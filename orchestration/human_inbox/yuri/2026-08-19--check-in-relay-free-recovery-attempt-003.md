@@ -29,7 +29,7 @@ only after it passes will a separately named attempt 004 be frozen.
 - execution source: `19e4414fec067fcbb6af12818e432953432878be`;
 - failure: `unexpected_controller_failure` at `attempt_003_execution`;
 - exact cause: missing `network_name` keyword at `_create_server` and
-  `_run_sidecar` calls to `_container_profile_predicates`;
+  `_create_sidecar` calls to `_container_profile_predicates`;
 - execution count: 1; retry count: 0; success release: false;
 - pre-recovery state: `created`, `Running=false`;
 - credential delivery, PostgreSQL start, SQL and transaction counts: zero;

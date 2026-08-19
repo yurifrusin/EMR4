@@ -1,0 +1,126 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in relay-free profile call-site and pre-registry cleanup conformance repair",
+    "completed_stage": "Attempt 003 is closed blocked with one consumed execution, zero retry, zero credential delivery, zero PostgreSQL or SQL execution, exact recovered cleanup and zero labelled residue. Yuri's standing authority selects the narrow deterministic call-site and pre-registry cleanup repair.",
+    "next_executable_stage": "freeze_the_narrow_provider_free_call_site_and_pre_registry_cleanup_conformance_repair_plan_without_docker_or_database_execution",
+    "operation_id": "raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair",
+    "resume_after_compaction": true,
+    "source_head": "244a35761d67628576d72093634afa1f2b823c07",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "78e0202343b4a925a0674e58486d8616df7f7599",
+    "reason_codes": [],
+    "resolved_commit": "244a35761d67628576d72093634afa1f2b823c07",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "244a35761d67628576d72093634afa1f2b823c07"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "78e0202343b4a925a0674e58486d8616df7f7599",
+    "branch_origin_aligned": false,
+    "head": "78e0202343b4a925a0674e58486d8616df7f7599",
+    "origin_branch_commit": "b5afa75bfc759efa689d35cd06c5b330e4b7ed05",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 655
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native DeepSeek Harness remains outside occupied EMR4 worker admission until its separate boot proof passes; Claude Code is no fallback, and this two-call-site repair is tightly coupled to Sol's accepted failure interpretation.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high exact-candidate veto is reserved only after the provider-free deterministic repair and all exact local assertions pass.",
+        "work_packages": [
+          "future_exact_candidate_read_only_call_site_cleanup_repair_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation and no separable package outweighs briefing and reconciliation cost.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "plan_frozen",
+      "deterministic_candidate",
+      "verifier_acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol freezes the exact causal repair boundary before code change",
+      "both real call sites and cleanup ownership are one coupled harness change",
+      "no Docker or database execution occurs in this repair",
+      "Gemini reviews only the deterministic clean exact candidate",
+      "clockwork check and publish remain separate commands"
+    ]
+  },
+  "planned_action": "freeze_the_narrow_provider_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan_without_docker_or_database_execution",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-003-blocked-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-003-sol-blocked-assessment.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003/rehearsal-failure-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003/attempt-003-execution-envelope.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003/attempt-003-cleanup-recovery.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-003/efficacy-reading.json",
+      "docs/raisa-provider-free-docker-created-state-profile-conformance-repair-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-docker-created-state-profile-conformance-repair-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/created-state-representation-evidence.json",
+      "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/repair-attestation.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the frozen plan, deterministic two-call-site repair, fault-injection cleanup proof, acceptance, continuity and Git under Yuri's standing uninterrupted-development authority. DeepSeek is declined because its native Harness requires a separately frozen stock-headless-to-custom-runner boot proof, Claude Code is no fallback, and the tiny repair is inseparable from failure interpretation. Gemini 3.7 Flash/high is reserved for one fresh post-deterministic exact-candidate veto. Native subagents are declined by current developer policy and lack a separable positive-leverage package.",
+    "git_refs_and_worktree": "Task HEAD and local task branch are exact 78e0202343b4a925a0674e58486d8616df7f7599; origin task branch is b5afa75bfc759efa689d35cd06c5b330e4b7ed05. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked and staged worktree is clean, docs/branding is preserved and untracked, and matching relay-free harness containers and networks are zero.",
+    "live_handover_current_baton": "AGENTS.md was read completely at task HEAD 78e0202343b4a925a0674e58486d8616df7f7599. Its clockwork relation is the lease-24 user-decision transition from exact source 244a35761d67628576d72093634afa1f2b823c07, and Next implementation names raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair under the active latch.",
+    "protected_evidence_boundaries": "Attempts 001 through 003 and the Created-state representation evidence are immutable. This tranche may only freeze and implement two network_name call-site arguments, deterministic real-call invocation contracts and exact cleanup for post-create pre-registry exceptions. It authorises no Docker object, credential, container start/attach, PostgreSQL process, SQL, transaction, database attempt or retry; no product/API/OpenAPI/GraphQL/config/client change; no ordinary-practice enablement, feature flag, allowlist, generic-status Arrived, grammar or waiting-area movement; no product/patient/clinical/protected data, provider call before deterministic candidate, production, deployment, release, Pages or protected-ref movement. docs/branding and unrelated untracked files remain excluded; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

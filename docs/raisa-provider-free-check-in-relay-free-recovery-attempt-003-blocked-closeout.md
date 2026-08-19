@@ -65,7 +65,7 @@ and retains no Docker ID, name, nonce, credential, raw inspect object or log.
 
 This was not a Docker timing failure and would not benefit from retry. The
 defect is deterministic: `_container_profile_predicates` gained the required
-`network_name` keyword while `_create_server` and `_run_sidecar` did not pass
+`network_name` keyword while `_create_server` and `_create_sidecar` did not pass
 it. Direct predicate tests covered the corrected semantics but no deterministic
 test invoked both real profile-check call sites with a spy predicate signature.
 

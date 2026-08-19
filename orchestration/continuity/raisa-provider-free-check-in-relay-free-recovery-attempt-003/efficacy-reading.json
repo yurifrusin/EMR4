@@ -14,7 +14,8 @@
   "authoring_or_packaging_correction_cycles": [
     "plan_test_line_wrap_assertion_normalized_before_commit",
     "caller_authored_false_full_git_id_replaced_by_machine_resolved_head_before_clockwork_publication",
-    "first_cleanup_profile_check_replaced_abbreviated_docker_listing_id_with_inspected_full_id_before_removal"
+    "first_cleanup_profile_check_replaced_abbreviated_docker_listing_id_with_inspected_full_id_before_removal",
+    "closeout_call_site_name_corrected_from_run_sidecar_to_create_sidecar_during_successor_rehydration"
   ],
   "redundant_deterministic_suite_count": 1,
   "redundant_deterministic_suite_reason": "A second suite was started after the first yielded execution session was not retained in the caller-visible result; both passed and neither touched Docker.",
