@@ -1,0 +1,131 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 003",
+    "completed_stage": "Accepted raisa-provider-free-docker-created-state-profile-conformance-repair at the machine-resolved source.",
+    "next_executable_stage": "rehydrate_and_freeze_the_narrowest_attempt_003_plan_without_database_execution",
+    "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-003",
+    "resume_after_compaction": true,
+    "source_head": "cf7e86c19e0a33c9702359f4ee4439c4f86ff977",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "dd9f0f8469b04bd91ddf38888032ce38a93926a5",
+    "reason_codes": [],
+    "resolved_commit": "cf7e86c19e0a33c9702359f4ee4439c4f86ff977",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "cf7e86c19e0a33c9702359f4ee4439c4f86ff977"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "dd9f0f8469b04bd91ddf38888032ce38a93926a5",
+    "branch_origin_aligned": false,
+    "head": "dd9f0f8469b04bd91ddf38888032ce38a93926a5",
+    "origin_branch_commit": "b5afa75bfc759efa689d35cd06c5b330e4b7ed05",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 655
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native DeepSeek Harness remains outside occupied EMR4 worker admission until its separately frozen stock-headless-to-custom-runner boot proof passes; Claude Code is no fallback. Plan acceptance meaning belongs to Sol, and the later database lifecycle is one non-separable cleanup domain.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high exact-candidate veto is reserved only after deterministic admission and exactly one successful attempt-003 execution; no provider call is permitted during planning or preexecution.",
+        "work_packages": [
+          "future_exact_candidate_read_only_attempt_003_veto_after_success"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation, and neither acceptance planning nor the one-cleanup-owner database lifecycle has a safe separable package with positive leverage.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-003",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "plan_frozen",
+      "preexecution",
+      "occupied_result",
+      "verifier_acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol freezes and admits one exact attempt-003 plan before any Docker object exists",
+      "all exact verifier assertions must be executed locally before any provider dispatch",
+      "the disposable PostgreSQL lifecycle has one cleanup owner and cannot be parallelised",
+      "Gemini reviews only one clean exact candidate after occupied success",
+      "clockwork check and publish remain separate commands and staging consumes the exact owned-surface manifest"
+    ]
+  },
+  "planned_action": "freeze_the_narrowest_fail_closed_attempt_003_plan_without_docker_or_database_execution",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-docker-created-state-profile-conformance-repair-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-docker-created-state-profile-conformance-repair-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/repair-attestation.json",
+      "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/efficacy-reading.json",
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-002-plan.md",
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-002-blocked-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-002-sol-blocked-assessment.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-002/rehearsal-failure-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-002/attempt-002-execution-envelope.json",
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal-plan.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal/contract.json",
+      "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-transport-redesign-sol-acceptance.md",
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-runtime-role-tenant-isolation-attestation-sol-acceptance.md"
+    ],
+    "current_authority_allocation": "GPT Sol owns planning, deterministic admission, the later exactly-one serial disposable database lifecycle, cleanup, decision admission, continuity and Git under Yuri's standing uninterrupted-development authority. DeepSeek is declined because its native Harness still requires a separately frozen stock-headless-to-custom-runner boot proof and Claude Code is not an authorised fallback. Gemini 3.7 Flash/high is reserved only for one fresh post-success exact-candidate veto. Native subagents are declined by developer policy and the single cleanup-owner constraint.",
+    "git_refs_and_worktree": "Task HEAD and local task branch are exact dd9f0f8469b04bd91ddf38888032ce38a93926a5; origin task branch is b5afa75bfc759efa689d35cd06c5b330e4b7ed05. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree is clean, docs/branding is preserved and untracked, and matching relay-free harness containers and networks are zero.",
+    "live_handover_current_baton": "AGENTS.md was read completely at task HEAD dd9f0f8469b04bd91ddf38888032ce38a93926a5. Current result is the accepted Docker Created-state profile conformance repair at Continuity 336 / Compass 318, and Next implementation is the planning-only start of raisa-provider-free-check-in-relay-free-recovery-attempt-003 under the active latch.",
+    "protected_evidence_boundaries": "Attempts 001 and 002, their failure artifacts, cleanup recovery/envelopes, execution counts and historical harness bindings are immutable. This stage may only freeze a separately named attempt-003 plan bound to the accepted relay-free transport, runtime-role/RLS floor and Created-state predicate repair. It authorises no Docker object, credential, PostgreSQL process, SQL or database execution yet; no product/API/OpenAPI/GraphQL/config/client change; no ordinary-practice enablement, flag, allowlist, generic-status Arrived, grammar or waiting-area movement; no product/patient/clinical/protected data, provider call, production, deployment, release, Pages or protected-ref movement. docs/branding and unrelated untracked files remain excluded; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
