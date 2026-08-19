@@ -1,0 +1,50 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preterminal-activation-observability-recovery",
+  "status": "blocked_pending_corrected_independent_veto",
+  "deterministic_candidate": {
+    "commit": "b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab",
+    "result": "pass",
+    "scenario_count": 10,
+    "focused_review_suite_tests": 85,
+    "full_owned_neighboring_governance_tests": 168,
+    "ruff": "pass",
+    "compile": "pass",
+    "native_harness_process_count": 0,
+    "agent_session_count": 0,
+    "broker_request_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "network_attempt_count": 0
+  },
+  "honest_build_cost": {
+    "offline_materialisation_count": 1,
+    "offline_materialisation_duration_ms": 114765,
+    "non_harness_node_import_count": 1,
+    "node_import_duration_ms": 118,
+    "pre_review_portability_corrections": 1,
+    "portability_correction": "The inherited native-proof test derived the npm cache from the review worktree parent rather than the stable user-local cache location; the candidate corrected that test-only path before review.",
+    "overbroad_local_gate_reruns": 1,
+    "overbroad_gate_result": "The optional acceptance-index compaction test exposed the inherited AGENTS.md 121619-byte versus 80000-byte budget mismatch; it was not changed or counted as a tranche pass."
+  },
+  "independent_review": {
+    "first_provider_decision": "pass",
+    "first_orchestrator_disposition": "revision_required",
+    "first_disposition_reason": "The packet asserted 137 tests although the exact seven-module manifest contained 85, and the reviewer did not challenge the false count.",
+    "corrected_packet_test_count": 85,
+    "corrected_transport_attempt_count": 3,
+    "corrected_candidate_review_admitted_count": 0,
+    "corrected_transport_terminal_error": "PERMISSION_DENIED (code 403): The caller does not have permission",
+    "corrected_veto": "pending_external_antigravity_authorisation_recovery",
+    "fallback_model_used": false
+  },
+  "rerun_assessment": {
+    "candidate_rebuild_count": 0,
+    "native_attempt_retry_count": 0,
+    "review_packet_corrections": 1,
+    "verifier_transport_retries_after_correction": 2,
+    "further_automatic_verifier_retries_stopped": true,
+    "conclusion": "The observability mechanism is technically promising and locally complete, but acceptance must remain closed until a corrected clean Gemini 3.7 Flash/high veto is obtained."
+  },
+  "protected_boundaries_preserved": true
+}
