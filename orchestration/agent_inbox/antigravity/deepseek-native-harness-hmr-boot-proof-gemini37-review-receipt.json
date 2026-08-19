@@ -1,0 +1,241 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\native-hmr-boot-gemini-5c3325e9",
+  "branch": "codex/review-native-hmr-boot-5c3325e9",
+  "head_before": "5c3325e9213afc5690453812e2078c61135c8a38",
+  "head_after": "5c3325e9213afc5690453812e2078c61135c8a38",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "c7e16ca2fb5ccd4760aa94cd724ae611d7f259d81dd7ad95d38805a449219065",
+  "result": "# Gemini 3.7 Flash/high Independent Veto: Provider-Free Native Harness HMR Boot Proof\n\n**Review Date:** 2026-08-20  \n**Candidate Commit:** `5c3325e9213afc5690453812e2078c61135c8a38`  \n**Accepted Base:** `f5a00279f428698b5ce789d022404335a54a7d95`  \n**Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\native-hmr-boot-gemini-5c3325e9`  \n**Branch:** `codex/review-native-hmr-boot-5c3325e9`  \n**Reviewer Model:** Gemini 3.7 Flash (High reasoning effort)\n\n---\n\n## 1. Rehydration and Authority Verification\n\n### Five Rehydration Sources\n1. `live_handover_current_baton`: `AGENTS.md` was read completely. Current protected integration results confirm PR 74 and PR 75 rebase-merged at protected `master` `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Baton ref `handoff/current` and origin are aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Task branch preserves all accepted historical ancestors and clockwork lineage through `958ae762e7c6a065b5926f47eb1a2b63115212c7`.\n2. `current_authority_allocation`: GPT Sol holds conductor/integrator authority and the provider-free shadow Ariadne/DeepSeek broker clockwork lease. Gemini 3.7 Flash/high is dispatched for this fresh independent read-only exact-candidate veto. DeepSeek model/worker calls remain declined and Claude Code remains historical lineage only.\n3. `active_plan_and_acceptance`: `docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-plan.md`, `docs/security/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-threat-model-delta.md`, `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`, and `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md`.\n4. `protected_evidence_boundaries`: Holdouts v1\u2013v10 remain sealed. Historical diary PHI remains local and uncommitted. DeepSeek native Harness occupied attempts remain immutable negative evidence. No model/provider API call, credential access, external network I/O, occupied worker, attempt-004 execution, Docker, PostgreSQL, product source/config/API/client/waiting-area changes, ordinary-practice enablement, generic-status Arrived modification, deployment, Pages, or protected-ref movement is authorized. Untracked `docs/branding/` and all unrelated files remain preserved.\n5. `git_refs_and_worktree`: Verified clean worktree on `codex/review-native-hmr-boot-5c3325e9` at exact HEAD `5c3325e9213afc5690453812e2078c61135c8a38`. Protected refs `master` and `handoff/current` (local and origin) remain at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n### Active Operation Latch Validation\n- File: `orchestration/continuity/ariadne-active-operation-latch/current.json`\n- `schema_version`: `ariadne.active_operation_latch.v1`\n- `operation_id`: `deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof`\n- `status`: `in_progress`\n- `checkpoint.completed_stage`: \"Native attempt-001 passed at exact evidence candidate c2c4d33654b77a50ca86e79471841568bf7bcbcf: stock headless reached the HMR-applied local custom runner, exact four-event order, exit 0, zero network/model/broker/provider/session counts and complete cleanup.\"\n- `checkpoint.next_executable_stage`: `obtain_one_fresh_gemini_3_7_flash_high_exact_candidate_read_only_veto_then_close_out_through_clockwork`\n- `user_attention.required`: `false`\n\n### Explicit Parallelism Assessment\n- **DeepSeek**: Declined as worker and reviewer. The native DeepSeek Harness is the provider-free subject under test; invoking model calls would violate the proof boundary.\n- **Gemini**: Dispatched in fresh context for this independent exact-candidate read-only veto (`gemini-3.7-flash-high` at `high` reasoning effort).\n- **Native Subagents**: Declined under current developer policy and because the process launch, sentinel observation, atomic mutation, terminal capture, and cleanup require serial process ownership.\n\n---\n\n## 2. Evaluation of Mandatory Challenges\n\n### Challenge 1: Exact Candidate/Worktree Identity and Clean Tracked Tree\n- Verified `git status --short --branch` (C01, C10) is clean on `codex/review-native-hmr-boot-5c3325e9`.\n- Verified `git rev-parse HEAD` (C02) matches `5c3325e9213afc5690453812e2078c61135c8a38`.\n- Verified `git diff --exit-code HEAD --` (C07) returns 0.\n- Verified `git diff --check` against base `f5a00279f428698b5ce789d022404335a54a7d95` (C08) returns 0 with no whitespace errors or merge conflict markers.\n\n### Challenge 2: Installed-Source Predicate Binding\n- Function `_verify_installed_source` inspects the unpatched, offline-installed `@deepseek-ai/dsh@0.1.0-rc.7` package:\n  - Manifest identity: `@deepseek-ai/dsh` version `0.1.0-rc.7`, bin `lib/bin.js`.\n  - `documented_headless_profile_flag`: Confirms `--profile <name>` option and documented `dsh --profile headless` invocation in `lib/bin.js`.\n  - `headless_hmr_row_disabled`: Confirms stock headless disables default HMR via `- id: hmr`, `disabled: true` in `dsh-headless/cordis.patch.yml`.\n  - `headless_runner_declared`: Confirms `- id: headless-runner` declaration in stock patch.\n  - `hmr_expose_internals_required`: Confirms `--expose-internals is required for HMR service` in `cordis-plugin-hmr/lib/index.js`.\n  - `hmr_register_config_present`: Confirms `async registerConfig(` in HMR plugin source.\n  - `profile_boot_creates_watch_only_hmr`: Confirms `config: { root: [] }` in `profile-boot-*.js`.\n  - `profile_boot_watches_user_patches_twice`: Confirms `boot_text.count(\"await watchUserPatches(ctx\") == 2`.\n- Package source is verified read-only and never modified or patched in place.\n\n### Challenge 3: Causality and Lifecycle Ordering\n- Initial configuration:\n  - Disables stock `headless-runner`, `code-runtime`, and `session-telemetry-otel`.\n  - Mounts only `provider-free-hmr-sentinel`. Custom runner is verified absent from the initial layer by `validate_patch_pair`.\n- Sentinel behavior:\n  - Polls `ctx.get(\"hmr\")` in-process. Verifies that `hmr.configs` is a `Map` containing both resolved watched paths (`profile_patch` and `home_patch`).\n  - Emits `stock_headless_hmr_ready` only after real HMR config registration is verified.\n- Atomic mutation:\n  - Controller observes `stock_headless_hmr_ready` in `events.jsonl` and invokes `atomic_write` using a temporary `.next` file with `fsync` and `os.replace`.\n  - The mutated patch adds `provider-free-hmr-custom-runner` with `inject: [\"hmr\"]`.\n- Custom runner execution:\n  - In-process custom runner confirms active HMR and both patch registrations, then emits `custom_runner_reached` and `app_exit_requested`, and calls `ctx.get(\"appExit\")(0)`.\n- Event sequence: Exactly `sentinel_activated` -> `stock_headless_hmr_ready` -> `custom_runner_reached` -> `app_exit_requested` with monotonic sequence numbers and schema `ariadne.deepseek_native_harness_hmr_boot_event.v1`.\n\n### Challenge 4: Containment and Residual Limit Distinction\n- Credential scrubbing: Strips all environment variables matching `AUTH|BEARER|CREDENTIAL|SECRET|TOKEN|PASSWORD|API[_-]?KEY|DEEPSEEK|OPENAI|ANTHROPIC|GEMINI|VERTEX|GOOGLE|AZURE|AWS|GCP|PUSHOVER` and `*_PROXY`. Verified 3 credential variables removed with 0 surviving.\n- Package materialization: Enforces `npm install --offline --ignore-scripts --no-audit --no-fund` against verified tarball (SHA-1 `8a69013c06179d7af437de92fb4a9a2e1fd7d410`, integrity `sha512-ZceDCJ8FAywih+USW/OMk9jEhunlvJBGEz4kqrhau23hPzbciOazZrywH0nBRsaalSeAJ1JGBmjtw4OSjToStw==`).\n- Network denial: Preloaded `--import` ESM network guard intercepts `net.Socket.connect`, `net.connect`, `net.createConnection`, `tls.connect`, `http.request`, `http.get`, `https.request`, `https.get`, `dgram.createSocket`, all `dns` methods/promises, `globalThis.fetch`, and `globalThis.WebSocket`, throwing immediately on any attempt. Verified 0 network attempts recorded.\n- Telemetry: Disabled via `DSH_TELEMETRY_DISABLED=1` and `session-telemetry-otel: disabled: true`.\n- Zero-count invariant: Confirmed 0 network attempts, 0 model requests, 0 broker requests, 0 provider requests, and 0 agent sessions.\n- Process reap & cleanup: Process is bounded by a 45.0s deadline, awaited, and verified absent. Disposable root outside repository is removed via `shutil.rmtree` and verified absent (`disposable_root_absent: true`, `process_absent: true`).\n- Stated residual limit: Explicitly documented that the network guard is a detection-and-denial control for Node primitives reachable in this composition, not a general VM boundary.\n\n### Challenge 5: Prelaunch Construction Evidence and Passing Attempt\n- `prelaunch-source-predicate-rejection.json` records the earlier controller prelaunch rejection caused by a formatting discrepancy in the CLI help text check.\n  - Native boot count was 0 (`native_boot_process_count: 0`).\n  - Duration: 0 ms, exit code: null, events: `[]`, 0 network/provider activity.\n  - Cleanup verified complete (`disposable_root_absent: true`, `process_absent: true`).\n  - Proves it was prelaunch construction evidence and not a hidden failed native execution.\n- Passing evidence (`provider-free-native-harness-hmr-boot-evidence.json`):\n  - Identifies `attempt_id: \"native-attempt-001\"`.\n  - `native_boot_process_count`: 1.\n  - Duration: 10,597 ms, exit code: 0, stdout/stderr bytes: 0.\n  - All source contract checks passed.\n\n### Challenge 6: Evidence Sanitization and Fact Parity\n- No raw environment variables, stdout/stderr payloads, npm cache, or disposable paths are retained in repository evidence.\n- `stdout_sha256` and `stderr_sha256` record the SHA256 of empty byte streams.\n- Every claim in `provider-free-native-harness-hmr-boot-report.md` is strictly corroborated by `provider-free-native-harness-hmr-boot-evidence.json`.\n\n### Challenge 7: Bounded Authority and Closed Gates\n- Result proves only the pinned local rc.7 launcher/HMR lifecycle with Node `--expose-internals`.\n- It grants no authority for DeepSeek model/provider calls, occupied workers, attempt-004 execution, development edits, product/runtime/data changes, deployment, Pages rebuild, or protected-ref movement.\n- Protected refs `master` and `handoff/current` remain fixed at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n### Challenge 8: Ten-Command Manifest Execution\nAll 10 commands executed in order with exit code 0:\n- C01: `git status --short --branch` -> 0\n- C02: `git rev-parse HEAD` -> 0\n- C03: `scripts.ariadne_provider_free_pytest` -> 0 (39/39 tests passed)\n- C04: `ruff check` -> 0 (All checks passed)\n- C05: `py_compile` -> 0\n- C06: `scripts.deepseek_native_harness_provider_free_hmr_boot_proof` -> 0 (contract pass)\n- C07: `git diff --exit-code HEAD --` -> 0\n- C08: `git diff --check base..candidate` -> 0\n- C09: `git diff --name-only base..candidate` -> 0\n- C10: `git status --short --branch` -> 0\n\n---\n\n## 3. Findings Summary\n\n- **P0 Findings:** 0\n- **P1 Findings:** 0\n- **P2 Findings:** 0\n\nThe provider-free native Harness HMR boot proof is exact, contained, attributable, and fully verified.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Independent Veto: Provider-Free Native Harness HMR Boot Proof\n\n**Review Date:** 2026-08-20  \n**Candidate Commit:** `5c3325e9213afc5690453812e2078c61135c8a38`  \n**Accepted Base:** `f5a00279f428698b5ce789d022404335a54a7d95`  \n**Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\native-hmr-boot-gemini-5c3325e9`  \n**Branch:** `codex/review-native-hmr-boot-5c3325e9`  \n**Reviewer Model:** Gemini 3.7 Flash (High reasoning effort)\n\n---\n\n## 1. Rehydration and Authority Verification\n\n### Five Rehydration Sources\n1. `live_handover_current_baton`: `AGENTS.md` was read completely. Current protected integration results confirm PR 74 and PR 75 rebase-merged at protected `master` `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Baton ref `handoff/current` and origin are aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Task branch preserves all accepted historical ancestors and clockwork lineage through `958ae762e7c6a065b5926f47eb1a2b63115212c7`.\n2. `current_authority_allocation`: GPT Sol holds conductor/integrator authority and the provider-free shadow Ariadne/DeepSeek broker clockwork lease. Gemini 3.7 Flash/high is dispatched for this fresh independent read-only exact-candidate veto. DeepSeek model/worker calls remain declined and Claude Code remains historical lineage only.\n3. `active_plan_and_acceptance`: `docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-plan.md`, `docs/security/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-threat-model-delta.md`, `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`, and `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md`.\n4. `protected_evidence_boundaries`: Holdouts v1\u2013v10 remain sealed. Historical diary PHI remains local and uncommitted. DeepSeek native Harness occupied attempts remain immutable negative evidence. No model/provider API call, credential access, external network I/O, occupied worker, attempt-004 execution, Docker, PostgreSQL, product source/config/API/client/waiting-area changes, ordinary-practice enablement, generic-status Arrived modification, deployment, Pages, or protected-ref movement is authorized. Untracked `docs/branding/` and all unrelated files remain preserved.\n5. `git_refs_and_worktree`: Verified clean worktree on `codex/review-native-hmr-boot-5c3325e9` at exact HEAD `5c3325e9213afc5690453812e2078c61135c8a38`. Protected refs `master` and `handoff/current` (local and origin) remain at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n### Active Operation Latch Validation\n- File: `orchestration/continuity/ariadne-active-operation-latch/current.json`\n- `schema_version`: `ariadne.active_operation_latch.v1`\n- `operation_id`: `deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof`\n- `status`: `in_progress`\n- `checkpoint.completed_stage`: \"Native attempt-001 passed at exact evidence candidate c2c4d33654b77a50ca86e79471841568bf7bcbcf: stock headless reached the HMR-applied local custom runner, exact four-event order, exit 0, zero network/model/broker/provider/session counts and complete cleanup.\"\n- `checkpoint.next_executable_stage`: `obtain_one_fresh_gemini_3_7_flash_high_exact_candidate_read_only_veto_then_close_out_through_clockwork`\n- `user_attention.required`: `false`\n\n### Explicit Parallelism Assessment\n- **DeepSeek**: Declined as worker and reviewer. The native DeepSeek Harness is the provider-free subject under test; invoking model calls would violate the proof boundary.\n- **Gemini**: Dispatched in fresh context for this independent exact-candidate read-only veto (`gemini-3.7-flash-high` at `high` reasoning effort).\n- **Native Subagents**: Declined under current developer policy and because the process launch, sentinel observation, atomic mutation, terminal capture, and cleanup require serial process ownership.\n\n---\n\n## 2. Evaluation of Mandatory Challenges\n\n### Challenge 1: Exact Candidate/Worktree Identity and Clean Tracked Tree\n- Verified `git status --short --branch` (C01, C10) is clean on `codex/review-native-hmr-boot-5c3325e9`.\n- Verified `git rev-parse HEAD` (C02) matches `5c3325e9213afc5690453812e2078c61135c8a38`.\n- Verified `git diff --exit-code HEAD --` (C07) returns 0.\n- Verified `git diff --check` against base `f5a00279f428698b5ce789d022404335a54a7d95` (C08) returns 0 with no whitespace errors or merge conflict markers.\n\n### Challenge 2: Installed-Source Predicate Binding\n- Function `_verify_installed_source` inspects the unpatched, offline-installed `@deepseek-ai/dsh@0.1.0-rc.7` package:\n  - Manifest identity: `@deepseek-ai/dsh` version `0.1.0-rc.7`, bin `lib/bin.js`.\n  - `documented_headless_profile_flag`: Confirms `--profile <name>` option and documented `dsh --profile headless` invocation in `lib/bin.js`.\n  - `headless_hmr_row_disabled`: Confirms stock headless disables default HMR via `- id: hmr`, `disabled: true` in `dsh-headless/cordis.patch.yml`.\n  - `headless_runner_declared`: Confirms `- id: headless-runner` declaration in stock patch.\n  - `hmr_expose_internals_required`: Confirms `--expose-internals is required for HMR service` in `cordis-plugin-hmr/lib/index.js`.\n  - `hmr_register_config_present`: Confirms `async registerConfig(` in HMR plugin source.\n  - `profile_boot_creates_watch_only_hmr`: Confirms `config: { root: [] }` in `profile-boot-*.js`.\n  - `profile_boot_watches_user_patches_twice`: Confirms `boot_text.count(\"await watchUserPatches(ctx\") == 2`.\n- Package source is verified read-only and never modified or patched in place.\n\n### Challenge 3: Causality and Lifecycle Ordering\n- Initial configuration:\n  - Disables stock `headless-runner`, `code-runtime`, and `session-telemetry-otel`.\n  - Mounts only `provider-free-hmr-sentinel`. Custom runner is verified absent from the initial layer by `validate_patch_pair`.\n- Sentinel behavior:\n  - Polls `ctx.get(\"hmr\")` in-process. Verifies that `hmr.configs` is a `Map` containing both resolved watched paths (`profile_patch` and `home_patch`).\n  - Emits `stock_headless_hmr_ready` only after real HMR config registration is verified.\n- Atomic mutation:\n  - Controller observes `stock_headless_hmr_ready` in `events.jsonl` and invokes `atomic_write` using a temporary `.next` file with `fsync` and `os.replace`.\n  - The mutated patch adds `provider-free-hmr-custom-runner` with `inject: [\"hmr\"]`.\n- Custom runner execution:\n  - In-process custom runner confirms active HMR and both patch registrations, then emits `custom_runner_reached` and `app_exit_requested`, and calls `ctx.get(\"appExit\")(0)`.\n- Event sequence: Exactly `sentinel_activated` -> `stock_headless_hmr_ready` -> `custom_runner_reached` -> `app_exit_requested` with monotonic sequence numbers and schema `ariadne.deepseek_native_harness_hmr_boot_event.v1`.\n\n### Challenge 4: Containment and Residual Limit Distinction\n- Credential scrubbing: Strips all environment variables matching `AUTH|BEARER|CREDENTIAL|SECRET|TOKEN|PASSWORD|API[_-]?KEY|DEEPSEEK|OPENAI|ANTHROPIC|GEMINI|VERTEX|GOOGLE|AZURE|AWS|GCP|PUSHOVER` and `*_PROXY`. Verified 3 credential variables removed with 0 surviving.\n- Package materialization: Enforces `npm install --offline --ignore-scripts --no-audit --no-fund` against verified tarball (SHA-1 `8a69013c06179d7af437de92fb4a9a2e1fd7d410`, integrity `sha512-ZceDCJ8FAywih+USW/OMk9jEhunlvJBGEz4kqrhau23hPzbciOazZrywH0nBRsaalSeAJ1JGBmjtw4OSjToStw==`).\n- Network denial: Preloaded `--import` ESM network guard intercepts `net.Socket.connect`, `net.connect`, `net.createConnection`, `tls.connect`, `http.request`, `http.get`, `https.request`, `https.get`, `dgram.createSocket`, all `dns` methods/promises, `globalThis.fetch`, and `globalThis.WebSocket`, throwing immediately on any attempt. Verified 0 network attempts recorded.\n- Telemetry: Disabled via `DSH_TELEMETRY_DISABLED=1` and `session-telemetry-otel: disabled: true`.\n- Zero-count invariant: Confirmed 0 network attempts, 0 model requests, 0 broker requests, 0 provider requests, and 0 agent sessions.\n- Process reap & cleanup: Process is bounded by a 45.0s deadline, awaited, and verified absent. Disposable root outside repository is removed via `shutil.rmtree` and verified absent (`disposable_root_absent: true`, `process_absent: true`).\n- Stated residual limit: Explicitly documented that the network guard is a detection-and-denial control for Node primitives reachable in this composition, not a general VM boundary.\n\n### Challenge 5: Prelaunch Construction Evidence and Passing Attempt\n- `prelaunch-source-predicate-rejection.json` records the earlier controller prelaunch rejection caused by a formatting discrepancy in the CLI help text check.\n  - Native boot count was 0 (`native_boot_process_count: 0`).\n  - Duration: 0 ms, exit code: null, events: `[]`, 0 network/provider activity.\n  - Cleanup verified complete (`disposable_root_absent: true`, `process_absent: true`).\n  - Proves it was prelaunch construction evidence and not a hidden failed native execution.\n- Passing evidence (`provider-free-native-harness-hmr-boot-evidence.json`):\n  - Identifies `attempt_id: \"native-attempt-001\"`.\n  - `native_boot_process_count`: 1.\n  - Duration: 10,597 ms, exit code: 0, stdout/stderr bytes: 0.\n  - All source contract checks passed.\n\n### Challenge 6: Evidence Sanitization and Fact Parity\n- No raw environment variables, stdout/stderr payloads, npm cache, or disposable paths are retained in repository evidence.\n- `stdout_sha256` and `stderr_sha256` record the SHA256 of empty byte streams.\n- Every claim in `provider-free-native-harness-hmr-boot-report.md` is strictly corroborated by `provider-free-native-harness-hmr-boot-evidence.json`.\n\n### Challenge 7: Bounded Authority and Closed Gates\n- Result proves only the pinned local rc.7 launcher/HMR lifecycle with Node `--expose-internals`.\n- It grants no authority for DeepSeek model/provider calls, occupied workers, attempt-004 execution, development edits, product/runtime/data changes, deployment, Pages rebuild, or protected-ref movement.\n- Protected refs `master` and `handoff/current` remain fixed at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n### Challenge 8: Ten-Command Manifest Execution\nAll 10 commands executed in order with exit code 0:\n- C01: `git status --short --branch` -> 0\n- C02: `git rev-parse HEAD` -> 0\n- C03: `scripts.ariadne_provider_free_pytest` -> 0 (39/39 tests passed)\n- C04: `ruff check` -> 0 (All checks passed)\n- C05: `py_compile` -> 0\n- C06: `scripts.deepseek_native_harness_provider_free_hmr_boot_proof` -> 0 (contract pass)\n- C07: `git diff --exit-code HEAD --` -> 0\n- C08: `git diff --check base..candidate` -> 0\n- C09: `git diff --name-only base..candidate` -> 0\n- C10: `git status --short --branch` -> 0\n\n---\n\n## 3. Findings Summary\n\n- **P0 Findings:** 0\n- **P1 Findings:** 0\n- **P2 Findings:** 0\n\nThe provider-free native Harness HMR boot proof is exact, contained, attributable, and fully verified.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/native-hmr-boot-gemini-5c3325e9",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_provider_free_no_database_admission.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.deepseek_native_harness_provider_free_hmr_boot_proof"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "f5a00279f428698b5ce789d022404335a54a7d95..5c3325e9213afc5690453812e2078c61135c8a38"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "f5a00279f428698b5ce789d022404335a54a7d95..5c3325e9213afc5690453812e2078c61135c8a38"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "299c06d4e9706089bfa2668474046edf3040298d211d2bde41ee75895b7e8cc6",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/native-hmr-boot-gemini-5c3325e9",
+        "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py",
+        "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+        "tests/test_ariadne_provider_free_no_database_admission.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/deepseek_native_harness_provider_free_hmr_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/deepseek_native_harness_provider_free_hmr_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.deepseek_native_harness_provider_free_hmr_boot_proof"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "f5a00279f428698b5ce789d022404335a54a7d95..5c3325e9213afc5690453812e2078c61135c8a38"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "f5a00279f428698b5ce789d022404335a54a7d95..5c3325e9213afc5690453812e2078c61135c8a38"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

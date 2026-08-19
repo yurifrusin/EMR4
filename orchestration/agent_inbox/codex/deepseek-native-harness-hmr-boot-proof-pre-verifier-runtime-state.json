@@ -1,0 +1,58 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_gemini_3_7_flash_high_read_only_veto_of_exact_provider_free_native_harness_hmr_boot_candidate_without_reexecuting_native_attempt_001",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely through line 508. The Current Baton retains exact protected refs at 2e34bdad732fdab32fbf778280b3d3c70d66d602 and the active latch requires the provider-free native-Harness stock-headless-to-custom-runner HMR boot proof.",
+    "current_authority_allocation": "GPT Sol owns implementation, native-process terminal acceptance, repair, clockwork and task-branch Git under Yuri's standing authority. DeepSeek is declined because its native Harness is the proof subject and no model call is authorised. Gemini 3.7 Flash/high owns one fresh exact-candidate read-only veto. Native subagents are declined by current policy and the serial evidence lease.",
+    "active_plan_and_acceptance": ["docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-plan.md", "docs/security/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-threat-model-delta.md", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-report.md", "orchestration/continuity/ariadne-active-operation-latch/current.json"],
+    "protected_evidence_boundaries": "Provider-free pinned rc.7 startup/HMR evidence only. No reexecution of native attempt-001, model/provider/credential/external network, occupied worker, attempt-004, Docker/database, product/API/config/client/data, ordinary-practice or flag/allowlist change, deployment, release, Pages, protected evidence or protected refs. Preserve docs/branding and all unrelated untracked files.",
+    "git_refs_and_worktree": "Exact candidate and clean review worktree HEAD are 5c3325e9213afc5690453812e2078c61135c8a38 on codex/review-native-hmr-boot-5c3325e9. Candidate base is f5a00279f428698b5ce789d022404335a54a7d95. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof",
+    "active_tranche": "DeepSeek native Harness provider-free stock-headless-to-custom-runner HMR boot proof",
+    "objective": "Freeze and execute the narrowest provider-free proof that the pinned native DeepSeek Harness can boot through its documented stock headless path and reach the custom runner under HMR, with exact readiness, terminal-state and cleanup evidence and no provider I/O.",
+    "status": "in_progress",
+    "source_head": "c2c4d33654b77a50ca86e79471841568bf7bcbcf",
+    "authority_source": "Yuri's standing uninterrupted-development authority, the accepted no-database WorkOrder/broker interlock and the historical rc.7 pre-provider HMR startup terminal.",
+    "checkpoint": {
+      "completed_stage": "Native attempt-001 passed at exact evidence candidate c2c4d33654b77a50ca86e79471841568bf7bcbcf: stock headless reached the HMR-applied local custom runner, exact four-event order, exit 0, zero network/model/broker/provider/session counts and complete cleanup.",
+      "next_executable_stage": "obtain_one_fresh_gemini_3_7_flash_high_exact_candidate_read_only_veto_then_close_out_through_clockwork",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": ["provider_free_native_harness_stock_headless_to_custom_runner_hmr_boot_proof_only", "pinned_native_harness_and_exact_documented_startup_flags_only", "provider_free_local_custom_runner_stub_only", "no_deepseek_model_call_provider_io_credential_or_external_network", "no_occupied_worker_or_development_edit_authority", "exact_readiness_terminal_state_trace_and_cleanup_evidence_required", "harness_boot_ambiguity_is_terminal_failure_not_success_or_retry", "no_attempt_004_plan_execution_or_retry_until_boot_proof_is_separately_accepted", "historical_native_harness_terminals_and_consumed_attempts_remain_immutable", "no_docker_postgresql_sql_transaction_or_product_database_execution", "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change", "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting", "no_generic_status_arrived_action_grammar_or_first_party_client_change", "no_product_patient_appointment_clinical_historical_or_protected_data", "no_claude_code_fallback_and_gemini_only_after_deterministic_exact_candidate", "no_production_runtime_deployment_release_or_pages", "no_protected_evidence_access_or_protected_ref_movement", "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602", "docs_branding_and_all_unrelated_untracked_files_preserved", "explicit_path_staging_only"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof",
+    "assessed_stage": "exact_candidate_read_only_veto",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "The native Harness is the provider-free subject under test; DeepSeek cannot independently review its own controlling startup proof and no model call is authorised.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "dispatched", "expected_leverage": "required_independence", "rationale": "Gemini owns one fresh exact-candidate read-only veto over proof causality, containment, retained evidence and boundaries.", "work_packages": ["exact_candidate_provider_free_native_harness_hmr_boot_proof_veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Current policy prohibits proactive native delegation and the process/evidence/cleanup lease remains serial.", "work_packages": []}
+    ],
+    "parallel_work_packages": ["gemini_exact_candidate_read_only_veto"],
+    "serial_constraints": ["candidate immutable during review", "native attempt-001 must not be rerun", "Sol alone repairs or accepts", "clockwork check and publish remain separate"],
+    "reassessment_triggers": ["verifier_terminal_decision", "closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh five-source exact-candidate pre-verifier reading", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol accepted the exact native terminal and retained evidence candidate."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Provider-free native attempt-001 passed; no model/provider call occurred and no further attempt is authorised."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Fresh isolated Gemini review worktree is ready."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Declined; no native subagent dispatched."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}, {"resource_id": "deepseek-native-harness-workers", "active_instance_ids": [], "stale_instance_ids": []}, {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

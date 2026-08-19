@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/native-hmr-boot-gemini-5c3325e9",
+  "branch": "codex/review-native-hmr-boot-5c3325e9",
+  "head": "5c3325e9213afc5690453812e2078c61135c8a38",
+  "expected_head": "5c3325e9213afc5690453812e2078c61135c8a38",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "299c06d4e9706089bfa2668474046edf3040298d211d2bde41ee75895b7e8cc6",
+  "command_count": 10,
+  "repository_paths": [],
+  "candidate_paths": [
+    "C:/Users/sarashera/EMR4-worktrees/native-hmr-boot-gemini-5c3325e9/scripts/deepseek_native_harness_provider_free_hmr_boot_proof.py",
+    "C:/Users/sarashera/EMR4-worktrees/native-hmr-boot-gemini-5c3325e9/tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+    "C:/Users/sarashera/EMR4-worktrees/native-hmr-boot-gemini-5c3325e9/orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json",
+    "C:/Users/sarashera/EMR4-worktrees/native-hmr-boot-gemini-5c3325e9/orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/prelaunch-source-predicate-rejection.json"
+  ],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/native-hmr-boot-gemini-5c3325e9",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

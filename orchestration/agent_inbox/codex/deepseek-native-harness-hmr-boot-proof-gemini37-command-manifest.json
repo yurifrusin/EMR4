@@ -1,0 +1,38 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/native-hmr-boot-gemini-5c3325e9",
+        "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py",
+        "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+        "tests/test_ariadne_provider_free_no_database_admission.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/deepseek_native_harness_provider_free_hmr_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py"
+      ]
+    },
+    {"id": "C05", "argv": ["C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "py_compile", "scripts/deepseek_native_harness_provider_free_hmr_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py"]},
+    {"id": "C06", "argv": ["C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.deepseek_native_harness_provider_free_hmr_boot_proof"]},
+    {"id": "C07", "argv": ["git", "diff", "--exit-code", "HEAD", "--"]},
+    {"id": "C08", "argv": ["git", "diff", "--check", "f5a00279f428698b5ce789d022404335a54a7d95..5c3325e9213afc5690453812e2078c61135c8a38"]},
+    {"id": "C09", "argv": ["git", "diff", "--name-only", "f5a00279f428698b5ce789d022404335a54a7d95..5c3325e9213afc5690453812e2078c61135c8a38"]},
+    {"id": "C10", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

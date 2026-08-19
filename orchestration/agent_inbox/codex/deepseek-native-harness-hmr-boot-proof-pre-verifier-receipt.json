@@ -1,0 +1,119 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free stock-headless-to-custom-runner HMR boot proof",
+    "completed_stage": "Native attempt-001 passed at exact evidence candidate c2c4d33654b77a50ca86e79471841568bf7bcbcf: stock headless reached the HMR-applied local custom runner, exact four-event order, exit 0, zero network/model/broker/provider/session counts and complete cleanup.",
+    "next_executable_stage": "obtain_one_fresh_gemini_3_7_flash_high_exact_candidate_read_only_veto_then_close_out_through_clockwork",
+    "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof",
+    "resume_after_compaction": true,
+    "source_head": "c2c4d33654b77a50ca86e79471841568bf7bcbcf",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "5c3325e9213afc5690453812e2078c61135c8a38",
+    "reason_codes": [],
+    "resolved_commit": "c2c4d33654b77a50ca86e79471841568bf7bcbcf",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "c2c4d33654b77a50ca86e79471841568bf7bcbcf"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "5c3325e9213afc5690453812e2078c61135c8a38",
+    "branch_origin_aligned": false,
+    "head": "5c3325e9213afc5690453812e2078c61135c8a38",
+    "origin_branch_commit": "f5a00279f428698b5ce789d022404335a54a7d95",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 658
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "exact_candidate_read_only_veto",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native Harness is the provider-free subject under test; DeepSeek cannot independently review its own controlling startup proof and no model call is authorised.",
+        "work_packages": []
+      },
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini owns one fresh exact-candidate read-only veto over proof causality, containment, retained evidence and boundaries.",
+        "work_packages": [
+          "exact_candidate_provider_free_native_harness_hmr_boot_proof_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current policy prohibits proactive native delegation and the process/evidence/cleanup lease remains serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof",
+    "parallel_work_packages": [
+      "gemini_exact_candidate_read_only_veto"
+    ],
+    "reassessment_triggers": [
+      "verifier_terminal_decision",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "candidate immutable during review",
+      "native attempt-001 must not be rerun",
+      "Sol alone repairs or accepts",
+      "clockwork check and publish remain separate"
+    ]
+  },
+  "planned_action": "dispatch_one_fresh_gemini_3_7_flash_high_read_only_veto_of_exact_provider_free_native_harness_hmr_boot_candidate_without_reexecuting_native_attempt_001",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-report.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns implementation, native-process terminal acceptance, repair, clockwork and task-branch Git under Yuri's standing authority. DeepSeek is declined because its native Harness is the proof subject and no model call is authorised. Gemini 3.7 Flash/high owns one fresh exact-candidate read-only veto. Native subagents are declined by current policy and the serial evidence lease.",
+    "git_refs_and_worktree": "Exact candidate and clean review worktree HEAD are 5c3325e9213afc5690453812e2078c61135c8a38 on codex/review-native-hmr-boot-5c3325e9. Candidate base is f5a00279f428698b5ce789d022404335a54a7d95. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was read completely through line 508. The Current Baton retains exact protected refs at 2e34bdad732fdab32fbf778280b3d3c70d66d602 and the active latch requires the provider-free native-Harness stock-headless-to-custom-runner HMR boot proof.",
+    "protected_evidence_boundaries": "Provider-free pinned rc.7 startup/HMR evidence only. No reexecution of native attempt-001, model/provider/credential/external network, occupied worker, attempt-004, Docker/database, product/API/config/client/data, ordinary-practice or flag/allowlist change, deployment, release, Pages, protected evidence or protected refs. Preserve docs/branding and all unrelated untracked files."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
