@@ -1,0 +1,55 @@
+{
+  "schema_version": "ariadne.governance_live_blocked_transition_intent.v1",
+  "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-004",
+  "completed_stage": "Attempt 004 is consumed once at 932ae6ce02e0e973a22dfe999601087295001d1b and failed closed after readiness with zero retry or released effect. Failure and envelope are immutable at 4908bf53265e1356a9c5dac84a05b05702ad6d34; cleanup and zero residue are verified. The honest blocked closeout, Sol assessment, efficacy reading and paired Yuri summary are committed at 7c7d3708fe10c563bd61356966a7a287d383a5b2.",
+  "user_attention_reason": "Attempt 004 cannot be rerun. Yuri's standing uninterrupted-development authority already selects the separately named provider-free server-attachment lifetime and post-readiness observability conformance repair; a separate user-decision clockwork transition will consume that standing authority without a ceremonial pause.",
+  "terminal_reason": "The intended rollback and unknown-response transaction proof was not achieved. The retained evidence localizes failure to the combined running/identity guard after readiness and attachment release but cannot distinguish its two branches, so attempt 004 closes blocked with exact cleanup and no retry.",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "attempt-004-terminal-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_ariadne_provider_free_no_database_admission.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt-004-terminal-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_004.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt-004-terminal-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_004.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}
