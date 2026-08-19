@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture",
-  "active_tranche": "Raisa provider-free default-off ordinary-practice check-in environment-manifest and operational secret posture architecture",
-  "objective": "Freeze non-secret environment, ordinary runtime-role, secret/key-reference, rotation-evidence and break-glass-denial contracts without creating secrets, connecting a database, changing product configuration or enabling a practice.",
+  "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal",
+  "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in runtime-role and tenant-isolation attestation rehearsal",
+  "objective": "Prove in a uniquely named disposable local PostgreSQL instance that an ephemeral authored-synthetic manifest binds the exact non-owner NOBYPASSRLS ordinary runtime role and denies cross-tenant access, then prove exact cleanup without using real secrets, existing databases or product data.",
   "status": "in_progress",
-  "source_head": "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e",
-  "authority_source": "Accepted check-in readiness and admission-control lineage, this dependency resolution and Yuri's standing uninterrupted-development authority.",
+  "source_head": "a1f309a6d52d01f9866432f7e9abb8095788d023",
+  "authority_source": "Accepted check-in environment-manifest and secret-posture architecture plus Yuri's standing uninterrupted-development authority.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-provider-free-clockwork-governed-check-in-successor-resolution at the machine-resolved source.",
-    "next_executable_stage": "rehydrate_and_freeze_the_provider_free_default_off_environment_manifest_and_operational_secret_posture_contract",
+    "completed_stage": "Accepted raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture at the machine-resolved source.",
+    "next_executable_stage": "rehydrate_and_freeze_the_disposable_postgresql_runtime_role_tenant_isolation_attestation_plan",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,10 +34,12 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_repository_static_architecture_only",
-    "accepted_check_in_route_readiness_admission_architecture_and_unmounted_kernel_are_the_floor",
-    "environment_and_runtime_role_identifiers_and_evidence_references_only_no_secret_values",
-    "no_database_connection_role_creation_practice_selection_or_runtime_attestation",
+    "provider_free_uniquely_named_disposable_local_postgresql_only",
+    "accepted_environment_manifest_secret_posture_architecture_a1f309a6d52d01f9866432f7e9abb8095788d023_is_the_floor",
+    "ephemeral_authored_synthetic_manifest_practice_role_and_credential_provider_only",
+    "no_local_env_live_secret_cloud_or_hosted_database_existing_database_or_persistent_role",
+    "runtime_role_must_be_non_owner_nobypassrls_and_own_no_product_relation",
+    "exact_cross_tenant_denial_and_exact_cleanup_required",
     "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
     "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
     "no_generic_status_arrived_action_grammar_or_first_party_client_change",

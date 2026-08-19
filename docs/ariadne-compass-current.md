@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will next freeze a default-off, non-secret environment-manifest and operational secret-reference architecture before attempting runtime-role attestation or unknown-commit recovery evidence.
+> EMR4 will next prove the frozen restricted ordinary check-in role and exact tenant isolation in a uniquely named disposable local PostgreSQL rehearsal before any unknown-commit drill or ordinary-practice admission.
 
 ## North star
 
@@ -434,26 +434,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The task branch has one clockwork-owned canonical governance generation, guarded historical writers and an exact Git-backed rollback generation. Lineage parent: `ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal`.
 209. **Select the first remaining check-in admission dependency and make live clockwork operation repeatable — Clockwork-governed check-in successor resolution**
    The accepted check-in lineage has one unrepeated architecture successor and the live clockwork has a bounded generic second-tick path. Lineage parent: `ariadne-provider-free-clockwork-live-canonical-adoption-retirement`.
+210. **Freeze the non-secret environment and credential-custody vocabulary needed for representative operational evidence — Default-off check-in environment-manifest and secret-posture architecture**
+   One closed environment-manifest contract now defines exact restricted-role, opaque secret-reference, rotation-evidence and deny-only break-glass expectations without instantiating them. Lineage parent: `raisa-provider-free-clockwork-governed-check-in-successor-resolution`.
 
 ## Current position
 
-**Freeze the non-secret ordinary check-in environment boundary before operational drills — Clockwork-governed check-in successor resolution**
+**Prove the frozen ordinary runtime role and tenant-isolation properties in a disposable authored-synthetic database — Default-off check-in environment-manifest and secret-posture architecture**
 
-**Why this proof came next:** Route, admission architecture and unmounted kernel work are accepted; remaining admission gates need one exact environment and runtime-role vocabulary before evidence can be representative.
+**Why this proof came next:** The environment, role and reference vocabulary is frozen; the first remaining operational-evidence dependency is whether the restricted role is physically representable with exact cross-tenant denial.
 
-The next tranche is architecture-only environment-manifest and operational secret-reference posture, with ordinary practice and runtime still denied.
+The next tranche is a provider-free uniquely named disposable PostgreSQL attestation with ephemeral authored-synthetic identifiers and exact cleanup.
 
 ### What this unlocks
 
-- A later ordinary runtime-role and tenant-isolation attestation against a frozen identifier.
-- A later rollback and unknown-commit drill against the same frozen environment boundary.
-- Measured use of the generic clockwork on subsequent closeouts.
+- Representative non-owner and NOBYPASSRLS role evidence for the ordinary check-in environment gate.
+- Exact cross-tenant denial evidence under the same frozen manifest vocabulary.
+- A later rollback and unknown-commit rehearsal against the same environment boundary.
 
 ### What it does not solve
 
-- No secret, key, database role or selected-practice environment is created or accessed.
+- No real secret, existing database, product data or persistent database role is used.
 - No ordinary-practice check-in command is enabled or mounted.
-- No provider, product data, deployment, release, Pages or protected integration opens.
+- No provider, production runtime, deployment, release, Pages or protected integration opens.
 
 ## Continuity and authority
 
@@ -1303,6 +1305,7 @@ Prerequisites:
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review.md`
 - `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md`
 - `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md`
+- `docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md`
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-closeout.md`
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-design.md`
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-plan.md`
@@ -1758,6 +1761,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-architecture-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-kernel-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-kernel-gemini37-first-worktree-postcondition-failure.json`
+- `orchestration/agent_inbox/antigravity/raisa-check-in-environment-manifest-secret-posture-architecture-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-repair-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-current-operational-weave-review-1-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-attempt-048-review-receipt.json`
@@ -2626,6 +2630,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md`
 - `orchestration/continuity/raisa-provider-free-compatibility-conformance-harness-readiness-repair/structural-repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json`
+- `orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/contract.json`
+- `orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/environment-manifest.schema.json`
+- `orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/provider-free-architecture-evidence.json`
 - `orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/architecture-report.md`
 - `orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.json`
 - `orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.schema.json`
@@ -3193,7 +3200,6 @@ Prerequisites:
 - `orchestration_harness/git_object_resolution.py`
 - `orchestration_harness/git_refs_snapshot.py`
 - `orchestration_harness/governance_clockwork.py`
-- `orchestration_harness/governance_clockwork_tick.py`
 - `orchestration_harness/governance_live_adoption.py`
 - `orchestration_harness/governance_migration.py`
 - `orchestration_harness/orchestrator_preflight.py`
@@ -3486,4 +3492,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 314; continuity graph revision 332._
+_Compass map revision 315; continuity graph revision 333._

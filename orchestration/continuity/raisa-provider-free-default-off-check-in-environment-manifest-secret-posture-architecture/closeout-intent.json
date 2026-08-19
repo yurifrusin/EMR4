@@ -1,0 +1,214 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v1",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture",
+    "title": "Raisa provider-free default-off check-in environment-manifest and secret-posture architecture",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-19T05:38:31+00:00",
+    "node": {
+      "id": "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture",
+      "title": "Default-off check-in environment-manifest and secret-posture architecture",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorised uninterrupted dependency-satisfied development under the accepted check-in lineage.",
+          "This operation freezes a provider-free repository-static architecture and opens only a later disposable authored-synthetic role-attestation rehearsal.",
+          "No ordinary practice, secret value, existing database, product behavior, provider, production runtime, deployment, Pages or protected-ref authority opens."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "freeze-normalized-non-secret-environment-manifest",
+          "source": "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md",
+          "status": "accepted",
+          "summary": "Freeze one closed default-off manifest shape, exact restricted logical role and exactly three ordered opaque reference-only secret/key slots."
+        },
+        {
+          "id": "require-independent-rotation-evidence-and-deny-only-break-glass",
+          "source": "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md",
+          "status": "accepted",
+          "summary": "Treat rotation as fresh immutable independently verified evidence and permit break glass only to deny authority."
+        },
+        {
+          "id": "retain-zero-population-and-separate-operational-attestation",
+          "source": "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-plan.md",
+          "status": "accepted",
+          "summary": "Assert no operational environment, role, secret reference or admission evidence; prove the role and tenant isolation only in a later disposable rehearsal."
+        }
+      ],
+      "claim_scope": [
+        "The canonical population remains zero manifests, practices, runtime roles, secret references and operational-evidence artifacts.",
+        "The exact logical role and three opaque reference-only slots are frozen without creating or accessing a database role or secret.",
+        "Rotation requires independently verified immutable evidence bound to a full 40-character Git object, and break glass can only deny.",
+        "The bounded evaluator can return an evidence-gate reading only; it cannot admit, mount, configure, resolve a secret, connect a database or execute a command."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-plan.md",
+          "docs/security/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md",
+          "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/architecture-report.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-secret-posture-architecture-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-secret-posture-architecture-preplanning-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-environment-manifest-secret-posture-architecture-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/provider-free-architecture-evidence.json",
+          "scripts/raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
+          "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact ordinary runtime role and cross-tenant denial still require provider-free disposable PostgreSQL attestation.",
+        "Atomic rollback and unknown-commit recovery remain a later operational-evidence gate.",
+        "Ordinary-practice activation, occupied DeepSeek HMR, live secrets, product runtime, deployment, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Freeze the non-secret environment and credential-custody vocabulary needed for representative operational evidence",
+      "outcome": "One closed environment-manifest contract now defines exact restricted-role, opaque secret-reference, rotation-evidence and deny-only break-glass expectations without instantiating them.",
+      "evidence": [
+        "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md",
+        "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/contract.json",
+        "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/provider-free-architecture-evidence.json"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Prove the frozen ordinary runtime role and tenant-isolation properties in a disposable authored-synthetic database",
+      "why_now": "The environment, role and reference vocabulary is frozen; the first remaining operational-evidence dependency is whether the restricted role is physically representable with exact cross-tenant denial.",
+      "outcome": "The next tranche is a provider-free uniquely named disposable PostgreSQL attestation with ephemeral authored-synthetic identifiers and exact cleanup.",
+      "unlocks": [
+        "Representative non-owner and NOBYPASSRLS role evidence for the ordinary check-in environment gate.",
+        "Exact cross-tenant denial evidence under the same frozen manifest vocabulary.",
+        "A later rollback and unknown-commit rehearsal against the same environment boundary."
+      ],
+      "does_not_solve": [
+        "No real secret, existing database, product data or persistent database role is used.",
+        "No ordinary-practice check-in command is enabled or mounted.",
+        "No provider, production runtime, deployment, release, Pages or protected integration opens."
+      ],
+      "evidence": [
+        "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md",
+        "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/environment-manifest.schema.json",
+        "orchestration/agent_inbox/antigravity/raisa-check-in-environment-manifest-secret-posture-architecture-gemini37-review-receipt.json"
+      ],
+      "orientation_statement": "EMR4 will next prove the frozen restricted ordinary check-in role and exact tenant isolation in a uniquely named disposable local PostgreSQL rehearsal before any unknown-commit drill or ordinary-practice admission."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal",
+      "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in runtime-role and tenant-isolation attestation rehearsal",
+      "objective": "Prove in a uniquely named disposable local PostgreSQL instance that an ephemeral authored-synthetic manifest binds the exact non-owner NOBYPASSRLS ordinary runtime role and denies cross-tenant access, then prove exact cleanup without using real secrets, existing databases or product data.",
+      "authority_source": "Accepted check-in environment-manifest and secret-posture architecture plus Yuri's standing uninterrupted-development authority.",
+      "next_stage": "rehydrate_and_freeze_the_disposable_postgresql_runtime_role_tenant_isolation_attestation_plan"
+    },
+    "incidents": [],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "read_only_clockwork_tick_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "focused_environment_architecture",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "material_check_in_surrounding",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_raisa_provider_free_read_only_ordinary_practice_check_in_admission_readiness_review.py",
+          "tests/test_raisa_provider_free_default_off_ordinary_practice_check_in_admission_control_architecture.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Raisa provider-free default-off check-in environment-manifest and secret-posture architecture acceptance",
+    "paths": [
+      "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-plan.md",
+      "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md",
+      "docs/security/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/contract.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/environment-manifest.schema.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/provider-free-architecture-evidence.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/architecture-report.md",
+      "scripts/raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
+      "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/closeout-intent.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-secret-posture-architecture-preplanning-receipt.json",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-environment-manifest-secret-posture-architecture-gemini37-review-receipt.json",
+      "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-secret-posture-architecture-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-19--check-in-environment-manifest-secret-posture-architecture.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_uniquely_named_disposable_local_postgresql_only",
+    "accepted_environment_manifest_secret_posture_architecture_a1f309a6d52d01f9866432f7e9abb8095788d023_is_the_floor",
+    "ephemeral_authored_synthetic_manifest_practice_role_and_credential_provider_only",
+    "no_local_env_live_secret_cloud_or_hosted_database_existing_database_or_persistent_role",
+    "runtime_role_must_be_non_owner_nobypassrls_and_own_no_product_relation",
+    "exact_cross_tenant_denial_and_exact_cleanup_required",
+    "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_occupied_deepseek_hmr_claude_code_fallback_or_other_provider_call_before_optional_gemini_veto",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}

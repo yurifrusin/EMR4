@@ -139,6 +139,12 @@ def _selected_clockwork_operation() -> str | None:
     return json.loads(CLOCKWORK_TRANSACTION.read_text(encoding="utf-8"))["operation_id"]
 
 
+def _selected_clockwork_transaction() -> dict | None:
+    if not CLOCKWORK_POINTER.is_file() or not CLOCKWORK_TRANSACTION.is_file():
+        return None
+    return json.loads(CLOCKWORK_TRANSACTION.read_text(encoding="utf-8"))
+
+
 def test_continuity_and_compass_bind_risk_weighted_result_and_product_position() -> (
     None
 ):
@@ -146,22 +152,15 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
     assert graph["graph_revision"] == compass["source_graph_revision"]
-    if _selected_clockwork_operation() == GENERIC_TICK_NODE_ID:
-        assert graph["nodes"][-1]["id"] == GENERIC_TICK_NODE_ID
-        assert graph["nodes"][-1]["coordinates"]["source_head"] == (
-            GENERIC_TICK_SOURCE_HEAD
-        )
-        assert graph["nodes"][-1]["relationships"] == [
-            {"node_id": LIVE_CLOCKWORK_NODE_ID, "relation": "builds_on"}
-        ]
-    elif CLOCKWORK_POINTER.is_file():
-        assert graph["nodes"][-1]["id"] == LIVE_CLOCKWORK_NODE_ID
+    selected_transaction = _selected_clockwork_transaction()
+    if selected_transaction is not None:
+        assert graph["nodes"][-1]["id"] == selected_transaction["operation_id"]
         assert (
             graph["nodes"][-1]["coordinates"]["source_head"]
-            == LIVE_CLOCKWORK_SOURCE_HEAD
+            == selected_transaction["source_commit"]
         )
         assert graph["nodes"][-1]["relationships"] == [
-            {"node_id": LIVE_CLOCKWORK_PARENT_ID, "relation": "builds_on"}
+            {"node_id": graph["nodes"][-2]["id"], "relation": "builds_on"}
         ]
     else:
         assert graph["nodes"][-1]["id"] == LIVE_CLOCKWORK_PARENT_ID
@@ -205,19 +204,16 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
     assert f"Continuity {graph['graph_revision']} / Compass {compass['map_revision']}" in current
     assert graph["nodes"][-1]["coordinates"]["source_head"] in current
-    if _selected_clockwork_operation() == GENERIC_TICK_NODE_ID:
-        assert "clockwork-governed check-in successor resolution" in current.lower()
-        assert "environment-manifest" in current.lower()
-        assert GENERIC_TICK_SOURCE_HEAD in current
-        assert GENERIC_TICK_SOURCE_HEAD in clockwork_relation
-        assert "ten surfaces" in clockwork_relation.lower()
-        assert "previous generation" in clockwork_relation.lower()
-    elif clockwork_active:
-        assert "ten repository-governance surfaces" in current.lower()
-        assert "one clockwork owner" in current.lower()
-        assert "previous git generation" in current.lower()
-        assert LIVE_CLOCKWORK_SOURCE_HEAD in clockwork_relation
-        assert LIVE_CLOCKWORK_FLOOR_SOURCE_HEAD in clockwork_relation
+    selected_transaction = _selected_clockwork_transaction()
+    if selected_transaction is not None:
+        latch = json.loads(ACTIVE_LATCH.read_text(encoding="utf-8"))
+        assert "accepted at exact reviewed source" in current.lower()
+        assert selected_transaction["source_commit"] in clockwork_relation
+        assert "one clockwork writer owns all ten surfaces" in clockwork_relation.lower()
+        assert "immediately previous generation" in clockwork_relation.lower()
+        assert latch["operation_id"] in next_work
+        assert "active latch is the exact authority boundary" in next_work.lower()
+        assert "protected refs remain closed" in next_work.lower()
     else:
         assert "exclusive mirror ownership" in current.lower()
         assert "23/23 fault safety" in current.lower()
@@ -292,21 +288,7 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    if _selected_clockwork_operation() == GENERIC_TICK_NODE_ID:
-        assert (
-            "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture"
-            in next_work.lower()
-        )
-        assert "active latch is the exact authority boundary" in next_work.lower()
-        assert "protected refs remain closed" in next_work.lower()
-    elif clockwork_active:
-        assert "clockwork-governed-check-in-successor-resolution" in next_work.lower()
-        assert "provider-free and read-only" in next_work.lower()
-        assert "occupied deepseek/hmr" in next_work.lower()
-        assert "ordinary-practice enablement" in next_work.lower()
-        assert "product/data/runtime" in next_work.lower()
-        assert "protected-ref movement" in next_work.lower()
-    else:
+    if selected_transaction is None:
         assert "explicit adoption boundary" in next_work.lower()
         assert "live canonical clockwork adoption/retirement" in next_work.lower()
         assert "no dual writer" in next_work.lower()
@@ -356,29 +338,22 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
         and json.loads(CLOCKWORK_POINTER.read_text(encoding="utf-8")).get("phase")
         == "clockwork_active"
     )
-    generic_tick_selected = _selected_clockwork_operation() == GENERIC_TICK_NODE_ID
+    selected_transaction = _selected_clockwork_transaction()
+    clockwork_generation_selected = selected_transaction is not None
+    latch = (
+        json.loads(ACTIVE_LATCH.read_text(encoding="utf-8"))
+        if clockwork_generation_selected
+        else None
+    )
     phrases = (
         (
-            "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture",
+            latch["operation_id"],
             "active latch is the exact authority boundary",
             "protected refs remain closed",
             "docs/branding/",
             "stage explicit paths only",
         )
-        if generic_tick_selected
-        else
-        (
-            "clockwork-governed-check-in-successor-resolution",
-            "provider-free and read-only",
-            "occupied deepseek/hmr",
-            "ordinary-practice enablement",
-            "product/data/runtime",
-            "deployment",
-            "protected-ref movement",
-            "docs/branding/",
-            "stage explicit paths only",
-        )
-        if clockwork_active
+        if clockwork_generation_selected
         else (
             "explicit adoption boundary",
             "live canonical clockwork adoption/retirement",
@@ -396,11 +371,9 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     )
     for phrase in phrases:
         assert phrase in next_work
-    if generic_tick_selected:
-        latch = json.loads(ACTIVE_LATCH.read_text(encoding="utf-8"))
+    if clockwork_generation_selected:
         boundaries = set(latch["protected_boundaries"])
         assert {
-            "provider_free_repository_static_architecture_only",
             "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
             "no_product_patient_appointment_clinical_historical_or_protected_data",
             "no_production_runtime_deployment_release_or_pages",
