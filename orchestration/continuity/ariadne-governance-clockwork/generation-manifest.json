@@ -1,41 +1,41 @@
 {
   "schema_version": "ariadne.governance_live_tick_generation.v1",
-  "generation_id": "gen-accfc21d4094710b9b5a60d18bddfe729051a19815abb7aa72bc26d3350f4174",
-  "bundle_sha256": "accfc21d4094710b9b5a60d18bddfe729051a19815abb7aa72bc26d3350f4174",
-  "source_commit": "1bb482036225fa3cc42031b5e336b55799eb8c77",
+  "generation_id": "gen-eaf19b337fe05c11216e28fcd9d365edd3d6bdcd10d24342ef36f386d499bf11",
+  "bundle_sha256": "eaf19b337fe05c11216e28fcd9d365edd3d6bdcd10d24342ef36f386d499bf11",
+  "source_commit": "36c1a31da8cb680a0ad278a93e7fa51b0dbfa73e",
   "previous_generation": {
-    "generation_id": "gen-aabde3b6d630882dacfbd8c6815773783c36f81f505c05f01c0f9c691c897d80",
-    "source_commit": "1bb482036225fa3cc42031b5e336b55799eb8c77",
-    "bundle_sha256": "aabde3b6d630882dacfbd8c6815773783c36f81f505c05f01c0f9c691c897d80",
+    "generation_id": "gen-accfc21d4094710b9b5a60d18bddfe729051a19815abb7aa72bc26d3350f4174",
+    "source_commit": "36c1a31da8cb680a0ad278a93e7fa51b0dbfa73e",
+    "bundle_sha256": "accfc21d4094710b9b5a60d18bddfe729051a19815abb7aa72bc26d3350f4174",
     "canonical_sha256s": {
       "continuity": "7293ce432edb77d6d50d31f8cc713ac39ff074a28520aaa71f219f594f3d5f2a",
       "compass": "9bf7381b65a8b6275b6e1e96f123eac873377a7a087dfd31c774512031da5dc0",
       "compass_markdown": "1eb460886e396f010f3a055cd891ceaa4cda1c4e0c6b9fb9ce4a841ca479f995",
-      "active_latch": "1021ce4d782a528c0d14aae85d1beb7c00055d9337afc683cd7eaa0743f24f4d",
+      "active_latch": "372281133d7f0d73bba511279e42f03dbc5e46570e924074b2ab1721f5dd1069",
       "error_register": "92df6f2779fea4d5048e0d64d4f07748024ba162354e3ce2e4e191746546223b",
       "pattern_report": "0f0d0a5019674a7cc158dfe0485c0ff048869e08188a613ca29c9e5017666a04",
       "current_baton": "418b0e9b6273b20d9162857da0872b7ceeb6b2491ae6cd3d9c94ff9e9fab7128"
     },
     "metadata_sha256s": {
-      "command-manifest.json": "0fcb553d6f0784ddef775568a6e8624b0a70cb5d13cb2ce01ab4eff2232a2966",
-      "transaction.json": "d92d736fd43f089ef78ea0eaadeb7c5fbc7d6f92b1a4979b97ce9b5a1640b22d",
+      "command-manifest.json": "5fcd3414c77c619c4c9e37fef63af9b0c0b5b5639dc54d3a6f4391f961fe7e95",
+      "transaction.json": "9fdda4ddbf5ba176e1dff7f1c481cfd783773b3d456f331ba9b709a98304373e",
       "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-      "generation-manifest.json": "a20805c5ddb2ad99ce7717aab227493c502e805b4e6036d1c43b84645d18c8f4"
+      "generation-manifest.json": "0e139f62e25d4cd54258295154691b709ec522dcd11378198ff8ee188a84bf3a"
     },
-    "pointer_sha256": "5b4b5c6ed7daf580ab2c237efdf269a30fdcc689799200db3a8f9badff044bd2"
+    "pointer_sha256": "62e8924bac023ea6527bca9716c3fb79c590a9d3cb71b6424d71659221e031d6"
   },
   "canonical_sha256s": {
     "continuity": "7293ce432edb77d6d50d31f8cc713ac39ff074a28520aaa71f219f594f3d5f2a",
     "compass": "9bf7381b65a8b6275b6e1e96f123eac873377a7a087dfd31c774512031da5dc0",
     "compass_markdown": "1eb460886e396f010f3a055cd891ceaa4cda1c4e0c6b9fb9ce4a841ca479f995",
-    "active_latch": "372281133d7f0d73bba511279e42f03dbc5e46570e924074b2ab1721f5dd1069",
+    "active_latch": "02be3aee194d6ce367dc21f606bba6af53f9c3ed96e8cd9a91026ae273d03d96",
     "error_register": "92df6f2779fea4d5048e0d64d4f07748024ba162354e3ce2e4e191746546223b",
     "pattern_report": "0f0d0a5019674a7cc158dfe0485c0ff048869e08188a613ca29c9e5017666a04",
-    "current_baton": "418b0e9b6273b20d9162857da0872b7ceeb6b2491ae6cd3d9c94ff9e9fab7128"
+    "current_baton": "5c04e2ef6c593a2a4d8ba2166810fa40b07b42cd6bcb3f0954a35ac5e2ecd583"
   },
   "metadata_sha256s": {
-    "command-manifest.json": "5fcd3414c77c619c4c9e37fef63af9b0c0b5b5639dc54d3a6f4391f961fe7e95",
-    "transaction.json": "9fdda4ddbf5ba176e1dff7f1c481cfd783773b3d456f331ba9b709a98304373e",
+    "command-manifest.json": "9268cffade34ec470705a5b7bcb076d427516c2a4b5d4daf1ee39002923ed3ef",
+    "transaction.json": "693af2eb24976c7924ca6750390c04c61ed76f0a68d6defbebc7bbeab78dcf5c",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9"
   }
 }

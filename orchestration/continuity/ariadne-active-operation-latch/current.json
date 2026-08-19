@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-004",
-  "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 004",
-  "objective": "Freeze and, only after exact deterministic and preexecution admission, execute exactly one separately named provider-free disposable PostgreSQL relay-free rollback/unknown-commit recovery attempt using the accepted corrected harness, with immutable predecessor evidence, zero retry and exact cleanup.",
-  "status": "blocked",
-  "source_head": "00714269c97deca32019779287ebca77f46cdc50",
-  "authority_source": "Yuri's standing uninterrupted-development authority, the immutable attempts 001-003, accepted call-site/pre-registry cleanup repair, accepted no-database WorkOrder/broker interlock and accepted native-Harness HMR boot proof.",
+  "operation_id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+  "active_tranche": "Raisa provider-free check-in server-attachment lifetime and post-readiness observability conformance repair",
+  "objective": "Freeze and complete a provider-free deterministic repair that keeps the relay-free PostgreSQL server attachment under one cleanup owner until final teardown, separates post-readiness running-state failure from exact identity-predicate failure, preserves sanitized failed-predicate evidence and proves the lifecycle with fakes, without Docker or database execution.",
+  "status": "in_progress",
+  "source_head": "36c1a31da8cb680a0ad278a93e7fa51b0dbfa73e",
+  "authority_source": "Yuri's explicit standing uninterrupted-development authority, immutable attempt-004 failure and envelope evidence, its blocked clockwork closeout at lease 32, and the accepted relay-free transport, runtime-role and cleanup controls.",
   "checkpoint": {
-    "completed_stage": "Attempt 004 is consumed once at 932ae6ce02e0e973a22dfe999601087295001d1b and failed closed after readiness with zero retry or released effect. Failure and envelope are immutable at 4908bf53265e1356a9c5dac84a05b05702ad6d34; cleanup and zero residue are verified. The honest blocked closeout, Sol assessment, efficacy reading and paired Yuri summary are committed at 7c7d3708fe10c563bd61356966a7a287d383a5b2.",
-    "next_executable_stage": null,
+    "completed_stage": "Attempt 004 is closed blocked at a6a292e36978aa95e439fa398242c67816b6d4cc after one consumed execution, zero retry, no released effect, exact cleanup and zero residue. Yuri's standing authority selects the narrow no-Docker server-attachment lifetime and post-readiness observability repair.",
+    "next_executable_stage": "fresh_five_source_rehydration_and_freeze_the_provider_free_server_attachment_lifetime_and_post_readiness_observability_repair_plan_without_docker_database_or_model_execution",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 1
+      "verification": 0
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,23 +26,26 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": true,
-    "reason": "Attempt 004 cannot be rerun. Yuri's standing uninterrupted-development authority already selects the separately named provider-free server-attachment lifetime and post-readiness observability conformance repair; a separate user-decision clockwork transition will consume that standing authority without a ceremonial pause."
+    "required": false,
+    "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "The intended rollback and unknown-response transaction proof was not achieved. The retained evidence localizes failure to the combined running/identity guard after readiness and attachment release but cannot distinguish its two branches, so attempt 004 closes blocked with exact cleanup and no retry."
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_disposable_postgresql_relay_free_recovery_attempt_004_plan_and_exactly_one_execution_only",
-    "attempts_001_002_003_failure_envelopes_cleanup_execution_counts_and_sources_remain_immutable",
-    "accepted_call_site_pre_registry_cleanup_created_state_relay_free_transport_runtime_role_and_transaction_semantics_remain_exact",
-    "attempt_004_uses_a_distinct_collision_free_output_namespace_and_one_terminal_envelope",
-    "no_docker_object_container_network_credential_postgresql_sql_or_database_execution_before_frozen_plan_and_exact_preexecution_admission",
-    "no_retry_or_reclassification_of_any_consumed_attempt",
-    "no_deepseek_model_call_or_occupied_worker_without_separately_bound_work_order_provider_free_admission_and_one_run_latch",
+    "provider_free_deterministic_relay_free_server_attachment_lifetime_and_post_readiness_observability_repair_only",
+    "attempt_004_failure_envelope_execution_count_source_and_cleanup_result_are_immutable_and_never_overwritten",
+    "attempts_001_002_003_and_all_accepted_repairs_remain_immutable",
+    "no_retry_reclassification_or_second_execution_of_attempt_004",
+    "only_the_relay_free_harness_attachment_lifetime_combined_running_identity_guard_failure_evidence_and_exact_tests_may_change",
+    "server_attachment_remains_owned_until_final_cleanup_unless_deterministic_evidence_proves_an_equally_safe_earlier_release",
+    "running_state_and_identity_predicate_failures_are_distinct_and_sanitized_failed_predicate_names_are_preserved",
+    "provider_free_fake_process_and_inspect_sequence_tests_required",
+    "no_docker_object_container_start_attach_stdin_credential_postgresql_sql_transaction_or_database_execution",
+    "no_deepseek_model_call_or_occupied_worker_without_a_separately_bound_v2_work_order_provider_free_no_database_admission_and_one_run_latch",
     "no_claude_code_fallback",
-    "gemini_only_after_an_exact_deterministic_or_successful_occupied_candidate",
+    "gemini_only_after_an_exact_deterministic_candidate",
     "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
     "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
     "no_generic_status_arrived_action_grammar_or_first_party_client_change",

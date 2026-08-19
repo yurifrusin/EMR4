@@ -2,45 +2,42 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "attempt-004-terminal-provider-free-tests",
+      "command_id": "attachment-observability-transition-provider-free-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004_plan.py",
-        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
-        "tests/test_ariadne_provider_free_no_database_admission.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "attachment-observability-transition-ruff",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/governance_clockwork_tick.py",
+        "scripts/ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_current_baton_consistency.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "attempt-004-terminal-ruff",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "ruff",
-        "check",
-        "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_004.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004_plan.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required"
-    },
-    {
-      "command_id": "attempt-004-terminal-compile",
+      "command_id": "attachment-observability-transition-compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_004.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_004_plan.py"
+        "orchestration_harness/governance_clockwork_tick.py",
+        "scripts/ariadne_governance_clockwork_tick.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }
