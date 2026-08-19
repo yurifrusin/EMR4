@@ -1,7 +1,7 @@
 {
   "admitted_manifest_command_count": 1,
   "broker_work_order_schema": "ariadne.deepseek_work_order.v2",
-  "command_manifest_sha256": "sha256:cf432ea1295334d2184ab5179d4e6d34f12ff50799538218578308c218035e08",
+  "command_manifest_sha256": "sha256:5a2c760132aad87d3c05b46ac2aeb65e2bd5e4d8dd6ca9fcbbaf7d685e872b99",
   "contract_sha256": "sha256:dc2d2a7151be1d7962fa27c7cbe01cc2743d9cc3e13b7286119cd35e3f1ef248",
   "hostile_mutations": {
     "escaped": [],
@@ -18,7 +18,7 @@
     "selected_module_imports": 0
   },
   "legacy_v1_broker_policy": "test_mode_plus_explicit_compatibility_flag_only",
-  "manifest_admission_sha256": "sha256:1042b4e2f519b223d2acc12fd419c9ba510bf46531a956269fce2545589a5b5e",
+  "manifest_admission_sha256": "sha256:bf1fa67c57c589ec67bae88a3fd71795f75057b598b5b6090cd7ba21263e1bbc",
   "manifest_runner_selection_identical": true,
   "planning_source": "440fc7bbd071fbb97a97c986e8c80fe69b83f747",
   "repository_a5_1": {

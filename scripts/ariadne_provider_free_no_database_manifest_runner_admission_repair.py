@@ -85,11 +85,11 @@ def build_evidence(repo_root: Path = ROOT) -> dict[str, Any]:
             {
                 "id": "PF",
                 "argv": [
-                    str(root / ".venv" / "Scripts" / "python.exe"),
+                    "python",
                     "-m",
                     "scripts.ariadne_provider_free_pytest",
                     "--repo-root",
-                    str(root),
+                    ".",
                     "tests/test_ariadne_provider_free_no_database_admission.py",
                 ],
             }

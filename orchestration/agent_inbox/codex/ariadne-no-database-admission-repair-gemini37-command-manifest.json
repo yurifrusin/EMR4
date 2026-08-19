@@ -1,0 +1,101 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "C01",
+      "argv": ["git", "status", "--short", "--branch"]
+    },
+    {
+      "id": "C02",
+      "argv": ["git", "rev-parse", "HEAD"]
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0",
+        "tests/test_ariadne_provider_free_no_database_admission.py",
+        "tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py",
+        "tests/test_ariadne_provider_free_pytest.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_no_database_manifest_runner_admission_repair",
+        "--check"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/provider_free_no_database_admission.py",
+        "orchestration_harness/transactional_closeout.py",
+        "scripts/ariadne_provider_free_no_database_manifest_runner_admission_repair.py",
+        "scripts/ariadne_provider_free_pytest.py",
+        "scripts/ariadne_validation_runner.py",
+        "tests/test_ariadne_provider_free_no_database_admission.py",
+        "tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py",
+        "tests/test_ariadne_provider_free_pytest.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/provider_free_no_database_admission.py",
+        "orchestration_harness/transactional_closeout.py",
+        "scripts/ariadne_provider_free_no_database_manifest_runner_admission_repair.py",
+        "scripts/ariadne_provider_free_pytest.py",
+        "scripts/ariadne_validation_runner.py"
+      ]
+    },
+    {
+      "id": "C07",
+      "argv": ["node", "--check", "scripts/ariadne_deepseek_native_harness_broker.mjs"]
+    },
+    {
+      "id": "C08",
+      "argv": ["git", "diff", "--exit-code", "HEAD", "--"]
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "440fc7bbd071fbb97a97c986e8c80fe69b83f747..91ee5ee06b7f1fb698b0240208295b226c4b87ff"
+      ]
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "440fc7bbd071fbb97a97c986e8c80fe69b83f747..91ee5ee06b7f1fb698b0240208295b226c4b87ff"
+      ]
+    },
+    {
+      "id": "C11",
+      "argv": ["git", "status", "--short", "--branch"]
+    }
+  ]
+}

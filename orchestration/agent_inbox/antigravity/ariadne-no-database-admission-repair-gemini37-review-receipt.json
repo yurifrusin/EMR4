@@ -1,0 +1,289 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "revision_required",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\no-db-admission-gemini-91ee5ee0",
+  "branch": "codex/review-no-db-admission-91ee5ee0",
+  "head_before": "91ee5ee06b7f1fb698b0240208295b226c4b87ff",
+  "head_after": "91ee5ee06b7f1fb698b0240208295b226c4b87ff",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "c40ac829f3ccf557550add2ee342c66c5c04bd87bcc6832a9eabf40e8d56967c",
+  "result": "# Gemini 3.7 Flash/high Independent Veto: Provider-Free No-Database Admission Repair\n\n- **Date:** 2026-08-20\n- **Candidate HEAD:** [`91ee5ee06b7f1fb698b0240208295b226c4b87ff`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0)\n- **Review Base:** [`440fc7bbd071fbb97a97c986e8c80fe69b83f747`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0)\n- **Bound Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\no-db-admission-gemini-91ee5ee0`\n- **Bound Branch:** `codex/review-no-db-admission-91ee5ee0`\n\n---\n\n## 1. Five-Source Authority Rehydration\n\n1. **`live_handover_current_baton`:**\n   Read [`AGENTS.md`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/AGENTS.md) completely. Current baton aligns on protected master and handoff at commit `2e34bdad732fdab32fbf778280b3d3c70d66d602`. The active clockwork relation published through exact reviewed source `31cddb7511be306ecadbe02555cec8cd1f8c200e` at Continuity 337 / Compass 319.\n2. **`current_authority_allocation`:**\n   GPT Sol owns implementation, deterministic tests, and clockwork maintenance under Yuri's standing uninterrupted-development authority. Gemini owns this fresh, independent, read-only exact-candidate veto. DeepSeek remains declined/paused pending its separate stock-headless-to-custom-runner boot proof, and Claude Code is lineage only with no silent fallback. Native subagents remain declined.\n3. **`active_plan_and_acceptance`:**\n   Read [`docs/ariadne-provider-free-no-database-manifest-runner-admission-repair-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/docs/ariadne-provider-free-no-database-manifest-runner-admission-repair-plan.md), [`docs/security/ariadne-provider-free-no-database-manifest-runner-admission-repair-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/docs/security/ariadne-provider-free-no-database-manifest-runner-admission-repair-threat-model-delta.md), [`orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/contract.json`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/contract.json), and preplanning receipts.\n4. **`protected_evidence_boundaries`:**\n   No Docker container/process, no PostgreSQL instance/transaction/execution, no live provider invocation, no occupied DeepSeek execution, no attempt-004 plan/retry, no product data, no production runtime, no Pages rebuild, and no protected-ref movement. Preserved `docs/branding/` and all unrelated untracked files.\n5. **`git_refs_and_worktree`:**\n   Verified clean tracked tree on `codex/review-no-db-admission-91ee5ee0` at HEAD `91ee5ee06b7f1fb698b0240208295b226c4b87ff` against base `440fc7bbd071fbb97a97c986e8c80fe69b83f747`.\n\n---\n\n## 2. Active Operation Latch & Parallelism Assessment\n\n- **Latch Validation:**\n  [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/orchestration/continuity/ariadne-active-operation-latch/current.json) is valid with status `in_progress`, operation ID `ariadne-provider-free-no-database-manifest-runner-admission-repair`, checkpoint next stage `fresh_five_source_rehydration_and_freeze_narrow_no_database_admission_repair_plan`.\n- **Parallelism Assessment:**\n  - **DeepSeek:** Declined while the controlling broker gear is under repair; paused pending separate boot proof.\n  - **Gemini:** Assigned and active for this exact clean candidate veto.\n  - **Native subagents:** Declined by current policy and serial coupling across the AST classifier, manifest preflight, and broker boundary.\n\n---\n\n## 3. Substantive Challenge Audits\n\n1. **Candidate & Worktree Identities:**\n   Confirmed worktree `C:\\Users\\sarashera\\EMR4-worktrees\\no-db-admission-gemini-91ee5ee0` on branch `codex/review-no-db-admission-91ee5ee0` at commit `91ee5ee06b7f1fb698b0240208295b226c4b87ff`. Clean tracked tree verified across C01, C08, C11.\n2. **AST Classifier & Fail-Closed Rules:**\n   Audited [`orchestration_harness/provider_free_no_database_admission.py`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/orchestration_harness/provider_free_no_database_admission.py). The static parser safely traverses AST nodes without importing test modules, conftest, or pytest. It strictly rejects:\n   - Dynamic/star imports and conftest imports (`tests.conftest`, `*.conftest`, `__import__('conftest')`, `importlib.import_module('conftest')`).\n   - Dynamic fixture declarations, duplicate fixture names, dynamic `usefixtures`, dynamic/indirect parameterizations, and fixture dependency cycles.\n   - Any fixture reachability edge into `tests/conftest.py` shared fixtures (`provider_free_shared_postgresql_fixture_reachable`).\n   - Path escapes, absolute paths, symlinks, duplicate paths, non-python extensions, and node-id selectors (`::`).\n3. **False Denial Risk & Fixture Allowlist:**\n   Audited [`PYTEST_CORE_FIXTURES`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/orchestration_harness/provider_free_no_database_admission.py#L22-L40). The 17 core pytest fixtures are frozen and matched against [`contract.json`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/contract.json#L13-L31).\n4. **Validation Preflight & Runner Derivation:**\n   [`scripts/ariadne_validation_runner.py`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/scripts/ariadne_validation_runner.py) derives the exact selection digest, enforces `--repo-root` binding, and injects `ARIADNE_EXPECTED_NO_DATABASE_ADMISSION_SHA256` into the child process. [`scripts/ariadne_provider_free_pytest.py`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/scripts/ariadne_provider_free_pytest.py) re-evaluates admission and fails closed if any drift occurs prior to pytest launch.\n5. **Ordinary Pytest Prohibition & Clean Environment:**\n   Validation manifests strictly forbid `pytest`, `py.test`, `pytest.exe`, and `python -m pytest`. Provider-free execution enforces `--noconftest`, `-p no:cacheprovider`, `--strict-config`, and strips all database URLs and credentials from `os.environ`.\n6. **WorkOrder v2 Schema & Mutual Artifact Bindings:**\n   [`orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/work-order-v2.schema.json`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/work-order-v2.schema.json) and [`orchestration_harness/transactional_closeout.py`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/orchestration_harness/transactional_closeout.py) require exact `command_manifest_sha256` and `provider_free_no_database_admission_sha256` bindings. Bundle preparation and validation reject any mismatched or untracked artifact.\n7. **Node Broker Synchronous Pre-Ready Validation:**\n   [`scripts/ariadne_deepseek_native_harness_broker.mjs`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/scripts/ariadne_deepseek_native_harness_broker.mjs) validates the WorkOrder and both bound JSON artifact bodies synchronously before opening the HTTP port (`broker-ready`) or handling requests, rejecting missing, mutated, or incomplete command coverage with exit code 2.\n8. **Frozen-Source Efficacy Baseline:**\n   [`tests/test_ariadne_transactional_closeout.py`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/tests/test_ariadne_transactional_closeout.py) preserves immutable baseline source `f21072405a4d5877ec03e2cd1aefc7fa74d379e9` and accepted candidate `f6cbd33fd3322754e06ac6dafa1503f5200e0803` for efficacy measurement.\n\n---\n\n## 4. Findings and Defect Analysis (P1 Finding)\n\n### P1 Finding: Worktree-Absolute Path Inclusion in Stored Deterministic Evidence Hashes\n\n- **Affected Files:**\n  - [`scripts/ariadne_provider_free_no_database_manifest_runner_admission_repair.py`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/scripts/ariadne_provider_free_no_database_manifest_runner_admission_repair.py#L82-L97)\n  - [`orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-evidence.json`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-evidence.json#L4-L21)\n  - [`tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py#L21)\n- **Description:**\n  In [`scripts/ariadne_provider_free_no_database_manifest_runner_admission_repair.py`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/scripts/ariadne_provider_free_no_database_manifest_runner_admission_repair.py), `build_evidence()` constructs a synthetic command manifest for self-evidence verification:\n  ```python\n  command_manifest = {\n      \"schema_version\": COMMAND_MANIFEST_SCHEMA_VERSION,\n      \"commands\": [\n          {\n              \"id\": \"PF\",\n              \"argv\": [\n                  str(root / \".venv\" / \"Scripts\" / \"python.exe\"),\n                  \"-m\",\n                  \"scripts.ariadne_provider_free_pytest\",\n                  \"--repo-root\",\n                  str(root),\n                  \"tests/test_ariadne_provider_free_no_database_admission.py\",\n              ],\n          }\n      ],\n  }\n  ```\n  Because `root` is dynamically resolved from `repo_root` (which in worker worktrees resolves to `C:\\Users\\sarashera\\EMR4-worktrees\\no-db-admission-gemini-91ee5ee0` rather than the main worktree `C:\\Users\\sarashera\\emr4`), `command_manifest[\"commands\"][0][\"argv\"]` embeds the local absolute worktree directory path.\n  Consequently, hashing `command_manifest` in `build_evidence(ROOT)` yields:\n  - Computed `command_manifest_sha256`: `sha256:0d7a388707a53f140245bc239f514fa5f49355180f2fd59b4bfe91f7cd821e09` (differs from stored `sha256:cf432ea1295334d2184ab5179d4e6d34f12ff50799538218578308c218035e08`).\n  - Computed `manifest_admission_sha256`: `sha256:8d60284fd0f251e4853350054606898fca67063e88c7422aa0de5f59fb4836f1` (differs from stored `sha256:1042b4e2f519b223d2acc12fd419c9ba510bf46531a956269fce2545589a5b5e`).\n\n- **Verification Failure Impact:**\n  - **Command C03:** Failed with exit code 1 due to `AssertionError` in [`tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py::test_deterministic_no_database_evidence_is_exact`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py#L21).\n  - **Command C04:** Failed with exit code 1 (`provider-free no-database evidence drift`).\n\n- **Required Remediation:**\n  The command manifest used in `build_evidence` (or the evidence builder specification) must either avoid baking volatile absolute host/worktree paths into the tracked canonical evidence artifact or canonicalize/parameterize the evidence representation so that deterministic `--check` and `test_deterministic_no_database_evidence_is_exact` pass reproducibly across worker worktrees.\n\n---\n\n## 5. Execution Summary of Bound Manifest Commands\n\n- **C01** (`git status --short --branch`): Exited 0 (Clean branch `codex/review-no-db-admission-91ee5ee0`).\n- **C02** (`git rev-parse HEAD`): Exited 0 (`91ee5ee06b7f1fb698b0240208295b226c4b87ff`).\n- **C03** (`scripts.ariadne_provider_free_pytest`): Exited 1 (`test_deterministic_no_database_evidence_is_exact` failed due to absolute path hash drift).\n- **C04** (`scripts.ariadne_provider_free_no_database_manifest_runner_admission_repair --check`): Exited 1 (`provider-free no-database evidence drift`).\n- **C05** (`ruff check ...`): Exited 0 (All checks passed).\n- **C06** (`py_compile ...`): Exited 0.\n- **C07** (`node --check scripts/ariadne_deepseek_native_harness_broker.mjs`): Exited 0.\n- **C08** (`git diff --exit-code HEAD --`): Exited 0.\n- **C09** (`git diff --check 440fc7bbd071fbb97a97c986e8c80fe69b83f747..91ee5ee06b7f1fb698b0240208295b226c4b87ff`): Exited 0.\n- **C10** (`git diff --name-only 440fc7bbd071fbb97a97c986e8c80fe69b83f747..91ee5ee06b7f1fb698b0240208295b226c4b87ff`): Exited 0 (21 changed files).\n- **C11** (`git status --short --branch`): Exited 0.",
+  "decision_envelope": {
+    "decision": "revision_required",
+    "review": "# Gemini 3.7 Flash/high Independent Veto: Provider-Free No-Database Admission Repair\n\n- **Date:** 2026-08-20\n- **Candidate HEAD:** [`91ee5ee06b7f1fb698b0240208295b226c4b87ff`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0)\n- **Review Base:** [`440fc7bbd071fbb97a97c986e8c80fe69b83f747`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0)\n- **Bound Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\no-db-admission-gemini-91ee5ee0`\n- **Bound Branch:** `codex/review-no-db-admission-91ee5ee0`\n\n---\n\n## 1. Five-Source Authority Rehydration\n\n1. **`live_handover_current_baton`:**\n   Read [`AGENTS.md`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/AGENTS.md) completely. Current baton aligns on protected master and handoff at commit `2e34bdad732fdab32fbf778280b3d3c70d66d602`. The active clockwork relation published through exact reviewed source `31cddb7511be306ecadbe02555cec8cd1f8c200e` at Continuity 337 / Compass 319.\n2. **`current_authority_allocation`:**\n   GPT Sol owns implementation, deterministic tests, and clockwork maintenance under Yuri's standing uninterrupted-development authority. Gemini owns this fresh, independent, read-only exact-candidate veto. DeepSeek remains declined/paused pending its separate stock-headless-to-custom-runner boot proof, and Claude Code is lineage only with no silent fallback. Native subagents remain declined.\n3. **`active_plan_and_acceptance`:**\n   Read [`docs/ariadne-provider-free-no-database-manifest-runner-admission-repair-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/docs/ariadne-provider-free-no-database-manifest-runner-admission-repair-plan.md), [`docs/security/ariadne-provider-free-no-database-manifest-runner-admission-repair-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/docs/security/ariadne-provider-free-no-database-manifest-runner-admission-repair-threat-model-delta.md), [`orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/contract.json`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/contract.json), and preplanning receipts.\n4. **`protected_evidence_boundaries`:**\n   No Docker container/process, no PostgreSQL instance/transaction/execution, no live provider invocation, no occupied DeepSeek execution, no attempt-004 plan/retry, no product data, no production runtime, no Pages rebuild, and no protected-ref movement. Preserved `docs/branding/` and all unrelated untracked files.\n5. **`git_refs_and_worktree`:**\n   Verified clean tracked tree on `codex/review-no-db-admission-91ee5ee0` at HEAD `91ee5ee06b7f1fb698b0240208295b226c4b87ff` against base `440fc7bbd071fbb97a97c986e8c80fe69b83f747`.\n\n---\n\n## 2. Active Operation Latch & Parallelism Assessment\n\n- **Latch Validation:**\n  [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/orchestration/continuity/ariadne-active-operation-latch/current.json) is valid with status `in_progress`, operation ID `ariadne-provider-free-no-database-manifest-runner-admission-repair`, checkpoint next stage `fresh_five_source_rehydration_and_freeze_narrow_no_database_admission_repair_plan`.\n- **Parallelism Assessment:**\n  - **DeepSeek:** Declined while the controlling broker gear is under repair; paused pending separate boot proof.\n  - **Gemini:** Assigned and active for this exact clean candidate veto.\n  - **Native subagents:** Declined by current policy and serial coupling across the AST classifier, manifest preflight, and broker boundary.\n\n---\n\n## 3. Substantive Challenge Audits\n\n1. **Candidate & Worktree Identities:**\n   Confirmed worktree `C:\\Users\\sarashera\\EMR4-worktrees\\no-db-admission-gemini-91ee5ee0` on branch `codex/review-no-db-admission-91ee5ee0` at commit `91ee5ee06b7f1fb698b0240208295b226c4b87ff`. Clean tracked tree verified across C01, C08, C11.\n2. **AST Classifier & Fail-Closed Rules:**\n   Audited [`orchestration_harness/provider_free_no_database_admission.py`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/orchestration_harness/provider_free_no_database_admission.py). The static parser safely traverses AST nodes without importing test modules, conftest, or pytest. It strictly rejects:\n   - Dynamic/star imports and conftest imports (`tests.conftest`, `*.conftest`, `__import__('conftest')`, `importlib.import_module('conftest')`).\n   - Dynamic fixture declarations, duplicate fixture names, dynamic `usefixtures`, dynamic/indirect parameterizations, and fixture dependency cycles.\n   - Any fixture reachability edge into `tests/conftest.py` shared fixtures (`provider_free_shared_postgresql_fixture_reachable`).\n   - Path escapes, absolute paths, symlinks, duplicate paths, non-python extensions, and node-id selectors (`::`).\n3. **False Denial Risk & Fixture Allowlist:**\n   Audited [`PYTEST_CORE_FIXTURES`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/orchestration_harness/provider_free_no_database_admission.py#L22-L40). The 17 core pytest fixtures are frozen and matched against [`contract.json`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/contract.json#L13-L31).\n4. **Validation Preflight & Runner Derivation:**\n   [`scripts/ariadne_validation_runner.py`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/scripts/ariadne_validation_runner.py) derives the exact selection digest, enforces `--repo-root` binding, and injects `ARIADNE_EXPECTED_NO_DATABASE_ADMISSION_SHA256` into the child process. [`scripts/ariadne_provider_free_pytest.py`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/scripts/ariadne_provider_free_pytest.py) re-evaluates admission and fails closed if any drift occurs prior to pytest launch.\n5. **Ordinary Pytest Prohibition & Clean Environment:**\n   Validation manifests strictly forbid `pytest`, `py.test`, `pytest.exe`, and `python -m pytest`. Provider-free execution enforces `--noconftest`, `-p no:cacheprovider`, `--strict-config`, and strips all database URLs and credentials from `os.environ`.\n6. **WorkOrder v2 Schema & Mutual Artifact Bindings:**\n   [`orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/work-order-v2.schema.json`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/work-order-v2.schema.json) and [`orchestration_harness/transactional_closeout.py`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/orchestration_harness/transactional_closeout.py) require exact `command_manifest_sha256` and `provider_free_no_database_admission_sha256` bindings. Bundle preparation and validation reject any mismatched or untracked artifact.\n7. **Node Broker Synchronous Pre-Ready Validation:**\n   [`scripts/ariadne_deepseek_native_harness_broker.mjs`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/scripts/ariadne_deepseek_native_harness_broker.mjs) validates the WorkOrder and both bound JSON artifact bodies synchronously before opening the HTTP port (`broker-ready`) or handling requests, rejecting missing, mutated, or incomplete command coverage with exit code 2.\n8. **Frozen-Source Efficacy Baseline:**\n   [`tests/test_ariadne_transactional_closeout.py`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/tests/test_ariadne_transactional_closeout.py) preserves immutable baseline source `f21072405a4d5877ec03e2cd1aefc7fa74d379e9` and accepted candidate `f6cbd33fd3322754e06ac6dafa1503f5200e0803` for efficacy measurement.\n\n---\n\n## 4. Findings and Defect Analysis (P1 Finding)\n\n### P1 Finding: Worktree-Absolute Path Inclusion in Stored Deterministic Evidence Hashes\n\n- **Affected Files:**\n  - [`scripts/ariadne_provider_free_no_database_manifest_runner_admission_repair.py`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/scripts/ariadne_provider_free_no_database_manifest_runner_admission_repair.py#L82-L97)\n  - [`orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-evidence.json`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-evidence.json#L4-L21)\n  - [`tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py#L21)\n- **Description:**\n  In [`scripts/ariadne_provider_free_no_database_manifest_runner_admission_repair.py`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/scripts/ariadne_provider_free_no_database_manifest_runner_admission_repair.py), `build_evidence()` constructs a synthetic command manifest for self-evidence verification:\n  ```python\n  command_manifest = {\n      \"schema_version\": COMMAND_MANIFEST_SCHEMA_VERSION,\n      \"commands\": [\n          {\n              \"id\": \"PF\",\n              \"argv\": [\n                  str(root / \".venv\" / \"Scripts\" / \"python.exe\"),\n                  \"-m\",\n                  \"scripts.ariadne_provider_free_pytest\",\n                  \"--repo-root\",\n                  str(root),\n                  \"tests/test_ariadne_provider_free_no_database_admission.py\",\n              ],\n          }\n      ],\n  }\n  ```\n  Because `root` is dynamically resolved from `repo_root` (which in worker worktrees resolves to `C:\\Users\\sarashera\\EMR4-worktrees\\no-db-admission-gemini-91ee5ee0` rather than the main worktree `C:\\Users\\sarashera\\emr4`), `command_manifest[\"commands\"][0][\"argv\"]` embeds the local absolute worktree directory path.\n  Consequently, hashing `command_manifest` in `build_evidence(ROOT)` yields:\n  - Computed `command_manifest_sha256`: `sha256:0d7a388707a53f140245bc239f514fa5f49355180f2fd59b4bfe91f7cd821e09` (differs from stored `sha256:cf432ea1295334d2184ab5179d4e6d34f12ff50799538218578308c218035e08`).\n  - Computed `manifest_admission_sha256`: `sha256:8d60284fd0f251e4853350054606898fca67063e88c7422aa0de5f59fb4836f1` (differs from stored `sha256:1042b4e2f519b223d2acc12fd419c9ba510bf46531a956269fce2545589a5b5e`).\n\n- **Verification Failure Impact:**\n  - **Command C03:** Failed with exit code 1 due to `AssertionError` in [`tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py::test_deterministic_no_database_evidence_is_exact`](file:///C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0/tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py#L21).\n  - **Command C04:** Failed with exit code 1 (`provider-free no-database evidence drift`).\n\n- **Required Remediation:**\n  The command manifest used in `build_evidence` (or the evidence builder specification) must either avoid baking volatile absolute host/worktree paths into the tracked canonical evidence artifact or canonicalize/parameterize the evidence representation so that deterministic `--check` and `test_deterministic_no_database_evidence_is_exact` pass reproducibly across worker worktrees.\n\n---\n\n## 5. Execution Summary of Bound Manifest Commands\n\n- **C01** (`git status --short --branch`): Exited 0 (Clean branch `codex/review-no-db-admission-91ee5ee0`).\n- **C02** (`git rev-parse HEAD`): Exited 0 (`91ee5ee06b7f1fb698b0240208295b226c4b87ff`).\n- **C03** (`scripts.ariadne_provider_free_pytest`): Exited 1 (`test_deterministic_no_database_evidence_is_exact` failed due to absolute path hash drift).\n- **C04** (`scripts.ariadne_provider_free_no_database_manifest_runner_admission_repair --check`): Exited 1 (`provider-free no-database evidence drift`).\n- **C05** (`ruff check ...`): Exited 0 (All checks passed).\n- **C06** (`py_compile ...`): Exited 0.\n- **C07** (`node --check scripts/ariadne_deepseek_native_harness_broker.mjs`): Exited 0.\n- **C08** (`git diff --exit-code HEAD --`): Exited 0.\n- **C09** (`git diff --check 440fc7bbd071fbb97a97c986e8c80fe69b83f747..91ee5ee06b7f1fb698b0240208295b226c4b87ff`): Exited 0.\n- **C10** (`git diff --name-only 440fc7bbd071fbb97a97c986e8c80fe69b83f747..91ee5ee06b7f1fb698b0240208295b226c4b87ff`): Exited 0 (21 changed files).\n- **C11** (`git status --short --branch`): Exited 0.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0",
+          "tests/test_ariadne_provider_free_no_database_admission.py",
+          "tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py",
+          "tests/test_ariadne_provider_free_pytest.py",
+          "tests/test_ariadne_validation_runner.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py"
+        ],
+        "exit_code": 1
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_no_database_manifest_runner_admission_repair",
+          "--check"
+        ],
+        "exit_code": 1
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "orchestration_harness/provider_free_no_database_admission.py",
+          "orchestration_harness/transactional_closeout.py",
+          "scripts/ariadne_provider_free_no_database_manifest_runner_admission_repair.py",
+          "scripts/ariadne_provider_free_pytest.py",
+          "scripts/ariadne_validation_runner.py",
+          "tests/test_ariadne_provider_free_no_database_admission.py",
+          "tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py",
+          "tests/test_ariadne_provider_free_pytest.py",
+          "tests/test_ariadne_validation_runner.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "orchestration_harness/provider_free_no_database_admission.py",
+          "orchestration_harness/transactional_closeout.py",
+          "scripts/ariadne_provider_free_no_database_manifest_runner_admission_repair.py",
+          "scripts/ariadne_provider_free_pytest.py",
+          "scripts/ariadne_validation_runner.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "node",
+          "--check",
+          "scripts/ariadne_deepseek_native_harness_broker.mjs"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "440fc7bbd071fbb97a97c986e8c80fe69b83f747..91ee5ee06b7f1fb698b0240208295b226c4b87ff"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "440fc7bbd071fbb97a97c986e8c80fe69b83f747..91ee5ee06b7f1fb698b0240208295b226c4b87ff"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C11",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "c754ebc9a22b2e854d3b36d5808b005bba67bd0ebf8d25304974a401550426e8",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/no-db-admission-gemini-91ee5ee0",
+        "tests/test_ariadne_provider_free_no_database_admission.py",
+        "tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py",
+        "tests/test_ariadne_provider_free_pytest.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py"
+      ],
+      "exit_code": 1
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_no_database_manifest_runner_admission_repair",
+        "--check"
+      ],
+      "exit_code": 1
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/provider_free_no_database_admission.py",
+        "orchestration_harness/transactional_closeout.py",
+        "scripts/ariadne_provider_free_no_database_manifest_runner_admission_repair.py",
+        "scripts/ariadne_provider_free_pytest.py",
+        "scripts/ariadne_validation_runner.py",
+        "tests/test_ariadne_provider_free_no_database_admission.py",
+        "tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py",
+        "tests/test_ariadne_provider_free_pytest.py",
+        "tests/test_ariadne_validation_runner.py",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/provider_free_no_database_admission.py",
+        "orchestration_harness/transactional_closeout.py",
+        "scripts/ariadne_provider_free_no_database_manifest_runner_admission_repair.py",
+        "scripts/ariadne_provider_free_pytest.py",
+        "scripts/ariadne_validation_runner.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "node",
+        "--check",
+        "scripts/ariadne_deepseek_native_harness_broker.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "440fc7bbd071fbb97a97c986e8c80fe69b83f747..91ee5ee06b7f1fb698b0240208295b226c4b87ff"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "440fc7bbd071fbb97a97c986e8c80fe69b83f747..91ee5ee06b7f1fb698b0240208295b226c4b87ff"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C11",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}
