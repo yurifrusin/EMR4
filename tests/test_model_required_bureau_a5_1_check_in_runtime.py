@@ -1069,7 +1069,7 @@ def test_migration_keeps_one_alembic_head():
     cfg = alembic.config.Config(str(ROOT / "alembic.ini"))
     script = alembic.script.ScriptDirectory.from_config(cfg)
     heads = script.get_heads()
-    assert heads == ["v1w2x3y4z5b6"]
+    assert heads == ["x3y4z5a6b7c8"]
     assert len(heads) == 1
 
 

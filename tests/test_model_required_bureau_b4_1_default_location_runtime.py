@@ -1248,4 +1248,4 @@ def test_one_alembic_head() -> None:
     cfg = alembic.config.Config(str(ROOT / "alembic.ini"))
     script = alembic.script.ScriptDirectory.from_config(cfg)
     heads = script.get_heads()
-    assert heads == ["v1w2x3y4z5b6"], heads
+    assert heads == ["x3y4z5a6b7c8"], heads
