@@ -15,7 +15,6 @@ from typing import Any
 from orchestration_harness import transactional_closeout as tc
 from orchestration_harness.governance_clockwork import (
     GovernanceRejection,
-    canonical_bytes,
     digest,
     validate_contract as validate_governance_contract,
     validate_probes,
