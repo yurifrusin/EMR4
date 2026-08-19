@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal",
-  "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in rollback and unknown-commit recovery rehearsal",
-  "objective": "Prove with one newly frozen authored-synthetic disposable PostgreSQL transaction probe that explicit rollback leaves no effect and an ambiguous response is resolved fail-closed without duplicate effect or ordinary release, followed by exact cleanup.",
-  "status": "blocked",
-  "source_head": "6a2832575e9b4df5c40a13984db7281e79814a94",
-  "authority_source": "Accepted runtime-role and tenant-isolation attestation plus Yuri's standing uninterrupted-development authority.",
+  "operation_id": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign",
+  "active_tranche": "Raisa provider-free default-off check-in relay-free unknown-response transport redesign",
+  "objective": "Freeze and provider-free prove a relay-free caller/result transport that eliminates the Windows host TCP relay and multiprocessing queue from the evidence path while preserving exact request identity, fail-closed no-retry semantics, authoritative readback, forced-RLS isolation and zero ordinary release; perform no disposable PostgreSQL execution until a separately admitted preexecution gate passes.",
+  "status": "in_progress",
+  "source_head": "44c1c8efa2357d9ebdc9ec895fd31e5758bc66d4",
+  "authority_source": "Yuri's explicit transport-redesign selection, the blocked predecessor's immutable negative evidence and the accepted runtime-role and tenant-isolation floor.",
   "checkpoint": {
-    "completed_stage": "Three authorised disposable PostgreSQL executions failed closed after exact rollback-zero and post-commit wait observations. No complete worker outcome, success release or automatic retry occurred; every physical role, relay, container and network cleaned exactly. Bounded recovery is exhausted.",
-    "next_executable_stage": null,
+    "completed_stage": "Yuri selected a newly frozen transport redesign after the predecessor exhausted three fail-closed host-relay attempts; no fourth execution or prior transport replay is inherited.",
+    "next_executable_stage": "inspect_cached_container_local_transport_capabilities_and_freeze_the_relay_free_contract_without_database_execution",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 1
+      "verification": 0
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,22 +26,24 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": true,
-    "reason": "Choose whether to authorise a newly frozen transport redesign for the unresolved caller-outcome path or defer the rollback and unknown-response operational-evidence gap. No fourth execution is authorised by the current plan."
+    "required": false,
+    "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "bounded_recovery_exhausted_and_clockwork_blocked_transition_published"
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_uniquely_named_disposable_local_postgresql_only",
+    "provider_free_local_transport_design_and_authored_synthetic_fixture_only",
     "accepted_runtime_role_tenant_isolation_attestation_6a2832575e9b4df5c40a13984db7281e79814a94_is_the_floor",
-    "ephemeral_authored_synthetic_transaction_manifest_practice_role_and_credentials_only",
-    "rollback_and_unknown_commit_recovery_evidence_only",
-    "explicit_rollback_must_leave_zero_effect",
-    "ambiguous_outcome_must_fail_closed_and_resolve_by_authoritative_readback",
-    "no_duplicate_probe_effect_and_zero_ordinary_admission_release_required",
-    "exact_role_container_network_and_relay_cleanup_required",
+    "three_predecessor_failed_attempts_remain_immutable_negative_transport_evidence",
+    "windows_host_tcp_relay_and_multiprocessing_queue_excluded_from_the_new_evidence_path",
+    "no_disposable_postgresql_execution_before_new_plan_deterministic_admission_and_fresh_preexecution_receipt",
+    "exact_request_command_idempotency_digest_and_audit_identity_must_be_preserved",
+    "ambiguous_outcome_must_release_no_success_forbid_retry_and_require_authoritative_readback",
+    "forced_rls_tenant_isolation_and_zero_ordinary_admission_release_remain_required",
+    "exact_container_network_role_and_any_local_test_process_cleanup_required",
+    "declarative_manifest_is_fixture_only_and_never_command_or_policy_authority",
     "no_local_env_live_secret_cloud_hosted_existing_or_product_database",
     "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
     "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
