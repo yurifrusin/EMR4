@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will next freeze relay-free recovery attempt 003 against the exact corrected harness; one disposable PostgreSQL execution remains denied until deterministic and five-source preexecution admission pass.
+> EMR4 will next enforce provider-free no-database status at manifest admission and test-fixture selection; attempt 004 remains closed.
 
 ## North star
 
@@ -442,26 +442,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One provider-free no-database fixture proves attached-stdin credential input, exact terminal OCI-state outcome closure and exact cleanup without a retry. Lineage parent: `raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal`.
 213. **Remove the two pre-start containment-predicate defects before consuming another relay-free database attempt — Docker Created-state profile conformance repair**
    One no-credential Created-state proof now binds exact network and nonce semantics without starting PostgreSQL or repeating attempt 002. Lineage parent: `raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign`.
+214. **Repair the exact relay-free call-site and pre-registry lifecycle defects without consuming another occupied database attempt — Check-in relay-free profile call-site and pre-registry cleanup conformance repair**
+   The mechanism passes independently, while two excluded test-selection lapses expose the remaining no-database admission-control gap. Lineage parent: `raisa-provider-free-docker-created-state-profile-conformance-repair`.
 
 ## Current position
 
-**Prove rollback and incomplete-response recovery through the corrected relay-free caller boundary — Docker Created-state profile conformance repair**
+**Turn the provider-free no-database boundary from an orchestrator memory rule into a pre-execution interlock — Check-in relay-free profile call-site and pre-registry cleanup conformance repair**
 
-**Why this proof came next:** The accepted transport, restricted role and forced-RLS floor already exist, and the exact pre-start Docker representation defects exposed by attempt 002 are now corrected and independently accepted.
+**Why this proof came next:** The repair itself is accepted, but the retained verifier-manifest rejection and two local fixture contacts demonstrate that argv-shape checks do not prove fixture-graph portability and the same error recurred immediately.
 
-The next tranche freezes attempt 003 for exactly one new disposable authored-synthetic PostgreSQL relay-free execution after fresh deterministic admission.
+The next tranche rejects ordinary pytest and shared-PostgreSQL fixture reachability before any provider-free command can run.
 
 ### What this unlocks
 
-- Evidence that explicit rollback leaves zero synthetic effect through the corrected relay-free caller.
-- Evidence that incomplete terminal response releases no success or retry and is resolved by restricted authoritative readback.
-- A later fresh ordinary-admission readiness decision over the complete operational evidence chain.
+- A mechanically evidenced no-database property for future provider-free verifier manifests.
+- A safer separately frozen attempt-004 plan after the interlock is accepted.
+- A reusable clockwork gear for DeepSeek broker work orders that share the same command boundary.
 
 ### What it does not solve
 
-- No attempt-003 execution is authorized until its separate plan and preexecution receipt pass.
+- No attempt-004 execution or retry is authorized.
 - No ordinary-practice command is enabled, admitted or mounted.
-- No product, patient or clinical data, provider worker, production, deployment, release, Pages or protected integration opens.
+- No product, data, occupied provider, production, deployment, release, Pages or protected integration opens.
 
 ## Continuity and authority
 
@@ -1303,6 +1305,7 @@ Prerequisites:
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-architecture.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-plan.md`
+- `docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-closeout.md`
 - `docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-closeout.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-plan.md`
@@ -1357,7 +1360,6 @@ Prerequisites:
 - `docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-plan.md`
 - `docs/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-plan.md`
-- `docs/raisa-provider-free-docker-created-state-profile-conformance-repair-closeout.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-closeout.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-design.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-plan.md`
@@ -1768,6 +1770,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-architecture-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-kernel-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-kernel-gemini37-first-worktree-postcondition-failure.json`
+- `orchestration/agent_inbox/antigravity/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-relay-free-transport-redesign-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-runtime-role-tenant-isolation-attestation-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-context-fabric-bureau-memory-repair-review-receipt.json`
@@ -2001,6 +2004,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -2117,7 +2121,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-pre-verifier-acceptance-v2-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-docker-created-state-profile-conformance-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-dual-host-foundation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-preplanning-receipt.json`
@@ -2637,6 +2640,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json`
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.json`
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/efficacy-reading.json`
+- `orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md`
 - `orchestration/continuity/raisa-provider-free-compatibility-conformance-harness-readiness-repair/structural-repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json`
@@ -3507,4 +3512,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 318; continuity graph revision 336._
+_Compass map revision 319; continuity graph revision 337._

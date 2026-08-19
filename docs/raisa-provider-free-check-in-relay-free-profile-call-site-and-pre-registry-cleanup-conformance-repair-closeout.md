@@ -4,7 +4,7 @@ Date: 2026-08-20
 
 Timestamp: 2026-08-20T00:41:43.7639055+10:00 (Australia/Brisbane)
 
-Status: **accepted mechanism with contained verification-scope violations**
+Status: **accepted mechanism with contained verification-scope violations at Continuity 337 / Compass 319**
 
 ## Outcome
 
@@ -92,6 +92,7 @@ make provider-free/no-database status a validated property of the command and
 selected test graph, rejecting ordinary pytest and shared-PostgreSQL fixture
 reachability before execution. Attempt 004 remains closed until that repair is
 accepted and a new one-run plan is separately frozen.
+
 ## Boundaries retained
 
 No product source, API Spine, OpenAPI, GraphQL, configuration, migration,
@@ -110,3 +111,9 @@ narrow objective is to reject non-provider-free pytest entry points and any
 selected test whose fixture graph can acquire shared PostgreSQL before a
 command is executable. This is a harness-control repair only; it opens no
 attempt-004 execution or product authority.
+
+Clockwork published generation
+`gen-c11c8663948b6c7fc2c76feead419a62f2a6b4335c0780a63f86f83665ee83c1`
+at lease sequence 27 with zero canonical drift and no bespoke updater. The
+non-PHI continuing Pushover notification succeeded with request
+`57abe907-5ad2-48a2-8d5f-e0d70734d860`.

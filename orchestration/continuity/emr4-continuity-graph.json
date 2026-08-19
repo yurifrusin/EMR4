@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 336,
+  "graph_revision": 337,
   "harvests": [],
   "nodes": [
     {
@@ -23903,9 +23903,121 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair",
+      "title": "Check-in relay-free profile call-site and pre-registry cleanup conformance repair",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-docker-created-state-profile-conformance-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri granted standing uninterrupted-development authority through this repair and dependency-satisfied successors.",
+          "The accepted mechanism opens only a provider-free no-database manifest and runner admission repair before any attempt-004 plan.",
+          "No database execution, attempt retry, ordinary practice, product change, data, production, deployment, Pages or protected-ref authority opens."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-call-site-and-pre-registry-cleanup-mechanism",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the two captured network-name bindings and ownership-checked fail-closed Created-state cleanup mechanism at the exact reviewed candidate."
+        },
+        {
+          "id": "reject-tranche-wide-zero-database-claim",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Retain and exclude two orchestrator database-fixture scope violations; accept only the 146-test provider-free matrix."
+        },
+        {
+          "id": "retain-first-review-control-rejection",
+          "source": "orchestration/agent_inbox/antigravity/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-review-receipt.json",
+          "status": "accepted",
+          "summary": "Retain the first revision-required receipt and manifest as evidence that fixture-graph portability was not preflight-enforced."
+        },
+        {
+          "id": "accept-corrected-independent-veto",
+          "source": "orchestration/agent_inbox/antigravity/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-corrected-review-receipt.json",
+          "status": "accepted",
+          "summary": "Accept one fresh corrected clean-worktree Gemini 3.7 Flash/high pass over the unchanged exact candidate."
+        }
+      ],
+      "claim_scope": [
+        "Both real relay-free container creation call sites pass the exact captured network name to the accepted profile predicate.",
+        "Any post-create pre-registry failure can remove only the exact owned never-started Created-state container and must prove absence; cleanup uncertainty dominates.",
+        "The admitted 146-test provider-free matrix passes with 582 of 582 hostile relay-free mutations rejected and zero admitted Docker, database or provider invocation.",
+        "Two out-of-scope shared-PostgreSQL fixture contacts are retained in tranche-scoped efficacy evidence, excluded from acceptance, and prevent any tranche-wide zero-database claim.",
+        "Attempt 003 remains immutable at one occupied execution, zero retry and no released ambiguous success."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-plan.md",
+          "docs/security/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-report.md",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-pre-verifier-corrected-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-corrected-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-corrected-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/checkpoint-intent.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/clockwork-checkpoint-tick-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/clockwork-checkpoint-tick-report.md",
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-corrected-command-manifest.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-review-packet.md",
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-corrected-review-packet.md",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Provider-free and no-database status are not yet engine-validated against the selected pytest fixture graph.",
+        "Attempt 004 requires a separately frozen one-run plan after the no-database admission repair is independently accepted.",
+        "No ordinary-practice activation, product change, live data, occupied provider work, production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-20T00:41:43.7639055+10:00",
+      "updated_at": "2026-08-20T00:41:43.7639055+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "31cddb7511be306ecadbe02555cec8cd1f8c200e",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-19T13:09:50.9051335Z"
+  "updated_at": "2026-08-20T00:41:43.7639055+10:00"
 }

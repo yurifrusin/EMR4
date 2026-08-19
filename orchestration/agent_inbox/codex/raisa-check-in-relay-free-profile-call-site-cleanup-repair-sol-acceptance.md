@@ -4,7 +4,7 @@ Date: 2026-08-20
 
 Timestamp: 2026-08-20T00:41:43.7639055+10:00 (Australia/Brisbane)
 
-Decision: **accept mechanism; reject tranche-wide zero-database claim**
+Decision: **accept mechanism at Continuity 337 / Compass 319; reject tranche-wide zero-database claim**
 
 I accept exact reviewed candidate
 `8bda88069daeb314998341fc961b9aa061d496e5`, runtime implementation
@@ -49,3 +49,9 @@ acceptance opens only the provider-free no-database manifest/runner admission
 repair. It opens no attempt 004, product change, ordinary-practice command,
 patient or clinical data, occupied provider work, production, deployment,
 release, Pages or protected-ref movement.
+
+Clockwork generation
+`gen-c11c8663948b6c7fc2c76feead419a62f2a6b4335c0780a63f86f83665ee83c1`
+published at lease sequence 27 with zero canonical drift. The non-PHI
+continuing Pushover notification succeeded with request
+`57abe907-5ad2-48a2-8d5f-e0d70734d860`.
