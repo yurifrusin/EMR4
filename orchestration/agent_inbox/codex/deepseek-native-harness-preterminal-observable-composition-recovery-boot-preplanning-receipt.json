@@ -1,0 +1,133 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free preterminal-observable composition recovery boot",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_and_freeze_exact_one_process_recovery_boot_plan",
+    "operation_id": "deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot",
+    "resume_after_compaction": true,
+    "source_head": "295f686c430f4233880335cf9c0f05c51d42c26c",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "git_object_resolution": {
+    "observed_head": "b3df372968b6f9eca3ba270e691a0c7420c55ba8",
+    "reason_codes": [],
+    "resolved_commit": "295f686c430f4233880335cf9c0f05c51d42c26c",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "295f686c430f4233880335cf9c0f05c51d42c26c"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "b3df372968b6f9eca3ba270e691a0c7420c55ba8",
+    "branch_origin_aligned": false,
+    "head": "b3df372968b6f9eca3ba270e691a0c7420c55ba8",
+    "origin_branch_commit": "2678b43abec8f29e7af432a0a3c64759fada8fda",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 655
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The exact rc.7 native Harness is the provider-free subject under test. A DeepSeek model/provider call or occupied worker would cross the boundary this one-process recovery boot must prove, and Claude Code is not a fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high isolated read-only veto is reserved only after the deterministic controller, the single new native terminal and complete cleanup evidence pass. It receives no implementation, execution, repair or acceptance authority.",
+        "work_packages": [
+          "future_exact_candidate_preterminal_observable_native_composition_recovery_boot_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation, and native launch, activation ledger, guard terminal, duration, process absence and filesystem cleanup form one serial ownership chain.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "plan_frozen",
+      "pre_native_execution",
+      "native_terminal",
+      "pre_verifier",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol freezes the exact new attempt id, process, cache, network-denial, activation, terminal, timing and cleanup envelope before implementation",
+      "all deterministic hostile checks pass before the single native process is admitted",
+      "the new native process may start exactly once with zero retry or resume",
+      "native-composition-attempt-001 remains byte-immutable and cannot be reclassified",
+      "no agent, broker, model, provider or occupied-worker surface may start",
+      "cleanup and retained evidence complete before verifier eligibility",
+      "Gemini is eligible only after one exact clean candidate and a passing consumed terminal",
+      "clockwork check and publication remain separate commands"
+    ]
+  },
+  "planned_action": "freeze_exactly_one_provider_free_preterminal_observable_native_composition_recovery_boot_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-recovery-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/efficacy-reading.json",
+      "docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-plan.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/provider-free-effective-tool-native-boot-evidence.json",
+      "docs/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard-plan.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/provider-free-effective-tool-guard-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns plan freezing, deterministic implementation, the one native-process lifecycle, cleanup, acceptance, clockwork and Git. DeepSeek receives no model or worker package because the native Harness process is the provider-free evidence subject. Gemini 3.7 Flash/high is reserved for one exact-candidate read-only veto only after a passing terminal and complete cleanup. Native subagents are declined under the developer restriction and the single-owner serial lifecycle.",
+    "git_refs_and_worktree": "Task HEAD and local task branch are exact b3df372968b6f9eca3ba270e691a0c7420c55ba8 on codex/ariadne-bernie-davida-parallel-seam; origin task branch remains 2678b43abec8f29e7af432a0a3c64759fada8fda. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked and staged worktree was clean before this receipt; all unrelated untracked entries including docs/branding remain preserved. No protected ref moved.",
+    "live_handover_current_baton": "AGENTS.md was read completely as the current 124110-byte live handover with SHA-256 5ba348ac917a38a9d3c1e2b839a1ded593185ffb0d8e67384033af9b83af0878. The accepted corrected preterminal-observability closeout is bound by Continuity 343 / Compass 325, and the Current Baton selects exactly one separately named provider-free native recovery boot as the active next implementation.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 and raw historical Diary material remain sealed. native-composition-attempt-001 and its retained failed evidence are immutable and cannot be retried, resumed, reclassified or overwritten. The successor admits exactly one new offline provider-free native Harness process under a new attempt ID only after a frozen plan and preexecution receipt. No agent/session/turn, broker/model/provider, external network, Docker/database, product/API/config/client/flag/allowlist/grammar/waiting-area or ordinary-practice change; no product, patient, appointment, clinical, historical or protected data; no production, deployment, release, Pages or protected-ref movement. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
