@@ -188,14 +188,14 @@ def _canonical_sha256(payload: dict[str, Any]) -> str:
     return hashlib.sha256(canonical).hexdigest()
 
 
-def build_pattern_report(
+def build_pattern_report_from_payload(
+    register: dict[str, Any],
+    schema: dict[str, Any],
     *,
-    register_path: Path = REGISTER_PATH,
-    schema_path: Path = SCHEMA_PATH,
     root: Path = ROOT,
 ) -> dict[str, Any]:
-    register = _load_json(register_path)
-    schema = _load_json(schema_path)
+    """Validate one prospective register and derive its canonical report."""
+
     validate_register(register, schema, root=root)
     incidents = register["incidents"]
 
@@ -261,6 +261,17 @@ def build_pattern_report(
             "are not a comparative quality score."
         ),
     }
+
+
+def build_pattern_report(
+    *,
+    register_path: Path = REGISTER_PATH,
+    schema_path: Path = SCHEMA_PATH,
+    root: Path = ROOT,
+) -> dict[str, Any]:
+    register = _load_json(register_path)
+    schema = _load_json(schema_path)
+    return build_pattern_report_from_payload(register, schema, root=root)
 
 
 def write_json_lf(path: Path, payload: dict[str, Any]) -> None:

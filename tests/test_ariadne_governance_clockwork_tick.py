@@ -10,6 +10,7 @@ import pytest
 from orchestration_harness.governance_clockwork_tick import (
     BLOCKED_INTENT_VERSION,
     CHECKPOINT_INTENT_VERSION,
+    TICK_INCIDENT_INTENT_VERSION,
     USER_DECISION_INTENT_VERSION,
     CommittedClockworkTick,
     ClockworkTickRejection,
@@ -181,6 +182,47 @@ def _checkpoint_intent(worktree: Path) -> dict:
     }
 
 
+def _incident_intent(worktree: Path) -> dict:
+    intent = _json(worktree / INTENT_PATH.relative_to(ROOT))
+    intent["schema_version"] = TICK_INCIDENT_INTENT_VERSION
+    intent["agent_error_observations"] = [
+        {
+            "attempt_key": "clockwork-test-review-packet-count",
+            "observed_on": "2026-08-19",
+            "tranche": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
+            "role": "orchestrator",
+            "resource_id": "codex-primary-orchestrator",
+            "model": None,
+            "reasoning_level": "high",
+            "transport": "codex_primary_session",
+            "stage": "independent_review",
+            "category": "evidence_misreport",
+            "process_severity": "moderate",
+            "expected_invariant": "A review packet exact test count must equal mechanical collection of its exact command manifest.",
+            "observed_error": "The first packet stated a count that did not equal the mechanically collected exact command.",
+            "detection_method": "The orchestrator compared the packet statement with the exact command collection before acceptance.",
+            "evidence_paths": [
+                "docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md",
+                "docs/security/raisa-provider-free-clockwork-governed-check-in-successor-resolution-threat-model-delta.md",
+            ],
+            "candidate_state": "canonical_unchanged",
+            "workflow_disposition": "revision_required",
+            "recurrence_signature": "orchestrator.review_packet_test_count_mismatch",
+            "causal_claim_level": "observation_only",
+            "correction": {
+                "status": "control_added",
+                "action": "Correct the packet count and require mechanical collection before dispatch.",
+                "prevention_control": "Clockwork closeout admits the corrected review only after the rejected packet incident is canonically recorded.",
+                "evidence_paths": [
+                    "docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md",
+                ],
+            },
+            "baton_summary": "preserves the rejected packet-count conflict and its mechanical-count correction.",
+        }
+    ]
+    return intent
+
+
 @contextmanager
 def _worktree(path: Path, source_ref: str = REPLAY_FIXTURE_SOURCE):
     source = subprocess.run(
@@ -266,6 +308,26 @@ def test_intent_rejects_derived_unsafe_and_underbounded_input() -> None:
         validate_tick_intent(underbounded, contract)
 
 
+def test_incident_intent_rejects_derived_identity_and_unsafe_evidence() -> None:
+    contract = validate_contract(_json(CONTRACT_PATH))
+    baseline = _incident_intent(ROOT)
+    observed = validate_tick_intent(baseline, contract)
+    assert observed["schema_version"] == TICK_INCIDENT_INTENT_VERSION
+    assert "incident_id" not in observed["agent_error_observations"][0]
+    derived = json.loads(json.dumps(baseline))
+    derived["agent_error_observations"][0]["incident_id"] = "AER-9999"
+    with pytest.raises(
+        ClockworkTickRejection, match="tick_incident_observation_keys"
+    ):
+        validate_tick_intent(derived, contract)
+    unsafe = json.loads(json.dumps(baseline))
+    unsafe["agent_error_observations"][0]["evidence_paths"] = [
+        "docs/branding/escape.md"
+    ]
+    with pytest.raises(ClockworkTickRejection, match="tick_incident_evidence_path"):
+        validate_tick_intent(unsafe, contract)
+
+
 def test_blocked_intent_is_closed_and_rejects_hostile_fields() -> None:
     contract = validate_contract(_json(CONTRACT_PATH))
     baseline = _blocked_intent(ROOT)
@@ -347,6 +409,65 @@ def test_reviewed_fixture_generation_is_preparable(tmp_path: Path) -> None:
         assert latch["operation_id"] == "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture"
         assert latch["protected_boundaries"] == prepared["intent"]["next_operation_protected_boundaries"]
         assert prepared["generation_manifest"]["source_commit"] == REPLAY_FIXTURE_SOURCE
+
+
+def test_incident_tick_derives_register_pattern_and_rolls_back_atomically(
+    tmp_path: Path,
+) -> None:
+    with _worktree(tmp_path / "incident-intake") as worktree:
+        contract = validate_contract(_json(worktree / CONTRACT_PATH.relative_to(ROOT)))
+        intent = _incident_intent(worktree)
+        canonical_paths, metadata_paths, pointer_path = _paths(worktree, contract)
+        before_canonical = {
+            key: path.read_bytes() for key, path in canonical_paths.items()
+        }
+        before_metadata = {
+            key: path.read_bytes() for key, path in metadata_paths.items()
+        }
+        before_pointer = pointer_path.read_bytes()
+        previous_register = json.loads(before_canonical["error_register"])
+        prepared = build_tick_generation(worktree, contract, intent)
+        register = json.loads(prepared["canonical"]["error_register"])
+        pattern = json.loads(prepared["canonical"]["pattern_report"])
+        transaction = json.loads(prepared["metadata"]["transaction.json"])
+        baton = prepared["canonical"]["current_baton"].decode("utf-8")
+        next_number = int(
+            previous_register["incidents"][-1]["incident_id"].split("-")[1]
+        ) + 1
+        assert register["register_revision"] == previous_register["register_revision"] + 1
+        assert len(register["incidents"]) == len(previous_register["incidents"]) + 1
+        assert register["incidents"][-1]["incident_id"] == f"AER-{next_number:04d}"
+        assert register["incidents"][-1]["origin"] == "agent_behavior"
+        assert register["incidents"][-1]["related_incident_ids"] == []
+        assert pattern["register_revision"] == register["register_revision"]
+        assert pattern["incident_count"] == len(register["incidents"])
+        assert transaction["register_bytes_preserved"] is False
+        assert transaction["pattern_bytes_preserved"] is False
+        assert f"AER-{next_number:04d} preserves the rejected" in baton
+        with pytest.raises(OSError, match="injected_tick_precommit_failure"):
+            publish_tick_generation(
+                worktree,
+                prepared,
+                writer_id="clockwork",
+                fail_at="after:error_register",
+            )
+        assert {
+            key: path.read_bytes() for key, path in canonical_paths.items()
+        } == before_canonical
+        assert {
+            key: path.read_bytes() for key, path in metadata_paths.items()
+        } == before_metadata
+        assert pointer_path.read_bytes() == before_pointer
+        active = publish_tick_generation(worktree, prepared, writer_id="clockwork")
+        assert active["status"] == "passed"
+        assert validate_tick_live_state(worktree, contract)["status"] == "passed"
+        rolled_back = rollback_tick_generation(
+            worktree, contract, writer_id="clockwork"
+        )
+        assert rolled_back["byte_exact"] is True
+        assert {
+            key: path.read_bytes() for key, path in canonical_paths.items()
+        } == before_canonical
 
 
 def test_blocked_tick_preserves_every_non_latch_surface_and_rolls_back(

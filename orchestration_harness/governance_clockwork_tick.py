@@ -9,6 +9,8 @@ import re
 from pathlib import Path
 from typing import Any, NoReturn
 
+from jsonschema.exceptions import SchemaError, ValidationError
+
 from orchestration_harness import transactional_closeout as tc
 from orchestration_harness.active_operation import validate_active_operation
 from orchestration_harness.governance_live_adoption import (
@@ -34,9 +36,14 @@ from orchestration_harness.governance_live_adoption import (
     validate_live_state,
 )
 from scripts import ariadne_compass
+from scripts.ariadne_agent_error_register import (
+    EXPECTED_ORIGIN_BY_CATEGORY,
+    build_pattern_report_from_payload,
+)
 
 
 TICK_INTENT_VERSION = "ariadne.governance_live_tick_intent.v1"
+TICK_INCIDENT_INTENT_VERSION = "ariadne.governance_live_tick_intent.v2"
 BLOCKED_INTENT_VERSION = "ariadne.governance_live_blocked_transition_intent.v1"
 USER_DECISION_INTENT_VERSION = (
     "ariadne.governance_live_user_decision_transition_intent.v1"
@@ -181,22 +188,168 @@ def _validate_commands(value: object) -> dict[str, Any]:
     return {"schema_version": COMMAND_VERSION, "commands": commands}
 
 
+def _validate_incident_observations(value: object) -> list[dict[str, Any]]:
+    if not isinstance(value, list) or not value:
+        _reject("tick_incident_observations")
+    observations: list[dict[str, Any]] = []
+    attempt_keys: list[str] = []
+    for item in value:
+        try:
+            row = _exact(
+                item,
+                {
+                    "attempt_key",
+                    "observed_on",
+                    "tranche",
+                    "role",
+                    "resource_id",
+                    "model",
+                    "reasoning_level",
+                    "transport",
+                    "stage",
+                    "category",
+                    "process_severity",
+                    "expected_invariant",
+                    "observed_error",
+                    "detection_method",
+                    "evidence_paths",
+                    "candidate_state",
+                    "workflow_disposition",
+                    "recurrence_signature",
+                    "causal_claim_level",
+                    "correction",
+                    "baton_summary",
+                },
+                "tick_incident_observation_keys",
+            )
+        except AdoptionRejection as error:
+            raise ClockworkTickRejection(
+                "tick_incident_observation_keys"
+            ) from error
+        attempt_key = _text(row["attempt_key"], "tick_incident_attempt_key", 128)
+        if IDENTIFIER.fullmatch(attempt_key) is None:
+            _reject("tick_incident_attempt_key")
+        attempt_keys.append(attempt_key)
+        category = _text(row["category"], "tick_incident_category", 80)
+        if category not in EXPECTED_ORIGIN_BY_CATEGORY:
+            _reject("tick_incident_category")
+        model = row["model"]
+        if model is not None:
+            model = _text(model, "tick_incident_model", 120)
+        try:
+            correction = _exact(
+                row["correction"],
+                {"status", "action", "prevention_control", "evidence_paths"},
+                "tick_incident_correction_keys",
+            )
+        except AdoptionRejection as error:
+            raise ClockworkTickRejection(
+                "tick_incident_correction_keys"
+            ) from error
+        evidence_paths = _strings(
+            row["evidence_paths"], "tick_incident_evidence_paths"
+        )
+        correction_paths = _strings(
+            correction["evidence_paths"], "tick_incident_correction_paths"
+        )
+        for path in [*evidence_paths, *correction_paths]:
+            try:
+                _safe_path(path, "tick_incident_evidence_path")
+            except AdoptionRejection as error:
+                raise ClockworkTickRejection(
+                    "tick_incident_evidence_path"
+                ) from error
+        observations.append(
+            {
+                "attempt_key": attempt_key,
+                "observed_on": _text(
+                    row["observed_on"], "tick_incident_observed_on", 10
+                ),
+                "tranche": _text(row["tranche"], "tick_incident_tranche", 180),
+                "role": _text(row["role"], "tick_incident_role", 80),
+                "resource_id": _text(
+                    row["resource_id"], "tick_incident_resource_id", 160
+                ),
+                "model": model,
+                "reasoning_level": _text(
+                    row["reasoning_level"], "tick_incident_reasoning_level", 80
+                ),
+                "transport": _text(
+                    row["transport"], "tick_incident_transport", 160
+                ),
+                "stage": _text(row["stage"], "tick_incident_stage", 120),
+                "category": category,
+                "process_severity": _text(
+                    row["process_severity"], "tick_incident_severity", 40
+                ),
+                "expected_invariant": _text(
+                    row["expected_invariant"], "tick_incident_expected", 1000
+                ),
+                "observed_error": _text(
+                    row["observed_error"], "tick_incident_observed", 1000
+                ),
+                "detection_method": _text(
+                    row["detection_method"], "tick_incident_detection", 1000
+                ),
+                "evidence_paths": evidence_paths,
+                "candidate_state": _text(
+                    row["candidate_state"], "tick_incident_candidate_state", 80
+                ),
+                "workflow_disposition": _text(
+                    row["workflow_disposition"],
+                    "tick_incident_workflow_disposition",
+                    120,
+                ),
+                "recurrence_signature": _text(
+                    row["recurrence_signature"],
+                    "tick_incident_recurrence_signature",
+                    240,
+                ),
+                "causal_claim_level": _text(
+                    row["causal_claim_level"], "tick_incident_causal_claim", 80
+                ),
+                "correction": {
+                    "status": _text(
+                        correction["status"], "tick_incident_correction_status", 80
+                    ),
+                    "action": _text(
+                        correction["action"], "tick_incident_correction_action", 1000
+                    ),
+                    "prevention_control": _text(
+                        correction["prevention_control"],
+                        "tick_incident_prevention_control",
+                        1000,
+                    ),
+                    "evidence_paths": correction_paths,
+                },
+                "baton_summary": _text(
+                    row["baton_summary"], "tick_incident_baton_summary", 300
+                ),
+            }
+        )
+    if len(attempt_keys) != len(set(attempt_keys)):
+        _reject("tick_incident_attempt_key_duplicate")
+    return observations
+
+
 def validate_tick_intent(value: object, contract_value: object) -> dict[str, Any]:
     """Validate semantic caller input and reject every derived binding."""
 
     contract = validate_contract(contract_value)
-    row = _exact(
-        value,
-        {
-            "schema_version",
-            "transaction_manifest",
-            "command_manifest",
-            "baton_acceptance",
-            "next_operation_protected_boundaries",
-        },
-        "tick_intent_keys",
-    )
-    if row["schema_version"] != TICK_INTENT_VERSION:
+    if not isinstance(value, dict):
+        _reject("tick_intent_keys")
+    version = value.get("schema_version")
+    keys = {
+        "schema_version",
+        "transaction_manifest",
+        "command_manifest",
+        "baton_acceptance",
+        "next_operation_protected_boundaries",
+    }
+    if version == TICK_INCIDENT_INTENT_VERSION:
+        keys.add("agent_error_observations")
+    row = _exact(value, keys, "tick_intent_keys")
+    if version not in {TICK_INTENT_VERSION, TICK_INCIDENT_INTENT_VERSION}:
         _reject("tick_intent_version")
     if _all_keys(row) & DERIVED_INPUT_KEYS:
         _reject("caller_authored_derived_binding")
@@ -228,13 +381,18 @@ def validate_tick_intent(value: object, contract_value: object) -> dict[str, Any
     )
     if not REQUIRED_NEXT_BOUNDARIES.issubset(boundaries):
         _reject("tick_next_boundaries_floor")
-    return {
-        "schema_version": TICK_INTENT_VERSION,
+    result = {
+        "schema_version": version,
         "transaction_manifest": manifest,
         "command_manifest": commands,
         "baton_acceptance": {"label": label, "paths": paths},
         "next_operation_protected_boundaries": boundaries,
     }
+    if version == TICK_INCIDENT_INTENT_VERSION:
+        result["agent_error_observations"] = _validate_incident_observations(
+            row["agent_error_observations"]
+        )
+    return result
 
 
 def validate_blocked_tick_intent(
@@ -419,7 +577,10 @@ def _validate_any_intent(
 ) -> dict[str, Any]:
     if not isinstance(value, dict):
         _reject("tick_intent_object")
-    if value.get("schema_version") == TICK_INTENT_VERSION:
+    if value.get("schema_version") in {
+        TICK_INTENT_VERSION,
+        TICK_INCIDENT_INTENT_VERSION,
+    }:
         return validate_tick_intent(value, contract)
     if value.get("schema_version") == BLOCKED_INTENT_VERSION:
         return validate_blocked_tick_intent(value, contract)
@@ -431,7 +592,10 @@ def _validate_any_intent(
 
 
 def _intent_operation_id(intent: dict[str, Any]) -> str:
-    if intent["schema_version"] == TICK_INTENT_VERSION:
+    if intent["schema_version"] in {
+        TICK_INTENT_VERSION,
+        TICK_INCIDENT_INTENT_VERSION,
+    }:
         return intent["transaction_manifest"]["operation_id"]
     if intent["schema_version"] == BLOCKED_INTENT_VERSION:
         return intent["operation_id"]
@@ -581,6 +745,84 @@ def _assert_clean_predecessor(
     return source_canonical, source_metadata, source_pointer
 
 
+def _project_incident_register(
+    repo_root: Path,
+    contract: dict[str, Any],
+    current: dict[str, bytes],
+    observations: list[dict[str, Any]],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    try:
+        register = json.loads(current["error_register"].decode("utf-8"))
+        schema_path = (
+            repo_root / contract["canonical_paths"]["error_register"]
+        ).with_name("agent-error-register.schema.json")
+        schema = _load(schema_path)
+        next_number = int(register["incidents"][-1]["incident_id"].split("-")[1])
+    except (KeyError, IndexError, TypeError, ValueError, UnicodeDecodeError) as error:
+        raise ClockworkTickRejection("tick_incident_register_source") from error
+
+    prospective = copy.deepcopy(register)
+    generated: list[dict[str, Any]] = []
+    attempt_identity_by_key: dict[str, dict[str, Any]] = {}
+    for offset, observation in enumerate(observations, start=1):
+        stable = {
+            key: observation[key]
+            for key in (
+                "observed_on",
+                "tranche",
+                "role",
+                "resource_id",
+                "model",
+                "reasoning_level",
+                "transport",
+                "stage",
+            )
+        }
+        attempt_key = observation["attempt_key"]
+        previous_stable = attempt_identity_by_key.setdefault(attempt_key, stable)
+        if previous_stable != stable:
+            _reject("tick_incident_attempt_identity")
+        incident = {
+            key: copy.deepcopy(value)
+            for key, value in observation.items()
+            if key not in {"attempt_key", "baton_summary"}
+        }
+        incident.update(
+            {
+                "incident_id": f"AER-{next_number + offset:04d}",
+                "attempt_id": "clock-"
+                + _hash_json({"attempt_key": attempt_key, "stable": stable})[:24],
+                "origin": EXPECTED_ORIGIN_BY_CATEGORY[incident["category"]],
+                "related_incident_ids": [],
+                "status": "corrected",
+            }
+        )
+        generated.append(incident)
+    by_attempt: dict[str, list[dict[str, Any]]] = {}
+    for incident in generated:
+        by_attempt.setdefault(incident["attempt_id"], []).append(incident)
+    for incident in generated:
+        incident["related_incident_ids"] = sorted(
+            peer["incident_id"]
+            for peer in by_attempt[incident["attempt_id"]]
+            if peer is not incident
+        )
+
+    prospective["incidents"].extend(generated)
+    prospective["register_revision"] += 1
+    prospective["scope"]["source_cutoff_on"] = max(
+        prospective["scope"]["source_cutoff_on"],
+        *(observation["observed_on"] for observation in observations),
+    )
+    try:
+        pattern = build_pattern_report_from_payload(
+            prospective, schema, root=repo_root
+        )
+    except (ValueError, TypeError, SchemaError, ValidationError) as error:
+        raise ClockworkTickRejection("tick_incident_register_projection") from error
+    return prospective, pattern
+
+
 def _render_baton(
     current: str,
     *,
@@ -589,6 +831,8 @@ def _render_baton(
     graph: dict[str, Any],
     compass: dict[str, Any],
     source: str,
+    register: dict[str, Any] | None = None,
+    incident_summaries: list[str] | None = None,
 ) -> str:
     def replace_row(text: str, label: str, value: str) -> str:
         prefix = f"| {label} |"
@@ -617,6 +861,28 @@ def _render_baton(
         "full-Git-bound and byte-recoverable. This opens no protected-ref, deployment, release or Pages authority."
     )
     current = replace_row(current, "Current clockwork relation", relation)
+    if register is not None:
+        incidents = register["incidents"]
+        open_count = sum(item["status"] == "open" for item in incidents)
+        open_text = "none open" if open_count == 0 else f"{open_count} open"
+        summaries_list = incident_summaries or []
+        generated = incidents[-len(summaries_list) :] if summaries_list else []
+        summaries = " ".join(
+            f"{incident['incident_id']} {summary}"
+            for incident, summary in zip(generated, summaries_list, strict=True)
+        )
+        register_value = (
+            f"Revision {register['register_revision']}: "
+            "`docs/ariadne-agent-error-correction-register-revision-"
+            f"{register['register_revision']}.md`; {len(incidents)} bounded incidents, "
+            f"all corrected/contained and {open_text}. {summaries} Durable state: "
+            "`orchestration/continuity/ariadne-agent-error-register/`."
+        )
+        current = replace_row(
+            current,
+            "Ariadne agent error and correction register acceptance",
+            register_value,
+        )
     label = acceptance["label"]
     row = f"| {label} | " + ", ".join(f"`{path}`" for path in acceptance["paths"]) + " |"
     prefix = f"| {label} |"
@@ -745,13 +1011,30 @@ def build_tick_generation(
     )
     if report["status"] != "passed":
         _reject("tick_full_compass:" + ",".join(report["reasons"]))
+    incident_register: dict[str, Any] | None = None
+    incident_pattern: dict[str, Any] | None = None
+    if intent["schema_version"] == TICK_INCIDENT_INTENT_VERSION:
+        incident_register, incident_pattern = _project_incident_register(
+            repo_root,
+            contract,
+            current,
+            intent["agent_error_observations"],
+        )
     canonical = {
         "continuity": _json_text(bundle["projections"]["graph"]).encode("utf-8"),
         "compass": _json_text(bundle["projections"]["compass"]).encode("utf-8"),
         "compass_markdown": ariadne_compass.render_markdown(report).encode("utf-8"),
         "active_latch": _json_text(bundle["projections"]["latch"]).encode("utf-8"),
-        "error_register": current["error_register"],
-        "pattern_report": current["pattern_report"],
+        "error_register": (
+            _json_text(incident_register).encode("utf-8")
+            if incident_register is not None
+            else current["error_register"]
+        ),
+        "pattern_report": (
+            _json_text(incident_pattern).encode("utf-8")
+            if incident_pattern is not None
+            else current["pattern_report"]
+        ),
         "current_baton": _render_baton(
             current["current_baton"].decode("utf-8"),
             manifest=manifest,
@@ -759,6 +1042,11 @@ def build_tick_generation(
             graph=bundle["projections"]["graph"],
             compass=bundle["projections"]["compass"],
             source=source,
+            register=incident_register,
+            incident_summaries=[
+                item["baton_summary"]
+                for item in intent.get("agent_error_observations", [])
+            ],
         ).encode("utf-8"),
     }
     ownership = json.loads(prior_metadata["ownership.json"].decode("utf-8"))
@@ -1497,7 +1785,10 @@ def validate_prepared_tick(
         != prior["metadata_sha256s"]
     ):
         _reject("tick_prepared_semantics")
-    if intent["schema_version"] == TICK_INTENT_VERSION:
+    if intent["schema_version"] in {
+        TICK_INTENT_VERSION,
+        TICK_INCIDENT_INTENT_VERSION,
+    }:
         manifest = intent["transaction_manifest"]
         if (
             graph["nodes"][-1]["id"] != manifest["operation_id"]
@@ -1589,7 +1880,23 @@ def validate_prepared_tick(
             or not transaction["pattern_bytes_preserved"]
         ):
             _reject("checkpoint_tick_prepared_semantics")
-    if (
+    if intent["schema_version"] == TICK_INCIDENT_INTENT_VERSION:
+        expected_register, expected_pattern = _project_incident_register(
+            repo_root,
+            contract,
+            source_canonical,
+            intent["agent_error_observations"],
+        )
+        if (
+            row["canonical"]["error_register"]
+            != _json_text(expected_register).encode("utf-8")
+            or row["canonical"]["pattern_report"]
+            != _json_text(expected_pattern).encode("utf-8")
+            or transaction["register_bytes_preserved"]
+            or transaction["pattern_bytes_preserved"]
+        ):
+            _reject("tick_incident_projection_changed")
+    elif (
         row["canonical"]["error_register"] != source_canonical["error_register"]
         or row["canonical"]["pattern_report"] != source_canonical["pattern_report"]
     ):
