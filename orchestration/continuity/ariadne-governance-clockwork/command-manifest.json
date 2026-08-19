@@ -2,7 +2,7 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "created-state-exact-static-admission",
+      "command_id": "created-state-pre-closeout-static-admission",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -12,7 +12,7 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "created-state-preexecution-focused-tests",
+      "command_id": "created-state-pre-closeout-focused-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -22,32 +22,39 @@
         "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
         "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
         "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py",
-        "tests/test_ariadne_active_operation_latch.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
         "tests/test_current_baton_consistency.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "created-state-preexecution-ruff",
+      "command_id": "created-state-pre-closeout-ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
+        "orchestration_harness/governance_clockwork_tick.py",
+        "scripts/ariadne_governance_clockwork_tick.py",
         "scripts/raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
         "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
-        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py"
+        "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "created-state-preexecution-compile",
+      "command_id": "created-state-pre-closeout-compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/raisa_provider_free_docker_created_state_profile_conformance_repair.py"
+        "scripts/raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }
