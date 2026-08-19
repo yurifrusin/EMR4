@@ -25,8 +25,14 @@ the new incident correctly advanced the canonical cutoff to `2026-08-20`.
 The entire generation was rolled back byte-exactly. The corrected test now
 derives the cutoff from the maximum validated incident date.
 
-The clockwork now derives AER-0657, AER-0658 and all aggregate updates from
-semantic observations in the closeout intent. The register contains 658
+Before corrected publication, AER-0659 records one further orchestrator error:
+the short commit `835ee7af` was manually expanded incorrectly in commentary.
+The repository and dry run already held the correct machine-resolved full ID,
+the user-facing correction was immediate, and no canonical artifact contained
+the false value.
+
+The clockwork now derives AER-0657, AER-0658, AER-0659 and all aggregate updates from
+semantic observations in the closeout intent. The register contains 659
 incidents, all corrected or contained and none open.
 
 ## Prevention
@@ -37,3 +43,6 @@ enters through clockwork intent v2; callers cannot author the AER ID, revision,
 origin, peer links, status, counts or pattern report. Current register tests
 derive moving revision/count/cutoff/aggregate readings from the validated
 population rather than retaining next-update literals.
+Full Git object IDs in commentary and reports are copied only from current
+machine output or a persisted receipt; abbreviations are never manually
+expanded.

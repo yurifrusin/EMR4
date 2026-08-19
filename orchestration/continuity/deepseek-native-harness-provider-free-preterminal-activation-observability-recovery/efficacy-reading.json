@@ -66,7 +66,9 @@
     "legacy_intent_compatibility_preserved": true,
     "first_live_publication_rolled_back": true,
     "post_publication_compatibility_corrections": 1,
-    "compatibility_correction": "Replace the final literal 2026-08-19 source-cutoff assertion with the maximum validated incident date before corrected publication."
+    "compatibility_correction": "Replace the final literal 2026-08-19 source-cutoff assertion with the maximum validated incident date before corrected publication.",
+    "prepublication_commentary_hash_corrections": 1,
+    "full_git_id_reporting_control": "Copy full object IDs only from machine output or a persisted receipt; never manually expand an abbreviation."
   },
   "protected_boundaries_preserved": true
 }

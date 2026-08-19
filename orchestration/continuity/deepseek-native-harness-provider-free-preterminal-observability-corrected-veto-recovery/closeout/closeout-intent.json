@@ -170,6 +170,11 @@
         "incident_id": "register-source-cutoff-literal-fixture",
         "source_id": "incident-intake-postpublication-suite",
         "peers": []
+      },
+      {
+        "incident_id": "manually-expanded-source-hash-commentary-misstatement",
+        "source_id": "prepublication-clockwork-check-commentary",
+        "peers": []
       }
     ],
     "broker": {
@@ -382,6 +387,42 @@
         ]
       },
       "baton_summary": "preserves the rolled-back fixed cutoff-date assertion and its incident-derived correction."
+    },
+    {
+      "attempt_key": "prepublication-source-hash-commentary-attempt-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator-commentary",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "prepublication_clockwork_check",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Every reported full Git object ID must be copied from a machine-resolved 40-character command or receipt value and must never be manually expanded from an abbreviation.",
+      "observed_error": "The orchestrator commentary manually expanded commit 835ee7af to an incorrect 40-character value even though the repository and clockwork dry run held the correct machine-resolved source 835ee7afd6889560add45aaa4260ba1562bd3d3d.",
+      "detection_method": "The immediately following clockwork dry-run output was reconciled against the commentary before publication; the user-facing correction was issued and no canonical artifact contained the false value.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-closeout-source-hash-commentary-correction.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-567.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_git_object_expansion_in_report",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Correct the user-facing value immediately, preserve the mismatch, and require future full Git IDs in reports to be copied from machine output or a persisted receipt.",
+        "prevention_control": "The clockwork remains full-Git-bound; commentary and closeout reports may display a full object ID only from the exact current command result or receipt, never by manual abbreviation expansion.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-closeout-source-hash-commentary-correction.json",
+          "docs/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-closeout.md",
+          "docs/ariadne-agent-error-correction-register-revision-567.md"
+        ]
+      },
+      "baton_summary": "preserves the prepublication commentary hash misstatement and the machine-copy-only full-object-ID control."
     }
   ]
 }

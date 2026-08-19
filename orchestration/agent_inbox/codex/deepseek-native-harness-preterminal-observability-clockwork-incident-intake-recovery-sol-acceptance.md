@@ -17,4 +17,6 @@ This correction closes the sole-writer gap that otherwise made the rejected
 review impossible to register without a forbidden manual canonical edit. It
 also replaces the one remaining literal cutoff-date fixture exposed by the
 first rolled-back publication. It does not broaden the parent tranche or any
-product/provider authority.
+product/provider authority. AER-0659 additionally preserves the corrected
+prepublication commentary hash misstatement and the machine-copy-only full-ID
+reporting control.

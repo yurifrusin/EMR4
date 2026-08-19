@@ -31,6 +31,12 @@ assertion. The corrected assertion derives the maximum incident date. AER-0658
 preserves that repository-fixture defect; the corrected generation is the only
 accepted publication.
 
+Before that corrected publication, Sol also caught and corrected one manually
+expanded Git ID in conversational commentary. AER-0659 preserves the mismatch;
+the repository and dry run always held the correct full object ID. The durable
+reporting control now permits a full ID only when copied from machine output or
+a persisted receipt.
+
 Exact candidate `7c7ce52a6380637d54dc5ae2d6a778ccd300dd2f` passed 480 tests, Ruff,
 compile and a fresh Gemini 3.7 Flash/high independent veto with receipt SHA-256
 `32022df8a6c232ae9902c02910f18ebdd01ba546302e70e8aef43b27532fecb9`.
