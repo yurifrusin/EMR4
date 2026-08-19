@@ -1,0 +1,490 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schema/check-in-environment-manifest-secret-posture-architecture-v1.json",
+  "title": "EMR4 check-in environment-manifest and secret-posture architecture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_head",
+    "accepted_successor_resolution_source",
+    "accepted_readiness_source",
+    "accepted_admission_architecture_source",
+    "accepted_unmounted_kernel_source",
+    "result",
+    "architecture_status",
+    "source_bindings",
+    "current_posture",
+    "manifest_profile",
+    "runtime_role_profile",
+    "secret_reference_profile",
+    "rotation_evidence_profile",
+    "break_glass_profile",
+    "evidence_gate_evaluator",
+    "operational_evidence_boundary",
+    "clockwork_boundary",
+    "closed_boundaries",
+    "successor"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.check-in-environment-manifest-secret-posture-architecture.v1"
+    },
+    "source_head": {
+      "$ref": "#/$defs/fullGitObject"
+    },
+    "accepted_successor_resolution_source": {
+      "$ref": "#/$defs/fullGitObject"
+    },
+    "accepted_readiness_source": {
+      "$ref": "#/$defs/fullGitObject"
+    },
+    "accepted_admission_architecture_source": {
+      "$ref": "#/$defs/fullGitObject"
+    },
+    "accepted_unmounted_kernel_source": {
+      "$ref": "#/$defs/fullGitObject"
+    },
+    "result": {
+      "const": "raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture_pass"
+    },
+    "architecture_status": {
+      "const": "provider_free_default_off_contract_only_no_operational_evidence"
+    },
+    "source_bindings": {
+      "type": "array",
+      "minItems": 16,
+      "maxItems": 16,
+      "items": {
+        "$ref": "#/$defs/sourceBinding"
+      }
+    },
+    "current_posture": {
+      "$ref": "#/$defs/currentPosture"
+    },
+    "manifest_profile": {
+      "$ref": "#/$defs/manifestProfile"
+    },
+    "runtime_role_profile": {
+      "$ref": "#/$defs/runtimeRoleProfile"
+    },
+    "secret_reference_profile": {
+      "$ref": "#/$defs/secretReferenceProfile"
+    },
+    "rotation_evidence_profile": {
+      "$ref": "#/$defs/rotationEvidenceProfile"
+    },
+    "break_glass_profile": {
+      "$ref": "#/$defs/breakGlassProfile"
+    },
+    "evidence_gate_evaluator": {
+      "$ref": "#/$defs/evidenceGateEvaluator"
+    },
+    "operational_evidence_boundary": {
+      "$ref": "#/$defs/operationalEvidenceBoundary"
+    },
+    "clockwork_boundary": {
+      "$ref": "#/$defs/clockworkBoundary"
+    },
+    "closed_boundaries": {
+      "$ref": "#/$defs/closedBoundaries"
+    },
+    "successor": {
+      "$ref": "#/$defs/successor"
+    }
+  },
+  "$defs": {
+    "fullGitObject": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "currentPosture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "feature_setting",
+        "feature_default",
+        "synthetic_allowlist_setting",
+        "synthetic_allowlist_default",
+        "ordinary_admission_records_present",
+        "environment_manifest_instances_present",
+        "selected_practice_bindings_present",
+        "ordinary_runtime_role_bindings_present",
+        "secret_reference_bindings_present",
+        "operational_evidence_artifacts_present",
+        "secret_values_supplied",
+        "database_opened",
+        "product_configuration_changed",
+        "ordinary_practice_enabled",
+        "default_result"
+      ],
+      "properties": {
+        "feature_setting": {"type": "string"},
+        "feature_default": {"type": "boolean"},
+        "synthetic_allowlist_setting": {"type": "string"},
+        "synthetic_allowlist_default": {"type": "array"},
+        "ordinary_admission_records_present": {"type": "integer", "minimum": 0},
+        "environment_manifest_instances_present": {"type": "integer", "minimum": 0},
+        "selected_practice_bindings_present": {"type": "integer", "minimum": 0},
+        "ordinary_runtime_role_bindings_present": {"type": "integer", "minimum": 0},
+        "secret_reference_bindings_present": {"type": "integer", "minimum": 0},
+        "operational_evidence_artifacts_present": {"type": "integer", "minimum": 0},
+        "secret_values_supplied": {"type": "boolean"},
+        "database_opened": {"type": "boolean"},
+        "product_configuration_changed": {"type": "boolean"},
+        "ordinary_practice_enabled": {"type": "boolean"},
+        "default_result": {"type": "string"}
+      }
+    },
+    "manifestProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "normalized_schema_version",
+        "normalized_schema_path",
+        "normalized_schema_sha256",
+        "api_spine_layer",
+        "yaml_loader_implemented",
+        "canonical_instance_count",
+        "required_top_level_fields",
+        "environment_classes",
+        "full_git_object_pattern",
+        "unknown_fields_behavior",
+        "missing_manifest_behavior",
+        "multiple_current_manifests_behavior",
+        "wrong_environment_behavior",
+        "stale_manifest_behavior",
+        "caller_selected_environment_or_practice_allowed",
+        "manifest_is_activation_authority"
+      ],
+      "properties": {
+        "normalized_schema_version": {"type": "string"},
+        "normalized_schema_path": {"type": "string"},
+        "normalized_schema_sha256": {"$ref": "#/$defs/sha256"},
+        "api_spine_layer": {"type": "string"},
+        "yaml_loader_implemented": {"type": "boolean"},
+        "canonical_instance_count": {"type": "integer", "minimum": 0},
+        "required_top_level_fields": {"$ref": "#/$defs/stringArray"},
+        "environment_classes": {"$ref": "#/$defs/stringArray"},
+        "full_git_object_pattern": {"type": "string"},
+        "unknown_fields_behavior": {"type": "string"},
+        "missing_manifest_behavior": {"type": "string"},
+        "multiple_current_manifests_behavior": {"type": "string"},
+        "wrong_environment_behavior": {"type": "string"},
+        "stale_manifest_behavior": {"type": "string"},
+        "caller_selected_environment_or_practice_allowed": {"type": "boolean"},
+        "manifest_is_activation_authority": {"type": "boolean"}
+      }
+    },
+    "runtimeRoleProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "logical_role_id",
+        "physical_role_identifier_is_non_secret",
+        "required_manifest_fields",
+        "credential_secret_slot_id",
+        "non_owner_required",
+        "nobypassrls_required",
+        "product_relation_ownership_allowed",
+        "cross_tenant_denial_attestation_required",
+        "exact_environment_attestation_required",
+        "role_created",
+        "role_attested",
+        "database_connected"
+      ],
+      "properties": {
+        "logical_role_id": {"type": "string"},
+        "physical_role_identifier_is_non_secret": {"type": "boolean"},
+        "required_manifest_fields": {"$ref": "#/$defs/stringArray"},
+        "credential_secret_slot_id": {"type": "string"},
+        "non_owner_required": {"type": "boolean"},
+        "nobypassrls_required": {"type": "boolean"},
+        "product_relation_ownership_allowed": {"type": "boolean"},
+        "cross_tenant_denial_attestation_required": {"type": "boolean"},
+        "exact_environment_attestation_required": {"type": "boolean"},
+        "role_created": {"type": "boolean"},
+        "role_attested": {"type": "boolean"},
+        "database_connected": {"type": "boolean"}
+      }
+    },
+    "slotDescription": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slot_id", "purpose", "current_product_relation", "value_allowed"],
+      "properties": {
+        "slot_id": {"type": "string"},
+        "purpose": {"type": "string"},
+        "current_product_relation": {"type": "string"},
+        "value_allowed": {"type": "boolean"}
+      }
+    },
+    "secretReferenceProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reference_only",
+        "ordered_slots",
+        "required_binding_fields",
+        "secret_reference_pattern",
+        "forbidden_field_names",
+        "slot_reference_reuse_allowed",
+        "key_identifier_reuse_across_slots_allowed",
+        "cross_environment_reference_reuse_allowed",
+        "repository_secret_value_allowed",
+        "provider_endpoint_allowed",
+        "current_reference_count"
+      ],
+      "properties": {
+        "reference_only": {"type": "boolean"},
+        "ordered_slots": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {"$ref": "#/$defs/slotDescription"}
+        },
+        "required_binding_fields": {"$ref": "#/$defs/stringArray"},
+        "secret_reference_pattern": {"type": "string"},
+        "forbidden_field_names": {"$ref": "#/$defs/stringArray"},
+        "slot_reference_reuse_allowed": {"type": "boolean"},
+        "key_identifier_reuse_across_slots_allowed": {"type": "boolean"},
+        "cross_environment_reference_reuse_allowed": {"type": "boolean"},
+        "repository_secret_value_allowed": {"type": "boolean"},
+        "provider_endpoint_allowed": {"type": "boolean"},
+        "current_reference_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "rotationEvidenceProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required_for_each_slot",
+        "ordered_slot_ids",
+        "required_fields",
+        "artifact_digest_is_evidence_digest_not_secret_material_digest",
+        "full_git_object_required",
+        "independent_verifier_required",
+        "self_verified_evidence_allowed",
+        "fresh_until_must_follow_observed_at",
+        "evaluation_time_must_precede_fresh_until",
+        "exact_environment_slot_key_version_and_generation_binding_required",
+        "old_key_evidence_reuse_allowed",
+        "rotation_cadence_source",
+        "current_evidence_count"
+      ],
+      "properties": {
+        "required_for_each_slot": {"type": "boolean"},
+        "ordered_slot_ids": {"$ref": "#/$defs/stringArray"},
+        "required_fields": {"$ref": "#/$defs/stringArray"},
+        "artifact_digest_is_evidence_digest_not_secret_material_digest": {"type": "boolean"},
+        "full_git_object_required": {"type": "boolean"},
+        "independent_verifier_required": {"type": "boolean"},
+        "self_verified_evidence_allowed": {"type": "boolean"},
+        "fresh_until_must_follow_observed_at": {"type": "boolean"},
+        "evaluation_time_must_precede_fresh_until": {"type": "boolean"},
+        "exact_environment_slot_key_version_and_generation_binding_required": {"type": "boolean"},
+        "old_key_evidence_reuse_allowed": {"type": "boolean"},
+        "rotation_cadence_source": {"type": "string"},
+        "current_evidence_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "breakGlassProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "states",
+        "only_state_allowing_evidence_evaluation_to_continue",
+        "missing_or_malformed_behavior",
+        "engaged_effect",
+        "retired_effect",
+        "may_supply_secret",
+        "may_skip_rotation",
+        "may_attest_role",
+        "may_activate_practice",
+        "may_clear_global_kill_switch",
+        "may_grant_command_authority",
+        "automatic_clear_allowed",
+        "last_known_good_fallback",
+        "recovery_requires_new_manifest_generation",
+        "recovery_requires_fresh_independent_evidence"
+      ],
+      "properties": {
+        "mode": {"type": "string"},
+        "states": {"$ref": "#/$defs/stringArray"},
+        "only_state_allowing_evidence_evaluation_to_continue": {"type": "string"},
+        "missing_or_malformed_behavior": {"type": "string"},
+        "engaged_effect": {"type": "string"},
+        "retired_effect": {"type": "string"},
+        "may_supply_secret": {"type": "boolean"},
+        "may_skip_rotation": {"type": "boolean"},
+        "may_attest_role": {"type": "boolean"},
+        "may_activate_practice": {"type": "boolean"},
+        "may_clear_global_kill_switch": {"type": "boolean"},
+        "may_grant_command_authority": {"type": "boolean"},
+        "automatic_clear_allowed": {"type": "boolean"},
+        "last_known_good_fallback": {"type": "boolean"},
+        "recovery_requires_new_manifest_generation": {"type": "boolean"},
+        "recovery_requires_fresh_independent_evidence": {"type": "boolean"}
+      }
+    },
+    "evidenceGateEvaluator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ordered_steps",
+        "output_fields",
+        "closed_reason_codes",
+        "canonical_current_outcome",
+        "canonical_current_reason_code",
+        "may_admit_ordinary_practice",
+        "may_execute_check_in",
+        "may_connect_database",
+        "may_resolve_secret",
+        "may_create_or_change_role",
+        "may_mutate_product_configuration"
+      ],
+      "properties": {
+        "ordered_steps": {"$ref": "#/$defs/stringArray"},
+        "output_fields": {"$ref": "#/$defs/stringArray"},
+        "closed_reason_codes": {"$ref": "#/$defs/stringArray"},
+        "canonical_current_outcome": {"type": "string"},
+        "canonical_current_reason_code": {"type": "string"},
+        "may_admit_ordinary_practice": {"type": "boolean"},
+        "may_execute_check_in": {"type": "boolean"},
+        "may_connect_database": {"type": "boolean"},
+        "may_resolve_secret": {"type": "boolean"},
+        "may_create_or_change_role": {"type": "boolean"},
+        "may_mutate_product_configuration": {"type": "boolean"}
+      }
+    },
+    "operationalEvidenceBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "architecture_portion_frozen",
+        "environment_and_secret_posture_operational_gap_closed",
+        "tenant_runtime_role_operational_gap_closed",
+        "rollback_and_unknown_commit_operational_gap_closed",
+        "this_contract_is_operational_evidence",
+        "future_evidence_requirements",
+        "authored_synthetic_substitution_for_ordinary_evidence_allowed",
+        "missing_or_unproved_behavior"
+      ],
+      "properties": {
+        "architecture_portion_frozen": {"type": "boolean"},
+        "environment_and_secret_posture_operational_gap_closed": {"type": "boolean"},
+        "tenant_runtime_role_operational_gap_closed": {"type": "boolean"},
+        "rollback_and_unknown_commit_operational_gap_closed": {"type": "boolean"},
+        "this_contract_is_operational_evidence": {"type": "boolean"},
+        "future_evidence_requirements": {"$ref": "#/$defs/stringArray"},
+        "authored_synthetic_substitution_for_ordinary_evidence_allowed": {"type": "boolean"},
+        "missing_or_unproved_behavior": {"type": "string"}
+      }
+    },
+    "clockworkBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "governance_clockwork_status",
+        "closeout_projection_owner",
+        "full_git_objects_are_machine_resolved",
+        "manual_git_abbreviation_accepted",
+        "deepseek_native_harness_occupied_for_this_tranche",
+        "deepseek_broker_has_product_or_secret_authority",
+        "workflow_receipt_is_operational_or_product_authority"
+      ],
+      "properties": {
+        "governance_clockwork_status": {"type": "string"},
+        "closeout_projection_owner": {"type": "string"},
+        "full_git_objects_are_machine_resolved": {"type": "boolean"},
+        "manual_git_abbreviation_accepted": {"type": "boolean"},
+        "deepseek_native_harness_occupied_for_this_tranche": {"type": "boolean"},
+        "deepseek_broker_has_product_or_secret_authority": {"type": "boolean"},
+        "workflow_receipt_is_operational_or_product_authority": {"type": "boolean"}
+      }
+    },
+    "closedBoundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ordinary_practice_enabled",
+        "feature_flag_or_synthetic_allowlist_changed",
+        "environment_manifest_instance_created",
+        "practice_selected",
+        "secret_or_key_value_created_read_or_written",
+        "database_connected_or_role_created",
+        "runtime_role_attested",
+        "product_source_or_configuration_changed",
+        "api_openapi_graphql_or_schema_changed",
+        "route_or_product_command_called",
+        "generic_status_arrived_changed",
+        "action_grammar_client_or_waiting_area_changed",
+        "product_patient_appointment_or_clinical_data_used",
+        "provider_or_network_used",
+        "production_deployment_release_or_pages",
+        "protected_evidence_accessed_or_ref_moved"
+      ],
+      "properties": {
+        "ordinary_practice_enabled": {"type": "boolean"},
+        "feature_flag_or_synthetic_allowlist_changed": {"type": "boolean"},
+        "environment_manifest_instance_created": {"type": "boolean"},
+        "practice_selected": {"type": "boolean"},
+        "secret_or_key_value_created_read_or_written": {"type": "boolean"},
+        "database_connected_or_role_created": {"type": "boolean"},
+        "runtime_role_attested": {"type": "boolean"},
+        "product_source_or_configuration_changed": {"type": "boolean"},
+        "api_openapi_graphql_or_schema_changed": {"type": "boolean"},
+        "route_or_product_command_called": {"type": "boolean"},
+        "generic_status_arrived_changed": {"type": "boolean"},
+        "action_grammar_client_or_waiting_area_changed": {"type": "boolean"},
+        "product_patient_appointment_or_clinical_data_used": {"type": "boolean"},
+        "provider_or_network_used": {"type": "boolean"},
+        "production_deployment_release_or_pages": {"type": "boolean"},
+        "protected_evidence_accessed_or_ref_moved": {"type": "boolean"}
+      }
+    },
+    "successor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation_id",
+        "authorized_now",
+        "required_scope",
+        "ordinary_enablement_authorized",
+        "production_or_live_secret_authorized"
+      ],
+      "properties": {
+        "operation_id": {"type": "string"},
+        "authorized_now": {"type": "boolean"},
+        "required_scope": {"type": "string"},
+        "ordinary_enablement_authorized": {"type": "boolean"},
+        "production_or_live_secret_authorized": {"type": "boolean"}
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "bounded_synthetic_shape_outcome": {
+    "outcome": "satisfied",
+    "reason_code": "evidence_gate_satisfied"
+  },
+  "canonical_manifest_instance_count": 0,
+  "contract_hostile_mutation_count": 268,
+  "contract_hostile_mutation_escape_count": 0,
+  "current_rotation_evidence_count": 0,
+  "current_secret_reference_count": 0,
+  "database_or_role_used": false,
+  "manifest_hostile_mutation_count": 69,
+  "manifest_hostile_mutation_escape_count": 0,
+  "manifest_schema_sha256": "786cab3b19231c391d281cf36568b4206fe5f11b2a2ac51469f0996c3e718e88",
+  "missing_operational_evidence_outcome": {
+    "outcome": "denied",
+    "reason_code": "role_evidence_invalid"
+  },
+  "ordinary_practice_enabled": false,
+  "product_or_configuration_changed": false,
+  "provider_or_network_used": false,
+  "reasons": [],
+  "schema_version": "emr4.check-in-environment-manifest-secret-posture-architecture-report.v1",
+  "secret_slot_count": 3,
+  "secret_value_used": false,
+  "source_binding_count": 16,
+  "source_head": "8cc8aaf5e52c97ed46b868afb0ee6038eb1cf40a",
+  "status": "passed"
+}
