@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/deepseek-native-harness-required-service-injection-recovery-evidence.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "planning_source",
+    "result",
+    "root_cause",
+    "package_checks",
+    "source_semantics",
+    "future_declaration",
+    "immutable_attempts",
+    "provider_boundary",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.deepseek_native_harness_required_service_injection_recovery_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-required-service-injection-recovery"},
+    "planning_source": {"pattern": "^[0-9a-f]{40}$"},
+    "result": {"const": "pass"},
+    "root_cause": {"const": "headless_agent_presets_row_absent_and_runner_dependencies_underdeclared"},
+    "package_checks": {"type": "array", "minItems": 8, "maxItems": 8},
+    "source_semantics": {"type": "object"},
+    "future_declaration": {"type": "object"},
+    "immutable_attempts": {"type": "array", "minItems": 2, "maxItems": 2},
+    "provider_boundary": {"type": "object"},
+    "claim_boundary": {"type": "object"}
+  }
+}
