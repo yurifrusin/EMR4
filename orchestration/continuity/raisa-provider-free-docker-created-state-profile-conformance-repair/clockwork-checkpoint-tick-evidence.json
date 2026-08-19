@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "df5950e2309ca5a912b797fcaca61df7371be9b1",
+  "source_commit": "df5950e2309ca5a912b797fcaca61df7371be9b1",
+  "generation_id": "gen-0ea80ec6baebefc1b00c6fd168b75003b73b38c44e74025cadd0fe6d564308eb",
+  "bundle_sha256": "0ea80ec6baebefc1b00c6fd168b75003b73b38c44e74025cadd0fe6d564308eb",
+  "previous_generation_id": "gen-e2d5b0e4c500fe5610e3e3b3a296d4c0e8643f2636cbd591cce4ecf0c0be0922",
+  "previous_source_commit": "df5950e2309ca5a912b797fcaca61df7371be9b1",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 17,
+  "operation_id": "raisa-provider-free-docker-created-state-profile-conformance-repair",
+  "event_kind": "checkpoint_transition",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

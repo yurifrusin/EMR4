@@ -1,0 +1,35 @@
+{
+  "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
+  "operation_id": "raisa-provider-free-docker-created-state-profile-conformance-repair",
+  "completed_stage": "The no-credential Docker Created-state representation and predicate-correction plan, threat-model delta and four plan-boundary tests are frozen at exact full Git source df5950e2309ca5a912b797fcaca61df7371be9b1. No Docker object, credential, container process, PostgreSQL process, SQL or database attempt was created or executed.",
+  "next_executable_stage": "implement_the_closed_contract_schemas_no_credential_created_state_harness_and_deterministic_tests_without_docker_execution",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "created-state-plan-checkpoint-focused-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "created-state-plan-checkpoint-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}
