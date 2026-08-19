@@ -25,6 +25,12 @@ The candidate passes its 85-test review suite and a 168-test provider-free
 owned, neighbouring, latch, clockwork and baton-consistency suite, plus Ruff,
 compile and the deterministic ten-scenario check.
 
+After the clockwork-authored blocked transition, its corrected compatible
+post-publication suite passed 167/167 tests. The first blocked publication was
+rolled back byte-exactly because two selected legacy tests cannot represent the
+clockwork-supported `blocked` latch state; they were removed from the blocked
+manifest, not changed or falsely reported as passes.
+
 ## Why acceptance remains closed
 
 The first Gemini 3.7 Flash/high review returned `pass` against the exact clean

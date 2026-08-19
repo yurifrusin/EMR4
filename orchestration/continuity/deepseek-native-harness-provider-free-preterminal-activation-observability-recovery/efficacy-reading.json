@@ -8,6 +8,7 @@
     "scenario_count": 10,
     "focused_review_suite_tests": 85,
     "full_owned_neighboring_governance_tests": 168,
+    "post_blocked_transition_compatible_tests": 167,
     "ruff": "pass",
     "compile": "pass",
     "native_harness_process_count": 0,

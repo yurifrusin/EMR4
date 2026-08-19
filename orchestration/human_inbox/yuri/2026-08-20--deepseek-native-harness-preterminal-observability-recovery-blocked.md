@@ -24,7 +24,8 @@ rebuilt and the candidate can then receive one fresh corrected review.
   exact timing-envelope SHA-256
   `057392e7156907504165cbe6a74e50e78550ff9452b60467660087ee9fad4345`.
 - Tests: exact reviewer suite 85/85; expanded owned/neighboring/latch/clockwork/
-  baton-consistency suite 168/168; Ruff and compile pass.
+  baton-consistency suite 168/168; corrected post-blocked-transition suite
+  167/167; Ruff and compile pass.
 - Review attempt 1: provider `pass`, orchestrator `revision_required` because
   the packet falsely asserted 137 tests rather than 85.
 - Corrected review transports: three attempts, zero admitted decisions, each
