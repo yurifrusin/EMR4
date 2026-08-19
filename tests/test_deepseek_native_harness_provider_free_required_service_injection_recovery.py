@@ -54,6 +54,26 @@ def test_all_exact_cache_packages_and_members_pass() -> None:
     ]
 
 
+def test_default_cache_root_survives_provider_free_environment(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    expected = recovery.default_cache_root().resolve()
+    monkeypatch.delenv("LOCALAPPDATA", raising=False)
+    assert recovery.default_cache_root().resolve() == expected
+
+
+def test_default_cache_root_fails_closed_without_owned_candidate(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.delenv("LOCALAPPDATA", raising=False)
+    monkeypatch.setattr(recovery, "REPO_ROOT", Path("Z:/closed/repo"))
+    with pytest.raises(
+        recovery.ServiceInjectionRecoveryError,
+        match="localappdata_and_repo_owner_cache_missing",
+    ):
+        recovery.default_cache_root()
+
+
 def test_corrupt_cache_payload_fails_closed() -> None:
     package = recovery.load_contract()["packages"][0]
     payload = recovery.cache_blob_path(

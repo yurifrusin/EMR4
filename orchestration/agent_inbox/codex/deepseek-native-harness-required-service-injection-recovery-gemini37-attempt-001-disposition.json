@@ -1,0 +1,36 @@
+{
+  "schema_version": "ariadne.verifier_attempt_disposition.v1",
+  "operation_id": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+  "recorded_at": "2026-08-20T09:38:49.2312283+10:00",
+  "attempt_id": "required-service-injection-gemini37-review-attempt-001",
+  "candidate": "99ecaa6ac20a3b6394f4dd097550c7233a4a0436",
+  "receipt": "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-gemini37-review-receipt.json",
+  "decision": "revision_required",
+  "candidate_accepted": false,
+  "transport_accepted": true,
+  "worktree_unchanged": true,
+  "findings": [
+    {
+      "severity": "P1",
+      "classification": "candidate_provider_free_environment_compatibility",
+      "accepted": true,
+      "summary": "The provider-free pytest wrapper removes LOCALAPPDATA, while the candidate cache locator required it and therefore failed seven current tests in the isolated review environment.",
+      "correction": "Resolve the exact local cache from LOCALAPPDATA when present or from the first existing non-symlink AppData/Local/npm-cache under the repository ownership ancestry; add positive stripped-environment and negative no-candidate tests."
+    },
+    {
+      "severity": "P2",
+      "classification": "verifier_manifest_nontransferable_predecessor_assertion",
+      "accepted": true,
+      "summary": "The first manifest included a predecessor evidence test whose final assertion requires physical user-owned untracked docs/branding, which Git correctly does not copy into an isolated verifier worktree.",
+      "correction": "Do not alter the accepted predecessor test. Remove that non-transferable file from the corrected isolated-worktree manifest; retain direct exact digest and failed-result validation of both predecessor attempts in the current candidate and keep the main worktree preservation check."
+    }
+  ],
+  "bounded_recovery": {
+    "owner": "GPT Sol",
+    "same_lane_retry": false,
+    "fresh_corrected_veto_required": true,
+    "native_harness_process_authorised": false,
+    "model_or_provider_request_authorised_except_verifier": false,
+    "protected_boundaries_unchanged": true
+  }
+}

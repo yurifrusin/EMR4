@@ -106,9 +106,13 @@ def load_contract() -> dict[str, Any]:
 
 def default_cache_root() -> Path:
     local_app_data = os.environ.get("LOCALAPPDATA")
-    if not local_app_data:
-        raise ServiceInjectionRecoveryError("localappdata_missing")
-    return Path(local_app_data) / "npm-cache"
+    if local_app_data:
+        return Path(local_app_data) / "npm-cache"
+    for parent in REPO_ROOT.parents:
+        candidate = parent / "AppData" / "Local" / "npm-cache"
+        if candidate.is_dir() and not candidate.is_symlink():
+            return candidate
+    raise ServiceInjectionRecoveryError("localappdata_and_repo_owner_cache_missing")
 
 
 def cache_blob_path(cache_root: Path, integrity: str) -> Path:
