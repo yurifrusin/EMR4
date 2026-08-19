@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-003",
-  "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 003",
-  "objective": "Freeze and, only after deterministic and five-source preexecution admission, consume exactly one newly named disposable authored-synthetic PostgreSQL relay-free execution proving explicit rollback zero effect and incomplete-response no-success/no-retry resolution by restricted authoritative readback, followed by exact cleanup.",
-  "status": "blocked",
-  "source_head": "5c4ad3eb328192ed9729298beccb0ad3904426f5",
-  "authority_source": "Accepted relay-free transport, restricted runtime-role and forced-RLS floor, immutable attempts 001 and 002, this accepted Created-state predicate repair and Yuri's standing uninterrupted-development authority.",
+  "operation_id": "raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair",
+  "active_tranche": "Raisa provider-free check-in relay-free profile call-site and pre-registry cleanup conformance repair",
+  "objective": "Freeze and complete a provider-free deterministic repair that passes the captured network name at both real relay-free container-profile call sites, proves their invocation contracts, and guarantees exact captured-object cleanup for every post-create pre-registry exception, without Docker or database execution.",
+  "status": "in_progress",
+  "source_head": "244a35761d67628576d72093634afa1f2b823c07",
+  "authority_source": "Yuri's explicit standing authority to continue under Sol's recommended course through this tranche and dependency-satisfied successors, the immutable consumed attempt-003 failure/envelope/cleanup evidence, and the accepted Created-state representation and corrected profile semantics.",
   "checkpoint": {
-    "completed_stage": "The single attempt-003 execution is consumed at exact source 19e4414fec067fcbb6af12818e432953432878be. It failed closed before startup on a missing network_name call-site keyword, released no success, made zero retries and produced no database or product effect. Failure, envelope and closed cleanup recovery are immutable at source d2c6f7e465b1bcf2f8cf458a8fbd5721631db422; exact owned cleanup and zero labelled residue are verified.",
-    "next_executable_stage": null,
+    "completed_stage": "Attempt 003 is closed blocked with one consumed execution, zero retry, zero credential delivery, zero PostgreSQL or SQL execution, exact recovered cleanup and zero labelled residue. Yuri's standing authority selects the narrow deterministic call-site and pre-registry cleanup repair.",
+    "next_executable_stage": "freeze_the_narrow_provider_free_call_site_and_pre_registry_cleanup_conformance_repair_plan_without_docker_or_database_execution",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 1
+      "verification": 0
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,33 +26,28 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": true,
-    "reason": "Attempt 003 cannot be rerun. Yuri's standing uninterrupted-development authority already selects the separately named provider-free call-site and pre-registry cleanup conformance repair as the next operation; a separate user-decision clockwork transition will consume that standing authority without a ceremonial pause."
+    "required": false,
+    "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "Attempt 003 exhausted its exact one-run authority before PostgreSQL start. Its fail-closed evidence and recovered cleanup are complete, but the intended rollback and unknown-response transaction proof was not achieved; this operation therefore closes blocked."
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_uniquely_named_disposable_local_postgresql_only",
-    "accepted_relay_free_transport_runtime_role_tenant_isolation_and_created_state_predicate_repair_are_immutable",
-    "attempts_001_and_002_failure_envelopes_execution_counts_cleanup_and_historical_harnesses_remain_immutable",
-    "newly_frozen_authored_synthetic_attempt_003_fixture_only",
-    "exactly_one_attempt_003_execution_after_frozen_plan_deterministic_admission_and_fresh_five_source_preexecution_receipt",
-    "no_automatic_retry_and_any_failure_consumes_attempt_003",
-    "no_host_tcp_listener_forwarder_docker_exec_byte_bridge_multiprocessing_process_or_queue",
-    "credential_input_only_after_exact_profile_inspection_and_outcome_only_by_exact_terminal_oci_state",
-    "exact_request_command_idempotency_digest_and_audit_identity_preserved",
-    "explicit_rollback_zero_effect_required",
-    "incomplete_response_releases_no_success_forbids_retry_and_requires_restricted_authoritative_readback",
-    "forced_rls_tenant_isolation_no_duplicate_effect_and_zero_ordinary_admission_release_required",
-    "exact_role_attachment_container_network_process_and_label_cleanup_required",
-    "no_local_env_live_secret_cloud_hosted_existing_or_product_database",
+    "provider_free_deterministic_relay_free_harness_call_site_and_cleanup_repair_only",
+    "attempt_003_failure_envelope_cleanup_execution_count_and_source_are_immutable_and_never_overwritten",
+    "attempts_001_and_002_and_created_state_representation_evidence_remain_immutable",
+    "corrected_network_name_network_mode_endpoint_lifecycle_credential_and_nonce_semantics_remain_exact",
+    "only_both_profile_predicate_call_sites_and_post_create_pre_registry_cleanup_control_may_change",
+    "real_server_and_sidecar_call_site_signature_tests_and_fault_injection_cleanup_tests_required",
+    "no_docker_object_container_start_attach_stdin_credential_postgresql_sql_transaction_or_database_execution",
+    "no_retry_or_reclassification_of_attempt_003",
+    "no_local_env_live_secret_cloud_hosted_existing_product_or_disposable_database",
     "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
     "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
     "no_generic_status_arrived_action_grammar_or_first_party_client_change",
     "no_product_patient_appointment_clinical_historical_or_protected_data",
-    "no_occupied_deepseek_before_separate_native_harness_boot_proof_no_claude_code_fallback_and_no_provider_call_before_optional_gemini_veto",
+    "no_occupied_deepseek_before_separate_native_harness_boot_proof_no_claude_code_fallback_and_gemini_only_after_deterministic_exact_candidate",
     "no_production_runtime_deployment_release_or_pages",
     "no_protected_evidence_access_or_protected_ref_movement",
     "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
