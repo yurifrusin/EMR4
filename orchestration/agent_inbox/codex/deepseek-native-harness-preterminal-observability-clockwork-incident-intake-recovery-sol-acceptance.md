@@ -15,4 +15,6 @@ the exact worktree clean after 480 tests.
 
 This correction closes the sole-writer gap that otherwise made the rejected
 review impossible to register without a forbidden manual canonical edit. It
-does not broaden the parent tranche or any product/provider authority.
+also replaces the one remaining literal cutoff-date fixture exposed by the
+first rolled-back publication. It does not broaden the parent tranche or any
+product/provider authority.

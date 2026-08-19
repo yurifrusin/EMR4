@@ -63,7 +63,10 @@
     "caller_authored_incident_identity_fields": 0,
     "atomic_register_pattern_generation": true,
     "pre_pointer_failure_byte_exact_restore": true,
-    "legacy_intent_compatibility_preserved": true
+    "legacy_intent_compatibility_preserved": true,
+    "first_live_publication_rolled_back": true,
+    "post_publication_compatibility_corrections": 1,
+    "compatibility_correction": "Replace the final literal 2026-08-19 source-cutoff assertion with the maximum validated incident date before corrected publication."
   },
   "protected_boundaries_preserved": true
 }

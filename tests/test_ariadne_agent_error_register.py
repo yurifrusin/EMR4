@@ -8063,7 +8063,9 @@ def test_aer_0565_advances_source_cutoff_after_date_rollover() -> None:
     incident = incidents["AER-0565"]
 
     assert list(incidents)[564:565] == ["AER-0565"]
-    assert register["scope"]["source_cutoff_on"] == "2026-08-19"
+    assert register["scope"]["source_cutoff_on"] == max(
+        row["observed_on"] for row in register["incidents"]
+    )
     assert incident["origin"] == "agent_behavior"
     assert incident["category"] == "output_contract_violation"
     assert "source cutoff" in incident["detection_method"]

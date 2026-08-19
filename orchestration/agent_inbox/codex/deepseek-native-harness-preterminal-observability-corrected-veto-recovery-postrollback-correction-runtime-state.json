@@ -1,0 +1,184 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "correct_and_republish_atomic_clockwork_closeout_after_byte_exact_rollback",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete post-compaction rereading of the 121676-byte live handover, active plans and evidence, protected boundaries, active latch, explicit worker-lane assessment, and exact Git/worktree state",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after context restoration as the current 121676-byte live handover with SHA-256 1072c58c60c1db4b39f46e6b2c0a5bb40c7311fdf54c0f3ba8aa6583b1793958. Current result remains Continuity 342 / Compass 324, and Next implementation still selects the active corrected-veto recovery because the first closeout publication was rolled back byte-exactly.",
+    "current_authority_allocation": "GPT Sol owns the serial deterministic correction, acceptance reconciliation, clockwork closeout and Git. Gemini 3.7 Flash/high already completed the required exact read-only veto of the unchanged b5 candidate and independently passed the incident-intake gear. DeepSeek receives no package because no implementation or native run is admitted. Native subagents are declined under the developer delegation restriction and single-writer serial constraint.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery-plan.md",
+      "docs/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery-blocked-closeout.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/efficacy-reading.json",
+      "orchestration/agent_inbox/antigravity/deepseek-native-harness-preterminal-observability-corrected-veto-recovery-gemini37-post-auth-review-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-corrected-veto-recovery-authentication-disposition.json",
+      "docs/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-addendum.md",
+      "docs/security/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-threat-model-delta.md",
+      "orchestration/agent_inbox/antigravity/deepseek-native-harness-preterminal-observability-clockwork-incident-intake-gemini37-review-receipt.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "The exact candidate b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab, rejected first review, predecision transport failures and native-composition-attempt-001 remain immutable. The first clockwork closeout publication is retained only as rolled-back evidence and confers no successor authority. No protected fixture, product or patient data, native Harness, DeepSeek/model/broker, Docker/database, API, configuration, client, ordinary-practice enablement, production, deployment, release, Pages or protected-ref movement is authorised. The user authorization code is neither retained nor submitted. Preserve docs/branding and every unrelated untracked file; stage explicit paths only.",
+    "git_refs_and_worktree": "Main task HEAD is f2d84f1867021cd2db6651edc4576a828cc18faf on codex/ariadne-bernie-davida-parallel-seam. The tracked tree contains only the intentional rollback pointer and bounded cutoff-fixture incident correction; unrelated untracked files remain preserved. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The b5 and 7c7 verifier worktrees remain separate review evidence and no protected ref moved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+    "active_tranche": "DeepSeek native Harness provider-free preterminal observability corrected-veto recovery",
+    "objective": "Obtain one fresh corrected Gemini 3.7 Flash/high independent veto against unchanged candidate b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab after restored Antigravity inference authority, then reconcile the blocked predecessor without changing its candidate or rerunning any native attempt.",
+    "status": "in_progress",
+    "source_head": "f73974ef41e5bd11f2be8af18dcdf8c54dfea9e1",
+    "authority_source": "Yuri's restored or reauthorised Antigravity session, his standing uninterrupted-development authority, and the predecessor's immutable blocked clockwork evidence; no pasted authorization code is retained or required.",
+    "checkpoint": {
+      "completed_stage": "The exact corrected Gemini veto and incident-intake gear review passed; the first closeout publication was rolled back byte-exactly after its post-publication suite exposed one fixed-date source-cutoff assertion.",
+      "next_executable_stage": "preserve_rolled_back_tick_evidence_then_verify_check_and_republish_with_two_clockwork_derived_incidents",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 1,
+        "review": 0,
+        "verification": 1
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_preterminal_observability_corrected_independent_veto_and_atomic_clockwork_closeout_only",
+      "unchanged_candidate_b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab",
+      "native_composition_attempt_001_immutable_no_retry_resume_or_reclassification",
+      "no_native_harness_deepseek_agent_session_turn_broker_model_or_provider",
+      "no_product_patient_clinical_historical_or_protected_data",
+      "no_docker_database_production_deployment_release_or_pages",
+      "no_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+    "assessed_stage": "post-rollback deterministic closeout correction",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The correction is a one-assertion governance fixture plus clockwork-owned incident projection; a DeepSeek or native run would violate the frozen review-only boundary and add a second writer.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "rationale": "Gemini 3.7 Flash/high passed the unchanged b5 candidate and separately passed the incident-intake gear at exact 7c7; the post-publication correction changes no reviewed gear or product semantics.",
+        "work_packages": [
+          "completed exact-candidate corrected veto",
+          "completed independent incident-intake gear review"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and the rollback, incident derivation, check, publication and post-publication verification form one serial canonical-writer transaction.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "preserve the first rolled-back tick artifacts before publication aliases are overwritten",
+      "commit the rollback pointer and deterministic correction before source-bound clockwork check",
+      "run check and the exact command manifest before publish",
+      "publish once then run the post-publication suite and idempotent check"
+    ],
+    "reassessment_triggers": [
+      "corrected clockwork check",
+      "corrected publication",
+      "successor tranche rehydration"
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the fresh five-source restoration and owns the serial correction."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": ["The accepted post-auth b5 veto and separate 7c7 gear review receipts remain exact and complete."]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Historical local evidence remains readable, but no native process is admitted during closeout correction."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Historical transport is not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent was spawned; delegation is prohibited and leverage is negative."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback is not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback is not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": []
+}

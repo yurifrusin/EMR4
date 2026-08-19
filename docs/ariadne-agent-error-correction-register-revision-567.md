@@ -19,13 +19,21 @@ commands against the unchanged candidate. The original evidence conflict is
 attributed to orchestrator packet construction, not Gemini reasoning or the
 Antigravity transport.
 
-The clockwork now derives AER-0657 and all aggregate updates from a semantic
-observation in the closeout intent. The register contains 657 incidents, all
-corrected or contained and none open.
+The first incident-intake publication then exposed AER-0658: one historical
+register test still required the literal source cutoff `2026-08-19`, although
+the new incident correctly advanced the canonical cutoff to `2026-08-20`.
+The entire generation was rolled back byte-exactly. The corrected test now
+derives the cutoff from the maximum validated incident date.
+
+The clockwork now derives AER-0657, AER-0658 and all aggregate updates from
+semantic observations in the closeout intent. The register contains 658
+incidents, all corrected or contained and none open.
 
 ## Prevention
 
 Every review packet with an exact test-count claim must bind the mechanical
 collection of its exact command before dispatch. A qualifying closeout incident
 enters through clockwork intent v2; callers cannot author the AER ID, revision,
-origin, peer links, status, counts or pattern report.
+origin, peer links, status, counts or pattern report. Current register tests
+derive moving revision/count/cutoff/aggregate readings from the validated
+population rather than retaining next-update literals.

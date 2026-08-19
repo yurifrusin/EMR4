@@ -165,6 +165,11 @@
         "incident_id": "clockwork-register-intake-gap",
         "source_id": "preterminal-observability-closeout-check",
         "peers": []
+      },
+      {
+        "incident_id": "register-source-cutoff-literal-fixture",
+        "source_id": "incident-intake-postpublication-suite",
+        "peers": []
       }
     ],
     "broker": {
@@ -341,6 +346,42 @@
         ]
       },
       "baton_summary": "preserves the rejected 137-versus-85 review-packet conflict and the corrected mechanical-count gate."
+    },
+    {
+      "attempt_key": "clockwork-incident-intake-source-cutoff-fixture-attempt-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register-source-cutoff-test",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Current register tests must derive the source cutoff from the maximum validated incident date so a legitimate next-day clockwork intake remains representable.",
+      "observed_error": "After the first incident-intake publication correctly advanced the source cutoff to 2026-08-20, one historical test still required the literal 2026-08-19 and rejected the otherwise exact generation.",
+      "detection_method": "The serial post-publication compatibility suite failed one exact assertion; the clockwork then rolled the complete generation back byte-exactly before correction.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery/closeout/clockwork-tick-attempt-001-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-567.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.agent_error_register_source_cutoff_literal_not_incident_derived",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the literal cutoff assertion with the maximum observed_on value from the schema-validated incident population, then republish from the byte-exact rolled-back generation.",
+        "prevention_control": "Current register revision, population, aggregates and source cutoff are readings of the validated population; tests do not encode the next expected literal update.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-closeout.md",
+          "docs/ariadne-agent-error-correction-register-revision-567.md"
+        ]
+      },
+      "baton_summary": "preserves the rolled-back fixed cutoff-date assertion and its incident-derived correction."
     }
   ]
 }

@@ -1,0 +1,126 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free preterminal observability corrected-veto recovery",
+    "completed_stage": "The exact corrected Gemini veto and incident-intake gear review passed; the first closeout publication was rolled back byte-exactly after its post-publication suite exposed one fixed-date source-cutoff assertion.",
+    "next_executable_stage": "preserve_rolled_back_tick_evidence_then_verify_check_and_republish_with_two_clockwork_derived_incidents",
+    "operation_id": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+    "resume_after_compaction": true,
+    "source_head": "f73974ef41e5bd11f2be8af18dcdf8c54dfea9e1",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "git_object_resolution": {
+    "observed_head": "f2d84f1867021cd2db6651edc4576a828cc18faf",
+    "reason_codes": [],
+    "resolved_commit": "f73974ef41e5bd11f2be8af18dcdf8c54dfea9e1",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "f73974ef41e5bd11f2be8af18dcdf8c54dfea9e1"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "f2d84f1867021cd2db6651edc4576a828cc18faf",
+    "branch_origin_aligned": false,
+    "head": "f2d84f1867021cd2db6651edc4576a828cc18faf",
+    "origin_branch_commit": "2678b43abec8f29e7af432a0a3c64759fada8fda",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 658
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "post-rollback deterministic closeout correction",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The correction is a one-assertion governance fixture plus clockwork-owned incident projection; a DeepSeek or native run would violate the frozen review-only boundary and add a second writer.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini 3.7 Flash/high passed the unchanged b5 candidate and separately passed the incident-intake gear at exact 7c7; the post-publication correction changes no reviewed gear or product semantics.",
+        "work_packages": [
+          "completed exact-candidate corrected veto",
+          "completed independent incident-intake gear review"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the rollback, incident derivation, check, publication and post-publication verification form one serial canonical-writer transaction.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "corrected clockwork check",
+      "corrected publication",
+      "successor tranche rehydration"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "preserve the first rolled-back tick artifacts before publication aliases are overwritten",
+      "commit the rollback pointer and deterministic correction before source-bound clockwork check",
+      "run check and the exact command manifest before publish",
+      "publish once then run the post-publication suite and idempotent check"
+    ]
+  },
+  "planned_action": "correct_and_republish_atomic_clockwork_closeout_after_byte_exact_rollback",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery-plan.md",
+      "docs/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery-blocked-closeout.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/efficacy-reading.json",
+      "orchestration/agent_inbox/antigravity/deepseek-native-harness-preterminal-observability-corrected-veto-recovery-gemini37-post-auth-review-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-corrected-veto-recovery-authentication-disposition.json",
+      "docs/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-addendum.md",
+      "docs/security/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-threat-model-delta.md",
+      "orchestration/agent_inbox/antigravity/deepseek-native-harness-preterminal-observability-clockwork-incident-intake-gemini37-review-receipt.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial deterministic correction, acceptance reconciliation, clockwork closeout and Git. Gemini 3.7 Flash/high already completed the required exact read-only veto of the unchanged b5 candidate and independently passed the incident-intake gear. DeepSeek receives no package because no implementation or native run is admitted. Native subagents are declined under the developer delegation restriction and single-writer serial constraint.",
+    "git_refs_and_worktree": "Main task HEAD is f2d84f1867021cd2db6651edc4576a828cc18faf on codex/ariadne-bernie-davida-parallel-seam. The tracked tree contains only the intentional rollback pointer and bounded cutoff-fixture incident correction; unrelated untracked files remain preserved. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The b5 and 7c7 verifier worktrees remain separate review evidence and no protected ref moved.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after context restoration as the current 121676-byte live handover with SHA-256 1072c58c60c1db4b39f46e6b2c0a5bb40c7311fdf54c0f3ba8aa6583b1793958. Current result remains Continuity 342 / Compass 324, and Next implementation still selects the active corrected-veto recovery because the first closeout publication was rolled back byte-exactly.",
+    "protected_evidence_boundaries": "The exact candidate b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab, rejected first review, predecision transport failures and native-composition-attempt-001 remain immutable. The first clockwork closeout publication is retained only as rolled-back evidence and confers no successor authority. No protected fixture, product or patient data, native Harness, DeepSeek/model/broker, Docker/database, API, configuration, client, ordinary-practice enablement, production, deployment, release, Pages or protected-ref movement is authorised. The user authorization code is neither retained nor submitted. Preserve docs/branding and every unrelated untracked file; stage explicit paths only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

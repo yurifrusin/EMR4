@@ -25,6 +25,12 @@ each legitimate intake. Schema, ascending IDs, category/origin, split-attempt
 peer links, sensitive-key, exact evidence-path and open-incident controls
 remain intact.
 
+The first live incident-intake generation was rolled back byte-exactly when a
+post-publication compatibility run found one remaining fixed source-cutoff date
+assertion. The corrected assertion derives the maximum incident date. AER-0658
+preserves that repository-fixture defect; the corrected generation is the only
+accepted publication.
+
 Exact candidate `7c7ce52a6380637d54dc5ae2d6a778ccd300dd2f` passed 480 tests, Ruff,
 compile and a fresh Gemini 3.7 Flash/high independent veto with receipt SHA-256
 `32022df8a6c232ae9902c02910f18ebdd01ba546302e70e8aef43b27532fecb9`.
