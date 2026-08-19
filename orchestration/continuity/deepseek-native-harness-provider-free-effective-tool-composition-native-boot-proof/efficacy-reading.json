@@ -1,0 +1,49 @@
+{
+  "schema_version": "ariadne.deepseek_native_harness_effective_tool_native_boot_efficacy.v1",
+  "operation_id": "deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof",
+  "measured_at": "2026-08-20T05:47:54.6367968+10:00",
+  "deterministic_admission": {
+    "focused_test_count": 13,
+    "combined_test_count": 139,
+    "combined_result": "pass",
+    "ruff_result": "pass",
+    "compile_result": "pass",
+    "cache_package_identity_count": 4,
+    "native_processes_before_admission": 0
+  },
+  "native_attempt": {
+    "attempt_id": "native-composition-attempt-001",
+    "processes_started": 1,
+    "retries": 0,
+    "result": "fail",
+    "retained_events": [
+      "sentinel_activated",
+      "stock_headless_hmr_ready"
+    ],
+    "guard_terminal_retained": false,
+    "effective_tool_view_observed": false,
+    "network_attempt_count": 0,
+    "agent_session_count": 0,
+    "broker_request_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "cleanup_complete": true
+  },
+  "traceability": {
+    "package_materialisation_duration_ms": 115532,
+    "package_materialisation_passed": true,
+    "native_launch_duration_retained_ms": 0,
+    "native_launch_duration_is_reliable": false,
+    "failure_coordinate": "NATIVE_COMPOSITION_EXECUTION_FAILED",
+    "failure_coordinate_is_root_cause_specific": false,
+    "raw_logs_retained": false,
+    "bounded_preterminal_root_cause_retained": false,
+    "conclusion": "The attempt proves provider-free HMR readiness, zero prohibited calls and complete cleanup, but it does not prove tool composition or identify the exact post-readiness preterminal rejection."
+  },
+  "parallelism": {
+    "deepseek_lane": "declined_provider_free_subject",
+    "gemini_lane": "not_eligible_without_passing_terminal",
+    "native_subagent_lane": "declined_serial_lifecycle_and_policy"
+  },
+  "next_control": "A separately named provider-free recovery must first make every post-readiness preterminal path produce a closed bounded coordinate and a reliable duration; it may not rerun or reclassify this attempt."
+}
