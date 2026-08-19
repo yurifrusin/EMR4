@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 340,
+  "graph_revision": 341,
   "harvests": [],
   "nodes": [
     {
@@ -24346,9 +24346,120 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard",
+      "title": "DeepSeek native Harness provider-free effective-tool composition and terminal-coordinate guard",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admits this dependency-satisfied provider-free guard and its separately frozen provider-free native-boot successor.",
+          "The accepted result changes only deterministic Harness composition validation, exact package/source bindings, safe terminal coordinates and their provider-free tests.",
+          "No attempt 005, occupied worker, model/provider call, product, ordinary-practice, data, production, deployment, Pages or protected-ref authority opens."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-rc7-effective-tool-composition-guard",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/provider-free-effective-tool-guard-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact rc.7 mount, inherited-tool, restriction and final-schema guard with deterministic zero-execution evidence."
+        },
+        {
+          "id": "accept-stable-sanitized-terminal-coordinate-vocabulary",
+          "source": "scripts/deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "status": "accepted",
+          "summary": "Accept the closed success/failure coordinate vocabulary and safe tool-name-only detail projection; generic dynamic failures are forbidden."
+        },
+        {
+          "id": "accept-independent-gemini-veto",
+          "source": "orchestration/agent_inbox/antigravity/deepseek-native-harness-effective-tool-composition-terminal-coordinate-guard-gemini37-review-receipt.json",
+          "status": "accepted",
+          "summary": "Accept one fresh Gemini 3.7 Flash/high pass with ten zero-exit commands, 73 passing tests, no P0-P2 finding and an unchanged exact candidate."
+        },
+        {
+          "id": "retain-honest-local-rerun-cost",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Retain eleven grouped local procedural repair events and distinguish them from zero DeepSeek/native/product execution cost."
+        }
+      ],
+      "claim_scope": [
+        "Four exact rc.7 package identities, all frozen member digests and seven source-semantic predicates pass.",
+        "The generated helper proves the exact await-mount, pre-view, inherited-name, one-restriction and exact-final-schema sequence.",
+        "Thirteen deterministic projections, 21 focused tests and 73 combined provider-free tests pass.",
+        "Every guard execution count is zero, including native Harness boots, occupied workers, sessions, broker requests, model requests and provider calls.",
+        "The result is deterministic guard construction and does not claim an actual native composition boot or DeepSeek model performance."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/provider-free-effective-tool-guard-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/provider-free-effective-tool-guard-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-terminal-coordinate-guard-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-terminal-coordinate-guard-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-terminal-coordinate-guard-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-terminal-coordinate-guard-postcompaction-closeout-runtime-state.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-terminal-coordinate-guard-postcompaction-closeout-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-terminal-coordinate-guard-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-effective-tool-composition-terminal-coordinate-guard-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_ariadne_provider_free_no_database_admission.py",
+          "tests/test_ariadne_provider_free_pytest.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/evidence.schema.json",
+          "scripts/deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-terminal-coordinate-guard-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-terminal-coordinate-guard-gemini37-review-packet.md",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-terminal-coordinate-guard-gemini37-review-worktree-preflight.json",
+          "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-effective-tool-composition-guard.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The accepted guard has not yet executed inside one real provider-free rc.7 native composition boot.",
+        "No agent session, broker request, model request, provider call or occupied DeepSeek worker is admitted.",
+        "No attempt 005, ordinary-practice activation, product change, data, production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-20T05:00:08.3025395+10:00",
+      "updated_at": "2026-08-20T05:00:08.3025395+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "dc167c20f5b54b783a57fccb7843f434136c8ca8",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-20T04:21:22.8905530+10:00"
+  "updated_at": "2026-08-20T05:00:08.3025395+10:00"
 }

@@ -1,0 +1,107 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard",
+  "recorded_at": "2026-08-20T05:00:08.3025395+10:00",
+  "outcome": "accepted_deterministic_guard_with_nontrivial_local_construction_reruns",
+  "useful_control_changes": 3,
+  "deepseek_occupied_launches": 0,
+  "deepseek_provider_calls": 0,
+  "native_harness_boots": 0,
+  "gemini_reviews": 1,
+  "gemini_review_retries": 0,
+  "focused_acceptance_tests": 21,
+  "combined_acceptance_tests": 73,
+  "construction_check_runs": 4,
+  "candidate_evidence_publications_before_acceptance": 2,
+  "focused_pytest_runs": 6,
+  "combined_pytest_runs": 1,
+  "verifier_preflight_runs": 2,
+  "procedural_repair_events": [
+    {
+      "id": "rehydration_chunk_output_too_large",
+      "effect": "one AGENTS.md character window exceeded the available context output and had to be reread in smaller non-overlapping windows",
+      "correction": "continue the complete read in 15000-character windows"
+    },
+    {
+      "id": "powershell_inline_conditional_expression_invalid",
+      "effect": "one local npm-cache path projection failed before filesystem access",
+      "correction": "assign the conditional result before constructing the object"
+    },
+    {
+      "id": "temporary_extraction_cleanup_command_rejected",
+      "effect": "the compound temporary extraction and recursive cleanup command was blocked before execution",
+      "correction": "read tar members entirely in memory through the .NET tar reader"
+    },
+    {
+      "id": "scope_package_integrity_transcription_missing_character",
+      "effect": "the first deterministic guard check rejected the dsh-scope Base64 integrity before evidence publication",
+      "correction": "restore the exact registry integrity and rerun the read-only check"
+    },
+    {
+      "id": "semantic_predicates_bound_to_bundled_syntax",
+      "effect": "the second deterministic guard check rejected three fragments because they described bundled lib/index.js syntax rather than exact lib/types/index.js syntax",
+      "correction": "bind predicates to the exact member named in the contract"
+    },
+    {
+      "id": "provider_free_wrapper_direct_script_invocation",
+      "effect": "one wrapper launch failed before pytest because repository modules were not on sys.path",
+      "correction": "invoke the repository wrapper with python -m"
+    },
+    {
+      "id": "selected_tool_order_not_rejected",
+      "effect": "the first focused run exposed that normalization admitted a reordered caller allowlist",
+      "correction": "require the caller sequence itself and its normalized set to equal the frozen sorted allowlist"
+    },
+    {
+      "id": "plan_literal_assertion_drift",
+      "effect": "four focused reruns were spent correcting phrase and line-wrap-sensitive documentation assertions",
+      "correction": "normalize prose whitespace and assert the actual frozen boundary wording"
+    },
+    {
+      "id": "worktree_branch_probe_powershell_parser_error",
+      "effect": "one branch-existence probe failed before Git mutation",
+      "correction": "capture git exit state on a separate statement"
+    },
+    {
+      "id": "verifier_manifest_direct_script_invocation",
+      "effect": "the first verifier worktree preflight rejected command C06 before Gemini dispatch",
+      "correction": "use the required python -m repository-module form"
+    },
+    {
+      "id": "antigravity_launcher_direct_script_invocation",
+      "effect": "the first launcher process failed before Antigravity or provider activity",
+      "correction": "invoke scripts.ariadne_antigravity as a module; the single actual Gemini review then passed"
+    },
+    {
+      "id": "postcompaction_receipt_vocabulary_rejection",
+      "effect": "the first fresh post-compaction receipt rejected one non-canonical leverage value and one non-canonical Antigravity observation method before any closeout action",
+      "correction": "use the configured required_independence leverage and agy_cli_observation method; the corrected five-source receipt passed"
+    },
+    {
+      "id": "clockwork_current_result_successor_target_tense",
+      "effect": "the single successful publication projected the intent's successor target as a present-tense Current-result suffix even though the active latch still requires the native boot",
+      "correction": "retain the mismatch transparently, treat the latch and Next implementation as controlling, and require the successor closeout to replace the suffix with actual native evidence"
+    }
+  ],
+  "clockwork_reading": {
+    "canonical_governance_check_runs": 1,
+    "canonical_governance_publications": 1,
+    "pre_closeout_judgment": "one_check_one_publish_no_mechanical_repair_with_one_semantic_projection_wording_defect",
+    "interpretation": "The deterministic guard prevented every provider and native-runtime waste, and the canonical writer met its one-check/one-publish mechanical target with zero drift. The remaining defect came from the caller-authored meaning of current_position.outcome, showing that typed publication removes clerical mutation failures but still needs a semantic assertion distinguishing accepted result from successor target."
+  },
+  "guard_control_reading": {
+    "exact_rc7_package_binding": "effective",
+    "inherited_vs_scope_local_precondition": "effective",
+    "exact_effective_tool_view": "effective_in_deterministic_projection",
+    "stable_terminal_coordinates": "effective_in_generated_helper_and_hostile_projection",
+    "outer_broker_independence": "preserved",
+    "native_runtime_composition": "not_yet_proven",
+    "conclusion": "The guard closes the deterministic composition and traceability gap without provider cost. One separately frozen provider-free native boot remains necessary before another occupied worker."
+  },
+  "efficiency_judgment": "useful_control_gain_and_mechanically_clean_clockwork_closeout_but_local_reruns_and_one_semantic_projection_defect_remain_above_target",
+  "next_measurement": {
+    "operation_id": "deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof",
+    "success_threshold": "one admitted provider-free native boot reaches the guard, emits the exact pass coordinate, exits cleanly, and uses zero agent sessions, broker requests, model requests, provider calls and retries",
+    "failure_threshold": "any generic terminal, provider or model request, second native attempt, unbounded cleanup, effective tool mismatch or manual correction after the one native terminal"
+  }
+}

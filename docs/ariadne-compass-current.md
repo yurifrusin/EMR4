@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will next prove the exact provider-free rc.7 effective tool composition and stable terminal coordinates before any further occupied DeepSeek worker.
+> EMR4 will next prove the accepted tool-composition guard in exactly one provider-free native rc.7 boot before considering any occupied DeepSeek worker.
 
 ## North star
 
@@ -450,26 +450,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The pinned native Harness reaches the local custom runner through its real watched headless profile path without a model or provider call. Lineage parent: `ariadne-provider-free-no-database-manifest-runner-admission-repair`.
 217. **Make the relay-free recovery harness retain its server attachment through the complete owned lifecycle and expose the exact post-readiness failure branch — Check-in server-attachment lifetime and post-readiness observability conformance repair**
    The deterministic repair and independent veto pass, while the first native-Harness worker exposes a separate pre-provider effective-tool composition gap. Lineage parent: `deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof`.
+218. **Give Ariadne a deterministic pre-provider reading of the rc.7 worker tool plane and a stable terminal coordinate before any occupied DeepSeek work — DeepSeek native Harness provider-free effective-tool composition and terminal-coordinate guard**
+   The exact guard and independent veto pass with zero native or DeepSeek execution; local construction reruns remain honestly visible. Lineage parent: `raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair`.
 
 ## Current position
 
-**Close the native Harness effective-tool composition and terminal-coordinate gap before another occupied DeepSeek worker — Check-in server-attachment lifetime and post-readiness observability conformance repair**
+**Prove the accepted deterministic guard inside one real provider-free native rc.7 composition boot — DeepSeek native Harness provider-free effective-tool composition and terminal-coordinate guard**
 
-**Why this proof came next:** The WorkOrder, latch, broker and cleanup gears worked, but the exact rc.7 preset failed before a provider request because scope-local tools were treated as inherited global tools and the terminal coordinate was generic.
+**Why this proof came next:** Static package/source bindings and hostile projections pass, but a native Harness process has not yet exercised the exact helper and terminal coordinate.
 
-A provider-free guard assembles the exact bounded preset, proves the effective tool view and stable safe terminal coordinates, and rejects any mismatch before provider dispatch.
+One offline, network-denied native boot reaches the guard, observes the exact effective tool view, emits one safe terminal coordinate, exits cleanly and leaves no process or filesystem residue.
 
 ### What this unlocks
 
-- A traceable pre-provider proof that the DeepSeek worker can see exactly read, glob and edit.
-- A stable sanitized failure coordinate for future Harness composition defects.
-- A separately planned occupied worker only after the guard is independently accepted.
+- Native runtime evidence that the rc.7 preset and guard compose exactly as the deterministic contract predicts.
+- A traceable pre-provider terminal suitable for a later separately planned occupied worker.
+- A fresh decision on whether another bounded DeepSeek development package has positive leverage.
 
 ### What it does not solve
 
-- No occupied DeepSeek request or attempt 005 is authorized.
-- No ordinary-practice command, product route, client, flag, grammar or waiting-area behavior is enabled.
-- No product, patient, appointment, clinical, protected, production, deployment, release, Pages or protected integration opens.
+- No agent session, broker/model/provider request or occupied worker is authorised.
+- No attempt 005, ordinary-practice command or product change is authorised.
+- No data, production, deployment, release, Pages or protected integration opens.
 
 ## Continuity and authority
 
@@ -1208,6 +1210,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-plan.md`
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md`
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md`
+- `docs/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard-closeout.md`
 - `docs/diary/diary.css`
 - `docs/diary/diary.html`
 - `docs/diary/diary.js`
@@ -1311,7 +1314,6 @@ Prerequisites:
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-architecture.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-plan.md`
-- `docs/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-closeout.md`
 - `docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-closeout.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-plan.md`
@@ -1758,6 +1760,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/ariadne-prime-derived-harness-adaptations-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-risk-weighted-workflow-reform-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-transactional-closeout-control-plane-gemini37-corrected-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/deepseek-native-harness-effective-tool-composition-terminal-coordinate-guard-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/deepseek-native-harness-hmr-boot-proof-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-request-contract-recovery-review-2-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-code-review-receipt.json`
@@ -1920,6 +1923,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-pre-dispatch-receipt.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-terminal-coordinate-guard-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-worker-terminal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-predispatch-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-first-admission-sol-acceptance.md`
@@ -2013,7 +2017,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -2566,6 +2569,8 @@ Prerequisites:
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/manifest.xml`
 - `orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.schema.json`
 - `orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml`
+- `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/efficacy-reading.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/provider-free-effective-tool-guard-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-cost-ledger.json`
@@ -2654,7 +2659,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-evidence.json`
-- `orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/diagnosis.md`
 - `orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md`
@@ -3527,4 +3531,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 322; continuity graph revision 340._
+_Compass map revision 323; continuity graph revision 341._
