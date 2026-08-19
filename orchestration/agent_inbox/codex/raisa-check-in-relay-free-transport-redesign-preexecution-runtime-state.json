@@ -1,0 +1,150 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "run_exactly_one_provider_free_no_database_relay_free_oci_result_channel_proof_after_clockwork_checkpoint_admission",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was freshly reread completely before this plan and its clockwork-owned checkpoint. The Current Baton retains the accepted Continuity 334 / Compass 316 product result while selecting the relay-free transport redesign and binding its in-progress checkpoint to full source 54c099b29af8b3f189c7367168e6db281ca4feaf.",
+    "current_authority_allocation": "GPT Sol owns the frozen material transport boundary and the one serial no-database container lifecycle. DeepSeek is declined because its native Harness still requires a separate stock-headless-to-custom-runner boot proof, Claude Code is no fallback and this lifecycle is not separable. Gemini is reserved for the exact-candidate veto only after occupied deterministic admission. Native subagents are declined under current developer policy and the serial lifecycle constraint.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-plan.md",
+      "docs/security/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-threat-model-delta.md",
+      "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign.md",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/contract.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/evidence.schema.json",
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal-blocked-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-rollback-unknown-commit-recovery-sol-blocked-assessment.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "The three predecessor failures remain immutable negative evidence. This execution may create exactly one network-disabled no-database caller-fixture container from the exact cached image, deliver one random token by attached stdin, read its terminal OCI state and remove the exact captured container. It may not start PostgreSQL, connect to a database, execute SQL, replay the predecessor, open a host relay, use product/config/API/client source or data, enable ordinary practice, change a feature flag/allowlist, call a provider, deploy, release, rebuild Pages or move protected refs. No raw credential, Docker identity, output or log may be serialized. Preserve docs/branding and every unrelated untracked path; explicit-path staging only.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is exact cd40c5c3cfdc57eb72e99ccc9bc88bf593b36e76 while origin remains the earlier published 1f6009943fcc2e8478511b95c85bf50388e3a634. The tracked worktree is clean and 652 unrelated untracked paths are preserved, including all five docs/branding files. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign",
+    "active_tranche": "Raisa provider-free default-off check-in relay-free unknown-response transport redesign",
+    "objective": "Freeze and provider-free prove a relay-free caller/result transport that eliminates the Windows host TCP relay and multiprocessing queue from the evidence path while preserving exact request identity, fail-closed no-retry semantics, authoritative readback, forced-RLS isolation and zero ordinary release; perform no disposable PostgreSQL execution until a separately admitted preexecution gate passes.",
+    "status": "in_progress",
+    "source_head": "54c099b29af8b3f189c7367168e6db281ca4feaf",
+    "authority_source": "Yuri's explicit transport-redesign selection, the blocked predecessor's immutable negative evidence and the accepted runtime-role and tenant-isolation floor.",
+    "checkpoint": {
+      "completed_stage": "The relay-free design, immutable-source contract, closed schemas, typed no-database harness, 256/256 hostile contract mutations, 96/96 hostile OCI states, exact cached-image admission and focused static tests passed at a full-Git candidate; no container or database execution occurred.",
+      "next_executable_stage": "generate_a_fresh_five_source_preexecution_receipt_then_run_exactly_one_no_database_relay_free_oci_result_channel_proof_and_stop_on_any_mismatch",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_local_transport_design_and_authored_synthetic_fixture_only",
+      "accepted_runtime_role_tenant_isolation_attestation_6a2832575e9b4df5c40a13984db7281e79814a94_is_the_floor",
+      "three_predecessor_failed_attempts_remain_immutable_negative_transport_evidence",
+      "windows_host_tcp_relay_and_multiprocessing_queue_excluded_from_the_new_evidence_path",
+      "no_disposable_postgresql_execution_before_new_plan_deterministic_admission_and_fresh_preexecution_receipt",
+      "exact_request_command_idempotency_digest_and_audit_identity_must_be_preserved",
+      "ambiguous_outcome_must_release_no_success_forbid_retry_and_require_authoritative_readback",
+      "forced_rls_tenant_isolation_and_zero_ordinary_admission_release_remain_required",
+      "exact_container_network_role_and_any_local_test_process_cleanup_required",
+      "declarative_manifest_is_fixture_only_and_never_command_or_policy_authority",
+      "no_local_env_live_secret_cloud_hosted_existing_or_product_database",
+      "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_occupied_deepseek_hmr_claude_code_fallback_or_provider_call_before_optional_gemini_veto",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign",
+    "assessed_stage": "preexecution_no_database_oci_result_channel_proof",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The native Harness still requires its separate stock-headless-to-custom-runner boot proof, Claude Code is no fallback and one mutable container lifecycle cannot be delegated economically.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "A fresh exact-candidate veto is required only after the occupied no-database proof and deterministic postconditions pass.",
+        "work_packages": ["later_exact_candidate_read_only_veto_after_occupied_admission"]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Current developer policy prohibits proactive delegation and the exact container creation, attach, state read and cleanup sequence is serial.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "create at most one exact network-disabled no-database fixture container",
+      "derive outcome before attachment disposition",
+      "remove only the exact captured container after identity reverification",
+      "stop without repeat on any mismatch",
+      "retain protected refs and unrelated untracked paths unchanged"
+    ],
+    "reassessment_triggers": [
+      "after the occupied no-database proof",
+      "before Gemini exact-candidate veto",
+      "before closeout",
+      "before any later PostgreSQL planning"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh full five-source preexecution rehydration after the clockwork checkpoint",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Five authorities, the active checkpoint, exact candidate, cached image and zero prior residue were freshly verified."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No dispatch; separate boot proof remains prerequisite."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Historical only; no fallback selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Reserved for the post-occupied exact-candidate veto."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["Declined under developer policy and serial lifecycle constraint."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected; no silent fallback."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

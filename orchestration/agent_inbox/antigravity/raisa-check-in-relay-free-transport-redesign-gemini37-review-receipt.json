@@ -1,0 +1,253 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\check-in-relay-free-gemini-4f0f54c2",
+  "branch": "codex/review-check-in-relay-free-4f0f54c2",
+  "head_before": "4f0f54c2b0861828f9994444201b8da1bd54be00",
+  "head_after": "4f0f54c2b0861828f9994444201b8da1bd54be00",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "083f32ef42bfb7fb5d831e64a26f7807df2789a6f0e58e20edc24ece2340ceab",
+  "result": "### Ariadne Five-Source Rehydration & Independent Veto Receipt\n\n1. **Rehydration Sources**:\n   - `live_handover_current_baton`: `AGENTS.md` read completely; Baton ref `handoff/current` aligned at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n   - `current_authority_allocation`: Conductor/Integrator is GPT Sol; Independent Reviewer is Gemini 3.7 Flash/high via fresh Antigravity worktree; DeepSeek native harness is paused from occupied EMR4 work; no external worker certification or self-acceptance.\n   - `active_plan_and_acceptance`: `docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-plan.md`, `docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign.md`, and `docs/security/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-threat-model-delta.md` accepted under Yuri's standing transport-redesign selection.\n   - `protected_evidence_boundaries`: Holdouts v1-v10 sealed and unopened; historical troves unopened; no product/patient/clinical/operational data; no ordinary-practice enablement; no deployment/release/Pages; `docs/branding/` preserved.\n   - `git_refs_and_worktree`: Worktree `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-relay-free-gemini-4f0f54c2` on branch `codex/review-check-in-relay-free-4f0f54c2` at HEAD `4f0f54c2b0861828f9994444201b8da1bd54be00`.\n   - Active Operation Latch: `orchestration/continuity/ariadne-active-operation-latch/current.json` verified with status `in_progress`, operation ID `raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign`, and source head `31cbebc4462d2795b9d6bca84a48186901515a6a`.\n   - Parallelism assessment: DeepSeek native Harness declined (paused pending custom runner boot proof); Gemini 3.7 Flash/high active for read-only veto; Native subagents declined (serial lifecycle).\n\n---\n\n### Verification Against Required Challenges\n\n1. **Git candidate hygiene**:\n   - Exact branch `codex/review-check-in-relay-free-4f0f54c2` and full HEAD `4f0f54c2b0861828f9994444201b8da1bd54be00` verified clean before and after review (C01, C02, C10).\n   - Diff base `1f6009943fcc2e8478511b95c85bf50388e3a634` to candidate `4f0f54c2b0861828f9994444201b8da1bd54be00` modifies only allowlisted files (C08, C09).\n\n2. **Immutable predecessor bindings**:\n   - Predecessor attempts 001 (`e357e3a2dec7f0d0740a2ea6f518cb695dc2a5cbf88b9c321dbcd61d6e7bd1c1`), 002 (`bea605006bf36996d439876a4976ec5b733ddc4bb841d5942aae1057c5f514ed`), and 003 (`15cebad64c7bfbddb83878e75cf8f3a0d137a7834075e063c92aead8b603e219`) are exact 64-character SHA-256 bindings in `contract.json`.\n   - Decision source `44c1c8efa2357d9ebdc9ec895fd31e5758bc66d4`, accepted runtime-role source `6a2832575e9b4df5c40a13984db7281e79814a94`, and protected ref source `2e34bdad732fdab32fbf778280b3d3c70d66d602` are full 40-character hex strings with zero abbreviations.\n\n3. **Transport exclusion**:\n   - Static inspection and automated unit tests confirm that the host TCP listener, TCP forwarder, Docker-exec byte bridge, `multiprocessing.Queue`, and multiprocessing process are completely absent from the new transport path.\n   - Container configuration enforces `--network none`, `--log-driver none`, `--pull never`, read-only rootfs, zero port bindings, and zero volume mounts.\n\n4. **Credential custody and delivery**:\n   - Container configuration inspection verifies the container profile before token delivery; token is absent from Docker config, argv, labels, environment, and logs.\n   - Token is delivered via attached stdin into wrapper process memory and unset immediately.\n   - Attachment process lifetime, stdout, stderr, and return code are excluded from outcome classification (`attachment_is_outcome_evidence: false`).\n\n5. **Closed OCI state outcome classification**:\n   - The classifier admits only exact identity match, stopped container (`running: false`), exit code 42, `oom_killed: false`, empty state error, and zero restart count as `simulated_connection_lost_without_complete_terminal_response`.\n   - All hostile/mismatched states (missing, running, 0, 43, other exit codes, OOM, restarts, runtime error) classify as `unresolved_denied` with no success release and no automatic retry.\n\n6. **Pass evidence validation & redaction**:\n   - `transport-evidence.json` validates against `evidence.schema.json` (C07) and binds execution source `cd40c5c3cfdc57eb72e99ccc9bc88bf593b36e76`.\n   - Records 256/256 contract hostile rejections and 96/96 state hostile rejections with 0 escapes.\n   - Claims 0 database processes, 0 connections, 0 transactions, 0 SQL statements, 0 product rows, 0 ordinary releases, and 0 provider calls.\n\n7. **Inert no-database proof execution**:\n   - Entrypoint is overridden to the inert shell wrapper; no `postgres` daemon starts. Cached image `postgres:16-bookworm` (`sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8`) is used without pull.\n   - One-shot run was executed previously and not repeated during review.\n\n8. **Exact cleanup verification**:\n   - Attachment process is terminated and absent prior to container cleanup.\n   - Container deletion is guarded by exact captured ID, profile, name, image, and owner nonce. Zero matching nonce resources remain (`matching_nonce_resources: 0`, `status: cleanup_verified`).\n\n9. **Claim discipline**:\n   - The candidate claims only credential-input separation, OCI-state outcome closure, and exact cleanup.\n   - Explicitly excludes claims of database connectivity, transactions, commit uncertainty resolution, rollback, authoritative readback, exact-once semantics, or product readiness.\n\n10. **Clockwork checkpoint idempotency & pairing**:\n    - Governance clockwork tick CLI (`scripts/ariadne_governance_clockwork_tick.py` and `orchestration_harness/governance_clockwork_tick.py`) matches transactions by exact `intent_sha256` digest rather than operation ID alone, preventing duplicate false-match bugs.\n    - Evidence JSON and report Markdown outputs are generated and updated strictly in pairs.\n\n11. **Manifest execution**:\n    - All 10 commands in the bound command manifest (C01\u2013C10) completed synchronously or via task notification with exit code 0. Worktree remains clean.\n\n12. **Boundary preservation**:\n    - Zero modifications to `app/**`, `docs/api-spine/**`, `docs/branding/**`, OpenAPI/GraphQL schemas, migrations, feature flags, generic status `Arrived`, action grammar, client code, or protected refs.\n\nNo P0-P2 findings, authority widening, result-channel ambiguities, credential leaks, or postcondition defects were found. The candidate fully satisfies all acceptance criteria.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "### Ariadne Five-Source Rehydration & Independent Veto Receipt\n\n1. **Rehydration Sources**:\n   - `live_handover_current_baton`: `AGENTS.md` read completely; Baton ref `handoff/current` aligned at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n   - `current_authority_allocation`: Conductor/Integrator is GPT Sol; Independent Reviewer is Gemini 3.7 Flash/high via fresh Antigravity worktree; DeepSeek native harness is paused from occupied EMR4 work; no external worker certification or self-acceptance.\n   - `active_plan_and_acceptance`: `docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-plan.md`, `docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign.md`, and `docs/security/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-threat-model-delta.md` accepted under Yuri's standing transport-redesign selection.\n   - `protected_evidence_boundaries`: Holdouts v1-v10 sealed and unopened; historical troves unopened; no product/patient/clinical/operational data; no ordinary-practice enablement; no deployment/release/Pages; `docs/branding/` preserved.\n   - `git_refs_and_worktree`: Worktree `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-relay-free-gemini-4f0f54c2` on branch `codex/review-check-in-relay-free-4f0f54c2` at HEAD `4f0f54c2b0861828f9994444201b8da1bd54be00`.\n   - Active Operation Latch: `orchestration/continuity/ariadne-active-operation-latch/current.json` verified with status `in_progress`, operation ID `raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign`, and source head `31cbebc4462d2795b9d6bca84a48186901515a6a`.\n   - Parallelism assessment: DeepSeek native Harness declined (paused pending custom runner boot proof); Gemini 3.7 Flash/high active for read-only veto; Native subagents declined (serial lifecycle).\n\n---\n\n### Verification Against Required Challenges\n\n1. **Git candidate hygiene**:\n   - Exact branch `codex/review-check-in-relay-free-4f0f54c2` and full HEAD `4f0f54c2b0861828f9994444201b8da1bd54be00` verified clean before and after review (C01, C02, C10).\n   - Diff base `1f6009943fcc2e8478511b95c85bf50388e3a634` to candidate `4f0f54c2b0861828f9994444201b8da1bd54be00` modifies only allowlisted files (C08, C09).\n\n2. **Immutable predecessor bindings**:\n   - Predecessor attempts 001 (`e357e3a2dec7f0d0740a2ea6f518cb695dc2a5cbf88b9c321dbcd61d6e7bd1c1`), 002 (`bea605006bf36996d439876a4976ec5b733ddc4bb841d5942aae1057c5f514ed`), and 003 (`15cebad64c7bfbddb83878e75cf8f3a0d137a7834075e063c92aead8b603e219`) are exact 64-character SHA-256 bindings in `contract.json`.\n   - Decision source `44c1c8efa2357d9ebdc9ec895fd31e5758bc66d4`, accepted runtime-role source `6a2832575e9b4df5c40a13984db7281e79814a94`, and protected ref source `2e34bdad732fdab32fbf778280b3d3c70d66d602` are full 40-character hex strings with zero abbreviations.\n\n3. **Transport exclusion**:\n   - Static inspection and automated unit tests confirm that the host TCP listener, TCP forwarder, Docker-exec byte bridge, `multiprocessing.Queue`, and multiprocessing process are completely absent from the new transport path.\n   - Container configuration enforces `--network none`, `--log-driver none`, `--pull never`, read-only rootfs, zero port bindings, and zero volume mounts.\n\n4. **Credential custody and delivery**:\n   - Container configuration inspection verifies the container profile before token delivery; token is absent from Docker config, argv, labels, environment, and logs.\n   - Token is delivered via attached stdin into wrapper process memory and unset immediately.\n   - Attachment process lifetime, stdout, stderr, and return code are excluded from outcome classification (`attachment_is_outcome_evidence: false`).\n\n5. **Closed OCI state outcome classification**:\n   - The classifier admits only exact identity match, stopped container (`running: false`), exit code 42, `oom_killed: false`, empty state error, and zero restart count as `simulated_connection_lost_without_complete_terminal_response`.\n   - All hostile/mismatched states (missing, running, 0, 43, other exit codes, OOM, restarts, runtime error) classify as `unresolved_denied` with no success release and no automatic retry.\n\n6. **Pass evidence validation & redaction**:\n   - `transport-evidence.json` validates against `evidence.schema.json` (C07) and binds execution source `cd40c5c3cfdc57eb72e99ccc9bc88bf593b36e76`.\n   - Records 256/256 contract hostile rejections and 96/96 state hostile rejections with 0 escapes.\n   - Claims 0 database processes, 0 connections, 0 transactions, 0 SQL statements, 0 product rows, 0 ordinary releases, and 0 provider calls.\n\n7. **Inert no-database proof execution**:\n   - Entrypoint is overridden to the inert shell wrapper; no `postgres` daemon starts. Cached image `postgres:16-bookworm` (`sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8`) is used without pull.\n   - One-shot run was executed previously and not repeated during review.\n\n8. **Exact cleanup verification**:\n   - Attachment process is terminated and absent prior to container cleanup.\n   - Container deletion is guarded by exact captured ID, profile, name, image, and owner nonce. Zero matching nonce resources remain (`matching_nonce_resources: 0`, `status: cleanup_verified`).\n\n9. **Claim discipline**:\n   - The candidate claims only credential-input separation, OCI-state outcome closure, and exact cleanup.\n   - Explicitly excludes claims of database connectivity, transactions, commit uncertainty resolution, rollback, authoritative readback, exact-once semantics, or product readiness.\n\n10. **Clockwork checkpoint idempotency & pairing**:\n    - Governance clockwork tick CLI (`scripts/ariadne_governance_clockwork_tick.py` and `orchestration_harness/governance_clockwork_tick.py`) matches transactions by exact `intent_sha256` digest rather than operation ID alone, preventing duplicate false-match bugs.\n    - Evidence JSON and report Markdown outputs are generated and updated strictly in pairs.\n\n11. **Manifest execution**:\n    - All 10 commands in the bound command manifest (C01\u2013C10) completed synchronously or via task notification with exit code 0. Worktree remains clean.\n\n12. **Boundary preservation**:\n    - Zero modifications to `app/**`, `docs/api-spine/**`, `docs/branding/**`, OpenAPI/GraphQL schemas, migrations, feature flags, generic status `Arrived`, action grammar, client code, or protected refs.\n\nNo P0-P2 findings, authority widening, result-channel ambiguities, credential leaks, or postcondition defects were found. The candidate fully satisfies all acceptance criteria.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign",
+          "--check"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/check-in-relay-free-gemini-4f0f54c2",
+          "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+          "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_plan.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "scripts/raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+          "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "scripts/raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+          "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-c",
+          "import json; from pathlib import Path; from jsonschema import Draft202012Validator; b=Path('orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign'); e=json.loads((b/'transport-evidence.json').read_text(encoding='utf-8')); s=json.loads((b/'evidence.schema.json').read_text(encoding='utf-8')); Draft202012Validator(s).validate(e); assert e['source_head']=='cd40c5c3cfdc57eb72e99ccc9bc88bf593b36e76'; assert e['closed_state']['exit_code']==42; assert e['cleanup']['matching_nonce_resources']==0"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "1f6009943fcc2e8478511b95c85bf50388e3a634..4f0f54c2b0861828f9994444201b8da1bd54be00"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "1f6009943fcc2e8478511b95c85bf50388e3a634..4f0f54c2b0861828f9994444201b8da1bd54be00"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "7cc6a399731544da82be516dcfa037713351f9057747d9c4487bd26c4828f51a",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/check-in-relay-free-gemini-4f0f54c2",
+        "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+        "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_plan.py",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "orchestration_harness/governance_clockwork_tick.py",
+        "scripts/ariadne_governance_clockwork_tick.py",
+        "scripts/raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+        "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/governance_clockwork_tick.py",
+        "scripts/ariadne_governance_clockwork_tick.py",
+        "scripts/raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+        "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import json; from pathlib import Path; from jsonschema import Draft202012Validator; b=Path('orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign'); e=json.loads((b/'transport-evidence.json').read_text(encoding='utf-8')); s=json.loads((b/'evidence.schema.json').read_text(encoding='utf-8')); Draft202012Validator(s).validate(e); assert e['source_head']=='cd40c5c3cfdc57eb72e99ccc9bc88bf593b36e76'; assert e['closed_state']['exit_code']==42; assert e['cleanup']['matching_nonce_resources']==0"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "1f6009943fcc2e8478511b95c85bf50388e3a634..4f0f54c2b0861828f9994444201b8da1bd54be00"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "1f6009943fcc2e8478511b95c85bf50388e3a634..4f0f54c2b0861828f9994444201b8da1bd54be00"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

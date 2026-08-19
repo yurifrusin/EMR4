@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/check-in-relay-free-gemini-4f0f54c2",
+  "branch": "codex/review-check-in-relay-free-4f0f54c2",
+  "head": "4f0f54c2b0861828f9994444201b8da1bd54be00",
+  "expected_head": "4f0f54c2b0861828f9994444201b8da1bd54be00",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "7cc6a399731544da82be516dcfa037713351f9057747d9c4487bd26c4828f51a",
+  "command_count": 10,
+  "repository_paths": [],
+  "candidate_paths": [],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/check-in-relay-free-gemini-4f0f54c2",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

@@ -1,0 +1,126 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free default-off check-in relay-free unknown-response transport redesign",
+    "completed_stage": "The relay-free design, immutable-source contract, closed schemas, typed no-database harness, 256/256 hostile contract mutations, 96/96 hostile OCI states, exact cached-image admission and focused static tests passed at a full-Git candidate; no container or database execution occurred.",
+    "next_executable_stage": "generate_a_fresh_five_source_preexecution_receipt_then_run_exactly_one_no_database_relay_free_oci_result_channel_proof_and_stop_on_any_mismatch",
+    "operation_id": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign",
+    "resume_after_compaction": true,
+    "source_head": "54c099b29af8b3f189c7367168e6db281ca4feaf",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "cd40c5c3cfdc57eb72e99ccc9bc88bf593b36e76",
+    "reason_codes": [],
+    "resolved_commit": "54c099b29af8b3f189c7367168e6db281ca4feaf",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "54c099b29af8b3f189c7367168e6db281ca4feaf"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "cd40c5c3cfdc57eb72e99ccc9bc88bf593b36e76",
+    "branch_origin_aligned": false,
+    "head": "cd40c5c3cfdc57eb72e99ccc9bc88bf593b36e76",
+    "origin_branch_commit": "1f6009943fcc2e8478511b95c85bf50388e3a634",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 654
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "preexecution_no_database_oci_result_channel_proof",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native Harness still requires its separate stock-headless-to-custom-runner boot proof, Claude Code is no fallback and one mutable container lifecycle cannot be delegated economically.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "A fresh exact-candidate veto is required only after the occupied no-database proof and deterministic postconditions pass.",
+        "work_packages": [
+          "later_exact_candidate_read_only_veto_after_occupied_admission"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation and the exact container creation, attach, state read and cleanup sequence is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "after the occupied no-database proof",
+      "before Gemini exact-candidate veto",
+      "before closeout",
+      "before any later PostgreSQL planning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "create at most one exact network-disabled no-database fixture container",
+      "derive outcome before attachment disposition",
+      "remove only the exact captured container after identity reverification",
+      "stop without repeat on any mismatch",
+      "retain protected refs and unrelated untracked paths unchanged"
+    ]
+  },
+  "planned_action": "run_exactly_one_provider_free_no_database_relay_free_oci_result_channel_proof_after_clockwork_checkpoint_admission",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-plan.md",
+      "docs/security/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-threat-model-delta.md",
+      "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign.md",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/contract.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/evidence.schema.json",
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal-blocked-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-rollback-unknown-commit-recovery-sol-blocked-assessment.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the frozen material transport boundary and the one serial no-database container lifecycle. DeepSeek is declined because its native Harness still requires a separate stock-headless-to-custom-runner boot proof, Claude Code is no fallback and this lifecycle is not separable. Gemini is reserved for the exact-candidate veto only after occupied deterministic admission. Native subagents are declined under current developer policy and the serial lifecycle constraint.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam is exact cd40c5c3cfdc57eb72e99ccc9bc88bf593b36e76 while origin remains the earlier published 1f6009943fcc2e8478511b95c85bf50388e3a634. The tracked worktree is clean and 652 unrelated untracked paths are preserved, including all five docs/branding files. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602.",
+    "live_handover_current_baton": "AGENTS.md was freshly reread completely before this plan and its clockwork-owned checkpoint. The Current Baton retains the accepted Continuity 334 / Compass 316 product result while selecting the relay-free transport redesign and binding its in-progress checkpoint to full source 54c099b29af8b3f189c7367168e6db281ca4feaf.",
+    "protected_evidence_boundaries": "The three predecessor failures remain immutable negative evidence. This execution may create exactly one network-disabled no-database caller-fixture container from the exact cached image, deliver one random token by attached stdin, read its terminal OCI state and remove the exact captured container. It may not start PostgreSQL, connect to a database, execute SQL, replay the predecessor, open a host relay, use product/config/API/client source or data, enable ordinary practice, change a feature flag/allowlist, call a provider, deploy, release, rebuild Pages or move protected refs. No raw credential, Docker identity, output or log may be serialized. Preserve docs/branding and every unrelated untracked path; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "emr4.workflow_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign",
+  "measured_at": "2026-08-19T09:50:59.0478032Z",
+  "accepted_candidate": "4f0f54c2b0861828f9994444201b8da1bd54be00",
+  "runtime": {
+    "occupied_proof_runs": 1,
+    "occupied_proof_retries": 0,
+    "database_runs": 0,
+    "provider_calls_before_verifier": 0,
+    "gemini_review_runs": 1,
+    "gemini_review_corrections": 0
+  },
+  "governance": {
+    "clockwork_publications_before_closeout": 3,
+    "manual_canonical_edits": 0,
+    "canonical_drift_events": 0,
+    "protected_ref_movements": 0,
+    "unrelated_untracked_paths_modified": 0
+  },
+  "construction": {
+    "corrective_cycles": 12,
+    "categories": {
+      "receipt_or_source_binding": 3,
+      "plan_or_contract_binding": 2,
+      "immutable_test_fixture": 1,
+      "clockwork_checkpoint_admission_or_idempotency": 2,
+      "implementation_import_or_output_pairing": 2,
+      "review_packet_supporting_path_label": 1,
+      "closeout_manifest_relationship_cardinality": 1
+    },
+    "accepted_runtime_or_verifier_reruns_caused": 0
+  },
+  "interpretation": {
+    "result": "promising_with_remaining_input_projection_cost",
+    "observed_gain": "The clockwork preserved zero canonical drift, derived full Git sources for every published transition, prevented a stale same-operation checkpoint from being silently accepted after repair, and kept the one occupied proof and one independent review free of retries.",
+    "remaining_cost": "Caller-authored runtime-state prose, source evidence and semantic intent still permit fail-closed drafts and transcription corrections before publication.",
+    "next_measurement": "Compare the next relay-free PostgreSQL tranche's occupied runs, verifier corrections, prepublication correction cycles and manual canonical edits against this baseline."
+  }
+}

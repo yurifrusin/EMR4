@@ -1,0 +1,219 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "launch_exactly_one_read_only_gemini_3_7_flash_high_veto_against_the_clean_relay_free_transport_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md Current Baton directs the in-progress relay-free unknown-response transport redesign under the accepted check-in lineage while protected integration remains closed.",
+    "current_authority_allocation": "GPT Sol owns orchestration, deterministic admission, recovery, decision admission, continuity and Git. DeepSeek is declined until its separate native-Harness stock-headless-to-custom-runner boot proof passes, with no Claude Code fallback. Gemini 3.7 Flash/high owns one fresh exact-candidate read-only veto. Native subagents are declined by current developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-plan.md",
+      "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign.md",
+      "docs/security/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/contract.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/evidence.schema.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/transport-evidence.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/pre-review/clockwork-checkpoint-tick-evidence.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-transport-redesign-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-transport-redesign-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-transport-redesign-gemini37-review-worktree-preflight.json"
+    ],
+    "protected_evidence_boundaries": "Only authored-synthetic, provider-free, no-database relay-free transport design and its single already-completed occupied proof are admitted. Review cannot invoke Docker or repeat the proof. No disposable PostgreSQL execution, product/API/config/client change, ordinary-practice admission, generic-status Arrived, grammar, waiting-area movement, product/patient/clinical/protected data, live provider, production, deployment, release, Pages or protected-ref movement. docs/branding and unrelated untracked files remain excluded; explicit-path staging only.",
+    "git_refs_and_worktree": "Task and clean review candidate are exact 4f0f54c2b0861828f9994444201b8da1bd54be00. Review branch codex/review-check-in-relay-free-4f0f54c2 is bound to C:/Users/sarashera/EMR4-worktrees/check-in-relay-free-gemini-4f0f54c2. Local/origin master and local/origin handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; no protected-ref movement is authorized."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign",
+    "active_tranche": "Raisa provider-free default-off check-in relay-free unknown-response transport redesign",
+    "objective": "Freeze and provider-free prove a relay-free caller/result transport that eliminates the Windows host TCP relay and multiprocessing queue from the evidence path while preserving exact request identity, fail-closed no-retry semantics, authoritative readback, forced-RLS isolation and zero ordinary release; perform no disposable PostgreSQL execution until a separately admitted preexecution gate passes.",
+    "status": "in_progress",
+    "source_head": "31cbebc4462d2795b9d6bca84a48186901515a6a",
+    "authority_source": "Yuri's explicit transport-redesign selection, the blocked predecessor's immutable negative evidence and the accepted runtime-role and tenant-isolation floor.",
+    "checkpoint": {
+      "completed_stage": "Exactly one provider-free no-database relay-free OCI result-channel proof passed from full Git source cd40c5c3cfdc57eb72e99ccc9bc88bf593b36e76; the closed evidence is committed at 31cbebc4462d2795b9d6bca84a48186901515a6a, all deterministic gates pass, and the attachment, captured container and matching labelled resources are absent.",
+      "next_executable_stage": "generate_a_fresh_five_source_pre_verifier_receipt_then_dispatch_exactly_one_read_only_gemini_3_7_flash_high_veto_against_the_clean_exact_candidate",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_local_transport_design_and_authored_synthetic_fixture_only",
+      "accepted_runtime_role_tenant_isolation_attestation_6a2832575e9b4df5c40a13984db7281e79814a94_is_the_floor",
+      "three_predecessor_failed_attempts_remain_immutable_negative_transport_evidence",
+      "windows_host_tcp_relay_and_multiprocessing_queue_excluded_from_the_new_evidence_path",
+      "no_disposable_postgresql_execution_before_new_plan_deterministic_admission_and_fresh_preexecution_receipt",
+      "exact_request_command_idempotency_digest_and_audit_identity_must_be_preserved",
+      "ambiguous_outcome_must_release_no_success_forbid_retry_and_require_authoritative_readback",
+      "forced_rls_tenant_isolation_and_zero_ordinary_admission_release_remain_required",
+      "exact_container_network_role_and_any_local_test_process_cleanup_required",
+      "declarative_manifest_is_fixture_only_and_never_command_or_policy_authority",
+      "no_local_env_live_secret_cloud_hosted_existing_or_product_database",
+      "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_occupied_deepseek_hmr_claude_code_fallback_or_provider_call_before_optional_gemini_veto",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign",
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "The new DeepSeek native Harness remains promising but still needs a separate stock-headless-to-custom-runner boot proof before EMR4 worker authority. This tightly coupled one-shot lifecycle is already complete, and Claude Code is not an authorized fallback.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "dispatched",
+        "expected_leverage": "required_independence",
+        "rationale": "One fresh Gemini 3.7 Flash/high exact-candidate read-only veto is required after deterministic admission and the clean ten-command worktree preflight.",
+        "work_packages": [
+          "fresh_exact_candidate_read_only_relay_free_transport_veto_with_exact_ten_command_manifest"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "Current developer policy prohibits proactive native delegation and no user or skill instruction authorizes a native subagent for this tranche.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [
+      "Gemini independently reviews the exact admitted candidate while Sol retains decision and closeout ownership"
+    ],
+    "serial_constraints": [
+      "DeepSeek is not admitted until its separate native-Harness boot proof passes",
+      "Gemini receives one exact clean candidate only after deterministic and occupied admission",
+      "Gemini may execute only the exact read-only packet and ten-command manifest",
+      "Sol alone owns decision admission, recovery, acceptance, continuity and Git"
+    ],
+    "reassessment_triggers": [
+      "verifier_result",
+      "pre_closeout",
+      "successor_preplanning"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh five-source rehydration, valid in-progress latch, full-Git candidate, deterministic admission and clean verifier worktree preflight",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol admitted the exact candidate, one-shot evidence and verifier worktree."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Native Harness is deliberately not dispatched before its separate stock-headless-to-custom-runner boot proof."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Code transport is not selected and is not an authorized fallback for this tranche."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Exact packet, ten-command manifest and clean-worktree preflight are ready; no verifier provider call has yet occurred."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native lane declined; no native subagent was spawned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-native-harness-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

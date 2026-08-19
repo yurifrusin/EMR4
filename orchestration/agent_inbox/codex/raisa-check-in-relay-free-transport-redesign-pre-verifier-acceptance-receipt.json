@@ -1,0 +1,125 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free default-off check-in relay-free unknown-response transport redesign",
+    "completed_stage": "Exactly one provider-free no-database relay-free OCI result-channel proof passed from full Git source cd40c5c3cfdc57eb72e99ccc9bc88bf593b36e76; the closed evidence is committed at 31cbebc4462d2795b9d6bca84a48186901515a6a, all deterministic gates pass, and the attachment, captured container and matching labelled resources are absent.",
+    "next_executable_stage": "generate_a_fresh_five_source_pre_verifier_receipt_then_dispatch_exactly_one_read_only_gemini_3_7_flash_high_veto_against_the_clean_exact_candidate",
+    "operation_id": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign",
+    "resume_after_compaction": true,
+    "source_head": "31cbebc4462d2795b9d6bca84a48186901515a6a",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "4f0f54c2b0861828f9994444201b8da1bd54be00",
+    "reason_codes": [],
+    "resolved_commit": "31cbebc4462d2795b9d6bca84a48186901515a6a",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "31cbebc4462d2795b9d6bca84a48186901515a6a"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "4f0f54c2b0861828f9994444201b8da1bd54be00",
+    "branch_origin_aligned": false,
+    "head": "4f0f54c2b0861828f9994444201b8da1bd54be00",
+    "origin_branch_commit": "1f6009943fcc2e8478511b95c85bf50388e3a634",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 659
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The new DeepSeek native Harness remains promising but still needs a separate stock-headless-to-custom-runner boot proof before EMR4 worker authority. This tightly coupled one-shot lifecycle is already complete, and Claude Code is not an authorized fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high exact-candidate read-only veto is required after deterministic admission and the clean ten-command worktree preflight.",
+        "work_packages": [
+          "fresh_exact_candidate_read_only_relay_free_transport_veto_with_exact_ten_command_manifest"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation and no user or skill instruction authorizes a native subagent for this tranche.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign",
+    "parallel_work_packages": [
+      "Gemini independently reviews the exact admitted candidate while Sol retains decision and closeout ownership"
+    ],
+    "reassessment_triggers": [
+      "verifier_result",
+      "pre_closeout",
+      "successor_preplanning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "DeepSeek is not admitted until its separate native-Harness boot proof passes",
+      "Gemini receives one exact clean candidate only after deterministic and occupied admission",
+      "Gemini may execute only the exact read-only packet and ten-command manifest",
+      "Sol alone owns decision admission, recovery, acceptance, continuity and Git"
+    ]
+  },
+  "planned_action": "launch_exactly_one_read_only_gemini_3_7_flash_high_veto_against_the_clean_relay_free_transport_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-plan.md",
+      "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign.md",
+      "docs/security/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/contract.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/evidence.schema.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/transport-evidence.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/pre-review/clockwork-checkpoint-tick-evidence.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-transport-redesign-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-transport-redesign-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-transport-redesign-gemini37-review-worktree-preflight.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns orchestration, deterministic admission, recovery, decision admission, continuity and Git. DeepSeek is declined until its separate native-Harness stock-headless-to-custom-runner boot proof passes, with no Claude Code fallback. Gemini 3.7 Flash/high owns one fresh exact-candidate read-only veto. Native subagents are declined by current developer policy.",
+    "git_refs_and_worktree": "Task and clean review candidate are exact 4f0f54c2b0861828f9994444201b8da1bd54be00. Review branch codex/review-check-in-relay-free-4f0f54c2 is bound to C:/Users/sarashera/EMR4-worktrees/check-in-relay-free-gemini-4f0f54c2. Local/origin master and local/origin handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602; no protected-ref movement is authorized.",
+    "live_handover_current_baton": "AGENTS.md Current Baton directs the in-progress relay-free unknown-response transport redesign under the accepted check-in lineage while protected integration remains closed.",
+    "protected_evidence_boundaries": "Only authored-synthetic, provider-free, no-database relay-free transport design and its single already-completed occupied proof are admitted. Review cannot invoke Docker or repeat the proof. No disposable PostgreSQL execution, product/API/config/client change, ordinary-practice admission, generic-status Arrived, grammar, waiting-area movement, product/patient/clinical/protected data, live provider, production, deployment, release, Pages or protected-ref movement. docs/branding and unrelated untracked files remain excluded; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

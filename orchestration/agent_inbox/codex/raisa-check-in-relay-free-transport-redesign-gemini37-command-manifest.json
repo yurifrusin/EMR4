@@ -1,0 +1,94 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "C01",
+      "argv": ["git", "status", "--short", "--branch"]
+    },
+    {
+      "id": "C02",
+      "argv": ["git", "rev-parse", "HEAD"]
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign",
+        "--check"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/check-in-relay-free-gemini-4f0f54c2",
+        "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+        "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_plan.py",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "orchestration_harness/governance_clockwork_tick.py",
+        "scripts/ariadne_governance_clockwork_tick.py",
+        "scripts/raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+        "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_plan.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/governance_clockwork_tick.py",
+        "scripts/ariadne_governance_clockwork_tick.py",
+        "scripts/raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py",
+        "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_plan.py"
+      ]
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import json; from pathlib import Path; from jsonschema import Draft202012Validator; b=Path('orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign'); e=json.loads((b/'transport-evidence.json').read_text(encoding='utf-8')); s=json.loads((b/'evidence.schema.json').read_text(encoding='utf-8')); Draft202012Validator(s).validate(e); assert e['source_head']=='cd40c5c3cfdc57eb72e99ccc9bc88bf593b36e76'; assert e['closed_state']['exit_code']==42; assert e['cleanup']['matching_nonce_resources']==0"
+      ]
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "1f6009943fcc2e8478511b95c85bf50388e3a634..4f0f54c2b0861828f9994444201b8da1bd54be00"
+      ]
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "1f6009943fcc2e8478511b95c85bf50388e3a634..4f0f54c2b0861828f9994444201b8da1bd54be00"
+      ]
+    },
+    {
+      "id": "C10",
+      "argv": ["git", "status", "--short", "--branch"]
+    }
+  ]
+}
