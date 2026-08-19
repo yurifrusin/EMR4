@@ -1,0 +1,47 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-docker-created-state-profile-conformance-repair",
+  "recorded_at": "2026-08-19T13:09:50.9051335Z",
+  "exact_reviewed_candidate": "260eeda97a3204a39b0f639d216fd7a53c0d2014",
+  "exact_pre_closeout_source": "cf7e86c19e0a33c9702359f4ee4439c4f86ff977",
+  "runtime": {
+    "docker_created_state_executions": 1,
+    "docker_created_state_retries": 0,
+    "database_executions": 0,
+    "provider_worker_executions": 0,
+    "provider_verifier_invocations": 2,
+    "provider_verifier_correction_invocations": 1,
+    "manual_canonical_edits": 0,
+    "clockwork_canonical_drift": 0
+  },
+  "caller_authored_correction_cycles": [
+    {
+      "id": "receipt-adapter-completeness",
+      "count": 1,
+      "effect": "The first user-decision receipt draft omitted two required adapter observations and was rejected before dispatch or canonical publication."
+    },
+    {
+      "id": "checkpoint-intent-version",
+      "count": 1,
+      "effect": "The first plan checkpoint used a non-admitted schema name and was rejected before canonical mutation."
+    },
+    {
+      "id": "verifier-attestation-field",
+      "count": 1,
+      "effect": "The first Gemini manifest asserted a non-existent attestation field; the verifier failed closed, its receipt was retained, and one fresh corrected veto was required."
+    },
+    {
+      "id": "checkpoint-text-bound",
+      "count": 1,
+      "effect": "The first pre-closeout checkpoint reading exceeded the 500-character schema bound and was shortened before canonical publication."
+    }
+  ],
+  "redundant_rejected_invocations": [
+    {
+      "id": "publish-after-failed-check",
+      "count": 1,
+      "effect": "A chained publish command ran after the failed checkpoint check and was independently rejected before mutation; validation and publication were then separated."
+    }
+  ],
+  "reading": "The clockwork protected canonical state and prevented every caller-authored correction from causing an occupied rerun, database action or drift. The remaining cost is four prepublication correction cycles, one redundant rejected invocation and one additional external verifier call. The next tranche must pre-execute every exact verifier assertion locally and run clockwork check and publish as separate stages."
+}

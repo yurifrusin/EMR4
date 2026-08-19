@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 335,
+  "graph_revision": 336,
   "harvests": [],
   "nodes": [
     {
@@ -23803,9 +23803,109 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-docker-created-state-profile-conformance-repair",
+      "title": "Docker Created-state profile conformance repair",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri explicitly selected the no-credential Created-state prerequisite and granted standing uninterrupted-development authority through its aim and onward.",
+          "The accepted result opens only a separately frozen one-run attempt-003 plan against the corrected relay-free harness.",
+          "No database execution, ordinary practice, product change, provider worker, patient or clinical data, production, deployment, Pages or protected-ref authority opens."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-created-state-representation",
+          "source": "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/created-state-representation-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact Docker 29.5.3 one-network never-started representation and its closed sanitized evidence."
+        },
+        {
+          "id": "accept-relay-free-profile-predicate-repair",
+          "source": "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/repair-attestation.json",
+          "status": "accepted",
+          "summary": "Accept only the evidence-derived network identity, lifecycle and credential-versus-ownership-nonce predicate corrections."
+        },
+        {
+          "id": "retain-review-control-correction",
+          "source": "orchestration/agent_inbox/antigravity/raisa-docker-created-state-profile-conformance-repair-gemini37-review-receipt.json",
+          "status": "accepted",
+          "summary": "Retain the first fail-closed C07 field-name rejection and the separately named corrected passing veto as traceable control-plane evidence."
+        }
+      ],
+      "claim_scope": [
+        "Docker Engine 29.5.3 represents the admitted Created-state attachment with the captured network name as sole map key, captured network ID as NetworkMode and empty endpoint NetworkID.",
+        "The relay-free harness now admits only exact captured network-name, network-mode and endpoint lifecycle states and separates actual credential absence from exact ownership-nonce placement.",
+        "Exactly one no-credential Created-state run completed with zero retry and exact container, network and labelled-resource cleanup.",
+        "This does not prove PostgreSQL startup, credential delivery, database connectivity, rollback, unknown-commit recovery, product readiness or ordinary admission."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-docker-created-state-profile-conformance-repair-plan.md",
+          "docs/security/raisa-provider-free-docker-created-state-profile-conformance-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/created-state-representation-evidence.json",
+          "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/repair-attestation.json",
+          "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-docker-created-state-profile-conformance-repair-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-docker-created-state-profile-conformance-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-docker-created-state-profile-conformance-repair-user-decision-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-docker-created-state-profile-conformance-repair-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-docker-created-state-profile-conformance-repair-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-docker-created-state-profile-conformance-repair-corrected-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-docker-created-state-profile-conformance-repair-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-docker-created-state-profile-conformance-repair-gemini37-corrected-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+          "tests/test_raisa_provider_free_docker_created_state_profile_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/contract.json",
+          "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/evidence.schema.json",
+          "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/repair-attestation.schema.json",
+          "scripts/raisa_provider_free_docker_created_state_profile_conformance_repair.py",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "No PostgreSQL process has started and no credential delivery, connection, rollback, unknown-commit readback or exact-one effect has been proved by this tranche.",
+        "Attempt 003 requires a separately frozen plan, deterministic admission and a fresh five-source preexecution receipt before one execution.",
+        "Ordinary-practice activation, product changes, live secrets, occupied DeepSeek, production, deployment, release, Pages and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-19T13:09:50.9051335Z",
+      "updated_at": "2026-08-19T13:09:50.9051335Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "cf7e86c19e0a33c9702359f4ee4439c4f86ff977",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-19T09:50:59.0478032Z"
+  "updated_at": "2026-08-19T13:09:50.9051335Z"
 }
