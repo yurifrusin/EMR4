@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/ariadne-deepseek-native-harness-hmr-boot-evidence-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "attempt_id", "result", "failure_classification", "package", "source_contract", "launch", "composition", "lifecycle", "provider_boundary", "cleanup"],
+  "properties": {
+    "schema_version": {"const": "ariadne.deepseek_native_harness_hmr_boot_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "attempt_id": {"const": "native-attempt-001"},
+    "result": {"const": "pass"},
+    "failure_classification": {"type": "null"},
+    "package": {"type": "object"},
+    "source_contract": {"type": "object"},
+    "launch": {"type": "object"},
+    "composition": {"type": "object"},
+    "lifecycle": {"type": "object"},
+    "provider_boundary": {"type": "object"},
+    "cleanup": {"type": "object"}
+  }
+}

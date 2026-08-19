@@ -252,3 +252,43 @@ def test_partial_or_malformed_event_ledger_rejects(tmp_path: Path) -> None:
 
     with pytest.raises(ProofError, match="partial_line"):
         parse_events(ledger)
+
+
+def test_retained_native_attempt_evidence_is_exact_and_clean() -> None:
+    root = CONTRACT_PATH.parent
+    evidence = json.loads(
+        (root / "provider-free-native-harness-hmr-boot-evidence.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    rejected = json.loads(
+        (root / "prelaunch-source-predicate-rejection.json").read_text(encoding="utf-8")
+    )
+
+    assert evidence["attempt_id"] == "native-attempt-001"
+    assert evidence["result"] == "pass"
+    assert evidence["failure_classification"] is None
+    assert evidence["package"]["name"] == "@deepseek-ai/dsh"
+    assert evidence["package"]["version"] == "0.1.0-rc.7"
+    assert evidence["package"]["sha1"] == load_contract()["package"]["tarball_sha1"]
+    assert all(evidence["source_contract"]["checks"].values())
+    assert evidence["launch"]["native_boot_process_count"] == 1
+    assert evidence["launch"]["mutated_after_in_process_readiness"] is True
+    assert evidence["launch"]["exit_code"] == 0
+    assert evidence["lifecycle"]["events"] == EXPECTED_EVENTS
+    assert evidence["lifecycle"]["exact_expected_order"] is True
+    assert evidence["lifecycle"]["readiness_source"] == "in_process_sentinel_only"
+    assert set(evidence["provider_boundary"].values()) >= {0}
+    for key in (
+        "network_attempt_count",
+        "model_request_count",
+        "broker_request_count",
+        "provider_request_count",
+        "agent_session_count",
+    ):
+        assert evidence["provider_boundary"][key] == 0
+    assert evidence["cleanup"]["process_absent"] is True
+    assert evidence["cleanup"]["disposable_root_absent"] is True
+    assert rejected["result"] == "fail"
+    assert rejected["launch"]["native_boot_process_count"] == 0
+    assert rejected["cleanup"]["disposable_root_absent"] is True
