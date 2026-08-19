@@ -57,9 +57,7 @@
         "The focused 48-test suite, wider 527-function admitted clockwork selection and 128 hostile mutations pass without prohibited deterministic invocation.",
         "The corrected evidence is location-neutral across the main and isolated verifier worktrees."
       ],
-      "contract_evidence": [
-        "orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/contract.json"
-      ],
+      "contract_evidence": [],
       "evidence": {
         "plans": [
           "docs/ariadne-provider-free-no-database-manifest-runner-admission-repair-plan.md",
@@ -160,6 +158,11 @@
       {
         "incident_id": "no-database-pre-verifier-observation-method",
         "source_id": "no-database-pre-verifier-advisory-check-attempt-001",
+        "peers": []
+      },
+      {
+        "incident_id": "no-database-closeout-contract-evidence-shape",
+        "source_id": "no-database-closeout-check-attempt-001",
         "peers": []
       }
     ],

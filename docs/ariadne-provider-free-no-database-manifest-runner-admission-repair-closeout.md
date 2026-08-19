@@ -76,6 +76,11 @@ correction and the first Gemini portability rejection are retained here as
 efficacy readings. They are not manually projected into the clockwork-owned
 canonical error register.
 
+The first closeout check then rejected a path string where the optional graph
+projection accepts structured contract-evidence records. No publication
+occurred. The contract remains explicitly retained as a tranche artifact, and
+the corrected optional projection is empty rather than fabricating a record.
+
 ## Parallelism closeout
 
 - DeepSeek was not invoked. Its native Harness cannot review its own broker
