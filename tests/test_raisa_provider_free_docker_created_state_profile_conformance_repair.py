@@ -303,14 +303,17 @@ def test_cleanup_removes_only_exact_owned_objects(monkeypatch: pytest.MonkeyPatc
     assert ("network", "rm", values["network_id"]) in calls
 
 
-def test_one_execution_evidence_is_retained_without_failure_or_attestation() -> None:
+def test_one_execution_evidence_and_repair_attestation_are_retained() -> None:
     assert repair.EVIDENCE_PATH.exists()
     assert not repair.FAILURE_PATH.exists()
-    assert not repair.ATTESTATION_PATH.exists()
+    assert repair.ATTESTATION_PATH.exists()
     evidence = repair._load_json(repair.EVIDENCE_PATH)
     repair._validate_evidence(evidence)
     assert evidence["execution_count"] == 1
     assert evidence["retry_count"] == 0
+    attestation = repair._load_json(repair.ATTESTATION_PATH)
+    repair._validate_attestation(attestation)
+    assert attestation["database_execution_authorized"] is False
 
 
 def test_source_contains_no_database_or_product_import() -> None:
