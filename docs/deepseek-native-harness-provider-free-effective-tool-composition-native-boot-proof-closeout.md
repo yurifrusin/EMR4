@@ -53,7 +53,10 @@ Accepted:
 - the plan, exact cache/source binding, one-run latch and deterministic
   controller candidate;
 - 13 focused tests and the 139-test neighbouring Harness/broker/no-database/
-  latch/clockwork/baton suite;
+  latch/clockwork/baton suite; the provider-free closeout wrapper required two
+  recorded test-only reruns after its intentional environment scrub removed
+  both `LOCALAPPDATA` and home discovery, and the corrected test derives the
+  explicit cache root from the repository parent;
 - the immutable failed attempt, zero prohibited calls and complete cleanup;
 - the conclusion that preterminal observability is insufficient and must be
   repaired before any separately named recovery execution.

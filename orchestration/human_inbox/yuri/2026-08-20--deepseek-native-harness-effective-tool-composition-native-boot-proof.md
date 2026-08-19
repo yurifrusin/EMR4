@@ -23,7 +23,10 @@ before we consider a separately named new native run.
 ## Technical summary
 
 - Candidate `b8331387120ade3634e73ba799f4a9fb48389f5b` passed 13 focused and
-  139 combined provider-free tests plus Ruff and compilation.
+  139 combined tests plus Ruff and compilation. The closeout's provider-free
+  wrapper required two test-only reruns because it removed `LOCALAPPDATA` and
+  home discovery; the corrected cache test derives the explicit local cache
+  root from the repository parent.
 - `native-composition-attempt-001` completed exact offline rc.7
   materialisation (`115532 ms`) and retained
   `sentinel_activated -> stock_headless_hmr_ready`.

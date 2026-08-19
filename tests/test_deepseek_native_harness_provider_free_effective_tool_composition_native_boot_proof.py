@@ -13,6 +13,7 @@ from scripts.deepseek_native_harness_provider_free_effective_tool_composition_na
     CONTRACT_PATH,
     EXPECTED_EVENTS,
     NativeCompositionProofError,
+    REPO_ROOT,
     build_patch_pair,
     build_preset_source,
     deterministic_check,
@@ -249,7 +250,8 @@ def test_event_ledger_rejects_reordering_and_duplicates(tmp_path: Path) -> None:
 
 
 def test_deterministic_check_uses_cache_only_and_starts_no_native_process() -> None:
-    projection = deterministic_check()
+    cache_root = REPO_ROOT.parent / "AppData" / "Local" / "npm-cache"
+    projection = deterministic_check(cache_root)
 
     assert projection["package_count"] == 4
     assert projection["cache_blob_sha256"] == (

@@ -9,7 +9,9 @@
     "ruff_result": "pass",
     "compile_result": "pass",
     "cache_package_identity_count": 4,
-    "native_processes_before_admission": 0
+    "native_processes_before_admission": 0,
+    "closeout_provider_free_wrapper_reruns": 2,
+    "closeout_rerun_reason": "The wrapper removed LOCALAPPDATA and home variables as designed. The first correction still used Path.home; the final cache-only test derives the explicit local npm cache root from the repository parent."
   },
   "native_attempt": {
     "attempt_id": "native-composition-attempt-001",
