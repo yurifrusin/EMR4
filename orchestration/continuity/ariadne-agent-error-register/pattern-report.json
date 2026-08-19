@@ -1,16 +1,16 @@
 {
-  "canonical_register_sha256": "5fa0a3629d570a64abf4909b344f23c07b2256ecc1e33affb98b8b65a5d7a4a4",
+  "canonical_register_sha256": "879bb20b63cd1687d74a7fb1813f7ce7facb4045730bdc7b50ea1d3af6b41727",
   "counts": {
     "by_candidate_state": {
-      "accepted_candidate_changed": 114,
-      "canonical_unchanged": 399,
+      "accepted_candidate_changed": 116,
+      "canonical_unchanged": 402,
       "untrusted_partial_worktree": 143
     },
     "by_category": {
-      "command_scope_violation": 88,
+      "command_scope_violation": 89,
       "evidence_misreport": 67,
-      "harness_failure": 54,
-      "operator_error": 36,
+      "harness_failure": 56,
+      "operator_error": 38,
       "output_contract_violation": 237,
       "read_only_violation": 4,
       "reasoning_claim_error": 46,
@@ -18,16 +18,16 @@
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 442,
-      "harness": 54,
-      "operator": 36,
+      "agent_behavior": 443,
+      "harness": 56,
+      "operator": 38,
       "repository": 108,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 378,
-      "material": 118,
-      "moderate": 160
+      "low": 381,
+      "material": 119,
+      "moderate": 161
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -63,7 +63,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 338,
+      "codex-primary-orchestrator::orchestrator": 339,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -128,10 +128,10 @@
       "live-agents-handover::orchestrator": 1,
       "local-apply-patch-operator::orchestrator": 8,
       "local-docker-desktop::orchestrator": 1,
-      "local-powershell-operator::orchestrator": 16,
+      "local-powershell-operator::orchestrator": 17,
       "local-powershell-python-operator::orchestrator": 1,
       "local-python-operator::orchestrator": 5,
-      "local-rg-operator::orchestrator": 3,
+      "local-rg-operator::orchestrator": 4,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
       "model-required-bureau-a3-b3-live-harness::orchestrator": 2,
       "model-required-bureau-c5-live-controller::orchestrator": 1,
@@ -142,6 +142,7 @@
       "ordinary-practice-check-in-readiness-continuity-updater::orchestrator": 2,
       "ordinary-practice-check-in-readiness-plan-tests::orchestrator": 1,
       "ordinary-practice-check-in-readiness-reviewer::orchestrator": 3,
+      "relay-free-sidecar-harness::orchestrator": 2,
       "shadow-clockwork-causal-tick-engine::orchestrator": 1,
       "shadow-clockwork-efficacy-reducer::orchestrator": 1,
       "shadow-clockwork-live-efficacy-tests::orchestrator": 1,
@@ -155,12 +156,12 @@
     "by_role": {
       "implementer": 44,
       "integration_reviewer": 3,
-      "orchestrator": 551,
+      "orchestrator": 556,
       "verifier": 58
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 656,
+  "incident_count": 661,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -200,7 +201,7 @@
       "categories": [
         "command_scope_violation"
       ],
-      "incident_count": 8,
+      "incident_count": 9,
       "incident_ids": [
         "AER-0334",
         "AER-0337",
@@ -209,7 +210,8 @@
         "AER-0429",
         "AER-0432",
         "AER-0455",
-        "AER-0458"
+        "AER-0458",
+        "AER-0659"
       ],
       "origins": [
         "agent_behavior"
@@ -218,6 +220,7 @@
         "Admission gates may be parallelized only as separately captured process results. Never chain validations where a later success can mask an earlier exit, and invoke repository package CLIs through their admitted python -m module path.",
         "After a no-chaining incident, semicolon-composed validation or readback commands are prohibited. Use one process call per gate and record its exit before starting the next gate.",
         "Every validation gate in this tranche must be one separately captured process invocation with exact plan-derived paths. A later Ariadne harness repair will prohibit semicolon-composed validation sequences and fail before execution when an exact requested test path is absent.",
+        "For the remainder of this tranche, each validation, generation, staging, commit and readback gate has exactly one process result; no command separator or conditional successor may join gates.",
         "For the remainder of this tranche, every shell process contains exactly one executable command with no pipe, semicolon or newline-composed successor; output limiting must use that executable's native options only.",
         "No validation, staging, commit or readback operation may share a shell invocation with another gate; record every exit before starting the next process.",
         "No validation, updater or mutating acceptance command may share a shell sequence with readback or later checks; capture its process result first and start every inspection in a distinct tool call.",
@@ -1668,15 +1671,17 @@
       "categories": [
         "operator_error"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0619",
-        "AER-0626"
+        "AER-0626",
+        "AER-0660"
       ],
       "origins": [
         "operator"
       ],
       "prevention_controls": [
+        "Only fixed-string rg queries are permitted for the remainder of this tranche; no compound regular expression may be issued.",
         "Prefer one fixed-string search per known register baseline; any required compound regular expression must be syntax-validated before repository execution.",
         "Use one fixed-string search per known vocabulary token; compound ripgrep expressions are prohibited for the remainder of this closeout."
       ],
@@ -1961,7 +1966,7 @@
       ]
     }
   ],
-  "register_revision": 566,
+  "register_revision": 569,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-19"
 }

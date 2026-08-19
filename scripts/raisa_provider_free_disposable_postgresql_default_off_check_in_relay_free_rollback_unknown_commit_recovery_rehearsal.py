@@ -1195,6 +1195,136 @@ def _network_matches(
         return False
 
 
+def _basic_network_owned(
+    row: dict[str, Any],
+    *,
+    network_id: str,
+    network_name: str,
+    nonce: str,
+    contract: dict[str, Any],
+) -> bool:
+    profile = contract["containment_profile"]
+    labels = row.get("Labels") or {}
+    return bool(
+        row.get("Id") == network_id
+        and row.get("Name") == network_name
+        and labels.get(profile["harness_label_key"])
+        == profile["harness_label_value"]
+        and labels.get(profile["nonce_label_key"]) == nonce
+    )
+
+
+def _basic_container_owned(
+    row: dict[str, Any],
+    *,
+    container_id: str,
+    container_name: str,
+    nonce: str,
+    contract: dict[str, Any],
+) -> bool:
+    profile = contract["containment_profile"]
+    config = row.get("Config") or {}
+    labels = config.get("Labels") or {}
+    return bool(
+        row.get("Id") == container_id
+        and row.get("Name") == "/" + container_name
+        and row.get("Image") == profile["image_id"]
+        and config.get("Image") == profile["image_reference"]
+        and labels.get(profile["harness_label_key"])
+        == profile["harness_label_value"]
+        and labels.get(profile["nonce_label_key"]) == nonce
+    )
+
+
+def _container_profile_predicates(
+    row: dict[str, Any],
+    *,
+    container_id: str,
+    container_name: str,
+    network_id: str,
+    nonce: str,
+    contract: dict[str, Any],
+    kind: str,
+    forbidden_values: tuple[str, ...],
+) -> dict[str, bool]:
+    profile = contract["containment_profile"]
+    try:
+        config = row["Config"]
+        host = row["HostConfig"]
+        labels = config["Labels"] or {}
+        networks = row["NetworkSettings"]["Networks"]
+        ports = row["NetworkSettings"].get("Ports") or {}
+        network_exact = isinstance(networks, dict) and len(networks) == 1
+        endpoint = next(iter(networks.values())) if network_exact else {}
+        serialized = json.dumps(
+            {"Config": config, "HostConfig": host}, sort_keys=True
+        )
+        predicates = {
+            "captured_id": row["Id"] == container_id,
+            "captured_name": row["Name"] == "/" + container_name,
+            "exact_image_id": row["Image"] == profile["image_id"],
+            "exact_image_reference": config["Image"] == profile["image_reference"],
+            "harness_label": labels.get(profile["harness_label_key"])
+            == profile["harness_label_value"],
+            "nonce_label": labels.get(profile["nonce_label_key"]) == nonce,
+            "one_network": network_exact,
+            "captured_network_id": endpoint.get("NetworkID") == network_id,
+            "published_ports_absent": host.get("PortBindings") in (None, {})
+            and all(value in (None, []) for value in ports.values()),
+            "binds_absent": host.get("Binds") in (None, []),
+            "mount_specs_absent": host.get("Mounts") in (None, []),
+            "log_driver_none": (host.get("LogConfig") or {}).get("Type") == "none",
+            "restart_disabled": (host.get("RestartPolicy") or {}).get("Name")
+            == "no",
+            "stdin_open": config.get("OpenStdin") is True,
+            "secret_absent": not any(
+                secret and secret in serialized for secret in forbidden_values
+            ),
+        }
+        if kind == "server":
+            tmpfs = (host.get("Tmpfs") or {}).get(
+                profile["server_tmpfs_destination"]
+            )
+            predicates.update(
+                {
+                    "server_memory": host.get("Memory")
+                    == profile["server_memory_bytes"],
+                    "server_cpu": host.get("NanoCpus")
+                    == profile["server_nano_cpus"],
+                    "server_pids": host.get("PidsLimit")
+                    == profile["server_pids_limit"],
+                    "server_tmpfs": isinstance(tmpfs, str)
+                    and set(tmpfs.split(","))
+                    == set(profile["server_tmpfs_options"].split(",")),
+                }
+            )
+            return predicates
+        tmpfs = (host.get("Tmpfs") or {}).get(
+            profile["sidecar_tmpfs_destination"]
+        )
+        predicates.update(
+            {
+                "action_label": labels.get("emr4.action") == kind,
+                "sidecar_read_only": host.get("ReadonlyRootfs") is True,
+                "sidecar_memory": host.get("Memory")
+                == profile["sidecar_memory_bytes"],
+                "sidecar_cpu": host.get("NanoCpus")
+                == profile["sidecar_nano_cpus"],
+                "sidecar_pids": host.get("PidsLimit")
+                == profile["sidecar_pids_limit"],
+                "sidecar_caps_dropped": host.get("CapDrop") == ["ALL"],
+                "sidecar_no_new_privileges": host.get("SecurityOpt")
+                == ["no-new-privileges"],
+                "sidecar_tmpfs": isinstance(tmpfs, str)
+                and set(tmpfs.split(","))
+                == set(profile["sidecar_tmpfs_options"].split(",")),
+            }
+        )
+        return predicates
+    except (KeyError, TypeError, AttributeError, StopIteration):
+        return {"inspect_shape": False}
+
+
 def _container_matches(
     row: dict[str, Any],
     *,
@@ -1207,57 +1337,18 @@ def _container_matches(
     kind: str,
     forbidden_values: tuple[str, ...],
 ) -> bool:
-    profile = contract["containment_profile"]
-    try:
-        config = row["Config"]
-        host = row["HostConfig"]
-        labels = config["Labels"]
-        endpoint = row["NetworkSettings"]["Networks"][network_name]
-        common = bool(
-            row["Id"] == container_id
-            and row["Name"] == "/" + container_name
-            and row["Image"] == profile["image_id"]
-            and config["Image"] == profile["image_reference"]
-            and labels[profile["harness_label_key"]]
-            == profile["harness_label_value"]
-            and labels[profile["nonce_label_key"]] == nonce
-            and endpoint["NetworkID"] == network_id
-            and not host.get("PortBindings")
-            and not host.get("Binds")
-            and host["LogConfig"]["Type"] == "none"
-            and host["RestartPolicy"]["Name"] == "no"
-            and config["OpenStdin"] is True
-        )
-        serialized = json.dumps(
-            {"Config": config, "HostConfig": host}, sort_keys=True
-        )
-        if any(secret and secret in serialized for secret in forbidden_values):
-            return False
-        if kind == "server":
-            tmpfs = host["Tmpfs"][profile["server_tmpfs_destination"]]
-            return bool(
-                common
-                and host["Memory"] == profile["server_memory_bytes"]
-                and host["NanoCpus"] == profile["server_nano_cpus"]
-                and host["PidsLimit"] == profile["server_pids_limit"]
-                and set(tmpfs.split(","))
-                == set(profile["server_tmpfs_options"].split(","))
-            )
-        tmpfs = host["Tmpfs"][profile["sidecar_tmpfs_destination"]]
-        return bool(
-            common
-            and labels["emr4.action"] == kind
-            and host["ReadonlyRootfs"] is True
-            and host["Memory"] == profile["sidecar_memory_bytes"]
-            and host["NanoCpus"] == profile["sidecar_nano_cpus"]
-            and host["PidsLimit"] == profile["sidecar_pids_limit"]
-            and host["CapDrop"] == ["ALL"]
-            and "no-new-privileges" in host["SecurityOpt"]
-            and set(tmpfs.split(","))
-            == set(profile["sidecar_tmpfs_options"].split(","))
-        )
-    except (KeyError, TypeError, AttributeError):
-        return False
+    del network_name
+    predicates = _container_profile_predicates(
+        row,
+        container_id=container_id,
+        container_name=container_name,
+        network_id=network_id,
+        nonce=nonce,
+        contract=contract,
+        kind=kind,
+        forbidden_values=forbidden_values,
+    )
+    return all(predicates.values())
 
 
 def _create_network(
@@ -1289,7 +1380,27 @@ def _create_network(
         nonce=nonce,
         contract=contract,
     ):
-        _fail("environment", "network_profile_mismatch")
+        cleaned = False
+        if len(rows) == 1 and _basic_network_owned(
+            rows[0],
+            network_id=network_id,
+            network_name=name,
+            nonce=nonce,
+            contract=contract,
+        ):
+            _docker(executable, "network", "rm", network_id, check=False)
+            cleaned = (
+                _docker(
+                    executable, "network", "inspect", network_id, check=False
+                ).returncode
+                != 0
+            )
+        _fail(
+            "environment",
+            "network_profile_mismatch_cleaned"
+            if cleaned
+            else "network_profile_mismatch_cleanup_unverified",
+        )
     return network_id, name
 
 
@@ -1303,6 +1414,7 @@ def _create_server(
     forbidden_values: tuple[str, ...],
 ) -> tuple[str, str]:
     profile = contract["containment_profile"]
+    del network_name
     name = profile["server_name_prefix"] + secrets.token_hex(8)
     completed = _docker(
         executable,
@@ -1344,18 +1456,40 @@ def _create_server(
     if CONTAINER_ID.fullmatch(container_id) is None:
         _fail("environment", "server_id_invalid")
     row = _inspect_container(executable, container_id)
-    if not _container_matches(
+    predicates = _container_profile_predicates(
         row,
         container_id=container_id,
         container_name=name,
-        network_name=network_name,
         network_id=network_id,
         nonce=nonce,
         contract=contract,
         kind="server",
         forbidden_values=forbidden_values,
-    ):
-        _fail("environment", "server_profile_mismatch")
+    )
+    if not all(predicates.values()):
+        failed = ",".join(sorted(key for key, passed in predicates.items() if not passed))
+        cleaned = False
+        if _basic_container_owned(
+            row,
+            container_id=container_id,
+            container_name=name,
+            nonce=nonce,
+            contract=contract,
+        ):
+            _docker(executable, "rm", "--force", container_id, check=False)
+            cleaned = (
+                _docker(
+                    executable, "container", "inspect", container_id, check=False
+                ).returncode
+                != 0
+            )
+        _fail(
+            "environment",
+            "server_profile_mismatch_cleaned"
+            if cleaned
+            else "server_profile_mismatch_cleanup_unverified",
+            failed,
+        )
     return container_id, name
 
 
@@ -1372,6 +1506,7 @@ def _create_sidecar(
     forbidden_values: tuple[str, ...],
 ) -> tuple[str, str]:
     profile = contract["containment_profile"]
+    del network_name
     if action not in contract["action_classes"]:
         _fail("sidecar", "action_not_allowlisted")
     name = profile["sidecar_name_prefix"] + secrets.token_hex(8)
@@ -1420,18 +1555,40 @@ def _create_sidecar(
     if CONTAINER_ID.fullmatch(container_id) is None:
         _fail("sidecar", "container_id_invalid")
     row = _inspect_container(executable, container_id)
-    if not _container_matches(
+    predicates = _container_profile_predicates(
         row,
         container_id=container_id,
         container_name=name,
-        network_name=network_name,
         network_id=network_id,
         nonce=nonce,
         contract=contract,
         kind=action,
         forbidden_values=forbidden_values,
-    ):
-        _fail("sidecar", "container_profile_mismatch")
+    )
+    if not all(predicates.values()):
+        failed = ",".join(sorted(key for key, passed in predicates.items() if not passed))
+        cleaned = False
+        if _basic_container_owned(
+            row,
+            container_id=container_id,
+            container_name=name,
+            nonce=nonce,
+            contract=contract,
+        ):
+            _docker(executable, "rm", "--force", container_id, check=False)
+            cleaned = (
+                _docker(
+                    executable, "container", "inspect", container_id, check=False
+                ).returncode
+                != 0
+            )
+        _fail(
+            "sidecar",
+            "container_profile_mismatch_cleaned"
+            if cleaned
+            else "container_profile_mismatch_cleanup_unverified",
+            failed,
+        )
     return container_id, name
 
 
@@ -1681,6 +1838,9 @@ def _failure_evidence(
     lifecycle: list[str],
     cleanup: dict[str, Any],
 ) -> dict[str, Any]:
+    failed_predicates = []
+    if error.detail and re.fullmatch(r"[a-z_,]+", error.detail):
+        failed_predicates = error.detail.split(",")
     return {
         "schema_version": (
             "emr4.check-in-relay-free-rollback-unknown-response-rehearsal-"
@@ -1689,6 +1849,7 @@ def _failure_evidence(
         "result": "failed_closed",
         "stage": error.stage,
         "code": error.code,
+        "failed_predicates": failed_predicates,
         "evidence_label": EVIDENCE_LABEL,
         "plan_source": PLAN_SOURCE,
         "lifecycle": lifecycle,
@@ -1696,6 +1857,17 @@ def _failure_evidence(
         "retry_count": 0,
         "cleanup": cleanup,
     }
+
+
+def _preserve_primary_error(
+    primary: RehearsalFailure | None,
+    cleanup_error: RehearsalFailure,
+    lifecycle: list[str],
+) -> RehearsalFailure:
+    if primary is None:
+        return cleanup_error
+    lifecycle.append(f"cleanup_{cleanup_error.code}_after_primary_failure")
+    return primary
 
 
 def _write_json(path: Path, value: dict[str, Any]) -> None:
@@ -2181,7 +2353,13 @@ def run_rehearsal() -> tuple[dict[str, Any], dict[str, Any] | None]:
         error = caught
     finally:
         if not _stop_attachment(server_attachment):
-            error = RehearsalFailure("cleanup", "server_attachment_absence_unverified")
+            error = _preserve_primary_error(
+                error,
+                RehearsalFailure(
+                    "cleanup", "server_attachment_absence_unverified"
+                ),
+                lifecycle,
+            )
         if role_created and network_id and server_id:
             try:
                 _run_sidecar(
@@ -2269,7 +2447,11 @@ def run_rehearsal() -> tuple[dict[str, Any], dict[str, Any] | None]:
             ),
         }
         if cleanup["status"] != "cleanup_verified":
-            error = RehearsalFailure("cleanup", "exact_cleanup_unverified")
+            error = _preserve_primary_error(
+                error,
+                RehearsalFailure("cleanup", "exact_cleanup_unverified"),
+                lifecycle,
+            )
     elapsed = round(time.monotonic() - started, 6)
     if error is not None or result is None or attestation is None:
         failure = _failure_evidence(

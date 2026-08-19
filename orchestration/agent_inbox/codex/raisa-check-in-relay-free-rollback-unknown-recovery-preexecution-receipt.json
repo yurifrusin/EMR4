@@ -1,0 +1,122 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in relay-free rollback and unknown-commit recovery rehearsal",
+    "completed_stage": "The frozen contract, five closed schemas, relay-free sidecar harness and focused deterministic tests pass at exact full-Git source 5adbf56b886cb1107dc8c18723c791e4e566c2fd with 366/366 hostile contract mutations, 96/96 manifest mutations, 96/96 OCI states and 24/24 classifier packets denied; no Docker object or database was opened.",
+    "next_executable_stage": "verify_the_exact_cached_image_and_zero_owned_residue_generate_a_fresh_five_source_preexecution_receipt_then_run_exactly_one_disposable_postgresql_proof_and_stop_on_any_mismatch",
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "5adbf56b886cb1107dc8c18723c791e4e566c2fd",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "a0bb02c8531aefdaeeacf0cb7c43b5a592741e81",
+    "reason_codes": [],
+    "resolved_commit": "5adbf56b886cb1107dc8c18723c791e4e566c2fd",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "5adbf56b886cb1107dc8c18723c791e4e566c2fd"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "a0bb02c8531aefdaeeacf0cb7c43b5a592741e81",
+    "branch_origin_aligned": false,
+    "head": "a0bb02c8531aefdaeeacf0cb7c43b5a592741e81",
+    "origin_branch_commit": "b5afa75bfc759efa689d35cd06c5b330e4b7ed05",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 656
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_worker_dispatch",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native DeepSeek Harness still requires its separate boot proof, Claude Code is no authorised fallback, and the one mutable database lifecycle has a single cleanup owner.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high exact-candidate read-only veto is reserved only after the one occupied proof and deterministic post-run packet pass.",
+        "work_packages": [
+          "future_exact_candidate_read_only_relay_free_database_recovery_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation and the tightly coupled lifecycle cannot be split without creating competing cleanup owners.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "occupied_proof_complete",
+      "pre_verifier_acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol alone creates and owns the network server role sidecars and cleanup",
+      "exactly one occupied execution is allowed and stops on any mismatch",
+      "no provider call occurs before successful evidence and deterministic post-run admission",
+      "Gemini reviews only one clean exact candidate after the occupied run passes"
+    ]
+  },
+  "planned_action": "run_exactly_one_provider_free_disposable_postgresql_relay_free_rollback_unknown_commit_recovery_proof_and_stop_on_any_mismatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal/contract.json",
+      "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+      "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-closeout.md",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/transport-evidence.json",
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md",
+      "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol exclusively owns the one tightly coupled disposable Docker/PostgreSQL lifecycle, recovery, acceptance, continuity and Git. DeepSeek is declined because its separate native-Harness boot proof remains outstanding and Claude Code is no fallback. Gemini 3.7 Flash/high is reserved for one fresh exact-candidate veto after the occupied proof and deterministic packet pass. Native subagents are declined by current developer policy and single cleanup ownership.",
+    "git_refs_and_worktree": "Current task HEAD and local task branch are exact a0bb02c8531aefdaeeacf0cb7c43b5a592741e81; origin task branch remains the earlier accepted closeout b5afa75bfc759efa689d35cd06c5b330e4b7ed05. Local/origin master and local/origin handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked worktree is clean and docs/branding remains preserved and untracked. Docker 29.5.3 client/server, exact cached image sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8, zero matching containers, zero matching networks and zero terminal artifacts were read back before dispatch.",
+    "live_handover_current_baton": "AGENTS.md was read completely and the Current Baton now names the in-progress relay-free rollback/unknown-commit recovery rehearsal. The accepted relay-free transport remains Continuity 335 / Compass 317 and the active latch is valid at deterministic source 5adbf56b886cb1107dc8c18723c791e4e566c2fd.",
+    "protected_evidence_boundaries": "Exactly one newly named provider-free disposable local PostgreSQL 16 proof is authorised after exact image and zero-residue admission. Only the frozen authored-synthetic fixture, restricted role, forced RLS and relay-free sidecars may run. No host listener/forwarder/relay/docker-exec bridge/process/queue, retry, live secret, existing/cloud/product database, external network, product/API/config/client change, ordinary enablement, generic-status Arrived, grammar, waiting-area movement, product/patient/clinical/protected data, provider call, production, deployment, release, Pages or protected-ref movement. Credentials use post-inspection attached stdin only; results use exact OCI state only. docs/branding and unrelated untracked files remain excluded; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

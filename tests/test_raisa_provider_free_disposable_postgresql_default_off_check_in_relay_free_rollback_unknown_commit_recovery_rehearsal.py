@@ -248,7 +248,7 @@ def test_container_identity_predicates_reject_secret_configuration(
             },
         },
         "NetworkSettings": {
-            "Networks": {network_name: {"NetworkID": network_id}}
+            "Networks": {"runtime-generated-key": {"NetworkID": network_id}}
         },
     }
     assert harness._container_matches(
@@ -275,6 +275,76 @@ def test_container_identity_predicates_reject_secret_configuration(
         kind="readiness",
         forbidden_values=("f" * 64,),
     )
+
+
+def test_failed_server_acquisition_cleans_exact_owned_id_before_raising(
+    monkeypatch: pytest.MonkeyPatch, contract: dict[str, object]
+) -> None:
+    container_id = "c" * 64
+    calls: list[tuple[str, ...]] = []
+
+    def fake_docker(
+        executable: str,
+        *arguments: str,
+        check: bool = True,
+        timeout: int = 30,
+    ) -> object:
+        del executable, check, timeout
+        calls.append(arguments)
+        if arguments[0] == "create":
+            return type("Result", (), {"stdout": container_id, "returncode": 0})()
+        if arguments[:2] == ("container", "inspect"):
+            return type("Result", (), {"stdout": "", "returncode": 1})()
+        return type("Result", (), {"stdout": "", "returncode": 0})()
+
+    row = {
+        "Id": container_id,
+        "Name": "/emr4-checkin-rfr-pg16-0123456789abcdef",
+        "Image": contract["containment_profile"]["image_id"],
+        "Config": {
+            "Image": contract["containment_profile"]["image_reference"],
+            "Labels": {
+                contract["containment_profile"]["harness_label_key"]: contract[
+                    "containment_profile"
+                ]["harness_label_value"],
+                contract["containment_profile"]["nonce_label_key"]: "b" * 32,
+            },
+        },
+    }
+    monkeypatch.setattr(harness, "_docker", fake_docker)
+    monkeypatch.setattr(harness, "_inspect_container", lambda *_: row)
+    monkeypatch.setattr(
+        harness,
+        "_container_profile_predicates",
+        lambda *_, **__: {"captured_network_id": False},
+    )
+    monkeypatch.setattr(harness.secrets, "token_hex", lambda _: "0123456789abcdef")
+    with pytest.raises(harness.RehearsalFailure) as caught:
+        harness._create_server(
+            "docker.exe",
+            contract,
+            nonce="b" * 32,
+            network_id="a" * 64,
+            network_name="ignored-runtime-key",
+            forbidden_values=("f" * 64,),
+        )
+    assert caught.value.code == "server_profile_mismatch_cleaned"
+    assert caught.value.detail == "captured_network_id"
+    assert ("rm", "--force", container_id) in calls
+
+
+def test_cleanup_error_never_overwrites_primary_coordinate() -> None:
+    lifecycle: list[str] = []
+    primary = harness.RehearsalFailure(
+        "environment", "server_profile_mismatch_cleaned", "server_tmpfs"
+    )
+    cleanup = harness.RehearsalFailure("cleanup", "exact_cleanup_unverified")
+    assert harness._preserve_primary_error(primary, cleanup, lifecycle) is primary
+    assert lifecycle == ["cleanup_exact_cleanup_unverified_after_primary_failure"]
+    failure = harness._failure_evidence(primary, lifecycle, {"status": "failed"})
+    assert failure["stage"] == "environment"
+    assert failure["code"] == "server_profile_mismatch_cleaned"
+    assert failure["failed_predicates"] == ["server_tmpfs"]
 
 
 def test_success_schemas_accept_only_closed_sanitized_shapes(

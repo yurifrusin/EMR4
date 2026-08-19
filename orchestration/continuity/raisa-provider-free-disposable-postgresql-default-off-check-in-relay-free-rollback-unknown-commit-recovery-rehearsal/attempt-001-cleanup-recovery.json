@@ -1,0 +1,21 @@
+{
+  "schema_version": "emr4.check-in-relay-free-rollback-unknown-response-cleanup-recovery.v1",
+  "attempt": 1,
+  "source_head": "5adbf56b886cb1107dc8c18723c791e4e566c2fd",
+  "failure_artifact_sha256": "5c38080aa27615ea1efad166d14a61605596130058498ea03c8b631bbeae3be2",
+  "candidate_multiplicity": 1,
+  "full_container_id_shape_verified": true,
+  "name_prefix_verified": true,
+  "exact_image_verified": true,
+  "harness_label_verified": true,
+  "ownership_nonce_shape_verified": true,
+  "pre_start_state": "created",
+  "database_process_started": false,
+  "published_port_count": 0,
+  "bind_mount_count": 0,
+  "exact_owned_container_removed": true,
+  "matching_container_count_after_recovery": 0,
+  "matching_network_count_after_recovery": 0,
+  "proof_rerun": false,
+  "status": "cleanup_recovered"
+}
