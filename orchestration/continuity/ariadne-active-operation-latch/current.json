@@ -4,11 +4,11 @@
   "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 002",
   "objective": "Freeze and then execute exactly one separately named provider-free authored-synthetic disposable PostgreSQL attempt using the accepted relay-free transport and repaired lifecycle-admission harness, proving explicit rollback leaves zero effect and an incomplete terminal response releases neither success nor retry before restricted-role authoritative readback, with exact cleanup; stop fail-closed on any mismatch.",
   "status": "in_progress",
-  "source_head": "9dd017e6ad3f5d5d681727441a2fd7a50869dca7",
+  "source_head": "c216409f0fc9470117d6cf8dfef938f941f3b64e",
   "authority_source": "Yuri's explicit confirmation of one new attempt, immutable attempt-001 failure and cleanup evidence, accepted relay-free transport, accepted restricted-role/forced-RLS floor and repaired harness source fc772085a02d7db790b938fb845ef4546156d31e.",
   "checkpoint": {
-    "completed_stage": "Yuri explicitly confirmed one separately frozen new attempt after attempt 001 closed blocked; attempt-001 evidence remains immutable and no attempt-002 database execution has occurred.",
-    "next_executable_stage": "freeze_the_narrowest_attempt_002_plan_and_immutable_output_namespace_without_database_execution",
+    "completed_stage": "The corrected frozen plan, fixed attempt adapter and closed envelope schema are committed. The accepted harness remains byte-exact. Static admission passed 366/366 contract, 96/96 manifest, 96/96 OCI-state and 24/24 classifier mutations; focused harness, API Spine, A5.1, latch, Baton and clockwork tests, Ruff and compilation pass at c216409f0fc9470117d6cf8dfef938f941f3b64e. The attempt-002 terminal namespace is empty and no Docker object has been created.",
+    "next_executable_stage": "after_one_fresh_five_source_pre_worker_dispatch_receipt_execute_exactly_one_attempt_002_wrapper_run_then_stop_without_retry_and_preserve_its_terminal_evidence",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
