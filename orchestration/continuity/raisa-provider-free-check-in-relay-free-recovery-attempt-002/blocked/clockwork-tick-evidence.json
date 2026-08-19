@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "6aeb0a5852f2830e9cae6b2c497091ada13032bd",
+  "source_commit": "6aeb0a5852f2830e9cae6b2c497091ada13032bd",
+  "generation_id": "gen-b6db67400e64825046043fbd32ecb834b5c312c144c041696363c840a73dd528",
+  "bundle_sha256": "b6db67400e64825046043fbd32ecb834b5c312c144c041696363c840a73dd528",
+  "previous_generation_id": "gen-48316db23eee1ccdb4af22493f6b7e95b3699894f420aac02b66de2699c03fce",
+  "previous_source_commit": "6aeb0a5852f2830e9cae6b2c497091ada13032bd",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 15,
+  "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-002",
+  "event_kind": "blocked_transition",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

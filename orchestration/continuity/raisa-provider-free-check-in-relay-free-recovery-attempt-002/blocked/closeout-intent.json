@@ -1,0 +1,48 @@
+{
+  "schema_version": "ariadne.governance_live_blocked_transition_intent.v1",
+  "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-002",
+  "completed_stage": "The single authorised attempt-002 execution is consumed. It failed closed before PostgreSQL start on captured_network_id and secret_absent, released no success, made zero retries and produced zero ordinary/product effects. Failure SHA-256 7efb9853beee9723dbb01fac1f03c4392216bfcc15e9f490f4cb0baae08920ff and envelope SHA-256 6418ecf2e2356b6c875a70106136cdc65d6e545ead5fceeb2c793db45ebe2e40 are immutable; cleanup and binding restoration are verified with zero labelled residue.",
+  "user_attention_reason": "This plan cannot be rerun. Any further occupied attempt requires Yuri to authorise a separately frozen descendant after a provider-free no-credential Docker Created-state endpoint representation proof and correction of the contradictory ownership-nonce secret scan.",
+  "terminal_reason": "Attempt 002 exhausted its exact one-run authority before PostgreSQL start. Its fail-closed evidence and cleanup are complete, but the intended rollback and unknown-response transaction proof was not achieved; the operation therefore closes blocked.",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "attempt-002-terminal-readback-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt-002-terminal-readback-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_002.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt-002-terminal-readback-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_002.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}

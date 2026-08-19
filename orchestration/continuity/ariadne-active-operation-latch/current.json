@@ -3,17 +3,17 @@
   "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-002",
   "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 002",
   "objective": "Freeze and then execute exactly one separately named provider-free authored-synthetic disposable PostgreSQL attempt using the accepted relay-free transport and repaired lifecycle-admission harness, proving explicit rollback leaves zero effect and an incomplete terminal response releases neither success nor retry before restricted-role authoritative readback, with exact cleanup; stop fail-closed on any mismatch.",
-  "status": "in_progress",
+  "status": "blocked",
   "source_head": "c216409f0fc9470117d6cf8dfef938f941f3b64e",
   "authority_source": "Yuri's explicit confirmation of one new attempt, immutable attempt-001 failure and cleanup evidence, accepted relay-free transport, accepted restricted-role/forced-RLS floor and repaired harness source fc772085a02d7db790b938fb845ef4546156d31e.",
   "checkpoint": {
-    "completed_stage": "The corrected frozen plan, fixed attempt adapter and closed envelope schema are committed. The accepted harness remains byte-exact. Static admission passed 366/366 contract, 96/96 manifest, 96/96 OCI-state and 24/24 classifier mutations; focused harness, API Spine, A5.1, latch, Baton and clockwork tests, Ruff and compilation pass at c216409f0fc9470117d6cf8dfef938f941f3b64e. The attempt-002 terminal namespace is empty and no Docker object has been created.",
-    "next_executable_stage": "after_one_fresh_five_source_pre_worker_dispatch_receipt_execute_exactly_one_attempt_002_wrapper_run_then_stop_without_retry_and_preserve_its_terminal_evidence",
+    "completed_stage": "The single authorised attempt-002 execution is consumed. It failed closed before PostgreSQL start on captured_network_id and secret_absent, released no success, made zero retries and produced zero ordinary/product effects. Failure SHA-256 7efb9853beee9723dbb01fac1f03c4392216bfcc15e9f490f4cb0baae08920ff and envelope SHA-256 6418ecf2e2356b6c875a70106136cdc65d6e545ead5fceeb2c793db45ebe2e40 are immutable; cleanup and binding restoration are verified with zero labelled residue.",
+    "next_executable_stage": null,
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 0
+      "verification": 1
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,12 +26,12 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": false,
-    "reason": null
+    "required": true,
+    "reason": "This plan cannot be rerun. Any further occupied attempt requires Yuri to authorise a separately frozen descendant after a provider-free no-credential Docker Created-state endpoint representation proof and correction of the contradictory ownership-nonce secret scan."
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "Attempt 002 exhausted its exact one-run authority before PostgreSQL start. Its fail-closed evidence and cleanup are complete, but the intended rollback and unknown-response transaction proof was not achieved; the operation therefore closes blocked."
   },
   "protected_boundaries": [
     "provider_free_uniquely_named_disposable_local_postgresql_only",
