@@ -11,8 +11,7 @@
       "title": "Provider-free native Harness stock-headless-to-custom-runner HMR boot proof",
       "kind": "foundation",
       "relationships": [
-        {"node_id": "ariadne-provider-free-no-database-manifest-runner-admission-repair", "relation": "builds_on"},
-        {"node_id": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission", "relation": "resolves_runtime_gap_from"}
+        {"node_id": "ariadne-provider-free-no-database-manifest-runner-admission-repair", "relation": "builds_on"}
       ],
       "authority": {
         "authorized_openings": [],
@@ -74,7 +73,8 @@
     },
     "incidents": [
       {"incident_id": "native-hmr-prelaunch-source-predicate-format", "source_id": "native-hmr-prelaunch-check-001", "peers": []},
-      {"incident_id": "native-hmr-source-inspection-cleanup-policy-shape", "source_id": "native-hmr-closeout-cleanup-001", "peers": []}
+      {"incident_id": "native-hmr-source-inspection-cleanup-policy-shape", "source_id": "native-hmr-closeout-cleanup-001", "peers": []},
+      {"incident_id": "native-hmr-clockwork-relationship-cardinality-and-vocabulary", "source_id": "native-hmr-clockwork-check-001", "peers": []}
     ],
     "broker": {"enabled": false, "posture": "provider_free_shadow"}
   },
