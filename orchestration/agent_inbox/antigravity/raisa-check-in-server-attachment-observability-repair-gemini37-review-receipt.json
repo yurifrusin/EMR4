@@ -1,0 +1,263 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\checkin-attachment-observability-gemini-9f9984e0",
+  "branch": "codex/review-checkin-attachment-observability-9f9984e0",
+  "head_before": "9f9984e0575beb7b300035fdb74433f5bef32028",
+  "head_after": "9f9984e0575beb7b300035fdb74433f5bef32028",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "22296fd12da654d2199489d84d35fbf71a74059cb061c9db4b9cedabff2a040b",
+  "result": "# Independent Verification Review: Raisa Provider-Free Check-In Server-Attachment Lifetime & Post-Readiness Observability Conformance Repair\n\n## 1. Five Mandatory Authority Sources & Active Operation Latch\n\n1. **`live_handover_current_baton`**: `AGENTS.md` was reread completely in its active version. The current baton and in-progress latch govern this provider-free server-attachment lifetime and post-readiness observability conformance repair. Protected master and handoff/current remain aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n2. **`current_authority_allocation`**: Yuri's standing uninterrupted-development authority admits completion without ceremonial pause. GPT Sol acts as conductor/integrator; the single DeepSeek native-Harness worker attempt is consumed failed closed before any provider call; Gemini 3.7 Flash (high reasoning) owns this isolated read-only veto; native subagents remain declined by policy and serial ownership.\n3. **`active_plan_and_acceptance`**: Verified against `docs/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-plan.md`, `docs/security/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-threat-model-delta.md`, `orchestration/continuity/ariadne-active-operation-latch/current.json`, `orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-pre-verifier-acceptance-runtime-state.json`, `orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-pre-verifier-acceptance-receipt.json`, `scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py`, and `tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py`.\n4. **`protected_evidence_boundaries`**: Protected holdouts v1\u2013v10 remain sealed. Rehearsal attempts 001\u2013004 are immutable. Attempt-004 failure and envelope evidence (`1ccc86c76826aa805a48a8823186f5b0eee6e0b571f6deff59ece0474f5df4d3` and `415f054f10639c2dba2466842ad7b957ce9a66f71f48bf07abe5bfdf4e47e7d5`) are verified exact with zero retry or reclassification. Zero Docker, PostgreSQL, SQL, or database execution took place. No product, patient, appointment, clinical, or protected data was touched. No API Spine / REST / GraphQL schema changes, no ordinary-practice enablement, no generic status `Arrived`, no Pages build, and no protected-ref movement occurred.\n5. **`git_refs_and_worktree`**: Verified clean tracked worktree at `C:\\Users\\sarashera\\EMR4-worktrees\\checkin-attachment-observability-gemini-9f9984e0` on branch `codex/review-checkin-attachment-observability-9f9984e0` at candidate HEAD `9f9984e0575beb7b300035fdb74433f5bef32028`. `refs/heads/master`, `refs/remotes/origin/master`, `refs/heads/handoff/current`, and `refs/remotes/origin/handoff/current` are all exact at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. `docs/branding/` and all unrelated untracked files remain preserved and excluded.\n6. **Active Operation Latch**: `orchestration/continuity/ariadne-active-operation-latch/current.json` is valid and active (`in_progress`) for operation `raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair`.\n7. **Lane Restoration**: The DeepSeek native-Harness worker attempt is consumed failed closed before any provider request; Gemini 3.7 Flash/high holds this one isolated read-only veto; native subagents are declined by policy and serial ownership.\n\n---\n\n## 2. Substantive Challenge Verification\n\n1. **Exact Candidate and Authority**:\n   - Worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\checkin-attachment-observability-gemini-9f9984e0`\n   - Branch: `codex/review-checkin-attachment-observability-9f9984e0`\n   - HEAD: `9f9984e0575beb7b300035fdb74433f5bef32028`\n   - Review Base: `553aef4efd3e23a516ebf32af9abb0f95d1ed284`\n   - Implementation Source: `cfc7eb472aaaa4fdf7ffef35b07a65a2729073c5`\n   - Tracked worktree is verified completely clean.\n\n2. **Attachment Lifetime & Liveness**:\n   - In `scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py`, the early `_stop_attachment(server_attachment)` call and `server_attachment = None` assignment following the readiness sidecar were removed.\n   - The attachment captured by `_start_attached` remains live and owned across post-readiness inspection and all subsequent admitted sidecar stages (`setup_and_catalogue`, `explicit_rollback`, `rollback_readback`, `ambiguous_caller`, `authoritative_readback`, and `role_cleanup`).\n   - No success or failure branch performs early `terminate`, `kill`, or `wait` on the server attachment handle prior to final teardown.\n\n3. **Single Teardown Owner & Error Preservation**:\n   - The final `finally:` block in `run_rehearsal()` remains the sole owner of server attachment teardown, calling `_stop_attachment(server_attachment)` exactly once.\n   - Teardown failure correctly raises/records `cleanup/server_attachment_absence_unverified` via `_preserve_primary_error`, preserving any earlier primary error without overwrite.\n\n4. **Running State Verification Isolation**:\n   - In `_verify_server_after_readiness`, `row.get(\"State\", {}).get(\"Running\") is not True` fails closed at stage `environment` with error code `server_not_running_after_readiness` and `detail=None`, with no predicate detail.\n\n5. **Identity Predicate Sanitization & Failure Mapping**:\n   - When running state is `True`, all container profile predicates are evaluated via `_container_profile_predicates`.\n   - Any non-`True` predicate fails closed with `environment/server_identity_mismatch_after_readiness`.\n   - Failed predicate names are strictly sorted and comma-joined. If any name fails the closed `[a-z_]+` regex, the detail collapses to `[\"inspect_shape\"]`.\n   - No secrets, values, IDs, names, paths, nonce, credentials, raw inspection payloads, or Docker command outputs can leak into failure evidence.\n\n6. **Lifecycle Event Ordering**:\n   - `lifecycle.append(\"relay_free_server_readiness_verified\")` executes only after both running state and all profile identity predicates have successfully passed.\n\n7. **Deterministic Fake-Based Testing**:\n   - `tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py` uses `FakeAttachment` and isolated monkeypatching without importing shared conftest, running Docker, or connecting to PostgreSQL.\n   - Test suite comprehensively verifies:\n     - `test_post_readiness_running_failure_is_distinct_and_has_no_detail` (False, missing, malformed type)\n     - `test_post_readiness_identity_failure_retains_only_sorted_predicate_names` (sorted comma-joined names)\n     - `test_post_readiness_malformed_identity_retains_only_inspect_shape` (shape sanitization)\n     - `test_attachment_stays_live_through_post_readiness_and_next_sidecar_stage` (liveness and execution order)\n     - `test_run_rehearsal_has_no_early_server_attachment_teardown` (source inspection confirming no early teardown)\n\n8. **Attempt-004 Evidence Immutability**:\n   - SHA-256 hashes of `rehearsal-failure-evidence.json` (`1ccc86c76826aa805a48a8823186f5b0eee6e0b571f6deff59ece0474f5df4d3`) and `attempt-004-execution-envelope.json` (`415f054f10639c2dba2466842ad7b957ce9a66f71f48bf07abe5bfdf4e47e7d5`) are exact and unmodified.\n   - No retry, resume, or reclassification of attempt-004 occurred.\n\n9. **DeepSeek Worker Attempt-001 Terminal Evidence & Diagnosis**:\n   - Verified `attempt-terminal-evidence.json`, `runner-terminal.json`, `broker-events.jsonl`, `hmr-events.jsonl`, and `diagnosis.md`.\n   - Broker reached ready state (`ready: true`).\n   - Exactly 0 provider calls were started, completed, or failed (`provider_call_started: 0`, `provider_call_completed: 0`, `provider_call_failed: 0`).\n   - Exactly 0 requests, 0 model steps, 0 tool calls, 0 file changes (`changed_paths: []`), and 0 retries (`automatic_retry_count: 0`) occurred.\n   - All cleanup invariants verified (`harness_home_absent: true`, `provider_key_present_in_worker_environment: false`, `raw_logs_retained: false`, `raw_session_retained: false`).\n   - Diagnosis confirmed: scope-local preset tools (`edit`, `glob`, `read`) were incorrectly passed to rc.7 `agentCtx.tools.restrict()` which restricts inherited global tools, raising a pre-request runner composition error. No DeepSeek model-quality inference is drawn since no model request occurred.\n\n10. **Historical Source-Pin Boundary & Regression Gate**:\n    - Historical plan-freeze and attempt-003/004 source-pin tests correctly reject descendant harness bytes and were preserved without weakening.\n    - All 72 descendant-compatible provider-free test cases in the manifest passed cleanly via `scripts.ariadne_provider_free_pytest`.\n\n11. **Command Manifest Execution**:\n    - All 11 commands (C01\u2013C11) executed in exact sequence with exit code 0, leaving the review worktree pristine and clean.\n\n---\n\n## 3. Verdict Summary\n\nAll 11 substantive challenges, five authority sources, lane assessments, latch controls, and security boundaries are fully satisfied. There are zero P0\u2013P2 findings. The candidate is fully verified.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Independent Verification Review: Raisa Provider-Free Check-In Server-Attachment Lifetime & Post-Readiness Observability Conformance Repair\n\n## 1. Five Mandatory Authority Sources & Active Operation Latch\n\n1. **`live_handover_current_baton`**: `AGENTS.md` was reread completely in its active version. The current baton and in-progress latch govern this provider-free server-attachment lifetime and post-readiness observability conformance repair. Protected master and handoff/current remain aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n2. **`current_authority_allocation`**: Yuri's standing uninterrupted-development authority admits completion without ceremonial pause. GPT Sol acts as conductor/integrator; the single DeepSeek native-Harness worker attempt is consumed failed closed before any provider call; Gemini 3.7 Flash (high reasoning) owns this isolated read-only veto; native subagents remain declined by policy and serial ownership.\n3. **`active_plan_and_acceptance`**: Verified against `docs/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-plan.md`, `docs/security/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-threat-model-delta.md`, `orchestration/continuity/ariadne-active-operation-latch/current.json`, `orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-pre-verifier-acceptance-runtime-state.json`, `orchestration/agent_inbox/codex/raisa-check-in-server-attachment-observability-repair-pre-verifier-acceptance-receipt.json`, `scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py`, and `tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py`.\n4. **`protected_evidence_boundaries`**: Protected holdouts v1\u2013v10 remain sealed. Rehearsal attempts 001\u2013004 are immutable. Attempt-004 failure and envelope evidence (`1ccc86c76826aa805a48a8823186f5b0eee6e0b571f6deff59ece0474f5df4d3` and `415f054f10639c2dba2466842ad7b957ce9a66f71f48bf07abe5bfdf4e47e7d5`) are verified exact with zero retry or reclassification. Zero Docker, PostgreSQL, SQL, or database execution took place. No product, patient, appointment, clinical, or protected data was touched. No API Spine / REST / GraphQL schema changes, no ordinary-practice enablement, no generic status `Arrived`, no Pages build, and no protected-ref movement occurred.\n5. **`git_refs_and_worktree`**: Verified clean tracked worktree at `C:\\Users\\sarashera\\EMR4-worktrees\\checkin-attachment-observability-gemini-9f9984e0` on branch `codex/review-checkin-attachment-observability-9f9984e0` at candidate HEAD `9f9984e0575beb7b300035fdb74433f5bef32028`. `refs/heads/master`, `refs/remotes/origin/master`, `refs/heads/handoff/current`, and `refs/remotes/origin/handoff/current` are all exact at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. `docs/branding/` and all unrelated untracked files remain preserved and excluded.\n6. **Active Operation Latch**: `orchestration/continuity/ariadne-active-operation-latch/current.json` is valid and active (`in_progress`) for operation `raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair`.\n7. **Lane Restoration**: The DeepSeek native-Harness worker attempt is consumed failed closed before any provider request; Gemini 3.7 Flash/high holds this one isolated read-only veto; native subagents are declined by policy and serial ownership.\n\n---\n\n## 2. Substantive Challenge Verification\n\n1. **Exact Candidate and Authority**:\n   - Worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\checkin-attachment-observability-gemini-9f9984e0`\n   - Branch: `codex/review-checkin-attachment-observability-9f9984e0`\n   - HEAD: `9f9984e0575beb7b300035fdb74433f5bef32028`\n   - Review Base: `553aef4efd3e23a516ebf32af9abb0f95d1ed284`\n   - Implementation Source: `cfc7eb472aaaa4fdf7ffef35b07a65a2729073c5`\n   - Tracked worktree is verified completely clean.\n\n2. **Attachment Lifetime & Liveness**:\n   - In `scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py`, the early `_stop_attachment(server_attachment)` call and `server_attachment = None` assignment following the readiness sidecar were removed.\n   - The attachment captured by `_start_attached` remains live and owned across post-readiness inspection and all subsequent admitted sidecar stages (`setup_and_catalogue`, `explicit_rollback`, `rollback_readback`, `ambiguous_caller`, `authoritative_readback`, and `role_cleanup`).\n   - No success or failure branch performs early `terminate`, `kill`, or `wait` on the server attachment handle prior to final teardown.\n\n3. **Single Teardown Owner & Error Preservation**:\n   - The final `finally:` block in `run_rehearsal()` remains the sole owner of server attachment teardown, calling `_stop_attachment(server_attachment)` exactly once.\n   - Teardown failure correctly raises/records `cleanup/server_attachment_absence_unverified` via `_preserve_primary_error`, preserving any earlier primary error without overwrite.\n\n4. **Running State Verification Isolation**:\n   - In `_verify_server_after_readiness`, `row.get(\"State\", {}).get(\"Running\") is not True` fails closed at stage `environment` with error code `server_not_running_after_readiness` and `detail=None`, with no predicate detail.\n\n5. **Identity Predicate Sanitization & Failure Mapping**:\n   - When running state is `True`, all container profile predicates are evaluated via `_container_profile_predicates`.\n   - Any non-`True` predicate fails closed with `environment/server_identity_mismatch_after_readiness`.\n   - Failed predicate names are strictly sorted and comma-joined. If any name fails the closed `[a-z_]+` regex, the detail collapses to `[\"inspect_shape\"]`.\n   - No secrets, values, IDs, names, paths, nonce, credentials, raw inspection payloads, or Docker command outputs can leak into failure evidence.\n\n6. **Lifecycle Event Ordering**:\n   - `lifecycle.append(\"relay_free_server_readiness_verified\")` executes only after both running state and all profile identity predicates have successfully passed.\n\n7. **Deterministic Fake-Based Testing**:\n   - `tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py` uses `FakeAttachment` and isolated monkeypatching without importing shared conftest, running Docker, or connecting to PostgreSQL.\n   - Test suite comprehensively verifies:\n     - `test_post_readiness_running_failure_is_distinct_and_has_no_detail` (False, missing, malformed type)\n     - `test_post_readiness_identity_failure_retains_only_sorted_predicate_names` (sorted comma-joined names)\n     - `test_post_readiness_malformed_identity_retains_only_inspect_shape` (shape sanitization)\n     - `test_attachment_stays_live_through_post_readiness_and_next_sidecar_stage` (liveness and execution order)\n     - `test_run_rehearsal_has_no_early_server_attachment_teardown` (source inspection confirming no early teardown)\n\n8. **Attempt-004 Evidence Immutability**:\n   - SHA-256 hashes of `rehearsal-failure-evidence.json` (`1ccc86c76826aa805a48a8823186f5b0eee6e0b571f6deff59ece0474f5df4d3`) and `attempt-004-execution-envelope.json` (`415f054f10639c2dba2466842ad7b957ce9a66f71f48bf07abe5bfdf4e47e7d5`) are exact and unmodified.\n   - No retry, resume, or reclassification of attempt-004 occurred.\n\n9. **DeepSeek Worker Attempt-001 Terminal Evidence & Diagnosis**:\n   - Verified `attempt-terminal-evidence.json`, `runner-terminal.json`, `broker-events.jsonl`, `hmr-events.jsonl`, and `diagnosis.md`.\n   - Broker reached ready state (`ready: true`).\n   - Exactly 0 provider calls were started, completed, or failed (`provider_call_started: 0`, `provider_call_completed: 0`, `provider_call_failed: 0`).\n   - Exactly 0 requests, 0 model steps, 0 tool calls, 0 file changes (`changed_paths: []`), and 0 retries (`automatic_retry_count: 0`) occurred.\n   - All cleanup invariants verified (`harness_home_absent: true`, `provider_key_present_in_worker_environment: false`, `raw_logs_retained: false`, `raw_session_retained: false`).\n   - Diagnosis confirmed: scope-local preset tools (`edit`, `glob`, `read`) were incorrectly passed to rc.7 `agentCtx.tools.restrict()` which restricts inherited global tools, raising a pre-request runner composition error. No DeepSeek model-quality inference is drawn since no model request occurred.\n\n10. **Historical Source-Pin Boundary & Regression Gate**:\n    - Historical plan-freeze and attempt-003/004 source-pin tests correctly reject descendant harness bytes and were preserved without weakening.\n    - All 72 descendant-compatible provider-free test cases in the manifest passed cleanly via `scripts.ariadne_provider_free_pytest`.\n\n11. **Command Manifest Execution**:\n    - All 11 commands (C01\u2013C11) executed in exact sequence with exit code 0, leaving the review worktree pristine and clean.\n\n---\n\n## 3. Verdict Summary\n\nAll 11 substantive challenges, five authority sources, lane assessments, latch controls, and security boundaries are fully satisfied. There are zero P0\u2013P2 findings. The candidate is fully verified.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/checkin-attachment-observability-gemini-9f9984e0",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002_plan.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal_plan.py",
+          "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_plan.py",
+          "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-c",
+          "import hashlib,json,subprocess; from pathlib import Path; root=Path('.'); sha=lambda p: hashlib.sha256((root/p).read_bytes()).hexdigest(); assert sha('scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py')=='62a18d9ce2a29eb417f491c8ce341416f03183375f042f8c41bcb1f4674df77c'; base=subprocess.check_output(['git','show','b91733b11cbe28d0d22ae4d46308bdc706ea2897:scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py']); assert hashlib.sha256(base).hexdigest()=='eda68427b87db48064bcfb82762d55c51b600cf2ba5d4724a0faae24d8a3db5b'; p='orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-004/'; assert sha(p+'rehearsal-failure-evidence.json')=='1ccc86c76826aa805a48a8823186f5b0eee6e0b571f6deff59ece0474f5df4d3'; assert sha(p+'attempt-004-execution-envelope.json')=='415f054f10639c2dba2466842ad7b957ce9a66f71f48bf07abe5bfdf4e47e7d5'; t=json.loads((root/'orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json').read_text(encoding='utf-8')); assert t['automatic_retry_count']==0 and t['broker']['provider_call_started']==0 and t['runner']['request_count']==0 and t['worker']['changed_paths']==[]"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "553aef4efd3e23a516ebf32af9abb0f95d1ed284..9f9984e0575beb7b300035fdb74433f5bef32028"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "553aef4efd3e23a516ebf32af9abb0f95d1ed284..9f9984e0575beb7b300035fdb74433f5bef32028"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-c",
+          "import subprocess; expected='2e34bdad732fdab32fbf778280b3d3c70d66d602'; refs=['refs/heads/master','refs/remotes/origin/master','refs/heads/handoff/current','refs/remotes/origin/handoff/current']; assert all(subprocess.check_output(['git','rev-parse',r],text=True).strip()==expected for r in refs)"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C11",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "7ae7657d270cafb24e53f6dc98821c3926df013dcdec1798611b06f54cbea158",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/checkin-attachment-observability-gemini-9f9984e0",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_002_plan.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal_plan.py",
+        "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_plan.py",
+        "tests/test_raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import hashlib,json,subprocess; from pathlib import Path; root=Path('.'); sha=lambda p: hashlib.sha256((root/p).read_bytes()).hexdigest(); assert sha('scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py')=='62a18d9ce2a29eb417f491c8ce341416f03183375f042f8c41bcb1f4674df77c'; base=subprocess.check_output(['git','show','b91733b11cbe28d0d22ae4d46308bdc706ea2897:scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py']); assert hashlib.sha256(base).hexdigest()=='eda68427b87db48064bcfb82762d55c51b600cf2ba5d4724a0faae24d8a3db5b'; p='orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-004/'; assert sha(p+'rehearsal-failure-evidence.json')=='1ccc86c76826aa805a48a8823186f5b0eee6e0b571f6deff59ece0474f5df4d3'; assert sha(p+'attempt-004-execution-envelope.json')=='415f054f10639c2dba2466842ad7b957ce9a66f71f48bf07abe5bfdf4e47e7d5'; t=json.loads((root/'orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json').read_text(encoding='utf-8')); assert t['automatic_retry_count']==0 and t['broker']['provider_call_started']==0 and t['runner']['request_count']==0 and t['worker']['changed_paths']==[]"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "553aef4efd3e23a516ebf32af9abb0f95d1ed284..9f9984e0575beb7b300035fdb74433f5bef32028"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "553aef4efd3e23a516ebf32af9abb0f95d1ed284..9f9984e0575beb7b300035fdb74433f5bef32028"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import subprocess; expected='2e34bdad732fdab32fbf778280b3d3c70d66d602'; refs=['refs/heads/master','refs/remotes/origin/master','refs/heads/handoff/current','refs/remotes/origin/handoff/current']; assert all(subprocess.check_output(['git','rev-parse',r],text=True).strip()==expected for r in refs)"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C11",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

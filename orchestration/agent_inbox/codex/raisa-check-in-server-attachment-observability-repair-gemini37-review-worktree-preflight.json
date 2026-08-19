@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/checkin-attachment-observability-gemini-9f9984e0",
+  "branch": "codex/review-checkin-attachment-observability-9f9984e0",
+  "head": "9f9984e0575beb7b300035fdb74433f5bef32028",
+  "expected_head": "9f9984e0575beb7b300035fdb74433f5bef32028",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "7ae7657d270cafb24e53f6dc98821c3926df013dcdec1798611b06f54cbea158",
+  "command_count": 11,
+  "repository_paths": [],
+  "candidate_paths": [
+    "C:/Users/sarashera/EMR4-worktrees/checkin-attachment-observability-gemini-9f9984e0/scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+    "C:/Users/sarashera/EMR4-worktrees/checkin-attachment-observability-gemini-9f9984e0/tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+    "C:/Users/sarashera/EMR4-worktrees/checkin-attachment-observability-gemini-9f9984e0/orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/deepseek-native-worker-attempt-001/diagnosis.md"
+  ],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/checkin-attachment-observability-gemini-9f9984e0",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}
