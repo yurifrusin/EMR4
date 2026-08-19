@@ -120,9 +120,21 @@ def test_intent_rejects_derived_unsafe_and_underbounded_input() -> None:
         validate_tick_intent(underbounded, contract)
 
 
-def test_current_live_generation_prepares_a_derived_second_tick() -> None:
+def test_current_live_generation_is_preparable_or_exactly_selected() -> None:
     contract = validate_contract(_json(CONTRACT_PATH))
     before = validate_live_state(ROOT, contract)
+    transaction = _json(ROOT / contract["clockwork_root"] / "transaction.json")
+    if transaction["operation_id"] == "raisa-provider-free-clockwork-governed-check-in-successor-resolution":
+        selected = validate_tick_live_state(ROOT, contract)
+        graph = _json(ROOT / contract["canonical_paths"]["continuity"])
+        compass = _json(ROOT / contract["canonical_paths"]["compass"])
+        latch = _json(ROOT / contract["canonical_paths"]["active_latch"])
+        assert selected["source_commit"] == "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e"
+        assert selected["previous_generation_id"] == "gen-f3b629e6cbe28061d1340c8ee75fb11e46847a9343338608a780ff3b4240885c"
+        assert graph["graph_revision"] == 332
+        assert compass["map_revision"] == 314
+        assert latch["operation_id"] == "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture"
+        return
     prepared = build_tick_generation(ROOT, contract, _json(INTENT_PATH))
     graph = json.loads(prepared["canonical"]["continuity"].decode("utf-8"))
     compass = json.loads(prepared["canonical"]["compass"].decode("utf-8"))

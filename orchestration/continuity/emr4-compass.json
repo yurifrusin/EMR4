@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 313,
-  "updated_at": "2026-08-19T03:30:00+00:00",
-  "source_graph_revision": 331,
-  "orientation_statement": "EMR4 has adopted one provider-free clockwork owner for repository-governance closeouts; the next read-only tranche resolves the true check-in successor while product and protected authorities remain closed.",
+  "map_revision": 314,
+  "updated_at": "2026-08-19T04:26:41+00:00",
+  "source_graph_revision": 332,
+  "orientation_statement": "EMR4 will next freeze a default-off, non-secret environment-manifest and operational secret-reference architecture before attempting runtime-role attestation or unknown-commit recovery evidence.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4219,26 +4219,38 @@
         "orchestration_harness/governance_live_adoption.py",
         "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
+      "lineage_parent": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+      "strategic_role": "Select the first remaining check-in admission dependency and make live clockwork operation repeatable",
+      "outcome": "The accepted check-in lineage has one unrepeated architecture successor and the live clockwork has a bounded generic second-tick path.",
+      "evidence": [
+        "docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md",
+        "orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
-    "strategic_role": "Operate future repository-governance closeouts through one clockwork owner",
-    "why_now": "The accepted mirror proved exclusivity and rollback, and Yuri explicitly selected live adoption for a long future sequence of closeouts.",
-    "outcome": "The first live clockwork tick owns the canonical governance surfaces and historical direct publishers fail closed.",
+    "node_id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
+    "strategic_role": "Freeze the non-secret ordinary check-in environment boundary before operational drills",
+    "why_now": "Route, admission architecture and unmounted kernel work are accepted; remaining admission gates need one exact environment and runtime-role vocabulary before evidence can be representative.",
+    "outcome": "The next tranche is architecture-only environment-manifest and operational secret-reference posture, with ordinary practice and runtime still denied.",
     "unlocks": [
-      "Measured clockwork use on the next dependency-satisfied repository closeouts.",
-      "A provider-free read-only resolution of the true next check-in product successor under the new controls."
+      "A later ordinary runtime-role and tenant-isolation attestation against a frozen identifier.",
+      "A later rollback and unknown-commit drill against the same frozen environment boundary.",
+      "Measured use of the generic clockwork on subsequent closeouts."
     ],
     "does_not_solve": [
-      "Clockwork adoption does not prove the native DeepSeek Harness HMR boot path.",
-      "No ordinary-practice admission or product behavior changes.",
-      "No product data, provider runtime, deployment, release, Pages or protected integration opens."
+      "No secret, key, database role or selected-practice environment is created or accessed.",
+      "No ordinary-practice check-in command is enabled or mounted.",
+      "No provider, product data, deployment, release, Pages or protected integration opens."
     ],
     "evidence": [
-      "docs/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-plan.md",
-      "docs/security/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-threat-model-delta.md",
-      "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/writer-inventory.json"
+      "docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md",
+      "orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md",
+      "orchestration_harness/governance_clockwork_tick.py"
     ]
   },
   "decision_horizon": [

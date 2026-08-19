@@ -1,0 +1,105 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "C01",
+      "argv": ["git", "status", "--short", "--branch"]
+    },
+    {
+      "id": "C02",
+      "argv": ["git", "rev-parse", "HEAD"]
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_governance_clockwork_tick",
+        "--check",
+        "--intent",
+        "orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/closeout-intent.json"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--timeout-seconds",
+        "300",
+        "--",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-clockwork-tick-gemini-focused"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--timeout-seconds",
+        "300",
+        "--",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_current_baton_consistency.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-clockwork-tick-gemini-surrounding"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "orchestration_harness/governance_clockwork_tick.py",
+        "orchestration_harness/governance_live_adoption.py",
+        "scripts/ariadne_governance_clockwork_tick.py",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ]
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/governance_clockwork_tick.py",
+        "orchestration_harness/governance_live_adoption.py",
+        "scripts/ariadne_governance_clockwork_tick.py"
+      ]
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "c11038545838f685cdabf81aea004470dafd02c6..f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e"
+      ]
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "c11038545838f685cdabf81aea004470dafd02c6..f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e"
+      ]
+    },
+    {
+      "id": "C10",
+      "argv": ["git", "status", "--short", "--branch"]
+    }
+  ]
+}

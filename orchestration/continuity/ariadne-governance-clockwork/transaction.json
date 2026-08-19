@@ -1,77 +1,85 @@
 {
-  "schema_version": "ariadne.governance_live_transaction.v1",
-  "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
-  "transaction_id": "txn-a10b193b121c4eac0deb669c",
-  "source_commit": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
-  "previous_source_commit": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+  "schema_version": "ariadne.governance_live_tick_transaction.v1",
+  "operation_id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
+  "transaction_id": "txn-4fc020d8d8f8652accb21a79",
+  "source_commit": "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e",
+  "previous_source_commit": "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e",
+  "previous_generation_id": "gen-f3b629e6cbe28061d1340c8ee75fb11e46847a9343338608a780ff3b4240885c",
+  "previous_bundle_sha256": "f3b629e6cbe28061d1340c8ee75fb11e46847a9343338608a780ff3b4240885c",
   "previous_canonical_sha256s": {
-    "continuity": "1593ebe467f55d31978e6678728a9879eb8cd4b16affa08395519bc8efd30a2f",
-    "compass": "5056d0b06de40993ec4ab06724a95196547fe471d186732fe61e3f70612d7aa1",
-    "compass_markdown": "27ba843ccb8b3ee362f6ff203c228089b154888a75442ea655e4edb7e7c3381b",
-    "active_latch": "71eed7c0fe60145236f8d954bc13eb3b5b3fa1cdd7151a378d9d5370b687907b",
+    "continuity": "ac290e4ce6b083258e3e97246c47d4b272e3c0b1975a3513be2a2d5d90f46dcb",
+    "compass": "10003deea9827cedeed2211067b00c6668573286c727447c84244de36760fd37",
+    "compass_markdown": "ac81548bef74b64b346952b4cde074c0e5aea6b396abd5a1bc2fd695aea14d5e",
+    "active_latch": "f422d3d78564e8722e0de9b05e27b8503fe8974a4e74fd06ad80070c56475423",
     "error_register": "92df6f2779fea4d5048e0d64d4f07748024ba162354e3ce2e4e191746546223b",
     "pattern_report": "0f0d0a5019674a7cc158dfe0485c0ff048869e08188a613ca29c9e5017666a04",
-    "current_baton": "d5eda4ad3a0f504f920920993a6c2974de0d55c95351ad5814c472ecf43971c5"
+    "current_baton": "1aab47bb4ece51b1d4a67743ec2812dfab095e86dd47d341e1eeffdabd5884c6"
+  },
+  "previous_metadata_sha256s": {
+    "command-manifest.json": "a5e85f3d537bdd9a48a94d4b58befe843f501c869f2b0fbfe265794494b16301",
+    "transaction.json": "8167a643854eb3055ac42c2d51aa1869e7d25bf76e2a2fc5c4aa10a2b18d4a25",
+    "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
+    "generation-manifest.json": "3ae281ae5184565ccbbfc4ab0c7591ee8032546027c721a16a38082567c9d0e8"
   },
   "projection_sha256s": {
-    "graph": "sha256:ca569e43e60d2f7807fcf9f924eda1038e3d92cda05098364b475d8c3a89aaa1",
-    "compass": "sha256:b69fd83c79da029863c5d5ed6690dc3879bbd6dae70c50ce0a80bb305e6f831c",
-    "report": "sha256:2bb73158e6865d1554362bef283fac3972e86b81a1aed00b6df4bcc30a6cffeb",
-    "latch": "sha256:bfe26176919343390f709fbb821f25cc9461fca68b6a8923e40b1f686dde78d2",
+    "graph": "sha256:830a53a91e90e23519650cdbbf98e6d6504d04e4eee24172ccc3c7df283e43d7",
+    "compass": "sha256:de507c8a28080ba6f31bedc2cc3877b4e7e81e97a3b3d242a382f3967a0395d6",
+    "report": "sha256:27c6b15b7c0669bd98bc89fc30744e0fa43d15f886ba5256dad5b52682b1a3ff",
+    "latch": "sha256:80d60e01f0265852f900595b29110e6c709f5a7983324abf93bd66f11d6b0f4f",
     "incident_aggregate": "sha256:012cd99c89990d8a80584cdc38452c69df669aaa4fbdbc83e5f088ec2c190ded"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-a10b193b121c4eac0deb669c",
-      "transaction_id": "txn-a10b193b121c4eac0deb669c",
-      "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+      "journal_id": "journal-4fc020d8d8f8652accb21a79",
+      "transaction_id": "txn-4fc020d8d8f8652accb21a79",
+      "operation_id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
       "event_type": "manifest-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "manifest_sha256": "sha256:dab298be60aa5e92ae24c437c642407812be9fd7befece40139a385131c8cd2c"
+        "manifest_sha256": "sha256:091f767ef2520bad381cb63d6e5aae52eb65b9bb03825291795e777653918697"
       },
-      "event_sha256": "sha256:e48d09f8208c322ae6b2206b84703bf3c4e4fd7f03149d52ca60ca7baea04a83"
+      "event_sha256": "sha256:88b0bd0340f28bd3b1f49536f86905e48183acaf139905b0084d0596ff1975bd"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-a10b193b121c4eac0deb669c",
-      "transaction_id": "txn-a10b193b121c4eac0deb669c",
-      "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+      "journal_id": "journal-4fc020d8d8f8652accb21a79",
+      "transaction_id": "txn-4fc020d8d8f8652accb21a79",
+      "operation_id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
       "sequence": 2,
-      "previous_event_sha256": "sha256:e48d09f8208c322ae6b2206b84703bf3c4e4fd7f03149d52ca60ca7baea04a83",
+      "previous_event_sha256": "sha256:88b0bd0340f28bd3b1f49536f86905e48183acaf139905b0084d0596ff1975bd",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "9014e08a3fb4e3253759e0133d93c5aaf99a7ace",
+        "source_commit": "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e",
         "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
       },
-      "event_sha256": "sha256:1010a213f7d21d46a9093e4b97f870e328871699737e639fb429b663f97d45a3"
+      "event_sha256": "sha256:61127f2ae631dc225654b0d230a35f4467766de27a1be78d1be65bfef6973361"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-a10b193b121c4eac0deb669c",
-      "transaction_id": "txn-a10b193b121c4eac0deb669c",
-      "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+      "journal_id": "journal-4fc020d8d8f8652accb21a79",
+      "transaction_id": "txn-4fc020d8d8f8652accb21a79",
+      "operation_id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
       "sequence": 3,
-      "previous_event_sha256": "sha256:1010a213f7d21d46a9093e4b97f870e328871699737e639fb429b663f97d45a3",
+      "previous_event_sha256": "sha256:61127f2ae631dc225654b0d230a35f4467766de27a1be78d1be65bfef6973361",
       "event_type": "projections-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "graph_revision": 331,
-        "map_revision": 313
+        "graph_revision": 332,
+        "map_revision": 314
       },
-      "event_sha256": "sha256:4738acc368950fb6deabea1ee87edb17424ded1fcb5233a43e7e04bbec870cbf"
+      "event_sha256": "sha256:ea89944d241e61f305db28897cdaa3c7b0b375f06fc264cc9e06902f652538c5"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-a10b193b121c4eac0deb669c",
-      "transaction_id": "txn-a10b193b121c4eac0deb669c",
-      "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+      "journal_id": "journal-4fc020d8d8f8652accb21a79",
+      "transaction_id": "txn-4fc020d8d8f8652accb21a79",
+      "operation_id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
       "sequence": 4,
-      "previous_event_sha256": "sha256:4738acc368950fb6deabea1ee87edb17424ded1fcb5233a43e7e04bbec870cbf",
+      "previous_event_sha256": "sha256:ea89944d241e61f305db28897cdaa3c7b0b375f06fc264cc9e06902f652538c5",
       "event_type": "projections-validated",
       "actor": "gpt-sol",
       "payload": {
@@ -79,25 +87,26 @@
         "compass": "passed",
         "latch": "passed"
       },
-      "event_sha256": "sha256:b4f3c2d6e16d9261ebc082bad9cbb2d4bd7f36c18c4c0ae5e6df83f640ad74af"
+      "event_sha256": "sha256:75a52b81a717c746a771d1684e92c2f30353d721799104691be36c42796e818c"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-a10b193b121c4eac0deb669c",
-      "transaction_id": "txn-a10b193b121c4eac0deb669c",
-      "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+      "journal_id": "journal-4fc020d8d8f8652accb21a79",
+      "transaction_id": "txn-4fc020d8d8f8652accb21a79",
+      "operation_id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
       "sequence": 5,
-      "previous_event_sha256": "sha256:b4f3c2d6e16d9261ebc082bad9cbb2d4bd7f36c18c4c0ae5e6df83f640ad74af",
+      "previous_event_sha256": "sha256:75a52b81a717c746a771d1684e92c2f30353d721799104691be36c42796e818c",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "shadow_directory_rename"
       },
-      "event_sha256": "sha256:ec93ca91cf740603245a226c71d083a57d3eed8546fdb99f061a0a92d645b2ba"
+      "event_sha256": "sha256:efca377d42bc34e158a99414635644bc5b36a7f3f144372ba1b58854b805ceec"
     }
   ],
-  "publication_mode": "lease_bound_pointer_last_live_materialization",
+  "publication_mode": "lease_bound_pointer_last_live_tick",
   "event_kind": "clean_closeout",
+  "next_boundaries_sha256": "sha256:c7ba473e83198e025fd0c4071a9538a2344353ea9b430f7f6cb458f2477a789a",
   "register_bytes_preserved": true,
   "pattern_bytes_preserved": true
 }

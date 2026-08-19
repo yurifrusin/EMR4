@@ -1,0 +1,122 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free default-off ordinary-practice check-in environment-manifest and operational secret posture architecture",
+    "completed_stage": "Accepted raisa-provider-free-clockwork-governed-check-in-successor-resolution at the machine-resolved source.",
+    "next_executable_stage": "rehydrate_and_freeze_the_provider_free_default_off_environment_manifest_and_operational_secret_posture_contract",
+    "operation_id": "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture",
+    "resume_after_compaction": true,
+    "source_head": "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e",
+    "reason_codes": [],
+    "resolved_commit": "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e",
+    "branch_origin_aligned": false,
+    "head": "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e",
+    "origin_branch_commit": "c11038545838f685cdabf81aea004470dafd02c6",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 663
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "closeout_commit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The accepted closeout and next repository-static architecture have no occupied worker package; native Harness HMR proof remains separate and Claude Code is no fallback.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini 3.7 Flash/high completed the exact generic-tick candidate veto with ten zero-exit commands and an unchanged clean worktree.",
+        "work_packages": [
+          "completed_exact_candidate_generic_clockwork_tick_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the closeout commit is a serial single-owner boundary.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "after closeout commit",
+      "before task branch push",
+      "before next architecture plan freeze"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one clockwork generation and one closeout commit",
+      "explicit path staging only",
+      "task branch push only",
+      "protected refs remain exact",
+      "rehydrate the next active architecture before planning"
+    ]
+  },
+  "planned_action": "commit_the_accepted_clockwork_owned_successor_resolution_closeout_on_the_task_branch_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md",
+      "docs/security/raisa-provider-free-clockwork-governed-check-in-successor-resolution-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md",
+      "docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-clockwork-governed-check-in-successor-resolution-sol-acceptance.md",
+      "orchestration/agent_inbox/antigravity/raisa-clockwork-governed-check-in-successor-resolution-gemini37-review-receipt.json",
+      "orchestration/continuity/ariadne-governance-clockwork/current.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the exact-path closeout commit and task-branch push. Gemini completed the exact-candidate veto. DeepSeek and native subagents have no work package; protected integration remains closed.",
+    "git_refs_and_worktree": "The task branch is at exact reviewed candidate f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e with one uncommitted clockwork generation and named closeout artifacts. Local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; docs/branding remains preserved.",
+    "live_handover_current_baton": "The clockwork-owned Baton now records Continuity 332 / Compass 314, exact reviewed source f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e and the default-off environment-manifest architecture successor.",
+    "protected_evidence_boundaries": "The active tranche is provider-free repository-static architecture only. No secrets, database connection or role, product source/configuration, ordinary-practice enablement, data, provider runtime, deployment, Pages or protected-ref movement is authorised. Preserve docs/branding and stage explicit paths only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

@@ -2,7 +2,7 @@
 
 Timestamp: 2026-08-19T14:26:41+10:00 (Australia/Brisbane)
 
-Status: **resolved, pending exact-candidate clockwork-repair verification**
+Status: **accepted**
 
 ## Lineage reading
 
@@ -26,16 +26,21 @@ The first live generation is structurally valid at Continuity 331 / Compass 313 
 
 The generic repair is limited to semantic-intent validation, full-Git predecessor binding, deterministic projection, explicit successor boundaries, pointer-last publication, exact restoration and idempotent validation under the already accepted single owner.
 
-## Efficacy observations before candidate admission
+## Efficacy observations
 
 - Ariadne preplanning validation trips: 2.
 - First trip: unadmitted continuation event `pre_plan`; no plan, dispatch or write was admitted.
 - Second trip: recurring unadmitted leverage term `conditional_independence`; no plan, dispatch or write was admitted.
 - Corrected five-source receipt: passed.
-- Canonical clockwork publications in this tranche: 0.
-- Rollback events: 0.
+- Pre-candidate generic-tick construction corrections: 4 (node-kind vocabulary,
+  prospective-evidence timing, rejection-type normalisation and pre-adoption
+  metadata replay compatibility).
+- Canonical clockwork publications in this tranche: 1.
+- Live rollback events: 0.
 - Legacy-writer guard trips: 0.
 - Manual derived-field edits: 0.
 - Product/provider/runtime/protected-ref actions: 0.
+- Post-publication validation attempts: 4; reruns: 3. All failures were stale
+  historical/current-state test assertions. Canonical republications: 0.
 
-These trips are retained as evidence. The generic tick does not claim to eliminate preflight-runtime authoring mistakes; it removes the larger manual closeout projection and publication surface. The closeout will report the final counts without converting this known recurrence into a bespoke procedure.
+These trips are retained as evidence. The generic tick does not claim to eliminate preflight-runtime authoring mistakes; it removes the larger manual closeout projection and publication surface. The accepted live result is generation `gen-5a0b019d139a11facff7c19be77910496f8c973ec4a7ee36904b2eebe79a706b` at Continuity 332 / Compass 314, with one publication and no manual canonical repair.

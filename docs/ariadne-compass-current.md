@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 has adopted one provider-free clockwork owner for repository-governance closeouts; the next read-only tranche resolves the true check-in successor while product and protected authorities remain closed.
+> EMR4 will next freeze a default-off, non-secret environment-manifest and operational secret-reference architecture before attempting runtime-role attestation or unknown-commit recovery evidence.
 
 ## North star
 
@@ -432,25 +432,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Canonical-mirror rehearsal accepted; live adoption remains an explicit user-attention fork. Lineage parent: `ariadne-provider-free-clockwork-governance-projection-consolidation-repair`.
 208. **Replace duplicate administrative writers with one live fail-closed clockwork reading — Clockwork live canonical adoption and retirement**
    The task branch has one clockwork-owned canonical governance generation, guarded historical writers and an exact Git-backed rollback generation. Lineage parent: `ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal`.
+209. **Select the first remaining check-in admission dependency and make live clockwork operation repeatable — Clockwork-governed check-in successor resolution**
+   The accepted check-in lineage has one unrepeated architecture successor and the live clockwork has a bounded generic second-tick path. Lineage parent: `ariadne-provider-free-clockwork-live-canonical-adoption-retirement`.
 
 ## Current position
 
-**Operate future repository-governance closeouts through one clockwork owner — Clockwork live canonical adoption and retirement**
+**Freeze the non-secret ordinary check-in environment boundary before operational drills — Clockwork-governed check-in successor resolution**
 
-**Why this proof came next:** The accepted mirror proved exclusivity and rollback, and Yuri explicitly selected live adoption for a long future sequence of closeouts.
+**Why this proof came next:** Route, admission architecture and unmounted kernel work are accepted; remaining admission gates need one exact environment and runtime-role vocabulary before evidence can be representative.
 
-The first live clockwork tick owns the canonical governance surfaces and historical direct publishers fail closed.
+The next tranche is architecture-only environment-manifest and operational secret-reference posture, with ordinary practice and runtime still denied.
 
 ### What this unlocks
 
-- Measured clockwork use on the next dependency-satisfied repository closeouts.
-- A provider-free read-only resolution of the true next check-in product successor under the new controls.
+- A later ordinary runtime-role and tenant-isolation attestation against a frozen identifier.
+- A later rollback and unknown-commit drill against the same frozen environment boundary.
+- Measured use of the generic clockwork on subsequent closeouts.
 
 ### What it does not solve
 
-- Clockwork adoption does not prove the native DeepSeek Harness HMR boot path.
-- No ordinary-practice admission or product behavior changes.
-- No product data, provider runtime, deployment, release, Pages or protected integration opens.
+- No secret, key, database role or selected-practice environment is created or accessed.
+- No ordinary-practice check-in command is enabled or mounted.
+- No provider, product data, deployment, release, Pages or protected integration opens.
 
 ## Continuity and authority
 
@@ -1292,6 +1295,7 @@ Prerequisites:
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-architecture.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-plan.md`
+- `docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-closeout.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-plan.md`
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-closeout.md`
@@ -1563,7 +1567,6 @@ Prerequisites:
 - `docs/security/ariadne-post-native-harness-successor-resolution-repair-threat-model-delta.md`
 - `docs/security/ariadne-postcompaction-active-operation-latch-threat-model-delta.md`
 - `docs/security/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-threat-model-delta.md`
-- `docs/security/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-threat-model-delta.md`
 - `docs/security/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-threat-model-delta.md`
 - `docs/security/ariadne-provider-free-continuity-journal-and-refinement-promotion-threat-model-delta.md`
 - `docs/security/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-threat-model-delta.md`
@@ -2468,7 +2471,6 @@ Prerequisites:
 - `orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/provider-free-repair-evidence.json`
 - `orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/repair-report.md`
 - `orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/rerun-probes.json`
-- `orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/writer-inventory.json`
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/canonical-mirror-receipt.json`
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/closeout-intent.json`
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/contract.json`
@@ -2621,6 +2623,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json`
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.json`
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md`
 - `orchestration/continuity/raisa-provider-free-compatibility-conformance-harness-readiness-repair/structural-repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json`
 - `orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/architecture-report.md`
@@ -3190,6 +3193,7 @@ Prerequisites:
 - `orchestration_harness/git_object_resolution.py`
 - `orchestration_harness/git_refs_snapshot.py`
 - `orchestration_harness/governance_clockwork.py`
+- `orchestration_harness/governance_clockwork_tick.py`
 - `orchestration_harness/governance_live_adoption.py`
 - `orchestration_harness/governance_migration.py`
 - `orchestration_harness/orchestrator_preflight.py`
@@ -3329,6 +3333,7 @@ Prerequisites:
 - `tests/test_ariadne_deepseek_native_harness_broker.py`
 - `tests/test_ariadne_git_object_resolution.py`
 - `tests/test_ariadne_git_refs_snapshot.py`
+- `tests/test_ariadne_governance_clockwork_tick.py`
 - `tests/test_ariadne_orchestrator_preflight.py`
 - `tests/test_ariadne_post_native_harness_successor_resolution_repair_continuity.py`
 - `tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py`
@@ -3481,4 +3486,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 313; continuity graph revision 331._
+_Compass map revision 314; continuity graph revision 332._

@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e",
+  "source_commit": "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e",
+  "generation_id": "gen-5a0b019d139a11facff7c19be77910496f8c973ec4a7ee36904b2eebe79a706b",
+  "bundle_sha256": "5a0b019d139a11facff7c19be77910496f8c973ec4a7ee36904b2eebe79a706b",
+  "previous_generation_id": "gen-f3b629e6cbe28061d1340c8ee75fb11e46847a9343338608a780ff3b4240885c",
+  "previous_source_commit": "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 2,
+  "operation_id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

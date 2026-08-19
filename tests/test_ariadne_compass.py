@@ -18,6 +18,9 @@ SCHEMA_PATH = REPO_ROOT / "orchestration/continuity/ariadne-compass.schema.json"
 CLOCKWORK_POINTER = (
     REPO_ROOT / "orchestration/continuity/ariadne-governance-clockwork/current.json"
 )
+CLOCKWORK_TRANSACTION = (
+    REPO_ROOT / "orchestration/continuity/ariadne-governance-clockwork/transaction.json"
+)
 
 
 def load_graph() -> dict:
@@ -53,11 +56,14 @@ def test_report_answers_the_navigation_questions_in_plain_language() -> None:
     assert report["north_star"]["title"].startswith("A complete AI-native")
     assert report["programme"]["id"] == "reception-one"
     assert report["programme"]["master_plan_phase"].startswith("Phase 2B")
-    expected_position = (
-        "ariadne-provider-free-clockwork-live-canonical-adoption-retirement"
-        if CLOCKWORK_POINTER.is_file()
-        else "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal"
-    )
+    if CLOCKWORK_POINTER.is_file() and CLOCKWORK_TRANSACTION.is_file():
+        expected_position = json.loads(
+            CLOCKWORK_TRANSACTION.read_text(encoding="utf-8")
+        )["operation_id"]
+    else:
+        expected_position = (
+            "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal"
+        )
     assert report["current_position"]["node_id"] == expected_position
     assert report["current_position"]["why_now"]
     assert report["current_position"]["unlocks"]

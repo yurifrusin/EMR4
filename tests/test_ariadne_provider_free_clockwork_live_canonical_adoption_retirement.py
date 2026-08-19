@@ -30,6 +30,7 @@ TOPIC = ROOT / "orchestration/continuity/ariadne-provider-free-clockwork-live-ca
 CONTRACT_PATH = TOPIC / "contract.json"
 INTENT_PATH = TOPIC / "closeout-intent.json"
 POINTER = ROOT / "orchestration/continuity/ariadne-governance-clockwork/current.json"
+ADOPTION_EVIDENCE = TOPIC / "provider-free-live-adoption-evidence.json"
 
 
 def _json(path: Path) -> dict:
@@ -38,7 +39,7 @@ def _json(path: Path) -> dict:
 
 def _source_for_replay() -> str:
     if POINTER.is_file():
-        return _json(POINTER)["previous_source_commit"]
+        return _json(ADOPTION_EVIDENCE)["source_commit"]
     return subprocess.run(
         ["git", "rev-parse", "HEAD"],
         cwd=ROOT,

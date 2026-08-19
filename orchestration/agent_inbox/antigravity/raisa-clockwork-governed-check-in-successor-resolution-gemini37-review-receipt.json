@@ -1,0 +1,275 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-tick-gemini-f98baaa5",
+  "branch": "codex/review-clockwork-tick-f98baaa5",
+  "head_before": "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e",
+  "head_after": "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "816b0479604f3e10765a27c635b1d9ea42ca729bd7d828605f231a69290f55a9",
+  "result": "# Gemini 3.7 Flash/high Independent Veto Review: Generic Governance Clockwork Tick\n\nDate: 2026-08-19  \nReviewer role: Exactly one final independent Tier-2 veto after deterministic admission and before the second live canonical tick.\n\n---\n\n## 1. Mandatory Five-Source Ariadne Rehydration Receipt\n\n- `live_handover_current_baton`:\n  - Baton ref: `handoff/current` aligned with `master`, `origin/master`, `origin/handoff/current` at protected commit `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n  - Mode: Risk-weighted parallel-capable Ariadne workflow; protected single-track integration.\n  - Active task branch: `codex/ariadne-bernie-davida-parallel-seam` / review worktree `codex/review-clockwork-tick-f98baaa5`.\n  - Current clockwork relation: Live repository-governance clockwork owner accepted at exact reviewed source `9014e08a3fb4e3253759e0133d93c5aaf99a7ace` with mirror floor `d03cc6386fdf3e2714881089514380d93824e160`. Historical writers remain retired with no open authority.\n- `current_authority_allocation`:\n  - Conductor / integrator: GPT Sol.\n  - Implementation / test worker: GPT Sol holding provider-free shadow Ariadne/DeepSeek broker clockwork gear architecture lease. DeepSeek native harness paused behind HMR startup terminal. Claude Code bare remains historical lineage only.\n  - Independent reviewer: Gemini 3.7 Flash/high via fresh Antigravity project for exact read-only Tier-2 veto. Zero write authority.\n- `active_plan_and_acceptance`:\n  - Plan: `docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md`\n  - Threat model delta: `docs/security/raisa-provider-free-clockwork-governed-check-in-successor-resolution-threat-model-delta.md`\n  - Successor report: `orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md`\n  - Closeout intent: `orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/closeout-intent.json`\n  - Acceptance base: Live canonical clockwork adoption and retirement at `c11038545838f685cdabf81aea004470dafd02c6` / `9014e08a3fb4e3253759e0133d93c5aaf99a7ace`.\n- `protected_evidence_boundaries`:\n  - Provider-free repository governance, authored-synthetic faults and disposable Git worktrees only; no product data, patient data, clinical data, appointment data, or historical evidence access.\n  - Untracked `docs/branding/` and all unrelated untracked files strictly preserved and excluded.\n  - No production, runtime, deployment, release, Pages rebuild, or protected-ref movement (`2e34bdad732fdab32fbf778280b3d3c70d66d602` fixed).\n  - Explicit path staging only.\n- `git_refs_and_worktree`:\n  - Worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-tick-gemini-f98baaa5`\n  - Branch: `codex/review-clockwork-tick-f98baaa5`\n  - HEAD: `f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e`\n  - Base: `c11038545838f685cdabf81aea004470dafd02c6`\n  - Clean worktree before and after review.\n\n---\n\n## 2. Continuity & Workflow Parallelism Confirmation\n\n- Continuity evidence: `orchestration/continuity/ariadne-active-operation-latch/current.json` is `in_progress` for operation `raisa-provider-free-clockwork-governed-check-in-successor-resolution` with checkpoint `next_executable_stage: rehydrate_the_clockwork_owned_generation_and_resolve_the_exact_unrepeated_check_in_successor`.\n- Parallelism assessment: DeepSeek paused behind HMR startup terminal; native subagents declined under single-transaction atomicity policy; Gemini 3.7 Flash/high active solely for this read-only Tier-2 veto.\n\n---\n\n## 3. Evaluation of Required Challenges\n\n1. **Exact branch, HEAD, clean worktree, and diff list**: Verified branch `codex/review-clockwork-tick-f98baaa5`, full 40-character HEAD `f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e`, clean worktree before and after review (C01, C02, C10), and exact diff of 13 allowlisted files across `c11038545838f685cdabf81aea004470dafd02c6..f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e` (C08, C09).\n2. **Intent input validation & derived binding rejection**: `validate_tick_intent` recursively enforces exact top-level keys (`schema_version`, `transaction_manifest`, `command_manifest`, `baton_acceptance`, `next_operation_protected_boundaries`) and rejects all keys in `DERIVED_INPUT_KEYS` (`source_commit`, revisions, counts, digests, generation IDs, lease sequences, projection digests). Commands are validated for executable, argument safety (no shell metacharacters `*?[];&|$<>`), and completion contract.\n3. **Clean-source readings**: `build_tick_generation` validates live state, resolves git state, and executes `_assert_clean_predecessor`, verifying that canonical files and metadata match git blobs and that the physical pointer matches the git source pointer without physical drift.\n4. **Shared reducer & latch replacement**: `build_tick_generation` prepares projections via `transactional_closeout.prepare_transaction`, replaces inherited protected boundaries exclusively with validated intent boundaries, validates the active operation latch, builds the full compass report, rehashes the bundle, and validates the entire bundle against repository schemas.\n5. **Successor-boundary floor**: `REQUIRED_NEXT_BOUNDARIES` is strictly validated as a subset of the intent's `next_operation_protected_boundaries`, ensuring protected refs, deployment/release/Pages closure, protected evidence protection, `docs/branding/` preservation, and explicit path staging cannot be omitted.\n6. **Fault-safety and pre-pointer restoration**: In `publish_tick_generation`, all 7 canonical and 4 metadata files are staged to same-directory temporary files. Across all 23 pre-pointer fault positions (`before:KEY`, `after:KEY`, `before_pointer_replace`), failures trigger complete byte-exact restoration of original canonical, metadata, and pointer files with verification rereading, cleanup of staged files, and release of `writer.lock`.\n7. **`current.json` sole commit point & post-pointer classification**: `current.json` is replaced last. An injected failure after pointer replacement sets `committed = True`, validates live state via `validate_tick_live_state`, and raises `CommittedClockworkTick`.\n8. **Idempotency & stale-predecessor denial**: Replaying an already published generation returns live state without rewriting files or incrementing lease sequence. Stale pointer, non-clockwork writer, occupied lease, path escape, or drift fail closed before publication.\n9. **Full-Git rollback**: `rollback_tick_generation` loads the exact predecessor canonical and metadata files from the bound full Git source commit (`previous_source_commit`), writes the restored pointer with incremented lease sequence under exclusive lease, and verifies live state.\n10. **CRLF/LF newline portability**: Generation bytes and digests are derived strictly from Git blobs (`git show`), ensuring that CRLF/LF line-ending differences in a Git-clean working copy do not alter generation manifests or digests.\n11. **Deterministic Baton renderer**: `_render_baton` modifies only `Current result`, `Next implementation`, `Current clockwork relation`, and the acceptance table row using semantic inputs, eliminating manual canonical editing or bespoke updaters.\n12. **Successor dependency resolution**: The accepted check-in lineage (route convergence, admission readiness review, admission-control architecture, unmounted kernel) is complete. The environment-manifest posture (`raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture`) is the true narrowest unrepeated predecessor to both runtime-role attestation and unknown-commit recovery drills. It remains repository-static, default-off, and architecture-only, opening zero secret values, database connections, practice selections, or product configurations.\n13. **Command manifest execution**: All 10 commands (C01 through C10) executed in structured order, passed with exit code 0, and left the worktree clean.\n14. **Protected closures maintained**: Zero changes to product code, practice routes, schemas, OpenAPI, GraphQL, databases, clients, patient data, clinical data, provider calls, deployments, releases, Pages, protected evidence, or protected refs (`2e34bdad732fdab32fbf778280b3d3c70d66d602`).\n\n---\n\n## 4. Conclusion\n\nThe exact candidate `f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e` safely generalises the live single-owner clockwork to second and subsequent ticks while preserving all safety invariants, full-Git predecessor recovery, pointer-last atomicity, pre-pointer rollback, and product/protected boundaries. The selected next product tranche is confirmed as the narrowest unrepeated dependency.\n\nThe independent Tier-2 veto review is complete and passes without findings.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Independent Veto Review: Generic Governance Clockwork Tick\n\nDate: 2026-08-19  \nReviewer role: Exactly one final independent Tier-2 veto after deterministic admission and before the second live canonical tick.\n\n---\n\n## 1. Mandatory Five-Source Ariadne Rehydration Receipt\n\n- `live_handover_current_baton`:\n  - Baton ref: `handoff/current` aligned with `master`, `origin/master`, `origin/handoff/current` at protected commit `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n  - Mode: Risk-weighted parallel-capable Ariadne workflow; protected single-track integration.\n  - Active task branch: `codex/ariadne-bernie-davida-parallel-seam` / review worktree `codex/review-clockwork-tick-f98baaa5`.\n  - Current clockwork relation: Live repository-governance clockwork owner accepted at exact reviewed source `9014e08a3fb4e3253759e0133d93c5aaf99a7ace` with mirror floor `d03cc6386fdf3e2714881089514380d93824e160`. Historical writers remain retired with no open authority.\n- `current_authority_allocation`:\n  - Conductor / integrator: GPT Sol.\n  - Implementation / test worker: GPT Sol holding provider-free shadow Ariadne/DeepSeek broker clockwork gear architecture lease. DeepSeek native harness paused behind HMR startup terminal. Claude Code bare remains historical lineage only.\n  - Independent reviewer: Gemini 3.7 Flash/high via fresh Antigravity project for exact read-only Tier-2 veto. Zero write authority.\n- `active_plan_and_acceptance`:\n  - Plan: `docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md`\n  - Threat model delta: `docs/security/raisa-provider-free-clockwork-governed-check-in-successor-resolution-threat-model-delta.md`\n  - Successor report: `orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md`\n  - Closeout intent: `orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/closeout-intent.json`\n  - Acceptance base: Live canonical clockwork adoption and retirement at `c11038545838f685cdabf81aea004470dafd02c6` / `9014e08a3fb4e3253759e0133d93c5aaf99a7ace`.\n- `protected_evidence_boundaries`:\n  - Provider-free repository governance, authored-synthetic faults and disposable Git worktrees only; no product data, patient data, clinical data, appointment data, or historical evidence access.\n  - Untracked `docs/branding/` and all unrelated untracked files strictly preserved and excluded.\n  - No production, runtime, deployment, release, Pages rebuild, or protected-ref movement (`2e34bdad732fdab32fbf778280b3d3c70d66d602` fixed).\n  - Explicit path staging only.\n- `git_refs_and_worktree`:\n  - Worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-tick-gemini-f98baaa5`\n  - Branch: `codex/review-clockwork-tick-f98baaa5`\n  - HEAD: `f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e`\n  - Base: `c11038545838f685cdabf81aea004470dafd02c6`\n  - Clean worktree before and after review.\n\n---\n\n## 2. Continuity & Workflow Parallelism Confirmation\n\n- Continuity evidence: `orchestration/continuity/ariadne-active-operation-latch/current.json` is `in_progress` for operation `raisa-provider-free-clockwork-governed-check-in-successor-resolution` with checkpoint `next_executable_stage: rehydrate_the_clockwork_owned_generation_and_resolve_the_exact_unrepeated_check_in_successor`.\n- Parallelism assessment: DeepSeek paused behind HMR startup terminal; native subagents declined under single-transaction atomicity policy; Gemini 3.7 Flash/high active solely for this read-only Tier-2 veto.\n\n---\n\n## 3. Evaluation of Required Challenges\n\n1. **Exact branch, HEAD, clean worktree, and diff list**: Verified branch `codex/review-clockwork-tick-f98baaa5`, full 40-character HEAD `f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e`, clean worktree before and after review (C01, C02, C10), and exact diff of 13 allowlisted files across `c11038545838f685cdabf81aea004470dafd02c6..f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e` (C08, C09).\n2. **Intent input validation & derived binding rejection**: `validate_tick_intent` recursively enforces exact top-level keys (`schema_version`, `transaction_manifest`, `command_manifest`, `baton_acceptance`, `next_operation_protected_boundaries`) and rejects all keys in `DERIVED_INPUT_KEYS` (`source_commit`, revisions, counts, digests, generation IDs, lease sequences, projection digests). Commands are validated for executable, argument safety (no shell metacharacters `*?[];&|$<>`), and completion contract.\n3. **Clean-source readings**: `build_tick_generation` validates live state, resolves git state, and executes `_assert_clean_predecessor`, verifying that canonical files and metadata match git blobs and that the physical pointer matches the git source pointer without physical drift.\n4. **Shared reducer & latch replacement**: `build_tick_generation` prepares projections via `transactional_closeout.prepare_transaction`, replaces inherited protected boundaries exclusively with validated intent boundaries, validates the active operation latch, builds the full compass report, rehashes the bundle, and validates the entire bundle against repository schemas.\n5. **Successor-boundary floor**: `REQUIRED_NEXT_BOUNDARIES` is strictly validated as a subset of the intent's `next_operation_protected_boundaries`, ensuring protected refs, deployment/release/Pages closure, protected evidence protection, `docs/branding/` preservation, and explicit path staging cannot be omitted.\n6. **Fault-safety and pre-pointer restoration**: In `publish_tick_generation`, all 7 canonical and 4 metadata files are staged to same-directory temporary files. Across all 23 pre-pointer fault positions (`before:KEY`, `after:KEY`, `before_pointer_replace`), failures trigger complete byte-exact restoration of original canonical, metadata, and pointer files with verification rereading, cleanup of staged files, and release of `writer.lock`.\n7. **`current.json` sole commit point & post-pointer classification**: `current.json` is replaced last. An injected failure after pointer replacement sets `committed = True`, validates live state via `validate_tick_live_state`, and raises `CommittedClockworkTick`.\n8. **Idempotency & stale-predecessor denial**: Replaying an already published generation returns live state without rewriting files or incrementing lease sequence. Stale pointer, non-clockwork writer, occupied lease, path escape, or drift fail closed before publication.\n9. **Full-Git rollback**: `rollback_tick_generation` loads the exact predecessor canonical and metadata files from the bound full Git source commit (`previous_source_commit`), writes the restored pointer with incremented lease sequence under exclusive lease, and verifies live state.\n10. **CRLF/LF newline portability**: Generation bytes and digests are derived strictly from Git blobs (`git show`), ensuring that CRLF/LF line-ending differences in a Git-clean working copy do not alter generation manifests or digests.\n11. **Deterministic Baton renderer**: `_render_baton` modifies only `Current result`, `Next implementation`, `Current clockwork relation`, and the acceptance table row using semantic inputs, eliminating manual canonical editing or bespoke updaters.\n12. **Successor dependency resolution**: The accepted check-in lineage (route convergence, admission readiness review, admission-control architecture, unmounted kernel) is complete. The environment-manifest posture (`raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture`) is the true narrowest unrepeated predecessor to both runtime-role attestation and unknown-commit recovery drills. It remains repository-static, default-off, and architecture-only, opening zero secret values, database connections, practice selections, or product configurations.\n13. **Command manifest execution**: All 10 commands (C01 through C10) executed in structured order, passed with exit code 0, and left the worktree clean.\n14. **Protected closures maintained**: Zero changes to product code, practice routes, schemas, OpenAPI, GraphQL, databases, clients, patient data, clinical data, provider calls, deployments, releases, Pages, protected evidence, or protected refs (`2e34bdad732fdab32fbf778280b3d3c70d66d602`).\n\n---\n\n## 4. Conclusion\n\nThe exact candidate `f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e` safely generalises the live single-owner clockwork to second and subsequent ticks while preserving all safety invariants, full-Git predecessor recovery, pointer-last atomicity, pre-pointer rollback, and product/protected boundaries. The selected next product tranche is confirmed as the narrowest unrepeated dependency.\n\nThe independent Tier-2 veto review is complete and passes without findings.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/closeout-intent.json"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_serial_pytest",
+          "--timeout-seconds",
+          "300",
+          "--",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:/Users/sarashera/AppData/Local/Temp/emr4-clockwork-tick-gemini-focused"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_serial_pytest",
+          "--timeout-seconds",
+          "300",
+          "--",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "C:/Users/sarashera/AppData/Local/Temp/emr4-clockwork-tick-gemini-surrounding"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration_harness/governance_live_adoption.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration_harness/governance_live_adoption.py",
+          "scripts/ariadne_governance_clockwork_tick.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "c11038545838f685cdabf81aea004470dafd02c6..f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "c11038545838f685cdabf81aea004470dafd02c6..f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "0caa9aa689c1459cc9c4b25459044bfab421a5d6f00015c568eb0b8f7ddf53ac",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_governance_clockwork_tick",
+        "--check",
+        "--intent",
+        "orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/closeout-intent.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--timeout-seconds",
+        "300",
+        "--",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-clockwork-tick-gemini-focused"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_serial_pytest",
+        "--timeout-seconds",
+        "300",
+        "--",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_current_baton_consistency.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:/Users/sarashera/AppData/Local/Temp/emr4-clockwork-tick-gemini-surrounding"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "orchestration_harness/governance_clockwork_tick.py",
+        "orchestration_harness/governance_live_adoption.py",
+        "scripts/ariadne_governance_clockwork_tick.py",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/governance_clockwork_tick.py",
+        "orchestration_harness/governance_live_adoption.py",
+        "scripts/ariadne_governance_clockwork_tick.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "c11038545838f685cdabf81aea004470dafd02c6..f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "c11038545838f685cdabf81aea004470dafd02c6..f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

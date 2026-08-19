@@ -9,6 +9,8 @@ GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
 ERROR_REGISTER = ROOT / "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
 CLOCKWORK_POINTER = ROOT / "orchestration/continuity/ariadne-governance-clockwork/current.json"
+CLOCKWORK_TRANSACTION = ROOT / "orchestration/continuity/ariadne-governance-clockwork/transaction.json"
+ACTIVE_LATCH = ROOT / "orchestration/continuity/ariadne-active-operation-latch/current.json"
 NODE_ID = "raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review"
 SOURCE_HEAD = "da03039f637d3808c8785a6d6fc95309650044d9"
 HTTP_NODE_ID = "raisa-provider-free-delete-confirm-http-route-convergence"
@@ -88,6 +90,10 @@ LIVE_CLOCKWORK_PARENT_ID = (
     "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal"
 )
 LIVE_CLOCKWORK_FLOOR_SOURCE_HEAD = "d03cc6386fdf3e2714881089514380d93824e160"
+GENERIC_TICK_NODE_ID = (
+    "raisa-provider-free-clockwork-governed-check-in-successor-resolution"
+)
+GENERIC_TICK_SOURCE_HEAD = "f98baaa5c57cfcf00f8d2e6cd0d1113d4a59ed6e"
 ROUTE_CONVERGENCE_SOURCE_HEAD = "c82c3a741053a9c8da260aa62e1a968af22bb54e"
 UNMOUNTED_SOURCE_HEAD = "43e993a98ffec3f9ffe2740b0b38816bcb2d6adb"
 ARCHITECTURE_SOURCE_HEAD = "9f0c166be2276d4e236dbdb4ed5657074ffbd0aa"
@@ -127,6 +133,12 @@ def _table_row(text: str, label: str) -> str:
     return matches[0]
 
 
+def _selected_clockwork_operation() -> str | None:
+    if not CLOCKWORK_POINTER.is_file() or not CLOCKWORK_TRANSACTION.is_file():
+        return None
+    return json.loads(CLOCKWORK_TRANSACTION.read_text(encoding="utf-8"))["operation_id"]
+
+
 def test_continuity_and_compass_bind_risk_weighted_result_and_product_position() -> (
     None
 ):
@@ -134,7 +146,15 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
 
     assert graph["graph_revision"] == compass["source_graph_revision"]
-    if CLOCKWORK_POINTER.is_file():
+    if _selected_clockwork_operation() == GENERIC_TICK_NODE_ID:
+        assert graph["nodes"][-1]["id"] == GENERIC_TICK_NODE_ID
+        assert graph["nodes"][-1]["coordinates"]["source_head"] == (
+            GENERIC_TICK_SOURCE_HEAD
+        )
+        assert graph["nodes"][-1]["relationships"] == [
+            {"node_id": LIVE_CLOCKWORK_NODE_ID, "relation": "builds_on"}
+        ]
+    elif CLOCKWORK_POINTER.is_file():
         assert graph["nodes"][-1]["id"] == LIVE_CLOCKWORK_NODE_ID
         assert (
             graph["nodes"][-1]["coordinates"]["source_head"]
@@ -185,7 +205,14 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
     assert f"Continuity {graph['graph_revision']} / Compass {compass['map_revision']}" in current
     assert graph["nodes"][-1]["coordinates"]["source_head"] in current
-    if clockwork_active:
+    if _selected_clockwork_operation() == GENERIC_TICK_NODE_ID:
+        assert "clockwork-governed check-in successor resolution" in current.lower()
+        assert "environment-manifest" in current.lower()
+        assert GENERIC_TICK_SOURCE_HEAD in current
+        assert GENERIC_TICK_SOURCE_HEAD in clockwork_relation
+        assert "ten surfaces" in clockwork_relation.lower()
+        assert "previous generation" in clockwork_relation.lower()
+    elif clockwork_active:
         assert "ten repository-governance surfaces" in current.lower()
         assert "one clockwork owner" in current.lower()
         assert "previous git generation" in current.lower()
@@ -265,7 +292,14 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    if clockwork_active:
+    if _selected_clockwork_operation() == GENERIC_TICK_NODE_ID:
+        assert (
+            "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture"
+            in next_work.lower()
+        )
+        assert "active latch is the exact authority boundary" in next_work.lower()
+        assert "protected refs remain closed" in next_work.lower()
+    elif clockwork_active:
         assert "clockwork-governed-check-in-successor-resolution" in next_work.lower()
         assert "provider-free and read-only" in next_work.lower()
         assert "occupied deepseek/hmr" in next_work.lower()
@@ -322,7 +356,17 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
         and json.loads(CLOCKWORK_POINTER.read_text(encoding="utf-8")).get("phase")
         == "clockwork_active"
     )
+    generic_tick_selected = _selected_clockwork_operation() == GENERIC_TICK_NODE_ID
     phrases = (
+        (
+            "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture",
+            "active latch is the exact authority boundary",
+            "protected refs remain closed",
+            "docs/branding/",
+            "stage explicit paths only",
+        )
+        if generic_tick_selected
+        else
         (
             "clockwork-governed-check-in-successor-resolution",
             "provider-free and read-only",
@@ -352,4 +396,16 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     )
     for phrase in phrases:
         assert phrase in next_work
+    if generic_tick_selected:
+        latch = json.loads(ACTIVE_LATCH.read_text(encoding="utf-8"))
+        boundaries = set(latch["protected_boundaries"])
+        assert {
+            "provider_free_repository_static_architecture_only",
+            "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+            "no_product_patient_appointment_clinical_historical_or_protected_data",
+            "no_production_runtime_deployment_release_or_pages",
+            "no_protected_evidence_access_or_protected_ref_movement",
+            "docs_branding_and_all_unrelated_untracked_files_preserved",
+            "explicit_path_staging_only",
+        }.issubset(boundaries)
     assert "single-owner-migration-retirement-rehearsal" not in next_work
