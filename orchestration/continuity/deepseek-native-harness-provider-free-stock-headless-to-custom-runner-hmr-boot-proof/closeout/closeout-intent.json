@@ -1,0 +1,115 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v1",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof",
+    "title": "DeepSeek native Harness provider-free stock-headless-to-custom-runner HMR boot proof",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-20T02:33:29.0250603+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof",
+      "title": "Provider-free native Harness stock-headless-to-custom-runner HMR boot proof",
+      "kind": "foundation",
+      "relationships": [
+        {"node_id": "ariadne-provider-free-no-database-manifest-runner-admission-repair", "relation": "builds_on"},
+        {"node_id": "deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission", "relation": "resolves_runtime_gap_from"}
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri granted standing uninterrupted-development authority through this proof and dependency-satisfied successors.",
+          "The result opens only planning for a separately named one-run relay-free recovery attempt 004.",
+          "No model/provider call, occupied worker, product/practice authority, deployment, Pages or protected-ref authority opens automatically."
+        ]
+      },
+      "decisions": [
+        {"id": "retain-prelaunch-source-predicate-rejection", "source": "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/prelaunch-source-predicate-rejection.json", "status": "accepted", "summary": "Retain the fail-closed static predicate rejection with zero native boot processes and complete cleanup."},
+        {"id": "accept-native-hmr-boot-attempt-001", "source": "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json", "status": "accepted", "summary": "Accept one exact rc.7 stock-headless boot reaching the HMR-applied local custom runner with exit 0 and zero provider boundary counts."},
+        {"id": "accept-independent-gemini-veto", "source": "orchestration/agent_inbox/antigravity/deepseek-native-harness-hmr-boot-proof-gemini37-review-receipt.json", "status": "accepted", "summary": "Accept one fresh Gemini 3.7 Flash/high exact-candidate pass with ten zero-exit commands and no P0-P2 finding."}
+      ],
+      "claim_scope": [
+        "The exact @deepseek-ai/dsh@0.1.0-rc.7 package boots through its documented stock headless launcher with Node --expose-internals.",
+        "The initial patch disables the stock model runner, code runtime and telemetry; only a post-readiness watched patch adds the local custom runner.",
+        "The real HMR config registry contains both stock patch registrations before mutation, the four lifecycle events are exact and the custom runner owns exit 0.",
+        "Network, model, broker, provider and agent-session counts are zero and process/root cleanup is complete.",
+        "The focused 39-test selection and fresh independent ten-command veto pass at the exact clean candidate."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": ["docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-plan.md", "docs/security/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-threat-model-delta.md"],
+        "findings": ["orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/prelaunch-source-predicate-rejection.json", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-report.md"],
+        "closeouts": ["docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-closeout.md"],
+        "acceptances": ["orchestration/agent_inbox/codex/deepseek-native-harness-hmr-boot-proof-sol-acceptance.md"],
+        "receipts": ["orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-hmr-boot-proof-preplanning-receipt.json", "orchestration/agent_inbox/codex/deepseek-native-harness-hmr-boot-proof-pre-verifier-receipt.json", "orchestration/agent_inbox/antigravity/deepseek-native-harness-hmr-boot-proof-gemini37-review-receipt.json"],
+        "tests": ["tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py", "tests/test_ariadne_deepseek_native_harness_broker.py", "tests/test_deepseek_native_harness_emr4_profile_contract.py", "tests/test_ariadne_provider_free_no_database_admission.py"],
+        "artifacts": ["scripts/deepseek_native_harness_provider_free_hmr_boot_proof.py", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/contract.json", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/contract.schema.json", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/evidence.schema.json", "orchestration/agent_inbox/codex/deepseek-native-harness-hmr-boot-proof-gemini37-command-manifest.json", "orchestration/agent_inbox/codex/deepseek-native-harness-hmr-boot-proof-gemini37-review-packet.md", "orchestration/agent_inbox/codex/deepseek-native-harness-hmr-boot-proof-gemini37-review-worktree-preflight.json", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/closeout/closeout-intent.json"]
+      },
+      "unresolved_gates": [
+        "The proof does not establish DeepSeek model quality, provider reliability, occupied-worker completion or production isolation.",
+        "Any DeepSeek model call or occupied worker requires a separately frozen WorkOrder, exact provider-free admission and one-run authority.",
+        "Relay-free recovery attempt 004 requires a fresh plan, collision-free namespace and full preexecution admission before Docker or PostgreSQL execution.",
+        "No ordinary-practice activation, product/data change, production, deployment, release, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Replace an opaque pre-session native-Harness failure with attributable stock-launcher/HMR lifecycle evidence",
+      "outcome": "The pinned native Harness reaches the local custom runner through its real watched headless profile path without a model or provider call.",
+      "evidence": ["orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json", "orchestration/agent_inbox/antigravity/deepseek-native-harness-hmr-boot-proof-gemini37-review-receipt.json"]
+    },
+    "current_position": {
+      "strategic_role": "Freeze the fourth uniquely named relay-free recovery run only after all deterministic caller, cleanup, no-database and Harness prerequisites are accepted",
+      "why_now": "Attempts 001-003 remain immutable; the call-site/pre-registry cleanup repair, no-database broker interlock and native-Harness HMR startup proof now all pass.",
+      "outcome": "The next tranche first freezes an exact one-run attempt-004 plan and may execute only after full deterministic, Docker/image, collision and latch admission.",
+      "unlocks": ["A separately named collision-free attempt-004 namespace and envelope.", "One bounded provider-free disposable PostgreSQL recovery execution after exact preflight.", "A fresh post-success independent veto if the occupied local execution passes."],
+      "does_not_solve": ["No automatic retry or reclassification of attempts 001-003.", "No unplanned Docker, PostgreSQL or DeepSeek model execution.", "No product, ordinary-practice, data, production, deployment, Pages or protected integration authority."],
+      "evidence": ["docs/raisa-provider-free-check-in-relay-free-recovery-attempt-003-plan.md", "docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-closeout.md", "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-closeout.md"],
+      "orientation_statement": "EMR4 will next freeze, then conditionally run, exactly one separately named provider-free relay-free recovery attempt 004; prior terminals remain immutable and no execution is inherited implicitly."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-004",
+      "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 004",
+      "objective": "Freeze and, only after exact deterministic and preexecution admission, execute exactly one separately named provider-free disposable PostgreSQL relay-free rollback/unknown-commit recovery attempt using the accepted corrected harness, with immutable predecessor evidence, zero retry and exact cleanup.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, the immutable attempts 001-003, accepted call-site/pre-registry cleanup repair, accepted no-database WorkOrder/broker interlock and accepted native-Harness HMR boot proof.",
+      "next_stage": "fresh_five_source_rehydration_and_freeze_exact_relay_free_recovery_attempt_004_plan_before_any_docker_database_or_model_execution"
+    },
+    "incidents": [
+      {"incident_id": "native-hmr-prelaunch-source-predicate-format", "source_id": "native-hmr-prelaunch-check-001", "peers": []},
+      {"incident_id": "native-hmr-source-inspection-cleanup-policy-shape", "source_id": "native-hmr-closeout-cleanup-001", "peers": []}
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {"command_id": "read_only_native_hmr_closeout_tick_check", "executable": ".venv/Scripts/python.exe", "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/closeout/closeout-intent.json"], "completion_contract": "final_exit_code_zero_required"},
+      {"command_id": "admitted_native_hmr_and_governance_tests", "executable": ".venv/Scripts/python.exe", "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py", "tests/test_ariadne_deepseek_native_harness_broker.py", "tests/test_deepseek_native_harness_emr4_profile_contract.py", "tests/test_ariadne_provider_free_no_database_admission.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_current_baton_consistency.py"], "completion_contract": "final_exit_code_zero_required"},
+      {"command_id": "native_hmr_contract_check", "executable": ".venv/Scripts/python.exe", "arguments": ["-m", "scripts.deepseek_native_harness_provider_free_hmr_boot_proof"], "completion_contract": "final_exit_code_zero_required"},
+      {"command_id": "native_hmr_closeout_ruff", "executable": ".venv/Scripts/python.exe", "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_hmr_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py"], "completion_contract": "final_exit_code_zero_required"},
+      {"command_id": "native_hmr_closeout_compile", "executable": ".venv/Scripts/python.exe", "arguments": ["-m", "py_compile", "scripts/deepseek_native_harness_provider_free_hmr_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py"], "completion_contract": "final_exit_code_zero_required"}
+    ]
+  },
+  "baton_acceptance": {
+    "label": "DeepSeek native Harness provider-free stock-headless-to-custom-runner HMR boot proof acceptance",
+    "paths": ["docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-plan.md", "docs/security/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-threat-model-delta.md", "scripts/deepseek_native_harness_provider_free_hmr_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/contract.json", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/contract.schema.json", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/evidence.schema.json", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/prelaunch-source-predicate-rejection.json", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-report.md", "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-hmr-boot-proof-preplanning-runtime-state.json", "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-hmr-boot-proof-preplanning-receipt.json", "orchestration/agent_inbox/codex/deepseek-native-harness-hmr-boot-proof-pre-verifier-runtime-state.json", "orchestration/agent_inbox/codex/deepseek-native-harness-hmr-boot-proof-pre-verifier-receipt.json", "orchestration/agent_inbox/codex/deepseek-native-harness-hmr-boot-proof-gemini37-command-manifest.json", "orchestration/agent_inbox/codex/deepseek-native-harness-hmr-boot-proof-gemini37-review-packet.md", "orchestration/agent_inbox/codex/deepseek-native-harness-hmr-boot-proof-gemini37-review-worktree-preflight.json", "orchestration/agent_inbox/antigravity/deepseek-native-harness-hmr-boot-proof-gemini37-review-receipt.json", "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof-closeout.md", "orchestration/agent_inbox/codex/deepseek-native-harness-hmr-boot-proof-sol-acceptance.md", "orchestration/human_inbox/yuri/2026-08-20--native-harness-provider-free-hmr-boot-proof.md", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/closeout/closeout-intent.json"]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_disposable_postgresql_relay_free_recovery_attempt_004_plan_and_exactly_one_execution_only",
+    "attempts_001_002_003_failure_envelopes_cleanup_execution_counts_and_sources_remain_immutable",
+    "accepted_call_site_pre_registry_cleanup_created_state_relay_free_transport_runtime_role_and_transaction_semantics_remain_exact",
+    "attempt_004_uses_a_distinct_collision_free_output_namespace_and_one_terminal_envelope",
+    "no_docker_object_container_network_credential_postgresql_sql_or_database_execution_before_frozen_plan_and_exact_preexecution_admission",
+    "no_retry_or_reclassification_of_any_consumed_attempt",
+    "no_deepseek_model_call_or_occupied_worker_without_separately_bound_work_order_provider_free_admission_and_one_run_latch",
+    "no_claude_code_fallback",
+    "gemini_only_after_an_exact_deterministic_or_successful_occupied_candidate",
+    "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}
