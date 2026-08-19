@@ -1424,6 +1424,45 @@ def _container_matches(
     return all(predicates.values())
 
 
+def _verify_server_after_readiness(
+    executable: str,
+    *,
+    container_id: str,
+    container_name: str,
+    network_name: str,
+    network_id: str,
+    nonce: str,
+    contract: dict[str, Any],
+    forbidden_values: tuple[str, ...],
+) -> dict[str, Any]:
+    row = _inspect_container(executable, container_id)
+    if row.get("State", {}).get("Running") is not True:
+        _fail("environment", "server_not_running_after_readiness")
+    predicates = _container_profile_predicates(
+        row,
+        container_id=container_id,
+        container_name=container_name,
+        network_name=network_name,
+        network_id=network_id,
+        nonce=nonce,
+        contract=contract,
+        kind="server",
+        forbidden_values=forbidden_values,
+    )
+    failed = sorted(
+        name for name, passed in predicates.items() if passed is not True
+    )
+    if failed:
+        if any(re.fullmatch(r"[a-z_]+", name) is None for name in failed):
+            failed = ["inspect_shape"]
+        _fail(
+            "environment",
+            "server_identity_mismatch_after_readiness",
+            ",".join(failed),
+        )
+    return row
+
+
 def _create_network(
     executable: str, contract: dict[str, Any], nonce: str
 ) -> tuple[str, str]:
@@ -2032,7 +2071,7 @@ def run_rehearsal() -> tuple[dict[str, Any], dict[str, Any] | None]:
             executable, server_id, (admin_password,)
         )
         lifecycle.append("server_credential_delivered_by_attached_stdin")
-        readiness_state = _run_sidecar(
+        _run_sidecar(
             executable,
             contract,
             nonce=nonce,
@@ -2055,25 +2094,16 @@ def run_rehearsal() -> tuple[dict[str, Any], dict[str, Any] | None]:
             + 5,
         )
         sidecar_count += 1
-        if not _stop_attachment(server_attachment):
-            _fail("cleanup", "server_attachment_absence_unverified")
-        server_attachment = None
-        server_row = _inspect_container(executable, server_id)
-        if (
-            server_row.get("State", {}).get("Running") is not True
-            or not _container_matches(
-                server_row,
-                container_id=server_id,
-                container_name=server_name,
-                network_name=network_name,
-                network_id=network_id,
-                nonce=nonce,
-                contract=contract,
-                kind="server",
-                forbidden_values=forbidden_values,
-            )
-        ):
-            _fail("environment", "server_not_ready_or_identity_mismatch")
+        _verify_server_after_readiness(
+            executable,
+            container_id=server_id,
+            container_name=server_name,
+            network_name=network_name,
+            network_id=network_id,
+            nonce=nonce,
+            contract=contract,
+            forbidden_values=forbidden_values,
+        )
         lifecycle.append("relay_free_server_readiness_verified")
         role_created = True
         role_absent = False

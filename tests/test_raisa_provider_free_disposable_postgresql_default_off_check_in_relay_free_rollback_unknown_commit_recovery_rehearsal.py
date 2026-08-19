@@ -16,6 +16,34 @@ from scripts import (
 ROOT = Path(__file__).resolve().parents[1]
 
 
+class FakeAttachment:
+    def __init__(self, *, terminate_completes: bool = True) -> None:
+        self.running = True
+        self.terminate_completes = terminate_completes
+        self.terminate_count = 0
+        self.kill_count = 0
+        self.wait_count = 0
+
+    def poll(self) -> int | None:
+        return None if self.running else 0
+
+    def terminate(self) -> None:
+        self.terminate_count += 1
+        if self.terminate_completes:
+            self.running = False
+
+    def kill(self) -> None:
+        self.kill_count += 1
+        self.running = False
+
+    def wait(self, timeout: int) -> int:
+        del timeout
+        self.wait_count += 1
+        if self.running:
+            raise harness.subprocess.TimeoutExpired("fake-attachment", 5)
+        return 0
+
+
 @pytest.fixture
 def contract() -> dict[str, object]:
     return json.loads(harness.CONTRACT_PATH.read_text(encoding="utf-8"))
@@ -395,6 +423,176 @@ def test_cleanup_error_never_overwrites_primary_coordinate() -> None:
     assert failure["stage"] == "environment"
     assert failure["code"] == "server_profile_mismatch_cleaned"
     assert failure["failed_predicates"] == ["server_tmpfs"]
+
+
+@pytest.mark.parametrize(
+    "state",
+    [
+        {"Running": False},
+        {},
+        {"Running": "true"},
+    ],
+)
+def test_post_readiness_running_failure_is_distinct_and_has_no_detail(
+    monkeypatch: pytest.MonkeyPatch,
+    contract: dict[str, object],
+    state: dict[str, object],
+) -> None:
+    attachment = FakeAttachment()
+
+    def inspect(*_: object) -> dict[str, object]:
+        assert attachment.poll() is None
+        return {"State": state}
+
+    monkeypatch.setattr(harness, "_inspect_container", inspect)
+    with pytest.raises(harness.RehearsalFailure) as caught:
+        try:
+            harness._verify_server_after_readiness(
+                "docker.exe",
+                container_id="c" * 64,
+                container_name="server",
+                network_name="network",
+                network_id="a" * 64,
+                nonce="b" * 32,
+                contract=contract,
+                forbidden_values=("f" * 64, "b" * 32),
+            )
+        finally:
+            assert harness._stop_attachment(attachment)
+    assert caught.value.stage == "environment"
+    assert caught.value.code == "server_not_running_after_readiness"
+    assert caught.value.detail is None
+    assert attachment.terminate_count == 1
+    assert attachment.kill_count == 0
+    assert attachment.wait_count == 1
+
+
+def test_post_readiness_identity_failure_retains_only_sorted_predicate_names(
+    monkeypatch: pytest.MonkeyPatch, contract: dict[str, object]
+) -> None:
+    attachment = FakeAttachment()
+
+    def inspect(*_: object) -> dict[str, object]:
+        assert attachment.poll() is None
+        return {"State": {"Running": True}}
+
+    def predicates(*_: object, **__: object) -> dict[str, bool]:
+        assert attachment.poll() is None
+        return {"server_tmpfs": False, "captured_id": True, "server_cpu": False}
+
+    monkeypatch.setattr(harness, "_inspect_container", inspect)
+    monkeypatch.setattr(harness, "_container_profile_predicates", predicates)
+    with pytest.raises(harness.RehearsalFailure) as caught:
+        try:
+            harness._verify_server_after_readiness(
+                "docker.exe",
+                container_id="c" * 64,
+                container_name="server",
+                network_name="network",
+                network_id="a" * 64,
+                nonce="b" * 32,
+                contract=contract,
+                forbidden_values=("f" * 64, "b" * 32),
+            )
+        finally:
+            assert harness._stop_attachment(attachment)
+    assert caught.value.code == "server_identity_mismatch_after_readiness"
+    assert caught.value.detail == "server_cpu,server_tmpfs"
+    failure = harness._failure_evidence(caught.value, [], {"status": "failed"})
+    assert failure["failed_predicates"] == ["server_cpu", "server_tmpfs"]
+    assert attachment.terminate_count == 1
+
+
+def test_post_readiness_malformed_identity_retains_only_inspect_shape(
+    monkeypatch: pytest.MonkeyPatch, contract: dict[str, object]
+) -> None:
+    attachment = FakeAttachment()
+    monkeypatch.setattr(
+        harness,
+        "_inspect_container",
+        lambda *_: {"State": {"Running": True}},
+    )
+    monkeypatch.setattr(
+        harness,
+        "_container_profile_predicates",
+        lambda *_, **__: {"inspect_shape": False},
+    )
+    with pytest.raises(harness.RehearsalFailure) as caught:
+        try:
+            harness._verify_server_after_readiness(
+                "docker.exe",
+                container_id="c" * 64,
+                container_name="server",
+                network_name="network",
+                network_id="a" * 64,
+                nonce="b" * 32,
+                contract=contract,
+                forbidden_values=("f" * 64, "b" * 32),
+            )
+        finally:
+            assert harness._stop_attachment(attachment)
+    assert caught.value.code == "server_identity_mismatch_after_readiness"
+    assert caught.value.detail == "inspect_shape"
+    assert attachment.terminate_count == 1
+
+
+def test_attachment_stays_live_through_post_readiness_and_next_sidecar_stage(
+    monkeypatch: pytest.MonkeyPatch, contract: dict[str, object]
+) -> None:
+    attachment = FakeAttachment()
+    sequence: list[str] = []
+
+    def inspect(*_: object) -> dict[str, object]:
+        assert attachment.poll() is None
+        assert attachment.terminate_count == 0
+        sequence.append("inspect")
+        return {"State": {"Running": True}}
+
+    def predicates(*_: object, **__: object) -> dict[str, bool]:
+        assert attachment.poll() is None
+        assert attachment.terminate_count == 0
+        sequence.append("predicates")
+        return {"captured_id": True, "server_tmpfs": True}
+
+    monkeypatch.setattr(harness, "_inspect_container", inspect)
+    monkeypatch.setattr(harness, "_container_profile_predicates", predicates)
+    try:
+        row = harness._verify_server_after_readiness(
+            "docker.exe",
+            container_id="c" * 64,
+            container_name="server",
+            network_name="network",
+            network_id="a" * 64,
+            nonce="b" * 32,
+            contract=contract,
+            forbidden_values=("f" * 64, "b" * 32),
+        )
+        sequence.append("readiness_verified")
+        assert row["State"]["Running"] is True
+        assert attachment.poll() is None
+        assert attachment.terminate_count == 0
+        sequence.append("next_sidecar_started")
+    finally:
+        assert harness._stop_attachment(attachment)
+    assert sequence == [
+        "inspect",
+        "predicates",
+        "readiness_verified",
+        "next_sidecar_started",
+    ]
+    assert attachment.terminate_count == 1
+    assert attachment.kill_count == 0
+    assert attachment.wait_count == 1
+
+
+def test_run_rehearsal_has_no_early_server_attachment_teardown() -> None:
+    source = Path(harness.__file__).read_text(encoding="utf-8")
+    readiness = source.index('action="readiness"')
+    setup = source.index('action="setup_and_catalogue"', readiness)
+    post_readiness = source[readiness:setup]
+    assert "_verify_server_after_readiness(" in post_readiness
+    assert "_stop_attachment(server_attachment)" not in post_readiness
+    assert "server_attachment = None" not in post_readiness
 
 
 def test_success_schemas_accept_only_closed_sanitized_shapes(
