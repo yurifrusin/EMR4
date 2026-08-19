@@ -170,7 +170,10 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
             assert graph["nodes"][-1]["id"] != selected_transaction["operation_id"]
         else:
             latch = json.loads(ACTIVE_LATCH.read_text(encoding="utf-8"))
-            assert selected_transaction["event_kind"] == "user_decision_transition"
+            assert selected_transaction["event_kind"] in {
+                "user_decision_transition",
+                "checkpoint_transition",
+            }
             assert latch["operation_id"] == selected_transaction["operation_id"]
             assert latch["status"] == "in_progress"
             assert graph["nodes"][-1]["id"] != selected_transaction["operation_id"]
@@ -227,7 +230,10 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
             assert latch["user_attention"]["required"] is True
             assert latch["terminal_response"]["permitted"] is True
         else:
-            assert selected_transaction["event_kind"] == "user_decision_transition"
+            assert selected_transaction["event_kind"] in {
+                "user_decision_transition",
+                "checkpoint_transition",
+            }
             assert selected_transaction["source_commit"] in clockwork_relation
             assert latch["status"] == "in_progress"
             assert latch["user_attention"]["required"] is False

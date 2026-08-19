@@ -14,7 +14,9 @@ if str(ROOT) not in sys.path:
 
 from orchestration_harness.governance_clockwork_tick import (
     BLOCKED_INTENT_VERSION,
+    CHECKPOINT_INTENT_VERSION,
     USER_DECISION_INTENT_VERSION,
+    build_checkpoint_tick_generation,
     build_user_decision_tick_generation,
     build_tick_generation,
     build_blocked_tick_generation,
@@ -41,14 +43,17 @@ def _intent_path(raw: Path) -> Path:
         path.relative_to(ROOT.resolve())
     except ValueError as error:
         raise ValueError("intent_path_escape") from error
-    if not path.is_file() or path.name != "closeout-intent.json":
-        raise ValueError("closeout_intent_required")
+    if not path.is_file() or path.name not in {
+        "closeout-intent.json",
+        "checkpoint-intent.json",
+    }:
+        raise ValueError("closed_tick_intent_required")
     return path
 
 
-def _write_outputs(topic: Path, result: dict) -> None:
-    evidence = topic / "clockwork-tick-evidence.json"
-    report = topic / "clockwork-tick-report.md"
+def _write_outputs(topic: Path, result: dict, *, prefix: str = "clockwork-tick") -> None:
+    evidence = topic / f"{prefix}-evidence.json"
+    report = topic / f"{prefix}-report.md"
     evidence.write_text(
         json.dumps(result, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
@@ -88,15 +93,27 @@ def main(argv: list[str] | None = None) -> int:
         transaction = _load(ROOT / contract["clockwork_root"] / "transaction.json")
         if intent.get("schema_version") == BLOCKED_INTENT_VERSION:
             operation_id = intent.get("operation_id")
+            event_kind = "blocked_transition"
+        elif intent.get("schema_version") == CHECKPOINT_INTENT_VERSION:
+            operation_id = intent.get("operation_id")
+            event_kind = "checkpoint_transition"
         elif intent.get("schema_version") == USER_DECISION_INTENT_VERSION:
             operation_id = intent.get("next_operation", {}).get("operation_id")
+            event_kind = "user_decision_transition"
         else:
             operation_id = intent.get("transaction_manifest", {}).get("operation_id")
-        if arguments.check and transaction.get("operation_id") == operation_id:
+            event_kind = "clean_closeout"
+        if (
+            arguments.check
+            and transaction.get("operation_id") == operation_id
+            and transaction.get("event_kind") == event_kind
+        ):
             result = validate_tick_live_state(ROOT, contract)
         else:
             if intent.get("schema_version") == BLOCKED_INTENT_VERSION:
                 prepared = build_blocked_tick_generation(ROOT, contract, intent)
+            elif intent.get("schema_version") == CHECKPOINT_INTENT_VERSION:
+                prepared = build_checkpoint_tick_generation(ROOT, contract, intent)
             elif intent.get("schema_version") == USER_DECISION_INTENT_VERSION:
                 prepared = build_user_decision_tick_generation(
                     ROOT, contract, intent
@@ -124,7 +141,15 @@ def main(argv: list[str] | None = None) -> int:
                     "live_publication_count": 1,
                     "bespoke_updater_executions": 0,
                 }
-                _write_outputs(intent_path.parent, result)
+                _write_outputs(
+                    intent_path.parent,
+                    result,
+                    prefix=(
+                        "clockwork-checkpoint-tick"
+                        if intent.get("schema_version") == CHECKPOINT_INTENT_VERSION
+                        else "clockwork-tick"
+                    ),
+                )
     print(json.dumps(result, indent=2, ensure_ascii=False))
     return 0
 

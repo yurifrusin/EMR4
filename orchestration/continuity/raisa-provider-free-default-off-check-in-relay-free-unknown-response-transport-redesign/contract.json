@@ -9,7 +9,7 @@
   "source_bindings": [
     {
       "path": "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-plan.md",
-      "sha256": "03e469ad26080bdaa9c8bc62c130f90afd1712e4e85041612c05111686607dd9"
+      "sha256": "3b88e96110a33437895a993dfca7e44164e7a342c420c53cc7f366851f424f1b"
     },
     {
       "path": "docs/security/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-threat-model-delta.md",
@@ -56,12 +56,12 @@
       "sha256": "5532f9ccc0efc326d34bc0d33f9f650d3f5322f8f4b22271fc8970b0dad31946"
     },
     {
-      "path": "orchestration/continuity/ariadne-active-operation-latch/current.json",
-      "sha256": "7e04a7dc823a79f579eb3251536d2bb7b536e07b1b48c19295fb891cdcfee0dd"
+      "path": "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/clockwork-tick-evidence.json",
+      "sha256": "c1ac9a35088927ff3af804db2d162d01d06133973ecb36b5be262697a49e255a"
     },
     {
-      "path": "orchestration/continuity/ariadne-governance-clockwork/transaction.json",
-      "sha256": "63494f9f0960057e4bf8b95fa0e54de8748485c975f991392c033ea79814fb30"
+      "path": "orchestration/continuity/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign/clockwork-tick-report.md",
+      "sha256": "5640874077b42019680b39c8b588844e125ed041527ec6509bf06c48480ba71e"
     }
   ],
   "containment_profile": {

@@ -63,8 +63,8 @@ occupied no-database proof:
 | `94ac2239a81f06e1404fa6c3fe7a02c9e9df2c0b4cea6b633347a987171a1712` | `orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-contract.json` |
 | `d0fa77aec371d634284f81bf1fd6cfd49bb5a52fbe14003a17c5e35dcaf0283e` | `orchestration/api_spine_adr.md` |
 | `5532f9ccc0efc326d34bc0d33f9f650d3f5322f8f4b22271fc8970b0dad31946` | `orchestration/api_spine_programme.md` |
-| `7e04a7dc823a79f579eb3251536d2bb7b536e07b1b48c19295fb891cdcfee0dd` | clockwork-derived active latch after Yuri's decision |
-| `63494f9f0960057e4bf8b95fa0e54de8748485c975f991392c033ea79814fb30` | clockwork `user_decision_transition` transaction |
+| `c1ac9a35088927ff3af804db2d162d01d06133973ecb36b5be262697a49e255a` | immutable clockwork user-decision tick evidence |
+| `5640874077b42019680b39c8b588844e125ed041527ec6509bf06c48480ba71e` | immutable clockwork user-decision tick report |
 
 The exact attempt-002 source path is
 `orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal/rehearsal-failure-evidence-attempt-002.json`.
