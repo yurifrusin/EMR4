@@ -1,0 +1,81 @@
+{
+  "schema_version": "ariadne.governance_live_user_decision_transition_intent.v1",
+  "blocked_operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-004",
+  "selected_outcome": "replace_with_newly_frozen_descendant",
+  "next_operation": {
+    "operation_id": "raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair",
+    "active_tranche": "Raisa provider-free check-in server-attachment lifetime and post-readiness observability conformance repair",
+    "objective": "Freeze and complete a provider-free deterministic repair that keeps the relay-free PostgreSQL server attachment under one cleanup owner until final teardown, separates post-readiness running-state failure from exact identity-predicate failure, preserves sanitized failed-predicate evidence and proves the lifecycle with fakes, without Docker or database execution.",
+    "authority_source": "Yuri's explicit standing uninterrupted-development authority, immutable attempt-004 failure and envelope evidence, its blocked clockwork closeout at lease 32, and the accepted relay-free transport, runtime-role and cleanup controls.",
+    "completed_stage": "Attempt 004 is closed blocked at a6a292e36978aa95e439fa398242c67816b6d4cc after one consumed execution, zero retry, no released effect, exact cleanup and zero residue. Yuri's standing authority selects the narrow no-Docker server-attachment lifetime and post-readiness observability repair.",
+    "next_executable_stage": "fresh_five_source_rehydration_and_freeze_the_provider_free_server_attachment_lifetime_and_post_readiness_observability_repair_plan_without_docker_database_or_model_execution"
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_deterministic_relay_free_server_attachment_lifetime_and_post_readiness_observability_repair_only",
+    "attempt_004_failure_envelope_execution_count_source_and_cleanup_result_are_immutable_and_never_overwritten",
+    "attempts_001_002_003_and_all_accepted_repairs_remain_immutable",
+    "no_retry_reclassification_or_second_execution_of_attempt_004",
+    "only_the_relay_free_harness_attachment_lifetime_combined_running_identity_guard_failure_evidence_and_exact_tests_may_change",
+    "server_attachment_remains_owned_until_final_cleanup_unless_deterministic_evidence_proves_an_equally_safe_earlier_release",
+    "running_state_and_identity_predicate_failures_are_distinct_and_sanitized_failed_predicate_names_are_preserved",
+    "provider_free_fake_process_and_inspect_sequence_tests_required",
+    "no_docker_object_container_start_attach_stdin_credential_postgresql_sql_transaction_or_database_execution",
+    "no_deepseek_model_call_or_occupied_worker_without_a_separately_bound_v2_work_order_provider_free_no_database_admission_and_one_run_latch",
+    "no_claude_code_fallback",
+    "gemini_only_after_an_exact_deterministic_candidate",
+    "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "attachment-observability-transition-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attachment-observability-transition-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attachment-observability-transition-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}
