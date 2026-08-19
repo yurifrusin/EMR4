@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 569,
+  "register_revision": 570,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-20",
@@ -26049,6 +26049,43 @@
         ]
       },
       "status": "contained"
+    },
+    {
+      "incident_id": "AER-0660",
+      "attempt_id": "checkin-relay-cleanup-closeout-clockwork-check-001",
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "clockwork-transaction-manifest-incident-identifier",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_exec_session",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every transactional-closeout incident identifier must satisfy the clockwork lowercase machine-identifier grammar before the read-only closeout check.",
+      "observed_error": "The first closeout intent copied the human-facing uppercase AER-0657 through AER-0659 labels into incident_id fields; transactional manifest validation rejected the intent before publication with incident_id_invalid.",
+      "detection_method": "The separate read-only clockwork --check raised tick_transaction_manifest from incident_id_invalid and made no canonical publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-570.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.transaction_manifest_incident_identifier_used_human_case",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the rejected check, count the authoring correction, replace the three machine incident identifiers and peer identifiers with lowercase schema-valid forms, and rerun the read-only check before any publish.",
+        "prevention_control": "Render or validate transaction-manifest incident identifiers through the schema grammar at intent authoring time; human-facing register labels remain evidence text rather than machine keys.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-570.md"
+        ]
+      },
+      "status": "corrected"
     }
   ]
 }

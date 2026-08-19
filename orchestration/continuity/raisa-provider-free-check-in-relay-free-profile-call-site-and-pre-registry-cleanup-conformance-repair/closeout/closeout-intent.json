@@ -135,7 +135,7 @@
       "evidence": [
         "docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-closeout.md",
         "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-sol-acceptance.md",
-        "docs/ariadne-agent-error-correction-register-revision-569.md"
+        "docs/ariadne-agent-error-correction-register-revision-570.md"
       ],
       "orientation_statement": "EMR4 will next enforce provider-free no-database status at manifest admission and test-fixture selection; attempt 004 remains closed."
     },
@@ -158,28 +158,33 @@
         "peers": []
       },
       {
-        "incident_id": "AER-0657",
+        "incident_id": "aer-0657",
         "source_id": "profile-call-site-cleanup-gemini-review-attempt-001",
         "peers": [
-          "AER-0658",
-          "AER-0659"
+          "aer-0658",
+          "aer-0659"
         ]
       },
       {
-        "incident_id": "AER-0658",
+        "incident_id": "aer-0658",
         "source_id": "profile-call-site-cleanup-sol-initial-verification",
         "peers": [
-          "AER-0657",
-          "AER-0659"
+          "aer-0657",
+          "aer-0659"
         ]
       },
       {
-        "incident_id": "AER-0659",
+        "incident_id": "aer-0659",
         "source_id": "profile-call-site-cleanup-register-verification",
         "peers": [
-          "AER-0657",
-          "AER-0658"
+          "aer-0657",
+          "aer-0658"
         ]
+      },
+      {
+        "incident_id": "clockwork-incident-identifier-case",
+        "source_id": "profile-call-site-cleanup-closeout-check-attempt-001",
+        "peers": []
       }
     ],
     "broker": {
@@ -284,6 +289,7 @@
       "docs/ariadne-agent-error-correction-register-revision-567.md",
       "docs/ariadne-agent-error-correction-register-revision-568.md",
       "docs/ariadne-agent-error-correction-register-revision-569.md",
+      "docs/ariadne-agent-error-correction-register-revision-570.md",
       "docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-closeout.md",
       "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-sol-acceptance.md",
       "orchestration/human_inbox/yuri/2026-08-20--check-in-relay-free-profile-call-site-cleanup-repair.md",

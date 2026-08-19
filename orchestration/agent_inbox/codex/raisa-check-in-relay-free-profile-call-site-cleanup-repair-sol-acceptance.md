@@ -30,6 +30,11 @@ class. A corrected provider-free manifest then passed locally and in one fresh
 Gemini 3.7 Flash/high clean-worktree review at the unchanged candidate with no
 substantive finding.
 
+Clockwork separately rejected the first closeout intent because machine
+incident identifiers used the human-facing uppercase AER form. AER-0660
+retains that pre-publication correction; it changes no candidate or accepted
+claim.
+
 Attempt 003 remains immutable at one occupied execution and zero retry. This
 acceptance opens only the provider-free no-database manifest/runner admission
 repair. It opens no attempt 004, product change, ordinary-practice command,

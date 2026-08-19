@@ -71,6 +71,11 @@ manifest preflight did not detect the database fixture graph, and Sol then
 repeated the same class of mistake while verifying the error register. That
 remaining gap is not safely solved by another reminder.
 
+The first closeout check also rejected human-facing uppercase AER labels in
+machine identifier fields before publication. AER-0660 retains that bounded
+authoring correction; lowercase schema-valid identifiers are used in the fresh
+check.
+
 The direct successor is therefore an engine-level admission repair. It will
 make provider-free/no-database status a validated property of the command and
 selected test graph, rejecting ordinary pytest and shared-PostgreSQL fixture

@@ -42,6 +42,12 @@
       "error": "ordinary pytest was invoked again and acquired the shared PostgreSQL schema before interruption",
       "effect": "the no-database command-scope violation recurred immediately and the run was rejected from acceptance",
       "correction": "register AER-0659 and constrain every remaining test command to scripts.ariadne_provider_free_pytest"
+    },
+    {
+      "stage": "clockwork_closeout_check",
+      "error": "human-facing uppercase AER labels were copied into lowercase machine incident identifiers",
+      "effect": "the separate read-only check rejected the transaction manifest before publication",
+      "correction": "register AER-0660, use lowercase incident and peer identifiers, and rerun check before publish"
     }
   ],
   "efficacy_assessment": {
