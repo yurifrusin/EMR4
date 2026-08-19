@@ -1,0 +1,71 @@
+{
+  "schema_version": "emr4.relay-free-oci-transport-evidence.v1",
+  "result": "raisa_provider_free_default_off_check_in_relay_free_unknown_response_transport_redesign_pass",
+  "evidence_label": "authored_synthetic_provider_free_no_database_relay_free_oci_result_transport",
+  "source_head": "cd40c5c3cfdc57eb72e99ccc9bc88bf593b36e76",
+  "decision_transition_source": "44c1c8efa2357d9ebdc9ec895fd31e5758bc66d4",
+  "contract_sha256": "f384dcacf517f24e5f694f9175e225458d850a5f5464303e87cca741792ec5ce",
+  "source_binding_count": 14,
+  "hostile_mutations": {
+    "contract_attempted": 256,
+    "contract_rejected": 256,
+    "state_attempted": 96,
+    "state_rejected": 96,
+    "escapes": 0
+  },
+  "containment": {
+    "image_reference": "postgres:16-bookworm",
+    "image_id_sha256": "7d021b3520a305fd7934dcc6aa4b7d9c6a91e677fd328b94848b857060cc5065",
+    "pulls": 0,
+    "network_mode": "none",
+    "published_ports": false,
+    "bind_mounts": 0,
+    "volumes": 0,
+    "tmpfs_count": 1,
+    "log_driver": "none",
+    "read_only_rootfs": true
+  },
+  "transport": {
+    "credential_input": "attached_stdin_process_memory_only",
+    "attachment_is_outcome_evidence": false,
+    "outcome_source": "captured_container_oci_state",
+    "classification": "simulated_connection_lost_without_complete_terminal_response",
+    "complete_terminal_response": false,
+    "success_released": false,
+    "automatic_retries": 0
+  },
+  "closed_state": {
+    "identity_match": true,
+    "running": false,
+    "exit_code": 42,
+    "oom_killed": false,
+    "state_error_empty": true,
+    "restart_count": 0
+  },
+  "database": {
+    "postgres_process_started": false,
+    "connections": 0,
+    "transactions": 0,
+    "sql_statements": 0,
+    "product_rows": 0,
+    "ordinary_admission_releases": 0
+  },
+  "provider_calls": 0,
+  "lifecycle": [
+    "static_admission_passed",
+    "captured_container_created_without_network_or_logs",
+    "exact_no_secret_container_configuration_verified",
+    "token_delivered_over_attached_stdin_only",
+    "oci_state_classified_before_attachment_disposition",
+    "hostile_oci_states_denied",
+    "attachment_absent_before_container_cleanup",
+    "captured_container_absent"
+  ],
+  "elapsed_milliseconds": 706,
+  "cleanup": {
+    "attachment_absent_before_cleanup": true,
+    "captured_container_absent": true,
+    "matching_nonce_resources": 0,
+    "status": "cleanup_verified"
+  }
+}
