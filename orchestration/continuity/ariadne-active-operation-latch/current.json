@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal",
-  "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in relay-free rollback and unknown-commit recovery rehearsal",
-  "objective": "Freeze and then prove in one uniquely named disposable authored-synthetic PostgreSQL environment that explicit rollback leaves zero effect and an incomplete terminal response through the accepted relay-free caller releases no success or retry and is resolved by restricted-role authoritative readback, followed by exact cleanup.",
-  "status": "blocked",
-  "source_head": "5adbf56b886cb1107dc8c18723c791e4e566c2fd",
-  "authority_source": "Accepted restricted runtime-role and forced-RLS floor, Yuri's explicit relay-free redesign selection, this accepted no-database transport proof and Yuri's standing uninterrupted-development authority.",
+  "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-002",
+  "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 002",
+  "objective": "Freeze and then execute exactly one separately named provider-free authored-synthetic disposable PostgreSQL attempt using the accepted relay-free transport and repaired lifecycle-admission harness, proving explicit rollback leaves zero effect and an incomplete terminal response releases neither success nor retry before restricted-role authoritative readback, with exact cleanup; stop fail-closed on any mismatch.",
+  "status": "in_progress",
+  "source_head": "9dd017e6ad3f5d5d681727441a2fd7a50869dca7",
+  "authority_source": "Yuri's explicit confirmation of one new attempt, immutable attempt-001 failure and cleanup evidence, accepted relay-free transport, accepted restricted-role/forced-RLS floor and repaired harness source fc772085a02d7db790b938fb845ef4546156d31e.",
   "checkpoint": {
-    "completed_stage": "Attempt 001 failed before PostgreSQL start at server profile admission. Exact owned Created-state residue was verified and removed; matching containers and networks are zero. Immutable failure evidence and static repair source fc772085a02d7db790b938fb845ef4546156d31e preserve the failure, self-clean pre-return acquisitions and retain the primary error. Static admission, 17 focused tests, register, lint, compilation and diff checks pass; no rerun occurred.",
-    "next_executable_stage": null,
+    "completed_stage": "Yuri explicitly confirmed one separately frozen new attempt after attempt 001 closed blocked; attempt-001 evidence remains immutable and no attempt-002 database execution has occurred.",
+    "next_executable_stage": "freeze_the_narrowest_attempt_002_plan_and_immutable_output_namespace_without_database_execution",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 1
+      "verification": 0
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,17 +26,20 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": true,
-    "reason": "The frozen plan authorised exactly one occupied execution. It is consumed and failed. A new occupied attempt requires Yuri to choose whether to authorise a separately frozen descendant recovery plan; the current plan permits neither rerun nor successful-proof review."
+    "required": false,
+    "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "The single authorised occupied attempt is consumed, its failure is preserved, cleanup is complete and the harness repair is statically accepted. The intended PostgreSQL rollback and unknown-response proof was not achieved, so this tranche closes blocked rather than passing."
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
     "provider_free_uniquely_named_disposable_local_postgresql_only",
+    "attempt_001_failure_and_cleanup_evidence_are_immutable_and_never_overwritten",
     "accepted_relay_free_transport_and_runtime_role_tenant_isolation_floor_are_immutable",
-    "newly_frozen_authored_synthetic_transaction_fixture_only",
+    "repaired_lifecycle_admission_source_fc772085a02d7db790b938fb845ef4546156d31e_is_the_attempt_002_floor",
+    "exactly_one_attempt_002_occupied_execution_after_new_plan_and_preexecution_admission",
+    "newly_frozen_authored_synthetic_transaction_fixture_and_output_namespace_only",
     "no_host_tcp_listener_forwarder_docker_exec_byte_bridge_multiprocessing_process_or_queue",
     "credential_input_only_by_post_inspection_attached_stdin_and_outcome_only_by_exact_terminal_oci_state",
     "exact_request_command_idempotency_digest_and_audit_identity_must_be_preserved",
