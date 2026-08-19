@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_static_admission_preserves_accepted_harness_and_hostile_gates() -> None:
-    result = attempt.static_check()
+    result = attempt.static_check(require_empty_namespace=False)
     assert result["status"] == "passed"
     assert result["accepted_harness_sha256"] == attempt.ACCEPTED_HARNESS_SHA256
     assert hashlib.sha256(Path(attempt.accepted.__file__).read_bytes()).hexdigest() == (
@@ -106,3 +106,21 @@ def test_execution_envelope_is_closed_and_binds_one_attempt(tmp_path: Path) -> N
         match="execution_envelope_schema_invalid",
     ):
         attempt._validate_envelope(hostile)
+
+
+def test_retained_attempt_002_failure_is_closed_and_schema_valid() -> None:
+    envelope = json.loads(attempt.ENVELOPE_PATH.read_text(encoding="utf-8"))
+    failure = json.loads(attempt.FAILURE_PATH.read_text(encoding="utf-8"))
+    attempt._validate_envelope(envelope)
+    assert envelope["result"] == "failed_closed"
+    assert envelope["occupied_execution_count"] == 1
+    assert envelope["automatic_retry_count"] == 0
+    assert envelope["ambiguous_success_released"] is False
+    assert envelope["cleanup_status"] == "cleanup_verified"
+    assert envelope["terminal_binding_restored"] is True
+    assert failure["result"] == "failed_closed"
+    assert failure["code"] == "server_profile_mismatch_cleaned"
+    assert failure["failed_predicates"] == ["captured_network_id", "secret_absent"]
+    assert failure["success_released"] is False
+    assert failure["retry_count"] == 0
+    assert failure["cleanup"]["matching_owned_resources"] == 0
