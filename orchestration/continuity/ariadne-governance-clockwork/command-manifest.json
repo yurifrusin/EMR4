@@ -12,16 +12,35 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "relay-free-recovery-focused-tests",
+      "command_id": "relay-free-recovery-harness-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "pytest",
         "-q",
-        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
-        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal_plan.py",
-        "tests/test_ariadne_active_operation_latch.py",
-        "tests/test_current_baton_consistency.py"
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "relay-free-recovery-plan-tests",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal_plan.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "relay-free-recovery-register-tests",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_ariadne_agent_error_register.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
@@ -34,7 +53,7 @@
         "check",
         "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
         "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
-        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal_plan.py"
+        "tests/test_ariadne_agent_error_register.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },

@@ -3,17 +3,17 @@
   "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal",
   "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in relay-free rollback and unknown-commit recovery rehearsal",
   "objective": "Freeze and then prove in one uniquely named disposable authored-synthetic PostgreSQL environment that explicit rollback leaves zero effect and an incomplete terminal response through the accepted relay-free caller releases no success or retry and is resolved by restricted-role authoritative readback, followed by exact cleanup.",
-  "status": "in_progress",
+  "status": "blocked",
   "source_head": "5adbf56b886cb1107dc8c18723c791e4e566c2fd",
   "authority_source": "Accepted restricted runtime-role and forced-RLS floor, Yuri's explicit relay-free redesign selection, this accepted no-database transport proof and Yuri's standing uninterrupted-development authority.",
   "checkpoint": {
-    "completed_stage": "The frozen contract, five closed schemas, relay-free sidecar harness and focused deterministic tests pass at exact full-Git source 5adbf56b886cb1107dc8c18723c791e4e566c2fd with 366/366 hostile contract mutations, 96/96 manifest mutations, 96/96 OCI states and 24/24 classifier packets denied; no Docker object or database was opened.",
-    "next_executable_stage": "verify_the_exact_cached_image_and_zero_owned_residue_generate_a_fresh_five_source_preexecution_receipt_then_run_exactly_one_disposable_postgresql_proof_and_stop_on_any_mismatch",
+    "completed_stage": "Attempt 001 failed before PostgreSQL start at server profile admission. Exact owned Created-state residue was verified and removed; matching containers and networks are zero. Immutable failure evidence and static repair source fc772085a02d7db790b938fb845ef4546156d31e preserve the failure, self-clean pre-return acquisitions and retain the primary error. Static admission, 17 focused tests, register, lint, compilation and diff checks pass; no rerun occurred.",
+    "next_executable_stage": null,
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 0
+      "verification": 1
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,12 +26,12 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": false,
-    "reason": null
+    "required": true,
+    "reason": "The frozen plan authorised exactly one occupied execution. It is consumed and failed. A new occupied attempt requires Yuri to choose whether to authorise a separately frozen descendant recovery plan; the current plan permits neither rerun nor successful-proof review."
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "The single authorised occupied attempt is consumed, its failure is preserved, cleanup is complete and the harness repair is statically accepted. The intended PostgreSQL rollback and unknown-response proof was not achieved, so this tranche closes blocked rather than passing."
   },
   "protected_boundaries": [
     "provider_free_uniquely_named_disposable_local_postgresql_only",
