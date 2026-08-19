@@ -1,0 +1,32 @@
+{
+  "admitted_manifest_command_count": 1,
+  "broker_work_order_schema": "ariadne.deepseek_work_order.v2",
+  "command_manifest_sha256": "sha256:cf432ea1295334d2184ab5179d4e6d34f12ff50799538218578308c218035e08",
+  "contract_sha256": "sha256:dc2d2a7151be1d7962fa27c7cbe01cc2743d9cc3e13b7286119cd35e3f1ef248",
+  "hostile_mutations": {
+    "escaped": [],
+    "named": 128,
+    "rejected": 128
+  },
+  "invocations": {
+    "docker": 0,
+    "occupied_deepseek_attempts": 0,
+    "ordinary_pytest": 0,
+    "postgresql": 0,
+    "provider": 0,
+    "pytest_collections": 0,
+    "selected_module_imports": 0
+  },
+  "legacy_v1_broker_policy": "test_mode_plus_explicit_compatibility_flag_only",
+  "manifest_admission_sha256": "sha256:1042b4e2f519b223d2acc12fd419c9ba510bf46531a956269fce2545589a5b5e",
+  "manifest_runner_selection_identical": true,
+  "planning_source": "440fc7bbd071fbb97a97c986e8c80fe69b83f747",
+  "repository_a5_1": {
+    "reason": "provider_free_conftest_import_forbidden",
+    "status": "rejected_before_subprocess"
+  },
+  "safe_selection_sha256": "sha256:169baac1ad295415f07a06ee7ab8fbc8c3197e76cdfe69317cd9f040c5803e29",
+  "safe_selection_test_count": 5,
+  "schema_version": "ariadne.provider_free_no_database_admission_evidence.v1",
+  "status": "passed"
+}

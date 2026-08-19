@@ -1,0 +1,123 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne provider-free no-database manifest and runner admission repair",
+    "completed_stage": "Accepted raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_and_freeze_narrow_no_database_admission_repair_plan",
+    "operation_id": "ariadne-provider-free-no-database-manifest-runner-admission-repair",
+    "resume_after_compaction": true,
+    "source_head": "31cddb7511be306ecadbe02555cec8cd1f8c200e",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "440fc7bbd071fbb97a97c986e8c80fe69b83f747",
+    "reason_codes": [],
+    "resolved_commit": "31cddb7511be306ecadbe02555cec8cd1f8c200e",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "31cddb7511be306ecadbe02555cec8cd1f8c200e"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "440fc7bbd071fbb97a97c986e8c80fe69b83f747",
+    "branch_origin_aligned": true,
+    "head": "440fc7bbd071fbb97a97c986e8c80fe69b83f747",
+    "origin_branch_commit": "440fc7bbd071fbb97a97c986e8c80fe69b83f747",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 655
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native DeepSeek Harness remains paused pending its separately frozen stock-headless-to-custom-runner boot proof; Claude Code is no fallback, and this tranche itself repairs the broker work-order admission gear needed before occupied worker use.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high exact-candidate read-only veto is reserved after deterministic proof because the repair changes a reusable global command-admission boundary.",
+        "work_packages": [
+          "future_exact_candidate_read_only_no_database_admission_repair_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation and the runner, fixture-graph classifier, manifest preflight and broker boundary form one tightly coupled serial invariant.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-provider-free-no-database-manifest-runner-admission-repair",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "plan_frozen",
+      "deterministic_candidate",
+      "verifier_acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol freezes the exact no-database admission semantics before source changes",
+      "test fixture-graph classification and command-shape admission share one fail-closed verdict",
+      "no Docker database provider or occupied worker execution occurs",
+      "the DeepSeek broker integration is provider-free static and deterministic only",
+      "Gemini reviews only an exact deterministic clean candidate",
+      "clockwork check and publish remain separate commands"
+    ]
+  },
+  "planned_action": "freeze_the_narrow_provider_free_no_database_manifest_and_runner_admission_repair_plan_without_docker_database_or_provider_execution",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-report.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/efficacy-reading.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/closeout/clockwork-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns plan, deterministic execution-admission architecture, implementation, acceptance, clockwork and task-branch Git under Yuri's standing uninterrupted-development authority. DeepSeek is declined because its native Harness still requires the separately frozen stock-headless-to-custom-runner boot proof and Claude Code is no fallback. Gemini 3.7 Flash/high is reserved for one fresh exact-candidate veto because this tranche changes the global manifest/runner command boundary. Native subagents are declined by current developer policy and because the runner, manifest preflight and broker integration are one serial control package.",
+    "git_refs_and_worktree": "Task HEAD and origin task branch are exact 440fc7bbd071fbb97a97c986e8c80fe69b83f747 on codex/ariadne-bernie-davida-parallel-seam. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked and staged worktree is clean; docs/branding and unrelated untracked files remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely through line 507 at task HEAD 440fc7bbd071fbb97a97c986e8c80fe69b83f747. At Continuity 337 / Compass 319 its Current result accepts the relay-free call-site and cleanup mechanism at exact source 31cddb7511be306ecadbe02555cec8cd1f8c200e, and Next implementation names ariadne-provider-free-no-database-manifest-runner-admission-repair under the active latch.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 remain sealed; the provider lane remains paused; historical diary PHI remains local and ignored. This tranche may change only provider-free pytest admission, deterministic selected-test fixture-graph analysis, verifier/work-order manifest preflight and the DeepSeek broker command boundary. It authorises no Docker object, process, credential, PostgreSQL fixture, SQL, transaction, database or provider execution; no attempt-004 plan or retry; no product/API/OpenAPI/GraphQL/config/client/waiting-area change; no ordinary-practice enablement, feature-flag, allowlist, generic-status Arrived or grammar change; no product/patient/appointment/clinical/protected data, production, deployment, release, Pages or protected-ref movement. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

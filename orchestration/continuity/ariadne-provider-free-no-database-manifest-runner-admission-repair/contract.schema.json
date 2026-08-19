@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/ariadne-provider-free-no-database-admission-contract-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "planning_source",
+    "operation_id",
+    "admission_schema",
+    "broker_work_order_schema",
+    "path_policy",
+    "pytest_core_fixture_allowlist",
+    "shared_fixture_policy",
+    "unknown_fixture_policy",
+    "unsupported_syntax_policy",
+    "broker_required_bindings",
+    "legacy_v1_broker_policy",
+    "forbidden_invocations"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.provider_free_no_database_admission_contract.v1"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "operation_id": {"const": "ariadne-provider-free-no-database-manifest-runner-admission-repair"},
+    "admission_schema": {"const": "ariadne.provider_free_no_database_admission.v1"},
+    "broker_work_order_schema": {"const": "ariadne.deepseek_work_order.v2"},
+    "path_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prefix", "suffix", "literal_regular_non_symlink_only", "duplicates_forbidden"],
+      "properties": {
+        "prefix": {"const": "tests/"},
+        "suffix": {"const": ".py"},
+        "literal_regular_non_symlink_only": {"const": true},
+        "duplicates_forbidden": {"const": true}
+      }
+    },
+    "pytest_core_fixture_allowlist": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}
+    },
+    "shared_fixture_policy": {"const": "reject_any_tests_conftest_fixture_or_import"},
+    "unknown_fixture_policy": {"const": "reject"},
+    "unsupported_syntax_policy": {"const": "reject"},
+    "broker_required_bindings": {
+      "const": ["command_manifest_sha256", "provider_free_no_database_admission_sha256"]
+    },
+    "legacy_v1_broker_policy": {"const": "test_mode_plus_explicit_compatibility_flag_only"},
+    "forbidden_invocations": {
+      "const": ["ordinary_pytest", "docker", "postgresql", "provider", "occupied_deepseek_attempt"]
+    }
+  }
+}

@@ -73,6 +73,7 @@ def test_main_uses_fixed_command_clean_environment_and_exact_root(
 ) -> None:
     test_path = tmp_path / "tests" / "test_safe.py"
     test_path.parent.mkdir()
+    (test_path.parent / "conftest.py").write_text("# synthetic\n", encoding="utf-8")
     test_path.write_text("def test_safe():\n    assert True\n", encoding="utf-8")
     observed: dict[str, object] = {}
 
@@ -111,6 +112,56 @@ def test_main_uses_fixed_command_clean_environment_and_exact_root(
     assert observed["shell"] is False
     assert "--noconftest" in observed["command"]
     assert "TEST_DATABASE_URL" not in observed["env"]
+
+
+def test_main_rejects_shared_fixture_before_subprocess(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    tests = tmp_path / "tests"
+    tests.mkdir()
+    (tests / "conftest.py").write_text(
+        "import pytest\n@pytest.fixture\ndef practice(): return object()\n",
+        encoding="utf-8",
+    )
+    (tests / "test_unsafe.py").write_text(
+        "def test_unsafe(practice): pass\n", encoding="utf-8"
+    )
+    monkeypatch.setattr(
+        provider_free.subprocess,
+        "run",
+        lambda *args, **kwargs: pytest.fail("subprocess must not start"),
+    )
+
+    with pytest.raises(SystemExit, match="shared_postgresql_fixture_reachable"):
+        provider_free.main(
+            ["--repo-root", str(tmp_path), "tests/test_unsafe.py"]
+        )
+
+
+def test_main_rejects_manifest_to_runner_admission_digest_drift(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    tests = tmp_path / "tests"
+    tests.mkdir()
+    (tests / "conftest.py").write_text("# synthetic\n", encoding="utf-8")
+    (tests / "test_safe.py").write_text(
+        "def test_safe(): pass\n", encoding="utf-8"
+    )
+    monkeypatch.setattr(
+        provider_free.os,
+        "environ",
+        {provider_free.EXPECTED_ADMISSION_ENV: "sha256:" + "0" * 64},
+    )
+    monkeypatch.setattr(
+        provider_free.subprocess,
+        "run",
+        lambda *args, **kwargs: pytest.fail("subprocess must not start"),
+    )
+
+    with pytest.raises(SystemExit, match="admission digest mismatch"):
+        provider_free.main(
+            ["--repo-root", str(tmp_path), "tests/test_safe.py"]
+        )
 
 
 def test_evidence_led_workflow_names_provider_free_entrypoint() -> None:

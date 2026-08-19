@@ -20,7 +20,10 @@ const MAX_REQUEST_BYTES = 1_048_576;
 const MAX_RESPONSE_BYTES = 2_097_152;
 const MAX_OUTPUT_TOKENS = 4_096;
 const UPSTREAM_TIMEOUT_MS = 300_000;
-const WORK_ORDER_SCHEMA = "ariadne.deepseek_work_order.v1";
+const WORK_ORDER_SCHEMA_V1 = "ariadne.deepseek_work_order.v1";
+const WORK_ORDER_SCHEMA_V2 = "ariadne.deepseek_work_order.v2";
+const COMMAND_MANIFEST_SCHEMA = "ariadne.verifier-command-manifest.v1";
+const NO_DATABASE_ADMISSION_SCHEMA = "ariadne.provider_free_no_database_admission.v1";
 const DIGEST_PATTERN = /^sha256:[0-9a-f]{64}$/;
 const COMMIT_PATTERN = /^[0-9a-f]{40}$/;
 
@@ -45,13 +48,57 @@ function canonical(value) {
   return JSON.stringify(value);
 }
 
+function sortedValue(value) {
+  if (Array.isArray(value)) return value.map(sortedValue);
+  if (value !== null && typeof value === "object") {
+    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, sortedValue(value[key])]));
+  }
+  return value;
+}
+
+function prettyCanonical(value) {
+  return `${JSON.stringify(sortedValue(value), null, 2)}\n`;
+}
+
+function loadCommandBoundary(boundWorkOrder) {
+  if (boundWorkOrder.schema_version !== WORK_ORDER_SCHEMA_V2) return null;
+  const manifestPath = process.env.EMR4_BROKER_COMMAND_MANIFEST_PATH;
+  const admissionPath = process.env.EMR4_BROKER_NO_DATABASE_ADMISSION_PATH;
+  if (manifestPath === undefined || admissionPath === undefined) throw new Error("command-boundary-path-missing");
+  const manifest = JSON.parse(readFileSync(manifestPath, { encoding: "utf8" }));
+  const admission = JSON.parse(readFileSync(admissionPath, { encoding: "utf8" }));
+  if (sha256(prettyCanonical(manifest)) !== boundWorkOrder.command_manifest_sha256 || sha256(prettyCanonical(admission)) !== boundWorkOrder.provider_free_no_database_admission_sha256) throw new Error("command-boundary-digest-invalid");
+  if (manifest === null || Array.isArray(manifest) || typeof manifest !== "object" || JSON.stringify(Object.keys(manifest).sort()) !== JSON.stringify(["commands", "schema_version"]) || manifest.schema_version !== COMMAND_MANIFEST_SCHEMA || !Array.isArray(manifest.commands) || manifest.commands.length < 1) throw new Error("command-manifest-invalid");
+  if (admission === null || Array.isArray(admission) || typeof admission !== "object" || JSON.stringify(Object.keys(admission).sort()) !== JSON.stringify(["command_manifest_sha256", "commands", "schema_version", "status"]) || admission.schema_version !== NO_DATABASE_ADMISSION_SCHEMA || admission.status !== "passed" || admission.command_manifest_sha256 !== boundWorkOrder.command_manifest_sha256 || !Array.isArray(admission.commands) || admission.commands.length < 1) throw new Error("no-database-admission-invalid");
+  const commands = new Map();
+  const providerFreeCommandIds = [];
+  for (const command of manifest.commands) {
+    if (command === null || Array.isArray(command) || typeof command !== "object" || JSON.stringify(Object.keys(command).sort()) !== JSON.stringify(["argv", "id"]) || typeof command.id !== "string" || commands.has(command.id) || !Array.isArray(command.argv)) throw new Error("command-manifest-command-invalid");
+    commands.set(command.id, command.argv);
+    if (command.argv.length >= 3 && command.argv[1] === "-m" && command.argv[2] === "scripts.ariadne_provider_free_pytest") providerFreeCommandIds.push(command.id);
+  }
+  const admittedCommandIds = [];
+  for (const row of admission.commands) {
+    if (row === null || Array.isArray(row) || typeof row !== "object" || JSON.stringify(Object.keys(row).sort()) !== JSON.stringify(["argv_sha256", "command_id", "selection", "selection_sha256"]) || !commands.has(row.command_id) || !DIGEST_PATTERN.test(row.argv_sha256) || !DIGEST_PATTERN.test(row.selection_sha256)) throw new Error("no-database-command-invalid");
+    const argv = commands.get(row.command_id);
+    if (sha256(prettyCanonical(argv)) !== row.argv_sha256 || argv.length < 3 || argv[1] !== "-m" || argv[2] !== "scripts.ariadne_provider_free_pytest" || sha256(prettyCanonical(row.selection)) !== row.selection_sha256 || row.selection?.schema_version !== "ariadne.provider_free_no_database_selection.v1" || row.selection?.status !== "passed") throw new Error("no-database-command-binding-invalid");
+    admittedCommandIds.push(row.command_id);
+  }
+  if (JSON.stringify(admittedCommandIds.sort()) !== JSON.stringify(providerFreeCommandIds.sort())) throw new Error("no-database-command-coverage-invalid");
+  return { manifest, admission };
+}
+
 function loadWorkOrder(path, expectedDigest) {
   if (path === undefined) return null;
   const value = JSON.parse(readFileSync(path, { encoding: "utf8" }));
   if (!DIGEST_PATTERN.test(expectedDigest ?? "") || sha256(canonical(value)) !== expectedDigest) throw new Error("work-order-digest-invalid");
-  const keys = ["allowed_tool_names", "authority_sha256", "branch", "forbidden_surfaces_sha256", "journal_id", "lease_id", "next_sequence", "operation_id", "posture", "previous_event_sha256", "schema_version", "source_commit", "transaction_id", "work_order_id", "worktree"];
+  const keysV1 = ["allowed_tool_names", "authority_sha256", "branch", "forbidden_surfaces_sha256", "journal_id", "lease_id", "next_sequence", "operation_id", "posture", "previous_event_sha256", "schema_version", "source_commit", "transaction_id", "work_order_id", "worktree"];
+  const keysV2 = [...keysV1, "command_manifest_sha256", "provider_free_no_database_admission_sha256"].sort();
+  const keys = value?.schema_version === WORK_ORDER_SCHEMA_V2 ? keysV2 : keysV1;
   if (value === null || Array.isArray(value) || typeof value !== "object" || JSON.stringify(Object.keys(value).sort()) !== JSON.stringify(keys)) throw new Error("work-order-keys-invalid");
-  if (value.schema_version !== WORK_ORDER_SCHEMA || !COMMIT_PATTERN.test(value.source_commit) || !DIGEST_PATTERN.test(value.authority_sha256) || !DIGEST_PATTERN.test(value.forbidden_surfaces_sha256) || !DIGEST_PATTERN.test(value.previous_event_sha256)) throw new Error("work-order-binding-invalid");
+  if (![WORK_ORDER_SCHEMA_V1, WORK_ORDER_SCHEMA_V2].includes(value.schema_version) || !COMMIT_PATTERN.test(value.source_commit) || !DIGEST_PATTERN.test(value.authority_sha256) || !DIGEST_PATTERN.test(value.forbidden_surfaces_sha256) || !DIGEST_PATTERN.test(value.previous_event_sha256)) throw new Error("work-order-binding-invalid");
+  if (value.schema_version === WORK_ORDER_SCHEMA_V1 && !(TEST_MODE && process.env.EMR4_BROKER_ALLOW_LEGACY_WORK_ORDER_V1 === "1")) throw new Error("legacy-work-order-v1-forbidden");
+  if (value.schema_version === WORK_ORDER_SCHEMA_V2 && (!DIGEST_PATTERN.test(value.command_manifest_sha256) || !DIGEST_PATTERN.test(value.provider_free_no_database_admission_sha256))) throw new Error("work-order-command-binding-invalid");
   if (JSON.stringify(value.allowed_tool_names) !== JSON.stringify([...ALLOWED_TOOL_NAMES].sort()) || value.posture !== "provider_free_shadow" || !Number.isInteger(value.next_sequence) || value.next_sequence < 1) throw new Error("work-order-authority-invalid");
   for (const key of ["work_order_id", "transaction_id", "operation_id", "lease_id", "journal_id", "branch", "worktree"]) if (typeof value[key] !== "string" || value[key].length < 1 || value[key].length > 512) throw new Error("work-order-identity-invalid");
   return value;
@@ -325,6 +372,7 @@ try {
     process.env.EMR4_BROKER_WORK_ORDER_SHA256,
   );
   if (workOrder !== null) {
+    loadCommandBoundary(workOrder);
     clockSequence = workOrder.next_sequence;
     clockPrevious = workOrder.previous_event_sha256;
   }

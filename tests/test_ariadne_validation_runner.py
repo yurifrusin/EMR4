@@ -10,6 +10,7 @@ from scripts.ariadne_validation_runner import (
     run_validation,
     validate_execution_manifest,
 )
+from scripts.ariadne_provider_free_pytest import EXPECTED_ADMISSION_ENV
 
 
 def _manifest(*commands: tuple[str, list[str]]) -> dict[str, object]:
@@ -148,6 +149,48 @@ def test_runner_binds_provider_free_paths_to_exact_repo(tmp_path: Path) -> None:
         repo_root=repo,
     )
     assert admitted["commands"][0]["id"] == "PF"
+
+
+def test_runner_passes_engine_derived_selection_digest_to_child(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repo = _test_repo(tmp_path)
+    receipt = repo / "provider-free-validation.json"
+    observed: dict[str, object] = {}
+
+    class Completed:
+        returncode = 0
+        stdout = b""
+        stderr = b""
+
+    def fake_run(argv, *, cwd, env, check, capture_output, shell):
+        observed.update(argv=argv, cwd=cwd, env=env)
+        return Completed()
+
+    monkeypatch.setattr("scripts.ariadne_validation_runner.subprocess.run", fake_run)
+    manifest = _manifest(
+        (
+            "PF",
+            [
+                sys.executable,
+                "-m",
+                "scripts.ariadne_provider_free_pytest",
+                "--repo-root",
+                str(repo),
+                "tests/test_present.py",
+            ],
+        )
+    )
+
+    result = run_validation(
+        manifest=manifest, repo_root=repo, receipt_path=receipt
+    )
+
+    assert result["status"] == "passed"
+    assert result["provider_free_no_database_admission_sha256"].startswith(
+        "sha256:"
+    )
+    assert observed["env"][EXPECTED_ADMISSION_ENV].startswith("sha256:")
 
 
 def test_interrupted_run_is_durably_fail_closed(

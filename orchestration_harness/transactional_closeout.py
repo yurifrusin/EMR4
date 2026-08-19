@@ -20,8 +20,9 @@ from orchestration_harness.git_refs_snapshot import build_git_refs_snapshot
 from scripts import ariadne_compass
 
 SCHEMA_VERSION = "ariadne.transactional_closeout_manifest.v1"
-BUNDLE_VERSION = "ariadne.transactional_closeout_bundle.v1"
+BUNDLE_VERSION = "ariadne.transactional_closeout_bundle.v2"
 WORK_ORDER_VERSION = "ariadne.deepseek_work_order.v1"
+WORK_ORDER_COMMAND_BOUND_VERSION = "ariadne.deepseek_work_order.v2"
 EVENT_VERSION = "ariadne.bureaucratic_clock_event.v1"
 ZERO_DIGEST = "sha256:" + "0" * 64
 EXPECTED_PROTECTED_COMMIT = "2e34bdad732fdab32fbf778280b3d3c70d66d602"
@@ -246,8 +247,22 @@ def _projection_report(compass: dict[str, Any], graph: dict[str, Any], repo_root
 def prepare_transaction(
     value: object, *, repo_root: Path, graph: dict[str, Any],
     compass: dict[str, Any], active_latch: dict[str, Any],
+    broker_command_manifest: object | None = None,
+    allow_legacy_work_order_v1: bool = False,
 ) -> dict[str, Any]:
     manifest = validate_manifest(value)
+    if not manifest["broker"]["enabled"] and broker_command_manifest is not None:
+        raise ValueError("broker_command_manifest_without_broker")
+    if allow_legacy_work_order_v1 and (
+        not manifest["broker"]["enabled"] or broker_command_manifest is not None
+    ):
+        raise ValueError("legacy_work_order_compatibility_invalid")
+    if (
+        manifest["broker"]["enabled"]
+        and broker_command_manifest is None
+        and not allow_legacy_work_order_v1
+    ):
+        raise ValueError("command_bound_work_order_required")
     latch = validate_active_operation(active_latch)
     if latch["status"] != "in_progress" or latch["operation_id"] != manifest["operation_id"]:
         raise ValueError("active_operation_mismatch")
@@ -306,15 +321,48 @@ def prepare_transaction(
         previous = item["event_sha256"]
     authority_sha = sha256({"boundaries": latch["protected_boundaries"], "authority": node["authority"]})
     work_order = None
+    bound_command_manifest = None
+    provider_free_no_database_admission = None
     if manifest["broker"]["enabled"]:
+        command_bindings: dict[str, str] = {}
+        work_order_version = WORK_ORDER_VERSION
+        if broker_command_manifest is not None:
+            from scripts.ariadne_evidence_gate import command_manifest_sha256
+            from scripts.ariadne_validation_runner import (
+                validate_execution_manifest_with_admission,
+            )
+            from orchestration_harness.provider_free_no_database_admission import (
+                canonical_sha256,
+            )
+
+            admitted_commands, no_database_admission = (
+                validate_execution_manifest_with_admission(
+                    broker_command_manifest,
+                    repo_root=repo_root,
+                    require_provider_free=True,
+                )
+            )
+            if no_database_admission is None:
+                raise ValueError("broker_no_database_admission_missing")
+            bound_command_manifest = admitted_commands
+            provider_free_no_database_admission = no_database_admission
+            command_bindings = {
+                "command_manifest_sha256": "sha256:"
+                + command_manifest_sha256(admitted_commands),
+                "provider_free_no_database_admission_sha256": canonical_sha256(
+                    no_database_admission
+                ),
+            }
+            work_order_version = WORK_ORDER_COMMAND_BOUND_VERSION
         base = {
-            "schema_version": WORK_ORDER_VERSION, "work_order_id": "wo-" + transaction_id[4:],
+            "schema_version": work_order_version, "work_order_id": "wo-" + transaction_id[4:],
             "transaction_id": transaction_id, "operation_id": manifest["operation_id"],
             "lease_id": "lease-" + transaction_id[4:], "journal_id": journal_id,
             "source_commit": source_head, "authority_sha256": authority_sha,
             "forbidden_surfaces_sha256": sha256(latch["protected_boundaries"]),
             "branch": snapshot["branch"], "worktree": str(repo_root.resolve()),
             "allowed_tool_names": ALLOWED_TOOLS, "posture": "provider_free_shadow",
+            **command_bindings,
         }
         issued = _event(journal_id=journal_id, transaction_id=transaction_id, operation_id=manifest["operation_id"], sequence=len(events) + 1, previous=previous, event_type="work-order-issued", payload={"work_order_base_sha256": sha256(base)})
         events.append(issued)
@@ -326,6 +374,8 @@ def prepare_transaction(
         "manifest_sha256": manifest_sha, "source_commit": source_head,
         "git_snapshot": snapshot, "journal": events, "projections": projections,
         "projection_sha256s": {key: sha256(value) for key, value in projections.items()},
+        "broker_command_manifest": bound_command_manifest,
+        "provider_free_no_database_admission": provider_free_no_database_admission,
         "work_order": work_order, "work_order_sha256": sha256(work_order) if work_order is not None else None,
     }
     validate_bundle(bundle, repo_root=repo_root)
@@ -333,7 +383,7 @@ def prepare_transaction(
 
 
 def validate_bundle(bundle: object, *, repo_root: Path) -> None:
-    row = _exact(bundle, {"schema_version", "transaction_id", "manifest_sha256", "source_commit", "git_snapshot", "journal", "projections", "projection_sha256s", "work_order", "work_order_sha256"}, "bundle")
+    row = _exact(bundle, {"schema_version", "transaction_id", "manifest_sha256", "source_commit", "git_snapshot", "journal", "projections", "projection_sha256s", "broker_command_manifest", "provider_free_no_database_admission", "work_order", "work_order_sha256"}, "bundle")
     if row["schema_version"] != BUNDLE_VERSION or HEX40.fullmatch(row["source_commit"]) is None:
         raise ValueError("bundle_identity_invalid")
     validate_event_chain(row["journal"])
@@ -346,11 +396,22 @@ def validate_bundle(bundle: object, *, repo_root: Path) -> None:
         raise ValueError("bundle_projection_invalid")
     work_order = row["work_order"]
     if work_order is not None:
-        _validate_work_order(work_order)
+        order = _validate_work_order(work_order)
         if row["work_order_sha256"] != sha256(work_order):
             raise ValueError("work_order_digest_invalid")
         if work_order["previous_event_sha256"] != row["journal"][-1]["event_sha256"]:
             raise ValueError("work_order_anchor_invalid")
+        work_order_base = {
+            key: value
+            for key, value in work_order.items()
+            if key not in {"next_sequence", "previous_event_sha256"}
+        }
+        if (
+            row["journal"][-1].get("event_type") != "work-order-issued"
+            or row["journal"][-1].get("payload")
+            != {"work_order_base_sha256": sha256(work_order_base)}
+        ):
+            raise ValueError("work_order_base_binding_invalid")
         expected_bindings = {
             "transaction_id": row["transaction_id"],
             "operation_id": row["journal"][-1]["operation_id"],
@@ -360,16 +421,70 @@ def validate_bundle(bundle: object, *, repo_root: Path) -> None:
         }
         if any(work_order[key] != expected for key, expected in expected_bindings.items()):
             raise ValueError("work_order_bundle_binding_invalid")
+        if order["schema_version"] == WORK_ORDER_COMMAND_BOUND_VERSION:
+            from scripts.ariadne_evidence_gate import (
+                command_manifest_sha256,
+                validate_command_manifest,
+            )
+            from orchestration_harness.provider_free_no_database_admission import (
+                canonical_sha256,
+                validate_manifest_admission,
+            )
+
+            command_manifest = validate_command_manifest(
+                row["broker_command_manifest"]
+            )
+            admission = validate_manifest_admission(
+                row["provider_free_no_database_admission"]
+            )
+            if (
+                order["command_manifest_sha256"]
+                != "sha256:" + command_manifest_sha256(command_manifest)
+                or admission["command_manifest_sha256"]
+                != order["command_manifest_sha256"]
+                or order["provider_free_no_database_admission_sha256"]
+                != canonical_sha256(admission)
+            ):
+                raise ValueError("work_order_command_artifact_binding_invalid")
+        elif (
+            row["broker_command_manifest"] is not None
+            or row["provider_free_no_database_admission"] is not None
+        ):
+            raise ValueError("legacy_work_order_command_artifacts_forbidden")
+    elif (
+        row["work_order_sha256"] is not None
+        or row["broker_command_manifest"] is not None
+        or row["provider_free_no_database_admission"] is not None
+    ):
+        raise ValueError("broker_artifacts_without_work_order")
 
 
 def _validate_work_order(value: object) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        raise ValueError("work_order_keys_not_exact")
+    version = value.get("schema_version")
     keys = {"schema_version", "work_order_id", "transaction_id", "operation_id", "lease_id", "journal_id", "source_commit", "authority_sha256", "forbidden_surfaces_sha256", "branch", "worktree", "allowed_tool_names", "posture", "next_sequence", "previous_event_sha256"}
+    if version == WORK_ORDER_COMMAND_BOUND_VERSION:
+        keys.update(
+            {
+                "command_manifest_sha256",
+                "provider_free_no_database_admission_sha256",
+            }
+        )
     row = _exact(value, keys, "work_order")
-    if row["schema_version"] != WORK_ORDER_VERSION or HEX40.fullmatch(row["source_commit"]) is None:
+    if version not in {WORK_ORDER_VERSION, WORK_ORDER_COMMAND_BOUND_VERSION} or HEX40.fullmatch(row["source_commit"]) is None:
         raise ValueError("work_order_source_invalid")
     for key in ("work_order_id", "transaction_id", "operation_id", "lease_id", "journal_id"):
         _identifier(row[key], key)
-    for key in ("authority_sha256", "forbidden_surfaces_sha256"):
+    digest_keys = ["authority_sha256", "forbidden_surfaces_sha256"]
+    if version == WORK_ORDER_COMMAND_BOUND_VERSION:
+        digest_keys.extend(
+            [
+                "command_manifest_sha256",
+                "provider_free_no_database_admission_sha256",
+            ]
+        )
+    for key in digest_keys:
         if not isinstance(row[key], str) or DIGEST.fullmatch(row[key]) is None:
             raise ValueError("work_order_digest_binding_invalid")
     _text(row["branch"], "work_order_branch", 300)
@@ -418,6 +533,15 @@ def publish_shadow(bundle: object, *, repo_root: Path, target: Path, fail_after_
         "work-order.json": json.dumps(bundle["work_order"], indent=2, ensure_ascii=False) + "\n",
         "work-order.sha256": str(bundle["work_order_sha256"]) + "\n",
     }
+    if bundle["broker_command_manifest"] is not None:
+        files["command-manifest.json"] = json.dumps(
+            bundle["broker_command_manifest"], indent=2, ensure_ascii=False
+        ) + "\n"
+        files["provider-free-no-database-admission.json"] = json.dumps(
+            bundle["provider_free_no_database_admission"],
+            indent=2,
+            ensure_ascii=False,
+        ) + "\n"
     try:
         for index, (name, content) in enumerate(files.items(), start=1):
             (staging / name).write_text(content, encoding="utf-8", newline="\n")
@@ -452,6 +576,7 @@ def measure_efficacy(
     *, repo_root: Path, manifest: dict[str, Any], graph: dict[str, Any],
     compass: dict[str, Any], latch: dict[str, Any], fixtures: dict[str, Any],
     candidate_paths: list[str], iterations: int = 20,
+    candidate_source: str | None = None,
 ) -> dict[str, Any]:
     """Run the frozen controlled shadow comparison and derive every total."""
     if iterations < 20:
@@ -472,10 +597,10 @@ def measure_efficacy(
     prevented = []
     for defect, candidate, candidate_latch in mutations:
         try:
-            prepare_transaction(candidate, repo_root=repo_root, graph=graph, compass=compass, active_latch=candidate_latch)
+            prepare_transaction(candidate, repo_root=repo_root, graph=graph, compass=compass, active_latch=candidate_latch, allow_legacy_work_order_v1=True)
         except ValueError:
             prevented.append(defect)
-    bundle = prepare_transaction(manifest, repo_root=repo_root, graph=graph, compass=compass, active_latch=latch)
+    bundle = prepare_transaction(manifest, repo_root=repo_root, graph=graph, compass=compass, active_latch=latch, allow_legacy_work_order_v1=True)
     with tempfile.TemporaryDirectory(prefix="ariadne-efficacy-") as temporary:
         temporary_root = Path(temporary)
         fault_prevented = True
@@ -488,12 +613,22 @@ def measure_efficacy(
             fault_prevented = fault_prevented and not target.exists()
     if fault_prevented:
         prevented.append("prevalidation_or_partial_publication")
-    diff = subprocess.run(["git", "diff", "--numstat", fixtures["baseline_source"], "--", *candidate_paths], cwd=repo_root, check=True, capture_output=True, text=True, encoding="utf-8")
+    diff_command = ["git", "diff", "--numstat", fixtures["baseline_source"]]
+    if candidate_source is not None:
+        if HEX40.fullmatch(candidate_source) is None:
+            raise ValueError("efficacy_candidate_source_invalid")
+        diff_command.append(candidate_source)
+    diff = subprocess.run([*diff_command, "--", *candidate_paths], cwd=repo_root, check=True, capture_output=True, text=True, encoding="utf-8")
     deltas = {path: int(added) + int(deleted) for added, deleted, path in (line.split("\t") for line in diff.stdout.splitlines() if line)}
     candidate_lines = 0
     for path in candidate_paths:
-        tracked = subprocess.run(["git", "ls-files", "--error-unmatch", path], cwd=repo_root, capture_output=True, check=False).returncode == 0
-        candidate_lines += deltas[path] if tracked else len((repo_root / path).read_text(encoding="utf-8").splitlines())
+        if candidate_source is None:
+            tracked = subprocess.run(["git", "ls-files", "--error-unmatch", path], cwd=repo_root, capture_output=True, check=False).returncode == 0
+            untracked_lines = len((repo_root / path).read_text(encoding="utf-8").splitlines())
+        else:
+            tracked = subprocess.run(["git", "cat-file", "-e", f"{candidate_source}:{path}"], cwd=repo_root, capture_output=True, check=False).returncode == 0
+            untracked_lines = 0
+        candidate_lines += deltas.get(path, 0) if tracked else untracked_lines
     legacy_writes = sum((repo_root / item[key]).read_text(encoding="utf-8").count("_write(") + (repo_root / item[key]).read_text(encoding="utf-8").count("REPORT.write_text") for item in fixtures["fixtures"] for key in ("legacy_updater",))
     legacy_constants = sum(sum(isinstance(node, ast.Assign) and any(isinstance(target, ast.Name) and target.id.isupper() for target in node.targets) for node in ast.parse((repo_root / item["legacy_updater"]).read_text(encoding="utf-8")).body) for item in fixtures["fixtures"])
     def leaf_count(value: object) -> int:

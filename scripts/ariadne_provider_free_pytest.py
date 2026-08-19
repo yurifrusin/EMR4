@@ -15,6 +15,11 @@ import subprocess
 import sys
 from collections.abc import Mapping, Sequence
 
+from orchestration_harness.provider_free_no_database_admission import (
+    admit_test_paths,
+    canonical_sha256,
+)
+
 
 ROOT = Path(__file__).resolve().parents[1]
 PASSTHROUGH_ENVIRONMENT_KEYS = (
@@ -25,6 +30,7 @@ PASSTHROUGH_ENVIRONMENT_KEYS = (
     "TMP",
     "WINDIR",
 )
+EXPECTED_ADMISSION_ENV = "ARIADNE_EXPECTED_NO_DATABASE_ADMISSION_SHA256"
 
 
 def _literal_test_path(value: str) -> str:
@@ -105,6 +111,17 @@ def main(argv: list[str] | None = None) -> int:
             raise SystemExit("test path escaped repository root") from error
         if not test_path.is_file():
             raise SystemExit(f"test path is not a file: {relative_path}")
+    try:
+        admission = admit_test_paths(
+            repo_root=repo_root,
+            test_paths=args.test_paths,
+        )
+    except ValueError as error:
+        raise SystemExit(f"provider-free no-database admission rejected: {error}") from error
+    expected_admission = os.environ.get(EXPECTED_ADMISSION_ENV)
+    observed_admission = canonical_sha256(admission)
+    if expected_admission is not None and expected_admission != observed_admission:
+        raise SystemExit("provider-free no-database admission digest mismatch")
     completed = subprocess.run(  # noqa: S603
         provider_free_command(args.test_paths),
         cwd=repo_root,

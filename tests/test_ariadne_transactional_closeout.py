@@ -4,16 +4,24 @@ import copy
 import json
 from pathlib import Path
 import subprocess
+import sys
 
 import pytest
 from jsonschema import Draft202012Validator
 
 from orchestration_harness import transactional_closeout as tc
+from orchestration_harness.provider_free_no_database_admission import canonical_sha256
+from scripts.ariadne_evidence_gate import (
+    COMMAND_MANIFEST_SCHEMA_VERSION,
+    command_manifest_sha256,
+)
+from scripts.ariadne_validation_runner import validate_execution_manifest_with_admission
 
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "orchestration/continuity/ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal"
 SOURCE = "f21072405a4d5877ec03e2cd1aefc7fa74d379e9"
+ACCEPTED_CANDIDATE = "f6cbd33fd3322754e06ac6dafa1503f5200e0803"
 CANDIDATE_PATHS = [
     "orchestration_harness/transactional_closeout.py",
     f"{BASE}/control-plane.schema.json",
@@ -134,7 +142,7 @@ def test_one_reading_derives_full_source_all_projections_and_broker_gear(
 ) -> None:
     graph, compass, latch, manifest = state
     assert "source_head" not in json.dumps(manifest)
-    bundle = tc.prepare_transaction(manifest, repo_root=ROOT, graph=graph, compass=compass, active_latch=latch)
+    bundle = tc.prepare_transaction(manifest, repo_root=ROOT, graph=graph, compass=compass, active_latch=latch, allow_legacy_work_order_v1=True)
     assert bundle["source_commit"] == bundle["git_snapshot"]["head"]
     assert bundle["projections"]["graph"]["graph_revision"] == graph["graph_revision"] + 1
     assert bundle["projections"]["compass"]["map_revision"] == compass["map_revision"] + 1
@@ -148,6 +156,91 @@ def test_one_reading_derives_full_source_all_projections_and_broker_gear(
     Draft202012Validator({**schema, "$ref": "#/$defs/manifest"}).validate(manifest)
     Draft202012Validator({**schema, "$ref": "#/$defs/work_order"}).validate(bundle["work_order"])
     tc.validate_bundle(bundle, repo_root=ROOT)
+
+
+def test_command_bound_work_order_v2_derives_no_database_digests(
+    state: tuple[dict, dict, dict, dict], tmp_path: Path,
+) -> None:
+    graph, compass, latch, manifest = state
+    with pytest.raises(ValueError, match="command_bound_work_order_required"):
+        tc.prepare_transaction(
+            manifest,
+            repo_root=ROOT,
+            graph=graph,
+            compass=compass,
+            active_latch=latch,
+        )
+    commands = {
+        "schema_version": COMMAND_MANIFEST_SCHEMA_VERSION,
+        "commands": [
+            {
+                "id": "PF",
+                "argv": [
+                    sys.executable,
+                    "-m",
+                    "scripts.ariadne_provider_free_pytest",
+                    "--repo-root",
+                    str(ROOT),
+                    "tests/test_ariadne_provider_free_pytest.py",
+                ],
+            }
+        ],
+    }
+    admitted, admission = validate_execution_manifest_with_admission(
+        commands, repo_root=ROOT, require_provider_free=True
+    )
+    bundle = tc.prepare_transaction(
+        manifest,
+        repo_root=ROOT,
+        graph=graph,
+        compass=compass,
+        active_latch=latch,
+        broker_command_manifest=commands,
+    )
+
+    order = bundle["work_order"]
+    assert order["schema_version"] == tc.WORK_ORDER_COMMAND_BOUND_VERSION
+    assert order["command_manifest_sha256"] == "sha256:" + command_manifest_sha256(
+        admitted
+    )
+    assert admission is not None
+    assert bundle["broker_command_manifest"] == admitted
+    assert bundle["provider_free_no_database_admission"] == admission
+    assert order["provider_free_no_database_admission_sha256"] == canonical_sha256(
+        admission
+    )
+    work_order_schema = _load(
+        "orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/work-order-v2.schema.json"
+    )
+    Draft202012Validator.check_schema(work_order_schema)
+    Draft202012Validator(work_order_schema).validate(order)
+    tc.validate_bundle(bundle, repo_root=ROOT)
+    published = tc.publish_shadow(
+        bundle, repo_root=ROOT, target=tmp_path / "v2-command-bound-shadow"
+    )
+    assert {
+        "command-manifest.json",
+        "provider-free-no-database-admission.json",
+        "work-order.json",
+        "work-order.sha256",
+    }.issubset(path.name for path in published.iterdir())
+
+    drifted = copy.deepcopy(bundle)
+    drifted["work_order"]["provider_free_no_database_admission_sha256"] = (
+        "sha256:" + "0" * 64
+    )
+    drifted["work_order_sha256"] = tc.sha256(drifted["work_order"])
+    with pytest.raises(ValueError, match="work_order_base_binding_invalid"):
+        # The digest is schema-valid but no longer the engine-derived base that
+        # anchors the final journal event.
+        tc.validate_bundle(drifted, repo_root=ROOT)
+
+    artifact_drift = copy.deepcopy(bundle)
+    artifact_drift["provider_free_no_database_admission"]["status"] = (
+        "revision_required"
+    )
+    with pytest.raises(ValueError, match="provider_free_admission_identity_invalid"):
+        tc.validate_bundle(artifact_drift, repo_root=ROOT)
 
 
 def test_observed_bookkeeping_defects_fail_before_publication(
@@ -170,12 +263,12 @@ def test_observed_bookkeeping_defects_fail_before_publication(
     stale = copy.deepcopy(latch)
     stale["operation_id"] = "different-operation"
     with pytest.raises(ValueError, match="active_operation_mismatch"):
-        tc.prepare_transaction(manifest, repo_root=ROOT, graph=graph, compass=compass, active_latch=stale)
+        tc.prepare_transaction(manifest, repo_root=ROOT, graph=graph, compass=compass, active_latch=stale, allow_legacy_work_order_v1=True)
     missing_evidence = copy.deepcopy(manifest)
     missing_evidence["node"]["evidence"]["receipts"].append("docs/nonexistent-new-clockwork-evidence.md")
     with pytest.raises(ValueError, match="prospective_projection_invalid"):
-        tc.prepare_transaction(missing_evidence, repo_root=ROOT, graph=graph, compass=compass, active_latch=latch)
-    bundle = tc.prepare_transaction(manifest, repo_root=ROOT, graph=graph, compass=compass, active_latch=latch)
+        tc.prepare_transaction(missing_evidence, repo_root=ROOT, graph=graph, compass=compass, active_latch=latch, allow_legacy_work_order_v1=True)
+    bundle = tc.prepare_transaction(manifest, repo_root=ROOT, graph=graph, compass=compass, active_latch=latch, allow_legacy_work_order_v1=True)
     live = [ROOT / "orchestration/continuity/emr4-continuity-graph.json", ROOT / "orchestration/continuity/emr4-compass.json", ROOT / "orchestration/continuity/ariadne-active-operation-latch/current.json"]
     before = [path.read_bytes() for path in live]
     for step in range(1, 9):
@@ -194,7 +287,7 @@ def test_event_and_broker_chains_reject_reorder_or_tamper(
     state: tuple[dict, dict, dict, dict],
 ) -> None:
     graph, compass, latch, manifest = state
-    bundle = tc.prepare_transaction(manifest, repo_root=ROOT, graph=graph, compass=compass, active_latch=latch)
+    bundle = tc.prepare_transaction(manifest, repo_root=ROOT, graph=graph, compass=compass, active_latch=latch, allow_legacy_work_order_v1=True)
     tampered = copy.deepcopy(bundle["journal"])
     tampered[1]["payload"]["source_commit"] = "2" * 40
     with pytest.raises(ValueError, match="event_digest_invalid"):
@@ -209,7 +302,7 @@ def test_event_and_broker_chains_reject_reorder_or_tamper(
     rebound = copy.deepcopy(bundle)
     rebound["work_order"]["transaction_id"] = "txn-different"
     rebound["work_order_sha256"] = tc.sha256(rebound["work_order"])
-    with pytest.raises(ValueError, match="work_order_bundle_binding_invalid"):
+    with pytest.raises(ValueError, match="work_order_base_binding_invalid"):
         tc.validate_bundle(rebound, repo_root=ROOT)
     order = bundle["work_order"]
     events = []
@@ -226,7 +319,7 @@ def test_event_and_broker_chains_reject_reorder_or_tamper(
 
 
 def test_candidate_maintained_surface_is_below_frozen_legacy_baseline() -> None:
-    result = subprocess.run(["git", "diff", "--numstat", SOURCE, "--", *CANDIDATE_PATHS], cwd=ROOT, check=True, capture_output=True, text=True, encoding="utf-8")
+    result = subprocess.run(["git", "diff", "--numstat", SOURCE, ACCEPTED_CANDIDATE, "--", *CANDIDATE_PATHS], cwd=ROOT, check=True, capture_output=True, text=True, encoding="utf-8")
     tracked_delta = {path: int(added) + int(deleted) for added, deleted, path in (line.split("\t") for line in result.stdout.splitlines() if line)}
     changed_lines = 0
     for path in CANDIDATE_PATHS:
@@ -243,7 +336,7 @@ def test_controlled_efficacy_gate_passes_without_hidden_engine_cost(
     result = tc.measure_efficacy(
         repo_root=ROOT, manifest=manifest, graph=graph, compass=compass,
         latch=latch, fixtures=_load(f"{BASE}/historical-shadow-fixtures.json"),
-        candidate_paths=CANDIDATE_PATHS,
+        candidate_paths=CANDIDATE_PATHS, candidate_source=ACCEPTED_CANDIDATE,
     )
     assert result["status"] == "passed"
     assert result["defects"]["escaped"] == []

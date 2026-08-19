@@ -20,6 +20,13 @@ from scripts.ariadne_evidence_gate import (
     validate_command_manifest,
 )
 from scripts.ariadne_serial_pytest import validate_pytest_arguments
+from orchestration_harness.provider_free_no_database_admission import (
+    MANIFEST_ADMISSION_SCHEMA_VERSION,
+    admit_test_paths,
+    canonical_sha256,
+    validate_manifest_admission,
+)
+from scripts.ariadne_provider_free_pytest import EXPECTED_ADMISSION_ENV
 
 
 SCHEMA_VERSION = "ariadne.validation_run.v1"
@@ -62,12 +69,13 @@ def _bound_repo_root(arguments: list[str], repo_root: Path) -> list[str]:
 
 def _validate_provider_free_arguments(
     arguments: Sequence[str], *, repo_root: Path
-) -> None:
+) -> dict[str, Any]:
     args = _bound_repo_root(list(arguments), repo_root)
     if args[:1] == ["--"]:
         args = args[1:]
     if not args:
         raise ValueError("provider_free_test_paths_required")
+    normalized_paths: list[str] = []
     for token in args:
         if token.startswith("-") or "::" in token:
             raise ValueError("provider_free_test_selector_invalid")
@@ -81,6 +89,8 @@ def _validate_provider_free_arguments(
             raise ValueError("selected_test_path_outside_repository") from error
         if not candidate.is_file():
             raise ValueError(f"selected_test_path_missing:{normalized}")
+        normalized_paths.append(normalized)
+    return admit_test_paths(repo_root=repo_root, test_paths=normalized_paths)
 
 
 def _validate_serial_arguments(arguments: Sequence[str], *, repo_root: Path) -> None:
@@ -101,14 +111,18 @@ def _validate_serial_arguments(arguments: Sequence[str], *, repo_root: Path) -> 
     validate_pytest_arguments(args[separator:], repo_root=repo_root)
 
 
-def validate_execution_manifest(
-    manifest: object, *, repo_root: Path
-) -> dict[str, Any]:
-    """Admit exact argv and fail closed around repository pytest entry points."""
+def validate_execution_manifest_with_admission(
+    manifest: object,
+    *,
+    repo_root: Path,
+    require_provider_free: bool = False,
+) -> tuple[dict[str, Any], dict[str, Any] | None]:
+    """Admit exact argv and derive every provider-free no-database reading."""
     root = repo_root.resolve(strict=True)
     if not root.is_dir():
         raise ValueError("repo_root_must_be_directory")
     admitted = validate_command_manifest(manifest)
+    provider_free_commands: list[dict[str, Any]] = []
     for index, command in enumerate(admitted["commands"]):
         argv = command["argv"]
         executable = Path(argv[0]).name.casefold()
@@ -118,7 +132,38 @@ def validate_execution_manifest(
         if module == SERIAL_PYTEST_MODULE:
             _validate_serial_arguments(argv[3:], repo_root=root)
         elif module == PROVIDER_FREE_PYTEST_MODULE:
-            _validate_provider_free_arguments(argv[3:], repo_root=root)
+            selection = _validate_provider_free_arguments(argv[3:], repo_root=root)
+            provider_free_commands.append(
+                {
+                    "command_id": command["id"],
+                    "argv_sha256": canonical_sha256(argv),
+                    "selection": selection,
+                    "selection_sha256": canonical_sha256(selection),
+                }
+            )
+    if require_provider_free and not provider_free_commands:
+        raise ValueError("provider_free_command_required")
+    if not provider_free_commands:
+        return admitted, None
+    admission = validate_manifest_admission(
+        {
+            "schema_version": MANIFEST_ADMISSION_SCHEMA_VERSION,
+            "status": "passed",
+            "command_manifest_sha256": "sha256:"
+            + command_manifest_sha256(admitted),
+            "commands": provider_free_commands,
+        }
+    )
+    return admitted, admission
+
+
+def validate_execution_manifest(
+    manifest: object, *, repo_root: Path
+) -> dict[str, Any]:
+    """Admit exact argv and fail closed around repository pytest entry points."""
+    admitted, _admission = validate_execution_manifest_with_admission(
+        manifest, repo_root=repo_root
+    )
     return admitted
 
 
@@ -169,7 +214,9 @@ def run_validation(
     *, manifest: object, repo_root: Path, receipt_path: Path
 ) -> dict[str, Any]:
     root = repo_root.resolve(strict=True)
-    admitted = validate_execution_manifest(manifest, repo_root=root)
+    admitted, provider_free_admission = validate_execution_manifest_with_admission(
+        manifest, repo_root=root
+    )
     receipt = receipt_path.resolve()
     if receipt.exists():
         raise ValueError("validation_receipt_already_exists")
@@ -178,6 +225,11 @@ def run_validation(
         "status": "in_progress",
         "repo_root": str(root),
         "command_manifest_sha256": command_manifest_sha256(admitted),
+        "provider_free_no_database_admission_sha256": (
+            canonical_sha256(provider_free_admission)
+            if provider_free_admission is not None
+            else None
+        ),
         "commands": admitted["commands"],
         "started_at": _timestamp(),
         "ended_at": None,
@@ -190,10 +242,24 @@ def run_validation(
         lifecycle["results"][index]["status"] = "in_progress"
         _atomic_write(receipt, lifecycle)
         started = time.monotonic()
+        environment = None
+        if provider_free_admission is not None:
+            bound = next(
+                (
+                    row
+                    for row in provider_free_admission["commands"]
+                    if row["command_id"] == command["id"]
+                ),
+                None,
+            )
+            if bound is not None:
+                environment = dict(os.environ)
+                environment[EXPECTED_ADMISSION_ENV] = bound["selection_sha256"]
         try:
             completed = subprocess.run(
                 command["argv"],
                 cwd=root,
+                env=environment,
                 check=False,
                 capture_output=True,
                 shell=False,

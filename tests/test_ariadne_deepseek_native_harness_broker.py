@@ -17,6 +17,11 @@ from orchestration_harness.transactional_closeout import (
     sha256 as canonical_sha256,
     validate_broker_events,
 )
+from orchestration_harness.provider_free_no_database_admission import (
+    canonical_sha256 as boundary_sha256,
+)
+from scripts.ariadne_evidence_gate import COMMAND_MANIFEST_SCHEMA_VERSION
+from scripts.ariadne_validation_runner import validate_execution_manifest_with_admission
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -40,6 +45,36 @@ WORK_ORDER = {
     "posture": "provider_free_shadow",
     "next_sequence": 7,
     "previous_event_sha256": "sha256:" + "4" * 64,
+}
+COMMAND_MANIFEST = {
+    "schema_version": COMMAND_MANIFEST_SCHEMA_VERSION,
+    "commands": [
+        {
+            "id": "PF",
+            "argv": [
+                os.fspath(ROOT / ".venv" / "Scripts" / "python.exe"),
+                "-m",
+                "scripts.ariadne_provider_free_pytest",
+                "--repo-root",
+                str(ROOT),
+                "tests/test_ariadne_provider_free_pytest.py",
+            ],
+        }
+    ],
+}
+_ADMITTED_COMMAND_MANIFEST, NO_DATABASE_ADMISSION = (
+    validate_execution_manifest_with_admission(
+        COMMAND_MANIFEST, repo_root=ROOT, require_provider_free=True
+    )
+)
+assert NO_DATABASE_ADMISSION is not None
+WORK_ORDER_V2 = {
+    **WORK_ORDER,
+    "schema_version": "ariadne.deepseek_work_order.v2",
+    "command_manifest_sha256": boundary_sha256(_ADMITTED_COMMAND_MANIFEST),
+    "provider_free_no_database_admission_sha256": boundary_sha256(
+        NO_DATABASE_ADMISSION
+    ),
 }
 
 
@@ -103,6 +138,19 @@ def broker_process(
         work_order_path.write_text(json.dumps(selected_work_order), encoding="utf-8")
         env["EMR4_BROKER_WORK_ORDER_PATH"] = str(work_order_path)
         env["EMR4_BROKER_WORK_ORDER_SHA256"] = canonical_sha256(selected_work_order)
+        if selected_work_order["schema_version"] == "ariadne.deepseek_work_order.v1":
+            env["EMR4_BROKER_ALLOW_LEGACY_WORK_ORDER_V1"] = "1"
+        else:
+            command_manifest_path = tmp_path / "command-manifest.json"
+            command_manifest_path.write_text(
+                json.dumps(_ADMITTED_COMMAND_MANIFEST), encoding="utf-8"
+            )
+            admission_path = tmp_path / "no-database-admission.json"
+            admission_path.write_text(
+                json.dumps(NO_DATABASE_ADMISSION), encoding="utf-8"
+            )
+            env["EMR4_BROKER_COMMAND_MANIFEST_PATH"] = str(command_manifest_path)
+            env["EMR4_BROKER_NO_DATABASE_ADMISSION_PATH"] = str(admission_path)
     process = subprocess.Popen(
         ["node", str(BROKER)],
         cwd=ROOT,
@@ -318,6 +366,72 @@ def test_broker_continues_the_work_order_clock_without_secret_leakage(
     retained = json.dumps(observed)
     assert BROKER_TOKEN not in retained
     assert PROVIDER_KEY not in retained
+
+
+@pytest.mark.parametrize("broker_process", [WORK_ORDER_V2], indirect=True)
+def test_broker_v2_validates_command_and_no_database_artifacts_before_ready(
+    broker_process: tuple[subprocess.Popen[str], int, queue.Queue[dict]],
+) -> None:
+    _process, port, events = broker_process
+    status, _response = _request(port)
+    assert status == 200
+    observed = [
+        _wait_for_event(events, event_type)
+        for event_type in (
+            "broker-ready",
+            "provider-call-started",
+            "provider-response-started",
+            "provider-call-completed",
+        )
+    ]
+    validate_broker_events(WORK_ORDER_V2, observed)
+
+
+def test_broker_rejects_unbound_v1_and_mutated_v2_artifact_before_ready(
+    tmp_path: Path,
+) -> None:
+    cases: list[tuple[dict, dict | None, bool]] = [
+        (WORK_ORDER, None, False),
+        (
+            WORK_ORDER_V2,
+            {**NO_DATABASE_ADMISSION, "status": "revision_required"},
+            True,
+        ),
+    ]
+    for index, (order, admission, include_boundary) in enumerate(cases):
+        work_order_path = tmp_path / f"work-order-boundary-{index}.json"
+        work_order_path.write_text(json.dumps(order), encoding="utf-8")
+        env = {
+            **os.environ,
+            "EMR4_BROKER_TEST_MODE": "1",
+            "EMR4_BROKER_LISTEN_PORT": "0",
+            "EMR4_BROKER_TEST_UPSTREAM_URL": "http://127.0.0.1:1/chat/completions",
+            "DSH_EMR4_BROKER_TOKEN": BROKER_TOKEN,
+            "DEEPSEEK_API_KEY": PROVIDER_KEY,
+            "EMR4_BROKER_WORK_ORDER_PATH": str(work_order_path),
+            "EMR4_BROKER_WORK_ORDER_SHA256": canonical_sha256(order),
+        }
+        if include_boundary:
+            manifest_path = tmp_path / f"command-manifest-{index}.json"
+            manifest_path.write_text(json.dumps(_ADMITTED_COMMAND_MANIFEST), encoding="utf-8")
+            admission_path = tmp_path / f"admission-{index}.json"
+            admission_path.write_text(json.dumps(admission), encoding="utf-8")
+            env["EMR4_BROKER_COMMAND_MANIFEST_PATH"] = str(manifest_path)
+            env["EMR4_BROKER_NO_DATABASE_ADMISSION_PATH"] = str(admission_path)
+        result = subprocess.run(
+            ["node", str(BROKER)],
+            cwd=ROOT,
+            env=env,
+            text=True,
+            encoding="utf-8",
+            capture_output=True,
+            timeout=10,
+            check=False,
+        )
+        assert result.returncode == 2
+        event = json.loads(result.stdout)
+        assert event["event"] == "broker-start-rejected"
+        assert event["reason_code"] == "work-order-invalid"
 
 
 def test_broker_rejects_malformed_or_digest_drifted_work_order_before_io(

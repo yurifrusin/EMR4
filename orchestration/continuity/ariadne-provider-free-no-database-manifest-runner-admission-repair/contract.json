@@ -1,0 +1,47 @@
+{
+  "schema_version": "ariadne.provider_free_no_database_admission_contract.v1",
+  "planning_source": "440fc7bbd071fbb97a97c986e8c80fe69b83f747",
+  "operation_id": "ariadne-provider-free-no-database-manifest-runner-admission-repair",
+  "admission_schema": "ariadne.provider_free_no_database_admission.v1",
+  "broker_work_order_schema": "ariadne.deepseek_work_order.v2",
+  "path_policy": {
+    "prefix": "tests/",
+    "suffix": ".py",
+    "literal_regular_non_symlink_only": true,
+    "duplicates_forbidden": true
+  },
+  "pytest_core_fixture_allowlist": [
+    "capfd",
+    "capfdbinary",
+    "caplog",
+    "capsys",
+    "capsysbinary",
+    "doctest_namespace",
+    "monkeypatch",
+    "pytestconfig",
+    "record_property",
+    "record_testsuite_property",
+    "record_xml_attribute",
+    "recwarn",
+    "request",
+    "tmp_path",
+    "tmp_path_factory",
+    "tmpdir",
+    "tmpdir_factory"
+  ],
+  "shared_fixture_policy": "reject_any_tests_conftest_fixture_or_import",
+  "unknown_fixture_policy": "reject",
+  "unsupported_syntax_policy": "reject",
+  "broker_required_bindings": [
+    "command_manifest_sha256",
+    "provider_free_no_database_admission_sha256"
+  ],
+  "legacy_v1_broker_policy": "test_mode_plus_explicit_compatibility_flag_only",
+  "forbidden_invocations": [
+    "ordinary_pytest",
+    "docker",
+    "postgresql",
+    "provider",
+    "occupied_deepseek_attempt"
+  ]
+}

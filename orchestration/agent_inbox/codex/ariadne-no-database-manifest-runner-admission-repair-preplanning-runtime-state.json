@@ -1,0 +1,213 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_narrow_provider_free_no_database_manifest_and_runner_admission_repair_plan_without_docker_database_or_provider_execution",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely through line 507 at task HEAD 440fc7bbd071fbb97a97c986e8c80fe69b83f747. At Continuity 337 / Compass 319 its Current result accepts the relay-free call-site and cleanup mechanism at exact source 31cddb7511be306ecadbe02555cec8cd1f8c200e, and Next implementation names ariadne-provider-free-no-database-manifest-runner-admission-repair under the active latch.",
+    "current_authority_allocation": "GPT Sol owns plan, deterministic execution-admission architecture, implementation, acceptance, clockwork and task-branch Git under Yuri's standing uninterrupted-development authority. DeepSeek is declined because its native Harness still requires the separately frozen stock-headless-to-custom-runner boot proof and Claude Code is no fallback. Gemini 3.7 Flash/high is reserved for one fresh exact-candidate veto because this tranche changes the global manifest/runner command boundary. Native subagents are declined by current developer policy and because the runner, manifest preflight and broker integration are one serial control package.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-profile-call-site-cleanup-repair-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-report.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/efficacy-reading.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/closeout/clockwork-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 remain sealed; the provider lane remains paused; historical diary PHI remains local and ignored. This tranche may change only provider-free pytest admission, deterministic selected-test fixture-graph analysis, verifier/work-order manifest preflight and the DeepSeek broker command boundary. It authorises no Docker object, process, credential, PostgreSQL fixture, SQL, transaction, database or provider execution; no attempt-004 plan or retry; no product/API/OpenAPI/GraphQL/config/client/waiting-area change; no ordinary-practice enablement, feature-flag, allowlist, generic-status Arrived or grammar change; no product/patient/appointment/clinical/protected data, production, deployment, release, Pages or protected-ref movement. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only.",
+    "git_refs_and_worktree": "Task HEAD and origin task branch are exact 440fc7bbd071fbb97a97c986e8c80fe69b83f747 on codex/ariadne-bernie-davida-parallel-seam. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked and staged worktree is clean; docs/branding and unrelated untracked files remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "ariadne-provider-free-no-database-manifest-runner-admission-repair",
+    "active_tranche": "Ariadne provider-free no-database manifest and runner admission repair",
+    "objective": "Freeze and implement the narrowest provider-free deterministic admission control that rejects ordinary pytest entry points and any selected test whose fixture graph can acquire shared PostgreSQL before execution, then prove integration at manifest preflight and the DeepSeek broker command boundary without Docker, database or provider invocation.",
+    "status": "in_progress",
+    "source_head": "31cddb7511be306ecadbe02555cec8cd1f8c200e",
+    "authority_source": "Yuri's standing uninterrupted-development authority, the accepted clockwork workflow, the retained no-database verification-scope evidence and this accepted relay-free mechanism repair.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_and_freeze_narrow_no_database_admission_repair_plan",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_no_database_manifest_and_runner_admission_control_only",
+      "ordinary_pytest_entry_points_rejected_for_provider_free_work_orders",
+      "selected_test_fixture_graph_must_prove_no_shared_postgresql_reachability_before_execution",
+      "no_docker_container_network_process_credential_postgresql_sql_transaction_or_database_execution",
+      "attempt_003_failure_envelope_cleanup_execution_count_retry_count_and_historical_harness_remain_immutable",
+      "no_attempt_004_plan_execution_or_retry_until_this_control_is_separately_accepted",
+      "no_local_env_live_secret_cloud_hosted_existing_product_or_disposable_database",
+      "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_occupied_deepseek_before_separate_native_harness_boot_proof_no_claude_code_fallback_and_gemini_only_after_deterministic_exact_candidate",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "ariadne-provider-free-no-database-manifest-runner-admission-repair",
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The native DeepSeek Harness remains paused pending its separately frozen stock-headless-to-custom-runner boot proof; Claude Code is no fallback, and this tranche itself repairs the broker work-order admission gear needed before occupied worker use.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "One fresh Gemini 3.7 Flash/high exact-candidate read-only veto is reserved after deterministic proof because the repair changes a reusable global command-admission boundary.",
+        "work_packages": [
+          "future_exact_candidate_read_only_no_database_admission_repair_veto"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Current developer policy prohibits proactive native delegation and the runner, fixture-graph classifier, manifest preflight and broker boundary form one tightly coupled serial invariant.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "Sol freezes the exact no-database admission semantics before source changes",
+      "test fixture-graph classification and command-shape admission share one fail-closed verdict",
+      "no Docker database provider or occupied worker execution occurs",
+      "the DeepSeek broker integration is provider-free static and deterministic only",
+      "Gemini reviews only an exact deterministic clean candidate",
+      "clockwork check and publish remain separate commands"
+    ],
+    "reassessment_triggers": [
+      "plan_frozen",
+      "deterministic_candidate",
+      "verifier_acceptance",
+      "closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete updated AGENTS reread through line 507, accepted relay-free cleanup closeout and efficacy evidence, exact active latch, protected sections 5 and 6, Git refs and clean tracked worktree",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the five-source rehydration and owns the deterministic admission repair."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Native Harness remains paused pending its separately frozen boot proof."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Historical transport is not selected and no fallback is authorised."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Verifier is reserved until a deterministic exact candidate passes locally."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native lane declined and no native subagent was spawned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-native-harness-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
