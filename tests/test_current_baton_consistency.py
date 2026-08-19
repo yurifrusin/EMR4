@@ -126,14 +126,14 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
 
     assert graph["graph_revision"] == compass["source_graph_revision"]
     assert graph["nodes"][-1]["id"] == (
-        "ariadne-provider-free-clockwork-governance-projection-consolidation-repair"
+        "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal"
     )
     assert graph["nodes"][-1]["coordinates"]["source_head"] == (
-        "a0bb86b78bfc011066142740c82d5c25cab7b9c8"
+        "d03cc6386fdf3e2714881089514380d93824e160"
     )
     assert graph["nodes"][-1]["relationships"] == [
         {
-            "node_id": CLOCKWORK_REHEARSAL_NODE_ID,
+            "node_id": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
             "relation": "builds_on",
         }
     ]
@@ -158,9 +158,9 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
     assert f"Continuity {graph['graph_revision']} / Compass {compass['map_revision']}" in current
     assert graph["nodes"][-1]["coordinates"]["source_head"] in current
-    assert "thirteen reruns" in current.lower()
-    assert "twenty-one" in current.lower()
-    assert "selected the recommended bounded migration" in current.lower()
+    assert "exclusive mirror ownership" in current.lower()
+    assert "23/23 fault safety" in current.lower()
+    assert "actual canonical adoption and retirement flags remain false" in current.lower()
     assert CLOCKWORK_ARCHITECTURE_SOURCE_HEAD in clockwork_relation
     assert CLOCKWORK_REHEARSAL_SOURCE_HEAD in clockwork_relation
     error_register = _table_row(
@@ -231,15 +231,13 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "single-owner-migration-retirement-rehearsal" in next_work.lower()
-    assert "read-only authoritative oracles" in next_work.lower()
-    assert "exclusive clockwork ownership" in next_work.lower()
-    assert "legacy/stale-writer rejection" in next_work.lower()
-    assert "byte-exact rollback" in next_work.lower()
-    assert "canonical-check-in-route-adapter-convergence-rehearsal" not in next_work.lower()
-    assert "no actual canonical adoption or control deletion" in next_work.lower()
-    assert "dual live plane" in next_work.lower()
-    assert "occupied deepseek/hmr or other provider call" in next_work.lower()
+    assert "explicit adoption boundary" in next_work.lower()
+    assert "live canonical clockwork adoption/retirement" in next_work.lower()
+    assert "no dual writer" in next_work.lower()
+    assert "exact rollback" in next_work.lower()
+    assert "canonical-check-in-route-adapter-convergence-rehearsal" in next_work.lower()
+    assert "neither branch is inferred" in next_work.lower()
+    assert "occupied deepseek/hmr" in next_work.lower()
     assert "product/practice/data/runtime" in next_work.lower()
     assert "protected-ref movement" in next_work.lower()
     assert "primeintellect" not in next_work.lower()
@@ -278,14 +276,13 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
     for phrase in (
-        "single-owner-migration-retirement-rehearsal",
-        "read-only authoritative oracles",
-        "exclusive clockwork ownership",
-        "legacy/stale-writer rejection",
-        "byte-exact rollback",
-        "no actual canonical adoption or control deletion",
-        "dual live plane",
-        "occupied deepseek/hmr or other provider call",
+        "explicit adoption boundary",
+        "live canonical clockwork adoption/retirement",
+        "no dual writer",
+        "exact rollback",
+        "canonical-check-in-route-adapter-convergence-rehearsal",
+        "neither branch is inferred",
+        "occupied deepseek/hmr",
         "product/practice/data/runtime",
         "deployment",
         "protected-ref movement",
@@ -293,4 +290,4 @@ def test_current_rows_preserve_closed_surface_boundary() -> None:
         "stage explicit paths only",
     ):
         assert phrase in next_work
-    assert "canonical-check-in-route-adapter-convergence-rehearsal" not in next_work
+    assert "single-owner-migration-retirement-rehearsal" not in next_work

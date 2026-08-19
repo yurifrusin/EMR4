@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 is at Continuity 329 / Compass 311. The provider-free clockwork governance projection repair is accepted in private shadow at exact candidate a0bb86b78bfc011066142740c82d5c25cab7b9c8: twenty-two representative probes pass, maintained surfaces fall sixty percent and honest repair-only payback is three closeouts. Yuri's choice is required before live migration or control retirement.
+> EMR4 is at Continuity 330 / Compass 312. The provider-free clockwork single-owner migration and retirement rehearsal is accepted at exact candidate d03cc6386fdf3e2714881089514380d93824e160: ten surfaces have one clockwork owner, all twenty-three fault checkpoints and byte-exact rollback pass, and projected representative steady-state corrective reruns are zero. Live canonical adoption remains Yuri's explicit choice.
 
 ## North star
 
@@ -428,24 +428,25 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Evaluation retained; candidate revision-required at thirteen reruns versus a maximum seven. Lineage parent: `ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture`.
 206. **Replace repeated hand-authored governance bindings with one measured private-shadow clock reading — Ariadne provider-free clockwork governance projection consolidation repair**
    Private-shadow repair accepted; live adoption remains a separate user-attention gate. Lineage parent: `ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal`.
+207. **Prove exclusive clockwork ownership, retirement safety and exact rollback in an isolated canonical mirror — Ariadne provider-free clockwork single-owner migration and retirement rehearsal**
+   Canonical-mirror rehearsal accepted; live adoption remains an explicit user-attention fork. Lineage parent: `ariadne-provider-free-clockwork-governance-projection-consolidation-repair`.
 
 ## Current position
 
-**Choose whether the accepted clockwork should enter a separately controlled live migration — Ariadne provider-free clockwork governance projection consolidation repair**
+**Choose live canonical adoption or retain shadow-only clockwork and resume product work — Ariadne provider-free clockwork single-owner migration and retirement rehearsal**
 
-**Why this proof came next:** Exact reviewed candidate a0bb86b78bfc011066142740c82d5c25cab7b9c8 covers all twenty-two representative probes, reduces maintained surfaces sixty percent and pays back in two repair-only closeouts.
+**Why this proof came next:** Exact candidate d03cc6386fdf3e2714881089514380d93824e160 proves exclusive ownership, all twenty-three fault boundaries and byte-exact rollback with zero projected representative steady-state corrective reruns.
 
-Yuri chooses either a separately frozen migration-and-retirement rehearsal with no dual live control plane, or retains this mechanism in private shadow while product work resumes.
+Yuri explicitly authorizes one separately frozen live adoption/retirement tranche or retains existing controls and resumes the default-off check-in route-adapter plan.
 
 ### What this unlocks
 
-- A deliberate adoption decision based on measured construction cost and projected savings.
-- If selected, one fail-closed migration plan that makes the clockwork the sole owner before retiring duplicates.
-- If deferred, continued use of all existing controls with the accepted shadow mechanism retained as evidence.
+- A controlled live adoption plan with no dual writer and exact rollback, if explicitly selected.
+- Otherwise, immediate product-track resumption with existing governance controls unchanged.
 
 ### What it does not solve
 
-- Private-shadow acceptance does not authorize live adoption or current-control retirement.
+- Mirror acceptance does not activate the clockwork or retire any actual control.
 - No DeepSeek Harness reliability or HMR boot proof was tested.
 - No product, practice, data, Git, runtime, deployment or protected integration opens.
 
@@ -1025,6 +1026,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-531.md`
 - `docs/ariadne-agent-error-correction-register-revision-543.md`
 - `docs/ariadne-agent-error-correction-register-revision-561.md`
+- `docs/ariadne-agent-error-correction-register-revision-566.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
@@ -1048,6 +1050,8 @@ Prerequisites:
 - `docs/ariadne-postcompaction-active-operation-latch-plan.md`
 - `docs/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-closeout.md`
 - `docs/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-plan.md`
+- `docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-closeout.md`
+- `docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-plan.md`
 - `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-closeout.md`
 - `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-plan.md`
 - `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-closeout.md`
@@ -1556,6 +1560,7 @@ Prerequisites:
 - `docs/security/ariadne-post-native-harness-successor-resolution-repair-threat-model-delta.md`
 - `docs/security/ariadne-postcompaction-active-operation-latch-threat-model-delta.md`
 - `docs/security/ariadne-provider-free-clockwork-governance-projection-consolidation-repair-threat-model-delta.md`
+- `docs/security/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-threat-model-delta.md`
 - `docs/security/ariadne-provider-free-continuity-journal-and-refinement-promotion-threat-model-delta.md`
 - `docs/security/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-threat-model-delta.md`
 - `docs/security/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal-threat-model-delta.md`
@@ -1721,6 +1726,8 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/ariadne-clockwork-broker-gear-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-clockwork-governance-projection-consolidation-repair-gemini37-retry-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-clockwork-governance-projection-consolidation-repair-gemini37-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-corrected-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-prime-derived-harness-adaptations-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-risk-weighted-workflow-reform-gemini37-corrected-review-receipt.json`
@@ -1807,6 +1814,17 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-retry-pre-verifier-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-retry-pre-verifier-runtime-state.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-corrected-pre-verifier-receipt.json`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-corrected-pre-verifier-runtime-state.json`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-command-manifest.json`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-corrected-command-manifest.json`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-corrected-review-packet.md`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-corrected-review-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-review-packet.md`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-review-worktree-preflight.json`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-preplanning-receipt.json`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-preplanning-runtime-state.json`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-adaptation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-command-manifest.json`
@@ -2446,6 +2464,11 @@ Prerequisites:
 - `orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/provider-free-repair-evidence.json`
 - `orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/repair-report.md`
 - `orchestration/continuity/ariadne-provider-free-clockwork-governance-projection-consolidation-repair/rerun-probes.json`
+- `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/canonical-mirror-receipt.json`
+- `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/closeout-intent.json`
+- `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/contract.json`
+- `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/migration-report.md`
+- `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/provider-free-migration-evidence.json`
 - `orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/architecture-report.md`
 - `orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/contract.json`
 - `orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture/contract.schema.json`
@@ -3142,6 +3165,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-18--post-native-harness-successor-resolution-repair.md`
 - `orchestration/human_inbox/yuri/2026-08-19--ariadne-transactional-closeout-control-plane-consolidation-efficacy-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-19--clockwork-governance-projection-consolidation-repair.md`
+- `orchestration/human_inbox/yuri/2026-08-19--clockwork-single-owner-migration-retirement-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-19--default-off-ordinary-practice-check-in-admission-control-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-rehearsal.md`
@@ -3161,6 +3185,7 @@ Prerequisites:
 - `orchestration_harness/git_object_resolution.py`
 - `orchestration_harness/git_refs_snapshot.py`
 - `orchestration_harness/governance_clockwork.py`
+- `orchestration_harness/governance_migration.py`
 - `orchestration_harness/orchestrator_preflight.py`
 - `orchestration_harness/risk_weighted_workflow.py`
 - `orchestration_harness/shadow_clockwork.py`
@@ -3185,6 +3210,8 @@ Prerequisites:
 - `scripts/ariadne_post_native_harness_successor_resolution_repair_continuity_update.py`
 - `scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py`
 - `scripts/ariadne_provider_free_clockwork_governance_projection_consolidation_repair_continuity_update.py`
+- `scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py`
+- `scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal_continuity_update.py`
 - `scripts/ariadne_provider_free_pytest.py`
 - `scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py`
 - `scripts/ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_continuity_update.py`
@@ -3301,6 +3328,8 @@ Prerequisites:
 - `tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py`
 - `tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py`
 - `tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair_continuity.py`
+- `tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py`
+- `tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal_continuity.py`
 - `tests/test_ariadne_provider_free_pytest.py`
 - `tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture.py`
 - `tests/test_ariadne_provider_free_shadow_clockwork_deepseek_broker_gear_architecture_continuity.py`
@@ -3445,4 +3474,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 311; continuity graph revision 329._
+_Compass map revision 312; continuity graph revision 330._

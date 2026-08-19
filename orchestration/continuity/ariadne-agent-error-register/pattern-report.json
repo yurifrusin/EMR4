@@ -1,33 +1,33 @@
 {
-  "canonical_register_sha256": "66174a906e8fdd85ce9e19b1405656995fb9fc9631052cdea6be36bb1ecaf747",
+  "canonical_register_sha256": "5fa0a3629d570a64abf4909b344f23c07b2256ecc1e33affb98b8b65a5d7a4a4",
   "counts": {
     "by_candidate_state": {
       "accepted_candidate_changed": 114,
-      "canonical_unchanged": 394,
+      "canonical_unchanged": 399,
       "untrusted_partial_worktree": 143
     },
     "by_category": {
-      "command_scope_violation": 87,
+      "command_scope_violation": 88,
       "evidence_misreport": 67,
       "harness_failure": 54,
       "operator_error": 36,
-      "output_contract_violation": 233,
+      "output_contract_violation": 237,
       "read_only_violation": 4,
       "reasoning_claim_error": 46,
       "repository_defect": 108,
       "transport_timeout": 16
     },
     "by_origin": {
-      "agent_behavior": 437,
+      "agent_behavior": 442,
       "harness": 54,
       "operator": 36,
       "repository": 108,
       "transport": 16
     },
     "by_process_severity": {
-      "low": 375,
+      "low": 378,
       "material": 118,
-      "moderate": 158
+      "moderate": 160
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
@@ -54,6 +54,8 @@
       "ariadne-provider-free-pytest-launcher::orchestrator": 1,
       "ariadne-verifier-worktree-preflight::orchestrator": 3,
       "clockwork-gear-architecture-plan-latch-test::orchestrator": 1,
+      "clockwork-migration-focused-replay-fixture::orchestrator": 1,
+      "clockwork-migration-verifier-command-manifest::orchestrator": 1,
       "codex-native-architecture-challenger::verifier": 1,
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 2,
@@ -61,7 +63,7 @@
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 335,
+      "codex-primary-orchestrator::orchestrator": 338,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -153,12 +155,12 @@
     "by_role": {
       "implementer": 44,
       "integration_reviewer": 3,
-      "orchestrator": 546,
+      "orchestrator": 551,
       "verifier": 58
     }
   },
   "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 651,
+  "incident_count": 656,
   "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
   "open_incident_ids": [],
   "recurring_patterns": [
@@ -166,13 +168,14 @@
       "categories": [
         "command_scope_violation"
       ],
-      "incident_count": 5,
+      "incident_count": 6,
       "incident_ids": [
         "AER-0490",
         "AER-0508",
         "AER-0573",
         "AER-0581",
-        "AER-0584"
+        "AER-0584",
+        "AER-0656"
       ],
       "origins": [
         "agent_behavior"
@@ -181,6 +184,7 @@
         "Every patch to a repeated register field must include the target incident_id in the same hunk and receive exact target plus sentinel readback before validation.",
         "Every repeated attempt-ID edit must be addressed by incident identity, with exact target and neighboring sentinel readback before validation; the clockwork allocator removes this edit class.",
         "Every repeated-field patch hunk includes target incident_id context and receives immediate exact intended-target plus early-sentinel readback before canonical validation.",
+        "Every repeated-value register patch includes the exact incident_id plus field context; compare all pre-existing incident fields to HEAD before regenerating patterns.",
         "The typed reducer must address fields by stable recurrence identity; until adoption, repeated-value patches include the owning signature and an unchanged neighboring sentinel.",
         "Typed reducer output eliminates repeated manual count patches; until adoption, every repeated-field patch must include the owning recurrence signature and receive exact target plus sentinel readback."
       ],
@@ -670,15 +674,17 @@
       "categories": [
         "output_contract_violation"
       ],
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-0460",
-        "AER-0512"
+        "AER-0512",
+        "AER-0655"
       ],
       "origins": [
         "agent_behavior"
       ],
       "prevention_controls": [
+        "Generate and validate the terminal latch projection before any surrounding suite; no hand-authored checkpoint summary may be admitted without the schema length reading.",
         "Run the active-latch validator immediately after every checkpoint edit and before the broad packet; detailed incident inventory stays in the register rather than the bounded checkpoint.",
         "Validate the active latch as its own gate after every checkpoint edit and before copying it into any continuation runtime state; never rely on preflight to be the first bounded-text check."
       ],
@@ -1215,6 +1221,30 @@
         "For every remaining AES-C2 receipt, copy each adapter_id and method as an exact pair from transport_adapters.yaml; completed-transport detail belongs only in the observation evidence string."
       ],
       "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "roles": [
+        "orchestrator"
+      ]
+    },
+    {
+      "categories": [
+        "output_contract_violation"
+      ],
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0651",
+        "AER-0654"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "prevention_controls": [
+        "Every exec wrapper for a potentially yielding command emits output, session_id and exit_code; a non-final result is polled before any acceptance claim.",
+        "Every potentially yielding exec wrapper must emit session_id as well as output and exit_code, or run the bounded test as a dedicated command."
+      ],
+      "recurrence_signature": "orchestrator.yielded_verification_session_id_not_exposed",
       "resource_ids": [
         "codex-primary-orchestrator"
       ],
@@ -1931,7 +1961,7 @@
       ]
     }
   ],
-  "register_revision": 561,
+  "register_revision": 566,
   "schema_version": "ariadne.agent-error-pattern-report.v1",
   "source_cutoff_on": "2026-08-19"
 }

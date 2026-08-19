@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 329,
+  "graph_revision": 330,
   "harvests": [],
   "nodes": [
     {
@@ -23270,9 +23270,107 @@
         "Occupied DeepSeek remains behind the separate native-Harness HMR boot proof.",
         "No product, practice, provider, Git, runtime, deployment or protected integration authority is opened."
       ]
+    },
+    {
+      "id": "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal",
+      "title": "Ariadne provider-free clockwork single-owner migration and retirement rehearsal",
+      "kind": "foundation",
+      "status": "accepted",
+      "created_at": "2026-08-19T01:53:31.2243631Z",
+      "updated_at": "2026-08-19T01:53:31.2243631Z",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "d03cc6386fdf3e2714881089514380d93824e160",
+        "thread_id": null,
+        "worktree_role": "task"
+      },
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-clockwork-governance-projection-consolidation-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "The provider-free canonical-mirror rehearsal is accepted; live canonical adoption remains closed.",
+          "Existing canonical controls remain authoritative until Yuri makes the explicit adoption choice.",
+          "No product, provider, runtime, deployment or protected-ref authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-clockwork-single-owner-migration-retirement-rehearsal",
+          "source": "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept exclusive mirror ownership, fault safety and rollback evidence without activating the clockwork live."
+        }
+      ],
+      "claim_scope": [
+        "All ten mirror surfaces have exclusive clockwork ownership; dual-owned surfaces are zero and four legacy writers are retired in the mirror.",
+        "All twenty-three fault checkpoints, byte-exact rollback and exact restore pass.",
+        "All thirteen predecessor and nine surrounding probes pass with zero caller-authored derived fields.",
+        "The exact reviewed package occupies 892 of 950 lines; immutable closeout-fixture binding leaves the final package at 914 of 950.",
+        "Final end-to-end cost is twenty-five reruns; projected representative steady-state corrective reruns are zero.",
+        "Fresh corrected Gemini 3.7 Flash/high review passes eleven of eleven commands at exact clean candidate d03cc6386fdf3e2714881089514380d93824e160."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-plan.md",
+          "docs/security/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/contract.json",
+          "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/closeout-intent.json",
+          "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/provider-free-migration-evidence.json",
+          "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/canonical-mirror-receipt.json",
+          "orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/migration-report.md",
+          "docs/ariadne-agent-error-correction-register-revision-566.md"
+        ],
+        "closeouts": [
+          "docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-19--clockwork-single-owner-migration-retirement-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-review-packet.md",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-review-worktree-preflight.json",
+          "orchestration/agent_inbox/antigravity/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-corrected-command-manifest.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-corrected-review-packet.md",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-corrected-review-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-corrected-pre-verifier-runtime-state.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-corrected-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/antigravity/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-corrected-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+          "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal_continuity.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_migration.py",
+          "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+          "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal_continuity_update.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Yuri must explicitly choose live canonical adoption/retirement or shadow retention plus product resumption.",
+        "No actual canonical writer or control may be changed before that choice.",
+        "Occupied DeepSeek remains behind the separate native-Harness HMR boot proof.",
+        "No product, practice, provider, Git, runtime, deployment or protected integration authority is opened."
+      ]
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-18T23:49:44.1443944Z"
+  "updated_at": "2026-08-19T01:53:31.2243631Z"
 }

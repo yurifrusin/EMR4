@@ -1,0 +1,271 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "revision_required",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-migration-gemini-9a1a27db",
+  "branch": "codex/review-clockwork-migration-9a1a27db",
+  "head_before": "d03cc6386fdf3e2714881089514380d93824e160",
+  "head_after": "d03cc6386fdf3e2714881089514380d93824e160",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "e047245ada786e5b93170232ab11497372fbbbe5292aec7f9f81a47bd6855aaa",
+  "result": "# Ariadne Independent Review Receipt \u2014 Clockwork Single-Owner Migration Rehearsal\n\n## 1. Five-Source Mandatory Rehydration\n- **live_handover_current_baton**: Read `AGENTS.md` completely. Current baton records protected integration PR 74/PR 75 rebase-merged and aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. The next implementation authorizes bounded canonical-mirror migration and retirement rehearsal only, preserving existing canonical controls as read-only authoritative oracles without actual canonical adoption or control deletion.\n- **current_authority_allocation**: GPT Sol conductor/integrator; Gemini 3.7 Flash (high) independent read-only reviewer; DeepSeek Harness and Claude Code fallback paused/closed; no product, patient, database, live-runtime or deployment authority.\n- **active_plan_and_acceptance**: `docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-plan.md` and threat delta `docs/security/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-threat-model-delta.md`.\n- **protected_evidence_boundaries**: Zero mutation or retirement of live canonical controls; zero dual-control live planes; zero provider calls outside this independent review; strict exclusion of `docs/branding/` and all unrelated untracked files; explicit-path staging only.\n- **git_refs_and_worktree**: Worktree `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-migration-gemini-9a1a27db` on branch `codex/review-clockwork-migration-9a1a27db`. Candidate HEAD `d03cc6386fdf3e2714881089514380d93824e160`, base `14e968de92300ff9e0fd103b4a0489448fde1587`. Protected refs `master`, `handoff/current`, `origin/master`, `origin/handoff/current` all confirmed aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n---\n\n## 2. Challenge-by-Challenge Assessment\n\n1. **Git State and Protected Refs**: Verified exact branch `codex/review-clockwork-migration-9a1a27db`, full 40-character HEAD `d03cc6386fdf3e2714881089514380d93824e160`, clean worktree, and all 4 protected refs (`master`, `handoff/current`, `origin/master`, `origin/handoff/current`) at `2e34bdad732fdab32fbf778280b3d3c70d66d602` before and after review.\n2. **Intent Schema and Closed Validation**: Confirmed `validate_intent` in `orchestration_harness/governance_migration.py` strictly forbids `DERIVED_KEYS` (`source_commit`, `source_head`, `graph_revision`, `map_revision`, `register_revision`, `incident_population`, `latest_incident_id`, `transaction_id`, `generation_id`, `lease_id`, `output_path`). Abbreviated OIDs and extra keys fail closed.\n3. **Pre-Preparation and Pre-Promotion State Verification**: Confirmed `_assert_git_state` re-checks HEAD commit, ancestor relationship to `14e968de92300ff9e0fd103b4a0489448fde1587`, and protected ref alignment both before transaction preparation and immediately before atomic pointer promotion in `publish_generation`.\n4. **Canonical Oracle Integrity**: Confirmed generation zero reads canonical oracle bytes, but publication occurs strictly within an isolated mirror target (`_allowed_target`). Canonical oracles were byte-compared before and after execution, confirming zero mutation.\n5. **Single Ownership & Legacy Writer Retirement**: Confirmed exactly 10 logical surfaces in each generation (`continuity`, `compass`, `compass_markdown`, `active_latch`, `error_register`, `pattern_report`, `current_baton`, `command_manifest`, `transaction`, `ownership`). All 10 have exclusive writer `\"clockwork\"` after cutover, and all 4 legacy writers (`bespoke_continuity_updater`, `manual_baton_editor`, `manual_latch_editor`, `manual_register_fixture_editor`) are marked `\"retired_in_mirror\"` with zero dual-owned surfaces.\n6. **Rejection of Invalid/Stale Operations**: Confirmed fail-closed rejection for non-clockwork writers, stale generation IDs, occupied leases (`O_CREAT | O_EXCL`), dirty/drifted protected refs, and target paths escaping the mirror root or referencing `docs/branding/`.\n7. **Fault Injection Coverage (23 Checkpoints)**: Verified all 23 fault points (20 file checkpoints, `after_generation_rename`, `before_pointer_replace`, and `after_pointer_replace`). All 22 precommit checkpoints clean up staging and preserve the prior complete generation without leaving active leases; the postcommit checkpoint (`after_pointer_replace`) correctly raises `CommittedCutover` and exposes the complete new generation.\n8. **Rollback & Restore Parity**: Confirmed rollback selects the byte-exact immutable oracle generation digest (`gen-4424945c1e7c74c257a071e7b9b049f2cf952431b5456fd5d0eab87ac558b9b5`), and restore selects the byte-exact clockwork generation digest (`gen-f306fdc585b04257a8d6fc863a2876b7d4c7c3113fb7cfbe08d0f6d45220ae3f`).\n9. **Clean Closeout Byte Preservation**: Verified error-register and pattern-report bytes are copied verbatim, while Continuity, Compass, latch, and typed baton readings are derived deterministically with zero caller-authored derived fields.\n10. **Probe & AER Control Coverage**: Probes validated (13 predecessor, 9 surrounding). AER-0643 through AER-0651 controls are verified in contract and execution.\n11. **Line Budget Verification**: Exact line budget across the 5 files in `line_budget_files` is 892 lines against the 950 limit (560 + 127 + 50 + 46 + 109 = 892). Persisted evidence measured 893 before removing an unused import; both are within ceiling.\n12. **Cost Separation**: Construction cost (13 reruns including admission correction) is reported separately from projected steady-state corrective reruns (0).\n13. **Evidence Compaction**: Confirmed full duplicate-generation text is not committed; retained evidence is compact receipt, evidence, and report only.\n14. **Byte-Preserving Default Execution**: Confirmed default runner execution does not write to the repository without `--publish`.\n15. **Source Separation**: Confirmed stored evidence is bound to `b4b31cec8ce7922b9b9b8b5eedad6686e19c8ca2` while C04 independently derived HEAD `d03cc6386fdf3e2714881089514380d93824e160`.\n16. **Provider & Scope Containment**: No unauthorized provider calls, no occupied DeepSeek/HMR sessions, no Claude fallbacks, no product/database/client changes.\n17. **Command Execution & Findings**: Commands C01-C06 and C08-C11 passed with exit code 0. Command C07 failed with exit code 1.\n\n---\n\n## 3. Finding and Failure Analysis (C07 Exit Code 1)\n\nCommand C07:\n```\npython -m scripts.ariadne_provider_free_pytest --repo-root C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db tests/test_ariadne_transactional_closeout.py tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py tests/test_ariadne_active_operation_latch.py tests/test_ariadne_agent_error_register.py tests/test_ariadne_compass.py tests/test_current_baton_consistency.py\n```\nexited with **exit_code 1** due to 7 test failures in `tests/test_ariadne_compass.py`.\n\n### Root Cause:\n`tests/test_ariadne_compass.py` calls `compass.validate_compass(current, graph, repo_root=REPO_ROOT)` which enforces `require_evidence_files=True`. In `orchestration/continuity/emr4-compass.json` and `orchestration/continuity/emr4-continuity-graph.json`, historical nodes (such as `raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering` and related CF-D2 nodes) reference untracked receipt files in `orchestration/agent_inbox/codex/` (e.g. `raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-precommit-receipt.json`).\n\nBecause isolated git worktrees only contain tracked files, these untracked receipts are absent in `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-migration-gemini-9a1a27db`, causing `compass.validate_compass` to return 19 `evidence_not_found` errors.\n\nUnder the strict decision rule, a non-zero exit code on any admitted manifest command mandates `revision_required`.\n\n---\n\n## 4. Postcondition Verification\nThe worktree remains clean on branch `codex/review-clockwork-migration-9a1a27db` at commit `d03cc6386fdf3e2714881089514380d93824e160`. Protected refs remain aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. No files were modified or created during this review.",
+  "decision_envelope": {
+    "decision": "revision_required",
+    "review": "# Ariadne Independent Review Receipt \u2014 Clockwork Single-Owner Migration Rehearsal\n\n## 1. Five-Source Mandatory Rehydration\n- **live_handover_current_baton**: Read `AGENTS.md` completely. Current baton records protected integration PR 74/PR 75 rebase-merged and aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. The next implementation authorizes bounded canonical-mirror migration and retirement rehearsal only, preserving existing canonical controls as read-only authoritative oracles without actual canonical adoption or control deletion.\n- **current_authority_allocation**: GPT Sol conductor/integrator; Gemini 3.7 Flash (high) independent read-only reviewer; DeepSeek Harness and Claude Code fallback paused/closed; no product, patient, database, live-runtime or deployment authority.\n- **active_plan_and_acceptance**: `docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-plan.md` and threat delta `docs/security/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-threat-model-delta.md`.\n- **protected_evidence_boundaries**: Zero mutation or retirement of live canonical controls; zero dual-control live planes; zero provider calls outside this independent review; strict exclusion of `docs/branding/` and all unrelated untracked files; explicit-path staging only.\n- **git_refs_and_worktree**: Worktree `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-migration-gemini-9a1a27db` on branch `codex/review-clockwork-migration-9a1a27db`. Candidate HEAD `d03cc6386fdf3e2714881089514380d93824e160`, base `14e968de92300ff9e0fd103b4a0489448fde1587`. Protected refs `master`, `handoff/current`, `origin/master`, `origin/handoff/current` all confirmed aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n---\n\n## 2. Challenge-by-Challenge Assessment\n\n1. **Git State and Protected Refs**: Verified exact branch `codex/review-clockwork-migration-9a1a27db`, full 40-character HEAD `d03cc6386fdf3e2714881089514380d93824e160`, clean worktree, and all 4 protected refs (`master`, `handoff/current`, `origin/master`, `origin/handoff/current`) at `2e34bdad732fdab32fbf778280b3d3c70d66d602` before and after review.\n2. **Intent Schema and Closed Validation**: Confirmed `validate_intent` in `orchestration_harness/governance_migration.py` strictly forbids `DERIVED_KEYS` (`source_commit`, `source_head`, `graph_revision`, `map_revision`, `register_revision`, `incident_population`, `latest_incident_id`, `transaction_id`, `generation_id`, `lease_id`, `output_path`). Abbreviated OIDs and extra keys fail closed.\n3. **Pre-Preparation and Pre-Promotion State Verification**: Confirmed `_assert_git_state` re-checks HEAD commit, ancestor relationship to `14e968de92300ff9e0fd103b4a0489448fde1587`, and protected ref alignment both before transaction preparation and immediately before atomic pointer promotion in `publish_generation`.\n4. **Canonical Oracle Integrity**: Confirmed generation zero reads canonical oracle bytes, but publication occurs strictly within an isolated mirror target (`_allowed_target`). Canonical oracles were byte-compared before and after execution, confirming zero mutation.\n5. **Single Ownership & Legacy Writer Retirement**: Confirmed exactly 10 logical surfaces in each generation (`continuity`, `compass`, `compass_markdown`, `active_latch`, `error_register`, `pattern_report`, `current_baton`, `command_manifest`, `transaction`, `ownership`). All 10 have exclusive writer `\"clockwork\"` after cutover, and all 4 legacy writers (`bespoke_continuity_updater`, `manual_baton_editor`, `manual_latch_editor`, `manual_register_fixture_editor`) are marked `\"retired_in_mirror\"` with zero dual-owned surfaces.\n6. **Rejection of Invalid/Stale Operations**: Confirmed fail-closed rejection for non-clockwork writers, stale generation IDs, occupied leases (`O_CREAT | O_EXCL`), dirty/drifted protected refs, and target paths escaping the mirror root or referencing `docs/branding/`.\n7. **Fault Injection Coverage (23 Checkpoints)**: Verified all 23 fault points (20 file checkpoints, `after_generation_rename`, `before_pointer_replace`, and `after_pointer_replace`). All 22 precommit checkpoints clean up staging and preserve the prior complete generation without leaving active leases; the postcommit checkpoint (`after_pointer_replace`) correctly raises `CommittedCutover` and exposes the complete new generation.\n8. **Rollback & Restore Parity**: Confirmed rollback selects the byte-exact immutable oracle generation digest (`gen-4424945c1e7c74c257a071e7b9b049f2cf952431b5456fd5d0eab87ac558b9b5`), and restore selects the byte-exact clockwork generation digest (`gen-f306fdc585b04257a8d6fc863a2876b7d4c7c3113fb7cfbe08d0f6d45220ae3f`).\n9. **Clean Closeout Byte Preservation**: Verified error-register and pattern-report bytes are copied verbatim, while Continuity, Compass, latch, and typed baton readings are derived deterministically with zero caller-authored derived fields.\n10. **Probe & AER Control Coverage**: Probes validated (13 predecessor, 9 surrounding). AER-0643 through AER-0651 controls are verified in contract and execution.\n11. **Line Budget Verification**: Exact line budget across the 5 files in `line_budget_files` is 892 lines against the 950 limit (560 + 127 + 50 + 46 + 109 = 892). Persisted evidence measured 893 before removing an unused import; both are within ceiling.\n12. **Cost Separation**: Construction cost (13 reruns including admission correction) is reported separately from projected steady-state corrective reruns (0).\n13. **Evidence Compaction**: Confirmed full duplicate-generation text is not committed; retained evidence is compact receipt, evidence, and report only.\n14. **Byte-Preserving Default Execution**: Confirmed default runner execution does not write to the repository without `--publish`.\n15. **Source Separation**: Confirmed stored evidence is bound to `b4b31cec8ce7922b9b9b8b5eedad6686e19c8ca2` while C04 independently derived HEAD `d03cc6386fdf3e2714881089514380d93824e160`.\n16. **Provider & Scope Containment**: No unauthorized provider calls, no occupied DeepSeek/HMR sessions, no Claude fallbacks, no product/database/client changes.\n17. **Command Execution & Findings**: Commands C01-C06 and C08-C11 passed with exit code 0. Command C07 failed with exit code 1.\n\n---\n\n## 3. Finding and Failure Analysis (C07 Exit Code 1)\n\nCommand C07:\n```\npython -m scripts.ariadne_provider_free_pytest --repo-root C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db tests/test_ariadne_transactional_closeout.py tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py tests/test_ariadne_active_operation_latch.py tests/test_ariadne_agent_error_register.py tests/test_ariadne_compass.py tests/test_current_baton_consistency.py\n```\nexited with **exit_code 1** due to 7 test failures in `tests/test_ariadne_compass.py`.\n\n### Root Cause:\n`tests/test_ariadne_compass.py` calls `compass.validate_compass(current, graph, repo_root=REPO_ROOT)` which enforces `require_evidence_files=True`. In `orchestration/continuity/emr4-compass.json` and `orchestration/continuity/emr4-continuity-graph.json`, historical nodes (such as `raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering` and related CF-D2 nodes) reference untracked receipt files in `orchestration/agent_inbox/codex/` (e.g. `raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-precommit-receipt.json`).\n\nBecause isolated git worktrees only contain tracked files, these untracked receipts are absent in `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-migration-gemini-9a1a27db`, causing `compass.validate_compass` to return 19 `evidence_not_found` errors.\n\nUnder the strict decision rule, a non-zero exit code on any admitted manifest command mandates `revision_required`.\n\n---\n\n## 4. Postcondition Verification\nThe worktree remains clean on branch `codex/review-clockwork-migration-9a1a27db` at commit `d03cc6386fdf3e2714881089514380d93824e160`. Protected refs remain aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. No files were modified or created during this review.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db",
+          "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal",
+          "--construction-reruns",
+          "13"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "orchestration_harness/governance_migration.py",
+          "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+          "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "orchestration_harness/governance_migration.py",
+          "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_compass.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "exit_code": 1
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "14e968de92300ff9e0fd103b4a0489448fde1587..d03cc6386fdf3e2714881089514380d93824e160"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "14e968de92300ff9e0fd103b4a0489448fde1587..d03cc6386fdf3e2714881089514380d93824e160"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C11",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "7e3d2e1bbfc015d353d9504bf4cfeb4d90b92014c94a46bdfc90552c2ba55be4",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db",
+        "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal",
+        "--construction-reruns",
+        "13"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "orchestration_harness/governance_migration.py",
+        "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+        "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/governance_migration.py",
+        "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_compass.py",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "exit_code": 1
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "14e968de92300ff9e0fd103b4a0489448fde1587..d03cc6386fdf3e2714881089514380d93824e160"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "14e968de92300ff9e0fd103b4a0489448fde1587..d03cc6386fdf3e2714881089514380d93824e160"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C11",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

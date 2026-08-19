@@ -114,7 +114,7 @@ All gates are mandatory:
 11. The controls make AER-0643 through AER-0651 either impossible to represent or fail before publication: bounded latch prose, Compass fixture derivation, immutable replay source, exact line reading, current pytest-node discovery/whole-file fallback, aggregate/membership generation, structured accessor use and yielding-session completion.
 12. All 13 immutable predecessor probes and all 9 surrounding probes remain passing with no coverage loss.
 13. Construction retries are reported separately from the projected steady-state closeout; no amortisation or timing claim is accepted.
-14. Focused, latch, register, Compass, transactional-closeout and governance-clockwork suites pass.
+14. Focused, latch, register, main-workspace Compass evidence-presence, transactional-closeout and governance-clockwork suites pass; an isolated tracked-only verifier reruns the portable packet and names the separately passed non-portable Compass gate.
 15. Fresh Gemini 3.7 Flash/high returns a read-only pass on the exact clean candidate and command packet.
 16. `git diff --cached --check`, explicit-path staging, clean tracked handoff, task-origin alignment and unchanged protected refs pass.
 

@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {"id": "C03", "argv": ["C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db", "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"]},
+    {"id": "C04", "argv": ["C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal", "--construction-reruns", "13"]},
+    {"id": "C05", "argv": ["C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe", "check", "orchestration_harness/governance_migration.py", "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py", "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"]},
+    {"id": "C06", "argv": ["C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "py_compile", "orchestration_harness/governance_migration.py", "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"]},
+    {"id": "C07", "argv": ["C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db", "tests/test_ariadne_transactional_closeout.py", "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_compass.py", "tests/test_current_baton_consistency.py"]},
+    {"id": "C08", "argv": ["git", "diff", "--exit-code", "HEAD", "--"]},
+    {"id": "C09", "argv": ["git", "diff", "--check", "14e968de92300ff9e0fd103b4a0489448fde1587..d03cc6386fdf3e2714881089514380d93824e160"]},
+    {"id": "C10", "argv": ["git", "diff", "--name-only", "14e968de92300ff9e0fd103b4a0489448fde1587..d03cc6386fdf3e2714881089514380d93824e160"]},
+    {"id": "C11", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

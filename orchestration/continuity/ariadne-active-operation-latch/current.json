@@ -3,17 +3,17 @@
   "operation_id": "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal",
   "active_tranche": "Ariadne provider-free clockwork single-owner migration and retirement rehearsal",
   "objective": "Prove or reject a reversible single-owner migration of repository-local governance closeout projections by replaying one accepted representative closeout into an isolated canonical mirror, atomically cutting that mirror from legacy-oracle comparison to exclusive clockwork ownership, rejecting legacy or stale writers, fault-testing every publication step and proving byte-exact rollback before any canonical control retirement or live adoption.",
-  "status": "in_progress",
-  "source_head": "14e968de92300ff9e0fd103b4a0489448fde1587",
+  "status": "blocked",
+  "source_head": "d03cc6386fdf3e2714881089514380d93824e160",
   "authority_source": "AGENTS.md Current Baton Next implementation, the accepted private-shadow reducer at a0bb86b78bfc011066142740c82d5c25cab7b9c8, Yuri's explicit 2026-08-19 choice to tighten the workflow by doing the recommended migration/retirement rehearsal, and standing uninterrupted-development authority authorize only this bounded provider-free canonical-mirror rehearsal.",
   "checkpoint": {
-    "completed_stage": "The five-source receipt and frozen plan pass; the bounded candidate gives all ten mirror surfaces one clockwork owner, retires four legacy writers in the mirror, passes 23 fault points, exact rollback, 13 predecessor and 9 surrounding probes, and reports twelve construction reruns separately from projected zero steady-state corrective reruns.",
-    "next_executable_stage": "freeze_the_exact_clean_candidate_then_publish_its_isolated_mirror_evidence_and_run_deterministic_preverifier_admission",
+    "completed_stage": "Accepted at Continuity 330 / Compass 312: d03cc6386fdf3e2714881089514380d93824e160 passed corrected Gemini; 10/10 exclusive owners, 23/23 faults, byte-exact rollback/restore and 25 end-to-end reruns with projected steady-state 0 pass. AER-0653 binds immutable replay; AER-0654 through AER-0656 preserve closeout corrections. Existing controls remain authoritative pending Yuri's choice.",
+    "next_executable_stage": "await_yuris_explicit_choice_between_live_canonical_clockwork_adoption_retirement_and_shadow_retention_plus_product_route_adapter_resumption",
     "retry_counters": {
       "planning": 0,
       "implementation": 3,
-      "review": 0,
-      "verification": 9
+      "review": 2,
+      "verification": 21
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,12 +26,12 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": false,
-    "reason": null
+    "required": true,
+    "reason": "The accepted mirror rehearsal grants no live adoption authority. Yuri must explicitly choose whether to adopt and retire canonical controls or retain shadow-only use and resume product work."
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "operation_accepted_and_blocked_at_explicit_user_authority_fork"
   },
   "protected_boundaries": [
     "provider_free_single_owner_canonical_mirror_migration_and_retirement_rehearsal_only",

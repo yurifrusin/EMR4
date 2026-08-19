@@ -1,0 +1,269 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-migration-gemini-9a1a27db",
+  "branch": "codex/review-clockwork-migration-9a1a27db",
+  "head_before": "d03cc6386fdf3e2714881089514380d93824e160",
+  "head_after": "d03cc6386fdf3e2714881089514380d93824e160",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "5013348f611d9498b05bff2b764e65d692d4c664ae99a9173b21d9782fe6f427",
+  "result": "# Gemini 3.7 Flash/high Corrected Independent Review: Clockwork Single-Owner Migration Rehearsal\n\n**Reviewer Model & Role:** Gemini 3.7 Flash (`gemini-3.7-flash-high`) at `high` reasoning effort; fresh corrected Tier-2 read-only independent verifier.  \n**Decision Owner:** GPT Sol  \n**Date:** 2026-08-19  \n**Bound Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-migration-gemini-9a1a27db`  \n**Bound Branch:** `codex/review-clockwork-migration-9a1a27db`  \n**Exact Candidate HEAD:** `d03cc6386fdf3e2714881089514380d93824e160`  \n**Base Commit:** `14e968de92300ff9e0fd103b4a0489448fde1587`  \n\n---\n\n## 1. Mandatory Rehydration\n\nRehydration has been completed across all five authoritative sources:\n1. `live_handover_current_baton`: Read and rehydrated from [`AGENTS.md`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db/AGENTS.md) Section 3, confirming the single-track closed integration at master `2e34bdad732fdab32fbf778280b3d3c70d66d602`, the active migration rehearsal lease, and unchanged continuity state.\n2. `current_authority_allocation`: Section 4 confirmed GPT Sol as conductor/integrator and architecture owner; Gemini 3.7 Flash/high via fresh Antigravity review as independent read-only verifier; DeepSeek V4 paused from occupied development; no self-acceptance or external integration authority.\n3. `active_plan_and_acceptance`: Verified [`docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db/docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-plan.md) and [`docs/security/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db/docs/security/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-threat-model-delta.md).\n4. `protected_evidence_boundaries`: Verified holdouts v1-v10 sealed, provider lanes paused, clinical/patient/real product data excluded, `docs/branding/` untracked assets preserved and untouched.\n5. `git_refs_and_worktree`: Verified bound worktree at `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-migration-gemini-9a1a27db` on `codex/review-clockwork-migration-9a1a27db` at exact HEAD `d03cc6386fdf3e2714881089514380d93824e160` with clean working tree.\n\n---\n\n## 2. Portability Correction & Evaluation Findings\n\n### Verification of Corrected Manifest & Test Narrowing\n- **First Review Rejection Root Cause:** The initial review failed closed solely at C07 because `tests/test_ariadne_compass.py` asserted the presence of 19 historical, untracked receipts that are intentionally omitted from isolated tracked-only worktrees. In the main development tree, that Compass evidence-presence test passes completely.\n- **AER-0652 / Register Revision 562 Verification:** Confirmed that AER-0652 and revision 562 record and classify the worktree portability defect prior to this attempt, ensuring transparent fail-closed incident tracking.\n- **Corrected C07 Composition:** Corrected command C07 removed only `tests/test_ariadne_compass.py` while retaining full regression coverage:\n  - `tests/test_ariadne_transactional_closeout.py`\n  - `tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py`\n  - `tests/test_ariadne_active_operation_latch.py`\n  - `tests/test_ariadne_agent_error_register.py`\n  - `tests/test_current_baton_consistency.py`\n  All 511 tests across these suites passed (100%).\n- **Prospective Migration Coverage in C03 & C04:** C03 executed all 10 focused migration tests in [`tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db/tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py), covering prospective Continuity, Compass, latch, ownership, fault injection, and rollback behaviors. C04 validated all 23/23 fault-injection checkpoints, atomic promotion, and byte-exact rollback in the canonical mirror.\n\n### Substantive Review Criteria Verification\n1. **Source & Protected Refs:** Exact unchanged HEAD `d03cc6386fdf3e2714881089514380d93824e160` verified; working tree is completely clean before and after manifest execution. Protected refs remain untouched.\n2. **Line Budget & Implementation Integrity:** Total candidate implementation footprint is 892 lines against the 950-line maximum budget (`orchestration_harness/governance_migration.py` + `scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py`), unchanged from the initial review.\n3. **Static Analysis & Compilation:** Ruff checks (C05) passed with zero violations across all modified files; `py_compile` (C06) succeeded cleanly.\n4. **Ownership & Writer Retirement:** 10/10 governance surfaces transferred exclusively to clockwork in mirror (`active_latch`, `command_manifest`, `compass`, `compass_markdown`, `continuity`, `current_baton`, `error_register`, `ownership`, `pattern_report`, `transaction`); 4 legacy writers retired in mirror (`bespoke_continuity_updater`, `manual_baton_editor`, `manual_latch_editor`, `manual_register_fixture_editor`); 0 dual-owned surfaces.\n5. **Fault Tolerance & Rollback:** 23/23 fault checkpoints verified; atomic generation swap and rollback to the pre-existing complete generation passed without data loss or corruption.\n6. **Rerun & Cost Accounting:** Construction cost verified at 16 reruns; projected steady-state corrective reruns remain 0.\n\n---\n\n## 3. Command Execution Summary\n\n| ID | Command | Exit Code | Result |\n|---|---|---|---|\n| C01 | `git status --short --branch` | 0 | `## codex/review-clockwork-migration-9a1a27db` (clean) |\n| C02 | `git rev-parse HEAD` | 0 | `d03cc6386fdf3e2714881089514380d93824e160` |\n| C03 | `python -m scripts.ariadne_provider_free_pytest --repo-root ... tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py` | 0 | 10 passed in 49.33s (100%) |\n| C04 | `python -m scripts.ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal --construction-reruns 16` | 0 | 23/23 fault checkpoints passed, 892/950 lines, status: passed |\n| C05 | `ruff check orchestration_harness/governance_migration.py scripts/... tests/...` | 0 | All checks passed! |\n| C06 | `python -m py_compile orchestration_harness/governance_migration.py scripts/...` | 0 | Clean compilation |\n| C07 | `python -m scripts.ariadne_provider_free_pytest --repo-root ... tests/test_ariadne_transactional_closeout.py ... tests/test_current_baton_consistency.py` | 0 | 511 passed in 30.64s (100%) |\n| C08 | `git diff --exit-code HEAD --` | 0 | Clean worktree, zero diff |\n| C09 | `git diff --check 14e968de92300ff9e0fd103b4a0489448fde1587..d03cc6386fdf3e2714881089514380d93824e160` | 0 | Zero whitespace / conflict marker errors |\n| C10 | `git diff --name-only 14e968de92300ff9e0fd103b4a0489448fde1587..d03cc6386fdf3e2714881089514380d93824e160` | 0 | 16 expected candidate files |\n| C11 | `git status --short --branch` | 0 | `## codex/review-clockwork-migration-9a1a27db` (clean) |\n\n---\n\n## 4. Final Assessment\n\nThe candidate is strictly unchanged, satisfies all single-owner migration and retirement invariants, and passes all 11 commands of the corrected manifest with exit code 0 while leaving the worktree clean.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Corrected Independent Review: Clockwork Single-Owner Migration Rehearsal\n\n**Reviewer Model & Role:** Gemini 3.7 Flash (`gemini-3.7-flash-high`) at `high` reasoning effort; fresh corrected Tier-2 read-only independent verifier.  \n**Decision Owner:** GPT Sol  \n**Date:** 2026-08-19  \n**Bound Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-migration-gemini-9a1a27db`  \n**Bound Branch:** `codex/review-clockwork-migration-9a1a27db`  \n**Exact Candidate HEAD:** `d03cc6386fdf3e2714881089514380d93824e160`  \n**Base Commit:** `14e968de92300ff9e0fd103b4a0489448fde1587`  \n\n---\n\n## 1. Mandatory Rehydration\n\nRehydration has been completed across all five authoritative sources:\n1. `live_handover_current_baton`: Read and rehydrated from [`AGENTS.md`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db/AGENTS.md) Section 3, confirming the single-track closed integration at master `2e34bdad732fdab32fbf778280b3d3c70d66d602`, the active migration rehearsal lease, and unchanged continuity state.\n2. `current_authority_allocation`: Section 4 confirmed GPT Sol as conductor/integrator and architecture owner; Gemini 3.7 Flash/high via fresh Antigravity review as independent read-only verifier; DeepSeek V4 paused from occupied development; no self-acceptance or external integration authority.\n3. `active_plan_and_acceptance`: Verified [`docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db/docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-plan.md) and [`docs/security/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db/docs/security/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-threat-model-delta.md).\n4. `protected_evidence_boundaries`: Verified holdouts v1-v10 sealed, provider lanes paused, clinical/patient/real product data excluded, `docs/branding/` untracked assets preserved and untouched.\n5. `git_refs_and_worktree`: Verified bound worktree at `C:\\Users\\sarashera\\EMR4-worktrees\\clockwork-migration-gemini-9a1a27db` on `codex/review-clockwork-migration-9a1a27db` at exact HEAD `d03cc6386fdf3e2714881089514380d93824e160` with clean working tree.\n\n---\n\n## 2. Portability Correction & Evaluation Findings\n\n### Verification of Corrected Manifest & Test Narrowing\n- **First Review Rejection Root Cause:** The initial review failed closed solely at C07 because `tests/test_ariadne_compass.py` asserted the presence of 19 historical, untracked receipts that are intentionally omitted from isolated tracked-only worktrees. In the main development tree, that Compass evidence-presence test passes completely.\n- **AER-0652 / Register Revision 562 Verification:** Confirmed that AER-0652 and revision 562 record and classify the worktree portability defect prior to this attempt, ensuring transparent fail-closed incident tracking.\n- **Corrected C07 Composition:** Corrected command C07 removed only `tests/test_ariadne_compass.py` while retaining full regression coverage:\n  - `tests/test_ariadne_transactional_closeout.py`\n  - `tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py`\n  - `tests/test_ariadne_active_operation_latch.py`\n  - `tests/test_ariadne_agent_error_register.py`\n  - `tests/test_current_baton_consistency.py`\n  All 511 tests across these suites passed (100%).\n- **Prospective Migration Coverage in C03 & C04:** C03 executed all 10 focused migration tests in [`tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py`](file:///C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db/tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py), covering prospective Continuity, Compass, latch, ownership, fault injection, and rollback behaviors. C04 validated all 23/23 fault-injection checkpoints, atomic promotion, and byte-exact rollback in the canonical mirror.\n\n### Substantive Review Criteria Verification\n1. **Source & Protected Refs:** Exact unchanged HEAD `d03cc6386fdf3e2714881089514380d93824e160` verified; working tree is completely clean before and after manifest execution. Protected refs remain untouched.\n2. **Line Budget & Implementation Integrity:** Total candidate implementation footprint is 892 lines against the 950-line maximum budget (`orchestration_harness/governance_migration.py` + `scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py`), unchanged from the initial review.\n3. **Static Analysis & Compilation:** Ruff checks (C05) passed with zero violations across all modified files; `py_compile` (C06) succeeded cleanly.\n4. **Ownership & Writer Retirement:** 10/10 governance surfaces transferred exclusively to clockwork in mirror (`active_latch`, `command_manifest`, `compass`, `compass_markdown`, `continuity`, `current_baton`, `error_register`, `ownership`, `pattern_report`, `transaction`); 4 legacy writers retired in mirror (`bespoke_continuity_updater`, `manual_baton_editor`, `manual_latch_editor`, `manual_register_fixture_editor`); 0 dual-owned surfaces.\n5. **Fault Tolerance & Rollback:** 23/23 fault checkpoints verified; atomic generation swap and rollback to the pre-existing complete generation passed without data loss or corruption.\n6. **Rerun & Cost Accounting:** Construction cost verified at 16 reruns; projected steady-state corrective reruns remain 0.\n\n---\n\n## 3. Command Execution Summary\n\n| ID | Command | Exit Code | Result |\n|---|---|---|---|\n| C01 | `git status --short --branch` | 0 | `## codex/review-clockwork-migration-9a1a27db` (clean) |\n| C02 | `git rev-parse HEAD` | 0 | `d03cc6386fdf3e2714881089514380d93824e160` |\n| C03 | `python -m scripts.ariadne_provider_free_pytest --repo-root ... tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py` | 0 | 10 passed in 49.33s (100%) |\n| C04 | `python -m scripts.ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal --construction-reruns 16` | 0 | 23/23 fault checkpoints passed, 892/950 lines, status: passed |\n| C05 | `ruff check orchestration_harness/governance_migration.py scripts/... tests/...` | 0 | All checks passed! |\n| C06 | `python -m py_compile orchestration_harness/governance_migration.py scripts/...` | 0 | Clean compilation |\n| C07 | `python -m scripts.ariadne_provider_free_pytest --repo-root ... tests/test_ariadne_transactional_closeout.py ... tests/test_current_baton_consistency.py` | 0 | 511 passed in 30.64s (100%) |\n| C08 | `git diff --exit-code HEAD --` | 0 | Clean worktree, zero diff |\n| C09 | `git diff --check 14e968de92300ff9e0fd103b4a0489448fde1587..d03cc6386fdf3e2714881089514380d93824e160` | 0 | Zero whitespace / conflict marker errors |\n| C10 | `git diff --name-only 14e968de92300ff9e0fd103b4a0489448fde1587..d03cc6386fdf3e2714881089514380d93824e160` | 0 | 16 expected candidate files |\n| C11 | `git status --short --branch` | 0 | `## codex/review-clockwork-migration-9a1a27db` (clean) |\n\n---\n\n## 4. Final Assessment\n\nThe candidate is strictly unchanged, satisfies all single-owner migration and retirement invariants, and passes all 11 commands of the corrected manifest with exit code 0 while leaving the worktree clean.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db",
+          "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal",
+          "--construction-reruns",
+          "16"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "orchestration_harness/governance_migration.py",
+          "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+          "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "orchestration_harness/governance_migration.py",
+          "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "14e968de92300ff9e0fd103b4a0489448fde1587..d03cc6386fdf3e2714881089514380d93824e160"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "14e968de92300ff9e0fd103b4a0489448fde1587..d03cc6386fdf3e2714881089514380d93824e160"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C11",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "8acabb1d26e00cac122105541395c47e5a13e15a613c3f440fcfc96b9af33874",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db",
+        "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal",
+        "--construction-reruns",
+        "16"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "orchestration_harness/governance_migration.py",
+        "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+        "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/governance_migration.py",
+        "scripts/ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/clockwork-migration-gemini-9a1a27db",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "14e968de92300ff9e0fd103b4a0489448fde1587..d03cc6386fdf3e2714881089514380d93824e160"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "14e968de92300ff9e0fd103b4a0489448fde1587..d03cc6386fdf3e2714881089514380d93824e160"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C11",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

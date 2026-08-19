@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 561,
+  "register_revision": 566,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-19",
@@ -25735,6 +25735,199 @@
         "evidence_paths": [
           "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
           "docs/ariadne-agent-error-correction-register-revision-561.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0652",
+      "attempt_id": "clockwork-migration-gemini-review-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "clockwork-migration-verifier-command-manifest",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Every verifier command must be satisfiable from the exact tracked-only review worktree or be explicitly classified as a main-workspace evidence-presence gate before provider dispatch.",
+      "observed_error": "The first Gemini manifest required the complete Compass evidence-presence suite in an isolated tracked-only worktree, but that historical suite depends on 19 unrelated untracked receipt files and returned seven test failures despite all migration challenges passing.",
+      "detection_method": "The schema-bound Gemini receipt returned revision_required with C07 exit code 1, a clean unchanged worktree and exact evidence_not_found paths limited to historical untracked receipts.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-command-manifest.json",
+        "docs/ariadne-agent-error-correction-register-revision-562.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "orchestrator.verifier_manifest_depended_on_untracked_historical_evidence",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count one review retry, preserve the rejected receipt, retain the complete Compass evidence-presence suite as a passed main-workspace gate, remove it from the tracked-only verifier manifest and require a fresh corrected Gemini decision on the unchanged exact candidate.",
+        "prevention_control": "Verifier manifests classify every evidence-presence test by tracked-only portability before dispatch; isolated worktrees run only portable suites while the main-workspace gate remains separately recorded.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-corrected-command-manifest.json",
+          "docs/ariadne-agent-error-correction-register-revision-562.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0653",
+      "attempt_id": "clockwork-migration-terminal-closeout-suite-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "clockwork-migration-focused-replay-fixture",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_exec_session",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "An accepted rehearsal's focused tests must replay the immutable admitted latch and remain independent of the mutable live operation latch after terminal closeout.",
+      "observed_error": "The first terminal closeout suite changed the live latch to blocked, after which eight focused rehearsal paths rejected with active_operation_mismatch and two historical latch assertions still expected in_progress.",
+      "detection_method": "The combined closeout suite returned thirteen exact failures while the reviewed implementation and clean worktree remained unchanged; all mechanism failures traced to tests reading the now-terminal current latch rather than the admitted preplanning latch.",
+      "evidence_paths": [
+        "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+        "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+        "docs/ariadne-agent-error-correction-register-revision-563.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.accepted_rehearsal_replay_depended_on_mutable_live_latch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count a twenty-first end-to-end rerun after correcting the incident's schema and incomplete latch-only replay fix, make both historical suites assert immutable admission evidence, make migration replay load all seven historical oracle inputs from the exact reviewed full Git commit, and retain live-current assertions separately.",
+        "prevention_control": "Accepted rehearsal replay tests bind every mutable canonical oracle to one immutable full Git commit; current projections are tested only as present state and are never reused as historical construction fixtures.",
+        "evidence_paths": [
+          "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+          "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+          "docs/ariadne-agent-error-correction-register-revision-563.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0654",
+      "attempt_id": "clockwork-migration-final-focused-session-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_exec_session",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every potentially yielding verification wrapper must expose its returned session identifier and obtain a final exit code before contributing acceptance evidence.",
+      "observed_error": "The corrected focused suite yielded after partial dots, but the wrapper printed only output and an undefined exit value; it did not expose the returned session identifier.",
+      "detection_method": "The tool result showed exit=undefined while two exact pytest process rows remained; the processes later exited but their terminal result was unrecoverable.",
+      "evidence_paths": [
+        "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-564.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.yielded_verification_session_id_not_exposed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count a twenty-second end-to-end rerun and execute the focused file alone with wrapper output that explicitly emits session_id and polls it to a final exit code.",
+        "prevention_control": "Every exec wrapper for a potentially yielding command emits output, session_id and exit_code; a non-final result is polled before any acceptance claim.",
+        "evidence_paths": [
+          "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-564.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0655",
+      "attempt_id": "clockwork-migration-terminal-latch-closeout-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_exec_session",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The terminal active-operation checkpoint summary must remain within the schema's 500-character bound before the full surrounding closeout suite runs.",
+      "observed_error": "The first terminal summary was 525 characters, so latch validation failed and every dependent transactional or predecessor replay test rejected before evaluating its own invariant.",
+      "detection_method": "The complete surrounding suite returned the exact jsonschema maxLength and pure-validator bounded-text failures; direct length inspection returned 525.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "tests/test_ariadne_active_operation_latch.py",
+        "docs/ariadne-agent-error-correction-register-revision-565.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.active_operation_checkpoint_text_exceeded_bound",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count a twenty-fourth end-to-end rerun, reduce completed_stage below 500 characters, restore the exact protected-ref movement Baton phrase and classify both new recurring patterns with their exact composite resource keys before rerunning the whole packet.",
+        "prevention_control": "Generate and validate the terminal latch projection before any surrounding suite; no hand-authored checkpoint summary may be admitted without the schema length reading.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "tests/test_ariadne_active_operation_latch.py",
+          "docs/ariadne-agent-error-correction-register-revision-565.md"
+        ]
+      },
+      "status": "corrected"
+    },
+    {
+      "incident_id": "AER-0656",
+      "attempt_id": "clockwork-migration-register-resource-correction-001",
+      "observed_on": "2026-08-19",
+      "tranche": "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal",
+      "origin": "agent_behavior",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_exec_session",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "A repeated-value patch to a historical register must include the exact incident ID context and must not mutate an earlier matching incident.",
+      "observed_error": "The first AER-0655 resource correction matched AER-0556's earlier identical resource string, changing the wrong historical incident while leaving AER-0655 unchanged.",
+      "detection_method": "The targeted pattern test still excluded AER-0655; a read-only field comparison between current JSON and HEAD identified AER-0556 as the unintended mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-566.md"
+      ],
+      "related_incident_ids": [],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.apply_patch_repeated_value_target_missing_incident_context",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Count a twenty-fifth end-to-end rerun, restore AER-0556 from the exact HEAD field reading, patch AER-0655 only with incident-ID context and admit AER-0656 into the existing recurrence fixture.",
+        "prevention_control": "Every repeated-value register patch includes the exact incident_id plus field context; compare all pre-existing incident fields to HEAD before regenerating patterns.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-566.md"
         ]
       },
       "status": "corrected"

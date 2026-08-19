@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import re
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -21,17 +23,32 @@ TOPIC = ROOT / "orchestration/continuity/ariadne-provider-free-clockwork-single-
 CONTRACT_PATH = TOPIC / "contract.json"
 INTENT_PATH = TOPIC / "closeout-intent.json"
 LATCH = ROOT / "orchestration/continuity/ariadne-active-operation-latch/current.json"
+PREPLAN = ROOT / "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-preplanning-runtime-state.json"
+REVIEWED_HEAD = "d03cc6386fdf3e2714881089514380d93824e160"
 
 
 def _load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _construction_snapshot(repo_root: Path, contract: dict) -> tuple[dict[str, str], dict[str, str]]:
+    readings = {
+        name: subprocess.run(
+            ["git", "show", f"{REVIEWED_HEAD}:{path}"], cwd=repo_root,
+            check=True, capture_output=True, text=True, encoding="utf-8",
+        ).stdout
+        for name, path in contract["oracle_paths"].items()
+    }
+    digests = {name: hashlib.sha256(text.encode()).hexdigest() for name, text in readings.items()}
+    return readings, digests
+
+
 def _state(tmp_path: Path):
     contract = validate_contract(_load(CONTRACT_PATH))
     intent = validate_intent(_load(INTENT_PATH), contract)
-    initialized = initialize_mirror(ROOT, tmp_path / "mirror", contract)
-    generation = build_clockwork_generation(ROOT, contract, intent, initialized["oracle"]["generation_id"])
+    with patch("orchestration_harness.governance_migration._snapshot", side_effect=_construction_snapshot):
+        initialized = initialize_mirror(ROOT, tmp_path / "mirror", contract)
+        generation = build_clockwork_generation(ROOT, contract, intent, initialized["oracle"]["generation_id"])
     return contract, initialized, generation
 
 
@@ -39,13 +56,15 @@ def test_plan_receipt_latch_and_parallelism_are_frozen() -> None:
     plan = (ROOT / "docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-plan.md").read_text(encoding="utf-8")
     threat = (ROOT / "docs/security/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-threat-model-delta.md").read_text(encoding="utf-8")
     receipt = _load(ROOT / "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-preplanning-receipt.json")
-    latch = _load(LATCH)
+    historical_latch = _load(PREPLAN)["active_operation"]
+    live_latch = _load(LATCH)
     assert "950 physical lines" in plan and "AER-0643 through AER-0651" in plan
     assert "zero dual-owned surfaces" in threat
     assert receipt["status"] == "passed" and receipt["rehydrated_from_receipt"]
     assert set(receipt["rehydration_sources"]) == {"live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"}
-    assert latch["operation_id"] == receipt["active_operation"]["operation_id"]
-    assert latch["status"] == "in_progress" and not latch["terminal_response"]["permitted"]
+    assert historical_latch["operation_id"] == receipt["active_operation"]["operation_id"]
+    assert historical_latch["status"] == "in_progress" and not historical_latch["terminal_response"]["permitted"]
+    assert live_latch["status"] == "blocked" and live_latch["terminal_response"]["permitted"]
     lanes = {item["lane_id"]: item["disposition"] for item in receipt["parallelism_assessment"]["lanes"]}
     assert lanes == {"deepseek_flash": "declined", "gemini_verifier": "reserved", "native_subagents": "declined"}
 
@@ -123,7 +142,8 @@ def test_precommit_faults_preserve_old_generation_and_postcommit_is_explicit(tmp
         publish_generation(ROOT, mirror, contract, generation, writer_id=WRITER, fail_at="after:continuity.json")
     assert validate_mirror(mirror)["pointer"]["selected_generation_id"] == initialized["oracle"]["generation_id"]
     assert not (mirror / "lease.json").exists()
-    generation = build_clockwork_generation(ROOT, contract, validate_intent(_load(INTENT_PATH), contract), initialized["oracle"]["generation_id"])
+    with patch("orchestration_harness.governance_migration._snapshot", side_effect=_construction_snapshot):
+        generation = build_clockwork_generation(ROOT, contract, validate_intent(_load(INTENT_PATH), contract), initialized["oracle"]["generation_id"])
     with pytest.raises(CommittedCutover, match="injected_postcommit_failure"):
         publish_generation(ROOT, mirror, contract, generation, writer_id=WRITER, fail_at="after_pointer_replace")
     assert validate_mirror(mirror)["pointer"]["selected_generation_id"] == generation["generation_id"]
@@ -142,7 +162,8 @@ def test_rollback_and_restore_select_exact_immutable_generations(tmp_path: Path)
 
 
 def test_complete_efficacy_packet_passes_all_observed_controls_and_faults() -> None:
-    evidence = assess_rehearsal(ROOT, CONTRACT_PATH, INTENT_PATH, construction_reruns=0)
+    with patch("orchestration_harness.governance_migration._snapshot", side_effect=_construction_snapshot):
+        evidence = assess_rehearsal(ROOT, CONTRACT_PATH, INTENT_PATH, construction_reruns=0)
     assert evidence["status"] == "passed"
     assert evidence["ownership"]["dual_owned"] == 0
     assert evidence["fault_injection"]["passed"] == evidence["fault_injection"]["checkpoints"] == 23
@@ -157,7 +178,8 @@ def test_complete_efficacy_packet_passes_all_observed_controls_and_faults() -> N
 def test_runner_defaults_to_read_only(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
     before = {path.relative_to(TOPIC): path.read_bytes() for path in TOPIC.rglob("*") if path.is_file()}
     monkeypatch.setattr("sys.argv", ["migration-rehearsal"])
-    assert runner_main() == 0
+    with patch("orchestration_harness.governance_migration._snapshot", side_effect=_construction_snapshot):
+        assert runner_main() == 0
     assert json.loads(capsys.readouterr().out)["status"] == "passed"
     assert before == {path.relative_to(TOPIC): path.read_bytes() for path in TOPIC.rglob("*") if path.is_file()}
 
