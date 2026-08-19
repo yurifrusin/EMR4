@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 342,
+  "graph_revision": 343,
   "harvests": [],
   "nodes": [
     {
@@ -24563,9 +24563,125 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+      "title": "DeepSeek native Harness provider-free preterminal observability corrected-veto recovery",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri restored Antigravity authentication and standing uninterrupted-development authority admitted the bounded corrected veto and required clockwork self-correction.",
+          "The deterministic candidate and consumed native attempt remain exact; no native process was rerun.",
+          "The successor is one separately named provider-free native recovery boot with a new attempt ID and no model/provider authority."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-preterminal-observability-recovery",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the ten-scenario deterministic activation-coordinate and reliable-timing recovery at exact reviewed candidate b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab."
+        },
+        {
+          "id": "accept-corrected-independent-veto",
+          "source": "orchestration/agent_inbox/antigravity/deepseek-native-harness-preterminal-observability-corrected-veto-recovery-gemini37-post-auth-review-receipt.json",
+          "status": "accepted",
+          "summary": "Accept one fresh Gemini 3.7 Flash/high pass with ten zero-exit commands, exactly 85 tests, unchanged HEAD and clean postflight."
+        },
+        {
+          "id": "reject-first-review-packet-count",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-recovery-gemini37-review-attempt-001-disposition.json",
+          "status": "rejected",
+          "summary": "Reject the first pass because its packet asserted 137 tests while the exact command contained 85; preserve it as AER-0657 negative evidence."
+        },
+        {
+          "id": "accept-clockwork-incident-intake",
+          "source": "orchestration/agent_inbox/antigravity/deepseek-native-harness-preterminal-observability-clockwork-incident-intake-gemini37-review-receipt.json",
+          "status": "accepted",
+          "summary": "Accept the backward-compatible clockwork v2 incident-intake gear after 480 tests, atomic rollback proof and one clean independent veto."
+        }
+      ],
+      "claim_scope": [
+        "Ten deterministic hostile scenarios now end in finite sanitized preterminal coordinates.",
+        "The future runner separates sentinel readiness from bootstrap activation and records duration before cleanup.",
+        "One offline rc.7 materialisation and one non-Harness Node import probe passed with zero external network or native Harness processes.",
+        "The corrected Gemini veto passed exactly 85 tests and all ten commands against the unchanged candidate.",
+        "Clockwork v2 derives the qualifying AER incident and register/pattern projection without a manual canonical edit.",
+        "The consumed native attempt remains immutable and native edit/glob/read composition remains unproved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery-plan.md",
+          "docs/deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery-plan.md",
+          "docs/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-addendum.md",
+          "docs/security/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery-closeout.md",
+          "docs/deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery-closeout.md",
+          "docs/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-recovery-sol-acceptance.md",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-corrected-veto-recovery-sol-acceptance.md",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-clockwork-incident-intake-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-preterminal-observability-corrected-veto-recovery-gemini37-post-auth-review-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-corrected-veto-recovery-authentication-disposition.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-corrected-veto-recovery-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-clockwork-incident-intake-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-preterminal-observability-clockwork-incident-intake-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-567.md",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-clockwork-incident-intake-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-clockwork-incident-intake-gemini37-review-packet.md",
+          "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-preterminal-observability-recovery-accepted.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Native edit/glob/read composition remains unproved.",
+        "The consumed native-composition-attempt-001 cannot be retried, resumed or reclassified.",
+        "A successor native process requires its own exact attempt ID, plan, receipt, offline-cache boundary and no-retry latch.",
+        "No occupied worker, product, practice, data, production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-20T07:22:35.5977084+10:00",
+      "updated_at": "2026-08-20T07:22:35.5977084+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "295f686c430f4233880335cf9c0f05c51d42c26c",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-20T05:47:54.6367968+10:00"
+  "updated_at": "2026-08-20T07:22:35.5977084+10:00"
 }

@@ -53,4 +53,8 @@ agent/session/turn/broker/model/provider. Any mismatch stops without retry.
 
 Yuri attention required: `no`.
 
-Pushover delivery: request `e64e8519-d3af-4b11-a68b-34c4a0393a65`, status `1`.
+Initial prepublication Pushover delivery: request
+`e64e8519-d3af-4b11-a68b-34c4a0393a65`, status `1`.
+
+Corrected final-generation Pushover delivery: request
+`47627c0b-69b0-4708-af8c-fa9f958c4fa6`, status `1`.

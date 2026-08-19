@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 566,
+  "register_revision": 567,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-19",
+    "source_cutoff_on": "2026-08-20",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -3759,7 +3759,11 @@
       "expected_invariant": "An exact-catalogue implementation veto must mechanically challenge same-name definition drift, complete containment readback and the total runtime deadline before reporting pass.",
       "observed_error": "The review returned pass although same-name definition drift, several container/resource facts and the aggregate execution deadline were not enforced.",
       "detection_method": "Sol reconciled the pass against the plan before Docker resolution and preserved three P1/P2 findings.",
-      "evidence_paths": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-implementation-review-sol-rejection-receipt.json", "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md", "docs/ariadne-agent-error-correction-register-revision-90.md"],
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-implementation-review-sol-rejection-receipt.json",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-90.md"
+      ],
       "related_incident_ids": [],
       "candidate_state": "accepted_candidate_changed",
       "workflow_disposition": "review_rejected",
@@ -3769,7 +3773,11 @@
         "status": "corrected_fresh_attempt",
         "action": "Sol expanded every closed catalogue projection, exact resource readback and total deadline, then required fresh vetoes through the terminal candidate.",
         "prevention_control": "Exactness claims require hostile same-population mutations and explicit checks for every named containment and deadline field.",
-        "evidence_paths": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-implementation-review-sol-rejection-receipt.json", "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-exact-catalogue-binding-review-receipt.json", "docs/ariadne-agent-error-correction-register-revision-90.md"]
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-implementation-review-sol-rejection-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-exact-catalogue-binding-review-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-90.md"
+        ]
       },
       "status": "corrected"
     },
@@ -3790,7 +3798,11 @@
       "expected_invariant": "A bounded-output review must distinguish live byte-capped draining from an after-the-fact length check.",
       "observed_error": "The review described Popen.communicate collection as capped even though output could accumulate without bound before rejection.",
       "detection_method": "Sol inspected the exact runner after the pass and rejected it before Docker or database contact.",
-      "evidence_paths": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-definition-recovery-review-sol-rejection-receipt.json", "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md", "docs/ariadne-agent-error-correction-register-revision-90.md"],
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-definition-recovery-review-sol-rejection-receipt.json",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-90.md"
+      ],
       "related_incident_ids": [],
       "candidate_state": "accepted_candidate_changed",
       "workflow_disposition": "review_rejected",
@@ -3800,7 +3812,11 @@
         "status": "corrected_fresh_attempt",
         "action": "The runner now drains both pipes concurrently, terminates at the hard cap and has hostile live-cap coverage.",
         "prevention_control": "Review resource bounds from the data-flow mechanism, not the name or final-size assertion.",
-        "evidence_paths": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-definition-recovery-review-sol-rejection-receipt.json", "scripts/raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py", "docs/ariadne-agent-error-correction-register-revision-90.md"]
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-definition-recovery-review-sol-rejection-receipt.json",
+          "scripts/raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-90.md"
+        ]
       },
       "status": "corrected"
     },
@@ -3821,7 +3837,11 @@
       "expected_invariant": "Exact absence and tmpfs containment checks must admit documented Docker Desktop representations without weakening fail-closed ownership.",
       "observed_error": "One attempt rejected Docker Desktop's No such container phrase before creation; the next rejected an empty normalized Mounts projection despite the exact HostConfig.Tmpfs declaration.",
       "detection_method": "Both owned attempts failed before SQL; the second container was manually reverified, removed by exact ID and proved absent.",
-      "evidence_paths": ["orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-name-absence-failure.json", "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-tmpfs-mount-readback-failure.json", "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-tmpfs-readback-manual-cleanup-receipt.json"],
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-name-absence-failure.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-tmpfs-mount-readback-failure.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-disposable-postgresql-tmpfs-readback-manual-cleanup-receipt.json"
+      ],
       "related_incident_ids": [],
       "candidate_state": "accepted_candidate_changed",
       "workflow_disposition": "revision_required",
@@ -3831,7 +3851,11 @@
         "status": "corrected_fresh_attempt",
         "action": "The harness now admits only the two exact documented absence phrases and requires exact HostConfig.Tmpfs while allowing only the two closed normalized projections.",
         "prevention_control": "Position-close engine-specific readback variants from exact owned evidence without replacing immutable ownership checks.",
-        "evidence_paths": ["docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md", "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py", "docs/ariadne-agent-error-correction-register-revision-90.md"]
+        "evidence_paths": [
+          "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-90.md"
+        ]
       },
       "status": "corrected"
     },
@@ -3852,7 +3876,12 @@
       "expected_invariant": "The accepted inert renderer must emit PostgreSQL-16-admissible dependency order, physical catalog type names, system-column treatment and relation constraint families.",
       "observed_error": "Serial owned attempts exposed composite forward reference, schema-qualified alias types, an explicit xmin column and interleaved forward foreign keys.",
       "detection_method": "Bounded SQLSTATE evidence and exact source coordinates isolated each repository defect; every failed container was removed and proved absent.",
-      "evidence_paths": ["orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-composite-ordering-failure.json", "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-undefined-object-sqlstate.json", "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-system-column-conflict.json", "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-relation-dependency-failure.json"],
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-composite-ordering-failure.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-undefined-object-sqlstate.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-system-column-conflict.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-relation-dependency-failure.json"
+      ],
       "related_incident_ids": [],
       "candidate_state": "accepted_candidate_changed",
       "workflow_disposition": "revision_required",
@@ -3862,7 +3891,11 @@
         "status": "recovery_lease_applied",
         "action": "The parent renderer gained stable composite and relation-family ordering, exact physical aliases and modeled-xmin omission while preserving 412 statements and all logical contracts.",
         "prevention_control": "An inert DDL acceptance must be followed by isolated server admission before any migration or behavioral claim.",
-        "evidence_paths": ["docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md", "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert", "docs/ariadne-agent-error-correction-register-revision-90.md"]
+        "evidence_paths": [
+          "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
+          "docs/ariadne-agent-error-correction-register-revision-90.md"
+        ]
       },
       "status": "corrected"
     },
@@ -3883,7 +3916,12 @@
       "expected_invariant": "Readiness must prove a stable authenticated PostgreSQL-16 SQL endpoint, not one socket handshake or an ambiguous host timeout.",
       "observed_error": "Successive attempts exposed bootstrap handoff, host timeout ambiguity, a consistently failing authenticated probe and under-tested version-output normalization.",
       "detection_method": "Value-free readiness counters, exit codes and digests distinguished socket availability from authenticated SQL admission.",
-      "evidence_paths": ["orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-readiness-handoff-failure.json", "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-readiness-probe-timeout-failure.json", "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-readiness-sql-probe-failure.json", "orchestration/agent_inbox/codex/raisa-context-fabric-durability-readiness-sql-query-review-sol-rejection.json"],
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-readiness-handoff-failure.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-readiness-probe-timeout-failure.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-readiness-sql-probe-failure.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-readiness-sql-query-review-sol-rejection.json"
+      ],
       "related_incident_ids": [],
       "candidate_state": "accepted_candidate_changed",
       "workflow_disposition": "revision_required",
@@ -3893,7 +3931,11 @@
         "status": "corrected_fresh_attempt",
         "action": "Readiness now requires continuous paired pg_isready and exact authenticated server-major probes, closed failure classification and hostile version-output tests.",
         "prevention_control": "Database readiness must bind the exact authenticated query path used by subsequent work and remain stable across bootstrap handoff.",
-        "evidence_paths": ["docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md", "scripts/raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py", "docs/ariadne-agent-error-correction-register-revision-90.md"]
+        "evidence_paths": [
+          "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md",
+          "scripts/raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-90.md"
+        ]
       },
       "status": "corrected"
     },
@@ -3914,7 +3956,11 @@
       "expected_invariant": "The rollback proof must establish that the fixed appended invalid suffix, rather than an earlier artifact defect, caused the expected transaction failure.",
       "observed_error": "The first checker missed SQLSTATE; later both rollback and success shared SQLSTATE 42601, proving the old rollback claim could falsely attribute an earlier artifact syntax error to the suffix.",
       "detection_method": "Bounded psql error-line and statement-relative coordinates placed failure at artifact line 1980 rather than suffix line 4608.",
-      "evidence_paths": ["orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-rollback-unexpected-failure-shape.json", "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-artifact-syntax-unlocated.json", "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-artifact-syntax-line-1980.json"],
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-rollback-unexpected-failure-shape.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-artifact-syntax-unlocated.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-artifact-syntax-line-1980.json"
+      ],
       "related_incident_ids": [],
       "candidate_state": "accepted_candidate_changed",
       "workflow_disposition": "revision_required",
@@ -3924,7 +3970,11 @@
         "status": "corrected_fresh_attempt",
         "action": "Rollback now requires the exact suffix line plus SQLSTATE and exit, while bounded coordinates diagnose earlier artifact failures without retaining raw text.",
         "prevention_control": "Negative tests must bind the failure to the injected mutation's exact coordinate, not merely to an expected error class.",
-        "evidence_paths": ["docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md", "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py", "docs/ariadne-agent-error-correction-register-revision-90.md"]
+        "evidence_paths": [
+          "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-90.md"
+        ]
       },
       "status": "corrected"
     },
@@ -3945,7 +3995,11 @@
       "expected_invariant": "Logical body symbols must lower to collision-free physical PL/pgSQL identifiers that remain legal inside embedded SQL.",
       "observed_error": "The logical local primary was emitted physically as primary; PL/pgSQL declaration admitted it but embedded SQL rejected primary.key_id at statement-relative line 352.",
       "detection_method": "Bounded numeric coordinates mapped the failure to the exact accepted body symbol without retaining error text or values.",
-      "evidence_paths": ["orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-artifact-syntax-statement-line-352.json", "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md", "docs/ariadne-agent-error-correction-register-revision-90.md"],
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal/provider-free-disposable-postgresql-evidence-artifact-syntax-statement-line-352.json",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-90.md"
+      ],
       "related_incident_ids": [],
       "candidate_state": "accepted_candidate_changed",
       "workflow_disposition": "revision_required",
@@ -3955,7 +4009,11 @@
         "status": "recovery_lease_applied",
         "action": "The renderer preserves the logical symbol but lowers it everywhere to cf_primary_admission with collision checks; the exact parent artifact was regenerated and freshly vetoed.",
         "prevention_control": "Physical-symbol admission must cover both procedural declarations and every embedded SQL grammar position.",
-        "evidence_paths": ["docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md", "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert", "docs/ariadne-agent-error-correction-register-revision-90.md"]
+        "evidence_paths": [
+          "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md",
+          "orchestration/continuity/raisa-provider-free-unmounted-durability-inert-ddl-rehearsal/durability-schema.sql.inert",
+          "docs/ariadne-agent-error-correction-register-revision-90.md"
+        ]
       },
       "status": "corrected"
     },
@@ -3976,7 +4034,10 @@
       "expected_invariant": "The verifier must leave its exact-HEAD worktree byte-clean and may not mutate dependencies or lockfiles.",
       "observed_error": "The r54 verifier changed uv.lock requires-python from >=3.14 to >=3.12 in the read-only review worktree.",
       "detection_method": "Postflight detected the exact one-file mutation; the review was rejected and r54 remained isolated.",
-      "evidence_paths": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-rollback-sqlstate-antigravity-worktree-mutation-failure-receipt.json", "docs/ariadne-agent-error-correction-register-revision-90.md"],
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-rollback-sqlstate-antigravity-worktree-mutation-failure-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-90.md"
+      ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "review_rejected",
@@ -3986,7 +4047,10 @@
         "status": "corrected_fresh_attempt",
         "action": "r54 was not reused; a fresh exact-HEAD r55 used fixed primary-venv commands without uv and passed clean postflight.",
         "prevention_control": "Verifier packets forbid dependency tools and acceptance requires exact postflight cleanliness before reading the decision.",
-        "evidence_paths": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-rollback-sqlstate-antigravity-worktree-mutation-failure-receipt.json", "docs/ariadne-agent-error-correction-register-revision-90.md"]
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-rollback-sqlstate-antigravity-worktree-mutation-failure-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-90.md"
+        ]
       },
       "status": "corrected"
     },
@@ -4007,7 +4071,11 @@
       "expected_invariant": "Review narratives must report the exact collected test total and per-file distribution when those figures are claimed.",
       "observed_error": "One review packet overstated a 106-test run as 107, and r64 reported an 83/24 split although Sol collected the same 107 tests under a different distribution.",
       "detection_method": "Sol compared the verifier narrative with exact pytest collection output before acceptance.",
-      "evidence_paths": ["orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-numeric-coordinate-review-receipt.json", "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-constraint-population-review-receipt.json", "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-process-incidents.json"],
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-numeric-coordinate-review-receipt.json",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-constraint-population-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-process-incidents.json"
+      ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
@@ -4017,7 +4085,11 @@
         "status": "control_added",
         "action": "Sol retained exact collection output as authority and the final r69 review reported the independently confirmed 100 plus 9 distribution.",
         "prevention_control": "Test totals in acceptance prose must be copied from terminal collection output, not inferred from earlier packets.",
-        "evidence_paths": ["orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-exact-catalogue-binding-review-receipt.json", "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-process-incidents.json", "docs/ariadne-agent-error-correction-register-revision-90.md"]
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-exact-catalogue-binding-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-process-incidents.json",
+          "docs/ariadne-agent-error-correction-register-revision-90.md"
+        ]
       },
       "status": "corrected"
     },
@@ -4038,7 +4110,11 @@
       "expected_invariant": "Every runtime state must be valid JSON and use an allowlisted continuation_event before its receipt can authorize action.",
       "observed_error": "A postcompaction state briefly had a trailing comma, and the terminal predispatch state first used worker_dispatch instead of pre_worker_dispatch.",
       "detection_method": "JSON parsing and the orchestrator preflight rejected each state before the affected task action.",
-      "evidence_paths": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-process-incidents.json", "orchestration/agent_inbox/codex/raisa-context-fabric-durability-exact-catalogue-terminal-preexecution-receipt.json", "docs/ariadne-agent-error-correction-register-revision-90.md"],
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-process-incidents.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-exact-catalogue-terminal-preexecution-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-90.md"
+      ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
@@ -4048,7 +4124,11 @@
         "status": "control_added",
         "action": "Both states were corrected and a separate passing receipt was inspected before work continued.",
         "prevention_control": "Generate and inspect the receipt in a standalone command before every protected continuation action.",
-        "evidence_paths": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-exact-catalogue-terminal-preexecution-receipt.json", "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-process-incidents.json", "docs/ariadne-agent-error-correction-register-revision-90.md"]
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-exact-catalogue-terminal-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-process-incidents.json",
+          "docs/ariadne-agent-error-correction-register-revision-90.md"
+        ]
       },
       "status": "corrected"
     },
@@ -4069,7 +4149,11 @@
       "expected_invariant": "The constraint-trigger recovery must change only the intended constraint query and must not hide future non-trigger constraint kinds.",
       "observed_error": "The first edit inserted con.contype into the schema query; the next c/f/p/u allowlist would have hidden exclusion or unknown constraint kinds.",
       "detection_method": "Immediate source inspection caught the first before tests and semantic reconciliation caught the second before review or runtime.",
-      "evidence_paths": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-process-incidents.json", "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md", "docs/ariadne-agent-error-correction-register-revision-90.md"],
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-process-incidents.json",
+        "docs/raisa-provider-free-disposable-postgresql-durability-parse-catalogue-rehearsal-plan-recovery.md",
+        "docs/ariadne-agent-error-correction-register-revision-90.md"
+      ],
       "related_incident_ids": [],
       "candidate_state": "untrusted_partial_worktree",
       "workflow_disposition": "revision_required",
@@ -4079,7 +4163,11 @@
         "status": "corrected_fresh_attempt",
         "action": "The accepted query excludes only contype t and hostile tests require every other unexpected kind to remain visible.",
         "prevention_control": "Query-filter repairs require both placement inspection and a future-kind fail-closed challenge before dispatch.",
-        "evidence_paths": ["scripts/raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py", "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py", "docs/ariadne-agent-error-correction-register-revision-90.md"]
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-90.md"
+        ]
       },
       "status": "corrected"
     },
@@ -4100,7 +4188,11 @@
       "expected_invariant": "Verifier HEAD must be copied from literal Git output and dispatch must be a separate command after a visibly passing receipt.",
       "observed_error": "The first r68 preflight used an invented full hash and failed; the corrected receipt and verifier invocation were then improperly joined with a command separator.",
       "detection_method": "Preflight rejected the false identity. The corrected receipt did pass, but Sol later identified that chaining could have bypassed the intended visible stop.",
-      "evidence_paths": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-table-column-relkind-review-worktree-preflight.json", "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-process-incidents.json", "docs/ariadne-agent-error-correction-register-revision-90.md"],
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-table-column-relkind-review-worktree-preflight.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-process-incidents.json",
+        "docs/ariadne-agent-error-correction-register-revision-90.md"
+      ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
@@ -4110,7 +4202,11 @@
         "status": "control_added",
         "action": "r69 used a literal full git rev-parse identity and three separate commands for receipt generation, receipt inspection and verifier launch.",
         "prevention_control": "Never chain receipt creation or inspection with a provider/verifier command; literal Git identity is mandatory.",
-        "evidence_paths": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-exact-catalogue-binding-review-worktree-preflight.json", "orchestration/agent_inbox/codex/raisa-context-fabric-durability-exact-catalogue-binding-veto-predispatch-receipt.json", "docs/ariadne-agent-error-correction-register-revision-90.md"]
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-exact-catalogue-binding-review-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-exact-catalogue-binding-veto-predispatch-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-90.md"
+        ]
       },
       "status": "corrected"
     },
@@ -4131,7 +4227,10 @@
       "expected_invariant": "Focused verification commands must use repository-confirmed test paths and must not invent a continuity-test filename.",
       "observed_error": "The first closeout test command named a nonexistent rehearsal_continuity.py file and exited before collecting tests.",
       "detection_method": "Pytest and Ruff returned file-not-found; exact-path discovery found the existing plan test and the corrected 109-test run passed.",
-      "evidence_paths": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-process-incidents.json", "docs/ariadne-agent-error-correction-register-revision-90.md"],
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-process-incidents.json",
+        "docs/ariadne-agent-error-correction-register-revision-90.md"
+      ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
@@ -4141,7 +4240,11 @@
         "status": "control_added",
         "action": "The exact two existing test files were discovered and passed 109 tests; no file was changed by the failed command.",
         "prevention_control": "Resolve test filenames from exact repository path inventory before invoking a focused packet.",
-        "evidence_paths": ["tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py", "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_plan.py", "docs/ariadne-agent-error-correction-register-revision-90.md"]
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_plan.py",
+          "docs/ariadne-agent-error-correction-register-revision-90.md"
+        ]
       },
       "status": "corrected"
     },
@@ -4162,7 +4265,11 @@
       "expected_invariant": "The continuity updater must be invoked through the repository module path and its node contract evidence must be a subset of explicitly typed node evidence before writing an accepted report.",
       "observed_error": "Direct script invocation failed to import scripts; the first two module invocations then failed Compass validation because terminal evidence and an implementation-test type were not completely linked.",
       "detection_method": "Import and Compass validation failures stopped closeout admission. The updater was repaired and rerun idempotently until the report passed.",
-      "evidence_paths": ["scripts/raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_continuity_update.py", "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-process-incidents.json", "docs/ariadne-agent-error-correction-register-revision-90.md"],
+      "evidence_paths": [
+        "scripts/raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_continuity_update.py",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-process-incidents.json",
+        "docs/ariadne-agent-error-correction-register-revision-90.md"
+      ],
       "related_incident_ids": [],
       "candidate_state": "untrusted_partial_worktree",
       "workflow_disposition": "revision_required",
@@ -4172,7 +4279,11 @@
         "status": "control_added",
         "action": "The updater is invoked with python -m, links terminal evidence under typed node findings, includes the implementation test in contract evidence and now passes idempotently at Continuity 232 / Compass 214.",
         "prevention_control": "Continuity closeout requires module invocation plus a successful rendered Compass validation before commit or acceptance.",
-        "evidence_paths": ["scripts/raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_continuity_update.py", "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_continuity.py", "docs/ariadne-agent-error-correction-register-revision-90.md"]
+        "evidence_paths": [
+          "scripts/raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_continuity_update.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_parse_catalogue_rehearsal_continuity.py",
+          "docs/ariadne-agent-error-correction-register-revision-90.md"
+        ]
       },
       "status": "corrected"
     },
@@ -4193,7 +4304,12 @@
       "expected_invariant": "The final independent closeout receipt must report the exact collected and passed total for all seven test files named by its review packet.",
       "observed_error": "The r70 receipt returned pass but reported 214 tests, omitting exactly the three tests in tests/test_agents_acceptance_index.py from the required 217-test packet.",
       "detection_method": "Sol rejected the narrative count after exact r70 collection proved 217 = 100 + 9 + 4 + 77 + 14 + 10 + 3, then required a fresh same-HEAD replacement review.",
-      "evidence_paths": ["orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-catalogue-closeout-review-receipt.json", "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-review-sol-rejection.json", "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-catalogue-closeout-retry-review-receipt.json", "docs/ariadne-agent-error-correction-register-revision-91.md"],
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-catalogue-closeout-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-review-sol-rejection.json",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-catalogue-closeout-retry-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-91.md"
+      ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "review_rejected",
@@ -4203,7 +4319,12 @@
         "status": "corrected_fresh_attempt",
         "action": "The r70 pass was preserved but not admitted. Fresh r71 at the same exact clean HEAD explicitly collected and passed 100/9/4/77/14/10/3 tests, 217/217 total, reported zero P0-P3 findings and left its worktree unchanged.",
         "prevention_control": "Final closeout acceptance must bind each required test path to exact per-file collection and pass counts; any missing path or arithmetic mismatch rejects the review even when its terminal decision says pass.",
-        "evidence_paths": ["orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-catalogue-closeout-retry-review-receipt.json", "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-retry-worktree-postflight.json", "docs/ariadne-agent-error-correction-register-revision-91.md", "tests/test_ariadne_agent_error_register.py"]
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-parse-catalogue-closeout-retry-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-parse-catalogue-closeout-retry-worktree-postflight.json",
+          "docs/ariadne-agent-error-correction-register-revision-91.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
       },
       "status": "corrected"
     },
@@ -4224,7 +4345,13 @@
       "expected_invariant": "Every text parent hash in a cross-worktree planning contract must use one explicit canonical byte rule that survives Git CRLF checkout without weakening content identity.",
       "observed_error": "Candidate 1f21a3c bound raw checkout bytes for the function/trigger body contract and its test hashed raw bytes, so the exact parent check failed in the fresh Windows review worktree.",
       "detection_method": "The r73 Gemini veto returned revision_required after reproducing the focused parent-hash test failure. Sol then computed raw and canonical hashes for all six parents and found the body contract was the sole divergent text parent.",
-      "evidence_paths": ["orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-review-receipt.json", "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan.md", "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json", "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan.py", "docs/ariadne-agent-error-correction-register-revision-92.md"],
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-review-receipt.json",
+        "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan.md",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json",
+        "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan.py",
+        "docs/ariadne-agent-error-correction-register-revision-92.md"
+      ],
       "related_incident_ids": [],
       "candidate_state": "accepted_candidate_changed",
       "workflow_disposition": "revision_required",
@@ -4234,7 +4361,12 @@
         "status": "control_added",
         "action": "The plan now position-closes canonical UTF-8/LF hashing for all six text parents, rejects lone carriage returns, binds the canonical body-contract hash and verifies the complete parent set under that rule.",
         "prevention_control": "Any future cross-worktree text binding must declare and test one canonical newline rule across every bound text parent rather than special-casing only the principal SQL artifact.",
-        "evidence_paths": ["docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan.md", "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json", "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan.py", "docs/ariadne-agent-error-correction-register-revision-92.md"]
+        "evidence_paths": [
+          "docs/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal-plan.md",
+          "orchestration/continuity/raisa-provider-free-disposable-postgresql-durability-behavior-transaction-rehearsal/behavior-transaction-rehearsal-contract.json",
+          "tests/test_raisa_provider_free_disposable_postgresql_durability_behavior_transaction_rehearsal_plan.py",
+          "docs/ariadne-agent-error-correction-register-revision-92.md"
+        ]
       },
       "status": "corrected"
     },
@@ -4255,7 +4387,11 @@
       "expected_invariant": "The independent plan receipt must reconcile the exact per-file collection counts frozen in its packet before reporting a test total.",
       "observed_error": "The r73 receipt reported 118 total, 117 admitted and 116 passed although exact independent collection in that clean worktree yielded 27/9/12/7/36/4/7/22 = 124 admitted plus the one named baseline deselection.",
       "detection_method": "Sol compared the receipt narrative with the packet's frozen per-file arithmetic and independently reran exact per-file collection; the valid P2 finding remained admitted but the count narrative was rejected.",
-      "evidence_paths": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-review-packet.md", "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-review-receipt.json", "docs/ariadne-agent-error-correction-register-revision-92.md"],
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-review-packet.md",
+        "orchestration/agent_inbox/antigravity/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-92.md"
+      ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "review_rejected",
@@ -4265,7 +4401,11 @@
         "status": "control_added",
         "action": "The valid cross-worktree hash finding was preserved, but the incorrect count narrative receives no acceptance weight. The replacement veto must print and reconcile each of the eight exact per-file counts before a terminal decision.",
         "prevention_control": "Fresh replacement review admission requires exact per-file collect-only and pass arithmetic, not an aggregate progress-line estimate.",
-        "evidence_paths": ["orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-review-packet.md", "docs/ariadne-agent-error-correction-register-revision-92.md", "tests/test_ariadne_agent_error_register.py"]
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-context-fabric-durability-behavior-transaction-rehearsal-plan-review-packet.md",
+          "docs/ariadne-agent-error-correction-register-revision-92.md",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
       },
       "status": "corrected"
     },
@@ -11899,7 +12039,9 @@
         "docs/ariadne-agent-error-correction-register-revision-261.md",
         "tests/test_ariadne_agent_error_register.py"
       ],
-      "related_incident_ids": ["AER-0297"],
+      "related_incident_ids": [
+        "AER-0297"
+      ],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "attempt_rejected_and_escalated",
       "recurrence_signature": "orchestrator.worker_spawn_before_distinct_predispatch_receipt",
@@ -11942,7 +12084,9 @@
         "docs/ariadne-agent-error-correction-register-revision-261.md",
         "tests/test_ariadne_agent_error_register.py"
       ],
-      "related_incident_ids": ["AER-0296"],
+      "related_incident_ids": [
+        "AER-0296"
+      ],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
       "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
@@ -17851,7 +17995,10 @@
       "expected_invariant": "PowerShell multi-command readback must use actual script lines or independent invocations, never a literal newline marker embedded in one token.",
       "observed_error": "Two read-only command drafts passed a literal newline marker into git status and ConvertFrom-Json, so both failed before their intended readback.",
       "detection_method": "Git reported an unknown combined option and PowerShell reported a combined ConvertFrom-Json command name; corrected independent invocations then passed.",
-      "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-orchestrator-incidents.json", "docs/ariadne-agent-error-correction-register-revision-392.md"],
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-orchestrator-incidents.json",
+        "docs/ariadne-agent-error-correction-register-revision-392.md"
+      ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
@@ -17861,7 +18008,10 @@
         "status": "corrected_fresh_attempt",
         "action": "Run the Git refs and receipt parsing as independent bounded commands or actual multiline PowerShell source.",
         "prevention_control": "Do not encode shell newlines through a host-language escape whose interpretation is uncertain; prefer one command per tool invocation for gates.",
-        "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-orchestrator-incidents.json", "docs/ariadne-agent-error-correction-register-revision-392.md"]
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-orchestrator-incidents.json",
+          "docs/ariadne-agent-error-correction-register-revision-392.md"
+        ]
       },
       "status": "corrected"
     },
@@ -17882,7 +18032,10 @@
       "expected_invariant": "A long-running package bootstrap wrapper must preserve the returned process/session handle required for ordinary bounded waiting.",
       "observed_error": "The first npx wrapper emitted only output and exit fields, so its still-running session handle was not retained while the large official dependency tree resolved.",
       "detection_method": "The wrapper returned without a visible exit code while an exact npx child process and advancing npm registry log remained observable.",
-      "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-orchestrator-incidents.json", "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-package-preflight-evidence.json"],
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-orchestrator-incidents.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-package-preflight-evidence.json"
+      ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
@@ -17892,7 +18045,10 @@
         "status": "corrected_fresh_attempt",
         "action": "Observe the exact child process and npm-log progress read-only, let the bootstrap finish, then preserve the full result object from a cached offline version invocation.",
         "prevention_control": "For potentially long commands, emit or store the complete exec result including session_id before the orchestration wrapper exits.",
-        "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-package-preflight-evidence.json", "docs/ariadne-agent-error-correction-register-revision-392.md"]
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-package-preflight-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-392.md"
+        ]
       },
       "status": "corrected"
     },
@@ -17913,7 +18069,10 @@
       "expected_invariant": "A custom sandbox and approval combination must be represented by an explicit named permission preset before runtime admission.",
       "observed_error": "The first key-absent runtime boot rejected workspace-write plus never approval because the composed defaults matched no named preset.",
       "detection_method": "The native Harness exited 1 during permission plugin load before credential resolution or HTTP I/O and named the missing defaultPreset invariant.",
-      "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-package-preflight-evidence.json", "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-orchestrator-incidents.json"],
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-package-preflight-evidence.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-orchestrator-incidents.json"
+      ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
@@ -17923,7 +18082,10 @@
         "status": "corrected_fresh_attempt",
         "action": "Define explicit rehearsal-write preset pairing workspace-write sandbox with never approval and select it as the default.",
         "prevention_control": "Treat named session-pinned presets as the unit of permission admission; never rely on an unnamed cross-product of independent defaults.",
-        "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-package-preflight-evidence.json", "docs/ariadne-agent-error-correction-register-revision-392.md"]
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-package-preflight-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-392.md"
+        ]
       },
       "status": "corrected"
     },
@@ -17944,7 +18106,10 @@
       "expected_invariant": "Five-source EMR4 Git evidence must not present a separately rooted synthetic repository object as an EMR4-resolvable full object id.",
       "observed_error": "The first pre-dispatch source prose included the synthetic repository's full commit id, and the receipt correctly returned git_refs_evidence_object_unresolvable.",
       "detection_method": "The generated receipt failed closed before worker dispatch and named the unresolvable Git evidence object.",
-      "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-pre-dispatch-receipt.json", "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-orchestrator-incidents.json"],
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-pre-dispatch-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-orchestrator-incidents.json"
+      ],
       "related_incident_ids": [],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
@@ -17954,7 +18119,10 @@
         "status": "corrected_fresh_attempt",
         "action": "Keep the full foreign commit in its dedicated evidence and use a labelled short foreign id in the five-source prose.",
         "prevention_control": "Full 40-hex object ids in orchestrator Git prose must belong to and resolve in the active repository unless the schema carries explicit foreign-repository identity.",
-        "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-package-preflight-evidence.json", "docs/ariadne-agent-error-correction-register-revision-392.md"]
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-package-preflight-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-392.md"
+        ]
       },
       "status": "corrected"
     },
@@ -17975,7 +18143,10 @@
       "expected_invariant": "A request-counting transport guard must persist request admission before forwarding so every ordinal remains attributable even if an SSE response never reaches its observed end callback.",
       "observed_error": "The guard recorded provider response terminals for ordinals 1 and 3-6 plus local rejection 7, but no terminal for ordinal 2 and no independent request-start records.",
       "detection_method": "Proxy metadata had an ordinal gap while the durable Harness session contained six successful assistant usage anchors and the counter rejected ordinal 7.",
-      "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-rehearsal-evidence.json", "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-orchestrator-incidents.json"],
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-rehearsal-evidence.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-orchestrator-incidents.json"
+      ],
       "related_incident_ids": [],
       "candidate_state": "untrusted_partial_worktree",
       "workflow_disposition": "revision_required",
@@ -17985,7 +18156,10 @@
         "status": "control_added",
         "action": "Bind current request accounting through six durable assistant usage anchors and preserve the proxy gap; add a pre-forward body-admitted request-start record to any future counter.",
         "prevention_control": "Transport guards log request admission before forwarding and record client-close/abort separately from upstream end.",
-        "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-rehearsal-evidence.json", "docs/ariadne-agent-error-correction-register-revision-392.md"]
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-rehearsal-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-392.md"
+        ]
       },
       "status": "contained"
     },
@@ -25930,6 +26104,201 @@
           "docs/ariadne-agent-error-correction-register-revision-566.md"
         ]
       },
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-preterminal-activation-observability-recovery",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "Every exact test-count claim in a verifier packet must equal mechanical collection of the packet's exact command manifest before dispatch.",
+      "observed_error": "The first Gemini packet asserted 137 tests although its exact seven-module C03 command contained 85; Gemini returned pass without challenging the false count, so Sol rejected the receipt.",
+      "detection_method": "Sol reconciled the exact command manifest and per-module collection after receipt return, preserved the receipt and issued a revision_required disposition before acceptance.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-recovery-gemini37-review-attempt-001-disposition.json",
+        "orchestration/agent_inbox/antigravity/deepseek-native-harness-preterminal-observability-recovery-gemini37-review-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-567.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.review_packet_test_count_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Correct the packet to the exact 85 total and seven component counts, obtain one fresh exact-candidate veto, and add clockwork-owned incident intake before acceptance.",
+        "prevention_control": "Mechanically collect every exact verifier command before dispatch; qualifying incidents enter through clockwork intent v2 with all identifiers and aggregates derived by the canonical writer.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-recovery-gemini37-review-attempt-001-disposition.json",
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-preterminal-observability-corrected-veto-recovery-gemini37-post-auth-review-receipt.json",
+          "docs/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-addendum.md"
+        ]
+      },
+      "incident_id": "AER-0657",
+      "attempt_id": "clock-7fb3f0213d7bea590d15b8f6",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register-current-reading-tests",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Current register tests must derive the source cutoff from the maximum validated incident date so a legitimate next-day clockwork intake remains representable.",
+      "observed_error": "After the first incident-intake publication correctly advanced the source cutoff to 2026-08-20, one historical test still required the literal 2026-08-19 and rejected the otherwise exact generation.",
+      "detection_method": "The serial post-publication compatibility suite failed one exact assertion; the clockwork then rolled the complete generation back byte-exactly before correction.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery/closeout/clockwork-tick-attempt-001-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-567.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.agent_error_register_current_reading_literal_not_population_derived",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the literal cutoff assertion with the maximum observed_on value from the schema-validated incident population, then republish from the byte-exact rolled-back generation.",
+        "prevention_control": "Current register revision, population, aggregates and source cutoff are readings of the validated population; tests do not encode the next expected literal update.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-closeout.md",
+          "docs/ariadne-agent-error-correction-register-revision-567.md"
+        ]
+      },
+      "incident_id": "AER-0658",
+      "attempt_id": "clock-7c156a8e43ee487768c12515",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator-commentary",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "closeout",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Every reported full Git object ID must be copied from a machine-resolved 40-character command or receipt value and must never be manually expanded from an abbreviation.",
+      "observed_error": "The orchestrator commentary manually expanded commit 835ee7af to an incorrect 40-character value even though the repository and clockwork dry run held the correct machine-resolved source 835ee7afd6889560add45aaa4260ba1562bd3d3d.",
+      "detection_method": "The immediately following clockwork dry-run output was reconciled against the commentary before publication; the user-facing correction was issued and no canonical artifact contained the false value.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-closeout-source-hash-commentary-correction.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-567.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_git_object_expansion_in_report",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Correct the user-facing value immediately, preserve the mismatch, and require future full Git IDs in reports to be copied from machine output or a persisted receipt.",
+        "prevention_control": "The clockwork remains full-Git-bound; commentary and closeout reports may display a full object ID only from the exact current command result or receipt, never by manual abbreviation expansion.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observability-closeout-source-hash-commentary-correction.json",
+          "docs/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-closeout.md",
+          "docs/ariadne-agent-error-correction-register-revision-567.md"
+        ]
+      },
+      "incident_id": "AER-0659",
+      "attempt_id": "clock-f46ba1110a2e203dd9e79429",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register-current-reading-tests",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "Current register revision, population and origin readings must be validated from their canonical sources or recomputed population and must not depend on historical arithmetic constants.",
+      "observed_error": "The second incident-intake publication passed its deterministic tick but the post-publication suite exposed two more historical formulas: revision equalled incident count minus 90, and agent-origin count equalled 442 plus one selected recurrence.",
+      "detection_method": "The exact serial post-publication suite failed the two assertions while all other selected checks continued; the clockwork rolled the complete generation back byte-exactly before correction.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery/closeout/clockwork-tick-attempt-002-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-567.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.agent_error_register_current_reading_literal_not_population_derived",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the revision arithmetic with existence of the canonical current revision document and replace the agent-origin base formula with direct origin-separation assertions over the validated population.",
+        "prevention_control": "Current-state tests validate authoritative bindings and population properties directly; no revision, population, origin or cutoff assertion encodes an expected next-update arithmetic literal.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-closeout.md",
+          "docs/ariadne-agent-error-correction-register-revision-567.md"
+        ]
+      },
+      "incident_id": "AER-0660",
+      "attempt_id": "clock-737c0c9e7f5576373a646e7f",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register-current-reading-tests",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The historical recurring-pattern literal baseline must remain immutable while post-baseline recurring patterns are asserted from the validated current population.",
+      "observed_error": "The third incident-intake publication passed every other selected check but one full recurring-pattern list equality rejected the newly derived AER-0658/AER-0660 peer group because the list still treated every future pattern as a manual literal update.",
+      "detection_method": "The exact serial post-publication suite isolated one failure in the recurring-pattern baseline assertion; the clockwork rolled the complete generation back byte-exactly before correction.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery/closeout/clockwork-tick-attempt-003-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-567.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.agent_error_register_current_reading_literal_not_population_derived",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Freeze the large literal list as the historical through-AER-0656 baseline and validate every later current-reading recurrence directly from the validated incident population and generated report.",
+        "prevention_control": "Historical literal recurrence fixtures are bounded by an immutable incident cutoff; post-baseline patterns and counts are readings recomputed from canonical incidents and never appended manually to that list.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-closeout.md",
+          "docs/ariadne-agent-error-correction-register-revision-567.md"
+        ]
+      },
+      "incident_id": "AER-0661",
+      "attempt_id": "clock-bf9559dc8ea6d85f2b48e973",
+      "origin": "repository",
+      "related_incident_ids": [],
       "status": "corrected"
     }
   ]

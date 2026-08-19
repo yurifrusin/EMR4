@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will repair the native Harness preterminal reading deterministically, without another native process, before deciding on any separately frozen recovery execution.
+> EMR4 will run exactly one separately named provider-free recovery boot with the accepted preterminal clockwork before considering any model-backed DeepSeek worker.
 
 ## North star
 
@@ -454,26 +454,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The exact guard and independent veto pass with zero native or DeepSeek execution; local construction reruns remain honestly visible. Lineage parent: `raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair`.
 219. **Test the accepted deterministic tool-composition guard once inside the real provider-free rc.7 native lifecycle — DeepSeek native Harness provider-free effective-tool composition native-boot proof**
    The process reached stock HMR readiness but no guard terminal was retained; the intended proof failed closed with zero prohibited calls and complete cleanup. Lineage parent: `deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard`.
+220. **Make a future provider-free native composition boot causally readable and keep its bureaucracy on one clockwork timeline — DeepSeek native Harness provider-free preterminal observability corrected-veto recovery**
+   The deterministic preterminal design and corrected independent veto pass, and the clockwork can now record the qualifying rejected review atomically. Lineage parent: `deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof`.
 
 ## Current position
 
-**Preserve the failed native attempt exactly and repair the missing preterminal causal reading — DeepSeek native Harness provider-free effective-tool composition native-boot proof**
+**Run one new provider-free recovery boot with exact activation coordinates and no model/provider — DeepSeek native Harness provider-free preterminal observability corrected-veto recovery**
 
-**Why this proof came next:** The attempt is safely contained but its generic failure coordinate and zero duration cannot distinguish loader, service, event-parser or guard activation failure.
+**Why this proof came next:** The deterministic observability design, corrected independent veto and atomic incident-intake control now pass without changing the consumed attempt.
 
-native-composition-attempt-001 retained sentinel activation and HMR readiness, no effective-tool terminal, zero prohibited calls and complete cleanup; native composition remains unproved.
+Preterminal activation observability is accepted; the original native composition attempt remains failed and immutable, while one separately named recovery boot is now eligible for exact planning.
 
 ### What this unlocks
 
-- A deterministic inventory of every post-readiness path that can avoid the guard terminal.
-- Specific safe preterminal coordinates and reliable elapsed-time evidence before another native process can be considered.
-- A defensible later decision whether the native Harness merits a separately named recovery execution.
+- One new native process can distinguish bootstrap, runtime import, scope, guard, disposal and exit coordinates.
+- A reliable elapsed duration can be retained before cleanup.
+- The next result can be closed in the same bureaucratic time as the Harness evidence.
 
 ### What it does not solve
 
-- No native effective-tool result, occupied worker or DeepSeek model-quality conclusion is accepted.
-- No same-attempt retry, resume, reclassification or automatic successor process is authorised.
-- No product, ordinary-practice, data, deployment, release, Pages or protected integration opens.
+- No native composition success or DeepSeek worker reliability is yet proved.
+- No retry, resume or reinterpretation of native-composition-attempt-001 is permitted.
+- No product, data, provider, deployment, release, Pages or protected integration opens.
 
 ## Continuity and authority
 
@@ -1213,6 +1215,8 @@ Prerequisites:
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md`
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md`
 - `docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-closeout.md`
+- `docs/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery-closeout.md`
+- `docs/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-closeout.md`
 - `docs/diary/diary.css`
 - `docs/diary/diary.html`
 - `docs/diary/diary.js`
@@ -1764,6 +1768,8 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/ariadne-transactional-closeout-control-plane-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/deepseek-native-harness-effective-tool-composition-terminal-coordinate-guard-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/deepseek-native-harness-hmr-boot-proof-gemini37-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/deepseek-native-harness-preterminal-observability-clockwork-incident-intake-gemini37-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/deepseek-native-harness-preterminal-observability-corrected-veto-recovery-gemini37-post-auth-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-request-contract-recovery-review-2-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-code-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-c3-d3-review-receipt.json`
@@ -1925,7 +1931,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-pre-dispatch-receipt.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-effective-tool-composition-native-boot-proof-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-worker-terminal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-predispatch-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-first-admission-sol-acceptance.md`
@@ -2575,6 +2580,7 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/provider-free-effective-tool-guard-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/provider-free-effective-tool-native-boot-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-cost-ledger.json`
@@ -3228,6 +3234,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-19--unmounted-check-in-admission-control-kernel-rehearsal.md`
+- `orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-preterminal-observability-recovery-accepted.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3535,4 +3542,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 324; continuity graph revision 342._
+_Compass map revision 325; continuity graph revision 343._
