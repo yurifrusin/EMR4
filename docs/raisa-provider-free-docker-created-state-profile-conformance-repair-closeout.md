@@ -63,15 +63,17 @@ against unchanged candidate `260eeda97a3204a39b0f639d216fd7a53c0d2014`.
 ## Efficiency reading
 
 The clockwork kept manual canonical edits and canonical drift at zero and
-prevented four caller-authored correction cycles from causing another occupied
-run or any database effect. The honest cost was one additional Gemini review
-and one redundant rejected publish invocation after an overlong checkpoint
-check. The retained efficacy reading makes those costs visible rather than
-counting only the successful run.
+prevented five caller-authored authoring or packaging correction cycles from
+causing another occupied run or any database effect. The honest cost was one
+additional Gemini review, one redundant rejected publish invocation after an
+overlong checkpoint check, and one follow-up commit for a clockwork-rendered
+Compass omitted from the first explicit stage. The retained efficacy reading
+makes those costs visible rather than counting only the successful run.
 
 The direct control for the next tranche is mechanical: execute every exact
 verifier assertion locally before provider dispatch, and never chain clockwork
-publication after validation. Check and publish remain separate stages.
+publication after validation. Check and publish remain separate stages, and
+staging must consume the exact clockwork-owned surface manifest.
 
 ## Boundaries retained
 

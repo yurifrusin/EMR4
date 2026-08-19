@@ -34,6 +34,11 @@
       "id": "checkpoint-text-bound",
       "count": 1,
       "effect": "The first pre-closeout checkpoint reading exceeded the 500-character schema bound and was shortened before canonical publication."
+    },
+    {
+      "id": "rendered-compass-explicit-staging",
+      "count": 1,
+      "effect": "Fresh successor rehydration found the clockwork-generated rendered Compass omitted from the explicit closeout stage; its unchanged clockwork bytes were added in a bounded follow-up commit."
     }
   ],
   "redundant_rejected_invocations": [
@@ -43,5 +48,5 @@
       "effect": "A chained publish command ran after the failed checkpoint check and was independently rejected before mutation; validation and publication were then separated."
     }
   ],
-  "reading": "The clockwork protected canonical state and prevented every caller-authored correction from causing an occupied rerun, database action or drift. The remaining cost is four prepublication correction cycles, one redundant rejected invocation and one additional external verifier call. The next tranche must pre-execute every exact verifier assertion locally and run clockwork check and publish as separate stages."
+  "reading": "The clockwork protected canonical state and prevented every caller-authored correction from causing an occupied rerun, database action or drift. The remaining cost is five authoring and packaging correction cycles, one redundant rejected invocation and one additional external verifier call. The next tranche must pre-execute every exact verifier assertion locally, run clockwork check and publish as separate stages, and stage the exact ten-surface clockwork manifest rather than a caller-reconstructed list."
 }

@@ -28,8 +28,9 @@ The first Gemini veto is retained as `revision_required` solely because my C07
 manifest assertion named the wrong attestation field. The candidate itself was
 unchanged. After local proof of the corrected exact assertion, one fresh Gemini
 3.7 Flash/high review passed all ten commands in a clean worktree. The efficacy
-reading records this additional review, three other prepublication authoring
-corrections and the rejected chained publish attempt.
+reading records this additional review, four other authoring or packaging
+corrections, the rejected chained publish attempt and the exact follow-up stage
+of the clockwork-rendered Compass.
 
 This acceptance opens only the separately frozen attempt-003 plan. It opens no
 database execution by itself, ordinary-practice command, product/API/config/

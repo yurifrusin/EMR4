@@ -37,13 +37,16 @@ next tranche can now freeze attempt 003 around the corrected harness.
 The first independent review found no substantive defect; it failed closed on
 one wrong field name in the review command I authored. The corrected field was
 proved locally before a fresh review, which then passed all ten commands. The
-clockwork also rejected an overlong checkpoint before publication. These costs
-are retained explicitly: four authoring correction cycles, one additional
-Gemini call and one redundant rejected publish invocation, but no repeated
-occupied run, database action or canonical drift.
+clockwork also rejected an overlong checkpoint before publication, and fresh
+successor rehydration found its rendered Compass omitted from the first explicit
+closeout stage. These costs are retained explicitly: five authoring or packaging
+correction cycles, one additional Gemini call, one redundant rejected publish
+invocation and one bounded follow-up commit, but no repeated occupied run,
+database action, hand-edited canonical field or canonical drift.
 
 For attempt 003, every exact verifier assertion will be executed locally first,
-and clockwork check and publish will be separate commands. No ordinary practice,
+clockwork check and publish will be separate commands, and explicit staging will
+consume its exact ten-surface manifest. No ordinary practice,
 product/API/config/client change, product/patient/clinical data, provider worker,
 production, deployment, release, Pages or protected ref has opened.
 

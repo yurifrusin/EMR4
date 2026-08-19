@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will next freeze a new provider-free disposable PostgreSQL rollback and unknown-response rehearsal that uses the accepted relay-free caller/result transport, with no execution before deterministic admission and a fresh five-source preexecution receipt.
+> EMR4 will next freeze relay-free recovery attempt 003 against the exact corrected harness; one disposable PostgreSQL execution remains denied until deterministic and five-source preexecution admission pass.
 
 ## North star
 
@@ -440,26 +440,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One disposable authored-synthetic PostgreSQL instance now demonstrates the exact restricted role, forced-RLS same-tenant success, cross-tenant denial and exact cleanup without product data or ordinary release. Lineage parent: `raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture`.
 212. **Remove the failed host relay and queue before resuming check-in transaction-outcome evidence — Relay-free check-in unknown-response transport redesign**
    One provider-free no-database fixture proves attached-stdin credential input, exact terminal OCI-state outcome closure and exact cleanup without a retry. Lineage parent: `raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal`.
+213. **Remove the two pre-start containment-predicate defects before consuming another relay-free database attempt — Docker Created-state profile conformance repair**
+   One no-credential Created-state proof now binds exact network and nonce semantics without starting PostgreSQL or repeating attempt 002. Lineage parent: `raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign`.
 
 ## Current position
 
-**Prove rollback and ambiguous-result readback through the accepted relay-free caller boundary — Relay-free check-in unknown-response transport redesign**
+**Prove rollback and incomplete-response recovery through the corrected relay-free caller boundary — Docker Created-state profile conformance repair**
 
-**Why this proof came next:** The restricted role and forced-RLS floor already pass, and the replacement credential/result transport now passes independently without a database; the failed relay no longer blocks a newly frozen transaction rehearsal.
+**Why this proof came next:** The accepted transport, restricted role and forced-RLS floor already exist, and the exact pre-start Docker representation defects exposed by attempt 002 are now corrected and independently accepted.
 
-The next tranche freezes a provider-free disposable PostgreSQL rollback and unknown-response recovery rehearsal using only the accepted relay-free transport.
+The next tranche freezes attempt 003 for exactly one new disposable authored-synthetic PostgreSQL relay-free execution after fresh deterministic admission.
 
 ### What this unlocks
 
-- Evidence that explicit rollback leaves zero synthetic effect through the relay-free caller.
-- Evidence that an incomplete terminal response releases no success or retry and is resolved by restricted authoritative readback.
+- Evidence that explicit rollback leaves zero synthetic effect through the corrected relay-free caller.
+- Evidence that incomplete terminal response releases no success or retry and is resolved by restricted authoritative readback.
 - A later fresh ordinary-admission readiness decision over the complete operational evidence chain.
 
 ### What it does not solve
 
-- No disposable PostgreSQL execution is authorized until the successor plan and preexecution receipt pass.
+- No attempt-003 execution is authorized until its separate plan and preexecution receipt pass.
 - No ordinary-practice command is enabled, admitted or mounted.
-- No product/patient/clinical data, provider, production, deployment, release, Pages or protected integration opens.
+- No product, patient or clinical data, provider worker, production, deployment, release, Pages or protected integration opens.
 
 ## Continuity and authority
 
@@ -1310,7 +1312,6 @@ Prerequisites:
 - `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md`
 - `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md`
 - `docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md`
-- `docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-closeout.md`
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-closeout.md`
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-design.md`
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-plan.md`
@@ -1356,6 +1357,7 @@ Prerequisites:
 - `docs/raisa-provider-free-disposable-postgresql-status-confirm-product-adapter-integration-rehearsal-plan.md`
 - `docs/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-closeout.md`
 - `docs/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal-plan.md`
+- `docs/raisa-provider-free-docker-created-state-profile-conformance-repair-closeout.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-closeout.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-design.md`
 - `docs/raisa-provider-free-globally-disabled-runtime-instrumentation-scaffold-plan.md`
@@ -1798,6 +1800,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-route-convergence-git-object-resolution-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-route-mounting-readiness-review-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-delete-confirm-scaffold-parse-catalogue-gemini37-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/raisa-docker-created-state-profile-conformance-repair-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-gemini37-receipt.json`
@@ -1998,7 +2001,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-check-in-relay-free-transport-redesign-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -2115,6 +2117,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-pre-verifier-acceptance-v2-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-route-mounting-readiness-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-delete-confirm-scaffold-parse-catalogue-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-docker-created-state-profile-conformance-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-dual-host-foundation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-globally-disabled-runtime-instrumentation-scaffold-preplanning-receipt.json`
@@ -2706,6 +2709,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/provider-free-disposable-postgresql-failure-evidence.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.json`
 - `orchestration/continuity/raisa-provider-free-disposable-postgresql-status-confirm-scaffold-parse-catalogue-rehearsal/rehearsal-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/created-state-representation-evidence.json`
+- `orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/repair-attestation.json`
 - `orchestration/continuity/raisa-provider-free-office-directory-lifecycle-descendants/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-office-practitioner-directory-consumer/live-office-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-provider-free-oidc-admission-grant-redemption-bridge/live-local-http-backend-postgres-redemption-evidence.json`
@@ -3502,4 +3507,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 317; continuity graph revision 335._
+_Compass map revision 318; continuity graph revision 336._
