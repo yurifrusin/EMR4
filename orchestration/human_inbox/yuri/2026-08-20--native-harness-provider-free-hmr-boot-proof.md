@@ -40,6 +40,14 @@ This proves startup/HMR traceability, not DeepSeek's coding performance or
 production readiness. It opens no model call or product/practice authority by
 itself.
 
+The clockwork also did useful policing at closeout. It rejected one malformed
+relationship declaration and then detected that progress had been written
+directly into its owned latch instead of through its checkpoint gear. Neither
+problem caused another Harness run. I restored the exact prior reading and
+republished the real completed stage through the admitted checkpoint path;
+lease 29 now reports zero canonical drift. Both the prevented error and the
+correction cost remain recorded for later efficacy comparison.
+
 ## Next tranche
 
 The prerequisites are now satisfied to freeze the separately named provider-

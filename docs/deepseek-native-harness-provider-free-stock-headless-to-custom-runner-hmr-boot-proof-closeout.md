@@ -76,6 +76,24 @@ terminal. Native attempt 001 ran exactly once.
   stayed clean and no P0-P2 finding was reported.
 - The review worktree and review branch are absent.
 
+## Clockwork guard outcome
+
+The closeout clockwork rejected two caller-side governance mistakes before any
+closeout publication. The first intent supplied two relationships and a
+non-admitted relationship verb where the transactional schema admits exactly
+one `builds_on` relationship. The second check detected that four progress
+commits had directly changed the clockwork-owned active latch after the prior
+generation. Neither rejection reran the Harness, Docker, PostgreSQL or a model.
+
+The intent was narrowed to the admitted relationship, the prior latch bytes
+were restored exactly, and the completed native proof plus Gemini veto were
+re-expressed through the clockwork checkpoint surface. That checkpoint
+published once at lease 29 with source
+`76cd30da0e2ad290e76b775c36bd49edbbb59752`, zero canonical drift, zero
+caller-authored derived fields and zero bespoke updater executions. Both
+mistakes are retained as closeout incidents so future efficacy readings count
+the avoided bad publication and the added correction cost.
+
 ## Parallelism closeout
 
 - DeepSeek was not invoked as a model worker or reviewer. Its native Harness
