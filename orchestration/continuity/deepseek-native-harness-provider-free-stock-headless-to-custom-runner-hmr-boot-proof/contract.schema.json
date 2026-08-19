@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/ariadne-deepseek-native-harness-hmr-boot-proof-contract-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "package", "launch", "initial_disabled_rows", "readiness", "expected_events", "required_zero_counts", "terminal"],
+  "properties": {
+    "schema_version": {"const": "ariadne.deepseek_native_harness_hmr_boot_proof_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof"},
+    "planning_source": {"const": "f5a00279f428698b5ce789d022404335a54a7d95"},
+    "package": {
+      "const": {
+        "name": "@deepseek-ai/dsh",
+        "version": "0.1.0-rc.7",
+        "bin": "lib/bin.js",
+        "tarball_sha1": "8a69013c06179d7af437de92fb4a9a2e1fd7d410",
+        "tarball_integrity": "sha512-ZceDCJ8FAywih+USW/OMk9jEhunlvJBGEz4kqrhau23hPzbciOazZrywH0nBRsaalSeAJ1JGBmjtw4OSjToStw=="
+      }
+    },
+    "launch": {
+      "const": {
+        "node_flag": "--expose-internals",
+        "profile_args": ["--profile", "headless"],
+        "native_boot_process_count": 1,
+        "online_package_fallback": false,
+        "package_lifecycle_scripts": false
+      }
+    },
+    "initial_disabled_rows": {"const": ["headless-runner", "code-runtime", "session-telemetry-otel"]},
+    "readiness": {
+      "const": {
+        "source": "in_process_sentinel_only",
+        "required_hmr_config_paths": ["profile_patch", "home_patch"],
+        "controller_synthetic_readiness": false
+      }
+    },
+    "expected_events": {"const": ["sentinel_activated", "stock_headless_hmr_ready", "custom_runner_reached", "app_exit_requested"]},
+    "required_zero_counts": {"const": ["network_attempts", "model_requests", "broker_requests", "provider_requests", "agent_sessions"]},
+    "terminal": {
+      "const": {
+        "exit_code": 0,
+        "automatic_retry": false,
+        "process_absent": true,
+        "disposable_root_absent": true
+      }
+    }
+  }
+}

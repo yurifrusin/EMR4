@@ -1,0 +1,218 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_narrow_provider_free_native_harness_stock_headless_to_custom_runner_hmr_boot_proof_plan_without_model_provider_credential_or_product_execution",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely through line 508 at task HEAD f5a00279f428698b5ce789d022404335a54a7d95. At Continuity 338 / Compass 320 its Current result accepts the no-database manifest/runner admission repair at exact source 958ae762e7c6a065b5926f47eb1a2b63115212c7, and Next implementation names deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof under the active latch.",
+    "current_authority_allocation": "GPT Sol owns plan freeze, deterministic startup-proof architecture, local process ownership, acceptance, clockwork and task-branch Git under Yuri's standing uninterrupted-development authority. The native DeepSeek Harness is the provider-free system under test, not an implementation worker; no DeepSeek model call is permitted and Claude Code is no fallback. Gemini 3.7 Flash/high is reserved for one fresh exact-candidate read-only veto only after deterministic proof. Native subagents are declined by current developer policy and because one controller must own the startup process, capture stub, terminal observation and cleanup.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-provider-free-no-database-manifest-runner-admission-repair-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-no-database-admission-repair-sol-acceptance.md",
+      "orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/closeout/clockwork-tick-evidence.json",
+      "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md",
+      "docs/security/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-threat-model-delta.md",
+      "docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 remain sealed; historical diary PHI remains local and ignored; historical native-Harness occupied attempts and terminals remain immutable. This tranche may use only the pinned native Harness, its documented stock headless startup, a provider-free local custom-runner stub and sanitized readiness/terminal/cleanup metadata. It authorises no DeepSeek model call, provider credential, provider I/O, external network, occupied worker, development edit, attempt-004 plan/execution/retry, Docker, PostgreSQL, SQL, product source/config/API/client/waiting-area change, ordinary-practice enablement, feature flag, allowlist, generic-status Arrived, action grammar, product/patient/appointment/clinical/protected data, production, deployment, release, Pages or protected-ref movement. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only.",
+    "git_refs_and_worktree": "Task HEAD and origin task branch are exact f5a00279f428698b5ce789d022404335a54a7d95 on codex/ariadne-bernie-davida-parallel-seam. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked and staged worktree is clean; docs/branding and unrelated untracked files remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof",
+    "active_tranche": "DeepSeek native Harness provider-free stock-headless-to-custom-runner HMR boot proof",
+    "objective": "Freeze and execute the narrowest provider-free proof that the pinned native DeepSeek Harness can boot through its documented stock headless path and reach the custom runner under HMR, with exact readiness, terminal-state and cleanup evidence and no provider I/O.",
+    "status": "in_progress",
+    "source_head": "958ae762e7c6a065b5926f47eb1a2b63115212c7",
+    "authority_source": "Yuri's standing uninterrupted-development authority, the accepted no-database WorkOrder/broker interlock and the historical rc.7 pre-provider HMR startup terminal.",
+    "checkpoint": {
+      "completed_stage": "Accepted ariadne-provider-free-no-database-manifest-runner-admission-repair at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_and_freeze_provider_free_native_harness_hmr_boot_proof_plan",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_native_harness_stock_headless_to_custom_runner_hmr_boot_proof_only",
+      "pinned_native_harness_and_exact_documented_startup_flags_only",
+      "provider_free_local_custom_runner_stub_only",
+      "no_deepseek_model_call_provider_io_credential_or_external_network",
+      "no_occupied_worker_or_development_edit_authority",
+      "exact_readiness_terminal_state_trace_and_cleanup_evidence_required",
+      "harness_boot_ambiguity_is_terminal_failure_not_success_or_retry",
+      "no_attempt_004_plan_execution_or_retry_until_boot_proof_is_separately_accepted",
+      "historical_native_harness_terminals_and_consumed_attempts_remain_immutable",
+      "no_docker_postgresql_sql_transaction_or_product_database_execution",
+      "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_claude_code_fallback_and_gemini_only_after_deterministic_exact_candidate",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof",
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The native Harness is the provider-free startup system under test, not a worker. Invoking the DeepSeek model would violate the proof boundary, and Claude Code is no fallback.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "One fresh Gemini 3.7 Flash/high exact-candidate read-only veto is reserved only after deterministic startup, terminal and cleanup evidence passes locally.",
+        "work_packages": [
+          "future_exact_candidate_read_only_native_harness_hmr_boot_proof_veto"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Current developer policy prohibits proactive native delegation, and one Sol-owned controller must retain the startup process, capture stub, terminal observation and cleanup lease.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "Sol freezes the exact boot and success semantics before starting any Harness process",
+      "package and launcher identity inspection precedes execution",
+      "the local custom-runner stub must be ready before stock headless boot",
+      "one controller owns process identity terminal observation and cleanup",
+      "no model provider credential external network Docker database or product execution occurs",
+      "Gemini reviews only an exact deterministic clean candidate",
+      "clockwork check and publish remain separate commands"
+    ],
+    "reassessment_triggers": [
+      "plan_frozen",
+      "deterministic_boot_candidate",
+      "verifier_acceptance",
+      "closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete updated AGENTS reread through line 508, accepted no-database closeout, exact native-Harness rc.7 plan/threat/closeout and occupied negative evidence, exact active latch, protected sections 5 and 6, Git refs and clean tracked worktree",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol completed the five-source rehydration and owns the provider-free boot proof."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The pinned native Harness is the provider-free system under test; no model or provider call is authorized."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Historical transport is not selected and no fallback is authorized."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Verifier is reserved until deterministic exact-candidate evidence passes locally."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Native lane declined and no native subagent was spawned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-native-harness-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
