@@ -1,0 +1,247 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\effective-tool-guard-gemini-51fe669f",
+  "branch": "codex/review-effective-tool-guard-51fe669f",
+  "head_before": "51fe669f7925a9468e036bb242d6f7bcf2613dc9",
+  "head_after": "51fe669f7925a9468e036bb242d6f7bcf2613dc9",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "80f03e6101493d05063cec65b7156bafb0d90b61bf597898463fe7d3d03f8e3a",
+  "result": "# Independent Review and Veto Receipt \u2014 Provider-Free Effective-Tool Composition Guard\n\n- **Reviewer**: Gemini 3.7 Flash (High reasoning effort)\n- **Candidate Commit**: `51fe669f7925a9468e036bb242d6f7bcf2613dc9`\n- **Base Commit**: `80d9e69c3dee0ddeb4b7fc620cbd0673d7ad0fa4`\n- **Worktree**: `C:\\Users\\sarashera\\EMR4-worktrees\\effective-tool-guard-gemini-51fe669f`\n- **Branch**: `codex/review-effective-tool-guard-51fe669f`\n- **Date**: 2026-08-20\n\n---\n\n## 1. Rehydration and Authority Verification\n\nRehydration was performed across all five mandatory authority and continuity sources:\n1. `live_handover_current_baton`: [`AGENTS.md`](file:///C:/Users/sarashera/EMR4-worktrees/effective-tool-guard-gemini-51fe669f/AGENTS.md) was read completely. Local/origin `master` and `handoff/current` remain aligned at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n2. `current_authority_allocation`: Standing uninterrupted-development authority admits this provider-free guard under GPT Sol's integration leadership. DeepSeek is declined; Gemini 3.7 Flash/high is dispatched for this fresh read-only veto; native subagents are declined.\n3. `active_plan_and_acceptance`: Active plan [`docs/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/effective-tool-guard-gemini-51fe669f/docs/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard-plan.md), threat delta [`docs/security/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/effective-tool-guard-gemini-51fe669f/docs/security/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard-threat-model-delta.md), contract, schemas, and evidence files under `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/` were fully inspected.\n4. `protected_evidence_boundaries`: Protected holdouts v1\u2013v10 remain sealed. Consumed attempt 004 and native worker attempt 001 remain immutable. Zero provider calls, zero occupied workers, zero database/docker/network operations, and no product/client/grammar/waiting-area changes are permitted.\n5. `git_refs_and_worktree`: Task branch is `codex/review-effective-tool-guard-51fe669f`, HEAD is `51fe669f7925a9468e036bb242d6f7bcf2613dc9`, tracked worktree is clean, and `docs/branding/` plus unrelated untracked files remain preserved.\n\nThe active operation latch [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/effective-tool-guard-gemini-51fe669f/orchestration/continuity/ariadne-active-operation-latch/current.json) for `deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard` was validated in state `in_progress`.\n\nExplicit lane dispositions are confirmed:\n- **DeepSeek**: Declined (the Harness and rc.7 composition path are the provider-free subject under inspection; invoking provider dispatch would violate the boundary).\n- **Gemini**: Dispatched (independent read-only veto of the exact candidate).\n- **Native Subagents**: Declined (proactive delegation prohibited; small serial boundary).\n\n---\n\n## 2. Mandatory Challenges Evaluation\n\n### Challenge 1: Candidate and Worktree Identity\n- Worktree root is `C:\\Users\\sarashera\\EMR4-worktrees\\effective-tool-guard-gemini-51fe669f`.\n- Branch is `codex/review-effective-tool-guard-51fe669f`.\n- Exact HEAD is `51fe669f7925a9468e036bb242d6f7bcf2613dc9`.\n- Tracked tree is completely clean (`git status --short --branch` returned only the branch header; `git diff --exit-code HEAD --` returned 0).\n\n### Challenge 2: Cache Identities, Source-Member Digests, and Semantic Predicates\n- Checked all four pinned rc.7 package identities (`@deepseek-ai/dsh@0.1.0-rc.7`, `@deepseek-ai/dsh-tools@0.1.0-rc.7`, `@deepseek-ai/dsh-agent-presets@0.1.0-rc.7`, `@deepseek-ai/dsh-scope@0.1.0-rc.7`) against local npm cache content blobs with SHA-1 registry shasums and SHA-512 integrities.\n- Verified exact member byte counts and SHA-256 digests in memory, rejecting symlinks and malformed tar members.\n- Verified all seven source-semantic predicates:\n  1. `tools_restrict_reads_restrictable_names`\n  2. `tools_restrict_rejects_unknown_names`\n  3. `tools_view_filters_inherited_layers`\n  4. `tools_view_preserves_own_layer_registrations`\n  5. `preset_mount_awaits_standing_generation`\n  6. `preset_mount_binds_agent_scope_to_standing_parent`\n  7. `scope_parent_binding_is_single_owner`\n- No package was installed, no source was patched, no package source was retained in evidence, and no network access occurred.\n\n### Challenge 3: Generated Helper Causal Ordering\n- Helper in [`scripts/deepseek_native_harness_provider_free_effective_tool_composition_guard.py`](file:///C:/Users/sarashera/EMR4-worktrees/effective-tool-guard-gemini-51fe669f/scripts/deepseek_native_harness_provider_free_effective_tool_composition_guard.py) implements the strict order:\n  1. Validate sorted inputs against `PRESET_ID = \"emr4-bounded-worker\"` and `EXPECTED_TOOLS = [\"edit\", \"glob\", \"read\"]`.\n  2. `await agentCtx.agentPresets.mount(agentCtx, presetId)`.\n  3. Resolve scope via `scopeOf(agentCtx)`.\n  4. Exactly one pre-restriction `agentCtx.tools.view(scope)`.\n  5. Reject `knownNames - restrictableNames` (ensuring no scope-local tool is present).\n  6. Reject if any expected tool is not in `restrictableNames`.\n  7. Exactly one `agentCtx.tools.restrict({ allow: [...EXPECTED_TOOLS] })`.\n  8. One schema projection via `agentCtx.tools.schemas(scope)` requiring exact match to `edit`, `glob`, `read`.\n  9. Freeze and return success object.\n- Structural AST and string validation prove call counts (1 mount, 1 view, 1 restrict, 1 schemas) and causal ordering.\n\n### Challenge 4: Scope-Local Isolation and Fail-Closed Schema Validation\n- The helper computes `local = known.filter((name) => !restrictableSet.has(name))`; if non-empty, it throws `EFFECTIVE_TOOL_COMPOSITION_SCOPE_LOCAL_TOOL_PRESENT` before restriction can occur.\n- Missing inherited tools throw `EFFECTIVE_TOOL_COMPOSITION_EXPECTED_TOOL_NOT_INHERITED`.\n- Surplus, missing, duplicate, or malformed schema projections fail closed via `EFFECTIVE_TOOL_COMPOSITION_SCHEMA_VIEW_INVALID` or `EFFECTIVE_TOOL_COMPOSITION_EFFECTIVE_VIEW_MISMATCH`.\n\n### Challenge 5: Terminal Sanitizer and Coordinate Closure\n- The terminal sanitizer admits only the 9 closed failure coordinates plus the 1 success coordinate.\n- Unknown exceptions are downgraded to `EFFECTIVE_TOOL_COMPOSITION_UNCLASSIFIED`.\n- Details are strictly filtered by regex `^[a-z_]+$`, sorted, and deduplicated, retaining only safe tool names.\n- Raw exception messages, stacks, prompts, payloads, paths, credentials, and environment values are never retained.\n- Generic `CUSTOM_RUNNER_FAILURE` appears only in the contract as a forbidden historical coordinate and never in the generated helper or terminal output.\n\n### Challenge 6: Outer Broker Independence\n- The outer broker remains independently mandatory and enforces the profile allowlist (`edit`, `glob`, `read`).\n- The guard is explicitly documented and bounded as an internal runner pre-condition check, not as an authorization or sandbox boundary.\n\n### Challenge 7: Deterministic Evidence and Zero-Count Claims\n- Validated evidence JSON and report MD:\n  - `node_processes`: 0\n  - `native_harness_boots`: 0\n  - `occupied_workers`: 0\n  - `agent_sessions`: 0\n  - `broker_requests`: 0\n  - `model_requests`: 0\n  - `provider_calls`: 0\n  - `network_attempts`: 0\n  - `docker_invocations`: 0\n  - `database_invocations`: 0\n- The evidence and report claim deterministic guard construction only; no native-boot, agent, model-quality, provider-reliability, or production claims are made.\n\n### Challenge 8: Immutability of Historical Nodes and Boundary Preservation\n- Attempt 004 and native worker attempt 001 remain immutable.\n- No attempt 005 was created or authorized.\n- No product, API, configuration, client, flag, grammar, waiting area, ordinary practice, clinical data, production, deployment, Pages, or protected ref authority was added.\n\n### Challenge 9: Command Manifest Execution\n- All ten manifest commands (C01 through C10) executed successfully with exit code 0.\n- Command C03 executed pytest across 6 test suites and passed all 73 tests.\n- Ruff linting (C04) and py_compile (C05) passed cleanly.\n- Effective tool guard `--check` (C06) passed all package checks, semantic checks, and scenario projections.\n- The review worktree remains clean and unmodified.\n\n---\n\n## 3. Findings\n\n- **P0 / P1 / P2 Findings**: None.\n- The candidate satisfies all deterministic requirements, schema contracts, fail-closed isolation rules, and zero-execution boundaries.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Independent Review and Veto Receipt \u2014 Provider-Free Effective-Tool Composition Guard\n\n- **Reviewer**: Gemini 3.7 Flash (High reasoning effort)\n- **Candidate Commit**: `51fe669f7925a9468e036bb242d6f7bcf2613dc9`\n- **Base Commit**: `80d9e69c3dee0ddeb4b7fc620cbd0673d7ad0fa4`\n- **Worktree**: `C:\\Users\\sarashera\\EMR4-worktrees\\effective-tool-guard-gemini-51fe669f`\n- **Branch**: `codex/review-effective-tool-guard-51fe669f`\n- **Date**: 2026-08-20\n\n---\n\n## 1. Rehydration and Authority Verification\n\nRehydration was performed across all five mandatory authority and continuity sources:\n1. `live_handover_current_baton`: [`AGENTS.md`](file:///C:/Users/sarashera/EMR4-worktrees/effective-tool-guard-gemini-51fe669f/AGENTS.md) was read completely. Local/origin `master` and `handoff/current` remain aligned at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n2. `current_authority_allocation`: Standing uninterrupted-development authority admits this provider-free guard under GPT Sol's integration leadership. DeepSeek is declined; Gemini 3.7 Flash/high is dispatched for this fresh read-only veto; native subagents are declined.\n3. `active_plan_and_acceptance`: Active plan [`docs/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/effective-tool-guard-gemini-51fe669f/docs/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard-plan.md), threat delta [`docs/security/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/effective-tool-guard-gemini-51fe669f/docs/security/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard-threat-model-delta.md), contract, schemas, and evidence files under `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/` were fully inspected.\n4. `protected_evidence_boundaries`: Protected holdouts v1\u2013v10 remain sealed. Consumed attempt 004 and native worker attempt 001 remain immutable. Zero provider calls, zero occupied workers, zero database/docker/network operations, and no product/client/grammar/waiting-area changes are permitted.\n5. `git_refs_and_worktree`: Task branch is `codex/review-effective-tool-guard-51fe669f`, HEAD is `51fe669f7925a9468e036bb242d6f7bcf2613dc9`, tracked worktree is clean, and `docs/branding/` plus unrelated untracked files remain preserved.\n\nThe active operation latch [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/effective-tool-guard-gemini-51fe669f/orchestration/continuity/ariadne-active-operation-latch/current.json) for `deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard` was validated in state `in_progress`.\n\nExplicit lane dispositions are confirmed:\n- **DeepSeek**: Declined (the Harness and rc.7 composition path are the provider-free subject under inspection; invoking provider dispatch would violate the boundary).\n- **Gemini**: Dispatched (independent read-only veto of the exact candidate).\n- **Native Subagents**: Declined (proactive delegation prohibited; small serial boundary).\n\n---\n\n## 2. Mandatory Challenges Evaluation\n\n### Challenge 1: Candidate and Worktree Identity\n- Worktree root is `C:\\Users\\sarashera\\EMR4-worktrees\\effective-tool-guard-gemini-51fe669f`.\n- Branch is `codex/review-effective-tool-guard-51fe669f`.\n- Exact HEAD is `51fe669f7925a9468e036bb242d6f7bcf2613dc9`.\n- Tracked tree is completely clean (`git status --short --branch` returned only the branch header; `git diff --exit-code HEAD --` returned 0).\n\n### Challenge 2: Cache Identities, Source-Member Digests, and Semantic Predicates\n- Checked all four pinned rc.7 package identities (`@deepseek-ai/dsh@0.1.0-rc.7`, `@deepseek-ai/dsh-tools@0.1.0-rc.7`, `@deepseek-ai/dsh-agent-presets@0.1.0-rc.7`, `@deepseek-ai/dsh-scope@0.1.0-rc.7`) against local npm cache content blobs with SHA-1 registry shasums and SHA-512 integrities.\n- Verified exact member byte counts and SHA-256 digests in memory, rejecting symlinks and malformed tar members.\n- Verified all seven source-semantic predicates:\n  1. `tools_restrict_reads_restrictable_names`\n  2. `tools_restrict_rejects_unknown_names`\n  3. `tools_view_filters_inherited_layers`\n  4. `tools_view_preserves_own_layer_registrations`\n  5. `preset_mount_awaits_standing_generation`\n  6. `preset_mount_binds_agent_scope_to_standing_parent`\n  7. `scope_parent_binding_is_single_owner`\n- No package was installed, no source was patched, no package source was retained in evidence, and no network access occurred.\n\n### Challenge 3: Generated Helper Causal Ordering\n- Helper in [`scripts/deepseek_native_harness_provider_free_effective_tool_composition_guard.py`](file:///C:/Users/sarashera/EMR4-worktrees/effective-tool-guard-gemini-51fe669f/scripts/deepseek_native_harness_provider_free_effective_tool_composition_guard.py) implements the strict order:\n  1. Validate sorted inputs against `PRESET_ID = \"emr4-bounded-worker\"` and `EXPECTED_TOOLS = [\"edit\", \"glob\", \"read\"]`.\n  2. `await agentCtx.agentPresets.mount(agentCtx, presetId)`.\n  3. Resolve scope via `scopeOf(agentCtx)`.\n  4. Exactly one pre-restriction `agentCtx.tools.view(scope)`.\n  5. Reject `knownNames - restrictableNames` (ensuring no scope-local tool is present).\n  6. Reject if any expected tool is not in `restrictableNames`.\n  7. Exactly one `agentCtx.tools.restrict({ allow: [...EXPECTED_TOOLS] })`.\n  8. One schema projection via `agentCtx.tools.schemas(scope)` requiring exact match to `edit`, `glob`, `read`.\n  9. Freeze and return success object.\n- Structural AST and string validation prove call counts (1 mount, 1 view, 1 restrict, 1 schemas) and causal ordering.\n\n### Challenge 4: Scope-Local Isolation and Fail-Closed Schema Validation\n- The helper computes `local = known.filter((name) => !restrictableSet.has(name))`; if non-empty, it throws `EFFECTIVE_TOOL_COMPOSITION_SCOPE_LOCAL_TOOL_PRESENT` before restriction can occur.\n- Missing inherited tools throw `EFFECTIVE_TOOL_COMPOSITION_EXPECTED_TOOL_NOT_INHERITED`.\n- Surplus, missing, duplicate, or malformed schema projections fail closed via `EFFECTIVE_TOOL_COMPOSITION_SCHEMA_VIEW_INVALID` or `EFFECTIVE_TOOL_COMPOSITION_EFFECTIVE_VIEW_MISMATCH`.\n\n### Challenge 5: Terminal Sanitizer and Coordinate Closure\n- The terminal sanitizer admits only the 9 closed failure coordinates plus the 1 success coordinate.\n- Unknown exceptions are downgraded to `EFFECTIVE_TOOL_COMPOSITION_UNCLASSIFIED`.\n- Details are strictly filtered by regex `^[a-z_]+$`, sorted, and deduplicated, retaining only safe tool names.\n- Raw exception messages, stacks, prompts, payloads, paths, credentials, and environment values are never retained.\n- Generic `CUSTOM_RUNNER_FAILURE` appears only in the contract as a forbidden historical coordinate and never in the generated helper or terminal output.\n\n### Challenge 6: Outer Broker Independence\n- The outer broker remains independently mandatory and enforces the profile allowlist (`edit`, `glob`, `read`).\n- The guard is explicitly documented and bounded as an internal runner pre-condition check, not as an authorization or sandbox boundary.\n\n### Challenge 7: Deterministic Evidence and Zero-Count Claims\n- Validated evidence JSON and report MD:\n  - `node_processes`: 0\n  - `native_harness_boots`: 0\n  - `occupied_workers`: 0\n  - `agent_sessions`: 0\n  - `broker_requests`: 0\n  - `model_requests`: 0\n  - `provider_calls`: 0\n  - `network_attempts`: 0\n  - `docker_invocations`: 0\n  - `database_invocations`: 0\n- The evidence and report claim deterministic guard construction only; no native-boot, agent, model-quality, provider-reliability, or production claims are made.\n\n### Challenge 8: Immutability of Historical Nodes and Boundary Preservation\n- Attempt 004 and native worker attempt 001 remain immutable.\n- No attempt 005 was created or authorized.\n- No product, API, configuration, client, flag, grammar, waiting area, ordinary practice, clinical data, production, deployment, Pages, or protected ref authority was added.\n\n### Challenge 9: Command Manifest Execution\n- All ten manifest commands (C01 through C10) executed successfully with exit code 0.\n- Command C03 executed pytest across 6 test suites and passed all 73 tests.\n- Ruff linting (C04) and py_compile (C05) passed cleanly.\n- Effective tool guard `--check` (C06) passed all package checks, semantic checks, and scenario projections.\n- The review worktree remains clean and unmodified.\n\n---\n\n## 3. Findings\n\n- **P0 / P1 / P2 Findings**: None.\n- The candidate satisfies all deterministic requirements, schema contracts, fail-closed isolation rules, and zero-execution boundaries.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/effective-tool-guard-gemini-51fe669f",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_ariadne_provider_free_no_database_admission.py",
+          "tests/test_ariadne_provider_free_pytest.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.deepseek_native_harness_provider_free_effective_tool_composition_guard",
+          "--check"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "80d9e69c3dee0ddeb4b7fc620cbd0673d7ad0fa4..51fe669f7925a9468e036bb242d6f7bcf2613dc9"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "80d9e69c3dee0ddeb4b7fc620cbd0673d7ad0fa4..51fe669f7925a9468e036bb242d6f7bcf2613dc9"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "38227f9b956c9a78bdaade6a671f1d683c2c3ca343a45e42e8f1f6f417e10412",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/effective-tool-guard-gemini-51fe669f",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+        "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py",
+        "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+        "tests/test_ariadne_provider_free_no_database_admission.py",
+        "tests/test_ariadne_provider_free_pytest.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.deepseek_native_harness_provider_free_effective_tool_composition_guard",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "80d9e69c3dee0ddeb4b7fc620cbd0673d7ad0fa4..51fe669f7925a9468e036bb242d6f7bcf2613dc9"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "80d9e69c3dee0ddeb4b7fc620cbd0673d7ad0fa4..51fe669f7925a9468e036bb242d6f7bcf2613dc9"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}
