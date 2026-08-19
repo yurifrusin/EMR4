@@ -1,0 +1,39 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-004",
+  "outcome": "blocked_with_cleanup_verified",
+  "occupied_execution_count": 1,
+  "automatic_retry_count": 0,
+  "readiness_sidecar_terminal_success": true,
+  "intended_transaction_execution_count": 0,
+  "ambiguous_success_release_count": 0,
+  "ordinary_admission_release_count": 0,
+  "product_record_count": 0,
+  "provider_call_count": 0,
+  "matching_owned_resource_count_after_cleanup": 0,
+  "clockwork_publication_count_before_closeout": 1,
+  "manual_canonical_governance_edit_count": 0,
+  "canonical_drift_count": 0,
+  "authoring_or_packaging_correction_cycles": [
+    "overbroad_provider_free_test_selection_rejected_before_checkpoint_publication",
+    "provisional_hand_typed_git_suffix_replaced_by_machine_resolved_full_object_id_before_publication",
+    "checkpoint_completed_stage_shortened_from_720_to_481_characters_after_schema_rejection_before_publication"
+  ],
+  "root_cause_resolution": "not_yet_distinguishable_from_retained_evidence",
+  "failure_localization": "The readiness sidecar exited successfully. After the controller released the local server attachment, the combined guard observed either State.Running not true or one or more container identity predicates false. The failure artifact did not preserve which branch or failed predicate names.",
+  "effective_controls": [
+    "one_run_latch_prevented_retry_or_evidence_laundering",
+    "closed_envelope_bound_the_exact_execution_source_and_immutable_predecessors",
+    "cleanup_removed_the_server_sidecar_network_and_attachments_with_zero_owned_residue",
+    "machine_git_resolution_prevented_a_false_full_object_id_from_entering_continuity",
+    "clockwork_schema_validation_prevented_an_overlength_transition_from_mutating_canonical_state",
+    "protected_refs_and_unrelated_untracked_files_remained_unchanged"
+  ],
+  "next_direct_controls": [
+    "separate_server_running_and_identity_predicate_failures_with_exact_sanitized_predicate_names",
+    "retain_the_server_attachment_until_final_cleanup_unless_a_deterministic_contract_proves_early_release_safe",
+    "exercise_pre_and_post_attachment_release_state_with_provider_free_fake_process_and_inspect_sequences",
+    "generate_checkpoint_text_and_git_bindings_from_machine_readings_instead_of_hand_authoring_them"
+  ],
+  "pushover_request": "9fe662fa-a647-45bf-a2ad-b3b7d7d447d2"
+}
