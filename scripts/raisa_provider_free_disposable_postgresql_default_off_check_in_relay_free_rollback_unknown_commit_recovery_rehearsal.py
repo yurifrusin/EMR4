@@ -1241,6 +1241,7 @@ def _container_profile_predicates(
     *,
     container_id: str,
     container_name: str,
+    network_name: str,
     network_id: str,
     nonce: str,
     contract: dict[str, Any],
@@ -1255,9 +1256,20 @@ def _container_profile_predicates(
         networks = row["NetworkSettings"]["Networks"]
         ports = row["NetworkSettings"].get("Ports") or {}
         network_exact = isinstance(networks, dict) and len(networks) == 1
-        endpoint = next(iter(networks.values())) if network_exact else {}
+        network_key, endpoint = (
+            next(iter(networks.items())) if network_exact else (None, {})
+        )
         serialized = json.dumps(
             {"Config": config, "HostConfig": host}, sort_keys=True
+        )
+        credential_values = tuple(
+            value for value in forbidden_values if value != nonce
+        )
+        pruned = copy.deepcopy({"Config": config, "HostConfig": host})
+        pruned_labels = pruned["Config"].get("Labels") or {}
+        pruned_labels.pop(profile["nonce_label_key"], None)
+        nonce_absent_outside_label = nonce not in json.dumps(
+            pruned, sort_keys=True
         )
         predicates = {
             "captured_id": row["Id"] == container_id,
@@ -1268,7 +1280,10 @@ def _container_profile_predicates(
             == profile["harness_label_value"],
             "nonce_label": labels.get(profile["nonce_label_key"]) == nonce,
             "one_network": network_exact,
-            "captured_network_id": endpoint.get("NetworkID") == network_id,
+            "captured_network_name_key": network_key == network_name,
+            "captured_network_mode": host.get("NetworkMode") == network_id,
+            "endpoint_network_id_lifecycle_state": endpoint.get("NetworkID")
+            in ("", network_id),
             "published_ports_absent": host.get("PortBindings") in (None, {})
             and all(value in (None, []) for value in ports.values()),
             "binds_absent": host.get("Binds") in (None, []),
@@ -1277,9 +1292,11 @@ def _container_profile_predicates(
             "restart_disabled": (host.get("RestartPolicy") or {}).get("Name")
             == "no",
             "stdin_open": config.get("OpenStdin") is True,
-            "secret_absent": not any(
-                secret and secret in serialized for secret in forbidden_values
+            "credentials_absent": not any(
+                credential and credential in serialized
+                for credential in credential_values
             ),
+            "nonce_absent_outside_label": nonce_absent_outside_label,
         }
         if kind == "server":
             tmpfs = (host.get("Tmpfs") or {}).get(
@@ -1337,11 +1354,11 @@ def _container_matches(
     kind: str,
     forbidden_values: tuple[str, ...],
 ) -> bool:
-    del network_name
     predicates = _container_profile_predicates(
         row,
         container_id=container_id,
         container_name=container_name,
+        network_name=network_name,
         network_id=network_id,
         nonce=nonce,
         contract=contract,

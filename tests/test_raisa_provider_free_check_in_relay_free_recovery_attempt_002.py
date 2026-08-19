@@ -3,6 +3,7 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -15,20 +16,30 @@ from scripts import (
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_static_admission_preserves_accepted_harness_and_hostile_gates() -> None:
-    result = attempt.static_check(require_empty_namespace=False)
-    assert result["status"] == "passed"
-    assert result["accepted_harness_sha256"] == attempt.ACCEPTED_HARNESS_SHA256
-    assert hashlib.sha256(Path(attempt.accepted.__file__).read_bytes()).hexdigest() == (
+def test_consumed_attempt_binds_historical_harness_and_denies_reuse_after_repair() -> None:
+    historical = subprocess.run(
+        [
+            "git",
+            "show",
+            (
+                f"{attempt.LIFECYCLE_ADMISSION_REPAIR_SOURCE}:"
+                "scripts/raisa_provider_free_disposable_postgresql_default_off_"
+                "check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+            ),
+        ],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+    ).stdout
+    assert hashlib.sha256(historical).hexdigest() == attempt.ACCEPTED_HARNESS_SHA256
+    assert hashlib.sha256(Path(attempt.accepted.__file__).read_bytes()).hexdigest() != (
         attempt.ACCEPTED_HARNESS_SHA256
     )
-    assert result["contract_mutations"]["attempted"] >= 256
-    assert result["contract_mutations"]["attempted"] == result[
-        "contract_mutations"
-    ]["rejected"]
-    assert result["manifest_mutations"] == {"attempted": 96, "rejected": 96}
-    assert result["state_mutations"] == {"attempted": 96, "rejected": 96}
-    assert result["classifier_mutations"] == {"attempted": 24, "rejected": 24}
+    with pytest.raises(
+        attempt.accepted.RehearsalFailure,
+        match="accepted_harness_digest_mismatch",
+    ):
+        attempt.static_check(require_empty_namespace=False)
 
 
 def test_wrapper_exposes_no_output_path_argument() -> None:

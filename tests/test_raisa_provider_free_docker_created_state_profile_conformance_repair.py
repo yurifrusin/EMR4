@@ -88,10 +88,10 @@ def _classify(row: dict[str, object], values: dict[str, str]) -> dict[str, objec
 
 
 def test_static_admission_binds_historical_bytes_and_hostile_floor() -> None:
-    result = repair.static_check(require_historical_current=True)
+    result = repair.static_check(require_historical_current=False)
     assert result["status"] == "passed"
     assert result["source_head"] and len(result["source_head"]) == 40
-    assert result["current_harness_is_historical"] is True
+    assert result["current_harness_is_historical"] is False
     assert result["hostile_contract_mutations"] == {
         "attempted": 128,
         "rejected": 128,
@@ -303,10 +303,14 @@ def test_cleanup_removes_only_exact_owned_objects(monkeypatch: pytest.MonkeyPatc
     assert ("network", "rm", values["network_id"]) in calls
 
 
-def test_terminal_artifacts_do_not_exist_before_the_one_execution() -> None:
-    assert not repair.EVIDENCE_PATH.exists()
+def test_one_execution_evidence_is_retained_without_failure_or_attestation() -> None:
+    assert repair.EVIDENCE_PATH.exists()
     assert not repair.FAILURE_PATH.exists()
     assert not repair.ATTESTATION_PATH.exists()
+    evidence = repair._load_json(repair.EVIDENCE_PATH)
+    repair._validate_evidence(evidence)
+    assert evidence["execution_count"] == 1
+    assert evidence["retry_count"] == 0
 
 
 def test_source_contains_no_database_or_product_import() -> None:

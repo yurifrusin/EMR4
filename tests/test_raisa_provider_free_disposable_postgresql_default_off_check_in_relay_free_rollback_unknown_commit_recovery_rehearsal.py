@@ -207,7 +207,7 @@ def test_source_has_no_host_relay_process_queue_or_exec_bridge() -> None:
     assert "PortBindings" in source
 
 
-def test_container_identity_predicates_reject_secret_configuration(
+def test_container_identity_predicates_separate_credentials_nonce_and_network_lifecycle(
     contract: dict[str, object],
 ) -> None:
     profile = contract["containment_profile"]
@@ -231,6 +231,7 @@ def test_container_identity_predicates_reject_secret_configuration(
             "Env": [],
         },
         "HostConfig": {
+            "NetworkMode": network_id,
             "PortBindings": {},
             "Binds": None,
             "LogConfig": {"Type": "none"},
@@ -248,7 +249,7 @@ def test_container_identity_predicates_reject_secret_configuration(
             },
         },
         "NetworkSettings": {
-            "Networks": {"runtime-generated-key": {"NetworkID": network_id}}
+            "Networks": {network_name: {"NetworkID": ""}}
         },
     }
     assert harness._container_matches(
@@ -260,7 +261,7 @@ def test_container_identity_predicates_reject_secret_configuration(
         nonce=nonce,
         contract=contract,
         kind="readiness",
-        forbidden_values=("f" * 64,),
+        forbidden_values=("f" * 64, nonce),
     )
     candidate = copy.deepcopy(row)
     candidate["Config"]["Env"] = ["PGPASSWORD=" + "f" * 64]
@@ -273,8 +274,48 @@ def test_container_identity_predicates_reject_secret_configuration(
         nonce=nonce,
         contract=contract,
         kind="readiness",
-        forbidden_values=("f" * 64,),
+        forbidden_values=("f" * 64, nonce),
     )
+    candidate = copy.deepcopy(row)
+    candidate["Config"]["Env"] = ["UNRELATED=" + nonce]
+    assert not harness._container_matches(
+        candidate,
+        container_id=container_id,
+        container_name=name,
+        network_name=network_name,
+        network_id=network_id,
+        nonce=nonce,
+        contract=contract,
+        kind="readiness",
+        forbidden_values=("f" * 64, nonce),
+    )
+    for key, value in (
+        ("network_key", "foreign-network"),
+        ("network_mode", "foreign-network"),
+        ("endpoint_network_id", "d" * 64),
+    ):
+        candidate = copy.deepcopy(row)
+        if key == "network_key":
+            candidate["NetworkSettings"]["Networks"] = {
+                value: {"NetworkID": ""}
+            }
+        elif key == "network_mode":
+            candidate["HostConfig"]["NetworkMode"] = value
+        else:
+            candidate["NetworkSettings"]["Networks"][network_name][
+                "NetworkID"
+            ] = value
+        assert not harness._container_matches(
+            candidate,
+            container_id=container_id,
+            container_name=name,
+            network_name=network_name,
+            network_id=network_id,
+            nonce=nonce,
+            contract=contract,
+            kind="readiness",
+            forbidden_values=("f" * 64, nonce),
+        )
 
 
 def test_failed_server_acquisition_cleans_exact_owned_id_before_raising(
@@ -316,7 +357,7 @@ def test_failed_server_acquisition_cleans_exact_owned_id_before_raising(
     monkeypatch.setattr(
         harness,
         "_container_profile_predicates",
-        lambda *_, **__: {"captured_network_id": False},
+        lambda *_, **__: {"captured_network_name_key": False},
     )
     monkeypatch.setattr(harness.secrets, "token_hex", lambda _: "0123456789abcdef")
     with pytest.raises(harness.RehearsalFailure) as caught:
@@ -329,7 +370,7 @@ def test_failed_server_acquisition_cleans_exact_owned_id_before_raising(
             forbidden_values=("f" * 64,),
         )
     assert caught.value.code == "server_profile_mismatch_cleaned"
-    assert caught.value.detail == "captured_network_id"
+    assert caught.value.detail == "captured_network_name_key"
     assert ("rm", "--force", container_id) in calls
 
 
