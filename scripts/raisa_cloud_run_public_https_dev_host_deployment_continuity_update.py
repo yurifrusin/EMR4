@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 
@@ -405,4 +406,8 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+    from orchestration_harness.governance_writer_guard import refuse_retired_legacy_writer
+    refuse_retired_legacy_writer(ROOT)
     raise SystemExit(main())

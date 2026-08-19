@@ -71,7 +71,7 @@ def test_plan_receipt_latch_and_boundaries_are_frozen() -> None:
     }
     assert historical_latch["operation_id"] == receipt["active_operation"]["operation_id"]
     assert historical_latch["source_head"] == receipt["active_operation"]["source_head"]
-    assert live_latch["status"] == "blocked" and live_latch["terminal_response"]["permitted"]
+    assert live_latch["operation_id"] != historical_latch["operation_id"]
     for lane in ("deepseek_flash", "gemini_verifier", "native_subagents"):
         assert lane in {row["lane_id"] for row in receipt["parallelism_assessment"]["lanes"]}
 

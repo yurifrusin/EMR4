@@ -19,6 +19,16 @@ try:
 except ModuleNotFoundError:  # Direct execution from the scripts directory.
     import ariadne_continuity as continuity  # type: ignore[no-redef]
 
+try:
+    from orchestration_harness.governance_writer_guard import (
+        refuse_retired_legacy_writer,
+    )
+except ModuleNotFoundError:  # Direct execution from the scripts directory.
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from orchestration_harness.governance_writer_guard import (
+        refuse_retired_legacy_writer,
+    )
+
 
 SCHEMA_VERSION = "ariadne.compass.v1"
 REPORT_VERSION = "ariadne.compass_report.v1"
@@ -316,11 +326,32 @@ def validate_compass(
 
 
 def build_compass_report(
-    compass: dict[str, Any], graph: dict[str, Any], *, repo_root: Path
+    compass: dict[str, Any],
+    graph: dict[str, Any],
+    *,
+    repo_root: Path,
+    require_evidence_files: bool = True,
 ) -> dict[str, Any]:
     """Build a deterministic read-only programme-position report."""
 
-    errors = validate_compass(compass, graph, repo_root=repo_root)
+    refuse_retired_legacy_writer(repo_root)
+
+    errors = validate_compass(
+        compass,
+        graph,
+        repo_root=repo_root,
+        require_evidence_files=require_evidence_files,
+    )
+    if not require_evidence_files:
+        current_node = f":{compass.get('current_position', {}).get('node_id')}:"
+        errors = [
+            reason
+            for reason in errors
+            if not (
+                reason.startswith("current_position_continuity:evidence_not_found:")
+                and current_node not in reason
+            )
+        ]
     if errors:
         return {
             "schema_version": REPORT_VERSION,
@@ -333,7 +364,10 @@ def build_compass_report(
     nodes = continuity._node_index(graph)
     current_id = compass["current_position"]["node_id"]
     current_audit = continuity.audit_graph(
-        graph, repo_root=repo_root, node_id=current_id
+        graph,
+        repo_root=repo_root,
+        node_id=current_id,
+        require_evidence_files=require_evidence_files,
     )["nodes"][0]
     journey = []
     for step in compass["journey"]:

@@ -1,0 +1,33 @@
+{
+  "schema_version": "ariadne.governance_writer_inventory.v1",
+  "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+  "historical_updater_glob": "scripts/*continuity_update.py",
+  "historical_updater_count": 145,
+  "sorted_path_list_sha256": "484730fc3699f75a62ac268c35f1ee6a125ec1b1224b45b3430ec6f4a5308ff5",
+  "shared_compass_guard_count": 137,
+  "explicit_entry_guard_paths": [
+    "scripts/raisa_cloud_run_api_runtime_identity_enablement_continuity_update.py",
+    "scripts/raisa_cloud_run_public_access_word_online_verification_continuity_update.py",
+    "scripts/raisa_cloud_run_public_https_dev_host_deployment_continuity_update.py",
+    "scripts/raisa_provider_free_disposable_postgresql_status_confirm_product_adapter_integration_rehearsal_continuity_update.py",
+    "scripts/raisa_provider_free_read_only_status_confirm_route_mounting_readiness_rereview_continuity_update.py",
+    "scripts/raisa_provider_free_unmounted_status_confirm_product_adapter_rehearsal_continuity_update.py",
+    "scripts/raisa_shared_application_auth_clinician_role_boundary_continuity_update.py",
+    "scripts/raisa_word_online_authenticated_companion_verification_continuity_update.py"
+  ],
+  "canonical_authority_paths": {
+    "continuity": "orchestration/continuity/emr4-continuity-graph.json",
+    "compass": "orchestration/continuity/emr4-compass.json",
+    "compass_markdown": "docs/ariadne-compass-current.md",
+    "active_latch": "orchestration/continuity/ariadne-active-operation-latch/current.json",
+    "error_register": "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+    "pattern_report": "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+    "current_baton": "AGENTS.md"
+  },
+  "legacy_writer_classes": [
+    "bespoke_continuity_updater",
+    "manual_baton_editor",
+    "manual_latch_editor",
+    "manual_register_fixture_editor"
+  ]
+}

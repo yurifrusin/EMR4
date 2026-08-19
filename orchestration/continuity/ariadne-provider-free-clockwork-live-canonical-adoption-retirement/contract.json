@@ -1,0 +1,63 @@
+{
+  "schema_version": "ariadne.governance_live_adoption_contract.v1",
+  "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+  "required_ancestor": "a6129d9a0c391314691cb73b28a5f21f1e834654",
+  "accepted_rehearsal_source": "d03cc6386fdf3e2714881089514380d93824e160",
+  "protected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+  "canonical_paths": {
+    "continuity": "orchestration/continuity/emr4-continuity-graph.json",
+    "compass": "orchestration/continuity/emr4-compass.json",
+    "compass_markdown": "docs/ariadne-compass-current.md",
+    "active_latch": "orchestration/continuity/ariadne-active-operation-latch/current.json",
+    "error_register": "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+    "pattern_report": "orchestration/continuity/ariadne-agent-error-register/pattern-report.json",
+    "current_baton": "AGENTS.md"
+  },
+  "clockwork_root": "orchestration/continuity/ariadne-governance-clockwork",
+  "writer_inventory": "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/writer-inventory.json",
+  "legacy_writer_classes": [
+    "bespoke_continuity_updater",
+    "manual_baton_editor",
+    "manual_latch_editor",
+    "manual_register_fixture_editor"
+  ],
+  "commands": [
+    {
+      "command_id": "read_only_live_adoption_check",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": ["-m", "scripts.ariadne_provider_free_clockwork_live_canonical_adoption_retirement", "--check"],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "focused_live_adoption",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": ["-m", "pytest", "-q", "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py"],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "surrounding_governance",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": ["-m", "pytest", "-q", "tests/test_ariadne_transactional_closeout.py", "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py", "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_ariadne_agent_error_register.py", "tests/test_current_baton_consistency.py"],
+      "completion_contract": "final_exit_code_zero_required"
+    }
+  ],
+  "selected_command_ids": [
+    "read_only_live_adoption_check",
+    "focused_live_adoption",
+    "surrounding_governance"
+  ],
+  "baton_acceptance_paths": [
+    "docs/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-plan.md",
+    "docs/security/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-threat-model-delta.md",
+    "orchestration_harness/governance_writer_guard.py",
+    "orchestration_harness/governance_live_adoption.py",
+    "scripts/ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json",
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/closeout-intent.json",
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/writer-inventory.json",
+    "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+    "docs/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-closeout.md",
+    "orchestration/agent_inbox/codex/ariadne-clockwork-live-canonical-adoption-retirement-sol-acceptance.md",
+    "orchestration/human_inbox/yuri/2026-08-19--clockwork-live-canonical-adoption-retirement.md"
+  ]
+}

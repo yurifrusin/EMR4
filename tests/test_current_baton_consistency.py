@@ -8,6 +8,7 @@ PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
 ERROR_REGISTER = ROOT / "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
+CLOCKWORK_POINTER = ROOT / "orchestration/continuity/ariadne-governance-clockwork/current.json"
 NODE_ID = "raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review"
 SOURCE_HEAD = "da03039f637d3808c8785a6d6fc95309650044d9"
 HTTP_NODE_ID = "raisa-provider-free-delete-confirm-http-route-convergence"
@@ -143,6 +144,11 @@ def test_continuity_and_compass_bind_risk_weighted_result_and_product_position()
 
 def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> None:
     text = AGENTS.read_text(encoding="utf-8")
+    clockwork_active = (
+        CLOCKWORK_POINTER.is_file()
+        and json.loads(CLOCKWORK_POINTER.read_text(encoding="utf-8")).get("phase")
+        == "clockwork_active"
+    )
     current = _table_row(text, "Current result")
     relation = _table_row(text, "Required Git relation")
     product = _table_row(text, "Active product track")
@@ -153,16 +159,27 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     reform_relation = _table_row(text, "Ariadne risk-weighted reform Git relation")
     ordinary_relation = _table_row(text, "Current ordinary Diary cancellation relation")
     orientation_relation = _table_row(text, "Current arrival/check-in convergence relation")
-    clockwork_relation = _table_row(text, "Current shadow clockwork relation")
+    clockwork_relation = _table_row(
+        text,
+        "Current clockwork relation"
+        if clockwork_active
+        else "Current shadow clockwork relation",
+    )
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
     assert f"Continuity {graph['graph_revision']} / Compass {compass['map_revision']}" in current
     assert graph["nodes"][-1]["coordinates"]["source_head"] in current
-    assert "exclusive mirror ownership" in current.lower()
-    assert "23/23 fault safety" in current.lower()
-    assert "actual canonical adoption and retirement flags remain false" in current.lower()
-    assert CLOCKWORK_ARCHITECTURE_SOURCE_HEAD in clockwork_relation
-    assert CLOCKWORK_REHEARSAL_SOURCE_HEAD in clockwork_relation
+    if clockwork_active:
+        assert "ten repository-governance surfaces" in current.lower()
+        assert "one clockwork owner" in current.lower()
+        assert "previous git generation" in current.lower()
+        assert CLOCKWORK_REHEARSAL_SOURCE_HEAD in clockwork_relation
+    else:
+        assert "exclusive mirror ownership" in current.lower()
+        assert "23/23 fault safety" in current.lower()
+        assert "actual canonical adoption and retirement flags remain false" in current.lower()
+        assert CLOCKWORK_ARCHITECTURE_SOURCE_HEAD in clockwork_relation
+        assert CLOCKWORK_REHEARSAL_SOURCE_HEAD in clockwork_relation
     error_register = _table_row(
         text, "Ariadne agent error and correction register acceptance"
     ).lower()
@@ -231,15 +248,23 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     assert "a1629f2441e2bdb350d00c6d6016e94123ff0d8d" in relation
     assert "530a1d479a48242df6985886acdbb796550e9093" in relation
     assert "826aad11c29007b13eaa377e3f7ea494cc82ce70" in relation
-    assert "explicit adoption boundary" in next_work.lower()
-    assert "live canonical clockwork adoption/retirement" in next_work.lower()
-    assert "no dual writer" in next_work.lower()
-    assert "exact rollback" in next_work.lower()
-    assert "canonical-check-in-route-adapter-convergence-rehearsal" in next_work.lower()
-    assert "neither branch is inferred" in next_work.lower()
-    assert "occupied deepseek/hmr" in next_work.lower()
-    assert "product/practice/data/runtime" in next_work.lower()
-    assert "protected-ref movement" in next_work.lower()
+    if clockwork_active:
+        assert "clockwork-governed-check-in-successor-resolution" in next_work.lower()
+        assert "provider-free and read-only" in next_work.lower()
+        assert "occupied deepseek/hmr" in next_work.lower()
+        assert "ordinary-practice enablement" in next_work.lower()
+        assert "product/data/runtime" in next_work.lower()
+        assert "protected-ref movement" in next_work.lower()
+    else:
+        assert "explicit adoption boundary" in next_work.lower()
+        assert "live canonical clockwork adoption/retirement" in next_work.lower()
+        assert "no dual writer" in next_work.lower()
+        assert "exact rollback" in next_work.lower()
+        assert "canonical-check-in-route-adapter-convergence-rehearsal" in next_work.lower()
+        assert "neither branch is inferred" in next_work.lower()
+        assert "occupied deepseek/hmr" in next_work.lower()
+        assert "product/practice/data/runtime" in next_work.lower()
+        assert "protected-ref movement" in next_work.lower()
     assert "primeintellect" not in next_work.lower()
     assert "attempt-016" not in relation.lower()
     assert "attempt 016" not in relation.lower()
@@ -275,19 +300,39 @@ def test_master_plan_and_handover_contain_no_stale_next_work_instruction() -> No
 def test_current_rows_preserve_closed_surface_boundary() -> None:
     text = AGENTS.read_text(encoding="utf-8")
     next_work = _table_row(text, "Next implementation").lower()
-    for phrase in (
-        "explicit adoption boundary",
-        "live canonical clockwork adoption/retirement",
-        "no dual writer",
-        "exact rollback",
-        "canonical-check-in-route-adapter-convergence-rehearsal",
-        "neither branch is inferred",
-        "occupied deepseek/hmr",
-        "product/practice/data/runtime",
-        "deployment",
-        "protected-ref movement",
-        "docs/branding/",
-        "stage explicit paths only",
-    ):
+    clockwork_active = (
+        CLOCKWORK_POINTER.is_file()
+        and json.loads(CLOCKWORK_POINTER.read_text(encoding="utf-8")).get("phase")
+        == "clockwork_active"
+    )
+    phrases = (
+        (
+            "clockwork-governed-check-in-successor-resolution",
+            "provider-free and read-only",
+            "occupied deepseek/hmr",
+            "ordinary-practice enablement",
+            "product/data/runtime",
+            "deployment",
+            "protected-ref movement",
+            "docs/branding/",
+            "stage explicit paths only",
+        )
+        if clockwork_active
+        else (
+            "explicit adoption boundary",
+            "live canonical clockwork adoption/retirement",
+            "no dual writer",
+            "exact rollback",
+            "canonical-check-in-route-adapter-convergence-rehearsal",
+            "neither branch is inferred",
+            "occupied deepseek/hmr",
+            "product/practice/data/runtime",
+            "deployment",
+            "protected-ref movement",
+            "docs/branding/",
+            "stage explicit paths only",
+        )
+    )
+    for phrase in phrases:
         assert phrase in next_work
     assert "single-owner-migration-retirement-rehearsal" not in next_work

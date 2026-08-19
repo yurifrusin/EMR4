@@ -637,8 +637,18 @@ def required_contracts(graph: dict[str, Any], node_id: str) -> list[dict[str, An
     return sorted(contracts, key=lambda item: item["id"])
 
 
-def audit_graph(graph: dict[str, Any], *, repo_root: Path, node_id: str | None = None) -> dict[str, Any]:
-    structural_errors = validate_graph(graph, repo_root=repo_root)
+def audit_graph(
+    graph: dict[str, Any],
+    *,
+    repo_root: Path,
+    node_id: str | None = None,
+    require_evidence_files: bool = True,
+) -> dict[str, Any]:
+    structural_errors = validate_graph(
+        graph,
+        repo_root=repo_root,
+        require_evidence_files=require_evidence_files,
+    )
     if structural_errors:
         return {
             "schema_version": "ariadne.continuity_audit.v1",

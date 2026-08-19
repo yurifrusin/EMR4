@@ -1,0 +1,121 @@
+{
+  "schema_version": "ariadne.governance_live_adoption_intent.v1",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+    "title": "Ariadne provider-free clockwork live canonical adoption and retirement",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-19T03:30:00+00:00",
+    "node": {
+      "id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+      "title": "Clockwork live canonical adoption and retirement",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri explicitly authorized repository-governance clockwork adoption and legacy-writer retirement only.",
+          "One clockwork writer owns the canonical closeout; historical updater scripts remain preserved evidence without publication authority.",
+          "No product, provider, runtime, deployment, Pages or protected-ref authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-live-canonical-clockwork-adoption-retirement",
+          "source": "AGENTS.md",
+          "status": "accepted",
+          "summary": "Adopt the proven clockwork as the sole repository-governance closeout publisher with exact rollback and no dual writer."
+        }
+      ],
+      "claim_scope": [
+        "Ten governance surfaces have one clockwork owner and zero dual owners after the live task-branch cutover.",
+        "Four legacy writer classes are retired without deleting the 145 historical updater programs.",
+        "The exact previous canonical generation remains Git-bound and byte-recoverable.",
+        "The first accepted live closeout uses one validated intent, one clockwork publication and no bespoke updater."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-plan.md",
+          "docs/security/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json",
+          "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/writer-inventory.json"
+        ],
+        "closeouts": [],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-live-canonical-adoption-retirement-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-live-canonical-adoption-retirement-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_writer_guard.py",
+          "orchestration_harness/governance_live_adoption.py",
+          "scripts/ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The next three qualifying closeouts must report clockwork validation failures, rollback events, legacy-guard trips and manual derived-field edits.",
+        "Occupied DeepSeek remains behind the separate native-Harness HMR boot proof.",
+        "Ordinary-practice check-in activation, product runtime, deployment, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Replace duplicate administrative writers with one live fail-closed clockwork reading",
+      "outcome": "The task branch has one clockwork-owned canonical governance generation, guarded historical writers and an exact Git-backed rollback generation.",
+      "evidence": [
+        "docs/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-plan.md",
+        "orchestration_harness/governance_live_adoption.py",
+        "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Operate future repository-governance closeouts through one clockwork owner",
+      "why_now": "The accepted mirror proved exclusivity and rollback, and Yuri explicitly selected live adoption for a long future sequence of closeouts.",
+      "outcome": "The first live clockwork tick owns the canonical governance surfaces and historical direct publishers fail closed.",
+      "unlocks": [
+        "Measured clockwork use on the next dependency-satisfied repository closeouts.",
+        "A provider-free read-only resolution of the true next check-in product successor under the new controls."
+      ],
+      "does_not_solve": [
+        "Clockwork adoption does not prove the native DeepSeek Harness HMR boot path.",
+        "No ordinary-practice admission or product behavior changes.",
+        "No product data, provider runtime, deployment, release, Pages or protected integration opens."
+      ],
+      "evidence": [
+        "docs/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-plan.md",
+        "docs/security/ariadne-provider-free-clockwork-live-canonical-adoption-retirement-threat-model-delta.md",
+        "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/writer-inventory.json"
+      ],
+      "orientation_statement": "EMR4 has adopted one provider-free clockwork owner for repository-governance closeouts; the next read-only tranche resolves the true check-in successor while product and protected authorities remain closed."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-clockwork-governed-check-in-successor-resolution",
+      "active_tranche": "Raisa provider-free clockwork-governed check-in successor resolution",
+      "objective": "Read the accepted check-in lineage and freeze the narrowest true dependency-satisfied successor without repeating an accepted route tranche or enabling ordinary practice.",
+      "authority_source": "Accepted check-in lineage, accepted live clockwork adoption and Yuri's standing uninterrupted-development authority.",
+      "next_stage": "rehydrate_the_clockwork_owned_generation_and_resolve_the_exact_unrepeated_check_in_successor"
+    },
+    "incidents": [],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_ids": [
+    "read_only_live_adoption_check",
+    "focused_live_adoption",
+    "surrounding_governance"
+  ]
+}

@@ -25,6 +25,7 @@ INTENT_PATH = TOPIC / "closeout-intent.json"
 LATCH = ROOT / "orchestration/continuity/ariadne-active-operation-latch/current.json"
 PREPLAN = ROOT / "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-preplanning-runtime-state.json"
 REVIEWED_HEAD = "d03cc6386fdf3e2714881089514380d93824e160"
+CLOSEOUT_HEAD = "a6129d9a0c391314691cb73b28a5f21f1e834654"
 
 
 def _load(path: Path) -> dict:
@@ -58,13 +59,24 @@ def test_plan_receipt_latch_and_parallelism_are_frozen() -> None:
     receipt = _load(ROOT / "orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-preplanning-receipt.json")
     historical_latch = _load(PREPLAN)["active_operation"]
     live_latch = _load(LATCH)
+    reviewed_latch = json.loads(
+        subprocess.run(
+            ["git", "show", f"{CLOSEOUT_HEAD}:orchestration/continuity/ariadne-active-operation-latch/current.json"],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        ).stdout
+    )
     assert "950 physical lines" in plan and "AER-0643 through AER-0651" in plan
     assert "zero dual-owned surfaces" in threat
     assert receipt["status"] == "passed" and receipt["rehydrated_from_receipt"]
     assert set(receipt["rehydration_sources"]) == {"live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"}
     assert historical_latch["operation_id"] == receipt["active_operation"]["operation_id"]
     assert historical_latch["status"] == "in_progress" and not historical_latch["terminal_response"]["permitted"]
-    assert live_latch["status"] == "blocked" and live_latch["terminal_response"]["permitted"]
+    assert reviewed_latch["status"] == "blocked" and reviewed_latch["terminal_response"]["permitted"]
+    assert live_latch["operation_id"] != historical_latch["operation_id"]
     lanes = {item["lane_id"]: item["disposition"] for item in receipt["parallelism_assessment"]["lanes"]}
     assert lanes == {"deepseek_flash": "declined", "gemini_verifier": "reserved", "native_subagents": "declined"}
 
