@@ -36,6 +36,12 @@ revision and agent-origin population. AER-0660 preserves that recurrence and
 the corrected tests now validate canonical or population-derived readings
 directly. Only the final fully compatible generation is accepted.
 
+The third live generation was likewise rolled back byte-exactly after one
+remaining full recurring-pattern list rejected the new post-baseline peer
+group. AER-0661 freezes that list as historical through AER-0656 and makes all
+later recurring-pattern assertions population-derived. The final generation is
+the only accepted publication.
+
 Before that corrected publication, Sol also caught and corrected one manually
 expanded Git ID in conversational commentary. AER-0659 preserves the mismatch;
 the repository and dry run always held the correct full object ID. The durable

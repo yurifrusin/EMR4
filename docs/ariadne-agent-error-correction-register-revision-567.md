@@ -37,8 +37,14 @@ arithmetic formulas. That generation was also rolled back byte-exactly. The
 tests now validate the canonical current revision document and direct
 population properties without forecasting the next update.
 
-The clockwork now derives AER-0657 through AER-0660 and all aggregate updates
-from semantic observations in the closeout intent. The register contains 660
+The third incident-intake publication exposed AER-0661: the full historical
+recurring-pattern literal list still rejected the newly derived post-baseline
+peer group. That generation was rolled back byte-exactly. The literal list is
+now frozen through AER-0656, while later patterns and counts are recomputed from
+the validated current population.
+
+The clockwork now derives AER-0657 through AER-0661 and all aggregate updates
+from semantic observations in the closeout intent. The register contains 661
 incidents, all corrected or contained and none open.
 
 ## Prevention
@@ -49,6 +55,8 @@ enters through clockwork intent v2; callers cannot author the AER ID, revision,
 origin, peer links, status, counts or pattern report. Current register tests
 derive moving revision/count/cutoff/aggregate readings from the validated
 population rather than retaining next-update literals.
+Historical recurring-pattern fixtures have an immutable cutoff; post-baseline
+patterns are current readings, not manually extended lists.
 Full Git object IDs in commentary and reports are copied only from current
 machine output or a persisted receipt; abbreviations are never manually
 expanded.

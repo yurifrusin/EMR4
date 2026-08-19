@@ -4011,6 +4011,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
     )
     assert yielded_session_recurrence["incident_ids"] == ["AER-0651", "AER-0654"]
     assert yielded_session_recurrence["incident_count"] == 2
+    legacy_pattern_baseline_max_incident = 656
     assert [
         row
         for row in report["recurring_patterns"]
@@ -4050,6 +4051,11 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "operator.ripgrep_compound_regex_not_syntax_validated",
             "orchestrator.yielded_verification_session_id_not_exposed",
         }
+        and max(
+            int(incident_id.removeprefix("AER-"))
+            for incident_id in row["incident_ids"]
+        )
+        <= legacy_pattern_baseline_max_incident
     ] == [
         {
             "recurrence_signature": "orchestrator.chained_validation_exit_masking",
@@ -4670,6 +4676,25 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             ],
         },
     ]
+    current_reading_rows = [
+        row
+        for row in incidents
+        if row["recurrence_signature"]
+        == "repository.agent_error_register_current_reading_literal_not_population_derived"
+    ]
+    if current_reading_rows:
+        current_reading_pattern = next(
+            row
+            for row in report["recurring_patterns"]
+            if row["recurrence_signature"]
+            == "repository.agent_error_register_current_reading_literal_not_population_derived"
+        )
+        assert current_reading_pattern["incident_ids"] == sorted(
+            row["incident_id"] for row in current_reading_rows
+        )
+        assert current_reading_pattern["incident_count"] == len(
+            current_reading_rows
+        )
     assert "do not prove model" in report["interpretation_boundary"]
 
 

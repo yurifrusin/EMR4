@@ -15,8 +15,10 @@ the exact worktree clean after 480 tests.
 
 This correction closes the sole-writer gap that otherwise made the rejected
 review impossible to register without a forbidden manual canonical edit. It
-also replaces the literal current-reading fixtures exposed by the first two
+also replaces the literal current-reading fixtures exposed by the first three
 rolled-back publications. It does not broaden the parent tranche or any
 product/provider authority. AER-0659 preserves the corrected prepublication
 commentary hash misstatement and the machine-copy-only full-ID reporting
 control; AER-0660 preserves the second rollback and its two formula repairs.
+AER-0661 preserves the third rollback and separates the immutable historical
+recurrence baseline from population-derived post-baseline patterns.

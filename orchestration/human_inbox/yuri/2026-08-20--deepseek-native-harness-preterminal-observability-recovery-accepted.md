@@ -33,12 +33,13 @@ clinical, database, deployment or protected branch changed.
 - clockwork incident-intake candidate:
   `7c7ce52a6380637d54dc5ae2d6a778ccd300dd2f`;
 - 480/480 clockwork/register tests and clean Gemini veto;
-- AER-0657 through AER-0660 are clockwork-derived during the same corrected
-  closeout generation; the first two generations were rolled back byte-exactly
-  after exposing three remaining current-reading formulas, AER-0659 preserves an
+- AER-0657 through AER-0661 are clockwork-derived during the same corrected
+  closeout generation; the first three generations were rolled back byte-exactly
+  after exposing four remaining current-reading fixtures, AER-0659 preserves an
   immediately corrected prepublication commentary hash misstatement plus the
   machine-copy-only full-ID reporting control, and AER-0660 preserves the
-  second rollback and final two formula repairs;
+  second rollback and two formula repairs; AER-0661 separates the historical
+  recurring-pattern baseline from population-derived later patterns;
 - protected refs remain
   `2e34bdad732fdab32fbf778280b3d3c70d66d602`.
 

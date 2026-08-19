@@ -180,6 +180,11 @@
         "incident_id": "remaining-register-current-reading-literal-fixtures",
         "source_id": "incident-intake-second-postpublication-suite",
         "peers": []
+      },
+      {
+        "incident_id": "post-baseline-recurring-pattern-list-fixture",
+        "source_id": "incident-intake-third-postpublication-suite",
+        "peers": []
       }
     ],
     "broker": {
@@ -464,6 +469,42 @@
         ]
       },
       "baton_summary": "preserves the second rolled-back current-reading formula failures and their population-derived correction."
+    },
+    {
+      "attempt_key": "clockwork-incident-intake-recurring-pattern-fixture-attempt-003",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register-current-reading-tests",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The historical recurring-pattern literal baseline must remain immutable while post-baseline recurring patterns are asserted from the validated current population.",
+      "observed_error": "The third incident-intake publication passed every other selected check but one full recurring-pattern list equality rejected the newly derived AER-0658/AER-0660 peer group because the list still treated every future pattern as a manual literal update.",
+      "detection_method": "The exact serial post-publication suite isolated one failure in the recurring-pattern baseline assertion; the clockwork rolled the complete generation back byte-exactly before correction.",
+      "evidence_paths": [
+        "tests/test_ariadne_agent_error_register.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery/closeout/clockwork-tick-attempt-003-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-567.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.agent_error_register_current_reading_literal_not_population_derived",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Freeze the large literal list as the historical through-AER-0656 baseline and validate every later current-reading recurrence directly from the validated incident population and generated report.",
+        "prevention_control": "Historical literal recurrence fixtures are bounded by an immutable incident cutoff; post-baseline patterns and counts are readings recomputed from canonical incidents and never appended manually to that list.",
+        "evidence_paths": [
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/deepseek-native-harness-provider-free-preterminal-observability-clockwork-incident-intake-recovery-closeout.md",
+          "docs/ariadne-agent-error-correction-register-revision-567.md"
+        ]
+      },
+      "baton_summary": "preserves the third rolled-back recurring-pattern baseline failure and its post-baseline population-reading control."
     }
   ]
 }
