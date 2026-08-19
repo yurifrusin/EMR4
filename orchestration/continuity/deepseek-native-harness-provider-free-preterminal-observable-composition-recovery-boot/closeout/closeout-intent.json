@@ -1,0 +1,263 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v1",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot",
+    "title": "DeepSeek native Harness provider-free preterminal-observable composition recovery boot",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-20T08:51:16.4963085+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot",
+      "title": "DeepSeek native Harness provider-free preterminal-observable composition recovery boot",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted exactly one new offline provider-free native composition recovery boot with no retry.",
+          "The attempt is accepted only as immutable fail-closed service-availability and cleanup evidence; the native effective-tool composition proof is rejected.",
+          "The successor is deterministic and provider-free and authorizes no native Harness process, agent, broker, model, provider, product, data, deployment, Pages or protected-ref movement."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-immutable-service-unavailable-native-attempt",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one consumed new native process, exact SERVICES_UNAVAILABLE terminal, reliable duration, zero prohibited calls and complete owned cleanup as immutable evidence."
+        },
+        {
+          "id": "reject-native-effective-tool-composition-recovery-proof",
+          "source": "docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md",
+          "status": "rejected",
+          "summary": "Reject the intended composition proof because the required agentPresets or tools service was unavailable before scope creation and guard entry."
+        },
+        {
+          "id": "accept-deterministic-required-service-injection-successor",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept a no-native-process successor that binds exact rc.7 service-injection semantics and constructs the required hmr, agentPresets and tools declaration before any separately frozen future execution."
+        }
+      ],
+      "claim_scope": [
+        "The exact rc.7 package materialised offline and six required installed packages matched 0.1.0-rc.7.",
+        "The single new native process retained exact sentinel/HMR readiness and entered the corrected runner.",
+        "The runner emitted the exact SERVICES_UNAVAILABLE terminal and EXIT_REQUESTED coordinate before exiting 2.",
+        "The finally-path native duration is reliably retained as 10025 ms.",
+        "No scope creation, guard entry, effective-tool terminal or edit/glob/read view occurred, so native composition remains unproved.",
+        "Network, agent-session, turn, broker, model, provider, occupied-worker, Docker and database counts are zero.",
+        "The controller waited for process absence and removed its exact disposable root."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-preexecution-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot_evidence.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_provider_free_no_database_admission.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/evidence.schema.json",
+          "scripts/deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-preexecution-runtime-state.json",
+          "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-preterminal-observable-composition-recovery-boot.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The native effective-tool composition proof did not pass and no occupied worker is eligible.",
+        "The exact unavailable service and rc.7 binding rule require deterministic resolution.",
+        "Both consumed native attempts are immutable and cannot be retried, resumed or reclassified.",
+        "A later native process requires a separately frozen successor after deterministic service-injection recovery acceptance.",
+        "No product, data, production, deployment, release, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Test the accepted preterminal observability design once inside the real provider-free rc.7 native lifecycle",
+      "outcome": "The new process reached the corrected runner and failed closed at exact SERVICES_UNAVAILABLE with reliable timing, zero prohibited calls and complete cleanup; native tool composition remains unproved.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/efficacy-reading.json",
+        "docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Preserve the exact service-availability terminal and resolve rc.7 required-service injection deterministically",
+      "why_now": "The observability repair worked: the retained coordinate proves the runner entered but agentPresets or tools was unavailable before scope creation, so service binding can be investigated without another native process.",
+      "outcome": "The consumed new attempt retained exact readiness, SERVICES_UNAVAILABLE, reliable 10025 ms duration, zero prohibited calls and complete cleanup; native composition remains unproved.",
+      "unlocks": [
+        "Exact offline inspection of rc.7 plugin and service-injection semantics.",
+        "A future runner/patch declaration that requires exactly hmr, agentPresets and tools.",
+        "A defensible later decision whether one separately named provider-free native execution is warranted."
+      ],
+      "does_not_solve": [
+        "No native effective-tool result, occupied worker or DeepSeek model-quality conclusion is accepted.",
+        "No same-attempt retry, resume, reclassification or automatic successor process is authorised.",
+        "No product, ordinary-practice, data, deployment, release, Pages or protected integration opens."
+      ],
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json",
+        "docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-sol-acceptance.md"
+      ],
+      "orientation_statement": "EMR4 will resolve the rc.7 required-service injection contract deterministically, without another native process, before considering any separately frozen recovery execution."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+      "active_tranche": "DeepSeek native Harness provider-free required-service injection recovery",
+      "objective": "Preserve both consumed native attempts unchanged, bind the exact rc.7 plugin and Cordis service-injection semantics, identify the missing agentPresets or tools availability rule, and construct an exact future runner/patch declaration for hmr, agentPresets and tools without starting a native Harness process, agent, broker, model or provider.",
+      "authority_source": "Yuri's standing uninterrupted-development authority plus the immutable SERVICES_UNAVAILABLE terminal and this bounded fail-closed closeout.",
+      "next_stage": "fresh_five_source_rehydration_and_freeze_no_native_process_required_service_injection_recovery_plan"
+    },
+    "incidents": [
+      {
+        "incident_id": "required_services_unavailable",
+        "source_id": "preterminal_observable_composition_recovery_boot_attempt_001",
+        "peers": []
+      }
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "read_only_preterminal_observable_recovery_boot_closeout_tick_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "preterminal_observable_recovery_boot_and_governance_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot_evidence.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_provider_free_no_database_admission.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "preterminal_observable_recovery_boot_closeout_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot_evidence.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "preterminal_observable_recovery_boot_closeout_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot_evidence.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "DeepSeek native Harness provider-free preterminal-observable composition recovery boot fail-closed acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/evidence.schema.json",
+      "scripts/deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+      "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+      "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot_evidence.py",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-preplanning-runtime-state.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-preexecution-runtime-state.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-preexecution-receipt.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/efficacy-reading.json",
+      "docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-preterminal-observable-composition-recovery-boot.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/closeout/closeout-intent.json"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_required_service_injection_recovery_only",
+    "no_native_harness_process_agent_session_turn_broker_model_provider_or_occupied_worker",
+    "both_consumed_native_attempts_immutable_no_retry_resume_or_reclassification",
+    "offline_exact_cache_only_no_registry_or_external_network",
+    "accepted_guard_and_preterminal_coordinate_vocabularies_remain_exact",
+    "no_attempt_004_retry_resume_reclassification_or_attempt_005_execution",
+    "no_docker_container_credential_postgresql_sql_transaction_or_database_execution",
+    "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}

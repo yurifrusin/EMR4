@@ -1,0 +1,65 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot",
+  "recorded_at": "2026-08-20T08:51:16.4963085+10:00",
+  "outcome": "accepted_immutable_fail_closed_service_availability_terminal_native_composition_not_accepted",
+  "deterministic_admission": {
+    "focused_test_count": 12,
+    "combined_provider_free_test_count": 97,
+    "postterminal_combined_governance_test_count": 170,
+    "combined_result": "pass",
+    "ruff_result": "pass",
+    "compile_result": "pass",
+    "cache_only_check_result": "pass",
+    "verified_cached_package_count": 4,
+    "native_processes_before_admission": 0,
+    "prelaunch_corrections": [
+      "One PowerShell file-inventory projection used an invalid empty pipeline and was rerun as a collected row array before any repository or execution mutation.",
+      "The implementation and focused-test digests were added to the frozen contract before execution so the terminal evidence could bind the exact controller candidate."
+    ]
+  },
+  "native_attempt": {
+    "attempt_id": "preterminal-observable-composition-recovery-boot-attempt-001",
+    "processes_started": 1,
+    "retries": 0,
+    "result": "fail",
+    "failure_classification": "SERVICES_UNAVAILABLE",
+    "offline_materialisation_duration_ms": 119731,
+    "native_launch_duration_ms": 10025,
+    "native_launch_duration_reliable": true,
+    "readiness_events": ["sentinel_activated", "stock_headless_hmr_ready"],
+    "activation_coordinates": [
+      "BOOTSTRAP_APPLY_ENTERED",
+      "SERVICES_UNAVAILABLE",
+      "EXIT_REQUESTED"
+    ],
+    "terminal_code": "SERVICES_UNAVAILABLE",
+    "effective_tool_view_observed": false,
+    "network_attempt_count": 0,
+    "agent_session_count": 0,
+    "broker_request_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "cleanup_complete": true
+  },
+  "control_efficacy": {
+    "separate_readiness_writer": "effective",
+    "separate_activation_writer": "effective",
+    "closed_preterminal_coordinate": "effective",
+    "finally_path_duration": "effective",
+    "one_process_no_retry_latch": "effective",
+    "offline_network_denial": "effective",
+    "exact_edit_glob_read_composition": "not_proved",
+    "interpretation": "The new clockwork-like observability controls converted the previous opaque zero-duration failure into an exact service-availability coordinate with reliable timing, while preserving zero provider cost and complete cleanup. The failure is therefore actionable without guessing or rerunning."
+  },
+  "parallelism": {
+    "deepseek_lane": "declined_provider_free_subject_no_model_call",
+    "gemini_lane": "not_eligible_without_passing_native_terminal",
+    "native_subagent_lane": "declined_serial_lifecycle_and_developer_policy"
+  },
+  "next_control": {
+    "operation_id": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+    "boundary": "Deterministically bind rc.7 service-injection semantics and construct an exact future runner/patch declaration for hmr, agentPresets and tools without starting another native Harness process, agent, broker, model or provider.",
+    "native_process_authorised": false
+  }
+}
