@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-002",
-  "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 002",
-  "objective": "Freeze and then execute exactly one separately named provider-free authored-synthetic disposable PostgreSQL attempt using the accepted relay-free transport and repaired lifecycle-admission harness, proving explicit rollback leaves zero effect and an incomplete terminal response releases neither success nor retry before restricted-role authoritative readback, with exact cleanup; stop fail-closed on any mismatch.",
-  "status": "blocked",
-  "source_head": "c216409f0fc9470117d6cf8dfef938f941f3b64e",
-  "authority_source": "Yuri's explicit confirmation of one new attempt, immutable attempt-001 failure and cleanup evidence, accepted relay-free transport, accepted restricted-role/forced-RLS floor and repaired harness source fc772085a02d7db790b938fb845ef4546156d31e.",
+  "operation_id": "raisa-provider-free-docker-created-state-profile-conformance-repair",
+  "active_tranche": "Raisa provider-free Docker Created-state profile conformance repair",
+  "objective": "Freeze and complete one provider-free no-credential Docker Created-state representation rehearsal: create one exact internal network and one exact never-started container, retain only sanitized structural evidence, clean both exactly, then correct and bind the relay-free harness's network-identity and credential-versus-ownership-nonce predicates without starting PostgreSQL or repeating a database attempt.",
+  "status": "in_progress",
+  "source_head": "d20a8eb2d41423c7c3746f70894c8c82ba512792",
+  "authority_source": "Yuri explicitly accepted Sol's recommended prerequisite and granted standing authority through this tranche's aim and onward under his usual uninterrupted-development authority; immutable attempt-002 failure and cleanup evidence remain the causal floor.",
   "checkpoint": {
-    "completed_stage": "The single authorised attempt-002 execution is consumed. It failed closed before PostgreSQL start on captured_network_id and secret_absent, released no success, made zero retries and produced zero ordinary/product effects. Failure SHA-256 7efb9853beee9723dbb01fac1f03c4392216bfcc15e9f490f4cb0baae08920ff and envelope SHA-256 6418ecf2e2356b6c875a70106136cdc65d6e545ead5fceeb2c793db45ebe2e40 are immutable; cleanup and binding restoration are verified with zero labelled residue.",
-    "next_executable_stage": null,
+    "completed_stage": "Attempt 002 is closed blocked with one consumed execution, zero PostgreSQL startup, zero credential delivery, zero retry, zero product effect and exact cleanup. Yuri selected the no-credential Created-state representation and predicate-correction successor.",
+    "next_executable_stage": "freeze_the_no_credential_created_state_representation_and_predicate_correction_plan_without_docker_execution",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 1
+      "verification": 0
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,29 +26,24 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": true,
-    "reason": "This plan cannot be rerun. Any further occupied attempt requires Yuri to authorise a separately frozen descendant after a provider-free no-credential Docker Created-state endpoint representation proof and correction of the contradictory ownership-nonce secret scan."
+    "required": false,
+    "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "Attempt 002 exhausted its exact one-run authority before PostgreSQL start. Its fail-closed evidence and cleanup are complete, but the intended rollback and unknown-response transaction proof was not achieved; the operation therefore closes blocked."
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_uniquely_named_disposable_local_postgresql_only",
-    "attempt_001_failure_and_cleanup_evidence_are_immutable_and_never_overwritten",
-    "accepted_relay_free_transport_and_runtime_role_tenant_isolation_floor_are_immutable",
-    "repaired_lifecycle_admission_source_fc772085a02d7db790b938fb845ef4546156d31e_is_the_attempt_002_floor",
-    "exactly_one_attempt_002_occupied_execution_after_new_plan_and_preexecution_admission",
-    "newly_frozen_authored_synthetic_transaction_fixture_and_output_namespace_only",
-    "no_host_tcp_listener_forwarder_docker_exec_byte_bridge_multiprocessing_process_or_queue",
-    "credential_input_only_by_post_inspection_attached_stdin_and_outcome_only_by_exact_terminal_oci_state",
-    "exact_request_command_idempotency_digest_and_audit_identity_must_be_preserved",
-    "explicit_rollback_must_leave_zero_effect",
-    "ambiguous_outcome_must_release_no_success_forbid_retry_and_require_restricted_authoritative_readback",
-    "forced_rls_tenant_isolation_no_duplicate_effect_and_zero_ordinary_admission_release_required",
-    "no_execution_before_frozen_plan_deterministic_admission_and_fresh_five_source_preexecution_receipt",
-    "exact_role_attachment_container_network_and_process_cleanup_required",
-    "no_local_env_live_secret_cloud_hosted_existing_or_product_database",
+    "provider_free_no_credential_docker_created_state_representation_only",
+    "attempt_002_failure_envelope_and_cleanup_evidence_are_immutable_and_never_overwritten",
+    "accepted_relay_free_transport_and_runtime_role_tenant_isolation_floor_remain_immutable_except_the_two_evidence_proven_profile_predicates",
+    "exactly_one_newly_named_internal_network_and_one_created_never_started_container_after_frozen_plan_and_preexecution_admission",
+    "container_start_attach_stdin_credential_delivery_postgresql_process_sql_transaction_and_database_retry_forbidden",
+    "sanitized_closed_structural_evidence_only_no_raw_docker_inspect_output_object_id_name_nonce_path_or_secret",
+    "credential_absence_and_ownership_nonce_presence_are_distinct_noncontradictory_predicates",
+    "network_identity_predicate_must_be_derived_only_from_observed_created_state_docker_29_5_3_representation",
+    "captured_id_only_cleanup_after_exact_ownership_reinspection_and_zero_labelled_residue",
+    "no_local_env_live_secret_cloud_hosted_existing_product_or_disposable_database",
     "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
     "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
     "no_generic_status_arrived_action_grammar_or_first_party_client_change",

@@ -1,0 +1,122 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 002",
+    "completed_stage": "The single authorised attempt-002 execution is consumed. It failed closed before PostgreSQL start on captured_network_id and secret_absent, released no success, made zero retries and produced zero ordinary/product effects. Failure SHA-256 7efb9853beee9723dbb01fac1f03c4392216bfcc15e9f490f4cb0baae08920ff and envelope SHA-256 6418ecf2e2356b6c875a70106136cdc65d6e545ead5fceeb2c793db45ebe2e40 are immutable; cleanup and binding restoration are verified with zero labelled residue.",
+    "next_executable_stage": null,
+    "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-002",
+    "resume_after_compaction": true,
+    "source_head": "c216409f0fc9470117d6cf8dfef938f941f3b64e",
+    "status": "blocked",
+    "terminal_handback_permitted": true,
+    "user_attention_required": true
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "d20a8eb2d41423c7c3746f70894c8c82ba512792",
+    "reason_codes": [],
+    "resolved_commit": "c216409f0fc9470117d6cf8dfef938f941f3b64e",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "c216409f0fc9470117d6cf8dfef938f941f3b64e"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "d20a8eb2d41423c7c3746f70894c8c82ba512792",
+    "branch_origin_aligned": false,
+    "head": "d20a8eb2d41423c7c3746f70894c8c82ba512792",
+    "origin_branch_commit": "b5afa75bfc759efa689d35cd06c5b330e4b7ed05",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 656
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "successor_user_decision_transition",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native DeepSeek Harness remains outside occupied EMR4 work until its separate stock-headless-to-custom-runner boot proof passes; Claude Code is no fallback and this single Docker representation lifecycle is not a safe separable worker package.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "A fresh Gemini 3.7 Flash/high exact-candidate veto is reserved only after deterministic tests and the one no-credential Created-state evidence run pass.",
+        "work_packages": [
+          "future_exact_candidate_read_only_created_state_profile_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive native delegation, and the disposable Docker lifecycle requires one cleanup owner.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-002",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "user_decision_published",
+      "plan_frozen",
+      "preexecution",
+      "verifier_acceptance",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "the clockwork must publish Yuri's successor choice before the new plan is frozen",
+      "one no-credential Created-state Docker lifecycle has one owner and exact cleanup",
+      "predicate correction follows sanitized representation evidence",
+      "Gemini reviews only one clean exact candidate after deterministic and occupied no-credential evidence pass"
+    ]
+  },
+  "planned_action": "publish_yuris_explicit_choice_of_a_provider_free_no_credential_docker_created_state_profile_conformance_repair_before_freezing_its_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal-threat-model-delta.md",
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-002-blocked-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-002-sol-blocked-assessment.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-002/rehearsal-failure-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-002/attempt-002-execution-envelope.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "Yuri explicitly accepted Sol's recommendation to proceed with only the narrow no-credential Docker Created-state representation and predicate-correction prerequisite, and granted standing authority to continue until this tranche's aim is reached and then into the next dependency-satisfied tranche under his usual uninterrupted-development authority. GPT Sol owns its clockwork transition, plan, single disposable Created-state lifecycle, cleanup, implementation and acceptance. Only a truly extraordinary, genuinely non-inferable or safety-critical fork requires renewed attention. DeepSeek is declined because the native Harness still requires a separately frozen stock-headless-to-custom-runner boot proof and Claude Code is not an authorised fallback. Gemini 3.7 Flash/high is reserved for a fresh exact-candidate read-only veto only after deterministic and occupied no-credential evidence pass. Native subagents are declined by developer policy and the one-Docker-lifecycle cleanup-owner constraint.",
+    "git_refs_and_worktree": "Task HEAD and local task branch are exact d20a8eb2d41423c7c3746f70894c8c82ba512792; origin task branch remains b5afa75bfc759efa689d35cd06c5b330e4b7ed05 and the local task branch is nineteen commits ahead. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked worktree is clean and docs/branding remains preserved and untracked.",
+    "live_handover_current_baton": "AGENTS.md was read completely at task HEAD d20a8eb2d41423c7c3746f70894c8c82ba512792. It preserves Continuity 335 / Compass 317, the accepted check-in and relay-free lineages, the single-owner clockwork regime, the paused native DeepSeek Harness allocation and the blocked attempt-002 boundary requiring a no-credential Created-state representation proof before any further occupied database attempt.",
+    "protected_evidence_boundaries": "The consumed attempt-002 failure and execution envelope remain immutable. This stage may only publish Yuri's explicit successor choice and freeze a separate provider-free no-credential Docker Created-state representation and predicate-correction plan. It authorises one Created-state container/network lifecycle only after planning, never container start, PostgreSQL startup, credential delivery, attachment, SQL, transaction or database retry. It authorises no product/API/OpenAPI/GraphQL/config/client change, ordinary-practice enablement, feature-flag or allowlist change, generic-status Arrived, grammar, waiting-area movement, product/patient/clinical/protected data, provider call, production, deployment, release, Pages or protected-ref movement. docs/branding and all unrelated untracked files remain excluded; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": false
+}
