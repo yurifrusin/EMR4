@@ -311,6 +311,26 @@ def _source_bytes(
     }
 
 
+def _canonical_paths_match_source(
+    repo_root: Path, contract: dict[str, Any], source: str
+) -> bool:
+    result = subprocess.run(
+        [
+            "git",
+            "diff",
+            "--quiet",
+            source,
+            "--",
+            *contract["canonical_paths"].values(),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+    )
+    if result.returncode not in {0, 1}:
+        _reject("git_diff_read")
+    return result.returncode == 0
+
+
 def _replace_table_row(text: str, label: str, value: str) -> str:
     prefix = f"| {label} |"
     matches = [line for line in text.splitlines() if line.startswith(prefix)]
@@ -374,7 +394,7 @@ def build_generation(
     source = _assert_git_state(repo_root, contract)
     current = _canonical_bytes(repo_root, contract)
     previous = _source_bytes(repo_root, contract, source)
-    if current != previous:
+    if not _canonical_paths_match_source(repo_root, contract, source):
         _reject("canonical_not_at_source")
     graph = json.loads(current["continuity"].decode("utf-8"))
     compass = json.loads(current["compass"].decode("utf-8"))
@@ -639,7 +659,9 @@ def publish_live_generation(
     metadata_targets = {name: root / name for name in metadata_values}
     original_canonical = {key: path.read_bytes() for key, path in canonical_targets.items()}
     previous_source = _source_bytes(repo_root, contract, prepared["source_commit"])
-    if original_canonical != previous_source:
+    if not _canonical_paths_match_source(
+        repo_root, contract, prepared["source_commit"]
+    ):
         lease_path.unlink(missing_ok=True)
         _reject("stale_canonical_generation")
     original_metadata = {
