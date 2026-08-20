@@ -1,0 +1,254 @@
+{
+  "artifact_roles": {
+    "contract": "contract.json",
+    "contract_schema": "contract.schema.json",
+    "diagnostic_schema": "server-post-readiness.schema.json",
+    "efficacy_reading": "efficacy-reading.json",
+    "evidence_schema": "evidence.schema.json",
+    "native_probe_consumed": "native-probe-consumed.json",
+    "native_probe_terminal": "native-probe-terminal.json",
+    "repair_evidence": "repair-evidence.json",
+    "repair_report": "repair-report.md"
+  },
+  "baseline_blob_bindings": [
+    {
+      "path": "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+      "sha256": "62a18d9ce2a29eb417f491c8ce341416f03183375f042f8c41bcb1f4674df77c"
+    },
+    {
+      "path": "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+      "sha256": "aaa9d1d5851742f757869919d610d610afd91678f5882fb066a82b1eb23a0d3f"
+    }
+  ],
+  "baseline_source": "2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd",
+  "checkpoint_templates": {
+    "deterministic_ready": "Deterministic lifecycle gate passed for {test_count} selected test files."
+  },
+  "closed_boundaries": {
+    "attempt_006_executed": false,
+    "database_or_docker_executed": false,
+    "deepseek_or_other_model_called": false,
+    "ordinary_practice_enabled": false,
+    "product_api_config_or_client_changed": false,
+    "product_patient_or_clinical_data_used": false,
+    "production_deployment_release_or_pages": false,
+    "protected_ref_moved": false
+  },
+  "command_manifest": {
+    "commands": [
+      {
+        "argv": [
+          ".venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py"
+        ],
+        "id": "PF_CHECK_IN_LIFECYCLE_REPAIR"
+      }
+    ],
+    "schema_version": "ariadne.verifier-command-manifest.v1"
+  },
+  "dependency_manifest": {
+    "commands": [
+      {
+        "command_id": "PF_CHECK_IN_LIFECYCLE_REPAIR",
+        "required_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/contract.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/evidence.schema.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/server-post-readiness.schema.json",
+          "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+        ],
+        "test_paths": [
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py"
+        ]
+      }
+    ],
+    "schema_version": "ariadne.test-dependency-manifest.v1"
+  },
+  "git_sources": [
+    {
+      "commit": "2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd",
+      "role": "baseline"
+    },
+    {
+      "commit": "d62ecb97f9d0a844d0021235cf8f067bfb925a78",
+      "role": "frozen_plan"
+    },
+    {
+      "commit": "905184b76f576006232fcfdc78da71d98fcf0ca0",
+      "role": "attempt_005_execution"
+    },
+    {
+      "commit": "03b94136c9c6cd82d5a8098705f263ba34a20de4",
+      "role": "attempt_005_closeout"
+    },
+    {
+      "commit": "f9a4ede953cc496e9b778a6162d77dc7e73121df",
+      "role": "complete_composition_clockwork"
+    },
+    {
+      "commit": "6ef058b87a2c927efd9d9d2027b59d6ad279fec5",
+      "role": "complete_composition_candidate"
+    }
+  ],
+  "immutable_bindings": [
+    {
+      "path": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/rehearsal-failure-evidence.json",
+      "sha256": "a9e6331471dadc06ddc1fc7f5f6e9510a231fa7cd3a0fc748495f8c9794bb887"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/attempt-005-execution-envelope.json",
+      "sha256": "dedfcbf008ea11c9dac9241a59c900582f5ca82a1de003bcd9f740409c0bbb54"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json",
+      "sha256": "daf1bccfd8fbd1ca005be68cb1ac0eecaa30fd2a34236e9ce543a1f9c0e0ae14"
+    },
+    {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/provider-free-complete-composition-native-boot-evidence.json",
+      "sha256": "9ba784b0726addb5644ac3786def410aed56e5bf9da3e23ec21d8e10f6ba1ea0"
+    }
+  ],
+  "native_installation": {
+    "installation_id": "deepseek-check-in-attachment-observability-native-001",
+    "method_sources": [
+      {
+        "id": "agent_registry",
+        "relative_path": "node_modules/@deepseek-ai/dsh-agent/lib/index.js",
+        "required_fragments": [
+          {
+            "count": 1,
+            "id": "create_method",
+            "text": "async create(options) {"
+          },
+          {
+            "count": 1,
+            "id": "factory_delegation",
+            "text": "Reflect.apply(target.createAgent"
+          }
+        ],
+        "sha256": "e7e40c5ca66d9827a5084c5c0c68983f9685842bb9b6d604803d4cb4642bb263"
+      },
+      {
+        "id": "agent_loop",
+        "relative_path": "node_modules/@deepseek-ai/dsh-agent-loop/lib/index.js",
+        "required_fragments": [
+          {
+            "count": 1,
+            "id": "factory_create",
+            "text": "async createAgent(ownerCtx, options) {"
+          },
+          {
+            "count": 1,
+            "id": "setup_awaited_before_publish",
+            "text": "(await raceAbort(setup?.(prepared.agent.ctx)"
+          },
+          {
+            "count": 1,
+            "id": "publish_after_setup",
+            "text": "return prepared.publish(source);"
+          }
+        ],
+        "sha256": "bf8ca1e9b05e9b78320a5e2f0b4e25395eba91dd72db6d3cb5626e3dfb529204"
+      },
+      {
+        "id": "agent_presets",
+        "relative_path": "node_modules/@deepseek-ai/dsh-agent-presets/lib/index.js",
+        "required_fragments": [
+          {
+            "count": 1,
+            "id": "resolution_method",
+            "text": "async resolveMountable(id) {"
+          },
+          {
+            "count": 1,
+            "id": "mount_method",
+            "text": "async mount(agentCtx, id) {"
+          },
+          {
+            "count": 2,
+            "id": "standing_method_call",
+            "text": "const standing = await this.ensureStanding(preset);"
+          },
+          {
+            "count": 3,
+            "id": "scope_binding_call",
+            "text": "this.bindings.set(agentKey, bindScopeParent(agentKey, standing.key));"
+          },
+          {
+            "count": 1,
+            "id": "binding_registry",
+            "text": "bindings = /* @__PURE__ */ new WeakMap();"
+          }
+        ],
+        "sha256": "a0b417514e3d285ad5fef74867e8049af333ebdec6e4d7639e388aa0903e0039"
+      }
+    ],
+    "package_lock_sha256": "a89defcd8a2c5aae4a54c03bda98e2585711fce881b4b08c90ca4808d45555f4",
+    "packages": [
+      "@deepseek-ai/dsh",
+      "@deepseek-ai/dsh-agent",
+      "@deepseek-ai/dsh-agent-loop",
+      "@deepseek-ai/dsh-agent-presets",
+      "@deepseek-ai/dsh-scope",
+      "@deepseek-ai/dsh-tools"
+    ]
+  },
+  "native_probe": {
+    "attempt_id": "check-in-lifecycle-native-mount-probe-001",
+    "expected_tools": [
+      "edit",
+      "glob",
+      "read"
+    ],
+    "instrumentation_unavailable_coordinate": "PRESET_SUBSTAGE_INSTRUMENTATION_UNAVAILABLE",
+    "native_process_limit": 1,
+    "preset_bytes": 158,
+    "preset_id": "emr4-bounded-worker",
+    "preset_sha256": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1",
+    "provider_enabled": false,
+    "retry_limit": 0,
+    "success_markers": [
+      "PRESET_DISCOVERY_ENTERED",
+      "PRESET_DISCOVERY_PASSED",
+      "PRESET_VALIDATION_PASSED",
+      "AGENTS_CREATE_ENTERED",
+      "AGENT_SETUP_ENTERED",
+      "PRESET_RESOLUTION_ENTERED",
+      "PRESET_RESOLUTION_PASSED",
+      "PRESET_STANDING_ENTERED",
+      "PRESET_STANDING_PASSED",
+      "PRESET_SCOPE_BINDING_ENTERED",
+      "PRESET_SCOPE_BINDING_PASSED",
+      "EFFECTIVE_TOOL_VIEW_PASSED",
+      "AGENT_CREATED_PROVIDER_DISABLED",
+      "AGENT_DISPOSED"
+    ]
+  },
+  "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+  "plan_source": "d62ecb97f9d0a844d0021235cf8f067bfb925a78",
+  "protected_source": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+  "schema_version": "emr4.check-in-lifecycle-conformance-repair-contract.v1",
+  "tracked_paths": [
+    "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-plan.md",
+    "docs/security/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-threat-model-delta.md",
+    "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/contract.json",
+    "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/contract.schema.json",
+    "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/evidence.schema.json",
+    "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/server-post-readiness.schema.json",
+    "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+    "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+    "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+    "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+    "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+  ]
+}

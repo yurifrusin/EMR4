@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_roles": {"type": "object"},
+    "baseline_blob_bindings": {"$ref": "#/$defs/bindings"},
+    "baseline_source": {"$ref": "#/$defs/hex40"},
+    "checkpoint_templates": {
+      "additionalProperties": false,
+      "properties": {"deterministic_ready": {"maxLength": 160, "minLength": 1, "type": "string"}},
+      "required": ["deterministic_ready"],
+      "type": "object"
+    },
+    "closed_boundaries": {
+      "additionalProperties": {"const": false},
+      "minProperties": 8,
+      "type": "object"
+    },
+    "command_manifest": {"type": "object"},
+    "dependency_manifest": {"type": "object"},
+    "git_sources": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {"commit": {"$ref": "#/$defs/hex40"}, "role": {"pattern": "^[a-z0-9_]+$", "type": "string"}},
+        "required": ["commit", "role"],
+        "type": "object"
+      },
+      "minItems": 6,
+      "type": "array"
+    },
+    "immutable_bindings": {"$ref": "#/$defs/bindings"},
+    "native_installation": {"type": "object"},
+    "native_probe": {"type": "object"},
+    "operation_id": {"const": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair"},
+    "plan_source": {"$ref": "#/$defs/hex40"},
+    "protected_source": {"$ref": "#/$defs/hex40"},
+    "schema_version": {"const": "emr4.check-in-lifecycle-conformance-repair-contract.v1"},
+    "tracked_paths": {"items": {"pattern": "^[a-z0-9_./-]+$", "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true}
+  },
+  "required": [
+    "schema_version",
+    "operation_id",
+    "plan_source",
+    "baseline_source",
+    "protected_source",
+    "git_sources",
+    "immutable_bindings",
+    "baseline_blob_bindings",
+    "native_installation",
+    "native_probe",
+    "command_manifest",
+    "dependency_manifest",
+    "checkpoint_templates",
+    "artifact_roles",
+    "tracked_paths",
+    "closed_boundaries"
+  ],
+  "type": "object",
+  "$defs": {
+    "bindings": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {"path": {"minLength": 1, "type": "string"}, "sha256": {"$ref": "#/$defs/hex64"}},
+        "required": ["path", "sha256"],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "hex40": {"pattern": "^[0-9a-f]{40}$", "type": "string"},
+    "hex64": {"pattern": "^[0-9a-f]{64}$", "type": "string"}
+  }
+}

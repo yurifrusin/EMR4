@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {"$ref": "#/$defs/native_terminal"},
+    {"$ref": "#/$defs/repair_evidence"}
+  ],
+  "$defs": {
+    "closed_boundaries": {
+      "additionalProperties": {"const": false},
+      "minProperties": 8,
+      "type": "object"
+    },
+    "hex40": {"pattern": "^[0-9a-f]{40}$", "type": "string"},
+    "hex64": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "native_terminal": {
+      "additionalProperties": false,
+      "properties": {
+        "attempt_id": {"const": "check-in-lifecycle-native-mount-probe-001"},
+        "cleanup": {
+          "additionalProperties": false,
+          "properties": {"disposable_root_absent": {"type": "boolean"}, "process_absent": {"type": "boolean"}},
+          "required": ["process_absent", "disposable_root_absent"],
+          "type": "object"
+        },
+        "counts": {
+          "additionalProperties": false,
+          "properties": {
+            "agent_sessions": {"maximum": 1, "minimum": 0, "type": "integer"},
+            "automatic_retries": {"const": 0},
+            "broker_requests": {"const": 0},
+            "database_invocations": {"const": 0},
+            "docker_invocations": {"const": 0},
+            "model_requests": {"const": 0},
+            "native_processes": {"maximum": 1, "minimum": 0, "type": "integer"},
+            "network_attempts": {"minimum": 0, "type": "integer"},
+            "provider_requests": {"const": 0},
+            "turns": {"const": 0}
+          },
+          "required": ["native_processes", "automatic_retries", "agent_sessions", "turns", "broker_requests", "model_requests", "provider_requests", "network_attempts", "docker_invocations", "database_invocations"],
+          "type": "object"
+        },
+        "effective_tool_names": {"items": {"enum": ["edit", "glob", "read"]}, "maxItems": 3, "type": "array", "uniqueItems": true},
+        "launch": {
+          "additionalProperties": false,
+          "properties": {
+            "credential_environment_names_removed_count": {"minimum": 0, "type": "integer"},
+            "duration_ms": {"anyOf": [{"minimum": 0, "type": "integer"}, {"type": "null"}]},
+            "exit_code": {"type": ["integer", "null"]},
+            "raw_logs_retained": {"const": false},
+            "stderr_bytes": {"minimum": 0, "type": "integer"},
+            "stderr_sha256": {"$ref": "#/$defs/hex64"},
+            "stdout_bytes": {"minimum": 0, "type": "integer"},
+            "stdout_sha256": {"$ref": "#/$defs/hex64"}
+          },
+          "required": ["exit_code", "duration_ms", "stdout_sha256", "stdout_bytes", "stderr_sha256", "stderr_bytes", "raw_logs_retained", "credential_environment_names_removed_count"],
+          "type": "object"
+        },
+        "markers": {"items": {"pattern": "^[A-Z0-9_]+$", "type": "string"}, "maxItems": 14, "type": "array", "uniqueItems": true},
+        "operation_id": {"const": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair"},
+        "package": {
+          "additionalProperties": false,
+          "properties": {
+            "installation_id": {"const": "deepseek-check-in-attachment-observability-native-001"},
+            "name": {"const": "@deepseek-ai/dsh"},
+            "package_lock_sha256": {"$ref": "#/$defs/hex64"},
+            "version": {"const": "0.1.0-rc.7"}
+          },
+          "required": ["name", "version", "installation_id", "package_lock_sha256"],
+          "type": "object"
+        },
+        "result": {"enum": ["pass", "failed_closed"]},
+        "schema_version": {"const": "emr4.check-in-lifecycle-native-probe-terminal.v1"},
+        "terminal_coordinate": {"pattern": "^[A-Z0-9_]+$", "type": "string"}
+      },
+      "required": ["schema_version", "operation_id", "attempt_id", "result", "terminal_coordinate", "markers", "effective_tool_names", "package", "counts", "launch", "cleanup"],
+      "type": "object"
+    },
+    "repair_evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "closed_boundaries": {"$ref": "#/$defs/closed_boundaries"},
+        "git_bindings": {"additionalProperties": {"$ref": "#/$defs/hex40"}, "minProperties": 6, "type": "object"},
+        "historical_evidence_unchanged": {"const": true},
+        "native_probe": {"$ref": "#/$defs/native_terminal"},
+        "operation_id": {"const": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair"},
+        "plan_source": {"$ref": "#/$defs/hex40"},
+        "result": {"enum": ["raisa_provider_free_check_in_server_post_readiness_exit_state_and_stdin_lifecycle_conformance_repair_pass", "failed_closed"]},
+        "schema_version": {"const": "emr4.check-in-lifecycle-conformance-repair-evidence.v1"},
+        "server_lifecycle": {"type": "object"},
+        "source_head": {"$ref": "#/$defs/hex40"},
+        "workflow_readings": {"type": "object"}
+      },
+      "required": ["schema_version", "operation_id", "result", "source_head", "plan_source", "git_bindings", "server_lifecycle", "workflow_readings", "native_probe", "historical_evidence_unchanged", "closed_boundaries"],
+      "type": "object"
+    }
+  }
+}

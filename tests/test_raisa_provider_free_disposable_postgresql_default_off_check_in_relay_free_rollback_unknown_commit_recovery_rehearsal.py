@@ -16,16 +16,44 @@ from scripts import (
 ROOT = Path(__file__).resolve().parents[1]
 
 
+class FakeStdin:
+    def __init__(self, *, closed: bool = False) -> None:
+        self.closed = closed
+        self.writes: list[bytes] = []
+        self.flush_count = 0
+        self.close_count = 0
+
+    def write(self, payload: bytes) -> int:
+        self.writes.append(payload)
+        return len(payload)
+
+    def flush(self) -> None:
+        self.flush_count += 1
+
+    def close(self) -> None:
+        if not self.closed:
+            self.close_count += 1
+            self.closed = True
+
+
 class FakeAttachment:
-    def __init__(self, *, terminate_completes: bool = True) -> None:
+    def __init__(
+        self,
+        *,
+        terminate_completes: bool = True,
+        stdin: object | None = None,
+        return_code: int = 0,
+    ) -> None:
         self.running = True
         self.terminate_completes = terminate_completes
+        self.stdin = FakeStdin() if stdin is None else stdin
+        self.return_code = return_code
         self.terminate_count = 0
         self.kill_count = 0
         self.wait_count = 0
 
     def poll(self) -> int | None:
-        return None if self.running else 0
+        return None if self.running else self.return_code
 
     def terminate(self) -> None:
         self.terminate_count += 1
@@ -41,7 +69,7 @@ class FakeAttachment:
         self.wait_count += 1
         if self.running:
             raise harness.subprocess.TimeoutExpired("fake-attachment", 5)
-        return 0
+        return self.return_code
 
 
 @pytest.fixture
@@ -423,6 +451,114 @@ def test_cleanup_error_never_overwrites_primary_coordinate() -> None:
     assert failure["stage"] == "environment"
     assert failure["code"] == "server_profile_mismatch_cleaned"
     assert failure["failed_predicates"] == ["server_tmpfs"]
+    assert failure["server_post_readiness"] is None
+
+
+def test_start_attached_writes_flushes_and_leaves_stdin_open(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    attachment = FakeAttachment()
+    monkeypatch.setattr(harness.subprocess, "Popen", lambda *_, **__: attachment)
+    observed = harness._start_attached(
+        "docker.exe", "c" * 64, ("first", "second")
+    )
+    assert observed is attachment
+    assert attachment.stdin.writes == [b"first\nsecond\n"]
+    assert attachment.stdin.flush_count == 1
+    assert attachment.stdin.closed is False
+    assert attachment.stdin.close_count == 0
+
+
+@pytest.mark.parametrize("stdin_state", ["open", "closed", "missing", "malformed"])
+def test_stop_attachment_is_the_close_once_and_bounded_teardown_owner(
+    stdin_state: str,
+) -> None:
+    attachment = FakeAttachment(terminate_completes=False)
+    stdin = attachment.stdin
+    if stdin_state == "closed":
+        stdin.closed = True
+    elif stdin_state == "missing":
+        attachment.stdin = None
+    elif stdin_state == "malformed":
+        attachment.stdin = object()
+    assert harness._stop_attachment(attachment)
+    assert attachment.terminate_count == 1
+    assert attachment.kill_count == 1
+    assert attachment.wait_count == 2
+    assert stdin.close_count == (1 if stdin_state == "open" else 0)
+
+
+def test_stop_attachment_closes_stdin_even_when_child_already_exited() -> None:
+    attachment = FakeAttachment()
+    attachment.running = False
+    stdin = attachment.stdin
+    assert harness._stop_attachment(attachment)
+    assert stdin.close_count == 1
+    assert attachment.terminate_count == 0
+    assert attachment.kill_count == 0
+    assert attachment.wait_count == 0
+
+
+def test_canonical_post_readiness_projection_is_closed_and_sanitized() -> None:
+    attachment = FakeAttachment()
+    row = {
+        "Id": "secret-container-id",
+        "RestartCount": 2,
+        "State": {
+            "Status": "exited",
+            "Running": False,
+            "ExitCode": 1,
+            "OOMKilled": False,
+            "Error": "sensitive raw daemon detail",
+        },
+    }
+    projection = harness._server_post_readiness_projection(row, attachment)
+    assert projection == {
+        "projection_valid": True,
+        "status": "exited",
+        "running": False,
+        "exit_code": 1,
+        "oom_killed": False,
+        "state_error_empty": False,
+        "restart_count": 2,
+        "attachment_process": "running",
+        "attachment_stdin": "open_after_delivery",
+    }
+    serialized = json.dumps(projection)
+    assert "secret-container-id" not in serialized
+    assert "sensitive raw daemon detail" not in serialized
+
+
+@pytest.mark.parametrize(
+    ("mutation", "field", "collapsed"),
+    [
+        (("State", "Status", "future"), "status", "unknown"),
+        (("State", "Running", "false"), "running", None),
+        (("State", "ExitCode", 256), "exit_code", None),
+        (("State", "OOMKilled", 0), "oom_killed", None),
+        (("State", "Error", None), "state_error_empty", None),
+        ((None, "RestartCount", -1), "restart_count", None),
+    ],
+)
+def test_malformed_post_readiness_values_collapse_fail_closed(
+    mutation: tuple[str | None, str, object], field: str, collapsed: object
+) -> None:
+    row = {
+        "RestartCount": 0,
+        "State": {
+            "Status": "exited",
+            "Running": False,
+            "ExitCode": 1,
+            "OOMKilled": False,
+            "Error": "",
+        },
+    }
+    parent, key, value = mutation
+    target = row if parent is None else row[parent]
+    target[key] = value
+    projection = harness._server_post_readiness_projection(row, FakeAttachment())
+    assert projection["projection_valid"] is False
+    assert projection[field] == collapsed
 
 
 @pytest.mark.parametrize(
@@ -449,6 +585,7 @@ def test_post_readiness_running_failure_is_distinct_and_has_no_detail(
         try:
             harness._verify_server_after_readiness(
                 "docker.exe",
+                attachment=attachment,
                 container_id="c" * 64,
                 container_name="server",
                 network_name="network",
@@ -462,9 +599,14 @@ def test_post_readiness_running_failure_is_distinct_and_has_no_detail(
     assert caught.value.stage == "environment"
     assert caught.value.code == "server_not_running_after_readiness"
     assert caught.value.detail is None
+    assert caught.value.server_post_readiness is not None
+    assert caught.value.server_post_readiness["attachment_stdin"] == (
+        "open_after_delivery"
+    )
     assert attachment.terminate_count == 1
     assert attachment.kill_count == 0
     assert attachment.wait_count == 1
+    assert attachment.stdin.close_count == 1
 
 
 def test_post_readiness_identity_failure_retains_only_sorted_predicate_names(
@@ -486,6 +628,7 @@ def test_post_readiness_identity_failure_retains_only_sorted_predicate_names(
         try:
             harness._verify_server_after_readiness(
                 "docker.exe",
+                attachment=attachment,
                 container_id="c" * 64,
                 container_name="server",
                 network_name="network",
@@ -521,6 +664,7 @@ def test_post_readiness_malformed_identity_retains_only_inspect_shape(
         try:
             harness._verify_server_after_readiness(
                 "docker.exe",
+                attachment=attachment,
                 container_id="c" * 64,
                 container_name="server",
                 network_name="network",
@@ -559,6 +703,7 @@ def test_attachment_stays_live_through_post_readiness_and_next_sidecar_stage(
     try:
         row = harness._verify_server_after_readiness(
             "docker.exe",
+            attachment=attachment,
             container_id="c" * 64,
             container_name="server",
             network_name="network",

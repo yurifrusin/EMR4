@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "attachment_process": {"enum": ["running", "exited_zero", "exited_nonzero", "unreadable"]},
+    "attachment_stdin": {"enum": ["open_after_delivery", "closed_before_verification", "missing", "unreadable"]},
+    "exit_code": {"anyOf": [{"maximum": 255, "minimum": 0, "type": "integer"}, {"type": "null"}]},
+    "oom_killed": {"type": ["boolean", "null"]},
+    "projection_valid": {"type": "boolean"},
+    "restart_count": {"anyOf": [{"maximum": 1000000, "minimum": 0, "type": "integer"}, {"type": "null"}]},
+    "running": {"type": ["boolean", "null"]},
+    "state_error_empty": {"type": ["boolean", "null"]},
+    "status": {"enum": ["created", "running", "restarting", "removing", "paused", "exited", "dead", "unknown"]}
+  },
+  "required": ["projection_valid", "status", "running", "exit_code", "oom_killed", "state_error_empty", "restart_count", "attachment_process", "attachment_stdin"],
+  "type": "object"
+}

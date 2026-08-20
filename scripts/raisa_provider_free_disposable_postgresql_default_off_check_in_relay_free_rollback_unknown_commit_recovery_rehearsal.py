@@ -79,15 +79,34 @@ FORBIDDEN_EVIDENCE_KEYS = {
 
 
 class RehearsalFailure(RuntimeError):
-    def __init__(self, stage: str, code: str, detail: str | None = None) -> None:
+    def __init__(
+        self,
+        stage: str,
+        code: str,
+        detail: str | None = None,
+        *,
+        server_post_readiness: dict[str, Any] | None = None,
+    ) -> None:
         self.stage = stage
         self.code = code
         self.detail = detail
+        self.server_post_readiness = server_post_readiness
         super().__init__(f"{stage}:{code}")
 
 
-def _fail(stage: str, code: str, detail: str | None = None) -> NoReturn:
-    raise RehearsalFailure(stage, code, detail)
+def _fail(
+    stage: str,
+    code: str,
+    detail: str | None = None,
+    *,
+    server_post_readiness: dict[str, Any] | None = None,
+) -> NoReturn:
+    raise RehearsalFailure(
+        stage,
+        code,
+        detail,
+        server_post_readiness=server_post_readiness,
+    )
 
 
 def _canonical_source_bytes(path: Path) -> bytes:
@@ -1424,9 +1443,126 @@ def _container_matches(
     return all(predicates.values())
 
 
+_SERVER_STATUSES = {
+    "created",
+    "running",
+    "restarting",
+    "removing",
+    "paused",
+    "exited",
+    "dead",
+}
+
+
+def _server_post_readiness_projection(
+    row: object,
+    attachment: object,
+) -> dict[str, Any]:
+    valid = True
+    state: dict[str, Any]
+    if isinstance(row, dict) and isinstance(row.get("State"), dict):
+        state = row["State"]
+    else:
+        state = {}
+        valid = False
+
+    raw_status = state.get("Status")
+    if isinstance(raw_status, str) and raw_status in _SERVER_STATUSES:
+        status = raw_status
+    else:
+        status = "unknown"
+        valid = False
+
+    raw_running = state.get("Running")
+    if isinstance(raw_running, bool):
+        running: bool | None = raw_running
+    else:
+        running = None
+        valid = False
+
+    raw_exit_code = state.get("ExitCode")
+    if (
+        isinstance(raw_exit_code, int)
+        and not isinstance(raw_exit_code, bool)
+        and 0 <= raw_exit_code <= 255
+    ):
+        exit_code: int | None = raw_exit_code
+    else:
+        exit_code = None
+        valid = False
+
+    raw_oom_killed = state.get("OOMKilled")
+    if isinstance(raw_oom_killed, bool):
+        oom_killed: bool | None = raw_oom_killed
+    else:
+        oom_killed = None
+        valid = False
+
+    raw_error = state.get("Error")
+    if isinstance(raw_error, str):
+        state_error_empty: bool | None = raw_error == ""
+    else:
+        state_error_empty = None
+        valid = False
+
+    raw_restart_count = row.get("RestartCount") if isinstance(row, dict) else None
+    if (
+        isinstance(raw_restart_count, int)
+        and not isinstance(raw_restart_count, bool)
+        and 0 <= raw_restart_count <= 1_000_000
+    ):
+        restart_count: int | None = raw_restart_count
+    else:
+        restart_count = None
+        valid = False
+
+    try:
+        return_code = attachment.poll()
+        if return_code is None:
+            attachment_process = "running"
+        elif isinstance(return_code, int) and not isinstance(return_code, bool):
+            attachment_process = (
+                "exited_zero" if return_code == 0 else "exited_nonzero"
+            )
+        else:
+            attachment_process = "unreadable"
+            valid = False
+    except Exception:
+        attachment_process = "unreadable"
+        valid = False
+
+    try:
+        stdin = attachment.stdin
+        if stdin is None:
+            attachment_stdin = "missing"
+        elif stdin.closed is False:
+            attachment_stdin = "open_after_delivery"
+        elif stdin.closed is True:
+            attachment_stdin = "closed_before_verification"
+        else:
+            attachment_stdin = "unreadable"
+            valid = False
+    except Exception:
+        attachment_stdin = "unreadable"
+        valid = False
+
+    return {
+        "projection_valid": valid,
+        "status": status,
+        "running": running,
+        "exit_code": exit_code,
+        "oom_killed": oom_killed,
+        "state_error_empty": state_error_empty,
+        "restart_count": restart_count,
+        "attachment_process": attachment_process,
+        "attachment_stdin": attachment_stdin,
+    }
+
+
 def _verify_server_after_readiness(
     executable: str,
     *,
+    attachment: subprocess.Popen[bytes],
     container_id: str,
     container_name: str,
     network_name: str,
@@ -1437,7 +1573,11 @@ def _verify_server_after_readiness(
 ) -> dict[str, Any]:
     row = _inspect_container(executable, container_id)
     if row.get("State", {}).get("Running") is not True:
-        _fail("environment", "server_not_running_after_readiness")
+        _fail(
+            "environment",
+            "server_not_running_after_readiness",
+            server_post_readiness=_server_post_readiness_projection(row, attachment),
+        )
     predicates = _container_profile_predicates(
         row,
         container_id=container_id,
@@ -1733,13 +1873,18 @@ def _start_attached(
     payload = "".join(f"{line}\n" for line in credential_lines).encode("ascii")
     attachment.stdin.write(payload)
     attachment.stdin.flush()
-    attachment.stdin.close()
     return attachment
 
 
 def _stop_attachment(attachment: subprocess.Popen[bytes] | None) -> bool:
     if attachment is None:
         return True
+    try:
+        stdin = attachment.stdin
+        if stdin is not None and stdin.closed is False:
+            stdin.close()
+    except Exception:
+        pass
     if attachment.poll() is None:
         attachment.terminate()
         try:
@@ -1968,6 +2113,7 @@ def _failure_evidence(
         "stage": error.stage,
         "code": error.code,
         "failed_predicates": failed_predicates,
+        "server_post_readiness": error.server_post_readiness,
         "evidence_label": EVIDENCE_LABEL,
         "plan_source": PLAN_SOURCE,
         "lifecycle": lifecycle,
@@ -2096,6 +2242,7 @@ def run_rehearsal() -> tuple[dict[str, Any], dict[str, Any] | None]:
         sidecar_count += 1
         _verify_server_after_readiness(
             executable,
+            attachment=server_attachment,
             container_id=server_id,
             container_name=server_name,
             network_name=network_name,
