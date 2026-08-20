@@ -1,12 +1,12 @@
 {
   "schema_version": "ariadne.orchestrator_runtime_state.v1",
-  "continuation_event": "pre_commit",
-  "planned_action": "commit_the_deterministically_passing_provider_disabled_pre_hmr_startup_terminal_candidate_with_explicit_paths_only",
+  "continuation_event": "pre_push",
+  "planned_action": "push_the_committed_provider_disabled_pre_hmr_startup_terminal_candidate_to_the_task_branch_only",
   "context_health": {
     "agent_contexts": [
       {
         "agent_id": "orchestrator",
-        "measurement_source": "fresh complete five-source rehydration retained through provider-disabled candidate build, hostile tests, exact attempt immutability, static validation, lint and compilation",
+        "measurement_source": "fresh complete five-source rehydration retained through provider-disabled candidate commit, hostile tests, exact attempt immutability, static validation, lint and compilation",
         "rehydrated_from_receipt": true,
         "rehydration_sources": [
           "live_handover_current_baton",
@@ -88,7 +88,7 @@
   "parallelism_assessment": {
     "schema_version": "ariadne.parallelism_assessment.v1",
     "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
-    "assessed_stage": "provider_disabled_candidate_precommit",
+    "assessed_stage": "provider_disabled_candidate_prepush",
     "lanes": [
       {
         "lane_id": "deepseek_flash",
@@ -116,7 +116,7 @@
     "serial_constraints": [
       "classification and validation before controller binding",
       "terminal validation before raw-stream deletion",
-      "hostile deterministic fixtures before candidate commit"
+      "hostile deterministic fixtures before task-branch push"
     ],
     "reassessment_triggers": [
       "provider_disabled_recovery_closeout"

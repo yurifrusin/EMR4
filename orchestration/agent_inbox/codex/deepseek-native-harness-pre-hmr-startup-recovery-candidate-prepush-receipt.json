@@ -1,0 +1,120 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free pre-HMR startup-failure classification and terminalization recovery",
+    "completed_stage": "Accepted raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002 at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_provider_disabled_pre_hmr_startup_failure_classification_and_terminalization_plan",
+    "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+    "resume_after_compaction": true,
+    "source_head": "bf4af9db23827bbed8adc724eaf4ad58a1347dfe",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "git_object_resolution": {
+    "observed_head": "cf0f6935d9b45b4e87fce2e001057ce8a5c47175",
+    "reason_codes": [],
+    "resolved_commit": "bf4af9db23827bbed8adc724eaf4ad58a1347dfe",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "bf4af9db23827bbed8adc724eaf4ad58a1347dfe"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "cf0f6935d9b45b4e87fce2e001057ce8a5c47175",
+    "branch_origin_aligned": false,
+    "head": "cf0f6935d9b45b4e87fce2e001057ce8a5c47175",
+    "origin_branch_commit": "4992b5b14be0462566dc923ab20c67695a99c6cd",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 656
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "provider_disabled_candidate_prepush",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The active recovery forbids a native worker and every DeepSeek or other provider request.",
+        "work_packages": []
+      },
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The active provider-disabled envelope prohibits Gemini; deterministic hostile fixtures own the acceptance surface.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the startup classifier, terminal ordering and cleanup binding are one coupled serial repair.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "provider_disabled_recovery_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "classification and validation before controller binding",
+      "terminal validation before raw-stream deletion",
+      "hostile deterministic fixtures before task-branch push"
+    ]
+  },
+  "planned_action": "push_the_committed_provider_disabled_pre_hmr_startup_terminal_candidate_to_the_task_branch_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-threat-model-delta.md",
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002-failed-closed-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-worker-attempt-002-sol-acceptance.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the coupled plan, component, controller integration, deterministic tests, acceptance, clockwork and Git. DeepSeek and Gemini are inapplicable; native subagents are declined.",
+    "git_refs_and_worktree": "The machine-generated Git snapshot alone owns exact object identities. It verifies the task branch and origin alignment, all four protected refs, tracked cleanliness, and preservation of existing untracked files including docs/branding.",
+    "live_handover_current_baton": "AGENTS.md controls. Continuity 353 and Compass 335 accept attempt 002 as failed-closed negative evidence, and the named provider-disabled pre-HMR startup terminal recovery is active.",
+    "protected_evidence_boundaries": "Attempts 001 and 002 remain immutable and consumed. No native Harness, worker, broker, DeepSeek, Gemini or provider process may run; no raw streams persist; product, database, data, deployment, Pages and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
