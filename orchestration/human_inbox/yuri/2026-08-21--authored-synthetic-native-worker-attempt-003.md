@@ -32,8 +32,8 @@ EMR4 work under this profile.
 - Harness, broker and disposable root absent;
 - eight deterministic post-terminal commands pass;
 - four clockwork/schema mistakes were caught before action and corrected;
-- register revision 578: 731 contained incidents, none open. This includes the
-  read-only closeout-intent shape rejection, corrected before publication.
+- register revision 578: 732 contained incidents, none open. This includes two
+  read-only closeout-shape rejections, both corrected before publication.
 
 Deliberately closed: another occupied attempt, retry, product or patient data,
 database/runtime work, ordinary-practice changes, production, deployment,

@@ -155,7 +155,8 @@
       {"incident_id": "historical-equality-test-selection", "source_id": "attempt-003-verification-001", "peers": []},
       {"incident_id": "prelaunch-workspace-receipt-shape", "source_id": "attempt-003-prelaunch-001", "peers": []},
       {"incident_id": "native-exit-pre-hmr-unclassified", "source_id": "attempt-003-native-001", "peers": []},
-      {"incident_id": "closeout-authorized-opening-object-shape", "source_id": "attempt-003-closeout-clockwork-001", "peers": []}
+      {"incident_id": "closeout-authorized-opening-object-shape", "source_id": "attempt-003-closeout-clockwork-001", "peers": []},
+      {"incident_id": "closeout-human-register-reading-shape", "source_id": "attempt-003-closeout-clockwork-002", "peers": []}
     ],
     "broker": {"enabled": false, "posture": "provider_free_shadow"}
   },
@@ -348,6 +349,38 @@
         ]
       },
       "baton_summary": "records the read-only rejection of an untyped authority opening and the corrected model-runtime/provider-call binding."
+    },
+    {
+      "attempt_key": "attempt-003-closeout-human-register-reading-shape-001",
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register-human-reading",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The prospective human register revision must contain the exact clockwork reading comment and one ordered level-two heading for every new incident ID.",
+      "observed_error": "The first prospective revision note used bullets and prose counts but omitted the exact machine comment and incident heading sequence.",
+      "detection_method": "The second read-only clockwork check rejected with tick_incident_revision_reading before any canonical write.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/closeout/clockwork-check-attempt-002-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.prospective_register_reading_missing_exact_comment_and_headings",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact prospective revision, total count, ordered new incident IDs, open count and matching level-two headings derived from the current register plus observation count.",
+        "prevention_control": "Future prospective register notes must be rendered from the clockwork parser contract rather than summarized freehand.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-578.md"
+        ]
+      },
+      "baton_summary": "records the rejected freehand human register syntax and its exact clockwork-derived reading repair."
     }
   ]
 }

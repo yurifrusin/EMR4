@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.governance_clockwork_check_rejection.v1",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+  "attempt": 2,
+  "recorded_at": "2026-08-21T07:48:14.0352839+10:00",
+  "mode": "check",
+  "status": "revision_required",
+  "source_head": "9d7f026dfb60e97ea857d285ce318e5807780976",
+  "reason_code": "tick_incident_revision_reading",
+  "detail": "The prospective human revision omitted the exact machine reading comment and ordered level-two incident headings.",
+  "canonical_write_count": 0,
+  "canonical_precheck_sha256": {
+    "AGENTS.md": "581c4a3b9552c95eca7448e5414d82d9fb934014fe4c77a84fb375c9abfdb9d4",
+    "orchestration/continuity/emr4-continuity-graph.json": "9eb3148106c658372e68f5645fab5158a7aa68a0f62e275c8308918f78151ca7",
+    "orchestration/continuity/emr4-compass.json": "1720ca6640884792afcc02c3b3fe402f7e17ecce5fa9b4b1dd70c2b675cd74d9",
+    "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json": "db2f427b254271a3b479ee4651df3f8053604b044af5b555ba0ae8bb2d7d7582",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json": "8ac236ea331cf503b0876d0634f6eaa187d495af4b2d4a7e642737ce78b792aa"
+  },
+  "correction": "Render the exact prospective register reading and ordered headings, add the incident, then rerun the separate read-only check."
+}
