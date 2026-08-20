@@ -1,0 +1,181 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push_the_exact_attempt_002_failed_closed_closeout_commits_to_the_task_branch_only_then_begin_the_provider_disabled_pre_hmr_recovery_without_another_worker_or_provider_call",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh complete five-source pre-push readback after closeout commit, origin fetch, exact task-branch divergence check, protected-ref verification, Continuity 353 and Compass 335 validation, revision-576 validation and passing post-publication tests",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md controls and records attempt 002 as accepted negative evidence at Continuity 353 / Compass 335; only provider-disabled pre-HMR classification and terminalization is active.",
+    "current_authority_allocation": "GPT Sol owns task-branch publication and the provider-disabled successor. DeepSeek received zero calls and has no active package. Gemini completed the predecessor veto and the successor prohibits provider requests. Native subagents remain declined under developer policy and serial ownership.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal-plan.md",
+      "docs/security/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal-threat-model-delta.md",
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-001-prelaunch-recovery.md",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-terminal.json",
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002-failed-closed-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-worker-attempt-002-sol-acceptance.md",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/closeout/clockwork-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Attempts 001 and 002 are immutable and consumed; no retry, resume, fallback, second worker or provider request is open. Product, data, database, deployment, release, Pages, protected evidence and protected refs remain closed.",
+    "git_refs_and_worktree": "The machine-generated Git snapshot alone owns exact object identities. The fetched task-branch origin is the exact parent of the local closeout commit, all protected refs retain their required object, docs/branding and unrelated untracked files are preserved, and only explicit paths were staged."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+    "active_tranche": "DeepSeek native Harness provider-free pre-HMR startup-failure classification and terminalization recovery",
+    "objective": "Freeze and implement the narrowest provider-disabled recovery that converts native Harness startup exceptions before the first HMR event into a closed sanitized stage/cause vocabulary and immutable terminal evidence before deleting raw streams, with deterministic hostile fixtures and no native worker or provider request.",
+    "status": "in_progress",
+    "source_head": "bf4af9db23827bbed8adc724eaf4ad58a1347dfe",
+    "authority_source": "Yuri's standing uninterrupted-development authority and the accepted failed-closed attempt-002 terminal, exact cleanup and efficacy reading.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002 at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_provider_disabled_pre_hmr_startup_failure_classification_and_terminalization_plan",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_disabled_pre_hmr_startup_failure_classification_and_terminalization_only",
+      "deterministic_static_and_hostile_fixture_evidence_only_no_native_worker_process",
+      "closed_sanitized_stage_and_cause_vocabulary_no_raw_stream_or_secret_retention",
+      "attempts_001_and_002_immutable_consumed_no_retry_resume_overwrite_or_reclassification",
+      "no_new_deepseek_gemini_or_other_provider_request",
+      "any_future_occupied_worker_requires_a_distinct_yuri_decision_and_new_checkpoint",
+      "no_attempt_006_docker_database_postgresql_sql_or_transaction_execution",
+      "no_product_source_configuration_api_openapi_graphql_schema_migration_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+    "assessed_stage": "attempt_002_closeout_pre_push",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "rationale": "The successor launches no native worker and permits no DeepSeek request; the attempt-002 worker package is consumed with zero provider calls.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "rationale": "Gemini completed the predecessor semantic veto, while the successor's provider-disabled latch prohibits every new provider request.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and this exact task-branch push plus successor rehydration is a serial authority transition.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "fetch and exact protected-ref verification before task-branch push",
+      "task-branch push before fresh successor rehydration",
+      "no provider or native-worker process in the successor"
+    ],
+    "reassessment_triggers": [
+      "attempt_002_closeout_push",
+      "provider_disabled_recovery_plan_freeze",
+      "provider_disabled_recovery_closeout"
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol committed the explicit-path closeout and fetched exact refs before push."]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The predecessor process is absent and the successor admits no process or provider call."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Historical transport only and not selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["Predecessor veto completed; successor provider access is closed."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent spawned."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    }
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "deepseek-native-harness-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
