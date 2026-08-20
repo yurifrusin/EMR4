@@ -1,0 +1,120 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in server post-readiness exit-state and stdin-lifecycle conformance repair",
+    "completed_stage": "Accepted raisa-provider-free-check-in-relay-free-recovery-attempt-005 at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_narrow_provider_disabled_lifecycle_conformance_plan",
+    "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+    "resume_after_compaction": true,
+    "source_head": "03b94136c9c6cd82d5a8098705f263ba34a20de4",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd",
+    "reason_codes": [],
+    "resolved_commit": "03b94136c9c6cd82d5a8098705f263ba34a20de4",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "03b94136c9c6cd82d5a8098705f263ba34a20de4"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd",
+    "branch_origin_aligned": true,
+    "head": "2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd",
+    "origin_branch_commit": "2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 655
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "preplanning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native Harness failed before provider dispatch at preset mount and no worker retry is authorised; its identical full-profile mount must first be diagnosed provider-disabled under Sol.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "A fresh Gemini 3.7 Flash/high read-only veto is useful only after one exact provider-free deterministic repair candidate passes all closed tests.",
+        "work_packages": [
+          "future_exact_lifecycle_repair_candidate_read_only_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive native delegation and the vocabulary, fake process model and minimal patch are one coupled serial architecture decision.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "plan_freeze",
+      "candidate_precommit",
+      "pre_verifier",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "freeze safe OCI and attachment lifecycle semantics before source edits",
+      "run only provider-free deterministic fakes until the plan separately admits any local process smoke",
+      "do not dispatch DeepSeek until identical provider-disabled preset mount passes",
+      "do not dispatch Gemini until an exact deterministic candidate exists",
+      "no attempt 006 or protected-ref authority exists"
+    ]
+  },
+  "planned_action": "sprint_planning",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/closeout/clockwork-tick-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "Sol owns architecture, plan freeze, deterministic implementation, exact tests, acceptance and Git. DeepSeek native Harness is declined until its failed mount path is diagnosed provider-disabled. Gemini 3.7 Flash/high is reserved for a later exact read-only candidate veto. Native subagents are declined under current developer policy and the coupled source/lifecycle design.",
+    "git_refs_and_worktree": "Fresh machine readings align local/origin codex/ariadne-bernie-davida-parallel-seam at exact 2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd. Local/origin master and handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked and staged state is clean; docs/branding and every unrelated untracked path remain preserved.",
+    "live_handover_current_baton": "The clockwork-generated AGENTS.md is rehydrated completely as the 141223-character, 141229-byte source with SHA-256 a08699d6f260420476fdfc61a75aa57368932651450864c64f380f5db63ec568. At Continuity 348 / Compass 330 it accepts attempt 005 negative evidence and names raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair.",
+    "protected_evidence_boundaries": "Attempts 001-005 and the sole native worker remain immutable. Planning is provider-disabled and initially database/Docker-nonexecuting; attempt 006 needs its own later authority. Only a closed sanitized OCI exit-state vocabulary, deterministic fake attachment lifecycle proof, split provider-disabled Harness mount coordinates and the narrowest source/test correction are in scope. No product/API/config/client change, ordinary enablement, generic-status Arrived, data, provider, production, deployment, release, Pages, protected evidence or protected-ref movement is authorised. docs/branding and all unrelated untracked files remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
