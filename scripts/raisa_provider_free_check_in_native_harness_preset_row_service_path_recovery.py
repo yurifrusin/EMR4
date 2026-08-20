@@ -278,7 +278,8 @@ def _write_exclusive(path: Path, value: dict[str, Any]) -> None:
         handle.write(_canonical_json(value))
 
 
-def load_native_checkpoint(path: Path = NATIVE_CHECKPOINT_PATH) -> dict[str, Any]:
+def load_native_checkpoint(path: Path | None = None) -> dict[str, Any]:
+    path = NATIVE_CHECKPOINT_PATH if path is None else path
     value = _load_json(path)
     expected = {
         "schema_version",

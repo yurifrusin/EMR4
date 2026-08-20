@@ -27555,6 +27555,154 @@
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+      "role": "orchestrator",
+      "resource_id": "preset-row-service-semantic-review-command-manifest",
+      "model": "gemini-3.7-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "read_only_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Every independent-review command must be non-writing and leave the exact candidate worktree clean.",
+      "observed_error": "The first semantic-review manifest regenerated a tracked fixture whose credential-environment removal count varied from three to four, leaving the exact review worktree dirty.",
+      "detection_method": "The Antigravity postcondition recorded read_only_worktree_postcondition_failed at unchanged HEAD and admitted no terminal decision.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-check-in-preset-row-service-path-recovery-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-preset-row-service-path-recovery-gemini37-command-manifest.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.verifier_manifest_regenerated_environment_dependent_tracked_evidence",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed worktree and receipt, replace both writing commands with non-writing function validations and dispatch one fresh exact-candidate review.",
+        "prevention_control": "Verifier command manifests must delegate durable artifact generation to deterministic pre-review stages and may call only non-writing validation functions inside isolated candidate worktrees.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-preset-row-service-path-recovery-corrected-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-preset-row-service-path-recovery-corrected-gemini37-review-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0695",
+      "attempt_id": "clock-67fb1335b4827e2bc2c53100",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+      "role": "verifier",
+      "resource_id": "ariadne-antigravity-command-result-egress",
+      "model": "gemini-3.7-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A completed exact-command review must expose exactly one schema-valid decision envelope without requiring fallible model retranscription of deterministic command facts.",
+      "observed_error": "The first executor review exited zero with non-empty output, no stderr and an unchanged clean worktree, but the egress gate admitted zero structured decision envelopes.",
+      "detection_method": "The digest-only failure receipt recorded structured_decision_envelope_not_admitted and candidate_review_admitted false.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-check-in-preset-row-service-path-recovery-executor-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-preset-row-service-path-recovery-executor-gemini37-command-manifest.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.antigravity_model_retranscribed_command_results_not_admitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the non-decision receipt and allow one fresh corrected transport over the unchanged candidate with the exact JSON-only egress requirement restated.",
+        "prevention_control": "Do not make an LLM the authority that reproduces exact command argv and results; deterministic code must own that ledger and the verifier should own semantic judgment only.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery-review-egress-addendum.md",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/executor-review-command-validation-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0696",
+      "attempt_id": "clock-311c0a546a1a52c4c0b18ef8",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+      "role": "verifier",
+      "resource_id": "ariadne-antigravity-command-result-egress",
+      "model": "gemini-3.7-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A corrected exact-command review must expose exactly one schema-valid decision envelope without repeated model retranscription failure.",
+      "observed_error": "The corrected executor review repeated the zero-envelope egress failure despite explicit JSON-only wording, while again exiting zero with non-empty output, no stderr and an unchanged clean candidate.",
+      "detection_method": "The second digest-only receipt recorded the same structured_decision_envelope_not_admitted coordinate; this closed the retranscription retry lane.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-check-in-preset-row-service-path-recovery-executor-corrected-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-preset-row-service-path-recovery-executor-corrected-gemini37-command-manifest.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "harness.antigravity_model_retranscribed_command_results_not_admitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Split the gate: execute and seal all twelve exact commands through the shell-free deterministic validation runner, then obtain a fresh Gemini semantic veto whose response contains only decision and review.",
+        "prevention_control": "Clockwork-owned exact result ledgers and model-owned semantic judgments are separate gears; no future verifier response should be required to retranscribe deterministic argv or exit-code vocabulary.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/executor-review-command-validation-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-preset-row-service-path-recovery-split-veto-gemini37-review-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0697",
+      "attempt_id": "clock-0fec6b0a03e305a083b8b07e",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+      "role": "orchestrator",
+      "resource_id": "preset-row-service-native-checkpoint-test-double",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The fail-before-process checkpoint test must substitute the module checkpoint path even after the real checkpoint has been published.",
+      "observed_error": "load_native_checkpoint captured NATIVE_CHECKPOINT_PATH in its default argument at import time, so the monkeypatched missing path was ignored once the real checkpoint existed and the negative test did not raise.",
+      "detection_method": "The post-terminal focused provider-free suite failed only test_native_stage_fails_before_process_without_checkpoint after checkpoint publication.",
+      "evidence_paths": [
+        "scripts/raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.python_default_argument_captured_mutable_checkpoint_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Default the function argument to None and resolve NATIVE_CHECKPOINT_PATH at call time so the checkpoint boundary remains test-substitutable.",
+        "prevention_control": "Filesystem boundary functions use late-bound module paths when focused tests monkeypatch those boundaries; post-publication negative tests must run before closeout.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py"
+        ]
+      },
+      "incident_id": "AER-0698",
+      "attempt_id": "clock-745bc9d7109592481184f001",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
     }
   ]
 }
