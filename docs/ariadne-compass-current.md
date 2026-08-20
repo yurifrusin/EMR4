@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will diagnose and repair the post-readiness server and stdin lifecycle provider-disabled before considering a separately frozen attempt 006.
+> EMR4 will split and prove the native Harness preset-validation coordinates provider-free before considering another separately checkpointed native process.
 
 ## North star
 
@@ -466,26 +466,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One real provider-free rc.7 boot proved exact service activation, preset mount and edit/glob/read projection with bounded terminal and cleanup. Lineage parent: `deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery`.
 225. **Test the relay-free check-in transaction path once under exact clockwork authority while measuring the first useful native-Harness worker boundary — Raisa provider-free check-in relay-free recovery attempt 005 blocked closeout**
    The attempt failed closed after readiness with exact cleanup, the worker failed pre-provider, and both negative terminals now identify narrower lifecycle gaps without releasing product effects. Lineage parent: `deepseek-native-harness-provider-free-complete-composition-native-boot-recovery`.
+226. **Make the check-in server lifecycle and native Harness preset path mechanically readable before another database or occupied-worker attempt — Raisa provider-free check-in server post-readiness exit-state and stdin-lifecycle conformance repair closeout**
+   The server repair and closed diagnostic pass; the one provider-disabled native process fails earlier and more precisely at preset validation with zero provider cost and exact cleanup. Lineage parent: `raisa-provider-free-check-in-relay-free-recovery-attempt-005`.
 
 ## Current position
 
-**Make the server's safe post-readiness exit coordinates and attached-stdin lifetime deterministically observable before authorising any future attempt — Raisa provider-free check-in relay-free recovery attempt 005 blocked closeout**
+**Split the rc.7 preset-validation boundary into deterministic source-owned readings before another provider-disabled native process — Raisa provider-free check-in server post-readiness exit-state and stdin-lifecycle conformance repair closeout**
 
-**Why this proof came next:** Attempt 005 proves the captured server stops after readiness but retained evidence deliberately omits the exit detail needed to distinguish stdin attachment, entrypoint exit, OOM or another terminal cause.
+**Why this proof came next:** Discovery passes but the current safe terminal collapses preset row, bytes, parse and digest/length validation into one missing marker.
 
-Attempt 005 is honestly closed as failed evidence; the next work is a provider-disabled and initially database-nonexecuting lifecycle conformance repair.
+The lifecycle repair is accepted, native mount success is rejected, and the next work is a provider-free preset-validation subcoordinate recovery.
 
 ### What this unlocks
 
-- Safe OCI exit-state fields can become a closed diagnostic vocabulary.
-- Deterministic fakes can prove whether attached stdin lifetime controls the server process.
-- A later attempt 006 can be planned from a diagnosed repair rather than another blind occupied retry.
+- Preset-row discovery can be distinguished from preset-byte reading.
+- Exact parse/validation can be distinguished from digest and length binding.
+- A future one-shot provider-disabled process can be admitted only after those deterministic coordinates pass.
 
 ### What it does not solve
 
-- No transaction, restricted-role or exactly-once result is proved.
-- No DeepSeek coding-quality conclusion exists because the provider was never called.
-- No further database run, product data, ordinary-practice, production or protected integration authority opens.
+- No native agent, effective-tool projection or occupied DeepSeek work is proved.
+- No attempt 006, Docker, PostgreSQL, transaction or product result is proved.
+- No ordinary-practice, production, deployment or protected-ref authority opens.
 
 ## Continuity and authority
 
@@ -1330,6 +1332,7 @@ Prerequisites:
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-plan.md`
 - `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md`
+- `docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md`
 - `docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-closeout.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-plan.md`
@@ -2037,7 +2040,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-sol-blocked-assessment.md`
+- `orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-sol-blocked-assessment.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -2695,6 +2698,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/rehearsal-failure-evidence.json`
 - `orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/repair-evidence.json`
+- `orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/native-probe-terminal.json`
+- `orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md`
 - `orchestration/continuity/raisa-provider-free-compatibility-conformance-harness-readiness-repair/structural-repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json`
@@ -3258,7 +3263,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-19--unmounted-check-in-admission-control-kernel-rehearsal.md`
-- `orchestration/human_inbox/yuri/2026-08-20--check-in-relay-free-recovery-attempt-005.md`
+- `orchestration/human_inbox/yuri/2026-08-20--check-in-lifecycle-conformance-repair.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3566,4 +3571,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 330; continuity graph revision 348._
+_Compass map revision 331; continuity graph revision 349._

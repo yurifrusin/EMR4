@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 348,
+  "graph_revision": 349,
   "harvests": [],
   "nodes": [
     {
@@ -25311,9 +25311,135 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+      "title": "Raisa provider-free check-in server post-readiness exit-state and stdin-lifecycle conformance repair closeout",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted this provider-disabled and initially database-nonexecuting lifecycle repair.",
+          "The sole native process and both Gemini reviews are consumed; no retry, further provider call or attempt 006 is authorised.",
+          "The successor is initially deterministic and provider-free and must receive a separate checkpoint before any native process."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-server-stdin-lifetime-and-sole-cleanup-owner",
+          "source": "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "status": "accepted",
+          "summary": "Accept one write and flush with stdin open after delivery plus sole-owner close-once bounded attachment cleanup."
+        },
+        {
+          "id": "accept-closed-server-post-readiness-projection",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact nine-key sanitized OCI and host-attachment projection with malformed values collapsed fail closed."
+        },
+        {
+          "id": "accept-native-provider-disabled-negative-terminal",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/native-probe-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one consumed provider-disabled process that passed discovery and stopped at the first missing PRESET_VALIDATION_PASSED marker with zero downstream requests and exact cleanup."
+        },
+        {
+          "id": "reject-native-mount-success-and-deepseek-quality-claim",
+          "source": "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-sol-blocked-assessment.md",
+          "status": "rejected",
+          "summary": "Reject preset-validation, agent-creation, effective-tool, occupied-worker and DeepSeek-quality success claims."
+        },
+        {
+          "id": "accept-bounded-path-correction-and-fresh-corrected-veto",
+          "source": "orchestration/agent_inbox/antigravity/raisa-check-in-lifecycle-conformance-repair-gemini37-corrected-review-receipt.json",
+          "status": "accepted",
+          "summary": "Preserve the initial P1 and accept the exact worker-root correction after 52 provider-free tests and a fresh corrected Gemini pass over nine zero-exit commands at unchanged clean HEAD."
+        },
+        {
+          "id": "accept-nine-contained-workflow-incidents",
+          "source": "docs/ariadne-agent-error-correction-register-revision-572.md",
+          "status": "accepted",
+          "summary": "Intake nine machine-derived incidents as AER-0682 through AER-0690 and retain zero open incidents."
+        }
+      ],
+      "claim_scope": [
+        "Attached stdin remains open after the exact credential line is written and flushed; final cleanup is the sole close owner.",
+        "A stopped post-readiness server now yields only the exact closed nine-key projection.",
+        "Server post-readiness and native preset-mount failure families remain distinct.",
+        "The sole provider-disabled native process passed discovery and failed before preset validation, agent creation, turns or any external request.",
+        "The native terminal is consumed with zero retry and exact process/root cleanup.",
+        "The initial isolated-worktree P1 is preserved and its bounded correction passes a fresh independent veto.",
+        "Nine workflow incidents are corrected or contained; no new operator memory checklist is accepted."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-plan.md",
+          "docs/security/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/native-probe-terminal.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-report.md",
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/efficacy-reading.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-lifecycle-conformance-repair-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-lifecycle-conformance-repair-gemini37-corrected-review-receipt.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-corrected-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-corrected-review-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-gemini37-corrected-review-worktree-preflight.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/contract.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/server-post-readiness.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-572.md",
+          "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-sol-blocked-assessment.md",
+          "orchestration/human_inbox/yuri/2026-08-20--check-in-lifecycle-conformance-repair.md",
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact rc.7 preset-validation subcause remains unproved.",
+        "The consumed native process cannot be retried; another native process needs a separately frozen plan and checkpoint.",
+        "Attempt 006 and all Docker/PostgreSQL execution remain unauthorised.",
+        "Dedicated check-in remains default-off with no ordinary-practice or product-data authority.",
+        "No production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-20T16:04:16.4951745+10:00",
+      "updated_at": "2026-08-20T16:04:16.4951745+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "290923ef7b068b4b61f1bf41fff84fe4f47e3049",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-20T14:29:30.6434371+10:00"
+  "updated_at": "2026-08-20T16:04:16.4951745+10:00"
 }
