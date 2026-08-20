@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
+  "operation_id": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+  "completed_stage": "Exact rc.7 source proof, five-scenario service-input fixture and minimal shipped-plus-derived-user-root candidate pass. The semantic candidate passed an exact Gemini veto. The executor's twelve shell-free deterministic commands and split-gate Gemini 3.7 Flash/high veto pass at clean full sources; two earlier zero-decision egress receipts remain immutable and confer no authority. The separate one-process, zero-retry provider-disabled native checkpoint is now admitted.",
+  "next_executable_stage": "generate_a_fresh_five_source_preexecution_receipt_then_run_exactly_one_provider_disabled_native_preset_row_service_confirmation_without_retry",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "preset_row_service_native_checkpoint_tick_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-checkpoint/checkpoint-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}

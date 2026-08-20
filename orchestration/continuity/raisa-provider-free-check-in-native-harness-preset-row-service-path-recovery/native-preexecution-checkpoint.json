@@ -1,0 +1,27 @@
+{
+  "schema_version": "ariadne.check_in_preset_row_service_path_checkpoint.v1",
+  "operation_id": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+  "status": "admitted",
+  "semantic_candidate_source": "da52514548ef1c1253e379f983165545482592a6",
+  "semantic_review_receipt": "orchestration/agent_inbox/antigravity/raisa-check-in-preset-row-service-path-recovery-corrected-gemini37-review-receipt.json",
+  "semantic_review_receipt_sha256": "173fe07bfdc830d923e1b7512e901e6d4c0c386da1739ed30bc365315a86b245",
+  "executor_candidate_source": "a6b3fc9ea582677419b5053952336792fd088d0c",
+  "executor_review_receipt": "orchestration/agent_inbox/antigravity/raisa-check-in-preset-row-service-path-recovery-split-veto-gemini37-review-receipt.json",
+  "executor_review_receipt_sha256": "b1888a572070d63b82107c5148194da47962e8a11b5ed53e9b29c03dfb0a92b4",
+  "attempt_id": "check-in-preset-row-service-native-probe-001",
+  "native_process_limit": 1,
+  "automatic_retry_limit": 0,
+  "timeout_seconds": 60,
+  "markers": [
+    "EFFECTIVE_ROOTS_ENTERED",
+    "EFFECTIVE_ROOTS_PASSED",
+    "PRESET_ROW_DISCOVERY_ENTERED",
+    "PRESET_ROW_FOUND",
+    "PRESET_ROW_HEALTHY",
+    "PRESET_BYTES_READ",
+    "PRESET_LENGTH_BOUND_PASSED",
+    "PRESET_DIGEST_BOUND_PASSED"
+  ],
+  "runner_sha256": "929c610c13aae5e7bc5587d8db231a4c057580f06684b5e64784c002caa8d64a",
+  "checkpoint_admitted": true
+}
