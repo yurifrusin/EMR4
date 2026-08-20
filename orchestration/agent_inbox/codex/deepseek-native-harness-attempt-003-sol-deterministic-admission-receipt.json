@@ -1,0 +1,37 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "sol_provider_disabled_deterministic_admission",
+  "model": "gpt-sol",
+  "requested_model": "gpt-sol",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "attempt_003_provider_disabled_exact_admission_v1",
+  "worktree": "C:/Users/sarashera/emr4",
+  "branch": "codex/ariadne-bernie-davida-parallel-seam",
+  "head_before": "2518b7671175808d4aa77f213a744ffafbd60eb8",
+  "head_after": "2518b7671175808d4aa77f213a744ffafbd60eb8",
+  "dirty_after": false,
+  "timestamp": "2026-08-21T07:25:37.1647990+10:00",
+  "provider_posture": "zero_provider_requests",
+  "checks": {
+    "five_source_preexecution_receipt": "passed",
+    "deterministic_controller_check": "passed",
+    "provider_free_focused_tests": 60,
+    "ruff": "passed",
+    "python_compilation": "passed",
+    "node_broker_syntax": "passed",
+    "provider_key_present_only_in_controller_environment": true,
+    "attempt_root_absent": true,
+    "matching_process_count": 0,
+    "attempt_003_artifacts_before_preparation": [
+      "occupied-terminal.schema.json"
+    ],
+    "attempts_001_and_002_dirty_paths": 0,
+    "protected_refs_exact": true
+  },
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "The committed attempt-003 identity, terminal schema, one-call prepaid-balance cost posture, immutable prior-attempt boundary and recovered pre-HMR cleanup ordering pass deterministic admission. This receipt authorizes fresh root materialization only; it is not an independent Gemini veto and it does not itself authorize native process creation."
+  }
+}

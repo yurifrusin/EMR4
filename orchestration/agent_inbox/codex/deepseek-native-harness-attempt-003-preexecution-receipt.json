@@ -1,0 +1,124 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker attempt 003",
+    "completed_stage": "The pre-HMR recovery is accepted at Continuity 354 / Compass 336; attempts 001 and 002 remain consumed and immutable, attempt 002 reached no provider request, and Yuri explicitly authorised one separately frozen new occupied attempt.",
+    "next_executable_stage": "generate_a_fresh_five_source_attempt_003_preexecution_receipt_then_run_zero_provider_deterministic_admission_before_materializing_the_new_disposable_root",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+    "resume_after_compaction": true,
+    "source_head": "ef3f2cb61bd482c304f6828439d7600ea444d68a",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "2518b7671175808d4aa77f213a744ffafbd60eb8",
+    "reason_codes": [],
+    "resolved_commit": "ef3f2cb61bd482c304f6828439d7600ea444d68a",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "ef3f2cb61bd482c304f6828439d7600ea444d68a"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "2518b7671175808d4aa77f213a744ffafbd60eb8",
+    "branch_origin_aligned": false,
+    "head": "2518b7671175808d4aa77f213a744ffafbd60eb8",
+    "origin_branch_commit": "db8f6f442ecb152a46fc93b1891260129f3e3919",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 657
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "attempt_003_preexecution_admission",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "It owns one later synthetic edit after this zero-provider admission and a separate committed checkpoint.",
+        "work_packages": [
+          "one attempt-003 synthetic literal edit after admission"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The unchanged shaped package and accepted controller do not justify another provider call before admission; reassess after the terminal.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and admission, preparation and checkpoint are serial identity transitions.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "deterministic_admission_rejects",
+      "preparation_completes",
+      "occupied_attempt_terminalizes"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "zero-provider checks before root materialization",
+      "preparation commit before checkpoint",
+      "checkpoint before occupied launch"
+    ]
+  },
+  "planned_action": "run_zero_provider_attempt_003_admission_and_materialize_one_fresh_disposable_root_without_launching_until_a_separate_checkpoint",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-plan.md",
+      "docs/security/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-threat-model-delta.md",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003/clockwork-tick-evidence.json",
+      "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns admission and preparation. DeepSeek is planned for the later one-process checkpointed run, Gemini remains reserved, and native subagents are declined.",
+    "git_refs_and_worktree": "The machine snapshot alone owns exact Git identities and verifies task branch, four protected refs, tracked cleanliness and preservation of all unrelated untracked files including docs/branding.",
+    "live_handover_current_baton": "AGENTS.md controls and identifies attempt 003 as in progress with deterministic admission and preparation next.",
+    "protected_evidence_boundaries": "Admission is zero-provider. It may materialize only the fresh attempt-003 synthetic root after checks; no native launch occurs before a separate checkpoint and no product/data/database/deployment/Pages/protected-ref scope opens."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
