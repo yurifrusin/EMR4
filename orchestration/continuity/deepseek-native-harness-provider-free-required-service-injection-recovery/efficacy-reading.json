@@ -66,11 +66,20 @@
       "One negative cache-root test used an ancestry that still contained the real user cache and was replaced with a closed drive-root fixture."
     ],
     "deterministic_projection_regenerations_before_candidate_commit": 1,
-    "prepublication_clockwork_intent_validation_corrections": 2,
+    "prepublication_clockwork_intent_validation_corrections": 3,
     "prepublication_clockwork_intent_validation_notes": [
       "The first dry reading rejected a path string placed in contract_evidence, which accepts structured contract-evidence objects; the redundant entry was removed before any canonical write.",
-      "The second dry reading rejected the non-canonical role independent_reviewer; the incident now uses the register's verifier enum."
+      "The second dry reading rejected the non-canonical role independent_reviewer; the incident now uses the register's verifier enum.",
+      "After rollback, a redundant python -c companion-note check was rejected because clockwork command manifests admit python -m entries only; the command was removed because incident evidence-path validation already requires the note to exist."
     ],
+    "clockwork_publication_attempts_before_final": 1,
+    "clockwork_rollback_count_before_final": 1,
+    "post_publication_compatibility_corrections": 1,
+    "post_publication_compatibility_correction": "The first publication derived register revision 568 but the caller omitted the required human-readable versioned revision note; the post-publication suite failed and clockwork restored the preceding generation byte-exactly before the note and prepublication check were added.",
+    "rollback_invocation_corrections": 1,
+    "rollback_invocation_note": "The first rollback command incorrectly supplied --intent; the CLI rejected it without mutation and the exact no-intent rollback then passed byte-exactly.",
+    "rollback_source_rebind_corrections": 1,
+    "rollback_source_rebind_note": "A dry reading correctly refused physical pointer drift until the clockwork-written rollback pointer was included in the next exact Git source.",
     "native_attempt_retry_count": 0
   },
   "rerun_assessment": {
@@ -80,8 +89,8 @@
     "fresh_egress_recovery_attempt_count": 1,
     "blind_retry_count": 0,
     "native_attempt_retry_count": 0,
-    "qualifying_incident_count": 3,
-    "micro_corrections_recorded_only_in_efficacy": 5,
+    "qualifying_incident_count": 4,
+    "micro_corrections_recorded_only_in_efficacy": 8,
     "conclusion": "The mechanism reduced ambiguity rather than hiding cost: two semantic defects and one machine-envelope mismatch were each isolated, preserved and corrected; the exact candidate then passed one admissible fresh veto without any native Harness retry."
   },
   "protected_boundaries_preserved": true

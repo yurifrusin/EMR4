@@ -33,6 +33,13 @@ verdict. One fresh project repeated the complete review and returned an exact,
 schema-admissible `pass`: ten commands, 86 tests, unchanged HEAD and clean
 worktree.
 
+The first canonical clockwork publication then exposed one closeout omission:
+the caller had not materialised the required human-readable revision-568
+register note. The post-publication suite rejected that generation and the
+clockwork restored the preceding generation byte-exactly. The revision note,
+rolled-back attempt evidence and a prospective-note presence check are now part
+of the corrected closeout.
+
 `emr4-bounded-worker` is not a shipped rc.7 preset and remains unmaterialised.
 This acceptance authorises no native Harness process, Node process, worker,
 agent session, turn, broker, DeepSeek model or provider request. It changes no

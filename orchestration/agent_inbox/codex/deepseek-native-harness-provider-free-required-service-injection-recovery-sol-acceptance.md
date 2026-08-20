@@ -29,9 +29,10 @@ Acceptance basis:
   records one schema-admissible `pass`, ten exact zero-exit command results,
   unchanged candidate HEAD and a clean isolated worktree.
 
-The initial `revision_required` review and the first corrected but
-non-admitted egress remain immutable. Their two semantic defects and one C10
-output-contract mismatch are qualifying incidents for clockwork-owned register
+The initial `revision_required` review, the first corrected but non-admitted
+egress, and the rolled-back first clockwork publication remain immutable. Their
+two semantic defects, one C10 output-contract mismatch and one omitted
+versioned register note are qualifying incidents for clockwork-owned register
 intake. They are not erased or reclassified by this acceptance.
 
 Claim ceiling: this proves a deterministic future service-injection repair,

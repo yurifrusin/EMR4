@@ -18,6 +18,11 @@ one command in its machine-readable receipt, so the broker rejected it exactly
 as intended. A fresh review then passed cleanly: all ten checks, including 86
 tests, with the candidate unchanged.
 
+The first clockwork closeout also caught a missing human-readable register
+note after publication. It restored the previous governance generation
+byte-for-byte; the note and a prepublication presence check have now been
+added. This cost one closeout rerun but left no ambiguous canonical state.
+
 This is encouraging but deliberately narrow. We have not yet run a DeepSeek
 worker. The named `emr4-bounded-worker` preset still needs to be materialised
 and proved against the edit/glob/read boundary before another native boot is
@@ -38,6 +43,9 @@ eligible.
 - Independent review: initial `revision_required`; one corrected non-admitted
   C10 envelope; final Gemini 3.7 Flash/high `pass` with ten zero-exit commands,
   exact C10 argv, unchanged HEAD and clean worktree.
+- Clockwork: first publication rolled back byte-exactly after the required
+  revision-568 companion note was missing; failed-attempt evidence is retained
+  and the corrected command manifest checks the note before republication.
 - Execution boundary: zero Node, native Harness, occupied worker, agent
   session, turn, broker, DeepSeek model, provider, external network, Docker and
   database execution.
