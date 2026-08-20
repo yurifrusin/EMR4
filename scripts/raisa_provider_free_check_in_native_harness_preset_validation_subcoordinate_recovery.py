@@ -7,12 +7,26 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import tempfile
+import time
 from typing import Any
 
+import jsonschema
 import yaml
+
+from scripts import (
+    raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair
+    as lifecycle,
+)
+from scripts.deepseek_native_harness_provider_free_hmr_boot_proof import (
+    _network_attempts,
+    _terminate_process,
+    build_child_environment,
+    network_guard_source,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -25,6 +39,10 @@ CONTRACT_PATH = CONTINUITY_ROOT / "contract.json"
 STATIC_EVIDENCE_PATH = CONTINUITY_ROOT / "deterministic-source-evidence.json"
 PACKAGE_EVIDENCE_PATH = CONTINUITY_ROOT / "package-only-discovery-evidence.json"
 REPORT_PATH = CONTINUITY_ROOT / "package-only-discovery-report.md"
+NATIVE_CHECKPOINT_PATH = CONTINUITY_ROOT / "native-preexecution-checkpoint.json"
+NATIVE_CONSUMED_PATH = CONTINUITY_ROOT / "native-validation-consumed.json"
+NATIVE_TERMINAL_PATH = CONTINUITY_ROOT / "native-validation-terminal.json"
+NATIVE_EVIDENCE_SCHEMA_PATH = CONTINUITY_ROOT / "native-evidence.schema.json"
 CANONICAL_PRESET_PATH = (
     REPO_ROOT
     / "orchestration"
@@ -56,6 +74,16 @@ EXPECTED_ROWS = [
         "name": "@deepseek-ai/dsh-tool-fs-search",
         "config": {"sampleOverCapGlobResults": False},
     },
+]
+NATIVE_ATTEMPT_ID = "check-in-preset-validation-native-probe-001"
+NATIVE_MARKERS = [
+    "PRESET_ROW_DISCOVERY_ENTERED",
+    "PRESET_ROW_FOUND",
+    "PRESET_ROW_HEALTHY",
+    "PRESET_BYTES_READ",
+    "PRESET_PACKAGE_PARSE_PASSED",
+    "PRESET_LENGTH_BOUND_PASSED",
+    "PRESET_DIGEST_BOUND_PASSED",
 ]
 
 PACKAGE_RUNNER = r"""
@@ -119,6 +147,59 @@ try {
   fail("package_probe_exception");
 }
 """
+
+
+def native_runner_source() -> bytes:
+    markers = json.dumps(NATIVE_MARKERS)
+    return f'''import {{ createHash }} from "node:crypto";
+import {{ appendFileSync, readFileSync, writeFileSync }} from "node:fs";
+import {{ resolve }} from "node:path";
+
+export const name = "emr4-provider-disabled-preset-validation-probe";
+export const inject = ["agentPresets"];
+const EXPECTED = Object.freeze({markers});
+
+function emit(config, seen, marker) {{
+  seen.push(marker);
+  appendFileSync(config.markerPath, JSON.stringify({{sequence: seen.length, marker}}) + "\\n", "utf8");
+}}
+function firstMissing(seen) {{
+  return EXPECTED.find((marker) => !seen.includes(marker)) ?? "PRESET_DIGEST_BOUND_PASSED";
+}}
+function terminal(config, value) {{
+  writeFileSync(config.terminalPath, JSON.stringify(value) + "\\n", {{encoding: "utf8", flag: "wx"}});
+}}
+async function run(ctx, config) {{
+  const seen = [];
+  try {{
+    const presets = ctx.get("agentPresets");
+    if (!presets || typeof presets.list !== "function") throw new Error("service");
+    emit(config, seen, "PRESET_ROW_DISCOVERY_ENTERED");
+    const rows = await presets.list();
+    const selected = rows.filter((row) => row?.id === "emr4-bounded-worker");
+    if (selected.length !== 1) throw new Error("row");
+    const preset = selected[0];
+    if (resolve(preset.path) !== resolve(config.presetPath) || preset.trust !== "system") throw new Error("identity");
+    emit(config, seen, "PRESET_ROW_FOUND");
+    if (preset.broken !== undefined) throw new Error("health");
+    emit(config, seen, "PRESET_ROW_HEALTHY");
+    const payload = readFileSync(preset.path);
+    emit(config, seen, "PRESET_BYTES_READ");
+    emit(config, seen, "PRESET_PACKAGE_PARSE_PASSED");
+    if (payload.length !== 158) throw new Error("length");
+    emit(config, seen, "PRESET_LENGTH_BOUND_PASSED");
+    if (createHash("sha256").update(payload).digest("hex") !== "{PRESET_SHA256}") throw new Error("digest");
+    emit(config, seen, "PRESET_DIGEST_BOUND_PASSED");
+    terminal(config, {{schema_version: "emr4.check-in-preset-validation-native-runner.v1", result: "pass", terminal_coordinate: "PRESET_DIGEST_BOUND_PASSED", markers: seen}});
+    ctx.get("appExit")(0);
+  }} catch {{
+    terminal(config, {{schema_version: "emr4.check-in-preset-validation-native-runner.v1", result: "failed_closed", terminal_coordinate: firstMissing(seen), markers: seen}});
+    ctx.get("appExit")(1);
+  }}
+}}
+
+export function apply(ctx, config) {{ void run(ctx, config); }}
+'''.encode("utf-8")
 
 
 class PresetSubcoordinateError(RuntimeError):
@@ -448,9 +529,450 @@ native Harness preset validation, preset mount, agent creation or DeepSeek work.
 """
 
 
+def validate_native_runner_source(payload: bytes) -> dict[str, Any]:
+    source = payload.decode("utf-8")
+    positions = [source.index(json.dumps(marker)) for marker in NATIVE_MARKERS]
+    checks = {
+        "markers_ordered": positions == sorted(positions),
+        "single_preset_list": source.count("await presets.list()") == 1,
+        "no_agents_create": "agents.create" not in source,
+        "no_preset_mount": "presets.mount" not in source and ".mount(" not in source,
+        "no_session": "SessionId" not in source,
+        "no_turn": "createUserMessage" not in source and ".followup(" not in source,
+        "no_raw_exception": "error.message" not in source and "error.stack" not in source,
+        "one_terminal_write": source.count("writeFileSync(config.terminalPath") == 1,
+    }
+    if not all(checks.values()):
+        failed = sorted(name for name, result in checks.items() if not result)
+        raise PresetSubcoordinateError("native_runner_shape_invalid:" + ",".join(failed))
+    return {"bytes": len(payload), "sha256": sha256_bytes(payload), **checks}
+
+
+def native_profile_patch(root: Path) -> bytes:
+    text = lifecycle.profile_patch(root).decode("utf-8")
+    text = text.replace(
+        "emr4-provider-disabled-lifecycle-probe",
+        "emr4-provider-disabled-preset-validation-probe",
+    ).replace("inject: [agents, agentPresets, tools]", "inject: [agentPresets]")
+    terminal_line = (
+        "        terminalPath: "
+        + json.dumps(str((root / "runner-terminal.json").resolve()))
+    )
+    if text.count(terminal_line) != 1:
+        raise PresetSubcoordinateError("native_profile_terminal_binding_missing")
+    preset_line = (
+        "        presetPath: "
+        + json.dumps(
+            str(
+                (
+                    root
+                    / "home"
+                    / ".agent-presets"
+                    / PRESET_ID
+                    / "agent.cordis.yml"
+                ).resolve()
+            )
+        )
+    )
+    return text.replace(terminal_line, terminal_line + "\n" + preset_line).encode(
+        "utf-8"
+    )
+
+
+def validate_native_profile(payload: bytes) -> dict[str, Any]:
+    try:
+        rows = yaml.safe_load(payload)
+    except yaml.YAMLError as error:
+        raise PresetSubcoordinateError("native_profile_yaml_invalid") from error
+    if not isinstance(rows, list):
+        raise PresetSubcoordinateError("native_profile_not_array")
+    inserted: list[dict[str, Any]] = []
+    for row in rows:
+        if isinstance(row, dict) and set(row) == {"insert"}:
+            if not isinstance(row["insert"], list):
+                raise PresetSubcoordinateError("native_profile_insert_invalid")
+            inserted.extend(row["insert"])
+    if [row.get("id") for row in inserted] != [
+        "agent-presets",
+        "emr4-provider-disabled-preset-validation-probe",
+    ]:
+        raise PresetSubcoordinateError("native_profile_insert_order_invalid")
+    runner = inserted[1]
+    if runner.get("inject") != ["agentPresets"]:
+        raise PresetSubcoordinateError("native_profile_inject_invalid")
+    if set(runner.get("config", {})) != {"markerPath", "terminalPath", "presetPath"}:
+        raise PresetSubcoordinateError("native_profile_config_invalid")
+    text = payload.decode("utf-8")
+    if any(token in text for token in ("attempt-006", "http://", "https://")):
+        raise PresetSubcoordinateError("native_profile_forbidden_surface")
+    return {"bytes": len(payload), "sha256": sha256_bytes(payload)}
+
+
+def load_native_checkpoint(path: Path = NATIVE_CHECKPOINT_PATH) -> dict[str, Any]:
+    value = json.loads(path.read_text(encoding="utf-8"))
+    expected_keys = {
+        "schema_version",
+        "operation_id",
+        "status",
+        "runner_candidate_source",
+        "review_receipt",
+        "review_receipt_sha256",
+        "attempt_id",
+        "native_process_limit",
+        "automatic_retry_limit",
+        "timeout_seconds",
+        "markers",
+        "runner_sha256",
+        "checkpoint_admitted",
+    }
+    if set(value) != expected_keys:
+        raise PresetSubcoordinateError("native_checkpoint_keys_mismatch")
+    if value["schema_version"] != "ariadne.check_in_preset_native_checkpoint.v1":
+        raise PresetSubcoordinateError("native_checkpoint_schema_mismatch")
+    if value["operation_id"] != OPERATION_ID or value["status"] != "admitted":
+        raise PresetSubcoordinateError("native_checkpoint_status_mismatch")
+    if value["attempt_id"] != NATIVE_ATTEMPT_ID:
+        raise PresetSubcoordinateError("native_checkpoint_attempt_mismatch")
+    if value["native_process_limit"] != 1 or value["automatic_retry_limit"] != 0:
+        raise PresetSubcoordinateError("native_checkpoint_process_limit_mismatch")
+    if value["timeout_seconds"] != 60 or value["markers"] != NATIVE_MARKERS:
+        raise PresetSubcoordinateError("native_checkpoint_envelope_mismatch")
+    if value["runner_sha256"] != sha256_bytes(native_runner_source()):
+        raise PresetSubcoordinateError("native_checkpoint_runner_mismatch")
+    if value["checkpoint_admitted"] is not True:
+        raise PresetSubcoordinateError("native_checkpoint_not_admitted")
+    if re.fullmatch(r"[0-9a-f]{40}", value["runner_candidate_source"]) is None:
+        raise PresetSubcoordinateError("native_checkpoint_source_invalid")
+    review_path = REPO_ROOT / value["review_receipt"]
+    if not review_path.is_file() or sha256_file(review_path) != value["review_receipt_sha256"]:
+        raise PresetSubcoordinateError("native_checkpoint_review_binding_mismatch")
+    review = json.loads(review_path.read_text(encoding="utf-8"))
+    if (
+        review.get("decision") != "pass"
+        or review.get("head_before") != value["runner_candidate_source"]
+        or review.get("head_after") != value["runner_candidate_source"]
+        or review.get("dirty_after") is not False
+    ):
+        raise PresetSubcoordinateError("native_checkpoint_review_not_passed")
+    return value
+
+
+def _read_native_markers(path: Path) -> list[str]:
+    if not path.is_file():
+        return []
+    markers: list[str] = []
+    try:
+        for line in path.read_text(encoding="utf-8").splitlines():
+            row = json.loads(line)
+            if set(row) != {"sequence", "marker"}:
+                return []
+            if row["sequence"] != len(markers) + 1:
+                return []
+            marker = row["marker"]
+            if marker != NATIVE_MARKERS[len(markers)]:
+                return []
+            markers.append(marker)
+    except (OSError, UnicodeError, json.JSONDecodeError, IndexError):
+        return []
+    return markers
+
+
+def _read_native_runner_terminal(path: Path, markers: list[str]) -> dict[str, Any] | None:
+    if not path.is_file():
+        return None
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return None
+    if set(value) != {"schema_version", "result", "terminal_coordinate", "markers"}:
+        return None
+    if value["schema_version"] != "emr4.check-in-preset-validation-native-runner.v1":
+        return None
+    if value["markers"] != markers:
+        return None
+    first_missing = next(
+        (marker for marker in NATIVE_MARKERS if marker not in markers),
+        "PRESET_DIGEST_BOUND_PASSED",
+    )
+    if value["result"] == "pass":
+        if markers != NATIVE_MARKERS or value["terminal_coordinate"] != NATIVE_MARKERS[-1]:
+            return None
+    elif value["result"] == "failed_closed":
+        if value["terminal_coordinate"] != first_missing:
+            return None
+    else:
+        return None
+    return value
+
+
+def _write_exclusive(path: Path, value: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("xb") as stream:
+        stream.write(canonical_json_bytes(value))
+
+
+def _verify_clean_runner_source(checkpoint: dict[str, Any]) -> None:
+    head = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=REPO_ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        timeout=5,
+        shell=False,
+    ).stdout.strip()
+    ancestor = subprocess.run(
+        [
+            "git",
+            "merge-base",
+            "--is-ancestor",
+            checkpoint["runner_candidate_source"],
+            head,
+        ],
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+        timeout=5,
+        shell=False,
+    )
+    tracked = subprocess.run(
+        ["git", "status", "--porcelain=v1", "--untracked-files=no"],
+        cwd=REPO_ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        timeout=5,
+        shell=False,
+    ).stdout
+    if ancestor.returncode != 0 or tracked.strip():
+        raise PresetSubcoordinateError("native_checkpoint_git_state_invalid")
+
+
+def execute_native_validation() -> dict[str, Any]:
+    if NATIVE_CONSUMED_PATH.exists() or NATIVE_TERMINAL_PATH.exists():
+        raise PresetSubcoordinateError("native_validation_already_consumed")
+    checkpoint = load_native_checkpoint()
+    _verify_clean_runner_source(checkpoint)
+    validate_native_runner_source(native_runner_source())
+    lifecycle_contract = lifecycle.validate_contract(
+        lifecycle._load_json(lifecycle.CONTRACT_PATH)
+    )
+    installation = lifecycle.verify_native_installation(lifecycle_contract)
+    parent = lifecycle.DISPOSABLE_PARENT.resolve()
+    if not parent.is_dir():
+        raise PresetSubcoordinateError("native_disposable_parent_missing")
+    root = Path(
+        tempfile.mkdtemp(prefix="check-in-preset-validation-native-", dir=parent)
+    ).resolve()
+    if root.parent != parent:
+        raise PresetSubcoordinateError("native_disposable_root_escape")
+
+    process: subprocess.Popen[bytes] | None = None
+    process_started = False
+    start: float | None = None
+    exit_code: int | None = None
+    failure: str | None = None
+    removed_environment_names = 0
+    marker_path = root / "markers.jsonl"
+    runner_terminal_path = root / "runner-terminal.json"
+    network_path = root / "network.jsonl"
+    stdout_path = root / "stdout.log"
+    stderr_path = root / "stderr.log"
+    markers: list[str] = []
+    runner_terminal: dict[str, Any] | None = None
+    network_records: list[dict[str, Any]] = []
+    network_ledger_valid = True
+    stdout_payload = b""
+    stderr_payload = b""
+    consumed = {
+        "schema_version": "emr4.check-in-preset-validation-native-latch.v1",
+        "operation_id": OPERATION_ID,
+        "attempt_id": NATIVE_ATTEMPT_ID,
+        "state": "consumed",
+        "native_process_limit": 1,
+        "automatic_retry_count": 0,
+        "resume_permitted": False,
+        "provider_enabled": False,
+        "runner_candidate_source": checkpoint["runner_candidate_source"],
+    }
+    _write_exclusive(NATIVE_CONSUMED_PATH, consumed)
+    try:
+        home = root / "home"
+        profile = home / "profiles" / "headless"
+        proof = profile / "proof"
+        workspace = root / "workspace"
+        workspace.mkdir()
+        proof.mkdir(parents=True)
+        preset_path = home / ".agent-presets" / PRESET_ID / "agent.cordis.yml"
+        preset_path.parent.mkdir(parents=True)
+        preset_path.write_bytes(CANONICAL_PRESET_PATH.read_bytes())
+        (profile / "package.json").write_text(
+            json.dumps(
+                {
+                    "name": "dsh-profile-headless",
+                    "private": True,
+                    "dependencies": {},
+                    "dsh": {
+                        "profile": {
+                            "bundles": [
+                                "@deepseek-ai/dsh-base",
+                                "@deepseek-ai/dsh-headless",
+                            ]
+                        }
+                    },
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        (profile / "pnpm-workspace.yaml").write_text(
+            "packages:\n  - .\n\nnodeLinker: hoisted\nautoInstallPeers: false\n",
+            encoding="utf-8",
+        )
+        (proof / "runner.mjs").write_bytes(native_runner_source())
+        profile_payload = native_profile_patch(root)
+        validate_native_profile(profile_payload)
+        (profile / "cordis.patch.yml").write_bytes(profile_payload)
+        guard_path = root / "network-guard.mjs"
+        guard_path.write_bytes(network_guard_source())
+        environment, removed_environment_names = build_child_environment(
+            home, guard_path, network_path
+        )
+        environment["DSH_CWD"] = str(workspace)
+        environment["DSH_PERMISSION_MODE"] = "workspace-write"
+        environment["DSH_TOOLS_MODE"] = "native"
+        if any(
+            re.search(
+                r"(DEEPSEEK|OPENAI|ANTHROPIC|GEMINI|VERTEX|GOOGLE|AZURE|AWS|GCP|API[_-]?KEY|TOKEN|PASSWORD|SECRET)",
+                name,
+                re.IGNORECASE,
+            )
+            for name in environment
+        ):
+            raise PresetSubcoordinateError("native_provider_environment_not_scrubbed")
+        command = [
+            shutil.which("node") or "node",
+            "--expose-internals",
+            str(installation["bin_path"]),
+            "--profile",
+            "headless",
+            "provider-disabled preset validation probe",
+        ]
+        with stdout_path.open("wb") as stdout, stderr_path.open("wb") as stderr:
+            start = time.monotonic()
+            process = subprocess.Popen(
+                command,
+                cwd=workspace,
+                env=environment,
+                stdout=stdout,
+                stderr=stderr,
+                shell=False,
+            )
+            process_started = True
+            exit_code = process.wait(timeout=checkpoint["timeout_seconds"])
+    except subprocess.TimeoutExpired:
+        failure = "NATIVE_PROCESS_TIMEOUT"
+    except (OSError, subprocess.SubprocessError, ValueError, PresetSubcoordinateError):
+        failure = "NATIVE_PROCESS_OR_CONTROLLER_FAILURE"
+    finally:
+        duration_ms = (
+            round((time.monotonic() - start) * 1000) if start is not None else None
+        )
+        if process is not None:
+            _terminate_process(process)
+            if exit_code is None:
+                exit_code = process.returncode
+        if stdout_path.exists():
+            stdout_payload = stdout_path.read_bytes()
+        if stderr_path.exists():
+            stderr_payload = stderr_path.read_bytes()
+        markers = _read_native_markers(marker_path)
+        runner_terminal = _read_native_runner_terminal(runner_terminal_path, markers)
+        try:
+            network_records = _network_attempts(network_path)
+        except (OSError, ValueError, json.JSONDecodeError):
+            network_records = []
+            network_ledger_valid = False
+        if root.parent != parent:
+            raise PresetSubcoordinateError("native_cleanup_root_escape")
+        shutil.rmtree(root)
+
+    process_absent = process is None or process.poll() is not None
+    root_absent = not root.exists()
+    first_missing = next(
+        (marker for marker in NATIVE_MARKERS if marker not in markers),
+        NATIVE_MARKERS[-1],
+    )
+    success = bool(
+        process_started
+        and exit_code == 0
+        and failure is None
+        and markers == NATIVE_MARKERS
+        and runner_terminal is not None
+        and runner_terminal["result"] == "pass"
+        and not network_records
+        and network_ledger_valid
+        and process_absent
+        and root_absent
+    )
+    terminal = {
+        "schema_version": "emr4.check-in-preset-validation-native-terminal.v1",
+        "operation_id": OPERATION_ID,
+        "attempt_id": NATIVE_ATTEMPT_ID,
+        "result": "pass" if success else "failed_closed",
+        "terminal_coordinate": NATIVE_MARKERS[-1] if success else first_missing,
+        "markers": markers,
+        "package": {
+            "name": "@deepseek-ai/dsh",
+            "version": "0.1.0-rc.7",
+            "installation_id": installation["installation_id"],
+            "package_lock_sha256": installation["package_lock_sha256"],
+        },
+        "counts": {
+            "native_processes": 1 if process_started else 0,
+            "automatic_retries": 0,
+            "agent_sessions": 0,
+            "turns": 0,
+            "broker_requests": 0,
+            "model_requests": 0,
+            "provider_requests": 0,
+            "network_attempts": len(network_records),
+            "docker_invocations": 0,
+            "database_invocations": 0,
+        },
+        "launch": {
+            "exit_code": exit_code,
+            "duration_ms": duration_ms,
+            "stdout_sha256": sha256_bytes(stdout_payload),
+            "stdout_bytes": len(stdout_payload),
+            "stderr_sha256": sha256_bytes(stderr_payload),
+            "stderr_bytes": len(stderr_payload),
+            "raw_logs_retained": False,
+            "credential_environment_names_removed_count": removed_environment_names,
+        },
+        "cleanup": {
+            "process_absent": process_absent,
+            "disposable_root_absent": root_absent,
+        },
+        "runner_terminal_valid": runner_terminal is not None,
+        "network_ledger_valid": network_ledger_valid,
+        "claim_boundary": (
+            "provider_disabled_native_preset_validation_subcoordinates_only_no_"
+            "agent_mount_deepseek_database_or_product_claim"
+        ),
+    }
+    schema = json.loads(NATIVE_EVIDENCE_SCHEMA_PATH.read_text(encoding="utf-8"))
+    jsonschema.validate(terminal, schema)
+    _write_exclusive(NATIVE_TERMINAL_PATH, terminal)
+    return terminal
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--stage", choices=("static", "package"), required=True)
+    parser.add_argument("--stage", choices=("static", "package", "native"), required=True)
     parser.add_argument("--contract", type=Path, default=CONTRACT_PATH)
     args = parser.parse_args()
     try:
@@ -458,10 +980,14 @@ def main() -> int:
         if args.stage == "static":
             evidence = build_static_evidence(contract)
             write_json(STATIC_EVIDENCE_PATH, evidence)
-        else:
+        elif args.stage == "package":
             evidence = run_package_only_characterization(contract)
             write_json(PACKAGE_EVIDENCE_PATH, evidence)
             REPORT_PATH.write_text(render_report(evidence), encoding="utf-8", newline="\n")
+        else:
+            evidence = execute_native_validation()
+            if evidence["result"] != "pass":
+                return 1
     except (OSError, KeyError, TypeError, ValueError, PresetSubcoordinateError) as error:
         print(f"preset subcoordinate recovery failed: {error}")
         return 2

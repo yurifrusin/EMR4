@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/check-in-preset-validation-native-terminal-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "attempt_id",
+    "result",
+    "terminal_coordinate",
+    "markers",
+    "package",
+    "counts",
+    "launch",
+    "cleanup",
+    "runner_terminal_valid",
+    "network_ledger_valid",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.check-in-preset-validation-native-terminal.v1"},
+    "operation_id": {"const": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery"},
+    "attempt_id": {"const": "check-in-preset-validation-native-probe-001"},
+    "result": {"enum": ["pass", "failed_closed"]},
+    "terminal_coordinate": {
+      "enum": [
+        "PRESET_ROW_DISCOVERY_ENTERED",
+        "PRESET_ROW_FOUND",
+        "PRESET_ROW_HEALTHY",
+        "PRESET_BYTES_READ",
+        "PRESET_PACKAGE_PARSE_PASSED",
+        "PRESET_LENGTH_BOUND_PASSED",
+        "PRESET_DIGEST_BOUND_PASSED"
+      ]
+    },
+    "markers": {
+      "type": "array",
+      "maxItems": 7,
+      "items": {
+        "enum": [
+          "PRESET_ROW_DISCOVERY_ENTERED",
+          "PRESET_ROW_FOUND",
+          "PRESET_ROW_HEALTHY",
+          "PRESET_BYTES_READ",
+          "PRESET_PACKAGE_PARSE_PASSED",
+          "PRESET_LENGTH_BOUND_PASSED",
+          "PRESET_DIGEST_BOUND_PASSED"
+        ]
+      }
+    },
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "installation_id", "package_lock_sha256"],
+      "properties": {
+        "name": {"const": "@deepseek-ai/dsh"},
+        "version": {"const": "0.1.0-rc.7"},
+        "installation_id": {"const": "deepseek-check-in-attachment-observability-native-001"},
+        "package_lock_sha256": {"pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["native_processes", "automatic_retries", "agent_sessions", "turns", "broker_requests", "model_requests", "provider_requests", "network_attempts", "docker_invocations", "database_invocations"],
+      "properties": {
+        "native_processes": {"enum": [0, 1]},
+        "automatic_retries": {"const": 0},
+        "agent_sessions": {"const": 0},
+        "turns": {"const": 0},
+        "broker_requests": {"const": 0},
+        "model_requests": {"const": 0},
+        "provider_requests": {"const": 0},
+        "network_attempts": {"const": 0},
+        "docker_invocations": {"const": 0},
+        "database_invocations": {"const": 0}
+      }
+    },
+    "launch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exit_code", "duration_ms", "stdout_sha256", "stdout_bytes", "stderr_sha256", "stderr_bytes", "raw_logs_retained", "credential_environment_names_removed_count"],
+      "properties": {
+        "exit_code": {"type": ["integer", "null"]},
+        "duration_ms": {"type": ["integer", "null"], "minimum": 0},
+        "stdout_sha256": {"pattern": "^[0-9a-f]{64}$"},
+        "stdout_bytes": {"type": "integer", "minimum": 0},
+        "stderr_sha256": {"pattern": "^[0-9a-f]{64}$"},
+        "stderr_bytes": {"type": "integer", "minimum": 0},
+        "raw_logs_retained": {"const": false},
+        "credential_environment_names_removed_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["process_absent", "disposable_root_absent"],
+      "properties": {
+        "process_absent": {"const": true},
+        "disposable_root_absent": {"const": true}
+      }
+    },
+    "runner_terminal_valid": {"type": "boolean"},
+    "network_ledger_valid": {"type": "boolean"},
+    "claim_boundary": {"const": "provider_disabled_native_preset_validation_subcoordinates_only_no_agent_mount_deepseek_database_or_product_claim"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"result": {"const": "pass"}}, "required": ["result"]},
+      "then": {
+        "properties": {
+          "terminal_coordinate": {"const": "PRESET_DIGEST_BOUND_PASSED"},
+          "markers": {"const": ["PRESET_ROW_DISCOVERY_ENTERED", "PRESET_ROW_FOUND", "PRESET_ROW_HEALTHY", "PRESET_BYTES_READ", "PRESET_PACKAGE_PARSE_PASSED", "PRESET_LENGTH_BOUND_PASSED", "PRESET_DIGEST_BOUND_PASSED"]},
+          "counts": {"properties": {"native_processes": {"const": 1}}},
+          "runner_terminal_valid": {"const": true},
+          "network_ledger_valid": {"const": true}
+        }
+      }
+    }
+  ]
+}

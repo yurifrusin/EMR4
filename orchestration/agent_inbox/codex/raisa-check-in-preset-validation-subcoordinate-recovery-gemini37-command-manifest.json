@@ -1,0 +1,71 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery",
+        "--stage",
+        "static"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery",
+        "--stage",
+        "package"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/preset-validation-gemini-e013bfc0",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_plan.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_plan.py"
+      ]
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import json,jsonschema,pathlib; r=pathlib.Path('orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery'); pairs=[('contract.json','contract.schema.json'),('deterministic-source-evidence.json','static-evidence.schema.json'),('package-only-discovery-evidence.json','package-evidence.schema.json')]; [jsonschema.validate(json.loads((r/a).read_text()),json.loads((r/b).read_text())) for a,b in pairs]"
+      ]
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import json,pathlib; r=pathlib.Path('orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery'); e=json.loads((r/'package-only-discovery-evidence.json').read_text()); s=pathlib.Path('scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py').read_text(); assert e['result']=='pass' and e['process_boundary']['package_only_node_processes']==1 and e['process_boundary']['native_harness_processes']==0 and e['process_boundary']['provider_requests']==0 and e['native_process_checkpoint_admitted'] is False; assert 'agents.create' not in s and 'presets.mount' not in s"
+      ]
+    },
+    {"id": "C09", "argv": ["git", "diff", "--check", "ea5fcbeb99df006e7b22429a38f59db3e576cd57..e013bfc0725be62c30b1af2e3ab120a3ef820616"]},
+    {"id": "C10", "argv": ["git", "diff", "--name-only", "ea5fcbeb99df006e7b22429a38f59db3e576cd57..e013bfc0725be62c30b1af2e3ab120a3ef820616"]},
+    {"id": "C11", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

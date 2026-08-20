@@ -1,0 +1,259 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\preset-validation-gemini-e013bfc0",
+  "branch": "codex/review-preset-validation-e013bfc0",
+  "head_before": "e013bfc0725be62c30b1af2e3ab120a3ef820616",
+  "head_after": "e013bfc0725be62c30b1af2e3ab120a3ef820616",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "a720a7fcb1c77236234f18ee81bae4ea758ecc451a839129d7355a0a7c3f7d7e",
+  "result": "# Gemini 3.7 Flash/high Veto \u2014 Check-in Preset-Validation Subcoordinate Recovery Review\n\n**Candidate HEAD:** `e013bfc0725be62c30b1af2e3ab120a3ef820616`  \n**Diff Base:** `ea5fcbeb99df006e7b22429a38f59db3e576cd57`  \n**Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\preset-validation-gemini-e013bfc0`  \n**Branch:** `codex/review-preset-validation-e013bfc0`\n\n---\n\n## 1. Rehydration and Authority Allocation\n\n- Rehydrated from the five controlling sources defined in [AGENTS.md](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-gemini-e013bfc0/AGENTS.md):\n  1. `live_handover_current_baton`: PR 74 / PR 75 integration accepted, local/origin `master` and `handoff/current` aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. No protected ref movement or GitHub Pages rebuild authorised.\n  2. `current_authority_allocation`: GPT Sol is conductor, recovery and acceptance owner. Gemini 3.7 Flash/high provides this single fresh read-only veto. DeepSeek Flash and native subagents are declined.\n  3. `active_plan_and_acceptance`: [`docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-gemini-e013bfc0/docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-plan.md), its threat-model delta [`docs/security/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-gemini-e013bfc0/docs/security/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-threat-model-delta.md), and contract/schemas in [`orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-gemini-e013bfc0/orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/).\n  4. `protected_evidence_boundaries`: Holdouts v1-v10 sealed, provider-experimentation paused, historical diary trove segregated, product/runtime writes closed, `docs/branding/` untracked files preserved.\n  5. `git_refs_and_worktree`: Worktree and branch verified; clean pre- and post-execution status.\n- Latch status: [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-gemini-e013bfc0/orchestration/continuity/ariadne-active-operation-latch/current.json) is `in_progress` with `completed_stage` recording deterministic characterization and `next_executable_stage` requiring independent veto before any native process checkpoint.\n\n---\n\n## 2. Assessment of Required Challenges\n\n1. **Exact Worktree, Branch, Full HEAD, and Cleanliness:**\n   Verified via C01, C02, and C11. Candidate HEAD is `e013bfc0725be62c30b1af2e3ab120a3ef820616` on `codex/review-preset-validation-e013bfc0`. Pre- and post-review working trees are clean.\n\n2. **Git Narrative Evidence Guard vs. Structured Resolution:**\n   [`scripts/ariadne_orchestrator_preflight.py`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-gemini-e013bfc0/scripts/ariadne_orchestrator_preflight.py) implements `git_ref_evidence_commit_ids`, which inspects `source_evidence.git_refs_and_worktree` for manually typed 40-character commit hashes and rejects them with `git_refs_evidence_manual_object_id_forbidden`. Structured fields (`active_operation.source_head`) continue to undergo machine-evaluated Git object ancestry resolution, while `git_refs_snapshot` remains the single machine source of truth for exact refs.\n\n3. **Package Version, Integrity, and Hash Binding:**\n   The contract and static validator bind `@deepseek-ai/dsh-agent-presets` at version `0.1.0-rc.7`, lockfile integrity `sha512-T/VcMV7lrXCFmRKrtoMTAz5DAdUmku6hz95wbikRvRc0WizIwQ3R04ke9KIeDiQcxK8xkE8cx+IYqEWa9C5gPg==`, `package.json` SHA-256 `26c8b9455103b1b565e910184902c6845661e5134c82679cce385bf5950d8278`, `discovery.js` SHA-256 `c0f57246518133790df1da5b1d41e63e8fff13a58c874d4de515848b7c860345`, and `index.js` SHA-256 `ed4bd786694596ea445ce26ad7cc5068463052b8afdd63b5f83248819d89923b`. Package commands `npm`, `npx`, `docker`, `psql` are in `forbidden_commands`, and network access is disabled (`NO_PROXY=*`).\n\n4. **Discovery Path Tracing:**\n   The deterministic check in [`scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-gemini-e013bfc0/scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py) inspects the AST/source tokens proving:\n   - `AgentPresets.list()` calls `discoverPresets(this.resolvedRoots)`.\n   - `scanRoot(root)` scans `.agent-presets` directories and looks for `agent.cordis.yml`.\n   - Content is read via `readFile(path, 'utf8')` and parsed using `js-yaml` `load(content, { schema: entryListSchema })`.\n   - Shape is checked via `entryListProblem(rows)`.\n   - Row projection adds `{ broken }` if invalid, and `resolveMountable(id)` rejects broken rows before `ensureStanding(preset)`.\n\n5. **Package-Only Process Isolation and Cleanup:**\n   The package characterization evaluates `PACKAGE_RUNNER` inside a disposable Node process without assembling the Harness service graph. It writes canonical JSON output, persists no raw stdout/stderr/exceptions, and cleans up the temporary disposable root completely upon completion.\n\n6. **Separation of Subcoordinate Readings and Closed Schemas:**\n   The three readings are cleanly separated:\n   - `row_discovery`: exact ID found once, correct path and trust, no `broken` attribute.\n   - `byte_read_and_parse`: verified regular file, readable, passes `entryListSchema` shape check.\n   - `digest_and_length_binding`: exactly 158 bytes and SHA-256 `3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1`.\n   Schemas enforce closed properties (`additionalProperties: false`) and reject malformed/broadened payloads.\n\n7. **Zero-Call, Zero-Mount, Zero-Agent Boundary:**\n   `PACKAGE_RUNNER` and controller contain no invocations of `agents.create`, `presets.mount`, agent sessions, turns, broker requests, model requests, provider requests, Docker or database commands.\n\n8. **Zero Native Process Count Before Checkpoint:**\n   `process_boundary.native_harness_processes` is 0; `native_process_checkpoint_admitted` is `false`.\n\n9. **Separate Fresh Preexecution Receipt Required for Stage 4:**\n   The plan explicitly requires stages 1 and 2, schema validation, focused tests, and a fresh 5-source preexecution receipt before the latch can advance to Stage 3 / Stage 4 native validation. Stage 4 validation is strictly limited to 1 provider-disabled process emitting markers up to `PRESET_DIGEST_BOUND_PASSED` without retry.\n\n10. **Preservation of Product, Data, and Deployment Scope:**\n    All modifications are strictly confined to the recovery plan, threat-model delta, continuity artifacts, preflight git guard update, recovery script, and unit tests. No product runtime, API, database schema, or protected branch references have been touched.\n\n11. **Command Execution Results:**\n    All eleven bounded commands C01 through C11 executed in order and exited with status code 0.\n\n---\n\n## 3. Summary of Manifest Executions\n\n| Command ID | Argv | Exit Code | Result Summary |\n|---|---|---|---|\n| C01 | `git status --short --branch` | 0 | Clean branch `codex/review-preset-validation-e013bfc0` |\n| C02 | `git rev-parse HEAD` | 0 | `e013bfc0725be62c30b1af2e3ab120a3ef820616` |\n| C03 | `python -m scripts.raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery --stage static` | 0 | Static stage source/preset validation passed |\n| C04 | `python -m scripts.raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery --stage package` | 0 | Package-only discovery characterization passed |\n| C05 | `python -m scripts.ariadne_provider_free_pytest ...` | 0 | 42 unit tests passed |\n| C06 | `ruff check ...` | 0 | All lint/formatting checks passed |\n| C07 | `python -c jsonschema.validate ...` | 0 | Contract and evidence schemas validated |\n| C08 | `python -c assertions ...` | 0 | Process boundaries, counters, and symbol exclusions verified |\n| C09 | `git diff --check ...` | 0 | No whitespace or git diff formatting anomalies |\n| C10 | `git diff --name-only ...` | 0 | Modified files strictly confined to allowlisted recovery scope |\n| C11 | `git status --short --branch` | 0 | Worktree remained completely clean |\n\n---\n\n## 4. Conclusion\n\nAll 11 challenges are satisfied, all 11 commands passed with exit code 0, no P0-P2 findings exist, and no unauthorized surface or boundary was opened. The deterministic candidate correctly replaces the opaque coordinate with closed subcoordinate readings and enables a separately frozen provider-disabled native validation checkpoint.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Veto \u2014 Check-in Preset-Validation Subcoordinate Recovery Review\n\n**Candidate HEAD:** `e013bfc0725be62c30b1af2e3ab120a3ef820616`  \n**Diff Base:** `ea5fcbeb99df006e7b22429a38f59db3e576cd57`  \n**Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\preset-validation-gemini-e013bfc0`  \n**Branch:** `codex/review-preset-validation-e013bfc0`\n\n---\n\n## 1. Rehydration and Authority Allocation\n\n- Rehydrated from the five controlling sources defined in [AGENTS.md](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-gemini-e013bfc0/AGENTS.md):\n  1. `live_handover_current_baton`: PR 74 / PR 75 integration accepted, local/origin `master` and `handoff/current` aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. No protected ref movement or GitHub Pages rebuild authorised.\n  2. `current_authority_allocation`: GPT Sol is conductor, recovery and acceptance owner. Gemini 3.7 Flash/high provides this single fresh read-only veto. DeepSeek Flash and native subagents are declined.\n  3. `active_plan_and_acceptance`: [`docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-gemini-e013bfc0/docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-plan.md), its threat-model delta [`docs/security/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-gemini-e013bfc0/docs/security/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-threat-model-delta.md), and contract/schemas in [`orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-gemini-e013bfc0/orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/).\n  4. `protected_evidence_boundaries`: Holdouts v1-v10 sealed, provider-experimentation paused, historical diary trove segregated, product/runtime writes closed, `docs/branding/` untracked files preserved.\n  5. `git_refs_and_worktree`: Worktree and branch verified; clean pre- and post-execution status.\n- Latch status: [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-gemini-e013bfc0/orchestration/continuity/ariadne-active-operation-latch/current.json) is `in_progress` with `completed_stage` recording deterministic characterization and `next_executable_stage` requiring independent veto before any native process checkpoint.\n\n---\n\n## 2. Assessment of Required Challenges\n\n1. **Exact Worktree, Branch, Full HEAD, and Cleanliness:**\n   Verified via C01, C02, and C11. Candidate HEAD is `e013bfc0725be62c30b1af2e3ab120a3ef820616` on `codex/review-preset-validation-e013bfc0`. Pre- and post-review working trees are clean.\n\n2. **Git Narrative Evidence Guard vs. Structured Resolution:**\n   [`scripts/ariadne_orchestrator_preflight.py`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-gemini-e013bfc0/scripts/ariadne_orchestrator_preflight.py) implements `git_ref_evidence_commit_ids`, which inspects `source_evidence.git_refs_and_worktree` for manually typed 40-character commit hashes and rejects them with `git_refs_evidence_manual_object_id_forbidden`. Structured fields (`active_operation.source_head`) continue to undergo machine-evaluated Git object ancestry resolution, while `git_refs_snapshot` remains the single machine source of truth for exact refs.\n\n3. **Package Version, Integrity, and Hash Binding:**\n   The contract and static validator bind `@deepseek-ai/dsh-agent-presets` at version `0.1.0-rc.7`, lockfile integrity `sha512-T/VcMV7lrXCFmRKrtoMTAz5DAdUmku6hz95wbikRvRc0WizIwQ3R04ke9KIeDiQcxK8xkE8cx+IYqEWa9C5gPg==`, `package.json` SHA-256 `26c8b9455103b1b565e910184902c6845661e5134c82679cce385bf5950d8278`, `discovery.js` SHA-256 `c0f57246518133790df1da5b1d41e63e8fff13a58c874d4de515848b7c860345`, and `index.js` SHA-256 `ed4bd786694596ea445ce26ad7cc5068463052b8afdd63b5f83248819d89923b`. Package commands `npm`, `npx`, `docker`, `psql` are in `forbidden_commands`, and network access is disabled (`NO_PROXY=*`).\n\n4. **Discovery Path Tracing:**\n   The deterministic check in [`scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-gemini-e013bfc0/scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py) inspects the AST/source tokens proving:\n   - `AgentPresets.list()` calls `discoverPresets(this.resolvedRoots)`.\n   - `scanRoot(root)` scans `.agent-presets` directories and looks for `agent.cordis.yml`.\n   - Content is read via `readFile(path, 'utf8')` and parsed using `js-yaml` `load(content, { schema: entryListSchema })`.\n   - Shape is checked via `entryListProblem(rows)`.\n   - Row projection adds `{ broken }` if invalid, and `resolveMountable(id)` rejects broken rows before `ensureStanding(preset)`.\n\n5. **Package-Only Process Isolation and Cleanup:**\n   The package characterization evaluates `PACKAGE_RUNNER` inside a disposable Node process without assembling the Harness service graph. It writes canonical JSON output, persists no raw stdout/stderr/exceptions, and cleans up the temporary disposable root completely upon completion.\n\n6. **Separation of Subcoordinate Readings and Closed Schemas:**\n   The three readings are cleanly separated:\n   - `row_discovery`: exact ID found once, correct path and trust, no `broken` attribute.\n   - `byte_read_and_parse`: verified regular file, readable, passes `entryListSchema` shape check.\n   - `digest_and_length_binding`: exactly 158 bytes and SHA-256 `3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1`.\n   Schemas enforce closed properties (`additionalProperties: false`) and reject malformed/broadened payloads.\n\n7. **Zero-Call, Zero-Mount, Zero-Agent Boundary:**\n   `PACKAGE_RUNNER` and controller contain no invocations of `agents.create`, `presets.mount`, agent sessions, turns, broker requests, model requests, provider requests, Docker or database commands.\n\n8. **Zero Native Process Count Before Checkpoint:**\n   `process_boundary.native_harness_processes` is 0; `native_process_checkpoint_admitted` is `false`.\n\n9. **Separate Fresh Preexecution Receipt Required for Stage 4:**\n   The plan explicitly requires stages 1 and 2, schema validation, focused tests, and a fresh 5-source preexecution receipt before the latch can advance to Stage 3 / Stage 4 native validation. Stage 4 validation is strictly limited to 1 provider-disabled process emitting markers up to `PRESET_DIGEST_BOUND_PASSED` without retry.\n\n10. **Preservation of Product, Data, and Deployment Scope:**\n    All modifications are strictly confined to the recovery plan, threat-model delta, continuity artifacts, preflight git guard update, recovery script, and unit tests. No product runtime, API, database schema, or protected branch references have been touched.\n\n11. **Command Execution Results:**\n    All eleven bounded commands C01 through C11 executed in order and exited with status code 0.\n\n---\n\n## 3. Summary of Manifest Executions\n\n| Command ID | Argv | Exit Code | Result Summary |\n|---|---|---|---|\n| C01 | `git status --short --branch` | 0 | Clean branch `codex/review-preset-validation-e013bfc0` |\n| C02 | `git rev-parse HEAD` | 0 | `e013bfc0725be62c30b1af2e3ab120a3ef820616` |\n| C03 | `python -m scripts.raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery --stage static` | 0 | Static stage source/preset validation passed |\n| C04 | `python -m scripts.raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery --stage package` | 0 | Package-only discovery characterization passed |\n| C05 | `python -m scripts.ariadne_provider_free_pytest ...` | 0 | 42 unit tests passed |\n| C06 | `ruff check ...` | 0 | All lint/formatting checks passed |\n| C07 | `python -c jsonschema.validate ...` | 0 | Contract and evidence schemas validated |\n| C08 | `python -c assertions ...` | 0 | Process boundaries, counters, and symbol exclusions verified |\n| C09 | `git diff --check ...` | 0 | No whitespace or git diff formatting anomalies |\n| C10 | `git diff --name-only ...` | 0 | Modified files strictly confined to allowlisted recovery scope |\n| C11 | `git status --short --branch` | 0 | Worktree remained completely clean |\n\n---\n\n## 4. Conclusion\n\nAll 11 challenges are satisfied, all 11 commands passed with exit code 0, no P0-P2 findings exist, and no unauthorized surface or boundary was opened. The deterministic candidate correctly replaces the opaque coordinate with closed subcoordinate readings and enables a separately frozen provider-disabled native validation checkpoint.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery",
+          "--stage",
+          "static"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery",
+          "--stage",
+          "package"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/preset-validation-gemini-e013bfc0",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "scripts/ariadne_orchestrator_preflight.py",
+          "scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-c",
+          "import json,jsonschema,pathlib; r=pathlib.Path('orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery'); pairs=[('contract.json','contract.schema.json'),('deterministic-source-evidence.json','static-evidence.schema.json'),('package-only-discovery-evidence.json','package-evidence.schema.json')]; [jsonschema.validate(json.loads((r/a).read_text()),json.loads((r/b).read_text())) for a,b in pairs]"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-c",
+          "import json,pathlib; r=pathlib.Path('orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery'); e=json.loads((r/'package-only-discovery-evidence.json').read_text()); s=pathlib.Path('scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py').read_text(); assert e['result']=='pass' and e['process_boundary']['package_only_node_processes']==1 and e['process_boundary']['native_harness_processes']==0 and e['process_boundary']['provider_requests']==0 and e['native_process_checkpoint_admitted'] is False; assert 'agents.create' not in s and 'presets.mount' not in s"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "ea5fcbeb99df006e7b22429a38f59db3e576cd57..e013bfc0725be62c30b1af2e3ab120a3ef820616"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "ea5fcbeb99df006e7b22429a38f59db3e576cd57..e013bfc0725be62c30b1af2e3ab120a3ef820616"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C11",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "e0d0293ae9c23add8280fac7bc4d424126c862eac2f0dddcfb8ebacdebd1d14e",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery",
+        "--stage",
+        "static"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery",
+        "--stage",
+        "package"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/preset-validation-gemini-e013bfc0",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/ariadne_orchestrator_preflight.py",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import json,jsonschema,pathlib; r=pathlib.Path('orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery'); pairs=[('contract.json','contract.schema.json'),('deterministic-source-evidence.json','static-evidence.schema.json'),('package-only-discovery-evidence.json','package-evidence.schema.json')]; [jsonschema.validate(json.loads((r/a).read_text()),json.loads((r/b).read_text())) for a,b in pairs]"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import json,pathlib; r=pathlib.Path('orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery'); e=json.loads((r/'package-only-discovery-evidence.json').read_text()); s=pathlib.Path('scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py').read_text(); assert e['result']=='pass' and e['process_boundary']['package_only_node_processes']==1 and e['process_boundary']['native_harness_processes']==0 and e['process_boundary']['provider_requests']==0 and e['native_process_checkpoint_admitted'] is False; assert 'agents.create' not in s and 'presets.mount' not in s"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "ea5fcbeb99df006e7b22429a38f59db3e576cd57..e013bfc0725be62c30b1af2e3ab120a3ef820616"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "ea5fcbeb99df006e7b22429a38f59db3e576cd57..e013bfc0725be62c30b1af2e3ab120a3ef820616"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C11",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

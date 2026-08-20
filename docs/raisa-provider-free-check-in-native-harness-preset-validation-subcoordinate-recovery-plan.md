@@ -160,7 +160,9 @@ cannot be called native preset-validation success.
   and no DeepSeek model request is admitted.
 - **Gemini 3.7 Flash/high:** declined at planning with neutral leverage;
   reassess only after an exact deterministic candidate exists. It may own one
-  fresh isolated read-only veto, never implementation or acceptance.
+  fresh isolated read-only veto per materially distinct exact candidate (the
+  deterministic/package candidate and, if subsequently authored, the native
+  preexecution runner candidate), never implementation or acceptance.
 - **Native subagents:** declined. Current developer policy prohibits proactive
   delegation, and the source, checkpoint and one-process boundary are serial.
 - **GPT Sol:** owns the Git guard, plan, deterministic/package characterization,

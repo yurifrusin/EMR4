@@ -3,18 +3,25 @@ from pathlib import Path
 
 import jsonschema
 import pytest
+import yaml
 
 from scripts.raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery import (
     CANONICAL_PRESET_PATH,
     CONTRACT_PATH,
     CONTINUITY_ROOT,
+    NATIVE_EVIDENCE_SCHEMA_PATH,
+    NATIVE_MARKERS,
     PACKAGE_RUNNER,
     PRESET_SHA256,
     PresetSubcoordinateError,
     _validate_package_runner,
     build_static_evidence,
     load_contract,
+    native_profile_patch,
+    native_runner_source,
     run_package_only_characterization,
+    validate_native_profile,
+    validate_native_runner_source,
     validate_preset,
 )
 
@@ -113,3 +120,81 @@ def test_schemas_reject_broadened_evidence() -> None:
 
     with pytest.raises(jsonschema.ValidationError):
         jsonschema.validate(static, _json(CONTINUITY_ROOT / "static-evidence.schema.json"))
+
+
+def test_native_runner_stops_after_digest_without_agent_or_mount_path() -> None:
+    payload = native_runner_source()
+    reading = validate_native_runner_source(payload)
+    source = payload.decode("utf-8")
+
+    assert reading["single_preset_list"] is True
+    assert reading["no_agents_create"] is True
+    assert reading["no_preset_mount"] is True
+    assert reading["no_session"] is True
+    assert reading["no_turn"] is True
+    assert "ctx.get(\"appExit\")(0)" in source
+    assert source.index("PRESET_ROW_DISCOVERY_ENTERED") < source.index(
+        "PRESET_DIGEST_BOUND_PASSED"
+    )
+
+
+def test_native_profile_injects_only_agent_presets(tmp_path: Path) -> None:
+    payload = native_profile_patch(tmp_path.resolve())
+    reading = validate_native_profile(payload)
+    rows = yaml.safe_load(payload)
+    inserted = next(row["insert"] for row in rows if "insert" in row)
+    runner = inserted[1]
+
+    assert reading["bytes"] == len(payload)
+    assert runner["id"] == "emr4-provider-disabled-preset-validation-probe"
+    assert runner["inject"] == ["agentPresets"]
+    assert set(runner["config"]) == {"markerPath", "terminalPath", "presetPath"}
+
+
+def test_native_pass_terminal_schema_is_closed() -> None:
+    terminal = {
+        "schema_version": "emr4.check-in-preset-validation-native-terminal.v1",
+        "operation_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+        "attempt_id": "check-in-preset-validation-native-probe-001",
+        "result": "pass",
+        "terminal_coordinate": NATIVE_MARKERS[-1],
+        "markers": NATIVE_MARKERS,
+        "package": {
+            "name": "@deepseek-ai/dsh",
+            "version": "0.1.0-rc.7",
+            "installation_id": "deepseek-check-in-attachment-observability-native-001",
+            "package_lock_sha256": "a" * 64,
+        },
+        "counts": {
+            "native_processes": 1,
+            "automatic_retries": 0,
+            "agent_sessions": 0,
+            "turns": 0,
+            "broker_requests": 0,
+            "model_requests": 0,
+            "provider_requests": 0,
+            "network_attempts": 0,
+            "docker_invocations": 0,
+            "database_invocations": 0,
+        },
+        "launch": {
+            "exit_code": 0,
+            "duration_ms": 1,
+            "stdout_sha256": "b" * 64,
+            "stdout_bytes": 0,
+            "stderr_sha256": "c" * 64,
+            "stderr_bytes": 0,
+            "raw_logs_retained": False,
+            "credential_environment_names_removed_count": 1,
+        },
+        "cleanup": {"process_absent": True, "disposable_root_absent": True},
+        "runner_terminal_valid": True,
+        "network_ledger_valid": True,
+        "claim_boundary": "provider_disabled_native_preset_validation_subcoordinates_only_no_agent_mount_deepseek_database_or_product_claim",
+    }
+    schema = _json(NATIVE_EVIDENCE_SCHEMA_PATH)
+
+    jsonschema.validate(terminal, schema)
+    terminal["counts"]["agent_sessions"] = 1
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.validate(terminal, schema)
