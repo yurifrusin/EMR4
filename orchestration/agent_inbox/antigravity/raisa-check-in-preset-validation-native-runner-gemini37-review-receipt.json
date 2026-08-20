@@ -1,0 +1,275 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\preset-validation-native-runner-gemini-8b42760c",
+  "branch": "codex/review-preset-native-runner-8b42760c",
+  "head_before": "8b42760cf68bc2fcc09432de9bd42a8d80b50317",
+  "head_after": "8b42760cf68bc2fcc09432de9bd42a8d80b50317",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "c02f18f95dcf6ee4baae283f96e1a4a2bf19e3d4e5551d8fc2588ee0384a5329",
+  "result": "# Gemini 3.7 Flash/high Preexecution Veto \u2014 No-Agent Native Preset Runner\n\n**Candidate HEAD:** `8b42760cf68bc2fcc09432de9bd42a8d80b50317`  \n**Diff Base:** `e013bfc0725be62c30b1af2e3ab120a3ef820616`  \n**Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\preset-validation-native-runner-gemini-8b42760c`  \n**Branch:** `codex/review-preset-native-runner-8b42760c`  \n**Timestamp:** `2026-08-20T17:01:49.2869379+10:00 (Australia/Brisbane)`  \n\n---\n\n## 1. Mandatory Rehydration and Authority Verification\n\nRehydrated completely across all five controlling sources defined in [AGENTS.md](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/AGENTS.md):\n\n1. **`live_handover_current_baton`**:\n   - PR 74 integration and PR 75 no-`docs/**` baton are closed and accepted.\n   - Protected `master` and `handoff/current` remain aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n   - No protected ref movement or public GitHub Pages rebuild is authorised.\n2. **`current_authority_allocation`**:\n   - GPT Sol remains the conductor, implementation, checkpoint, recovery, and acceptance owner.\n   - DeepSeek Flash is declined with negative leverage.\n   - Gemini 3.7 Flash/high holds sole ownership of this read-only preexecution veto review.\n   - Native subagents are declined.\n   - Sol retains all final acceptance authority.\n3. **`active_plan_and_acceptance`**:\n   - [`docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-plan.md) (status `frozen`).\n   - Threat-model delta [`docs/security/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/docs/security/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-threat-model-delta.md).\n   - Continuity contract and schemas in [`orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/).\n4. **`protected_evidence_boundaries`**:\n   - Holdouts v1\u2013v10 sealed; provider experimentation paused; historical diary trove segregated; product/runtime write paths closed; `docs/branding/` and all unrelated untracked files preserved.\n5. **`git_refs_and_worktree`**:\n   - Exact bound worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\preset-validation-native-runner-gemini-8b42760c`.\n   - Exact bound branch: `codex/review-preset-native-runner-8b42760c`.\n   - Candidate HEAD: `8b42760cf68bc2fcc09432de9bd42a8d80b50317`.\n   - Worktree cleanliness confirmed pre- and post-review.\n6. **Active Operation Latch**:\n   - [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/orchestration/continuity/ariadne-active-operation-latch/current.json) validated as `in_progress`. Completed stage records the deterministic/package candidate pass; next executable stage requires this fresh preexecution veto of the newly authored native runner before any native checkpoint can be committed.\n\n---\n\n## 2. Assessment of Required Challenges\n\n### Challenge 1: Exact Branch, Full HEAD, and Clean Worktree\n- **Branch**: `codex/review-preset-native-runner-8b42760c` confirmed via C01 and C12.\n- **HEAD**: `8b42760cf68bc2fcc09432de9bd42a8d80b50317` confirmed via C02.\n- **Working Tree**: Completely clean before and after manifest execution (`git status --short --branch` outputs only `## codex/review-preset-native-runner-8b42760c`).\n\n### Challenge 2: Inspection of `native_runner_source()`\n- `native_runner_source()` in [`scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py) exports `inject = [\"agentPresets\"]`.\n- The only service retrieved from the Cordis context is `ctx.get(\"agentPresets\")`.\n- The only service method called is a single `await presets.list()`.\n- Upon emitting `PRESET_DIGEST_BOUND_PASSED`, it writes the passing terminal record and immediately calls `ctx.get(\"appExit\")(0)`.\n- On any exception, it catches without inspecting raw error fields, writes a closed failure terminal record with `firstMissing(seen)`, and calls `ctx.get(\"appExit\")(1)`.\n\n### Challenge 3: Confirmation of No Agent/Mount/Session/Turn/Provider Paths\n- The generated JavaScript contains no occurrence of `agents.create`, `presets.mount`, `.mount(`, `SessionId`, `createUserMessage`, `.followup(`, or any broker/model/provider/HTTP/network request.\n- Verified both by source code inspection and mechanical assertions in `validate_native_runner_source()` and manifest step C08.\n\n### Challenge 4: Exact Seven Ordered and Prefix-Validated Markers\n- The seven emitted markers are exact:\n  1. `PRESET_ROW_DISCOVERY_ENTERED`\n  2. `PRESET_ROW_FOUND`\n  3. `PRESET_ROW_HEALTHY`\n  4. `PRESET_BYTES_READ`\n  5. `PRESET_PACKAGE_PARSE_PASSED`\n  6. `PRESET_LENGTH_BOUND_PASSED`\n  7. `PRESET_DIGEST_BOUND_PASSED`\n- Sequence order is enforced in the runner and verified by `_read_native_markers()` in the controller, which validates that `sequence == len(markers) + 1` and matches `NATIVE_MARKERS[len(markers)]` exactly, returning an empty list on any skipped, out-of-order, or invalid marker.\n\n### Challenge 5: Exact Healthy Row Requirements Preceding File Read\n- The runner filters `rows` strictly for `id === \"emr4-bounded-worker\"` and asserts `selected.length === 1`.\n- It asserts `resolve(preset.path) === resolve(config.presetPath)` and `preset.trust === \"system\"` before emitting `PRESET_ROW_FOUND`.\n- It asserts `preset.broken === undefined` before emitting `PRESET_ROW_HEALTHY`.\n- File content is read via `readFileSync(preset.path)` strictly after `PRESET_ROW_HEALTHY` has been emitted.\n\n### Challenge 6: Exact 158-Byte Length and SHA-256 Digest Binding\n- The runner asserts `payload.length === 158` before emitting `PRESET_LENGTH_BOUND_PASSED`.\n- It computes `createHash(\"sha256\").update(payload).digest(\"hex\")` and strictly compares it against `3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1` before emitting `PRESET_DIGEST_BOUND_PASSED`.\n\n### Challenge 7: Exclusive Sanitized Terminal Write and No Raw Exception Leaks\n- The runner's `terminal()` helper uses `writeFileSync` with `{encoding: \"utf8\", flag: \"wx\"}` for exclusive write.\n- The catch block is parameterless (`catch { ... }`), guaranteeing no `error.message`, `error.stack`, or raw exception text can leak into output.\n- `validate_native_runner_source()` mechanically enforces `\"error.message\" not in source and \"error.stack\" not in source` and `one_terminal_write`.\n\n### Challenge 8: Profile Injection and Scrubbed Environment\n- `native_profile_patch()` replaces the lifecycle probe with `emr4-provider-disabled-preset-validation-probe`, injecting only `agentPresets`.\n- `validate_native_profile()` enforces that `runner[\"inject\"] == [\"agentPresets\"]` and configuration keys are strictly `{\"markerPath\", \"terminalPath\", \"presetPath\"}`.\n- `execute_native_validation()` uses `build_child_environment()` with a strict regex check ensuring all provider, API key, token, and cloud credential environment variables are scrubbed, raising `PresetSubcoordinateError(\"native_provider_environment_not_scrubbed\")` if any remain.\n- A local `network-guard.mjs` prevents external socket / network interactions.\n\n### Challenge 9: One-Shot Latch, Zero Retries, Bounded Timeout, and Exact Cleanup\n- `execute_native_validation()` writes `NATIVE_CONSUMED_PATH` (`native-validation-consumed.json`) exclusively with `\"state\": \"consumed\"`, `\"native_process_limit\": 1`, `\"automatic_retry_count\": 0`, and `\"resume_permitted\": false` *prior* to launching the subprocess.\n- Subsequent calls fail closed immediately with `\"native_validation_already_consumed\"`.\n- Process execution is bounded by `checkpoint[\"timeout_seconds\"]` (60s).\n- The `finally:` block terminates any active process (`_terminate_process`), removes the disposable root via `shutil.rmtree(root)`, and verifies `process_absent` and `root_absent`.\n\n### Challenge 10: Native Evidence Schema Zero-Count and Cleanup Bounds\n- [`orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-evidence.schema.json`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-evidence.schema.json) enforces:\n  - `counts.native_processes`: `enum: [0, 1]`\n  - `counts.automatic_retries`: `const: 0`\n  - `counts.agent_sessions`: `const: 0`\n  - `counts.turns`: `const: 0`\n  - `counts.broker_requests`: `const: 0`\n  - `counts.model_requests`: `const: 0`\n  - `counts.provider_requests`: `const: 0`\n  - `counts.network_attempts`: `const: 0`\n  - `counts.docker_invocations`: `const: 0`\n  - `counts.database_invocations`: `const: 0`\n  - `cleanup.process_absent`: `const: true`\n  - `cleanup.disposable_root_absent`: `const: true`\n  - `claim_boundary`: `const: \"provider_disabled_native_preset_validation_subcoordinates_only_no_agent_mount_deepseek_database_or_product_claim\"`\n\n### Challenge 11: Fail-Closed Protection Without Committed Checkpoint and Passing Review\n- `execute_native_validation()` invokes `load_native_checkpoint()`, which strictly checks:\n  - `NATIVE_CHECKPOINT_PATH` exists, matches schema, and has `status == \"admitted\"`.\n  - `runner_sha256` in checkpoint matches `sha256_bytes(native_runner_source())`.\n  - `review_receipt` file exists, its SHA-256 matches `checkpoint[\"review_receipt_sha256\"]`, `decision == \"pass\"`, `head_before == runner_candidate_source`, `head_after == runner_candidate_source`, and `dirty_after == false`.\n  - Git HEAD is an ancestor of `runner_candidate_source` with a clean index.\n- In step C09, `NATIVE_CHECKPOINT_PATH`, `NATIVE_CONSUMED_PATH`, and `NATIVE_TERMINAL_PATH` are all verified absent. Native execution is mechanically prevented until a separate checkpoint commit is authored.\n\n### Challenge 12: Execution of Manifest Commands C01\u2013C12\n- All 12 manifest commands C01 through C12 executed in exact order, returned exit code 0, and left the worktree clean.\n\n---\n\n## 3. Command Manifest Results Summary\n\n| ID | Command | Exit Code | Outcome |\n|---|---|---|---|\n| C01 | `git status --short --branch` | 0 | Clean branch `codex/review-preset-native-runner-8b42760c` |\n| C02 | `git rev-parse HEAD` | 0 | Candidate HEAD `8b42760cf68bc2fcc09432de9bd42a8d80b50317` |\n| C03 | `python -m scripts.ariadne_provider_free_pytest ...` | 0 | 15 unit and plan tests passed |\n| C04 | `ruff check ...` | 0 | Code formatting and lint checks passed |\n| C05 | `python -m py_compile ...` | 0 | Bytecode compilation succeeded with zero warnings/errors |\n| C06 | `python -m scripts... --stage static` | 0 | Deterministic static evidence generated and validated |\n| C07 | `python -m scripts... --stage package` | 0 | Package-only discovery characterization passed |\n| C08 | `python -c assertions (reading & profile)` | 0 | Runner source and profile AST checks confirmed no agent/mount/turn paths |\n| C09 | `python -c assertions (paths absent & marker)` | 0 | Checkpoint/consumed/terminal paths confirmed absent; final marker bound |\n| C10 | `git diff --check e013bfc0...8b42760c` | 0 | Diff is clean with zero whitespace or format issues |\n| C11 | `git diff --name-only e013bfc0...8b42760c` | 0 | Modified files strictly confined to recovery plan, runner, schema, and tests |\n| C12 | `git status --short --branch` | 0 | Worktree remains completely clean |\n\n---\n\n## 4. Veto Review Conclusion\n\nThe candidate at `8b42760cf68bc2fcc09432de9bd42a8d80b50317` satisfies all 12 challenges without exception:\n- The native runner is mechanically incapable of creating agents, mounting presets, creating sessions/turns, or making broker/model/provider/network/Docker/database requests.\n- It is constrained to exactly seven ordered markers and writes an exclusive sanitized terminal.\n- Native execution is fail-closed and cannot proceed without a separately committed checkpoint bound to this review receipt.\n- No P0\u2013P2 issues exist, all boundaries remain intact, and all twelve commands passed with exit code 0.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Preexecution Veto \u2014 No-Agent Native Preset Runner\n\n**Candidate HEAD:** `8b42760cf68bc2fcc09432de9bd42a8d80b50317`  \n**Diff Base:** `e013bfc0725be62c30b1af2e3ab120a3ef820616`  \n**Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\preset-validation-native-runner-gemini-8b42760c`  \n**Branch:** `codex/review-preset-native-runner-8b42760c`  \n**Timestamp:** `2026-08-20T17:01:49.2869379+10:00 (Australia/Brisbane)`  \n\n---\n\n## 1. Mandatory Rehydration and Authority Verification\n\nRehydrated completely across all five controlling sources defined in [AGENTS.md](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/AGENTS.md):\n\n1. **`live_handover_current_baton`**:\n   - PR 74 integration and PR 75 no-`docs/**` baton are closed and accepted.\n   - Protected `master` and `handoff/current` remain aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n   - No protected ref movement or public GitHub Pages rebuild is authorised.\n2. **`current_authority_allocation`**:\n   - GPT Sol remains the conductor, implementation, checkpoint, recovery, and acceptance owner.\n   - DeepSeek Flash is declined with negative leverage.\n   - Gemini 3.7 Flash/high holds sole ownership of this read-only preexecution veto review.\n   - Native subagents are declined.\n   - Sol retains all final acceptance authority.\n3. **`active_plan_and_acceptance`**:\n   - [`docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-plan.md) (status `frozen`).\n   - Threat-model delta [`docs/security/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-threat-model-delta.md`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/docs/security/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-threat-model-delta.md).\n   - Continuity contract and schemas in [`orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/).\n4. **`protected_evidence_boundaries`**:\n   - Holdouts v1\u2013v10 sealed; provider experimentation paused; historical diary trove segregated; product/runtime write paths closed; `docs/branding/` and all unrelated untracked files preserved.\n5. **`git_refs_and_worktree`**:\n   - Exact bound worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\preset-validation-native-runner-gemini-8b42760c`.\n   - Exact bound branch: `codex/review-preset-native-runner-8b42760c`.\n   - Candidate HEAD: `8b42760cf68bc2fcc09432de9bd42a8d80b50317`.\n   - Worktree cleanliness confirmed pre- and post-review.\n6. **Active Operation Latch**:\n   - [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/orchestration/continuity/ariadne-active-operation-latch/current.json) validated as `in_progress`. Completed stage records the deterministic/package candidate pass; next executable stage requires this fresh preexecution veto of the newly authored native runner before any native checkpoint can be committed.\n\n---\n\n## 2. Assessment of Required Challenges\n\n### Challenge 1: Exact Branch, Full HEAD, and Clean Worktree\n- **Branch**: `codex/review-preset-native-runner-8b42760c` confirmed via C01 and C12.\n- **HEAD**: `8b42760cf68bc2fcc09432de9bd42a8d80b50317` confirmed via C02.\n- **Working Tree**: Completely clean before and after manifest execution (`git status --short --branch` outputs only `## codex/review-preset-native-runner-8b42760c`).\n\n### Challenge 2: Inspection of `native_runner_source()`\n- `native_runner_source()` in [`scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py) exports `inject = [\"agentPresets\"]`.\n- The only service retrieved from the Cordis context is `ctx.get(\"agentPresets\")`.\n- The only service method called is a single `await presets.list()`.\n- Upon emitting `PRESET_DIGEST_BOUND_PASSED`, it writes the passing terminal record and immediately calls `ctx.get(\"appExit\")(0)`.\n- On any exception, it catches without inspecting raw error fields, writes a closed failure terminal record with `firstMissing(seen)`, and calls `ctx.get(\"appExit\")(1)`.\n\n### Challenge 3: Confirmation of No Agent/Mount/Session/Turn/Provider Paths\n- The generated JavaScript contains no occurrence of `agents.create`, `presets.mount`, `.mount(`, `SessionId`, `createUserMessage`, `.followup(`, or any broker/model/provider/HTTP/network request.\n- Verified both by source code inspection and mechanical assertions in `validate_native_runner_source()` and manifest step C08.\n\n### Challenge 4: Exact Seven Ordered and Prefix-Validated Markers\n- The seven emitted markers are exact:\n  1. `PRESET_ROW_DISCOVERY_ENTERED`\n  2. `PRESET_ROW_FOUND`\n  3. `PRESET_ROW_HEALTHY`\n  4. `PRESET_BYTES_READ`\n  5. `PRESET_PACKAGE_PARSE_PASSED`\n  6. `PRESET_LENGTH_BOUND_PASSED`\n  7. `PRESET_DIGEST_BOUND_PASSED`\n- Sequence order is enforced in the runner and verified by `_read_native_markers()` in the controller, which validates that `sequence == len(markers) + 1` and matches `NATIVE_MARKERS[len(markers)]` exactly, returning an empty list on any skipped, out-of-order, or invalid marker.\n\n### Challenge 5: Exact Healthy Row Requirements Preceding File Read\n- The runner filters `rows` strictly for `id === \"emr4-bounded-worker\"` and asserts `selected.length === 1`.\n- It asserts `resolve(preset.path) === resolve(config.presetPath)` and `preset.trust === \"system\"` before emitting `PRESET_ROW_FOUND`.\n- It asserts `preset.broken === undefined` before emitting `PRESET_ROW_HEALTHY`.\n- File content is read via `readFileSync(preset.path)` strictly after `PRESET_ROW_HEALTHY` has been emitted.\n\n### Challenge 6: Exact 158-Byte Length and SHA-256 Digest Binding\n- The runner asserts `payload.length === 158` before emitting `PRESET_LENGTH_BOUND_PASSED`.\n- It computes `createHash(\"sha256\").update(payload).digest(\"hex\")` and strictly compares it against `3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1` before emitting `PRESET_DIGEST_BOUND_PASSED`.\n\n### Challenge 7: Exclusive Sanitized Terminal Write and No Raw Exception Leaks\n- The runner's `terminal()` helper uses `writeFileSync` with `{encoding: \"utf8\", flag: \"wx\"}` for exclusive write.\n- The catch block is parameterless (`catch { ... }`), guaranteeing no `error.message`, `error.stack`, or raw exception text can leak into output.\n- `validate_native_runner_source()` mechanically enforces `\"error.message\" not in source and \"error.stack\" not in source` and `one_terminal_write`.\n\n### Challenge 8: Profile Injection and Scrubbed Environment\n- `native_profile_patch()` replaces the lifecycle probe with `emr4-provider-disabled-preset-validation-probe`, injecting only `agentPresets`.\n- `validate_native_profile()` enforces that `runner[\"inject\"] == [\"agentPresets\"]` and configuration keys are strictly `{\"markerPath\", \"terminalPath\", \"presetPath\"}`.\n- `execute_native_validation()` uses `build_child_environment()` with a strict regex check ensuring all provider, API key, token, and cloud credential environment variables are scrubbed, raising `PresetSubcoordinateError(\"native_provider_environment_not_scrubbed\")` if any remain.\n- A local `network-guard.mjs` prevents external socket / network interactions.\n\n### Challenge 9: One-Shot Latch, Zero Retries, Bounded Timeout, and Exact Cleanup\n- `execute_native_validation()` writes `NATIVE_CONSUMED_PATH` (`native-validation-consumed.json`) exclusively with `\"state\": \"consumed\"`, `\"native_process_limit\": 1`, `\"automatic_retry_count\": 0`, and `\"resume_permitted\": false` *prior* to launching the subprocess.\n- Subsequent calls fail closed immediately with `\"native_validation_already_consumed\"`.\n- Process execution is bounded by `checkpoint[\"timeout_seconds\"]` (60s).\n- The `finally:` block terminates any active process (`_terminate_process`), removes the disposable root via `shutil.rmtree(root)`, and verifies `process_absent` and `root_absent`.\n\n### Challenge 10: Native Evidence Schema Zero-Count and Cleanup Bounds\n- [`orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-evidence.schema.json`](file:///C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-evidence.schema.json) enforces:\n  - `counts.native_processes`: `enum: [0, 1]`\n  - `counts.automatic_retries`: `const: 0`\n  - `counts.agent_sessions`: `const: 0`\n  - `counts.turns`: `const: 0`\n  - `counts.broker_requests`: `const: 0`\n  - `counts.model_requests`: `const: 0`\n  - `counts.provider_requests`: `const: 0`\n  - `counts.network_attempts`: `const: 0`\n  - `counts.docker_invocations`: `const: 0`\n  - `counts.database_invocations`: `const: 0`\n  - `cleanup.process_absent`: `const: true`\n  - `cleanup.disposable_root_absent`: `const: true`\n  - `claim_boundary`: `const: \"provider_disabled_native_preset_validation_subcoordinates_only_no_agent_mount_deepseek_database_or_product_claim\"`\n\n### Challenge 11: Fail-Closed Protection Without Committed Checkpoint and Passing Review\n- `execute_native_validation()` invokes `load_native_checkpoint()`, which strictly checks:\n  - `NATIVE_CHECKPOINT_PATH` exists, matches schema, and has `status == \"admitted\"`.\n  - `runner_sha256` in checkpoint matches `sha256_bytes(native_runner_source())`.\n  - `review_receipt` file exists, its SHA-256 matches `checkpoint[\"review_receipt_sha256\"]`, `decision == \"pass\"`, `head_before == runner_candidate_source`, `head_after == runner_candidate_source`, and `dirty_after == false`.\n  - Git HEAD is an ancestor of `runner_candidate_source` with a clean index.\n- In step C09, `NATIVE_CHECKPOINT_PATH`, `NATIVE_CONSUMED_PATH`, and `NATIVE_TERMINAL_PATH` are all verified absent. Native execution is mechanically prevented until a separate checkpoint commit is authored.\n\n### Challenge 12: Execution of Manifest Commands C01\u2013C12\n- All 12 manifest commands C01 through C12 executed in exact order, returned exit code 0, and left the worktree clean.\n\n---\n\n## 3. Command Manifest Results Summary\n\n| ID | Command | Exit Code | Outcome |\n|---|---|---|---|\n| C01 | `git status --short --branch` | 0 | Clean branch `codex/review-preset-native-runner-8b42760c` |\n| C02 | `git rev-parse HEAD` | 0 | Candidate HEAD `8b42760cf68bc2fcc09432de9bd42a8d80b50317` |\n| C03 | `python -m scripts.ariadne_provider_free_pytest ...` | 0 | 15 unit and plan tests passed |\n| C04 | `ruff check ...` | 0 | Code formatting and lint checks passed |\n| C05 | `python -m py_compile ...` | 0 | Bytecode compilation succeeded with zero warnings/errors |\n| C06 | `python -m scripts... --stage static` | 0 | Deterministic static evidence generated and validated |\n| C07 | `python -m scripts... --stage package` | 0 | Package-only discovery characterization passed |\n| C08 | `python -c assertions (reading & profile)` | 0 | Runner source and profile AST checks confirmed no agent/mount/turn paths |\n| C09 | `python -c assertions (paths absent & marker)` | 0 | Checkpoint/consumed/terminal paths confirmed absent; final marker bound |\n| C10 | `git diff --check e013bfc0...8b42760c` | 0 | Diff is clean with zero whitespace or format issues |\n| C11 | `git diff --name-only e013bfc0...8b42760c` | 0 | Modified files strictly confined to recovery plan, runner, schema, and tests |\n| C12 | `git status --short --branch` | 0 | Worktree remains completely clean |\n\n---\n\n## 4. Veto Review Conclusion\n\nThe candidate at `8b42760cf68bc2fcc09432de9bd42a8d80b50317` satisfies all 12 challenges without exception:\n- The native runner is mechanically incapable of creating agents, mounting presets, creating sessions/turns, or making broker/model/provider/network/Docker/database requests.\n- It is constrained to exactly seven ordered markers and writes an exclusive sanitized terminal.\n- Native execution is fail-closed and cannot proceed without a separately committed checkpoint bound to this review receipt.\n- No P0\u2013P2 issues exist, all boundaries remain intact, and all twelve commands passed with exit code 0.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery",
+          "--stage",
+          "static"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery",
+          "--stage",
+          "package"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-c",
+          "from pathlib import Path; from scripts import raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery as r; payload=r.native_runner_source(); source=payload.decode(); reading=r.validate_native_runner_source(payload); profile=r.native_profile_patch(Path('C:/deterministic/preset-validation')); r.validate_native_profile(profile); assert reading['no_agents_create'] and reading['no_preset_mount'] and reading['no_session'] and reading['no_turn']; assert 'agents.create' not in source and 'presets.mount' not in source"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-c",
+          "from scripts import raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery as r; assert not r.NATIVE_CHECKPOINT_PATH.exists(); assert not r.NATIVE_CONSUMED_PATH.exists(); assert not r.NATIVE_TERMINAL_PATH.exists(); assert r.NATIVE_MARKERS[-1]=='PRESET_DIGEST_BOUND_PASSED'"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "e013bfc0725be62c30b1af2e3ab120a3ef820616..8b42760cf68bc2fcc09432de9bd42a8d80b50317"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C11",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "e013bfc0725be62c30b1af2e3ab120a3ef820616..8b42760cf68bc2fcc09432de9bd42a8d80b50317"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C12",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "9340066f1ced544a6f2de346ff1009bf43091cf1926133254bf7990e9263fafc",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery",
+        "--stage",
+        "static"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery",
+        "--stage",
+        "package"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from pathlib import Path; from scripts import raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery as r; payload=r.native_runner_source(); source=payload.decode(); reading=r.validate_native_runner_source(payload); profile=r.native_profile_patch(Path('C:/deterministic/preset-validation')); r.validate_native_profile(profile); assert reading['no_agents_create'] and reading['no_preset_mount'] and reading['no_session'] and reading['no_turn']; assert 'agents.create' not in source and 'presets.mount' not in source"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from scripts import raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery as r; assert not r.NATIVE_CHECKPOINT_PATH.exists(); assert not r.NATIVE_CONSUMED_PATH.exists(); assert not r.NATIVE_TERMINAL_PATH.exists(); assert r.NATIVE_MARKERS[-1]=='PRESET_DIGEST_BOUND_PASSED'"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "e013bfc0725be62c30b1af2e3ab120a3ef820616..8b42760cf68bc2fcc09432de9bd42a8d80b50317"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C11",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "e013bfc0725be62c30b1af2e3ab120a3ef820616..8b42760cf68bc2fcc09432de9bd42a8d80b50317"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C12",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

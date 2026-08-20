@@ -1,0 +1,60 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_plan.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_plan.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py"
+      ]
+    },
+    {"id": "C06", "argv": ["C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery", "--stage", "static"]},
+    {"id": "C07", "argv": ["C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery", "--stage", "package"]},
+    {
+      "id": "C08",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from pathlib import Path; from scripts import raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery as r; payload=r.native_runner_source(); source=payload.decode(); reading=r.validate_native_runner_source(payload); profile=r.native_profile_patch(Path('C:/deterministic/preset-validation')); r.validate_native_profile(profile); assert reading['no_agents_create'] and reading['no_preset_mount'] and reading['no_session'] and reading['no_turn']; assert 'agents.create' not in source and 'presets.mount' not in source"
+      ]
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from scripts import raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery as r; assert not r.NATIVE_CHECKPOINT_PATH.exists(); assert not r.NATIVE_CONSUMED_PATH.exists(); assert not r.NATIVE_TERMINAL_PATH.exists(); assert r.NATIVE_MARKERS[-1]=='PRESET_DIGEST_BOUND_PASSED'"
+      ]
+    },
+    {"id": "C10", "argv": ["git", "diff", "--check", "e013bfc0725be62c30b1af2e3ab120a3ef820616..8b42760cf68bc2fcc09432de9bd42a8d80b50317"]},
+    {"id": "C11", "argv": ["git", "diff", "--name-only", "e013bfc0725be62c30b1af2e3ab120a3ef820616..8b42760cf68bc2fcc09432de9bd42a8d80b50317"]},
+    {"id": "C12", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

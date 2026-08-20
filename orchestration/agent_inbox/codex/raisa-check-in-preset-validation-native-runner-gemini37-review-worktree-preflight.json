@@ -1,0 +1,42 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c",
+  "branch": "codex/review-preset-native-runner-8b42760c",
+  "head": "8b42760cf68bc2fcc09432de9bd42a8d80b50317",
+  "expected_head": "8b42760cf68bc2fcc09432de9bd42a8d80b50317",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "9340066f1ced544a6f2de346ff1009bf43091cf1926133254bf7990e9263fafc",
+  "command_count": 12,
+  "repository_paths": [
+    {
+      "path": "C:/Users/sarashera/EMR4-worktrees/deepseek-check-in-attachment-observability-native-001",
+      "kind": "directory",
+      "required": true,
+      "scope": "external",
+      "exists": true
+    },
+    {
+      "path": "C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+      "kind": "file",
+      "required": true,
+      "scope": "worktree",
+      "exists": true
+    },
+    {
+      "path": "C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-evidence.schema.json",
+      "kind": "file",
+      "required": true,
+      "scope": "worktree",
+      "exists": true
+    }
+  ],
+  "candidate_paths": [
+    "C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+    "C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c/tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_plan.py"
+  ],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/preset-validation-native-runner-gemini-8b42760c",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

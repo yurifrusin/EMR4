@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.check_in_preset_native_checkpoint.v1",
+  "operation_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+  "status": "admitted",
+  "runner_candidate_source": "8b42760cf68bc2fcc09432de9bd42a8d80b50317",
+  "review_receipt": "orchestration/agent_inbox/antigravity/raisa-check-in-preset-validation-native-runner-gemini37-review-receipt.json",
+  "review_receipt_sha256": "fa4da0142098d84da387098ff0f935f7b5168100802f12e76ae2928d0925b3a0",
+  "attempt_id": "check-in-preset-validation-native-probe-001",
+  "native_process_limit": 1,
+  "automatic_retry_limit": 0,
+  "timeout_seconds": 60,
+  "markers": [
+    "PRESET_ROW_DISCOVERY_ENTERED",
+    "PRESET_ROW_FOUND",
+    "PRESET_ROW_HEALTHY",
+    "PRESET_BYTES_READ",
+    "PRESET_PACKAGE_PARSE_PASSED",
+    "PRESET_LENGTH_BOUND_PASSED",
+    "PRESET_DIGEST_BOUND_PASSED"
+  ],
+  "runner_sha256": "1882f6c355a0691e3619fe6ecdab46c5741697b7210e4d6305896df7871ca5db",
+  "checkpoint_admitted": true
+}
