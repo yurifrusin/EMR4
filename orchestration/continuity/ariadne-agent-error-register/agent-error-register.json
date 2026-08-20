@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 577,
+  "register_revision": 578,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -28688,6 +28688,255 @@
       },
       "incident_id": "AER-0725",
       "attempt_id": "clock-e7de320b2ffbd4f19a395967",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+      "role": "orchestrator",
+      "resource_id": "ariadne-parallelism-assessment",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every parallelism lane disposition must come from the orchestrator schema vocabulary before a continuation receipt passes.",
+      "observed_error": "The first attempt-003 preplanning state used deferred for the Gemini lane, which is not an admitted disposition.",
+      "detection_method": "Preflight returned parallelism_lane_disposition_invalid:gemini_verifier before planning or dispatch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-003-user-decision-preplanning-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.attempt_003_parallelism_deferred_not_schema_owned",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace deferred with the schema-owned reserved disposition.",
+        "prevention_control": "Continuation lane states are projected from orchestrator_requirements admitted_dispositions.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-003-user-decision-preplanning-corrected-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0726",
+      "attempt_id": "clock-b596067924bef1506701bb6e",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+      "role": "orchestrator",
+      "resource_id": "ariadne-adapter-observation-inventory",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every precommit runtime state must observe every declared adapter even when most lanes are unused.",
+      "observed_error": "The first candidate precommit state supplied an empty adapter observation list.",
+      "detection_method": "Preflight rejected six missing adapter observations before commit.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-003-candidate-precommit-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.attempt_003_precommit_adapter_inventory_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add explicit bounded observations for every declared adapter.",
+        "prevention_control": "Precommit runtime templates retain the complete adapter inventory.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-003-candidate-precommit-corrected-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0727",
+      "attempt_id": "clock-b752f38079761c12e84a204f",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+      "role": "orchestrator",
+      "resource_id": "provider-disabled-test-selection",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A descendant must not select immutable historical-report equality nodes whose artifacts are intentionally frozen at an accepted ancestor source.",
+      "observed_error": "The first transition suite selected two pre-HMR recovery equality tests; both correctly reported evidence_not_current after attempt-003 identity wiring changed the descendant controller digest.",
+      "detection_method": "The provider-free suite returned exactly two failures and no process or provider activity.",
+      "evidence_paths": [
+        "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-plan.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.attempt_003_overbroad_historical_equality_test_selection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Exclude frozen report-regeneration nodes and add descendant-focused recovered-ordering assertions.",
+        "prevention_control": "The plan records the equality-node exclusion and the accepted manifest runs only current descendant tests.",
+        "evidence_paths": [
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py",
+          "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-plan.md"
+        ]
+      },
+      "incident_id": "AER-0728",
+      "attempt_id": "clock-7509b4ce0b196f7b60fb3f94",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+      "role": "orchestrator",
+      "resource_id": "ariadne-workspace-receipt",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A native synthetic process must not be projected as an assigned Ariadne handoff worker requiring an at-handoff/current repository receipt.",
+      "observed_error": "The first prelaunch state assigned the synthetic worker identity with an incompatible worker_id-shaped workspace receipt.",
+      "detection_method": "Preflight returned workspace_receipt_missing before native launch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-003-occupied-prelaunch-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.attempt_003_native_process_misprojected_as_handoff_worker",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep the native lane planned until controller dispatch and leave Ariadne assigned-agent/workspace-receipt inventories empty.",
+        "prevention_control": "Native process identities are not projected through the repository handoff-worker receipt schema.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-003-occupied-prelaunch-corrected-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0729",
+      "attempt_id": "clock-ce32e0ecd4c85d9f74b228dd",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+      "role": "implementer",
+      "resource_id": "deepseek-native-harness-rc7-worker-attempt-003",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "deepseek_native_harness",
+      "stage": "implementation",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The sole checkpointed native process must reach HMR/runner/provider coordinates or yield the strongest safe bounded pre-HMR terminal before cleanup.",
+      "observed_error": "The process exited 1 before the first HMR event with zero provider requests; the recovered sidecar found no admitted signature group and classified the cause as unclassified_nonzero_exit.",
+      "detection_method": "The immutable outer terminal and digest-bound pre-HMR sidecar record one process, zero HMR/runner/provider/tool/change counts and exact cleanup.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/occupied-terminal.json",
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/pre-hmr-startup-terminal.json",
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/diagnosis.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.native_exit_pre_hmr_safely_unclassified_after_sidecar_recovery",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume without retry, preserve the safe terminal and route provider-disabled source-static structured diagnosis.",
+        "prevention_control": "No new native process may run while the source-static recovery derives a narrower safe diagnostic seam.",
+        "evidence_paths": [
+          "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-failed-closed-closeout.md",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/efficacy-reading.json"
+        ]
+      },
+      "incident_id": "AER-0730",
+      "attempt_id": "clock-2b684521d851b55266141974",
+      "origin": "harness",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+      "role": "orchestrator",
+      "resource_id": "ariadne-governance-clockwork-closeout-intent",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every non-empty authorized_openings entry must use the continuity graph's typed boundary-and-source object shape.",
+      "observed_error": "The first attempt-003 closeout intent supplied one prose string instead of typed model-runtime and provider-call opening objects.",
+      "detection_method": "The read-only clockwork check rejected with authorized_opening_object_required before any canonical write.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/closeout/clockwork-check-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_authorized_opening_prose_instead_of_typed_object",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the prose entry with separately typed model-runtime and provider-call openings bound to the committed plan.",
+        "prevention_control": "Non-empty authorized openings are now copied from the continuity schema shape and must pass a separate read-only clockwork check before publication.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0731",
+      "attempt_id": "clock-53a3db4d0504f76fb914b81f",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register-human-reading",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The prospective human register revision must contain the exact clockwork reading comment and one ordered level-two heading for every new incident ID.",
+      "observed_error": "The first prospective revision note used bullets and prose counts but omitted the exact machine comment and incident heading sequence.",
+      "detection_method": "The second read-only clockwork check rejected with tick_incident_revision_reading before any canonical write.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/closeout/clockwork-check-attempt-002-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.prospective_register_reading_missing_exact_comment_and_headings",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact prospective revision, total count, ordered new incident IDs, open count and matching level-two headings derived from the current register plus observation count.",
+        "prevention_control": "Future prospective register notes must be rendered from the clockwork parser contract rather than summarized freehand.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-578.md"
+        ]
+      },
+      "incident_id": "AER-0732",
+      "attempt_id": "clock-8cf562498bcde53189470bc2",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

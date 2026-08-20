@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 336,
-  "updated_at": "2026-08-20T23:49:08.9636913+10:00",
-  "source_graph_revision": 354,
-  "orientation_statement": "EMR4 will not launch another occupied native worker unless Yuri distinctly selects that next outcome.",
+  "map_revision": 337,
+  "updated_at": "2026-08-21T07:35:11.0925861+10:00",
+  "source_graph_revision": 355,
+  "orientation_statement": "Continue source-statically and provider-disabled; do not launch another native Harness process.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4471,25 +4471,35 @@
         "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md",
         "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-pre-hmr-startup-recovery.md"
       ]
+    },
+    {
+      "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+      "lineage_parent": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "strategic_role": "Test whether the recovered native-Harness gears can produce a useful bounded occupied result",
+      "outcome": "The attempt remained unsuccessful but now has a safe explicitly unclassified pre-HMR terminal, zero provider spend and exact cleanup.",
+      "evidence": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/efficacy-reading.json",
+        "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-failed-closed-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
-    "strategic_role": "Place a genuine user decision before the next occupied native-Harness worker",
-    "why_now": "The provider-disabled diagnostic control is complete, while every occupied attempt remains cost-bearing external execution under a distinct accepted envelope.",
-    "outcome": "The Harness is better instrumented but remains paused from occupied EMR4 work pending Yuri's decision.",
+    "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+    "strategic_role": "Improve diagnosis without spending another occupied allowance",
+    "why_now": "Two native attempts have exited before HMR and the accepted safe vocabulary leaves the latest cause unclassified.",
+    "outcome": "The native Harness remains closed from EMR4 worker use while a provider-disabled source-static diagnostic seam is derived.",
     "unlocks": [
-      "A later occupied failure can distinguish process creation, runtime contract, package, profile, module, service, HMR, controller, limit, ambiguity and unknown coordinates.",
-      "Raw startup streams can still be deleted without collapsing safe failure attribution."
+      "Source-grounded identification of a narrower non-secret typed startup diagnostic coordinate.",
+      "A deterministic decision whether further Harness investment is technically justified."
     ],
     "does_not_solve": [
-      "No new occupied attempt or provider request.",
-      "No Harness reliability or DeepSeek performance conclusion.",
-      "No product, ordinary-practice, database, deployment or protected-ref authority."
+      "No new Harness, worker, broker or provider process.",
+      "No occupied retry or DeepSeek performance evidence.",
+      "No product, database, production, deployment or protected-ref authority."
     ],
     "evidence": [
-      "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/efficacy-reading.json",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-sol-acceptance.md"
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/diagnosis.md",
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-worker-attempt-003-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

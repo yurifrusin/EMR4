@@ -2,7 +2,22 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "authored_synthetic_native_worker_attempt_003_checkpoint_provider_free_tests",
+      "command_id": "attempt_003_terminal_relationship_check",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "scripts.ariadne_validation_runner",
+        "--manifest",
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/postterminal-command-manifest.json",
+        "--repo-root",
+        "C:/Users/sarashera/emr4",
+        "--receipt",
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/postterminal-command-validation-receipt.json"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "attempt_003_provider_free_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -16,12 +31,25 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "authored_synthetic_native_worker_attempt_003_checkpoint_controller_check",
+      "command_id": "attempt_003_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal",
-        "--check"
+        "ruff",
+        "check",
+        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "attempt_003_compile",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "py_compile",
+        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }
