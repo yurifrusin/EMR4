@@ -1,0 +1,9 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "operation_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+  "status": 1,
+  "request": "70300a0e-15b8-4de0-b3b0-179c62faebf1",
+  "contains_phi": false,
+  "engine_state": "continuing",
+  "next_workstream": "provider-free preset-row service-path recovery"
+}

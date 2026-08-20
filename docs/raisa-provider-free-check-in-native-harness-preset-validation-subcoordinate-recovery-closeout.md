@@ -66,6 +66,9 @@ from its byte-recoverable generation and the terminal checkpoint was republished
 by the exclusive writer with zero canonical drift. This correction matters:
 the closeout does not claim that a manually maintained latch was acceptable.
 
+The usual non-PHI continuing Pushover closeout notification succeeded with
+request `70300a0e-15b8-4de0-b3b0-179c62faebf1`.
+
 ## Next boundary
 
 The narrow successor is
