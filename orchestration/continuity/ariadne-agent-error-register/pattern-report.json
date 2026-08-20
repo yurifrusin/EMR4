@@ -1,44 +1,44 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 572,
+  "register_revision": 573,
   "source_cutoff_on": "2026-08-20",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "4d1f6c7ddcfbc660d2cb0b595045b8730ce6f2c6402b1c4a81c206e8bc2b926a",
-  "incident_count": 690,
+  "canonical_register_sha256": "52ec359287e1c3c58b6c449c0b75f81c93a9bc7db00285d35b5122fde06c6d3c",
+  "incident_count": 694,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 458,
-      "harness": 56,
-      "operator": 39,
+      "agent_behavior": 460,
+      "harness": 57,
+      "operator": 40,
       "repository": 121,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 91,
       "evidence_misreport": 70,
-      "harness_failure": 56,
-      "operator_error": 39,
-      "output_contract_violation": 246,
+      "harness_failure": 57,
+      "operator_error": 40,
+      "output_contract_violation": 248,
       "read_only_violation": 4,
       "reasoning_claim_error": 47,
       "repository_defect": 121,
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 48,
+      "implementer": 49,
       "integration_reviewer": 3,
-      "orchestrator": 578,
+      "orchestrator": 581,
       "verifier": 61
     },
     "by_process_severity": {
       "low": 396,
-      "material": 121,
-      "moderate": 173
+      "material": 122,
+      "moderate": 176
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 121,
-      "canonical_unchanged": 426,
+      "accepted_candidate_changed": 122,
+      "canonical_unchanged": 429,
       "untrusted_partial_worktree": 143
     },
     "by_resource_and_role": {
@@ -49,7 +49,7 @@
       "api-spine-historical-regression-suite::orchestrator": 2,
       "ariadne-active-operation-latch-closeout::orchestrator": 1,
       "ariadne-active-operation-latch-continuity-test::orchestrator": 3,
-      "ariadne-active-operation-latch::orchestrator": 2,
+      "ariadne-active-operation-latch::orchestrator": 3,
       "ariadne-agent-error-register-current-literal-test::orchestrator": 1,
       "ariadne-agent-error-register-current-projection-tests::orchestrator": 2,
       "ariadne-agent-error-register-current-reading-tests::orchestrator": 3,
@@ -66,6 +66,7 @@
       "ariadne-continuity-closeout-suite::orchestrator": 2,
       "ariadne-governance-clockwork-checkpoint::orchestrator": 2,
       "ariadne-governance-clockwork-command-manifest::orchestrator": 1,
+      "ariadne-orchestrator-git-ref-evidence-binding::orchestrator": 1,
       "ariadne-orchestrator-postcompaction-preflight::orchestrator": 1,
       "ariadne-orchestrator-preflight::orchestrator": 3,
       "ariadne-provider-free-pytest-launcher::orchestrator": 1,
@@ -95,7 +96,7 @@
       "deepseek-native-harness-rc7-container-readonly-rootfs::orchestrator": 1,
       "deepseek-native-harness-rc7-container-worker::implementer": 1,
       "deepseek-native-harness-rc7-container-worker::orchestrator": 2,
-      "deepseek-native-harness-rc7-provider-disabled::implementer": 1,
+      "deepseek-native-harness-rc7-provider-disabled::implementer": 2,
       "deepseek-native-harness-rc7-worker::implementer": 1,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
@@ -169,6 +170,7 @@
       "ordinary-practice-check-in-readiness-continuity-updater::orchestrator": 2,
       "ordinary-practice-check-in-readiness-plan-tests::orchestrator": 1,
       "ordinary-practice-check-in-readiness-reviewer::orchestrator": 3,
+      "preset-validation-independent-review-scope::orchestrator": 1,
       "shadow-clockwork-causal-tick-engine::orchestrator": 1,
       "shadow-clockwork-efficacy-reducer::orchestrator": 1,
       "shadow-clockwork-live-efficacy-tests::orchestrator": 1,
@@ -1601,6 +1603,30 @@
       "prevention_controls": [
         "Every Antigravity path after provider process completion must terminate in exactly one admitted worker receipt or one sanitized transport/egress failure receipt; no parse or decision-count exception may bypass evidence persistence.",
         "Every Antigravity path after provider process completion must terminate in exactly one admitted worker receipt or one sanitized transport/egress failure receipt; worktree postcondition failures are part of the same exhaustive boundary."
+      ]
+    },
+    {
+      "recurrence_signature": "operator.active_latch_bypassed_clockwork_owner",
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0685",
+        "AER-0694"
+      ],
+      "origins": [
+        "operator"
+      ],
+      "categories": [
+        "operator_error"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "ariadne-active-operation-latch"
+      ],
+      "prevention_controls": [
+        "The governance owner guard and source-byte comparison reject direct latch drift before any subsequent checkpoint or dispatch.",
+        "The live owner check must pass with ten owned surfaces, zero dual ownership and zero drift before every future checkpoint or closeout; direct latch edits are prohibited."
       ]
     },
     {

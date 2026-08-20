@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will split and prove the native Harness preset-validation coordinates provider-free before considering another separately checkpointed native process.
+> EMR4 will explain the native Harness preset-row service path provider-free before considering another separately planned and checkpointed native process.
 
 ## North star
 
@@ -468,24 +468,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The attempt failed closed after readiness with exact cleanup, the worker failed pre-provider, and both negative terminals now identify narrower lifecycle gaps without releasing product effects. Lineage parent: `deepseek-native-harness-provider-free-complete-composition-native-boot-recovery`.
 226. **Make the check-in server lifecycle and native Harness preset path mechanically readable before another database or occupied-worker attempt — Raisa provider-free check-in server post-readiness exit-state and stdin-lifecycle conformance repair closeout**
    The server repair and closed diagnostic pass; the one provider-disabled native process fails earlier and more precisely at preset validation with zero provider cost and exact cleanup. Lineage parent: `raisa-provider-free-check-in-relay-free-recovery-attempt-005`.
+227. **Replace the collapsed native preset-validation failure with exact direct-package and native service-path subcoordinates before any occupied worker — Raisa provider-free check-in native Harness preset-validation subcoordinate recovery closeout**
+   Direct package discovery, bytes, parse, length and digest pass; one reviewed provider-disabled native process fails closed before the exact preset row is found, with zero provider cost and exact cleanup. Lineage parent: `raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair`.
 
 ## Current position
 
-**Split the rc.7 preset-validation boundary into deterministic source-owned readings before another provider-disabled native process — Raisa provider-free check-in server post-readiness exit-state and stdin-lifecycle conformance repair closeout**
+**Explain the native agentPresets service-path discrepancy provider-free before considering another native process or DeepSeek worker — Raisa provider-free check-in native Harness preset-validation subcoordinate recovery closeout**
 
-**Why this proof came next:** Discovery passes but the current safe terminal collapses preset row, bytes, parse and digest/length validation into one missing marker.
+**Why this proof came next:** The preset file and direct package scanner are proven healthy while the native runner enters row discovery but does not reach the exact row-found coordinate.
 
-The lifecycle repair is accepted, native mount success is rejected, and the next work is a provider-free preset-validation subcoordinate recovery.
+The subcoordinate recovery is accepted as bounded negative native evidence, native preset-validation success is rejected, and the next work is a provider-free preset-row service-path recovery.
 
 ### What this unlocks
 
-- Preset-row discovery can be distinguished from preset-byte reading.
-- Exact parse/validation can be distinguished from digest and length binding.
-- A future one-shot provider-disabled process can be admitted only after those deterministic coordinates pass.
+- Native and direct home/root/profile discovery inputs can be compared exactly.
+- The agentPresets service call can be distinguished from row selection without creating an agent.
+- Any future one-shot native process can be admitted only after the deterministic discrepancy is explained and independently reviewed.
 
 ### What it does not solve
 
-- No native agent, effective-tool projection or occupied DeepSeek work is proved.
+- No native preset validation, mount, agent, effective-tool projection or occupied DeepSeek work is proved.
 - No attempt 006, Docker, PostgreSQL, transaction or product result is proved.
 - No ordinary-practice, production, deployment or protected-ref authority opens.
 
@@ -1331,6 +1333,7 @@ Prerequisites:
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-architecture.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-plan.md`
+- `docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-closeout.md`
 - `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md`
 - `docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md`
 - `docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md`
@@ -2040,7 +2043,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-sol-blocked-assessment.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -2692,6 +2694,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json`
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.json`
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-validation-report.md`
+- `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-validation-terminal.json`
+- `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/package-only-discovery-evidence.json`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json`
@@ -3263,7 +3268,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-19--unmounted-check-in-admission-control-kernel-rehearsal.md`
-- `orchestration/human_inbox/yuri/2026-08-20--check-in-lifecycle-conformance-repair.md`
+- `orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-validation-subcoordinate-recovery.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3571,4 +3576,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 331; continuity graph revision 349._
+_Compass map revision 332; continuity graph revision 350._

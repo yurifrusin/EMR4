@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
-  "active_tranche": "Raisa provider-free check-in native Harness preset-validation subcoordinate recovery",
-  "objective": "Freeze the narrowest provider-free recovery that separates exact preset-row discovery, exact preset-byte read and parse, and digest/length binding, first through deterministic package-source proofs; admit no native process until a separate checkpoint and no DeepSeek request or attempt 006.",
+  "operation_id": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+  "active_tranche": "Raisa provider-free check-in native Harness preset-row service-path recovery",
+  "objective": "Freeze the narrowest provider-free recovery that explains why the pinned direct package scanner exposes one exact healthy EMR4 worker preset while the native agentPresets service does not reach PRESET_ROW_FOUND, first through exact home, root, profile, discovery-source and fixture proofs; admit no native process without a separate checkpoint and no DeepSeek request or attempt 006.",
   "status": "in_progress",
-  "source_head": "9e4d13029e4ea3eb1b511602cf52cd1c863ea69e",
-  "authority_source": "Yuri's standing uninterrupted-development authority and the accepted lifecycle repair plus immutable provider-disabled PRESET_VALIDATION_PASSED negative terminal.",
+  "source_head": "65a87b14e4c8a06af8bce0e22d39a2ca6b3c2691",
+  "authority_source": "Yuri's standing uninterrupted-development authority and the accepted immutable provider-disabled PRESET_ROW_FOUND negative terminal.",
   "checkpoint": {
-    "completed_stage": "The deterministic and package-only preset-row, byte/parse and digest/length readings pass. The exact no-agent runner passed a distinct Gemini veto. Its sole checkpoint-bound provider-disabled native process reached PRESET_ROW_DISCOVERY_ENTERED and failed closed before PRESET_ROW_FOUND with one process, zero retries or external requests and exact cleanup. The consumed terminal is immutable; canonical latch drift was detected and byte-restored before this clockwork-owned checkpoint.",
-    "next_executable_stage": "complete_register_revision_573_and_publish_the_clockwork_owned_paired_closeout_without_retrying_the_consumed_native_process",
+    "completed_stage": "Accepted raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_exact_provider_free_native_preset_row_service_path_recovery_plan",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,11 +34,12 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_only",
+    "provider_free_check_in_native_harness_preset_row_service_path_recovery_only",
     "initially_deterministic_and_no_native_process_until_a_separate_exact_checkpoint",
-    "consumed_lifecycle_native_probe_immutable_no_retry_resume_or_reclassification",
-    "split_only_preset_row_discovery_exact_byte_read_parse_and_digest_length_binding",
+    "consumed_preset_validation_native_probe_immutable_no_retry_resume_overwrite_or_reclassification",
+    "compare_only_exact_home_root_profile_discovery_source_service_and_fixture_inputs",
     "no_deepseek_model_provider_broker_network_or_other_external_request",
+    "no_agent_creation_preset_mount_session_turn_or_occupied_worker",
     "no_attempt_006_docker_database_postgresql_sql_or_transaction_execution",
     "no_product_source_configuration_api_openapi_graphql_schema_migration_client_or_waiting_area_change",
     "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",

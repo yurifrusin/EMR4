@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 572,
+  "register_revision": 573,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-20",
@@ -27404,6 +27404,154 @@
       },
       "incident_id": "AER-0690",
       "attempt_id": "clock-8fa9edd59dc00dae512a3c34",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+      "role": "orchestrator",
+      "resource_id": "ariadne-orchestrator-git-ref-evidence-binding",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Git-ref narratives must use only machine-resolved full object IDs and must not depend on operator expansion of abbreviations.",
+      "observed_error": "The predecessor closeout draft expanded a seven-character abbreviation into a 40-character-looking value that was not the reviewed Git object.",
+      "detection_method": "Continuity schema validation and repository object resolution rejected the draft before canonical acceptance.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-plan.md",
+        "scripts/ariadne_orchestrator_preflight.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_ref_narrative_manual_object_expansion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Reject manually supplied object IDs in Git-ref narratives and make the generated Git snapshot the sole exact ref owner.",
+        "prevention_control": "Focused preflight tests reject nonexistent and valid-but-role-wrong manual Git IDs while preserving machine-resolved structured source fields.",
+        "evidence_paths": [
+          "scripts/ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_orchestrator_preflight.py"
+        ]
+      },
+      "incident_id": "AER-0691",
+      "attempt_id": "clock-6b9b5e12108801a1d5aa9101",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+      "role": "orchestrator",
+      "resource_id": "preset-validation-independent-review-scope",
+      "model": "gemini-3.7-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Independent review must bind every materially distinct executable candidate before its checkpoint and may not be silently inherited by later source.",
+      "observed_error": "The first passing Gemini receipt covered the deterministic and package-only candidate, while the no-agent native runner was authored afterwards.",
+      "detection_method": "Exact receipt and Git-diff comparison showed that the first review source preceded the runner source and accurately bounded its narrower scope.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-check-in-preset-validation-subcoordinate-recovery-gemini37-review-receipt.json",
+        "docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-plan.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.independent_review_preceded_material_runner_candidate",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Keep the first receipt scoped to its candidate, amend the plan and dispatch one distinct fresh veto over the exact no-agent runner.",
+        "prevention_control": "Checkpoint validation binds the passing review digest and exact clean pre/post runner source before process creation.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-check-in-preset-validation-native-runner-gemini37-review-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-preexecution-checkpoint.json"
+        ]
+      },
+      "incident_id": "AER-0692",
+      "attempt_id": "clock-9491f6995623ea1301e0b52a",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+      "role": "implementer",
+      "resource_id": "deepseek-native-harness-rc7-provider-disabled",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "deepseek_native_harness",
+      "stage": "implementation",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The native agentPresets service must expose exactly one healthy canonical EMR4 worker row before any agent, mount, turn or provider path.",
+      "observed_error": "The sole checkpoint-bound provider-disabled process reached PRESET_ROW_DISCOVERY_ENTERED and stopped before PRESET_ROW_FOUND.",
+      "detection_method": "The sanitized terminal records one marker, one process, zero retries, zero agents or external requests and exact cleanup.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-validation-terminal.json",
+        "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-validation-report.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.native_preset_row_not_found_provider_disabled",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume the process without retry and freeze a provider-free successor that compares native and direct preset-row service-path inputs.",
+        "prevention_control": "No further native process is admitted until exact source and fixture proofs pass, a materially distinct candidate is reviewed and a separate checkpoint is published.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-validation-consumed.json",
+          "docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-closeout.md"
+        ]
+      },
+      "incident_id": "AER-0693",
+      "attempt_id": "clock-6c3a44bbbfb378ba2f1963b5",
+      "origin": "harness",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+      "role": "orchestrator",
+      "resource_id": "ariadne-active-operation-latch",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "material",
+      "expected_invariant": "Every active-latch checkpoint must be published only by the exclusive clockwork writer, including resumptions after compaction.",
+      "observed_error": "Several intermediate latch readings were committed by direct file edits, recurring after the prior exclusive-writer correction and creating canonical drift.",
+      "detection_method": "The live canonical adoption check returned canonical_drift before closeout acceptance while the terminal evidence remained intact.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/terminal-checkpoint/checkpoint-intent.json",
+        "docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "operator.active_latch_bypassed_clockwork_owner",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Restore the latch byte-for-byte from the active generation, commit terminal evidence against the clean baseline and publish the terminal checkpoint through clockwork.",
+        "prevention_control": "The live owner check must pass with ten owned surfaces, zero dual ownership and zero drift before every future checkpoint or closeout; direct latch edits are prohibited.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/terminal-checkpoint/clockwork-checkpoint-tick-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-573.md"
+        ]
+      },
+      "incident_id": "AER-0694",
+      "attempt_id": "clock-9731a71de367565fc2a3b9c0",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 349,
+  "graph_revision": 350,
   "harvests": [],
   "nodes": [
     {
@@ -25437,9 +25437,136 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+      "title": "Raisa provider-free check-in native Harness preset-validation subcoordinate recovery closeout",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted this provider-free subcoordinate recovery and its separately checkpointed provider-disabled one-shot process.",
+          "The native process and both exact-candidate Gemini reviews are consumed; no retry, DeepSeek request or attempt 006 is authorised.",
+          "The successor begins with deterministic source and fixture evidence and requires a separate plan, review and checkpoint before any further native process."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-deterministic-and-package-only-preset-subcoordinates",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/package-only-discovery-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact rc.7 discovery chain and one healthy direct package row with canonical bytes, parse, length and digest binding."
+        },
+        {
+          "id": "accept-no-agent-runner-independent-veto",
+          "source": "orchestration/agent_inbox/antigravity/raisa-check-in-preset-validation-native-runner-gemini37-review-receipt.json",
+          "status": "accepted",
+          "summary": "Accept the exact no-agent runner after one distinct Gemini 3.7 Flash/high veto passed twelve commands at unchanged clean HEAD."
+        },
+        {
+          "id": "accept-provider-disabled-native-row-negative-terminal",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-validation-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one consumed native process that entered row discovery and failed before the row-found coordinate with zero downstream requests and exact cleanup."
+        },
+        {
+          "id": "reject-native-preset-validation-and-deepseek-quality-claim",
+          "source": "docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-closeout.md",
+          "status": "rejected",
+          "summary": "Reject preset-validation, mount, agent, occupied-worker, DeepSeek-quality, attempt-006, database and product claims."
+        },
+        {
+          "id": "accept-clockwork-owned-latch-recovery",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/terminal-checkpoint/clockwork-checkpoint-tick-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the terminal checkpoint only after byte restoration and exclusive clockwork publication returned canonical drift to zero."
+        },
+        {
+          "id": "accept-four-contained-workflow-incidents",
+          "source": "docs/ariadne-agent-error-correction-register-revision-573.md",
+          "status": "accepted",
+          "summary": "Intake four machine-derived incidents as AER-0691 through AER-0694 and retain zero open incidents."
+        }
+      ],
+      "claim_scope": [
+        "The rc.7 direct package discovery path exposes exactly one healthy canonical EMR4 worker preset and binds its bytes, parse, length and digest.",
+        "The reviewed native runner can only list preset rows and bind local preset bytes; it cannot create an agent, mount a preset, create a turn or make an external request.",
+        "The sole provider-disabled native process entered preset-row discovery and failed before the exact row-found coordinate.",
+        "The negative terminal is consumed with zero retry, zero agents or external requests and exact process/root cleanup.",
+        "The result localizes the remaining discrepancy to the native agentPresets service path without claiming its narrower cause.",
+        "Four workflow incidents are corrected or contained and canonical latch ownership is restored."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-plan.md",
+          "docs/security/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/deterministic-source-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/package-only-discovery-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-validation-terminal.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/efficacy-reading.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-preset-validation-subcoordinate-recovery-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-preset-validation-native-runner-gemini37-review-receipt.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-preset-validation-subcoordinate-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-preset-validation-native-runner-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-preset-validation-native-preexecution-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/terminal-checkpoint/clockwork-checkpoint-tick-evidence.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_plan.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+          "scripts/ariadne_orchestrator_preflight.py",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-preexecution-checkpoint.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-validation-consumed.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-validation-report.md",
+          "docs/ariadne-agent-error-correction-register-revision-573.md",
+          "orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-validation-subcoordinate-recovery.md",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The native agentPresets service-path cause before PRESET_ROW_FOUND remains unproved.",
+        "The consumed native process cannot be retried; another native process needs a separate frozen plan, exact candidate review and checkpoint.",
+        "No DeepSeek request, agent creation, preset mount or occupied worker is authorised.",
+        "Attempt 006 and all Docker/PostgreSQL execution remain unauthorised.",
+        "Dedicated check-in remains default-off with no ordinary-practice or product-data authority.",
+        "No production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-20T17:18:14.3713624+10:00",
+      "updated_at": "2026-08-20T17:18:14.3713624+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "65a87b14e4c8a06af8bce0e22d39a2ca6b3c2691",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-20T16:04:16.4951745+10:00"
+  "updated_at": "2026-08-20T17:18:14.3713624+10:00"
 }
