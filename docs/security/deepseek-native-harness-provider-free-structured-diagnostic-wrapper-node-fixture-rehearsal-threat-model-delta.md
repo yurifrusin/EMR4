@@ -24,4 +24,3 @@ Operation:
 The rehearsal can prove the wrapper gear's local Node behavior. It cannot prove
 DSH boot, native Harness readiness, DeepSeek execution, provider reliability or
 authority for another occupied attempt.
-

@@ -89,4 +89,3 @@ def test_evidence_schema_requires_candidate_process_retention_and_cleanup() -> N
         "retention",
         "cleanup",
     ]
-

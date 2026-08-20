@@ -118,4 +118,3 @@ allowlist, command mounting, product/configuration/API/database/route/adapter/
 grammar/client/waiting-area change, product/patient/clinical data, production
 runtime, deployment, release, Pages, protected evidence or protected-ref
 movement.
-
