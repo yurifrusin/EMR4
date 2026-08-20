@@ -1,0 +1,91 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery",
+  "status": "accepted_first_candidate_first_independent_veto",
+  "deterministic_candidate": {
+    "commit": "962e91d9af90fbe977177d251f9f3e3134aaad19",
+    "result": "pass",
+    "cached_package_count": 6,
+    "materialised_payload_bytes": 158,
+    "materialised_payload_sha256": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1",
+    "hostile_variant_count": 21,
+    "focused_test_count": 24,
+    "isolated_provider_free_test_count": 101,
+    "ruff": "pass",
+    "compile": "pass",
+    "native_harness_process_count": 0,
+    "node_process_count": 0,
+    "agent_session_count": 0,
+    "broker_request_count": 0,
+    "deepseek_model_request_count": 0,
+    "provider_request_count": 0,
+    "network_attempt_count": 0,
+    "docker_invocation_count": 0,
+    "database_invocation_count": 0
+  },
+  "boundary_reading": {
+    "future_install_relative_path": ".agent-presets/emr4-bounded-worker/agent.cordis.yml",
+    "raw_unconditional_surface": [
+      "edit",
+      "glob",
+      "grep",
+      "read",
+      "write"
+    ],
+    "raw_conditional_surface": [
+      "read_image"
+    ],
+    "accepted_post_mount_effective_surface": [
+      "edit",
+      "glob",
+      "read"
+    ],
+    "outer_broker_allowlist_still_required": true,
+    "remaining_gate": "Native discovery, mount, required-service activation and effective-schema observation must be proved together in one separately frozen provider-free process attempt before an occupied worker is eligible."
+  },
+  "independent_review": {
+    "candidate_commit": "962e91d9af90fbe977177d251f9f3e3134aaad19",
+    "provider_call_count": 1,
+    "decision": "pass",
+    "receipt_sha256": "c21fa4751e42ec42b4c392f5f67088063855b85ef52333917d554ea5ecae54a8",
+    "command_count": 10,
+    "test_count": 101,
+    "worktree_unchanged": true,
+    "fallback_model_used": false,
+    "p0_p2_finding_count": 0
+  },
+  "honest_build_cost": {
+    "candidate_source_correction_batches_after_commit": 0,
+    "independent_review_provider_calls": 1,
+    "independent_review_admitted_decisions": 1,
+    "independent_review_non_admitted_envelopes": 0,
+    "diagnostic_command_corrections": 2,
+    "diagnostic_command_note": "Two read-only PowerShell here-string inspection invocations were malformed before replacement with a direct Python inspection; neither changed repository state.",
+    "test_authoring_corrections": 1,
+    "test_authoring_note": "One negative import assertion matched the evidence key broker_requests and was narrowed to actual import statements before candidate commit.",
+    "deterministic_source_predicate_corrections_before_first_write": 2,
+    "deterministic_source_predicate_note": "Two source-token predicates were aligned to the exact accepted rc.7 strings before the first successful materialiser write.",
+    "test_execution_reruns_for_observability": 1,
+    "test_execution_rerun_note": "One successful neighboring-suite execution lost its terminal summary because the process session identifier was not retained; the same suite was rerun once and 77 of 77 tests were observed passing.",
+    "pre_verifier_receipt_schema_corrections": 1,
+    "pre_verifier_receipt_schema_note": "The generic preflight treated an optional workspace receipt as a handoff workspace; the inapplicable field was removed before dispatch.",
+    "prepublication_clockwork_intent_validation_corrections": 2,
+    "prepublication_clockwork_intent_validation_notes": [
+      "The first dry reading rejected two builds_on rows because the transactional closeout schema permits exactly one parent; the redundant effective-tool-guard relationship was removed while its accepted evidence binding remained explicit.",
+      "The second dry reading rejected an empty incident array because v2 is the non-empty incident-intake schema; the no-incident closeout was correctly changed to v1 with no incident field."
+    ],
+    "commentary_factual_corrections": 1,
+    "commentary_factual_note": "The payload size was corrected from an early 160-byte commentary estimate to the measured 158 bytes.",
+    "native_attempt_retry_count": 0
+  },
+  "rerun_assessment": {
+    "candidate_rebuild_count_after_commit": 0,
+    "semantic_review_attempt_count": 1,
+    "blind_retry_count": 0,
+    "native_attempt_retry_count": 0,
+    "qualifying_incident_count": 0,
+    "micro_corrections_recorded_only_in_efficacy": 9,
+    "conclusion": "The clockwork-shaped tranche achieved its exact candidate and independent veto without semantic rebuild, verifier retry or native-process retry. Mechanical costs remain visible here without creating new procedural gates."
+  },
+  "protected_boundaries_preserved": true
+}

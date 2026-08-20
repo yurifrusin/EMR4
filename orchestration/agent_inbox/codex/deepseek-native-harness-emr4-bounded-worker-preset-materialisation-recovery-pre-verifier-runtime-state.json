@@ -1,0 +1,137 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_one_fresh_gemini_37_flash_high_read_only_veto_for_exact_emr4_bounded_worker_preset_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely as the current 129311-byte live handover with SHA-256 6f406b38c49bfc64c8c6e875992e50cf7d45322aedb0e919ec95f97883ef1a83. At Continuity 345 / Compass 327 it accepts required-service injection recovery and selects this provider-free emr4-bounded-worker preset materialisation recovery.",
+    "current_authority_allocation": "Yuri's standing uninterrupted-development authority selects this dependency-satisfied provider-free recovery. GPT Sol owns plan, offline implementation, deterministic acceptance, recovery, clockwork and Git. DeepSeek receives no work package because its Harness/preset are the evidence subjects and no native/model execution is authorised. Gemini 3.7 Flash/high is dispatched for one fresh exact-candidate veto. Native subagents are declined under current developer policy and the small serial source-semantic boundary.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/evidence.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/materialised-home/.agent-presets/emr4-bounded-worker/agent.cordis.yml",
+      "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-report.md",
+      "scripts/deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+      "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+      "docs/deepseek-native-harness-provider-free-required-service-injection-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-required-service-injection-recovery-sol-acceptance.md",
+      "docs/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard-plan.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 remain sealed and historical Diary material remains local and ignored. Both consumed native attempts remain immutable. The exact candidate proves only the repository-retained rc.7 preset payload and deterministic composition with the accepted guard. It authorises zero Node/native-Harness processes, agents/sessions/turns, occupied workers, broker/DeepSeek/provider requests, network, Docker or database execution. Native discovery, mount, combined service activation and every future boot remain closed. No product/API/config/client/flag/allowlist/grammar/waiting-area, ordinary-practice, data, production, deployment, Pages or protected-ref authority changed. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only.",
+    "git_refs_and_worktree": "Exact candidate HEAD and local task branch are 962e91d9af90fbe977177d251f9f3e3134aaad19 on codex/ariadne-bernie-davida-parallel-seam; origin task remains 2678b43abec8f29e7af432a0a3c64759fada8fda. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked and staged task worktree is clean; before this receipt 657 untracked entries included three intentional verifier-control artifacts plus every unrelated entry and docs/branding. The isolated review worktree is exact 962e91d9af90fbe977177d251f9f3e3134aaad19, clean and bound by a passed ten-command worktree preflight."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery",
+    "active_tranche": "DeepSeek native Harness provider-free emr4-bounded-worker preset materialisation recovery",
+    "objective": "Deterministically derive, materialise and prove the exact emr4-bounded-worker preset mapping to the accepted edit, glob and read tool boundary from exact offline rc.7 sources without starting Node, a native Harness process, agent, broker, model or provider.",
+    "status": "in_progress",
+    "source_head": "ae608b4a8cc4004693813a83e518c71eb2ff06f3",
+    "authority_source": "Yuri's standing uninterrupted-development authority and the accepted provider-free required-service injection recovery.",
+    "checkpoint": {
+      "completed_stage": "Accepted deepseek-native-harness-provider-free-required-service-injection-recovery at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_and_freeze_no_native_process_bounded_preset_materialisation_plan",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_emr4_bounded_worker_preset_materialisation_recovery_only",
+      "exact_offline_rc7_cache_sources_only_no_registry_or_external_network",
+      "emr4_bounded_worker_maps_only_to_accepted_edit_glob_read_boundary",
+      "hostile_preset_variants_fail_closed",
+      "no_node_or_native_harness_process_agent_session_turn_broker_model_provider_or_occupied_worker",
+      "no_future_native_boot_authorised",
+      "both_consumed_native_attempts_immutable_no_retry_resume_or_reclassification",
+      "accepted_required_service_injection_and_activation_coordinates_remain_exact",
+      "no_docker_container_credential_postgresql_sql_transaction_or_database_execution",
+      "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery",
+    "assessed_stage": "pre_verifier",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The native Harness and emr4-bounded-worker preset are the provider-free evidence subjects. No native process, occupied DeepSeek worker, model/provider request or Claude Code fallback is authorised.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "rationale": "The exact candidate passed 24 focused tests plus 77 neighboring provider-free tests. One fresh Gemini 3.7 Flash/high isolated read-only veto now supplies required independent leverage and receives no implementation, execution, repair, acceptance or Git authority.",
+        "work_packages": ["exact_candidate_962e91d9_emr4_bounded_worker_preset_read_only_veto"]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Current developer policy prohibits proactive delegation, and package-source semantics, one exact preset payload and the accepted guard form one small serial boundary.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "Sol froze the exact offline cache, payload and two-stage guard boundary before implementation",
+      "all six package identities and source semantics passed without registry or network access",
+      "no Node or native Harness process may start in this tranche",
+      "both consumed attempts remain byte-immutable",
+      "Gemini receives one exact clean read-only candidate only after deterministic acceptance",
+      "native discovery, mount, combined activation and every future native process remain closed",
+      "clockwork check and publication remain separate commands"
+    ],
+    "reassessment_triggers": ["verifier_terminal", "bounded_correction_if_required", "closeout"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh five-source rehydration, frozen plan/threat delta, exact six-package deterministic evidence, candidate 962e91d9af90fbe977177d251f9f3e3134aaad19, 24 focused plus 77 neighboring passing tests, active latch, aligned protected refs and passed isolated-worktree preflight",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol committed the exact deterministic candidate and owns verifier admission and acceptance."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Exact rc.7 cache source is locally reachable; native execution remains forbidden."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Historical transport is not selected and no fallback is authorised."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["The restored authenticated Antigravity verifier passed the preceding tranche; Gemini 3.7 Flash/high is planned in the passed isolated read-only worktree."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent was spawned; developer policy prohibits proactive delegation."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "deepseek-native-harness-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

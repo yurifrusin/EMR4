@@ -1,0 +1,249 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\bounded-worker-preset-gemini-962e91d9",
+  "branch": "codex/review-bounded-worker-preset-962e91d9",
+  "head_before": "962e91d9af90fbe977177d251f9f3e3134aaad19",
+  "head_after": "962e91d9af90fbe977177d251f9f3e3134aaad19",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "92ad9412f51bd41dab931f8073eaca2c6c9b6d19d569ec48f1e3ad2a1f736ba6",
+  "result": "# Gemini 3.7 Flash/high Independent Veto: DeepSeek Native Harness Provider-Free emr4-bounded-worker Preset Materialisation Recovery\n\n- **Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\bounded-worker-preset-gemini-962e91d9`\n- **Branch:** `codex/review-bounded-worker-preset-962e91d9`\n- **Candidate HEAD:** `962e91d9af90fbe977177d251f9f3e3134aaad19`\n- **Planning Source:** `817add1e9f36ff143e6e46e854cdefd81fd45969`\n- **Model / Effort:** Gemini 3.7 Flash / high\n- **Review Provider Boundary:** Review-provider use only. The candidate starts no Node process, native Harness process, agent, broker, model or external provider.\n\n---\n\n## 1. Rehydration and Authority Confirmation\n\nThe five mandatory rehydration sources from [`AGENTS.md`](file:///C:/Users/sarashera/EMR4-worktrees/bounded-worker-preset-gemini-962e91d9/AGENTS.md) were completely restored:\n1. `live_handover_current_baton`: Current Baton at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602` for `master` and `handoff/current`.\n2. `current_authority_allocation`: GPT Sol conductor/integrator; Gemini 3.7 Flash/high independent veto worker in isolated review worktree; DeepSeek declined; native subagents declined.\n3. `active_plan_and_acceptance`: [`deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/bounded-worker-preset-gemini-962e91d9/docs/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-plan.md), threat model delta, accepted required-service recovery (`ae608b4a8cc4004693813a83e518c71eb2ff06f3`), and accepted effective-tool guard (`dc167c20f5b54b783a57fccb7843f434136c8ca8`).\n4. `protected_evidence_boundaries`: AGENTS.md Sections 5 & 6; provider-free review boundary only; zero Node/native Harness/Docker/PostgreSQL/network executions; no product/data/schema changes; no protected ref movements; preservation of `docs/branding/` and untracked paths.\n5. `git_refs_and_worktree`: Worktree `C:\\Users\\sarashera\\EMR4-worktrees\\bounded-worker-preset-gemini-962e91d9` on `codex/review-bounded-worker-preset-962e91d9` at exact candidate `962e91d9af90fbe977177d251f9f3e3134aaad19`.\n\nThe active operation latch [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/bounded-worker-preset-gemini-962e91d9/orchestration/continuity/ariadne-active-operation-latch/current.json) for `deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery` is valid and `in_progress`.\n\nExplicit Parallelism-Efficacy Assessment restored:\n- **DeepSeek:** `declined` (negative leverage; provider-free evidence subject; no native process, model, or provider call permitted).\n- **Gemini:** `dispatched` for this one fresh exact-candidate read-only veto.\n- **Native subagents:** `declined` (current developer policy prohibits proactive delegation; cache semantics, payload, and guard form a compact serial proof boundary).\n\n---\n\n## 2. Mandatory Challenge Evaluations\n\n### Challenge 1: Exact Candidate, Branch, Worktree, and 40-character Git Predecessors\n- Isolated worktree confirmed clean at branch `codex/review-bounded-worker-preset-962e91d9` and candidate HEAD `962e91d9af90fbe977177d251f9f3e3134aaad19`.\n- Planning source `817add1e9f36ff143e6e46e854cdefd81fd45969`, accepted required-service source `ae608b4a8cc4004693813a83e518c71eb2ff06f3`, and accepted effective-tool guard source `dc167c20f5b54b783a57fccb7843f434136c8ca8` are full 40-character hexadecimal Git object IDs.\n- Direct Git ancestry confirmed via `git merge-base --is-ancestor` for all three predecessor commits into candidate `962e91d9af90fbe977177d251f9f3e3134aaad19`.\n\n### Challenge 2: Reperformance of Exact Local-Cache Identity and Member Checks\n- Verified in-memory tarball verification from local npm cache without registry access, npm, Node, or network calls.\n- Six bound `0.1.0-rc.7` packages verified:\n  1. `@deepseek-ai/dsh-base`: tar SHA-256 `d96842508eb4b30e7d0c33f8530804fd413a1e894a0cd90f88ef9ed93cd3b99a`\n  2. `@deepseek-ai/dsh-headless`: tar SHA-256 `625949c8bac75813b4156b7c4b7a8358ec496e385d4e03221fc0a220a3c53ed7`\n  3. `@deepseek-ai/dsh-agent-presets`: tar SHA-256 `467bf61e01529ba4d2e46a96dd45252d6a5d90ca1675fd6d0d30dbe7b5328159`\n  4. `@deepseek-ai/dsh-tools`: tar SHA-256 `980da421e1f3724de39a1cc781785f625231d8c6cc97baac789aae8e10c152ce`\n  5. `@deepseek-ai/dsh-tool-fs`: tar SHA-256 `1b163810c5065fdf90a08f0d4e3c7341071c4e839c796773ab462c6356328d59`\n  6. `@deepseek-ai/dsh-tool-fs-search`: tar SHA-256 `961279d53a23a2a1d73f6ce31e76300b26f4c5dd7f667571572e9aee9d6c4d13`\n- Registry SHA-1, SHA-512 integrity, tar SHA-256, and inner member digests (`package.json`, `lib/index.js`, `cordis.patch.yml`) match exactly. Stripped `LOCALAPPDATA` fallback tested and verified fail-closed.\n\n### Challenge 3: rc.7 Discovery and Composition Semantics\n- Verified from `@deepseek-ai/dsh-agent-presets` source:\n  - User root is `.agent-presets` (`USER_PRESET_DIR = \".agent-presets\"`, `includeUserRoot: true`).\n  - Composition filename is `agent.cordis.yml` (`COMPOSITION_FILE = \"agent.cordis.yml\"`).\n  - Directory name corresponds to preset ID, conforming to `/^[a-z0-9][a-z0-9-]*$/`.\n  - Composition requires a top-level list of plugin rows.\n  - Invalid/unloadable compositions are classified as broken and halt rather than silently falling back.\n  - First configured root wins on duplicate preset IDs (`if (byId.has(preset.id)) continue;`).\n  - `mount()` sequence: `resolveMountable(id)` executes before `ensureStanding(preset)` and `bindScopeParent(agentKey, standing.key)`.\n\n### Challenge 4: Byte-Exact Materialised Payload\n- Payload path: `orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/materialised-home/.agent-presets/emr4-bounded-worker/agent.cordis.yml`.\n- Exactly 158 bytes UTF-8/LF without BOM or CRLF.\n- Contains exactly the two ordered rows (`tool-fs` and `tool-fs-search`).\n- Contains `sampleOverCapGlobResults: false` under `tool-fs-search.config` (mandatory per search tool schema).\n- No YAML aliases (`*`, `&`), dynamic tags (`!!`), variable expressions (`${`), extra keys, or comments.\n\n### Challenge 5: Two-Stage Security Boundary Challenge\n- **Stage 1 (Preset Registration):** Plugin source inspection confirms `tool-fs` unconditionally registers `read`, `write`, `edit` (and conditionally `read_image` when `attachments` context is injected); `tool-fs-search` unconditionally registers `glob`, `grep`. The raw inherited surface is thus 5 unconditional + 1 conditional tool (`edit`, `glob`, `grep`, `read`, `write` \u00b1 `read_image`). The preset alone is explicitly **not** the authority boundary.\n- **Stage 2 (Accepted Post-Mount Guard):** Symbolic evaluation of the accepted guard demonstrates that post-mount `tools.restrict()` reduces both minimal (`5`) and attachment-present (`6`) tool sets to exactly sorted `['edit', 'glob', 'read']`. `write`, `grep`, and `read_image` are strictly stripped from model-visible schemas.\n- **Stage 3 (Broker Allowlist):** Outer Ariadne broker allowlist independently enforces `['edit', 'glob', 'read']` defense-in-depth.\n\n### Challenge 6: Rejection of 21 Hostile Variants and Closed Paths\n- 15 hostile YAML payload variants (missing rows, duplicate rows, inverted order, renamed plugins, surplus rows, group rows, unexpected config, missing sampling, true sampling, string sampling, dynamic tags, aliases, CRLF, BOM) tested and confirmed rejected.\n- 6 hostile path variants (directory traversal, upper case, underscores, wrong filenames, absolute root) tested and confirmed rejected.\n- Selected-tool name drift, missing inherited tools, and scope-local tool registrations all fail closed with `PresetMaterialisationError`.\n- File writes are strictly confined within the operation's continuity directory; no writes occur to `%USERPROFILE%`, real Harness home, or external paths.\n\n### Challenge 7: Consumed Native Attempts & Zero Runtime Action Counts\n- Both consumed attempts (`native-composition-attempt-001` at `296f35ff696361c63a4e018e5ae9317c79cb6213` and `preterminal-observable-composition-recovery-boot-attempt-001` at `8155a941a28b3d22a7dbb4132c4b0ada8558482e`) remain byte-exact, immutable, failed records with zero retry/resume/reclassification.\n- All 11 required zero counts verified: `agent_sessions: 0`, `broker_requests: 0`, `database_invocations: 0`, `docker_invocations: 0`, `model_requests: 0`, `native_harness_processes: 0`, `network_attempts: 0`, `node_processes: 0`, `occupied_workers: 0`, `provider_requests: 0`, `turns: 0`.\n\n### Challenge 8: Bounded Command Manifest Execution\n- Executed all 10 bound commands in exact sequence (C01\u2013C10):\n  - C01 (`git status --short --branch`): clean worktree, exit code 0.\n  - C02 (`git rev-parse HEAD`): exact `962e91d9af90fbe977177d251f9f3e3134aaad19`, exit code 0.\n  - C03 (pytest across 7 test suites): 101 tests passed, exit code 0.\n  - C04 (ruff check): all checks passed, exit code 0.\n  - C05 (py_compile): compiled cleanly, exit code 0.\n  - C06 (script `--check` mode): validated exact bytes and zero counts, exit code 0.\n  - C07 (`git diff --exit-code HEAD --`): clean diff, exit code 0.\n  - C08 (`git diff --check` across range): whitespace clean, exit code 0.\n  - C09 (`git diff --name-only` across range): exactly 8 candidate files, exit code 0.\n  - C10 (`git status --short --branch`): clean worktree preserved, exit code 0.\n\n### Challenge 9: Claim Ceiling\n- Candidate claims only that the repository-retained preset payload is byte-exact, rc.7-compatible, installation-ready, and deterministically projected by the accepted post-mount guard to `['edit', 'glob', 'read']`.\n- Explicitly **not** proved: native preset discovery in a live process, native mount, combined service activation, native scope creation, runtime effective schema view, future native Harness boot, occupied DeepSeek worker completion, or model/provider reliability.\n\n### Challenge 10: Closed Protected Boundaries\n- No product source, API, OpenAPI, schema, config, feature flag, allowlist, grammar, waiting area, or ordinary-practice settings were modified.\n- Protected refs (`master` and `handoff/current`) remain fixed at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n---\n\n## 3. Finding Summary and Final Determination\n\nNo P0, P1, or P2 findings exist. The candidate is deterministic, fail-closed, exact against frozen planning source `817add1e9f36ff143e6e46e854cdefd81fd45969`, and preserves all protected boundaries.\n\nVeto result: **pass**.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Gemini 3.7 Flash/high Independent Veto: DeepSeek Native Harness Provider-Free emr4-bounded-worker Preset Materialisation Recovery\n\n- **Worktree:** `C:\\Users\\sarashera\\EMR4-worktrees\\bounded-worker-preset-gemini-962e91d9`\n- **Branch:** `codex/review-bounded-worker-preset-962e91d9`\n- **Candidate HEAD:** `962e91d9af90fbe977177d251f9f3e3134aaad19`\n- **Planning Source:** `817add1e9f36ff143e6e46e854cdefd81fd45969`\n- **Model / Effort:** Gemini 3.7 Flash / high\n- **Review Provider Boundary:** Review-provider use only. The candidate starts no Node process, native Harness process, agent, broker, model or external provider.\n\n---\n\n## 1. Rehydration and Authority Confirmation\n\nThe five mandatory rehydration sources from [`AGENTS.md`](file:///C:/Users/sarashera/EMR4-worktrees/bounded-worker-preset-gemini-962e91d9/AGENTS.md) were completely restored:\n1. `live_handover_current_baton`: Current Baton at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602` for `master` and `handoff/current`.\n2. `current_authority_allocation`: GPT Sol conductor/integrator; Gemini 3.7 Flash/high independent veto worker in isolated review worktree; DeepSeek declined; native subagents declined.\n3. `active_plan_and_acceptance`: [`deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-plan.md`](file:///C:/Users/sarashera/EMR4-worktrees/bounded-worker-preset-gemini-962e91d9/docs/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-plan.md), threat model delta, accepted required-service recovery (`ae608b4a8cc4004693813a83e518c71eb2ff06f3`), and accepted effective-tool guard (`dc167c20f5b54b783a57fccb7843f434136c8ca8`).\n4. `protected_evidence_boundaries`: AGENTS.md Sections 5 & 6; provider-free review boundary only; zero Node/native Harness/Docker/PostgreSQL/network executions; no product/data/schema changes; no protected ref movements; preservation of `docs/branding/` and untracked paths.\n5. `git_refs_and_worktree`: Worktree `C:\\Users\\sarashera\\EMR4-worktrees\\bounded-worker-preset-gemini-962e91d9` on `codex/review-bounded-worker-preset-962e91d9` at exact candidate `962e91d9af90fbe977177d251f9f3e3134aaad19`.\n\nThe active operation latch [`orchestration/continuity/ariadne-active-operation-latch/current.json`](file:///C:/Users/sarashera/EMR4-worktrees/bounded-worker-preset-gemini-962e91d9/orchestration/continuity/ariadne-active-operation-latch/current.json) for `deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery` is valid and `in_progress`.\n\nExplicit Parallelism-Efficacy Assessment restored:\n- **DeepSeek:** `declined` (negative leverage; provider-free evidence subject; no native process, model, or provider call permitted).\n- **Gemini:** `dispatched` for this one fresh exact-candidate read-only veto.\n- **Native subagents:** `declined` (current developer policy prohibits proactive delegation; cache semantics, payload, and guard form a compact serial proof boundary).\n\n---\n\n## 2. Mandatory Challenge Evaluations\n\n### Challenge 1: Exact Candidate, Branch, Worktree, and 40-character Git Predecessors\n- Isolated worktree confirmed clean at branch `codex/review-bounded-worker-preset-962e91d9` and candidate HEAD `962e91d9af90fbe977177d251f9f3e3134aaad19`.\n- Planning source `817add1e9f36ff143e6e46e854cdefd81fd45969`, accepted required-service source `ae608b4a8cc4004693813a83e518c71eb2ff06f3`, and accepted effective-tool guard source `dc167c20f5b54b783a57fccb7843f434136c8ca8` are full 40-character hexadecimal Git object IDs.\n- Direct Git ancestry confirmed via `git merge-base --is-ancestor` for all three predecessor commits into candidate `962e91d9af90fbe977177d251f9f3e3134aaad19`.\n\n### Challenge 2: Reperformance of Exact Local-Cache Identity and Member Checks\n- Verified in-memory tarball verification from local npm cache without registry access, npm, Node, or network calls.\n- Six bound `0.1.0-rc.7` packages verified:\n  1. `@deepseek-ai/dsh-base`: tar SHA-256 `d96842508eb4b30e7d0c33f8530804fd413a1e894a0cd90f88ef9ed93cd3b99a`\n  2. `@deepseek-ai/dsh-headless`: tar SHA-256 `625949c8bac75813b4156b7c4b7a8358ec496e385d4e03221fc0a220a3c53ed7`\n  3. `@deepseek-ai/dsh-agent-presets`: tar SHA-256 `467bf61e01529ba4d2e46a96dd45252d6a5d90ca1675fd6d0d30dbe7b5328159`\n  4. `@deepseek-ai/dsh-tools`: tar SHA-256 `980da421e1f3724de39a1cc781785f625231d8c6cc97baac789aae8e10c152ce`\n  5. `@deepseek-ai/dsh-tool-fs`: tar SHA-256 `1b163810c5065fdf90a08f0d4e3c7341071c4e839c796773ab462c6356328d59`\n  6. `@deepseek-ai/dsh-tool-fs-search`: tar SHA-256 `961279d53a23a2a1d73f6ce31e76300b26f4c5dd7f667571572e9aee9d6c4d13`\n- Registry SHA-1, SHA-512 integrity, tar SHA-256, and inner member digests (`package.json`, `lib/index.js`, `cordis.patch.yml`) match exactly. Stripped `LOCALAPPDATA` fallback tested and verified fail-closed.\n\n### Challenge 3: rc.7 Discovery and Composition Semantics\n- Verified from `@deepseek-ai/dsh-agent-presets` source:\n  - User root is `.agent-presets` (`USER_PRESET_DIR = \".agent-presets\"`, `includeUserRoot: true`).\n  - Composition filename is `agent.cordis.yml` (`COMPOSITION_FILE = \"agent.cordis.yml\"`).\n  - Directory name corresponds to preset ID, conforming to `/^[a-z0-9][a-z0-9-]*$/`.\n  - Composition requires a top-level list of plugin rows.\n  - Invalid/unloadable compositions are classified as broken and halt rather than silently falling back.\n  - First configured root wins on duplicate preset IDs (`if (byId.has(preset.id)) continue;`).\n  - `mount()` sequence: `resolveMountable(id)` executes before `ensureStanding(preset)` and `bindScopeParent(agentKey, standing.key)`.\n\n### Challenge 4: Byte-Exact Materialised Payload\n- Payload path: `orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/materialised-home/.agent-presets/emr4-bounded-worker/agent.cordis.yml`.\n- Exactly 158 bytes UTF-8/LF without BOM or CRLF.\n- Contains exactly the two ordered rows (`tool-fs` and `tool-fs-search`).\n- Contains `sampleOverCapGlobResults: false` under `tool-fs-search.config` (mandatory per search tool schema).\n- No YAML aliases (`*`, `&`), dynamic tags (`!!`), variable expressions (`${`), extra keys, or comments.\n\n### Challenge 5: Two-Stage Security Boundary Challenge\n- **Stage 1 (Preset Registration):** Plugin source inspection confirms `tool-fs` unconditionally registers `read`, `write`, `edit` (and conditionally `read_image` when `attachments` context is injected); `tool-fs-search` unconditionally registers `glob`, `grep`. The raw inherited surface is thus 5 unconditional + 1 conditional tool (`edit`, `glob`, `grep`, `read`, `write` \u00b1 `read_image`). The preset alone is explicitly **not** the authority boundary.\n- **Stage 2 (Accepted Post-Mount Guard):** Symbolic evaluation of the accepted guard demonstrates that post-mount `tools.restrict()` reduces both minimal (`5`) and attachment-present (`6`) tool sets to exactly sorted `['edit', 'glob', 'read']`. `write`, `grep`, and `read_image` are strictly stripped from model-visible schemas.\n- **Stage 3 (Broker Allowlist):** Outer Ariadne broker allowlist independently enforces `['edit', 'glob', 'read']` defense-in-depth.\n\n### Challenge 6: Rejection of 21 Hostile Variants and Closed Paths\n- 15 hostile YAML payload variants (missing rows, duplicate rows, inverted order, renamed plugins, surplus rows, group rows, unexpected config, missing sampling, true sampling, string sampling, dynamic tags, aliases, CRLF, BOM) tested and confirmed rejected.\n- 6 hostile path variants (directory traversal, upper case, underscores, wrong filenames, absolute root) tested and confirmed rejected.\n- Selected-tool name drift, missing inherited tools, and scope-local tool registrations all fail closed with `PresetMaterialisationError`.\n- File writes are strictly confined within the operation's continuity directory; no writes occur to `%USERPROFILE%`, real Harness home, or external paths.\n\n### Challenge 7: Consumed Native Attempts & Zero Runtime Action Counts\n- Both consumed attempts (`native-composition-attempt-001` at `296f35ff696361c63a4e018e5ae9317c79cb6213` and `preterminal-observable-composition-recovery-boot-attempt-001` at `8155a941a28b3d22a7dbb4132c4b0ada8558482e`) remain byte-exact, immutable, failed records with zero retry/resume/reclassification.\n- All 11 required zero counts verified: `agent_sessions: 0`, `broker_requests: 0`, `database_invocations: 0`, `docker_invocations: 0`, `model_requests: 0`, `native_harness_processes: 0`, `network_attempts: 0`, `node_processes: 0`, `occupied_workers: 0`, `provider_requests: 0`, `turns: 0`.\n\n### Challenge 8: Bounded Command Manifest Execution\n- Executed all 10 bound commands in exact sequence (C01\u2013C10):\n  - C01 (`git status --short --branch`): clean worktree, exit code 0.\n  - C02 (`git rev-parse HEAD`): exact `962e91d9af90fbe977177d251f9f3e3134aaad19`, exit code 0.\n  - C03 (pytest across 7 test suites): 101 tests passed, exit code 0.\n  - C04 (ruff check): all checks passed, exit code 0.\n  - C05 (py_compile): compiled cleanly, exit code 0.\n  - C06 (script `--check` mode): validated exact bytes and zero counts, exit code 0.\n  - C07 (`git diff --exit-code HEAD --`): clean diff, exit code 0.\n  - C08 (`git diff --check` across range): whitespace clean, exit code 0.\n  - C09 (`git diff --name-only` across range): exactly 8 candidate files, exit code 0.\n  - C10 (`git status --short --branch`): clean worktree preserved, exit code 0.\n\n### Challenge 9: Claim Ceiling\n- Candidate claims only that the repository-retained preset payload is byte-exact, rc.7-compatible, installation-ready, and deterministically projected by the accepted post-mount guard to `['edit', 'glob', 'read']`.\n- Explicitly **not** proved: native preset discovery in a live process, native mount, combined service activation, native scope creation, runtime effective schema view, future native Harness boot, occupied DeepSeek worker completion, or model/provider reliability.\n\n### Challenge 10: Closed Protected Boundaries\n- No product source, API, OpenAPI, schema, config, feature flag, allowlist, grammar, waiting area, or ordinary-practice settings were modified.\n- Protected refs (`master` and `handoff/current`) remain fixed at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n---\n\n## 3. Finding Summary and Final Determination\n\nNo P0, P1, or P2 findings exist. The candidate is deterministic, fail-closed, exact against frozen planning source `817add1e9f36ff143e6e46e854cdefd81fd45969`, and preserves all protected boundaries.\n\nVeto result: **pass**.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/bounded-worker-preset-gemini-962e91d9",
+          "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery",
+          "--check"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "817add1e9f36ff143e6e46e854cdefd81fd45969..962e91d9af90fbe977177d251f9f3e3134aaad19"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "817add1e9f36ff143e6e46e854cdefd81fd45969..962e91d9af90fbe977177d251f9f3e3134aaad19"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "6c1555ac1e03deb24d1f0e91f7729863f3bae28537acf2d750ac7bc109597e2d",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/bounded-worker-preset-gemini-962e91d9",
+        "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+        "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "817add1e9f36ff143e6e46e854cdefd81fd45969..962e91d9af90fbe977177d251f9f3e3134aaad19"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "817add1e9f36ff143e6e46e854cdefd81fd45969..962e91d9af90fbe977177d251f9f3e3134aaad19"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

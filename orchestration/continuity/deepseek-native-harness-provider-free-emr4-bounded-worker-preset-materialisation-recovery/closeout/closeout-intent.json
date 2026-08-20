@@ -1,0 +1,271 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v1",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery",
+    "title": "DeepSeek native Harness provider-free emr4-bounded-worker preset materialisation recovery",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-20T10:52:45.8367551+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery",
+      "title": "DeepSeek native Harness provider-free emr4-bounded-worker preset materialisation recovery",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admits this provider-free deterministic materialisation and its clockwork closeout.",
+          "No Node, native Harness process, worker, agent, broker, DeepSeek model or provider request occurred.",
+          "The successor admits exactly one separately frozen provider-free native composition boot and no agent, session, turn, broker, model or provider call."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-bounded-worker-preset-payload",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact 158-byte rc.7 emr4-bounded-worker payload and its full local-cache bindings at reviewed candidate 962e91d9af90fbe977177d251f9f3e3134aaad19."
+        },
+        {
+          "id": "accept-two-stage-tool-boundary",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-evidence.json",
+          "status": "accepted",
+          "summary": "Accept that the preset inherits a broader raw filesystem surface and only the mandatory post-mount guard yields exactly edit, glob and read; the outer broker allowlist remains independently required."
+        },
+        {
+          "id": "accept-first-independent-veto",
+          "source": "orchestration/agent_inbox/antigravity/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-gemini37-review-receipt.json",
+          "status": "accepted",
+          "summary": "Accept the first Gemini 3.7 Flash/high veto with ten exact zero-exit commands, 101 tests, unchanged candidate HEAD and a clean isolated worktree."
+        }
+      ],
+      "claim_scope": [
+        "The exact future Harness-home relative payload is .agent-presets/emr4-bounded-worker/agent.cordis.yml.",
+        "Six rc.7 cached packages and required members are bound without registry, npm, Node, network or disk extraction.",
+        "The raw inherited tool surface is broader than the authority boundary and is explicitly recorded.",
+        "The accepted post-mount guard symbolically yields exactly sorted edit, glob and read for both admitted attachment postures.",
+        "Twenty-one hostile variants fail closed, 24 focused tests pass and the independent manifest passes 101 tests.",
+        "No native discovery, mount, service activation, scope, runtime schema, worker or model/provider reliability is claimed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/materialised-home/.agent-presets/emr4-bounded-worker/agent.cordis.yml",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-gemini37-review-packet.md",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-gemini37-review-worktree-preflight.json",
+          "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "No native process has yet proved combined preset discovery, mount, service activation, scope creation and effective-schema observation.",
+        "No agent, session, turn, broker, DeepSeek model or provider call is authorised.",
+        "Both consumed native attempts remain immutable and cannot be retried, resumed or reclassified.",
+        "No product, practice, data, production, deployment, release, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Connect the DeepSeek native Harness to Ariadne's clockwork through an exact inspectable preset and a separately enforced least-authority tool boundary",
+      "outcome": "The custom preset payload is exact, hostile variants fail closed and one first-attempt independent veto passes without starting the native Harness.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-evidence.json",
+        "orchestration/agent_inbox/antigravity/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-gemini37-review-receipt.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/efficacy-reading.json"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Prove the accepted service graph and exact bounded preset together in one native provider-free composition",
+      "why_now": "The service-injection repair and exact preset payload are separately proven, so a single bounded native process can now test their composition without exposing a model/provider boundary.",
+      "outcome": "The preset is installation-ready and its deterministic effective-tool projection is accepted; the remaining uncertainty is native discovery, activation and runtime observation.",
+      "unlocks": [
+        "One process can test discovery and mount of the exact repository payload.",
+        "The accepted required-service graph can be observed reaching readiness before runner activation.",
+        "The accepted guard can be observed producing exactly edit, glob and read before any agent or provider is eligible."
+      ],
+      "does_not_solve": [
+        "No native composition success has yet been observed.",
+        "No occupied DeepSeek worker, broker, model or provider reliability is proved.",
+        "No product, data, runtime, deployment, release, Pages or protected integration opens."
+      ],
+      "evidence": [
+        "docs/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-closeout.md",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery.md"
+      ],
+      "orientation_statement": "EMR4 will perform exactly one freshly frozen provider-free native composition boot before considering any occupied DeepSeek worker."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+      "active_tranche": "DeepSeek native Harness provider-free complete-composition native-boot recovery",
+      "objective": "Perform exactly one separately frozen offline, network-denied rc.7 native Harness boot combining the accepted required-service declaration, exact emr4-bounded-worker payload, preterminal observability and post-mount effective-tool guard; require observed readiness and exactly edit, glob and read, one sanitized terminal, bounded exit and cleanup, with no agent, session, turn, broker, DeepSeek model or provider request.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted required-service and bounded-preset recoveries.",
+      "next_stage": "fresh_five_source_rehydration_and_freeze_one_process_complete_composition_native_boot_plan"
+    },
+    "incidents": [],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "bounded_worker_preset_closeout_tick_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "bounded_worker_preset_and_clockwork_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "bounded_worker_preset_closeout_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "bounded_worker_preset_closeout_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "bounded_worker_preset_deterministic_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery",
+          "--check"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "DeepSeek native Harness provider-free emr4-bounded-worker preset materialisation recovery acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-threat-model-delta.md",
+      "scripts/deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+      "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/evidence.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/materialised-home/.agent-presets/emr4-bounded-worker/agent.cordis.yml",
+      "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/efficacy-reading.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-preplanning-runtime-state.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-preplanning-receipt.json",
+      "orchestration/agent_inbox/antigravity/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-gemini37-review-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-gemini37-review-worktree-preflight.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-pre-verifier-runtime-state.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-pre-verifier-receipt.json",
+      "docs/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/closeout-intent.json"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_complete_composition_native_boot_recovery_only",
+    "exactly_one_fresh_bounded_network_denied_native_harness_process",
+    "exact_accepted_rc7_required_service_declaration_and_emr4_bounded_worker_payload_only",
+    "observe_hmr_agentPresets_tools_readiness_before_runner_and_exact_edit_glob_read_after_guard",
+    "one_sanitized_terminal_bounded_exit_and_complete_cleanup_required",
+    "no_agent_session_turn_broker_deepseek_model_provider_or_occupied_worker",
+    "no_fallback_to_claude_code_or_other_model_harness",
+    "both_consumed_native_attempts_immutable_no_retry_resume_or_reclassification",
+    "no_registry_external_network_credential_docker_postgresql_sql_transaction_or_database_execution",
+    "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}
