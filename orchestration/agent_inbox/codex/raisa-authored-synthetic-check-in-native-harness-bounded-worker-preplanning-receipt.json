@@ -1,0 +1,134 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker monitored development rehearsal",
+    "completed_stage": "Accepted raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_narrowest_authored_synthetic_monitored_worker_plan",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "109aeed0b4794fa8c4f98f78c71021d7b4562c32",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "1307c5f0fc22b86c999616afa4f0c4e2055b8908",
+    "reason_codes": [],
+    "resolved_commit": "109aeed0b4794fa8c4f98f78c71021d7b4562c32",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "109aeed0b4794fa8c4f98f78c71021d7b4562c32"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "1307c5f0fc22b86c999616afa4f0c4e2055b8908",
+    "branch_origin_aligned": true,
+    "head": "1307c5f0fc22b86c999616afa4f0c4e2055b8908",
+    "origin_branch_commit": "1307c5f0fc22b86c999616afa4f0c4e2055b8908",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 657
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "preplanning",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "This tranche exists to test one useful bounded DeepSeek worker through the native Harness; leverage begins only after Sol freezes and independently verifies the exact authored-synthetic work package and controller.",
+        "work_packages": [
+          "one authored-synthetic non-product bounded implementation-and-test work package through the pinned native Harness"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "An occupied provider request and new broker-to-native composition require one fresh exact-candidate semantic veto after all deterministic gates pass; Gemini receives no implementation or acceptance authority.",
+        "work_packages": [
+          "one fresh read-only semantic veto over the exact controller, work package, schemas, tests and provider boundary"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation, and work-package freeze, broker binding, one-request monitoring, terminal interpretation and cleanup form one causally serial path.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "deterministic_candidate_ready",
+      "pre_verifier",
+      "occupied_worker_checkpoint",
+      "terminal_interpretation",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "fresh five-source receipt before plan freeze",
+      "freeze an exact authored-synthetic non-product work package with mechanical acceptance before implementation",
+      "provider-free controller and hostile fixtures before independent review",
+      "fresh Gemini veto before the occupied checkpoint",
+      "one exact clockwork checkpoint before one DeepSeek request",
+      "immutable terminal and cleanup before output acceptance",
+      "no retry or fallback after the occupied identity is consumed"
+    ]
+  },
+  "planned_action": "freeze_the_narrowest_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal-threat-model-delta.md",
+      "docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-preset-mount-effective-tool-projection-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-terminal-attempt-003.json",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/closeout/clockwork-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns plan freeze, acceptance, recovery, clockwork and Git. DeepSeek V4 Flash/high is planned only through the pinned native Harness for one bounded work package after separate admission. Gemini 3.7 Flash/high is reserved for the required fresh semantic veto. Native subagents are declined because current developer policy prohibits proactive delegation and the one-request lifecycle is serial.",
+    "git_refs_and_worktree": "The generated snapshot owns every exact Git identity. The local and origin task branch are aligned at the committed clockwork transition, all four protected refs remain exact, tracked state is clean, docs/branding and all unrelated untracked paths are preserved, and staging remains explicit-path only.",
+    "live_handover_current_baton": "AGENTS.md was read completely after the clockwork closeout and task-branch push. It accepts the provider-disabled native preset mount and exact edit, glob and read projection and names only this authored-synthetic monitored native worker successor.",
+    "protected_evidence_boundaries": "Authored-synthetic non-product development only. Preserve the accepted rc.7 preset/tool guard and every immutable attempt. No occupied request before plan, exact candidate, review and separate checkpoint; then exactly one new worker identity, one model request, zero automatic retries and zero silent fallback. No product source or data, ordinary-practice enablement, Arrived/status/grammar/client/waiting-area change, Docker/database, production, deployment, release, Pages, protected evidence or protected-ref movement."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
