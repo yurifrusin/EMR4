@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
-  "active_tranche": "DeepSeek native Harness post-recovery occupied-attempt decision gate",
-  "objective": "Await Yuri's distinct decision whether to authorise one new occupied authored-synthetic native-Harness worker attempt under a separately frozen calls, cost, isolation, cleanup and claim envelope, without launching any process or provider request meanwhile.",
-  "status": "blocked",
-  "source_head": "12d8758fee2504435ca2b4ccf6225b9d7a86a6a1",
-  "authority_source": "The accepted provider-disabled pre-HMR recovery and its explicit boundary that every new occupied worker requires Yuri's distinct decision.",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+  "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker attempt 003",
+  "objective": "Prepare, separately checkpoint and execute exactly one new DeepSeek Flash worker identity against the unchanged authored-synthetic non-product one-edit package through the accepted native Harness controller, broker and recovered pre-HMR terminal, with at most one provider request, zero retries, immutable terminal evidence and exact-root cleanup.",
+  "status": "in_progress",
+  "source_head": "ef3f2cb61bd482c304f6828439d7600ea444d68a",
+  "authority_source": "Yuri's explicit affirmative 2026-08-21 decision authorising one new occupied authored-synthetic native-Harness attempt, together with the accepted attempt-002 negative evidence and provider-disabled pre-HMR terminal recovery.",
   "checkpoint": {
-    "completed_stage": "The provider-disabled pre-HMR startup terminal recovery is accepted and published through the clockwork. Future pre-first-HMR failures now receive a validated bounded stage/cause coordinate before raw-stream cleanup, while attempts 001 and 002 remain immutable and no provider request occurred in the accepted recovery.",
-    "next_executable_stage": null,
+    "completed_stage": "The pre-HMR recovery is accepted at Continuity 354 / Compass 336; attempts 001 and 002 remain consumed and immutable, attempt 002 reached no provider request, and Yuri explicitly authorised one separately frozen new occupied attempt.",
+    "next_executable_stage": "generate_a_fresh_five_source_attempt_003_preexecution_receipt_then_run_zero_provider_deterministic_admission_before_materializing_the_new_disposable_root",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 1
+      "verification": 0
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,21 +26,26 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": true,
-    "reason": "Yuri must distinctly choose whether to authorise one new occupied authored-synthetic native-Harness worker attempt under a separately frozen calls, cost, isolation, cleanup and claim envelope. The accepted recovery expressly does not confer that occupied authority."
+    "required": false,
+    "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "The provider-disabled recovery is complete and the next possible action would incur a new occupied Harness/provider execution. No process or provider request may launch until Yuri authorises or declines that distinct attempt."
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "no_new_occupied_native_harness_worker_before_distinct_yuri_decision",
-    "no_native_harness_broker_worker_or_provider_process_while_awaiting_decision",
-    "no_attempt_002_retry_resume_overwrite_or_reclassification",
-    "no_raw_startup_stream_retention",
-    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
-    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "authored_synthetic_nonproduct_native_harness_bounded_worker_attempt_003_only",
+    "attempts_001_and_002_consumed_terminal_and_cleanup_evidence_remain_immutable",
+    "one_new_worker_identity_one_native_process_one_session_one_turn_and_at_most_one_provider_request",
+    "maximum_output_tokens_4096_request_bytes_1048576_response_bytes_2097152_upstream_seconds_300_native_seconds_420",
+    "existing_user_controlled_prepaid_balance_only_no_top_up_balance_mutation_or_claimed_broker_currency_cap",
+    "zero_automatic_retries_zero_resume_zero_fallback_zero_auxiliary_model_calls_and_no_second_worker",
+    "fresh_deterministic_admission_preparation_and_separate_exact_clockwork_checkpoint_required_before_launch",
+    "only_synthetic_window_coalescer_py_may_change_inside_the_disposable_attempt_root",
+    "validated_bounded_pre_hmr_terminal_required_before_raw_cleanup_when_applicable",
+    "no_product_source_configuration_api_openapi_graphql_database_schema_migration_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
     "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_change",
     "no_product_patient_appointment_clinical_historical_or_protected_data",
     "no_production_runtime_deployment_release_or_pages",
     "no_protected_evidence_access_or_protected_ref_movement",

@@ -2,12 +2,39 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "pre-hmr-startup-recovery-provider-disabled-check",
+      "command_id": "native-worker-attempt-003-transition-provider-free-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery",
-        "--check"
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/emr4",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "native-worker-attempt-003-transition-ruff",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "ruff",
+        "check",
+        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "native-worker-attempt-003-transition-compile",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "py_compile",
+        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }
