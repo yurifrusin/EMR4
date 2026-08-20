@@ -3,17 +3,17 @@
   "operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
   "active_tranche": "DeepSeek native Harness post-recovery occupied-attempt decision gate",
   "objective": "Await Yuri's distinct decision whether to authorise one new occupied authored-synthetic native-Harness worker attempt under a separately frozen calls, cost, isolation, cleanup and claim envelope, without launching any process or provider request meanwhile.",
-  "status": "in_progress",
+  "status": "blocked",
   "source_head": "12d8758fee2504435ca2b4ccf6225b9d7a86a6a1",
   "authority_source": "The accepted provider-disabled pre-HMR recovery and its explicit boundary that every new occupied worker requires Yuri's distinct decision.",
   "checkpoint": {
-    "completed_stage": "Accepted deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery at the machine-resolved source.",
-    "next_executable_stage": "record_a_genuine_user_attention_gate_before_any_new_occupied_attempt",
+    "completed_stage": "The provider-disabled pre-HMR startup terminal recovery is accepted and published through the clockwork. Future pre-first-HMR failures now receive a validated bounded stage/cause coordinate before raw-stream cleanup, while attempts 001 and 002 remain immutable and no provider request occurred in the accepted recovery.",
+    "next_executable_stage": null,
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 0
+      "verification": 1
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,12 +26,12 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": false,
-    "reason": null
+    "required": true,
+    "reason": "Yuri must distinctly choose whether to authorise one new occupied authored-synthetic native-Harness worker attempt under a separately frozen calls, cost, isolation, cleanup and claim envelope. The accepted recovery expressly does not confer that occupied authority."
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "The provider-disabled recovery is complete and the next possible action would incur a new occupied Harness/provider execution. No process or provider request may launch until Yuri authorises or declines that distinct attempt."
   },
   "protected_boundaries": [
     "no_new_occupied_native_harness_worker_before_distinct_yuri_decision",

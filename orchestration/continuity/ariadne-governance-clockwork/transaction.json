@@ -1,112 +1,106 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
-  "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
-  "transaction_id": "txn-f28a332da6018456ad3b3a01",
-  "source_commit": "12d8758fee2504435ca2b4ccf6225b9d7a86a6a1",
-  "previous_source_commit": "12d8758fee2504435ca2b4ccf6225b9d7a86a6a1",
-  "previous_generation_id": "gen-0627c63ba4372e4dca7e7738d9553aa43291be22a661f127d647f00e0d1531d6",
-  "previous_bundle_sha256": "0627c63ba4372e4dca7e7738d9553aa43291be22a661f127d647f00e0d1531d6",
+  "operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
+  "transaction_id": "txn-c7f52847d2d857868ae36c5c",
+  "source_commit": "240b317da06a021d48ea85d3c8446689006cb241",
+  "previous_source_commit": "240b317da06a021d48ea85d3c8446689006cb241",
+  "previous_generation_id": "gen-5a00a01945c3eb7523d94ebfe98b0bd0c9d487dba73edaf1e2f8298fa1196bdf",
+  "previous_bundle_sha256": "5a00a01945c3eb7523d94ebfe98b0bd0c9d487dba73edaf1e2f8298fa1196bdf",
   "previous_canonical_sha256s": {
-    "continuity": "22a0e5add13a24358b23dc250e176083c299fab7e1c7100ff77bba8ef2eb995d",
-    "compass": "bb539418d800aebd1a718c0b5756219df4da33c32c0662512feae7553f3ae3b7",
-    "compass_markdown": "5cef65f6e8b73f0e8e050fe6f7c626c15d77cc854707dd1018c6ae44fe6fafec",
-    "active_latch": "fb1e2f68c8c01bdd4f3267d0924923b80dc1dcbc2c9cf8f41a512f9fc1bbf6ae",
-    "error_register": "a2eb1a84a1ed22464ab6528f99135e80813c74f5f9a259a4c53e672d4f82eeaf",
-    "pattern_report": "522d8488078b86e10a28f38c9536d36bfc2b3c6b757e55df2cecb6702ef051d3",
-    "current_baton": "43f9f7eca971f5b3ff3c17b7bab0b2f3e461e8b122ad3dd8979b871c87604114"
+    "continuity": "9eb3148106c658372e68f5645fab5158a7aa68a0f62e275c8308918f78151ca7",
+    "compass": "1720ca6640884792afcc02c3b3fe402f7e17ecce5fa9b4b1dd70c2b675cd74d9",
+    "compass_markdown": "22af7c21cf2bedd0bc7e616e5c89a343ad83d802605805466cd88d0bab368827",
+    "active_latch": "4acf8abee5e0f8714b3a5872229f7c279d0ef669d710123d9a2c55f5640e00bc",
+    "error_register": "db2f427b254271a3b479ee4651df3f8053604b044af5b555ba0ae8bb2d7d7582",
+    "pattern_report": "73c7a348ddc93c87554d5b59bf71d3a14b58c96701eda24610d0d33e92c5d326",
+    "current_baton": "980ffec8900433987d86b8507e5b6b4800427eca9e30249c6b1f2f41ee205fb8"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "dd3b27da8c15a3962726acc196cce74a9b550f978001336c66e6e417ee742308",
-    "transaction.json": "55584ca49e7c9781e08e3f223530c3435936471a944361a29449cf7b8c7c5a78",
+    "command-manifest.json": "d03305083319577e514927497178a5037d31893d7830bc1ee246578f19239ba9",
+    "transaction.json": "3b908d33d02ae134c85d784964576c438eacea63b10f3964004fddc3fa68282f",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "b2e1f87fb0db0230d9c1876968dec4e6485adf95373476a29e0c0a939ea5c466"
+    "generation-manifest.json": "8e129ede42f0b3f7f7964e3c4cd7bdc3b4438a3e50e77af0fb2af30fde113dd2"
   },
   "projection_sha256s": {
-    "graph": "sha256:4052cf76e83b6134da4cbf5878403ba94c2be59a0671fa3f4a3b922595f3bc07",
-    "compass": "sha256:88704496d188802529846809da5115cee0dcad9943ee1104850dc44ab5b7d9b3",
-    "report": "sha256:510bbb1a5040481f4f1674d3f26908082901a89cc0906129b68628271e5b7654",
-    "latch": "sha256:b4776bc6269d3154079dcdc4d614a5fad5e44ee0ec5d2a9c058daa549fd61346",
-    "incident_aggregate": "sha256:5129e73b2cd8188b20cd829ebddb4683d507b15510fa2bbdf40070a2355667d0"
+    "latch": "sha256:322348d128dca6e9bc908f8e83efd60361e50d4aad5b7aa0bdc5e8e14aa432d4"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-f28a332da6018456ad3b3a01",
-      "transaction_id": "txn-f28a332da6018456ad3b3a01",
-      "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "journal_id": "journal-c7f52847d2d857868ae36c5c",
+      "transaction_id": "txn-c7f52847d2d857868ae36c5c",
+      "operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
-      "event_type": "manifest-accepted",
+      "event_type": "blocked-transition-intent-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "manifest_sha256": "sha256:5aa52809c02b71de00d9fae3156f531c41d1407d791f92033dac689634363d06"
+        "intent_sha256": "sha256:ab8a4260d07b0d030f2e969cd19fbc8334b4d3217c7f811cb9dbbbe701753782"
       },
-      "event_sha256": "sha256:a6696c95fecb204ebb7811eba400bfbdbf46074435c39e5fe1e713eac6d39d45"
+      "event_sha256": "sha256:0eded32250ee939e9ae7b5029970e4634f0d2019181bbb4746c8e5735b24fed7"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-f28a332da6018456ad3b3a01",
-      "transaction_id": "txn-f28a332da6018456ad3b3a01",
-      "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "journal_id": "journal-c7f52847d2d857868ae36c5c",
+      "transaction_id": "txn-c7f52847d2d857868ae36c5c",
+      "operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
       "sequence": 2,
-      "previous_event_sha256": "sha256:a6696c95fecb204ebb7811eba400bfbdbf46074435c39e5fe1e713eac6d39d45",
+      "previous_event_sha256": "sha256:0eded32250ee939e9ae7b5029970e4634f0d2019181bbb4746c8e5735b24fed7",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "12d8758fee2504435ca2b4ccf6225b9d7a86a6a1",
-        "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
+        "source_commit": "240b317da06a021d48ea85d3c8446689006cb241"
       },
-      "event_sha256": "sha256:25667b8a1d61ec367db0106289bf24fb5c32195544a172480e7eb17f72b63fbe"
+      "event_sha256": "sha256:476d47b414f289fc16beb1c1705ade61091a6bf2b6d30f007d4f621eee84916d"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-f28a332da6018456ad3b3a01",
-      "transaction_id": "txn-f28a332da6018456ad3b3a01",
-      "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "journal_id": "journal-c7f52847d2d857868ae36c5c",
+      "transaction_id": "txn-c7f52847d2d857868ae36c5c",
+      "operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
       "sequence": 3,
-      "previous_event_sha256": "sha256:25667b8a1d61ec367db0106289bf24fb5c32195544a172480e7eb17f72b63fbe",
-      "event_type": "projections-reduced",
+      "previous_event_sha256": "sha256:476d47b414f289fc16beb1c1705ade61091a6bf2b6d30f007d4f621eee84916d",
+      "event_type": "blocked-latch-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "graph_revision": 354,
-        "map_revision": 336
+        "status": "blocked",
+        "verification_counter": 1
       },
-      "event_sha256": "sha256:261790859ebd17c8bd35979ba1536c34e5a908255583d1cccbd4df34db4818a1"
+      "event_sha256": "sha256:33b55160473ae728974c083c2a0d39488874998f2bd95972c280108a173a96fe"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-f28a332da6018456ad3b3a01",
-      "transaction_id": "txn-f28a332da6018456ad3b3a01",
-      "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "journal_id": "journal-c7f52847d2d857868ae36c5c",
+      "transaction_id": "txn-c7f52847d2d857868ae36c5c",
+      "operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
       "sequence": 4,
-      "previous_event_sha256": "sha256:261790859ebd17c8bd35979ba1536c34e5a908255583d1cccbd4df34db4818a1",
-      "event_type": "projections-validated",
+      "previous_event_sha256": "sha256:33b55160473ae728974c083c2a0d39488874998f2bd95972c280108a173a96fe",
+      "event_type": "blocked-latch-validated",
       "actor": "gpt-sol",
       "payload": {
-        "continuity": "passed",
-        "compass": "passed",
-        "latch": "passed"
+        "user_attention_required": true,
+        "terminal_response_permitted": true
       },
-      "event_sha256": "sha256:c0b93f3b83bc8c0f3760a6e3a46babd30d0ef2739eaf850c9c8d48c62414d0f1"
+      "event_sha256": "sha256:c496302135239e3934e41dff17926928c6a5f7763309d456dcb7825eb387aa7a"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-f28a332da6018456ad3b3a01",
-      "transaction_id": "txn-f28a332da6018456ad3b3a01",
-      "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "journal_id": "journal-c7f52847d2d857868ae36c5c",
+      "transaction_id": "txn-c7f52847d2d857868ae36c5c",
+      "operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
       "sequence": 5,
-      "previous_event_sha256": "sha256:c0b93f3b83bc8c0f3760a6e3a46babd30d0ef2739eaf850c9c8d48c62414d0f1",
+      "previous_event_sha256": "sha256:c496302135239e3934e41dff17926928c6a5f7763309d456dcb7825eb387aa7a",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
-        "publication_mode": "shadow_directory_rename"
+        "publication_mode": "lease_bound_pointer_last_live_tick"
       },
-      "event_sha256": "sha256:ab2106d1db1b2368e40690d724ead675b6d4b966bbd22488d055d82d2c142022"
+      "event_sha256": "sha256:d7b57ab959143a4795a9ca2165d58df6396399380a64c89191062dd18d069f46"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
-  "event_kind": "clean_closeout",
+  "event_kind": "blocked_transition",
   "next_boundaries_sha256": "sha256:e38b87f0be74395e7d39c313a417868292a11cfee3471fc242664bec381e3274",
-  "register_bytes_preserved": false,
-  "pattern_bytes_preserved": false
+  "register_bytes_preserved": true,
+  "pattern_bytes_preserved": true
 }
