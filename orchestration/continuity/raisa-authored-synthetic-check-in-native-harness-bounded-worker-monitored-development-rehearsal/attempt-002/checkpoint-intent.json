@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+  "completed_stage": "The exact attempt-002 identity-isolation candidate passed eleven deterministic commands and one fresh Gemini 3.7 Flash/high semantic veto at unchanged clean candidate. Review evidence was committed and published. Preparation then materialised the distinct authored-synthetic root, accepted rc.7 controls and exact checkpoint candidate with attempt-001 evidence byte-stable and zero native, model or provider requests. The one-process, one-request, zero-retry checkpoint is admitted.",
+  "next_executable_stage": "generate_a_fresh_five_source_attempt_002_preexecution_receipt_then_run_exactly_one_deepseek_native_harness_authored_synthetic_edit_without_retry_or_fallback",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "authored_synthetic_native_worker_attempt_002_checkpoint_tick_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/checkpoint-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}
