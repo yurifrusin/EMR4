@@ -58,6 +58,13 @@ receipt's invalid leverage enum and the historical guard defect are separately
 retained. The accepted Harness terminal and Gemini veto remain unchanged and
 are not rerun.
 
+The first corrected check at full source
+`64d319d7771c3fe60952e70ec17b70248079673c` then rejected one incident-stage
+value before publication. Sol treats the late rejection as a contained
+repository control defect, corrects all adjacent incident vocabulary in one
+pass and moves the complete register-bound date, identifier, enum and const
+admission into `validate_tick_intent`. No canonical projection changed.
+
 The exact unrepeated successor is
 `raisa-provider-free-check-in-relay-free-recovery-attempt-005`. It has planning
 authority only until a fresh exact plan, WorkOrder, deterministic admission and

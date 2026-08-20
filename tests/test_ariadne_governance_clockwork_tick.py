@@ -10,6 +10,17 @@ import pytest
 from orchestration_harness.governance_clockwork_tick import (
     BLOCKED_INTENT_VERSION,
     CHECKPOINT_INTENT_VERSION,
+    INCIDENT_CANDIDATE_STATES,
+    INCIDENT_CAUSAL_CLAIM_LEVEL,
+    INCIDENT_CORRECTION_STATUSES,
+    INCIDENT_RECURRENCE,
+    INCIDENT_RESOURCE,
+    INCIDENT_ROLES,
+    INCIDENT_SEVERITIES,
+    INCIDENT_STAGES,
+    INCIDENT_TRANSPORT,
+    INCIDENT_TRANCHE,
+    INCIDENT_WORKFLOW_DISPOSITIONS,
     TICK_INCIDENT_INTENT_VERSION,
     USER_DECISION_INTENT_VERSION,
     CommittedClockworkTick,
@@ -326,6 +337,73 @@ def test_incident_intent_rejects_derived_identity_and_unsafe_evidence() -> None:
     ]
     with pytest.raises(ClockworkTickRejection, match="tick_incident_evidence_path"):
         validate_tick_intent(unsafe, contract)
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "reason"),
+    [
+        ("observed_on", "2026-02-30", "tick_incident_observed_on"),
+        ("tranche", "Invalid Tranche", "tick_incident_tranche"),
+        ("role", "planner", "tick_incident_role"),
+        ("resource_id", "invalid_resource", "tick_incident_resource_id"),
+        ("transport", "invalid.transport", "tick_incident_transport"),
+        ("stage", "post_closeout_rehydration", "tick_incident_stage"),
+        ("process_severity", "high", "tick_incident_severity"),
+        ("candidate_state", "clean", "tick_incident_candidate_state"),
+        ("workflow_disposition", "corrected", "tick_incident_workflow_disposition"),
+        (
+            "recurrence_signature",
+            "invalid signature",
+            "tick_incident_recurrence_signature",
+        ),
+        ("causal_claim_level", "root_cause_confirmed", "tick_incident_causal_claim"),
+    ],
+)
+def test_incident_intent_rejects_register_schema_vocabulary_before_projection(
+    field: str, value: str, reason: str
+) -> None:
+    contract = validate_contract(_json(CONTRACT_PATH))
+    intent = _incident_intent(ROOT)
+    intent["agent_error_observations"][0][field] = value
+    with pytest.raises(ClockworkTickRejection, match=reason):
+        validate_tick_intent(intent, contract)
+
+
+def test_incident_intent_rejects_correction_status_before_projection() -> None:
+    contract = validate_contract(_json(CONTRACT_PATH))
+    intent = _incident_intent(ROOT)
+    intent["agent_error_observations"][0]["correction"]["status"] = "corrected"
+    with pytest.raises(
+        ClockworkTickRejection, match="tick_incident_correction_status"
+    ):
+        validate_tick_intent(intent, contract)
+
+
+def test_incident_intent_vocabulary_is_bound_to_register_schema() -> None:
+    schema = _json(
+        ROOT
+        / "orchestration/continuity/ariadne-agent-error-register/agent-error-register.schema.json"
+    )
+    properties = schema["$defs"]["incident"]["properties"]
+    correction = schema["$defs"]["correction"]["properties"]
+    assert INCIDENT_ROLES == frozenset(properties["role"]["enum"])
+    assert INCIDENT_STAGES == frozenset(properties["stage"]["enum"])
+    assert INCIDENT_SEVERITIES == frozenset(properties["process_severity"]["enum"])
+    assert INCIDENT_CANDIDATE_STATES == frozenset(
+        properties["candidate_state"]["enum"]
+    )
+    assert INCIDENT_WORKFLOW_DISPOSITIONS == frozenset(
+        properties["workflow_disposition"]["enum"]
+    )
+    assert INCIDENT_CORRECTION_STATUSES == frozenset(correction["status"]["enum"])
+    assert INCIDENT_CAUSAL_CLAIM_LEVEL == properties["causal_claim_level"]["const"]
+    assert INCIDENT_TRANCHE.pattern == properties["tranche"]["pattern"]
+    assert INCIDENT_RESOURCE.pattern == properties["resource_id"]["pattern"]
+    assert INCIDENT_TRANSPORT.pattern == properties["transport"]["pattern"]
+    assert (
+        INCIDENT_RECURRENCE.pattern
+        == properties["recurrence_signature"]["pattern"]
+    )
 
 
 def test_blocked_intent_is_closed_and_rejects_hostile_fields() -> None:

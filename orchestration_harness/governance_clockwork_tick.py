@@ -6,6 +6,7 @@ import copy
 import json
 import os
 import re
+from datetime import date
 from pathlib import Path
 from typing import Any, NoReturn
 
@@ -64,6 +65,46 @@ PREDECESSOR_METADATA_NAMES = (*METADATA_NAMES, GENERATION_NAME)
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
 IDENTIFIER = re.compile(r"^[a-z][a-z0-9._-]{0,127}$")
+INCIDENT_TRANCHE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
+INCIDENT_RESOURCE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
+INCIDENT_TRANSPORT = re.compile(r"^[a-z0-9][a-z0-9_-]*$")
+INCIDENT_RECURRENCE = re.compile(r"^[a-z0-9][a-z0-9_.-]*$")
+INCIDENT_ROLES = frozenset(
+    {"orchestrator", "implementer", "verifier", "integration_reviewer"}
+)
+INCIDENT_STAGES = frozenset(
+    {
+        "dispatch",
+        "implementation",
+        "deterministic_verification",
+        "independent_review",
+        "acceptance",
+        "integration",
+        "closeout",
+    }
+)
+INCIDENT_SEVERITIES = frozenset({"low", "moderate", "material"})
+INCIDENT_CANDIDATE_STATES = frozenset(
+    {"canonical_unchanged", "untrusted_partial_worktree", "accepted_candidate_changed"}
+)
+INCIDENT_WORKFLOW_DISPOSITIONS = frozenset(
+    {
+        "review_rejected",
+        "revision_required",
+        "attempt_rejected_and_escalated",
+        "recovery_lease_invoked",
+    }
+)
+INCIDENT_CORRECTION_STATUSES = frozenset(
+    {
+        "corrected_fresh_attempt",
+        "contained_then_escalated",
+        "recovery_lease_applied",
+        "control_added",
+        "control_implemented_pending_acceptance",
+    }
+)
+INCIDENT_CAUSAL_CLAIM_LEVEL = "observation_only"
 
 DERIVED_INPUT_KEYS = {
     "source_commit",
@@ -233,6 +274,58 @@ def _validate_incident_observations(value: object) -> list[dict[str, Any]]:
         category = _text(row["category"], "tick_incident_category", 80)
         if category not in EXPECTED_ORIGIN_BY_CATEGORY:
             _reject("tick_incident_category")
+        observed_on = _text(row["observed_on"], "tick_incident_observed_on", 10)
+        try:
+            if date.fromisoformat(observed_on).isoformat() != observed_on:
+                _reject("tick_incident_observed_on")
+        except ValueError:
+            _reject("tick_incident_observed_on")
+        tranche = _text(row["tranche"], "tick_incident_tranche", 120)
+        if INCIDENT_TRANCHE.fullmatch(tranche) is None:
+            _reject("tick_incident_tranche")
+        role = _text(row["role"], "tick_incident_role", 80)
+        if role not in INCIDENT_ROLES:
+            _reject("tick_incident_role")
+        resource_id = _text(
+            row["resource_id"], "tick_incident_resource_id", 120
+        )
+        if INCIDENT_RESOURCE.fullmatch(resource_id) is None:
+            _reject("tick_incident_resource_id")
+        transport = _text(row["transport"], "tick_incident_transport", 120)
+        if INCIDENT_TRANSPORT.fullmatch(transport) is None:
+            _reject("tick_incident_transport")
+        stage = _text(row["stage"], "tick_incident_stage", 120)
+        if stage not in INCIDENT_STAGES:
+            _reject("tick_incident_stage")
+        process_severity = _text(
+            row["process_severity"], "tick_incident_severity", 40
+        )
+        if process_severity not in INCIDENT_SEVERITIES:
+            _reject("tick_incident_severity")
+        candidate_state = _text(
+            row["candidate_state"], "tick_incident_candidate_state", 80
+        )
+        if candidate_state not in INCIDENT_CANDIDATE_STATES:
+            _reject("tick_incident_candidate_state")
+        workflow_disposition = _text(
+            row["workflow_disposition"],
+            "tick_incident_workflow_disposition",
+            120,
+        )
+        if workflow_disposition not in INCIDENT_WORKFLOW_DISPOSITIONS:
+            _reject("tick_incident_workflow_disposition")
+        recurrence_signature = _text(
+            row["recurrence_signature"],
+            "tick_incident_recurrence_signature",
+            120,
+        )
+        if INCIDENT_RECURRENCE.fullmatch(recurrence_signature) is None:
+            _reject("tick_incident_recurrence_signature")
+        causal_claim_level = _text(
+            row["causal_claim_level"], "tick_incident_causal_claim", 80
+        )
+        if causal_claim_level != INCIDENT_CAUSAL_CLAIM_LEVEL:
+            _reject("tick_incident_causal_claim")
         model = row["model"]
         if model is not None:
             model = _text(model, "tick_incident_model", 120)
@@ -246,6 +339,11 @@ def _validate_incident_observations(value: object) -> list[dict[str, Any]]:
             raise ClockworkTickRejection(
                 "tick_incident_correction_keys"
             ) from error
+        correction_status = _text(
+            correction["status"], "tick_incident_correction_status", 80
+        )
+        if correction_status not in INCIDENT_CORRECTION_STATUSES:
+            _reject("tick_incident_correction_status")
         evidence_paths = _strings(
             row["evidence_paths"], "tick_incident_evidence_paths"
         )
@@ -262,26 +360,18 @@ def _validate_incident_observations(value: object) -> list[dict[str, Any]]:
         observations.append(
             {
                 "attempt_key": attempt_key,
-                "observed_on": _text(
-                    row["observed_on"], "tick_incident_observed_on", 10
-                ),
-                "tranche": _text(row["tranche"], "tick_incident_tranche", 180),
-                "role": _text(row["role"], "tick_incident_role", 80),
-                "resource_id": _text(
-                    row["resource_id"], "tick_incident_resource_id", 160
-                ),
+                "observed_on": observed_on,
+                "tranche": tranche,
+                "role": role,
+                "resource_id": resource_id,
                 "model": model,
                 "reasoning_level": _text(
                     row["reasoning_level"], "tick_incident_reasoning_level", 80
                 ),
-                "transport": _text(
-                    row["transport"], "tick_incident_transport", 160
-                ),
-                "stage": _text(row["stage"], "tick_incident_stage", 120),
+                "transport": transport,
+                "stage": stage,
                 "category": category,
-                "process_severity": _text(
-                    row["process_severity"], "tick_incident_severity", 40
-                ),
+                "process_severity": process_severity,
                 "expected_invariant": _text(
                     row["expected_invariant"], "tick_incident_expected", 1000
                 ),
@@ -292,26 +382,12 @@ def _validate_incident_observations(value: object) -> list[dict[str, Any]]:
                     row["detection_method"], "tick_incident_detection", 1000
                 ),
                 "evidence_paths": evidence_paths,
-                "candidate_state": _text(
-                    row["candidate_state"], "tick_incident_candidate_state", 80
-                ),
-                "workflow_disposition": _text(
-                    row["workflow_disposition"],
-                    "tick_incident_workflow_disposition",
-                    120,
-                ),
-                "recurrence_signature": _text(
-                    row["recurrence_signature"],
-                    "tick_incident_recurrence_signature",
-                    240,
-                ),
-                "causal_claim_level": _text(
-                    row["causal_claim_level"], "tick_incident_causal_claim", 80
-                ),
+                "candidate_state": candidate_state,
+                "workflow_disposition": workflow_disposition,
+                "recurrence_signature": recurrence_signature,
+                "causal_claim_level": causal_claim_level,
                 "correction": {
-                    "status": _text(
-                        correction["status"], "tick_incident_correction_status", 80
-                    ),
+                    "status": correction_status,
                     "action": _text(
                         correction["action"], "tick_incident_correction_action", 1000
                     ),

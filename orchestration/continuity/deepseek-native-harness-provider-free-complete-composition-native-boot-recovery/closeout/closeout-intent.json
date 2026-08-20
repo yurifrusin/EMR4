@@ -73,7 +73,7 @@
         "All provider-boundary counts were zero and process/root cleanup was complete.",
         "The independent manifest passed 86 safe tests and ten zero-exit commands.",
         "Six ancillary mock Node unit-test processes and one verifier filename-grounding lapse are recorded as contained procedure incidents.",
-        "Stale lease 60, the invalid first recovery receipt and the historical hard-coded successor guard are retained as corrected governance incidents.",
+        "Stale lease 60, the invalid first recovery receipt, the historical hard-coded successor guard and the rejected first corrected-publication check are retained as corrected governance incidents.",
         "The corrected successor is the unrepeated attempt-005 planning operation; attempt 004 remains immutable.",
         "No occupied worker, broker, DeepSeek reasoning, coding reliability, product suitability or production isolation is claimed."
       ],
@@ -184,7 +184,8 @@
       {"incident_id": "clockwork-next-operation-legacy-boundary-token-omission", "source_id": "complete-composition-native-boot-clockwork-attempt-001", "peers": []},
       {"incident_id": "clockwork-recorded-operation-selected-as-successor", "source_id": "complete-composition-native-boot-clockwork-lease-60", "peers": []},
       {"incident_id": "recovery-receipt-parallelism-enum-mismatch", "source_id": "stale-successor-preplanning-attempt-001", "peers": []},
-      {"incident_id": "historical-successor-guard-hard-coded", "source_id": "post-native-harness-successor-guard", "peers": []}
+      {"incident_id": "historical-successor-guard-hard-coded", "source_id": "post-native-harness-successor-guard", "peers": []},
+      {"incident_id": "incident-intent-schema-vocabulary-late-validation", "source_id": "corrected-clockwork-check-at-source-64d319d7771c3fe60952e70ec17b70248079673c", "peers": []}
     ],
     "broker": {"enabled": false, "posture": "provider_free_shadow"}
   },
@@ -420,9 +421,9 @@
       "model": null,
       "reasoning_level": "high",
       "transport": "clockwork_clean_closeout",
-      "stage": "post_closeout_rehydration",
+      "stage": "closeout",
       "category": "reasoning_claim_error",
-      "process_severity": "high",
+      "process_severity": "material",
       "expected_invariant": "A newly generated next-operation latch must identify an unrepeated operation absent from the immutable accepted Continuity graph.",
       "observed_error": "Lease 60 selected raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal even though the graph already records that exact operation accepted at c82c3a741053a9c8da260aa62e1a968af22bb54e and later product descendants are also accepted.",
       "detection_method": "Fresh complete five-source rehydration compared the generated latch and Baton Next row with exact graph node identities before any worker dispatch or product action.",
@@ -434,7 +435,7 @@
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
       "recurrence_signature": "orchestrator.recorded_operation_selected_as_clockwork_successor",
-      "causal_claim_level": "root_cause_confirmed",
+      "causal_claim_level": "observation_only",
       "correction": {
         "status": "control_added",
         "action": "Preserve stale lease 60, restore the immediately previous generation byte-exactly through rollback lease 61, and correct the successor to separately frozen attempt 005.",
@@ -456,7 +457,7 @@
       "model": null,
       "reasoning_level": "high",
       "transport": "ariadne_orchestrator_preflight",
-      "stage": "pre_sprint_planning",
+      "stage": "dispatch",
       "category": "output_contract_violation",
       "process_severity": "low",
       "expected_invariant": "Every parallelism expected_leverage value must be copied from the configured positive, required_independence, neutral or negative vocabulary before receipt generation.",
@@ -469,9 +470,9 @@
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
       "recurrence_signature": "orchestrator.parallelism_expected_leverage_vocabulary_mismatch",
-      "causal_claim_level": "root_cause_confirmed",
+      "causal_claim_level": "observation_only",
       "correction": {
-        "status": "corrected",
+        "status": "corrected_fresh_attempt",
         "action": "Preserve the rejected receipt, replace the invented value with required_independence and rerun the same five-source state to an exact passed receipt.",
         "prevention_control": "Copy every expected_leverage value from orchestration/harness_settings/orchestrator_requirements.yaml; express qualifications only in rationale text and require exact passed readback before planning or dispatch.",
         "evidence_paths": [
@@ -490,9 +491,9 @@
       "model": null,
       "reasoning_level": "high",
       "transport": "repository_deterministic_test",
-      "stage": "post_closeout_rehydration",
+      "stage": "closeout",
       "category": "repository_defect",
-      "process_severity": "high",
+      "process_severity": "material",
       "expected_invariant": "The accepted-versus-next guard must derive immutable operation identities from current machine state and remain valid as successors advance.",
       "observed_error": "The historical guard scanned only backticked docs/*-plan.md names and required one old readiness operation, so it neither rejected the recorded route node before publication nor represented the current successor chain.",
       "detection_method": "The focused test failed on its hard-coded readiness assertion after lease 60 while exact graph inspection showed the route operation was already accepted.",
@@ -503,7 +504,7 @@
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
       "recurrence_signature": "repository.successor_guard_hard_coded_to_historical_operation",
-      "causal_claim_level": "root_cause_confirmed",
+      "causal_claim_level": "observation_only",
       "correction": {
         "status": "control_added",
         "action": "Replace the historical successor assertion with graph/latch/Baton identity checks and add the same recorded-ID rejection inside clockwork construction.",
@@ -515,6 +516,40 @@
         ]
       },
       "baton_summary": "retires the hard-coded Markdown successor assertion in favour of graph-backed pre-publication identity checks."
+    },
+    {
+      "attempt_key": "corrected-closeout-incident-intent-schema-vocabulary-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+      "role": "orchestrator",
+      "resource_id": "emr4-repository",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "repository_deterministic_check",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The caller-authored incident intent must reject every register-schema enum, const, date and identifier mismatch before any clockwork generation build or publication attempt.",
+      "observed_error": "The first corrected-publication check at full source 64d319d7771c3fe60952e70ec17b70248079673c reached register projection before rejecting an invalid post_closeout_rehydration stage; three adjacent observations also contained schema-invalid severity, causal-claim and correction-status vocabulary that would otherwise have required serial reruns.",
+      "detection_method": "The separate clockwork check failed before publication with tick_incident_register_projection and the exact jsonschema stage-enum diagnostic; Sol then compared every caller-authored observation field with the canonical register schema before retrying.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/closeout-intent.json",
+        "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-stale-successor-recovery-addendum.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.clockwork_incident_intent_schema_vocabulary_validated_only_at_projection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Correct every incident observation to canonical vocabulary and move date, identifier, enum and const validation into validate_tick_intent before register projection.",
+        "prevention_control": "The intent validator and parameterized tests now reject every register-bound field class before build_tick_generation can reach canonical projection.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "baton_summary": "moves complete incident-schema vocabulary admission ahead of clockwork generation so one bad field cannot create a cascade of check reruns."
     }
   ]
 }

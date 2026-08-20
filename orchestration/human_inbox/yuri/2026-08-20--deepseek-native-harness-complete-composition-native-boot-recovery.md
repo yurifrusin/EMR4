@@ -40,6 +40,13 @@ interlock checks the Continuity graph itself and will reject any already
 recorded operation before publication, instead of relying on a hard-coded
 Markdown expectation.
 
+The first corrected check then caught another mechanical vocabulary mismatch
+before publication. Rather than fixing one field and discovering the next one
+on another run, I compared the whole incident packet with its schema and moved
+all of those readings into the earlier intent gate. One check now rejects the
+complete date, identifier and fixed-vocabulary surface before the clockwork can
+build a generation. No canonical record or Harness result changed.
+
 The genuine next assignment is the separately named fifth relay-free recovery
 attempt. It will first receive its own exact one-run plan and broker-limited
 native-Harness WorkOrder. Attempt 004 remains consumed; no rerun or product
@@ -74,7 +81,10 @@ enablement is hidden inside the correction.
   the stale accepted-successor selection, one invalid parallelism enum in the
   first recovery receipt, and the hard-coded historical successor guard.
 - Successor recovery: stale lease 60 preserved; rollback lease 61 byte-exact;
-  general graph-identity interlock added before publication.
+  general graph-identity interlock added before publication. The first
+  corrected check at full source
+  `64d319d7771c3fe60952e70ec17b70248079673c` rejected late incident-stage
+  validation; the complete register vocabulary now validates at intent intake.
 - Protected refs: local/origin `master` and `handoff/current` remain exact
   `2e34bdad732fdab32fbf778280b3d3c70d66d602`.
 

@@ -72,8 +72,11 @@ part of this recovery.
    planning operation. Preserve the accepted Harness claim and all three
    earlier contained incidents.
 6. Register this stale-successor conflict, the first receipt's invalid
-   `expected_leverage` vocabulary and the hard-coded historical successor guard
-   as corrected incidents through the same closeout clockwork intake.
+   `expected_leverage` vocabulary, the hard-coded historical successor guard
+   and the first corrected check's late incident-schema rejection as corrected
+   incidents through the same closeout clockwork intake. Move complete
+   register-bound date, identifier, enum and const validation into the intent
+   validator so adjacent vocabulary errors reject together before generation.
 7. Commit the rollback and correction explicitly, run one clockwork `--check`,
    then one separate `--publish`. The corrected generation must pass the full
    safe closeout suite and leave local/origin `master` and `handoff/current`
@@ -103,7 +106,7 @@ publication and before the later attempt-005 worker decision.
   the generated latch and Baton Next row;
 - the rollback reports `byte_exact: true` and the corrected publication has one
   new generation, zero drift and a full 40-character source binding;
-- all six incidents are retained in the generated register with none open;
+- all seven incidents are retained in the generated register with none open;
 - the focused clockwork, successor, latch, Baton, API Spine and register suites
   pass; Ruff, compilation and `git diff --check` pass; and
 - no worker, model/provider, Docker, PostgreSQL, SQL, product route or data path

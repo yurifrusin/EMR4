@@ -79,6 +79,15 @@ previous generation byte-for-byte. The corrected build now rejects any next
 operation ID already present in the Continuity graph, replacing the prior
 hard-coded Markdown successor assertion.
 
+The first corrected check at exact full source
+`64d319d7771c3fe60952e70ec17b70248079673c` failed closed before publication
+because one new incident used a non-canonical stage value. Inspection found
+three adjacent vocabulary mismatches that would otherwise have produced serial
+reruns. The intent validator now admits the complete register-bound date,
+identifier, enum and const vocabulary before generation, with parameterized
+hostile tests for every field class. This seventh contained incident changed no
+canonical state or accepted Harness evidence.
+
 The unrepeated next tranche is
 `raisa-provider-free-check-in-relay-free-recovery-attempt-005`. It begins with
 fresh rehydration, an exact one-run plan and a separately frozen brokered
