@@ -1,0 +1,63 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/preset-row-service-gemini-da525145",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery_plan.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+        "tests/test_ariadne_orchestrator_preflight.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery_plan.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery_plan.py"
+      ]
+    },
+    {"id": "C06", "argv": ["C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery", "--stage", "static"]},
+    {"id": "C07", "argv": ["C:/Users/sarashera/emr4/.venv/Scripts/python.exe", "-m", "scripts.raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery", "--stage", "fixture"]},
+    {
+      "id": "C08",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from pathlib import Path; from scripts import raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery as r; c=r.validate_native_candidate(Path('C:/emr4-service-path-native-candidate').resolve()); assert c['profile']['include_user_root'] is True; assert c['profile']['runner_inject']==['agentPresets']; assert c['runner']['single_service_list'] and c['runner']['exact_root_count'] and c['runner']['emr4_row_user_trust'] and c['runner']['no_agent_create'] and c['runner']['no_preset_mount']"
+      ]
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import json; from pathlib import Path; p=Path('orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/service-input-fixture-evidence.json'); e=json.loads(p.read_text()); assert e['result']=='pass'; assert e['native_process_checkpoint_admitted'] is False; assert e['process_boundary']['native_harness_processes']==0; assert e['process_boundary']['provider_requests']==0; assert e['scenarios'][1]['row']['trust']=='user'; assert e['scenarios'][3]['decision']=='rejected_shadowed'"
+      ]
+    },
+    {"id": "C10", "argv": ["git", "diff", "--check", "e37e7b5d408cc687c67d2bc1c1e1a4012a793672..da52514548ef1c1253e379f983165545482592a6"]},
+    {"id": "C11", "argv": ["git", "diff", "--name-only", "e37e7b5d408cc687c67d2bc1c1e1a4012a793672..da52514548ef1c1253e379f983165545482592a6"]},
+    {"id": "C12", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

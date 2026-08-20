@@ -1,0 +1,273 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\preset-row-service-gemini-da525145-v2",
+  "branch": "codex/review-preset-row-service-da525145-v2",
+  "head_before": "da52514548ef1c1253e379f983165545482592a6",
+  "head_after": "da52514548ef1c1253e379f983165545482592a6",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "cb66ebd37e7740508c2fc97d69b77afbfbd987cf1efa828b41cf42dba2f4c426",
+  "result": "# Corrected Gemini 3.7 Flash/high Independent Veto Review: Native Preset-Row Service Path Recovery\n\n## 1. Worktree, Branch, and Pre/Post State Verification\n- **Bound Worktree**: `C:\\Users\\sarashera\\EMR4-worktrees\\preset-row-service-gemini-da525145-v2`\n- **Bound Branch**: `codex/review-preset-row-service-da525145-v2`\n- **Candidate HEAD**: `da52514548ef1c1253e379f983165545482592a6`\n- **Diff Base**: `e37e7b5d408cc687c67d2bc1c1e1a4012a793672`\n- C01 confirmed a clean initial worktree on `codex/review-preset-row-service-da525145-v2`.\n- C02 confirmed exact HEAD `da52514548ef1c1253e379f983165545482592a6`.\n- C12 confirmed the post-execution worktree remains entirely clean.\n\n## 2. Pinned rc.7 Source and Lockfile Digest Binding\nAll six retained `@deepseek-ai` rc.7 package sources and the package lockfile in `C:\\Users\\sarashera\\EMR4-worktrees\\deepseek-check-in-attachment-observability-native-001` match their exact contract digests without network, registry, or mutation activity:\n- Lockfile SHA-256: `a89defcd8a2c5aae4a54c03bda98e2585711fce881b4b08c90ca4808d45555f4`\n- `@deepseek-ai/dsh` manifest (`dsh_manifest`, 4298 bytes): `7a9f356ad1e27c7013b44619bc675b8cb877f995cd0951ab3dfeb10d4edcc361`\n- `@deepseek-ai/dsh` profile boot (`profile_boot`, 11157 bytes): `f83ffea6a4d30cfbe02b41dabcc05104c4ad27bf79c74f601f0ddb6ccdf88969`\n- `@deepseek-ai/dsh-agent-presets` manifest (`presets_manifest`, 2393 bytes): `26c8b9455103b1b565e910184902c6845661e5134c82679cce385bf5950d8278`\n- `@deepseek-ai/dsh-agent-presets` service (`presets_service`, 52188 bytes): `a0b417514e3d285ad5fef74867e8049af333ebdec6e4d7639e388aa0903e0039`\n- `@deepseek-ai/dsh-home-paths` manifest (`home_manifest`, 1058 bytes): `42abe8bb74aeb8f3e1ea94fef5984c99d5030e4720754d9b565aadfe1972865c`\n- `@deepseek-ai/dsh-home-paths` paths (`home_paths`, 4390 bytes): `b82aa631aa4bfdd5b02c67d48fce455b2ca73cbf66d2b7096a336b3800914340`\n\n## 3. Native Forced Overlay Analysis in `composeProfile()`\nIn `profile_boot`, `composeProfile()` maps all configured rows first and then evaluates `if (rows.has(\"agent-presets\")) composedOverlays.push({ ...rows.get(\"agent-presets\")?.config ?? {}, roots: [{ path: SHIPPED_PRESET_ROOT, trust: \"system\" }] })`. This proves:\n- The native overlay is appended after profile/home/CLI overlays.\n- It preserves prior config fields (such as `includeUserRoot`).\n- It completely replaces any earlier configured `roots` with the single shipped preset root carrying `system` trust.\n\n## 4. `AgentPresets.resolvedRoots` and Discovery Execution\nIn `presets_service`, `AgentPresets` computes:\n`this.resolvedRoots = config.includeUserRoot ? [...config.roots, { path: dshHomePath(USER_PRESET_DIR), trust: \"user\" }] : [...config.roots];`\nWhere `USER_PRESET_DIR = \".agent-presets\"`.\n`list()` executes `return await discoverPresets(this.resolvedRoots);`.\nThus, the derived `$DSH_HOME/.agent-presets` root is appended if and only if `includeUserRoot` is `true`.\n\n## 5. Predecessor Profile Root Exclusion\nThe predecessor diagnostic profile explicitly configured `includeUserRoot: false`.\nCombined with the native forced overlay replacing configured roots with the shipped system root, the predecessor's effective root set was restricted exclusively to `[{\"role\": \"shipped\", \"trust\": \"system\"}]`, completely excluding the canonical preset directory `$DSH_HOME/.agent-presets` where `emr4-bounded-worker` resided.\n\n## 6. Shipped Roster Exactness vs. Direct Scan\n- The rc.7 shipped root contains exactly `[\"code\", \"cordis\", \"minimal\", \"standard\"]` (`emr4-bounded-worker` is absent).\n- The predecessor package-level direct scan in `raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery` explicitly provided the disposable user root directly to `discoverPresets()`, which is why the direct scan passed while the predecessor native Harness service failed to find the preset.\n\n## 7. Corrected Fixture Characterization\nThe closed fixture evaluated `discoverPresets` across the 5 structured scenarios:\n- `corrected_shipped_plus_user` evaluated roots `[{\"path\": shipped_root, \"trust\": \"system\"}, {\"path\": user_root, \"trust\": \"user\"}]`.\n- Yielded all 5 IDs: `[\"code\", \"cordis\", \"emr4-bounded-worker\", \"minimal\", \"standard\"]`.\n- `emr4_count`: 1.\n- Row details: `trust: \"user\"`, `source_role: \"derived_user\"`, `broken_absent: true`, `bytes: 158`, `sha256: \"3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1\"`.\n- Decision: `accepted_exact_user_row`.\n\n## 8. Edge and Negative Scenarios\n- `predecessor_shipped_only`: `emr4_count: 0`, decision `emr4_absent`.\n- `missing_user_root`: `emr4_count: 0`, decision `emr4_absent` (nonexistent directory ignored gracefully).\n- `configured_root_displaced`: `emr4_count: 0`, decision `configured_root_displaced` (confirms displaced roots do not leak presets).\n- `earlier_system_duplicate`: `emr4_count: 1`, decision `rejected_shadowed` (source_role: `earlier_system`, trust: `system`; proves first-root-wins deduplication prevents silent acceptance of duplicate user rows).\n\n## 9. Process and Isolation Boundary\nThe fixture execution created exactly 1 package-only Node process under offline network denial (`network-guard.mjs`).\nThe recorded boundary metrics are:\n- `package_only_node_processes`: 1\n- `native_harness_processes`: 0\n- `agent_sessions`: 0\n- `turns`: 0\n- `broker_requests`: 0\n- `model_requests`: 0\n- `provider_requests`: 0\n- `network_attempts`: 0\n- `docker_invocations`: 0\n- `database_invocations`: 0\n- `disposable_root_absent`: true\n- `package_process_absent`: true\n\n## 10. Prospective Native Runner Gates\nStatic validation of `native_runner_source()` and the generated profile via `validate_native_candidate()` confirmed:\n- `runner_inject`: `[\"agentPresets\"]`\n- `exact_root_count`: exactly 2 roots checked\n- `single_service_list`: `await presets.list()` called exactly once\n- `shipped_root_system` and `derived_user_root_user`: verified\n- `emr4_row_user_trust`: requires exact `user` trust\n- `no_agent_create`, `no_preset_mount`, `no_session_or_turn`, `no_raw_error`: all true\n- `one_terminal_write`: exactly 1 atomic terminal write (`flag: \"wx\"`)\n\n## 11. Schema Strictness and Validation\nThe JSON schemas (`contract.schema.json`, `static-evidence.schema.json`, `fixture-evidence.schema.json`):\n- Forbid additional or broadened properties (`additionalProperties: false`).\n- Require exact enum values for scenario decisions, roles, and trust.\n- Require `native_harness_processes: 0`, `model_requests: 0`, `provider_requests: 0`.\n- Reject mislabelled trust (e.g. attempting to label corrected row as `system` trust fails schema validation).\n- Require `native_process_checkpoint_admitted: false`.\n\n## 12. Corrected Command Execution (C01\u2013C12)\nC06 and C07 execute purely non-writing Python invocations (`build_static_evidence()` and `run_fixture_characterization()`), ensuring no tracked evidence files or reports are rewritten during review.\nAll 12 bound commands C01 through C12 passed with return code 0, and the worktree was verified completely clean before and after execution.\n\nNo P0\u2013P2 defect or unresolved gate remains in this candidate. The candidate is ready for a separate one-process clockwork checkpoint.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Corrected Gemini 3.7 Flash/high Independent Veto Review: Native Preset-Row Service Path Recovery\n\n## 1. Worktree, Branch, and Pre/Post State Verification\n- **Bound Worktree**: `C:\\Users\\sarashera\\EMR4-worktrees\\preset-row-service-gemini-da525145-v2`\n- **Bound Branch**: `codex/review-preset-row-service-da525145-v2`\n- **Candidate HEAD**: `da52514548ef1c1253e379f983165545482592a6`\n- **Diff Base**: `e37e7b5d408cc687c67d2bc1c1e1a4012a793672`\n- C01 confirmed a clean initial worktree on `codex/review-preset-row-service-da525145-v2`.\n- C02 confirmed exact HEAD `da52514548ef1c1253e379f983165545482592a6`.\n- C12 confirmed the post-execution worktree remains entirely clean.\n\n## 2. Pinned rc.7 Source and Lockfile Digest Binding\nAll six retained `@deepseek-ai` rc.7 package sources and the package lockfile in `C:\\Users\\sarashera\\EMR4-worktrees\\deepseek-check-in-attachment-observability-native-001` match their exact contract digests without network, registry, or mutation activity:\n- Lockfile SHA-256: `a89defcd8a2c5aae4a54c03bda98e2585711fce881b4b08c90ca4808d45555f4`\n- `@deepseek-ai/dsh` manifest (`dsh_manifest`, 4298 bytes): `7a9f356ad1e27c7013b44619bc675b8cb877f995cd0951ab3dfeb10d4edcc361`\n- `@deepseek-ai/dsh` profile boot (`profile_boot`, 11157 bytes): `f83ffea6a4d30cfbe02b41dabcc05104c4ad27bf79c74f601f0ddb6ccdf88969`\n- `@deepseek-ai/dsh-agent-presets` manifest (`presets_manifest`, 2393 bytes): `26c8b9455103b1b565e910184902c6845661e5134c82679cce385bf5950d8278`\n- `@deepseek-ai/dsh-agent-presets` service (`presets_service`, 52188 bytes): `a0b417514e3d285ad5fef74867e8049af333ebdec6e4d7639e388aa0903e0039`\n- `@deepseek-ai/dsh-home-paths` manifest (`home_manifest`, 1058 bytes): `42abe8bb74aeb8f3e1ea94fef5984c99d5030e4720754d9b565aadfe1972865c`\n- `@deepseek-ai/dsh-home-paths` paths (`home_paths`, 4390 bytes): `b82aa631aa4bfdd5b02c67d48fce455b2ca73cbf66d2b7096a336b3800914340`\n\n## 3. Native Forced Overlay Analysis in `composeProfile()`\nIn `profile_boot`, `composeProfile()` maps all configured rows first and then evaluates `if (rows.has(\"agent-presets\")) composedOverlays.push({ ...rows.get(\"agent-presets\")?.config ?? {}, roots: [{ path: SHIPPED_PRESET_ROOT, trust: \"system\" }] })`. This proves:\n- The native overlay is appended after profile/home/CLI overlays.\n- It preserves prior config fields (such as `includeUserRoot`).\n- It completely replaces any earlier configured `roots` with the single shipped preset root carrying `system` trust.\n\n## 4. `AgentPresets.resolvedRoots` and Discovery Execution\nIn `presets_service`, `AgentPresets` computes:\n`this.resolvedRoots = config.includeUserRoot ? [...config.roots, { path: dshHomePath(USER_PRESET_DIR), trust: \"user\" }] : [...config.roots];`\nWhere `USER_PRESET_DIR = \".agent-presets\"`.\n`list()` executes `return await discoverPresets(this.resolvedRoots);`.\nThus, the derived `$DSH_HOME/.agent-presets` root is appended if and only if `includeUserRoot` is `true`.\n\n## 5. Predecessor Profile Root Exclusion\nThe predecessor diagnostic profile explicitly configured `includeUserRoot: false`.\nCombined with the native forced overlay replacing configured roots with the shipped system root, the predecessor's effective root set was restricted exclusively to `[{\"role\": \"shipped\", \"trust\": \"system\"}]`, completely excluding the canonical preset directory `$DSH_HOME/.agent-presets` where `emr4-bounded-worker` resided.\n\n## 6. Shipped Roster Exactness vs. Direct Scan\n- The rc.7 shipped root contains exactly `[\"code\", \"cordis\", \"minimal\", \"standard\"]` (`emr4-bounded-worker` is absent).\n- The predecessor package-level direct scan in `raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery` explicitly provided the disposable user root directly to `discoverPresets()`, which is why the direct scan passed while the predecessor native Harness service failed to find the preset.\n\n## 7. Corrected Fixture Characterization\nThe closed fixture evaluated `discoverPresets` across the 5 structured scenarios:\n- `corrected_shipped_plus_user` evaluated roots `[{\"path\": shipped_root, \"trust\": \"system\"}, {\"path\": user_root, \"trust\": \"user\"}]`.\n- Yielded all 5 IDs: `[\"code\", \"cordis\", \"emr4-bounded-worker\", \"minimal\", \"standard\"]`.\n- `emr4_count`: 1.\n- Row details: `trust: \"user\"`, `source_role: \"derived_user\"`, `broken_absent: true`, `bytes: 158`, `sha256: \"3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1\"`.\n- Decision: `accepted_exact_user_row`.\n\n## 8. Edge and Negative Scenarios\n- `predecessor_shipped_only`: `emr4_count: 0`, decision `emr4_absent`.\n- `missing_user_root`: `emr4_count: 0`, decision `emr4_absent` (nonexistent directory ignored gracefully).\n- `configured_root_displaced`: `emr4_count: 0`, decision `configured_root_displaced` (confirms displaced roots do not leak presets).\n- `earlier_system_duplicate`: `emr4_count: 1`, decision `rejected_shadowed` (source_role: `earlier_system`, trust: `system`; proves first-root-wins deduplication prevents silent acceptance of duplicate user rows).\n\n## 9. Process and Isolation Boundary\nThe fixture execution created exactly 1 package-only Node process under offline network denial (`network-guard.mjs`).\nThe recorded boundary metrics are:\n- `package_only_node_processes`: 1\n- `native_harness_processes`: 0\n- `agent_sessions`: 0\n- `turns`: 0\n- `broker_requests`: 0\n- `model_requests`: 0\n- `provider_requests`: 0\n- `network_attempts`: 0\n- `docker_invocations`: 0\n- `database_invocations`: 0\n- `disposable_root_absent`: true\n- `package_process_absent`: true\n\n## 10. Prospective Native Runner Gates\nStatic validation of `native_runner_source()` and the generated profile via `validate_native_candidate()` confirmed:\n- `runner_inject`: `[\"agentPresets\"]`\n- `exact_root_count`: exactly 2 roots checked\n- `single_service_list`: `await presets.list()` called exactly once\n- `shipped_root_system` and `derived_user_root_user`: verified\n- `emr4_row_user_trust`: requires exact `user` trust\n- `no_agent_create`, `no_preset_mount`, `no_session_or_turn`, `no_raw_error`: all true\n- `one_terminal_write`: exactly 1 atomic terminal write (`flag: \"wx\"`)\n\n## 11. Schema Strictness and Validation\nThe JSON schemas (`contract.schema.json`, `static-evidence.schema.json`, `fixture-evidence.schema.json`):\n- Forbid additional or broadened properties (`additionalProperties: false`).\n- Require exact enum values for scenario decisions, roles, and trust.\n- Require `native_harness_processes: 0`, `model_requests: 0`, `provider_requests: 0`.\n- Reject mislabelled trust (e.g. attempting to label corrected row as `system` trust fails schema validation).\n- Require `native_process_checkpoint_admitted: false`.\n\n## 12. Corrected Command Execution (C01\u2013C12)\nC06 and C07 execute purely non-writing Python invocations (`build_static_evidence()` and `run_fixture_characterization()`), ensuring no tracked evidence files or reports are rewritten during review.\nAll 12 bound commands C01 through C12 passed with return code 0, and the worktree was verified completely clean before and after execution.\n\nNo P0\u2013P2 defect or unresolved gate remains in this candidate. The candidate is ready for a separate one-process clockwork checkpoint.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/preset-row-service-gemini-da525145-v2",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery_plan.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+          "tests/test_ariadne_orchestrator_preflight.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "scripts/raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "scripts/raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery_plan.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-c",
+          "from scripts import raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery as r; e=r.build_static_evidence(r.load_contract()); assert e['result']=='pass'; assert e['provider_boundary']['native_harness_processes']==0; assert e['root_transformation']['predecessor_include_user_root'] is False; assert e['root_transformation']['corrected_include_user_root'] is True"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-c",
+          "from scripts import raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery as r; e=r.run_fixture_characterization(r.load_contract()); assert e['result']=='pass'; assert e['native_process_checkpoint_admitted'] is False; assert e['process_boundary']['provider_requests']==0; assert e['scenarios'][1]['row']['trust']=='user'; assert e['scenarios'][3]['decision']=='rejected_shadowed'"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-c",
+          "from pathlib import Path; from scripts import raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery as r; c=r.validate_native_candidate(Path('C:/emr4-service-path-native-candidate').resolve()); assert c['profile']['include_user_root'] is True; assert c['profile']['runner_inject']==['agentPresets']; assert c['runner']['single_service_list'] and c['runner']['exact_root_count'] and c['runner']['emr4_row_user_trust'] and c['runner']['no_agent_create'] and c['runner']['no_preset_mount']"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-c",
+          "import json; from pathlib import Path; p=Path('orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/service-input-fixture-evidence.json'); e=json.loads(p.read_text()); assert e['result']=='pass'; assert e['native_process_checkpoint_admitted'] is False; assert e['process_boundary']['native_harness_processes']==0; assert e['process_boundary']['provider_requests']==0; assert e['scenarios'][1]['row']['trust']=='user'; assert e['scenarios'][3]['decision']=='rejected_shadowed'"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "e37e7b5d408cc687c67d2bc1c1e1a4012a793672..da52514548ef1c1253e379f983165545482592a6"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C11",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "e37e7b5d408cc687c67d2bc1c1e1a4012a793672..da52514548ef1c1253e379f983165545482592a6"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C12",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "8afcadeefd59c0aa20d4dd5ba95c41bae7867fff75808228d26eb2822e89306c",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/preset-row-service-gemini-da525145-v2",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery_plan.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+        "tests/test_ariadne_orchestrator_preflight.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery_plan.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from scripts import raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery as r; e=r.build_static_evidence(r.load_contract()); assert e['result']=='pass'; assert e['provider_boundary']['native_harness_processes']==0; assert e['root_transformation']['predecessor_include_user_root'] is False; assert e['root_transformation']['corrected_include_user_root'] is True"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from scripts import raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery as r; e=r.run_fixture_characterization(r.load_contract()); assert e['result']=='pass'; assert e['native_process_checkpoint_admitted'] is False; assert e['process_boundary']['provider_requests']==0; assert e['scenarios'][1]['row']['trust']=='user'; assert e['scenarios'][3]['decision']=='rejected_shadowed'"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from pathlib import Path; from scripts import raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery as r; c=r.validate_native_candidate(Path('C:/emr4-service-path-native-candidate').resolve()); assert c['profile']['include_user_root'] is True; assert c['profile']['runner_inject']==['agentPresets']; assert c['runner']['single_service_list'] and c['runner']['exact_root_count'] and c['runner']['emr4_row_user_trust'] and c['runner']['no_agent_create'] and c['runner']['no_preset_mount']"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import json; from pathlib import Path; p=Path('orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/service-input-fixture-evidence.json'); e=json.loads(p.read_text()); assert e['result']=='pass'; assert e['native_process_checkpoint_admitted'] is False; assert e['process_boundary']['native_harness_processes']==0; assert e['process_boundary']['provider_requests']==0; assert e['scenarios'][1]['row']['trust']=='user'; assert e['scenarios'][3]['decision']=='rejected_shadowed'"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "e37e7b5d408cc687c67d2bc1c1e1a4012a793672..da52514548ef1c1253e379f983165545482592a6"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C11",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "e37e7b5d408cc687c67d2bc1c1e1a4012a793672..da52514548ef1c1253e379f983165545482592a6"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C12",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}
