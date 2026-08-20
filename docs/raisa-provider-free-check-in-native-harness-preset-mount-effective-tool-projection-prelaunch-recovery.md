@@ -1,7 +1,9 @@
 # Preset-mount effective-tool projection prelaunch recovery
 
-Status: frozen recovery addendum  
-Date: 2026-08-20  
+Status: frozen recovery addendum
+
+Date: 2026-08-20
+
 Operation: `raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal`
 
 ## Immutable failed attempt
