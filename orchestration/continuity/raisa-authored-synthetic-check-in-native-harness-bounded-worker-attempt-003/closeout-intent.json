@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.governance_live_user_decision_transition_intent.v1",
+  "blocked_operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
+  "selected_outcome": "replace_with_newly_frozen_descendant",
+  "next_operation": {
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+    "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker attempt 003",
+    "objective": "Prepare, separately checkpoint and execute exactly one new DeepSeek Flash worker identity against the unchanged authored-synthetic non-product one-edit package through the accepted native Harness controller, broker and recovered pre-HMR terminal, with at most one provider request, zero retries, immutable terminal evidence and exact-root cleanup.",
+    "authority_source": "Yuri's explicit affirmative 2026-08-21 decision authorising one new occupied authored-synthetic native-Harness attempt, together with the accepted attempt-002 negative evidence and provider-disabled pre-HMR terminal recovery.",
+    "completed_stage": "The pre-HMR recovery is accepted at Continuity 354 / Compass 336; attempts 001 and 002 remain consumed and immutable, attempt 002 reached no provider request, and Yuri explicitly authorised one separately frozen new occupied attempt.",
+    "next_executable_stage": "generate_a_fresh_five_source_attempt_003_preexecution_receipt_then_run_zero_provider_deterministic_admission_before_materializing_the_new_disposable_root"
+  },
+  "next_operation_protected_boundaries": [
+    "authored_synthetic_nonproduct_native_harness_bounded_worker_attempt_003_only",
+    "attempts_001_and_002_consumed_terminal_and_cleanup_evidence_remain_immutable",
+    "one_new_worker_identity_one_native_process_one_session_one_turn_and_at_most_one_provider_request",
+    "maximum_output_tokens_4096_request_bytes_1048576_response_bytes_2097152_upstream_seconds_300_native_seconds_420",
+    "existing_user_controlled_prepaid_balance_only_no_top_up_balance_mutation_or_claimed_broker_currency_cap",
+    "zero_automatic_retries_zero_resume_zero_fallback_zero_auxiliary_model_calls_and_no_second_worker",
+    "fresh_deterministic_admission_preparation_and_separate_exact_clockwork_checkpoint_required_before_launch",
+    "only_synthetic_window_coalescer_py_may_change_inside_the_disposable_attempt_root",
+    "validated_bounded_pre_hmr_terminal_required_before_raw_cleanup_when_applicable",
+    "no_product_source_configuration_api_openapi_graphql_database_schema_migration_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "native-worker-attempt-003-transition-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "native-worker-attempt-003-transition-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "native-worker-attempt-003-transition-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}

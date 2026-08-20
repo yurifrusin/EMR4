@@ -42,6 +42,9 @@ OPERATION_ID = (
 ATTEMPT_TWO_OPERATION_ID = (
     "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002"
 )
+ATTEMPT_THREE_OPERATION_ID = (
+    "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003"
+)
 EXECUTION_OPERATION_ID = OPERATION_ID
 CONTINUITY_ROOT = REPO_ROOT / "orchestration" / "continuity" / OPERATION_ID
 CONTRACT_PATH = CONTINUITY_ROOT / "contract.json"
@@ -210,6 +213,33 @@ def attempt_two_configuration() -> dict[str, Any]:
     }
 
 
+def attempt_three_configuration() -> dict[str, Any]:
+    """Return the new attempt-003 identity without touching earlier evidence."""
+
+    evidence_root = CONTINUITY_ROOT / "attempt-003"
+    attempt_id = "deepseek-native-synthetic-window-worker-003"
+    return {
+        "operation_id": ATTEMPT_THREE_OPERATION_ID,
+        "attempt_id": attempt_id,
+        "attempt_root": Path(f"C:/Users/sarashera/EMR4-worktrees/{attempt_id}"),
+        "checkpoint_path": evidence_root / "occupied-preexecution-checkpoint.json",
+        "preparation_path": evidence_root / "occupied-attempt-preparation.json",
+        "work_order_path": evidence_root / "work-order-v2.json",
+        "authority_path": evidence_root / "worker-authority.json",
+        "forbidden_path": evidence_root / "forbidden-surfaces.json",
+        "command_manifest_path": evidence_root / "command-manifest.json",
+        "no_database_admission_path": evidence_root
+        / "provider-free-no-database-admission.json",
+        "consumed_path": evidence_root / "occupied-attempt-consumed.json",
+        "terminal_path": evidence_root / "occupied-terminal.json",
+        "terminal_schema_path": evidence_root / "occupied-terminal.schema.json",
+        "native_report_path": evidence_root / "occupied-report.md",
+        "pre_hmr_terminal_path": evidence_root / "pre-hmr-startup-terminal.json",
+        "work_order_id": "wo-synthetic-native-window-worker-003",
+        "lease_id": "lease-synthetic-native-window-worker-003",
+    }
+
+
 def configure_attempt_two() -> None:
     """Select the separately authorised attempt-002 runtime surfaces."""
 
@@ -221,6 +251,36 @@ def configure_attempt_two() -> None:
     global ATTEMPT_ROOT, ATTEMPT_ID, WORK_ORDER_ID, LEASE_ID
 
     value = attempt_two_configuration()
+    EXECUTION_OPERATION_ID = value["operation_id"]
+    CHECKPOINT_PATH = value["checkpoint_path"]
+    PREPARATION_PATH = value["preparation_path"]
+    WORK_ORDER_PATH = value["work_order_path"]
+    AUTHORITY_PATH = value["authority_path"]
+    FORBIDDEN_PATH = value["forbidden_path"]
+    COMMAND_MANIFEST_PATH = value["command_manifest_path"]
+    NO_DATABASE_ADMISSION_PATH = value["no_database_admission_path"]
+    CONSUMED_PATH = value["consumed_path"]
+    TERMINAL_PATH = value["terminal_path"]
+    TERMINAL_SCHEMA_PATH = value["terminal_schema_path"]
+    NATIVE_REPORT_PATH = value["native_report_path"]
+    PRE_HMR_TERMINAL_PATH = value["pre_hmr_terminal_path"]
+    ATTEMPT_ROOT = value["attempt_root"]
+    ATTEMPT_ID = value["attempt_id"]
+    WORK_ORDER_ID = value["work_order_id"]
+    LEASE_ID = value["lease_id"]
+
+
+def configure_attempt_three() -> None:
+    """Select Yuri's separately authorised attempt-003 runtime surfaces."""
+
+    global EXECUTION_OPERATION_ID
+    global CHECKPOINT_PATH, PREPARATION_PATH, WORK_ORDER_PATH
+    global AUTHORITY_PATH, FORBIDDEN_PATH, COMMAND_MANIFEST_PATH
+    global NO_DATABASE_ADMISSION_PATH, CONSUMED_PATH, TERMINAL_PATH
+    global TERMINAL_SCHEMA_PATH, NATIVE_REPORT_PATH, PRE_HMR_TERMINAL_PATH
+    global ATTEMPT_ROOT, ATTEMPT_ID, WORK_ORDER_ID, LEASE_ID
+
+    value = attempt_three_configuration()
     EXECUTION_OPERATION_ID = value["operation_id"]
     CHECKPOINT_PATH = value["checkpoint_path"]
     PREPARATION_PATH = value["preparation_path"]
@@ -1152,6 +1212,11 @@ def prepare_attempt(review_receipt_path: Path) -> dict[str, Any]:
             "reasoning_effort": "high",
             "maximum_output_tokens": 4096,
             "maximum_provider_calls": 1,
+            "maximum_upstream_wall_clock_seconds": 300,
+            "maximum_native_wall_clock_seconds": 420,
+            "provider_spend_source": "existing_user_controlled_prepaid_balance",
+            "broker_currency_cap_enforced": False,
+            "provider_balance_top_up_authorized": False,
             "maximum_parallel_tool_calls": 1,
             "automatic_retries": 0,
             "fallbacks": 0,
@@ -1821,14 +1886,17 @@ def main() -> int:
     action.add_argument("--build", action="store_true")
     action.add_argument("--prepare-attempt", action="store_true")
     action.add_argument("--native", action="store_true")
-    parser.add_argument("--attempt-number", type=int, choices=(2,))
+    parser.add_argument("--attempt-number", type=int, choices=(2, 3))
     parser.add_argument("--review-receipt", type=Path)
     args = parser.parse_args()
     try:
         if args.prepare_attempt or args.native:
-            if args.attempt_number != 2:
-                raise RehearsalError("attempt_002_number_required")
-            configure_attempt_two()
+            if args.attempt_number == 2:
+                configure_attempt_two()
+            elif args.attempt_number == 3:
+                configure_attempt_three()
+            else:
+                raise RehearsalError("explicit_occupied_attempt_number_required")
         elif args.attempt_number is not None:
             raise RehearsalError("attempt_number_only_valid_for_occupied_lifecycle")
         if args.check:

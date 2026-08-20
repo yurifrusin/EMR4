@@ -1,0 +1,128 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness post-recovery occupied-attempt decision gate",
+    "completed_stage": "The provider-disabled pre-HMR startup terminal recovery is accepted and published through the clockwork. Future pre-first-HMR failures now receive a validated bounded stage/cause coordinate before raw-stream cleanup, while attempts 001 and 002 remain immutable and no provider request occurred in the accepted recovery.",
+    "next_executable_stage": null,
+    "operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
+    "resume_after_compaction": true,
+    "source_head": "12d8758fee2504435ca2b4ccf6225b9d7a86a6a1",
+    "status": "blocked",
+    "terminal_handback_permitted": true,
+    "user_attention_required": true
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "db8f6f442ecb152a46fc93b1891260129f3e3919",
+    "reason_codes": [],
+    "resolved_commit": "12d8758fee2504435ca2b4ccf6225b9d7a86a6a1",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "12d8758fee2504435ca2b4ccf6225b9d7a86a6a1"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "db8f6f442ecb152a46fc93b1891260129f3e3919",
+    "branch_origin_aligned": true,
+    "head": "db8f6f442ecb152a46fc93b1891260129f3e3919",
+    "origin_branch_commit": "db8f6f442ecb152a46fc93b1891260129f3e3919",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 658
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "affirmative_user_decision_preplanning",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "Yuri authorised exactly one occupied native-Harness rehearsal; the bounded non-product synthetic literal-edit work package directly tests the improved traceable transport.",
+        "work_packages": [
+          "one newly identified single-use authored-synthetic non-product edit after a committed envelope and deterministic admission"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "No new product or repository implementation candidate exists at this decision transition. Reassess only if the occupied result creates a risk-triggered candidate requiring independent veto.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and one occupied process, one broker session, one terminal and cleanup are irreducibly serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "deterministic_admission_rejects_the_frozen_attempt",
+      "occupied_attempt_produces_a_candidate_requiring_independent_veto",
+      "occupied_attempt_reaches_one_terminal_result"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "freeze and commit the distinct envelope before latch replacement",
+      "publish the user-decision transition before deterministic admission",
+      "complete zero-provider deterministic admission before one occupied launch",
+      "terminalize and clean up the single process before judgment"
+    ]
+  },
+  "planned_action": "freeze_one_new_single_use_authored_synthetic_native_harness_attempt_after_yuri_authorization_without_launching_before_deterministic_admission",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal-plan.md",
+      "docs/security/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal-threat-model-delta.md",
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002-failed-closed-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-worker-attempt-002-sol-acceptance.md",
+      "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-plan.md",
+      "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-sol-acceptance.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns plan, admission, monitoring, cleanup, judgment and Git. DeepSeek native Harness is planned for exactly one disposable authored-synthetic edit after admission. Gemini is deferred unless a risk-triggered candidate review becomes necessary. Native subagents are declined under developer policy and the single serial runtime.",
+    "git_refs_and_worktree": "The machine-generated Git snapshot alone owns exact object identities. It must verify the task branch and origin alignment, all four protected refs, a clean tracked worktree, and preservation of all existing untracked files including docs/branding.",
+    "live_handover_current_baton": "AGENTS.md controls. The provider-disabled pre-HMR recovery is accepted, the post-recovery decision gate is blocked, and Yuri has now answered Yes to exactly one new separately frozen occupied authored-synthetic native-Harness attempt.",
+    "protected_evidence_boundaries": "Attempts 001 and 002 remain immutable and consumed. The new authority is one newly identified authored-synthetic non-product attempt only, with no automatic retry or fallback and no product, patient, clinical, historical, protected, database, production, deployment, Pages or protected-ref scope."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": false
+}

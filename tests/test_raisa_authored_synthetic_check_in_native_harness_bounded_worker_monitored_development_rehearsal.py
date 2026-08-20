@@ -153,9 +153,10 @@ def test_occupied_cli_is_structurally_behind_separate_checkpoint() -> None:
     assert 'action.add_argument("--build"' in source
     assert 'action.add_argument("--prepare-attempt"' in source
     assert 'action.add_argument("--native"' in source
-    assert 'parser.add_argument("--attempt-number", type=int, choices=(2,))' in source
-    assert 'RehearsalError("attempt_002_number_required")' in source
+    assert 'parser.add_argument("--attempt-number", type=int, choices=(2, 3))' in source
+    assert 'RehearsalError("explicit_occupied_attempt_number_required")' in source
     assert source.index("configure_attempt_two()") < source.index("value = execute_native()")
+    assert source.index("configure_attempt_three()") < source.index("value = execute_native()")
     native = inspect.getsource(subject.execute_native)
     assert native.index("checkpoint = load_checkpoint()") < native.index(
         "write_json_exclusive(CONSUMED_PATH"
@@ -228,6 +229,74 @@ def test_attempt_two_terminal_schema_is_exact_and_cannot_admit_attempt_one() -> 
         "pattern": "^[0-9a-f]{64}$",
     }
     assert schema == legacy
+
+
+def test_attempt_three_configuration_is_exact_and_disjoint_from_prior_attempts() -> None:
+    value = subject.attempt_three_configuration()
+    assert value["operation_id"] == (
+        "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003"
+    )
+    assert value["attempt_id"] == "deepseek-native-synthetic-window-worker-003"
+    assert value["attempt_root"].as_posix().endswith(
+        "/EMR4-worktrees/deepseek-native-synthetic-window-worker-003"
+    )
+    attempt_three_root = subject.CONTINUITY_ROOT / "attempt-003"
+    attempt_three_paths = {
+        value[key]
+        for key in (
+            "checkpoint_path",
+            "preparation_path",
+            "work_order_path",
+            "authority_path",
+            "forbidden_path",
+            "command_manifest_path",
+            "no_database_admission_path",
+            "consumed_path",
+            "terminal_path",
+            "terminal_schema_path",
+            "native_report_path",
+            "pre_hmr_terminal_path",
+        )
+    }
+    assert all(path.parent == attempt_three_root for path in attempt_three_paths)
+    attempt_two_paths = {
+        subject.attempt_two_configuration()[key]
+        for key in (
+            "checkpoint_path",
+            "preparation_path",
+            "work_order_path",
+            "authority_path",
+            "forbidden_path",
+            "command_manifest_path",
+            "no_database_admission_path",
+            "consumed_path",
+            "terminal_path",
+            "terminal_schema_path",
+            "native_report_path",
+            "pre_hmr_terminal_path",
+        )
+    }
+    assert not attempt_three_paths & attempt_two_paths
+
+
+def test_attempt_three_terminal_schema_is_exact_and_cannot_admit_attempt_two() -> None:
+    path = subject.attempt_three_configuration()["terminal_schema_path"]
+    schema = json.loads(path.read_text(encoding="utf-8"))
+    assert schema["properties"]["operation_id"]["const"] == (
+        "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003"
+    )
+    assert schema["properties"]["attempt_id"]["const"] == (
+        "deepseek-native-synthetic-window-worker-003"
+    )
+    attempt_two = json.loads(
+        subject.attempt_two_configuration()["terminal_schema_path"].read_text(
+            encoding="utf-8"
+        )
+    )
+    schema["$id"] = attempt_two["$id"]
+    schema["properties"]["operation_id"] = attempt_two["properties"]["operation_id"]
+    schema["properties"]["attempt_id"] = attempt_two["properties"]["attempt_id"]
+    assert schema == attempt_two
 
 
 def test_preparation_derives_full_reviewed_ancestor_not_current_head(
