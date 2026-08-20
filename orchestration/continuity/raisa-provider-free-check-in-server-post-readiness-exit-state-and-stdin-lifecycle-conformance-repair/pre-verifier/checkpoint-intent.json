@@ -1,0 +1,43 @@
+{
+  "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
+  "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+  "completed_stage": "At exact full Git source f89677fb1a8c8d9ae07ae20e8b854809cc0d4899, the sole provider-disabled native process is immutably retained as failed-closed negative evidence at first-missing marker PRESET_VALIDATION_PASSED. It created no agent, turn, broker, model or provider request, made no network, Docker or database attempt, retried zero times and cleaned its process and disposable root exactly.",
+  "next_executable_stage": "dispatch_one_fresh_gemini_3_7_flash_high_read_only_veto_over_the_exact_failed_closed_candidate_then_close_honestly_and_freeze_the_narrow_validation_subcoordinate_successor",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "check-in-lifecycle-postterminal-static-admission",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair", "--check"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "check-in-lifecycle-postterminal-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "check-in-lifecycle-postterminal-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}

@@ -2,7 +2,7 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "check-in-lifecycle-exact-static-admission",
+      "command_id": "check-in-lifecycle-postterminal-static-admission",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -12,7 +12,7 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "check-in-lifecycle-preexecution-provider-free-tests",
+      "command_id": "check-in-lifecycle-postterminal-provider-free-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -24,7 +24,7 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "check-in-lifecycle-preexecution-ruff",
+      "command_id": "check-in-lifecycle-postterminal-ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -34,17 +34,6 @@
         "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
         "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
         "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required"
-    },
-    {
-      "command_id": "check-in-lifecycle-preexecution-compile",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "py_compile",
-        "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
-        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }
