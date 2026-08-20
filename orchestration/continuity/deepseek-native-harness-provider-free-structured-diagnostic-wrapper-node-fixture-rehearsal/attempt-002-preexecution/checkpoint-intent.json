@@ -1,0 +1,35 @@
+{
+  "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
+  "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+  "completed_stage": "Attempt 001 ran exactly four authored local Node observers and preserved identical rejection, exclusive sidecar failure behavior, zero stream bytes and exact cleanup, but its three safe diagnostics failed canonical-byte validation solely because JavaScript retained insertion order; the immutable negative evidence and plan-admitted opt-in recursive key-order correction are committed with historical default wrapper bytes preserved.",
+  "next_executable_stage": "generate_and_validate_one_fresh_attempt_002_preexecution_receipt_then_run_the_same_exact_four_serial_authored_local_node_scenarios_once_against_the_corrected_source",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "node-fixture-canonical-recovery-deterministic-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal", "--check"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "node-fixture-canonical-recovery-focused-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal_plan.py", "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_current_baton_consistency.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "node-fixture-canonical-recovery-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "orchestration_harness/native_pre_hmr_diagnostic.py", "scripts/deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal_plan.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "node-fixture-canonical-recovery-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "orchestration_harness/native_pre_hmr_diagnostic.py", "scripts/deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}
