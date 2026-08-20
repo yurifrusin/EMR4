@@ -1,0 +1,12 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "operation_id": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+  "recorded_at": "2026-08-20T19:00:25.0192636+10:00",
+  "status": 1,
+  "request": "432db1da-c8ac-4744-9633-e578612f8072",
+  "contains_phi": false,
+  "engine_state": "continuing",
+  "corrects_request": "d65c2006-6c3e-4ce1-81f1-0e20ccfa3fc5",
+  "correction_reason": "The first notification named an operation already accepted in the live graph; clockwork rejected that duplicate successor before closeout publication.",
+  "next_workstream": "provider-free preset mount and exact edit/glob/read projection rehearsal"
+}

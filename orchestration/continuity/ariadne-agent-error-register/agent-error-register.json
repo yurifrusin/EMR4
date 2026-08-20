@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 573,
+  "register_revision": 574,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-20",
@@ -27552,6 +27552,228 @@
       },
       "incident_id": "AER-0694",
       "attempt_id": "clock-9731a71de367565fc2a3b9c0",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+      "role": "orchestrator",
+      "resource_id": "preset-row-service-semantic-review-command-manifest",
+      "model": "gemini-3.7-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "read_only_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Every independent-review command must be non-writing and leave the exact candidate worktree clean and unchanged.",
+      "observed_error": "The first semantic review command regenerated a tracked environment-dependent fixture, changing the credential-removal count from three to four and leaving the review worktree dirty.",
+      "detection_method": "The Antigravity postcondition rejected the run as read_only_worktree_postcondition_failed and admitted no review decision.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-check-in-preset-row-service-path-recovery-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-preset-row-service-path-recovery-gemini37-command-manifest.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.verifier_manifest_regenerated_environment_dependent_tracked_evidence",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the fixture-regenerating review command with non-writing assertions and dispatch one fresh exact semantic review.",
+        "prevention_control": "Verifier command manifests must use assertion-only functions over committed evidence and retain the exact clean-worktree postcondition.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-preset-row-service-path-recovery-corrected-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-preset-row-service-path-recovery-corrected-gemini37-review-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0695",
+      "attempt_id": "clock-0d82de3927ab9b519d4e1bf4",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+      "role": "verifier",
+      "resource_id": "ariadne-antigravity-command-result-egress",
+      "model": "gemini-3.7-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "One exact independent-review transport must return one schema-valid terminal decision without fallible retranscription of deterministic command results.",
+      "observed_error": "The first executor review exited zero with nonempty output, no stderr and an unchanged clean candidate, but egress admitted zero schema-valid decision envelopes.",
+      "detection_method": "The egress receipt records a successful transport and zero admitted decision envelopes.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-check-in-preset-row-service-path-recovery-executor-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-preset-row-service-path-recovery-executor-gemini37-command-manifest.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.antigravity_model_retranscribed_command_results_not_admitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the failed egress receipt and dispatch one corrected fresh transport with a narrowed response instruction.",
+        "prevention_control": "Move exact argv, exit codes and command-result ledgers to deterministic evidence and reserve the model envelope for semantic judgment.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-preset-row-service-path-recovery-executor-corrected-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-preset-row-service-path-recovery-executor-corrected-gemini37-review-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0696",
+      "attempt_id": "clock-1cfe2c9627b900d05bacff31",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+      "role": "verifier",
+      "resource_id": "ariadne-antigravity-command-result-egress",
+      "model": "gemini-3.7-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A corrected fresh review transport must emit one schema-valid semantic terminal decision while deterministic code owns exact command results.",
+      "observed_error": "The corrected executor transport again exited zero with nonempty output, no stderr and a clean unchanged candidate, but repeated the zero-envelope egress result.",
+      "detection_method": "The second immutable egress receipt repeated zero admitted decisions under the same result-retranscription seam.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-check-in-preset-row-service-path-recovery-executor-corrected-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-preset-row-service-path-recovery-executor-corrected-gemini37-command-manifest.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "harness.antigravity_model_retranscribed_command_results_not_admitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Split the gate: execute the exact command manifest with the shell-free deterministic validator and run one fresh Gemini semantic veto without command-result retranscription.",
+        "prevention_control": "Deterministic gears own exact vocabulary, argv, counts and exit results; the independent model owns bounded semantic judgment only.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/executor-review-command-validation-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-preset-row-service-path-recovery-split-veto-gemini37-review-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0697",
+      "attempt_id": "clock-dde4c8ddc78e79cabb1f79b6",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+      "role": "orchestrator",
+      "resource_id": "preset-row-service-native-checkpoint-test-double",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The missing-checkpoint test must substitute the module checkpoint path even after the real checkpoint has been published.",
+      "observed_error": "The checkpoint loader captured the real path in a Python default argument at import time, so the monkeypatched missing path was ignored once the real checkpoint existed.",
+      "detection_method": "The post-terminal focused test failed deterministically while the immutable native terminal remained passed and consumed.",
+      "evidence_paths": [
+        "scripts/raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.python_default_argument_captured_mutable_checkpoint_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Late-bind the checkpoint path from the module variable when the loader is called and rerun the focused deterministic tests without rerunning the native process.",
+        "prevention_control": "Filesystem test boundaries that are monkeypatched after import must use late-bound defaults rather than captured path objects.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py"
+        ]
+      },
+      "incident_id": "AER-0698",
+      "attempt_id": "clock-f57c0c0ec2352c25fd4fed6e",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+      "role": "orchestrator",
+      "resource_id": "ariadne-governance-clockwork-canonical-register",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "material",
+      "expected_invariant": "The agent-error register, pattern report, active latch and all other canonical governance projections may be written only by the exclusive clockwork transaction.",
+      "observed_error": "The orchestrator directly appended incidents to the canonical register and regenerated the pattern report before invoking the clockwork closeout.",
+      "detection_method": "The clockwork closeout dry-run rejected canonical_drift before any publication and left the active generation authoritative.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-574.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "operator.clockwork_owned_agent_register_edited_directly",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Restore both register projections byte-for-byte from the active generation and submit every incident observation through the version-two clockwork intent.",
+        "prevention_control": "All incident intake and canonical register or pattern publication must pass only through the clockwork observation schema; direct projection edits are prohibited.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/closeout/closeout-intent.json",
+          "orchestration_harness/governance_clockwork_tick.py"
+        ]
+      },
+      "incident_id": "AER-0699",
+      "attempt_id": "clock-cf13035c25e0ae48745bd1a3",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+      "role": "orchestrator",
+      "resource_id": "ariadne-clockwork-next-operation-resolution",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "material",
+      "expected_invariant": "A closeout successor must be absent from the accepted live operation graph and must reflect the current dependency frontier rather than an earlier prompt chronology.",
+      "observed_error": "The first closeout intent named the default-off check-in route-adapter convergence even though that operation was already accepted and recorded in the live graph.",
+      "detection_method": "The clockwork dry-run rejected tick_next_operation_already_recorded before any publication or latch transition.",
+      "evidence_paths": [
+        "docs/ariadne-post-native-harness-successor-resolution-repair-closeout.md",
+        "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.accepted_operation_repeated_as_closeout_successor",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the rejection and select one newly named provider-free preset-mount and effective-tool-projection successor from the current accepted Harness frontier.",
+        "prevention_control": "Every closeout continues to use the clockwork accepted-versus-next graph guard; successor narratives must be derived from that machine reading before publication.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "docs/ariadne-agent-error-correction-register-revision-574.md"
+        ]
+      },
+      "incident_id": "AER-0700",
+      "attempt_id": "clock-2aaf07c0cd0f9feb6dda0a02",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

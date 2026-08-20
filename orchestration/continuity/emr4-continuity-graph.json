@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 350,
+  "graph_revision": 351,
   "harvests": [],
   "nodes": [
     {
@@ -25564,9 +25564,136 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+      "title": "Raisa provider-free check-in native Harness preset-row service-path recovery closeout",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted this provider-free root/service-path recovery and its separately checkpointed one-shot process.",
+          "The sole native process is consumed and no DeepSeek request, agent creation, preset mount, attempt 006 or retry is authorised.",
+          "The already accepted route-adapter operation is not repeated; the successor is a newly named provider-free preset-mount and exact effective-tool-projection rehearsal."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-rc7-root-overlay-and-user-root-correction",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/source-and-effective-root-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the rc.7 forced shipped-root overlay explanation and the minimal derived-user-root correction with exact user trust."
+        },
+        {
+          "id": "accept-five-scenario-service-input-fixture",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/service-input-fixture-evidence.json",
+          "status": "accepted",
+          "summary": "Accept predecessor absence, corrected one-row success, missing-root absence, duplicate shadowing rejection and configured-root displacement evidence."
+        },
+        {
+          "id": "accept-split-executor-evidence-gate",
+          "source": "orchestration/agent_inbox/antigravity/raisa-check-in-preset-row-service-path-recovery-split-veto-gemini37-review-receipt.json",
+          "status": "accepted",
+          "summary": "Accept twelve shell-free deterministic command results plus one clean independent Gemini semantic pass without model retranscription of exact command facts."
+        },
+        {
+          "id": "accept-provider-disabled-native-preset-row-convergence",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-service-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one consumed native process that passed all eight preset-row service coordinates with zero external or agent activity and exact cleanup."
+        },
+        {
+          "id": "reject-agent-deepseek-product-and-production-claims",
+          "source": "docs/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery-closeout.md",
+          "status": "rejected",
+          "summary": "Reject preset-mount, agent, DeepSeek quality, attempt-006, database, product, production and deployment claims."
+        },
+        {
+          "id": "accept-six-corrected-workflow-incidents",
+          "source": "docs/ariadne-agent-error-correction-register-revision-574.md",
+          "status": "accepted",
+          "summary": "Accept AER-0695 through AER-0700 as corrected with no open incident."
+        }
+      ],
+      "claim_scope": [
+        "rc.7 native profile composition replaced configured preset roots with the shipped system root and the predecessor disabled the derived user root.",
+        "Re-enabling the derived user root yields exactly one healthy canonical EMR4 worker row with user trust in deterministic fixtures.",
+        "The reviewed executor can only list preset rows once and bind local bytes, length and digest without agent, mount, turn or provider paths.",
+        "The sole checkpointed native process passed all eight coordinates with one process, zero retries and exact cleanup.",
+        "Deterministic code owns exact command facts while Gemini owns the independent semantic veto.",
+        "Six workflow, test-control, clockwork-ownership and successor-chronology incidents are corrected and none remains open."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery-plan.md",
+          "docs/security/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery-threat-model-delta.md",
+          "docs/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery-review-egress-addendum.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/source-and-effective-root-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/service-input-fixture-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/executor-review-command-validation-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-service-terminal.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-preset-row-service-path-recovery-corrected-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-preset-row-service-path-recovery-split-veto-gemini37-review-receipt.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-preset-row-service-path-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-preset-row-service-path-recovery-native-preexecution-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-checkpoint/clockwork-checkpoint-tick-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/closeout/pushover-notification-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/closeout/pushover-correction-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery_plan.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-preexecution-checkpoint.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-service-consumed.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-service-report.md",
+          "docs/ariadne-agent-error-correction-register-revision-574.md",
+          "orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-row-service-path-recovery.md",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "No preset mount, effective-tool composition, agent creation or occupied DeepSeek work is proved.",
+        "The consumed provider-disabled process cannot be retried.",
+        "No attempt 006, Docker, PostgreSQL, transaction or product behavior is proved.",
+        "Dedicated check-in remains default-off with no ordinary-practice enablement or product-data authority.",
+        "No production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-20T18:41:10.4055454+10:00",
+      "updated_at": "2026-08-20T18:41:10.4055454+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "5232330b2cb7dca0f3f2dddf332cb4f3b8beccf7",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-20T17:18:14.3713624+10:00"
+  "updated_at": "2026-08-20T18:41:10.4055454+10:00"
 }

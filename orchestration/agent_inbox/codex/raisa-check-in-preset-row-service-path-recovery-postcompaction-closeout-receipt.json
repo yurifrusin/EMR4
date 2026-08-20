@@ -1,0 +1,128 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in native Harness preset-row service-path recovery",
+    "completed_stage": "The separately checkpointed provider-disabled native service process passed once with all eight markers, exact digest binding, zero provider or agent activity and complete cleanup; the post-terminal late-binding test repair passed without rerunning the process.",
+    "next_executable_stage": "validate_then_publish_the_exclusive_clockwork_closeout_and_rehydrate_the_authorised_successor",
+    "operation_id": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+    "resume_after_compaction": true,
+    "source_head": "e00ec1e82040a6c67013e8a5b59368fc303d3549",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "git_object_resolution": {
+    "observed_head": "5232330b2cb7dca0f3f2dddf332cb4f3b8beccf7",
+    "reason_codes": [],
+    "resolved_commit": "e00ec1e82040a6c67013e8a5b59368fc303d3549",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "e00ec1e82040a6c67013e8a5b59368fc303d3549"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "5232330b2cb7dca0f3f2dddf332cb4f3b8beccf7",
+    "branch_origin_aligned": false,
+    "head": "5232330b2cb7dca0f3f2dddf332cb4f3b8beccf7",
+    "origin_branch_commit": "23b6c423319a453b9888088295ee3f9cad5c78a9",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 663
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "post_compaction_closeout",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The one provider-disabled Harness process is consumed and made no model request; dispatch now would violate the immutable terminal and confound closeout.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini 3.7 Flash/high passed the exact split semantic veto at the unchanged executor candidate; no second semantic review is needed for deterministic closeout records.",
+        "work_packages": [
+          "split_gate_executor_semantic_veto_completed"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation and one exclusive clockwork writer makes the closeout transaction irreducibly serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "clockwork_closeout_published",
+      "successor_preplanning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "fresh five-source post-compaction receipt must pass",
+      "clockwork-owned register projections must equal the active generation before check",
+      "five incident observations must be validated and assigned canonical IDs by clockwork",
+      "all exact closeout commands must pass serially before one publication",
+      "successor rehydration begins only after the clean closeout publication and task-branch push"
+    ]
+  },
+  "planned_action": "validate_and_publish_the_clockwork_owned_closeout_for_the_passed_provider_disabled_native_preset_row_service_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery-plan.md",
+      "docs/security/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery-threat-model-delta.md",
+      "docs/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery-review-egress-addendum.md",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-service-consumed.json",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-service-terminal.json",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-service-report.md",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-preset-row-service-path-recovery-split-veto-gemini37-review-receipt.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns closeout validation, the exclusive clockwork publication, exact Git handling and successor rehydration. DeepSeek has no model work package because the sole provider-disabled native process is consumed. Gemini completed the exact split semantic veto. Native subagents are declined under developer policy and the remaining transaction is serial.",
+    "git_refs_and_worktree": "Exact task and protected refs are owned by the generated Git snapshot; this narrative contains no manually transcribed Git object ID. Clockwork-owned register projections were restored byte-for-byte from the active generation after fail-closed drift detection. docs/branding and every unrelated untracked path remain preserved; explicit-path staging only.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. The live baton preserves the provider-free native Harness lineage, keeps protected integration closed, and leaves the active recovery in progress until its clockwork closeout is published.",
+    "protected_evidence_boundaries": "The consumed process, predecessor attempts and review failures remain immutable. Closeout may intake five corrected workflow incidents only through the clockwork, publish its owned canonical surfaces, commit and push the task branch, then rehydrate the authorised successor. It may not rerun the native process, dispatch a model, touch product or protected data, enable ordinary practice, execute Docker or database work, deploy, release, rebuild Pages or move protected refs."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

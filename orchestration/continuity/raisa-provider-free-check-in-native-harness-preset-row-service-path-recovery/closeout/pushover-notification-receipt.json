@@ -1,0 +1,9 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "operation_id": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+  "status": 1,
+  "request": "d65c2006-6c3e-4ce1-81f1-0e20ccfa3fc5",
+  "contains_phi": false,
+  "engine_state": "continuing",
+  "next_workstream": "default-off canonical check-in route adapter convergence rehearsal"
+}

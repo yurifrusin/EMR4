@@ -1,44 +1,44 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 573,
+  "register_revision": 574,
   "source_cutoff_on": "2026-08-20",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "52ec359287e1c3c58b6c449c0b75f81c93a9bc7db00285d35b5122fde06c6d3c",
-  "incident_count": 694,
+  "canonical_register_sha256": "fb162005fad0a131d936d57a439228c5d0820fb8725bc71f622fa802590d6859",
+  "incident_count": 700,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 460,
+      "agent_behavior": 463,
       "harness": 57,
-      "operator": 40,
-      "repository": 121,
+      "operator": 42,
+      "repository": 122,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 91,
       "evidence_misreport": 70,
       "harness_failure": 57,
-      "operator_error": 40,
-      "output_contract_violation": 248,
-      "read_only_violation": 4,
+      "operator_error": 42,
+      "output_contract_violation": 250,
+      "read_only_violation": 5,
       "reasoning_claim_error": 47,
-      "repository_defect": 121,
+      "repository_defect": 122,
       "transport_timeout": 16
     },
     "by_role": {
       "implementer": 49,
       "integration_reviewer": 3,
-      "orchestrator": 581,
-      "verifier": 61
+      "orchestrator": 585,
+      "verifier": 63
     },
     "by_process_severity": {
       "low": 396,
-      "material": 122,
-      "moderate": 176
+      "material": 124,
+      "moderate": 180
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 122,
-      "canonical_unchanged": 429,
+      "accepted_candidate_changed": 123,
+      "canonical_unchanged": 434,
       "untrusted_partial_worktree": 143
     },
     "by_resource_and_role": {
@@ -59,11 +59,14 @@
       "ariadne-agent-error-register-tests::orchestrator": 3,
       "ariadne-agent-error-register-update::orchestrator": 1,
       "ariadne-agent-error-register::orchestrator": 5,
+      "ariadne-antigravity-command-result-egress::verifier": 2,
       "ariadne-antigravity-command-schema::orchestrator": 1,
       "ariadne-antigravity-egress-admission::verifier": 2,
+      "ariadne-clockwork-next-operation-resolution::orchestrator": 1,
       "ariadne-compass-current-position-test::orchestrator": 7,
       "ariadne-continuity-acceptance-reference::orchestrator": 1,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
+      "ariadne-governance-clockwork-canonical-register::orchestrator": 1,
       "ariadne-governance-clockwork-checkpoint::orchestrator": 2,
       "ariadne-governance-clockwork-command-manifest::orchestrator": 1,
       "ariadne-orchestrator-git-ref-evidence-binding::orchestrator": 1,
@@ -170,6 +173,8 @@
       "ordinary-practice-check-in-readiness-continuity-updater::orchestrator": 2,
       "ordinary-practice-check-in-readiness-plan-tests::orchestrator": 1,
       "ordinary-practice-check-in-readiness-reviewer::orchestrator": 3,
+      "preset-row-service-native-checkpoint-test-double::orchestrator": 1,
+      "preset-row-service-semantic-review-command-manifest::orchestrator": 1,
       "preset-validation-independent-review-scope::orchestrator": 1,
       "shadow-clockwork-causal-tick-engine::orchestrator": 1,
       "shadow-clockwork-efficacy-reducer::orchestrator": 1,
@@ -1379,6 +1384,30 @@
         "The wrapper regex counts terminal decisions and rejects any count other than one; tests cover missing and duplicate decisions.",
         "Verifier packets for potentially asynchronous checks must require all background notifications to complete before one final terminal response and forbid any later follow-up; exact-single-decision wrapper admission remains mandatory.",
         "Verifier packets must require all commands and notifications to settle before exactly one terminal line, and the wrapper must continue rejecting every zero-or-duplicate result before candidate acceptance."
+      ]
+    },
+    {
+      "recurrence_signature": "harness.antigravity_model_retranscribed_command_results_not_admitted",
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0696",
+        "AER-0697"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "categories": [
+        "output_contract_violation"
+      ],
+      "roles": [
+        "verifier"
+      ],
+      "resource_ids": [
+        "ariadne-antigravity-command-result-egress"
+      ],
+      "prevention_controls": [
+        "Deterministic gears own exact vocabulary, argv, counts and exit results; the independent model owns bounded semantic judgment only.",
+        "Move exact argv, exit codes and command-result ledgers to deterministic evidence and reserve the model envelope for semantic judgment."
       ]
     },
     {

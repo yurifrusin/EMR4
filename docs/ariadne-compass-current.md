@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will explain the native Harness preset-row service path provider-free before considering another separately planned and checkpointed native process.
+> EMR4 will next prove only provider-free preset mount and the exact edit/glob/read tool projection; the accepted check-in route remains unchanged and no model request is admitted.
 
 ## North star
 
@@ -470,26 +470,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The server repair and closed diagnostic pass; the one provider-disabled native process fails earlier and more precisely at preset validation with zero provider cost and exact cleanup. Lineage parent: `raisa-provider-free-check-in-relay-free-recovery-attempt-005`.
 227. **Replace the collapsed native preset-validation failure with exact direct-package and native service-path subcoordinates before any occupied worker — Raisa provider-free check-in native Harness preset-validation subcoordinate recovery closeout**
    Direct package discovery, bytes, parse, length and digest pass; one reviewed provider-disabled native process fails closed before the exact preset row is found, with zero provider cost and exact cleanup. Lineage parent: `raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair`.
+228. **Make the native DeepSeek Harness preset service reliably expose the exact EMR4 worker preset before any agent or model request — Raisa provider-free check-in native Harness preset-row service-path recovery closeout**
+   The rc.7 root cause is proved and one reviewed provider-disabled native process passes the exact preset-row, bytes, length and digest coordinates with zero retries or external activity. Lineage parent: `raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery`.
 
 ## Current position
 
-**Explain the native agentPresets service-path discrepancy provider-free before considering another native process or DeepSeek worker — Raisa provider-free check-in native Harness preset-validation subcoordinate recovery closeout**
+**Advance the successful native Harness service diagnosis to the next provider-free composition boundary without repeating accepted product work — Raisa provider-free check-in native Harness preset-row service-path recovery closeout**
 
-**Why this proof came next:** The preset file and direct package scanner are proven healthy while the native runner enters row discovery but does not reach the exact row-found coordinate.
+**Why this proof came next:** The exact EMR4 preset row is now visible and healthy in the native service, while preset mount and the accepted exact effective-tool guard remain unproved in this corrected root composition.
 
-The subcoordinate recovery is accepted as bounded negative native evidence, native preset-validation success is rejected, and the next work is a provider-free preset-row service-path recovery.
+Native preset-row service convergence is accepted; the next tranche may prove only provider-free preset mount and exact edit/glob/read projection before any model or agent-session boundary.
 
 ### What this unlocks
 
-- Native and direct home/root/profile discovery inputs can be compared exactly.
-- The agentPresets service call can be distinguished from row selection without creating an agent.
-- Any future one-shot native process can be admitted only after the deterministic discrepancy is explained and independently reviewed.
+- A deterministic reconstruction of the exact rc.7 preset-mount and effective-tool projection path.
+- A separately checkpointed one-shot provider-disabled native confirmation if the exact candidate and veto pass.
+- Later consideration of an occupied DeepSeek worker only after a distinct successful terminal and new authority envelope.
 
 ### What it does not solve
 
-- No native preset validation, mount, agent, effective-tool projection or occupied DeepSeek work is proved.
-- No attempt 006, Docker, PostgreSQL, transaction or product result is proved.
-- No ordinary-practice, production, deployment or protected-ref authority opens.
+- No ordinary-practice check-in command is enabled.
+- No generic-status Arrived, action grammar, first-party client or waiting-area behavior changes.
+- No product data, provider, production, deployment or protected-ref authority opens.
 
 ## Continuity and authority
 
@@ -1333,6 +1335,7 @@ Prerequisites:
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-architecture.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-plan.md`
+- `docs/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery-closeout.md`
 - `docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-closeout.md`
 - `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md`
 - `docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md`
@@ -2043,6 +2046,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-check-in-preset-row-service-path-recovery-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -2694,7 +2698,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json`
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.json`
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.schema.json`
-- `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-validation-report.md`
+- `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-service-report.md`
+- `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-service-terminal.json`
 - `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-validation-terminal.json`
 - `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/package-only-discovery-evidence.json`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/efficacy-reading.json`
@@ -3268,7 +3273,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-19--unmounted-check-in-admission-control-kernel-rehearsal.md`
-- `orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-validation-subcoordinate-recovery.md`
+- `orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-row-service-path-recovery.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3576,4 +3581,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 332; continuity graph revision 350._
+_Compass map revision 333; continuity graph revision 351._

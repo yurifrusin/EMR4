@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 332,
-  "updated_at": "2026-08-20T17:18:14.3713624+10:00",
-  "source_graph_revision": 350,
-  "orientation_statement": "EMR4 will explain the native Harness preset-row service path provider-free before considering another separately planned and checkpointed native process.",
+  "map_revision": 333,
+  "updated_at": "2026-08-20T18:41:10.4055454+10:00",
+  "source_graph_revision": 351,
+  "orientation_statement": "EMR4 will next prove only provider-free preset mount and the exact edit/glob/read tool projection; the accepted check-in route remains unchanged and no model request is admitted.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4427,27 +4427,38 @@
         "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-validation-terminal.json",
         "docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-closeout.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+      "lineage_parent": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+      "strategic_role": "Make the native DeepSeek Harness preset service reliably expose the exact EMR4 worker preset before any agent or model request",
+      "outcome": "The rc.7 root cause is proved and one reviewed provider-disabled native process passes the exact preset-row, bytes, length and digest coordinates with zero retries or external activity.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-service-terminal.json",
+        "docs/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery-closeout.md",
+        "orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-row-service-path-recovery.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
-    "strategic_role": "Explain the native agentPresets service-path discrepancy provider-free before considering another native process or DeepSeek worker",
-    "why_now": "The preset file and direct package scanner are proven healthy while the native runner enters row discovery but does not reach the exact row-found coordinate.",
-    "outcome": "The subcoordinate recovery is accepted as bounded negative native evidence, native preset-validation success is rejected, and the next work is a provider-free preset-row service-path recovery.",
+    "node_id": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+    "strategic_role": "Advance the successful native Harness service diagnosis to the next provider-free composition boundary without repeating accepted product work",
+    "why_now": "The exact EMR4 preset row is now visible and healthy in the native service, while preset mount and the accepted exact effective-tool guard remain unproved in this corrected root composition.",
+    "outcome": "Native preset-row service convergence is accepted; the next tranche may prove only provider-free preset mount and exact edit/glob/read projection before any model or agent-session boundary.",
     "unlocks": [
-      "Native and direct home/root/profile discovery inputs can be compared exactly.",
-      "The agentPresets service call can be distinguished from row selection without creating an agent.",
-      "Any future one-shot native process can be admitted only after the deterministic discrepancy is explained and independently reviewed."
+      "A deterministic reconstruction of the exact rc.7 preset-mount and effective-tool projection path.",
+      "A separately checkpointed one-shot provider-disabled native confirmation if the exact candidate and veto pass.",
+      "Later consideration of an occupied DeepSeek worker only after a distinct successful terminal and new authority envelope."
     ],
     "does_not_solve": [
-      "No native preset validation, mount, agent, effective-tool projection or occupied DeepSeek work is proved.",
-      "No attempt 006, Docker, PostgreSQL, transaction or product result is proved.",
-      "No ordinary-practice, production, deployment or protected-ref authority opens."
+      "No ordinary-practice check-in command is enabled.",
+      "No generic-status Arrived, action grammar, first-party client or waiting-area behavior changes.",
+      "No product data, provider, production, deployment or protected-ref authority opens."
     ],
     "evidence": [
-      "docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-closeout.md",
-      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-validation-report.md",
-      "orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-validation-subcoordinate-recovery.md"
+      "docs/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-preset-row-service-path-recovery-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-service-report.md"
     ]
   },
   "decision_horizon": [
