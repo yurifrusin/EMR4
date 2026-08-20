@@ -67,6 +67,78 @@ def test_corrected_native_candidate_enables_only_derived_user_root() -> None:
     assert candidate["runner"]["no_preset_mount"] is True
 
 
+def test_native_stage_fails_before_process_without_checkpoint(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    missing = tmp_path / "missing-checkpoint.json"
+    consumed = tmp_path / "consumed.json"
+    terminal = tmp_path / "terminal.json"
+    monkeypatch.setattr(recovery, "NATIVE_CHECKPOINT_PATH", missing)
+    monkeypatch.setattr(recovery, "NATIVE_CONSUMED_PATH", consumed)
+    monkeypatch.setattr(recovery, "NATIVE_TERMINAL_PATH", terminal)
+
+    with pytest.raises(FileNotFoundError):
+        recovery.execute_native_service_confirmation()
+
+    assert not consumed.exists()
+    assert not terminal.exists()
+
+
+def test_native_terminal_schema_rejects_broadened_success() -> None:
+    schema = json.loads(recovery.NATIVE_SCHEMA_PATH.read_text(encoding="utf-8"))
+    terminal = {
+        "schema_version": recovery.NATIVE_TERMINAL_SCHEMA,
+        "operation_id": recovery.OPERATION_ID,
+        "attempt_id": recovery.NATIVE_ATTEMPT_ID,
+        "result": "pass",
+        "terminal_coordinate": recovery.NATIVE_MARKERS[-1],
+        "markers": recovery.NATIVE_MARKERS,
+        "package": {
+            "installation_id": "deepseek-check-in-attachment-observability-native-001",
+            "name": "@deepseek-ai/dsh",
+            "version": "0.1.0-rc.7",
+            "package_lock_sha256": "a89defcd8a2c5aae4a54c03bda98e2585711fce881b4b08c90ca4808d45555f4",
+        },
+        "launch": {
+            "duration_ms": 1,
+            "exit_code": 0,
+            "stdout_bytes": 0,
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stderr_bytes": 0,
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "raw_logs_retained": False,
+            "credential_environment_names_removed_count": 0,
+        },
+        "counts": {
+            "native_processes": 1,
+            "automatic_retries": 0,
+            "agent_sessions": 0,
+            "turns": 0,
+            "broker_requests": 0,
+            "model_requests": 0,
+            "provider_requests": 0,
+            "network_attempts": 0,
+            "docker_invocations": 0,
+            "database_invocations": 0,
+        },
+        "cleanup": {"process_absent": True, "disposable_root_absent": True},
+        "runner_terminal_valid": True,
+        "network_ledger_valid": True,
+        "claim_boundary": "provider_disabled_native_preset_row_service_confirmation_only_no_agent_mount_deepseek_database_or_product_claim",
+    }
+    jsonschema.Draft202012Validator(schema).validate(terminal)
+
+    broadened = copy.deepcopy(terminal)
+    broadened["counts"]["agent_sessions"] = 1
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.Draft202012Validator(schema).validate(broadened)
+
+    retried = copy.deepcopy(terminal)
+    retried["counts"]["automatic_retries"] = 1
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.Draft202012Validator(schema).validate(retried)
+
+
 def test_provider_free_service_input_fixture_passes() -> None:
     evidence = recovery.run_fixture_characterization(recovery.load_contract())
 

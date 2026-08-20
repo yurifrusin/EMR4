@@ -9,6 +9,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import tempfile
+import time
 from typing import Any
 
 import jsonschema
@@ -20,6 +21,7 @@ from scripts import (
 )
 from scripts.deepseek_native_harness_provider_free_hmr_boot_proof import (
     _network_attempts,
+    _terminate_process,
     build_child_environment,
     network_guard_source,
 )
@@ -37,16 +39,24 @@ FIXTURE_SCHEMA_PATH = TOPIC / "fixture-evidence.schema.json"
 STATIC_EVIDENCE_PATH = TOPIC / "source-and-effective-root-evidence.json"
 FIXTURE_EVIDENCE_PATH = TOPIC / "service-input-fixture-evidence.json"
 REPORT_PATH = TOPIC / "service-input-fixture-report.md"
+NATIVE_CHECKPOINT_PATH = TOPIC / "native-preexecution-checkpoint.json"
+NATIVE_CONSUMED_PATH = TOPIC / "native-service-consumed.json"
+NATIVE_TERMINAL_PATH = TOPIC / "native-service-terminal.json"
+NATIVE_REPORT_PATH = TOPIC / "native-service-report.md"
+NATIVE_SCHEMA_PATH = TOPIC / "native-terminal.schema.json"
 
 SCHEMA_CONTRACT = "ariadne.check_in_preset_row_service_path_contract.v1"
 SCHEMA_STATIC = "ariadne.check_in_preset_row_service_path_static_evidence.v1"
 SCHEMA_FIXTURE = "ariadne.check_in_preset_row_service_path_fixture_evidence.v1"
 RUNNER_SCHEMA = "ariadne.check_in_preset_row_service_path_package_runner.v1"
+NATIVE_CHECKPOINT_SCHEMA = "ariadne.check_in_preset_row_service_path_checkpoint.v1"
+NATIVE_TERMINAL_SCHEMA = "ariadne.check_in_preset_row_service_path_native_terminal.v1"
 PRESET_ID = "emr4-bounded-worker"
 PRESET_BYTES = 158
 PRESET_SHA256 = "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1"
 SHIPPED_IDS = ["code", "cordis", "minimal", "standard"]
 CORRECTED_IDS = ["code", "cordis", "emr4-bounded-worker", "minimal", "standard"]
+NATIVE_ATTEMPT_ID = "check-in-preset-row-service-native-probe-001"
 NATIVE_MARKERS = [
     "EFFECTIVE_ROOTS_ENTERED",
     "EFFECTIVE_ROOTS_PASSED",
@@ -260,6 +270,358 @@ def validate_native_candidate(root: Path) -> dict[str, Any]:
             "runner_inject": ["agentPresets"],
         },
     }
+
+
+def _write_exclusive(path: Path, value: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("xb") as handle:
+        handle.write(_canonical_json(value))
+
+
+def load_native_checkpoint(path: Path = NATIVE_CHECKPOINT_PATH) -> dict[str, Any]:
+    value = _load_json(path)
+    expected = {
+        "schema_version",
+        "operation_id",
+        "status",
+        "semantic_candidate_source",
+        "semantic_review_receipt",
+        "semantic_review_receipt_sha256",
+        "executor_candidate_source",
+        "executor_review_receipt",
+        "executor_review_receipt_sha256",
+        "attempt_id",
+        "native_process_limit",
+        "automatic_retry_limit",
+        "timeout_seconds",
+        "markers",
+        "runner_sha256",
+        "checkpoint_admitted",
+    }
+    if set(value) != expected:
+        raise ServicePathRecoveryError("native_checkpoint_shape_invalid")
+    if (
+        value["schema_version"] != NATIVE_CHECKPOINT_SCHEMA
+        or value["operation_id"] != OPERATION_ID
+        or value["status"] != "admitted"
+        or value["attempt_id"] != NATIVE_ATTEMPT_ID
+        or value["native_process_limit"] != 1
+        or value["automatic_retry_limit"] != 0
+        or value["timeout_seconds"] != 60
+        or value["markers"] != NATIVE_MARKERS
+        or value["runner_sha256"] != _sha256(native_runner_source())
+        or value["checkpoint_admitted"] is not True
+    ):
+        raise ServicePathRecoveryError("native_checkpoint_binding_invalid")
+    for prefix in ("semantic", "executor"):
+        source = value[f"{prefix}_candidate_source"]
+        if not isinstance(source, str) or len(source) != 40:
+            raise ServicePathRecoveryError("native_checkpoint_source_invalid")
+        receipt_path = REPO_ROOT / value[f"{prefix}_review_receipt"]
+        if not receipt_path.is_file() or receipt_path.is_symlink():
+            raise ServicePathRecoveryError("native_checkpoint_review_missing")
+        if _file_sha256(receipt_path) != value[f"{prefix}_review_receipt_sha256"]:
+            raise ServicePathRecoveryError("native_checkpoint_review_digest_mismatch")
+        receipt = _load_json(receipt_path)
+        if (
+            receipt.get("status") != "completed"
+            or receipt.get("decision") != "pass"
+            or receipt.get("head_before") != source
+            or receipt.get("head_after") != source
+            or receipt.get("dirty_after") is not False
+        ):
+            raise ServicePathRecoveryError("native_checkpoint_review_invalid")
+    ancestry = subprocess.run(
+        [
+            "git",
+            "merge-base",
+            "--is-ancestor",
+            value["semantic_candidate_source"],
+            value["executor_candidate_source"],
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        check=False,
+    )
+    if ancestry.returncode != 0:
+        raise ServicePathRecoveryError("native_checkpoint_candidate_ancestry_invalid")
+    if NATIVE_CONSUMED_PATH.exists() or NATIVE_TERMINAL_PATH.exists():
+        raise ServicePathRecoveryError("native_checkpoint_already_consumed")
+    return value
+
+
+def _read_markers(path: Path) -> list[str]:
+    if not path.is_file():
+        return []
+    markers: list[str] = []
+    for index, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+        try:
+            row = json.loads(line)
+        except json.JSONDecodeError as error:
+            raise ServicePathRecoveryError("native_marker_json_invalid") from error
+        if row != {"sequence": index, "marker": row.get("marker")}:
+            raise ServicePathRecoveryError("native_marker_shape_invalid")
+        marker = row["marker"]
+        if marker not in NATIVE_MARKERS or index > len(NATIVE_MARKERS):
+            raise ServicePathRecoveryError("native_marker_value_invalid")
+        markers.append(marker)
+    if markers != NATIVE_MARKERS[: len(markers)]:
+        raise ServicePathRecoveryError("native_marker_order_invalid")
+    return markers
+
+
+def _read_runner_terminal(path: Path, markers: list[str]) -> dict[str, Any] | None:
+    if not path.is_file():
+        return None
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as error:
+        raise ServicePathRecoveryError("native_runner_terminal_json_invalid") from error
+    if not isinstance(value, dict) or set(value) != {
+        "schema_version",
+        "result",
+        "terminal_coordinate",
+        "markers",
+    }:
+        raise ServicePathRecoveryError("native_runner_terminal_shape_invalid")
+    if value["schema_version"] != "emr4.check-in-preset-row-service-native-runner.v1":
+        raise ServicePathRecoveryError("native_runner_terminal_schema_invalid")
+    if value["result"] not in {"pass", "failed_closed"} or value["markers"] != markers:
+        raise ServicePathRecoveryError("native_runner_terminal_result_invalid")
+    expected_coordinate = (
+        NATIVE_MARKERS[-1]
+        if markers == NATIVE_MARKERS
+        else NATIVE_MARKERS[len(markers)]
+    )
+    if value["terminal_coordinate"] != expected_coordinate:
+        raise ServicePathRecoveryError("native_runner_terminal_coordinate_invalid")
+    if (value["result"] == "pass") != (markers == NATIVE_MARKERS):
+        raise ServicePathRecoveryError("native_runner_terminal_pass_invalid")
+    return value
+
+
+def execute_native_service_confirmation() -> dict[str, Any]:
+    checkpoint = load_native_checkpoint()
+    contract = load_contract()
+    paths = _source_paths(contract)
+    installation = _installation_root(contract)
+    manifest = _load_json(paths["dsh_manifest"])
+    bin_relative = manifest.get("bin", {}).get("dsh")
+    if not isinstance(bin_relative, str):
+        raise ServicePathRecoveryError("native_bin_binding_missing")
+    bin_path = installation / "node_modules" / "@deepseek-ai" / "dsh" / bin_relative
+    if not bin_path.is_file() or bin_path.is_symlink():
+        raise ServicePathRecoveryError("native_bin_unavailable")
+
+    consumed = {
+        "schema_version": "ariadne.check_in_preset_row_service_path_consumed.v1",
+        "operation_id": OPERATION_ID,
+        "attempt_id": NATIVE_ATTEMPT_ID,
+        "state": "consumed",
+        "native_process_limit": 1,
+        "automatic_retry_count": 0,
+        "resume_permitted": False,
+        "provider_enabled": False,
+        "executor_candidate_source": checkpoint["executor_candidate_source"],
+    }
+    _write_exclusive(NATIVE_CONSUMED_PATH, consumed)
+
+    root_path: Path | None = None
+    process: subprocess.Popen[bytes] | None = None
+    process_started = False
+    start: float | None = None
+    exit_code: int | None = None
+    failure_coordinate: str | None = None
+    removed_environment_names = 0
+    stdout_sha256 = _sha256(b"")
+    stderr_sha256 = _sha256(b"")
+    stdout_bytes = 0
+    stderr_bytes = 0
+    markers: list[str] = []
+    runner_terminal: dict[str, Any] | None = None
+    network_attempt_count = 0
+    try:
+        with tempfile.TemporaryDirectory(
+            prefix="emr4-preset-row-native-",
+            dir=predecessor.lifecycle.DISPOSABLE_PARENT,
+        ) as temp:
+            root_path = Path(temp)
+            home = root_path / "home"
+            profile = home / "profiles" / "headless"
+            proof = profile / "proof"
+            workspace = root_path / "workspace"
+            marker_path = root_path / "markers.jsonl"
+            runner_terminal_path = root_path / "runner-terminal.json"
+            network_path = root_path / "network.jsonl"
+            stdout_path = root_path / "stdout.log"
+            stderr_path = root_path / "stderr.log"
+            workspace.mkdir()
+            proof.mkdir(parents=True)
+            preset_path = home / ".agent-presets" / PRESET_ID / "agent.cordis.yml"
+            preset_path.parent.mkdir(parents=True)
+            preset_path.write_bytes(predecessor.CANONICAL_PRESET_PATH.read_bytes())
+            (profile / "package.json").write_text(
+                json.dumps(
+                    {
+                        "name": "dsh-profile-headless",
+                        "private": True,
+                        "dependencies": {},
+                        "dsh": {
+                            "profile": {
+                                "bundles": [
+                                    "@deepseek-ai/dsh-base",
+                                    "@deepseek-ai/dsh-headless",
+                                ]
+                            }
+                        },
+                    },
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+                newline="\n",
+            )
+            (profile / "pnpm-workspace.yaml").write_text(
+                "packages:\n  - .\n\nnodeLinker: hoisted\nautoInstallPeers: false\n",
+                encoding="utf-8",
+                newline="\n",
+            )
+            (proof / "runner.mjs").write_bytes(native_runner_source())
+            profile_payload = corrected_native_profile_patch(root_path)
+            validate_native_candidate(root_path)
+            (profile / "cordis.patch.yml").write_bytes(profile_payload)
+            guard_path = root_path / "network-guard.mjs"
+            guard_path.write_bytes(network_guard_source())
+            environment, removed_environment_names = build_child_environment(
+                home, guard_path, network_path
+            )
+            environment["DSH_CWD"] = str(workspace)
+            environment["DSH_PERMISSION_MODE"] = "workspace-write"
+            environment["DSH_TOOLS_MODE"] = "native"
+            command = [
+                shutil.which("node") or "node",
+                "--expose-internals",
+                str(bin_path),
+                "--profile",
+                "headless",
+                "provider-disabled preset row service probe",
+            ]
+            with stdout_path.open("wb") as stdout, stderr_path.open("wb") as stderr:
+                start = time.monotonic()
+                process = subprocess.Popen(
+                    command,
+                    cwd=workspace,
+                    env=environment,
+                    stdout=stdout,
+                    stderr=stderr,
+                    shell=False,
+                )
+                process_started = True
+                try:
+                    exit_code = process.wait(timeout=checkpoint["timeout_seconds"])
+                except subprocess.TimeoutExpired:
+                    failure_coordinate = "NATIVE_PROCESS_TIMEOUT"
+                    _terminate_process(process)
+                    exit_code = process.returncode
+            stdout_bytes = stdout_path.stat().st_size
+            stderr_bytes = stderr_path.stat().st_size
+            stdout_sha256 = _file_sha256(stdout_path)
+            stderr_sha256 = _file_sha256(stderr_path)
+            markers = _read_markers(marker_path)
+            runner_terminal = _read_runner_terminal(runner_terminal_path, markers)
+            network_attempt_count = len(_network_attempts(network_path))
+            if network_attempt_count != 0:
+                failure_coordinate = "NETWORK_ATTEMPT_OBSERVED"
+    except Exception:
+        if failure_coordinate is None:
+            failure_coordinate = "NATIVE_SERVICE_EXECUTION_EXCEPTION"
+    finally:
+        if process is not None and process.poll() is None:
+            _terminate_process(process)
+        process_absent = process is None or process.poll() is not None
+        disposable_absent = root_path is None or not root_path.exists()
+
+    duration_ms = 0 if start is None else max(0, int((time.monotonic() - start) * 1000))
+    passed = (
+        process_started
+        and exit_code == 0
+        and failure_coordinate is None
+        and runner_terminal is not None
+        and runner_terminal["result"] == "pass"
+        and markers == NATIVE_MARKERS
+        and network_attempt_count == 0
+        and process_absent
+        and disposable_absent
+    )
+    terminal_coordinate = (
+        NATIVE_MARKERS[-1]
+        if passed
+        else failure_coordinate
+        or (NATIVE_MARKERS[len(markers)] if len(markers) < len(NATIVE_MARKERS) else NATIVE_MARKERS[-1])
+    )
+    terminal = {
+        "schema_version": NATIVE_TERMINAL_SCHEMA,
+        "operation_id": OPERATION_ID,
+        "attempt_id": NATIVE_ATTEMPT_ID,
+        "result": "pass" if passed else "failed_closed",
+        "terminal_coordinate": terminal_coordinate,
+        "markers": markers,
+        "package": {
+            "installation_id": installation.name,
+            "name": "@deepseek-ai/dsh",
+            "version": manifest.get("version"),
+            "package_lock_sha256": _file_sha256(paths["lockfile"]),
+        },
+        "launch": {
+            "duration_ms": duration_ms,
+            "exit_code": exit_code,
+            "stdout_bytes": stdout_bytes,
+            "stdout_sha256": stdout_sha256,
+            "stderr_bytes": stderr_bytes,
+            "stderr_sha256": stderr_sha256,
+            "raw_logs_retained": False,
+            "credential_environment_names_removed_count": removed_environment_names,
+        },
+        "counts": {
+            "native_processes": 1 if process_started else 0,
+            "automatic_retries": 0,
+            "agent_sessions": 0,
+            "turns": 0,
+            "broker_requests": 0,
+            "model_requests": 0,
+            "provider_requests": 0,
+            "network_attempts": network_attempt_count,
+            "docker_invocations": 0,
+            "database_invocations": 0,
+        },
+        "cleanup": {
+            "process_absent": process_absent,
+            "disposable_root_absent": disposable_absent,
+        },
+        "runner_terminal_valid": runner_terminal is not None,
+        "network_ledger_valid": network_attempt_count == 0,
+        "claim_boundary": "provider_disabled_native_preset_row_service_confirmation_only_no_agent_mount_deepseek_database_or_product_claim",
+    }
+    jsonschema.Draft202012Validator(_load_json(NATIVE_SCHEMA_PATH)).validate(terminal)
+    _write_exclusive(NATIVE_TERMINAL_PATH, terminal)
+    NATIVE_REPORT_PATH.write_text(render_native_report(terminal), encoding="utf-8", newline="\n")
+    return terminal
+
+
+def render_native_report(terminal: dict[str, Any]) -> str:
+    return f"""# Native Harness preset-row service confirmation report
+
+- Result: `{terminal['result']}`
+- Terminal coordinate: `{terminal['terminal_coordinate']}`
+- Markers reached: `{', '.join(terminal['markers']) or 'none'}`
+- Native processes / automatic retries: `{terminal['counts']['native_processes']} / 0`
+- Agents / turns / provider / network: `0 / 0 / 0 / {terminal['counts']['network_attempts']}`
+- Process and disposable root absent: `{str(terminal['cleanup']['process_absent']).lower()} / {str(terminal['cleanup']['disposable_root_absent']).lower()}`
+
+This is one consumed provider-disabled native service-row reading. It proves no
+preset mount, agent creation, DeepSeek request, model quality, attempt 006,
+database or product behavior.
+"""
 
 
 class ServicePathRecoveryError(RuntimeError):
@@ -802,7 +1164,7 @@ attempt 006, database or product behavior.
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--stage", choices=("static", "fixture", "all"), default="all")
+    parser.add_argument("--stage", choices=("static", "fixture", "native", "all"), default="all")
     args = parser.parse_args()
     contract = load_contract()
     if args.stage in {"static", "all"}:
@@ -813,6 +1175,9 @@ def main() -> int:
         _write_json(FIXTURE_EVIDENCE_PATH, evidence)
         REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
         REPORT_PATH.write_text(render_report(evidence), encoding="utf-8", newline="\n")
+    if args.stage == "native":
+        terminal = execute_native_service_confirmation()
+        return 0 if terminal["result"] == "pass" else 1
     return 0
 
 
