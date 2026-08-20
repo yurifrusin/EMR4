@@ -1,0 +1,127 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free complete-composition native-boot recovery",
+    "completed_stage": "Deterministic candidate 589225f199f415adc67178aea12f1d08ab59c35c passed focused and complete neighbouring provider-free Harness tests, Ruff, compilation, schema and Git whitespace checks with zero attempt output.",
+    "next_executable_stage": "execute_exactly_one_complete_composition_native_boot_recovery_attempt_001_process",
+    "operation_id": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+    "resume_after_compaction": true,
+    "source_head": "589225f199f415adc67178aea12f1d08ab59c35c",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "589225f199f415adc67178aea12f1d08ab59c35c",
+    "reason_codes": [],
+    "resolved_commit": "589225f199f415adc67178aea12f1d08ab59c35c",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "589225f199f415adc67178aea12f1d08ab59c35c"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "589225f199f415adc67178aea12f1d08ab59c35c",
+    "branch_origin_aligned": false,
+    "head": "589225f199f415adc67178aea12f1d08ab59c35c",
+    "origin_branch_commit": "2678b43abec8f29e7af432a0a3c64759fada8fda",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 656
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "preexecution",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native DeepSeek Harness is the provider-free evidence subject; any DeepSeek model worker or Claude Code fallback would violate and confound the exact claim.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high isolated read-only veto remains reserved until the sole immutable terminal and exact candidate are committed.",
+        "work_packages": [
+          "future_exact_candidate_and_terminal_complete_composition_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation, and one disposable home, process, terminal and cleanup boundary is indivisible.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "terminal_captured",
+      "pre_verifier",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "the first and only Popen consumes complete-composition-native-boot-recovery-attempt-001",
+      "no second process is permitted after success, failure, timeout or tool-envelope yield",
+      "the execution tool call must retain output, session_id, exit_code and chunk_id and poll a yielded session to terminal",
+      "the runner may activate only after hmr, agentPresets and tools are all active",
+      "exactly edit, glob and read plus zero provider boundary counts and full cleanup are mandatory",
+      "Gemini becomes eligible only after the sole terminal is committed"
+    ]
+  },
+  "planned_action": "execute_sole_provider_free_complete_composition_native_harness_process",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/evidence.schema.json",
+      "scripts/deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+      "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/provider-free-effective-tool-native-boot-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns deterministic admission, exactly one bounded provider-free native Harness process, terminal capture, cleanup, recovery, acceptance, clockwork and Git. DeepSeek Flash is declined because the native Harness is the provider-free evidence subject. Gemini 3.7 Flash/high remains reserved for one post-terminal exact-candidate read-only veto. Native subagents remain declined by current developer policy and the indivisible one-home, one-process, one-terminal serial boundary.",
+    "git_refs_and_worktree": "The deterministic candidate is exact clean HEAD 589225f199f415adc67178aea12f1d08ab59c35c on codex/ariadne-bernie-davida-parallel-seam; origin task remains 2678b43abec8f29e7af432a0a3c64759fada8fda. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked and staged state is clean. docs/branding and every unrelated untracked file remain preserved; only explicit-path staging is permitted. Canonical attempt evidence and report do not exist.",
+    "live_handover_current_baton": "AGENTS.md was read completely as the live handover with SHA-256 bb8ad8847511bb2602cc233fe04492b1c5136f36e27742ad37a9e4d9926e3d1f. The Current Baton accepts bounded-worker preset materialisation at exact source 4ffc8482934bed754e149acea005d7f8f444a782 and names this provider-free complete-composition native-boot recovery as the next bounded implementation.",
+    "protected_evidence_boundaries": "The sole admitted attempt is complete-composition-native-boot-recovery-attempt-001. Its first Popen permanently consumes the attempt and no retry, resume or reclassification is permitted. Canonical evidence and report are both absent before launch. The exact scrubbed executable is C:\\Program Files\\nodejs\\node.exe v24.18.0 with --expose-internals, pinned @deepseek-ai/dsh 0.1.0-rc.7 lib/bin.js and tarball SHA-256 2f8f0b763d611ac536f7a9411ee43c0afc067c1b8732c3102c04dbe398bcacc5. No agent/session/turn, broker, DeepSeek model/provider, fallback, registry/external network, credential, Docker/database, product/data/runtime/deployment/Pages/protected-ref path is authorised."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

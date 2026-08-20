@@ -143,8 +143,8 @@ def test_configured_base_is_scoped_and_restores_every_binding() -> None:
 
 def test_deterministic_check_is_cache_only_and_creates_no_attempt_output() -> None:
     cache_root = DISPOSABLE_PARENT.parent / "AppData" / "Local" / "npm-cache"
-    assert not EVIDENCE_PATH.exists()
-    assert not REPORT_PATH.exists()
+    evidence_before = EVIDENCE_PATH.read_bytes() if EVIDENCE_PATH.exists() else None
+    report_before = REPORT_PATH.read_bytes() if REPORT_PATH.exists() else None
 
     projection = deterministic_check(cache_root)
 
@@ -152,8 +152,10 @@ def test_deterministic_check_is_cache_only_and_creates_no_attempt_output() -> No
     assert projection["controller"]["single_popen"] is True
     assert projection["controller"]["no_retry_loop"] is True
     assert projection["contract"]["required_services"] == list(REQUIRED_SERVICES)
-    assert not EVIDENCE_PATH.exists()
-    assert not REPORT_PATH.exists()
+    assert (EVIDENCE_PATH.read_bytes() if EVIDENCE_PATH.exists() else None) == (
+        evidence_before
+    )
+    assert (REPORT_PATH.read_bytes() if REPORT_PATH.exists() else None) == report_before
 
 
 def test_plan_and_threat_delta_keep_execution_and_authority_closed() -> None:
