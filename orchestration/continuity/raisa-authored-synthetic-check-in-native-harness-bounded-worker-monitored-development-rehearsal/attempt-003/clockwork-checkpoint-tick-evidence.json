@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "c2104330ce8a7cacb6e79c4c49cdd2e61dbed2a3",
+  "source_commit": "c2104330ce8a7cacb6e79c4c49cdd2e61dbed2a3",
+  "generation_id": "gen-9d3a4e888b7a17db298087d6b9c4f2473973e003f2b4e8bf6888efb62dbf3706",
+  "bundle_sha256": "9d3a4e888b7a17db298087d6b9c4f2473973e003f2b4e8bf6888efb62dbf3706",
+  "previous_generation_id": "gen-a46b7bd78280feeeb62b4c4cf18d94ccbb963f7e7a198a5c62247e189aefb3f9",
+  "previous_source_commit": "c2104330ce8a7cacb6e79c4c49cdd2e61dbed2a3",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 90,
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+  "event_kind": "checkpoint_transition",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

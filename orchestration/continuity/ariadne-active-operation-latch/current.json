@@ -4,11 +4,11 @@
   "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker attempt 003",
   "objective": "Prepare, separately checkpoint and execute exactly one new DeepSeek Flash worker identity against the unchanged authored-synthetic non-product one-edit package through the accepted native Harness controller, broker and recovered pre-HMR terminal, with at most one provider request, zero retries, immutable terminal evidence and exact-root cleanup.",
   "status": "in_progress",
-  "source_head": "ef3f2cb61bd482c304f6828439d7600ea444d68a",
+  "source_head": "c2104330ce8a7cacb6e79c4c49cdd2e61dbed2a3",
   "authority_source": "Yuri's explicit affirmative 2026-08-21 decision authorising one new occupied authored-synthetic native-Harness attempt, together with the accepted attempt-002 negative evidence and provider-disabled pre-HMR terminal recovery.",
   "checkpoint": {
-    "completed_stage": "The pre-HMR recovery is accepted at Continuity 354 / Compass 336; attempts 001 and 002 remain consumed and immutable, attempt 002 reached no provider request, and Yuri explicitly authorised one separately frozen new occupied attempt.",
-    "next_executable_stage": "generate_a_fresh_five_source_attempt_003_preexecution_receipt_then_run_zero_provider_deterministic_admission_before_materializing_the_new_disposable_root",
+    "completed_stage": "The committed attempt-003 candidate passed the fresh five-source preexecution gate, exact zero-provider deterministic admission and preparation. The distinct one-file authored-synthetic root, pinned rc.7 package, preset, tool projection, WorkOrder, honest prepaid-balance cost posture and recovered pre-HMR sidecar are bound with attempts 001 and 002 unchanged, zero matching processes and zero provider requests. The one-process, one-request, zero-retry checkpoint is admitted.",
+    "next_executable_stage": "generate_a_fresh_five_source_attempt_003_occupied_prelaunch_receipt_then_run_exactly_one_deepseek_native_harness_authored_synthetic_edit_without_retry_resume_or_fallback",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,

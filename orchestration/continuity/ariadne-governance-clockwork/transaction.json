@@ -1,109 +1,107 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
   "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
-  "transaction_id": "txn-44bf6d3a41ca1323aacb092a",
-  "source_commit": "ef3f2cb61bd482c304f6828439d7600ea444d68a",
-  "previous_source_commit": "ef3f2cb61bd482c304f6828439d7600ea444d68a",
-  "previous_generation_id": "gen-45c707ba7bfab8b4ae57b6772ef3e25c74ef62700c83bb4b0727b54033b5873e",
-  "previous_bundle_sha256": "45c707ba7bfab8b4ae57b6772ef3e25c74ef62700c83bb4b0727b54033b5873e",
+  "transaction_id": "txn-b9499aeee6492cd3a6838b13",
+  "source_commit": "c2104330ce8a7cacb6e79c4c49cdd2e61dbed2a3",
+  "previous_source_commit": "c2104330ce8a7cacb6e79c4c49cdd2e61dbed2a3",
+  "previous_generation_id": "gen-a46b7bd78280feeeb62b4c4cf18d94ccbb963f7e7a198a5c62247e189aefb3f9",
+  "previous_bundle_sha256": "a46b7bd78280feeeb62b4c4cf18d94ccbb963f7e7a198a5c62247e189aefb3f9",
   "previous_canonical_sha256s": {
     "continuity": "9eb3148106c658372e68f5645fab5158a7aa68a0f62e275c8308918f78151ca7",
     "compass": "1720ca6640884792afcc02c3b3fe402f7e17ecce5fa9b4b1dd70c2b675cd74d9",
     "compass_markdown": "22af7c21cf2bedd0bc7e616e5c89a343ad83d802605805466cd88d0bab368827",
-    "active_latch": "f63f3217eefb7943dc0edd5b26fdc66dd0ba3bd38034d68eadba28279fc820e2",
+    "active_latch": "910d9a8f1fd9d42265cc8036575a06ae8db8f5a074d015f3a12aed24103d4239",
     "error_register": "db2f427b254271a3b479ee4651df3f8053604b044af5b555ba0ae8bb2d7d7582",
     "pattern_report": "73c7a348ddc93c87554d5b59bf71d3a14b58c96701eda24610d0d33e92c5d326",
-    "current_baton": "980ffec8900433987d86b8507e5b6b4800427eca9e30249c6b1f2f41ee205fb8"
+    "current_baton": "25ff82fb444b784c52e3fad9079e6db931146a06446eba0b8c23603c662f77bd"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "65f1f1c2f3230f2f04cc002c88307e30dd0a67adfefac900b370693de06c7074",
-    "transaction.json": "bc584c768a29ffb03c4ec5d1fee672355ce93638a38d8d70a5f72ae8ad8e794f",
+    "command-manifest.json": "3c24dac43af4b2925c7206c41b5b286b3757dd4aaf3f5c61f9b1c411d716ccec",
+    "transaction.json": "16b42cc2a5992eda6c5b248893a4257b8a59e0b15b9f87dd762e39e2ced69029",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "11cc365f0b074c9c9017dcd8c3e6b51a0214a22a400c7eb37ed9453d1e2b6b00"
+    "generation-manifest.json": "e96bbd9769a110b5284348106cb123514e6e7cd685eb617c800a051fa7398c9f"
   },
   "projection_sha256s": {
-    "latch": "sha256:d8f8a230a234a821caa300c48c6a67290ba0a4e4b246c5afc5b900984a633c23",
-    "current_baton": "sha256:5ab9041bd473e2d0c3095b3b14dbf9647978b31b22df21d01c7ecb76c78980f3"
+    "latch": "sha256:0d2a747b31756fa9e18512312eb66ee2b89260da5d577ce39c33b296cd38a169",
+    "current_baton": "sha256:b658c7c603fc278fdbaeecd360badf8eef373884bf4302edc129a8b485a21a78"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-44bf6d3a41ca1323aacb092a",
-      "transaction_id": "txn-44bf6d3a41ca1323aacb092a",
+      "journal_id": "journal-b9499aeee6492cd3a6838b13",
+      "transaction_id": "txn-b9499aeee6492cd3a6838b13",
       "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
-      "event_type": "user-decision-intent-accepted",
+      "event_type": "checkpoint-intent-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "intent_sha256": "sha256:e7590645c39f0fa59b5287922fc7f621fab3357f6124906877e6e58b3e09377e",
-        "previous_operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
-        "selected_outcome": "replace_with_newly_frozen_descendant"
+        "intent_sha256": "sha256:07d90a4350462541c43c7ce0bb1db2f16e26e74baa8f1d2a60c97385d10919c8",
+        "previous_next_executable_stage": "generate_a_fresh_five_source_attempt_003_preexecution_receipt_then_run_zero_provider_deterministic_admission_before_materializing_the_new_disposable_root"
       },
-      "event_sha256": "sha256:faa8aab8fc6512eb32f91da5c2f01d0e643aebaff93b7310ab4515b8fc57c3f3"
+      "event_sha256": "sha256:5bcd1ae3ffcbf646b6a6aa4f844f74b183210b2e11e5a45a33edfc961beb3f43"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-44bf6d3a41ca1323aacb092a",
-      "transaction_id": "txn-44bf6d3a41ca1323aacb092a",
+      "journal_id": "journal-b9499aeee6492cd3a6838b13",
+      "transaction_id": "txn-b9499aeee6492cd3a6838b13",
       "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
       "sequence": 2,
-      "previous_event_sha256": "sha256:faa8aab8fc6512eb32f91da5c2f01d0e643aebaff93b7310ab4515b8fc57c3f3",
+      "previous_event_sha256": "sha256:5bcd1ae3ffcbf646b6a6aa4f844f74b183210b2e11e5a45a33edfc961beb3f43",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "ef3f2cb61bd482c304f6828439d7600ea444d68a"
+        "source_commit": "c2104330ce8a7cacb6e79c4c49cdd2e61dbed2a3"
       },
-      "event_sha256": "sha256:2e58d6d156d3e2db4fc4c18f66310a2028146b34b684f5f0308e85ac17e63e85"
+      "event_sha256": "sha256:117394b918afae5be7a7856db9a159463e69857d1060b8d349524d26383739bb"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-44bf6d3a41ca1323aacb092a",
-      "transaction_id": "txn-44bf6d3a41ca1323aacb092a",
+      "journal_id": "journal-b9499aeee6492cd3a6838b13",
+      "transaction_id": "txn-b9499aeee6492cd3a6838b13",
       "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
       "sequence": 3,
-      "previous_event_sha256": "sha256:2e58d6d156d3e2db4fc4c18f66310a2028146b34b684f5f0308e85ac17e63e85",
-      "event_type": "active-operation-replaced",
+      "previous_event_sha256": "sha256:117394b918afae5be7a7856db9a159463e69857d1060b8d349524d26383739bb",
+      "event_type": "active-operation-checkpoint-advanced",
       "actor": "gpt-sol",
       "payload": {
-        "previous_operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
-        "next_operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003"
+        "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+        "next_executable_stage": "generate_a_fresh_five_source_attempt_003_occupied_prelaunch_receipt_then_run_exactly_one_deepseek_native_harness_authored_synthetic_edit_without_retry_resume_or_fallback"
       },
-      "event_sha256": "sha256:56c89950ea26919f0fcdcd30942dc12bc1f8c980df47e0750e9c54615f448c37"
+      "event_sha256": "sha256:b4697bd2048768a9d651ec44bd847e6ba98e80fd46b5b74421e9f062e2027e56"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-44bf6d3a41ca1323aacb092a",
-      "transaction_id": "txn-44bf6d3a41ca1323aacb092a",
+      "journal_id": "journal-b9499aeee6492cd3a6838b13",
+      "transaction_id": "txn-b9499aeee6492cd3a6838b13",
       "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
       "sequence": 4,
-      "previous_event_sha256": "sha256:56c89950ea26919f0fcdcd30942dc12bc1f8c980df47e0750e9c54615f448c37",
-      "event_type": "replacement-latch-validated",
+      "previous_event_sha256": "sha256:b4697bd2048768a9d651ec44bd847e6ba98e80fd46b5b74421e9f062e2027e56",
+      "event_type": "checkpoint-latch-validated",
       "actor": "gpt-sol",
       "payload": {
         "status": "in_progress",
-        "user_attention_required": false,
         "terminal_response_permitted": false
       },
-      "event_sha256": "sha256:9fb6a798f171b66f75949c255a67ace58224e34b94baba40af45abea7848cda1"
+      "event_sha256": "sha256:8491e5ed8422f2ce2e565bffbfdd9a02d0342ec08f1c0b611040b5926891eb03"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-44bf6d3a41ca1323aacb092a",
-      "transaction_id": "txn-44bf6d3a41ca1323aacb092a",
+      "journal_id": "journal-b9499aeee6492cd3a6838b13",
+      "transaction_id": "txn-b9499aeee6492cd3a6838b13",
       "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
       "sequence": 5,
-      "previous_event_sha256": "sha256:9fb6a798f171b66f75949c255a67ace58224e34b94baba40af45abea7848cda1",
+      "previous_event_sha256": "sha256:8491e5ed8422f2ce2e565bffbfdd9a02d0342ec08f1c0b611040b5926891eb03",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "lease_bound_pointer_last_live_tick"
       },
-      "event_sha256": "sha256:d8dd5210a7fe68c93b20c73c0b242b6ba1f11625ddbcef1b5b9ed554ba5affcc"
+      "event_sha256": "sha256:34af7b7dddc7159cc012fbd829e31554e50ff04f69a86968e5d4c7c3ee3e6dbc"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
-  "event_kind": "user_decision_transition",
+  "event_kind": "checkpoint_transition",
   "next_boundaries_sha256": "sha256:ad947dcd1e148ef05759afca30d87c3488b7a2661c7cec0cc19bdedc52e125c6",
   "register_bytes_preserved": true,
   "pattern_bytes_preserved": true
