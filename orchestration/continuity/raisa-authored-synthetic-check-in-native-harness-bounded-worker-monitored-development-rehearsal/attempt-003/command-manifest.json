@@ -1,0 +1,18 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\sarashera\\emr4\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:\\Users\\sarashera\\emr4",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal_plan.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py"
+      ],
+      "id": "PF_SYNTHETIC_NATIVE_WORKER"
+    }
+  ],
+  "schema_version": "ariadne.verifier-command-manifest.v1"
+}
