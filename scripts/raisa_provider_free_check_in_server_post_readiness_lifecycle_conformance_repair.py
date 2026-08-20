@@ -983,6 +983,18 @@ def build_evidence() -> dict[str, Any]:
 
 def render_report(evidence: dict[str, Any]) -> str:
     native = evidence["native_probe"]
+    if native["result"] == "pass":
+        native_claim = (
+            "This proves only the closed lifecycle projection and one pinned rc.7\n"
+            "provider-disabled `agents.create({setup})` mount."
+        )
+    else:
+        native_claim = (
+            "The sole native process failed closed before `agents.create` and preset mount; "
+            f"`{native['terminal_coordinate']}` is the first missing lifecycle marker. "
+            "The terminal proves zero agent, turn, model and provider activity, not a "
+            "successful native mount."
+        )
     return f"""# Check-in lifecycle conformance repair report
 
 - Result: `{evidence['result']}`
@@ -995,9 +1007,8 @@ def render_report(evidence: dict[str, Any]) -> str:
 - Model / provider / network / Docker / database requests: `0 / 0 / {native['counts']['network_attempts']} / 0 / 0`
 - Process and disposable-root absence: `{str(native['cleanup']['process_absent']).lower()} / {str(native['cleanup']['disposable_root_absent']).lower()}`
 
-This proves only the closed lifecycle projection and one pinned rc.7
-provider-disabled `agents.create({{setup}})` mount. It is not attempt 006, an
-occupied DeepSeek worker, a model-quality result or product/runtime admission.
+{native_claim} It is not attempt 006, an occupied DeepSeek worker, a
+model-quality result or product/runtime admission.
 """
 
 

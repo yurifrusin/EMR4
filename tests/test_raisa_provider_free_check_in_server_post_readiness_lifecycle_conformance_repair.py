@@ -220,3 +220,13 @@ def test_controller_has_no_attempt_006_docker_database_or_product_import() -> No
         "DEEPSEEK_API_KEY",
     ):
         assert forbidden not in source
+
+
+def test_failed_native_report_does_not_claim_agent_creation_or_mount() -> None:
+    terminal = repair._load_json(repair.PROBE_TERMINAL_PATH)
+    report = repair.render_report(
+        {"result": "failed_closed", "native_probe": terminal}
+    )
+    assert "failed closed before `agents.create` and preset mount" in report
+    assert "not a successful native mount" in report
+    assert "one pinned rc.7\nprovider-disabled `agents.create" not in report
