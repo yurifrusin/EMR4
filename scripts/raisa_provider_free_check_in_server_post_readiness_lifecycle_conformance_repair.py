@@ -89,10 +89,17 @@ ARTIFACT_ROLES = {
     "efficacy_reading": "efficacy-reading.json",
 }
 NATIVE_INSTALLATION_ID = "deepseek-check-in-attachment-observability-native-001"
-NATIVE_INSTALLATION_ROOT = (
-    ROOT.parent / "EMR4-worktrees" / NATIVE_INSTALLATION_ID
-)
-DISPOSABLE_PARENT = ROOT.parent / "EMR4-worktrees"
+
+
+def _worker_root(repo_root: Path) -> Path:
+    parent = repo_root.resolve().parent
+    if parent.name.casefold() == "emr4-worktrees":
+        return parent
+    return parent / "EMR4-worktrees"
+
+
+DISPOSABLE_PARENT = _worker_root(ROOT)
+NATIVE_INSTALLATION_ROOT = DISPOSABLE_PARENT / NATIVE_INSTALLATION_ID
 
 
 class LifecycleRepairError(RuntimeError):

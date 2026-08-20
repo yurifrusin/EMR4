@@ -1,0 +1,52 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair",
+        "--check"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/check-in-lifecycle-gemini-bcd3f594",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import json; from pathlib import Path; from jsonschema import Draft202012Validator; b=Path('orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair'); s=json.loads((b/'evidence.schema.json').read_text(encoding='utf-8')); t=json.loads((b/'native-probe-terminal.json').read_text(encoding='utf-8')); e=json.loads((b/'repair-evidence.json').read_text(encoding='utf-8')); Draft202012Validator(s).validate(t); Draft202012Validator(s).validate(e); assert e['source_head']=='5faa13b6c47034a8864e1ef5d10b3f3d9d920e0a'; assert t['result']=='failed_closed'; assert t['terminal_coordinate']=='PRESET_VALIDATION_PASSED'; assert t['counts']=={'agent_sessions':0,'automatic_retries':0,'broker_requests':0,'database_invocations':0,'docker_invocations':0,'model_requests':0,'native_processes':1,'network_attempts':0,'provider_requests':0,'turns':0}; assert all(t['cleanup'].values()); r=(b/'repair-report.md').read_text(encoding='utf-8'); assert 'failed closed before `agents.create` and preset mount' in r and 'not a successful native mount' in r"
+      ]
+    },
+    {"id": "C07", "argv": ["git", "diff", "--check", "2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd..0fd047447605d91fbda35c59b0fef711826699ad"]},
+    {"id": "C08", "argv": ["git", "diff", "--name-only", "2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd..0fd047447605d91fbda35c59b0fef711826699ad"]},
+    {"id": "C09", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

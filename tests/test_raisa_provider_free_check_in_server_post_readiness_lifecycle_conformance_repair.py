@@ -65,6 +65,16 @@ def test_native_installation_is_exact_rc7_and_method_shape_bound() -> None:
     assert all(projection["method_checks"].values())
 
 
+def test_worker_root_is_stable_from_primary_and_isolated_worktrees() -> None:
+    primary = Path("C:/Users/sarashera/emr4")
+    isolated = Path(
+        "C:/Users/sarashera/EMR4-worktrees/check-in-lifecycle-gemini-candidate"
+    )
+    expected = Path("C:/Users/sarashera/EMR4-worktrees")
+    assert repair._worker_root(primary) == expected
+    assert repair._worker_root(isolated) == expected
+
+
 def test_dependency_closure_comes_from_both_manifests_and_rejects_omission() -> None:
     contract = _contract()
     reading = repair.derive_test_dependencies(contract)

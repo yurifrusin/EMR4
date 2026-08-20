@@ -1,0 +1,217 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "revision_required",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\check-in-lifecycle-gemini-bcd3f594",
+  "branch": "codex/review-check-in-lifecycle-bcd3f594",
+  "head_before": "0fd047447605d91fbda35c59b0fef711826699ad",
+  "head_after": "0fd047447605d91fbda35c59b0fef711826699ad",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "f47a5bfcebfcb0309b4e04501cee06db711989a8188ea2f9366b109253d39710",
+  "result": "# Independent Veto Review: Check-In Lifecycle Conformance Repair\n\n## 1. Five-Source Rehydration Receipt\n\n- `live_handover_current_baton`: Authoritative baton ref `handoff/current` with protected `master` aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Conductor/integrator: GPT Sol. Independent reviewer: Gemini 3.7 Flash/high. Active task branch: `codex/review-check-in-lifecycle-bcd3f594`.\n- `current_authority_allocation`: Governed under Yuri's standing uninterrupted-development authority (Continuity 208 / Compass 189). Sol owns deterministic architecture, harness repair, and task-branch publication; Gemini 3.7 Flash/high holds exactly one independent read-only candidate veto.\n- `active_plan_and_acceptance`: Bound by `docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-plan.md` and threat delta `docs/security/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-threat-model-delta.md`.\n- `protected_evidence_boundaries`: Immutable attempts 001 through 005 and the consumed native worker terminal are preserved; attempt 006 is absent and unauthorized; zero model/provider/network/Docker/database requests permitted; no product, patient, clinical, appointment, historical, or protected data; no protected-ref movement (`master` and `handoff/current` remain locked); `docs/branding/` and all unrelated untracked files preserved.\n- `git_refs_and_worktree`: Bound worktree `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-lifecycle-gemini-bcd3f594`, bound branch `codex/review-check-in-lifecycle-bcd3f594`, HEAD `0fd047447605d91fbda35c59b0fef711826699ad`, review base `2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd`.\n\n### Active-Operation Latch & Parallelism Assessment\n- **Active Operation Latch**: `orchestration/continuity/ariadne-active-operation-latch/current.json` validated: `status: in_progress`, `operation_id: raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair`, `completed_stage` at machine-resolved Git source `f89677fb17f80e0660f6dd2b72f8cfad09b190d6`, `next_executable_stage: dispatch_one_fresh_gemini_3_7_flash_high_read_only_veto_with_machine_resolved_source_bindings_then_close_honestly_and_freeze_the_narrow_validation_subcoordinate_successor`.\n- **DeepSeek Native Harness**: `declined`, negative leverage (sole worker consumed before provider dispatch, no repeat authorized; mount diagnosed provider-disabled under Sol).\n- **Gemini**: `reserved`, required independent leverage (one read-only veto).\n- **Native Subagents**: `declined`, negative leverage (serial coupled architecture boundary).\n\n---\n\n## 2. Evaluation of Challenges & Findings\n\n### Challenge Assessment Summary\n1. **Worktree & Diff Verification**: Root `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-lifecycle-gemini-bcd3f594`, branch `codex/review-check-in-lifecycle-bcd3f594`, HEAD `0fd047447605d91fbda35c59b0fef711826699ad`, and clean state verified before and after review (`C01`, `C02`, `C09`). Exact diff `2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd..0fd047447605d91fbda35c59b0fef711826699ad` checked cleanly (`C07`, `C08`).\n2. **Server Stdin Lifecycle**: `_start_attached` writes and flushes credentials while leaving parent `attachment.stdin` open; `_stop_attachment` remains the sole cleanup closer and closes at most once.\n3. **Closed 9-Key Server Projection**: Validated against `server-post-readiness.schema.json` with closed enums and bounds (`projection_valid`, `status`, `running`, `exit_code`, `oom_killed`, `state_error_empty`, `restart_count`, `attachment_process`, `attachment_stdin`). Raw Docker fields, strings, and exceptions rejected.\n4. **Separation of Coordinate Families**: Disjoint schemas and mappings maintained; server failures carry `server_post_readiness`, unrelated failures carry `null`, and native coordinates (`native_harness/preset_mount`) never masquerade as Docker or server errors.\n5. **Schema-Generated Generator Controls**: Full 40-character Git bindings, manifest-derived test dependency closure, length-bounded checkpoint rendering (`SAFE_CHECKPOINT`), changed-path SHA-256 map diffing, and canonical artifact roles fail closed under hostile mutations.\n6. **Immutable Native Probe Terminal**: `native-probe-terminal.json` accurately records 1 native process, 0 automatic retries, 0 agent sessions, 0 turns, 0 broker/model/provider/network/Docker/database requests, terminal coordinate `PRESET_VALIDATION_PASSED`, and complete cleanup (`process_absent: true`, `disposable_root_absent: true`).\n7. **No Overclaiming in Evidence/Report**: `repair-evidence.json` and `repair-report.md` record `failed_closed`, emphasizing that the sole native process stopped before `agents.create` and preset mount, asserting negative evidence rather than native mount success.\n8. **Immutable Predecessor Enclosure**: Attempts 001-005 remain byte-exact and immutable; attempt 006 is absent.\n9. **Credential Scrubbing & Sandbox Closure**: Profile patch and controller scrub credentials, disable all unneeded plugins (LLM, bash, pwsh, web), and discard raw stdout/stderr logs.\n10. **Product & Protected Scope Integrity**: Zero product router, model, migration, client, GraphQL, OpenAPI, feature flag, or protected ref modifications.\n11. **Manifest Execution & Verification (FINDING)**: Command manifest execution failed on `C03` (exit code 1) and `C04` (exit code 1).\n12. **Successor Scope**: The successor plan is bounded strictly to splitting the three preset validation subcoordinates without rerunning the consumed attempt.\n\n---\n\n## 3. Material Finding (P1): Path Resolution Defect in Worker Worktrees\n\n### Location\n- File: [scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py](file:///C:/Users/sarashera/EMR4-worktrees/check-in-lifecycle-gemini-bcd3f594/scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py#L91-L95)\n- Lines: 91\u201395, 218\u2013221\n\n### Root Cause\nIn `scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py`:\n```python\nNATIVE_INSTALLATION_ID = \"deepseek-check-in-attachment-observability-native-001\"\nNATIVE_INSTALLATION_ROOT = (\n    ROOT.parent / \"EMR4-worktrees\" / NATIVE_INSTALLATION_ID\n)\nDISPOSABLE_PARENT = ROOT.parent / \"EMR4-worktrees\"\n```\nWhen running in the primary repository (`ROOT = C:\\Users\\sarashera\\emr4`), `ROOT.parent` is `C:\\Users\\sarashera`, so `ROOT.parent / \"EMR4-worktrees\"` resolves to `C:\\Users\\sarashera\\EMR4-worktrees`.\nHowever, when executed inside a worker worktree (`ROOT = C:\\Users\\sarashera\\EMR4-worktrees\\check-in-lifecycle-gemini-bcd3f594`), `ROOT.parent` is already `C:\\Users\\sarashera\\EMR4-worktrees`. As a consequence:\n- `DISPOSABLE_PARENT` incorrectly resolves to `C:\\Users\\sarashera\\EMR4-worktrees\\EMR4-worktrees` (which does not exist).\n- `NATIVE_INSTALLATION_ROOT` incorrectly resolves to `C:\\Users\\sarashera\\EMR4-worktrees\\EMR4-worktrees\\deepseek-check-in-attachment-observability-native-001`.\n\nDuring `verify_native_installation(contract)`:\n```python\nroot = NATIVE_INSTALLATION_ROOT.resolve()\nexpected_parent = DISPOSABLE_PARENT.resolve()\nif root.parent != expected_parent or not root.is_dir() or root.is_symlink():\n    _fail(\"native_installation_root_unavailable\")\n```\nThis causes:\n1. `C03` (`python -m scripts.raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair --check`) to fail with `LifecycleRepairError: native_installation_root_unavailable` (exit code 1).\n2. `C04` (pytest) to fail 2 tests:\n   - `test_native_installation_is_exact_rc7_and_method_shape_bound`\n   - `test_complete_deterministic_gate_has_zero_native_execution`\n   (exit code 1).\n\n### Required Revision\nUpdate `DISPOSABLE_PARENT` and `NATIVE_INSTALLATION_ROOT` in `scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py` to correctly resolve the worktree root directory regardless of whether the script is invoked from the primary repository or from an isolated worker worktree (e.g. `(ROOT.parent if ROOT.parent.name == \"EMR4-worktrees\" else ROOT.parent / \"EMR4-worktrees\")`). Ensure `C03` and `C04` execute with exit code 0 under the review worktree.",
+  "decision_envelope": {
+    "decision": "revision_required",
+    "review": "# Independent Veto Review: Check-In Lifecycle Conformance Repair\n\n## 1. Five-Source Rehydration Receipt\n\n- `live_handover_current_baton`: Authoritative baton ref `handoff/current` with protected `master` aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Conductor/integrator: GPT Sol. Independent reviewer: Gemini 3.7 Flash/high. Active task branch: `codex/review-check-in-lifecycle-bcd3f594`.\n- `current_authority_allocation`: Governed under Yuri's standing uninterrupted-development authority (Continuity 208 / Compass 189). Sol owns deterministic architecture, harness repair, and task-branch publication; Gemini 3.7 Flash/high holds exactly one independent read-only candidate veto.\n- `active_plan_and_acceptance`: Bound by `docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-plan.md` and threat delta `docs/security/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-threat-model-delta.md`.\n- `protected_evidence_boundaries`: Immutable attempts 001 through 005 and the consumed native worker terminal are preserved; attempt 006 is absent and unauthorized; zero model/provider/network/Docker/database requests permitted; no product, patient, clinical, appointment, historical, or protected data; no protected-ref movement (`master` and `handoff/current` remain locked); `docs/branding/` and all unrelated untracked files preserved.\n- `git_refs_and_worktree`: Bound worktree `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-lifecycle-gemini-bcd3f594`, bound branch `codex/review-check-in-lifecycle-bcd3f594`, HEAD `0fd047447605d91fbda35c59b0fef711826699ad`, review base `2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd`.\n\n### Active-Operation Latch & Parallelism Assessment\n- **Active Operation Latch**: `orchestration/continuity/ariadne-active-operation-latch/current.json` validated: `status: in_progress`, `operation_id: raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair`, `completed_stage` at machine-resolved Git source `f89677fb17f80e0660f6dd2b72f8cfad09b190d6`, `next_executable_stage: dispatch_one_fresh_gemini_3_7_flash_high_read_only_veto_with_machine_resolved_source_bindings_then_close_honestly_and_freeze_the_narrow_validation_subcoordinate_successor`.\n- **DeepSeek Native Harness**: `declined`, negative leverage (sole worker consumed before provider dispatch, no repeat authorized; mount diagnosed provider-disabled under Sol).\n- **Gemini**: `reserved`, required independent leverage (one read-only veto).\n- **Native Subagents**: `declined`, negative leverage (serial coupled architecture boundary).\n\n---\n\n## 2. Evaluation of Challenges & Findings\n\n### Challenge Assessment Summary\n1. **Worktree & Diff Verification**: Root `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-lifecycle-gemini-bcd3f594`, branch `codex/review-check-in-lifecycle-bcd3f594`, HEAD `0fd047447605d91fbda35c59b0fef711826699ad`, and clean state verified before and after review (`C01`, `C02`, `C09`). Exact diff `2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd..0fd047447605d91fbda35c59b0fef711826699ad` checked cleanly (`C07`, `C08`).\n2. **Server Stdin Lifecycle**: `_start_attached` writes and flushes credentials while leaving parent `attachment.stdin` open; `_stop_attachment` remains the sole cleanup closer and closes at most once.\n3. **Closed 9-Key Server Projection**: Validated against `server-post-readiness.schema.json` with closed enums and bounds (`projection_valid`, `status`, `running`, `exit_code`, `oom_killed`, `state_error_empty`, `restart_count`, `attachment_process`, `attachment_stdin`). Raw Docker fields, strings, and exceptions rejected.\n4. **Separation of Coordinate Families**: Disjoint schemas and mappings maintained; server failures carry `server_post_readiness`, unrelated failures carry `null`, and native coordinates (`native_harness/preset_mount`) never masquerade as Docker or server errors.\n5. **Schema-Generated Generator Controls**: Full 40-character Git bindings, manifest-derived test dependency closure, length-bounded checkpoint rendering (`SAFE_CHECKPOINT`), changed-path SHA-256 map diffing, and canonical artifact roles fail closed under hostile mutations.\n6. **Immutable Native Probe Terminal**: `native-probe-terminal.json` accurately records 1 native process, 0 automatic retries, 0 agent sessions, 0 turns, 0 broker/model/provider/network/Docker/database requests, terminal coordinate `PRESET_VALIDATION_PASSED`, and complete cleanup (`process_absent: true`, `disposable_root_absent: true`).\n7. **No Overclaiming in Evidence/Report**: `repair-evidence.json` and `repair-report.md` record `failed_closed`, emphasizing that the sole native process stopped before `agents.create` and preset mount, asserting negative evidence rather than native mount success.\n8. **Immutable Predecessor Enclosure**: Attempts 001-005 remain byte-exact and immutable; attempt 006 is absent.\n9. **Credential Scrubbing & Sandbox Closure**: Profile patch and controller scrub credentials, disable all unneeded plugins (LLM, bash, pwsh, web), and discard raw stdout/stderr logs.\n10. **Product & Protected Scope Integrity**: Zero product router, model, migration, client, GraphQL, OpenAPI, feature flag, or protected ref modifications.\n11. **Manifest Execution & Verification (FINDING)**: Command manifest execution failed on `C03` (exit code 1) and `C04` (exit code 1).\n12. **Successor Scope**: The successor plan is bounded strictly to splitting the three preset validation subcoordinates without rerunning the consumed attempt.\n\n---\n\n## 3. Material Finding (P1): Path Resolution Defect in Worker Worktrees\n\n### Location\n- File: [scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py](file:///C:/Users/sarashera/EMR4-worktrees/check-in-lifecycle-gemini-bcd3f594/scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py#L91-L95)\n- Lines: 91\u201395, 218\u2013221\n\n### Root Cause\nIn `scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py`:\n```python\nNATIVE_INSTALLATION_ID = \"deepseek-check-in-attachment-observability-native-001\"\nNATIVE_INSTALLATION_ROOT = (\n    ROOT.parent / \"EMR4-worktrees\" / NATIVE_INSTALLATION_ID\n)\nDISPOSABLE_PARENT = ROOT.parent / \"EMR4-worktrees\"\n```\nWhen running in the primary repository (`ROOT = C:\\Users\\sarashera\\emr4`), `ROOT.parent` is `C:\\Users\\sarashera`, so `ROOT.parent / \"EMR4-worktrees\"` resolves to `C:\\Users\\sarashera\\EMR4-worktrees`.\nHowever, when executed inside a worker worktree (`ROOT = C:\\Users\\sarashera\\EMR4-worktrees\\check-in-lifecycle-gemini-bcd3f594`), `ROOT.parent` is already `C:\\Users\\sarashera\\EMR4-worktrees`. As a consequence:\n- `DISPOSABLE_PARENT` incorrectly resolves to `C:\\Users\\sarashera\\EMR4-worktrees\\EMR4-worktrees` (which does not exist).\n- `NATIVE_INSTALLATION_ROOT` incorrectly resolves to `C:\\Users\\sarashera\\EMR4-worktrees\\EMR4-worktrees\\deepseek-check-in-attachment-observability-native-001`.\n\nDuring `verify_native_installation(contract)`:\n```python\nroot = NATIVE_INSTALLATION_ROOT.resolve()\nexpected_parent = DISPOSABLE_PARENT.resolve()\nif root.parent != expected_parent or not root.is_dir() or root.is_symlink():\n    _fail(\"native_installation_root_unavailable\")\n```\nThis causes:\n1. `C03` (`python -m scripts.raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair --check`) to fail with `LifecycleRepairError: native_installation_root_unavailable` (exit code 1).\n2. `C04` (pytest) to fail 2 tests:\n   - `test_native_installation_is_exact_rc7_and_method_shape_bound`\n   - `test_complete_deterministic_gate_has_zero_native_execution`\n   (exit code 1).\n\n### Required Revision\nUpdate `DISPOSABLE_PARENT` and `NATIVE_INSTALLATION_ROOT` in `scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py` to correctly resolve the worktree root directory regardless of whether the script is invoked from the primary repository or from an isolated worker worktree (e.g. `(ROOT.parent if ROOT.parent.name == \"EMR4-worktrees\" else ROOT.parent / \"EMR4-worktrees\")`). Ensure `C03` and `C04` execute with exit code 0 under the review worktree.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair",
+          "--check"
+        ],
+        "exit_code": 1
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/check-in-lifecycle-gemini-bcd3f594",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py"
+        ],
+        "exit_code": 1
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-c",
+          "import json; from pathlib import Path; from jsonschema import Draft202012Validator; b=Path('orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair'); s=json.loads((b/'evidence.schema.json').read_text(encoding='utf-8')); t=json.loads((b/'native-probe-terminal.json').read_text(encoding='utf-8')); e=json.loads((b/'repair-evidence.json').read_text(encoding='utf-8')); Draft202012Validator(s).validate(t); Draft202012Validator(s).validate(e); assert e['source_head']=='5faa13b6c47034a8864e1ef5d10b3f3d9d920e0a'; assert t['result']=='failed_closed'; assert t['terminal_coordinate']=='PRESET_VALIDATION_PASSED'; assert t['counts']=={'agent_sessions':0,'automatic_retries':0,'broker_requests':0,'database_invocations':0,'docker_invocations':0,'model_requests':0,'native_processes':1,'network_attempts':0,'provider_requests':0,'turns':0}; assert all(t['cleanup'].values()); r=(b/'repair-report.md').read_text(encoding='utf-8'); assert 'failed closed before `agents.create` and preset mount' in r and 'not a successful native mount' in r"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd..0fd047447605d91fbda35c59b0fef711826699ad"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd..0fd047447605d91fbda35c59b0fef711826699ad"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "2af230accc13020c7665d48d907aa8b6681076c9bdc7cc12cec23207f16602b4",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair",
+        "--check"
+      ],
+      "exit_code": 1
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/check-in-lifecycle-gemini-bcd3f594",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py"
+      ],
+      "exit_code": 1
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import json; from pathlib import Path; from jsonschema import Draft202012Validator; b=Path('orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair'); s=json.loads((b/'evidence.schema.json').read_text(encoding='utf-8')); t=json.loads((b/'native-probe-terminal.json').read_text(encoding='utf-8')); e=json.loads((b/'repair-evidence.json').read_text(encoding='utf-8')); Draft202012Validator(s).validate(t); Draft202012Validator(s).validate(e); assert e['source_head']=='5faa13b6c47034a8864e1ef5d10b3f3d9d920e0a'; assert t['result']=='failed_closed'; assert t['terminal_coordinate']=='PRESET_VALIDATION_PASSED'; assert t['counts']=={'agent_sessions':0,'automatic_retries':0,'broker_requests':0,'database_invocations':0,'docker_invocations':0,'model_requests':0,'native_processes':1,'network_attempts':0,'provider_requests':0,'turns':0}; assert all(t['cleanup'].values()); r=(b/'repair-report.md').read_text(encoding='utf-8'); assert 'failed closed before `agents.create` and preset mount' in r and 'not a successful native mount' in r"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd..0fd047447605d91fbda35c59b0fef711826699ad"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd..0fd047447605d91fbda35c59b0fef711826699ad"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}
