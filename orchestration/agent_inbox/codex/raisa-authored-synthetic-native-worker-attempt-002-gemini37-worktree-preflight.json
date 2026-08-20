@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/gemini37-synthetic-native-worker-attempt-002-veto-005",
+  "branch": "codex/review-synthetic-native-worker-attempt-002-7f14d9eb",
+  "head": "7f14d9eb2490aa0864feb8d70f1dcd9a2422747b",
+  "expected_head": "7f14d9eb2490aa0864feb8d70f1dcd9a2422747b",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "223638b1d9a40583703ee9d8af3f7ec6920230a9209a9bceecefe713854303a9",
+  "command_count": 11,
+  "repository_paths": [],
+  "candidate_paths": [
+    "C:/Users/sarashera/EMR4-worktrees/gemini37-synthetic-native-worker-attempt-002-veto-005/scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+    "C:/Users/sarashera/EMR4-worktrees/gemini37-synthetic-native-worker-attempt-002-veto-005/tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+    "C:/Users/sarashera/EMR4-worktrees/gemini37-synthetic-native-worker-attempt-002-veto-005/orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-terminal.schema.json"
+  ],
+  "serial_repo_root": null,
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}
