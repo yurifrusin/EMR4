@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.governance_clockwork_check_rejection.v1",
+  "operation_id": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+  "recorded_at": "2026-08-21T08:34:24.5936650+10:00",
+  "status": "revision_required",
+  "canonical_mutation": false,
+  "reason": "tick_incident_stage",
+  "detail": "intent_validation_rejected: one or more agent-error observations used stage labels outside the fixed clockwork incident-stage vocabulary",
+  "correction": "Map the affected observations to the admitted closeout stage, register this rejected validation, and rerun the read-only check idempotently."
+}

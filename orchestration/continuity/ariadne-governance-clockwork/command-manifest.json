@@ -2,54 +2,55 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "attempt_003_terminal_relationship_check",
+      "command_id": "structured_seam_deterministic_check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.ariadne_validation_runner",
-        "--manifest",
-        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/postterminal-command-manifest.json",
-        "--repo-root",
-        "C:/Users/sarashera/emr4",
-        "--receipt",
-        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/postterminal-command-validation-receipt.json"
+        "scripts.deepseek_native_harness_provider_free_unclassified_pre_hmr_structured_diagnostic_seam_recovery",
+        "--check"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "attempt_003_provider_free_tests",
+      "command_id": "structured_seam_provider_free_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
+        "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
         "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_active_operation_latch.py",
         "tests/test_current_baton_consistency.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "attempt_003_ruff",
+      "command_id": "structured_seam_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py"
+        "orchestration_harness/native_pre_hmr_diagnostic.py",
+        "scripts/deepseek_native_harness_provider_free_unclassified_pre_hmr_structured_diagnostic_seam_recovery.py",
+        "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "attempt_003_compile",
+      "command_id": "structured_seam_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py"
+        "orchestration_harness/native_pre_hmr_diagnostic.py",
+        "scripts/deepseek_native_harness_provider_free_unclassified_pre_hmr_structured_diagnostic_seam_recovery.py",
+        "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

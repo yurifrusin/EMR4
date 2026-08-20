@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.governance_clockwork_check_rejection.v1",
+  "operation_id": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+  "recorded_at": "2026-08-21T08:32:39.9414929+10:00",
+  "status": "revision_required",
+  "canonical_mutation": false,
+  "reason": "tick_transaction_prepare",
+  "detail": "prospective_projection_invalid: contract_evidence_object_required and node_kind_invalid:architecture",
+  "correction": "Use the schema-admitted tooling node kind and an empty contract-evidence collection while retaining contract artifacts in ordinary evidence and baton acceptance, then rerun the read-only check idempotently."
+}

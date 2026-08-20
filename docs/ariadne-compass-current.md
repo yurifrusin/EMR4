@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Continue source-statically and provider-disabled; do not launch another native Harness process.
+> Exercise the generated wrapper only against authored local failing modules; keep DSH, Harness and every provider surface closed.
 
 ## North star
 
@@ -480,32 +480,32 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Future pre-first-HMR startup failures now preserve one safe bounded stage and cause before local raw streams are deleted. Lineage parent: `raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002`.
 232. **Test whether the recovered native-Harness gears can produce a useful bounded occupied result — Raisa authored-synthetic native Harness bounded-worker attempt 003**
    The attempt remained unsuccessful but now has a safe explicitly unclassified pre-HMR terminal, zero provider spend and exact cleanup. Lineage parent: `deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery`.
+233. **Replace expanding stderr phrase memory with one source-object diagnostic gear — DeepSeek native Harness provider-free unclassified pre-HMR structured diagnostic seam recovery**
+   A future-only closed wrapper and v2 terminal are source-proved while all accepted v1 and consumed evidence stays unchanged. Lineage parent: `raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003`.
 
 ## Current position
 
-**Improve diagnosis without spending another occupied allowance — Raisa authored-synthetic native Harness bounded-worker attempt 003**
+**Prove the JavaScript gear itself before it is allowed near native Harness — DeepSeek native Harness provider-free unclassified pre-HMR structured diagnostic seam recovery**
 
-**Why this proof came next:** Two native attempts have exited before HMR and the accepted safe vocabulary leaves the latest cause unclassified.
+**Why this proof came next:** Source inspection establishes the seam, but static Python fixtures do not prove Node write/rethrow behavior.
 
-The native Harness remains closed from EMR4 worker use while a provider-disabled source-static diagnostic seam is derived.
+The native Harness remains closed while authored local Node failures exercise only the generated wrapper machinery.
 
 ### What this unlocks
 
-- Source-grounded identification of a narrower non-secret typed startup diagnostic coordinate.
-- A deterministic decision whether further Harness investment is technically justified.
+- Actual exclusive sidecar and identical-rethrow evidence from authored Node fixtures.
+- A grounded decision whether a later provider-free native Harness boot is justified.
 
 ### What it does not solve
 
-- No new Harness, worker, broker or provider process.
-- No occupied retry or DeepSeek performance evidence.
-- No product, database, production, deployment or protected-ref authority.
+- No DSH import or native Harness process.
+- No worker, broker, model, provider or occupied retry.
+- No product, data, production, deployment or protected-ref authority.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Bounded opening `model-runtime`: See source evidence.
-- Bounded opening `provider-call`: See source evidence.
-- All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `pii`, `production`, `protected-evidence`, `release`, `security-review`, `stage-3b`, `voice`.
+- All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
 
@@ -1242,6 +1242,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-closeout.md`
 - `docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md`
+- `docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-closeout.md`
 - `docs/diary/diary.css`
 - `docs/diary/diary.html`
 - `docs/diary/diary.js`
@@ -1978,6 +1979,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-pre-dispatch-receipt.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-structured-diagnostic-seam-recovery-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-a3-b3-request-contract-recovery-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-a5-b4-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/model-required-bureau-c3-d3-sol-acceptance.md`
@@ -2024,7 +2026,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-aes-c5-single-generation-destination-conflict-analysis.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-source-review-receipt.json`
-- `orchestration/agent_inbox/codex/raisa-authored-synthetic-native-worker-attempt-003-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-sol-acceptance.md`
@@ -2627,6 +2628,8 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-report.md`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-cost-ledger.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-evidence.json`
@@ -2677,7 +2680,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/product-runtime-envelope.json`
 - `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/product-runtime-envelope.schema.json`
 - `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-terminal.json`
-- `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/diagnosis.md`
 - `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/efficacy-reading.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-cost-ledger.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-evidence.json`
@@ -3601,4 +3603,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 337; continuity graph revision 355._
+_Compass map revision 338; continuity graph revision 356._

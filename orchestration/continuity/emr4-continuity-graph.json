@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 355,
+  "graph_revision": 356,
   "harvests": [],
   "nodes": [
     {
@@ -26183,9 +26183,123 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+      "title": "DeepSeek native Harness provider-free unclassified pre-HMR structured diagnostic seam recovery",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority covers provider-disabled architecture strengthening.",
+          "The active latch forbids every Harness, worker, broker, model and provider process.",
+          "No occupied retry, product change or protected integration is authorised."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-source-object-diagnostic-seam",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the generated entrypoint-import wrapper as the narrowest source-backed pre-serialization diagnostic seam."
+        },
+        {
+          "id": "accept-closed-sanitization-vocabulary",
+          "source": "orchestration_harness/native_pre_hmr_diagnostic.py",
+          "status": "accepted",
+          "summary": "Accept only bounded cause nodes, closed enums and explicit false raw-retention declarations."
+        },
+        {
+          "id": "preserve-v1-and-consumed-controller",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-structured-diagnostic-seam-recovery-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Keep the accepted v1 terminal and consumed controller byte-identical; the v2 terminal and future envelope remain separate."
+        },
+        {
+          "id": "reject-runtime-and-attempt-003-reclassification",
+          "source": "docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-closeout.md",
+          "status": "rejected",
+          "summary": "Reject every claim that the wrapper ran, Harness or DeepSeek was reached, or attempt 003 gained a semantic cause."
+        },
+        {
+          "id": "accept-contained-seam-workflow-corrections",
+          "source": "docs/ariadne-agent-error-correction-register-revision-579.md",
+          "status": "accepted",
+          "summary": "Accept the isolated-boundary, focused-test and closeout-control corrections with zero open incident."
+        }
+      ],
+      "claim_scope": [
+        "The pinned rc.7 launcher exposes one future rejected-import error-object seam before stderr serialization.",
+        "The generated wrapper writes only a closed non-secret diagnostic and rethrows the identical value.",
+        "The separate v2 terminal and future controller envelope preserve accepted v1 and consumed evidence.",
+        "Six installed source files and eleven hostile fixtures pass deterministic inspection.",
+        "No Node, Harness, broker, worker, model, provider or raw-attempt-stream activity occurred.",
+        "Attempt 003 remains unclassified and native Harness readiness remains unproved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-report.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-structured-diagnostic-seam-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-diagnostic-seam-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-diagnostic-seam-recovery-postcompaction-closeout-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-diagnostic-seam-recovery-postcompaction-closeout-corrected-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/clockwork-publication-attempt-001-postcondition-rejected-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/native_pre_hmr_diagnostic.py",
+          "scripts/deepseek_native_harness_provider_free_unclassified_pre_hmr_structured_diagnostic_seam_recovery.py",
+          "docs/ariadne-agent-error-correction-register-revision-579.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-unclassified-pre-hmr-structured-diagnostic-seam-recovery.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The generated JavaScript wrapper has not executed.",
+        "No native Harness, worker, broker, model or provider process has run.",
+        "Attempt 003 remains unclassified and consumed without retry authority.",
+        "Product, data, ordinary-practice, deployment and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-21T08:24:15.9013739+10:00",
+      "updated_at": "2026-08-21T08:24:15.9013739+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "4b09bc3665bed77ed7d8cd6f50dc793d1e35d2de",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-21T07:35:11.0925861+10:00"
+  "updated_at": "2026-08-21T08:24:15.9013739+10:00"
 }

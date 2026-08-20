@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
-  "active_tranche": "DeepSeek native Harness provider-free unclassified pre-HMR structured diagnostic seam recovery",
-  "objective": "Derive and deterministically prove the narrowest non-secret structured diagnostic seam for currently unclassified native-Harness failures before the first HMR event, using installed source and hostile fixtures only and launching no Harness, worker, broker or provider request.",
+  "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+  "active_tranche": "DeepSeek native Harness provider-free structured diagnostic wrapper Node fixture rehearsal",
+  "objective": "Execute the generated wrapper only against authored local failing Node modules and deterministically prove exclusive safe sidecar creation, identical rejection, bounded validation and exact cleanup without importing DSH or launching Harness, broker, worker, model or provider activity.",
   "status": "in_progress",
-  "source_head": "5bcaf43d7843d19642ee7fa335a1cb125909600f",
-  "authority_source": "Yuri's standing uninterrupted-development authority after the completed single occupied attempt, constrained by the attempt-003 no-retry boundary and the provider-disabled architecture-strengthening sequence.",
+  "source_head": "4b09bc3665bed77ed7d8cd6f50dc793d1e35d2de",
+  "authority_source": "Yuri's standing uninterrupted-development authority, constrained to the dependency-satisfied provider-free diagnostic-strengthening course and no occupied retry.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003 at the machine-resolved source.",
-    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_source_static_no_process_diagnostic_contract",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_authored_node_fixture_execution_contract",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,9 +34,10 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_disabled_source_static_unclassified_pre_hmr_diagnostic_seam_only",
-    "no_native_harness_broker_worker_or_provider_process",
-    "no_attempt_003_retry_resume_overwrite_or_reclassification",
+    "provider_free_authored_local_node_fixture_wrapper_only",
+    "no_dsh_import_or_native_harness_process",
+    "no_broker_worker_model_or_provider_process_or_request",
+    "no_occupied_attempt_retry_resume_overwrite_or_reclassification",
     "attempts_001_002_and_003_terminal_and_consumed_evidence_remain_immutable",
     "no_raw_startup_stream_reconstruction_or_retention",
     "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",

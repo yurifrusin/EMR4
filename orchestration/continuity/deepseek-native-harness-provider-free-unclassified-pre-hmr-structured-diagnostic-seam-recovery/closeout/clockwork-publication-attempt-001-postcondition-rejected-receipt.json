@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.governance_clockwork_publication_postcondition_rejection.v1",
+  "operation_id": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+  "recorded_at": "2026-08-21T08:39:57.6262960+10:00",
+  "status": "revision_required",
+  "generation_id": "gen-8a13bfe4b9a4caf965ab4681f861d5c5b363dad168d909be4e238b8a35ce9cd8",
+  "canonical_mutation": true,
+  "postcondition": "tests/test_current_baton_consistency.py::test_current_rows_preserve_closed_surface_boundary",
+  "detail": "The derived next-operation latch omitted no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting, so the post-publication closed-surface boundary assertion failed.",
+  "disposition": "rollback_then_correct_and_republish",
+  "correction": "Use the clockwork rollback to restore the previous byte-bound generation, add the omitted unchanged closed boundary to the next-operation boundary input, register the rejected publication, then rerun check and publish."
+}

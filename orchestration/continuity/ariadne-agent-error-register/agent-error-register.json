@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 578,
+  "register_revision": 579,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -28938,6 +28938,222 @@
       "incident_id": "AER-0732",
       "attempt_id": "clock-8cf562498bcde53189470bc2",
       "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+      "role": "orchestrator",
+      "resource_id": "accepted-native-startup-terminal-and-consumed-controller-source",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A descendant diagnostic seam must preserve the accepted v1 terminal, consumed controller and predecessor evidence byte-for-byte.",
+      "observed_error": "The first draft added v2 behavior directly to both accepted sources, causing the compatibility evidence equality check to report evidence_not_current.",
+      "detection_method": "The provider-free compatibility suite rejected before staging, commit, runtime or provider activity.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.descendant_diagnostic_draft_mutated_accepted_v1_and_consumed_controller",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Move v2 terminal and future controller envelope wholly into the new seam component and restore both accepted sources byte-for-byte.",
+        "prevention_control": "The deterministic recovery asserts the accepted controller insertion point and historical v1 terminal bytes without editing either source.",
+        "evidence_paths": [
+          "orchestration_harness/native_pre_hmr_diagnostic.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-evidence.json"
+        ]
+      },
+      "incident_id": "AER-0733",
+      "attempt_id": "clock-d6673b272909e511fc6582cf",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+      "role": "orchestrator",
+      "resource_id": "provider-disabled-test-selection",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A descendant suite must not rerun immutable historical-report equality nodes already superseded by the accepted attempt-003 controller source.",
+      "observed_error": "The first suite repeated two predecessor equality tests that compare the current controller with its pre-attempt-003 digest and returned evidence_not_current.",
+      "detection_method": "Exactly two historical equality failures appeared alongside the first-draft compatibility rejection; zero runtime/provider activity occurred.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-closeout.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.repeated_overbroad_historical_equality_test_selection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the focused descendant suite covering the new seam, current accepted controller and immutable attempt-003 terminal.",
+        "prevention_control": "The closeout manifest names only current descendant tests and leaves the historical report-regeneration nodes immutable.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py"
+        ]
+      },
+      "incident_id": "AER-0734",
+      "attempt_id": "clock-1a9dec238cb843c8ef9310fc",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+      "role": "orchestrator",
+      "resource_id": "governance-clockwork-closeout-intent",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A clockwork intent must use a schema-admitted Continuity node kind and typed contract-evidence objects, or an empty contract-evidence list.",
+      "observed_error": "The first read-only clockwork check rejected node kind architecture and three string-valued contract-evidence entries before canonical mutation.",
+      "detection_method": "The clockwork transaction-prepare gate returned node_kind_invalid and contract_evidence_object_required with canonical mutation false.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/clockwork-check-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_intent_invalid_node_kind_and_untyped_contract_evidence",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the admitted tooling node kind and an empty typed contract-evidence collection; retain the contract artifacts in ordinary evidence and baton acceptance.",
+        "prevention_control": "The clockwork read-only transaction-prepare gate remains mandatory before every publish and owns schema validation.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-continuity-graph.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0735",
+      "attempt_id": "clock-68de1edf6595240c9062e6f0",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+      "role": "orchestrator",
+      "resource_id": "postcompaction-five-source-rehydration-receipt",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Descriptive rehydration evidence must not repeat Git object IDs; the preflight's machine snapshot alone owns exact Git-ref evidence.",
+      "observed_error": "The first post-compaction runtime state repeated two full Git object IDs in descriptive source evidence, so preflight returned git_refs_evidence_manual_object_id_forbidden.",
+      "detection_method": "The fresh orchestrator preflight emitted a preserved revision_required receipt with manual object count two before dispatch, commit, push or canonical mutation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-diagnostic-seam-recovery-postcompaction-closeout-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.postcompaction_source_evidence_repeated_machine_owned_git_object_ids",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove Git object IDs from descriptive source evidence and regenerate a distinct corrected receipt from the unchanged runtime boundary.",
+        "prevention_control": "The preflight's machine_snapshot_only binding continues to reject every manually supplied Git object ID in source evidence.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-diagnostic-seam-recovery-postcompaction-closeout-runtime-state.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-diagnostic-seam-recovery-postcompaction-closeout-corrected-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0736",
+      "attempt_id": "clock-88127992deec8f77afdff67a",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+      "role": "orchestrator",
+      "resource_id": "governance-clockwork-agent-error-observations",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Clockwork incident observations must use the fixed incident-stage vocabulary before transaction preparation.",
+      "observed_error": "The corrected closeout added two descriptive but unadmitted stage labels, and the next read-only clockwork check rejected tick_incident_stage.",
+      "detection_method": "Intent validation stopped before command execution or canonical mutation and returned ClockworkTickRejection tick_incident_stage.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/clockwork-check-attempt-002-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_incident_observations_used_unadmitted_stage_labels",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Map both observations to the admitted closeout stage and add this rejected validation as a separate closed observation.",
+        "prevention_control": "The clockwork intent validator remains the vocabulary owner and executes before any manifest command or canonical projection.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0737",
+      "attempt_id": "clock-415761a1e1085556bf62013d",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+      "role": "orchestrator",
+      "resource_id": "governance-clockwork-next-operation-protected-boundaries",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every derived next-operation latch must retain the explicit no ordinary-practice enablement, feature-flag, allowlist or command-mounting boundary required by the live baton consistency contract.",
+      "observed_error": "The first canonical publication omitted that exact boundary token from the otherwise closed next-operation boundary list, and the post-publication baton test failed.",
+      "detection_method": "The serial post-publication suite failed exactly test_current_rows_preserve_closed_surface_boundary after one publication; no Harness, provider or protected-ref action occurred.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/clockwork-publication-attempt-001-postcondition-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.next_operation_boundaries_omitted_required_ordinary_practice_closed_token",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Roll back the rejected generation byte-exactly, add the omitted boundary token to the only clockwork input and republish through the full check/postcondition sequence.",
+        "prevention_control": "The current-baton consistency test remains in the closeout manifest and is rerun after every publication before commit.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0738",
+      "attempt_id": "clock-e1a2d2b4c654edd472c5b039",
+      "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"
     }

@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 337,
-  "updated_at": "2026-08-21T07:35:11.0925861+10:00",
-  "source_graph_revision": 355,
-  "orientation_statement": "Continue source-statically and provider-disabled; do not launch another native Harness process.",
+  "map_revision": 338,
+  "updated_at": "2026-08-21T08:24:15.9013739+10:00",
+  "source_graph_revision": 356,
+  "orientation_statement": "Exercise the generated wrapper only against authored local failing modules; keep DSH, Harness and every provider surface closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4481,25 +4481,35 @@
         "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/efficacy-reading.json",
         "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-failed-closed-closeout.md"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+      "lineage_parent": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+      "strategic_role": "Replace expanding stderr phrase memory with one source-object diagnostic gear",
+      "outcome": "A future-only closed wrapper and v2 terminal are source-proved while all accepted v1 and consumed evidence stays unchanged.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-evidence.json",
+        "docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
-    "strategic_role": "Improve diagnosis without spending another occupied allowance",
-    "why_now": "Two native attempts have exited before HMR and the accepted safe vocabulary leaves the latest cause unclassified.",
-    "outcome": "The native Harness remains closed from EMR4 worker use while a provider-disabled source-static diagnostic seam is derived.",
+    "node_id": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+    "strategic_role": "Prove the JavaScript gear itself before it is allowed near native Harness",
+    "why_now": "Source inspection establishes the seam, but static Python fixtures do not prove Node write/rethrow behavior.",
+    "outcome": "The native Harness remains closed while authored local Node failures exercise only the generated wrapper machinery.",
     "unlocks": [
-      "Source-grounded identification of a narrower non-secret typed startup diagnostic coordinate.",
-      "A deterministic decision whether further Harness investment is technically justified."
+      "Actual exclusive sidecar and identical-rethrow evidence from authored Node fixtures.",
+      "A grounded decision whether a later provider-free native Harness boot is justified."
     ],
     "does_not_solve": [
-      "No new Harness, worker, broker or provider process.",
-      "No occupied retry or DeepSeek performance evidence.",
-      "No product, database, production, deployment or protected-ref authority."
+      "No DSH import or native Harness process.",
+      "No worker, broker, model, provider or occupied retry.",
+      "No product, data, production, deployment or protected-ref authority."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/diagnosis.md",
-      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-worker-attempt-003-sol-acceptance.md"
+      "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-structured-diagnostic-seam-recovery-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-report.md"
     ]
   },
   "decision_horizon": [

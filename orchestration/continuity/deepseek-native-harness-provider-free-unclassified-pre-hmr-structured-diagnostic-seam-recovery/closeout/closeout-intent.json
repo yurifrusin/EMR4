@@ -1,0 +1,447 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+    "title": "DeepSeek native Harness provider-free unclassified pre-HMR structured diagnostic seam recovery",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-21T08:24:15.9013739+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+      "title": "DeepSeek native Harness provider-free unclassified pre-HMR structured diagnostic seam recovery",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority covers provider-disabled architecture strengthening.",
+          "The active latch forbids every Harness, worker, broker, model and provider process.",
+          "No occupied retry, product change or protected integration is authorised."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-source-object-diagnostic-seam",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the generated entrypoint-import wrapper as the narrowest source-backed pre-serialization diagnostic seam."
+        },
+        {
+          "id": "accept-closed-sanitization-vocabulary",
+          "source": "orchestration_harness/native_pre_hmr_diagnostic.py",
+          "status": "accepted",
+          "summary": "Accept only bounded cause nodes, closed enums and explicit false raw-retention declarations."
+        },
+        {
+          "id": "preserve-v1-and-consumed-controller",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-structured-diagnostic-seam-recovery-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Keep the accepted v1 terminal and consumed controller byte-identical; the v2 terminal and future envelope remain separate."
+        },
+        {
+          "id": "reject-runtime-and-attempt-003-reclassification",
+          "source": "docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-closeout.md",
+          "status": "rejected",
+          "summary": "Reject every claim that the wrapper ran, Harness or DeepSeek was reached, or attempt 003 gained a semantic cause."
+        },
+        {
+          "id": "accept-contained-seam-workflow-corrections",
+          "source": "docs/ariadne-agent-error-correction-register-revision-579.md",
+          "status": "accepted",
+          "summary": "Accept the isolated-boundary, focused-test and closeout-control corrections with zero open incident."
+        }
+      ],
+      "claim_scope": [
+        "The pinned rc.7 launcher exposes one future rejected-import error-object seam before stderr serialization.",
+        "The generated wrapper writes only a closed non-secret diagnostic and rethrows the identical value.",
+        "The separate v2 terminal and future controller envelope preserve accepted v1 and consumed evidence.",
+        "Six installed source files and eleven hostile fixtures pass deterministic inspection.",
+        "No Node, Harness, broker, worker, model, provider or raw-attempt-stream activity occurred.",
+        "Attempt 003 remains unclassified and native Harness readiness remains unproved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-report.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-structured-diagnostic-seam-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-diagnostic-seam-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-diagnostic-seam-recovery-postcompaction-closeout-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-diagnostic-seam-recovery-postcompaction-closeout-corrected-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/clockwork-publication-attempt-001-postcondition-rejected-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/native_pre_hmr_diagnostic.py",
+          "scripts/deepseek_native_harness_provider_free_unclassified_pre_hmr_structured_diagnostic_seam_recovery.py",
+          "docs/ariadne-agent-error-correction-register-revision-579.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-unclassified-pre-hmr-structured-diagnostic-seam-recovery.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The generated JavaScript wrapper has not executed.",
+        "No native Harness, worker, broker, model or provider process has run.",
+        "Attempt 003 remains unclassified and consumed without retry authority.",
+        "Product, data, ordinary-practice, deployment and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Replace expanding stderr phrase memory with one source-object diagnostic gear",
+      "outcome": "A future-only closed wrapper and v2 terminal are source-proved while all accepted v1 and consumed evidence stays unchanged.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-evidence.json",
+        "docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Prove the JavaScript gear itself before it is allowed near native Harness",
+      "why_now": "Source inspection establishes the seam, but static Python fixtures do not prove Node write/rethrow behavior.",
+      "outcome": "The native Harness remains closed while authored local Node failures exercise only the generated wrapper machinery.",
+      "unlocks": [
+        "Actual exclusive sidecar and identical-rethrow evidence from authored Node fixtures.",
+        "A grounded decision whether a later provider-free native Harness boot is justified."
+      ],
+      "does_not_solve": [
+        "No DSH import or native Harness process.",
+        "No worker, broker, model, provider or occupied retry.",
+        "No product, data, production, deployment or protected-ref authority."
+      ],
+      "evidence": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-structured-diagnostic-seam-recovery-sol-acceptance.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-report.md"
+      ],
+      "orientation_statement": "Exercise the generated wrapper only against authored local failing modules; keep DSH, Harness and every provider surface closed."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+      "active_tranche": "DeepSeek native Harness provider-free structured diagnostic wrapper Node fixture rehearsal",
+      "objective": "Execute the generated wrapper only against authored local failing Node modules and deterministically prove exclusive safe sidecar creation, identical rejection, bounded validation and exact cleanup without importing DSH or launching Harness, broker, worker, model or provider activity.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, constrained to the dependency-satisfied provider-free diagnostic-strengthening course and no occupied retry.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_authored_node_fixture_execution_contract"
+    },
+    "incidents": [
+      {
+        "incident_id": "accepted-source-boundary-crossed-by-first-seam-draft",
+        "source_id": "pre-hmr-structured-seam-implementation-001",
+        "peers": []
+      },
+      {
+        "incident_id": "historical-equality-test-reselected-by-first-seam-suite",
+        "source_id": "pre-hmr-structured-seam-verification-001",
+        "peers": []
+      },
+      {
+        "incident_id": "closeout-intent-used-invalid-node-kind-and-untyped-contract-evidence",
+        "source_id": "pre-hmr-structured-seam-closeout-check-001",
+        "peers": []
+      },
+      {
+        "incident_id": "postcompaction-receipt-repeated-manual-git-object-evidence",
+        "source_id": "pre-hmr-structured-seam-postcompaction-preflight-001",
+        "peers": []
+      },
+      {
+        "incident_id": "closeout-observations-used-unadmitted-stage-labels",
+        "source_id": "pre-hmr-structured-seam-closeout-check-002",
+        "peers": []
+      },
+      {
+        "incident_id": "first-publication-omitted-required-closed-surface-boundary",
+        "source_id": "pre-hmr-structured-seam-publication-postcondition-001",
+        "peers": []
+      }
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "structured_seam_deterministic_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.deepseek_native_harness_provider_free_unclassified_pre_hmr_structured_diagnostic_seam_recovery", "--check"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "structured_seam_provider_free_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_current_baton_consistency.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "structured_seam_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "orchestration_harness/native_pre_hmr_diagnostic.py", "scripts/deepseek_native_harness_provider_free_unclassified_pre_hmr_structured_diagnostic_seam_recovery.py", "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "structured_seam_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "orchestration_harness/native_pre_hmr_diagnostic.py", "scripts/deepseek_native_harness_provider_free_unclassified_pre_hmr_structured_diagnostic_seam_recovery.py", "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "DeepSeek native Harness provider-free structured diagnostic seam recovery acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/evidence.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-report.md",
+      "orchestration_harness/native_pre_hmr_diagnostic.py",
+      "scripts/deepseek_native_harness_provider_free_unclassified_pre_hmr_structured_diagnostic_seam_recovery.py",
+      "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
+      "docs/ariadne-agent-error-correction-register-revision-579.md",
+      "docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-structured-diagnostic-seam-recovery-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-unclassified-pre-hmr-structured-diagnostic-seam-recovery.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_authored_local_node_fixture_wrapper_only",
+    "no_dsh_import_or_native_harness_process",
+    "no_broker_worker_model_or_provider_process_or_request",
+    "no_occupied_attempt_retry_resume_overwrite_or_reclassification",
+    "attempts_001_002_and_003_terminal_and_consumed_evidence_remain_immutable",
+    "no_raw_startup_stream_reconstruction_or_retention",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "pre-hmr-structured-seam-accepted-source-boundary-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+      "role": "orchestrator",
+      "resource_id": "accepted-native-startup-terminal-and-consumed-controller-source",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A descendant diagnostic seam must preserve the accepted v1 terminal, consumed controller and predecessor evidence byte-for-byte.",
+      "observed_error": "The first draft added v2 behavior directly to both accepted sources, causing the compatibility evidence equality check to report evidence_not_current.",
+      "detection_method": "The provider-free compatibility suite rejected before staging, commit, runtime or provider activity.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.descendant_diagnostic_draft_mutated_accepted_v1_and_consumed_controller",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Move v2 terminal and future controller envelope wholly into the new seam component and restore both accepted sources byte-for-byte.",
+        "prevention_control": "The deterministic recovery asserts the accepted controller insertion point and historical v1 terminal bytes without editing either source.",
+        "evidence_paths": [
+          "orchestration_harness/native_pre_hmr_diagnostic.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-evidence.json"
+        ]
+      },
+      "baton_summary": "records the rejected cross-boundary first draft and byte-identical isolated-v2 correction."
+    },
+    {
+      "attempt_key": "pre-hmr-structured-seam-historical-equality-selection-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+      "role": "orchestrator",
+      "resource_id": "provider-disabled-test-selection",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A descendant suite must not rerun immutable historical-report equality nodes already superseded by the accepted attempt-003 controller source.",
+      "observed_error": "The first suite repeated two predecessor equality tests that compare the current controller with its pre-attempt-003 digest and returned evidence_not_current.",
+      "detection_method": "Exactly two historical equality failures appeared alongside the first-draft compatibility rejection; zero runtime/provider activity occurred.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-closeout.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.repeated_overbroad_historical_equality_test_selection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the focused descendant suite covering the new seam, current accepted controller and immutable attempt-003 terminal.",
+        "prevention_control": "The closeout manifest names only current descendant tests and leaves the historical report-regeneration nodes immutable.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py"
+        ]
+      },
+      "baton_summary": "records the repeated historical equality selection and focused descendant replacement."
+    },
+    {
+      "attempt_key": "pre-hmr-structured-seam-clockwork-schema-shape-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+      "role": "orchestrator",
+      "resource_id": "governance-clockwork-closeout-intent",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A clockwork intent must use a schema-admitted Continuity node kind and typed contract-evidence objects, or an empty contract-evidence list.",
+      "observed_error": "The first read-only clockwork check rejected node kind architecture and three string-valued contract-evidence entries before canonical mutation.",
+      "detection_method": "The clockwork transaction-prepare gate returned node_kind_invalid and contract_evidence_object_required with canonical mutation false.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/clockwork-check-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_intent_invalid_node_kind_and_untyped_contract_evidence",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the admitted tooling node kind and an empty typed contract-evidence collection; retain the contract artifacts in ordinary evidence and baton acceptance.",
+        "prevention_control": "The clockwork read-only transaction-prepare gate remains mandatory before every publish and owns schema validation.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-continuity-graph.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the rejected closeout vocabulary shape and schema-admitted correction before any canonical mutation."
+    },
+    {
+      "attempt_key": "pre-hmr-structured-seam-postcompaction-manual-git-ref-evidence-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+      "role": "orchestrator",
+      "resource_id": "postcompaction-five-source-rehydration-receipt",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Descriptive rehydration evidence must not repeat Git object IDs; the preflight's machine snapshot alone owns exact Git-ref evidence.",
+      "observed_error": "The first post-compaction runtime state repeated two full Git object IDs in descriptive source evidence, so preflight returned git_refs_evidence_manual_object_id_forbidden.",
+      "detection_method": "The fresh orchestrator preflight emitted a preserved revision_required receipt with manual object count two before dispatch, commit, push or canonical mutation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-diagnostic-seam-recovery-postcompaction-closeout-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.postcompaction_source_evidence_repeated_machine_owned_git_object_ids",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove Git object IDs from descriptive source evidence and regenerate a distinct corrected receipt from the unchanged runtime boundary.",
+        "prevention_control": "The preflight's machine_snapshot_only binding continues to reject every manually supplied Git object ID in source evidence.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-diagnostic-seam-recovery-postcompaction-closeout-runtime-state.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-diagnostic-seam-recovery-postcompaction-closeout-corrected-receipt.json"
+        ]
+      },
+      "baton_summary": "records the rejected manual Git-object repetition and corrected machine-snapshot-only receipt."
+    },
+    {
+      "attempt_key": "pre-hmr-structured-seam-clockwork-incident-stage-vocabulary-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+      "role": "orchestrator",
+      "resource_id": "governance-clockwork-agent-error-observations",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Clockwork incident observations must use the fixed incident-stage vocabulary before transaction preparation.",
+      "observed_error": "The corrected closeout added two descriptive but unadmitted stage labels, and the next read-only clockwork check rejected tick_incident_stage.",
+      "detection_method": "Intent validation stopped before command execution or canonical mutation and returned ClockworkTickRejection tick_incident_stage.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/clockwork-check-attempt-002-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_incident_observations_used_unadmitted_stage_labels",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Map both observations to the admitted closeout stage and add this rejected validation as a separate closed observation.",
+        "prevention_control": "The clockwork intent validator remains the vocabulary owner and executes before any manifest command or canonical projection.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the rejected freehand incident-stage labels and fixed-vocabulary closeout correction."
+    },
+    {
+      "attempt_key": "pre-hmr-structured-seam-publication-closed-boundary-omission-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+      "role": "orchestrator",
+      "resource_id": "governance-clockwork-next-operation-protected-boundaries",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every derived next-operation latch must retain the explicit no ordinary-practice enablement, feature-flag, allowlist or command-mounting boundary required by the live baton consistency contract.",
+      "observed_error": "The first canonical publication omitted that exact boundary token from the otherwise closed next-operation boundary list, and the post-publication baton test failed.",
+      "detection_method": "The serial post-publication suite failed exactly test_current_rows_preserve_closed_surface_boundary after one publication; no Harness, provider or protected-ref action occurred.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/clockwork-publication-attempt-001-postcondition-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.next_operation_boundaries_omitted_required_ordinary_practice_closed_token",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Roll back the rejected generation byte-exactly, add the omitted boundary token to the only clockwork input and republish through the full check/postcondition sequence.",
+        "prevention_control": "The current-baton consistency test remains in the closeout manifest and is rerun after every publication before commit.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the rolled-back boundary omission and corrected explicit closed-surface projection."
+    }
+  ]
+}
