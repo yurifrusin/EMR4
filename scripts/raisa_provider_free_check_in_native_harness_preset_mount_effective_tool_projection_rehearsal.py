@@ -56,10 +56,10 @@ DETERMINISTIC_SCHEMA_PATH = CONTINUITY_ROOT / "deterministic-evidence.schema.jso
 NATIVE_SCHEMA_PATH = CONTINUITY_ROOT / "native-terminal.schema.json"
 DETERMINISTIC_EVIDENCE_PATH = CONTINUITY_ROOT / "deterministic-evidence.json"
 DETERMINISTIC_REPORT_PATH = CONTINUITY_ROOT / "deterministic-report.md"
-NATIVE_CHECKPOINT_PATH = CONTINUITY_ROOT / "native-preexecution-checkpoint.json"
-NATIVE_CONSUMED_PATH = CONTINUITY_ROOT / "native-consumed.json"
-NATIVE_TERMINAL_PATH = CONTINUITY_ROOT / "native-terminal.json"
-NATIVE_REPORT_PATH = CONTINUITY_ROOT / "native-report.md"
+NATIVE_CHECKPOINT_PATH = CONTINUITY_ROOT / "native-preexecution-checkpoint-attempt-002.json"
+NATIVE_CONSUMED_PATH = CONTINUITY_ROOT / "native-consumed-attempt-002.json"
+NATIVE_TERMINAL_PATH = CONTINUITY_ROOT / "native-terminal-attempt-002.json"
+NATIVE_REPORT_PATH = CONTINUITY_ROOT / "native-report-attempt-002.md"
 
 CONTRACT_SCHEMA = "ariadne.check_in_preset_mount_effective_tool_contract.v1"
 DETERMINISTIC_SCHEMA = (
@@ -70,7 +70,7 @@ RUNNER_TERMINAL_SCHEMA = "emr4.check-in-preset-mount-effective-tool-runner.v1"
 NATIVE_TERMINAL_SCHEMA = (
     "ariadne.check_in_preset_mount_effective_tool_native_terminal.v1"
 )
-NATIVE_ATTEMPT_ID = "check-in-preset-mount-effective-tool-native-001"
+NATIVE_ATTEMPT_ID = "check-in-preset-mount-effective-tool-native-002"
 EXPECTED_TOOLS = ["edit", "glob", "read"]
 SUCCESS_CODE = "EFFECTIVE_TOOL_COMPOSITION_PASSED"
 ROOT_FAILURE_CODE = "EFFECTIVE_ROOT_ROSTER_MISMATCH"
@@ -156,6 +156,13 @@ def load_contract(path: Path = CONTRACT_PATH) -> dict[str, Any]:
         raise PresetMountProjectionError("contract_profile_mismatch")
     native = value.get("native", {})
     if native != {
+        "failed_prelaunch_attempt": {
+            "attempt_id": "check-in-preset-mount-effective-tool-native-001",
+            "terminal_code": "NATIVE_PRELAUNCH_INSTALLATION_PATH_PRECREATED",
+            "native_process_count": 0,
+            "automatic_retry_count": 0,
+            "resume_permitted": False,
+        },
         "attempt_id": NATIVE_ATTEMPT_ID,
         "process_limit": 1,
         "automatic_retry_limit": 0,
@@ -706,7 +713,7 @@ def render_native_report(value: dict[str, Any]) -> str:
 - Terminal: `{value['terminal_code']}`
 - Events: `{len(value['events'])}/{len(EXPECTED_EVENTS)}`
 - Effective tools: `{', '.join(value['effective_tool_names'])}`
-- Native processes / automatic retries: `1 / 0`
+- Native processes / automatic retries: `{value['native_process_count']} / 0`
 - Agent/session/turn/broker/model/provider/network/Docker/database counts: all `0`
 - Process and disposable-root absence: `{str(value['cleanup']['process_absent']).lower()} / {str(value['cleanup']['disposable_root_absent']).lower()}`
 
@@ -761,16 +768,19 @@ def execute_native() -> dict[str, Any]:
         tarball = root / "dsh-0.1.0-rc.7.tgz"
         workspace.mkdir()
         profile_dir.mkdir(parents=True)
-        proof.mkdir(parents=True)
         guard_path.write_bytes(network_guard_source())
         tarball.write_bytes(blob.read_bytes())
         environment, removed_environment_names = build_child_environment(
             home, guard_path, network_path
         )
+        failure = "NATIVE_PRELAUNCH_OFFLINE_INSTALL_FAILED"
         package_root, _ = _offline_install(root, tarball, environment)
+        proof.mkdir(parents=True)
+        failure = "NATIVE_PRELAUNCH_PACKAGE_VALIDATION_FAILED"
         _verify_installed_source(package_root, old_contract)
         native_predecessor.validate_installed_packages(package_root, old_contract)
 
+        failure = "NATIVE_PRELAUNCH_PROFILE_MATERIALIZATION_FAILED"
         (profile_dir / "package.json").write_text(
             json.dumps(
                 {
@@ -811,6 +821,7 @@ def execute_native() -> dict[str, Any]:
         )
         patch_path = profile_dir / "cordis.patch.yml"
         patch_path.write_bytes(initial)
+        failure = "NATIVE_PRELAUNCH_LAUNCH_RESOLUTION_FAILED"
         node = shutil.which("node")
         if node is None:
             raise PresetMountProjectionError("node_not_found")
@@ -891,9 +902,7 @@ def execute_native() -> dict[str, Any]:
             raise PresetMountProjectionError("cleanup_root_escape")
         shutil.rmtree(root)
 
-    if not process_started:
-        raise PresetMountProjectionError("prelaunch_failed_before_process")
-    process_absent = process is not None and process.poll() is not None
+    process_absent = process is None or process.poll() is not None
     root_absent = not root.exists()
     success = (
         exit_code == 0
@@ -918,7 +927,7 @@ def execute_native() -> dict[str, Any]:
         "effective_tool_count": (
             runner_terminal["effective_tool_count"] if runner_terminal is not None else 0
         ),
-        "native_process_count": 1,
+        "native_process_count": 1 if process_started else 0,
         "automatic_retry_count": 0,
         "provider_boundary": {
             "credential_environment_names_removed_count": removed_environment_names,

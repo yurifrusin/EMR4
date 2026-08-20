@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import inspect
 import json
 from pathlib import Path
 
@@ -183,6 +184,66 @@ def test_native_schema_rejects_boundary_and_cleanup_broadening() -> None:
     assert cleanup["additionalProperties"] is False
     assert cleanup["properties"]["raw_logs_retained"]["const"] is False
     assert cleanup["properties"]["raw_environment_retained"]["const"] is False
+
+
+def test_offline_install_owns_installation_root_before_proof_materialisation() -> None:
+    source = inspect.getsource(subject.execute_native)
+    assert source.index("package_root, _ = _offline_install") < source.index(
+        "proof.mkdir(parents=True)"
+    )
+    assert "NATIVE_PRELAUNCH_OFFLINE_INSTALL_FAILED" in source
+
+
+def test_attempt_002_uses_fresh_exclusive_lifecycle_paths() -> None:
+    assert subject.NATIVE_ATTEMPT_ID == "check-in-preset-mount-effective-tool-native-002"
+    assert subject.NATIVE_CHECKPOINT_PATH.name.endswith("attempt-002.json")
+    assert subject.NATIVE_CONSUMED_PATH.name.endswith("attempt-002.json")
+    assert subject.NATIVE_TERMINAL_PATH.name.endswith("attempt-002.json")
+    assert subject.NATIVE_REPORT_PATH.name.endswith("attempt-002.md")
+
+
+def test_native_schema_admits_zero_process_prelaunch_failure_but_not_zero_process_pass() -> None:
+    schema = json.loads(subject.NATIVE_SCHEMA_PATH.read_text(encoding="utf-8"))
+    terminal = {
+        "schema_version": subject.NATIVE_TERMINAL_SCHEMA,
+        "operation_id": subject.OPERATION_ID,
+        "attempt_id": subject.NATIVE_ATTEMPT_ID,
+        "result": "failed_closed",
+        "terminal_code": "NATIVE_PRELAUNCH_OFFLINE_INSTALL_FAILED",
+        "events": [],
+        "effective_tool_names": [],
+        "effective_tool_count": 0,
+        "native_process_count": 0,
+        "automatic_retry_count": 0,
+        "provider_boundary": {
+            "credential_environment_names_removed_count": 0,
+            "agent_session_count": 0,
+            "turn_count": 0,
+            "broker_request_count": 0,
+            "model_request_count": 0,
+            "provider_request_count": 0,
+            "network_attempt_count": 0,
+            "occupied_worker_count": 0,
+            "docker_invocation_count": 0,
+            "database_invocation_count": 0,
+        },
+        "cleanup": {
+            "process_absent": True,
+            "disposable_root_absent": True,
+            "raw_logs_retained": False,
+            "raw_environment_retained": False,
+            "stdout_bytes": 0,
+            "stderr_bytes": 0,
+            "stdout_sha256": "0" * 64,
+            "stderr_sha256": "0" * 64,
+        },
+    }
+    validator = jsonschema.Draft202012Validator(schema)
+    validator.validate(terminal)
+    terminal["result"] = "pass"
+    terminal["terminal_code"] = subject.SUCCESS_CODE
+    with pytest.raises(jsonschema.ValidationError):
+        validator.validate(terminal)
 
 
 def test_missing_checkpoint_fails_before_native_consumption(

@@ -55,7 +55,14 @@
     "runner_inject": ["hmr", "agentPresets", "tools"]
   },
   "native": {
-    "attempt_id": "check-in-preset-mount-effective-tool-native-001",
+    "failed_prelaunch_attempt": {
+      "attempt_id": "check-in-preset-mount-effective-tool-native-001",
+      "terminal_code": "NATIVE_PRELAUNCH_INSTALLATION_PATH_PRECREATED",
+      "native_process_count": 0,
+      "automatic_retry_count": 0,
+      "resume_permitted": false
+    },
+    "attempt_id": "check-in-preset-mount-effective-tool-native-002",
     "process_limit": 1,
     "automatic_retry_limit": 0,
     "timeout_seconds": 75,
