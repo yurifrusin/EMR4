@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.pushover_closeout_receipt.v1",
+  "sent_at": "2026-08-20T22:57:36.3168337+10:00",
+  "sprint": "Native Harness attempt 002 failed closed",
+  "checks": "1 process; 0 DeepSeek calls; 0 retries; exact cleanup; 9/9 deterministic commands",
+  "continuing": "Provider-free pre-HMR startup failure classification; no worker or provider call",
+  "request": "358b76f8-39da-4997-91b6-9ef15dca2616",
+  "status": 1,
+  "delivery": "accepted"
+}

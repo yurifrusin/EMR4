@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.governance_clockwork_check_rejection.v1",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+  "recorded_at": "2026-08-20T23:06:15.9826095+10:00",
+  "status": "revision_required",
+  "canonical_mutation": false,
+  "reason": "tick_incident_causal_claim",
+  "detail": "The first closeout intent used verified_cause for two incident rows where the live clockwork schema admits only observation_only.",
+  "correction": "Use the schema-owned observation_only coordinate for every incident row, retain stronger technical conclusions in accepted supporting evidence, register this rejected check, and rerun the idempotent check."
+}

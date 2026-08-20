@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 575,
+  "register_revision": 576,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-20",
@@ -27997,6 +27997,339 @@
       "incident_id": "AER-0706",
       "attempt_id": "clock-7484b59b26a9588ce1ec8090",
       "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+      "role": "orchestrator",
+      "resource_id": "authored-synthetic-native-worker-controller-broker-handshake",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_controller_to_node_broker",
+      "stage": "dispatch",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "Controller and broker must derive the exact same canonical-object SHA-256 for the reviewed WorkOrder before broker readiness.",
+      "observed_error": "Attempt 001 hashed canonical JSON with a trailing newline while the broker hashed the parsed canonical object without that newline, so the broker rejected before ready and before provider I/O.",
+      "detection_method": "Immutable attempt-001 terminal plus static controller/broker comparison isolated the distinct digest algorithms with zero native, model or provider calls.",
+      "evidence_paths": [
+        "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-001-prelaunch-recovery.md",
+        "orchestration/agent_inbox/antigravity/raisa-authored-synthetic-native-worker-attempt-001-repair-gemini37-review-receipt.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.controller_broker_canonical_object_digest_newline_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the controller environment to the shared canonical-object digest and add a real provider-free controller-to-broker readiness regression.",
+        "prevention_control": "A single imported canonical-object digest owns both sides of every WorkOrder handshake and the real broker seam is exercised before occupied dispatch.",
+        "evidence_paths": [
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py"
+        ]
+      },
+      "incident_id": "AER-0707",
+      "attempt_id": "clock-14033f696daf29f5be5145d0",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+      "role": "orchestrator",
+      "resource_id": "authored-synthetic-native-worker-exact-root-cleanup",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_windows_filesystem",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "Cleanup must preserve the initiating failure coordinate and remove the exact root despite Windows read-only Git objects.",
+      "observed_error": "Attempt 001 cleanup failed on read-only Git object files and the immutable terminal exposed only cleanup failure instead of preserving the earlier broker handshake rejection.",
+      "detection_method": "Separate exact-root cleanup recovery found three read-only Git object files and static terminal ordering showed the initiating coordinate had been overwritten.",
+      "evidence_paths": [
+        "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-001-prelaunch-recovery.md",
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-postterminal-cleanup-recovery.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.occupied_terminal_cleanup_overwrote_initiating_coordinate",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Clear only exact-root read-only attributes during bounded removal and append cleanup failure to the initiating coordinate instead of replacing it.",
+        "prevention_control": "Terminal construction retains the first failure and exact-root cleanup has a bounded Windows read-only callback with literal descendant checks.",
+        "evidence_paths": [
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py"
+        ]
+      },
+      "incident_id": "AER-0708",
+      "attempt_id": "clock-73939f674b216aac0acae28d",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+      "role": "orchestrator",
+      "resource_id": "ariadne-five-source-runtime-state",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Only the machine-generated Git snapshot may own exact object identifiers in the git_refs_and_worktree source.",
+      "observed_error": "The first post-compaction runtime state repeated full Git identifiers in hand-authored git_refs_and_worktree prose.",
+      "detection_method": "The orchestrator preflight returned revision_required with git_refs_evidence_manual_object_id_forbidden before dispatch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-worker-attempt-002-postcompaction-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-worker-attempt-002-postcompaction-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_ref_source_evidence_embedded_manual_object_ids",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace manual identifiers with a statement that the machine snapshot alone owns exact Git objects and rerun preflight.",
+        "prevention_control": "Five-source builders prohibit object-ID literals in narrative Git evidence and project exact refs only from git rev-parse.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-worker-attempt-002-postcompaction-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-worker-attempt-002-postcompaction-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0709",
+      "attempt_id": "clock-eb5e21bb288b5b596ce902a1",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+      "role": "orchestrator",
+      "resource_id": "windows-owned-process-absence-reading",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "powershell_cim_read_only",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Process-absence readings must select the owned executable tree and cannot match the diagnostic command containing the search text.",
+      "observed_error": "The first broad CommandLine substring query counted its own PowerShell diagnostic as one matching process.",
+      "detection_method": "Preparation still reported zero native processes; an immediate executable-qualified node.exe query returned zero and remained zero through preexecution.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/preparation-verification.json",
+        "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-worker-attempt-002-native-preexecution-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.process_absence_query_self_matched_command_text",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Qualify the owned process reading by node.exe plus the exact Harness/broker command-line identities.",
+        "prevention_control": "Owned-process absence uses executable-qualified process-tree predicates rather than unqualified command-text substring searches.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/preparation-verification.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-terminal.json"
+        ]
+      },
+      "incident_id": "AER-0710",
+      "attempt_id": "clock-fc3095a38140193c3334665f",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+      "role": "orchestrator",
+      "resource_id": "ariadne-validation-runner-cli",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The deterministic validation runner must receive its exact schema-owned --receipt output flag.",
+      "observed_error": "The first post-terminal invocation used --output, so argparse rejected before executing any validation command.",
+      "detection_method": "CLI usage returned the missing --receipt error; no receipt or command result was accepted from that invocation.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/postterminal-command-manifest.json",
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/postterminal-command-validation-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.validation_runner_receipt_flag_recalled_as_output",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Invoke the runner with --receipt and accept only the resulting nine-command terminal receipt.",
+        "prevention_control": "Validation-runner calls are generated from the parser contract or a reusable wrapper rather than reconstructed from memory.",
+        "evidence_paths": [
+          "scripts/ariadne_validation_runner.py",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/postterminal-command-validation-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0711",
+      "attempt_id": "clock-7fcf907d2847e343feacc827",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+      "role": "implementer",
+      "resource_id": "deepseek-native-harness-rc7-worker-attempt-002",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "deepseek_native_harness",
+      "stage": "implementation",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The sole checkpointed native process must either reach exact HMR/runner/provider coordinates or emit a sanitized semantic startup terminal before raw streams are deleted.",
+      "observed_error": "The process exited 1 before the first HMR event with 7,314 stderr bytes retained only by digest and a generic native_harness_terminal_failure coordinate; no provider request occurred.",
+      "detection_method": "The immutable terminal binds process count, exit, timing, stderr size/digest, zero HMR/runner/provider/tool/change counts and exact cleanup.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-terminal.json",
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/diagnosis.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.native_exit_pre_hmr_unclassified_startup_stderr_deleted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume the attempt without retry, preserve the terminal and route a provider-disabled startup-classification recovery.",
+        "prevention_control": "Before another occupied worker, emit a closed sanitized pre-HMR stage/cause terminal from startup exceptions before deleting raw streams, proved by deterministic hostile fixtures.",
+        "evidence_paths": [
+          "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002-failed-closed-closeout.md",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/efficacy-reading.json"
+        ]
+      },
+      "incident_id": "AER-0712",
+      "attempt_id": "clock-645c962f892960263ffa8489",
+      "origin": "harness",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+      "role": "orchestrator",
+      "resource_id": "ariadne-clockwork-incident-intake",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Clockwork incident intake accepts only the schema-owned observation_only causal-claim coordinate and derives stronger causal meaning elsewhere from accepted evidence.",
+      "observed_error": "The first attempt-002 closeout check supplied verified_cause for two otherwise bounded historical observations, so validation rejected before canonical mutation.",
+      "detection_method": "The clockwork check raised tick_incident_causal_claim with canonical state unchanged.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+        "orchestration_harness/governance_clockwork_tick.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_incident_causal_claim_recalled_outside_schema_enum",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Project every incident row with the schema-owned observation_only coordinate and preserve verified technical conclusions in the supporting evidence and baton summary.",
+        "prevention_control": "Closeout-intent incident rows use the clockwork validator constant rather than a hand-recalled causal-claim vocabulary.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0713",
+      "attempt_id": "clock-64b61f49da15dc30d2b50a86",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+      "role": "orchestrator",
+      "resource_id": "ariadne-clockwork-incident-intake",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every incident must project its detailed lifecycle coordinate into the clockwork's closed dispatch, implementation, verification, review, acceptance, integration or closeout stage vocabulary.",
+      "observed_error": "The corrected closeout intent still used cleanup, rehydration and preparation as incident stages, so the second check rejected before canonical mutation.",
+      "detection_method": "The idempotent clockwork check raised tick_incident_stage with canonical state unchanged.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+        "orchestration_harness/governance_clockwork_tick.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_incident_stage_recalled_outside_schema_enum",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Map cleanup to closeout, rehydration to acceptance and preparation to dispatch while retaining detailed coordinates in each incident narrative.",
+        "prevention_control": "Incident stage projection is generated from the clockwork validator's closed stage vocabulary rather than reconstructed from lifecycle prose.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0714",
+      "attempt_id": "clock-137dcafb1ef259cd93a2af8f",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+      "role": "orchestrator",
+      "resource_id": "ariadne-clockwork-prospective-register-revision",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The exact human-readable prospective register revision must exist and bind the complete derived incident reading before transactional evidence projection validates its source path.",
+      "observed_error": "The third closeout check referenced revision 576 before its exact nine-incident reading document existed, so prospective projection rejected the missing evidence source.",
+      "detection_method": "The clockwork check raised tick_transaction_prepare with evidence_not_found for the prospective revision and canonical state remained unchanged.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/closeout/clockwork-check-attempt-003-rejected-receipt.json",
+        "orchestration_harness/governance_clockwork_tick.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_prospective_register_revision_source_missing_before_projection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Write the exact prospective revision reading for AER-0707 through AER-0715 before rerunning the idempotent clockwork check.",
+        "prevention_control": "Incident closeout preparation derives the revision number, count and new IDs from the current register plus admitted observations before transaction projection.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-576.md",
+          "orchestration_harness/governance_clockwork_tick.py"
+        ]
+      },
+      "incident_id": "AER-0715",
+      "attempt_id": "clock-362c9d0a610e815413f69772",
+      "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"
     }

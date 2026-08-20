@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will next freeze one authored-synthetic non-product monitored DeepSeek worker rehearsal; no occupied request starts before its own exact plan, candidate, review and pre-dispatch checkpoint.
+> EMR4 will next recover only provider-disabled pre-HMR startup classification and terminalization; no new worker or DeepSeek request is admitted.
 
 ## North star
 
@@ -474,26 +474,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The rc.7 root cause is proved and one reviewed provider-disabled native process passes the exact preset-row, bytes, length and digest coordinates with zero retries or external activity. Lineage parent: `raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery`.
 229. **Connect the accepted native DeepSeek Harness preset service to the exact least-authority tool guard before admitting any worker request — Raisa provider-free check-in native Harness preset-mount effective-tool projection rehearsal closeout**
    One consumed provider-disabled native process mounted the exact EMR4 preset, projected exactly edit, glob and read, emitted all nine lifecycle events and cleaned up completely. Lineage parent: `raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery`.
+230. **Connect the native DeepSeek worker to Ariadne clockwork and test one bounded authored-synthetic edit with complete lifecycle accounting — Raisa authored-synthetic native Harness bounded-worker attempt 002 failed-closed closeout**
+   The clockwork and broker contained and attributed one pre-provider native failure, but Harness startup stopped before HMR and deleted the semantic cause before safe classification. Lineage parent: `raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal`.
 
 ## Current position
 
-**Advance the now-observable native preset and tool boundary to one monitored authored-synthetic DeepSeek worker without opening product authority — Raisa provider-free check-in native Harness preset-mount effective-tool projection rehearsal closeout**
+**Make native Harness pre-HMR startup failures safely classifiable before considering another occupied worker — Raisa authored-synthetic native Harness bounded-worker attempt 002 failed-closed closeout**
 
-**Why this proof came next:** Preset discovery, preset mounting, exact tool projection and provider-disabled native lifecycle cleanup now pass independently; the unproved dependency frontier is the first bounded model-backed work package under the same gears.
+**Why this proof came next:** Attempt 002 proves lifecycle accounting and cleanup but leaves 7,314 startup stderr bytes represented only by size and digest under a generic terminal coordinate.
 
-The native Harness composition seam is accepted; the next tranche may design and, only after its own checkpoint, run one authored-synthetic non-product DeepSeek worker request with complete broker and terminal traceability.
+The negative attempt is honestly closed; the next tranche is provider-disabled observability recovery with no worker or provider call.
 
 ### What this unlocks
 
-- A frozen authored-synthetic work package whose completion can be judged mechanically.
-- A one-request occupied DeepSeek run through the accepted preset, exact tool guard and Ariadne broker gears after separate admission.
-- Comparison of useful worker output, trace completeness and cleanup against the earlier Claude Code transport experience.
+- A closed sanitized vocabulary for profile, dependency, service, HMR and runner startup failures.
+- Terminal stage and cause evidence emitted before raw startup streams are deleted.
+- A later informed user choice about another occupied attempt instead of another blind launch.
 
 ### What it does not solve
 
-- No ordinary-practice check-in command is enabled.
-- No generic-status Arrived, action grammar, first-party client or waiting-area behavior changes.
-- No product data, live practice runtime, production, deployment or protected-ref authority opens.
+- No native worker success or DeepSeek quality conclusion.
+- No another occupied attempt or provider request.
+- No product, database, ordinary-practice, production or protected-ref authority.
 
 ## Continuity and authority
 
@@ -1272,6 +1274,7 @@ Prerequisites:
 - `docs/raisa-agent-execution-surface-containment-gate-aes-c4-preexecution-factual-rebind.md`
 - `docs/raisa-agent-execution-surface-containment-gate-aes-c5-product-runtime-admission-closeout.md`
 - `docs/raisa-agent-execution-surface-containment-gate-aes-c5-product-runtime-admission-plan.md`
+- `docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002-failed-closed-closeout.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-closeout.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-design.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`
@@ -2014,6 +2017,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-aes-c5-single-generation-destination-conflict-analysis.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-source-review-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-authored-synthetic-native-worker-attempt-002-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-sol-acceptance.md`
@@ -2049,7 +2053,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-check-in-preset-mount-effective-tool-projection-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -2665,6 +2668,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/occupied-lifecycle-evidence.json`
 - `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/product-runtime-envelope.json`
 - `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/product-runtime-envelope.schema.json`
+- `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/diagnosis.md`
+- `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/efficacy-reading.json`
+- `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-terminal.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-cost-ledger.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-evidence.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-free-acceptance-evidence.json`
@@ -2701,7 +2707,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json`
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.json`
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.schema.json`
-- `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-report-attempt-003.md`
 - `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-terminal-attempt-003.json`
 - `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-service-terminal.json`
 - `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-validation-terminal.json`
@@ -3277,6 +3282,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-19--unmounted-check-in-admission-control-kernel-rehearsal.md`
+- `orchestration/human_inbox/yuri/2026-08-20--authored-synthetic-native-worker-attempt-002.md`
 - `orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-mount-effective-tool-projection.md`
 - `orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-row-service-path-recovery.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
@@ -3586,4 +3592,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 334; continuity graph revision 352._
+_Compass map revision 335; continuity graph revision 353._

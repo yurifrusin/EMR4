@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "T01",
+      "argv": ["git", "status", "--short", "--branch"]
+    },
+    {
+      "id": "T02",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import json; from pathlib import Path; from jsonschema import Draft202012Validator; e=Path('orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002'); t=json.loads((e/'occupied-terminal.json').read_text(encoding='utf-8')); s=json.loads((e/'occupied-terminal.schema.json').read_text(encoding='utf-8')); Draft202012Validator(s).validate(t); assert t['operation_id']=='raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002'; assert t['attempt_id']=='deepseek-native-synthetic-window-worker-002'; assert t['result']=='failed_closed'; assert t['failure_coordinate']=='native_harness_terminal_failure'; assert t['process']['native_process_count']==1 and t['process']['harness_exit_code']==1; assert t['broker']=={'provider_call_started':0,'provider_call_completed':0,'provider_call_failed':0,'request_rejected':0}; assert t['runner']=={}; assert t['candidate']['changed_paths']==[] and not t['candidate']['exact_expected_bytes']; assert t['automatic_retry_count']==t['fallback_count']==t['auxiliary_model_call_count']==0; assert t['cleanup']['harness_absent'] and t['cleanup']['broker_absent'] and t['cleanup']['attempt_root_absent']; assert not t['cleanup']['raw_logs_retained'] and not t['cleanup']['raw_session_retained']"
+      ]
+    },
+    {
+      "id": "T03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import hashlib,json; from pathlib import Path; e=Path('orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002'); root=e.parent; b=json.loads((e/'attempt-001-immutability-baseline.json').read_text(encoding='utf-8')); assert all(hashlib.sha256((root/n).read_bytes()).hexdigest()==v['sha256'] and (root/n).stat().st_size==v['bytes'] for n,v in b['artifacts'].items()); assert not Path('C:/Users/sarashera/EMR4-worktrees/deepseek-native-synthetic-window-worker-002').exists(); assert (e/'occupied-attempt-consumed.json').is_file() and (e/'occupied-terminal.json').is_file() and (e/'occupied-report.md').is_file()"
+      ]
+    },
+    {
+      "id": "T04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/emr4",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal_plan.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_current_baton_consistency.py"
+      ]
+    },
+    {
+      "id": "T05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal_plan.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py"
+      ]
+    },
+    {
+      "id": "T06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py"
+      ]
+    },
+    {
+      "id": "T07",
+      "argv": ["node", "--check", "scripts/ariadne_deepseek_native_harness_broker.mjs"]
+    },
+    {
+      "id": "T08",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import subprocess; expected='2e34bdad732fdab32fbf778280b3d3c70d66d602'; refs=['master','handoff/current','origin/master','origin/handoff/current']; assert all(subprocess.check_output(['git','rev-parse',r],text=True).strip()==expected for r in refs); assert subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==subprocess.check_output(['git','rev-parse','origin/codex/ariadne-bernie-davida-parallel-seam'],text=True).strip()"
+      ]
+    },
+    {
+      "id": "T09",
+      "argv": ["git", "status", "--short", "--branch"]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.governance_clockwork_check_rejection.v1",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+  "recorded_at": "2026-08-20T23:07:24.0138863+10:00",
+  "status": "revision_required",
+  "canonical_mutation": false,
+  "reason": "tick_incident_stage",
+  "detail": "The second closeout intent used cleanup, rehydration and preparation where the live clockwork admits only its closed seven-stage projection vocabulary.",
+  "correction": "Map the detailed lifecycle coordinates to closeout, acceptance and dispatch respectively, retain the original detail in narrative fields, register this rejected check, and rerun idempotently."
+}

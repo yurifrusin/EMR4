@@ -1,44 +1,44 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 575,
+  "register_revision": 576,
   "source_cutoff_on": "2026-08-20",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "a9fab04f55d2c65becf9df6667740b406ed48c837d3f631ece9598f8353ceaa4",
-  "incident_count": 706,
+  "canonical_register_sha256": "b95c98ffb189f505ae3f7dde1e2d1581d4cb1804467c1d64d80aa42415c7f928",
+  "incident_count": 715,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 464,
-      "harness": 58,
-      "operator": 44,
-      "repository": 124,
+      "agent_behavior": 468,
+      "harness": 59,
+      "operator": 46,
+      "repository": 126,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 91,
       "evidence_misreport": 70,
-      "harness_failure": 58,
-      "operator_error": 44,
-      "output_contract_violation": 251,
+      "harness_failure": 59,
+      "operator_error": 46,
+      "output_contract_violation": 255,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
-      "repository_defect": 124,
+      "repository_defect": 126,
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 51,
+      "implementer": 52,
       "integration_reviewer": 3,
-      "orchestrator": 589,
+      "orchestrator": 597,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 396,
+      "low": 402,
       "material": 127,
-      "moderate": 183
+      "moderate": 186
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 128,
-      "canonical_unchanged": 435,
+      "accepted_candidate_changed": 130,
+      "canonical_unchanged": 442,
       "untrusted_partial_worktree": 143
     },
     "by_resource_and_role": {
@@ -62,10 +62,13 @@
       "ariadne-antigravity-command-result-egress::verifier": 2,
       "ariadne-antigravity-command-schema::orchestrator": 1,
       "ariadne-antigravity-egress-admission::verifier": 2,
+      "ariadne-clockwork-incident-intake::orchestrator": 2,
       "ariadne-clockwork-next-operation-resolution::orchestrator": 1,
+      "ariadne-clockwork-prospective-register-revision::orchestrator": 1,
       "ariadne-compass-current-position-test::orchestrator": 7,
       "ariadne-continuity-acceptance-reference::orchestrator": 1,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
+      "ariadne-five-source-runtime-state::orchestrator": 1,
       "ariadne-governance-clockwork-canonical-register::orchestrator": 1,
       "ariadne-governance-clockwork-checkpoint::orchestrator": 2,
       "ariadne-governance-clockwork-command-manifest::orchestrator": 1,
@@ -73,9 +76,12 @@
       "ariadne-orchestrator-postcompaction-preflight::orchestrator": 1,
       "ariadne-orchestrator-preflight::orchestrator": 3,
       "ariadne-provider-free-pytest-launcher::orchestrator": 1,
+      "ariadne-validation-runner-cli::orchestrator": 1,
       "ariadne-verifier-worktree-preflight::orchestrator": 3,
       "attempt-005-deterministic-command-manifest::orchestrator": 1,
       "attempt-005-worker-packet-builder::orchestrator": 1,
+      "authored-synthetic-native-worker-controller-broker-handshake::orchestrator": 1,
+      "authored-synthetic-native-worker-exact-root-cleanup::orchestrator": 1,
       "clockwork-gear-architecture-plan-latch-test::orchestrator": 1,
       "clockwork-migration-focused-replay-fixture::orchestrator": 1,
       "clockwork-migration-verifier-command-manifest::orchestrator": 1,
@@ -100,6 +106,7 @@
       "deepseek-native-harness-rc7-container-worker::implementer": 1,
       "deepseek-native-harness-rc7-container-worker::orchestrator": 2,
       "deepseek-native-harness-rc7-provider-disabled::implementer": 2,
+      "deepseek-native-harness-rc7-worker-attempt-002::implementer": 1,
       "deepseek-native-harness-rc7-worker::implementer": 1,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
@@ -190,7 +197,8 @@
       "shadow-clockwork-rehearsal-closeout-projections::orchestrator": 1,
       "shadow-clockwork-rehearsal-continuity-updater::orchestrator": 1,
       "shared-postgresql-pytest-gate::orchestrator": 1,
-      "transactional-closeout-shadow-fixture::orchestrator": 1
+      "transactional-closeout-shadow-fixture::orchestrator": 1,
+      "windows-owned-process-absence-reading::orchestrator": 1
     }
   },
   "recurring_patterns": [
