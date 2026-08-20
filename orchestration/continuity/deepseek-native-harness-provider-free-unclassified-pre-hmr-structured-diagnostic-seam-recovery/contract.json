@@ -1,0 +1,73 @@
+{
+  "schema_version": "ariadne.native_harness_pre_hmr_structured_diagnostic_recovery_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+  "planning_source": "ae07978123a3fd4029715f971b76e7307a4839c1",
+  "attempt_003": {
+    "candidate_source": "2518b7671175808d4aa77f213a744ffafbd60eb8",
+    "pre_hmr_terminal_sha256": "dc9d7eaea6a2f9a4decf5513f2095853ba74fa1764b381f6706bda1399ba288f",
+    "stderr_sha256": "803374be8cc52569aadbd787500d6044d84ef1ed80d4e14828d2ae974dd57d67",
+    "stderr_bytes": 7314,
+    "immutable": true,
+    "reclassification_permitted": false
+  },
+  "installed_source": {
+    "root": "C:/Users/sarashera/EMR4-worktrees/deepseek-check-in-attachment-observability-native-001/node_modules/@deepseek-ai",
+    "package": "@deepseek-ai/dsh",
+    "version": "0.1.0-rc.7",
+    "files": {
+      "dsh/lib/bin.js": "c0226687bb20f45c603ec6fe50f3de16d1c3510c3a803304ec575ef9bc366c62",
+      "dsh/lib/profile-boot-BnJoK_kl.js": "778c5b338674d986a49972be920c965d28b2c8cac85364ae77f8587070397663",
+      "dsh/lib/profile-boot-DG5t9aNs.js": "f83ffea6a4d30cfbe02b41dabcc05104c4ad27bf79c74f601f0ddb6ccdf88969",
+      "dsh-app-boot/lib/index.js": "f02b310698d4ec6d18d313f6c9fa61c6566fbc0b5f79e135826b6d98409a2347",
+      "cordis-plugin-loader/lib/index.js": "4e0797430b460ac570bc75338c955da8a4d82c0e9772ab78abe423a9fc25a75a",
+      "cordis/lib/index.js": "1729cdbf8ee40b17c8839e06bf96491490548559e11ef7e411271e0754e751c5"
+    }
+  },
+  "diagnostic": {
+    "schema_version": "ariadne.native_harness_pre_hmr_structured_diagnostic.v1",
+    "phase": "entrypoint_import_rejected",
+    "maximum_cause_nodes": 6,
+    "maximum_sidecar_bytes": 16384,
+    "error_kinds": [
+      "aggregate_error",
+      "config_file_error",
+      "cordis_error",
+      "error",
+      "type_error",
+      "unknown",
+      "validation_error"
+    ],
+    "code_coordinates": [
+      "ERR_INVALID_MODULE_SPECIFIER",
+      "ERR_INVALID_PACKAGE_CONFIG",
+      "ERR_MODULE_NOT_FOUND",
+      "ERR_PACKAGE_PATH_NOT_EXPORTED",
+      "ERR_REQUIRE_ESM",
+      "ERR_UNKNOWN_BUILTIN_MODULE",
+      "ERR_UNSUPPORTED_DIR_IMPORT",
+      "INACTIVE_EFFECT",
+      "MODULE_NOT_FOUND",
+      "none",
+      "unrecognized"
+    ],
+    "config_stages": ["none", "parse", "read", "validate"],
+    "message_coordinates": [
+      "entries_did_not_activate",
+      "host_preparation_failed",
+      "none",
+      "plugin_tree_failed_to_load",
+      "plugins_failed_to_load"
+    ],
+    "aggregate_shapes": ["multiple", "none", "one", "unreadable", "zero"]
+  },
+  "proof_boundary": {
+    "python_process_count": 1,
+    "node_process_count": 0,
+    "native_harness_process_count": 0,
+    "broker_process_count": 0,
+    "worker_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "raw_attempt_stream_read_count": 0
+  }
+}

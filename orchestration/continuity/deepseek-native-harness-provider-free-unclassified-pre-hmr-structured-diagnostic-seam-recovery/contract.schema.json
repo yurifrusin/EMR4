@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "attempt_003": {
+      "type": "object"
+    },
+    "diagnostic": {
+      "type": "object"
+    },
+    "installed_source": {
+      "type": "object"
+    },
+    "operation_id": {
+      "const": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery"
+    },
+    "planning_source": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "proof_boundary": {
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "ariadne.native_harness_pre_hmr_structured_diagnostic_recovery_contract.v1"
+    }
+  },
+  "required": [
+    "schema_version",
+    "operation_id",
+    "planning_source",
+    "attempt_003",
+    "installed_source",
+    "diagnostic",
+    "proof_boundary"
+  ],
+  "type": "object"
+}

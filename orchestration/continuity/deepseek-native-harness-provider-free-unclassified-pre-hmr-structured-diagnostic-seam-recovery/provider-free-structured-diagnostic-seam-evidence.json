@@ -1,0 +1,198 @@
+{
+  "conclusion": "A future rejected dsh entrypoint import can be reduced before stderr serialization to a closed non-secret typed cause chain and then rethrow the identical rejection. Attempt 003 remains unclassified and no Harness/provider readiness claim is made.",
+  "hostile_fixtures": [
+    {
+      "cause_node_count": 3,
+      "cycle_detected": false,
+      "safe": true,
+      "scenario": "source_backed_nested_chain",
+      "top_error_kind": "error",
+      "top_message_coordinate": "plugin_tree_failed_to_load",
+      "truncated": false
+    },
+    {
+      "cause_node_count": 1,
+      "cycle_detected": false,
+      "safe": true,
+      "scenario": "unknown_secret_message",
+      "top_error_kind": "unknown",
+      "top_message_coordinate": "none",
+      "truncated": false
+    },
+    {
+      "cause_node_count": 1,
+      "cycle_detected": false,
+      "safe": true,
+      "scenario": "unrecognized_code",
+      "top_error_kind": "error",
+      "top_message_coordinate": "none",
+      "truncated": false
+    },
+    {
+      "cause_node_count": 1,
+      "cycle_detected": false,
+      "safe": true,
+      "scenario": "aggregate_zero",
+      "top_error_kind": "aggregate_error",
+      "top_message_coordinate": "none",
+      "truncated": false
+    },
+    {
+      "cause_node_count": 1,
+      "cycle_detected": false,
+      "safe": true,
+      "scenario": "aggregate_one",
+      "top_error_kind": "aggregate_error",
+      "top_message_coordinate": "none",
+      "truncated": false
+    },
+    {
+      "cause_node_count": 1,
+      "cycle_detected": false,
+      "safe": true,
+      "scenario": "aggregate_multiple",
+      "top_error_kind": "aggregate_error",
+      "top_message_coordinate": "none",
+      "truncated": false
+    },
+    {
+      "cause_node_count": 1,
+      "cycle_detected": false,
+      "safe": true,
+      "scenario": "aggregate_unreadable",
+      "top_error_kind": "aggregate_error",
+      "top_message_coordinate": "none",
+      "truncated": false
+    },
+    {
+      "cause_node_count": 1,
+      "cycle_detected": true,
+      "safe": true,
+      "scenario": "cycle",
+      "top_error_kind": "error",
+      "top_message_coordinate": "none",
+      "truncated": false
+    },
+    {
+      "cause_node_count": 6,
+      "cycle_detected": false,
+      "safe": true,
+      "scenario": "over_depth",
+      "top_error_kind": "error",
+      "top_message_coordinate": "none",
+      "truncated": true
+    },
+    {
+      "cause_node_count": 1,
+      "cycle_detected": false,
+      "safe": true,
+      "scenario": "hostile_getter",
+      "top_error_kind": "unknown",
+      "top_message_coordinate": "none",
+      "truncated": false
+    },
+    {
+      "cause_node_count": 1,
+      "cycle_detected": false,
+      "safe": true,
+      "scenario": "non_error_throw",
+      "top_error_kind": "unknown",
+      "top_message_coordinate": "none",
+      "truncated": false
+    }
+  ],
+  "immutable_attempt_003": {
+    "candidate_source": "2518b7671175808d4aa77f213a744ffafbd60eb8",
+    "cause": "unclassified_nonzero_exit",
+    "raw_stream_read_count": 0,
+    "reclassified": false,
+    "schema_version": "ariadne.native_harness_pre_hmr_startup_terminal.v1",
+    "stderr_bytes": 7314,
+    "stderr_sha256": "803374be8cc52569aadbd787500d6044d84ef1ed80d4e14828d2ae974dd57d67",
+    "unchanged": true
+  },
+  "installed_source": {
+    "checks": {
+      "activation_coordinates_present": true,
+      "aggregate_error_structure_present": true,
+      "boot_stage_coordinates_present": true,
+      "config_file_error_structure_present": true,
+      "cordis_typed_errors_present": true,
+      "fail_loud_precedes_boot_and_hmr": true,
+      "launcher_awaits_profile_import": true,
+      "launcher_dispatch_has_no_outer_catch": true,
+      "shim_reexports_actual_profile": true
+    },
+    "file_sha256": {
+      "cordis-plugin-loader/lib/index.js": "4e0797430b460ac570bc75338c955da8a4d82c0e9772ab78abe423a9fc25a75a",
+      "cordis/lib/index.js": "1729cdbf8ee40b17c8839e06bf96491490548559e11ef7e411271e0754e751c5",
+      "dsh-app-boot/lib/index.js": "f02b310698d4ec6d18d313f6c9fa61c6566fbc0b5f79e135826b6d98409a2347",
+      "dsh/lib/bin.js": "c0226687bb20f45c603ec6fe50f3de16d1c3510c3a803304ec575ef9bc366c62",
+      "dsh/lib/profile-boot-BnJoK_kl.js": "778c5b338674d986a49972be920c965d28b2c8cac85364ae77f8587070397663",
+      "dsh/lib/profile-boot-DG5t9aNs.js": "f83ffea6a4d30cfbe02b41dabcc05104c4ad27bf79c74f601f0ddb6ccdf88969"
+    },
+    "package": "@deepseek-ai/dsh",
+    "version": "0.1.0-rc.7"
+  },
+  "operation_id": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+  "planning_source": "ae07978123a3fd4029715f971b76e7307a4839c1",
+  "proof_boundary": {
+    "broker_process_count": 0,
+    "model_request_count": 0,
+    "native_harness_process_count": 0,
+    "node_process_count": 0,
+    "provider_request_count": 0,
+    "python_process_count": 1,
+    "raw_attempt_stream_read_count": 0,
+    "worker_process_count": 0
+  },
+  "result": "pass",
+  "schema_version": "ariadne.native_harness_pre_hmr_structured_diagnostic_recovery_evidence.v1",
+  "structured_seam": {
+    "accepted_controller_insertion_checks": {
+      "accepted_controller_direct_entrypoint_precedes_process": true,
+      "accepted_controller_has_zero_automatic_retry": true,
+      "accepted_v1_terminal_precedes_root_cleanup": true
+    },
+    "diagnostic_write_changes_exit_semantics": false,
+    "future_controller_envelope": {
+      "bytes": 520,
+      "checks": {
+        "cleanup_last": true,
+        "exact_order": true,
+        "no_retry": true,
+        "single_process_launch": true,
+        "single_safe_terminal_write": true,
+        "single_wrapper_build": true
+      },
+      "sha256": "16410826ed3f13715c2b2a36bec074039936b6bbf1aa8161eb22e049bf6e8dd5"
+    },
+    "future_launch_argv_shape": [
+      "node",
+      "--expose-internals",
+      "<generated-wrapper>",
+      "--profile",
+      "headless",
+      "<task>"
+    ],
+    "original_rejection_rethrown": true,
+    "v1_fallback_schema": "ariadne.native_harness_pre_hmr_startup_terminal.v1",
+    "v2_cause": "structured_entrypoint_import_rejected",
+    "v2_structured_schema": "ariadne.native_harness_pre_hmr_startup_terminal.v2",
+    "v2_terminal_sha256": "b81d588bbd1501b39eb3a107be4cdef99d4a9abd93c7ce4a1f28aaf28061b34d",
+    "wrapper": {
+      "bytes": 4778,
+      "checks": {
+        "bounded_cause_chain": true,
+        "no_network_module": true,
+        "no_process_exit": true,
+        "no_stack_property_read": true,
+        "raw_retention_false": true,
+        "single_entrypoint_import": true,
+        "single_exclusive_writer": true,
+        "single_identical_rethrow": true
+      },
+      "sha256": "39e4b5aa9b5dc3d8950f1a3b9a031a2a8f5f764fa92eb228efe43087199d3ce3"
+    }
+  }
+}
