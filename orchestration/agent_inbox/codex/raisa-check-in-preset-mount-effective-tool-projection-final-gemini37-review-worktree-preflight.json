@@ -1,0 +1,26 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/preset-mount-tool-projection-gemini-53e1a7a2",
+  "branch": "codex/review-preset-mount-tool-projection-53e1a7a2",
+  "head": "3c99d1d41da915aebcf5238a73b7e99fd5d54bc1",
+  "expected_head": "3c99d1d41da915aebcf5238a73b7e99fd5d54bc1",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "2ef2d220070a373d8d10c3f0ad86bd166c7dce1780d3c122f82f05e62fa31221",
+  "command_count": 12,
+  "repository_paths": [],
+  "candidate_paths": [
+    "C:/Users/sarashera/EMR4-worktrees/preset-mount-tool-projection-gemini-53e1a7a2/docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal-plan.md",
+    "C:/Users/sarashera/EMR4-worktrees/preset-mount-tool-projection-gemini-53e1a7a2/docs/security/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal-threat-model-delta.md",
+    "C:/Users/sarashera/EMR4-worktrees/preset-mount-tool-projection-gemini-53e1a7a2/orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/contract.json",
+    "C:/Users/sarashera/EMR4-worktrees/preset-mount-tool-projection-gemini-53e1a7a2/orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/deterministic-evidence.json",
+    "C:/Users/sarashera/EMR4-worktrees/preset-mount-tool-projection-gemini-53e1a7a2/orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-terminal.schema.json",
+    "C:/Users/sarashera/EMR4-worktrees/preset-mount-tool-projection-gemini-53e1a7a2/scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+    "C:/Users/sarashera/EMR4-worktrees/preset-mount-tool-projection-gemini-53e1a7a2/tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+    "C:/Users/sarashera/EMR4-worktrees/preset-mount-tool-projection-gemini-53e1a7a2/tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal_plan.py"
+  ],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/preset-mount-tool-projection-gemini-53e1a7a2",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}
