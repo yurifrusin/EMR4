@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 327,
-  "updated_at": "2026-08-20T09:54:56.7001117+10:00",
-  "source_graph_revision": 345,
-  "orientation_statement": "EMR4 will prove and materialise the exact emr4-bounded-worker preset mapping before considering another native Harness boot.",
+  "map_revision": 328,
+  "updated_at": "2026-08-20T10:52:45.8367551+10:00",
+  "source_graph_revision": 346,
+  "orientation_statement": "EMR4 will perform exactly one freshly frozen provider-free native composition boot before considering any occupied DeepSeek worker.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4372,27 +4372,38 @@
         "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-recovery-review-receipt.json",
         "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/efficacy-reading.json"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery",
+      "lineage_parent": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+      "strategic_role": "Connect the DeepSeek native Harness to Ariadne's clockwork through an exact inspectable preset and a separately enforced least-authority tool boundary",
+      "outcome": "The custom preset payload is exact, hostile variants fail closed and one first-attempt independent veto passes without starting the native Harness.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-evidence.json",
+        "orchestration/agent_inbox/antigravity/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-gemini37-review-receipt.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/efficacy-reading.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-required-service-injection-recovery",
-    "strategic_role": "Materialise the exact bounded worker preset before any future native boot",
-    "why_now": "The host service graph is proven, but the requested emr4-bounded-worker preset is absent from the shipped rc.7 roster and cannot yet select the exact edit/glob/read surface.",
-    "outcome": "Required-service injection is accepted without rerunning the native Harness; the next missing dependency is now the bounded preset itself.",
+    "node_id": "deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery",
+    "strategic_role": "Prove the accepted service graph and exact bounded preset together in one native provider-free composition",
+    "why_now": "The service-injection repair and exact preset payload are separately proven, so a single bounded native process can now test their composition without exposing a model/provider boundary.",
+    "outcome": "The preset is installation-ready and its deterministic effective-tool projection is accepted; the remaining uncertainty is native discovery, activation and runtime observation.",
     "unlocks": [
-      "A deterministic preset contract can bind the exact edit/glob/read tool mapping.",
-      "Hostile preset variants can be rejected before any native process starts.",
-      "A later separately authorised boot can use an exact, traceable preset and service graph."
+      "One process can test discovery and mount of the exact repository payload.",
+      "The accepted required-service graph can be observed reaching readiness before runner activation.",
+      "The accepted guard can be observed producing exactly edit, glob and read before any agent or provider is eligible."
     ],
     "does_not_solve": [
-      "No emr4-bounded-worker preset is yet materialised.",
-      "No native DeepSeek worker, broker, model or provider reliability is proved.",
+      "No native composition success has yet been observed.",
+      "No occupied DeepSeek worker, broker, model or provider reliability is proved.",
       "No product, data, runtime, deployment, release, Pages or protected integration opens."
     ],
     "evidence": [
-      "docs/deepseek-native-harness-provider-free-required-service-injection-recovery-closeout.md",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-required-service-injection-recovery-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-required-service-injection-recovery.md"
+      "docs/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery.md"
     ]
   },
   "decision_horizon": [

@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 345,
+  "graph_revision": 346,
   "harvests": [],
   "nodes": [
     {
@@ -24909,9 +24909,133 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery",
+      "title": "DeepSeek native Harness provider-free emr4-bounded-worker preset materialisation recovery",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admits this provider-free deterministic materialisation and its clockwork closeout.",
+          "No Node, native Harness process, worker, agent, broker, DeepSeek model or provider request occurred.",
+          "The successor admits exactly one separately frozen provider-free native composition boot and no agent, session, turn, broker, model or provider call."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-bounded-worker-preset-payload",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact 158-byte rc.7 emr4-bounded-worker payload and its full local-cache bindings at reviewed candidate 962e91d9af90fbe977177d251f9f3e3134aaad19."
+        },
+        {
+          "id": "accept-two-stage-tool-boundary",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-evidence.json",
+          "status": "accepted",
+          "summary": "Accept that the preset inherits a broader raw filesystem surface and only the mandatory post-mount guard yields exactly edit, glob and read; the outer broker allowlist remains independently required."
+        },
+        {
+          "id": "accept-first-independent-veto",
+          "source": "orchestration/agent_inbox/antigravity/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-gemini37-review-receipt.json",
+          "status": "accepted",
+          "summary": "Accept the first Gemini 3.7 Flash/high veto with ten exact zero-exit commands, 101 tests, unchanged candidate HEAD and a clean isolated worktree."
+        },
+        {
+          "id": "reject-first-clean-publication-after-observability-audit",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/clockwork-tick-attempt-001-evidence.json",
+          "status": "rejected",
+          "summary": "Preserve the otherwise-valid lease-53 publication and its byte-exact lease-54 rollback after the postpublication chain discarded a yielded session handle and required one observed unchanged rerun."
+        },
+        {
+          "id": "reject-second-publication-stale-recurrence-fixture",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/clockwork-tick-attempt-002-evidence.json",
+          "status": "rejected",
+          "summary": "Preserve lease 55 and its byte-exact lease-56 rollback after correct AER-0666 intake exposed the stale two-member yielded-session recurrence assertion."
+        }
+      ],
+      "claim_scope": [
+        "The exact future Harness-home relative payload is .agent-presets/emr4-bounded-worker/agent.cordis.yml.",
+        "Six rc.7 cached packages and required members are bound without registry, npm, Node, network or disk extraction.",
+        "The raw inherited tool surface is broader than the authority boundary and is explicitly recorded.",
+        "The accepted post-mount guard symbolically yields exactly sorted edit, glob and read for both admitted attachment postures.",
+        "Twenty-one hostile variants fail closed, 24 focused tests pass and the independent manifest passes 101 tests.",
+        "The observed postpublication rerun passed to 100% at exit zero; the preceding discarded-session-handle execution is not admitted.",
+        "No native discovery, mount, service activation, scope, runtime schema, worker or model/provider reliability is claimed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/materialised-home/.agent-presets/emr4-bounded-worker/agent.cordis.yml",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-gemini37-review-packet.md",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-gemini37-review-worktree-preflight.json",
+          "docs/ariadne-agent-error-correction-register-revision-569.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/clockwork-tick-attempt-001-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/clockwork-tick-attempt-001-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/clockwork-tick-attempt-002-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/clockwork-tick-attempt-002-report.md",
+          "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "No native process has yet proved combined preset discovery, mount, service activation, scope creation and effective-schema observation.",
+        "No agent, session, turn, broker, DeepSeek model or provider call is authorised.",
+        "Both consumed native attempts remain immutable and cannot be retried, resumed or reclassified.",
+        "No product, practice, data, production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-20T10:52:45.8367551+10:00",
+      "updated_at": "2026-08-20T10:52:45.8367551+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "4ffc8482934bed754e149acea005d7f8f444a782",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-20T09:54:56.7001117+10:00"
+  "updated_at": "2026-08-20T10:52:45.8367551+10:00"
 }

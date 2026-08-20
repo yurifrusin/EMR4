@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 568,
+  "register_revision": 569,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-20",
@@ -26453,6 +26453,88 @@
       },
       "incident_id": "AER-0665",
       "attempt_id": "clock-7a5ae338f1601a983c437c26",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_exec_session",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every potentially yielding verification call must expose its complete execution envelope, retain the unified-session identifier and poll it to an exact terminal exit before contributing acceptance evidence.",
+      "observed_error": "The first postpublication compatibility chain yielded after partial pytest output, but the orchestration wrapper emitted only stdout and discarded the returned session identifier. The process later reached its final clockwork check and exited, but the pytest terminal exit was unavailable and not admitted.",
+      "detection_method": "The first tool result ended at 79 percent with no terminal exit or exposed handle; process inspection found the still-running exact chain and later its final clockwork child, while the unchanged rerun with retained session 42419 reached 100 percent and exit zero.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/clockwork-tick-attempt-001-evidence.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/clockwork-tick-attempt-001-report.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-569.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.yielded_verification_session_id_not_exposed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve and roll back the lease-53 publication, rerun the exact unchanged postpublication test suite once while retaining session 42419, poll it to 100 percent and exit zero, and republish through incident intake.",
+        "prevention_control": "Every command that can exceed the initial yield runs as a dedicated tool call whose full result envelope including output, session_id, exit_code and chunk_id is emitted; any returned session_id is polled to terminal exit before another command or acceptance claim, and long tests are never hidden inside a multi-command shell chain.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/clockwork-tick-attempt-001-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/clockwork-tick-attempt-001-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/efficacy-reading.json",
+          "docs/ariadne-agent-error-correction-register-revision-569.md"
+        ]
+      },
+      "incident_id": "AER-0666",
+      "attempt_id": "clock-7c92b8c06bde8e386c97ed62",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_exec_session",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "An incident-intake closeout that deliberately extends an existing recurrence signature must update every exact recurrence-member compatibility fixture from the prospective dry clockwork state before publication.",
+      "observed_error": "Lease 55 correctly added AER-0666 to orchestrator.yielded_verification_session_id_not_exposed, but test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering still required only AER-0651 and AER-0654 with count two.",
+      "detection_method": "The dedicated postpublication suite retained session 38278 and returned exit code one with one exact assertion failure showing actual members AER-0651, AER-0654 and AER-0666.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/clockwork-tick-attempt-002-evidence.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/clockwork-tick-attempt-002-report.md",
+        "tests/test_ariadne_agent_error_register.py",
+        "docs/ariadne-agent-error-correction-register-revision-569.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.agent_error_register_recurrence_fixture_not_prospectively_updated",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve and roll back lease 55, update the exact yielded-session recurrence fixture to AER-0651, AER-0654 and prospective AER-0666 with count three, and rerun publication plus the complete compatibility suite.",
+        "prevention_control": "Before incident-intake publication, inspect the dry clockwork-derived pattern report and update every exact recurrence-member fixture that the new semantic observations will extend; the postpublication suite remains mandatory.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/clockwork-tick-attempt-002-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/clockwork-tick-attempt-002-report.md",
+          "tests/test_ariadne_agent_error_register.py",
+          "docs/ariadne-agent-error-correction-register-revision-569.md"
+        ]
+      },
+      "incident_id": "AER-0667",
+      "attempt_id": "clock-1e0d304088bf488bafd491e3",
       "origin": "repository",
       "related_incident_ids": [],
       "status": "corrected"
