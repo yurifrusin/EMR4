@@ -1,0 +1,119 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_validated_preset_validation_closeout_papers_then_publish_one_clockwork_owned_clean_closeout_generation",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh five-source closeout reading over the complete baton, exact immutable negative terminal, both scoped Gemini vetoes, restored clockwork-owned latch, validated closeout intent and preserved worktree",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The clockwork-owned active latch records the immutable PRESET_ROW_FOUND negative terminal and requires register revision 573 plus the paired closeout without retry.",
+    "current_authority_allocation": "GPT Sol owns closeout interpretation, acceptance, clockwork publication and Git. Both scoped Gemini 3.7 Flash/high vetoes are complete. DeepSeek and native subagents receive no work package.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-plan.md",
+      "docs/security/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/deterministic-source-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/package-only-discovery-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-validation-terminal.json",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/efficacy-reading.json",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-preset-validation-subcoordinate-recovery-gemini37-review-receipt.json",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-preset-validation-native-runner-gemini37-review-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-573.md",
+      "docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-preset-validation-subcoordinate-recovery-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-validation-subcoordinate-recovery.md",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/closeout/closeout-intent.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Closeout only. Do not retry the consumed native process, launch Harness, contact DeepSeek or any provider, create an agent or mount, invoke Docker/database, modify product/API/client/configuration, inspect branding or unrelated files, deploy, release, rebuild Pages or move protected refs.",
+    "git_refs_and_worktree": "The exact task, origin and protected refs are owned by the generated Git snapshot; this narrative intentionally contains no manually transcribed object ID. The clockwork owner check reports zero canonical drift, closeout papers are the only intentional new paths, and docs/branding plus every unrelated untracked path remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+    "active_tranche": "Raisa provider-free check-in native Harness preset-validation subcoordinate recovery",
+    "objective": "Freeze the narrowest provider-free recovery that separates exact preset-row discovery, exact preset-byte read and parse, and digest/length binding, first through deterministic package-source proofs; admit no native process until a separate checkpoint and no DeepSeek request or attempt 006.",
+    "status": "in_progress",
+    "source_head": "9e4d13029e4ea3eb1b511602cf52cd1c863ea69e",
+    "authority_source": "Yuri's standing uninterrupted-development authority and the accepted lifecycle repair plus immutable provider-disabled PRESET_VALIDATION_PASSED negative terminal.",
+    "checkpoint": {
+      "completed_stage": "The deterministic and package-only preset-row, byte/parse and digest/length readings pass. The exact no-agent runner passed a distinct Gemini veto. Its sole checkpoint-bound provider-disabled native process reached PRESET_ROW_DISCOVERY_ENTERED and failed closed before PRESET_ROW_FOUND with one process, zero retries or external requests and exact cleanup. The consumed terminal is immutable; canonical latch drift was detected and byte-restored before this clockwork-owned checkpoint.",
+      "next_executable_stage": "complete_register_revision_573_and_publish_the_clockwork_owned_paired_closeout_without_retrying_the_consumed_native_process",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_only",
+      "initially_deterministic_and_no_native_process_until_a_separate_exact_checkpoint",
+      "consumed_lifecycle_native_probe_immutable_no_retry_resume_or_reclassification",
+      "split_only_preset_row_discovery_exact_byte_read_parse_and_digest_length_binding",
+      "no_deepseek_model_provider_broker_network_or_other_external_request",
+      "no_attempt_006_docker_database_postgresql_sql_or_transaction_execution",
+      "no_product_source_configuration_api_openapi_graphql_schema_migration_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+    "assessed_stage": "closeout_precommit",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "The consumed provider-disabled terminal is the accepted result; no DeepSeek request or retry is admitted at closeout.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "completed", "expected_leverage": "required_independence", "rationale": "Gemini completed one clean veto over the deterministic/package candidate and one distinct clean veto over the later no-agent runner candidate.", "work_packages": ["deterministic_package_candidate_veto_completed", "exact_no_agent_runner_veto_completed"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Current developer policy prohibits proactive delegation and closeout publication is a serial clockwork transaction.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "commit the validated closeout papers before publication",
+      "publish exactly one clockwork-owned clean closeout generation",
+      "do not retry the consumed native process",
+      "Sol alone accepts and advances the successor latch"
+    ],
+    "reassessment_triggers": ["clockwork_closeout_published", "pre_push", "successor_rehydration"]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol owns closeout acceptance and clockwork publication."]},
+    {"adapter_id": "deepseek_native_harness", "method": "native_harness_terminal", "reachability": "reachable", "evidence": ["One consumed provider-disabled process failed closed before PRESET_ROW_FOUND; no retry is selected."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected or authorised."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Both materially distinct exact candidates have scoped passing veto receipts."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No subagent was spawned; proactive delegation is prohibited."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected or authorised."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected or authorised."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "deepseek-native-harness-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
