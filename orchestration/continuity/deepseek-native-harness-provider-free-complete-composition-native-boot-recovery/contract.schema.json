@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "planning_source", "frozen_plan_source",
+    "accepted_sources", "predecessor_bytes", "implementation_bytes", "generated_bytes",
+    "immutable_predecessor_attempt", "attempt", "required_services", "package",
+    "required_installed_packages", "preset", "launch", "readiness", "activation",
+    "terminal", "required_zero_counts"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "frozen_plan_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_sources": {"type": "object", "minProperties": 6, "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{40}$"}},
+    "predecessor_bytes": {"type": "object", "minProperties": 20, "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+    "implementation_bytes": {
+      "type": "object", "additionalProperties": false,
+      "required": ["controller_sha256", "focused_test_sha256"],
+      "properties": {
+        "controller_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "focused_test_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "generated_bytes": {"type": "object", "minProperties": 4, "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+    "immutable_predecessor_attempt": {
+      "type": "object", "additionalProperties": false,
+      "required": ["attempt_id", "terminal", "retry_permitted", "reclassification_permitted"],
+      "properties": {
+        "attempt_id": {"const": "preterminal-observable-composition-recovery-boot-attempt-001"},
+        "terminal": {"const": "SERVICES_UNAVAILABLE"},
+        "retry_permitted": {"const": false},
+        "reclassification_permitted": {"const": false}
+      }
+    },
+    "attempt": {
+      "type": "object", "additionalProperties": false,
+      "required": ["attempt_id", "native_process_count", "automatic_retry", "manual_retry", "resume"],
+      "properties": {
+        "attempt_id": {"const": "complete-composition-native-boot-recovery-attempt-001"},
+        "native_process_count": {"const": 1},
+        "automatic_retry": {"const": false},
+        "manual_retry": {"const": false},
+        "resume": {"const": false}
+      }
+    },
+    "required_services": {"const": ["hmr", "agentPresets", "tools"]},
+    "package": {"type": "object"},
+    "required_installed_packages": {"type": "array", "minItems": 6, "uniqueItems": true, "items": {"type": "string"}},
+    "preset": {"type": "object"},
+    "launch": {"type": "object"},
+    "readiness": {"type": "object"},
+    "activation": {"type": "object"},
+    "terminal": {"type": "object"},
+    "required_zero_counts": {"type": "array", "minItems": 9, "uniqueItems": true, "items": {"type": "string"}}
+  }
+}
