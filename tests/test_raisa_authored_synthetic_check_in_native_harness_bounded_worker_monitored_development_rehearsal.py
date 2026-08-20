@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+from types import SimpleNamespace
 
 import jsonschema
 import pytest
@@ -141,6 +142,46 @@ def test_occupied_cli_is_structurally_behind_separate_checkpoint() -> None:
     assert native.index("checkpoint = load_checkpoint()") < native.index(
         "subprocess.Popen("
     )
+
+
+def test_preparation_derives_full_reviewed_ancestor_not_current_head(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    candidate = "a" * 40
+    descendant = "b" * 40
+    receipt_path = tmp_path / "review.json"
+    receipt_path.write_text(
+        json.dumps(
+            {
+                "decision": "pass",
+                "head_before": candidate,
+                "head_after": candidate,
+                "dirty_after": False,
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(subject, "REPO_ROOT", tmp_path)
+
+    def fake_git(*args: str) -> str:
+        if args == ("rev-parse", "--verify", f"{candidate}^{{commit}}"):
+            return candidate
+        if args == ("rev-parse", "--verify", "HEAD"):
+            return descendant
+        raise AssertionError(args)
+
+    monkeypatch.setattr(subject, "git", fake_git)
+    monkeypatch.setattr(
+        subject.subprocess,
+        "run",
+        lambda *args, **kwargs: SimpleNamespace(returncode=0),
+    )
+
+    assert subject.resolve_reviewed_candidate_source(receipt_path) == candidate
+    assert subject.validate_review_receipt(receipt_path, candidate)["decision"] == "pass"
+    preparation_source = inspect.getsource(subject.prepare_attempt)
+    assert "resolve_reviewed_candidate_source(review_receipt_path)" in preparation_source
+    assert 'git("rev-parse", "--verify", "HEAD")' not in preparation_source
 
 
 def test_profile_candidate_is_exact_no_retry_and_one_parallel_tool() -> None:

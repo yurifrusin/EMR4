@@ -845,6 +845,35 @@ def validate_review_receipt(path: Path, candidate_source: str) -> dict[str, Any]
     return receipt
 
 
+def resolve_reviewed_candidate_source(path: Path) -> str:
+    resolved = path.resolve()
+    if REPO_ROOT.resolve() not in resolved.parents or not resolved.is_file():
+        raise RehearsalError("review_receipt_path_invalid")
+    receipt = load_json(resolved)
+    candidate_source = receipt.get("head_before")
+    if not isinstance(candidate_source, str) or FULL_OID.fullmatch(candidate_source) is None:
+        raise RehearsalError("review_candidate_not_full_git_oid")
+    if git("rev-parse", "--verify", f"{candidate_source}^{{commit}}") != candidate_source:
+        raise RehearsalError("review_candidate_not_resolved_exact_commit")
+    ancestry = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(REPO_ROOT),
+            "merge-base",
+            "--is-ancestor",
+            candidate_source,
+            "HEAD",
+        ],
+        check=False,
+        capture_output=True,
+        timeout=15,
+    )
+    if ancestry.returncode != 0:
+        raise RehearsalError("review_candidate_not_ancestor_of_head")
+    return candidate_source
+
+
 def initialize_synthetic_workspace(root: Path) -> dict[str, str]:
     workspace = root / "workspace"
     workspace.mkdir(parents=True)
@@ -949,9 +978,7 @@ def prepare_attempt(review_receipt_path: Path) -> dict[str, Any]:
     parent = Path("C:/Users/sarashera/EMR4-worktrees").resolve()
     if root.parent != parent or root.exists():
         raise RehearsalError("attempt_root_not_fresh_exact_descendant")
-    candidate_source = git("rev-parse", "--verify", "HEAD")
-    if FULL_OID.fullmatch(candidate_source) is None:
-        raise RehearsalError("candidate_source_not_full_git_oid")
+    candidate_source = resolve_reviewed_candidate_source(review_receipt_path)
     receipt = validate_review_receipt(review_receipt_path, candidate_source)
 
     root.mkdir(parents=False)
