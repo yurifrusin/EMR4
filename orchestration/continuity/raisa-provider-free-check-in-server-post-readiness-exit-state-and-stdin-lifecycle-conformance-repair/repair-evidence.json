@@ -1,0 +1,116 @@
+{
+  "closed_boundaries": {
+    "attempt_006_executed": false,
+    "database_or_docker_executed": false,
+    "deepseek_or_other_model_called": false,
+    "ordinary_practice_enabled": false,
+    "product_api_config_or_client_changed": false,
+    "product_patient_or_clinical_data_used": false,
+    "production_deployment_release_or_pages": false,
+    "protected_ref_moved": false
+  },
+  "git_bindings": {
+    "attempt_005_closeout": "03b94136c9c6cd82d5a8098705f263ba34a20de4",
+    "attempt_005_execution": "905184b76f576006232fcfdc78da71d98fcf0ca0",
+    "baseline": "2ebb05ebaf28cc4978e1f21bf8a7340fb6ee44bd",
+    "complete_composition_candidate": "6ef058b87a2c927efd9d9d2027b59d6ad279fec5",
+    "complete_composition_clockwork": "f9a4ede953cc496e9b778a6162d77dc7e73121df",
+    "frozen_plan": "d62ecb97f9d0a844d0021235cf8f067bfb925a78"
+  },
+  "historical_evidence_unchanged": true,
+  "native_probe": {
+    "attempt_id": "check-in-lifecycle-native-mount-probe-001",
+    "cleanup": {
+      "disposable_root_absent": true,
+      "process_absent": true
+    },
+    "counts": {
+      "agent_sessions": 0,
+      "automatic_retries": 0,
+      "broker_requests": 0,
+      "database_invocations": 0,
+      "docker_invocations": 0,
+      "model_requests": 0,
+      "native_processes": 1,
+      "network_attempts": 0,
+      "provider_requests": 0,
+      "turns": 0
+    },
+    "effective_tool_names": [],
+    "launch": {
+      "credential_environment_names_removed_count": 3,
+      "duration_ms": 654,
+      "exit_code": 1,
+      "raw_logs_retained": false,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "markers": [
+      "PRESET_DISCOVERY_ENTERED",
+      "PRESET_DISCOVERY_PASSED"
+    ],
+    "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+    "package": {
+      "installation_id": "deepseek-check-in-attachment-observability-native-001",
+      "name": "@deepseek-ai/dsh",
+      "package_lock_sha256": "a89defcd8a2c5aae4a54c03bda98e2585711fce881b4b08c90ca4808d45555f4",
+      "version": "0.1.0-rc.7"
+    },
+    "result": "failed_closed",
+    "schema_version": "emr4.check-in-lifecycle-native-probe-terminal.v1",
+    "terminal_coordinate": "PRESET_VALIDATION_PASSED"
+  },
+  "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+  "plan_source": "d62ecb97f9d0a844d0021235cf8f067bfb925a78",
+  "result": "failed_closed",
+  "schema_version": "emr4.check-in-lifecycle-conformance-repair-evidence.v1",
+  "server_lifecycle": {
+    "diagnostic_key_count": 9,
+    "final_cleanup_is_sole_stdin_close_owner": true,
+    "other_failure_families_carry_null": true,
+    "stdin_open_after_delivery": true
+  },
+  "source_head": "5faa13b6c47034a8864e1ef5d10b3f3d9d920e0a",
+  "workflow_readings": {
+    "artifact_paths": {
+      "contract": "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/contract.json",
+      "contract_schema": "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/contract.schema.json",
+      "diagnostic_schema": "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/server-post-readiness.schema.json",
+      "efficacy_reading": "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/efficacy-reading.json",
+      "evidence_schema": "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/evidence.schema.json",
+      "native_probe_consumed": "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/native-probe-consumed.json",
+      "native_probe_terminal": "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/native-probe-terminal.json",
+      "repair_evidence": "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-evidence.json",
+      "repair_report": "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-report.md"
+    },
+    "changed_paths": [
+      "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-plan.md",
+      "docs/security/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/contract.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/evidence.schema.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/server-post-readiness.schema.json",
+      "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+      "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+      "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+      "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+      "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+    ],
+    "checkpoint": "Deterministic lifecycle gate passed for 3 selected test files.",
+    "test_dependencies": {
+      "PF_CHECK_IN_LIFECYCLE_REPAIR": [
+        "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/contract.json",
+        "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/contract.schema.json",
+        "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/evidence.schema.json",
+        "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/server-post-readiness.schema.json",
+        "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+      ]
+    }
+  }
+}

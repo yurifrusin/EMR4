@@ -1,0 +1,18 @@
+{
+  "automatic_retries": 0,
+  "database_invocations": 0,
+  "docker_invocations": 0,
+  "efficiency_judgment": "blocked_before_occupied_worker",
+  "manual_checklist_fields_replaced": [
+    "full_git_object_resolution",
+    "test_dependency_closure",
+    "bounded_checkpoint_rendering",
+    "changed_path_sha256_comparison",
+    "artifact_role_projection"
+  ],
+  "native_processes": 1,
+  "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+  "outcome": "native_mount_probe_failed_closed",
+  "provider_requests": 0,
+  "schema_version": "ariadne.tranche_efficacy_reading.v1"
+}
