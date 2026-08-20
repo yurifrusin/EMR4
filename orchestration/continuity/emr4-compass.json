@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 338,
-  "updated_at": "2026-08-21T08:24:15.9013739+10:00",
-  "source_graph_revision": 356,
-  "orientation_statement": "Exercise the generated wrapper only against authored local failing modules; keep DSH, Harness and every provider surface closed.",
+  "map_revision": 339,
+  "updated_at": "2026-08-21T09:19:00.3227540+10:00",
+  "source_graph_revision": 357,
+  "orientation_statement": "Freeze one provider-free native-Harness boot around the accepted wrapper and reader; admit no worker or provider activity.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4491,25 +4491,35 @@
         "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-evidence.json",
         "docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-closeout.md"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+      "lineage_parent": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+      "strategic_role": "Prove the structured diagnostic gear under real Node semantics before native Harness composition",
+      "outcome": "Canonical safe sidecar creation, identical rejection, exclusive-write failure handling and exact cleanup pass across four authored fixtures.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/provider-free-node-fixture-evidence.json",
+        "docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
-    "strategic_role": "Prove the JavaScript gear itself before it is allowed near native Harness",
-    "why_now": "Source inspection establishes the seam, but static Python fixtures do not prove Node write/rethrow behavior.",
-    "outcome": "The native Harness remains closed while authored local Node failures exercise only the generated wrapper machinery.",
+    "node_id": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+    "strategic_role": "Connect the now-tested diagnostic gear to one provider-free native Harness boot boundary",
+    "why_now": "Real Node fixture behavior passes, but the wrapper and terminal reader have not yet surrounded the pinned rc.7 entrypoint.",
+    "outcome": "The diagnostic gear is ready for a separately frozen provider-free native-boot observability rehearsal, while every worker and provider surface remains closed.",
     "unlocks": [
-      "Actual exclusive sidecar and identical-rethrow evidence from authored Node fixtures.",
-      "A grounded decision whether a later provider-free native Harness boot is justified."
+      "One bounded proof that a pinned native-Harness pre-HMR failure becomes a safe v2 terminal.",
+      "A grounded decision whether later provider-free worker-session preparation remains justified."
     ],
     "does_not_solve": [
-      "No DSH import or native Harness process.",
-      "No worker, broker, model, provider or occupied retry.",
+      "No worker session, prompt, tool execution, model or provider request.",
+      "No occupied retry or attempt-003 reclassification.",
       "No product, data, production, deployment or protected-ref authority."
     ],
     "evidence": [
-      "orchestration/agent_inbox/codex/deepseek-native-harness-unclassified-pre-hmr-structured-diagnostic-seam-recovery-sol-acceptance.md",
-      "orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-report.md"
+      "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-wrapper-node-fixture-rehearsal-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/provider-free-node-fixture-report.md"
     ]
   },
   "decision_horizon": [

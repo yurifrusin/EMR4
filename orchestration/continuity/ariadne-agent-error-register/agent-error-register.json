@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 579,
+  "register_revision": 580,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -29153,6 +29153,187 @@
       },
       "incident_id": "AER-0738",
       "attempt_id": "clock-e1a2d2b4c654edd472c5b039",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "plan-commit-staged-whitespace-gate",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_git_cli",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A nonzero staged-whitespace gate must stop the command sequence before commit.",
+      "observed_error": "The plan commit proceeded after git diff --cached --check reported trailing blank-line whitespace because later commands masked its exit status.",
+      "detection_method": "The committed plan diff was inspected immediately afterward and the whitespace warning was reproduced without any runtime or provider activity.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-closeout.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.staged_whitespace_gate_exit_masked_by_later_command",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the whitespace in a dedicated mechanical descendant commit before implementation or execution.",
+        "prevention_control": "Critical gates are now followed by immediate LASTEXITCODE checks and staged scope is validated separately before commit.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-plan.md",
+          "docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-closeout.md"
+        ]
+      },
+      "incident_id": "AER-0739",
+      "attempt_id": "clock-94c09491018bbf1771f97fe6",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "canonical-wrapper-conditional-template",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The opt-in canonical serializer must leave the default generated wrapper byte-identical to accepted historical evidence.",
+      "observed_error": "The first conditional-template draft inserted one extra blank line into default wrapper output.",
+      "detection_method": "The focused historical equality test rejected the draft before staging, commit or Node execution.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.opt_in_serializer_draft_changed_default_wrapper_bytes",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Place the conditional serializer at the existing template boundary without introducing default-mode whitespace.",
+        "prevention_control": "The focused test now generates both default and canonical modes and the predecessor equality suite remains mandatory.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py",
+          "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py"
+        ]
+      },
+      "incident_id": "AER-0740",
+      "attempt_id": "clock-6cd5f6e46ad0ef68e24194a5",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+      "role": "implementer",
+      "resource_id": "generated-entrypoint-wrapper-json-serializer",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_node_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Every safe diagnostic emitted by the generated wrapper must match the reader's recursive canonical JSON bytes.",
+      "observed_error": "Attempt 001 produced three semantically safe sidecars in JavaScript insertion order, and all three were rejected with diagnostic_canonical_bytes_required.",
+      "detection_method": "The exact four-process authored fixture rehearsal preserved immutable attempt-001 evidence with three identical canonical-byte rejection coordinates.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/attempts/node-fixture-attempt-001/execution-evidence.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.generated_wrapper_json_insertion_order_failed_canonical_reader",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Add the plan-admitted opt-in recursive key-order serializer and execute one fresh exact four-scenario attempt.",
+        "prevention_control": "Canonical mode validates its serializer source shape and the real-Node rehearsal requires three byte-canonical diagnostics.",
+        "evidence_paths": [
+          "orchestration_harness/native_pre_hmr_diagnostic.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/attempts/node-fixture-attempt-002/execution-evidence.json"
+        ]
+      },
+      "incident_id": "AER-0741",
+      "attempt_id": "clock-6d43769da032d7f73623ef62",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "attempt-001-recovery-precommit-command-sequence",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A required pre-commit receipt invocation must have its exit and terminal status checked immediately before later commands can mask it.",
+      "observed_error": "The first combined recovery command invoked preflight and then several later checks without an immediate exit guard, so the displayed output did not prove the receipt status.",
+      "detection_method": "A separate fail-closed readback immediately parsed the preserved receipt, confirmed status passed and re-ran the whitespace gate before staging.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-wrapper-node-fixture-rehearsal-attempt-001-recovery-precommit-receipt.json",
+        "docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.required_precommit_receipt_exit_not_checked_immediately",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Parse the preserved receipt in a separate command, require passed status and stop before staging on any mismatch.",
+        "prevention_control": "Subsequent preflight commands use immediate LASTEXITCODE and receipt-status guards before any later command.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-wrapper-node-fixture-rehearsal-attempt-002-precommit-receipt.json",
+          "docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-closeout.md"
+        ]
+      },
+      "incident_id": "AER-0742",
+      "attempt_id": "clock-1480b9811439671b182e7fbb",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "clockwork-prospective-register-revision-reading",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The prospective human register revision reading must exist and bind the projected revision before clockwork transaction preparation resolves node evidence.",
+      "observed_error": "The first closeout check referenced revision 580 in node evidence before the required human reading artifact existed, so transaction preparation rejected evidence_not_found.",
+      "detection_method": "The read-only clockwork check returned tick_transaction_prepare before command execution, publication or canonical mutation.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_closeout_referenced_missing_prospective_register_reading",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Author the exact revision 580 reading with all projected incident IDs and counts before rerunning the unchanged closeout transaction.",
+        "prevention_control": "Future incident-bearing clockwork closeouts create and validate the prospective reading artifact before the first transaction check.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-580.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0743",
+      "attempt_id": "clock-6545833c520724171d78fa37",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

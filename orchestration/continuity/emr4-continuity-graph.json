@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 356,
+  "graph_revision": 357,
   "harvests": [],
   "nodes": [
     {
@@ -26297,9 +26297,126 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+      "title": "DeepSeek native Harness provider-free structured diagnostic wrapper Node fixture rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority covers this provider-free diagnostic-strengthening rehearsal.",
+          "Exactly four serial local Node processes were permitted against authored fixture modules only.",
+          "No DSH/Harness, worker, broker, model, provider, product or protected integration authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-real-node-wrapper-behavior",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/provider-free-node-fixture-evidence.json",
+          "status": "accepted",
+          "summary": "Accept canonical safe sidecars, identical rejection, exclusive-write failure behavior and exact cleanup across the four authored Node fixtures."
+        },
+        {
+          "id": "accept-opt-in-canonical-json-correction",
+          "source": "orchestration_harness/native_pre_hmr_diagnostic.py",
+          "status": "accepted",
+          "summary": "Accept the plan-admitted recursive key-order serializer only in the explicit canonical mode while preserving historical default wrapper bytes."
+        },
+        {
+          "id": "preserve-attempt-001-negative-evidence",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/attempts/node-fixture-attempt-001/execution-evidence.json",
+          "status": "accepted",
+          "summary": "Preserve the first run as immutable evidence that insertion-order JSON fails the canonical reader while rejection and cleanup semantics remain safe."
+        },
+        {
+          "id": "reject-native-harness-and-worker-readiness",
+          "source": "docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "Reject claims of DSH import, native Harness boot, DeepSeek worker execution, provider reliability or occupied retry authority."
+        },
+        {
+          "id": "accept-contained-node-rehearsal-corrections",
+          "source": "docs/ariadne-agent-error-correction-register-revision-580.md",
+          "status": "accepted",
+          "summary": "Accept five bounded corrected observations with no open incident or protected-surface effect."
+        }
+      ],
+      "claim_scope": [
+        "Exactly four serial Node 24.18.0 processes imported only authored fixture packages through generated wrappers.",
+        "Three safe sidecars are canonical and the pre-existing fourth remains unchanged and inadmissible.",
+        "All four observers caught the identical thrown JavaScript value.",
+        "No raw message, stack, path, environment, secret sentinel, stdout or stderr was retained.",
+        "All disposable roots were absent at terminal readback.",
+        "Native Harness, broker, worker, model and provider counts remained zero.",
+        "Native Harness and DeepSeek operational readiness remain unproved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-attempt-001-canonical-json-recovery.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/attempts/node-fixture-attempt-001/execution-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/attempts/node-fixture-attempt-002/execution-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/provider-free-node-fixture-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/provider-free-node-fixture-report.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-wrapper-node-fixture-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-wrapper-node-fixture-rehearsal-attempt-001-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-wrapper-node-fixture-rehearsal-attempt-001-recovery-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-wrapper-node-fixture-rehearsal-attempt-001-recovery-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-wrapper-node-fixture-rehearsal-attempt-002-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-wrapper-node-fixture-rehearsal-attempt-002-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal_plan.py",
+          "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/native_pre_hmr_diagnostic.py",
+          "scripts/deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-580.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-structured-diagnostic-wrapper-node-fixture-rehearsal.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The wrapper has not been composed around pinned DSH or a native Harness process.",
+        "No worker session, prompt, tool execution, model or provider request has occurred.",
+        "Attempt 003 remains unclassified, terminal and consumed without retry authority.",
+        "Product, data, ordinary-practice, deployment and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-21T09:19:00.3227540+10:00",
+      "updated_at": "2026-08-21T09:19:00.3227540+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "3ed856dac63bf0e51312e2b3dee14bdc2c934daf",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-21T08:24:15.9013739+10:00"
+  "updated_at": "2026-08-21T09:19:00.3227540+10:00"
 }

@@ -2,7 +2,7 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "node-fixture-canonical-recovery-deterministic-check",
+      "command_id": "node_fixture_final_deterministic_check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -12,7 +12,7 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "node-fixture-canonical-recovery-focused-tests",
+      "command_id": "node_fixture_final_provider_free_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -22,6 +22,7 @@
         "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py",
         "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal_plan.py",
         "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
+        "tests/test_ariadne_agent_error_register.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_active_operation_latch.py",
         "tests/test_current_baton_consistency.py"
@@ -29,7 +30,7 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "node-fixture-canonical-recovery-ruff",
+      "command_id": "node_fixture_final_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -43,7 +44,7 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "node-fixture-canonical-recovery-compile",
+      "command_id": "node_fixture_final_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",

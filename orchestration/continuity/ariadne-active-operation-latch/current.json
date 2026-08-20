@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
-  "active_tranche": "DeepSeek native Harness provider-free structured diagnostic wrapper Node fixture rehearsal",
-  "objective": "Execute the generated wrapper only against authored local failing Node modules and deterministically prove exclusive safe sidecar creation, identical rejection, bounded validation and exact cleanup without importing DSH or launching Harness, broker, worker, model or provider activity.",
+  "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+  "active_tranche": "DeepSeek native Harness provider-free structured diagnostic native-boot observability rehearsal",
+  "objective": "Compose the accepted canonical diagnostic wrapper and v2 terminal reader around exactly one pinned rc.7 provider-free native Harness boot and prove safe pre-HMR terminalization plus exact cleanup without creating a worker session, prompt, tool execution, model or provider request.",
   "status": "in_progress",
-  "source_head": "32dbd5233d114692d1913163ba62fc25e44a013f",
+  "source_head": "3ed856dac63bf0e51312e2b3dee14bdc2c934daf",
   "authority_source": "Yuri's standing uninterrupted-development authority, constrained to the dependency-satisfied provider-free diagnostic-strengthening course and no occupied retry.",
   "checkpoint": {
-    "completed_stage": "Attempt 001 ran exactly four authored local Node observers and preserved identical rejection, exclusive sidecar failure behavior, zero stream bytes and exact cleanup, but its three safe diagnostics failed canonical-byte validation solely because JavaScript retained insertion order; the immutable negative evidence and plan-admitted opt-in recursive key-order correction are committed with historical default wrapper bytes preserved.",
-    "next_executable_stage": "generate_and_validate_one_fresh_attempt_002_preexecution_receipt_then_run_the_same_exact_four_serial_authored_local_node_scenarios_once_against_the_corrected_source",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_single_native_boot_observability_contract",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,9 +34,9 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_authored_local_node_fixture_wrapper_only",
-    "no_dsh_import_or_native_harness_process",
-    "no_broker_worker_model_or_provider_process_or_request",
+    "provider_free_single_native_harness_structured_diagnostic_boot_only",
+    "pinned_rc7_source_and_package_identity_required",
+    "no_broker_worker_session_prompt_tool_model_or_provider_request",
     "no_occupied_attempt_retry_resume_overwrite_or_reclassification",
     "attempts_001_002_and_003_terminal_and_consumed_evidence_remain_immutable",
     "no_raw_startup_stream_reconstruction_or_retention",
