@@ -20,6 +20,12 @@ const MAX_REQUEST_BYTES = 1_048_576;
 const MAX_RESPONSE_BYTES = 2_097_152;
 const MAX_OUTPUT_TOKENS = 4_096;
 const UPSTREAM_TIMEOUT_MS = 300_000;
+const providerCallAllowanceText = TEST_MODE
+  ? process.env.EMR4_BROKER_MAX_PROVIDER_CALLS
+  : undefined;
+const MAX_PROVIDER_CALLS = providerCallAllowanceText === undefined
+  ? null
+  : Number.parseInt(providerCallAllowanceText, 10);
 const WORK_ORDER_SCHEMA_V1 = "ariadne.deepseek_work_order.v1";
 const WORK_ORDER_SCHEMA_V2 = "ariadne.deepseek_work_order.v2";
 const COMMAND_MANIFEST_SCHEMA = "ariadne.verifier-command-manifest.v1";
@@ -385,6 +391,10 @@ if (
   !brokerToken ||
   !providerKey ||
   equalSecret(brokerToken, providerKey) ||
+  (MAX_PROVIDER_CALLS !== null &&
+    (!Number.isSafeInteger(MAX_PROVIDER_CALLS) ||
+      MAX_PROVIDER_CALLS < 1 ||
+      String(MAX_PROVIDER_CALLS) !== providerCallAllowanceText)) ||
   !Number.isInteger(LISTEN_PORT) ||
   LISTEN_PORT < 0 ||
   LISTEN_PORT > 65535 ||
@@ -424,6 +434,15 @@ const server = http.createServer(async (request, response) => {
       reason_code: "concurrent-provider-call-forbidden",
     });
     respondJson(response, 409, "concurrent-provider-call-forbidden");
+    return;
+  }
+  if (MAX_PROVIDER_CALLS !== null && providerCallCount >= MAX_PROVIDER_CALLS) {
+    logEvent({
+      event: "broker-request-rejected",
+      reason_code: "provider-call-allowance-exhausted",
+      provider_call_count: providerCallCount,
+    });
+    respondJson(response, 429, "provider-call-allowance-exhausted");
     return;
   }
 
@@ -505,6 +524,7 @@ server.listen(LISTEN_PORT, LISTEN_HOST, () => {
     maximum_request_bytes: MAX_REQUEST_BYTES,
     maximum_response_bytes: MAX_RESPONSE_BYTES,
     maximum_output_tokens: MAX_OUTPUT_TOKENS,
+    maximum_provider_calls: MAX_PROVIDER_CALLS,
     provider_call_budget: "none_beyond_process_wall_clock_and_prepaid_balance",
     test_mode: TEST_MODE,
   });

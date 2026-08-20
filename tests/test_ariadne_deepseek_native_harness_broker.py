@@ -132,7 +132,14 @@ def broker_process(
         "DSH_EMR4_BROKER_TOKEN": BROKER_TOKEN,
         "DEEPSEEK_API_KEY": PROVIDER_KEY,
     }
-    selected_work_order = getattr(request, "param", None)
+    selected = getattr(request, "param", None)
+    provider_call_allowance: int | None = None
+    if isinstance(selected, tuple):
+        selected_work_order, provider_call_allowance = selected
+    else:
+        selected_work_order = selected
+    if provider_call_allowance is not None:
+        env["EMR4_BROKER_MAX_PROVIDER_CALLS"] = str(provider_call_allowance)
     if selected_work_order is not None:
         work_order_path = tmp_path / "work-order.json"
         work_order_path.write_text(json.dumps(selected_work_order), encoding="utf-8")
@@ -314,6 +321,28 @@ def test_broker_binds_one_session_without_imposing_request_count_budget(
     assert [event["provider_call_ordinal"] for event in completions] == [1, 2]
     rejected = _wait_for_event(events, "broker-request-rejected")
     assert rejected["reason_code"] == "session-binding-mismatch"
+
+
+@pytest.mark.parametrize("broker_process", [(None, 1)], indirect=True)
+def test_broker_optional_one_request_allowance_rejects_ordinal_two_before_upstream(
+    broker_process: tuple[subprocess.Popen[str], int, queue.Queue[dict]],
+) -> None:
+    _process, port, events = broker_process
+    ready = _wait_for_event(events, "broker-ready")
+    assert ready["maximum_provider_calls"] == 1
+
+    first_status, _ = _request(port)
+    second_status, second_body = _request(port)
+
+    assert first_status == 200
+    assert second_status == 429
+    assert b"provider-call-allowance-exhausted" in second_body
+    assert _wait_for_event(events, "provider-call-completed")[
+        "provider_call_ordinal"
+    ] == 1
+    rejected = _wait_for_event(events, "broker-request-rejected")
+    assert rejected["reason_code"] == "provider-call-allowance-exhausted"
+    assert rejected["provider_call_count"] == 1
 
 
 def test_broker_rejects_overlapping_provider_call(

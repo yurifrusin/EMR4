@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/synthetic-native-worker-contract-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "authored_at",
+    "planning_source",
+    "package",
+    "provider",
+    "model",
+    "reasoning_effort",
+    "allowed_tool_names",
+    "maximum_parallel_tool_calls",
+    "maximum_provider_calls",
+    "automatic_retries",
+    "fallbacks",
+    "auxiliary_model_calls",
+    "work_package",
+    "success_coordinate",
+    "failure_coordinates",
+    "predecessor_files"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.synthetic_native_worker_contract.v1"},
+    "operation_id": {"const": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal"},
+    "authored_at": {"const": "2026-08-20T20:46:14.4461645+10:00"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "package": {
+      "const": {"name": "@deepseek-ai/dsh", "version": "0.1.0-rc.7"}
+    },
+    "provider": {"const": "deepseek-official"},
+    "model": {"const": "deepseek-v4-flash"},
+    "reasoning_effort": {"const": "high"},
+    "allowed_tool_names": {"const": ["edit", "glob", "read"]},
+    "maximum_parallel_tool_calls": {"const": 1},
+    "maximum_provider_calls": {"const": 1},
+    "automatic_retries": {"const": 0},
+    "fallbacks": {"const": 0},
+    "auxiliary_model_calls": {"const": 0},
+    "work_package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "baseline_bytes", "baseline_sha256", "expected_bytes", "expected_sha256", "public_case_count", "holdback_case_count"],
+      "properties": {
+        "path": {"const": "synthetic_window_coalescer.py"},
+        "baseline_bytes": {"const": 999},
+        "baseline_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "expected_bytes": {"const": 1069},
+        "expected_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "public_case_count": {"const": 4},
+        "holdback_case_count": {"const": 3}
+      }
+    },
+    "success_coordinate": {"const": "ONE_REQUEST_SYNTHETIC_EDIT_ADMITTED"},
+    "failure_coordinates": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[A-Z0-9_]+$"}
+    },
+    "predecessor_files": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "path", "sha256"],
+        "properties": {
+          "role": {"type": "string", "minLength": 1},
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    }
+  }
+}

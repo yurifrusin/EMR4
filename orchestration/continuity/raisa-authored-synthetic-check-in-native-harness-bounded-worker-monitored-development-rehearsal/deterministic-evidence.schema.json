@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/synthetic-native-worker-deterministic-evidence-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "result", "planning_source", "predecessors", "source_semantics", "fixture_matrix", "runner", "profile", "work_package", "boundary"],
+  "properties": {
+    "schema_version": {"const": "ariadne.synthetic_native_worker_deterministic_evidence.v1"},
+    "operation_id": {"const": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal"},
+    "result": {"const": "pass"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "predecessors": {"type": "array", "minItems": 5, "maxItems": 5},
+    "source_semantics": {"type": "object"},
+    "fixture_matrix": {"type": "array", "minItems": 9, "maxItems": 9},
+    "runner": {"type": "object"},
+    "profile": {"type": "object"},
+    "work_package": {
+      "type": "object",
+      "required": ["path", "baseline_bytes", "baseline_sha256", "expected_bytes", "expected_sha256", "prompt_sha256", "public_case_count", "holdback_case_count"]
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["native_process_count", "agent_session_count", "model_request_count", "provider_request_count", "automatic_retry_count", "fallback_count", "auxiliary_model_call_count", "docker_or_database_count"],
+      "properties": {
+        "native_process_count": {"const": 0},
+        "agent_session_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0},
+        "automatic_retry_count": {"const": 0},
+        "fallback_count": {"const": 0},
+        "auxiliary_model_call_count": {"const": 0},
+        "docker_or_database_count": {"const": 0}
+      }
+    }
+  }
+}
