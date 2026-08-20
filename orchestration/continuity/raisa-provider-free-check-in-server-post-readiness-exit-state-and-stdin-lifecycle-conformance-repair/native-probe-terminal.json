@@ -1,0 +1,44 @@
+{
+  "attempt_id": "check-in-lifecycle-native-mount-probe-001",
+  "cleanup": {
+    "disposable_root_absent": true,
+    "process_absent": true
+  },
+  "counts": {
+    "agent_sessions": 0,
+    "automatic_retries": 0,
+    "broker_requests": 0,
+    "database_invocations": 0,
+    "docker_invocations": 0,
+    "model_requests": 0,
+    "native_processes": 1,
+    "network_attempts": 0,
+    "provider_requests": 0,
+    "turns": 0
+  },
+  "effective_tool_names": [],
+  "launch": {
+    "credential_environment_names_removed_count": 3,
+    "duration_ms": 654,
+    "exit_code": 1,
+    "raw_logs_retained": false,
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_bytes": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "markers": [
+    "PRESET_DISCOVERY_ENTERED",
+    "PRESET_DISCOVERY_PASSED"
+  ],
+  "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+  "package": {
+    "installation_id": "deepseek-check-in-attachment-observability-native-001",
+    "name": "@deepseek-ai/dsh",
+    "package_lock_sha256": "a89defcd8a2c5aae4a54c03bda98e2585711fce881b4b08c90ca4808d45555f4",
+    "version": "0.1.0-rc.7"
+  },
+  "result": "failed_closed",
+  "schema_version": "emr4.check-in-lifecycle-native-probe-terminal.v1",
+  "terminal_coordinate": "PRESET_VALIDATION_PASSED"
+}

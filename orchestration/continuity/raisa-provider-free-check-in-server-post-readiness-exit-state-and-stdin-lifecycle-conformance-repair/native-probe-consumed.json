@@ -1,0 +1,10 @@
+{
+  "attempt_id": "check-in-lifecycle-native-mount-probe-001",
+  "automatic_retry_count": 0,
+  "native_process_limit": 1,
+  "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+  "provider_enabled": false,
+  "resume_permitted": false,
+  "schema_version": "emr4.check-in-lifecycle-native-probe-latch.v1",
+  "state": "consumed"
+}
