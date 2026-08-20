@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "operation_id",
+    "candidate_source",
+    "attempt_id",
+    "result",
+    "package",
+    "wrapper",
+    "launch",
+    "structured_diagnostic",
+    "terminal",
+    "provider_boundary",
+    "immutable_artifacts_match",
+    "cleanup"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_structured_diagnostic_native_boot_observability_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "attempt_id": {"const": "structured-diagnostic-native-boot-observability-attempt-001"},
+    "result": {"enum": ["pass", "fail"]},
+    "package": {"type": "object"},
+    "wrapper": {"type": "object"},
+    "launch": {"type": "object"},
+    "structured_diagnostic": {"type": ["object", "null"]},
+    "terminal": {"type": "object"},
+    "provider_boundary": {"type": "object"},
+    "immutable_artifacts_match": {"type": "boolean"},
+    "cleanup": {"type": "object"}
+  }
+}

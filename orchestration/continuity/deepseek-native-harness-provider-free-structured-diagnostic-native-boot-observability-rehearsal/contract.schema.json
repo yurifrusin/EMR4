@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "operation_id",
+    "planning_source",
+    "accepted_sources",
+    "attempt",
+    "components",
+    "materialization",
+    "package",
+    "launch",
+    "diagnostic",
+    "terminal",
+    "process_boundary",
+    "immutable_artifacts",
+    "cleanup_required",
+    "raw_streams_retained"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_structured_diagnostic_native_boot_observability_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_sources": {"type": "object", "minProperties": 3, "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{40}$"}},
+    "attempt": {
+      "type": "object",
+      "required": ["attempt_id", "native_process_limit", "automatic_retry", "manual_retry", "resume", "reclassification"],
+      "additionalProperties": false,
+      "properties": {
+        "attempt_id": {"const": "structured-diagnostic-native-boot-observability-attempt-001"},
+        "native_process_limit": {"const": 1},
+        "automatic_retry": {"const": false},
+        "manual_retry": {"const": false},
+        "resume": {"const": false},
+        "reclassification": {"const": false}
+      }
+    },
+    "components": {"type": "object", "minProperties": 7, "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+    "materialization": {"type": "object"},
+    "package": {"type": "object"},
+    "launch": {"type": "object"},
+    "diagnostic": {"type": "object"},
+    "terminal": {"type": "object"},
+    "process_boundary": {"type": "object"},
+    "immutable_artifacts": {
+      "type": "array",
+      "minItems": 7,
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256"],
+        "additionalProperties": false,
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "cleanup_required": {"const": true},
+    "raw_streams_retained": {"const": false}
+  }
+}

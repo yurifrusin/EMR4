@@ -1,0 +1,141 @@
+{
+  "schema_version": "ariadne.native_harness_structured_diagnostic_native_boot_observability_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+  "planning_source": "90e40cc8fdc154ca48e79dbfb24df68e7f05b558",
+  "accepted_sources": {
+    "canonical_wrapper_node_fixture": "3ed856dac63bf0e51312e2b3dee14bdc2c934daf",
+    "structured_diagnostic_seam": "af22b3e7b2ce3ece15dd6d8530688d19380c1403",
+    "complete_provider_free_rc7_composition": "6ef058b87a2c927efd9d9d2027b59d6ad279fec5"
+  },
+  "attempt": {
+    "attempt_id": "structured-diagnostic-native-boot-observability-attempt-001",
+    "native_process_limit": 1,
+    "automatic_retry": false,
+    "manual_retry": false,
+    "resume": false,
+    "reclassification": false
+  },
+  "components": {
+    "structured_diagnostic_sha256": "d6fe1ddc4930ce7f0ddbf3480ca93b999d6390a17e16aaa5945c115df04ab72a",
+    "legacy_terminal_sha256": "0a476ee7617fbc71d9cc3efb88ca08ac1cc6f01b433aa8d83d0603493cc05468",
+    "materializer_sha256": "c1905ddf1b17e6d513f143c001ce1bb4bfb1eb59de086052735579e00cfeb57c",
+    "materializer_contract_sha256": "2facdb18c79aab5e03a177761c51650272502e67a54e6d5ac6839be3abc4221d",
+    "structured_seam_contract_sha256": "016bdc9121353a7ffccb17fcd4a998de9675c64d51179f9b764fa13d24d70f5b",
+    "node_fixture_evidence_sha256": "da4ce65e6af66a04047df2ee2ead5abbd43878aa0daf29e671e5723e905d75d3",
+    "complete_composition_evidence_sha256": "9ba784b0726addb5644ac3786def410aed56e5bf9da3e23ec21d8e10f6ba1ea0"
+  },
+  "materialization": {
+    "source_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-check-in-attachment-observability-native-001",
+    "package_json_sha256": "0009f94a6b9c3495404d4a1a89e0eef82ba4948c4ea29994c210a271390e64db",
+    "package_lock_sha256": "a89defcd8a2c5aae4a54c03bda98e2585711fce881b4b08c90ca4808d45555f4",
+    "node_modules_lock_sha256": "f68d8d35b440a2d72417f8a50ec6017e28ace9a15da9466ff25d05cdbf7664a4",
+    "process_count": 0,
+    "method": "python_copy_only"
+  },
+  "package": {
+    "name": "@deepseek-ai/dsh",
+    "version": "0.1.0-rc.7",
+    "bin": "lib/bin.js",
+    "tarball_sha256": "2f8f0b763d611ac536f7a9411ee43c0afc067c1b8732c3102c04dbe398bcacc5",
+    "required_installed_packages": [
+      "@deepseek-ai/dsh",
+      "@deepseek-ai/dsh-tools",
+      "@deepseek-ai/dsh-agent-presets",
+      "@deepseek-ai/dsh-scope",
+      "@deepseek-ai/dsh-tool-fs",
+      "@deepseek-ai/dsh-tool-fs-search"
+    ],
+    "installed_source_sha256": {
+      "dsh/lib/bin.js": "c0226687bb20f45c603ec6fe50f3de16d1c3510c3a803304ec575ef9bc366c62",
+      "dsh/lib/profile-boot-BnJoK_kl.js": "778c5b338674d986a49972be920c965d28b2c8cac85364ae77f8587070397663",
+      "dsh/lib/profile-boot-DG5t9aNs.js": "f83ffea6a4d30cfbe02b41dabcc05104c4ad27bf79c74f601f0ddb6ccdf88969",
+      "dsh-app-boot/lib/index.js": "f02b310698d4ec6d18d313f6c9fa61c6566fbc0b5f79e135826b6d98409a2347",
+      "cordis-plugin-loader/lib/index.js": "4e0797430b460ac570bc75338c955da8a4d82c0e9772ab78abe423a9fc25a75a",
+      "cordis/lib/index.js": "1729cdbf8ee40b17c8839e06bf96491490548559e11ef7e411271e0754e751c5"
+    }
+  },
+  "launch": {
+    "node_flag": "--expose-internals",
+    "profile_flag": "--profile",
+    "profile": "emr4-diagnostic-observability-missing",
+    "task_arguments": [],
+    "timeout_seconds": 30,
+    "expected_exit_code": 1,
+    "expected_hmr_event_count": 0
+  },
+  "diagnostic": {
+    "schema_version": "ariadne.native_harness_pre_hmr_structured_diagnostic.v1",
+    "phase": "entrypoint_import_rejected",
+    "cause_chain": [
+      {
+        "position": 0,
+        "error_kind": "error",
+        "code_coordinate": "none",
+        "config_stage": "none",
+        "message_coordinate": "none",
+        "aggregate_shape": "none"
+      }
+    ],
+    "cause_chain_cycle_detected": false,
+    "cause_chain_truncated": false,
+    "raw_error_message_retained": false,
+    "raw_stack_retained": false,
+    "raw_paths_retained": false
+  },
+  "terminal": {
+    "schema_version": "ariadne.native_harness_pre_hmr_startup_terminal.v2",
+    "stage": "native_process_started_before_first_hmr_event",
+    "cause": "structured_entrypoint_import_rejected",
+    "controller_coordinate": "native_process_exited_nonzero",
+    "fallback_schema_version": "ariadne.native_harness_pre_hmr_startup_terminal.v1",
+    "fallback_is_acceptance": false,
+    "exclusive_write": true
+  },
+  "process_boundary": {
+    "python_controller_processes": 1,
+    "package_materializer_processes": 0,
+    "native_harness_processes": 1,
+    "broker_processes": 0,
+    "worker_sessions": 0,
+    "prompts": 0,
+    "tool_executions": 0,
+    "model_requests": 0,
+    "provider_requests": 0,
+    "network_attempts": 0,
+    "docker_invocations": 0,
+    "database_invocations": 0,
+    "serial": true
+  },
+  "immutable_artifacts": [
+    {
+      "path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-attempt-consumed.json",
+      "sha256": "cb4613ebe46f122e24e5fb11a7b48bcba47be8f30c23b75e5d0d4d9ec9fd3541"
+    },
+    {
+      "path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-terminal.json",
+      "sha256": "38cd1854c555de83bbe00757bed4e7744215d4f1996fc2910f37bdc7c8d020e1"
+    },
+    {
+      "path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-attempt-consumed.json",
+      "sha256": "d9af398db0e9416f29df6316ac349a50a9c1516fbf54ccf6b0c40357340457a1"
+    },
+    {
+      "path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-terminal.json",
+      "sha256": "6f873651c94e81faa8af93bd3d191dd67c13982bfca081479cee6e390ff6cb00"
+    },
+    {
+      "path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/occupied-attempt-consumed.json",
+      "sha256": "32db476458a602bc627955d8f8918dc9193ef4338b7ba03e62577b8468854ca4"
+    },
+    {
+      "path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/occupied-terminal.json",
+      "sha256": "00474761a6a901642c3f6ebfc9b07db607125e9ba48e2bbc5654ea8425904e07"
+    },
+    {
+      "path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/pre-hmr-startup-terminal.json",
+      "sha256": "dc9d7eaea6a2f9a4decf5513f2095853ba74fa1764b381f6706bda1399ba288f"
+    }
+  ],
+  "cleanup_required": true,
+  "raw_streams_retained": false
+}
