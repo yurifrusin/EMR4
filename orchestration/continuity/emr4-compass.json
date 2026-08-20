@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 326,
-  "updated_at": "2026-08-20T08:51:16.4963085+10:00",
-  "source_graph_revision": 344,
-  "orientation_statement": "EMR4 will resolve the rc.7 required-service injection contract deterministically, without another native process, before considering any separately frozen recovery execution.",
+  "map_revision": 327,
+  "updated_at": "2026-08-20T09:54:56.7001117+10:00",
+  "source_graph_revision": 345,
+  "orientation_statement": "EMR4 will prove and materialise the exact emr4-bounded-worker preset mapping before considering another native Harness boot.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4361,27 +4361,38 @@
         "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/efficacy-reading.json",
         "docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+      "lineage_parent": "deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot",
+      "strategic_role": "Connect the native DeepSeek harness to Ariadne's deterministic clockwork by making service activation a reproducible, inspectable prerequisite rather than an opaque boot failure",
+      "outcome": "The missing required-service graph is exact, the future declaration is frozen, two verifier defects are corrected and one exact independent veto passes.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json",
+        "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-recovery-review-receipt.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/efficacy-reading.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot",
-    "strategic_role": "Preserve the exact service-availability terminal and resolve rc.7 required-service injection deterministically",
-    "why_now": "The observability repair worked: the retained coordinate proves the runner entered but agentPresets or tools was unavailable before scope creation, so service binding can be investigated without another native process.",
-    "outcome": "The consumed new attempt retained exact readiness, SERVICES_UNAVAILABLE, reliable 10025 ms duration, zero prohibited calls and complete cleanup; native composition remains unproved.",
+    "node_id": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+    "strategic_role": "Materialise the exact bounded worker preset before any future native boot",
+    "why_now": "The host service graph is proven, but the requested emr4-bounded-worker preset is absent from the shipped rc.7 roster and cannot yet select the exact edit/glob/read surface.",
+    "outcome": "Required-service injection is accepted without rerunning the native Harness; the next missing dependency is now the bounded preset itself.",
     "unlocks": [
-      "Exact offline inspection of rc.7 plugin and service-injection semantics.",
-      "A future runner/patch declaration that requires exactly hmr, agentPresets and tools.",
-      "A defensible later decision whether one separately named provider-free native execution is warranted."
+      "A deterministic preset contract can bind the exact edit/glob/read tool mapping.",
+      "Hostile preset variants can be rejected before any native process starts.",
+      "A later separately authorised boot can use an exact, traceable preset and service graph."
     ],
     "does_not_solve": [
-      "No native effective-tool result, occupied worker or DeepSeek model-quality conclusion is accepted.",
-      "No same-attempt retry, resume, reclassification or automatic successor process is authorised.",
-      "No product, ordinary-practice, data, deployment, release, Pages or protected integration opens."
+      "No emr4-bounded-worker preset is yet materialised.",
+      "No native DeepSeek worker, broker, model or provider reliability is proved.",
+      "No product, data, runtime, deployment, release, Pages or protected integration opens."
     ],
     "evidence": [
-      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json",
-      "docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-sol-acceptance.md"
+      "docs/deepseek-native-harness-provider-free-required-service-injection-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-required-service-injection-recovery-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-required-service-injection-recovery.md"
     ]
   },
   "decision_horizon": [

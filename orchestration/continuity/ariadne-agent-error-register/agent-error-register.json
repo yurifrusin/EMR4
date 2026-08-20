@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 567,
+  "register_revision": 568,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-20",
@@ -26297,6 +26297,162 @@
       },
       "incident_id": "AER-0661",
       "attempt_id": "clock-bf9559dc8ea6d85f2b48e973",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "A deterministic provider-free controller must run under the repository's exact provider-free pytest wrapper, including its removal of LOCALAPPDATA, without silently widening environment passthrough.",
+      "observed_error": "The first isolated Gemini review found seven current-suite failures because the controller's default cache root required LOCALAPPDATA even though the exact wrapper removes it.",
+      "detection_method": "Gemini executed the exact isolated-worktree C03 command and returned revision_required with the failing trace and affected source boundary.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-gemini37-attempt-001-disposition.json",
+        "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.provider_free_controller_requires_stripped_environment_variable",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Use LOCALAPPDATA when present, otherwise select the first existing non-symlink user-owned AppData/Local/npm-cache in repository ancestry, and fail closed when no owned candidate exists.",
+        "prevention_control": "Every provider-free controller that needs a user-local cache must be tested under the exact environment-stripping wrapper and with a no-owned-candidate negative fixture before independent dispatch.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-recovery-review-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0662",
+      "attempt_id": "clock-9aff0ad588caf927563fea1f",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "Every verifier-manifest test must be transferable into its clean Git worktree or be explicitly excluded with equivalent candidate-owned evidence for the exact protected boundary.",
+      "observed_error": "The first verifier manifest included a predecessor evidence test that requires the physical user-owned untracked docs/branding directory, which a clean Git-created review worktree cannot contain.",
+      "detection_method": "Gemini's exact isolated C03 command failed the predecessor preservation assertion and returned revision_required; Sol verified the test's accepted primary-worktree purpose and non-transferability.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-gemini37-attempt-001-disposition.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-command-manifest.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.verifier_manifest_includes_nontransferable_untracked_path_assertion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Exclude only the non-transferable predecessor evidence test from the isolated manifest, preserve that test unchanged for the primary worktree, and directly hash-check both immutable attempts in the current candidate suite.",
+        "prevention_control": "Verifier-manifest construction classifies every selected test as Git-transferable or primary-worktree-only before dispatch and requires an explicit equivalent evidence binding for any justified exclusion.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-command-manifest.json",
+          "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-recovery-review-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0663",
+      "attempt_id": "clock-3452f31dec16c29d1db2aae7",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "model": "gemini-3.7-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The terminal structured envelope must reproduce each executed command id and argv exactly from the injected manifest so local evidence admission can bind execution without model transcription drift.",
+      "observed_error": "The corrected reviewer executed C10 as git status --short --branch and completed all ten commands at exit zero, but reported C10 argv as git diff status --short --branch; the broker admitted no verdict.",
+      "detection_method": "Exact local command-result admission returned zero schema-valid envelopes; read-only inspection of the retained conversation record isolated the single extra diff token while the worktree remained unchanged.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-attempt-001-disposition.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-command-manifest.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "verifier.structured_command_argv_transcription_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the non-admitted receipt, start one fresh project, repeat the complete exact manifest, and require verbatim manifest id and argv copying with C10 called out explicitly.",
+        "prevention_control": "The broker continues exact local argv admission; recovery packets explicitly direct reviewers to copy injected command results rather than reconstruct them, and no semantic verdict is inferred from rejected output.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-recovery-review-packet.md",
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-recovery-review-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0664",
+      "attempt_id": "clock-f46be727565a9df92d045651",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "Before incident-intake publication, the machine-derived versioned human-readable register note named by the prospective revision must exist so the canonical baton cannot point at a missing repository artifact.",
+      "observed_error": "The first live publication derived register revision 568 and updated the canonical baton, but the caller had not materialised docs/ariadne-agent-error-correction-register-revision-568.md; the exact post-publication register suite failed.",
+      "detection_method": "The provider-free post-publication compatibility suite failed test_register_is_valid_after_durability_schema_recovery, after which clockwork restored the preceding generation byte-exactly at lease sequence 51.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/closeout/clockwork-tick-attempt-001-evidence.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/closeout/clockwork-tick-attempt-001-report.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.clockwork_incident_intake_missing_versioned_register_note",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the failed publication evidence, roll back byte-exactly, materialise the machine-derived revision-568 companion note, and require its file existence in prepublication verification.",
+        "prevention_control": "Every incident-intake closeout takes the prospective revision from a dry clockwork reading and validates the corresponding versioned register note before live publication; canonical register fields remain clockwork-derived.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-568.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/closeout/closeout-intent.json",
+          "tests/test_ariadne_agent_error_register.py"
+        ]
+      },
+      "incident_id": "AER-0665",
+      "attempt_id": "clock-7a5ae338f1601a983c437c26",
       "origin": "repository",
       "related_incident_ids": [],
       "status": "corrected"

@@ -2,62 +2,70 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "read_only_preterminal_observable_recovery_boot_closeout_tick_check",
+      "command_id": "required_service_injection_closeout_tick_check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_governance_clockwork_tick",
         "--check",
         "--intent",
-        "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/closeout/closeout-intent.json"
+        "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "preterminal_observable_recovery_boot_and_governance_tests",
+      "command_id": "required_service_injection_and_clockwork_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
+        "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
         "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
-        "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot_evidence.py",
         "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
         "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
         "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
-        "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
-        "tests/test_deepseek_native_harness_emr4_profile_contract.py",
-        "tests/test_ariadne_deepseek_native_harness_broker.py",
-        "tests/test_ariadne_provider_free_no_database_admission.py",
-        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_agent_error_register.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+        "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_ariadne_active_operation_latch.py",
         "tests/test_current_baton_consistency.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "preterminal_observable_recovery_boot_closeout_ruff",
+      "command_id": "required_service_injection_closeout_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
-        "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
-        "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot_evidence.py"
+        "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "preterminal_observable_recovery_boot_closeout_compile",
+      "command_id": "required_service_injection_closeout_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
-        "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
-        "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot_evidence.py"
+        "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "required_service_injection_deterministic_check",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "scripts.deepseek_native_harness_provider_free_required_service_injection_recovery",
+        "--check"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

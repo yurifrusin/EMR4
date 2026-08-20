@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will resolve the rc.7 required-service injection contract deterministically, without another native process, before considering any separately frozen recovery execution.
+> EMR4 will prove and materialise the exact emr4-bounded-worker preset mapping before considering another native Harness boot.
 
 ## North star
 
@@ -458,26 +458,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The deterministic preterminal design and corrected independent veto pass, and the clockwork can now record the qualifying rejected review atomically. Lineage parent: `deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof`.
 221. **Test the accepted preterminal observability design once inside the real provider-free rc.7 native lifecycle — DeepSeek native Harness provider-free preterminal-observable composition recovery boot**
    The new process reached the corrected runner and failed closed at exact SERVICES_UNAVAILABLE with reliable timing, zero prohibited calls and complete cleanup; native tool composition remains unproved. Lineage parent: `deepseek-native-harness-provider-free-preterminal-observability-corrected-veto-recovery`.
+222. **Connect the native DeepSeek harness to Ariadne's deterministic clockwork by making service activation a reproducible, inspectable prerequisite rather than an opaque boot failure — DeepSeek native Harness provider-free required-service injection recovery**
+   The missing required-service graph is exact, the future declaration is frozen, two verifier defects are corrected and one exact independent veto passes. Lineage parent: `deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot`.
 
 ## Current position
 
-**Preserve the exact service-availability terminal and resolve rc.7 required-service injection deterministically — DeepSeek native Harness provider-free preterminal-observable composition recovery boot**
+**Materialise the exact bounded worker preset before any future native boot — DeepSeek native Harness provider-free required-service injection recovery**
 
-**Why this proof came next:** The observability repair worked: the retained coordinate proves the runner entered but agentPresets or tools was unavailable before scope creation, so service binding can be investigated without another native process.
+**Why this proof came next:** The host service graph is proven, but the requested emr4-bounded-worker preset is absent from the shipped rc.7 roster and cannot yet select the exact edit/glob/read surface.
 
-The consumed new attempt retained exact readiness, SERVICES_UNAVAILABLE, reliable 10025 ms duration, zero prohibited calls and complete cleanup; native composition remains unproved.
+Required-service injection is accepted without rerunning the native Harness; the next missing dependency is now the bounded preset itself.
 
 ### What this unlocks
 
-- Exact offline inspection of rc.7 plugin and service-injection semantics.
-- A future runner/patch declaration that requires exactly hmr, agentPresets and tools.
-- A defensible later decision whether one separately named provider-free native execution is warranted.
+- A deterministic preset contract can bind the exact edit/glob/read tool mapping.
+- Hostile preset variants can be rejected before any native process starts.
+- A later separately authorised boot can use an exact, traceable preset and service graph.
 
 ### What it does not solve
 
-- No native effective-tool result, occupied worker or DeepSeek model-quality conclusion is accepted.
-- No same-attempt retry, resume, reclassification or automatic successor process is authorised.
-- No product, ordinary-practice, data, deployment, release, Pages or protected integration opens.
+- No emr4-bounded-worker preset is yet materialised.
+- No native DeepSeek worker, broker, model or provider reliability is proved.
+- No product, data, runtime, deployment, release, Pages or protected integration opens.
 
 ## Continuity and authority
 
@@ -1218,6 +1220,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md`
 - `docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-closeout.md`
 - `docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md`
+- `docs/deepseek-native-harness-provider-free-required-service-injection-recovery-closeout.md`
 - `docs/diary/diary.css`
 - `docs/diary/diary.html`
 - `docs/diary/diary.js`
@@ -1771,6 +1774,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/deepseek-native-harness-hmr-boot-proof-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/deepseek-native-harness-preterminal-observability-clockwork-incident-intake-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/deepseek-native-harness-preterminal-observability-corrected-veto-recovery-gemini37-post-auth-review-receipt.json`
+- `orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-recovery-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a3-b3-request-contract-recovery-review-2-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-a5-b4-code-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/model-required-bureau-c3-d3-review-receipt.json`
@@ -1939,7 +1943,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-preterminal-observable-composition-recovery-boot-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-required-service-injection-recovery-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2585,6 +2589,8 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/efficacy-reading.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-cost-ledger.json`
@@ -3238,6 +3244,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-19--unmounted-check-in-admission-control-kernel-rehearsal.md`
+- `orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-required-service-injection-recovery.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3545,4 +3552,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 326; continuity graph revision 344._
+_Compass map revision 327; continuity graph revision 345._

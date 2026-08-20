@@ -1,17 +1,17 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 567,
+  "register_revision": 568,
   "source_cutoff_on": "2026-08-20",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "604d53a3243630e1bbe8419f637735dbfceca1c73d90f2f7e3f78befee20e1e5",
-  "incident_count": 661,
+  "canonical_register_sha256": "b7f4e26128025da23ecb5d22df2049d1dccea32a64f1d88fded432fa70d32ce4",
+  "incident_count": 665,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 444,
+      "agent_behavior": 445,
       "harness": 54,
       "operator": 36,
-      "repository": 111,
+      "repository": 114,
       "transport": 16
     },
     "by_category": {
@@ -19,32 +19,32 @@
       "evidence_misreport": 69,
       "harness_failure": 54,
       "operator_error": 36,
-      "output_contract_violation": 237,
+      "output_contract_violation": 238,
       "read_only_violation": 4,
       "reasoning_claim_error": 46,
-      "repository_defect": 111,
+      "repository_defect": 114,
       "transport_timeout": 16
     },
     "by_role": {
       "implementer": 44,
       "integration_reviewer": 3,
-      "orchestrator": 556,
-      "verifier": 58
+      "orchestrator": 559,
+      "verifier": 59
     },
     "by_process_severity": {
       "low": 380,
       "material": 118,
-      "moderate": 163
+      "moderate": 167
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 114,
-      "canonical_unchanged": 404,
+      "accepted_candidate_changed": 116,
+      "canonical_unchanged": 406,
       "untrusted_partial_worktree": 143
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 43,
-      "antigravity-gemini-flash-3-7-high-verifier::verifier": 2,
+      "antigravity-gemini-flash-3-7-high-verifier::verifier": 3,
       "api-spine-historical-regression-suite::orchestrator": 2,
       "ariadne-active-operation-latch-closeout::orchestrator": 1,
       "ariadne-active-operation-latch-continuity-test::orchestrator": 3,
@@ -77,7 +77,7 @@
       "codex-primary-orchestrator-commentary::orchestrator": 1,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 339,
+      "codex-primary-orchestrator::orchestrator": 342,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
