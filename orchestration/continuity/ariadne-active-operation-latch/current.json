@@ -4,11 +4,11 @@
   "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 005",
   "objective": "Freeze and deterministically admit the fifth and only fifth separately named provider-free disposable PostgreSQL relay-free recovery attempt around the accepted server-attachment repair; optionally allocate one exact brokered native-Harness DeepSeek adapter/test package, then permit at most one new authored-synthetic execution only after a distinct one-run checkpoint.",
   "status": "in_progress",
-  "source_head": "f9a4ede953cc496e9b778a6162d77dc7e73121df",
+  "source_head": "d8eec606735ed7d1b5ab089c0c33b8d4469d612f",
   "authority_source": "Yuri's standing uninterrupted-development authority, the accepted attempt-004 blocked evidence and server-attachment repair, and the accepted complete-composition native-Harness prerequisite.",
   "checkpoint": {
-    "completed_stage": "Accepted deepseek-native-harness-provider-free-complete-composition-native-boot-recovery at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_and_freeze_attempt_005_plan_work_order_and_preexecution_gates",
+    "completed_stage": "Fresh five-source rehydration passed; the attempt-005 plan, threat delta, closed envelope schema and plan tests are frozen at full source d8eec606735ed7d1b5ab089c0c33b8d4469d612f; the new sparse worker packet is clean at that source; and 47 exact provider-free plan, harness, broker, no-database and accepted-Harness-evidence tests pass with zero Docker, PostgreSQL or model execution.",
+    "next_executable_stage": "generate_and_validate_work_order_v2_exact_no_database_command_binding_custom_hmr_runner_fresh_five_source_predispatch_receipt_then_launch_exactly_one_deepseek_native_harness_worker_session",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
