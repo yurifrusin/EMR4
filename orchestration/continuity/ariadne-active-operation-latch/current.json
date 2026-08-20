@@ -3,17 +3,17 @@
   "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal",
   "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker monitored development rehearsal",
   "objective": "Freeze and, only after a separate exact checkpoint, run one authored-synthetic non-product DeepSeek worker work package through the accepted native preset, exact tool guard and Ariadne broker gears with one request, immutable terminal evidence and zero silent fallback.",
-  "status": "in_progress",
+  "status": "blocked",
   "source_head": "065b872c90834fa543c9ce88b7159fde80c0efea",
   "authority_source": "Yuri's standing uninterrupted-development authority, prepaid DeepSeek budget control and the accepted provider-disabled native preset/tool projection closeout.",
   "checkpoint": {
-    "completed_stage": "The exact provider-free candidate passed deterministic validation in primary and isolated Windows worktrees. Two rich command-result envelopes failed closed and remain immutable. A synthetic diagnostic proved basic structured egress; a fresh semantic-only Gemini 3.7 Flash/high veto passed. Preparation then materialised the authored-synthetic baseline and accepted rc.7 controls with zero native, model or provider requests. The one-process, one-request, zero-retry checkpoint is admitted.",
-    "next_executable_stage": "generate_a_fresh_five_source_preexecution_receipt_then_run_exactly_one_deepseek_native_harness_authored_synthetic_edit_without_retry_or_fallback",
+    "completed_stage": "Attempt 001 is consumed and immutable. It failed before broker-ready with zero native, model or provider calls and no DeepSeek performance evidence. Exact-root cleanup recovered, the controller-broker canonical digest seam and Windows read-only cleanup were repaired, the provider-free deterministic ledger passed, and one fresh Gemini 3.7 Flash/high semantic veto accepted the published repair with no P0-P2 issue.",
+    "next_executable_stage": null,
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 0
+      "verification": 1
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,12 +26,12 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": false,
-    "reason": null
+    "required": true,
+    "reason": "The frozen plan expressly permits no second worker or retry without a distinct user-attention decision. Yuri must now choose whether the reviewed repair may be exercised by a separately prepared and checkpointed attempt 002; standing continuation authority cannot silently override this narrower no-retry boundary."
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "The prelaunch repair is complete and independently accepted, but the tranche aim has not been achieved because attempt 001 never reached DeepSeek. The operation pauses blocked with zero provider cost from the occupied attempt until Yuri explicitly authorises or declines one fresh attempt 002."
   },
   "protected_boundaries": [
     "authored_synthetic_nonproduct_check_in_native_harness_bounded_worker_only",

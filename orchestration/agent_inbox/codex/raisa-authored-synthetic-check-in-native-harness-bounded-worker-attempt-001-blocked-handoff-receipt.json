@@ -1,0 +1,127 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker monitored development rehearsal",
+    "completed_stage": "Attempt 001 is consumed with zero DeepSeek contact; exact cleanup recovered; the published controller-broker handshake repair passed deterministic validation and fresh Gemini semantic veto; clockwork published the user-attention boundary with zero drift.",
+    "next_executable_stage": null,
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "065b872c90834fa543c9ce88b7159fde80c0efea",
+    "status": "blocked",
+    "terminal_handback_permitted": true,
+    "user_attention_required": true
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "dd3b5cf4e4ae1a152f56ab6c29dc64633b9c6b78",
+    "reason_codes": [],
+    "resolved_commit": "065b872c90834fa543c9ce88b7159fde80c0efea",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "065b872c90834fa543c9ce88b7159fde80c0efea"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "dd3b5cf4e4ae1a152f56ab6c29dc64633b9c6b78",
+    "branch_origin_aligned": true,
+    "head": "dd3b5cf4e4ae1a152f56ab6c29dc64633b9c6b78",
+    "origin_branch_commit": "dd3b5cf4e4ae1a152f56ab6c29dc64633b9c6b78",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 660
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "attempt_001_blocked_handoff",
+    "lanes": [
+      {
+        "disposition": "blocked",
+        "expected_leverage": "unknown",
+        "lane_id": "deepseek_flash",
+        "rationale": "Attempt 001 never reached DeepSeek and no attempt-002 authority exists.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "The fresh independent semantic repair veto passed with no P0-P2 issue and unchanged clean worktree.",
+        "work_packages": [
+          "accepted repair veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and this user decision is inherently serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "user_attempt_002_decision"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "distinct Yuri decision before any attempt 002 preparation",
+      "fresh preparation and separate checkpoint before any newly authorised native process"
+    ]
+  },
+  "planned_action": "commit_and_push_the_clockwork_owned_blocked_transition_then_request_yuris_distinct_attempt_002_decision",
+  "reasons": [
+    "parallelism_lane_disposition_invalid:deepseek_flash",
+    "parallelism_lane_leverage_invalid:deepseek_flash"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal-plan.md",
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-001-prelaunch-recovery.md",
+      "orchestration/agent_inbox/antigravity/raisa-authored-synthetic-native-worker-attempt-001-repair-gemini37-review-receipt.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-attempt-consumed.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-postterminal-cleanup-recovery.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/blocked/closeout-intent.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "Sol owns immutable failure evidence, reviewed repair, clockwork and Git. Gemini completed the independent repair veto. DeepSeek has no attempt-002 identity or request authority. Native subagents remain declined.",
+    "git_refs_and_worktree": "Machine snapshot alone owns exact Git identities. The published repair/review predecessor is exact; the clockwork projection is the only tracked change pending explicit-path commit. All four protected refs remain exact and docs/branding plus unrelated untracked files remain preserved.",
+    "live_handover_current_baton": "AGENTS.md controls. The active authored-synthetic native Harness operation is now blocked by its clockwork-owned latch after consumed attempt 001 and reviewed prelaunch repair.",
+    "protected_evidence_boundaries": "Attempt 001 is immutable and non-resumable. No second worker, native process or provider request exists. Attempt 002 requires Yuri's distinct decision. Product/data/database/deployment/Pages/protected-ref authority remains closed."
+  },
+  "status": "revision_required",
+  "terminal_handback_permitted": true,
+  "worker_dispatch_permitted": false
+}

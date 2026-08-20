@@ -1,0 +1,76 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_and_push_the_clockwork_owned_blocked_transition_then_request_yuris_distinct_attempt_002_decision",
+  "context_health": {"agent_contexts": [{
+    "agent_id": "orchestrator",
+    "measurement_source": "fresh five-source blocked-transition readback after immutable zero-request terminal, exact cleanup recovery, published repair, deterministic validation, independent semantic veto and clockwork generation 79",
+    "rehydrated_from_receipt": true,
+    "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+  }]},
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md controls. The active authored-synthetic native Harness operation is now blocked by its clockwork-owned latch after consumed attempt 001 and reviewed prelaunch repair.",
+    "current_authority_allocation": "Sol owns immutable failure evidence, reviewed repair, clockwork and Git. Gemini completed the independent repair veto. DeepSeek has no attempt-002 identity or request authority. Native subagents remain declined.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal-plan.md",
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-001-prelaunch-recovery.md",
+      "orchestration/agent_inbox/antigravity/raisa-authored-synthetic-native-worker-attempt-001-repair-gemini37-review-receipt.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-attempt-consumed.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-postterminal-cleanup-recovery.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/blocked/closeout-intent.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Attempt 001 is immutable and non-resumable. No second worker, native process or provider request exists. Attempt 002 requires Yuri's distinct decision. Product/data/database/deployment/Pages/protected-ref authority remains closed.",
+    "git_refs_and_worktree": "Machine snapshot alone owns exact Git identities. The published repair/review predecessor is exact; the clockwork projection is the only tracked change pending explicit-path commit. All four protected refs remain exact and docs/branding plus unrelated untracked files remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal",
+    "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker monitored development rehearsal",
+    "objective": "Freeze and, only after a separate exact checkpoint, run one authored-synthetic non-product DeepSeek worker work package through the accepted native preset, exact tool guard and Ariadne broker gears with one request, immutable terminal evidence and zero silent fallback.",
+    "status": "blocked",
+    "source_head": "065b872c90834fa543c9ce88b7159fde80c0efea",
+    "authority_source": "Yuri's standing uninterrupted-development authority, prepaid DeepSeek budget control and the frozen no-retry plan.",
+    "checkpoint": {
+      "completed_stage": "Attempt 001 is consumed with zero DeepSeek contact; exact cleanup recovered; the published controller-broker handshake repair passed deterministic validation and fresh Gemini semantic veto; clockwork published the user-attention boundary with zero drift.",
+      "next_executable_stage": null,
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 1},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": true, "reason": "The frozen plan expressly permits no second worker or retry without a distinct user-attention decision."},
+    "terminal_response": {"permitted": true, "reason": "The repair is accepted but the tranche aim remains unmet because attempt 001 never reached DeepSeek; Yuri must authorise or decline one fresh attempt 002."},
+    "protected_boundaries": ["attempt_001_immutable_nonresumable", "no_second_worker_or_retry_without_distinct_user_attention_decision", "zero_product_data_database_deployment_pages_or_protected_refs", "protected_refs_remain_exact", "docs_branding_preserved", "explicit_path_staging_only"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal",
+    "assessed_stage": "attempt_001_blocked_handoff",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "reserved", "expected_leverage": "negative", "rationale": "Attempt 001 never reached DeepSeek and no attempt-002 authority exists; this lane remains reserved but cannot dispatch.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "completed", "expected_leverage": "positive", "rationale": "The fresh independent semantic repair veto passed with no P0-P2 issue and unchanged clean worktree.", "work_packages": ["accepted repair veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Developer policy prohibits proactive delegation and this user decision is inherently serial.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["distinct Yuri decision before any attempt 002 preparation", "fresh preparation and separate checkpoint before any newly authorised native process"],
+    "reassessment_triggers": ["user_attempt_002_decision"]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol completed the repair, veto and clockwork blocked transition."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Attempt 001 made zero provider requests and yields no performance conclusion."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected as fallback."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini 3.7 Flash/high repair veto passed."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No subagent spawned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "deepseek-native-harness-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
