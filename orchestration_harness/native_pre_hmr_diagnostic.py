@@ -328,6 +328,7 @@ def build_entrypoint_wrapper_source(
     operation_id: str,
     attempt_id: str,
     candidate_source: str,
+    canonical_json: bool = False,
 ) -> bytes:
     operation_id = _identifier(operation_id, "operation_id")
     attempt_id = _identifier(attempt_id, "attempt_id")
@@ -348,6 +349,21 @@ def build_entrypoint_wrapper_source(
         except ValueError as error:
             raise StructuredDiagnosticError(f"{label}_path_outside_disposable_root") from error
     known_codes = sorted(CODE_COORDINATES - {"none", "unrecognized"})
+    canonical_serializer = ""
+    diagnostic_expression = "buildDiagnostic(error)"
+    if canonical_json:
+        canonical_serializer = '''
+function canonicalize(value) {
+  if (Array.isArray(value)) return value.map((item) => canonicalize(item));
+  if (value !== null && typeof value === "object") {
+    const result = {};
+    for (const key of Object.keys(value).sort()) result[key] = canonicalize(value[key]);
+    return result;
+  }
+  return value;
+}
+'''
+        diagnostic_expression = "canonicalize(buildDiagnostic(error))"
     source = f'''import {{ closeSync, fsyncSync, openSync, writeFileSync }} from "node:fs";
 
 const SCHEMA_VERSION = {json.dumps(SCHEMA_VERSION)};
@@ -445,13 +461,13 @@ function buildDiagnostic(error) {{
     raw_paths_retained: false,
   }};
 }}
-
+{canonical_serializer}
 try {{
   await import(ENTRYPOINT_URL);
 }} catch (error) {{
   let descriptor;
   try {{
-    const payload = JSON.stringify(buildDiagnostic(error)) + "\\n";
+    const payload = JSON.stringify({diagnostic_expression}) + "\\n";
     descriptor = openSync(DIAGNOSTIC_PATH, "wx", 0o600);
     writeFileSync(descriptor, payload, "utf8");
     fsyncSync(descriptor);
@@ -464,11 +480,13 @@ try {{
 }}
 '''
     payload = source.encode()
-    validate_entrypoint_wrapper_source(payload)
+    validate_entrypoint_wrapper_source(payload, require_canonical_json=canonical_json)
     return payload
 
 
-def validate_entrypoint_wrapper_source(payload: bytes) -> dict[str, Any]:
+def validate_entrypoint_wrapper_source(
+    payload: bytes, *, require_canonical_json: bool = False
+) -> dict[str, Any]:
     try:
         source = payload.decode("utf-8")
     except UnicodeError as error:
@@ -490,6 +508,13 @@ def validate_entrypoint_wrapper_source(payload: bytes) -> dict[str, Any]:
             )
         ),
     }
+    if require_canonical_json:
+        checks["canonical_json_serializer"] = (
+            source.count("function canonicalize(value)") == 1
+            and source.count("Object.keys(value).sort()") == 1
+            and source.count("JSON.stringify(canonicalize(buildDiagnostic(error)))")
+            == 1
+        )
     if not all(checks.values()):
         raise StructuredDiagnosticError("wrapper_source_shape_invalid")
     return {

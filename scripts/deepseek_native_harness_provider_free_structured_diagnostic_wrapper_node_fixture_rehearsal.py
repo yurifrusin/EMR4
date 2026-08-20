@@ -162,7 +162,9 @@ def validate_authored_sources(
     for token in contract["forbidden_source_tokens"]:
         if token.encode() in combined:
             raise NodeFixtureRehearsalError("forbidden_source_token")
-    wrapper_projection = diagnostic.validate_entrypoint_wrapper_source(wrapper)
+    wrapper_projection = diagnostic.validate_entrypoint_wrapper_source(
+        wrapper, require_canonical_json=True
+    )
     observer_text = observer.decode("utf-8")
     if (
         observer_text.count("await import(WRAPPER_URL)") != 1
@@ -249,6 +251,7 @@ def _scenario_projection(
         operation_id=OPERATION_ID,
         attempt_id=attempt_id,
         candidate_source=candidate_source,
+        canonical_json=True,
     )
     _write_exclusive(wrapper_path, wrapper)
     observer = observer_source(

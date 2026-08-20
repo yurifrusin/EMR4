@@ -49,6 +49,39 @@ def test_observer_retains_only_identity_and_fixed_coordinates() -> None:
     assert ".stack" not in source
 
 
+def test_canonical_wrapper_mode_sorts_recursive_json_without_changing_default(
+    tmp_path: Path,
+) -> None:
+    package_root = tmp_path / "fixture-package"
+    entrypoint = package_root / "lib" / "bin.js"
+    entrypoint.parent.mkdir(parents=True)
+    entrypoint.write_bytes(rehearsal.fixture_source("nested_known"))
+    default = diagnostic.build_entrypoint_wrapper_source(
+        package_root=package_root.resolve(),
+        wrapper_path=(tmp_path / "default-wrapper.mjs").resolve(),
+        diagnostic_path=(tmp_path / "default-diagnostic.json").resolve(),
+        disposable_root=tmp_path.resolve(),
+        operation_id=rehearsal.OPERATION_ID,
+        attempt_id=ATTEMPT,
+        candidate_source=CANDIDATE,
+    )
+    canonical = diagnostic.build_entrypoint_wrapper_source(
+        package_root=package_root.resolve(),
+        wrapper_path=(tmp_path / "canonical-wrapper.mjs").resolve(),
+        diagnostic_path=(tmp_path / "canonical-diagnostic.json").resolve(),
+        disposable_root=tmp_path.resolve(),
+        operation_id=rehearsal.OPERATION_ID,
+        attempt_id=ATTEMPT,
+        candidate_source=CANDIDATE,
+        canonical_json=True,
+    )
+    assert b"function canonicalize(value)" not in default
+    projection = diagnostic.validate_entrypoint_wrapper_source(
+        canonical, require_canonical_json=True
+    )
+    assert projection["checks"]["canonical_json_serializer"] is True
+
+
 def test_observer_validation_rejects_nonidentical_and_extra_fields() -> None:
     value = {
         "caught_rejection": True,
