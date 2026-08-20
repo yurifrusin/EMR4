@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.governance_live_tick_rejected_receipt.v1",
+  "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+  "attempt": 1,
+  "status": "revision_required",
+  "reason": "tick_command_contract",
+  "observed_error": "The first evidence command used a direct script operand instead of the required -m module-launch form.",
+  "canonical_mutation": false,
+  "published_generation": false,
+  "recorded_at": "2026-08-21T00:00:21.7924368+10:00"
+}

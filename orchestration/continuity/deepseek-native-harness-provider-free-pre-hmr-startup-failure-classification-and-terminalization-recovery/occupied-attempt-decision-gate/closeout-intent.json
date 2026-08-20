@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.governance_live_blocked_transition_intent.v1",
+  "operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
+  "completed_stage": "The provider-disabled pre-HMR startup terminal recovery is accepted and published through the clockwork. Future pre-first-HMR failures now receive a validated bounded stage/cause coordinate before raw-stream cleanup, while attempts 001 and 002 remain immutable and no provider request occurred in the accepted recovery.",
+  "user_attention_reason": "Yuri must distinctly choose whether to authorise one new occupied authored-synthetic native-Harness worker attempt under a separately frozen calls, cost, isolation, cleanup and claim envelope. The accepted recovery expressly does not confer that occupied authority.",
+  "terminal_reason": "The provider-disabled recovery is complete and the next possible action would incur a new occupied Harness/provider execution. No process or provider request may launch until Yuri authorises or declines that distinct attempt.",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "pre-hmr-startup-recovery-provider-disabled-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery",
+          "--check"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.native_harness_pre_hmr_legacy_test_boundary_containment.v1",
+  "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+  "observed_on": "2026-08-20",
+  "status": "contained",
+  "origin": "overbroad_legacy_controller_test_selection",
+  "local_test_broker_process_count": 1,
+  "provider_request_count": 0,
+  "native_harness_process_count": 0,
+  "worker_process_count": 0,
+  "automatic_retry_count": 0,
+  "post_test_matching_broker_process_count": 0,
+  "post_test_attempt_root_exists": false,
+  "correction": "The accepted provider-disabled manifest runs only the recovery suite and monkeypatches subprocess Popen and run to reject invocation.",
+  "claim_boundary": "This records a local ready-only broker test boundary breach and exact containment; it is not provider or worker evidence."
+}

@@ -1,0 +1,492 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+    "title": "DeepSeek native Harness provider-free pre-HMR startup failure classification and terminalization recovery",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-20T23:49:08.9636913+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "title": "DeepSeek native Harness provider-free pre-HMR startup failure classification and terminalization recovery",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the provider-disabled recovery only.",
+          "The accepted path launches no native Harness, worker or provider request.",
+          "Any new occupied native worker remains a distinct Yuri decision."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-closed-pre-hmr-terminal-vocabulary",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/contract.json",
+          "status": "accepted",
+          "summary": "Accept two startup stages, eleven fail-closed causes, fixed byte signatures, ambiguity, unclassified and stream-limit outcomes."
+        },
+        {
+          "id": "accept-terminal-before-cleanup-controller-binding",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json",
+          "status": "accepted",
+          "summary": "Accept exclusive safe sidecar validation before exact-root removal and digest-only ordinary-terminal binding."
+        },
+        {
+          "id": "accept-provider-disabled-hostile-evidence",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept twelve semantic scenarios, twelve hostile mutations, forty-nine focused tests, five ordering assertions and seventeen immutable artifacts."
+        },
+        {
+          "id": "reject-harness-reliability-and-deepseek-performance",
+          "source": "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md",
+          "status": "rejected",
+          "summary": "Reject attempt-002 reclassification, Harness reliability, DeepSeek performance and any occupied retry or provider authority."
+        },
+        {
+          "id": "accept-contained-recovery-incidents",
+          "source": "docs/ariadne-agent-error-correction-register-revision-577.md",
+          "status": "accepted",
+          "summary": "Accept AER-0716 through AER-0721 as contained, including the ready-only local broker test boundary breach with exact post-test absence."
+        }
+      ],
+      "claim_scope": [
+        "Future native-Harness failures before the first HMR event can emit a bounded sanitized stage and cause before raw stream deletion.",
+        "Raw startup lines, paths, exception messages, prompts, reasoning, environment values and credentials are not durable terminal fields.",
+        "Zero matching cause groups remain unclassified and multiple groups remain ambiguous.",
+        "Streams above sixty-four KiB per stream receive only the closed stream-limit cause while full counts and digests are retained.",
+        "The accepted provider-disabled path starts no native Harness, worker or provider request.",
+        "Attempt 002 remains immutable and its exact semantic startup cause remains unproved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/efficacy-reading.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/legacy-broker-test-boundary-containment.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-preplanning-corrected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-postcompaction-corrected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-corrected-candidate-prepush-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/clockwork-check-attempt-003-rejected-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/native_startup_terminal.py",
+          "scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery.py",
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-terminal.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-577.md",
+          "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-pre-hmr-startup-recovery.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Attempt 002's exact semantic startup cause remains unproved and cannot be reconstructed.",
+        "Harness reliability and DeepSeek coding performance remain unproved.",
+        "A new occupied native worker requires Yuri's distinct decision.",
+        "No product, data, database, ordinary-practice, production, deployment, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Make the clockwork-coupled native DeepSeek worker diagnosable before another occupied attempt",
+      "outcome": "Future pre-first-HMR startup failures now preserve one safe bounded stage and cause before local raw streams are deleted.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json",
+        "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md",
+        "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-pre-hmr-startup-recovery.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Place a genuine user decision before the next occupied native-Harness worker",
+      "why_now": "The provider-disabled diagnostic control is complete, while every occupied attempt remains cost-bearing external execution under a distinct accepted envelope.",
+      "outcome": "The Harness is better instrumented but remains paused from occupied EMR4 work pending Yuri's decision.",
+      "unlocks": [
+        "A later occupied failure can distinguish process creation, runtime contract, package, profile, module, service, HMR, controller, limit, ambiguity and unknown coordinates.",
+        "Raw startup streams can still be deleted without collapsing safe failure attribution."
+      ],
+      "does_not_solve": [
+        "No new occupied attempt or provider request.",
+        "No Harness reliability or DeepSeek performance conclusion.",
+        "No product, ordinary-practice, database, deployment or protected-ref authority."
+      ],
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/efficacy-reading.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-sol-acceptance.md"
+      ],
+      "orientation_statement": "EMR4 will not launch another occupied native worker unless Yuri distinctly selects that next outcome."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
+      "active_tranche": "DeepSeek native Harness post-recovery occupied-attempt decision gate",
+      "objective": "Await Yuri's distinct decision whether to authorise one new occupied authored-synthetic native-Harness worker attempt under a separately frozen calls, cost, isolation, cleanup and claim envelope, without launching any process or provider request meanwhile.",
+      "authority_source": "The accepted provider-disabled pre-HMR recovery and its explicit boundary that every new occupied worker requires Yuri's distinct decision.",
+      "next_stage": "record_a_genuine_user_attention_gate_before_any_new_occupied_attempt"
+    },
+    "incidents": [
+      {"incident_id": "continuation-event-alias", "source_id": "preplanning-receipt-001", "peers": []},
+      {"incident_id": "manual-git-object-narrative", "source_id": "postcompaction-receipt-001", "peers": []},
+      {"incident_id": "timeout-signature-validator", "source_id": "startup-terminal-test-001", "peers": []},
+      {"incident_id": "direct-script-bootstrap", "source_id": "recovery-runner-build-001", "peers": []},
+      {"incident_id": "ordering-probe-stale-fragment", "source_id": "recovery-ordering-test-001", "peers": []},
+      {"incident_id": "provider-disabled-broker-test-selection", "source_id": "legacy-controller-test-001", "peers": []},
+      {"incident_id": "clockwork-direct-script-command", "source_id": "closeout-check-001", "peers": []},
+      {"incident_id": "clockwork-contract-evidence-shape", "source_id": "closeout-check-002", "peers": []},
+      {"incident_id": "clockwork-unregistered-contract-id", "source_id": "closeout-check-003", "peers": []}
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "pre_hmr_recovery_evidence_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery", "--check"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "pre_hmr_recovery_provider_disabled_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "pre_hmr_recovery_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "orchestration_harness/native_startup_terminal.py", "scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery.py", "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py", "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "pre_hmr_recovery_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "orchestration_harness/native_startup_terminal.py", "scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery.py", "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py", "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "DeepSeek native Harness provider-free pre-HMR startup terminal recovery acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-threat-model-delta.md",
+      "orchestration_harness/native_startup_terminal.py",
+      "scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery.py",
+      "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+      "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/pre-hmr-startup-terminal.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/evidence.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/efficacy-reading.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/legacy-broker-test-boundary-containment.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/clockwork-check-attempt-003-rejected-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-577.md",
+      "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-pre-hmr-startup-recovery.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "no_new_occupied_native_harness_worker_before_distinct_yuri_decision",
+    "no_native_harness_broker_worker_or_provider_process_while_awaiting_decision",
+    "no_attempt_002_retry_resume_overwrite_or_reclassification",
+    "no_raw_startup_stream_retention",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "pre-hmr-recovery-continuation-event-alias-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "role": "orchestrator",
+      "resource_id": "ariadne-orchestrator-continuation-event",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "acceptance",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Continuation receipts must use the exact configured continuation-event vocabulary.",
+      "observed_error": "The first preplanning runtime state supplied pre_plan instead of pre_sprint_planning and was rejected before source change.",
+      "detection_method": "The orchestrator preflight returned revision_required with continuation_event_missing_or_unapproved.",
+      "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-preplanning-receipt.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.pre_hmr_recovery_continuation_event_alias",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "List the configured event vocabulary and regenerate the receipt with pre_sprint_planning.",
+        "prevention_control": "Continuation events are selected from orchestrator preflight list output rather than recalled aliases.",
+        "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-preplanning-corrected-receipt.json"]
+      },
+      "baton_summary": "records the rejected pre_plan alias and the schema-listed pre_sprint_planning correction."
+    },
+    {
+      "attempt_key": "pre-hmr-recovery-manual-git-object-narrative-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "role": "orchestrator",
+      "resource_id": "ariadne-five-source-runtime-state",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Exact Git identities belong only to the machine-generated snapshot, not narrative five-source evidence.",
+      "observed_error": "The first post-compaction runtime state repeated full Git object IDs in git_refs_and_worktree prose.",
+      "detection_method": "Preflight rejected with git_refs_evidence_manual_object_id_forbidden before implementation resumed.",
+      "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-postcompaction-receipt.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.pre_hmr_recovery_manual_git_object_narrative",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove all exact object IDs from narrative Git evidence and delegate them to the machine snapshot.",
+        "prevention_control": "The Git evidence sentence now contains no hexadecimal object literal and the guard remains mandatory.",
+        "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-postcompaction-corrected-receipt.json"]
+      },
+      "baton_summary": "records the rejected manual Git-object narrative recurrence and corrected machine-only projection."
+    },
+    {
+      "attempt_key": "pre-hmr-recovery-timeout-signature-validator-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "role": "implementer",
+      "resource_id": "native-startup-terminal-validator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Exact controller timeout coordinates must validate without requiring a raw-text signature.",
+      "observed_error": "The first validator treated hmr_bootstrap_failed only as signature-derived and rejected a native_worker_timeout terminal with no matched signature group.",
+      "detection_method": "The focused timeout fixture failed at single_signature_cause_invalid before any candidate acceptance.",
+      "evidence_paths": ["tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.native_startup_timeout_signature_relationship",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Validate controller timeout and exception facts separately from nonzero-exit signature classification.",
+        "prevention_control": "The relationship matrix now has exact fixtures for process creation, timeout, controller exception and text-derived exits.",
+        "evidence_paths": ["orchestration_harness/native_startup_terminal.py", "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py"]
+      },
+      "baton_summary": "records the timeout relationship defect and exact controller-fact validation repair."
+    },
+    {
+      "attempt_key": "pre-hmr-recovery-direct-script-bootstrap-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "role": "implementer",
+      "resource_id": "provider-free-recovery-evidence-runner",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "implementation",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "A repository script must boot both as a direct path and through module import from the repository root.",
+      "observed_error": "Two direct build/check invocations failed before evidence generation because orchestration_harness was imported before repository-root bootstrapping.",
+      "detection_method": "Python returned ModuleNotFoundError for orchestration_harness on both invocations.",
+      "evidence_paths": ["scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery.py"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.provider_free_recovery_direct_script_bootstrap",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the standard bounded repository-root bootstrap before local package imports.",
+        "prevention_control": "Both direct --build and --check invocations are part of the accepted command manifest.",
+        "evidence_paths": ["scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery.py", "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json"]
+      },
+      "baton_summary": "records the direct-script import failure and standard repository-root bootstrap."
+    },
+    {
+      "attempt_key": "pre-hmr-recovery-ordering-probe-stale-fragment-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "role": "implementer",
+      "resource_id": "pre-hmr-controller-ordering-probe",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Deterministic controller-ordering probes must bind the current stable source seam after a refactor.",
+      "observed_error": "The first per-label stream-read refactor left the probe searching for the earlier literal stdout call, so evidence build and two tests rejected.",
+      "detection_method": "The builder and tests raised ValueError because the stale source substring was absent.",
+      "evidence_paths": ["scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery.py", "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.pre_hmr_ordering_probe_stale_source_fragment",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the ordering probe to the stable per-label stream-reading assignment.",
+        "prevention_control": "The builder and focused test share the same stable ordering seam and all five assertions pass.",
+        "evidence_paths": ["scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery.py", "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py"]
+      },
+      "baton_summary": "records the stale source-order probe and its stable per-label binding repair."
+    },
+    {
+      "attempt_key": "pre-hmr-recovery-provider-disabled-broker-test-selection-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "role": "orchestrator",
+      "resource_id": "provider-disabled-test-manifest",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "The provider-disabled recovery validation must not start a broker, native Harness, worker or provider request.",
+      "observed_error": "The first broad test selection included the historical local broker-ready regression and briefly started one test broker outside the tranche boundary.",
+      "detection_method": "Review of the selected legacy test source exposed its Popen call; its finally block terminated the broker and exact post-test readback found zero matching processes and no attempt root.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/legacy-broker-test-boundary-containment.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.provider_disabled_recovery_overbroad_broker_test_selection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Narrow the accepted manifest to the recovery suite and make subprocess Popen and run fatal within provider-disabled validation.",
+        "prevention_control": "The accepted forty-nine-test suite monkeypatches both subprocess entry points and the evidence boundary remains zero process and zero provider request.",
+        "evidence_paths": ["tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py", "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json"]
+      },
+      "baton_summary": "records the ready-only local broker test breach, exact absence and narrowed fatal-subprocess validation manifest."
+    },
+    {
+      "attempt_key": "pre-hmr-recovery-clockwork-direct-script-command-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "role": "orchestrator",
+      "resource_id": "ariadne-clockwork-command-manifest",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every clockwork Python command must use the schema-owned module-launch form beginning with -m.",
+      "observed_error": "The first closeout check supplied the recovery evidence runner as a direct script path and was rejected before canonical mutation.",
+      "detection_method": "The clockwork validator returned tick_command_contract before preparing a generation.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/clockwork-check-attempt-001-rejected-receipt.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.pre_hmr_closeout_direct_script_command_form",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the direct script operand with -m followed by the exact module path.",
+        "prevention_control": "Closeout command manifests are checked against the exact clockwork module-launch contract before publication.",
+        "evidence_paths": ["orchestration_harness/governance_clockwork_tick.py", "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/closeout-intent.json"]
+      },
+      "baton_summary": "records the rejected direct-script closeout command and corrected module-launch form."
+    },
+    {
+      "attempt_key": "pre-hmr-recovery-clockwork-contract-evidence-shape-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "role": "orchestrator",
+      "resource_id": "ariadne-continuity-contract-evidence",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Continuity contract evidence must use typed contract objects rather than bare repository paths.",
+      "observed_error": "The second closeout check supplied four bare contract-evidence paths and prospective graph validation rejected them.",
+      "detection_method": "Clockwork transaction preparation returned contract_evidence_object_required before canonical mutation.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/clockwork-check-attempt-002-rejected-receipt.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.pre_hmr_closeout_contract_evidence_object_shape",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Project the four paths through one satisfied typed contract-evidence object.",
+        "prevention_control": "New node contract evidence follows the continuity graph contractEvidence definition before transaction preparation.",
+        "evidence_paths": ["orchestration/continuity/ariadne-continuity-graph.schema.json", "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/closeout-intent.json"]
+      },
+      "baton_summary": "records the rejected bare contract paths and corrected typed contract-evidence object."
+    },
+    {
+      "attempt_key": "pre-hmr-recovery-clockwork-unregistered-contract-id-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "role": "orchestrator",
+      "resource_id": "ariadne-continuity-contract-registry",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A nonempty contract-evidence record must reference an existing global continuity contract and its registered node evidence.",
+      "observed_error": "The third closeout check used a newly invented local contract ID as though it were a registered global cross-node contract.",
+      "detection_method": "Prospective validation returned contract_evidence_contract_unknown and path_not_node_evidence before canonical mutation.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/clockwork-check-attempt-003-rejected-receipt.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.pre_hmr_closeout_unregistered_global_contract_id",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Set cross-node contract evidence empty and retain the tranche-local contract under ordinary node evidence.",
+        "prevention_control": "Nonempty contract evidence is admitted only after resolving an existing ID from the continuity graph contract registry.",
+        "evidence_paths": ["orchestration/continuity/emr4-continuity-graph.json", "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/closeout-intent.json"]
+      },
+      "baton_summary": "records the rejected invented global contract ID and empty cross-node contract projection."
+    }
+  ]
+}

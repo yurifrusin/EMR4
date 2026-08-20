@@ -1,0 +1,13 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "sent_at": "2026-08-21T00:10:07.5170895+10:00",
+  "sprint": "DeepSeek native Harness pre-HMR recovery",
+  "checks": "12 scenarios, 12 hostile mutations, 49 focused tests; provider calls 0",
+  "engine_disposition": "paused",
+  "pause_reason": "Provider-disabled recovery accepted; Yuri decision required before one new occupied authored-synthetic attempt",
+  "provider_response": {
+    "status": 1,
+    "request": "22cc7e21-4063-4961-aad6-19ab7326da81"
+  },
+  "non_phi": true
+}

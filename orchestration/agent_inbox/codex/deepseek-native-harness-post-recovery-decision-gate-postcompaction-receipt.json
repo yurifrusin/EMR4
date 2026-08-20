@@ -1,0 +1,122 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness post-recovery occupied-attempt decision gate",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery at the machine-resolved source.",
+    "next_executable_stage": "record_a_genuine_user_attention_gate_before_any_new_occupied_attempt",
+    "operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
+    "resume_after_compaction": true,
+    "source_head": "3df76c569e57ef50de7b54e44ebb81d2b882e75a",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "git_object_resolution": {
+    "observed_head": "3df76c569e57ef50de7b54e44ebb81d2b882e75a",
+    "reason_codes": [],
+    "resolved_commit": "3df76c569e57ef50de7b54e44ebb81d2b882e75a",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "3df76c569e57ef50de7b54e44ebb81d2b882e75a"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "3df76c569e57ef50de7b54e44ebb81d2b882e75a",
+    "branch_origin_aligned": true,
+    "head": "3df76c569e57ef50de7b54e44ebb81d2b882e75a",
+    "origin_branch_commit": "3df76c569e57ef50de7b54e44ebb81d2b882e75a",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 668
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "post_compaction_user_attention_gate",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The active gate expressly prohibits a native worker and provider request before Yuri's distinct decision.",
+        "work_packages": []
+      },
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "There is no implementation candidate or acceptance surface requiring independent veto at this human-owned decision gate.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the only remaining action is one serial clockwork transition to a human-owned decision boundary.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "yuri_authorizes_one_new_occupied_attempt",
+      "yuri_declines_or_redirects_the_native_harness_lane"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "five-source rehydration before blocked transition",
+      "blocked clockwork check before publish",
+      "no occupied envelope construction before Yuri's distinct decision"
+    ]
+  },
+  "planned_action": "validate_and_record_the_genuine_yuri_attention_gate_without_launching_any_native_harness_broker_worker_or_provider_process",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-pre-hmr-startup-recovery.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns rehydration and the blocked transition only. DeepSeek cannot launch before Yuri's distinct decision, Gemini has no candidate to veto, and native subagents are declined under developer policy and the serial human-owned decision boundary.",
+    "git_refs_and_worktree": "The machine-generated Git snapshot alone owns exact object identities. It verifies the task branch and origin alignment, all four protected refs, the intentional clockwork closeout changes, and preservation of existing untracked files including docs/branding.",
+    "live_handover_current_baton": "AGENTS.md controls. The provider-disabled pre-HMR recovery is accepted and the post-recovery occupied-attempt decision gate is the named successor.",
+    "protected_evidence_boundaries": "Attempts 001 and 002 remain immutable and consumed. No native Harness, broker, worker or provider process may run while awaiting the decision; no product, database, data, deployment, Pages, protected evidence or protected ref is opened."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

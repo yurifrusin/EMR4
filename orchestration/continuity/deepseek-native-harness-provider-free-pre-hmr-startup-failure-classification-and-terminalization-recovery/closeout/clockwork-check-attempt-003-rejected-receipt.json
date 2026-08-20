@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.governance_live_tick_rejected_receipt.v1",
+  "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+  "attempt": 3,
+  "status": "revision_required",
+  "reason": "prospective_projection_invalid_unregistered_contract_id",
+  "observed_error": "The typed correction used a tranche-local identifier as though it were a registered global cross-node contract.",
+  "canonical_mutation": false,
+  "published_generation": false,
+  "recorded_at": "2026-08-21T00:00:21.7924368+10:00"
+}

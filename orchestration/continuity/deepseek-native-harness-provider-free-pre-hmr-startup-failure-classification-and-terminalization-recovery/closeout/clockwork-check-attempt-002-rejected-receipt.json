@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.governance_live_tick_rejected_receipt.v1",
+  "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+  "attempt": 2,
+  "status": "revision_required",
+  "reason": "prospective_projection_invalid_contract_evidence_object_required",
+  "observed_error": "The second draft supplied bare contract-evidence paths where continuity requires typed contract objects.",
+  "canonical_mutation": false,
+  "published_generation": false,
+  "recorded_at": "2026-08-21T00:00:21.7924368+10:00"
+}
