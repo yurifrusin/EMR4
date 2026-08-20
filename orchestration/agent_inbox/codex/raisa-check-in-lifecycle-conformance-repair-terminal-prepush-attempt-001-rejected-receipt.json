@@ -1,0 +1,19 @@
+{
+  "schema_version": "ariadne.orchestrator_rejected_input_receipt.v1",
+  "status": "revision_required",
+  "stage": "pre_push",
+  "operation_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+  "reason_codes": [
+    "git_refs_source_evidence_object_conflict"
+  ],
+  "field": "source_evidence.git_refs_and_worktree",
+  "supplied_object_id": "ad906437313bd798f6a19e66a6400bb42d118f26",
+  "machine_resolved_object_id": "ad906437b92e44fa7fd6159caa8be8e04690fb9c",
+  "object_id_match": false,
+  "worker_dispatch_permitted": false,
+  "push_permitted": false,
+  "provider_requests": 0,
+  "canonical_mutations_after_detection": 0,
+  "protected_ref_mutations": 0,
+  "correction": "Replace the narrative token with the exact resolver result, preserve this rejected input and add a reusable source-evidence object consistency guard before successor acceptance."
+}
