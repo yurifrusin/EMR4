@@ -1,50 +1,50 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 569,
+  "register_revision": 570,
   "source_cutoff_on": "2026-08-20",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "447ba44329ea1dffe19158db9cb126822112d43979357b09441d89cb58cd8aa9",
-  "incident_count": 667,
+  "canonical_register_sha256": "1dd0bb1e670f117123c8ff33628bbbd36519a4752791c7327581980b8fc88cb6",
+  "incident_count": 675,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 446,
+      "agent_behavior": 451,
       "harness": 54,
       "operator": 36,
-      "repository": 115,
+      "repository": 118,
       "transport": 16
     },
     "by_category": {
-      "command_scope_violation": 88,
-      "evidence_misreport": 69,
+      "command_scope_violation": 89,
+      "evidence_misreport": 70,
       "harness_failure": 54,
       "operator_error": 36,
-      "output_contract_violation": 239,
+      "output_contract_violation": 241,
       "read_only_violation": 4,
-      "reasoning_claim_error": 46,
-      "repository_defect": 115,
+      "reasoning_claim_error": 47,
+      "repository_defect": 118,
       "transport_timeout": 16
     },
     "by_role": {
       "implementer": 44,
       "integration_reviewer": 3,
-      "orchestrator": 561,
-      "verifier": 59
+      "orchestrator": 568,
+      "verifier": 60
     },
     "by_process_severity": {
-      "low": 382,
-      "material": 118,
-      "moderate": 167
+      "low": 386,
+      "material": 121,
+      "moderate": 168
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 116,
-      "canonical_unchanged": 408,
+      "canonical_unchanged": 416,
       "untrusted_partial_worktree": 143
     },
     "by_resource_and_role": {
       "antigravity-gemini-36-flash-high::verifier": 1,
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 43,
-      "antigravity-gemini-flash-3-7-high-verifier::verifier": 3,
+      "antigravity-gemini-flash-3-7-high-verifier::verifier": 4,
       "api-spine-historical-regression-suite::orchestrator": 2,
       "ariadne-active-operation-latch-closeout::orchestrator": 1,
       "ariadne-active-operation-latch-continuity-test::orchestrator": 3,
@@ -77,7 +77,7 @@
       "codex-primary-orchestrator-commentary::orchestrator": 1,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 344,
+      "codex-primary-orchestrator::orchestrator": 348,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "context-fabric-behavior-result-admission::orchestrator": 1,
@@ -133,6 +133,7 @@
       "emr4-live-handover-compactness-guard::orchestrator": 1,
       "emr4-live-handover-compactness::orchestrator": 1,
       "emr4-maintenance-test-suite::orchestrator": 1,
+      "emr4-repository::orchestrator": 3,
       "gemini-36-flash-high-verifier::verifier": 1,
       "git-cached-diff-whitespace-gate::orchestrator": 1,
       "git-worktree-windows-path-layout::orchestrator": 3,

@@ -97,6 +97,11 @@ enablement is hidden inside the correction.
   its machine register passed at Continuity 347 / Compass 329 through AER-0674,
   but its human revision still showed the earlier draft. Rollback lease 63 was
   byte-exact; the new prospective revision is 570 / 675 through AER-0675.
+- Final coupled publication: lease 64 / generation
+  `gen-7ed55aab9b7849a0c7033b639bedee3f188bd805ff7832cc8133096f7233910e`;
+  Continuity 347 / Compass 329; register revision 570 / 675 incidents through
+  AER-0675; full safe postpublication suite and idempotent zero-drift readback
+  passed.
 - Protected refs: local/origin `master` and `handoff/current` remain exact
   `2e34bdad732fdab32fbf778280b3d3c70d66d602`.
 
@@ -109,5 +114,5 @@ authored-synthetic, product-data and protected-ref boundaries unchanged.
 The first non-PHI continuing Pushover notification succeeded with request
 `ec01f12b-6fec-4680-95b5-02391ce84d65`; its stale next-work line is superseded
 by corrective request `4db1795d-21ca-41f6-93e3-2f5a52169f06`, delivered after
-the lease-62 publication. It will itself be superseded after the fully coupled
-publication passes.
+the lease-62 publication. It is itself superseded by final corrective request
+`e2454fb4-1f98-4672-9106-8894689aa2cc`, which succeeded after lease 64.

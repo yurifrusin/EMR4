@@ -84,5 +84,8 @@ broker behavior, production isolation or product suitability. No product,
 data, deployment, release, Pages or protected-ref authority is granted.
 
 Lease 62 and its generation remain immutable negative projection evidence; the
-accepted Harness result itself remains unchanged. Final closeout requires a
-new full-Git-bound publication and postpublication readback.
+accepted Harness result itself remains unchanged. The new full-Git-bound lease
+64 publication passed at generation
+`gen-7ed55aab9b7849a0c7033b639bedee3f188bd805ff7832cc8133096f7233910e`,
+Continuity 347 / Compass 329 and register revision 570 / AER-0675. The full safe
+postpublication suite and idempotent zero-drift readback passed.

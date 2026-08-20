@@ -108,5 +108,9 @@ The first non-PHI continuing Pushover notification succeeded with request
 `ec01f12b-6fec-4680-95b5-02391ce84d65`; its stale successor statement is
 superseded by corrective request
 `4db1795d-21ca-41f6-93e3-2f5a52169f06`; lease 62 was subsequently rolled back
-at lease 63 after its stale human projection was found. A final corrective
-notification follows only after the fully coupled publication passes.
+at lease 63 after its stale human projection was found. Fully coupled lease 64
+then passed exactly once at generation
+`gen-7ed55aab9b7849a0c7033b639bedee3f188bd805ff7832cc8133096f7233910e`,
+with Continuity 347 / Compass 329, register revision 570 / AER-0675, full safe
+postpublication verification and an idempotent zero-drift readback. Final
+corrective Pushover request `e2454fb4-1f98-4672-9106-8894689aa2cc` succeeded.

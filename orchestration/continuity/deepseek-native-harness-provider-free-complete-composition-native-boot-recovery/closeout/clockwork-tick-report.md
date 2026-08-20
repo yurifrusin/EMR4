@@ -4,10 +4,10 @@ Status: **passed**
 
 Operation: `deepseek-native-harness-provider-free-complete-composition-native-boot-recovery`
 
-Source: `8bb6930eaedc7ba692b43426b6d41a2fc591d1d5`
+Source: `f9a4ede953cc496e9b778a6162d77dc7e73121df`
 
-Generation: `gen-40aeffc94b940cd10a27a457fd537c0ffdac5d9499795f4fd12322645b37f860`
+Generation: `gen-7ed55aab9b7849a0c7033b639bedee3f188bd805ff7832cc8133096f7233910e`
 
 Previous generation: `gen-edb10ab8559ab7068e78e1d21a9bd3e7c0e4b40c04e50020c924a96556469cab`
 
-Lease sequence: 62
+Lease sequence: 64
