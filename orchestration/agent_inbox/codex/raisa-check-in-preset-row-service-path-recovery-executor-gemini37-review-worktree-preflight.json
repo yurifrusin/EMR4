@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/preset-row-service-executor-gemini-ff2ae5e5",
+  "branch": "codex/review-preset-row-service-executor-ff2ae5e5",
+  "head": "ff2ae5e55384989f83bfcd16499662a1a3c04a2b",
+  "expected_head": "ff2ae5e55384989f83bfcd16499662a1a3c04a2b",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "ba7c2b2a97f82bfc03bbb94ac4f6870256f4ad1221d86ce62499074a7acf72df",
+  "command_count": 12,
+  "repository_paths": [
+    {
+      "path": "C:/Users/sarashera/EMR4-worktrees/deepseek-check-in-attachment-observability-native-001",
+      "kind": "directory",
+      "required": true,
+      "scope": "external",
+      "exists": true
+    }
+  ],
+  "candidate_paths": [
+    "C:/Users/sarashera/EMR4-worktrees/preset-row-service-executor-gemini-ff2ae5e5/scripts/raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+    "C:/Users/sarashera/EMR4-worktrees/preset-row-service-executor-gemini-ff2ae5e5/orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-terminal.schema.json",
+    "C:/Users/sarashera/EMR4-worktrees/preset-row-service-executor-gemini-ff2ae5e5/tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+    "C:/Users/sarashera/EMR4-worktrees/preset-row-service-executor-gemini-ff2ae5e5/tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery_plan.py"
+  ],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/preset-row-service-executor-gemini-ff2ae5e5",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": "ariadne.egress-failure-receipt.v1",
+  "status": "egress_failed_without_admitted_terminal_decision",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\preset-row-service-executor-gemini-ff2ae5e5",
+  "branch": "codex/review-preset-row-service-executor-ff2ae5e5",
+  "head_before": "ff2ae5e55384989f83bfcd16499662a1a3c04a2b",
+  "head_after": "ff2ae5e55384989f83bfcd16499662a1a3c04a2b",
+  "dirty_after": false,
+  "worktree_identity_unchanged": true,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "b83c2ccea809494192f8057eae3273ac19930dd2c2c4ff0ff74a43da9ecfc998",
+  "exit_code": 0,
+  "elapsed_ms": 155574,
+  "stdout": {
+    "bytes": 27339,
+    "sha256": "311c0a546a1a52c4c0b18ef8bfaede94daf0e078aec832a9011de0db83d366be",
+    "empty": false
+  },
+  "stderr": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "empty": true
+  },
+  "decision_contract": "schema_constrained_json_v1",
+  "reason_code": "structured_decision_envelope_not_admitted",
+  "terminal_decision_admitted": false,
+  "candidate_review_admitted": false,
+  "command_manifest_sha256": "ba7c2b2a97f82bfc03bbb94ac4f6870256f4ad1221d86ce62499074a7acf72df"
+}
