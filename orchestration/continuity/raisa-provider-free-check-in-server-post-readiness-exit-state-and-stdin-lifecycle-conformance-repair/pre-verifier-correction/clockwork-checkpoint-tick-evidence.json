@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "bcd3f594f9b9821f05cfcc6ed35e2e40b45bc3ca",
+  "source_commit": "bcd3f594f9b9821f05cfcc6ed35e2e40b45bc3ca",
+  "generation_id": "gen-6d16de17b4b9b38bd5899e57e53dc089d8e6be3f2129776a71196b046806bd43",
+  "bundle_sha256": "6d16de17b4b9b38bd5899e57e53dc089d8e6be3f2129776a71196b046806bd43",
+  "previous_generation_id": "gen-e6524b97d6438958437dc64b52ba584e7e541f472f0120fd4e3c51928499cb88",
+  "previous_source_commit": "bcd3f594f9b9821f05cfcc6ed35e2e40b45bc3ca",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 70,
+  "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+  "event_kind": "checkpoint_transition",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

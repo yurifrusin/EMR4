@@ -1,0 +1,29 @@
+{
+  "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
+  "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+  "completed_stage": "At machine-resolved exact full Git source f89677fb17f80e0660f6dd2b72f8cfad09b190d6, the sole provider-disabled native process is immutably retained as failed-closed negative evidence at first-missing marker PRESET_VALIDATION_PASSED. It created no agent, turn, broker, model or provider request, made no network, Docker or database attempt, retried zero times and cleaned its process and disposable root exactly.",
+  "next_executable_stage": "dispatch_one_fresh_gemini_3_7_flash_high_read_only_veto_with_machine_resolved_source_bindings_then_close_honestly_and_freeze_the_narrow_validation_subcoordinate_successor",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "check-in-lifecycle-corrected-static-admission",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair", "--check"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "check-in-lifecycle-corrected-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}
