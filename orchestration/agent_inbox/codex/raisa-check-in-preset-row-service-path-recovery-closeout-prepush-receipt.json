@@ -1,0 +1,125 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in native Harness preset-mount effective-tool projection rehearsal",
+    "completed_stage": "Accepted raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_narrowest_fail_closed_provider_free_preset_mount_effective_tool_projection_plan",
+    "operation_id": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "5232330b2cb7dca0f3f2dddf332cb4f3b8beccf7",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "git_object_resolution": {
+    "observed_head": "c70c9aee6c65fd09a186a8450e66a91d2188f395",
+    "reason_codes": [],
+    "resolved_commit": "5232330b2cb7dca0f3f2dddf332cb4f3b8beccf7",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "5232330b2cb7dca0f3f2dddf332cb4f3b8beccf7"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "c70c9aee6c65fd09a186a8450e66a91d2188f395",
+    "branch_origin_aligned": false,
+    "head": "c70c9aee6c65fd09a186a8450e66a91d2188f395",
+    "origin_branch_commit": "23b6c423319a453b9888088295ee3f9cad5c78a9",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 657
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "predecessor_closeout_prepush",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Task-branch Git publication admits no worker or model request.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The predecessor exact semantic veto is complete; no review work remains before task-branch push.",
+        "work_packages": [
+          "predecessor_split_semantic_veto_completed"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and one owner must perform fetch, ref verification and push serially.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "successor_preplanning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit this prepush receipt",
+      "fetch origin",
+      "verify task and four protected refs",
+      "push only the task branch",
+      "verify origin task branch and protected refs",
+      "rehydrate successor before plan freeze"
+    ]
+  },
+  "planned_action": "fetch_verify_and_push_only_the_task_branch_closeout_commits_without_moving_any_protected_ref",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-preset-row-service-path-recovery-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-row-service-path-recovery.md",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/closeout/clockwork-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns task-branch fetch, verification and push. DeepSeek receives no request, Gemini's predecessor veto is complete and native subagents are declined because Git publication is serial and proactive delegation is prohibited.",
+    "git_refs_and_worktree": "The generated snapshot is the sole exact Git reading. docs/branding and every unrelated untracked path remain preserved; task-branch push only and no protected-ref movement.",
+    "live_handover_current_baton": "AGENTS.md was read completely. The provider-disabled preset-row service recovery is clockwork-accepted at Continuity 351 / Compass 333 and the provider-free mount/tool-projection successor is in progress.",
+    "protected_evidence_boundaries": "Fetch and verify all refs, then push only codex/ariadne-bernie-davida-parallel-seam. No force, protected-ref, Pages, deployment, release, provider, native process, product or data action is authorised."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
