@@ -24,6 +24,15 @@ and my corrected byte-count statement are all in the efficacy reading. They do
 not justify adding new ceremony. This tranche is a good provisional example of
 the clockwork reducing ambiguity while keeping honest cost measurable.
 
+There was one less flattering closeout event. I repeated a previously recorded
+mistake by failing to retain the session handle from a long-running
+postpublication test command. The process completed, but its final test exit
+was not admissible. I reran the unchanged suite once with the handle retained;
+it passed to 100%. The clockwork publication was then preserved and rolled back
+byte-for-byte so the recurrence could enter the error register before final
+publication. This does not affect the candidate, but it is exactly the kind of
+workflow cost the efficacy mechanism must make visible.
+
 The next step is a single, tightly bounded provider-free native boot that puts
 the now-proven pieces together. It will test harness discovery, service
 activation and the final three-tool view, but still will not run a DeepSeek
@@ -46,6 +55,9 @@ worker or contact a model provider.
 - Deterministic verification: 24 focused tests and 21 hostile variants.
 - Independent review: first-attempt Gemini 3.7 Flash/high `pass`, ten exact
   zero-exit commands, 101 tests, unchanged HEAD and clean worktree.
+- Closeout recovery: one repeated yielded-session-handle lapse; unchanged
+  observed compatibility rerun passed to 100%; lease 53 preserved and rolled
+  back byte-exactly at lease 54 for incident intake.
 - Execution boundary: zero Node, native Harness, worker, agent, broker,
   DeepSeek model, provider, external network, Docker and database execution.
 - Protected boundary: no product, API, client, feature flag, practice, data,

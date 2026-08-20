@@ -30,9 +30,13 @@ Acceptance basis:
   records an exact `pass`, ten zero-exit commands, unchanged candidate HEAD and
   a clean isolated worktree.
 
-The bounded mechanical corrections recorded in the efficacy reading do not
-alter candidate semantics, require a provider retry or meet the incident
-register threshold.
+The bounded prepublication mechanical corrections recorded in the efficacy
+reading do not alter candidate semantics or require a provider retry. The
+postpublication compatibility chain did repeat the previously registered
+discarded-session-handle error. Its unchanged observed rerun passed at exit
+zero; the first lease-53 publication is preserved, rolled back byte-exactly at
+lease 54 and admitted as a qualifying clockwork-owned incident before final
+acceptance.
 
 Claim ceiling: this proves an exact installation-ready preset payload and its
 deterministic post-mount projection. It does not prove live discovery, mount,

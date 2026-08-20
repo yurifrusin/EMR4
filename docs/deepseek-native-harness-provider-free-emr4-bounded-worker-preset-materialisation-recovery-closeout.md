@@ -34,8 +34,16 @@ The efficacy record retains the actual mechanical cost: two malformed
 read-only inspection invocations, one test-assertion narrowing, two pre-write
 source-token alignments, one test rerun whose first terminal summary was lost,
 one pre-verifier schema correction and one commentary byte-count correction.
-None changed the accepted claim, caused a provider/native retry or qualifies
-for the incident register.
+None changed the accepted claim or caused a provider/native retry.
+
+The first postpublication compatibility chain then repeated an already
+registered orchestration error: its long-running tool result was projected to
+stdout alone, discarding the yielded session handle. The process reached its
+final clockwork check, but its pytest exit could not be admitted. One unchanged
+rerun retained and polled session `42419` and passed to 100% at exit zero. The
+otherwise-valid lease-53 publication is preserved and rolled back byte-exactly
+at lease 54; this recurrence enters clockwork incident intake rather than being
+mislabelled as a micro-cost.
 
 No Node or native Harness process, worker, agent, session, turn, broker,
 DeepSeek model, provider, network, Docker or database action occurred. No

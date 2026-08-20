@@ -1,7 +1,7 @@
 {
   "schema_version": "ariadne.tranche_efficacy_reading.v1",
   "operation_id": "deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery",
-  "status": "accepted_first_candidate_first_independent_veto",
+  "status": "accepted_first_candidate_first_independent_veto_after_one_clockwork_rollback",
   "deterministic_candidate": {
     "commit": "962e91d9af90fbe977177d251f9f3e3134aaad19",
     "result": "pass",
@@ -65,8 +65,11 @@
     "test_authoring_note": "One negative import assertion matched the evidence key broker_requests and was narrowed to actual import statements before candidate commit.",
     "deterministic_source_predicate_corrections_before_first_write": 2,
     "deterministic_source_predicate_note": "Two source-token predicates were aligned to the exact accepted rc.7 strings before the first successful materialiser write.",
-    "test_execution_reruns_for_observability": 1,
-    "test_execution_rerun_note": "One successful neighboring-suite execution lost its terminal summary because the process session identifier was not retained; the same suite was rerun once and 77 of 77 tests were observed passing.",
+    "test_execution_reruns_for_observability": 2,
+    "test_execution_rerun_notes": [
+      "One successful neighboring-suite execution lost its terminal summary because the process session identifier was not retained; the same suite was rerun once and 77 of 77 tests were observed passing.",
+      "The first postpublication compatibility chain repeated the already registered discarded-session-handle lapse. It reached its final clockwork check but its pytest terminal exit was not admissible; one unchanged rerun retained session 42419 and passed to 100% at exit zero."
+    ],
     "pre_verifier_receipt_schema_corrections": 1,
     "pre_verifier_receipt_schema_note": "The generic preflight treated an optional workspace receipt as a handoff workspace; the inapplicable field was removed before dispatch.",
     "prepublication_clockwork_intent_validation_corrections": 2,
@@ -76,6 +79,9 @@
     ],
     "commentary_factual_corrections": 1,
     "commentary_factual_note": "The payload size was corrected from an early 160-byte commentary estimate to the measured 158 bytes.",
+    "clockwork_publication_attempts_before_final": 1,
+    "clockwork_rollback_count_before_final": 1,
+    "clockwork_rollback_note": "Lease 53 was a deterministic clean publication, but it omitted the newly observed repeated session-handle incident. It was preserved and rolled back byte-exactly at lease 54 before corrected incident-intake publication.",
     "native_attempt_retry_count": 0
   },
   "rerun_assessment": {
@@ -83,9 +89,9 @@
     "semantic_review_attempt_count": 1,
     "blind_retry_count": 0,
     "native_attempt_retry_count": 0,
-    "qualifying_incident_count": 0,
+    "qualifying_incident_count": 1,
     "micro_corrections_recorded_only_in_efficacy": 9,
-    "conclusion": "The clockwork-shaped tranche achieved its exact candidate and independent veto without semantic rebuild, verifier retry or native-process retry. Mechanical costs remain visible here without creating new procedural gates."
+    "conclusion": "The tranche achieved its exact candidate and independent veto without semantic rebuild, verifier retry or native-process retry. The repeated yielded-session-handle lapse is not hidden as a micro-cost: the first publication is preserved, rolled back byte-exactly and entered through clockwork incident intake before final closeout."
   },
   "protected_boundaries_preserved": true
 }

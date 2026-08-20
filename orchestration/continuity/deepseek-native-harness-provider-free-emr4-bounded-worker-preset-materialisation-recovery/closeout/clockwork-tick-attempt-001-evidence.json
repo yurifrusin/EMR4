@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "rejected_after_postpublication_observability_audit",
+  "head": "d54f8f55019c911277ad2ff6dd4e499ca10954f1",
+  "source_commit": "d54f8f55019c911277ad2ff6dd4e499ca10954f1",
+  "generation_id": "gen-9c56d1fad99d61a4600bf37c7dcc1ada37be8a49c50b9ebfe2922f766ac077a7",
+  "bundle_sha256": "9c56d1fad99d61a4600bf37c7dcc1ada37be8a49c50b9ebfe2922f766ac077a7",
+  "previous_generation_id": "gen-1a484be32129fdf24dde4615377059c29772136dc0eb414693f3f9803ea578ff",
+  "lease_sequence": 53,
+  "operation_id": "deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery",
+  "event_kind": "clean_closeout",
+  "live_publication_count": 1,
+  "rejection_reason": "The first postpublication verification chain yielded after partial output, but the caller emitted only stdout and discarded the returned unified-session identifier. The process completed, but its terminal pytest exit was not admissible and an observed rerun was required. This recurs AER-0421, AER-0651 and AER-0654 and must enter incident intake before final closeout.",
+  "candidate_unchanged": true,
+  "protected_boundaries_preserved": true
+}
