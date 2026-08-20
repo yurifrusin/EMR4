@@ -261,14 +261,18 @@ def test_writer_rejects_escape_and_disposable_root_output(tmp_path: Path) -> Non
         )
 
 
-def test_reader_and_writer_reject_symlinks_when_supported(tmp_path: Path) -> None:
+def test_reader_and_writer_reject_symlinks(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
     target = tmp_path / "target.raw"
     target.write_bytes(b"hostile")
-    link = tmp_path / "stream.raw"
-    try:
-        link.symlink_to(target)
-    except OSError:
-        pytest.skip("symlink creation is unavailable")
+    link = target
+    original_is_symlink = Path.is_symlink
+    monkeypatch.setattr(
+        Path,
+        "is_symlink",
+        lambda self: self == link or original_is_symlink(self),
+    )
     with pytest.raises(terminal.StartupTerminalError):
         terminal.read_startup_stream(link)
 
@@ -279,7 +283,12 @@ def test_reader_and_writer_reject_symlinks_when_supported(tmp_path: Path) -> Non
     evidence_root.mkdir()
     disposable_root.mkdir()
     real_parent.mkdir()
-    linked_parent.symlink_to(real_parent, target_is_directory=True)
+    linked_parent.mkdir()
+    monkeypatch.setattr(
+        Path,
+        "is_symlink",
+        lambda self: self == linked_parent or original_is_symlink(self),
+    )
     with pytest.raises(terminal.StartupTerminalError):
         terminal.write_pre_hmr_terminal_exclusive(
             path=linked_parent / "terminal.json",
