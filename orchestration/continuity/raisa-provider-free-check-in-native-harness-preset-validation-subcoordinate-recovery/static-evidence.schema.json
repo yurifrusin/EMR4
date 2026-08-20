@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/check-in-preset-validation-static-evidence-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "result", "characterization", "provider_boundary", "native_process_checkpoint_admitted", "claim_boundary"],
+  "properties": {
+    "schema_version": {"const": "ariadne.check_in_preset_validation_static_evidence.v1"},
+    "operation_id": {"const": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery"},
+    "result": {"const": "pass"},
+    "characterization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package", "source_checks", "discovery_chain", "preset"],
+      "properties": {
+        "package": {"type": "object"},
+        "source_checks": {"type": "object", "minProperties": 10, "additionalProperties": {"const": true}},
+        "discovery_chain": {"const": ["AgentPresets.list", "discoverPresets", "scanRoot", "compositionProblem", "entryListProblem"]},
+        "preset": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "bytes", "sha256", "safe_yaml_rows_exact"],
+          "properties": {
+            "id": {"const": "emr4-bounded-worker"},
+            "bytes": {"const": 158},
+            "sha256": {"const": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1"},
+            "safe_yaml_rows_exact": {"const": true}
+          }
+        }
+      }
+    },
+    "provider_boundary": {
+      "type": "object",
+      "minProperties": 10,
+      "maxProperties": 10,
+      "additionalProperties": {"const": 0}
+    },
+    "native_process_checkpoint_admitted": {"const": false},
+    "claim_boundary": {"const": "pinned_package_source_and_canonical_preset_bytes_only_no_package_process_native_harness_agent_mount_or_provider_claim"}
+  }
+}

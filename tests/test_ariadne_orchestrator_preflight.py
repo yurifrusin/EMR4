@@ -361,6 +361,63 @@ def test_unresolvable_full_commit_id_in_git_ref_evidence_fails_closed(
     assert receipt["status"] == "revision_required"
     assert receipt["worker_dispatch_permitted"] is False
     assert "git_refs_evidence_object_unresolvable" in receipt["reasons"]
+    assert "git_refs_evidence_manual_object_id_forbidden" in receipt["reasons"]
+    assert receipt["git_ref_evidence_binding"] == {
+        "schema_version": "ariadne.git_ref_evidence_binding.v1",
+        "status": "revision_required",
+        "policy": "machine_snapshot_only",
+        "manually_supplied_object_id_count": 1,
+        "reason_codes": ["git_refs_evidence_manual_object_id_forbidden"],
+    }
+
+
+def test_resolvable_full_commit_id_in_git_ref_narrative_fails_closed(
+    tmp_path: Path,
+) -> None:
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime_state["source_evidence"]["git_refs_and_worktree"] = (
+        "Task HEAD is " + runtime_state["active_operation"]["source_head"]
+    )
+    path = tmp_path / "runtime-state.json"
+    path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+    receipt = build_receipt(runtime_state_path=path)
+
+    assert receipt["status"] == "revision_required"
+    assert receipt["worker_dispatch_permitted"] is False
+    assert "git_refs_evidence_object_unresolvable" not in receipt["reasons"]
+    assert "git_refs_evidence_manual_object_id_forbidden" in receipt["reasons"]
+
+
+def test_machine_snapshot_owns_exact_git_ids_without_narrative_tokens() -> None:
+    receipt = build_receipt(runtime_state_path=RUNTIME_STATE)
+
+    assert receipt["git_ref_evidence_binding"] == {
+        "schema_version": "ariadne.git_ref_evidence_binding.v1",
+        "status": "passed",
+        "policy": "machine_snapshot_only",
+        "manually_supplied_object_id_count": 0,
+        "reason_codes": [],
+    }
+    assert receipt["git_refs_snapshot"]["head"]
+    assert receipt["git_refs_snapshot"]["protected_expected_commit"]
+
+
+def test_full_commit_ids_outside_git_ref_narrative_remain_admissible(
+    tmp_path: Path,
+) -> None:
+    runtime_state = json.loads(RUNTIME_STATE.read_text(encoding="utf-8"))
+    runtime_state["source_evidence"]["active_plan_and_acceptance"] = [
+        "Accepted historical source "
+        + runtime_state["active_operation"]["source_head"]
+    ]
+    path = tmp_path / "runtime-state.json"
+    path.write_text(json.dumps(runtime_state), encoding="utf-8")
+
+    receipt = build_receipt(runtime_state_path=path)
+
+    assert receipt["status"] == "passed"
+    assert receipt["git_ref_evidence_binding"]["status"] == "passed"
 
 
 def test_named_source_without_evidence_fails_closed(tmp_path: Path):

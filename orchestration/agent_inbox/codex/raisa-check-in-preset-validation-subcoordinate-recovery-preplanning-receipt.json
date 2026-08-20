@@ -1,0 +1,124 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in native Harness preset-validation subcoordinate recovery",
+    "completed_stage": "Accepted raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_exact_provider_free_preset_validation_subcoordinate_recovery_plan",
+    "operation_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+    "resume_after_compaction": true,
+    "source_head": "290923ef7b068b4b61f1bf41fff84fe4f47e3049",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "ea5fcbeb99df006e7b22429a38f59db3e576cd57",
+    "reason_codes": [],
+    "resolved_commit": "290923ef7b068b4b61f1bf41fff84fe4f47e3049",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "290923ef7b068b4b61f1bf41fff84fe4f47e3049"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "ea5fcbeb99df006e7b22429a38f59db3e576cd57",
+    "branch_origin_aligned": true,
+    "head": "ea5fcbeb99df006e7b22429a38f59db3e576cd57",
+    "origin_branch_commit": "ea5fcbeb99df006e7b22429a38f59db3e576cd57",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 658
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "preplanning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "No native process or model request is admitted before the deterministic subcoordinate plan and checkpoint; dispatch would violate and confound the evidence boundary.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "There is no exact new candidate to veto at planning. Reassess after the deterministic guard, plan, source characterization and tests pass.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation, and the initial Git-binding guard plus pinned-package source characterization are tightly serial orchestration work.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "deterministic_candidate_ready",
+      "native_process_checkpoint",
+      "pre_verifier",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "fresh five-source receipt must pass before plan freeze",
+      "reusable source-evidence Git-binding guard must precede successor acceptance",
+      "exact pinned-package source proof must precede any native-process checkpoint",
+      "the consumed lifecycle probe cannot be retried or reclassified",
+      "no verifier is eligible before an exact deterministic candidate exists"
+    ]
+  },
+  "planned_action": "freeze_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-20--check-in-lifecycle-conformance-repair.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns rehydration, the reusable Git-binding self-correction, deterministic package-source characterization, plan freeze, recovery and acceptance. DeepSeek is declined because no model request or native process is admitted at planning. Gemini 3.7 Flash/high is declined at planning and will be reassessed only after an exact deterministic candidate exists. Native subagents are declined because current developer policy prohibits proactive delegation and the initial source proof is tightly serial.",
+    "git_refs_and_worktree": "The task branch and origin plus local/origin master and handoff/current require a fresh machine-generated Git snapshot below; no exact object ID is manually transcribed into this narrative field. Tracked state is clean; docs/branding and every unrelated untracked file remain preserved; explicit-path staging only.",
+    "live_handover_current_baton": "AGENTS.md was read completely after the preceding closeout. The Current Baton names the accepted lifecycle repair and this provider-free preset-validation subcoordinate recovery as the only next implementation.",
+    "protected_evidence_boundaries": "The consumed lifecycle native probe and attempts 001 through 005 are immutable. This stage is provider-free and deterministic only: it may separate exact preset-row discovery, exact preset-byte read and parse, and digest/length binding, but may not start a native Harness process, dispatch DeepSeek, create attempt 006, execute Docker/database work, touch product or protected data, change product/API/client/configuration surfaces, or move protected refs."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

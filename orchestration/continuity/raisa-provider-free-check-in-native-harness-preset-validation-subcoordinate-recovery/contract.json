@@ -1,0 +1,48 @@
+{
+  "schema_version": "ariadne.check_in_preset_validation_contract.v1",
+  "operation_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+  "authored_at": "2026-08-20T16:36:42.2544702+10:00",
+  "accepted_lifecycle_source": "290923ef7b068b4b61f1bf41fff84fe4f47e3049",
+  "retained_installation_root": "C:\\Users\\sarashera\\EMR4-worktrees\\deepseek-check-in-attachment-observability-native-001",
+  "package": {
+    "name": "@deepseek-ai/dsh-agent-presets",
+    "version": "0.1.0-rc.7",
+    "integrity": "sha512-T/VcMV7lrXCFmRKrtoMTAz5DAdUmku6hz95wbikRvRc0WizIwQ3R04ke9KIeDiQcxK8xkE8cx+IYqEWa9C5gPg==",
+    "package_json_sha256": "26c8b9455103b1b565e910184902c6845661e5134c82679cce385bf5950d8278",
+    "discovery_source_sha256": "c0f57246518133790df1da5b1d41e63e8fff13a58c874d4de515848b7c860345",
+    "index_source_sha256": "ed4bd786694596ea445ce26ad7cc5068463052b8afdd63b5f83248819d89923b"
+  },
+  "preset": {
+    "id": "emr4-bounded-worker",
+    "relative_path": ".agent-presets/emr4-bounded-worker/agent.cordis.yml",
+    "bytes": 158,
+    "sha256": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1"
+  },
+  "subcoordinates": [
+    "row_discovery",
+    "byte_read_and_parse",
+    "digest_and_length_binding"
+  ],
+  "native_process_checkpoint_required": true,
+  "required_zero_counts_before_checkpoint": [
+    "agent_sessions",
+    "broker_requests",
+    "database_invocations",
+    "docker_invocations",
+    "model_requests",
+    "native_harness_processes",
+    "network_attempts",
+    "occupied_workers",
+    "provider_requests",
+    "turns"
+  ],
+  "forbidden_commands": [
+    "npm",
+    "npx",
+    "docker",
+    "psql"
+  ],
+  "native_processes_before_checkpoint": 0,
+  "deepseek_requests": 0,
+  "attempt_006_authorised": false
+}

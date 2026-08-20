@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/check-in-preset-validation-package-evidence-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "result", "static_source_gate", "subcoordinates", "process_boundary", "cleanup", "raw_stdout_retained", "raw_stderr_retained", "native_process_checkpoint_admitted", "claim_boundary"],
+  "properties": {
+    "schema_version": {"const": "ariadne.check_in_preset_validation_package_evidence.v1"},
+    "operation_id": {"const": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery"},
+    "result": {"const": "pass"},
+    "static_source_gate": {"const": "pass"},
+    "subcoordinates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["row_discovery", "byte_read_and_parse", "digest_and_length_binding"],
+      "properties": {
+        "row_discovery": {
+          "const": {"exact_id_count": 1, "exact_path": true, "exact_trust": true, "broken_absent": true}
+        },
+        "byte_read_and_parse": {
+          "const": {"regular_file": true, "readable": true, "package_parse_shape_admitted": true}
+        },
+        "digest_and_length_binding": {
+          "const": {"bytes": 158, "sha256": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1"}
+        }
+      }
+    },
+    "process_boundary": {
+      "const": {"package_only_node_processes": 1, "native_harness_processes": 0, "agent_sessions": 0, "turns": 0, "broker_requests": 0, "model_requests": 0, "provider_requests": 0, "network_attempts": 0, "docker_invocations": 0, "database_invocations": 0}
+    },
+    "cleanup": {"const": {"package_process_absent": true, "disposable_root_absent": true}},
+    "raw_stdout_retained": {"const": false},
+    "raw_stderr_retained": {"const": false},
+    "native_process_checkpoint_admitted": {"const": false},
+    "claim_boundary": {"const": "pinned_package_only_preset_discovery_parse_and_byte_binding_no_native_harness_agent_mount_or_provider_claim"}
+  }
+}

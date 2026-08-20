@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/check-in-preset-validation-contract-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "authored_at",
+    "accepted_lifecycle_source",
+    "retained_installation_root",
+    "package",
+    "preset",
+    "subcoordinates",
+    "native_process_checkpoint_required",
+    "required_zero_counts_before_checkpoint",
+    "forbidden_commands",
+    "native_processes_before_checkpoint",
+    "deepseek_requests",
+    "attempt_006_authorised"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.check_in_preset_validation_contract.v1"},
+    "operation_id": {"const": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery"},
+    "authored_at": {"const": "2026-08-20T16:36:42.2544702+10:00"},
+    "accepted_lifecycle_source": {"pattern": "^[0-9a-f]{40}$"},
+    "retained_installation_root": {"type": "string", "minLength": 1},
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "integrity", "package_json_sha256", "discovery_source_sha256", "index_source_sha256"],
+      "properties": {
+        "name": {"const": "@deepseek-ai/dsh-agent-presets"},
+        "version": {"const": "0.1.0-rc.7"},
+        "integrity": {"const": "sha512-T/VcMV7lrXCFmRKrtoMTAz5DAdUmku6hz95wbikRvRc0WizIwQ3R04ke9KIeDiQcxK8xkE8cx+IYqEWa9C5gPg=="},
+        "package_json_sha256": {"pattern": "^[0-9a-f]{64}$"},
+        "discovery_source_sha256": {"pattern": "^[0-9a-f]{64}$"},
+        "index_source_sha256": {"pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "preset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "relative_path", "bytes", "sha256"],
+      "properties": {
+        "id": {"const": "emr4-bounded-worker"},
+        "relative_path": {"const": ".agent-presets/emr4-bounded-worker/agent.cordis.yml"},
+        "bytes": {"const": 158},
+        "sha256": {"const": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1"}
+      }
+    },
+    "subcoordinates": {
+      "const": ["row_discovery", "byte_read_and_parse", "digest_and_length_binding"]
+    },
+    "native_process_checkpoint_required": {"const": true},
+    "required_zero_counts_before_checkpoint": {
+      "const": ["agent_sessions", "broker_requests", "database_invocations", "docker_invocations", "model_requests", "native_harness_processes", "network_attempts", "occupied_workers", "provider_requests", "turns"]
+    },
+    "forbidden_commands": {"const": ["npm", "npx", "docker", "psql"]},
+    "native_processes_before_checkpoint": {"const": 0},
+    "deepseek_requests": {"const": 0},
+    "attempt_006_authorised": {"const": false}
+  }
+}

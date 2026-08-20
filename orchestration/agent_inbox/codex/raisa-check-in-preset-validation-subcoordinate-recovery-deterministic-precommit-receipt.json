@@ -1,0 +1,134 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in native Harness preset-validation subcoordinate recovery",
+    "completed_stage": "Frozen the exact recovery plan, installed the machine-snapshot-only Git narrative guard, and passed deterministic rc.7 source plus package-only row, parse and digest/length characterization with zero native Harness or provider processes.",
+    "next_executable_stage": "commit_the_exact_deterministic_candidate_then_obtain_fresh_independent_veto_before_any_native_process_checkpoint",
+    "operation_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+    "resume_after_compaction": true,
+    "source_head": "290923ef7b068b4b61f1bf41fff84fe4f47e3049",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "ea5fcbeb99df006e7b22429a38f59db3e576cd57",
+    "reason_codes": [],
+    "resolved_commit": "290923ef7b068b4b61f1bf41fff84fe4f47e3049",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "290923ef7b068b4b61f1bf41fff84fe4f47e3049"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "ea5fcbeb99df006e7b22429a38f59db3e576cd57",
+    "branch_origin_aligned": true,
+    "head": "ea5fcbeb99df006e7b22429a38f59db3e576cd57",
+    "origin_branch_commit": "ea5fcbeb99df006e7b22429a38f59db3e576cd57",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 671
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "deterministic_candidate_precommit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The provider-free native Harness seam is the evidence subject and no model request is admitted.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The new controller and evidence meaning now form an exact deterministic candidate requiring one fresh isolated read-only veto before a native checkpoint.",
+        "work_packages": [
+          "exact_deterministic_candidate_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation and the checkpoint boundary is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "deterministic_candidate_committed",
+      "pre_verifier",
+      "native_process_checkpoint",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit exact deterministic candidate before isolated review",
+      "fresh veto must pass before native checkpoint",
+      "native Harness process count remains zero",
+      "consumed lifecycle process cannot be retried"
+    ]
+  },
+  "planned_action": "commit_exact_preset_validation_deterministic_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-plan.md",
+      "docs/security/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/contract.json",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/static-evidence.schema.json",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/package-evidence.schema.json",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/deterministic-source-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/package-only-discovery-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/package-only-discovery-report.md",
+      "scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+      "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+      "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_plan.py",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the exact deterministic candidate, checkpoint and recovery. DeepSeek remains declined because no model request is admitted. Gemini 3.7 Flash/high is reserved for one fresh exact-candidate veto before any native checkpoint. Native subagents remain declined because proactive delegation is prohibited and the boundary is serial.",
+    "git_refs_and_worktree": "The task, origin and protected refs require the machine-generated snapshot below; this narrative intentionally contains no manually transcribed object ID. The intended deterministic candidate paths are explicitly enumerated, docs/branding and all unrelated untracked files remain preserved, and staging is explicit-path only.",
+    "live_handover_current_baton": "AGENTS.md was read completely after the preceding closeout. The Current Baton names this provider-free preset-validation subcoordinate recovery as the only next implementation.",
+    "protected_evidence_boundaries": "The consumed lifecycle process and attempts 001 through 005 remain immutable. The committed candidate may contain only the Git guard, frozen plan, schemas, deterministic source/byte evidence and one package-only local characterization. No native Harness process, DeepSeek request, attempt 006, Docker/database, product/data, deployment or protected-ref action is admitted."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

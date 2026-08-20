@@ -62,13 +62,7 @@ def unresolved_git_ref_evidence_commit(
     repository_root: Path,
 ) -> str | None:
     """Return the first full Git-ref evidence ID that is not a local commit."""
-    source_evidence = runtime_state.get("source_evidence")
-    if not isinstance(source_evidence, dict):
-        return None
-    evidence = source_evidence.get("git_refs_and_worktree")
-    if not isinstance(evidence, str):
-        return None
-    for object_id in sorted(set(_FULL_COMMIT_ID.findall(evidence))):
+    for object_id in git_ref_evidence_commit_ids(runtime_state):
         try:
             completed = subprocess.run(  # noqa: S603
                 ["git", "cat-file", "-e", f"{object_id}^{{commit}}"],
@@ -83,6 +77,17 @@ def unresolved_git_ref_evidence_commit(
         if completed.returncode != 0:
             return object_id
     return None
+
+
+def git_ref_evidence_commit_ids(runtime_state: dict[str, Any]) -> tuple[str, ...]:
+    """Return manually authored full IDs from the narrative Git evidence field."""
+    source_evidence = runtime_state.get("source_evidence")
+    if not isinstance(source_evidence, dict):
+        return ()
+    evidence = source_evidence.get("git_refs_and_worktree")
+    if not isinstance(evidence, str):
+        return ()
+    return tuple(sorted(set(_FULL_COMMIT_ID.findall(evidence))))
 
 
 def build_receipt(
@@ -127,6 +132,25 @@ def build_receipt(
         reasons = receipt.setdefault("reasons", [])
         if reason not in reasons:
             reasons.append(reason)
+        receipt["status"] = "revision_required"
+        receipt["worker_dispatch_permitted"] = False
+    manual_evidence_ids = git_ref_evidence_commit_ids(runtime_state)
+    manual_binding_reason = (
+        "git_refs_evidence_manual_object_id_forbidden"
+        if manual_evidence_ids
+        else None
+    )
+    receipt["git_ref_evidence_binding"] = {
+        "schema_version": "ariadne.git_ref_evidence_binding.v1",
+        "status": "revision_required" if manual_binding_reason else "passed",
+        "policy": "machine_snapshot_only",
+        "manually_supplied_object_id_count": len(manual_evidence_ids),
+        "reason_codes": [manual_binding_reason] if manual_binding_reason else [],
+    }
+    if manual_binding_reason is not None:
+        reasons = receipt.setdefault("reasons", [])
+        if manual_binding_reason not in reasons:
+            reasons.append(manual_binding_reason)
         receipt["status"] = "revision_required"
         receipt["worker_dispatch_permitted"] = False
     snapshot_policy = requirements.get("git_refs_snapshot")
