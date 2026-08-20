@@ -20,10 +20,9 @@ mount success or any DeepSeek-quality claim.
 The initial Gemini P1 is preserved. The bounded worker-root correction passes
 52 provider-free tests and one fresh corrected Gemini 3.7 Flash/high veto passes
 all nine exact commands at unchanged clean HEAD. Register revision 572 contains
-eight corrected or contained incidents and none open.
+nine corrected or contained incidents and none open.
 
 This acceptance grants no attempt 006, retry, occupied DeepSeek worker,
 ordinary-practice admission, product/API/client/config change, data, production,
 deployment, release, Pages or protected-ref authority. The next operation is
 the provider-free preset-validation subcoordinate recovery.
-

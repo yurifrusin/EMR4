@@ -15,4 +15,3 @@ The terminal is accepted only as accurately bounded negative Harness evidence.
 It does not justify a retry, occupied DeepSeek run, attempt 006, product change
 or model-quality conclusion. The admissible successor is a separately frozen
 provider-free validation-subcoordinate recovery.
-

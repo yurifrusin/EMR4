@@ -6,12 +6,12 @@ Timestamp: 2026-08-20T16:04:16.4951745+10:00 (Australia/Brisbane)
 
 <!-- ariadne-agent-error-register-reading
 revision: 572
-incident_count: 689
-new_incident_ids: AER-0682,AER-0683,AER-0684,AER-0685,AER-0686,AER-0687,AER-0688,AER-0689
+incident_count: 690
+new_incident_ids: AER-0682,AER-0683,AER-0684,AER-0685,AER-0686,AER-0687,AER-0688,AER-0689,AER-0690
 open_incident_count: 0
 -->
 
-This revision records eight contained or corrected lifecycle-repair and
+This revision records nine contained or corrected lifecycle-repair and
 verification incidents. None opened product, provider, database, protected-ref
 or deployment authority, and none remains open.
 
@@ -95,3 +95,13 @@ isolated-worktree child to the same exact worker root. A regression covers both
 shapes, 52 provider-free tests pass there, and one fresh corrected Gemini veto
 passes all nine commands at unchanged clean HEAD.
 
+## AER-0690 — PowerShell did not stop the commit after a native gate failed
+
+The first closeout staging command ran `git diff --cached --check`, which
+reported extra blank lines, but PowerShell continued to `git commit` because
+the command block did not explicitly test the native process exit code. No
+clockwork publication, provider action or protected-ref movement occurred.
+
+Correction: remove the blank lines, preserve the first task-branch commit, and
+require an explicit `$LASTEXITCODE` assertion after every native precommit gate
+before a later commit command can run.

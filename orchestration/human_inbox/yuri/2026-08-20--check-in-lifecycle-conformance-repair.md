@@ -36,7 +36,7 @@ readings before considering another provider-disabled process.
   schema/static checks;
 - independent review: initial `revision_required`, one bounded correction,
   corrected Gemini 3.7 Flash/high `pass`, all nine commands zero, clean HEAD;
-- workflow register: revision 572, eight new contained/corrected incidents,
+- workflow register: revision 572, nine new contained/corrected incidents,
   none open; and
 - protected refs: all remain
   `2e34bdad732fdab32fbf778280b3d3c70d66d602`.
@@ -48,4 +48,3 @@ production, deployment, release, Pages and protected-ref movement.
 
 Next tranche:
 `raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery`.
-

@@ -52,7 +52,7 @@ DeepSeek worker, attempt 006, PostgreSQL behavior or product readiness.
 
 Clockwork kept the single native process to one and provider cost to zero. It
 also detected a direct-latch ownership breach and a hand-completed Git object
-before acceptance. Eight qualifying incidents are closed in register revision
+before acceptance. Nine qualifying incidents are closed in register revision
 572. The controls are readings rather than new operator memory rules: exact
 Git objects, dependency closure, bounded checkpoint text, artifact roles,
 changed paths and canonical ownership are mechanically derived or validated.
@@ -81,4 +81,3 @@ Docker/database execution, production runtime, deployment, release, Pages or
 protected ref changed. Local/origin `master` and `handoff/current` remain exact
 `2e34bdad732fdab32fbf778280b3d3c70d66d602`. `docs/branding/` and every
 unrelated untracked path remain preserved.
-
