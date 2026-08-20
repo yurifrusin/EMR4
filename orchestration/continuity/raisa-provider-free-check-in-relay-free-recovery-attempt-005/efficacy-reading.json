@@ -1,0 +1,97 @@
+{
+  "schema_version": "ariadne.workflow_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+  "recorded_at": "2026-08-20T14:15:35.7847894+10:00",
+  "result": "failed_closed_no_retry",
+  "exact_execution_source": "905184b76f576006232fcfdc78da71d98fcf0ca0",
+  "occupied_database_execution_count": 1,
+  "automatic_retry_count": 0,
+  "deepseek_native_worker": {
+    "attempt_count": 1,
+    "result": "failed_closed_pre_provider",
+    "failure_coordinate": "EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED",
+    "provider_requests_started": 0,
+    "model_steps": 0,
+    "tool_calls": 0,
+    "model_executed_tests": 0,
+    "model_edits": 0,
+    "automatic_retries": 0,
+    "wall_clock_ms": 6874,
+    "cleanup_verified": true
+  },
+  "sol_recovery": {
+    "direct_adapter_and_test_completion": true,
+    "postcommit_provider_free_test_count": 239,
+    "postexecution_provider_free_test_count": 240,
+    "ruff_passed": true,
+    "compile_passed": true,
+    "full_clockwork_regression_passed": true,
+    "gemini_dispatched": false,
+    "gemini_reason": "occupied_attempt_failed_before_verifier_eligibility"
+  },
+  "database_terminal": {
+    "result": "failed_closed",
+    "stage": "environment",
+    "code": "server_not_running_after_readiness",
+    "transaction_attestation_present": false,
+    "ambiguous_success_released": false,
+    "ordinary_admission_release_count": 0,
+    "product_record_count": 0,
+    "cleanup_status": "cleanup_verified",
+    "matching_owned_resources_after_cleanup": 0,
+    "failure_sha256": "a9e6331471dadc06ddc1fc7f5f6e9510a231fa7cd3a0fc748495f8c9794bb887",
+    "envelope_sha256": "dedfcbf008ea11c9dac9241a59c900582f5ca82a1de003bcd9f740409c0bbb54"
+  },
+  "contained_workflow_events": [
+    {
+      "event": "hand_entered_full_git_object_was_wrong",
+      "effect": "controller_prepare_rejected_before_worker_dispatch",
+      "canonical_mutation": false,
+      "prospective_control": "inject_machine_resolved_git_objects_into_builders"
+    },
+    {
+      "event": "sparse_worker_packet_omitted_one_admitted_test_dependency",
+      "effect": "controller_prepare_rejected_before_worker_dispatch",
+      "canonical_mutation": false,
+      "prospective_control": "derive_sparse_packet_closure_from_the_admitted_command_manifest"
+    },
+    {
+      "event": "native_harness_preset_mount_failed_with_collapsed_coordinate",
+      "effect": "sole_worker_consumed_before_provider_or_model_execution",
+      "canonical_mutation": false,
+      "prospective_control": "provider_disabled_identical_agents_create_mount_smoke_and_split_safe_mount_coordinates"
+    },
+    {
+      "event": "historical_source_pin_test_was_included_in_descendant_manifest",
+      "effect": "one_deterministic_runner_rejected_before_candidate_commit",
+      "canonical_mutation": false,
+      "prospective_control": "derive_descendant_test_selection_from_compatibility_metadata_not_filename_proximity"
+    },
+    {
+      "event": "checkpoint_completed_stage_exceeded_500_character_schema_limit",
+      "effect": "first_database_checkpoint_check_rejected_before_command_or_publication",
+      "canonical_mutation": false,
+      "prospective_control": "schema_backed_bounded_text_builder_with_pre_render_length_readback"
+    },
+    {
+      "event": "postexecution_synthetic_routing_test_retained_the_real_namespace_default_tuple",
+      "effect": "one_postexecution_runner_rejected_then_fixture_isolation_was_corrected",
+      "canonical_mutation": false,
+      "prospective_control": "test_consumed_terminal_namespaces_through_explicit_injected_paths"
+    }
+  ],
+  "clockwork_assessment": {
+    "high_cost_authority_repetitions_prevented": true,
+    "worker_provider_calls_prevented_after_premount_failure": true,
+    "database_retries_prevented": true,
+    "protected_ref_drift": 0,
+    "canonical_checkpoint_drift": 0,
+    "remaining_manual_error_surfaces": [
+      "free_text_bounded_fields",
+      "dependency_packet_closure",
+      "descendant_compatible_test_selection",
+      "baseline_versus_model_changed_path_classification"
+    ],
+    "conclusion": "Clockwork materially contained expensive authority and retry risk, but schema-shaped prose, packet closure and compatibility selection still need generated builders rather than additional memory rules."
+  }
+}

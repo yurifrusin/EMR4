@@ -154,6 +154,7 @@ def test_run_attempt_routes_exact_paths_and_restores_globals(
         "TERMINAL_PATHS",
         (envelope_path, attestation_path, evidence_path, failure_path),
     )
+    monkeypatch.setattr(attempt, "_assert_terminal_namespace_empty", lambda: None)
 
     def fake_run_rehearsal() -> tuple[dict[str, object], dict[str, object]]:
         assert attempt.accepted.ATTESTATION_PATH == attestation_path
@@ -186,3 +187,40 @@ def test_failure_evidence_is_sanitized_and_attempt_scoped() -> None:
     serialized = json.dumps(value, sort_keys=True)
     assert "attempt_005_wrapper_failed_closed" in serialized
     assert "injected_denial" in serialized
+
+
+def test_attempt_005_failure_is_closed_specific_and_non_retriable() -> None:
+    failure = json.loads(attempt.FAILURE_PATH.read_text(encoding="utf-8"))
+    envelope = json.loads(attempt.ENVELOPE_PATH.read_text(encoding="utf-8"))
+    attempt.accepted._assert_redacted(failure, forbidden_values=())
+    attempt._validate_envelope(envelope)
+    assert failure["stage"] == "environment"
+    assert failure["code"] == "server_not_running_after_readiness"
+    assert failure["failed_predicates"] == []
+    assert failure["retry_count"] == 0
+    assert failure["success_released"] is False
+    assert failure["cleanup"] == {
+        "role_absent_before_teardown": True,
+        "attachments_absent": True,
+        "sidecars_absent": True,
+        "server_absent": True,
+        "network_absent": True,
+        "matching_owned_resources": 0,
+        "status": "cleanup_verified",
+    }
+    assert envelope["source_head"] == (
+        "905184b76f576006232fcfdc78da71d98fcf0ca0"
+    )
+    assert envelope["result"] == "failed_closed"
+    assert envelope["occupied_execution_count"] == 1
+    assert envelope["automatic_retry_count"] == 0
+    assert envelope["ambiguous_success_released"] is False
+    assert envelope["ordinary_admission_release_count"] == 0
+    assert envelope["product_record_count"] == 0
+    assert envelope["terminal_artifact_kind"] == "rehearsal_failure_evidence"
+    assert envelope["terminal_artifact_sha256"] == attempt._sha256(
+        attempt.FAILURE_PATH
+    )
+    assert envelope["transaction_attestation_sha256"] is None
+    assert envelope["cleanup_status"] == "cleanup_verified"
+    assert envelope["terminal_binding_restored"] is True

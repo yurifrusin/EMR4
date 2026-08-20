@@ -1,0 +1,64 @@
+{
+  "command_manifest_sha256": "b9e63d7f3df54c5d3db0687ad550f94c83c5557ccf6cc3897d52919f4bace612",
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\sarashera\\emr4\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:\\Users\\sarashera\\emr4",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005.py",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py",
+        "tests/test_ariadne_provider_free_no_database_admission.py",
+        "tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_git_object_resolution.py"
+      ],
+      "id": "PF_ATTEMPT_005_EXACT_CANDIDATE"
+    }
+  ],
+  "ended_at": "2026-08-20T04:17:37.049659Z",
+  "failure_command_id": null,
+  "provider_free_no_database_admission_sha256": "sha256:7926337fda01103b84c6f1d2d1f28f5c147a3eaf1e5d5e758f8f17e681c236c9",
+  "repo_root": "C:\\Users\\sarashera\\emr4",
+  "results": [
+    {
+      "argv": [
+        "C:\\Users\\sarashera\\emr4\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:\\Users\\sarashera\\emr4",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005.py",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py",
+        "tests/test_ariadne_provider_free_no_database_admission.py",
+        "tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_git_object_resolution.py"
+      ],
+      "elapsed_ms": 30893,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "PF_ATTEMPT_005_EXACT_CANDIDATE",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 324,
+      "stdout_sha256": "3dc5c332dd15b86040a9b39a42768810e0b0129bec3eed4008f2d0d7af1b55a5"
+    }
+  ],
+  "schema_version": "ariadne.validation_run.v1",
+  "started_at": "2026-08-20T04:17:06.150435Z",
+  "status": "passed"
+}
