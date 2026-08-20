@@ -1,0 +1,59 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/complete-composition-native-boot-gemini-6ef058b8",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py",
+        "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+        "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.deepseek_native_harness_provider_free_complete_composition_native_boot_recovery",
+        "--check"
+      ]
+    },
+    {"id": "C07", "argv": ["git", "diff", "--exit-code", "HEAD", "--"]},
+    {"id": "C08", "argv": ["git", "diff", "--check", "d64a816aa422b45706b7cc154f989a6f83bc6468..6ef058b87a2c927efd9d9d2027b59d6ad279fec5"]},
+    {"id": "C09", "argv": ["git", "diff", "--name-only", "d64a816aa422b45706b7cc154f989a6f83bc6468..6ef058b87a2c927efd9d9d2027b59d6ad279fec5"]},
+    {"id": "C10", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

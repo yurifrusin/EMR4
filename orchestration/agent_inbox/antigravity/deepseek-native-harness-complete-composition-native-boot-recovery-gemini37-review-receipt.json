@@ -1,0 +1,251 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\complete-composition-native-boot-gemini-6ef058b8",
+  "branch": "codex/review-complete-composition-native-boot-6ef058b8",
+  "head_before": "6ef058b87a2c927efd9d9d2027b59d6ad279fec5",
+  "head_after": "6ef058b87a2c927efd9d9d2027b59d6ad279fec5",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "1c3243896dc37be832191a6ee3259470c891559eb27f0f54ad87c25bb7adfe80",
+  "result": "# Independent Review Receipt: DeepSeek Native Harness Complete-Composition Native-Boot Recovery\n\n## 1. Rehydration and Authority Verification\n- **Authority**: Fresh read-only verification veto executed in isolated worktree `C:\\Users\\sarashera\\EMR4-worktrees\\complete-composition-native-boot-gemini-6ef058b8` on branch `codex/review-complete-composition-native-boot-6ef058b8` at exact HEAD `6ef058b87a2c927efd9d9d2027b59d6ad279fec5`.\n- **Five Rehydration Sources Named**:\n  1. `live_handover_current_baton`: Read `AGENTS.md` completely; verified current baton and protected boundaries.\n  2. `current_authority_allocation`: GPT Sol is conductor/integrator holding the recovery and clockwork lease; Gemini 3.7 Flash/high holds this isolated independent review veto; DeepSeek is declined as evidence subject; native subagents declined by developer policy and indivisible serial boundary.\n  3. `active_plan_and_acceptance`: Verified frozen recovery plan `docs/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-plan.md` at frozen plan source `e26303882e2bd7bc5fa336c312626f17a0e1cea7`, threat model delta `docs/security/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-threat-model-delta.md`, contract `orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/contract.json`, and evidence schema.\n  4. `protected_evidence_boundaries`: Exact attempt `complete-composition-native-boot-recovery-attempt-001` is one non-retryable execution; prior failed attempts `296f35ff696361c63a4e018e5ae9317c79cb6213` and `8155a941a28b3d22a7dbb4132c4b0ada8558482e` remain immutable; zero provider requests, zero network, zero product data, no protected ref movement.\n  5. `git_refs_and_worktree`: Candidate HEAD is `6ef058b87a2c927efd9d9d2027b59d6ad279fec5`; local/origin `master` and `handoff/current` remain aligned at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Tracked worktree is clean; untracked `docs/branding/` preserved.\n- **Active Operation Latch**: Validated `orchestration/continuity/ariadne-active-operation-latch/current.json` for `deepseek-native-harness-provider-free-complete-composition-native-boot-recovery` in status `in_progress`.\n- **Parallelism Assessment Restored**:\n  - `deepseek_flash`: Declined (negative leverage; native Harness is the evidence subject).\n  - `gemini_verifier`: Dispatched / active (required independent leverage for this exact veto).\n  - `native_subagents`: Declined (negative leverage; current developer policy and indivisible serial chain).\n\n---\n\n## 2. Mandatory Challenges Adjudication\n\n### Challenge 1: Candidate, Head, Ancestry, and Protected Ref Alignment\n- Worktree branch `codex/review-complete-composition-native-boot-6ef058b8` is clean at HEAD `6ef058b87a2c927efd9d9d2027b59d6ad279fec5`.\n- Full 40-character commit hashes and ancestry confirmed:\n  - Planning source: `d64a816aa422b45706b7cc154f989a6f83bc6468`\n  - Frozen plan source: `e26303882e2bd7bc5fa336c312626f17a0e1cea7`\n  - Accepted required-service recovery: `ae608b4a8cc4004693813a83e518c71eb2ff06f3`\n  - Accepted bounded-worker preset: `4ffc8482934bed754e149acea005d7f8f444a782`\n  - Accepted effective-tool guard: `dc167c20f5b54b783a57fccb7843f434136c8ca8`\n  - Accepted preterminal observability: `b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab`\n  - Immutable first native attempt: `296f35ff696361c63a4e018e5ae9317c79cb6213`\n  - Immutable preterminal boot attempt: `8155a941a28b3d22a7dbb4132c4b0ada8558482e`\n  - Stock headless HMR boot: `5ff79d68f6df25d8bebdba78a6d504afb64de2ab`\n- `master`, `handoff/current`, `origin/master`, and `origin/handoff/current` all remain exactly `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n### Challenge 2: Preexecution Admission\n- Verified `orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-preexecution-receipt.json` and runtime state.\n- Bound zero prior attempt output, zero owned process, exact Node `C:\\Program Files\\nodejs\\node.exe` v24.18.0 with `--expose-internals`, rc.7 package identity, and tarball SHA-256 `2f8f0b763d611ac536f7a9411ee43c0afc067c1b8732c3102c04dbe398bcacc5`.\n\n### Challenge 3: Source Composition and Dependency Gate\n- Initial patch disables `headless-runner`, `code-runtime`, and `session-telemetry-otel`, adding only the accepted sentinel (`provider-free-effective-tool-hmr-sentinel`).\n- Only after real exact HMR readiness (`sentinel_activated`, `stock_headless_hmr_ready`) does the atomic patch replace the file with official `agent-presets` and runner (`provider-free-complete-composition-runner`).\n- Loader row and runner injection are both identically and strictly ordered `hmr`, `agentPresets`, `tools`.\n- The runner module source differs from accepted preterminal source only by that dependency injection declaration (`export const inject = [\"hmr\", \"agentPresets\", \"tools\"];`).\n\n### Challenge 4: Disposable Home, Preset Materialisation, and Tool Guard\n- Copied exact accepted 158-byte preset at `.agent-presets/emr4-bounded-worker/agent.cordis.yml` with SHA-256 `3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1`.\n- Guard executed exactly 1 mount, 1 pre-restriction view, 1 restriction to `edit`/`glob`/`read`, and 1 final schema projection.\n\n### Challenge 5: Immutable Evidence Validation\n- Canonical evidence SHA-256 verified: `9ba784b0726addb5644ac3786def410aed56e5bf9da3e23ec21d8e10f6ba1ea0`.\n- Readiness: `sentinel_activated`, `stock_headless_hmr_ready`.\n- Activation: `BOOTSTRAP_APPLY_ENTERED`, `RUNTIME_MODULES_IMPORTED`, `SCOPE_CREATED`, `GUARD_ENTRY_REACHED`, `GUARD_TERMINAL_REACHED`, `SCOPE_DISPOSED`, `EXIT_REQUESTED`.\n- Terminal: `EFFECTIVE_TOOL_COMPOSITION_PASSED`, effective tools `edit`, `glob`, `read` (count 3).\n- Launch facts: 1 native process, 0 retries, exit code 0, duration 9316 ms.\n- Provider boundary counts: all 0 (network, agent sessions, turns, broker requests, model requests, provider requests, occupied workers, docker, database).\n- Cleanup: `process_absent: true`, `disposable_root_absent: true`.\n\n### Challenge 6: Single Native Process and Immutability\n- No second Harness process can be started. Attempt `complete-composition-native-boot-recovery-attempt-001` is permanently consumed.\n- Predecessor failed attempts remain immutable and unchanged.\n- Command manifest C01\u2013C10 executed with zero Node processes launched during deterministic checks/veto.\n\n### Challenge 7: Independent Adjudication of Disclosed Control Nonconformance\n- **Incident Description**: Before and after the sole boot execution, Sol broadened local test verification to include three neighbouring historical test modules (`test_deepseek_native_harness_provider_free_required_service_injection_recovery.py`, `test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py`, and `test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py`), each of which executes a mock synthetic Node driver during unit tests.\n- **Adjudication**:\n  1. The mock Node drivers executed purely synthetic test scripts and did *not* execute `lib/bin.js`, did *not* use `--profile headless`, did *not* invoke any real DeepSeek Harness or provider code, and did *not* touch or alter the sole terminal or evidence of this recovery.\n  2. The frozen plan rule (\"no deterministic check or unit test may execute Node, `lib/bin.js`, `--profile headless`\") was intended to prevent unmetered Harness invocations; running historical mock-driver unit tests represents an orchestration-procedure scope deviation (P3), not an invariant breach or claim invalidation.\n  3. The one native Harness process boundary for attempt `complete-composition-native-boot-recovery-attempt-001` was strictly preserved.\n  4. This incident is adjudicated as a **contained orchestration-procedure incident**, not a P0\u2013P2 acceptance blocker. It requires recording in the agent error register and prospective manifest scoping in future verification suites.\n\n### Challenge 8: Candidate and Post-Terminal Adjustment\n- Post-terminal test adjustment in `tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py` updated `test_deterministic_check_is_cache_only_and_creates_no_attempt_output()` to read and assert byte preservation of existing canonical evidence/report rather than assuming file absence.\n- Contract digest `implementation_bytes.focused_test_sha256` was correctly updated to `a75df0de5d44d4c296f6741b69e5c2bfb96372703de57502b6bfac8c63369884`.\n- Deterministic check remained completely zero-process (`native_processes: 0`). No terminal-bound bytes were altered after execution.\n\n### Challenge 9: Claim Ceiling\n- Proves strictly one offline, network-denied, pre-provider rc.7 Harness boot demonstrating dependency-gated service activation (`hmr`, `agentPresets`, `tools`), bounded preset mount, and post-guard tool projection (`edit`, `glob`, `read`).\n- Does not prove DeepSeek reasoning capability, coding quality, occupied-worker execution, broker integration, product readiness, or future version compatibility.\n\n### Challenge 10: Boundary and Authority Preservation\n- No product, API, OpenAPI, schema, client, configuration, feature flag, allowlist, waiting area, or ordinary-practice authority changed.\n- No patient, appointment, clinical, historical, or protected data accessed.\n- No production, deployment, release, Pages rebuild, or protected ref movement permitted or performed.\n\n---\n\n## 3. Command Manifest Results\n- `C01`: `git status --short --branch` -> Exit 0\n- `C02`: `git rev-parse HEAD` -> Exit 0 (`6ef058b87a2c927efd9d9d2027b59d6ad279fec5`)\n- `C03`: `pytest (6 provider-free test suites, 86 passed)` -> Exit 0\n- `C04`: `ruff check` -> Exit 0\n- `C05`: `py_compile` -> Exit 0\n- `C06`: `scripts.deepseek_native_harness_provider_free_complete_composition_native_boot_recovery --check` -> Exit 0 (`native_processes: 0`)\n- `C07`: `git diff --exit-code HEAD --` -> Exit 0\n- `C08`: `git diff --check d64a816a..6ef058b8` -> Exit 0\n- `C09`: `git diff --name-only d64a816a..6ef058b8` -> Exit 0 (14 expected files)\n- `C10`: `git status --short --branch` -> Exit 0",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Independent Review Receipt: DeepSeek Native Harness Complete-Composition Native-Boot Recovery\n\n## 1. Rehydration and Authority Verification\n- **Authority**: Fresh read-only verification veto executed in isolated worktree `C:\\Users\\sarashera\\EMR4-worktrees\\complete-composition-native-boot-gemini-6ef058b8` on branch `codex/review-complete-composition-native-boot-6ef058b8` at exact HEAD `6ef058b87a2c927efd9d9d2027b59d6ad279fec5`.\n- **Five Rehydration Sources Named**:\n  1. `live_handover_current_baton`: Read `AGENTS.md` completely; verified current baton and protected boundaries.\n  2. `current_authority_allocation`: GPT Sol is conductor/integrator holding the recovery and clockwork lease; Gemini 3.7 Flash/high holds this isolated independent review veto; DeepSeek is declined as evidence subject; native subagents declined by developer policy and indivisible serial boundary.\n  3. `active_plan_and_acceptance`: Verified frozen recovery plan `docs/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-plan.md` at frozen plan source `e26303882e2bd7bc5fa336c312626f17a0e1cea7`, threat model delta `docs/security/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-threat-model-delta.md`, contract `orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/contract.json`, and evidence schema.\n  4. `protected_evidence_boundaries`: Exact attempt `complete-composition-native-boot-recovery-attempt-001` is one non-retryable execution; prior failed attempts `296f35ff696361c63a4e018e5ae9317c79cb6213` and `8155a941a28b3d22a7dbb4132c4b0ada8558482e` remain immutable; zero provider requests, zero network, zero product data, no protected ref movement.\n  5. `git_refs_and_worktree`: Candidate HEAD is `6ef058b87a2c927efd9d9d2027b59d6ad279fec5`; local/origin `master` and `handoff/current` remain aligned at protected `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Tracked worktree is clean; untracked `docs/branding/` preserved.\n- **Active Operation Latch**: Validated `orchestration/continuity/ariadne-active-operation-latch/current.json` for `deepseek-native-harness-provider-free-complete-composition-native-boot-recovery` in status `in_progress`.\n- **Parallelism Assessment Restored**:\n  - `deepseek_flash`: Declined (negative leverage; native Harness is the evidence subject).\n  - `gemini_verifier`: Dispatched / active (required independent leverage for this exact veto).\n  - `native_subagents`: Declined (negative leverage; current developer policy and indivisible serial chain).\n\n---\n\n## 2. Mandatory Challenges Adjudication\n\n### Challenge 1: Candidate, Head, Ancestry, and Protected Ref Alignment\n- Worktree branch `codex/review-complete-composition-native-boot-6ef058b8` is clean at HEAD `6ef058b87a2c927efd9d9d2027b59d6ad279fec5`.\n- Full 40-character commit hashes and ancestry confirmed:\n  - Planning source: `d64a816aa422b45706b7cc154f989a6f83bc6468`\n  - Frozen plan source: `e26303882e2bd7bc5fa336c312626f17a0e1cea7`\n  - Accepted required-service recovery: `ae608b4a8cc4004693813a83e518c71eb2ff06f3`\n  - Accepted bounded-worker preset: `4ffc8482934bed754e149acea005d7f8f444a782`\n  - Accepted effective-tool guard: `dc167c20f5b54b783a57fccb7843f434136c8ca8`\n  - Accepted preterminal observability: `b5f0bc0d823a1c8009f3bb49efcc9a588b9703ab`\n  - Immutable first native attempt: `296f35ff696361c63a4e018e5ae9317c79cb6213`\n  - Immutable preterminal boot attempt: `8155a941a28b3d22a7dbb4132c4b0ada8558482e`\n  - Stock headless HMR boot: `5ff79d68f6df25d8bebdba78a6d504afb64de2ab`\n- `master`, `handoff/current`, `origin/master`, and `origin/handoff/current` all remain exactly `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n\n### Challenge 2: Preexecution Admission\n- Verified `orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-preexecution-receipt.json` and runtime state.\n- Bound zero prior attempt output, zero owned process, exact Node `C:\\Program Files\\nodejs\\node.exe` v24.18.0 with `--expose-internals`, rc.7 package identity, and tarball SHA-256 `2f8f0b763d611ac536f7a9411ee43c0afc067c1b8732c3102c04dbe398bcacc5`.\n\n### Challenge 3: Source Composition and Dependency Gate\n- Initial patch disables `headless-runner`, `code-runtime`, and `session-telemetry-otel`, adding only the accepted sentinel (`provider-free-effective-tool-hmr-sentinel`).\n- Only after real exact HMR readiness (`sentinel_activated`, `stock_headless_hmr_ready`) does the atomic patch replace the file with official `agent-presets` and runner (`provider-free-complete-composition-runner`).\n- Loader row and runner injection are both identically and strictly ordered `hmr`, `agentPresets`, `tools`.\n- The runner module source differs from accepted preterminal source only by that dependency injection declaration (`export const inject = [\"hmr\", \"agentPresets\", \"tools\"];`).\n\n### Challenge 4: Disposable Home, Preset Materialisation, and Tool Guard\n- Copied exact accepted 158-byte preset at `.agent-presets/emr4-bounded-worker/agent.cordis.yml` with SHA-256 `3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1`.\n- Guard executed exactly 1 mount, 1 pre-restriction view, 1 restriction to `edit`/`glob`/`read`, and 1 final schema projection.\n\n### Challenge 5: Immutable Evidence Validation\n- Canonical evidence SHA-256 verified: `9ba784b0726addb5644ac3786def410aed56e5bf9da3e23ec21d8e10f6ba1ea0`.\n- Readiness: `sentinel_activated`, `stock_headless_hmr_ready`.\n- Activation: `BOOTSTRAP_APPLY_ENTERED`, `RUNTIME_MODULES_IMPORTED`, `SCOPE_CREATED`, `GUARD_ENTRY_REACHED`, `GUARD_TERMINAL_REACHED`, `SCOPE_DISPOSED`, `EXIT_REQUESTED`.\n- Terminal: `EFFECTIVE_TOOL_COMPOSITION_PASSED`, effective tools `edit`, `glob`, `read` (count 3).\n- Launch facts: 1 native process, 0 retries, exit code 0, duration 9316 ms.\n- Provider boundary counts: all 0 (network, agent sessions, turns, broker requests, model requests, provider requests, occupied workers, docker, database).\n- Cleanup: `process_absent: true`, `disposable_root_absent: true`.\n\n### Challenge 6: Single Native Process and Immutability\n- No second Harness process can be started. Attempt `complete-composition-native-boot-recovery-attempt-001` is permanently consumed.\n- Predecessor failed attempts remain immutable and unchanged.\n- Command manifest C01\u2013C10 executed with zero Node processes launched during deterministic checks/veto.\n\n### Challenge 7: Independent Adjudication of Disclosed Control Nonconformance\n- **Incident Description**: Before and after the sole boot execution, Sol broadened local test verification to include three neighbouring historical test modules (`test_deepseek_native_harness_provider_free_required_service_injection_recovery.py`, `test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py`, and `test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py`), each of which executes a mock synthetic Node driver during unit tests.\n- **Adjudication**:\n  1. The mock Node drivers executed purely synthetic test scripts and did *not* execute `lib/bin.js`, did *not* use `--profile headless`, did *not* invoke any real DeepSeek Harness or provider code, and did *not* touch or alter the sole terminal or evidence of this recovery.\n  2. The frozen plan rule (\"no deterministic check or unit test may execute Node, `lib/bin.js`, `--profile headless`\") was intended to prevent unmetered Harness invocations; running historical mock-driver unit tests represents an orchestration-procedure scope deviation (P3), not an invariant breach or claim invalidation.\n  3. The one native Harness process boundary for attempt `complete-composition-native-boot-recovery-attempt-001` was strictly preserved.\n  4. This incident is adjudicated as a **contained orchestration-procedure incident**, not a P0\u2013P2 acceptance blocker. It requires recording in the agent error register and prospective manifest scoping in future verification suites.\n\n### Challenge 8: Candidate and Post-Terminal Adjustment\n- Post-terminal test adjustment in `tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py` updated `test_deterministic_check_is_cache_only_and_creates_no_attempt_output()` to read and assert byte preservation of existing canonical evidence/report rather than assuming file absence.\n- Contract digest `implementation_bytes.focused_test_sha256` was correctly updated to `a75df0de5d44d4c296f6741b69e5c2bfb96372703de57502b6bfac8c63369884`.\n- Deterministic check remained completely zero-process (`native_processes: 0`). No terminal-bound bytes were altered after execution.\n\n### Challenge 9: Claim Ceiling\n- Proves strictly one offline, network-denied, pre-provider rc.7 Harness boot demonstrating dependency-gated service activation (`hmr`, `agentPresets`, `tools`), bounded preset mount, and post-guard tool projection (`edit`, `glob`, `read`).\n- Does not prove DeepSeek reasoning capability, coding quality, occupied-worker execution, broker integration, product readiness, or future version compatibility.\n\n### Challenge 10: Boundary and Authority Preservation\n- No product, API, OpenAPI, schema, client, configuration, feature flag, allowlist, waiting area, or ordinary-practice authority changed.\n- No patient, appointment, clinical, historical, or protected data accessed.\n- No production, deployment, release, Pages rebuild, or protected ref movement permitted or performed.\n\n---\n\n## 3. Command Manifest Results\n- `C01`: `git status --short --branch` -> Exit 0\n- `C02`: `git rev-parse HEAD` -> Exit 0 (`6ef058b87a2c927efd9d9d2027b59d6ad279fec5`)\n- `C03`: `pytest (6 provider-free test suites, 86 passed)` -> Exit 0\n- `C04`: `ruff check` -> Exit 0\n- `C05`: `py_compile` -> Exit 0\n- `C06`: `scripts.deepseek_native_harness_provider_free_complete_composition_native_boot_recovery --check` -> Exit 0 (`native_processes: 0`)\n- `C07`: `git diff --exit-code HEAD --` -> Exit 0\n- `C08`: `git diff --check d64a816a..6ef058b8` -> Exit 0\n- `C09`: `git diff --name-only d64a816a..6ef058b8` -> Exit 0 (14 expected files)\n- `C10`: `git status --short --branch` -> Exit 0",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/complete-composition-native-boot-gemini-6ef058b8",
+          "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py",
+          "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.deepseek_native_harness_provider_free_complete_composition_native_boot_recovery",
+          "--check"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "d64a816aa422b45706b7cc154f989a6f83bc6468..6ef058b87a2c927efd9d9d2027b59d6ad279fec5"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "d64a816aa422b45706b7cc154f989a6f83bc6468..6ef058b87a2c927efd9d9d2027b59d6ad279fec5"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "913b2b080d388c317a826fc1ff6fc134195375d8ba08e30f5839d8cb0bb2c907",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/complete-composition-native-boot-gemini-6ef058b8",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py",
+        "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+        "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.deepseek_native_harness_provider_free_complete_composition_native_boot_recovery",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "d64a816aa422b45706b7cc154f989a6f83bc6468..6ef058b87a2c927efd9d9d2027b59d6ad279fec5"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "d64a816aa422b45706b7cc154f989a6f83bc6468..6ef058b87a2c927efd9d9d2027b59d6ad279fec5"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

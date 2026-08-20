@@ -1,0 +1,108 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_one_fresh_gemini_37_flash_high_read_only_veto_for_exact_complete_composition_native_boot_candidate",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "five-source rehydration, frozen plan, sole immutable terminal, sanitized evidence, disclosed ancillary mock-Node test incident, exact candidate 6ef058b87a2c927efd9d9d2027b59d6ad279fec5 and passed isolated-worktree preflight",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely with SHA-256 bb8ad8847511bb2602cc233fe04492b1c5136f36e27742ad37a9e4d9926e3d1f. The Current Baton accepts bounded-worker preset source 4ffc8482934bed754e149acea005d7f8f444a782 and selects this complete-composition native-boot recovery.",
+    "current_authority_allocation": "GPT Sol owns terminal acceptance, contained procedure-incident handling, clockwork and Git. DeepSeek is declined because the native Harness remains the evidence subject. Gemini 3.7 Flash/high is now dispatched for exactly one isolated exact-candidate and terminal read-only veto. Native subagents remain declined by developer policy and the indivisible serial evidence boundary.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/provider-free-complete-composition-native-boot-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/provider-free-complete-composition-native-boot-report.md",
+      "scripts/deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+      "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+      "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-preexecution-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-complete-composition-native-boot-recovery-gemini37-review-packet.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-complete-composition-native-boot-recovery-gemini37-command-manifest.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-complete-composition-native-boot-recovery-gemini37-review-worktree-preflight.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Attempt complete-composition-native-boot-recovery-attempt-001 is permanently consumed. Immutable evidence SHA-256 9ba784b0726addb5644ac3786def410aed56e5bf9da3e23ec21d8e10f6ba1ea0 records one Harness process, zero retries, exact readiness/activation/edit-glob-read terminal, exit 0 and complete cleanup with all provider-boundary counts zero. No second Harness process is authorised. The disclosed mock-Node neighbouring-test procedure nonconformance is presented for independent adjudication and cannot be hidden, retried or used to alter terminal bytes. No product/data/runtime/deployment/Pages/protected-ref authority exists.",
+    "git_refs_and_worktree": "Exact candidate and task HEAD are 6ef058b87a2c927efd9d9d2027b59d6ad279fec5 on codex/ariadne-bernie-davida-parallel-seam; origin task remains 2678b43abec8f29e7af432a0a3c64759fada8fda. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The tracked task worktree is clean. Isolated worktree C:/Users/sarashera/EMR4-worktrees/complete-composition-native-boot-gemini-6ef058b8 is clean on codex/review-complete-composition-native-boot-6ef058b8 at exact candidate, with passed ten-command preflight SHA-256 913b2b080d388c317a826fc1ff6fc134195375d8ba08e30f5839d8cb0bb2c907. docs/branding and unrelated untracked files remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+    "active_tranche": "DeepSeek native Harness provider-free complete-composition native-boot recovery",
+    "objective": "Perform exactly one separately frozen offline, network-denied rc.7 native Harness boot combining the accepted required-service declaration, exact emr4-bounded-worker payload, preterminal observability and post-mount effective-tool guard; require observed readiness and exactly edit, glob and read, one sanitized terminal, bounded exit and cleanup, with no agent, session, turn, broker, DeepSeek model or provider request.",
+    "status": "in_progress",
+    "source_head": "6ef058b87a2c927efd9d9d2027b59d6ad279fec5",
+    "authority_source": "Yuri's standing uninterrupted-development authority and the exact frozen one-process plan.",
+    "checkpoint": {
+      "completed_stage": "The sole native process passed, sanitized evidence and terminal tests were committed at exact candidate 6ef058b87a2c927efd9d9d2027b59d6ad279fec5, and the ancillary mock-Node test procedure nonconformance was disclosed.",
+      "next_executable_stage": "one_fresh_gemini_37_flash_high_exact_candidate_terminal_veto",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_complete_composition_native_boot_recovery_only",
+      "sole_native_attempt_consumed_no_second_harness_process",
+      "immutable_terminal_and_evidence_bytes",
+      "disclosed_mock_node_test_procedure_nonconformance_must_be_independently_adjudicated",
+      "verifier_manifest_forbids_node_npm_harness_execute_and_provider_fallback",
+      "no_agent_session_turn_broker_deepseek_model_provider_or_occupied_worker",
+      "no_product_data_production_deployment_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+    "assessed_stage": "pre_verifier",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "The native Harness is the evidence subject and no occupied DeepSeek/model/provider request or Claude Code fallback is authorised.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "planned", "expected_leverage": "required_independence", "rationale": "One fresh Gemini 3.7 Flash/high isolated read-only veto must challenge the exact terminal and disclosed control nonconformance without execution or repair authority.", "work_packages": ["exact_candidate_6ef058b8_complete_composition_terminal_and_procedure_incident_veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Current developer policy prohibits proactive delegation and the immutable one-terminal acceptance boundary is serial.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "Gemini receives one exact clean isolated candidate and ten-command manifest only",
+      "the manifest may not execute Node npm Harness the controller execute path Docker PostgreSQL DeepSeek or another provider",
+      "no second native process may occur under any review outcome",
+      "a P0-P2 finding permits deterministic or documentary correction only and cannot alter terminal-bound bytes",
+      "clockwork check and publication remain separate commands"
+    ],
+    "reassessment_triggers": ["verifier_terminal", "bounded_correction_if_required", "closeout"]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol committed the exact terminal candidate and owns verifier admission and subsequent acceptance."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["The sole native process is complete and immutable; no second process is permitted."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected or authorised."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Authenticated Gemini 3.7 transport is available and bound to the passed isolated worktree preflight."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent was spawned; proactive delegation is prohibited."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "deepseek-native-harness-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

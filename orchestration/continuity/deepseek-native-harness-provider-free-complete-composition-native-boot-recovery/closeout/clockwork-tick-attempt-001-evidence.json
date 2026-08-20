@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.clockwork_closeout_attempt_evidence.v1",
+  "operation_id": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+  "attempt_id": "complete-composition-clockwork-publication-attempt-001",
+  "source_commit": "6ef058b87a2c927efd9d9d2027b59d6ad279fec5",
+  "generation_id": "gen-09e0653937eff6c1e57c5e8cea3cfe4b0231eabf0ee5f35ebe63c60e2409048e",
+  "bundle_sha256": "09e0653937eff6c1e57c5e8cea3cfe4b0231eabf0ee5f35ebe63c60e2409048e",
+  "lease_sequence": 58,
+  "publication_status": "published_then_rejected",
+  "publication_count": 1,
+  "clockwork_check_status": "passed",
+  "postpublication_session_id": 47449,
+  "postpublication_exit_code": 1,
+  "failure": {
+    "test": "tests/test_current_baton_consistency.py::test_current_rows_preserve_closed_surface_boundary",
+    "classification": "next_operation_legacy_closed_boundary_token_omitted",
+    "missing_boundary": "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting"
+  },
+  "candidate_state": "canonical_unchanged",
+  "native_harness_process_count": 0,
+  "provider_call_count": 0,
+  "rollback_required": true
+}
