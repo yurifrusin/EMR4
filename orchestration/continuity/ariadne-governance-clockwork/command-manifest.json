@@ -2,27 +2,26 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "structured_seam_deterministic_check",
+      "command_id": "node-fixture-process-free-deterministic-check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.deepseek_native_harness_provider_free_unclassified_pre_hmr_structured_diagnostic_seam_recovery",
+        "scripts.deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal",
         "--check"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "structured_seam_provider_free_tests",
+      "command_id": "node-fixture-process-free-focused-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
+        "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal_plan.py",
         "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py",
-        "tests/test_ariadne_agent_error_register.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_active_operation_latch.py",
         "tests/test_current_baton_consistency.py"
@@ -30,27 +29,26 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "structured_seam_ruff",
+      "command_id": "node-fixture-ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "orchestration_harness/native_pre_hmr_diagnostic.py",
-        "scripts/deepseek_native_harness_provider_free_unclassified_pre_hmr_structured_diagnostic_seam_recovery.py",
-        "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py"
+        "scripts/deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal_plan.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "structured_seam_compile",
+      "command_id": "node-fixture-compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "orchestration_harness/native_pre_hmr_diagnostic.py",
-        "scripts/deepseek_native_harness_provider_free_unclassified_pre_hmr_structured_diagnostic_seam_recovery.py",
-        "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py"
+        "scripts/deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

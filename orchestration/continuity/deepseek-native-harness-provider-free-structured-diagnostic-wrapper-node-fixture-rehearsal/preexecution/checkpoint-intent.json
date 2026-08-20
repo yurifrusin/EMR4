@@ -1,0 +1,35 @@
+{
+  "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
+  "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+  "completed_stage": "Fresh five-source rehydration passed; the provider-free authored-Node fixture plan, threat delta and exact four-scenario contract are frozen; the controller candidate is committed; and process-free deterministic checks, focused tests, Ruff, Python compilation and whitespace validation pass without Node, DSH, Harness, worker, model or provider activity.",
+  "next_executable_stage": "generate_and_validate_one_fresh_preexecution_receipt_then_run_exactly_four_serial_node_observers_against_authored_local_fixture_packages_as_node_fixture_attempt_001",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "node-fixture-process-free-deterministic-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal", "--check"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "node-fixture-process-free-focused-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal_plan.py", "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_current_baton_consistency.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "node-fixture-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal_plan.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "node-fixture-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}

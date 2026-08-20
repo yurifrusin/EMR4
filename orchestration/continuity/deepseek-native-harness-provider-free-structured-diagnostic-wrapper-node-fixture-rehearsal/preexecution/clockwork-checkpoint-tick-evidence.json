@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "3a12bb88e23cb90a7f7a0ea38c8a67cd9542b2fa",
+  "source_commit": "3a12bb88e23cb90a7f7a0ea38c8a67cd9542b2fa",
+  "generation_id": "gen-97a0702cd8174ba65333b3d222a54689911a8a996a078610f3f433a213a8ca8e",
+  "bundle_sha256": "97a0702cd8174ba65333b3d222a54689911a8a996a078610f3f433a213a8ca8e",
+  "previous_generation_id": "gen-b5e27957acd5a45f08dbd4f1de7689f58b05ff5a4ab791ce832dc35e31df57df",
+  "previous_source_commit": "3a12bb88e23cb90a7f7a0ea38c8a67cd9542b2fa",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 95,
+  "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+  "event_kind": "checkpoint_transition",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}
