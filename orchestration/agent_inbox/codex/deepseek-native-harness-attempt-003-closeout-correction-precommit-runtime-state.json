@@ -1,0 +1,53 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_clockwork_rejected_receipt_typed_authority_opening_correction_and_sixth_contained_incident_before_rerunning_check",
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh five-source receipt plus the read-only clockwork rejection, byte-identical canonical projections, corrected typed intent and exact Git snapshot", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md controls; attempt 003 remains in progress until its corrected closeout publishes.",
+    "current_authority_allocation": "Sol owns the schema-only correction and serial clockwork rerun. DeepSeek's one lane is consumed, Gemini remains reserved, and native subagents remain declined.",
+    "active_plan_and_acceptance": ["docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-plan.md", "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-failed-closed-closeout.md", "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/closeout/clockwork-check-attempt-001-rejected-receipt.json", "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/closeout/closeout-intent.json", "orchestration/continuity/ariadne-active-operation-latch/current.json"],
+    "protected_evidence_boundaries": "The rejection authorises only a typed closeout-intent repair. No attempt retry, Harness, broker, worker, provider, product, data, database, deployment, Pages or protected-ref action is permitted.",
+    "git_refs_and_worktree": "The machine snapshot owns exact object IDs and must show the task candidate only, four protected refs fixed, and docs/branding preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+    "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker attempt 003",
+    "objective": "Prepare, separately checkpoint and execute exactly one new DeepSeek Flash worker identity against the unchanged authored-synthetic non-product one-edit package through the accepted native Harness controller, broker and recovered pre-HMR terminal, with at most one provider request, zero retries, immutable terminal evidence and exact-root cleanup.",
+    "status": "in_progress",
+    "source_head": "c2104330ce8a7cacb6e79c4c49cdd2e61dbed2a3",
+    "authority_source": "Yuri's explicit affirmative 2026-08-21 decision authorising one new occupied authored-synthetic native-Harness attempt, together with the accepted attempt-002 negative evidence and provider-disabled pre-HMR terminal recovery.",
+    "checkpoint": {"completed_stage": "The single attempt is consumed and exactly cleaned up. Its immutable negative result is committed. The first read-only clockwork closeout check rejected an untyped authorized-opening entry without canonical writes; the typed correction and incident record are ready for commit.", "next_executable_stage": "commit_the_typed_clockwork_intent_correction_then_rerun_separate_check_before_publish", "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 5}, "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"},
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": ["attempt_003_consumed_failed_closed_closeout_correction_only", "no_attempt_003_retry_resume_overwrite_or_reclassification", "no_native_harness_broker_worker_or_provider_process", "no_product_or_data_or_database_change", "no_production_runtime_deployment_release_or_pages", "no_protected_evidence_access_or_protected_ref_movement", "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602", "docs_branding_and_all_unrelated_untracked_files_preserved", "explicit_path_staging_only"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+    "assessed_stage": "clockwork_closeout_intent_correction_precommit",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "completed", "expected_leverage": "neutral", "rationale": "The one authorised native attempt is consumed before provider contact and has no remaining work package.", "work_packages": ["one attempt-003 synthetic edit attempt consumed with zero provider requests"]},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "neutral", "rationale": "The clockwork schema gives the deterministic veto; an external provider cannot improve this typed correction.", "work_packages": []},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Developer policy prohibits proactive delegation and the correction-to-check boundary is serial.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["commit the rejected receipt and typed correction", "rerun read-only clockwork check", "publish only after the check passes"],
+    "reassessment_triggers": ["correction_precommit_rejects", "clockwork_check_rejects", "clockwork_publish_advances_latch"]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol preserved the rejection and corrected the typed intent without canonical writes."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Closed after the consumed pre-HMR attempt; no process or provider request is authorised."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Gemini is reserved and not called."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent spawned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

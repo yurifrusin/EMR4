@@ -36,8 +36,10 @@ about DeepSeek reasoning, coding quality or native-worker performance.
 Eight post-terminal deterministic commands pass, including terminal/schema/
 sidecar relationships, exact cleanup, 60 focused provider-free tests, Ruff,
 compilation, Node syntax, protected refs and diff hygiene. Attempts 001 and 002
-remain untouched. Register revision 578 records four contained workflow
-corrections and the Harness failure, for 730 incidents and none open.
+remain untouched. Register revision 578 records five contained workflow
+corrections and the Harness failure, for 731 incidents and none open. The
+fifth workflow correction is the read-only clockwork rejection of an untyped
+authority-opening entry; no canonical file changed before its typed repair.
 
 ## Next tranche
 

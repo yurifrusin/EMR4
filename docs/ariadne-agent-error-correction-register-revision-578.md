@@ -6,10 +6,10 @@ Timestamp: 2026-08-21T07:35:11.0925861+10:00 (Australia/Brisbane)
 
 Status: `prospective_clockwork_reading`
 
-This revision adds five contained observations from the native-Harness
+This revision adds six contained observations from the native-Harness
 attempt-003 tranche to revision 577's 725 incidents. The exclusive clockwork
-derives the canonical register; this human-readable reading must match 730
-total incidents, latest `AER-0730`, and zero open incidents.
+derives the canonical register; this human-readable reading must match 731
+total incidents, latest `AER-0731`, and zero open incidents.
 
 - `AER-0726`: the preplanning receipt rejected the recalled `deferred` lane
   disposition; the schema-owned `reserved` coordinate passed before planning.
@@ -27,7 +27,11 @@ total incidents, latest `AER-0730`, and zero open incidents.
   event with zero provider requests. The recovered sidecar safely recorded
   `unclassified_nonzero_exit`; the attempt is consumed, cleaned up and routed
   to provider-disabled source-static diagnosis without retry.
+- `AER-0731`: the first read-only clockwork closeout check rejected one prose
+  `authorized_openings` entry before any canonical write. The corrected intent
+  uses separate typed `model-runtime` and `provider-call` boundary/source
+  objects bound to the committed plan.
 
-All five observations are corrected or contained. None confer comparative
+All six observations are corrected or contained. None confer comparative
 model scoring, occupied retry, product, data, database, production,
 deployment, Pages or protected-ref authority.

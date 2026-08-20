@@ -16,7 +16,7 @@ Accepted:
 - exact digest binding between safe sidecar and outer terminal;
 - no raw-stream retention and exact Harness, broker and root cleanup;
 - eight passing post-terminal commands and unchanged prior attempts; and
-- register revision 578's five contained observations and zero open incidents.
+- register revision 578's six contained observations and zero open incidents.
 
 Rejected:
 

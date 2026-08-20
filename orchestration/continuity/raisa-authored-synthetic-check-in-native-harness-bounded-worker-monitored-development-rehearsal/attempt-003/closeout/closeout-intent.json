@@ -18,7 +18,14 @@
       ],
       "authority": {
         "authorized_openings": [
-          "one authored-synthetic non-product native Harness process and at most one DeepSeek request under the exact prepaid-balance envelope"
+          {
+            "boundary": "model-runtime",
+            "source": "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-plan.md"
+          },
+          {
+            "boundary": "provider-call",
+            "source": "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-plan.md"
+          }
         ],
         "notes": [
           "Yuri explicitly authorised exactly one new occupied attempt.",
@@ -147,7 +154,8 @@
       {"incident_id": "precommit-adapter-observation-inventory", "source_id": "attempt-003-precommit-001", "peers": []},
       {"incident_id": "historical-equality-test-selection", "source_id": "attempt-003-verification-001", "peers": []},
       {"incident_id": "prelaunch-workspace-receipt-shape", "source_id": "attempt-003-prelaunch-001", "peers": []},
-      {"incident_id": "native-exit-pre-hmr-unclassified", "source_id": "attempt-003-native-001", "peers": []}
+      {"incident_id": "native-exit-pre-hmr-unclassified", "source_id": "attempt-003-native-001", "peers": []},
+      {"incident_id": "closeout-authorized-opening-object-shape", "source_id": "attempt-003-closeout-clockwork-001", "peers": []}
     ],
     "broker": {"enabled": false, "posture": "provider_free_shadow"}
   },
@@ -308,6 +316,38 @@
       "causal_claim_level": "observation_only",
       "correction": {"status": "contained_then_escalated", "action": "Consume without retry, preserve the safe terminal and route provider-disabled source-static structured diagnosis.", "prevention_control": "No new native process may run while the source-static recovery derives a narrower safe diagnostic seam.", "evidence_paths": ["docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-failed-closed-closeout.md", "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/efficacy-reading.json"]},
       "baton_summary": "records the single pre-HMR unclassified native exit, zero provider spend, exact cleanup and provider-disabled escalation."
+    },
+    {
+      "attempt_key": "attempt-003-closeout-authorized-opening-object-shape-001",
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+      "role": "orchestrator",
+      "resource_id": "ariadne-governance-clockwork-closeout-intent",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every non-empty authorized_openings entry must use the continuity graph's typed boundary-and-source object shape.",
+      "observed_error": "The first attempt-003 closeout intent supplied one prose string instead of typed model-runtime and provider-call opening objects.",
+      "detection_method": "The read-only clockwork check rejected with authorized_opening_object_required before any canonical write.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/closeout/clockwork-check-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_authorized_opening_prose_instead_of_typed_object",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the prose entry with separately typed model-runtime and provider-call openings bound to the committed plan.",
+        "prevention_control": "Non-empty authorized openings are now copied from the continuity schema shape and must pass a separate read-only clockwork check before publication.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the read-only rejection of an untyped authority opening and the corrected model-runtime/provider-call binding."
     }
   ]
 }
