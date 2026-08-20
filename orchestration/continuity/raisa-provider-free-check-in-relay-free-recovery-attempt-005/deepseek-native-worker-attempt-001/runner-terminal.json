@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.deepseek_native_worker_runner_terminal.v2",
+  "status": "failed",
+  "stage": "pre_provider_or_model_run",
+  "failure_code": "EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED",
+  "detail": null,
+  "request_count": 0,
+  "ordered_tool_metadata": [],
+  "model_usage_steps": [],
+  "allowed_tool_names": [
+    "edit",
+    "glob",
+    "read"
+  ],
+  "effective_tool_names": []
+}

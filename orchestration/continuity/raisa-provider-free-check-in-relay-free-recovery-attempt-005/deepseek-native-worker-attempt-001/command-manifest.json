@@ -1,0 +1,18 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\sarashera\\emr4\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:\\Users\\sarashera\\EMR4-worktrees\\deepseek-check-in-relay-free-attempt-005-worker-001",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005.py"
+      ],
+      "id": "PF_ATTEMPT_005_WORKER_PACKET"
+    }
+  ],
+  "schema_version": "ariadne.verifier-command-manifest.v1"
+}

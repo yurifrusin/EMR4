@@ -1,0 +1,10 @@
+{
+  "attempt_id": "deepseek-native-checkin-relay-free-attempt-005-worker-001",
+  "automatic_retries": 0,
+  "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+  "resume_permitted": false,
+  "schema_version": "ariadne.deepseek_native_worker_one_run_latch.v1",
+  "source_commit": "d8eec606735ed7d1b5ab089c0c33b8d4469d612f",
+  "started_at_utc": "2026-08-20T03:54:14Z",
+  "state": "consumed"
+}

@@ -1,0 +1,23 @@
+{
+  "allowed_tool_names": [
+    "edit",
+    "glob",
+    "read"
+  ],
+  "authority_sha256": "sha256:a17dfc297f3d04a95dbfa60838878006756be94f0dfff48c86be74b433448bcf",
+  "branch": "codex/deepseek-check-in-relay-free-attempt-005-worker-001",
+  "command_manifest_sha256": "sha256:ddcf71deb096f280c10c0026fb1ad440a4da1a648a400e7b902077284cfcf118",
+  "forbidden_surfaces_sha256": "sha256:5fcbdfc64ad79d520eb3efbaf8e00f7e7235a603e2f6fa39adc9ded058ef3906",
+  "journal_id": "journal-6473021ff858028676660e57",
+  "lease_id": "lease-65",
+  "next_sequence": 6,
+  "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+  "posture": "provider_free_shadow",
+  "previous_event_sha256": "sha256:ff6d7d40bd599a72c91e2709da231ffad07fdbc5e7aebae20543c603bcdfe583",
+  "provider_free_no_database_admission_sha256": "sha256:fb6c5df6349f9718bc4516311b95c04af722ca4152a48eb881cc7c1223177569",
+  "schema_version": "ariadne.deepseek_work_order.v2",
+  "source_commit": "d8eec606735ed7d1b5ab089c0c33b8d4469d612f",
+  "transaction_id": "txn-6473021ff858028676660e57",
+  "work_order_id": "wo-checkin-relay-free-attempt-005-worker-001",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/deepseek-check-in-relay-free-attempt-005-worker-001"
+}

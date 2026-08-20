@@ -1,0 +1,22 @@
+{
+  "allowed_tool_names": [
+    "edit",
+    "glob",
+    "read"
+  ],
+  "attempt_id": "deepseek-native-checkin-relay-free-attempt-005-worker-001",
+  "automatic_retries": 0,
+  "fallbacks": [],
+  "maximum_output_tokens": 4096,
+  "maximum_parallel_tool_calls": 1,
+  "model": "deepseek-official/deepseek-v4-flash",
+  "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+  "owned_paths": [
+    "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_005.py",
+    "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005.py"
+  ],
+  "reasoning_effort": "high",
+  "source_commit": "d8eec606735ed7d1b5ab089c0c33b8d4469d612f",
+  "test_executor": "gpt_sol_outside_model_session",
+  "wall_clock_seconds": 900
+}

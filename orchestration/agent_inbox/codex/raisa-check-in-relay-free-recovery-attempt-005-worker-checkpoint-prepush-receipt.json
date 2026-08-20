@@ -1,0 +1,133 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 005",
+    "completed_stage": "Fresh five-source rehydration passed; the attempt-005 plan, threat delta, closed envelope schema and plan tests are frozen at full source d8eec606735ed7d1b5ab089c0c33b8d4469d612f; the new sparse worker packet is clean at that source; and 47 exact provider-free plan, harness, broker, no-database and accepted-Harness-evidence tests pass with zero Docker, PostgreSQL or model execution.",
+    "next_executable_stage": "generate_and_validate_work_order_v2_exact_no_database_command_binding_custom_hmr_runner_fresh_five_source_predispatch_receipt_then_launch_exactly_one_deepseek_native_harness_worker_session",
+    "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+    "resume_after_compaction": true,
+    "source_head": "d8eec606735ed7d1b5ab089c0c33b8d4469d612f",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "git_object_resolution": {
+    "observed_head": "7a7734effea12cca8dcbb97b70c032e92ca2f0ec",
+    "reason_codes": [],
+    "resolved_commit": "d8eec606735ed7d1b5ab089c0c33b8d4469d612f",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "d8eec606735ed7d1b5ab089c0c33b8d4469d612f"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "7a7734effea12cca8dcbb97b70c032e92ca2f0ec",
+    "branch_origin_aligned": false,
+    "head": "7a7734effea12cca8dcbb97b70c032e92ca2f0ec",
+    "origin_branch_commit": "f270fd0be764230ca189cd08dabd8135409cad9e",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 655
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_push",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The accepted complete-composition native boot and the published one-run checkpoint make one exact adapter-and-focused-test package useful while Sol retains tests, database, acceptance and Git. No retry, resume or Claude Code fallback is authorised.",
+        "work_packages": [
+          "attempt_005_adapter_and_focused_provider_free_tests"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high isolated read-only veto remains reserved only after deterministic and occupied acceptance.",
+        "work_packages": [
+          "future_exact_candidate_and_attempt_005_terminal_read_only_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation, and the database lifecycle plus cleanup lease remain one serial Sol-owned boundary.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+    "parallel_work_packages": [
+      "attempt_005_adapter_and_focused_provider_free_tests"
+    ],
+    "reassessment_triggers": [
+      "worker_predispatch",
+      "worker_terminal",
+      "preexecution",
+      "occupied_result",
+      "pre_verifier",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "task branch publication precedes exact worker dispatch verification",
+      "the DeepSeek worker may edit only the attempt-005 adapter and focused test and cannot execute tests Docker database Git or acceptance",
+      "Sol independently reads the complete worker diff and runs every admitted provider-free test",
+      "one occupied disposable PostgreSQL lifecycle has one cleanup owner and cannot be parallelised",
+      "Gemini reviews only one exact clean candidate after occupied success",
+      "clockwork check and publication remain separate commands"
+    ]
+  },
+  "planned_action": "publish_attempt_005_plan_and_worker_checkpoint_commits_to_task_branch_without_moving_protected_refs",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-plan.md",
+      "docs/security/raisa-provider-free-check-in-relay-free-recovery-attempt-005-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/attempt-005-execution-envelope.schema.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-004/attempt-004-execution-envelope.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-004/rehearsal-failure-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/repair-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/provider-free-complete-composition-native-boot-evidence.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-sol-acceptance.md",
+      "orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/work-order-v2.schema.json",
+      "orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns exact authority, deterministic admission, worker-result review or repair, the later single serial database lifecycle, acceptance, clockwork and task-branch Git. DeepSeek native Harness is planned for one adapter-and-focused-test package only after WorkOrder v2, no-database admission, exact tool checks and a one-run checkpoint. Gemini 3.7 Flash/high is reserved for a later fresh read-only veto. Native subagents are declined under current developer policy and the serial database/cleanup boundary.",
+    "git_refs_and_worktree": "Fresh fetch observed task branch codex/ariadne-bernie-davida-parallel-seam at local HEAD 7a7734effea12cca8dcbb97b70c032e92ca2f0ec and origin f270fd0be764230ca189cd08dabd8135409cad9e; the active source d8eec606735ed7d1b5ab089c0c33b8d4469d612f is a machine-verified ancestor of HEAD. Local/origin master and handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked and staged state is clean; 654 unrelated untracked paths including docs/branding remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely as a 138894-character, 138896-byte UTF-8 authority source with SHA-256 342e56a651648442d07de160259ea39b453c345ce093b074a8e373c397ce65c1. At Continuity 347 / Compass 329 its Current Baton accepts complete-composition native-Harness recovery and names raisa-provider-free-check-in-relay-free-recovery-attempt-005 as the exact active operation.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 and raw historical Diary material remain sealed. Attempts 001-004 are immutable. This push may move only origin/codex/ariadne-bernie-davida-parallel-seam to the exact local task HEAD. It authorises no worker/provider call, Docker or database execution, product/API/client/config change, ordinary-practice enablement, generic-status Arrived, product/patient/clinical data, production, deployment, release, Pages, protected evidence access or protected-ref movement. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

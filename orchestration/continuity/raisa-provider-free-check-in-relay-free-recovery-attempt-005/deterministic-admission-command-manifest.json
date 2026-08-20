@@ -1,0 +1,26 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\sarashera\\emr4\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:\\Users\\sarashera\\emr4",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005.py",
+        "tests/test_raisa_provider_free_unmounted_canonical_check_in_product_adapter.py",
+        "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py",
+        "tests/test_ariadne_provider_free_no_database_admission.py",
+        "tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_git_object_resolution.py"
+      ],
+      "id": "PF_ATTEMPT_005_EXACT_CANDIDATE"
+    }
+  ],
+  "schema_version": "ariadne.verifier-command-manifest.v1"
+}

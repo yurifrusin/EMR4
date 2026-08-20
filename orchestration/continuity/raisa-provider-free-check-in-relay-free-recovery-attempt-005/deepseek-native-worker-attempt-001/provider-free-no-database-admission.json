@@ -1,0 +1,193 @@
+{
+  "command_manifest_sha256": "sha256:ddcf71deb096f280c10c0026fb1ad440a4da1a648a400e7b902077284cfcf118",
+  "commands": [
+    {
+      "argv_sha256": "sha256:aea1d840d63cd75ec801293e8c9341ac065096b9033d124e4356924df59c77b4",
+      "command_id": "PF_ATTEMPT_005_WORKER_PACKET",
+      "selection": {
+        "policy_version": "ariadne.provider_free_no_database_policy.v1",
+        "pytest_core_fixture_allowlist": [
+          "capfd",
+          "capfdbinary",
+          "caplog",
+          "capsys",
+          "capsysbinary",
+          "doctest_namespace",
+          "monkeypatch",
+          "pytestconfig",
+          "record_property",
+          "record_testsuite_property",
+          "record_xml_attribute",
+          "recwarn",
+          "request",
+          "tmp_path",
+          "tmp_path_factory",
+          "tmpdir",
+          "tmpdir_factory"
+        ],
+        "schema_version": "ariadne.provider_free_no_database_selection.v1",
+        "selected_tests": [
+          {
+            "local_fixtures": [],
+            "path": "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005_plan.py",
+            "resolved_fixture_edges": [],
+            "source_sha256": "sha256:9381f0ea7cac45800e59041341db3db9398884e7ca1c4033f6a75f2a9a8b189e",
+            "test_count": 6
+          },
+          {
+            "local_fixtures": [
+              "contract",
+              "manifest"
+            ],
+            "path": "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+            "resolved_fixture_edges": [
+              {
+                "consumer": "manifest",
+                "fixture": "contract",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_attachment_stays_live_through_post_readiness_and_next_sidecar_stage",
+                "fixture": "contract",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_attachment_stays_live_through_post_readiness_and_next_sidecar_stage",
+                "fixture": "monkeypatch",
+                "source": "pytest_core"
+              },
+              {
+                "consumer": "test_container_identity_predicates_separate_credentials_nonce_and_network_lifecycle",
+                "fixture": "contract",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_contract_is_closed_and_binds_full_git_and_program_digests",
+                "fixture": "contract",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_failed_server_acquisition_cleans_exact_owned_id_before_raising",
+                "fixture": "contract",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_failed_server_acquisition_cleans_exact_owned_id_before_raising",
+                "fixture": "monkeypatch",
+                "source": "pytest_core"
+              },
+              {
+                "consumer": "test_manifest_is_closed_disjoint_and_default_denied",
+                "fixture": "contract",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_manifest_is_closed_disjoint_and_default_denied",
+                "fixture": "manifest",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_post_readiness_identity_failure_retains_only_sorted_predicate_names",
+                "fixture": "contract",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_post_readiness_identity_failure_retains_only_sorted_predicate_names",
+                "fixture": "monkeypatch",
+                "source": "pytest_core"
+              },
+              {
+                "consumer": "test_post_readiness_malformed_identity_retains_only_inspect_shape",
+                "fixture": "contract",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_post_readiness_malformed_identity_retains_only_inspect_shape",
+                "fixture": "monkeypatch",
+                "source": "pytest_core"
+              },
+              {
+                "consumer": "test_post_readiness_running_failure_is_distinct_and_has_no_detail",
+                "fixture": "contract",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_post_readiness_running_failure_is_distinct_and_has_no_detail",
+                "fixture": "monkeypatch",
+                "source": "pytest_core"
+              },
+              {
+                "consumer": "test_programs_are_fixed_and_credentials_are_not_arguments",
+                "fixture": "contract",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_programs_are_fixed_and_credentials_are_not_arguments",
+                "fixture": "manifest",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_readback_classifier_accepts_only_closed_zero_or_exact_packet",
+                "fixture": "manifest",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_sql_fixes_atomicity_rls_observer_and_no_retry",
+                "fixture": "contract",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_sql_fixes_atomicity_rls_observer_and_no_retry",
+                "fixture": "manifest",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_success_schemas_accept_only_closed_sanitized_shapes",
+                "fixture": "contract",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_success_schemas_accept_only_closed_sanitized_shapes",
+                "fixture": "manifest",
+                "source": "file_local"
+              }
+            ],
+            "source_sha256": "sha256:aaa9d1d5851742f757869919d610d610afd91678f5882fb066a82b1eb23a0d3f",
+            "test_count": 17
+          },
+          {
+            "local_fixtures": [],
+            "path": "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005.py",
+            "resolved_fixture_edges": [],
+            "source_sha256": "sha256:4ad7e4ccb57dc02913a73dcde67a53935455a5b5816008e903c38e6c637e99e7",
+            "test_count": 1
+          }
+        ],
+        "shared_conftest": {
+          "fixture_names": [
+            "appt_type",
+            "clean_db",
+            "client",
+            "db",
+            "engine",
+            "gp_user",
+            "gp_user_b",
+            "patient",
+            "patient_b",
+            "practice",
+            "practice_b",
+            "practitioner",
+            "receptionist_user",
+            "schedule"
+          ],
+          "path": "tests/conftest.py",
+          "source_sha256": "sha256:905013c3e76b62c5eff68235cc2c770791b1ded96330391270d20b49b04a56e7"
+        },
+        "status": "passed"
+      },
+      "selection_sha256": "sha256:390fbe3e385b09a2237e350852835e7e6bd461b9d8b6d7df107821b4f6600bad"
+    }
+  ],
+  "schema_version": "ariadne.provider_free_no_database_admission.v1",
+  "status": "passed"
+}
