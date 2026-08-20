@@ -165,6 +165,26 @@ def test_deterministic_schema_rejects_broadened_projection() -> None:
         jsonschema.Draft202012Validator(schema).validate(evidence)
 
 
+def test_deterministic_schema_rejects_nonzero_provider_boundary() -> None:
+    evidence = subject.deterministic_evidence()
+    evidence["process_boundary"]["provider_requests"] = 1
+    schema = json.loads(subject.DETERMINISTIC_SCHEMA_PATH.read_text(encoding="utf-8"))
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.Draft202012Validator(schema).validate(evidence)
+
+
+def test_native_schema_rejects_boundary_and_cleanup_broadening() -> None:
+    schema = json.loads(subject.NATIVE_SCHEMA_PATH.read_text(encoding="utf-8"))
+    provider = schema["properties"]["provider_boundary"]
+    cleanup = schema["properties"]["cleanup"]
+    assert provider["additionalProperties"] is False
+    assert provider["properties"]["agent_session_count"]["const"] == 0
+    assert provider["properties"]["provider_request_count"]["const"] == 0
+    assert cleanup["additionalProperties"] is False
+    assert cleanup["properties"]["raw_logs_retained"]["const"] is False
+    assert cleanup["properties"]["raw_environment_retained"]["const"] is False
+
+
 def test_missing_checkpoint_fails_before_native_consumption(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:

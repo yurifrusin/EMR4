@@ -9,12 +9,77 @@
     "attempt_id": {"const": "check-in-preset-mount-effective-tool-native-001"},
     "result": {"enum": ["pass", "failed_closed"]},
     "terminal_code": {"type": "string", "pattern": "^[A-Z0-9_]+$"},
-    "events": {"type": "array", "items": {"type": "string", "pattern": "^[a-z0-9_]+$"}, "uniqueItems": true},
-    "effective_tool_names": {"type": "array", "items": {"enum": ["edit", "glob", "read"]}, "uniqueItems": true},
+    "events": {"type": "array", "items": {"enum": ["sentinel_activated", "stock_headless_hmr_ready", "effective_roots_entered", "effective_roots_passed", "effective_tool_guard_started", "effective_tool_projection_passed", "scope_disposed", "effective_tool_guard_terminal", "app_exit_requested"]}, "maxItems": 9, "uniqueItems": true},
+    "effective_tool_names": {"type": "array", "items": {"enum": ["edit", "glob", "read"]}, "maxItems": 3, "uniqueItems": true},
     "effective_tool_count": {"type": "integer", "minimum": 0, "maximum": 3},
     "native_process_count": {"const": 1},
     "automatic_retry_count": {"const": 0},
-    "provider_boundary": {"type": "object"},
-    "cleanup": {"type": "object"}
-  }
+    "provider_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["credential_environment_names_removed_count", "agent_session_count", "turn_count", "broker_request_count", "model_request_count", "provider_request_count", "network_attempt_count", "occupied_worker_count", "docker_invocation_count", "database_invocation_count"],
+      "properties": {
+        "credential_environment_names_removed_count": {"type": "integer", "minimum": 0},
+        "agent_session_count": {"const": 0},
+        "turn_count": {"const": 0},
+        "broker_request_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0},
+        "network_attempt_count": {"type": "integer", "minimum": 0},
+        "occupied_worker_count": {"const": 0},
+        "docker_invocation_count": {"const": 0},
+        "database_invocation_count": {"const": 0}
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["process_absent", "disposable_root_absent", "raw_logs_retained", "raw_environment_retained", "stdout_bytes", "stderr_bytes", "stdout_sha256", "stderr_sha256"],
+      "properties": {
+        "process_absent": {"type": "boolean"},
+        "disposable_root_absent": {"type": "boolean"},
+        "raw_logs_retained": {"const": false},
+        "raw_environment_retained": {"const": false},
+        "stdout_bytes": {"type": "integer", "minimum": 0},
+        "stderr_bytes": {"type": "integer", "minimum": 0},
+        "stdout_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "stderr_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"result": {"const": "pass"}}, "required": ["result"]},
+      "then": {
+        "properties": {
+          "terminal_code": {"const": "EFFECTIVE_TOOL_COMPOSITION_PASSED"},
+          "events": {
+            "prefixItems": [
+              {"const": "sentinel_activated"},
+              {"const": "stock_headless_hmr_ready"},
+              {"const": "effective_roots_entered"},
+              {"const": "effective_roots_passed"},
+              {"const": "effective_tool_guard_started"},
+              {"const": "effective_tool_projection_passed"},
+              {"const": "scope_disposed"},
+              {"const": "effective_tool_guard_terminal"},
+              {"const": "app_exit_requested"}
+            ],
+            "items": false,
+            "minItems": 9,
+            "maxItems": 9
+          },
+          "effective_tool_names": {
+            "prefixItems": [{"const": "edit"}, {"const": "glob"}, {"const": "read"}],
+            "items": false,
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "effective_tool_count": {"const": 3},
+          "provider_boundary": {"properties": {"network_attempt_count": {"const": 0}}},
+          "cleanup": {"properties": {"process_absent": {"const": true}, "disposable_root_absent": {"const": true}}}
+        }
+      }
+    }
+  ]
 }

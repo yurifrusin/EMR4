@@ -13,7 +13,21 @@
     "candidate": {"type": "object"},
     "process_boundary": {
       "type": "object",
-      "additionalProperties": {"type": "integer", "minimum": 0}
+      "additionalProperties": false,
+      "required": ["package_only_node_processes", "native_harness_processes", "agent_sessions", "turns", "broker_requests", "model_requests", "provider_requests", "network_attempts", "occupied_workers", "docker_invocations", "database_invocations"],
+      "properties": {
+        "package_only_node_processes": {"const": 1},
+        "native_harness_processes": {"const": 0},
+        "agent_sessions": {"const": 0},
+        "turns": {"const": 0},
+        "broker_requests": {"const": 0},
+        "model_requests": {"const": 0},
+        "provider_requests": {"const": 0},
+        "network_attempts": {"const": 0},
+        "occupied_workers": {"const": 0},
+        "docker_invocations": {"const": 0},
+        "database_invocations": {"const": 0}
+      }
     }
   }
 }
