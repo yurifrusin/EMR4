@@ -4,16 +4,16 @@ Date: 2026-08-20
 
 <!-- ariadne-agent-error-register-reading
 revision: 577
-incident_count: 724
-new_incident_ids: AER-0716,AER-0717,AER-0718,AER-0719,AER-0720,AER-0721,AER-0722,AER-0723,AER-0724
+incident_count: 725
+new_incident_ids: AER-0716,AER-0717,AER-0718,AER-0719,AER-0720,AER-0721,AER-0722,AER-0723,AER-0724,AER-0725
 open_incident_count: 0
 -->
 
-This revision records nine bounded workflow and implementation incidents exposed
+This revision records ten bounded workflow and implementation incidents exposed
 while building the provider-disabled pre-HMR startup terminal. No DeepSeek,
 Gemini or provider request occurred. One overly broad legacy test selection
 briefly started the local test broker through its provider-free ready-only path;
-it terminated in the test cleanup and exact process readback is zero. All six
+it terminated in the test cleanup and exact process readback is zero. All ten
 incidents are contained and none remains open.
 
 ## AER-0716 — the first continuation receipt used a recalled event alias
@@ -101,3 +101,15 @@ were not evidence for a registered cross-node contract.
 Correction: `contract_evidence` is empty, matching the parent closeout and this
 node's lack of a global cross-node contract. The local contract and schema paths
 remain ordinary findings and artifacts.
+
+## AER-0725 — the successor latch omitted an exact closed-surface invariant
+
+The first published blocked decision-gate generation retained the intended
+default denial across two newer protected-boundary strings, but omitted the
+exact compatibility invariant
+`no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting`.
+The post-publication Current Baton consistency test rejected that generation.
+
+Correction: the rejected generation is retained by receipt, both affected
+clockwork generations were rolled back byte-exactly, and the exact invariant
+was added to the successor boundary source before corrected republication.

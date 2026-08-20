@@ -29,8 +29,10 @@ before exact-root cleanup and publishes only its digest.
 During development I selected one legacy controller test too broadly; it
 briefly started the local provider-free broker only to its ready event, then
 terminated it without a provider request. Exact readback found zero matching
-processes. This and eight smaller rejected technical drafts are preserved and
-contained as AER-0716 through AER-0724.
+processes. This, eight smaller rejected technical drafts and one subsequently
+caught successor-latch vocabulary omission are preserved and contained as
+AER-0716 through AER-0725. The clockwork rolled the affected projections back
+byte-exactly before corrected republication.
 
 ## Deliberately closed
 

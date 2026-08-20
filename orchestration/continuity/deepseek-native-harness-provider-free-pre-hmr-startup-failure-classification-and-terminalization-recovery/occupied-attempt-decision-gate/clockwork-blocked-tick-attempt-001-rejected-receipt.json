@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.clockwork_rejected_generation_receipt.v1",
+  "operation_id": "deepseek-native-harness-post-recovery-occupied-attempt-decision-gate",
+  "generation_id": "gen-6f9a8e0f1de4d9d02a06666b7c43be86e83a63ba140ed452b889a6f3a0a1fd7b",
+  "source_commit": "02908f5e6e01df749ae6efb7da490a389005c1a6",
+  "clockwork_publication_status": "published_then_byte_exact_rollback_required",
+  "acceptance_status": "revision_required",
+  "reason": "current_baton_closed_surface_boundary_exact_vocabulary_missing",
+  "missing_boundary": "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+  "detected_by": "tests/test_current_baton_consistency.py::test_current_rows_preserve_closed_surface_boundary",
+  "provider_request_count": 0,
+  "native_harness_process_count": 0,
+  "correction": "Roll back the blocked and recovery projections byte-exactly, add the exact boundary to the recovery successor intent, intake the incident through the clockwork, and republish from a committed source."
+}

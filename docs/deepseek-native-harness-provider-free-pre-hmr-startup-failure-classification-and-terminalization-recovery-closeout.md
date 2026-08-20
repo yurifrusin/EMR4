@@ -43,8 +43,10 @@ One earlier broad development-test selection accidentally included the legacy
 local broker-ready regression. It started and terminated one provider-free
 test broker without a request; exact readback immediately afterwards found
 zero matching broker processes and the disposable attempt root absent. The
-boundary breach and eight other rejected technical drafts are preserved in
-register revision 577, AER-0716 through AER-0724.
+boundary breach, eight other rejected technical drafts and one successor-latch
+vocabulary omission are preserved in register revision 577, AER-0716 through
+AER-0725. The first blocked generation was rolled back byte-exactly before
+corrected republication.
 
 ## Acceptance boundary
 

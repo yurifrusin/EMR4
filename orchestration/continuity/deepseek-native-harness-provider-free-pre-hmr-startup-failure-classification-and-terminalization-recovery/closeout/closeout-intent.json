@@ -53,7 +53,7 @@
           "id": "accept-contained-recovery-incidents",
           "source": "docs/ariadne-agent-error-correction-register-revision-577.md",
           "status": "accepted",
-          "summary": "Accept AER-0716 through AER-0721 as contained, including the ready-only local broker test boundary breach with exact post-test absence."
+          "summary": "Accept AER-0716 through AER-0725 as contained, including the ready-only local broker test boundary breach and the byte-exact successor-latch vocabulary correction."
         }
       ],
       "claim_scope": [
@@ -228,6 +228,7 @@
     "no_raw_startup_stream_retention",
     "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
     "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
     "no_product_patient_appointment_clinical_historical_or_protected_data",
     "no_production_runtime_deployment_release_or_pages",
     "no_protected_evidence_access_or_protected_ref_movement",
@@ -487,6 +488,39 @@
         "evidence_paths": ["orchestration/continuity/emr4-continuity-graph.json", "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/closeout-intent.json"]
       },
       "baton_summary": "records the rejected invented global contract ID and empty cross-node contract projection."
+    },
+    {
+      "attempt_key": "pre-hmr-recovery-successor-latch-closed-surface-vocabulary-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "role": "orchestrator",
+      "resource_id": "ariadne-clockwork-successor-latch",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every clockwork successor latch must retain the exact Current Baton closed-surface compatibility vocabulary as well as any stronger split boundaries.",
+      "observed_error": "The first blocked successor generation omitted no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting while retaining its meaning across two newer boundary strings.",
+      "detection_method": "The post-publication Current Baton consistency test rejected the protected-boundary subset assertion.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/occupied-attempt-decision-gate/clockwork-blocked-tick-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.pre_hmr_recovery_successor_latch_closed_surface_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Roll back the blocked and recovery generations byte-exactly, add the exact invariant to the successor source, and republish only after focused consistency passes.",
+        "prevention_control": "The exact closed-surface subset test remains a mandatory post-publication gate for every current latch.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the rejected successor-latch vocabulary omission and byte-exact rollback/correction."
     }
   ]
 }

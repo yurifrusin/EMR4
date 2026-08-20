@@ -2,51 +2,55 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "pre_hmr_recovery_evidence_check",
+      "command_id": "authored_synthetic_native_worker_attempt_002_closeout_tick_check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery",
-        "--check"
+        "scripts.ariadne_governance_clockwork_tick",
+        "--check",
+        "--intent",
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "pre_hmr_recovery_provider_disabled_tests",
+      "command_id": "authored_synthetic_native_worker_attempt_002_closeout_provider_free_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
-        "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py"
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal_plan.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_current_baton_consistency.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "pre_hmr_recovery_ruff",
+      "command_id": "authored_synthetic_native_worker_attempt_002_closeout_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "orchestration_harness/native_startup_terminal.py",
-        "scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery.py",
         "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
-        "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py"
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "pre_hmr_recovery_compile",
+      "command_id": "authored_synthetic_native_worker_attempt_002_closeout_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "orchestration_harness/native_startup_terminal.py",
-        "scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery.py",
         "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
-        "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py"
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

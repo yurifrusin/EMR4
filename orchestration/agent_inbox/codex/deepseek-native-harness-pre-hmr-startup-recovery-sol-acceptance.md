@@ -21,8 +21,9 @@ Accepted:
 - 12 semantic scenarios, 12 rejected mutations, five ordering assertions,
   49 provider-disabled tests, Ruff and compilation;
 - byte equality for 17 immutable attempt-001/002 artifacts; and
-- register revision 577's containment of nine implementation/workflow
-  incidents, including the ready-only local broker test boundary breach.
+- register revision 577's containment of ten implementation/workflow
+  incidents, including the ready-only local broker test boundary breach and the
+  byte-exact rollback/correction of one successor-latch vocabulary omission.
 
 Rejected:
 

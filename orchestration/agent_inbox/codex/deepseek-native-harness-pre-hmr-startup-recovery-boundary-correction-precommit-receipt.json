@@ -1,0 +1,122 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free pre-HMR startup-failure classification and terminalization recovery",
+    "completed_stage": "Accepted raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002 at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_provider_disabled_pre_hmr_startup_failure_classification_and_terminalization_plan",
+    "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+    "resume_after_compaction": true,
+    "source_head": "bf4af9db23827bbed8adc724eaf4ad58a1347dfe",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "02908f5e6e01df749ae6efb7da490a389005c1a6",
+    "reason_codes": [],
+    "resolved_commit": "bf4af9db23827bbed8adc724eaf4ad58a1347dfe",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "bf4af9db23827bbed8adc724eaf4ad58a1347dfe"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "02908f5e6e01df749ae6efb7da490a389005c1a6",
+    "branch_origin_aligned": false,
+    "head": "02908f5e6e01df749ae6efb7da490a389005c1a6",
+    "origin_branch_commit": "3df76c569e57ef50de7b54e44ebb81d2b882e75a",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 660
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "provider_disabled_closeout_boundary_correction_precommit",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The active provider-disabled recovery prohibits every DeepSeek worker or provider request.",
+        "work_packages": []
+      },
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The correction is an exact deterministic latch vocabulary repair with no new implementation candidate or provider authority.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and rollback, incident intake, successor projection and republish are one coupled serial transaction.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "corrected_provider_disabled_recovery_republished",
+      "corrected_blocked_transition_postpublication_validation"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "byte-exact rollback before source correction",
+      "corrected source commit before recovery republish",
+      "recovery republish before corrected blocked transition"
+    ]
+  },
+  "planned_action": "commit_the_byte_exact_clockwork_rollback_and_exact_successor_boundary_correction_before_republishing_the_provider_disabled_recovery",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-pre-hmr-startup-recovery.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial clockwork rollback, exact boundary correction, deterministic validation and Git. DeepSeek and Gemini remain inapplicable, and native subagents are declined under developer policy and the tightly coupled correction.",
+    "git_refs_and_worktree": "The machine-generated Git snapshot alone owns exact object identities. It verifies the task branch, all four protected refs, intentional byte-exact rollback/correction changes, and preservation of existing untracked files including docs/branding.",
+    "live_handover_current_baton": "AGENTS.md controls. The byte-exact rollback restored the provider-disabled pre-HMR recovery as the active operation so its corrected successor boundary can be republished.",
+    "protected_evidence_boundaries": "Attempts 001 and 002 remain immutable and consumed. No native Harness, broker, worker or provider process may run; no product, database, data, deployment, Pages, protected evidence or protected ref is opened."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
