@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/synthetic-native-worker-attempt-002-occupied-terminal-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "attempt_id", "candidate_source", "result", "failure_coordinate", "work_order_sha256", "process", "profile", "hmr_events", "runner", "broker", "candidate", "automatic_retry_count", "fallback_count", "auxiliary_model_call_count", "cleanup"],
+  "properties": {
+    "schema_version": {"const": "ariadne.synthetic_native_worker_occupied_terminal.v1"},
+    "operation_id": {"const": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002"},
+    "attempt_id": {"const": "deepseek-native-synthetic-window-worker-002"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {"enum": ["pass", "failed_closed"]},
+    "failure_coordinate": {"type": ["string", "null"]},
+    "work_order_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "process": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["native_process_count", "harness_exit_code", "wall_clock_ms", "stdout_bytes", "stdout_sha256", "stderr_bytes", "stderr_sha256", "broker_stderr_bytes", "broker_stderr_sha256"],
+      "properties": {
+        "native_process_count": {"type": "integer", "minimum": 0, "maximum": 1},
+        "harness_exit_code": {"type": ["integer", "null"]},
+        "wall_clock_ms": {"type": "integer", "minimum": 0},
+        "stdout_bytes": {"type": "integer", "minimum": 0},
+        "stdout_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "stderr_bytes": {"type": "integer", "minimum": 0},
+        "stderr_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "broker_stderr_bytes": {"type": "integer", "minimum": 0},
+        "broker_stderr_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "profile": {"type": "object"},
+    "hmr_events": {"type": "array", "items": {"type": "string"}},
+    "runner": {"type": "object"},
+    "broker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider_call_started", "provider_call_completed", "provider_call_failed", "request_rejected"],
+      "properties": {
+        "provider_call_started": {"type": "integer", "minimum": 0, "maximum": 1},
+        "provider_call_completed": {"type": "integer", "minimum": 0, "maximum": 1},
+        "provider_call_failed": {"type": "integer", "minimum": 0, "maximum": 1},
+        "request_rejected": {"type": "integer", "minimum": 0}
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["changed_paths", "exact_expected_bytes", "final_sha256", "cases"],
+      "properties": {
+        "changed_paths": {"type": "array", "items": {"type": "string"}},
+        "exact_expected_bytes": {"type": "boolean"},
+        "final_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "cases": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["executed", "public_passed", "holdback_passed"],
+          "properties": {
+            "executed": {"type": "boolean"},
+            "public_passed": {"type": "integer", "minimum": 0, "maximum": 4},
+            "holdback_passed": {"type": "integer", "minimum": 0, "maximum": 3}
+          }
+        }
+      }
+    },
+    "automatic_retry_count": {"const": 0},
+    "fallback_count": {"const": 0},
+    "auxiliary_model_call_count": {"const": 0},
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["harness_absent", "broker_absent", "attempt_root_absent", "raw_logs_retained", "raw_session_retained", "provider_key_present_in_worker_environment"],
+      "properties": {
+        "harness_absent": {"type": "boolean"},
+        "broker_absent": {"type": "boolean"},
+        "attempt_root_absent": {"type": "boolean"},
+        "raw_logs_retained": {"const": false},
+        "raw_session_retained": {"const": false},
+        "provider_key_present_in_worker_environment": {"const": false}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"result": {"const": "pass"}}},
+      "then": {
+        "properties": {
+          "failure_coordinate": {"const": null},
+          "process": {"properties": {"native_process_count": {"const": 1}, "harness_exit_code": {"const": 0}}},
+          "hmr_events": {"const": ["sentinel_activated", "stock_headless_hmr_ready"]},
+          "broker": {"properties": {"provider_call_started": {"const": 1}, "provider_call_completed": {"const": 1}, "provider_call_failed": {"const": 0}, "request_rejected": {"const": 0}}},
+          "candidate": {"properties": {"changed_paths": {"const": ["synthetic_window_coalescer.py"]}, "exact_expected_bytes": {"const": true}, "cases": {"properties": {"executed": {"const": true}, "public_passed": {"const": 4}, "holdback_passed": {"const": 3}}}}},
+          "cleanup": {"properties": {"harness_absent": {"const": true}, "broker_absent": {"const": true}, "attempt_root_absent": {"const": true}}}
+        }
+      }
+    }
+  ]
+}

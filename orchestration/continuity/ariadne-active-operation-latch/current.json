@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal",
-  "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker monitored development rehearsal",
-  "objective": "Freeze and, only after a separate exact checkpoint, run one authored-synthetic non-product DeepSeek worker work package through the accepted native preset, exact tool guard and Ariadne broker gears with one request, immutable terminal evidence and zero silent fallback.",
-  "status": "blocked",
-  "source_head": "065b872c90834fa543c9ce88b7159fde80c0efea",
-  "authority_source": "Yuri's standing uninterrupted-development authority, prepaid DeepSeek budget control and the accepted provider-disabled native preset/tool projection closeout.",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+  "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker attempt 002",
+  "objective": "Prepare, separately checkpoint and execute exactly one fresh DeepSeek Flash worker identity against the unchanged authored-synthetic non-product one-edit package through the reviewed native Harness controller-broker repair, with one provider request, zero retries, zero fallback, immutable terminal evidence and exact-root cleanup.",
+  "status": "in_progress",
+  "source_head": "35c50917098271aacb07860b2e8a0f47d2e19111",
+  "authority_source": "Yuri's explicit 2026-08-20 authorisation of one fresh attempt 002 after the clockwork-blocked attempt-001 result, together with the frozen parent plan, immutable zero-request attempt-001 evidence and independently accepted prelaunch repair.",
   "checkpoint": {
-    "completed_stage": "Attempt 001 is consumed and immutable. It failed before broker-ready with zero native, model or provider calls and no DeepSeek performance evidence. Exact-root cleanup recovered, the controller-broker canonical digest seam and Windows read-only cleanup were repaired, the provider-free deterministic ledger passed, and one fresh Gemini 3.7 Flash/high semantic veto accepted the published repair with no P0-P2 issue.",
-    "next_executable_stage": null,
+    "completed_stage": "Attempt 001 remains consumed and immutable with zero native, model or provider calls. Exact cleanup recovered; the canonical controller-broker digest and Windows read-only cleanup repairs passed provider-free validation and one fresh Gemini 3.7 Flash/high semantic veto. Yuri explicitly authorised a fresh attempt 002.",
+    "next_executable_stage": "generate_a_fresh_five_source_attempt_002_preparation_receipt_then_materialize_one_new_disposable_worker_root_with_zero_provider_requests_before_a_separate_exact_clockwork_checkpoint",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 1
+      "verification": 0
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,20 +26,22 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": true,
-    "reason": "The frozen plan expressly permits no second worker or retry without a distinct user-attention decision. Yuri must now choose whether the reviewed repair may be exercised by a separately prepared and checkpointed attempt 002; standing continuation authority cannot silently override this narrower no-retry boundary."
+    "required": false,
+    "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "The prelaunch repair is complete and independently accepted, but the tranche aim has not been achieved because attempt 001 never reached DeepSeek. The operation pauses blocked with zero provider cost from the occupied attempt until Yuri explicitly authorises or declines one fresh attempt 002."
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "authored_synthetic_nonproduct_check_in_native_harness_bounded_worker_only",
-    "accepted_rc7_preset_row_mount_and_exact_edit_glob_read_guard_remain_exact",
-    "plan_candidate_review_and_separate_exact_checkpoint_before_any_occupied_request",
-    "one_new_worker_identity_one_model_request_zero_automatic_retries_and_zero_silent_fallback",
+    "authored_synthetic_nonproduct_check_in_native_harness_bounded_worker_attempt_002_only",
+    "attempt_001_terminal_consumed_state_cleanup_recovery_and_zero_call_counts_remain_immutable",
+    "attempt_002_uses_the_exact_independently_reviewed_controller_broker_repair_and_unchanged_one_edit_work_package",
+    "one_new_worker_identity_one_native_process_one_session_one_turn_and_one_provider_admitted_model_request",
+    "zero_automatic_retries_zero_fallback_zero_auxiliary_model_calls_and_no_second_worker",
+    "fresh_preparation_and_separate_exact_clockwork_checkpoint_required_before_any_native_process_or_provider_request",
+    "only_synthetic_window_coalescer_py_may_change_inside_the_disposable_attempt_root",
     "immutable_request_lifecycle_tool_result_terminal_and_cleanup_evidence_required",
-    "no_second_worker_or_retry_without_a_distinct_user_attention_decision",
     "no_attempt_006_docker_database_postgresql_sql_or_transaction_execution",
     "no_product_source_configuration_api_openapi_graphql_schema_migration_client_or_waiting_area_change",
     "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",

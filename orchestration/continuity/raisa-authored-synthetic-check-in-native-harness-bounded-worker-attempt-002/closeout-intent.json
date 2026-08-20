@@ -1,0 +1,81 @@
+{
+  "schema_version": "ariadne.governance_live_user_decision_transition_intent.v1",
+  "blocked_operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal",
+  "selected_outcome": "replace_with_newly_frozen_descendant",
+  "next_operation": {
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+    "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker attempt 002",
+    "objective": "Prepare, separately checkpoint and execute exactly one fresh DeepSeek Flash worker identity against the unchanged authored-synthetic non-product one-edit package through the reviewed native Harness controller-broker repair, with one provider request, zero retries, zero fallback, immutable terminal evidence and exact-root cleanup.",
+    "authority_source": "Yuri's explicit 2026-08-20 authorisation of one fresh attempt 002 after the clockwork-blocked attempt-001 result, together with the frozen parent plan, immutable zero-request attempt-001 evidence and independently accepted prelaunch repair.",
+    "completed_stage": "Attempt 001 remains consumed and immutable with zero native, model or provider calls. Exact cleanup recovered; the canonical controller-broker digest and Windows read-only cleanup repairs passed provider-free validation and one fresh Gemini 3.7 Flash/high semantic veto. Yuri explicitly authorised a fresh attempt 002.",
+    "next_executable_stage": "generate_a_fresh_five_source_attempt_002_preparation_receipt_then_materialize_one_new_disposable_worker_root_with_zero_provider_requests_before_a_separate_exact_clockwork_checkpoint"
+  },
+  "next_operation_protected_boundaries": [
+    "authored_synthetic_nonproduct_check_in_native_harness_bounded_worker_attempt_002_only",
+    "attempt_001_terminal_consumed_state_cleanup_recovery_and_zero_call_counts_remain_immutable",
+    "attempt_002_uses_the_exact_independently_reviewed_controller_broker_repair_and_unchanged_one_edit_work_package",
+    "one_new_worker_identity_one_native_process_one_session_one_turn_and_one_provider_admitted_model_request",
+    "zero_automatic_retries_zero_fallback_zero_auxiliary_model_calls_and_no_second_worker",
+    "fresh_preparation_and_separate_exact_clockwork_checkpoint_required_before_any_native_process_or_provider_request",
+    "only_synthetic_window_coalescer_py_may_change_inside_the_disposable_attempt_root",
+    "immutable_request_lifecycle_tool_result_terminal_and_cleanup_evidence_required",
+    "no_attempt_006_docker_database_postgresql_sql_or_transaction_execution",
+    "no_product_source_configuration_api_openapi_graphql_schema_migration_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "native-worker-attempt-002-transition-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal_plan.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "native-worker-attempt-002-transition-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "native-worker-attempt-002-transition-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}

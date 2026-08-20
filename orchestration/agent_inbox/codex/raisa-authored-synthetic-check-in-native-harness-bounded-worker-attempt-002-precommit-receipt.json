@@ -1,0 +1,127 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker attempt 002",
+    "completed_stage": "Clockwork opened attempt 002 at lease sequence 80; provider-free changes isolate every attempt-002 runtime/evidence path and leave attempt 001 immutable; focused tests, Ruff, compile and exact schema comparison pass with zero provider activity.",
+    "next_executable_stage": "commit_and_push_exact_candidate_then_run_clean_worktree_deterministic_validation_and_one_fresh_gemini_semantic_veto_before_preparation",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+    "resume_after_compaction": true,
+    "source_head": "35c50917098271aacb07860b2e8a0f47d2e19111",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "35c50917098271aacb07860b2e8a0f47d2e19111",
+    "reason_codes": [],
+    "resolved_commit": "35c50917098271aacb07860b2e8a0f47d2e19111",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "35c50917098271aacb07860b2e8a0f47d2e19111"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "35c50917098271aacb07860b2e8a0f47d2e19111",
+    "branch_origin_aligned": true,
+    "head": "35c50917098271aacb07860b2e8a0f47d2e19111",
+    "origin_branch_commit": "35c50917098271aacb07860b2e8a0f47d2e19111",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 661
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "attempt_002_identity_isolation_precommit",
+    "lanes": [
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "DeepSeek owns exactly one later authored-synthetic edit after the candidate, fresh review, preparation and separate checkpoint pass.",
+        "work_packages": [
+          "one later attempt-002 authored-synthetic edit"
+        ]
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "A fresh isolated semantic veto must confirm attempt-002 evidence isolation and unchanged one-request controls before preparation.",
+        "work_packages": [
+          "attempt-002 identity and evidence isolation veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the lifecycle is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "attempt_002_review_terminal",
+      "attempt_002_preparation",
+      "attempt_002_terminal"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "candidate commit before review",
+      "review before preparation",
+      "preparation before separate checkpoint",
+      "checkpoint before one native process"
+    ]
+  },
+  "planned_action": "commit_and_publish_the_clockwork_user_decision_transition_and_provider_free_attempt_002_identity_evidence_isolation_candidate_before_any_preparation_or_provider_request",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal-plan.md",
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-001-prelaunch-recovery.md",
+      "orchestration/agent_inbox/antigravity/raisa-authored-synthetic-native-worker-attempt-001-repair-gemini37-review-receipt.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002/closeout-intent.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "Sol owns attempt-002 identity/evidence isolation, deterministic validation, verifier dispatch, preparation, checkpoint, monitoring, acceptance, clockwork and Git. DeepSeek is reserved for exactly one later request after review and checkpoint. Gemini owns the fresh identity-isolation semantic veto. Native subagents remain declined.",
+    "git_refs_and_worktree": "Machine snapshot alone owns exact Git identities. Task and origin branch were aligned before the candidate; all four protected refs remain exact; docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only.",
+    "live_handover_current_baton": "AGENTS.md controls. Clockwork has replaced the blocked attempt-001 operation with the explicitly authorised attempt-002 descendant while preserving all accepted product and protected-ref boundaries.",
+    "protected_evidence_boundaries": "Attempt 001 remains byte-immutable. Attempt 002 receives a distinct operation, worker identity, disposable root and evidence directory; no preparation, native process or provider request has occurred. Product/data/database/deployment/Pages/protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

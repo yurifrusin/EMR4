@@ -38,6 +38,10 @@ OPERATION_ID = (
     "raisa-authored-synthetic-check-in-native-harness-bounded-worker-"
     "monitored-development-rehearsal"
 )
+ATTEMPT_TWO_OPERATION_ID = (
+    "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002"
+)
+EXECUTION_OPERATION_ID = OPERATION_ID
 CONTINUITY_ROOT = REPO_ROOT / "orchestration" / "continuity" / OPERATION_ID
 CONTRACT_PATH = CONTINUITY_ROOT / "contract.json"
 CONTRACT_SCHEMA_PATH = CONTINUITY_ROOT / "contract.schema.json"
@@ -84,6 +88,8 @@ ATTEMPT_ROOT = Path(
     "C:/Users/sarashera/EMR4-worktrees/deepseek-native-synthetic-window-worker-001"
 )
 ATTEMPT_ID = "deepseek-native-synthetic-window-worker-001"
+WORK_ORDER_ID = "wo-synthetic-native-window-worker-001"
+LEASE_ID = "lease-synthetic-native-window-worker-001"
 
 CONTRACT_SCHEMA = "ariadne.synthetic_native_worker_contract.v1"
 EVIDENCE_SCHEMA = "ariadne.synthetic_native_worker_deterministic_evidence.v1"
@@ -173,6 +179,61 @@ if __name__ == "__main__":
 
 class RehearsalError(RuntimeError):
     """A frozen rehearsal invariant failed closed."""
+
+
+def attempt_two_configuration() -> dict[str, Any]:
+    """Return the exact attempt-002 identity without touching attempt-001 evidence."""
+
+    evidence_root = CONTINUITY_ROOT / "attempt-002"
+    attempt_id = "deepseek-native-synthetic-window-worker-002"
+    return {
+        "operation_id": ATTEMPT_TWO_OPERATION_ID,
+        "attempt_id": attempt_id,
+        "attempt_root": Path(f"C:/Users/sarashera/EMR4-worktrees/{attempt_id}"),
+        "checkpoint_path": evidence_root / "occupied-preexecution-checkpoint.json",
+        "preparation_path": evidence_root / "occupied-attempt-preparation.json",
+        "work_order_path": evidence_root / "work-order-v2.json",
+        "authority_path": evidence_root / "worker-authority.json",
+        "forbidden_path": evidence_root / "forbidden-surfaces.json",
+        "command_manifest_path": evidence_root / "command-manifest.json",
+        "no_database_admission_path": evidence_root
+        / "provider-free-no-database-admission.json",
+        "consumed_path": evidence_root / "occupied-attempt-consumed.json",
+        "terminal_path": evidence_root / "occupied-terminal.json",
+        "terminal_schema_path": evidence_root / "occupied-terminal.schema.json",
+        "native_report_path": evidence_root / "occupied-report.md",
+        "work_order_id": "wo-synthetic-native-window-worker-002",
+        "lease_id": "lease-synthetic-native-window-worker-002",
+    }
+
+
+def configure_attempt_two() -> None:
+    """Select the separately authorised attempt-002 runtime surfaces."""
+
+    global EXECUTION_OPERATION_ID
+    global CHECKPOINT_PATH, PREPARATION_PATH, WORK_ORDER_PATH
+    global AUTHORITY_PATH, FORBIDDEN_PATH, COMMAND_MANIFEST_PATH
+    global NO_DATABASE_ADMISSION_PATH, CONSUMED_PATH, TERMINAL_PATH
+    global TERMINAL_SCHEMA_PATH, NATIVE_REPORT_PATH
+    global ATTEMPT_ROOT, ATTEMPT_ID, WORK_ORDER_ID, LEASE_ID
+
+    value = attempt_two_configuration()
+    EXECUTION_OPERATION_ID = value["operation_id"]
+    CHECKPOINT_PATH = value["checkpoint_path"]
+    PREPARATION_PATH = value["preparation_path"]
+    WORK_ORDER_PATH = value["work_order_path"]
+    AUTHORITY_PATH = value["authority_path"]
+    FORBIDDEN_PATH = value["forbidden_path"]
+    COMMAND_MANIFEST_PATH = value["command_manifest_path"]
+    NO_DATABASE_ADMISSION_PATH = value["no_database_admission_path"]
+    CONSUMED_PATH = value["consumed_path"]
+    TERMINAL_PATH = value["terminal_path"]
+    TERMINAL_SCHEMA_PATH = value["terminal_schema_path"]
+    NATIVE_REPORT_PATH = value["native_report_path"]
+    ATTEMPT_ROOT = value["attempt_root"]
+    ATTEMPT_ID = value["attempt_id"]
+    WORK_ORDER_ID = value["work_order_id"]
+    LEASE_ID = value["lease_id"]
 
 
 def canonical_json(value: Any) -> bytes:
@@ -883,7 +944,7 @@ def validate_authority_boundary() -> None:
             raise RehearsalError("protected_ref_mismatch")
     latch = load_json(LATCH_PATH)
     if (
-        latch.get("operation_id") != OPERATION_ID
+        latch.get("operation_id") != EXECUTION_OPERATION_ID
         or latch.get("status") != "in_progress"
         or latch.get("user_attention", {}).get("required") is not False
         or latch.get("terminal_response", {}).get("permitted") is not False
@@ -1078,7 +1139,7 @@ def prepare_attempt(review_receipt_path: Path) -> dict[str, Any]:
         if admission is None or admission.get("status") != "passed":
             raise RehearsalError("no_database_admission_failed")
         authority = {
-            "operation_id": OPERATION_ID,
+            "operation_id": EXECUTION_OPERATION_ID,
             "attempt_id": ATTEMPT_ID,
             "candidate_source": candidate_source,
             "provider": "deepseek-official",
@@ -1122,10 +1183,10 @@ def prepare_attempt(review_receipt_path: Path) -> dict[str, Any]:
         admission_digest = sha256_bytes(canonical_pretty_json(admission))
         work_order = {
             "schema_version": "ariadne.deepseek_work_order.v2",
-            "work_order_id": "wo-synthetic-native-window-worker-001",
+            "work_order_id": WORK_ORDER_ID,
             "transaction_id": transaction["transaction_id"],
-            "operation_id": OPERATION_ID,
-            "lease_id": "lease-synthetic-native-window-worker-001",
+            "operation_id": EXECUTION_OPERATION_ID,
+            "lease_id": LEASE_ID,
             "journal_id": tip["journal_id"],
             "source_commit": candidate_source,
             "authority_sha256": "sha256:" + sha256_bytes(canonical_json(authority)),
@@ -1150,7 +1211,7 @@ def prepare_attempt(review_receipt_path: Path) -> dict[str, Any]:
         relative_receipt = review_receipt_path.resolve().relative_to(REPO_ROOT.resolve())
         preparation = {
             "schema_version": "ariadne.synthetic_native_worker_preparation.v1",
-            "operation_id": OPERATION_ID,
+            "operation_id": EXECUTION_OPERATION_ID,
             "attempt_id": ATTEMPT_ID,
             "status": "passed",
             "candidate_source": candidate_source,
@@ -1205,7 +1266,7 @@ def load_checkpoint() -> dict[str, Any]:
         raise RehearsalError("checkpoint_shape_mismatch")
     if (
         value["schema_version"] != "ariadne.synthetic_native_worker_checkpoint.v1"
-        or value["operation_id"] != OPERATION_ID
+        or value["operation_id"] != EXECUTION_OPERATION_ID
         or value["attempt_id"] != ATTEMPT_ID
         or value["status"] != "admitted"
         or value["checkpoint_admitted"] is not True
@@ -1413,7 +1474,7 @@ def execute_native() -> dict[str, Any]:
         raise RehearsalError("work_order_candidate_mismatch")
     consumed = {
         "schema_version": "ariadne.synthetic_native_worker_consumed.v1",
-        "operation_id": OPERATION_ID,
+        "operation_id": EXECUTION_OPERATION_ID,
         "attempt_id": ATTEMPT_ID,
         "state": "consumed",
         "candidate_source": checkpoint["candidate_source"],
@@ -1611,7 +1672,7 @@ def execute_native() -> dict[str, Any]:
         )
     terminal = {
         "schema_version": TERMINAL_SCHEMA,
-        "operation_id": OPERATION_ID,
+        "operation_id": EXECUTION_OPERATION_ID,
         "attempt_id": ATTEMPT_ID,
         "candidate_source": checkpoint["candidate_source"],
         "result": "pass" if success else "failed_closed",
@@ -1662,9 +1723,16 @@ def main() -> int:
     action.add_argument("--build", action="store_true")
     action.add_argument("--prepare-attempt", action="store_true")
     action.add_argument("--native", action="store_true")
+    parser.add_argument("--attempt-number", type=int, choices=(2,))
     parser.add_argument("--review-receipt", type=Path)
     args = parser.parse_args()
     try:
+        if args.prepare_attempt or args.native:
+            if args.attempt_number != 2:
+                raise RehearsalError("attempt_002_number_required")
+            configure_attempt_two()
+        elif args.attempt_number is not None:
+            raise RehearsalError("attempt_number_only_valid_for_occupied_lifecycle")
         if args.check:
             value = deterministic_evidence()
         elif args.build:
@@ -1681,7 +1749,7 @@ def main() -> int:
             json.dumps(
                 {
                     "result": value.get("result", value.get("status")),
-                    "operation_id": OPERATION_ID,
+                    "operation_id": EXECUTION_OPERATION_ID,
                 }
             )
         )

@@ -153,6 +153,9 @@ def test_occupied_cli_is_structurally_behind_separate_checkpoint() -> None:
     assert 'action.add_argument("--build"' in source
     assert 'action.add_argument("--prepare-attempt"' in source
     assert 'action.add_argument("--native"' in source
+    assert 'parser.add_argument("--attempt-number", type=int, choices=(2,))' in source
+    assert 'RehearsalError("attempt_002_number_required")' in source
+    assert source.index("configure_attempt_two()") < source.index("value = execute_native()")
     native = inspect.getsource(subject.execute_native)
     assert native.index("checkpoint = load_checkpoint()") < native.index(
         "write_json_exclusive(CONSUMED_PATH"
@@ -160,6 +163,65 @@ def test_occupied_cli_is_structurally_behind_separate_checkpoint() -> None:
     assert native.index("checkpoint = load_checkpoint()") < native.index(
         "subprocess.Popen("
     )
+
+
+def test_attempt_two_configuration_is_exact_and_disjoint_from_attempt_one() -> None:
+    value = subject.attempt_two_configuration()
+    assert value["operation_id"] == (
+        "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002"
+    )
+    assert value["attempt_id"] == "deepseek-native-synthetic-window-worker-002"
+    assert value["attempt_root"].as_posix().endswith(
+        "/EMR4-worktrees/deepseek-native-synthetic-window-worker-002"
+    )
+    attempt_two_root = subject.CONTINUITY_ROOT / "attempt-002"
+    attempt_two_paths = {
+        value[key]
+        for key in (
+            "checkpoint_path",
+            "preparation_path",
+            "work_order_path",
+            "authority_path",
+            "forbidden_path",
+            "command_manifest_path",
+            "no_database_admission_path",
+            "consumed_path",
+            "terminal_path",
+            "terminal_schema_path",
+            "native_report_path",
+        )
+    }
+    assert all(path.parent == attempt_two_root for path in attempt_two_paths)
+    assert not attempt_two_paths & {
+        subject.CHECKPOINT_PATH,
+        subject.PREPARATION_PATH,
+        subject.WORK_ORDER_PATH,
+        subject.AUTHORITY_PATH,
+        subject.FORBIDDEN_PATH,
+        subject.COMMAND_MANIFEST_PATH,
+        subject.NO_DATABASE_ADMISSION_PATH,
+        subject.CONSUMED_PATH,
+        subject.TERMINAL_PATH,
+        subject.TERMINAL_SCHEMA_PATH,
+        subject.NATIVE_REPORT_PATH,
+    }
+
+
+def test_attempt_two_terminal_schema_is_exact_and_cannot_admit_attempt_one() -> None:
+    path = subject.attempt_two_configuration()["terminal_schema_path"]
+    schema = json.loads(path.read_text(encoding="utf-8"))
+    assert schema["properties"]["operation_id"]["const"] == (
+        "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002"
+    )
+    assert schema["properties"]["attempt_id"]["const"] == (
+        "deepseek-native-synthetic-window-worker-002"
+    )
+    assert schema["properties"]["attempt_id"]["const"] != subject.ATTEMPT_ID
+    legacy = json.loads(subject.TERMINAL_SCHEMA_PATH.read_text(encoding="utf-8"))
+    schema["$id"] = legacy["$id"]
+    schema["properties"]["operation_id"] = legacy["properties"]["operation_id"]
+    schema["properties"]["attempt_id"] = legacy["properties"]["attempt_id"]
+    assert schema == legacy
 
 
 def test_preparation_derives_full_reviewed_ancestor_not_current_head(
