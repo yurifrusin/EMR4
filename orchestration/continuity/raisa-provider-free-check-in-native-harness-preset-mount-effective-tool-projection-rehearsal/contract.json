@@ -1,0 +1,85 @@
+{
+  "schema_version": "ariadne.check_in_preset_mount_effective_tool_contract.v1",
+  "operation_id": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+  "authored_at": "2026-08-20T19:06:25.3877564+10:00",
+  "predecessor_files": [
+    {
+      "role": "accepted_effective_tool_guard_script",
+      "path": "scripts/deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+      "sha256": "b36d9c11d9a6c2f67d72b2afae9aae18dd63d46636627137ccfc38de5d05afa9"
+    },
+    {
+      "role": "accepted_effective_tool_guard_contract",
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/contract.json",
+      "sha256": "fa076f0e02caa8fd308225456bc498a117c946200fe57b960d5c906904d24241"
+    },
+    {
+      "role": "consumed_native_composition_controller",
+      "path": "scripts/deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+      "sha256": "b8a6231c4bdac8d986b3c76967ddafac29ecda93b258fece988ab628d8d8bef4"
+    },
+    {
+      "role": "consumed_native_composition_contract",
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/contract.json",
+      "sha256": "95acde52d8c14dcebff9eba95fd4584423f35687f89e59eabc488f2495c063a4"
+    },
+    {
+      "role": "accepted_preset_row_service_controller",
+      "path": "scripts/raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+      "sha256": "fea1ce77b3c5bb09b2ece69b809d49700a534435e6d3f1fe14a4901bdb02c2fc"
+    },
+    {
+      "role": "accepted_preset_row_service_contract",
+      "path": "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/contract.json",
+      "sha256": "a072c275efcf395264e5c9790ef994baceca6e11c768cf44ca601a0c59c170da"
+    }
+  ],
+  "guard": {
+    "generated_sha256": "6678ed31bdcd30a5018689b72ad509c182854bf5d63862f59b397acc8de40894",
+    "success_code": "EFFECTIVE_TOOL_COMPOSITION_PASSED",
+    "expected_tools": ["edit", "glob", "read"]
+  },
+  "preset": {
+    "id": "emr4-bounded-worker",
+    "relative_path": ".agent-presets/emr4-bounded-worker/agent.cordis.yml",
+    "bytes": 158,
+    "sha256": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1",
+    "trust": "user"
+  },
+  "profile": {
+    "include_user_root": true,
+    "effective_roots": [
+      {"role": "shipped", "trust": "system"},
+      {"role": "derived_user", "trust": "user"}
+    ],
+    "runner_inject": ["hmr", "agentPresets", "tools"]
+  },
+  "native": {
+    "attempt_id": "check-in-preset-mount-effective-tool-native-001",
+    "process_limit": 1,
+    "automatic_retry_limit": 0,
+    "timeout_seconds": 75,
+    "expected_events": [
+      "sentinel_activated",
+      "stock_headless_hmr_ready",
+      "effective_roots_entered",
+      "effective_roots_passed",
+      "effective_tool_guard_started",
+      "effective_tool_projection_passed",
+      "scope_disposed",
+      "effective_tool_guard_terminal",
+      "app_exit_requested"
+    ]
+  },
+  "zero_counts": [
+    "agent_sessions",
+    "turns",
+    "broker_requests",
+    "model_requests",
+    "provider_requests",
+    "network_attempts",
+    "occupied_workers",
+    "docker_invocations",
+    "database_invocations"
+  ]
+}

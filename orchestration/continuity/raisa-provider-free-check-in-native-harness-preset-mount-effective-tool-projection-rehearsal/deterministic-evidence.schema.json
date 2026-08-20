@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "result", "predecessors", "root_fixture", "guard_fixture", "candidate", "process_boundary"],
+  "properties": {
+    "schema_version": {"const": "ariadne.check_in_preset_mount_effective_tool_deterministic_evidence.v1"},
+    "operation_id": {"const": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal"},
+    "result": {"const": "pass"},
+    "predecessors": {"type": "object"},
+    "root_fixture": {"type": "object"},
+    "guard_fixture": {"type": "object"},
+    "candidate": {"type": "object"},
+    "process_boundary": {
+      "type": "object",
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_explicit_provider_free_preset_mount_effective_tool_deterministic_candidate_for_exact_review",
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh five-source precommit reading over the complete live baton, frozen plan, passing deterministic candidate and tests, protected boundaries, active latch and exact Git/worktree state", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The active latch permits only this provider-free preset-mount/effective-tool-projection rehearsal and no native process before a separate checkpoint.",
+    "current_authority_allocation": "GPT Sol owns the deterministic candidate and exact-path commit. DeepSeek is declined because no model request is admitted. Gemini is reserved for one fresh exact-candidate semantic veto after commit. Native subagents are declined under developer policy and the composition path is serial.",
+    "active_plan_and_acceptance": ["docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal-plan.md", "docs/security/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal-threat-model-delta.md", "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/deterministic-evidence.json", "scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py", "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py", "orchestration/continuity/ariadne-active-operation-latch/current.json"],
+    "protected_evidence_boundaries": "Commit the deterministic candidate only. No native Harness process, agent/session/turn, broker/model/provider/network, attempt 006, Docker/database, product/data, deployment/release/Pages or protected-ref action is admitted.",
+    "git_refs_and_worktree": "The generated snapshot owns exact refs. The candidate exists only on explicit new paths, docs/branding and unrelated untracked paths remain preserved, and staging is explicit-path only."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+    "active_tranche": "Raisa provider-free check-in native Harness preset-mount effective-tool projection rehearsal",
+    "objective": "Freeze the narrowest provider-free proof that the exact healthy emr4-bounded-worker row can mount through the accepted rc.7 guard and project exactly edit, glob and read, initially deterministically and with no native process until a separate exact checkpoint.",
+    "status": "in_progress",
+    "source_head": "5232330b2cb7dca0f3f2dddf332cb4f3b8beccf7",
+    "authority_source": "Yuri's standing uninterrupted-development authority, the accepted rc.7 effective-tool guard and the passed provider-disabled preset-row service convergence.",
+    "checkpoint": {"completed_stage": "The frozen plan, five root scenarios, thirteen guard scenarios, exact candidate, focused and neighbouring tests, Ruff, compile and whitespace checks pass with zero native/model/agent activity.", "next_executable_stage": "commit_the_exact_deterministic_candidate_then_dispatch_one_fresh_gemini_semantic_veto_without_command_result_retranscription", "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0}, "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"},
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": ["provider_free_check_in_native_harness_preset_mount_effective_tool_projection_only", "accepted_rc7_preset_row_and_effective_tool_guard_remain_exact", "initially_deterministic_and_no_native_process_until_a_separate_exact_checkpoint", "any_native_process_has_one_new_attempt_identity_zero_retries_and_terminal_before_agent_session_or_turn", "exact_projected_tool_names_edit_glob_read_only", "no_agent_session_turn_broker_model_provider_or_network_request", "no_attempt_006_docker_database_postgresql_sql_or_transaction_execution", "no_product_source_configuration_api_openapi_graphql_schema_migration_client_or_waiting_area_change", "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting", "no_generic_status_arrived_action_grammar_or_first_party_client_change", "no_product_patient_appointment_clinical_historical_or_protected_data", "no_production_runtime_deployment_release_or_pages", "no_protected_evidence_access_or_protected_ref_movement", "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602", "docs_branding_and_all_unrelated_untracked_files_preserved", "explicit_path_staging_only"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+    "assessed_stage": "deterministic_candidate_precommit",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "No model request belongs in the pre-provider composition proof.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "After exact candidate commit, Gemini owns one read-only semantic veto while deterministic code retains the command ledger.", "work_packages": ["exact_candidate_semantic_veto_after_commit"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Developer policy prohibits proactive delegation and the exact candidate plus checkpoint sequence is serial.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["commit exact candidate", "fresh verifier worktree at exact source", "deterministic command ledger separate from model decision", "no checkpoint until veto passes", "no native process until clockwork checkpoint"],
+    "reassessment_triggers": ["pre_verifier", "native_process_checkpoint", "closeout"]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol owns exact-path candidate commit."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Only package fixtures ran; native process count remains zero."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected or authorised."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["One exact-candidate veto is reserved after commit."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No subagent was spawned; proactive delegation is prohibited."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected or authorised."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected or authorised."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}, {"resource_id": "deepseek-native-harness-workers", "active_instance_ids": [], "stale_instance_ids": []}, {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

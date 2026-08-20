@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "attempt_id", "result", "terminal_code", "events", "effective_tool_names", "effective_tool_count", "native_process_count", "automatic_retry_count", "provider_boundary", "cleanup"],
+  "properties": {
+    "schema_version": {"const": "ariadne.check_in_preset_mount_effective_tool_native_terminal.v1"},
+    "operation_id": {"const": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal"},
+    "attempt_id": {"const": "check-in-preset-mount-effective-tool-native-001"},
+    "result": {"enum": ["pass", "failed_closed"]},
+    "terminal_code": {"type": "string", "pattern": "^[A-Z0-9_]+$"},
+    "events": {"type": "array", "items": {"type": "string", "pattern": "^[a-z0-9_]+$"}, "uniqueItems": true},
+    "effective_tool_names": {"type": "array", "items": {"enum": ["edit", "glob", "read"]}, "uniqueItems": true},
+    "effective_tool_count": {"type": "integer", "minimum": 0, "maximum": 3},
+    "native_process_count": {"const": 1},
+    "automatic_retry_count": {"const": 0},
+    "provider_boundary": {"type": "object"},
+    "cleanup": {"type": "object"}
+  }
+}

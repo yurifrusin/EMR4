@@ -1,0 +1,127 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in native Harness preset-mount effective-tool projection rehearsal",
+    "completed_stage": "The frozen plan, five root scenarios, thirteen guard scenarios, exact candidate, focused and neighbouring tests, Ruff, compile and whitespace checks pass with zero native/model/agent activity.",
+    "next_executable_stage": "commit_the_exact_deterministic_candidate_then_dispatch_one_fresh_gemini_semantic_veto_without_command_result_retranscription",
+    "operation_id": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "5232330b2cb7dca0f3f2dddf332cb4f3b8beccf7",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "57d582810550ce1d5495cae23a1a36429f4ac41d",
+    "reason_codes": [],
+    "resolved_commit": "5232330b2cb7dca0f3f2dddf332cb4f3b8beccf7",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "5232330b2cb7dca0f3f2dddf332cb4f3b8beccf7"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "57d582810550ce1d5495cae23a1a36429f4ac41d",
+    "branch_origin_aligned": true,
+    "head": "57d582810550ce1d5495cae23a1a36429f4ac41d",
+    "origin_branch_commit": "57d582810550ce1d5495cae23a1a36429f4ac41d",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 669
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "deterministic_candidate_precommit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "No model request belongs in the pre-provider composition proof.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "After exact candidate commit, Gemini owns one read-only semantic veto while deterministic code retains the command ledger.",
+        "work_packages": [
+          "exact_candidate_semantic_veto_after_commit"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the exact candidate plus checkpoint sequence is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "pre_verifier",
+      "native_process_checkpoint",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit exact candidate",
+      "fresh verifier worktree at exact source",
+      "deterministic command ledger separate from model decision",
+      "no checkpoint until veto passes",
+      "no native process until clockwork checkpoint"
+    ]
+  },
+  "planned_action": "commit_only_the_explicit_provider_free_preset_mount_effective_tool_deterministic_candidate_for_exact_review",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/deterministic-evidence.json",
+      "scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+      "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the deterministic candidate and exact-path commit. DeepSeek is declined because no model request is admitted. Gemini is reserved for one fresh exact-candidate semantic veto after commit. Native subagents are declined under developer policy and the composition path is serial.",
+    "git_refs_and_worktree": "The generated snapshot owns exact refs. The candidate exists only on explicit new paths, docs/branding and unrelated untracked paths remain preserved, and staging is explicit-path only.",
+    "live_handover_current_baton": "AGENTS.md was read completely. The active latch permits only this provider-free preset-mount/effective-tool-projection rehearsal and no native process before a separate checkpoint.",
+    "protected_evidence_boundaries": "Commit the deterministic candidate only. No native Harness process, agent/session/turn, broker/model/provider/network, attempt 006, Docker/database, product/data, deployment/release/Pages or protected-ref action is admitted."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
