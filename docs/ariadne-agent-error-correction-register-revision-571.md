@@ -4,14 +4,14 @@ Date: 2026-08-20
 
 <!-- ariadne-agent-error-register-reading
 revision: 571
-incident_count: 680
-new_incident_ids: AER-0676,AER-0677,AER-0678,AER-0679,AER-0680
+incident_count: 681
+new_incident_ids: AER-0676,AER-0677,AER-0678,AER-0679,AER-0680,AER-0681
 open_incident_count: 0
 -->
 
-This revision records five contained or corrected workflow incidents from
+This revision records six contained or corrected workflow incidents from
 check-in relay-free recovery attempt 005. The prospective canonical machine
-register contains 680 incidents and none is open.
+register contains 681 incidents and none is open.
 
 ## AER-0676 — hand-entered full Git object was wrong
 
@@ -67,7 +67,21 @@ check, publication and idempotent readback passed. Future transition prose must
 be produced through a schema-backed bounded-text builder that reports length
 before the clockwork command is invoked.
 
-All five incidents have contained or accepted correction states. They do not
+## AER-0681 — negative acceptance used a noncanonical reference name
+
+The first closeout clockwork check rejected the otherwise grounded negative
+result because its only acceptance evidence path ended in
+`sol-blocked-assessment.md`; the Continuity grammar recognizes canonical Sol
+acceptance references, not arbitrary semantically equivalent filenames. The
+check failed before publication and canonical governance remained unchanged.
+
+Correction: preserve the blocked assessment and add a distinct
+`sol-acceptance.md` that accepts the failed-closed evidence while explicitly
+rejecting the success claim. Future closeout builders must emit evidence paths
+from the schema-owned artifact-role vocabulary rather than asking the
+orchestrator to remember filename suffix conventions.
+
+All six incidents have contained or accepted correction states. They do not
 reclassify the failed database attempt, authorise a worker or database retry,
 or change any product, data, production, deployment, Pages or protected-ref
 boundary.

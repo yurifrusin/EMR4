@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will next freeze relay-free recovery attempt 005 and may allocate its first post-recovery explicitly brokered native-Harness DeepSeek worker package.
+> EMR4 will diagnose and repair the post-readiness server and stdin lifecycle provider-disabled before considering a separately frozen attempt 006.
 
 ## North star
 
@@ -464,26 +464,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The custom preset payload is exact, hostile variants fail closed and one first-attempt independent veto passes without starting the native Harness. Lineage parent: `deepseek-native-harness-provider-free-required-service-injection-recovery`.
 224. **Connect the native DeepSeek Harness to Ariadne's clockwork with observable dependency gating and least-authority tools before any occupied worker assignment — DeepSeek native Harness provider-free complete-composition native-boot recovery**
    One real provider-free rc.7 boot proved exact service activation, preset mount and edit/glob/read projection with bounded terminal and cleanup. Lineage parent: `deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery`.
+225. **Test the relay-free check-in transaction path once under exact clockwork authority while measuring the first useful native-Harness worker boundary — Raisa provider-free check-in relay-free recovery attempt 005 blocked closeout**
+   The attempt failed closed after readiness with exact cleanup, the worker failed pre-provider, and both negative terminals now identify narrower lifecycle gaps without releasing product effects. Lineage parent: `deepseek-native-harness-provider-free-complete-composition-native-boot-recovery`.
 
 ## Current position
 
-**Use the now-observed native Harness boundary for one explicitly brokered relay-free recovery worker package — DeepSeek native Harness provider-free complete-composition native-boot recovery**
+**Make the server's safe post-readiness exit coordinates and attached-stdin lifetime deterministically observable before authorising any future attempt — Raisa provider-free check-in relay-free recovery attempt 005 blocked closeout**
 
-**Why this proof came next:** Required services, exact preset discovery, guard enforcement, terminal observation and cleanup have passed together, while attempt 004's accepted attachment repair leaves attempt 005 as the narrowest unrepeated product evidence gap.
+**Why this proof came next:** Attempt 005 proves the captured server stops after readiness but retained evidence deliberately omits the exit detail needed to distinguish stdin attachment, entrypoint exit, OOM or another terminal cause.
 
-The native Harness composition seam is accepted; the relay-free recovery track can freeze attempt 005 without repeating accepted route work or changing default-off authority.
+Attempt 005 is honestly closed as failed evidence; the next work is a provider-disabled and initially database-nonexecuting lifecycle conformance repair.
 
 ### What this unlocks
 
-- A fresh work order can bind DeepSeek to exact branch, files, tools, acceptance and cost records.
-- A separately frozen attempt-005 adapter and tests can be the first useful post-recovery EMR4 package.
-- Clockwork and broker evidence can measure worker traceability and failure shape during real development.
+- Safe OCI exit-state fields can become a closed diagnostic vocabulary.
+- Deterministic fakes can prove whether attached stdin lifetime controls the server process.
+- A later attempt 006 can be planned from a diagnosed repair rather than another blind occupied retry.
 
 ### What it does not solve
 
-- No occupied-worker reliability or coding-quality conclusion exists yet.
-- No ordinary-practice route is enabled and no product data is admitted.
-- No production, deployment, release, Pages or protected integration opens.
+- No transaction, restricted-role or exactly-once result is proved.
+- No DeepSeek coding-quality conclusion exists because the provider was never called.
+- No further database run, product data, ordinary-practice, production or protected integration authority opens.
 
 ## Continuity and authority
 
@@ -1222,7 +1224,6 @@ Prerequisites:
 - `docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-plan.md`
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md`
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md`
-- `docs/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-closeout.md`
 - `docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md`
 - `docs/diary/diary.css`
@@ -1328,6 +1329,7 @@ Prerequisites:
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-architecture.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-plan.md`
+- `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md`
 - `docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-closeout.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-plan.md`
@@ -1949,7 +1951,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2036,6 +2037,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-sol-blocked-assessment.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -2689,6 +2691,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-evidence.json`
+- `orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json`
+- `orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/rehearsal-failure-evidence.json`
 - `orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md`
@@ -3254,7 +3258,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-19--unmounted-check-in-admission-control-kernel-rehearsal.md`
-- `orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-complete-composition-native-boot-recovery.md`
+- `orchestration/human_inbox/yuri/2026-08-20--check-in-relay-free-recovery-attempt-005.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3562,4 +3566,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 329; continuity graph revision 347._
+_Compass map revision 330; continuity graph revision 348._

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 570,
+  "register_revision": 571,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-20",
@@ -26843,6 +26843,235 @@
       "incident_id": "AER-0675",
       "attempt_id": "clock-ddfdc338f86047a8e9a13bcb",
       "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator-commentary",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every Git source entering a worker controller must be injected from the machine resolver as the exact current 40-character commit and must never be transcribed or completed by the orchestrator.",
+      "observed_error": "The first controller draft contained a 40-character-looking Git identifier that did not equal the machine-resolved current HEAD.",
+      "detection_method": "Controller prepare resolved and compared the source before worker dispatch, rejected the mismatch and left provider requests and canonical mutations at zero.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-571.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_git_object_expansion_in_report",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Rebind the controller to the exact git rev-parse HEAD result and preserve the rejected preparation as workflow cost.",
+        "prevention_control": "Inject full Git objects directly from the resolver into schema-backed builders; reports and packets may display only a machine-returned value and never a manually expanded abbreviation.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+          "docs/ariadne-agent-error-correction-register-revision-571.md"
+        ]
+      },
+      "incident_id": "AER-0676",
+      "attempt_id": "clock-4a7681f4f84f0bd26aef50b7",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-worker-packet-builder",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A sparse worker packet must contain the complete resolved file dependency closure of every command admitted in its manifest before dispatch.",
+      "observed_error": "The first sparse worker packet omitted one base focused test named by the admitted command manifest.",
+      "detection_method": "Controller prepare compared the packet contents with the manifest before dispatch, rejected the incomplete packet and made no provider request or canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-571.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.sparse_worker_packet_dependency_closure_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact missing dependency, rerun controller prepare and admit only the complete sparse packet.",
+        "prevention_control": "Generate sparse worktree inclusion from the manifest's mechanically resolved dependency graph rather than maintaining a second hand-authored file list.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+          "docs/ariadne-agent-error-correction-register-revision-571.md"
+        ]
+      },
+      "incident_id": "AER-0677",
+      "attempt_id": "clock-6a029427bd34846273c9ac4d",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+      "role": "implementer",
+      "resource_id": "deepseek-native-harness-rc7-worker",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "deepseek_native_harness",
+      "stage": "implementation",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The accepted rc.7 composition must mount the exact emr4-bounded-worker preset, expose only edit, glob and read and reach the provider boundary before a useful occupied worker can begin.",
+      "observed_error": "The sole worker reached broker and HMR readiness but terminated at EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED before any DeepSeek request, model step, tool call, test or edit.",
+      "detection_method": "Runner, HMR and broker terminals recorded the collapsed failure coordinate, unchanged owned placeholder hashes, zero provider-boundary counts and exact cleanup.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/diagnosis.md",
+        "docs/ariadne-agent-error-correction-register-revision-571.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.native_effective_tool_preset_mount_failed_pre_provider",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume the worker without retry, preserve its terminal and complete the exact frozen adapter/test package under Sol ownership.",
+        "prevention_control": "Before another occupied worker, run the identical agents.create full-profile mount provider-disabled, split safe preset-mount coordinates and compare model-owned paths by baseline and terminal hashes.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/diagnosis.md",
+          "docs/ariadne-agent-error-correction-register-revision-571.md"
+        ]
+      },
+      "incident_id": "AER-0678",
+      "attempt_id": "clock-7ea955e1585fe73453cd05c3",
+      "origin": "harness",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-deterministic-command-manifest",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "A descendant verification manifest must include current compatibility tests but exclude immutable historical source-pin assertions that deliberately bind predecessor bytes.",
+      "observed_error": "The first expanded manifest included the server-repair plan-freeze test, whose accepted purpose is to require the pre-repair harness hash and therefore reject the repaired descendant.",
+      "detection_method": "The first deterministic runner failed that exact historical assertion before candidate commit; Sol preserved the rejected receipt and changed no implementation or authority source.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deterministic-admission-receipt.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-571.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.descendant_manifest_included_immutable_source_pin_test",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the rejected deterministic receipt and remove only the immutable-history source-pin test from the descendant command manifest.",
+        "prevention_control": "Select descendant tests from machine-readable compatibility metadata that distinguishes invariant coverage from predecessor-byte pinning instead of using filename proximity.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deterministic-admission-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+          "docs/ariadne-agent-error-correction-register-revision-571.md"
+        ]
+      },
+      "incident_id": "AER-0679",
+      "attempt_id": "clock-c71f0d72cf087b56fe4f39ae",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+      "role": "orchestrator",
+      "resource_id": "ariadne-governance-clockwork-checkpoint",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every checkpoint completed_stage value must be schema-validated and no longer than 500 characters before the clockwork check command is invoked.",
+      "observed_error": "The first database checkpoint check rejected the hand-authored completed_stage because it exceeded the 500-character schema maximum.",
+      "detection_method": "The semantic intent validator rejected the value before any command execution, generation publication or canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/database-preexecution/checkpoint-intent.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-571.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.active_operation_checkpoint_text_exceeded_bound",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Render the same facts in 458 characters, rerun the separate check and publish steps and verify idempotent readback.",
+        "prevention_control": "Construct transition prose through a schema-backed bounded-text renderer that exposes the exact length and rejection reason before invoking clockwork.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/database-preexecution/checkpoint-intent.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+          "docs/ariadne-agent-error-correction-register-revision-571.md"
+        ]
+      },
+      "incident_id": "AER-0680",
+      "attempt_id": "clock-959efbdb47fdb7d998438d2e",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+      "role": "orchestrator",
+      "resource_id": "ariadne-continuity-acceptance-reference",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every accepted Continuity node must cite at least one evidence path whose schema-owned artifact role is recognized as a canonical acceptance reference.",
+      "observed_error": "The first clockwork check cited only a semantically valid sol-blocked-assessment.md path, which the closed Continuity acceptance-reference grammar rejected.",
+      "detection_method": "The prospective graph validator returned accepted_node_acceptance_invalid before publication and canonical governance remained unchanged.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-571.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.continuity_acceptance_reference_role_not_canonical",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the blocked assessment and add a canonical sol-acceptance.md artifact that accepts the negative evidence while rejecting the planned success result.",
+        "prevention_control": "Generate node evidence paths from schema-owned artifact-role constructors so the acceptance suffix and semantic decision are validated before clockwork invocation.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-sol-acceptance.md",
+          "docs/ariadne-agent-error-correction-register-revision-571.md"
+        ]
+      },
+      "incident_id": "AER-0681",
+      "attempt_id": "clock-6f2cfca0ff7e82f27654d4f9",
+      "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"
     }

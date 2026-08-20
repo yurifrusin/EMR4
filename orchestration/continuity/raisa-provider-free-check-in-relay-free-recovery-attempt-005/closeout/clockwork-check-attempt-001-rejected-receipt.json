@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.governance_clockwork_check_rejection.v1",
+  "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+  "recorded_at": "2026-08-20T14:29:30.6434371+10:00",
+  "status": "revision_required",
+  "canonical_mutation": false,
+  "reason": "tick_transaction_prepare",
+  "detail": "prospective_projection_invalid:source_graph:accepted_node_acceptance_invalid:raisa-provider-free-check-in-relay-free-recovery-attempt-005:orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-sol-blocked-assessment.md",
+  "correction": "Preserve the blocked assessment as terminal analysis and add a canonical sol-acceptance artifact that explicitly accepts the failed-closed negative evidence without accepting the success claim."
+}

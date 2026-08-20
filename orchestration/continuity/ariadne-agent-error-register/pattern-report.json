@@ -1,44 +1,44 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 570,
+  "register_revision": 571,
   "source_cutoff_on": "2026-08-20",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "1dd0bb1e670f117123c8ff33628bbbd36519a4752791c7327581980b8fc88cb6",
-  "incident_count": 675,
+  "canonical_register_sha256": "fd431d471b2081af21243cb3b85245f85d2bbf3588d1b40ca46253e9052ea088",
+  "incident_count": 681,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 451,
-      "harness": 54,
+      "agent_behavior": 456,
+      "harness": 55,
       "operator": 36,
       "repository": 118,
       "transport": 16
     },
     "by_category": {
-      "command_scope_violation": 89,
+      "command_scope_violation": 90,
       "evidence_misreport": 70,
-      "harness_failure": 54,
+      "harness_failure": 55,
       "operator_error": 36,
-      "output_contract_violation": 241,
+      "output_contract_violation": 245,
       "read_only_violation": 4,
       "reasoning_claim_error": 47,
       "repository_defect": 118,
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 44,
+      "implementer": 45,
       "integration_reviewer": 3,
-      "orchestrator": 568,
+      "orchestrator": 573,
       "verifier": 60
     },
     "by_process_severity": {
-      "low": 386,
+      "low": 391,
       "material": 121,
-      "moderate": 168
+      "moderate": 169
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 116,
-      "canonical_unchanged": 416,
+      "canonical_unchanged": 422,
       "untrusted_partial_worktree": 143
     },
     "by_resource_and_role": {
@@ -61,11 +61,15 @@
       "ariadne-antigravity-command-schema::orchestrator": 1,
       "ariadne-antigravity-egress-admission::verifier": 2,
       "ariadne-compass-current-position-test::orchestrator": 7,
+      "ariadne-continuity-acceptance-reference::orchestrator": 1,
       "ariadne-continuity-closeout-suite::orchestrator": 2,
+      "ariadne-governance-clockwork-checkpoint::orchestrator": 1,
       "ariadne-orchestrator-postcompaction-preflight::orchestrator": 1,
       "ariadne-orchestrator-preflight::orchestrator": 3,
       "ariadne-provider-free-pytest-launcher::orchestrator": 1,
       "ariadne-verifier-worktree-preflight::orchestrator": 3,
+      "attempt-005-deterministic-command-manifest::orchestrator": 1,
+      "attempt-005-worker-packet-builder::orchestrator": 1,
       "clockwork-gear-architecture-plan-latch-test::orchestrator": 1,
       "clockwork-migration-focused-replay-fixture::orchestrator": 1,
       "clockwork-migration-verifier-command-manifest::orchestrator": 1,
@@ -74,7 +78,7 @@
       "codex-native-parallel-worker::implementer": 2,
       "codex-native-parallel-worker::integration_reviewer": 2,
       "codex-primary-implementer::implementer": 3,
-      "codex-primary-orchestrator-commentary::orchestrator": 1,
+      "codex-primary-orchestrator-commentary::orchestrator": 2,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
       "codex-primary-orchestrator::orchestrator": 348,
@@ -89,6 +93,7 @@
       "deepseek-native-harness-rc7-container-readonly-rootfs::orchestrator": 1,
       "deepseek-native-harness-rc7-container-worker::implementer": 1,
       "deepseek-native-harness-rc7-container-worker::orchestrator": 2,
+      "deepseek-native-harness-rc7-worker::implementer": 1,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,

@@ -1,0 +1,98 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "source_evidence": {
+    "live_handover_current_baton": "The latest clockwork-generated AGENTS.md was rehydrated from the prior complete 138894-character reading plus the exact complete generated diff, then read as a 141223-character, 141229-byte UTF-8 source with SHA-256 a08699d6f260420476fdfc61a75aa57368932651450864c64f380f5db63ec568. At Continuity 348 / Compass 330 it accepts attempt 005 as failed-closed negative evidence and names the post-readiness lifecycle conformance repair as next implementation.",
+    "current_authority_allocation": "GPT Sol owns the successor plan freeze, safe diagnostic vocabulary, deterministic fakes, narrow source/test correction, acceptance and Git. DeepSeek native Harness is unavailable for useful work until its provider-disabled preset-mount path is diagnosed; no retry is authorised. Gemini 3.7 Flash/high is reserved only for a future exact deterministic candidate veto. Native subagents are declined under developer policy and the serial lifecycle diagnosis boundary.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/closeout/clockwork-tick-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/closeout/closeout-intent.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Attempts 001-005 and the consumed native worker remain immutable with no retry, resume, overwrite or reclassification. The successor is provider-disabled and initially permits no Docker object, PostgreSQL process, SQL or database execution; attempt 006 requires a separate future plan and checkpoint. Protected holdouts and historical Diary data remain sealed. No product/config/API/client change, ordinary-practice enablement, generic-status Arrived, product/patient/clinical data, live provider, production, deployment, release, Pages, protected evidence or protected-ref movement is authorised. docs/branding and all unrelated untracked files remain preserved; staging is explicit-path only.",
+    "git_refs_and_worktree": "Machine readings align local HEAD and origin/codex/ariadne-bernie-davida-parallel-seam at exact closeout source 03b94136c9c6cd82d5a8098705f263ba34a20de4 before the generated governance commit. Local/origin master and handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Current tracked and operation-specific untracked changes are the successful lease-67 clockwork projection, intent, negative Sol acceptance and incident correction; unrelated untracked paths including docs/branding remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+    "active_tranche": "Raisa provider-free check-in server post-readiness exit-state and stdin-lifecycle conformance repair",
+    "objective": "Freeze a provider-disabled and initially database-nonexecuting repair that exposes a closed sanitized OCI post-readiness exit-state vocabulary, separates native-Harness preset/server lifecycle coordinates, proves attached-stdin lifetime with deterministic fakes, and makes the narrowest source/test correction without authorising attempt 006.",
+    "status": "in_progress",
+    "source_head": "03b94136c9c6cd82d5a8098705f263ba34a20de4",
+    "authority_source": "Yuri's standing uninterrupted-development authority and the accepted failed-closed attempt-005 terminal, exact cleanup and workflow-efficacy reading.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-provider-free-check-in-relay-free-recovery-attempt-005 at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_narrow_provider_disabled_lifecycle_conformance_plan",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_check_in_server_post_readiness_exit_state_and_stdin_lifecycle_conformance_repair_only",
+      "provider_disabled_and_initially_no_database_or_docker_object_execution",
+      "closed_sanitized_oci_exit_state_vocabulary_and_deterministic_fake_lifecycle_proofs_only",
+      "attempts_001_through_005_immutable_no_retry_resume_overwrite_or_reclassification",
+      "no_attempt_006_or_other_disposable_postgresql_execution_without_separate_plan_and_checkpoint",
+      "no_deepseek_gemini_or_other_live_provider_call_without_separate_exact_dispatch_authority",
+      "future_native_harness_mount_probe_must_be_provider_disabled_and_split_safe_mount_coordinates",
+      "generate_full_git_bindings_dependency_closure_bounded_text_and_changed_path_readings_from_schema",
+      "no_product_source_configuration_api_openapi_graphql_schema_migration_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+    "assessed_stage": "post_attempt_005_closeout_precommit",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "The native Harness mount path failed before provider dispatch and has no retry authority; the successor must first diagnose that same path provider-disabled. Claude Code fallback is not authorised.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "One fresh Gemini 3.7 Flash/high read-only veto may review a future exact deterministic lifecycle-repair candidate only after the plan and all provider-free tests pass.", "work_packages": ["future_exact_lifecycle_repair_candidate_read_only_veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Developer policy prohibits proactive native delegation and the safe vocabulary, fake lifecycle model and minimal repair form one tightly coupled serial design boundary.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "commit and publish the exact lease-67 closeout before successor planning",
+      "freeze the closed diagnostic vocabulary before source edits",
+      "prove stdin and exit-state behavior with deterministic fakes before any real Docker or database process",
+      "no occupied provider or attempt 006 authority exists",
+      "protected refs remain closed"
+    ],
+    "reassessment_triggers": ["successor_preplanning", "candidate_precommit", "pre_verifier", "closeout"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "complete prior AGENTS reading plus exact generated diff, latest full file hash, attempt-005 closeout evidence, current latch and fresh Git refs", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol completed the successor five-source restoration and closeout review."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["The consumed pre-provider mount failure is reachable as immutable evidence; no new worker is authorised."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Sign-in is restored; a future veto remains gated on a deterministic candidate."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent was spawned; the lane is declined."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "deepseek-native-harness-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

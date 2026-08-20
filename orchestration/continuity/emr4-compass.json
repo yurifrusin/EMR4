@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 329,
-  "updated_at": "2026-08-20T11:55:38.3228395+10:00",
-  "source_graph_revision": 347,
-  "orientation_statement": "EMR4 will next freeze relay-free recovery attempt 005 and may allocate its first post-recovery explicitly brokered native-Harness DeepSeek worker package.",
+  "map_revision": 330,
+  "updated_at": "2026-08-20T14:29:30.6434371+10:00",
+  "source_graph_revision": 348,
+  "orientation_statement": "EMR4 will diagnose and repair the post-readiness server and stdin lifecycle provider-disabled before considering a separately frozen attempt 006.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4394,27 +4394,38 @@
         "orchestration/agent_inbox/antigravity/deepseek-native-harness-complete-composition-native-boot-recovery-gemini37-review-receipt.json",
         "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/efficacy-reading.json"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+      "lineage_parent": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+      "strategic_role": "Test the relay-free check-in transaction path once under exact clockwork authority while measuring the first useful native-Harness worker boundary",
+      "outcome": "The attempt failed closed after readiness with exact cleanup, the worker failed pre-provider, and both negative terminals now identify narrower lifecycle gaps without releasing product effects.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/rehearsal-failure-evidence.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json",
+        "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
-    "strategic_role": "Use the now-observed native Harness boundary for one explicitly brokered relay-free recovery worker package",
-    "why_now": "Required services, exact preset discovery, guard enforcement, terminal observation and cleanup have passed together, while attempt 004's accepted attachment repair leaves attempt 005 as the narrowest unrepeated product evidence gap.",
-    "outcome": "The native Harness composition seam is accepted; the relay-free recovery track can freeze attempt 005 without repeating accepted route work or changing default-off authority.",
+    "node_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+    "strategic_role": "Make the server's safe post-readiness exit coordinates and attached-stdin lifetime deterministically observable before authorising any future attempt",
+    "why_now": "Attempt 005 proves the captured server stops after readiness but retained evidence deliberately omits the exit detail needed to distinguish stdin attachment, entrypoint exit, OOM or another terminal cause.",
+    "outcome": "Attempt 005 is honestly closed as failed evidence; the next work is a provider-disabled and initially database-nonexecuting lifecycle conformance repair.",
     "unlocks": [
-      "A fresh work order can bind DeepSeek to exact branch, files, tools, acceptance and cost records.",
-      "A separately frozen attempt-005 adapter and tests can be the first useful post-recovery EMR4 package.",
-      "Clockwork and broker evidence can measure worker traceability and failure shape during real development."
+      "Safe OCI exit-state fields can become a closed diagnostic vocabulary.",
+      "Deterministic fakes can prove whether attached stdin lifetime controls the server process.",
+      "A later attempt 006 can be planned from a diagnosed repair rather than another blind occupied retry."
     ],
     "does_not_solve": [
-      "No occupied-worker reliability or coding-quality conclusion exists yet.",
-      "No ordinary-practice route is enabled and no product data is admitted.",
-      "No production, deployment, release, Pages or protected integration opens."
+      "No transaction, restricted-role or exactly-once result is proved.",
+      "No DeepSeek coding-quality conclusion exists because the provider was never called.",
+      "No further database run, product data, ordinary-practice, production or protected integration authority opens."
     ],
     "evidence": [
-      "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-closeout.md",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-complete-composition-native-boot-recovery.md"
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-sol-blocked-assessment.md",
+      "orchestration/human_inbox/yuri/2026-08-20--check-in-relay-free-recovery-attempt-005.md"
     ]
   },
   "decision_horizon": [

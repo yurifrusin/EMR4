@@ -1,0 +1,475 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+    "title": "Raisa provider-free check-in relay-free recovery attempt 005 blocked closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-20T14:29:30.6434371+10:00",
+    "node": {
+      "id": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+      "title": "Raisa provider-free check-in relay-free recovery attempt 005 blocked closeout",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted one and only one occupied attempt-005 database execution after its separate checkpoint.",
+          "The occupied execution and sole native-Harness worker are consumed with no retry, resume, fallback or reclassification.",
+          "The successor is provider-disabled and database-nonexecuting until a separate future attempt plan grants otherwise."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-immutable-attempt-005-failed-closed-terminal",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/rehearsal-failure-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one immutable environment/server_not_running_after_readiness terminal at execution source 905184b76f576006232fcfdc78da71d98fcf0ca0 with zero retry, no transaction attestation and no released product or ordinary-practice effect."
+        },
+        {
+          "id": "accept-exact-attempt-005-cleanup",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/attempt-005-execution-envelope.json",
+          "status": "accepted",
+          "summary": "Accept cleanup_verified with server attachment, sidecars, captured server, internal network and all matching labelled resources absent."
+        },
+        {
+          "id": "accept-native-harness-pre-provider-negative-terminal",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the sole worker as consumed at EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED with zero provider requests, model steps, tools, tests, edits or retries and exact cleanup."
+        },
+        {
+          "id": "reject-attempt-005-success-claim",
+          "source": "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-sol-blocked-assessment.md",
+          "status": "rejected",
+          "summary": "Reject the target transaction proof because setup, restricted role, rollback, unknown-response commit, authoritative readback and transaction attestation never ran."
+        },
+        {
+          "id": "accept-deterministic-terminal-verification",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/postexecution-deterministic-receipt.json",
+          "status": "accepted",
+          "summary": "Accept the corrected 240-test provider-free postexecution suite, Ruff, compilation, exact schema validation and protected-boundary checks."
+        },
+        {
+          "id": "accept-five-clockwork-incident-readings",
+          "source": "docs/ariadne-agent-error-correction-register-revision-571.md",
+          "status": "accepted",
+          "summary": "Intake five contained workflow observations as machine-derived AER-0676 through AER-0680 and retain zero open incidents."
+        }
+      ],
+      "claim_scope": [
+        "Attempt 005 executed exactly once and failed closed after readiness when the captured server was no longer running.",
+        "Failure SHA-256 a9e6331471dadc06ddc1fc7f5f6e9510a231fa7cd3a0fc748495f8c9794bb887 and envelope SHA-256 dedfcbf008ea11c9dac9241a59c900582f5ca82a1de003bcd9f740409c0bbb54 are immutable.",
+        "Setup, role creation, both transaction branches, authoritative readback and transaction attestation did not run.",
+        "No retry, ambiguous success, ordinary-practice admission or product record was released.",
+        "All owned Docker resources and the ephemeral attachment are absent after cleanup.",
+        "The native Harness worker failed before DeepSeek was called and therefore supplies no evidence about DeepSeek reasoning or coding quality.",
+        "The stopped-server coordinate is narrower than attempt 004's combined liveness-or-identity coordinate, but the retained evidence cannot select the underlying exit cause.",
+        "Five workflow incidents are contained; their prevention direction is generated schema-backed readings rather than additional memory rules."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-plan.md",
+          "docs/security/raisa-provider-free-check-in-relay-free-recovery-attempt-005-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/rehearsal-failure-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/attempt-005-execution-envelope.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/diagnosis.md",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/postexecution-deterministic-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-blocked-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-terminal-prepush-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/database-preexecution/clockwork-checkpoint-tick-evidence.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_005.py",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/attempt-005-execution-envelope.schema.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/preexecution-read-only-docker-inspection.json",
+          "docs/ariadne-agent-error-correction-register-revision-571.md",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+          "orchestration/human_inbox/yuri/2026-08-20--check-in-relay-free-recovery-attempt-005.md",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The PostgreSQL server's post-readiness exit cause remains unproved.",
+        "No further disposable PostgreSQL execution is authorised; any attempt 006 requires a separately frozen plan and one-run checkpoint.",
+        "The native Harness preset-mount subcause remains collapsed and must be separated provider-disabled before another occupied worker.",
+        "Dedicated check-in remains default-off with no ordinary-practice route or product-data authority.",
+        "No production, deployment, release, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Test the relay-free check-in transaction path once under exact clockwork authority while measuring the first useful native-Harness worker boundary",
+      "outcome": "The attempt failed closed after readiness with exact cleanup, the worker failed pre-provider, and both negative terminals now identify narrower lifecycle gaps without releasing product effects.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/rehearsal-failure-evidence.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json",
+        "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Make the server's safe post-readiness exit coordinates and attached-stdin lifetime deterministically observable before authorising any future attempt",
+      "why_now": "Attempt 005 proves the captured server stops after readiness but retained evidence deliberately omits the exit detail needed to distinguish stdin attachment, entrypoint exit, OOM or another terminal cause.",
+      "outcome": "Attempt 005 is honestly closed as failed evidence; the next work is a provider-disabled and initially database-nonexecuting lifecycle conformance repair.",
+      "unlocks": [
+        "Safe OCI exit-state fields can become a closed diagnostic vocabulary.",
+        "Deterministic fakes can prove whether attached stdin lifetime controls the server process.",
+        "A later attempt 006 can be planned from a diagnosed repair rather than another blind occupied retry."
+      ],
+      "does_not_solve": [
+        "No transaction, restricted-role or exactly-once result is proved.",
+        "No DeepSeek coding-quality conclusion exists because the provider was never called.",
+        "No further database run, product data, ordinary-practice, production or protected integration authority opens."
+      ],
+      "evidence": [
+        "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-sol-blocked-assessment.md",
+        "orchestration/human_inbox/yuri/2026-08-20--check-in-relay-free-recovery-attempt-005.md"
+      ],
+      "orientation_statement": "EMR4 will diagnose and repair the post-readiness server and stdin lifecycle provider-disabled before considering a separately frozen attempt 006."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+      "active_tranche": "Raisa provider-free check-in server post-readiness exit-state and stdin-lifecycle conformance repair",
+      "objective": "Freeze a provider-disabled and initially database-nonexecuting repair that exposes a closed sanitized OCI post-readiness exit-state vocabulary, separates native-Harness preset/server lifecycle coordinates, proves attached-stdin lifetime with deterministic fakes, and makes the narrowest source/test correction without authorising attempt 006.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted failed-closed attempt-005 terminal, exact cleanup and workflow-efficacy reading.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_narrow_provider_disabled_lifecycle_conformance_plan"
+    },
+    "incidents": [
+      {"incident_id": "attempt-005-wrong-full-git-object", "source_id": "attempt-005-controller-prepare-001", "peers": []},
+      {"incident_id": "attempt-005-sparse-dependency-omission", "source_id": "attempt-005-controller-prepare-002", "peers": []},
+      {"incident_id": "attempt-005-native-preset-mount-failure", "source_id": "attempt-005-native-worker-001", "peers": []},
+      {"incident_id": "attempt-005-historical-source-pin-selection", "source_id": "attempt-005-deterministic-runner-001", "peers": []},
+      {"incident_id": "attempt-005-checkpoint-text-overflow", "source_id": "attempt-005-database-checkpoint-check-001", "peers": []}
+      ,{"incident_id": "attempt-005-acceptance-reference-name", "source_id": "attempt-005-closeout-clockwork-check-001", "peers": []}
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "attempt_005_closeout_tick_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/closeout/closeout-intent.json"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt_005_closeout_provider_free_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt_005_closeout_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_005.py", "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt_005_closeout_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_005.py", "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Raisa provider-free check-in relay-free recovery attempt 005 blocked closeout acceptance",
+    "paths": [
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-plan.md",
+      "docs/security/raisa-provider-free-check-in-relay-free-recovery-attempt-005-threat-model-delta.md",
+      "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_005.py",
+      "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005.py",
+      "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_005_plan.py",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/attempt-005-execution-envelope.schema.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/attempt-005-execution-envelope.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/rehearsal-failure-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/diagnosis.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/database-preexecution/checkpoint-intent.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/database-preexecution/clockwork-checkpoint-tick-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/database-preexecution/clockwork-checkpoint-tick-report.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/postexecution-deterministic-receipt.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-571.md",
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-sol-blocked-assessment.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-blocked-precommit-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-terminal-prepush-receipt.json",
+      "orchestration/human_inbox/yuri/2026-08-20--check-in-relay-free-recovery-attempt-005.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/closeout/closeout-intent.json"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_check_in_server_post_readiness_exit_state_and_stdin_lifecycle_conformance_repair_only",
+    "provider_disabled_and_initially_no_database_or_docker_object_execution",
+    "closed_sanitized_oci_exit_state_vocabulary_and_deterministic_fake_lifecycle_proofs_only",
+    "attempts_001_through_005_immutable_no_retry_resume_overwrite_or_reclassification",
+    "no_attempt_006_or_other_disposable_postgresql_execution_without_separate_plan_and_checkpoint",
+    "no_deepseek_gemini_or_other_live_provider_call_without_separate_exact_dispatch_authority",
+    "future_native_harness_mount_probe_must_be_provider_disabled_and_split_safe_mount_coordinates",
+    "generate_full_git_bindings_dependency_closure_bounded_text_and_changed_path_readings_from_schema",
+    "no_product_source_configuration_api_openapi_graphql_schema_migration_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "attempt-005-controller-wrong-full-git-object-001",
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator-commentary",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every Git source entering a worker controller must be injected from the machine resolver as the exact current 40-character commit and must never be transcribed or completed by the orchestrator.",
+      "observed_error": "The first controller draft contained a 40-character-looking Git identifier that did not equal the machine-resolved current HEAD.",
+      "detection_method": "Controller prepare resolved and compared the source before worker dispatch, rejected the mismatch and left provider requests and canonical mutations at zero.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-571.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_git_object_expansion_in_report",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Rebind the controller to the exact git rev-parse HEAD result and preserve the rejected preparation as workflow cost.",
+        "prevention_control": "Inject full Git objects directly from the resolver into schema-backed builders; reports and packets may display only a machine-returned value and never a manually expanded abbreviation.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+          "docs/ariadne-agent-error-correction-register-revision-571.md"
+        ]
+      },
+      "baton_summary": "preserves the rejected hand-entered full Git object and extends the machine-injected object-ID control."
+    },
+    {
+      "attempt_key": "attempt-005-sparse-packet-dependency-omission-001",
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-worker-packet-builder",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A sparse worker packet must contain the complete resolved file dependency closure of every command admitted in its manifest before dispatch.",
+      "observed_error": "The first sparse worker packet omitted one base focused test named by the admitted command manifest.",
+      "detection_method": "Controller prepare compared the packet contents with the manifest before dispatch, rejected the incomplete packet and made no provider request or canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-571.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.sparse_worker_packet_dependency_closure_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact missing dependency, rerun controller prepare and admit only the complete sparse packet.",
+        "prevention_control": "Generate sparse worktree inclusion from the manifest's mechanically resolved dependency graph rather than maintaining a second hand-authored file list.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+          "docs/ariadne-agent-error-correction-register-revision-571.md"
+        ]
+      },
+      "baton_summary": "records the predispatch sparse dependency omission and the manifest-derived closure control."
+    },
+    {
+      "attempt_key": "attempt-005-native-harness-preset-mount-001",
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+      "role": "implementer",
+      "resource_id": "deepseek-native-harness-rc7-worker",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "deepseek_native_harness",
+      "stage": "implementation",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The accepted rc.7 composition must mount the exact emr4-bounded-worker preset, expose only edit, glob and read and reach the provider boundary before a useful occupied worker can begin.",
+      "observed_error": "The sole worker reached broker and HMR readiness but terminated at EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED before any DeepSeek request, model step, tool call, test or edit.",
+      "detection_method": "Runner, HMR and broker terminals recorded the collapsed failure coordinate, unchanged owned placeholder hashes, zero provider-boundary counts and exact cleanup.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/diagnosis.md",
+        "docs/ariadne-agent-error-correction-register-revision-571.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.native_effective_tool_preset_mount_failed_pre_provider",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume the worker without retry, preserve its terminal and complete the exact frozen adapter/test package under Sol ownership.",
+        "prevention_control": "Before another occupied worker, run the identical agents.create full-profile mount provider-disabled, split safe preset-mount coordinates and compare model-owned paths by baseline and terminal hashes.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/diagnosis.md",
+          "docs/ariadne-agent-error-correction-register-revision-571.md"
+        ]
+      },
+      "baton_summary": "preserves the pre-provider native preset-mount failure as Harness—not DeepSeek-quality—evidence and requires a provider-disabled identical mount smoke."
+    },
+    {
+      "attempt_key": "attempt-005-historical-source-pin-test-selection-001",
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-deterministic-command-manifest",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "A descendant verification manifest must include current compatibility tests but exclude immutable historical source-pin assertions that deliberately bind predecessor bytes.",
+      "observed_error": "The first expanded manifest included the server-repair plan-freeze test, whose accepted purpose is to require the pre-repair harness hash and therefore reject the repaired descendant.",
+      "detection_method": "The first deterministic runner failed that exact historical assertion before candidate commit; Sol preserved the rejected receipt and changed no implementation or authority source.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deterministic-admission-receipt.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-571.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.descendant_manifest_included_immutable_source_pin_test",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the rejected deterministic receipt and remove only the immutable-history source-pin test from the descendant command manifest.",
+        "prevention_control": "Select descendant tests from machine-readable compatibility metadata that distinguishes invariant coverage from predecessor-byte pinning instead of using filename proximity.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deterministic-admission-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+          "docs/ariadne-agent-error-correction-register-revision-571.md"
+        ]
+      },
+      "baton_summary": "records the rejected immutable source-pin test selection and the future compatibility-metadata selector."
+    },
+    {
+      "attempt_key": "attempt-005-checkpoint-completed-stage-overflow-001",
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+      "role": "orchestrator",
+      "resource_id": "ariadne-governance-clockwork-checkpoint",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every checkpoint completed_stage value must be schema-validated and no longer than 500 characters before the clockwork check command is invoked.",
+      "observed_error": "The first database checkpoint check rejected the hand-authored completed_stage because it exceeded the 500-character schema maximum.",
+      "detection_method": "The semantic intent validator rejected the value before any command execution, generation publication or canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/database-preexecution/checkpoint-intent.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-571.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.active_operation_checkpoint_text_exceeded_bound",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Render the same facts in 458 characters, rerun the separate check and publish steps and verify idempotent readback.",
+        "prevention_control": "Construct transition prose through a schema-backed bounded-text renderer that exposes the exact length and rejection reason before invoking clockwork.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/database-preexecution/checkpoint-intent.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/efficacy-reading.json",
+          "docs/ariadne-agent-error-correction-register-revision-571.md"
+        ]
+      },
+      "baton_summary": "preserves the rejected overlong checkpoint prose and extends the schema-backed bounded-text control."
+    },
+    {
+      "attempt_key": "attempt-005-noncanonical-negative-acceptance-reference-001",
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+      "role": "orchestrator",
+      "resource_id": "ariadne-continuity-acceptance-reference",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every accepted Continuity node must cite at least one evidence path whose schema-owned artifact role is recognized as a canonical acceptance reference.",
+      "observed_error": "The first clockwork check cited only a semantically valid sol-blocked-assessment.md path, which the closed Continuity acceptance-reference grammar rejected.",
+      "detection_method": "The prospective graph validator returned accepted_node_acceptance_invalid before publication and canonical governance remained unchanged.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-571.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.continuity_acceptance_reference_role_not_canonical",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the blocked assessment and add a canonical sol-acceptance.md artifact that accepts the negative evidence while rejecting the planned success result.",
+        "prevention_control": "Generate node evidence paths from schema-owned artifact-role constructors so the acceptance suffix and semantic decision are validated before clockwork invocation.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-sol-acceptance.md",
+          "docs/ariadne-agent-error-correction-register-revision-571.md"
+        ]
+      },
+      "baton_summary": "preserves the rejected noncanonical negative-acceptance filename and adds schema-owned artifact-role construction."
+    }
+  ]
+}

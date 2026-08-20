@@ -76,11 +76,12 @@ PostgreSQL execution.
 
 Clockwork prevented every expensive repetition: the Harness mount failure
 spent zero model/provider calls, the database attempt ran once only, protected
-refs did not move and canonical checkpoint drift stayed zero. Six construction
+refs did not move and canonical checkpoint drift stayed zero. Seven construction
 events still consumed human/orchestrator time: one wrong hand-entered full Git
 object, one sparse dependency omission, the pre-provider preset-mount failure,
 one historical source-pin test selection, one 500-character checkpoint-field
-overflow and one postexecution fixture bound to the real consumed namespace.
+overflow, one postexecution fixture bound to the real consumed namespace and
+one noncanonical negative-acceptance filename rejected before publication.
 
 The answer is not six more memory rules. The successor workflow work should
 generate full Git bindings, dependency closure, bounded prose and changed-path

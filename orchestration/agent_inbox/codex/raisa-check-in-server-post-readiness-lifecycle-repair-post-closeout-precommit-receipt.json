@@ -1,0 +1,120 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in server post-readiness exit-state and stdin-lifecycle conformance repair",
+    "completed_stage": "Accepted raisa-provider-free-check-in-relay-free-recovery-attempt-005 at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_narrow_provider_disabled_lifecycle_conformance_plan",
+    "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+    "resume_after_compaction": true,
+    "source_head": "03b94136c9c6cd82d5a8098705f263ba34a20de4",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "03b94136c9c6cd82d5a8098705f263ba34a20de4",
+    "reason_codes": [],
+    "resolved_commit": "03b94136c9c6cd82d5a8098705f263ba34a20de4",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "03b94136c9c6cd82d5a8098705f263ba34a20de4"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "03b94136c9c6cd82d5a8098705f263ba34a20de4",
+    "branch_origin_aligned": true,
+    "head": "03b94136c9c6cd82d5a8098705f263ba34a20de4",
+    "origin_branch_commit": "03b94136c9c6cd82d5a8098705f263ba34a20de4",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 660
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "post_attempt_005_closeout_precommit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native Harness mount path failed before provider dispatch and has no retry authority; the successor must first diagnose that same path provider-disabled. Claude Code fallback is not authorised.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high read-only veto may review a future exact deterministic lifecycle-repair candidate only after the plan and all provider-free tests pass.",
+        "work_packages": [
+          "future_exact_lifecycle_repair_candidate_read_only_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive native delegation and the safe vocabulary, fake lifecycle model and minimal repair form one tightly coupled serial design boundary.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "successor_preplanning",
+      "candidate_precommit",
+      "pre_verifier",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit and publish the exact lease-67 closeout before successor planning",
+      "freeze the closed diagnostic vocabulary before source edits",
+      "prove stdin and exit-state behavior with deterministic fakes before any real Docker or database process",
+      "no occupied provider or attempt 006 authority exists",
+      "protected refs remain closed"
+    ]
+  },
+  "planned_action": "commit",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/closeout/clockwork-tick-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/closeout/closeout-intent.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the successor plan freeze, safe diagnostic vocabulary, deterministic fakes, narrow source/test correction, acceptance and Git. DeepSeek native Harness is unavailable for useful work until its provider-disabled preset-mount path is diagnosed; no retry is authorised. Gemini 3.7 Flash/high is reserved only for a future exact deterministic candidate veto. Native subagents are declined under developer policy and the serial lifecycle diagnosis boundary.",
+    "git_refs_and_worktree": "Machine readings align local HEAD and origin/codex/ariadne-bernie-davida-parallel-seam at exact closeout source 03b94136c9c6cd82d5a8098705f263ba34a20de4 before the generated governance commit. Local/origin master and handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Current tracked and operation-specific untracked changes are the successful lease-67 clockwork projection, intent, negative Sol acceptance and incident correction; unrelated untracked paths including docs/branding remain preserved.",
+    "live_handover_current_baton": "The latest clockwork-generated AGENTS.md was rehydrated from the prior complete 138894-character reading plus the exact complete generated diff, then read as a 141223-character, 141229-byte UTF-8 source with SHA-256 a08699d6f260420476fdfc61a75aa57368932651450864c64f380f5db63ec568. At Continuity 348 / Compass 330 it accepts attempt 005 as failed-closed negative evidence and names the post-readiness lifecycle conformance repair as next implementation.",
+    "protected_evidence_boundaries": "Attempts 001-005 and the consumed native worker remain immutable with no retry, resume, overwrite or reclassification. The successor is provider-disabled and initially permits no Docker object, PostgreSQL process, SQL or database execution; attempt 006 requires a separate future plan and checkpoint. Protected holdouts and historical Diary data remain sealed. No product/config/API/client change, ordinary-practice enablement, generic-status Arrived, product/patient/clinical data, live provider, production, deployment, release, Pages, protected evidence or protected-ref movement is authorised. docs/branding and all unrelated untracked files remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

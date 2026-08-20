@@ -78,6 +78,12 @@
       "effect": "one_postexecution_runner_rejected_then_fixture_isolation_was_corrected",
       "canonical_mutation": false,
       "prospective_control": "test_consumed_terminal_namespaces_through_explicit_injected_paths"
+    },
+    {
+      "event": "negative_acceptance_used_noncanonical_reference_filename",
+      "effect": "first_closeout_clockwork_check_rejected_before_publication",
+      "canonical_mutation": false,
+      "prospective_control": "generate_evidence_paths_from_schema_owned_artifact_roles"
     }
   ],
   "clockwork_assessment": {
