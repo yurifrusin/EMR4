@@ -1,0 +1,542 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+    "title": "Raisa provider-free check-in server post-readiness exit-state and stdin-lifecycle conformance repair closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-20T16:04:16.4951745+10:00",
+    "node": {
+      "id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+      "title": "Raisa provider-free check-in server post-readiness exit-state and stdin-lifecycle conformance repair closeout",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted this provider-disabled and initially database-nonexecuting lifecycle repair.",
+          "The sole native process and both Gemini reviews are consumed; no retry, further provider call or attempt 006 is authorised.",
+          "The successor is initially deterministic and provider-free and must receive a separate checkpoint before any native process."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-server-stdin-lifetime-and-sole-cleanup-owner",
+          "source": "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "status": "accepted",
+          "summary": "Accept one write and flush with stdin open after delivery plus sole-owner close-once bounded attachment cleanup."
+        },
+        {
+          "id": "accept-closed-server-post-readiness-projection",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact nine-key sanitized OCI and host-attachment projection with malformed values collapsed fail closed."
+        },
+        {
+          "id": "accept-native-provider-disabled-negative-terminal",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/native-probe-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one consumed provider-disabled process that passed discovery and stopped at the first missing PRESET_VALIDATION_PASSED marker with zero downstream requests and exact cleanup."
+        },
+        {
+          "id": "reject-native-mount-success-and-deepseek-quality-claim",
+          "source": "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-sol-blocked-assessment.md",
+          "status": "rejected",
+          "summary": "Reject preset-validation, agent-creation, effective-tool, occupied-worker and DeepSeek-quality success claims."
+        },
+        {
+          "id": "accept-bounded-path-correction-and-fresh-corrected-veto",
+          "source": "orchestration/agent_inbox/antigravity/raisa-check-in-lifecycle-conformance-repair-gemini37-corrected-review-receipt.json",
+          "status": "accepted",
+          "summary": "Preserve the initial P1 and accept the exact worker-root correction after 52 provider-free tests and a fresh corrected Gemini pass over nine zero-exit commands at unchanged clean HEAD."
+        },
+        {
+          "id": "accept-eight-contained-workflow-incidents",
+          "source": "docs/ariadne-agent-error-correction-register-revision-572.md",
+          "status": "accepted",
+          "summary": "Intake eight machine-derived incidents as AER-0682 through AER-0689 and retain zero open incidents."
+        }
+      ],
+      "claim_scope": [
+        "Attached stdin remains open after the exact credential line is written and flushed; final cleanup is the sole close owner.",
+        "A stopped post-readiness server now yields only the exact closed nine-key projection.",
+        "Server post-readiness and native preset-mount failure families remain distinct.",
+        "The sole provider-disabled native process passed discovery and failed before preset validation, agent creation, turns or any external request.",
+        "The native terminal is consumed with zero retry and exact process/root cleanup.",
+        "The initial isolated-worktree P1 is preserved and its bounded correction passes a fresh independent veto.",
+        "Eight workflow incidents are corrected or contained; no new operator memory checklist is accepted."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-plan.md",
+          "docs/security/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/native-probe-terminal.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-report.md",
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/efficacy-reading.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-lifecycle-conformance-repair-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-lifecycle-conformance-repair-gemini37-corrected-review-receipt.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-corrected-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-corrected-review-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-gemini37-corrected-review-worktree-preflight.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/contract.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/server-post-readiness.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-572.md",
+          "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-sol-blocked-assessment.md",
+          "orchestration/human_inbox/yuri/2026-08-20--check-in-lifecycle-conformance-repair.md",
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact rc.7 preset-validation subcause remains unproved.",
+        "The consumed native process cannot be retried; another native process needs a separately frozen plan and checkpoint.",
+        "Attempt 006 and all Docker/PostgreSQL execution remain unauthorised.",
+        "Dedicated check-in remains default-off with no ordinary-practice or product-data authority.",
+        "No production, deployment, release, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Make the check-in server lifecycle and native Harness preset path mechanically readable before another database or occupied-worker attempt",
+      "outcome": "The server repair and closed diagnostic pass; the one provider-disabled native process fails earlier and more precisely at preset validation with zero provider cost and exact cleanup.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-evidence.json",
+        "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/native-probe-terminal.json",
+        "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Split the rc.7 preset-validation boundary into deterministic source-owned readings before another provider-disabled native process",
+      "why_now": "Discovery passes but the current safe terminal collapses preset row, bytes, parse and digest/length validation into one missing marker.",
+      "outcome": "The lifecycle repair is accepted, native mount success is rejected, and the next work is a provider-free preset-validation subcoordinate recovery.",
+      "unlocks": [
+        "Preset-row discovery can be distinguished from preset-byte reading.",
+        "Exact parse/validation can be distinguished from digest and length binding.",
+        "A future one-shot provider-disabled process can be admitted only after those deterministic coordinates pass."
+      ],
+      "does_not_solve": [
+        "No native agent, effective-tool projection or occupied DeepSeek work is proved.",
+        "No attempt 006, Docker, PostgreSQL, transaction or product result is proved.",
+        "No ordinary-practice, production, deployment or protected-ref authority opens."
+      ],
+      "evidence": [
+        "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-sol-blocked-assessment.md",
+        "orchestration/human_inbox/yuri/2026-08-20--check-in-lifecycle-conformance-repair.md"
+      ],
+      "orientation_statement": "EMR4 will split and prove the native Harness preset-validation coordinates provider-free before considering another separately checkpointed native process."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+      "active_tranche": "Raisa provider-free check-in native Harness preset-validation subcoordinate recovery",
+      "objective": "Freeze the narrowest provider-free recovery that separates exact preset-row discovery, exact preset-byte read and parse, and digest/length binding, first through deterministic package-source proofs; admit no native process until a separate checkpoint and no DeepSeek request or attempt 006.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted lifecycle repair plus immutable provider-disabled PRESET_VALIDATION_PASSED negative terminal.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_exact_provider_free_preset_validation_subcoordinate_recovery_plan"
+    },
+    "incidents": [
+      {"incident_id": "lifecycle-provider-free-home-dependency", "source_id": "lifecycle-local-gate-001", "peers": []},
+      {"incident_id": "lifecycle-static-audit-literal", "source_id": "lifecycle-local-gate-002", "peers": []},
+      {"incident_id": "lifecycle-direct-import-root", "source_id": "lifecycle-local-gate-003", "peers": []},
+      {"incident_id": "lifecycle-latch-owner-bypass", "source_id": "lifecycle-clockwork-001", "peers": []},
+      {"incident_id": "lifecycle-checkpoint-git-transcription", "source_id": "lifecycle-clockwork-002", "peers": []},
+      {"incident_id": "lifecycle-clockwork-command-grammar", "source_id": "lifecycle-clockwork-003", "peers": []},
+      {"incident_id": "lifecycle-native-preset-validation", "source_id": "lifecycle-native-probe-001", "peers": []},
+      {"incident_id": "lifecycle-isolated-worker-root", "source_id": "lifecycle-gemini-review-001", "peers": []}
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "lifecycle_closeout_tick_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/closeout/closeout-intent.json"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "lifecycle_closeout_provider_free_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "lifecycle_closeout_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py", "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py", "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py", "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py", "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "lifecycle_closeout_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py", "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py", "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py", "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py", "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Raisa provider-free check-in server post-readiness exit-state and stdin-lifecycle conformance repair acceptance",
+    "paths": [
+      "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-plan.md",
+      "docs/security/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-threat-model-delta.md",
+      "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+      "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+      "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+      "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+      "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/contract.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/evidence.schema.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/server-post-readiness.schema.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/native-probe-consumed.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/native-probe-terminal.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-report.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/efficacy-reading.json",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-lifecycle-conformance-repair-gemini37-review-receipt.json",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-lifecycle-conformance-repair-gemini37-corrected-review-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-gemini37-corrected-command-manifest.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-gemini37-corrected-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-gemini37-corrected-review-worktree-preflight.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-corrected-pre-verifier-runtime-state.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-corrected-pre-verifier-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-corrected-review-precommit-runtime-state.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-corrected-review-precommit-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-572.md",
+      "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-sol-blocked-assessment.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-20--check-in-lifecycle-conformance-repair.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/closeout/closeout-intent.json"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_only",
+    "initially_deterministic_and_no_native_process_until_a_separate_exact_checkpoint",
+    "consumed_lifecycle_native_probe_immutable_no_retry_resume_or_reclassification",
+    "split_only_preset_row_discovery_exact_byte_read_parse_and_digest_length_binding",
+    "no_deepseek_model_provider_broker_network_or_other_external_request",
+    "no_attempt_006_docker_database_postgresql_sql_or_transaction_execution",
+    "no_product_source_configuration_api_openapi_graphql_schema_migration_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "lifecycle-provider-free-home-dependency-001",
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "lifecycle-provider-free-test-bootstrap",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Provider-free test collection must derive every package and fixture root from the exact task-owned repository or explicit input and must never depend on the ambient user home.",
+      "observed_error": "The first sealed provider-free import consulted the ambient home for a package location and failed before any native process.",
+      "detection_method": "The provider-free runner removed the ambient dependency and collection rejected the import before process, provider or canonical activity.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.provider_free_bootstrap_used_ambient_home",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the bootstrap to the exact task-owned root and rerun sealed provider-free collection.",
+        "prevention_control": "Provider-free tests cover the sealed environment and reject ambient-home dependency before native execution.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+          "docs/ariadne-agent-error-correction-register-revision-572.md"
+        ]
+      },
+      "baton_summary": "records and corrects the ambient-home dependency in provider-free test bootstrap."
+    },
+    {
+      "attempt_key": "lifecycle-controller-static-audit-literal-001",
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+      "role": "implementer",
+      "resource_id": "lifecycle-controller-static-scope-guard",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "The controller's static scope guard must reject real forbidden surfaces without self-matching audit-only literals.",
+      "observed_error": "The first guard matched credential and future-attempt names that appeared only as literal audit constants, while no such surface was opened.",
+      "detection_method": "Focused static tests failed before native execution and inspection showed the matches originated inside the guard's own constant list.",
+      "evidence_paths": [
+        "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+        "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.static_scope_guard_self_matched_audit_literal",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Compose audit-only names from closed fragments and keep the forbidden literal absent from executable source.",
+        "prevention_control": "Focused tests distinguish an actual forbidden token from the guard's own audit vocabulary.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py"
+        ]
+      },
+      "baton_summary": "preserves the static-guard self-match and its source-owned audit-token correction."
+    },
+    {
+      "attempt_key": "lifecycle-controller-direct-import-root-001",
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+      "role": "implementer",
+      "resource_id": "lifecycle-controller-cli-entrypoint",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "The controller must import its repository modules under both direct-path and module-shaped execution from the exact checkout.",
+      "observed_error": "The first direct-path check could not import repository modules even though module-shaped execution worked.",
+      "detection_method": "The deterministic CLI gate failed before native execution and the same source passed when invoked as a module.",
+      "evidence_paths": [
+        "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+        "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.direct_script_missing_repo_import_root",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Insert the resolved repository root for direct entry-point execution and rerun both invocation shapes.",
+        "prevention_control": "Focused controller tests exercise direct-path and module execution before any process admission.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py"
+        ]
+      },
+      "baton_summary": "records the direct-entry import defect and its exact repository-root binding."
+    },
+    {
+      "attempt_key": "lifecycle-clockwork-latch-owner-bypass-001",
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "ariadne-active-operation-latch",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Every named latch checkpoint must be published only by the exclusive clockwork writer over all ten canonical surfaces.",
+      "observed_error": "One intermediate checkpoint wrote the latch directly and created canonical drift before native execution.",
+      "detection_method": "The clockwork predecessor and canonical-source comparison rejected the drift before process or provider dispatch.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/preexecution/checkpoint-intent.json",
+        "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "operator.active_latch_bypassed_clockwork_owner",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Reject the direct draft and restore all ten canonical surfaces through the clockwork's byte-recoverable predecessor before continuing.",
+        "prevention_control": "The governance owner guard and source-byte comparison reject direct latch drift before any subsequent checkpoint or dispatch.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/preexecution/clockwork-checkpoint-tick-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-572.md"
+        ]
+      },
+      "baton_summary": "preserves the direct-latch ownership breach and clockwork-owned byte recovery."
+    },
+    {
+      "attempt_key": "lifecycle-checkpoint-git-object-transcription-001",
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "ariadne-governance-clockwork-checkpoint",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Every Git object displayed in checkpoint prose must be injected from the same machine resolver as the source binding and must never be manually completed.",
+      "observed_error": "The first pre-verifier prose contained a 40-character-looking expansion that did not equal the resolver's full object while the machine source binding itself was correct.",
+      "detection_method": "Full checkpoint readback compared the prose with git rev-parse before verifier acceptance and preserved the rejected checkpoint.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/pre-verifier/checkpoint-intent.json",
+        "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/pre-verifier-correction/checkpoint-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.checkpoint_prose_manual_git_object_expansion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Publish a fresh clockwork checkpoint with the exact resolver-returned full object injected into both binding and prose.",
+        "prevention_control": "Checkpoint builders reuse one resolver value for every source display and validation rejects any conflicting object-like token.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/pre-verifier-correction/clockwork-checkpoint-tick-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-572.md"
+        ]
+      },
+      "baton_summary": "preserves the conflicting checkpoint Git prose and its machine-injected full-object correction."
+    },
+    {
+      "attempt_key": "lifecycle-clockwork-command-grammar-001",
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "ariadne-governance-clockwork-command-manifest",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Clockwork command manifests must use the exact admitted Python module entry point and may not introduce a direct Git executable.",
+      "observed_error": "The first local manifest named Git directly and was rejected by the closed command grammar before publication.",
+      "detection_method": "Manifest validation stopped before command execution, canonical mutation or provider activity.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md",
+        "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/pre-verifier-correction/checkpoint-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_manifest_nonadmitted_executable",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the direct executable with the exact Python -m clockwork command and rerun validation.",
+        "prevention_control": "The clockwork command grammar admits only its exact module entry point and rejects all other executables before publication.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/pre-verifier-correction/clockwork-checkpoint-tick-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-572.md"
+        ]
+      },
+      "baton_summary": "records the rejected clockwork executable and the closed Python-module command grammar."
+    },
+    {
+      "attempt_key": "lifecycle-native-preset-validation-001",
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+      "role": "implementer",
+      "resource_id": "deepseek-native-harness-rc7-provider-disabled",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "deepseek_native_harness",
+      "stage": "implementation",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The exact rc.7 full-profile mount path must validate the pinned preset before agent creation while remaining provider-disabled.",
+      "observed_error": "The sole provider-disabled process passed discovery and stopped at the first missing PRESET_VALIDATION_PASSED marker before agents.create.",
+      "detection_method": "The sanitized terminal records one process, two discovery markers, zero agents, turns and external requests, zero retry and exact cleanup.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/native-probe-terminal.json",
+        "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-report.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.native_preset_validation_failed_pre_agent_provider_disabled",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume the process without retry and freeze a successor that splits row discovery, byte read and parse, and digest/length binding provider-free.",
+        "prevention_control": "No further native process is admitted until deterministic package-source subcoordinates pass and a separate exact checkpoint is published.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/native-probe-consumed.json",
+          "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md"
+        ]
+      },
+      "baton_summary": "preserves the one provider-disabled preset-validation failure and its no-retry subcoordinate successor."
+    },
+    {
+      "attempt_key": "lifecycle-isolated-worktree-root-001",
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini37-review",
+      "model": "gemini-3.7-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The controller must resolve the same exact native worker root from the primary checkout and any direct isolated review worktree.",
+      "observed_error": "The initial verifier found that the controller appended EMR4-worktrees twice inside its isolated worktree, causing bound commands C03 and C04 to fail.",
+      "detection_method": "Gemini executed the exact nine-command manifest, returned revision_required and left the candidate clean and unchanged.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-check-in-lifecycle-conformance-repair-gemini37-review-receipt.json",
+        "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "review_rejected",
+      "recurrence_signature": "repository.isolated_worktree_worker_root_segment_doubled",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Resolve the shared worker root by primary-versus-direct-child shape, add a two-shape regression and dispatch one fresh corrected veto.",
+        "prevention_control": "The corrected manifest executes controller and 52 provider-free tests inside the isolated worktree and requires exact clean pre/post HEAD.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/antigravity/raisa-check-in-lifecycle-conformance-repair-gemini37-corrected-review-receipt.json",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py"
+        ]
+      },
+      "baton_summary": "preserves Gemini's isolated-root P1 and the fresh corrected nine-command pass."
+    }
+  ]
+}

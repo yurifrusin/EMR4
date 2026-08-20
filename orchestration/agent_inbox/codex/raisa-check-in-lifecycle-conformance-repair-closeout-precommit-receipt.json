@@ -1,0 +1,125 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in server post-readiness exit-state and stdin-lifecycle conformance repair",
+    "completed_stage": "At machine-resolved exact full Git source a425055b3ed2b691e969b4454d33124ba092f016, Sol accepted Gemini's isolated-worktree path-resolution finding and made the one permitted bounded correction. Fifty-two provider-free tests, Ruff, compilation and primary-worktree admission pass; the immutable native terminal and all closed boundaries are unchanged.",
+    "next_executable_stage": "dispatch_one_fresh_corrected_gemini_3_7_flash_high_read_only_veto_over_the_exact_path_resolution_repair_then_close_honestly",
+    "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+    "resume_after_compaction": true,
+    "source_head": "a425055b3ed2b691e969b4454d33124ba092f016",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "3ee2b9c074864b12225338d8559fd4226bac2a7a",
+    "reason_codes": [],
+    "resolved_commit": "a425055b3ed2b691e969b4454d33124ba092f016",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "a425055b3ed2b691e969b4454d33124ba092f016"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "3ee2b9c074864b12225338d8559fd4226bac2a7a",
+    "branch_origin_aligned": true,
+    "head": "3ee2b9c074864b12225338d8559fd4226bac2a7a",
+    "origin_branch_commit": "3ee2b9c074864b12225338d8559fd4226bac2a7a",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 661
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "closeout_precommit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The sole native process was provider-disabled and consumed before any DeepSeek dispatch; no DeepSeek call or retry was authorised or used.",
+        "work_packages": []
+      },
+      {
+        "disposition": "completed",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini completed one initial revision-required veto and the plan's one fresh corrected veto, which passed all nine commands at unchanged clean HEAD.",
+        "work_packages": [
+          "initial_isolated_worktree_veto",
+          "corrected_isolated_worktree_path_resolution_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibited proactive delegation and the lifecycle/process/clockwork sequence remained serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "clockwork_closeout_published",
+      "successor_rehydration"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "the one native process and both Gemini terminals are consumed",
+      "clockwork alone may publish the register, baton, graph, compass and successor latch",
+      "no further provider or native process is permitted",
+      "Sol owns final acceptance, Git and successor planning"
+    ]
+  },
+  "planned_action": "commit_the_exact_negative_result_closeout_incident_revision_and_clockwork_intent_before_pointer_last_publication",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-plan.md",
+      "docs/security/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/native-probe-terminal.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-evidence.json",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-lifecycle-conformance-repair-gemini37-review-receipt.json",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-lifecycle-conformance-repair-gemini37-corrected-review-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-572.md",
+      "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-20--check-in-lifecycle-conformance-repair.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/closeout/closeout-intent.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns negative-result acceptance, incident intake, clockwork, Git and successor scope. Gemini 3.7 Flash/high completed the initial revision-required veto and the one corrected passing veto. DeepSeek and native subagents receive no work package.",
+    "git_refs_and_worktree": "The task branch and origin are exact 3ee2b9c074864b12225338d8559fd4226bac2a7a with tracked state clean. The isolated review worktree remains clean at exact 7d39641c3170fc0fec76fadce5cd45309bdffdb2. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Six exact closeout inputs are untracked; all unrelated untracked files including docs/branding remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction. The live baton retains the in-progress lifecycle repair and requires honest closeout plus immediate continuation to its narrow dependency-satisfied successor.",
+    "protected_evidence_boundaries": "Closeout accepts the server repair and negative native terminal only. It admits no retry, DeepSeek request, native process, attempt 006, Docker/database, product/API/config/client, product or protected data, production, deployment, release, Pages or protected-ref action."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
