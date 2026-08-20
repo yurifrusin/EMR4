@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 574,
+  "register_revision": 575,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-20",
@@ -27774,6 +27774,228 @@
       },
       "incident_id": "AER-0700",
       "attempt_id": "clock-2aaf07c0cd0f9feb6dda0a02",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preset-projection-deterministic-classifiers",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "Provider, scope and failure classifiers must inspect executable structure and explicit terminal fields rather than reject audit literals, package names or descriptive plan prose.",
+      "observed_error": "Early deterministic checks treated the installed @deepseek-ai/dsh-scope package name as provider activity and derived boundary or root-failure conclusions from vocabulary tokens rather than execution structure.",
+      "detection_method": "Focused deterministic ledgers failed while direct inspection showed only package identity or audit prose and no provider path, forcing structural comparison against the accepted runner.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/candidate-command-validation-receipt.json",
+        "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/candidate-command-validation-receipt-v2.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.static_vocabulary_guard_misclassified_audit_or_package_literal",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace vocabulary-only predicates with structural source checks and bind boundary classification to explicit terminal fields and focused regressions.",
+        "prevention_control": "Deterministic boundary guards distinguish executable imports and launches from package identifiers and audit strings; exact vocabulary is generated or parsed where possible.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py"
+        ]
+      },
+      "incident_id": "AER-0701",
+      "attempt_id": "clock-5ec8aa70ed0a92430621332d",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preset-projection-review-command-manifests",
+      "model": "gemini-3.7-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Every review command must name exact inspected implementation symbols, apply closed nested schemas and distinguish the literal native launch statement from annotations before external dispatch.",
+      "observed_error": "Successive draft manifests referenced a nonexistent checkpoint loader, admitted over-broad nested evidence shapes and matched the subprocess.Popen type annotation rather than the process launch assignment.",
+      "detection_method": "The local evidence gate and shell-free command validator rejected each mismatch before the final independent semantic decision was admitted.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/candidate-command-validation-receipt-v2.json",
+        "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/candidate-command-validation-receipt-v3.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.review_manifest_relied_on_fallible_implementation_name_recall",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Inspect the exact callable and launch assignment, close every nested schema and rerun the deterministic manifest before one fresh semantic veto.",
+        "prevention_control": "Shell-free deterministic validation owns symbols, argv, schemas and counts; the model receives only the bounded semantic review package.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/materialization-recovery-command-validation-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-preset-mount-materialization-recovery-gemini37-review-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0702",
+      "attempt_id": "clock-5c84fb79514beda8c3e52a5f",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preset-projection-explicit-path-commit",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "A nonzero staged-diff check must prevent the subsequent explicit-path commit rather than rely on PowerShell statement sequencing.",
+      "observed_error": "A semicolon-separated command block continued to commit after git diff --cached --check reported trailing whitespace, requiring a corrective descendant commit.",
+      "detection_method": "The staged-diff output named the whitespace defect and later exact-history inspection showed that the commit command had still executed.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-prelaunch-recovery.md",
+        "docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-package-materialisation-recovery.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.powershell_staged_check_exit_not_asserted_before_commit",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Correct the whitespace in a descendant and separate staged validation from commit execution so the observed zero exit is a prerequisite.",
+        "prevention_control": "Explicit-path staging, staged-diff checking and commit execution are separate commands with independent exit observation.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-prelaunch-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-575.md"
+        ]
+      },
+      "incident_id": "AER-0703",
+      "attempt_id": "clock-206249b7188c789e5b704596",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+      "role": "implementer",
+      "resource_id": "preset-projection-native-attempt-001",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_native_harness",
+      "stage": "implementation",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "The package materialiser must exclusively create the installation root before proof files are created, and every prelaunch failure must publish sanitized terminal evidence.",
+      "observed_error": "Attempt 001 created installation/proof before the accepted offline installer claimed installation, raising FileExistsError before checkpoint consumption or native launch; the first controller shape did not preserve a terminal for that prelaunch class.",
+      "detection_method": "The launch command failed before any subprocess, and filesystem/process inspection confirmed zero native process, zero checkpoint consumption and a disposable partial root.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-attempt-001-prelaunch-failure.json",
+        "docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-prelaunch-recovery.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "repository.native_controller_conflicting_installation_root_ownership",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Preserve attempt 001, move materialisation before proof creation and make sanitized prelaunch terminal publication part of the controller contract.",
+        "prevention_control": "One component owns each disposable path creation boundary, and process/count evidence distinguishes prelaunch failure from a native attempt.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/recovery-command-validation-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0704",
+      "attempt_id": "clock-c8bf9b1f31397ef16dbad396",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+      "role": "implementer",
+      "resource_id": "preset-projection-native-attempt-002",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_native_harness",
+      "stage": "implementation",
+      "category": "harness_failure",
+      "process_severity": "material",
+      "expected_invariant": "Provider-free package materialisation must be bounded, own and terminate every child, publish terminal evidence on cleanup failure and leave no disposable root before a native process begins.",
+      "observed_error": "Attempt 002's offline npm materialiser exceeded 300 seconds, left one exact npm child holding the disposable root and then raised PermissionError during cleanup before terminal publication; no native process started.",
+      "detection_method": "Checkpoint state, process inspection and the immutable failure record identified the exact package PID, zero native processes, zero model activity and the retained temporary root.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-attempt-002-prelaunch-failure.json",
+        "docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-package-materialisation-recovery.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "harness.package_materialiser_timeout_child_and_cleanup_terminal_escape",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Identity-verify and terminate the child, remove the verified disposable root and replace npm with a zero-process copy of the exact accepted content- and lock-bound package tree.",
+        "prevention_control": "Materialisation validates accepted source digests and critical packages before and after copy; cleanup is bounded and always maps to a sanitized terminal state.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/materialization-recovery-command-validation-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-terminal-attempt-003.json"
+        ]
+      },
+      "incident_id": "AER-0705",
+      "attempt_id": "clock-473001d35edeaba1b29ba3bb",
+      "origin": "harness",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preset-projection-disposable-root-recovery",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "material",
+      "expected_invariant": "A destructive cleanup must resolve and validate the exact absolute disposable target, retain one shell or language end to end and never combine computed enumeration with recursive deletion.",
+      "observed_error": "The first recovery command combined process and path operations in a form rejected by the Windows safety layer, and a later recursive Remove-Item call was also blocked; neither deletion ran.",
+      "detection_method": "The command layer rejected both operations before filesystem mutation while separate read-only checks proved the exact PID and target containment.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-attempt-002-prelaunch-failure.json",
+        "docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-package-materialisation-recovery.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.windows_cleanup_crossed_shell_or_unresolved_recursive_delete_boundary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Separate identity and containment checks, then remove only the already verified temporary root through one explicit language-local operation and verify absence.",
+        "prevention_control": "Cleanup implementations own target resolution, containment, deletion and absence verification in one bounded language path; ad hoc recursive shell cleanup is excluded.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py"
+        ]
+      },
+      "incident_id": "AER-0706",
+      "attempt_id": "clock-7484b59b26a9588ce1ec8090",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

@@ -1,85 +1,85 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
-  "operation_id": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
-  "transaction_id": "txn-1e143d2991cd5b22086a2002",
-  "source_commit": "5232330b2cb7dca0f3f2dddf332cb4f3b8beccf7",
-  "previous_source_commit": "5232330b2cb7dca0f3f2dddf332cb4f3b8beccf7",
-  "previous_generation_id": "gen-aa5c98b84f5374a416c5a3839afba4998efd022acbfaa2fb543abda443aa42f3",
-  "previous_bundle_sha256": "aa5c98b84f5374a416c5a3839afba4998efd022acbfaa2fb543abda443aa42f3",
+  "operation_id": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+  "transaction_id": "txn-79613eb86c54cc141acb48c7",
+  "source_commit": "109aeed0b4794fa8c4f98f78c71021d7b4562c32",
+  "previous_source_commit": "109aeed0b4794fa8c4f98f78c71021d7b4562c32",
+  "previous_generation_id": "gen-04505bb8f1fc0687bb1884a251a4307d56171e52e34bf3b3d9c0550e68c3a157",
+  "previous_bundle_sha256": "04505bb8f1fc0687bb1884a251a4307d56171e52e34bf3b3d9c0550e68c3a157",
   "previous_canonical_sha256s": {
-    "continuity": "54b111c97e8f24570dfe181cefa6177b1eb8a2ea66d5a8e3b596b48309506d3d",
-    "compass": "8bcef0773545344928cfe1b90058e9707c8b922b10740f3920e8740890fce651",
-    "compass_markdown": "22f93048e4bc3cc9a5285e9222c33091b481c4cea21168332e4c4b26e4a49b5b",
-    "active_latch": "ad13629fedc7b7680f4954332377c31db1b7d3105d138182cf6573ac727ef7fb",
-    "error_register": "f26e3d6a92ea459cad074dcef19df4a58f58a1ef6ca0b4c0f1b1b240fb3df667",
-    "pattern_report": "8245736f5626b1a7d5e240efb0beca72d2e7030c7c081bf7a38a58a07baf48e1",
-    "current_baton": "6a51a9bbdc9edd38adbe4d6595efccdd22772f5de98d07d9c053f0b3cab47e51"
+    "continuity": "0d533609a911c8daed1fc102ce179f6a843c859f6467728d6d3eb1e5b019286e",
+    "compass": "08951f678aea2b00255725bd88125146a84f5f9dc4f3934b87e04bd1acfff186",
+    "compass_markdown": "916646f38bad3c023d508aec82fb9fa9c4b4aab8ce8848a7afdc6aeca1f4e618",
+    "active_latch": "b18f83bc1fc3136eae04202d5e0a1933320b5f31d699ffff0c908635dcac9a8b",
+    "error_register": "39d2f9a8c6be2a049c6f70b32d43a81f206e18d4ed574239a0b432348dcd4e20",
+    "pattern_report": "9424c39a606e520cca3258e053fed7dd08f15ae64ce2738b47ed6ad73877399e",
+    "current_baton": "bc946735054dba802dc9027e1cf6ef7491b2d601bd068c347765d600d500a01c"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "a06dea01797946396f81f89ad5e11e9050005951da41ef848a0a41f99ea70877",
-    "transaction.json": "a6d93c09762e1f7a0c07861c1f00bc4722db19165308bbf2b117186e257a6366",
+    "command-manifest.json": "9cd040a8c64383727d472a418f2eb54fee159608978a5551ea6dfb878ca9ae04",
+    "transaction.json": "bac7e48372f69135c67583baa2c93bf15457a61eb9ee4ceb7e29e60ebe5dfc90",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "505e808e28e1cebaf04b405f281e2fb73e38ce72c5afe9d9770ae6cd5010b3e4"
+    "generation-manifest.json": "6eb546a593060d2062fb372391dc200df7bc483036f9799507f06e87a0757add"
   },
   "projection_sha256s": {
-    "graph": "sha256:2c1430de7952dfb799c2e33d2f86c80786594ac0355b9f76ff55cc0f8a028391",
-    "compass": "sha256:f046f4eab4e714c4dcf24b1c47a83e20a4fdf0662fb413203d6d86edb20f9188",
-    "report": "sha256:2e95ffca5b9293fb775743572790728661061384b9d33fb709b8cb06e162e401",
-    "latch": "sha256:46d98fe06adece7125fc22ca609befccbc7abf45cbbaceb4af20389c315e9732",
-    "incident_aggregate": "sha256:abc435bc93a208c0a72b074a151b17635ebd1bcdeb72f70664feb5725c7b2abc"
+    "graph": "sha256:6c97b47d97cdea048131020cefe8b1015a3d2f674bb50b384c0ddf645b13a54f",
+    "compass": "sha256:ee6af542b7239e00b680caa4ae0b5bbe78e1588324402ce852023244b31254ef",
+    "report": "sha256:d2b8536d29016ec562560679b3089a33bd76f4b7bdb1792d0d89ed453a8f00c2",
+    "latch": "sha256:8a8dd3e3aaccc4d121d9ada720c1551c9d1845da7a6311d940662b91f8d06894",
+    "incident_aggregate": "sha256:09dd1e15058c19c6db987ba70e0b700ade6d9d5557887c15d116b0fa2b2dc80b"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-1e143d2991cd5b22086a2002",
-      "transaction_id": "txn-1e143d2991cd5b22086a2002",
-      "operation_id": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+      "journal_id": "journal-79613eb86c54cc141acb48c7",
+      "transaction_id": "txn-79613eb86c54cc141acb48c7",
+      "operation_id": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
       "event_type": "manifest-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "manifest_sha256": "sha256:63ea12710cbf9a6211bf35947380e6d072e377256518b6f1163d3ee47f729344"
+        "manifest_sha256": "sha256:7de211db5c14c3607fe13cf99bc15943df8951577b12e4a8e3854a2f33e430f4"
       },
-      "event_sha256": "sha256:332a0cc35c602b5f9d8f51442c41911b1be911ab42787293d63940976b940a83"
+      "event_sha256": "sha256:8a5c2ec689b69533fd9bfc234f94d0e5e70bef38127abc487b5cf284ea60bc9a"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-1e143d2991cd5b22086a2002",
-      "transaction_id": "txn-1e143d2991cd5b22086a2002",
-      "operation_id": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+      "journal_id": "journal-79613eb86c54cc141acb48c7",
+      "transaction_id": "txn-79613eb86c54cc141acb48c7",
+      "operation_id": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
       "sequence": 2,
-      "previous_event_sha256": "sha256:332a0cc35c602b5f9d8f51442c41911b1be911ab42787293d63940976b940a83",
+      "previous_event_sha256": "sha256:8a5c2ec689b69533fd9bfc234f94d0e5e70bef38127abc487b5cf284ea60bc9a",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "5232330b2cb7dca0f3f2dddf332cb4f3b8beccf7",
+        "source_commit": "109aeed0b4794fa8c4f98f78c71021d7b4562c32",
         "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
       },
-      "event_sha256": "sha256:450f2c3fa7cae0e8a7dac5c7722e849f807b71787df5fb74503cd509fb277f8d"
+      "event_sha256": "sha256:00d4b854d1427e8ce7c0f0b38cb95bd499f0ef154973eebb7ec024b5f9cdd66b"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-1e143d2991cd5b22086a2002",
-      "transaction_id": "txn-1e143d2991cd5b22086a2002",
-      "operation_id": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+      "journal_id": "journal-79613eb86c54cc141acb48c7",
+      "transaction_id": "txn-79613eb86c54cc141acb48c7",
+      "operation_id": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
       "sequence": 3,
-      "previous_event_sha256": "sha256:450f2c3fa7cae0e8a7dac5c7722e849f807b71787df5fb74503cd509fb277f8d",
+      "previous_event_sha256": "sha256:00d4b854d1427e8ce7c0f0b38cb95bd499f0ef154973eebb7ec024b5f9cdd66b",
       "event_type": "projections-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "graph_revision": 351,
-        "map_revision": 333
+        "graph_revision": 352,
+        "map_revision": 334
       },
-      "event_sha256": "sha256:ba91417ada6110cf043302b3bf043ffdc1f5e384e863df2b3443df614de19712"
+      "event_sha256": "sha256:9efe545ca14b82dcf1a05fda46dbb8dbac6897acfae3956120e236f9ad05f9d7"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-1e143d2991cd5b22086a2002",
-      "transaction_id": "txn-1e143d2991cd5b22086a2002",
-      "operation_id": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+      "journal_id": "journal-79613eb86c54cc141acb48c7",
+      "transaction_id": "txn-79613eb86c54cc141acb48c7",
+      "operation_id": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
       "sequence": 4,
-      "previous_event_sha256": "sha256:ba91417ada6110cf043302b3bf043ffdc1f5e384e863df2b3443df614de19712",
+      "previous_event_sha256": "sha256:9efe545ca14b82dcf1a05fda46dbb8dbac6897acfae3956120e236f9ad05f9d7",
       "event_type": "projections-validated",
       "actor": "gpt-sol",
       "payload": {
@@ -87,26 +87,26 @@
         "compass": "passed",
         "latch": "passed"
       },
-      "event_sha256": "sha256:f20233bbd67ff66e0fb0e68a0cfe00ef3e64fa77e3743f3fd231b8d3e380d370"
+      "event_sha256": "sha256:beb44e43d37eae4b8cd683a4769121e4d482400feefaf649781a5bcf563a3ff4"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-1e143d2991cd5b22086a2002",
-      "transaction_id": "txn-1e143d2991cd5b22086a2002",
-      "operation_id": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+      "journal_id": "journal-79613eb86c54cc141acb48c7",
+      "transaction_id": "txn-79613eb86c54cc141acb48c7",
+      "operation_id": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
       "sequence": 5,
-      "previous_event_sha256": "sha256:f20233bbd67ff66e0fb0e68a0cfe00ef3e64fa77e3743f3fd231b8d3e380d370",
+      "previous_event_sha256": "sha256:beb44e43d37eae4b8cd683a4769121e4d482400feefaf649781a5bcf563a3ff4",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "shadow_directory_rename"
       },
-      "event_sha256": "sha256:f1db4a39a9e3fa6b0022d97f3da922d9133c00954865e19a6e9bd93b2a03a5ea"
+      "event_sha256": "sha256:9eaf07b779cf94abc6e1bd44d99cbdb64d388a239971ef16a8aa20eb8d27eb31"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
   "event_kind": "clean_closeout",
-  "next_boundaries_sha256": "sha256:2cac18cdd42b59830f88b32215a1d3e12f2d6f49778e6a1ee02743e8dc73d785",
+  "next_boundaries_sha256": "sha256:2a6ed9fcba23c0683e51647389175b2077ac3c964d9212f09eb72ba00a42cf2c",
   "register_bytes_preserved": false,
   "pattern_bytes_preserved": false
 }

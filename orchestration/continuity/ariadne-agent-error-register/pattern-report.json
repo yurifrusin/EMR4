@@ -1,44 +1,44 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 574,
+  "register_revision": 575,
   "source_cutoff_on": "2026-08-20",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "fb162005fad0a131d936d57a439228c5d0820fb8725bc71f622fa802590d6859",
-  "incident_count": 700,
+  "canonical_register_sha256": "a9fab04f55d2c65becf9df6667740b406ed48c837d3f631ece9598f8353ceaa4",
+  "incident_count": 706,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 463,
-      "harness": 57,
-      "operator": 42,
-      "repository": 122,
+      "agent_behavior": 464,
+      "harness": 58,
+      "operator": 44,
+      "repository": 124,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 91,
       "evidence_misreport": 70,
-      "harness_failure": 57,
-      "operator_error": 42,
-      "output_contract_violation": 250,
+      "harness_failure": 58,
+      "operator_error": 44,
+      "output_contract_violation": 251,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
-      "repository_defect": 122,
+      "repository_defect": 124,
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 49,
+      "implementer": 51,
       "integration_reviewer": 3,
-      "orchestrator": 585,
+      "orchestrator": 589,
       "verifier": 63
     },
     "by_process_severity": {
       "low": 396,
-      "material": 124,
-      "moderate": 180
+      "material": 127,
+      "moderate": 183
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 123,
-      "canonical_unchanged": 434,
+      "accepted_candidate_changed": 128,
+      "canonical_unchanged": 435,
       "untrusted_partial_worktree": 143
     },
     "by_resource_and_role": {
@@ -173,6 +173,12 @@
       "ordinary-practice-check-in-readiness-continuity-updater::orchestrator": 2,
       "ordinary-practice-check-in-readiness-plan-tests::orchestrator": 1,
       "ordinary-practice-check-in-readiness-reviewer::orchestrator": 3,
+      "preset-projection-deterministic-classifiers::orchestrator": 1,
+      "preset-projection-disposable-root-recovery::orchestrator": 1,
+      "preset-projection-explicit-path-commit::orchestrator": 1,
+      "preset-projection-native-attempt-001::implementer": 1,
+      "preset-projection-native-attempt-002::implementer": 1,
+      "preset-projection-review-command-manifests::orchestrator": 1,
       "preset-row-service-native-checkpoint-test-double::orchestrator": 1,
       "preset-row-service-semantic-review-command-manifest::orchestrator": 1,
       "preset-validation-independent-review-scope::orchestrator": 1,

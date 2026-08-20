@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 351,
+  "graph_revision": 352,
   "harvests": [],
   "nodes": [
     {
@@ -25691,9 +25691,137 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+      "title": "Raisa provider-free check-in native Harness preset-mount effective-tool projection rehearsal closeout",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted this provider-free preset-mount and effective-tool projection rehearsal and its separately checkpointed one-shot native process.",
+          "The final native identity is consumed. Attempts 001 and 002 remain immutable prelaunch failures and are not retries of attempt 003.",
+          "No agent session, DeepSeek request, product work, ordinary-practice enablement, production runtime or protected integration is admitted by this closeout."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-preset-mount-and-tool-projection",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-terminal-attempt-003.json",
+          "status": "accepted",
+          "summary": "Accept one provider-disabled native lifecycle that mounted the exact healthy EMR4 preset and projected exactly edit, glob and read before every agent or provider boundary."
+        },
+        {
+          "id": "accept-process-free-package-materialisation",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/materialization-recovery-command-validation-receipt.json",
+          "status": "accepted",
+          "summary": "Accept the exact content- and lock-bound package-tree copy, six critical package validations, twelve-command shell-free ledger and disposable copy-cleanup fixture."
+        },
+        {
+          "id": "accept-final-independent-semantic-veto",
+          "source": "orchestration/agent_inbox/antigravity/raisa-check-in-preset-mount-materialization-recovery-gemini37-review-receipt.json",
+          "status": "accepted",
+          "summary": "Accept the fresh Gemini 3.7 Flash/high semantic pass at exact clean candidate c8b0e3a587191b65da212edda36b8b833a2ecc2c."
+        },
+        {
+          "id": "preserve-two-prelaunch-failures",
+          "source": "docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-package-materialisation-recovery.md",
+          "status": "accepted",
+          "summary": "Preserve attempts 001 and 002 as zero-native-process failures with their distinct identities, cleanup evidence and no model or provider activity."
+        },
+        {
+          "id": "reject-agent-product-and-production-claims",
+          "source": "docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "Reject agent-session, DeepSeek-quality, product, ordinary-practice, production, deployment, release, Pages and protected-integration claims."
+        },
+        {
+          "id": "accept-six-corrected-control-incidents",
+          "source": "docs/ariadne-agent-error-correction-register-revision-575.md",
+          "status": "accepted",
+          "summary": "Accept AER-0701 through AER-0706 as corrected with no open incident."
+        }
+      ],
+      "claim_scope": [
+        "The exact healthy emr4-bounded-worker row mounts through the accepted rc.7 guard in a real provider-disabled native Harness lifecycle.",
+        "The effective tool set is exactly edit, glob and read before any agent, turn, broker, model, provider or network boundary.",
+        "Attempt 003 passed all nine ordered lifecycle events with one native process, zero automatic retries, empty stdout and stderr, and exact cleanup.",
+        "The final package materialisation uses no npm or other materialiser process and revalidates exact accepted package and lock digests plus six critical rc.7 packages.",
+        "Deterministic code owns exact command, event, count and digest facts while Gemini owns the independent semantic veto.",
+        "Six recurring control classes are corrected and none remains open."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal-threat-model-delta.md",
+          "docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-prelaunch-recovery.md",
+          "docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-package-materialisation-recovery.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/deterministic-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/materialization-recovery-command-validation-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-attempt-001-prelaunch-failure.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-attempt-002-prelaunch-failure.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-terminal-attempt-003.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-preset-mount-materialization-recovery-gemini37-review-receipt.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-preset-mount-effective-tool-projection-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-preset-mount-materialization-recovery-native-preexecution-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-preexecution-checkpoint-attempt-003.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-consumed-attempt-003.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal_plan.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/contract.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-terminal.schema.json",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-report-attempt-003.md",
+          "docs/ariadne-agent-error-correction-register-revision-575.md",
+          "orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-mount-effective-tool-projection.md",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "No agent session, DeepSeek model response or completed worker work package is proved.",
+        "The consumed provider-disabled attempt 003 cannot be retried.",
+        "Any occupied worker requires a distinct exact work package, pre-dispatch admission, one-request limit, immutable terminal and zero silent fallback.",
+        "Dedicated check-in remains default-off with no ordinary-practice enablement, generic-status Arrived, action-grammar, client or waiting-area change.",
+        "No product, patient or clinical data, production runtime, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-20T20:24:20.5016784+10:00",
+      "updated_at": "2026-08-20T20:24:20.5016784+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "109aeed0b4794fa8c4f98f78c71021d7b4562c32",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-20T18:41:10.4055454+10:00"
+  "updated_at": "2026-08-20T20:24:20.5016784+10:00"
 }

@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "109aeed0b4794fa8c4f98f78c71021d7b4562c32",
+  "source_commit": "109aeed0b4794fa8c4f98f78c71021d7b4562c32",
+  "generation_id": "gen-6f8992fa9ce6868bbebb47ee8e58549ea6768755226fdc893509eabe84223fa0",
+  "bundle_sha256": "6f8992fa9ce6868bbebb47ee8e58549ea6768755226fdc893509eabe84223fa0",
+  "previous_generation_id": "gen-04505bb8f1fc0687bb1884a251a4307d56171e52e34bf3b3d9c0550e68c3a157",
+  "previous_source_commit": "109aeed0b4794fa8c4f98f78c71021d7b4562c32",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 77,
+  "operation_id": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+  "event_kind": "clean_closeout",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

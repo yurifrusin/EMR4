@@ -2,28 +2,29 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "preset_row_service_closeout_tick_check",
+      "command_id": "preset_mount_projection_closeout_tick_check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_governance_clockwork_tick",
         "--check",
         "--intent",
-        "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/closeout/closeout-intent.json"
+        "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "preset_row_service_closeout_provider_free_tests",
+      "command_id": "preset_mount_projection_closeout_provider_free_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal_plan.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
         "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
-        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery_plan.py",
-        "tests/test_ariadne_orchestrator_preflight.py",
         "tests/test_ariadne_agent_error_register.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_active_operation_latch.py",
@@ -32,26 +33,26 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "preset_row_service_closeout_ruff",
+      "command_id": "preset_mount_projection_closeout_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
-        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
-        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery_plan.py"
+        "scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal_plan.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "preset_row_service_closeout_compile",
+      "command_id": "preset_mount_projection_closeout_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
-        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py"
+        "scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }
