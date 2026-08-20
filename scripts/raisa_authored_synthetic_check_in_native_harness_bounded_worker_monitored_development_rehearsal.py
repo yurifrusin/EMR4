@@ -191,6 +191,36 @@ def file_sha256(path: Path) -> str:
     return sha256_bytes(path.read_bytes())
 
 
+def tracked_git_blob_sha256(path: Path) -> str:
+    resolved = path.resolve()
+    try:
+        relative = resolved.relative_to(REPO_ROOT.resolve()).as_posix()
+    except ValueError as error:
+        raise RehearsalError("git_blob_path_outside_repository") from error
+    for staged in (False, True):
+        args = ["git", "-C", str(REPO_ROOT), "diff"]
+        if staged:
+            args.append("--cached")
+        args.extend(["--quiet", "--", relative])
+        clean = subprocess.run(
+            args,
+            check=False,
+            capture_output=True,
+            timeout=15,
+        )
+        if clean.returncode != 0:
+            raise RehearsalError("bound_predecessor_not_tracked_clean")
+    blob = subprocess.run(
+        ["git", "-C", str(REPO_ROOT), "show", f"HEAD:{relative}"],
+        check=False,
+        capture_output=True,
+        timeout=15,
+    )
+    if blob.returncode != 0:
+        raise RehearsalError("bound_predecessor_git_blob_unavailable")
+    return sha256_bytes(blob.stdout)
+
+
 def git(*args: str) -> str:
     completed = subprocess.run(
         ["git", "-C", str(REPO_ROOT), *args],
@@ -269,7 +299,7 @@ def bind_predecessors(contract: dict[str, Any]) -> list[dict[str, Any]]:
         path = (REPO_ROOT / row["path"]).resolve()
         if role in roles or REPO_ROOT.resolve() not in path.parents or not path.is_file():
             raise RehearsalError("predecessor_path_invalid")
-        if file_sha256(path) != row["sha256"]:
+        if tracked_git_blob_sha256(path) != row["sha256"]:
             raise RehearsalError("predecessor_digest_mismatch")
         roles.add(role)
         bound.append({"role": role, "sha256": row["sha256"]})

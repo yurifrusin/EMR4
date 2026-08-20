@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/gemini37-synthetic-native-worker-veto-001",
+  "branch": "codex/review-synthetic-native-worker-0c93f7a2",
+  "head": "0c93f7a24e0e12fe518b3927bd67db6c28b83d27",
+  "expected_head": "0c93f7a24e0e12fe518b3927bd67db6c28b83d27",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "f2bf7fcb110b6f697a9ae1d5a527245269a49c5e288cb835e58b11fd79499c23",
+  "command_count": 11,
+  "repository_paths": [],
+  "candidate_paths": [
+    "C:/Users/sarashera/EMR4-worktrees/gemini37-synthetic-native-worker-veto-001/scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+    "C:/Users/sarashera/EMR4-worktrees/gemini37-synthetic-native-worker-veto-001/scripts/ariadne_deepseek_native_harness_broker.mjs"
+  ],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/gemini37-synthetic-native-worker-veto-001",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

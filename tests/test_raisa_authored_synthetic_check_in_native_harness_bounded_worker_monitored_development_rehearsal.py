@@ -44,6 +44,21 @@ def test_predecessor_bindings_are_exact() -> None:
         "accepted_effective_tool_guard_controller",
         "native_harness_broker",
     }
+    source = inspect.getsource(subject.bind_predecessors)
+    assert "tracked_git_blob_sha256(path)" in source
+    assert "file_sha256(path)" not in source
+
+
+def test_git_blob_binding_is_cross_worktree_line_ending_stable() -> None:
+    contract = subject.load_contract()
+    broker = next(
+        row
+        for row in contract["predecessor_files"]
+        if row["role"] == "native_harness_broker"
+    )
+    assert subject.tracked_git_blob_sha256(subject.REPO_ROOT / broker["path"]) == broker[
+        "sha256"
+    ]
 
 
 def test_work_package_has_one_exact_edit_success_shape(tmp_path: Path) -> None:
