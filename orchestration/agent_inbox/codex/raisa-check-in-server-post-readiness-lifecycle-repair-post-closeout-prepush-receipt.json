@@ -1,0 +1,118 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in server post-readiness exit-state and stdin-lifecycle conformance repair",
+    "completed_stage": "Accepted raisa-provider-free-check-in-relay-free-recovery-attempt-005 at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_narrow_provider_disabled_lifecycle_conformance_plan",
+    "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+    "resume_after_compaction": true,
+    "source_head": "03b94136c9c6cd82d5a8098705f263ba34a20de4",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "git_object_resolution": {
+    "observed_head": "2535d2fa74890aacd9b94f0d5ad3577e92a07353",
+    "reason_codes": [],
+    "resolved_commit": "03b94136c9c6cd82d5a8098705f263ba34a20de4",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "03b94136c9c6cd82d5a8098705f263ba34a20de4"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "2535d2fa74890aacd9b94f0d5ad3577e92a07353",
+    "branch_origin_aligned": false,
+    "head": "2535d2fa74890aacd9b94f0d5ad3577e92a07353",
+    "origin_branch_commit": "03b94136c9c6cd82d5a8098705f263ba34a20de4",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 655
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "post_closeout_prepush",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Native preset mount failed pre-provider and has no retry authority; provider-disabled diagnosis must precede another worker.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "A fresh Gemini veto remains reserved for a later exact deterministic lifecycle-repair candidate.",
+        "work_packages": [
+          "future_exact_lifecycle_repair_candidate_read_only_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the current publication is serial Sol work.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "successor_preplanning",
+      "candidate_precommit",
+      "pre_verifier",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "publish the accepted lease-67 closeout",
+      "rehydrate again before successor plan freeze",
+      "no occupied provider or database run",
+      "protected refs remain closed"
+    ]
+  },
+  "planned_action": "push",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/closeout/clockwork-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "Sol owns successor planning and task-branch publication. DeepSeek is declined until provider-disabled native preset-mount diagnosis; Gemini is reserved for a future exact deterministic veto; native subagents are declined under developer policy and the serial diagnosis boundary.",
+    "git_refs_and_worktree": "Local task branch is at exact closeout commit 2535d2fa74890aacd9b94f0d5ad3577e92a07353 and origin task branch is its immediate ancestor 03b94136c9c6cd82d5a8098705f263ba34a20de4 before push. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean before this receipt pair; all unrelated untracked paths remain preserved.",
+    "live_handover_current_baton": "Latest AGENTS.md is the clockwork-generated 141223-character, 141229-byte source with SHA-256 a08699d6f260420476fdfc61a75aa57368932651450864c64f380f5db63ec568 at Continuity 348 / Compass 330; it accepts attempt 005 negative evidence and names the lifecycle repair successor.",
+    "protected_evidence_boundaries": "Attempts 001-005 and the consumed worker are immutable. The successor is provider-disabled and initially database-nonexecuting; no attempt 006, product/config/API/client change, ordinary enablement, product/patient/clinical data, provider, production, deployment, release, Pages, protected evidence or protected-ref movement is authorised. docs/branding and unrelated untracked files remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
