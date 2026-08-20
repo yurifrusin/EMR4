@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/required-service-injection-corrected-gemini-056c59d1",
+        "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+        "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.deepseek_native_harness_provider_free_required_service_injection_recovery",
+        "--check"
+      ]
+    },
+    {"id": "C07", "argv": ["git", "diff", "--exit-code", "HEAD", "--"]},
+    {"id": "C08", "argv": ["git", "diff", "--check", "3e9c004e09b09c228937276f520d39e4b2c3d36b..056c59d14de4efc302898e84ec7a69cbf729dfce"]},
+    {"id": "C09", "argv": ["git", "diff", "--name-only", "3e9c004e09b09c228937276f520d39e4b2c3d36b..056c59d14de4efc302898e84ec7a69cbf729dfce"]},
+    {"id": "C10", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

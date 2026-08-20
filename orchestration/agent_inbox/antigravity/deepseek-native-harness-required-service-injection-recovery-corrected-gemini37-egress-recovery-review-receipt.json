@@ -1,0 +1,247 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\required-service-injection-corrected-gemini-056c59d1",
+  "branch": "codex/review-required-service-injection-corrected-056c59d1",
+  "head_before": "056c59d14de4efc302898e84ec7a69cbf729dfce",
+  "head_after": "056c59d14de4efc302898e84ec7a69cbf729dfce",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "9fef5c019ba7b5c169de0f2b5103b80a2ee505b020e9b52db2c39f6617137824",
+  "result": "# Corrected Gemini 3.7 Flash/high Egress-Recovery Veto: DeepSeek Native Harness Required-Service Injection Recovery\n\nDate: 2026-08-20  \nTimestamp: 2026-08-20T09:51:42+10:00 (Australia/Brisbane)  \nTarget Candidate: `056c59d14de4efc302898e84ec7a69cbf729dfce`  \nBase Frozen Plan Source: `3e9c004e09b09c228937276f520d39e4b2c3d36b`  \nBound Worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\required-service-injection-corrected-gemini-056c59d1`  \nBound Branch: `codex/review-required-service-injection-corrected-056c59d1`  \nEvaluator: Gemini 3.7 Flash (High) \u2014 Fresh Project / Bound Read-Only Egress-Recovery Veto\n\n---\n\n## 1. Mandatory Rehydration and Continuity Verification\n\nRehydration was performed across all five mandatory authority sources:\n1. `live_handover_current_baton`: Read `AGENTS.md` completely. Protected master remains `2e34bdad732fdab32fbf778280b3d3c70d66d602`, aligned with `origin/master` and `handoff/current`. Single-track protected integration remains closed.\n2. `current_authority_allocation`: Conductor/integrator GPT Sol; independent reviewer Gemini 3.7 Flash/high; DeepSeek native Harness worker paused.\n3. `active_plan_and_acceptance`: Verified `docs/deepseek-native-harness-provider-free-required-service-injection-recovery-plan.md`, its threat delta `docs/security/deepseek-native-harness-provider-free-required-service-injection-recovery-threat-model-delta.md`, contract and schemas under `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/`, previous review receipts, Sol dispositions, and predecessor closeouts.\n4. `protected_evidence_boundaries`: All protected evidence, product data, patient/clinical records, runtime deployment, Pages rebuild, and protected refs remain closed. User-owned untracked `docs/branding/` and unrelated untracked files remain excluded and preserved.\n5. `git_refs_and_worktree`: Worktree isolated at `C:\\Users\\sarashera\\EMR4-worktrees\\required-service-injection-corrected-gemini-056c59d1`, branch `codex/review-required-service-injection-corrected-056c59d1`, candidate HEAD `056c59d14de4efc302898e84ec7a69cbf729dfce`.\n\nThe active operation latch `orchestration/continuity/ariadne-active-operation-latch/current.json` was validated:\n- `operation_id`: `deepseek-native-harness-provider-free-required-service-injection-recovery`\n- `status`: `in_progress`\n- `checkpoint.completed_stage`: Accepted preterminal-observable recovery boot at machine-resolved source.\n- `checkpoint.next_executable_stage`: Fresh five-source rehydration and freeze plan.\n\nExplicit Parallelism Assessment:\n- **DeepSeek**: Declined (negative leverage); the native Harness service graph is the provider-free subject under evaluation; no native Harness process, agent, session, turn, broker, model request, or occupied worker is authorised.\n- **Gemini**: Dispatched (required independent leverage); executing this fresh read-only exact-candidate egress-recovery veto in an isolated worker worktree.\n- **Native subagents**: Declined (negative leverage); under developer policy and small serial source-semantic boundary.\n\n---\n\n## 2. Technical Design and Semantic Verification\n\nThe technical design in candidate `056c59d14de4efc302898e84ec7a69cbf729dfce` satisfies all semantic challenges:\n1. **Root Cause Analysis**: Confirmed that `@deepseek-ai/dsh-base@0.1.0-rc.7` supplies the host `tools` provider row, but neither `base` nor `headless` supplies an `agent-presets` provider row. The previous runner and loader entry declared only `hmr`. Cordis had no dependency gate for `agentPresets` or `tools`, allowing the runner to activate prior to required service availability, triggering the aggregate `SERVICES_UNAVAILABLE` preterminal failure.\n2. **Official Roster Reference**: The Web rc.7 bundle provides the official host-plane roster row naming `@deepseek-ai/dsh-agent-presets` with configuration `default: standard`.\n3. **Package & Member Integrity**: All 8 cached package tarballs (`@deepseek-ai/dsh`, `@deepseek-ai/dsh-base`, `@deepseek-ai/dsh-headless`, `@deepseek-ai/dsh-web-app`, `@deepseek-ai/dsh-agent-presets`, `@deepseek-ai/dsh-tools`, `@deepseek-ai/cordis`, `@deepseek-ai/cordis-plugin-loader`) match their registry SHA-1, SHA-512 integrity, and frozen SHA-256 digests. Retained member files match exact byte counts and SHA-256 digests.\n4. **Service & Fiber Semantics**:\n   - `AgentPresets` provides `agentPresets`, requires `loader`, and requires configuration property `default`.\n   - `ToolRuntime` provides `tools` and requires `systemPrompt`.\n   - `composeProfile()` only injects the shipped root when `agent-presets` is present in the composed row set.\n   - Cordis parses module `inject` array, merges loader-entry `inject` into the plugin fiber, and holds plugin activation in `INACTIVE` state while any declared dependency is absent.\n5. **Future Declarations**: The future patch declares ordered `[hmr, agentPresets, tools]` and inserts the official `agent-presets` row. The future runner modifies only its export injection declaration `export const inject = [\"hmr\", \"agentPresets\", \"tools\"];` while preserving all accepted activation coordinates and lifecycle bytes.\n6. **Hostile Cases Rejected**: Hostile patch/runner variants (omitted dependencies, permuted order, surplus dependencies, modified presets, altered activation coordinates) fail closed.\n7. **Immutable Negative Evidence**: Both consumed native attempts (`native-composition-attempt-001` and `preterminal-observable-composition-recovery-boot-attempt-001`) remain byte-exact and validate as failed results.\n8. **Strict Zero-Execution & Claim Ceiling**: Node, native Harness, occupied worker, agent session, turn, broker, model, provider, network, Docker, and database execution counts remain strictly zero. The claim ceiling explicitly records that `emr4-bounded-worker` is not an rc.7 shipped preset and remains unmaterialised.\n\n---\n\n## 3. Verification of Findings Remediation\n\n### Finding 1 (P1): Test Suite `LOCALAPPDATA` Environment Sanitization\n- In `scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py`, `default_cache_root()` now queries `os.environ.get(\"LOCALAPPDATA\")` when present, and when stripped by `ariadne_provider_free_pytest`, traverses `REPO_ROOT.parents` to locate the first existing non-symlink `AppData/Local/npm-cache` directory under the repository ownership ancestry. When no candidate exists, it fails closed with `ServiceInjectionRecoveryError: localappdata_and_repo_owner_cache_missing`.\n- Verified positive stripped-environment test `test_default_cache_root_survives_provider_free_environment` and negative closed test `test_default_cache_root_fails_closed_without_owned_candidate` in `tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py`.\n- Finding 1 is fully resolved.\n\n### Finding 2 (P2): Verifier Manifest Predecessor Assertion Containment\n- The verifier command manifest C03 runs the 6 transferable test suites (`test_deepseek_native_harness_provider_free_required_service_injection_recovery.py`, `test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py`, `test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py`, `test_deepseek_native_harness_provider_free_hmr_boot_proof.py`, `test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py`, `test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py`), omitting only `test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot_evidence.py` whose physical untracked `docs/branding/` directory assertion is non-transferable to Git-created secondary worktrees.\n- The accepted predecessor test is preserved unchanged. Direct exact digest and failed-result validation of both predecessor attempts are directly executed and pass in `test_immutable_attempts_remain_exact_failed_results`.\n- Finding 2 is fully contained.\n\n---\n\n## 4. Command Manifest Execution Log\n\n| ID | Command | Exit Code | Result |\n|---|---|---|---|\n| C01 | `git status --short --branch` | 0 | `## codex/review-required-service-injection-corrected-056c59d1` (clean) |\n| C02 | `git rev-parse HEAD` | 0 | `056c59d14de4efc302898e84ec7a69cbf729dfce` |\n| C03 | `C:/Users/sarashera/emr4/.venv/Scripts/python.exe -m scripts.ariadne_provider_free_pytest --repo-root C:/Users/sarashera/EMR4-worktrees/required-service-injection-corrected-gemini-056c59d1 tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py` | 0 | 86 passed (100%) |\n| C04 | `C:/Users/sarashera/emr4/.venv/Scripts/python.exe -m ruff check scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py` | 0 | All checks passed |\n| C05 | `C:/Users/sarashera/emr4/.venv/Scripts/python.exe -m py_compile scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py` | 0 | Syntax / bytecode compilation passed |\n| C06 | `C:/Users/sarashera/emr4/.venv/Scripts/python.exe -m scripts.deepseek_native_harness_provider_free_required_service_injection_recovery --check` | 0 | Deterministic check passed (`status: passed`, `package_count: 8`, `native_harness_processes: 0`) |\n| C07 | `git diff --exit-code HEAD --` | 0 | Working tree clean |\n| C08 | `git diff --check 3e9c004e09b09c228937276f520d39e4b2c3d36b..056c59d14de4efc302898e84ec7a69cbf729dfce` | 0 | No whitespace/diff errors |\n| C09 | `git diff --name-only 3e9c004e09b09c228937276f520d39e4b2c3d36b..056c59d14de4efc302898e84ec7a69cbf729dfce` | 0 | 14 files touched as expected |\n| C10 | `git status --short --branch` | 0 | `## codex/review-required-service-injection-corrected-056c59d1` (clean) |\n\n---\n\n## 5. Protected Boundaries and Claim Ceiling\n\n- No product, API spine, configuration, client, feature flag, allowlist, grammar, or waiting-area changes were introduced.\n- No ordinary practice admission, generic-status `Arrived`, deployment, release, Pages rebuild, or protected-ref movement occurred.\n- Local/origin `master` and `handoff/current` remain aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n- `emr4-bounded-worker` remains unmaterialised, and no future native process is authorised.\n\n---\n\n## 6. Summary and Final Decision\n\nBoth findings from the initial review are corrected and contained:\n- Finding 1: The cache locator safely handles stripped provider-free environments and fails closed without owned candidates.\n- Finding 2: The isolated-worktree command manifest is properly scoped to transferable suites while preserving predecessor integrity.\n- All 10 manifest commands executed with exit code 0, passing all 86 unit tests.\n- Zero P0-P2 findings remain. Candidate `056c59d14de4efc302898e84ec7a69cbf729dfce` passes acceptance.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Corrected Gemini 3.7 Flash/high Egress-Recovery Veto: DeepSeek Native Harness Required-Service Injection Recovery\n\nDate: 2026-08-20  \nTimestamp: 2026-08-20T09:51:42+10:00 (Australia/Brisbane)  \nTarget Candidate: `056c59d14de4efc302898e84ec7a69cbf729dfce`  \nBase Frozen Plan Source: `3e9c004e09b09c228937276f520d39e4b2c3d36b`  \nBound Worktree: `C:\\Users\\sarashera\\EMR4-worktrees\\required-service-injection-corrected-gemini-056c59d1`  \nBound Branch: `codex/review-required-service-injection-corrected-056c59d1`  \nEvaluator: Gemini 3.7 Flash (High) \u2014 Fresh Project / Bound Read-Only Egress-Recovery Veto\n\n---\n\n## 1. Mandatory Rehydration and Continuity Verification\n\nRehydration was performed across all five mandatory authority sources:\n1. `live_handover_current_baton`: Read `AGENTS.md` completely. Protected master remains `2e34bdad732fdab32fbf778280b3d3c70d66d602`, aligned with `origin/master` and `handoff/current`. Single-track protected integration remains closed.\n2. `current_authority_allocation`: Conductor/integrator GPT Sol; independent reviewer Gemini 3.7 Flash/high; DeepSeek native Harness worker paused.\n3. `active_plan_and_acceptance`: Verified `docs/deepseek-native-harness-provider-free-required-service-injection-recovery-plan.md`, its threat delta `docs/security/deepseek-native-harness-provider-free-required-service-injection-recovery-threat-model-delta.md`, contract and schemas under `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/`, previous review receipts, Sol dispositions, and predecessor closeouts.\n4. `protected_evidence_boundaries`: All protected evidence, product data, patient/clinical records, runtime deployment, Pages rebuild, and protected refs remain closed. User-owned untracked `docs/branding/` and unrelated untracked files remain excluded and preserved.\n5. `git_refs_and_worktree`: Worktree isolated at `C:\\Users\\sarashera\\EMR4-worktrees\\required-service-injection-corrected-gemini-056c59d1`, branch `codex/review-required-service-injection-corrected-056c59d1`, candidate HEAD `056c59d14de4efc302898e84ec7a69cbf729dfce`.\n\nThe active operation latch `orchestration/continuity/ariadne-active-operation-latch/current.json` was validated:\n- `operation_id`: `deepseek-native-harness-provider-free-required-service-injection-recovery`\n- `status`: `in_progress`\n- `checkpoint.completed_stage`: Accepted preterminal-observable recovery boot at machine-resolved source.\n- `checkpoint.next_executable_stage`: Fresh five-source rehydration and freeze plan.\n\nExplicit Parallelism Assessment:\n- **DeepSeek**: Declined (negative leverage); the native Harness service graph is the provider-free subject under evaluation; no native Harness process, agent, session, turn, broker, model request, or occupied worker is authorised.\n- **Gemini**: Dispatched (required independent leverage); executing this fresh read-only exact-candidate egress-recovery veto in an isolated worker worktree.\n- **Native subagents**: Declined (negative leverage); under developer policy and small serial source-semantic boundary.\n\n---\n\n## 2. Technical Design and Semantic Verification\n\nThe technical design in candidate `056c59d14de4efc302898e84ec7a69cbf729dfce` satisfies all semantic challenges:\n1. **Root Cause Analysis**: Confirmed that `@deepseek-ai/dsh-base@0.1.0-rc.7` supplies the host `tools` provider row, but neither `base` nor `headless` supplies an `agent-presets` provider row. The previous runner and loader entry declared only `hmr`. Cordis had no dependency gate for `agentPresets` or `tools`, allowing the runner to activate prior to required service availability, triggering the aggregate `SERVICES_UNAVAILABLE` preterminal failure.\n2. **Official Roster Reference**: The Web rc.7 bundle provides the official host-plane roster row naming `@deepseek-ai/dsh-agent-presets` with configuration `default: standard`.\n3. **Package & Member Integrity**: All 8 cached package tarballs (`@deepseek-ai/dsh`, `@deepseek-ai/dsh-base`, `@deepseek-ai/dsh-headless`, `@deepseek-ai/dsh-web-app`, `@deepseek-ai/dsh-agent-presets`, `@deepseek-ai/dsh-tools`, `@deepseek-ai/cordis`, `@deepseek-ai/cordis-plugin-loader`) match their registry SHA-1, SHA-512 integrity, and frozen SHA-256 digests. Retained member files match exact byte counts and SHA-256 digests.\n4. **Service & Fiber Semantics**:\n   - `AgentPresets` provides `agentPresets`, requires `loader`, and requires configuration property `default`.\n   - `ToolRuntime` provides `tools` and requires `systemPrompt`.\n   - `composeProfile()` only injects the shipped root when `agent-presets` is present in the composed row set.\n   - Cordis parses module `inject` array, merges loader-entry `inject` into the plugin fiber, and holds plugin activation in `INACTIVE` state while any declared dependency is absent.\n5. **Future Declarations**: The future patch declares ordered `[hmr, agentPresets, tools]` and inserts the official `agent-presets` row. The future runner modifies only its export injection declaration `export const inject = [\"hmr\", \"agentPresets\", \"tools\"];` while preserving all accepted activation coordinates and lifecycle bytes.\n6. **Hostile Cases Rejected**: Hostile patch/runner variants (omitted dependencies, permuted order, surplus dependencies, modified presets, altered activation coordinates) fail closed.\n7. **Immutable Negative Evidence**: Both consumed native attempts (`native-composition-attempt-001` and `preterminal-observable-composition-recovery-boot-attempt-001`) remain byte-exact and validate as failed results.\n8. **Strict Zero-Execution & Claim Ceiling**: Node, native Harness, occupied worker, agent session, turn, broker, model, provider, network, Docker, and database execution counts remain strictly zero. The claim ceiling explicitly records that `emr4-bounded-worker` is not an rc.7 shipped preset and remains unmaterialised.\n\n---\n\n## 3. Verification of Findings Remediation\n\n### Finding 1 (P1): Test Suite `LOCALAPPDATA` Environment Sanitization\n- In `scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py`, `default_cache_root()` now queries `os.environ.get(\"LOCALAPPDATA\")` when present, and when stripped by `ariadne_provider_free_pytest`, traverses `REPO_ROOT.parents` to locate the first existing non-symlink `AppData/Local/npm-cache` directory under the repository ownership ancestry. When no candidate exists, it fails closed with `ServiceInjectionRecoveryError: localappdata_and_repo_owner_cache_missing`.\n- Verified positive stripped-environment test `test_default_cache_root_survives_provider_free_environment` and negative closed test `test_default_cache_root_fails_closed_without_owned_candidate` in `tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py`.\n- Finding 1 is fully resolved.\n\n### Finding 2 (P2): Verifier Manifest Predecessor Assertion Containment\n- The verifier command manifest C03 runs the 6 transferable test suites (`test_deepseek_native_harness_provider_free_required_service_injection_recovery.py`, `test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py`, `test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py`, `test_deepseek_native_harness_provider_free_hmr_boot_proof.py`, `test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py`, `test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py`), omitting only `test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot_evidence.py` whose physical untracked `docs/branding/` directory assertion is non-transferable to Git-created secondary worktrees.\n- The accepted predecessor test is preserved unchanged. Direct exact digest and failed-result validation of both predecessor attempts are directly executed and pass in `test_immutable_attempts_remain_exact_failed_results`.\n- Finding 2 is fully contained.\n\n---\n\n## 4. Command Manifest Execution Log\n\n| ID | Command | Exit Code | Result |\n|---|---|---|---|\n| C01 | `git status --short --branch` | 0 | `## codex/review-required-service-injection-corrected-056c59d1` (clean) |\n| C02 | `git rev-parse HEAD` | 0 | `056c59d14de4efc302898e84ec7a69cbf729dfce` |\n| C03 | `C:/Users/sarashera/emr4/.venv/Scripts/python.exe -m scripts.ariadne_provider_free_pytest --repo-root C:/Users/sarashera/EMR4-worktrees/required-service-injection-corrected-gemini-056c59d1 tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py` | 0 | 86 passed (100%) |\n| C04 | `C:/Users/sarashera/emr4/.venv/Scripts/python.exe -m ruff check scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py` | 0 | All checks passed |\n| C05 | `C:/Users/sarashera/emr4/.venv/Scripts/python.exe -m py_compile scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py` | 0 | Syntax / bytecode compilation passed |\n| C06 | `C:/Users/sarashera/emr4/.venv/Scripts/python.exe -m scripts.deepseek_native_harness_provider_free_required_service_injection_recovery --check` | 0 | Deterministic check passed (`status: passed`, `package_count: 8`, `native_harness_processes: 0`) |\n| C07 | `git diff --exit-code HEAD --` | 0 | Working tree clean |\n| C08 | `git diff --check 3e9c004e09b09c228937276f520d39e4b2c3d36b..056c59d14de4efc302898e84ec7a69cbf729dfce` | 0 | No whitespace/diff errors |\n| C09 | `git diff --name-only 3e9c004e09b09c228937276f520d39e4b2c3d36b..056c59d14de4efc302898e84ec7a69cbf729dfce` | 0 | 14 files touched as expected |\n| C10 | `git status --short --branch` | 0 | `## codex/review-required-service-injection-corrected-056c59d1` (clean) |\n\n---\n\n## 5. Protected Boundaries and Claim Ceiling\n\n- No product, API spine, configuration, client, feature flag, allowlist, grammar, or waiting-area changes were introduced.\n- No ordinary practice admission, generic-status `Arrived`, deployment, release, Pages rebuild, or protected-ref movement occurred.\n- Local/origin `master` and `handoff/current` remain aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n- `emr4-bounded-worker` remains unmaterialised, and no future native process is authorised.\n\n---\n\n## 6. Summary and Final Decision\n\nBoth findings from the initial review are corrected and contained:\n- Finding 1: The cache locator safely handles stripped provider-free environments and fails closed without owned candidates.\n- Finding 2: The isolated-worktree command manifest is properly scoped to transferable suites while preserving predecessor integrity.\n- All 10 manifest commands executed with exit code 0, passing all 86 unit tests.\n- Zero P0-P2 findings remain. Candidate `056c59d14de4efc302898e84ec7a69cbf729dfce` passes acceptance.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/required-service-injection-corrected-gemini-056c59d1",
+          "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.deepseek_native_harness_provider_free_required_service_injection_recovery",
+          "--check"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "HEAD",
+          "--"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "3e9c004e09b09c228937276f520d39e4b2c3d36b..056c59d14de4efc302898e84ec7a69cbf729dfce"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "3e9c004e09b09c228937276f520d39e4b2c3d36b..056c59d14de4efc302898e84ec7a69cbf729dfce"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C10",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "ae278408c3c5c7833ac2f6236575846cf03486d301099cdb3a9fac9e63bb92d8",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/required-service-injection-corrected-gemini-056c59d1",
+        "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+        "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.deepseek_native_harness_provider_free_required_service_injection_recovery",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "3e9c004e09b09c228937276f520d39e4b2c3d36b..056c59d14de4efc302898e84ec7a69cbf729dfce"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "3e9c004e09b09c228937276f520d39e4b2c3d36b..056c59d14de4efc302898e84ec7a69cbf729dfce"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C10",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+  "status": "accepted_after_bounded_candidate_correction_and_exact_egress_recovery",
+  "deterministic_candidate": {
+    "commit": "056c59d14de4efc302898e84ec7a69cbf729dfce",
+    "result": "pass",
+    "cached_package_count": 8,
+    "required_services": [
+      "hmr",
+      "agentPresets",
+      "tools"
+    ],
+    "focused_test_count": 15,
+    "isolated_provider_free_test_count": 86,
+    "ruff": "pass",
+    "compile": "pass",
+    "native_harness_process_count": 0,
+    "node_process_count": 0,
+    "agent_session_count": 0,
+    "broker_request_count": 0,
+    "deepseek_model_request_count": 0,
+    "provider_request_count": 0,
+    "network_attempt_count": 0,
+    "docker_invocation_count": 0,
+    "database_invocation_count": 0
+  },
+  "root_cause_reading": {
+    "accepted_native_terminal": "SERVICES_UNAVAILABLE",
+    "cause": "The rc.7 headless composition supplied tools but no agent-presets provider row, while both the loader entry and runner declared only hmr; Cordis therefore had no dependency gate for agentPresets or tools before runner activation.",
+    "future_exact_patch": "Add the official @deepseek-ai/dsh-agent-presets row with default standard and require ordered hmr, agentPresets, tools in both the loader-entry injection and runner module injection.",
+    "remaining_gate": "emr4-bounded-worker is not a shipped rc.7 preset and remains unmaterialised; no future native boot is authorised by this tranche."
+  },
+  "independent_review": {
+    "initial_candidate_commit": "99ecaa6ac20a3b6394f4dd097550c7233a4a0436",
+    "initial_decision": "revision_required",
+    "initial_findings": 2,
+    "finding_1": "The provider-free pytest wrapper removed LOCALAPPDATA while the controller required it, causing seven current-suite failures in an isolated worktree.",
+    "finding_2": "The first verifier manifest included an accepted predecessor test whose physical untracked docs/branding assertion cannot transfer into a clean Git worktree.",
+    "corrected_candidate_commit": "056c59d14de4efc302898e84ec7a69cbf729dfce",
+    "first_corrected_transport_status": "completed_but_terminal_envelope_not_admitted",
+    "first_corrected_transport_reason": "The reviewer executed all ten commands successfully and wrote a substantive pass review but inserted diff into the reported C10 argv, so exact local manifest admission rejected the envelope.",
+    "fresh_egress_recovery_decision": "pass",
+    "fresh_egress_recovery_receipt_sha256": "2015153bbda12f644e05df9ad0c1a1c43168c05fbe1d294fd4f469026848358b",
+    "fresh_egress_recovery_command_count": 10,
+    "fresh_egress_recovery_test_count": 86,
+    "fresh_egress_recovery_worktree_unchanged": true,
+    "fallback_model_used": false
+  },
+  "honest_build_cost": {
+    "candidate_source_correction_batches": 1,
+    "candidate_source_correction_reason": "Add an owned-cache fallback for stripped LOCALAPPDATA and two focused tests without expanding provider-free passthrough.",
+    "verifier_manifest_correction_batches": 1,
+    "verifier_manifest_correction_reason": "Exclude only the non-transferable predecessor evidence test while directly retaining both predecessor attempt hashes and failed terminals in the current suite.",
+    "independent_review_provider_calls": 3,
+    "independent_review_admitted_decisions": 2,
+    "independent_review_non_admitted_envelopes": 1,
+    "diagnostic_command_corrections": 2,
+    "diagnostic_command_notes": [
+      "One source-inspection command required explicit UTF-8 console output after Windows rejected a Unicode character.",
+      "One Antigravity help invocation used the script path instead of the package module and was immediately corrected to python -m scripts.ariadne_antigravity."
+    ],
+    "test_authoring_reruns": 3,
+    "test_authoring_notes": [
+      "Two report-whitespace assertions were corrected without changing the product claim.",
+      "One negative cache-root test used an ancestry that still contained the real user cache and was replaced with a closed drive-root fixture."
+    ],
+    "deterministic_projection_regenerations_before_candidate_commit": 1,
+    "prepublication_clockwork_intent_validation_corrections": 2,
+    "prepublication_clockwork_intent_validation_notes": [
+      "The first dry reading rejected a path string placed in contract_evidence, which accepts structured contract-evidence objects; the redundant entry was removed before any canonical write.",
+      "The second dry reading rejected the non-canonical role independent_reviewer; the incident now uses the register's verifier enum."
+    ],
+    "native_attempt_retry_count": 0
+  },
+  "rerun_assessment": {
+    "candidate_rebuild_count": 1,
+    "semantic_review_attempt_count": 2,
+    "non_admitted_egress_attempt_count": 1,
+    "fresh_egress_recovery_attempt_count": 1,
+    "blind_retry_count": 0,
+    "native_attempt_retry_count": 0,
+    "qualifying_incident_count": 3,
+    "micro_corrections_recorded_only_in_efficacy": 5,
+    "conclusion": "The mechanism reduced ambiguity rather than hiding cost: two semantic defects and one machine-envelope mismatch were each isolated, preserved and corrected; the exact candidate then passed one admissible fresh veto without any native Harness retry."
+  },
+  "protected_boundaries_preserved": true
+}

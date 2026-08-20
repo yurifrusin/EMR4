@@ -1,0 +1,56 @@
+{
+  "schema_version": "ariadne.worker_attempt_disposition.v1",
+  "operation_id": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+  "attempt_id": "corrected-gemini37-egress-attempt-001",
+  "timestamp": "2026-08-20T09:48:32.4383560+10:00",
+  "candidate_head": "056c59d14de4efc302898e84ec7a69cbf729dfce",
+  "model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "transport_status": "completed",
+  "candidate_review_admitted": false,
+  "terminal_decision_admitted": false,
+  "disposition": "preserved_non_admitted_egress_failure",
+  "failure_receipt": {
+    "path": "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-review-receipt.json",
+    "sha256": "6b4c710b639116c7e2caefa8f264ac4e68886777b75317d83fe6ddaec6179690",
+    "status": "egress_failed_without_admitted_terminal_decision",
+    "reason_code": "structured_decision_envelope_not_admitted",
+    "exit_code": 0,
+    "elapsed_ms": 91502,
+    "worktree_identity_unchanged": true
+  },
+  "diagnosis": {
+    "authentication_succeeded": true,
+    "all_ten_commands_were_observed_executed_with_exit_code_zero": true,
+    "model_supplied_semantic_decision": "pass",
+    "semantic_decision_admitted": false,
+    "command_result_mismatch": {
+      "command_id": "C10",
+      "manifest_argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "reported_argv": [
+        "git",
+        "diff",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "executed_command_observed": "git status --short --branch",
+      "reason": "The final structured envelope mistranscribed C10 by inserting diff. Exact local manifest admission therefore rejected the otherwise substantive output."
+    },
+    "source": "Read-only inspection of the locally retained Antigravity conversation database and transcript after the digest-only failure receipt was written.",
+    "raw_provider_output_retained_in_repository": false
+  },
+  "authority_effect": {
+    "candidate_accepted": false,
+    "candidate_rejected_on_semantics": false,
+    "finding_admitted": false,
+    "protected_refs_moved": false,
+    "retry_authorised": true,
+    "retry_scope": "one fresh exact-candidate exact-manifest egress-recovery veto"
+  }
+}

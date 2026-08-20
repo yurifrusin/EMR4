@@ -1,0 +1,216 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "dispatch_one_fresh_corrected_gemini_37_flash_high_egress_recovery_veto_for_exact_required_service_injection_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely as the current 126738-byte live handover with SHA-256 4ecd5a50ade1ca9585fc570620e259c4f252dcb61f4280c2d772d66cc76259c1. At Continuity 344 / Compass 326 it accepts the immutable SERVICES_UNAVAILABLE boot and selects this provider-free required-service injection recovery.",
+    "current_authority_allocation": "GPT Sol owns containment and acceptance. DeepSeek remains declined because Harness is the provider-free evidence subject and no native/model execution is authorised. Gemini 3.7 Flash/high is planned for exactly one fresh egress-recovery veto after its preceding project completed all commands but emitted a non-admissible C10 argv. Native subagents remain declined under developer policy and negative leverage.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-required-service-injection-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-required-service-injection-recovery-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json",
+      "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+      "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+      "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-gemini37-review-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-gemini37-attempt-001-disposition.json",
+      "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-review-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-attempt-001-disposition.json",
+      "docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Both consumed native attempts remain immutable. The correction changes only the current cache-root resolver and current focused tests/evidence. The first corrected Gemini project remains non-admitted because its final C10 argv did not equal the exact executed manifest command. Zero Node/native-Harness, occupied worker, agent/session/turn, broker/DeepSeek/provider, Docker and database execution remains required. emr4-bounded-worker remains unmaterialised. No protected, product, data, runtime, deployment, Pages or ref authority changed; docs/branding and every unrelated untracked file remain preserved.",
+    "git_refs_and_worktree": "Corrected candidate HEAD is exact 056c59d14de4efc302898e84ec7a69cbf729dfce on codex/ariadne-bernie-davida-parallel-seam; origin task remains 2678b43abec8f29e7af432a0a3c64759fada8fda. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The task tracked and staged tree is clean and all unrelated untracked entries remain preserved. The corrected isolated review worktree is exact, clean and passed a fresh egress-recovery preflight."
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh five-source state, original rejected review, Sol correction, non-admitted corrected egress failure, exact C10 diagnosis, 15 focused and 86 isolated provider-free passing tests, active latch and fresh recovery worktree preflight",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+    "active_tranche": "DeepSeek native Harness provider-free required-service injection recovery",
+    "objective": "Preserve both consumed native attempts unchanged, bind the exact rc.7 plugin and Cordis service-injection semantics, identify the missing agentPresets or tools availability rule, and construct an exact future runner/patch declaration for hmr, agentPresets and tools without starting a native Harness process, agent, broker, model or provider.",
+    "status": "in_progress",
+    "source_head": "8155a941a28b3d22a7dbb4132c4b0ada8558482e",
+    "authority_source": "Yuri's standing uninterrupted-development authority plus the immutable SERVICES_UNAVAILABLE terminal and this bounded fail-closed closeout.",
+    "checkpoint": {
+      "completed_stage": "Accepted deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_and_freeze_no_native_process_required_service_injection_recovery_plan",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_required_service_injection_recovery_only",
+      "no_native_harness_process_agent_session_turn_broker_model_provider_or_occupied_worker",
+      "both_consumed_native_attempts_immutable_no_retry_resume_or_reclassification",
+      "offline_exact_cache_only_no_registry_or_external_network",
+      "accepted_guard_and_preterminal_coordinate_vocabularies_remain_exact",
+      "no_attempt_004_retry_resume_reclassification_or_attempt_005_execution",
+      "no_docker_container_credential_postgresql_sql_transaction_or_database_execution",
+      "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+    "assessed_stage": "egress_recovery_pre_verifier",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Harness remains the provider-free evidence subject; no native/model execution or Claude fallback is authorised.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "rationale": "The corrected project executed all ten commands successfully but its final C10 argv was non-admissible; one fresh exact-manifest egress-recovery veto is bounded and required.",
+        "work_packages": [
+          "exact_corrected_candidate_056c59d1_required_service_injection_egress_recovery_veto"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and the recovery is a single serial structured-egress boundary.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "preserve both rejected and non-admitted receipts",
+      "no candidate source change for egress recovery",
+      "execute the same ten exact manifest commands",
+      "copy every command id and argv exactly into the terminal envelope",
+      "no native Harness or Node process",
+      "clockwork check and publication remain separate"
+    ],
+    "reassessment_triggers": [
+      "egress_recovery_verifier_terminal",
+      "closeout"
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol diagnosed and contained the non-admitted C10 envelope mismatch and owns acceptance."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Exact rc.7 cache source remains reachable; native execution remains forbidden."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Historical transport and fallback are not selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "agy_cli_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Authentication succeeded; the preceding project returned no admissible envelope because C10 argv mismatched the manifest, and the fresh recovery worktree passed preflight."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No native subagent was spawned under developer policy."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback is not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Fallback is not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "deepseek-native-harness-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/required-service-injection-corrected-gemini-056c59d1",
+  "branch": "codex/review-required-service-injection-corrected-056c59d1",
+  "head": "056c59d14de4efc302898e84ec7a69cbf729dfce",
+  "expected_head": "056c59d14de4efc302898e84ec7a69cbf729dfce",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "ae278408c3c5c7833ac2f6236575846cf03486d301099cdb3a9fac9e63bb92d8",
+  "command_count": 10,
+  "repository_paths": [],
+  "candidate_paths": [
+    "C:/Users/sarashera/EMR4-worktrees/required-service-injection-corrected-gemini-056c59d1/scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+    "C:/Users/sarashera/EMR4-worktrees/required-service-injection-corrected-gemini-056c59d1/tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+    "C:/Users/sarashera/EMR4-worktrees/required-service-injection-corrected-gemini-056c59d1/orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/contract.json",
+    "C:/Users/sarashera/EMR4-worktrees/required-service-injection-corrected-gemini-056c59d1/orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json"
+  ],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/required-service-injection-corrected-gemini-056c59d1",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

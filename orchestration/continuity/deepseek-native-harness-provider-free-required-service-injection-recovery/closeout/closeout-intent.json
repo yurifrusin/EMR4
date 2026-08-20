@@ -1,0 +1,396 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+    "title": "DeepSeek native Harness provider-free required-service injection recovery",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-20T09:54:56.7001117+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+      "title": "DeepSeek native Harness provider-free required-service injection recovery",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admits this provider-free deterministic recovery and its clockwork closeout.",
+          "Both consumed native attempts remain immutable and no native process was rerun.",
+          "The successor may materialise only the exact emr4-bounded-worker preset mapping and has no native-process or model/provider authority."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-required-service-root-cause",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact rc.7 root cause and future ordered hmr, agentPresets, tools declaration at reviewed candidate 056c59d14de4efc302898e84ec7a69cbf729dfce."
+        },
+        {
+          "id": "reject-initial-candidate-review",
+          "source": "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-gemini37-review-receipt.json",
+          "status": "rejected",
+          "summary": "Preserve the valid revision_required review that found the stripped-LOCALAPPDATA cache defect and non-transferable predecessor test in the verifier manifest."
+        },
+        {
+          "id": "reject-corrected-non-admitted-egress",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-attempt-001-disposition.json",
+          "status": "rejected",
+          "summary": "Preserve the completed but non-admitted corrected review whose terminal C10 argv inserted diff despite executing the exact status command."
+        },
+        {
+          "id": "accept-fresh-egress-recovery-veto",
+          "source": "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-recovery-review-receipt.json",
+          "status": "accepted",
+          "summary": "Accept one fresh Gemini 3.7 Flash/high pass with ten exact zero-exit command results, 86 tests, unchanged candidate HEAD and clean worktree."
+        }
+      ],
+      "claim_scope": [
+        "The immutable SERVICES_UNAVAILABLE terminal is explained by an absent headless agent-presets row and underdeclared runner dependencies.",
+        "The exact future host declaration adds the official agent-presets row with default standard and requires ordered hmr, agentPresets, tools in entry and runner.",
+        "The corrected deterministic candidate passes 15 focused and 86 exact isolated provider-free tests.",
+        "The final independent veto is schema-admissible and preserves the exact worktree identity.",
+        "emr4-bounded-worker remains unmaterialised and no native DeepSeek worker success is claimed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-required-service-injection-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-required-service-injection-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-required-service-injection-recovery-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-required-service-injection-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-gemini37-attempt-001-disposition.json",
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-attempt-001-disposition.json",
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-recovery-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-recovery-review-packet.md",
+          "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-required-service-injection-recovery.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "emr4-bounded-worker is not a shipped rc.7 preset and remains unmaterialised.",
+        "No native Harness process, Node process, agent, broker, DeepSeek model or provider call is authorised.",
+        "Both consumed native attempts remain immutable and cannot be retried, resumed or reclassified.",
+        "No product, practice, data, production, deployment, release, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Connect the native DeepSeek harness to Ariadne's deterministic clockwork by making service activation a reproducible, inspectable prerequisite rather than an opaque boot failure",
+      "outcome": "The missing required-service graph is exact, the future declaration is frozen, two verifier defects are corrected and one exact independent veto passes.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json",
+        "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-recovery-review-receipt.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/efficacy-reading.json"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Materialise the exact bounded worker preset before any future native boot",
+      "why_now": "The host service graph is proven, but the requested emr4-bounded-worker preset is absent from the shipped rc.7 roster and cannot yet select the exact edit/glob/read surface.",
+      "outcome": "Required-service injection is accepted without rerunning the native Harness; the next missing dependency is now the bounded preset itself.",
+      "unlocks": [
+        "A deterministic preset contract can bind the exact edit/glob/read tool mapping.",
+        "Hostile preset variants can be rejected before any native process starts.",
+        "A later separately authorised boot can use an exact, traceable preset and service graph."
+      ],
+      "does_not_solve": [
+        "No emr4-bounded-worker preset is yet materialised.",
+        "No native DeepSeek worker, broker, model or provider reliability is proved.",
+        "No product, data, runtime, deployment, release, Pages or protected integration opens."
+      ],
+      "evidence": [
+        "docs/deepseek-native-harness-provider-free-required-service-injection-recovery-closeout.md",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-required-service-injection-recovery-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-required-service-injection-recovery.md"
+      ],
+      "orientation_statement": "EMR4 will prove and materialise the exact emr4-bounded-worker preset mapping before considering another native Harness boot."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery",
+      "active_tranche": "DeepSeek native Harness provider-free emr4-bounded-worker preset materialisation recovery",
+      "objective": "Deterministically derive, materialise and prove the exact emr4-bounded-worker preset mapping to the accepted edit, glob and read tool boundary from exact offline rc.7 sources without starting Node, a native Harness process, agent, broker, model or provider.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted provider-free required-service injection recovery.",
+      "next_stage": "fresh_five_source_rehydration_and_freeze_no_native_process_bounded_preset_materialisation_plan"
+    },
+    "incidents": [
+      {
+        "incident_id": "provider-free-cache-root-environment-mismatch",
+        "source_id": "required-service-injection-review-attempt-001",
+        "peers": []
+      },
+      {
+        "incident_id": "verifier-manifest-non-transferable-predecessor-test",
+        "source_id": "required-service-injection-review-attempt-001",
+        "peers": []
+      },
+      {
+        "incident_id": "corrected-verifier-c10-envelope-mistranscription",
+        "source_id": "required-service-injection-corrected-egress-attempt-001",
+        "peers": []
+      }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "required_service_injection_closeout_tick_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "required_service_injection_and_clockwork_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "required_service_injection_closeout_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "required_service_injection_closeout_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "required_service_injection_deterministic_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.deepseek_native_harness_provider_free_required_service_injection_recovery",
+          "--check"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "DeepSeek native Harness provider-free required-service injection recovery acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-required-service-injection-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-required-service-injection-recovery-threat-model-delta.md",
+      "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+      "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/evidence.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/efficacy-reading.json",
+      "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-gemini37-review-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-gemini37-attempt-001-disposition.json",
+      "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-review-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-attempt-001-disposition.json",
+      "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-recovery-review-receipt.json",
+      "docs/deepseek-native-harness-provider-free-required-service-injection-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-required-service-injection-recovery-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-required-service-injection-recovery.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/closeout/closeout-intent.json"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_emr4_bounded_worker_preset_materialisation_recovery_only",
+    "exact_offline_rc7_cache_sources_only_no_registry_or_external_network",
+    "emr4_bounded_worker_maps_only_to_accepted_edit_glob_read_boundary",
+    "hostile_preset_variants_fail_closed",
+    "no_node_or_native_harness_process_agent_session_turn_broker_model_provider_or_occupied_worker",
+    "no_future_native_boot_authorised",
+    "both_consumed_native_attempts_immutable_no_retry_resume_or_reclassification",
+    "accepted_required_service_injection_and_activation_coordinates_remain_exact",
+    "no_docker_container_credential_postgresql_sql_transaction_or_database_execution",
+    "no_product_source_configuration_api_openapi_graphql_schema_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "required-service-injection-provider-free-cache-root-attempt-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "A deterministic provider-free controller must run under the repository's exact provider-free pytest wrapper, including its removal of LOCALAPPDATA, without silently widening environment passthrough.",
+      "observed_error": "The first isolated Gemini review found seven current-suite failures because the controller's default cache root required LOCALAPPDATA even though the exact wrapper removes it.",
+      "detection_method": "Gemini executed the exact isolated-worktree C03 command and returned revision_required with the failing trace and affected source boundary.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-gemini37-attempt-001-disposition.json",
+        "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.provider_free_controller_requires_stripped_environment_variable",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Use LOCALAPPDATA when present, otherwise select the first existing non-symlink user-owned AppData/Local/npm-cache in repository ancestry, and fail closed when no owned candidate exists.",
+        "prevention_control": "Every provider-free controller that needs a user-local cache must be tested under the exact environment-stripping wrapper and with a no-owned-candidate negative fixture before independent dispatch.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-recovery-review-receipt.json"
+        ]
+      },
+      "baton_summary": "preserves the stripped-LOCALAPPDATA failure and the exact owned-cache fallback plus fail-closed test."
+    },
+    {
+      "attempt_key": "required-service-injection-verifier-manifest-untracked-predecessor-test-attempt-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "independent_review",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "Every verifier-manifest test must be transferable into its clean Git worktree or be explicitly excluded with equivalent candidate-owned evidence for the exact protected boundary.",
+      "observed_error": "The first verifier manifest included a predecessor evidence test that requires the physical user-owned untracked docs/branding directory, which a clean Git-created review worktree cannot contain.",
+      "detection_method": "Gemini's exact isolated C03 command failed the predecessor preservation assertion and returned revision_required; Sol verified the test's accepted primary-worktree purpose and non-transferability.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-gemini37-attempt-001-disposition.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-command-manifest.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.verifier_manifest_includes_nontransferable_untracked_path_assertion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Exclude only the non-transferable predecessor evidence test from the isolated manifest, preserve that test unchanged for the primary worktree, and directly hash-check both immutable attempts in the current candidate suite.",
+        "prevention_control": "Verifier-manifest construction classifies every selected test as Git-transferable or primary-worktree-only before dispatch and requires an explicit equivalent evidence binding for any justified exclusion.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-command-manifest.json",
+          "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-recovery-review-receipt.json"
+        ]
+      },
+      "baton_summary": "preserves the non-transferable untracked-path assertion and the manifest transferability classification control."
+    },
+    {
+      "attempt_key": "required-service-injection-corrected-verifier-c10-envelope-attempt-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-required-service-injection-recovery",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "model": "gemini-3.7-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The terminal structured envelope must reproduce each executed command id and argv exactly from the injected manifest so local evidence admission can bind execution without model transcription drift.",
+      "observed_error": "The corrected reviewer executed C10 as git status --short --branch and completed all ten commands at exit zero, but reported C10 argv as git diff status --short --branch; the broker admitted no verdict.",
+      "detection_method": "Exact local command-result admission returned zero schema-valid envelopes; read-only inspection of the retained conversation record isolated the single extra diff token while the worktree remained unchanged.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-attempt-001-disposition.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-command-manifest.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "verifier.structured_command_argv_transcription_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Preserve the non-admitted receipt, start one fresh project, repeat the complete exact manifest, and require verbatim manifest id and argv copying with C10 called out explicitly.",
+        "prevention_control": "The broker continues exact local argv admission; recovery packets explicitly direct reviewers to copy injected command results rather than reconstruct them, and no semantic verdict is inferred from rejected output.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-recovery-review-packet.md",
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-required-service-injection-recovery-corrected-gemini37-egress-recovery-review-receipt.json"
+        ]
+      },
+      "baton_summary": "preserves the C10 argv mistranscription and the exact local admission plus fresh-project recovery control."
+    }
+  ]
+}
