@@ -1,0 +1,122 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free structured diagnostic wrapper Node fixture rehearsal",
+    "completed_stage": "Attempt 001 ran exactly four authored local Node observers and preserved identical rejection, exclusive sidecar failure behavior, zero stream bytes and exact cleanup, but its three safe diagnostics failed canonical-byte validation solely because JavaScript retained insertion order; the immutable negative evidence and plan-admitted opt-in recursive key-order correction are committed with historical default wrapper bytes preserved.",
+    "next_executable_stage": "generate_and_validate_one_fresh_attempt_002_preexecution_receipt_then_run_the_same_exact_four_serial_authored_local_node_scenarios_once_against_the_corrected_source",
+    "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "32dbd5233d114692d1913163ba62fc25e44a013f",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "9f0c0090949e5690607e6d8f76955293509e7c32",
+    "reason_codes": [],
+    "resolved_commit": "32dbd5233d114692d1913163ba62fc25e44a013f",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "32dbd5233d114692d1913163ba62fc25e44a013f"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "9f0c0090949e5690607e6d8f76955293509e7c32",
+    "branch_origin_aligned": false,
+    "head": "9f0c0090949e5690607e6d8f76955293509e7c32",
+    "origin_branch_commit": "0dcad3dae9322e3a372ab141eff4f45795143f48",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 663
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "attempt_002_result_precommit",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "No Harness, worker, model or provider process is permitted; exact local evidence already supplies the result.",
+        "work_packages": []
+      },
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Provider calls remain closed and no semantic acceptance fork remains after deterministic postconditions passed.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and explicit evidence staging/commit is serial stateful work.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "evidence_schema_failure",
+      "staged_scope_differs_from_named_files",
+      "closeout_detects_nonmechanical_conflict"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "preserve attempt 001",
+      "explicit-path stage attempt 002 only",
+      "commit evidence before closeout clockwork"
+    ]
+  },
+  "planned_action": "commit_the_passing_attempt_002_receipt_exact_evidence_and_promoted_provider_free_result_on_the_task_branch_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-plan.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/attempts/node-fixture-attempt-002/execution-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/provider-free-node-fixture-evidence.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-wrapper-node-fixture-rehearsal-attempt-002-preexecution-receipt.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns deterministic acceptance and the exact task-branch evidence commit. No DeepSeek worker, Gemini provider or native subagent is dispatched.",
+    "git_refs_and_worktree": "Machine snapshot alone owns exact Git objects. Explicit-path staging must include only the attempt-002 receipts and evidence, preserve docs/branding and all unrelated untracked files, and keep all four protected refs fixed and aligned.",
+    "live_handover_current_baton": "The live baton keeps native Harness closed and permits only the authored local Node wrapper fixture rehearsal.",
+    "protected_evidence_boundaries": "The committed result proves only generated wrapper behavior against authored local fixtures. DSH/Harness, broker, worker, model/provider, raw streams, occupied attempts, product/data, deployment, protected evidence and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

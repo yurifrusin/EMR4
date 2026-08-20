@@ -1,0 +1,53 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_passing_attempt_002_receipt_exact_evidence_and_promoted_provider_free_result_on_the_task_branch_only",
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh five-source post-compaction receipt, published attempt-002 checkpoint, passed attempt-002 receipt, exact four-process terminal evidence, focused tests, Ruff, compilation and whitespace validation", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "source_evidence": {
+    "live_handover_current_baton": "The live baton keeps native Harness closed and permits only the authored local Node wrapper fixture rehearsal.",
+    "current_authority_allocation": "GPT Sol owns deterministic acceptance and the exact task-branch evidence commit. No DeepSeek worker, Gemini provider or native subagent is dispatched.",
+    "active_plan_and_acceptance": ["docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-plan.md", "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/attempts/node-fixture-attempt-002/execution-evidence.json", "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/provider-free-node-fixture-evidence.json", "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-wrapper-node-fixture-rehearsal-attempt-002-preexecution-receipt.json", "orchestration/continuity/ariadne-active-operation-latch/current.json"],
+    "protected_evidence_boundaries": "The committed result proves only generated wrapper behavior against authored local fixtures. DSH/Harness, broker, worker, model/provider, raw streams, occupied attempts, product/data, deployment, protected evidence and protected refs remain closed.",
+    "git_refs_and_worktree": "Machine snapshot alone owns exact Git objects. Explicit-path staging must include only the attempt-002 receipts and evidence, preserve docs/branding and all unrelated untracked files, and keep all four protected refs fixed and aligned."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+    "active_tranche": "DeepSeek native Harness provider-free structured diagnostic wrapper Node fixture rehearsal",
+    "objective": "Execute the generated wrapper only against authored local failing Node modules and deterministically prove exclusive safe sidecar creation, identical rejection, bounded validation and exact cleanup without importing DSH or launching Harness, broker, worker, model or provider activity.",
+    "status": "in_progress",
+    "source_head": "32dbd5233d114692d1913163ba62fc25e44a013f",
+    "authority_source": "Yuri's standing uninterrupted-development authority, constrained to the dependency-satisfied provider-free diagnostic-strengthening course and no occupied retry.",
+    "checkpoint": {"completed_stage": "Attempt 001 ran exactly four authored local Node observers and preserved identical rejection, exclusive sidecar failure behavior, zero stream bytes and exact cleanup, but its three safe diagnostics failed canonical-byte validation solely because JavaScript retained insertion order; the immutable negative evidence and plan-admitted opt-in recursive key-order correction are committed with historical default wrapper bytes preserved.", "next_executable_stage": "generate_and_validate_one_fresh_attempt_002_preexecution_receipt_then_run_the_same_exact_four_serial_authored_local_node_scenarios_once_against_the_corrected_source", "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0}, "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"},
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": ["provider_free_authored_local_node_fixture_wrapper_only", "no_dsh_import_or_native_harness_process", "no_broker_worker_model_or_provider_process_or_request", "no_occupied_attempt_retry_resume_overwrite_or_reclassification", "attempts_001_002_and_003_terminal_and_consumed_evidence_remain_immutable", "no_raw_startup_stream_reconstruction_or_retention", "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change", "no_ordinary_practice_enablement_or_generic_status_arrived_change", "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting", "no_product_patient_appointment_clinical_historical_or_protected_data", "no_production_runtime_deployment_release_or_pages", "no_protected_evidence_access_or_protected_ref_movement", "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602", "docs_branding_and_all_unrelated_untracked_files_preserved", "explicit_path_staging_only"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+    "assessed_stage": "attempt_002_result_precommit",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "not_applicable", "expected_leverage": "neutral", "rationale": "No Harness, worker, model or provider process is permitted; exact local evidence already supplies the result.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "not_applicable", "expected_leverage": "neutral", "rationale": "Provider calls remain closed and no semantic acceptance fork remains after deterministic postconditions passed.", "work_packages": []},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Developer policy prohibits proactive delegation and explicit evidence staging/commit is serial stateful work.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["preserve attempt 001", "explicit-path stage attempt 002 only", "commit evidence before closeout clockwork"],
+    "reassessment_triggers": ["evidence_schema_failure", "staged_scope_differs_from_named_files", "closeout_detects_nonmechanical_conflict"]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol observed the exact passing local result."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Closed; zero native Harness processes."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No provider call authorised."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No subagent spawned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
