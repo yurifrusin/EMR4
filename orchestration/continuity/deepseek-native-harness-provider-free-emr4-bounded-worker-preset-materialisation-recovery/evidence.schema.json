@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/deepseek-native-harness-emr4-bounded-worker-preset-evidence-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "planning_source",
+    "result",
+    "predecessor_bindings",
+    "package_checks",
+    "source_semantics",
+    "materialised_preset",
+    "effective_projection",
+    "hostile_variants",
+    "provider_boundary",
+    "implementation_bytes",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ariadne.deepseek_native_harness_emr4_bounded_worker_preset_evidence.v1"
+    },
+    "operation_id": {
+      "const": "deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery"
+    },
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {"const": "pass"},
+    "predecessor_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["accepted_sources", "files", "required_service_result", "effective_tool_guard_result", "immutable_attempts"],
+      "properties": {
+        "accepted_sources": {"type": "object"},
+        "files": {"type": "array", "minItems": 7, "maxItems": 7},
+        "required_service_result": {"const": "pass"},
+        "effective_tool_guard_result": {"const": "pass"},
+        "immutable_attempts": {"type": "array", "minItems": 2, "maxItems": 2}
+      }
+    },
+    "package_checks": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": ["name", "version", "registry_shasum", "registry_integrity", "tar_sha256", "members"]
+      }
+    },
+    "source_semantics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checks", "mandatory_selected_sources", "unconditional_inherited_tools", "conditional_inherited_tools", "preset_is_authority_boundary", "accepted_guard_remains_mandatory", "outer_broker_allowlist_remains_mandatory"],
+      "properties": {
+        "checks": {"type": "object", "minProperties": 18, "additionalProperties": {"const": true}},
+        "mandatory_selected_sources": {
+          "const": {
+            "edit": "@deepseek-ai/dsh-tool-fs",
+            "glob": "@deepseek-ai/dsh-tool-fs-search",
+            "read": "@deepseek-ai/dsh-tool-fs"
+          }
+        },
+        "unconditional_inherited_tools": {"const": ["edit", "glob", "grep", "read", "write"]},
+        "conditional_inherited_tools": {"const": ["read_image"]},
+        "preset_is_authority_boundary": {"const": false},
+        "accepted_guard_remains_mandatory": {"const": true},
+        "outer_broker_allowlist_remains_mandatory": {"const": true}
+      }
+    },
+    "materialised_preset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "install_relative_path", "repository_path", "bytes", "sha256", "row_ids", "row_count", "sample_over_cap_glob_results"],
+      "properties": {
+        "id": {"const": "emr4-bounded-worker"},
+        "install_relative_path": {"const": ".agent-presets/emr4-bounded-worker/agent.cordis.yml"},
+        "repository_path": {"const": "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/materialised-home/.agent-presets/emr4-bounded-worker/agent.cordis.yml"},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "row_ids": {"const": ["tool-fs", "tool-fs-search"]},
+        "row_count": {"const": 2},
+        "sample_over_cap_glob_results": {"const": false}
+      }
+    },
+    "effective_projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selected_tools", "minimal_inherited_tools", "minimal_effective_tools", "attachment_present_inherited_tools", "attachment_present_effective_tools", "guard_applied_after_mount", "guard_source_semantics", "outer_broker_allowlist_still_required"],
+      "properties": {
+        "selected_tools": {"const": ["edit", "glob", "read"]},
+        "minimal_inherited_tools": {"const": ["edit", "glob", "grep", "read", "write"]},
+        "minimal_effective_tools": {"const": ["edit", "glob", "read"]},
+        "attachment_present_inherited_tools": {"const": ["edit", "glob", "grep", "read", "write", "read_image"]},
+        "attachment_present_effective_tools": {"const": ["edit", "glob", "read"]},
+        "guard_applied_after_mount": {"const": true},
+        "guard_source_semantics": {"type": "object", "minProperties": 7, "additionalProperties": {"const": true}},
+        "outer_broker_allowlist_still_required": {"const": true}
+      }
+    },
+    "hostile_variants": {
+      "type": "array",
+      "minItems": 21,
+      "maxItems": 21,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["scenario", "result"],
+        "properties": {
+          "scenario": {"type": "string", "minLength": 1},
+          "result": {"const": "rejected"}
+        }
+      }
+    },
+    "provider_boundary": {"$ref": "#/$defs/zeroCounts"},
+    "implementation_bytes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["controller_sha256", "focused_test_sha256", "plan_sha256"],
+      "properties": {
+        "controller_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "focused_test_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proved", "not_proved", "future_native_execution_authorised"],
+      "properties": {
+        "proved": {"const": "exact_rc7_materialised_preset_and_deterministic_post_mount_edit_glob_read_projection"},
+        "not_proved": {
+          "const": [
+            "native_preset_discovery",
+            "native_preset_mount",
+            "combined_service_activation",
+            "native_scope_creation",
+            "native_effective_schema_view",
+            "future_native_harness_boot",
+            "occupied_deepseek_worker",
+            "model_or_provider_reliability"
+          ]
+        },
+        "future_native_execution_authorised": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "zeroCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["agent_sessions", "broker_requests", "database_invocations", "docker_invocations", "model_requests", "native_harness_processes", "network_attempts", "node_processes", "occupied_workers", "provider_requests", "turns"],
+      "properties": {
+        "agent_sessions": {"const": 0},
+        "broker_requests": {"const": 0},
+        "database_invocations": {"const": 0},
+        "docker_invocations": {"const": 0},
+        "model_requests": {"const": 0},
+        "native_harness_processes": {"const": 0},
+        "network_attempts": {"const": 0},
+        "node_processes": {"const": 0},
+        "occupied_workers": {"const": 0},
+        "provider_requests": {"const": 0},
+        "turns": {"const": 0}
+      }
+    }
+  }
+}

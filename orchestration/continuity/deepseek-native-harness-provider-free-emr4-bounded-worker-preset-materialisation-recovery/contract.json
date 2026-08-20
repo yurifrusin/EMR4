@@ -1,0 +1,136 @@
+{
+  "schema_version": "ariadne.deepseek_native_harness_emr4_bounded_worker_preset_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery",
+  "planning_source": "817add1e9f36ff143e6e46e854cdefd81fd45969",
+  "accepted_sources": {
+    "required_service_recovery": "ae608b4a8cc4004693813a83e518c71eb2ff06f3",
+    "effective_tool_guard": "dc167c20f5b54b783a57fccb7843f434136c8ca8"
+  },
+  "predecessor_files": [
+    {
+      "path": "scripts/deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+      "sha256": "2653e66536efaf9d3edf635653686e551ef051509e6e6758950dd57bf393d0a9"
+    },
+    {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/contract.json",
+      "sha256": "77dee70cb30aed6dee279b797c0bd6d9507271802a8bbdf09d07f26035c2d5f2"
+    },
+    {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json",
+      "sha256": "7e145786d0f5776611fde3556deb4f5cdbbd91d793c4b19b886443614ed2f85e"
+    },
+    {
+      "path": "scripts/deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+      "sha256": "b36d9c11d9a6c2f67d72b2afae9aae18dd63d46636627137ccfc38de5d05afa9"
+    },
+    {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/contract.json",
+      "sha256": "fa076f0e02caa8fd308225456bc498a117c946200fe57b960d5c906904d24241"
+    },
+    {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/provider-free-effective-tool-guard-evidence.json",
+      "sha256": "720bda0fcc7cacbe05f136e6f34896245bc0e5c40aa986ff94bcfca8d7c00adf"
+    },
+    {
+      "path": "docs/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-plan.md",
+      "sha256": "fac328226165cc9e57962b8bac2bc500a67fd89fee918fe5a445e21d750b6cb9"
+    }
+  ],
+  "predecessor_package_names": [
+    "@deepseek-ai/dsh-base",
+    "@deepseek-ai/dsh-headless",
+    "@deepseek-ai/dsh-agent-presets",
+    "@deepseek-ai/dsh-tools"
+  ],
+  "packages": [
+    {
+      "name": "@deepseek-ai/dsh-tool-fs",
+      "version": "0.1.0-rc.7",
+      "registry_shasum": "0df84033fddee766d88dd3bf9e8c660d348663c9",
+      "registry_integrity": "sha512-/Uf2z6OZckk0Nz7XjVbzf/yUnvDeY58CkUjAqy2FxgGuNc0rvIR6VzRER5NZ+30bXeB8TPnjMuCVB+j/8zltrw==",
+      "tar_sha256": "1b163810c5065fdf90a08f0d4e3c7341071c4e839c796773ab462c6356328d59",
+      "members": [
+        {
+          "path": "package.json",
+          "bytes": 2366,
+          "sha256": "aff8bc9a05d0aa1d44f0875a1efeba75a163ce5cd7d4f326abf724c9b466271b"
+        },
+        {
+          "path": "lib/index.js",
+          "bytes": 46024,
+          "sha256": "054af13c1d6f5e67ddf1b89211991f32e0e72f466762b75816282e5cdada86cd"
+        }
+      ]
+    },
+    {
+      "name": "@deepseek-ai/dsh-tool-fs-search",
+      "version": "0.1.0-rc.7",
+      "registry_shasum": "1691fff576a6f250c9b87e072ead0770238205fc",
+      "registry_integrity": "sha512-0Lo6bbpPcSMKZlWkBGx2KjwyLy5zYJKMH8fmwz8orwOKHjbfYQT51GV9cpdhLq6NYTwKeMUaxTZC4xPlZ03SAg==",
+      "tar_sha256": "961279d53a23a2a1d73f6ce31e76300b26f4c5dd7f667571572e9aee9d6c4d13",
+      "members": [
+        {
+          "path": "package.json",
+          "bytes": 2091,
+          "sha256": "0830ace5e18849e73775dd2f3e2d1f2c222fe50389b60f5ccfadccada9bab728"
+        },
+        {
+          "path": "lib/index.js",
+          "bytes": 55634,
+          "sha256": "ea87dbb4b2e0c2af1e3c9463c42892e510a3fa1e620ff98afc738e9dc5a0f787"
+        }
+      ]
+    }
+  ],
+  "preset": {
+    "id": "emr4-bounded-worker",
+    "install_relative_path": ".agent-presets/emr4-bounded-worker/agent.cordis.yml",
+    "materialised_repository_path": "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/materialised-home/.agent-presets/emr4-bounded-worker/agent.cordis.yml",
+    "rows": [
+      {
+        "id": "tool-fs",
+        "name": "@deepseek-ai/dsh-tool-fs"
+      },
+      {
+        "id": "tool-fs-search",
+        "name": "@deepseek-ai/dsh-tool-fs-search",
+        "config": {
+          "sampleOverCapGlobResults": false
+        }
+      }
+    ],
+    "selected_tools": [
+      "edit",
+      "glob",
+      "read"
+    ],
+    "unconditional_inherited_tools": [
+      "edit",
+      "glob",
+      "grep",
+      "read",
+      "write"
+    ],
+    "conditional_inherited_tools": [
+      "read_image"
+    ]
+  },
+  "required_zero_counts": [
+    "agent_sessions",
+    "broker_requests",
+    "database_invocations",
+    "docker_invocations",
+    "model_requests",
+    "native_harness_processes",
+    "network_attempts",
+    "node_processes",
+    "occupied_workers",
+    "provider_requests",
+    "turns"
+  ],
+  "implementation_bytes": {
+    "controller_sha256": "44a14fb04ca4358073bbd3989b66b1029b830cef054cb9ce4e11f8bfef07affb",
+    "focused_test_sha256": "02ea0a3cf8961a1a5cd5ff8749bbffdde6089c8224271c51162a490e4a74c3f0",
+    "plan_sha256": "fac328226165cc9e57962b8bac2bc500a67fd89fee918fe5a445e21d750b6cb9"
+  }
+}
