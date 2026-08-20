@@ -73,7 +73,7 @@
         "All provider-boundary counts were zero and process/root cleanup was complete.",
         "The independent manifest passed 86 safe tests and ten zero-exit commands.",
         "Six ancillary mock Node unit-test processes and one verifier filename-grounding lapse are recorded as contained procedure incidents.",
-        "Stale lease 60, the invalid first recovery receipt, the historical hard-coded successor guard and the rejected first corrected-publication check are retained as corrected governance incidents.",
+        "Stale leases 60 and 62, both byte-exact rollbacks, the invalid first recovery receipt, the historical hard-coded successor guard and both rejected corrected-publication controls are retained as corrected governance incidents.",
         "The corrected successor is the unrepeated attempt-005 planning operation; attempt 004 remains immutable.",
         "No occupied worker, broker, DeepSeek reasoning, coding reliability, product suitability or production isolation is claimed."
       ],
@@ -185,7 +185,8 @@
       {"incident_id": "clockwork-recorded-operation-selected-as-successor", "source_id": "complete-composition-native-boot-clockwork-lease-60", "peers": []},
       {"incident_id": "recovery-receipt-parallelism-enum-mismatch", "source_id": "stale-successor-preplanning-attempt-001", "peers": []},
       {"incident_id": "historical-successor-guard-hard-coded", "source_id": "post-native-harness-successor-guard", "peers": []},
-      {"incident_id": "incident-intent-schema-vocabulary-late-validation", "source_id": "corrected-clockwork-check-at-source-64d319d7771c3fe60952e70ec17b70248079673c", "peers": []}
+      {"incident_id": "incident-intent-schema-vocabulary-late-validation", "source_id": "corrected-clockwork-check-at-source-64d319d7771c3fe60952e70ec17b70248079673c", "peers": []},
+      {"incident_id": "human-register-revision-projection-stale", "source_id": "clockwork-publication-lease-62", "peers": []}
     ],
     "broker": {"enabled": false, "posture": "provider_free_shadow"}
   },
@@ -550,6 +551,42 @@
         ]
       },
       "baton_summary": "moves complete incident-schema vocabulary admission ahead of clockwork generation so one bad field cannot create a cascade of check reruns."
+    },
+    {
+      "attempt_key": "complete-composition-stale-human-register-revision-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+      "role": "orchestrator",
+      "resource_id": "emr4-repository",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "clockwork_postpublication_readback",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "The human agent-error revision accepted by a clockwork generation must carry the exact prospective register revision, total incident count, new incident IDs and open count before publication.",
+      "observed_error": "Lease 62 correctly published register revision 570 with 674 incidents through AER-0674, but the accepted human revision-570 document still described the earlier 670-incident draft through AER-0670.",
+      "detection_method": "The dedicated postpublication readback compared the canonical JSON register with its named human revision document before task-branch push.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-570.md",
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/clockwork-tick-evidence.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.human_register_revision_projection_stale_at_clockwork_publication",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve lease 62, roll it back byte-exactly at lease 63, correct the human revision and republish from a new full source.",
+        "prevention_control": "Before generation, compare one exact machine-readable block and the ordered new-incident headings in the named human revision document with the complete prospective canonical register.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "docs/ariadne-agent-error-correction-register-revision-570.md"
+        ]
+      },
+      "baton_summary": "couples the human register revision to the complete prospective machine reading before publication, eliminating a stale manually maintained display."
     }
   ]
 }

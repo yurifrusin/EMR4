@@ -105,6 +105,7 @@ INCIDENT_CORRECTION_STATUSES = frozenset(
     }
 )
 INCIDENT_CAUSAL_CLAIM_LEVEL = "observation_only"
+INCIDENT_REVISION_PREFIX = "docs/ariadne-agent-error-correction-register-revision-"
 
 DERIVED_INPUT_KEYS = {
     "source_commit",
@@ -908,6 +909,44 @@ def _project_incident_register(
     return prospective, pattern
 
 
+def _validate_incident_revision_artifact(
+    repo_root: Path,
+    acceptance_paths: list[str],
+    register: dict[str, Any],
+    observation_count: int,
+) -> None:
+    """Bind the human revision note to the complete prospective machine reading."""
+
+    revision = register["register_revision"]
+    expected_path = f"{INCIDENT_REVISION_PREFIX}{revision}.md"
+    matching = [
+        path for path in acceptance_paths if path.startswith(INCIDENT_REVISION_PREFIX)
+    ]
+    if matching != [expected_path]:
+        _reject("tick_incident_revision_path")
+    try:
+        document = (repo_root / expected_path).read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as error:
+        raise ClockworkTickRejection("tick_incident_revision_reading") from error
+    incident_ids = [
+        item["incident_id"] for item in register["incidents"][-observation_count:]
+    ]
+    open_count = sum(item["status"] == "open" for item in register["incidents"])
+    reading = "\n".join(
+        [
+            "<!-- ariadne-agent-error-register-reading",
+            f"revision: {revision}",
+            f"incident_count: {len(register['incidents'])}",
+            f"new_incident_ids: {','.join(incident_ids)}",
+            f"open_incident_count: {open_count}",
+            "-->",
+        ]
+    )
+    headings = re.findall(r"^## (AER-[0-9]{4})(?:\s|$)", document, re.MULTILINE)
+    if document.count(reading) != 1 or headings != incident_ids:
+        _reject("tick_incident_revision_reading")
+
+
 def _render_baton(
     current: str,
     *,
@@ -1107,6 +1146,12 @@ def build_tick_generation(
             contract,
             current,
             intent["agent_error_observations"],
+        )
+        _validate_incident_revision_artifact(
+            repo_root,
+            intent["baton_acceptance"]["paths"],
+            incident_register,
+            len(intent["agent_error_observations"]),
         )
     canonical = {
         "continuity": _json_text(bundle["projections"]["graph"]).encode("utf-8"),

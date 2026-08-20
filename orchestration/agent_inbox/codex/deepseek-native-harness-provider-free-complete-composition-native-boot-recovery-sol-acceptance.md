@@ -65,6 +65,13 @@ repository control defect, corrects all adjacent incident vocabulary in one
 pass and moves the complete register-bound date, identifier, enum and const
 admission into `validate_tick_intent`. No canonical projection changed.
 
+Lease 62 subsequently exposed a separate machine/human projection defect: its
+canonical register correctly contained 674 incidents through AER-0674 while
+the named human revision-570 document still described 670 through AER-0670.
+Sol preserves lease 62, accepts byte-exact rollback lease 63 and requires an
+exact machine-readable revision/count/new-ID/open-count block plus ordered
+headings to match the complete prospective register before generation.
+
 The exact unrepeated successor is
 `raisa-provider-free-check-in-relay-free-recovery-attempt-005`. It has planning
 authority only until a fresh exact plan, WorkOrder, deterministic admission and
@@ -75,3 +82,7 @@ Claim ceiling: this is a real provider-free pre-provider Harness composition
 success, not an occupied worker or proof of DeepSeek reasoning, coding quality,
 broker behavior, production isolation or product suitability. No product,
 data, deployment, release, Pages or protected-ref authority is granted.
+
+Lease 62 and its generation remain immutable negative projection evidence; the
+accepted Harness result itself remains unchanged. Final closeout requires a
+new full-Git-bound publication and postpublication readback.

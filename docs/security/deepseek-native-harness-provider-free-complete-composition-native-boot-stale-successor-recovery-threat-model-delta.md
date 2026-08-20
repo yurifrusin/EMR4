@@ -18,6 +18,7 @@ route or data path executes.
 | An already accepted operation is selected again from stale prose | Before any clean-closeout or user-decision projection, reject a next operation ID that already occurs in the validated Continuity graph. |
 | A filename/prose guard misses the accepted operation | Use exact graph node identity, not Markdown filenames, plan-path formatting or a hard-coded successor. |
 | Invalid incident vocabulary creates serial check reruns | Validate every register-bound date, identifier, enum and const in the caller intent before graph, register or canonical projection; parameterized hostile tests cover each field class. |
+| The human revision note lags the canonical machine register | Require one exact machine-readable block and ordered new-incident headings matching the complete prospective revision, population, IDs and open count before generation. |
 | Recovery erases the accepted Harness result or its incidents | Roll back only the selected clockwork generation, preserve its Git source and rejected receipts, then republish the same accepted result with all earlier and new incidents. |
 | A rollback selects arbitrary history | The existing clockwork may restore only the immediately previous full-Git-bound generation and must report byte-exact readback. |
 | Correcting the successor silently authorises attempt 005 execution | The new latch authorises fresh rehydration and plan freeze only; occupied execution requires a distinct plan, preexecution receipt, WorkOrder and one-run latch. |

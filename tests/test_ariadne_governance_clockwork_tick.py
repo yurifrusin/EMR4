@@ -234,6 +234,58 @@ def _incident_intent(worktree: Path) -> dict:
     return intent
 
 
+def _commit_incident_revision_artifact(
+    worktree: Path, intent: dict, *, incident_count_adjustment: int = 0
+) -> None:
+    register_path = (
+        worktree
+        / "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
+    )
+    register = _json(register_path)
+    revision = register["register_revision"] + 1
+    first_number = int(register["incidents"][-1]["incident_id"].split("-")[1]) + 1
+    incident_ids = [
+        f"AER-{number:04d}"
+        for number in range(
+            first_number,
+            first_number + len(intent["agent_error_observations"]),
+        )
+    ]
+    relative = f"docs/ariadne-agent-error-correction-register-revision-{revision}.md"
+    intent["baton_acceptance"]["paths"].append(relative)
+    reading = "\n".join(
+        [
+            f"# Ariadne agent error and correction register — revision {revision}",
+            "",
+            "<!-- ariadne-agent-error-register-reading",
+            f"revision: {revision}",
+            (
+                "incident_count: "
+                f"{len(register['incidents']) + len(incident_ids) + incident_count_adjustment}"
+            ),
+            f"new_incident_ids: {','.join(incident_ids)}",
+            "open_incident_count: 0",
+            "-->",
+            "",
+            *[f"## {incident_id} — bounded test incident" for incident_id in incident_ids],
+            "",
+        ]
+    )
+    (worktree / relative).write_text(reading, encoding="utf-8")
+    subprocess.run(
+        ["git", "add", "--", relative],
+        cwd=worktree,
+        check=True,
+        capture_output=True,
+    )
+    subprocess.run(
+        ["git", "commit", "-m", "Add incident revision test artifact"],
+        cwd=worktree,
+        check=True,
+        capture_output=True,
+    )
+
+
 @contextmanager
 def _worktree(path: Path, source_ref: str = REPLAY_FIXTURE_SOURCE):
     source = subprocess.run(
@@ -515,6 +567,7 @@ def test_incident_tick_derives_register_pattern_and_rolls_back_atomically(
     with _worktree(tmp_path / "incident-intake") as worktree:
         contract = validate_contract(_json(worktree / CONTRACT_PATH.relative_to(ROOT)))
         intent = _incident_intent(worktree)
+        _commit_incident_revision_artifact(worktree, intent)
         canonical_paths, metadata_paths, pointer_path = _paths(worktree, contract)
         before_canonical = {
             key: path.read_bytes() for key, path in canonical_paths.items()
@@ -566,6 +619,19 @@ def test_incident_tick_derives_register_pattern_and_rolls_back_atomically(
         assert {
             key: path.read_bytes() for key, path in canonical_paths.items()
         } == before_canonical
+
+
+def test_incident_tick_rejects_stale_human_revision_reading(tmp_path: Path) -> None:
+    with _worktree(tmp_path / "stale-incident-revision") as worktree:
+        contract = validate_contract(_json(worktree / CONTRACT_PATH.relative_to(ROOT)))
+        intent = _incident_intent(worktree)
+        _commit_incident_revision_artifact(
+            worktree, intent, incident_count_adjustment=-1
+        )
+        with pytest.raises(
+            ClockworkTickRejection, match="tick_incident_revision_reading"
+        ):
+            build_tick_generation(worktree, contract, intent)
 
 
 def test_blocked_tick_preserves_every_non_latch_surface_and_rolls_back(

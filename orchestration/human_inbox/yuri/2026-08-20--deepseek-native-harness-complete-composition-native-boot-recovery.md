@@ -47,6 +47,13 @@ all of those readings into the earlier intent gate. One check now rejects the
 complete date, identifier and fixed-vocabulary surface before the clockwork can
 build a generation. No canonical record or Harness result changed.
 
+The first corrected publication then revealed that the JSON register was right
+but its human revision note still showed the earlier count. I rolled that
+generation back as well. The human note now carries a small machine-readable
+reading—revision, total, new IDs and open count—which the clockwork compares
+with the prospective JSON before it can publish. This removes another piece of
+record-keeping from memory and turns it into a gauge reading.
+
 The genuine next assignment is the separately named fifth relay-free recovery
 attempt. It will first receive its own exact one-run plan and broker-limited
 native-Harness WorkOrder. Attempt 004 remains consumed; no rerun or product
@@ -85,6 +92,11 @@ enablement is hidden inside the correction.
   corrected check at full source
   `64d319d7771c3fe60952e70ec17b70248079673c` rejected late incident-stage
   validation; the complete register vocabulary now validates at intent intake.
+- Superseded publication: lease 62 / generation
+  `gen-40aeffc94b940cd10a27a457fd537c0ffdac5d9499795f4fd12322645b37f860`;
+  its machine register passed at Continuity 347 / Compass 329 through AER-0674,
+  but its human revision still showed the earlier draft. Rollback lease 63 was
+  byte-exact; the new prospective revision is 570 / 675 through AER-0675.
 - Protected refs: local/origin `master` and `handoff/current` remain exact
   `2e34bdad732fdab32fbf778280b3d3c70d66d602`.
 
@@ -96,4 +108,6 @@ authored-synthetic, product-data and protected-ref boundaries unchanged.
 
 The first non-PHI continuing Pushover notification succeeded with request
 `ec01f12b-6fec-4680-95b5-02391ce84d65`; its stale next-work line is superseded
-by the corrective notification recorded after corrected clockwork publication.
+by corrective request `4db1795d-21ca-41f6-93e3-2f5a52169f06`, delivered after
+the lease-62 publication. It will itself be superseded after the fully coupled
+publication passes.

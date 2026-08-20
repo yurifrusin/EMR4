@@ -2,9 +2,16 @@
 
 Date: 2026-08-20
 
-This revision records three corrected procedure incidents from the DeepSeek
+<!-- ariadne-agent-error-register-reading
+revision: 570
+incident_count: 675
+new_incident_ids: AER-0668,AER-0669,AER-0670,AER-0671,AER-0672,AER-0673,AER-0674,AER-0675
+open_incident_count: 0
+-->
+
+This revision records eight corrected procedure and governance incidents from the DeepSeek
 native Harness provider-free complete-composition native-boot recovery. The
-canonical machine register now contains 670 incidents and none is open.
+canonical machine register now contains 675 incidents and none is open.
 
 ## AER-0668 — unadmitted mock-Node tests in an execution-sensitive tranche
 
@@ -46,6 +53,59 @@ The corrected intent adds the exact token. Future closeouts must validate the
 prospective next latch against the complete compatibility-boundary subset, not
 only semantically equivalent tranche-specific wording.
 
-All three incidents have `control_added` corrections and `corrected` status. They do
+## AER-0671 — accepted operation selected again as successor
+
+Lease 60 selected the already accepted default-off route-adapter operation as
+the next tranche. Fresh five-source rehydration found the conflict before any
+worker or product action; lease 61 restored the immediately previous generation
+byte-for-byte.
+
+Correction: clockwork construction now rejects a next operation ID already
+present anywhere in the validated Continuity graph, and the live successor test
+compares the graph, latch and Baton rather than Markdown filenames.
+
+## AER-0672 — invalid parallelism leverage vocabulary
+
+The first stale-successor recovery receipt used an invented
+`conditional_independence` value instead of the configured parallelism
+vocabulary and failed closed before planning or dispatch.
+
+Correction: the rejected receipt is retained, the corrected receipt uses exact
+`required_independence`, and the preflight remains the admission boundary.
+
+## AER-0673 — historical successor guard was hard-coded
+
+The prior repository guard looked only for plan filenames in Markdown and one
+historical successor name. It could not prevent a later recorded operation from
+being selected again.
+
+Correction: the guard now uses exact live graph identities and the clockwork
+enforces the same predicate before it can build a generation.
+
+## AER-0674 — incident vocabulary validated too late
+
+The first corrected check at full source
+`64d319d7771c3fe60952e70ec17b70248079673c` reached prospective register
+projection before rejecting an invalid stage value. Whole-packet inspection
+found adjacent severity, causal-claim and correction-status mismatches that
+would otherwise have caused serial reruns.
+
+Correction: `validate_tick_intent` now validates every register-bound date,
+identifier, enum and constant up front, and its vocabulary is test-bound to the
+canonical register schema.
+
+## AER-0675 — human register revision lagged the machine register
+
+Lease 62 correctly published register revision 570 with 674 incidents through
+AER-0674, but this human revision still described the earlier 670-incident
+draft through AER-0670. Dedicated postpublication readback found the mismatch
+before task-branch push; lease 63 restored the prior generation byte-for-byte.
+
+Correction: every incident closeout revision now carries one exact
+machine-readable register reading. Clockwork compares its revision, incident
+count, ordered new incident IDs, open count and headings with the complete
+prospective machine register before publication.
+
+All eight incidents have accepted correction states and `corrected` status. They do
 not reopen the sole successful Harness attempt, authorise a retry, or change
 any product, data, production, deployment, Pages or protected-ref boundary.

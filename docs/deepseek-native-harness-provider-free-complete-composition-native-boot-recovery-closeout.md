@@ -88,6 +88,14 @@ identifier, enum and const vocabulary before generation, with parameterized
 hostile tests for every field class. This seventh contained incident changed no
 canonical state or accepted Harness evidence.
 
+Lease 62 then published the correct machine register but retained the earlier
+human revision-570 summary. The postpublication readback caught its 670-versus-
+674 incident mismatch before push, and rollback lease 63 restored the previous
+generation byte-for-byte. Revision 570 now carries an exact machine-readable
+prospective reading and ordered AER-0668 through AER-0675 headings; clockwork
+rejects any future machine/human mismatch before generation. This eighth
+contained incident changed no accepted Harness or product evidence.
+
 The unrepeated next tranche is
 `raisa-provider-free-check-in-relay-free-recovery-attempt-005`. It begins with
 fresh rehydration, an exact one-run plan and a separately frozen brokered
@@ -98,4 +106,7 @@ authority.
 
 The first non-PHI continuing Pushover notification succeeded with request
 `ec01f12b-6fec-4680-95b5-02391ce84d65`; its stale successor statement is
-superseded by the corrective notification recorded in the paired Yuri summary.
+superseded by corrective request
+`4db1795d-21ca-41f6-93e3-2f5a52169f06`; lease 62 was subsequently rolled back
+at lease 63 after its stale human projection was found. A final corrective
+notification follows only after the fully coupled publication passes.
