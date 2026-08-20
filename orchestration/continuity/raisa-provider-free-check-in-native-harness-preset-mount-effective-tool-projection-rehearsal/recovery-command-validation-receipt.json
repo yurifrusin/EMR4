@@ -1,0 +1,334 @@
+{
+  "command_manifest_sha256": "e6400f82c1ae7ebcc42fb206acb663a69cbaf3dbb7e00d5e7ba131d951458124",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "id": "C01"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "id": "C02"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/preset-mount-prelaunch-recovery-gemini-68786313",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal_plan.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+        "tests/test_ariadne_orchestrator_preflight.py"
+      ],
+      "id": "C03"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal_plan.py"
+      ],
+      "id": "C04"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal_plan.py"
+      ],
+      "id": "C05"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from scripts import raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal as r; c=r.load_contract(); assert c['native']['failed_prelaunch_attempt']=={'attempt_id':'check-in-preset-mount-effective-tool-native-001','terminal_code':'NATIVE_PRELAUNCH_INSTALLATION_PATH_PRECREATED','native_process_count':0,'automatic_retry_count':0,'resume_permitted':False}; assert c['native']['attempt_id']=='check-in-preset-mount-effective-tool-native-002'; assert c['native']['process_limit']==1 and c['native']['automatic_retry_limit']==0"
+      ],
+      "id": "C06"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import json; from jsonschema import Draft202012Validator; from scripts import raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal as r; s=json.loads(r.NATIVE_SCHEMA_PATH.read_text()); Draft202012Validator.check_schema(s); assert s['properties']['attempt_id']['const']=='check-in-preset-mount-effective-tool-native-002'; assert s['properties']['native_process_count']['enum']==[0,1]; assert s['allOf'][0]['then']['properties']['native_process_count']['const']==1; assert s['properties']['automatic_retry_count']['const']==0"
+      ],
+      "id": "C07"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import inspect; from scripts import raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal as r; py=inspect.getsource(r.execute_native); install='package_root, _ = _offline_install'; proof='proof.mkdir(parents=True)'; consumed='_write_json(NATIVE_CONSUMED_PATH, consumed, exclusive=True)'; launch='process = subprocess.Popen('; assert py.index(install) < py.index(proof) < py.index(consumed) < py.index(launch); assert 'NATIVE_PRELAUNCH_OFFLINE_INSTALL_FAILED' in py; assert 'native_process_count\": 1 if process_started else 0' in py; assert 'process_absent = process is None or process.poll() is not None' in py"
+      ],
+      "id": "C08"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from pathlib import Path; from scripts import raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal as r; old=r.CONTINUITY_ROOT/'native-preexecution-checkpoint.json'; failure=r.CONTINUITY_ROOT/'native-attempt-001-prelaunch-failure.json'; assert old.is_file() and failure.is_file(); assert not r.NATIVE_CHECKPOINT_PATH.exists(); assert not r.NATIVE_CONSUMED_PATH.exists(); assert not r.NATIVE_TERMINAL_PATH.exists(); assert not r.NATIVE_REPORT_PATH.exists()"
+      ],
+      "id": "C09"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "3c99d1d41da915aebcf5238a73b7e99fd5d54bc1..687863138593e8cac3c84258c27bab0fc889d77b"
+      ],
+      "id": "C10"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "3c99d1d41da915aebcf5238a73b7e99fd5d54bc1..687863138593e8cac3c84258c27bab0fc889d77b"
+      ],
+      "id": "C11"
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "id": "C12"
+    }
+  ],
+  "ended_at": "2026-08-20T09:51:47.483774Z",
+  "failure_command_id": null,
+  "provider_free_no_database_admission_sha256": "sha256:d45727203d64f15d6a22e3d0146ce70d269f512be24f3fab800ae82e7e7abf72",
+  "repo_root": "C:\\Users\\sarashera\\EMR4-worktrees\\preset-mount-prelaunch-recovery-gemini-68786313",
+  "results": [
+    {
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "elapsed_ms": 45,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C01",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 57,
+      "stdout_sha256": "38a9f890e6f8d2485dc9657d54a4c3c85e211cb751343be8f247d9b604f32349"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "elapsed_ms": 22,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C02",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 41,
+      "stdout_sha256": "9b001af0290203b5bec54020b9fea29d1c4537bfc67cd75e57b5282dd9693605"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/preset-mount-prelaunch-recovery-gemini-68786313",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal_plan.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+        "tests/test_ariadne_orchestrator_preflight.py"
+      ],
+      "elapsed_ms": 27705,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C03",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 162,
+      "stdout_sha256": "d3fb1d03a95fd8d5e498aee42ec71731ae8eb81c6a92b993ade59279cbfb4a41"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal_plan.py"
+      ],
+      "elapsed_ms": 22,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C04",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 19,
+      "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal_plan.py"
+      ],
+      "elapsed_ms": 92,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C05",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from scripts import raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal as r; c=r.load_contract(); assert c['native']['failed_prelaunch_attempt']=={'attempt_id':'check-in-preset-mount-effective-tool-native-001','terminal_code':'NATIVE_PRELAUNCH_INSTALLATION_PATH_PRECREATED','native_process_count':0,'automatic_retry_count':0,'resume_permitted':False}; assert c['native']['attempt_id']=='check-in-preset-mount-effective-tool-native-002'; assert c['native']['process_limit']==1 and c['native']['automatic_retry_limit']==0"
+      ],
+      "elapsed_ms": 229,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C06",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import json; from jsonschema import Draft202012Validator; from scripts import raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal as r; s=json.loads(r.NATIVE_SCHEMA_PATH.read_text()); Draft202012Validator.check_schema(s); assert s['properties']['attempt_id']['const']=='check-in-preset-mount-effective-tool-native-002'; assert s['properties']['native_process_count']['enum']==[0,1]; assert s['allOf'][0]['then']['properties']['native_process_count']['const']==1; assert s['properties']['automatic_retry_count']['const']==0"
+      ],
+      "elapsed_ms": 186,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C07",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import inspect; from scripts import raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal as r; py=inspect.getsource(r.execute_native); install='package_root, _ = _offline_install'; proof='proof.mkdir(parents=True)'; consumed='_write_json(NATIVE_CONSUMED_PATH, consumed, exclusive=True)'; launch='process = subprocess.Popen('; assert py.index(install) < py.index(proof) < py.index(consumed) < py.index(launch); assert 'NATIVE_PRELAUNCH_OFFLINE_INSTALL_FAILED' in py; assert 'native_process_count\": 1 if process_started else 0' in py; assert 'process_absent = process is None or process.poll() is not None' in py"
+      ],
+      "elapsed_ms": 164,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C08",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from pathlib import Path; from scripts import raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal as r; old=r.CONTINUITY_ROOT/'native-preexecution-checkpoint.json'; failure=r.CONTINUITY_ROOT/'native-attempt-001-prelaunch-failure.json'; assert old.is_file() and failure.is_file(); assert not r.NATIVE_CHECKPOINT_PATH.exists(); assert not r.NATIVE_CONSUMED_PATH.exists(); assert not r.NATIVE_TERMINAL_PATH.exists(); assert not r.NATIVE_REPORT_PATH.exists()"
+      ],
+      "elapsed_ms": 151,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C09",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "3c99d1d41da915aebcf5238a73b7e99fd5d54bc1..687863138593e8cac3c84258c27bab0fc889d77b"
+      ],
+      "elapsed_ms": 30,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C10",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "3c99d1d41da915aebcf5238a73b7e99fd5d54bc1..687863138593e8cac3c84258c27bab0fc889d77b"
+      ],
+      "elapsed_ms": 30,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C11",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 3253,
+      "stdout_sha256": "1810ad5298f912834301bb98a2887e926aa2eeb610ad174b257ff78d2edcf73a"
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "elapsed_ms": 42,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C12",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 57,
+      "stdout_sha256": "38a9f890e6f8d2485dc9657d54a4c3c85e211cb751343be8f247d9b604f32349"
+    }
+  ],
+  "schema_version": "ariadne.validation_run.v1",
+  "started_at": "2026-08-20T09:51:18.717717Z",
+  "status": "passed"
+}
