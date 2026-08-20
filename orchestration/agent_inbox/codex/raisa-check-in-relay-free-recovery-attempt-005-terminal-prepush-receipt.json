@@ -1,0 +1,116 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 005",
+    "completed_stage": "Native-Harness worker consumed pre-provider at preset mount with zero request, model, tool, test, edit and retry counts plus exact cleanup; Sol candidate committed and published at 905184b76f576006232fcfdc78da71d98fcf0ca0; postcommit no-database runner passes 239 tests; Ruff, compile, static admission and clockwork regression pass; read-only Docker inspection confirms the exact cached PostgreSQL 16 image, zero matching resources and zero object creation.",
+    "next_executable_stage": "execute_exactly_one_attempt_005_wrapper_run_then_stop_without_retry_and_preserve_terminal_evidence",
+    "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+    "resume_after_compaction": true,
+    "source_head": "905184b76f576006232fcfdc78da71d98fcf0ca0",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "git_object_resolution": {
+    "observed_head": "49fced564d631ef661d3462dd010cfd1692f6d88",
+    "reason_codes": [],
+    "resolved_commit": "905184b76f576006232fcfdc78da71d98fcf0ca0",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "905184b76f576006232fcfdc78da71d98fcf0ca0"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "49fced564d631ef661d3462dd010cfd1692f6d88",
+    "branch_origin_aligned": false,
+    "head": "49fced564d631ef661d3462dd010cfd1692f6d88",
+    "origin_branch_commit": "905184b76f576006232fcfdc78da71d98fcf0ca0",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 655
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "terminal_prepush",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The sole worker is consumed pre-provider with zero model or edit activity; no retry or package remains.",
+        "work_packages": [
+          "attempt_005_adapter_and_focused_provider_free_tests"
+        ]
+      },
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The plan permits Gemini only after occupied success, which was not achieved.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the Git/clockwork closeout is serial Sol work.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "clockwork_closeout",
+      "successor_preplanning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "publish the exact retained-evidence commit before deriving the clockwork closeout",
+      "attempt 005 cannot be retried",
+      "protected refs remain closed"
+    ]
+  },
+  "planned_action": "push",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-plan.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/rehearsal-failure-evidence.json",
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-005-sol-blocked-assessment.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "Sol owns retained-evidence publication and clockwork closeout. DeepSeek native Harness is completed and consumed pre-provider; Gemini is ineligible after occupied failure; native subagents are declined under developer policy and the serial closeout boundary.",
+    "git_refs_and_worktree": "Local task branch is at exact retained-evidence commit 49fced564d631ef661d3462dd010cfd1692f6d88 and origin task branch remains its immediate ancestor 905184b76f576006232fcfdc78da71d98fcf0ca0 before this push. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked state is clean before adding this receipt pair; every unrelated untracked path remains preserved.",
+    "live_handover_current_baton": "The complete post-checkpoint AGENTS.md reading remains authoritative at SHA-256 645ddf1be5f5a8ba3a4def8440e21cc27e836621bc573ae0a9fe190ed74d972e; Continuity 347 / Compass 329 names attempt 005 active pending terminal closeout.",
+    "protected_evidence_boundaries": "Attempt 005 and its worker are consumed with no retry or reclassification. No ordinary-practice enablement, generic-status Arrived, route, flag, allowlist, grammar, client, waiting-area, product/patient/clinical data, provider, production, deployment, release, Pages, protected evidence or protected-ref movement is authorised. docs/branding and all unrelated untracked files remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
