@@ -278,6 +278,7 @@ export async function apply(ctx, config) {{
 {_event_writer_source()}
   const exit = ctx.get("appExit");
   let scope;
+  let rootsPassed = false;
   let exitCode = 2;
   let terminal = {{
     schema_version: "{RUNNER_TERMINAL_SCHEMA}",
@@ -293,6 +294,7 @@ export async function apply(ctx, config) {{
     if (!presets || !Array.isArray(presets.roots) || presets.roots.length !== 2) throw new Error("roots");
     if (resolve(presets.roots[0].path) !== resolve(config.shippedRoot) || presets.roots[0].trust !== "system") throw new Error("shipped");
     if (resolve(presets.roots[1].path) !== resolve(config.userRoot) || presets.roots[1].trust !== "user") throw new Error("user");
+    rootsPassed = true;
     emit("effective_roots_passed");
     scope = createScope(ctx, Object.freeze({{}}));
     emit("effective_tool_guard_started");
@@ -308,7 +310,7 @@ export async function apply(ctx, config) {{
     exitCode = 0;
     emit("effective_tool_projection_passed");
   }} catch (error) {{
-    if (terminal.code !== "{ROOT_FAILURE_CODE}") {{
+    if (rootsPassed) {{
       const safe = sanitizeEffectiveToolTerminal(error);
       const names = safe.detail === null ? [] : safe.detail.split(",").filter((value) => /^[a-z_]+$/.test(value));
       terminal = {{
@@ -453,6 +455,11 @@ def validate_runner_source(payload: bytes) -> dict[str, Any]:
         "system_then_user": (
             'presets.roots[0].trust !== "system"' in source
             and 'presets.roots[1].trust !== "user"' in source
+        ),
+        "post_root_failure_classification": (
+            "let rootsPassed = false;" in source
+            and "rootsPassed = true;" in source
+            and "if (rootsPassed)" in source
         ),
         "exact_tools": '["edit", "glob", "read"]' in source,
         "no_agents_create": "agents.create" not in source,

@@ -75,6 +75,7 @@ def test_runner_is_one_scope_one_guard_no_agent_or_model() -> None:
     assert projection["one_guard_call"]
     assert projection["one_terminal"]
     assert projection["one_dispose"]
+    assert projection["post_root_failure_classification"]
     assert projection["no_agents_create"]
     assert projection["no_session_or_turn"]
     assert projection["no_broker_or_provider"]
