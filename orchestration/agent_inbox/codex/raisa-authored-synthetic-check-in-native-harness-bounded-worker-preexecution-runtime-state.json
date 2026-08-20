@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "consume_the_committed_clockwork_checkpoint_and_run_exactly_one_deepseek_native_harness_authored_synthetic_edit_without_retry_or_fallback",
+  "context_health": {"agent_contexts": [{
+    "agent_id": "orchestrator",
+    "measurement_source": "fresh five-source preexecution readback, active latch, exact semantic veto, materialised attempt, committed checkpoint, published clockwork generation and machine Git refs",
+    "rehydrated_from_receipt": true,
+    "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+  }]},
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md controls. The active operation is checkpointed for one authored-synthetic non-product native Harness worker edit.",
+    "current_authority_allocation": "Sol owns execution monitoring, deterministic judging, containment, acceptance, clockwork and Git. DeepSeek Flash owns exactly one edit request. Gemini completed the independent semantic veto. Native subagents remain declined under developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal-plan.md",
+      "docs/security/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal-threat-model-delta.md",
+      "orchestration/agent_inbox/antigravity/raisa-authored-synthetic-native-worker-gemini37-semantic-only-review-receipt.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-attempt-preparation.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-preexecution-checkpoint.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/clockwork-checkpoint-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "One authored-synthetic file and one literal edit only. One native process, one provider request, zero retry, zero fallback and zero auxiliary model calls. No shell, database, product/data, ordinary-practice, deployment, release, Pages or protected-ref authority.",
+    "git_refs_and_worktree": "Machine snapshot alone owns exact object identities. The task branch is aligned with origin; all protected refs remain exact; docs/branding and unrelated untracked files remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal",
+    "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker monitored development rehearsal",
+    "objective": "Freeze and, only after a separate exact checkpoint, run one authored-synthetic non-product DeepSeek worker work package through the accepted native preset, exact tool guard and Ariadne broker gears with one request, immutable terminal evidence and zero silent fallback.",
+    "status": "in_progress",
+    "source_head": "065b872c90834fa543c9ce88b7159fde80c0efea",
+    "authority_source": "Yuri's standing uninterrupted-development authority, prepaid DeepSeek budget control and the accepted provider-disabled native preset/tool projection closeout.",
+    "checkpoint": {
+      "completed_stage": "Candidate, independent veto, preparation, committed execution checkpoint and governance clockwork checkpoint transition all passed.",
+      "next_executable_stage": "run_one_checkpointed_native_harness_worker_attempt_then_capture_terminal_and_cleanup",
+      "retry_counters": {"planning": 0, "implementation": 1, "review": 2, "verification": 1},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "authored_synthetic_nonproduct_only",
+      "exact_edit_only",
+      "one_native_process_one_provider_request_zero_retry_zero_fallback_zero_auxiliary_calls",
+      "no_second_worker_or_retry_without_user_attention_decision",
+      "no_shell_docker_database_postgresql_sql_or_transaction",
+      "no_product_route_api_schema_client_status_arrived_grammar_waiting_area_or_ordinary_practice_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_deployment_release_pages_or_protected_refs",
+      "protected_refs_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_unrelated_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal",
+    "assessed_stage": "occupied_worker_preexecution",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "planned", "expected_leverage": "positive", "rationale": "The work package is now exact, independently reviewed, materialised and clockwork-checkpointed; one native Harness call is the direct subject of the tranche.", "work_packages": ["one literal authored-synthetic nested-window repair"]},
+      {"lane_id": "gemini_verifier", "disposition": "completed", "expected_leverage": "required_independence", "rationale": "Gemini completed the exact-candidate semantic veto after deterministic command ownership was correctly separated.", "work_packages": ["completed semantic-only veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Developer policy prohibits proactive delegation and the occupied attempt must remain one serial process.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["consume checkpoint before native spawn", "one native process", "one provider request", "terminal and cleanup before interpretation"],
+    "reassessment_triggers": ["terminal_interpretation", "closeout"]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol committed and published the exact checkpoint and owns monitoring."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Accepted rc.7 package/preset/guard projection is materialised; no native process has yet started."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude Code is not selected as transport or fallback."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["The semantic-only Gemini veto passed and its worktree stayed clean."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No subagent was spawned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Deep Code is not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Claude CLI is not selected."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "deepseek-native-harness-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
