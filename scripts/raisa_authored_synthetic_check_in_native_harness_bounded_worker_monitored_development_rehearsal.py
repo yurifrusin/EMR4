@@ -11,6 +11,7 @@ import queue
 import re
 import secrets
 import shutil
+import stat
 import subprocess
 import threading
 import time
@@ -18,6 +19,10 @@ from typing import Any
 
 import jsonschema
 import yaml
+
+from orchestration_harness.transactional_closeout import (
+    sha256 as canonical_object_sha256,
+)
 
 from scripts import (
     deepseek_native_harness_provider_free_effective_tool_composition_guard as guard,
@@ -252,6 +257,34 @@ def write_json_exclusive(path: Path, value: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("xb") as stream:
         stream.write(canonical_json(value))
+
+
+def _clear_readonly_then_retry(
+    function: Any, path: str, _error: BaseException
+) -> None:
+    os.chmod(path, stat.S_IWRITE)
+    function(path)
+
+
+def remove_exact_attempt_root(root: Path, parent: Path) -> bool:
+    resolved_root = root.resolve()
+    resolved_parent = parent.resolve()
+    if (
+        resolved_root.parent != resolved_parent
+        or resolved_root.name != ATTEMPT_ROOT.name
+        or resolved_root.is_symlink()
+    ):
+        raise RehearsalError("attempt_cleanup_scope_invalid")
+    for attempt in range(26):
+        try:
+            if resolved_root.exists():
+                shutil.rmtree(resolved_root, onexc=_clear_readonly_then_retry)
+            return not resolved_root.exists()
+        except OSError:
+            if attempt == 25:
+                return False
+            time.sleep(0.2)
+    return False
 
 
 def load_contract(path: Path = CONTRACT_PATH) -> dict[str, Any]:
@@ -1139,8 +1172,8 @@ def prepare_attempt(review_receipt_path: Path) -> dict[str, Any]:
         write_json_exclusive(PREPARATION_PATH, preparation)
         return preparation
     except BaseException:
-        if root.parent == parent and root.exists():
-            shutil.rmtree(root)
+        if root.parent == parent and root.exists() and not remove_exact_attempt_root(root, parent):
+            raise RehearsalError("attempt_preparation_cleanup_failed")
         raise
 
 
@@ -1251,8 +1284,7 @@ def _broker_environment(token: str) -> dict[str, str]:
         "DSH_EMR4_BROKER_TOKEN": token,
         "DEEPSEEK_API_KEY": provider_key,
         "EMR4_BROKER_WORK_ORDER_PATH": str(WORK_ORDER_PATH),
-        "EMR4_BROKER_WORK_ORDER_SHA256": "sha256:"
-        + sha256_bytes(canonical_json(work_order)),
+        "EMR4_BROKER_WORK_ORDER_SHA256": canonical_object_sha256(work_order),
         "EMR4_BROKER_COMMAND_MANIFEST_PATH": str(COMMAND_MANIFEST_PATH),
         "EMR4_BROKER_NO_DATABASE_ADMISSION_PATH": str(NO_DATABASE_ADMISSION_PATH),
     }
@@ -1568,23 +1600,15 @@ def execute_native() -> dict[str, Any]:
     if not success and failure is None:
         failure = "occupied_acceptance_mismatch"
 
-    for _attempt in range(26):
-        try:
-            if root.parent == parent and root.exists():
-                shutil.rmtree(root)
-            break
-        except PermissionError:
-            if _attempt == 25:
-                failure = "attempt_root_cleanup_failed"
-            else:
-                time.sleep(0.2)
-        except OSError:
-            failure = "attempt_root_cleanup_failed"
-            break
+    cleanup_passed = remove_exact_attempt_root(root, parent)
     root_absent = not root.exists()
-    if not root_absent:
+    if not cleanup_passed or not root_absent:
         success = False
-        failure = "attempt_root_cleanup_failed"
+        failure = (
+            "attempt_root_cleanup_failed"
+            if failure is None
+            else f"{failure}+attempt_root_cleanup_failed"
+        )
     terminal = {
         "schema_version": TERMINAL_SCHEMA,
         "operation_id": OPERATION_ID,

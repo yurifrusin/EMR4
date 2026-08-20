@@ -1,0 +1,123 @@
+{
+  "active_operation": {},
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": null,
+    "reason_codes": [
+      "git_object_resolution_active_operation_unavailable"
+    ],
+    "resolved_commit": null,
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": null,
+    "status": "revision_required",
+    "supplied_object_id": null
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "0020b7c0688abc8d7b751f4276837cebd8d02280",
+    "branch_origin_aligned": true,
+    "head": "0020b7c0688abc8d7b751f4276837cebd8d02280",
+    "origin_branch_commit": "0020b7c0688abc8d7b751f4276837cebd8d02280",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 663
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "attempt_001_recovery_precommit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Attempt 001 reached no native process or provider request and produced no DeepSeek performance evidence; no new attempt is authorised.",
+        "work_packages": [
+          "consumed zero-request attempt 001"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The exact repair requires one fresh semantic veto before the operation can pause for user attention.",
+        "work_packages": [
+          "fresh repair veto after commit"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and recovery is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "repair_veto_terminal",
+      "user_attention_transition"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit failure and repair",
+      "fresh Gemini repair veto",
+      "distinct user decision before any new attempt"
+    ]
+  },
+  "planned_action": "commit_immutable_zero_request_attempt_001_terminal_exact_cleanup_recovery_and_provider_free_controller_broker_handshake_repair",
+  "reasons": [
+    "active_operation_latch_invalid",
+    "parallelism_assessment_operation_mismatch",
+    "git_object_resolution_active_operation_unavailable"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal-plan.md",
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-001-prelaunch-recovery.md",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-attempt-consumed.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-postterminal-cleanup-recovery.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/postterminal-recovery-command-validation-receipt.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "Sol owns failure preservation, cleanup, deterministic repair, review dispatch, clockwork and Git. Gemini owns the coming exact repair veto. DeepSeek has no new identity or retry authority. Native subagents remain declined.",
+    "git_refs_and_worktree": "Machine snapshot alone owns exact identities. The task branch was aligned before recovery work; protected refs remain exact; docs/branding and unrelated untracked files remain preserved; staging is explicit-path only.",
+    "live_handover_current_baton": "AGENTS.md controls. Attempt 001 is consumed with zero native/model/provider calls; the operation remains in progress only for recovery review and a user-attention decision.",
+    "protected_evidence_boundaries": "Attempt 001 is immutable and non-resumable. No second worker, native process or provider request is authorised. The commit contains only authored-synthetic evidence and provider-free controller/tests; no product/data/database/deployment/Pages/protected-ref changes."
+  },
+  "status": "revision_required",
+  "terminal_handback_permitted": null,
+  "worker_dispatch_permitted": false
+}

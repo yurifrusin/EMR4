@@ -3,12 +3,15 @@ from __future__ import annotations
 import inspect
 import json
 from pathlib import Path
+import stat
 import subprocess
 import sys
 from types import SimpleNamespace
 
 import jsonschema
 import pytest
+
+from orchestration_harness.transactional_closeout import sha256 as canonical_sha256
 
 from scripts import (
     raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal
@@ -223,6 +226,61 @@ def test_worker_environment_cannot_receive_provider_credential(
     assert "DEEPSEEK_API_KEY" not in environment
     assert environment["DSH_EMR4_BROKER_TOKEN"] == "synthetic-token"
     assert environment["DSH_TELEMETRY_DISABLED"] == "1"
+
+
+def test_broker_environment_uses_broker_canonical_work_order_digest(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "synthetic-provider-key")
+    work_order = json.loads(subject.WORK_ORDER_PATH.read_text(encoding="utf-8"))
+    environment = subject._broker_environment("synthetic-capability-token")
+    assert environment["EMR4_BROKER_WORK_ORDER_SHA256"] == canonical_sha256(
+        work_order
+    )
+    assert environment["EMR4_BROKER_WORK_ORDER_SHA256"] != (
+        "sha256:" + subject.sha256_bytes(subject.canonical_json(work_order))
+    )
+
+
+def test_controller_environment_and_real_broker_reach_bound_ready(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "synthetic-provider-key")
+    process = subprocess.Popen(
+        ["node", str(subject.BROKER_PATH)],
+        cwd=subject.REPO_ROOT,
+        env=subject._broker_environment("synthetic-capability-token"),
+        text=True,
+        encoding="utf-8",
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    try:
+        assert process.stdout is not None
+        ready = json.loads(process.stdout.readline())
+        assert ready["event"] == "broker-ready"
+        assert ready["model_id"] == "deepseek-v4-flash"
+        assert ready["maximum_provider_calls"] == 1
+        assert ready["allowed_tool_names"] == ["edit", "glob", "read"]
+    finally:
+        process.terminate()
+        process.wait(timeout=10)
+
+
+def test_exact_attempt_cleanup_clears_read_only_git_objects(tmp_path: Path) -> None:
+    root = tmp_path / subject.ATTEMPT_ROOT.name
+    git_object = root / "workspace" / ".git" / "objects" / "aa" / "object"
+    git_object.parent.mkdir(parents=True)
+    git_object.write_bytes(b"synthetic git object")
+    git_object.chmod(stat.S_IREAD)
+
+    assert subject.remove_exact_attempt_root(root, tmp_path) is True
+    assert not root.exists()
+
+
+def test_cleanup_failure_preserves_primary_failure_coordinate() -> None:
+    source = inspect.getsource(subject.execute_native)
+    assert 'f"{failure}+attempt_root_cleanup_failed"' in source
 
 
 def test_occupied_terminal_schema_rejects_second_provider_request() -> None:

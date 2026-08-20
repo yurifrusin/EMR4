@@ -1,0 +1,19 @@
+{
+  "schema_version": "ariadne.synthetic_native_worker_postterminal_cleanup_recovery.v1",
+  "recorded_at": "2026-08-20T21:48:30.3784177+10:00",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal",
+  "attempt_id": "deepseek-native-synthetic-window-worker-001",
+  "status": "cleanup_recovered_attempt_remains_consumed",
+  "terminal_sha256": "38cd1854c555de83bbe00757bed4e7744215d4f1996fc2910f37bdc7c8d020e1",
+  "consumed_sha256": "cb4613ebe46f122e24e5fb11a7b48bcba47be8f30c23b75e5d0d4d9ec9fd3541",
+  "terminal_result": "failed_closed",
+  "native_process_count": 0,
+  "provider_request_count": 0,
+  "automatic_retry_count": 0,
+  "residual_owned_process_count_before_cleanup": 0,
+  "read_only_git_object_count_cleared": 3,
+  "cleanup_scope": "exact_disposable_attempt_root_only",
+  "attempt_root_absent_after_recovery": true,
+  "resume_permitted": false,
+  "second_attempt_authorised": false
+}
