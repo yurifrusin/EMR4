@@ -1,0 +1,25 @@
+{
+  "schema_version": "ariadne.verifier-worktree-preflight.v1",
+  "status": "passed",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/preset-mount-materialization-recovery-gemini-c8b0e3a5",
+  "branch": "codex/review-preset-mount-materialization-recovery-c8b0e3a5",
+  "head": "c8b0e3a587191b65da212edda36b8b833a2ecc2c",
+  "expected_head": "c8b0e3a587191b65da212edda36b8b833a2ecc2c",
+  "clean": true,
+  "branch_prefix": "codex/review-",
+  "command_manifest_sha256": "047ed547bede22bf79db7806c4c50ec59244a1a63944b9736a3a26fcf59fe39c",
+  "command_count": 12,
+  "repository_paths": [],
+  "candidate_paths": [
+    "C:/Users/sarashera/EMR4-worktrees/preset-mount-materialization-recovery-gemini-c8b0e3a5/docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-package-materialisation-recovery.md",
+    "C:/Users/sarashera/EMR4-worktrees/preset-mount-materialization-recovery-gemini-c8b0e3a5/orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/contract.json",
+    "C:/Users/sarashera/EMR4-worktrees/preset-mount-materialization-recovery-gemini-c8b0e3a5/orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/deterministic-evidence.json",
+    "C:/Users/sarashera/EMR4-worktrees/preset-mount-materialization-recovery-gemini-c8b0e3a5/orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-attempt-002-prelaunch-failure.json",
+    "C:/Users/sarashera/EMR4-worktrees/preset-mount-materialization-recovery-gemini-c8b0e3a5/orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-terminal.schema.json",
+    "C:/Users/sarashera/EMR4-worktrees/preset-mount-materialization-recovery-gemini-c8b0e3a5/scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+    "C:/Users/sarashera/EMR4-worktrees/preset-mount-materialization-recovery-gemini-c8b0e3a5/tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py"
+  ],
+  "serial_repo_root": "C:/Users/sarashera/EMR4-worktrees/preset-mount-materialization-recovery-gemini-c8b0e3a5",
+  "provider_or_model_calls": 0,
+  "authority_boundary": "local_read_only_pre_dispatch_check"
+}

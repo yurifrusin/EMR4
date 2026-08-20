@@ -1,0 +1,334 @@
+{
+  "command_manifest_sha256": "047ed547bede22bf79db7806c4c50ec59244a1a63944b9736a3a26fcf59fe39c",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "id": "C01"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "id": "C02"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/preset-mount-materialization-recovery-gemini-c8b0e3a5",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal_plan.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+        "tests/test_ariadne_orchestrator_preflight.py"
+      ],
+      "id": "C03"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal_plan.py"
+      ],
+      "id": "C04"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal_plan.py"
+      ],
+      "id": "C05"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from scripts import raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal as r; c=r.load_contract(); p=r.validate_materialization_source(c); assert c['native']['attempt_id']=='check-in-preset-mount-effective-tool-native-003'; assert len(c['native']['failed_prelaunch_attempts'])==2; assert p['materialization_process_count']==0 and len(p['validated_packages'])==6; assert p['package_json_sha256']=='0009f94a6b9c3495404d4a1a89e0eef82ba4948c4ea29994c210a271390e64db'; assert p['package_lock_sha256']=='a89defcd8a2c5aae4a54c03bda98e2585711fce881b4b08c90ca4808d45555f4'; assert p['node_modules_lock_sha256']=='f68d8d35b440a2d72417f8a50ec6017e28ace9a15da9466ff25d05cdbf7664a4'"
+      ],
+      "id": "C06"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from scripts import raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal as r; f=r.run_materialization_fixture(); assert f=={'result':'pass','materialization_process_count':0,'critical_package_count':6,'copied_package_root_observed':True,'disposable_root_absent':True}"
+      ],
+      "id": "C07"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import inspect; from scripts import raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal as r; py=inspect.getsource(r.execute_native); materialize='package_root, _ = materialize_accepted_node_modules'; proof='proof.mkdir(parents=True)'; consumed='_write_json(NATIVE_CONSUMED_PATH, consumed, exclusive=True)'; launch='process = subprocess.Popen('; assert py.index(materialize) < py.index(proof) < py.index(consumed) < py.index(launch); assert '_offline_install' not in py; assert 'for _cleanup_attempt in range(26)' in py; assert 'NATIVE_CLEANUP_FAILED' in py; assert '\"raw_logs_retained\": not root_absent' in py"
+      ],
+      "id": "C08"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from scripts import raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal as r; assert (r.CONTINUITY_ROOT/'native-attempt-001-prelaunch-failure.json').is_file(); assert (r.CONTINUITY_ROOT/'native-attempt-002-prelaunch-failure.json').is_file(); assert not r.NATIVE_CHECKPOINT_PATH.exists(); assert not r.NATIVE_CONSUMED_PATH.exists(); assert not r.NATIVE_TERMINAL_PATH.exists(); assert not r.NATIVE_REPORT_PATH.exists()"
+      ],
+      "id": "C09"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "687863138593e8cac3c84258c27bab0fc889d77b..c8b0e3a587191b65da212edda36b8b833a2ecc2c"
+      ],
+      "id": "C10"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "687863138593e8cac3c84258c27bab0fc889d77b..c8b0e3a587191b65da212edda36b8b833a2ecc2c"
+      ],
+      "id": "C11"
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "id": "C12"
+    }
+  ],
+  "ended_at": "2026-08-20T10:12:51.842927Z",
+  "failure_command_id": null,
+  "provider_free_no_database_admission_sha256": "sha256:e994c64ad19d18da9afad172785f8cfc55c35bd6a718b28d2dc9a22cea408e0e",
+  "repo_root": "C:\\Users\\sarashera\\EMR4-worktrees\\preset-mount-materialization-recovery-gemini-c8b0e3a5",
+  "results": [
+    {
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "elapsed_ms": 46,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C01",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 63,
+      "stdout_sha256": "fad875026c246841c206ac5da1e90a0a772f913bd3c6451156c8b637f32515bd"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "elapsed_ms": 22,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C02",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 41,
+      "stdout_sha256": "be3dc22079c6ecaaef72f7283c6ea4634393f3fb07a1c9d4dddd2e64be49a72a"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/preset-mount-materialization-recovery-gemini-c8b0e3a5",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal_plan.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_row_service_path_recovery.py",
+        "tests/test_ariadne_orchestrator_preflight.py"
+      ],
+      "elapsed_ms": 45480,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C03",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 162,
+      "stdout_sha256": "c827e9ecf9d5c99ad17611fc51d34b0960d7b029efc9114db56af59fec9e212a"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal_plan.py"
+      ],
+      "elapsed_ms": 23,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C04",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 19,
+      "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal_plan.py"
+      ],
+      "elapsed_ms": 77,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C05",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from scripts import raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal as r; c=r.load_contract(); p=r.validate_materialization_source(c); assert c['native']['attempt_id']=='check-in-preset-mount-effective-tool-native-003'; assert len(c['native']['failed_prelaunch_attempts'])==2; assert p['materialization_process_count']==0 and len(p['validated_packages'])==6; assert p['package_json_sha256']=='0009f94a6b9c3495404d4a1a89e0eef82ba4948c4ea29994c210a271390e64db'; assert p['package_lock_sha256']=='a89defcd8a2c5aae4a54c03bda98e2585711fce881b4b08c90ca4808d45555f4'; assert p['node_modules_lock_sha256']=='f68d8d35b440a2d72417f8a50ec6017e28ace9a15da9466ff25d05cdbf7664a4'"
+      ],
+      "elapsed_ms": 210,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C06",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from scripts import raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal as r; f=r.run_materialization_fixture(); assert f=={'result':'pass','materialization_process_count':0,'critical_package_count':6,'copied_package_root_observed':True,'disposable_root_absent':True}"
+      ],
+      "elapsed_ms": 17951,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C07",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import inspect; from scripts import raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal as r; py=inspect.getsource(r.execute_native); materialize='package_root, _ = materialize_accepted_node_modules'; proof='proof.mkdir(parents=True)'; consumed='_write_json(NATIVE_CONSUMED_PATH, consumed, exclusive=True)'; launch='process = subprocess.Popen('; assert py.index(materialize) < py.index(proof) < py.index(consumed) < py.index(launch); assert '_offline_install' not in py; assert 'for _cleanup_attempt in range(26)' in py; assert 'NATIVE_CLEANUP_FAILED' in py; assert '\"raw_logs_retained\": not root_absent' in py"
+      ],
+      "elapsed_ms": 171,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C08",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from scripts import raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal as r; assert (r.CONTINUITY_ROOT/'native-attempt-001-prelaunch-failure.json').is_file(); assert (r.CONTINUITY_ROOT/'native-attempt-002-prelaunch-failure.json').is_file(); assert not r.NATIVE_CHECKPOINT_PATH.exists(); assert not r.NATIVE_CONSUMED_PATH.exists(); assert not r.NATIVE_TERMINAL_PATH.exists(); assert not r.NATIVE_REPORT_PATH.exists()"
+      ],
+      "elapsed_ms": 171,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C09",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "687863138593e8cac3c84258c27bab0fc889d77b..c8b0e3a587191b65da212edda36b8b833a2ecc2c"
+      ],
+      "elapsed_ms": 29,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C10",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "687863138593e8cac3c84258c27bab0fc889d77b..c8b0e3a587191b65da212edda36b8b833a2ecc2c"
+      ],
+      "elapsed_ms": 25,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C11",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 2138,
+      "stdout_sha256": "8fd32840d075b541334263cb1ae6af5c78d0c8565a9fc631dd3ec6995fb152c9"
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "elapsed_ms": 39,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C12",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 63,
+      "stdout_sha256": "fad875026c246841c206ac5da1e90a0a772f913bd3c6451156c8b637f32515bd"
+    }
+  ],
+  "schema_version": "ariadne.validation_run.v1",
+  "started_at": "2026-08-20T10:11:47.549632Z",
+  "status": "passed"
+}
