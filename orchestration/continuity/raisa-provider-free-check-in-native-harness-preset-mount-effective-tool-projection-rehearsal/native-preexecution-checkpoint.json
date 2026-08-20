@@ -1,0 +1,26 @@
+{
+  "schema_version": "ariadne.check_in_preset_mount_native_checkpoint.v1",
+  "operation_id": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+  "status": "admitted",
+  "candidate_source": "3c99d1d41da915aebcf5238a73b7e99fd5d54bc1",
+  "review_receipt": "orchestration/agent_inbox/antigravity/raisa-check-in-preset-mount-effective-tool-projection-gemini37-review-receipt.json",
+  "review_receipt_sha256": "c190cec2203e0d7c1176922bd503b27ff0c86250647b80d6ce222d76c37dd63d",
+  "attempt_id": "check-in-preset-mount-effective-tool-native-001",
+  "native_process_limit": 1,
+  "automatic_retry_limit": 0,
+  "timeout_seconds": 75,
+  "expected_events": [
+    "sentinel_activated",
+    "stock_headless_hmr_ready",
+    "effective_roots_entered",
+    "effective_roots_passed",
+    "effective_tool_guard_started",
+    "effective_tool_projection_passed",
+    "scope_disposed",
+    "effective_tool_guard_terminal",
+    "app_exit_requested"
+  ],
+  "runner_sha256": "fbf59725b2e7e06e49179e81ed42bc36646c566cad3d82923188695829cb8ef6",
+  "guard_sha256": "6678ed31bdcd30a5018689b72ad509c182854bf5d63862f59b397acc8de40894",
+  "checkpoint_admitted": true
+}
