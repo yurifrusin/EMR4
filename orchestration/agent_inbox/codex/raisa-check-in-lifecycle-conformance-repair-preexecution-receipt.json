@@ -1,0 +1,126 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in server post-readiness exit-state and stdin-lifecycle conformance repair",
+    "completed_stage": "At exact full Git source 0c2918e78e86ecd006190850ee29f7c58766fa20, the closed lifecycle repair passes 50 provider-free tests, Ruff, compilation and deterministic admission. The retained rc.7 package graph, source methods, preset bytes and immutable attempt-005 evidence remain exact. No native Harness process, provider request, Docker object or database process has run.",
+    "next_executable_stage": "execute_exactly_one_provider_disabled_native_agent_creation_and_preset_mount_probe_without_followup_provider_request_retry_docker_or_database",
+    "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+    "resume_after_compaction": true,
+    "source_head": "01aa75b1df25dbf2570c483152fcca2a782f0217",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "01aa75b1df25dbf2570c483152fcca2a782f0217",
+    "reason_codes": [],
+    "resolved_commit": "01aa75b1df25dbf2570c483152fcca2a782f0217",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "01aa75b1df25dbf2570c483152fcca2a782f0217"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "01aa75b1df25dbf2570c483152fcca2a782f0217",
+    "branch_origin_aligned": true,
+    "head": "01aa75b1df25dbf2570c483152fcca2a782f0217",
+    "origin_branch_commit": "01aa75b1df25dbf2570c483152fcca2a782f0217",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 656
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "native_probe_preexecution",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native DeepSeek Harness lifecycle is the provider-disabled evidence subject; a DeepSeek worker or Claude Code fallback would violate and confound the claim.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "One fresh Gemini 3.7 Flash/high isolated read-only veto remains reserved until the sole terminal and exact candidate are committed.",
+        "work_packages": [
+          "future_exact_candidate_and_native_lifecycle_terminal_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation, and one retained installation, process, consumed latch, terminal and cleanup boundary is indivisible.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "terminal_captured",
+      "pre_verifier",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "the first and only Popen consumes check-in-lifecycle-native-mount-probe-001",
+      "no second process is permitted after success failure timeout or instrumentation-unavailable yield",
+      "the native process creates and disposes one provider-disabled agent without followup",
+      "preset discovery validation resolution standing scope binding and effective tools must be marked",
+      "Gemini becomes eligible only after the sole terminal is committed"
+    ]
+  },
+  "planned_action": "execute_one_provider_disabled_native_harness_lifecycle_probe",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-plan.md",
+      "docs/security/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/contract.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/evidence.schema.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/server-post-readiness.schema.json",
+      "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+      "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+      "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+      "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+      "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns deterministic admission, one provider-disabled native Harness agent-creation and preset-mount process, terminal capture, cleanup, recovery, acceptance, clockwork and Git. DeepSeek is declined because the native Harness lifecycle is the evidence subject and no provider request is admitted. Gemini 3.7 Flash/high remains reserved for one later exact-candidate read-only veto. Native subagents are declined by current developer policy and the indivisible one-process terminal boundary.",
+    "git_refs_and_worktree": "The deterministic lifecycle implementation is exact source 0c2918e78e86ecd006190850ee29f7c58766fa20 and the clockwork-ownership repair source is exact HEAD 01aa75b1df25dbf2570c483152fcca2a782f0217 on codex/ariadne-bernie-davida-parallel-seam, aligned with origin. Local/origin master and handoff/current are exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Tracked source is clean; only the untracked checkpoint intent and receipt inputs are pending. docs/branding and every unrelated untracked file remain preserved; explicit-path staging only. Native consumed and terminal artifacts are absent.",
+    "live_handover_current_baton": "AGENTS.md was read completely. The live baton preserves the accepted check-in adapter and failed-closed attempt-005 evidence, and names this provider-disabled lifecycle conformance repair as the active successor operation.",
+    "protected_evidence_boundaries": "Attempts 001 through 005 and their retained evidence are immutable. The only admitted process is check-in-lifecycle-native-mount-probe-001 using the exact retained rc.7 installation, 158-byte preset and provider-disabled profile. First Popen permanently consumes it; no retry, followup, model/provider request, network, credential, Docker/database, product/data/runtime/deployment/Pages or protected-ref path is authorised."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
