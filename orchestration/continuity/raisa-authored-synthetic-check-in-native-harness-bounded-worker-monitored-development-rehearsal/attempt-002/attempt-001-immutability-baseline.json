@@ -1,0 +1,53 @@
+{
+  "schema_version": "ariadne.synthetic_native_worker_attempt_001_immutability_baseline.v1",
+  "captured_at": "2026-08-20T22:39:01.8882125+10:00",
+  "purpose": "Bind the complete retained attempt-001 occupied lifecycle artifacts before attempt-002 preparation so any overwrite or reuse fails closed.",
+  "attempt_001_operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal",
+  "attempt_001_id": "deepseek-native-synthetic-window-worker-001",
+  "artifacts": {
+    "occupied-preexecution-checkpoint.json": {
+      "sha256": "f4501f0b548480daad3f5acc094e0cfa29ef2db423da76615fc43bf2b0346224",
+      "bytes": 1313
+    },
+    "occupied-attempt-preparation.json": {
+      "sha256": "cabc8e42eafc7c6859df511fcfa896455862d8020de021e2f3b12925d3858fc5",
+      "bytes": 2133
+    },
+    "work-order-v2.json": {
+      "sha256": "667f64cb43e8853c09a679d4bc52d7cf9a025e8e5db9b6e1768b57cfb51d7353",
+      "bytes": 1191
+    },
+    "worker-authority.json": {
+      "sha256": "c07c17c7c72da0e87e8e55a0a42bb35a296779ff9fc9ee34f76115b58851bab9",
+      "bytes": 643
+    },
+    "forbidden-surfaces.json": {
+      "sha256": "e1e373d576cf397e5692e2bda06dcb9311c0d82fad86997f24c3a8cd4927e3e5",
+      "bytes": 432
+    },
+    "command-manifest.json": {
+      "sha256": "057f2eae46fd2a1dc0a17381448ba256dc312faf48608cbb7aa91e1789de6975",
+      "bytes": 661
+    },
+    "provider-free-no-database-admission.json": {
+      "sha256": "3ae8d2e97a69b54777fb9b8fca2fe5b9b326ba40c907f8d7972d0c35ca2fe9fa",
+      "bytes": 6163
+    },
+    "occupied-attempt-consumed.json": {
+      "sha256": "cb4613ebe46f122e24e5fb11a7b48bcba47be8f30c23b75e5d0d4d9ec9fd3541",
+      "bytes": 369
+    },
+    "occupied-terminal.json": {
+      "sha256": "38cd1854c555de83bbe00757bed4e7744215d4f1996fc2910f37bdc7c8d020e1",
+      "bytes": 1494
+    },
+    "occupied-terminal.schema.json": {
+      "sha256": "85a6f0158a1a83c860d0ae2a32706dea4171b27cadca2acdf0a4ac8a2a70b9ee",
+      "bytes": 5205
+    },
+    "occupied-report.md": {
+      "sha256": "70d0022c39ee10ae8a3086dffcfe2e2f94e733439588bc1421e3d8c0aa9a759d",
+      "bytes": 557
+    }
+  }
+}

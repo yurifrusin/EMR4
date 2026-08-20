@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.synthetic_native_worker_checkpoint.v1",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+  "attempt_id": "deepseek-native-synthetic-window-worker-002",
+  "status": "admitted",
+  "candidate_source": "7f14d9eb2490aa0864feb8d70f1dcd9a2422747b",
+  "review_receipt": "orchestration/agent_inbox/antigravity/raisa-authored-synthetic-native-worker-attempt-002-gemini37-review-receipt.json",
+  "review_receipt_sha256": "0a117da62c5201efe0211905c3418a2150258a7f5ef8b209b9c7a85e470dbccd",
+  "preparation_sha256": "f7631a852c5891b5ec5e23ce1b29f03899ea494a7e85e863be2d1f8adf9e5859",
+  "work_order_sha256": "d2dbec5585e1cf45bfa790ee2249042b9694cb5e0725a1b72c5c02c3e0ad2636",
+  "runner_sha256": "17de168d6d0e498f3738e49b107a82bc64b52cf4546c577bb534bcd32fc67402",
+  "prompt_sha256": "4c7c2902d60d066f90ab1bf160277fbda4ef5bb6d1bd9ee999324a394e3c2cef",
+  "attempt_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-synthetic-window-worker-002",
+  "native_process_limit": 1,
+  "provider_request_limit": 1,
+  "automatic_retry_limit": 0,
+  "fallback_limit": 0,
+  "auxiliary_model_call_limit": 0,
+  "expected_tool_names": ["edit"],
+  "expected_changed_paths": ["synthetic_window_coalescer.py"],
+  "checkpoint_admitted": true
+}
