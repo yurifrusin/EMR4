@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will next freeze the default-off canonical check-in route-adapter convergence rehearsal and may allocate its first explicitly brokered native-Harness DeepSeek worker package.
+> EMR4 will perform exactly one freshly frozen provider-free native composition boot before considering any occupied DeepSeek worker.
 
 ## North star
 
@@ -462,28 +462,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The missing required-service graph is exact, the future declaration is frozen, two verifier defects are corrected and one exact independent veto passes. Lineage parent: `deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot`.
 223. **Connect the DeepSeek native Harness to Ariadne's clockwork through an exact inspectable preset and a separately enforced least-authority tool boundary — DeepSeek native Harness provider-free emr4-bounded-worker preset materialisation recovery**
    The custom preset payload is exact, hostile variants fail closed and one first-attempt independent veto passes without starting the native Harness. Lineage parent: `deepseek-native-harness-provider-free-required-service-injection-recovery`.
-224. **Connect the native DeepSeek Harness to Ariadne's clockwork with observable dependency gating and least-authority tools before any occupied worker assignment — DeepSeek native Harness provider-free complete-composition native-boot recovery**
-   One real provider-free rc.7 boot proved exact service activation, preset mount and edit/glob/read projection with bounded terminal and cleanup. Lineage parent: `deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery`.
 
 ## Current position
 
-**Use the now-observed native Harness boundary for one explicitly brokered, default-off EMR4 worker package — DeepSeek native Harness provider-free complete-composition native-boot recovery**
+**Prove the accepted service graph and exact bounded preset together in one native provider-free composition — DeepSeek native Harness provider-free emr4-bounded-worker preset materialisation recovery**
 
-**Why this proof came next:** Required services, exact preset discovery, guard enforcement, terminal observation and cleanup have passed together, so the next uncertainty is occupied worker usefulness under Ariadne control rather than Harness plumbing.
+**Why this proof came next:** The service-injection repair and exact preset payload are separately proven, so a single bounded native process can now test their composition without exposing a model/provider boundary.
 
-The native Harness composition seam is accepted; the product track can resume with a bounded worker allocation and unchanged default-off authority.
+The preset is installation-ready and its deterministic effective-tool projection is accepted; the remaining uncertainty is native discovery, activation and runtime observation.
 
 ### What this unlocks
 
-- A fresh work order can bind DeepSeek to exact branch, files, tools, acceptance and cost records.
-- The default-off A5.1 route-adapter convergence rehearsal can be the first useful EMR4 package.
-- Clockwork and broker evidence can measure worker traceability and failure shape during real development.
+- One process can test discovery and mount of the exact repository payload.
+- The accepted required-service graph can be observed reaching readiness before runner activation.
+- The accepted guard can be observed producing exactly edit, glob and read before any agent or provider is eligible.
 
 ### What it does not solve
 
-- No occupied-worker reliability or coding-quality conclusion exists yet.
-- No ordinary-practice route is enabled and no product data is admitted.
-- No production, deployment, release, Pages or protected integration opens.
+- No native composition success has yet been observed.
+- No occupied DeepSeek worker, broker, model or provider reliability is proved.
+- No product, data, runtime, deployment, release, Pages or protected integration opens.
 
 ## Continuity and authority
 
@@ -1222,8 +1220,8 @@ Prerequisites:
 - `docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-plan.md`
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md`
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md`
-- `docs/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-closeout.md`
+- `docs/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md`
 - `docs/diary/diary.css`
 - `docs/diary/diary.html`
@@ -1774,7 +1772,6 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/ariadne-prime-derived-harness-adaptations-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-risk-weighted-workflow-reform-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/ariadne-transactional-closeout-control-plane-gemini37-corrected-review-receipt.json`
-- `orchestration/agent_inbox/antigravity/deepseek-native-harness-complete-composition-native-boot-recovery-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/deepseek-native-harness-effective-tool-composition-terminal-coordinate-guard-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/deepseek-native-harness-hmr-boot-proof-gemini37-review-receipt.json`
@@ -1949,7 +1946,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2588,8 +2585,6 @@ Prerequisites:
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/manifest.xml`
 - `orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.schema.json`
 - `orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml`
-- `orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/efficacy-reading.json`
-- `orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/provider-free-complete-composition-native-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/provider-free-effective-tool-guard-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/efficacy-reading.json`
@@ -3254,7 +3249,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-architecture.md`
 - `orchestration/human_inbox/yuri/2026-08-19--shadow-clockwork-deepseek-broker-gear-rehearsal.md`
 - `orchestration/human_inbox/yuri/2026-08-19--unmounted-check-in-admission-control-kernel-rehearsal.md`
-- `orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-complete-composition-native-boot-recovery.md`
+- `orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-emr4-bounded-worker-preset-materialisation-recovery.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3562,4 +3557,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 329; continuity graph revision 347._
+_Compass map revision 328; continuity graph revision 346._

@@ -1,0 +1,125 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free default-off canonical check-in route-adapter convergence rehearsal",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-complete-composition-native-boot-recovery at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_and_freeze_default_off_route_adapter_convergence_plan_and_brokered_worker_allocation",
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "3ac06830de46c9f5debaf3efb5c36c2efd581a4b",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "642e315772548ca4589f7bf87914f6dd74b235bc",
+    "reason_codes": [],
+    "resolved_commit": "3ac06830de46c9f5debaf3efb5c36c2efd581a4b",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "3ac06830de46c9f5debaf3efb5c36c2efd581a4b"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "642e315772548ca4589f7bf87914f6dd74b235bc",
+    "branch_origin_aligned": false,
+    "head": "642e315772548ca4589f7bf87914f6dd74b235bc",
+    "origin_branch_commit": "2678b43abec8f29e7af432a0a3c64759fada8fda",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 656
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The proposed worker target is already accepted at c82c3a741053a9c8da260aa62e1a968af22bb54e. Dispatch would duplicate accepted work and corrupt lineage; the native Harness remains available only after a distinct successor and WorkOrder are frozen.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini 3.7 Flash/high is reserved for a fresh exact-candidate veto only if the successor repair changes material clockwork semantics. No verifier call is eligible during diagnosis.",
+        "work_packages": [
+          "conditional_fresh_exact_successor_repair_veto"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation, and accepted-versus-next lineage diagnosis is one serial authority decision owned by Sol.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "successor_diagnosis_complete",
+      "corrected_successor_frozen",
+      "pre_worker_dispatch",
+      "pre_verifier",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "the five-source receipt and accepted-versus-next comparison precede any plan or dispatch",
+      "the accepted c82c3a route result must remain immutable",
+      "successor resolution must derive from the latest accepted product and Harness closeouts rather than prompt recency",
+      "no product source, provider/model process, Docker/database process or worker may start during diagnosis",
+      "clockwork check and publication remain separate fail-closed commands",
+      "Sol alone accepts the corrected successor and integrates it"
+    ]
+  },
+  "planned_action": "fail_closed_and_repair_clockwork_successor_repetition_before_any_product_or_worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-threat-model-delta.md",
+      "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-default-off-check-in-route-adapter-sol-acceptance.md",
+      "docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-closeout.md",
+      "docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-closeout.md",
+      "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-closeout.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns fail-closed diagnosis, successor-resolution repair, deterministic checks, clockwork recovery, acceptance and Git under Yuri's standing uninterrupted-development authority. DeepSeek native Harness receives no worker package while its proposed operation is already accepted and therefore not a valid WorkOrder target. Gemini 3.7 Flash/high is reserved only if a materially changed exact repair candidate requires an independent veto. Native subagents are declined because current developer policy prohibits proactive delegation and the diagnosis is a serial authority-consistency check.",
+    "git_refs_and_worktree": "Task HEAD is exact 642e315772548ca4589f7bf87914f6dd74b235bc on codex/ariadne-bernie-davida-parallel-seam; origin task remains 2678b43abec8f29e7af432a0a3c64759fada8fda. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Accepted c82c3a741053a9c8da260aa62e1a968af22bb54e, 27101faa86b5aa3850e90bc4ded8600e5f8d7dc9 and 4204ec6348abb0f92b1a30314699d4a469fa860a are ancestors of HEAD. Tracked and staged state was clean before this receipt; 654 unrelated untracked entries including docs/branding were preserved. No protected ref moved.",
+    "live_handover_current_baton": "AGENTS.md was read completely as 137125 characters / 517 lines with SHA-256 525fbbe1f09fc3c2213944773433b266ba6a8469dc4d118abfc68304614aaff6. Its live Current Baton already accepts default-off canonical check-in route convergence at full reviewed source c82c3a741053a9c8da260aa62e1a968af22bb54e, later admission readiness at 27101faa86b5aa3850e90bc4ded8600e5f8d7dc9 and the unmounted admission kernel at 4204ec6348abb0f92b1a30314699d4a469fa860a. The generated Next implementation and active latch nevertheless repeat the already accepted c82c3a route tranche, so no product plan or worker dispatch is admissible until successor resolution is repaired.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 and raw historical Diary material remain sealed. No accepted product tranche may be repeated or rewritten. No ordinary-practice enablement, feature-flag or allowlist change, command mounting, generic-status Arrived change, action grammar, first-party client, waiting-area movement, product/patient/appointment/clinical/historical/protected data, provider/model call, occupied worker, Docker/database execution, production runtime, deployment, release, Pages or protected-ref movement is authorised during successor repair. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

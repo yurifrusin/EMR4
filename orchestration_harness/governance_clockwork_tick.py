@@ -604,6 +604,15 @@ def _intent_operation_id(intent: dict[str, Any]) -> str:
     return intent["operation_id"]
 
 
+def _reject_recorded_next_operation(
+    graph: dict[str, Any], operation_id: str
+) -> None:
+    """Keep an immutable operation identity out of every successor latch."""
+
+    if any(node.get("id") == operation_id for node in graph["nodes"]):
+        _reject("tick_next_operation_already_recorded")
+
+
 def _derive_blocked_latch(
     latch: dict[str, Any], intent: dict[str, Any]
 ) -> dict[str, Any]:
@@ -985,6 +994,9 @@ def build_tick_generation(
         _reject("tick_active_operation")
     graph = json.loads(current["continuity"].decode("utf-8"))
     compass = json.loads(current["compass"].decode("utf-8"))
+    _reject_recorded_next_operation(
+        graph, manifest["next_operation"]["operation_id"]
+    )
     try:
         bundle = tc.prepare_transaction(
             manifest,
@@ -1166,9 +1178,12 @@ def build_user_decision_tick_generation(
     source_latch = validate_active_operation(
         json.loads(current["active_latch"].decode("utf-8"))
     )
-    next_latch = _derive_user_decision_latch(source_latch, intent, source)
     graph = json.loads(current["continuity"].decode("utf-8"))
     compass = json.loads(current["compass"].decode("utf-8"))
+    _reject_recorded_next_operation(
+        graph, intent["next_operation"]["operation_id"]
+    )
+    next_latch = _derive_user_decision_latch(source_latch, intent, source)
     baton = _render_user_decision_baton(
         current["current_baton"].decode("utf-8"),
         intent=intent,

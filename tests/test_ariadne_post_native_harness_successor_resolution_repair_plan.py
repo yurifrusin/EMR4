@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 
@@ -11,6 +12,8 @@ THREAT = (
     / "docs/security/ariadne-post-native-harness-successor-resolution-repair-threat-model-delta.md"
 )
 BATON = ROOT / "AGENTS.md"
+GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
+LATCH = ROOT / "orchestration/continuity/ariadne-active-operation-latch/current.json"
 
 
 def test_plan_freezes_exact_accepted_route_and_read_only_successor() -> None:
@@ -47,11 +50,10 @@ def test_live_next_tranche_does_not_intersect_accepted_plan_names() -> None:
     next_row = next(
         line for line in baton.splitlines() if line.startswith("| Next implementation |")
     )
-    accepted_plan_names = set(re.findall(r"`docs/([a-z0-9-]+)-plan\\.md`", baton))
     next_names = set(re.findall(r"`([a-z0-9]+(?:-[a-z0-9]+)+)`", next_row))
-    assert next_names
-    assert accepted_plan_names.isdisjoint(next_names)
-    assert (
-        "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-"
-        "admission-readiness-review"
-    ) in next_names
+    assert len(next_names) == 1
+    next_operation = next(iter(next_names))
+    latch = json.loads(LATCH.read_text(encoding="utf-8"))
+    graph = json.loads(GRAPH.read_text(encoding="utf-8"))
+    assert latch["operation_id"] == next_operation
+    assert next_operation not in {node["id"] for node in graph["nodes"]}

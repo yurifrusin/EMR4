@@ -18,7 +18,7 @@
         "notes": [
           "Yuri's standing uninterrupted-development authority admitted exactly one provider-free native Harness composition process and its clockwork closeout.",
           "The sole process contacted no agent, broker, DeepSeek model or provider and no second process is authorised.",
-          "The successor returns to the existing default-off check-in route-adapter authority and requires its own freshly frozen brokered worker allocation."
+          "The unrepeated successor is relay-free recovery attempt 005 and requires its own exact one-run plan, brokered worker allocation and preexecution admission."
         ]
       },
       "decisions": [
@@ -51,6 +51,18 @@
           "source": "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/clockwork-tick-attempt-001-evidence.json",
           "status": "rejected",
           "summary": "Preserve lease 58 and its byte-exact lease-59 rollback after the postpublication suite found the generated next latch omitted one exact legacy closed-boundary compatibility token."
+        },
+        {
+          "id": "reject-recorded-route-operation-as-successor",
+          "source": "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-stale-successor-recovery-addendum.md",
+          "status": "rejected",
+          "summary": "Preserve lease 60 and its stale latch after fresh rehydration proved the selected route-adapter operation was already accepted at c82c3a741053a9c8da260aa62e1a968af22bb54e."
+        },
+        {
+          "id": "accept-graph-identity-successor-interlock-and-rollback",
+          "source": "orchestration_harness/governance_clockwork_tick.py",
+          "status": "accepted",
+          "summary": "Accept byte-exact rollback lease 61 and reject every prospective next operation ID already present in the validated Continuity graph before projection or publication."
         }
       ],
       "claim_scope": [
@@ -61,13 +73,17 @@
         "All provider-boundary counts were zero and process/root cleanup was complete.",
         "The independent manifest passed 86 safe tests and ten zero-exit commands.",
         "Six ancillary mock Node unit-test processes and one verifier filename-grounding lapse are recorded as contained procedure incidents.",
+        "Stale lease 60, the invalid first recovery receipt and the historical hard-coded successor guard are retained as corrected governance incidents.",
+        "The corrected successor is the unrepeated attempt-005 planning operation; attempt 004 remains immutable.",
         "No occupied worker, broker, DeepSeek reasoning, coding reliability, product suitability or production isolation is claimed."
       ],
       "contract_evidence": [],
       "evidence": {
         "plans": [
           "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-plan.md",
-          "docs/security/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-threat-model-delta.md"
+          "docs/security/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-stale-successor-recovery-addendum.md",
+          "docs/security/deepseek-native-harness-provider-free-complete-composition-native-boot-stale-successor-recovery-threat-model-delta.md"
         ],
         "findings": [
           "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/provider-free-complete-composition-native-boot-evidence.json",
@@ -80,7 +96,10 @@
           "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-preplanning-receipt.json",
           "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-preexecution-receipt.json",
           "orchestration/agent_inbox/codex/deepseek-native-harness-complete-composition-native-boot-recovery-pre-verifier-receipt.json",
-          "orchestration/agent_inbox/antigravity/deepseek-native-harness-complete-composition-native-boot-recovery-gemini37-review-receipt.json"
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-complete-composition-native-boot-recovery-gemini37-review-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-stale-successor-preplanning-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-stale-successor-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-complete-composition-stale-successor-recovery-precommit-receipt.json"
         ],
         "tests": [
           "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
@@ -91,6 +110,7 @@
           "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
           "tests/test_ariadne_agent_error_register.py",
           "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py",
           "tests/test_ariadne_active_operation_latch.py",
           "tests/test_current_baton_consistency.py"
         ],
@@ -107,13 +127,17 @@
           "docs/ariadne-agent-error-correction-register-revision-570.md",
           "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/clockwork-tick-attempt-001-evidence.json",
           "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/clockwork-tick-attempt-001-report.md",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration/agent_inbox/codex/raisa-check-in-stale-successor-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-complete-composition-stale-successor-recovery-precommit-runtime-state.json",
           "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/closeout-intent.json"
         ]
       },
       "unresolved_gates": [
         "No occupied DeepSeek worker or brokered work order has yet been executed through the native Harness.",
         "The outer broker allowlist, work-order ledger and provider-cost boundary remain mandatory for the first occupied assignment.",
-        "The next product tranche remains default-off and authorises no ordinary-practice enablement or product data.",
+        "Attempt 005 has no execution authority until its distinct plan, WorkOrder, deterministic admission and clockwork checkpoint pass.",
+        "Dedicated check-in remains default-off and no ordinary-practice enablement or product data is authorised.",
         "No production, deployment, release, Pages or protected integration is open."
       ]
     },
@@ -127,12 +151,12 @@
       ]
     },
     "current_position": {
-      "strategic_role": "Use the now-observed native Harness boundary for one explicitly brokered, default-off EMR4 worker package",
-      "why_now": "Required services, exact preset discovery, guard enforcement, terminal observation and cleanup have passed together, so the next uncertainty is occupied worker usefulness under Ariadne control rather than Harness plumbing.",
-      "outcome": "The native Harness composition seam is accepted; the product track can resume with a bounded worker allocation and unchanged default-off authority.",
+      "strategic_role": "Use the now-observed native Harness boundary for one explicitly brokered relay-free recovery worker package",
+      "why_now": "Required services, exact preset discovery, guard enforcement, terminal observation and cleanup have passed together, while attempt 004's accepted attachment repair leaves attempt 005 as the narrowest unrepeated product evidence gap.",
+      "outcome": "The native Harness composition seam is accepted; the relay-free recovery track can freeze attempt 005 without repeating accepted route work or changing default-off authority.",
       "unlocks": [
         "A fresh work order can bind DeepSeek to exact branch, files, tools, acceptance and cost records.",
-        "The default-off A5.1 route-adapter convergence rehearsal can be the first useful EMR4 package.",
+        "A separately frozen attempt-005 adapter and tests can be the first useful post-recovery EMR4 package.",
         "Clockwork and broker evidence can measure worker traceability and failure shape during real development."
       ],
       "does_not_solve": [
@@ -145,19 +169,22 @@
         "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-sol-acceptance.md",
         "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-complete-composition-native-boot-recovery.md"
       ],
-      "orientation_statement": "EMR4 will next freeze the default-off canonical check-in route-adapter convergence rehearsal and may allocate its first explicitly brokered native-Harness DeepSeek worker package."
+      "orientation_statement": "EMR4 will next freeze relay-free recovery attempt 005 and may allocate its first post-recovery explicitly brokered native-Harness DeepSeek worker package."
     },
     "next_operation": {
-      "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
-      "active_tranche": "Raisa provider-free default-off canonical check-in route-adapter convergence rehearsal",
-      "objective": "Make the existing unchanged default-off A5.1 route delegate to the accepted canonical check-in adapter while preserving its feature flag, authored-synthetic practice allowlist, exact request/response contract and default denial; optionally allocate one separately frozen brokered native-Harness DeepSeek worker package without enabling ordinary practice or product data.",
-      "authority_source": "Yuri's original explicit tranche authority, standing uninterrupted-development authority and the accepted check-in adapter at 8de886c5148b3259428c8c517674f10ea92d937e.",
-      "next_stage": "fresh_five_source_rehydration_and_freeze_default_off_route_adapter_convergence_plan_and_brokered_worker_allocation"
+      "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+      "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 005",
+      "objective": "Freeze and deterministically admit the fifth and only fifth separately named provider-free disposable PostgreSQL relay-free recovery attempt around the accepted server-attachment repair; optionally allocate one exact brokered native-Harness DeepSeek adapter/test package, then permit at most one new authored-synthetic execution only after a distinct one-run checkpoint.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, the accepted attempt-004 blocked evidence and server-attachment repair, and the accepted complete-composition native-Harness prerequisite.",
+      "next_stage": "fresh_five_source_rehydration_and_freeze_attempt_005_plan_work_order_and_preexecution_gates"
     },
     "incidents": [
       {"incident_id": "ancillary-mock-node-unit-test-plan-deviation", "source_id": "complete-composition-native-boot-local-verification", "peers": []},
       {"incident_id": "gemini-incident-test-module-filename-misattribution", "source_id": "complete-composition-native-boot-gemini-veto", "peers": []},
-      {"incident_id": "clockwork-next-operation-legacy-boundary-token-omission", "source_id": "complete-composition-native-boot-clockwork-attempt-001", "peers": []}
+      {"incident_id": "clockwork-next-operation-legacy-boundary-token-omission", "source_id": "complete-composition-native-boot-clockwork-attempt-001", "peers": []},
+      {"incident_id": "clockwork-recorded-operation-selected-as-successor", "source_id": "complete-composition-native-boot-clockwork-lease-60", "peers": []},
+      {"incident_id": "recovery-receipt-parallelism-enum-mismatch", "source_id": "stale-successor-preplanning-attempt-001", "peers": []},
+      {"incident_id": "historical-successor-guard-hard-coded", "source_id": "post-native-harness-successor-guard", "peers": []}
     ],
     "broker": {"enabled": false, "posture": "provider_free_shadow"}
   },
@@ -183,6 +210,7 @@
           "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
           "tests/test_ariadne_agent_error_register.py",
           "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py",
           "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
           "tests/test_ariadne_transactional_closeout.py",
           "tests/test_ariadne_active_operation_latch.py",
@@ -193,13 +221,13 @@
       {
         "command_id": "complete_composition_native_boot_closeout_ruff",
         "executable": ".venv/Scripts/python.exe",
-        "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py", "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py", "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py"],
+        "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py", "orchestration_harness/governance_clockwork_tick.py", "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py", "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py"],
         "completion_contract": "final_exit_code_zero_required"
       },
       {
         "command_id": "complete_composition_native_boot_closeout_compile",
         "executable": ".venv/Scripts/python.exe",
-        "arguments": ["-m", "py_compile", "scripts/deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py", "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py", "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py"],
+        "arguments": ["-m", "py_compile", "scripts/deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py", "orchestration_harness/governance_clockwork_tick.py", "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py", "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py"],
         "completion_contract": "final_exit_code_zero_required"
       },
       {
@@ -215,9 +243,14 @@
     "paths": [
       "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-plan.md",
       "docs/security/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-stale-successor-recovery-addendum.md",
+      "docs/security/deepseek-native-harness-provider-free-complete-composition-native-boot-stale-successor-recovery-threat-model-delta.md",
       "scripts/deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
       "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
       "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py",
+      "orchestration_harness/governance_clockwork_tick.py",
+      "tests/test_ariadne_governance_clockwork_tick.py",
+      "tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py",
       "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/contract.json",
       "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/contract.schema.json",
       "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/evidence.schema.json",
@@ -228,6 +261,11 @@
       "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-preplanning-receipt.json",
       "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-preexecution-runtime-state.json",
       "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-preexecution-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-stale-successor-preplanning-attempt-001-rejected-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-stale-successor-preplanning-runtime-state.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-stale-successor-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-complete-composition-stale-successor-recovery-precommit-runtime-state.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-complete-composition-stale-successor-recovery-precommit-receipt.json",
       "orchestration/agent_inbox/codex/deepseek-native-harness-complete-composition-native-boot-recovery-gemini37-command-manifest.json",
       "orchestration/agent_inbox/codex/deepseek-native-harness-complete-composition-native-boot-recovery-gemini37-review-packet.md",
       "orchestration/agent_inbox/codex/deepseek-native-harness-complete-composition-native-boot-recovery-gemini37-review-worktree-preflight.json",
@@ -244,15 +282,19 @@
     ]
   },
   "next_operation_protected_boundaries": [
-    "provider_free_default_off_canonical_check_in_route_adapter_convergence_rehearsal_only",
-    "existing_a5_1_route_and_feature_flag_remain_default_off",
-    "authored_synthetic_practice_allowlist_only_with_default_denial",
-    "accepted_check_in_adapter_and_exact_request_response_contract_only",
-    "one_separately_frozen_brokered_native_harness_deepseek_worker_package_may_be_allocated",
-    "outer_broker_edit_glob_read_allowlist_and_full_work_order_journal_mandatory",
+    "provider_free_check_in_relay_free_recovery_attempt_005_only",
+    "attempts_001_through_004_immutable_no_retry_resume_overwrite_or_reclassification",
+    "fresh_exact_plan_work_order_deterministic_admission_and_clockwork_checkpoint_before_execution",
+    "at_most_one_new_authored_synthetic_disposable_postgresql_execution_with_zero_automatic_retries",
+    "one_separately_frozen_brokered_native_harness_deepseek_adapter_test_package_may_be_allocated",
+    "outer_broker_edit_glob_read_allowlist_full_work_order_journal_and_no_silent_fallback_mandatory",
+    "worker_cannot_run_docker_database_tests_git_or_acceptance",
+    "accepted_server_attachment_lifetime_observability_repair_and_relay_free_transport_only",
+    "exact_cached_postgresql_16_internal_network_no_published_port_volume_bind_or_external_network",
+    "authored_synthetic_ephemeral_identifiers_only_with_zero_product_or_ordinary_release",
     "no_ordinary_practice_enablement_or_generic_status_arrived_change",
     "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
-    "no_action_grammar_first_party_client_waiting_area_or_live_provider_change",
+    "no_action_grammar_first_party_client_waiting_area_or_other_live_provider_change",
     "no_product_patient_appointment_clinical_historical_or_protected_data",
     "no_production_runtime_deployment_release_or_pages",
     "no_protected_evidence_access_or_protected_ref_movement",
@@ -368,6 +410,111 @@
         ]
       },
       "baton_summary": "preserves lease 58, its byte-exact rollback and the exact prospective legacy boundary-subset control."
+    },
+    {
+      "attempt_key": "complete-composition-recorded-route-successor-selection-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "clockwork_clean_closeout",
+      "stage": "post_closeout_rehydration",
+      "category": "reasoning_claim_error",
+      "process_severity": "high",
+      "expected_invariant": "A newly generated next-operation latch must identify an unrepeated operation absent from the immutable accepted Continuity graph.",
+      "observed_error": "Lease 60 selected raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal even though the graph already records that exact operation accepted at c82c3a741053a9c8da260aa62e1a968af22bb54e and later product descendants are also accepted.",
+      "detection_method": "Fresh complete five-source rehydration compared the generated latch and Baton Next row with exact graph node identities before any worker dispatch or product action.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-stale-successor-recovery-addendum.md",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json",
+        "orchestration/continuity/emr4-continuity-graph.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.recorded_operation_selected_as_clockwork_successor",
+      "causal_claim_level": "root_cause_confirmed",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve stale lease 60, restore the immediately previous generation byte-exactly through rollback lease 61, and correct the successor to separately frozen attempt 005.",
+        "prevention_control": "Before clean-closeout or user-decision projection, reject the prospective next operation ID if it matches any exact node ID in the validated Continuity graph.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py"
+        ]
+      },
+      "baton_summary": "preserves stale lease 60 and byte-exact rollback lease 61, then prevents every recorded graph operation from re-entering the successor latch."
+    },
+    {
+      "attempt_key": "stale-successor-rehydration-parallelism-enum-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "ariadne_orchestrator_preflight",
+      "stage": "pre_sprint_planning",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every parallelism expected_leverage value must be copied from the configured positive, required_independence, neutral or negative vocabulary before receipt generation.",
+      "observed_error": "The first stale-successor receipt used conditional_independence for the reserved Gemini lane and failed with parallelism_lane_leverage_invalid:gemini_verifier.",
+      "detection_method": "The fresh Ariadne preflight returned revision_required with the exact enum reason before planning or dispatch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-check-in-stale-successor-preplanning-attempt-001-rejected-receipt.json",
+        "orchestration/harness_settings/orchestrator_requirements.yaml"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.parallelism_expected_leverage_vocabulary_mismatch",
+      "causal_claim_level": "root_cause_confirmed",
+      "correction": {
+        "status": "corrected",
+        "action": "Preserve the rejected receipt, replace the invented value with required_independence and rerun the same five-source state to an exact passed receipt.",
+        "prevention_control": "Copy every expected_leverage value from orchestration/harness_settings/orchestrator_requirements.yaml; express qualifications only in rationale text and require exact passed readback before planning or dispatch.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-stale-successor-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-stale-successor-preplanning-receipt.json"
+        ]
+      },
+      "baton_summary": "retains the rejected recovery receipt and reuses only the configured parallelism-leverage vocabulary."
+    },
+    {
+      "attempt_key": "historical-successor-guard-hard-coded-001",
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+      "role": "orchestrator",
+      "resource_id": "emr4-repository",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "repository_deterministic_test",
+      "stage": "post_closeout_rehydration",
+      "category": "repository_defect",
+      "process_severity": "high",
+      "expected_invariant": "The accepted-versus-next guard must derive immutable operation identities from current machine state and remain valid as successors advance.",
+      "observed_error": "The historical guard scanned only backticked docs/*-plan.md names and required one old readiness operation, so it neither rejected the recorded route node before publication nor represented the current successor chain.",
+      "detection_method": "The focused test failed on its hard-coded readiness assertion after lease 60 while exact graph inspection showed the route operation was already accepted.",
+      "evidence_paths": [
+        "tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py",
+        "docs/ariadne-post-native-harness-successor-resolution-repair-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.successor_guard_hard_coded_to_historical_operation",
+      "causal_claim_level": "root_cause_confirmed",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the historical successor assertion with graph/latch/Baton identity checks and add the same recorded-ID rejection inside clockwork construction.",
+        "prevention_control": "Successor guards must compare exact operation IDs against the full validated Continuity node set and must not hard-code a dated operation name or infer acceptance from Markdown path formatting.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_post_native_harness_successor_resolution_repair_plan.py"
+        ]
+      },
+      "baton_summary": "retires the hard-coded Markdown successor assertion in favour of graph-backed pre-publication identity checks."
     }
   ]
 }

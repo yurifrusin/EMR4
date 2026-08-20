@@ -32,10 +32,18 @@ allows them, and verifier packets will bind exact incident filenames so the
 reviewer cannot substitute nearby names.
 
 We can now move from testing the harness's plumbing to giving it a genuinely
-bounded EMR4 worker assignment. The recommended next assignment is the already
-authorised default-off check-in route-adapter convergence rehearsal. Its work
-order will be separately frozen and broker-limited; the product route remains
-off by default and no ordinary practice is enabled.
+bounded EMR4 worker assignment. Fresh rehydration caught one important
+bookkeeping error before that happened: I had pointed the next-work latch back
+to the check-in route-adapter tranche, but that work had already passed on 18
+August. The clockwork restored the previous generation byte-for-byte. Its new
+interlock checks the Continuity graph itself and will reject any already
+recorded operation before publication, instead of relying on a hard-coded
+Markdown expectation.
+
+The genuine next assignment is the separately named fifth relay-free recovery
+attempt. It will first receive its own exact one-run plan and broker-limited
+native-Harness WorkOrder. Attempt 004 remains consumed; no rerun or product
+enablement is hidden inside the correction.
 
 ## Technical summary
 
@@ -62,14 +70,20 @@ off by default and no ordinary practice is enabled.
   verifier narrative with three incorrect module names; and one omitted exact
   legacy next-latch token caught by the 630-test postpublication session.
   Lease 58 was rolled back byte-for-byte at lease 59 before correction; all
-  three incidents enter clockwork intake.
+  three incidents enter clockwork intake. The corrected closeout also retains
+  the stale accepted-successor selection, one invalid parallelism enum in the
+  first recovery receipt, and the hard-coded historical successor guard.
+- Successor recovery: stale lease 60 preserved; rollback lease 61 byte-exact;
+  general graph-identity interlock added before publication.
 - Protected refs: local/origin `master` and `handoff/current` remain exact
   `2e34bdad732fdab32fbf778280b3d3c70d66d602`.
 
 Next: freeze
-`raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal`
-with one explicitly brokered native-Harness DeepSeek worker package and the
-existing default-off/product-data/protected-ref boundaries unchanged.
+`raisa-provider-free-check-in-relay-free-recovery-attempt-005` with one exact
+brokered native-Harness DeepSeek implementation package, one-run execution
+authority only after deterministic admission, and the existing default-off,
+authored-synthetic, product-data and protected-ref boundaries unchanged.
 
-The usual non-PHI continuing Pushover notification succeeded with request
-`ec01f12b-6fec-4680-95b5-02391ce84d65`.
+The first non-PHI continuing Pushover notification succeeded with request
+`ec01f12b-6fec-4680-95b5-02391ce84d65`; its stale next-work line is superseded
+by the corrective notification recorded after corrected clockwork publication.

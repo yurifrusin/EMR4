@@ -411,6 +411,26 @@ def test_reviewed_fixture_generation_is_preparable(tmp_path: Path) -> None:
         assert prepared["generation_manifest"]["source_commit"] == REPLAY_FIXTURE_SOURCE
 
 
+def test_clean_closeout_rejects_a_successor_already_recorded_in_graph(
+    tmp_path: Path,
+) -> None:
+    with _worktree(tmp_path / "recorded-successor") as worktree:
+        contract = validate_contract(_json(worktree / CONTRACT_PATH.relative_to(ROOT)))
+        intent_path = worktree / INTENT_PATH.relative_to(ROOT)
+        intent = _json(intent_path)
+        graph = _json(
+            worktree / "orchestration/continuity/emr4-continuity-graph.json"
+        )
+        intent["transaction_manifest"]["next_operation"]["operation_id"] = graph[
+            "nodes"
+        ][-1]["id"]
+        with pytest.raises(
+            ClockworkTickRejection,
+            match="tick_next_operation_already_recorded",
+        ):
+            build_tick_generation(worktree, contract, intent)
+
+
 def test_incident_tick_derives_register_pattern_and_rolls_back_atomically(
     tmp_path: Path,
 ) -> None:

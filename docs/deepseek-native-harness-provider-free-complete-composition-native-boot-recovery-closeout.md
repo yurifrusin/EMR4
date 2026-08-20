@@ -69,14 +69,24 @@ No product, API, client, feature flag, allowlist, grammar, ordinary-practice,
 waiting-area, patient or clinical data, production, deployment, release,
 Pages or protected-ref boundary changed.
 
-The next tranche returns to the authorised product track:
-`raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal`.
-Its fresh plan may allocate one explicitly brokered native-Harness DeepSeek
-worker package, while the product rehearsal itself remains provider-free and
-default-off. It may only make unchanged A5.1 delegate to the accepted check-in
-adapter under the existing feature flag, authored-synthetic allowlist, exact
-contract and default denial. No ordinary-practice enablement or wider product
-authority is opened.
+Fresh rehydration then found that lease 60 had selected an already accepted
+successor. The default-off route-adapter convergence passed on 18 August at
+exact source `c82c3a741053a9c8da260aa62e1a968af22bb54e`; later admission review
+and kernel descendants also pass. Lease 60 and Git source
+`642e315772548ca4589f7bf87914f6dd74b235bc` remain immutable negative
+governance evidence. Clockwork rollback lease 61 restored the immediately
+previous generation byte-for-byte. The corrected build now rejects any next
+operation ID already present in the Continuity graph, replacing the prior
+hard-coded Markdown successor assertion.
 
-The usual non-PHI continuing Pushover notification succeeded with request
-`ec01f12b-6fec-4680-95b5-02391ce84d65`.
+The unrepeated next tranche is
+`raisa-provider-free-check-in-relay-free-recovery-attempt-005`. It begins with
+fresh rehydration, an exact one-run plan and a separately frozen brokered
+native-Harness WorkOrder. Attempt 004 remains consumed. Attempt 005 may run only
+after its deterministic, no-database worker, Docker/image, collision, latch and
+preexecution gates pass; it receives no ordinary-practice or product-data
+authority.
+
+The first non-PHI continuing Pushover notification succeeded with request
+`ec01f12b-6fec-4680-95b5-02391ce84d65`; its stale successor statement is
+superseded by the corrective notification recorded in the paired Yuri summary.

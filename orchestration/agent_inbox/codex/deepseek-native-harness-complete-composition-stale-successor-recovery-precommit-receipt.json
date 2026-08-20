@@ -1,0 +1,123 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free complete-composition native-boot recovery",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_and_freeze_one_process_complete_composition_native_boot_plan",
+    "operation_id": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+    "resume_after_compaction": true,
+    "source_head": "4ffc8482934bed754e149acea005d7f8f444a782",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "642e315772548ca4589f7bf87914f6dd74b235bc",
+    "reason_codes": [],
+    "resolved_commit": "4ffc8482934bed754e149acea005d7f8f444a782",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "4ffc8482934bed754e149acea005d7f8f444a782"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "642e315772548ca4589f7bf87914f6dd74b235bc",
+    "branch_origin_aligned": false,
+    "head": "642e315772548ca4589f7bf87914f6dd74b235bc",
+    "origin_branch_commit": "2678b43abec8f29e7af432a0a3c64759fada8fda",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 660
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_commit_stale_successor_recovery",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The accepted native Harness terminal and worker composition are unchanged. This is a deterministic governance-identity repair with no separable model implementation package and no provider request authority.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The correction is limited to exact successor identity, a fail-closed graph membership predicate and deterministic tests. The existing accepted Harness veto is unchanged; restored Antigravity authentication is retained for a later eligible exact-candidate review.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation, and rollback, graph validation, publication and canonical readback form one serial ownership chain.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "deterministic_test_failure",
+      "clockwork_check_rejection",
+      "corrected_publication",
+      "pre_push",
+      "attempt_005_rehydration"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "the five-source post-rollback receipt must pass before commit",
+      "the accepted Harness evidence and Gemini veto remain immutable",
+      "the rollback and graph-identity interlock must be committed at one full source hash before clockwork check",
+      "clockwork check and publication are separate commands",
+      "attempt 005 remains planning-only until its own plan WorkOrder and preexecution checkpoint",
+      "Sol alone accepts and publishes the corrected successor"
+    ]
+  },
+  "planned_action": "commit_the_byte_exact_lease_61_rollback_graph_identity_interlock_and_corrected_attempt_005_successor_before_separate_clockwork_check_and_publication",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-sol-acceptance.md",
+      "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-stale-successor-recovery-addendum.md",
+      "docs/security/deepseek-native-harness-provider-free-complete-composition-native-boot-stale-successor-recovery-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/closeout-intent.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial stale-successor diagnosis, byte-exact rollback, graph-identity interlock, deterministic verification, corrected clockwork publication, acceptance and Git under Yuri's standing uninterrupted-development authority. DeepSeek is declined because this recovery has no bounded model implementation package. Gemini 3.7 Flash/high is declined for this narrow deterministic successor correction; its accepted Harness veto is not rerun, and the restored Antigravity sign-in is preserved for a future eligible review. Native subagents are declined because current developer policy prohibits proactive delegation and the rollback/publication boundary is serial.",
+    "git_refs_and_worktree": "Task branch codex/ariadne-bernie-davida-parallel-seam remains at full HEAD 642e315772548ca4589f7bf87914f6dd74b235bc while the intended byte-exact lease-61 rollback and interlock correction are present as explicit tracked/new paths. Origin task remains 2678b43abec8f29e7af432a0a3c64759fada8fda. Local/origin master and local/origin handoff/current are all exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. The validated Continuity graph contains one recorded route-adapter operation and zero attempt-005 nodes; all 654 unrelated untracked paths remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after rollback as 133388 characters / 517 lines with SHA-256 bb8ad8847511bb2602cc233fe04492b1c5136f36e27742ad37a9e4d9926e3d1f. Its canonical reading is Continuity 346 / Compass 328 at accepted source 4ffc8482934bed754e149acea005d7f8f444a782, and its active Next implementation remains the completed complete-composition native-boot recovery pending corrected clockwork publication.",
+    "protected_evidence_boundaries": "Protected holdouts v1-v10 and raw historical Diary material remain sealed. Lease 60, source 642e315772548ca4589f7bf87914f6dd74b235bc, the stale latch and both rejected/corrected diagnosis receipts remain evidence. This recovery executes no attempt 005, worker, model/provider, Docker, PostgreSQL, SQL, product route or data path. It authorises no ordinary-practice enablement, feature-flag or allowlist change, command mounting, generic-status Arrived change, action grammar, first-party client, waiting-area movement, product/patient/appointment/clinical/historical/protected data, production, deployment, release, Pages or protected-ref movement. docs/branding and every unrelated untracked file remain preserved; staging is explicit-path only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

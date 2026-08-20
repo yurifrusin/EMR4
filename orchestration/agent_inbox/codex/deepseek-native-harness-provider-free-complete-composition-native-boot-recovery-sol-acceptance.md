@@ -48,6 +48,22 @@ returned the exact failure; lease 58 is preserved and rolled back byte-exactly
 at lease 59. Corrected publication retains the full exact compatibility subset
 and admits this closeout lapse as AER-0670 rather than hiding the rerun.
 
+Post-closeout five-source rehydration exposed a fourth control failure: lease
+60 selected the already accepted route-adapter operation as the next tranche.
+That contradicts the accepted Continuity graph and is not a valid worker
+target. Sol preserves lease 60, the stale latch and the rejected first receipt,
+accepts byte-exact rollback lease 61, and replaces the historical hard-coded
+successor assertion with a pre-publication graph-identity interlock. The first
+receipt's invalid leverage enum and the historical guard defect are separately
+retained. The accepted Harness terminal and Gemini veto remain unchanged and
+are not rerun.
+
+The exact unrepeated successor is
+`raisa-provider-free-check-in-relay-free-recovery-attempt-005`. It has planning
+authority only until a fresh exact plan, WorkOrder, deterministic admission and
+one-run checkpoint exist; attempt 004 remains immutable and no execution is
+silently inherited from this acceptance.
+
 Claim ceiling: this is a real provider-free pre-provider Harness composition
 success, not an occupied worker or proof of DeepSeek reasoning, coding quality,
 broker behavior, production isolation or product suitability. No product,
