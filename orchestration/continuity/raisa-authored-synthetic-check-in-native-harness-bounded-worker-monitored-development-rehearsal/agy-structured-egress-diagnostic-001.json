@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.synthetic_egress_diagnostic.v1",
+  "diagnostic_id": "agy-structured-egress-diagnostic-001",
+  "recorded_at": "2026-08-20T21:36:05.1081940+10:00",
+  "status": "passed",
+  "agy_version": "1.1.16",
+  "model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "repository_access": false,
+  "tool_calls_requested": 0,
+  "command_manifest_present": false,
+  "decision_schema_fields": ["decision", "review"],
+  "structured_output_present": true,
+  "structured_output": {
+    "decision": "pass",
+    "review": "synthetic diagnostic passed"
+  },
+  "wrapper_status": "SUCCESS",
+  "conversation_id": "05a74bfd-39f7-42a4-be4f-a3fbec6cdde3",
+  "duration_seconds": 11.652512,
+  "num_turns": 2,
+  "usage": {
+    "input_tokens": 23482,
+    "output_tokens": 1936,
+    "thinking_tokens": 1870,
+    "cache_read_tokens": 16762,
+    "total_tokens": 25418
+  },
+  "conclusion": "Basic schema-constrained egress is healthy; the repeated verifier failures are specific to model reproduction/admission of the large command_results envelope. Deterministic command execution remains separately evidenced and semantic review should not duplicate that ledger."
+}
