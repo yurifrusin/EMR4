@@ -1,0 +1,217 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\check-in-lifecycle-gemini-bcd3f594",
+  "branch": "codex/review-check-in-lifecycle-bcd3f594",
+  "head_before": "7d39641c3170fc0fec76fadce5cd45309bdffdb2",
+  "head_after": "7d39641c3170fc0fec76fadce5cd45309bdffdb2",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "b146acf80458c7c6316290dfb696be900101cd9c1ed2892d8664b0425eccbda0",
+  "result": "# Corrected Independent Veto Review: Check-In Lifecycle Conformance Repair\n\n## 1. Five-Source Rehydration Receipt\n\n- `live_handover_current_baton`: Authoritative baton ref `handoff/current` with protected `master` aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Conductor/integrator: GPT Sol. Independent reviewer: Gemini 3.7 Flash/high. Active development worktree: `C:\\Users\\sarashera\\emr4` on `codex/ariadne-bernie-davida-parallel-seam`. Active task branch: `codex/review-check-in-lifecycle-bcd3f594`.\n- `current_authority_allocation`: Governed under Yuri's standing uninterrupted-development authority (Continuity 208 / Compass 189). Sol owns deterministic architecture, harness repair, and task-branch publication; Gemini 3.7 Flash/high holds exactly one independent read-only candidate veto.\n- `active_plan_and_acceptance`: Bound by `docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-plan.md` and threat delta `docs/security/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-threat-model-delta.md`.\n- `protected_evidence_boundaries`: Immutable attempts 001 through 005 and the consumed native worker terminal are preserved; attempt 006 is absent and unauthorized; zero model/provider/network/Docker/database requests permitted; no product, patient, clinical, appointment, historical, or protected data; no protected-ref movement (`master` and `handoff/current` remain locked); `docs/branding/` and all unrelated untracked files preserved.\n- `git_refs_and_worktree`: Bound worktree `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-lifecycle-gemini-bcd3f594`, bound branch `codex/review-check-in-lifecycle-bcd3f594`, HEAD `7d39641c3170fc0fec76fadce5cd45309bdffdb2`, correction base `0fd047447605d91fbda35c59b0fef711826699ad`, correction source `a425055b3ed2b691e969b4454d33124ba092f016`.\n\n### Active-Operation Latch & Parallelism Assessment\n- **Active Operation Latch**: `orchestration/continuity/ariadne-active-operation-latch/current.json` validated: `status: in_progress`, `operation_id: raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair`, `source_head: a425055b3ed2b691e969b4454d33124ba092f016`, `completed_stage` at machine-resolved Git source `a425055b3ed2b691e969b4454d33124ba092f016` (Sol accepted Gemini's isolated-worktree path-resolution finding and made the one permitted bounded correction; 52 provider-free tests pass), `next_executable_stage: dispatch_one_fresh_corrected_gemini_3_7_flash_high_read_only_veto_over_the_exact_path_resolution_repair_then_close_honestly`.\n- **DeepSeek Native Harness**: `declined`, negative leverage (sole worker consumed before provider dispatch, no repeat authorized; mount diagnosed provider-disabled under Sol).\n- **Gemini**: `reserved`, required independent leverage (one fresh corrected read-only veto).\n- **Native Subagents**: `declined`, negative leverage (serial coupled architecture boundary).\n\n---\n\n## 2. Evaluation of Challenges & Verification\n\n### Challenge Assessment Summary\n1. **Worktree & Diff Verification**: Root `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-lifecycle-gemini-bcd3f594`, branch `codex/review-check-in-lifecycle-bcd3f594`, HEAD `7d39641c3170fc0fec76fadce5cd45309bdffdb2`, and clean state verified before, during, and after review (`C01`, `C02`, `C09`). Exact diff `0fd047447605d91fbda35c59b0fef711826699ad..7d39641c3170fc0fec76fadce5cd45309bdffdb2` checked cleanly without whitespace or lint errors (`C07`, `C08`).\n2. **Worker Root Resolution**: `_worker_root()` in [scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py](file:///C:/Users/sarashera/EMR4-worktrees/check-in-lifecycle-gemini-bcd3f594/scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py#L94-L99) inspects `repo_root.resolve().parent.name.casefold() == \"emr4-worktrees\"`. It maps both `C:/Users/sarashera/emr4` and any direct child of `C:/Users/sarashera/EMR4-worktrees` (e.g. `C:/Users/sarashera/EMR4-worktrees/check-in-lifecycle-gemini-bcd3f594`) to exactly `C:/Users/sarashera/EMR4-worktrees`, eliminating the doubled path segment.\n3. **Native Installation Coordinates**: `NATIVE_INSTALLATION_ROOT` resolves to `DISPOSABLE_PARENT / NATIVE_INSTALLATION_ID` (`deepseek-check-in-attachment-observability-native-001`). All strict installation gates in `verify_native_installation(contract)` (exact parent matching, non-symlink verification, lockfile SHA-256 matching, exact 0.1.0-rc.7 package versions, and 10 method source digest/fragment shape checks) remain unchanged and fully enforced.\n4. **Regression Coverage & Manifest Execution**: The regression test `test_worker_root_is_stable_from_primary_and_isolated_worktrees` in [tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py](file:///C:/Users/sarashera/EMR4-worktrees/check-in-lifecycle-gemini-bcd3f594/tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py#L68-L76) directly exercises primary and isolated paths. `C03` (`--check`) and `C04` (pytest 52/52) execute with exit code 0 under the isolated worker worktree.\n5. **Initial Receipt Immutability**: The initial Gemini receipt at `orchestration/agent_inbox/antigravity/raisa-check-in-lifecycle-conformance-repair-gemini37-review-receipt.json` remains immutable; the initial P1 finding is acknowledged and verified as fixed without reclassification or omission.\n6. **Negative Evidence Immutability & Cleanup**: `native-probe-consumed.json`, `native-probe-terminal.json`, `repair-evidence.json`, `repair-report.md`, and `efficacy-reading.json` are byte-exact and unchanged. Native process count is 1, retries 0, provider requests 0, Docker/database invocations 0; cleanup confirms `process_absent: true` and `disposable_root_absent: true`.\n7. **Report Accuracy & No Overclaiming**: `repair-report.md` explicitly documents `failed_closed`, confirming the process failed before `agents.create` and preset mount, asserting honest negative evidence rather than native mount success.\n8. **Clockwork Integrity**: Corrected clockwork tick evidence and report at `orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/corrected-pre-verifier/` bind to machine-resolved full Git source `a425055b3ed2b691e969b4454d33124ba092f016` with zero canonical drift (`canonical_drift: 0`, `clockwork_owned_surfaces: 10`, `dual_owned_surfaces: 0`).\n9. **Bound Command Manifest Execution**: All nine structured argv commands (`C01` through `C09`) executed strictly in order and completed with exit code 0; worktree remains clean.\n10. **Protected Scope & Closed Boundaries**: Zero modifications to product routers, data models, database migrations, diary client scripts, OpenAPI/GraphQL schemas, feature flags, or waiting-area handling. No provider calls or protected ref movements.\n\n---\n\n## 3. Conclusion\n\nThe isolated-worktree path resolution defect (P1) identified in the initial review is cleanly resolved. All nine bound commands pass with exit code 0, all regression and conformance tests pass, immutable terminal evidence is preserved without retry or widening of authority, and the worktree remains clean.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Corrected Independent Veto Review: Check-In Lifecycle Conformance Repair\n\n## 1. Five-Source Rehydration Receipt\n\n- `live_handover_current_baton`: Authoritative baton ref `handoff/current` with protected `master` aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Conductor/integrator: GPT Sol. Independent reviewer: Gemini 3.7 Flash/high. Active development worktree: `C:\\Users\\sarashera\\emr4` on `codex/ariadne-bernie-davida-parallel-seam`. Active task branch: `codex/review-check-in-lifecycle-bcd3f594`.\n- `current_authority_allocation`: Governed under Yuri's standing uninterrupted-development authority (Continuity 208 / Compass 189). Sol owns deterministic architecture, harness repair, and task-branch publication; Gemini 3.7 Flash/high holds exactly one independent read-only candidate veto.\n- `active_plan_and_acceptance`: Bound by `docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-plan.md` and threat delta `docs/security/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-threat-model-delta.md`.\n- `protected_evidence_boundaries`: Immutable attempts 001 through 005 and the consumed native worker terminal are preserved; attempt 006 is absent and unauthorized; zero model/provider/network/Docker/database requests permitted; no product, patient, clinical, appointment, historical, or protected data; no protected-ref movement (`master` and `handoff/current` remain locked); `docs/branding/` and all unrelated untracked files preserved.\n- `git_refs_and_worktree`: Bound worktree `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-lifecycle-gemini-bcd3f594`, bound branch `codex/review-check-in-lifecycle-bcd3f594`, HEAD `7d39641c3170fc0fec76fadce5cd45309bdffdb2`, correction base `0fd047447605d91fbda35c59b0fef711826699ad`, correction source `a425055b3ed2b691e969b4454d33124ba092f016`.\n\n### Active-Operation Latch & Parallelism Assessment\n- **Active Operation Latch**: `orchestration/continuity/ariadne-active-operation-latch/current.json` validated: `status: in_progress`, `operation_id: raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair`, `source_head: a425055b3ed2b691e969b4454d33124ba092f016`, `completed_stage` at machine-resolved Git source `a425055b3ed2b691e969b4454d33124ba092f016` (Sol accepted Gemini's isolated-worktree path-resolution finding and made the one permitted bounded correction; 52 provider-free tests pass), `next_executable_stage: dispatch_one_fresh_corrected_gemini_3_7_flash_high_read_only_veto_over_the_exact_path_resolution_repair_then_close_honestly`.\n- **DeepSeek Native Harness**: `declined`, negative leverage (sole worker consumed before provider dispatch, no repeat authorized; mount diagnosed provider-disabled under Sol).\n- **Gemini**: `reserved`, required independent leverage (one fresh corrected read-only veto).\n- **Native Subagents**: `declined`, negative leverage (serial coupled architecture boundary).\n\n---\n\n## 2. Evaluation of Challenges & Verification\n\n### Challenge Assessment Summary\n1. **Worktree & Diff Verification**: Root `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-lifecycle-gemini-bcd3f594`, branch `codex/review-check-in-lifecycle-bcd3f594`, HEAD `7d39641c3170fc0fec76fadce5cd45309bdffdb2`, and clean state verified before, during, and after review (`C01`, `C02`, `C09`). Exact diff `0fd047447605d91fbda35c59b0fef711826699ad..7d39641c3170fc0fec76fadce5cd45309bdffdb2` checked cleanly without whitespace or lint errors (`C07`, `C08`).\n2. **Worker Root Resolution**: `_worker_root()` in [scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py](file:///C:/Users/sarashera/EMR4-worktrees/check-in-lifecycle-gemini-bcd3f594/scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py#L94-L99) inspects `repo_root.resolve().parent.name.casefold() == \"emr4-worktrees\"`. It maps both `C:/Users/sarashera/emr4` and any direct child of `C:/Users/sarashera/EMR4-worktrees` (e.g. `C:/Users/sarashera/EMR4-worktrees/check-in-lifecycle-gemini-bcd3f594`) to exactly `C:/Users/sarashera/EMR4-worktrees`, eliminating the doubled path segment.\n3. **Native Installation Coordinates**: `NATIVE_INSTALLATION_ROOT` resolves to `DISPOSABLE_PARENT / NATIVE_INSTALLATION_ID` (`deepseek-check-in-attachment-observability-native-001`). All strict installation gates in `verify_native_installation(contract)` (exact parent matching, non-symlink verification, lockfile SHA-256 matching, exact 0.1.0-rc.7 package versions, and 10 method source digest/fragment shape checks) remain unchanged and fully enforced.\n4. **Regression Coverage & Manifest Execution**: The regression test `test_worker_root_is_stable_from_primary_and_isolated_worktrees` in [tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py](file:///C:/Users/sarashera/EMR4-worktrees/check-in-lifecycle-gemini-bcd3f594/tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py#L68-L76) directly exercises primary and isolated paths. `C03` (`--check`) and `C04` (pytest 52/52) execute with exit code 0 under the isolated worker worktree.\n5. **Initial Receipt Immutability**: The initial Gemini receipt at `orchestration/agent_inbox/antigravity/raisa-check-in-lifecycle-conformance-repair-gemini37-review-receipt.json` remains immutable; the initial P1 finding is acknowledged and verified as fixed without reclassification or omission.\n6. **Negative Evidence Immutability & Cleanup**: `native-probe-consumed.json`, `native-probe-terminal.json`, `repair-evidence.json`, `repair-report.md`, and `efficacy-reading.json` are byte-exact and unchanged. Native process count is 1, retries 0, provider requests 0, Docker/database invocations 0; cleanup confirms `process_absent: true` and `disposable_root_absent: true`.\n7. **Report Accuracy & No Overclaiming**: `repair-report.md` explicitly documents `failed_closed`, confirming the process failed before `agents.create` and preset mount, asserting honest negative evidence rather than native mount success.\n8. **Clockwork Integrity**: Corrected clockwork tick evidence and report at `orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/corrected-pre-verifier/` bind to machine-resolved full Git source `a425055b3ed2b691e969b4454d33124ba092f016` with zero canonical drift (`canonical_drift: 0`, `clockwork_owned_surfaces: 10`, `dual_owned_surfaces: 0`).\n9. **Bound Command Manifest Execution**: All nine structured argv commands (`C01` through `C09`) executed strictly in order and completed with exit code 0; worktree remains clean.\n10. **Protected Scope & Closed Boundaries**: Zero modifications to product routers, data models, database migrations, diary client scripts, OpenAPI/GraphQL schemas, feature flags, or waiting-area handling. No provider calls or protected ref movements.\n\n---\n\n## 3. Conclusion\n\nThe isolated-worktree path resolution defect (P1) identified in the initial review is cleanly resolved. All nine bound commands pass with exit code 0, all regression and conformance tests pass, immutable terminal evidence is preserved without retry or widening of authority, and the worktree remains clean.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair",
+          "--check"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/check-in-lifecycle-gemini-bcd3f594",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-c",
+          "from pathlib import Path; import json; from scripts import raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair as r; expected=Path('C:/Users/sarashera/EMR4-worktrees'); assert r._worker_root(Path('C:/Users/sarashera/emr4'))==expected; assert r._worker_root(Path('C:/Users/sarashera/EMR4-worktrees/review'))==expected; t=json.loads(r.PROBE_TERMINAL_PATH.read_text(encoding='utf-8')); assert t['result']=='failed_closed' and t['counts']['native_processes']==1 and t['counts']['automatic_retries']==0 and t['counts']['provider_requests']==0 and all(t['cleanup'].values())"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "0fd047447605d91fbda35c59b0fef711826699ad..7d39641c3170fc0fec76fadce5cd45309bdffdb2"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "0fd047447605d91fbda35c59b0fef711826699ad..7d39641c3170fc0fec76fadce5cd45309bdffdb2"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C09",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "dddb8d91004b3ac9486cf39b0ae8a111d7cc4f8afba3b921b6f5ec9c3c0486b0",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/check-in-lifecycle-gemini-bcd3f594",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from pathlib import Path; import json; from scripts import raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair as r; expected=Path('C:/Users/sarashera/EMR4-worktrees'); assert r._worker_root(Path('C:/Users/sarashera/emr4'))==expected; assert r._worker_root(Path('C:/Users/sarashera/EMR4-worktrees/review'))==expected; t=json.loads(r.PROBE_TERMINAL_PATH.read_text(encoding='utf-8')); assert t['result']=='failed_closed' and t['counts']['native_processes']==1 and t['counts']['automatic_retries']==0 and t['counts']['provider_requests']==0 and all(t['cleanup'].values())"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "0fd047447605d91fbda35c59b0fef711826699ad..7d39641c3170fc0fec76fadce5cd45309bdffdb2"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "0fd047447605d91fbda35c59b0fef711826699ad..7d39641c3170fc0fec76fadce5cd45309bdffdb2"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C09",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "dispatch_one_fresh_corrected_gemini_3_7_flash_high_read_only_veto",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh five-source corrected-pre-verifier reading over the complete baton, standing authority, frozen plan, immutable failed terminal, initial Gemini finding, bounded path correction, clockwork checkpoint and exact clean review worktree",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The live baton retains the failed-closed lifecycle operation at clockwork lease 71 after the one bounded verifier-worktree correction and admits only one fresh corrected veto.",
+    "current_authority_allocation": "GPT Sol owns correction interpretation, acceptance, closeout, clockwork, Git and successor scope. Gemini 3.7 Flash/high owns the one fresh corrected isolated read-only veto. DeepSeek and native subagents receive no work package.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-plan.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/native-probe-terminal.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-evidence.json",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-lifecycle-conformance-repair-gemini37-review-receipt.json",
+      "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+      "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+      "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-gemini37-corrected-review-packet.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-lifecycle-conformance-repair-gemini37-corrected-command-manifest.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "The consumed native attempt and initial Gemini receipt are immutable. The corrected veto may only read the exact allowlist and execute the exact manifest in the clean review worktree; no Harness, DeepSeek, Docker, database, edit, Git write, product/protected data, branding, deployment or ref movement is admitted.",
+    "git_refs_and_worktree": "The task branch and origin are exact 7d39641c3170fc0fec76fadce5cd45309bdffdb2. The review branch codex/review-check-in-lifecycle-bcd3f594 and worktree C:\\Users\\sarashera\\EMR4-worktrees\\check-in-lifecycle-gemini-bcd3f594 are clean at that exact HEAD. Local/origin master and handoff/current remain exact 2e34bdad732fdab32fbf778280b3d3c70d66d602. Main tracked state is clean; untracked corrected packet inputs and user files including docs/branding remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+    "active_tranche": "Raisa provider-free check-in server post-readiness exit-state and stdin-lifecycle conformance repair",
+    "objective": "Freeze a provider-disabled and initially database-nonexecuting repair that exposes a closed sanitized OCI post-readiness exit-state vocabulary, separates native-Harness preset/server lifecycle coordinates, proves attached-stdin lifetime with deterministic fakes, and makes the narrowest source/test correction without authorising attempt 006.",
+    "status": "in_progress",
+    "source_head": "a425055b3ed2b691e969b4454d33124ba092f016",
+    "authority_source": "Yuri's standing uninterrupted-development authority and the accepted failed-closed attempt-005 terminal, exact cleanup and workflow-efficacy reading.",
+    "checkpoint": {
+      "completed_stage": "At machine-resolved exact full Git source a425055b3ed2b691e969b4454d33124ba092f016, Sol accepted Gemini's isolated-worktree path-resolution finding and made the one permitted bounded correction. Fifty-two provider-free tests, Ruff, compilation and primary-worktree admission pass; the immutable native terminal and all closed boundaries are unchanged.",
+      "next_executable_stage": "dispatch_one_fresh_corrected_gemini_3_7_flash_high_read_only_veto_over_the_exact_path_resolution_repair_then_close_honestly",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "one_fresh_corrected_gemini_read_only_veto_only",
+      "native_probe_and_initial_review_receipt_immutable",
+      "no_native_harness_deepseek_retry_or_other_provider_dispatch",
+      "no_attempt_006_docker_database_or_product_execution",
+      "no_product_api_config_client_flag_allowlist_grammar_or_waiting_area_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_deployment_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+    "assessed_stage": "corrected_pre_verifier",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "The native attempt is consumed before provider dispatch and the correction concerns local worktree path resolution, so DeepSeek is outside scope.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "planned", "expected_leverage": "required_independence", "rationale": "Gemini 3.7 Flash/high must independently confirm its P1 is fixed in the same isolated worktree and all exact commands now pass.", "work_packages": ["corrected_isolated_worktree_path_resolution_veto"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Current developer policy prohibits proactive delegation and the one-review correction chain is serial.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "the initial revision-required receipt remains immutable",
+      "one corrected Gemini veto is permitted after the bounded Sol correction",
+      "no native or DeepSeek process is permitted",
+      "Sol owns final acceptance and honest negative closeout"
+    ],
+    "reassessment_triggers": ["corrected_verifier_terminal_captured", "closeout"]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol owns corrected dispatch admission and receipt reconciliation."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Only the immutable consumed terminal is read; no process is selected."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected or authorised."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["The same clean isolated review worktree now contains the bounded correction and is ready for one fresh veto."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent was spawned; proactive delegation is prohibited."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected or authorised."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected or authorised."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "deepseek-native-harness-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

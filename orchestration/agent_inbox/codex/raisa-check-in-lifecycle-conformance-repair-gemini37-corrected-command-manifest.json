@@ -1,0 +1,52 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair",
+        "--check"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/check-in-lifecycle-gemini-bcd3f594",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+        "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from pathlib import Path; import json; from scripts import raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair as r; expected=Path('C:/Users/sarashera/EMR4-worktrees'); assert r._worker_root(Path('C:/Users/sarashera/emr4'))==expected; assert r._worker_root(Path('C:/Users/sarashera/EMR4-worktrees/review'))==expected; t=json.loads(r.PROBE_TERMINAL_PATH.read_text(encoding='utf-8')); assert t['result']=='failed_closed' and t['counts']['native_processes']==1 and t['counts']['automatic_retries']==0 and t['counts']['provider_requests']==0 and all(t['cleanup'].values())"
+      ]
+    },
+    {"id": "C07", "argv": ["git", "diff", "--check", "0fd047447605d91fbda35c59b0fef711826699ad..7d39641c3170fc0fec76fadce5cd45309bdffdb2"]},
+    {"id": "C08", "argv": ["git", "diff", "--name-only", "0fd047447605d91fbda35c59b0fef711826699ad..7d39641c3170fc0fec76fadce5cd45309bdffdb2"]},
+    {"id": "C09", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}
