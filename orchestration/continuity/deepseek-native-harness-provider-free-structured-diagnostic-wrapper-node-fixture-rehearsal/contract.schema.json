@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-structured-diagnostic-node-fixture-contract.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "accepted_seam_source", "clockwork_binding_source", "scenario_order", "process_boundary", "fixture_paths", "forbidden_source_tokens", "accepted_sidecar_scenarios", "sidecar_write_failure_scenario", "required_identity_result", "retain_raw_process_streams", "cleanup_required", "bounded_correction"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_structured_diagnostic_node_fixture_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_seam_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "clockwork_binding_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "scenario_order": {"const": ["nested_known", "unknown_secret_shaped", "aggregate_multiple", "preexisting_sidecar"]},
+    "process_boundary": {"type": "object"},
+    "fixture_paths": {"type": "object"},
+    "forbidden_source_tokens": {"type": "array", "items": {"type": "string"}, "minItems": 3},
+    "accepted_sidecar_scenarios": {"const": ["nested_known", "unknown_secret_shaped", "aggregate_multiple"]},
+    "sidecar_write_failure_scenario": {"const": "preexisting_sidecar"},
+    "required_identity_result": {"const": true},
+    "retain_raw_process_streams": {"const": false},
+    "cleanup_required": {"const": true},
+    "bounded_correction": {"const": "recursive_sorted_key_json_serializer_only"}
+  }
+}
+

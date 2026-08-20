@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-structured-diagnostic-node-fixture-evidence.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "candidate_source", "result", "node", "scenarios", "proof_boundary", "retention", "cleanup"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_structured_diagnostic_node_fixture_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {"enum": ["pass", "revision_required"]},
+    "node": {"type": "object"},
+    "scenarios": {"type": "array", "minItems": 4, "maxItems": 4},
+    "proof_boundary": {"type": "object"},
+    "retention": {"type": "object"},
+    "cleanup": {"type": "object"}
+  }
+}
+

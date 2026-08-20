@@ -1,0 +1,46 @@
+{
+  "schema_version": "ariadne.native_harness_structured_diagnostic_node_fixture_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+  "planning_source": "0dcad3dae9322e3a372ab141eff4f45795143f48",
+  "accepted_seam_source": "af22b3e7b2ce3ece15dd6d8530688d19380c1403",
+  "clockwork_binding_source": "4b09bc3665bed77ed7d8cd6f50dc793d1e35d2de",
+  "scenario_order": [
+    "nested_known",
+    "unknown_secret_shaped",
+    "aggregate_multiple",
+    "preexisting_sidecar"
+  ],
+  "process_boundary": {
+    "python_controller_processes": 1,
+    "node_processes": 4,
+    "native_harness_processes": 0,
+    "broker_processes": 0,
+    "worker_processes": 0,
+    "model_requests": 0,
+    "provider_requests": 0,
+    "serial": true
+  },
+  "fixture_paths": {
+    "package_entrypoint": "fixture-package/lib/bin.js",
+    "wrapper": "entrypoint-wrapper.mjs",
+    "observer": "identity-observer.mjs",
+    "diagnostic": "diagnostic.json",
+    "observer_result": "observer-result.json"
+  },
+  "forbidden_source_tokens": [
+    "@deepseek-ai",
+    "node_modules",
+    "@deepseek-ai/dsh"
+  ],
+  "accepted_sidecar_scenarios": [
+    "nested_known",
+    "unknown_secret_shaped",
+    "aggregate_multiple"
+  ],
+  "sidecar_write_failure_scenario": "preexisting_sidecar",
+  "required_identity_result": true,
+  "retain_raw_process_streams": false,
+  "cleanup_required": true,
+  "bounded_correction": "recursive_sorted_key_json_serializer_only"
+}
+
