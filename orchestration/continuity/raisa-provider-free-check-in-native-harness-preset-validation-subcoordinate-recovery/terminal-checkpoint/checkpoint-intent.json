@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
+  "operation_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+  "completed_stage": "The deterministic and package-only preset-row, byte/parse and digest/length readings pass. The exact no-agent runner passed a distinct Gemini veto. Its sole checkpoint-bound provider-disabled native process reached PRESET_ROW_DISCOVERY_ENTERED and failed closed before PRESET_ROW_FOUND with one process, zero retries or external requests and exact cleanup. The consumed terminal is immutable; canonical latch drift was detected and byte-restored before this clockwork-owned checkpoint.",
+  "next_executable_stage": "complete_register_revision_573_and_publish_the_clockwork_owned_paired_closeout_without_retrying_the_consumed_native_process",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "preset_validation_terminal_checkpoint_tick_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/terminal-checkpoint/checkpoint-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}
