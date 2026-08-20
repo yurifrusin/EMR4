@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "result", "claim_boundary", "static_source_gate", "runner", "scenarios", "correction_candidate", "native_candidate", "process_boundary", "cleanup", "credential_environment_names_removed_count", "raw_stdout_retained", "raw_stderr_retained", "native_process_checkpoint_admitted"],
+  "properties": {
+    "schema_version": {"const": "ariadne.check_in_preset_row_service_path_fixture_evidence.v1"},
+    "operation_id": {"const": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery"},
+    "result": {"const": "pass"},
+    "claim_boundary": {"const": "pinned_rc7_provider_free_service_input_fixture_only_no_native_harness_agent_mount_or_provider_claim"},
+    "static_source_gate": {"const": "pass"},
+    "runner": {
+      "type": "object", "required": ["bytes", "sha256"],
+      "properties": {"bytes": {"type": "integer", "minimum": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+      "additionalProperties": {"type": "boolean"}
+    },
+    "scenarios": {
+      "type": "array", "minItems": 5, "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["scenario", "decision", "ids", "emr4_count"],
+        "properties": {
+          "scenario": {"enum": ["predecessor_shipped_only", "corrected_shipped_plus_user", "missing_user_root", "earlier_system_duplicate", "configured_root_displaced"]},
+          "decision": {"enum": ["emr4_absent", "accepted_exact_user_row", "rejected_shadowed", "configured_root_displaced"]},
+          "ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "emr4_count": {"type": "integer", "minimum": 0, "maximum": 1},
+          "row": {
+            "type": "object", "additionalProperties": false,
+            "required": ["trust", "source_role", "broken_absent", "bytes", "sha256"],
+            "properties": {
+              "trust": {"enum": ["system", "user"]},
+              "source_role": {"enum": ["derived_user", "earlier_system"]},
+              "broken_absent": {"const": true},
+              "bytes": {"const": 158},
+              "sha256": {"const": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1"}
+            }
+          }
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {"properties": {"scenario": {"const": "corrected_shipped_plus_user"}}},
+            "then": {
+              "properties": {
+                "decision": {"const": "accepted_exact_user_row"},
+                "emr4_count": {"const": 1},
+                "row": {
+                  "properties": {
+                    "trust": {"const": "user"},
+                    "source_role": {"const": "derived_user"}
+                  }
+                }
+              },
+              "required": ["row"]
+            }
+          },
+          {
+            "if": {"properties": {"scenario": {"const": "earlier_system_duplicate"}}},
+            "then": {
+              "properties": {
+                "decision": {"const": "rejected_shadowed"},
+                "emr4_count": {"const": 1},
+                "row": {
+                  "properties": {
+                    "trust": {"const": "system"},
+                    "source_role": {"const": "earlier_system"}
+                  }
+                }
+              },
+              "required": ["row"]
+            }
+          },
+          {
+            "if": {"properties": {"scenario": {"enum": ["predecessor_shipped_only", "missing_user_root", "configured_root_displaced"]}}},
+            "then": {
+              "properties": {"emr4_count": {"const": 0}},
+              "not": {"required": ["row"]}
+            }
+          }
+        ]
+      }
+    },
+    "correction_candidate": {
+      "const": {
+        "include_user_root": true,
+        "effective_root_roles": [{"role": "shipped", "trust": "system"}, {"role": "derived_user", "trust": "user"}],
+        "emr4_row_trust": "user",
+        "installed_package_mutated": false,
+        "shipped_preset_mutated": false
+      }
+    },
+    "native_candidate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["runner", "profile"],
+      "properties": {
+        "runner": {
+          "type": "object", "required": ["bytes", "sha256"],
+          "properties": {"bytes": {"type": "integer", "minimum": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+          "additionalProperties": {"type": "boolean"}
+        },
+        "profile": {
+          "type": "object", "additionalProperties": false,
+          "required": ["bytes", "sha256", "include_user_root", "runner_inject"],
+          "properties": {
+            "bytes": {"type": "integer", "minimum": 1},
+            "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+            "include_user_root": {"const": true},
+            "runner_inject": {"const": ["agentPresets"]}
+          }
+        }
+      }
+    },
+    "process_boundary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["package_only_node_processes", "native_harness_processes", "agent_sessions", "turns", "broker_requests", "model_requests", "provider_requests", "network_attempts", "docker_invocations", "database_invocations"],
+      "properties": {
+        "package_only_node_processes": {"const": 1}, "native_harness_processes": {"const": 0},
+        "agent_sessions": {"const": 0}, "turns": {"const": 0}, "broker_requests": {"const": 0},
+        "model_requests": {"const": 0}, "provider_requests": {"const": 0}, "network_attempts": {"const": 0},
+        "docker_invocations": {"const": 0}, "database_invocations": {"const": 0}
+      }
+    },
+    "cleanup": {"const": {"package_process_absent": true, "disposable_root_absent": true}},
+    "credential_environment_names_removed_count": {"type": "integer", "minimum": 0},
+    "raw_stdout_retained": {"const": false},
+    "raw_stderr_retained": {"const": false},
+    "native_process_checkpoint_admitted": {"const": false}
+  }
+}

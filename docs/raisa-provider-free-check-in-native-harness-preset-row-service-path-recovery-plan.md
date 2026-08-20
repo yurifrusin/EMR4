@@ -190,5 +190,7 @@ enablement or generic-status `Arrived`; no product, patient, appointment,
 clinical, historical or protected data; no production runtime, deployment,
 release, Pages or protected-ref movement.
 
+There is no protected-ref movement.
+
 Preserve `docs/branding/` and every unrelated untracked file. Stage only exact
 paths; never use `git add .` or `git add -A`.

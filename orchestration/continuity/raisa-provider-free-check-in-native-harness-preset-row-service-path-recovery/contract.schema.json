@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "accepted_predecessor_source", "protected_source", "retained_installation_root", "lockfile_sha256", "packages", "preset", "expected_shipped_ids"],
+  "properties": {
+    "schema_version": {"const": "ariadne.check_in_preset_row_service_path_contract.v1"},
+    "operation_id": {"const": "raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery"},
+    "accepted_predecessor_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "protected_source": {"const": "2e34bdad732fdab32fbf778280b3d3c70d66d602"},
+    "retained_installation_root": {"type": "string", "minLength": 1},
+    "lockfile_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "packages": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "lock_key", "version", "integrity", "sources"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "lock_key": {"type": "string", "pattern": "^node_modules/@deepseek-ai/"},
+          "version": {"const": "0.1.0-rc.7"},
+          "integrity": {"type": "string", "pattern": "^sha512-"},
+          "sources": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["role", "sha256"],
+              "properties": {
+                "role": {"enum": ["dsh_manifest", "profile_boot", "presets_manifest", "presets_service", "home_manifest", "home_paths"]},
+                "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "preset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "bytes", "sha256"],
+      "properties": {
+        "id": {"const": "emr4-bounded-worker"},
+        "bytes": {"const": 158},
+        "sha256": {"const": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1"}
+      }
+    },
+    "expected_shipped_ids": {"const": ["code", "cordis", "minimal", "standard"]}
+  }
+}
