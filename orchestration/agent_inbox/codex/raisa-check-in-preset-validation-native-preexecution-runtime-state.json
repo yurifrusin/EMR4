@@ -1,0 +1,119 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "execute_exactly_one_provider_disabled_native_harness_preset_validation_process_after_committed_checkpoint_with_zero_retries",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh five-source preexecution reading over the complete baton, frozen plan, exact committed checkpoint source, passing distinct runner veto, active latch and preserved worktree",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The active latch resumes after the committed review-bound one-shot checkpoint and admits only the single provider-disabled native preset-validation process.",
+    "current_authority_allocation": "GPT Sol owns the one-shot native process, evidence interpretation, recovery, acceptance and Git. Gemini 3.7 Flash/high has completed the distinct exact-runner veto. DeepSeek and native subagents receive no work package.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-plan.md",
+      "docs/security/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/contract.json",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/deterministic-source-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/package-only-discovery-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-evidence.schema.json",
+      "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-preexecution-checkpoint.json",
+      "scripts/raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+      "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery.py",
+      "tests/test_raisa_provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_plan.py",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-preset-validation-subcoordinate-recovery-gemini37-review-receipt.json",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-preset-validation-native-runner-gemini37-review-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-preset-validation-native-runner-gemini37-review-worktree-preflight.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Execute only the checkpoint-bound provider-disabled no-agent preset-validation stage once. No DeepSeek, agent, mount, turn, broker/model/provider/network, Docker/database, product/protected-data, deployment, release, Pages or protected-ref action is admitted. The consumed latch is permanent and automatic retries remain zero.",
+    "git_refs_and_worktree": "The exact task, origin and four protected refs are owned by the generated Git snapshot; this narrative intentionally contains no manually transcribed object ID. The checkpoint is committed, docs/branding and every unrelated untracked path remain preserved, and intentional receipt/latch paths will be committed before process creation."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+    "active_tranche": "Raisa provider-free check-in native Harness preset-validation subcoordinate recovery",
+    "objective": "Freeze the narrowest provider-free recovery that separates exact preset-row discovery, exact preset-byte read and parse, and digest/length binding, first through deterministic package-source proofs; admit no native process until a separate checkpoint and no DeepSeek request or attempt 006.",
+    "status": "in_progress",
+    "source_head": "a2ea9c9ab7aaad1677bf51d5aec9ca8861356518",
+    "authority_source": "Yuri's standing uninterrupted-development authority and the accepted lifecycle repair plus immutable provider-disabled PRESET_VALIDATION_PASSED negative terminal.",
+    "checkpoint": {
+      "completed_stage": "The exact no-agent runner candidate passed a distinct fresh Gemini 3.7 preexecution veto with all twelve commands and an unchanged clean review worktree. The separately committed one-shot checkpoint binds that candidate, review digest, seven markers, 60-second timeout, one native process and zero retries; no native Harness process has run.",
+      "next_executable_stage": "generate_and_commit_a_fresh_exact_checkpoint_source_preexecution_receipt_then_execute_the_single_provider_disabled_native_preset_validation_process_with_no_retry",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_check_in_native_harness_preset_validation_subcoordinate_recovery_only",
+      "single_checkpoint_bound_native_process_and_zero_automatic_retries",
+      "consumed_lifecycle_native_probe_immutable_no_retry_resume_or_reclassification",
+      "split_only_preset_row_discovery_exact_byte_read_parse_and_digest_length_binding",
+      "no_deepseek_model_provider_broker_network_or_other_external_request",
+      "no_attempt_006_docker_database_postgresql_sql_or_transaction_execution",
+      "no_product_source_configuration_api_openapi_graphql_schema_migration_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+    "assessed_stage": "native_preexecution",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "The admitted process is provider-disabled and ends before agent creation; no DeepSeek request exists in this work package.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "completed", "expected_leverage": "required_independence", "rationale": "Gemini 3.7 Flash/high passed the distinct exact-runner veto with twelve zero-exit commands and an unchanged clean worktree.", "work_packages": ["exact_no_agent_native_runner_candidate_veto_completed"]},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Current developer policy prohibits proactive delegation and the checkpoint-to-one-shot-terminal chain is irreducibly serial.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "commit this preexecution receipt before process creation",
+      "execute exactly one checkpoint-bound native Harness process",
+      "automatic retry count remains zero",
+      "capture the consumed latch and one closed terminal before interpretation"
+    ],
+    "reassessment_triggers": ["native_terminal_captured", "post_terminal_review", "closeout"]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol owns the single native process and evidence reconciliation."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "reachable", "evidence": ["Pinned source, package-only discovery, exact no-agent runner, clean Gemini veto and separately committed checkpoint are all present."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected or authorised."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Distinct runner veto completed and its receipt digest is checkpoint-bound."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No subagent was spawned; proactive delegation is prohibited."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected or authorised."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Fallback is not selected or authorised."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "deepseek-native-harness-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
