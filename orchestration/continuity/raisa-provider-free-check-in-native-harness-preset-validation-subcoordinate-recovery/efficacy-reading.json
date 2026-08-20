@@ -1,0 +1,18 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery",
+  "outcome": "native_preset_row_discovery_failed_closed",
+  "efficiency_judgment": "narrower_native_service_path_coordinate_obtained_without_provider_cost",
+  "native_processes": 1,
+  "automatic_retries": 0,
+  "provider_requests": 0,
+  "docker_invocations": 0,
+  "database_invocations": 0,
+  "manual_checklist_fields_replaced": [
+    "git_ref_narrative_object_ids",
+    "preset_row_discovery_chain",
+    "preset_byte_length_and_digest",
+    "review_receipt_digest_binding",
+    "one_shot_process_consumption"
+  ]
+}
