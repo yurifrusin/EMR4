@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will next recover only provider-disabled pre-HMR startup classification and terminalization; no new worker or DeepSeek request is admitted.
+> EMR4 will not launch another occupied native worker unless Yuri distinctly selects that next outcome.
 
 ## North star
 
@@ -476,26 +476,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One consumed provider-disabled native process mounted the exact EMR4 preset, projected exactly edit, glob and read, emitted all nine lifecycle events and cleaned up completely. Lineage parent: `raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery`.
 230. **Connect the native DeepSeek worker to Ariadne clockwork and test one bounded authored-synthetic edit with complete lifecycle accounting — Raisa authored-synthetic native Harness bounded-worker attempt 002 failed-closed closeout**
    The clockwork and broker contained and attributed one pre-provider native failure, but Harness startup stopped before HMR and deleted the semantic cause before safe classification. Lineage parent: `raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal`.
+231. **Make the clockwork-coupled native DeepSeek worker diagnosable before another occupied attempt — DeepSeek native Harness provider-free pre-HMR startup failure classification and terminalization recovery**
+   Future pre-first-HMR startup failures now preserve one safe bounded stage and cause before local raw streams are deleted. Lineage parent: `raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002`.
 
 ## Current position
 
-**Make native Harness pre-HMR startup failures safely classifiable before considering another occupied worker — Raisa authored-synthetic native Harness bounded-worker attempt 002 failed-closed closeout**
+**Place a genuine user decision before the next occupied native-Harness worker — DeepSeek native Harness provider-free pre-HMR startup failure classification and terminalization recovery**
 
-**Why this proof came next:** Attempt 002 proves lifecycle accounting and cleanup but leaves 7,314 startup stderr bytes represented only by size and digest under a generic terminal coordinate.
+**Why this proof came next:** The provider-disabled diagnostic control is complete, while every occupied attempt remains cost-bearing external execution under a distinct accepted envelope.
 
-The negative attempt is honestly closed; the next tranche is provider-disabled observability recovery with no worker or provider call.
+The Harness is better instrumented but remains paused from occupied EMR4 work pending Yuri's decision.
 
 ### What this unlocks
 
-- A closed sanitized vocabulary for profile, dependency, service, HMR and runner startup failures.
-- Terminal stage and cause evidence emitted before raw startup streams are deleted.
-- A later informed user choice about another occupied attempt instead of another blind launch.
+- A later occupied failure can distinguish process creation, runtime contract, package, profile, module, service, HMR, controller, limit, ambiguity and unknown coordinates.
+- Raw startup streams can still be deleted without collapsing safe failure attribution.
 
 ### What it does not solve
 
-- No native worker success or DeepSeek quality conclusion.
-- No another occupied attempt or provider request.
-- No product, database, ordinary-practice, production or protected-ref authority.
+- No new occupied attempt or provider request.
+- No Harness reliability or DeepSeek performance conclusion.
+- No product, ordinary-practice, database, deployment or protected-ref authority.
 
 ## Continuity and authority
 
@@ -1235,6 +1236,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md`
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md`
 - `docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-closeout.md`
+- `docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md`
 - `docs/diary/diary.css`
 - `docs/diary/diary.html`
@@ -1966,6 +1968,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2017,7 +2020,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-aes-c5-single-generation-destination-conflict-analysis.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-source-review-receipt.json`
-- `orchestration/agent_inbox/codex/raisa-authored-synthetic-native-worker-attempt-002-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-sol-acceptance.md`
@@ -2613,6 +2615,8 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/provider-free-effective-tool-native-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/efficacy-reading.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json`
@@ -2668,8 +2672,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/occupied-lifecycle-evidence.json`
 - `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/product-runtime-envelope.json`
 - `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/product-runtime-envelope.schema.json`
-- `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/diagnosis.md`
-- `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/efficacy-reading.json`
 - `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-terminal.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-cost-ledger.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-evidence.json`
@@ -3285,6 +3287,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-20--authored-synthetic-native-worker-attempt-002.md`
 - `orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-mount-effective-tool-projection.md`
 - `orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-row-service-path-recovery.md`
+- `orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-pre-hmr-startup-recovery.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3592,4 +3595,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 335; continuity graph revision 353._
+_Compass map revision 336; continuity graph revision 354._

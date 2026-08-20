@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 353,
+  "graph_revision": 354,
   "harvests": [],
   "nodes": [
     {
@@ -25944,9 +25944,130 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+      "title": "DeepSeek native Harness provider-free pre-HMR startup failure classification and terminalization recovery",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the provider-disabled recovery only.",
+          "The accepted path launches no native Harness, worker or provider request.",
+          "Any new occupied native worker remains a distinct Yuri decision."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-closed-pre-hmr-terminal-vocabulary",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/contract.json",
+          "status": "accepted",
+          "summary": "Accept two startup stages, eleven fail-closed causes, fixed byte signatures, ambiguity, unclassified and stream-limit outcomes."
+        },
+        {
+          "id": "accept-terminal-before-cleanup-controller-binding",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json",
+          "status": "accepted",
+          "summary": "Accept exclusive safe sidecar validation before exact-root removal and digest-only ordinary-terminal binding."
+        },
+        {
+          "id": "accept-provider-disabled-hostile-evidence",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept twelve semantic scenarios, twelve hostile mutations, forty-nine focused tests, five ordering assertions and seventeen immutable artifacts."
+        },
+        {
+          "id": "reject-harness-reliability-and-deepseek-performance",
+          "source": "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md",
+          "status": "rejected",
+          "summary": "Reject attempt-002 reclassification, Harness reliability, DeepSeek performance and any occupied retry or provider authority."
+        },
+        {
+          "id": "accept-contained-recovery-incidents",
+          "source": "docs/ariadne-agent-error-correction-register-revision-577.md",
+          "status": "accepted",
+          "summary": "Accept AER-0716 through AER-0725 as contained, including the ready-only local broker test boundary breach and the byte-exact successor-latch vocabulary correction."
+        }
+      ],
+      "claim_scope": [
+        "Future native-Harness failures before the first HMR event can emit a bounded sanitized stage and cause before raw stream deletion.",
+        "Raw startup lines, paths, exception messages, prompts, reasoning, environment values and credentials are not durable terminal fields.",
+        "Zero matching cause groups remain unclassified and multiple groups remain ambiguous.",
+        "Streams above sixty-four KiB per stream receive only the closed stream-limit cause while full counts and digests are retained.",
+        "The accepted provider-disabled path starts no native Harness, worker or provider request.",
+        "Attempt 002 remains immutable and its exact semantic startup cause remains unproved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/efficacy-reading.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/legacy-broker-test-boundary-containment.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-preplanning-corrected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-postcompaction-corrected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pre-hmr-startup-recovery-corrected-candidate-prepush-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/clockwork-check-attempt-003-rejected-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/native_startup_terminal.py",
+          "scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery.py",
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-terminal.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-577.md",
+          "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-pre-hmr-startup-recovery.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Attempt 002's exact semantic startup cause remains unproved and cannot be reconstructed.",
+        "Harness reliability and DeepSeek coding performance remain unproved.",
+        "A new occupied native worker requires Yuri's distinct decision.",
+        "No product, data, database, ordinary-practice, production, deployment, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-20T23:49:08.9636913+10:00",
+      "updated_at": "2026-08-20T23:49:08.9636913+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "12d8758fee2504435ca2b4ccf6225b9d7a86a6a1",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-20T22:57:36.3168337+10:00"
+  "updated_at": "2026-08-20T23:49:08.9636913+10:00"
 }
