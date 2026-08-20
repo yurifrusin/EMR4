@@ -1,0 +1,141 @@
+{
+  "boundary": {
+    "native_process_count": 0,
+    "provider_request_count": 0,
+    "raw_stream_bytes_persisted": 0,
+    "subprocess_count": 0,
+    "worker_process_count": 0
+  },
+  "controller_ordering": {
+    "outer_digest_before_outer_publish": true,
+    "root_removal_before_outer_terminal": true,
+    "stale_sidecar_prelaunch_refusal": true,
+    "stream_read_before_terminal_write": true,
+    "terminal_write_before_root_removal": true
+  },
+  "immutable_artifact_count": 17,
+  "immutable_artifacts_match": true,
+  "mutation_count": 12,
+  "mutations_rejected": [
+    "hmr_event_present",
+    "successful_exit",
+    "boolean_exit",
+    "unknown_coordinate",
+    "creation_stream_nonempty",
+    "wrong_schema",
+    "wrong_cause",
+    "creation_coordinate",
+    "hmr_count",
+    "raw_retained",
+    "wrong_limit",
+    "extra_raw_field"
+  ],
+  "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+  "provider_posture": "provider_disabled_zero_process",
+  "result": "pass",
+  "scenario_count": 12,
+  "scenarios": [
+    {
+      "cause": "hmr_bootstrap_failed",
+      "matched_signature_groups": [
+        "hmr_bootstrap_failed"
+      ],
+      "scenario_id": "signature_hmr_bootstrap_failed",
+      "stage": "native_process_started_before_first_hmr_event"
+    },
+    {
+      "cause": "module_resolution_failed",
+      "matched_signature_groups": [
+        "module_resolution_failed"
+      ],
+      "scenario_id": "signature_module_resolution_failed",
+      "stage": "native_process_started_before_first_hmr_event"
+    },
+    {
+      "cause": "node_runtime_contract_rejected",
+      "matched_signature_groups": [
+        "node_runtime_contract_rejected"
+      ],
+      "scenario_id": "signature_node_runtime_contract_rejected",
+      "stage": "native_process_started_before_first_hmr_event"
+    },
+    {
+      "cause": "package_entrypoint_load_failed",
+      "matched_signature_groups": [
+        "package_entrypoint_load_failed"
+      ],
+      "scenario_id": "signature_package_entrypoint_load_failed",
+      "stage": "native_process_started_before_first_hmr_event"
+    },
+    {
+      "cause": "profile_load_or_validation_failed",
+      "matched_signature_groups": [
+        "profile_load_or_validation_failed"
+      ],
+      "scenario_id": "signature_profile_load_or_validation_failed",
+      "stage": "native_process_started_before_first_hmr_event"
+    },
+    {
+      "cause": "required_service_unavailable",
+      "matched_signature_groups": [
+        "required_service_unavailable"
+      ],
+      "scenario_id": "signature_required_service_unavailable",
+      "stage": "native_process_started_before_first_hmr_event"
+    },
+    {
+      "cause": "ambiguous_startup_signatures",
+      "matched_signature_groups": [
+        "module_resolution_failed",
+        "profile_load_or_validation_failed"
+      ],
+      "scenario_id": "ambiguous",
+      "stage": "native_process_started_before_first_hmr_event"
+    },
+    {
+      "cause": "unclassified_nonzero_exit",
+      "matched_signature_groups": [],
+      "scenario_id": "unclassified",
+      "stage": "native_process_started_before_first_hmr_event"
+    },
+    {
+      "cause": "operating_system_process_failure",
+      "matched_signature_groups": [],
+      "scenario_id": "process_creation",
+      "stage": "native_process_creation"
+    },
+    {
+      "cause": "controller_startup_exception",
+      "matched_signature_groups": [],
+      "scenario_id": "controller_exception",
+      "stage": "native_process_started_before_first_hmr_event"
+    },
+    {
+      "cause": "hmr_bootstrap_failed",
+      "matched_signature_groups": [],
+      "scenario_id": "timeout",
+      "stage": "native_process_started_before_first_hmr_event"
+    },
+    {
+      "cause": "startup_stream_limit_exceeded",
+      "matched_signature_groups": [],
+      "scenario_id": "stream_limit",
+      "stage": "native_process_started_before_first_hmr_event"
+    }
+  ],
+  "schema_sha256": {
+    "contract_schema": "555eb9fa9a2ec23016cb3f29bba05cdb6605f883bba6ad90046942d71ec2444c",
+    "evidence_schema": "7a26e10563204fa46cbba09de674b9974a9a0f7eba0b7c8a68aa1d60843ab461",
+    "terminal_schema": "2bfc1d32c4ea495434e4861d8cd198032d60c4957a725cdce788939ee6fff142"
+  },
+  "schema_version": "ariadne.native_harness_pre_hmr_recovery_evidence.v1",
+  "source_sha256": {
+    "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-plan.md": "9274aa7b34bddcd78111f4120bb66896afbd987b92192225deaac4bae4bb249e",
+    "docs/security/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-threat-model-delta.md": "c149f4b63d3381138b02723b86a324c5fbcf9fa3b8e9b7686d1ef2778ded2e65",
+    "orchestration_harness/native_startup_terminal.py": "0a476ee7617fbc71d9cc3efb88ca08ac1cc6f01b433aa8d83d0603493cc05468",
+    "scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery.py": "693645904b2779a54bc8d2afc3eb1395793fc184a1981e72a8cad20058d84e6b",
+    "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py": "52d8ba01e7284e84de7308b3eb48aa5473cd3eb749f94850df17a4dad85da749",
+    "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py": "f72d390dca52b9f41a653ea71cdb7c0a1229bc41c6e0da7127d9618bf82ff211",
+    "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py": "b1b784f2cba677a52211f5ed6f759b27d43e931d7e9e54db72966a872adc61e8"
+  }
+}

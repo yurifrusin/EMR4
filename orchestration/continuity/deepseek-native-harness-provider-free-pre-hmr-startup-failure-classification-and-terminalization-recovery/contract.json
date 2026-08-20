@@ -1,0 +1,85 @@
+{
+  "causes": [
+    "ambiguous_startup_signatures",
+    "controller_startup_exception",
+    "hmr_bootstrap_failed",
+    "module_resolution_failed",
+    "node_runtime_contract_rejected",
+    "operating_system_process_failure",
+    "package_entrypoint_load_failed",
+    "profile_load_or_validation_failed",
+    "required_service_unavailable",
+    "startup_stream_limit_exceeded",
+    "unclassified_nonzero_exit"
+  ],
+  "classification_byte_limit_per_stream": 65536,
+  "closed_surfaces": [
+    "native_harness_process",
+    "worker_or_broker_process",
+    "deepseek_gemini_or_other_provider_request",
+    "raw_stream_retention",
+    "product_database_or_protected_data",
+    "deployment_release_pages_or_protected_refs"
+  ],
+  "controller_coordinates": [
+    "native_process_creation_failed",
+    "native_process_exited_nonzero",
+    "native_worker_timeout",
+    "unexpected_controller_failure"
+  ],
+  "immutable_attempts": [
+    "attempt-001",
+    "attempt-002"
+  ],
+  "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+  "provider_posture": "provider_disabled_zero_process",
+  "required_order": [
+    "observe_failed_pre_hmr_lifecycle",
+    "stop_exact_owned_process_tree",
+    "incrementally_read_local_streams",
+    "derive_and_validate_sanitized_terminal",
+    "exclusive_write_and_readback_terminal",
+    "remove_exact_disposable_root",
+    "publish_outer_terminal_with_sanitized_digest"
+  ],
+  "schema_version": "ariadne.native_harness_pre_hmr_recovery_contract.v1",
+  "signature_groups": {
+    "hmr_bootstrap_failed": [
+      "hmr unavailable",
+      "hmr bootstrap failed",
+      "hot module replacement failed"
+    ],
+    "module_resolution_failed": [
+      "err_module_not_found",
+      "cannot find module",
+      "module not found"
+    ],
+    "node_runtime_contract_rejected": [
+      "err_unknown_builtin_module",
+      "unknown builtin module",
+      "--expose-internals"
+    ],
+    "package_entrypoint_load_failed": [
+      "err_package_path_not_exported",
+      "cannot find package '@deepseek-ai/dsh'",
+      "package entrypoint load failed"
+    ],
+    "profile_load_or_validation_failed": [
+      "profile validation failed",
+      "profile not found",
+      "yamlparseerror",
+      "cordis.patch.yml"
+    ],
+    "required_service_unavailable": [
+      "services_unavailable",
+      "required service unavailable",
+      "no provider for",
+      "dependency injection failed"
+    ]
+  },
+  "stages": [
+    "native_process_creation",
+    "native_process_started_before_first_hmr_event"
+  ],
+  "status": "frozen"
+}

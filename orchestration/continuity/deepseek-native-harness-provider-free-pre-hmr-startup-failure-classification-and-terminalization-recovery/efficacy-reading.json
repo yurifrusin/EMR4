@@ -1,0 +1,18 @@
+{
+  "after": {
+    "ambiguous_and_unclassified_fail_closed": true,
+    "raw_stream_bytes_persisted": 0,
+    "safe_cause_count": 11,
+    "safe_stage_count": 2
+  },
+  "before": {
+    "coordinate": "native_harness_terminal_failure",
+    "raw_stream_bytes_persisted": 0,
+    "safe_cause_count": 1,
+    "safe_stage_count": 1
+  },
+  "claim_boundary": "Future pre-first-HMR failures gain a bounded sanitized coordinate; Harness reliability, attempt-002 cause and DeepSeek performance remain unproved.",
+  "operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+  "result": "promising_bounded_traceability_improvement",
+  "schema_version": "ariadne.native_harness_pre_hmr_recovery_efficacy.v1"
+}

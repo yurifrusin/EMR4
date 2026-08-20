@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "boundary": {
+      "additionalProperties": false,
+      "properties": {
+        "native_process_count": {
+          "const": 0
+        },
+        "provider_request_count": {
+          "const": 0
+        },
+        "raw_stream_bytes_persisted": {
+          "const": 0
+        },
+        "subprocess_count": {
+          "const": 0
+        },
+        "worker_process_count": {
+          "const": 0
+        }
+      },
+      "required": [
+        "subprocess_count",
+        "native_process_count",
+        "worker_process_count",
+        "provider_request_count",
+        "raw_stream_bytes_persisted"
+      ],
+      "type": "object"
+    },
+    "controller_ordering": {
+      "type": "object"
+    },
+    "immutable_artifact_count": {
+      "minimum": 17,
+      "type": "integer"
+    },
+    "immutable_artifacts_match": {
+      "const": true
+    },
+    "mutation_count": {
+      "minimum": 10,
+      "type": "integer"
+    },
+    "mutations_rejected": {
+      "minItems": 10,
+      "type": "array"
+    },
+    "operation_id": {
+      "const": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery"
+    },
+    "provider_posture": {
+      "const": "provider_disabled_zero_process"
+    },
+    "result": {
+      "const": "pass"
+    },
+    "scenario_count": {
+      "minimum": 12,
+      "type": "integer"
+    },
+    "scenarios": {
+      "minItems": 12,
+      "type": "array"
+    },
+    "schema_sha256": {
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "ariadne.native_harness_pre_hmr_recovery_evidence.v1"
+    },
+    "source_sha256": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "operation_id",
+    "result",
+    "provider_posture",
+    "scenario_count",
+    "mutation_count",
+    "scenarios",
+    "mutations_rejected",
+    "controller_ordering",
+    "immutable_artifact_count",
+    "immutable_artifacts_match",
+    "source_sha256",
+    "schema_sha256",
+    "boundary"
+  ],
+  "type": "object"
+}

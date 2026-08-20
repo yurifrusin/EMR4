@@ -1,0 +1,133 @@
+{
+  "$id": "https://emr4.dev/schemas/native-harness-pre-hmr-startup-terminal-v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "attempt_id": {
+      "pattern": "^[a-z0-9][a-z0-9._-]{0,159}$",
+      "type": "string"
+    },
+    "candidate_source": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "cause": {
+      "enum": [
+        "ambiguous_startup_signatures",
+        "controller_startup_exception",
+        "hmr_bootstrap_failed",
+        "module_resolution_failed",
+        "node_runtime_contract_rejected",
+        "operating_system_process_failure",
+        "package_entrypoint_load_failed",
+        "profile_load_or_validation_failed",
+        "required_service_unavailable",
+        "startup_stream_limit_exceeded",
+        "unclassified_nonzero_exit"
+      ]
+    },
+    "classification_byte_limit_per_stream": {
+      "const": 65536
+    },
+    "controller_coordinate": {
+      "enum": [
+        "native_process_creation_failed",
+        "native_process_exited_nonzero",
+        "native_worker_timeout",
+        "unexpected_controller_failure"
+      ]
+    },
+    "exit_code": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "hmr_event_count": {
+      "const": 0
+    },
+    "matched_signature_groups": {
+      "items": {
+        "enum": [
+          "hmr_bootstrap_failed",
+          "module_resolution_failed",
+          "node_runtime_contract_rejected",
+          "package_entrypoint_load_failed",
+          "profile_load_or_validation_failed",
+          "required_service_unavailable"
+        ]
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "operation_id": {
+      "pattern": "^[a-z0-9][a-z0-9._-]{0,159}$",
+      "type": "string"
+    },
+    "raw_streams_retained": {
+      "const": false
+    },
+    "schema_version": {
+      "const": "ariadne.native_harness_pre_hmr_startup_terminal.v1"
+    },
+    "stage": {
+      "enum": [
+        "native_process_creation",
+        "native_process_started_before_first_hmr_event"
+      ]
+    },
+    "stderr": {
+      "additionalProperties": false,
+      "properties": {
+        "byte_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "byte_count",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "stdout": {
+      "additionalProperties": false,
+      "properties": {
+        "byte_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "byte_count",
+        "sha256"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "operation_id",
+    "attempt_id",
+    "candidate_source",
+    "stage",
+    "cause",
+    "exit_code",
+    "controller_coordinate",
+    "hmr_event_count",
+    "matched_signature_groups",
+    "classification_byte_limit_per_stream",
+    "raw_streams_retained",
+    "stdout",
+    "stderr"
+  ],
+  "type": "object"
+}

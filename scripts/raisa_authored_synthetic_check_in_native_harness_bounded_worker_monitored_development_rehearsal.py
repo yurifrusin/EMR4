@@ -23,6 +23,7 @@ import yaml
 from orchestration_harness.transactional_closeout import (
     sha256 as canonical_object_sha256,
 )
+from orchestration_harness import native_startup_terminal as startup_terminal
 
 from scripts import (
     deepseek_native_harness_provider_free_effective_tool_composition_guard as guard,
@@ -59,6 +60,7 @@ CONSUMED_PATH = CONTINUITY_ROOT / "occupied-attempt-consumed.json"
 TERMINAL_PATH = CONTINUITY_ROOT / "occupied-terminal.json"
 TERMINAL_SCHEMA_PATH = CONTINUITY_ROOT / "occupied-terminal.schema.json"
 NATIVE_REPORT_PATH = CONTINUITY_ROOT / "occupied-report.md"
+PRE_HMR_TERMINAL_PATH = CONTINUITY_ROOT / "pre-hmr-startup-terminal.json"
 PLAN_PATH = REPO_ROOT / "docs" / f"{OPERATION_ID}-plan.md"
 THREAT_PATH = REPO_ROOT / "docs" / "security" / f"{OPERATION_ID}-threat-model-delta.md"
 BROKER_PATH = REPO_ROOT / "scripts" / "ariadne_deepseek_native_harness_broker.mjs"
@@ -202,6 +204,7 @@ def attempt_two_configuration() -> dict[str, Any]:
         "terminal_path": evidence_root / "occupied-terminal.json",
         "terminal_schema_path": evidence_root / "occupied-terminal.schema.json",
         "native_report_path": evidence_root / "occupied-report.md",
+        "pre_hmr_terminal_path": evidence_root / "pre-hmr-startup-terminal.json",
         "work_order_id": "wo-synthetic-native-window-worker-002",
         "lease_id": "lease-synthetic-native-window-worker-002",
     }
@@ -214,7 +217,7 @@ def configure_attempt_two() -> None:
     global CHECKPOINT_PATH, PREPARATION_PATH, WORK_ORDER_PATH
     global AUTHORITY_PATH, FORBIDDEN_PATH, COMMAND_MANIFEST_PATH
     global NO_DATABASE_ADMISSION_PATH, CONSUMED_PATH, TERMINAL_PATH
-    global TERMINAL_SCHEMA_PATH, NATIVE_REPORT_PATH
+    global TERMINAL_SCHEMA_PATH, NATIVE_REPORT_PATH, PRE_HMR_TERMINAL_PATH
     global ATTEMPT_ROOT, ATTEMPT_ID, WORK_ORDER_ID, LEASE_ID
 
     value = attempt_two_configuration()
@@ -230,6 +233,7 @@ def configure_attempt_two() -> None:
     TERMINAL_PATH = value["terminal_path"]
     TERMINAL_SCHEMA_PATH = value["terminal_schema_path"]
     NATIVE_REPORT_PATH = value["native_report_path"]
+    PRE_HMR_TERMINAL_PATH = value["pre_hmr_terminal_path"]
     ATTEMPT_ROOT = value["attempt_root"]
     ATTEMPT_ID = value["attempt_id"]
     WORK_ORDER_ID = value["work_order_id"]
@@ -1095,6 +1099,7 @@ def prepare_attempt(review_receipt_path: Path) -> dict[str, Any]:
             NO_DATABASE_ADMISSION_PATH,
             CONSUMED_PATH,
             TERMINAL_PATH,
+            PRE_HMR_TERMINAL_PATH,
         )
     ):
         raise RehearsalError("attempt_artifact_already_exists")
@@ -1460,7 +1465,11 @@ admit EMR4 product work, multi-turn reliability or production use.
 def execute_native() -> dict[str, Any]:
     checkpoint = load_checkpoint()
     validate_authority_boundary()
-    if CONSUMED_PATH.exists() or TERMINAL_PATH.exists():
+    if (
+        CONSUMED_PATH.exists()
+        or TERMINAL_PATH.exists()
+        or PRE_HMR_TERMINAL_PATH.exists()
+    ):
         raise RehearsalError("occupied_attempt_already_consumed")
     root = ATTEMPT_ROOT.resolve()
     parent = Path("C:/Users/sarashera/EMR4-worktrees").resolve()
@@ -1494,6 +1503,11 @@ def execute_native() -> dict[str, Any]:
     hmr_names: list[str] = []
     harness_exit: int | None = None
     native_started = False
+    native_launch_attempted = False
+    controller_coordinate: str | None = None
+    pre_hmr_terminal: dict[str, Any] | None = None
+    pre_hmr_terminal_sha256: str | None = None
+    hmr_observation_valid = True
     start = time.monotonic()
     raw_readings: dict[str, Any] = {}
     runtime_profiles: dict[str, str] = {}
@@ -1556,13 +1570,18 @@ def execute_native() -> dict[str, Any]:
                 task_text(target.resolve().as_posix()),
             ]
             with stdout_path.open("wb") as stdout, stderr_path.open("wb") as stderr:
-                harness = subprocess.Popen(
-                    command,
-                    cwd=workspace,
-                    env=_worker_environment(root, port, token),
-                    stdout=stdout,
-                    stderr=stderr,
-                )
+                native_launch_attempted = True
+                try:
+                    harness = subprocess.Popen(
+                        command,
+                        cwd=workspace,
+                        env=_worker_environment(root, port, token),
+                        stdout=stdout,
+                        stderr=stderr,
+                    )
+                except OSError as error:
+                    controller_coordinate = "native_process_creation_failed"
+                    raise RehearsalError("native_process_creation_failed") from error
                 native_started = True
                 deadline = time.monotonic() + 420
                 mutated = False
@@ -1572,6 +1591,7 @@ def execute_native() -> dict[str, Any]:
                         profile_path.write_bytes(changed)
                         mutated = True
                     if time.monotonic() >= deadline:
+                        controller_coordinate = "native_worker_timeout"
                         raise RehearsalError("native_worker_timeout")
                     time.sleep(0.05)
                 harness_exit = harness.wait(timeout=10)
@@ -1581,24 +1601,84 @@ def execute_native() -> dict[str, Any]:
             if runner_terminal_path.is_file():
                 runner = load_json(runner_terminal_path)
             if harness_exit != 0:
+                controller_coordinate = "native_process_exited_nonzero"
                 raise RehearsalError("native_harness_terminal_failure")
     except RehearsalError as error:
         failure = str(error)
+        if native_started and controller_coordinate is None:
+            controller_coordinate = "unexpected_controller_failure"
     except (OSError, subprocess.SubprocessError, ValueError, json.JSONDecodeError):
         failure = "unexpected_controller_failure"
+        if native_started:
+            controller_coordinate = "unexpected_controller_failure"
     finally:
         _terminate(harness)
         _terminate(broker)
+        if harness is not None and harness_exit is None:
+            harness_exit = harness.poll()
         if broker_thread is not None:
             broker_thread.join(timeout=10)
+        if native_launch_attempted:
+            try:
+                hmr_names = _hmr_events(event_path)
+            except (OSError, UnicodeError, json.JSONDecodeError, RehearsalError):
+                hmr_observation_valid = False
+                failure = (
+                    "hmr_observation_invalid"
+                    if failure is None
+                    else f"{failure}+hmr_observation_invalid"
+                )
+            stream_readings: dict[str, dict[str, Any]] = {}
+            for label, path in (("stdout", stdout_path), ("stderr", stderr_path)):
+                try:
+                    stream_readings[label] = startup_terminal.read_startup_stream(
+                        path
+                    )
+                except startup_terminal.StartupTerminalError:
+                    failure = (
+                        "pre_hmr_startup_stream_read_failed"
+                        if failure is None
+                        else f"{failure}+pre_hmr_startup_stream_read_failed"
+                    )
+            if (
+                failure is not None
+                and hmr_observation_valid
+                and not hmr_names
+                and controller_coordinate is not None
+                and set(stream_readings) == {"stdout", "stderr"}
+            ):
+                try:
+                    pre_hmr_terminal = startup_terminal.build_pre_hmr_terminal(
+                        operation_id=EXECUTION_OPERATION_ID,
+                        attempt_id=ATTEMPT_ID,
+                        candidate_source=checkpoint["candidate_source"],
+                        native_process_started=native_started,
+                        exit_code=harness_exit,
+                        controller_coordinate=controller_coordinate,
+                        hmr_events=hmr_names,
+                        stdout=stream_readings["stdout"],
+                        stderr=stream_readings["stderr"],
+                    )
+                except startup_terminal.StartupTerminalError:
+                    failure += "+pre_hmr_terminal_derivation_failed"
         for label, path in (
             ("stdout", stdout_path),
             ("stderr", stderr_path),
             ("broker_stderr", broker_stderr_path),
         ):
-            payload = path.read_bytes() if path.exists() else b""
-            raw_readings[f"{label}_bytes"] = len(payload)
-            raw_readings[f"{label}_sha256"] = sha256_bytes(payload)
+            if label in {"stdout", "stderr"} and native_launch_attempted:
+                reading = stream_readings.get(label)
+            else:
+                try:
+                    reading = startup_terminal.read_startup_stream(path)
+                except startup_terminal.StartupTerminalError:
+                    reading = None
+            raw_readings[f"{label}_bytes"] = (
+                reading["byte_count"] if reading is not None else 0
+            )
+            raw_readings[f"{label}_sha256"] = (
+                reading["sha256"] if reading is not None else sha256_bytes(b"")
+            )
 
     changed_paths = sorted(
         line[3:].replace("\\", "/")
@@ -1661,6 +1741,23 @@ def execute_native() -> dict[str, Any]:
     if not success and failure is None:
         failure = "occupied_acceptance_mismatch"
 
+    if pre_hmr_terminal is not None:
+        try:
+            pre_hmr_terminal_sha256 = (
+                startup_terminal.write_pre_hmr_terminal_exclusive(
+                    path=PRE_HMR_TERMINAL_PATH.resolve(),
+                    terminal=pre_hmr_terminal,
+                    evidence_root=CONTINUITY_ROOT.resolve(),
+                    disposable_root=root,
+                )
+            )
+        except startup_terminal.StartupTerminalError:
+            success = False
+            failure = (
+                "pre_hmr_terminalization_failed"
+                if failure is None
+                else f"{failure}+pre_hmr_terminalization_failed"
+            )
     cleanup_passed = remove_exact_attempt_root(root, parent)
     root_absent = not root.exists()
     if not cleanup_passed or not root_absent:
@@ -1677,6 +1774,7 @@ def execute_native() -> dict[str, Any]:
         "candidate_source": checkpoint["candidate_source"],
         "result": "pass" if success else "failed_closed",
         "failure_coordinate": None if success else failure,
+        "pre_hmr_startup_terminal_sha256": pre_hmr_terminal_sha256,
         "work_order_sha256": file_sha256(WORK_ORDER_PATH),
         "process": {
             "native_process_count": 1 if native_started else 0,

@@ -11,6 +11,7 @@
     "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
     "result": {"enum": ["pass", "failed_closed"]},
     "failure_coordinate": {"type": ["string", "null"]},
+    "pre_hmr_startup_terminal_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
     "work_order_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "process": {
       "type": "object",

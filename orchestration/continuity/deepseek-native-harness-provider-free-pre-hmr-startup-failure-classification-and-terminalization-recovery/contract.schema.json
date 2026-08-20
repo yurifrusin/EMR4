@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "causes": {
+      "const": [
+        "ambiguous_startup_signatures",
+        "controller_startup_exception",
+        "hmr_bootstrap_failed",
+        "module_resolution_failed",
+        "node_runtime_contract_rejected",
+        "operating_system_process_failure",
+        "package_entrypoint_load_failed",
+        "profile_load_or_validation_failed",
+        "required_service_unavailable",
+        "startup_stream_limit_exceeded",
+        "unclassified_nonzero_exit"
+      ]
+    },
+    "classification_byte_limit_per_stream": {
+      "const": 65536
+    },
+    "closed_surfaces": {
+      "maxItems": 6,
+      "minItems": 6,
+      "type": "array"
+    },
+    "controller_coordinates": {
+      "const": [
+        "native_process_creation_failed",
+        "native_process_exited_nonzero",
+        "native_worker_timeout",
+        "unexpected_controller_failure"
+      ]
+    },
+    "immutable_attempts": {
+      "const": [
+        "attempt-001",
+        "attempt-002"
+      ]
+    },
+    "operation_id": {
+      "const": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery"
+    },
+    "provider_posture": {
+      "const": "provider_disabled_zero_process"
+    },
+    "required_order": {
+      "maxItems": 7,
+      "minItems": 7,
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "ariadne.native_harness_pre_hmr_recovery_contract.v1"
+    },
+    "signature_groups": {
+      "type": "object"
+    },
+    "stages": {
+      "const": [
+        "native_process_creation",
+        "native_process_started_before_first_hmr_event"
+      ]
+    },
+    "status": {
+      "const": "frozen"
+    }
+  },
+  "required": [
+    "schema_version",
+    "operation_id",
+    "status",
+    "provider_posture",
+    "classification_byte_limit_per_stream",
+    "stages",
+    "causes",
+    "controller_coordinates",
+    "signature_groups",
+    "required_order",
+    "immutable_attempts",
+    "closed_surfaces"
+  ],
+  "type": "object"
+}

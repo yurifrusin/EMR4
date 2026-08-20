@@ -189,6 +189,7 @@ def test_attempt_two_configuration_is_exact_and_disjoint_from_attempt_one() -> N
             "terminal_path",
             "terminal_schema_path",
             "native_report_path",
+            "pre_hmr_terminal_path",
         )
     }
     assert all(path.parent == attempt_two_root for path in attempt_two_paths)
@@ -204,6 +205,7 @@ def test_attempt_two_configuration_is_exact_and_disjoint_from_attempt_one() -> N
         subject.TERMINAL_PATH,
         subject.TERMINAL_SCHEMA_PATH,
         subject.NATIVE_REPORT_PATH,
+        subject.PRE_HMR_TERMINAL_PATH,
     }
 
 
@@ -221,6 +223,10 @@ def test_attempt_two_terminal_schema_is_exact_and_cannot_admit_attempt_one() -> 
     schema["$id"] = legacy["$id"]
     schema["properties"]["operation_id"] = legacy["properties"]["operation_id"]
     schema["properties"]["attempt_id"] = legacy["properties"]["attempt_id"]
+    assert schema["properties"].pop("pre_hmr_startup_terminal_sha256") == {
+        "type": ["string", "null"],
+        "pattern": "^[0-9a-f]{64}$",
+    }
     assert schema == legacy
 
 
