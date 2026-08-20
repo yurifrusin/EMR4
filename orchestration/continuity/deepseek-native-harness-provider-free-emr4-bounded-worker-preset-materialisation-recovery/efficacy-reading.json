@@ -79,9 +79,14 @@
     ],
     "commentary_factual_corrections": 1,
     "commentary_factual_note": "The payload size was corrected from an early 160-byte commentary estimate to the measured 158 bytes.",
-    "clockwork_publication_attempts_before_final": 1,
-    "clockwork_rollback_count_before_final": 1,
-    "clockwork_rollback_note": "Lease 53 was a deterministic clean publication, but it omitted the newly observed repeated session-handle incident. It was preserved and rolled back byte-exactly at lease 54 before corrected incident-intake publication.",
+    "clockwork_publication_attempts_before_final": 2,
+    "clockwork_rollback_count_before_final": 2,
+    "clockwork_rollback_notes": [
+      "Lease 53 was a deterministic clean publication, but it omitted the newly observed repeated session-handle incident. It was preserved and rolled back byte-exactly at lease 54 before corrected incident-intake publication.",
+      "Lease 55 correctly derived AER-0666, but the complete observed postpublication suite found one stale exact recurrence-member assertion. It was preserved and rolled back byte-exactly at lease 56 before the prospective expectation and second incident were added."
+    ],
+    "postpublication_compatibility_corrections": 1,
+    "postpublication_compatibility_correction": "Update the exact yielded-session recurrence fixture from AER-0651/AER-0654 count two to AER-0651/AER-0654/AER-0666 count three.",
     "native_attempt_retry_count": 0
   },
   "rerun_assessment": {
@@ -89,9 +94,9 @@
     "semantic_review_attempt_count": 1,
     "blind_retry_count": 0,
     "native_attempt_retry_count": 0,
-    "qualifying_incident_count": 1,
+    "qualifying_incident_count": 2,
     "micro_corrections_recorded_only_in_efficacy": 9,
-    "conclusion": "The tranche achieved its exact candidate and independent veto without semantic rebuild, verifier retry or native-process retry. The repeated yielded-session-handle lapse is not hidden as a micro-cost: the first publication is preserved, rolled back byte-exactly and entered through clockwork incident intake before final closeout."
+    "conclusion": "The tranche achieved its exact candidate and independent veto without semantic rebuild, verifier retry or native-process retry. The repeated yielded-session-handle lapse and the stale prospective recurrence fixture are not hidden: both publications are preserved, rolled back byte-exactly and entered through clockwork incident intake before final closeout."
   },
   "protected_boundaries_preserved": true
 }

@@ -33,6 +33,14 @@ byte-for-byte so the recurrence could enter the error register before final
 publication. This does not affect the candidate, but it is exactly the kind of
 workflow cost the efficacy mechanism must make visible.
 
+The strengthened result handling immediately paid for itself: the next full
+test run preserved a real failure instead of losing it. The error-register
+test still expected only the two old occurrences of this same mistake, while
+the clockwork had correctly added the new third occurrence. That publication
+was also preserved and rolled back byte-for-byte; the test now expects all
+three. This is closeout overhead, but it is evidence-led rather than a blind
+rerun.
+
 The next step is a single, tightly bounded provider-free native boot that puts
 the now-proven pieces together. It will test harness discovery, service
 activation and the final three-tool view, but still will not run a DeepSeek
@@ -57,7 +65,8 @@ worker or contact a model provider.
   zero-exit commands, 101 tests, unchanged HEAD and clean worktree.
 - Closeout recovery: one repeated yielded-session-handle lapse; unchanged
   observed compatibility rerun passed to 100%; lease 53 preserved and rolled
-  back byte-exactly at lease 54 for incident intake.
+  back byte-exactly at lease 54 for incident intake; lease 55 then exposed one
+  stale recurrence fixture and was rolled back at lease 56 for correction.
 - Execution boundary: zero Node, native Harness, worker, agent, broker,
   DeepSeek model, provider, external network, Docker and database execution.
 - Protected boundary: no product, API, client, feature flag, practice, data,

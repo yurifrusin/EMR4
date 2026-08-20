@@ -45,6 +45,13 @@ otherwise-valid lease-53 publication is preserved and rolled back byte-exactly
 at lease 54; this recurrence enters clockwork incident intake rather than being
 mislabelled as a micro-cost.
 
+That stronger control then retained the complete lease-55 postpublication
+failure. Correct incident intake added `AER-0666`, but one register test still
+hard-coded the older two-member recurrence. Lease 55 is preserved and rolled
+back byte-exactly at lease 56; the prospective assertion now names
+`AER-0651`, `AER-0654`, `AER-0666` and count three. This second bounded
+closeout incident also enters clockwork intake.
+
 No Node or native Harness process, worker, agent, session, turn, broker,
 DeepSeek model, provider, network, Docker or database action occurred. No
 product, API, client, feature flag, allowlist, grammar, ordinary-practice,

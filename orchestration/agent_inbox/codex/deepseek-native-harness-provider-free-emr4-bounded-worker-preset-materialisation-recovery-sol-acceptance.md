@@ -38,6 +38,12 @@ zero; the first lease-53 publication is preserved, rolled back byte-exactly at
 lease 54 and admitted as a qualifying clockwork-owned incident before final
 acceptance.
 
+The corrected full-envelope run then exposed one stale register compatibility
+assertion after correct derivation of `AER-0666`. Lease 55 is likewise
+preserved and rolled back byte-exactly at lease 56; the exact prospective
+recurrence fixture is corrected and this repository defect enters the same
+clockwork-owned revision before acceptance.
+
 Claim ceiling: this proves an exact installation-ready preset payload and its
 deterministic post-mount projection. It does not prove live discovery, mount,
 combined service activation, native scope or schema observation, an occupied

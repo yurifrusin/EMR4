@@ -4009,8 +4009,12 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
         if row["recurrence_signature"]
         == "orchestrator.yielded_verification_session_id_not_exposed"
     )
-    assert yielded_session_recurrence["incident_ids"] == ["AER-0651", "AER-0654"]
-    assert yielded_session_recurrence["incident_count"] == 2
+    assert yielded_session_recurrence["incident_ids"] == [
+        "AER-0651",
+        "AER-0654",
+        "AER-0666",
+    ]
+    assert yielded_session_recurrence["incident_count"] == 3
     legacy_pattern_baseline_max_incident = 656
     assert [
         row

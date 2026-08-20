@@ -6,7 +6,7 @@ Timestamp: 2026-08-20T11:05:00+10:00 (Australia/Brisbane)
 
 ## Revision scope
 
-Revision 569 records one low-severity orchestration recurrence from the
+Revision 569 records two bounded closeout incidents from the
 DeepSeek native Harness provider-free emr4-bounded-worker preset
 materialisation recovery.
 
@@ -24,6 +24,14 @@ unchanged. The otherwise-valid lease-53 clean publication is preserved as a
 rejected closeout attempt and rolled back byte-exactly at lease 54 so this
 recurrence can enter canonical incident intake before final publication.
 
+The next incident was exposed precisely because the corrected full-envelope
+control worked. Lease 55 derived `AER-0666`, and the complete postpublication
+suite retained session `38278` through exit code one. Its sole failure was an
+existing register test that hard-coded the yielded-session recurrence members
+as `AER-0651` and `AER-0654`; correct intake had added `AER-0666`. Lease 55 is
+preserved and rolled back byte-exactly at lease 56. The expectation now names
+all three exact members and count three before the corrected publication.
+
 The clockwork derives the incident identifier, revision, origin, status,
 counts and pattern report from the semantic observation in the closeout
 intent. This explanatory note does not replace the canonical register under
@@ -36,4 +44,6 @@ dedicated call whose complete result envelope—`output`, `session_id`,
 `exit_code` and `chunk_id`—is emitted before control returns. A nonterminal
 result is polled through that retained identifier to a final exit. Long test
 suites are not placed in a multi-command shell chain whose earlier exit could
-become unobservable.
+become unobservable. Exact recurrence-member fixtures must be updated from the
+prospective dry clockwork reading whenever incident intake deliberately adds a
+member to an existing pattern.
