@@ -1,0 +1,163 @@
+{
+  "command_manifest_sha256": "sha256:057f2eae46fd2a1dc0a17381448ba256dc312faf48608cbb7aa91e1789de6975",
+  "commands": [
+    {
+      "argv_sha256": "sha256:5a323797dccd4dd67bf5f5f7320968254ab5c874158420ca3e5bbdb3009e1958",
+      "command_id": "PF_SYNTHETIC_NATIVE_WORKER",
+      "selection": {
+        "policy_version": "ariadne.provider_free_no_database_policy.v1",
+        "pytest_core_fixture_allowlist": [
+          "capfd",
+          "capfdbinary",
+          "caplog",
+          "capsys",
+          "capsysbinary",
+          "doctest_namespace",
+          "monkeypatch",
+          "pytestconfig",
+          "record_property",
+          "record_testsuite_property",
+          "record_xml_attribute",
+          "recwarn",
+          "request",
+          "tmp_path",
+          "tmp_path_factory",
+          "tmpdir",
+          "tmpdir_factory"
+        ],
+        "schema_version": "ariadne.provider_free_no_database_selection.v1",
+        "selected_tests": [
+          {
+            "local_fixtures": [],
+            "path": "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+            "resolved_fixture_edges": [
+              {
+                "consumer": "test_preparation_derives_full_reviewed_ancestor_not_current_head",
+                "fixture": "monkeypatch",
+                "source": "pytest_core"
+              },
+              {
+                "consumer": "test_preparation_derives_full_reviewed_ancestor_not_current_head",
+                "fixture": "tmp_path",
+                "source": "pytest_core"
+              },
+              {
+                "consumer": "test_work_package_has_one_exact_edit_success_shape",
+                "fixture": "tmp_path",
+                "source": "pytest_core"
+              },
+              {
+                "consumer": "test_worker_environment_cannot_receive_provider_credential",
+                "fixture": "monkeypatch",
+                "source": "pytest_core"
+              },
+              {
+                "consumer": "test_worker_environment_cannot_receive_provider_credential",
+                "fixture": "tmp_path",
+                "source": "pytest_core"
+              }
+            ],
+            "source_sha256": "sha256:92c089a20b6d634cfacc7594655c915ad3dc8542e0b3b39d8ccca65705c913b0",
+            "test_count": 15
+          },
+          {
+            "local_fixtures": [],
+            "path": "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal_plan.py",
+            "resolved_fixture_edges": [],
+            "source_sha256": "sha256:0bf7c112ddb9d1a47df71c3d4c6550df87171952cf78b05f0ea0ef2a3621ea8d",
+            "test_count": 5
+          },
+          {
+            "local_fixtures": [
+              "broker_process"
+            ],
+            "path": "tests/test_ariadne_deepseek_native_harness_broker.py",
+            "resolved_fixture_edges": [
+              {
+                "consumer": "broker_process",
+                "fixture": "request",
+                "source": "pytest_core"
+              },
+              {
+                "consumer": "broker_process",
+                "fixture": "tmp_path",
+                "source": "pytest_core"
+              },
+              {
+                "consumer": "test_broker_binds_one_session_without_imposing_request_count_budget",
+                "fixture": "broker_process",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_broker_continues_the_work_order_clock_without_secret_leakage",
+                "fixture": "broker_process",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_broker_optional_one_request_allowance_rejects_ordinal_two_before_upstream",
+                "fixture": "broker_process",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_broker_rejects_malformed_or_digest_drifted_work_order_before_io",
+                "fixture": "tmp_path",
+                "source": "pytest_core"
+              },
+              {
+                "consumer": "test_broker_rejects_overlapping_provider_call",
+                "fixture": "broker_process",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_broker_rejects_unbound_v1_and_mutated_v2_artifact_before_ready",
+                "fixture": "tmp_path",
+                "source": "pytest_core"
+              },
+              {
+                "consumer": "test_broker_rejects_wrong_token_and_nonallowlisted_tool_without_upstream_call",
+                "fixture": "broker_process",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_broker_replaces_capability_with_provider_key_and_streams_metadata",
+                "fixture": "broker_process",
+                "source": "file_local"
+              },
+              {
+                "consumer": "test_broker_v2_validates_command_and_no_database_artifacts_before_ready",
+                "fixture": "broker_process",
+                "source": "file_local"
+              }
+            ],
+            "source_sha256": "sha256:ca9e93dd30b842ebb1a371dcaa02f9bde15a8dd8e33a2253db5c5b7052102b6d",
+            "test_count": 9
+          }
+        ],
+        "shared_conftest": {
+          "fixture_names": [
+            "appt_type",
+            "clean_db",
+            "client",
+            "db",
+            "engine",
+            "gp_user",
+            "gp_user_b",
+            "patient",
+            "patient_b",
+            "practice",
+            "practice_b",
+            "practitioner",
+            "receptionist_user",
+            "schedule"
+          ],
+          "path": "tests/conftest.py",
+          "source_sha256": "sha256:905013c3e76b62c5eff68235cc2c770791b1ded96330391270d20b49b04a56e7"
+        },
+        "status": "passed"
+      },
+      "selection_sha256": "sha256:a763866a7488ab3db3860b93fdacbc03bfab83b6d5d5a4198806b3c750c98cfc"
+    }
+  ],
+  "schema_version": "ariadne.provider_free_no_database_admission.v1",
+  "status": "passed"
+}

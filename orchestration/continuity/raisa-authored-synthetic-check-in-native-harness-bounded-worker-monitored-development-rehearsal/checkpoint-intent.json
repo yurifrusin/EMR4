@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal",
+  "completed_stage": "The exact provider-free candidate passed deterministic validation in primary and isolated Windows worktrees. Two rich command-result envelopes failed closed and remain immutable. A synthetic diagnostic proved basic structured egress; a fresh semantic-only Gemini 3.7 Flash/high veto passed. Preparation then materialised the authored-synthetic baseline and accepted rc.7 controls with zero native, model or provider requests. The one-process, one-request, zero-retry checkpoint is admitted.",
+  "next_executable_stage": "generate_a_fresh_five_source_preexecution_receipt_then_run_exactly_one_deepseek_native_harness_authored_synthetic_edit_without_retry_or_fallback",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "authored_synthetic_native_worker_checkpoint_tick_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/checkpoint-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}
