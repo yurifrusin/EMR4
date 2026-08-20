@@ -182,24 +182,61 @@ def test_native_schema_rejects_boundary_and_cleanup_broadening() -> None:
     assert provider["properties"]["agent_session_count"]["const"] == 0
     assert provider["properties"]["provider_request_count"]["const"] == 0
     assert cleanup["additionalProperties"] is False
-    assert cleanup["properties"]["raw_logs_retained"]["const"] is False
+    assert cleanup["properties"]["raw_logs_retained"]["type"] == "boolean"
     assert cleanup["properties"]["raw_environment_retained"]["const"] is False
+    assert (
+        schema["allOf"][0]["then"]["properties"]["cleanup"]["properties"]
+        ["raw_logs_retained"]["const"]
+        is False
+    )
 
 
-def test_offline_install_owns_installation_root_before_proof_materialisation() -> None:
+def test_accepted_package_tree_materialises_before_proof_without_npm() -> None:
     source = inspect.getsource(subject.execute_native)
-    assert source.index("package_root, _ = _offline_install") < source.index(
+    assert source.index("package_root, _ = materialize_accepted_node_modules") < source.index(
         "proof.mkdir(parents=True)"
     )
-    assert "NATIVE_PRELAUNCH_OFFLINE_INSTALL_FAILED" in source
+    assert "NATIVE_PRELAUNCH_ACCEPTED_MATERIALIZATION_FAILED" in source
+    assert "_offline_install" not in source
 
 
-def test_attempt_002_uses_fresh_exclusive_lifecycle_paths() -> None:
-    assert subject.NATIVE_ATTEMPT_ID == "check-in-preset-mount-effective-tool-native-002"
-    assert subject.NATIVE_CHECKPOINT_PATH.name.endswith("attempt-002.json")
-    assert subject.NATIVE_CONSUMED_PATH.name.endswith("attempt-002.json")
-    assert subject.NATIVE_TERMINAL_PATH.name.endswith("attempt-002.json")
-    assert subject.NATIVE_REPORT_PATH.name.endswith("attempt-002.md")
+def test_attempt_003_uses_fresh_exclusive_lifecycle_paths() -> None:
+    assert subject.NATIVE_ATTEMPT_ID == "check-in-preset-mount-effective-tool-native-003"
+    assert subject.NATIVE_CHECKPOINT_PATH.name.endswith("attempt-003.json")
+    assert subject.NATIVE_CONSUMED_PATH.name.endswith("attempt-003.json")
+    assert subject.NATIVE_TERMINAL_PATH.name.endswith("attempt-003.json")
+    assert subject.NATIVE_REPORT_PATH.name.endswith("attempt-003.md")
+
+
+def test_materialization_source_is_exact_and_uses_no_process() -> None:
+    projection = subject.validate_materialization_source(subject.load_contract())
+    assert projection["materialization_process_count"] == 0
+    assert projection["validated_packages"] == {
+        "@deepseek-ai/dsh": "0.1.0-rc.7",
+        "@deepseek-ai/dsh-tools": "0.1.0-rc.7",
+        "@deepseek-ai/dsh-agent-presets": "0.1.0-rc.7",
+        "@deepseek-ai/dsh-scope": "0.1.0-rc.7",
+        "@deepseek-ai/dsh-tool-fs": "0.1.0-rc.7",
+        "@deepseek-ai/dsh-tool-fs-search": "0.1.0-rc.7",
+    }
+
+
+def test_accepted_package_tree_materialization_fixture() -> None:
+    fixture = subject.run_materialization_fixture()
+    assert fixture == {
+        "result": "pass",
+        "materialization_process_count": 0,
+        "critical_package_count": 6,
+        "copied_package_root_observed": True,
+        "disposable_root_absent": True,
+    }
+
+
+def test_cleanup_is_bounded_and_preserves_failure_terminal_path() -> None:
+    source = inspect.getsource(subject.execute_native)
+    assert "for _cleanup_attempt in range(26)" in source
+    assert 'failure = "NATIVE_CLEANUP_FAILED"' in source
+    assert '"raw_logs_retained": not root_absent' in source
 
 
 def test_native_schema_admits_zero_process_prelaunch_failure_but_not_zero_process_pass() -> None:

@@ -36,7 +36,6 @@ from scripts.deepseek_native_harness_provider_free_hmr_boot_proof import (
     POLL_SECONDS,
     ProofError,
     _network_attempts,
-    _offline_install,
     _terminate_process,
     _verify_installed_source,
     atomic_write,
@@ -56,10 +55,14 @@ DETERMINISTIC_SCHEMA_PATH = CONTINUITY_ROOT / "deterministic-evidence.schema.jso
 NATIVE_SCHEMA_PATH = CONTINUITY_ROOT / "native-terminal.schema.json"
 DETERMINISTIC_EVIDENCE_PATH = CONTINUITY_ROOT / "deterministic-evidence.json"
 DETERMINISTIC_REPORT_PATH = CONTINUITY_ROOT / "deterministic-report.md"
-NATIVE_CHECKPOINT_PATH = CONTINUITY_ROOT / "native-preexecution-checkpoint-attempt-002.json"
-NATIVE_CONSUMED_PATH = CONTINUITY_ROOT / "native-consumed-attempt-002.json"
-NATIVE_TERMINAL_PATH = CONTINUITY_ROOT / "native-terminal-attempt-002.json"
-NATIVE_REPORT_PATH = CONTINUITY_ROOT / "native-report-attempt-002.md"
+NATIVE_CHECKPOINT_PATH = CONTINUITY_ROOT / "native-preexecution-checkpoint-attempt-003.json"
+NATIVE_CONSUMED_PATH = CONTINUITY_ROOT / "native-consumed-attempt-003.json"
+NATIVE_TERMINAL_PATH = CONTINUITY_ROOT / "native-terminal-attempt-003.json"
+NATIVE_REPORT_PATH = CONTINUITY_ROOT / "native-report-attempt-003.md"
+MATERIALIZATION_SOURCE_ROOT = Path(
+    "C:/Users/sarashera/EMR4-worktrees/"
+    "deepseek-check-in-attachment-observability-native-001"
+)
 
 CONTRACT_SCHEMA = "ariadne.check_in_preset_mount_effective_tool_contract.v1"
 DETERMINISTIC_SCHEMA = (
@@ -70,7 +73,7 @@ RUNNER_TERMINAL_SCHEMA = "emr4.check-in-preset-mount-effective-tool-runner.v1"
 NATIVE_TERMINAL_SCHEMA = (
     "ariadne.check_in_preset_mount_effective_tool_native_terminal.v1"
 )
-NATIVE_ATTEMPT_ID = "check-in-preset-mount-effective-tool-native-002"
+NATIVE_ATTEMPT_ID = "check-in-preset-mount-effective-tool-native-003"
 EXPECTED_TOOLS = ["edit", "glob", "read"]
 SUCCESS_CODE = "EFFECTIVE_TOOL_COMPOSITION_PASSED"
 ROOT_FAILURE_CODE = "EFFECTIVE_ROOT_ROSTER_MISMATCH"
@@ -156,12 +159,30 @@ def load_contract(path: Path = CONTRACT_PATH) -> dict[str, Any]:
         raise PresetMountProjectionError("contract_profile_mismatch")
     native = value.get("native", {})
     if native != {
-        "failed_prelaunch_attempt": {
-            "attempt_id": "check-in-preset-mount-effective-tool-native-001",
-            "terminal_code": "NATIVE_PRELAUNCH_INSTALLATION_PATH_PRECREATED",
-            "native_process_count": 0,
-            "automatic_retry_count": 0,
-            "resume_permitted": False,
+        "failed_prelaunch_attempts": [
+            {
+                "attempt_id": "check-in-preset-mount-effective-tool-native-001",
+                "terminal_code": "NATIVE_PRELAUNCH_INSTALLATION_PATH_PRECREATED",
+                "package_process_count": 0,
+                "native_process_count": 0,
+                "automatic_retry_count": 0,
+                "resume_permitted": False,
+            },
+            {
+                "attempt_id": "check-in-preset-mount-effective-tool-native-002",
+                "terminal_code": "NATIVE_PRELAUNCH_PACKAGE_MATERIALISATION_TIMEOUT",
+                "package_process_count": 1,
+                "native_process_count": 0,
+                "automatic_retry_count": 0,
+                "resume_permitted": False,
+            },
+        ],
+        "materialization_source": {
+            "root": MATERIALIZATION_SOURCE_ROOT.as_posix(),
+            "package_json_sha256": "0009f94a6b9c3495404d4a1a89e0eef82ba4948c4ea29994c210a271390e64db",
+            "package_lock_sha256": "a89defcd8a2c5aae4a54c03bda98e2585711fce881b4b08c90ca4808d45555f4",
+            "node_modules_lock_sha256": "f68d8d35b440a2d72417f8a50ec6017e28ace9a15da9466ff25d05cdbf7664a4",
+            "materialization_process_count": 0,
         },
         "attempt_id": NATIVE_ATTEMPT_ID,
         "process_limit": 1,
@@ -223,6 +244,92 @@ def bind_predecessors(contract: dict[str, Any]) -> dict[str, Any]:
         "guard": guard_projection,
         "preset_bytes": preset.stat().st_size,
         "preset_sha256": _file_sha256(preset),
+    }
+
+
+def validate_materialization_source(
+    contract: dict[str, Any],
+) -> dict[str, Any]:
+    specification = contract["native"]["materialization_source"]
+    root = MATERIALIZATION_SOURCE_ROOT.resolve(strict=True)
+    if root.as_posix() != specification["root"] or not root.is_dir():
+        raise PresetMountProjectionError("materialization_source_root_mismatch")
+    files = {
+        "package_json_sha256": root / "package.json",
+        "package_lock_sha256": root / "package-lock.json",
+        "node_modules_lock_sha256": root / "node_modules" / ".package-lock.json",
+    }
+    observed: dict[str, str] = {}
+    for field, path in files.items():
+        if not path.is_file():
+            raise PresetMountProjectionError("materialization_source_file_missing")
+        observed[field] = _file_sha256(path)
+        if observed[field] != specification[field]:
+            raise PresetMountProjectionError(
+                "materialization_source_digest_mismatch:" + field
+            )
+    package_root = root / "node_modules" / "@deepseek-ai" / "dsh"
+    old_contract = native_predecessor.load_contract()
+    source_projection = _verify_installed_source(package_root, old_contract)
+    packages = native_predecessor.validate_installed_packages(
+        package_root, old_contract
+    )
+    return {
+        "root": specification["root"],
+        **observed,
+        "validated_packages": packages,
+        "source_projection": source_projection,
+        "materialization_process_count": 0,
+    }
+
+
+def materialize_accepted_node_modules(
+    root: Path, contract: dict[str, Any]
+) -> tuple[Path, dict[str, Any]]:
+    source_projection = validate_materialization_source(contract)
+    source_root = MATERIALIZATION_SOURCE_ROOT.resolve(strict=True)
+    install_root = root / "installation"
+    install_root.mkdir()
+    shutil.copy2(source_root / "package.json", install_root / "package.json")
+    shutil.copy2(source_root / "package-lock.json", install_root / "package-lock.json")
+    shutil.copytree(source_root / "node_modules", install_root / "node_modules")
+    package_root = install_root / "node_modules" / "@deepseek-ai" / "dsh"
+    old_contract = native_predecessor.load_contract()
+    copied_source = _verify_installed_source(package_root, old_contract)
+    copied_packages = native_predecessor.validate_installed_packages(
+        package_root, old_contract
+    )
+    if (
+        copied_source != source_projection["source_projection"]
+        or copied_packages != source_projection["validated_packages"]
+    ):
+        raise PresetMountProjectionError("materialized_package_projection_mismatch")
+    return package_root, source_projection
+
+
+def run_materialization_fixture() -> dict[str, Any]:
+    parent = DISPOSABLE_PARENT.resolve(strict=True)
+    root = Path(
+        tempfile.mkdtemp(prefix="dsh-preset-materialization-fixture-", dir=parent)
+    ).resolve()
+    if root.parent != parent:
+        raise PresetMountProjectionError("materialization_fixture_root_escape")
+    package_root: Path | None = None
+    projection: dict[str, Any] | None = None
+    try:
+        package_root, projection = materialize_accepted_node_modules(
+            root, load_contract()
+        )
+        if not package_root.is_dir():
+            raise PresetMountProjectionError("materialization_fixture_package_missing")
+    finally:
+        shutil.rmtree(root)
+    return {
+        "result": "pass",
+        "materialization_process_count": 0,
+        "critical_package_count": len(projection["validated_packages"]),
+        "copied_package_root_observed": package_root is not None,
+        "disposable_root_absent": not root.exists(),
     }
 
 
@@ -574,6 +681,7 @@ def deterministic_evidence() -> dict[str, Any]:
         "runner": validate_runner_source(runner_source()),
         "sentinel_sha256": _sha256(sentinel_source()),
         "guard_sha256": _sha256(guard.build_guard_source()),
+        "materialization_source": validate_materialization_source(contract),
         "native_process_checkpoint_admitted": False,
     }
     evidence = {
@@ -729,9 +837,7 @@ def execute_native() -> dict[str, Any]:
     deterministic_evidence()
     old_contract = native_predecessor.load_contract()
     cache_root = service_injection_recovery.default_cache_root().resolve()
-    blob, cached_packages = native_predecessor.verify_cached_packages(
-        old_contract, cache_root
-    )
+    native_predecessor.verify_cached_packages(old_contract, cache_root)
     parent = DISPOSABLE_PARENT.resolve()
     if not parent.is_dir():
         raise PresetMountProjectionError("disposable_parent_missing")
@@ -765,16 +871,14 @@ def execute_native() -> dict[str, Any]:
         stdout_path = root / "stdout.log"
         stderr_path = root / "stderr.log"
         guard_path = root / "network-guard.mjs"
-        tarball = root / "dsh-0.1.0-rc.7.tgz"
         workspace.mkdir()
         profile_dir.mkdir(parents=True)
         guard_path.write_bytes(network_guard_source())
-        tarball.write_bytes(blob.read_bytes())
         environment, removed_environment_names = build_child_environment(
             home, guard_path, network_path
         )
-        failure = "NATIVE_PRELAUNCH_OFFLINE_INSTALL_FAILED"
-        package_root, _ = _offline_install(root, tarball, environment)
+        failure = "NATIVE_PRELAUNCH_ACCEPTED_MATERIALIZATION_FAILED"
+        package_root, _ = materialize_accepted_node_modules(root, load_contract())
         proof.mkdir(parents=True)
         failure = "NATIVE_PRELAUNCH_PACKAGE_VALIDATION_FAILED"
         _verify_installed_source(package_root, old_contract)
@@ -899,8 +1003,20 @@ def execute_native() -> dict[str, Any]:
         if process is not None and process.poll() is None:
             _terminate_process(process)
         if root.parent != parent:
-            raise PresetMountProjectionError("cleanup_root_escape")
-        shutil.rmtree(root)
+            failure = "NATIVE_CLEANUP_ROOT_ESCAPE"
+        else:
+            for _cleanup_attempt in range(26):
+                try:
+                    shutil.rmtree(root)
+                    break
+                except PermissionError:
+                    if _cleanup_attempt == 25:
+                        failure = "NATIVE_CLEANUP_FAILED"
+                        break
+                    time.sleep(0.2)
+                except OSError:
+                    failure = "NATIVE_CLEANUP_FAILED"
+                    break
 
     process_absent = process is None or process.poll() is not None
     root_absent = not root.exists()
@@ -944,7 +1060,7 @@ def execute_native() -> dict[str, Any]:
         "cleanup": {
             "process_absent": process_absent,
             "disposable_root_absent": root_absent,
-            "raw_logs_retained": False,
+            "raw_logs_retained": not root_absent,
             "raw_environment_retained": False,
             "stdout_bytes": stdout_bytes,
             "stderr_bytes": stderr_bytes,

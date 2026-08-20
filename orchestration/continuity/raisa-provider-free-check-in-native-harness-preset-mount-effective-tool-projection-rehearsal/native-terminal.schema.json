@@ -6,7 +6,7 @@
   "properties": {
     "schema_version": {"const": "ariadne.check_in_preset_mount_effective_tool_native_terminal.v1"},
     "operation_id": {"const": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal"},
-    "attempt_id": {"const": "check-in-preset-mount-effective-tool-native-002"},
+    "attempt_id": {"const": "check-in-preset-mount-effective-tool-native-003"},
     "result": {"enum": ["pass", "failed_closed"]},
     "terminal_code": {"type": "string", "pattern": "^[A-Z0-9_]+$"},
     "events": {"type": "array", "items": {"enum": ["sentinel_activated", "stock_headless_hmr_ready", "effective_roots_entered", "effective_roots_passed", "effective_tool_guard_started", "effective_tool_projection_passed", "scope_disposed", "effective_tool_guard_terminal", "app_exit_requested"]}, "maxItems": 9, "uniqueItems": true},
@@ -38,7 +38,7 @@
       "properties": {
         "process_absent": {"type": "boolean"},
         "disposable_root_absent": {"type": "boolean"},
-        "raw_logs_retained": {"const": false},
+        "raw_logs_retained": {"type": "boolean"},
         "raw_environment_retained": {"const": false},
         "stdout_bytes": {"type": "integer", "minimum": 0},
         "stderr_bytes": {"type": "integer", "minimum": 0},
@@ -78,7 +78,7 @@
           "effective_tool_count": {"const": 3},
           "native_process_count": {"const": 1},
           "provider_boundary": {"properties": {"network_attempt_count": {"const": 0}}},
-          "cleanup": {"properties": {"process_absent": {"const": true}, "disposable_root_absent": {"const": true}}}
+          "cleanup": {"properties": {"process_absent": {"const": true}, "disposable_root_absent": {"const": true}, "raw_logs_retained": {"const": false}}}
         }
       }
     }
