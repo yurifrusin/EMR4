@@ -295,8 +295,25 @@ def test_missing_checkpoint_fails_before_native_consumption(
     assert not (tmp_path / "terminal.json").exists()
 
 
-def test_no_native_canonical_outputs_exist_before_checkpoint() -> None:
-    assert not subject.NATIVE_CHECKPOINT_PATH.exists()
-    assert not subject.NATIVE_CONSUMED_PATH.exists()
-    assert not subject.NATIVE_TERMINAL_PATH.exists()
-    assert not subject.NATIVE_REPORT_PATH.exists()
+def test_attempt_003_terminal_is_consumed_exact_and_clean() -> None:
+    assert subject.NATIVE_CHECKPOINT_PATH.is_file()
+    assert subject.NATIVE_CONSUMED_PATH.is_file()
+    assert subject.NATIVE_TERMINAL_PATH.is_file()
+    assert subject.NATIVE_REPORT_PATH.is_file()
+    consumed = json.loads(subject.NATIVE_CONSUMED_PATH.read_text(encoding="utf-8"))
+    terminal = json.loads(subject.NATIVE_TERMINAL_PATH.read_text(encoding="utf-8"))
+    assert consumed["state"] == "consumed"
+    assert consumed["resume_permitted"] is False
+    assert consumed["automatic_retry_count"] == 0
+    assert terminal["result"] == "pass"
+    assert terminal["terminal_code"] == subject.SUCCESS_CODE
+    assert terminal["events"] == subject.EXPECTED_EVENTS
+    assert terminal["effective_tool_names"] == subject.EXPECTED_TOOLS
+    assert terminal["native_process_count"] == 1
+    assert terminal["automatic_retry_count"] == 0
+    assert terminal["cleanup"]["process_absent"] is True
+    assert terminal["cleanup"]["disposable_root_absent"] is True
+    assert terminal["cleanup"]["raw_logs_retained"] is False
+    jsonschema.Draft202012Validator(
+        json.loads(subject.NATIVE_SCHEMA_PATH.read_text(encoding="utf-8"))
+    ).validate(terminal)

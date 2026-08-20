@@ -1,0 +1,9 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "operation_id": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+  "status": 1,
+  "request": "fa56bda9-c9a6-449c-99a8-fc2327842d1f",
+  "contains_phi": false,
+  "engine_state": "continuing",
+  "next_workstream": "authored-synthetic monitored DeepSeek worker rehearsal"
+}
