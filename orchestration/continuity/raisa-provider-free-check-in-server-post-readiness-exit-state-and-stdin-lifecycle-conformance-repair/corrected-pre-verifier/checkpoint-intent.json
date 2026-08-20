@@ -1,0 +1,29 @@
+{
+  "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
+  "operation_id": "raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair",
+  "completed_stage": "At machine-resolved exact full Git source a425055b3ed2b691e969b4454d33124ba092f016, Sol accepted Gemini's isolated-worktree path-resolution finding and made the one permitted bounded correction. Fifty-two provider-free tests, Ruff, compilation and primary-worktree admission pass; the immutable native terminal and all closed boundaries are unchanged.",
+  "next_executable_stage": "dispatch_one_fresh_corrected_gemini_3_7_flash_high_read_only_veto_over_the_exact_path_resolution_repair_then_close_honestly",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "check-in-lifecycle-corrected-candidate-admission",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair", "--check"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "check-in-lifecycle-corrected-candidate-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}
