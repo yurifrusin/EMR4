@@ -1,0 +1,127 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker attempt 003",
+    "completed_stage": "Exactly one checkpointed native process was consumed. It exited 1 before the first HMR event, emitted zero provider, runner, tool and change coordinates, produced a digest-bound safe unclassified pre-HMR sidecar, received no retry or fallback and was cleaned up exactly. The failed-closed evidence and closeout candidate are ready for scoped commit.",
+    "next_executable_stage": "commit_attempt_003_failed_closed_evidence_then_run_separate_clockwork_check_and_publish_to_the_provider_disabled_source_static_diagnostic_recovery",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+    "resume_after_compaction": true,
+    "source_head": "c2104330ce8a7cacb6e79c4c49cdd2e61dbed2a3",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "14d83712461d2c63ddbbc07c799f294a7b062b02",
+    "reason_codes": [],
+    "resolved_commit": "c2104330ce8a7cacb6e79c4c49cdd2e61dbed2a3",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "c2104330ce8a7cacb6e79c4c49cdd2e61dbed2a3"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "14d83712461d2c63ddbbc07c799f294a7b062b02",
+    "branch_origin_aligned": false,
+    "head": "14d83712461d2c63ddbbc07c799f294a7b062b02",
+    "origin_branch_commit": "db8f6f442ecb152a46fc93b1891260129f3e3919",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 673
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "attempt_003_failed_closed_closeout_precommit",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "Its sole authorised work package was consumed, but the native process exited before the provider boundary and yielded no DeepSeek performance evidence.",
+        "work_packages": [
+          "one attempt-003 synthetic literal edit attempt consumed with zero provider requests and zero changes"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The immutable machine terminal, typed sidecar and deterministic postterminal validation settle this negative closeout; a provider review would not identify an unretained startup cause.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the immutable-terminal-to-clockwork closeout is a single serial authority transition.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "closeout_candidate_commit_rejects",
+      "clockwork_check_rejects",
+      "clockwork_publish_advances_latch"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit immutable terminal and closeout candidate before clockwork check",
+      "clockwork check before separate publication",
+      "publication before any next-tranche planning"
+    ]
+  },
+  "planned_action": "commit_the_immutable_attempt_003_failed_closed_terminal_diagnosis_acceptance_and_clockwork_closeout_intent_without_retry_or_provider_action",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-plan.md",
+      "docs/security/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-threat-model-delta.md",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/pre-hmr-startup-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/diagnosis.md",
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-failed-closed-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-worker-attempt-003-sol-acceptance.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns terminal judgment, scoped commit, clockwork publication and cleanup verification. DeepSeek's single authorised native attempt is completed as consumed without reaching the provider. Gemini is reserved and no call is justified. Native subagents are declined under developer policy and the serial evidence-to-clockwork transition.",
+    "git_refs_and_worktree": "The machine-generated snapshot alone owns exact object identities. It verifies the expected task HEAD, four protected refs at the fixed commit, tracked cleanliness and preservation of unrelated untracked files including docs/branding; explicit-path staging is mandatory.",
+    "live_handover_current_baton": "AGENTS.md controls. The attempt-003 latch remains in progress until its consumed failed-closed evidence is committed and the clockwork advances to the provider-disabled source-static diagnostic recovery.",
+    "protected_evidence_boundaries": "Attempt 003 is consumed and may not be retried, resumed, overwritten or reclassified. Attempts 001 and 002 remain immutable. The next operation is source-static and provider-disabled: no Harness, broker, worker or provider process; no raw-stream reconstruction; no product, data, database, deployment, Pages or protected-ref action."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

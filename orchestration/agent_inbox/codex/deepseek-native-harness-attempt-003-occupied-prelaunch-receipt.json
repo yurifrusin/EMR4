@@ -1,0 +1,126 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker attempt 003",
+    "completed_stage": "The committed attempt-003 candidate passed the fresh five-source preexecution gate, exact zero-provider deterministic admission and preparation. The distinct one-file authored-synthetic root, pinned rc.7 package, preset, tool projection, WorkOrder, honest prepaid-balance cost posture and recovered pre-HMR sidecar are bound with attempts 001 and 002 unchanged, zero matching processes and zero provider requests. The one-process, one-request, zero-retry checkpoint is admitted.",
+    "next_executable_stage": "generate_a_fresh_five_source_attempt_003_occupied_prelaunch_receipt_then_run_exactly_one_deepseek_native_harness_authored_synthetic_edit_without_retry_resume_or_fallback",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+    "resume_after_compaction": true,
+    "source_head": "c2104330ce8a7cacb6e79c4c49cdd2e61dbed2a3",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "14d83712461d2c63ddbbc07c799f294a7b062b02",
+    "reason_codes": [],
+    "resolved_commit": "c2104330ce8a7cacb6e79c4c49cdd2e61dbed2a3",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "c2104330ce8a7cacb6e79c4c49cdd2e61dbed2a3"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "14d83712461d2c63ddbbc07c799f294a7b062b02",
+    "branch_origin_aligned": false,
+    "head": "14d83712461d2c63ddbbc07c799f294a7b062b02",
+    "origin_branch_commit": "db8f6f442ecb152a46fc93b1891260129f3e3919",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 657
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "occupied_prelaunch",
+    "lanes": [
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The published checkpoint assigns it exactly one shaped synthetic edit and no other work.",
+        "work_packages": [
+          "one attempt-003 synthetic literal edit under the native Harness"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "No Gemini call is part of the one-request DeepSeek envelope; reassess only after the terminal.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the occupied lifecycle is one serial process.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "prelaunch_receipt_rejects",
+      "occupied_attempt_terminalizes",
+      "cleanup_fails"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one consumed record before process creation",
+      "one terminal before exact-root cleanup judgment",
+      "no second launch after any outcome"
+    ]
+  },
+  "planned_action": "consume_exactly_one_attempt_003_native_process_and_at_most_one_deepseek_request_without_retry_resume_fallback_or_second_worker",
+  "reasons": [
+    "workspace_receipt_missing:deepseek-native-synthetic-window-worker-003"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-plan.md",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/occupied-attempt-preparation.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/occupied-preexecution-checkpoint.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/clockwork-checkpoint-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "DeepSeek native Harness owns exactly one synthetic edit attempt. Sol owns launch monitoring, terminalization, cleanup and judgment; Gemini is reserved and native subagents declined.",
+    "git_refs_and_worktree": "Machine snapshot owns exact identities and verifies clean task HEAD, protected refs and preserved untracked files including docs/branding; the final root readback proves one clean tracked synthetic file and zero matching processes.",
+    "live_handover_current_baton": "AGENTS.md controls and names occupied prelaunch as the exact next stage for attempt 003.",
+    "protected_evidence_boundaries": "One new synthetic worker/process/session/turn and at most one request only. No retry, resume, fallback, second worker, product/data/database/deployment/Pages/protected evidence or protected-ref action."
+  },
+  "status": "revision_required",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": false
+}

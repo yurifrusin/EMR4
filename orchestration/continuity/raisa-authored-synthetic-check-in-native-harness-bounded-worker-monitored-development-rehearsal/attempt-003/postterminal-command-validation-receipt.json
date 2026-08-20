@@ -1,0 +1,222 @@
+{
+  "command_manifest_sha256": "bf85986273091d6e33e4f7f50b07edc386884fc9b9f70866f03fa8138563008c",
+  "commands": [
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import hashlib,json; from pathlib import Path; from jsonschema import Draft202012Validator; e=Path('orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003'); t=json.loads((e/'occupied-terminal.json').read_text()); s=json.loads((e/'occupied-terminal.schema.json').read_text()); p=json.loads((e/'pre-hmr-startup-terminal.json').read_text()); Draft202012Validator(s).validate(t); assert t['result']=='failed_closed' and t['failure_coordinate']=='native_harness_terminal_failure'; assert t['process']['native_process_count']==1 and t['process']['harness_exit_code']==1; assert t['broker']=={'provider_call_started':0,'provider_call_completed':0,'provider_call_failed':0,'request_rejected':0}; assert t['runner']=={} and t['candidate']['changed_paths']==[]; assert t['automatic_retry_count']==t['fallback_count']==t['auxiliary_model_call_count']==0; assert all(t['cleanup'][k] for k in ('harness_absent','broker_absent','attempt_root_absent')); assert p['stage']=='native_process_started_before_first_hmr_event' and p['cause']=='unclassified_nonzero_exit' and p['matched_signature_groups']==[] and p['hmr_event_count']==0; assert hashlib.sha256((e/'pre-hmr-startup-terminal.json').read_bytes()).hexdigest()==t['pre_hmr_startup_terminal_sha256']"
+      ],
+      "id": "T01"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from pathlib import Path; e=Path('orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003'); assert not Path('C:/Users/sarashera/EMR4-worktrees/deepseek-native-synthetic-window-worker-003').exists(); assert all((e/n).is_file() for n in ('occupied-attempt-consumed.json','occupied-terminal.json','pre-hmr-startup-terminal.json','occupied-report.md','diagnosis.md','efficacy-reading.json'))"
+      ],
+      "id": "T02"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/emr4",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "id": "T03"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py"
+      ],
+      "id": "T04"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py"
+      ],
+      "id": "T05"
+    },
+    {
+      "argv": [
+        "node",
+        "--check",
+        "scripts/ariadne_deepseek_native_harness_broker.mjs"
+      ],
+      "id": "T06"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import subprocess; expected='2e34bdad732fdab32fbf778280b3d3c70d66d602'; refs=['master','handoff/current','origin/master','origin/handoff/current']; assert all(subprocess.check_output(['git','rev-parse',r],text=True).strip()==expected for r in refs)"
+      ],
+      "id": "T07"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "id": "T08"
+    }
+  ],
+  "ended_at": "2026-08-20T21:36:51.816328Z",
+  "failure_command_id": null,
+  "provider_free_no_database_admission_sha256": "sha256:b0b765d81bc59b3cac1d3975f5cd9ff522f297efbcea9dc83bf0e2e02238a757",
+  "repo_root": "C:\\Users\\sarashera\\emr4",
+  "results": [
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import hashlib,json; from pathlib import Path; from jsonschema import Draft202012Validator; e=Path('orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003'); t=json.loads((e/'occupied-terminal.json').read_text()); s=json.loads((e/'occupied-terminal.schema.json').read_text()); p=json.loads((e/'pre-hmr-startup-terminal.json').read_text()); Draft202012Validator(s).validate(t); assert t['result']=='failed_closed' and t['failure_coordinate']=='native_harness_terminal_failure'; assert t['process']['native_process_count']==1 and t['process']['harness_exit_code']==1; assert t['broker']=={'provider_call_started':0,'provider_call_completed':0,'provider_call_failed':0,'request_rejected':0}; assert t['runner']=={} and t['candidate']['changed_paths']==[]; assert t['automatic_retry_count']==t['fallback_count']==t['auxiliary_model_call_count']==0; assert all(t['cleanup'][k] for k in ('harness_absent','broker_absent','attempt_root_absent')); assert p['stage']=='native_process_started_before_first_hmr_event' and p['cause']=='unclassified_nonzero_exit' and p['matched_signature_groups']==[] and p['hmr_event_count']==0; assert hashlib.sha256((e/'pre-hmr-startup-terminal.json').read_bytes()).hexdigest()==t['pre_hmr_startup_terminal_sha256']"
+      ],
+      "elapsed_ms": 120,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "T01",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "from pathlib import Path; e=Path('orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003'); assert not Path('C:/Users/sarashera/EMR4-worktrees/deepseek-native-synthetic-window-worker-003').exists(); assert all((e/n).is_file() for n in ('occupied-attempt-consumed.json','occupied-terminal.json','pre-hmr-startup-terminal.json','occupied-report.md','diagnosis.md','efficacy-reading.json'))"
+      ],
+      "elapsed_ms": 40,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "T02",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/emr4",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "elapsed_ms": 699,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "T03",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 81,
+      "stdout_sha256": "199f701955786ef1c8109689487bcb6a74ebc4384a76e1ec71a64fa81edbebfe"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py"
+      ],
+      "elapsed_ms": 33,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "T04",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 19,
+      "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py"
+      ],
+      "elapsed_ms": 74,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "T05",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "node",
+        "--check",
+        "scripts/ariadne_deepseek_native_harness_broker.mjs"
+      ],
+      "elapsed_ms": 51,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "T06",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-c",
+        "import subprocess; expected='2e34bdad732fdab32fbf778280b3d3c70d66d602'; refs=['master','handoff/current','origin/master','origin/handoff/current']; assert all(subprocess.check_output(['git','rev-parse',r],text=True).strip()==expected for r in refs)"
+      ],
+      "elapsed_ms": 109,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "T07",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "elapsed_ms": 36,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "T08",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "schema_version": "ariadne.validation_run.v1",
+  "started_at": "2026-08-20T21:36:50.628219Z",
+  "status": "passed"
+}

@@ -1,0 +1,22 @@
+{
+  "attempt_id": "deepseek-native-synthetic-window-worker-003",
+  "candidate_source": "2518b7671175808d4aa77f213a744ffafbd60eb8",
+  "cause": "unclassified_nonzero_exit",
+  "classification_byte_limit_per_stream": 65536,
+  "controller_coordinate": "native_process_exited_nonzero",
+  "exit_code": 1,
+  "hmr_event_count": 0,
+  "matched_signature_groups": [],
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003",
+  "raw_streams_retained": false,
+  "schema_version": "ariadne.native_harness_pre_hmr_startup_terminal.v1",
+  "stage": "native_process_started_before_first_hmr_event",
+  "stderr": {
+    "byte_count": 7314,
+    "sha256": "803374be8cc52569aadbd787500d6044d84ef1ed80d4e14828d2ae974dd57d67"
+  },
+  "stdout": {
+    "byte_count": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
