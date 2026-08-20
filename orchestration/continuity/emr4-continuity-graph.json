@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 346,
+  "graph_revision": 347,
   "harvests": [],
   "nodes": [
     {
@@ -25033,9 +25033,136 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+      "title": "DeepSeek native Harness provider-free complete-composition native-boot recovery",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted exactly one provider-free native Harness composition process and its clockwork closeout.",
+          "The sole process contacted no agent, broker, DeepSeek model or provider and no second process is authorised.",
+          "The successor returns to the existing default-off check-in route-adapter authority and requires its own freshly frozen brokered worker allocation."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-sole-complete-composition-native-terminal",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/provider-free-complete-composition-native-boot-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the sole rc.7 process terminal at candidate 6ef058b87a2c927efd9d9d2027b59d6ad279fec5 with exact dependency-gated activation, edit/glob/read, zero provider-boundary counts and complete cleanup."
+        },
+        {
+          "id": "accept-first-independent-veto-with-sol-grounding-correction",
+          "source": "orchestration/agent_inbox/antigravity/deepseek-native-harness-complete-composition-native-boot-recovery-gemini37-review-receipt.json",
+          "status": "accepted",
+          "summary": "Accept the first Gemini 3.7 Flash/high pass, ten zero-exit commands and 86 tests while correcting its three factually substituted incident filenames from direct source evidence."
+        },
+        {
+          "id": "contain-ancillary-mock-node-plan-deviation",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Contain as P3 the six ancillary synthetic Node processes from two widened historical suites; none entered the Harness path or changed terminal evidence, and future manifests statically exclude unadmitted process-spawning tests."
+        },
+        {
+          "id": "contain-gemini-incident-filename-misattribution",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Correct Gemini's wrong test-module names without a second provider call and require exact incident identifiers to be echoed by future verifiers."
+        },
+        {
+          "id": "reject-first-clockwork-publication-missing-legacy-boundary-token",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/clockwork-tick-attempt-001-evidence.json",
+          "status": "rejected",
+          "summary": "Preserve lease 58 and its byte-exact lease-59 rollback after the postpublication suite found the generated next latch omitted one exact legacy closed-boundary compatibility token."
+        }
+      ],
+      "claim_scope": [
+        "One pinned offline rc.7 native Harness process passed with no retry.",
+        "Real sentinel readiness preceded atomic insertion of agent-presets and the custom runner.",
+        "Loader and module dependency declarations were exactly hmr, agentPresets and tools.",
+        "The exact 158-byte emr4-bounded-worker preset mounted and the accepted guard yielded exactly edit, glob and read.",
+        "All provider-boundary counts were zero and process/root cleanup was complete.",
+        "The independent manifest passed 86 safe tests and ten zero-exit commands.",
+        "Six ancillary mock Node unit-test processes and one verifier filename-grounding lapse are recorded as contained procedure incidents.",
+        "No occupied worker, broker, DeepSeek reasoning, coding reliability, product suitability or production isolation is claimed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/provider-free-complete-composition-native-boot-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/provider-free-complete-composition-native-boot-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-complete-composition-native-boot-recovery-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/antigravity/deepseek-native-harness-complete-composition-native-boot-recovery-gemini37-review-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py",
+          "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/evidence.schema.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-complete-composition-native-boot-recovery-gemini37-command-manifest.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-complete-composition-native-boot-recovery-gemini37-review-packet.md",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-complete-composition-native-boot-recovery-gemini37-review-worktree-preflight.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-complete-composition-native-boot-recovery-pre-verifier-runtime-state.json",
+          "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-complete-composition-native-boot-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-570.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/clockwork-tick-attempt-001-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/clockwork-tick-attempt-001-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "No occupied DeepSeek worker or brokered work order has yet been executed through the native Harness.",
+        "The outer broker allowlist, work-order ledger and provider-cost boundary remain mandatory for the first occupied assignment.",
+        "The next product tranche remains default-off and authorises no ordinary-practice enablement or product data.",
+        "No production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-20T11:55:38.3228395+10:00",
+      "updated_at": "2026-08-20T11:55:38.3228395+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "3ac06830de46c9f5debaf3efb5c36c2efd581a4b",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-20T10:52:45.8367551+10:00"
+  "updated_at": "2026-08-20T11:55:38.3228395+10:00"
 }

@@ -2,32 +2,31 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "bounded_worker_preset_closeout_tick_check",
+      "command_id": "complete_composition_native_boot_closeout_tick_check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_governance_clockwork_tick",
         "--check",
         "--intent",
-        "orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/closeout/closeout-intent.json"
+        "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "bounded_worker_preset_and_clockwork_tests",
+      "command_id": "complete_composition_native_boot_safe_closeout_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
-        "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py",
         "tests/test_deepseek_native_harness_provider_free_required_service_injection_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
         "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
-        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
-        "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
-        "tests/test_deepseek_native_harness_emr4_profile_contract.py",
-        "tests/test_ariadne_deepseek_native_harness_broker.py",
+        "tests/test_deepseek_native_harness_provider_free_preterminal_observability_recovery.py",
         "tests/test_ariadne_agent_error_register.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
@@ -38,34 +37,36 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "bounded_worker_preset_closeout_ruff",
+      "command_id": "complete_composition_native_boot_closeout_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
-        "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py"
+        "scripts/deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "bounded_worker_preset_closeout_compile",
+      "command_id": "complete_composition_native_boot_closeout_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py",
-        "tests/test_deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery.py"
+        "scripts/deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery_evidence.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "bounded_worker_preset_deterministic_check",
+      "command_id": "complete_composition_native_boot_deterministic_check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.deepseek_native_harness_provider_free_emr4_bounded_worker_preset_materialisation_recovery",
+        "scripts.deepseek_native_harness_provider_free_complete_composition_native_boot_recovery",
         "--check"
       ],
       "completion_contract": "final_exit_code_zero_required"

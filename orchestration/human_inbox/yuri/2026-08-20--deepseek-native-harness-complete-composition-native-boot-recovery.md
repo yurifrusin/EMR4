@@ -70,3 +70,6 @@ Next: freeze
 `raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal`
 with one explicitly brokered native-Harness DeepSeek worker package and the
 existing default-off/product-data/protected-ref boundaries unchanged.
+
+The usual non-PHI continuing Pushover notification succeeded with request
+`ec01f12b-6fec-4680-95b5-02391ce84d65`.

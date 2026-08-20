@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 569,
+  "register_revision": 570,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-20",
@@ -26536,6 +26536,123 @@
       "incident_id": "AER-0667",
       "attempt_id": "clock-1e0d304088bf488bafd491e3",
       "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_exec_session",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "No deterministic check or unit test in the execution-sensitive tranche may execute Node, lib/bin.js, --profile headless or an equivalent Harness entry; manifests must classify process-spawning tests before execution.",
+      "observed_error": "The widened neighbouring verification suite was run once before and once after the sole Harness boot and included three historical mock-driver tests that each started Node, producing six ancillary Node processes despite the frozen no-Node unit-test sentence.",
+      "detection_method": "Postterminal source audit found shutil.which node plus subprocess.run in the effective-tool native-boot proof, HMR-boot proof and preterminal-observable recovery-boot test modules; the exact two widened suite invocations included all three modules.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-plan.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/efficacy-reading.json",
+        "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.node_spawning_neighbor_tests_run_despite_zero_node_plan",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the sole Harness terminal without retry, exclude all three Node-spawning modules from the verifier and closeout manifests, and record the exact six-process ancillary cost.",
+        "prevention_control": "Every execution-sensitive manifest must statically scan candidate test modules for subprocess, Popen and resolved Node launch sites; any process-spawning test is excluded unless its exact executable boundary and count are explicitly admitted by the frozen plan.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-complete-composition-native-boot-recovery-gemini37-command-manifest.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/closeout-intent.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-sol-acceptance.md"
+        ]
+      },
+      "incident_id": "AER-0668",
+      "attempt_id": "clock-0ab679b1c33058ab525cdee5",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+      "role": "verifier",
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "model": "gemini-3.7-flash-high",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "An independent veto must ground an incident adjudication in the exact executed module identities and must not substitute nearby filenames that lack the observed behavior.",
+      "observed_error": "Gemini correctly classified the mock-Node deviation as contained P3 but named required-service, bounded-preset and preterminal-observability tests, while the actual Node-spawning modules were effective-tool native-boot proof, HMR-boot proof and preterminal-observable recovery-boot.",
+      "detection_method": "Sol compared the receipt's named modules with direct rg source evidence for shutil.which node and subprocess.run across the exact widened suite manifests.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/deepseek-native-harness-complete-composition-native-boot-recovery-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-sol-acceptance.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/efficacy-reading.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "gemini_verifier.ancillary_node_test_modules_factually_misattributed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the immutable first veto, correct the three module names in Sol acceptance and closeout from direct source evidence, and do not spend a second provider call on a narrative-only restatement.",
+        "prevention_control": "Review packets for incident adjudication must enumerate exact incident filenames and require the structured verifier response to echo the supplied identifiers without substitution; Sol must compare returned identifiers before acceptance.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-sol-acceptance.md",
+          "docs/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-complete-composition-native-boot-recovery.md"
+        ]
+      },
+      "incident_id": "AER-0669",
+      "attempt_id": "clock-ce126b9fa1dad7a519196a4e",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-20",
+      "tranche": "deepseek-native-harness-provider-free-complete-composition-native-boot-recovery",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_exec_session",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The next active latch must retain every exact legacy closed-surface compatibility token required by current-baton consistency in addition to narrower tranche-specific boundaries.",
+      "observed_error": "Lease 58 generated the correct default-off route-adapter boundaries but omitted the exact compatibility token no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting, causing one postpublication current-baton consistency failure.",
+      "detection_method": "The dedicated 630-test postpublication suite retained session 47449 and returned exit one with the exact missing-set assertion in test_current_rows_preserve_closed_surface_boundary.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/clockwork-tick-attempt-001-evidence.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/clockwork-tick-attempt-001-report.md",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.next_operation_legacy_closed_boundary_token_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve and roll back lease 58 byte-exactly at lease 59, add the exact legacy compatibility token to the next-operation boundaries, and republish through three-incident clockwork intake.",
+        "prevention_control": "Before publication, derive the prospective next latch and assert the complete exact compatibility-boundary subset used by current-baton consistency rather than relying only on semantically equivalent narrower controls.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/clockwork-tick-attempt-001-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/clockwork-tick-attempt-001-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0670",
+      "attempt_id": "clock-6fd82f29bac78f0e42c2f46e",
+      "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"
     }
