@@ -2,17 +2,17 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "native_source_reconciliation_check",
+      "command_id": "native_root_service_correction_check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal",
+        "scripts.deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal",
         "--check"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "native_source_reconciliation_focused_tests",
+      "command_id": "native_root_service_correction_focused_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -23,29 +23,29 @@
         "--strict-config",
         "--strict-markers",
         "-q",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py"
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "native_source_reconciliation_ruff",
+      "command_id": "native_root_service_correction_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py"
+        "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "native_source_reconciliation_compile",
+      "command_id": "native_root_service_correction_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py"
+        "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

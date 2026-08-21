@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 386,
+  "graph_revision": 387,
   "harvests": [],
   "nodes": [
     {
@@ -29710,9 +29710,118 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "title": "Preset-mount root-service-forwarding process-free correction rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits this bounded process-free correction and its dependency-satisfied isolated Node-fixture successor.",
+          "No native Harness, worker, model, provider, retry, product, data, deployment, Pages or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-root-service-forwarding-source-correction",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence-v2.json",
+          "status": "accepted",
+          "summary": "Accept the prospective runner, guard and bridge source correction with explicit root-service forwarding and in-bridge mount validation."
+        },
+        {
+          "id": "accept-machine-resolved-idempotent-candidate-binding",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the zero-authored-object-ID binding whose implementation source remains stable after the evidence descendant advances HEAD."
+        },
+        {
+          "id": "accept-isolated-node-fixture-successor",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Proceed only with one separately frozen disposable authored-synthetic Node fixture for the exact derived bridge and sanitizer."
+        },
+        {
+          "id": "reject-javascript-or-native-runtime-proof",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "The source correction proves no JavaScript evaluation, native boot, DeepSeek turn, model/provider request or retry."
+        }
+      ],
+      "claim_scope": [
+        "The derived runner forwards the already admitted root preset service explicitly to the guard.",
+        "The derived guard contains zero agentCtx.agentPresets dereferences and passes the service object into the bridge.",
+        "The derived bridge validates the service, reads and validates the mount handle and invokes it inside the sanitizing try boundary.",
+        "All twenty-three ordered source predicates pass with zero failed coordinates.",
+        "The caller-authored contract contains zero Git object IDs.",
+        "The repository resolver binds the plan and controller-owning implementation commits and remains stable after an evidence descendant advances HEAD.",
+        "The focused eleven-test file and exact broader 169-test collection pass with one platform-specific skip.",
+        "Node, native Harness, worker, model, provider, retry, resume, target and product activity remained zero.",
+        "JavaScript evaluation, native runtime behavior and occupied worker quality remain unproved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-610.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-root-service-forwarding-process-free-correction.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-pre-verifier-before-idempotency-repair-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-postcompaction-closeout-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence-v2.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-report-v2.md",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-postcompaction-closeout-runtime-state.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact derived bridge has not been materialized or evaluated by Node.",
+        "The derived runner and guard module graph has not been evaluated.",
+        "The installed package seed has not executed the correction.",
+        "No native Harness boot, occupied DeepSeek worker turn, model/provider request or coding-quality evidence is accepted.",
+        "No native retry exists; any later process requires a distinct frozen plan.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T09:01:43.2459891+10:00",
+      "updated_at": "2026-08-22T09:01:43.2459891+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "c483ef6a0faa239d8c7795b008bb38c3e10bc114",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T08:26:47.0343827+10:00"
+  "updated_at": "2026-08-22T09:01:43.2459891+10:00"
 }

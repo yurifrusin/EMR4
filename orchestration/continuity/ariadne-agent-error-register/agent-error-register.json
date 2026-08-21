@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 609,
+  "register_revision": 610,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -35463,6 +35463,305 @@
       },
       "incident_id": "AER-0911",
       "attempt_id": "clock-a447ce48bba6cb7f6cad43bc",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "postclockwork-current-state-suite-selection",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A live-state closeout suite excludes historical equality nodes whose frozen revision and orientation are not current acceptance predicates.",
+      "observed_error": "The first post-clockwork command included a historical test fixed at Continuity 324 and the former check-in orientation, producing two non-regression failures.",
+      "detection_method": "The failure text named only the old graph revision and old strategic-role assertion; the current-state suite then passed without rewriting the historical test.",
+      "evidence_paths": [
+        "tests/test_ariadne_transactional_closeout_control_plane_consolidation_efficacy_rehearsal_continuity.py",
+        "docs/ariadne-agent-error-correction-register-revision-610.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.historical_snapshot_test_included_in_live_state_suite",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Rerun the current-state suite without the immutable historical equality node and preserve that node unchanged.",
+        "prevention_control": "Live closeout suites are assembled from active acceptance paths; frozen historical equality nodes require an explicit active reason before inclusion.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-610.md",
+          "tests/test_current_baton_consistency.py"
+        ]
+      },
+      "incident_id": "AER-0912",
+      "attempt_id": "clock-a42696891711a4447c4cff7f",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "postclockwork-powershell-reading",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_powershell",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Read-only PowerShell projections use admitted statement-form control flow.",
+      "observed_error": "A read-only file projection piped directly from an inline foreach construct and stopped at parsing.",
+      "detection_method": "PowerShell emitted an empty-pipe parser error before any command, file or Git mutation.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-610.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_inline_expression_parse_failure",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use separate statement-form commands for the diff check and exact file readings.",
+        "prevention_control": "Multi-step PowerShell readings assign or emit results only after statement-form control flow completes.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-610.md"
+        ]
+      },
+      "incident_id": "AER-0913",
+      "attempt_id": "clock-e19e178ac570e42898a37cb1",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "powershell-git-commit-peel-expression",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_powershell",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "PowerShell Git revision expressions containing braces are quoted as one exact argument.",
+      "observed_error": "The unquoted commit-peel expression resolved a parent form and then passed an encoded brace fragment that Git rejected.",
+      "detection_method": "The read-only command output contained the unintended parent and fatal ambiguous-argument errors; quoted revisions returned both intended full commits.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-610.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_git_revision_braces_unquoted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Quote every full Git revision expression containing braces before passing it to Git.",
+        "prevention_control": "Manual PowerShell Git peels use one single-quoted revision argument; contract evidence uses the repository resolver instead.",
+        "evidence_paths": [
+          "orchestration_harness/git_object_resolution.py",
+          "docs/ariadne-agent-error-correction-register-revision-610.md"
+        ]
+      },
+      "incident_id": "AER-0914",
+      "attempt_id": "clock-faae915f6734753ac3d7c907",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "guard-postrewrite-selected-tools-count",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_python_cli",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A source-rewrite count is measured at the exact transformation stage where it is asserted.",
+      "observed_error": "The first guard derivation required three selectedTools tokens after the signature rewrite had already consumed one and only two body references remained.",
+      "detection_method": "The direct source check rejected the post-rewrite count before commit or evidence generation.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-610.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.source_rewrite_anchor_count_measured_at_wrong_stage",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Require the two body references that remain after the signature rewrite and rerun the direct check.",
+        "prevention_control": "Rewrite predicates name whether their expected count is pre-transform or post-transform and retain a focused rejection test.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-610.md"
+        ]
+      },
+      "incident_id": "AER-0915",
+      "attempt_id": "clock-ca9a65c3358f3bcbeec7aeb1",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "raw-detail-release-predicate",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "The raw-detail guard rejects release projections without rejecting fixed internal error-message comparisons.",
+      "observed_error": "The first predicate banned every .message read and falsely rejected three accepted equality or lookup checks that release no raw content.",
+      "detection_method": "The closed reading named only derived_sources_release_no_raw_detail; exact source projection showed the three fixed internal comparisons.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-610.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "controller.raw_detail_guard_confused_internal_comparison_with_release",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Match actual detail, stack, cause, environment, prompt, response and credential projections instead of the generic message member.",
+        "prevention_control": "Release guards target output coordinates and preserve fixed internal classification comparisons.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-610.md"
+        ]
+      },
+      "incident_id": "AER-0916",
+      "attempt_id": "clock-366c8f5701245f17022705d3",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "controller-rejected-result-exit-contract",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "A direct controller check returns zero only for the single admitted closed result.",
+      "observed_error": "The first rejected derivation printed its closed result but returned exit code zero.",
+      "detection_method": "The orchestrator read the typed result as non-admitted despite the process status and stopped before commit or evidence generation.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-610.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "controller.rejected_closed_result_exited_zero",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Return nonzero for every result except root_service_forwarding_correction_admitted.",
+        "prevention_control": "The direct CLI exit contract is derived from the same single admitted closed-result constant used by evidence acceptance.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-610.md"
+        ]
+      },
+      "incident_id": "AER-0917",
+      "attempt_id": "clock-83cf7c45c3178aeba6af2a41",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "candidate-source-idempotency-binding",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_git_object_resolution",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "A deterministic evidence check resolves the implementation-owning commit identically before and after evidence descendants advance HEAD.",
+      "observed_error": "The preliminary reading used current HEAD, so later recomputation would select the evidence descendant rather than the implementation owner.",
+      "detection_method": "The pre-verifier audit compared evidence-time binding semantics with the post-evidence repository position before acceptance.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-pre-verifier-before-idempotency-repair-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-610.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "controller.candidate_binding_followed_current_head_instead_of_source_owner",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve the commit that last changed the controller path, emit immutable v2 evidence and recompute after its descendant commit.",
+        "prevention_control": "Implementation ownership comes from the Git path history plus repository resolver; current HEAD remains only the live worktree position.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence-v2.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-pre-verifier-acceptance-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-610.md"
+        ]
+      },
+      "incident_id": "AER-0918",
+      "attempt_id": "clock-23223584b473a456fc3dcf14",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "current-baton-acceptance-row-density",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_check",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The rolling Current-Baton acceptance row remains within the live handover compaction byte budget.",
+      "observed_error": "The first closeout intent listed every long operation artifact separately and the prospective projection exceeded the Baton compaction budget.",
+      "detection_method": "The governance clockwork rejected tick_baton_compaction_budget before any canonical publication.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-610.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.current_baton_acceptance_paths_exceeded_compaction_budget",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Collapse operation-owned artifacts to the single continuity directory and keep only controlling external artifacts explicit.",
+        "prevention_control": "Rolling acceptance rows name an operation directory once and reserve individual entries for controlling cross-directory documents and receipts.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-610.md"
+        ]
+      },
+      "incident_id": "AER-0919",
+      "attempt_id": "clock-51612960bd678762327a6a80",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

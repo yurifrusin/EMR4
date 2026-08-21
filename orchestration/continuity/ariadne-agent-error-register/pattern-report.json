@@ -1,44 +1,44 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 609,
+  "register_revision": 610,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "c70a2e650bc8dac7dfd3bc66d292bcdfd5efcc19607795f348d38374c72511ca",
-  "incident_count": 911,
+  "canonical_register_sha256": "ae0944dfb8c5794fcb26c69fd53966f6878b5d4fd843a052e1b0c500fecf2ae1",
+  "incident_count": 919,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 494,
       "harness": 67,
-      "operator": 199,
-      "repository": 135,
+      "operator": 204,
+      "repository": 138,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 95,
       "evidence_misreport": 73,
       "harness_failure": 67,
-      "operator_error": 199,
+      "operator_error": 204,
       "output_contract_violation": 274,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
-      "repository_defect": 135,
+      "repository_defect": 138,
       "transport_timeout": 16
     },
     "by_role": {
       "implementer": 64,
       "integration_reviewer": 3,
-      "orchestrator": 781,
+      "orchestrator": 789,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 564,
+      "low": 570,
       "material": 133,
-      "moderate": 214
+      "moderate": 216
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 177,
-      "canonical_unchanged": 565,
+      "accepted_candidate_changed": 182,
+      "canonical_unchanged": 568,
       "untrusted_partial_worktree": 169
     },
     "by_resource_and_role": {
@@ -116,6 +116,7 @@
       "authored-synthetic-native-worker-controller-broker-handshake::orchestrator": 1,
       "authored-synthetic-native-worker-exact-root-cleanup::orchestrator": 1,
       "boot-runner-cli-import::orchestrator": 1,
+      "candidate-source-idempotency-binding::orchestrator": 1,
       "canonical-wrapper-conditional-template::orchestrator": 1,
       "clockwork-authorized-opening-shape::orchestrator": 1,
       "clockwork-authorized-opening-vocabulary::orchestrator": 1,
@@ -167,7 +168,9 @@
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
       "continuity-negative-result-acceptance-pointer::orchestrator": 1,
       "controlled-document-date-timestamp-pair::orchestrator": 1,
+      "controller-rejected-result-exit-contract::orchestrator": 1,
       "current-baton-acceptance-row-compaction::orchestrator": 1,
+      "current-baton-acceptance-row-density::orchestrator": 1,
       "deepseek-flash-workers::implementer": 14,
       "deepseek-native-harness-first-admission-continuity-test::orchestrator": 1,
       "deepseek-native-harness-rc7-container-readonly-rootfs::orchestrator": 1,
@@ -245,6 +248,7 @@
       "governance-projection-repair-focused-tests::orchestrator": 2,
       "governance-projection-repair-runner-read-only-interface::verifier": 1,
       "grouped-test-path-inventory::orchestrator": 1,
+      "guard-postrewrite-selected-tools-count::orchestrator": 1,
       "historical-bounded-worker-controller-source::orchestrator": 1,
       "historical-latch-test-selection::orchestrator": 1,
       "historical-source-binding-test-selection::orchestrator": 1,
@@ -294,8 +298,11 @@
       "ordinary-practice-check-in-readiness-plan-tests::orchestrator": 1,
       "ordinary-practice-check-in-readiness-reviewer::orchestrator": 3,
       "plan-commit-staged-whitespace-gate::orchestrator": 1,
+      "postclockwork-current-state-suite-selection::orchestrator": 1,
+      "postclockwork-powershell-reading::orchestrator": 1,
       "postcompaction-five-source-rehydration-receipt::orchestrator": 1,
       "postexecution-hash-bound-focused-test::orchestrator": 1,
+      "powershell-git-commit-peel-expression::orchestrator": 1,
       "powershell-read-only-inventory::orchestrator": 1,
       "pre-hmr-controller-ordering-probe::implementer": 1,
       "pre-verifier-candidate-git-object::orchestrator": 1,
@@ -335,6 +342,7 @@
       "provider-free-pytest-wrapper-cli::orchestrator": 1,
       "provider-free-recovery-evidence-runner::implementer": 1,
       "provider-free-test-session-exit-capture::orchestrator": 1,
+      "raw-detail-release-predicate::orchestrator": 1,
       "raw-stream-nonretention-test::orchestrator": 1,
       "readiness-clockwork-nonreuse-regression::orchestrator": 1,
       "readiness-test-clockwork-pointer-coordinate::orchestrator": 1,
