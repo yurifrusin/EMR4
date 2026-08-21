@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 
 from jsonschema import Draft202012Validator
 
@@ -21,6 +22,28 @@ EVIDENCE = (
 ATTEMPT_ROOT = Path(
     "C:/Users/sarashera/EMR4-worktrees/deepseek-native-synthetic-window-worker-004"
 )
+TERMINAL_SOURCE = "26c95db309c2bfb12e640b6fd504b7399f87d73d"
+CLOSEOUT = (
+    ROOT
+    / "docs"
+    / "raisa-authored-synthetic-check-in-native-harness-bounded-worker-"
+    "attempt-004-closeout.md"
+)
+SOL = (
+    ROOT
+    / "orchestration"
+    / "agent_inbox"
+    / "codex"
+    / "raisa-native-harness-attempt-004-sol-acceptance.md"
+)
+YURI = (
+    ROOT
+    / "orchestration"
+    / "human_inbox"
+    / "yuri"
+    / "2026-08-21--native-harness-attempt-004-terminal.md"
+)
+REGISTER_REVISION = ROOT / "docs" / "ariadne-agent-error-correction-register-revision-585.md"
 
 
 def load(name: str) -> dict[str, object]:
@@ -97,3 +120,47 @@ def test_attempt_four_is_consumed_and_cleanup_is_complete() -> None:
     assert terminal["cleanup"]["raw_logs_retained"] is False
     assert terminal["cleanup"]["raw_session_retained"] is False
     assert not ATTEMPT_ROOT.exists()
+
+
+def test_attempt_four_efficacy_reading_states_the_honest_conclusion() -> None:
+    value = load("efficacy-reading.json")
+    assert value["terminal_source"] == TERMINAL_SOURCE
+    assert value["measurements"]["top_message_coordinate"] == (
+        "plugin_tree_failed_to_load"
+    )
+    assert value["measurements"]["cause_chain_length"] == 4
+    assert value["efficacy"]["traceability_vs_attempt_003"] == "improved"
+    assert value["efficacy"]["deepseek_reasoning_or_coding_evidence"] == (
+        "not_reached"
+    )
+    assert value["efficacy"]["native_worker_success"] == "failed"
+
+
+def test_attempt_four_closeout_documents_bind_timestamp_and_terminal_source() -> None:
+    resolved = subprocess.check_output(
+        ["git", "rev-parse", "--verify", f"{TERMINAL_SOURCE}^{{commit}}"],
+        cwd=ROOT,
+        text=True,
+    ).strip()
+    assert resolved == TERMINAL_SOURCE
+    subprocess.run(
+        ["git", "merge-base", "--is-ancestor", TERMINAL_SOURCE, "HEAD"],
+        cwd=ROOT,
+        check=True,
+    )
+    for path in (CLOSEOUT, SOL, YURI, EVIDENCE / "diagnosis.md"):
+        text = path.read_text(encoding="utf-8")
+        assert "Date: 2026-08-21" in text
+        assert "Timestamp: 2026-08-21T" in text
+        assert "+10:00 (Australia/Brisbane)" in text
+    for path in (CLOSEOUT, SOL, YURI):
+        assert TERMINAL_SOURCE in path.read_text(encoding="utf-8")
+
+
+def test_attempt_four_register_revision_records_every_caught_rerun() -> None:
+    text = REGISTER_REVISION.read_text(encoding="utf-8")
+    assert "revision: 585" in text
+    assert "incident_count: 768" in text
+    for number in range(760, 769):
+        assert f"AER-{number:04d}" in text
+    assert "none remains open" in text

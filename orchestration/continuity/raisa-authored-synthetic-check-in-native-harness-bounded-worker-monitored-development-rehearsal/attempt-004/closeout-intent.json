@@ -1,0 +1,485 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004",
+    "title": "Raisa authored-synthetic check-in native Harness bounded-worker attempt 004",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-21T12:45:22.5790561+10:00",
+    "node": {
+      "id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004",
+      "title": "Native Harness bounded-worker attempt 004 structured terminal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision",
+          "relation": "builds_on"
+        },
+        {
+          "node_id": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri explicitly authorised exactly one attempt-004 occupied identity under standing uninterrupted-development authority.",
+          "The attempt is consumed with zero retry, resume, fallback or second-worker authority.",
+          "No product, data, production, deployment, Pages or protected integration authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-consumed-failed-closed-terminal",
+          "source": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/occupied-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one native process, exit one, zero provider calls, zero retries and complete cleanup as the final attempt-004 result."
+        },
+        {
+          "id": "accept-structured-plugin-tree-coordinate",
+          "source": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/pre-hmr-startup-terminal.json",
+          "status": "accepted",
+          "summary": "Accept the digest-bound v2 terminal, plugin-tree-load message coordinate and finite sanitized cause chain as a material traceability improvement."
+        },
+        {
+          "id": "reject-native-worker-readiness",
+          "source": "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004-closeout.md",
+          "status": "rejected",
+          "summary": "Reject every claim that DeepSeek was reached, model performance was measured or native Harness is ready for EMR4 worker use."
+        },
+        {
+          "id": "decline-postterminal-gemini-call",
+          "source": "orchestration/agent_inbox/codex/raisa-native-harness-attempt-004-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Decline Gemini because no code candidate or provider result survived and the closed machine terminal is decisive."
+        },
+        {
+          "id": "accept-contained-attempt-004-workflow-incidents",
+          "source": "docs/ariadne-agent-error-correction-register-revision-585.md",
+          "status": "accepted",
+          "summary": "Accept nine corrected or contained preexecution workflow incidents with none open."
+        }
+      ],
+      "claim_scope": [
+        "Exactly one native Harness attempt-004 process started and exited one before the first HMR event.",
+        "The converged controller retained a schema-valid v2 plugin-tree-load coordinate and four-node sanitized cause chain.",
+        "The broker recorded zero provider requests and the runner recorded no model or tool activity.",
+        "No candidate path changed; retry, fallback and auxiliary-model counts are zero.",
+        "Harness, broker and the exact disposable root are absent after cleanup.",
+        "The Harness is more traceable but remains unready for EMR4 worker use."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision-plan.md",
+          "docs/security/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/occupied-terminal.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/pre-hmr-startup-terminal.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/efficacy-reading.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/diagnosis.md"
+        ],
+        "closeouts": [
+          "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-attempt-004-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-004-sol-deterministic-admission-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-004-occupied-prelaunch-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-004-occupied-prelaunch-v2-receipt.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/clockwork-checkpoint-tick-evidence.json"
+        ],
+        "tests": [
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/occupied-attempt-consumed.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/occupied-report.md",
+          "docs/ariadne-agent-error-correction-register-revision-585.md",
+          "orchestration/human_inbox/yuri/2026-08-21--native-harness-attempt-004-terminal.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact pinned rc.7 plugin-tree branch and deepest code remain unidentified.",
+        "DeepSeek provider, reasoning, coding and tool behavior were not reached.",
+        "Native Harness worker readiness and product-use authority remain closed.",
+        "Every attempt-004 identity is consumed and no occupied retry is authorised."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Test whether the native Harness can provide bounded, orchestrator-controlled DeepSeek worker execution",
+      "outcome": "The one occupied identity failed before provider I/O but produced a materially more precise structured plugin-tree-load terminal with exact cleanup.",
+      "evidence": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/efficacy-reading.json",
+        "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Identify the pinned rc.7 plugin-tree failure without spending another occupied attempt",
+      "why_now": "The structured terminal supplies a bounded top coordinate and cause-chain shape, but the deepest code remains outside the closed vocabulary.",
+      "outcome": "A provider-free source reading will decide whether the exact failing plugin-tree branch can be named and safely repaired.",
+      "unlocks": [
+        "A grounded repair-or-stop decision for the native Harness profile.",
+        "A later separately authorised boot proof only if source evidence supports it."
+      ],
+      "does_not_solve": [
+        "No native Harness, broker, worker, model or provider process.",
+        "No occupied retry, product work, data use, deployment or protected integration."
+      ],
+      "evidence": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/pre-hmr-startup-terminal.json",
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/diagnosis.md"
+      ],
+      "orientation_statement": "Inspect the pinned plugin-tree source against the immutable cause chain; do not launch another occupied process."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis",
+      "active_tranche": "DeepSeek native Harness provider-free plugin-tree failed-to-load source-coordinate diagnosis",
+      "objective": "Read only the pinned rc.7 plugin-tree construction and error-wrapping source, accepted profile templates and immutable attempt-004 structured terminal to identify the narrowest supported failure coordinate and decide whether a provider-free repair is justified, without launching Harness, broker, worker, model or provider activity.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, constrained to provider-free diagnostic strengthening after the consumed attempt-004 terminal.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_read_only_source_coordinate_diagnosis_contract"
+    },
+    "incidents": [
+      {"incident_id": "grouped-verification-named-missing-test", "source_id": "attempt-004-provider-free-test-inventory-001", "peers": []},
+      {"incident_id": "no-retry-guard-conflicted-with-evidence-field", "source_id": "attempt-004-no-retry-source-guard-001", "peers": []},
+      {"incident_id": "register-stage-used-unadmitted-vocabulary", "source_id": "attempt-004-agent-error-register-stage-vocabulary-001", "peers": []},
+      {"incident_id": "register-peer-linkage-was-topical-only", "source_id": "attempt-004-agent-error-register-peer-linkage-001", "peers": []},
+      {"incident_id": "checkpoint-stage-text-exceeded-bound", "source_id": "attempt-004-clockwork-checkpoint-text-001", "peers": []},
+      {"incident_id": "incident-intake-bypassed-clockwork-owner", "source_id": "attempt-004-canonical-owner-recovery-001", "peers": []},
+      {"incident_id": "yielded-test-session-exit-was-not-captured", "source_id": "attempt-004-provider-free-test-session-001", "peers": []},
+      {"incident_id": "prelaunch-probe-method-was-unadmitted", "source_id": "attempt-004-prelaunch-receipt-method-001", "peers": []},
+      {"incident_id": "synthetic-root-was-mislabelled-handoff", "source_id": "attempt-004-prelaunch-workspace-receipt-001", "peers": []}
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "attempt_004_postterminal_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt_004_governance_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_current_baton_consistency.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt_004_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt_004_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Native Harness attempt 004 structured terminal acceptance",
+    "paths": [
+      "docs/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision-plan.md",
+      "docs/security/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision-threat-model-delta.md",
+      "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/occupied-attempt-consumed.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/pre-hmr-startup-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/efficacy-reading.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/diagnosis.md",
+      "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py",
+      "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py",
+      "docs/ariadne-agent-error-correction-register-revision-585.md",
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-attempt-004-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-21--native-harness-attempt-004-terminal.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_read_only_pinned_rc7_source_and_immutable_attempt_004_terminal_only",
+    "no_native_harness_broker_worker_model_provider_process_or_request",
+    "no_occupied_attempt_retry_resume_overwrite_reclassification_or_second_worker",
+    "attempts_001_002_003_004_terminal_and_consumed_evidence_remain_immutable",
+    "no_raw_error_message_stack_path_stream_session_or_credential_reconstruction",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "attempt-004-provider-free-test-inventory-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-004-provider-free-test-inventory",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Grouped provider-free verification must select only exact paths discovered from the repository test inventory.",
+      "observed_error": "The first grouped command named a non-existent generic structured-diagnostic controller test and failed before collection.",
+      "detection_method": "Strict path resolution returned FileNotFoundError before pytest, Harness, broker, model or provider activity.",
+      "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-585.md"],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.provider_free_grouped_test_path_not_inventory_resolved",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve the test inventory with rg --files and rerun using only existing exact paths.",
+        "prevention_control": "Grouped provider-free path selection is derived from a current rg --files reading.",
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-585.md"]
+      },
+      "baton_summary": "records the inventory-unresolved test path and exact-path correction."
+    },
+    {
+      "attempt_key": "attempt-004-no-retry-source-guard-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-004-no-retry-source-guard",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A no-retry guard must distinguish retry control flow from mandatory zero-valued retry evidence fields.",
+      "observed_error": "The first focused test prohibited the substring retry while also requiring automatic_retry_count, so its assertions contradicted each other.",
+      "detection_method": "Provider-free pytest identified the mandatory field as the rejected substring.",
+      "evidence_paths": ["tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py"],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.no_retry_guard_conflicted_with_required_retry_count_field",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the substring ban with structural one-launch, no-unbounded-loop and zero-count assertions.",
+        "prevention_control": "The focused guard checks behavior structurally while preserving mandatory evidence vocabulary.",
+        "evidence_paths": ["tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py"]
+      },
+      "baton_summary": "records the contradictory substring guard and structural replacement."
+    },
+    {
+      "attempt_key": "attempt-004-agent-error-register-stage-vocabulary-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "agent-error-register-stage-vocabulary",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Incident stage values must come from the register schema's closed vocabulary.",
+      "observed_error": "The first draft used verification instead of deterministic_verification for two observations.",
+      "detection_method": "Schema validation rejected the draft before the pattern report was accepted.",
+      "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-585.md"],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_stage_used_unadmitted_verification",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use deterministic_verification and retain schema validation before publication.",
+        "prevention_control": "Clockwork now exclusively receives incident observations and validates the fixed vocabulary.",
+        "evidence_paths": ["orchestration_harness/governance_clockwork_tick.py"]
+      },
+      "baton_summary": "records the unadmitted stage and fixed-vocabulary correction."
+    },
+    {
+      "attempt_key": "attempt-004-agent-error-register-peer-linkage-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "agent-error-register-peer-linkage",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Related incidents must satisfy attempt-peer identity rather than topical proximity.",
+      "observed_error": "The second draft linked incidents with distinct attempt identities only because they were topically related.",
+      "detection_method": "The deterministic register validator rejected attempt peer linkage mismatch.",
+      "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-585.md"],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_related_ids_without_attempt_peer_identity",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove topical-only links and retain empty peer lists for independent attempts.",
+        "prevention_control": "Clockwork allocates peer relationships from explicit incident source identity.",
+        "evidence_paths": ["orchestration_harness/governance_clockwork_tick.py"]
+      },
+      "baton_summary": "records the topical peer links and identity-based correction."
+    },
+    {
+      "attempt_key": "attempt-004-clockwork-checkpoint-text-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "governance-clockwork-checkpoint-intent",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Checkpoint completed-stage text must remain within the schema's 500-character bound.",
+      "observed_error": "The first read-only checkpoint check rejected an overlong completed-stage field before transaction preparation.",
+      "detection_method": "Clockwork returned checkpoint_tick_completed_stage with no command or publication action.",
+      "evidence_paths": ["orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/checkpoint-intent.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_checkpoint_completed_stage_exceeded_bound",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Reduce the same facts to a bounded completed-stage string and rerun the read-only check.",
+        "prevention_control": "Clockwork validates text bounds before transaction preparation or command execution.",
+        "evidence_paths": ["orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/checkpoint-intent.json"]
+      },
+      "baton_summary": "records the rejected overlong checkpoint text and bounded replacement."
+    },
+    {
+      "attempt_key": "attempt-004-canonical-owner-recovery-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "governance-clockwork-canonical-owner",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Incident intake and canonical register, pattern and AGENTS publication must pass only through clockwork.",
+      "observed_error": "The first implementation commit directly updated the three clockwork-owned incident projections and created canonical drift.",
+      "detection_method": "The occupied-checkpoint dry run returned canonical_drift before command execution or publication.",
+      "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-585.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "orchestrator.incident_intake_bypassed_clockwork_canonical_owner",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Restore all three canonical surfaces byte-for-byte from the active generation and submit observations only through this version-two intent.",
+        "prevention_control": "Clockwork validates zero drift and remains the exclusive canonical publisher before every checkpoint and closeout.",
+        "evidence_paths": ["orchestration/continuity/ariadne-governance-clockwork/current.json", "orchestration_harness/governance_clockwork_tick.py"]
+      },
+      "baton_summary": "records the canonical-owner bypass, byte-exact restoration and clockwork-only incident intake."
+    },
+    {
+      "attempt_key": "attempt-004-provider-free-test-session-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "provider-free-test-session-exit-capture",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every yielded validation process must retain its session identifier until final exit capture.",
+      "observed_error": "One grouped test yielded at 96 percent without exposing its session identifier, so its final exit reading was unavailable after process completion.",
+      "detection_method": "A process-absence reading found no live test process while the captured result had no exit code.",
+      "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-585.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.yielded_validation_session_identifier_not_retained",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Rerun the remaining test file with explicit session and final exit capture.",
+        "prevention_control": "Long process wrappers always emit and retain session_id before waiting for completion.",
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-585.md"]
+      },
+      "baton_summary": "records the lost yielded-process exit reading and explicit session-retention correction."
+    },
+    {
+      "attempt_key": "attempt-004-prelaunch-receipt-method-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-004-prelaunch-adapter-probe-method",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Adapter probe methods must use the orchestrator preflight's fixed vocabulary before worker dispatch.",
+      "observed_error": "The first prelaunch receipt used native_harness_prelaunch, which is not an admitted adapter probe method.",
+      "detection_method": "Preflight returned adapter_probe_method_invalid and worker_dispatch_permitted false before process creation.",
+      "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-attempt-004-occupied-prelaunch-receipt.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.prelaunch_adapter_probe_used_unadmitted_method",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the admitted synthetic_fixture method in a distinct corrected receipt.",
+        "prevention_control": "Preflight's fixed adapter method vocabulary remains a dispatch prerequisite.",
+        "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-attempt-004-occupied-prelaunch-v2-receipt.json"]
+      },
+      "baton_summary": "records the rejected adapter method and admitted synthetic-fixture correction."
+    },
+    {
+      "attempt_key": "attempt-004-prelaunch-workspace-receipt-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-004-prelaunch-workspace-receipt",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A standalone synthetic baseline must not be represented as an Ariadne task-handoff worktree.",
+      "observed_error": "The first prelaunch runtime state supplied the disposable synthetic repository as a handoff workspace receipt.",
+      "detection_method": "Preflight rejected workspace_not_clean and workspace_not_at_handoff before worker dispatch.",
+      "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-attempt-004-occupied-prelaunch-receipt.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.synthetic_baseline_misrepresented_as_handoff_worktree",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the false handoff receipt and retain the root identity in preparation and checkpoint evidence only.",
+        "prevention_control": "Ariadne workspace receipts are reserved for task-handoff worktrees; standalone synthetic roots use their own evidence schemas.",
+        "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-attempt-004-occupied-prelaunch-v2-receipt.json", "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/occupied-attempt-preparation.json"]
+      },
+      "baton_summary": "records the false handoff-workspace claim and synthetic-evidence correction."
+    }
+  ]
+}

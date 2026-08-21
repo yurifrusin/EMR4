@@ -5,8 +5,8 @@ Timestamp: 2026-08-21T12:24:55.9790653+10:00 (Australia/Brisbane)
 
 <!-- ariadne-agent-error-register-reading
 revision: 585
-incident_count: 763
-new_incident_ids: AER-0760,AER-0761,AER-0762,AER-0763
+incident_count: 768
+new_incident_ids: AER-0760,AER-0761,AER-0762,AER-0763,AER-0764,AER-0765,AER-0766,AER-0767,AER-0768
 open_incident_count: 0
 -->
 
@@ -45,4 +45,43 @@ related IDs to satisfy its attempt-peer rule and rejected that draft before
 publication. The invalid links are removed; independently identified attempts
 retain empty related-ID lists.
 
-All four incidents are corrected and none remains open.
+## AER-0764 — checkpoint prose exceeded its closed bound
+
+The first read-only occupied-checkpoint check rejected its completed-stage
+text because it exceeded the schema's 500-character bound. No transaction or
+command began. The same facts were reduced to a bounded string and the next
+read-only check passed.
+
+## AER-0765 — incident intake bypassed clockwork ownership
+
+The first implementation commit directly updated the canonical register,
+pattern projection and AGENTS register row. The occupied-checkpoint dry run
+correctly returned `canonical_drift`. Those three surfaces were restored
+byte-for-byte from the active generation in a descendant commit. The incident
+observations are now supplied only through the version-2 closeout intent, so
+clockwork remains their exclusive publisher.
+
+## AER-0766 — a yielded test process lost its captured exit reading
+
+One long grouped provider-free test call yielded after showing 96 percent
+progress, but its caller had not exposed the returned session identifier. A
+process-absence read proved it had ended, but the exit value was unavailable.
+The remaining test file was rerun separately with explicit exit capture and
+passed. Later long calls always expose and retain the session identifier.
+
+## AER-0767 — prelaunch receipt used a non-admitted probe method
+
+The first occupied-prelaunch receipt described the native Harness observation
+with method `native_harness_prelaunch`, outside the preflight's fixed adapter
+method vocabulary. Preflight rejected dispatch before any process. The
+corrected receipt uses the admitted `synthetic_fixture` method.
+
+## AER-0768 — disposable synthetic Git was mislabelled as a handoff worktree
+
+The same rejected prelaunch receipt supplied the standalone synthetic baseline
+as an Ariadne workspace handoff receipt. Preflight correctly reported it was
+not at the task handoff and not clean under that false model. The corrected
+receipt makes no handoff-workspace claim; the exact synthetic root remains
+bound by its preparation and checkpoint artifacts.
+
+All nine incidents are corrected or contained and none remains open.
