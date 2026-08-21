@@ -11,7 +11,7 @@
     {
       "role": "inert_task_one_process_controller",
       "path": "scripts/deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_engine.py",
-      "sha256": "35a4d6e12eeb7b340dcd6d75d8cfd7ec87f8e563504f42e35293a426c4bd0c9a"
+      "sha256": "aed211a600376f3af82b91c6715e124323fbfd99303613eae06915e068ec80b6"
     },
     {
       "role": "source_repaired_boot_wrapper",
