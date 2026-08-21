@@ -59,11 +59,7 @@
         "Node, native Harness, worker, model, provider, network, retry, resume, target and product counters remained zero.",
         "The exact runtime exception, private context value and repaired native runtime remain unproved."
       ],
-      "contract_evidence": [
-        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/contract.json",
-        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/contract.schema.json",
-        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/evidence.schema.json"
-      ],
+      "contract_evidence": [],
       "evidence": {
         "plans": [
           "docs/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal-plan.md",
@@ -354,6 +350,41 @@
         ]
       },
       "baton_summary": "records and corrects Markdown soft-wrap normalization that removed source-owned compound hyphens."
+    },
+    {
+      "attempt_key": "source-reconciliation-incident-0911",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "source-reconciliation-contract-evidence-shape",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_check",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A Continuity node's contract_evidence field contains only registered contract objects or the narrow empty form.",
+      "observed_error": "The first closeout intent supplied artifact-path strings in contract_evidence instead of registered contract objects.",
+      "detection_method": "The governance clockwork rejected the prospective projection before any canonical surface changed.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-609.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.transaction_manifest_contract_evidence_strings_instead_of_registered_objects",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the invalid path-string list with the narrow empty contract-evidence form and retain the files in the ordinary evidence inventory.",
+        "prevention_control": "Closeout manifests copy the Continuity node contract-evidence shape from the canonical schema and use an empty list when no registered contract applies.",
+        "evidence_paths": [
+          "scripts/ariadne_continuity.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-609.md"
+        ]
+      },
+      "baton_summary": "records and corrects the first closeout manifest's invalid contract-evidence string list before canonical publication."
     }
   ]
 }

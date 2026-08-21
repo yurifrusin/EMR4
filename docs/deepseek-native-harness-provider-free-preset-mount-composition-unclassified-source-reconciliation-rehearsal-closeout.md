@@ -57,10 +57,12 @@ unproved, and no retry is authorised by this result.
 - Node, native Harness, worker, model and provider processes, requests, retries
   and resumes remained zero.
 
-Clockwork closeout records the machine-object-ID, direct-script import-path and
-Markdown-soft-wrap assertion corrections as AER-0908 through AER-0910. The
-first is the exact class of clerical binding that the governance mechanism must
-continue removing from caller-authored contracts.
+Clockwork closeout records the machine-object-ID, direct-script import-path,
+Markdown-soft-wrap assertion and first-manifest contract-evidence-shape
+corrections as AER-0908 through AER-0911. The first is the exact class of
+clerical binding that the governance mechanism must continue removing from
+caller-authored contracts. The last was rejected by the prospective clockwork
+projection before any canonical surface changed.
 
 ## Parallelism disposition
 
