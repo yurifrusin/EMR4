@@ -1,0 +1,66 @@
+{
+  "schema_version": "ariadne.deepseek_native_harness_sentinel_source_escape_repair_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-sentinel-source-escape-repair",
+  "planning_source": "eca807562c32c232034c63268b3e5f149e267592",
+  "accepted_diagnosis_source": "1609d7fa2c505fbd3f4f28a1a7f1f823356059d3",
+  "repair_target": {
+    "path": "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+    "preimage_sha256": "83d7b7ed0a438993f32b60d98f1dda567875eb67e6fcba5087d9b6796d23deeb",
+    "postimage_sha256": "e64b6c7f6b13bae69dd910963620e03e292b5262c5b05029305d6097f3e6191b",
+    "function_name": "sentinel_source",
+    "old_token": "return b'''import {",
+    "new_token": "return br'''import {",
+    "required_replacement_count": 1,
+    "expected_changed_byte_count": 1,
+    "expected_generated_module_sha256": "8b53bc7fb781d29d87310ee2d3425ca159a62fed4893a3e4db94069d63cd60bd",
+    "expected_generated_module_bytes": 1157,
+    "required_generated_spellings": [
+      ".split(/\\r?\\n/)",
+      "+ \"\\n\","
+    ]
+  },
+  "diagnosis_bindings": [
+    {
+      "role": "accepted_diagnosis_contract",
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/contract.json",
+      "sha256": "2ed936389bddf7a456c88bd8df56e9666486ce6e9fca007f3f000ed3be2db7c1"
+    },
+    {
+      "role": "accepted_diagnosis_evidence",
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/diagnosis-evidence.json",
+      "sha256": "5affbc07f689697336aae6b2ec5a388c8e3f694f1f32f6e7221515946eae59c3"
+    },
+    {
+      "role": "consumed_failed_terminal",
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-terminal.json",
+      "sha256": "98fe86b1b9d7eddbed156595aaaa135b0b59d18228ba78a0036c1bc94f580556"
+    },
+    {
+      "role": "accepted_passing_control_terminal",
+      "path": "orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-terminal-attempt-003.json",
+      "sha256": "27e37e025b6c31d0c29ad1976252dc2bd9a87c32a4754323243f1a66e5e4bc7c"
+    }
+  ],
+  "consumed_evidence_roots": [
+    "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal",
+    "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof",
+    "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis"
+  ],
+  "method": {
+    "execute_or_import_repair_target": false,
+    "node_process_limit": 0,
+    "harness_process_limit": 0,
+    "broker_process_limit": 0,
+    "worker_process_limit": 0,
+    "model_request_limit": 0,
+    "provider_request_limit": 0,
+    "network_request_limit": 0,
+    "raw_stream_reconstruction_limit": 0,
+    "maximum_modified_preexisting_files": 1,
+    "accepted_results": [
+      "pass",
+      "failed_closed"
+    ]
+  },
+  "claim_boundary": "A pass proves only the exact source-literal escape repair, the frozen generated-byte property and consumed-evidence immutability. It is not a Harness boot, worker, model or provider performance result and authorizes no executable retry."
+}

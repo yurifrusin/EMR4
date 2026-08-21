@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "planning_source",
+    "accepted_diagnosis_source",
+    "repair_target",
+    "diagnosis_bindings",
+    "consumed_evidence_roots",
+    "method",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.deepseek_native_harness_sentinel_source_escape_repair_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-sentinel-source-escape-repair"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_diagnosis_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "repair_target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "preimage_sha256", "postimage_sha256", "function_name", "old_token", "new_token", "required_replacement_count", "expected_changed_byte_count", "expected_generated_module_sha256", "expected_generated_module_bytes", "required_generated_spellings"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "preimage_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "postimage_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "function_name": {"const": "sentinel_source"},
+        "old_token": {"type": "string", "minLength": 1},
+        "new_token": {"type": "string", "minLength": 1},
+        "required_replacement_count": {"const": 1},
+        "expected_changed_byte_count": {"const": 1},
+        "expected_generated_module_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "expected_generated_module_bytes": {"type": "integer", "minimum": 1},
+        "required_generated_spellings": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "diagnosis_bindings": {
+      "type": "array",
+      "minItems": 4,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "path", "sha256"],
+        "properties": {
+          "role": {"type": "string", "minLength": 1},
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "consumed_evidence_roots": {"type": "array", "minItems": 3, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["execute_or_import_repair_target", "node_process_limit", "harness_process_limit", "broker_process_limit", "worker_process_limit", "model_request_limit", "provider_request_limit", "network_request_limit", "raw_stream_reconstruction_limit", "maximum_modified_preexisting_files", "accepted_results"],
+      "properties": {
+        "execute_or_import_repair_target": {"const": false},
+        "node_process_limit": {"const": 0},
+        "harness_process_limit": {"const": 0},
+        "broker_process_limit": {"const": 0},
+        "worker_process_limit": {"const": 0},
+        "model_request_limit": {"const": 0},
+        "provider_request_limit": {"const": 0},
+        "network_request_limit": {"const": 0},
+        "raw_stream_reconstruction_limit": {"const": 0},
+        "maximum_modified_preexisting_files": {"const": 1},
+        "accepted_results": {"type": "array", "const": ["pass", "failed_closed"]}
+      }
+    },
+    "claim_boundary": {"type": "string", "minLength": 1}
+  }
+}
