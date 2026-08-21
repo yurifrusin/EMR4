@@ -54,7 +54,7 @@ ACTIVE_LABELS = (
     "Reception One selected-appointment cancellation composition acceptance",
     "Ordinary Diary canonical cancellation consumer convergence acceptance",
     "Provider-free default-off canonical check-in route-adapter convergence acceptance",
-    "DeepSeek native Harness authored-synthetic traceability micro-rehearsal acceptance",
+    "Current DeepSeek native Harness acceptance",
     "Current result",
     "Next implementation",
     "Future Consultant clinical direction",

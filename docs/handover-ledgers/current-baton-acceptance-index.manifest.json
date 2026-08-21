@@ -32,7 +32,7 @@
     "Reception One selected-appointment cancellation composition acceptance",
     "Ordinary Diary canonical cancellation consumer convergence acceptance",
     "Provider-free default-off canonical check-in route-adapter convergence acceptance",
-    "DeepSeek native Harness authored-synthetic traceability micro-rehearsal acceptance",
+    "Current DeepSeek native Harness acceptance",
     "Current result",
     "Next implementation",
     "Future Consultant clinical direction",
@@ -40,10 +40,10 @@
     "Agent Execution Surface and Containment Gate direction"
   ],
   "generated_date": "2026-08-03",
-  "ledger_byte_count": 339936,
-  "ledger_line_count": 237,
+  "ledger_byte_count": 340608,
+  "ledger_line_count": 238,
   "ledger_path": "docs/handover-ledgers/current-baton-acceptance-index.md",
-  "ledger_sha256": "86ba7dd12bd11d608ddfb7d78ec6af7cc9aa88162bcadb7ecc0b2cb33be6fae0",
+  "ledger_sha256": "0de03ca130969853fbe7e83e8b4e941ed1b0d64b91cc1e11511b9f4f18b4ed99",
   "moved_labels": [
     "Current product result",
     "Provider-free OIDC start/callback transport boundary acceptance",
@@ -265,14 +265,15 @@
     "Native Harness post-sentinel pre-stock-readiness exit-coordinate diagnosis acceptance",
     "Native Harness inert-task sentinel-readiness proof acceptance",
     "Native Harness attempt 005 readiness decision acceptance",
-    "Native Harness attempt 005 runner terminal acceptance"
+    "Native Harness attempt 005 runner terminal acceptance",
+    "DeepSeek native Harness authored-synthetic traceability micro-rehearsal acceptance"
   ],
-  "moved_row_count": 221,
+  "moved_row_count": 222,
   "schema_version": "emr4.current_baton_acceptance_index_manifest.v1",
-  "source_agents_byte_count": 78034,
-  "source_agents_git_blob_sha1": "e82530ab5c4216d751fa78fa7bd99564eed65c09",
-  "source_agents_line_count": 412,
+  "source_agents_byte_count": 78666,
+  "source_agents_git_blob_sha1": "ec79b86b1ca33a1860c7ea7865bbb1f9483bd95b",
+  "source_agents_line_count": 413,
   "source_agents_path": "AGENTS.md",
-  "source_agents_sha256": "085d371792f93ef6bce0e410f92930af82a9a794c7786b15756778e4734ab82e",
-  "source_git_head": "167f8330216b84f2981469299575f4fa7ad1f7e8"
+  "source_agents_sha256": "0e9598c7cce4ae7bd6191d298022919445761e4178753c9148743a8d05834490",
+  "source_git_head": "c96128adcc3b43ade8f7f1d13da693df2760c551"
 }
