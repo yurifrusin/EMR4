@@ -1,0 +1,11 @@
+{
+  "schema_version": "emr4.non_phi_pushover_notification_receipt.v1",
+  "recorded_at": "2026-08-22T08:43:13.0945225+10:00",
+  "status": "passed",
+  "provider": "pushover",
+  "request": "f709be19-68b2-4565-9240-4ccaaacc4fec",
+  "title": "EMR4 sprint closeout",
+  "message_class": "non_phi_operational_closeout",
+  "phi_or_clinical_data": false,
+  "summary": "Thirteen source coordinates and current governance checks passed with zero worker or provider activity; process-free root preset-service forwarding correction is next."
+}
