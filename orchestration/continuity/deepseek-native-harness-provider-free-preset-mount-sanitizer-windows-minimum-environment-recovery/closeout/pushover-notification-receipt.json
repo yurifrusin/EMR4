@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.pushover_closeout_receipt.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery",
+  "sent_at": "2026-08-22T06:18:02.9732563+10:00",
+  "status": "passed",
+  "provider_status": 1,
+  "request": "b9e6042b-e7f9-4ab2-b65a-6cf1bccff2ef",
+  "continuing": true,
+  "next_operation": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+  "non_phi": true
+}
