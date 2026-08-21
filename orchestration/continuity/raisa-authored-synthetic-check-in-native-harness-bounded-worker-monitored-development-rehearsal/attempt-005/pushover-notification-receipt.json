@@ -1,0 +1,10 @@
+{
+  "schema_version": "emr4.non_phi_pushover_notification_receipt.v1",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
+  "sent_at": "2026-08-21T20:03:42.2972050+10:00",
+  "provider": "pushover",
+  "request": "1aa85f2c-c7ec-4b10-a82c-b55c25235ba3",
+  "status": 1,
+  "contains_phi": false,
+  "message_scope": "attempt 005 consumed fail-closed after native HMR readiness and before provider I/O; zero retry and provider requests; complete cleanup; 538 final tests; Continuity 372 / Compass 354; provider-free runner pre-request diagnosis next"
+}
