@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 591,
+  "register_revision": 592,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -31396,6 +31396,114 @@
       },
       "incident_id": "AER-0801",
       "attempt_id": "clock-a629e487c212acd0787a22d9",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "static-source-chain-helper-count-predicate",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A unique causal coordinate and a repeated helper-presence predicate must use distinct cardinality rules.",
+      "observed_error": "The first predicate required forceExitOnce(code) to appear exactly once even though the exact shutdown source invokes it from several branches.",
+      "detection_method": "The first focused pytest run failed closed before canonical evidence generation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/verification-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-592.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.static_helper_presence_misclassified_as_unique_coordinate",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Require at least one exact helper call while retaining uniqueness only for the causal source-chain verdict.",
+        "prevention_control": "Static predicates declare whether a token is unique, ordered or merely present before choosing a count operator.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_post_sentinel_pre_stock_readiness_exit_coordinate_diagnosis.py"
+        ]
+      },
+      "incident_id": "AER-0802",
+      "attempt_id": "clock-f118dd27f440ff76d18a18f2",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "raw-stream-nonretention-test",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Raw-stream nonretention must be tested structurally without forbidding precise safety prose.",
+      "observed_error": "The first test prohibited the word stderr anywhere in serialized evidence and therefore rejected the claim boundary that states stderr was not reconstructed.",
+      "detection_method": "The first focused pytest run failed closed before canonical evidence generation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/verification-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-592.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.raw_stream_safety_test_forbade_nonreconstruction_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Assert absence of stream and stderr-digest fields while permitting explicit non-reconstruction prose.",
+        "prevention_control": "Safety tests inspect schema fields and retained values, not unrestricted vocabulary in explanatory text.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_post_sentinel_pre_stock_readiness_exit_coordinate_diagnosis.py"
+        ]
+      },
+      "incident_id": "AER-0803",
+      "attempt_id": "clock-4bb9b8fbbb5be06842fceca1",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "applicable-predecessor-test-selector",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A widened successor verification packet must exclude assertions intentionally frozen to pre-repair digests and verdicts.",
+      "observed_error": "Two widened selections rediscovered four immutable pre-source-repair assertions before the final exact applicability set passed.",
+      "detection_method": "Pytest reported only expected old controller/sentinel digest and pre-repair verdict mismatches; targeted inspection confirmed their immutable purpose.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/verification-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-592.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_verification_rediscovered_immutable_pre_repair_selectors",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Name and deselect the four immutable selectors; retain all 37 applicable current and predecessor tests.",
+        "prevention_control": "Generate and consume an applicability manifest at repair closeout instead of reconstructing negative selectors from memory.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/efficacy-reading.json"
+        ]
+      },
+      "incident_id": "AER-0804",
+      "attempt_id": "clock-ab90300d31fddc2cd059e0c5",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

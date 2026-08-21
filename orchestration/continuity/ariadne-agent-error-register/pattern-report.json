@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 591,
+  "register_revision": 592,
   "source_cutoff_on": "2026-08-21",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "be7e8634fa129305b7334db423031a7b42b5f70bb1d27d0b7c110652cd3a9d43",
-  "incident_count": 801,
+  "canonical_register_sha256": "50daa9571546ecf3dcdc5bc0b9d25569702a26aad6aaccab5c079ed5f8ecfd34",
+  "incident_count": 804,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 482,
       "harness": 61,
-      "operator": 111,
+      "operator": 114,
       "repository": 131,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 93,
       "evidence_misreport": 71,
       "harness_failure": 61,
-      "operator_error": 111,
+      "operator_error": 114,
       "output_contract_violation": 266,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
@@ -28,18 +28,18 @@
     "by_role": {
       "implementer": 57,
       "integration_reviewer": 3,
-      "orchestrator": 678,
+      "orchestrator": 681,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 477,
+      "low": 480,
       "material": 129,
       "moderate": 195
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 144,
-      "canonical_unchanged": 500,
-      "untrusted_partial_worktree": 157
+      "canonical_unchanged": 501,
+      "untrusted_partial_worktree": 159
     },
     "by_resource_and_role": {
       "accepted-native-startup-terminal-and-consumed-controller-source::orchestrator": 1,
@@ -51,6 +51,7 @@
       "antigravity-gemini-flash-3-7-high-verifier::verifier": 4,
       "antigravity-gemini37-review::verifier": 1,
       "api-spine-historical-regression-suite::orchestrator": 2,
+      "applicable-predecessor-test-selector::orchestrator": 1,
       "ariadne-active-operation-latch-closeout::orchestrator": 1,
       "ariadne-active-operation-latch-continuity-test::orchestrator": 3,
       "ariadne-active-operation-latch::orchestrator": 3,
@@ -255,6 +256,7 @@
       "provider-free-pytest-wrapper-cli::orchestrator": 1,
       "provider-free-recovery-evidence-runner::implementer": 1,
       "provider-free-test-session-exit-capture::orchestrator": 1,
+      "raw-stream-nonretention-test::orchestrator": 1,
       "repair-dead-local-guard::orchestrator": 1,
       "repair-runner-cli-import::orchestrator": 1,
       "repaired-sentinel-native-boot-process::orchestrator": 1,
@@ -277,6 +279,7 @@
       "source-repaired-sentinel-human-report::orchestrator": 1,
       "source-repaired-sentinel-preexecution-receipt::orchestrator": 1,
       "source-repaired-sentinel-widened-test-packet::orchestrator": 1,
+      "static-source-chain-helper-count-predicate::orchestrator": 1,
       "successor-protected-boundary-vocabulary::orchestrator": 1,
       "transactional-closeout-decision-evidence::orchestrator": 1,
       "transactional-closeout-node-relationship-cardinality::orchestrator": 1,

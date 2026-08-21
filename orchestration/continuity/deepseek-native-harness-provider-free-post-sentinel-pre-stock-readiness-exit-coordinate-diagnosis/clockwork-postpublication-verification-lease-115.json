@@ -1,0 +1,21 @@
+{
+  "schema_version": "deepseek.native_harness.post_sentinel_exit_diagnosis_clockwork_postpublication_verification.v1",
+  "status": "passed",
+  "source_commit": "5fae13203261be6c8960d1bad599e7f04f749fed",
+  "generation_id": "gen-d063ab19afaa4efce2914f25705df00682b29f2b62f881a8df99a45fb13cb565",
+  "lease_sequence": 115,
+  "tests": 557,
+  "passed": 557,
+  "failed": 0,
+  "errors": 0,
+  "provider_requests": 0,
+  "native_harness_processes": 0,
+  "live_state_validation": {
+    "status": "passed",
+    "canonical_drift": 0,
+    "clockwork_owned_surfaces": 10,
+    "dual_owned_surfaces": 0,
+    "retired_legacy_writer_classes": 4
+  },
+  "claim_boundary": "This record proves the lease-115 clockwork, latch, Compass, continuity and error-register regression packet passed. It is not a Harness boot, worker, model or provider performance result."
+}

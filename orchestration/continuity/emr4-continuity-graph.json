@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 368,
+  "graph_revision": 369,
   "harvests": [],
   "nodes": [
     {
@@ -27642,9 +27642,115 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis",
+      "title": "Native Harness post-sentinel pre-readiness exit diagnosis",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted a provider-free process-free static diagnosis only.",
+          "The consumed native attempt remains immutable; no retry, Node, Harness, broker, worker, model, provider or network activity opened during diagnosis.",
+          "No product, data, deployment, Pages or protected-ref authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-unique-empty-task-exit-coordinate",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/diagnosis-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the mounted headless-startup missing-task rejection and appExit-one shutdown path as sufficient to explain the retained post-sentinel exit."
+        },
+        {
+          "id": "preserve-consumed-attempt-and-raw-stream-boundaries",
+          "source": "docs/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis-closeout.md",
+          "status": "accepted",
+          "summary": "Keep the consumed process terminal immutable and perform no digest-oracle reconstruction of destroyed raw streams."
+        },
+        {
+          "id": "accept-inert-task-readiness-proof-next",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-post-sentinel-exit-coordinate-diagnosis-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Permit a separately frozen one-process provider-free sentinel-readiness proof with exactly one inert task and the headless runner disabled."
+        },
+        {
+          "id": "accept-contained-diagnosis-observations",
+          "source": "docs/ariadne-agent-error-correction-register-revision-592.md",
+          "status": "accepted",
+          "summary": "Accept three corrected observations with none open."
+        }
+      ],
+      "claim_scope": [
+        "The frozen boot passed zero inner task arguments while the exact headless-startup provider remained mounted.",
+        "The exact rc7 startup, Commander, command-line adapter and profile shutdown sources form an eight-link path to exit code one.",
+        "The retained sentinel_activated then exit-one terminal matches that sufficient source path.",
+        "The result does not prove later HMR readiness or measure DeepSeek model/provider performance.",
+        "No raw stream was reconstructed and every executable Harness/provider activity count is zero."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/diagnosis-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/diagnosis-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/verification-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-post-sentinel-exit-coordinate-diagnosis-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-post-sentinel-exit-coordinate-diagnosis-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-post-sentinel-exit-coordinate-diagnosis-pre-verifier-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_post_sentinel_pre_stock_readiness_exit_coordinate_diagnosis.py",
+          "tests/test_deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_sentinel_source_escape_repair.py",
+          "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_preactivation_source_coordinate_diagnosis.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_post_sentinel_pre_stock_readiness_exit_coordinate_diagnosis.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/evidence.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-592.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-post-sentinel-exit-coordinate-diagnosis.md"
+        ]
+      },
+      "unresolved_gates": [
+        "No inert task has been supplied to a fresh attempt.",
+        "Stock-headless HMR readiness after the task-shape correction remains untested.",
+        "No runner, broker, worker, model/provider or EMR4 development work is admitted.",
+        "Any fresh native proof remains limited to one separately consumed process with no retry."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-21T17:13:29.8514555+10:00",
+      "updated_at": "2026-08-21T17:13:29.8514555+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "5fae13203261be6c8960d1bad599e7f04f749fed",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-21T16:33:56.0458572+10:00"
+  "updated_at": "2026-08-21T17:13:29.8514555+10:00"
 }

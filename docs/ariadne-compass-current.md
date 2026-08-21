@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Freeze one provider-free, process-free diagnosis of the exact rc7 path between sentinel activation and stock-headless readiness while preserving the consumed terminal and raw-stream boundary.
+> Freeze one fresh provider-free process with exactly one inert task, keep the headless runner disabled, and terminate after stock HMR readiness or the first sanitized failure coordinate.
 
 ## North star
 
@@ -506,25 +506,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One source byte now preserves the generated JavaScript escapes, with zero lexical violations and exact consumed-evidence preservation. Lineage parent: `deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis`.
 245. **Establish whether the repaired sentinel reaches stock-headless readiness without involving a worker or provider — Source-repaired sentinel native-boot proof**
    The sentinel activated in one traceable native process, then the process failed closed before stock-headless readiness with complete cleanup. Lineage parent: `deepseek-native-harness-provider-free-sentinel-source-escape-repair`.
+246. **Replace an apparently opaque post-sentinel exit with an exact source-control path — Native Harness post-sentinel pre-readiness exit diagnosis**
+   One canonical static pass traced the exit to the frozen empty headless task without another Harness or provider process. Lineage parent: `deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof`.
 
 ## Current position
 
-**Diagnose the post-sentinel, pre-stock-readiness exit without consuming another process — Source-repaired sentinel native-boot proof**
+**Test stock HMR readiness with only the diagnosed startup precondition corrected — Native Harness post-sentinel pre-readiness exit diagnosis**
 
-**Why this proof came next:** Sentinel activation proves the source repair works while the sanitized native exit proves a distinct later failure surface remains.
+**Why this proof came next:** The sentinel source loads and the only supported exit coordinate is the missing mandatory task, so one inert task can isolate the next readiness boundary.
 
-A process-free source diagnosis will bind the narrowest evidenced exit coordinate or bounded hypotheses and decide whether any separately authorised repair or rehearsal is justified.
+A one-process provider-free proof will either emit stock_headless_hmr_ready or fail closed at a new sanitized coordinate with complete cleanup.
 
 ### What this unlocks
 
-- A grounded explanation of the native exit window after sentinel activation.
-- A narrow future decision about whether one source repair or differently instrumented rehearsal is justified.
+- A grounded decision about whether the native Harness composition can proceed to a bounded runner rehearsal.
+- Removal of the empty-task rehearsal-shape defect from the readiness path.
 
 ### What it does not solve
 
-- No retry, second native process, broker, worker, model or provider request.
-- No DeepSeek development-reliability conclusion.
-- No product work, data use, deployment or protected integration.
+- No broker, worker, model or provider request.
+- No product work, patient data, live runtime or production suitability.
+- No automatic retry or general Harness reliability claim.
 
 ## Continuity and authority
 
@@ -1266,6 +1268,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-closeout.md`
 - `docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md`
+- `docs/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md`
 - `docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-closeout.md`
@@ -2010,7 +2013,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-post-sentinel-exit-coordinate-diagnosis-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2659,6 +2662,7 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/efficacy-reading.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/diagnosis-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/efficacy-reading.json`
@@ -2670,7 +2674,6 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-sentinel-source-escape-repair/repair-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/provider-free-source-repaired-sentinel-native-boot-terminal.json`
-- `orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/verification-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/provider-free-node-fixture-evidence.json`
@@ -3651,4 +3654,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 350; continuity graph revision 368._
+_Compass map revision 351; continuity graph revision 369._
