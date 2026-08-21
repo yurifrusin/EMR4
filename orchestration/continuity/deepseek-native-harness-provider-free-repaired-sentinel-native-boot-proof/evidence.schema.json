@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "attempt_id",
+    "candidate_source",
+    "result",
+    "failure_coordinate",
+    "package",
+    "profile",
+    "launch",
+    "hmr_events",
+    "streams",
+    "provider_boundary",
+    "cleanup",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.deepseek_native_harness_repaired_sentinel_boot_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof"},
+    "attempt_id": {"const": "repaired-sentinel-native-boot-attempt-001"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {"enum": ["pass", "failed_closed"]},
+    "failure_coordinate": {"type": ["string", "null"]},
+    "package": {"type": "object"},
+    "profile": {"type": "object"},
+    "launch": {"type": "object"},
+    "hmr_events": {
+      "type": "array",
+      "items": {"enum": ["sentinel_activated", "stock_headless_hmr_ready"]},
+      "maxItems": 2
+    },
+    "streams": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stdout", "stderr", "raw_retained"],
+      "properties": {
+        "stdout": {"$ref": "#/$defs/stream"},
+        "stderr": {"$ref": "#/$defs/stream"},
+        "raw_retained": {"const": false}
+      }
+    },
+    "provider_boundary": {"type": "object"},
+    "cleanup": {"type": "object"},
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "stream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["byte_count", "sha256"],
+      "properties": {
+        "byte_count": {"type": "integer", "minimum": 0},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}
