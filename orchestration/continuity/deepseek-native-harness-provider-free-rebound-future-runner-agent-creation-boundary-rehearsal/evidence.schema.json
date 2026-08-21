@@ -1,0 +1,246 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.example/schemas/native-harness-agent-creation-boundary-evidence.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "planning_source", "candidate_source", "execution_attempt_id",
+    "result", "failure_classification", "source_bindings", "package", "launch", "composition",
+    "readiness", "sidecar", "factory_boundary", "broker_reading", "controller_terminal",
+    "provider_boundary", "target", "cleanup"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_agent_creation_boundary_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal"},
+    "planning_source": {"$ref": "#/$defs/oid"},
+    "candidate_source": {"$ref": "#/$defs/oid"},
+    "execution_attempt_id": {"const": "rebound-agent-creation-boundary-attempt-001"},
+    "result": {"enum": ["pass", "fail"]},
+    "failure_classification": {"type": ["string", "null"]},
+    "source_bindings": {"$ref": "#/$defs/digestMap"},
+    "package": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "version", "bin", "sha1", "integrity", "sha256", "offline_install", "installed_source", "installed_versions", "installed_package_members", "verified_cached_package_count"],
+      "properties": {
+        "name": {"const": "@deepseek-ai/dsh"},
+        "version": {"const": "0.1.0-rc.7"},
+        "bin": {"const": "lib/bin.js"},
+        "sha1": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "integrity": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/digest"},
+        "offline_install": {
+          "type": "object", "additionalProperties": false,
+          "required": ["duration_ms", "process_count", "retry_count", "strategy", "seed", "copy"],
+          "properties": {
+            "duration_ms": {"type": "integer", "minimum": 0},
+            "process_count": {"const": 0},
+            "retry_count": {"const": 0},
+            "strategy": {"const": "verified_installed_tree_seed_copy"},
+            "seed": {"$ref": "#/$defs/seed"},
+            "copy": {"$ref": "#/$defs/tree"}
+          }
+        },
+        "installed_source": {
+          "type": "object", "additionalProperties": false,
+          "required": ["checks", "source_sha256"],
+          "properties": {
+            "checks": {"type": "object", "minProperties": 1, "additionalProperties": {"const": true}},
+            "source_sha256": {"$ref": "#/$defs/digestMap"}
+          }
+        },
+        "installed_versions": {"type": "object", "minProperties": 9, "maxProperties": 9, "additionalProperties": {"const": "0.1.0-rc.7"}},
+        "installed_package_members": {"$ref": "#/$defs/packageMembers"},
+        "verified_cached_package_count": {"type": "integer", "minimum": 1}
+      }
+    },
+    "launch": {
+      "type": "object", "additionalProperties": false,
+      "required": ["started_at_utc", "duration_ms", "native_process_count", "retry_count", "resume_count", "hmr_mutation_count", "exit_code", "exit_mode", "stdout_retained", "stderr_retained", "raw_stream_read"],
+      "properties": {
+        "started_at_utc": {"type": ["string", "null"]},
+        "duration_ms": {"type": ["integer", "null"], "minimum": 0},
+        "native_process_count": {"const": 1},
+        "retry_count": {"const": 0},
+        "resume_count": {"const": 0},
+        "hmr_mutation_count": {"type": "integer", "minimum": 0, "maximum": 1},
+        "exit_code": {"type": ["integer", "null"]},
+        "exit_mode": {"type": ["string", "null"]},
+        "stdout_retained": {"const": false},
+        "stderr_retained": {"const": false},
+        "raw_stream_read": {"const": false}
+      }
+    },
+    "composition": {
+      "type": "object", "additionalProperties": false,
+      "required": ["initial_patch_sha256", "changed_patch_sha256", "runner_copy_equal", "bundle_manifest_before_sha256", "bundle_manifest_after_sha256", "bundle_manifest_unchanged", "preset", "effective_tool_names"],
+      "properties": {
+        "initial_patch_sha256": {"$ref": "#/$defs/digest"},
+        "changed_patch_sha256": {"$ref": "#/$defs/digest"},
+        "runner_copy_equal": {"type": "boolean"},
+        "bundle_manifest_before_sha256": {"$ref": "#/$defs/digest"},
+        "bundle_manifest_after_sha256": {"$ref": "#/$defs/digest"},
+        "bundle_manifest_unchanged": {"type": "boolean"},
+        "preset": {"$ref": "#/$defs/preset"},
+        "effective_tool_names": {"const": ["edit", "glob", "read"]}
+      }
+    },
+    "readiness": {
+      "type": "object", "additionalProperties": false,
+      "required": ["events", "valid", "exact_expected_order"],
+      "properties": {
+        "events": {"type": "array", "items": {"type": "string"}, "maxItems": 2},
+        "valid": {"type": "boolean"},
+        "exact_expected_order": {"type": "boolean"}
+      }
+    },
+    "sidecar": {"type": ["object", "null"]},
+    "factory_boundary": {"$ref": "#/$defs/factoryBoundary"},
+    "broker_reading": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "request_count", "provider_call_started", "provider_call_completed", "provider_call_failed", "request_rejected", "identity_bound", "canonical", "raw_broker_stream_retained"],
+      "properties": {
+        "schema_version": {"const": "ariadne.native_harness_broker_request_reading.v1"},
+        "request_count": {"const": 0},
+        "provider_call_started": {"const": 0},
+        "provider_call_completed": {"const": 0},
+        "provider_call_failed": {"const": 0},
+        "request_rejected": {"const": 0},
+        "identity_bound": {"const": true},
+        "canonical": {"const": true},
+        "raw_broker_stream_retained": {"const": false}
+      }
+    },
+    "controller_terminal": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/controllerTerminal"}]},
+    "provider_boundary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["credential_environment_names_removed_count", "network_attempt_count", "network_ledger_valid", "turn_count", "request_count", "broker_process_count", "broker_request_count", "occupied_worker_count", "model_request_count", "provider_request_count", "database_invocation_count", "docker_invocation_count"],
+      "properties": {
+        "credential_environment_names_removed_count": {"type": "integer", "minimum": 0},
+        "network_attempt_count": {"type": "integer", "minimum": 0},
+        "network_ledger_valid": {"type": "boolean"},
+        "turn_count": {"type": "integer", "minimum": 0},
+        "request_count": {"type": "integer", "minimum": 0},
+        "broker_process_count": {"type": "integer", "minimum": 0},
+        "broker_request_count": {"type": "integer", "minimum": 0},
+        "occupied_worker_count": {"type": "integer", "minimum": 0},
+        "model_request_count": {"type": "integer", "minimum": 0},
+        "provider_request_count": {"type": "integer", "minimum": 0},
+        "database_invocation_count": {"type": "integer", "minimum": 0},
+        "docker_invocation_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "target": {
+      "type": "object", "additionalProperties": false,
+      "required": ["file_created", "used", "absent_after_process"],
+      "properties": {
+        "file_created": {"const": false},
+        "used": {"const": false},
+        "absent_after_process": {"type": "boolean"}
+      }
+    },
+    "cleanup": {
+      "type": "object", "additionalProperties": false,
+      "required": ["process_absent", "disposable_root_absent", "raw_environment_retained", "raw_logs_retained", "package_seed_unchanged"],
+      "properties": {
+        "process_absent": {"type": "boolean"},
+        "disposable_root_absent": {"type": "boolean"},
+        "raw_environment_retained": {"const": false},
+        "raw_logs_retained": {"const": false},
+        "package_seed_unchanged": {"const": true}
+      }
+    }
+  },
+  "$defs": {
+    "oid": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "digestMap": {"type": "object", "minProperties": 1, "additionalProperties": {"$ref": "#/$defs/digest"}},
+    "tree": {
+      "type": "object", "additionalProperties": false,
+      "required": ["tree_sha256", "file_count", "byte_count", "reparse_point_count"],
+      "properties": {
+        "tree_sha256": {"$ref": "#/$defs/digest"},
+        "file_count": {"const": 32744},
+        "byte_count": {"const": 219364530},
+        "reparse_point_count": {"const": 0}
+      }
+    },
+    "seed": {
+      "type": "object", "additionalProperties": false,
+      "required": ["tree_sha256", "file_count", "byte_count", "reparse_point_count", "package_json_sha256", "package_lock_sha256", "lock_package_count", "dsh_manifest_sha256", "seed_scope_package_only"],
+      "properties": {
+        "tree_sha256": {"$ref": "#/$defs/digest"},
+        "file_count": {"const": 32744},
+        "byte_count": {"const": 219364530},
+        "reparse_point_count": {"const": 0},
+        "package_json_sha256": {"$ref": "#/$defs/digest"},
+        "package_lock_sha256": {"$ref": "#/$defs/digest"},
+        "lock_package_count": {"const": 588},
+        "dsh_manifest_sha256": {"$ref": "#/$defs/digest"},
+        "seed_scope_package_only": {"const": true}
+      }
+    },
+    "packageMembers": {
+      "type": "object", "minProperties": 5, "maxProperties": 5,
+      "additionalProperties": {
+        "type": "object", "additionalProperties": false,
+        "required": ["bytes", "sha256", "version"],
+        "properties": {
+          "bytes": {"type": "integer", "minimum": 1},
+          "sha256": {"$ref": "#/$defs/digest"},
+          "version": {"const": "0.1.0-rc.7"}
+        }
+      }
+    },
+    "preset": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "relative_path", "bytes", "sha256", "trust", "effective_tools"],
+      "properties": {
+        "id": {"const": "emr4-bounded-worker"},
+        "relative_path": {"const": ".agent-presets/emr4-bounded-worker/agent.cordis.yml"},
+        "bytes": {"const": 158},
+        "sha256": {"const": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1"},
+        "trust": {"const": "user"},
+        "effective_tools": {"const": ["edit", "glob", "read"]}
+      }
+    },
+    "factoryBoundary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["agent_create_invocation_count", "private_agent_preparation_count", "private_session_preparation_count", "live_agent_count", "live_session_count", "session_created_event_count", "agent_created_event_count", "agent_session_start_event_count"],
+      "properties": {
+        "agent_create_invocation_count": {"type": "integer", "minimum": 0, "maximum": 1},
+        "private_agent_preparation_count": {"type": "integer", "minimum": 0, "maximum": 1},
+        "private_session_preparation_count": {"type": "integer", "minimum": 0, "maximum": 1},
+        "live_agent_count": {"type": "integer", "minimum": 0},
+        "live_session_count": {"type": "integer", "minimum": 0},
+        "session_created_event_count": {"type": "integer", "minimum": 0},
+        "agent_created_event_count": {"type": "integer", "minimum": 0},
+        "agent_session_start_event_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "controllerTerminal": {
+      "type": "object", "additionalProperties": false,
+      "required": ["coordinate", "diagnostic_accepted", "factory_construction_supported", "publication_zero", "broker_zero", "pre_request_supported", "occupied_launch_authorized", "agent_create_invocation_count", "private_agent_preparation_count", "private_session_preparation_count", "live_agent_count", "live_session_count", "session_created_event_count", "agent_created_event_count", "agent_session_start_event_count", "turn_count", "request_count", "model_request_count", "provider_request_count"],
+      "properties": {
+        "coordinate": {"const": "post_hmr_agent_create_prepublication_stop"},
+        "diagnostic_accepted": {"const": true},
+        "factory_construction_supported": {"const": true},
+        "publication_zero": {"const": true},
+        "broker_zero": {"const": true},
+        "pre_request_supported": {"const": true},
+        "occupied_launch_authorized": {"const": false},
+        "agent_create_invocation_count": {"const": 1},
+        "private_agent_preparation_count": {"const": 1},
+        "private_session_preparation_count": {"const": 1},
+        "live_agent_count": {"const": 0},
+        "live_session_count": {"const": 0},
+        "session_created_event_count": {"const": 0},
+        "agent_created_event_count": {"const": 0},
+        "agent_session_start_event_count": {"const": 0},
+        "turn_count": {"const": 0},
+        "request_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0}
+      }
+    }
+  }
+}

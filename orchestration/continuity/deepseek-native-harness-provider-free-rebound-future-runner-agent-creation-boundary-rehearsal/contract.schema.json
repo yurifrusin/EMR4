@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.example/schemas/native-harness-agent-creation-boundary-contract.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "planning_source", "accepted_sources",
+    "predecessor_bytes", "implementation_bytes", "execution_attempt", "bundle_identity",
+    "source_bindings", "target_binding", "package", "required_installed_packages",
+    "package_source_members", "materialisation", "launch", "readiness", "preset",
+    "selection", "factory_boundary", "expected_terminal", "required_zero_counts"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_agent_creation_boundary_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal"},
+    "planning_source": {"$ref": "#/$defs/oid"},
+    "accepted_sources": {"$ref": "#/$defs/oidMap"},
+    "predecessor_bytes": {"$ref": "#/$defs/digestMap"},
+    "implementation_bytes": {"$ref": "#/$defs/digestMap"},
+    "execution_attempt": {
+      "type": "object", "additionalProperties": false,
+      "required": ["attempt_id", "native_process_count", "automatic_retry", "manual_retry", "resume"],
+      "properties": {
+        "attempt_id": {"const": "rebound-agent-creation-boundary-attempt-001"},
+        "native_process_count": {"const": 1},
+        "automatic_retry": {"const": false},
+        "manual_retry": {"const": false},
+        "resume": {"const": false}
+      }
+    },
+    "bundle_identity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["operation_id", "attempt_id", "candidate_source"],
+      "properties": {
+        "operation_id": {"type": "string", "minLength": 1},
+        "attempt_id": {"type": "string", "minLength": 1},
+        "candidate_source": {"$ref": "#/$defs/oid"}
+      }
+    },
+    "source_bindings": {
+      "type": "object", "additionalProperties": false,
+      "required": ["future_runner_sha256", "generated_helper_sha256", "controller_module_sha256", "effective_tool_guard_sha256", "readiness_sentinel_sha256"],
+      "properties": {
+        "future_runner_sha256": {"$ref": "#/$defs/digest"},
+        "generated_helper_sha256": {"$ref": "#/$defs/digest"},
+        "controller_module_sha256": {"$ref": "#/$defs/digest"},
+        "effective_tool_guard_sha256": {"$ref": "#/$defs/digest"},
+        "readiness_sentinel_sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "target_binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["classification", "relative_path", "coordinate_sha256", "occupied_target_use_authorized"],
+      "properties": {
+        "classification": {"const": "inert_authored_synthetic_relative_python_fixture"},
+        "relative_path": {"const": "workspace/authored_synthetic_control_probe.py"},
+        "coordinate_sha256": {"$ref": "#/$defs/digest"},
+        "occupied_target_use_authorized": {"const": false}
+      }
+    },
+    "package": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "version", "bin", "tarball_sha1", "tarball_integrity", "tarball_sha256"],
+      "properties": {
+        "name": {"const": "@deepseek-ai/dsh"},
+        "version": {"const": "0.1.0-rc.7"},
+        "bin": {"const": "lib/bin.js"},
+        "tarball_sha1": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "tarball_integrity": {"type": "string", "minLength": 1},
+        "tarball_sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "required_installed_packages": {"type": "array", "minItems": 9, "maxItems": 9, "uniqueItems": true, "items": {"type": "string"}},
+    "package_source_members": {
+      "type": "object", "minProperties": 5, "maxProperties": 5,
+      "additionalProperties": {
+        "type": "object", "additionalProperties": false,
+        "required": ["bytes", "sha256", "version"],
+        "properties": {
+          "bytes": {"type": "integer", "minimum": 1},
+          "sha256": {"$ref": "#/$defs/digest"},
+          "version": {"const": "0.1.0-rc.7"}
+        }
+      }
+    },
+    "materialisation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["generation", "strategy", "seed_classification", "process_count", "retry_count", "package_json_sha256", "package_lock_sha256", "lock_package_count", "tree_sha256", "file_count", "byte_count", "dsh_manifest_sha256", "reparse_point_count", "seed_scope_package_only"],
+      "properties": {
+        "generation": {"const": 3},
+        "strategy": {"const": "verified_installed_tree_seed_copy"},
+        "seed_classification": {"const": "provider_free_rc7_package_only_seed"},
+        "process_count": {"const": 0},
+        "retry_count": {"const": 0},
+        "package_json_sha256": {"$ref": "#/$defs/digest"},
+        "package_lock_sha256": {"$ref": "#/$defs/digest"},
+        "lock_package_count": {"const": 588},
+        "tree_sha256": {"$ref": "#/$defs/digest"},
+        "file_count": {"const": 32744},
+        "byte_count": {"const": 219364530},
+        "dsh_manifest_sha256": {"$ref": "#/$defs/digest"},
+        "reparse_point_count": {"const": 0},
+        "seed_scope_package_only": {"const": true}
+      }
+    },
+    "launch": {
+      "type": "object", "additionalProperties": false,
+      "required": ["node_flag", "profile_args", "online_package_fallback", "package_lifecycle_scripts", "timeout_seconds"],
+      "properties": {
+        "node_flag": {"const": "--expose-internals"},
+        "profile_args": {"const": ["--profile", "headless"]},
+        "online_package_fallback": {"const": false},
+        "package_lifecycle_scripts": {"const": false},
+        "timeout_seconds": {"type": "integer", "minimum": 10, "maximum": 60}
+      }
+    },
+    "readiness": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "writer", "events"],
+      "properties": {
+        "schema_version": {"const": "ariadne.deepseek_native_harness_effective_tool_native_boot_event.v1"},
+        "writer": {"const": "provider-free-effective-tool-hmr-sentinel"},
+        "events": {"const": ["sentinel_activated", "stock_headless_hmr_ready"]}
+      }
+    },
+    "preset": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "relative_path", "bytes", "sha256", "trust", "effective_tools"],
+      "properties": {
+        "id": {"const": "emr4-bounded-worker"},
+        "relative_path": {"const": ".agent-presets/emr4-bounded-worker/agent.cordis.yml"},
+        "bytes": {"const": 158},
+        "sha256": {"const": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1"},
+        "trust": {"const": "user"},
+        "effective_tools": {"const": ["edit", "glob", "read"]}
+      }
+    },
+    "selection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["provider", "model", "reasoning_effort", "max_tokens"],
+      "properties": {
+        "provider": {"const": "deepseek-official"},
+        "model": {"const": "deepseek-v4-flash"},
+        "reasoning_effort": {"const": "high"},
+        "max_tokens": {"const": 4096}
+      }
+    },
+    "factory_boundary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["private_session_id", "publication_stop", "agents_create_invocations", "private_agent_preparations", "private_session_preparations", "published_agents", "published_sessions"],
+      "properties": {
+        "private_session_id": {"const": "session-emr4-agent-creation-boundary-001"},
+        "publication_stop": {"const": "EMR4_AGENT_PUBLICATION_STOP"},
+        "agents_create_invocations": {"const": 1},
+        "private_agent_preparations": {"const": 1},
+        "private_session_preparations": {"const": 1},
+        "published_agents": {"const": 0},
+        "published_sessions": {"const": 0}
+      }
+    },
+    "expected_terminal": {
+      "type": "object", "additionalProperties": false,
+      "required": ["coordinate", "diagnostic_accepted", "factory_construction_supported", "publication_zero", "broker_zero", "pre_request_supported", "occupied_launch_authorized"],
+      "properties": {
+        "coordinate": {"const": "post_hmr_agent_create_prepublication_stop"},
+        "diagnostic_accepted": {"const": true},
+        "factory_construction_supported": {"const": true},
+        "publication_zero": {"const": true},
+        "broker_zero": {"const": true},
+        "pre_request_supported": {"const": true},
+        "occupied_launch_authorized": {"const": false}
+      }
+    },
+    "required_zero_counts": {"type": "array", "minItems": 16, "maxItems": 16, "uniqueItems": true, "items": {"type": "string"}}
+  },
+  "$defs": {
+    "oid": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "digestMap": {"type": "object", "minProperties": 1, "additionalProperties": {"$ref": "#/$defs/digest"}},
+    "oidMap": {"type": "object", "minProperties": 1, "additionalProperties": {"$ref": "#/$defs/oid"}}
+  }
+}
