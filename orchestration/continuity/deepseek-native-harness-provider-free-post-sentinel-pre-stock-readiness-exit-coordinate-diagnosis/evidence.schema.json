@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "result", "verdict", "bindings", "terminal", "source_chain", "narrowest_supported_coordinate", "zero_activity", "claim_boundary"],
+  "properties": {
+    "schema_version": {"const": "ariadne.deepseek_native_harness_post_sentinel_pre_stock_readiness_exit_diagnosis_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis"},
+    "result": {"enum": ["pass", "failed_closed"]},
+    "verdict": {"enum": ["unique_supported_exit_coordinate", "insufficient_static_evidence"]},
+    "bindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "expected_sha256", "observed_sha256", "matched"],
+        "properties": {
+          "role": {"type": "string"},
+          "expected_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "observed_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "matched": {"type": "boolean"}
+        }
+      }
+    },
+    "terminal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["binding_passed", "result", "failure_coordinate", "events", "exit_code", "readiness_observed", "retry_count", "raw_streams_retained"],
+      "properties": {
+        "binding_passed": {"type": "boolean"},
+        "result": {"type": "string"},
+        "failure_coordinate": {"type": "string"},
+        "events": {"type": "array", "items": {"type": "string"}},
+        "exit_code": {"type": "integer"},
+        "readiness_observed": {"type": "boolean"},
+        "retry_count": {"type": "integer", "minimum": 0},
+        "raw_streams_retained": {"type": "boolean"}
+      }
+    },
+    "source_chain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["supported_link_count", "required_link_count", "all_links_supported", "links"],
+      "properties": {
+        "supported_link_count": {"type": "integer", "minimum": 0},
+        "required_link_count": {"type": "integer", "minimum": 1},
+        "all_links_supported": {"type": "boolean"},
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ordinal", "coordinate", "supported"],
+            "properties": {
+              "ordinal": {"type": "integer", "minimum": 1},
+              "coordinate": {"type": "string", "minLength": 1},
+              "supported": {"type": "boolean"}
+            }
+          }
+        }
+      }
+    },
+    "narrowest_supported_coordinate": {"type": ["string", "null"]},
+    "zero_activity": {
+      "type": "object",
+      "additionalProperties": {"const": 0},
+      "minProperties": 8
+    },
+    "claim_boundary": {"type": "string", "minLength": 1}
+  }
+}

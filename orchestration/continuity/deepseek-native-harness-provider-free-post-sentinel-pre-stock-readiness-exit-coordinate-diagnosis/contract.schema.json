@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "accepted_sources", "components", "package", "method", "claim_boundary"],
+  "properties": {
+    "schema_version": {"const": "ariadne.deepseek_native_harness_post_sentinel_pre_stock_readiness_exit_diagnosis_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_sources": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+      "minProperties": 4
+    },
+    "components": {
+      "type": "array",
+      "minItems": 6,
+      "items": {"$ref": "#/$defs/binding"}
+    },
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "materialization_root", "files"],
+      "properties": {
+        "name": {"const": "@deepseek-ai/dsh"},
+        "version": {"const": "0.1.0-rc.7"},
+        "materialization_root": {"type": "string", "minLength": 1},
+        "files": {
+          "type": "array",
+          "minItems": 7,
+          "items": {"$ref": "#/$defs/binding"}
+        }
+      }
+    },
+    "method": {"type": "object"},
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "path", "sha256"],
+      "properties": {
+        "role": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}

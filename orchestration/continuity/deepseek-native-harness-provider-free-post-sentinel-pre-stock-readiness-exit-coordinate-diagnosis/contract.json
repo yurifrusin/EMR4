@@ -1,0 +1,103 @@
+{
+  "schema_version": "ariadne.deepseek_native_harness_post_sentinel_pre_stock_readiness_exit_diagnosis_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis",
+  "planning_source": "f2de7108b0074501c66e2c82ad83b45294b402db",
+  "accepted_sources": {
+    "boot_controller_candidate": "84a9327d98812a9891af0ef5724045f7599eb3a5",
+    "boot_clockwork_source": "2585cdae995ce90047d1f9099a36cb379de4f3b4",
+    "boot_closeout_source": "f2de7108b0074501c66e2c82ad83b45294b402db",
+    "sentinel_source_repair_candidate": "eb8913aacb19d823e251731f9393cc54fe71524c"
+  },
+  "components": [
+    {
+      "role": "boot_contract",
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/contract.json",
+      "sha256": "c206724e6a9223ad4373dcc87229415b4e9a260927bd3cf8a2dec7a3f6b0a1a4"
+    },
+    {
+      "role": "consumed_attempt",
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/native-attempt-consumed.json",
+      "sha256": "b05656347888ca86eabadc2cd273d0cada5a5facb4bce4c8737dd613d2e1de22"
+    },
+    {
+      "role": "failed_terminal",
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/provider-free-source-repaired-sentinel-native-boot-terminal.json",
+      "sha256": "32819ef6972247cdbacb4c38dc1437add5c8dcfb288673533630c5e57ff5bfdd"
+    },
+    {
+      "role": "source_repaired_controller",
+      "path": "scripts/deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py",
+      "sha256": "068d205006a9d93252f03af296809f3b41926fcdcbcc762c00dfc0b234d4d901"
+    },
+    {
+      "role": "reusable_boot_controller",
+      "path": "scripts/deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
+      "sha256": "53ee8faf1146c569c26ed39afb7d2495f083bd15329e78fd00dfe876e6bc0920"
+    },
+    {
+      "role": "profile_and_sentinel_author",
+      "path": "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+      "sha256": "e64b6c7f6b13bae69dd910963620e03e292b5262c5b05029305d6097f3e6191b"
+    }
+  ],
+  "package": {
+    "name": "@deepseek-ai/dsh",
+    "version": "0.1.0-rc.7",
+    "materialization_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-check-in-attachment-observability-native-001/node_modules",
+    "files": [
+      {
+        "role": "package_manifest",
+        "path": "@deepseek-ai/dsh/package.json",
+        "sha256": "7a9f356ad1e27c7013b44619bc675b8cb877f995cd0951ab3dfeb10d4edcc361"
+      },
+      {
+        "role": "launcher_bin",
+        "path": "@deepseek-ai/dsh/lib/bin.js",
+        "sha256": "c0226687bb20f45c603ec6fe50f3de16d1c3510c3a803304ec575ef9bc366c62"
+      },
+      {
+        "role": "profile_boot",
+        "path": "@deepseek-ai/dsh/lib/profile-boot-DG5t9aNs.js",
+        "sha256": "f83ffea6a4d30cfbe02b41dabcc05104c4ad27bf79c74f601f0ddb6ccdf88969"
+      },
+      {
+        "role": "headless_bundle_patch",
+        "path": "@deepseek-ai/dsh-headless/cordis.patch.yml",
+        "sha256": "534dc49c84b0fb9c2d3278dc8990f577d57b7a88442941444b58c96ac1a09ba0"
+      },
+      {
+        "role": "headless_startup",
+        "path": "@deepseek-ai/dsh-headless/lib/startup.js",
+        "sha256": "3da49b082d7f8bf6ec8342d7f5e19a25f62dd55d46a3bc6aaa9b65a9db577958"
+      },
+      {
+        "role": "cmdline_adapter",
+        "path": "@deepseek-ai/dsh-cmdline/lib/index.js",
+        "sha256": "e631a136c09b1f37f004db8e7d2a5a2b91456d1c17bd88edb8cc8d7abd1e6c41"
+      },
+      {
+        "role": "commander_command",
+        "path": "commander/lib/command.js",
+        "sha256": "751c19479dac3e3f415fbbd709df90d25c595034f699dba7bef6eeab4dc1304b"
+      }
+    ]
+  },
+  "method": {
+    "import_repository_components": false,
+    "execute_javascript": false,
+    "node_process_limit": 0,
+    "harness_process_limit": 0,
+    "broker_process_limit": 0,
+    "worker_process_limit": 0,
+    "model_request_limit": 0,
+    "provider_request_limit": 0,
+    "network_request_limit": 0,
+    "raw_stream_reconstruction": false,
+    "required_supported_link_count": 8,
+    "accepted_verdicts": [
+      "unique_supported_exit_coordinate",
+      "insufficient_static_evidence"
+    ]
+  },
+  "claim_boundary": "A unique result identifies the exact empty-task startup rejection and shutdown path sufficient to explain the observed post-sentinel exit; it does not reconstruct stderr, prove later HMR readiness, authorize a repair, or authorize another native process."
+}
