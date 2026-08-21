@@ -37,7 +37,7 @@ That mistake was contained before planning or execution, exactly as intended.
   retained.
 - 25 current/applicable tests plus Ruff, compilation, diff and protected-ref
   checks pass.
-- Revision 593 records four contained workflow corrections; none is open and
+- Revision 593 records five contained workflow corrections; none is open and
   none caused another native process.
 
 ## Deliberately closed

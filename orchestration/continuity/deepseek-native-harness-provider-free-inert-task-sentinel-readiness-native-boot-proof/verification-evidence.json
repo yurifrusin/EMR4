@@ -51,6 +51,11 @@
       "coordinate": "human_report_line_wrap_assertion",
       "outcome": "failed_closed_during_postexecution_verification",
       "correction": "Assert the two semantic report clauses independently instead of assuming Markdown line wrapping."
+    },
+    {
+      "coordinate": "clockwork_incident_vocabulary",
+      "outcome": "revision_required_with_zero_publication",
+      "correction": "Use only the clockwork's admitted incident stage and candidate-state vocabulary before repeating the read-only check."
     }
   ],
   "cleanup": {

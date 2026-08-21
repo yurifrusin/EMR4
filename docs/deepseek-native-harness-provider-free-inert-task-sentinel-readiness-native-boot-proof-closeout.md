@@ -46,8 +46,9 @@ The only native execution passed and no procedural correction consumed a
 second process. Clockwork rejected the first freehand Git binding before work,
 which is direct evidence that the machine-reading regime is preventing the
 40-character-ID lapses discussed with Yuri. Three later low-severity procedure
-issues were corrected before preexecution or during deterministic verification;
-revision 593 records all four and none remain open.
+issues plus one closeout-intent vocabulary mismatch were corrected before
+preexecution, during deterministic verification or before publication;
+revision 593 records all five and none remain open.
 
 ## Parallelism closeout
 

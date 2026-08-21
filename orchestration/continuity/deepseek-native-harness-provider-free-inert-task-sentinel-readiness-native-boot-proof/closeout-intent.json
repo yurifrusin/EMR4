@@ -47,7 +47,7 @@
           "id": "accept-contained-readiness-observations",
           "source": "docs/ariadne-agent-error-correction-register-revision-593.md",
           "status": "accepted",
-          "summary": "Accept four corrected workflow observations with none open."
+          "summary": "Accept five corrected workflow observations with none open."
         }
       ],
       "claim_scope": [
@@ -81,6 +81,7 @@
           "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preplanning-receipt.json",
           "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preexecution-receipt.json",
           "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-pre-verifier-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/clockwork-check-attempt-001-rejected-receipt.json",
           "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/pushover-notification-receipt.json"
         ],
         "tests": [
@@ -203,6 +204,7 @@
       "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/provider-free-inert-task-sentinel-readiness-native-boot-report.md",
       "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/verification-evidence.json",
       "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/efficacy-reading.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/clockwork-check-attempt-001-rejected-receipt.json",
       "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/pushover-notification-receipt.json",
       "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preplanning-attempt-001-rejected-receipt.json",
       "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preplanning-runtime-state.json",
@@ -243,7 +245,7 @@
       "model": null,
       "reasoning_level": "high",
       "transport": "local_python_cli",
-      "stage": "preplanning_rehydration",
+      "stage": "deterministic_verification",
       "category": "operator_error",
       "process_severity": "low",
       "expected_invariant": "Git ref evidence must be generated from the machine snapshot with zero caller-supplied object IDs.",
@@ -276,7 +278,7 @@
       "model": null,
       "reasoning_level": "high",
       "transport": "local_git_cli",
-      "stage": "candidate_precommit",
+      "stage": "deterministic_verification",
       "category": "operator_error",
       "process_severity": "low",
       "expected_invariant": "A nonzero staged diff check must stop the commit before the candidate can advance.",
@@ -286,7 +288,7 @@
         "docs/ariadne-agent-error-correction-register-revision-593.md",
         "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/verification-evidence.json"
       ],
-      "candidate_state": "corrected_descendant_before_execution",
+      "candidate_state": "accepted_candidate_changed",
       "workflow_disposition": "revision_required",
       "recurrence_signature": "orchestrator.semicolon_command_did_not_fail_closed_after_cached_diff_warning",
       "causal_claim_level": "observation_only",
@@ -342,7 +344,7 @@
       "model": null,
       "reasoning_level": "high",
       "transport": "local_pytest_cli",
-      "stage": "postexecution_verification",
+      "stage": "deterministic_verification",
       "category": "operator_error",
       "process_severity": "low",
       "expected_invariant": "A report verifier must test semantic claim clauses without assuming presentation line wrapping.",
@@ -352,7 +354,7 @@
         "tests/test_deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py",
         "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/verification-evidence.json"
       ],
-      "candidate_state": "terminal_unchanged",
+      "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
       "recurrence_signature": "orchestrator.human_report_verifier_assumed_contiguous_markdown_line_wrapping",
       "causal_claim_level": "observation_only",
@@ -365,6 +367,39 @@
         ]
       },
       "baton_summary": "records the line-wrap assertion defect and semantic-fragment correction."
+    },
+    {
+      "attempt_key": "inert-task-readiness-clockwork-intent-vocabulary-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "clockwork-incident-vocabulary-admission",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every incident observation in a clockwork intent must use the exact admitted closed stage and candidate-state vocabulary.",
+      "observed_error": "The first read-only check used descriptive preplanning, precommit and postexecution stage phrases plus two non-admitted candidate-state phrases.",
+      "detection_method": "The clockwork check rejected at tick_incident_stage before publication or canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/clockwork-check-attempt-001-rejected-receipt.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_intent_used_descriptive_instead_of_admitted_incident_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Map every observation to admitted deterministic_verification or closeout stages and admitted candidate states before rerunning the read-only check.",
+        "prevention_control": "Generate incident stage and candidate-state fields from the clockwork constants rather than authoring descriptive synonyms.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the rejected closeout-intent vocabulary and exact-enum correction."
     }
   ]
 }

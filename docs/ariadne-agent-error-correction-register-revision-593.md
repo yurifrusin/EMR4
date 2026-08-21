@@ -2,12 +2,12 @@
 
 <!-- ariadne-agent-error-register-reading
 revision: 593
-incident_count: 808
-new_incident_ids: AER-0805,AER-0806,AER-0807,AER-0808
+incident_count: 809
+new_incident_ids: AER-0805,AER-0806,AER-0807,AER-0808,AER-0809
 open_incident_count: 0
 -->
 
-This revision note binds four corrected workflow observations to the
+This revision note binds five corrected workflow observations to the
 prospective clockwork-projected register. The canonical JSON register and
 pattern report remain clockwork-owned.
 
@@ -42,3 +42,11 @@ contiguous across a deliberate Markdown line break. Postexecution verification
 failed closed without changing the terminal or consuming a process. The test
 now asserts the two claim-boundary clauses independently; the final 25-test
 packet passes.
+
+## AER-0809
+
+The first read-only clockwork check used descriptive incident stage and
+candidate-state phrases that were not members of the clockwork's closed
+vocabulary. It rejected at `tick_incident_stage` with zero publications and no
+canonical change. The rejected check is preserved; every observation now uses
+the exact admitted stage and candidate-state values before the check is rerun.

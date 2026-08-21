@@ -38,6 +38,12 @@
       "count": 1,
       "cause": "A test assumed two report phrases were contiguous across a deliberate Markdown line break.",
       "control": "The verifier now checks the two semantic clauses independently."
+    },
+    {
+      "kind": "clockwork_intent_vocabulary_correction",
+      "count": 1,
+      "cause": "The first closeout intent used descriptive incident stages and candidate states outside the clockwork's exact closed vocabulary.",
+      "control": "The read-only check rejected with zero publication; the corrected intent uses only admitted deterministic_verification and candidate-state values."
     }
   ],
   "process_cost": {

@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.governance_clockwork_rejected_check.v1",
+  "operation_id": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof",
+  "attempt": 1,
+  "checked_at": "2026-08-21T17:44:30.1265992+10:00",
+  "source_commit": "0d7ed0b7f3e2d84fd32ea0b482e1e2235244656c",
+  "status": "revision_required",
+  "rule": "tick_incident_stage",
+  "publication_count": 0,
+  "canonical_files_changed": false,
+  "correction": "Map preplanning, precommit and postexecution prose stages to the exact admitted deterministic_verification vocabulary and use only admitted candidate-state values before repeating the read-only check."
+}
