@@ -1,0 +1,23 @@
+{
+  "schema_version": "deepseek.native_harness.inert_task_readiness_clockwork_postpublication_verification.v1",
+  "status": "passed",
+  "source_commit": "1913e55a5d5a0e24835f7c61ec77228b4628e8d3",
+  "generation_id": "gen-cfbfb3cdf473a5b6b46246d960df2a2a46f29c5387e9c0980cd934fe28706b62",
+  "lease_sequence": 116,
+  "tests": 557,
+  "passed": 557,
+  "failed": 0,
+  "errors": 0,
+  "incident_count": 809,
+  "open_incident_count": 0,
+  "provider_requests": 0,
+  "native_harness_processes": 0,
+  "live_state_validation": {
+    "status": "passed",
+    "canonical_drift": 0,
+    "clockwork_owned_surfaces": 10,
+    "dual_owned_surfaces": 0,
+    "retired_legacy_writer_classes": 4
+  },
+  "claim_boundary": "This record proves the lease-116 clockwork, latch, Compass, continuity and error-register regression packet passed after publication. It is not another Harness boot, worker, model or provider performance result."
+}

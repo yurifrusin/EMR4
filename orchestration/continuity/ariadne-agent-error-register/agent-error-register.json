@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 592,
+  "register_revision": 593,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -31504,6 +31504,186 @@
       },
       "incident_id": "AER-0804",
       "attempt_id": "clock-ab90300d31fddc2cd059e0c5",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "ariadne-preplanning-git-ref-evidence-binding",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Git ref evidence must be generated from the machine snapshot with zero caller-supplied object IDs.",
+      "observed_error": "The first source-evidence prose repeated the task and protected commit IDs, and preflight counted two manual Git objects.",
+      "detection_method": "The fresh Ariadne preplanning receipt returned revision_required before planning or execution.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preplanning-attempt-001-rejected-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preplanning-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preplanning_source_evidence_repeated_machine_owned_git_object_ids",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the rejected receipt and replace the prose with a machine-snapshot requirement containing no object ID.",
+        "prevention_control": "Treat every git_refs_and_worktree source-evidence field as a qualitative machine-reading instruction and reject all hexadecimal Git object tokens before preflight.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preplanning-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0805",
+      "attempt_id": "clock-6746959598b2f8d19ae348f0",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "explicit-path-precommit-diff-gate",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_git_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A nonzero staged diff check must stop the commit before the candidate can advance.",
+      "observed_error": "Semicolon-separated commands allowed the initial commit to proceed after two blank EOF warnings.",
+      "detection_method": "git diff --cached --check printed both warnings in the commit command output before any preexecution receipt or Node launch.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-593.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/verification-evidence.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.semicolon_command_did_not_fail_closed_after_cached_diff_warning",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the blank lines, refresh the component hash and commit an immediate normalized descendant before preexecution.",
+        "prevention_control": "Every compound staged-diff command checks LASTEXITCODE and exits before commit, push or execution.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/contract.json"
+        ]
+      },
+      "incident_id": "AER-0806",
+      "attempt_id": "clock-9510691ce9a697ecd4a48ec0",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "applicable-predecessor-test-selector",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A successor verification packet must consume the accepted historical-selector applicability boundary.",
+      "observed_error": "One widened run included the immutable pre-source-repair direct-check selector and rediscovered its expected old controller digest mismatch.",
+      "detection_method": "Pytest reported only component_digest_mismatch:repaired_profile_controller while the original controller remained byte-identical.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/verification-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-593.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_verification_rediscovered_immutable_pre_repair_selectors",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Exclude the one immutable selector and retain all 25 current/applicable tests.",
+        "prevention_control": "The attempt-005 readiness contract must consume a generated applicability manifest rather than reconstructing negative selectors.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/efficacy-reading.json"
+        ]
+      },
+      "incident_id": "AER-0807",
+      "attempt_id": "clock-3b46389ad09a016561e911ca",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "retained-human-report-semantic-assertion",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A report verifier must test semantic claim clauses without assuming presentation line wrapping.",
+      "observed_error": "The first assertion required model/provider and product-runtime clauses to be contiguous across a deliberate Markdown newline.",
+      "detection_method": "The first postexecution packet failed one report assertion while the immutable terminal and all structural checks passed.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/verification-evidence.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.human_report_verifier_assumed_contiguous_markdown_line_wrapping",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Assert the model/provider and product-runtime claim clauses independently.",
+        "prevention_control": "Human-report verification checks semantic fragments or parsed structure rather than formatting-contiguous prose.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py"
+        ]
+      },
+      "incident_id": "AER-0808",
+      "attempt_id": "clock-7cf71205a0076c4b55a2bb3a",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "clockwork-incident-vocabulary-admission",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every incident observation in a clockwork intent must use the exact admitted closed stage and candidate-state vocabulary.",
+      "observed_error": "The first read-only check used descriptive preplanning, precommit and postexecution stage phrases plus two non-admitted candidate-state phrases.",
+      "detection_method": "The clockwork check rejected at tick_incident_stage before publication or canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/clockwork-check-attempt-001-rejected-receipt.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_intent_used_descriptive_instead_of_admitted_incident_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Map every observation to admitted deterministic_verification or closeout stages and admitted candidate states before rerunning the read-only check.",
+        "prevention_control": "Generate incident stage and candidate-state fields from the clockwork constants rather than authoring descriptive synonyms.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0809",
+      "attempt_id": "clock-eecb05127480e09ad92ab9d0",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

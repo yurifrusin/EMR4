@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 369,
+  "graph_revision": 370,
   "harvests": [],
   "nodes": [
     {
@@ -27748,9 +27748,118 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof",
+      "title": "Native Harness inert-task stock-readiness proof",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted one provider-free rc7 process with one inert authored-synthetic task and no runner or worker.",
+          "The exact attempt is consumed; no retry, resume, fallback, second process or provider request is opened.",
+          "No product, data, deployment, Pages or protected-ref authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-inert-task-stock-readiness-pass",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/provider-free-inert-task-sentinel-readiness-native-boot-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one inert task followed by exact sentinel activation and stock-headless HMR readiness in the sole consumed rc7 process."
+        },
+        {
+          "id": "preserve-pre-worker-claim-boundary",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Treat this as pre-worker Harness readiness only, with no DeepSeek model, worker, product-runtime or longitudinal reliability claim."
+        },
+        {
+          "id": "accept-attempt-005-readiness-decision-next",
+          "source": "docs/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-closeout.md",
+          "status": "accepted",
+          "summary": "Proceed first with a provider-free process-free attempt-005 readiness and preexecution decision before any occupied worker is admitted."
+        },
+        {
+          "id": "accept-contained-readiness-observations",
+          "source": "docs/ariadne-agent-error-correction-register-revision-593.md",
+          "status": "accepted",
+          "summary": "Accept five corrected workflow observations with none open."
+        }
+      ],
+      "claim_scope": [
+        "One exact rc7 process received one inert authored-synthetic task.",
+        "The process emitted sentinel_activated followed by stock_headless_hmr_ready.",
+        "The controller terminated only after readiness and proved exact process and disposable-root absence.",
+        "All runner, broker, worker, model, provider, network, Docker and database counters are zero.",
+        "The result proves pre-worker native Harness readiness only."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/native-attempt-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/provider-free-inert-task-sentinel-readiness-native-boot-terminal.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/provider-free-inert-task-sentinel-readiness-native-boot-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/verification-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preplanning-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-pre-verifier-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/clockwork-check-attempt-001-rejected-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_post_sentinel_pre_stock_readiness_exit_coordinate_diagnosis.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_engine.py",
+          "scripts/deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/evidence.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-593.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-inert-task-sentinel-readiness.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The headless runner has not been enabled in this descendant.",
+        "No broker, worker session, DeepSeek request, tool call or candidate edit has occurred.",
+        "A fresh attempt-005 identity and occupied envelope have not yet been admitted.",
+        "No model coding quality or repeated Harness reliability claim is supported."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-21T17:44:30.1265992+10:00",
+      "updated_at": "2026-08-21T17:44:30.1265992+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "1913e55a5d5a0e24835f7c61ec77228b4628e8d3",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-21T17:13:29.8514555+10:00"
+  "updated_at": "2026-08-21T17:44:30.1265992+10:00"
 }
