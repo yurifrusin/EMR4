@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "result", "verdict", "bindings", "terminal", "lexical_analysis", "passing_control", "narrowest_supported_coordinate", "zero_activity", "claim_boundary"],
+  "properties": {
+    "schema_version": {"const": "ariadne.deepseek_native_harness_repaired_sentinel_preactivation_source_diagnosis_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis"},
+    "result": {"enum": ["pass", "failed_closed"]},
+    "verdict": {"enum": ["unique_supported_coordinate", "insufficient_source_coordinate"]},
+    "bindings": {"type": "array"},
+    "terminal": {"type": "object"},
+    "lexical_analysis": {"type": "object"},
+    "passing_control": {"type": "object"},
+    "narrowest_supported_coordinate": {"type": ["string", "null"]},
+    "zero_activity": {"type": "object"},
+    "claim_boundary": {"type": "string", "minLength": 1}
+  }
+}

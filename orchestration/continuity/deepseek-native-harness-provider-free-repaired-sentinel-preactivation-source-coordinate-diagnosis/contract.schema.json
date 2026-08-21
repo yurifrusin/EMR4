@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "accepted_sources", "components", "package", "method", "claim_boundary"],
+  "properties": {
+    "schema_version": {"const": "ariadne.deepseek_native_harness_repaired_sentinel_preactivation_source_diagnosis_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_sources": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+      "minProperties": 3
+    },
+    "components": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "path", "sha256"],
+        "properties": {
+          "role": {"type": "string", "minLength": 1},
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "package": {"type": "object"},
+    "method": {"type": "object"},
+    "claim_boundary": {"type": "string", "minLength": 1}
+  }
+}
