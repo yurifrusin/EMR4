@@ -2,30 +2,27 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "native_boot_final_deterministic_check",
+      "command_id": "controller_convergence_final_check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal",
-        "--check",
-        "--candidate-source",
-        "253b4071ca2758da948a618aa86b5393fab0f1de"
+        "scripts.raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal",
+        "--check"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "native_boot_final_provider_free_tests",
+      "command_id": "controller_convergence_final_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
+        "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py",
+        "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
         "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
         "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal_plan.py",
-        "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
-        "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py",
-        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
         "tests/test_ariadne_agent_error_register.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_active_operation_latch.py",
@@ -34,26 +31,26 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "native_boot_final_ruff",
+      "command_id": "controller_convergence_final_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal_plan.py"
+        "orchestration_harness/bounded_worker_structured_diagnostic_controller.py",
+        "scripts/raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py",
+        "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "native_boot_final_compile",
+      "command_id": "controller_convergence_final_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py"
+        "orchestration_harness/bounded_worker_structured_diagnostic_controller.py",
+        "scripts/raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

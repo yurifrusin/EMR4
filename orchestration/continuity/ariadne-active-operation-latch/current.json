@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
-  "active_tranche": "Raisa provider-free authored-synthetic native Harness structured diagnostic bounded-worker controller convergence rehearsal",
-  "objective": "Compose the accepted canonical structured diagnostic wrapper and v2 terminal reader into the bounded authored-synthetic worker controller and prove exact pre-provider terminal selection, identity binding and cleanup relationships without launching Harness, broker, worker, model or provider activity.",
+  "operation_id": "deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair",
+  "active_tranche": "DeepSeek native Harness provider-free historical recovery validator source-binding repair",
+  "objective": "Replace the historical startup-terminal validator's mutable-current-source equality with exact immutable Git-object binding and restore its two predecessor checks without changing historical evidence or launching Harness, worker, model or provider activity.",
   "status": "in_progress",
-  "source_head": "6f728b2979dffcd089bd79eb73f49d7e447d772f",
-  "authority_source": "Yuri's standing uninterrupted-development authority, constrained to provider-free deterministic controller convergence and no occupied attempt.",
+  "source_head": "7a681e1688c7b7cfa71a8856bb7db1c84c346be4",
+  "authority_source": "Yuri's standing uninterrupted-development authority, constrained to provider-free deterministic validator repair and no occupied attempt.",
   "checkpoint": {
-    "completed_stage": "Accepted deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal at the machine-resolved source.",
-    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_provider_free_bounded_worker_controller_convergence_contract",
+    "completed_stage": "Accepted raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_historical_git_object_binding_repair_contract",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,11 +34,11 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_bounded_worker_controller_convergence_only",
+    "provider_free_historical_validator_source_binding_repair_only",
     "no_native_harness_broker_worker_session_prompt_tool_model_or_provider_process_or_request",
-    "pinned_rc7_wrapper_terminal_and_controller_identity_required",
+    "historical_evidence_bytes_and_consumed_attempts_remain_immutable",
+    "exact_full_git_object_resolution_required",
     "no_occupied_attempt_retry_resume_overwrite_or_reclassification",
-    "consumed_attempts_and_terminal_evidence_remain_immutable",
     "no_raw_startup_stream_reconstruction_or_retention",
     "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
     "no_ordinary_practice_enablement_or_generic_status_arrived_change",

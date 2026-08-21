@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 581,
+  "register_revision": 582,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -29546,6 +29546,111 @@
       },
       "incident_id": "AER-0749",
       "attempt_id": "clock-4b50a85275b9980eab5d2738",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "historical-bounded-worker-controller-source",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Controller convergence must preserve every byte-bound historical evidence input unless a separately frozen repair changes its validation semantics.",
+      "observed_error": "The first uncommitted implementation edited the historical bounded-worker controller directly before predecessor tests exposed its source-hash binding.",
+      "detection_method": "Focused predecessor tests rejected current-source equality before candidate commit or occupied execution.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.direct_controller_edit_crossed_historical_source_binding",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the historical controller exactly and place the new gear in a descendant adapter with explicit immutable-artifact checks.",
+        "prevention_control": "Inspect historical source-hash consumers before editing accepted controllers; use a descendant adapter when consumed evidence binds the original bytes.",
+        "evidence_paths": [
+          "orchestration_harness/bounded_worker_structured_diagnostic_controller.py"
+        ]
+      },
+      "incident_id": "AER-0750",
+      "attempt_id": "clock-e4613cd27fc195c4a15fa78c",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "pre-verifier-task-branch-alignment",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "acceptance",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A pre-verifier receipt requiring branch alignment must run after the exact candidate is present on the task-branch origin.",
+      "observed_error": "The first receipt was generated after local candidate commit but before its task-branch push.",
+      "detection_method": "The machine Git snapshot returned branch_origin_aligned false and revision_required.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.preverifier_receipt_generated_before_candidate_push",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Push the exact candidate, rerun the unchanged preflight and require branch-origin alignment before acceptance.",
+        "prevention_control": "Pre-verifier sequencing now treats candidate push as a prerequisite whenever the generic Git snapshot policy requires branch alignment.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-structured-diagnostic-bounded-worker-controller-convergence-pre-verifier-acceptance-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0751",
+      "attempt_id": "clock-cdb33fb5cf95d5486a0e5821",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "clockwork-incident-tranche-vocabulary",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every incident tranche label must fit the clockwork's closed 120-character bounded vocabulary.",
+      "observed_error": "The first read-only closeout check supplied the full operation identifier as the incident tranche label and exceeded the bound.",
+      "detection_method": "Clockwork rejected with tick_incident_tranche before transaction preparation, command execution or publication.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_incident_tranche_exceeded_bound",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use one concise unique tranche label that fits the engine-owned bound and rerun the read-only check.",
+        "prevention_control": "Measure incident tranche labels against the 120-character clockwork contract before the first closeout check.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0752",
+      "attempt_id": "clock-192745b6151596c5a852933a",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

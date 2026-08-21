@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Freeze one provider-free controller convergence around the accepted wrapper and v2 reader; admit no Harness, worker or provider activity.
+> Bind historical validation to historical Git objects, not mutable current files, before attempt-004 planning.
 
 ## North star
 
@@ -486,24 +486,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Canonical safe sidecar creation, identical rejection, exclusive-write failure handling and exact cleanup pass across four authored fixtures. Lineage parent: `deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery`.
 235. **Connect the tested structured diagnostic gear to one real pinned provider-free native Harness entrypoint boundary — DeepSeek native Harness provider-free structured diagnostic native-boot observability rehearsal**
    One authored pre-HMR rc.7 failure becomes the exact safe v2 terminal with zero downstream activity and complete cleanup. Lineage parent: `deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal`.
+236. **Converge the proven structured diagnostic gear into a callable descendant of the bounded authored-synthetic controller — Provider-free structured diagnostic bounded-worker controller convergence**
+   A future fresh runner can build the canonical wrapper and select the exact safe terminal without mutating consumed evidence. Lineage parent: `deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal`.
 
 ## Current position
 
-**Converge the proven diagnostic gear into the future bounded-worker controller before another occupied decision — DeepSeek native Harness provider-free structured diagnostic native-boot observability rehearsal**
+**Repair historical source-binding semantics before admitting a fresh occupied attempt — Provider-free structured diagnostic bounded-worker controller convergence**
 
-**Why this proof came next:** The wrapper and v2 reader now work around the real pinned entrypoint, but the accepted occupied-worker controller still owns only the older unclassified pre-HMR terminal path.
+**Why this proof came next:** The controller convergence exposed two old tests whose validator treats mutable present-day controller and test sources as if they were immutable historical evidence.
 
-The diagnostic gear is ready for a separately frozen provider-free bounded-worker-controller convergence rehearsal while every worker and provider surface remains closed.
+A narrow provider-free repair can bind those historical hashes to their exact Git snapshot and restore deterministic predecessor verification.
 
 ### What this unlocks
 
-- One deterministic proof that the future bounded-worker controller selects the structured v2 terminal when an entrypoint import rejects.
-- A grounded later decision on a separately named fresh occupied authored-synthetic attempt.
+- A clean full predecessor verification surface for the converged controller.
+- A grounded attempt-004 readiness and preexecution decision.
 
 ### What it does not solve
 
-- No Harness process, worker session, prompt, tool execution, model or provider request in the successor.
-- No retry or reclassification of consumed attempts.
+- No occupied Harness, worker, model or provider attempt.
+- No change to immutable historical evidence bytes.
 - No product, data, production, deployment or protected-ref authority.
 
 ## Continuity and authority
@@ -1351,6 +1353,7 @@ Prerequisites:
 - `docs/raisa-postgresql-oidc-operational-connection-boundary-plan.md`
 - `docs/raisa-practice-context-fabric-direction.md`
 - `docs/raisa-projection-neutral-kernel-truth-architecture.md`
+- `docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-architecture.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-closeout.md`
 - `docs/raisa-provider-free-cf-d2-observability-first-event-cue-plan.md`
@@ -1980,7 +1983,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2635,7 +2637,6 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-evidence.json`
-- `orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-report.md`
 - `orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/provider-free-node-fixture-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-evidence.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-acceptance-evidence.json`
@@ -2723,6 +2724,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review/ordinary-diary-cancellation-compatibility-consumer-convergence-review-evidence.schema.json`
 - `orchestration/continuity/raisa-postgresql-oidc-authorization-attempt-store/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-postgresql-oidc-operational-connection-boundary/live-local-backend-postgres-operational-evidence.json`
+- `orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/deterministic-evidence.json`
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.json`
 - `orchestration/continuity/raisa-provider-free-cf-d2-observability-first-event-cue/observability-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal/native-terminal-attempt-003.json`
@@ -3488,6 +3490,7 @@ Prerequisites:
 - `tests/test_deepseek_native_harness_emr4_profile_contract.py`
 - `tests/test_deepseek_native_harness_emr4_worker_profile_first_admission_continuity.py`
 - `tests/test_deepseek_native_harness_exact_tool_view_second_admission_continuity.py`
+- `tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py`
 - `tests/test_deepseek_native_harness_traceability_micro_rehearsal_continuity.py`
 - `tests/test_diary_security_hardening.py`
 - `tests/test_model_required_bureau_a3_b3_request_contract_recovery.py`
@@ -3611,4 +3614,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 340; continuity graph revision 358._
+_Compass map revision 341; continuity graph revision 359._

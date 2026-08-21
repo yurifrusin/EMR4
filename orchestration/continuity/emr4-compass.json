@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 340,
-  "updated_at": "2026-08-21T10:15:26.7935902+10:00",
-  "source_graph_revision": 358,
-  "orientation_statement": "Freeze one provider-free controller convergence around the accepted wrapper and v2 reader; admit no Harness, worker or provider activity.",
+  "map_revision": 341,
+  "updated_at": "2026-08-21T10:54:16.4878045+10:00",
+  "source_graph_revision": 359,
+  "orientation_statement": "Bind historical validation to historical Git objects, not mutable current files, before attempt-004 planning.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4511,25 +4511,35 @@
         "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-evidence.json",
         "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+      "lineage_parent": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+      "strategic_role": "Converge the proven structured diagnostic gear into a callable descendant of the bounded authored-synthetic controller",
+      "outcome": "A future fresh runner can build the canonical wrapper and select the exact safe terminal without mutating consumed evidence.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/deterministic-evidence.json",
+        "docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
-    "strategic_role": "Converge the proven diagnostic gear into the future bounded-worker controller before another occupied decision",
-    "why_now": "The wrapper and v2 reader now work around the real pinned entrypoint, but the accepted occupied-worker controller still owns only the older unclassified pre-HMR terminal path.",
-    "outcome": "The diagnostic gear is ready for a separately frozen provider-free bounded-worker-controller convergence rehearsal while every worker and provider surface remains closed.",
+    "node_id": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+    "strategic_role": "Repair historical source-binding semantics before admitting a fresh occupied attempt",
+    "why_now": "The controller convergence exposed two old tests whose validator treats mutable present-day controller and test sources as if they were immutable historical evidence.",
+    "outcome": "A narrow provider-free repair can bind those historical hashes to their exact Git snapshot and restore deterministic predecessor verification.",
     "unlocks": [
-      "One deterministic proof that the future bounded-worker controller selects the structured v2 terminal when an entrypoint import rejects.",
-      "A grounded later decision on a separately named fresh occupied authored-synthetic attempt."
+      "A clean full predecessor verification surface for the converged controller.",
+      "A grounded attempt-004 readiness and preexecution decision."
     ],
     "does_not_solve": [
-      "No Harness process, worker session, prompt, tool execution, model or provider request in the successor.",
-      "No retry or reclassification of consumed attempts.",
+      "No occupied Harness, worker, model or provider attempt.",
+      "No change to immutable historical evidence bytes.",
       "No product, data, production, deployment or protected-ref authority."
     ],
     "evidence": [
-      "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-sol-acceptance.md",
-      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-report.md"
+      "docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md",
+      "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py"
     ]
   },
   "decision_horizon": [
