@@ -11,9 +11,9 @@
     "user_attention_required": false
   },
   "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
-  "continuation_event": "pre_commit",
+  "continuation_event": "pre_push",
   "git_object_resolution": {
-    "observed_head": "33b4e061b1385abc91ecd170e4abdb563396c3ef",
+    "observed_head": "2909bcdd1c29f34ae11cf610f6300cd6f7bdbe4d",
     "reason_codes": [],
     "resolved_commit": "70cd5569e83008c02796a8bac9291626ee3d6286",
     "schema_version": "ariadne.git_object_resolution.v1",
@@ -31,9 +31,9 @@
   },
   "git_refs_snapshot": {
     "branch": "codex/ariadne-bernie-davida-parallel-seam",
-    "branch_commit": "33b4e061b1385abc91ecd170e4abdb563396c3ef",
-    "branch_origin_aligned": true,
-    "head": "33b4e061b1385abc91ecd170e4abdb563396c3ef",
+    "branch_commit": "2909bcdd1c29f34ae11cf610f6300cd6f7bdbe4d",
+    "branch_origin_aligned": false,
+    "head": "2909bcdd1c29f34ae11cf610f6300cd6f7bdbe4d",
     "origin_branch_commit": "33b4e061b1385abc91ecd170e4abdb563396c3ef",
     "preserved_untracked_paths": {
       "docs/branding": true
@@ -50,10 +50,10 @@
     "schema_version": "ariadne.git_refs_snapshot.v1",
     "status": "passed",
     "tracked_worktree_clean": false,
-    "untracked_path_count": 680
+    "untracked_path_count": 660
   },
   "parallelism_assessment": {
-    "assessed_stage": "closeout_precommit",
+    "assessed_stage": "closeout_prepush",
     "lanes": [
       {
         "disposition": "declined",
@@ -97,7 +97,7 @@
       "close out through clockwork"
     ]
   },
-  "planned_action": "commit_the_verified_diagnostic_closeout_candidate_and_frozen_safe_terminal_bridge_successor_using_explicit_path_staging_only",
+  "planned_action": "push_the_verified_diagnostic_closeout_candidate_to_the_task_branch_only_then_rerun_the_clockwork_dry_run_at_the_published_candidate",
   "reasons": [],
   "rehydrated_from_receipt": true,
   "rehydration_sources": [

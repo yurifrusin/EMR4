@@ -1,7 +1,7 @@
 {
   "schema_version": "ariadne.orchestrator_runtime_state.v1",
-  "continuation_event": "pre_commit",
-  "planned_action": "commit_the_verified_diagnostic_closeout_candidate_and_frozen_safe_terminal_bridge_successor_using_explicit_path_staging_only",
+  "continuation_event": "pre_push",
+  "planned_action": "push_the_verified_diagnostic_closeout_candidate_to_the_task_branch_only_then_rerun_the_clockwork_dry_run_at_the_published_candidate",
   "context_health": {
     "agent_contexts": [
       {
@@ -101,7 +101,7 @@
   "parallelism_assessment": {
     "schema_version": "ariadne.parallelism_assessment.v1",
     "operation_id": "deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal",
-    "assessed_stage": "closeout_precommit",
+    "assessed_stage": "closeout_prepush",
     "lanes": [
       {
         "lane_id": "deepseek_flash",
