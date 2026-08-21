@@ -60,6 +60,12 @@
           "source": "docs/ariadne-agent-error-correction-register-revision-583.md",
           "status": "accepted",
           "summary": "Retain only the one admitted builds_on relationship after the first read-only clockwork check rejected a two-parent manifest."
+        },
+        {
+          "id": "accept-contained-incident-stage-vocabulary-correction",
+          "source": "docs/ariadne-agent-error-correction-register-revision-583.md",
+          "status": "accepted",
+          "summary": "Use the admitted deterministic_verification stage for the plan-test incident and pre-validate all incident observations before the CLI reading."
         }
       ],
       "claim_scope": [
@@ -156,6 +162,11 @@
       {
         "incident_id": "closeout-manifest-supplied-two-relationships",
         "source_id": "historical-source-binding-closeout-check-001",
+        "peers": []
+      },
+      {
+        "incident_id": "incident-stage-vocabulary-used-planning",
+        "source_id": "historical-source-binding-closeout-check-002",
         "peers": []
       }
     ],
@@ -265,7 +276,7 @@
       "model": null,
       "reasoning_level": "high",
       "transport": "local_python_cli",
-      "stage": "planning",
+      "stage": "deterministic_verification",
       "category": "operator_error",
       "process_severity": "low",
       "expected_invariant": "The frozen acceptance language must distinguish admitted bounded local Git reads from forbidden Harness/provider processes and repeat the exact ordinary-practice authority token.",
@@ -319,6 +330,38 @@
         ]
       },
       "baton_summary": "records the read-only two-relationship rejection and exact single-parent correction."
+    },
+    {
+      "attempt_key": "historical-source-binding-closeout-incident-stage-001",
+      "observed_on": "2026-08-21",
+      "tranche": "historical-recovery-source-binding-repair",
+      "role": "orchestrator",
+      "resource_id": "clockwork-incident-stage-vocabulary",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every incident stage must use the closed clockwork vocabulary before the first CLI check.",
+      "observed_error": "After correcting relationship cardinality, the second read-only check rejected the first observation's unsupported planning stage.",
+      "detection_method": "Clockwork rejected with tick_incident_stage before transaction preparation, commands or publication.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_incident_stage_used_unadmitted_planning_value",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use deterministic_verification for the plan-test detection and directly validate the complete intent against the live contract before the next CLI check.",
+        "prevention_control": "Closeout construction now takes the incident-stage vocabulary from clockwork validation instead of free-form workflow prose.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the read-only incident-stage rejection and mechanical vocabulary pre-validation."
     }
   ]
 }

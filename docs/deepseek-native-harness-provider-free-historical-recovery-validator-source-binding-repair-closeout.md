@@ -80,6 +80,11 @@ relationships where the manifest admits exactly one. The intent now retains
 the controlling controller-convergence parent; no transaction, command or
 publication began before rejection.
 
+AER-0755 records the second read-only check's rejection of an unsupported
+`planning` incident stage. The observation now uses the admitted
+`deterministic_verification` value, and the complete intent receives a direct
+contract validation before another clockwork CLI reading.
+
 ## Boundaries and next step
 
 This result proves historical validator stability only. It does not identify

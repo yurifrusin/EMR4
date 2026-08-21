@@ -6,8 +6,8 @@ Timestamp: 2026-08-21T11:28:18.5222638+10:00 (Australia/Brisbane)
 
 <!-- ariadne-agent-error-register-reading
 revision: 583
-incident_count: 754
-new_incident_ids: AER-0753,AER-0754
+incident_count: 755
+new_incident_ids: AER-0753,AER-0754,AER-0755
 open_incident_count: 0
 -->
 
@@ -37,4 +37,14 @@ the relationship to the older recovery remains explicit in prose and evidence.
 Future closeout construction checks relationship cardinality before its first
 clockwork reading.
 
-Both incidents are corrected or contained and none remains open.
+## AER-0755 — incident stage used an unadmitted planning value
+
+After the relationship correction, the second read-only clockwork check reached
+the incident validator and rejected the first observation's `planning` stage.
+The closed vocabulary instead admits `deterministic_verification` for the
+focused plan-test detection. The observation now uses that exact value, and the
+complete intent is validated directly against the live clockwork contract
+before another CLI reading. Rejection occurred before transaction preparation,
+commands or publication.
+
+All three incidents are corrected or contained and none remains open.
