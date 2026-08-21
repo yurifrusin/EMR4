@@ -4,11 +4,11 @@
   "active_tranche": "DeepSeek native Harness provider-free repaired-sentinel native boot proof",
   "objective": "Launch exactly one bounded rc7 Node/Harness process using only the repaired initial sentinel profile, require exactly one stock-headless HMR-ready event or retain one sanitized fail-closed pre-provider terminal, forbid the changed runner, broker, worker, model and provider, and prove exact process and disposable-root cleanup.",
   "status": "in_progress",
-  "source_head": "b0ab1f7d2d9623890c8ceafa2675545b8bdd8ce6",
+  "source_head": "b99d961e225f355a17e74ec15d6e82fb61d83532",
   "authority_source": "Yuri's standing uninterrupted-development authority, constrained by the accepted two-row repair and a one-process provider-free initial-sentinel boot envelope.",
   "checkpoint": {
-    "completed_stage": "Accepted deepseek-native-harness-provider-free-proof-module-relative-specifier-repair at the machine-resolved source.",
-    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_one_process_repaired_sentinel_boot_contract",
+    "completed_stage": "Fresh five-source rehydration passed; the repaired-sentinel one-process plan, threat delta, contract, schemas, controller and tests are frozen at committed and pushed candidate b99d961e225f355a17e74ec15d6e82fb61d83532; focused 6-test and widened 80-test deterministic readings pass with zero Node or Harness process.",
+    "next_executable_stage": "generate_and_validate_one_fresh_preexecution_receipt_then_execute_exactly_one_provider_free_repaired_sentinel_native_boot_attempt_001_without_retry",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
