@@ -1,0 +1,149 @@
+{
+  "accepted_terminal": {
+    "candidate_source": "c66eb82cccd64961f0d99bf9f67803e1a69ebd8a",
+    "last_admitted_stage": "private_identity_admitted",
+    "raw_runtime_detail_retained": false,
+    "result": "preset_composition_failure_attributed",
+    "safe_guard_coordinate": "EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED",
+    "safe_guard_detail": null
+  },
+  "candidate_source": "2c0e24e6b59263129ec59e948f17a18203015b67",
+  "claim_boundary": {
+    "exact_internal_coordinate_observed": false,
+    "occupied_model_launch_authorized": false,
+    "raw_runtime_error_recovered": false,
+    "repair_selected": false,
+    "second_native_process_authorized": false,
+    "source_reachable_candidate_set_only": true,
+    "worker_launch_authorized": false
+  },
+  "eliminated_coordinates": [
+    "preset_root_count_mismatch",
+    "shipped_root_mismatch",
+    "user_root_mismatch",
+    "preset_roster_mismatch",
+    "unknown_or_discovery_broken_preset",
+    "package_import_rejected_before_factory",
+    "public_agent_or_session_creation"
+  ],
+  "finite_remaining_coordinates": [
+    "PRESET_MOUNT_AGENT_SCOPE_ABSENT",
+    "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE",
+    "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED",
+    "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT",
+    "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT",
+    "PRESET_MOUNT_ROOT_SERVICE_LEAK"
+  ],
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal",
+  "plugin_prerequisites": {
+    "all_injected_services_declared_by_host": true,
+    "host_declared_services": [
+      "fs",
+      "subprocess",
+      "systemPrompt",
+      "tools"
+    ],
+    "preset_rows": [
+      "@deepseek-ai/dsh-tool-fs",
+      "@deepseek-ai/dsh-tool-fs-search"
+    ],
+    "tool_fs_inject": [
+      "tools",
+      "fs",
+      "systemPrompt"
+    ],
+    "tool_fs_search_inject": [
+      "tools",
+      "systemPrompt",
+      "subprocess"
+    ]
+  },
+  "result": "pass",
+  "schema_version": "ariadne.native_harness_preset_mount_source_reconciliation_evidence.v1",
+  "source_bindings": [
+    {
+      "bytes": 52188,
+      "passed": true,
+      "path": "dsh-agent-presets/lib/index.js",
+      "sha256": "a0b417514e3d285ad5fef74867e8049af333ebdec6e4d7639e388aa0903e0039",
+      "version": "0.1.0-rc.7"
+    },
+    {
+      "bytes": 2393,
+      "passed": true,
+      "path": "dsh-agent-presets/package.json",
+      "sha256": "26c8b9455103b1b565e910184902c6845661e5134c82679cce385bf5950d8278",
+      "version": "0.1.0-rc.7"
+    },
+    {
+      "bytes": 46024,
+      "passed": true,
+      "path": "dsh-tool-fs/lib/index.js",
+      "sha256": "054af13c1d6f5e67ddf1b89211991f32e0e72f466762b75816282e5cdada86cd",
+      "version": "0.1.0-rc.7"
+    },
+    {
+      "bytes": 2366,
+      "passed": true,
+      "path": "dsh-tool-fs/package.json",
+      "sha256": "aff8bc9a05d0aa1d44f0875a1efeba75a163ce5cd7d4f326abf724c9b466271b",
+      "version": "0.1.0-rc.7"
+    },
+    {
+      "bytes": 55634,
+      "passed": true,
+      "path": "dsh-tool-fs-search/lib/index.js",
+      "sha256": "ea87dbb4b2e0c2af1e3c9463c42892e510a3fa1e620ff98afc738e9dc5a0f787",
+      "version": "0.1.0-rc.7"
+    },
+    {
+      "bytes": 2091,
+      "passed": true,
+      "path": "dsh-tool-fs-search/package.json",
+      "sha256": "0830ace5e18849e73775dd2f3e2d1f2c222fe50389b60f5ccfadccada9bab728",
+      "version": "0.1.0-rc.7"
+    },
+    {
+      "bytes": 18162,
+      "passed": true,
+      "path": "dsh-base/cordis.patch.yml",
+      "sha256": "9870a518274194c0e1ebd870cee2737fbc2ffc04ae36887871ffe6fcf74beac1",
+      "version": "0.1.0-rc.7"
+    },
+    {
+      "bytes": 5435,
+      "passed": true,
+      "path": "dsh-base/package.json",
+      "sha256": "bb959290b08f21d6a1c659aa6201447472527611fe896bba554449f553e83b3c",
+      "version": "0.1.0-rc.7"
+    }
+  ],
+  "source_semantics": {
+    "mount_awaits_entry_tree": true,
+    "mount_awaits_standing_scope": true,
+    "mount_checks_agent_scope": true,
+    "mount_checks_inactive_rows": true,
+    "mount_checks_root_service_leaks": true,
+    "mount_checks_subtree_publication": true,
+    "mount_resolves_mountable_roster": true,
+    "preset_tree_owns_bare_package_resolution": true,
+    "scope_binding_occurs_after_standing_mount": true,
+    "standing_calls_mount_preset": true,
+    "standing_checks_composition_stamp": true
+  },
+  "zero_counters": {
+    "broker_process_count": 0,
+    "broker_request_count": 0,
+    "database_invocation_count": 0,
+    "docker_invocation_count": 0,
+    "model_request_count": 0,
+    "native_harness_process_count": 0,
+    "network_attempt_count": 0,
+    "occupied_worker_count": 0,
+    "provider_request_count": 0,
+    "request_count": 0,
+    "target_creation_count": 0,
+    "target_use_count": 0,
+    "turn_count": 0
+  }
+}
