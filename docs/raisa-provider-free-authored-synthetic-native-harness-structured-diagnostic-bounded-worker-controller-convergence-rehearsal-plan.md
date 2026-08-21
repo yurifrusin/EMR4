@@ -42,11 +42,18 @@ not prepare, consume, launch, retry, resume or reclassify an occupied attempt.
 
 ## Narrow controller seam
 
-The controller imports the already accepted
-`orchestration_harness.native_pre_hmr_diagnostic` component without changing
-that component or the accepted v1 terminal component. Its future execution path
-uses fixed leaf names `entrypoint-wrapper.mjs` and
-`pre-hmr-structured-diagnostic.json` beneath the verified attempt root.
+Fail-closed source inspection established that the consumed controller file is
+itself a byte-bound input to earlier immutable recovery evidence. The narrowest
+convergence therefore leaves that historical controller byte-identical and adds
+a descendant controller adapter for the next fresh attempt. The adapter imports
+the accepted controller identity/task vocabulary plus
+`orchestration_harness.native_pre_hmr_diagnostic`; it changes neither accepted
+component. This avoids silently changing the meaning of attempts 001-003 while
+making the new gear directly callable by a separately authorised fresh runner.
+
+The descendant adapter's future execution path uses fixed leaf names
+`entrypoint-wrapper.mjs` and `pre-hmr-structured-diagnostic.json` beneath the
+verified attempt root.
 
 After the copied rc.7 package root and profile validate, the controller:
 
@@ -138,4 +145,3 @@ Local/origin `master` and `handoff/current` remain exactly
 `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Preserve `docs/branding/` and
 every unrelated untracked file. Stage explicit paths only; `git add .` and
 `git add -A` are forbidden.
-

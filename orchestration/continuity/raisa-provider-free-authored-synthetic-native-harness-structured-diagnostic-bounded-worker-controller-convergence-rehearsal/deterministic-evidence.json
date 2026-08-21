@@ -1,0 +1,115 @@
+{
+  "claim": "provider_free_descendant_controller_adapter_converged",
+  "cleanup": {
+    "disposable_fixture_root_absent": true
+  },
+  "components": {
+    "controller_baseline_sha256": "43e47f244728449f4476431b8d32e3b110c2239025d286a2a5075c477648d9bb",
+    "legacy_terminal_sha256": "0a476ee7617fbc71d9cc3efb88ca08ac1cc6f01b433aa8d83d0603493cc05468",
+    "structured_diagnostic_sha256": "d6fe1ddc4930ce7f0ddbf3480ca93b999d6390a17e16aaa5945c115df04ab72a"
+  },
+  "immutable_artifact_count": 7,
+  "immutable_artifacts": [
+    {
+      "path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-attempt-consumed.json",
+      "sha256": "cb4613ebe46f122e24e5fb11a7b48bcba47be8f30c23b75e5d0d4d9ec9fd3541"
+    },
+    {
+      "path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-terminal.json",
+      "sha256": "38cd1854c555de83bbe00757bed4e7744215d4f1996fc2910f37bdc7c8d020e1"
+    },
+    {
+      "path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-attempt-consumed.json",
+      "sha256": "d9af398db0e9416f29df6316ac349a50a9c1516fbf54ccf6b0c40357340457a1"
+    },
+    {
+      "path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-terminal.json",
+      "sha256": "6f873651c94e81faa8af93bd3d191dd67c13982bfca081479cee6e390ff6cb00"
+    },
+    {
+      "path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/occupied-attempt-consumed.json",
+      "sha256": "32db476458a602bc627955d8f8918dc9193ef4338b7ba03e62577b8468854ca4"
+    },
+    {
+      "path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/occupied-terminal.json",
+      "sha256": "00474761a6a901642c3f6ebfc9b07db607125e9ba48e2bbc5654ea8425904e07"
+    },
+    {
+      "path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/pre-hmr-startup-terminal.json",
+      "sha256": "dc9d7eaea6a2f9a4decf5513f2095853ba74fa1764b381f6706bda1399ba288f"
+    }
+  ],
+  "launch_projection": {
+    "argv_shape": [
+      "node",
+      "--expose-internals",
+      "<exact-wrapper>",
+      "--profile",
+      "headless",
+      "<accepted-authored-synthetic-task>"
+    ],
+    "task_bound_to_accepted_controller": true,
+    "wrapper_and_sidecar_inside_root": true,
+    "wrapper_checks": {
+      "bounded_cause_chain": true,
+      "canonical_json_serializer": true,
+      "no_network_module": true,
+      "no_process_exit": true,
+      "no_stack_property_read": true,
+      "raw_retention_false": true,
+      "single_entrypoint_import": true,
+      "single_exclusive_writer": true,
+      "single_identical_rethrow": true
+    }
+  },
+  "lifecycle_envelope": {
+    "checks": {
+      "cleanup_last": true,
+      "exact_order": true,
+      "no_retry": true,
+      "single_launch": true,
+      "single_terminal_write": true
+    },
+    "sha256": "14c2c7e4fdb3520b0c8face8607b519a8980cb45e2a0e2c82477d48243722d09"
+  },
+  "occupied_attempt_authorized": false,
+  "operation_id": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+  "process_boundary": {
+    "broker": 0,
+    "model": 0,
+    "native_harness": 0,
+    "network": 0,
+    "node": 0,
+    "prompt": 0,
+    "provider": 0,
+    "session": 0,
+    "tool": 0,
+    "worker": 0
+  },
+  "raw_historical_stream_read": false,
+  "result": "pass",
+  "schema_version": "ariadne.structured_diagnostic_bounded_worker_controller_convergence_evidence.v1",
+  "selection_matrix": {
+    "absent": {
+      "reason": "structured_diagnostic_absent",
+      "schema": "ariadne.native_harness_pre_hmr_startup_terminal.v1",
+      "structured_accepted": false
+    },
+    "escaped": "structured_diagnostic_invalid",
+    "malformed": "structured_diagnostic_invalid",
+    "noncanonical": "structured_diagnostic_invalid",
+    "valid_exact_identity": {
+      "reason": null,
+      "schema": "ariadne.native_harness_pre_hmr_startup_terminal.v2",
+      "structured_accepted": true
+    },
+    "wrong_identity": "structured_diagnostic_invalid"
+  },
+  "source_checks": {
+    "accepted_base_controller_imported": true,
+    "accepted_wrapper_imported": true,
+    "base_controller_unchanged": true,
+    "no_process_launcher": true,
+    "no_provider_key": true
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "result", "claim", "components", "immutable_artifact_count", "immutable_artifacts", "launch_projection", "selection_matrix", "lifecycle_envelope", "source_checks", "cleanup", "process_boundary", "occupied_attempt_authorized", "raw_historical_stream_read"],
+  "properties": {
+    "schema_version": {"const": "ariadne.structured_diagnostic_bounded_worker_controller_convergence_evidence.v1"},
+    "operation_id": {"const": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal"},
+    "result": {"const": "pass"},
+    "claim": {"const": "provider_free_descendant_controller_adapter_converged"},
+    "components": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+    "immutable_artifact_count": {"const": 7},
+    "immutable_artifacts": {"type": "array", "minItems": 7, "maxItems": 7},
+    "launch_projection": {"type": "object"},
+    "selection_matrix": {"type": "object"},
+    "lifecycle_envelope": {"type": "object"},
+    "source_checks": {"type": "object", "additionalProperties": {"const": true}},
+    "cleanup": {"type": "object", "properties": {"disposable_fixture_root_absent": {"const": true}}, "required": ["disposable_fixture_root_absent"], "additionalProperties": false},
+    "process_boundary": {"type": "object", "additionalProperties": {"const": 0}},
+    "occupied_attempt_authorized": {"const": false},
+    "raw_historical_stream_read": {"const": false}
+  }
+}
