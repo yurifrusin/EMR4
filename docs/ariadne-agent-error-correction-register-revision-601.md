@@ -6,8 +6,8 @@ Timestamp: 2026-08-22T03:05:18.6792181+10:00 (Australia/Brisbane)
 
 <!-- ariadne-agent-error-register-reading
 revision: 601
-incident_count: 866
-new_incident_ids: AER-0861,AER-0862,AER-0863,AER-0864,AER-0865,AER-0866
+incident_count: 867
+new_incident_ids: AER-0861,AER-0862,AER-0863,AER-0864,AER-0865,AER-0866,AER-0867
 open_incident_count: 0
 -->
 
@@ -61,3 +61,10 @@ Continuity node acceptance pointer. The prospective graph rejected the form.
 Failed tranches now use paired semantics: a Sol acceptance of the exact negative
 containment result plus a distinct non-acceptance of every unproved capability
 claim.
+
+## AER-0867
+
+The first semantically valid prospective node duplicated its detailed evidence
+inventory into the live acceptance row and exceeded the compact handover byte
+budget. The clockwork rejected before publication. The full inventory remains
+in Continuity while the live baton now carries only nine routing artifacts.

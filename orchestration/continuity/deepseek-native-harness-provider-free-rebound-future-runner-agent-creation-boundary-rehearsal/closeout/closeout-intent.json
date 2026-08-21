@@ -171,7 +171,8 @@
       {"incident_id": "post-hmr-sidecar-free-process-exit", "source_id": "agent-boundary-native-attempt-001", "peers": []},
       {"incident_id": "failed-result-success-claim-generation", "source_id": "agent-boundary-generated-claims-001", "peers": []},
       {"incident_id": "manual-canonical-latch-drift", "source_id": "agent-boundary-clockwork-check-001", "peers": []},
-      {"incident_id": "negative-result-nonacceptance-pointer", "source_id": "agent-boundary-clockwork-check-002", "peers": []}
+      {"incident_id": "negative-result-nonacceptance-pointer", "source_id": "agent-boundary-clockwork-check-002", "peers": []},
+      {"incident_id": "live-baton-compaction-budget", "source_id": "agent-boundary-clockwork-check-003", "peers": []}
     ],
     "broker": {"enabled": false, "posture": "provider_free_shadow"}
   },
@@ -213,25 +214,11 @@
   "baton_acceptance": {
     "label": "Current DeepSeek native Harness acceptance",
     "paths": [
-      "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-plan.md",
-      "docs/security/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-threat-model-delta.md",
-      "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-prelaunch-contract-family-recovery.md",
-      "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-clockwork-canonical-latch-recovery.md",
-      "scripts/deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
-      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/contract.json",
-      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/prelaunch-controller-contract-family-failure-001.json",
-      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-attempt-consumed.json",
-      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-agent-creation-boundary-evidence.json",
-      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-agent-creation-boundary-report.md",
-      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/efficacy-reading.json",
-      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/failure-interpretation.json",
-      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/rejected-generated-claims.json",
-      "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
-      "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_plan.py",
-      "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_evidence.py",
       "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-closeout.md",
       "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-failed-result-sol-acceptance.md",
       "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-sol-nonacceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/failure-interpretation.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/rejected-generated-claims.json",
       "docs/ariadne-agent-error-correction-register-revision-601.md",
       "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-rebound-future-runner-agent-creation-boundary-rehearsal.md",
       "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md",
@@ -469,6 +456,40 @@
         ]
       },
       "baton_summary": "records the rejected non-acceptance node pointer and paired negative-result acceptance semantics."
+    },
+    {
+      "attempt_key": "agent-boundary-clockwork-check-003",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-rebound-agent-creation-boundary",
+      "role": "orchestrator",
+      "resource_id": "current-baton-acceptance-row-compaction",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The compact live handover must remain within its byte budget and route to aggregate artifacts rather than duplicating the detailed Continuity evidence inventory.",
+      "observed_error": "The first graph-valid closeout intent repeated the detailed artifact inventory in the live acceptance row and the clockwork rejected baton compaction budget before publication.",
+      "detection_method": "The clockwork rendered the prospective baton, measured it against the fixed 80 KB limit and rejected the transaction while every canonical byte remained unchanged.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-baton-compaction-recovery.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.live_baton_acceptance_row_exceeds_compaction_budget",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep the full evidence inventory in the Continuity node and reduce the Current Baton row to nine aggregate routing artifacts.",
+        "prevention_control": "Live baton acceptance rows carry compact aggregate routes; detailed tests, receipts and implementation artifacts remain in Continuity evidence.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-baton-compaction-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-601.md"
+        ]
+      },
+      "baton_summary": "records the rejected oversized live-baton row and compact aggregate routing correction."
     }
   ]
 }

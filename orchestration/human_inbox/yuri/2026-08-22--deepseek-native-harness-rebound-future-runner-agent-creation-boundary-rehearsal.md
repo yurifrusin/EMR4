@@ -40,7 +40,7 @@ toward giving the orchestrator dependable control of native DeepSeek workers.
 - Clockwork recovery: its first check caught a manually edited canonical latch
   before publication; the selected generation was restored byte-for-byte and
   canonical transitions are now left exclusively to the clockwork.
-- Register: revision 601 binds six concrete incidents and their prevention
+- Register: revision 601 binds seven concrete incidents and their prevention
   controls; none is left open.
 - Next: one separately frozen provider-free closed-subcoordinate diagnostic
   transaction using dynamic imports and a finite failure vocabulary.

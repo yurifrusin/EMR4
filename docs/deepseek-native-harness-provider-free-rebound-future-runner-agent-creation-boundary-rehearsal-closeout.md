@@ -60,7 +60,8 @@ prevention rule are preserved in the canonical-latch recovery note.
 
 Register revision 601 binds the pre-push identity lapse, prelaunch contract
 mismatch, sidecar-free native exit, generated evidence overclaim, manual
-canonical-latch drift and negative-result acceptance-pointer correction.
+canonical-latch drift, negative-result acceptance-pointer correction and live-
+baton compaction correction.
 
 ## Parallelism efficacy
 
