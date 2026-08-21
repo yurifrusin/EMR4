@@ -1,0 +1,176 @@
+{
+  "accepted_runner": {
+    "bytes": 5369,
+    "fragment_counts": {
+      "agent.followup(": 1,
+      "await agent.whenIdle()": 2,
+      "await agents.create(": 1,
+      "await ctx.get(\"loader\")?.await()": 1,
+      "await sessions.flush(agent.session)": 1,
+      "const agents = ctx.get(\"agents\")": 1,
+      "const presets = ctx.get(\"agentPresets\")": 1,
+      "const sessions = ctx.get(\"sessions\")": 1,
+      "failure_code: \"CUSTOM_RUNNER_FAILURE\"": 1,
+      "presets.roots.length !== 2": 1
+    },
+    "operation_order": [
+      1741,
+      1777,
+      2018,
+      2533,
+      3948,
+      4012,
+      4127,
+      4153
+    ],
+    "operation_order_exact": true,
+    "sha256": "1233d4fc14726800dcf063c1cab5e814f3df0091040126784c4a7d42c3ec0746"
+  },
+  "attempt_005": {
+    "diagnosis_sha256": "63b9c1aa0eca41456a2ab8806d6a3a69fddb1133fc1fec0885bcf9f7ed6c6650",
+    "efficacy_reading_sha256": "76ec764daa6d11d164c7c4bb70fac86e3ed65b30bfcd5a3e5007ff005883ab83",
+    "immutable": true,
+    "occupied_terminal_sha256": "c699308b03d90875393e6038b242a6c8118c3b6d58d3595e50fb891c6f24c3f0",
+    "reclassification_permitted": false
+  },
+  "claim_boundary": {
+    "deepseek_performance_claimed": false,
+    "harness_readiness_claimed": false,
+    "internal_rc7_suboperation_claimed": false,
+    "pre_request_conclusion_requires_broker_zero_reading": true,
+    "sidecar_stage_is_source_coordinate_only": true
+  },
+  "closed_vocabulary": {
+    "cause_coordinates": [
+      "operation_rejected",
+      "required_service_missing",
+      "preset_root_roster_mismatch"
+    ],
+    "error_kinds": [
+      "aggregate_error",
+      "error",
+      "invalid_preset_id_error",
+      "preset_mount_error",
+      "type_error",
+      "unknown",
+      "unknown_preset_error"
+    ],
+    "single_constant_owner": true,
+    "stages": [
+      "loader_readiness_wait",
+      "required_service_lookup",
+      "preset_root_roster_admission",
+      "agent_create_setup_publish",
+      "initial_idle_wait",
+      "first_followup_dispatch",
+      "first_turn_idle_wait"
+    ]
+  },
+  "diagnostic_helper": {
+    "bytes": 3099,
+    "checks": {
+      "exact_cause_vocabulary": true,
+      "exact_error_vocabulary": true,
+      "exact_stage_vocabulary": true,
+      "no_raw_or_execution_surface": true,
+      "one_canonical_serializer": true,
+      "one_exclusive_writer": true,
+      "one_safe_export": true,
+      "raw_retention_false": true
+    },
+    "sha256": "932d24aa60cf457054b0f3b22cb6edc0bfa2c74232819f3b0e13aa967987ac59"
+  },
+  "fixture_matrix": {
+    "dynamic_secret_or_path_text_released": false,
+    "error_kind_count": 7,
+    "scenario_count": 51,
+    "special_cause_relationship_count": 2,
+    "stage_count": 7
+  },
+  "future_runner_envelope": {
+    "bytes": 1207,
+    "checks": {
+      "flush_outside_interval": true,
+      "no_raw_error_projection": true,
+      "no_retry_or_fallback": true,
+      "outer_lifecycle_bindings": true,
+      "single_identical_rethrow": true,
+      "single_sidecar_write": true,
+      "stage_before_each_operation": true,
+      "stage_order_exact": true
+    },
+    "sha256": "d30b673902599fe457d35fdb314971568469d5a480a6d90d4850eb351f74fc26",
+    "stage_positions": {
+      "agent_create_setup_publish": 688,
+      "first_followup_dispatch": 904,
+      "first_turn_idle_wait": 983,
+      "initial_idle_wait": 840,
+      "loader_readiness_wait": 29,
+      "preset_root_roster_admission": 449,
+      "required_service_lookup": 157
+    }
+  },
+  "operation_id": "deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis",
+  "pinned_rc7_sources": {
+    "dsh_agent": {
+      "bytes": 31560,
+      "fragment_counts": {
+        "Reflect.apply(target.createAgent": 1,
+        "async create(options) {": 1
+      },
+      "package_version": "0.1.0-rc.7",
+      "sha256": "e7e40c5ca66d9827a5084c5c0c68983f9685842bb9b6d604803d4cb4642bb263",
+      "tar_member": "package/lib/index.js"
+    },
+    "dsh_agent_loop": {
+      "bytes": 47416,
+      "fragment_counts": {
+        "async createAgent(ownerCtx, options) {": 1,
+        "async whenIdle() {": 1,
+        "await raceAbort(setup?.(prepared.agent.ctx)": 1,
+        "followup(input) {": 1,
+        "return prepared.publish(source);": 1
+      },
+      "package_version": "0.1.0-rc.7",
+      "sha256": "bf8ca1e9b05e9b78320a5e2f0b4e25395eba91dd72db6d3cb5626e3dfb529204",
+      "tar_member": "package/lib/index.js"
+    },
+    "dsh_agent_presets": {
+      "bytes": 52188,
+      "fragment_counts": {
+        "async ensureStanding(preset) {": 1,
+        "async mount(agentCtx, id) {": 1,
+        "async resolveMountable(id) {": 1,
+        "bindings = /* @__PURE__ */ new WeakMap();": 1
+      },
+      "package_version": "0.1.0-rc.7",
+      "sha256": "a0b417514e3d285ad5fef74867e8049af333ebdec6e4d7639e388aa0903e0039",
+      "tar_member": "package/lib/index.js"
+    },
+    "dsh_session": {
+      "bytes": 79221,
+      "fragment_counts": {
+        "Promise.allSettled(callbacks.map": 1,
+        "async flush(session) {": 1
+      },
+      "package_version": "0.1.0-rc.7",
+      "sha256": "9270186b579bc8a4c6c53c256e4471d3f134e94308462c6a413a722e9c7556fb",
+      "tar_member": "package/lib/index.js"
+    }
+  },
+  "proof_boundary": {
+    "broker_process_count": 0,
+    "database_invocation_count": 0,
+    "docker_invocation_count": 0,
+    "model_request_count": 0,
+    "native_harness_process_count": 0,
+    "network_request_count": 0,
+    "node_process_count": 0,
+    "provider_request_count": 0,
+    "python_process_count": 1,
+    "raw_attempt_stream_read_count": 0,
+    "worker_process_count": 0
+  },
+  "result": "pass",
+  "schema_version": "ariadne.native_harness_post_hmr_pre_request_diagnosis_evidence.v1"
+}

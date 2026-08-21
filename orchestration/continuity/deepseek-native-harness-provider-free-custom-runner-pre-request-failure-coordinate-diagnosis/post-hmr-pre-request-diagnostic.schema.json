@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "attempt_id",
+    "candidate_source",
+    "stage",
+    "cause_coordinate",
+    "error_kind",
+    "raw_error_message_retained",
+    "raw_stack_retained",
+    "raw_paths_retained",
+    "raw_cause_retained"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_post_hmr_pre_request_diagnostic.v1"},
+    "operation_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,159}$"},
+    "attempt_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,159}$"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "stage": {"enum": ["loader_readiness_wait", "required_service_lookup", "preset_root_roster_admission", "agent_create_setup_publish", "initial_idle_wait", "first_followup_dispatch", "first_turn_idle_wait"]},
+    "cause_coordinate": {"enum": ["operation_rejected", "required_service_missing", "preset_root_roster_mismatch"]},
+    "error_kind": {"enum": ["aggregate_error", "error", "invalid_preset_id_error", "preset_mount_error", "type_error", "unknown", "unknown_preset_error"]},
+    "raw_error_message_retained": {"const": false},
+    "raw_stack_retained": {"const": false},
+    "raw_paths_retained": {"const": false},
+    "raw_cause_retained": {"const": false}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"cause_coordinate": {"const": "required_service_missing"}}, "required": ["cause_coordinate"]},
+      "then": {"properties": {"stage": {"const": "required_service_lookup"}}}
+    },
+    {
+      "if": {"properties": {"cause_coordinate": {"const": "preset_root_roster_mismatch"}}, "required": ["cause_coordinate"]},
+      "then": {"properties": {"stage": {"const": "preset_root_roster_admission"}}}
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "efficacy": {
+    "caller_descriptive_stage_admission": false,
+    "generic_runner_failure_replaced_in_design": true,
+    "occupied_harness_readiness": "not_tested",
+    "provider_position_overclaim_prevented": true,
+    "raw_error_retention": false,
+    "stage_is_machine_selected_from_closed_vocabulary": true
+  },
+  "measurements": {
+    "closed_cause_coordinate_count": 3,
+    "closed_error_kind_count": 7,
+    "closed_stage_count": 7,
+    "fixture_scenario_count": 51,
+    "pinned_source_member_count": 4,
+    "prohibited_process_or_request_count": 0
+  },
+  "next_recovery": "provider_free_future_runner_sidecar_integration_rehearsal_before_any_occupied_attempt",
+  "operation_id": "deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis",
+  "result": "pass",
+  "schema_version": "ariadne.native_harness_post_hmr_pre_request_diagnosis_efficacy.v1"
+}

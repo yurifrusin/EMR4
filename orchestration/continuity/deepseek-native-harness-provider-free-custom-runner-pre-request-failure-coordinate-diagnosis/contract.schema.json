@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "planning_source",
+    "accepted_attempt_005",
+    "closed_vocabulary",
+    "pinned_rc7_sources",
+    "proof_boundary",
+    "artifacts"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_post_hmr_pre_request_diagnosis_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_attempt_005": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["terminal_source", "reviewed_controller_candidate", "runner_sha256", "immutable", "reclassification_permitted", "retry_permitted"],
+      "properties": {
+        "terminal_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "reviewed_controller_candidate": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "runner_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "immutable": {"const": true},
+        "reclassification_permitted": {"const": false},
+        "retry_permitted": {"const": false}
+      }
+    },
+    "closed_vocabulary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stages", "cause_coordinates", "error_kinds"],
+      "properties": {
+        "stages": {"const": ["loader_readiness_wait", "required_service_lookup", "preset_root_roster_admission", "agent_create_setup_publish", "initial_idle_wait", "first_followup_dispatch", "first_turn_idle_wait"]},
+        "cause_coordinates": {"const": ["operation_rejected", "required_service_missing", "preset_root_roster_mismatch"]},
+        "error_kinds": {"const": ["aggregate_error", "error", "invalid_preset_id_error", "preset_mount_error", "type_error", "unknown", "unknown_preset_error"]}
+      }
+    },
+    "pinned_rc7_sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dsh_agent_sha256", "dsh_agent_loop_sha256", "dsh_agent_presets_sha256", "dsh_session_sha256", "version"],
+      "properties": {
+        "dsh_agent_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "dsh_agent_loop_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "dsh_agent_presets_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "dsh_session_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "version": {"const": "0.1.0-rc.7"}
+      }
+    },
+    "proof_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_process_count", "native_harness_process_count", "broker_process_count", "worker_process_count", "model_request_count", "provider_request_count", "network_request_count", "database_invocation_count", "docker_invocation_count", "raw_attempt_stream_read_count"],
+      "properties": {
+        "node_process_count": {"const": 0},
+        "native_harness_process_count": {"const": 0},
+        "broker_process_count": {"const": 0},
+        "worker_process_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0},
+        "network_request_count": {"const": 0},
+        "database_invocation_count": {"const": 0},
+        "docker_invocation_count": {"const": 0},
+        "raw_attempt_stream_read_count": {"const": 0}
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_schema", "diagnostic_schema", "evidence_schema", "evidence", "report", "efficacy"],
+      "properties": {
+        "contract_schema": {"const": "contract.schema.json"},
+        "diagnostic_schema": {"const": "post-hmr-pre-request-diagnostic.schema.json"},
+        "evidence_schema": {"const": "diagnosis-evidence.schema.json"},
+        "evidence": {"const": "diagnosis-evidence.json"},
+        "report": {"const": "diagnosis-report.md"},
+        "efficacy": {"const": "efficacy-reading.json"}
+      }
+    }
+  }
+}

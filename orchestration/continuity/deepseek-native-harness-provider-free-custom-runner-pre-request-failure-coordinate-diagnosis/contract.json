@@ -1,0 +1,65 @@
+{
+  "schema_version": "ariadne.native_harness_post_hmr_pre_request_diagnosis_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis",
+  "planning_source": "b76533f5ffad75788268180cbe26391e33a6aac7",
+  "accepted_attempt_005": {
+    "terminal_source": "0b2aebd104f4c9dcfd4603af5dd51a687bace555",
+    "reviewed_controller_candidate": "67e15262f6dc8d6038edbc64ea938a2cb27baa98",
+    "runner_sha256": "1233d4fc14726800dcf063c1cab5e814f3df0091040126784c4a7d42c3ec0746",
+    "immutable": true,
+    "reclassification_permitted": false,
+    "retry_permitted": false
+  },
+  "closed_vocabulary": {
+    "stages": [
+      "loader_readiness_wait",
+      "required_service_lookup",
+      "preset_root_roster_admission",
+      "agent_create_setup_publish",
+      "initial_idle_wait",
+      "first_followup_dispatch",
+      "first_turn_idle_wait"
+    ],
+    "cause_coordinates": [
+      "operation_rejected",
+      "required_service_missing",
+      "preset_root_roster_mismatch"
+    ],
+    "error_kinds": [
+      "aggregate_error",
+      "error",
+      "invalid_preset_id_error",
+      "preset_mount_error",
+      "type_error",
+      "unknown",
+      "unknown_preset_error"
+    ]
+  },
+  "pinned_rc7_sources": {
+    "dsh_agent_sha256": "e7e40c5ca66d9827a5084c5c0c68983f9685842bb9b6d604803d4cb4642bb263",
+    "dsh_agent_loop_sha256": "bf8ca1e9b05e9b78320a5e2f0b4e25395eba91dd72db6d3cb5626e3dfb529204",
+    "dsh_agent_presets_sha256": "a0b417514e3d285ad5fef74867e8049af333ebdec6e4d7639e388aa0903e0039",
+    "dsh_session_sha256": "9270186b579bc8a4c6c53c256e4471d3f134e94308462c6a413a722e9c7556fb",
+    "version": "0.1.0-rc.7"
+  },
+  "proof_boundary": {
+    "node_process_count": 0,
+    "native_harness_process_count": 0,
+    "broker_process_count": 0,
+    "worker_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "network_request_count": 0,
+    "database_invocation_count": 0,
+    "docker_invocation_count": 0,
+    "raw_attempt_stream_read_count": 0
+  },
+  "artifacts": {
+    "contract_schema": "contract.schema.json",
+    "diagnostic_schema": "post-hmr-pre-request-diagnostic.schema.json",
+    "evidence_schema": "diagnosis-evidence.schema.json",
+    "evidence": "diagnosis-evidence.json",
+    "report": "diagnosis-report.md",
+    "efficacy": "efficacy-reading.json"
+  }
+}

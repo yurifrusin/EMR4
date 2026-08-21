@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "result",
+    "attempt_005",
+    "accepted_runner",
+    "pinned_rc7_sources",
+    "closed_vocabulary",
+    "diagnostic_helper",
+    "future_runner_envelope",
+    "fixture_matrix",
+    "claim_boundary",
+    "proof_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_post_hmr_pre_request_diagnosis_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis"},
+    "result": {"const": "pass"},
+    "attempt_005": {"type": "object"},
+    "accepted_runner": {"type": "object"},
+    "pinned_rc7_sources": {
+      "type": "object",
+      "required": ["dsh_agent", "dsh_agent_loop", "dsh_agent_presets", "dsh_session"],
+      "additionalProperties": false,
+      "properties": {
+        "dsh_agent": {"$ref": "#/$defs/sourceBinding"},
+        "dsh_agent_loop": {"$ref": "#/$defs/sourceBinding"},
+        "dsh_agent_presets": {"$ref": "#/$defs/sourceBinding"},
+        "dsh_session": {"$ref": "#/$defs/sourceBinding"}
+      }
+    },
+    "closed_vocabulary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stages", "cause_coordinates", "error_kinds", "single_constant_owner"],
+      "properties": {
+        "stages": {"const": ["loader_readiness_wait", "required_service_lookup", "preset_root_roster_admission", "agent_create_setup_publish", "initial_idle_wait", "first_followup_dispatch", "first_turn_idle_wait"]},
+        "cause_coordinates": {"const": ["operation_rejected", "required_service_missing", "preset_root_roster_mismatch"]},
+        "error_kinds": {"const": ["aggregate_error", "error", "invalid_preset_id_error", "preset_mount_error", "type_error", "unknown", "unknown_preset_error"]},
+        "single_constant_owner": {"const": true}
+      }
+    },
+    "diagnostic_helper": {"type": "object"},
+    "future_runner_envelope": {"type": "object"},
+    "fixture_matrix": {"type": "object"},
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sidecar_stage_is_source_coordinate_only", "pre_request_conclusion_requires_broker_zero_reading", "internal_rc7_suboperation_claimed", "deepseek_performance_claimed", "harness_readiness_claimed"],
+      "properties": {
+        "sidecar_stage_is_source_coordinate_only": {"const": true},
+        "pre_request_conclusion_requires_broker_zero_reading": {"const": true},
+        "internal_rc7_suboperation_claimed": {"const": false},
+        "deepseek_performance_claimed": {"const": false},
+        "harness_readiness_claimed": {"const": false}
+      }
+    },
+    "proof_boundary": {
+      "type": "object",
+      "properties": {
+        "python_process_count": {"const": 1},
+        "node_process_count": {"const": 0},
+        "native_harness_process_count": {"const": 0},
+        "broker_process_count": {"const": 0},
+        "worker_process_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0},
+        "network_request_count": {"const": 0},
+        "database_invocation_count": {"const": 0},
+        "docker_invocation_count": {"const": 0},
+        "raw_attempt_stream_read_count": {"const": 0}
+      },
+      "additionalProperties": false,
+      "required": ["python_process_count", "node_process_count", "native_harness_process_count", "broker_process_count", "worker_process_count", "model_request_count", "provider_request_count", "network_request_count", "database_invocation_count", "docker_invocation_count", "raw_attempt_stream_read_count"]
+    }
+  },
+  "$defs": {
+    "sourceBinding": {
+      "type": "object",
+      "required": ["package_version", "tar_member", "sha256", "bytes", "fragment_counts"],
+      "additionalProperties": false,
+      "properties": {
+        "package_version": {"const": "0.1.0-rc.7"},
+        "tar_member": {"const": "package/lib/index.js"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "bytes": {"type": "integer", "minimum": 1},
+        "fragment_counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 1}}
+      }
+    }
+  }
+}
