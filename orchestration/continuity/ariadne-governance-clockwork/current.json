@@ -5,6 +5,6 @@
   "selected_bundle_sha256": "44e6d9cb0ad86d87fc6d714dffae3703485818321ea5e874b5d5d18cbf759da2",
   "previous_generation_id": "gen-f127ed08ee563b3588cb25d3b1dab8b531fb219eb94857e443e63e802a0d1b86",
   "previous_source_commit": "484a2bf3819d95e674aa7b1a57dbaa9cd1b25d68",
-  "lease_sequence": 123,
+  "lease_sequence": 125,
   "writer": "clockwork"
 }
