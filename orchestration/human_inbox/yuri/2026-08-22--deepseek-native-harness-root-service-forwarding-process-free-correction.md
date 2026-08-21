@@ -27,7 +27,7 @@ bridge validates the root service and mount handle inside its `try`, invokes
 terminal mapping. The focused 11 tests and exact broader 169-test collection
 passed with one platform-specific skip.
 
-Seven bounded workflow incidents were caught and corrected. They add honest
+Eight bounded workflow incidents were caught and corrected. They add honest
 local build cost, but no external worker, native Harness or provider attempt
 was wasted. The accepted v2 object-ID mechanism recomputes unchanged after its
 evidence commit, so later repository progress no longer changes which

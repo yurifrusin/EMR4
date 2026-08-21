@@ -63,16 +63,18 @@ plan path and takes the object reading from the resolver.
 - Direct CLI, Ruff, `py_compile`, JSON Schema, deterministic recomputation,
   latch and Current-Baton checks passed.
 - The complete five-source pre-verifier receipt passed at the pushed evidence
-  source.
+  source, and a fresh five-source post-compaction receipt passed before the
+  corrected closeout projection was committed.
 - Node, native Harness, worker, model and provider processes, requests, retries
   and resumes remained zero.
 
 ## Workflow-cost reading
 
-Clockwork records AER-0912 through AER-0918. The historical-suite selection,
+Clockwork records AER-0912 through AER-0919. The historical-suite selection,
 two PowerShell command forms, post-rewrite count, over-broad release predicate
 rejected-result exit status and first time-sensitive candidate-source reading
-all failed before acceptance and were corrected. They are real costs, but none
+plus the first over-dense Current-Baton acceptance row all failed before
+acceptance and were corrected. They are real costs, but none
 required an external worker rerun or consumed a native/provider attempt. The
 accepted v2 resolver binding is idempotent across its descendant evidence
 commit.

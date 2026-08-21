@@ -2,12 +2,12 @@
 
 Date: 2026-08-22
 
-Status: **seven corrected incidents added; none open**
+Status: **eight corrected incidents added; none open**
 
 <!-- ariadne-agent-error-register-reading
 revision: 610
-incident_count: 918
-new_incident_ids: AER-0912,AER-0913,AER-0914,AER-0915,AER-0916,AER-0917,AER-0918
+incident_count: 919
+new_incident_ids: AER-0912,AER-0913,AER-0914,AER-0915,AER-0916,AER-0917,AER-0918,AER-0919
 open_incident_count: 0
 -->
 
@@ -66,11 +66,22 @@ through the repository resolver and emits immutable v2 evidence. After the v2
 evidence commit advanced `HEAD`, recomputation remained byte-equal and retained
 the exact implementation source.
 
+## AER-0919
+
+The first clockwork closeout listed each long operation-owned artifact
+separately in the rolling Current-Baton acceptance row. The prospective
+projection rejected the row because it would exceed the live handover's
+compaction byte budget. No canonical surface changed. The corrected intent
+names the operation continuity directory once and retains only the controlling
+plan, threat, test, receipt, register, closeout, acceptance and Yuri summary as
+individual paths.
+
 ## Control reading
 
-All seven incidents were detected without Node, native Harness, worker, model or
+All eight incidents were detected without Node, native Harness, worker, model or
 provider activity. Four were orchestration command or suite-selection costs;
-three strengthened the prospective controller's own fail-closed semantics. Most
+three strengthened the prospective controller's own fail-closed semantics and
+one corrected closeout projection density. Most
 importantly, the tranche's Git plan and candidate identities were derived by
 the repository resolver with zero caller-authored object IDs, so the original
 clerical object-binding class did not recur inside the contract or evidence.

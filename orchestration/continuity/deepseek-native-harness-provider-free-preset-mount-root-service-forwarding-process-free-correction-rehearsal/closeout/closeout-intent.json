@@ -79,7 +79,8 @@
         "receipts": [
           "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-preplanning-receipt.json",
           "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-pre-verifier-before-idempotency-repair-receipt.json",
-          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-pre-verifier-acceptance-receipt.json"
+        "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-pre-verifier-acceptance-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-postcompaction-closeout-receipt.json"
         ],
         "tests": [
           "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
@@ -92,7 +93,8 @@
           "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/contract.json",
           "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence.json",
           "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence-v2.json",
-          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-report-v2.md"
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-report-v2.md",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-postcompaction-closeout-runtime-state.json"
         ]
       },
       "unresolved_gates": [
@@ -201,18 +203,9 @@
     "paths": [
       "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-plan.md",
       "docs/security/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-threat-model-delta.md",
-      "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
       "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
-      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/contract.json",
-      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/contract.schema.json",
-      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/evidence.schema.json",
-      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence.json",
-      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-report.md",
-      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence-v2.json",
-      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-report-v2.md",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-preplanning-receipt.json",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-pre-verifier-before-idempotency-repair-receipt.json",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-pre-verifier-acceptance-receipt.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-postcompaction-closeout-receipt.json",
       "docs/ariadne-agent-error-correction-register-revision-610.md",
       "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-closeout.md",
       "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-sol-acceptance.md",
@@ -493,6 +486,40 @@
         ]
       },
       "baton_summary": "records and corrects a time-sensitive current-HEAD candidate binding with an idempotent source-owner resolution."
+    },
+    {
+      "attempt_key": "root-service-correction-incident-0919",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "current-baton-acceptance-row-density",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_check",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The rolling Current-Baton acceptance row remains within the live handover compaction byte budget.",
+      "observed_error": "The first closeout intent listed every long operation artifact separately and the prospective projection exceeded the Baton compaction budget.",
+      "detection_method": "The governance clockwork rejected tick_baton_compaction_budget before any canonical publication.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-610.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.current_baton_acceptance_paths_exceeded_compaction_budget",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Collapse operation-owned artifacts to the single continuity directory and keep only controlling external artifacts explicit.",
+        "prevention_control": "Rolling acceptance rows name an operation directory once and reserve individual entries for controlling cross-directory documents and receipts.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-610.md"
+        ]
+      },
+      "baton_summary": "records and corrects an over-dense rolling acceptance path list before canonical publication."
     }
   ]
 }
