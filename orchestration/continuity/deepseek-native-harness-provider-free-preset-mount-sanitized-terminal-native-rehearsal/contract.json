@@ -161,10 +161,10 @@
   },
   "base_contract_sha256": "19d1983d0cf372aa6c4845e9c4e5bb2c252e12ed2dcff2ada1e4a6766e7a140c",
   "implementation_bytes": {
-    "execution_controller_sha256": "c0bb64ba18c275b25f0e4c9e6fb8eb53899ff6ee771c1eb6c2ad1cfe0037c8f5",
-    "focused_test_sha256": "0a22d91c91aa3a13dd1f006d48df92ff3a2ef3899505035364c169bae2cef7f3",
+    "execution_controller_sha256": "3cb989bedc1515448b6b0d0f60ecbb390ec2d54189eeaa6ed07fa32f00fa6990",
+    "focused_test_sha256": "cbeb2d9eac4a5994a0d9f4492b86d2589869a4319b690f9ed6ce8b11f9d8e626",
     "contract_schema_sha256": "b5bd64e508e7b9603b26d2f25566cebddca40ea642ae32c3502cfd1e321c183c",
-    "sidecar_schema_sha256": "af6ee2e6c09c89f72e70037a6a3f585a2ce8a9c06ccbac9e96d8c1dc5aa40327",
+    "sidecar_schema_sha256": "b866a18dc145fb0c13f03dc3599e5d81315983a737bf42e19ccee8af787e7563",
     "evidence_schema_sha256": "7f2a0c5d68fe2d05be79cc21be084be6f6ade41acdc73c828a23528c986b83c3",
     "process_envelope_schema_sha256": "fd5c4065dcccf1cda5f1dc64b45e4787eea56fbbdffa94f7a42993835cee4824"
   }

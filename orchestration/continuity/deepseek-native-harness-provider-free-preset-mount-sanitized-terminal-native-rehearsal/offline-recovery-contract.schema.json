@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "consumed_operation_id", "execution_attempt_id", "consumed_candidate_source", "input_bindings", "source_hashes", "retained_layout", "expected_readiness", "expected_terminal", "required_zero_fields", "recovery_process_budget"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_sanitized_terminal_offline_recovery_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-offline-admission-recovery"},
+    "planning_source": {"$ref": "#/$defs/oid"},
+    "consumed_operation_id": {"type": "string", "minLength": 1},
+    "execution_attempt_id": {"type": "string", "minLength": 1},
+    "consumed_candidate_source": {"$ref": "#/$defs/oid"},
+    "input_bindings": {"type": "object"},
+    "source_hashes": {"type": "object"},
+    "retained_layout": {"type": "object"},
+    "expected_readiness": {"type": "array", "items": {"type": "string"}, "minItems": 2, "maxItems": 2},
+    "expected_terminal": {"type": "object"},
+    "required_zero_fields": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+    "recovery_process_budget": {"type": "object"}
+  },
+  "$defs": {"oid": {"type": "string", "pattern": "^[0-9a-f]{40}$"}}
+}

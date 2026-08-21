@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "execution_attempt_id", "consumed_candidate_source", "process_envelope_sha256", "sidecar_sha256", "sidecar_bytes", "observed_schema_version", "intended_schema_version", "schema_token_mismatch_preserved", "terminal", "source_hashes", "factory_counts", "required_zero_counters", "raw_runtime_detail_retained", "retry_authorized"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_sanitized_terminal_offline_admitted_terminal.v1"},
+    "operation_id": {"type": "string"},
+    "execution_attempt_id": {"type": "string"},
+    "consumed_candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "process_envelope_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "sidecar_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "sidecar_bytes": {"const": 1646},
+    "observed_schema_version": {"type": "string"},
+    "intended_schema_version": {"type": "string"},
+    "schema_token_mismatch_preserved": {"const": true},
+    "terminal": {"type": "object"},
+    "source_hashes": {"type": "object"},
+    "factory_counts": {"type": "object"},
+    "required_zero_counters": {"type": "object"},
+    "raw_runtime_detail_retained": {"const": false},
+    "retry_authorized": {"const": false}
+  }
+}

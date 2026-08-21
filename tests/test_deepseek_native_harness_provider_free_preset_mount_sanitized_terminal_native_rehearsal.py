@@ -109,10 +109,16 @@ def test_contract_and_exact_source_derivation_pass() -> None:
 
 
 def test_deterministic_check_starts_no_native_process() -> None:
+    existing = [path.exists() for path in subject.OUTPUT_PATHS]
+    if any(existing) and not all(existing):
+        with pytest.raises(
+            subject.native_base.base.ClosedSubcoordinateError,
+            match="partial_native_output_state",
+        ):
+            subject.deterministic_check()
+        return
     result = subject.deterministic_check()
-    expected_state = (
-        "consumed" if all(path.exists() for path in subject.OUTPUT_PATHS) else "fresh"
-    )
+    expected_state = "consumed" if all(existing) else "fresh"
     assert result["artifact_state"] == expected_state
     assert result["native_process_count"] == (1 if expected_state == "consumed" else 0)
 
@@ -124,6 +130,20 @@ def test_runner_terminal_precedes_broader_composition_fallback() -> None:
     assert preset < broader
     assert source.count('emit("preset_mount_failure_attributed", null)') == 1
     assert source.count('emit("preset_composition_failure_attributed", null)') == 1
+    assert source.count(subject.SIDECAR_SCHEMA) == 1
+    assert subject.INTENDED_SIDECAR_SCHEMA not in source
+
+
+def test_rejected_sidecar_envelope_is_not_rewritten_as_absent(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    path = tmp_path / "process-envelope.json"
+    original = subject.PROCESS_ENVELOPE_PATH.read_bytes()
+    path.write_bytes(original)
+    monkeypatch.setattr(subject, "PROCESS_ENVELOPE_PATH", path)
+    terminal = subject.build_controller_terminal(None)
+    assert terminal["result"] == "runner_link_or_apply_absence"
+    assert path.read_bytes() == original
 
 
 def test_guard_imports_exact_materialized_modules() -> None:

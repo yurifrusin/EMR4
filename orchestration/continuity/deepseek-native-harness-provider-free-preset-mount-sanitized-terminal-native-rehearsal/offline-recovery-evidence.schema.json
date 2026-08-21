@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "recovery_candidate_source", "consumed_candidate_source", "result", "failure_classification", "native_terminal", "new_bridge_runtime_path_proved", "inputs", "retained_artifacts", "provider_boundary", "cleanup", "unavailable_launch_observations", "claim_boundary"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_sanitized_terminal_offline_recovery_evidence.v1"},
+    "operation_id": {"type": "string"},
+    "recovery_candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "consumed_candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {"const": "recovered_finite_terminal"},
+    "failure_classification": {"const": "CONTROLLER_SCHEMA_VERSION_AND_ENVELOPE_COMPOSITION_DEFECT"},
+    "native_terminal": {"type": "object"},
+    "new_bridge_runtime_path_proved": {"const": false},
+    "inputs": {"type": "object"},
+    "retained_artifacts": {"type": "object"},
+    "provider_boundary": {"type": "object"},
+    "cleanup": {"type": "object"},
+    "unavailable_launch_observations": {"type": "object"},
+    "claim_boundary": {"type": "object"}
+  }
+}

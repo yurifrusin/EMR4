@@ -19,7 +19,7 @@
     "database_invocation_count", "docker_invocation_count"
   ],
   "properties": {
-    "schema_version": {"const": "ariadne.native_harness_preset_mount_sanitized_terminal_sidecar.v1"},
+    "schema_version": {"const": "ariadne.native_harness_preset_composition_safe_terminal_sidecar.v1"},
     "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal"},
     "execution_attempt_id": {"const": "preset-mount-sanitized-terminal-native-attempt-001"},
     "candidate_source": {"$ref": "#/$defs/oid"},

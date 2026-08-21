@@ -68,7 +68,12 @@ SANITIZER_MATERIALIZED_NAME = (
 FULL_OID = re.compile(r"^[0-9a-f]{40}$")
 SAFE_DETAIL = native_base.SAFE_DETAIL
 MAX_SIDECAR_BYTES = native_base.MAX_SIDECAR_BYTES
-SIDECAR_SCHEMA = "ariadne.native_harness_preset_mount_sanitized_terminal_sidecar.v1"
+SIDECAR_SCHEMA = (
+    "ariadne.native_harness_preset_composition_safe_terminal_sidecar.v1"
+)
+INTENDED_SIDECAR_SCHEMA = (
+    "ariadne.native_harness_preset_mount_sanitized_terminal_sidecar.v1"
+)
 EVIDENCE_SCHEMA = "ariadne.native_harness_preset_mount_sanitized_terminal_evidence.v1"
 PROCESS_ENVELOPE_SCHEMA = (
     "ariadne.native_harness_preset_mount_sanitized_terminal_process_envelope.v1"
@@ -170,6 +175,9 @@ def validate_runner_source(payload: bytes) -> dict[str, Any]:
         "bridge_derivation_checks_all_pass": all(
             derivation["bridge_checks"].values()
         ),
+        "emitted_sidecar_schema_token_exact": source.count(SIDECAR_SCHEMA) == 1,
+        "unemitted_successor_schema_token_absent": INTENDED_SIDECAR_SCHEMA
+        not in source,
     }
     if not all(checks.values()):
         raise native_base.base.ClosedSubcoordinateError(
@@ -577,10 +585,23 @@ def read_sidecar(
 
 def build_controller_terminal(sidecar: dict[str, Any] | None) -> dict[str, Any]:
     if sidecar is None:
-        _persist_process_envelope(
-            candidate_source=_git("rev-parse", "HEAD"),
-            sidecar_payload=None,
-        )
+        if PROCESS_ENVELOPE_PATH.exists():
+            envelope = json.loads(PROCESS_ENVELOPE_PATH.read_bytes())
+            schema = json.loads(PROCESS_ENVELOPE_SCHEMA_PATH.read_bytes())
+            jsonschema.Draft202012Validator(schema).validate(envelope)
+            if (
+                envelope["sidecar_file_seen"] is not True
+                or envelope["sidecar_semantics_interpreted"] is not False
+                or envelope["stream_content_retained"] is not False
+            ):
+                raise native_base.base.ClosedSubcoordinateError(
+                    "existing_rejected_sidecar_envelope_invalid"
+                )
+        else:
+            _persist_process_envelope(
+                candidate_source=_git("rev-parse", "HEAD"),
+                sidecar_payload=None,
+            )
         return {
             "result": "runner_link_or_apply_absence",
             "last_admitted_stage": None,

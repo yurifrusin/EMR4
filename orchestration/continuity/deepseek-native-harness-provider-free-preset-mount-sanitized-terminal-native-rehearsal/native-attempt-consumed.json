@@ -1,0 +1,9 @@
+{
+  "candidate_source": "c1ae13df334dfdffefb229c3ae5a502a7251451c",
+  "execution_attempt_id": "preset-mount-sanitized-terminal-native-attempt-001",
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+  "resume_permitted": false,
+  "retry_count": 0,
+  "schema_version": "ariadne.native_harness_agent_factory_diagnostic_attempt.v1",
+  "state": "consumed"
+}

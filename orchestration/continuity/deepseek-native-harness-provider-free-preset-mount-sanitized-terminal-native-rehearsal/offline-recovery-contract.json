@@ -1,0 +1,61 @@
+{
+  "schema_version": "ariadne.native_harness_sanitized_terminal_offline_recovery_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-offline-admission-recovery",
+  "planning_source": "6e60331ca6d5d003b852b837a6d668d411b1d482",
+  "consumed_operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+  "execution_attempt_id": "preset-mount-sanitized-terminal-native-attempt-001",
+  "consumed_candidate_source": "c1ae13df334dfdffefb229c3ae5a502a7251451c",
+  "input_bindings": {
+    "attempt_consumed_sha256": "d1ff5db9937066e4dd435fc60e34788907a81d7e9e58f1f4d0754b1dbfd5c6b1",
+    "process_envelope_sha256": "98ee98f80184f1fa96822740eb618b31513e5416e9d13badafbf9514572604aa",
+    "sidecar_bytes": 1646,
+    "sidecar_sha256": "e76534cfe263a0d4239182338d5fdbe2515669fd4dd258107b94e1cf338f7eb4",
+    "observed_sidecar_schema": "ariadne.native_harness_preset_composition_safe_terminal_sidecar.v1",
+    "intended_sidecar_schema": "ariadne.native_harness_preset_mount_sanitized_terminal_sidecar.v1"
+  },
+  "source_hashes": {
+    "runner_sha256": "871fb7fc9d2d8a93e5e67c41a4c0f18af7ba8a23d0a3664505f149199befb9cb",
+    "effective_tool_guard_sha256": "440e7e60bd8a8a1b6c33a4e64ae241c51cd4e126ce6422dc0fcba39b41ec4151",
+    "preset_mount_bridge_sha256": "867b32001030786018cdc8423179902869eed92a2d35f62dc6bb83eb4c6ab428",
+    "preset_mount_sanitizer_sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f",
+    "readiness_sentinel_sha256": "6ff4ff7da4b0bc4a488d1cf79e8412ebb959d8d2c4061683196cf4fa5f4c8de4",
+    "preset_sha256": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1",
+    "fixed_identity_sha256": "83af2bbc4a8cf436f68e26a9f72d2002c9c34a6f791423724f46f32bcb512868",
+    "target_path_sha256": "f1a4634e24e1cde4bcddfcc88e932a44d75843f6c8a47c1568599775f219c72d"
+  },
+  "retained_layout": {
+    "root_prefix": "dsh-agent-factory-diagnostic-",
+    "bundle_parent": "bundle",
+    "sidecar_relative": "control/post-hmr-diagnostic.json",
+    "readiness_relative": "readiness.jsonl",
+    "network_relative": "network.jsonl",
+    "broker_relative": "control/broker-request-reading.json",
+    "proof_relative": "installation/proof",
+    "target_relative": "workspace/authored_synthetic_control_probe.py"
+  },
+  "expected_readiness": ["sentinel_activated", "stock_headless_hmr_ready"],
+  "expected_terminal": {
+    "result": "preset_composition_failure_attributed",
+    "last_admitted_stage": "private_identity_admitted",
+    "error_class": null,
+    "safe_guard_coordinate": "EFFECTIVE_TOOL_COMPOSITION_UNCLASSIFIED",
+    "safe_guard_detail": null,
+    "preset_mount_terminal": null
+  },
+  "required_zero_fields": [
+    "live_agent_count", "live_session_count", "session_created_event_count",
+    "agent_created_event_count", "agent_session_start_event_count", "turn_count",
+    "request_count", "broker_process_count", "broker_request_count",
+    "occupied_worker_count", "model_request_count", "provider_request_count",
+    "database_invocation_count", "docker_invocation_count"
+  ],
+  "recovery_process_budget": {
+    "node_process_count": 0,
+    "native_harness_process_count": 0,
+    "worker_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "retry_count": 0,
+    "resume_count": 0
+  }
+}
