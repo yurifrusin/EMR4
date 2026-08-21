@@ -1,0 +1,124 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free structured diagnostic native-boot observability rehearsal",
+    "completed_stage": "The single authorised native attempt consumed exactly one pinned rc.7 process, exited one on the authored missing profile, accepted a v2 structured entrypoint-import terminal before HMR, recorded zero broker/session/prompt/tool/model/provider/network activity and proved exact process, raw-stream and disposable-root cleanup.",
+    "next_executable_stage": "commit_the_exact_passing_terminal_evidence_and_report_then_run_the_deterministic_closeout_clockwork",
+    "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "253b4071ca2758da948a618aa86b5393fab0f1de",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "cc26371f09be60f44b9c7ca13e90d33617204b5c",
+    "reason_codes": [],
+    "resolved_commit": "253b4071ca2758da948a618aa86b5393fab0f1de",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "253b4071ca2758da948a618aa86b5393fab0f1de"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "cc26371f09be60f44b9c7ca13e90d33617204b5c",
+    "branch_origin_aligned": false,
+    "head": "cc26371f09be60f44b9c7ca13e90d33617204b5c",
+    "origin_branch_commit": "90e40cc8fdc154ca48e79dbfb24df68e7f05b558",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 660
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "single_native_boot_result_precommit",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The evidence subject was the provider-free Harness entrypoint, not a worker; exact local terminal evidence already supplies the result.",
+        "work_packages": []
+      },
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Provider calls remain closed and deterministic terminal, process-count and cleanup postconditions passed.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and explicit evidence staging is serial stateful work.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "evidence_schema_failure",
+      "staged_scope_differs_from_named_files",
+      "closeout_detects_nonmechanical_conflict"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "attempt 001 is consumed and immutable",
+      "explicit-path stage exact result artifacts only",
+      "commit evidence before closeout clockwork"
+    ]
+  },
+  "planned_action": "commit_the_single_passing_native_boot_terminal_exact_provider_free_evidence_and_report_on_the_task_branch_only",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-plan.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/pre-hmr-startup-terminal.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-report.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-preexecution-receipt.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns deterministic terminal acceptance and the exact task-branch evidence commit. No DeepSeek worker, Gemini provider or native subagent is dispatched.",
+    "git_refs_and_worktree": "Machine snapshot alone owns exact Git objects. Explicit-path staging must include only the result receipt, runtime state, terminal, evidence and report, preserve docs/branding and all unrelated untracked files, and keep all four protected refs fixed and aligned.",
+    "live_handover_current_baton": "The live baton and lease checkpoint admit exactly one provider-free pinned rc.7 authored-missing-profile native entrypoint execution through the accepted canonical wrapper.",
+    "protected_evidence_boundaries": "The committed result proves only one pinned rc.7 provider-free pre-HMR diagnostic composition. It admits no broker, worker session, prompt, tool, model/provider request, raw stream, product/data, deployment, protected evidence or protected ref."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

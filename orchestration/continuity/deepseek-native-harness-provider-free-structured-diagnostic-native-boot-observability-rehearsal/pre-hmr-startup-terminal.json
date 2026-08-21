@@ -1,0 +1,44 @@
+{
+  "attempt_id": "structured-diagnostic-native-boot-observability-attempt-001",
+  "candidate_source": "253b4071ca2758da948a618aa86b5393fab0f1de",
+  "cause": "structured_entrypoint_import_rejected",
+  "classification_byte_limit_per_stream": 65536,
+  "controller_coordinate": "native_process_exited_nonzero",
+  "exit_code": 1,
+  "hmr_event_count": 0,
+  "matched_signature_groups": [],
+  "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+  "raw_streams_retained": false,
+  "schema_version": "ariadne.native_harness_pre_hmr_startup_terminal.v2",
+  "stage": "native_process_started_before_first_hmr_event",
+  "stderr": {
+    "byte_count": 1425,
+    "sha256": "e23d4038afe003535be5e6176b2d769cbdfcbe48942fe68c5c4f836b28d6e0f7"
+  },
+  "stdout": {
+    "byte_count": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "structured_diagnostic": {
+    "attempt_id": "structured-diagnostic-native-boot-observability-attempt-001",
+    "candidate_source": "253b4071ca2758da948a618aa86b5393fab0f1de",
+    "cause_chain": [
+      {
+        "aggregate_shape": "none",
+        "code_coordinate": "none",
+        "config_stage": "none",
+        "error_kind": "error",
+        "message_coordinate": "none",
+        "position": 0
+      }
+    ],
+    "cause_chain_cycle_detected": false,
+    "cause_chain_truncated": false,
+    "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+    "phase": "entrypoint_import_rejected",
+    "raw_error_message_retained": false,
+    "raw_paths_retained": false,
+    "raw_stack_retained": false,
+    "schema_version": "ariadne.native_harness_pre_hmr_structured_diagnostic.v1"
+  }
+}
