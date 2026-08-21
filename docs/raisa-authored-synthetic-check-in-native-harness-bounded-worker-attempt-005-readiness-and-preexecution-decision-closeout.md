@@ -49,8 +49,11 @@ lease, rather than operation identity alone. Its first correction named a
 nonexistent pointer constant and failed closed before recomputation; the test
 now uses the subject's exported clockwork root. The widened rerun then caught
 one stale paired 9/75 count assertion after the evidence advanced to 10/76.
-Revision 598 records AER-0810 through AER-0818; all 818 incidents are contained
-or corrected and none are open. No attempt-005 process or provider request ran.
+The next dry check rejected descriptive incident stage/state labels outside the
+register's closed vocabulary; they are now schema-admitted before source
+freeze. Revision 599 records AER-0810 through AER-0819; all 819 incidents are
+contained or corrected and none are open. No attempt-005 process or provider
+request ran.
 
 ## Parallelism closeout
 

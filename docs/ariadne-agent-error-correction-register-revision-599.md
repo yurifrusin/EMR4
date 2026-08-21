@@ -1,17 +1,17 @@
-# Ariadne agent error and correction register — revision 598
+# Ariadne agent error and correction register — revision 599
 
 <!-- ariadne-agent-error-register-reading
-revision: 598
-incident_count: 818
-new_incident_ids: AER-0810,AER-0811,AER-0812,AER-0813,AER-0814,AER-0815,AER-0816,AER-0817,AER-0818
+revision: 599
+incident_count: 819
+new_incident_ids: AER-0810,AER-0811,AER-0812,AER-0813,AER-0814,AER-0815,AER-0816,AER-0817,AER-0818,AER-0819
 open_incident_count: 0
 -->
 
 This revision note supersedes the unpublished revision-595 through
-revision-597 drafts for the attempt-005 readiness closeout. It binds the five
-earlier contained readiness observations plus the successor-boundary and three
-postrollback regression observations. The canonical JSON register and pattern
-report remain clockwork-owned.
+revision-598 drafts for the attempt-005 readiness closeout. It binds the five
+earlier contained readiness observations plus the successor-boundary, three
+postrollback regression and incident-vocabulary observations. The canonical
+JSON register and pattern report remain clockwork-owned.
 
 ## AER-0810 through AER-0814
 
@@ -58,3 +58,14 @@ failed only on that stale value. The paired assertions now advance with the
 evidence, and future test-count changes are treated as one mechanical edit set
 covering both the evidence fields and their exact binding assertions. No
 Harness process or provider request ran.
+
+## AER-0819
+
+The first correction source described its follow-up incident stages as
+`postpublication_verification` and `postrollback_verification`, and described
+the rolled-back canonical state as `canonical_rolled_back`. Those values were
+clear prose but were outside the register's closed vocabularies. The read-only
+clockwork check rejected at `tick_incident_stage` with zero publication. The
+observations now use the admitted `closeout` stage and canonical states, and a
+complete intent-schema admission is required before the next source commit.
+No Harness process or provider request ran.

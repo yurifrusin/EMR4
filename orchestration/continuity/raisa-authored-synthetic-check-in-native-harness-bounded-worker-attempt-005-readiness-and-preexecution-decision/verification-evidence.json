@@ -94,6 +94,13 @@
       "count": 1,
       "outcome": "widened_packet_failed_only_on_stale_expected_counts",
       "correction": "Update the paired verification assertions to the post-closeout 10 and 76 test counts."
+    },
+    {
+      "incident_id": "AER-0819",
+      "coordinate": "clockwork_incident_closed_vocabulary",
+      "count": 1,
+      "outcome": "read_only_clockwork_check_rejected_with_zero_publication",
+      "correction": "Use admitted closeout and canonical-state values and validate the whole incident-bearing intent before commit."
     }
   ],
   "activity": {

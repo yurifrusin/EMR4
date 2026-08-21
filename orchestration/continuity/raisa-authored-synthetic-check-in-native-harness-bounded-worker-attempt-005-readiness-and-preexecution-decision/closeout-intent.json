@@ -53,9 +53,9 @@
         },
         {
           "id": "accept-contained-readiness-procedure-observations",
-          "source": "docs/ariadne-agent-error-correction-register-revision-598.md",
+          "source": "docs/ariadne-agent-error-correction-register-revision-599.md",
           "status": "accepted",
-          "summary": "Accept AER-0810 through AER-0818 as contained or corrected with no open incident and no Harness/provider process cost."
+          "summary": "Accept AER-0810 through AER-0819 as contained or corrected with no open incident and no Harness/provider process cost."
         }
       ],
       "claim_scope": [
@@ -101,7 +101,7 @@
           "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/contract.schema.json",
           "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/deterministic-evidence.schema.json",
           "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-historical-test-selection.md",
-          "docs/ariadne-agent-error-correction-register-revision-598.md",
+          "docs/ariadne-agent-error-correction-register-revision-599.md",
           "orchestration/human_inbox/yuri/2026-08-21--native-harness-attempt-005-readiness.md"
         ]
       },
@@ -206,7 +206,7 @@
       "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-pre-verifier-receipt.json",
       "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-001-rejected-receipt.json",
       "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-002-rejected-receipt.json",
-      "docs/ariadne-agent-error-correction-register-revision-598.md",
+      "docs/ariadne-agent-error-correction-register-revision-599.md",
       "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-closeout.md",
       "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-sol-acceptance.md",
       "orchestration/human_inbox/yuri/2026-08-21--native-harness-attempt-005-readiness.md"
@@ -249,7 +249,7 @@
       "detection_method": "PowerShell parser errors occurred before output, file mutation, test execution or process launch.",
       "evidence_paths": [
         "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/verification-evidence.json",
-        "docs/ariadne-agent-error-correction-register-revision-598.md"
+        "docs/ariadne-agent-error-correction-register-revision-599.md"
       ],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
@@ -259,7 +259,7 @@
         "status": "control_added",
         "action": "Assign each foreach result to a rows variable before piping the variable to JSON conversion.",
         "prevention_control": "Use the rows-assignment inventory template for every future PowerShell foreach projection.",
-        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-598.md"]
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-599.md"]
       },
       "baton_summary": "records two rejected read-only inventory commands and their common corrected template."
     },
@@ -345,7 +345,7 @@
       "detection_method": "The read-only clockwork check rejected at tick_transaction_prepare with authorized_opening_object_required before publication.",
       "evidence_paths": [
         "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-001-rejected-receipt.json",
-        "docs/ariadne-agent-error-correction-register-revision-598.md"
+        "docs/ariadne-agent-error-correction-register-revision-599.md"
       ],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
@@ -378,7 +378,7 @@
       "detection_method": "The read-only clockwork check rejected at tick_transaction_prepare with authorized_opening_boundary_unknown before publication.",
       "evidence_paths": [
         "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-002-rejected-receipt.json",
-        "docs/ariadne-agent-error-correction-register-revision-598.md"
+        "docs/ariadne-agent-error-correction-register-revision-599.md"
       ],
       "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
@@ -403,7 +403,7 @@
       "model": null,
       "reasoning_level": "high",
       "transport": "local_pytest_cli",
-      "stage": "postpublication_verification",
+      "stage": "closeout",
       "category": "operator_error",
       "process_severity": "low",
       "expected_invariant": "Every successor latch must retain each canonical closed-surface boundary required by the baton consistency control, even when a narrower companion boundary is also present.",
@@ -411,9 +411,9 @@
       "detection_method": "The final postpublication governance assertion failed closed; the clockwork generation was rolled back byte-exactly before any attempt-005 preparation, Harness process or provider request.",
       "evidence_paths": [
         "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-postpublication-attempt-001-rejected-receipt.json",
-        "docs/ariadne-agent-error-correction-register-revision-598.md"
+        "docs/ariadne-agent-error-correction-register-revision-599.md"
       ],
-      "candidate_state": "canonical_rolled_back",
+      "candidate_state": "canonical_unchanged",
       "workflow_disposition": "revision_required",
       "recurrence_signature": "orchestrator.successor_latch_omitted_canonical_closed_surface_boundary",
       "causal_claim_level": "observation_only",
@@ -437,7 +437,7 @@
       "model": null,
       "reasoning_level": "high",
       "transport": "local_pytest_cli",
-      "stage": "postrollback_verification",
+      "stage": "closeout",
       "category": "operator_error",
       "process_severity": "low",
       "expected_invariant": "The readiness regression must recompute the stored clockwork reading only while its exact generation and lease remain live.",
@@ -445,7 +445,7 @@
       "detection_method": "The focused pytest run failed closed with clockwork_reading_mismatch and no Node, Harness, broker, provider or network process.",
       "evidence_paths": [
         "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
-        "docs/ariadne-agent-error-correction-register-revision-598.md"
+        "docs/ariadne-agent-error-correction-register-revision-599.md"
       ],
       "candidate_state": "accepted_candidate_changed",
       "workflow_disposition": "revision_required",
@@ -470,7 +470,7 @@
       "model": null,
       "reasoning_level": "high",
       "transport": "local_pytest_cli",
-      "stage": "postrollback_verification",
+      "stage": "closeout",
       "category": "operator_error",
       "process_severity": "low",
       "expected_invariant": "A regression must consume the exact exported clockwork-root coordinate supplied by its subject module.",
@@ -478,7 +478,7 @@
       "detection_method": "The focused pytest run failed closed with AttributeError before deterministic recomputation, Harness startup or provider activity.",
       "evidence_paths": [
         "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
-        "docs/ariadne-agent-error-correction-register-revision-598.md"
+        "docs/ariadne-agent-error-correction-register-revision-599.md"
       ],
       "candidate_state": "accepted_candidate_changed",
       "workflow_disposition": "revision_required",
@@ -504,7 +504,7 @@
       "model": null,
       "reasoning_level": "high",
       "transport": "local_pytest_cli",
-      "stage": "postrollback_verification",
+      "stage": "closeout",
       "category": "operator_error",
       "process_severity": "low",
       "expected_invariant": "When a regression is added to the focused and widened packets, its evidence counts and the assertions binding those counts must advance together.",
@@ -513,7 +513,7 @@
       "evidence_paths": [
         "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/verification-evidence.json",
         "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
-        "docs/ariadne-agent-error-correction-register-revision-598.md"
+        "docs/ariadne-agent-error-correction-register-revision-599.md"
       ],
       "candidate_state": "accepted_candidate_changed",
       "workflow_disposition": "revision_required",
@@ -529,6 +529,40 @@
         ]
       },
       "baton_summary": "records the stale paired count assertion and its mechanical synchronization control."
+    },
+    {
+      "attempt_key": "attempt-005-readiness-incident-vocabulary-admission-001",
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "role": "orchestrator",
+      "resource_id": "clockwork-incident-vocabulary-admission",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every incident observation must use the clockwork register's closed stage and candidate-state vocabularies before its source commit is frozen.",
+      "observed_error": "The first correction source used descriptive postpublication_verification, postrollback_verification and canonical_rolled_back values outside the admitted vocabulary.",
+      "detection_method": "The read-only clockwork dry check rejected at tick_incident_stage with zero publication and no Harness/provider activity.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-003-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-599.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_incident_used_unadmitted_stage_and_candidate_state",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Map all closeout follow-up observations to the admitted closeout stage and canonical_unchanged or accepted_candidate_changed states, then run intent validation before commit.",
+        "prevention_control": "Validate the complete incident-bearing intent against the clockwork schema before freezing its Git source.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the rejected descriptive incident vocabulary and the new pre-commit admission control."
     }
   ]
 }

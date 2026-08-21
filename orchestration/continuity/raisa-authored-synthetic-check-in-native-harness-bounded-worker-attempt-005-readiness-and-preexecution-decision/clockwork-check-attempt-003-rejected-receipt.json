@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.clockwork_rejected_receipt.v1",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+  "source_commit": "3177aa7c5e843ee3621e6fbda6f8d2ea9cd29a93",
+  "mode": "check",
+  "result": "revision_required",
+  "rejection": "tick_incident_stage",
+  "live_publication_count": 0,
+  "native_harness_process_count": 0,
+  "provider_request_count": 0,
+  "correction": "use_closed_incident_stage_and_candidate_state_vocabularies_then_validate_before_commit"
+}
