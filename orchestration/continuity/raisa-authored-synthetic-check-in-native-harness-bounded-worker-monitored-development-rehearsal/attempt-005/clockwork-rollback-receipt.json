@@ -1,0 +1,9 @@
+{
+  "schema_version": "ariadne.governance_live_tick_rollback.v1",
+  "status": "passed",
+  "rolled_back_from_generation_id": "gen-e0680180d5f854a01d8a895bdff03105f8a3afbd72b0cd644fab6076865d185d",
+  "selected_generation_id": "gen-f127ed08ee563b3588cb25d3b1dab8b531fb219eb94857e443e63e802a0d1b86",
+  "previous_source_commit": "86a91cc86402a3d89ee2f00a86bd6aaee062985b",
+  "lease_sequence": 122,
+  "byte_exact": true
+}

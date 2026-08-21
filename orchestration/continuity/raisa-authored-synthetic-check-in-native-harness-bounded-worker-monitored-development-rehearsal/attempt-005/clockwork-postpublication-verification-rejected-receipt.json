@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.governance_postpublication_verification_rejected_receipt.v1",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
+  "source_commit": "86a91cc86402a3d89ee2f00a86bd6aaee062985b",
+  "generation_id": "gen-e0680180d5f854a01d8a895bdff03105f8a3afbd72b0cd644fab6076865d185d",
+  "lease_sequence": 121,
+  "status": "revision_required",
+  "failed_selector": "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py::test_attempt_five_provider_free_check_reports_zero_activity",
+  "reason": "historical_live_latch_selector_not_applicable_after_successor_transition",
+  "other_selected_failures": 0,
+  "native_harness_processes": 0,
+  "provider_requests": 0
+}

@@ -53,7 +53,7 @@
           "id": "accept-contained-attempt-005-workflow-incidents",
           "source": "docs/ariadne-agent-error-correction-register-revision-595.md",
           "status": "accepted",
-          "summary": "Accept six corrected or contained workflow and diagnostic observations with none open."
+          "summary": "Accept eight corrected or contained workflow and diagnostic observations with none open."
         }
       ],
       "claim_scope": [
@@ -99,6 +99,8 @@
           "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-attempt-consumed.json",
           "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-report.md",
           "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/postterminal-command-manifest.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/clockwork-postpublication-verification-rejected-receipt.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/clockwork-rollback-receipt.json",
           "docs/ariadne-agent-error-correction-register-revision-595.md",
           "orchestration/human_inbox/yuri/2026-08-21--native-harness-attempt-005-terminal.md"
         ]
@@ -149,7 +151,9 @@
       {"incident_id": "historical-live-latch-selector-applied", "source_id": "attempt-005-historical-selector-001", "peers": []},
       {"incident_id": "postterminal-test-dead-conditional", "source_id": "attempt-005-postterminal-test-expression-001", "peers": []},
       {"incident_id": "post-hmr-runner-diagnostic-too-generic", "source_id": "attempt-005-runner-diagnostic-gap-001", "peers": []},
-      {"incident_id": "closeout-incident-category-unadmitted", "source_id": "attempt-005-closeout-category-vocabulary-001", "peers": []}
+      {"incident_id": "closeout-incident-category-unadmitted", "source_id": "attempt-005-closeout-category-vocabulary-001", "peers": []},
+      {"incident_id": "postcloseout-live-latch-selector-retained", "source_id": "attempt-005-postcloseout-selector-001", "peers": []},
+      {"incident_id": "rollback-command-used-unsupported-intent", "source_id": "attempt-005-rollback-argument-001", "peers": []}
     ],
     "broker": {
       "enabled": false,
@@ -168,7 +172,7 @@
       {
         "command_id": "attempt_005_governance_tests",
         "executable": ".venv/Scripts/python.exe",
-        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_current_baton_consistency.py"],
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_current_baton_consistency.py"],
         "completion_contract": "final_exit_code_zero_required"
       },
       {
@@ -195,6 +199,8 @@
       "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-terminal.json",
       "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/efficacy-reading.json",
       "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/diagnosis.md",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/clockwork-postpublication-verification-rejected-receipt.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/clockwork-rollback-receipt.json",
       "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
       "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py",
       "docs/ariadne-agent-error-correction-register-revision-595.md",
@@ -387,6 +393,62 @@
         "evidence_paths": ["orchestration_harness/governance_clockwork_tick.py", "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/closeout-intent.json"]
       },
       "baton_summary": "records the rejected descriptive category and pre-commit closed-vocabulary correction."
+    },
+    {
+      "attempt_key": "attempt-005-postcloseout-selector-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-005-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-postcloseout-test-selection",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "A postcloseout packet must exclude every test whose contract requires the closed operation to remain the live latch.",
+      "observed_error": "The first postpublication packet retained attempt 005's prelaunch-only provider-free check after clockwork had correctly activated the successor latch.",
+      "detection_method": "The 545-selector packet failed only the live-latch-bound provider-free check; all other selectors passed and zero Harness/provider activity occurred.",
+      "evidence_paths": ["orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/clockwork-postpublication-verification-rejected-receipt.json", "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/clockwork-rollback-receipt.json", "docs/ariadne-agent-error-correction-register-revision-595.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.postcloseout_packet_retained_closed_operation_live_latch_selector",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Roll back the published generation byte-exactly, remove the selector from both postterminal command manifests and rerun before republishing.",
+        "prevention_control": "Closeout verification classifies selectors against the prospective successor latch before intent source freeze.",
+        "evidence_paths": ["orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/postterminal-command-manifest.json", "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/closeout-intent.json"]
+      },
+      "baton_summary": "records the obsolete postcloseout latch selector, byte-exact rollback and corrected prospective-latch selection."
+    },
+    {
+      "attempt_key": "attempt-005-rollback-argument-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-005-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-clockwork-rollback-command",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Clockwork rollback must use its exact argument-free predecessor-selection interface.",
+      "observed_error": "The first rollback invocation supplied the unsupported --intent argument.",
+      "detection_method": "Argparse rejected the command before state change, then the exact --rollback invocation passed byte-exactly at lease 122.",
+      "evidence_paths": ["orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/clockwork-rollback-receipt.json", "docs/ariadne-agent-error-correction-register-revision-595.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_rollback_supplied_unsupported_intent_argument",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Invoke clockwork rollback without an intent argument and preserve the byte-exact rollback receipt.",
+        "prevention_control": "Read the rollback CLI help and use the fixed argument-free rollback shape before execution.",
+        "evidence_paths": ["scripts/ariadne_governance_clockwork_tick.py", "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/clockwork-rollback-receipt.json"]
+      },
+      "baton_summary": "records the rejected rollback argument and exact argument-free correction."
     }
   ]
 }

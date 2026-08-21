@@ -2,12 +2,12 @@
 
 <!-- ariadne-agent-error-register-reading
 revision: 595
-incident_count: 826
-new_incident_ids: AER-0821,AER-0822,AER-0823,AER-0824,AER-0825,AER-0826
+incident_count: 828
+new_incident_ids: AER-0821,AER-0822,AER-0823,AER-0824,AER-0825,AER-0826,AER-0827,AER-0828
 open_incident_count: 0
 -->
 
-This revision note binds six corrected or contained attempt-005 observations
+This revision note binds eight corrected or contained attempt-005 observations
 to the prospective clockwork-projected register. The canonical JSON register
 and pattern report remain clockwork-owned. One clockwork tick advances the
 register once, irrespective of the number of observations.
@@ -59,3 +59,20 @@ category vocabulary. Direct schema admission rejected the draft before commit
 or publication. The runner diagnostic observation now uses the admitted
 `harness_failure` category, and the pre-commit admission is rerun on the full
 intent.
+
+## AER-0827
+
+The first postpublication regression packet retained attempt 005's
+prelaunch-only provider-free check after clockwork had correctly moved the
+active latch to the successor. That one selector failed and every other one
+passed. The closeout generation was rolled back byte-exactly; both command
+manifests now exclude the historical live-latch selector and retain the
+postterminal, register, clockwork, active-latch and baton checks.
+
+## AER-0828
+
+The first rollback command incorrectly supplied `--intent`, although rollback
+selects the recorded predecessor generation and accepts no intent argument.
+Argument parsing rejected the command before state change. The corrected
+`--rollback` invocation completed byte-exactly at lease 122, and its receipt is
+preserved.

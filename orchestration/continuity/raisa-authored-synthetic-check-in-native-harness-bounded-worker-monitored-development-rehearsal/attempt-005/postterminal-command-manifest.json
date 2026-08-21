@@ -20,7 +20,6 @@
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
         "tests/test_ariadne_active_operation_latch.py",
         "tests/test_current_baton_consistency.py"
       ]
