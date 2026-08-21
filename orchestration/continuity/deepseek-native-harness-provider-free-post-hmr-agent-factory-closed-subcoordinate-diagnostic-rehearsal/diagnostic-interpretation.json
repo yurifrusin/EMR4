@@ -1,0 +1,61 @@
+{
+  "schema_version": "ariadne.native_harness_agent_factory_diagnostic_interpretation.v1",
+  "operation_id": "deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal",
+  "execution_attempt_id": "post-hmr-agent-factory-diagnostic-attempt-001",
+  "recorded_at": "2026-08-22T03:42:19.3682524+10:00",
+  "result": "accepted_diagnostic_pass",
+  "terminal": "closed_subcoordinate_failure",
+  "last_admitted_stage": "private_identity_admitted",
+  "error_class": "unclassified_error",
+  "accepted_stage_progress": [
+    "runner_apply_entered",
+    "loader_ready",
+    "package_imports_admitted",
+    "services_resolved",
+    "preset_roots_admitted",
+    "preset_roster_admitted",
+    "registries_empty_before_factory",
+    "session_identity_constructed",
+    "agent_factory_invoked",
+    "factory_setup_entered",
+    "private_identity_admitted"
+  ],
+  "failure_interval": {
+    "after": "private_identity_admitted",
+    "before": "preset_composition_admitted",
+    "bounded_operations": [
+      "accepted_effective_tool_guard_call",
+      "exact_guard_result_validation"
+    ],
+    "exact_internal_cause_observed": false
+  },
+  "factory_observations": {
+    "agent_create_invocation_count": 1,
+    "private_agent_preparation_count": 1,
+    "private_session_preparation_count": 1,
+    "live_agent_count": 0,
+    "live_session_count": 0,
+    "lifecycle_announcement_count": 0
+  },
+  "downstream_zero": {
+    "turns": 0,
+    "requests": 0,
+    "broker_processes": 0,
+    "broker_requests": 0,
+    "occupied_workers": 0,
+    "model_requests": 0,
+    "provider_requests": 0,
+    "network_attempts": 0,
+    "database_invocations": 0,
+    "docker_invocations": 0,
+    "target_uses": 0
+  },
+  "cleanup": {
+    "process_absent": true,
+    "disposable_root_absent": true,
+    "package_seed_unchanged": true
+  },
+  "claim_boundary": "The result proves attributable native progress through private identity admission and a failure in the preset-composition interval. It does not prove effective-tool composition, model selection, setup commit, publication veto, worker readiness or occupied model behavior.",
+  "retry_permitted": false,
+  "successor": "deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal"
+}

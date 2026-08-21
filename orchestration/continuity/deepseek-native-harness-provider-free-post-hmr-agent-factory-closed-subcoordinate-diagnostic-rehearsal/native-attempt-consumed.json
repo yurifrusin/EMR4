@@ -1,0 +1,9 @@
+{
+  "candidate_source": "33b4e061b1385abc91ecd170e4abdb563396c3ef",
+  "execution_attempt_id": "post-hmr-agent-factory-diagnostic-attempt-001",
+  "operation_id": "deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal",
+  "resume_permitted": false,
+  "retry_count": 0,
+  "schema_version": "ariadne.native_harness_agent_factory_diagnostic_attempt.v1",
+  "state": "consumed"
+}

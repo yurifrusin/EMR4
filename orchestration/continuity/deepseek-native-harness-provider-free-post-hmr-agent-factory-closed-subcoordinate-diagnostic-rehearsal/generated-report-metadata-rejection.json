@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.generated_report_metadata_rejection.v1",
+  "operation_id": "deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal",
+  "execution_attempt_id": "post-hmr-agent-factory-diagnostic-attempt-001",
+  "recorded_at": "2026-08-22T03:42:19.3682524+10:00",
+  "artifact": {
+    "path": "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/agent-factory-diagnostic-report.md",
+    "sha256": "3b7627251f288f129b4f5747b4dc10ff7f4281b6d4880af6412158ba927fb12a"
+  },
+  "rejected_field": "Timestamp",
+  "rejected_value": "2026-08-22T04:15:00+10:00",
+  "reason": "static_future_timestamp_not_derived_from_execution_or_closeout_clock",
+  "accepted_report_claims_unchanged": true,
+  "authoritative_launch_time_field": "agent-factory-diagnostic-evidence.json:launch.started_at_utc",
+  "raw_runtime_detail_added": false
+}

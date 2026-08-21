@@ -1,0 +1,538 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal",
+    "title": "DeepSeek native Harness provider-free post-HMR agent-factory closed-subcoordinate diagnostic rehearsal",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T03:42:19.3682524+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal",
+      "title": "Post-HMR agent-factory closed-subcoordinate diagnostic rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the bounded provider-free native-Harness control sequence and its narrow deterministic recoveries.",
+          "The distinct native attempt is consumed without retry; no worker turn, model/provider request, target, product, data, deployment, Pages or protected-ref authority opened.",
+          "Both predecessor attempts, their exact negative evidence and the accepted package/runner bindings remain immutable."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-finite-agent-factory-diagnostic-pass",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/agent-factory-diagnostic-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one typed private-identity-admitted terminal as finite diagnostic evidence with exact zero downstream activity and cleanup."
+        },
+        {
+          "id": "reject-agent-creation-worker-readiness-and-composition-claims",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/diagnostic-interpretation.json",
+          "status": "rejected",
+          "summary": "Do not infer effective-tool composition, model selection, commit, publication veto, agent creation, worker readiness or occupied model behavior."
+        },
+        {
+          "id": "accept-preset-composition-failure-interval",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/diagnostic-interpretation.json",
+          "status": "accepted",
+          "summary": "Accept the interval after private identity admission and before preset composition admission while retaining the exact internal guard coordinate as unknown."
+        },
+        {
+          "id": "reject-generated-future-report-timestamp",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/generated-report-metadata-rejection.json",
+          "status": "rejected",
+          "summary": "Reject only the guessed future Markdown timestamp; preserve the exact report and retain its evidence-consistent terminal, counter and cleanup claims."
+        },
+        {
+          "id": "freeze-safe-terminal-bridge-successor",
+          "source": "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-plan.md",
+          "status": "accepted",
+          "summary": "Freeze one distinct process whose runner exposes only the accepted guard sanitizer's closed safe coordinate or the existing prepublication-veto path."
+        },
+        {
+          "id": "accept-sol-diagnostic-closeout",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-agent-factory-diagnostic-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the diagnostic gain and exact containment without opening a DeepSeek worker or model request."
+        }
+      ],
+      "claim_scope": [
+        "One pinned rc.7 process traversed exact readiness and HMR mutation, dynamically imported the bound package dependencies and emitted one typed sidecar.",
+        "The real factory was invoked once and private Agent/Session identity was admitted before the preset-composition interval failed with a closed unclassified coordinate.",
+        "Public registries, lifecycle announcements, turns, requests, broker, worker, model/provider, network, database, Docker and target activity remained zero.",
+        "The process and disposable root were absent, the bundle and package seed remained unchanged, and no raw runtime detail was retained.",
+        "The generated report's static future timestamp is rejected without changing the accepted typed evidence."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/diagnostic-interpretation.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/generated-report-metadata-rejection.json",
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-report-timestamp-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-602.md",
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-register-revision-recovery.md",
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-explicit-cache-root-test-recovery.md",
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-hash-bound-test-recovery.md",
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-incident-category-vocabulary-recovery.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-agent-factory-closed-subcoordinate-diagnostic.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-agent-factory-diagnostic-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-agent-factory-diagnostic-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal_evidence.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/diagnostic-sidecar.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/evidence.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/native-attempt-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/agent-factory-diagnostic-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/agent-factory-diagnostic-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/efficacy-reading.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact safe effective-tool guard coordinate remains unobserved.",
+        "Effective-tool composition, model selection, commit, publication veto, agent creation, worker readiness and occupied model behavior remain unproved.",
+        "All product, data, provider-request, production, release, Pages and protected-integration gates remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Make native DeepSeek worker execution bounded, traceable and governable enough for Raisa development",
+      "outcome": "The first self-reporting native factory attempt narrowed an opaque post-HMR exit to the exact interval after private identity admission and before preset composition admission.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/agent-factory-diagnostic-evidence.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/diagnostic-interpretation.json"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Expose the preset-composition failure through the guard's already accepted safe terminal vocabulary",
+      "why_now": "The native process proved the factory and private identity boundary but retained only an outer unclassified coordinate while the guard already supplies a finite sanitizer.",
+      "outcome": "One distinct process will emit an exact safe guard coordinate or proceed through the prepublication veto without raw error retention.",
+      "unlocks": [
+        "A source-grounded repair for the exact preset-composition defect if a safe guard coordinate is returned.",
+        "A defensible private factory-boundary acceptance if the existing prepublication veto is reached."
+      ],
+      "does_not_solve": [
+        "No occupied worker turn, model/provider request, target edit or coding-performance evidence.",
+        "No product/data action, ordinary-practice enablement, production, deployment, release, Pages or protected integration."
+      ],
+      "evidence": [
+        "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-plan.md",
+        "docs/security/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-threat-model-delta.md"
+      ],
+      "orientation_statement": "Continue the bounded native-Harness control sequence by connecting the accepted guard sanitizer to one distinct no-request process."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal",
+      "active_tranche": "DeepSeek native Harness provider-free preset-composition safe-terminal bridge rehearsal",
+      "objective": "Derive one runner descendant that maps only the accepted effective-tool guard sanitizer's closed safe coordinate into the typed sidecar and runs at most one distinct provider-free native process before any turn, request, target or publication.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and extended authority for the bounded native-Harness control sequence.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_implement_the_safe_guard_terminal_bridge_and_deterministic_admission"
+    },
+    "incidents": [
+      {
+        "incident_id": "generated-report-static-future-timestamp",
+        "source_id": "agent-factory-diagnostic-report-001",
+        "peers": []
+      },
+      {
+        "incident_id": "transactional-contract-evidence-string-shape",
+        "source_id": "agent-factory-clockwork-check-001",
+        "peers": []
+      },
+      {
+        "incident_id": "register-revision-incident-increment-confusion",
+        "source_id": "agent-factory-clockwork-check-002",
+        "peers": []
+      },
+      {
+        "incident_id": "provider-free-deterministic-test-ambient-cache-root",
+        "source_id": "agent-factory-closeout-test-001",
+        "peers": []
+      },
+      {
+        "incident_id": "postexecution-hash-bound-focused-test-edit",
+        "source_id": "agent-factory-closeout-test-002",
+        "peers": []
+      },
+      {
+        "incident_id": "clockwork-incident-category-vocabulary-lapse",
+        "source_id": "agent-factory-clockwork-check-003",
+        "peers": []
+      }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "agent_factory_diagnostic_focused_and_evidence_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "--noconftest",
+          "-p",
+          "no:cacheprovider",
+          "--strict-config",
+          "--strict-markers",
+          "-q",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal_evidence.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "agent_factory_diagnostic_inherited_regressions",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof_evidence.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "agent_factory_diagnostic_governance_regressions",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_agents_handover_archive.py",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "agent_factory_diagnostic_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal_evidence.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "agent_factory_diagnostic_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal_evidence.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "agent_factory_diagnostic_deterministic_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal",
+          "--check"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-agent-factory-diagnostic-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/agent-factory-diagnostic-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/diagnostic-interpretation.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/generated-report-metadata-rejection.json",
+      "docs/ariadne-agent-error-correction-register-revision-602.md",
+      "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-agent-factory-closed-subcoordinate-diagnostic.md",
+      "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-threat-model-delta.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_preset_composition_safe_terminal_bridge_only",
+    "consumed_agent_creation_boundary_and_closed_subcoordinate_attempts_remain_immutable",
+    "accepted_dynamic_import_runner_helper_controller_package_preset_and_guard_bindings_remain_immutable",
+    "one_distinct_fresh_disposable_root_one_native_harness_process_and_one_terminal_only",
+    "accepted_guard_sanitizer_closed_coordinate_and_safe_tool_name_detail_only",
+    "no_raw_error_message_stack_code_path_cause_stream_session_prompt_response_path_or_credential",
+    "at_most_one_agent_factory_invocation_and_zero_published_agents_sessions_or_lifecycle_announcements",
+    "turn_broker_worker_request_model_provider_database_docker_network_counts_remain_zero",
+    "occupied_model_launch_authorized_remains_false",
+    "target_file_creation_and_target_use_remain_false",
+    "no_second_native_process_retry_resume_fallback_or_alternate_transport",
+    "verified_package_only_seed_and_independent_copy_required",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "exact_test_counts_from_completed_machine_output_only",
+    "no_commit_identity_statement_without_current_machine_snapshot_copy",
+    "all_new_narrative_artifacts_require_date_and_brisbane_timestamp",
+    "generated_narrative_timestamps_derive_from_creation_clock_or_typed_evidence",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "agent-factory-diagnostic-report-timestamp-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-agent-factory-diagnostic",
+      "role": "orchestrator",
+      "resource_id": "generated-diagnostic-report-timestamp",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_script_execution",
+      "stage": "closeout",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Every generated narrative timestamp must be measured at artifact creation or copied from an authoritative typed evidence time.",
+      "observed_error": "The generated report used a guessed static 04:15 Brisbane timestamp that was still in the future when the attempt and readback completed.",
+      "detection_method": "The report timestamp was compared with the machine clock and the evidence launch time during immediate postexecution readback.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/agent-factory-diagnostic-report.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/generated-report-metadata-rejection.json",
+        "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-report-timestamp-recovery.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.static_future_timestamp_in_generated_report",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the report bytes, reject only the timestamp metadata, retain the typed launch time as authoritative and add an evidence regression test.",
+        "prevention_control": "Generated narrative timestamps come from the creation clock or an already typed evidence timestamp; guessed static future values are forbidden.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/generated-report-metadata-rejection.json",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal_evidence.py",
+          "docs/ariadne-agent-error-correction-register-revision-602.md"
+        ]
+      },
+      "baton_summary": "records and corrects the generated report's guessed future timestamp without changing the accepted typed diagnostic evidence."
+    },
+    {
+      "attempt_key": "agent-factory-clockwork-check-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-agent-factory-diagnostic",
+      "role": "orchestrator",
+      "resource_id": "transactional-contract-evidence-projection",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Transactional node contract_evidence is empty unless it contains the graph's structured contract-evidence objects; ordinary artifact paths belong in the evidence inventory.",
+      "observed_error": "The first prospective intent placed three ordinary file-path strings in contract_evidence and the clockwork rejected the graph projection before commands or publication.",
+      "detection_method": "The clockwork validated the prospective Continuity and Compass graph and returned contract_evidence_object_required while every canonical byte remained unchanged.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-contract-evidence-shape-recovery.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.transactional_closeout_contract_evidence_string_shape",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep the exact contract and schema paths in the node artifact inventory and make contract_evidence empty because no structured contract-evidence object is needed.",
+        "prevention_control": "Ordinary file paths are routed through evidence.artifacts; contract_evidence is reserved for schema-valid structured graph objects.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-contract-evidence-shape-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-602.md"
+        ]
+      },
+      "baton_summary": "records the rejected contract-evidence string shape and correct artifact-inventory routing."
+    },
+    {
+      "attempt_key": "agent-factory-clockwork-check-002",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-agent-factory-diagnostic",
+      "role": "orchestrator",
+      "resource_id": "agent-error-register-revision-reading",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The prospective register revision increments once per accepted clockwork transaction, while incident population and incident identifiers increment independently for every observation in that transaction.",
+      "observed_error": "The second prospective intent incorrectly incremented the register revision once for each of two observations and named revision 603 instead of canonical revision 601 plus one transaction, revision 602.",
+      "detection_method": "The clockwork compared the prospective note with the canonical register and rejected tick_incident_revision_path before commands or publication.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-register-revision-recovery.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.agent_error_revision_confused_with_incident_increment",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use prospective register revision 602, incident population 870 and latest incident AER-0870 for this one transaction containing three observations.",
+        "prevention_control": "Derive the register revision as canonical revision plus one per transaction; derive incident population and identifiers independently from the observation count.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-register-revision-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-602.md"
+        ]
+      },
+      "baton_summary": "records the rejected per-observation revision increment and restores the clockwork's one-revision-per-transaction reading."
+    },
+    {
+      "attempt_key": "agent-factory-closeout-test-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-agent-factory-diagnostic",
+      "role": "orchestrator",
+      "resource_id": "provider-free-deterministic-check-cache-root",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_provider_free_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A deterministic check executed through the provider-free test wrapper supplies every required local resource path explicitly and does not rely on stripped ambient user-location variables.",
+      "observed_error": "The first combined focused/evidence run called deterministic_check without cache_root; the provider-free wrapper had correctly removed LOCALAPPDATA, so the test failed before any native process was created.",
+      "detection_method": "The focused provider-free test gate failed with the typed localappdata_missing guard error while native-process count remained zero.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-explicit-cache-root-test-recovery.md",
+        "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.provider_free_test_omitted_explicit_local_resource_root",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep the hash-bound focused test unchanged and run it through the closeout's no-conftest pytest command, which retains the accepted host cache-location binding without loading repository conftest.",
+        "prevention_control": "Provider-free wrapper suitability is checked against each test's bound local-resource requirements before command-manifest selection; postexecution implementation bytes remain immutable.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-explicit-cache-root-test-recovery.md",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-602.md"
+        ]
+      },
+      "baton_summary": "records the stripped cache-location input and corrects the mutable verifier invocation while preserving the accepted execution source unchanged."
+    },
+    {
+      "attempt_key": "agent-factory-closeout-test-002",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-agent-factory-diagnostic",
+      "role": "orchestrator",
+      "resource_id": "postexecution-hash-bound-focused-test",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_provider_free_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The focused test bound by implementation_bytes remains byte-identical after the native attempt; closeout-only execution-environment corrections occur in the mutable command manifest.",
+      "observed_error": "The first cache-root correction edited the hash-bound focused test, so the next run correctly failed with implementation_digest_mismatch before any native process was created.",
+      "detection_method": "The accepted deterministic source recalculated implementation_bytes and rejected the changed focused-test digest.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-hash-bound-test-recovery.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/contract.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.postexecution_hash_bound_test_edited_for_closeout_environment",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the focused test byte-for-byte and move the environment-sensitive verification choice to the closeout command manifest's no-conftest pytest invocation.",
+        "prevention_control": "After occupied execution, implementation_bytes paths are immutable; closeout verification adaptations are expressed only in unbound verifier orchestration.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-hash-bound-test-recovery.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-602.md"
+        ]
+      },
+      "baton_summary": "records and reverses the hash-bound focused-test edit, moving the correction to mutable closeout orchestration."
+    },
+    {
+      "attempt_key": "agent-factory-clockwork-check-003",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-agent-factory-diagnostic",
+      "role": "orchestrator",
+      "resource_id": "clockwork-incident-category-vocabulary",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every incident observation chooses category directly from EXPECTED_ORIGIN_BY_CATEGORY's closed vocabulary.",
+      "observed_error": "The third prospective clockwork intent used the descriptive categories test_setup_error and protected_evidence_boundary_violation, neither of which belongs to the closed incident vocabulary.",
+      "detection_method": "The clockwork rejected tick_incident_category before commands or canonical publication; direct reading of EXPECTED_ORIGIN_BY_CATEGORY identified operator_error as the admitted category for both observations.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-incident-category-vocabulary-recovery.md",
+        "orchestration_harness/governance_clockwork_tick.py",
+        "scripts/ariadne_agent_error_register.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.closed_incident_category_vocabulary_bypassed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace both descriptive categories with the admitted operator_error category and bind future selection to the runtime category map.",
+        "prevention_control": "Incident category is selected by reading EXPECTED_ORIGIN_BY_CATEGORY; free-form category authoring is forbidden.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-incident-category-vocabulary-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-602.md"
+        ]
+      },
+      "baton_summary": "records and corrects the two descriptive incident categories by selecting the admitted operator_error coordinate."
+    }
+  ]
+}

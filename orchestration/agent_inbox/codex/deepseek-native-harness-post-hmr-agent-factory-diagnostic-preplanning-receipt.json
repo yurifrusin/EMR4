@@ -11,9 +11,9 @@
     "user_attention_required": false
   },
   "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
-  "continuation_event": "pre_worker_dispatch",
+  "continuation_event": "pre_commit",
   "git_object_resolution": {
-    "observed_head": "d29b4b3373f7837e2c54d62df8a171831aae6b7d",
+    "observed_head": "33b4e061b1385abc91ecd170e4abdb563396c3ef",
     "reason_codes": [],
     "resolved_commit": "70cd5569e83008c02796a8bac9291626ee3d6286",
     "schema_version": "ariadne.git_object_resolution.v1",
@@ -31,10 +31,10 @@
   },
   "git_refs_snapshot": {
     "branch": "codex/ariadne-bernie-davida-parallel-seam",
-    "branch_commit": "d29b4b3373f7837e2c54d62df8a171831aae6b7d",
+    "branch_commit": "33b4e061b1385abc91ecd170e4abdb563396c3ef",
     "branch_origin_aligned": true,
-    "head": "d29b4b3373f7837e2c54d62df8a171831aae6b7d",
-    "origin_branch_commit": "d29b4b3373f7837e2c54d62df8a171831aae6b7d",
+    "head": "33b4e061b1385abc91ecd170e4abdb563396c3ef",
+    "origin_branch_commit": "33b4e061b1385abc91ecd170e4abdb563396c3ef",
     "preserved_untracked_paths": {
       "docs/branding": true
     },
@@ -50,30 +50,30 @@
     "schema_version": "ariadne.git_refs_snapshot.v1",
     "status": "passed",
     "tracked_worktree_clean": false,
-    "untracked_path_count": 660
+    "untracked_path_count": 680
   },
   "parallelism_assessment": {
-    "assessed_stage": "fresh_preexecution",
+    "assessed_stage": "closeout_precommit",
     "lanes": [
       {
         "disposition": "declined",
         "expected_leverage": "negative",
         "lane_id": "deepseek_flash",
-        "rationale": "The native factory remains the diagnostic object; dispatch before the boundary is implemented and admitted would be circular and unauthorised.",
+        "rationale": "The single native diagnostic attempt is consumed and DeepSeek remains the diagnosed factory object; no worker package exists in this closeout stage.",
         "work_packages": []
       },
       {
         "disposition": "declined",
         "expected_leverage": "negative",
         "lane_id": "gemini_verifier",
-        "rationale": "The frozen contract is finite and deterministic, and a reviewer cannot reconstruct the missing runtime stage; reconsider only if a new typed terminal creates semantic ambiguity.",
+        "rationale": "The typed evidence narrows the failure interval without semantic ambiguity, and the clockwork plus deterministic tests own closeout admission.",
         "work_packages": []
       },
       {
         "disposition": "declined",
         "expected_leverage": "negative",
         "lane_id": "native_subagents",
-        "rationale": "Developer policy prohibits delegation, and the implementation plus one-process diagnostic transaction is serial.",
+        "rationale": "Developer policy prohibits delegation, and explicit-path closeout commit plus clockwork publication are serial single-writer operations.",
         "work_packages": []
       }
     ],
@@ -97,7 +97,7 @@
       "close out through clockwork"
     ]
   },
-  "planned_action": "execute_at_most_one_distinct_provider_free_native_rc7_diagnostic_process_and_accept_only_a_finite_typed_terminal_without_retry",
+  "planned_action": "commit_the_verified_diagnostic_closeout_candidate_and_frozen_safe_terminal_bridge_successor_using_explicit_path_staging_only",
   "reasons": [],
   "rehydrated_from_receipt": true,
   "rehydration_sources": [

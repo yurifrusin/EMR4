@@ -1,7 +1,7 @@
 {
   "schema_version": "ariadne.orchestrator_runtime_state.v1",
-  "continuation_event": "pre_worker_dispatch",
-  "planned_action": "execute_at_most_one_distinct_provider_free_native_rc7_diagnostic_process_and_accept_only_a_finite_typed_terminal_without_retry",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_verified_diagnostic_closeout_candidate_and_frozen_safe_terminal_bridge_successor_using_explicit_path_staging_only",
   "context_health": {
     "agent_contexts": [
       {
@@ -101,27 +101,27 @@
   "parallelism_assessment": {
     "schema_version": "ariadne.parallelism_assessment.v1",
     "operation_id": "deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal",
-    "assessed_stage": "fresh_preexecution",
+    "assessed_stage": "closeout_precommit",
     "lanes": [
       {
         "lane_id": "deepseek_flash",
         "disposition": "declined",
         "expected_leverage": "negative",
-        "rationale": "The native factory remains the diagnostic object; dispatch before the boundary is implemented and admitted would be circular and unauthorised.",
+        "rationale": "The single native diagnostic attempt is consumed and DeepSeek remains the diagnosed factory object; no worker package exists in this closeout stage.",
         "work_packages": []
       },
       {
         "lane_id": "gemini_verifier",
         "disposition": "declined",
         "expected_leverage": "negative",
-        "rationale": "The frozen contract is finite and deterministic, and a reviewer cannot reconstruct the missing runtime stage; reconsider only if a new typed terminal creates semantic ambiguity.",
+        "rationale": "The typed evidence narrows the failure interval without semantic ambiguity, and the clockwork plus deterministic tests own closeout admission.",
         "work_packages": []
       },
       {
         "lane_id": "native_subagents",
         "disposition": "declined",
         "expected_leverage": "negative",
-        "rationale": "Developer policy prohibits delegation, and the implementation plus one-process diagnostic transaction is serial.",
+        "rationale": "Developer policy prohibits delegation, and explicit-path closeout commit plus clockwork publication are serial single-writer operations.",
         "work_packages": []
       }
     ],

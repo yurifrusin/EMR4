@@ -1,0 +1,14 @@
+{
+  "candidate_source": "33b4e061b1385abc91ecd170e4abdb563396c3ef",
+  "control_gain": "finite_post_hmr_subcoordinate_or_exact_link_apply_absence",
+  "diagnostic_terminal": "closed_subcoordinate_failure",
+  "error_class": "unclassified_error",
+  "execution_attempt_id": "post-hmr-agent-factory-diagnostic-attempt-001",
+  "factory_boundary_observed": true,
+  "last_admitted_stage": "private_identity_admitted",
+  "occupied_model_launch_authorized": false,
+  "operation_id": "deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal",
+  "result": "pass",
+  "schema_version": "ariadne.native_harness_agent_factory_diagnostic_efficacy.v1",
+  "worker_launch_authorized": false
+}
