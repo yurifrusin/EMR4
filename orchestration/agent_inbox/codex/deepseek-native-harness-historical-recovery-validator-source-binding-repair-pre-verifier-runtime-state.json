@@ -1,0 +1,175 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "admit_the_exact_provider_free_historical_source_binding_repair_candidate_for_sol_acceptance_without_external_provider_review",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh complete five-source rehydration, frozen repair plan and contract, exact pushed candidate, deterministic evidence and maintained native-Harness regression readback",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "Continuity 359 and Compass 341 name this historical validator repair as the exact successor to accepted structured-diagnostic controller convergence.",
+    "current_authority_allocation": "GPT Sol owns the serial provider-free repair, deterministic acceptance, clockwork closeout and Git; no external model, Harness worker or subagent has authority.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Historical recovery evidence and consumed attempts remain byte-immutable; no Harness, worker, model, provider, occupied attempt, raw stream, product, data, deployment, Pages or protected-ref surface opened.",
+    "git_refs_and_worktree": "Machine snapshot alone must show the pushed exact candidate aligned with origin, protected refs fixed, tracked state clean, docs/branding present and all unrelated untracked paths preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair",
+    "active_tranche": "DeepSeek native Harness provider-free historical recovery validator source-binding repair",
+    "objective": "Replace the historical startup-terminal validator's mutable-current-source equality with exact immutable Git-object binding and restore its two predecessor checks without changing historical evidence or launching Harness, worker, model or provider activity.",
+    "status": "in_progress",
+    "source_head": "7a681e1688c7b7cfa71a8856bb7db1c84c346be4",
+    "authority_source": "Yuri's standing uninterrupted-development authority, constrained to provider-free deterministic validator repair and no occupied attempt.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal at the machine-resolved source.",
+      "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_historical_git_object_binding_repair_contract",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_historical_validator_source_binding_repair_only",
+      "no_native_harness_broker_worker_session_prompt_tool_model_or_provider_process_or_request",
+      "historical_evidence_bytes_and_consumed_attempts_remain_immutable",
+      "exact_full_git_object_resolution_required",
+      "no_occupied_attempt_retry_resume_overwrite_or_reclassification",
+      "no_raw_startup_stream_reconstruction_or_retention",
+      "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair",
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "rationale": "The DeepSeek Harness validator is the provider-free object under repair; a worker or model request violates the latch and adds no evidence to the exact Git/hash proof.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "rationale": "The exact pushed candidate is decided by local Git-object hashes, closed schemas, unchanged predecessor tests and 352 maintained Harness regressions; provider review adds no distinct evidence.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and the old-validator projection plus its independent Git proof remains one serial semantic seam.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "one validator repair owner",
+      "historical evidence bytes remain immutable",
+      "only bounded local Git and deterministic test subprocesses are admitted"
+    ],
+    "reassessment_triggers": [
+      "historical evidence mutation becomes proposed",
+      "exact Git source binding stops resolving",
+      "provider or occupied execution becomes proposed"
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol produced and verified the exact provider-free candidate."]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "native_harness_observation",
+      "reachability": "reachable",
+      "evidence": ["Historical Harness evidence and exact Git source are locally readable; no Harness process was launched."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Historical lineage only; no fallback selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No provider call is authorised or useful for this exact local invariant."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No subagent was spawned."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
