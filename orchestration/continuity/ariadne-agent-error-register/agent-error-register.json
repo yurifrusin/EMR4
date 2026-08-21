@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 582,
+  "register_revision": 583,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -29651,6 +29651,111 @@
       },
       "incident_id": "AER-0752",
       "attempt_id": "clock-192745b6151596c5a852933a",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "historical-recovery-source-binding-repair",
+      "role": "orchestrator",
+      "resource_id": "frozen-plan-process-and-authority-vocabulary",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The frozen acceptance language must distinguish admitted bounded local Git reads from forbidden Harness/provider processes and repeat the exact ordinary-practice authority token.",
+      "observed_error": "The first frozen row used generic zero-process wording although the design admits local Git subprocesses, and its prose omitted the exact ordinary-practice token.",
+      "detection_method": "Plan-contract reconciliation and the focused plan test rejected the missing exact token before candidate acceptance.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.plan_local_git_process_boundary_and_exact_authority_token_imprecise",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Clarify nine bounded local Git reads versus zero Harness/provider activity and add a focused exact-token plan assertion.",
+        "prevention_control": "Plan acceptance tests bind exact authority tokens and distinguish administrative local subprocesses from forbidden runtime/provider process classes.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_historical_recovery_validator_source_binding_repair.py"
+        ]
+      },
+      "incident_id": "AER-0753",
+      "attempt_id": "clock-9bdbbd66d3b97fb976d06236",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "historical-recovery-source-binding-repair",
+      "role": "orchestrator",
+      "resource_id": "transactional-closeout-node-relationship-cardinality",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A transactional closeout node must declare exactly one admitted parent relationship.",
+      "observed_error": "The first read-only check supplied both a builds_on relation and a descriptive repairs-validation relation, but the manifest contract admits exactly one relationship.",
+      "detection_method": "Clockwork rejected with tick_transaction_manifest and node_relationship_invalid before transaction preparation, commands or publication.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.transactional_closeout_supplied_two_node_relationships",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Retain the single controller-convergence builds_on parent and preserve the older recovery relation in prose and evidence rather than the closed relationship array.",
+        "prevention_control": "Validate closeout node relationship cardinality as exactly one before the first clockwork check.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0754",
+      "attempt_id": "clock-5935c0c57938146e788d2002",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "historical-recovery-source-binding-repair",
+      "role": "orchestrator",
+      "resource_id": "clockwork-incident-stage-vocabulary",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every incident stage must use the closed clockwork vocabulary before the first CLI check.",
+      "observed_error": "After correcting relationship cardinality, the second read-only check rejected the first observation's unsupported planning stage.",
+      "detection_method": "Clockwork rejected with tick_incident_stage before transaction preparation, commands or publication.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_incident_stage_used_unadmitted_planning_value",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use deterministic_verification for the plan-test detection and directly validate the complete intent against the live contract before the next CLI check.",
+        "prevention_control": "Closeout construction now takes the incident-stage vocabulary from clockwork validation instead of free-form workflow prose.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0755",
+      "attempt_id": "clock-33d3d36be3ffef2753b07a1a",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

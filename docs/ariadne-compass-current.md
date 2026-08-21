@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Bind historical validation to historical Git objects, not mutable current files, before attempt-004 planning.
+> Take the clock reading and freeze attempt-004 admission before any occupied process is allowed.
 
 ## North star
 
@@ -488,24 +488,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One authored pre-HMR rc.7 failure becomes the exact safe v2 terminal with zero downstream activity and complete cleanup. Lineage parent: `deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal`.
 236. **Converge the proven structured diagnostic gear into a callable descendant of the bounded authored-synthetic controller — Provider-free structured diagnostic bounded-worker controller convergence**
    A future fresh runner can build the canonical wrapper and select the exact safe terminal without mutating consumed evidence. Lineage parent: `deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal`.
+237. **Repair historical source-binding semantics before admitting a fresh occupied attempt — Provider-free historical recovery validator source-binding repair**
+   The old validator now takes its historical reading from exact Git source while preserved behavioral and consumed-attempt checks remain live. Lineage parent: `raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal`.
 
 ## Current position
 
-**Repair historical source-binding semantics before admitting a fresh occupied attempt — Provider-free structured diagnostic bounded-worker controller convergence**
+**Freeze a grounded provider-free attempt-004 readiness and preexecution decision — Provider-free historical recovery validator source-binding repair**
 
-**Why this proof came next:** The controller convergence exposed two old tests whose validator treats mutable present-day controller and test sources as if they were immutable historical evidence.
+**Why this proof came next:** The historical validator is stable, the structured-diagnostic controller is converged and the maintained predecessor surface is clean.
 
-A narrow provider-free repair can bind those historical hashes to their exact Git snapshot and restore deterministic predecessor verification.
+A narrow readiness tranche can bind a fresh attempt identity, exact controller/preset/task, clockwork/broker lease, cleanup envelope and one-execution admission without launching DeepSeek.
 
 ### What this unlocks
 
-- A clean full predecessor verification surface for the converged controller.
-- A grounded attempt-004 readiness and preexecution decision.
+- A deterministic accept-or-deny decision for one bounded occupied attempt 004.
+- A machine-bound attempt identity and exact one-execution contract if every readiness gate passes.
 
 ### What it does not solve
 
-- No occupied Harness, worker, model or provider attempt.
-- No change to immutable historical evidence bytes.
+- No Harness, worker, model or provider execution.
+- No assumption that attempt 004 will start, reach HMR or succeed.
 - No product, data, production, deployment or protected-ref authority.
 
 ## Continuity and authority
@@ -1246,6 +1248,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md`
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md`
 - `docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-closeout.md`
+- `docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md`
 - `docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md`
@@ -2629,6 +2632,7 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/provider-free-effective-tool-native-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/efficacy-reading.json`
@@ -3490,7 +3494,6 @@ Prerequisites:
 - `tests/test_deepseek_native_harness_emr4_profile_contract.py`
 - `tests/test_deepseek_native_harness_emr4_worker_profile_first_admission_continuity.py`
 - `tests/test_deepseek_native_harness_exact_tool_view_second_admission_continuity.py`
-- `tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py`
 - `tests/test_deepseek_native_harness_traceability_micro_rehearsal_continuity.py`
 - `tests/test_diary_security_hardening.py`
 - `tests/test_model_required_bureau_a3_b3_request_contract_recovery.py`
@@ -3614,4 +3617,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 341; continuity graph revision 359._
+_Compass map revision 342; continuity graph revision 360._

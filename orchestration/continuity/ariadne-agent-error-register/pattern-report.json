@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 582,
+  "register_revision": 583,
   "source_cutoff_on": "2026-08-21",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "0da3cb7b9d54ce42c893831ec8af32d78a358c8e2b21baa9ae7492263bd03349",
-  "incident_count": 752,
+  "canonical_register_sha256": "44cbe74f2d69f70118a699374b827e4e2d11dcc5441dd230a64d542eadcfab94",
+  "incident_count": 755,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 479,
       "harness": 60,
-      "operator": 67,
+      "operator": 70,
       "repository": 130,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 91,
       "evidence_misreport": 70,
       "harness_failure": 60,
-      "operator_error": 67,
+      "operator_error": 70,
       "output_contract_violation": 266,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 57,
       "integration_reviewer": 3,
-      "orchestrator": 629,
+      "orchestrator": 632,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 437,
+      "low": 440,
       "material": 127,
       "moderate": 188
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 137,
-      "canonical_unchanged": 472,
+      "canonical_unchanged": 475,
       "untrusted_partial_worktree": 143
     },
     "by_resource_and_role": {
@@ -97,6 +97,7 @@
       "canonical-wrapper-conditional-template::orchestrator": 1,
       "clockwork-closeout-incident-observation::orchestrator": 1,
       "clockwork-gear-architecture-plan-latch-test::orchestrator": 1,
+      "clockwork-incident-stage-vocabulary::orchestrator": 1,
       "clockwork-incident-tranche-vocabulary::orchestrator": 1,
       "clockwork-migration-focused-replay-fixture::orchestrator": 1,
       "clockwork-migration-verifier-command-manifest::orchestrator": 1,
@@ -172,6 +173,7 @@
       "emr4-live-handover-compactness::orchestrator": 1,
       "emr4-maintenance-test-suite::orchestrator": 1,
       "emr4-repository::orchestrator": 3,
+      "frozen-plan-process-and-authority-vocabulary::orchestrator": 1,
       "gemini-36-flash-high-verifier::verifier": 1,
       "generated-entrypoint-wrapper-json-serializer::implementer": 1,
       "git-cached-diff-whitespace-gate::orchestrator": 1,
@@ -232,6 +234,7 @@
       "shadow-clockwork-rehearsal-closeout-projections::orchestrator": 1,
       "shadow-clockwork-rehearsal-continuity-updater::orchestrator": 1,
       "shared-postgresql-pytest-gate::orchestrator": 1,
+      "transactional-closeout-node-relationship-cardinality::orchestrator": 1,
       "transactional-closeout-shadow-fixture::orchestrator": 1,
       "windows-owned-process-absence-reading::orchestrator": 1
     }

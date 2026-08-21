@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 341,
-  "updated_at": "2026-08-21T10:54:16.4878045+10:00",
-  "source_graph_revision": 359,
-  "orientation_statement": "Bind historical validation to historical Git objects, not mutable current files, before attempt-004 planning.",
+  "map_revision": 342,
+  "updated_at": "2026-08-21T11:28:18.5222638+10:00",
+  "source_graph_revision": 360,
+  "orientation_statement": "Take the clock reading and freeze attempt-004 admission before any occupied process is allowed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4521,25 +4521,35 @@
         "orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/deterministic-evidence.json",
         "docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair",
+      "lineage_parent": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+      "strategic_role": "Repair historical source-binding semantics before admitting a fresh occupied attempt",
+      "outcome": "The old validator now takes its historical reading from exact Git source while preserved behavioral and consumed-attempt checks remain live.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-evidence.json",
+        "docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
-    "strategic_role": "Repair historical source-binding semantics before admitting a fresh occupied attempt",
-    "why_now": "The controller convergence exposed two old tests whose validator treats mutable present-day controller and test sources as if they were immutable historical evidence.",
-    "outcome": "A narrow provider-free repair can bind those historical hashes to their exact Git snapshot and restore deterministic predecessor verification.",
+    "node_id": "deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair",
+    "strategic_role": "Freeze a grounded provider-free attempt-004 readiness and preexecution decision",
+    "why_now": "The historical validator is stable, the structured-diagnostic controller is converged and the maintained predecessor surface is clean.",
+    "outcome": "A narrow readiness tranche can bind a fresh attempt identity, exact controller/preset/task, clockwork/broker lease, cleanup envelope and one-execution admission without launching DeepSeek.",
     "unlocks": [
-      "A clean full predecessor verification surface for the converged controller.",
-      "A grounded attempt-004 readiness and preexecution decision."
+      "A deterministic accept-or-deny decision for one bounded occupied attempt 004.",
+      "A machine-bound attempt identity and exact one-execution contract if every readiness gate passes."
     ],
     "does_not_solve": [
-      "No occupied Harness, worker, model or provider attempt.",
-      "No change to immutable historical evidence bytes.",
+      "No Harness, worker, model or provider execution.",
+      "No assumption that attempt 004 will start, reach HMR or succeed.",
       "No product, data, production, deployment or protected-ref authority."
     ],
     "evidence": [
-      "docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md",
-      "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py"
+      "docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-evidence.json"
     ]
   },
   "decision_horizon": [

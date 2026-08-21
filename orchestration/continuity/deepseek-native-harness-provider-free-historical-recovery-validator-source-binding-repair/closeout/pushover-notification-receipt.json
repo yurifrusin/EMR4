@@ -1,0 +1,8 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "operation_id": "deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair",
+  "request": "d1ea8d6d-4bd3-4421-92b6-5140a2e703f2",
+  "status": 1,
+  "contains_phi": false,
+  "continuing_to": "raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision"
+}

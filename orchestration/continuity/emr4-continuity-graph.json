@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 359,
+  "graph_revision": 360,
   "harvests": [],
   "nodes": [
     {
@@ -26633,9 +26633,131 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair",
+      "title": "Provider-free historical recovery validator source-binding repair",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority covers the provider-free deterministic validator repair.",
+          "Only bounded local Git and deterministic test subprocesses were admitted.",
+          "No Harness, worker, model, provider, occupied, product, data, deployment or protected-integration authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-immutable-historical-source-projection",
+          "source": "scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery.py",
+          "status": "accepted",
+          "summary": "Use the accepted seven-source map as the old validator's immutable historical projection instead of hashing mutable descendant files."
+        },
+        {
+          "id": "accept-independent-full-git-object-proof",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-evidence.json",
+          "status": "accepted",
+          "summary": "Resolve the full historical commit, prove ancestry and match all seven exact Git blob hashes in a separate provider-free checker."
+        },
+        {
+          "id": "preserve-historical-evidence-bytes",
+          "source": "docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md",
+          "status": "accepted",
+          "summary": "Keep eight named historical recovery artifacts and all consumed attempts byte-identical."
+        },
+        {
+          "id": "reject-occupied-attempt-authority",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-historical-recovery-validator-source-binding-repair-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Reject any inference that a provider-free validator repair authorises or proves an occupied attempt."
+        },
+        {
+          "id": "accept-contained-plan-vocabulary-correction",
+          "source": "docs/ariadne-agent-error-correction-register-revision-583.md",
+          "status": "accepted",
+          "summary": "Bind the distinction between nine local Git reads and zero Harness/provider activity, plus the exact ordinary-practice token."
+        },
+        {
+          "id": "accept-contained-single-parent-manifest-correction",
+          "source": "docs/ariadne-agent-error-correction-register-revision-583.md",
+          "status": "accepted",
+          "summary": "Retain only the one admitted builds_on relationship after the first read-only clockwork check rejected a two-parent manifest."
+        },
+        {
+          "id": "accept-contained-incident-stage-vocabulary-correction",
+          "source": "docs/ariadne-agent-error-correction-register-revision-583.md",
+          "status": "accepted",
+          "summary": "Use the admitted deterministic_verification stage for the plan-test incident and pre-validate all incident observations before the CLI reading."
+        }
+      ],
+      "claim_scope": [
+        "The old recovery validator projects its accepted seven historical source hashes without starting a subprocess.",
+        "A separate checker matches all seven exact Git blobs at full historical commit 12d8758fee2504435ca2b4ccf6225b9d7a86a6a1.",
+        "Eight named historical recovery artifacts and all consumed attempts remain unchanged.",
+        "Both unchanged predecessor checks and 352 maintained native-Harness functional tests pass.",
+        "Harness, broker, worker, session, prompt, tool, model, provider and occupied-attempt counts are zero.",
+        "This proves historical validator stability only."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-report.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-historical-recovery-validator-source-binding-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-historical-recovery-validator-source-binding-repair-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-historical-recovery-validator-source-binding-repair-pre-verifier-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_historical_recovery_validator_source_binding_repair.py",
+          "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py",
+          "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_historical_recovery_validator_source_binding_repair.py",
+          "scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery.py",
+          "docs/ariadne-agent-error-correction-register-revision-583.md",
+          "orchestration/human_inbox/yuri/2026-08-21--historical-recovery-validator-source-binding-repair.md"
+        ]
+      },
+      "unresolved_gates": [
+        "No fresh attempt-004 identity or one-execution preexecution admission exists.",
+        "No occupied Harness, worker, model or provider activity occurred.",
+        "Eight legacy global-current governance assertions remain stale and outside this repair.",
+        "Product, data, ordinary-practice, deployment and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-21T11:28:18.5222638+10:00",
+      "updated_at": "2026-08-21T11:28:18.5222638+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "4410c0c4d1ac95d31775d87f13dd6c6077a016d7",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-21T10:54:16.4878045+10:00"
+  "updated_at": "2026-08-21T11:28:18.5222638+10:00"
 }
