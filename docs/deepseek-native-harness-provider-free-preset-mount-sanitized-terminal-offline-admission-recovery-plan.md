@@ -88,4 +88,3 @@ allowlist/grammar/client/waiting-area change, ordinary-practice enablement,
 generic-status `Arrived` change, patient/product/clinical/historical/protected
 data, production, deployment, release, Pages, protected evidence or
 protected-ref movement is authorised.
-

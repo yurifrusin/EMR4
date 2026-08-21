@@ -32,4 +32,3 @@ Node, Harness, worker, model or provider process.
 Accept only an exact envelope/sidecar binding, closed typed projection, zero
 owned process, exact retained-root cleanup, zero provider/product effects and no
 retry authority.
-
