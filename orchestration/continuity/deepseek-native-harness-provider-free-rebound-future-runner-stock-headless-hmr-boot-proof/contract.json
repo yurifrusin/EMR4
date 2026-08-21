@@ -1,0 +1,106 @@
+{
+  "schema_version": "ariadne.native_harness_rebound_stock_headless_hmr_boot_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof",
+  "planning_source": "d1f9e549068c4ac1bb6348219b389e02e10352da",
+  "accepted_sources": {
+    "accepted_rebinding_candidate": "5f30c69d8cd0ad6f4c01f33b465fe7b541ef1f47",
+    "accepted_rebinding_planning_source": "deaf0b3ccc23adb2f2f17b275a6a7faa4d2ae2ac",
+    "stock_headless_hmr_boot": "5ff79d68f6df25d8bebdba78a6d504afb64de2ab",
+    "effective_tool_guard": "dc167c20f5b54b783a57fccb7843f434136c8ca8",
+    "complete_composition_native_boot": "e26303882e2bd7bc5fa336c312626f17a0e1cea7"
+  },
+  "predecessor_bytes": {
+    "frozen_plan_sha256": "095395e2f9d4fd62a97844672208709fe69bd280a2533ce5c68c657dc5aa381b",
+    "threat_model_sha256": "f9261df421e335574df8f5c15b597e93db652ca8596ee8824f30e09e3bf5f87b",
+    "accepted_rebinding_contract_sha256": "d35f6c7ecf6324b3cdcaead523a8b7e56f9d689e37a095013f8335e75cf9cd51",
+    "accepted_rebinding_evidence_sha256": "0a04802608a0da5dd46d9e55271f4ee6d80aa9693f581f0a7befdebebfb14f3f",
+    "accepted_rebinding_controller_sha256": "cb7a3475ddd12486f9b5eb10b92dba909924d73f592b3d9770de05f9514b7dc6",
+    "rebinding_module_sha256": "6f2bf41551ddb839678eaea0cfbf2f61c8cc0735be60b0cd94db4e79b469b983",
+    "accepted_controller_sha256": "29495710c5e95a12fba92a2ef34c28ed6b9ce5e034402e5551767e19b843014c",
+    "native_boot_utility_sha256": "158a229fb1df85c6f1692295a4cf8cf2c12519ea2ff2cb88fec2f408c5f43262"
+  },
+  "implementation_bytes": {
+    "execution_controller_sha256": "edad182cda034c83d74b74a14467bbeb680659d20ea1bf7e405aedc2cae6c6a7",
+    "focused_test_sha256": "a9cdfa611df1dc42f50a71b6df1ff4bcea82e00b95528d920a6c3dbdea829d77",
+    "contract_schema_sha256": "238e24c254178f4ca88ac1cf08abab593dba90777df63bc7dd7c0f50b3de539c",
+    "evidence_schema_sha256": "314d32addf1fd941097c60382fb4130d9da87ee2d237b17a7775cce45fa13edb"
+  },
+  "execution_attempt": {
+    "attempt_id": "rebound-stock-headless-hmr-boot-attempt-001",
+    "native_process_count": 1,
+    "automatic_retry": false,
+    "manual_retry": false,
+    "resume": false
+  },
+  "bundle_identity": {
+    "operation_id": "deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal",
+    "attempt_id": "future-identity-target-rebinding-fixture-001",
+    "candidate_source": "deaf0b3ccc23adb2f2f17b275a6a7faa4d2ae2ac"
+  },
+  "source_bindings": {
+    "future_runner_sha256": "d025d1929f20589e86cbd66e983bda17435c1a21e937468532c38bb4895efb1a",
+    "generated_helper_sha256": "7ff2630b1523c66bb9e0cb5d649879cfa97d0340b791a85255c7dc5ad1fb66fd",
+    "controller_module_sha256": "29495710c5e95a12fba92a2ef34c28ed6b9ce5e034402e5551767e19b843014c",
+    "effective_tool_guard_sha256": "6678ed31bdcd30a5018689b72ad509c182854bf5d63862f59b397acc8de40894",
+    "readiness_sentinel_sha256": "6ff4ff7da4b0bc4a488d1cf79e8412ebb959d8d2c4061683196cf4fa5f4c8de4",
+    "rebinding_module_sha256": "6f2bf41551ddb839678eaea0cfbf2f61c8cc0735be60b0cd94db4e79b469b983"
+  },
+  "target_binding": {
+    "classification": "inert_authored_synthetic_relative_python_fixture",
+    "relative_path": "workspace/authored_synthetic_control_probe.py",
+    "coordinate_sha256": "f1a4634e24e1cde4bcddfcc88e932a44d75843f6c8a47c1568599775f219c72d",
+    "occupied_target_use_authorized": false
+  },
+  "package": {
+    "name": "@deepseek-ai/dsh",
+    "version": "0.1.0-rc.7",
+    "bin": "lib/bin.js",
+    "tarball_sha1": "8a69013c06179d7af437de92fb4a9a2e1fd7d410",
+    "tarball_integrity": "sha512-ZceDCJ8FAywih+USW/OMk9jEhunlvJBGEz4kqrhau23hPzbciOazZrywH0nBRsaalSeAJ1JGBmjtw4OSjToStw==",
+    "tarball_sha256": "2f8f0b763d611ac536f7a9411ee43c0afc067c1b8732c3102c04dbe398bcacc5"
+  },
+  "required_installed_packages": [
+    "@deepseek-ai/dsh",
+    "@deepseek-ai/dsh-tools",
+    "@deepseek-ai/dsh-agent-presets",
+    "@deepseek-ai/dsh-scope",
+    "@deepseek-ai/dsh-tool-fs",
+    "@deepseek-ai/dsh-tool-fs-search"
+  ],
+  "launch": {
+    "node_flag": "--expose-internals",
+    "profile_args": ["--profile", "headless"],
+    "online_package_fallback": false,
+    "package_lifecycle_scripts": false,
+    "timeout_seconds": 45
+  },
+  "readiness": {
+    "schema_version": "ariadne.deepseek_native_harness_effective_tool_native_boot_event.v1",
+    "writer": "provider-free-effective-tool-hmr-sentinel",
+    "events": ["sentinel_activated", "stock_headless_hmr_ready"]
+  },
+  "expected_terminal": {
+    "coordinate": "post_hmr_pre_request_failure",
+    "diagnostic_accepted": true,
+    "broker_zero": true,
+    "pre_request_supported": true,
+    "stage": "preset_root_roster_admission",
+    "cause_coordinate": "preset_root_roster_mismatch",
+    "error_kind": "error"
+  },
+  "required_zero_counts": [
+    "network_attempts",
+    "agent_create",
+    "sessions",
+    "turns",
+    "broker_processes",
+    "broker_requests",
+    "workers",
+    "model_requests",
+    "provider_requests",
+    "database_invocations",
+    "docker_invocations",
+    "target_creations",
+    "target_uses"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.example/schemas/native-harness-rebound-stock-headless-hmr-boot-evidence.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "planning_source", "candidate_source", "execution_attempt_id",
+    "result", "failure_classification", "bundle_identity", "source_bindings",
+    "target_binding", "package", "launch", "composition", "readiness", "diagnostic",
+    "broker_reading", "controller_terminal", "provider_boundary", "target", "cleanup"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_rebound_stock_headless_hmr_boot_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "execution_attempt_id": {"const": "rebound-stock-headless-hmr-boot-attempt-001"},
+    "result": {"enum": ["pass", "fail"]},
+    "failure_classification": {"type": ["string", "null"]},
+    "bundle_identity": {"type": "object"},
+    "source_bindings": {"type": "object"},
+    "target_binding": {"type": "object"},
+    "package": {"type": "object"},
+    "launch": {"type": "object"},
+    "composition": {"type": "object"},
+    "readiness": {"type": "object"},
+    "diagnostic": {"type": ["object", "null"]},
+    "broker_reading": {"type": "object"},
+    "controller_terminal": {"type": ["object", "null"]},
+    "provider_boundary": {"type": "object"},
+    "target": {"type": "object"},
+    "cleanup": {"type": "object"}
+  }
+}
