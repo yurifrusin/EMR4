@@ -1,0 +1,63 @@
+{
+  "schema_version": "ariadne.synthetic_native_worker_attempt_004_readiness_contract.v1",
+  "operation_id": "raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision",
+  "planning_source": "3109935ed697fc89d48803d4e33fa4393a6a9f09",
+  "protected_ref_source": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+  "attempt": {
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004",
+    "attempt_id": "deepseek-native-synthetic-window-worker-004",
+    "work_order_id": "wo-synthetic-native-window-worker-004",
+    "lease_id": "lease-synthetic-native-window-worker-004",
+    "root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-synthetic-window-worker-004",
+    "owned_path": "synthetic_window_coalescer.py",
+    "preset": "emr4-bounded-worker",
+    "profile": "headless",
+    "model": "deepseek-v4-flash",
+    "reasoning_effort": "high",
+    "allowed_tools": ["edit", "glob", "read"]
+  },
+  "limits": {
+    "native_processes": 1,
+    "sessions": 1,
+    "turns": 1,
+    "provider_requests": 1,
+    "model_tool_calls": 1,
+    "maximum_output_tokens": 4096,
+    "upstream_timeout_seconds": 300,
+    "native_deadline_seconds": 420,
+    "automatic_retries": 0,
+    "resumes": 0,
+    "fallbacks": 0,
+    "second_workers": 0
+  },
+  "components": {
+    "converged_controller_sha256": "dfa799c5787ecc73e3d5f4fdd6a65c5294c4e683400861436ad8414551c7d738",
+    "structured_diagnostic_sha256": "d6fe1ddc4930ce7f0ddbf3480ca93b999d6390a17e16aaa5945c115df04ab72a",
+    "legacy_terminal_sha256": "0a476ee7617fbc71d9cc3efb88ca08ac1cc6f01b433aa8d83d0603493cc05468",
+    "accepted_controller_sha256": "43e47f244728449f4476431b8d32e3b110c2239025d286a2a5075c477648d9bb",
+    "broker_sha256": "f8e80314ef895ad14fdbc7c76ea012207934545c48db0d0d25fcc2a22f47b71b",
+    "work_order_schema_sha256": "71c87760ff9351b60704b5b2dcf7d3c43c96a36b2c41a53057e3f497b6fc0a5b",
+    "preset_sha256": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1",
+    "task_sha256": "bccf90c9b6cf4a70e450d60dfe3a0fa02549e0bbc0a374edf674820e7ab7d7dc",
+    "baseline_source_sha256": "9606d9341e6b7e53f4ee9007d7518145322968b2d0bc156622928c33ab97d4f8",
+    "expected_source_sha256": "e763b74f87b5d6e721263414c74f1c36bac64bc5783987425a55a95826716d3c"
+  },
+  "clockwork_reading": {
+    "generation_id": "gen-ffb51b2915d8a99ef85f7a10d61d881ed2d7ea1f6df6e936ab66504dabc8e7a0",
+    "lease_sequence": 103,
+    "transaction_id": "txn-9eb2456a2e4ec48bd9408fd2",
+    "journal_id": "journal-9eb2456a2e4ec48bd9408fd2",
+    "sequence": 5,
+    "previous_event_sha256": "sha256:006d70faf758ea70ca58b7b95e9d5300575cacc501660f3b45855decc761e176",
+    "read_only": true,
+    "reusable_for_occupied_execution": false
+  },
+  "decision": {
+    "pass_coordinate": "ready_for_one_separately_checkpointed_occupied_attempt_004",
+    "failure_coordinate": "not_ready",
+    "occupied_attempt_authorized": false,
+    "fresh_post_closeout_clockwork_reading_required": true,
+    "automatic_retry_authorized": false
+  },
+  "ordinary_practice_boundary": "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting"
+}

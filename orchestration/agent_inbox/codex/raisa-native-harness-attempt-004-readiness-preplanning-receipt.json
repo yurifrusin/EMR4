@@ -1,0 +1,123 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa authored-synthetic native Harness bounded-worker attempt-004 readiness and preexecution decision",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_attempt_004_readiness_contract_and_one_execution_gate",
+    "operation_id": "raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision",
+    "resume_after_compaction": true,
+    "source_head": "4410c0c4d1ac95d31775d87f13dd6c6077a016d7",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "3109935ed697fc89d48803d4e33fa4393a6a9f09",
+    "reason_codes": [],
+    "resolved_commit": "4410c0c4d1ac95d31775d87f13dd6c6077a016d7",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "4410c0c4d1ac95d31775d87f13dd6c6077a016d7"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "3109935ed697fc89d48803d4e33fa4393a6a9f09",
+    "branch_origin_aligned": true,
+    "head": "3109935ed697fc89d48803d4e33fa4393a6a9f09",
+    "origin_branch_commit": "3109935ed697fc89d48803d4e33fa4393a6a9f09",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 660
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "fresh_preplanning",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "This tranche decides whether a later DeepSeek attempt may exist; the active latch forbids Harness, worker, model and provider execution during readiness.",
+        "work_packages": []
+      },
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The readiness decision is an exact local identity, source, schema, broker/clockwork lease, cleanup and command-envelope proof; the latch forbids a provider review request.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and one owner must bind the serial fresh attempt identity, clockwork lease, broker work order and one-execution gate.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "readiness design proposes an occupied process",
+      "fresh identity or lease cannot be bound deterministically",
+      "historical evidence mutation becomes proposed",
+      "pre-verifier acceptance or closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one readiness and identity owner",
+      "attempts 001-003 and their evidence remain immutable",
+      "no Harness worker model or provider process",
+      "future occupied authority remains conditional on this exact deterministic gate"
+    ]
+  },
+  "planned_action": "freeze_the_provider_free_attempt_004_readiness_contract_and_one_execution_gate_without_starting_the_harness",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-historical-recovery-validator-source-binding-repair-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the tightly coupled provider-free readiness decision, exact identity and lease bindings, deterministic acceptance, clockwork and task-branch Git; no worker or provider has execution authority.",
+    "git_refs_and_worktree": "Machine snapshot alone must show the task branch aligned with origin, latch source ancestral, all four protected refs fixed at the configured expected commit, tracked state clean, docs/branding present and unrelated untracked paths preserved.",
+    "live_handover_current_baton": "Continuity 360 and Compass 342 accept the historical validator repair and name provider-free attempt-004 readiness as the exact next operation.",
+    "protected_evidence_boundaries": "Only provider-free attempt-004 readiness and a future one-execution gate may be designed; attempts 001-003, historical evidence, raw streams, Harness/provider execution, product/data/deployment and protected surfaces remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
