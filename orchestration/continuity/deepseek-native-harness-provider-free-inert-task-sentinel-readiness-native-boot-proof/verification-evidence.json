@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.deepseek_native_harness_inert_task_sentinel_readiness_verification.v1",
+  "verification_source": "58b0cd8464b78e6a7dd224f2d302748ef315d42c",
+  "executed_candidate_source": "1b4b2b4f04ff29ace609f788fc9fb891d933bb24",
+  "result": "pass",
+  "terminal": {
+    "result": "pass",
+    "failure_coordinate": null,
+    "events": ["sentinel_activated", "stock_headless_hmr_ready"],
+    "native_process_count": 1,
+    "retry_count": 0,
+    "argument_count": 6,
+    "task_argument_count": 1,
+    "readiness_observed": true,
+    "controller_terminated_after_readiness": true,
+    "exit_code_after_controller_termination": 1,
+    "post_readiness_exit_interpretation": "controller_owned_teardown_after_the_required_readiness_event_not_a_boot_failure"
+  },
+  "commands": [
+    {
+      "id": "focused_and_applicable_predecessor_pytest",
+      "result": "pass",
+      "passed": 25,
+      "failed": 0,
+      "historical_selectors_deselected": 1
+    },
+    {"id": "ruff", "result": "pass"},
+    {"id": "py_compile", "result": "pass"},
+    {"id": "git_diff_check", "result": "pass"},
+    {"id": "protected_ref_verification", "result": "pass"}
+  ],
+  "historical_selector_boundary": {
+    "deselected": [
+      "repaired_sentinel_native_boot.test_direct_script_check_bootstraps_repository_imports"
+    ],
+    "reason": "This immutable pre-source-repair selector intentionally binds the old repaired-profile controller digest and was already excluded by the accepted source-repair descendants. The original controller file remains byte-identical; the fresh inert-task engine is disjoint.",
+    "selection_reruns": 1
+  },
+  "construction_corrections": [
+    {
+      "coordinate": "preplanning_git_ref_prose",
+      "outcome": "revision_required_before_planning",
+      "correction": "Preserve the rejected receipt and remove every caller-supplied Git object ID so the receipt owns the machine snapshot."
+    },
+    {
+      "coordinate": "cached_diff_check_command_control_flow",
+      "outcome": "normalized_before_preexecution",
+      "correction": "Remove two blank EOF lines, refresh the exact engine hash and use fail-fast PowerShell control flow for every subsequent staged diff check."
+    },
+    {
+      "coordinate": "human_report_line_wrap_assertion",
+      "outcome": "failed_closed_during_postexecution_verification",
+      "correction": "Assert the two semantic report clauses independently instead of assuming Markdown line wrapping."
+    }
+  ],
+  "cleanup": {
+    "owned_node_processes_after_cleanup": 0,
+    "matching_disposable_roots_after_cleanup": 0,
+    "raw_streams_retained": false,
+    "raw_environment_retained": false,
+    "copied_package_tree_retained": false
+  },
+  "activity": {
+    "node_process_count": 1,
+    "harness_process_count": 1,
+    "broker_process_count": 0,
+    "worker_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "network_request_count": 0,
+    "retry_count": 0,
+    "resume_count": 0,
+    "fallback_count": 0
+  }
+}
