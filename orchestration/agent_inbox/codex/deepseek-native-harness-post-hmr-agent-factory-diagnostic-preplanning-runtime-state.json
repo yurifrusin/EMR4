@@ -1,0 +1,193 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_only_the_exact_deterministically_passing_closed_subcoordinate_candidate_and_its_five_source_receipt_before_any_native_execution",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete AGENTS.md read; active diagnostic plan and threat delta; predecessor negative-result closeout, acceptance, nonacceptance and failure interpretation; clockwork tick; active latch; exact current Git snapshot",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "Continuity 378 and Compass 360 make the provider-free post-HMR agent-factory closed-subcoordinate diagnostic the active successor; the predecessor is accepted only as failed-closed negative evidence.",
+    "current_authority_allocation": "GPT Sol owns the serial implementation and diagnostic. DeepSeek is the diagnostic object and cannot be dispatched, Gemini cannot reconstruct missing runtime state and has no present veto package, and native subagents are prohibited by developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-failed-result-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-sol-nonacceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/failure-interpretation.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/closeout/clockwork-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Only provider-free diagnostic source, schemas, deterministic guards and later at most one distinct native process are in scope. No retry of the consumed predecessor, raw errors, fallback factory counts, worker/model/provider request, target, product/data, ordinary-practice, production, deployment, release, Pages, protected evidence or protected-ref movement is allowed.",
+    "git_refs_and_worktree": "Machine snapshot only: the task branch and origin, all four protected refs, tracked cleanliness and preserved untracked paths are read by preflight; caller prose supplies no Git object identity."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal",
+    "active_tranche": "DeepSeek native Harness provider-free post-HMR agent-factory closed-subcoordinate diagnostic rehearsal",
+    "objective": "Derive one minimal rebound runner that dynamically imports its package dependencies inside a guarded transaction, emits exactly one finite typed stage/error sidecar, and runs at most one distinct provider-free native process before any turn, broker/model/provider request or target creation or use.",
+    "status": "in_progress",
+    "source_head": "70cd5569e83008c02796a8bac9291626ee3d6286",
+    "authority_source": "Yuri's standing uninterrupted-development authority and extended authority for the bounded native-Harness control sequence.",
+    "checkpoint": {
+      "completed_stage": "Accepted deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal at the machine-resolved source.",
+      "next_executable_stage": "perform_fresh_five_source_rehydration_then_implement_the_closed_subcoordinate_contract_and_deterministic_runner_guard",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_only",
+      "consumed_rebound_agent_creation_boundary_attempt_001_and_its_failure_interpretation_remain_immutable",
+      "accepted_rebound_runner_helper_controller_target_package_and_preset_bindings_remain_immutable",
+      "one_distinct_fresh_disposable_root_one_native_harness_process_and_one_terminal_only",
+      "dynamic_package_and_guard_imports_must_remain_inside_the_guarded_diagnostic_transaction",
+      "finite_closed_stage_error_and_terminal_vocabularies_only",
+      "no_raw_error_message_stack_code_path_cause_stream_session_prompt_response_path_or_credential",
+      "no_fallback_factory_counts_when_typed_sidecar_is_absent",
+      "at_most_one_agent_factory_invocation_and_zero_published_agents_sessions_or_lifecycle_announcements",
+      "turn_broker_worker_request_model_provider_database_docker_network_counts_remain_zero",
+      "occupied_model_launch_authorized_remains_false",
+      "target_file_creation_and_target_use_remain_false",
+      "no_second_diagnostic_process_retry_resume_fallback_or_alternate_transport",
+      "verified_package_only_seed_and_independent_copy_required",
+      "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "exact_test_counts_from_completed_machine_output_only",
+      "no_commit_identity_statement_without_current_machine_snapshot_copy",
+      "all_new_narrative_artifacts_require_date_and_brisbane_timestamp",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal",
+    "assessed_stage": "candidate_precommit",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The native factory remains the diagnostic object; dispatch before the boundary is implemented and admitted would be circular and unauthorised.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The frozen contract is finite and deterministic, and a reviewer cannot reconstruct the missing runtime stage; reconsider only if a new typed terminal creates semantic ambiguity.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits delegation, and the implementation plus one-process diagnostic transaction is serial.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "freeze exact source and schema bindings",
+      "implement runner and controller guards",
+      "run deterministic checks",
+      "commit and push candidate",
+      "generate fresh preexecution receipt",
+      "run at most one native diagnostic process",
+      "read evidence before cleanup",
+      "close out through clockwork"
+    ],
+    "reassessment_triggers": [
+      "preexecution",
+      "typed terminal interpretation",
+      "pre-verifier gate",
+      "closeout"
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["GPT Sol owns the serial implementation and diagnostic transaction."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No DeepSeek worker is dispatched; the native factory is the diagnostic object."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No Gemini request is admitted at preplanning."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No subagent was spawned; delegation is prohibited."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

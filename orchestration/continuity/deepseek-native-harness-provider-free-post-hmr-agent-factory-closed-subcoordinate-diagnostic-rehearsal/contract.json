@@ -1,0 +1,103 @@
+{
+  "schema_version": "ariadne.native_harness_agent_factory_diagnostic_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal",
+  "planning_source": "9640f01f7d20b71fd78b00c3e39f4c3a256715ce",
+  "base_contract_sha256": "19d1983d0cf372aa6c4845e9c4e5bb2c252e12ed2dcff2ada1e4a6766e7a140c",
+  "predecessor_bytes": {
+    "frozen_plan_sha256": "8ee56767e85752277b713834ea4894db74bfd2041443863b7919bb9bccf1ccbf",
+    "threat_model_sha256": "494d941816f54329ec16249836f97bd1dbf0591f509c15290bc2c8ac1df1a468",
+    "predecessor_contract_sha256": "19d1983d0cf372aa6c4845e9c4e5bb2c252e12ed2dcff2ada1e4a6766e7a140c",
+    "predecessor_controller_sha256": "54d680e821aa8379f079213933ba5030babc2a06b0bae50764fdbf1934fbe31d",
+    "predecessor_closeout_sha256": "38073b97494b30ccb4eea17ffabab7a8510cdf39047cd72ffb959bdd0ca5d9cb",
+    "predecessor_failure_interpretation_sha256": "cfeb7325d73a2dbb3d50a3a9607df0e337160683e829dbf689d211b75d55025d",
+    "predecessor_rejected_claims_sha256": "782a5e4bc74cb69e474c75b988c3578ed21c8d100667711300eb03cdd8c341c2"
+  },
+  "implementation_bytes": {
+    "execution_controller_sha256": "c16aa68cba335dd62c959ea29c3183f1d505ae94d5bdbd1448e970e4d289cfe5",
+    "focused_test_sha256": "072290d277b7f2c9c3fabe3e958d8ff18294b44fe24c7516e1e21f668c7c2160",
+    "contract_schema_sha256": "8eb281587aa55d7d77e0aa06e272846298d87336011936f0f1cd6afc06ded974",
+    "sidecar_schema_sha256": "2a6bd44d854d69fea1be88c4a7b2ef439c29aff40be54d1ab370f568c1089a22",
+    "evidence_schema_sha256": "5bfda68d4801e7a1ed973a2fade2214174725d6bd737bd56a595b8c24b572932"
+  },
+  "execution_attempt": {
+    "attempt_id": "post-hmr-agent-factory-diagnostic-attempt-001",
+    "native_process_count": 1,
+    "automatic_retry": false,
+    "manual_retry": false,
+    "resume": false
+  },
+  "source_bindings": {
+    "diagnostic_runner_sha256": "2e8bd61edaf32c939392cacec1dd6bf580cc4f6dbcf93d1673b08f58aa6df077",
+    "generated_helper_sha256": "7ff2630b1523c66bb9e0cb5d649879cfa97d0340b791a85255c7dc5ad1fb66fd",
+    "controller_module_sha256": "29495710c5e95a12fba92a2ef34c28ed6b9ce5e034402e5551767e19b843014c",
+    "effective_tool_guard_sha256": "6678ed31bdcd30a5018689b72ad509c182854bf5d63862f59b397acc8de40894",
+    "readiness_sentinel_sha256": "6ff4ff7da4b0bc4a488d1cf79e8412ebb959d8d2c4061683196cf4fa5f4c8de4"
+  },
+  "closed_vocabulary": {
+    "stages": [
+      "runner_apply_entered",
+      "loader_ready",
+      "package_imports_admitted",
+      "services_resolved",
+      "preset_roots_admitted",
+      "preset_roster_admitted",
+      "registries_empty_before_factory",
+      "session_identity_constructed",
+      "agent_factory_invoked",
+      "factory_setup_entered",
+      "private_identity_admitted",
+      "preset_composition_admitted",
+      "model_selection_installed",
+      "setup_commit_entered",
+      "publication_veto_observed",
+      "postrollback_registries_empty"
+    ],
+    "error_classes": [
+      "loader_await_rejected",
+      "package_import_rejected",
+      "required_service_missing",
+      "preset_root_count_mismatch",
+      "shipped_root_mismatch",
+      "user_root_mismatch",
+      "preset_roster_mismatch",
+      "registry_not_empty",
+      "private_identity_mismatch",
+      "private_object_prepublished",
+      "effective_composition_mismatch",
+      "commit_identity_mismatch",
+      "commit_publication_early",
+      "commit_composition_mismatch",
+      "publication_veto_mismatch",
+      "factory_resolved_without_veto",
+      "private_identity_retained",
+      "lifecycle_event_escaped",
+      "cwd_not_absolute",
+      "unclassified_error"
+    ],
+    "terminals": [
+      "closed_subcoordinate_failure",
+      "prepublication_veto_diagnosed",
+      "runner_link_or_apply_absence"
+    ]
+  },
+  "preset": {
+    "id": "emr4-bounded-worker",
+    "bytes": 158,
+    "sha256": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1",
+    "trust": "user",
+    "effective_tools": ["edit", "glob", "read"]
+  },
+  "selection": {
+    "provider": "deepseek-official",
+    "model": "deepseek-v4-flash",
+    "reasoning_effort": "high",
+    "max_tokens": 4096
+  },
+  "factory_boundary": {
+    "private_session_id": "session-emr4-agent-factory-diagnostic-001",
+    "publication_stop": "EMR4_AGENT_PUBLICATION_STOP",
+    "agents_create_invocations_max": 1,
+    "published_agents": 0,
+    "published_sessions": 0
+  }
+}

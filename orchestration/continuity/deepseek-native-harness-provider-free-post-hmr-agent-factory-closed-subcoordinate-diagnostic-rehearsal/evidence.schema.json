@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-agent-factory-diagnostic-evidence.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "candidate_source", "execution_attempt_id", "result", "failure_classification", "source_bindings", "package", "launch", "composition", "readiness", "sidecar", "controller_terminal", "provider_boundary", "target", "cleanup"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_agent_factory_diagnostic_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal"},
+    "planning_source": {"$ref": "#/$defs/oid"},
+    "candidate_source": {"$ref": "#/$defs/oid"},
+    "execution_attempt_id": {"const": "post-hmr-agent-factory-diagnostic-attempt-001"},
+    "result": {"enum": ["pass", "fail"]},
+    "failure_classification": {"type": ["string", "null"]},
+    "source_bindings": {"type": "object", "minProperties": 5, "additionalProperties": {"$ref": "#/$defs/digest"}},
+    "package": {"type": "object", "required": ["name", "version", "bin", "verified_cached_package_count"], "additionalProperties": true},
+    "launch": {
+      "type": "object", "additionalProperties": false,
+      "required": ["started_at_utc", "duration_ms", "native_process_count", "retry_count", "resume_count", "hmr_mutation_count", "exit_code", "exit_mode", "stdout_retained", "stderr_retained", "raw_stream_read"],
+      "properties": {
+        "started_at_utc": {"type": ["string", "null"]}, "duration_ms": {"type": ["integer", "null"], "minimum": 0},
+        "native_process_count": {"const": 1}, "retry_count": {"const": 0}, "resume_count": {"const": 0},
+        "hmr_mutation_count": {"type": "integer", "minimum": 0, "maximum": 1}, "exit_code": {"type": ["integer", "null"]},
+        "exit_mode": {"type": ["string", "null"]}, "stdout_retained": {"const": false}, "stderr_retained": {"const": false}, "raw_stream_read": {"const": false}
+      }
+    },
+    "composition": {"type": "object", "required": ["initial_patch_sha256", "changed_patch_sha256", "runner_copy_equal", "bundle_manifest_unchanged", "preset"], "additionalProperties": true},
+    "readiness": {"type": "object", "additionalProperties": false, "required": ["events", "valid", "exact_expected_order"], "properties": {"events": {"type": "array", "items": {"type": "string"}}, "valid": {"type": "boolean"}, "exact_expected_order": {"type": "boolean"}}},
+    "sidecar": {"type": ["object", "null"]},
+    "controller_terminal": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["result", "last_admitted_stage", "error_class", "factory_boundary", "raw_runtime_detail_retained"],
+      "properties": {
+        "result": {"enum": ["closed_subcoordinate_failure", "prepublication_veto_diagnosed", "runner_link_or_apply_absence"]},
+        "last_admitted_stage": {"type": ["string", "null"]}, "error_class": {"type": ["string", "null"]},
+        "factory_boundary": {"type": ["object", "null"]}, "raw_runtime_detail_retained": {"const": false}
+      }
+    },
+    "provider_boundary": {"type": "object", "required": ["credential_environment_names_removed_count", "network_attempt_count", "network_ledger_valid", "turn_count", "request_count", "broker_process_count", "broker_request_count", "occupied_worker_count", "model_request_count", "provider_request_count", "database_invocation_count", "docker_invocation_count"], "additionalProperties": false, "properties": {"credential_environment_names_removed_count": {"type": "integer", "minimum": 0}, "network_attempt_count": {"type": "integer", "minimum": 0}, "network_ledger_valid": {"type": "boolean"}, "turn_count": {"const": 0}, "request_count": {"const": 0}, "broker_process_count": {"const": 0}, "broker_request_count": {"const": 0}, "occupied_worker_count": {"const": 0}, "model_request_count": {"const": 0}, "provider_request_count": {"const": 0}, "database_invocation_count": {"const": 0}, "docker_invocation_count": {"const": 0}}},
+    "target": {"type": "object", "additionalProperties": false, "required": ["file_created", "used", "absent_after_process"], "properties": {"file_created": {"const": false}, "used": {"const": false}, "absent_after_process": {"type": "boolean"}}},
+    "cleanup": {"type": "object", "additionalProperties": false, "required": ["process_absent", "disposable_root_absent", "raw_environment_retained", "raw_logs_retained", "package_seed_unchanged"], "properties": {"process_absent": {"type": "boolean"}, "disposable_root_absent": {"type": "boolean"}, "raw_environment_retained": {"const": false}, "raw_logs_retained": {"const": false}, "package_seed_unchanged": {"const": true}}}
+  },
+  "$defs": {
+    "oid": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}
