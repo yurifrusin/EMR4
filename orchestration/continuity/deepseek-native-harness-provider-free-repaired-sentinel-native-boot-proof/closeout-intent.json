@@ -1,0 +1,546 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof",
+    "title": "DeepSeek native Harness provider-free repaired-sentinel native boot proof",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-21T14:22:57.0516264+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof",
+      "title": "Native Harness repaired-sentinel boot terminal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-proof-module-relative-specifier-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted exactly one provider-free repaired-initial-profile process.",
+          "Attempt 001 is consumed; no retry, resume, fallback, changed runner, broker, worker, model or provider authority remains open.",
+          "No product, data, deployment, Pages or protected-ref authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-single-attempt-terminal-and-cleanup",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one consumed process, zero retry, zero provider activity, sanitized evidence and exact process/root cleanup."
+        },
+        {
+          "id": "reject-repaired-sentinel-boot-proof",
+          "source": "docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-closeout.md",
+          "status": "rejected",
+          "summary": "Reject sentinel loading, stock-headless HMR readiness and worker-readiness claims because the process exited 1 with zero HMR events."
+        },
+        {
+          "id": "preserve-no-retry-and-open-static-diagnosis",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Keep attempt 001 immutable and permit only a separately frozen provider-free static preactivation source-coordinate diagnosis."
+        },
+        {
+          "id": "accept-contained-terminal-and-closeout-incidents",
+          "source": "docs/ariadne-agent-error-correction-register-revision-588.md",
+          "status": "accepted",
+          "summary": "Accept three contained or corrected incidents with none open, including explicit correction of the failed terminal's generic claim wording."
+        }
+      ],
+      "claim_scope": [
+        "Exactly one pinned rc7 Node/Harness process started and no retry occurred.",
+        "The process exited 1 after 7310 ms before emitting any sentinel or HMR-readiness event.",
+        "Changed runner, broker, worker, prompt, tool, model, provider and network activity remained zero.",
+        "Only stream counts and digests were retained; the child and disposable root are absent.",
+        "The boot proof is rejected and the static two-row repair remains insufficient for this initial profile."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/native-attempt-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-terminal.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-preplanning-receipt-v3.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-pre-verifier-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py",
+          "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/evidence.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-588.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-repaired-sentinel-native-boot-proof.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The unique preactivation source coordinate is not yet identified.",
+        "No repaired sentinel activation or stock-headless HMR readiness has passed in this profile.",
+        "No changed runner, worker, model/provider or EMR4 development work is admitted.",
+        "Attempt 001 remains terminal and no native retry is authorised."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Test whether the accepted profile-relative repair clears initial Harness startup",
+      "outcome": "One bounded process reached a sanitized preactivation failure, proving the relative-path repair alone is insufficient while all provider and cleanup controls held.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/efficacy-reading.json",
+        "docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Identify the next exact preactivation source coordinate without another runtime attempt",
+      "why_now": "The only process exited before every sentinel event, so static package/profile comparison must narrow the failure before any later execution can be considered.",
+      "outcome": "A deterministic diagnosis will name one unique code/config coordinate or fail closed as non-unique.",
+      "unlocks": [
+        "A grounded decision about whether a narrow configuration repair exists.",
+        "A separately frozen later proof only if diagnosis justifies it."
+      ],
+      "does_not_solve": [
+        "No retry, runner, worker, broker, model or provider request.",
+        "No product work, data use, deployment or protected integration."
+      ],
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-terminal.json",
+        "docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-closeout.md"
+      ],
+      "orientation_statement": "Inspect pinned rc7 and the exact initial profile statically; identify one preactivation coordinate without raw reconstruction or runtime execution."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis",
+      "active_tranche": "DeepSeek native Harness provider-free repaired-sentinel preactivation source-coordinate diagnosis",
+      "objective": "Statically inspect the pinned rc7 loader and plugin configuration against the exact repaired initial profile and sanitized terminal to identify the narrowest unique source coordinate consistent with zero HMR events and exit 1, without reconstructing raw output or launching Node, Harness, broker, worker, model, provider or network activity.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, constrained by the consumed no-retry boot terminal and a provider-free static diagnosis envelope.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_static_preactivation_source_coordinate_diagnosis_contract"
+    },
+    "incidents": [],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "repaired_sentinel_boot_focused_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "pytest", "-q", "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "repaired_sentinel_boot_register_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "pytest", "-q", "tests/test_ariadne_agent_error_register.py::test_register_is_valid_after_durability_schema_recovery", "tests/test_ariadne_agent_error_register.py::test_pattern_report_detects_recurring_control_signals", "tests/test_ariadne_agent_error_register.py::test_committed_pattern_report_matches_fresh_build"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "repaired_sentinel_boot_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "repaired_sentinel_boot_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Native Harness repaired-sentinel failed-closed boot terminal acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/evidence.schema.json",
+      "scripts/deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
+      "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/native-attempt-consumed.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-terminal.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/efficacy-reading.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-preplanning-receipt-v3.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-preexecution-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-pre-verifier-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-588.md",
+      "docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-repaired-sentinel-native-boot-proof.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_static_preactivation_source_coordinate_diagnosis_only",
+    "zero_node_native_harness_broker_worker_model_provider_or_network_process_or_request",
+    "no_retry_resume_fallback_reclassification_or_second_process_for_consumed_attempt_001",
+    "consumed_terminal_stream_digests_and_attempt_evidence_remain_immutable",
+    "no_raw_error_message_stack_path_stream_session_environment_or_credential_reconstruction",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "repaired-sentinel-preplanning-adapter-inventory-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-repaired-sentinel-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "preplanning-adapter-inventory",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every declared transport adapter must have an explicit observation row before a continuation receipt may pass.",
+      "observed_error": "The first boot preplanning runtime state omitted the declared deepcode_cli and claude_cli_print adapter observations.",
+      "detection_method": "The orchestrator preflight preserved a revision_required receipt with both exact adapter_observation_missing reasons and prohibited dispatch before any native process.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-preplanning-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-588.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preplanning_receipt_omitted_declared_adapter_observations",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the rejected pair and include all six declared adapters in every successor runtime state.",
+        "prevention_control": "Copy the complete adapter inventory from the last passing receipt before changing tranche-specific evidence.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-preplanning-receipt-v3.json"
+        ]
+      },
+      "baton_summary": "records the rejected incomplete adapter inventory and complete v3 correction."
+    },
+    {
+      "attempt_key": "repaired-sentinel-preplanning-latch-git-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-repaired-sentinel-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "preplanning-latch-and-git-evidence",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A continuation runtime state must preserve the exact latch key set and must leave Git-ref object IDs to the machine snapshot.",
+      "observed_error": "The compact v2 state omitted interruption_policy and manually wrote the protected commit into narrative git_refs_and_worktree evidence.",
+      "detection_method": "The orchestrator preflight preserved a revision_required v2 receipt with active_operation_latch_invalid, parallelism mismatch, manual Git-object binding rejection and unavailable resolution; dispatch remained prohibited.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-preplanning-runtime-state-v2.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-preplanning-receipt-v2.json",
+        "docs/ariadne-agent-error-correction-register-revision-588.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.compacted_runtime_state_dropped_exact_latch_keys_and_authored_git_oid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the v2 rejection and issue a distinct v3 with the exact latch plus narrative-only Git evidence.",
+        "prevention_control": "Runtime-state construction reuses the exact validated latch object and lets preflight alone populate Git object IDs.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-preplanning-receipt-v3.json"
+        ]
+      },
+      "baton_summary": "records the rejected latch/Git evidence compression and exact v3 correction."
+    },
+    {
+      "attempt_key": "repaired-sentinel-runner-import-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-repaired-sentinel-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "boot-runner-cli-import",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A new repository runner must carry the established repository-root import bootstrap before its first direct CLI invocation.",
+      "observed_error": "The first direct boot-runner check repeated the missing scripts-package bootstrap previously recorded in AER-0773.",
+      "detection_method": "Direct Python execution raised ModuleNotFoundError before contract evaluation, evidence, Node, Harness or provider activity.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
+        "docs/ariadne-agent-error-correction-register-revision-588.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.repository_runner_direct_cli_missing_repo_root_bootstrap",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the standard bootstrap and a dedicated subprocess regression that invokes the script directly.",
+        "prevention_control": "The focused acceptance suite now makes direct CLI bootstrap an explicit test rather than relying only on a manual check.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py"
+        ]
+      },
+      "baton_summary": "records the direct-runner bootstrap recurrence and executable regression."
+    },
+    {
+      "attempt_key": "repaired-sentinel-zero-node-guard-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-repaired-sentinel-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "deterministic-node-process-guard",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A zero-Node deterministic guard must reject Node only while allowing the Git subprocesses required for full-hash ancestry validation.",
+      "observed_error": "The first test replaced all subprocess.Popen calls and therefore blocked the expected git cat-file ancestry probe.",
+      "detection_method": "Focused pytest failed at _git_commit_is_ancestor before any Node/Harness activity and identified the overbroad monkeypatch.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
+        "docs/ariadne-agent-error-correction-register-revision-588.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.zero_node_test_guard_blocked_required_non_node_subprocess",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Guard only node and node.exe while delegating Git subprocesses to the original Popen implementation.",
+        "prevention_control": "Process-denial tests classify the executable family they own instead of replacing the entire subprocess primitive.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py"
+        ]
+      },
+      "baton_summary": "records the overbroad process guard and Node-only correction."
+    },
+    {
+      "attempt_key": "repaired-sentinel-native-attempt-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-repaired-sentinel-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "repaired-sentinel-native-boot-process",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_node_cli",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The sole pinned rc7 process must activate the sentinel and emit one stock-headless HMR-ready event or fail closed without provider activity.",
+      "observed_error": "The process exited 1 after 7310 ms before any sentinel or HMR-readiness event.",
+      "detection_method": "The controller retained exit 1, zero HMR events, zero provider activity, process absence and disposable-root absence.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-terminal.json",
+        "docs/ariadne-agent-error-correction-register-revision-588.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.native_boot_process_exited_before_sentinel_activation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume attempt 001 without retry, reject boot readiness and constrain the successor to static diagnosis.",
+        "prevention_control": "No later native process is admissible until a separately frozen static diagnosis identifies a unique grounded coordinate.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-closeout.md"
+        ]
+      },
+      "baton_summary": "records the consumed preactivation exit, no retry and static-diagnosis containment."
+    },
+    {
+      "attempt_key": "repaired-sentinel-terminal-claim-boundary-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-repaired-sentinel-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "repaired-sentinel-terminal-claim-wording",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "A failed terminal narrative must not affirm conditions rejected by its structured fields.",
+      "observed_error": "The immutable generic claim sentence affirms sentinel loading and HMR readiness while result is failed_closed, events are empty and readiness is false.",
+      "detection_method": "Structured-field-to-narrative comparison identified the contradiction before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-terminal.json",
+        "docs/ariadne-agent-error-correction-register-revision-588.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.failed_terminal_used_success_affirmative_claim_wording",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep the terminal immutable and make its structured result, events and readiness controlling in closeout.",
+        "prevention_control": "Future terminal renderers branch claim wording on result and test failed-closed narrative against structured fields.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-closeout.md"
+        ]
+      },
+      "baton_summary": "records and contains the failed terminal's success-affirmative generic wording."
+    },
+    {
+      "attempt_key": "repaired-sentinel-register-append-anchor-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-repaired-sentinel-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "agent-error-register-append-anchor",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_apply_patch",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "An incident append must target the unique final incident and preserve one valid JSON document.",
+      "observed_error": "The first append matched a generic corrected-status row, inserted after AER-0001 and left trailing JSON.",
+      "detection_method": "JSON parsing and focused register tests rejected the worktree before staging or publication.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-588.md",
+        "tests/test_ariadne_agent_error_register.py"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_append_used_nonunique_patch_anchor",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Discard the malformed append, restore the selected generation and supply observations through the typed reducer.",
+        "prevention_control": "Clockwork allocates identifiers and appends incidents; manual register patching is prohibited.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the rejected non-unique append and typed-reducer correction."
+    },
+    {
+      "attempt_key": "repaired-sentinel-clockwork-register-ownership-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-repaired-sentinel-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "clockwork-owned-error-register-projection",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_git_cli",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "material",
+      "expected_invariant": "The live error register and pattern report are single-owner clockwork projections.",
+      "observed_error": "Candidate b99d961e225f355a17e74ec15d6e82fb61d83532 directly advanced both canonical files outside a tick.",
+      "detection_method": "Selected-generation SHA comparison exposed canonical drift before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-governance-clockwork/generation-manifest.json",
+        "docs/ariadne-agent-error-correction-register-revision-588.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_owned_canonical_surface_mutated_outside_tick",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore both files byte-exactly and submit the complete observations through one typed tick.",
+        "prevention_control": "Before staging, compare changed paths with the clockwork ownership inventory and reject direct canonical edits.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-governance-clockwork/ownership.json"
+        ]
+      },
+      "baton_summary": "records byte-exact recovery from the register/pattern ownership bypass."
+    },
+    {
+      "attempt_key": "repaired-sentinel-clockwork-latch-ownership-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-repaired-sentinel-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "clockwork-owned-active-latch-projection",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_git_cli",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "material",
+      "expected_invariant": "The active-operation latch is a single-owner clockwork projection.",
+      "observed_error": "Checkpoint 976dd4dd2c67bc337e2f0ca54a315bcb8ebeab7b directly changed the latch outside a tick.",
+      "detection_method": "Selected-generation SHA comparison exposed canonical drift before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-governance-clockwork/generation-manifest.json",
+        "docs/ariadne-agent-error-correction-register-revision-588.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_owned_canonical_surface_mutated_outside_tick",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the latch byte-exactly and let this closeout tick advance it.",
+        "prevention_control": "All latch updates use typed clockwork intents; ordinary commits never author the projection.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-governance-clockwork/ownership.json"
+        ]
+      },
+      "baton_summary": "records byte-exact recovery from the active-latch ownership bypass."
+    },
+    {
+      "attempt_key": "repaired-sentinel-closeout-intent-observations-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-repaired-sentinel-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "clockwork-v2-incident-observations",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "An incident-bearing v2 tick intent must supply a non-empty complete ordered observation set.",
+      "observed_error": "The first v2 closeout intent supplied an empty agent_error_observations list.",
+      "detection_method": "The deterministic tick validator rejected tick_incident_observations before projection or publication.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-588.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_v2_tick_intent_omitted_incident_observations",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Supply all ten observations and bind the revision note to clockwork-derived IDs and count.",
+        "prevention_control": "Validate v2 intent observations before treating an incident revision artifact as frozen.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the rejected empty v2 observation set and complete typed replacement."
+    }
+  ]
+}
