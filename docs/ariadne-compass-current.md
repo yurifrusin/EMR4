@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Continue with one exact five-variable Windows minimum-environment fixture process while preserving the sanitizer and wrapper byte-for-byte.
+> Connect the admitted sanitizer to one exact preset-mount runner catch and prove the closed terminal grammar without a native Harness process.
 
 ## North star
 
@@ -534,24 +534,25 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The opaque outer preset-mount stop is now bounded to six exact source-reachable coordinates without spending another native process or retaining the raw exception. Lineage parent: `deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal`.
 259. **Give the orchestrator substantial, typed control over native DeepSeek worker execution for reliable Raisa development — Preset-mount safe-subcoordinate sanitizer rehearsal**
    An opaque local fixture abort is now a content-free typed process reading, while the sanitizer correctly remains unadmitted. Lineage parent: `deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal`.
+260. **Give the orchestrator substantial, typed control over native DeepSeek worker execution for reliable Raisa development — Preset-mount sanitizer Windows minimum-environment recovery**
+   The previously opaque sanitizer launch boundary is now a one-shot, five-key, content-free deterministic control that admits the exact closed sanitizer vector. Lineage parent: `deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal`.
 
 ## Current position
 
-**Test the narrowest remaining local launch-envelope difference without widening worker authority — Preset-mount safe-subcoordinate sanitizer rehearsal**
+**Connect the admitted preset-mount sanitizer to the exact runner catch without yet turning the native engine — Preset-mount sanitizer Windows minimum-environment recovery**
 
-**Why this proof came next:** All three consumed fixture processes used env={}, unlike the accepted repository Node fixture convention; attempt 003 made that divergence safely measurable but did not prove causation.
+**Why this proof came next:** The pure sanitizer and its minimum Windows launch envelope are admitted, while runner integration and native execution remain separate closed gates.
 
-One successor will provide only five required Windows runtime variables to the unchanged sanitizer/wrapper and record another content-free process reading.
+One deterministic runner descendant will expose only the closed preset-mount stage/code/null-detail grammar at the accepted mount boundary.
 
 ### What this unlocks
 
-- Sanitizer admission if and only if the exact fifteen-result vector passes.
-- A later separately frozen runner bridge only after sanitizer admission.
+- An accepted traceable runner source with exact sanitizer import, call and catch coordinates.
+- A later separately frozen provider-free native process only after the bridge passes.
 
 ### What it does not solve
 
-- No DeepSeek Harness process, worker turn, model/provider request or coding-performance evidence.
-- No causal proof until the one-process result is observed.
+- No native Harness behavior, DeepSeek worker turn, model/provider request or coding-performance evidence.
 - No product/data action, production, release, Pages or protected integration.
 
 ## Continuity and authority
@@ -1302,8 +1303,8 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-closeout.md`
-- `docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-launch-environment-diagnosis.md`
-- `docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-plan.md`
+- `docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-plan.md`
+- `docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md`
 - `docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-closeout.md`
@@ -1726,7 +1727,7 @@ Prerequisites:
 - `docs/security/bernie-reception-one-structured-source-language-threat-model-delta.md`
 - `docs/security/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-threat-model-delta.md`
 - `docs/security/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-threat-model-delta.md`
-- `docs/security/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-threat-model-delta.md`
+- `docs/security/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-threat-model-delta.md`
 - `docs/security/dependabot-alert-17-triage-2026-08-01.md`
 - `docs/security/dependabot-alerts-8-15-triage-2026-08-01.md`
 - `docs/security/emr4-model-required-bureau-a3-b3-request-contract-recovery-threat-model-delta.md`
@@ -2712,6 +2713,8 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/preset-mount-source-coordinate-interpretation.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/safe-terminal-bridge-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-process-envelope.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/attempt-001-process-envelope.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/minimum-environment-sanitizer-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal/source-coordinate-reconciliation-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal/source-coordinate-reconciliation-report.md`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-evidence.json`
@@ -3708,4 +3711,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 364; continuity graph revision 382._
+_Compass map revision 365; continuity graph revision 383._

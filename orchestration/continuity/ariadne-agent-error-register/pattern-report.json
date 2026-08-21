@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 605,
+  "register_revision": 606,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "49be12e4a45636787fe43753a260388c625ade8ae2ec6a6f85fd52ff60d44517",
-  "incident_count": 890,
+  "canonical_register_sha256": "0e5796621fe54a9617bebe3a04b528ebb9bf13c0847abfbb40a8d532f2154836",
+  "incident_count": 894,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 493,
       "harness": 67,
-      "operator": 180,
+      "operator": 184,
       "repository": 134,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 95,
       "evidence_misreport": 73,
       "harness_failure": 67,
-      "operator_error": 180,
+      "operator_error": 184,
       "output_contract_violation": 273,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
@@ -28,18 +28,18 @@
     "by_role": {
       "implementer": 64,
       "integration_reviewer": 3,
-      "orchestrator": 760,
+      "orchestrator": 764,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 545,
+      "low": 549,
       "material": 131,
       "moderate": 214
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 168,
-      "canonical_unchanged": 556,
-      "untrusted_partial_worktree": 166
+      "canonical_unchanged": 559,
+      "untrusted_partial_worktree": 167
     },
     "by_resource_and_role": {
       "accepted-native-startup-terminal-and-consumed-controller-source::orchestrator": 1,
@@ -262,6 +262,10 @@
       "local-rg-operator::orchestrator": 3,
       "mandatory-narrative-timestamp::orchestrator": 1,
       "materialised-runtime-identity-validator::implementer": 1,
+      "minimum-environment-candidate-identity::orchestrator": 1,
+      "minimum-environment-evidence-shape::orchestrator": 1,
+      "minimum-environment-javascript-paths::orchestrator": 1,
+      "minimum-environment-next-operation-boundaries::orchestrator": 1,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
       "model-required-bureau-a3-b3-live-harness::orchestrator": 2,
       "model-required-bureau-c5-live-controller::orchestrator": 1,

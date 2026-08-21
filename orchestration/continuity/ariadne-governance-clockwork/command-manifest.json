@@ -2,7 +2,17 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "preset_mount_sanitizer_focused_and_negative_tests",
+      "command_id": "minimum_environment_persisted_check",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "scripts.deepseek_native_harness_provider_free_preset_mount_sanitizer_windows_minimum_environment_recovery",
+        "--check"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "minimum_environment_direct_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -13,54 +23,32 @@
         "--strict-config",
         "--strict-markers",
         "-q",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_windows_minimum_environment_recovery.py",
         "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
         "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "preset_mount_sanitizer_selected_inherited_tests",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "pytest",
-        "--noconftest",
-        "-p",
-        "no:cacheprovider",
-        "--strict-config",
-        "--strict-markers",
-        "-q",
-        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal_evidence.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required"
-    },
-    {
-      "command_id": "preset_mount_sanitizer_ruff",
+      "command_id": "minimum_environment_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py"
+        "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_windows_minimum_environment_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_windows_minimum_environment_recovery.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "preset_mount_sanitizer_compile",
+      "command_id": "minimum_environment_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py"
+        "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_windows_minimum_environment_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_windows_minimum_environment_recovery.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

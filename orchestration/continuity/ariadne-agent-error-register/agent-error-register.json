@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 605,
+  "register_revision": 606,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -34676,6 +34676,155 @@
       },
       "incident_id": "AER-0890",
       "attempt_id": "clock-510630d8e2ad8ea25f5a51be",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery",
+      "role": "orchestrator",
+      "resource_id": "minimum-environment-candidate-identity",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_git",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every Git object identity in a receipt or closeout binding is copied from the current machine snapshot and is never completed from memory.",
+      "observed_error": "The orchestrator drafted a guessed forty-character candidate identity before resolving HEAD; the guess did not equal the actual implementation commit.",
+      "detection_method": "git rev-parse exposed the mismatch before receipt generation or publication.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-606.md",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-windows-minimum-environment-recovery-prepush-receipt.json"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.caller_authored_git_identity_before_machine_resolution",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the caller-authored object identity and bind the receipt to the preflight's machine-resolved Git snapshot.",
+        "prevention_control": "Git identities are populated only by Git/preflight output; narrative input may name the measurement but not its value.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-606.md",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-windows-minimum-environment-recovery-prepush-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0891",
+      "attempt_id": "clock-7fc9dd7c0c46f73073fa2248",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery",
+      "role": "orchestrator",
+      "resource_id": "minimum-environment-javascript-paths",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_powershell",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Protected repository paths are resolved from accepted plan or repository inventory before a hash reading.",
+      "observed_error": "The first read-only hash command guessed shortened sanitizer and fixture paths that did not exist.",
+      "detection_method": "Get-FileHash failed on the nonexistent path before any Node process was launched.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-606.md",
+        "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.repository_path_recalled_before_source_resolution",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve both physical paths with repository inventory and then hash those exact files.",
+        "prevention_control": "Path-bearing verification commands consume source-owned paths instead of shortened remembered names.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-606.md"
+        ]
+      },
+      "incident_id": "AER-0892",
+      "attempt_id": "clock-811658739e7499d909a79ab8",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery",
+      "role": "orchestrator",
+      "resource_id": "minimum-environment-evidence-shape",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_powershell",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Typed artifact summaries select fields from the artifact schema rather than an assumed analogous shape.",
+      "observed_error": "The first read-only summary query used guessed evidence and envelope field names and therefore returned null readings.",
+      "detection_method": "The null summary conflicted with the controller's passing typed result and prompted direct schema-led inspection.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-606.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/evidence.schema.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/process-envelope.schema.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.typed_artifact_fields_guessed_before_schema_read",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Read the persisted JSON and schemas directly, then select the actual typed fields.",
+        "prevention_control": "Summary projections are schema-derived and fail on missing fields rather than silently accepting nulls.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-606.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/evidence.schema.json"
+        ]
+      },
+      "incident_id": "AER-0893",
+      "attempt_id": "clock-ed03bc71ff439ea6cfa57ce8",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery",
+      "role": "orchestrator",
+      "resource_id": "minimum-environment-next-operation-boundaries",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every next-operation latch preserves the exact inherited closed-surface boundary vocabulary in addition to any narrower successor-specific constraints.",
+      "observed_error": "The first closeout intent retained a narrower ordinary-practice constraint but omitted the exact inherited no-ordinary-practice feature-flag allowlist or command-mounting token.",
+      "detection_method": "The full current-baton consistency suite rejected the published projection; the clockwork then rolled it back byte-exactly before commit.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-606.md",
+        "tests/test_current_baton_consistency.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.successor_boundary_paraphrase_omits_inherited_exact_token",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the exact inherited boundary token alongside the successor-specific constraint and rerun the full consistency suite before republication.",
+        "prevention_control": "Next-boundary construction begins with the complete inherited mandatory set; successor constraints may append but never replace exact tokens.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-606.md",
+          "tests/test_current_baton_consistency.py"
+        ]
+      },
+      "incident_id": "AER-0894",
+      "attempt_id": "clock-44e216000c3200b93f3f2551",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 382,
+  "graph_revision": 383,
   "harvests": [],
   "nodes": [
     {
@@ -29251,9 +29251,125 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery",
+      "title": "Preset-mount sanitizer Windows minimum-environment recovery",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the bounded native-Harness control sequence and dependency-satisfied deterministic successors.",
+          "This closeout admits only the pure preset-mount sanitizer under one exact five-key local fixture boundary.",
+          "No runner execution, native Harness, worker/model/provider, product/data, deployment, Pages or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-one-five-key-node-fixture-process",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/attempt-001-process-envelope.json",
+          "status": "accepted",
+          "summary": "Accept one local Node fixture process with exactly five named Windows runtime keys, exit zero, zero stderr and no retained stream content."
+        },
+        {
+          "id": "accept-exact-fifteen-result-sanitizer-vector",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/minimum-environment-sanitizer-evidence.json",
+          "status": "accepted",
+          "summary": "Admit the unchanged pure sanitizer because the exact fifteen-result closed vector and frozen hashes pass."
+        },
+        {
+          "id": "reject-causal-overclaim-and-runtime-readiness",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-closeout.md",
+          "status": "rejected",
+          "summary": "Do not claim the sole cause of the earlier abort or admit any runner, native Harness, worker, model/provider request or retry."
+        },
+        {
+          "id": "accept-deterministic-runner-bridge-successor",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-plan.md",
+          "status": "accepted",
+          "summary": "Freeze a provider-free deterministic source bridge at the exact preset-mount catch without a native Harness process."
+        },
+        {
+          "id": "accept-sol-sanitizer-boundary",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-windows-minimum-environment-recovery-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the sanitizer boundary and preserve every later execution gate."
+        }
+      ],
+      "claim_scope": [
+        "Exact execution candidate ceac8b2600530bf858394bb84e66a42ec3d016f4 ran one local Node fixture process.",
+        "The child environment contained exactly SystemRoot, WINDIR, ComSpec, TEMP and TMP; values and unlisted keys were not retained.",
+        "The process exited zero with zero stderr and the exact fifteen-result safe vector.",
+        "Sanitizer and wrapper SHA-256 bindings remained 12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f and 601bb41f21916fc836603e54cb5caecec6987e75347609ff1881eef758940788.",
+        "Native Harness, worker, model/provider, request, network, database, Docker, target and product counts remained zero.",
+        "Thirty-three directly relevant tests, deterministic readback and static checks passed after execution."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-606.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-preset-mount-sanitizer-minimum-environment-pass.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-windows-minimum-environment-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-windows-minimum-environment-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-windows-minimum-environment-recovery-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-windows-minimum-environment-recovery-prepush-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-windows-minimum-environment-recovery-preexecution-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_windows_minimum_environment_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_windows_minimum_environment_recovery.py",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer.mjs",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_fixture.mjs",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/evidence.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/process-envelope.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/attempt-001-process-envelope.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/minimum-environment-sanitizer-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/minimum-environment-sanitizer-report.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact sole cause of the earlier empty-environment abort is not claimed.",
+        "The admitted sanitizer is not yet connected to an accepted runner.",
+        "Any DSH/native Harness process, worker/model/provider use, repair, retry and occupied behavior remain closed.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T06:03:42.6115665+10:00",
+      "updated_at": "2026-08-22T06:03:42.6115665+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "8d581bacb68447f13b6d13cc2a80d36431fba557",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T05:35:38.3957746+10:00"
+  "updated_at": "2026-08-22T06:03:42.6115665+10:00"
 }
