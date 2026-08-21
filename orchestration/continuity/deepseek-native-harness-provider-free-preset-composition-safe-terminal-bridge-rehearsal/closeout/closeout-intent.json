@@ -1,0 +1,333 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal",
+    "title": "DeepSeek native Harness provider-free preset-composition safe-terminal bridge rehearsal",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T04:31:24.1598131+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal",
+      "title": "Preset-composition safe-terminal bridge rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the bounded native-Harness control sequence and its dependency-satisfied deterministic descendants.",
+          "The one distinct native attempt is consumed without retry; no worker turn, model/provider request, target, product, data, deployment, Pages or protected-ref authority opened.",
+          "The accepted predecessor and this candidate's exact process evidence remain immutable."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-safe-preset-mount-terminal",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/safe-terminal-bridge-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact closed preset-mount coordinate with private identity admission, zero downstream activity and complete cleanup."
+        },
+        {
+          "id": "reject-worker-readiness-and-repair-selection",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/preset-mount-source-coordinate-interpretation.json",
+          "status": "rejected",
+          "summary": "Do not infer preset success, effective tools, model selection, publication veto, worker readiness, exact internal mount cause or a repair."
+        },
+        {
+          "id": "accept-source-reconciliation-successor",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-plan.md",
+          "status": "accepted",
+          "summary": "Freeze one provider-free read-only source reconciliation with zero native processes and a six-coordinate closed candidate vocabulary."
+        },
+        {
+          "id": "accept-sol-safe-terminal-closeout",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-preset-composition-safe-terminal-bridge-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the traceability gain and exact containment without opening a DeepSeek worker or model request."
+        }
+      ],
+      "claim_scope": [
+        "One pinned rc.7 process reached private identity admission and emitted one typed safe terminal.",
+        "The exact accepted coordinate is EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED with no raw runtime detail.",
+        "Public registries, lifecycle announcements, turns, requests, broker, worker, model/provider, network, database, Docker and target activity remained zero.",
+        "The process and disposable root are absent, the bundle and package seed are unchanged, and retry/resume counts are zero.",
+        "Pinned source inspection yields a finite candidate set only; the exact internal mount coordinate and repair remain unobserved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/preset-mount-source-coordinate-interpretation.json",
+          "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-603.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-preset-composition-safe-terminal-bridge.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-composition-safe-terminal-bridge-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-composition-safe-terminal-bridge-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/safe-terminal-sidecar.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/evidence.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/native-attempt-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/safe-terminal-bridge-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/safe-terminal-bridge-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/efficacy-reading.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact internal preset-mount subcoordinate remains unobserved and no repair is selected.",
+        "Preset composition, effective tools, model selection, commit, publication veto, worker readiness and occupied model behavior remain unproved.",
+        "All product, data, provider-request, production, release, Pages and protected-integration gates remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Make native DeepSeek worker execution bounded, traceable and governable enough for Raisa development",
+      "outcome": "The safe terminal bridge converted an opaque factory failure into one exact closed preset-mount coordinate without raw-error retention or downstream activity.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/safe-terminal-bridge-evidence.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/preset-mount-source-coordinate-interpretation.json"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Reconcile the exact pinned preset-mount source before designing any further native probe",
+      "why_now": "The safe terminal identifies preset mounting but deliberately omits the raw internal exception, leaving a finite source-level ambiguity that should be resolved without spending another process.",
+      "outcome": "One deterministic projection will verify exact source identities and freeze the narrowest source-reachable six-coordinate candidate set.",
+      "unlocks": [
+        "A separately frozen safe typed subcoordinate probe if more than one source coordinate remains reachable.",
+        "A source-grounded repair only after an exact internal coordinate is observed."
+      ],
+      "does_not_solve": [
+        "No native process, worker turn, model/provider request, target edit or coding-performance evidence.",
+        "No product/data action, ordinary-practice enablement, production, deployment, release, Pages or protected integration."
+      ],
+      "evidence": [
+        "docs/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-plan.md",
+        "docs/security/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-threat-model-delta.md"
+      ],
+      "orientation_statement": "Continue the bounded native-Harness control sequence with a zero-process exact-source reconciliation before any further execution."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal",
+      "active_tranche": "DeepSeek native Harness provider-free preset-mount source-coordinate reconciliation rehearsal",
+      "objective": "Bind the exact pinned rc.7 mount and preset-row sources to the narrowest finite internal candidate set without raw runtime detail or a native process.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and extended authority for the bounded native-Harness control sequence.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_implement_the_zero_process_source_reconciliation_and_deterministic_admission"
+    },
+    "incidents": [
+      {"incident_id": "safe-terminal-threat-row-wording-mismatch", "source_id": "safe-terminal-focused-test-001", "peers": []},
+      {"incident_id": "safe-terminal-rebound-private-identity-validation", "source_id": "safe-terminal-focused-test-002", "peers": []},
+      {"incident_id": "safe-terminal-receipt-dirty-generation-order", "source_id": "safe-terminal-preexecution-receipt-001", "peers": []},
+      {"incident_id": "safe-terminal-consumed-attempt-schema-inference", "source_id": "safe-terminal-closeout-test-001", "peers": []},
+      {"incident_id": "safe-terminal-closeout-wrapper-cache-recurrence", "source_id": "safe-terminal-closeout-command-001", "peers": []}
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "safe_terminal_focused_and_evidence_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "pytest", "--noconftest", "-p", "no:cacheprovider", "--strict-config", "--strict-markers", "-q", "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "safe_terminal_selected_inherited_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "pytest", "--noconftest", "-p", "no:cacheprovider", "--strict-config", "--strict-markers", "-q", "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py", "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "safe_terminal_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "safe_terminal_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "safe_terminal_deterministic_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal", "--check"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-composition-safe-terminal-bridge-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/safe-terminal-bridge-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/preset-mount-source-coordinate-interpretation.json",
+      "docs/ariadne-agent-error-correction-register-revision-603.md",
+      "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-preset-composition-safe-terminal-bridge.md",
+      "docs/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-threat-model-delta.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_read_only_preset_mount_source_coordinate_reconciliation_only",
+    "accepted_safe_terminal_attempt_and_all_predecessor_attempts_remain_consumed_and_immutable",
+    "exact_pinned_rc7_package_source_hashes_and_versions_required",
+    "native_harness_process_turn_request_broker_worker_model_provider_network_database_docker_and_target_counts_remain_zero",
+    "no_raw_error_message_stack_code_path_cause_stream_session_prompt_response_path_or_credential",
+    "closed_six_coordinate_source_candidate_vocabulary_only",
+    "exact_internal_coordinate_observed_repair_selected_and_retry_authority_remain_false",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "exact_test_counts_from_completed_machine_output_only",
+    "no_commit_identity_statement_without_current_machine_snapshot_copy",
+    "all_new_narrative_artifacts_require_date_and_brisbane_timestamp",
+    "generated_narrative_timestamps_derive_from_creation_clock_or_typed_evidence",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "safe-terminal-focused-test-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-preset-composition-safe-terminal-bridge",
+      "role": "orchestrator",
+      "resource_id": "safe-terminal-threat-row-assertion",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A focused test binds the exact frozen threat label and its separate fail-closed control without paraphrasing either.",
+      "observed_error": "The first assertion searched for a positive sentence while the frozen table correctly labels the threat as Raw guard errors escape.",
+      "detection_method": "Focused pytest rejected the absent sentence before any native process was launched.",
+      "evidence_paths": ["docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md", "docs/security/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-threat-model-delta.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.threat_label_rewritten_as_positive_control",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Bind the exact threat-table row in the focused test.", "prevention_control": "Tests quote the frozen label and control separately rather than synthesizing prose.", "evidence_paths": ["docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md", "docs/ariadne-agent-error-correction-register-revision-603.md"]},
+      "baton_summary": "records and corrects the threat-row wording mismatch before execution."
+    },
+    {
+      "attempt_key": "safe-terminal-focused-test-002",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-preset-composition-safe-terminal-bridge",
+      "role": "orchestrator",
+      "resource_id": "safe-terminal-private-identity-validator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Successor identity validation compares against an immutable captured predecessor identity outside temporary module rebinding.",
+      "observed_error": "The first validator compared against the dynamically rebound predecessor global and falsely rejected the distinct successor identity.",
+      "detection_method": "Focused pytest rejected distinct_identity before any native process was launched.",
+      "evidence_paths": ["docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md", "scripts/deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.validator_reads_temporarily_rebound_reference",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Capture the accepted predecessor identity once and compare the successor against that immutable value.", "prevention_control": "Validators do not use temporarily rebound module globals as historical reference values.", "evidence_paths": ["docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md", "docs/ariadne-agent-error-correction-register-revision-603.md"]},
+      "baton_summary": "records and corrects the rebinding-sensitive identity validator before execution."
+    },
+    {
+      "attempt_key": "safe-terminal-preexecution-receipt-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-preset-composition-safe-terminal-bridge",
+      "role": "orchestrator",
+      "resource_id": "safe-terminal-preexecution-receipt-order",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A preexecution receipt is generated only after its own paths and all implementation paths are committed and the tracked tree is clean.",
+      "observed_error": "The first receipt was generated while its two receipt paths were modified and honestly recorded a dirty tracked tree.",
+      "detection_method": "Immediate receipt readback showed tracked_worktree_clean false; it was not used to authorize execution.",
+      "evidence_paths": ["docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md", "orchestration/agent_inbox/codex/deepseek-native-harness-preset-composition-safe-terminal-bridge-preplanning-receipt.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.preexecution_receipt_generated_before_receipt_commit",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Commit the receipt paths, regenerate at the committed source and require clean branch-origin alignment.", "prevention_control": "Receipt generation follows the final receipt-path commit and precedes execution only after clean readback.", "evidence_paths": ["docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md", "docs/ariadne-agent-error-correction-register-revision-603.md"]},
+      "baton_summary": "records the rejected dirty receipt and the clean regenerated preexecution receipt."
+    },
+    {
+      "attempt_key": "safe-terminal-closeout-test-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-preset-composition-safe-terminal-bridge",
+      "role": "orchestrator",
+      "resource_id": "safe-terminal-attempt-schema-assertion",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Immutable-evidence tests copy schema identifiers from the retained artifact or owning schema rather than deriving them from operation names.",
+      "observed_error": "The first evidence test guessed a successor-specific attempt schema while the consumed artifact retains the inherited diagnostic schema.",
+      "detection_method": "Focused pytest reported the exact schema_version mismatch without launching a native process.",
+      "evidence_paths": ["docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md", "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/native-attempt-consumed.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.schema_identifier_inferred_from_operation_name",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Bind the exact retained schema identifier in the immutable-evidence test.", "prevention_control": "Schema identifiers are copied from an authoritative artifact or schema, never invented by analogy.", "evidence_paths": ["tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py", "docs/ariadne-agent-error-correction-register-revision-603.md"]},
+      "baton_summary": "records and corrects the inferred consumed-attempt schema identifier."
+    },
+    {
+      "attempt_key": "safe-terminal-closeout-command-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-preset-composition-safe-terminal-bridge",
+      "role": "orchestrator",
+      "resource_id": "safe-terminal-closeout-wrapper-selection",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_provider_free_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Closeout command selection carries forward the accepted host cache-location constraint for deterministic native-Harness checks.",
+      "observed_error": "The first inherited command repeated the incompatible provider-free wrapper and failed with localappdata_missing in two deterministic checks.",
+      "detection_method": "The wrapper emitted only the typed local resource guard failures and native-process count remained zero.",
+      "evidence_paths": ["docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md", "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-explicit-cache-root-test-recovery.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.provider_free_wrapper_reused_despite_cache_constraint",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Use the predecessor-approved no-conftest pytest invocation for the exact selected inherited tests.", "prevention_control": "Verifier environment constraints are inherited as typed command-selection inputs across descendant closeouts.", "evidence_paths": ["docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md", "docs/ariadne-agent-error-correction-register-revision-603.md"]},
+      "baton_summary": "records the repeated wrapper incompatibility and restores the accepted verifier command shape."
+    }
+  ]
+}

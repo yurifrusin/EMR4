@@ -1,0 +1,16 @@
+{
+  "candidate_source": "c66eb82cccd64961f0d99bf9f67803e1a69ebd8a",
+  "control_gain": "finite_guard_coordinate_or_prepublication_veto_or_exact_link_apply_absence",
+  "diagnostic_terminal": "preset_composition_failure_attributed",
+  "error_class": null,
+  "execution_attempt_id": "preset-composition-safe-terminal-attempt-001",
+  "factory_boundary_observed": true,
+  "last_admitted_stage": "private_identity_admitted",
+  "occupied_model_launch_authorized": false,
+  "operation_id": "deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal",
+  "result": "pass",
+  "safe_guard_coordinate": "EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED",
+  "safe_guard_detail": null,
+  "schema_version": "ariadne.native_harness_preset_composition_safe_terminal_efficacy.v1",
+  "worker_launch_authorized": false
+}

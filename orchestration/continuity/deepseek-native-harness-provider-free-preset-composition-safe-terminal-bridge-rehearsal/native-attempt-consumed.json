@@ -1,0 +1,9 @@
+{
+  "candidate_source": "c66eb82cccd64961f0d99bf9f67803e1a69ebd8a",
+  "execution_attempt_id": "preset-composition-safe-terminal-attempt-001",
+  "operation_id": "deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal",
+  "resume_permitted": false,
+  "retry_count": 0,
+  "schema_version": "ariadne.native_harness_agent_factory_diagnostic_attempt.v1",
+  "state": "consumed"
+}

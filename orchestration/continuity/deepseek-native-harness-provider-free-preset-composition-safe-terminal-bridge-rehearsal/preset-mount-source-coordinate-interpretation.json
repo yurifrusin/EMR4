@@ -1,0 +1,71 @@
+{
+  "schema_version": "ariadne.native_harness_preset_mount_source_coordinate_interpretation.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal",
+  "candidate_source": "c66eb82cccd64961f0d99bf9f67803e1a69ebd8a",
+  "evidence_source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/safe-terminal-bridge-evidence.json",
+  "terminal": {
+    "result": "preset_composition_failure_attributed",
+    "last_admitted_stage": "private_identity_admitted",
+    "safe_guard_coordinate": "EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED",
+    "safe_guard_detail": null
+  },
+  "pinned_source_bindings": {
+    "@deepseek-ai/dsh-agent-presets/lib/index.js": "a0b417514e3d285ad5fef74867e8049af333ebdec6e4d7639e388aa0903e0039",
+    "@deepseek-ai/dsh-tool-fs/lib/index.js": "054af13c1d6f5e67ddf1b89211991f32e0e72f466762b75816282e5cdada86cd",
+    "@deepseek-ai/dsh-tool-fs-search/lib/index.js": "ea87dbb4b2e0c2af1e3c9463c42892e510a3fa1e620ff98afc738e9dc5a0f787",
+    "@deepseek-ai/dsh-base/cordis.patch.yml": "9870a518274194c0e1ebd870cee2737fbc2ffc04ae36887871ffe6fcf74beac1"
+  },
+  "source_chain": [
+    "AgentPresets.mount checks the agent scope",
+    "AgentPresets.resolveMountable resolves the already admitted roster",
+    "AgentPresets.ensureStanding reads a composition stamp and creates a standing scope",
+    "mountPreset awaits the PresetTree handle",
+    "mountPreset requires the subtree publication record",
+    "mountPreset rejects enabled rows with unresolved injected services",
+    "mountPreset rejects services published into the root realm",
+    "AgentPresets.mount binds the agent scope only after the standing mount passes"
+  ],
+  "admitted_static_prerequisites": {
+    "preset_rows": [
+      "@deepseek-ai/dsh-tool-fs",
+      "@deepseek-ai/dsh-tool-fs-search"
+    ],
+    "tool_fs_inject": [
+      "tools",
+      "fs",
+      "systemPrompt"
+    ],
+    "tool_fs_search_inject": [
+      "tools",
+      "systemPrompt",
+      "subprocess"
+    ],
+    "host_declares_required_services": true,
+    "bare_package_resolution_is_owned_by_preset_tree": true
+  },
+  "eliminated_coordinates": [
+    "preset_root_count_mismatch",
+    "shipped_root_mismatch",
+    "user_root_mismatch",
+    "preset_roster_mismatch",
+    "unknown_or_discovery_broken_preset",
+    "package_import_rejected_before_factory",
+    "public_agent_or_session_creation"
+  ],
+  "finite_remaining_coordinates": [
+    "PRESET_MOUNT_AGENT_SCOPE_ABSENT",
+    "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE",
+    "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED",
+    "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT",
+    "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT",
+    "PRESET_MOUNT_ROOT_SERVICE_LEAK"
+  ],
+  "claim_boundary": {
+    "exact_internal_coordinate_observed": false,
+    "raw_runtime_error_retained": false,
+    "repair_selected": false,
+    "second_native_process_authorized": false,
+    "worker_launch_authorized": false,
+    "occupied_model_launch_authorized": false
+  }
+}
