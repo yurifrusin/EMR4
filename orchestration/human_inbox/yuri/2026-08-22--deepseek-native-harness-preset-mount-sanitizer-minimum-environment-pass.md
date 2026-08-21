@@ -29,8 +29,10 @@ Harness process.
 - Native Harness, worker, model/provider, network and product activity stayed
   at zero.
 - Deterministic readback plus 33 relevant tests and static checks passed.
-- Three contained low-severity caller-shape errors are recorded as AER-0891 to
-  AER-0893; none consumed another Node process or altered evidence.
+- Four contained low-severity workflow errors are recorded as AER-0891 to
+  AER-0894. The fourth was an exact inherited-boundary vocabulary omission;
+  the first projection was rolled back byte-exactly and none consumed another
+  Node process or altered execution evidence.
 
 Next: deterministic provider-free preset-mount sanitizer runner bridge; no
 native process yet.

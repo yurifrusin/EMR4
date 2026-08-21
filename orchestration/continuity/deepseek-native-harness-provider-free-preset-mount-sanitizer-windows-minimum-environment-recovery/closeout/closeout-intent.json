@@ -163,6 +163,11 @@
         "incident_id": "minimum-environment-caller-authored-evidence-shape",
         "source_id": "minimum-environment-postexecution-reading-001",
         "peers": []
+      },
+      {
+        "incident_id": "minimum-environment-inherited-boundary-token-omission",
+        "source_id": "minimum-environment-clockwork-projection-001",
+        "peers": []
       }
     ],
     "broker": {
@@ -267,6 +272,7 @@
     "any_pure_fixture_process_count_frozen_before_execution",
     "no_worker_model_provider_request_repair_retry_or_target_authority",
     "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
     "no_ordinary_practice_enablement_or_generic_status_arrived_change",
     "no_product_patient_appointment_clinical_historical_or_protected_data",
     "exact_test_counts_from_completed_machine_output_only",
@@ -381,6 +387,41 @@
         ]
       },
       "baton_summary": "records the guessed evidence shape and corrects post-execution readback to schema-owned fields."
+    },
+    {
+      "attempt_key": "minimum-environment-clockwork-projection-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery",
+      "role": "orchestrator",
+      "resource_id": "minimum-environment-next-operation-boundaries",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every next-operation latch preserves the exact inherited closed-surface boundary vocabulary in addition to any narrower successor-specific constraints.",
+      "observed_error": "The first closeout intent retained a narrower ordinary-practice constraint but omitted the exact inherited no-ordinary-practice feature-flag allowlist or command-mounting token.",
+      "detection_method": "The full current-baton consistency suite rejected the published projection; the clockwork then rolled it back byte-exactly before commit.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-606.md",
+        "tests/test_current_baton_consistency.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.successor_boundary_paraphrase_omits_inherited_exact_token",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the exact inherited boundary token alongside the successor-specific constraint and rerun the full consistency suite before republication.",
+        "prevention_control": "Next-boundary construction begins with the complete inherited mandatory set; successor constraints may append but never replace exact tokens.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-606.md",
+          "tests/test_current_baton_consistency.py"
+        ]
+      },
+      "baton_summary": "records the missing inherited boundary token, byte-exact rollback and correction before the final clockwork publication."
     }
   ]
 }

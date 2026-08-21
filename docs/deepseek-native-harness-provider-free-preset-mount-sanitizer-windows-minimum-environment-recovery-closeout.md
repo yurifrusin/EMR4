@@ -45,12 +45,14 @@ Ruff, `py_compile`, schema validation and Git whitespace checks pass after the
 single execution. The check path read the persisted artifacts and spawned no
 second process.
 
-Three low-severity caller-shape mistakes were contained without a Node rerun:
+Four low-severity workflow mistakes were contained without a Node rerun:
 one guessed commit identity was removed before receipt generation; one
 read-only hash query guessed a JavaScript path before resolving it from the
 repository; and one read-only summary query guessed evidence field names before
-schema-led inspection. They are recorded as AER-0891 through AER-0893 so the
-clockwork can measure recurrence rather than hide it.
+schema-led inspection. The first clockwork projection also omitted one exact
+inherited boundary token and was rolled back byte-exactly after the full baton
+consistency suite rejected it. They are recorded as AER-0891 through AER-0894
+so the clockwork can measure recurrence rather than hide it.
 
 ## Parallelism disposition
 
