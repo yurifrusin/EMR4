@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.pushover_closeout_receipt.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+  "sent_at": "2026-08-22T05:47:37.3377282+10:00",
+  "status": "passed",
+  "provider_status": 1,
+  "request": "f1b52749-bb82-4329-898a-c43466ac5dd9",
+  "continuing": true,
+  "next_operation": "deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery",
+  "non_phi": true
+}
