@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import subprocess
 
 from jsonschema import Draft202012Validator
 
@@ -17,6 +18,27 @@ EVIDENCE = (
 )
 ATTEMPT_ROOT = Path(
     "C:/Users/sarashera/EMR4-worktrees/deepseek-native-synthetic-window-worker-005"
+)
+TERMINAL_SOURCE = "0b2aebd104f4c9dcfd4603af5dd51a687bace555"
+CLOSEOUT = (
+    ROOT
+    / "docs"
+    / "raisa-authored-synthetic-check-in-native-harness-bounded-worker-"
+    "attempt-005-closeout.md"
+)
+SOL = (
+    ROOT
+    / "orchestration"
+    / "agent_inbox"
+    / "codex"
+    / "raisa-native-harness-attempt-005-sol-acceptance.md"
+)
+YURI = (
+    ROOT
+    / "orchestration"
+    / "human_inbox"
+    / "yuri"
+    / "2026-08-21--native-harness-attempt-005-terminal.md"
 )
 
 
@@ -94,3 +116,44 @@ def test_attempt_five_is_consumed_and_cleanup_is_complete() -> None:
     assert terminal["cleanup"]["raw_session_retained"] is False
     assert terminal["cleanup"]["provider_key_present_in_worker_environment"] is False
     assert not ATTEMPT_ROOT.exists()
+
+
+def test_attempt_five_efficacy_reading_states_the_honest_conclusion() -> None:
+    value = load("efficacy-reading.json")
+    assert value["terminal_source"] == TERMINAL_SOURCE
+    assert value["measurements"]["hmr_events"] == [
+        "sentinel_activated",
+        "stock_headless_hmr_ready",
+    ]
+    assert value["measurements"]["runner_failure_code"] == "CUSTOM_RUNNER_FAILURE"
+    assert value["efficacy"]["pre_hmr_startup_recovery_vs_attempt_004"] == (
+        "improved"
+    )
+    assert value["efficacy"]["post_hmr_runner_cause_localization"] == (
+        "insufficient"
+    )
+    assert value["efficacy"]["deepseek_reasoning_or_coding_evidence"] == (
+        "not_reached"
+    )
+    assert value["efficacy"]["native_worker_success"] == "failed"
+
+
+def test_attempt_five_closeout_documents_bind_timestamp_and_terminal_source() -> None:
+    resolved = subprocess.check_output(
+        ["git", "rev-parse", "--verify", f"{TERMINAL_SOURCE}^{{commit}}"],
+        cwd=ROOT,
+        text=True,
+    ).strip()
+    assert resolved == TERMINAL_SOURCE
+    subprocess.run(
+        ["git", "merge-base", "--is-ancestor", TERMINAL_SOURCE, "HEAD"],
+        cwd=ROOT,
+        check=True,
+    )
+    for path in (CLOSEOUT, SOL, YURI, EVIDENCE / "diagnosis.md"):
+        text = path.read_text(encoding="utf-8")
+        assert "Date: 2026-08-21" in text
+        assert "Timestamp: 2026-08-21T" in text
+        assert "+10:00 (Australia/Brisbane)" in text
+    for path in (CLOSEOUT, SOL, YURI):
+        assert TERMINAL_SOURCE in path.read_text(encoding="utf-8")

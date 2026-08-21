@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "T01",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/emr4",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py"
+      ]
+    },
+    {
+      "id": "T02",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/emr4",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_current_baton_consistency.py"
+      ]
+    },
+    {
+      "id": "T03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py"
+      ]
+    },
+    {
+      "id": "T04",
+      "argv": [
+        "node",
+        "--check",
+        "scripts/ariadne_deepseek_native_harness_broker.mjs"
+      ]
+    },
+    {
+      "id": "T05",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ]
+    }
+  ]
+}

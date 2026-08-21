@@ -1,0 +1,52 @@
+{
+  "schema_version": "ariadne.synthetic_native_worker_attempt_005_efficacy.v1",
+  "captured_at": "2026-08-21T19:35:59.5541506+10:00",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
+  "attempt_id": "deepseek-native-synthetic-window-worker-005",
+  "result": "failed_closed",
+  "failure_coordinate": "native_harness_terminal_failure",
+  "terminal_source": "0b2aebd104f4c9dcfd4603af5dd51a687bace555",
+  "checkpoint_source": "c135890e691ef6540af9ae556e28ed26b9020637",
+  "reviewed_candidate_source": "67e15262f6dc8d6038edbc64ea938a2cb27baa98",
+  "measurements": {
+    "native_process_count": 1,
+    "harness_exit_code": 1,
+    "wall_clock_ms": 10929,
+    "stdout_bytes": 0,
+    "stderr_bytes": 0,
+    "hmr_events": [
+      "sentinel_activated",
+      "stock_headless_hmr_ready"
+    ],
+    "runner_terminal_present": true,
+    "runner_status": "failed",
+    "runner_failure_code": "CUSTOM_RUNNER_FAILURE",
+    "runner_request_count": 0,
+    "provider_request_started": 0,
+    "provider_request_completed": 0,
+    "provider_request_failed": 0,
+    "broker_request_rejected": 0,
+    "tool_call_count": 0,
+    "tool_result_count": 0,
+    "changed_path_count": 0,
+    "automatic_retry_count": 0,
+    "fallback_count": 0,
+    "auxiliary_model_call_count": 0,
+    "owned_processes_after_cleanup": 0,
+    "attempt_root_absent_after_cleanup": true
+  },
+  "efficacy": {
+    "single_launch_accounting": "passed",
+    "provider_boundary_accounting": "passed",
+    "retry_and_fallback_control": "passed",
+    "candidate_change_accounting": "passed",
+    "exact_cleanup": "passed",
+    "pre_hmr_startup_recovery_vs_attempt_004": "improved",
+    "post_hmr_runner_phase_localization": "partial",
+    "post_hmr_runner_cause_localization": "insufficient",
+    "deepseek_reasoning_or_coding_evidence": "not_reached",
+    "native_worker_success": "failed"
+  },
+  "honest_conclusion": "Attempt 005 crossed both native-Harness HMR readiness coordinates and invoked the custom runner, a real improvement over attempt 004. The runner then failed before its first model request and retained only the generic CUSTOM_RUNNER_FAILURE code, so DeepSeek performance remains unmeasured and the native Harness is not ready for EMR4 worker work. One-shot accounting and cleanup were exact, but the next correction must add a closed, sanitized post-HMR pre-request diagnostic stage before any further occupied attempt.",
+  "next_recovery": "provider_free_read_only_custom_runner_pre_request_failure_coordinate_diagnosis_and_closed_stage_diagnostic_design_without_any_new_native_or_provider_process"
+}

@@ -1,0 +1,392 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
+    "title": "Raisa authored-synthetic check-in native Harness bounded-worker attempt 005",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-21T19:35:59.5541506+10:00",
+    "node": {
+      "id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
+      "title": "Native Harness bounded-worker attempt 005 runner terminal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorised one attempt-005 occupied identity under standing uninterrupted-development authority.",
+          "The attempt is consumed with zero retry, resume, fallback or second-worker authority.",
+          "No product, data, production, deployment, Pages or protected integration authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-consumed-failed-closed-terminal",
+          "source": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one native process, exit one, zero provider calls, zero retries and complete cleanup as the final attempt-005 result."
+        },
+        {
+          "id": "accept-partial-runner-localization",
+          "source": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept both HMR coordinates and runner activation as an execution-path improvement while recording only partial pre-request localization."
+        },
+        {
+          "id": "reject-native-worker-readiness",
+          "source": "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-closeout.md",
+          "status": "rejected",
+          "summary": "Reject every claim that DeepSeek was reached, model performance was measured or native Harness is ready for EMR4 worker use."
+        },
+        {
+          "id": "decline-postterminal-gemini-call",
+          "source": "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Decline Gemini because no code candidate or provider result survived and the closed machine terminal is decisive."
+        },
+        {
+          "id": "accept-contained-attempt-005-workflow-incidents",
+          "source": "docs/ariadne-agent-error-correction-register-revision-595.md",
+          "status": "accepted",
+          "summary": "Accept six corrected or contained workflow and diagnostic observations with none open."
+        }
+      ],
+      "claim_scope": [
+        "Exactly one native Harness attempt-005 process started and exited one after both HMR readiness coordinates.",
+        "The custom runner activated and failed before its first model request with the closed generic code CUSTOM_RUNNER_FAILURE.",
+        "The broker recorded zero provider requests and the runner recorded no model or tool activity.",
+        "No candidate path changed; retry, fallback and auxiliary-model counts are zero.",
+        "Harness, broker and the exact disposable root are absent after cleanup.",
+        "The Harness advanced past attempt-004 startup but remains unready for EMR4 worker use."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-plan.md",
+          "docs/security/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-terminal.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/efficacy-reading.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/diagnosis.md"
+        ],
+        "closeouts": [
+          "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-005-sol-deterministic-admission-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-005-occupied-prelaunch-receipt.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/clockwork-checkpoint-tick-evidence.json"
+        ],
+        "tests": [
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-attempt-consumed.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-report.md",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/postterminal-command-manifest.json",
+          "docs/ariadne-agent-error-correction-register-revision-595.md",
+          "orchestration/human_inbox/yuri/2026-08-21--native-harness-attempt-005-terminal.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact custom-runner pre-request sub-stage remains unidentified.",
+        "DeepSeek provider, reasoning, coding and tool behavior were not reached.",
+        "Native Harness worker readiness and product-use authority remain closed.",
+        "Every attempt-005 identity is consumed and no occupied retry is authorised."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Test whether the native Harness can provide bounded, orchestrator-controlled DeepSeek worker execution",
+      "outcome": "The one occupied identity passed full HMR readiness and entered the custom runner, then failed before provider I/O with exact cleanup but only a generic runner code.",
+      "evidence": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/efficacy-reading.json",
+        "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Identify and instrument the custom runner's pre-request failure without spending another occupied attempt",
+      "why_now": "The terminal rules out pre-HMR startup but its generic catch cannot distinguish the bounded runner sub-stages.",
+      "outcome": "A provider-free source reading and closed diagnostic design will decide the narrowest correction before any later occupied proof.",
+      "unlocks": [
+        "A stage-grounded repair-or-stop decision for the native runner.",
+        "A later separately authorised occupied proof only after diagnostic acceptance."
+      ],
+      "does_not_solve": [
+        "No native Harness, broker, worker, model or provider process.",
+        "No occupied retry, product work, data use, deployment or protected integration."
+      ],
+      "evidence": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-terminal.json",
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/diagnosis.md"
+      ],
+      "orientation_statement": "Inspect and instrument the closed runner pre-request stages; do not launch another occupied process."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis",
+      "active_tranche": "DeepSeek native Harness provider-free custom-runner pre-request failure-coordinate diagnosis",
+      "objective": "Read only the accepted custom runner and relevant pinned rc.7 source, map the bounded pre-request operations to a closed vocabulary and design a sanitized post-HMR diagnostic sidecar that can identify the narrowest supported failure stage, without launching Harness, broker, worker, model or provider activity.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, constrained to provider-free diagnostic strengthening after the consumed attempt-005 terminal.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_custom_runner_pre_request_source_and_diagnostic_contract"
+    },
+    "incidents": [
+      {"incident_id": "preflight-configuration-property-mismatch", "source_id": "attempt-005-preflight-config-property-001", "peers": []},
+      {"incident_id": "preflight-process-query-self-match", "source_id": "attempt-005-process-query-self-match-001", "peers": []},
+      {"incident_id": "historical-live-latch-selector-applied", "source_id": "attempt-005-historical-selector-001", "peers": []},
+      {"incident_id": "postterminal-test-dead-conditional", "source_id": "attempt-005-postterminal-test-expression-001", "peers": []},
+      {"incident_id": "post-hmr-runner-diagnostic-too-generic", "source_id": "attempt-005-runner-diagnostic-gap-001", "peers": []},
+      {"incident_id": "closeout-incident-category-unadmitted", "source_id": "attempt-005-closeout-category-vocabulary-001", "peers": []}
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "attempt_005_postterminal_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt_005_governance_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_current_baton_consistency.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt_005_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt_005_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Native Harness attempt 005 runner terminal acceptance",
+    "paths": [
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-plan.md",
+      "docs/security/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-threat-model-delta.md",
+      "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-attempt-consumed.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/efficacy-reading.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/diagnosis.md",
+      "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
+      "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py",
+      "docs/ariadne-agent-error-correction-register-revision-595.md",
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-21--native-harness-attempt-005-terminal.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_read_only_pinned_rc7_source_accepted_runner_and_immutable_attempt_005_terminal_only",
+    "no_native_harness_broker_worker_model_provider_process_or_request",
+    "no_occupied_attempt_retry_resume_overwrite_reclassification_or_second_worker",
+    "attempts_001_002_003_004_005_terminal_and_consumed_evidence_remain_immutable",
+    "no_raw_error_message_stack_path_stream_session_or_credential_reconstruction",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "attempt-005-preflight-config-property-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-005-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-preflight-configuration",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_powershell_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Read-only absence checks must consume the exact keys exported by the attempt controller configuration.",
+      "observed_error": "The first query addressed non-existent disposable_root and evidence_root property names instead of the exported attempt_root and evidence_root coordinates.",
+      "detection_method": "PowerShell rejected the null Test-Path argument before preparation, Harness, broker, model or provider activity.",
+      "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-595.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preflight_used_unresolved_controller_configuration_property",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve the exported attempt configuration and use only its actual attempt_root and evidence_root keys.",
+        "prevention_control": "Every preflight property is read from the controller's exported configuration before composing an absence query.",
+        "evidence_paths": ["scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py"]
+      },
+      "baton_summary": "records the unresolved preflight property and exact exported-key correction."
+    },
+    {
+      "attempt_key": "attempt-005-process-query-self-match-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-005-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-process-absence-query",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_powershell_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A process-absence reading must not match the observation command that produces it.",
+      "observed_error": "The first broad command-line query matched its own PowerShell command and reported one false process.",
+      "detection_method": "Readback showed the sole result was the observing PowerShell command rather than node.exe or a Harness-owned process.",
+      "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-595.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.process_absence_query_self_matched_observer_command",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Filter exact node.exe processes before matching Harness, broker, attempt-root or package coordinates.",
+        "prevention_control": "Owned-process absence readings use executable identity first and bounded owned coordinates second.",
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-595.md"]
+      },
+      "baton_summary": "records the self-matching process query and executable-first correction."
+    },
+    {
+      "attempt_key": "attempt-005-historical-selector-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-005-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-historical-test-selection",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A widened descendant packet must not apply a predecessor's deliberately live-latch-bound selector to the current operation.",
+      "observed_error": "The first widened packet selected attempt 004's provider-free live-latch test while the latch correctly named attempt 005.",
+      "detection_method": "Pytest failed only that historical selector; all other selected predecessor and current tests passed without Harness or provider activity.",
+      "evidence_paths": ["docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-historical-test-selection.md", "docs/ariadne-agent-error-correction-register-revision-595.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.descendant_packet_applied_predecessor_live_latch_selector",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Freeze the exact three-selector applicability boundary and rerun the 97-test widened and 219-test admission packets.",
+        "prevention_control": "Every historical selector is classified as immutable-artifact, digest-equality or live-latch-bound before descendant selection.",
+        "evidence_paths": ["docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-historical-test-selection.md"]
+      },
+      "baton_summary": "records the predecessor latch-selector mismatch and frozen applicability boundary."
+    },
+    {
+      "attempt_key": "attempt-005-postterminal-test-expression-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-005-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-postterminal-baseline-assertion",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_apply_patch",
+      "stage": "acceptance",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The immutable baseline digest must be asserted by one direct exact comparison with no dead branch or alternate value.",
+      "observed_error": "The first postterminal test draft accidentally wrapped the exact digest assertion in an always-false conditional expression.",
+      "detection_method": "Immediate source readback identified the dead conditional before the test, staging or acceptance packet ran.",
+      "evidence_paths": ["tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py", "docs/ariadne-agent-error-correction-register-revision-595.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.postterminal_exact_digest_assertion_contained_dead_conditional",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the conditional and retain one direct assertion of the exact 64-character baseline digest.",
+        "prevention_control": "Exact retained-evidence assertions receive source readback plus lint and focused execution before staging.",
+        "evidence_paths": ["tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py"]
+      },
+      "baton_summary": "records the dead conditional draft and direct exact-digest correction."
+    },
+    {
+      "attempt_key": "attempt-005-runner-diagnostic-gap-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-005-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-post-hmr-runner-diagnostic",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "deepseek_native_harness",
+      "stage": "acceptance",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "A bounded post-HMR runner failure must retain a closed sanitized stage coordinate precise enough to guide provider-free recovery.",
+      "observed_error": "The accepted runner catch discarded the exception and retained only CUSTOM_RUNNER_FAILURE, leaving five bounded pre-request sub-stages indistinguishable.",
+      "detection_method": "The immutable terminal proved both HMR events, runner activation, zero provider requests and the generic runner code with no finer diagnostic sidecar.",
+      "evidence_paths": ["orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-terminal.json", "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/diagnosis.md", "docs/ariadne-agent-error-correction-register-revision-595.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.post_hmr_runner_catch_retained_only_generic_failure_code",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume attempt 005 without retry and open only a provider-free source diagnosis plus closed-stage diagnostic design.",
+        "prevention_control": "No later occupied attempt may be admitted until post-HMR pre-request diagnostics use a schema-closed sanitized stage vocabulary and pass deterministic validation.",
+        "evidence_paths": ["docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-closeout.md", "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/diagnosis.md"]
+      },
+      "baton_summary": "contains the generic runner diagnostic gap and opens only provider-free staged-diagnostic recovery."
+    },
+    {
+      "attempt_key": "attempt-005-closeout-category-vocabulary-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-005-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-closeout-incident-category",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every incident-bearing closeout intent must pass the register's closed category vocabulary before its source is committed.",
+      "observed_error": "The first pre-commit intent described the runner diagnostic gap as orchestration_failure instead of selecting the admitted harness_failure category.",
+      "detection_method": "Direct validate_tick_intent admission rejected at tick_incident_category before commit, publication or any Harness/provider activity.",
+      "evidence_paths": ["orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/closeout-intent.json", "docs/ariadne-agent-error-correction-register-revision-595.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_incident_used_descriptive_unadmitted_category",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the descriptive category with harness_failure and rerun full direct intent admission before source freeze.",
+        "prevention_control": "Incident category, stage, state and disposition values are selected from exported schema constants and admitted together before commit.",
+        "evidence_paths": ["orchestration_harness/governance_clockwork_tick.py", "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/closeout-intent.json"]
+      },
+      "baton_summary": "records the rejected descriptive category and pre-commit closed-vocabulary correction."
+    }
+  ]
+}
