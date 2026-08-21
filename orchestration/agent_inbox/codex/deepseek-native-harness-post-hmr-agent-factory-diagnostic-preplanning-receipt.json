@@ -11,9 +11,9 @@
     "user_attention_required": false
   },
   "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
-  "continuation_event": "pre_push",
+  "continuation_event": "pre_worker_dispatch",
   "git_object_resolution": {
-    "observed_head": "27bdd707fd80b313899f4c9a182ab63b14444761",
+    "observed_head": "d29b4b3373f7837e2c54d62df8a171831aae6b7d",
     "reason_codes": [],
     "resolved_commit": "70cd5569e83008c02796a8bac9291626ee3d6286",
     "schema_version": "ariadne.git_object_resolution.v1",
@@ -31,10 +31,10 @@
   },
   "git_refs_snapshot": {
     "branch": "codex/ariadne-bernie-davida-parallel-seam",
-    "branch_commit": "27bdd707fd80b313899f4c9a182ab63b14444761",
-    "branch_origin_aligned": false,
-    "head": "27bdd707fd80b313899f4c9a182ab63b14444761",
-    "origin_branch_commit": "e58de252cbd9a38a640e778c478ab3461a8e3bb0",
+    "branch_commit": "d29b4b3373f7837e2c54d62df8a171831aae6b7d",
+    "branch_origin_aligned": true,
+    "head": "d29b4b3373f7837e2c54d62df8a171831aae6b7d",
+    "origin_branch_commit": "d29b4b3373f7837e2c54d62df8a171831aae6b7d",
     "preserved_untracked_paths": {
       "docs/branding": true
     },
@@ -53,7 +53,7 @@
     "untracked_path_count": 660
   },
   "parallelism_assessment": {
-    "assessed_stage": "candidate_prepush",
+    "assessed_stage": "fresh_preexecution",
     "lanes": [
       {
         "disposition": "declined",
@@ -97,7 +97,7 @@
       "close out through clockwork"
     ]
   },
-  "planned_action": "push_only_the_committed_deterministically_passing_closed_subcoordinate_candidate_to_the_task_branch_before_fresh_preexecution_admission",
+  "planned_action": "execute_at_most_one_distinct_provider_free_native_rc7_diagnostic_process_and_accept_only_a_finite_typed_terminal_without_retry",
   "reasons": [],
   "rehydrated_from_receipt": true,
   "rehydration_sources": [
