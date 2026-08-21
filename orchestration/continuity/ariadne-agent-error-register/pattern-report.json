@@ -1,38 +1,48 @@
 {
-  "canonical_register_sha256": "daf504a7a21da3232eb1ad8fef2685628d0f802915abe052b5804d8ffd0f0c7d",
+  "schema_version": "ariadne.agent-error-pattern-report.v1",
+  "register_revision": 584,
+  "source_cutoff_on": "2026-08-21",
+  "coverage": "bounded_known_preserved_incidents",
+  "canonical_register_sha256": "77df4587e3c7e6a707d1322ef4b84c0dcc7fb4f827fa79c291a3407901a0512a",
+  "incident_count": 759,
+  "open_incident_ids": [],
   "counts": {
-    "by_candidate_state": {
-      "accepted_candidate_changed": 137,
-      "canonical_unchanged": 479,
-      "untrusted_partial_worktree": 147
+    "by_origin": {
+      "agent_behavior": 479,
+      "harness": 60,
+      "operator": 74,
+      "repository": 130,
+      "transport": 16
     },
     "by_category": {
       "command_scope_violation": 91,
       "evidence_misreport": 70,
       "harness_failure": 60,
-      "operator_error": 78,
+      "operator_error": 74,
       "output_contract_violation": 266,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
       "repository_defect": 130,
       "transport_timeout": 16
     },
-    "by_origin": {
-      "agent_behavior": 479,
-      "harness": 60,
-      "operator": 78,
-      "repository": 130,
-      "transport": 16
+    "by_role": {
+      "implementer": 57,
+      "integration_reviewer": 3,
+      "orchestrator": 636,
+      "verifier": 63
     },
     "by_process_severity": {
-      "low": 448,
+      "low": 444,
       "material": 127,
       "moderate": 188
     },
+    "by_candidate_state": {
+      "accepted_candidate_changed": 137,
+      "canonical_unchanged": 479,
+      "untrusted_partial_worktree": 143
+    },
     "by_resource_and_role": {
       "accepted-native-startup-terminal-and-consumed-controller-source::orchestrator": 1,
-      "agent-error-register-peer-linkage::orchestrator": 1,
-      "agent-error-register-stage-vocabulary::orchestrator": 1,
       "antigravity-gemini-36-flash-high::verifier": 1,
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 43,
       "antigravity-gemini-flash-3-7-high-verifier::verifier": 4,
@@ -80,8 +90,6 @@
       "ariadne-verifier-worktree-preflight::orchestrator": 3,
       "ariadne-workspace-receipt::orchestrator": 1,
       "attempt-001-recovery-precommit-command-sequence::orchestrator": 1,
-      "attempt-004-no-retry-source-guard::orchestrator": 1,
-      "attempt-004-provider-free-test-inventory::orchestrator": 1,
       "attempt-005-deterministic-command-manifest::orchestrator": 1,
       "attempt-005-worker-packet-builder::orchestrator": 1,
       "authored-synthetic-native-worker-controller-broker-handshake::orchestrator": 1,
@@ -233,23 +241,11 @@
       "transactional-closeout-node-relationship-cardinality::orchestrator": 1,
       "transactional-closeout-shadow-fixture::orchestrator": 1,
       "windows-owned-process-absence-reading::orchestrator": 1
-    },
-    "by_role": {
-      "implementer": 57,
-      "integration_reviewer": 3,
-      "orchestrator": 640,
-      "verifier": 63
     }
   },
-  "coverage": "bounded_known_preserved_incidents",
-  "incident_count": 763,
-  "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score.",
-  "open_incident_ids": [],
   "recurring_patterns": [
     {
-      "categories": [
-        "command_scope_violation"
-      ],
+      "recurrence_signature": "orchestrator.apply_patch_repeated_value_target_missing_incident_context",
       "incident_count": 6,
       "incident_ids": [
         "AER-0490",
@@ -262,6 +258,15 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "command_scope_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "Every patch to a repeated register field must include the target incident_id in the same hunk and receive exact target plus sentinel readback before validation.",
         "Every repeated attempt-ID edit must be addressed by incident identity, with exact target and neighboring sentinel readback before validation; the clockwork allocator removes this edit class.",
@@ -269,19 +274,10 @@
         "Every repeated-value register patch includes the exact incident_id plus field context; compare all pre-existing incident fields to HEAD before regenerating patterns.",
         "The typed reducer must address fields by stable recurrence identity; until adoption, repeated-value patches include the owning signature and an unchanged neighboring sentinel.",
         "Typed reducer output eliminates repeated manual count patches; until adoption, every repeated-field patch must include the owning recurrence signature and receive exact target plus sentinel readback."
-      ],
-      "recurrence_signature": "orchestrator.apply_patch_repeated_value_target_missing_incident_context",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "command_scope_violation"
-      ],
+      "recurrence_signature": "orchestrator.chained_validation_exit_masking",
       "incident_count": 8,
       "incident_ids": [
         "AER-0334",
@@ -296,6 +292,15 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "command_scope_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "Admission gates may be parallelized only as separately captured process results. Never chain validations where a later success can mask an earlier exit, and invoke repository package CLIs through their admitted python -m module path.",
         "After a no-chaining incident, semicolon-composed validation or readback commands are prohibited. Use one process call per gate and record its exit before starting the next gate.",
@@ -305,19 +310,10 @@
         "No validation, updater or mutating acceptance command may share a shell sequence with readback or later checks; capture its process result first and start every inspection in a distinct tool call.",
         "One command and one result per process for all remaining gates; newline separation inside one shell invocation is prohibited just like semicolon or pipeline composition.",
         "One process per validation, staging, commit or readback gate; semicolon-composed gate invocations are prohibited even when every operation is read-only."
-      ],
-      "recurrence_signature": "orchestrator.chained_validation_exit_masking",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "command_scope_violation"
-      ],
+      "recurrence_signature": "orchestrator.fixture_dependent_pytest_invoked_without_conftest",
       "incident_count": 2,
       "incident_ids": [
         "AER-0378",
@@ -326,22 +322,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Prerequisite validators and dependent pytest commands must not be joined by an unconditional separator; repository pytest always uses the serial launcher when tests/conftest.py loads.",
-        "The post-closeout effectiveness repair must make each named pytest profile declare conftest_required and have the launcher reject --noconftest when any selected file is fixture-dependent."
-      ],
-      "recurrence_signature": "orchestrator.fixture_dependent_pytest_invoked_without_conftest",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "command_scope_violation"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "Prerequisite validators and dependent pytest commands must not be joined by an unconditional separator; repository pytest always uses the serial launcher when tests/conftest.py loads.",
+        "The post-closeout effectiveness repair must make each named pytest profile declare conftest_required and have the launcher reject --noconftest when any selected file is fixture-dependent."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.overbroad_protected_path_metadata_enumeration",
       "incident_count": 2,
       "incident_ids": [
         "AER-0292",
@@ -350,22 +346,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "For physical-representability discovery, every filename-metadata and content command must name exact already-known non-protected files. Directory roots are prohibited even when narrowly scoped or filtered. Any expansion must follow an exact link inside an already allowlisted file and requires plan revision before opening.",
-        "Near protected evidence, every content or filename-metadata command must name exact already-known non-protected files. A directory root may not be used to derive candidates. Any expansion must follow an exact import or migration link found inside a file already authorized by a frozen plan."
-      ],
-      "recurrence_signature": "orchestrator.overbroad_protected_path_metadata_enumeration",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "command_scope_violation"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "For physical-representability discovery, every filename-metadata and content command must name exact already-known non-protected files. Directory roots are prohibited even when narrowly scoped or filtered. Any expansion must follow an exact link inside an already allowlisted file and requires plan revision before opening.",
+        "Near protected evidence, every content or filename-metadata command must name exact already-known non-protected files. A directory root may not be used to derive candidates. Any expansion must follow an exact import or migration link found inside a file already authorized by a frozen plan."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.overbroad_repository_content_search",
       "incident_count": 4,
       "incident_ids": [
         "AER-0054",
@@ -376,24 +372,24 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "command_scope_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "Architecture recovery packets and Sol self-checks must carry an explicit exact-path read allowlist. Environment facts are read from one named configuration or handover path; broad rg, recursive content search and wildcard discovery are prohibited under protected-evidence containment.",
         "Every content-search command in this and later protected-evidence-adjacent work must supply an explicit exact-file allowlist assembled from already known non-protected baton/API paths. Searching a directory root such as tests, docs or the repository root is prohibited even when the textual pattern appears narrow.",
         "Every environment-discovery step must carry an exact path or executable-name allowlist before execution. Unknown facts become explicit fail-closed plan preconditions rather than triggers for broad search.",
         "No content-search, recursive or glob command may target a directory root in protected-evidence-adjacent work; every read must name one predeclared non-protected literal file."
-      ],
-      "recurrence_signature": "orchestrator.overbroad_repository_content_search",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "command_scope_violation"
-      ],
+      "recurrence_signature": "orchestrator.parallelism_expected_leverage_vocabulary_mismatch",
       "incident_count": 5,
       "incident_ids": [
         "AER-0314",
@@ -405,24 +401,24 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "command_scope_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "Construct every parallelism assessment from the configured enum vocabulary and the last passing exact analogue; express timing, qualifications and net leverage only in rationale text.",
         "Copy every expected_leverage value from orchestration/harness_settings/orchestrator_requirements.yaml; express qualifications only in rationale text and require exact passed readback before planning or dispatch.",
         "Copy operation_id directly from the validated live latch and select every expected_leverage value from the configured enum before receipt generation; express timing or qualifications only in rationale text and require exact passed readback before dispatch.",
         "Use only the configured expected_leverage vocabulary in Ariadne runtime states; express qualified or net assessments in rationale text, never by inventing a new enum value."
-      ],
-      "recurrence_signature": "orchestrator.parallelism_expected_leverage_vocabulary_mismatch",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "command_scope_violation"
-      ],
+      "recurrence_signature": "orchestrator.powershell_pipeline_used_for_read_only_projection",
       "incident_count": 5,
       "incident_ids": [
         "AER-0484",
@@ -434,25 +430,25 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "command_scope_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "Before every shell call, reject command text containing a pipeline operator and express discovery filters through the selected executable's own arguments.",
         "Inspect every command string for a pipeline operator before execution; use direct array indexing or a single purpose-built executable for read-only projection.",
         "Reject a closeout command containing a pipeline operator before execution; bound searches with the selected executable's own file and context arguments only.",
         "Reject any proposed shell command containing a pipeline operator before execution; use rg context arguments or one direct executable instead of composed read-only projections.",
         "Reject command text containing a pipeline, semicolon or newline-composed successor before execution; use native rg context or one self-contained executable for bounded reads."
-      ],
-      "recurrence_signature": "orchestrator.powershell_pipeline_used_for_read_only_projection",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "command_scope_violation"
-      ],
+      "recurrence_signature": "orchestrator.powershell_statement_sequence_embedded_inside_expression",
       "incident_count": 4,
       "incident_ids": [
         "AER-0242",
@@ -463,24 +459,24 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "command_scope_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "Do not place a Git command, semicolon or if statement inside a PowerShell assignment expression. Use newline-separated scalar assignments exclusively for all remaining Git/ref/worktree probes in this tranche.",
         "For PowerShell orchestration probes, use one statement per step: capture collection output, run Git or shell commands, capture $LASTEXITCODE, and only then construct the final object. Never place a semicolon-delimited statement sequence inside a property expression.",
         "For every remaining worktree and worker probe, execute each PowerShell and Git statement separately, capture LASTEXITCODE immediately, and construct objects only from named scalar variables.",
         "For the rest of AES-C2 orchestration, every PowerShell diagnostic uses literal command statements with named intermediate values and no script-text variable in command position; Git revision-path arguments are always quoted."
-      ],
-      "recurrence_signature": "orchestrator.powershell_statement_sequence_embedded_inside_expression",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "command_scope_violation"
-      ],
+      "recurrence_signature": "orchestrator.python_package_script_path_invocation",
       "incident_count": 7,
       "incident_ids": [
         "AER-0058",
@@ -494,6 +490,15 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "command_scope_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "For every remaining repository Python harness in this tranche, use python -m scripts.<module> exclusively; never infer direct-path safety from an AGENTS.md launcher label.",
         "For the remainder of this tranche, invoke every repository Python harness only as python -m scripts.<module>; use filesystem paths only for non-Python executables or files passed as data arguments.",
@@ -501,19 +506,10 @@
         "Invoke every repository script that imports the scripts package through python -m scripts.<module> from the repository root; direct path invocation is reserved for self-contained scripts whose imports have been preflighted.",
         "Invoke import-dependent scripts as python -m scripts.<module> when they expose a module CLI, or import their public API from the repository root; never execute them by filesystem path.",
         "The direct-path exception is removed for this tranche: every Python file under scripts is invoked as a package module unless a recorded preflight proves it has no package imports on every execution path."
-      ],
-      "recurrence_signature": "orchestrator.python_package_script_path_invocation",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "command_scope_violation"
-      ],
+      "recurrence_signature": "orchestrator.worker_spawn_before_distinct_predispatch_receipt",
       "incident_count": 2,
       "incident_ids": [
         "AER-0043",
@@ -522,22 +518,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Treat pre_sprint_planning and pre_worker_dispatch as distinct ordered events; the dispatch command may be issued only after the latter receipt is generated and read back as passed.",
-        "Treat worker_dispatch_permitted true in the immediately preceding distinct receipt as a hard executable precondition for every native or external worker spawn or follow-up task."
-      ],
-      "recurrence_signature": "orchestrator.worker_spawn_before_distinct_predispatch_receipt",
-      "resource_ids": [
-        "codex-primary-orchestrator"
+      "categories": [
+        "command_scope_violation"
       ],
       "roles": [
         "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "Treat pre_sprint_planning and pre_worker_dispatch as distinct ordered events; the dispatch command may be issued only after the latter receipt is generated and read back as passed.",
+        "Treat worker_dispatch_permitted true in the immediately preceding distinct receipt as a hard executable precondition for every native or external worker spawn or follow-up task."
       ]
     },
     {
-      "categories": [
-        "evidence_misreport"
-      ],
+      "recurrence_signature": "orchestrator.git_evidence_future_commit_hash_invented_from_short_prefix",
       "incident_count": 5,
       "incident_ids": [
         "AER-0354",
@@ -549,25 +545,25 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "evidence_misreport"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "A follow-on Ariadne workflow repair must machine-populate or mechanically compare Git object-ID fields; prose-only copying instruction has now proved insufficient.",
         "Every full 40-character Git object ID in continuation Git-ref evidence is now mechanically resolved with git cat-file before a receipt can pass; unresolvable IDs return revision_required and forbid dispatch or publication.",
         "Precommit evidence may name only current exact HEAD and a pending commit; post-commit hashes must be machine-populated or mechanically compared with direct Git output.",
         "The existing Git-object-resolution preflight remains fail-closed for every continuation event. Orchestrator evidence authoring must capture the full object first and paste only that machine output; short displayed prefixes are presentation only.",
         "The post-closeout Ariadne effectiveness review must prioritize machine-populating all Git-ref fields from one resolved-ref snapshot so the orchestrator never manually transcribes a full object ID."
-      ],
-      "recurrence_signature": "orchestrator.git_evidence_future_commit_hash_invented_from_short_prefix",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "evidence_misreport"
-      ],
+      "recurrence_signature": "orchestrator.git_refs_evidence_included_noncommit_tree_object",
       "incident_count": 2,
       "incident_ids": [
         "AER-0365",
@@ -576,22 +572,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "The AER-0363 guard remains fail-closed. Pre-verifier runtime templates must carry candidate tree identity only in the dedicated worktree-preflight artifact or review packet, never in source_evidence.git_refs_and_worktree.",
-        "The AER-0363 local commit-resolution guard remains the prevention control; continuation evidence must describe tree identity outside the commit-ref field or omit it when the exact commit already binds the tree."
-      ],
-      "recurrence_signature": "orchestrator.git_refs_evidence_included_noncommit_tree_object",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "evidence_misreport"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "The AER-0363 guard remains fail-closed. Pre-verifier runtime templates must carry candidate tree identity only in the dedicated worktree-preflight artifact or review packet, never in source_evidence.git_refs_and_worktree.",
+        "The AER-0363 local commit-resolution guard remains the prevention control; continuation evidence must describe tree identity outside the commit-ref field or omit it when the exact commit already binds the tree."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.raw_text_hash_bound_to_primary_crlf_worktree_bytes",
       "incident_count": 2,
       "incident_ids": [
         "AER-0349",
@@ -600,22 +596,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Every future text-bound review must reuse a checkout-stable canonical LF helper and prove its bindings in a fresh exact-HEAD worktree before verifier dispatch; raw SHA-256 remains only for explicitly binary artifacts.",
-        "Text source bindings must declare and test a checkout-stable canonical line-ending mode; raw worktree-byte hashes remain only for explicitly binary artifacts."
-      ],
-      "recurrence_signature": "orchestrator.raw_text_hash_bound_to_primary_crlf_worktree_bytes",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "evidence_misreport"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "Every future text-bound review must reuse a checkout-stable canonical LF helper and prove its bindings in a fresh exact-HEAD worktree before verifier dispatch; raw SHA-256 remains only for explicitly binary artifacts.",
+        "Text source bindings must declare and test a checkout-stable canonical line-ending mode; raw worktree-byte hashes remain only for explicitly binary artifacts."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id",
       "incident_count": 13,
       "incident_ids": [
         "AER-0192",
@@ -635,6 +631,15 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "evidence_misreport"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "Before any source-bound evidence generation, capture full HEAD from git rev-parse, verify it with git cat-file, and pass that same captured value directly to the harness; never copy a restored summary or abbreviated display hash into source_head.",
         "Capture and retain the forty-character HEAD in a named scalar immediately after every commit and before drafting any source-bound packet, runtime state or receipt; never construct or autocomplete an object ID from abbreviated terminal output.",
@@ -643,19 +648,10 @@
         "Move exact git rev-parse capture ahead of every packet or runtime-state drafting step and mechanically interpolate only the captured forty-character value; do not begin authoring from abbreviated commit output.",
         "Never expand or infer a short Git hash. Capture every exact object ID with git rev-parse, verify it resolves, and reconcile every packet diff range before generating the final dispatch receipt.",
         "Never expand or infer a short Git hash. Capture every exact object ID with git rev-parse, verify it with git cat-file, and test the full value before review or runtime dispatch."
-      ],
-      "recurrence_signature": "orchestrator.short_git_hash_fabricated_into_nonexistent_full_object_id",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "evidence_misreport"
-      ],
+      "recurrence_signature": "verifier.exact_packet_test_count_underreport",
       "incident_count": 4,
       "incident_ids": [
         "AER-0035",
@@ -666,24 +662,24 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "evidence_misreport"
+      ],
+      "roles": [
+        "verifier"
+      ],
+      "resource_ids": [
+        "antigravity-gemini-flash-3-6-high-verifier"
+      ],
       "prevention_controls": [
         "Acceptance must machine-reconcile every verifier test-count and repository-path claim against exact collection output and the candidate tree; prose discrepancies are preserved and never copied as authoritative evidence.",
         "Acceptance must reconcile every verifier test-count claim against exact machine collection output; a numerical discrepancy is preserved explicitly and never copied into closeout as authoritative evidence.",
         "Final closeout acceptance must bind each required test path to exact per-file collection and pass counts; any missing path or arithmetic mismatch rejects the review even when its terminal decision says pass.",
         "Fresh replacement review admission requires exact per-file collect-only and pass arithmetic, not an aggregate progress-line estimate."
-      ],
-      "recurrence_signature": "verifier.exact_packet_test_count_underreport",
-      "resource_ids": [
-        "antigravity-gemini-flash-3-6-high-verifier"
-      ],
-      "roles": [
-        "verifier"
       ]
     },
     {
-      "categories": [
-        "output_contract_violation"
-      ],
+      "recurrence_signature": "implementer.required_single_json_decision_wrapped_in_prose_and_fence",
       "incident_count": 2,
       "incident_ids": [
         "AER-0309",
@@ -692,22 +688,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Validate worker egress shape separately from candidate source: extra prose or fencing remains an output-contract violation even when an embedded object parses, and no self-reported pass may substitute for Git and independently reproduced checks.",
-        "Validate worker egress shape separately from candidate source: extra prose or fencing remains an output-contract violation even when an embedded object parses, and no self-reported pass may substitute for Git inspection, explicit Sol recovery and independently reproduced checks."
-      ],
-      "recurrence_signature": "implementer.required_single_json_decision_wrapped_in_prose_and_fence",
-      "resource_ids": [
-        "deepseek-flash-workers"
-      ],
-      "roles": [
-        "implementer"
-      ]
-    },
-    {
       "categories": [
         "output_contract_violation"
       ],
+      "roles": [
+        "implementer"
+      ],
+      "resource_ids": [
+        "deepseek-flash-workers"
+      ],
+      "prevention_controls": [
+        "Validate worker egress shape separately from candidate source: extra prose or fencing remains an output-contract violation even when an embedded object parses, and no self-reported pass may substitute for Git and independently reproduced checks.",
+        "Validate worker egress shape separately from candidate source: extra prose or fencing remains an output-contract violation even when an embedded object parses, and no self-reported pass may substitute for Git inspection, explicit Sol recovery and independently reproduced checks."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.register_related_incident_peer_link_not_symmetric",
       "incident_count": 2,
       "incident_ids": [
         "AER-0564",
@@ -716,22 +712,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "The transactional journal must derive recurrence groups and accept explicit peer relationships only as validated symmetric data, eliminating manual back-link maintenance.",
-        "The transactional journal should accept conceptual tags separately and derive only explicitly symmetric peer edges, eliminating manual back-link maintenance."
-      ],
-      "recurrence_signature": "orchestrator.register_related_incident_peer_link_not_symmetric",
-      "resource_ids": [
-        "ariadne-agent-error-register"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "output_contract_violation"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "ariadne-agent-error-register"
+      ],
+      "prevention_controls": [
+        "The transactional journal must derive recurrence groups and accept explicit peer relationships only as validated symmetric data, eliminating manual back-link maintenance.",
+        "The transactional journal should accept conceptual tags separately and derive only explicitly symmetric peer edges, eliminating manual back-link maintenance."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.verifier_preflight_branch_prefix_not_exact_review_prefix",
       "incident_count": 2,
       "incident_ids": [
         "AER-0392",
@@ -740,22 +736,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Copy the exact verifier branch prefix from the execution policy or a passing preflight template; never derive a narrower prefix from the tranche name.",
-        "Generate verifier preflight arguments from the typed execution-policy enum; until adoption, copy branch_prefix exactly as codex/review- and never derive it from the branch name."
-      ],
-      "recurrence_signature": "orchestrator.verifier_preflight_branch_prefix_not_exact_review_prefix",
-      "resource_ids": [
-        "ariadne-verifier-worktree-preflight"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "output_contract_violation"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "ariadne-verifier-worktree-preflight"
+      ],
+      "prevention_controls": [
+        "Copy the exact verifier branch prefix from the execution policy or a passing preflight template; never derive a narrower prefix from the tranche name.",
+        "Generate verifier preflight arguments from the typed execution-policy enum; until adoption, copy branch_prefix exactly as codex/review- and never derive it from the branch name."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.active_operation_checkpoint_text_exceeded_bound",
       "incident_count": 3,
       "incident_ids": [
         "AER-0460",
@@ -765,23 +761,23 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "output_contract_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "Generate and validate the terminal latch projection before any surrounding suite; no hand-authored checkpoint summary may be admitted without the schema length reading.",
         "Run the active-latch validator immediately after every checkpoint edit and before the broad packet; detailed incident inventory stays in the register rather than the bounded checkpoint.",
         "Validate the active latch as its own gate after every checkpoint edit and before copying it into any continuation runtime state; never rely on preflight to be the first bounded-text check."
-      ],
-      "recurrence_signature": "orchestrator.active_operation_checkpoint_text_exceeded_bound",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "output_contract_violation"
-      ],
+      "recurrence_signature": "orchestrator.active_operation_complete_retained_resume_or_next_stage",
       "incident_count": 2,
       "incident_ids": [
         "AER-0390",
@@ -790,22 +786,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Construct every terminal latch transition from the exact status branch in orchestration_harness/active_operation.py and run both canonical latch suites before generating the final precommit receipt. When adding an explicit recurrence assertion, update its residual-list exclusion in the same patch.",
-        "Construct terminal latch transitions from the exact status branch in orchestration_harness/active_operation.py and run the two canonical latch suites before any closeout receipt, commit or publication."
-      ],
-      "recurrence_signature": "orchestrator.active_operation_complete_retained_resume_or_next_stage",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "output_contract_violation"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "Construct every terminal latch transition from the exact status branch in orchestration_harness/active_operation.py and run both canonical latch suites before generating the final precommit receipt. When adding an explicit recurrence assertion, update its residual-list exclusion in the same patch.",
+        "Construct terminal latch transitions from the exact status branch in orchestration_harness/active_operation.py and run the two canonical latch suites before any closeout receipt, commit or publication."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
       "incident_count": 13,
       "incident_ids": [
         "AER-0255",
@@ -825,6 +821,15 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "output_contract_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "After adding any incident, search the complete focused register test for register_revision, incident_count, ordered range, origin/category/candidate-state aggregates and recurring-pattern equality; update them as one atomic mechanical change before running pattern generation.",
         "After adding any incident, search the complete focused register test for register_revision, incident_count, ordered range, standalone origin lengths, origin/category/candidate-state aggregate dictionaries and recurring-pattern equality; update them as one atomic mechanical change before pattern generation.",
@@ -838,19 +843,10 @@
         "The clockwork reducer must expose one generated recurrence projection; tests should validate reducer properties instead of copying the reducer's complete incident list into multiple fixtures.",
         "The clockwork reducer must own contiguous IDs, populations, aggregate dictionaries, recurrence rows and the committed report as projections of one journal reading.",
         "The clockwork reducer must own contiguous IDs, standalone and aggregate populations, recurrence classifications, exact recurrence rows and the committed report as projections of one journal reading."
-      ],
-      "recurrence_signature": "orchestrator.agent_error_register_population_fixture_update_incomplete",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "output_contract_violation"
-      ],
+      "recurrence_signature": "orchestrator.agent_error_register_regression_assertion_literal_not_canonical",
       "incident_count": 2,
       "incident_ids": [
         "AER-0602",
@@ -859,22 +855,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "The clockwork test projector must derive regression assertions from canonical typed fields or exact stored controls; until adoption, copy the asserted phrase directly from the validated register value before execution.",
-        "The clockwork test projector must derive regression assertions from canonical typed fields or exact stored controls; until adoption, copy the asserted phrase from the validated register value before running the packet."
-      ],
-      "recurrence_signature": "orchestrator.agent_error_register_regression_assertion_literal_not_canonical",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "output_contract_violation"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "The clockwork test projector must derive regression assertions from canonical typed fields or exact stored controls; until adoption, copy the asserted phrase directly from the validated register value before execution.",
+        "The clockwork test projector must derive regression assertions from canonical typed fields or exact stored controls; until adoption, copy the asserted phrase from the validated register value before running the packet."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.closeout_latch_enum_and_current_baton_fixture_stale",
       "incident_count": 4,
       "incident_ids": [
         "AER-0319",
@@ -885,24 +881,24 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "output_contract_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "Before a closeout updater runs, construct the complete latch from the exact validator branch and update the terminal Continuity/Compass/current-baton fixtures in the same patch; run both latch suites and tests/test_current_baton_consistency.py before any closeout receipt, commit, notification or push.",
         "Before a closeout updater runs, validate the complete latch as a whole object, search all global continuity/Compass/current-baton fixtures for the predecessor, and require acceptance-index refresh to replace an existing moved label in place rather than duplicating or rejecting it.",
         "The clockwork must distinguish immutable event receipts from mutable current projections; historical tests bind the former exactly and validate the latter by schema, operation identity when applicable and terminal invariants rather than predecessor literals.",
         "The shadow clockwork projector must generate the mutable current-latch check from the terminal event schema; tests may bind exact operation facts only through immutable event receipts, never through the fallback branch for live state."
-      ],
-      "recurrence_signature": "orchestrator.closeout_latch_enum_and_current_baton_fixture_stale",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "output_contract_violation"
-      ],
+      "recurrence_signature": "orchestrator.continuity_node_contract_evidence_inventory_incomplete",
       "incident_count": 4,
       "incident_ids": [
         "AER-0461",
@@ -913,24 +909,24 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "output_contract_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "Before every Continuity updater run, mechanically compare the union of contract_evidence paths with the node evidence inventory and resolve every named artifact path; only then permit graph or Compass writes.",
         "Construct contract_evidence and node evidence from one shared typed path inventory so no contract path can exist outside the node evidence collections.",
         "Validate inherited contract evidence by typed collection before every updater run: every contract plan, finding, closeout, acceptance, receipt, test and artifact must appear in the matching node evidence key.",
         "Validate inherited contract evidence by typed collection, not path union alone: every contract plan, finding, closeout, acceptance, receipt, test and artifact path must appear in the matching node evidence key before any Continuity write."
-      ],
-      "recurrence_signature": "orchestrator.continuity_node_contract_evidence_inventory_incomplete",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "output_contract_violation"
-      ],
+      "recurrence_signature": "orchestrator.current_latch_revision_assertion_stale_after_incident_advance",
       "incident_count": 2,
       "incident_ids": [
         "AER-0498",
@@ -939,22 +935,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Current-latch continuity tests assert durable operation semantics and named terminal evidence; exact mutable register revision numbers remain validated by the register suite rather than duplicated in the latch fixture.",
-        "Every incident patch that changes current-latch completed_stage must search and atomically advance exact current-operation checkpoint literals in the dedicated continuity test."
-      ],
-      "recurrence_signature": "orchestrator.current_latch_revision_assertion_stale_after_incident_advance",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "output_contract_violation"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "Current-latch continuity tests assert durable operation semantics and named terminal evidence; exact mutable register revision numbers remain validated by the register suite rather than duplicated in the latch fixture.",
+        "Every incident patch that changes current-latch completed_stage must search and atomically advance exact current-operation checkpoint literals in the dedicated continuity test."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.detached_verifier_branch",
       "incident_count": 4,
       "incident_ids": [
         "AER-0012",
@@ -965,24 +961,24 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "output_contract_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "Create every verifier worktree directly on a named non-protected codex/review branch; never use --detach even temporarily before the mandatory preflight.",
         "Never create an Antigravity verifier worktree with --detach. Create it directly on a named codex/review branch and require scripts.ariadne_verifier_worktree_preflight to pass before constructing the pre-verifier runtime state.",
         "Verifier setup must validate a non-empty non-protected codex/review branch and exact candidate HEAD before issuing the pre-verifier receipt or invoking Antigravity.",
         "scripts/ariadne_verifier_worktree_preflight.py must pass on the exact candidate and codex/review branch before a pre-verifier receipt or Antigravity launch; policy ordering and tests enforce the gate."
-      ],
-      "recurrence_signature": "orchestrator.detached_verifier_branch",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "output_contract_violation"
-      ],
+      "recurrence_signature": "orchestrator.latch_continuity_phrase_stale_after_bounded_checkpoint_rewrite",
       "incident_count": 2,
       "incident_ids": [
         "AER-0513",
@@ -991,22 +987,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "A bounded checkpoint rewrite updates its dedicated semantic phrase assertions in the same patch and runs the focused latch packet immediately.",
-        "Before accepting a bounded latch rewrite, run its dedicated continuity fixture and preserve every exact semantic transition anchor it asserts."
-      ],
-      "recurrence_signature": "orchestrator.latch_continuity_phrase_stale_after_bounded_checkpoint_rewrite",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "output_contract_violation"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "A bounded checkpoint rewrite updates its dedicated semantic phrase assertions in the same patch and runs the focused latch packet immediately.",
+        "Before accepting a bounded latch rewrite, run its dedicated continuity fixture and preserve every exact semantic transition anchor it asserts."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.new_recurring_pattern_baseline_not_advanced_atomically",
       "incident_count": 5,
       "incident_ids": [
         "AER-0487",
@@ -1018,25 +1014,25 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "output_contract_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "After every new incident, inspect every generated recurrence containing that ID and update the exact list, count and residual-pattern allowlist in the same correction patch.",
         "After pattern generation, compare every recurrence touched by the new incident field-for-field with its test literal, including prevention_controls, before starting the complete suite.",
         "Copy every changed generated recurrence block as a whole field-for-field structure; never patch one nested field from a truncated assertion diff.",
         "The clockwork reducer must generate recurrence projections directly from journal state and eliminate duplicated hand-maintained recurrence snapshots.",
         "Whenever a new incident repeats a full recurrence composite, inspect the generated report and advance the exact recurring-pattern baseline in the same revision before launching the complete suite."
-      ],
-      "recurrence_signature": "orchestrator.new_recurring_pattern_baseline_not_advanced_atomically",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "output_contract_violation"
-      ],
+      "recurrence_signature": "orchestrator.orchestrator_receipt_continuation_event_vocabulary_mismatch",
       "incident_count": 7,
       "incident_ids": [
         "AER-0259",
@@ -1050,6 +1046,15 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "output_contract_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "Before creating any runtime state, run the orchestrator preflight continuation-event listing and copy one exact configured value; never infer a shortened machine event from prose.",
         "Before every future receipt generation, mechanically test continuation_event membership against orchestration/harness_settings/orchestrator_requirements.yaml; never infer a descriptive event label from a filename or phase name.",
@@ -1057,19 +1062,10 @@
         "Copy every continuation event directly from orchestration/harness_settings/orchestrator_requirements.yaml or a current passed receipt; never abbreviate or infer the machine event label from prose.",
         "Copy receipt continuation events from the configured schema or a current passing repository example before running preflight; never abbreviate or infer the machine event from prose.",
         "Expose the configured event vocabulary through the receipt CLI and require authors to select from that output; tests bind the discoverable list to orchestrator_requirements.yaml so event spelling is not a memory or prose task."
-      ],
-      "recurrence_signature": "orchestrator.orchestrator_receipt_continuation_event_vocabulary_mismatch",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "output_contract_violation"
-      ],
+      "recurrence_signature": "orchestrator.plan_precommit_parallelism_disposition_invalid",
       "incident_count": 2,
       "incident_ids": [
         "AER-0322",
@@ -1078,22 +1074,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Reuse the last passing stage-equivalent parallelism object and validate its disposition vocabulary locally before any plan, dispatch or verifier boundary.",
-        "Select lane dispositions only from orchestration/harness_settings/orchestrator_requirements.yaml and place descriptive terminal detail in rationale and work_packages rather than inventing an enum value."
-      ],
-      "recurrence_signature": "orchestrator.plan_precommit_parallelism_disposition_invalid",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "output_contract_violation"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "Reuse the last passing stage-equivalent parallelism object and validate its disposition vocabulary locally before any plan, dispatch or verifier boundary.",
+        "Select lane dispositions only from orchestration/harness_settings/orchestrator_requirements.yaml and place descriptive terminal detail in rationale and work_packages rather than inventing an enum value."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.pre_verifier_parallelism_disposition_and_workspace_receipt_shape_invalid",
       "incident_count": 2,
       "incident_ids": [
         "AER-0320",
@@ -1102,22 +1098,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Construct pre-verifier parallelism and workspace-receipt objects from the last passing exact analogue, validate incident peer links as part of register admission, then validate the runtime state before invoking any external verifier; do not infer enum values or reuse generic receipt metadata shapes.",
-        "The typed clockwork continuation event must project verifier disposition from the configured enum and stage; until adoption, copy the reserved value from the last passing pre-verifier analogue and never infer selected."
-      ],
-      "recurrence_signature": "orchestrator.pre_verifier_parallelism_disposition_and_workspace_receipt_shape_invalid",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "output_contract_violation"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "Construct pre-verifier parallelism and workspace-receipt objects from the last passing exact analogue, validate incident peer links as part of register admission, then validate the runtime state before invoking any external verifier; do not infer enum values or reuse generic receipt metadata shapes.",
+        "The typed clockwork continuation event must project verifier disposition from the configured enum and stage; until adoption, copy the reserved value from the last passing pre-verifier analogue and never infer selected."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.preplanning_adapter_observation_inventory_incomplete",
       "incident_count": 2,
       "incident_ids": [
         "AER-0517",
@@ -1126,22 +1122,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Copy the complete configured adapter ID set into every fresh runtime state before preflight, including unselected fallback transports.",
-        "Copy the complete configured adapter ID set into every fresh runtime state before preflight, including unselected fallback transports; the clockwork projector must emit this inventory from settings rather than memory."
-      ],
-      "recurrence_signature": "orchestrator.preplanning_adapter_observation_inventory_incomplete",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "output_contract_violation"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "Copy the complete configured adapter ID set into every fresh runtime state before preflight, including unselected fallback transports.",
+        "Copy the complete configured adapter ID set into every fresh runtime state before preflight, including unselected fallback transports; the clockwork projector must emit this inventory from settings rather than memory."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.provider_free_test_allowlist_included_fixture_or_known_negative_suites",
       "incident_count": 2,
       "incident_ids": [
         "AER-0420",
@@ -1150,22 +1146,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Before a no-conftest dispatch, inspect every selected file for repository fixtures and known-negative classification; fixture-backed coverage belongs only to an explicitly authorised database profile and documented negative suites cannot become positive admission gates.",
-        "Verifier manifest construction must classify every pytest path as self-contained or conftest-required before selection and obtain the digest only through load_command_manifest plus command_manifest_sha256; raw JSON file hashing is not an admitted substitute."
-      ],
-      "recurrence_signature": "orchestrator.provider_free_test_allowlist_included_fixture_or_known_negative_suites",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "output_contract_violation"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "Before a no-conftest dispatch, inspect every selected file for repository fixtures and known-negative classification; fixture-backed coverage belongs only to an explicitly authorised database profile and documented negative suites cannot become positive admission gates.",
+        "Verifier manifest construction must classify every pytest path as self-contained or conftest-required before selection and obtain the digest only through load_command_manifest plus command_manifest_sha256; raw JSON file hashing is not an admitted substitute."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.touched_python_format_preflight_incomplete",
       "incident_count": 2,
       "incident_ids": [
         "AER-0124",
@@ -1174,22 +1170,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Derive local Ruff check and format targets from every touched Python path in the candidate and run the exact packet commands after the final formatting pass, not a hand-selected subset.",
-        "Derive local Ruff lint and format targets mechanically from git diff --name-only filtered to Python after the final edit; do not use a hand-selected subset copied from an earlier candidate stage."
-      ],
-      "recurrence_signature": "orchestrator.touched_python_format_preflight_incomplete",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "output_contract_violation"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "Derive local Ruff check and format targets from every touched Python path in the candidate and run the exact packet commands after the final formatting pass, not a hand-selected subset.",
+        "Derive local Ruff lint and format targets mechanically from git diff --name-only filtered to Python after the final edit; do not use a hand-selected subset copied from an earlier candidate stage."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.unapproved_continuation_event",
       "incident_count": 7,
       "incident_ids": [
         "AER-0013",
@@ -1203,6 +1199,15 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "output_contract_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "Before constructing any receipt, copy continuation_event verbatim from orchestration/harness_settings/orchestrator_requirements.yaml; descriptive lifecycle detail belongs in planned_action and source evidence, never in the enum field.",
         "Before drafting any receipt state, copy both continuation_event and the complete adapter/managed-slot inventory directly from the active orchestrator requirements and a recent passing envelope; descriptive phase names belong only in planned_action.",
@@ -1211,19 +1216,10 @@
         "Every Ariadne receipt state must copy continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml before planned_action is drafted; any unapproved event produces immutable revision_required evidence and a distinct corrected state.",
         "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml and preserve any fail-closed envelope before issuing a corrected distinct receipt.",
         "Receipt construction must select continuation_event directly from orchestration/harness_settings/orchestrator_requirements.yaml; pre-planning specifically uses pre_sprint_planning and sprint_planning, and any fail-closed envelope remains immutable before a corrected distinct receipt."
-      ],
-      "recurrence_signature": "orchestrator.unapproved_continuation_event",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "output_contract_violation"
-      ],
+      "recurrence_signature": "orchestrator.verifier_preflight_expected_head_not_read_from_git",
       "incident_count": 2,
       "incident_ids": [
         "AER-0090",
@@ -1232,22 +1228,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Populate verifier expected_head only from the literal output of git rev-parse HEAD in the target worktree.",
-        "The closeout protocol now requires a standalone git rev-parse HEAD read immediately before every verifier preflight and forbids manually completing abbreviated hashes."
-      ],
-      "recurrence_signature": "orchestrator.verifier_preflight_expected_head_not_read_from_git",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "output_contract_violation"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "Populate verifier expected_head only from the literal output of git rev-parse HEAD in the target worktree.",
+        "The closeout protocol now requires a standalone git rev-parse HEAD read immediately before every verifier preflight and forbids manually completing abbreviated hashes."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.worker_dispatch_continuation_event_and_assignment_envelope",
       "incident_count": 2,
       "incident_ids": [
         "AER-0080",
@@ -1256,22 +1252,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Copy the approved continuation event from a passing native-worker predispatch receipt and leave assigned_agent_ids empty unless an actual workspace receipt is already present; descriptive lane availability belongs in adapter evidence and worker_slots.",
-        "For every remaining AES-C3 dispatch receipt, copy continuation_event and assignment fields from a passing external-worker receipt; a separately preflighted worktree belongs in source evidence, while workspace_receipts and assigned_agent_ids remain empty until their harness-governed assignment exists."
-      ],
-      "recurrence_signature": "orchestrator.worker_dispatch_continuation_event_and_assignment_envelope",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "output_contract_violation"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "Copy the approved continuation event from a passing native-worker predispatch receipt and leave assigned_agent_ids empty unless an actual workspace receipt is already present; descriptive lane availability belongs in adapter evidence and worker_slots.",
+        "For every remaining AES-C3 dispatch receipt, copy continuation_event and assignment fields from a passing external-worker receipt; a separately preflighted worktree belongs in source evidence, while workspace_receipts and assigned_agent_ids remain empty until their harness-governed assignment exists."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
       "incident_count": 11,
       "incident_ids": [
         "AER-0024",
@@ -1289,6 +1285,15 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "output_contract_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "Before any receipt is generated, copy both adapter_id and method as an exact admitted pair from orchestration/harness_settings/transport_adapters.yaml; keep descriptive evidence classification only in the evidence string and never promote it into method.",
         "Before each verifier dispatch receipt, copy adapter methods from transport_adapters.yaml and use workspace_receipts only for handoff-aligned assigned worker contracts; a separately preflighted external review worktree belongs in source evidence rather than that structure.",
@@ -1301,19 +1306,10 @@
         "Copy adapter observation and assignment shapes only from the current harness contract, keep native session coordination out of adapter probes and validate the state before any worker spawn.",
         "Every Antigravity launch must supply --orchestrator-receipt; scripts/ariadne_antigravity.py verifies the exact five sources, status passed and worker_dispatch_permitted true before reading the packet or invoking agy. External verifier worktrees remain separate evidence and are never predeclared as native assigned agents.",
         "For every remaining AES-C2 receipt, copy each adapter_id and method as an exact pair from transport_adapters.yaml; completed-transport detail belongs only in the observation evidence string."
-      ],
-      "recurrence_signature": "orchestrator.worker_dispatch_runtime_contract",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "output_contract_violation"
-      ],
+      "recurrence_signature": "orchestrator.yielded_verification_session_id_not_exposed",
       "incident_count": 3,
       "incident_ids": [
         "AER-0651",
@@ -1323,23 +1319,23 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "output_contract_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "Every command that can exceed the initial yield runs as a dedicated tool call whose full result envelope including output, session_id, exit_code and chunk_id is emitted; any returned session_id is polled to terminal exit before another command or acceptance claim, and long tests are never hidden inside a multi-command shell chain.",
         "Every exec wrapper for a potentially yielding command emits output, session_id and exit_code; a non-final result is polled before any acceptance claim.",
         "Every potentially yielding exec wrapper must emit session_id as well as output and exit_code, or run the bounded test as a dedicated command."
-      ],
-      "recurrence_signature": "orchestrator.yielded_verification_session_id_not_exposed",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "output_contract_violation"
-      ],
+      "recurrence_signature": "orchestrator.agent_error_register_asymmetric_peer_link",
       "incident_count": 2,
       "incident_ids": [
         "AER-0400",
@@ -1348,22 +1344,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Leave related_incident_ids empty for historical recurrences unless both records can carry the exact symmetric attempt-peer link; recurrence grouping belongs exclusively in recurrence_signature and must pass standalone register validation before tests or dispatch.",
-        "Leave related_incident_ids empty unless both existing records already carry the exact symmetric link; use recurrence_signature for recurrence grouping and run standalone register validation immediately after every new incident draft."
-      ],
-      "recurrence_signature": "orchestrator.agent_error_register_asymmetric_peer_link",
-      "resource_ids": [
-        "emr4-ariadne-agent-error-register-acceptance"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "output_contract_violation"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "emr4-ariadne-agent-error-register-acceptance"
+      ],
+      "prevention_controls": [
+        "Leave related_incident_ids empty for historical recurrences unless both records can carry the exact symmetric attempt-peer link; recurrence grouping belongs exclusively in recurrence_signature and must pass standalone register validation before tests or dispatch.",
+        "Leave related_incident_ids empty unless both existing records already carry the exact symmetric link; use recurrence_signature for recurrence grouping and run standalone register validation immediately after every new incident draft."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.agent_error_register_test_prose_assertion_mismatch",
       "incident_count": 2,
       "incident_ids": [
         "AER-0401",
@@ -1372,22 +1368,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Copy exact stable prose from the incident when a literal phrase is intentionally tested; otherwise assert structured fields or a shorter material token rather than inventing equivalent wording.",
-        "Focused register tests assert stable structured fields and material semantic phrases; they do not require schema field names to be duplicated inside free-text prose unless that literal wording is itself an invariant."
-      ],
-      "recurrence_signature": "orchestrator.agent_error_register_test_prose_assertion_mismatch",
-      "resource_ids": [
-        "emr4-ariadne-agent-error-register-acceptance"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "output_contract_violation"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "emr4-ariadne-agent-error-register-acceptance"
+      ],
+      "prevention_controls": [
+        "Copy exact stable prose from the incident when a literal phrase is intentionally tested; otherwise assert structured fields or a shorter material token rather than inventing equivalent wording.",
+        "Focused register tests assert stable structured fields and material semantic phrases; they do not require schema field names to be duplicated inside free-text prose unless that literal wording is itself an invariant."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.current_baton_prose_assertion_representation_mismatch",
       "incident_count": 4,
       "incident_ids": [
         "AER-0403",
@@ -1398,24 +1394,24 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "output_contract_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "emr4-current-baton-consistency"
+      ],
       "prevention_controls": [
         "Current Baton prose fixtures require current revision/count and current bounded-chain endpoints; historical incident continuity belongs in the canonical register and revision documents, not as permanent names in the compact live row.",
         "The typed manifest must render both live baton prose and boundary assertions from canonical tokens; denials never depend on grammatical carry-over.",
         "Treat graph/Compass advance, current-row fixtures, active-label classification and the live-handover byte budget as one closeout change set; measure and run the compactness check before the first full closeout packet and bind assertions to the new node and exact successor in the same patch.",
         "When a maintenance fixture intentionally binds prose, copy or deliberately add the exact normalized semantic phrase in the accepted baton row; use structured artifacts for numeric semantics instead of inventing alternate representations and read the entire assertion block before the next packet."
-      ],
-      "recurrence_signature": "orchestrator.current_baton_prose_assertion_representation_mismatch",
-      "resource_ids": [
-        "emr4-current-baton-consistency"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "output_contract_violation"
-      ],
+      "recurrence_signature": "verifier.multiple_terminal_decisions",
       "incident_count": 6,
       "incident_ids": [
         "AER-0004",
@@ -1428,6 +1424,15 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "output_contract_violation"
+      ],
+      "roles": [
+        "verifier"
+      ],
+      "resource_ids": [
+        "antigravity-gemini-flash-3-6-high-verifier"
+      ],
       "prevention_controls": [
         "New Antigravity reviews must use one closed schema-constrained JSON decision object; deterministic parsing deduplicates identical wrapper mirrors, rejects missing or conflicting envelopes and forbids legacy terminal markers inside review text.",
         "The verifier wrapper admits exactly one terminal decision and rejects zero or duplicate terminal envelopes before acceptance.",
@@ -1435,19 +1440,10 @@
         "The wrapper regex counts terminal decisions and rejects any count other than one; tests cover missing and duplicate decisions.",
         "Verifier packets for potentially asynchronous checks must require all background notifications to complete before one final terminal response and forbid any later follow-up; exact-single-decision wrapper admission remains mandatory.",
         "Verifier packets must require all commands and notifications to settle before exactly one terminal line, and the wrapper must continue rejecting every zero-or-duplicate result before candidate acceptance."
-      ],
-      "recurrence_signature": "verifier.multiple_terminal_decisions",
-      "resource_ids": [
-        "antigravity-gemini-flash-3-6-high-verifier"
-      ],
-      "roles": [
-        "verifier"
       ]
     },
     {
-      "categories": [
-        "output_contract_violation"
-      ],
+      "recurrence_signature": "harness.antigravity_model_retranscribed_command_results_not_admitted",
       "incident_count": 2,
       "incident_ids": [
         "AER-0696",
@@ -1456,22 +1452,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Deterministic gears own exact vocabulary, argv, counts and exit results; the independent model owns bounded semantic judgment only.",
-        "Move exact argv, exit codes and command-result ledgers to deterministic evidence and reserve the model envelope for semantic judgment."
-      ],
-      "recurrence_signature": "harness.antigravity_model_retranscribed_command_results_not_admitted",
-      "resource_ids": [
-        "ariadne-antigravity-command-result-egress"
+      "categories": [
+        "output_contract_violation"
       ],
       "roles": [
         "verifier"
+      ],
+      "resource_ids": [
+        "ariadne-antigravity-command-result-egress"
+      ],
+      "prevention_controls": [
+        "Deterministic gears own exact vocabulary, argv, counts and exit results; the independent model owns bounded semantic judgment only.",
+        "Move exact argv, exit codes and command-result ledgers to deterministic evidence and reserve the model envelope for semantic judgment."
       ]
     },
     {
-      "categories": [
-        "read_only_violation"
-      ],
+      "recurrence_signature": "orchestrator.generative_acceptance_in_read_only_review_worktree",
       "incident_count": 2,
       "incident_ids": [
         "AER-0040",
@@ -1480,22 +1476,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Review-worktree reconciliation runs only non-regenerative tests and static checks. Acceptance generators run before candidate freeze in the primary worktree; review verifies committed evidence through hashes and focused tests rather than regeneration.",
-        "The future typed clockwork command vocabulary must classify manifest operations by filesystem effect and reject evidence generators from read-only verifier ticks; until adoption, verifier manifests inspect committed evidence and run only non-regenerative tests and static checks."
-      ],
-      "recurrence_signature": "orchestrator.generative_acceptance_in_read_only_review_worktree",
-      "resource_ids": [
-        "codex-primary-orchestrator"
+      "categories": [
+        "read_only_violation"
       ],
       "roles": [
         "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "Review-worktree reconciliation runs only non-regenerative tests and static checks. Acceptance generators run before candidate freeze in the primary worktree; review verifies committed evidence through hashes and focused tests rather than regeneration.",
+        "The future typed clockwork command vocabulary must classify manifest operations by filesystem effect and reject evidence generators from read-only verifier ticks; until adoption, verifier manifests inspect committed evidence and run only non-regenerative tests and static checks."
       ]
     },
     {
-      "categories": [
-        "reasoning_claim_error"
-      ],
+      "recurrence_signature": "implementer.self_pass_with_contradictory_or_underclosed_canonical_contract",
       "incident_count": 2,
       "incident_ids": [
         "AER-0324",
@@ -1504,22 +1500,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Before admitting any worker self-pass for a stateful harness contract, independently probe every command state for identity conflict, preserve literal append order, reject contradictory same-fingerprint gate history, require exact proposal/source/reviewer/promoter binding, and derive rollback solely from validated immutable promotion history; test counts and hostile-mutation totals never substitute for semantic admission.",
-        "Before any worker self-pass is admitted, independently validate canonical temporal relations and enumerate every frozen closed-contract field and nullable success coordinate; focused test success cannot substitute for semantic packet admission."
-      ],
-      "recurrence_signature": "implementer.self_pass_with_contradictory_or_underclosed_canonical_contract",
-      "resource_ids": [
-        "deepseek-flash-workers"
-      ],
-      "roles": [
-        "implementer"
-      ]
-    },
-    {
       "categories": [
         "reasoning_claim_error"
       ],
+      "roles": [
+        "implementer"
+      ],
+      "resource_ids": [
+        "deepseek-flash-workers"
+      ],
+      "prevention_controls": [
+        "Before admitting any worker self-pass for a stateful harness contract, independently probe every command state for identity conflict, preserve literal append order, reject contradictory same-fingerprint gate history, require exact proposal/source/reviewer/promoter binding, and derive rollback solely from validated immutable promotion history; test counts and hostile-mutation totals never substitute for semantic admission.",
+        "Before any worker self-pass is admitted, independently validate canonical temporal relations and enumerate every frozen closed-contract field and nullable success coordinate; focused test success cannot substitute for semantic packet admission."
+      ]
+    },
+    {
+      "recurrence_signature": "implementer.self_pass_with_material_acceptance_gaps",
       "incident_count": 2,
       "incident_ids": [
         "AER-0025",
@@ -1528,22 +1524,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Authority and one-use review must exercise more than single-instance happy paths: mutate current role during a blocked handler, race two runtime instances over the same evidence store, and prove shared idempotency, attempt sequencing and authority locking before a repair self-pass can be considered.",
-        "Worker path compliance and passing authored tests are necessary but insufficient: before integration, independently adversarially exercise malformed scalar admission, actual-target readback, current authority drift, rollback audit disposition, exact schema property names, non-caller-selectable entropy and concurrent issuance uniqueness."
-      ],
-      "recurrence_signature": "implementer.self_pass_with_material_acceptance_gaps",
-      "resource_ids": [
-        "deepseek-v4-flash-c4-worker"
-      ],
-      "roles": [
-        "implementer"
-      ]
-    },
-    {
       "categories": [
         "reasoning_claim_error"
       ],
+      "roles": [
+        "implementer"
+      ],
+      "resource_ids": [
+        "deepseek-v4-flash-c4-worker"
+      ],
+      "prevention_controls": [
+        "Authority and one-use review must exercise more than single-instance happy paths: mutate current role during a blocked handler, race two runtime instances over the same evidence store, and prove shared idempotency, attempt sequencing and authority locking before a repair self-pass can be considered.",
+        "Worker path compliance and passing authored tests are necessary but insufficient: before integration, independently adversarially exercise malformed scalar admission, actual-target readback, current authority drift, rollback audit disposition, exact schema property names, non-caller-selectable entropy and concurrent issuance uniqueness."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.manual_short_sha_expansion",
       "incident_count": 4,
       "incident_ids": [
         "AER-0286",
@@ -1554,24 +1550,24 @@
       "origins": [
         "agent_behavior"
       ],
+      "categories": [
+        "reasoning_claim_error"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
       "prevention_controls": [
         "Copy all 40-character Git identities only from separately captured machine output and immediately verify repository resolution; never extend a displayed prefix manually.",
         "Treat full Git identities as command outputs only. Every future worktree command must consume a separately captured literal git rev-parse value or an already machine-validated durable field; no manual completion of display prefixes is admitted.",
         "Treat full Git identities as command outputs, never completion tasks. Capture git rev-parse HEAD in a standalone read before every worktree command, copy its literal forty-character output and let deterministic preflight compare the created worktree before external review.",
         "Treat full Git identities as command outputs, never memory or completion tasks. Worktree creation and verifier packets copy the literal git rev-parse result and a separate preflight compares the resulting worktree HEAD before any external call."
-      ],
-      "recurrence_signature": "orchestrator.manual_short_sha_expansion",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "reasoning_claim_error"
-      ],
+      "recurrence_signature": "orchestrator.pre_review_format_gate_omitted",
       "incident_count": 2,
       "incident_ids": [
         "AER-0274",
@@ -1580,22 +1576,22 @@
       "origins": [
         "agent_behavior"
       ],
-      "prevention_controls": [
-        "Before every external review, execute and record every command in the packet's allowlist locally, including format checks, rather than treating Ruff lint as a formatter substitute.",
-        "Generate verifier allowed-command blocks from one executable local gate list, persist each exit code before dispatch, and make the launcher reject any external pass receipt whose required command outcomes are nonzero."
-      ],
-      "recurrence_signature": "orchestrator.pre_review_format_gate_omitted",
-      "resource_ids": [
-        "codex-sol-orchestrator"
+      "categories": [
+        "reasoning_claim_error"
       ],
       "roles": [
         "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-sol-orchestrator"
+      ],
+      "prevention_controls": [
+        "Before every external review, execute and record every command in the packet's allowlist locally, including format checks, rather than treating Ruff lint as a formatter substitute.",
+        "Generate verifier allowed-command blocks from one executable local gate list, persist each exit code before dispatch, and make the launcher reject any external pass receipt whose required command outcomes are nonzero."
       ]
     },
     {
-      "categories": [
-        "harness_failure"
-      ],
+      "recurrence_signature": "diagnosis.undefined_symbol_parser_undercoverage",
       "incident_count": 2,
       "incident_ids": [
         "AER-0158",
@@ -1604,22 +1600,22 @@
       "origins": [
         "harness"
       ],
-      "prevention_controls": [
-        "Database diagnostics should prefer typed catalogue-resolution probes over human-formatted error-text parsing; when text is used, an unrecognized format must emit a bounded unresolved classification rather than erase otherwise valid cleanup and observation evidence.",
-        "Undefined-symbol diagnostics must combine fixed catalogue probes with repository-bounded identifier admission; a historical failure allowlist may be the first classifier but never the sole classifier for a later execution path."
-      ],
-      "recurrence_signature": "diagnosis.undefined_symbol_parser_undercoverage",
-      "resource_ids": [
-        "codex-primary-orchestrator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "harness_failure"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-primary-orchestrator"
+      ],
+      "prevention_controls": [
+        "Database diagnostics should prefer typed catalogue-resolution probes over human-formatted error-text parsing; when text is used, an unrecognized format must emit a bounded unresolved classification rather than erase otherwise valid cleanup and observation evidence.",
+        "Undefined-symbol diagnostics must combine fixed catalogue probes with repository-bounded identifier admission; a historical failure allowlist may be the first classifier but never the sole classifier for a later execution path."
+      ]
+    },
+    {
+      "recurrence_signature": "harness.shell_wrapper_timeout_before_live_external_worker_completion",
       "incident_count": 3,
       "incident_ids": [
         "AER-0256",
@@ -1629,23 +1625,23 @@
       "origins": [
         "harness"
       ],
+      "categories": [
+        "harness_failure"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "codex-shell-command-timeout-wrapper"
+      ],
       "prevention_controls": [
         "Never reuse an arbitrary fixed wrapper timeout after a timeout incident. Derive outer timeout greater than inner timeout plus margin, and never chain Ruff, diff or other later gates behind a long pytest process.",
         "Run future long external worker launchers through a sufficiently long or asynchronous wrapper and monitor their own terminal receipt; a shell timeout is harness evidence, not a worker decision, while the exact authorized process remains live.",
         "Set every outer orchestration timeout to cover the declared inner adapter timeout. After any outer timeout, inspect the exact process, receipt and worktree before considering recovery; never retry while the original authorized process may still complete."
-      ],
-      "recurrence_signature": "harness.shell_wrapper_timeout_before_live_external_worker_completion",
-      "resource_ids": [
-        "codex-shell-command-timeout-wrapper"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "harness_failure"
-      ],
+      "recurrence_signature": "harness.windows_verifier_worktree_destination_path_too_long",
       "incident_count": 3,
       "incident_ids": [
         "AER-0063",
@@ -1655,23 +1651,23 @@
       "origins": [
         "harness"
       ],
+      "categories": [
+        "harness_failure"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "git-worktree-windows-path-layout"
+      ],
       "prevention_controls": [
         "All Windows verifier worktrees use the next short rNN path by default; descriptive tranche identity belongs only in branch, packet and receipt metadata.",
         "On Windows this repository must allocate every new verifier worktree from the next available short rNN destination before constructing any descriptive path; tranche identity belongs only in the branch, packet and receipt.",
         "Windows verifier worktrees use the short rNN root naming pattern; descriptive tranche identity belongs in the review packet and receipt rather than the filesystem destination."
-      ],
-      "recurrence_signature": "harness.windows_verifier_worktree_destination_path_too_long",
-      "resource_ids": [
-        "git-worktree-windows-path-layout"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "harness_failure"
-      ],
+      "recurrence_signature": "harness.antigravity_completed_transport_invalid_egress_without_digest_receipt",
       "incident_count": 2,
       "incident_ids": [
         "AER-0424",
@@ -1680,22 +1676,22 @@
       "origins": [
         "harness"
       ],
-      "prevention_controls": [
-        "Every Antigravity path after provider process completion must terminate in exactly one admitted worker receipt or one sanitized transport/egress failure receipt; no parse or decision-count exception may bypass evidence persistence.",
-        "Every Antigravity path after provider process completion must terminate in exactly one admitted worker receipt or one sanitized transport/egress failure receipt; worktree postcondition failures are part of the same exhaustive boundary."
-      ],
-      "recurrence_signature": "harness.antigravity_completed_transport_invalid_egress_without_digest_receipt",
-      "resource_ids": [
-        "ariadne-antigravity-egress-admission"
+      "categories": [
+        "harness_failure"
       ],
       "roles": [
         "verifier"
+      ],
+      "resource_ids": [
+        "ariadne-antigravity-egress-admission"
+      ],
+      "prevention_controls": [
+        "Every Antigravity path after provider process completion must terminate in exactly one admitted worker receipt or one sanitized transport/egress failure receipt; no parse or decision-count exception may bypass evidence persistence.",
+        "Every Antigravity path after provider process completion must terminate in exactly one admitted worker receipt or one sanitized transport/egress failure receipt; worktree postcondition failures are part of the same exhaustive boundary."
       ]
     },
     {
-      "categories": [
-        "operator_error"
-      ],
+      "recurrence_signature": "operator.active_latch_bypassed_clockwork_owner",
       "incident_count": 2,
       "incident_ids": [
         "AER-0685",
@@ -1704,22 +1700,22 @@
       "origins": [
         "operator"
       ],
-      "prevention_controls": [
-        "The governance owner guard and source-byte comparison reject direct latch drift before any subsequent checkpoint or dispatch.",
-        "The live owner check must pass with ten owned surfaces, zero dual ownership and zero drift before every future checkpoint or closeout; direct latch edits are prohibited."
-      ],
-      "recurrence_signature": "operator.active_latch_bypassed_clockwork_owner",
-      "resource_ids": [
-        "ariadne-active-operation-latch"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "operator_error"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "ariadne-active-operation-latch"
+      ],
+      "prevention_controls": [
+        "The governance owner guard and source-byte comparison reject direct latch drift before any subsequent checkpoint or dispatch.",
+        "The live owner check must pass with ten owned surfaces, zero dual ownership and zero drift before every future checkpoint or closeout; direct latch edits are prohibited."
+      ]
+    },
+    {
+      "recurrence_signature": "operator.apply_patch_duplicate_update_file_operation",
       "incident_count": 2,
       "incident_ids": [
         "AER-0559",
@@ -1728,22 +1724,22 @@
       "origins": [
         "operator"
       ],
-      "prevention_controls": [
-        "Before dispatch, check that every file path appears in at most one operation within an apply_patch payload.",
-        "The clockwork publisher owns one target operation per projection; until adoption, reject any patch manifest containing the same path more than once."
-      ],
-      "recurrence_signature": "operator.apply_patch_duplicate_update_file_operation",
-      "resource_ids": [
-        "local-apply-patch-operator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "operator_error"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "local-apply-patch-operator"
+      ],
+      "prevention_controls": [
+        "Before dispatch, check that every file path appears in at most one operation within an apply_patch payload.",
+        "The clockwork publisher owns one target operation per projection; until adoption, reject any patch manifest containing the same path more than once."
+      ]
+    },
+    {
+      "recurrence_signature": "operator.explicit_repository_path_operand_not_inventory_resolved",
       "incident_count": 6,
       "incident_ids": [
         "AER-0570",
@@ -1756,6 +1752,15 @@
       "origins": [
         "operator"
       ],
+      "categories": [
+        "operator_error"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "local-powershell-operator"
+      ],
       "prevention_controls": [
         "The causal clock must resolve every command path into a typed manifest before dispatch and prohibit guessed sibling operands; discover matching test inventory before issuing exact-path inspection commands.",
         "The causal clock must resolve every command path into a typed manifest before dispatch and prohibit guessed sibling operands; inventory discovery and exact-file inspection are separate readings.",
@@ -1763,19 +1768,10 @@
         "The causal clock must resolve every command path into a typed manifest before dispatch, reject absent operands before process launch and issue one executable per process.",
         "The causal clock must resolve every command path into a typed manifest before dispatch, reject wildcard path operands on Windows and express file selection as a validated directory root plus native glob filter.",
         "The causal clock should resolve path operands into the typed command manifest before dispatch and reject absent paths before process launch."
-      ],
-      "recurrence_signature": "operator.explicit_repository_path_operand_not_inventory_resolved",
-      "resource_ids": [
-        "local-powershell-operator"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "operator_error"
-      ],
+      "recurrence_signature": "operator.python_path_read_text_utf8_encoding_omitted",
       "incident_count": 2,
       "incident_ids": [
         "AER-0548",
@@ -1784,22 +1780,22 @@
       "origins": [
         "operator"
       ],
-      "prevention_controls": [
-        "Every repository Path.read_text call in a one-off Python command specifies encoding='utf-8' explicitly.",
-        "The transactional control plane centralizes UTF-8 JSON loading; until canonical adoption, every remaining one-off Path.read_text call must state encoding='utf-8' explicitly."
-      ],
-      "recurrence_signature": "operator.python_path_read_text_utf8_encoding_omitted",
-      "resource_ids": [
-        "local-python-operator"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "operator_error"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "local-python-operator"
+      ],
+      "prevention_controls": [
+        "Every repository Path.read_text call in a one-off Python command specifies encoding='utf-8' explicitly.",
+        "The transactional control plane centralizes UTF-8 JSON loading; until canonical adoption, every remaining one-off Path.read_text call must state encoding='utf-8' explicitly."
+      ]
+    },
+    {
+      "recurrence_signature": "operator.ripgrep_compound_regex_not_syntax_validated",
       "incident_count": 2,
       "incident_ids": [
         "AER-0619",
@@ -1808,22 +1804,22 @@
       "origins": [
         "operator"
       ],
-      "prevention_controls": [
-        "Prefer one fixed-string search per known register baseline; any required compound regular expression must be syntax-validated before repository execution.",
-        "Use one fixed-string search per known vocabulary token; compound ripgrep expressions are prohibited for the remainder of this closeout."
-      ],
-      "recurrence_signature": "operator.ripgrep_compound_regex_not_syntax_validated",
-      "resource_ids": [
-        "local-rg-operator"
+      "categories": [
+        "operator_error"
       ],
       "roles": [
         "orchestrator"
+      ],
+      "resource_ids": [
+        "local-rg-operator"
+      ],
+      "prevention_controls": [
+        "Prefer one fixed-string search per known register baseline; any required compound regular expression must be syntax-validated before repository execution.",
+        "Use one fixed-string search per known vocabulary token; compound ripgrep expressions are prohibited for the remainder of this closeout."
       ]
     },
     {
-      "categories": [
-        "repository_defect"
-      ],
+      "recurrence_signature": "repository.api_spine_historical_expectation_drift",
       "incident_count": 2,
       "incident_ids": [
         "AER-0068",
@@ -1832,22 +1828,22 @@
       "origins": [
         "repository"
       ],
-      "prevention_controls": [
-        "Future cross-programme regression gates must run a source-HEAD baseline preflight and separate pre-existing collection or expectation drift from candidate-caused regressions before using the suite as acceptance evidence.",
-        "Run every mandatory legacy regression at the plan source before worker dispatch, bind frozen digests to the exact current source, and classify any source-identical expectation drift before evaluating descendant causation."
-      ],
-      "recurrence_signature": "repository.api_spine_historical_expectation_drift",
-      "resource_ids": [
-        "api-spine-historical-regression-suite"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "repository_defect"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "api-spine-historical-regression-suite"
+      ],
+      "prevention_controls": [
+        "Future cross-programme regression gates must run a source-HEAD baseline preflight and separate pre-existing collection or expectation drift from candidate-caused regressions before using the suite as acceptance evidence.",
+        "Run every mandatory legacy regression at the plan source before worker dispatch, bind frozen digests to the exact current source, and classify any source-identical expectation drift before evaluating descendant causation."
+      ]
+    },
+    {
+      "recurrence_signature": "repository.agent_error_register_current_reading_literal_not_population_derived",
       "incident_count": 3,
       "incident_ids": [
         "AER-0658",
@@ -1857,23 +1853,23 @@
       "origins": [
         "repository"
       ],
+      "categories": [
+        "repository_defect"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "ariadne-agent-error-register-current-reading-tests"
+      ],
       "prevention_controls": [
         "Current register revision, population, aggregates and source cutoff are readings of the validated population; tests do not encode the next expected literal update.",
         "Current-state tests validate authoritative bindings and population properties directly; no revision, population, origin or cutoff assertion encodes an expected next-update arithmetic literal.",
         "Historical literal recurrence fixtures are bounded by an immutable incident cutoff; post-baseline patterns and counts are readings recomputed from canonical incidents and never appended manually to that list."
-      ],
-      "recurrence_signature": "repository.agent_error_register_current_reading_literal_not_population_derived",
-      "resource_ids": [
-        "ariadne-agent-error-register-current-reading-tests"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "repository_defect"
-      ],
+      "recurrence_signature": "repository.agent_error_register_literal_baseline_stale_after_valid_advance",
       "incident_count": 2,
       "incident_ids": [
         "AER-0470",
@@ -1882,22 +1878,22 @@
       "origins": [
         "repository"
       ],
-      "prevention_controls": [
-        "Every accepted register revision must baseline-check and advance the canonical register revision, total-count and origin-count test literals before the complete suite is launched.",
-        "Treat the contiguous ID range, revision, total, origin, category and candidate-state maps as one atomic baseline update for every accepted register revision."
-      ],
-      "recurrence_signature": "repository.agent_error_register_literal_baseline_stale_after_valid_advance",
-      "resource_ids": [
-        "ariadne-agent-error-register-tests"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "repository_defect"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "ariadne-agent-error-register-tests"
+      ],
+      "prevention_controls": [
+        "Every accepted register revision must baseline-check and advance the canonical register revision, total-count and origin-count test literals before the complete suite is launched.",
+        "Treat the contiguous ID range, revision, total, origin, category and candidate-state maps as one atomic baseline update for every accepted register revision."
+      ]
+    },
+    {
+      "recurrence_signature": "repository.compass_current_position_literal_stale_after_valid_advance",
       "incident_count": 6,
       "incident_ids": [
         "AER-0388",
@@ -1910,25 +1906,25 @@
       "origins": [
         "repository"
       ],
+      "categories": [
+        "repository_defect"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "ariadne-compass-current-position-test"
+      ],
       "prevention_controls": [
         "Every Continuity closeout that advances current_position must include the canonical Compass test in its risk-weighted metadata packet and update its explicit current-node sentinel in the same closeout change.",
         "Every Continuity closeout that advances current_position must update and execute the canonical Compass current-node sentinel in the same closeout packet; baseline-check that literal before the updater write.",
         "Every current-position advance updates and runs the canonical Compass sentinel in the same closeout packet.",
         "Every valid Compass advance must derive the dedicated node, live baton and global current-position fixtures from the prospective projection before canonical publication.",
         "Every valid Compass advance updates the dedicated node test, live baton test and global report current-position sentinel in the same patch before broad closeout."
-      ],
-      "recurrence_signature": "repository.compass_current_position_literal_stale_after_valid_advance",
-      "resource_ids": [
-        "ariadne-compass-current-position-test"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "repository_defect"
-      ],
+      "recurrence_signature": "repository.agent_error_register_exact_count_update_incomplete",
       "incident_count": 10,
       "incident_ids": [
         "AER-0175",
@@ -1945,6 +1941,15 @@
       "origins": [
         "repository"
       ],
+      "categories": [
+        "repository_defect"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "emr4-ariadne-agent-error-register-acceptance"
+      ],
       "prevention_controls": [
         "After appending register incidents, search the entire register test for every previous revision and incident-count literal before the first full validation run.",
         "Before a register test, inspect literal searches plus every whole aggregate and recurring-pattern equality block that consumes incident totals, update every field against a fresh pattern report, regenerate pattern-report.json explicitly, then run the complete file as one serialized acceptance packet.",
@@ -1955,19 +1960,10 @@
         "Compare the complete generated counts object and every affected recurring-pattern row against its test literal as one atomic fixture update.",
         "Compare the complete generated counts object and every standalone origin/category literal against the test file as one atomic register-fixture update.",
         "Every register edit must run the whole exact register test file after regenerating pattern-report.json; partial node selection cannot serve as final register acceptance."
-      ],
-      "recurrence_signature": "repository.agent_error_register_exact_count_update_incomplete",
-      "resource_ids": [
-        "emr4-ariadne-agent-error-register-acceptance"
-      ],
-      "roles": [
-        "orchestrator"
       ]
     },
     {
-      "categories": [
-        "repository_defect"
-      ],
+      "recurrence_signature": "repository.current_baton_protected_boundary_literal_paraphrased",
       "incident_count": 2,
       "incident_ids": [
         "AER-0558",
@@ -1976,22 +1972,22 @@
       "origins": [
         "repository"
       ],
-      "prevention_controls": [
-        "The clockwork manifest owns canonical boundary tokens and renders the live row and its tests from one typed list without paraphrase.",
-        "The transactional manifest must own protected-boundary vocabulary once and derive every human and test projection from that typed value."
-      ],
-      "recurrence_signature": "repository.current_baton_protected_boundary_literal_paraphrased",
-      "resource_ids": [
-        "emr4-current-baton-consistency"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "repository_defect"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "emr4-current-baton-consistency"
+      ],
+      "prevention_controls": [
+        "The clockwork manifest owns canonical boundary tokens and renders the live row and its tests from one typed list without paraphrase.",
+        "The transactional manifest must own protected-boundary vocabulary once and derive every human and test projection from that typed value."
+      ]
+    },
+    {
+      "recurrence_signature": "repository.schema_qualified_postgresql_special_form",
       "incident_count": 2,
       "incident_ids": [
         "AER-0131",
@@ -2000,22 +1996,22 @@
       "origins": [
         "repository"
       ],
-      "prevention_controls": [
-        "Generated PostgreSQL SQL must distinguish special syntactic forms from callable functions, and exact renderer tests must forbid schema-qualified special forms before runtime review.",
-        "Generated PostgreSQL SQL must maintain an artifact-wide census of non-callable special forms, forbid namespace qualification for each form, and hostile-test the full accepted renderer independently of any downstream harness query generator."
-      ],
-      "recurrence_signature": "repository.schema_qualified_postgresql_special_form",
-      "resource_ids": [
-        "emr4-disposable-postgresql-harness"
-      ],
-      "roles": [
-        "orchestrator"
-      ]
-    },
-    {
       "categories": [
         "repository_defect"
       ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "emr4-disposable-postgresql-harness"
+      ],
+      "prevention_controls": [
+        "Generated PostgreSQL SQL must distinguish special syntactic forms from callable functions, and exact renderer tests must forbid schema-qualified special forms before runtime review.",
+        "Generated PostgreSQL SQL must maintain an artifact-wide census of non-callable special forms, forbid namespace qualification for each form, and hostile-test the full accepted renderer independently of any downstream harness query generator."
+      ]
+    },
+    {
+      "recurrence_signature": "repository.clean_checkout_mutable_fixture_dependency",
       "incident_count": 2,
       "incident_ids": [
         "AER-0163",
@@ -2024,22 +2020,22 @@
       "origins": [
         "repository"
       ],
-      "prevention_controls": [
-        "Review-packet tests must be collected and executed in a clean committed worktree before verifier admission; assertions over mutable untracked evidence must state and handle its optional clean-checkout absence.",
-        "Run each exact review packet from a clean committed worktree before verifier admission; diagnosis code and tests may compare a mutable untracked alias only behind an explicit existence guard while immutable evidence remains mandatory."
-      ],
-      "recurrence_signature": "repository.clean_checkout_mutable_fixture_dependency",
-      "resource_ids": [
-        "antigravity-gemini-flash-3-6-high-verifier"
+      "categories": [
+        "repository_defect"
       ],
       "roles": [
         "verifier"
+      ],
+      "resource_ids": [
+        "antigravity-gemini-flash-3-6-high-verifier"
+      ],
+      "prevention_controls": [
+        "Review-packet tests must be collected and executed in a clean committed worktree before verifier admission; assertions over mutable untracked evidence must state and handle its optional clean-checkout absence.",
+        "Run each exact review packet from a clean committed worktree before verifier admission; diagnosis code and tests may compare a mutable untracked alias only behind an explicit existence guard while immutable evidence remains mandatory."
       ]
     },
     {
-      "categories": [
-        "transport_timeout"
-      ],
+      "recurrence_signature": "transport.deepseek_occupied_worker_no_terminal_response",
       "incident_count": 4,
       "incident_ids": [
         "AER-0036",
@@ -2050,24 +2046,24 @@
       "origins": [
         "transport"
       ],
+      "categories": [
+        "transport_timeout"
+      ],
+      "roles": [
+        "implementer"
+      ],
+      "resource_ids": [
+        "deepseek-flash-workers"
+      ],
       "prevention_controls": [
         "A failed bounded Flash correction receives no further same-lane retry. Exact HEAD, changed-path and receipt readback remain mandatory; partial source stays quarantined while Sol independently reimplements and verifies the correction.",
         "A recurrent DeepSeek no-terminal transport event triggers direct Sol fallback after exact result-path, owned-path, HEAD and worktree readback; no same-lane retry or late source adoption is permitted without a distinct authorised recovery.",
         "DeepSeek implementation leases retain the bounded no-artifact/no-terminal observation window, exact process/worktree readback, sanitized failure receipt and no-source-adoption rule; recurrence triggers direct Sol fallback rather than a same-lane retry.",
         "Occupied development workers require a bounded no-artifact/no-terminal observation window, exact process and worktree readback, a sanitized failure receipt, and a declared fallback that cannot broaden the frozen packet or protected authority."
-      ],
-      "recurrence_signature": "transport.deepseek_occupied_worker_no_terminal_response",
-      "resource_ids": [
-        "deepseek-flash-workers"
-      ],
-      "roles": [
-        "implementer"
       ]
     },
     {
-      "categories": [
-        "transport_timeout"
-      ],
+      "recurrence_signature": "transport.deepseek_claude_exit_1_before_worker_result",
       "incident_count": 2,
       "incident_ids": [
         "AER-0382",
@@ -2076,22 +2072,22 @@
       "origins": [
         "transport"
       ],
-      "prevention_controls": [
-        "A DeepSeek transport retry is allowed only after an exact clean-worktree/HEAD check and never converts the earlier transport failure into worker evidence or expands its file authority.",
-        "After a recurrent DeepSeek exit-1 non-result, exact result-path, owned-path, HEAD and worktree readback are mandatory; a bounded Sol fallback may use only the already frozen package and no later worker source is admitted without distinct authority."
-      ],
-      "recurrence_signature": "transport.deepseek_claude_exit_1_before_worker_result",
-      "resource_ids": [
-        "deepseek-v4-flash-test-worker"
-      ],
-      "roles": [
-        "implementer"
-      ]
-    },
-    {
       "categories": [
         "transport_timeout"
       ],
+      "roles": [
+        "implementer"
+      ],
+      "resource_ids": [
+        "deepseek-v4-flash-test-worker"
+      ],
+      "prevention_controls": [
+        "A DeepSeek transport retry is allowed only after an exact clean-worktree/HEAD check and never converts the earlier transport failure into worker evidence or expands its file authority.",
+        "After a recurrent DeepSeek exit-1 non-result, exact result-path, owned-path, HEAD and worktree readback are mandatory; a bounded Sol fallback may use only the already frozen package and no later worker source is admitted without distinct authority."
+      ]
+    },
+    {
+      "recurrence_signature": "transport.antigravity_oauth_timeout_without_closeout",
       "incident_count": 5,
       "incident_ids": [
         "AER-0022",
@@ -2103,23 +2099,23 @@
       "origins": [
         "transport"
       ],
+      "categories": [
+        "transport_timeout"
+      ],
+      "roles": [
+        "verifier"
+      ],
+      "resource_ids": [
+        "antigravity-gemini-flash-3-6-high-verifier"
+      ],
       "prevention_controls": [
         "After one bounded fresh-project authentication retry, preserve a sanitized zero-call receipt and use the configured authentication-or-transport fallback against the same exact clean HEAD instead of repeatedly interrupting the programme for ceremonial reauthentication.",
         "Authentication failures remain transport incidents with no inferred reviewer decision; preserve a sanitized failure, require human credential restoration, then use a fresh process and reverify exact HEAD, clean status and single-decision admission.",
         "Preserve every Antigravity OAuth timeout as a sanitized zero-model transport incident, permit at most one same-head same-model retry, and require exact clean postflight plus a distinct successful receipt before review admission; never silently change verifier or model.",
         "Treat Antigravity OAuth as a human-restored transport boundary distinct from ADC and gcloud stores; preserve every sanitized timeout and require exact-head plus clean-worktree readback before a fresh-project recovery result is admitted.",
         "Treat Antigravity OAuth as its own human-restored credential boundary, distinct from ADC and gcloud stores; preserve sanitized timeout failures, then use a fresh new-project process and require one decision plus unchanged postflight before acceptance."
-      ],
-      "recurrence_signature": "transport.antigravity_oauth_timeout_without_closeout",
-      "resource_ids": [
-        "antigravity-gemini-flash-3-6-high-verifier"
-      ],
-      "roles": [
-        "verifier"
       ]
     }
   ],
-  "register_revision": 585,
-  "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "source_cutoff_on": "2026-08-21"
+  "interpretation_boundary": "A recurring signature is an operational control signal only. These counts do not prove model, provider or role causation and are not a comparative quality score."
 }

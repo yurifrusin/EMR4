@@ -1,0 +1,39 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "sol_provider_disabled_deterministic_admission",
+  "model": "gpt-sol",
+  "requested_model": "gpt-sol",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "attempt_004_structured_diagnostic_provider_disabled_exact_admission_v1",
+  "worktree": "C:/Users/sarashera/emr4",
+  "branch": "codex/ariadne-bernie-davida-parallel-seam",
+  "head_before": "bd56f4359b0bb223a7d9a6983281266190016fd7",
+  "head_after": "bd56f4359b0bb223a7d9a6983281266190016fd7",
+  "dirty_after": false,
+  "timestamp": "2026-08-21T12:31:48.1266374+10:00",
+  "provider_posture": "zero_provider_requests",
+  "checks": {
+    "five_source_preworker_receipt": "passed",
+    "attempt_004_provider_free_controller_check": "passed",
+    "provider_free_focused_tests": 523,
+    "ruff": "passed",
+    "python_compilation": "passed",
+    "node_broker_syntax": "passed",
+    "provider_key_present_only_in_controller_environment": true,
+    "worker_provider_keys_absent": true,
+    "attempt_root_absent": true,
+    "matching_process_count": 0,
+    "attempt_004_artifacts_before_preparation": [
+      "occupied-terminal.schema.json"
+    ],
+    "attempts_001_002_003_dirty_paths": 0,
+    "task_origin_aligned": true,
+    "protected_refs_exact": true
+  },
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "The committed attempt-004 identity, static outer terminal schema, structured-diagnostic descendant, temporary accepted-controller binding, one-call prepaid-balance cost posture, immutable earlier-attempt boundary and terminal-before-cleanup ordering pass deterministic admission. This receipt authorizes fresh root materialization only; it is not a Gemini veto and it does not itself authorize native process creation."
+  }
+}
