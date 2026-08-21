@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "attempt_id", "candidate_source", "request_count", "provider_call_started", "provider_call_completed", "provider_call_failed", "request_rejected", "raw_broker_stream_retained"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_broker_request_reading.v1"},
+    "operation_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,159}$"},
+    "attempt_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,159}$"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "request_count": {"type": "integer", "minimum": 0},
+    "provider_call_started": {"type": "integer", "minimum": 0},
+    "provider_call_completed": {"type": "integer", "minimum": 0},
+    "provider_call_failed": {"type": "integer", "minimum": 0},
+    "request_rejected": {"type": "integer", "minimum": 0},
+    "raw_broker_stream_retained": {"const": false}
+  }
+}

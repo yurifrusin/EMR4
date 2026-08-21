@@ -1,0 +1,80 @@
+{
+  "claim": "provider_free_future_runner_sidecar_and_broker_zero_join_representable",
+  "cleanup": {
+    "disposable_fixture_root_absent": true
+  },
+  "diagnostic_helper": {
+    "bytes": 3110,
+    "checks": {
+      "exact_cause_vocabulary": true,
+      "exact_error_vocabulary": true,
+      "exact_stage_vocabulary": true,
+      "no_raw_or_execution_surface": true,
+      "one_canonical_serializer": true,
+      "one_exclusive_writer": true,
+      "one_safe_export": true,
+      "raw_retention_false": true
+    },
+    "sha256": "bd2995a62c7d8bbf37b29c0cd5b5a88c3570341255d1644d9cb98cbef0bd490e"
+  },
+  "future_runner": {
+    "accepted_runner_sha256": "1233d4fc14726800dcf063c1cab5e814f3df0091040126784c4a7d42c3ec0746",
+    "bytes": 6300,
+    "checks": {
+      "accepted_runner_bound": true,
+      "accepted_tool_controls_preserved": true,
+      "generic_terminal_preserved": true,
+      "interval_closes_after_first_turn": true,
+      "no_raw_error_projection": true,
+      "no_retry_resume_fallback": true,
+      "one_helper_import": true,
+      "one_identical_rethrow": true,
+      "one_sidecar_write": true,
+      "special_causes_exact": true,
+      "stage_assignment_exact": true,
+      "stage_order_exact": true
+    },
+    "sha256": "98cf8db1803c7dbfde867044504a820518e448278faf220c8ec3c5dbb8818805",
+    "stage_positions": {
+      "agent_create_setup_publish": 2802,
+      "first_followup_dispatch": 4652,
+      "first_turn_idle_wait": 4815,
+      "initial_idle_wait": 4544,
+      "loader_readiness_wait": 1825,
+      "preset_root_roster_admission": 2316,
+      "required_service_lookup": 1992
+    }
+  },
+  "join_matrix": {
+    "error_kind_count": 7,
+    "invalid_sidecar_coordinate": "native_harness_terminal_failure",
+    "nonzero_coordinate": "post_hmr_request_boundary_unresolved",
+    "nonzero_counter_count": 5,
+    "pre_request_requires_both": true,
+    "special_cause_count": 2,
+    "stage_count": 7,
+    "valid_zero_coordinate": "post_hmr_pre_request_failure"
+  },
+  "occupied_attempt_authorized": false,
+  "operation_id": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
+  "proof_boundary": {
+    "broker_process_count": 0,
+    "database_invocation_count": 0,
+    "docker_invocation_count": 0,
+    "model_request_count": 0,
+    "native_harness_process_count": 0,
+    "network_request_count": 0,
+    "node_process_count": 0,
+    "provider_request_count": 0,
+    "raw_attempt_stream_read_count": 0,
+    "worker_process_count": 0
+  },
+  "raw_historical_stream_read": false,
+  "result": "pass",
+  "schema_version": "ariadne.native_harness_post_hmr_sidecar_integration_evidence.v1",
+  "source_bindings": {
+    "accepted_diagnostic_module_sha256": "5b42a61f6fd1b23b8044a0b9248e2c202c42b7800c6d36b10dbed229ae954368",
+    "accepted_runner_sha256": "1233d4fc14726800dcf063c1cab5e814f3df0091040126784c4a7d42c3ec0746",
+    "controller_module_sha256": "29495710c5e95a12fba92a2ef34c28ed6b9ce5e034402e5551767e19b843014c"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "result", "claim", "source_bindings", "future_runner", "diagnostic_helper", "join_matrix", "cleanup", "proof_boundary", "occupied_attempt_authorized", "raw_historical_stream_read"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_post_hmr_sidecar_integration_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal"},
+    "result": {"const": "pass"},
+    "claim": {"const": "provider_free_future_runner_sidecar_and_broker_zero_join_representable"},
+    "source_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["accepted_runner_sha256", "accepted_diagnostic_module_sha256", "controller_module_sha256"],
+      "properties": {
+        "accepted_runner_sha256": {"const": "1233d4fc14726800dcf063c1cab5e814f3df0091040126784c4a7d42c3ec0746"},
+        "accepted_diagnostic_module_sha256": {"const": "5b42a61f6fd1b23b8044a0b9248e2c202c42b7800c6d36b10dbed229ae954368"},
+        "controller_module_sha256": {"const": "29495710c5e95a12fba92a2ef34c28ed6b9ce5e034402e5551767e19b843014c"}
+      }
+    },
+    "future_runner": {"type": "object"},
+    "diagnostic_helper": {"type": "object"},
+    "join_matrix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage_count", "error_kind_count", "special_cause_count", "nonzero_counter_count", "valid_zero_coordinate", "invalid_sidecar_coordinate", "nonzero_coordinate", "pre_request_requires_both"],
+      "properties": {
+        "stage_count": {"const": 7},
+        "error_kind_count": {"const": 7},
+        "special_cause_count": {"const": 2},
+        "nonzero_counter_count": {"const": 5},
+        "valid_zero_coordinate": {"const": "post_hmr_pre_request_failure"},
+        "invalid_sidecar_coordinate": {"const": "native_harness_terminal_failure"},
+        "nonzero_coordinate": {"const": "post_hmr_request_boundary_unresolved"},
+        "pre_request_requires_both": {"const": true}
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["disposable_fixture_root_absent"],
+      "properties": {"disposable_fixture_root_absent": {"const": true}}
+    },
+    "proof_boundary": {"type": "object"},
+    "occupied_attempt_authorized": {"const": false},
+    "raw_historical_stream_read": {"const": false}
+  }
+}
