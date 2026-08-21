@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 584,
+  "register_revision": 585,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -29896,6 +29896,359 @@
       },
       "incident_id": "AER-0759",
       "attempt_id": "clock-0ac4275852214968ca21fe39",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-004-provider-free-test-inventory",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Grouped provider-free verification must select only exact paths discovered from the repository test inventory.",
+      "observed_error": "The first grouped command named a non-existent generic structured-diagnostic controller test and failed before collection.",
+      "detection_method": "Strict path resolution returned FileNotFoundError before pytest, Harness, broker, model or provider activity.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-585.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.provider_free_grouped_test_path_not_inventory_resolved",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve the test inventory with rg --files and rerun using only existing exact paths.",
+        "prevention_control": "Grouped provider-free path selection is derived from a current rg --files reading.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-585.md"
+        ]
+      },
+      "incident_id": "AER-0760",
+      "attempt_id": "clock-4e91a186845352d1c3a749d1",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-004-no-retry-source-guard",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A no-retry guard must distinguish retry control flow from mandatory zero-valued retry evidence fields.",
+      "observed_error": "The first focused test prohibited the substring retry while also requiring automatic_retry_count, so its assertions contradicted each other.",
+      "detection_method": "Provider-free pytest identified the mandatory field as the rejected substring.",
+      "evidence_paths": [
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.no_retry_guard_conflicted_with_required_retry_count_field",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the substring ban with structural one-launch, no-unbounded-loop and zero-count assertions.",
+        "prevention_control": "The focused guard checks behavior structurally while preserving mandatory evidence vocabulary.",
+        "evidence_paths": [
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py"
+        ]
+      },
+      "incident_id": "AER-0761",
+      "attempt_id": "clock-4a6a11a6f0dac280ddbca9c0",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "agent-error-register-stage-vocabulary",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Incident stage values must come from the register schema's closed vocabulary.",
+      "observed_error": "The first draft used verification instead of deterministic_verification for two observations.",
+      "detection_method": "Schema validation rejected the draft before the pattern report was accepted.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-585.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_stage_used_unadmitted_verification",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use deterministic_verification and retain schema validation before publication.",
+        "prevention_control": "Clockwork now exclusively receives incident observations and validates the fixed vocabulary.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py"
+        ]
+      },
+      "incident_id": "AER-0762",
+      "attempt_id": "clock-53a5d5565dae4cbf745cf632",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "agent-error-register-peer-linkage",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Related incidents must satisfy attempt-peer identity rather than topical proximity.",
+      "observed_error": "The second draft linked incidents with distinct attempt identities only because they were topically related.",
+      "detection_method": "The deterministic register validator rejected attempt peer linkage mismatch.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-585.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.agent_error_register_related_ids_without_attempt_peer_identity",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove topical-only links and retain empty peer lists for independent attempts.",
+        "prevention_control": "Clockwork allocates peer relationships from explicit incident source identity.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py"
+        ]
+      },
+      "incident_id": "AER-0763",
+      "attempt_id": "clock-684f602e9de07832444a632d",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "governance-clockwork-checkpoint-intent",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Checkpoint completed-stage text must remain within the schema's 500-character bound.",
+      "observed_error": "The first read-only checkpoint check rejected an overlong completed-stage field before transaction preparation.",
+      "detection_method": "Clockwork returned checkpoint_tick_completed_stage with no command or publication action.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/checkpoint-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_checkpoint_completed_stage_exceeded_bound",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Reduce the same facts to a bounded completed-stage string and rerun the read-only check.",
+        "prevention_control": "Clockwork validates text bounds before transaction preparation or command execution.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/checkpoint-intent.json"
+        ]
+      },
+      "incident_id": "AER-0764",
+      "attempt_id": "clock-1220de86474a85efa152a8e7",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "governance-clockwork-canonical-owner",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Incident intake and canonical register, pattern and AGENTS publication must pass only through clockwork.",
+      "observed_error": "The first implementation commit directly updated the three clockwork-owned incident projections and created canonical drift.",
+      "detection_method": "The occupied-checkpoint dry run returned canonical_drift before command execution or publication.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-585.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "orchestrator.incident_intake_bypassed_clockwork_canonical_owner",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Restore all three canonical surfaces byte-for-byte from the active generation and submit observations only through this version-two intent.",
+        "prevention_control": "Clockwork validates zero drift and remains the exclusive canonical publisher before every checkpoint and closeout.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-governance-clockwork/current.json",
+          "orchestration_harness/governance_clockwork_tick.py"
+        ]
+      },
+      "incident_id": "AER-0765",
+      "attempt_id": "clock-11c78d3e06476abac2d91e07",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "provider-free-test-session-exit-capture",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every yielded validation process must retain its session identifier until final exit capture.",
+      "observed_error": "One grouped test yielded at 96 percent without exposing its session identifier, so its final exit reading was unavailable after process completion.",
+      "detection_method": "A process-absence reading found no live test process while the captured result had no exit code.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-585.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.yielded_validation_session_identifier_not_retained",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Rerun the remaining test file with explicit session and final exit capture.",
+        "prevention_control": "Long process wrappers always emit and retain session_id before waiting for completion.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-585.md"
+        ]
+      },
+      "incident_id": "AER-0766",
+      "attempt_id": "clock-ac9d8272789c721e0d721023",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-004-prelaunch-adapter-probe-method",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Adapter probe methods must use the orchestrator preflight's fixed vocabulary before worker dispatch.",
+      "observed_error": "The first prelaunch receipt used native_harness_prelaunch, which is not an admitted adapter probe method.",
+      "detection_method": "Preflight returned adapter_probe_method_invalid and worker_dispatch_permitted false before process creation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-004-occupied-prelaunch-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.prelaunch_adapter_probe_used_unadmitted_method",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the admitted synthetic_fixture method in a distinct corrected receipt.",
+        "prevention_control": "Preflight's fixed adapter method vocabulary remains a dispatch prerequisite.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-004-occupied-prelaunch-v2-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0767",
+      "attempt_id": "clock-c71659fecf2a27e7e734ec6f",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-004-prelaunch-workspace-receipt",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A standalone synthetic baseline must not be represented as an Ariadne task-handoff worktree.",
+      "observed_error": "The first prelaunch runtime state supplied the disposable synthetic repository as a handoff workspace receipt.",
+      "detection_method": "Preflight rejected workspace_not_clean and workspace_not_at_handoff before worker dispatch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-004-occupied-prelaunch-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.synthetic_baseline_misrepresented_as_handoff_worktree",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the false handoff receipt and retain the root identity in preparation and checkpoint evidence only.",
+        "prevention_control": "Ariadne workspace receipts are reserved for task-handoff worktrees; standalone synthetic roots use their own evidence schemas.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-004-occupied-prelaunch-v2-receipt.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/occupied-attempt-preparation.json"
+        ]
+      },
+      "incident_id": "AER-0768",
+      "attempt_id": "clock-0d36877c88c25c98a0a0ed45",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "governance-clockwork-closeout-node-relationships",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A transactional closeout node must carry exactly one direct builds_on relationship.",
+      "observed_error": "The first attempt-004 closeout intent supplied both readiness and controller-convergence parents.",
+      "detection_method": "The read-only clockwork check rejected node_relationship_invalid before command execution or publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_node_supplied_multiple_builds_on_relationships",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Retain only the direct readiness parent because it already preserves the accepted controller lineage.",
+        "prevention_control": "The read-only clockwork manifest validator enforces exactly one direct builds_on relationship before commands or publication.",
+        "evidence_paths": [
+          "orchestration_harness/transactional_closeout.py",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0769",
+      "attempt_id": "clock-278ecd329c73ae21521d2c90",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

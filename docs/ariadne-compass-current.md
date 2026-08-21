@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Take a fresh clock reading, consume one identity, run once and trust the bounded terminal.
+> Inspect the pinned plugin-tree source against the immutable cause chain; do not launch another occupied process.
 
 ## North star
 
@@ -492,25 +492,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The old validator now takes its historical reading from exact Git source while preserved behavioral and consumed-attempt checks remain live. Lineage parent: `raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal`.
 238. **Prove one fresh native-Harness bounded worker can be attempted under clockwork control — Provider-free native Harness attempt-004 readiness decision**
    A fourth identity and one-execution envelope are ready, traceable and separate from consumed history. Lineage parent: `deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair`.
+239. **Test whether the native Harness can provide bounded, orchestrator-controlled DeepSeek worker execution — Native Harness bounded-worker attempt 004 structured terminal**
+   The one occupied identity failed before provider I/O but produced a materially more precise structured plugin-tree-load terminal with exact cleanup. Lineage parent: `raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision`.
 
 ## Current position
 
-**Execute exactly one separately checkpointed occupied attempt 004 — Provider-free native Harness attempt-004 readiness decision**
+**Identify the pinned rc.7 plugin-tree failure without spending another occupied attempt — Native Harness bounded-worker attempt 004 structured terminal**
 
-**Why this proof came next:** The identity, controller, preset, task, broker, terminal and cleanup envelope have passed their deterministic gate.
+**Why this proof came next:** The structured terminal supplies a bounded top coordinate and cause-chain shape, but the deepest code remains outside the closed vocabulary.
 
-One native Harness attempt produces a bounded success or fail-closed terminal under a fresh clockwork parent.
+A provider-free source reading will decide whether the exact failing plugin-tree branch can be named and safely repaired.
 
 ### What this unlocks
 
-- Evidence of whether the converged native Harness reaches useful model/tool work under EMR4 orchestration.
-- A traceable basis for using or correcting the Harness worker lane.
+- A grounded repair-or-stop decision for the native Harness profile.
+- A later separately authorised boot proof only if source evidence supports it.
 
 ### What it does not solve
 
-- No retry or second attempt.
-- No product/data/runtime authority.
-- No presumption of provider or Harness success.
+- No native Harness, broker, worker, model or provider process.
+- No occupied retry, product work, data use, deployment or protected integration.
 
 ## Continuity and authority
 
@@ -1296,6 +1297,7 @@ Prerequisites:
 - `docs/raisa-agent-execution-surface-containment-gate-aes-c5-product-runtime-admission-plan.md`
 - `docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002-failed-closed-closeout.md`
 - `docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-failed-closed-closeout.md`
+- `docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004-closeout.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-closeout.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-design.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`
@@ -2198,7 +2200,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-native-harness-attempt-004-readiness-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-packet.md`
@@ -2698,6 +2699,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/product-runtime-envelope.schema.json`
 - `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-terminal.json`
 - `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/efficacy-reading.json`
+- `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/diagnosis.md`
+- `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/efficacy-reading.json`
+- `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/pre-hmr-startup-terminal.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-cost-ledger.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-evidence.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-free-acceptance-evidence.json`
@@ -3622,4 +3626,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 343; continuity graph revision 361._
+_Compass map revision 344; continuity graph revision 362._
