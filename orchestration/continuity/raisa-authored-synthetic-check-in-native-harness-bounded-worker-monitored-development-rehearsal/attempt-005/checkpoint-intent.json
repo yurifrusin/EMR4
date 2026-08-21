@@ -1,0 +1,35 @@
+{
+  "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
+  "completed_stage": "Attempt 005 passed fresh five-source rehydration, exact zero-provider deterministic admission and preparation. Its distinct synthetic root, pinned rc.7 package, preset, edit/glob/read projection, WorkOrder and structured-diagnostic gear are bound. Attempts 001-004 remain consumed; zero native-Harness processes and provider requests occurred. The one-process, one-request, one-tool-call, zero-retry checkpoint is admitted.",
+  "next_executable_stage": "generate_a_fresh_five_source_attempt_005_occupied_prelaunch_receipt_then_run_exactly_one_deepseek_native_harness_authored_synthetic_edit_through_the_structured_diagnostic_controller_without_retry_resume_fallback_or_second_worker",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "authored_synthetic_native_worker_attempt_005_checkpoint_provider_free_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "authored_synthetic_native_worker_attempt_005_checkpoint_controller_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005",
+          "--check"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}
