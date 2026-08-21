@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-preset-composition-safe-terminal-evidence.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "candidate_source", "execution_attempt_id", "result", "failure_classification", "source_bindings", "package", "launch", "composition", "readiness", "sidecar", "controller_terminal", "provider_boundary", "target", "cleanup"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_preset_composition_safe_terminal_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal"},
+    "planning_source": {"$ref": "#/$defs/oid"},
+    "candidate_source": {"$ref": "#/$defs/oid"},
+    "execution_attempt_id": {"const": "preset-composition-safe-terminal-attempt-001"},
+    "result": {"enum": ["pass", "fail"]},
+    "failure_classification": {"type": ["string", "null"]},
+    "source_bindings": {"type": "object"},
+    "package": {"type": "object"},
+    "launch": {"type": "object"},
+    "composition": {"type": "object"},
+    "readiness": {"type": "object"},
+    "sidecar": {"type": ["object", "null"]},
+    "controller_terminal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["result", "last_admitted_stage", "error_class", "safe_guard_coordinate", "safe_guard_detail", "factory_boundary", "raw_runtime_detail_retained"],
+      "properties": {
+        "result": {"enum": ["closed_subcoordinate_failure", "preset_composition_failure_attributed", "prepublication_veto_diagnosed", "runner_link_or_apply_absence"]},
+        "last_admitted_stage": {"type": ["string", "null"]},
+        "error_class": {"type": ["string", "null"]},
+        "safe_guard_coordinate": {"type": ["string", "null"]},
+        "safe_guard_detail": {"type": ["string", "null"]},
+        "factory_boundary": {"type": ["object", "null"]},
+        "raw_runtime_detail_retained": {"const": false}
+      }
+    },
+    "provider_boundary": {"type": "object"},
+    "target": {"type": "object"},
+    "cleanup": {"type": "object"}
+  },
+  "$defs": {
+    "oid": {"type": "string", "pattern": "^[0-9a-f]{40}$"}
+  }
+}

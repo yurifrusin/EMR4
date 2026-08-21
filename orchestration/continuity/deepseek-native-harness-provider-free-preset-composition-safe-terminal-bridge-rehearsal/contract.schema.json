@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-preset-composition-safe-terminal-contract.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "planning_source", "base_contract_sha256",
+    "predecessor_bytes", "implementation_bytes", "execution_attempt",
+    "source_bindings", "closed_vocabulary", "safe_terminal_bridge", "preset",
+    "selection", "factory_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_preset_composition_safe_terminal_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal"},
+    "planning_source": {"$ref": "#/$defs/oid"},
+    "base_contract_sha256": {"$ref": "#/$defs/digest"},
+    "predecessor_bytes": {"$ref": "#/$defs/digestMap"},
+    "implementation_bytes": {"$ref": "#/$defs/digestMap"},
+    "execution_attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempt_id", "native_process_count", "automatic_retry", "manual_retry", "resume"],
+      "properties": {
+        "attempt_id": {"const": "preset-composition-safe-terminal-attempt-001"},
+        "native_process_count": {"const": 1},
+        "automatic_retry": {"const": false},
+        "manual_retry": {"const": false},
+        "resume": {"const": false}
+      }
+    },
+    "source_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["diagnostic_runner_sha256", "generated_helper_sha256", "controller_module_sha256", "effective_tool_guard_sha256", "readiness_sentinel_sha256"],
+      "properties": {
+        "diagnostic_runner_sha256": {"$ref": "#/$defs/digest"},
+        "generated_helper_sha256": {"$ref": "#/$defs/digest"},
+        "controller_module_sha256": {"$ref": "#/$defs/digest"},
+        "effective_tool_guard_sha256": {"$ref": "#/$defs/digest"},
+        "readiness_sentinel_sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "closed_vocabulary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stages", "error_classes", "terminals", "safe_guard_coordinates"],
+      "properties": {
+        "stages": {"type": "array", "minItems": 16, "maxItems": 16, "uniqueItems": true, "items": {"type": "string"}},
+        "error_classes": {"type": "array", "minItems": 21, "maxItems": 21, "uniqueItems": true, "items": {"type": "string"}},
+        "terminals": {"const": ["closed_subcoordinate_failure", "preset_composition_failure_attributed", "prepublication_veto_diagnosed", "runner_link_or_apply_absence"]},
+        "safe_guard_coordinates": {
+          "const": [
+            "EFFECTIVE_TOOL_COMPOSITION_INPUT_INVALID",
+            "EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED",
+            "EFFECTIVE_TOOL_COMPOSITION_SCOPE_MISSING",
+            "EFFECTIVE_TOOL_COMPOSITION_SCOPE_LOCAL_TOOL_PRESENT",
+            "EFFECTIVE_TOOL_COMPOSITION_EXPECTED_TOOL_NOT_INHERITED",
+            "EFFECTIVE_TOOL_COMPOSITION_RESTRICTION_FAILED",
+            "EFFECTIVE_TOOL_COMPOSITION_SCHEMA_VIEW_INVALID",
+            "EFFECTIVE_TOOL_COMPOSITION_EFFECTIVE_VIEW_MISMATCH",
+            "EFFECTIVE_TOOL_COMPOSITION_UNCLASSIFIED"
+          ]
+        }
+      }
+    },
+    "safe_terminal_bridge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sanitizer", "stage", "detail"],
+      "properties": {
+        "sanitizer": {"const": "sanitizeEffectiveToolTerminal"},
+        "stage": {"const": "pre_provider_tool_composition"},
+        "detail": {"const": "null_or_sorted_comma_separated_safe_tool_names"}
+      }
+    },
+    "preset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "bytes", "sha256", "trust", "effective_tools"],
+      "properties": {
+        "id": {"const": "emr4-bounded-worker"},
+        "bytes": {"const": 158},
+        "sha256": {"const": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1"},
+        "trust": {"const": "user"},
+        "effective_tools": {"const": ["edit", "glob", "read"]}
+      }
+    },
+    "selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "model", "reasoning_effort", "max_tokens"],
+      "properties": {
+        "provider": {"const": "deepseek-official"},
+        "model": {"const": "deepseek-v4-flash"},
+        "reasoning_effort": {"const": "high"},
+        "max_tokens": {"const": 4096}
+      }
+    },
+    "factory_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["private_session_id", "publication_stop", "agents_create_invocations_max", "published_agents", "published_sessions"],
+      "properties": {
+        "private_session_id": {"const": "session-emr4-preset-composition-terminal-001"},
+        "publication_stop": {"const": "EMR4_AGENT_PUBLICATION_STOP"},
+        "agents_create_invocations_max": {"const": 1},
+        "published_agents": {"const": 0},
+        "published_sessions": {"const": 0}
+      }
+    }
+  },
+  "$defs": {
+    "oid": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "digestMap": {"type": "object", "minProperties": 1, "additionalProperties": {"$ref": "#/$defs/digest"}}
+  }
+}
