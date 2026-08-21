@@ -1,0 +1,11 @@
+{
+  "schema_version": "emr4.non_phi_pushover_notification_receipt.v1",
+  "recorded_at": "2026-08-22T07:58:34.6730760+10:00",
+  "status": "passed",
+  "provider": "pushover",
+  "request": "587618b9-48ea-4c79-8206-c9cf86b4d775",
+  "title": "EMR4 sprint closeout",
+  "message_class": "non_phi_operational_closeout",
+  "phi_or_clinical_data": false,
+  "summary": "Finite native terminal recovered with zero requests and exact cleanup; clockwork and regression checks passed, and process-free source reconciliation is next."
+}
