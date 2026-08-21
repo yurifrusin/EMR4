@@ -1,0 +1,11 @@
+{
+  "schema_version": "emr4.non_phi_pushover_notification_receipt.v1",
+  "recorded_at": "2026-08-22T09:34:02.6520578+10:00",
+  "status": "passed",
+  "provider": "pushover",
+  "request": "1c3db9a6-05d3-462a-bed8-39302f7d4a18",
+  "title": "EMR4 sprint closeout",
+  "message_class": "non_phi_operational_closeout",
+  "phi_or_clinical_data": false,
+  "summary": "Clockwork 387/369, all twenty-three source predicates and focused plus governance suites passed; the isolated Node-fixture rehearsal is continuing."
+}
