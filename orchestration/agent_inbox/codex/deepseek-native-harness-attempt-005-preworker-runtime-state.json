@@ -1,0 +1,180 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh complete five-source rehydration, current latch validation, provider-free attempt-005 implementation, widened deterministic packet and machine Git snapshot",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md controls attempt 005 and requires one separate provider-free admission and checkpoint before the sole occupied native-Harness launch.",
+    "current_authority_allocation": "GPT Sol owns deterministic admission, preparation, checkpoint control, monitoring, terminalization and acceptance. DeepSeek Flash owns exactly one later authored-synthetic literal edit through the native Harness. Gemini remains reserved for a proportionate postterminal veto. Native subagents are declined under developer policy and the serial one-shot constraint.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-plan.md",
+      "docs/security/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-threat-model-delta.md",
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-historical-test-selection.md",
+      "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
+      "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-terminal.schema.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "This preworker stage is provider-free. It may admit and prepare one distinct authored-synthetic attempt-005 root and publish one checkpoint, but cannot launch the native Harness before that checkpoint. The later ceiling is one Harness process, session and turn, at most one DeepSeek request and exactly one literal edit, with zero retry, resume, fallback, auxiliary model or second worker. Product, data, database, deployment, Pages, protected evidence and protected refs remain closed.",
+    "git_refs_and_worktree": "The machine snapshot alone owns exact Git identities and verifies a clean origin-aligned task candidate, exact protected refs, preserved unrelated untracked files including docs/branding, an absent attempt root and no matching native-Harness process."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
+    "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker attempt 005",
+    "objective": "Under one fresh machine-derived clockwork checkpoint, prepare and execute at most one disjoint authored-synthetic native Harness worker attempt 005 using the exact repaired sentinel, runner, preset, broker and work order; permit one process, one session, one turn, at most one DeepSeek provider request and exactly one direct literal edit tool call; retain bounded structured terminal evidence, destroy raw streams and environment, clean all owned processes and the disposable root, and perform no retry, resume, fallback, auxiliary model, second worker or product activity.",
+    "status": "in_progress",
+    "source_head": "5f9a207df5e237ec63c8ed3ac3507adfb7d8c319",
+    "authority_source": "Yuri's standing uninterrupted-development authority, constrained by the accepted process-free attempt-005 readiness decision and a separately frozen one-process checkpoint.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision at the machine-resolved source.",
+      "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_and_validate_the_attempt_005_preexecution_checkpoint",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "one_fresh_disjoint_attempt_005_only",
+      "fresh_five_source_rehydration_full_git_resolution_and_clockwork_checkpoint_required_before_preparation_or_execution",
+      "exactly_one_node_native_harness_process_one_session_one_turn_one_provider_request_and_one_direct_literal_edit_ceiling",
+      "zero_automatic_retry_resume_fallback_auxiliary_model_or_second_worker",
+      "consumed_attempts_001_through_004_and_all_boot_attempts_remain_immutable_and_nonresumable",
+      "exact_repaired_sentinel_runner_preset_broker_work_order_identity_output_and_cleanup_bindings",
+      "raw_prompt_response_reasoning_stream_environment_session_and_credential_material_not_retained",
+      "user_controlled_prepaid_balance_only_no_broker_currency_cap_claim_or_balance_top_up",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+      "authored_synthetic_non_product_single_file_only_no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
+    "assessed_stage": "attempt_005_deterministic_admission",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "rationale": "DeepSeek owns exactly one later attempt-005 authored-synthetic literal edit after Sol admits, prepares and checkpoints the exact provider-free descendant.",
+        "work_packages": [
+          "one attempt-005 authored-synthetic literal edit"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "neutral",
+        "rationale": "There is no occupied candidate to veto yet; reassess only after terminalization if a surviving candidate makes independent review proportionate.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and the identity-bound admission, preparation, checkpoint and launch transitions are serial.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "clean exact provider-free candidate before admission",
+      "deterministic admission before preparation",
+      "one root preparation before one checkpoint",
+      "one checkpoint before one native launch"
+    ],
+    "reassessment_triggers": [
+      "deterministic_admission_rejects",
+      "preparation_or_checkpoint_rejects",
+      "occupied_attempt_terminalizes"
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["GPT Sol owns deterministic admission and checkpoint control."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Historical transport only; no Claude Code fallback is selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Gemini is reserved and not called before the occupied terminal."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent was spawned."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["The pinned native Harness is planned but remains unlaunched before checkpoint."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
