@@ -1,0 +1,10 @@
+{
+  "schema_version": "emr4.non_phi_pushover_notification_receipt.v1",
+  "operation_id": "deepseek-native-harness-provider-free-proof-module-relative-specifier-repair",
+  "sent_at": "2026-08-21T13:52:21.3811695+10:00",
+  "provider": "pushover",
+  "request": "cd0c707a-6aa2-4e01-928f-7ca3db1d61a8",
+  "status": 1,
+  "contains_phi": false,
+  "message_scope": "exact two-row repair accepted; 30 focused plus 56 widened tests, schema and clockwork generation 108 passed; zero Harness or provider activity; one provider-free repaired-sentinel native boot proof next"
+}

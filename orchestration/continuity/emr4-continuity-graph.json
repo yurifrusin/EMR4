@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 363,
+  "graph_revision": 364,
   "harvests": [],
   "nodes": [
     {
@@ -27096,9 +27096,111 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-proof-module-relative-specifier-repair",
+      "title": "Native Harness proof-module relative-specifier repair",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the exact provider-free repair justified by the accepted diagnosis.",
+          "No Node, Harness, broker, worker, model, provider, network or occupied-retry authority opened.",
+          "No product, data, deployment, Pages or protected-ref authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-two-row-relative-specifier-repair",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/repair-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the two generated profile module-name replacements and one dead-local removal with preserved bounded profile invariants."
+        },
+        {
+          "id": "preserve-historical-latch-and-source-bindings",
+          "source": "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-historical-test-selection.md",
+          "status": "accepted",
+          "summary": "Preserve three historical latch/equality assertions unchanged under exact successor deselection."
+        },
+        {
+          "id": "reject-native-boot-and-worker-readiness",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-proof-module-relative-specifier-repair-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Reject any claim that this static repair proves native boot, DeepSeek reachability or worker readiness."
+        },
+        {
+          "id": "accept-contained-repair-workflow-incidents",
+          "source": "docs/ariadne-agent-error-correction-register-revision-587.md",
+          "status": "accepted",
+          "summary": "Accept four corrected or contained repair/verification incidents with none open."
+        }
+      ],
+      "claim_scope": [
+        "The generated sentinel and runner module names now use the accepted profile-relative rc7 form.",
+        "The behavioral output diff is exactly two rows and mechanical fallout is one dead local.",
+        "All bounded profile validation anchors remain passing.",
+        "Focused 30-test and corrected widened 56-test readings pass.",
+        "Node, Harness, broker, worker, model, provider and network activity remained zero."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/repair-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/repair-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/efficacy-reading.json",
+          "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-historical-test-selection.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-proof-module-relative-specifier-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-proof-module-relative-specifier-repair-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-proof-module-relative-specifier-repair-pre-verifier-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py",
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/evidence.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-587.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-proof-module-relative-specifier-repair.md"
+        ]
+      },
+      "unresolved_gates": [
+        "No repaired native Harness process has booted.",
+        "No HMR-ready event from the repaired sentinel has been observed.",
+        "DeepSeek provider, reasoning, coding and tool behavior remain unreached.",
+        "Every attempt-004 identity remains consumed and no occupied retry is authorised."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-21T13:48:50.6623983+10:00",
+      "updated_at": "2026-08-21T13:48:50.6623983+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "b0ab1f7d2d9623890c8ceafa2675545b8bdd8ce6",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-21T13:26:54.8506659+10:00"
+  "updated_at": "2026-08-21T13:48:50.6623983+10:00"
 }

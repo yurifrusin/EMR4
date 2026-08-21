@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 586,
+  "register_revision": 587,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -30357,6 +30357,150 @@
       },
       "incident_id": "AER-0772",
       "attempt_id": "clock-4f1a41ec19013bedcb0f151a",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-relative-specifier-repair",
+      "role": "orchestrator",
+      "resource_id": "repair-runner-cli-import",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A repository runner must support direct script execution with the repository package importable.",
+      "observed_error": "The first direct invocation raised ModuleNotFoundError for scripts because the repository-root bootstrap was absent.",
+      "detection_method": "The Python CLI exited before evidence or external activity.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py",
+        "docs/ariadne-agent-error-correction-register-revision-587.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.repository_runner_direct_cli_missing_repo_root_bootstrap",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the standard resolved repository-root sys.path bootstrap before importing scripts.",
+        "prevention_control": "Every new repository runner is invoked directly before acceptance.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py"
+        ]
+      },
+      "incident_id": "AER-0773",
+      "attempt_id": "clock-2e90e15073845489802a4b82",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-relative-specifier-repair",
+      "role": "orchestrator",
+      "resource_id": "repair-dead-local-guard",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A dead-local assertion must inspect only the function that owns the repaired local.",
+      "observed_error": "The first guard searched the whole controller and rejected a legitimate proof local in attempt preparation.",
+      "detection_method": "The evidence returned failed_closed with only dead_proof_local_absent false.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py",
+        "docs/ariadne-agent-error-correction-register-revision-587.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.static_guard_scope_exceeded_owned_function_boundary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Slice the exact profile_patch body before applying the dead-local check.",
+        "prevention_control": "Static local-variable guards bind their named function boundary explicitly.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py"
+        ]
+      },
+      "incident_id": "AER-0774",
+      "attempt_id": "clock-f843abda179c9f43cd73dad4",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-relative-specifier-repair",
+      "role": "orchestrator",
+      "resource_id": "provider-free-pytest-wrapper-cli",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The provider-free pytest wrapper must receive only its admitted exact-path vocabulary.",
+      "observed_error": "The first widened command passed pytest --deselect options to a wrapper that accepts paths only.",
+      "detection_method": "Argument parsing rejected the command before pytest collection.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-historical-test-selection.md",
+        "docs/ariadne-agent-error-correction-register-revision-587.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.provider_free_pytest_wrapper_received_unadmitted_pytest_option",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use direct serial pytest whenever explicit deselection is required.",
+        "prevention_control": "Wrapper commands contain paths only; direct pytest owns documented option-bearing selections.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-historical-test-selection.md"
+        ]
+      },
+      "incident_id": "AER-0775",
+      "attempt_id": "clock-8748e520583844aef26d53fd",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-relative-specifier-repair",
+      "role": "orchestrator",
+      "resource_id": "historical-source-binding-test-selection",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A successor regression must exclude frozen current-artifact equality checks whose accepted source is intentionally changed.",
+      "observed_error": "The first direct widened run selected two controller-convergence checks bound to the pre-repair component hash.",
+      "detection_method": "Both checks returned accepted_component_drift while all behavioral peers passed.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-historical-test-selection.md",
+        "docs/ariadne-agent-error-correction-register-revision-587.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_regression_selected_frozen_predecessor_source_binding_checks",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Deselect only the two exact frozen source-binding checks and retain every behavioral peer.",
+        "prevention_control": "Successor manifests document historical source-binding deselections before widened execution.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-historical-test-selection.md"
+        ]
+      },
+      "incident_id": "AER-0776",
+      "attempt_id": "clock-d674fb5105a5a98759a08200",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

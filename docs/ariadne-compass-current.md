@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Change only the two generated proof-module names to the accepted profile-relative form; do not launch the Harness.
+> Launch one bounded rc7 process with only the repaired initial sentinel profile; require HMR readiness or a sanitized fail-closed terminal, then clean up.
 
 ## North star
 
@@ -496,24 +496,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The one occupied identity failed before provider I/O but produced a materially more precise structured plugin-tree-load terminal with exact cleanup. Lineage parent: `raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision`.
 240. **Replace opaque native Harness startup failure with a source-bound repair decision — Native Harness plugin-tree source-coordinate diagnosis**
    The provider-free reading identified one profile-owned Windows module-specifier coordinate and justified a two-row repair without another occupied attempt. Lineage parent: `raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004`.
+241. **Convert the source diagnosis into the narrowest fail-closed profile repair — Native Harness proof-module relative-specifier repair**
+   The two proof-module names now match the already passing rc7 relative-specifier form without runtime or provider activity. Lineage parent: `deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis`.
 
 ## Current position
 
-**Repair the exact generated proof-module specifier family before any new native boot — Native Harness plugin-tree source-coordinate diagnosis**
+**Prove the repaired initial sentinel can boot in one bounded provider-free rc7 process — Native Harness proof-module relative-specifier repair**
 
-**Why this proof came next:** The source proof has one supported coordinate and an already passing relative-specifier control.
+**Why this proof came next:** The exact source repair and static projections pass, but no repaired native process has yet exercised the loader.
 
-A two-row provider-free candidate will align sentinel and runner names with the accepted relative-specifier form and add deterministic regression evidence.
+One provider-free initial-profile boot will either emit the expected HMR-ready event with exact cleanup or stop at a new sanitized pre-provider terminal.
 
 ### What this unlocks
 
-- A later separately frozen provider-free native boot proof.
-- A grounded reassessment of Gemini review and eventual occupied-worker readiness.
+- A grounded decision about whether the repaired profile clears the plugin-tree startup branch.
+- A later separately controlled worker-readiness step only if the boot proof passes.
 
 ### What it does not solve
 
-- No Node, Harness, broker, worker, model or provider process.
-- No occupied retry, product work, data use, deployment or protected integration.
+- No changed runner, broker, model, provider or occupied worker request.
+- No product work, data use, deployment or protected integration.
 
 ## Continuity and authority
 
@@ -1257,6 +1259,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md`
+- `docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-closeout.md`
@@ -2641,13 +2644,14 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-evidence.json`
-- `orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/diagnosis-evidence.json`
-- `orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/diagnosis-report.md`
 - `orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/efficacy-reading.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/repair-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/repair-report.md`
 - `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json`
@@ -3630,4 +3634,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 345; continuity graph revision 363._
+_Compass map revision 346; continuity graph revision 364._
