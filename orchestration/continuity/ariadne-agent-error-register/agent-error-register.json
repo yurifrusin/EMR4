@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 608,
+  "register_revision": 609,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -35312,6 +35312,157 @@
       },
       "incident_id": "AER-0907",
       "attempt_id": "clock-b731402f7f7641501ca2b469",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "source-reconciliation-contract-planning-source",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_contract_validation",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every contract Git object identity is copied from the repository's machine resolver as a full 40-character commit ID.",
+      "observed_error": "The first contract manually expanded the planning source into an invented 40-character value instead of copying the machine-resolved object.",
+      "detection_method": "The deterministic contract check rejected the planning-source mismatch before commit or evidence generation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/contract.json",
+        "docs/ariadne-agent-error-correction-register-revision-609.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.contract_planning_source_manually_expanded_instead_of_machine_resolved",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the caller-authored value with the exact output of the repository Git object resolver.",
+        "prevention_control": "Contract Git object fields are populated only from machine resolver output; the next correction tranche carries this as an explicit fail-closed boundary.",
+        "evidence_paths": [
+          "orchestration_harness/git_object_resolution.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/contract.json",
+          "docs/ariadne-agent-error-correction-register-revision-609.md"
+        ]
+      },
+      "incident_id": "AER-0908",
+      "attempt_id": "clock-64ddc67f24184e5b5d3b61a9",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "source-reconciliation-direct-script-import-path",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_python_cli",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A repository controller invoked directly by path can import its repository-owned packages before performing its check.",
+      "observed_error": "The first direct CLI check raised ModuleNotFoundError for scripts while the pytest import path remained valid.",
+      "detection_method": "The direct process-free check stopped before evidence generation and the corrected direct invocation exited zero.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-609.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.direct_script_missing_repository_import_path_binding",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the repository root before importing the repository scripts package and rerun the direct check.",
+        "prevention_control": "Directly executable repository controllers establish their import root before package imports and retain a direct-CLI verification path.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-609.md"
+        ]
+      },
+      "incident_id": "AER-0909",
+      "attempt_id": "clock-bee3925cf661189a38b01c6a",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "source-reconciliation-markdown-soft-wrap-tests",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Plan-prose assertions normalize Markdown soft wrapping without changing source-owned compound terms.",
+      "observed_error": "Two first-draft assertions used normalization that removed compound hyphens and therefore mismatched the plan's source-owned wording.",
+      "detection_method": "The focused suite reported only the two plan-prose assertion mismatches before evidence generation.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-609.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.plan_prose_soft_wrap_normalization_removed_compound_hyphen",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Normalize whitespace only, preserve compound hyphens and rerun the focused suite.",
+        "prevention_control": "Prose tests collapse Markdown whitespace while preserving punctuation unless punctuation itself is explicitly outside the contract.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-609.md"
+        ]
+      },
+      "incident_id": "AER-0910",
+      "attempt_id": "clock-5c4eb1141eb76e46cb0e2304",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "source-reconciliation-contract-evidence-shape",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_check",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A Continuity node's contract_evidence field contains only registered contract objects or the narrow empty form.",
+      "observed_error": "The first closeout intent supplied artifact-path strings in contract_evidence instead of registered contract objects.",
+      "detection_method": "The governance clockwork rejected the prospective projection before any canonical surface changed.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-609.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.transaction_manifest_contract_evidence_strings_instead_of_registered_objects",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the invalid path-string list with the narrow empty contract-evidence form and retain the files in the ordinary evidence inventory.",
+        "prevention_control": "Closeout manifests copy the Continuity node contract-evidence shape from the canonical schema and use an empty list when no registered contract applies.",
+        "evidence_paths": [
+          "scripts/ariadne_continuity.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-609.md"
+        ]
+      },
+      "incident_id": "AER-0911",
+      "attempt_id": "clock-a447ce48bba6cb7f6cad43bc",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

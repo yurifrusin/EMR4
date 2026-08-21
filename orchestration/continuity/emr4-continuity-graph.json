@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 385,
+  "graph_revision": 386,
   "harvests": [],
   "nodes": [
     {
@@ -29607,9 +29607,112 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+      "title": "Preset-mount composition-unclassified source reconciliation rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits this bounded process-free source reconciliation and its dependency-satisfied process-free successor.",
+          "No Node, native Harness, worker, model, provider, retry, product, data, deployment, Pages or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-root-preset-service-forwarding-gap",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/source-reconciliation-evidence.json",
+          "status": "accepted",
+          "summary": "Accept root_preset_service_not_forwarded_before_bridge as the narrowest deterministic source explanation for the consumed broad terminal."
+        },
+        {
+          "id": "accept-process-free-root-service-forwarding-successor",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Proceed only with a prospective process-free correction that forwards the admitted root preset service and moves mount validation inside the typed bridge."
+        },
+        {
+          "id": "reject-exact-runtime-exception-inference",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-composition-unclassified-source-reconciliation-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "The deterministic source route does not reconstruct the exact runtime exception or private context value."
+        },
+        {
+          "id": "reject-native-retry-or-worker-inference",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "No native retry, occupied DeepSeek worker, model/provider request or product authority follows from this acceptance."
+        }
+      ],
+      "claim_scope": [
+        "Exact implementation source ab2018091ee40fa8833f957daf41085a83f6b41d binds the runner, guard, bridge, sanitizer and installed rc.7 dependency sources.",
+        "All thirteen required source coordinates passed with zero failed coordinates.",
+        "The runner resolves root presets but does not forward the handle into the guard.",
+        "The installed agent-loop setup context derives from a narrower dependency surface without agentPresets.",
+        "The guard dereferences agentCtx.agentPresets while constructing bridge arguments before the bridge body can sanitize.",
+        "The broader sanitizer maps the uncoded escape to EFFECTIVE_TOOL_COMPOSITION_UNCLASSIFIED.",
+        "Node, native Harness, worker, model, provider, network, retry, resume, target and product counters remained zero.",
+        "The exact runtime exception, private context value and repaired native runtime remain unproved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-609.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-composition-unclassified-source-reconciliation.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-composition-unclassified-source-reconciliation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-composition-unclassified-source-reconciliation-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-composition-unclassified-source-reconciliation-pre-verifier-acceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/source-reconciliation-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/source-reconciliation-report.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The prospective root-service-forwarding correction has not been derived or executed.",
+        "The exact runtime exception and private setup-context value remain deliberately unknown.",
+        "The new preset-mount bridge runtime path remains unproved.",
+        "No occupied DeepSeek worker turn, model/provider request or coding-quality evidence is accepted.",
+        "No native retry exists; any later process requires a distinct frozen plan.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T08:26:47.0343827+10:00",
+      "updated_at": "2026-08-22T08:26:47.0343827+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "a6341f9225e3453529e70f6b75a45aec484d8f0e",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T07:43:26.3147932+10:00"
+  "updated_at": "2026-08-22T08:26:47.0343827+10:00"
 }
