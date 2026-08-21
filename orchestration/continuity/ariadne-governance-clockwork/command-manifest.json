@@ -2,62 +2,49 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "relative_specifier_repair_focused_tests",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "scripts.ariadne_provider_free_pytest",
-        "--repo-root",
-        "C:/Users/sarashera/emr4",
-        "tests/test_deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required"
-    },
-    {
-      "command_id": "relative_specifier_repair_widened_tests",
+      "command_id": "repaired_sentinel_boot_focused_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "pytest",
         "-q",
-        "tests/test_deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py",
-        "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py",
-        "--deselect",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py::test_attempt_four_provider_free_check_reports_zero_processes_and_requests",
-        "--deselect",
-        "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py::test_deterministic_evidence_launches_no_subprocess",
-        "--deselect",
-        "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py::test_contract_evidence_and_report_are_current"
+        "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "relative_specifier_repair_ruff",
+      "command_id": "repaired_sentinel_boot_register_tests",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_ariadne_agent_error_register.py::test_register_is_valid_after_durability_schema_recovery",
+        "tests/test_ariadne_agent_error_register.py::test_pattern_report_detects_recurring_control_signals",
+        "tests/test_ariadne_agent_error_register.py::test_committed_pattern_report_matches_fresh_build"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "repaired_sentinel_boot_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py",
-        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py"
+        "scripts/deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "relative_specifier_repair_compile",
+      "command_id": "repaired_sentinel_boot_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py",
-        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py"
+        "scripts/deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

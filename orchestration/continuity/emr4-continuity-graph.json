@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 364,
+  "graph_revision": 365,
   "harvests": [],
   "nodes": [
     {
@@ -27198,9 +27198,118 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof",
+      "title": "Native Harness repaired-sentinel boot terminal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-proof-module-relative-specifier-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted exactly one provider-free repaired-initial-profile process.",
+          "Attempt 001 is consumed; no retry, resume, fallback, changed runner, broker, worker, model or provider authority remains open.",
+          "No product, data, deployment, Pages or protected-ref authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-single-attempt-terminal-and-cleanup",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one consumed process, zero retry, zero provider activity, sanitized evidence and exact process/root cleanup."
+        },
+        {
+          "id": "reject-repaired-sentinel-boot-proof",
+          "source": "docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-closeout.md",
+          "status": "rejected",
+          "summary": "Reject sentinel loading, stock-headless HMR readiness and worker-readiness claims because the process exited 1 with zero HMR events."
+        },
+        {
+          "id": "preserve-no-retry-and-open-static-diagnosis",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Keep attempt 001 immutable and permit only a separately frozen provider-free static preactivation source-coordinate diagnosis."
+        },
+        {
+          "id": "accept-contained-terminal-and-closeout-incidents",
+          "source": "docs/ariadne-agent-error-correction-register-revision-588.md",
+          "status": "accepted",
+          "summary": "Accept eleven contained or corrected incidents with none open, including the failed terminal wording and clockwork-boundary vocabulary corrections."
+        }
+      ],
+      "claim_scope": [
+        "Exactly one pinned rc7 Node/Harness process started and no retry occurred.",
+        "The process exited 1 after 7310 ms before emitting any sentinel or HMR-readiness event.",
+        "Changed runner, broker, worker, prompt, tool, model, provider and network activity remained zero.",
+        "Only stream counts and digests were retained; the child and disposable root are absent.",
+        "The boot proof is rejected and the static two-row repair remains insufficient for this initial profile."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/native-attempt-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-terminal.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/efficacy-reading.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/clockwork-postpublication-verification-rejected-lease-109.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-preplanning-receipt-v3.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-pre-verifier-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py",
+          "tests/test_deepseek_native_harness_provider_free_complete_composition_native_boot_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/evidence.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-588.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-repaired-sentinel-native-boot-proof.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The unique preactivation source coordinate is not yet identified.",
+        "No repaired sentinel activation or stock-headless HMR readiness has passed in this profile.",
+        "No changed runner, worker, model/provider or EMR4 development work is admitted.",
+        "Attempt 001 remains terminal and no native retry is authorised."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-21T14:22:57.0516264+10:00",
+      "updated_at": "2026-08-21T14:22:57.0516264+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "42f6314b640c55ed8fd72f62e09548f0fdabfe87",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-21T13:48:50.6623983+10:00"
+  "updated_at": "2026-08-21T14:22:57.0516264+10:00"
 }

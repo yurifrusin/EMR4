@@ -1,0 +1,23 @@
+{
+  "schema_version": "deepseek.native_harness.repaired_sentinel_clockwork_postpublication_verification.v1",
+  "status": "passed",
+  "source_commit": "42f6314b640c55ed8fd72f62e09548f0fdabfe87",
+  "generation_id": "gen-ccf4de49d0ed04cf1ed5ce1ec80e6c529914600b69f7ac1725534aa8364192b0",
+  "lease_sequence": 111,
+  "tests": 98,
+  "passed": 98,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "duration_seconds": 172.177,
+  "provider_requests": 0,
+  "native_harness_processes": 0,
+  "comparison": {
+    "rejected_lease": 109,
+    "rejected_passed": 97,
+    "rejected_failed": 1,
+    "corrected_failed": 0,
+    "corrected_failure_delta": -1
+  },
+  "claim_boundary": "This record proves the corrected clockwork, latch, Compass and baton verification packet passed. It is not Harness, worker, model or provider performance evidence."
+}

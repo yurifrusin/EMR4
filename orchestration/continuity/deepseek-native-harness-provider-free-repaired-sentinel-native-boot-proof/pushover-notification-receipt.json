@@ -1,0 +1,11 @@
+{
+  "schema_version": "emr4.non_phi_pushover_notification_receipt.v1",
+  "recorded_at": "2026-08-21T14:57:48.0533252+10:00",
+  "status": "passed",
+  "provider": "pushover",
+  "request": "80c9fcb3-1a14-4ee5-9829-a9a1b8a77150",
+  "title": "EMR4 Harness closeout",
+  "message_class": "non_phi_operational_closeout",
+  "phi_or_clinical_data": false,
+  "summary": "Repaired-sentinel boot failed closed before activation without DeepSeek/provider call or retry; corrected clockwork verification passed 98 of 98 and static diagnosis became active."
+}
