@@ -1,0 +1,179 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "inspect_the_accepted_bounded_worker_controller_and_structured_diagnostic_components_then_freeze_the_narrowest_provider_free_controller_convergence_contract",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh complete AGENTS reading through EOF, active acceptance and exact latch readback, post-push task-branch alignment, protected-boundary restoration and explicit three-lane assessment",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "Continuity 358 and Compass 340 accept the provider-free structured diagnostic native-boot result and name bounded-worker-controller convergence as the next exact tranche.",
+    "current_authority_allocation": "GPT Sol owns serial provider-free planning, source inspection, implementation, deterministic acceptance, clockwork and Git. No external worker or provider receives authority.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "The successor may converge accepted local controller code only. It launches no Harness, broker, worker, prompt, tool, model or provider; consumed evidence remains immutable and product/data/deployment/protected surfaces remain closed.",
+    "git_refs_and_worktree": "Machine snapshot alone owns exact Git objects. It must show the task branch aligned with origin, all four protected refs fixed, tracked state clean, docs/branding present and every unrelated untracked path preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+    "active_tranche": "Raisa provider-free authored-synthetic native Harness structured diagnostic bounded-worker controller convergence rehearsal",
+    "objective": "Compose the accepted canonical structured diagnostic wrapper and v2 terminal reader into the bounded authored-synthetic worker controller and prove exact pre-provider terminal selection, identity binding and cleanup relationships without launching Harness, broker, worker, model or provider activity.",
+    "status": "in_progress",
+    "source_head": "6f728b2979dffcd089bd79eb73f49d7e447d772f",
+    "authority_source": "Yuri's standing uninterrupted-development authority, constrained to provider-free deterministic controller convergence and no occupied attempt.",
+    "checkpoint": {
+      "completed_stage": "Accepted deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal at the machine-resolved source.",
+      "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_provider_free_bounded_worker_controller_convergence_contract",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_bounded_worker_controller_convergence_only",
+      "no_native_harness_broker_worker_session_prompt_tool_model_or_provider_process_or_request",
+      "pinned_rc7_wrapper_terminal_and_controller_identity_required",
+      "no_occupied_attempt_retry_resume_overwrite_or_reclassification",
+      "consumed_attempts_and_terminal_evidence_remain_immutable",
+      "no_raw_startup_stream_reconstruction_or_retention",
+      "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+    "assessed_stage": "fresh_preplanning",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "rationale": "The DeepSeek Harness/controller is the provider-free object under inspection; creating a worker or model request would violate the latch.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "rationale": "Provider calls remain closed and the planned convergence can be judged by exact source, fixture and lifecycle invariants.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and the controller selection, terminal relationship and cleanup order form one tightly coupled serial source surface.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "read accepted controller and terminal sources before freezing selection",
+      "one controller integration owner",
+      "no process launch",
+      "preserve consumed attempts byte-identically"
+    ],
+    "reassessment_triggers": [
+      "plan_exposes_a_genuinely_separable_provider_free_fixture_package",
+      "deterministic_source_conflict_changes_acceptance",
+      "provider_or_occupied_execution_becomes_proposed"
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol owns provider-free planning and exact source inspection."]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "native_harness_observation",
+      "reachability": "reachable",
+      "evidence": ["Accepted predecessor evidence proves the real entrypoint diagnostic boundary; no new process is admitted."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Historical lineage only; no fallback."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No provider call authorised."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No subagent spawned."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

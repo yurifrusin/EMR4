@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "accepted_native_boot_source", "components", "paths", "selection", "immutable_artifacts", "process_boundary", "occupied_attempt_authorized", "raw_historical_stream_read_authorized"],
+  "properties": {
+    "schema_version": {"const": "ariadne.structured_diagnostic_bounded_worker_controller_convergence_contract.v1"},
+    "operation_id": {"const": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_native_boot_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "components": {"type": "object"},
+    "paths": {"type": "object"},
+    "selection": {"type": "object"},
+    "immutable_artifacts": {"type": "array", "minItems": 7, "maxItems": 7},
+    "process_boundary": {"type": "object", "additionalProperties": {"const": 0}},
+    "occupied_attempt_authorized": {"const": false},
+    "raw_historical_stream_read_authorized": {"const": false}
+  }
+}

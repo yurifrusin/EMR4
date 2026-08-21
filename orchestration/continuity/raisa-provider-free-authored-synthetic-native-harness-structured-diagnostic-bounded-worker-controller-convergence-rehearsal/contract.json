@@ -1,0 +1,45 @@
+{
+  "schema_version": "ariadne.structured_diagnostic_bounded_worker_controller_convergence_contract.v1",
+  "operation_id": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+  "planning_source": "516f6bf6a7f6f68fc9a7fa38a5643d6f1bf65d98",
+  "accepted_native_boot_source": "6f728b2979dffcd089bd79eb73f49d7e447d772f",
+  "components": {
+    "structured_diagnostic_sha256": "d6fe1ddc4930ce7f0ddbf3480ca93b999d6390a17e16aaa5945c115df04ab72a",
+    "legacy_terminal_sha256": "0a476ee7617fbc71d9cc3efb88ca08ac1cc6f01b433aa8d83d0603493cc05468",
+    "controller_baseline_sha256": "43e47f244728449f4476431b8d32e3b110c2239025d286a2a5075c477648d9bb"
+  },
+  "paths": {
+    "wrapper_leaf": "entrypoint-wrapper.mjs",
+    "diagnostic_leaf": "pre-hmr-structured-diagnostic.json",
+    "terminal_outside_disposable_root": true
+  },
+  "selection": {
+    "valid_exact_identity": {"schema": "ariadne.native_harness_pre_hmr_startup_terminal.v2", "reason": null, "structured_accepted": true},
+    "absent": {"schema": "ariadne.native_harness_pre_hmr_startup_terminal.v1", "reason": "structured_diagnostic_absent", "structured_accepted": false},
+    "invalid": {"schema": "ariadne.native_harness_pre_hmr_startup_terminal.v1", "reason": "structured_diagnostic_invalid", "structured_accepted": false}
+  },
+  "immutable_artifacts": [
+    {"path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-attempt-consumed.json", "sha256": "cb4613ebe46f122e24e5fb11a7b48bcba47be8f30c23b75e5d0d4d9ec9fd3541"},
+    {"path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/occupied-terminal.json", "sha256": "38cd1854c555de83bbe00757bed4e7744215d4f1996fc2910f37bdc7c8d020e1"},
+    {"path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-attempt-consumed.json", "sha256": "d9af398db0e9416f29df6316ac349a50a9c1516fbf54ccf6b0c40357340457a1"},
+    {"path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-terminal.json", "sha256": "6f873651c94e81faa8af93bd3d191dd67c13982bfca081479cee6e390ff6cb00"},
+    {"path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/occupied-attempt-consumed.json", "sha256": "32db476458a602bc627955d8f8918dc9193ef4338b7ba03e62577b8468854ca4"},
+    {"path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/occupied-terminal.json", "sha256": "00474761a6a901642c3f6ebfc9b07db607125e9ba48e2bbc5654ea8425904e07"},
+    {"path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/pre-hmr-startup-terminal.json", "sha256": "dc9d7eaea6a2f9a4decf5513f2095853ba74fa1764b381f6706bda1399ba288f"}
+  ],
+  "process_boundary": {
+    "node": 0,
+    "native_harness": 0,
+    "broker": 0,
+    "worker": 0,
+    "session": 0,
+    "prompt": 0,
+    "tool": 0,
+    "model": 0,
+    "provider": 0,
+    "network": 0
+  },
+  "occupied_attempt_authorized": false,
+  "raw_historical_stream_read_authorized": false
+}
+
