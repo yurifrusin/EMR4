@@ -58,6 +58,10 @@ clockwork generation. The corrected closeout now leaves all canonical surfaces
 to the clockwork's single pointer-last transaction; the incident and exact
 prevention rule are preserved in the canonical-latch recovery note.
 
+Register revision 601 binds the pre-push identity lapse, prelaunch contract
+mismatch, sidecar-free native exit, generated evidence overclaim, manual
+canonical-latch drift and negative-result acceptance-pointer correction.
+
 ## Parallelism efficacy
 
 DeepSeek was correctly declined because its factory boundary was under test.
