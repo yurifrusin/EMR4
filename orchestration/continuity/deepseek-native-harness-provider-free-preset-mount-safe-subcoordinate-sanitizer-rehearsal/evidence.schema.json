@@ -58,10 +58,10 @@
       ],
       "properties": {
         "authored_synthetic": {"const": true},
-        "attempt_id": {"const": "attempt-002"},
+        "attempt_id": {"const": "attempt-003"},
         "node_process_count": {"const": 1},
-        "prior_consumed_node_process_count": {"const": 1},
-        "cumulative_node_process_count": {"const": 2},
+        "prior_consumed_node_process_count": {"const": 2},
+        "cumulative_node_process_count": {"const": 3},
         "result_count": {"const": 15},
         "stdout_exact": {"const": true},
         "stderr_bytes": {"const": 0},

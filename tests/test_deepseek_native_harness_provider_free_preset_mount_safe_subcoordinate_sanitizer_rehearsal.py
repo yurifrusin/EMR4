@@ -122,6 +122,41 @@ def test_byte_only_mismatch_uses_safe_nonindex_sentinel() -> None:
     assert raised.value.first_mismatch_index == -1
 
 
+@pytest.mark.parametrize(
+    "code",
+    ["SANITIZER_MODULE_IMPORT_REJECTED", "SANITIZER_MATRIX_EVALUATION_REJECTED"],
+)
+def test_wrapper_terminal_is_closed_and_nonleaking(code: str) -> None:
+    contract = subject.load_contract()
+    stdout = json.dumps(
+        {"stage": "fixture_boot", "code": code, "detail": None},
+        separators=(",", ":"),
+    ) + "\n"
+    with pytest.raises(subject.WrapperTerminal) as raised:
+        subject.validate_fixture_result(
+            stdout=stdout,
+            stderr="",
+            returncode=0,
+            contract=contract,
+        )
+    assert raised.value.code == code
+
+
+def test_process_envelope_retains_only_counts_and_digests() -> None:
+    envelope = subject.build_process_envelope(
+        candidate_source="b" * 40,
+        returncode=7,
+        stdout="safe-output",
+        stderr="discarded-error",
+    )
+    assert envelope["numeric_exit_code"] == 7
+    assert envelope["stdout_bytes"] == 11
+    assert envelope["stderr_bytes"] == 15
+    assert envelope["stream_content_retained"] is False
+    assert "safe-output" not in json.dumps(envelope)
+    assert "discarded-error" not in json.dumps(envelope)
+
+
 def test_synthetic_evidence_has_one_node_process_and_zero_runtime_effects() -> None:
     contract = subject.load_contract()
     upstream = subject.verify_upstream_source(contract)
@@ -134,7 +169,7 @@ def test_synthetic_evidence_has_one_node_process_and_zero_runtime_effects() -> N
         results=subject.expected_results(contract),
     )
     assert evidence["fixture"]["node_process_count"] == 1
-    assert evidence["fixture"]["cumulative_node_process_count"] == 2
+    assert evidence["fixture"]["cumulative_node_process_count"] == 3
     assert evidence["fixture"]["native_harness_import_count"] == 0
     assert set(evidence["zero_counters"].values()) == {0}
     assert evidence["claim_boundary"] == {
@@ -159,6 +194,10 @@ def test_rehearsal_source_has_one_node_launch_and_check_is_nonexecuting() -> Non
     assert "run_fixture_once(" not in check_body
     assert "expectedCodes" not in fixture
     assert "process.exitCode" not in fixture
+    assert fixture.count("await import(") == 1
+    assert "SANITIZER_MODULE_IMPORT_REJECTED" in fixture
+    assert "SANITIZER_MATRIX_EVALUATION_REJECTED" in fixture
+    assert "build_process_envelope(" in source
     assert "write_safe_vector_rejection(" in source
     assert "--execute" in source
     assert "--check" in source

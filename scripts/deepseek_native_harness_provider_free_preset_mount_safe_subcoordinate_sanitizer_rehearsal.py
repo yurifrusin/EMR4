@@ -29,7 +29,9 @@ CONTRACT_SCHEMA_PATH = OPERATION_ROOT / "contract.schema.json"
 EVIDENCE_SCHEMA_PATH = OPERATION_ROOT / "evidence.schema.json"
 EVIDENCE_PATH = OPERATION_ROOT / "safe-subcoordinate-sanitizer-evidence.json"
 REPORT_PATH = OPERATION_ROOT / "safe-subcoordinate-sanitizer-report.md"
-SAFE_VECTOR_REJECTION_PATH = OPERATION_ROOT / "attempt-002-safe-vector-rejection.json"
+SAFE_VECTOR_REJECTION_PATH = OPERATION_ROOT / "attempt-003-safe-vector-rejection.json"
+PROCESS_ENVELOPE_PATH = OPERATION_ROOT / "attempt-003-process-envelope.json"
+WRAPPER_TERMINAL_PATH = OPERATION_ROOT / "attempt-003-wrapper-terminal.json"
 PLAN_PATH = REPO_ROOT / "docs" / f"{OPERATION_ID}-plan.md"
 THREAT_PATH = REPO_ROOT / "docs" / "security" / f"{OPERATION_ID}-threat-model-delta.md"
 SCHEMA_VERSION = (
@@ -53,6 +55,14 @@ class SafeVectorMismatch(SanitizerRehearsalError):
         super().__init__("node_fixture_safe_vector_mismatch")
         self.observed_codes = observed_codes
         self.first_mismatch_index = first_mismatch_index
+
+
+class WrapperTerminal(SanitizerRehearsalError):
+    """The exact wrapper returned one closed import or evaluation terminal."""
+
+    def __init__(self, code: str) -> None:
+        super().__init__("node_fixture_wrapper_terminal")
+        self.code = code
 
 
 def canonical_bytes(value: Any) -> bytes:
@@ -198,12 +208,13 @@ def verify_repository_bindings(contract: dict[str, Any]) -> list[dict[str, Any]]
     if not all(anchor in sanitizer for anchor in required_sanitizer_anchors):
         raise SanitizerRehearsalError("sanitizer_source_anchor_missing")
 
-    imports = re.findall(r'(^|\n)\s*import[\s\S]*?from\s+"([^"]+)";', fixture)
     expected_import = (
         "./deepseek_native_harness_provider_free_preset_mount_safe_"
         "subcoordinate_sanitizer.mjs"
     )
-    if len(imports) != 1 or imports[0][1] != expected_import:
+    if re.search(r'(^|\n)\s*import[\s\S]*?from\s+"', fixture):
+        raise SanitizerRehearsalError("fixture_static_import_rejected")
+    if fixture.count(f'await import("{expected_import}")') != 1:
         raise SanitizerRehearsalError("fixture_import_boundary_rejected")
     forbidden_tokens = [
         "@deepseek-ai/dsh",
@@ -212,13 +223,14 @@ def verify_repository_bindings(contract: dict[str, Any]) -> list[dict[str, Any]]
         "node:http",
         "node:https",
         "process.env",
-        "import(",
         "fetch(",
         "XMLHttpRequest",
         "WebSocket",
     ]
     if any(token in fixture or token in sanitizer for token in forbidden_tokens):
         raise SanitizerRehearsalError("repository_effect_boundary_rejected")
+    if fixture.count("import(") != 1:
+        raise SanitizerRehearsalError("fixture_dynamic_import_count_rejected")
     if fixture.count("process.stdout.write(") != 1:
         raise SanitizerRehearsalError("fixture_stdout_boundary_rejected")
     return bindings
@@ -248,6 +260,24 @@ def validate_fixture_result(
         value = json.loads(stdout)
     except json.JSONDecodeError as error:
         raise SanitizerRehearsalError("node_fixture_stdout_not_json") from error
+    wrapper_codes = {
+        "SANITIZER_MODULE_IMPORT_REJECTED",
+        "SANITIZER_MATRIX_EVALUATION_REJECTED",
+    }
+    if isinstance(value, dict):
+        expected_wrapper = {
+            "stage": "fixture_boot",
+            "code": value.get("code"),
+            "detail": None,
+        }
+        if (
+            list(value) != ["stage", "code", "detail"]
+            or value != expected_wrapper
+            or value["code"] not in wrapper_codes
+            or stdout != json.dumps(value, separators=(",", ":")) + "\n"
+        ):
+            raise SanitizerRehearsalError("node_fixture_wrapper_shape_mismatch")
+        raise WrapperTerminal(value["code"])
     if not isinstance(value, list) or len(value) != len(contract["expected_result_codes"]):
         raise SanitizerRehearsalError("node_fixture_result_shape_mismatch")
     closed_codes = set(contract["closed_codes"])
@@ -281,7 +311,7 @@ def write_safe_vector_rejection(
     payload = {
         "schema_version": "ariadne.native_harness_preset_mount_safe_vector_rejection.v1",
         "operation_id": OPERATION_ID,
-        "attempt_id": "attempt-002",
+        "attempt_id": "attempt-003",
         "candidate_source": candidate_source,
         "result": "safe_vector_mismatch",
         "first_mismatch_index": error.first_mismatch_index,
@@ -290,13 +320,56 @@ def write_safe_vector_rejection(
         "detail_retained": False,
         "stderr_bytes": 0,
         "node_process_count": 1,
-        "cumulative_node_process_count": 2,
-        "third_process_authorized": False,
+        "cumulative_node_process_count": 3,
+        "fourth_process_authorized": False,
     }
     SAFE_VECTOR_REJECTION_PATH.write_bytes(canonical_bytes(payload))
 
 
-def run_fixture_once(contract: dict[str, Any]) -> list[dict[str, Any]]:
+def build_process_envelope(
+    *, candidate_source: str, returncode: int, stdout: str, stderr: str
+) -> dict[str, Any]:
+    stdout_bytes = stdout.encode("utf-8")
+    stderr_bytes = stderr.encode("utf-8")
+    return {
+        "schema_version": "ariadne.native_harness_preset_mount_process_envelope.v1",
+        "operation_id": OPERATION_ID,
+        "attempt_id": "attempt-003",
+        "candidate_source": candidate_source,
+        "numeric_exit_code": returncode,
+        "stdout_bytes": len(stdout_bytes),
+        "stdout_sha256": sha256_bytes(stdout_bytes),
+        "stderr_bytes": len(stderr_bytes),
+        "stderr_sha256": sha256_bytes(stderr_bytes),
+        "stream_content_retained": False,
+        "raw_runtime_detail_retained": False,
+        "node_process_count": 1,
+        "cumulative_node_process_count": 3,
+        "native_harness_process_count": 0,
+        "fourth_process_authorized": False,
+    }
+
+
+def write_wrapper_terminal(
+    *, candidate_source: str, envelope: dict[str, Any], error: WrapperTerminal
+) -> None:
+    payload = {
+        "schema_version": "ariadne.native_harness_preset_mount_wrapper_terminal.v1",
+        "operation_id": OPERATION_ID,
+        "attempt_id": "attempt-003",
+        "candidate_source": candidate_source,
+        "result": "wrapper_terminal",
+        "terminal": {"stage": "fixture_boot", "code": error.code, "detail": None},
+        "process_envelope_sha256": sha256_bytes(canonical_bytes(envelope)),
+        "raw_runtime_detail_retained": False,
+        "fourth_process_authorized": False,
+    }
+    WRAPPER_TERMINAL_PATH.write_bytes(canonical_bytes(payload))
+
+
+def run_fixture_once(
+    contract: dict[str, Any], *, candidate_source: str
+) -> list[dict[str, Any]]:
     node = shutil.which("node")
     if not node:
         raise SanitizerRehearsalError("node_executable_unavailable")
@@ -319,12 +392,25 @@ def run_fixture_once(contract: dict[str, Any]) -> list[dict[str, Any]]:
         )
     except (OSError, subprocess.SubprocessError, UnicodeError) as error:
         raise SanitizerRehearsalError("node_fixture_process_failed") from error
-    return validate_fixture_result(
+    envelope = build_process_envelope(
+        candidate_source=candidate_source,
+        returncode=completed.returncode,
         stdout=completed.stdout,
         stderr=completed.stderr,
-        returncode=completed.returncode,
-        contract=contract,
     )
+    PROCESS_ENVELOPE_PATH.write_bytes(canonical_bytes(envelope))
+    try:
+        return validate_fixture_result(
+            stdout=completed.stdout,
+            stderr=completed.stderr,
+            returncode=completed.returncode,
+            contract=contract,
+        )
+    except WrapperTerminal as error:
+        write_wrapper_terminal(
+            candidate_source=candidate_source, envelope=envelope, error=error
+        )
+        raise
 
 
 def _git(*args: str) -> str:
@@ -373,10 +459,10 @@ def build_evidence(
         "closed_codes": contract["closed_codes"],
         "fixture": {
             "authored_synthetic": True,
-            "attempt_id": "attempt-002",
+            "attempt_id": "attempt-003",
             "node_process_count": 1,
-            "prior_consumed_node_process_count": 1,
-            "cumulative_node_process_count": 2,
+            "prior_consumed_node_process_count": 2,
+            "cumulative_node_process_count": 3,
             "result_count": len(results),
             "stdout_exact": True,
             "stderr_bytes": 0,
@@ -427,7 +513,8 @@ def render_report(*, evidence: dict[str, Any], timestamp: str) -> str:
         "",
         "Result: **pass**",
         "",
-        "One authored-synthetic local Node process exercised fifteen fixed inputs.",
+        "Attempt 003 used one authored-synthetic local Node process to exercise",
+        "fifteen fixed inputs after two immutable consumed diagnostic attempts.",
         "Every result contained exactly `stage`, `code` and null `detail`; stdout",
         "matched the frozen JSON byte-for-byte and stderr was empty.",
         "",
@@ -459,7 +546,7 @@ def execute() -> dict[str, Any]:
     repository_bindings = verify_repository_bindings(contract)
     candidate_source = verify_execution_git_snapshot()
     try:
-        results = run_fixture_once(contract)
+        results = run_fixture_once(contract, candidate_source=candidate_source)
     except SafeVectorMismatch as error:
         write_safe_vector_rejection(
             candidate_source=candidate_source, contract=contract, error=error
