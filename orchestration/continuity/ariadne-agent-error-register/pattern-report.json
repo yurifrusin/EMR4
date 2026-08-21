@@ -1,44 +1,44 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 595,
+  "register_revision": 596,
   "source_cutoff_on": "2026-08-21",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "fb4d1be67eeec8a9ce898a6ae873bab96391facafaa4936e64a59c62558ef6f4",
-  "incident_count": 828,
+  "canonical_register_sha256": "e5128be1b3006b73d8d6f03dd3a0208edd8739cb54fad63f8e609d3b691c4f8b",
+  "incident_count": 839,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 482,
       "harness": 62,
-      "operator": 137,
-      "repository": 131,
+      "operator": 146,
+      "repository": 133,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 93,
       "evidence_misreport": 71,
       "harness_failure": 62,
-      "operator_error": 137,
+      "operator_error": 146,
       "output_contract_violation": 266,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
-      "repository_defect": 131,
+      "repository_defect": 133,
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 57,
+      "implementer": 60,
       "integration_reviewer": 3,
-      "orchestrator": 705,
+      "orchestrator": 713,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 502,
+      "low": 508,
       "material": 129,
-      "moderate": 197
+      "moderate": 202
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 155,
-      "canonical_unchanged": 514,
+      "accepted_candidate_changed": 161,
+      "canonical_unchanged": 519,
       "untrusted_partial_worktree": 159
     },
     "by_resource_and_role": {
@@ -91,6 +91,7 @@
       "ariadne-orchestrator-preflight::orchestrator": 3,
       "ariadne-parallelism-assessment::orchestrator": 1,
       "ariadne-preplanning-git-ref-evidence-binding::orchestrator": 1,
+      "ariadne-preplanning-receipt-source-evidence::orchestrator": 1,
       "ariadne-provider-free-pytest-launcher::orchestrator": 1,
       "ariadne-validation-runner-cli::orchestrator": 1,
       "ariadne-verifier-worktree-preflight::orchestrator": 3,
@@ -116,7 +117,9 @@
       "canonical-wrapper-conditional-template::orchestrator": 1,
       "clockwork-authorized-opening-shape::orchestrator": 1,
       "clockwork-authorized-opening-vocabulary::orchestrator": 1,
+      "clockwork-canonical-baton-writer::orchestrator": 1,
       "clockwork-closeout-incident-observation::orchestrator": 1,
+      "clockwork-continuity-node-projector::orchestrator": 1,
       "clockwork-gear-architecture-plan-latch-test::orchestrator": 1,
       "clockwork-incident-register-revision-projection::orchestrator": 1,
       "clockwork-incident-stage-vocabulary::orchestrator": 1,
@@ -127,7 +130,8 @@
       "clockwork-owned-active-latch-projection::orchestrator": 1,
       "clockwork-owned-error-register-projection::orchestrator": 1,
       "clockwork-prospective-register-revision-reading::orchestrator": 1,
-      "clockwork-rollback-pointer-lease::orchestrator": 1,
+      "clockwork-rollback-pointer-lease::orchestrator": 2,
+      "clockwork-successor-boundary-projector::orchestrator": 1,
       "clockwork-successor-protected-boundaries::orchestrator": 2,
       "clockwork-v2-incident-observations::orchestrator": 1,
       "closeout-compass-node-kind::orchestrator": 1,
@@ -171,6 +175,8 @@
       "delete-confirm-http-postgresql-harness::orchestrator": 3,
       "delete-confirm-idempotency-route-contract-test::orchestrator": 1,
       "deterministic-node-process-guard::orchestrator": 1,
+      "diagnosis-generator-entry-point::orchestrator": 1,
+      "diagnosis-plan-boundary-test::implementer": 1,
       "diagnosis-provider-boundary-predicate::orchestrator": 1,
       "docker-desktop-windows::orchestrator": 1,
       "emr4-ariadne-agent-error-register-acceptance::orchestrator": 18,
@@ -229,6 +235,7 @@
       "lifecycle-controller-static-scope-guard::implementer": 1,
       "lifecycle-provider-free-test-bootstrap::orchestrator": 1,
       "live-agents-handover::orchestrator": 1,
+      "live-handover-acceptance-index::orchestrator": 1,
       "local-apply-patch-operator::orchestrator": 8,
       "local-docker-desktop::orchestrator": 1,
       "local-powershell-operator::orchestrator": 16,
@@ -269,6 +276,7 @@
       "process-free-source-self-audit::orchestrator": 1,
       "provider-disabled-test-manifest::orchestrator": 1,
       "provider-disabled-test-selection::orchestrator": 2,
+      "provider-free-cached-rc7-source-reader::implementer": 1,
       "provider-free-pytest-command-manifest::orchestrator": 1,
       "provider-free-pytest-wrapper-cli::orchestrator": 1,
       "provider-free-recovery-evidence-runner::implementer": 1,
@@ -283,9 +291,11 @@
       "repaired-sentinel-source-author::orchestrator": 1,
       "repaired-sentinel-terminal-claim-wording::orchestrator": 1,
       "retained-human-report-semantic-assertion::orchestrator": 1,
+      "sanitized-error-kind-projector::implementer": 1,
       "sentinel-source-escape-repair-closeout-intent-json::orchestrator": 1,
       "sentinel-source-escape-repair-evidence-generator::orchestrator": 1,
       "sentinel-source-escape-repair-surrounding-test-packet::orchestrator": 1,
+      "serialized-widened-pytest-session::orchestrator": 1,
       "shadow-clockwork-causal-tick-engine::orchestrator": 1,
       "shadow-clockwork-efficacy-reducer::orchestrator": 1,
       "shadow-clockwork-live-efficacy-tests::orchestrator": 1,
@@ -1802,6 +1812,30 @@
       "prevention_controls": [
         "The governance owner guard and source-byte comparison reject direct latch drift before any subsequent checkpoint or dispatch.",
         "The live owner check must pass with ten owned surfaces, zero dual ownership and zero drift before every future checkpoint or closeout; direct latch edits are prohibited."
+      ]
+    },
+    {
+      "recurrence_signature": "operator.clockwork_rollback_lease_not_bound_before_republication",
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-0749",
+        "AER-0839"
+      ],
+      "origins": [
+        "operator"
+      ],
+      "categories": [
+        "operator_error"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "clockwork-rollback-pointer-lease"
+      ],
+      "prevention_controls": [
+        "A rollback/republication helper should make byte-exact rollback, monotonic lease commit and corrected dry-run one deterministic sequence rather than a remembered runbook step.",
+        "The rollback procedure now treats the byte-exact restoration and its monotonic lease commit as one required precursor to any replacement generation."
       ]
     },
     {

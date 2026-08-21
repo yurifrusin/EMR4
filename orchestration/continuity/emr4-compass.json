@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 354,
-  "updated_at": "2026-08-21T19:35:59.5541506+10:00",
-  "source_graph_revision": 372,
-  "orientation_statement": "Inspect and instrument the closed runner pre-request stages; do not launch another occupied process.",
+  "map_revision": 355,
+  "updated_at": "2026-08-21T20:45:20.9374564+10:00",
+  "source_graph_revision": 373,
+  "orientation_statement": "Integrate the deterministic typed stage dial provider-free; do not launch another occupied attempt.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4651,24 +4651,35 @@
         "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/efficacy-reading.json",
         "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-closeout.md"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis",
+      "lineage_parent": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
+      "strategic_role": "Make DeepSeek native-Harness worker execution bounded, traceable and governable enough for Raisa development",
+      "outcome": "The opaque post-HMR runner failure now has a source-bound finite diagnostic design whose factual stage is advanced by deterministic code rather than model prose.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/diagnosis-evidence.json",
+        "docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
-    "strategic_role": "Identify and instrument the custom runner's pre-request failure without spending another occupied attempt",
-    "why_now": "The terminal rules out pre-HMR startup but its generic catch cannot distinguish the bounded runner sub-stages.",
-    "outcome": "A provider-free source reading and closed diagnostic design will decide the narrowest correction before any later occupied proof.",
+    "node_id": "deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis",
+    "strategic_role": "Integrate the typed diagnostic into a future runner without spending an occupied attempt",
+    "why_now": "The source mapping and closed vocabulary pass; integration is the remaining prerequisite before another native execution can produce the missing coordinate.",
+    "outcome": "A provider-free integration rehearsal will prove exact helper placement, controller ingestion and the broker-zero join while preserving the accepted runner and attempt evidence.",
     "unlocks": [
-      "A stage-grounded repair-or-stop decision for the native runner.",
-      "A later separately authorised occupied proof only after diagnostic acceptance."
+      "A traceable future native terminal with a machine-owned stage reading.",
+      "A later repair-or-occupied-proof decision grounded in the exact failing runner coordinate."
     ],
     "does_not_solve": [
-      "No native Harness, broker, worker, model or provider process.",
-      "No occupied retry, product work, data use, deployment or protected integration."
+      "No Node, Harness, broker, worker, model or provider execution.",
+      "No DeepSeek performance evidence or native Harness worker readiness.",
+      "No product, data, production, deployment or protected integration."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-terminal.json",
-      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/diagnosis.md"
+      "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/efficacy-reading.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-custom-runner-pre-request-failure-coordinate-diagnosis-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

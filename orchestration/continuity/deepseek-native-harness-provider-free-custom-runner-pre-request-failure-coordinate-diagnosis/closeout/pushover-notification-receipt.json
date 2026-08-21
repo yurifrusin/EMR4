@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.pushover_closeout_receipt.v1",
+  "operation_id": "deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis",
+  "sent_at": "2026-08-21T20:45:20.9374564+10:00",
+  "status": "passed",
+  "provider_status": 1,
+  "request": "3100bb53-025c-456a-8256-3ddd43bbae71",
+  "continuing": true,
+  "next_operation": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
+  "non_phi": true
+}

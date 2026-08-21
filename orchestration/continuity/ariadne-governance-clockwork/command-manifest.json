@@ -2,54 +2,76 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "attempt_005_postterminal_tests",
+      "command_id": "diagnosis_focused_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py"
+        "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "attempt_005_governance_tests",
+      "command_id": "diagnosis_predecessor_regressions",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
-        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py",
+        "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py",
+        "tests/test_ariadne_orchestrator_preflight.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "diagnosis_governance_regressions",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/emr4",
         "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_ariadne_agent_error_register.py",
         "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_agents_handover_archive.py",
+        "tests/test_agents_acceptance_index.py",
         "tests/test_current_baton_consistency.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "attempt_005_ruff",
+      "command_id": "diagnosis_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py"
+        "orchestration_harness/native_post_hmr_pre_request_diagnostic.py",
+        "scripts/deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py",
+        "scripts/compact_agents_acceptance_index.py",
+        "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py",
+        "tests/test_agents_acceptance_index.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "attempt_005_compile",
+      "command_id": "diagnosis_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py"
+        "orchestration_harness/native_post_hmr_pre_request_diagnostic.py",
+        "scripts/deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py",
+        "scripts/compact_agents_acceptance_index.py",
+        "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py",
+        "tests/test_agents_acceptance_index.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

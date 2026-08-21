@@ -1,0 +1,548 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis",
+    "title": "DeepSeek native Harness provider-free custom-runner pre-request failure-coordinate diagnosis",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-21T20:45:20.9374564+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis",
+      "title": "Native Harness closed custom-runner failure coordinates",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits provider-free diagnostic strengthening after the consumed attempt-005 terminal.",
+          "No Harness, broker, worker, model, provider, network, database, product, deployment, Pages or protected-ref authority opened.",
+          "The accepted attempt-005 runner and every consumed attempt remain immutable."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-closed-runner-coordinate-contract",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/contract.json",
+          "status": "accepted",
+          "summary": "Accept seven ordered source coordinates, three cause coordinates and seven sanitized error kinds as the sole future sidecar vocabulary."
+        },
+        {
+          "id": "accept-source-bound-future-sidecar-design",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/diagnosis-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the hash-bound runner and rc.7 source mapping, exclusive canonical writer and code-owned future envelope as provider-free design evidence."
+        },
+        {
+          "id": "reject-provider-and-readiness-overclaim",
+          "source": "docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-closeout.md",
+          "status": "rejected",
+          "summary": "Reject claims about internal rc.7 sub-operations, provider reachability, DeepSeek performance or native Harness readiness."
+        },
+        {
+          "id": "accept-rolling-harness-baton-slot",
+          "source": "docs/handover-ledgers/current-baton-acceptance-index.manifest.json",
+          "status": "accepted",
+          "summary": "Accept one rolling current Harness acceptance row while preserving predecessor lookup rows verbatim in the hash-bound ledger."
+        },
+        {
+          "id": "accept-corrected-workflow-observations",
+          "source": "docs/ariadne-agent-error-correction-register-revision-596.md",
+          "status": "accepted",
+          "summary": "Accept eleven corrected or contained observations with none open."
+        }
+      ],
+      "claim_scope": [
+        "The accepted attempt-005 runner and four relevant cached rc.7 source members match exact SHA-256 bindings.",
+        "A future-only helper admits exactly seven stages, three cause coordinates and seven sanitized error kinds.",
+        "The runner, not an LLM, owns the factual stage variable immediately before each exact operation.",
+        "The sidecar reads no dynamic message, stack, code, path, cause, environment, stream, session, prompt, response or credential.",
+        "The final idle coordinate requires an independent zero-request broker reading before any pre-request conclusion.",
+        "The live baton is compact and uses one rolling current Harness acceptance slot.",
+        "No DeepSeek or other provider request occurred and native Harness readiness remains closed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/diagnosis-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/diagnosis-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-custom-runner-pre-request-failure-coordinate-diagnosis-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-custom-runner-pre-request-diagnosis-preplanning-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-custom-runner-pre-request-diagnosis-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-custom-runner-pre-request-diagnosis-candidate-precommit-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_agents_handover_archive.py",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/native_post_hmr_pre_request_diagnostic.py",
+          "scripts/deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py",
+          "scripts/compact_agents_acceptance_index.py",
+          "docs/handover-ledgers/current-baton-acceptance-index.md",
+          "docs/handover-ledgers/current-baton-acceptance-index.manifest.json",
+          "docs/ariadne-agent-error-correction-register-revision-596.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-custom-runner-pre-request-failure-coordinate-diagnosis.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The closed helper is not yet integrated into a future runner or controller terminal.",
+        "No internal rc.7 sub-operation below the seven runner coordinates is claimed.",
+        "No occupied Harness attempt, provider request or DeepSeek behavior is authorised or proved.",
+        "Product, data, production, deployment, release, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Make DeepSeek native-Harness worker execution bounded, traceable and governable enough for Raisa development",
+      "outcome": "The opaque post-HMR runner failure now has a source-bound finite diagnostic design whose factual stage is advanced by deterministic code rather than model prose.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/diagnosis-evidence.json",
+        "docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Integrate the typed diagnostic into a future runner without spending an occupied attempt",
+      "why_now": "The source mapping and closed vocabulary pass; integration is the remaining prerequisite before another native execution can produce the missing coordinate.",
+      "outcome": "A provider-free integration rehearsal will prove exact helper placement, controller ingestion and the broker-zero join while preserving the accepted runner and attempt evidence.",
+      "unlocks": [
+        "A traceable future native terminal with a machine-owned stage reading.",
+        "A later repair-or-occupied-proof decision grounded in the exact failing runner coordinate."
+      ],
+      "does_not_solve": [
+        "No Node, Harness, broker, worker, model or provider execution.",
+        "No DeepSeek performance evidence or native Harness worker readiness.",
+        "No product, data, production, deployment or protected integration."
+      ],
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/efficacy-reading.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-custom-runner-pre-request-failure-coordinate-diagnosis-sol-acceptance.md"
+      ],
+      "orientation_statement": "Integrate the deterministic typed stage dial provider-free; do not launch another occupied attempt."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
+      "active_tranche": "DeepSeek native Harness provider-free post-HMR pre-request diagnostic-sidecar integration rehearsal",
+      "objective": "Integrate the accepted closed diagnostic helper and code-owned stage variable into a new future-only runner derived from the accepted attempt-005 runner, preserve the accepted runner and consumed attempt byte-immutability, and prove controller ingestion plus broker-zero join semantics with provider-free fixtures and no Node, Harness, broker, worker, model or provider activity.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and extended authority for the bounded native-Harness control sequence.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_future_runner_sidecar_integration_contract"
+    },
+    "incidents": [
+      {"incident_id": "preplanning-caller-git-identity", "source_id": "diagnosis-preplanning-caller-git-identity-001", "peers": []},
+      {"incident_id": "environment-derived-cache-root", "source_id": "diagnosis-environment-derived-cache-root-001", "peers": []},
+      {"incident_id": "test-literal-patch-marker", "source_id": "diagnosis-test-literal-patch-marker-001", "peers": []},
+      {"incident_id": "pytest-session-handle-loss", "source_id": "diagnosis-pytest-session-handle-loss-001", "peers": []},
+      {"incident_id": "direct-path-module-invocation", "source_id": "diagnosis-direct-path-module-invocation-001", "peers": []},
+      {"incident_id": "specific-error-kind-precedence", "source_id": "diagnosis-specific-error-kind-precedence-001", "peers": []},
+      {"incident_id": "live-baton-compactness-recurrence", "source_id": "diagnosis-live-baton-compactness-recurrence-001", "peers": []}
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "diagnosis_focused_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "diagnosis_predecessor_regressions",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py", "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py", "tests/test_ariadne_orchestrator_preflight.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "diagnosis_governance_regressions",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_ariadne_active_operation_latch_continuity.py", "tests/test_agents_handover_archive.py", "tests/test_agents_acceptance_index.py", "tests/test_current_baton_consistency.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "diagnosis_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "orchestration_harness/native_post_hmr_pre_request_diagnostic.py", "scripts/deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py", "scripts/compact_agents_acceptance_index.py", "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py", "tests/test_agents_acceptance_index.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "diagnosis_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "orchestration_harness/native_post_hmr_pre_request_diagnostic.py", "scripts/deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py", "scripts/compact_agents_acceptance_index.py", "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py", "tests/test_agents_acceptance_index.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-threat-model-delta.md",
+      "orchestration_harness/native_post_hmr_pre_request_diagnostic.py",
+      "scripts/deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/diagnosis-evidence.json",
+      "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py",
+      "orchestration_harness/governance_clockwork_tick.py",
+      "tests/test_ariadne_governance_clockwork_tick.py",
+      "docs/ariadne-agent-error-correction-register-revision-596.md",
+      "docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-custom-runner-pre-request-failure-coordinate-diagnosis-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-custom-runner-pre-request-failure-coordinate-diagnosis.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_future_runner_diagnostic_sidecar_integration_only",
+    "accepted_attempt_005_runner_terminal_and_all_consumed_attempt_evidence_remain_byte_immutable",
+    "new_future_runner_must_be_derived_without_replacing_or_reclassifying_accepted_runner",
+    "closed_stage_cause_error_vocabulary_and_full_git_oid_contract_remain_exact",
+    "controller_may_ingest_only_canonical_identity_bound_sidecar_bytes",
+    "pre_request_conclusion_requires_independent_broker_zero_reading",
+    "no_node_native_harness_broker_worker_model_provider_process_or_request",
+    "no_occupied_attempt_retry_resume_fallback_or_second_worker",
+    "no_raw_error_message_stack_code_path_cause_stream_session_prompt_response_or_credential",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "diagnosis-preplanning-caller-git-identity-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-custom-runner-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "ariadne-preplanning-receipt-source-evidence",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Caller-authored receipt evidence must contain no Git object ID; the machine snapshot alone owns exact Git identities.",
+      "observed_error": "The first preplanning runtime draft repeated full Git object IDs inside two descriptive evidence fields.",
+      "detection_method": "The orchestrator preflight rejected the draft with git_refs_evidence_manual_object_id_forbidden before any dispatch or publication.",
+      "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-custom-runner-pre-request-diagnosis-preplanning-attempt-001-rejected-receipt.json", "docs/ariadne-agent-error-correction-register-revision-596.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preplanning_descriptive_evidence_contained_git_object_id",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove every caller-authored Git identity and regenerate the receipt from the machine snapshot.",
+        "prevention_control": "Continuation runtime descriptions state relations without object IDs; the preflight remains the exclusive Git-identity projector.",
+        "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-custom-runner-pre-request-diagnosis-preplanning-receipt.json"]
+      },
+      "baton_summary": "records the rejected caller-authored Git identities and machine-only receipt correction."
+    },
+    {
+      "attempt_key": "diagnosis-environment-derived-cache-root-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-custom-runner-coordinate-diagnosis",
+      "role": "implementer",
+      "resource_id": "provider-free-cached-rc7-source-reader",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Provider-free cached-source reading must not depend on HOME or another environment-derived user directory.",
+      "observed_error": "The first implementation derived the npm cache with Path.home(), and two focused checks failed when the provider-free environment did not expose a usable home coordinate.",
+      "detection_method": "The first focused pytest run failed only the cache-root dependent source binding and generated-evidence checks before any Node, Harness or provider activity.",
+      "evidence_paths": ["scripts/deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py", "docs/ariadne-agent-error-correction-register-revision-596.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.provider_free_source_reader_depended_on_home_environment",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve the exact cache from the repository parent and rerun all source bindings.",
+        "prevention_control": "The diagnostic source reader contains no HOME or environment lookup and its focused suite runs under the provider-free wrapper.",
+        "evidence_paths": ["scripts/deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py", "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py"]
+      },
+      "baton_summary": "records the environment-derived cache root and repository-bound provider-free correction."
+    },
+    {
+      "attempt_key": "diagnosis-test-literal-patch-marker-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-custom-runner-coordinate-diagnosis",
+      "role": "implementer",
+      "resource_id": "diagnosis-plan-boundary-test",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_apply_patch",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A plan-boundary assertion must contain the exact intended phrase with no patch-marker contamination.",
+      "observed_error": "The first test draft accidentally retained a plus character inside the expected process-count phrase.",
+      "detection_method": "Immediate focused pytest rejected the impossible literal before staging or acceptance.",
+      "evidence_paths": ["tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py", "docs/ariadne-agent-error-correction-register-revision-596.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.test_literal_retained_patch_marker_character",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the contaminated literal with the exact plan phrase and rerun the focused suite.",
+        "prevention_control": "Every new literal assertion is exercised immediately before a widened packet or staging.",
+        "evidence_paths": ["tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py"]
+      },
+      "baton_summary": "records the test-literal patch marker and immediate exact-phrase correction."
+    },
+    {
+      "attempt_key": "diagnosis-pytest-session-handle-loss-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-custom-runner-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "serialized-widened-pytest-session",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_tool_orchestration",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "An asynchronous verification launch must retain the returned session identifier until final exit and output are observed.",
+      "observed_error": "The first nested tool projection emitted only command output and discarded the still-running pytest session identifier.",
+      "detection_method": "The tool result showed partial progress without a usable handle while process inspection confirmed the serialized run remained active.",
+      "evidence_paths": ["docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-closeout.md", "docs/ariadne-agent-error-correction-register-revision-596.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.async_verification_projection_discarded_session_identifier",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Wait for the orphaned serialized run to end, then rerun with the complete result object retained through final exit.",
+        "prevention_control": "Long exec calls project the full structured result, and every returned session ID is polled through write_stdin to completion.",
+        "evidence_paths": ["docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-closeout.md"]
+      },
+      "baton_summary": "records the lost pytest session handle and full-result retention control."
+    },
+    {
+      "attempt_key": "diagnosis-direct-path-module-invocation-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-custom-runner-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "diagnosis-generator-entry-point",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Repository package scripts must be invoked through their declared python -m module entry point.",
+      "observed_error": "One exploratory direct-path help invocation failed to import orchestration_harness because package root was not on the direct script path.",
+      "detection_method": "Python raised ModuleNotFoundError before evidence mutation; the immediate module-form help invocation passed.",
+      "evidence_paths": ["scripts/deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py", "docs/ariadne-agent-error-correction-register-revision-596.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.repository_package_script_invoked_by_direct_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use python -m scripts.deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis for help and generation.",
+        "prevention_control": "The closeout command manifest names only module-form repository script invocations.",
+        "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/closeout/closeout-intent.json"]
+      },
+      "baton_summary": "records the rejected direct-path invocation and module-only command contract."
+    },
+    {
+      "attempt_key": "diagnosis-specific-error-kind-precedence-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-custom-runner-coordinate-diagnosis",
+      "role": "implementer",
+      "resource_id": "sanitized-error-kind-projector",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_source_review",
+      "stage": "acceptance",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "A closed error-kind projector must prefer a specific admitted constructor identity over an inherited generic Error name.",
+      "observed_error": "The first candidate checked generic Error before custom preset errors, so a mixed specific-constructor and generic-name object could be projected too coarsely.",
+      "detection_method": "Final source inspection identified the precedence before candidate publication, and a new mixed-identity fixture reproduced the risk deterministically.",
+      "evidence_paths": ["orchestration_harness/native_post_hmr_pre_request_diagnostic.py", "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py", "docs/ariadne-agent-error-correction-register-revision-596.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.sanitized_error_kind_projector_checked_generic_before_specific",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Order specific custom identities before AggregateError, TypeError and generic Error in both Python and generated JavaScript.",
+        "prevention_control": "A hostile mixed constructor/name regression fixture requires the specific preset coordinate and no raw text.",
+        "evidence_paths": ["orchestration_harness/native_post_hmr_pre_request_diagnostic.py", "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py"]
+      },
+      "baton_summary": "records the generic-before-specific error projection and hostile precedence guard."
+    },
+    {
+      "attempt_key": "diagnosis-live-baton-compactness-recurrence-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-custom-runner-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "live-handover-acceptance-index",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The live handover must remain below 80000 bytes and 500 lines, keep live clockwork state active and route historical acceptance lookup rows to the hash-bound index.",
+      "observed_error": "The accepted parent had regrown to 204718 bytes and 542 lines, and the first compaction draft also misclassified Current clockwork relation as historical.",
+      "detection_method": "The widened packet failed the line guard, the index packet then failed the byte guard, and the first compaction packet failed the required live clockwork-row check.",
+      "evidence_paths": ["AGENTS.md", "docs/handover-ledgers/current-baton-acceptance-index.manifest.json", "docs/ariadne-agent-error-correction-register-revision-596.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.live_handover_exceeds_compactness_guard",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Move deterministic compaction into the clockwork renderer, preserve 222 historical rows in the ledger, retain Current clockwork relation explicitly and install one rolling current Harness acceptance slot.",
+        "prevention_control": "Every clean closeout is projected by the one clockwork writer from the closed label/index manifest and must satisfy the byte and line budgets before publication.",
+        "evidence_paths": ["AGENTS.md", "orchestration_harness/governance_clockwork_tick.py", "docs/handover-ledgers/current-baton-acceptance-index.md", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_agents_acceptance_index.py"]
+      },
+      "baton_summary": "contains the recurrent baton overrun with indexed history and one rolling Harness acceptance slot."
+    },
+    {
+      "attempt_key": "diagnosis-manual-clockwork-canonical-edit-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-custom-runner-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "clockwork-canonical-baton-writer",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "The live clockwork exclusively owns AGENTS.md and every canonical baton projection must pass through its pointer-last writer.",
+      "observed_error": "The first compactness repair manually edited the clockwork-owned AGENTS.md surface and therefore created canonical drift despite producing semantically useful compact content.",
+      "detection_method": "The live clockwork check rejected the candidate with canonical_drift before any generation publication or protected-ref movement.",
+      "evidence_paths": ["AGENTS.md", "orchestration_harness/governance_clockwork_tick.py", "tests/test_ariadne_governance_clockwork_tick.py", "docs/ariadne-agent-error-correction-register-revision-596.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_baton_compaction_bypassed_clockwork_single_writer",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the selected clockwork generation byte-exactly and move the compaction projection into the clockwork renderer.",
+        "prevention_control": "The renderer now admits only the closed active/indexed label roster and rejects unindexed rows, duplicate rows or projections above either compactness guard.",
+        "evidence_paths": ["AGENTS.md", "orchestration_harness/governance_clockwork_tick.py", "tests/test_ariadne_governance_clockwork_tick.py"]
+      },
+      "baton_summary": "records the rejected manual canonical edit and clockwork-owned compaction correction."
+    },
+    {
+      "attempt_key": "diagnosis-contract-evidence-legacy-shape-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-custom-runner-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "clockwork-continuity-node-projector",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Continuity contract_evidence is either empty or a list of typed contract objects; artifact paths belong in the evidence object.",
+      "observed_error": "The first closeout intent supplied two artifact-path strings in contract_evidence using a legacy descriptive shape.",
+      "detection_method": "The prospective Continuity projection rejected contract_evidence_object_required before generation preparation or publication.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/closeout/closeout-intent.json", "docs/ariadne-agent-error-correction-register-revision-596.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_contract_evidence_used_legacy_string_shape",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep contract_evidence empty because this tooling tranche changes no registered product contract and retain the artifacts in the typed evidence collections.",
+        "prevention_control": "The clockwork's prospective graph validator remains the compulsory typed node-form gate before publication.",
+        "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/closeout/closeout-intent.json"]
+      },
+      "baton_summary": "records the rejected legacy contract-evidence shape and typed empty-list correction."
+    },
+    {
+      "attempt_key": "diagnosis-successor-closed-boundary-token-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-custom-runner-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "clockwork-successor-boundary-projector",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "The successor latch must preserve every exact established closed-surface boundary token in addition to any narrower or stronger descriptive boundary.",
+      "observed_error": "The first published successor split the ordinary-practice denial across two descriptive boundaries but omitted the exact established no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting token.",
+      "detection_method": "The post-publication current-baton consistency packet rejected the boundary-set subset check after all other broad governance cases passed.",
+      "evidence_paths": ["tests/test_current_baton_consistency.py", "orchestration/continuity/ariadne-active-operation-latch/current.json", "docs/ariadne-agent-error-correction-register-revision-596.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_boundary_omitted_established_exact_token",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Roll back the rejected generation byte-exactly, add the established boundary token without removing the narrower denials and rerun the complete check and publication packet.",
+        "prevention_control": "The post-publication baton consistency subset test remains compulsory and exact boundary tokens are copied forward as typed values rather than semantically paraphrased.",
+        "evidence_paths": ["tests/test_current_baton_consistency.py", "orchestration/continuity/ariadne-active-operation-latch/current.json"]
+      },
+      "baton_summary": "records the rolled-back successor boundary omission and exact-token restoration."
+    },
+    {
+      "attempt_key": "diagnosis-post-rollback-lease-binding-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-custom-runner-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "clockwork-rollback-pointer-lease",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A byte-exact rollback restores canonical and metadata bytes while its incremented pointer lease must be committed before another generation is prepared.",
+      "observed_error": "The first corrected dry-run was attempted immediately after rollback without first binding incremented lease 125 in Git, recurring after AER-0749.",
+      "detection_method": "The read-only clockwork check rejected with tick_pointer_physical_drift before transaction preparation or command execution.",
+      "evidence_paths": ["orchestration/continuity/ariadne-governance-clockwork/current.json", "docs/ariadne-agent-error-correction-register-revision-596.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_rollback_lease_not_bound_before_republication",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Commit only the clockwork-owned incremented pointer lease, then prepare the corrected generation from that exact full-Git source.",
+        "prevention_control": "A rollback/republication helper should make byte-exact rollback, monotonic lease commit and corrected dry-run one deterministic sequence rather than a remembered runbook step.",
+        "evidence_paths": ["orchestration/continuity/ariadne-governance-clockwork/current.json"]
+      },
+      "baton_summary": "records the recurrent unbound rollback lease and exact pointer-only Git binding."
+    }
+  ]
+}

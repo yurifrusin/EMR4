@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 372,
+  "graph_revision": 373,
   "harvests": [],
   "nodes": [
     {
@@ -28090,9 +28090,126 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis",
+      "title": "Native Harness closed custom-runner failure coordinates",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits provider-free diagnostic strengthening after the consumed attempt-005 terminal.",
+          "No Harness, broker, worker, model, provider, network, database, product, deployment, Pages or protected-ref authority opened.",
+          "The accepted attempt-005 runner and every consumed attempt remain immutable."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-closed-runner-coordinate-contract",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/contract.json",
+          "status": "accepted",
+          "summary": "Accept seven ordered source coordinates, three cause coordinates and seven sanitized error kinds as the sole future sidecar vocabulary."
+        },
+        {
+          "id": "accept-source-bound-future-sidecar-design",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/diagnosis-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the hash-bound runner and rc.7 source mapping, exclusive canonical writer and code-owned future envelope as provider-free design evidence."
+        },
+        {
+          "id": "reject-provider-and-readiness-overclaim",
+          "source": "docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-closeout.md",
+          "status": "rejected",
+          "summary": "Reject claims about internal rc.7 sub-operations, provider reachability, DeepSeek performance or native Harness readiness."
+        },
+        {
+          "id": "accept-rolling-harness-baton-slot",
+          "source": "docs/handover-ledgers/current-baton-acceptance-index.manifest.json",
+          "status": "accepted",
+          "summary": "Accept one rolling current Harness acceptance row while preserving predecessor lookup rows verbatim in the hash-bound ledger."
+        },
+        {
+          "id": "accept-corrected-workflow-observations",
+          "source": "docs/ariadne-agent-error-correction-register-revision-596.md",
+          "status": "accepted",
+          "summary": "Accept eleven corrected or contained observations with none open."
+        }
+      ],
+      "claim_scope": [
+        "The accepted attempt-005 runner and four relevant cached rc.7 source members match exact SHA-256 bindings.",
+        "A future-only helper admits exactly seven stages, three cause coordinates and seven sanitized error kinds.",
+        "The runner, not an LLM, owns the factual stage variable immediately before each exact operation.",
+        "The sidecar reads no dynamic message, stack, code, path, cause, environment, stream, session, prompt, response or credential.",
+        "The final idle coordinate requires an independent zero-request broker reading before any pre-request conclusion.",
+        "The live baton is compact and uses one rolling current Harness acceptance slot.",
+        "No DeepSeek or other provider request occurred and native Harness readiness remains closed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/diagnosis-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/diagnosis-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-custom-runner-pre-request-failure-coordinate-diagnosis-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-custom-runner-pre-request-diagnosis-preplanning-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-custom-runner-pre-request-diagnosis-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-custom-runner-pre-request-diagnosis-candidate-precommit-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_agents_handover_archive.py",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/native_post_hmr_pre_request_diagnostic.py",
+          "scripts/deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py",
+          "scripts/compact_agents_acceptance_index.py",
+          "docs/handover-ledgers/current-baton-acceptance-index.md",
+          "docs/handover-ledgers/current-baton-acceptance-index.manifest.json",
+          "docs/ariadne-agent-error-correction-register-revision-596.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-custom-runner-pre-request-failure-coordinate-diagnosis.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The closed helper is not yet integrated into a future runner or controller terminal.",
+        "No internal rc.7 sub-operation below the seven runner coordinates is claimed.",
+        "No occupied Harness attempt, provider request or DeepSeek behavior is authorised or proved.",
+        "Product, data, production, deployment, release, Pages and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-21T20:45:20.9374564+10:00",
+      "updated_at": "2026-08-21T20:45:20.9374564+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "97c4367cc21c7bf9dad1cbeab6be0da314fec3be",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-21T19:35:59.5541506+10:00"
+  "updated_at": "2026-08-21T20:45:20.9374564+10:00"
 }
