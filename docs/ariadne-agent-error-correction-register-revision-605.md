@@ -2,16 +2,16 @@
 
 Date: 2026-08-22
 
-Timestamp: 2026-08-22T05:40:14.8644397+10:00 (Australia/Brisbane)
+Timestamp: 2026-08-22T05:42:33.3788104+10:00 (Australia/Brisbane)
 
 <!-- ariadne-agent-error-register-reading
 revision: 605
-incident_count: 889
-new_incident_ids: AER-0881,AER-0882,AER-0883,AER-0884,AER-0885,AER-0886,AER-0887,AER-0888,AER-0889
+incident_count: 890
+new_incident_ids: AER-0881,AER-0882,AER-0883,AER-0884,AER-0885,AER-0886,AER-0887,AER-0888,AER-0889,AER-0890
 open_incident_count: 0
 -->
 
-This revision binds nine corrected or contained operator/harness incidents
+This revision binds ten corrected or contained operator/harness incidents
 from the failed-closed sanitizer tranche. The clockwork owns the canonical JSON
 register and pattern report.
 
@@ -90,3 +90,13 @@ revision 605 and advances the prospective incident count from 880 to 889.
 Future intent construction derives both values from the clockwork's canonical
 predecessor plus one projection and the exact observation count.
 
+## AER-0890
+
+The first candidate commit command placed `git diff --cached --check` and
+`git commit` sequentially in one PowerShell process without an explicit exit
+check. The whitespace check reported four new blank lines at end of file, but
+PowerShell continued and created a local, unpushed commit. No publication or
+canonical clockwork mutation occurred. A follow-up explicit-path repair removes
+the blank lines, records this incident and reruns the final check with an
+explicit `$LASTEXITCODE` stop before any push. Future multi-command
+verification/commit sequences must guard the verification exit explicitly.

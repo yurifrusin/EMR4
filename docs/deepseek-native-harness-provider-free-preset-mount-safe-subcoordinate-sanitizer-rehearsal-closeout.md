@@ -2,7 +2,7 @@
 
 Date: 2026-08-22
 
-Timestamp: 2026-08-22T05:40:14.8644397+10:00 (Australia/Brisbane)
+Timestamp: 2026-08-22T05:42:33.3788104+10:00 (Australia/Brisbane)
 
 Status: **accepted bounded negative result; sanitizer not admitted**
 
@@ -41,9 +41,9 @@ All three attempts preserve zero DeepSeek Harness, DSH, worker, model/provider,
 network, database, Docker, target and product activity. No raw stream, path,
 environment value, fixture detail or credential was retained.
 
-AER-0881 through AER-0889 bind the path, prose-test, incomplete-correction,
-opaque-attempt, launch-envelope and rejected clockwork-form incidents. None is
-attributed to DeepSeek model reasoning.
+AER-0881 through AER-0890 bind the path, prose-test, incomplete-correction,
+opaque-attempt, launch-envelope, rejected clockwork-form and guarded-commit
+incidents. None is attributed to DeepSeek model reasoning.
 
 ## Parallelism disposition
 

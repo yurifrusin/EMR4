@@ -2,7 +2,7 @@
 
 Date: 2026-08-22
 
-Timestamp: 2026-08-22T05:40:14.8644397+10:00 (Australia/Brisbane)
+Timestamp: 2026-08-22T05:42:33.3788104+10:00 (Australia/Brisbane)
 
 Yuri attention required: **no**
 
@@ -31,8 +31,8 @@ Windows runtime keys and no secrets, then runs the unchanged translator once.
 - DeepSeek Harness, DSH, worker/model/provider and product effects: zero.
 - Verification: 15 implementation plus 7 negative-evidence tests, Ruff,
   compilation, schemas, hashes and whitespace pass.
-- AER-0881 through AER-0889 contain the workflow incidents, including two
-  clockwork pre-publication rejections of descriptive/derived form drafts.
+- AER-0881 through AER-0890 contain the workflow incidents, including two
+  clockwork form rejections and one local guarded-commit correction.
 
 ## Place in Raisa and deliberately closed
 

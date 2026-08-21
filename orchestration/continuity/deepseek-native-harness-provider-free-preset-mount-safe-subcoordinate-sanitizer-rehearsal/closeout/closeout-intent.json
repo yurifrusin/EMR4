@@ -197,6 +197,11 @@
         "incident_id": "sanitizer-clockwork-register-revision-derivation",
         "source_id": "preset-mount-sanitizer-clockwork-check-002",
         "peers": []
+      },
+      {
+        "incident_id": "sanitizer-cached-diff-check-not-short-circuiting-commit",
+        "source_id": "preset-mount-sanitizer-precommit-001",
+        "peers": []
       }
     ],
     "broker": {
@@ -616,7 +621,40 @@
         ]
       },
       "baton_summary": "records the rejected prospective register revision and separates projection revision from incident-count arithmetic."
+    },
+    {
+      "attempt_key": "preset-mount-sanitizer-precommit-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preset-mount-sanitizer-candidate-commit-sequence",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_git",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A failing cached-diff whitespace check stops the command sequence before commit.",
+      "observed_error": "The PowerShell sequence did not inspect LASTEXITCODE after git diff --cached --check, so four EOF blank-line warnings were followed by a local commit.",
+      "detection_method": "The command output showed the four warnings immediately before the successful local commit summary.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-605.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.cached_diff_check_failure_not_short_circuiting_local_commit",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the four EOF blank lines in an explicit-path follow-up commit and guard the final whitespace check exit before push.",
+        "prevention_control": "Every multi-command verification/commit or verification/push sequence checks LASTEXITCODE and exits before the state-changing command.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-605.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the non-short-circuiting cached-diff check and the explicit guarded follow-up repair."
     }
   ]
 }
-

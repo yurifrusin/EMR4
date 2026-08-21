@@ -13,7 +13,7 @@
   "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
   "continuation_event": "pre_commit",
   "git_object_resolution": {
-    "observed_head": "03a53c5b6f5e487b991e465a73c6368aa9759d74",
+    "observed_head": "b2d4d9e3a738234da616fe79693b04b484ba26d1",
     "reason_codes": [],
     "resolved_commit": "e58ad788543622bdd2481cb46fc9e55c428e7e2e",
     "schema_version": "ariadne.git_object_resolution.v1",
@@ -31,9 +31,9 @@
   },
   "git_refs_snapshot": {
     "branch": "codex/ariadne-bernie-davida-parallel-seam",
-    "branch_commit": "03a53c5b6f5e487b991e465a73c6368aa9759d74",
-    "branch_origin_aligned": true,
-    "head": "03a53c5b6f5e487b991e465a73c6368aa9759d74",
+    "branch_commit": "b2d4d9e3a738234da616fe79693b04b484ba26d1",
+    "branch_origin_aligned": false,
+    "head": "b2d4d9e3a738234da616fe79693b04b484ba26d1",
     "origin_branch_commit": "03a53c5b6f5e487b991e465a73c6368aa9759d74",
     "preserved_untracked_paths": {
       "docs/branding": true
@@ -50,7 +50,7 @@
     "schema_version": "ariadne.git_refs_snapshot.v1",
     "status": "passed",
     "tracked_worktree_clean": false,
-    "untracked_path_count": 674
+    "untracked_path_count": 660
   },
   "parallelism_assessment": {
     "assessed_stage": "negative_closeout_precommit",
@@ -94,7 +94,7 @@
       "run deterministic closeout checks and publish through the live clockwork"
     ]
   },
-  "planned_action": "commit_the_exact_bounded_negative_sanitizer_closeout_candidate_and_separately_frozen_windows_minimum_environment_successor_after_the_clockwork_check_passed_without_publishing_canonical_state",
+  "planned_action": "commit_the_explicit_path_eof_whitespace_and_clockwork_observation_repair_after_guarded_tests_static_checks_git_diff_check_and_clockwork_dry_run_pass_then_fetch_verify_and_push_the_task_branch",
   "reasons": [],
   "rehydrated_from_receipt": true,
   "rehydration_sources": [

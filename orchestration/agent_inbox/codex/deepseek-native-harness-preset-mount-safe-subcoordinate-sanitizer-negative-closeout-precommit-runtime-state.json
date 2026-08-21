@@ -1,12 +1,12 @@
 {
   "schema_version": "ariadne.orchestrator_runtime_state.v1",
   "continuation_event": "pre_commit",
-  "planned_action": "commit_the_exact_bounded_negative_sanitizer_closeout_candidate_and_separately_frozen_windows_minimum_environment_successor_after_the_clockwork_check_passed_without_publishing_canonical_state",
+  "planned_action": "commit_the_explicit_path_eof_whitespace_and_clockwork_observation_repair_after_guarded_tests_static_checks_git_diff_check_and_clockwork_dry_run_pass_then_fetch_verify_and_push_the_task_branch",
   "context_health": {
     "agent_contexts": [
       {
         "agent_id": "orchestrator",
-        "measurement_source": "complete five-source rehydration; current latch; three immutable process attempts; exact typed attempt-003 envelope; 22 focused/negative tests; Ruff, py_compile, JSON, whitespace and clockwork dry-run pass; prospective register revision 605 with 889 incidents; explicit-path candidate set",
+        "measurement_source": "complete five-source rehydration; current latch; three immutable process attempts; exact typed attempt-003 envelope; 22 focused/negative tests; Ruff, py_compile, JSON and explicitly guarded whitespace checks; clockwork dry-run pass; prospective register revision 605 with 890 incidents; local unpushed candidate commit plus explicit-path repair set",
         "rehydrated_from_receipt": true,
         "rehydration_sources": [
           "live_handover_current_baton",
@@ -206,4 +206,3 @@
   "workspace_receipts": [],
   "assigned_agent_ids": []
 }
-
