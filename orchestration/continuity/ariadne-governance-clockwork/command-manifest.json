@@ -2,50 +2,63 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "sentinel_source_escape_repair_clean_candidate_tests",
+      "command_id": "source_repaired_sentinel_terminal_and_controller_tests",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "source_repaired_sentinel_applicable_predecessor_tests",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
+        "--deselect",
+        "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py::test_deterministic_check_never_launches_native_process",
+        "--deselect",
+        "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py::test_direct_script_check_bootstraps_repository_imports"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "source_repaired_sentinel_surrounding_static_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "pytest",
         "-q",
         "tests/test_deepseek_native_harness_provider_free_sentinel_source_escape_repair.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
-        "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py",
-        "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py",
-        "-k",
-        "not controller_environment_and_real_broker_reach_bound_ready",
-        "--deselect",
-        "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py::test_deterministic_check_never_launches_native_process",
-        "--deselect",
-        "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py::test_direct_script_check_bootstraps_repository_imports",
-        "--deselect",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py::test_attempt_four_provider_free_check_reports_zero_processes_and_requests"
+        "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "sentinel_source_escape_repair_ruff",
+      "command_id": "source_repaired_sentinel_closeout_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/deepseek_native_harness_provider_free_sentinel_source_escape_repair.py",
-        "tests/test_deepseek_native_harness_provider_free_sentinel_source_escape_repair.py",
-        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py"
+        "scripts/deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "sentinel_source_escape_repair_compile",
+      "command_id": "source_repaired_sentinel_closeout_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/deepseek_native_harness_provider_free_sentinel_source_escape_repair.py",
-        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py"
+        "scripts/deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

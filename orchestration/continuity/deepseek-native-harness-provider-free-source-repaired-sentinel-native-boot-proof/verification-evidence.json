@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.deepseek_native_harness_source_repaired_sentinel_boot_verification.v1",
+  "operation_id": "deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof",
+  "result": "accepted_failed_closed_terminal",
+  "attempt": {
+    "attempt_id": "source-repaired-sentinel-native-boot-attempt-001",
+    "consumed": true,
+    "native_processes": 1,
+    "retries": 0,
+    "terminal_result": "failed_closed",
+    "failure_coordinate": "native_process_exited_before_readiness",
+    "hmr_events": ["sentinel_activated"],
+    "exit_code": 1,
+    "duration_ms": 5617
+  },
+  "digests": {
+    "consumed": "b05656347888ca86eabadc2cd273d0cada5a5facb4bce4c8737dd613d2e1de22",
+    "terminal": "32819ef6972247cdbacb4c38dc1437add5c8dcfb288673533630c5e57ff5bfdd",
+    "report": "3da4e1e326eefc07b3900c06256490ba3d35325b51e56e3a445ae153dcffd45b",
+    "preexecution_receipt": "bec9939d2dfc29460e9e37a5a85ce454bc273ecc470aa3f6df90f1ff0e274e2f",
+    "executed_controller_candidate": "382d02b5b30b387242d10e9c9c43f5ce8be93c95cb484d7c6b021eaa5cb039fb",
+    "corrected_report_template": "068d205006a9d93252f03af296809f3b41926fcdcbcc762c00dfc0b234d4d901"
+  },
+  "retention": {
+    "stdout_byte_count": 0,
+    "stderr_byte_count": 79,
+    "raw_streams_retained": false,
+    "raw_environment_retained": false,
+    "copied_package_tree_retained": false
+  },
+  "zero_activity": {
+    "runner_processes": 0,
+    "broker_processes": 0,
+    "worker_sessions": 0,
+    "prompts": 0,
+    "tool_executions": 0,
+    "model_requests": 0,
+    "provider_requests": 0,
+    "network_attempts": 0,
+    "docker_invocations": 0,
+    "database_invocations": 0
+  },
+  "cleanup": {
+    "process_absent": true,
+    "disposable_root_absent": true,
+    "fresh_prefix_root_count": 0
+  },
+  "tests": {
+    "fresh_terminal_and_controller": {"passed": 7, "failed": 0},
+    "applicable_predecessor": {"passed": 4, "failed": 0, "historical_deselected": 2},
+    "source_repair_and_startup_terminal": {"passed": 60, "failed": 0},
+    "total_applicable": {"passed": 71, "failed": 0},
+    "ruff": "passed",
+    "py_compile": "passed"
+  },
+  "claim_boundary": "The repaired sentinel activated, but stock headless HMR readiness did not occur before native exit. This is an accepted one-attempt fail-closed harness result, not a passing boot and not worker/model/provider performance evidence."
+}

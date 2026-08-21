@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 349,
-  "updated_at": "2026-08-21T15:53:26.2180712+10:00",
-  "source_graph_revision": 367,
-  "orientation_statement": "Freeze one fresh source-repaired sentinel-only rc7 boot, admit one native process and preserve a structured terminal without any worker or provider activity.",
+  "map_revision": 350,
+  "updated_at": "2026-08-21T16:33:56.0458572+10:00",
+  "source_graph_revision": 368,
+  "orientation_statement": "Freeze one provider-free, process-free diagnosis of the exact rc7 path between sentinel activation and stock-headless readiness while preserving the consumed terminal and raw-stream boundary.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4601,25 +4601,35 @@
         "orchestration/continuity/deepseek-native-harness-provider-free-sentinel-source-escape-repair/repair-evidence.json",
         "docs/deepseek-native-harness-provider-free-sentinel-source-escape-repair-closeout.md"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof",
+      "lineage_parent": "deepseek-native-harness-provider-free-sentinel-source-escape-repair",
+      "strategic_role": "Establish whether the repaired sentinel reaches stock-headless readiness without involving a worker or provider",
+      "outcome": "The sentinel activated in one traceable native process, then the process failed closed before stock-headless readiness with complete cleanup.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/provider-free-source-repaired-sentinel-native-boot-terminal.json",
+        "docs/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-sentinel-source-escape-repair",
-    "strategic_role": "Test only whether the repaired sentinel reaches native Harness readiness",
-    "why_now": "Static validity is proven, so one fresh provider-free process can distinguish repaired activation from any later independent boot defect.",
-    "outcome": "A single fresh rc7 process will either emit the two ordered sentinel readiness events or preserve one structured fail-closed terminal with complete cleanup.",
+    "node_id": "deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof",
+    "strategic_role": "Diagnose the post-sentinel, pre-stock-readiness exit without consuming another process",
+    "why_now": "Sentinel activation proves the source repair works while the sanitized native exit proves a distinct later failure surface remains.",
+    "outcome": "A process-free source diagnosis will bind the narrowest evidenced exit coordinate or bounded hypotheses and decide whether any separately authorised repair or rehearsal is justified.",
     "unlocks": [
-      "A grounded decision about whether the native Harness can progress to a separately contracted broker/worker attempt.",
-      "Direct observation of the first post-repair native boot coordinate without provider cost."
+      "A grounded explanation of the native exit window after sentinel activation.",
+      "A narrow future decision about whether one source repair or differently instrumented rehearsal is justified."
     ],
     "does_not_solve": [
-      "No broker, worker, model or DeepSeek provider request.",
-      "No reliability conclusion for agentic development work.",
+      "No retry, second native process, broker, worker, model or provider request.",
+      "No DeepSeek development-reliability conclusion.",
       "No product work, data use, deployment or protected integration."
     ],
     "evidence": [
-      "orchestration/continuity/deepseek-native-harness-provider-free-sentinel-source-escape-repair/repair-evidence.json",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-sentinel-source-escape-repair-sol-acceptance.md"
+      "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/verification-evidence.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

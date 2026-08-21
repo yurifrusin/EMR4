@@ -1,0 +1,124 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free post-sentinel pre-stock-readiness exit-coordinate diagnosis",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_process_free_post_sentinel_exit_coordinate_diagnosis_contract",
+    "operation_id": "deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis",
+    "resume_after_compaction": true,
+    "source_head": "2585cdae995ce90047d1f9099a36cb379de4f3b4",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "2585cdae995ce90047d1f9099a36cb379de4f3b4",
+    "reason_codes": [],
+    "resolved_commit": "2585cdae995ce90047d1f9099a36cb379de4f3b4",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "2585cdae995ce90047d1f9099a36cb379de4f3b4"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "2585cdae995ce90047d1f9099a36cb379de4f3b4",
+    "branch_origin_aligned": true,
+    "head": "2585cdae995ce90047d1f9099a36cb379de4f3b4",
+    "origin_branch_commit": "2585cdae995ce90047d1f9099a36cb379de4f3b4",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 677
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "postpublication_closeout_precommit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The successor latch forbids worker/model/provider activity and admits only a static source diagnosis.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "gemini_verifier",
+        "rationale": "Provider review is outside the static envelope; exact local source and sanitized terminal evidence own the diagnosis.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and one serial owner must preserve the consumed terminal and raw-stream boundary.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "fresh static diagnosis plan freeze",
+      "candidate diagnosis evidence",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit and push the atomic boot closeout before diagnosis planning",
+      "read only exact pinned source and sanitized retained evidence",
+      "launch zero Node/Harness, worker, model, provider or network activity"
+    ]
+  },
+  "planned_action": "commit_the_clockwork_published_source_repaired_sentinel_boot_closeout_then_continue_the_latched_static_diagnosis",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-plan.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/provider-free-source-repaired-sentinel-native-boot-terminal.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/verification-evidence.json",
+      "docs/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/clockwork-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial static diagnosis and its acceptance. DeepSeek model, Gemini provider and native-subagent execution are declined; no Node/native-Harness process is admitted.",
+    "git_refs_and_worktree": "Machine evidence must bind the clockwork source and task/origin lineage, all four exact protected refs, clockwork-only canonical changes, preserved docs/branding and every unrelated untracked file; explicit closeout paths only may be staged.",
+    "live_handover_current_baton": "Continuity 368 and Compass 350 accept the one-process source-repaired sentinel failed-closed terminal and name a process-free post-sentinel exit-coordinate diagnosis as next.",
+    "protected_evidence_boundaries": "Only a process-free static reading of exact pinned rc7 source and sanitized retained evidence may follow. No retry, raw reconstruction, Node/Harness, broker, worker, model, provider, network, product/data/runtime/deployment/Pages/protected action is admitted."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

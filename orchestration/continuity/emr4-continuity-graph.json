@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 367,
+  "graph_revision": 368,
   "harvests": [],
   "nodes": [
     {
@@ -27527,9 +27527,124 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof",
+      "title": "Source-repaired sentinel native-boot proof",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-sentinel-source-escape-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted exactly one provider-free sentinel-only native boot.",
+          "The sole process lease is consumed and no retry, worker, model, provider or network authority remains open.",
+          "No product, data, deployment, Pages or protected-ref authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-source-repaired-sentinel-activation",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/provider-free-source-repaired-sentinel-native-boot-terminal.json",
+          "status": "accepted",
+          "summary": "Accept the exact sentinel_activated event as proof that the one-byte source repair survives native Harness loading."
+        },
+        {
+          "id": "accept-one-attempt-failed-closed-native-exit",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/verification-evidence.json",
+          "status": "accepted",
+          "summary": "Accept native_process_exited_before_readiness as the sanitized one-attempt terminal, not a passing boot, with no retry or reclassification."
+        },
+        {
+          "id": "accept-zero-provider-and-complete-cleanup",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/provider-free-source-repaired-sentinel-native-boot-report.md",
+          "status": "accepted",
+          "summary": "Accept zero broker, worker, model, provider and network activity plus exact process, raw-state and distinct-root cleanup."
+        },
+        {
+          "id": "accept-process-free-exit-coordinate-diagnosis-next",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Permit only a separately frozen provider-free static diagnosis of the post-sentinel, pre-stock-readiness native exit coordinate."
+        },
+        {
+          "id": "accept-contained-boot-proof-procedure-incidents",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept six corrected construction, binding, selection, human-report and clockwork-ownership observations with none open."
+        }
+      ],
+      "claim_scope": [
+        "The source-repaired sentinel emitted exactly sentinel_activated in one provider-free rc7 native process.",
+        "The process exited with code 1 before stock_headless_hmr_ready and the result is failed_closed, not pass.",
+        "Exactly one native process ran, no retry occurred and raw streams, environment, copied package tree and disposable root were destroyed.",
+        "No runner, broker, worker, prompt, tool, model, provider, network, Docker or database activity occurred.",
+        "The result narrows the next diagnosis to post-sentinel activation and pre-stock-headless readiness; it is not DeepSeek worker or model performance evidence."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/native-attempt-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/provider-free-source-repaired-sentinel-native-boot-terminal.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/provider-free-source-repaired-sentinel-native-boot-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/verification-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-pre-verifier-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_sentinel_source_escape_repair.py",
+          "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/evidence.schema.json",
+          "docs/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-historical-test-selection.md",
+          "docs/ariadne-agent-error-correction-register-revision-591.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-source-repaired-sentinel-native-boot-proof.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact post-sentinel cause of native exit is not yet diagnosed.",
+        "stock_headless_hmr_ready has not been observed from the source-repaired profile.",
+        "No second process or retry is authorised for the consumed attempt.",
+        "No runner, broker, worker, model/provider request or EMR4 product development work is admitted by this result."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-21T16:33:56.0458572+10:00",
+      "updated_at": "2026-08-21T16:33:56.0458572+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "2585cdae995ce90047d1f9099a36cb379de4f3b4",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-21T15:53:26.2180712+10:00"
+  "updated_at": "2026-08-21T16:33:56.0458572+10:00"
 }

@@ -1,0 +1,367 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof",
+    "title": "DeepSeek native Harness provider-free source-repaired sentinel native-boot proof",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-21T16:33:56.0458572+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof",
+      "title": "Source-repaired sentinel native-boot proof",
+      "kind": "tooling",
+      "relationships": [
+        {"node_id": "deepseek-native-harness-provider-free-sentinel-source-escape-repair", "relation": "builds_on"}
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted exactly one provider-free sentinel-only native boot.",
+          "The sole process lease is consumed and no retry, worker, model, provider or network authority remains open.",
+          "No product, data, deployment, Pages or protected-ref authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-source-repaired-sentinel-activation",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/provider-free-source-repaired-sentinel-native-boot-terminal.json",
+          "status": "accepted",
+          "summary": "Accept the exact sentinel_activated event as proof that the one-byte source repair survives native Harness loading."
+        },
+        {
+          "id": "accept-one-attempt-failed-closed-native-exit",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/verification-evidence.json",
+          "status": "accepted",
+          "summary": "Accept native_process_exited_before_readiness as the sanitized one-attempt terminal, not a passing boot, with no retry or reclassification."
+        },
+        {
+          "id": "accept-zero-provider-and-complete-cleanup",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/provider-free-source-repaired-sentinel-native-boot-report.md",
+          "status": "accepted",
+          "summary": "Accept zero broker, worker, model, provider and network activity plus exact process, raw-state and distinct-root cleanup."
+        },
+        {
+          "id": "accept-process-free-exit-coordinate-diagnosis-next",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Permit only a separately frozen provider-free static diagnosis of the post-sentinel, pre-stock-readiness native exit coordinate."
+        },
+        {
+          "id": "accept-contained-boot-proof-procedure-incidents",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept six corrected construction, binding, selection, human-report and clockwork-ownership observations with none open."
+        }
+      ],
+      "claim_scope": [
+        "The source-repaired sentinel emitted exactly sentinel_activated in one provider-free rc7 native process.",
+        "The process exited with code 1 before stock_headless_hmr_ready and the result is failed_closed, not pass.",
+        "Exactly one native process ran, no retry occurred and raw streams, environment, copied package tree and disposable root were destroyed.",
+        "No runner, broker, worker, prompt, tool, model, provider, network, Docker or database activity occurred.",
+        "The result narrows the next diagnosis to post-sentinel activation and pre-stock-headless readiness; it is not DeepSeek worker or model performance evidence."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/native-attempt-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/provider-free-source-repaired-sentinel-native-boot-terminal.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/provider-free-source-repaired-sentinel-native-boot-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/verification-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-pre-verifier-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_sentinel_source_escape_repair.py",
+          "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/evidence.schema.json",
+          "docs/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-historical-test-selection.md",
+          "docs/ariadne-agent-error-correction-register-revision-591.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-source-repaired-sentinel-native-boot-proof.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact post-sentinel cause of native exit is not yet diagnosed.",
+        "stock_headless_hmr_ready has not been observed from the source-repaired profile.",
+        "No second process or retry is authorised for the consumed attempt.",
+        "No runner, broker, worker, model/provider request or EMR4 product development work is admitted by this result."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Establish whether the repaired sentinel reaches stock-headless readiness without involving a worker or provider",
+      "outcome": "The sentinel activated in one traceable native process, then the process failed closed before stock-headless readiness with complete cleanup.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/provider-free-source-repaired-sentinel-native-boot-terminal.json",
+        "docs/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Diagnose the post-sentinel, pre-stock-readiness exit without consuming another process",
+      "why_now": "Sentinel activation proves the source repair works while the sanitized native exit proves a distinct later failure surface remains.",
+      "outcome": "A process-free source diagnosis will bind the narrowest evidenced exit coordinate or bounded hypotheses and decide whether any separately authorised repair or rehearsal is justified.",
+      "unlocks": [
+        "A grounded explanation of the native exit window after sentinel activation.",
+        "A narrow future decision about whether one source repair or differently instrumented rehearsal is justified."
+      ],
+      "does_not_solve": [
+        "No retry, second native process, broker, worker, model or provider request.",
+        "No DeepSeek development-reliability conclusion.",
+        "No product work, data use, deployment or protected integration."
+      ],
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/verification-evidence.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-sol-acceptance.md"
+      ],
+      "orientation_statement": "Freeze one provider-free, process-free diagnosis of the exact rc7 path between sentinel activation and stock-headless readiness while preserving the consumed terminal and raw-stream boundary."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis",
+      "active_tranche": "DeepSeek native Harness provider-free post-sentinel pre-stock-readiness exit-coordinate diagnosis",
+      "objective": "Perform one provider-free, process-free static diagnosis of the source-repaired rc7 Harness path after sentinel_activated and before stock_headless_hmr_ready, bind the narrowest evidenced exit coordinate or bounded hypotheses from exact pinned source and sanitized retained evidence, preserve the consumed attempt and raw-stream boundary, and launch no Node, Harness, broker, worker, model, provider or network activity.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, constrained by the accepted consumed failed-closed terminal and a static provider-free diagnostic envelope.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_process_free_post_sentinel_exit_coordinate_diagnosis_contract"
+    },
+    "incidents": [],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "source_repaired_sentinel_terminal_and_controller_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "pytest", "-q", "tests/test_deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "source_repaired_sentinel_applicable_predecessor_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "pytest", "-q", "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py", "--deselect", "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py::test_deterministic_check_never_launches_native_process", "--deselect", "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py::test_direct_script_check_bootstraps_repository_imports"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "source_repaired_sentinel_surrounding_static_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "pytest", "-q", "tests/test_deepseek_native_harness_provider_free_sentinel_source_escape_repair.py", "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "source_repaired_sentinel_closeout_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "source_repaired_sentinel_closeout_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Source-repaired sentinel native-boot failed-closed acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/evidence.schema.json",
+      "scripts/deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py",
+      "tests/test_deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py",
+      "docs/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-historical-test-selection.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/native-attempt-consumed.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/provider-free-source-repaired-sentinel-native-boot-terminal.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/provider-free-source-repaired-sentinel-native-boot-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/verification-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/efficacy-reading.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/pushover-notification-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-preexecution-runtime-state.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-preexecution-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-pre-verifier-runtime-state.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-pre-verifier-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-591.md",
+      "docs/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-source-repaired-sentinel-native-boot-proof.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_process_free_post_sentinel_exit_coordinate_diagnosis_only",
+    "exact_pinned_dsh_0_1_0_rc_7_source_and_sanitized_retained_evidence_only",
+    "consumed_attempt_terminal_and_stream_digests_remain_immutable",
+    "no_retry_resume_fallback_reclassification_or_second_process",
+    "zero_node_native_harness_broker_worker_model_provider_or_network_process_or_request",
+    "no_raw_stdout_stderr_error_message_stack_path_environment_session_or_credential_reconstruction",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "source-repaired-sentinel-contract-default-path-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "source-repaired-sentinel-boot-controller",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A reused loader must bind the fresh contract path even when the predecessor function captured its old default at definition time.",
+      "observed_error": "The first wrapper changed the engine globals but load_contract() still read the predecessor contract through its bound default path, so five dedicated tests and direct check rejected the schema label.",
+      "detection_method": "Provider-free pytest and direct deterministic admission failed before Node, Harness or provider activity.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/efficacy-reading.json"],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.reused_python_function_definition_default_retained_predecessor_contract_path",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Install a fresh wrapper loader that always supplies the fresh contract path explicitly.", "prevention_control": "Audit definition-time default arguments whenever a successor wrapper mutates reused module globals.", "evidence_paths": ["scripts/deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py"]},
+      "baton_summary": "records the rejected inherited default contract path and explicit fresh loader binding."
+    },
+    {
+      "attempt_key": "source-repaired-sentinel-disposable-prefix-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "source-repaired-sentinel-disposable-root",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_static_audit",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The fresh operation must allocate under a distinct disposable-root prefix frozen by its plan.",
+      "observed_error": "The first committed wrapper reused the predecessor engine's hard-coded dsh-repaired-sentinel-boot prefix.",
+      "detection_method": "A final plan-to-controller audit found the mismatch before preexecution receipt generation and before the sole Popen.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/efficacy-reading.json"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_wrapper_reused_predecessor_disposable_root_prefix",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Install a checked fresh-prefix proxy and expose the exact prefix in deterministic admission.", "prevention_control": "Treat disposable namespace as a first-class successor-wrapper binding alongside paths, schemas and attempt IDs.", "evidence_paths": ["tests/test_deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py"]},
+      "baton_summary": "records the rejected predecessor disposable namespace and deterministic fresh-prefix control."
+    },
+    {
+      "attempt_key": "source-repaired-sentinel-preexecution-prose-git-id-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "source-repaired-sentinel-preexecution-receipt",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "acceptance",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Git reference evidence must come only from the structured latch and machine snapshot, with no manually repeated object ID in prose.",
+      "observed_error": "The first preexecution runtime state repeated the full latch source object ID in git_refs_and_worktree prose.",
+      "detection_method": "The preflight returned revision_required with git_refs_evidence_manual_object_id_forbidden and a count of one; all attempt outputs remained absent.",
+      "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-preexecution-receipt.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preexecution_prose_duplicated_structured_latch_full_oid",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Remove the prose object ID and delegate identity to the structured source_head and machine Git snapshot.", "prevention_control": "Git-evidence prose names fields and relations only; object values remain machine projected.", "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-source-repaired-sentinel-native-boot-proof-preexecution-runtime-state.json"]},
+      "baton_summary": "records the rejected prose Git-ID duplication and machine-only evidence binding."
+    },
+    {
+      "attempt_key": "source-repaired-sentinel-historical-selection-recurrence-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "source-repaired-sentinel-widened-test-packet",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The widened successor packet must reuse the already established exclusion of predecessor digest selectors frozen before the accepted source repair.",
+      "observed_error": "The first widened packet repeated the prior selection lapse and included two predecessor digest selectors, which failed only at component_digest_mismatch for the repaired profile controller.",
+      "detection_method": "Pytest reported exactly those two historical failures; all four applicable predecessor selectors then passed with 67 current/surrounding selectors.",
+      "evidence_paths": ["docs/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-historical-test-selection.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.post_successor_packet_included_consumed_digest_and_latch_selectors",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Bind the two exact selectors in a new preservation-aware historical selection and pass all remaining applicable tests.", "prevention_control": "Make the historical selection artifact an input to command-manifest construction instead of relying on conversational recall.", "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/verification-evidence.json"]},
+      "baton_summary": "records the repeated historical-selector lapse and command-manifest selection binding."
+    },
+    {
+      "attempt_key": "source-repaired-sentinel-failed-closed-report-wording-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "source-repaired-sentinel-human-report",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_report_review",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A failed-closed human report must state that readiness was not reached and must never grammatically imply a passing readiness result.",
+      "observed_error": "The generic report boundary sentence named sentinel loading and stock-headless readiness together without result-dependent grammar, despite the structured terminal correctly recording readiness false.",
+      "detection_method": "Manual closeout comparison of the Markdown report to the immutable structured terminal caught the overbroad sentence.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/provider-free-source-repaired-sentinel-native-boot-report.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.generic_terminal_report_boundary_sentence_did_not_branch_on_result",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Render an explicit result-dependent outcome sentence and correct the retained Markdown without altering terminal evidence.", "prevention_control": "Every terminal report template must branch human outcome wording on pass versus failed_closed and test the retained sentence.", "evidence_paths": ["tests/test_deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py"]},
+      "baton_summary": "records the corrected failed-closed human wording and result-dependent report control."
+    },
+    {
+      "attempt_key": "source-repaired-sentinel-clockwork-latch-drift-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "source-repaired-sentinel-active-latch",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "A clockwork-owned active latch must remain byte-bound to the current generation until a clockwork transaction publishes its successor.",
+      "observed_error": "Two direct checkpoint commits kept the latch schema and ancestry valid but changed its bytes without advancing the clockwork generation manifest, so the first closeout dry run rejected canonical_drift.",
+      "detection_method": "The governance clockwork stopped during live-state validation before transaction preparation or publication; restoring the generated latch returned canonical drift zero.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/efficacy-reading.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.direct_checkpoint_commit_changed_clockwork_owned_active_latch",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Restore the exact generated latch, verify canonical drift zero and let closeout clockwork own the successor transition.", "prevention_control": "Record in-progress checkpoints in receipts; never edit a clockwork-owned canonical latch outside a clockwork transaction.", "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/closeout-intent.json"]},
+      "baton_summary": "records the rejected direct canonical latch checkpoints and exclusive clockwork transition ownership."
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": "ariadne.workflow_efficacy_reading.v1",
+  "operation_id": "deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof",
+  "result": "useful_failed_closed_result_with_six_contained_procedure_corrections",
+  "outcome": "The sole native attempt proved the source-repaired sentinel activates, then preserved a sanitized native_process_exited_before_readiness terminal before stock headless HMR readiness, with zero provider activity and complete cleanup.",
+  "useful_work": {
+    "native_processes": 1,
+    "retries": 0,
+    "ordered_events_observed": 1,
+    "ordered_events_required": 2,
+    "sentinel_activated": true,
+    "stock_headless_hmr_ready": false,
+    "provider_requests": 0,
+    "network_attempts": 0,
+    "applicable_tests_passed": 71
+  },
+  "reruns": [
+    {
+      "kind": "fresh_contract_path_binding_correction",
+      "count": 1,
+      "cause": "The reused Python loader retained its predecessor contract path in a definition-time default argument.",
+      "control": "The fresh wrapper now supplies and tests an explicit fresh-path loader binding before execution."
+    },
+    {
+      "kind": "distinct_disposable_prefix_binding_correction",
+      "count": 1,
+      "cause": "The first wrapper revision reused the predecessor engine's hard-coded disposable-root prefix despite the fresh plan requiring a distinct namespace.",
+      "control": "The wrapper now installs a checked prefix proxy and exposes the exact fresh prefix in deterministic admission."
+    },
+    {
+      "kind": "preexecution_git_evidence_binding_correction",
+      "count": 1,
+      "cause": "The first preexecution runtime-state draft repeated the latch source's full Git object ID in prose.",
+      "control": "Git evidence prose now refers only to the structured latch source; the regenerated receipt records zero manually supplied object IDs."
+    },
+    {
+      "kind": "historical_test_selection_correction",
+      "count": 1,
+      "cause": "The widened packet repeated a known selection error by including two predecessor digest selectors frozen before the accepted source repair.",
+      "control": "The exact selectors are bound in a preservation-aware historical selection and the remaining four predecessor plus 67 current/surrounding selectors pass."
+    },
+    {
+      "kind": "failed_closed_human_report_wording_correction",
+      "count": 1,
+      "cause": "The generic report boundary sentence named stock-headless readiness without grammatically distinguishing a passing from a failed-closed result.",
+      "control": "The report template now renders an explicit result-dependent sentence, and the retained failed-closed report says readiness was not reached."
+    },
+    {
+      "kind": "clockwork_latch_generation_drift_correction",
+      "count": 1,
+      "cause": "Two direct in-progress latch checkpoint commits were structurally valid but changed a clockwork-owned canonical surface without advancing its generation manifest.",
+      "control": "Restore the exact clockwork-generated latch before closeout, preserve candidate identity in the consumed terminal and machine receipts, and leave canonical latch transitions exclusively to clockwork publication."
+    }
+  ],
+  "assessment": "The clockwork and deterministic gates prevented every construction or evidence-binding lapse from consuming the one-process lease. The single authorised runtime then yielded new traceable information: source repair success through sentinel activation and a narrower post-sentinel, pre-stock-readiness native exit. The mechanism is useful, but the widened-test recurrence shows historical selection is not yet fully automated."
+}

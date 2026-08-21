@@ -5,6 +5,8 @@ from pathlib import Path
 import subprocess
 import sys
 
+import jsonschema
+
 from scripts import (
     deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof
     as subject,
@@ -74,3 +76,49 @@ def test_contract_keeps_every_non_sentinel_surface_closed() -> None:
     assert contract["profile"]["runner_file_count"] == 0
     assert contract["launch"]["task_arguments"] == []
     assert set(contract["zero_activity"]) >= {"broker_processes", "worker_sessions", "model_requests", "provider_requests", "network_attempts"}
+
+
+def test_retained_failed_closed_terminal_is_exact_and_cleaned() -> None:
+    subject.configure_engine()
+    consumed = subject.engine._load_json(subject.CONSUMED_PATH)
+    terminal = subject.engine._load_json(subject.EVIDENCE_PATH)
+
+    jsonschema.validate(
+        terminal,
+        subject.engine._load_json(subject.EVIDENCE_SCHEMA_PATH),
+    )
+    assert consumed["state"] == "consumed"
+    assert consumed["attempt_id"] == subject.ATTEMPT_ID
+    assert consumed["candidate_source"] == terminal["candidate_source"]
+    assert len(terminal["candidate_source"]) == 40
+    assert terminal["result"] == "failed_closed"
+    assert terminal["failure_coordinate"] == "native_process_exited_before_readiness"
+    assert terminal["hmr_events"] == ["sentinel_activated"]
+    assert terminal["launch"]["launch_attempt_count"] == 1
+    assert terminal["launch"]["native_process_count"] == 1
+    assert terminal["launch"]["retry_count"] == 0
+    assert all(
+        terminal["provider_boundary"][key] == 0
+        for key in (
+            "broker_processes",
+            "worker_sessions",
+            "model_requests",
+            "provider_requests",
+            "network_attempts",
+            "docker_invocations",
+            "database_invocations",
+        )
+    )
+    assert terminal["streams"]["raw_retained"] is False
+    assert terminal["cleanup"] == {
+        "process_absent": True,
+        "disposable_root_absent": True,
+        "raw_streams_retained": False,
+        "raw_environment_retained": False,
+        "copied_package_tree_retained": False,
+    }
+    report = subject.REPORT_PATH.read_text(encoding="utf-8")
+    assert "did not reach readiness" in report
+    assert not any(
+        subject.engine.DISPOSABLE_PARENT.glob(subject.DISPOSABLE_PREFIX + "*")
+    )

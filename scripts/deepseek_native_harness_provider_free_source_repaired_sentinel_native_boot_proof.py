@@ -98,6 +98,11 @@ def _source_repair_lineage(contract: dict[str, Any]) -> dict[str, Any]:
 
 
 def _report(evidence: dict[str, Any]) -> str:
+    outcome = (
+        "The repaired sentinel loaded and stock-headless HMR reached readiness."
+        if evidence["result"] == "pass"
+        else "The repaired sentinel loaded, but stock-headless HMR did not reach readiness."
+    )
     return f"""# Provider-free source-repaired sentinel native-boot report
 
 Date: 2026-08-21
@@ -114,9 +119,8 @@ Result: **{evidence['result']}**
 - Disposable root absent: `{str(evidence['cleanup']['disposable_root_absent']).lower()}`
 - Raw streams retained: `false`
 
-This proves only source-repaired sentinel loading and stock-headless HMR
-readiness in one provider-free rc.7 process. It is not a runner, worker,
-model/provider, product-runtime or reliability result.
+{outcome} This result is scoped to one provider-free rc.7 process. It is not
+a runner, worker, model/provider, product-runtime or reliability result.
 """
 
 

@@ -1,0 +1,11 @@
+{
+  "schema_version": "emr4.non_phi_pushover_notification_receipt.v1",
+  "recorded_at": "2026-08-21T16:33:56.0458572+10:00",
+  "status": "passed",
+  "provider": "pushover",
+  "request": "c5b79a40-2e82-4431-be30-252f1c91605e",
+  "title": "EMR4 Native Harness sentinel boot closeout",
+  "message_class": "non_phi_operational_closeout",
+  "phi_or_clinical_data": false,
+  "summary": "One process activated the repaired sentinel then failed closed before stock readiness; 71 applicable tests, zero provider/network activity and complete cleanup passed; provider-free exit-coordinate diagnosis is next."
+}
