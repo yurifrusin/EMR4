@@ -36,8 +36,8 @@ THREAT_PATH = REPO_ROOT / "docs" / "security" / f"{OPERATION_ID}-threat-model-de
 CONTRACT_PATH = OPERATION_ROOT / "contract.json"
 CONTRACT_SCHEMA_PATH = OPERATION_ROOT / "contract.schema.json"
 EVIDENCE_SCHEMA_PATH = OPERATION_ROOT / "evidence.schema.json"
-EVIDENCE_PATH = OPERATION_ROOT / "process-free-correction-evidence.json"
-REPORT_PATH = OPERATION_ROOT / "process-free-correction-report.md"
+EVIDENCE_PATH = OPERATION_ROOT / "process-free-correction-evidence-v2.json"
+REPORT_PATH = OPERATION_ROOT / "process-free-correction-report-v2.md"
 FOCUSED_TEST_PATH = (
     REPO_ROOT
     / "tests"
@@ -159,8 +159,12 @@ def machine_git_bindings() -> dict[str, Any]:
     plan_resolution = resolve_commit_source(
         repo_root=REPO_ROOT, source_head=plan_observed
     )
+    controller_relative = Path(__file__).resolve().relative_to(REPO_ROOT).as_posix()
+    candidate_observed = _git(
+        "log", "-1", "--format=%H", "--", controller_relative
+    )
     candidate_resolution = resolve_commit_source(
-        repo_root=REPO_ROOT, source_head=snapshot["head"]
+        repo_root=REPO_ROOT, source_head=candidate_observed
     )
     if (
         plan_resolution["status"] != "passed"

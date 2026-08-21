@@ -40,8 +40,8 @@
     "accepted_source_reconciliation_evidence_sha256": "59066214ed9c49b7c1cf2e299c838cc8f283cd20fd54a9619671faa12546ed42"
   },
   "implementation_bindings": {
-    "controller_sha256": "9fea3b34fcd81fc5f53aa8195d311cf2e610b8ea925f59e6f948bd531f551290",
-    "focused_test_sha256": "fde8dbda34c971cfcd3d7da0730488c2f1538f046a436b2bc40146a968f0fe8e",
+    "controller_sha256": "bf1261c60add47526526587e32966fdb315153a87574cd7c7a3c44b6ec5b8d83",
+    "focused_test_sha256": "ecbf911372187532d3130010a4dff90b4bedaa62055ae88ea139be7f7fce5065",
     "contract_schema_sha256": "9a4d62ccdefafb3eeef2ba9f5e04ecea48a558e2774fa1b3456f6433102c39b8",
     "evidence_schema_sha256": "f16ed2981c0517390911c42f21ff7b5ce6becc94bd56e193dfadb453f55d62af"
   },

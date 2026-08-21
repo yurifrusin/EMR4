@@ -25,9 +25,16 @@ def test_contract_contains_no_caller_authored_git_object_id() -> None:
 
 def test_machine_git_binding_resolves_plan_and_candidate_commits() -> None:
     binding = subject.machine_git_bindings()
+    controller_relative = (
+        Path(subject.__file__).resolve().relative_to(subject.REPO_ROOT).as_posix()
+    )
+    expected_candidate = subject._git(
+        "log", "-1", "--format=%H", "--", controller_relative
+    )
 
     assert len(binding["planning_source_commit"]) == 40
     assert len(binding["candidate_source_commit"]) == 40
+    assert binding["candidate_source_commit"] == expected_candidate
     assert binding["caller_authored_object_id_count"] == 0
     assert binding["planning_source_is_ancestor_of_candidate"] is True
     assert binding["branch_origin_aligned"] is True
