@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 383,
+  "graph_revision": 384,
   "harvests": [],
   "nodes": [
     {
@@ -29367,9 +29367,128 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+      "title": "Preset-mount sanitizer runner bridge",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits this bounded native-Harness control sequence and its dependency-satisfied successor.",
+          "This closeout admits only the exact deterministic runner bridge and one consumed pure Node fixture process.",
+          "No native Harness execution, worker/model/provider, target, product/data, deployment, Pages or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-one-pure-runner-bridge-fixture",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/attempt-001-process-envelope.json",
+          "status": "accepted",
+          "summary": "Accept one pure Node fixture process, exit zero, zero stderr, a content-free envelope and no further process under this plan."
+        },
+        {
+          "id": "accept-exact-runner-bridge-vector-and-source-derivation",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/runner-bridge-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact eight-result vector, thirteen source invariants and SHA-bound derived runner and guard."
+        },
+        {
+          "id": "reject-native-worker-or-provider-inference",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "Do not infer runner execution, DSH/native Harness behavior, DeepSeek work, model/provider access, retry or product authority."
+        },
+        {
+          "id": "accept-one-native-terminal-successor",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-plan.md",
+          "status": "accepted",
+          "summary": "Freeze one provider-free native rc.7 terminal rehearsal with zero turns, zero provider requests and no retry."
+        },
+        {
+          "id": "accept-sol-runner-bridge-boundary",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the deterministic bridge without transferring acceptance to native execution."
+        }
+      ],
+      "claim_scope": [
+        "Exact execution candidate 993a3b383aa79afba857bb53af29177bffacd566 ran one pure Node fixture process.",
+        "The process exited zero with zero stderr and emitted the exact eight-result success plus seven-code vector.",
+        "The bridge owns one sanitizer import, one sanitizer call and one await mount boundary.",
+        "The derived runner gives the exact preset-mount terminal precedence over the retained broader composition fallback.",
+        "Thirteen exact source checks and SHA-bound derived runner and guard readings pass.",
+        "DSH, native Harness, worker, turn, model/provider, network, database, Docker, target and product counts remain zero.",
+        "Ten focused tests and the exact 90-test selected current/inherited collection pass after execution."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-607.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-preset-mount-sanitizer-runner-bridge-pass.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-preplanning-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-prepush-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-preexecution-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_windows_minimum_environment_recovery.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge.mjs",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_fixture.mjs",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/evidence.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/process-envelope.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/attempt-001-process-envelope.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/runner-bridge-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/runner-bridge-report.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The derived runner and guard have not executed inside DSH or the native Harness.",
+        "No native terminal, worker turn, model/provider request or DeepSeek coding-performance evidence exists from this tranche.",
+        "The next native process is separately frozen at one with zero requests and no retry.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T06:36:06.5611095+10:00",
+      "updated_at": "2026-08-22T06:36:06.5611095+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "7b87189de73319be8f68113984e34e150688d59f",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T06:03:42.6115665+10:00"
+  "updated_at": "2026-08-22T06:36:06.5611095+10:00"
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 606,
+  "register_revision": 607,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -34825,6 +34825,116 @@
       },
       "incident_id": "AER-0894",
       "attempt_id": "clock-44e216000c3200b93f3f2551",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "runner-bridge-continuation-event",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_preflight",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Continuation runtime states use only the active orchestrator profile's registered event vocabulary.",
+      "observed_error": "The first state used the shorthand pre_plan, which is not a registered continuation event.",
+      "detection_method": "The orchestrator preflight returned revision_required with continuation_event_missing_or_unapproved before implementation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-preplanning-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-607.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.continuation_event_shorthand_outside_registered_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use pre_sprint_planning and preserve the rejected receipt before generating a fresh passing receipt.",
+        "prevention_control": "Continuation states copy the event from an active-profile receipt instead of composing a synonym.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-preplanning-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-607.md"
+        ]
+      },
+      "incident_id": "AER-0895",
+      "attempt_id": "clock-395f8a58173fadc3075ce0ad",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "runner-bridge-source-coordinate-evidence-path",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_powershell",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Accepted evidence paths are copied from repository inventory or the active acceptance list rather than inferred from logical operation names.",
+      "observed_error": "A read-only command inferred a nonexistent source-reconciliation directory for the accepted interpretation artifact.",
+      "detection_method": "Get-Content failed; repository inventory then resolved the artifact under the accepted safe-terminal bridge operation before implementation.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-607.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/preset-mount-source-coordinate-interpretation.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.repository_path_recalled_before_source_resolution",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve the exact physical artifact with repository inventory and read only that path.",
+        "prevention_control": "Logical operation names never generate physical evidence paths; inventory or accepted manifests supply them.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-607.md"
+        ]
+      },
+      "incident_id": "AER-0896",
+      "attempt_id": "clock-2027a92e03ff3f0b83906f3a",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "runner-bridge-artifact-state-test",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A deterministic checker test validates its exact fresh state before execution and exact accepted state after immutable outputs exist.",
+      "observed_error": "The first post-execution suite asserted only fresh and rejected the checker's correct accepted state.",
+      "detection_method": "The selected pytest collection failed one assertion after the sole fixture process had passed.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-607.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.deterministic_check_test_assumes_preexecution_state_after_execution",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Derive the expected phase from the exact output-set presence and assert accepted-only node count and bridge admission fields.",
+        "prevention_control": "State-machine tests cover every persistent phase that the same deterministic command is required to validate.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-607.md"
+        ]
+      },
+      "incident_id": "AER-0897",
+      "attempt_id": "clock-424dd6d4748f01b836084ad2",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

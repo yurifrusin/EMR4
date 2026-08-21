@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "7b87189de73319be8f68113984e34e150688d59f",
+  "source_commit": "7b87189de73319be8f68113984e34e150688d59f",
+  "generation_id": "gen-74411aa43a8298f8d0dcae4caabaa6d2c34cb7cbd63b5410a903ed2751b6e8ff",
+  "bundle_sha256": "74411aa43a8298f8d0dcae4caabaa6d2c34cb7cbd63b5410a903ed2751b6e8ff",
+  "previous_generation_id": "gen-8a138c2f6603d61a08a4d047c77cfdfb40d6a9271efa6d9bc79f06e42af68643",
+  "previous_source_commit": "7b87189de73319be8f68113984e34e150688d59f",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 143,
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+  "event_kind": "clean_closeout",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

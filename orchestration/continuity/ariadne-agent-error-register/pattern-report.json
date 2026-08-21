@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 606,
+  "register_revision": 607,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "0e5796621fe54a9617bebe3a04b528ebb9bf13c0847abfbb40a8d532f2154836",
-  "incident_count": 894,
+  "canonical_register_sha256": "ff06005098dc4529f0e8323a1ee34929e0e2926a92caf1ac2adb031124c7e0fc",
+  "incident_count": 897,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 493,
       "harness": 67,
-      "operator": 184,
+      "operator": 187,
       "repository": 134,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 95,
       "evidence_misreport": 73,
       "harness_failure": 67,
-      "operator_error": 184,
+      "operator_error": 187,
       "output_contract_violation": 273,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 64,
       "integration_reviewer": 3,
-      "orchestrator": 764,
+      "orchestrator": 767,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 549,
+      "low": 552,
       "material": 131,
       "moderate": 214
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 168,
-      "canonical_unchanged": 559,
+      "accepted_candidate_changed": 169,
+      "canonical_unchanged": 561,
       "untrusted_partial_worktree": 167
     },
     "by_resource_and_role": {
@@ -335,6 +335,9 @@
       "repaired-sentinel-source-author::orchestrator": 1,
       "repaired-sentinel-terminal-claim-wording::orchestrator": 1,
       "retained-human-report-semantic-assertion::orchestrator": 1,
+      "runner-bridge-artifact-state-test::orchestrator": 1,
+      "runner-bridge-continuation-event::orchestrator": 1,
+      "runner-bridge-source-coordinate-evidence-path::orchestrator": 1,
       "safe-terminal-attempt-schema-assertion::orchestrator": 1,
       "safe-terminal-closeout-wrapper-selection::orchestrator": 1,
       "safe-terminal-preexecution-receipt-order::orchestrator": 1,
