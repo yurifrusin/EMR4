@@ -1,0 +1,122 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free structured diagnostic native-boot observability rehearsal",
+    "completed_stage": "Fresh five-source rehydration passed; the single pinned rc.7 authored-missing-profile boot plan, threat delta, contract and schemas are frozen; the process-free controller candidate is committed at its full Git object; direct v1/v2, structured-seam, canonical-wrapper and package-materialization compatibility checks pass without a native Harness, worker, model or provider process.",
+    "next_executable_stage": "generate_and_validate_one_fresh_preexecution_receipt_then_execute_exactly_one_provider_free_pinned_rc7_native_entrypoint_through_the_canonical_wrapper_as_structured_diagnostic_native_boot_observability_attempt_001",
+    "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "253b4071ca2758da948a618aa86b5393fab0f1de",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "253b4071ca2758da948a618aa86b5393fab0f1de",
+    "reason_codes": [],
+    "resolved_commit": "253b4071ca2758da948a618aa86b5393fab0f1de",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "253b4071ca2758da948a618aa86b5393fab0f1de"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "253b4071ca2758da948a618aa86b5393fab0f1de",
+    "branch_origin_aligned": false,
+    "head": "253b4071ca2758da948a618aa86b5393fab0f1de",
+    "origin_branch_commit": "90e40cc8fdc154ca48e79dbfb24df68e7f05b558",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 660
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "clockwork_checkpoint_precommit",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "No worker/model/provider surface is admitted; the only later DeepSeek-related process is the provider-free Harness subject.",
+        "work_packages": []
+      },
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Provider calls remain closed and the checkpoint is deterministic governance state.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and checkpoint commit plus preexecution are serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "checkpoint_commit_rejected",
+      "preexecution_receipt_revision_required",
+      "package_or_candidate_identity_mismatch"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit checkpoint before preexecution receipt",
+      "fresh receipt before one Popen",
+      "no retry after Popen"
+    ]
+  },
+  "planned_action": "explicit_path_commit_the_zero_drift_clockwork_preexecution_checkpoint_before_the_fresh_single_boot_receipt",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-plan.md",
+      "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-historical-equality-test-selection.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/preexecution/checkpoint-intent.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/preexecution/clockwork-checkpoint-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns checkpoint publication and the later serial process. No DeepSeek worker, Gemini provider or native subagent is dispatched.",
+    "git_refs_and_worktree": "Machine snapshot alone owns exact Git objects. Only the clockwork-owned checkpoint surfaces, intent/evidence/report and receipts may be staged; all four protected refs remain fixed and docs/branding plus unrelated untracked files remain preserved.",
+    "live_handover_current_baton": "The clockwork-baton projection records an in-progress checkpoint at the exact full implementation source while accepted Continuity and Compass results remain unchanged.",
+    "protected_evidence_boundaries": "Commit only the clockwork checkpoint generation. The single native attempt remains unstarted pending a fresh preexecution receipt; no worker/session/prompt/tool/model/provider, product/data, deployment, protected evidence or protected ref is opened."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

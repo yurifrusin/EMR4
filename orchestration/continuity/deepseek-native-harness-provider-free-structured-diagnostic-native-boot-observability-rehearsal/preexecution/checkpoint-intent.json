@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
+  "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+  "completed_stage": "Fresh five-source rehydration passed; the single pinned rc.7 authored-missing-profile boot plan, threat delta, contract and schemas are frozen; the process-free controller candidate is committed at its full Git object; direct v1/v2, structured-seam, canonical-wrapper and package-materialization compatibility checks pass without a native Harness, worker, model or provider process.",
+  "next_executable_stage": "generate_and_validate_one_fresh_preexecution_receipt_then_execute_exactly_one_provider_free_pinned_rc7_native_entrypoint_through_the_canonical_wrapper_as_structured_diagnostic_native_boot_observability_attempt_001",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "structured-diagnostic-native-boot-process-free-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal", "--check", "--candidate-source", "253b4071ca2758da948a618aa86b5393fab0f1de"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "structured-diagnostic-native-boot-process-free-focused-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal_plan.py", "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py", "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py", "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py", "-k", "not accepted_package_tree_materialization_fixture"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "structured-diagnostic-native-boot-python-copy-materialization-fixture",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py::test_accepted_package_tree_materialization_fixture"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "structured-diagnostic-native-boot-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal_plan.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "structured-diagnostic-native-boot-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}
