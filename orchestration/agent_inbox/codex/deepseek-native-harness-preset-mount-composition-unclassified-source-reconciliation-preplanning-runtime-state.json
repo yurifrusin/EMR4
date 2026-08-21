@@ -1,0 +1,205 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_narrowest_process_free_contract_that_compares_the_exact_emitted_and_installed_runner_guard_bridge_and_sanitizer_sources_and_either_attributes_effective_tool_composition_unclassified_to_one_deterministic_source_coordinate_or_returns_an_explicit_bounded_evidence_gap",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete AGENTS.md read; active acceptance and recovery plans; accepted closeout and Sol acceptance; exact offline recovery evidence; active latch; fetched machine Git snapshot",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the accepted finite negative native result at Continuity 385 / Compass 367 and the process-free composition-unclassified source-reconciliation successor as current work.",
+    "current_authority_allocation": "GPT Sol owns planning, source readback, deterministic reconciliation and acceptance. DeepSeek is declined because no Harness, worker or model process is authorised; Gemini is declined provisionally because exact-source comparison is deterministic; native subagents are declined under current developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-plan.md",
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-offline-admission-recovery-plan.md",
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitized-terminal-native-rehearsal-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/offline-recovery-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "The consumed candidate and accepted offline recovery remain immutable. This tranche is provider-free and process-free, may inspect only the exact emitted and installed composition sources, may retain no raw runtime detail, and opens no retry, product, data, deployment, release, Pages or protected-ref authority.",
+    "git_refs_and_worktree": "The receipt builder supplies every current Git identity. Caller prose supplies none. Its machine snapshot must preserve task-branch alignment, fixed protected refs, docs/branding and every unrelated untracked file."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+    "active_tranche": "DeepSeek native Harness provider-free preset-mount composition-unclassified source reconciliation rehearsal",
+    "objective": "Identify the narrowest deterministic source explanation for the recovered EFFECTIVE_TOOL_COMPOSITION_UNCLASSIFIED terminal without another process.",
+    "status": "in_progress",
+    "source_head": "f97d6bd035cd9408bf561f36c802a9687fbddd58",
+    "authority_source": "Yuri's standing uninterrupted-development authority and extended authority for the bounded native-Harness control sequence.",
+    "checkpoint": {
+      "completed_stage": "Accepted deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal at the machine-resolved source.",
+      "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_exact_process_free_source_reconciliation_contract",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_preset_mount_composition_unclassified_source_reconciliation_only",
+      "consumed_native_candidate_c1ae13df334dfdffefb229c3ae5a502a7251451c_preserved",
+      "accepted_offline_recovery_source_05a721a075a96a5e248818371d7bdfc8e136c792_preserved",
+      "native_attempt_process_retry_and_resume_zero",
+      "no_node_native_harness_worker_model_or_provider_process",
+      "exact_emitted_installed_runner_guard_bridge_and_sanitizer_sources_only",
+      "no_target_or_product_source_change",
+      "accepted_runner_bridge_execution_source_993a3b383aa79afba857bb53af29177bffacd566_preserved",
+      "accepted_runner_guard_bridge_sanitizer_hashes_preserved",
+      "accepted_package_only_seed_and_bundle_immutable",
+      "automatic_manual_retry_and_resume_zero",
+      "finite_typed_terminal_before_any_turn_or_request",
+      "only_preset_mount_failure_attributed_proves_the_new_runtime_bridge",
+      "content_free_outer_process_envelope_before_interpretation",
+      "no_raw_message_stack_cause_path_stream_prompt_response_environment_or_credential",
+      "zero_turn_request_broker_worker_model_provider_network_database_docker_and_target_activity",
+      "private_identity_only_and_zero_public_agent_session_or_lifecycle_publication",
+      "disposable_process_and_root_cleanup_required",
+      "no_worker_model_provider_request_repair_retry_or_target_authority",
+      "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "exact_test_counts_from_completed_machine_output_only",
+      "no_commit_identity_statement_without_current_machine_snapshot_copy",
+      "all_new_narrative_artifacts_require_date_and_brisbane_timestamp",
+      "generated_narrative_timestamps_derive_from_creation_clock_or_typed_evidence",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+    "assessed_stage": "process-free source-reconciliation preplanning",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "DeepSeek and the native Harness are the governed object under diagnosis; any Harness, worker or model process would violate the process-free latch and could not independently accept its own transport.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "The first decision is exact byte, hash and source-branch reconciliation with a closed verdict grammar; reassess only if deterministic comparison leaves a genuine semantic ambiguity before acceptance.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Current developer policy prohibits delegation, and the evidence chain is a short serial comparison of one consumed attempt against its exact source lineage.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "freeze the exact process-free source inventory and digest contract",
+      "reconstruct the emitted and installed composition branches without execution",
+      "compare branch predicates and terminal precedence",
+      "emit one closed deterministic attribution or one explicit evidence-gap verdict",
+      "accept no runtime-path proof without the required terminal"
+    ],
+    "reassessment_triggers": [
+      "deterministic source-reconciliation result",
+      "pre-verifier gate",
+      "closeout"
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "GPT Sol owns the serial process-free source reconciliation."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No DeepSeek worker, native Harness or model request is permitted."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Gemini is not justified before deterministic exact-source reconciliation."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No subagent was spawned; current developer policy prohibits delegation."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

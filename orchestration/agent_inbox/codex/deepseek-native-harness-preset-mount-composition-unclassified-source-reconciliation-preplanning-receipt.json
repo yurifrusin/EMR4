@@ -1,0 +1,125 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free preset-mount composition-unclassified source reconciliation rehearsal",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_exact_process_free_source_reconciliation_contract",
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "f97d6bd035cd9408bf561f36c802a9687fbddd58",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "551fb75d0d836f6645957ca5704504c3c9f353b7",
+    "reason_codes": [],
+    "resolved_commit": "f97d6bd035cd9408bf561f36c802a9687fbddd58",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "f97d6bd035cd9408bf561f36c802a9687fbddd58"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "551fb75d0d836f6645957ca5704504c3c9f353b7",
+    "branch_origin_aligned": true,
+    "head": "551fb75d0d836f6645957ca5704504c3c9f353b7",
+    "origin_branch_commit": "551fb75d0d836f6645957ca5704504c3c9f353b7",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 661
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "process-free source-reconciliation preplanning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "DeepSeek and the native Harness are the governed object under diagnosis; any Harness, worker or model process would violate the process-free latch and could not independently accept its own transport.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The first decision is exact byte, hash and source-branch reconciliation with a closed verdict grammar; reassess only if deterministic comparison leaves a genuine semantic ambiguity before acceptance.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits delegation, and the evidence chain is a short serial comparison of one consumed attempt against its exact source lineage.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "deterministic source-reconciliation result",
+      "pre-verifier gate",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "freeze the exact process-free source inventory and digest contract",
+      "reconstruct the emitted and installed composition branches without execution",
+      "compare branch predicates and terminal precedence",
+      "emit one closed deterministic attribution or one explicit evidence-gap verdict",
+      "accept no runtime-path proof without the required terminal"
+    ]
+  },
+  "planned_action": "freeze_the_narrowest_process_free_contract_that_compares_the_exact_emitted_and_installed_runner_guard_bridge_and_sanitizer_sources_and_either_attributes_effective_tool_composition_unclassified_to_one_deterministic_source_coordinate_or_returns_an_explicit_bounded_evidence_gap",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-plan.md",
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-offline-admission-recovery-plan.md",
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitized-terminal-native-rehearsal-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/offline-recovery-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns planning, source readback, deterministic reconciliation and acceptance. DeepSeek is declined because no Harness, worker or model process is authorised; Gemini is declined provisionally because exact-source comparison is deterministic; native subagents are declined under current developer policy.",
+    "git_refs_and_worktree": "The receipt builder supplies every current Git identity. Caller prose supplies none. Its machine snapshot must preserve task-branch alignment, fixed protected refs, docs/branding and every unrelated untracked file.",
+    "live_handover_current_baton": "AGENTS.md names the accepted finite negative native result at Continuity 385 / Compass 367 and the process-free composition-unclassified source-reconciliation successor as current work.",
+    "protected_evidence_boundaries": "The consumed candidate and accepted offline recovery remain immutable. This tranche is provider-free and process-free, may inspect only the exact emitted and installed composition sources, may retain no raw runtime detail, and opens no retry, product, data, deployment, release, Pages or protected-ref authority."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
