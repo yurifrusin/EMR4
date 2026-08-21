@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 375,
+  "graph_revision": 376,
   "harvests": [],
   "nodes": [
     {
@@ -28424,9 +28424,123 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal",
+      "title": "Native Harness fresh identity and inert target binding",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the bounded provider-free native-Harness control sequence.",
+          "No Node, Harness, broker, worker, model, provider, target-file, product, deployment, Pages or protected-ref authority opened.",
+          "The accepted materialisation source, consumed attempts and predecessor identities remain immutable."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-fresh-full-git-identity-binding",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal/rebinding-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one fresh operation, attempt and full planning-source Git identity regenerated into the diagnostic helper and copied through bundle and terminal."
+        },
+        {
+          "id": "accept-reversible-inert-target-rebinding",
+          "source": "orchestration_harness/native_post_hmr_future_attempt_rebinding.py",
+          "status": "accepted",
+          "summary": "Accept exact one-literal replacement of the consumed target by the frozen inert relative target with byte-exact reverse recovery and independent target hash."
+        },
+        {
+          "id": "reject-native-boot-worker-and-behavior-overclaim",
+          "source": "docs/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "Reject claims about JavaScript parsing, native/HMR loading, DeepSeek behavior, provider reachability, coding completion or occupied readiness."
+        },
+        {
+          "id": "accept-corrected-machine-only-git-ref-reading",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-future-attempt-identity-target-rebinding-preplanning-v2-receipt.json",
+          "status": "accepted",
+          "summary": "Accept the distinct corrected five-source receipt in which the Git snapshot alone owns protected object values."
+        }
+      ],
+      "claim_scope": [
+        "One full planning-source Git object, distinct operation and distinct attempt bind the fresh helper identity.",
+        "The consumed absolute target is absent and one exact inert authored-synthetic relative target is present.",
+        "The runner transformation reverses byte-exactly to the accepted future runner.",
+        "Bundle and terminal carry identical source and target bindings with closed code-owned coordinates.",
+        "Target use, occupied launch, execution authority and raw retention remain false.",
+        "No prohibited process, request, target-file, product, data or protected-ref effect occurred."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal/rebinding-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal/rebinding-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-attempt-identity-target-rebinding-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-attempt-identity-target-rebinding-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-attempt-identity-target-rebinding-preplanning-v2-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-attempt-identity-target-rebinding-plan-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-attempt-identity-target-rebinding-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-attempt-identity-target-rebinding-closeout-paper-recovery-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-attempt-identity-target-rebinding-post-compaction-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-attempt-identity-target-rebinding-incident-revision-recovery-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_agents_handover_archive.py",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/native_post_hmr_future_attempt_rebinding.py",
+          "scripts/deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-599.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-future-attempt-identity-target-rebinding.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The rebound JavaScript and helper have not been parsed or mounted by the pinned native Harness.",
+        "No stock-headless HMR path, real sidecar or independent broker-zero source has exercised the rebound bundle.",
+        "No DeepSeek worker, model/provider request, coding behavior or occupied attempt is authorised or proved.",
+        "Product, data, production, deployment, release, Pages and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-21T23:08:25.7482343+10:00",
+      "updated_at": "2026-08-21T23:08:25.7482343+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "e573a97a6385ef57157860edd68934fa3a518f5e",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-21T22:25:11.2517454+10:00"
+  "updated_at": "2026-08-21T23:08:25.7482343+10:00"
 }

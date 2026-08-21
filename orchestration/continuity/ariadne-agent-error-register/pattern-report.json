@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 598,
+  "register_revision": 599,
   "source_cutoff_on": "2026-08-21",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "1501dce993c51bc403e4ed28d0300e96bd4c8558470e267b5f12ffb1aefc0d91",
-  "incident_count": 851,
+  "canonical_register_sha256": "65b2a1fec1f477a14a2ce153a05a5fb085f062476070905d42343b0c86f17066",
+  "incident_count": 856,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 482,
       "harness": 62,
-      "operator": 158,
+      "operator": 163,
       "repository": 133,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 93,
       "evidence_misreport": 71,
       "harness_failure": 62,
-      "operator_error": 158,
+      "operator_error": 163,
       "output_contract_violation": 266,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 64,
       "integration_reviewer": 3,
-      "orchestrator": 721,
+      "orchestrator": 726,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 517,
+      "low": 521,
       "material": 129,
-      "moderate": 205
+      "moderate": 206
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 161,
-      "canonical_unchanged": 527,
+      "canonical_unchanged": 532,
       "untrusted_partial_worktree": 163
     },
     "by_resource_and_role": {
@@ -119,6 +119,7 @@
       "clockwork-authorized-opening-vocabulary::orchestrator": 1,
       "clockwork-canonical-baton-writer::orchestrator": 1,
       "clockwork-canonical-path-staging::orchestrator": 1,
+      "clockwork-closed-tick-intent-path::orchestrator": 1,
       "clockwork-closeout-incident-observation::orchestrator": 1,
       "clockwork-continuity-node-projector::orchestrator": 1,
       "clockwork-gear-architecture-plan-latch-test::orchestrator": 1,
@@ -127,11 +128,14 @@
       "clockwork-incident-stage-vocabulary::orchestrator": 2,
       "clockwork-incident-tranche-vocabulary::orchestrator": 1,
       "clockwork-incident-vocabulary-admission::orchestrator": 2,
+      "clockwork-live-tick-intent-schema::orchestrator": 1,
       "clockwork-migration-focused-replay-fixture::orchestrator": 1,
       "clockwork-migration-verifier-command-manifest::orchestrator": 1,
       "clockwork-owned-active-latch-projection::orchestrator": 1,
+      "clockwork-owned-active-operation-latch::orchestrator": 1,
       "clockwork-owned-error-register-projection::orchestrator": 1,
       "clockwork-prospective-graph::orchestrator": 1,
+      "clockwork-prospective-incident-revision-artifact::orchestrator": 1,
       "clockwork-prospective-register-revision-reading::orchestrator": 1,
       "clockwork-rollback-pointer-lease::orchestrator": 2,
       "clockwork-successor-boundary-projector::orchestrator": 1,
@@ -256,6 +260,7 @@
       "model-required-bureau-c5-live-controller::orchestrator": 1,
       "native-codex-observation-to-signal-worker::implementer": 1,
       "native-startup-terminal-validator::implementer": 1,
+      "orchestrator-git-ref-evidence-binding::orchestrator": 1,
       "ordinary-diary-cancellation-browser-review-manifest::verifier": 1,
       "ordinary-diary-cancellation-continuity-updater::orchestrator": 1,
       "ordinary-practice-check-in-admission-readiness-plan-test::orchestrator": 1,
