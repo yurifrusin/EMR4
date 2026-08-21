@@ -17,6 +17,12 @@
       "count": 1,
       "cause": "The first provider-boundary assertion incorrectly treated the count of scrubbed credential environment names as prohibited provider activity.",
       "control": "Use an explicit allowlist of the zero-required provider-boundary fields."
+    },
+    {
+      "kind": "clockwork_dry_run_rejection",
+      "count": 1,
+      "cause": "The first closeout intent supplied path strings where transactional contract_evidence requires structured objects or an empty list.",
+      "control": "Use the accepted empty-list form when contract paths are already bound by the node evidence collection."
     }
   ],
   "draft_corrections": [
@@ -27,5 +33,5 @@
       "control": "Discard the guessed value, resolve HEAD with Git, then remove caller-authored object IDs from git_refs_and_worktree so the preflight machine snapshot is the sole binding."
     }
   ],
-  "assessment": "The clockwork remains worthwhile: neither correction reached publication, and the final pre-verifier receipt passed with zero manually supplied Git object IDs. The remaining improvement is to generate receipt runtime-state Git descriptions from a template so even transient guessed identifiers are unnecessary."
+  "assessment": "The clockwork remains worthwhile: none of the draft corrections reached publication, and the final pre-verifier receipt passed with zero manually supplied Git object IDs. The remaining improvements are to generate receipt Git descriptions from a template and schema-build closeout intent subfields so transient guessed identifiers and field-shape mismatches are unnecessary."
 }

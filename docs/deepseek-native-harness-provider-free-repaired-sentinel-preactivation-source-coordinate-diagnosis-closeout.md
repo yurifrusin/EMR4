@@ -23,7 +23,7 @@ No raw stderr message, path, stack, environment or stream was reconstructed or g
 
 ## Efficacy
 
-The static tranche avoided another opaque native attempt and reduced the failure to a source-level coordinate. One focused rerun corrected an overbroad provider-counter assertion. A transient pre-verifier draft also repeated the exact class of guessed-Git-ID lapse discussed with Yuri; it was caught before preflight, removed from Git narrative evidence and recorded for clockwork allocation. The final receipt delegates Git binding exclusively to the machine snapshot.
+The static tranche avoided another opaque native attempt and reduced the failure to a source-level coordinate. One focused rerun corrected an overbroad provider-counter assertion. A transient pre-verifier draft also repeated the exact class of guessed-Git-ID lapse discussed with Yuri; it was caught before preflight, removed from Git narrative evidence and recorded for clockwork allocation. The first clockwork dry run then rejected path strings in a structured `contract_evidence` field without publishing; the intent now uses the accepted empty-list form while retaining the paths in ordinary evidence. The final receipt delegates Git binding exclusively to the machine snapshot.
 
 ## Successor
 

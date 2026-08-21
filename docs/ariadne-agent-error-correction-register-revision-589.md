@@ -2,12 +2,12 @@
 
 <!-- ariadne-agent-error-register-reading
 revision: 589
-incident_count: 790
-new_incident_ids: AER-0788,AER-0789,AER-0790
+incident_count: 791
+new_incident_ids: AER-0788,AER-0789,AER-0790,AER-0791
 open_incident_count: 0
 -->
 
-This revision note binds three contained observations to the clockwork-projected register. The canonical JSON register and pattern report remain clockwork-owned.
+This revision note binds four contained observations to the clockwork-projected register. The canonical JSON register and pattern report remain clockwork-owned.
 
 ## AER-0788
 
@@ -20,3 +20,7 @@ The first diagnosis acceptance predicate counted the three deliberately scrubbed
 ## AER-0790
 
 An unvalidated pre-verifier draft expanded the visible abbreviated candidate ID with guessed suffix characters. Before preflight or publication, Git resolved the exact 40-character commit, the guessed value was discarded, and the final Git-evidence narrative was made object-ID-free so the machine snapshot remained the sole binding.
+
+## AER-0791
+
+The first closeout intent supplied path strings in `contract_evidence`, where the transactional projection accepts structured contract-evidence objects or an empty list. The clockwork dry run rejected the prospective projection without publication. The intent now uses the accepted empty-list form because the same paths remain fully bound elsewhere in the node evidence.

@@ -47,7 +47,7 @@
           "id": "accept-contained-diagnosis-incidents",
           "source": "docs/ariadne-agent-error-correction-register-revision-589.md",
           "status": "accepted",
-          "summary": "Accept three corrected or contained observations with none open."
+          "summary": "Accept four corrected or contained observations with none open."
         }
       ],
       "claim_scope": [
@@ -57,10 +57,7 @@
         "The result does not claim absence of later defects or measure DeepSeek model/provider performance.",
         "No raw stream was reconstructed and every executable Harness/provider activity count is zero."
       ],
-      "contract_evidence": [
-        "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/contract.json",
-        "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/evidence.schema.json"
-      ],
+      "contract_evidence": [],
       "evidence": {
         "plans": [
           "docs/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis-plan.md",
@@ -327,6 +324,39 @@
         ]
       },
       "baton_summary": "records the discarded guessed Git-object draft and machine-snapshot-only binding correction."
+    },
+    {
+      "attempt_key": "repaired-sentinel-diagnosis-contract-evidence-shape-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-repaired-sentinel-preactivation-source-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "transactional-contract-evidence-field",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Transactional contract_evidence must use its structured object vocabulary or the accepted empty-list form when contract paths are already carried by node evidence.",
+      "observed_error": "The first closeout intent supplied two plain path strings in contract_evidence.",
+      "detection_method": "The governance clockwork dry run rejected the prospective Compass projection with contract_evidence_object_required before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-589.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.transactional_contract_evidence_used_path_strings",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the path strings with the accepted empty-list form and retain the same contract paths in node evidence and baton acceptance.",
+        "prevention_control": "Schema-build transactional subfields before the live clockwork dry run instead of inferring their shape from neighboring evidence arrays.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/efficacy-reading.json"
+        ]
+      },
+      "baton_summary": "records the rejected contract-evidence field shape and empty-list correction."
     }
   ]
 }

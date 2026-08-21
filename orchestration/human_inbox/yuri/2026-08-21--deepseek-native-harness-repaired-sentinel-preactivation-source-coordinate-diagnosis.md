@@ -19,4 +19,4 @@ This is encouraging because it is narrow, local and repairable. The diagnosis re
 - Protected refs remain fixed at `2e34bdad732fdab32fbf778280b3d3c70d66d602`; no Pages or product surface opened.
 - Non-PHI Pushover closeout notification passed.
 
-The clockwork will allocate three contained observations: the source escape defect, one overbroad provider-counter predicate caught by tests, and one transient guessed full-Git-ID draft caught and removed before preflight.
+The clockwork will allocate four contained observations: the source escape defect, one overbroad provider-counter predicate caught by tests, one transient guessed full-Git-ID draft caught and removed before preflight, and one rejected closeout-intent field-shape mismatch that changed no canonical state.
