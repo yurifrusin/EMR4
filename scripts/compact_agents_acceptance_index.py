@@ -36,6 +36,7 @@ ACTIVE_LABELS = (
     "Implementation/test worker",
     "Independent worker/reviewer",
     "Active Ariadne descendant",
+    "Current clockwork relation",
     "Active product track",
     "Ariadne agent error and correction register acceptance",
     "Model-required Bureau architecture and paused development plan",
