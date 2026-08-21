@@ -38,7 +38,9 @@ CONTRACT_SCHEMA = (
 EVIDENCE_SCHEMA = (
     "ariadne.deepseek_native_harness_source_repaired_sentinel_boot_evidence.v1"
 )
+DISPOSABLE_PREFIX = "dsh-source-repaired-sentinel-boot-"
 _PREDECESSOR_LOAD_CONTRACT = engine.load_contract
+_PREDECESSOR_MKDTEMP = engine.tempfile.mkdtemp
 
 
 def _load_source_repaired_contract(
@@ -46,6 +48,17 @@ def _load_source_repaired_contract(
 ) -> dict[str, Any]:
     """Load the fresh contract without inheriting the predecessor default path."""
     return _PREDECESSOR_LOAD_CONTRACT(path)
+
+
+def _source_repaired_mkdtemp(*, prefix: str, dir: Path) -> str:
+    """Require the predecessor call site but allocate under the fresh prefix."""
+    if prefix != "dsh-repaired-sentinel-boot-":
+        raise engine.RepairedSentinelBootError("disposable_prefix_call_mismatch")
+    return _PREDECESSOR_MKDTEMP(prefix=DISPOSABLE_PREFIX, dir=dir)
+
+
+class _SourceRepairedTempfileProxy:
+    mkdtemp = staticmethod(_source_repaired_mkdtemp)
 
 
 def _source_repair_lineage(contract: dict[str, Any]) -> dict[str, Any]:
@@ -120,13 +133,18 @@ def configure_engine() -> None:
     engine.CONTRACT_SCHEMA = CONTRACT_SCHEMA
     engine.EVIDENCE_SCHEMA = EVIDENCE_SCHEMA
     engine.load_contract = _load_source_repaired_contract
+    engine.tempfile = _SourceRepairedTempfileProxy
     engine.validate_lineage = _source_repair_lineage
     engine._render_report = _report
 
 
 def deterministic_check(candidate_source: str | None = None) -> dict[str, Any]:
     configure_engine()
-    return engine.deterministic_check(candidate_source)
+    projection = engine.deterministic_check(candidate_source)
+    if engine.tempfile.mkdtemp is not _source_repaired_mkdtemp:
+        raise engine.RepairedSentinelBootError("disposable_prefix_binding_missing")
+    projection["disposable_root_prefix"] = DISPOSABLE_PREFIX
+    return projection
 
 
 def execute_boot(candidate_source: str) -> dict[str, Any]:

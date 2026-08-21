@@ -29,6 +29,8 @@ def test_deterministic_check_binds_source_repair_without_node() -> None:
     assert projection["profile"]["runner_row_count"] == 0
     assert projection["command"][-2:] == ["--profile", "headless"]
     assert projection["sentinel_sha256"] == "8b53bc7fb781d29d87310ee2d3425ca159a62fed4893a3e4db94069d63cd60bd"
+    assert projection["disposable_root_prefix"] == "dsh-source-repaired-sentinel-boot-"
+    assert subject.engine.tempfile.mkdtemp is subject._source_repaired_mkdtemp
 
 
 def test_source_repair_lineage_binds_all_components() -> None:
