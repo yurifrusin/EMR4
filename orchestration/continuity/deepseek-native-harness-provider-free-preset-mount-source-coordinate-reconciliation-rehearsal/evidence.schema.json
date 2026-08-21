@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-preset-mount-source-reconciliation-evidence.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "candidate_source", "result", "accepted_terminal", "source_bindings", "source_semantics", "plugin_prerequisites", "eliminated_coordinates", "finite_remaining_coordinates", "zero_counters", "claim_boundary"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_preset_mount_source_reconciliation_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {"const": "pass"},
+    "accepted_terminal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate_source", "result", "last_admitted_stage", "safe_guard_coordinate", "safe_guard_detail", "raw_runtime_detail_retained"],
+      "properties": {
+        "candidate_source": {"const": "c66eb82cccd64961f0d99bf9f67803e1a69ebd8a"},
+        "result": {"const": "preset_composition_failure_attributed"},
+        "last_admitted_stage": {"const": "private_identity_admitted"},
+        "safe_guard_coordinate": {"const": "EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED"},
+        "safe_guard_detail": {"type": "null"},
+        "raw_runtime_detail_retained": {"const": false}
+      }
+    },
+    "source_bindings": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "bytes", "sha256", "version", "passed"],
+        "properties": {
+          "path": {"type": "string"},
+          "bytes": {"type": "integer", "minimum": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "version": {"const": "0.1.0-rc.7"},
+          "passed": {"const": true}
+        }
+      }
+    },
+    "source_semantics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mount_checks_agent_scope", "mount_resolves_mountable_roster", "mount_awaits_standing_scope", "standing_checks_composition_stamp", "standing_calls_mount_preset", "mount_awaits_entry_tree", "mount_checks_subtree_publication", "mount_checks_inactive_rows", "mount_checks_root_service_leaks", "scope_binding_occurs_after_standing_mount", "preset_tree_owns_bare_package_resolution"],
+      "properties": {
+        "mount_checks_agent_scope": {"const": true},
+        "mount_resolves_mountable_roster": {"const": true},
+        "mount_awaits_standing_scope": {"const": true},
+        "standing_checks_composition_stamp": {"const": true},
+        "standing_calls_mount_preset": {"const": true},
+        "mount_awaits_entry_tree": {"const": true},
+        "mount_checks_subtree_publication": {"const": true},
+        "mount_checks_inactive_rows": {"const": true},
+        "mount_checks_root_service_leaks": {"const": true},
+        "scope_binding_occurs_after_standing_mount": {"const": true},
+        "preset_tree_owns_bare_package_resolution": {"const": true}
+      }
+    },
+    "plugin_prerequisites": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["preset_rows", "tool_fs_inject", "tool_fs_search_inject", "host_declared_services", "all_injected_services_declared_by_host"],
+      "properties": {
+        "preset_rows": {"const": ["@deepseek-ai/dsh-tool-fs", "@deepseek-ai/dsh-tool-fs-search"]},
+        "tool_fs_inject": {"const": ["tools", "fs", "systemPrompt"]},
+        "tool_fs_search_inject": {"const": ["tools", "systemPrompt", "subprocess"]},
+        "host_declared_services": {"const": ["fs", "subprocess", "systemPrompt", "tools"]},
+        "all_injected_services_declared_by_host": {"const": true}
+      }
+    },
+    "eliminated_coordinates": {"const": ["preset_root_count_mismatch", "shipped_root_mismatch", "user_root_mismatch", "preset_roster_mismatch", "unknown_or_discovery_broken_preset", "package_import_rejected_before_factory", "public_agent_or_session_creation"]},
+    "finite_remaining_coordinates": {"const": ["PRESET_MOUNT_AGENT_SCOPE_ABSENT", "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE", "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED", "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT", "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT", "PRESET_MOUNT_ROOT_SERVICE_LEAK"]},
+    "zero_counters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["native_harness_process_count", "turn_count", "request_count", "broker_process_count", "broker_request_count", "occupied_worker_count", "model_request_count", "provider_request_count", "network_attempt_count", "database_invocation_count", "docker_invocation_count", "target_creation_count", "target_use_count"],
+      "properties": {
+        "native_harness_process_count": {"const": 0}, "turn_count": {"const": 0}, "request_count": {"const": 0}, "broker_process_count": {"const": 0}, "broker_request_count": {"const": 0}, "occupied_worker_count": {"const": 0}, "model_request_count": {"const": 0}, "provider_request_count": {"const": 0}, "network_attempt_count": {"const": 0}, "database_invocation_count": {"const": 0}, "docker_invocation_count": {"const": 0}, "target_creation_count": {"const": 0}, "target_use_count": {"const": 0}
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_reachable_candidate_set_only", "exact_internal_coordinate_observed", "raw_runtime_error_recovered", "repair_selected", "second_native_process_authorized", "worker_launch_authorized", "occupied_model_launch_authorized"],
+      "properties": {
+        "source_reachable_candidate_set_only": {"const": true},
+        "exact_internal_coordinate_observed": {"const": false},
+        "raw_runtime_error_recovered": {"const": false},
+        "repair_selected": {"const": false},
+        "second_native_process_authorized": {"const": false},
+        "worker_launch_authorized": {"const": false},
+        "occupied_model_launch_authorized": {"const": false}
+      }
+    }
+  }
+}

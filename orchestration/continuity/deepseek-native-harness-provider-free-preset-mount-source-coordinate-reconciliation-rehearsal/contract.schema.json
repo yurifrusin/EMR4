@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-preset-mount-source-reconciliation-contract.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "accepted_terminal_source", "accepted_terminal_evidence", "accepted_source_interpretation", "seed_relative_path", "package_version", "source_files", "finite_remaining_coordinates", "eliminated_coordinates", "required_zero_counters"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_preset_mount_source_reconciliation_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_terminal_source": {"const": "c66eb82cccd64961f0d99bf9f67803e1a69ebd8a"},
+    "accepted_terminal_evidence": {"type": "string", "minLength": 1},
+    "accepted_source_interpretation": {"type": "string", "minLength": 1},
+    "seed_relative_path": {"const": "emr4-native-harness/dsh-0.1.0-rc.7-package-seed/node_modules/@deepseek-ai"},
+    "package_version": {"const": "0.1.0-rc.7"},
+    "source_files": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "bytes", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "bytes": {"type": "integer", "minimum": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "finite_remaining_coordinates": {"const": ["PRESET_MOUNT_AGENT_SCOPE_ABSENT", "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE", "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED", "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT", "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT", "PRESET_MOUNT_ROOT_SERVICE_LEAK"]},
+    "eliminated_coordinates": {"const": ["preset_root_count_mismatch", "shipped_root_mismatch", "user_root_mismatch", "preset_roster_mismatch", "unknown_or_discovery_broken_preset", "package_import_rejected_before_factory", "public_agent_or_session_creation"]},
+    "required_zero_counters": {"const": ["native_harness_process_count", "turn_count", "request_count", "broker_process_count", "broker_request_count", "occupied_worker_count", "model_request_count", "provider_request_count", "network_attempt_count", "database_invocation_count", "docker_invocation_count", "target_creation_count", "target_use_count"]}
+  }
+}
