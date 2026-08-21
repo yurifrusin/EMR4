@@ -28,6 +28,13 @@ No DeepSeek model request was made, no worker edited anything, and no product or
 patient data was involved. Nothing was deployed or released, and protected
 branches did not move.
 
+The first bureaucratic closeout tick also demonstrated the clockwork's value:
+it published a successor latch containing one paraphrased boundary, the full
+post-publication suite rejected that finite-vocabulary mismatch, and the
+clockwork restored the previous generation byte-for-byte. The corrected tick
+uses the registered boundary terms exactly. The native Harness result itself
+was unaffected.
+
 ## Technical summary
 
 - Accepted native execution source:
@@ -48,6 +55,9 @@ branches did not move.
   passed.
 - AER-0857 and AER-0858 preserve the two corrected prelaunch materialisation
   failures in prospective register revision 600.
+- AER-0859 preserves the rejected paraphrased successor boundary; AER-0860
+  preserves the contained rollback/republication sequencing errors. The first
+  published generation was rolled back byte-for-byte before correction.
 
 ## Place in the Raisa direction
 

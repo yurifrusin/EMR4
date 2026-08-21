@@ -27,6 +27,13 @@ the exact 32,744-file, 219,364,530-byte tree in 180673 ms with zero reparse
 points and zero materialiser processes. The two contained prelaunch failures
 remain explicit as AER-0857 and AER-0858; neither consumed the native attempt.
 
+The first clockwork closeout generation was not accepted: the post-publication
+suite found one paraphrased successor boundary, and the clockwork restored its
+predecessor byte-for-byte. AER-0859 records that vocabulary defect and AER-0860
+records the contained rollback/republication sequencing errors. Acceptance of
+the closeout additionally requires the corrected exact-vocabulary generation
+and a clean rerun of the same governance suite.
+
 Acceptance is backed by 27 focused and 206 inherited mechanically collected
 tests, the deterministic check, Ruff, compilation, strict schema validation,
 Git whitespace checks and an independent typed evidence readback. DeepSeek,

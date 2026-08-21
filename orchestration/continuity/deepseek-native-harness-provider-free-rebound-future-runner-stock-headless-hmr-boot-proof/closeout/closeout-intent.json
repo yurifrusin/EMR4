@@ -1,0 +1,417 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof",
+    "title": "DeepSeek native Harness provider-free rebound future-runner stock-headless HMR boot proof",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T01:02:14.2919121+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof",
+      "title": "Rebound future-runner native HMR boot proof",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits this bounded provider-free native-Harness control sequence.",
+          "One native rc.7 process was authorised, but no DeepSeek worker, model/provider request, target, product, data, deployment, Pages or protected-ref authority opened.",
+          "The accepted rebound identity, runner, helper, controller, target coordinate and both prelaunch failures remain immutable."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-rebound-runner-native-hmr-activation",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/native-boot-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one exact stock-headless readiness sequence, one HMR mutation and the typed preset-root mismatch as proof that the rebound runner and helper mounted natively."
+        },
+        {
+          "id": "accept-independent-pre-request-and-broker-zero-join",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/native-boot-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the helper-authored closed sidecar joined with an identity-bound canonical all-zero broker reading as the sole controller terminal."
+        },
+        {
+          "id": "accept-process-free-package-seed-recovery",
+          "source": "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-package-seed-materialisation-recovery.md",
+          "status": "accepted",
+          "summary": "Accept the verified package-only rc.7 seed and independently equal disposable copy with zero materialiser processes and zero reparse points."
+        },
+        {
+          "id": "reject-worker-provider-target-and-product-overclaim",
+          "source": "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof-closeout.md",
+          "status": "rejected",
+          "summary": "Reject claims about agent creation, sessions, turns, DeepSeek transport, provider behavior, coding quality, target editing, product integration or ordinary-practice readiness."
+        },
+        {
+          "id": "accept-byte-exact-clockwork-boundary-vocabulary-recovery",
+          "source": "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-clockwork-boundary-vocabulary-recovery.md",
+          "status": "accepted",
+          "summary": "Accept the byte-exact rollback and corrected successor boundary carrying both pre-existing closed vocabulary terms separately."
+        }
+      ],
+      "claim_scope": [
+        "One pinned rc.7 process traversed the exact stock-headless readiness sequence and mounted the exact rebound runner and helper.",
+        "One post-readiness HMR mutation produced the exact typed preset-root admission mismatch before agents.create.",
+        "The sidecar and independent broker-zero reading produced the exact post_hmr_pre_request_failure controller coordinate.",
+        "Runner/helper copies match, the bundle manifest is unchanged and no fallback terminal was written.",
+        "All agent, session, turn, broker, worker, model/provider, database, Docker, network and target counts remain zero.",
+        "Process/root cleanup passed and no raw stream, environment or log was retained."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-prelaunch-materialisation-process-ownership-recovery.md",
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-package-seed-materialisation-recovery.md",
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-clockwork-boundary-vocabulary-recovery.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/prelaunch-materialisation-failure-001.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/prelaunch-materialisation-failure-002.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/native-boot-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/native-boot-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-recovery-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-package-seed-recovery-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-package-seed-recovery-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-package-seed-recovery-prepush-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-package-seed-recovery-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-closeout-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof_evidence.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_agents_handover_archive.py",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+          "docs/ariadne-agent-error-correction-register-revision-600.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof.md"
+        ]
+      },
+      "unresolved_gates": [
+        "No DeepSeek worker agent has been created by the rebound runner.",
+        "No session, turn, broker request, model/provider request, coding behavior or target edit is authorised or proved.",
+        "The package-seed copy is exact but its 180673 ms local materialisation cost has not been optimised.",
+        "Product, data, ordinary-practice, production, deployment, release, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Make DeepSeek native-Harness worker execution bounded, traceable and governable enough for Raisa development",
+      "outcome": "The orchestrator can now prove exact stock-headless readiness, rebound-runner activation, the chosen typed pre-request stop and independent broker silence from one native process.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/native-boot-evidence.json",
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Prove the native Harness can create exactly one inert rebound worker agent while retaining provider-free broker and target silence",
+      "why_now": "Native HMR activation and typed pre-request attribution pass, while agent creation remains the next unproved boundary before any session or request.",
+      "outcome": "One provider-free runner descendant will either create one exact inert worker agent and emit a typed sidecar before session creation or fail closed with attributable evidence.",
+      "unlocks": [
+        "Typed agent-creation evidence under the native Harness and admitted preset roots.",
+        "A later separately frozen session/request-boundary rehearsal before any occupied DeepSeek development task."
+      ],
+      "does_not_solve": [
+        "No session, turn, broker/model/provider request or coding-performance evidence.",
+        "No target-file creation, product command, product data or ordinary-practice enablement.",
+        "No production, deployment, release, Pages or protected integration."
+      ],
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/efficacy-reading.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-sol-acceptance.md"
+      ],
+      "orientation_statement": "Freeze one provider-free rebound-runner agent-creation proof and stop before session or request."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal",
+      "active_tranche": "DeepSeek native Harness provider-free rebound future-runner agent-creation boundary rehearsal",
+      "objective": "Derive and mount one exact runner descendant with admitted preset roots, create exactly one inert DeepSeek worker agent, emit one typed agent-created sidecar and stop before session creation, a turn, broker/model/provider request or target creation or use.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and extended authority for the bounded native-Harness control sequence.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_agent_creation_boundary_contract"
+    },
+    "incidents": [
+      {
+        "incident_id": "windows-npm-wrapper-descendant-outlived-parent",
+        "source_id": "rebound-boot-prelaunch-materialisation-001",
+        "peers": []
+      },
+      {
+        "incident_id": "direct-npm-cli-materialisation-deadline",
+        "source_id": "rebound-boot-prelaunch-materialisation-002",
+        "peers": []
+      },
+      {
+        "incident_id": "successor-boundary-closed-vocabulary-paraphrase",
+        "source_id": "rebound-boot-closeout-boundary-vocabulary-001",
+        "peers": []
+      },
+      {
+        "incident_id": "clockwork-rollback-republication-sequence",
+        "source_id": "rebound-boot-closeout-rollback-sequence-001",
+        "peers": []
+      }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "rebound_native_boot_deterministic_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof", "--check"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "rebound_native_boot_focused_and_evidence_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof_evidence.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "rebound_native_boot_inherited_regressions",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py", "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py", "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot_evidence.py", "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "rebound_native_boot_governance_regressions",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_ariadne_active_operation_latch_continuity.py", "tests/test_agents_handover_archive.py", "tests/test_agents_acceptance_index.py", "tests/test_current_baton_consistency.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "rebound_native_boot_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof_evidence.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "rebound_native_boot_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof_evidence.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-prelaunch-materialisation-process-ownership-recovery.md",
+      "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-package-seed-materialisation-recovery.md",
+      "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-clockwork-boundary-vocabulary-recovery.md",
+      "scripts/deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/native-boot-evidence.json",
+      "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+      "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof_evidence.py",
+      "docs/ariadne-agent-error-correction-register-revision-600.md",
+      "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_rebound_future_runner_agent_creation_only",
+    "accepted_native_boot_execution_source_560f471b72bef0b9790120238657dc7afd4d602b_remains_immutable",
+    "accepted_rebound_runner_helper_controller_target_and_terminal_bindings_remain_immutable",
+    "derive_one_exact_agent_creation_runner_descendant_only",
+    "one_fresh_disposable_root_one_native_harness_process_one_agent_create_and_one_terminal_only",
+    "session_turn_broker_worker_request_model_provider_database_docker_network_counts_remain_zero",
+    "occupied_model_launch_authorized_remains_false",
+    "target_file_creation_and_target_use_remain_false",
+    "no_second_native_process_retry_resume_fallback_or_alternate_transport",
+    "no_raw_error_message_stack_code_path_cause_stream_session_prompt_response_or_credential",
+    "verified_package_only_seed_and_independent_copy_required",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "exact_test_counts_from_completed_machine_output_only",
+    "no_commit_identity_statement_without_current_machine_snapshot_copy",
+    "all_new_narrative_artifacts_require_date_and_brisbane_timestamp",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "rebound-boot-prelaunch-materialisation-001",
+      "observed_on": "2026-08-22",
+      "tranche": "rebound-future-runner-stock-headless-hmr-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "native-harness-prelaunch-materialiser",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_native_harness_controller",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "A prelaunch package materialiser must remain exactly owned and absent before the controller either rejects or advances to the one native Harness process.",
+      "observed_error": "The accepted Windows npm.cmd wrapper parent ended while its Node npm-CLI descendant remained live and held the disposable installation directory, so cleanup failed closed before native Popen.",
+      "detection_method": "The controller observed recursive cleanup refusal, identified the exact descendant, terminated it, verified process/root absence and recorded a typed prelaunch failure with zero native processes.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/prelaunch-materialisation-failure-001.json",
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-prelaunch-materialisation-process-ownership-recovery.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.prelaunch_windows_npm_wrapper_descendant_outlived_parent",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the typed failure, terminate and wait for the exact descendant, clean the verified root and replace wrapper ownership with direct-process ownership before further recovery.",
+        "prevention_control": "The final generation removes npm execution entirely and admits only a verified package-only seed plus independent disposable-copy digest before the unchanged native Popen site.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-package-seed-materialisation-recovery.md"
+        ]
+      },
+      "baton_summary": "records the contained Windows npm-wrapper descendant and the process-free package-seed control."
+    },
+    {
+      "attempt_key": "rebound-boot-prelaunch-materialisation-002",
+      "observed_on": "2026-08-22",
+      "tranche": "rebound-future-runner-stock-headless-hmr-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "native-harness-direct-npm-cli-materialiser",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_native_harness_controller",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The directly owned offline package materialiser must complete within its frozen deadline or terminate cleanly without consuming the native attempt.",
+      "observed_error": "The hash-bound direct Node/npm-CLI materialiser remained nonterminal until the 600-second deadline despite correct process ownership.",
+      "detection_method": "The controller's frozen deadline expired, after which it terminated and waited for the exact process, removed the root and wrote the second typed prelaunch failure with zero native processes.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/prelaunch-materialisation-failure-002.json",
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-package-seed-materialisation-recovery.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.prelaunch_direct_npm_cli_exceeded_frozen_materialisation_deadline",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove npm from prelaunch, freeze the exact package-only seed and verify both the source seed and disposable copy before native launch.",
+        "prevention_control": "Generation 3 has zero materialiser processes and binds package files, lock roster, file/byte counts, DSH manifest, reparse absence and the canonical tree digest.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/native-boot-evidence.json"
+        ]
+      },
+      "baton_summary": "records the contained direct npm-CLI deadline and the verified process-free seed-copy recovery."
+    },
+    {
+      "attempt_key": "rebound-boot-closeout-boundary-vocabulary-001",
+      "observed_on": "2026-08-22",
+      "tranche": "rebound-future-runner-stock-headless-hmr-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "successor-latch-closed-boundary-vocabulary",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_tick",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The clockwork successor latch must preserve every registered closed boundary as its exact existing vocabulary term rather than combining or paraphrasing controls.",
+      "observed_error": "The first closeout intent combined the feature-flag/allowlist/command-mounting and generic-status Arrived closures into one descriptive string, omitting one exact term required by baton consistency.",
+      "detection_method": "The first tick published, then tests/test_current_baton_consistency.py rejected the missing exact boundary; the clockwork restored the immediately previous generation byte-for-byte.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-clockwork-boundary-vocabulary-recovery.md",
+        "tests/test_current_baton_consistency.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/closeout/clockwork-tick-attempt-001-evidence.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.successor_latch_closed_boundary_vocabulary_paraphrase",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Roll back the first generation byte-for-byte and restore both pre-existing ordinary-practice boundary terms separately in the corrected intent.",
+        "prevention_control": "The complete post-publication baton consistency suite remains mandatory and the successor boundary copies exact registered terms without compression.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-clockwork-boundary-vocabulary-recovery.md"
+        ]
+      },
+      "baton_summary": "records the rolled-back successor-boundary paraphrase and exact closed-vocabulary restoration."
+    },
+    {
+      "attempt_key": "rebound-boot-closeout-rollback-sequence-001",
+      "observed_on": "2026-08-22",
+      "tranche": "rebound-future-runner-stock-headless-hmr-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "clockwork-rollback-republication-sequence",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Clockwork rollback must use its closed standalone mode, and its new lease pointer must become the committed source before any corrected check or publication.",
+      "observed_error": "The first rollback call supplied the forbidden intent argument; after the corrected rollback passed, an immediate new check preceded the rollback-pointer commit and was rejected for physical pointer drift.",
+      "detection_method": "The CLI rejected the first call before mutation, the standalone rollback then reported byte_exact true, and the next read-only check rejected tick_pointer_physical_drift before commands or publication.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-clockwork-boundary-vocabulary-recovery.md",
+        "orchestration/continuity/ariadne-governance-clockwork/current.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_rollback_mode_and_pointer_commit_sequence",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use standalone rollback, preserve its byte-exact result and commit the new rollback lease pointer before rerunning the corrected tick check.",
+        "prevention_control": "Rollback is treated as a distinct closed grammar and its pointer lease is an explicit recovery-commit prerequisite for republication.",
+        "evidence_paths": [
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "orchestration/continuity/ariadne-governance-clockwork/current.json",
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-clockwork-boundary-vocabulary-recovery.md"
+        ]
+      },
+      "baton_summary": "records the contained rollback-sequence rejections and the committed-pointer prerequisite."
+    }
+  ]
+}

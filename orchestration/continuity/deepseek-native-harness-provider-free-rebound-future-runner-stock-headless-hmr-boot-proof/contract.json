@@ -22,7 +22,7 @@
     "prelaunch_failure_sha256": "505cde86db44d7b185680d0b07704bc7716c5d50a268fa1b85ad1e5adf2ec99d",
     "package_seed_recovery_sha256": "8ee139587569129ac0bb86fea4580af12f571215336882e9ca7a136d475f37d2",
     "prelaunch_failure_two_sha256": "d280d5a6f11e5a57b33fc48fa11aa20ed032034cefc75830d4db710a88f84630",
-    "incident_revision_sha256": "3a989f31684e95535a644658b5fa78f7c14fec0e870cd6cfea8b76f3850380b4"
+    "incident_revision_sha256": "748bd6237195b89d39588958dcb0848616a9795d8de3780273759b6e4260868a"
   },
   "implementation_bytes": {
     "execution_controller_sha256": "26f773cff2195a8600ddef89b59c1457bb5d85aecacc262e67f0d352b07c1e07",

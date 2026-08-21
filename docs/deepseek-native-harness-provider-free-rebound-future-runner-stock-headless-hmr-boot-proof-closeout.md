@@ -59,6 +59,13 @@ was `180673 ms`; materialiser process and retry counts were both zero. AER-0857
 and AER-0858 preserve the two prelaunch failures and their corrections in
 prospective register revision 600.
 
+The first closeout tick was subsequently rolled back byte-for-byte after the
+post-publication consistency suite found one successor-boundary vocabulary
+paraphrase. AER-0859 records that rejected latch form. AER-0860 records the
+contained rollback/republication sequencing errors. The corrected clockwork
+intent restores the two existing closed terms exactly; neither incident changes
+the accepted native execution or opens any product or provider surface.
+
 ## Verification
 
 - The deterministic package/source, runner/helper, HMR-patch and schema check
@@ -71,6 +78,9 @@ prospective register revision 600.
 - An independent post-execution readback proved the expected terminal, every
   zero counter, target absence, process/root absence, bundle immutability and
   seed/copy equality.
+- The first clockwork generation was rolled back byte-for-byte after its
+  post-publication boundary-vocabulary failure; the corrected generation must
+  pass the same complete governance consistency suite.
 
 ## Parallelism efficacy
 
