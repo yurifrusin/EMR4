@@ -1,0 +1,359 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+    "title": "DeepSeek native Harness provider-free preset-mount composition-unclassified source reconciliation rehearsal",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T08:26:47.0343827+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+      "title": "Preset-mount composition-unclassified source reconciliation rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits this bounded process-free source reconciliation and its dependency-satisfied process-free successor.",
+          "No Node, native Harness, worker, model, provider, retry, product, data, deployment, Pages or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-root-preset-service-forwarding-gap",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/source-reconciliation-evidence.json",
+          "status": "accepted",
+          "summary": "Accept root_preset_service_not_forwarded_before_bridge as the narrowest deterministic source explanation for the consumed broad terminal."
+        },
+        {
+          "id": "accept-process-free-root-service-forwarding-successor",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Proceed only with a prospective process-free correction that forwards the admitted root preset service and moves mount validation inside the typed bridge."
+        },
+        {
+          "id": "reject-exact-runtime-exception-inference",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-composition-unclassified-source-reconciliation-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "The deterministic source route does not reconstruct the exact runtime exception or private context value."
+        },
+        {
+          "id": "reject-native-retry-or-worker-inference",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "No native retry, occupied DeepSeek worker, model/provider request or product authority follows from this acceptance."
+        }
+      ],
+      "claim_scope": [
+        "Exact implementation source ab2018091ee40fa8833f957daf41085a83f6b41d binds the runner, guard, bridge, sanitizer and installed rc.7 dependency sources.",
+        "All thirteen required source coordinates passed with zero failed coordinates.",
+        "The runner resolves root presets but does not forward the handle into the guard.",
+        "The installed agent-loop setup context derives from a narrower dependency surface without agentPresets.",
+        "The guard dereferences agentCtx.agentPresets while constructing bridge arguments before the bridge body can sanitize.",
+        "The broader sanitizer maps the uncoded escape to EFFECTIVE_TOOL_COMPOSITION_UNCLASSIFIED.",
+        "Node, native Harness, worker, model, provider, network, retry, resume, target and product counters remained zero.",
+        "The exact runtime exception, private context value and repaired native runtime remain unproved."
+      ],
+      "contract_evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/contract.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/contract.schema.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/evidence.schema.json"
+      ],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-609.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-composition-unclassified-source-reconciliation.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-composition-unclassified-source-reconciliation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-composition-unclassified-source-reconciliation-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-composition-unclassified-source-reconciliation-pre-verifier-acceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/source-reconciliation-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/source-reconciliation-report.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The prospective root-service-forwarding correction has not been derived or executed.",
+        "The exact runtime exception and private setup-context value remain deliberately unknown.",
+        "The new preset-mount bridge runtime path remains unproved.",
+        "No occupied DeepSeek worker turn, model/provider request or coding-quality evidence is accepted.",
+        "No native retry exists; any later process requires a distinct frozen plan.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development",
+      "outcome": "The previously broad native composition terminal is now attributable to one exact interface seam without another process.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/source-reconciliation-evidence.json",
+        "docs/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Correct the exact interface seam that bypassed typed preset-mount control before considering another native process",
+      "why_now": "The source route is deterministic, all required coordinates pass and the admitted root preset service is already available at the runner boundary.",
+      "outcome": "A process-free derived runner, guard and bridge will explicitly forward the admitted service and validate its mount handle inside the typed bridge.",
+      "unlocks": [
+        "A prospectively verified typed composition path under orchestrator ownership.",
+        "A defensible later decision about whether one separately frozen native process is worthwhile."
+      ],
+      "does_not_solve": [
+        "No occupied DeepSeek worker turn, model/provider request or coding-quality evidence.",
+        "No product/data action, production, release, Pages or protected integration."
+      ],
+      "evidence": [
+        "docs/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal-closeout.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/source-reconciliation-evidence.json"
+      ],
+      "orientation_statement": "Derive and verify root preset-service forwarding and in-bridge mount validation without Node, native Harness, worker, model or provider execution."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "active_tranche": "DeepSeek native Harness provider-free preset-mount root-service-forwarding process-free correction rehearsal",
+      "objective": "Prospectively derive and verify a runner, guard and typed bridge that explicitly forward the already admitted root preset service and validate its mount handle inside the bridge, without another process.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and extended authority for the bounded native-Harness control sequence.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_exact_process_free_root_service_forwarding_contract"
+    },
+    "incidents": [],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "native_source_reconciliation_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal",
+          "--check"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "native_source_reconciliation_focused_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "--noconftest",
+          "-p",
+          "no:cacheprovider",
+          "--strict-config",
+          "--strict-markers",
+          "-q",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "native_source_reconciliation_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "native_source_reconciliation_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal-threat-model-delta.md",
+      "scripts/deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+      "tests/test_deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/evidence.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/source-reconciliation-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/source-reconciliation-report.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-composition-unclassified-source-reconciliation-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-composition-unclassified-source-reconciliation-pre-verifier-acceptance-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-609.md",
+      "docs/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-composition-unclassified-source-reconciliation-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-composition-unclassified-source-reconciliation.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_preset_mount_root_service_forwarding_process_free_correction_only",
+    "accepted_source_reconciliation_implementation_ab2018091ee40fa8833f957daf41085a83f6b41d_preserved",
+    "consumed_native_candidate_c1ae13df334dfdffefb229c3ae5a502a7251451c_preserved",
+    "accepted_offline_recovery_source_05a721a075a96a5e248818371d7bdfc8e136c792_preserved",
+    "native_attempt_process_retry_and_resume_zero",
+    "no_node_native_harness_worker_model_or_provider_process",
+    "prospective_runner_guard_bridge_source_derivation_only",
+    "root_preset_service_handle_forwarded_explicitly",
+    "mount_handle_validation_inside_typed_bridge",
+    "no_target_or_product_source_change",
+    "accepted_package_only_seed_and_bundle_immutable",
+    "automatic_manual_retry_and_resume_zero",
+    "finite_typed_terminal_before_any_turn_or_request",
+    "only_preset_mount_failure_attributed_proves_the_new_runtime_bridge",
+    "no_raw_message_stack_cause_path_stream_prompt_response_environment_or_credential",
+    "zero_turn_request_broker_worker_model_provider_network_database_docker_and_target_activity",
+    "private_identity_only_and_zero_public_agent_session_or_lifecycle_publication",
+    "no_worker_model_provider_request_repair_retry_or_target_authority",
+    "git_object_id_contract_bindings_derive_from_machine_resolver_only",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "exact_test_counts_from_completed_machine_output_only",
+    "no_commit_identity_statement_without_current_machine_snapshot_copy",
+    "all_new_narrative_artifacts_require_date_and_brisbane_timestamp",
+    "generated_narrative_timestamps_derive_from_creation_clock_or_typed_evidence",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "source-reconciliation-incident-0908",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "source-reconciliation-contract-planning-source",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_contract_validation",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every contract Git object identity is copied from the repository's machine resolver as a full 40-character commit ID.",
+      "observed_error": "The first contract manually expanded the planning source into an invented 40-character value instead of copying the machine-resolved object.",
+      "detection_method": "The deterministic contract check rejected the planning-source mismatch before commit or evidence generation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/contract.json",
+        "docs/ariadne-agent-error-correction-register-revision-609.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.contract_planning_source_manually_expanded_instead_of_machine_resolved",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the caller-authored value with the exact output of the repository Git object resolver.",
+        "prevention_control": "Contract Git object fields are populated only from machine resolver output; the next correction tranche carries this as an explicit fail-closed boundary.",
+        "evidence_paths": [
+          "orchestration_harness/git_object_resolution.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/contract.json",
+          "docs/ariadne-agent-error-correction-register-revision-609.md"
+        ]
+      },
+      "baton_summary": "records and corrects the caller-authored planning-source object identity and requires machine resolution for future contract bindings."
+    },
+    {
+      "attempt_key": "source-reconciliation-incident-0909",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "source-reconciliation-direct-script-import-path",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_python_cli",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A repository controller invoked directly by path can import its repository-owned packages before performing its check.",
+      "observed_error": "The first direct CLI check raised ModuleNotFoundError for scripts while the pytest import path remained valid.",
+      "detection_method": "The direct process-free check stopped before evidence generation and the corrected direct invocation exited zero.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-609.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.direct_script_missing_repository_import_path_binding",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the repository root before importing the repository scripts package and rerun the direct check.",
+        "prevention_control": "Directly executable repository controllers establish their import root before package imports and retain a direct-CLI verification path.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-609.md"
+        ]
+      },
+      "baton_summary": "records and corrects the direct-controller repository import-path binding."
+    },
+    {
+      "attempt_key": "source-reconciliation-incident-0910",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "source-reconciliation-markdown-soft-wrap-tests",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Plan-prose assertions normalize Markdown soft wrapping without changing source-owned compound terms.",
+      "observed_error": "Two first-draft assertions used normalization that removed compound hyphens and therefore mismatched the plan's source-owned wording.",
+      "detection_method": "The focused suite reported only the two plan-prose assertion mismatches before evidence generation.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-609.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.plan_prose_soft_wrap_normalization_removed_compound_hyphen",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Normalize whitespace only, preserve compound hyphens and rerun the focused suite.",
+        "prevention_control": "Prose tests collapse Markdown whitespace while preserving punctuation unless punctuation itself is explicitly outside the contract.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-609.md"
+        ]
+      },
+      "baton_summary": "records and corrects Markdown soft-wrap normalization that removed source-owned compound hyphens."
+    }
+  ]
+}
