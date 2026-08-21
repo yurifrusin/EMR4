@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "protected_ref_source", "attempt", "limits", "components", "startup_lineage", "clockwork_reading", "decision", "ordinary_practice_boundary"],
+  "properties": {
+    "schema_version": {"const": "ariadne.synthetic_native_worker_attempt_005_readiness_contract.v1"},
+    "operation_id": {"const": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "protected_ref_source": {"const": "2e34bdad732fdab32fbf778280b3d3c70d66d602"},
+    "attempt": {"type": "object", "additionalProperties": false, "required": ["operation_id", "attempt_id", "work_order_id", "lease_id", "root", "owned_path", "preset", "profile", "model", "reasoning_effort", "allowed_tools"], "properties": {
+      "operation_id": {"const": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005"},
+      "attempt_id": {"const": "deepseek-native-synthetic-window-worker-005"},
+      "work_order_id": {"const": "wo-synthetic-native-window-worker-005"},
+      "lease_id": {"const": "lease-synthetic-native-window-worker-005"},
+      "root": {"const": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-synthetic-window-worker-005"},
+      "owned_path": {"const": "synthetic_window_coalescer.py"},
+      "preset": {"const": "emr4-bounded-worker"},
+      "profile": {"const": "headless"},
+      "model": {"const": "deepseek-v4-flash"},
+      "reasoning_effort": {"const": "high"},
+      "allowed_tools": {"const": ["edit", "glob", "read"]}
+    }},
+    "limits": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+    "components": {"type": "object", "minProperties": 16, "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+    "startup_lineage": {"type": "array", "minItems": 15, "maxItems": 15, "items": {"type": "object", "additionalProperties": false, "required": ["role", "path", "sha256"], "properties": {"role": {"type": "string", "minLength": 1}, "path": {"type": "string", "minLength": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}}},
+    "clockwork_reading": {"type": "object"},
+    "decision": {"type": "object"},
+    "ordinary_practice_boundary": {"const": "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting"}
+  }
+}
