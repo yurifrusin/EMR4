@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.pushover_closeout_receipt.v1",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+  "sent_at": "2026-08-21T19:06:42.3669653+10:00",
+  "status": "passed",
+  "provider_status": 1,
+  "request": "48b72e84-e2c8-475d-8c26-21663ddc1023",
+  "continuing": true,
+  "next_operation": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
+  "non_phi": true
+}

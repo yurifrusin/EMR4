@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Perform a provider-free process-free attempt-005 readiness decision, bind every accepted repair and consumed predecessor, and open no occupied process unless a later separately checkpointed operation is frozen.
+> Rehydrate, resolve the exact full source, freeze a fresh clockwork checkpoint and admit at most one occupied attempt-005 process under the established one-request/no-retry envelope.
 
 ## North star
 
@@ -510,30 +510,34 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One canonical static pass traced the exit to the frozen empty headless task without another Harness or provider process. Lineage parent: `deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof`.
 247. **Remove the final diagnosed pre-worker startup defect before another occupied DeepSeek attempt — Native Harness inert-task stock-readiness proof**
    One canonical provider-free process reached stock-headless readiness with the mandatory inert task and complete cleanup. Lineage parent: `deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis`.
+248. **Convert the accepted startup repair chain into one exact fail-closed worker-attempt envelope — Native Harness attempt 005 deterministic readiness decision**
+   The current repaired native-Harness composition is deterministically representable for one separately checkpointed attempt 005 with zero process activity. Lineage parent: `deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof`.
 
 ## Current position
 
-**Decide whether the repaired native Harness stack can safely support one fresh bounded occupied attempt — Native Harness inert-task stock-readiness proof**
+**Checkpoint and consume at most one traceable native DeepSeek worker attempt — Native Harness attempt 005 deterministic readiness decision**
 
-**Why this proof came next:** Stock readiness now passes with the exact mandatory task shape, while attempts 001 through 004 remain consumed and the runner/provider path still requires a fresh identity and envelope.
+**Why this proof came next:** The stock readiness proof and process-free attempt-005 decision both pass, while all previous worker attempts remain consumed and non-resumable.
 
-A process-free readiness decision will either freeze one exact attempt-005 envelope or reject it without launching Node, Harness, broker, worker, model or provider activity.
+A fresh preexecution checkpoint will either admit one exact occupied attempt-005 process or fail closed before Node, broker, model or provider activity.
 
 ### What this unlocks
 
-- A grounded decision about one separately checkpointed native DeepSeek worker attempt 005.
-- Exact reuse of the accepted startup repairs and broker clockwork without reopening consumed attempts.
+- One traceable bounded DeepSeek worker opportunity using the repaired runner and broker composition.
+- Direct evidence of whether the Harness reaches runner HMR and one model-requested edit after the startup repairs.
 
 ### What it does not solve
 
-- No occupied worker or provider request in the readiness tranche.
-- No product, patient or clinical data and no production suitability.
-- No automatic retry or generic Harness reliability claim.
+- No retry, second worker or generic reliability claim.
+- No product, patient, clinical or historical data and no product runtime.
+- No deployment, release, Pages or protected-ref authority.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
+- Bounded opening `model-runtime`: At most one fresh native Harness model-runtime attempt 005 after a separate latch, full rehydration, exact source resolution and clockwork checkpoint.
+- Bounded opening `provider-call`: At most one DeepSeek provider request inside the same consumed attempt-005 envelope, with zero retry, resume, fallback or auxiliary model.
+- All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `pii`, `production`, `protected-evidence`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
 
@@ -1323,6 +1327,7 @@ Prerequisites:
 - `docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002-failed-closed-closeout.md`
 - `docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-failed-closed-closeout.md`
 - `docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004-closeout.md`
+- `docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-closeout.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-closeout.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-design.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`
@@ -2016,7 +2021,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2226,6 +2230,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-packet.md`
@@ -2731,6 +2736,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/occupied-lifecycle-evidence.json`
 - `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/product-runtime-envelope.json`
 - `orchestration/continuity/raisa-agent-execution-surface-containment-gate-aes-c5/product-runtime-envelope.schema.json`
+- `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/deterministic-evidence.json`
 - `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-terminal.json`
 - `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/efficacy-reading.json`
 - `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/efficacy-reading.json`
@@ -3658,4 +3664,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 352; continuity graph revision 370._
+_Compass map revision 353; continuity graph revision 371._

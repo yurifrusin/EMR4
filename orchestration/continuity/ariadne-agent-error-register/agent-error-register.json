@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 593,
+  "register_revision": 594,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -31684,6 +31684,409 @@
       },
       "incident_id": "AER-0809",
       "attempt_id": "clock-eecb05127480e09ad92ab9d0",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "role": "orchestrator",
+      "resource_id": "powershell-read-only-inventory",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_powershell_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Read-only inventory commands must use syntactically valid PowerShell collection and pipeline forms.",
+      "observed_error": "Two foreach expressions were piped directly after their closing braces and PowerShell rejected each as an empty pipeline element.",
+      "detection_method": "PowerShell parser errors occurred before output, file mutation, test execution or process launch.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/verification-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-594.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_foreach_expression_piped_as_empty_element",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Assign each foreach result to a rows variable before piping the variable to JSON conversion.",
+        "prevention_control": "Use the rows-assignment inventory template for every future PowerShell foreach projection.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-594.md"
+        ]
+      },
+      "incident_id": "AER-0810",
+      "attempt_id": "clock-5e525ec7c13b02dbcd3566e4",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "role": "orchestrator",
+      "resource_id": "process-free-source-self-audit",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A source self-audit must not embed the exact forbidden tokens it searches for or count its own assertion token.",
+      "observed_error": "The first guard matched its own forbidden literals; the first correction missed the equivalent subprocess-run count token and caused a second focused failure.",
+      "detection_method": "Two serial focused pytest runs failed closed before evidence acceptance, with every process/provider activity counter zero.",
+      "evidence_paths": [
+        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/verification-evidence.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.source_self_audit_embedded_its_own_forbidden_token",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Construct every launcher, provider, credential and subprocess-run comparison token from fragments.",
+        "prevention_control": "Self-auditing source checks use fragmented comparison constants and a passing focused regression test.",
+        "evidence_paths": [
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py"
+        ]
+      },
+      "incident_id": "AER-0811",
+      "attempt_id": "clock-ee998e3b04cca7f05bf9837c",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "role": "orchestrator",
+      "resource_id": "applicable-startup-lineage-test-selector",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A successor packet must exclude immutable equality selectors superseded by explicitly accepted repair descendants.",
+      "observed_error": "The first widened packet included two controller-convergence selectors fixed to the pre-repair controller digest.",
+      "detection_method": "The 77-test packet passed 75 tests and failed only the two historical accepted-component equality selectors.",
+      "evidence_paths": [
+        "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-historical-test-selection.md",
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/verification-evidence.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_packet_included_superseded_controller_equality_selectors",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Freeze the two-selector applicability boundary and rerun every other current startup-lineage test.",
+        "prevention_control": "The attempt-005 execution packet consumes the committed historical selection document instead of reconstructing exclusions.",
+        "evidence_paths": [
+          "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-historical-test-selection.md"
+        ]
+      },
+      "incident_id": "AER-0812",
+      "attempt_id": "clock-454f5ba36cf5e2954963db4b",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "role": "orchestrator",
+      "resource_id": "clockwork-authorized-opening-shape",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every non-empty continuity authorized opening must use the typed boundary-and-source object shape.",
+      "observed_error": "The first closeout intent represented the exact successor opening as a free string.",
+      "detection_method": "The read-only clockwork check rejected at tick_transaction_prepare with authorized_opening_object_required before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-001-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-594.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_authorized_opening_authored_as_free_string",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the string with a typed boundary, repository source and exact one-attempt scope object.",
+        "prevention_control": "Non-empty clockwork authorized openings are copied from the continuity graph opening schema before the next dry check.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0813",
+      "attempt_id": "clock-8363b1cc3b6a6b1386c086d1",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "role": "orchestrator",
+      "resource_id": "clockwork-authorized-opening-vocabulary",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every typed continuity authority opening must use an existing closed-boundary identifier.",
+      "observed_error": "The second closeout draft used a structurally valid but newly coined boundary name outside the graph vocabulary.",
+      "detection_method": "The read-only clockwork check rejected at tick_transaction_prepare with authorized_opening_boundary_unknown before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-002-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-594.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_authorized_opening_used_unknown_boundary_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the coined name with the existing model-runtime and provider-call boundaries and retain the exact one-attempt scopes.",
+        "prevention_control": "Select every non-empty authority opening boundary from the live graph governance closed-boundaries list before dry check.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0814",
+      "attempt_id": "clock-2fc8b82649475451a4441c29",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "role": "orchestrator",
+      "resource_id": "clockwork-successor-protected-boundaries",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every successor latch must retain each canonical closed-surface boundary required by the baton consistency control, even when a narrower companion boundary is also present.",
+      "observed_error": "The first published successor latch retained the narrow authored-synthetic data boundary but omitted the canonical general no-product-data boundary required by the standing consistency test.",
+      "detection_method": "The final postpublication governance assertion failed closed; the clockwork generation was rolled back byte-exactly before any attempt-005 preparation, Harness process or provider request.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-postpublication-attempt-001-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-594.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_latch_omitted_canonical_closed_surface_boundary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Retain the narrow authored-synthetic boundary and add the exact canonical no-product-data boundary before republishing.",
+        "prevention_control": "Run the focused current-baton closed-surface assertion against the prepared successor generation before clockwork publication.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0815",
+      "attempt_id": "clock-d1fa10c99d365e1a7c6ce392",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "role": "orchestrator",
+      "resource_id": "readiness-clockwork-nonreuse-regression",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The readiness regression must recompute the stored clockwork reading only while its exact generation and lease remain live.",
+      "observed_error": "The first postrollback regression used operation identity alone as the recomputation condition, so the restored readiness latch attempted to reuse its consumed lease-116 reading after the pointer advanced to lease 118.",
+      "detection_method": "The focused pytest run failed closed with clockwork_reading_mismatch and no Node, Harness, broker, provider or network process.",
+      "evidence_paths": [
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
+        "docs/ariadne-agent-error-correction-register-revision-594.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.nonreusable_clockwork_reading_guard_used_operation_identity_only",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Require exact generation and lease equality before recomputation; otherwise verify only the immutable stored evidence and the monotonic later lease or successor checkpoint.",
+        "prevention_control": "Every regression for a declared non-reusable reading gates recomputation on the reading's exact generation and lease, not merely the operation identifier.",
+        "evidence_paths": [
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py"
+        ]
+      },
+      "incident_id": "AER-0816",
+      "attempt_id": "clock-df95f5764dfc8d93f1fcda83",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "role": "orchestrator",
+      "resource_id": "readiness-test-clockwork-pointer-coordinate",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A regression must consume the exact exported clockwork-root coordinate supplied by its subject module.",
+      "observed_error": "The first generation-and-lease guard referenced an invented CLOCKWORK_CURRENT_PATH attribute instead of the existing CLOCKWORK_ROOT/current.json coordinate.",
+      "detection_method": "The focused pytest run failed closed with AttributeError before deterministic recomputation, Harness startup or provider activity.",
+      "evidence_paths": [
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
+        "docs/ariadne-agent-error-correction-register-revision-594.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.regression_invented_clockwork_pointer_constant",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the subject module's existing CLOCKWORK_ROOT joined with current.json.",
+        "prevention_control": "Before adding a cross-module regression coordinate, resolve and reuse an actually exported constant from the subject source.",
+        "evidence_paths": [
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py"
+        ]
+      },
+      "incident_id": "AER-0817",
+      "attempt_id": "clock-364fd8bb654f278ed1c14c51",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "role": "orchestrator",
+      "resource_id": "readiness-verification-count-assertions",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "When a regression is added to the focused and widened packets, its evidence counts and the assertions binding those counts must advance together.",
+      "observed_error": "The verification evidence advanced from 9/75 to 10/76 but the paired binding test still asserted the old counts.",
+      "detection_method": "The widened pytest packet failed only on the stale focused-count assertion after all preceding selectors passed.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/verification-evidence.json",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
+        "docs/ariadne-agent-error-correction-register-revision-594.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.verification_evidence_count_updated_without_paired_assertion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Update the paired assertions to 10 and 76 and search the tranche paths for every stale 9/75 literal before rerun.",
+        "prevention_control": "Treat verification count fields and their exact binding assertions as one mechanical edit set.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/verification-evidence.json",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py"
+        ]
+      },
+      "incident_id": "AER-0818",
+      "attempt_id": "clock-14f9f3551a82e8497f180887",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "role": "orchestrator",
+      "resource_id": "clockwork-incident-vocabulary-admission",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every incident observation must use the clockwork register's closed stage and candidate-state vocabularies before its source commit is frozen.",
+      "observed_error": "The first correction source used descriptive postpublication_verification, postrollback_verification and canonical_rolled_back values outside the admitted vocabulary.",
+      "detection_method": "The read-only clockwork dry check rejected at tick_incident_stage with zero publication and no Harness/provider activity.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-003-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-594.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_incident_used_unadmitted_stage_and_candidate_state",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Map all closeout follow-up observations to the admitted closeout stage and canonical_unchanged or accepted_candidate_changed states, then run intent validation before commit.",
+        "prevention_control": "Validate the complete incident-bearing intent against the clockwork schema before freezing its Git source.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0819",
+      "attempt_id": "clock-1d830ccc96096c45203bf2aa",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "role": "orchestrator",
+      "resource_id": "clockwork-incident-register-revision-projection",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The incident revision note must use the clockwork-projected next register revision, independent of how many incidents the tick contains or how many unpublished drafts preceded it.",
+      "observed_error": "The correction drafts advanced the human revision filename once per added observation even though one clockwork tick advances the canonical register revision only once, from 593 to 594.",
+      "detection_method": "The read-only clockwork check rejected at tick_incident_revision_path with zero publication and no Harness/provider activity.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-004-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-594.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.incident_note_revision_advanced_per_observation_instead_of_per_tick",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the complete incident batch to the machine-projected next revision 594 and retain all new IDs in that single note.",
+        "prevention_control": "Derive the human revision-note path from the prospective register projection, never from incident count or draft count.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "docs/ariadne-agent-error-correction-register-revision-594.md"
+        ]
+      },
+      "incident_id": "AER-0820",
+      "attempt_id": "clock-be75cb767687b0cbac7fb90e",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

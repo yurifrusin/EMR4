@@ -1,0 +1,31 @@
+{
+  "schema_version": "ariadne.clockwork_postpublication_verification.v1",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+  "verified_at": "2026-08-21T19:06:42.3669653+10:00",
+  "source_commit": "5f9a207df5e237ec63c8ed3ac3507adfb7d8c319",
+  "generation_id": "gen-f787cbfcebea079a6d554ea9f3805a64fe2e9425c07a9bed3fdcddf228acadae",
+  "lease_sequence": 119,
+  "continuity_revision": 371,
+  "compass_revision": 353,
+  "agent_error_register_revision": 594,
+  "incident_count": 820,
+  "open_incident_count": 0,
+  "checks": {
+    "prepared_successor_boundary_projection": "passed",
+    "postpublication_readiness_and_boundary_regression": "passed",
+    "full_live_governance_packet": "passed",
+    "idempotent_clockwork_readback": "passed",
+    "canonical_drift": 0,
+    "task_origin_alignment": "passed",
+    "protected_ref_alignment": "passed"
+  },
+  "activity": {
+    "attempt_005_preparation_count": 0,
+    "native_harness_process_count": 0,
+    "provider_request_count": 0,
+    "retry_count": 0
+  },
+  "result": "passed",
+  "next_operation": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
+  "user_attention_required": false
+}

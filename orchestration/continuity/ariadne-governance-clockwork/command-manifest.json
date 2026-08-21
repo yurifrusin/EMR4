@@ -2,39 +2,48 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "inert_task_readiness_applicable_tests",
+      "command_id": "attempt_005_readiness_focused_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "pytest",
         "-q",
-        "tests/test_deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py",
-        "tests/test_deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py",
-        "tests/test_deepseek_native_harness_provider_free_post_sentinel_pre_stock_readiness_exit_coordinate_diagnosis.py"
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "inert_task_readiness_ruff",
+      "command_id": "attempt_005_readiness_applicable_startup_tests",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
+        "tests/test_raisa_authored_synthetic_native_harness_bounded_worker_attempt_004_readiness_and_preexecution_decision.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py",
+        "tests/test_deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py",
+        "tests/test_deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py",
+        "tests/test_deepseek_native_harness_provider_free_sentinel_source_escape_repair.py",
+        "tests/test_deepseek_native_harness_provider_free_post_sentinel_pre_stock_readiness_exit_coordinate_diagnosis.py",
+        "tests/test_deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py",
+        "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py",
+        "--deselect",
+        "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py::test_deterministic_evidence_launches_no_subprocess",
+        "--deselect",
+        "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py::test_contract_evidence_and_report_are_current"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "attempt_005_readiness_static_checks",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_engine.py",
-        "scripts/deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py",
-        "tests/test_deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required"
-    },
-    {
-      "command_id": "inert_task_readiness_compile",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "py_compile",
-        "scripts/deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_engine.py",
-        "scripts/deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py"
+        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }
