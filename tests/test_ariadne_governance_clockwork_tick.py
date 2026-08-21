@@ -37,6 +37,8 @@ from orchestration_harness.governance_clockwork_tick import (
     validate_tick_intent,
     validate_tick_live_state,
     validate_user_decision_tick_intent,
+    _compact_rendered_baton,
+    _load_baton_compaction_manifest,
 )
 from orchestration_harness.governance_live_adoption import (
     CANONICAL_KEYS,
@@ -346,6 +348,47 @@ def test_plan_and_intent_freeze_the_unrepeated_successor() -> None:
     }]
     assert manifest["next_operation"]["operation_id"] == "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture"
     assert "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting" in intent["next_operation_protected_boundaries"]
+
+
+def _rolling_slot_baton() -> str:
+    return (ROOT / "AGENTS.md").read_text(encoding="utf-8").replace(
+        "| DeepSeek native Harness authored-synthetic traceability micro-rehearsal acceptance |",
+        "| Current DeepSeek native Harness acceptance |",
+        1,
+    )
+
+
+def test_clockwork_compacts_the_rendered_baton_from_the_closed_index() -> None:
+    manifest = _load_baton_compaction_manifest(ROOT)
+    compacted = _compact_rendered_baton(
+        _rolling_slot_baton(),
+        manifest,
+        acceptance_label="Current DeepSeek native Harness acceptance",
+    )
+    assert len(compacted.encode("utf-8")) < 80_000
+    assert len(compacted.splitlines()) < 500
+    assert compacted.count("| Current DeepSeek native Harness acceptance |") == 1
+    assert "| DeepSeek native Harness authored-synthetic traceability micro-rehearsal acceptance |" not in compacted
+    assert compacted.count("| Current Baton acceptance index |") == 1
+    assert compacted.count("| Current clockwork relation |") == 1
+
+
+def test_clockwork_compaction_rejects_an_unindexed_live_row() -> None:
+    manifest = _load_baton_compaction_manifest(ROOT)
+    hostile = _rolling_slot_baton().replace(
+        "### Compact historical evaluation and transition state",
+        "| Unregistered future acceptance | caller-authored |\n"
+        "### Compact historical evaluation and transition state",
+        1,
+    )
+    with pytest.raises(
+        ClockworkTickRejection, match="tick_baton_compaction_unindexed"
+    ):
+        _compact_rendered_baton(
+            hostile,
+            manifest,
+            acceptance_label="Current DeepSeek native Harness acceptance",
+        )
 
 
 def test_intent_rejects_derived_unsafe_and_underbounded_input() -> None:

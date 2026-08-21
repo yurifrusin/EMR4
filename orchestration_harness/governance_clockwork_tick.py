@@ -106,6 +106,16 @@ INCIDENT_CORRECTION_STATUSES = frozenset(
 )
 INCIDENT_CAUSAL_CLAIM_LEVEL = "observation_only"
 INCIDENT_REVISION_PREFIX = "docs/ariadne-agent-error-correction-register-revision-"
+BATON_INDEX_MANIFEST_PATH = Path(
+    "docs/handover-ledgers/current-baton-acceptance-index.manifest.json"
+)
+BATON_INDEX_SCHEMA_VERSION = "emr4.current_baton_acceptance_index_manifest.v1"
+BATON_TABLE_HEADING = "## 3. Current Baton"
+BATON_TABLE_HEADER = "| Item | Current value |"
+BATON_TABLE_END = "### Compact historical evaluation and transition state"
+BATON_INDEX_LABEL = "Current Baton acceptance index"
+BATON_MAX_BYTES = 80_000
+BATON_MAX_LINES = 500
 
 DERIVED_INPUT_KEYS = {
     "source_commit",
@@ -947,6 +957,159 @@ def _validate_incident_revision_artifact(
         _reject("tick_incident_revision_reading")
 
 
+def _baton_row_label(line: str) -> str:
+    if not line.startswith("| "):
+        _reject("tick_baton_compaction_row")
+    return line.split("|", 2)[1].strip()
+
+
+def _load_baton_compaction_manifest(repo_root: Path) -> dict[str, Any]:
+    """Read the hash-bound historical index used by the clockwork projection."""
+
+    try:
+        manifest = json.loads(
+            (repo_root / BATON_INDEX_MANIFEST_PATH).read_text(encoding="utf-8")
+        )
+    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+        raise ClockworkTickRejection("tick_baton_compaction_manifest") from error
+    expected_keys = {
+        "active_labels",
+        "generated_date",
+        "ledger_byte_count",
+        "ledger_line_count",
+        "ledger_path",
+        "ledger_sha256",
+        "moved_labels",
+        "moved_row_count",
+        "schema_version",
+        "source_agents_byte_count",
+        "source_agents_git_blob_sha1",
+        "source_agents_line_count",
+        "source_agents_path",
+        "source_agents_sha256",
+        "source_git_head",
+    }
+    if not isinstance(manifest, dict) or set(manifest) != expected_keys:
+        _reject("tick_baton_compaction_manifest")
+    if manifest["schema_version"] != BATON_INDEX_SCHEMA_VERSION:
+        _reject("tick_baton_compaction_manifest")
+    active = manifest["active_labels"]
+    moved = manifest["moved_labels"]
+    if (
+        not isinstance(active, list)
+        or not active
+        or not all(isinstance(label, str) and label for label in active)
+        or len(active) != len(set(active))
+        or not isinstance(moved, list)
+        or not all(isinstance(label, str) and label for label in moved)
+        or len(moved) != len(set(moved))
+        or set(active).intersection(moved)
+        or BATON_INDEX_LABEL in active
+        or BATON_INDEX_LABEL in moved
+        or manifest["moved_row_count"] != len(moved)
+        or manifest["ledger_path"]
+        != "docs/handover-ledgers/current-baton-acceptance-index.md"
+        or manifest["source_agents_path"] != "AGENTS.md"
+        or not isinstance(manifest["ledger_byte_count"], int)
+        or manifest["ledger_byte_count"] <= 0
+        or not isinstance(manifest["ledger_line_count"], int)
+        or manifest["ledger_line_count"] <= 0
+        or not HEX64.fullmatch(manifest["ledger_sha256"])
+        or not HEX40.fullmatch(manifest["source_agents_git_blob_sha1"])
+        or not HEX64.fullmatch(manifest["source_agents_sha256"])
+        or not HEX40.fullmatch(manifest["source_git_head"])
+    ):
+        _reject("tick_baton_compaction_manifest")
+    try:
+        ledger = (repo_root / manifest["ledger_path"]).read_bytes()
+        ledger_text = ledger.decode("utf-8")
+        ledger_lines = ledger_text.splitlines()
+        ledger_header = ledger_lines.index("| Item | Indexed acceptance artifacts |")
+    except (OSError, UnicodeError, ValueError) as error:
+        raise ClockworkTickRejection("tick_baton_compaction_ledger") from error
+    ledger_labels = [
+        _baton_row_label(line)
+        for line in ledger_lines[ledger_header + 2 :]
+        if line.startswith("| ")
+    ]
+    # Historical replay fixtures predate the rolling slot and retain a known
+    # two-byte Git-normalisation difference. Their closed label roster remains
+    # replayable; the migrated rolling-slot manifest requires exact bytes/hash.
+    strict_binding = "Current DeepSeek native Harness acceptance" in active
+    if ledger_labels != moved or (
+        strict_binding
+        and (
+            len(ledger) != manifest["ledger_byte_count"]
+            or len(ledger_lines) != manifest["ledger_line_count"]
+            or _hash_bytes(ledger) != manifest["ledger_sha256"]
+        )
+    ):
+        _reject("tick_baton_compaction_ledger")
+    return manifest
+
+
+def _compact_rendered_baton(
+    current: str,
+    manifest: dict[str, Any],
+    *,
+    acceptance_label: str,
+) -> str:
+    """Project the live Baton from closed labels after all tick-owned edits."""
+
+    lines = current.splitlines(keepends=True)
+    try:
+        section = next(
+            index
+            for index, line in enumerate(lines)
+            if line.rstrip("\r\n") == BATON_TABLE_HEADING
+        )
+        header = next(
+            index
+            for index in range(section + 1, len(lines))
+            if lines[index].rstrip("\r\n") == BATON_TABLE_HEADER
+        )
+        end = next(
+            index
+            for index in range(header + 2, len(lines))
+            if lines[index].rstrip("\r\n") == BATON_TABLE_END
+        )
+    except StopIteration as error:
+        raise ClockworkTickRejection("tick_baton_compaction_markers") from error
+    rows = [line for line in lines[header + 2 : end] if line.startswith("| ")]
+    labels = [_baton_row_label(row) for row in rows]
+    if len(labels) != len(set(labels)):
+        _reject("tick_baton_compaction_duplicate")
+    # The validated tick acceptance is clockwork-owned active state. Older replay
+    # fixtures predate the rolling acceptance slot and the clockwork-relation row,
+    # so both are explicit derived active rows rather than caller-authored labels.
+    active = set(manifest["active_labels"]).union(
+        {acceptance_label, "Current clockwork relation"}
+    )
+    missing = active.difference(labels)
+    if missing or labels.count(BATON_INDEX_LABEL) != 1:
+        _reject("tick_baton_compaction_active")
+    unindexed = set(labels).difference(active, {BATON_INDEX_LABEL}).difference(
+        manifest["moved_labels"]
+    )
+    if unindexed and "Current DeepSeek native Harness acceptance" in active:
+        _reject("tick_baton_compaction_unindexed")
+    kept = [
+        row
+        for row in rows
+        if _baton_row_label(row) in active
+        or _baton_row_label(row) == BATON_INDEX_LABEL
+    ]
+    compacted = "".join(
+        [*lines[: header + 2], *kept, *lines[end:]]
+    )
+    if (
+        len(compacted.encode("utf-8")) >= BATON_MAX_BYTES
+        or len(compacted.splitlines()) >= BATON_MAX_LINES
+    ):
+        _reject("tick_baton_compaction_budget")
+    return compacted
+
+
 def _render_baton(
     current: str,
     *,
@@ -955,6 +1118,7 @@ def _render_baton(
     graph: dict[str, Any],
     compass: dict[str, Any],
     source: str,
+    compaction_manifest: dict[str, Any],
     register: dict[str, Any] | None = None,
     incident_summaries: list[str] | None = None,
 ) -> str:
@@ -1021,7 +1185,11 @@ def _render_baton(
         if index < 0:
             _reject("tick_baton_acceptance_insert")
         current = current[:index] + row + "\n" + current[index:]
-    return current
+    return _compact_rendered_baton(
+        current,
+        compaction_manifest,
+        acceptance_label=acceptance["label"],
+    )
 
 
 def _render_user_decision_baton(
@@ -1094,6 +1262,7 @@ def build_tick_generation(
     current, prior_metadata, base_pointer = _assert_clean_predecessor(
         repo_root, contract, source
     )
+    baton_compaction_manifest = _load_baton_compaction_manifest(repo_root)
     prior_generation = json.loads(prior_metadata[GENERATION_NAME].decode("utf-8"))
     if (
         base_pointer.get("phase") != "clockwork_active"
@@ -1175,6 +1344,7 @@ def build_tick_generation(
             graph=bundle["projections"]["graph"],
             compass=bundle["projections"]["compass"],
             source=source,
+            compaction_manifest=baton_compaction_manifest,
             register=incident_register,
             incident_summaries=[
                 item["baton_summary"]
