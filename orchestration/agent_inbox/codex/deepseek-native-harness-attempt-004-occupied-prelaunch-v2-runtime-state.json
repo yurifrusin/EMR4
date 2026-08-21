@@ -1,0 +1,191 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "execute_exactly_one_checkpointed_attempt_004_native_harness_process_and_terminalize_without_retry_resume_fallback_or_second_worker",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete five-source successor rehydration, published lease-105 checkpoint, clean origin-aligned Git snapshot and zero-process prelaunch reading",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md controls and identifies the checkpointed attempt 004 occupied run as the exact next stage.",
+    "current_authority_allocation": "DeepSeek Flash owns exactly one occupied authored-synthetic edit. GPT Sol owns serial launch monitoring, terminalization and cleanup. Gemini remains reserved after terminalization; native subagents are declined.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision-plan.md",
+      "docs/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-attempt-004-readiness-sol-acceptance.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-004-sol-deterministic-admission-receipt.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/occupied-preexecution-checkpoint.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/clockwork-checkpoint-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "One checkpointed attempt-004 process, session, turn, provider request and model tool call is the entire occupied authority. It has no retry, resume, fallback, second worker, product, data, database, deployment, Pages or protected-ref authority and must terminalize outside the disposable root before cleanup.",
+    "git_refs_and_worktree": "The machine snapshot alone owns exact Git identities and verifies the task branch is origin-aligned, four protected refs are exact, the tracked worktree is clean and unrelated untracked files including docs/branding remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004",
+    "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker attempt 004",
+    "objective": "Under a fresh post-closeout clockwork checkpoint, execute exactly one bounded rc.7 native DeepSeek Harness session against the accepted authored-synthetic one-file task through the converged structured-diagnostic controller and broker; retain only bounded terminal evidence and stop on every failure without retry.",
+    "status": "in_progress",
+    "source_head": "905b1829f5e85c3cbba440e80a48553b6a548452",
+    "authority_source": "Yuri's explicit new-attempt confirmation and standing uninterrupted-development authority, constrained by the accepted attempt-004 readiness result.",
+    "checkpoint": {
+      "completed_stage": "Attempt 004 passed fresh five-source rehydration, exact zero-provider deterministic admission and preparation. Its distinct synthetic root, pinned rc.7 package, preset, edit/glob/read projection, WorkOrder and structured-diagnostic gear are bound. Attempts 001-003 remain consumed; zero processes and provider requests occurred. The one-process, one-request, one-tool-call, zero-retry checkpoint is admitted.",
+      "next_executable_stage": "generate_a_fresh_five_source_attempt_004_occupied_prelaunch_receipt_then_run_exactly_one_deepseek_native_harness_authored_synthetic_edit_through_the_structured_diagnostic_controller_without_retry_resume_fallback_or_second_worker",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "exactly_one_fresh_attempt_004_native_harness_process_session_and_turn",
+      "at_most_one_deepseek_provider_request_and_one_model_tool_call",
+      "fresh_machine_resolved_full_git_source_and_post_closeout_clockwork_checkpoint_required",
+      "attempts_001_002_003_and_all_historical_evidence_remain_immutable_and_consumed",
+      "attempt_004_identity_work_order_lease_preset_task_broker_and_terminal_contract_remain_exact",
+      "zero_automatic_retries_resumes_fallbacks_or_second_workers",
+      "terminal_written_outside_exact_disposable_root_before_cleanup",
+      "no_raw_prompt_response_reasoning_credentials_or_startup_stream_retention",
+      "existing_user_controlled_prepaid_deepseek_balance_only_and_no_balance_top_up",
+      "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004",
+    "assessed_stage": "attempt_004_occupied_prelaunch",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "rationale": "It owns the exact one-session attempt-004 authored-synthetic edit now that deterministic admission and lease-105 checkpoint have passed.",
+        "work_packages": [
+          "one attempt-004 authored-synthetic literal edit"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "neutral",
+        "rationale": "It has no prelaunch package; reassess after the immutable occupied terminal if a candidate survives and a provider veto remains proportionate.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and the one-identity occupied run plus terminalization must remain serial.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "one prelaunch receipt before launch",
+      "one occupied process before terminalization",
+      "terminal write before exact-root cleanup",
+      "postterminal assessment only after cleanup"
+    ],
+    "reassessment_triggers": [
+      "occupied_attempt_terminalizes"
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "GPT Sol owns serial monitoring and terminalization."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected; the native Harness owns this occupied run."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Reserved after terminalization and not called prelaunch."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No native subagent spawned."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": [
+        "Pinned rc.7 package and structured-diagnostic wrapper are materialized in the exact disposable root."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
