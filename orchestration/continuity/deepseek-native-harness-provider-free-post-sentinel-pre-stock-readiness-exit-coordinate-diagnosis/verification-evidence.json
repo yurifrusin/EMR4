@@ -1,0 +1,59 @@
+{
+  "schema_version": "ariadne.deepseek_native_harness_post_sentinel_pre_stock_readiness_exit_diagnosis_verification.v1",
+  "candidate_source": "07b371090e0f8efe045f9ff39aab409c74244c1b",
+  "result": "pass",
+  "commands": [
+    {
+      "id": "focused_and_applicable_predecessor_pytest",
+      "result": "pass",
+      "passed": 37,
+      "failed": 0,
+      "historical_selectors_deselected": 4
+    },
+    {
+      "id": "ruff",
+      "result": "pass"
+    },
+    {
+      "id": "py_compile",
+      "result": "pass"
+    },
+    {
+      "id": "git_diff_check",
+      "result": "pass"
+    }
+  ],
+  "historical_selector_boundary": {
+    "deselected": [
+      "repaired_sentinel_native_boot.test_deterministic_check_never_launches_native_process",
+      "repaired_sentinel_native_boot.test_direct_script_check_bootstraps_repository_imports",
+      "preactivation_diagnosis.test_exact_static_diagnosis_names_unique_coordinate",
+      "preactivation_diagnosis.test_failed_author_is_extracted_without_import_or_execution"
+    ],
+    "reason": "These immutable historical selectors intentionally bind the pre-source-repair profile digest or pre-repair sentinel verdict; their retained failures do not apply to the accepted repaired descendant.",
+    "selection_reruns": 2,
+    "targeted_diagnostic_runs": 1
+  },
+  "construction_corrections": [
+    {
+      "coordinate": "profile_shutdown_force_exit_presence_predicate",
+      "outcome": "failed_closed_before_canonical_evidence",
+      "correction": "Require at least one exact force-exit call instead of incorrectly requiring a helper used on several shutdown branches to occur exactly once."
+    },
+    {
+      "coordinate": "raw_stream_nonretention_test",
+      "outcome": "failed_closed_before_canonical_evidence",
+      "correction": "Assert that evidence contains no stream or stderr-digest field while permitting the claim boundary to name stderr non-reconstruction."
+    }
+  ],
+  "activity": {
+    "node_process_count": 0,
+    "harness_process_count": 0,
+    "broker_process_count": 0,
+    "worker_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "network_request_count": 0,
+    "raw_stream_reconstruction_count": 0
+  }
+}

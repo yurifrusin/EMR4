@@ -1,0 +1,184 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_the_hash_bound_post_sentinel_exit_coordinate_before_closeout",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh five-source receipt; frozen static plan/contract; exact pinned rc7 source chain; canonical unique-coordinate evidence; 37 applicable tests; zero Node/Harness/provider activity",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "Continuity 368 / Compass 350 accept one source-repaired sentinel activation followed by native exit before stock readiness and name this process-free diagnosis as next.",
+    "current_authority_allocation": "GPT Sol owns the static diagnosis, plan, evidence and acceptance. DeepSeek, Gemini and native-subagent lanes are declined; no external or native process is admitted.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/diagnosis-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/diagnosis-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/verification-evidence.json"
+    ],
+    "protected_evidence_boundaries": "Read only exact pinned rc7 source and sanitized retained terminal/digests. Preserve the consumed attempt and raw-stream boundary. No protected holdout or historical diary access, raw reconstruction, Node/Harness, worker/model/provider/network, product/data/runtime/deployment/Pages/protected-ref action is admitted.",
+    "git_refs_and_worktree": "Machine evidence must show task/origin alignment, active source ancestry, local/origin master and handoff/current fixed at the protected commit, tracked cleanliness, docs/branding present and every unrelated untracked path preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis",
+    "active_tranche": "DeepSeek native Harness provider-free post-sentinel pre-stock-readiness exit-coordinate diagnosis",
+    "objective": "Perform one provider-free, process-free static diagnosis of the source-repaired rc7 Harness path after sentinel_activated and before stock_headless_hmr_ready, bind the narrowest evidenced exit coordinate or bounded hypotheses from exact pinned source and sanitized retained evidence, preserve the consumed attempt and raw-stream boundary, and launch no Node, Harness, broker, worker, model, provider or network activity.",
+    "status": "in_progress",
+    "source_head": "2585cdae995ce90047d1f9099a36cb379de4f3b4",
+    "authority_source": "Yuri's standing uninterrupted-development authority, constrained by the accepted consumed failed-closed terminal and a static provider-free diagnostic envelope.",
+    "checkpoint": {
+      "completed_stage": "Accepted deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof at the machine-resolved source.",
+      "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_process_free_post_sentinel_exit_coordinate_diagnosis_contract",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_process_free_post_sentinel_exit_coordinate_diagnosis_only",
+      "exact_pinned_dsh_0_1_0_rc_7_source_and_sanitized_retained_evidence_only",
+      "consumed_attempt_terminal_and_stream_digests_remain_immutable",
+      "no_retry_resume_fallback_reclassification_or_second_process",
+      "zero_node_native_harness_broker_worker_model_provider_or_network_process_or_request",
+      "no_raw_stdout_stderr_error_message_stack_path_environment_session_or_credential_reconstruction",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis",
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "A DeepSeek worker/model/provider request violates the process-free diagnostic claim and cannot recover destroyed raw streams.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Provider review is outside the static envelope; exact pinned package source and deterministic evidence are sufficient for the narrow coordinate reading.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and the bounded source/terminal correlation is tightly serial with acceptance judgment.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "freeze exact static inputs before reading package source",
+      "derive only coordinates supported by source and sanitized events",
+      "preserve the consumed terminal and raw-stream non-reconstruction boundary",
+      "launch zero Node/Harness, worker, model, provider or network activity"
+    ],
+    "reassessment_triggers": [
+      "closeout"
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "GPT Sol owns the exact static source/terminal acceptance; the deterministic evidence supports all eight links."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Historical transport only; no worker/model/provider request is admitted."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Gemini provider review is admitted."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No native subagent was spawned; developer policy and serial evidence ownership prohibit delegation."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

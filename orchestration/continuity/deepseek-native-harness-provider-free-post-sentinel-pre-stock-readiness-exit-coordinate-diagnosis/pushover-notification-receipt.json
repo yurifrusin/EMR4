@@ -1,0 +1,11 @@
+{
+  "schema_version": "emr4.non_phi_pushover_notification_receipt.v1",
+  "recorded_at": "2026-08-21T17:13:29.8514555+10:00",
+  "status": "passed",
+  "provider": "pushover",
+  "request": "895c297c-1578-417e-bfaa-c5b6754d3448",
+  "title": "EMR4 Native Harness exit diagnosis",
+  "message_class": "non_phi_operational_closeout",
+  "phi_or_clinical_data": false,
+  "summary": "The sentinel boot exited because its frozen headless launch supplied no required task; eight source links and 37 applicable tests passed with zero Harness/provider activity; a one-process inert-task readiness proof is next."
+}

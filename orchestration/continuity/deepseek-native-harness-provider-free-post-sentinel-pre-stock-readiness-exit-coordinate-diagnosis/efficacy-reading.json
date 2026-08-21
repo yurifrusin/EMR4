@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.workflow_efficacy_reading.v1",
+  "operation_id": "deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis",
+  "result": "promising_with_contained_construction_and_selector_corrections",
+  "outcome": "One canonical static evidence pass identified the exact empty-task startup-to-shutdown path without another Harness, Node or provider attempt.",
+  "useful_work": {
+    "unique_exit_coordinate": true,
+    "exact_source_chain_links": 8,
+    "hostile_mutation_tests": 9,
+    "applicable_verification_tests_passed": 37,
+    "canonical_evidence_generations": 1,
+    "native_processes": 0,
+    "provider_requests": 0
+  },
+  "reruns": [
+    {
+      "kind": "focused_construction_test_rerun",
+      "count": 1,
+      "cause": "One source predicate required a repeated shutdown helper to occur exactly once, while one test prohibited the word stderr even inside the non-reconstruction claim boundary.",
+      "control": "Separate exact unique coordinates from helper-presence predicates and test structural evidence fields rather than unrestricted prose vocabulary."
+    },
+    {
+      "kind": "historical_selector_selection_rerun",
+      "count": 2,
+      "cause": "The first widened selections included four immutable assertions whose purpose is to retain pre-repair digests and verdicts.",
+      "control": "Carry an explicit applicable-selector manifest forward from the accepted source-repair closeout instead of rediscovering historical exclusions during verification."
+    }
+  ],
+  "assessment": "The clockwork remains worthwhile because no draft correction reached canonical evidence, the causal result required one evidence generation, and all executable Harness/provider counts stayed zero. The main remaining workflow inefficiency is test-selection memory: successor closeouts should consume a generated applicability manifest rather than hand-maintained negative selectors."
+}
