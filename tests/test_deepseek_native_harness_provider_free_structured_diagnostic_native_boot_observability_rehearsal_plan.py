@@ -14,6 +14,9 @@ OPERATION_ID = (
 )
 PLAN = ROOT / "docs" / f"{OPERATION_ID}-plan.md"
 THREAT = ROOT / "docs" / "security" / f"{OPERATION_ID}-threat-model-delta.md"
+TEST_SELECTION = (
+    ROOT / "docs" / f"{OPERATION_ID}-historical-equality-test-selection.md"
+)
 CONTINUITY = ROOT / "orchestration" / "continuity" / OPERATION_ID
 CONTRACT = CONTINUITY / "contract.json"
 CONTRACT_SCHEMA = CONTINUITY / "contract.schema.json"
@@ -105,3 +108,11 @@ def test_evidence_schema_and_immutable_attempt_bindings_are_closed() -> None:
     assert all(re.fullmatch(r"[0-9a-f]{64}", row["sha256"]) for row in artifacts)
     assert contract["cleanup_required"] is True
     assert contract["raw_streams_retained"] is False
+
+
+def test_historical_equality_selection_preserves_immutable_evidence() -> None:
+    selection = TEST_SELECTION.read_text(encoding="utf-8")
+    assert "evidence_not_current" in selection
+    assert "historical recovery evidence is immutable" in selection
+    assert "started no Node, Harness, broker, worker, model or provider" in selection
+    assert "direct v1/v2" in selection
