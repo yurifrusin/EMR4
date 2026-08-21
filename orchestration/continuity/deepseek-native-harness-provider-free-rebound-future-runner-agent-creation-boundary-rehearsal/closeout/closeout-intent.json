@@ -54,6 +54,12 @@
           "source": "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md",
           "status": "accepted",
           "summary": "Freeze one distinct provider-free diagnostic transaction with dynamic imports and finite stage/error output; it is not a retry or retroactive acceptance."
+        },
+        {
+          "id": "accept-byte-exact-clockwork-canonical-latch-recovery",
+          "source": "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-clockwork-canonical-latch-recovery.md",
+          "status": "accepted",
+          "summary": "Accept byte-exact restoration of the selected latch generation after the first check rejected manual canonical drift before commands or publication."
         }
       ],
       "claim_scope": [
@@ -70,6 +76,7 @@
           "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-plan.md",
           "docs/security/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-threat-model-delta.md",
           "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-prelaunch-contract-family-recovery.md",
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-clockwork-canonical-latch-recovery.md",
           "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md",
           "docs/security/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-threat-model-delta.md"
         ],
@@ -155,7 +162,8 @@
       {"incident_id": "manual-git-object-in-prepush-receipt", "source_id": "agent-boundary-prepush-receipt-001", "peers": []},
       {"incident_id": "preset-contract-family-prelaunch-stop", "source_id": "agent-boundary-prelaunch-contract-001", "peers": []},
       {"incident_id": "post-hmr-sidecar-free-process-exit", "source_id": "agent-boundary-native-attempt-001", "peers": []},
-      {"incident_id": "failed-result-success-claim-generation", "source_id": "agent-boundary-generated-claims-001", "peers": []}
+      {"incident_id": "failed-result-success-claim-generation", "source_id": "agent-boundary-generated-claims-001", "peers": []},
+      {"incident_id": "manual-canonical-latch-drift", "source_id": "agent-boundary-clockwork-check-001", "peers": []}
     ],
     "broker": {"enabled": false, "posture": "provider_free_shadow"}
   },
@@ -200,6 +208,7 @@
       "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-plan.md",
       "docs/security/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-threat-model-delta.md",
       "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-prelaunch-contract-family-recovery.md",
+      "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-clockwork-canonical-latch-recovery.md",
       "scripts/deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
       "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/contract.json",
       "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/prelaunch-controller-contract-family-failure-001.json",
@@ -382,6 +391,40 @@
         ]
       },
       "baton_summary": "records and rejects the failed-result success overclaim with a typed authoritative interpretation."
+    },
+    {
+      "attempt_key": "agent-boundary-clockwork-check-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-rebound-agent-creation-boundary",
+      "role": "orchestrator",
+      "resource_id": "clockwork-owned-active-operation-latch",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "After live clockwork adoption the active latch and every other canonical governance surface must change only through one passed pointer-last clockwork transaction.",
+      "observed_error": "The orchestrator manually advanced the active latch during prelaunch recovery, so the first closeout check rejected canonical drift before running commands or publishing a projection.",
+      "detection_method": "The clockwork compared live canonical hashes with its selected generation, rejected before mutation and identified the latch as the only changed canonical path.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-clockwork-canonical-latch-recovery.md",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.manual_write_to_clockwork_owned_active_latch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the active latch byte-for-byte to the selected clockwork generation and rerun the same closeout only after that restoration is committed.",
+        "prevention_control": "Continuity, Compass, active latch, error register, pattern report and live baton are exclusive clockwork outputs after adoption; ordinary tranche commits must never edit them.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-clockwork-canonical-latch-recovery.md",
+          "orchestration/continuity/ariadne-governance-clockwork/current.json"
+        ]
+      },
+      "baton_summary": "records the rejected manual canonical-latch drift and exact single-owner restoration."
     }
   ]
 }

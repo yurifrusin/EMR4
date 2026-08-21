@@ -37,6 +37,9 @@ toward giving the orchestrator dependable control of native DeepSeek workers.
   an owner-contract pre-root guard; 28 focused and 205 inherited tests pass.
 - Rejected output: unconditional success prose and factory-control efficacy
   claim, both hash-bound and superseded by the typed failure interpretation.
+- Clockwork recovery: its first check caught a manually edited canonical latch
+  before publication; the selected generation was restored byte-for-byte and
+  canonical transitions are now left exclusively to the clockwork.
 - Next: one separately frozen provider-free closed-subcoordinate diagnostic
   transaction using dynamic imports and a finite failure vocabulary.
 

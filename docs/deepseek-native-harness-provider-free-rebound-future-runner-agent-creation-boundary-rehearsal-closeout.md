@@ -46,6 +46,15 @@ and absent sidecar. Their exact bytes are preserved but their success claims are
 rejected by `rejected-generated-claims.json`; `failure-interpretation.json` is
 the authoritative bounded reading.
 
+## Clockwork ownership recovery
+
+The first closeout check rejected `canonical_drift` before commands or
+publication because the orchestrator had manually edited the live latch during
+prelaunch recovery. The latch is restored byte-for-byte to the selected
+clockwork generation. The corrected closeout now leaves all canonical surfaces
+to the clockwork's single pointer-last transaction; the incident and exact
+prevention rule are preserved in the canonical-latch recovery note.
+
 ## Parallelism efficacy
 
 DeepSeek was correctly declined because its factory boundary was under test.

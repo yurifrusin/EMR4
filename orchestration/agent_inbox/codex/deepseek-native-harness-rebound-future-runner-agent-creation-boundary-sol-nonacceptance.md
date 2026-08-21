@@ -24,6 +24,11 @@ The prelaunch preset-contract-family defect is separately contained by a
 deterministic pre-root owner-contract binding and regression guard. It did not
 consume a native attempt.
 
+The first closeout check also rejected before publication because the active
+latch had been manually advanced after clockwork adoption. I accept only the
+byte-exact restoration to the selected generation and the rule that the
+clockwork exclusively owns all future canonical latch transitions.
+
 Standing authority permits the separately frozen closed-subcoordinate
 diagnostic successor. It grants one new diagnostic transaction, not a retry or
 acceptance of the failed attempt, and preserves every provider, request,
