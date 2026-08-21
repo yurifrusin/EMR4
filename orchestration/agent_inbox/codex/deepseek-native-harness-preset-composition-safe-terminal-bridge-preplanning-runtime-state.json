@@ -1,7 +1,7 @@
 {
   "schema_version": "ariadne.orchestrator_runtime_state.v1",
-  "continuation_event": "pre_push",
-  "planned_action": "push_the_deterministically_verified_safe_terminal_bridge_candidate_to_the_task_branch_only_before_fresh_preexecution_admission",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "execute_exactly_one_distinct_provider_free_safe_terminal_bridge_native_process_and_accept_only_the_frozen_typed_terminal_without_retry",
   "context_health": {
     "agent_contexts": [
       {
@@ -102,7 +102,7 @@
   "parallelism_assessment": {
     "schema_version": "ariadne.parallelism_assessment.v1",
     "operation_id": "deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal",
-    "assessed_stage": "implementation_prepush",
+    "assessed_stage": "fresh_preexecution",
     "lanes": [
       {
         "lane_id": "deepseek_flash",
