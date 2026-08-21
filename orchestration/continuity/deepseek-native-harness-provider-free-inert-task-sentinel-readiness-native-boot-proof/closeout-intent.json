@@ -1,0 +1,370 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof",
+    "title": "DeepSeek native Harness provider-free inert-task sentinel-readiness native boot proof",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-21T17:44:30.1265992+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof",
+      "title": "Native Harness inert-task stock-readiness proof",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted one provider-free rc7 process with one inert authored-synthetic task and no runner or worker.",
+          "The exact attempt is consumed; no retry, resume, fallback, second process or provider request is opened.",
+          "No product, data, deployment, Pages or protected-ref authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-inert-task-stock-readiness-pass",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/provider-free-inert-task-sentinel-readiness-native-boot-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one inert task followed by exact sentinel activation and stock-headless HMR readiness in the sole consumed rc7 process."
+        },
+        {
+          "id": "preserve-pre-worker-claim-boundary",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Treat this as pre-worker Harness readiness only, with no DeepSeek model, worker, product-runtime or longitudinal reliability claim."
+        },
+        {
+          "id": "accept-attempt-005-readiness-decision-next",
+          "source": "docs/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-closeout.md",
+          "status": "accepted",
+          "summary": "Proceed first with a provider-free process-free attempt-005 readiness and preexecution decision before any occupied worker is admitted."
+        },
+        {
+          "id": "accept-contained-readiness-observations",
+          "source": "docs/ariadne-agent-error-correction-register-revision-593.md",
+          "status": "accepted",
+          "summary": "Accept four corrected workflow observations with none open."
+        }
+      ],
+      "claim_scope": [
+        "One exact rc7 process received one inert authored-synthetic task.",
+        "The process emitted sentinel_activated followed by stock_headless_hmr_ready.",
+        "The controller terminated only after readiness and proved exact process and disposable-root absence.",
+        "All runner, broker, worker, model, provider, network, Docker and database counters are zero.",
+        "The result proves pre-worker native Harness readiness only."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/native-attempt-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/provider-free-inert-task-sentinel-readiness-native-boot-terminal.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/provider-free-inert-task-sentinel-readiness-native-boot-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/verification-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preplanning-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-pre-verifier-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_post_sentinel_pre_stock_readiness_exit_coordinate_diagnosis.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_engine.py",
+          "scripts/deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/evidence.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-593.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-inert-task-sentinel-readiness.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The headless runner has not been enabled in this descendant.",
+        "No broker, worker session, DeepSeek request, tool call or candidate edit has occurred.",
+        "A fresh attempt-005 identity and occupied envelope have not yet been admitted.",
+        "No model coding quality or repeated Harness reliability claim is supported."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Remove the final diagnosed pre-worker startup defect before another occupied DeepSeek attempt",
+      "outcome": "One canonical provider-free process reached stock-headless readiness with the mandatory inert task and complete cleanup.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/provider-free-inert-task-sentinel-readiness-native-boot-terminal.json",
+        "docs/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Decide whether the repaired native Harness stack can safely support one fresh bounded occupied attempt",
+      "why_now": "Stock readiness now passes with the exact mandatory task shape, while attempts 001 through 004 remain consumed and the runner/provider path still requires a fresh identity and envelope.",
+      "outcome": "A process-free readiness decision will either freeze one exact attempt-005 envelope or reject it without launching Node, Harness, broker, worker, model or provider activity.",
+      "unlocks": [
+        "A grounded decision about one separately checkpointed native DeepSeek worker attempt 005.",
+        "Exact reuse of the accepted startup repairs and broker clockwork without reopening consumed attempts."
+      ],
+      "does_not_solve": [
+        "No occupied worker or provider request in the readiness tranche.",
+        "No product, patient or clinical data and no production suitability.",
+        "No automatic retry or generic Harness reliability claim."
+      ],
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/provider-free-inert-task-sentinel-readiness-native-boot-terminal.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-sol-acceptance.md"
+      ],
+      "orientation_statement": "Perform a provider-free process-free attempt-005 readiness decision, bind every accepted repair and consumed predecessor, and open no occupied process unless a later separately checkpointed operation is frozen."
+    },
+    "next_operation": {
+      "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "active_tranche": "Raisa authored-synthetic native Harness bounded-worker attempt 005 readiness and preexecution decision",
+      "objective": "Perform one provider-free and process-free deterministic readiness decision for a fresh disjoint native Harness bounded-worker attempt 005: bind consumed attempts 001 through 004 and every accepted startup repair, validate the exact runner, broker, work-order, identity, output and cleanup envelope, and either freeze one separately checkpointed occupied attempt or fail closed without launching Node, Harness, broker, worker, model, provider or network activity.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, constrained by the accepted pre-worker readiness pass and a provider-free process-free readiness-decision envelope.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_attempt_005_readiness_decision_contract"
+    },
+    "incidents": [],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "inert_task_readiness_applicable_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_source_repaired_sentinel_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_post_sentinel_pre_stock_readiness_exit_coordinate_diagnosis.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "inert_task_readiness_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_engine.py",
+          "scripts/deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "inert_task_readiness_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_engine.py",
+          "scripts/deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Native Harness inert-task sentinel-readiness proof acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/evidence.schema.json",
+      "scripts/deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_engine.py",
+      "scripts/deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py",
+      "tests/test_deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/native-attempt-consumed.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/provider-free-inert-task-sentinel-readiness-native-boot-terminal.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/provider-free-inert-task-sentinel-readiness-native-boot-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/verification-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/efficacy-reading.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/pushover-notification-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preplanning-attempt-001-rejected-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preplanning-runtime-state.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preexecution-runtime-state.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preexecution-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-pre-verifier-runtime-state.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-pre-verifier-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-593.md",
+      "docs/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-inert-task-sentinel-readiness.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_process_free_attempt_005_readiness_decision_only",
+    "zero_node_native_harness_broker_worker_model_provider_or_network_process_or_request",
+    "consumed_attempts_001_through_004_and_the_inert_task_readiness_attempt_remain_immutable_and_nonresumable",
+    "fresh_disjoint_attempt_005_identity_outputs_root_work_order_lease_and_checkpoint_required",
+    "no_occupied_attempt_authority_inside_the_readiness_decision",
+    "no_retry_resume_fallback_auxiliary_model_or_second_worker",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "inert-task-readiness-preplanning-manual-git-ids-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "ariadne-preplanning-git-ref-evidence-binding",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "preplanning_rehydration",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Git ref evidence must be generated from the machine snapshot with zero caller-supplied object IDs.",
+      "observed_error": "The first source-evidence prose repeated the task and protected commit IDs, and preflight counted two manual Git objects.",
+      "detection_method": "The fresh Ariadne preplanning receipt returned revision_required before planning or execution.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preplanning-attempt-001-rejected-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preplanning-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preplanning_source_evidence_repeated_machine_owned_git_object_ids",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the rejected receipt and replace the prose with a machine-snapshot requirement containing no object ID.",
+        "prevention_control": "Treat every git_refs_and_worktree source-evidence field as a qualitative machine-reading instruction and reject all hexadecimal Git object tokens before preflight.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preplanning-receipt.json"
+        ]
+      },
+      "baton_summary": "records the rejected freehand Git binding and successful machine-only correction."
+    },
+    {
+      "attempt_key": "inert-task-readiness-staged-diff-control-flow-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "explicit-path-precommit-diff-gate",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_git_cli",
+      "stage": "candidate_precommit",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A nonzero staged diff check must stop the commit before the candidate can advance.",
+      "observed_error": "Semicolon-separated commands allowed the initial commit to proceed after two blank EOF warnings.",
+      "detection_method": "git diff --cached --check printed both warnings in the commit command output before any preexecution receipt or Node launch.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-593.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/verification-evidence.json"
+      ],
+      "candidate_state": "corrected_descendant_before_execution",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.semicolon_command_did_not_fail_closed_after_cached_diff_warning",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the blank lines, refresh the component hash and commit an immediate normalized descendant before preexecution.",
+        "prevention_control": "Every compound staged-diff command checks LASTEXITCODE and exits before commit, push or execution.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/contract.json"
+        ]
+      },
+      "baton_summary": "records the non-fail-fast precommit command and preexecution normalization."
+    },
+    {
+      "attempt_key": "inert-task-readiness-historical-selector-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "applicable-predecessor-test-selector",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A successor verification packet must consume the accepted historical-selector applicability boundary.",
+      "observed_error": "One widened run included the immutable pre-source-repair direct-check selector and rediscovered its expected old controller digest mismatch.",
+      "detection_method": "Pytest reported only component_digest_mismatch:repaired_profile_controller while the original controller remained byte-identical.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/verification-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-593.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_verification_rediscovered_immutable_pre_repair_selectors",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Exclude the one immutable selector and retain all 25 current/applicable tests.",
+        "prevention_control": "The attempt-005 readiness contract must consume a generated applicability manifest rather than reconstructing negative selectors.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/efficacy-reading.json"
+        ]
+      },
+      "baton_summary": "records one recurrence of the known immutable historical-selector selection class."
+    },
+    {
+      "attempt_key": "inert-task-readiness-report-line-wrap-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "retained-human-report-semantic-assertion",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "postexecution_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A report verifier must test semantic claim clauses without assuming presentation line wrapping.",
+      "observed_error": "The first assertion required model/provider and product-runtime clauses to be contiguous across a deliberate Markdown newline.",
+      "detection_method": "The first postexecution packet failed one report assertion while the immutable terminal and all structural checks passed.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/verification-evidence.json"
+      ],
+      "candidate_state": "terminal_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.human_report_verifier_assumed_contiguous_markdown_line_wrapping",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Assert the model/provider and product-runtime claim clauses independently.",
+        "prevention_control": "Human-report verification checks semantic fragments or parsed structure rather than formatting-contiguous prose.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py"
+        ]
+      },
+      "baton_summary": "records the line-wrap assertion defect and semantic-fragment correction."
+    }
+  ]
+}

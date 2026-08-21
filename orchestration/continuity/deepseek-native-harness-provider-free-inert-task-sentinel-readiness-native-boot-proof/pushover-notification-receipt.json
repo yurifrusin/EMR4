@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.pushover_closeout_receipt.v1",
+  "operation_id": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof",
+  "sent_at": "2026-08-21T17:44:30.1265992+10:00",
+  "status": "passed",
+  "provider_status": 1,
+  "request": "ade51898-72b9-452e-b620-dc9c8c15453b",
+  "continuing": true,
+  "next_operation": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+  "non_phi": true
+}

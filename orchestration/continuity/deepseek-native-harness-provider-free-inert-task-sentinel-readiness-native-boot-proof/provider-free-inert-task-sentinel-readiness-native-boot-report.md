@@ -1,6 +1,7 @@
 # Provider-free inert-task sentinel-readiness native boot report
 
 Date: 2026-08-21
+Timestamp: 2026-08-21T17:44:30.1265992+10:00 (Australia/Brisbane)
 
 Result: **pass**
 
