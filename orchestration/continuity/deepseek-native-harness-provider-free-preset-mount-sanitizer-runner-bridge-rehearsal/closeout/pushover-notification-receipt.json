@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.pushover_closeout_receipt.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+  "sent_at": "2026-08-22T06:46:05.7689803+10:00",
+  "status": "passed",
+  "provider_status": 1,
+  "request": "32581eb8-c5a3-4483-9cf7-023bc3871e43",
+  "continuing": true,
+  "next_operation": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+  "non_phi": true
+}
