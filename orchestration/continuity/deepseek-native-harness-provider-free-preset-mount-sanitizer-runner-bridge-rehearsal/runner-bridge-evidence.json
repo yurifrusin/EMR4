@@ -1,0 +1,169 @@
+{
+  "bridge_checks": {
+    "exact_terminal_shape": true,
+    "guard_bridge_import_once": true,
+    "guard_mount_bridge_call_once": true,
+    "guard_native_mount_binding_once": true,
+    "mount_await_once": true,
+    "no_fixture_dsh_import": true,
+    "no_raw_dynamic_projection": true,
+    "preset_precedes_broader_fallback": true,
+    "runner_broader_fallback_once": true,
+    "runner_preset_terminal_branch_once": true,
+    "runner_preset_terminal_emit_once": true,
+    "sanitizer_call_once": true,
+    "sanitizer_import_once": true
+  },
+  "candidate_source": "993a3b383aa79afba857bb53af29177bffacd566",
+  "claim_boundary": {
+    "native_harness_process_authorized": false,
+    "occupied_model_launch_authorized": false,
+    "provider_request_authorized": false,
+    "raw_runtime_detail_retained": false,
+    "retry_authorized": false,
+    "runner_bridge_deterministically_admitted": true,
+    "runner_executed": false,
+    "sanitizer_admitted": true,
+    "worker_launch_authorized": false
+  },
+  "closed_codes": [
+    "PRESET_MOUNT_AGENT_SCOPE_ABSENT",
+    "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE",
+    "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED",
+    "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT",
+    "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT",
+    "PRESET_MOUNT_ROOT_SERVICE_LEAK",
+    "PRESET_MOUNT_UNCLASSIFIED"
+  ],
+  "derived_guard_bytes": 4535,
+  "derived_runner_bytes": 12941,
+  "environment": {
+    "key_count": 5,
+    "keys": [
+      "SystemRoot",
+      "WINDIR",
+      "ComSpec",
+      "TEMP",
+      "TMP"
+    ],
+    "node_options_present": false,
+    "path_present": false,
+    "unlisted_key_count": 0,
+    "values_retained": false
+  },
+  "fixture": {
+    "attempt_id": "attempt-001",
+    "authored_synthetic": true,
+    "child_process_count": 0,
+    "dsh_import_count": 0,
+    "filesystem_api_count": 0,
+    "native_harness_process_count": 0,
+    "network_api_count": 0,
+    "node_process_count": 1,
+    "result_count": 8,
+    "stderr_bytes": 0,
+    "stdout_exact": true
+  },
+  "fixture_results": [
+    {
+      "passed": true,
+      "scenario": "success",
+      "terminal": null
+    },
+    {
+      "passed": false,
+      "scenario": "agent_scope_absent",
+      "terminal": {
+        "code": "PRESET_MOUNT_AGENT_SCOPE_ABSENT",
+        "detail": null,
+        "stage": "preset_mount"
+      }
+    },
+    {
+      "passed": false,
+      "scenario": "composition_stamp_unreadable",
+      "terminal": {
+        "code": "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE",
+        "detail": null,
+        "stage": "preset_mount"
+      }
+    },
+    {
+      "passed": false,
+      "scenario": "row_import_or_apply_rejected",
+      "terminal": {
+        "code": "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED",
+        "detail": null,
+        "stage": "preset_mount"
+      }
+    },
+    {
+      "passed": false,
+      "scenario": "subtree_publication_absent",
+      "terminal": {
+        "code": "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT",
+        "detail": null,
+        "stage": "preset_mount"
+      }
+    },
+    {
+      "passed": false,
+      "scenario": "row_inactive_after_await",
+      "terminal": {
+        "code": "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT",
+        "detail": null,
+        "stage": "preset_mount"
+      }
+    },
+    {
+      "passed": false,
+      "scenario": "root_service_leak",
+      "terminal": {
+        "code": "PRESET_MOUNT_ROOT_SERVICE_LEAK",
+        "detail": null,
+        "stage": "preset_mount"
+      }
+    },
+    {
+      "passed": false,
+      "scenario": "unclassified",
+      "terminal": {
+        "code": "PRESET_MOUNT_UNCLASSIFIED",
+        "detail": null,
+        "stage": "preset_mount"
+      }
+    }
+  ],
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+  "process_envelope_sha256": "74f5920a324ded110f745cd8d0a40e9abade3da658737593f96c0d79ed4c026c",
+  "result": "pass",
+  "schema_version": "ariadne.native_harness_preset_mount_runner_bridge_evidence.v1",
+  "source_sha256": {
+    "accepted_guard_generator_sha256": "b36d9c11d9a6c2f67d72b2afae9aae18dd63d46636627137ccfc38de5d05afa9",
+    "accepted_guard_source_sha256": "6678ed31bdcd30a5018689b72ad509c182854bf5d63862f59b397acc8de40894",
+    "accepted_minimum_environment_evidence_sha256": "fc4e751b1613c7b2110f0b2919cbbfc027fad0018b51812081a5bc2fd9daa3a5",
+    "accepted_runner_generator_sha256": "00db15a660290ff6761ea45b07eddecb95ba778b162e3f5cba440a08afc87e35",
+    "accepted_runner_source_sha256": "e0e6a0f32c98eddfb71dc88b9c9740d9e410701e90a8298d68a45fb0c00cae4b",
+    "bridge_sha256": "867b32001030786018cdc8423179902869eed92a2d35f62dc6bb83eb4c6ab428",
+    "derived_guard_sha256": "440e7e60bd8a8a1b6c33a4e64ae241c51cd4e126ce6422dc0fcba39b41ec4151",
+    "derived_runner_sha256": "871fb7fc9d2d8a93e5e67c41a4c0f18af7ba8a23d0a3664505f149199befb9cb",
+    "fixture_sha256": "4f231875bf3703a3703606a2f818454afd8de81a2a03016abdbd0963c1a290ee",
+    "sanitizer_sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f"
+  },
+  "zero_counters": {
+    "broker_process_count": 0,
+    "broker_request_count": 0,
+    "database_invocation_count": 0,
+    "docker_invocation_count": 0,
+    "dsh_import_count": 0,
+    "model_request_count": 0,
+    "native_harness_process_count": 0,
+    "network_attempt_count": 0,
+    "occupied_worker_count": 0,
+    "provider_request_count": 0,
+    "request_count": 0,
+    "target_creation_count": 0,
+    "target_use_count": 0,
+    "turn_count": 0
+  }
+}

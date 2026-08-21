@@ -1,0 +1,358 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+    "title": "DeepSeek native Harness provider-free preset-mount sanitizer runner-bridge rehearsal",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T06:36:06.5611095+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+      "title": "Preset-mount sanitizer runner bridge",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits this bounded native-Harness control sequence and its dependency-satisfied successor.",
+          "This closeout admits only the exact deterministic runner bridge and one consumed pure Node fixture process.",
+          "No native Harness execution, worker/model/provider, target, product/data, deployment, Pages or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-one-pure-runner-bridge-fixture",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/attempt-001-process-envelope.json",
+          "status": "accepted",
+          "summary": "Accept one pure Node fixture process, exit zero, zero stderr, a content-free envelope and no further process under this plan."
+        },
+        {
+          "id": "accept-exact-runner-bridge-vector-and-source-derivation",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/runner-bridge-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact eight-result vector, thirteen source invariants and SHA-bound derived runner and guard."
+        },
+        {
+          "id": "reject-native-worker-or-provider-inference",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "Do not infer runner execution, DSH/native Harness behavior, DeepSeek work, model/provider access, retry or product authority."
+        },
+        {
+          "id": "accept-one-native-terminal-successor",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-plan.md",
+          "status": "accepted",
+          "summary": "Freeze one provider-free native rc.7 terminal rehearsal with zero turns, zero provider requests and no retry."
+        },
+        {
+          "id": "accept-sol-runner-bridge-boundary",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the deterministic bridge without transferring acceptance to native execution."
+        }
+      ],
+      "claim_scope": [
+        "Exact execution candidate 993a3b383aa79afba857bb53af29177bffacd566 ran one pure Node fixture process.",
+        "The process exited zero with zero stderr and emitted the exact eight-result success plus seven-code vector.",
+        "The bridge owns one sanitizer import, one sanitizer call and one await mount boundary.",
+        "The derived runner gives the exact preset-mount terminal precedence over the retained broader composition fallback.",
+        "Thirteen exact source checks and SHA-bound derived runner and guard readings pass.",
+        "DSH, native Harness, worker, turn, model/provider, network, database, Docker, target and product counts remain zero.",
+        "Ten focused tests and the exact 90-test selected current/inherited collection pass after execution."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-607.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-preset-mount-sanitizer-runner-bridge-pass.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-preplanning-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-prepush-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-preexecution-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_windows_minimum_environment_recovery.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge.mjs",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_fixture.mjs",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/evidence.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/process-envelope.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/attempt-001-process-envelope.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/runner-bridge-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/runner-bridge-report.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The derived runner and guard have not executed inside DSH or the native Harness.",
+        "No native terminal, worker turn, model/provider request or DeepSeek coding-performance evidence exists from this tranche.",
+        "The next native process is separately frozen at one with zero requests and no retry.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Give the orchestrator substantial, typed control over native DeepSeek worker execution for reliable Raisa development",
+      "outcome": "The admitted sanitizer is now connected to an exact derived runner source with a one-shot pure fixture, finite terminal precedence and no opaque runtime material.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/runner-bridge-evidence.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/attempt-001-process-envelope.json",
+        "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Turn the native rc.7 engine once with the exact new terminal gauge attached while keeping DeepSeek and providers off",
+      "why_now": "The source bridge, precedence, hashes, process envelope and pure finite vector are accepted; only native materialisation and terminal survival remain unproved.",
+      "outcome": "One disposable native process will yield one finite typed terminal before any turn, worker action or provider request, then clean up without retry.",
+      "unlocks": [
+        "Native runtime proof of the exact preset-mount terminal if that branch is reached.",
+        "A source-owned next recovery or a later separately frozen worker gate based on one typed result."
+      ],
+      "does_not_solve": [
+        "No occupied DeepSeek worker turn, model/provider request or coding-quality evidence.",
+        "No product/data action, production, release, Pages or protected integration."
+      ],
+      "evidence": [
+        "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-closeout.md",
+        "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-plan.md",
+        "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-threat-model-delta.md"
+      ],
+      "orientation_statement": "Run one provider-free native rc.7 process with the exact admitted bridge, zero turns and zero provider requests, then stop without retry."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+      "active_tranche": "DeepSeek native Harness provider-free preset-mount sanitized-terminal native rehearsal",
+      "objective": "Prove one finite exact-source native rc.7 terminal with the admitted preset-mount bridge before any turn, worker action or model/provider request.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and extended authority for the bounded native-Harness control sequence.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_derive_the_exact_native_materialisation_controller_and_freeze_one_process_before_execution"
+    },
+    "incidents": [
+      {"incident_id": "runner-bridge-unregistered-continuation-event", "source_id": "runner-bridge-preplanning-001", "peers": []},
+      {"incident_id": "runner-bridge-logical-evidence-directory", "source_id": "runner-bridge-source-reading-001", "peers": []},
+      {"incident_id": "runner-bridge-phase-blind-artifact-state-test", "source_id": "runner-bridge-postexecution-tests-001", "peers": []}
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "runner_bridge_persisted_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal", "--check"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "runner_bridge_selected_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "pytest", "--noconftest", "-p", "no:cacheprovider", "--strict-config", "--strict-markers", "-q",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_windows_minimum_environment_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "runner_bridge_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "runner_bridge_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-threat-model-delta.md",
+      "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge.mjs",
+      "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_fixture.mjs",
+      "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
+      "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/evidence.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/process-envelope.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/attempt-001-process-envelope.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/runner-bridge-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/runner-bridge-report.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-preplanning-rejected-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-prepush-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-preexecution-runtime-state.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-preexecution-receipt.json",
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-preset-mount-sanitizer-runner-bridge-pass.md",
+      "docs/ariadne-agent-error-correction-register-revision-607.md",
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-threat-model-delta.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_preset_mount_sanitized_terminal_native_rehearsal_only",
+    "accepted_runner_bridge_execution_source_993a3b383aa79afba857bb53af29177bffacd566_preserved",
+    "accepted_runner_guard_bridge_sanitizer_hashes_preserved",
+    "accepted_package_only_seed_and_bundle_immutable",
+    "one_native_rc7_process_only",
+    "automatic_manual_retry_and_resume_zero",
+    "finite_typed_terminal_before_any_turn_or_request",
+    "only_preset_mount_failure_attributed_proves_the_new_runtime_bridge",
+    "content_free_outer_process_envelope_before_interpretation",
+    "no_raw_message_stack_cause_path_stream_prompt_response_environment_or_credential",
+    "zero_turn_request_broker_worker_model_provider_network_database_docker_and_target_activity",
+    "private_identity_only_and_zero_public_agent_session_or_lifecycle_publication",
+    "disposable_process_and_root_cleanup_required",
+    "no_worker_model_provider_request_repair_retry_or_target_authority",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "exact_test_counts_from_completed_machine_output_only",
+    "no_commit_identity_statement_without_current_machine_snapshot_copy",
+    "all_new_narrative_artifacts_require_date_and_brisbane_timestamp",
+    "generated_narrative_timestamps_derive_from_creation_clock_or_typed_evidence",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "runner-bridge-preplanning-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "runner-bridge-continuation-event",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_preflight",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Continuation runtime states use only the active orchestrator profile's registered event vocabulary.",
+      "observed_error": "The first state used the shorthand pre_plan, which is not a registered continuation event.",
+      "detection_method": "The orchestrator preflight returned revision_required with continuation_event_missing_or_unapproved before implementation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-preplanning-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-607.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.continuation_event_shorthand_outside_registered_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use pre_sprint_planning and preserve the rejected receipt before generating a fresh passing receipt.",
+        "prevention_control": "Continuation states copy the event from an active-profile receipt instead of composing a synonym.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-preplanning-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-607.md"
+        ]
+      },
+      "baton_summary": "records the unregistered continuation-event shorthand and correction to pre_sprint_planning."
+    },
+    {
+      "attempt_key": "runner-bridge-source-reading-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "runner-bridge-source-coordinate-evidence-path",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_powershell",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Accepted evidence paths are copied from repository inventory or the active acceptance list rather than inferred from logical operation names.",
+      "observed_error": "A read-only command inferred a nonexistent source-reconciliation directory for the accepted interpretation artifact.",
+      "detection_method": "Get-Content failed; repository inventory then resolved the artifact under the accepted safe-terminal bridge operation before implementation.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-607.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/preset-mount-source-coordinate-interpretation.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.repository_path_recalled_before_source_resolution",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve the exact physical artifact with repository inventory and read only that path.",
+        "prevention_control": "Logical operation names never generate physical evidence paths; inventory or accepted manifests supply them.",
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-607.md"]
+      },
+      "baton_summary": "records the recurring logical-directory guess and correction to repository-owned path resolution."
+    },
+    {
+      "attempt_key": "runner-bridge-postexecution-tests-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "runner-bridge-artifact-state-test",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A deterministic checker test validates its exact fresh state before execution and exact accepted state after immutable outputs exist.",
+      "observed_error": "The first post-execution suite asserted only fresh and rejected the checker's correct accepted state.",
+      "detection_method": "The selected pytest collection failed one assertion after the sole fixture process had passed.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-607.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.deterministic_check_test_assumes_preexecution_state_after_execution",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Derive the expected phase from the exact output-set presence and assert accepted-only node count and bridge admission fields.",
+        "prevention_control": "State-machine tests cover every persistent phase that the same deterministic command is required to validate.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-607.md"
+        ]
+      },
+      "baton_summary": "records the phase-blind fresh-state assertion and correction to exact fresh/accepted state validation."
+    }
+  ]
+}

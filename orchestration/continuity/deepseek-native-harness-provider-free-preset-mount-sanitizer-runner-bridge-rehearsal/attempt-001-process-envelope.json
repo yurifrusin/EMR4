@@ -1,0 +1,31 @@
+{
+  "attempt_id": "attempt-001",
+  "candidate_source": "993a3b383aa79afba857bb53af29177bffacd566",
+  "dsh_import_count": 0,
+  "environment": {
+    "key_count": 5,
+    "keys": [
+      "SystemRoot",
+      "WINDIR",
+      "ComSpec",
+      "TEMP",
+      "TMP"
+    ],
+    "node_options_present": false,
+    "path_present": false,
+    "unlisted_key_count": 0,
+    "values_retained": false
+  },
+  "further_process_authorized": false,
+  "native_harness_process_count": 0,
+  "node_process_count": 1,
+  "numeric_exit_code": 0,
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+  "raw_runtime_detail_retained": false,
+  "schema_version": "ariadne.native_harness_preset_mount_runner_bridge_process_envelope.v1",
+  "stderr_bytes": 0,
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 1089,
+  "stdout_sha256": "dc1c99a7f332575cf1bdef9ebe4f8cc0b13027a3b73232f78617165e4dda0dc7",
+  "stream_content_retained": false
+}

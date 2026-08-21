@@ -1,0 +1,134 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free preset-mount sanitizer runner-bridge rehearsal",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_implement_the_exact_hash_runner_bridge_and_freeze_any_pure_fixture_process_count_before_execution",
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "8d581bacb68447f13b6d13cc2a80d36431fba557",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "993a3b383aa79afba857bb53af29177bffacd566",
+    "reason_codes": [],
+    "resolved_commit": "8d581bacb68447f13b6d13cc2a80d36431fba557",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "8d581bacb68447f13b6d13cc2a80d36431fba557"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "993a3b383aa79afba857bb53af29177bffacd566",
+    "branch_origin_aligned": true,
+    "head": "993a3b383aa79afba857bb53af29177bffacd566",
+    "origin_branch_commit": "993a3b383aa79afba857bb53af29177bffacd566",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 661
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "preexecution",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "No DeepSeek worker/model or native Harness process is authorised; the pure bridge fixture is the governed object.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The one-process eight-result vector and thirteen source invariants are exact and deterministic; no semantic ambiguity exists.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits delegation and the process budget is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "typed one-process envelope",
+      "exact eight-result admission",
+      "non-pass stop",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "verify candidate and origin exact alignment and tracked cleanliness",
+      "verify exact sanitizer bridge fixture and derived-source hashes",
+      "verify five host keys without retaining values and all outputs absent",
+      "execute exactly one pure Node fixture process",
+      "persist the content-free envelope before semantic admission",
+      "stop without retry on every non-pass"
+    ]
+  },
+  "planned_action": "execute_exactly_one_provider_free_pure_node_runner_bridge_fixture_with_the_five_key_windows_environment_persist_a_content_free_envelope_then_stop_without_retry",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-closeout.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/minimum-environment-sanitizer-evidence.json",
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/evidence.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/process-envelope.schema.json",
+      "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge.mjs",
+      "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_fixture.mjs",
+      "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
+      "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the one pure fixture process and typed readback. DeepSeek is declined because no worker/model or native Harness process is authorised; Gemini is declined because the exact eight-result vector and thirteen source checks are deterministic; native subagents are prohibited.",
+    "git_refs_and_worktree": "Machine snapshot verifies exact candidate/origin alignment, all four protected refs at the mandated protected commit, tracked cleanliness and docs/branding preservation. Exact sanitizer, bridge and fixture hashes match the contract; all three successor output paths are absent. Caller prose supplies no Git object identity.",
+    "live_handover_current_baton": "Continuity 383 and Compass 365 accept the sanitizer boundary and the active latch names the provider-free runner-bridge rehearsal. The clockwork, register and baton consistency tests pass after the exact inherited boundary correction.",
+    "protected_evidence_boundaries": "Exactly one pure Node fixture process; content-free envelope before interpretation; five-key Windows environment; no DSH import, native Harness process, worker/model/provider request, retry, target, product/data, ordinary-practice, production, deployment, release, Pages, protected evidence or protected-ref movement."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

@@ -26,10 +26,16 @@ def test_contract_and_deterministic_check_pass_without_outputs() -> None:
     }
     reading = subject.deterministic_check()
     assert reading["status"] == "passed"
-    assert reading["artifact_state"] == "fresh"
+    expected_state = (
+        "accepted" if all(path.is_file() for path in subject.OUTPUT_PATHS) else "fresh"
+    )
+    assert reading["artifact_state"] == expected_state
     assert reading["bridge_check_count"] == 13
     assert reading["native_harness_process_count"] == 0
     assert reading["dsh_import_count"] == 0
+    if expected_state == "accepted":
+        assert reading["node_process_count"] == 1
+        assert reading["runner_bridge_deterministically_admitted"] is True
 
 
 def test_source_derivation_is_exact_hash_bound_and_deterministic() -> None:
