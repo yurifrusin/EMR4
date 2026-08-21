@@ -2,26 +2,17 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "historical_source_binding_final_check",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "scripts.deepseek_native_harness_provider_free_historical_recovery_validator_source_binding_repair",
-        "--check"
-      ],
-      "completion_contract": "final_exit_code_zero_required"
-    },
-    {
-      "command_id": "historical_source_binding_final_tests",
+      "command_id": "attempt_004_readiness_final_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
-        "tests/test_deepseek_native_harness_provider_free_historical_recovery_validator_source_binding_repair.py",
-        "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py",
+        "tests/test_raisa_authored_synthetic_native_harness_bounded_worker_attempt_004_readiness_and_preexecution_decision.py",
         "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_003.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py",
         "tests/test_ariadne_agent_error_register.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_active_operation_latch.py",
@@ -30,26 +21,24 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "historical_source_binding_final_ruff",
+      "command_id": "attempt_004_readiness_final_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/deepseek_native_harness_provider_free_historical_recovery_validator_source_binding_repair.py",
-        "scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery.py",
-        "tests/test_deepseek_native_harness_provider_free_historical_recovery_validator_source_binding_repair.py"
+        "scripts/raisa_authored_synthetic_native_harness_bounded_worker_attempt_004_readiness_and_preexecution_decision.py",
+        "tests/test_raisa_authored_synthetic_native_harness_bounded_worker_attempt_004_readiness_and_preexecution_decision.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "historical_source_binding_final_compile",
+      "command_id": "attempt_004_readiness_final_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/deepseek_native_harness_provider_free_historical_recovery_validator_source_binding_repair.py",
-        "scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery.py"
+        "scripts/raisa_authored_synthetic_native_harness_bounded_worker_attempt_004_readiness_and_preexecution_decision.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

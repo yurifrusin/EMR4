@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 583,
+  "register_revision": 584,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -29756,6 +29756,146 @@
       },
       "incident_id": "AER-0755",
       "attempt_id": "clock-33d3d36be3ffef2753b07a1a",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-readiness",
+      "role": "orchestrator",
+      "resource_id": "preplanning-git-ref-prose-binding",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Git-ref evidence in an Ariadne receipt must come only from the machine snapshot and contain zero caller-authored object IDs.",
+      "observed_error": "The first runtime state's git_refs_and_worktree prose manually included the full protected-ref object, so preflight rejected it.",
+      "detection_method": "Ariadne returned revision_required with manually_supplied_object_id_count one before planning artifacts were written.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-native-harness-attempt-004-readiness-preplanning-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preplanning_git_ref_prose_manual_object_id",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the object from caller prose and let the machine snapshot resolve all Git refs.",
+        "prevention_control": "Every continuation receipt reports and gates manually_supplied_object_id_count at zero.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-attempt-004-readiness-preplanning-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0756",
+      "attempt_id": "clock-4c8b156b6a8326f9eb66a01d",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-readiness",
+      "role": "orchestrator",
+      "resource_id": "controlled-document-date-timestamp-pair",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every newly authored tranche plan, threat delta, report, closeout, Sol acceptance and Yuri summary must begin with Date and an ISO Australia/Brisbane Timestamp.",
+      "observed_error": "Fresh rehydration found that several preceding accepted repair documents had Date but no Timestamp.",
+      "detection_method": "Complete AGENTS section-10 rehydration was reconciled against the preceding closeout artifact headings.",
+      "evidence_paths": [
+        "docs/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.controlled_document_required_timestamp_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep accepted predecessor bytes immutable and add a focused Date plus Brisbane Timestamp guard for every new controlled document.",
+        "prevention_control": "The tranche test resolves all five new document classes and asserts Date, Timestamp and explicit Brisbane offset.",
+        "evidence_paths": [
+          "tests/test_raisa_authored_synthetic_native_harness_bounded_worker_attempt_004_readiness_and_preexecution_decision.py"
+        ]
+      },
+      "incident_id": "AER-0757",
+      "attempt_id": "clock-28beff82461ae889ac821810",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-readiness",
+      "role": "orchestrator",
+      "resource_id": "closeout-full-git-object-binding",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every full Git object in closeout and acceptance must be copied from a machine-resolved Git reading rather than expanded from an abbreviation.",
+      "observed_error": "The first closeout draft used the correct a96448a1 abbreviation but guessed the remaining characters, producing an incorrect 40-character pre-verifier binding.",
+      "detection_method": "Direct git rev-parse comparison rejected the draft value before staging.",
+      "evidence_paths": [
+        "docs/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_full_git_object_manually_expanded_from_abbreviation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the draft value with git rev-parse output and assert the resolved candidate and pre-verifier objects in a focused closeout test.",
+        "prevention_control": "Closeout tests resolve named commits through Git and require those exact 40-character values in closeout and Sol acceptance.",
+        "evidence_paths": [
+          "tests/test_raisa_authored_synthetic_native_harness_bounded_worker_attempt_004_readiness_and_preexecution_decision.py"
+        ]
+      },
+      "incident_id": "AER-0758",
+      "attempt_id": "clock-ce22725e25d60137da9d6c55",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-readiness",
+      "role": "orchestrator",
+      "resource_id": "closeout-compass-node-kind",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A closeout graph node kind must come from the live Compass closed vocabulary before transaction preparation.",
+      "observed_error": "The first read-only closeout check labelled the readiness decision as rehearsal, which is not an admitted graph node kind.",
+      "detection_method": "Clockwork rejected prospective_projection_invalid with node_kind_invalid before transaction preparation, commands or publication.",
+      "evidence_paths": [
+        "docs/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_compass_node_kind_used_unadmitted_rehearsal",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the admitted tooling node kind for the provider-free readiness checker and preserve rehearsal as descriptive prose only.",
+        "prevention_control": "Read-only clockwork projection validation remains mandatory before any closeout input commit or publication.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0759",
+      "attempt_id": "clock-0ac4275852214968ca21fe39",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

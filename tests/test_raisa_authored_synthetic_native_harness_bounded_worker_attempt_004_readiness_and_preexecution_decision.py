@@ -36,7 +36,7 @@ def test_attempt_identity_is_fourth_fresh_and_exact() -> None:
     assert all(path.parent == subject.ATTEMPT_EVIDENCE_ROOT for path in value["paths"])
 
 
-def test_deterministic_gate_only_launches_read_only_git(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_git_reader_only_launches_git(monkeypatch: pytest.MonkeyPatch) -> None:
     original = subprocess.run
     calls: list[list[str]] = []
 
@@ -46,15 +46,19 @@ def test_deterministic_gate_only_launches_read_only_git(monkeypatch: pytest.Monk
         return original(argv, *args, **kwargs)
 
     monkeypatch.setattr(subject.subprocess, "run", guarded)
-    value = subject.deterministic_evidence()
-    assert value["result"] == "pass"
+    assert len(subject.git("rev-parse", "HEAD")) == 40
     assert calls
+
+
+def test_stored_deterministic_gate_has_zero_occupied_processes() -> None:
+    value = subject.validate_artifacts()
+    assert value["result"] == "pass"
     assert set(value["process_boundary"].values()) == {0}
     assert value["occupied_attempt_authorized"] is False
 
 
 def test_consumed_history_and_new_root_are_fail_closed() -> None:
-    value = subject.deterministic_evidence()
+    value = subject.validate_artifacts()
     assert len(value["consumed_history"]) == 7
     assert value["fresh_attempt"]["attempt_root_absent"] is True
     assert value["fresh_attempt"]["attempt_evidence_root_absent"] is True

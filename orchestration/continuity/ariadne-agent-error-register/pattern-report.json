@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 583,
+  "register_revision": 584,
   "source_cutoff_on": "2026-08-21",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "44cbe74f2d69f70118a699374b827e4e2d11dcc5441dd230a64d542eadcfab94",
-  "incident_count": 755,
+  "canonical_register_sha256": "77df4587e3c7e6a707d1322ef4b84c0dcc7fb4f827fa79c291a3407901a0512a",
+  "incident_count": 759,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 479,
       "harness": 60,
-      "operator": 70,
+      "operator": 74,
       "repository": 130,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 91,
       "evidence_misreport": 70,
       "harness_failure": 60,
-      "operator_error": 70,
+      "operator_error": 74,
       "output_contract_violation": 266,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 57,
       "integration_reviewer": 3,
-      "orchestrator": 632,
+      "orchestrator": 636,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 440,
+      "low": 444,
       "material": 127,
       "moderate": 188
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 137,
-      "canonical_unchanged": 475,
+      "canonical_unchanged": 479,
       "untrusted_partial_worktree": 143
     },
     "by_resource_and_role": {
@@ -104,6 +104,8 @@
       "clockwork-prospective-register-revision-reading::orchestrator": 1,
       "clockwork-rollback-pointer-lease::orchestrator": 1,
       "clockwork-successor-protected-boundaries::orchestrator": 1,
+      "closeout-compass-node-kind::orchestrator": 1,
+      "closeout-full-git-object-binding::orchestrator": 1,
       "codex-native-architecture-challenger::verifier": 1,
       "codex-native-independent-reviewer::verifier": 5,
       "codex-native-parallel-worker::implementer": 2,
@@ -119,6 +121,7 @@
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
       "context-fabric-outbox-rls-catalogue::implementer": 1,
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
+      "controlled-document-date-timestamp-pair::orchestrator": 1,
       "deepseek-flash-workers::implementer": 14,
       "deepseek-native-harness-first-admission-continuity-test::orchestrator": 1,
       "deepseek-native-harness-rc7-container-readonly-rootfs::orchestrator": 1,
@@ -213,6 +216,7 @@
       "pre-verifier-task-branch-alignment::orchestrator": 1,
       "preexecution-git-refs-evidence-binding::orchestrator": 1,
       "prelaunch-composite-readback-command::orchestrator": 1,
+      "preplanning-git-ref-prose-binding::orchestrator": 1,
       "preset-projection-deterministic-classifiers::orchestrator": 1,
       "preset-projection-disposable-root-recovery::orchestrator": 1,
       "preset-projection-explicit-path-commit::orchestrator": 1,

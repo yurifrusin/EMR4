@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Take the clock reading and freeze attempt-004 admission before any occupied process is allowed.
+> Take a fresh clock reading, consume one identity, run once and trust the bounded terminal.
 
 ## North star
 
@@ -490,25 +490,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    A future fresh runner can build the canonical wrapper and select the exact safe terminal without mutating consumed evidence. Lineage parent: `deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal`.
 237. **Repair historical source-binding semantics before admitting a fresh occupied attempt — Provider-free historical recovery validator source-binding repair**
    The old validator now takes its historical reading from exact Git source while preserved behavioral and consumed-attempt checks remain live. Lineage parent: `raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal`.
+238. **Prove one fresh native-Harness bounded worker can be attempted under clockwork control — Provider-free native Harness attempt-004 readiness decision**
+   A fourth identity and one-execution envelope are ready, traceable and separate from consumed history. Lineage parent: `deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair`.
 
 ## Current position
 
-**Freeze a grounded provider-free attempt-004 readiness and preexecution decision — Provider-free historical recovery validator source-binding repair**
+**Execute exactly one separately checkpointed occupied attempt 004 — Provider-free native Harness attempt-004 readiness decision**
 
-**Why this proof came next:** The historical validator is stable, the structured-diagnostic controller is converged and the maintained predecessor surface is clean.
+**Why this proof came next:** The identity, controller, preset, task, broker, terminal and cleanup envelope have passed their deterministic gate.
 
-A narrow readiness tranche can bind a fresh attempt identity, exact controller/preset/task, clockwork/broker lease, cleanup envelope and one-execution admission without launching DeepSeek.
+One native Harness attempt produces a bounded success or fail-closed terminal under a fresh clockwork parent.
 
 ### What this unlocks
 
-- A deterministic accept-or-deny decision for one bounded occupied attempt 004.
-- A machine-bound attempt identity and exact one-execution contract if every readiness gate passes.
+- Evidence of whether the converged native Harness reaches useful model/tool work under EMR4 orchestration.
+- A traceable basis for using or correcting the Harness worker lane.
 
 ### What it does not solve
 
-- No Harness, worker, model or provider execution.
-- No assumption that attempt 004 will start, reach HMR or succeed.
-- No product, data, production, deployment or protected-ref authority.
+- No retry or second attempt.
+- No product/data/runtime authority.
+- No presumption of provider or Harness success.
 
 ## Continuity and authority
 
@@ -1297,6 +1299,7 @@ Prerequisites:
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-closeout.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-design.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`
+- `docs/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision-closeout.md`
 - `docs/raisa-authority-kernel-reference-client-adapter-seam.md`
 - `docs/raisa-channel-neutral-patient-interaction-foundation-architecture.md`
 - `docs/raisa-channel-neutral-patient-interaction-foundation-closeout.md`
@@ -2195,6 +2198,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-native-harness-attempt-004-readiness-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-packet.md`
@@ -2699,6 +2703,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-free-dry-run-evidence.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/rayleen-context-fabric-intent-shaping-attempt-1-preflight.json`
+- `orchestration/continuity/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision/deterministic-evidence.json`
 - `orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/authored-synthetic-contract-examples.json`
 - `orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/foundation-contract.json`
 - `orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/foundation-contract.schema.json`
@@ -3617,4 +3622,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 342; continuity graph revision 360._
+_Compass map revision 343; continuity graph revision 361._
