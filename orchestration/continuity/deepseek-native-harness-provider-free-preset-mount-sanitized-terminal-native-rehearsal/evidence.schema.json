@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-preset-mount-sanitized-terminal-evidence.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "candidate_source", "execution_attempt_id", "result", "failure_classification", "source_bindings", "package", "launch", "composition", "readiness", "sidecar", "controller_terminal", "provider_boundary", "target", "cleanup"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_preset_mount_sanitized_terminal_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal"},
+    "planning_source": {"$ref": "#/$defs/oid"},
+    "candidate_source": {"$ref": "#/$defs/oid"},
+    "execution_attempt_id": {"const": "preset-mount-sanitized-terminal-native-attempt-001"},
+    "result": {"enum": ["pass", "fail"]},
+    "failure_classification": {"type": ["string", "null"]},
+    "source_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["diagnostic_runner_sha256", "generated_helper_sha256", "controller_module_sha256", "effective_tool_guard_sha256", "readiness_sentinel_sha256", "accepted_runner_generator_sha256", "accepted_guard_generator_sha256", "runner_bridge_generator_sha256", "preset_mount_bridge_sha256", "preset_mount_sanitizer_sha256"],
+      "properties": {
+        "diagnostic_runner_sha256": {"$ref": "#/$defs/digest"},
+        "generated_helper_sha256": {"$ref": "#/$defs/digest"},
+        "controller_module_sha256": {"$ref": "#/$defs/digest"},
+        "effective_tool_guard_sha256": {"$ref": "#/$defs/digest"},
+        "readiness_sentinel_sha256": {"$ref": "#/$defs/digest"},
+        "accepted_runner_generator_sha256": {"$ref": "#/$defs/digest"},
+        "accepted_guard_generator_sha256": {"$ref": "#/$defs/digest"},
+        "runner_bridge_generator_sha256": {"$ref": "#/$defs/digest"},
+        "preset_mount_bridge_sha256": {"$ref": "#/$defs/digest"},
+        "preset_mount_sanitizer_sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "package": {"type": "object"},
+    "launch": {"type": "object"},
+    "composition": {"type": "object"},
+    "readiness": {"type": "object"},
+    "sidecar": {"type": ["object", "null"]},
+    "controller_terminal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["result", "last_admitted_stage", "error_class", "safe_guard_coordinate", "safe_guard_detail", "preset_mount_terminal", "factory_boundary", "raw_runtime_detail_retained"],
+      "properties": {
+        "result": {"enum": ["closed_subcoordinate_failure", "preset_mount_failure_attributed", "preset_composition_failure_attributed", "prepublication_veto_diagnosed", "runner_link_or_apply_absence"]},
+        "last_admitted_stage": {"type": ["string", "null"]},
+        "error_class": {"type": ["string", "null"]},
+        "safe_guard_coordinate": {"type": ["string", "null"]},
+        "safe_guard_detail": {"type": ["string", "null"]},
+        "preset_mount_terminal": {
+          "anyOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["stage", "code", "detail"],
+              "properties": {
+                "stage": {"const": "preset_mount"},
+                "code": {"enum": ["PRESET_MOUNT_AGENT_SCOPE_ABSENT", "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE", "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED", "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT", "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT", "PRESET_MOUNT_ROOT_SERVICE_LEAK", "PRESET_MOUNT_UNCLASSIFIED"]},
+                "detail": {"type": "null"}
+              }
+            }
+          ]
+        },
+        "factory_boundary": {"type": ["object", "null"]},
+        "raw_runtime_detail_retained": {"const": false}
+      }
+    },
+    "provider_boundary": {"type": "object"},
+    "target": {"type": "object"},
+    "cleanup": {"type": "object"}
+  },
+  "$defs": {
+    "oid": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

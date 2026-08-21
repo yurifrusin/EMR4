@@ -1,0 +1,171 @@
+{
+  "schema_version": "ariadne.native_harness_preset_mount_sanitized_terminal_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+  "planning_source": "7b87189de73319be8f68113984e34e150688d59f",
+  "execution_attempt": {
+    "attempt_id": "preset-mount-sanitized-terminal-native-attempt-001",
+    "native_process_count": 1,
+    "automatic_retry": false,
+    "manual_retry": false,
+    "resume": false
+  },
+  "closed_vocabulary": {
+    "stages": [
+      "runner_apply_entered",
+      "loader_ready",
+      "package_imports_admitted",
+      "services_resolved",
+      "preset_roots_admitted",
+      "preset_roster_admitted",
+      "registries_empty_before_factory",
+      "session_identity_constructed",
+      "agent_factory_invoked",
+      "factory_setup_entered",
+      "private_identity_admitted",
+      "preset_composition_admitted",
+      "model_selection_installed",
+      "setup_commit_entered",
+      "publication_veto_observed",
+      "postrollback_registries_empty"
+    ],
+    "error_classes": [
+      "loader_await_rejected",
+      "package_import_rejected",
+      "required_service_missing",
+      "preset_root_count_mismatch",
+      "shipped_root_mismatch",
+      "user_root_mismatch",
+      "preset_roster_mismatch",
+      "registry_not_empty",
+      "private_identity_mismatch",
+      "private_object_prepublished",
+      "effective_composition_mismatch",
+      "commit_identity_mismatch",
+      "commit_publication_early",
+      "commit_composition_mismatch",
+      "publication_veto_mismatch",
+      "factory_resolved_without_veto",
+      "private_identity_retained",
+      "lifecycle_event_escaped",
+      "cwd_not_absolute",
+      "safe_terminal_invalid",
+      "unclassified_error"
+    ],
+    "terminals": [
+      "closed_subcoordinate_failure",
+      "preset_mount_failure_attributed",
+      "preset_composition_failure_attributed",
+      "prepublication_veto_diagnosed",
+      "runner_link_or_apply_absence"
+    ],
+    "safe_guard_coordinates": [
+      "EFFECTIVE_TOOL_COMPOSITION_INPUT_INVALID",
+      "EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED",
+      "EFFECTIVE_TOOL_COMPOSITION_SCOPE_MISSING",
+      "EFFECTIVE_TOOL_COMPOSITION_SCOPE_LOCAL_TOOL_PRESENT",
+      "EFFECTIVE_TOOL_COMPOSITION_EXPECTED_TOOL_NOT_INHERITED",
+      "EFFECTIVE_TOOL_COMPOSITION_RESTRICTION_FAILED",
+      "EFFECTIVE_TOOL_COMPOSITION_SCHEMA_VIEW_INVALID",
+      "EFFECTIVE_TOOL_COMPOSITION_EFFECTIVE_VIEW_MISMATCH",
+      "EFFECTIVE_TOOL_COMPOSITION_UNCLASSIFIED"
+    ],
+    "preset_mount_codes": [
+      "PRESET_MOUNT_AGENT_SCOPE_ABSENT",
+      "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE",
+      "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED",
+      "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT",
+      "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT",
+      "PRESET_MOUNT_ROOT_SERVICE_LEAK",
+      "PRESET_MOUNT_UNCLASSIFIED"
+    ]
+  },
+  "preset_mount_bridge": {
+    "stage": "preset_mount",
+    "detail": null,
+    "only_proving_result": "preset_mount_failure_attributed",
+    "bridge_materialized_name": "preset-mount-sanitizer-runner-bridge.mjs",
+    "sanitizer_materialized_name": "deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer.mjs"
+  },
+  "process_envelope": {
+    "path": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/attempt-001-process-envelope.json",
+    "persist_before_semantic_admission": true,
+    "stream_content_retained": false,
+    "numeric_exit_code_observed": false
+  },
+  "factory_boundary": {
+    "private_session_id": "session-emr4-preset-mount-sanitized-terminal-001",
+    "publication_stop": "EMR4_AGENT_PUBLICATION_STOP",
+    "agents_create_invocations_max": 1,
+    "published_agents": 0,
+    "published_sessions": 0
+  },
+  "selection": {
+    "provider": "deepseek-official",
+    "model": "deepseek-v4-flash",
+    "reasoning_effort": "high",
+    "max_tokens": 4096
+  },
+  "preset": {
+    "id": "emr4-bounded-worker",
+    "bytes": 158,
+    "sha256": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1",
+    "trust": "user",
+    "effective_tools": ["edit", "glob", "read"]
+  },
+  "required_zero_counters": [
+    "turn_count",
+    "request_count",
+    "broker_process_count",
+    "broker_request_count",
+    "occupied_worker_count",
+    "model_request_count",
+    "provider_request_count",
+    "network_attempt_count",
+    "database_invocation_count",
+    "docker_invocation_count",
+    "target_creation_count",
+    "target_use_count",
+    "published_agents",
+    "published_sessions"
+  ],
+  "claim_boundary": {
+    "only_preset_mount_failure_attributed_proves_new_bridge": true,
+    "worker_launch_authorized": false,
+    "model_provider_request_authorized": false,
+    "retry_authorized": false,
+    "target_or_product_authority": false
+  },
+  "source_bindings": {
+    "diagnostic_runner_sha256": "871fb7fc9d2d8a93e5e67c41a4c0f18af7ba8a23d0a3664505f149199befb9cb",
+    "generated_helper_sha256": "7ff2630b1523c66bb9e0cb5d649879cfa97d0340b791a85255c7dc5ad1fb66fd",
+    "controller_module_sha256": "29495710c5e95a12fba92a2ef34c28ed6b9ce5e034402e5551767e19b843014c",
+    "effective_tool_guard_sha256": "440e7e60bd8a8a1b6c33a4e64ae241c51cd4e126ce6422dc0fcba39b41ec4151",
+    "readiness_sentinel_sha256": "6ff4ff7da4b0bc4a488d1cf79e8412ebb959d8d2c4061683196cf4fa5f4c8de4",
+    "accepted_runner_generator_sha256": "00db15a660290ff6761ea45b07eddecb95ba778b162e3f5cba440a08afc87e35",
+    "accepted_guard_generator_sha256": "b36d9c11d9a6c2f67d72b2afae9aae18dd63d46636627137ccfc38de5d05afa9",
+    "runner_bridge_generator_sha256": "63bf1dc819d849580c51587e87fa77dda38543d8c03ab0503bdbcdcc6068d742",
+    "preset_mount_bridge_sha256": "867b32001030786018cdc8423179902869eed92a2d35f62dc6bb83eb4c6ab428",
+    "preset_mount_sanitizer_sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f"
+  },
+  "predecessor_bytes": {
+    "frozen_plan_sha256": "485b67724ae5ea4a8433ce597fab18c9015d9c2425299049b54f01cb45a3afe9",
+    "threat_model_sha256": "83368b04597ea4f3cbfee9f4ddb364569aaba35f1431b57d85075c35c288dbbb",
+    "accepted_native_controller_sha256": "00db15a660290ff6761ea45b07eddecb95ba778b162e3f5cba440a08afc87e35",
+    "accepted_native_contract_sha256": "69bcd6c5a3eed85dc845f6cd1c03827685236d960f1c6551f12c37976826c0c8",
+    "accepted_native_evidence_sha256": "badce8aa312a09b513173c5c0bbff4b8945b631bf5a5baabf5c363f99de761f7",
+    "accepted_runner_bridge_controller_sha256": "63bf1dc819d849580c51587e87fa77dda38543d8c03ab0503bdbcdcc6068d742",
+    "accepted_runner_bridge_contract_sha256": "baf33c03d0f18d45a6664b6c1b6928743dc82bfbe7e67f5929a58c8b0f32ee76",
+    "accepted_runner_bridge_evidence_sha256": "8050fc1c445f07b66bdc6ecd7f0d19f77f1443d90fdd9c0351820c4c604f2220",
+    "accepted_bridge_module_sha256": "867b32001030786018cdc8423179902869eed92a2d35f62dc6bb83eb4c6ab428",
+    "accepted_sanitizer_module_sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f"
+  },
+  "base_contract_sha256": "19d1983d0cf372aa6c4845e9c4e5bb2c252e12ed2dcff2ada1e4a6766e7a140c",
+  "implementation_bytes": {
+    "execution_controller_sha256": "c0bb64ba18c275b25f0e4c9e6fb8eb53899ff6ee771c1eb6c2ad1cfe0037c8f5",
+    "focused_test_sha256": "0a22d91c91aa3a13dd1f006d48df92ff3a2ef3899505035364c169bae2cef7f3",
+    "contract_schema_sha256": "b5bd64e508e7b9603b26d2f25566cebddca40ea642ae32c3502cfd1e321c183c",
+    "sidecar_schema_sha256": "af6ee2e6c09c89f72e70037a6a3f585a2ce8a9c06ccbac9e96d8c1dc5aa40327",
+    "evidence_schema_sha256": "7f2a0c5d68fe2d05be79cc21be084be6f6ade41acdc73c828a23528c986b83c3",
+    "process_envelope_schema_sha256": "fd5c4065dcccf1cda5f1dc64b45e4787eea56fbbdffa94f7a42993835cee4824"
+  }
+}

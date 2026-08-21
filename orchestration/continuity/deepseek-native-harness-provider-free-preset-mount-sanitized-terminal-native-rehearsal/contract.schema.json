@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-preset-mount-sanitized-terminal-contract.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "execution_attempt", "closed_vocabulary", "preset_mount_bridge", "process_envelope", "factory_boundary", "selection", "preset", "required_zero_counters", "claim_boundary", "source_bindings", "predecessor_bytes", "base_contract_sha256", "implementation_bytes"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_preset_mount_sanitized_terminal_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal"},
+    "planning_source": {"$ref": "#/$defs/oid"},
+    "execution_attempt": {
+      "const": {"attempt_id": "preset-mount-sanitized-terminal-native-attempt-001", "native_process_count": 1, "automatic_retry": false, "manual_retry": false, "resume": false}
+    },
+    "closed_vocabulary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stages", "error_classes", "terminals", "safe_guard_coordinates", "preset_mount_codes"],
+      "properties": {
+        "stages": {"type": "array", "items": {"type": "string"}},
+        "error_classes": {"type": "array", "items": {"type": "string"}},
+        "terminals": {"const": ["closed_subcoordinate_failure", "preset_mount_failure_attributed", "preset_composition_failure_attributed", "prepublication_veto_diagnosed", "runner_link_or_apply_absence"]},
+        "safe_guard_coordinates": {"type": "array", "items": {"type": "string"}},
+        "preset_mount_codes": {"const": ["PRESET_MOUNT_AGENT_SCOPE_ABSENT", "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE", "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED", "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT", "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT", "PRESET_MOUNT_ROOT_SERVICE_LEAK", "PRESET_MOUNT_UNCLASSIFIED"]}
+      }
+    },
+    "preset_mount_bridge": {
+      "const": {"stage": "preset_mount", "detail": null, "only_proving_result": "preset_mount_failure_attributed", "bridge_materialized_name": "preset-mount-sanitizer-runner-bridge.mjs", "sanitizer_materialized_name": "deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer.mjs"}
+    },
+    "process_envelope": {
+      "const": {"path": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/attempt-001-process-envelope.json", "persist_before_semantic_admission": true, "stream_content_retained": false, "numeric_exit_code_observed": false}
+    },
+    "factory_boundary": {
+      "const": {"private_session_id": "session-emr4-preset-mount-sanitized-terminal-001", "publication_stop": "EMR4_AGENT_PUBLICATION_STOP", "agents_create_invocations_max": 1, "published_agents": 0, "published_sessions": 0}
+    },
+    "selection": {
+      "const": {"provider": "deepseek-official", "model": "deepseek-v4-flash", "reasoning_effort": "high", "max_tokens": 4096}
+    },
+    "preset": {
+      "const": {"id": "emr4-bounded-worker", "bytes": 158, "sha256": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1", "trust": "user", "effective_tools": ["edit", "glob", "read"]}
+    },
+    "required_zero_counters": {"type": "array", "items": {"type": "string"}},
+    "claim_boundary": {
+      "const": {"only_preset_mount_failure_attributed_proves_new_bridge": true, "worker_launch_authorized": false, "model_provider_request_authorized": false, "retry_authorized": false, "target_or_product_authority": false}
+    },
+    "source_bindings": {"type": "object", "additionalProperties": {"$ref": "#/$defs/digest"}},
+    "predecessor_bytes": {"type": "object", "additionalProperties": {"$ref": "#/$defs/digest"}},
+    "base_contract_sha256": {"$ref": "#/$defs/digest"},
+    "implementation_bytes": {"type": "object", "additionalProperties": {"$ref": "#/$defs/digest"}}
+  },
+  "$defs": {
+    "oid": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

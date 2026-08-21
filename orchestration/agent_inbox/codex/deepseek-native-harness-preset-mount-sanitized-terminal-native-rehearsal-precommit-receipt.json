@@ -1,0 +1,125 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free preset-mount sanitized-terminal native rehearsal",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_derive_the_exact_native_materialisation_controller_and_freeze_one_process_before_execution",
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "7b87189de73319be8f68113984e34e150688d59f",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "66837017a24252a4d69f5fc5ed5b7e85dd46cb07",
+    "reason_codes": [],
+    "resolved_commit": "7b87189de73319be8f68113984e34e150688d59f",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "7b87189de73319be8f68113984e34e150688d59f"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "66837017a24252a4d69f5fc5ed5b7e85dd46cb07",
+    "branch_origin_aligned": true,
+    "head": "66837017a24252a4d69f5fc5ed5b7e85dd46cb07",
+    "origin_branch_commit": "66837017a24252a4d69f5fc5ed5b7e85dd46cb07",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 671
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "precommit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "A DeepSeek worker would enter the exact native path under test and violate the zero-turn zero-request boundary.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exact source hashes, schemas, finite terminals and one-hundred-nine deterministic tests leave no current semantic veto surface.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits delegation and the one-process controller has a single serial owner.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "prepush",
+      "preexecution",
+      "semantic ambiguity in the one-process evidence",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "explicitly stage only the exact controller contract schema test and receipt paths",
+      "commit before prepush assessment",
+      "push and align before fresh preexecution",
+      "start no native process during commit or push"
+    ]
+  },
+  "planned_action": "commit_only_the_exact_deterministically_verified_sanitized_terminal_native_controller_contract_schemas_tests_and_rehydration_receipts_without_execution_or_push",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-runner-bridge-rehearsal-sol-acceptance.md",
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/runner-bridge-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial exact-source controller and commit. DeepSeek is declined because its native path is under test; Gemini is declined because all current surfaces are deterministic; native subagents are declined because delegation is prohibited.",
+    "git_refs_and_worktree": "The receipt builder must supply every current Git object identity and worktree reading. Caller prose asserts no object ID. The named implementation paths alone are intended for explicit staging; docs/branding and every unrelated untracked entry remain excluded.",
+    "live_handover_current_baton": "The fully read live baton names this sanitized-terminal native rehearsal as Next implementation and keeps the accepted runner bridge at Continuity 384 and Compass 366.",
+    "protected_evidence_boundaries": "No native process, worker, model/provider request, retry, target, product/data action, ordinary-practice admission, deployment, release, Pages, protected evidence or protected-ref movement has occurred. The commit contains only provider-free controller and governance artifacts; one native process remains gated behind origin alignment and a fresh preexecution receipt."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

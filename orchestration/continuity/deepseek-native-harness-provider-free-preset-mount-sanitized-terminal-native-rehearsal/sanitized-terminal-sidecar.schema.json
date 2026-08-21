@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-preset-mount-sanitized-terminal-sidecar.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "execution_attempt_id", "candidate_source",
+    "result", "last_admitted_stage", "error_class", "safe_guard_coordinate",
+    "safe_guard_detail", "preset_mount_terminal", "runner_sha256",
+    "effective_tool_guard_sha256", "preset_sha256", "fixed_identity_sha256",
+    "target_path_sha256", "agent_create_invocation_count",
+    "private_agent_preparation_count", "private_session_preparation_count",
+    "live_agent_count", "live_session_count", "session_created_event_count",
+    "agent_created_event_count", "agent_session_start_event_count",
+    "preset_mounted", "model_selection_installed", "veto_exact", "veto_rejected",
+    "raw_error_retained", "target_created", "target_used", "turn_count",
+    "request_count", "broker_process_count", "broker_request_count",
+    "occupied_worker_count", "model_request_count", "provider_request_count",
+    "database_invocation_count", "docker_invocation_count"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_preset_mount_sanitized_terminal_sidecar.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal"},
+    "execution_attempt_id": {"const": "preset-mount-sanitized-terminal-native-attempt-001"},
+    "candidate_source": {"$ref": "#/$defs/oid"},
+    "result": {"enum": ["closed_subcoordinate_failure", "preset_mount_failure_attributed", "preset_composition_failure_attributed", "prepublication_veto_diagnosed"]},
+    "last_admitted_stage": {"enum": ["runner_apply_entered", "loader_ready", "package_imports_admitted", "services_resolved", "preset_roots_admitted", "preset_roster_admitted", "registries_empty_before_factory", "session_identity_constructed", "agent_factory_invoked", "factory_setup_entered", "private_identity_admitted", "preset_composition_admitted", "model_selection_installed", "setup_commit_entered", "publication_veto_observed", "postrollback_registries_empty"]},
+    "error_class": {"type": ["string", "null"], "enum": [null, "loader_await_rejected", "package_import_rejected", "required_service_missing", "preset_root_count_mismatch", "shipped_root_mismatch", "user_root_mismatch", "preset_roster_mismatch", "registry_not_empty", "private_identity_mismatch", "private_object_prepublished", "effective_composition_mismatch", "commit_identity_mismatch", "commit_publication_early", "commit_composition_mismatch", "publication_veto_mismatch", "factory_resolved_without_veto", "private_identity_retained", "lifecycle_event_escaped", "cwd_not_absolute", "safe_terminal_invalid", "unclassified_error"]},
+    "safe_guard_coordinate": {"type": ["string", "null"], "enum": [null, "EFFECTIVE_TOOL_COMPOSITION_INPUT_INVALID", "EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED", "EFFECTIVE_TOOL_COMPOSITION_SCOPE_MISSING", "EFFECTIVE_TOOL_COMPOSITION_SCOPE_LOCAL_TOOL_PRESENT", "EFFECTIVE_TOOL_COMPOSITION_EXPECTED_TOOL_NOT_INHERITED", "EFFECTIVE_TOOL_COMPOSITION_RESTRICTION_FAILED", "EFFECTIVE_TOOL_COMPOSITION_SCHEMA_VIEW_INVALID", "EFFECTIVE_TOOL_COMPOSITION_EFFECTIVE_VIEW_MISMATCH", "EFFECTIVE_TOOL_COMPOSITION_UNCLASSIFIED"]},
+    "safe_guard_detail": {"type": ["string", "null"], "pattern": "^[a-z_]+(?:,[a-z_]+)*$"},
+    "preset_mount_terminal": {
+      "anyOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["stage", "code", "detail"],
+          "properties": {
+            "stage": {"const": "preset_mount"},
+            "code": {"enum": ["PRESET_MOUNT_AGENT_SCOPE_ABSENT", "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE", "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED", "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT", "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT", "PRESET_MOUNT_ROOT_SERVICE_LEAK", "PRESET_MOUNT_UNCLASSIFIED"]},
+            "detail": {"type": "null"}
+          }
+        }
+      ]
+    },
+    "runner_sha256": {"$ref": "#/$defs/digest"},
+    "effective_tool_guard_sha256": {"$ref": "#/$defs/digest"},
+    "preset_sha256": {"$ref": "#/$defs/digest"},
+    "fixed_identity_sha256": {"$ref": "#/$defs/digest"},
+    "target_path_sha256": {"$ref": "#/$defs/digest"},
+    "agent_create_invocation_count": {"type": "integer", "minimum": 0, "maximum": 1},
+    "private_agent_preparation_count": {"type": "integer", "minimum": 0, "maximum": 1},
+    "private_session_preparation_count": {"type": "integer", "minimum": 0, "maximum": 1},
+    "live_agent_count": {"type": "integer", "minimum": 0},
+    "live_session_count": {"type": "integer", "minimum": 0},
+    "session_created_event_count": {"type": "integer", "minimum": 0},
+    "agent_created_event_count": {"type": "integer", "minimum": 0},
+    "agent_session_start_event_count": {"type": "integer", "minimum": 0},
+    "preset_mounted": {"type": "boolean"},
+    "model_selection_installed": {"type": "boolean"},
+    "veto_exact": {"type": "boolean"},
+    "veto_rejected": {"type": "boolean"},
+    "raw_error_retained": {"const": false},
+    "target_created": {"const": false},
+    "target_used": {"const": false},
+    "turn_count": {"const": 0},
+    "request_count": {"const": 0},
+    "broker_process_count": {"const": 0},
+    "broker_request_count": {"const": 0},
+    "occupied_worker_count": {"const": 0},
+    "model_request_count": {"const": 0},
+    "provider_request_count": {"const": 0},
+    "database_invocation_count": {"const": 0},
+    "docker_invocation_count": {"const": 0}
+  },
+  "$defs": {
+    "oid": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}
