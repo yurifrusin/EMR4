@@ -1,0 +1,31 @@
+{
+  "schema_version": "ariadne.workflow_efficacy_reading.v1",
+  "operation_id": "deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis",
+  "result": "promising_with_contained_draft_corrections",
+  "outcome": "One hash-bound static pass identified the preactivation sentinel-source escape transformation without another Harness or provider attempt.",
+  "useful_work": {
+    "unique_source_coordinate": true,
+    "passing_control_bound": true,
+    "hostile_mutation_tests": 6,
+    "verification_tests_passed": 50,
+    "native_processes": 0,
+    "provider_requests": 0
+  },
+  "reruns": [
+    {
+      "kind": "focused_test_rerun",
+      "count": 1,
+      "cause": "The first provider-boundary assertion incorrectly treated the count of scrubbed credential environment names as prohibited provider activity.",
+      "control": "Use an explicit allowlist of the zero-required provider-boundary fields."
+    }
+  ],
+  "draft_corrections": [
+    {
+      "kind": "git_object_resolution",
+      "count": 1,
+      "cause": "A pre-verifier draft expanded the displayed abbreviated candidate with guessed suffix characters before machine resolution.",
+      "control": "Discard the guessed value, resolve HEAD with Git, then remove caller-authored object IDs from git_refs_and_worktree so the preflight machine snapshot is the sole binding."
+    }
+  ],
+  "assessment": "The clockwork remains worthwhile: neither correction reached publication, and the final pre-verifier receipt passed with zero manually supplied Git object IDs. The remaining improvement is to generate receipt runtime-state Git descriptions from a template so even transient guessed identifiers are unnecessary."
+}

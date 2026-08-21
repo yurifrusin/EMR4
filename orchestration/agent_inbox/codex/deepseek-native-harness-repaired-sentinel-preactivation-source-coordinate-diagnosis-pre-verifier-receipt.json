@@ -1,0 +1,127 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free repaired-sentinel preactivation source-coordinate diagnosis",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_static_preactivation_source_coordinate_diagnosis_contract",
+    "operation_id": "deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis",
+    "resume_after_compaction": true,
+    "source_head": "42f6314b640c55ed8fd72f62e09548f0fdabfe87",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "d1e60a59a0b0cf600721850b96d2914059fe7ca3",
+    "reason_codes": [],
+    "resolved_commit": "42f6314b640c55ed8fd72f62e09548f0fdabfe87",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "42f6314b640c55ed8fd72f62e09548f0fdabfe87"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "d1e60a59a0b0cf600721850b96d2914059fe7ca3",
+    "branch_origin_aligned": true,
+    "head": "d1e60a59a0b0cf600721850b96d2914059fe7ca3",
+    "origin_branch_commit": "d1e60a59a0b0cf600721850b96d2914059fe7ca3",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 659
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The coordinate is a local Python-to-JavaScript escape transformation; a DeepSeek worker/provider call cannot alter the hash-bound static facts and would breach scope.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "gemini_verifier",
+        "rationale": "Provider review remains outside the latch; AST extraction, a passing native control and hostile mutations independently test the claim.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the unique-coordinate acceptance is one serial evidence chain.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "input digest drift",
+      "hostile mutation exposes non-uniqueness",
+      "clockwork closeout rejection",
+      "separately frozen repair tranche opens"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "preserve the consumed attempt and destroyed raw streams",
+      "accept one sufficient source coordinate without claiming absence of later defects",
+      "run deterministic verification only",
+      "publish the successor through clockwork before any repair"
+    ]
+  },
+  "planned_action": "accept_the_unique_static_preactivation_source_coordinate_and_freeze_the_narrow_sentinel_escape_repair_successor_without_runtime_execution",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/diagnosis-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/diagnosis-report.md",
+      "scripts/deepseek_native_harness_provider_free_repaired_sentinel_preactivation_source_coordinate_diagnosis.py",
+      "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_preactivation_source_coordinate_diagnosis.py",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns static interpretation, deterministic verification and closeout. DeepSeek, Gemini and native-subagent lanes remain declined because runtime, provider and delegated execution are closed.",
+    "git_refs_and_worktree": "Machine evidence alone must resolve the current candidate as HEAD and origin-aligned, preserve all four protected refs, docs/branding and every unrelated untracked path.",
+    "live_handover_current_baton": "Continuity 365 and Compass 347 opened only this static diagnosis after the one-process repaired-sentinel terminal failed closed; the candidate now names one source transformation sufficient for preactivation rejection.",
+    "protected_evidence_boundaries": "Accept only the hash-bound static source transformation. No raw stderr reconstruction, consumed-attempt retry, Node, Harness, broker, worker, model, provider, network, product, data, deployment, Pages or protected-ref action is permitted."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

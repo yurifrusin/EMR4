@@ -1,0 +1,36 @@
+{
+  "schema_version": "ariadne.deepseek_native_harness_repaired_sentinel_preactivation_source_diagnosis_verification.v1",
+  "candidate_source": "d1e60a59a0b0cf600721850b96d2914059fe7ca3",
+  "result": "pass",
+  "commands": [
+    {
+      "id": "focused_and_predecessor_pytest",
+      "result": "pass",
+      "passed": 50,
+      "failed": 0
+    },
+    {
+      "id": "ruff",
+      "result": "pass"
+    },
+    {
+      "id": "py_compile",
+      "result": "pass"
+    },
+    {
+      "id": "pre_verifier_receipt",
+      "result": "pass",
+      "reason_count": 0
+    }
+  ],
+  "activity": {
+    "node_process_count": 0,
+    "harness_process_count": 0,
+    "broker_process_count": 0,
+    "worker_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "network_request_count": 0,
+    "raw_stream_reconstruction_count": 0
+  }
+}

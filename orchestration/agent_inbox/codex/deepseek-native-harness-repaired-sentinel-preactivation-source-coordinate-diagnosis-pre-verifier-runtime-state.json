@@ -1,0 +1,177 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_the_unique_static_preactivation_source_coordinate_and_freeze_the_narrow_sentinel_escape_repair_successor_without_runtime_execution",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "passing five-source preplanning receipt, current committed and pushed static diagnosis candidate, exact hash-bound failed terminal and passing control, Python-AST extraction, lexical-state analysis and hostile-mutation tests",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "Continuity 365 and Compass 347 opened only this static diagnosis after the one-process repaired-sentinel terminal failed closed; the candidate now names one source transformation sufficient for preactivation rejection.",
+    "current_authority_allocation": "GPT Sol owns static interpretation, deterministic verification and closeout. DeepSeek, Gemini and native-subagent lanes remain declined because runtime, provider and delegated execution are closed.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/diagnosis-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/diagnosis-report.md",
+      "scripts/deepseek_native_harness_provider_free_repaired_sentinel_preactivation_source_coordinate_diagnosis.py",
+      "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_preactivation_source_coordinate_diagnosis.py",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Accept only the hash-bound static source transformation. No raw stderr reconstruction, consumed-attempt retry, Node, Harness, broker, worker, model, provider, network, product, data, deployment, Pages or protected-ref action is permitted.",
+    "git_refs_and_worktree": "Machine evidence alone must resolve the current candidate as HEAD and origin-aligned, preserve all four protected refs, docs/branding and every unrelated untracked path."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis",
+    "active_tranche": "DeepSeek native Harness provider-free repaired-sentinel preactivation source-coordinate diagnosis",
+    "objective": "Statically inspect the pinned rc7 loader and plugin configuration against the exact repaired initial profile and sanitized terminal to identify the narrowest unique source coordinate consistent with zero HMR events and exit 1, without reconstructing raw output or launching Node, Harness, broker, worker, model, provider or network activity.",
+    "status": "in_progress",
+    "source_head": "42f6314b640c55ed8fd72f62e09548f0fdabfe87",
+    "authority_source": "Yuri's standing uninterrupted-development authority, constrained by the consumed no-retry boot terminal and a provider-free static diagnosis envelope.",
+    "checkpoint": {
+      "completed_stage": "Accepted deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof at the machine-resolved source.",
+      "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_static_preactivation_source_coordinate_diagnosis_contract",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_static_preactivation_source_coordinate_diagnosis_only",
+      "zero_node_native_harness_broker_worker_model_provider_or_network_process_or_request",
+      "no_retry_resume_fallback_reclassification_or_second_process_for_consumed_attempt_001",
+      "consumed_terminal_stream_digests_and_attempt_evidence_remain_immutable",
+      "no_raw_error_message_stack_path_stream_session_environment_or_credential_reconstruction",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis",
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The coordinate is a local Python-to-JavaScript escape transformation; a DeepSeek worker/provider call cannot alter the hash-bound static facts and would breach scope.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Provider review remains outside the latch; AST extraction, a passing native control and hostile mutations independently test the claim.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and the unique-coordinate acceptance is one serial evidence chain.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "preserve the consumed attempt and destroyed raw streams",
+      "accept one sufficient source coordinate without claiming absence of later defects",
+      "run deterministic verification only",
+      "publish the successor through clockwork before any repair"
+    ],
+    "reassessment_triggers": [
+      "input digest drift",
+      "hostile mutation exposes non-uniqueness",
+      "clockwork closeout rejection",
+      "separately frozen repair tranche opens"
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol owns static acceptance and closeout."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Historical transport only; no worker/provider request is admitted."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Provider review is closed for this static acceptance."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No subagent was spawned; policy and serial ownership prohibit delegation."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": "emr4.non_phi_pushover_notification_receipt.v1",
+  "recorded_at": "2026-08-21T15:19:26.6692485+10:00",
+  "status": "passed",
+  "provider": "pushover",
+  "request": "df2b750a-125d-4f87-bc4a-ecc44bdef53a",
+  "title": "EMR4 Harness closeout",
+  "message_class": "non_phi_operational_closeout",
+  "phi_or_clinical_data": false,
+  "summary": "Harness preactivation diagnosis found one static sentinel escape coordinate; 50 tests passed with zero Node or provider activity, and a provider-free source repair is next."
+}
