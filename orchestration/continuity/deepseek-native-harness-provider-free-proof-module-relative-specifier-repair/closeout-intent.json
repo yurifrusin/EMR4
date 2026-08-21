@@ -1,0 +1,303 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-proof-module-relative-specifier-repair",
+    "title": "DeepSeek native Harness provider-free proof-module relative-specifier repair",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-21T13:48:50.6623983+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-proof-module-relative-specifier-repair",
+      "title": "Native Harness proof-module relative-specifier repair",
+      "kind": "tooling",
+      "relationships": [{
+        "node_id": "deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis",
+        "relation": "builds_on"
+      }],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the exact provider-free repair justified by the accepted diagnosis.",
+          "No Node, Harness, broker, worker, model, provider, network or occupied-retry authority opened.",
+          "No product, data, deployment, Pages or protected-ref authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-two-row-relative-specifier-repair",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/repair-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the two generated profile module-name replacements and one dead-local removal with preserved bounded profile invariants."
+        },
+        {
+          "id": "preserve-historical-latch-and-source-bindings",
+          "source": "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-historical-test-selection.md",
+          "status": "accepted",
+          "summary": "Preserve three historical latch/equality assertions unchanged under exact successor deselection."
+        },
+        {
+          "id": "reject-native-boot-and-worker-readiness",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-proof-module-relative-specifier-repair-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Reject any claim that this static repair proves native boot, DeepSeek reachability or worker readiness."
+        },
+        {
+          "id": "accept-contained-repair-workflow-incidents",
+          "source": "docs/ariadne-agent-error-correction-register-revision-587.md",
+          "status": "accepted",
+          "summary": "Accept four corrected or contained repair/verification incidents with none open."
+        }
+      ],
+      "claim_scope": [
+        "The generated sentinel and runner module names now use the accepted profile-relative rc7 form.",
+        "The behavioral output diff is exactly two rows and mechanical fallout is one dead local.",
+        "All bounded profile validation anchors remain passing.",
+        "Focused 30-test and corrected widened 56-test readings pass.",
+        "Node, Harness, broker, worker, model, provider and network activity remained zero."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/repair-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/repair-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/efficacy-reading.json",
+          "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-historical-test-selection.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-proof-module-relative-specifier-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-proof-module-relative-specifier-repair-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-proof-module-relative-specifier-repair-pre-verifier-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py",
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/evidence.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-587.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-proof-module-relative-specifier-repair.md"
+        ]
+      },
+      "unresolved_gates": [
+        "No repaired native Harness process has booted.",
+        "No HMR-ready event from the repaired sentinel has been observed.",
+        "DeepSeek provider, reasoning, coding and tool behavior remain unreached.",
+        "Every attempt-004 identity remains consumed and no occupied retry is authorised."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Convert the source diagnosis into the narrowest fail-closed profile repair",
+      "outcome": "The two proof-module names now match the already passing rc7 relative-specifier form without runtime or provider activity.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/efficacy-reading.json",
+        "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Prove the repaired initial sentinel can boot in one bounded provider-free rc7 process",
+      "why_now": "The exact source repair and static projections pass, but no repaired native process has yet exercised the loader.",
+      "outcome": "One provider-free initial-profile boot will either emit the expected HMR-ready event with exact cleanup or stop at a new sanitized pre-provider terminal.",
+      "unlocks": [
+        "A grounded decision about whether the repaired profile clears the plugin-tree startup branch.",
+        "A later separately controlled worker-readiness step only if the boot proof passes."
+      ],
+      "does_not_solve": [
+        "No changed runner, broker, model, provider or occupied worker request.",
+        "No product work, data use, deployment or protected integration."
+      ],
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/repair-evidence.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/repair-report.md"
+      ],
+      "orientation_statement": "Launch one bounded rc7 process with only the repaired initial sentinel profile; require HMR readiness or a sanitized fail-closed terminal, then clean up."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof",
+      "active_tranche": "DeepSeek native Harness provider-free repaired-sentinel native boot proof",
+      "objective": "Launch exactly one bounded rc7 Node/Harness process using only the repaired initial sentinel profile, require exactly one stock-headless HMR-ready event or retain one sanitized fail-closed pre-provider terminal, forbid the changed runner, broker, worker, model and provider, and prove exact process and disposable-root cleanup.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, constrained by the accepted two-row repair and a one-process provider-free initial-sentinel boot envelope.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_one_process_repaired_sentinel_boot_contract"
+    },
+    "incidents": [
+      {"incident_id": "repair-runner-omitted-repository-import-bootstrap", "source_id": "relative-specifier-repair-runner-import-001", "peers": []},
+      {"incident_id": "dead-local-guard-searched-outside-profile-function", "source_id": "relative-specifier-repair-guard-scope-001", "peers": []},
+      {"incident_id": "no-database-wrapper-received-unsupported-deselect", "source_id": "relative-specifier-repair-wrapper-cli-001", "peers": []},
+      {"incident_id": "widened-run-selected-frozen-source-binding-checks", "source_id": "relative-specifier-repair-historical-equality-selection-001", "peers": []}
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "relative_specifier_repair_focused_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "relative_specifier_repair_widened_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "pytest", "-q", "tests/test_deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py", "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py", "--deselect", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py::test_attempt_four_provider_free_check_reports_zero_processes_and_requests", "--deselect", "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py::test_deterministic_evidence_launches_no_subprocess", "--deselect", "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py::test_contract_evidence_and_report_are_current"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "relative_specifier_repair_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py", "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "relative_specifier_repair_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py", "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Native Harness proof-module relative-specifier repair acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/evidence.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/repair-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/repair-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/efficacy-reading.json",
+      "scripts/deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py",
+      "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+      "tests/test_deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py",
+      "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-historical-test-selection.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-proof-module-relative-specifier-repair-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-proof-module-relative-specifier-repair-pre-verifier-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-587.md",
+      "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-proof-module-relative-specifier-repair-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-proof-module-relative-specifier-repair.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_exactly_one_bounded_rc7_repaired_initial_sentinel_native_boot_only",
+    "exactly_one_node_native_harness_process_zero_changed_runner_broker_worker_model_provider_or_network_request",
+    "no_occupied_attempt_retry_resume_fallback_reclassification_or_second_process",
+    "attempts_001_002_003_004_terminal_and_consumed_evidence_remain_immutable",
+    "sanitized_closed_vocabulary_terminal_only_no_raw_error_message_stack_path_stream_session_or_credential_retention",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "relative-specifier-repair-runner-import-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-relative-specifier-repair",
+      "role": "orchestrator",
+      "resource_id": "repair-runner-cli-import",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A repository runner must support direct script execution with the repository package importable.",
+      "observed_error": "The first direct invocation raised ModuleNotFoundError for scripts because the repository-root bootstrap was absent.",
+      "detection_method": "The Python CLI exited before evidence or external activity.",
+      "evidence_paths": ["scripts/deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py", "docs/ariadne-agent-error-correction-register-revision-587.md"],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.repository_runner_direct_cli_missing_repo_root_bootstrap",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Add the standard resolved repository-root sys.path bootstrap before importing scripts.", "prevention_control": "Every new repository runner is invoked directly before acceptance.", "evidence_paths": ["scripts/deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py"]},
+      "baton_summary": "records the rejected direct-runner import and standard root-bootstrap correction."
+    },
+    {
+      "attempt_key": "relative-specifier-repair-guard-scope-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-relative-specifier-repair",
+      "role": "orchestrator",
+      "resource_id": "repair-dead-local-guard",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A dead-local assertion must inspect only the function that owns the repaired local.",
+      "observed_error": "The first guard searched the whole controller and rejected a legitimate proof local in attempt preparation.",
+      "detection_method": "The evidence returned failed_closed with only dead_proof_local_absent false.",
+      "evidence_paths": ["scripts/deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py", "docs/ariadne-agent-error-correction-register-revision-587.md"],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.static_guard_scope_exceeded_owned_function_boundary",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Slice the exact profile_patch body before applying the dead-local check.", "prevention_control": "Static local-variable guards bind their named function boundary explicitly.", "evidence_paths": ["scripts/deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py"]},
+      "baton_summary": "records the overbroad dead-local guard and function-boundary correction."
+    },
+    {
+      "attempt_key": "relative-specifier-repair-wrapper-cli-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-relative-specifier-repair",
+      "role": "orchestrator",
+      "resource_id": "provider-free-pytest-wrapper-cli",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The provider-free pytest wrapper must receive only its admitted exact-path vocabulary.",
+      "observed_error": "The first widened command passed pytest --deselect options to a wrapper that accepts paths only.",
+      "detection_method": "Argument parsing rejected the command before pytest collection.",
+      "evidence_paths": ["docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-historical-test-selection.md", "docs/ariadne-agent-error-correction-register-revision-587.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.provider_free_pytest_wrapper_received_unadmitted_pytest_option",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Use direct serial pytest whenever explicit deselection is required.", "prevention_control": "Wrapper commands contain paths only; direct pytest owns documented option-bearing selections.", "evidence_paths": ["docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-historical-test-selection.md"]},
+      "baton_summary": "records the rejected wrapper option and direct serial-pytest correction."
+    },
+    {
+      "attempt_key": "relative-specifier-repair-historical-equality-selection-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-relative-specifier-repair",
+      "role": "orchestrator",
+      "resource_id": "historical-source-binding-test-selection",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A successor regression must exclude frozen current-artifact equality checks whose accepted source is intentionally changed.",
+      "observed_error": "The first direct widened run selected two controller-convergence checks bound to the pre-repair component hash.",
+      "detection_method": "Both checks returned accepted_component_drift while all behavioral peers passed.",
+      "evidence_paths": ["docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-historical-test-selection.md", "docs/ariadne-agent-error-correction-register-revision-587.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_regression_selected_frozen_predecessor_source_binding_checks",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Deselect only the two exact frozen source-binding checks and retain every behavioral peer.", "prevention_control": "Successor manifests document historical source-binding deselections before widened execution.", "evidence_paths": ["docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-historical-test-selection.md"]},
+      "baton_summary": "records the frozen source-binding selections and exact successor deselections."
+    }
+  ]
+}

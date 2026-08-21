@@ -1,0 +1,28 @@
+{
+  "schema_version": "ariadne.native_harness_proof_module_relative_specifier_repair_efficacy.v1",
+  "operation_id": "deepseek-native-harness-provider-free-proof-module-relative-specifier-repair",
+  "recorded_at": "2026-08-21T13:48:50.6623983+10:00",
+  "reviewed_candidate": "3c31f2a9a44713db27b82e338e05374c5d9f62bc",
+  "result": "accepted_provider_free_two_row_repair",
+  "semantic_output_rows_changed": 2,
+  "mechanical_dead_locals_removed": 1,
+  "focused_tests_passed": 30,
+  "widened_tests_passed": 56,
+  "explicit_historical_deselections": 3,
+  "zero_activity": {
+    "node_process_count": 0,
+    "harness_process_count": 0,
+    "broker_process_count": 0,
+    "worker_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "network_request_count": 0
+  },
+  "parallelism": {
+    "deepseek": "declined_negative_leverage_no_model_or_provider_authority",
+    "gemini": "declined_negative_leverage_no_provider_review_authority",
+    "native_subagents": "declined_negative_leverage_serial_repair_and_developer_policy",
+    "owner": "gpt_sol"
+  },
+  "next_reading": "Run one separately frozen provider-free repaired-sentinel native boot proof with one bounded rc7 process, zero broker/model/provider activity and exact cleanup."
+}
