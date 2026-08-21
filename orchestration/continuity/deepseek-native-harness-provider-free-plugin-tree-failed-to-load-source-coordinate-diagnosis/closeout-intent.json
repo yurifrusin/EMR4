@@ -47,7 +47,7 @@
           "id": "accept-contained-verification-incidents",
           "source": "docs/ariadne-agent-error-correction-register-revision-586.md",
           "status": "accepted",
-          "summary": "Accept two corrected or contained exact-test-selection incidents with none open."
+          "summary": "Accept three corrected or contained verification and closeout-shape incidents with none open."
         }
       ],
       "claim_scope": [
@@ -57,9 +57,7 @@
         "A separate provider-free two-row repair is justified.",
         "Node, Harness, broker, worker, model, provider and network activity remained zero."
       ],
-      "contract_evidence": [
-        "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/contract.json"
-      ],
+      "contract_evidence": [],
       "evidence": {
         "plans": [
           "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-plan.md",
@@ -144,6 +142,11 @@
       {
         "incident_id": "grouped-verification-used-mnemonic-test-paths",
         "source_id": "plugin-tree-source-diagnosis-grouped-test-path-001",
+        "peers": []
+      },
+      {
+        "incident_id": "closeout-contract-evidence-used-path-not-object",
+        "source_id": "plugin-tree-source-diagnosis-contract-evidence-shape-001",
         "peers": []
       }
     ],
@@ -314,6 +317,39 @@
         ]
       },
       "baton_summary": "records the rejected mnemonic test paths and repository-inventory correction."
+    },
+    {
+      "attempt_key": "plugin-tree-source-diagnosis-contract-evidence-shape-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-plugin-tree-source-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "closeout-contract-evidence-shape",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Continuity contract evidence must be an exact structured object and must be empty when no cross-contract claim is made.",
+      "observed_error": "The first read-only closeout intent supplied the diagnosis contract path as a bare string in contract_evidence.",
+      "detection_method": "The prospective Compass projection returned contract_evidence_object_required before commands or publication.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-586.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_contract_evidence_used_bare_path_not_structured_object",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the exact empty contract_evidence list because this node makes no cross-contract claim.",
+        "prevention_control": "Read-only clockwork projection validation remains mandatory before commands and publication.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the rejected bare contract-evidence path and exact empty-list correction."
     }
   ]
 }

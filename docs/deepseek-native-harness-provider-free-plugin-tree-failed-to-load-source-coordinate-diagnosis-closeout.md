@@ -40,11 +40,13 @@ does not authorise another occupied attempt.
 - JSON Schema, Ruff, Python compilation and staged diff checks passed; and
 - Node, Harness, broker, worker, model, provider and network activity: zero.
 
-Two rejected verification readings are retained as procedure evidence. One
+Three rejected procedure readings are retained as evidence. One
 historical attempt-004 test correctly rejected the successor latch, so it was
 deselected rather than weakened or made to roll the latch backwards. A later
 grouped command used two mnemonic filenames that did not exist; `rg --files`
-resolved the exact inventory and the corrected 58-test command passed.
+resolved the exact inventory and the corrected 58-test command passed. The
+first read-only closeout check also rejected a bare `contract_evidence` path;
+the corrected node uses an empty list because it makes no cross-contract claim.
 
 ## Parallelism efficacy
 

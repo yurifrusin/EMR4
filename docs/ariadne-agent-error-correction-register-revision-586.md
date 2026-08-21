@@ -5,8 +5,8 @@ Timestamp: 2026-08-21T13:26:54.8506659+10:00 (Australia/Brisbane)
 
 <!-- ariadne-agent-error-register-reading
 revision: 586
-incident_count: 771
-new_incident_ids: AER-0770,AER-0771
+incident_count: 772
+new_incident_ids: AER-0770,AER-0771,AER-0772
 open_incident_count: 0
 -->
 
@@ -28,4 +28,13 @@ corrected exact-path command passed 58 tests. Future grouped selections are
 resolved mechanically from the repository rather than reconstructed from
 mnemonic names.
 
-Both incidents are corrected or contained and neither remains open.
+## AER-0772 — closeout contract evidence used the wrong shape
+
+The first read-only clockwork closeout check supplied a plain artifact path in
+`contract_evidence`, where the Continuity schema requires structured
+cross-contract evidence objects. The prospective projection rejected the input
+before commands or publication. This diagnosis makes no cross-contract claim,
+so the corrected field is the exact empty list; its ordinary contract artifact
+remains in the node evidence and baton acceptance paths.
+
+All three incidents are corrected or contained and none remains open.
