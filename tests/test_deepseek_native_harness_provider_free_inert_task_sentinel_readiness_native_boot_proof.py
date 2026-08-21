@@ -214,10 +214,58 @@ def test_simulated_success_records_one_task_then_cleans(
     assert retained["streams"]["raw_retained"] is False
 
 
-def test_canonical_attempt_outputs_do_not_exist_before_execution() -> None:
-    assert not subject.CONSUMED_PATH.exists()
-    assert not subject.EVIDENCE_PATH.exists()
-    assert not subject.REPORT_PATH.exists()
+def test_retained_pass_terminal_is_exact_consumed_and_cleaned() -> None:
+    consumed = subject.engine._load_json(subject.CONSUMED_PATH)
+    terminal = subject.engine._load_json(subject.EVIDENCE_PATH)
+
+    jsonschema.validate(
+        terminal,
+        subject.engine._load_json(subject.EVIDENCE_SCHEMA_PATH),
+    )
+    assert consumed["state"] == "consumed"
+    assert consumed["attempt_id"] == subject.ATTEMPT_ID
+    assert consumed["candidate_source"] == terminal["candidate_source"]
+    assert len(terminal["candidate_source"]) == 40
+    assert terminal["result"] == "pass"
+    assert terminal["failure_coordinate"] is None
+    assert terminal["hmr_events"] == subject.engine.EXPECTED_EVENTS
+    assert terminal["launch"]["launch_attempt_count"] == 1
+    assert terminal["launch"]["native_process_count"] == 1
+    assert terminal["launch"]["retry_count"] == 0
+    assert terminal["launch"]["argument_count"] == 6
+    assert terminal["launch"]["task_argument_count"] == 1
+    assert terminal["launch"]["readiness_observed"] is True
+    assert terminal["launch"]["controller_terminated_after_readiness"] is True
+    assert all(
+        terminal["provider_boundary"][key] == 0
+        for key in (
+            "changed_runner_processes",
+            "broker_processes",
+            "worker_sessions",
+            "prompts",
+            "tool_executions",
+            "model_requests",
+            "provider_requests",
+            "network_attempts",
+            "docker_invocations",
+            "database_invocations",
+        )
+    )
+    assert terminal["streams"]["raw_retained"] is False
+    assert terminal["cleanup"] == {
+        "process_absent": True,
+        "disposable_root_absent": True,
+        "raw_streams_retained": False,
+        "raw_environment_retained": False,
+        "copied_package_tree_retained": False,
+    }
+    assert not any(
+        subject.engine.DISPOSABLE_PARENT.glob(subject.DISPOSABLE_PREFIX + "*")
+    )
+    report = subject.REPORT_PATH.read_text(encoding="utf-8")
+    assert "stock-headless HMR reached readiness" in report
+    assert "model/provider" in report
+    assert "product-runtime or reliability result" in report
 
 
 def test_plan_and_threat_delta_freeze_closed_surfaces() -> None:
