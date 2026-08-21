@@ -1,0 +1,319 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis",
+    "title": "DeepSeek native Harness provider-free plugin-tree source-coordinate diagnosis",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-21T13:26:54.8506659+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis",
+      "title": "Native Harness plugin-tree source-coordinate diagnosis",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the provider-free diagnosis after consumed attempt 004.",
+          "No Harness, broker, worker, model, provider, network or occupied-retry authority opened.",
+          "No product, data, production, deployment, Pages or protected-ref authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-unique-source-coordinate",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/diagnosis-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one digest-bound profile-input coordinate as the sole supported initial plugin-tree failure branch."
+        },
+        {
+          "id": "authorize-separate-two-row-provider-free-repair",
+          "source": "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md",
+          "status": "accepted",
+          "summary": "Permit a separately frozen repair of only the sentinel and runner profile-relative module specifiers."
+        },
+        {
+          "id": "reject-boot-and-worker-readiness-claims",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-plugin-tree-source-coordinate-diagnosis-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Reject any claim that the repaired Harness booted, reached DeepSeek or is ready for EMR4 development."
+        },
+        {
+          "id": "accept-contained-verification-incidents",
+          "source": "docs/ariadne-agent-error-correction-register-revision-586.md",
+          "status": "accepted",
+          "summary": "Accept two corrected or contained exact-test-selection incidents with none open."
+        }
+      ],
+      "claim_scope": [
+        "The exact local rc7 package source and immutable attempt-004 terminal support one initial profile-input failure coordinate.",
+        "The current sentinel and later runner names are authored as absolute Windows filesystem specifiers.",
+        "The accepted passing predecessor used exact profile-relative sentinel and runner specifiers.",
+        "A separate provider-free two-row repair is justified.",
+        "Node, Harness, broker, worker, model, provider and network activity remained zero."
+      ],
+      "contract_evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/contract.json"
+      ],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/diagnosis-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/diagnosis-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/efficacy-reading.json",
+          "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-historical-latch-test-selection.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-plugin-tree-source-coordinate-diagnosis-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-plugin-tree-source-coordinate-diagnosis-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-plugin-tree-source-coordinate-diagnosis-pre-verifier-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py",
+          "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
+          "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/diagnosis-evidence.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-586.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-plugin-tree-source-coordinate-diagnosis.md"
+        ]
+      },
+      "unresolved_gates": [
+        "No repaired profile candidate exists yet.",
+        "No repaired native boot has been proved.",
+        "DeepSeek provider, reasoning, coding and tool behavior remain unreached.",
+        "Every attempt-004 identity remains consumed and no occupied retry is authorised."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Replace opaque native Harness startup failure with a source-bound repair decision",
+      "outcome": "The provider-free reading identified one profile-owned Windows module-specifier coordinate and justified a two-row repair without another occupied attempt.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/efficacy-reading.json",
+        "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Repair the exact generated proof-module specifier family before any new native boot",
+      "why_now": "The source proof has one supported coordinate and an already passing relative-specifier control.",
+      "outcome": "A two-row provider-free candidate will align sentinel and runner names with the accepted relative-specifier form and add deterministic regression evidence.",
+      "unlocks": [
+        "A later separately frozen provider-free native boot proof.",
+        "A grounded reassessment of Gemini review and eventual occupied-worker readiness."
+      ],
+      "does_not_solve": [
+        "No Node, Harness, broker, worker, model or provider process.",
+        "No occupied retry, product work, data use, deployment or protected integration."
+      ],
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/diagnosis-evidence.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/diagnosis-report.md"
+      ],
+      "orientation_statement": "Change only the two generated proof-module names to the accepted profile-relative form; do not launch the Harness."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-proof-module-relative-specifier-repair",
+      "active_tranche": "DeepSeek native Harness provider-free proof-module relative-specifier repair",
+      "objective": "Change only the generated sentinel and runner module names from root-specific absolute Windows filesystem paths to the exact profile-relative specifiers proven by the accepted rc7 predecessor, add deterministic static regression evidence and preserve zero Node, Harness, broker, worker, model, provider and network activity.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, constrained by the accepted source-coordinate diagnosis and its two-row provider-free repair decision.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_two_row_relative_specifier_repair_contract"
+    },
+    "incidents": [
+      {
+        "incident_id": "historical-latch-test-selected-after-successor-advance",
+        "source_id": "plugin-tree-source-diagnosis-historical-latch-selection-001",
+        "peers": []
+      },
+      {
+        "incident_id": "grouped-verification-used-mnemonic-test-paths",
+        "source_id": "plugin-tree-source-diagnosis-grouped-test-path-001",
+        "peers": []
+      }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "plugin_tree_source_diagnosis_focused_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "plugin_tree_source_diagnosis_widened_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py",
+          "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
+          "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
+          "--deselect",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py::test_attempt_four_provider_free_check_reports_zero_processes_and_requests"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "plugin_tree_source_diagnosis_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py",
+          "tests/test_deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "plugin_tree_source_diagnosis_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py",
+          "tests/test_deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Native Harness plugin-tree source-coordinate diagnosis acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/diagnosis-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/diagnosis-evidence.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/diagnosis-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/efficacy-reading.json",
+      "scripts/deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py",
+      "tests/test_deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py",
+      "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-historical-latch-test-selection.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-plugin-tree-source-coordinate-diagnosis-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-plugin-tree-source-coordinate-diagnosis-pre-verifier-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-586.md",
+      "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-plugin-tree-source-coordinate-diagnosis-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-plugin-tree-source-coordinate-diagnosis.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_two_row_profile_relative_proof_module_specifier_repair_only",
+    "no_node_native_harness_broker_worker_model_provider_process_or_request",
+    "no_occupied_attempt_retry_resume_overwrite_reclassification_or_second_worker",
+    "attempts_001_002_003_004_terminal_and_consumed_evidence_remain_immutable",
+    "no_raw_error_message_stack_path_stream_session_or_credential_reconstruction",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change_except_the_two_generated_harness_profile_module_name_rows",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "plugin-tree-source-diagnosis-historical-latch-selection-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-plugin-tree-source-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "historical-latch-test-selection",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Successor regression selection must exclude historical tests whose contract requires a predecessor live latch.",
+      "observed_error": "The first widened run selected the historical attempt-004 provider-free check after the live latch had advanced to the diagnosis successor.",
+      "detection_method": "The historical check correctly rejected the successor operation id before Harness, model, provider or network activity.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-historical-latch-test-selection.md",
+        "docs/ariadne-agent-error-correction-register-revision-586.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_regression_selected_historical_predecessor_latch_test",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Deselect only the exact historical latch assertion while retaining every other test in its module.",
+        "prevention_control": "Successor regression manifests carry an explicit documented deselection for predecessor-live-latch assertions.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-historical-latch-test-selection.md"
+        ]
+      },
+      "baton_summary": "records the rejected predecessor-latch test selection and exact successor deselection."
+    },
+    {
+      "attempt_key": "plugin-tree-source-diagnosis-grouped-test-path-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-plugin-tree-source-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "grouped-test-path-inventory",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Grouped verification must select exact current test paths resolved from the repository inventory.",
+      "observed_error": "A grouped command used two remembered mnemonic filenames that did not exist under those exact repository paths.",
+      "detection_method": "Pytest returned file-or-directory-not-found before collection; rg --files then exposed the exact current paths.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md",
+        "docs/ariadne-agent-error-correction-register-revision-586.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.grouped_verification_used_mnemonic_not_inventory_resolved_paths",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve current test paths with rg --files and rerun the exact corrected 58-test selection.",
+        "prevention_control": "Grouped verification paths are copied from a fresh repository inventory reading.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md"
+        ]
+      },
+      "baton_summary": "records the rejected mnemonic test paths and repository-inventory correction."
+    }
+  ]
+}
