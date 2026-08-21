@@ -1,0 +1,131 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free rebound future-runner agent-creation boundary rehearsal",
+    "completed_stage": "The first controller invocation rejected before native launch at the preset contract-family boundary; zero native processes, zero canonical attempt outputs and complete disposable-root absence preserve native attempt 001 as unconsumed.",
+    "next_executable_stage": "implement_and_publish_the_deterministic_preset_contract_family_guard_then_freshly_rehydrate_before_native_launch",
+    "operation_id": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "f7eff76e61f4b139741aadbe61df4c3c6a7f8d68",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "22733f5a30cfc36171142005734ca72bece2de6b",
+    "reason_codes": [],
+    "resolved_commit": "f7eff76e61f4b139741aadbe61df4c3c6a7f8d68",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "f7eff76e61f4b139741aadbe61df4c3c6a7f8d68"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "22733f5a30cfc36171142005734ca72bece2de6b",
+    "branch_origin_aligned": true,
+    "head": "22733f5a30cfc36171142005734ca72bece2de6b",
+    "origin_branch_commit": "22733f5a30cfc36171142005734ca72bece2de6b",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 661
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "recovered_preexecution",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The real native DeepSeek factory is the object under test; dispatch before this boundary passes would invalidate the rehearsal.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exact local package bytes, registries, lifecycle counters and typed schemas own admission; reassess only if terminal readback is semantically ambiguous.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits delegation and one mutable native process plus cleanup forms a serial trust boundary.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "typed terminal readback",
+      "pre_verifier gate",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "publish the recovered preexecution receipt",
+      "verify exact clean source and protected refs",
+      "start one native process",
+      "observe the exact prepublication veto sidecar",
+      "join independent downstream zero counts",
+      "terminate and clean before evidence publication"
+    ]
+  },
+  "planned_action": "execute_the_still_unconsumed_single_native_rc7_factory_process_from_the_corrected_clean_source_without_retry",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-sol-acceptance.md",
+      "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-prelaunch-contract-family-recovery.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/prelaunch-controller-contract-family-failure-001.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/contract.json",
+      "scripts/deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
+      "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-contract-family-recovery-prepush-receipt.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the single native lifecycle, typed readback, cleanup and acceptance. DeepSeek remains behind the factory boundary under test, Gemini remains reserved for typed semantic ambiguity, and native subagents are prohibited by developer policy.",
+    "git_refs_and_worktree": "Machine snapshot only: the current task branch and its origin must align; all four protected refs remain configured and exact; tracked files are clean before native execution; docs/branding and every unrelated untracked file remain preserved; caller prose supplies no Git object.",
+    "live_handover_current_baton": "The live baton keeps this provider-free native-Harness agent-creation boundary active. The typed prelaunch stop consumed no native attempt, and the deterministic contract-family recovery is now published.",
+    "protected_evidence_boundaries": "Run exactly one provider-free native rc.7 process, invoke the real factory once, and accept only the exact prepublication veto joined to zero live registries, zero lifecycle announcements and canonical downstream zero counts. No retry, resume, alternate transport, published agent or session, turn, broker/model/provider request, target creation/use, raw retention, product/configuration/API/database/route/adapter/flag/allowlist/grammar/client/waiting-area change, ordinary-practice or generic Arrived change, data, production, deployment, release, Pages or protected-ref movement."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
