@@ -1,0 +1,40 @@
+{
+  "schema_version": "ariadne.native_harness_historical_recovery_source_binding_repair_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair",
+  "status": "frozen",
+  "plan_source_head": "9c49b436fda682b1ba06e3b29ce52d60ba9c95e3",
+  "historical_operation_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
+  "historical_source_commit": "12d8758fee2504435ca2b4ccf6225b9d7a86a6a1",
+  "historical_source_sha256": {
+    "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-plan.md": "9274aa7b34bddcd78111f4120bb66896afbd987b92192225deaac4bae4bb249e",
+    "docs/security/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-threat-model-delta.md": "c149f4b63d3381138b02723b86a324c5fbcf9fa3b8e9b7686d1ef2778ded2e65",
+    "orchestration_harness/native_startup_terminal.py": "0a476ee7617fbc71d9cc3efb88ca08ac1cc6f01b433aa8d83d0603493cc05468",
+    "scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_recovery.py": "693645904b2779a54bc8d2afc3eb1395793fc184a1981e72a8cad20058d84e6b",
+    "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py": "52d8ba01e7284e84de7308b3eb48aa5473cd3eb749f94850df17a4dad85da749",
+    "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py": "494cb4bef251481569239a4d878d0e55aec9cf9cfc78d963693ce6b99898cac8",
+    "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py": "b1b784f2cba677a52211f5ed6f759b27d43e931d7e9e54db72966a872adc61e8"
+  },
+  "immutable_historical_artifact_sha256": {
+    "contract.json": "ac2d04b5c0245447c193c77fada8b63c80268967ae44e2c59928b58d9ceb257c",
+    "contract.schema.json": "555eb9fa9a2ec23016cb3f29bba05cdb6605f883bba6ad90046942d71ec2444c",
+    "efficacy-reading.json": "8e742ea5194d4ff2d7dcd8bb6ea192fcb7ba75cfdc79112f939e52c98d1eaf2d",
+    "evidence.schema.json": "7a26e10563204fa46cbba09de674b9974a9a0f7eba0b7c8a68aa1d60843ab461",
+    "legacy-broker-test-boundary-containment.json": "79435a497f72406a9fb956c292aef293a4f11d0d6dcc2110f7c4930d0ce29507",
+    "pre-hmr-startup-terminal.schema.json": "2bfc1d32c4ea495434e4861d8cd198032d60c4957a725cdce788939ee6fff142",
+    "provider-free-recovery-evidence.json": "a90ffbc5669c612ef44617724916c4e65d039f28c145dcfa5446bdfbf08075e0",
+    "provider-free-recovery-report.md": "25d2a3f6e7a5f602e705bd4be051e7d4593859775eeb1bbd59abfdbbd8e0ba7b"
+  },
+  "old_validator_source_binding": "immutable_git_object_projection",
+  "git_proof_owner": "separate_provider_free_repair_checker",
+  "provider_posture": "provider_free_zero_harness_worker_model_provider",
+  "ordinary_practice_authority": "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+  "protected_ref": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+  "closed_surfaces": [
+    "native_harness_broker_worker_session_prompt_tool_model_or_provider_process_or_request",
+    "occupied_attempt_retry_resume_overwrite_reclassification_or_raw_stream_reconstruction",
+    "historical_evidence_or_consumed_attempt_mutation",
+    "product_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "product_patient_appointment_clinical_historical_or_protected_data",
+    "production_runtime_deployment_release_pages_or_protected_ref_movement"
+  ]
+}

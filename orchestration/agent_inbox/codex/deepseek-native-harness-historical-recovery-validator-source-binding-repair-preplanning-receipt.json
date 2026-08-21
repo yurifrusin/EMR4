@@ -1,0 +1,121 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free historical recovery validator source-binding repair",
+    "completed_stage": "Accepted raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_historical_git_object_binding_repair_contract",
+    "operation_id": "deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair",
+    "resume_after_compaction": true,
+    "source_head": "7a681e1688c7b7cfa71a8856bb7db1c84c346be4",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "9c49b436fda682b1ba06e3b29ce52d60ba9c95e3",
+    "reason_codes": [],
+    "resolved_commit": "7a681e1688c7b7cfa71a8856bb7db1c84c346be4",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "7a681e1688c7b7cfa71a8856bb7db1c84c346be4"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "9c49b436fda682b1ba06e3b29ce52d60ba9c95e3",
+    "branch_origin_aligned": true,
+    "head": "9c49b436fda682b1ba06e3b29ce52d60ba9c95e3",
+    "origin_branch_commit": "9c49b436fda682b1ba06e3b29ce52d60ba9c95e3",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 659
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "fresh_preplanning",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The DeepSeek historical validator is the provider-free object under repair; a worker or model request would add cost and violate the latch.",
+        "work_packages": []
+      },
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The repair is an exact local Git-object/readback invariant with two already reproducing tests; provider review is closed and supplies no extra evidence.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the historical evidence, Git snapshot resolver and equality test form one serial semantic seam.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "repair requires historical evidence mutation",
+      "Git object cannot be resolved locally",
+      "provider or occupied execution becomes proposed"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one validator repair owner",
+      "historical evidence bytes remain immutable",
+      "no process launch beyond local Git and test commands"
+    ]
+  },
+  "planned_action": "freeze_the_narrowest_provider_free_historical_git_object_binding_repair_contract",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-structured-diagnostic-bounded-worker-controller-convergence-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/deterministic-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the tightly coupled provider-free validator repair, deterministic acceptance, clockwork and Git; no external worker or provider has authority.",
+    "git_refs_and_worktree": "Machine snapshot alone owns exact Git objects and must show task branch aligned with origin, all protected refs fixed, tracked state clean, docs/branding present and unrelated untracked paths preserved.",
+    "live_handover_current_baton": "Continuity 359 and Compass 341 accept controller convergence and name historical recovery-validator source binding as the exact successor.",
+    "protected_evidence_boundaries": "Only provider-free historical Git-object validation semantics may change; immutable evidence, consumed attempts, raw streams, Harness/provider, product/data/deployment and protected surfaces remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
