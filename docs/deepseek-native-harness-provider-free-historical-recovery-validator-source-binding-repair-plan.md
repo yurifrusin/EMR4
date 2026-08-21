@@ -95,8 +95,9 @@ historical validation path.
 7. `HSBR-S07` — the two previously failing predecessor tests pass unchanged;
 8. `HSBR-S08` — hostile wrong commit, path and hash mutations fail closed;
 9. `HSBR-S09` — focused and broader native-Harness controller regressions pass;
-10. `HSBR-S10` — process, Harness, broker, worker, session, prompt, tool, model
-    and provider-request counts remain zero; and
+10. `HSBR-S10` — Harness, broker, worker, session, prompt, tool, model and
+    provider-request counts remain zero; only bounded local Git object-reading
+    subprocesses are admitted in the separate repair checker; and
 11. `HSBR-S11` — clockwork closeout, paired Yuri summary and the usual non-PHI
     Pushover notification pass.
 
@@ -130,6 +131,8 @@ This tranche may change only:
 The accepted historical recovery directory is read-only. No product source,
 configuration, API, database, route, adapter, feature flag, allowlist, action
 grammar, first-party client or waiting-area path may change.
+The exact ordinary-practice boundary remains
+`no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting`.
 
 ## Fail-closed and continuation rule
 

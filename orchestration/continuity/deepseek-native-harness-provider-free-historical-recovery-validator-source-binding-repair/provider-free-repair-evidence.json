@@ -1,0 +1,33 @@
+{
+  "boundary": {
+    "broker_process_count": 0,
+    "local_git_subprocess_count": 9,
+    "model_request_count": 0,
+    "native_harness_process_count": 0,
+    "occupied_attempt_count": 0,
+    "prompt_count": 0,
+    "provider_request_count": 0,
+    "raw_stream_bytes_reconstructed_or_retained": 0,
+    "session_count": 0,
+    "tool_count": 0,
+    "worker_process_count": 0
+  },
+  "git_proof_owner": "separate_provider_free_repair_checker",
+  "historical_artifact_count": 8,
+  "historical_artifacts_unchanged": true,
+  "historical_source_commit": "12d8758fee2504435ca2b4ccf6225b9d7a86a6a1",
+  "old_validator_source_binding": "immutable_git_object_projection",
+  "operation_id": "deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair",
+  "ordinary_practice_authority": "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+  "predecessor_checks": {
+    "contract_and_evidence_current_check": true,
+    "old_validator_subprocess_count": 0,
+    "subprocess_forbidden_check": true
+  },
+  "protected_ref": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+  "provider_posture": "provider_free_zero_harness_worker_model_provider",
+  "result": "pass",
+  "schema_version": "ariadne.native_harness_historical_recovery_source_binding_repair_evidence.v1",
+  "source_blob_count": 7,
+  "source_blob_sha256_exact": true
+}

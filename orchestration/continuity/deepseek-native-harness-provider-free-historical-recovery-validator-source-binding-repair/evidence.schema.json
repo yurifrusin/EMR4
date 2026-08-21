@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "result",
+    "provider_posture",
+    "historical_source_commit",
+    "source_blob_count",
+    "source_blob_sha256_exact",
+    "historical_artifact_count",
+    "historical_artifacts_unchanged",
+    "old_validator_source_binding",
+    "git_proof_owner",
+    "predecessor_checks",
+    "boundary",
+    "ordinary_practice_authority",
+    "protected_ref"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ariadne.native_harness_historical_recovery_source_binding_repair_evidence.v1"
+    },
+    "operation_id": {
+      "const": "deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair"
+    },
+    "result": {"const": "pass"},
+    "provider_posture": {"const": "provider_free_zero_harness_worker_model_provider"},
+    "historical_source_commit": {
+      "const": "12d8758fee2504435ca2b4ccf6225b9d7a86a6a1",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "source_blob_count": {"const": 7},
+    "source_blob_sha256_exact": {"const": true},
+    "historical_artifact_count": {"const": 8},
+    "historical_artifacts_unchanged": {"const": true},
+    "old_validator_source_binding": {"const": "immutable_git_object_projection"},
+    "git_proof_owner": {"const": "separate_provider_free_repair_checker"},
+    "predecessor_checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract_and_evidence_current_check",
+        "subprocess_forbidden_check",
+        "old_validator_subprocess_count"
+      ],
+      "properties": {
+        "contract_and_evidence_current_check": {"const": true},
+        "subprocess_forbidden_check": {"const": true},
+        "old_validator_subprocess_count": {"const": 0}
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "local_git_subprocess_count",
+        "native_harness_process_count",
+        "broker_process_count",
+        "worker_process_count",
+        "session_count",
+        "prompt_count",
+        "tool_count",
+        "model_request_count",
+        "provider_request_count",
+        "occupied_attempt_count",
+        "raw_stream_bytes_reconstructed_or_retained"
+      ],
+      "properties": {
+        "local_git_subprocess_count": {"const": 9},
+        "native_harness_process_count": {"const": 0},
+        "broker_process_count": {"const": 0},
+        "worker_process_count": {"const": 0},
+        "session_count": {"const": 0},
+        "prompt_count": {"const": 0},
+        "tool_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0},
+        "occupied_attempt_count": {"const": 0},
+        "raw_stream_bytes_reconstructed_or_retained": {"const": 0}
+      }
+    },
+    "ordinary_practice_authority": {
+      "const": "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting"
+    },
+    "protected_ref": {
+      "const": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "pattern": "^[0-9a-f]{40}$"
+    }
+  }
+}

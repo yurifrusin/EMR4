@@ -51,6 +51,35 @@ CONTROLLER_TEST_PATH = (
 DATE = "2026-08-20"
 TIMESTAMP = "2026-08-20T23:23:58.3235077+10:00"
 EMPTY_DIGEST = hashlib.sha256(b"").hexdigest()
+HISTORICAL_SOURCE_COMMIT = "12d8758fee2504435ca2b4ccf6225b9d7a86a6a1"
+HISTORICAL_SOURCE_SHA256 = {
+    "docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-"
+    "classification-and-terminalization-recovery-plan.md": (
+        "9274aa7b34bddcd78111f4120bb66896afbd987b92192225deaac4bae4bb249e"
+    ),
+    "docs/security/deepseek-native-harness-provider-free-pre-hmr-startup-"
+    "failure-classification-and-terminalization-recovery-threat-model-delta.md": (
+        "c149f4b63d3381138b02723b86a324c5fbcf9fa3b8e9b7686d1ef2778ded2e65"
+    ),
+    "orchestration_harness/native_startup_terminal.py": (
+        "0a476ee7617fbc71d9cc3efb88ca08ac1cc6f01b433aa8d83d0603493cc05468"
+    ),
+    "scripts/deepseek_native_harness_provider_free_pre_hmr_startup_terminal_"
+    "recovery.py": (
+        "693645904b2779a54bc8d2afc3eb1395793fc184a1981e72a8cad20058d84e6b"
+    ),
+    "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_"
+    "monitored_development_rehearsal.py": (
+        "52d8ba01e7284e84de7308b3eb48aa5473cd3eb749f94850df17a4dad85da749"
+    ),
+    "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py": (
+        "494cb4bef251481569239a4d878d0e55aec9cf9cfc78d963693ce6b99898cac8"
+    ),
+    "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_"
+    "worker_monitored_development_rehearsal.py": (
+        "b1b784f2cba677a52211f5ed6f759b27d43e931d7e9e54db72966a872adc61e8"
+    ),
+}
 
 
 class RecoveryEvidenceError(RuntimeError):
@@ -67,6 +96,12 @@ def sha256_bytes(value: bytes) -> str:
 
 def file_sha256(path: Path) -> str:
     return sha256_bytes(path.read_bytes())
+
+
+def historical_source_sha256() -> dict[str, str]:
+    """Return the accepted source projection, not mutable descendant bytes."""
+
+    return dict(HISTORICAL_SOURCE_SHA256)
 
 
 def reading(payload: bytes) -> dict[str, Any]:
@@ -470,18 +505,7 @@ def evidence() -> dict[str, Any]:
         "terminal_schema": file_sha256(TERMINAL_SCHEMA_PATH),
         "evidence_schema": file_sha256(EVIDENCE_SCHEMA_PATH),
     }
-    sources = {
-        path.relative_to(REPO_ROOT).as_posix(): file_sha256(path)
-        for path in (
-            Path(__file__).resolve(),
-            Path(terminal.__file__).resolve(),
-            Path(controller.__file__).resolve(),
-            TEST_PATH,
-            CONTROLLER_TEST_PATH,
-            PLAN_PATH,
-            THREAT_PATH,
-        )
-    }
+    sources = historical_source_sha256()
     scenarios = scenario_matrix()
     mutations = rejected_mutations()
     ordering = controller_ordering()
