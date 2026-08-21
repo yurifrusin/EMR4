@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 597,
+  "register_revision": 598,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -32972,6 +32972,264 @@
       },
       "incident_id": "AER-0844",
       "attempt_id": "clock-f7ae900332f0af6bbe4911cc",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-future-attempt-materialisation",
+      "role": "orchestrator",
+      "resource_id": "clockwork-canonical-path-staging",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Candidate and closeout staging must use the exact current canonical path roster rather than recalled historical graph names.",
+      "observed_error": "The first predecessor candidate-staging invocation named emr-compass.json and emr-continuity-graph.json instead of the current emr4-prefixed canonical paths; Git rejected the whole invocation before staging.",
+      "detection_method": "Git pathspec resolution failed before index mutation, after which an explicit machine-read roster was staged successfully.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-plan.md",
+        "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manually_recalled_canonical_graph_path_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the exact clockwork-owned path roster and verify the complete staged set before commit.",
+        "prevention_control": "Explicit-path staging is checked against the machine roster; no broad staging command is permitted.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-598.md"
+        ]
+      },
+      "incident_id": "AER-0845",
+      "attempt_id": "clock-ad231df2f378d44e4e8e0f88",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-future-attempt-materialisation",
+      "role": "orchestrator",
+      "resource_id": "mandatory-narrative-timestamp",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_document_generation",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every newly authored plan, threat delta, report, closeout, Sol acceptance and Yuri summary must include Date and an explicit Brisbane ISO 8601 Timestamp.",
+      "observed_error": "The accepted predecessor report, closeout, Sol acceptance and Yuri summary omitted the mandatory Timestamp line.",
+      "detection_method": "The successor rehydration compared the four immutable predecessor narratives with AGENTS section 10 rule 8.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-plan.md",
+        "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.mandatory_brisbane_timestamp_omitted_from_narrative_artifact",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep accepted predecessor artifacts immutable and add the mandatory timestamp to every narrative in the successor tranche.",
+        "prevention_control": "The successor artifact tests assert both Date and the exact Australia/Brisbane Timestamp for all newly authored narratives.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py"
+        ]
+      },
+      "incident_id": "AER-0846",
+      "attempt_id": "clock-bd8067f0bdeda665a06e179a",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-future-attempt-materialisation",
+      "role": "implementer",
+      "resource_id": "future-attempt-embedded-helper-identity",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "The outer evidence operation and embedded accepted helper identity must be separate typed bindings; exact accepted helper bytes cannot be regenerated under a new identity silently.",
+      "observed_error": "The first contract used the new outer operation, attempt and planning source to generate the helper, changing its hash and causing source_binding_mismatch before evidence output.",
+      "detection_method": "The generator compared the independently generated helper hash with the exact accepted helper binding and rejected the draft.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-future-runner-materialisation-identity-binding-recovery.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/contract.json"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.outer_evidence_identity_conflated_with_embedded_source_identity",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Separate fixture_identity from the outer operation and bind the exact accepted predecessor operation, attempt and candidate values.",
+        "prevention_control": "The contract and schemas now carry a dedicated fixture_identity object and tests prove the outer identity is absent from helper bytes.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-future-runner-materialisation-identity-binding-recovery.md",
+          "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py"
+        ]
+      },
+      "incident_id": "AER-0847",
+      "attempt_id": "clock-7204aa115ec7aa640df50ea1",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-future-attempt-materialisation",
+      "role": "implementer",
+      "resource_id": "standalone-generator-import-bootstrap",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A repository generator intended for direct file-path execution must resolve and add the repository root before importing local packages.",
+      "observed_error": "The generator compiled but its first direct file-path invocation raised ModuleNotFoundError for orchestration_harness before artifact generation.",
+      "detection_method": "The exact documented direct invocation returned nonzero before the generator entered its fail-closed evidence handler.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py",
+        "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-closeout.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.standalone_repository_script_missing_root_import_bootstrap",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Resolve the repository root from __file__ and insert it before local imports, then rerun direct write and check.",
+        "prevention_control": "The command manifest exercises the module path and candidate verification also exercises the direct file-path entry point.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/materialisation-evidence.json"
+        ]
+      },
+      "incident_id": "AER-0848",
+      "attempt_id": "clock-c7e3227d54e9fed72c155964",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-future-attempt-materialisation",
+      "role": "implementer",
+      "resource_id": "materialised-runtime-identity-validator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A shortened candidate identity must be rejected by the full-Git-object validator before generic runtime identity comparison.",
+      "observed_error": "The first hostile shortened-candidate test received bundle_runtime_identity_mismatch because typed runtime identity validation occurred after manifest comparison.",
+      "detection_method": "The focused adversarial test asserted the exact finite error coordinate and exposed the validation-order gap.",
+      "evidence_paths": [
+        "orchestration_harness/native_post_hmr_future_attempt_materialisation.py",
+        "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.typed_git_identity_validation_after_generic_relationship_check",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Validate operation, attempt and full candidate identity before tree and manifest comparison.",
+        "prevention_control": "The hostile test now requires candidate_source_invalid for a shortened identity and the complete suite passes.",
+        "evidence_paths": [
+          "orchestration_harness/native_post_hmr_future_attempt_materialisation.py",
+          "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py"
+        ]
+      },
+      "incident_id": "AER-0849",
+      "attempt_id": "clock-d30682cbcea56ac3b7718de8",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-future-attempt-materialisation",
+      "role": "orchestrator",
+      "resource_id": "clockwork-incident-stage-vocabulary",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every incident stage must be selected from the clockwork-owned closed vocabulary rather than authored as descriptive prose.",
+      "observed_error": "The first closeout intent used planning and verification as incident stages even though neither is present in the closed INCIDENT_STAGES vocabulary.",
+      "detection_method": "The read-only clockwork intent validator rejected tick_incident_stage before command execution or canonical writes.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-598.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.descriptive_incident_stage_outside_clockwork_closed_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace both descriptive values with deterministic_verification and preserve the rejected draft as a bounded incident.",
+        "prevention_control": "Future incident intent stages must be selected directly from the finite clockwork INCIDENT_STAGES register.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-598.md",
+          "orchestration_harness/governance_clockwork_tick.py"
+        ]
+      },
+      "incident_id": "AER-0850",
+      "attempt_id": "clock-287a07d02f8605da16dbe1e9",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-future-attempt-materialisation",
+      "role": "orchestrator",
+      "resource_id": "clockwork-successor-protected-boundary",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Every clockwork successor latch must retain the exact mandatory ordinary-practice feature-flag, allowlist and command-mounting closure in addition to broader product boundaries.",
+      "observed_error": "The first published generation omitted no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting from the successor protected boundaries.",
+      "detection_method": "The completed 548-case postpublication governance suite failed test_current_rows_preserve_closed_surface_boundary on the generated latch.",
+      "evidence_paths": [
+        "tests/test_current_baton_consistency.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-598.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_latch_omitted_mandatory_ordinary_practice_subboundary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Roll back the uncommitted generation byte-exactly, restore the exact missing boundary and republish only after read-only preparation passes.",
+        "prevention_control": "The postpublication current-baton consistency suite requires the exact mandatory boundary set in every clockwork-selected latch.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "docs/ariadne-agent-error-correction-register-revision-598.md"
+        ]
+      },
+      "incident_id": "AER-0851",
+      "attempt_id": "clock-d26fb665110f079241876246",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

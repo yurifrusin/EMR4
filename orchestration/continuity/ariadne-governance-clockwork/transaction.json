@@ -1,85 +1,85 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
-  "operation_id": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
-  "transaction_id": "txn-726a1747ac40640932731a4d",
-  "source_commit": "34dc1facb493984aa3609e2a7beddb9699534a68",
-  "previous_source_commit": "34dc1facb493984aa3609e2a7beddb9699534a68",
-  "previous_generation_id": "gen-b4c565bcf38d75bc3aaf41b718498ad368a90743f974f556c3aec8bde266645a",
-  "previous_bundle_sha256": "b4c565bcf38d75bc3aaf41b718498ad368a90743f974f556c3aec8bde266645a",
+  "operation_id": "deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal",
+  "transaction_id": "txn-1db291a9d1fc7a589bbd33ea",
+  "source_commit": "9b59c6dd7dac9a77030118e83bc81ebf74c3289c",
+  "previous_source_commit": "9b59c6dd7dac9a77030118e83bc81ebf74c3289c",
+  "previous_generation_id": "gen-51119697b09943ad0ea143aa06d212884e6cd5417da64b25489823f97144bf75",
+  "previous_bundle_sha256": "51119697b09943ad0ea143aa06d212884e6cd5417da64b25489823f97144bf75",
   "previous_canonical_sha256s": {
-    "continuity": "174463e69409efeee0a986f7307c25af1e38ef87bfb0ee87434f8fb325ef5b42",
-    "compass": "e6016dbcdfd603c26d7da69e4202021ac49d7a286bb4a2d36e1da51e325117bf",
-    "compass_markdown": "c00c8ed8c2021e5ab2340d5d06ba16de2e61e75c8b1f85e4f754b06d24bd7d12",
-    "active_latch": "09717fba3b90e2d3bc50e9dd3e3ceedf4fe25e9f89903ffd7834f038b430a017",
-    "error_register": "efee2c57d05910d8ce3bd7d9f6e95b3de9c7212d6480171715f3c2fde5087d6a",
-    "pattern_report": "7ac99a9bedf984d6e78bed857a8c4bd08559b4a3fc9c9c3657a6738c4f301584",
-    "current_baton": "fac328458171d122bcd6085009f028c67332c6bf72213e87b1e396544a6dace2"
+    "continuity": "e7d05979462fb0d409ef9a3dedf1a124bb4c34011f9acec392750c62c5da1f65",
+    "compass": "6f3a64cbe8bbf16958adb2c2120494037cb5d0056ab9c6e88cedd8c15624a2b3",
+    "compass_markdown": "88c221a08f4122ca525b9cf0f42487d594ac2acdacace8577e30482ac2b634ad",
+    "active_latch": "9e10696ba7ec8762c5d2ef9e194e4a957b135d43a97d960cdc6b2e2a9994dcf3",
+    "error_register": "f392c6abac630f759a2024565e95f839d5be34448e1cf043672220cfb6605c13",
+    "pattern_report": "78aabf20d5d204784cd009a8691482aa02f9a366b9cb1bc6a24f84a1dda6c45b",
+    "current_baton": "765cfa192b393930c523a29dd8f30800aad3d638d84b1a1c3e3645adcceed872"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "d6b9a51467c1264e4b3f463a6f6b74fce827b24cbf91666a33b692eace0b370f",
-    "transaction.json": "555ec1595dc42c8037c1ac21dbac7395d92792b4f1cd674d4bd975a953866627",
+    "command-manifest.json": "0634b9bba0ffa6c79c510e7c90f19581ad40f4c01526e472cefd07795853b2c2",
+    "transaction.json": "3fd2a7139c4fd2dad9ff6dd6ad0d8208f4efaa32086c17218a9939535ff2b073",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "67b410e124c16058b6723f66ba676df0792506888079a9108f0e6a954ce92b7d"
+    "generation-manifest.json": "8248a67088e47820999815b3efdc99d9425b444919ba8ea447116910f95a0671"
   },
   "projection_sha256s": {
-    "graph": "sha256:5a70617932d0d8eb6f4e2d59b9b42628b1f093a8035d24d499e0fb4de7e2488d",
-    "compass": "sha256:da3e17eda93ea153f31715eda33da2161774384e8932c0ad052c078486ebec51",
-    "report": "sha256:9d2e085c379ab9a31d4c1eb96142f98885b566e1e298c54c7ae6672905b89065",
-    "latch": "sha256:8b40863ea1a0954d048bae2d21f96337c4021c3b9dbcab6bee032d9c515cc09a",
-    "incident_aggregate": "sha256:5d00dc8ba23c80b6f0fe44fe8b52de02c81188079b32d1692697143603729a01"
+    "graph": "sha256:aa5f46dc65410d3085402fd8d6ab3d4fdb4f9ddbf7d0a0ed2b2dcab52cf3b6b1",
+    "compass": "sha256:f788f713171beab0471725c5f4e73eeba7155a07e2a664c7314d30815dec4f9d",
+    "report": "sha256:5fcc74e448239d5eb64b14f4f303c681e65b4cbdcc9e851c93df7a4874049c6d",
+    "latch": "sha256:4876eb72c25e714806267b0dec023f07943768e37637a0abf192bf122a005cf6",
+    "incident_aggregate": "sha256:4b81292cb5e2484f11003d4930d733261504ec2c84c7b64704a8f5ef869990bc"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-726a1747ac40640932731a4d",
-      "transaction_id": "txn-726a1747ac40640932731a4d",
-      "operation_id": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
+      "journal_id": "journal-1db291a9d1fc7a589bbd33ea",
+      "transaction_id": "txn-1db291a9d1fc7a589bbd33ea",
+      "operation_id": "deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
       "event_type": "manifest-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "manifest_sha256": "sha256:72a086a8529f82a8f719531feb06bf27169f8794a7cbc7c67732cd64cebd72f4"
+        "manifest_sha256": "sha256:632c06926469c502f468fe6d00592f327431ea4281d9e3a0317b997ee4e59607"
       },
-      "event_sha256": "sha256:5e02091e02876b615bb2e12ae9adb8d9e9aa3906a85b69a9550b1e7f70f06a24"
+      "event_sha256": "sha256:92b1ce1ab20c6ad728521077405082934009604f84cb4ef06340c4732f8cceb1"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-726a1747ac40640932731a4d",
-      "transaction_id": "txn-726a1747ac40640932731a4d",
-      "operation_id": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
+      "journal_id": "journal-1db291a9d1fc7a589bbd33ea",
+      "transaction_id": "txn-1db291a9d1fc7a589bbd33ea",
+      "operation_id": "deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal",
       "sequence": 2,
-      "previous_event_sha256": "sha256:5e02091e02876b615bb2e12ae9adb8d9e9aa3906a85b69a9550b1e7f70f06a24",
+      "previous_event_sha256": "sha256:92b1ce1ab20c6ad728521077405082934009604f84cb4ef06340c4732f8cceb1",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "34dc1facb493984aa3609e2a7beddb9699534a68",
+        "source_commit": "9b59c6dd7dac9a77030118e83bc81ebf74c3289c",
         "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
       },
-      "event_sha256": "sha256:ffc8c912d602d589796b3239e563b65afda57a68a41d125ae4a78b9001e9f213"
+      "event_sha256": "sha256:a5315584938482576be993899a98acb8ecc2ad8478bc3db31c449f0c3d6e28b0"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-726a1747ac40640932731a4d",
-      "transaction_id": "txn-726a1747ac40640932731a4d",
-      "operation_id": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
+      "journal_id": "journal-1db291a9d1fc7a589bbd33ea",
+      "transaction_id": "txn-1db291a9d1fc7a589bbd33ea",
+      "operation_id": "deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal",
       "sequence": 3,
-      "previous_event_sha256": "sha256:ffc8c912d602d589796b3239e563b65afda57a68a41d125ae4a78b9001e9f213",
+      "previous_event_sha256": "sha256:a5315584938482576be993899a98acb8ecc2ad8478bc3db31c449f0c3d6e28b0",
       "event_type": "projections-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "graph_revision": 374,
-        "map_revision": 356
+        "graph_revision": 375,
+        "map_revision": 357
       },
-      "event_sha256": "sha256:ad8af3fb1b754c7d441c352dc6b758ff60eb316a454eeb73d778b4d49b1f03b9"
+      "event_sha256": "sha256:3f5139dd31add9e62351c6f6d86dc1010a252be42ba2998eed3639c59e0965e0"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-726a1747ac40640932731a4d",
-      "transaction_id": "txn-726a1747ac40640932731a4d",
-      "operation_id": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
+      "journal_id": "journal-1db291a9d1fc7a589bbd33ea",
+      "transaction_id": "txn-1db291a9d1fc7a589bbd33ea",
+      "operation_id": "deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal",
       "sequence": 4,
-      "previous_event_sha256": "sha256:ad8af3fb1b754c7d441c352dc6b758ff60eb316a454eeb73d778b4d49b1f03b9",
+      "previous_event_sha256": "sha256:3f5139dd31add9e62351c6f6d86dc1010a252be42ba2998eed3639c59e0965e0",
       "event_type": "projections-validated",
       "actor": "gpt-sol",
       "payload": {
@@ -87,26 +87,26 @@
         "compass": "passed",
         "latch": "passed"
       },
-      "event_sha256": "sha256:edcb9cdab980a97355d88f313de0210d2e17c6d0352ad51ec31361eebe49f0e1"
+      "event_sha256": "sha256:8a4cced48de2c2bc292f539742e92cee00cf4b9ccb8566e2e757bcda45b9b07c"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-726a1747ac40640932731a4d",
-      "transaction_id": "txn-726a1747ac40640932731a4d",
-      "operation_id": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
+      "journal_id": "journal-1db291a9d1fc7a589bbd33ea",
+      "transaction_id": "txn-1db291a9d1fc7a589bbd33ea",
+      "operation_id": "deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal",
       "sequence": 5,
-      "previous_event_sha256": "sha256:edcb9cdab980a97355d88f313de0210d2e17c6d0352ad51ec31361eebe49f0e1",
+      "previous_event_sha256": "sha256:8a4cced48de2c2bc292f539742e92cee00cf4b9ccb8566e2e757bcda45b9b07c",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "shadow_directory_rename"
       },
-      "event_sha256": "sha256:b1723e6c939d0f75002acd41c580aa3f34194dfe52e6b2014f8a0ac07ca33ce4"
+      "event_sha256": "sha256:66079ec3de22810e6934496c2102e863d33a264d828c55021fc4e2fb3b1f28e1"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
   "event_kind": "clean_closeout",
-  "next_boundaries_sha256": "sha256:38e027e74c71adb1d6e9b4ba5529580e0587035583f1f8ac0c57cb07ea80d252",
+  "next_boundaries_sha256": "sha256:069c41630f6fe02ed2572d4cdc9bb1b7f1d2460477152439236546eb06b2c955",
   "register_bytes_preserved": false,
   "pattern_bytes_preserved": false
 }

@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 356,
-  "updated_at": "2026-08-21T21:40:25.0822453+10:00",
-  "source_graph_revision": 374,
-  "orientation_statement": "Materialise and verify the typed native-Harness control gears provider-free; do not launch an occupied attempt.",
+  "map_revision": 357,
+  "updated_at": "2026-08-21T22:25:11.2517454+10:00",
+  "source_graph_revision": 375,
+  "orientation_statement": "Rebind one fresh inert future-attempt identity and target provider-free; do not launch the native Harness.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4671,25 +4671,35 @@
         "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/integration-evidence.json",
         "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal",
+      "lineage_parent": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
+      "strategic_role": "Make DeepSeek native-Harness worker execution bounded, traceable and governable enough for Raisa development",
+      "outcome": "The orchestrator can now materialise an exact future-attempt bundle and assemble its typed terminal from two independent canonical gauges before any worker process exists.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/materialisation-evidence.json",
+        "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
-    "strategic_role": "Materialise the exact deterministic gears before any further occupied native-Harness attempt",
-    "why_now": "The source transformation and evidence join pass; byte-exact disposable materialisation and controller-terminal assembly are the remaining provider-free prerequisites.",
-    "outcome": "A future-attempt fixture will contain the exact accepted runner, helper and controller bindings and prove closed terminal selection without executing the subject stack.",
+    "node_id": "deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal",
+    "strategic_role": "Give the verified bundle one genuinely fresh inert future-attempt identity and target before native loading",
+    "why_now": "Materialisation and terminal assembly pass, but the exact accepted bytes intentionally retain predecessor identity and a consumed target that cannot be relaunched.",
+    "outcome": "A deterministic transformation will bind a new disposable identity and inert authored-synthetic target across runner, helper, bundle and terminal without executing them.",
     "unlocks": [
-      "One inspectable future native-attempt bundle with exact source identities.",
-      "A later occupied-attempt decision whose terminal path is already mechanically assembled and verified."
+      "One fresh inspectable future-attempt bundle whose identity and target are not inherited from consumed attempt evidence.",
+      "The separately required provider-free stock-headless-to-custom-runner boot proof under already assembled controls."
     ],
     "does_not_solve": [
       "No Node, Harness, broker, worker, model or provider execution.",
-      "No DeepSeek performance evidence or native Harness worker readiness.",
+      "No DeepSeek performance evidence or native Harness occupied readiness.",
       "No product, data, production, deployment or protected integration."
     ],
     "evidence": [
-      "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/efficacy-reading.json",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-sidecar-integration-sol-acceptance.md"
+      "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/efficacy-reading.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-future-runner-materialisation-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

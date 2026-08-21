@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 597,
+  "register_revision": 598,
   "source_cutoff_on": "2026-08-21",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "8a1d756b723769eb0d4f45fd83d2b947cf562ac990c8593736ee1a4775e900e8",
-  "incident_count": 844,
+  "canonical_register_sha256": "1501dce993c51bc403e4ed28d0300e96bd4c8558470e267b5f12ffb1aefc0d91",
+  "incident_count": 851,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 482,
       "harness": 62,
-      "operator": 151,
+      "operator": 158,
       "repository": 133,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 93,
       "evidence_misreport": 71,
       "harness_failure": 62,
-      "operator_error": 151,
+      "operator_error": 158,
       "output_contract_violation": 266,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
@@ -26,20 +26,20 @@
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 61,
+      "implementer": 64,
       "integration_reviewer": 3,
-      "orchestrator": 717,
+      "orchestrator": 721,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 512,
+      "low": 517,
       "material": 129,
-      "moderate": 203
+      "moderate": 205
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 161,
-      "canonical_unchanged": 523,
-      "untrusted_partial_worktree": 160
+      "canonical_unchanged": 527,
+      "untrusted_partial_worktree": 163
     },
     "by_resource_and_role": {
       "accepted-native-startup-terminal-and-consumed-controller-source::orchestrator": 1,
@@ -118,12 +118,13 @@
       "clockwork-authorized-opening-shape::orchestrator": 1,
       "clockwork-authorized-opening-vocabulary::orchestrator": 1,
       "clockwork-canonical-baton-writer::orchestrator": 1,
+      "clockwork-canonical-path-staging::orchestrator": 1,
       "clockwork-closeout-incident-observation::orchestrator": 1,
       "clockwork-continuity-node-projector::orchestrator": 1,
       "clockwork-gear-architecture-plan-latch-test::orchestrator": 1,
       "clockwork-incident-register-revision-projection::orchestrator": 1,
       "clockwork-incident-revision-intake::orchestrator": 1,
-      "clockwork-incident-stage-vocabulary::orchestrator": 1,
+      "clockwork-incident-stage-vocabulary::orchestrator": 2,
       "clockwork-incident-tranche-vocabulary::orchestrator": 1,
       "clockwork-incident-vocabulary-admission::orchestrator": 2,
       "clockwork-migration-focused-replay-fixture::orchestrator": 1,
@@ -135,6 +136,7 @@
       "clockwork-rollback-pointer-lease::orchestrator": 2,
       "clockwork-successor-boundary-projector::orchestrator": 1,
       "clockwork-successor-protected-boundaries::orchestrator": 2,
+      "clockwork-successor-protected-boundary::orchestrator": 1,
       "clockwork-v2-incident-observations::orchestrator": 1,
       "closeout-compass-node-kind::orchestrator": 1,
       "closeout-contract-evidence-shape::orchestrator": 1,
@@ -216,6 +218,7 @@
       "emr4-repository::orchestrator": 3,
       "explicit-path-precommit-diff-gate::orchestrator": 1,
       "frozen-plan-process-and-authority-vocabulary::orchestrator": 1,
+      "future-attempt-embedded-helper-identity::implementer": 1,
       "gemini-36-flash-high-verifier::verifier": 1,
       "generated-entrypoint-wrapper-json-serializer::implementer": 1,
       "git-cached-diff-whitespace-gate::orchestrator": 1,
@@ -246,6 +249,8 @@
       "local-powershell-python-operator::orchestrator": 1,
       "local-python-operator::orchestrator": 5,
       "local-rg-operator::orchestrator": 3,
+      "mandatory-narrative-timestamp::orchestrator": 1,
+      "materialised-runtime-identity-validator::implementer": 1,
       "model-required-bureau-a3-b3-evidence-checkout::orchestrator": 1,
       "model-required-bureau-a3-b3-live-harness::orchestrator": 2,
       "model-required-bureau-c5-live-controller::orchestrator": 1,
@@ -315,6 +320,7 @@
       "source-repaired-sentinel-human-report::orchestrator": 1,
       "source-repaired-sentinel-preexecution-receipt::orchestrator": 1,
       "source-repaired-sentinel-widened-test-packet::orchestrator": 1,
+      "standalone-generator-import-bootstrap::implementer": 1,
       "static-source-chain-helper-count-predicate::orchestrator": 1,
       "successor-protected-boundary-vocabulary::orchestrator": 1,
       "transactional-closeout-decision-evidence::orchestrator": 1,

@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 374,
+  "graph_revision": 375,
   "harvests": [],
   "nodes": [
     {
@@ -28314,9 +28314,119 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal",
+      "title": "Native Harness exact future-attempt bundle and typed controller terminal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the bounded provider-free native-Harness control sequence.",
+          "No Node, Harness, broker, worker, model, provider, network, database, product, deployment, Pages or protected-ref authority opened.",
+          "The accepted predecessor runner, helper and all consumed attempts remain byte-immutable."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-six-path-future-attempt-materialisation",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/materialisation-evidence.json",
+          "status": "accepted",
+          "summary": "Accept exclusive materialisation and readback of the exact runner, helper and canonical bundle manifest in a closed disposable six-path tree."
+        },
+        {
+          "id": "accept-controller-owned-terminal-assembly",
+          "source": "orchestration_harness/native_post_hmr_future_attempt_materialisation.py",
+          "status": "accepted",
+          "summary": "Accept one canonical terminal assembled from exact bundle, broker and optional sidecar evidence through closed code-owned coordinates."
+        },
+        {
+          "id": "reject-occupied-readiness-and-behavior-overclaim",
+          "source": "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "Reject claims about JavaScript parsing, native loading, real broker or sidecar readings, DeepSeek behavior, provider reachability or occupied readiness."
+        },
+        {
+          "id": "accept-corrected-materialisation-workflow-readings",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/closeout/closeout-intent.json",
+          "status": "accepted",
+          "summary": "Accept seven corrected materialisation and workflow observations with their deterministic controls and none open."
+        }
+      ],
+      "claim_scope": [
+        "The accepted future runner, generated helper and controller are separately hash-bound before materialisation.",
+        "The disposable tree admits exactly six named paths and writes files exclusively without overwrite.",
+        "The canonical bundle explicitly preserves the inherited consumed target classification and keeps occupied launch false.",
+        "Pre-request terminal selection requires both exact diagnostic and independent all-zero broker evidence.",
+        "Invalid broker or bundle evidence rejects while invalid or absent sidecar evidence preserves the generic terminal.",
+        "No prohibited process, request, raw stream, product, data or protected-ref effect occurred."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-future-runner-materialisation-identity-binding-recovery.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/materialisation-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/materialisation-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-runner-materialisation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-runner-materialisation-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-runner-materialisation-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-runner-materialisation-candidate-prepush-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_agents_handover_archive.py",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/native_post_hmr_future_attempt_materialisation.py",
+          "scripts/deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-598.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-future-runner-materialisation.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The materialised bundle retains the predecessor embedded identity and consumed authored-synthetic target coordinate.",
+        "No JavaScript parse, stock-headless-to-custom-runner boot, real sidecar or broker source has been exercised.",
+        "No occupied Harness attempt, provider request or DeepSeek behavior is authorised or proved.",
+        "Product, data, production, deployment, release, Pages and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-21T22:25:11.2517454+10:00",
+      "updated_at": "2026-08-21T22:25:11.2517454+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "9b59c6dd7dac9a77030118e83bc81ebf74c3289c",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-21T21:40:25.0822453+10:00"
+  "updated_at": "2026-08-21T22:25:11.2517454+10:00"
 }
