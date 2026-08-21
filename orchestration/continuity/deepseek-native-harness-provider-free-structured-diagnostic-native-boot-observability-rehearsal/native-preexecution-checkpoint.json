@@ -1,0 +1,47 @@
+{
+  "schema_version": "ariadne.native_harness_structured_diagnostic_native_boot_preexecution_checkpoint.v1",
+  "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+  "attempt_id": "structured-diagnostic-native-boot-observability-attempt-001",
+  "authored_at": "2026-08-21T10:06:16.6165694+10:00",
+  "candidate_source": "253b4071ca2758da948a618aa86b5393fab0f1de",
+  "checkpoint_source": "478c2d8647ba9f00a09f02679100a39be8327d33",
+  "contract_sha256": "352b1a9e3b732b455009fcfb066fe88dac8d97034502c515db7fb40d23ca0221",
+  "controller_sha256": "62079d75e322b4c86a947892d679987516a0cdef8b0217f551245b844cc12a63",
+  "wrapper_sha256": "31a26cb4be13b507a95e417b1a427126ce5351a461bfa18a3da664fe1fc4fdda",
+  "node": {
+    "path_name": "node.exe",
+    "version": "24.18.0",
+    "sha256": "9a4eb5f1c29c6a2e93852ead46b999e284a6a5ca8bab4d4e241d587d025a52de"
+  },
+  "package": {
+    "name": "@deepseek-ai/dsh",
+    "version": "0.1.0-rc.7",
+    "bin": "lib/bin.js",
+    "launcher_sha256": "c0226687bb20f45c603ec6fe50f3de16d1c3510c3a803304ec575ef9bc366c62",
+    "materialization_method": "python_copy_only",
+    "materialization_process_count": 0
+  },
+  "launch": {
+    "argv_shape": ["node", "--expose-internals", "wrapper", "--profile", "emr4-diagnostic-observability-missing"],
+    "task_argument_count": 0,
+    "native_process_limit": 1,
+    "retry_limit": 0,
+    "timeout_seconds": 30
+  },
+  "prior_output": {
+    "evidence_exists": false,
+    "terminal_exists": false,
+    "report_exists": false
+  },
+  "prohibited_counts_before_launch": {
+    "native_harness_processes": 0,
+    "broker_processes": 0,
+    "worker_sessions": 0,
+    "prompts": 0,
+    "tool_executions": 0,
+    "model_requests": 0,
+    "provider_requests": 0
+  },
+  "tracked_worktree_clean": true,
+  "ready": true
+}

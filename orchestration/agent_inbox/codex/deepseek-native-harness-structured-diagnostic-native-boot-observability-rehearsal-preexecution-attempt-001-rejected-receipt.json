@@ -1,0 +1,129 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free structured diagnostic native-boot observability rehearsal",
+    "completed_stage": "Fresh five-source rehydration passed; the single pinned rc.7 authored-missing-profile boot plan, threat delta, contract and schemas are frozen; the process-free controller candidate is committed at its full Git object; direct v1/v2, structured-seam, canonical-wrapper and package-materialization compatibility checks pass without a native Harness, worker, model or provider process.",
+    "next_executable_stage": "generate_and_validate_one_fresh_preexecution_receipt_then_execute_exactly_one_provider_free_pinned_rc7_native_entrypoint_through_the_canonical_wrapper_as_structured_diagnostic_native_boot_observability_attempt_001",
+    "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "253b4071ca2758da948a618aa86b5393fab0f1de",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "478c2d8647ba9f00a09f02679100a39be8327d33",
+    "reason_codes": [],
+    "resolved_commit": "253b4071ca2758da948a618aa86b5393fab0f1de",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "253b4071ca2758da948a618aa86b5393fab0f1de"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 1,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [
+      "git_refs_evidence_manual_object_id_forbidden"
+    ],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "revision_required"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "478c2d8647ba9f00a09f02679100a39be8327d33",
+    "branch_origin_aligned": false,
+    "head": "478c2d8647ba9f00a09f02679100a39be8327d33",
+    "origin_branch_commit": "90e40cc8fdc154ca48e79dbfb24df68e7f05b558",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 658
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "single_native_boot_preexecution",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "The one provider-free Harness entrypoint is the evidence subject, not a worker; creating a worker session, model or provider request would invalidate the tranche.",
+        "work_packages": []
+      },
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Provider calls remain closed and exact local terminal, process-count and cleanup evidence own acceptance.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the one process, terminal and cleanup form one serial ownership chain.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "preexecution_receipt_revision_required",
+      "candidate_or_package_identity_mismatch_before_Popen",
+      "terminal_or_cleanup_failure_after_consumption"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one Popen consumes attempt 001",
+      "no retry or resume",
+      "validate v2 or v1 fallback before root cleanup",
+      "prove process and root absence before evidence acceptance"
+    ]
+  },
+  "planned_action": "execute_exactly_one_provider_free_pinned_rc7_native_entrypoint_through_the_canonical_wrapper_as_structured_diagnostic_native_boot_observability_attempt_001_then_validate_v2_terminal_process_absence_and_cleanup_without_retry",
+  "reasons": [
+    "git_refs_evidence_manual_object_id_forbidden"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-historical-equality-test-selection.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/native-preexecution-checkpoint.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/preexecution/clockwork-checkpoint-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the exact serial launch, terminal readback, termination, cleanup and acceptance. The DeepSeek worker lane, Gemini provider lane and native-subagent lane receive no work package.",
+    "git_refs_and_worktree": "Machine snapshot alone owns exact Git objects. It must resolve candidate 253b4071ca2758da948a618aa86b5393fab0f1de as an ancestor of the checkpoint HEAD, show all protected refs fixed, a clean tracked tree, docs/branding present, unrelated untracked files preserved and zero canonical attempt outputs before launch.",
+    "live_handover_current_baton": "The live baton and lease-98 checkpoint admit exactly one provider-free pinned rc.7 authored-missing-profile native entrypoint execution through the accepted canonical wrapper.",
+    "protected_evidence_boundaries": "Run one local Node/Harness entrypoint process with no task argument and no retry. The authored missing profile must reject before HMR; no broker/session/prompt/tool/model/provider, raw durable stream, product/data, deployment, protected evidence or protected ref is admitted."
+  },
+  "status": "revision_required",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": false
+}
