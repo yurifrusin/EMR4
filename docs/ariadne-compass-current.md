@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Integrate the deterministic typed stage dial provider-free; do not launch another occupied attempt.
+> Materialise and verify the typed native-Harness control gears provider-free; do not launch an occupied attempt.
 
 ## North star
 
@@ -516,19 +516,21 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The one occupied identity passed full HMR readiness and entered the custom runner, then failed before provider I/O with exact cleanup but only a generic runner code. Lineage parent: `raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision`.
 250. **Make DeepSeek native-Harness worker execution bounded, traceable and governable enough for Raisa development — Native Harness closed custom-runner failure coordinates**
    The opaque post-HMR runner failure now has a source-bound finite diagnostic design whose factual stage is advanced by deterministic code rather than model prose. Lineage parent: `raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005`.
+251. **Make DeepSeek native-Harness worker execution bounded, traceable and governable enough for Raisa development — Native Harness future-runner sidecar and broker-zero join**
+   A future runner and controller now form a deterministic two-gauge join that distinguishes supported pre-request failure from unresolved request-boundary and generic terminal states. Lineage parent: `deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis`.
 
 ## Current position
 
-**Integrate the typed diagnostic into a future runner without spending an occupied attempt — Native Harness closed custom-runner failure coordinates**
+**Materialise the exact deterministic gears before any further occupied native-Harness attempt — Native Harness future-runner sidecar and broker-zero join**
 
-**Why this proof came next:** The source mapping and closed vocabulary pass; integration is the remaining prerequisite before another native execution can produce the missing coordinate.
+**Why this proof came next:** The source transformation and evidence join pass; byte-exact disposable materialisation and controller-terminal assembly are the remaining provider-free prerequisites.
 
-A provider-free integration rehearsal will prove exact helper placement, controller ingestion and the broker-zero join while preserving the accepted runner and attempt evidence.
+A future-attempt fixture will contain the exact accepted runner, helper and controller bindings and prove closed terminal selection without executing the subject stack.
 
 ### What this unlocks
 
-- A traceable future native terminal with a machine-owned stage reading.
-- A later repair-or-occupied-proof decision grounded in the exact failing runner coordinate.
+- One inspectable future native-attempt bundle with exact source identities.
+- A later occupied-attempt decision whose terminal path is already mechanically assembled and verified.
 
 ### What it does not solve
 
@@ -1278,6 +1280,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-closeout.md`
 - `docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md`
+- `docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md`
@@ -2018,7 +2021,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-pre-dispatch-receipt.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-custom-runner-pre-request-failure-coordinate-diagnosis-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-worker-terminal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-predispatch-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-first-admission-sol-acceptance.md`
@@ -2026,6 +2028,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-sidecar-integration-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2667,7 +2670,6 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/provider-free-complete-composition-native-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/diagnosis-evidence.json`
-- `orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/provider-free-effective-tool-guard-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/efficacy-reading.json`
@@ -2677,6 +2679,8 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/provider-free-inert-task-sentinel-readiness-native-boot-terminal.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/efficacy-reading.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/efficacy-reading.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/integration-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/diagnosis-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-evidence.json`
@@ -3671,4 +3675,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 355; continuity graph revision 373._
+_Compass map revision 356; continuity graph revision 374._

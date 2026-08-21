@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 596,
+  "register_revision": 597,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -32789,6 +32789,189 @@
       },
       "incident_id": "AER-0839",
       "attempt_id": "clock-7870d6d36e0c7c6087af46d6",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-sidecar-integration",
+      "role": "orchestrator",
+      "resource_id": "completed-test-output",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Exact test counts must be stated only after mechanically collecting the completed command output.",
+      "observed_error": "The predecessor closeout packet was called 555 governance cases in commentary before completed output established 548; the statement was immediately corrected and did not alter evidence.",
+      "detection_method": "The completed provider-free pytest output and accepted predecessor closeout reported the exact 548-case reading.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-closeout.md",
+        "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-plan.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.test_count_stated_before_completed_machine_output",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Correct the statement and bind future exact test counts only from a completed machine collection or execution result.",
+        "prevention_control": "The successor latch carries exact_test_counts_from_completed_machine_output_only as an exact typed boundary.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md"
+        ]
+      },
+      "incident_id": "AER-0840",
+      "attempt_id": "clock-e5d6ceeda900308eb3200d0f",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-sidecar-integration",
+      "role": "implementer",
+      "resource_id": "sidecar-source-binding-contract",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Each semantically distinct source binding must contain the hash of the exact named source rather than a nearby generated artifact.",
+      "observed_error": "The first contract placed the generated diagnostic-helper hash in accepted_diagnostic_module_sha256, so the evidence generator rejected source_binding_mismatch before writing canonical evidence.",
+      "detection_method": "A direct machine hash roster isolated the accepted runner, diagnostic module, controller, future runner and generated helper as five separate bindings.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/contract.json",
+        "scripts/deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.adjacent_source_hash_bound_to_wrong_semantic_field",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the three affected schema constants with the exact diagnostic-module hash and rerun write plus idempotent check.",
+        "prevention_control": "The successor latch separates semantic source-binding fields and requires an exact machine-generated hash roster before schema freeze.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/integration-evidence.json",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py"
+        ]
+      },
+      "incident_id": "AER-0841",
+      "attempt_id": "clock-d8a66d3c03079d4b583db4cf",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-sidecar-integration",
+      "role": "orchestrator",
+      "resource_id": "git-object-identity-commentary",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "A commit identity may be stated only by copying a current machine-resolved 40-character object ID; an abbreviated display must never be manually expanded.",
+      "observed_error": "After candidate publication the orchestrator manually expanded the displayed 3a16f5a0 abbreviation into an incorrect 40-character value in commentary.",
+      "detection_method": "An immediate git rev-parse snapshot returned the actual candidate 3a16f5a00e50259caf993decc67719173348dc0a and confirmed task-origin alignment and unchanged protected refs.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_git_abbreviation_expansion_without_snapshot",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Correct the commentary from fresh git rev-parse output and prohibit any further manually expanded commit identity.",
+        "prevention_control": "The successor latch carries no_commit_identity_statement_without_current_machine_snapshot_copy as an exact typed boundary; clockwork-derived records remain the authority for closeout identities.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md",
+          "orchestration/continuity/ariadne-active-operation-latch/current.json"
+        ]
+      },
+      "incident_id": "AER-0842",
+      "attempt_id": "clock-ecbbc075e106b12db0ef9437",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-sidecar-integration",
+      "role": "orchestrator",
+      "resource_id": "clockwork-prospective-graph",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A clockwork input decision may cite only evidence already present before preparation; a register revision produced by the same tick is a derived output, not prospective input evidence.",
+      "observed_error": "The first closeout intent cited docs/ariadne-agent-error-correction-register-revision-597.md as a decision source before that derived register revision existed.",
+      "detection_method": "The read-only clockwork check rejected tick_transaction_prepare with a current-position evidence_not_found result before command execution or canonical writes.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/closeout/closeout-intent.json",
+        "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_input_forward_referenced_derived_register_output",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the prospective decision to the existing closeout intent and leave the generated register only in post-reduction acceptance paths.",
+        "prevention_control": "The successor latch prohibits closeout input evidence from referring to a not-yet-generated derived register revision.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0843",
+      "attempt_id": "clock-1d457690f1a4dcde0466f0bc",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-sidecar-integration",
+      "role": "orchestrator",
+      "resource_id": "clockwork-incident-revision-intake",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "When a closeout supplies incident observations, its exact human-readable prospective revision note must exist before clockwork preparation unless the writer itself renders that intake artifact.",
+      "observed_error": "The corrected clockwork intent was checked before docs/ariadne-agent-error-correction-register-revision-597.md had been prepared.",
+      "detection_method": "The read-only clockwork gate rejected tick_incident_revision_reading before command execution or canonical writes.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/closeout/closeout-intent.json",
+        "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_incident_revision_intake_not_prepared_before_check",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Prepare revision 597 with the exact prospective revision, population, incident IDs, open count and ordered incident headings before rerunning the clockwork.",
+        "prevention_control": "The successor latch requires the intake note to preexist a clockwork check unless a future clockwork renderer makes it a deterministic output.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-597.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0844",
+      "attempt_id": "clock-f7ae900332f0af6bbe4911cc",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

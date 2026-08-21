@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 373,
+  "graph_revision": 374,
   "harvests": [],
   "nodes": [
     {
@@ -28207,9 +28207,116 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
+      "title": "Native Harness future-runner sidecar and broker-zero join",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the bounded provider-free native-Harness control sequence.",
+          "No Node, Harness, broker, worker, model, provider, network, database, product, deployment, Pages or protected-ref authority opened.",
+          "The accepted runner and every consumed attempt remain byte-immutable."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-complete-future-runner-derivation",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/integration-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact future runner with seven code-owned stages, one helper write, identical rethrow and a diagnostic interval closed before flush."
+        },
+        {
+          "id": "accept-independent-broker-zero-join",
+          "source": "orchestration_harness/native_post_hmr_pre_request_controller.py",
+          "status": "accepted",
+          "summary": "Accept pre-request only from a canonical identity-bound sidecar plus a separately canonical all-zero five-counter broker reading."
+        },
+        {
+          "id": "reject-runtime-and-readiness-overclaim",
+          "source": "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "Reject claims about native loading, real broker counters, DeepSeek performance, occupied execution or Harness readiness."
+        },
+        {
+          "id": "accept-corrected-workflow-readings",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/closeout/closeout-intent.json",
+          "status": "accepted",
+          "summary": "Accept five corrected workflow observations and their typed prevention controls with none open."
+        }
+      ],
+      "claim_scope": [
+        "The byte-exact accepted attempt-005 runner validates before any transformation.",
+        "The complete future runner adds only the closed diagnostic import, stages, causes, guarded write and interval closure.",
+        "A canonical sidecar alone cannot establish a pre-request coordinate.",
+        "Every broker counter is an exact non-negative integer and booleans are rejected.",
+        "Invalid broker evidence rejects the join while invalid or absent sidecar evidence preserves the generic terminal.",
+        "No prohibited process, request, raw stream, product, data or protected-ref effect occurred."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/integration-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/integration-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-sidecar-integration-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-pre-request-sidecar-integration-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-sidecar-integration-candidate-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_agents_handover_archive.py",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/native_post_hmr_pre_request_controller.py",
+          "scripts/deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-597.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-post-hmr-sidecar-integration.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The accepted future runner and helper are not materialised in a native Harness attempt tree.",
+        "No real broker counter source or controller terminal has been exercised.",
+        "No occupied Harness attempt, provider request or DeepSeek behavior is authorised or proved.",
+        "Product, data, production, deployment, release, Pages and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-21T21:40:25.0822453+10:00",
+      "updated_at": "2026-08-21T21:40:25.0822453+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "34dc1facb493984aa3609e2a7beddb9699534a68",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-21T20:45:20.9374564+10:00"
+  "updated_at": "2026-08-21T21:40:25.0822453+10:00"
 }
