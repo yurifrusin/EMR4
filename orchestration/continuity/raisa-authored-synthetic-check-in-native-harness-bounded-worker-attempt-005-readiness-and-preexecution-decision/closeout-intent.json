@@ -1,0 +1,357 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+    "title": "Raisa authored-synthetic native Harness bounded-worker attempt 005 readiness and preexecution decision",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-21T18:25:14.5439157+10:00",
+    "node": {
+      "id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "title": "Native Harness attempt 005 deterministic readiness decision",
+      "kind": "tooling",
+      "relationships": [
+        {"node_id": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof", "relation": "builds_on"}
+      ],
+      "authority": {
+        "authorized_openings": [
+          {
+            "boundary": "authored-synthetic-native-harness-worker-attempt",
+            "source": "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-closeout.md",
+            "scope": "At most one fresh attempt 005 after a separate latch, full rehydration, exact source resolution and clockwork checkpoint."
+          }
+        ],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the exact successor only after a fresh latch, full rehydration, source resolution and checkpoint.",
+          "The readiness reading itself is non-reusable and opens no process or provider execution from this tranche.",
+          "No retry, resume, fallback, auxiliary model, second worker, product, data, deployment, Pages or protected-ref authority opens."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-attempt-005-deterministic-readiness-pass",
+          "source": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/deterministic-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact repaired composition as representable for one separately checkpointed attempt-005 successor."
+        },
+        {
+          "id": "preserve-no-execution-inside-readiness",
+          "source": "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Keep every Node, Harness, broker, worker, model, provider and network counter zero and do not reuse the readiness clockwork observation."
+        },
+        {
+          "id": "accept-separate-attempt-005-checkpoint-next",
+          "source": "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-closeout.md",
+          "status": "accepted",
+          "summary": "Proceed with a fresh successor latch and exact preexecution checkpoint before the sole occupied process becomes eligible."
+        },
+        {
+          "id": "accept-contained-readiness-procedure-observations",
+          "source": "docs/ariadne-agent-error-correction-register-revision-594.md",
+          "status": "accepted",
+          "summary": "Accept AER-0810 through AER-0813 as contained or corrected with no open incident and no Harness/provider process cost."
+        }
+      ],
+      "claim_scope": [
+        "Seven legacy and fifteen startup-lineage artifacts remain exact and consumed where applicable.",
+        "Sixteen current component digests bind the repaired sentinel, runner, profiles, broker, work-order and rc7 package.",
+        "The fresh attempt-005 identity, disposable root and twenty-two prospective outputs are absent and disjoint.",
+        "The readiness clockwork reading is read-only and cannot parent occupied execution.",
+        "The result proves deterministic representability only and no occupied worker or provider performance."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-plan.md",
+          "docs/security/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/deterministic-evidence.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/readiness-report.md",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/verification-evidence.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-pre-verifier-receipt.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-001-rejected-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
+          "tests/test_raisa_authored_synthetic_native_harness_bounded_worker_attempt_004_readiness_and_preexecution_decision.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py",
+          "tests/test_deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/contract.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/contract.schema.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/deterministic-evidence.schema.json",
+          "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-historical-test-selection.md",
+          "docs/ariadne-agent-error-correction-register-revision-594.md",
+          "orchestration/human_inbox/yuri/2026-08-21--native-harness-attempt-005-readiness.md"
+        ]
+      },
+      "unresolved_gates": [
+        "Attempt 005 has not been prepared, checkpointed, consumed or executed.",
+        "Runner HMR, broker reachability, the DeepSeek request, one edit and cleanup remain unproved for attempt 005.",
+        "No model coding-quality or repeated Harness reliability claim is supported.",
+        "No product, patient, clinical, production, deployment, Pages or protected-ref surface is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Convert the accepted startup repair chain into one exact fail-closed worker-attempt envelope",
+      "outcome": "The current repaired native-Harness composition is deterministically representable for one separately checkpointed attempt 005 with zero process activity.",
+      "evidence": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/deterministic-evidence.json",
+        "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Checkpoint and consume at most one traceable native DeepSeek worker attempt",
+      "why_now": "The stock readiness proof and process-free attempt-005 decision both pass, while all previous worker attempts remain consumed and non-resumable.",
+      "outcome": "A fresh preexecution checkpoint will either admit one exact occupied attempt-005 process or fail closed before Node, broker, model or provider activity.",
+      "unlocks": [
+        "One traceable bounded DeepSeek worker opportunity using the repaired runner and broker composition.",
+        "Direct evidence of whether the Harness reaches runner HMR and one model-requested edit after the startup repairs."
+      ],
+      "does_not_solve": [
+        "No retry, second worker or generic reliability claim.",
+        "No product, patient, clinical or historical data and no product runtime.",
+        "No deployment, release, Pages or protected-ref authority."
+      ],
+      "evidence": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/deterministic-evidence.json",
+        "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-sol-acceptance.md"
+      ],
+      "orientation_statement": "Rehydrate, resolve the exact full source, freeze a fresh clockwork checkpoint and admit at most one occupied attempt-005 process under the established one-request/no-retry envelope."
+    },
+    "next_operation": {
+      "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
+      "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker attempt 005",
+      "objective": "Under one fresh machine-derived clockwork checkpoint, prepare and execute at most one disjoint authored-synthetic native Harness worker attempt 005 using the exact repaired sentinel, runner, preset, broker and work order; permit one process, one session, one turn, at most one DeepSeek provider request and exactly one direct literal edit tool call; retain bounded structured terminal evidence, destroy raw streams and environment, clean all owned processes and the disposable root, and perform no retry, resume, fallback, auxiliary model, second worker or product activity.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, constrained by the accepted process-free attempt-005 readiness decision and a separately frozen one-process checkpoint.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_and_validate_the_attempt_005_preexecution_checkpoint"
+    },
+    "incidents": [],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "attempt_005_readiness_focused_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "pytest", "-q", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt_005_readiness_applicable_startup_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "pytest", "-q",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
+          "tests/test_raisa_authored_synthetic_native_harness_bounded_worker_attempt_004_readiness_and_preexecution_decision.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py",
+          "tests/test_deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py",
+          "tests/test_deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py",
+          "tests/test_deepseek_native_harness_provider_free_sentinel_source_escape_repair.py",
+          "tests/test_deepseek_native_harness_provider_free_post_sentinel_pre_stock_readiness_exit_coordinate_diagnosis.py",
+          "tests/test_deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py",
+          "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py",
+          "--deselect", "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py::test_deterministic_evidence_launches_no_subprocess",
+          "--deselect", "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py::test_contract_evidence_and_report_are_current"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt_005_readiness_static_checks",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Native Harness attempt 005 readiness decision acceptance",
+    "paths": [
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-plan.md",
+      "docs/security/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-threat-model-delta.md",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/contract.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/contract.schema.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/deterministic-evidence.schema.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/deterministic-evidence.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/readiness-report.md",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/verification-evidence.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/efficacy-reading.json",
+      "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
+      "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-historical-test-selection.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-preplanning-runtime-state.json",
+      "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-pre-verifier-runtime-state.json",
+      "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-pre-verifier-receipt.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-001-rejected-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-594.md",
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-21--native-harness-attempt-005-readiness.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "one_fresh_disjoint_attempt_005_only",
+    "fresh_five_source_rehydration_full_git_resolution_and_clockwork_checkpoint_required_before_preparation_or_execution",
+    "exactly_one_node_native_harness_process_one_session_one_turn_one_provider_request_and_one_direct_literal_edit_ceiling",
+    "zero_automatic_retry_resume_fallback_auxiliary_model_or_second_worker",
+    "consumed_attempts_001_through_004_and_all_boot_attempts_remain_immutable_and_nonresumable",
+    "exact_repaired_sentinel_runner_preset_broker_work_order_identity_output_and_cleanup_bindings",
+    "raw_prompt_response_reasoning_stream_environment_session_and_credential_material_not_retained",
+    "user_controlled_prepaid_balance_only_no_broker_currency_cap_claim_or_balance_top_up",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "authored_synthetic_non_product_single_file_only_no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "attempt-005-readiness-powershell-foreach-pipeline-001",
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "role": "orchestrator",
+      "resource_id": "powershell-read-only-inventory",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_powershell_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Read-only inventory commands must use syntactically valid PowerShell collection and pipeline forms.",
+      "observed_error": "Two foreach expressions were piped directly after their closing braces and PowerShell rejected each as an empty pipeline element.",
+      "detection_method": "PowerShell parser errors occurred before output, file mutation, test execution or process launch.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/verification-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-594.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_foreach_expression_piped_as_empty_element",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Assign each foreach result to a rows variable before piping the variable to JSON conversion.",
+        "prevention_control": "Use the rows-assignment inventory template for every future PowerShell foreach projection.",
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-594.md"]
+      },
+      "baton_summary": "records two rejected read-only inventory commands and their common corrected template."
+    },
+    {
+      "attempt_key": "attempt-005-readiness-self-audit-token-001",
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "role": "orchestrator",
+      "resource_id": "process-free-source-self-audit",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A source self-audit must not embed the exact forbidden tokens it searches for or count its own assertion token.",
+      "observed_error": "The first guard matched its own forbidden literals; the first correction missed the equivalent subprocess-run count token and caused a second focused failure.",
+      "detection_method": "Two serial focused pytest runs failed closed before evidence acceptance, with every process/provider activity counter zero.",
+      "evidence_paths": [
+        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/verification-evidence.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.source_self_audit_embedded_its_own_forbidden_token",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Construct every launcher, provider, credential and subprocess-run comparison token from fragments.",
+        "prevention_control": "Self-auditing source checks use fragmented comparison constants and a passing focused regression test.",
+        "evidence_paths": [
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py"
+        ]
+      },
+      "baton_summary": "records the self-referential guard and complete fragmented-token correction."
+    },
+    {
+      "attempt_key": "attempt-005-readiness-historical-selector-001",
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "role": "orchestrator",
+      "resource_id": "applicable-startup-lineage-test-selector",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A successor packet must exclude immutable equality selectors superseded by explicitly accepted repair descendants.",
+      "observed_error": "The first widened packet included two controller-convergence selectors fixed to the pre-repair controller digest.",
+      "detection_method": "The 77-test packet passed 75 tests and failed only the two historical accepted-component equality selectors.",
+      "evidence_paths": [
+        "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-historical-test-selection.md",
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/verification-evidence.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_packet_included_superseded_controller_equality_selectors",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Freeze the two-selector applicability boundary and rerun every other current startup-lineage test.",
+        "prevention_control": "The attempt-005 execution packet consumes the committed historical selection document instead of reconstructing exclusions.",
+        "evidence_paths": ["docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-historical-test-selection.md"]
+      },
+      "baton_summary": "records the superseded equality selectors and the 75-test applicable packet."
+    },
+    {
+      "attempt_key": "attempt-005-readiness-clockwork-authorized-opening-001",
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "role": "orchestrator",
+      "resource_id": "clockwork-authorized-opening-shape",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every non-empty continuity authorized opening must use the typed boundary-and-source object shape.",
+      "observed_error": "The first closeout intent represented the exact successor opening as a free string.",
+      "detection_method": "The read-only clockwork check rejected at tick_transaction_prepare with authorized_opening_object_required before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-001-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-594.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_authorized_opening_authored_as_free_string",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the string with a typed boundary, repository source and exact one-attempt scope object.",
+        "prevention_control": "Non-empty clockwork authorized openings are copied from the continuity graph opening schema before the next dry check.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the rejected free-string opening and its typed-object correction."
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "schema_version": "ariadne.workflow_efficacy_reading.v1",
   "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
-  "result": "promising_exact_readiness_pass_with_three_contained_procedure_classes",
+  "result": "promising_exact_readiness_pass_with_four_contained_procedure_classes",
   "outcome": "The repaired native-Harness runner composition is deterministically coherent and one fresh attempt-005 envelope is representable, while execution authority remains separately checkpointed and every process/provider counter stays zero.",
   "useful_work": {
     "readiness_decision_passed": true,
@@ -32,13 +32,20 @@
       "count": 1,
       "cause": "The first widened packet included two immutable controller-convergence equality selectors that intentionally bind the pre-repair controller digest.",
       "control": "The exact two-selector boundary is frozen; all other 75 current/applicable startup-lineage tests pass."
+    },
+    {
+      "kind": "clockwork_authorized_opening_shape",
+      "count": 1,
+      "cause": "The first closeout intent used a free string where the continuity graph requires a typed boundary-and-source opening object.",
+      "control": "The dry check rejected with zero publication; the corrected intent uses the exact schema object and preserves the rejected receipt."
     }
   ],
   "process_cost": {
     "native_processes_consumed": 0,
     "provider_cost_incurred": false,
     "extra_processes_caused_by_procedure_corrections": 0,
-    "deterministic_test_rerun_classes": 3
+    "deterministic_test_rerun_classes": 3,
+    "clockwork_dry_check_corrections": 1
   },
   "assessment": "The clockwork-oriented regime preserved the important property: none of the procedural corrections consumed a Harness or provider attempt. The remaining friction is local command and test-selection syntax, now measured explicitly. Attempt 005 is ready only for a new exact checkpoint, not execution from this tranche."
 }

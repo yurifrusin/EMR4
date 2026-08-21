@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.governance_live_tick_rejected_check.v1",
+  "status": "revision_required",
+  "source_commit": "988a1623ca1b576e603197a6fb91d0c30c397d96",
+  "failure_coordinate": "tick_transaction_prepare",
+  "underlying_coordinate": "source_graph:authorized_opening_object_required:raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+  "live_publication_count": 0,
+  "canonical_state_changed": false,
+  "correction": "Replace the free string with the continuity graph's typed boundary-and-source opening object and rerun the dry check."
+}

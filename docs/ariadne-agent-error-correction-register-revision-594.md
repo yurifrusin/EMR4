@@ -2,12 +2,12 @@
 
 <!-- ariadne-agent-error-register-reading
 revision: 594
-incident_count: 812
-new_incident_ids: AER-0810,AER-0811,AER-0812
+incident_count: 813
+new_incident_ids: AER-0810,AER-0811,AER-0812,AER-0813
 open_incident_count: 0
 -->
 
-This revision note binds three contained readiness-workflow observations to the
+This revision note binds four contained readiness-workflow observations to the
 prospective clockwork-projected register. The canonical JSON register and
 pattern report remain clockwork-owned.
 
@@ -35,3 +35,12 @@ accepted relative-specifier and sentinel-source repairs. Those two selectors
 failed on only that expected old digest. The exact applicability boundary is
 now frozen; the repaired current gate directly binds the new controller and all
 repair artifacts, and the other 75 tests pass.
+
+## AER-0813
+
+The first read-only clockwork closeout check represented the exact successor
+authority opening as a free string. The continuity graph requires a typed
+boundary-and-source object. The check rejected at `tick_transaction_prepare`
+with zero publication and no canonical change. The rejected receipt is
+preserved and the corrected intent uses the schema's boundary, repository
+source and exact one-attempt scope fields.

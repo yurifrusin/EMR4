@@ -52,6 +52,13 @@
       "count": 1,
       "outcome": "widened_packet_failed_only_on_two_pre_repair_equality_selectors",
       "correction": "Freeze the exact two-selector applicability boundary and retain the other 75 current tests."
+    },
+    {
+      "incident_id": "AER-0813",
+      "coordinate": "clockwork_authorized_opening_shape",
+      "count": 1,
+      "outcome": "read_only_clockwork_check_rejected_with_zero_publication",
+      "correction": "Replace the free string with the continuity graph's typed boundary, source and scope object."
     }
   ],
   "activity": {

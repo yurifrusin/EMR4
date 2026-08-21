@@ -36,11 +36,12 @@ rehydration, full source resolution and checkpoint all pass.
 
 ## Workflow efficacy and issues
 
-Three low-severity procedure classes were contained: two PowerShell inventory
-syntax errors, two self-auditing guard reruns and one historical-selector
-selection rerun. None consumed a Harness process or provider request. Revision
-594 records AER-0810 through AER-0812; all 812 incidents are contained or
-corrected and none are open.
+Four low-severity procedure classes were contained: two PowerShell inventory
+syntax errors, two self-auditing guard reruns, one historical-selector
+selection rerun and one rejected clockwork opening-shape draft. None consumed a
+Harness process or provider request, and the clockwork rejection published
+nothing. Revision 594 records AER-0810 through AER-0813; all 813 incidents are
+contained or corrected and none are open.
 
 ## Parallelism closeout
 
