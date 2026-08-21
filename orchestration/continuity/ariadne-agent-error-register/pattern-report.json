@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 589,
+  "register_revision": 590,
   "source_cutoff_on": "2026-08-21",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "52280e57ebc0d48de80e8b3aae605452cd7d58b9b8b04898d437aecb44d3db98",
-  "incident_count": 791,
+  "canonical_register_sha256": "ad715e12d8ca8fdd702c87c5c2ed1dd9ba332d23e5a27b19e309ddcf791d6b8a",
+  "incident_count": 795,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 482,
       "harness": 61,
-      "operator": 101,
+      "operator": 105,
       "repository": 131,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 93,
       "evidence_misreport": 71,
       "harness_failure": 61,
-      "operator_error": 101,
+      "operator_error": 105,
       "output_contract_violation": 266,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
@@ -28,18 +28,18 @@
     "by_role": {
       "implementer": 57,
       "integration_reviewer": 3,
-      "orchestrator": 668,
+      "orchestrator": 672,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 468,
+      "low": 472,
       "material": 129,
       "moderate": 194
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 141,
-      "canonical_unchanged": 496,
-      "untrusted_partial_worktree": 154
+      "canonical_unchanged": 498,
+      "untrusted_partial_worktree": 156
     },
     "by_resource_and_role": {
       "accepted-native-startup-terminal-and-consumed-controller-source::orchestrator": 1,
@@ -260,6 +260,9 @@
       "repaired-sentinel-native-boot-process::orchestrator": 1,
       "repaired-sentinel-source-author::orchestrator": 1,
       "repaired-sentinel-terminal-claim-wording::orchestrator": 1,
+      "sentinel-source-escape-repair-closeout-intent-json::orchestrator": 1,
+      "sentinel-source-escape-repair-evidence-generator::orchestrator": 1,
+      "sentinel-source-escape-repair-surrounding-test-packet::orchestrator": 1,
       "shadow-clockwork-causal-tick-engine::orchestrator": 1,
       "shadow-clockwork-efficacy-reducer::orchestrator": 1,
       "shadow-clockwork-live-efficacy-tests::orchestrator": 1,
@@ -269,6 +272,7 @@
       "shadow-clockwork-rehearsal-continuity-updater::orchestrator": 1,
       "shared-postgresql-pytest-gate::orchestrator": 1,
       "successor-protected-boundary-vocabulary::orchestrator": 1,
+      "transactional-closeout-decision-evidence::orchestrator": 1,
       "transactional-closeout-node-relationship-cardinality::orchestrator": 1,
       "transactional-closeout-shadow-fixture::orchestrator": 1,
       "transactional-contract-evidence-field::orchestrator": 1,

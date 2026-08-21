@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 589,
+  "register_revision": 590,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -31046,6 +31046,146 @@
       },
       "incident_id": "AER-0791",
       "attempt_id": "clock-8859f1c1cbb7244a2401d876",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-sentinel-source-escape-repair",
+      "role": "orchestrator",
+      "resource_id": "sentinel-source-escape-repair-evidence-generator",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A repository script that imports sibling scripts must bootstrap the repository root before package imports when invoked directly.",
+      "observed_error": "The first direct validator invocation raised ImportError because the scripts package import preceded repository-root sys.path insertion.",
+      "detection_method": "The direct evidence-generation command failed before writing evidence and before any Node, Harness or provider activity.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-sentinel-source-escape-repair/efficacy-reading.json"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.new_script_sibling_import_missing_repository_root_bootstrap",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Insert the repository root into sys.path before importing the accepted sibling diagnosis module.",
+        "prevention_control": "Use the repository's established direct-script import bootstrap for every new sibling-importing CLI.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_sentinel_source_escape_repair.py"
+        ]
+      },
+      "incident_id": "AER-0792",
+      "attempt_id": "clock-ff5c037abe8b986e57793f97",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-sentinel-source-escape-repair",
+      "role": "orchestrator",
+      "resource_id": "sentinel-source-escape-repair-surrounding-test-packet",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Post-repair surrounding tests must exclude exact historical digest and consumed-latch selectors whose frozen assertions are intentionally superseded without rewriting them.",
+      "observed_error": "The first surrounding packet included two consumed controller-digest selectors and one consumed attempt-004 latch selector, producing three expected historical-state failures.",
+      "detection_method": "Pytest reported the two component_digest_mismatch failures and one active_operation_latch_mismatch while every other selected control passed.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-sentinel-source-escape-repair-historical-test-selection.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.post_successor_packet_included_consumed_digest_and_latch_selectors",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Record the three exact historical selectors, preserve their artifacts unchanged and rerun all 66 remaining surrounding selectors successfully.",
+        "prevention_control": "Create the historical-state test selection from the frozen source/latch delta before the first post-successor surrounding packet.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-sentinel-source-escape-repair/verification-evidence.json"
+        ]
+      },
+      "incident_id": "AER-0793",
+      "attempt_id": "clock-a80feee44d20de64b13c95d7",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-sentinel-source-escape-repair",
+      "role": "orchestrator",
+      "resource_id": "transactional-closeout-decision-evidence",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every transactional decision source must already exist in the candidate repository; a register revision generated by the same prospective tick cannot serve as its own prepublication decision source.",
+      "observed_error": "The first dry-run intent bound the contained-incident decision to the future revision-590 Markdown path; after that coordinate was corrected, the second draft still carried the same future path inside each prospective incident's evidence list; after both references were corrected, the third draft had not yet pre-authored the required revision reading.",
+      "detection_method": "Three governance clockwork dry runs rejected the future path at transaction preparation, then at incident-register projection, then reported the missing revision reading; canonical state remained unchanged throughout.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-sentinel-source-escape-repair/efficacy-reading.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.transactional_decision_bound_future_same_tick_register_revision",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the decision and every prospective incident evidence path to already present candidate evidence, then pre-author the next revision reading with the exact prospective incident IDs before the clockwork dry run.",
+        "prevention_control": "Treat register closeout as a typed three-part template: existing evidence bindings, pre-authored next revision reading, and prospective canonical projection.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-sentinel-source-escape-repair/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0794",
+      "attempt_id": "clock-100959a8fc32506c2625848c",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-sentinel-source-escape-repair",
+      "role": "orchestrator",
+      "resource_id": "sentinel-source-escape-repair-closeout-intent-json",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every edited closeout intent must pass JSON parsing immediately before any clockwork invocation.",
+      "observed_error": "A patch that broadened the register-closeout correction omitted one comma between prevention_control and evidence_paths, so the next check stopped at JSON decoding.",
+      "detection_method": "The clockwork CLI failed during intent loading with JSONDecodeError before transaction preparation or canonical state change.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-sentinel-source-escape-repair/efficacy-reading.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_intent_patch_omitted_json_property_comma",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the missing comma and run json.tool before the next clockwork check.",
+        "prevention_control": "Parse and schema-check the intent after every patch, not only after its initial creation.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-sentinel-source-escape-repair/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0795",
+      "attempt_id": "clock-4fbe7daa0cc7407947e176f6",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

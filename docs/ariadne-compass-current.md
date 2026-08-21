@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Repair only the sentinel-source escape spellings, prove generated-byte lexical validity statically, and keep all executable Harness/provider surfaces closed.
+> Freeze one fresh source-repaired sentinel-only rc7 boot, admit one native process and preserve a structured terminal without any worker or provider activity.
 
 ## North star
 
@@ -502,24 +502,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One bounded process reached a sanitized preactivation failure, proving the relative-path repair alone is insufficient while all provider and cleanup controls held. Lineage parent: `deepseek-native-harness-provider-free-proof-module-relative-specifier-repair`.
 243. **Replace opaque native retries with a deterministic preactivation coordinate — Native Harness repaired-sentinel preactivation source diagnosis**
    One static pass traced the zero-event exit to a Python-to-JavaScript escape transformation without another Harness or provider process. Lineage parent: `deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof`.
+244. **Remove the proven preactivation lexical defect without spending another native attempt — Native Harness sentinel source escape repair**
+   One source byte now preserves the generated JavaScript escapes, with zero lexical violations and exact consumed-evidence preservation. Lineage parent: `deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis`.
 
 ## Current position
 
-**Repair only the proven sentinel-source lexical defect — Native Harness repaired-sentinel preactivation source diagnosis**
+**Test only whether the repaired sentinel reaches native Harness readiness — Native Harness sentinel source escape repair**
 
-**Why this proof came next:** The exact generated-byte transformation is known and can be corrected without executing rc7 or widening the worker boundary.
+**Why this proof came next:** Static validity is proven, so one fresh provider-free process can distinguish repaired activation from any later independent boot defect.
 
-A source-only repair will prove the sentinel generator emits lexically valid JavaScript while preserving every consumed attempt and zero runtime activity.
+A single fresh rc7 process will either emit the two ordered sentinel readiness events or preserve one structured fail-closed terminal with complete cleanup.
 
 ### What this unlocks
 
-- A grounded decision about whether a separately contracted repaired-sentinel boot proof is warranted.
-- Removal of one known preactivation defect from the native Harness integration.
+- A grounded decision about whether the native Harness can progress to a separately contracted broker/worker attempt.
+- Direct observation of the first post-repair native boot coordinate without provider cost.
 
 ### What it does not solve
 
-- No Node or native Harness boot.
-- No runner, broker, worker, model or provider request.
+- No broker, worker, model or DeepSeek provider request.
+- No reliability conclusion for agentic development work.
 - No product work, data use, deployment or protected integration.
 
 ## Continuity and authority
@@ -1267,6 +1269,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-closeout.md`
 - `docs/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis-closeout.md`
+- `docs/deepseek-native-harness-provider-free-sentinel-source-escape-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-closeout.md`
@@ -2004,7 +2007,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-preactivation-source-coordinate-diagnosis-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-sentinel-source-escape-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2662,6 +2665,7 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/diagnosis-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-sentinel-source-escape-repair/repair-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/provider-free-node-fixture-evidence.json`
@@ -3642,4 +3646,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 348; continuity graph revision 366._
+_Compass map revision 349; continuity graph revision 367._

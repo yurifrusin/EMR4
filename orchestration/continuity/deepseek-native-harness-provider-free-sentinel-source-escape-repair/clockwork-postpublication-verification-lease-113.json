@@ -1,0 +1,21 @@
+{
+  "schema_version": "deepseek.native_harness.sentinel_source_escape_repair_clockwork_postpublication_verification.v1",
+  "status": "passed",
+  "source_commit": "eb8913aacb19d823e251731f9393cc54fe71524c",
+  "generation_id": "gen-54480189ebdf39afaeebd7a9f00ee9497fe8b6610dce96eaed88389a7fd5d581",
+  "lease_sequence": 113,
+  "tests": 562,
+  "passed": 562,
+  "failed": 0,
+  "errors": 0,
+  "provider_requests": 0,
+  "native_harness_processes": 0,
+  "live_state_validation": {
+    "status": "passed",
+    "canonical_drift": 0,
+    "clockwork_owned_surfaces": 10,
+    "dual_owned_surfaces": 0,
+    "retired_legacy_writer_classes": 4
+  },
+  "claim_boundary": "This record proves the lease-113 clockwork, latch, Compass, error-register and baton regression packet passed. It is not a Harness boot, worker, model or provider performance result."
+}

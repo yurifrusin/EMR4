@@ -1,0 +1,52 @@
+{
+  "schema_version": "ariadne.deepseek_native_harness_sentinel_source_escape_repair_verification.v1",
+  "candidate_source": "eb8913aacb19d823e251731f9393cc54fe71524c",
+  "result": "pass",
+  "commands": [
+    {
+      "id": "pre_repair_diagnosis_baseline",
+      "result": "pass",
+      "passed": 8,
+      "failed": 0,
+      "stage": "before_exact_one_byte_repair"
+    },
+    {
+      "id": "clean_candidate_provider_free_packet",
+      "result": "pass",
+      "passed": 99,
+      "failed": 0,
+      "excluded_historical_state_selectors": 3,
+      "excluded_executable_node_fixture_selectors": 1
+    },
+    {
+      "id": "ruff",
+      "result": "pass"
+    },
+    {
+      "id": "py_compile",
+      "result": "pass"
+    },
+    {
+      "id": "pre_verifier_receipt",
+      "result": "pass",
+      "reason_count": 0,
+      "manually_supplied_git_object_id_count": 0
+    }
+  ],
+  "proof": {
+    "exact_changed_byte_count": 1,
+    "generated_module_bytes": 1157,
+    "generated_lexical_violation_count": 0,
+    "consumed_tracked_files_preserved": 133
+  },
+  "activity": {
+    "node_process_count": 0,
+    "harness_process_count": 0,
+    "broker_process_count": 0,
+    "worker_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "network_request_count": 0,
+    "raw_stream_reconstruction_count": 0
+  }
+}

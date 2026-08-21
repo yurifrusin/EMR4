@@ -1,0 +1,62 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_the_clockwork_published_sentinel_source_repair_closeout_then_continue_the_latched_boot_proof",
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "complete AGENTS read retained from this uninterrupted session; exact clockwork-generated AGENTS delta, Continuity 367/Compass 349 result, source-repair acceptance, new active latch, protected sections 5/6 and machine Git state refreshed after lease 113 publication", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "source_evidence": {
+    "live_handover_current_baton": "Continuity 367 and Compass 349 accept the one-byte provider-free sentinel source repair and name the fresh one-process source-repaired sentinel boot proof as next.",
+    "current_authority_allocation": "GPT Sol owns the serial one-process provider-free boot proof and its acceptance. DeepSeek model, Gemini provider and native-subagent execution are declined; only the exact local rc7 Node/native-Harness process is admitted.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-sentinel-source-escape-repair-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-sentinel-source-escape-repair-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-sentinel-source-escape-repair/repair-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-sentinel-source-escape-repair/verification-evidence.json",
+      "docs/deepseek-native-harness-provider-free-sentinel-source-escape-repair-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-sentinel-source-escape-repair-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-sentinel-source-escape-repair/clockwork-tick-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-sentinel-source-escape-repair/clockwork-postpublication-verification-lease-113.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Exactly one fresh disposable rc7 Node/native-Harness process may load the source-repaired sentinel-only profile. No runner, task, broker, worker, model, provider, network, retry, product/configuration/data/deployment/Pages/protected-ref action or raw-stream retention is admitted.",
+    "git_refs_and_worktree": "Machine evidence must bind the source-repair candidate and task/origin lineage, all four exact protected refs, clockwork-only canonical changes, preserved docs/branding and every unrelated untracked file; explicit closeout paths only may be staged."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof",
+    "active_tranche": "DeepSeek native Harness provider-free source-repaired sentinel native-boot proof",
+    "objective": "Execute exactly one fresh provider-free rc7 Node/native-Harness boot using the source-repaired sentinel and the unchanged sentinel-only headless profile, require ordered sentinel_activated then stock_headless_hmr_ready or preserve one structured fail-closed terminal, destroy raw streams and disposable state, and launch no broker, worker, model, provider or network activity.",
+    "status": "in_progress",
+    "source_head": "eb8913aacb19d823e251731f9393cc54fe71524c",
+    "authority_source": "Yuri's standing uninterrupted-development authority, constrained by the accepted source repair and a fresh one-process provider-free sentinel-only boot envelope.",
+    "checkpoint": {"completed_stage": "Accepted deepseek-native-harness-provider-free-sentinel-source-escape-repair at the machine-resolved source.", "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_one_process_source_repaired_sentinel_boot_contract", "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0}, "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"},
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": ["provider_free_one_process_source_repaired_sentinel_native_boot_only", "fresh_attempt_identity_and_disposable_root_required", "exact_pinned_dsh_0_1_0_rc_7_materialisation_only", "node_process_limit_one_and_native_harness_process_limit_one", "sentinel_only_initial_profile_no_runner_task_broker_or_worker", "zero_broker_worker_model_provider_and_network_requests", "no_retry_resume_fallback_reclassification_or_second_process", "raw_stdout_stderr_environment_session_and_disposable_state_not_retained", "no_raw_error_message_stack_path_stream_session_environment_or_credential_retention", "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting", "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change", "no_product_patient_appointment_clinical_historical_or_protected_data", "no_production_runtime_deployment_release_or_pages", "no_protected_evidence_access_or_protected_ref_movement", "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602", "docs_branding_and_all_unrelated_untracked_files_preserved", "explicit_path_staging_only"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof",
+    "assessed_stage": "postpublication_closeout_precommit",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "The new latch admits no worker, model or provider call; DeepSeek execution would breach the sentinel-only one-process proof.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "declined", "expected_leverage": "negative", "rationale": "Gemini provider review is outside the boot envelope; the result must come from the exact structured terminal and deterministic controls.", "work_packages": []},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Current developer policy prohibits proactive delegation, and one serial owner must control the single disposable process and terminal ledger.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["commit and push the already published source-repair closeout before freezing the boot contract", "admit exactly one later disposable Node/native-Harness process", "preserve zero broker, worker, model, provider and network activity"],
+    "reassessment_triggers": ["fresh boot plan freeze", "preexecution admission", "structured terminal closeout"]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["GPT Sol owns the serial provider-free boot proof and predecessor closeout commit."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No DeepSeek worker or model request is admitted."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No Gemini provider review is admitted."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent was spawned; developer policy and serial process ownership prohibit delegation."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

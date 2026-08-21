@@ -1,0 +1,43 @@
+{
+  "schema_version": "ariadne.workflow_efficacy_reading.v1",
+  "operation_id": "deepseek-native-harness-provider-free-sentinel-source-escape-repair",
+  "result": "effective_with_two_contained_procedure_corrections",
+  "outcome": "One inserted source byte removes all three diagnosed generated-JavaScript lexical violations while preserving every other controller byte and 133 tracked consumed-evidence files.",
+  "useful_work": {
+    "preexisting_source_bytes_changed": 1,
+    "generated_lexical_violations_before": 3,
+    "generated_lexical_violations_after": 0,
+    "consumed_tracked_files_preserved": 133,
+    "pre_repair_baseline_tests_passed": 8,
+    "clean_candidate_tests_passed": 99,
+    "node_processes": 0,
+    "provider_requests": 0
+  },
+  "reruns": [
+    {
+      "kind": "direct_script_import_correction",
+      "count": 1,
+      "cause": "The new validator initially imported the scripts package before adding the repository root to sys.path, so direct invocation failed while module-imported tests passed.",
+      "control": "Use the repository's established direct-script bootstrap before importing sibling scripts."
+    },
+    {
+      "kind": "historical_test_selection_correction",
+      "count": 1,
+      "cause": "The first surrounding packet included two consumed controller-digest checks and one consumed active-latch check that are intentionally false after this successor repair.",
+      "control": "Bind historical-state exclusions in an explicit selection artifact and rerun every remaining selector unchanged."
+    },
+    {
+      "kind": "clockwork_dry_run_rejection",
+      "count": 3,
+      "cause": "The first intent used the next register revision as a decision source; the second retained it in prospective incident evidence; the third had not yet pre-authored the revision reading that clockwork validates against the prospective register.",
+      "control": "Use a typed register-closeout template: existing candidate evidence for decisions/incidents, a pre-authored exact next-revision reading, and the clockwork-owned prospective canonical projection."
+    },
+    {
+      "kind": "closeout_intent_json_syntax_rejection",
+      "count": 1,
+      "cause": "A follow-up patch omitted one property-separating comma before the next clockwork invocation.",
+      "control": "Run JSON parsing and schema admission after every intent patch before invoking clockwork."
+    }
+  ],
+  "assessment": "The clockwork-backed narrow contract kept the actual repair to one source byte, detected all four procedure lapses before acceptance or canonical publication and preserved historical evidence rather than rewriting it. The register-closeout lapse required three fail-closed dry runs across its decision, incident-evidence and revision-reading surfaces; a fourth malformed-JSON check reinforced the need to parse after each patch. The typed template and immediate parser gate now cover these paths. The separately gated boot proof is justified; no DeepSeek/model conclusion is yet available."
+}
