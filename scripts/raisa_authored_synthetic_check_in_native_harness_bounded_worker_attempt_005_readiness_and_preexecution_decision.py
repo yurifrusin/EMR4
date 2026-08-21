@@ -669,6 +669,11 @@ def validate_artifacts() -> dict[str, Any]:
         raise ReadinessError("stored_clockwork_reading_mismatch")
     if value["occupied_attempt_authorized"] is not False:
         raise ReadinessError("occupied_authority_widened")
+    evaluated_source = value["evaluated_source"]
+    current_source = git("rev-parse", "HEAD")
+    if len(evaluated_source) != 40 or len(current_source) != 40:
+        raise ReadinessError("stored_full_git_object_required")
+    git("merge-base", "--is-ancestor", evaluated_source, current_source)
     report = REPORT_PATH.read_text(encoding="utf-8")
     required = (
         "Timestamp: 2026-08-21T",

@@ -118,6 +118,10 @@ def test_readiness_source_has_no_native_or_provider_launcher() -> None:
 
 def test_stored_evidence_is_schema_bound_and_authorizes_no_execution() -> None:
     value = subject.validate_artifacts()
+    fresh = subject.deterministic_evidence()
+    for key in value:
+        if key not in {"evaluated_source", "git_refs"}:
+            assert value[key] == fresh[key]
     assert value["result"] == "pass"
     assert value["decision"] == (
         "ready_for_one_separately_checkpointed_occupied_attempt_005"
