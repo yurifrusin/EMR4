@@ -1,0 +1,59 @@
+{
+  "schema_version": "ariadne.native_harness_plugin_tree_source_diagnosis_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis",
+  "mode": "provider_free_read_only_static_source",
+  "package": {
+    "name": "@deepseek-ai/dsh",
+    "version": "0.1.0-rc.7",
+    "local_only": true,
+    "execution_forbidden": true
+  },
+  "terminal": {
+    "path": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/pre-hmr-startup-terminal.json",
+    "sha256": "cc77466d1e30a371478b700cc08cb23d91b86e0161dadaf8c8ad23883fea3dcb",
+    "schema_version": "ariadne.native_harness_pre_hmr_startup_terminal.v2",
+    "cause": "structured_entrypoint_import_rejected",
+    "top_message_coordinate": "plugin_tree_failed_to_load",
+    "cause_chain_length": 4,
+    "raw_fields_forbidden": true
+  },
+  "allowed_owner_classifications": [
+    "profile_input",
+    "package_plugin_tree",
+    "launcher_environment",
+    "dependency_boundary",
+    "insufficient_source_coordinate"
+  ],
+  "allowed_verdicts": [
+    "unique_supported_coordinate",
+    "insufficient_source_coordinate",
+    "insufficient_local_source",
+    "source_binding_failed"
+  ],
+  "unique_match_required": true,
+  "repair_implementation_authorized": false,
+  "occupied_retry_authorized": false,
+  "forbidden_activity": [
+    "network",
+    "package_install",
+    "node_process",
+    "dynamic_import",
+    "native_harness",
+    "broker",
+    "worker",
+    "model",
+    "provider",
+    "raw_terminal_reconstruction",
+    "product_change",
+    "protected_ref_movement"
+  ],
+  "required_zero_counters": [
+    "node_process_count",
+    "harness_process_count",
+    "broker_process_count",
+    "worker_process_count",
+    "model_request_count",
+    "provider_request_count",
+    "network_request_count"
+  ]
+}

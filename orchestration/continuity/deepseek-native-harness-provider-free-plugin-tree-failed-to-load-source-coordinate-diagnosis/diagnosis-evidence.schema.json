@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-plugin-tree-source-diagnosis-evidence-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "status",
+    "verdict",
+    "package",
+    "inputs",
+    "candidate_branches",
+    "match_count",
+    "narrowest_supported_coordinate",
+    "owner_classification",
+    "repair_justified",
+    "repair_rationale",
+    "zero_activity",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_plugin_tree_source_diagnosis_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis"},
+    "status": {"enum": ["passed", "failed_closed"]},
+    "verdict": {"enum": ["unique_supported_coordinate", "insufficient_source_coordinate", "insufficient_local_source", "source_binding_failed"]},
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "package_json_sha256", "source_root_coordinate"],
+      "properties": {
+        "name": {"type": "string"},
+        "version": {"type": "string"},
+        "package_json_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "source_root_coordinate": {"type": "string", "minLength": 1}
+      }
+    },
+    "inputs": {"type": "array", "items": {"type": "object"}},
+    "candidate_branches": {"type": "array", "items": {"type": "object"}},
+    "match_count": {"type": "integer", "minimum": 0},
+    "narrowest_supported_coordinate": {"type": ["string", "null"]},
+    "owner_classification": {"enum": ["profile_input", "package_plugin_tree", "launcher_environment", "dependency_boundary", "insufficient_source_coordinate"]},
+    "repair_justified": {"type": "boolean"},
+    "repair_rationale": {"type": "string", "minLength": 1},
+    "zero_activity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_process_count", "harness_process_count", "broker_process_count", "worker_process_count", "model_request_count", "provider_request_count", "network_request_count"],
+      "properties": {
+        "node_process_count": {"const": 0},
+        "harness_process_count": {"const": 0},
+        "broker_process_count": {"const": 0},
+        "worker_process_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0},
+        "network_request_count": {"const": 0}
+      }
+    },
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"verdict": {"const": "unique_supported_coordinate"}}},
+      "then": {
+        "properties": {
+          "status": {"const": "passed"},
+          "package": {
+            "properties": {
+              "name": {"const": "@deepseek-ai/dsh"},
+              "version": {"const": "0.1.0-rc.7"}
+            }
+          },
+          "inputs": {"minItems": 2},
+          "match_count": {"const": 1},
+          "narrowest_supported_coordinate": {"type": "string", "minLength": 1},
+          "owner_classification": {"const": "profile_input"},
+          "repair_justified": {"const": true}
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free plugin-tree failed-to-load source-coordinate diagnosis",
+    "completed_stage": "Accepted raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004 at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_read_only_source_coordinate_diagnosis_contract",
+    "operation_id": "deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis",
+    "resume_after_compaction": true,
+    "source_head": "9345183bd2c5a2e26702ace970218345f918f9de",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "943c61a1d151d1e6a52ae3b79cb4e736a99f9c55",
+    "reason_codes": [],
+    "resolved_commit": "9345183bd2c5a2e26702ace970218345f918f9de",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "9345183bd2c5a2e26702ace970218345f918f9de"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "943c61a1d151d1e6a52ae3b79cb4e736a99f9c55",
+    "branch_origin_aligned": true,
+    "head": "943c61a1d151d1e6a52ae3b79cb4e736a99f9c55",
+    "origin_branch_commit": "943c61a1d151d1e6a52ae3b79cb4e736a99f9c55",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 659
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "fresh_preplanning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The latch forbids Harness, worker, model and provider activity; asking DeepSeek to diagnose its own unavailable startup path would violate the provider-free source-only boundary.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "gemini_verifier",
+        "rationale": "This tranche forbids provider requests and first requires deterministic source evidence. Reassess only in a later separately frozen repair tranche if a semantic candidate survives.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation, and the source-to-terminal binding is a short serial diagnosis with one evidence owner.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "a narrowly supported provider-free repair candidate is identified",
+      "source evidence cannot distinguish more than one failure branch",
+      "pre-verifier acceptance or closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "freeze the read-only diagnosis contract before source inspection",
+      "one owner binds immutable terminal coordinates to pinned source branches",
+      "no raw terminal reconstruction or runtime execution",
+      "repair decision follows deterministic diagnosis evidence"
+    ]
+  },
+  "planned_action": "freeze_the_provider_free_read_only_pinned_rc7_plugin_tree_source_coordinate_diagnosis_contract",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision-plan.md",
+      "docs/security/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision-threat-model-delta.md",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/pre-hmr-startup-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/diagnosis.md",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/efficacy-reading.json",
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-attempt-004-sol-acceptance.md",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/clockwork-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial provider-free source diagnosis, contract, deterministic evidence and acceptance. DeepSeek, Gemini and native subagents have no execution package in this read-only tranche.",
+    "git_refs_and_worktree": "The machine snapshot alone must show the task branch aligned with origin, latch source ancestral, all four protected refs fixed at the configured expected commit, tracked state clean, docs/branding present and every unrelated untracked path preserved.",
+    "live_handover_current_baton": "Continuity 362 and Compass 344 accept the consumed attempt-004 structured terminal and name provider-free plugin-tree source-coordinate diagnosis as the exact next operation.",
+    "protected_evidence_boundaries": "Only pinned rc.7 plugin-tree construction and error-wrapping source, accepted profile templates and immutable attempt-004 structured terminal may be read. No raw terminal reconstruction, Harness/broker/worker/model/provider execution, occupied retry, product/data/deployment or protected-ref action is permitted."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
