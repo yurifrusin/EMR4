@@ -42,7 +42,10 @@
       "additionalProperties": false,
       "required": [
         "authored_synthetic",
+        "attempt_id",
         "node_process_count",
+        "prior_consumed_node_process_count",
+        "cumulative_node_process_count",
         "result_count",
         "stdout_exact",
         "stderr_bytes",
@@ -55,7 +58,10 @@
       ],
       "properties": {
         "authored_synthetic": {"const": true},
+        "attempt_id": {"const": "attempt-002"},
         "node_process_count": {"const": 1},
+        "prior_consumed_node_process_count": {"const": 1},
+        "cumulative_node_process_count": {"const": 2},
         "result_count": {"const": 15},
         "stdout_exact": {"const": true},
         "stderr_bytes": {"const": 0},

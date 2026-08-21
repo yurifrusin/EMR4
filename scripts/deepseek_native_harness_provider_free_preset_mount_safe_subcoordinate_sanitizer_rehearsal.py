@@ -29,6 +29,7 @@ CONTRACT_SCHEMA_PATH = OPERATION_ROOT / "contract.schema.json"
 EVIDENCE_SCHEMA_PATH = OPERATION_ROOT / "evidence.schema.json"
 EVIDENCE_PATH = OPERATION_ROOT / "safe-subcoordinate-sanitizer-evidence.json"
 REPORT_PATH = OPERATION_ROOT / "safe-subcoordinate-sanitizer-report.md"
+SAFE_VECTOR_REJECTION_PATH = OPERATION_ROOT / "attempt-002-safe-vector-rejection.json"
 PLAN_PATH = REPO_ROOT / "docs" / f"{OPERATION_ID}-plan.md"
 THREAT_PATH = REPO_ROOT / "docs" / "security" / f"{OPERATION_ID}-threat-model-delta.md"
 SCHEMA_VERSION = (
@@ -43,6 +44,15 @@ FORBIDDEN_FIXTURE_DETAIL = "HOSTILE_FIXTURE_DETAIL_NEVER_RELEASE"
 
 class SanitizerRehearsalError(RuntimeError):
     """Fail-closed error carrying only a schema-owned diagnostic code."""
+
+
+class SafeVectorMismatch(SanitizerRehearsalError):
+    """A structurally safe closed-code vector differs from the contract."""
+
+    def __init__(self, observed_codes: list[str], first_mismatch_index: int) -> None:
+        super().__init__("node_fixture_safe_vector_mismatch")
+        self.observed_codes = observed_codes
+        self.first_mismatch_index = first_mismatch_index
 
 
 def canonical_bytes(value: Any) -> bytes:
@@ -232,19 +242,58 @@ def validate_fixture_result(
         raise SanitizerRehearsalError("node_fixture_exit_nonzero")
     if stderr:
         raise SanitizerRehearsalError("node_fixture_stderr_nonempty")
-    if stdout != expected_stdout(contract):
-        raise SanitizerRehearsalError("node_fixture_stdout_mismatch")
     if FORBIDDEN_FIXTURE_DETAIL in stdout or FORBIDDEN_FIXTURE_DETAIL in stderr:
         raise SanitizerRehearsalError("node_fixture_detail_leak")
     try:
         value = json.loads(stdout)
     except json.JSONDecodeError as error:
         raise SanitizerRehearsalError("node_fixture_stdout_not_json") from error
-    if value != expected_results(contract):
-        raise SanitizerRehearsalError("node_fixture_result_mismatch")
-    if not all(list(row) == ["stage", "code", "detail"] for row in value):
+    if not isinstance(value, list) or len(value) != len(contract["expected_result_codes"]):
         raise SanitizerRehearsalError("node_fixture_result_shape_mismatch")
+    closed_codes = set(contract["closed_codes"])
+    for row in value:
+        if not isinstance(row, dict) or list(row) != ["stage", "code", "detail"]:
+            raise SanitizerRehearsalError("node_fixture_result_shape_mismatch")
+        if (
+            row["stage"] != "preset_mount"
+            or row["code"] not in closed_codes
+            or row["detail"] is not None
+        ):
+            raise SanitizerRehearsalError("node_fixture_result_shape_mismatch")
+    expected = expected_results(contract)
+    if stdout != expected_stdout(contract) or value != expected:
+        observed_codes = [row["code"] for row in value]
+        expected_codes = contract["expected_result_codes"]
+        mismatch = next(
+            index
+            for index, (observed, wanted) in enumerate(
+                zip(observed_codes, expected_codes, strict=True)
+            )
+            if observed != wanted
+        ) if observed_codes != expected_codes else -1
+        raise SafeVectorMismatch(observed_codes, mismatch)
     return value
+
+
+def write_safe_vector_rejection(
+    *, candidate_source: str, contract: dict[str, Any], error: SafeVectorMismatch
+) -> None:
+    payload = {
+        "schema_version": "ariadne.native_harness_preset_mount_safe_vector_rejection.v1",
+        "operation_id": OPERATION_ID,
+        "attempt_id": "attempt-002",
+        "candidate_source": candidate_source,
+        "result": "safe_vector_mismatch",
+        "first_mismatch_index": error.first_mismatch_index,
+        "expected_codes": contract["expected_result_codes"],
+        "observed_codes": error.observed_codes,
+        "detail_retained": False,
+        "stderr_bytes": 0,
+        "node_process_count": 1,
+        "cumulative_node_process_count": 2,
+        "third_process_authorized": False,
+    }
+    SAFE_VECTOR_REJECTION_PATH.write_bytes(canonical_bytes(payload))
 
 
 def run_fixture_once(contract: dict[str, Any]) -> list[dict[str, Any]]:
@@ -324,7 +373,10 @@ def build_evidence(
         "closed_codes": contract["closed_codes"],
         "fixture": {
             "authored_synthetic": True,
+            "attempt_id": "attempt-002",
             "node_process_count": 1,
+            "prior_consumed_node_process_count": 1,
+            "cumulative_node_process_count": 2,
             "result_count": len(results),
             "stdout_exact": True,
             "stderr_bytes": 0,
@@ -406,7 +458,13 @@ def execute() -> dict[str, Any]:
     upstream_binding = verify_upstream_source(contract)
     repository_bindings = verify_repository_bindings(contract)
     candidate_source = verify_execution_git_snapshot()
-    results = run_fixture_once(contract)
+    try:
+        results = run_fixture_once(contract)
+    except SafeVectorMismatch as error:
+        write_safe_vector_rejection(
+            candidate_source=candidate_source, contract=contract, error=error
+        )
+        raise
     evidence = build_evidence(
         contract=contract,
         candidate_source=candidate_source,
@@ -477,6 +535,9 @@ def main() -> int:
                 "status": "passed",
                 "candidate_source": evidence["candidate_source"],
                 "node_process_count": evidence["fixture"]["node_process_count"],
+                "cumulative_node_process_count": evidence["fixture"][
+                    "cumulative_node_process_count"
+                ],
                 "native_harness_process_count": evidence["zero_counters"][
                     "native_harness_process_count"
                 ],

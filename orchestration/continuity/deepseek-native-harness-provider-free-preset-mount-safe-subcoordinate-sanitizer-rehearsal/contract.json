@@ -19,8 +19,8 @@
     },
     {
       "path": "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_fixture.mjs",
-      "bytes": 4101,
-      "sha256": "3c512e009c88dd561a3109022c668e397704dc726f8abe186b6c8fc51c614d69"
+      "bytes": 3128,
+      "sha256": "833cb96705eb97d78d9a0c0ccd1bd299aae2001fabd1054ec891eca8b40f56aa"
     }
   ],
   "upstream_source_anchors": [

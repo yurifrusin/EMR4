@@ -1,5 +1,4 @@
 import {
-  PRESET_MOUNT_SAFE_CODES,
   sanitizePresetMountError,
 } from "./deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer.mjs";
 
@@ -100,37 +99,4 @@ const results = [
   sanitizePresetMountError(new Error(scopeMessage), null),
 ];
 
-const expectedCodes = [
-  "PRESET_MOUNT_AGENT_SCOPE_ABSENT",
-  "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE",
-  "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED",
-  "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT",
-  "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT",
-  "PRESET_MOUNT_ROOT_SERVICE_LEAK",
-  "PRESET_MOUNT_UNCLASSIFIED",
-  "PRESET_MOUNT_UNCLASSIFIED",
-  "PRESET_MOUNT_UNCLASSIFIED",
-  "PRESET_MOUNT_UNCLASSIFIED",
-  "PRESET_MOUNT_UNCLASSIFIED",
-  "PRESET_MOUNT_UNCLASSIFIED",
-  "PRESET_MOUNT_UNCLASSIFIED",
-  "PRESET_MOUNT_UNCLASSIFIED",
-  "PRESET_MOUNT_AGENT_SCOPE_ABSENT",
-];
-
-const valid =
-  PRESET_MOUNT_SAFE_CODES.length === 7 &&
-  results.length === expectedCodes.length &&
-  results.every(
-    (result, index) =>
-      Object.keys(result).join(",") === "stage,code,detail" &&
-      result.stage === "preset_mount" &&
-      result.code === expectedCodes[index] &&
-      result.detail === null,
-  );
-
-if (!valid) {
-  process.exitCode = 2;
-} else {
-  process.stdout.write(`${JSON.stringify(results)}\n`);
-}
+process.stdout.write(`${JSON.stringify(results)}\n`);

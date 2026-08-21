@@ -63,7 +63,6 @@ def test_expected_stdout_is_exact_closed_three_field_json() -> None:
 @pytest.mark.parametrize(
     ("stdout_mutation", "stderr", "returncode", "expected"),
     [
-        (lambda value: value + " ", "", 0, "node_fixture_stdout_mismatch"),
         (lambda value: value, "safe-stderr", 0, "node_fixture_stderr_nonempty"),
         (lambda value: value, "", 2, "node_fixture_exit_nonzero"),
         (
@@ -74,7 +73,7 @@ def test_expected_stdout_is_exact_closed_three_field_json() -> None:
             ),
             "",
             0,
-            "node_fixture_stdout_mismatch",
+            "node_fixture_detail_leak",
         ),
     ],
 )
@@ -91,6 +90,38 @@ def test_fixture_admission_rejects_any_nonexact_result(
         )
 
 
+def test_safe_closed_vector_mismatch_remains_observable_without_detail() -> None:
+    contract = subject.load_contract()
+    value = subject.expected_results(contract)
+    value[0] = {
+        "stage": "preset_mount",
+        "code": "PRESET_MOUNT_UNCLASSIFIED",
+        "detail": None,
+    }
+    stdout = json.dumps(value, separators=(",", ":")) + "\n"
+    with pytest.raises(subject.SafeVectorMismatch) as raised:
+        subject.validate_fixture_result(
+            stdout=stdout,
+            stderr="",
+            returncode=0,
+            contract=contract,
+        )
+    assert raised.value.first_mismatch_index == 0
+    assert raised.value.observed_codes == [row["code"] for row in value]
+
+
+def test_byte_only_mismatch_uses_safe_nonindex_sentinel() -> None:
+    contract = subject.load_contract()
+    with pytest.raises(subject.SafeVectorMismatch) as raised:
+        subject.validate_fixture_result(
+            stdout=subject.expected_stdout(contract) + " ",
+            stderr="",
+            returncode=0,
+            contract=contract,
+        )
+    assert raised.value.first_mismatch_index == -1
+
+
 def test_synthetic_evidence_has_one_node_process_and_zero_runtime_effects() -> None:
     contract = subject.load_contract()
     upstream = subject.verify_upstream_source(contract)
@@ -103,6 +134,7 @@ def test_synthetic_evidence_has_one_node_process_and_zero_runtime_effects() -> N
         results=subject.expected_results(contract),
     )
     assert evidence["fixture"]["node_process_count"] == 1
+    assert evidence["fixture"]["cumulative_node_process_count"] == 2
     assert evidence["fixture"]["native_harness_import_count"] == 0
     assert set(evidence["zero_counters"].values()) == {0}
     assert evidence["claim_boundary"] == {
@@ -118,10 +150,16 @@ def test_synthetic_evidence_has_one_node_process_and_zero_runtime_effects() -> N
 
 def test_rehearsal_source_has_one_node_launch_and_check_is_nonexecuting() -> None:
     source = Path(subject.__file__).read_text(encoding="utf-8")
+    fixture = subject._safe_repo_path(
+        subject.load_contract()["repository_files"][1]["path"]
+    ).read_text(encoding="utf-8")
     run_body = source.split("def run_fixture_once", 1)[1].split("def _git", 1)[0]
     check_body = source.split("def check()", 1)[1].split("def parse_args", 1)[0]
     assert run_body.count("subprocess.run(") == 1
     assert "run_fixture_once(" not in check_body
+    assert "expectedCodes" not in fixture
+    assert "process.exitCode" not in fixture
+    assert "write_safe_vector_rejection(" in source
     assert "--execute" in source
     assert "--check" in source
 
