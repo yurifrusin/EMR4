@@ -5,8 +5,8 @@ Timestamp: 2026-08-21T12:24:55.9790653+10:00 (Australia/Brisbane)
 
 <!-- ariadne-agent-error-register-reading
 revision: 585
-incident_count: 768
-new_incident_ids: AER-0760,AER-0761,AER-0762,AER-0763,AER-0764,AER-0765,AER-0766,AER-0767,AER-0768
+incident_count: 769
+new_incident_ids: AER-0760,AER-0761,AER-0762,AER-0763,AER-0764,AER-0765,AER-0766,AER-0767,AER-0768,AER-0769
 open_incident_count: 0
 -->
 
@@ -84,4 +84,13 @@ not at the task handoff and not clean under that false model. The corrected
 receipt makes no handoff-workspace claim; the exact synthetic root remains
 bound by its preparation and checkpoint artifacts.
 
-All nine incidents are corrected or contained and none remains open.
+## AER-0769 — closeout node supplied two direct parents
+
+The first attempt-004 closeout intent supplied both the readiness and
+controller-convergence nodes as direct `builds_on` parents. The transactional
+manifest permits exactly one direct relationship and the read-only clockwork
+check rejected the draft before commands or publication. The corrected intent
+keeps only the readiness parent, which already preserves the controller
+lineage.
+
+All ten incidents are corrected or contained and none remains open.

@@ -160,7 +160,7 @@ def test_attempt_four_closeout_documents_bind_timestamp_and_terminal_source() ->
 def test_attempt_four_register_revision_records_every_caught_rerun() -> None:
     text = REGISTER_REVISION.read_text(encoding="utf-8")
     assert "revision: 585" in text
-    assert "incident_count: 768" in text
-    for number in range(760, 769):
+    assert "incident_count: 769" in text
+    for number in range(760, 770):
         assert f"AER-{number:04d}" in text
     assert "none remains open" in text

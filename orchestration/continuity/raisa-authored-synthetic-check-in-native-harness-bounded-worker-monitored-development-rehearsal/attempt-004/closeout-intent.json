@@ -14,10 +14,6 @@
         {
           "node_id": "raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision",
           "relation": "builds_on"
-        },
-        {
-          "node_id": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
-          "relation": "builds_on"
         }
       ],
       "authority": {
@@ -157,7 +153,8 @@
       {"incident_id": "incident-intake-bypassed-clockwork-owner", "source_id": "attempt-004-canonical-owner-recovery-001", "peers": []},
       {"incident_id": "yielded-test-session-exit-was-not-captured", "source_id": "attempt-004-provider-free-test-session-001", "peers": []},
       {"incident_id": "prelaunch-probe-method-was-unadmitted", "source_id": "attempt-004-prelaunch-receipt-method-001", "peers": []},
-      {"incident_id": "synthetic-root-was-mislabelled-handoff", "source_id": "attempt-004-prelaunch-workspace-receipt-001", "peers": []}
+      {"incident_id": "synthetic-root-was-mislabelled-handoff", "source_id": "attempt-004-prelaunch-workspace-receipt-001", "peers": []},
+      {"incident_id": "closeout-used-two-builds-on-parents", "source_id": "attempt-004-closeout-relationship-cardinality-001", "peers": []}
     ],
     "broker": {
       "enabled": false,
@@ -480,6 +477,34 @@
         "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-attempt-004-occupied-prelaunch-v2-receipt.json", "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/occupied-attempt-preparation.json"]
       },
       "baton_summary": "records the false handoff-workspace claim and synthetic-evidence correction."
+    },
+    {
+      "attempt_key": "attempt-004-closeout-relationship-cardinality-001",
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-004-occupied",
+      "role": "orchestrator",
+      "resource_id": "governance-clockwork-closeout-node-relationships",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A transactional closeout node must carry exactly one direct builds_on relationship.",
+      "observed_error": "The first attempt-004 closeout intent supplied both readiness and controller-convergence parents.",
+      "detection_method": "The read-only clockwork check rejected node_relationship_invalid before command execution or publication.",
+      "evidence_paths": ["orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/closeout-intent.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_node_supplied_multiple_builds_on_relationships",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Retain only the direct readiness parent because it already preserves the accepted controller lineage.",
+        "prevention_control": "The read-only clockwork manifest validator enforces exactly one direct builds_on relationship before commands or publication.",
+        "evidence_paths": ["orchestration_harness/transactional_closeout.py", "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/closeout-intent.json"]
+      },
+      "baton_summary": "records the rejected two-parent closeout and single-direct-parent correction."
     }
   ]
 }
