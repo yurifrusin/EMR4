@@ -1,0 +1,68 @@
+{
+  "schema_version": "ariadne.native_harness_preset_mount_runner_bridge_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+  "planning_source": "861eb2786b1c156c450b017167540a82a42a202b",
+  "plan_sha256": "b309f7784ab43569c58e7f33065a5c75f2311b42a5c70502bc2346c8f997b4ad",
+  "threat_model_sha256": "98338e572282df959120314689a580e2c2d0fb87038bfd36713ca285a60ee54c",
+  "accepted_minimum_environment_execution_source": "ceac8b2600530bf858394bb84e66a42ec3d016f4",
+  "accepted_minimum_environment_evidence": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery/minimum-environment-sanitizer-evidence.json",
+  "accepted_runner_generator": "scripts/deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
+  "accepted_guard_generator": "scripts/deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+  "sanitizer": "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer.mjs",
+  "bridge": "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge.mjs",
+  "fixture": "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_fixture.mjs",
+  "source_sha256": {
+    "accepted_runner_generator_sha256": "00db15a660290ff6761ea45b07eddecb95ba778b162e3f5cba440a08afc87e35",
+    "accepted_runner_source_sha256": "e0e6a0f32c98eddfb71dc88b9c9740d9e410701e90a8298d68a45fb0c00cae4b",
+    "accepted_guard_generator_sha256": "b36d9c11d9a6c2f67d72b2afae9aae18dd63d46636627137ccfc38de5d05afa9",
+    "accepted_guard_source_sha256": "6678ed31bdcd30a5018689b72ad509c182854bf5d63862f59b397acc8de40894",
+    "accepted_minimum_environment_evidence_sha256": "fc4e751b1613c7b2110f0b2919cbbfc027fad0018b51812081a5bc2fd9daa3a5",
+    "sanitizer_sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f",
+    "bridge_sha256": "867b32001030786018cdc8423179902869eed92a2d35f62dc6bb83eb4c6ab428",
+    "fixture_sha256": "4f231875bf3703a3703606a2f818454afd8de81a2a03016abdbd0963c1a290ee",
+    "derived_runner_sha256": "871fb7fc9d2d8a93e5e67c41a4c0f18af7ba8a23d0a3664505f149199befb9cb",
+    "derived_guard_sha256": "440e7e60bd8a8a1b6c33a4e64ae241c51cd4e126ce6422dc0fcba39b41ec4151"
+  },
+  "closed_codes": [
+    "PRESET_MOUNT_AGENT_SCOPE_ABSENT",
+    "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE",
+    "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED",
+    "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT",
+    "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT",
+    "PRESET_MOUNT_ROOT_SERVICE_LEAK",
+    "PRESET_MOUNT_UNCLASSIFIED"
+  ],
+  "expected_fixture_results": [
+    {"scenario": "success", "passed": true, "terminal": null},
+    {"scenario": "agent_scope_absent", "passed": false, "terminal": {"stage": "preset_mount", "code": "PRESET_MOUNT_AGENT_SCOPE_ABSENT", "detail": null}},
+    {"scenario": "composition_stamp_unreadable", "passed": false, "terminal": {"stage": "preset_mount", "code": "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE", "detail": null}},
+    {"scenario": "row_import_or_apply_rejected", "passed": false, "terminal": {"stage": "preset_mount", "code": "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED", "detail": null}},
+    {"scenario": "subtree_publication_absent", "passed": false, "terminal": {"stage": "preset_mount", "code": "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT", "detail": null}},
+    {"scenario": "row_inactive_after_await", "passed": false, "terminal": {"stage": "preset_mount", "code": "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT", "detail": null}},
+    {"scenario": "root_service_leak", "passed": false, "terminal": {"stage": "preset_mount", "code": "PRESET_MOUNT_ROOT_SERVICE_LEAK", "detail": null}},
+    {"scenario": "unclassified", "passed": false, "terminal": {"stage": "preset_mount", "code": "PRESET_MOUNT_UNCLASSIFIED", "detail": null}}
+  ],
+  "execution": {
+    "attempt_id": "attempt-001",
+    "pure_node_fixture_process_count": 1,
+    "native_harness_process_count": 0,
+    "automatic_retry": false,
+    "manual_retry": false
+  },
+  "required_zero_counters": [
+    "native_harness_process_count",
+    "dsh_import_count",
+    "turn_count",
+    "request_count",
+    "broker_process_count",
+    "broker_request_count",
+    "occupied_worker_count",
+    "model_request_count",
+    "provider_request_count",
+    "network_attempt_count",
+    "database_invocation_count",
+    "docker_invocation_count",
+    "target_creation_count",
+    "target_use_count"
+  ]
+}

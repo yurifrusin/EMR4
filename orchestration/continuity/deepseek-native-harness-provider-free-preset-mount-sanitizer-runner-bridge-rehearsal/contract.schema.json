@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "oid": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "terminal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "code", "detail"],
+      "properties": {
+        "stage": {"const": "preset_mount"},
+        "code": {"type": "string", "pattern": "^PRESET_MOUNT_[A-Z_]+$"},
+        "detail": {"type": "null"}
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "planning_source", "plan_sha256",
+    "threat_model_sha256", "accepted_minimum_environment_execution_source",
+    "accepted_minimum_environment_evidence", "accepted_runner_generator",
+    "accepted_guard_generator", "sanitizer", "bridge", "fixture",
+    "source_sha256", "closed_codes", "expected_fixture_results", "execution",
+    "required_zero_counters"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_preset_mount_runner_bridge_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal"},
+    "planning_source": {"$ref": "#/$defs/oid"},
+    "plan_sha256": {"$ref": "#/$defs/digest"},
+    "threat_model_sha256": {"$ref": "#/$defs/digest"},
+    "accepted_minimum_environment_execution_source": {"$ref": "#/$defs/oid"},
+    "accepted_minimum_environment_evidence": {"type": "string", "minLength": 1},
+    "accepted_runner_generator": {"type": "string", "minLength": 1},
+    "accepted_guard_generator": {"type": "string", "minLength": 1},
+    "sanitizer": {"type": "string", "minLength": 1},
+    "bridge": {"type": "string", "minLength": 1},
+    "fixture": {"type": "string", "minLength": 1},
+    "source_sha256": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "accepted_runner_generator_sha256", "accepted_runner_source_sha256",
+        "accepted_guard_generator_sha256", "accepted_guard_source_sha256",
+        "accepted_minimum_environment_evidence_sha256", "sanitizer_sha256",
+        "bridge_sha256", "fixture_sha256", "derived_runner_sha256",
+        "derived_guard_sha256"
+      ],
+      "properties": {
+        "accepted_runner_generator_sha256": {"$ref": "#/$defs/digest"},
+        "accepted_runner_source_sha256": {"$ref": "#/$defs/digest"},
+        "accepted_guard_generator_sha256": {"$ref": "#/$defs/digest"},
+        "accepted_guard_source_sha256": {"$ref": "#/$defs/digest"},
+        "accepted_minimum_environment_evidence_sha256": {"$ref": "#/$defs/digest"},
+        "sanitizer_sha256": {"$ref": "#/$defs/digest"},
+        "bridge_sha256": {"$ref": "#/$defs/digest"},
+        "fixture_sha256": {"$ref": "#/$defs/digest"},
+        "derived_runner_sha256": {"$ref": "#/$defs/digest"},
+        "derived_guard_sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "closed_codes": {
+      "type": "array", "minItems": 7, "maxItems": 7, "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^PRESET_MOUNT_[A-Z_]+$"}
+    },
+    "expected_fixture_results": {
+      "type": "array", "minItems": 8, "maxItems": 8,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["scenario", "passed", "terminal"],
+        "properties": {
+          "scenario": {"type": "string", "pattern": "^[a-z_]+$"},
+          "passed": {"type": "boolean"},
+          "terminal": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/terminal"}]}
+        }
+      }
+    },
+    "execution": {
+      "type": "object", "additionalProperties": false,
+      "required": ["attempt_id", "pure_node_fixture_process_count", "native_harness_process_count", "automatic_retry", "manual_retry"],
+      "properties": {
+        "attempt_id": {"const": "attempt-001"},
+        "pure_node_fixture_process_count": {"const": 1},
+        "native_harness_process_count": {"const": 0},
+        "automatic_retry": {"const": false},
+        "manual_retry": {"const": false}
+      }
+    },
+    "required_zero_counters": {
+      "type": "array", "minItems": 14, "maxItems": 14, "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[a-z_]+$"}
+    }
+  }
+}

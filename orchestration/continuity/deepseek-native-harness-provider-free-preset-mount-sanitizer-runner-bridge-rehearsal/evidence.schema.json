@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "oid": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "terminal": {
+      "type": "object", "additionalProperties": false,
+      "required": ["stage", "code", "detail"],
+      "properties": {
+        "stage": {"const": "preset_mount"},
+        "code": {"type": "string", "pattern": "^PRESET_MOUNT_[A-Z_]+$"},
+        "detail": {"type": "null"}
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "candidate_source", "result",
+    "source_sha256", "bridge_checks", "derived_runner_bytes",
+    "derived_guard_bytes", "closed_codes", "fixture_results", "fixture",
+    "environment", "process_envelope_sha256", "claim_boundary", "zero_counters"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_preset_mount_runner_bridge_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal"},
+    "candidate_source": {"$ref": "#/$defs/oid"},
+    "result": {"const": "pass"},
+    "source_sha256": {
+      "type": "object", "minProperties": 10, "maxProperties": 10,
+      "additionalProperties": {"$ref": "#/$defs/digest"}
+    },
+    "bridge_checks": {
+      "type": "object", "minProperties": 13, "maxProperties": 13,
+      "additionalProperties": {"const": true}
+    },
+    "derived_runner_bytes": {"type": "integer", "minimum": 1},
+    "derived_guard_bytes": {"type": "integer", "minimum": 1},
+    "closed_codes": {
+      "type": "array", "minItems": 7, "maxItems": 7, "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^PRESET_MOUNT_[A-Z_]+$"}
+    },
+    "fixture_results": {
+      "type": "array", "minItems": 8, "maxItems": 8,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["scenario", "passed", "terminal"],
+        "properties": {
+          "scenario": {"type": "string", "pattern": "^[a-z_]+$"},
+          "passed": {"type": "boolean"},
+          "terminal": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/terminal"}]}
+        }
+      }
+    },
+    "fixture": {
+      "type": "object", "additionalProperties": false,
+      "required": ["attempt_id", "authored_synthetic", "node_process_count", "native_harness_process_count", "dsh_import_count", "child_process_count", "network_api_count", "filesystem_api_count", "result_count", "stdout_exact", "stderr_bytes"],
+      "properties": {
+        "attempt_id": {"const": "attempt-001"},
+        "authored_synthetic": {"const": true},
+        "node_process_count": {"const": 1},
+        "native_harness_process_count": {"const": 0},
+        "dsh_import_count": {"const": 0},
+        "child_process_count": {"const": 0},
+        "network_api_count": {"const": 0},
+        "filesystem_api_count": {"const": 0},
+        "result_count": {"const": 8},
+        "stdout_exact": {"const": true},
+        "stderr_bytes": {"const": 0}
+      }
+    },
+    "environment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["keys", "key_count", "values_retained", "unlisted_key_count", "path_present", "node_options_present"],
+      "properties": {
+        "keys": {"const": ["SystemRoot", "WINDIR", "ComSpec", "TEMP", "TMP"]},
+        "key_count": {"const": 5},
+        "values_retained": {"const": false},
+        "unlisted_key_count": {"const": 0},
+        "path_present": {"const": false},
+        "node_options_present": {"const": false}
+      }
+    },
+    "process_envelope_sha256": {"$ref": "#/$defs/digest"},
+    "claim_boundary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["sanitizer_admitted", "runner_bridge_deterministically_admitted", "runner_executed", "native_harness_process_authorized", "worker_launch_authorized", "occupied_model_launch_authorized", "provider_request_authorized", "retry_authorized", "raw_runtime_detail_retained"],
+      "properties": {
+        "sanitizer_admitted": {"const": true},
+        "runner_bridge_deterministically_admitted": {"const": true},
+        "runner_executed": {"const": false},
+        "native_harness_process_authorized": {"const": false},
+        "worker_launch_authorized": {"const": false},
+        "occupied_model_launch_authorized": {"const": false},
+        "provider_request_authorized": {"const": false},
+        "retry_authorized": {"const": false},
+        "raw_runtime_detail_retained": {"const": false}
+      }
+    },
+    "zero_counters": {
+      "type": "object", "minProperties": 14, "maxProperties": 14,
+      "additionalProperties": {"const": 0}
+    }
+  }
+}

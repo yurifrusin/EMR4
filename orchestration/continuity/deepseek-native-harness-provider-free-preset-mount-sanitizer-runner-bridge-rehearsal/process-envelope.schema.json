@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "oid": {"type": "string", "pattern": "^[0-9a-f]{40}$"}
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "attempt_id", "candidate_source",
+    "numeric_exit_code", "stdout_bytes", "stdout_sha256", "stderr_bytes",
+    "stderr_sha256", "stream_content_retained", "raw_runtime_detail_retained",
+    "environment", "node_process_count", "native_harness_process_count",
+    "dsh_import_count", "further_process_authorized"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_preset_mount_runner_bridge_process_envelope.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal"},
+    "attempt_id": {"const": "attempt-001"},
+    "candidate_source": {"$ref": "#/$defs/oid"},
+    "numeric_exit_code": {"type": "integer"},
+    "stdout_bytes": {"type": "integer", "minimum": 0},
+    "stdout_sha256": {"$ref": "#/$defs/digest"},
+    "stderr_bytes": {"type": "integer", "minimum": 0},
+    "stderr_sha256": {"$ref": "#/$defs/digest"},
+    "stream_content_retained": {"const": false},
+    "raw_runtime_detail_retained": {"const": false},
+    "environment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["keys", "key_count", "values_retained", "unlisted_key_count", "path_present", "node_options_present"],
+      "properties": {
+        "keys": {"const": ["SystemRoot", "WINDIR", "ComSpec", "TEMP", "TMP"]},
+        "key_count": {"const": 5},
+        "values_retained": {"const": false},
+        "unlisted_key_count": {"const": 0},
+        "path_present": {"const": false},
+        "node_options_present": {"const": false}
+      }
+    },
+    "node_process_count": {"const": 1},
+    "native_harness_process_count": {"const": 0},
+    "dsh_import_count": {"const": 0},
+    "further_process_authorized": {"const": false}
+  }
+}
