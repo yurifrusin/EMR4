@@ -2,12 +2,12 @@
 
 <!-- ariadne-agent-error-register-reading
 revision: 594
-incident_count: 813
-new_incident_ids: AER-0810,AER-0811,AER-0812,AER-0813
+incident_count: 814
+new_incident_ids: AER-0810,AER-0811,AER-0812,AER-0813,AER-0814
 open_incident_count: 0
 -->
 
-This revision note binds four contained readiness-workflow observations to the
+This revision note binds five contained readiness-workflow observations to the
 prospective clockwork-projected register. The canonical JSON register and
 pattern report remain clockwork-owned.
 
@@ -44,3 +44,12 @@ boundary-and-source object. The check rejected at `tick_transaction_prepare`
 with zero publication and no canonical change. The rejected receipt is
 preserved and the corrected intent uses the schema's boundary, repository
 source and exact one-attempt scope fields.
+
+## AER-0814
+
+The second read-only clockwork check accepted the typed object shape but
+rejected the newly coined boundary identifier because authority openings use
+the live graph's closed vocabulary. Again, publication remained zero. The
+corrected intent binds the exact successor to the established `model-runtime`
+and `provider-call` boundaries with one-attempt/no-retry scopes, and both
+rejected checks remain preserved.

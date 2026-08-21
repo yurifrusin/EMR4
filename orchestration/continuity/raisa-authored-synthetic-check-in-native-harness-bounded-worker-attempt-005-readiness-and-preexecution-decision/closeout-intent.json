@@ -16,9 +16,14 @@
       "authority": {
         "authorized_openings": [
           {
-            "boundary": "authored-synthetic-native-harness-worker-attempt",
+            "boundary": "model-runtime",
             "source": "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-closeout.md",
-            "scope": "At most one fresh attempt 005 after a separate latch, full rehydration, exact source resolution and clockwork checkpoint."
+            "scope": "At most one fresh native Harness model-runtime attempt 005 after a separate latch, full rehydration, exact source resolution and clockwork checkpoint."
+          },
+          {
+            "boundary": "provider-call",
+            "source": "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-closeout.md",
+            "scope": "At most one DeepSeek provider request inside the same consumed attempt-005 envelope, with zero retry, resume, fallback or auxiliary model."
           }
         ],
         "notes": [
@@ -50,7 +55,7 @@
           "id": "accept-contained-readiness-procedure-observations",
           "source": "docs/ariadne-agent-error-correction-register-revision-594.md",
           "status": "accepted",
-          "summary": "Accept AER-0810 through AER-0813 as contained or corrected with no open incident and no Harness/provider process cost."
+          "summary": "Accept AER-0810 through AER-0814 as contained or corrected with no open incident and no Harness/provider process cost."
         }
       ],
       "claim_scope": [
@@ -81,7 +86,8 @@
         "receipts": [
           "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-preplanning-receipt.json",
           "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-pre-verifier-receipt.json",
-          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-001-rejected-receipt.json"
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-001-rejected-receipt.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-002-rejected-receipt.json"
         ],
         "tests": [
           "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_readiness_and_preexecution_decision.py",
@@ -199,6 +205,7 @@
       "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-pre-verifier-runtime-state.json",
       "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-pre-verifier-receipt.json",
       "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-001-rejected-receipt.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-002-rejected-receipt.json",
       "docs/ariadne-agent-error-correction-register-revision-594.md",
       "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-closeout.md",
       "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-sol-acceptance.md",
@@ -352,6 +359,39 @@
         ]
       },
       "baton_summary": "records the rejected free-string opening and its typed-object correction."
+    },
+    {
+      "attempt_key": "attempt-005-readiness-clockwork-opening-vocabulary-001",
+      "observed_on": "2026-08-21",
+      "tranche": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "role": "orchestrator",
+      "resource_id": "clockwork-authorized-opening-vocabulary",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every typed continuity authority opening must use an existing closed-boundary identifier.",
+      "observed_error": "The second closeout draft used a structurally valid but newly coined boundary name outside the graph vocabulary.",
+      "detection_method": "The read-only clockwork check rejected at tick_transaction_prepare with authorized_opening_boundary_unknown before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/clockwork-check-attempt-002-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-594.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_authorized_opening_used_unknown_boundary_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the coined name with the existing model-runtime and provider-call boundaries and retain the exact one-attempt scopes.",
+        "prevention_control": "Select every non-empty authority opening boundary from the live graph governance closed-boundaries list before dry check.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the rejected unknown boundary and its closed-vocabulary correction."
     }
   ]
 }

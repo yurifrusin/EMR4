@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.governance_live_tick_rejected_check.v1",
+  "status": "revision_required",
+  "source_commit": "ac175ad00e6820f020e6f366f36c4f104e3fa08e",
+  "failure_coordinate": "tick_transaction_prepare",
+  "underlying_coordinate": "source_graph:authorized_opening_boundary_unknown:raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision:authored-synthetic-native-harness-worker-attempt",
+  "live_publication_count": 0,
+  "canonical_state_changed": false,
+  "correction": "Use the continuity graph's existing model-runtime and provider-call boundary vocabulary with the exact one-attempt scope."
+}

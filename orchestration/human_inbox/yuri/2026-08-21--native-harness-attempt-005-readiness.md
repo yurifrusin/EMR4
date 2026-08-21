@@ -15,9 +15,9 @@ single allowed run.
 The gate also measured its own friction. Three kinds of local procedural rerun
 occurred—PowerShell inventory syntax, a self-check that initially matched its
 own words, two historical tests tied to the controller before the accepted
-repairs, and a clockwork authority-opening draft in the wrong shape. They are
+repairs, and two clockwork authority-opening drafts (shape, then vocabulary). They are
 corrected or explicitly bounded, and none wasted a Harness or provider attempt;
-the clockwork draft was rejected before publication.
+both clockwork drafts were rejected before publication.
 
 ## Technical summary
 
@@ -31,7 +31,7 @@ Decision:
 - focused 9/9 and applicable widened 75/75 tests pass;
 - zero Node/Harness/broker/worker/model/provider/network activity;
 - readiness clockwork reading is explicitly non-reusable;
-- AER-0810 through AER-0813 contained; 813 total, none open.
+- AER-0810 through AER-0814 contained; 814 total, none open.
 
 Still closed: occupied execution until its new checkpoint; retries, resumes,
 fallbacks and second workers; ordinary-practice/product/data/runtime/

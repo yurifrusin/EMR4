@@ -59,6 +59,13 @@
       "count": 1,
       "outcome": "read_only_clockwork_check_rejected_with_zero_publication",
       "correction": "Replace the free string with the continuity graph's typed boundary, source and scope object."
+    },
+    {
+      "incident_id": "AER-0814",
+      "coordinate": "clockwork_authorized_opening_boundary_vocabulary",
+      "count": 1,
+      "outcome": "second_read_only_clockwork_check_rejected_with_zero_publication",
+      "correction": "Use the existing model-runtime and provider-call boundary identifiers with exact one-attempt scopes."
     }
   ],
   "activity": {
