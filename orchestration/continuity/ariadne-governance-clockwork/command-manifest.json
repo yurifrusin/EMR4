@@ -2,47 +2,49 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "rebinding_generated_evidence",
+      "command_id": "rebound_native_boot_deterministic_check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal",
+        "scripts.deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof",
         "--check"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "rebinding_focused_tests",
+      "command_id": "rebound_native_boot_focused_and_evidence_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
+        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof_evidence.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "rebound_native_boot_inherited_regressions",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/emr4",
+        "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+        "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot_evidence.py",
+        "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py",
         "tests/test_deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "rebinding_accepted_chain_regressions",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "scripts.ariadne_provider_free_pytest",
-        "--repo-root",
-        "C:/Users/sarashera/emr4",
-        "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py",
-        "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py",
-        "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py",
-        "tests/test_ariadne_orchestrator_preflight.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required"
-    },
-    {
-      "command_id": "rebinding_governance_regressions",
+      "command_id": "rebound_native_boot_governance_regressions",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -60,27 +62,27 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "rebinding_ruff",
+      "command_id": "rebound_native_boot_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "orchestration_harness/native_post_hmr_future_attempt_rebinding.py",
-        "scripts/deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal.py"
+        "scripts/deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof_evidence.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "rebinding_compile",
+      "command_id": "rebound_native_boot_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "orchestration_harness/native_post_hmr_future_attempt_rebinding.py",
-        "scripts/deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal.py"
+        "scripts/deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof_evidence.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

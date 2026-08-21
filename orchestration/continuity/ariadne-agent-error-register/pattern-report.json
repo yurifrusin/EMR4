@@ -1,25 +1,25 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 599,
-  "source_cutoff_on": "2026-08-21",
+  "register_revision": 600,
+  "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "65b2a1fec1f477a14a2ce153a05a5fb085f062476070905d42343b0c86f17066",
-  "incident_count": 856,
+  "canonical_register_sha256": "4b91a9e7deef80d1336eda4e9fc1ba29046d932f9438b43f0513c77e05b247c2",
+  "incident_count": 860,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 482,
-      "harness": 62,
+      "agent_behavior": 484,
+      "harness": 64,
       "operator": 163,
       "repository": 133,
       "transport": 16
     },
     "by_category": {
-      "command_scope_violation": 93,
+      "command_scope_violation": 94,
       "evidence_misreport": 71,
-      "harness_failure": 62,
+      "harness_failure": 64,
       "operator_error": 163,
-      "output_contract_violation": 266,
+      "output_contract_violation": 267,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
       "repository_defect": 133,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 64,
       "integration_reviewer": 3,
-      "orchestrator": 726,
+      "orchestrator": 730,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 521,
+      "low": 522,
       "material": 129,
-      "moderate": 206
+      "moderate": 209
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 161,
-      "canonical_unchanged": 532,
+      "accepted_candidate_changed": 163,
+      "canonical_unchanged": 534,
       "untrusted_partial_worktree": 163
     },
     "by_resource_and_role": {
@@ -138,6 +138,7 @@
       "clockwork-prospective-incident-revision-artifact::orchestrator": 1,
       "clockwork-prospective-register-revision-reading::orchestrator": 1,
       "clockwork-rollback-pointer-lease::orchestrator": 2,
+      "clockwork-rollback-republication-sequence::orchestrator": 1,
       "clockwork-successor-boundary-projector::orchestrator": 1,
       "clockwork-successor-protected-boundaries::orchestrator": 2,
       "clockwork-successor-protected-boundary::orchestrator": 1,
@@ -259,6 +260,8 @@
       "model-required-bureau-a3-b3-live-harness::orchestrator": 2,
       "model-required-bureau-c5-live-controller::orchestrator": 1,
       "native-codex-observation-to-signal-worker::implementer": 1,
+      "native-harness-direct-npm-cli-materialiser::orchestrator": 1,
+      "native-harness-prelaunch-materialiser::orchestrator": 1,
       "native-startup-terminal-validator::implementer": 1,
       "orchestrator-git-ref-evidence-binding::orchestrator": 1,
       "ordinary-diary-cancellation-browser-review-manifest::verifier": 1,
@@ -327,6 +330,7 @@
       "source-repaired-sentinel-widened-test-packet::orchestrator": 1,
       "standalone-generator-import-bootstrap::implementer": 1,
       "static-source-chain-helper-count-predicate::orchestrator": 1,
+      "successor-latch-closed-boundary-vocabulary::orchestrator": 1,
       "successor-protected-boundary-vocabulary::orchestrator": 1,
       "transactional-closeout-decision-evidence::orchestrator": 1,
       "transactional-closeout-node-relationship-cardinality::orchestrator": 1,

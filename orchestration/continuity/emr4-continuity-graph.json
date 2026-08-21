@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 376,
+  "graph_revision": 377,
   "harvests": [],
   "nodes": [
     {
@@ -28538,9 +28538,139 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof",
+      "title": "Rebound future-runner native HMR boot proof",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits this bounded provider-free native-Harness control sequence.",
+          "One native rc.7 process was authorised, but no DeepSeek worker, model/provider request, target, product, data, deployment, Pages or protected-ref authority opened.",
+          "The accepted rebound identity, runner, helper, controller, target coordinate and both prelaunch failures remain immutable."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-rebound-runner-native-hmr-activation",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/native-boot-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one exact stock-headless readiness sequence, one HMR mutation and the typed preset-root mismatch as proof that the rebound runner and helper mounted natively."
+        },
+        {
+          "id": "accept-independent-pre-request-and-broker-zero-join",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/native-boot-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the helper-authored closed sidecar joined with an identity-bound canonical all-zero broker reading as the sole controller terminal."
+        },
+        {
+          "id": "accept-process-free-package-seed-recovery",
+          "source": "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-package-seed-materialisation-recovery.md",
+          "status": "accepted",
+          "summary": "Accept the verified package-only rc.7 seed and independently equal disposable copy with zero materialiser processes and zero reparse points."
+        },
+        {
+          "id": "reject-worker-provider-target-and-product-overclaim",
+          "source": "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof-closeout.md",
+          "status": "rejected",
+          "summary": "Reject claims about agent creation, sessions, turns, DeepSeek transport, provider behavior, coding quality, target editing, product integration or ordinary-practice readiness."
+        },
+        {
+          "id": "accept-byte-exact-clockwork-boundary-vocabulary-recovery",
+          "source": "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-clockwork-boundary-vocabulary-recovery.md",
+          "status": "accepted",
+          "summary": "Accept the byte-exact rollback and corrected successor boundary carrying both pre-existing closed vocabulary terms separately."
+        }
+      ],
+      "claim_scope": [
+        "One pinned rc.7 process traversed the exact stock-headless readiness sequence and mounted the exact rebound runner and helper.",
+        "One post-readiness HMR mutation produced the exact typed preset-root admission mismatch before agents.create.",
+        "The sidecar and independent broker-zero reading produced the exact post_hmr_pre_request_failure controller coordinate.",
+        "Runner/helper copies match, the bundle manifest is unchanged and no fallback terminal was written.",
+        "All agent, session, turn, broker, worker, model/provider, database, Docker, network and target counts remain zero.",
+        "Process/root cleanup passed and no raw stream, environment or log was retained."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-prelaunch-materialisation-process-ownership-recovery.md",
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-package-seed-materialisation-recovery.md",
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-clockwork-boundary-vocabulary-recovery.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/prelaunch-materialisation-failure-001.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/prelaunch-materialisation-failure-002.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/native-boot-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/native-boot-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-recovery-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-package-seed-recovery-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-package-seed-recovery-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-package-seed-recovery-prepush-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-package-seed-recovery-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-pre-verifier-acceptance-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-closeout-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof_evidence.py",
+          "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
+          "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_preterminal_observable_composition_recovery_boot.py",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_agents_handover_archive.py",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+          "docs/ariadne-agent-error-correction-register-revision-600.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof.md"
+        ]
+      },
+      "unresolved_gates": [
+        "No DeepSeek worker agent has been created by the rebound runner.",
+        "No session, turn, broker request, model/provider request, coding behavior or target edit is authorised or proved.",
+        "The package-seed copy is exact but its 180673 ms local materialisation cost has not been optimised.",
+        "Product, data, ordinary-practice, production, deployment, release, Pages and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T01:02:14.2919121+10:00",
+      "updated_at": "2026-08-22T01:02:14.2919121+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "f7eff76e61f4b139741aadbe61df4c3c6a7f8d68",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-21T23:08:25.7482343+10:00"
+  "updated_at": "2026-08-22T01:02:14.2919121+10:00"
 }

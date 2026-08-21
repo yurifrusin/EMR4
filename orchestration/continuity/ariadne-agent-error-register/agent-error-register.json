@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 599,
+  "register_revision": 600,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-21",
+    "source_cutoff_on": "2026-08-22",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -33417,6 +33417,157 @@
       "incident_id": "AER-0856",
       "attempt_id": "clock-ae6c7a9e099de6b2c03f5700",
       "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "rebound-future-runner-stock-headless-hmr-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "native-harness-prelaunch-materialiser",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_native_harness_controller",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "A prelaunch package materialiser must remain exactly owned and absent before the controller either rejects or advances to the one native Harness process.",
+      "observed_error": "The accepted Windows npm.cmd wrapper parent ended while its Node npm-CLI descendant remained live and held the disposable installation directory, so cleanup failed closed before native Popen.",
+      "detection_method": "The controller observed recursive cleanup refusal, identified the exact descendant, terminated it, verified process/root absence and recorded a typed prelaunch failure with zero native processes.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/prelaunch-materialisation-failure-001.json",
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-prelaunch-materialisation-process-ownership-recovery.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.prelaunch_windows_npm_wrapper_descendant_outlived_parent",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the typed failure, terminate and wait for the exact descendant, clean the verified root and replace wrapper ownership with direct-process ownership before further recovery.",
+        "prevention_control": "The final generation removes npm execution entirely and admits only a verified package-only seed plus independent disposable-copy digest before the unchanged native Popen site.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-package-seed-materialisation-recovery.md"
+        ]
+      },
+      "incident_id": "AER-0857",
+      "attempt_id": "clock-f21e4ae559a16a7e037932d8",
+      "origin": "harness",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "rebound-future-runner-stock-headless-hmr-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "native-harness-direct-npm-cli-materialiser",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_native_harness_controller",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The directly owned offline package materialiser must complete within its frozen deadline or terminate cleanly without consuming the native attempt.",
+      "observed_error": "The hash-bound direct Node/npm-CLI materialiser remained nonterminal until the 600-second deadline despite correct process ownership.",
+      "detection_method": "The controller's frozen deadline expired, after which it terminated and waited for the exact process, removed the root and wrote the second typed prelaunch failure with zero native processes.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/prelaunch-materialisation-failure-002.json",
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-package-seed-materialisation-recovery.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.prelaunch_direct_npm_cli_exceeded_frozen_materialisation_deadline",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove npm from prelaunch, freeze the exact package-only seed and verify both the source seed and disposable copy before native launch.",
+        "prevention_control": "Generation 3 has zero materialiser processes and binds package files, lock roster, file/byte counts, DSH manifest, reparse absence and the canonical tree digest.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/native-boot-evidence.json"
+        ]
+      },
+      "incident_id": "AER-0858",
+      "attempt_id": "clock-aa43540c23929676656a1489",
+      "origin": "harness",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "rebound-future-runner-stock-headless-hmr-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "successor-latch-closed-boundary-vocabulary",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_tick",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The clockwork successor latch must preserve every registered closed boundary as its exact existing vocabulary term rather than combining or paraphrasing controls.",
+      "observed_error": "The first closeout intent combined the feature-flag/allowlist/command-mounting and generic-status Arrived closures into one descriptive string, omitting one exact term required by baton consistency.",
+      "detection_method": "The first tick published, then tests/test_current_baton_consistency.py rejected the missing exact boundary; the clockwork restored the immediately previous generation byte-for-byte.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-clockwork-boundary-vocabulary-recovery.md",
+        "tests/test_current_baton_consistency.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/closeout/clockwork-tick-attempt-001-evidence.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.successor_latch_closed_boundary_vocabulary_paraphrase",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Roll back the first generation byte-for-byte and restore both pre-existing ordinary-practice boundary terms separately in the corrected intent.",
+        "prevention_control": "The complete post-publication baton consistency suite remains mandatory and the successor boundary copies exact registered terms without compression.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-clockwork-boundary-vocabulary-recovery.md"
+        ]
+      },
+      "incident_id": "AER-0859",
+      "attempt_id": "clock-e58a8f885e0a11d87aab6365",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "rebound-future-runner-stock-headless-hmr-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "clockwork-rollback-republication-sequence",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Clockwork rollback must use its closed standalone mode, and its new lease pointer must become the committed source before any corrected check or publication.",
+      "observed_error": "The first rollback call supplied the forbidden intent argument; after the corrected rollback passed, an immediate new check preceded the rollback-pointer commit and was rejected for physical pointer drift.",
+      "detection_method": "The CLI rejected the first call before mutation, the standalone rollback then reported byte_exact true, and the next read-only check rejected tick_pointer_physical_drift before commands or publication.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-clockwork-boundary-vocabulary-recovery.md",
+        "orchestration/continuity/ariadne-governance-clockwork/current.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_rollback_mode_and_pointer_commit_sequence",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use standalone rollback, preserve its byte-exact result and commit the new rollback lease pointer before rerunning the corrected tick check.",
+        "prevention_control": "Rollback is treated as a distinct closed grammar and its pointer lease is an explicit recovery-commit prerequisite for republication.",
+        "evidence_paths": [
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "orchestration/continuity/ariadne-governance-clockwork/current.json",
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-clockwork-boundary-vocabulary-recovery.md"
+        ]
+      },
+      "incident_id": "AER-0860",
+      "attempt_id": "clock-63b76eb574ccae58b3d243e8",
+      "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"
     }

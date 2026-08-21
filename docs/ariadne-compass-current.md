@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Freeze and run one provider-free rebound-runner stock-headless HMR boot; stop before any DeepSeek request.
+> Freeze one provider-free rebound-runner agent-creation proof and stop before session or request.
 
 ## North star
 
@@ -522,23 +522,25 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The orchestrator can now materialise an exact future-attempt bundle and assemble its typed terminal from two independent canonical gauges before any worker process exists. Lineage parent: `deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal`.
 253. **Make DeepSeek native-Harness worker execution bounded, traceable and governable enough for Raisa development — Native Harness fresh identity and inert target binding**
    The orchestrator now owns a fresh full-Git attempt identity and one inert target across the exact runner, helper, bundle and terminal before any worker process exists. Lineage parent: `deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal`.
+254. **Make DeepSeek native-Harness worker execution bounded, traceable and governable enough for Raisa development — Rebound future-runner native HMR boot proof**
+   The orchestrator can now prove exact stock-headless readiness, rebound-runner activation, the chosen typed pre-request stop and independent broker silence from one native process. Lineage parent: `deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal`.
 
 ## Current position
 
-**Prove the exact rebound bundle can traverse pinned rc.7 stock-headless HMR and stop at a typed pre-request terminal — Native Harness fresh identity and inert target binding**
+**Prove the native Harness can create exactly one inert rebound worker agent while retaining provider-free broker and target silence — Rebound future-runner native HMR boot proof**
 
-**Why this proof came next:** Identity and target convergence pass provider-free, but the rebound JavaScript has not yet been natively parsed or mounted.
+**Why this proof came next:** Native HMR activation and typed pre-request attribution pass, while agent creation remains the next unproved boundary before any session or request.
 
-One bounded provider-free native process will either prove the rebound runner/helper mount and broker-zero pre-request terminal or fail closed with attributable evidence.
+One provider-free runner descendant will either create one exact inert worker agent and emit a typed sidecar before session creation or fail closed with attributable evidence.
 
 ### What this unlocks
 
-- Native parse and HMR-mount evidence for the exact rebound future runner and helper.
-- A later separately frozen occupied DeepSeek development attempt under the assembled controller and broker gears.
+- Typed agent-creation evidence under the native Harness and admitted preset roots.
+- A later separately frozen session/request-boundary rehearsal before any occupied DeepSeek development task.
 
 ### What it does not solve
 
-- No DeepSeek model or provider request and no coding-performance evidence.
+- No session, turn, broker/model/provider request or coding-performance evidence.
 - No target-file creation, product command, product data or ordinary-practice enablement.
 - No production, deployment, release, Pages or protected integration.
 
@@ -1291,6 +1293,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md`
 - `docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-closeout.md`
+- `docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof-closeout.md`
 - `docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-closeout.md`
 - `docs/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-sentinel-source-escape-repair-closeout.md`
@@ -2034,7 +2037,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-future-attempt-identity-target-rebinding-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2682,7 +2685,6 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/provider-free-effective-tool-native-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-evidence.json`
-- `orchestration/continuity/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal/rebinding-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/materialisation-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-evidence.json`
@@ -2695,6 +2697,8 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/efficacy-reading.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/efficacy-reading.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/native-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/diagnosis-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/efficacy-reading.json`
@@ -3683,4 +3687,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 358; continuity graph revision 376._
+_Compass map revision 359; continuity graph revision 377._
