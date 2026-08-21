@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Preset-mount Windows minimum-environment sanitizer evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "candidate_source",
+    "result",
+    "upstream_source_binding",
+    "repository_bindings",
+    "environment",
+    "fixture",
+    "process_envelope_sha256",
+    "closed_codes",
+    "code_counts",
+    "zero_counters",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_preset_mount_windows_minimum_environment_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {"const": "pass"},
+    "upstream_source_binding": {"$ref": "#/$defs/upstreamBinding"},
+    "repository_bindings": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {"$ref": "#/$defs/repositoryBinding"}
+    },
+    "environment": {"$ref": "#/$defs/environment"},
+    "fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authored_synthetic",
+        "attempt_id",
+        "node_process_count",
+        "prior_consumed_node_process_count",
+        "lineage_cumulative_node_process_count",
+        "result_count",
+        "stdout_exact",
+        "stderr_bytes",
+        "forbidden_detail_absent",
+        "native_harness_import_count",
+        "child_process_count",
+        "fixture_environment_read_count",
+        "filesystem_api_count",
+        "network_api_count"
+      ],
+      "properties": {
+        "authored_synthetic": {"const": true},
+        "attempt_id": {"const": "attempt-001"},
+        "node_process_count": {"const": 1},
+        "prior_consumed_node_process_count": {"const": 3},
+        "lineage_cumulative_node_process_count": {"const": 4},
+        "result_count": {"const": 15},
+        "stdout_exact": {"const": true},
+        "stderr_bytes": {"const": 0},
+        "forbidden_detail_absent": {"const": true},
+        "native_harness_import_count": {"const": 0},
+        "child_process_count": {"const": 0},
+        "fixture_environment_read_count": {"const": 0},
+        "filesystem_api_count": {"const": 0},
+        "network_api_count": {"const": 0}
+      }
+    },
+    "process_envelope_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "closed_codes": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/code"}
+    },
+    "code_counts": {
+      "type": "object",
+      "additionalProperties": {"type": "integer", "minimum": 0},
+      "propertyNames": {"$ref": "#/$defs/code"},
+      "minProperties": 7,
+      "maxProperties": 7
+    },
+    "zero_counters": {
+      "type": "object",
+      "additionalProperties": {"const": 0},
+      "minProperties": 13,
+      "maxProperties": 13
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "safe_reduction_only",
+        "sanitizer_admitted",
+        "minimum_environment_fixture_passed",
+        "exact_previous_abort_cause_proven",
+        "raw_runtime_detail_retained",
+        "environment_values_retained",
+        "runner_integrated",
+        "repair_selected",
+        "retry_authorized",
+        "worker_launch_authorized",
+        "occupied_model_launch_authorized"
+      ],
+      "properties": {
+        "safe_reduction_only": {"const": true},
+        "sanitizer_admitted": {"const": true},
+        "minimum_environment_fixture_passed": {"const": true},
+        "exact_previous_abort_cause_proven": {"const": false},
+        "raw_runtime_detail_retained": {"const": false},
+        "environment_values_retained": {"const": false},
+        "runner_integrated": {"const": false},
+        "repair_selected": {"const": false},
+        "retry_authorized": {"const": false},
+        "worker_launch_authorized": {"const": false},
+        "occupied_model_launch_authorized": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "code": {
+      "enum": [
+        "PRESET_MOUNT_AGENT_SCOPE_ABSENT",
+        "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE",
+        "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED",
+        "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT",
+        "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT",
+        "PRESET_MOUNT_ROOT_SERVICE_LEAK",
+        "PRESET_MOUNT_UNCLASSIFIED"
+      ]
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "keys",
+        "key_count",
+        "values_retained",
+        "unlisted_key_count",
+        "path_present",
+        "node_options_present"
+      ],
+      "properties": {
+        "keys": {"const": ["SystemRoot", "WINDIR", "ComSpec", "TEMP", "TMP"]},
+        "key_count": {"const": 5},
+        "values_retained": {"const": false},
+        "unlisted_key_count": {"const": 0},
+        "path_present": {"const": false},
+        "node_options_present": {"const": false}
+      }
+    },
+    "repositoryBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256", "passed"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "passed": {"const": true}
+      }
+    },
+    "upstreamBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256", "package_version", "passed"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "package_version": {"const": "0.1.0-rc.7"},
+        "passed": {"const": true}
+      }
+    }
+  }
+}

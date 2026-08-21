@@ -1,0 +1,83 @@
+{
+  "schema_version": "ariadne.native_harness_preset_mount_windows_minimum_environment_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery",
+  "planning_source": "2c36ef593e57b1be814fc9d36c028641c4f835e1",
+  "accepted_contract": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/contract.json",
+  "accepted_negative_process_envelope": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-process-envelope.json",
+  "accepted_negative_process_envelope_sha256": "cef47d367fa1925240f0e29c7fc73b36ba4597fafb5c7b9ddee798b92d758c5a",
+  "accepted_source_contract": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal/contract.json",
+  "seed_relative_path": "emr4-native-harness/dsh-0.1.0-rc.7-package-seed/node_modules/@deepseek-ai",
+  "upstream_source": {
+    "path": "dsh-agent-presets/lib/index.js",
+    "bytes": 52188,
+    "sha256": "a0b417514e3d285ad5fef74867e8049af333ebdec6e4d7639e388aa0903e0039",
+    "package_version": "0.1.0-rc.7"
+  },
+  "repository_files": [
+    {
+      "path": "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer.mjs",
+      "bytes": 2439,
+      "sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f"
+    },
+    {
+      "path": "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_fixture.mjs",
+      "bytes": 3997,
+      "sha256": "601bb41f21916fc836603e54cb5caecec6987e75347609ff1881eef758940788"
+    }
+  ],
+  "upstream_source_anchors": [
+    "var PresetMountError = class extends Error {",
+    "super(`agent-presets: preset \"${presetId}\" failed to mount: ${reason}`, options);",
+    "agent-presets: refusing to compose an unscoped context; the scope key is what joins an agent to its preset",
+    "composition file is unreadable: ${preset.path}",
+    "mounted subtree did not publish its entry tree",
+    "row(s) did not activate:\\n",
+    "row(s) published process-global service(s) [",
+    "`${mountDetail(error)} (${preset.path})`",
+    "export { AgentPresetSettingsSchema, AgentPresets, AgentPresets as default, COMPOSITION_FILE, InvalidPresetIdError, METADATA_FILE, PresetExistsError, PresetMountError"
+  ],
+  "closed_codes": [
+    "PRESET_MOUNT_AGENT_SCOPE_ABSENT",
+    "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE",
+    "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED",
+    "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT",
+    "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT",
+    "PRESET_MOUNT_ROOT_SERVICE_LEAK",
+    "PRESET_MOUNT_UNCLASSIFIED"
+  ],
+  "expected_result_codes": [
+    "PRESET_MOUNT_AGENT_SCOPE_ABSENT",
+    "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE",
+    "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED",
+    "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT",
+    "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT",
+    "PRESET_MOUNT_ROOT_SERVICE_LEAK",
+    "PRESET_MOUNT_UNCLASSIFIED",
+    "PRESET_MOUNT_UNCLASSIFIED",
+    "PRESET_MOUNT_UNCLASSIFIED",
+    "PRESET_MOUNT_UNCLASSIFIED",
+    "PRESET_MOUNT_UNCLASSIFIED",
+    "PRESET_MOUNT_UNCLASSIFIED",
+    "PRESET_MOUNT_UNCLASSIFIED",
+    "PRESET_MOUNT_UNCLASSIFIED",
+    "PRESET_MOUNT_AGENT_SCOPE_ABSENT"
+  ],
+  "child_environment_keys": ["SystemRoot", "WINDIR", "ComSpec", "TEMP", "TMP"],
+  "forbidden_environment_keys": ["PATH", "NODE_OPTIONS"],
+  "prior_consumed_node_process_count": 3,
+  "required_zero_counters": [
+    "native_harness_process_count",
+    "turn_count",
+    "request_count",
+    "broker_process_count",
+    "broker_request_count",
+    "occupied_worker_count",
+    "model_request_count",
+    "provider_request_count",
+    "network_attempt_count",
+    "database_invocation_count",
+    "docker_invocation_count",
+    "target_creation_count",
+    "target_use_count"
+  ]
+}

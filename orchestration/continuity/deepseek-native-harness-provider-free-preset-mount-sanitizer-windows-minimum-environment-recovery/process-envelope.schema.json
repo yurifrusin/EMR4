@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Preset-mount Windows minimum-environment process envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "attempt_id",
+    "candidate_source",
+    "numeric_exit_code",
+    "stdout_bytes",
+    "stdout_sha256",
+    "stderr_bytes",
+    "stderr_sha256",
+    "stream_content_retained",
+    "raw_runtime_detail_retained",
+    "environment",
+    "node_process_count",
+    "prior_consumed_node_process_count",
+    "lineage_cumulative_node_process_count",
+    "native_harness_process_count",
+    "further_process_authorized"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_preset_mount_windows_minimum_environment_process_envelope.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery"},
+    "attempt_id": {"const": "attempt-001"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "numeric_exit_code": {"type": "integer"},
+    "stdout_bytes": {"type": "integer", "minimum": 0},
+    "stdout_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "stderr_bytes": {"type": "integer", "minimum": 0},
+    "stderr_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "stream_content_retained": {"const": false},
+    "raw_runtime_detail_retained": {"const": false},
+    "environment": {"$ref": "#/$defs/environment"},
+    "node_process_count": {"const": 1},
+    "prior_consumed_node_process_count": {"const": 3},
+    "lineage_cumulative_node_process_count": {"const": 4},
+    "native_harness_process_count": {"const": 0},
+    "further_process_authorized": {"const": false}
+  },
+  "$defs": {
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "keys",
+        "key_count",
+        "values_retained",
+        "unlisted_key_count",
+        "path_present",
+        "node_options_present"
+      ],
+      "properties": {
+        "keys": {"const": ["SystemRoot", "WINDIR", "ComSpec", "TEMP", "TMP"]},
+        "key_count": {"const": 5},
+        "values_retained": {"const": false},
+        "unlisted_key_count": {"const": 0},
+        "path_present": {"const": false},
+        "node_options_present": {"const": false}
+      }
+    }
+  }
+}

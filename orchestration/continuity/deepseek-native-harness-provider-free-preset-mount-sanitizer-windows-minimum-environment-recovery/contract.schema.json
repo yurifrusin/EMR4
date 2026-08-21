@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Native Harness preset-mount Windows minimum-environment contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "planning_source",
+    "accepted_contract",
+    "accepted_negative_process_envelope",
+    "accepted_negative_process_envelope_sha256",
+    "accepted_source_contract",
+    "seed_relative_path",
+    "upstream_source",
+    "repository_files",
+    "upstream_source_anchors",
+    "closed_codes",
+    "expected_result_codes",
+    "child_environment_keys",
+    "forbidden_environment_keys",
+    "prior_consumed_node_process_count",
+    "required_zero_counters"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_preset_mount_windows_minimum_environment_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery"},
+    "planning_source": {"const": "2c36ef593e57b1be814fc9d36c028641c4f835e1"},
+    "accepted_contract": {"const": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/contract.json"},
+    "accepted_negative_process_envelope": {"const": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-process-envelope.json"},
+    "accepted_negative_process_envelope_sha256": {"const": "cef47d367fa1925240f0e29c7fc73b36ba4597fafb5c7b9ddee798b92d758c5a"},
+    "accepted_source_contract": {"type": "string", "minLength": 1},
+    "seed_relative_path": {"type": "string", "minLength": 1},
+    "upstream_source": {"$ref": "#/$defs/upstream"},
+    "repository_files": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {"$ref": "#/$defs/repository"}
+    },
+    "upstream_source_anchors": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "closed_codes": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/code"}
+    },
+    "expected_result_codes": {
+      "type": "array",
+      "minItems": 15,
+      "maxItems": 15,
+      "items": {"$ref": "#/$defs/code"}
+    },
+    "child_environment_keys": {
+      "const": ["SystemRoot", "WINDIR", "ComSpec", "TEMP", "TMP"]
+    },
+    "forbidden_environment_keys": {"const": ["PATH", "NODE_OPTIONS"]},
+    "prior_consumed_node_process_count": {"const": 3},
+    "required_zero_counters": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "code": {
+      "enum": [
+        "PRESET_MOUNT_AGENT_SCOPE_ABSENT",
+        "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE",
+        "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED",
+        "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT",
+        "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT",
+        "PRESET_MOUNT_ROOT_SERVICE_LEAK",
+        "PRESET_MOUNT_UNCLASSIFIED"
+      ]
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "upstream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256", "package_version"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "package_version": {"const": "0.1.0-rc.7"}
+      }
+    }
+  }
+}
