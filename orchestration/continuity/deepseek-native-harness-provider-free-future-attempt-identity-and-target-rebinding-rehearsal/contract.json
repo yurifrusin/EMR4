@@ -1,0 +1,59 @@
+{
+  "schema_version": "ariadne.native_harness_future_attempt_rebinding_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal",
+  "planning_source": "deaf0b3ccc23adb2f2f17b275a6a7faa4d2ae2ac",
+  "accepted_materialisation": {
+    "reviewed_source": "9b59c6dd7dac9a77030118e83bc81ebf74c3289c",
+    "candidate_source": "55906f55dfd82474f095acaa9dc436013db77411",
+    "fixture_identity": {
+      "operation_id": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
+      "attempt_id": "future-post-hmr-sidecar-static-fixture-001",
+      "candidate_source": "cc75a9f8991120b66bf64ee12d415462f2cbfbb3"
+    },
+    "consumed_target_path": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-synthetic-window-worker-005/workspace/synthetic_window_coalescer.py",
+    "source_bindings": {
+      "future_runner_sha256": "98cf8db1803c7dbfde867044504a820518e448278faf220c8ec3c5dbb8818805",
+      "generated_helper_sha256": "bd2995a62c7d8bbf37b29c0cd5b5a88c3570341255d1644d9cb98cbef0bd490e",
+      "controller_module_sha256": "29495710c5e95a12fba92a2ef34c28ed6b9ce5e034402e5551767e19b843014c"
+    }
+  },
+  "fresh_identity": {
+    "operation_id": "deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal",
+    "attempt_id": "future-identity-target-rebinding-fixture-001",
+    "candidate_source": "deaf0b3ccc23adb2f2f17b275a6a7faa4d2ae2ac"
+  },
+  "target_binding": {
+    "classification": "inert_authored_synthetic_relative_python_fixture",
+    "relative_path": "workspace/authored_synthetic_control_probe.py",
+    "coordinate_sha256": "f1a4634e24e1cde4bcddfcc88e932a44d75843f6c8a47c1568599775f219c72d",
+    "occupied_target_use_authorized": false
+  },
+  "rebound_source_bindings": {
+    "future_runner_sha256": "d025d1929f20589e86cbd66e983bda17435c1a21e937468532c38bb4895efb1a",
+    "generated_helper_sha256": "7ff2630b1523c66bb9e0cb5d649879cfa97d0340b791a85255c7dc5ad1fb66fd",
+    "controller_module_sha256": "29495710c5e95a12fba92a2ef34c28ed6b9ce5e034402e5551767e19b843014c"
+  },
+  "rebinder_module_sha256": "6f2bf41551ddb839678eaea0cfbf2f61c8cc0735be60b0cd94db4e79b469b983",
+  "proof_boundary": {
+    "node_process_count": 0,
+    "native_harness_process_count": 0,
+    "broker_process_count": 0,
+    "worker_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "network_request_count": 0,
+    "database_invocation_count": 0,
+    "docker_invocation_count": 0,
+    "raw_attempt_stream_read_count": 0,
+    "target_file_creation_count": 0
+  },
+  "artifacts": {
+    "contract_schema": "contract.schema.json",
+    "bundle_schema": "rebound-future-attempt-bundle.schema.json",
+    "terminal_schema": "rebound-controller-terminal.schema.json",
+    "evidence_schema": "rebinding-evidence.schema.json",
+    "evidence": "rebinding-evidence.json",
+    "report": "rebinding-report.md",
+    "efficacy": "efficacy-reading.json"
+  }
+}

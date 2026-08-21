@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "result", "claim", "fresh_identity", "target_binding", "source_bindings", "transformation", "materialisation", "terminal_matrix", "proof_boundary", "occupied_attempt_authorized", "raw_historical_stream_read"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_future_attempt_rebinding_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal"},
+    "result": {"const": "pass"},
+    "claim": {"const": "provider_free_fresh_future_attempt_identity_and_inert_target_rebinding_representable"},
+    "fresh_identity": {"$ref": "#/$defs/identity"},
+    "target_binding": {"$ref": "#/$defs/target_binding"},
+    "source_bindings": {"$ref": "#/$defs/source_bindings"},
+    "transformation": {"type": "object", "additionalProperties": {"type": ["boolean", "integer", "string"]}},
+    "materialisation": {"type": "object", "additionalProperties": {"type": ["boolean", "integer", "string", "array"]}},
+    "terminal_matrix": {"type": "object", "additionalProperties": {"type": ["boolean", "integer", "string"]}},
+    "proof_boundary": {"$ref": "#/$defs/proof_boundary"},
+    "occupied_attempt_authorized": {"const": false},
+    "raw_historical_stream_read": {"const": false}
+  },
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "identity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["operation_id", "attempt_id", "candidate_source"],
+      "properties": {"operation_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,159}$"}, "attempt_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,159}$"}, "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"}}
+    },
+    "source_bindings": {
+      "type": "object", "additionalProperties": false,
+      "required": ["future_runner_sha256", "generated_helper_sha256", "controller_module_sha256"],
+      "properties": {"future_runner_sha256": {"$ref": "#/$defs/digest"}, "generated_helper_sha256": {"$ref": "#/$defs/digest"}, "controller_module_sha256": {"$ref": "#/$defs/digest"}}
+    },
+    "target_binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["classification", "relative_path", "coordinate_sha256", "occupied_target_use_authorized"],
+      "properties": {"classification": {"const": "inert_authored_synthetic_relative_python_fixture"}, "relative_path": {"const": "workspace/authored_synthetic_control_probe.py"}, "coordinate_sha256": {"const": "f1a4634e24e1cde4bcddfcc88e932a44d75843f6c8a47c1568599775f219c72d"}, "occupied_target_use_authorized": {"const": false}}
+    },
+    "proof_boundary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["node_process_count", "native_harness_process_count", "broker_process_count", "worker_process_count", "model_request_count", "provider_request_count", "network_request_count", "database_invocation_count", "docker_invocation_count", "raw_attempt_stream_read_count", "target_file_creation_count"],
+      "properties": {"node_process_count": {"const": 0}, "native_harness_process_count": {"const": 0}, "broker_process_count": {"const": 0}, "worker_process_count": {"const": 0}, "model_request_count": {"const": 0}, "provider_request_count": {"const": 0}, "network_request_count": {"const": 0}, "database_invocation_count": {"const": 0}, "docker_invocation_count": {"const": 0}, "raw_attempt_stream_read_count": {"const": 0}, "target_file_creation_count": {"const": 0}}
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "attempt_id", "candidate_source", "source_bindings", "target_binding", "path_roster", "occupied_launch_authorized", "execution_authority", "raw_retention"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_rebound_future_attempt_bundle.v1"},
+    "operation_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,159}$"},
+    "attempt_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,159}$"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "source_bindings": {"$ref": "#/$defs/source_bindings"},
+    "target_binding": {"$ref": "#/$defs/target_binding"},
+    "path_roster": {"const": ["runner/synthetic-one-request-worker-runner.mjs", "runner/post-hmr-pre-request-diagnostic.mjs", "control/future-attempt-bundle.json", "control/post-hmr-diagnostic.json", "control/broker-request-reading.json", "control/controller-terminal.json"]},
+    "occupied_launch_authorized": {"const": false},
+    "execution_authority": {"$ref": "#/$defs/execution_authority"},
+    "raw_retention": {"$ref": "#/$defs/raw_retention"}
+  },
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_bindings": {
+      "type": "object", "additionalProperties": false,
+      "required": ["future_runner_sha256", "generated_helper_sha256", "controller_module_sha256"],
+      "properties": {"future_runner_sha256": {"$ref": "#/$defs/digest"}, "generated_helper_sha256": {"$ref": "#/$defs/digest"}, "controller_module_sha256": {"$ref": "#/$defs/digest"}}
+    },
+    "target_binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["classification", "relative_path", "coordinate_sha256", "occupied_target_use_authorized"],
+      "properties": {"classification": {"const": "inert_authored_synthetic_relative_python_fixture"}, "relative_path": {"const": "workspace/authored_synthetic_control_probe.py"}, "coordinate_sha256": {"const": "f1a4634e24e1cde4bcddfcc88e932a44d75843f6c8a47c1568599775f219c72d"}, "occupied_target_use_authorized": {"const": false}}
+    },
+    "execution_authority": {
+      "type": "object", "additionalProperties": false,
+      "required": ["node_process_authorized", "native_harness_process_authorized", "broker_process_authorized", "worker_process_authorized", "model_request_authorized", "provider_request_authorized", "network_request_authorized", "database_invocation_authorized", "docker_invocation_authorized"],
+      "properties": {"node_process_authorized": {"const": false}, "native_harness_process_authorized": {"const": false}, "broker_process_authorized": {"const": false}, "worker_process_authorized": {"const": false}, "model_request_authorized": {"const": false}, "provider_request_authorized": {"const": false}, "network_request_authorized": {"const": false}, "database_invocation_authorized": {"const": false}, "docker_invocation_authorized": {"const": false}}
+    },
+    "raw_retention": {
+      "type": "object", "additionalProperties": false,
+      "required": ["raw_error_message_retained", "raw_stack_retained", "raw_paths_retained", "raw_cause_retained", "raw_stream_retained"],
+      "properties": {"raw_error_message_retained": {"const": false}, "raw_stack_retained": {"const": false}, "raw_paths_retained": {"const": false}, "raw_cause_retained": {"const": false}, "raw_stream_retained": {"const": false}}
+    }
+  }
+}

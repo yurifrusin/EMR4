@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "attempt_id", "candidate_source", "coordinate", "diagnostic_accepted", "broker_zero", "pre_request_supported", "stage", "cause_coordinate", "error_kind", "source_bindings", "target_binding", "occupied_launch_authorized", "raw_stream_read", "raw_error_retained"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_rebound_controller_terminal.v1"},
+    "operation_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,159}$"},
+    "attempt_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,159}$"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "coordinate": {"enum": ["native_harness_terminal_failure", "post_hmr_pre_request_failure", "post_hmr_request_boundary_unresolved"]},
+    "diagnostic_accepted": {"type": "boolean"},
+    "broker_zero": {"type": "boolean"},
+    "pre_request_supported": {"type": "boolean"},
+    "stage": {"type": ["string", "null"]},
+    "cause_coordinate": {"type": ["string", "null"]},
+    "error_kind": {"type": ["string", "null"]},
+    "source_bindings": {"$ref": "#/$defs/source_bindings"},
+    "target_binding": {"$ref": "#/$defs/target_binding"},
+    "occupied_launch_authorized": {"const": false},
+    "raw_stream_read": {"const": false},
+    "raw_error_retained": {"const": false}
+  },
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_bindings": {
+      "type": "object", "additionalProperties": false,
+      "required": ["future_runner_sha256", "generated_helper_sha256", "controller_module_sha256"],
+      "properties": {"future_runner_sha256": {"$ref": "#/$defs/digest"}, "generated_helper_sha256": {"$ref": "#/$defs/digest"}, "controller_module_sha256": {"$ref": "#/$defs/digest"}}
+    },
+    "target_binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["classification", "relative_path", "coordinate_sha256", "occupied_target_use_authorized"],
+      "properties": {"classification": {"const": "inert_authored_synthetic_relative_python_fixture"}, "relative_path": {"const": "workspace/authored_synthetic_control_probe.py"}, "coordinate_sha256": {"const": "f1a4634e24e1cde4bcddfcc88e932a44d75843f6c8a47c1568599775f219c72d"}, "occupied_target_use_authorized": {"const": false}}
+    }
+  }
+}

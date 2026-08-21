@@ -1,0 +1,82 @@
+{
+  "claim": "provider_free_fresh_future_attempt_identity_and_inert_target_rebinding_representable",
+  "fresh_identity": {
+    "attempt_id": "future-identity-target-rebinding-fixture-001",
+    "candidate_source": "deaf0b3ccc23adb2f2f17b275a6a7faa4d2ae2ac",
+    "operation_id": "deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal"
+  },
+  "materialisation": {
+    "bundle_terminal_bindings_converged": true,
+    "cleanup_complete": true,
+    "exclusive_write": true,
+    "helper_bytes": 3105,
+    "initial_files": [
+      "control/future-attempt-bundle.json",
+      "runner/post-hmr-pre-request-diagnostic.mjs",
+      "runner/synthetic-one-request-worker-runner.mjs"
+    ],
+    "occupied_launch_authorized": false,
+    "path_roster": [
+      "runner/synthetic-one-request-worker-runner.mjs",
+      "runner/post-hmr-pre-request-diagnostic.mjs",
+      "control/future-attempt-bundle.json",
+      "control/post-hmr-diagnostic.json",
+      "control/broker-request-reading.json",
+      "control/controller-terminal.json"
+    ],
+    "runner_bytes": 6228,
+    "target_file_created": false
+  },
+  "occupied_attempt_authorized": false,
+  "operation_id": "deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal",
+  "proof_boundary": {
+    "broker_process_count": 0,
+    "database_invocation_count": 0,
+    "docker_invocation_count": 0,
+    "model_request_count": 0,
+    "native_harness_process_count": 0,
+    "network_request_count": 0,
+    "node_process_count": 0,
+    "provider_request_count": 0,
+    "raw_attempt_stream_read_count": 0,
+    "target_file_creation_count": 0,
+    "worker_process_count": 0
+  },
+  "raw_historical_stream_read": false,
+  "result": "pass",
+  "schema_version": "ariadne.native_harness_future_attempt_rebinding_evidence.v1",
+  "source_bindings": {
+    "controller_module_sha256": "29495710c5e95a12fba92a2ef34c28ed6b9ce5e034402e5551767e19b843014c",
+    "future_runner_sha256": "d025d1929f20589e86cbd66e983bda17435c1a21e937468532c38bb4895efb1a",
+    "generated_helper_sha256": "7ff2630b1523c66bb9e0cb5d649879cfa97d0340b791a85255c7dc5ad1fb66fd"
+  },
+  "target_binding": {
+    "classification": "inert_authored_synthetic_relative_python_fixture",
+    "coordinate_sha256": "f1a4634e24e1cde4bcddfcc88e932a44d75843f6c8a47c1568599775f219c72d",
+    "occupied_target_use_authorized": false,
+    "relative_path": "workspace/authored_synthetic_control_probe.py"
+  },
+  "terminal_matrix": {
+    "absent_sidecar_coordinate": "native_harness_terminal_failure",
+    "error_kind_count": 7,
+    "invalid_sidecar_coordinate": "native_harness_terminal_failure",
+    "nonzero_coordinate": "post_hmr_request_boundary_unresolved",
+    "nonzero_counter_count": 5,
+    "pre_request_requires_both": true,
+    "raw_error_retained": false,
+    "raw_stream_read": false,
+    "scenario_count": 24,
+    "special_cause_count": 2,
+    "stage_count": 7,
+    "valid_zero_coordinate": "post_hmr_pre_request_failure"
+  },
+  "transformation": {
+    "accepted_future_runner_sha256": "98cf8db1803c7dbfde867044504a820518e448278faf220c8ec3c5dbb8818805",
+    "consumed_target_absent": true,
+    "independent_hash_fields": true,
+    "predecessor_helper_identity_absent": true,
+    "rebound_future_runner_sha256": "d025d1929f20589e86cbd66e983bda17435c1a21e937468532c38bb4895efb1a",
+    "reverse_binding_exact": true,
+    "target_literal_count": 1
+  }
+}
