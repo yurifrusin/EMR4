@@ -62,6 +62,13 @@ the clockwork accepts only its exact canonical filename. It rejected this too
 before reading content. The failed copy is preserved and the corrected intent
 now occupies the one closed path.
 
+The next read-only check exposed one further clockwork input dependency: the
+intent named the prospective error-register revision, but I had expected the
+clockwork to write its human revision note. It correctly rejected the missing
+document before commands or canonical state. The exact prospective note is now
+an explicit pre-check input, including the revision, total count and ordered
+new incident identifiers.
+
 ## Deliberately closed
 
 No Node, native Harness, broker, DeepSeek worker, model or provider ran. No

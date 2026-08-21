@@ -1,0 +1,130 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free future-attempt identity and target rebinding rehearsal",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_exact_identity_and_target_rebinding_contract",
+    "operation_id": "deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "9b59c6dd7dac9a77030118e83bc81ebf74c3289c",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "git_object_resolution": {
+    "observed_head": "54aad63b0f9c3325d375be64fa6452d01c5b7b5d",
+    "reason_codes": [],
+    "resolved_commit": "9b59c6dd7dac9a77030118e83bc81ebf74c3289c",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "9b59c6dd7dac9a77030118e83bc81ebf74c3289c"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "54aad63b0f9c3325d375be64fa6452d01c5b7b5d",
+    "branch_origin_aligned": false,
+    "head": "54aad63b0f9c3325d375be64fa6452d01c5b7b5d",
+    "origin_branch_commit": "79dd0d63619b340f881ef1af6acb8bea06ecf94c",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 659
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "post_compaction_closeout_recovery",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The tranche under closeout creates the identity and target envelope required before DeepSeek or native Harness execution; dispatch during closeout would violate that boundary.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "gemini_verifier",
+        "rationale": "The rebound bytes, schemas, reversibility, hostile fixtures and canonical terminal are exhaustively deterministic and leave no residual semantic veto.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits delegation and candidate, clockwork closeout and canonical publication form one serial trust boundary.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "clockwork check result",
+      "clockwork publication result",
+      "postpublication governance result",
+      "successor fresh rehydration"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "retain the committed byte-exact latch restoration before clockwork check",
+      "run the read-only clockwork check against the canonical exact-path intent",
+      "publish all canonical surfaces atomically only after check success",
+      "rerun governance after publication before closeout commit and task-branch push"
+    ]
+  },
+  "planned_action": "resume_the_check_gated_clockwork_closeout_from_the_committed_recovery_source",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-future-runner-materialisation-identity-binding-recovery.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/materialisation-evidence.json",
+      "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-future-runner-materialisation-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-future-runner-materialisation.md",
+      "docs/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns this serial provider-free rebinding and clockwork closeout. DeepSeek remains declined until the identity and target envelope is accepted; Gemini remains declined because exhaustive deterministic evidence leaves no residual semantic veto; native subagents remain declined because developer policy prohibits delegation and the binding chain is one serial trust boundary.",
+    "git_refs_and_worktree": "The fresh machine snapshot must resolve the current task branch and upstream relation, all four protected local/origin refs at the configured expected source, a tracked-clean worktree, preserved docs/branding content and all unrelated untracked paths; no Git object identity is supplied in this human evidence field.",
+    "live_handover_current_baton": "The live baton accepts the provider-free future-runner materialisation and controller-terminal fixture and names future-attempt identity plus inert authored-synthetic target rebinding as the active operation.",
+    "protected_evidence_boundaries": "Exactly one fresh disposable future identity and inert authored-synthetic target may remain bound across runner, helper, bundle and terminal. No accepted evidence mutation, executable target, Node, Harness, broker, worker, model, provider, raw stream, product/configuration/API/database/route/adapter/flag/allowlist/grammar/client/waiting-area change, ordinary-practice or generic-status Arrived change, data use, production, deployment, release, Pages or protected-ref movement is allowed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

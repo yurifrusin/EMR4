@@ -81,7 +81,9 @@
           "orchestration/agent_inbox/codex/deepseek-native-harness-future-attempt-identity-target-rebinding-preplanning-v2-receipt.json",
           "orchestration/agent_inbox/codex/deepseek-native-harness-future-attempt-identity-target-rebinding-plan-precommit-receipt.json",
           "orchestration/agent_inbox/codex/deepseek-native-harness-future-attempt-identity-target-rebinding-candidate-precommit-receipt.json",
-          "orchestration/agent_inbox/codex/deepseek-native-harness-future-attempt-identity-target-rebinding-closeout-paper-recovery-precommit-receipt.json"
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-attempt-identity-target-rebinding-closeout-paper-recovery-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-attempt-identity-target-rebinding-post-compaction-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-attempt-identity-target-rebinding-incident-revision-recovery-precommit-receipt.json"
         ],
         "tests": [
           "tests/test_deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal.py",
@@ -162,6 +164,11 @@
       {
         "incident_id": "closed-tick-intent-filename-mismatch",
         "source_id": "rebinding-closeout-intent-filename-001",
+        "peers": []
+      },
+      {
+        "incident_id": "prospective-incident-revision-artifact-omission",
+        "source_id": "rebinding-closeout-incident-revision-001",
         "peers": []
       }
     ],
@@ -435,6 +442,40 @@
         ]
       },
       "baton_summary": "records the rejected noncanonical tick-intent filename and exact closed-path control."
+    },
+    {
+      "attempt_key": "rebinding-closeout-incident-revision-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-future-attempt-identity-target-rebinding",
+      "role": "orchestrator",
+      "resource_id": "clockwork-prospective-incident-revision-artifact",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A live tick carrying agent-error observations must provide the exact prospective human revision document before the clockwork projects and validates the canonical register generation.",
+      "observed_error": "The corrected intent named revision 599 in baton acceptance, but the orchestrator incorrectly expected the clockwork to render that human document and did not create it before check.",
+      "detection_method": "The read-only clockwork check rejected tick_incident_revision_reading before command execution or canonical publication because the exact prospective revision document was absent.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-599.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.prospective_incident_revision_document_not_materialised_before_clockwork_check",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Create the exact prospective revision document with the projected revision, incident count, ordered new incident IDs and one heading per new observation, then rerun the read-only tick.",
+        "prevention_control": "Before every incident-bearing tick, derive the prospective revision reading from the current register plus the ordered intent observations and require that exact document as a pre-check input.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "docs/ariadne-agent-error-correction-register-revision-599.md"
+        ]
+      },
+      "baton_summary": "records the missing prospective incident-revision document and exact pre-check materialisation control."
     }
   ]
 }

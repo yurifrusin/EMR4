@@ -103,6 +103,14 @@ outside the clockwork's closed intent filename. The CLI rejected
 retained, and the corrected live intent now occupies the exact canonical
 `closeout/closeout-intent.json` path.
 
+That corrected intent named the prospective register revision but initially
+omitted the human revision document because the orchestrator expected the
+clockwork to render it. The read-only check rejected
+`tick_incident_revision_reading` before running commands or writing canonical
+state. Revision 599 is now materialised as the exact prospective input with its
+machine-checkable reading and ordered incident headings; future incident-bearing
+ticks require this document before check.
+
 ## Boundary and successor
 
 This proves fresh provider-free identity and inert-target transformation only.

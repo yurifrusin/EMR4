@@ -27,13 +27,13 @@ Gemini and native subagents were declined with negative leverage for this
 provider-free serial boundary. GPT Sol completed implementation, hostile-
 fixture verification, review and acceptance.
 
-The closeout preserves two contained orchestrator corrections: a rejected
-caller-supplied Git object in machine-snapshot prose, and restoration of a
-direct candidate latch update so the clockwork remains the sole canonical
-latch writer, and a rejected guessed live-tick schema replaced by the exact
-machine-read current schema. The clockwork also rejected that correction under
-a noncanonical filename before the exact closed path was used. None changes
-the accepted candidate or opens execution.
+The closeout preserves five contained orchestrator corrections: a rejected
+caller-supplied Git object in machine-snapshot prose; restoration of a direct
+candidate latch update so the clockwork remains the sole canonical latch
+writer; a rejected guessed live-tick schema; a rejected noncanonical intent
+filename; and a missing prospective incident-revision document rejected before
+commands. Each now has an exact deterministic control. None changes the
+accepted candidate or opens execution.
 
 This decision proves deterministic identity and inert-target rebinding only.
 It does not authorise or prove native Harness boot, a DeepSeek worker, model or
