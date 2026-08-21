@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 379,
+  "graph_revision": 380,
   "harvests": [],
   "nodes": [
     {
@@ -28924,9 +28924,114 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal",
+      "title": "Preset-composition safe-terminal bridge rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the bounded native-Harness control sequence and its dependency-satisfied deterministic descendants.",
+          "The one distinct native attempt is consumed without retry; no worker turn, model/provider request, target, product, data, deployment, Pages or protected-ref authority opened.",
+          "The accepted predecessor and this candidate's exact process evidence remain immutable."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-safe-preset-mount-terminal",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/safe-terminal-bridge-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact closed preset-mount coordinate with private identity admission, zero downstream activity and complete cleanup."
+        },
+        {
+          "id": "reject-worker-readiness-and-repair-selection",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/preset-mount-source-coordinate-interpretation.json",
+          "status": "rejected",
+          "summary": "Do not infer preset success, effective tools, model selection, publication veto, worker readiness, exact internal mount cause or a repair."
+        },
+        {
+          "id": "accept-source-reconciliation-successor",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-plan.md",
+          "status": "accepted",
+          "summary": "Freeze one provider-free read-only source reconciliation with zero native processes and a six-coordinate closed candidate vocabulary."
+        },
+        {
+          "id": "accept-sol-safe-terminal-closeout",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-preset-composition-safe-terminal-bridge-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the traceability gain and exact containment without opening a DeepSeek worker or model request."
+        }
+      ],
+      "claim_scope": [
+        "One pinned rc.7 process reached private identity admission and emitted one typed safe terminal.",
+        "The exact accepted coordinate is EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED with no raw runtime detail.",
+        "Public registries, lifecycle announcements, turns, requests, broker, worker, model/provider, network, database, Docker and target activity remained zero.",
+        "The process and disposable root are absent, the bundle and package seed are unchanged, and retry/resume counts are zero.",
+        "Pinned source inspection yields a finite candidate set only; the exact internal mount coordinate and repair remain unobserved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/preset-mount-source-coordinate-interpretation.json",
+          "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-603.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-preset-composition-safe-terminal-bridge.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-composition-safe-terminal-bridge-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-composition-safe-terminal-bridge-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/safe-terminal-sidecar.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/evidence.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/native-attempt-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/safe-terminal-bridge-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/safe-terminal-bridge-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/efficacy-reading.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact internal preset-mount subcoordinate remains unobserved and no repair is selected.",
+        "Preset composition, effective tools, model selection, commit, publication veto, worker readiness and occupied model behavior remain unproved.",
+        "All product, data, provider-request, production, release, Pages and protected-integration gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T04:31:24.1598131+10:00",
+      "updated_at": "2026-08-22T04:31:24.1598131+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "6f67aef39b18ee0d548330dcb5a2492f3e85e22b",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T03:42:19.3682524+10:00"
+  "updated_at": "2026-08-22T04:31:24.1598131+10:00"
 }

@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 602,
+  "register_revision": 603,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "970ddb1218fe3a506689e7ccad6af6ce900f8fd61dc225b116742830fa83b21c",
-  "incident_count": 873,
+  "canonical_register_sha256": "60103b520bb75fb8a1cd53460785868853b79510ceddedcf57a74566fe6f5597",
+  "incident_count": 878,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 493,
       "harness": 65,
-      "operator": 165,
+      "operator": 170,
       "repository": 134,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 95,
       "evidence_misreport": 73,
       "harness_failure": 65,
-      "operator_error": 165,
+      "operator_error": 170,
       "output_contract_violation": 273,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 64,
       "integration_reviewer": 3,
-      "orchestrator": 743,
+      "orchestrator": 748,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 531,
+      "low": 536,
       "material": 131,
       "moderate": 211
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 164,
-      "canonical_unchanged": 546,
+      "canonical_unchanged": 551,
       "untrusted_partial_worktree": 163
     },
     "by_resource_and_role": {
@@ -319,6 +319,11 @@
       "repaired-sentinel-source-author::orchestrator": 1,
       "repaired-sentinel-terminal-claim-wording::orchestrator": 1,
       "retained-human-report-semantic-assertion::orchestrator": 1,
+      "safe-terminal-attempt-schema-assertion::orchestrator": 1,
+      "safe-terminal-closeout-wrapper-selection::orchestrator": 1,
+      "safe-terminal-preexecution-receipt-order::orchestrator": 1,
+      "safe-terminal-private-identity-validator::orchestrator": 1,
+      "safe-terminal-threat-row-assertion::orchestrator": 1,
       "sanitized-error-kind-projector::implementer": 1,
       "sentinel-source-escape-repair-closeout-intent-json::orchestrator": 1,
       "sentinel-source-escape-repair-evidence-generator::orchestrator": 1,

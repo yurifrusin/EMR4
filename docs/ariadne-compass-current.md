@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Continue the bounded native-Harness control sequence by connecting the accepted guard sanitizer to one distinct no-request process.
+> Continue the bounded native-Harness control sequence with a zero-process exact-source reconciliation before any further execution.
 
 ## North star
 
@@ -528,23 +528,25 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The orchestrator contained one real post-HMR failure completely and identified the remaining traceability gap: runner/factory stages need a mandatory finite terminal before any success claim. Lineage parent: `deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof`.
 256. **Make native DeepSeek worker execution bounded, traceable and governable enough for Raisa development — Post-HMR agent-factory closed-subcoordinate diagnostic rehearsal**
    The first self-reporting native factory attempt narrowed an opaque post-HMR exit to the exact interval after private identity admission and before preset composition admission. Lineage parent: `deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal`.
+257. **Make native DeepSeek worker execution bounded, traceable and governable enough for Raisa development — Preset-composition safe-terminal bridge rehearsal**
+   The safe terminal bridge converted an opaque factory failure into one exact closed preset-mount coordinate without raw-error retention or downstream activity. Lineage parent: `deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal`.
 
 ## Current position
 
-**Expose the preset-composition failure through the guard's already accepted safe terminal vocabulary — Post-HMR agent-factory closed-subcoordinate diagnostic rehearsal**
+**Reconcile the exact pinned preset-mount source before designing any further native probe — Preset-composition safe-terminal bridge rehearsal**
 
-**Why this proof came next:** The native process proved the factory and private identity boundary but retained only an outer unclassified coordinate while the guard already supplies a finite sanitizer.
+**Why this proof came next:** The safe terminal identifies preset mounting but deliberately omits the raw internal exception, leaving a finite source-level ambiguity that should be resolved without spending another process.
 
-One distinct process will emit an exact safe guard coordinate or proceed through the prepublication veto without raw error retention.
+One deterministic projection will verify exact source identities and freeze the narrowest source-reachable six-coordinate candidate set.
 
 ### What this unlocks
 
-- A source-grounded repair for the exact preset-composition defect if a safe guard coordinate is returned.
-- A defensible private factory-boundary acceptance if the existing prepublication veto is reached.
+- A separately frozen safe typed subcoordinate probe if more than one source coordinate remains reachable.
+- A source-grounded repair only after an exact internal coordinate is observed.
 
 ### What it does not solve
 
-- No occupied worker turn, model/provider request, target edit or coding-performance evidence.
+- No native process, worker turn, model/provider request, target edit or coding-performance evidence.
 - No product/data action, ordinary-practice enablement, production, deployment, release, Pages or protected integration.
 
 ## Continuity and authority
@@ -1294,7 +1296,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md`
-- `docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-plan.md`
+- `docs/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-plan.md`
 - `docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md`
 - `docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-closeout.md`
@@ -1717,7 +1719,7 @@ Prerequisites:
 - `docs/security/bernie-reception-one-structured-source-language-threat-model-delta.md`
 - `docs/security/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-threat-model-delta.md`
 - `docs/security/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-threat-model-delta.md`
-- `docs/security/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-threat-model-delta.md`
+- `docs/security/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-threat-model-delta.md`
 - `docs/security/dependabot-alert-17-triage-2026-08-01.md`
 - `docs/security/dependabot-alerts-8-15-triage-2026-08-01.md`
 - `docs/security/emr4-model-required-bureau-a3-b3-request-contract-recovery-threat-model-delta.md`
@@ -2700,6 +2702,8 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/integration-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/diagnosis-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/preset-mount-source-coordinate-interpretation.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/safe-terminal-bridge-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json`
@@ -3694,4 +3698,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 361; continuity graph revision 379._
+_Compass map revision 362; continuity graph revision 380._

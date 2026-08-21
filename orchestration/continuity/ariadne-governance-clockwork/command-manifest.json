@@ -2,7 +2,7 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "agent_factory_diagnostic_focused_and_evidence_tests",
+      "command_id": "safe_terminal_focused_and_evidence_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -13,80 +13,66 @@
         "--strict-config",
         "--strict-markers",
         "-q",
-        "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal_evidence.py"
+        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "agent_factory_diagnostic_inherited_regressions",
+      "command_id": "safe_terminal_selected_inherited_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.ariadne_provider_free_pytest",
-        "--repo-root",
-        "C:/Users/sarashera/emr4",
+        "pytest",
+        "--noconftest",
+        "-p",
+        "no:cacheprovider",
+        "--strict-config",
+        "--strict-markers",
+        "-q",
         "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
         "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
         "tests/test_deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal.py",
         "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
         "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py",
         "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
-        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof_evidence.py",
-        "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py"
+        "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "agent_factory_diagnostic_governance_regressions",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "scripts.ariadne_provider_free_pytest",
-        "--repo-root",
-        "C:/Users/sarashera/emr4",
-        "tests/test_ariadne_governance_clockwork_tick.py",
-        "tests/test_ariadne_agent_error_register.py",
-        "tests/test_ariadne_active_operation_latch.py",
-        "tests/test_ariadne_active_operation_latch_continuity.py",
-        "tests/test_agents_handover_archive.py",
-        "tests/test_agents_acceptance_index.py",
-        "tests/test_current_baton_consistency.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required"
-    },
-    {
-      "command_id": "agent_factory_diagnostic_ruff",
+      "command_id": "safe_terminal_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal_evidence.py"
+        "scripts/deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "agent_factory_diagnostic_compile",
+      "command_id": "safe_terminal_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal_evidence.py"
+        "scripts/deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "agent_factory_diagnostic_deterministic_check",
+      "command_id": "safe_terminal_deterministic_check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal",
+        "scripts.deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal",
         "--check"
       ],
       "completion_contract": "final_exit_code_zero_required"

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 602,
+  "register_revision": 603,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -34053,6 +34053,191 @@
       "incident_id": "AER-0873",
       "attempt_id": "clock-69c70bea5d5dcd6bf9c56119",
       "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-preset-composition-safe-terminal-bridge",
+      "role": "orchestrator",
+      "resource_id": "safe-terminal-threat-row-assertion",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A focused test binds the exact frozen threat label and its separate fail-closed control without paraphrasing either.",
+      "observed_error": "The first assertion searched for a positive sentence while the frozen table correctly labels the threat as Raw guard errors escape.",
+      "detection_method": "Focused pytest rejected the absent sentence before any native process was launched.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md",
+        "docs/security/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-threat-model-delta.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.threat_label_rewritten_as_positive_control",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the exact threat-table row in the focused test.",
+        "prevention_control": "Tests quote the frozen label and control separately rather than synthesizing prose.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-603.md"
+        ]
+      },
+      "incident_id": "AER-0874",
+      "attempt_id": "clock-f1cb6678114a1b64126b47c8",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-preset-composition-safe-terminal-bridge",
+      "role": "orchestrator",
+      "resource_id": "safe-terminal-private-identity-validator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Successor identity validation compares against an immutable captured predecessor identity outside temporary module rebinding.",
+      "observed_error": "The first validator compared against the dynamically rebound predecessor global and falsely rejected the distinct successor identity.",
+      "detection_method": "Focused pytest rejected distinct_identity before any native process was launched.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md",
+        "scripts/deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.validator_reads_temporarily_rebound_reference",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Capture the accepted predecessor identity once and compare the successor against that immutable value.",
+        "prevention_control": "Validators do not use temporarily rebound module globals as historical reference values.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-603.md"
+        ]
+      },
+      "incident_id": "AER-0875",
+      "attempt_id": "clock-6c2fb7f9694ebe229cdfdc32",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-preset-composition-safe-terminal-bridge",
+      "role": "orchestrator",
+      "resource_id": "safe-terminal-preexecution-receipt-order",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A preexecution receipt is generated only after its own paths and all implementation paths are committed and the tracked tree is clean.",
+      "observed_error": "The first receipt was generated while its two receipt paths were modified and honestly recorded a dirty tracked tree.",
+      "detection_method": "Immediate receipt readback showed tracked_worktree_clean false; it was not used to authorize execution.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-preset-composition-safe-terminal-bridge-preplanning-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.preexecution_receipt_generated_before_receipt_commit",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Commit the receipt paths, regenerate at the committed source and require clean branch-origin alignment.",
+        "prevention_control": "Receipt generation follows the final receipt-path commit and precedes execution only after clean readback.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-603.md"
+        ]
+      },
+      "incident_id": "AER-0876",
+      "attempt_id": "clock-c59d737fdc57571782679756",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-preset-composition-safe-terminal-bridge",
+      "role": "orchestrator",
+      "resource_id": "safe-terminal-attempt-schema-assertion",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Immutable-evidence tests copy schema identifiers from the retained artifact or owning schema rather than deriving them from operation names.",
+      "observed_error": "The first evidence test guessed a successor-specific attempt schema while the consumed artifact retains the inherited diagnostic schema.",
+      "detection_method": "Focused pytest reported the exact schema_version mismatch without launching a native process.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/native-attempt-consumed.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.schema_identifier_inferred_from_operation_name",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the exact retained schema identifier in the immutable-evidence test.",
+        "prevention_control": "Schema identifiers are copied from an authoritative artifact or schema, never invented by analogy.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py",
+          "docs/ariadne-agent-error-correction-register-revision-603.md"
+        ]
+      },
+      "incident_id": "AER-0877",
+      "attempt_id": "clock-1eb6f8a0349596fb13a6b03f",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-preset-composition-safe-terminal-bridge",
+      "role": "orchestrator",
+      "resource_id": "safe-terminal-closeout-wrapper-selection",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_provider_free_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Closeout command selection carries forward the accepted host cache-location constraint for deterministic native-Harness checks.",
+      "observed_error": "The first inherited command repeated the incompatible provider-free wrapper and failed with localappdata_missing in two deterministic checks.",
+      "detection_method": "The wrapper emitted only the typed local resource guard failures and native-process count remained zero.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md",
+        "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-explicit-cache-root-test-recovery.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.provider_free_wrapper_reused_despite_cache_constraint",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the predecessor-approved no-conftest pytest invocation for the exact selected inherited tests.",
+        "prevention_control": "Verifier environment constraints are inherited as typed command-selection inputs across descendant closeouts.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-implementation-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-603.md"
+        ]
+      },
+      "incident_id": "AER-0878",
+      "attempt_id": "clock-655a3cae9f2b109209cb2f16",
+      "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"
     }
