@@ -713,7 +713,7 @@ def validate_runner_source(payload: bytes) -> dict[str, Any]:
 
 
 def sentinel_source() -> bytes:
-    return b'''import { appendFileSync, existsSync, readFileSync } from "node:fs";
+    return br'''import { appendFileSync, existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 export const name = "synthetic-worker-hmr-sentinel";
