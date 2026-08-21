@@ -1,0 +1,104 @@
+{
+  "candidate_source": "ceac8b2600530bf858394bb84e66a42ec3d016f4",
+  "claim_boundary": {
+    "environment_values_retained": false,
+    "exact_previous_abort_cause_proven": false,
+    "minimum_environment_fixture_passed": true,
+    "occupied_model_launch_authorized": false,
+    "raw_runtime_detail_retained": false,
+    "repair_selected": false,
+    "retry_authorized": false,
+    "runner_integrated": false,
+    "safe_reduction_only": true,
+    "sanitizer_admitted": true,
+    "worker_launch_authorized": false
+  },
+  "closed_codes": [
+    "PRESET_MOUNT_AGENT_SCOPE_ABSENT",
+    "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE",
+    "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED",
+    "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT",
+    "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT",
+    "PRESET_MOUNT_ROOT_SERVICE_LEAK",
+    "PRESET_MOUNT_UNCLASSIFIED"
+  ],
+  "code_counts": {
+    "PRESET_MOUNT_AGENT_SCOPE_ABSENT": 2,
+    "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE": 1,
+    "PRESET_MOUNT_ROOT_SERVICE_LEAK": 1,
+    "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED": 1,
+    "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT": 1,
+    "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT": 1,
+    "PRESET_MOUNT_UNCLASSIFIED": 8
+  },
+  "environment": {
+    "key_count": 5,
+    "keys": [
+      "SystemRoot",
+      "WINDIR",
+      "ComSpec",
+      "TEMP",
+      "TMP"
+    ],
+    "node_options_present": false,
+    "path_present": false,
+    "unlisted_key_count": 0,
+    "values_retained": false
+  },
+  "fixture": {
+    "attempt_id": "attempt-001",
+    "authored_synthetic": true,
+    "child_process_count": 0,
+    "filesystem_api_count": 0,
+    "fixture_environment_read_count": 0,
+    "forbidden_detail_absent": true,
+    "lineage_cumulative_node_process_count": 4,
+    "native_harness_import_count": 0,
+    "network_api_count": 0,
+    "node_process_count": 1,
+    "prior_consumed_node_process_count": 3,
+    "result_count": 15,
+    "stderr_bytes": 0,
+    "stdout_exact": true
+  },
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery",
+  "process_envelope_sha256": "09062119facf39a968145db634c19ed0a3aa5d1e2dc29b0cd3bd7077495caba2",
+  "repository_bindings": [
+    {
+      "bytes": 2439,
+      "passed": true,
+      "path": "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer.mjs",
+      "sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f"
+    },
+    {
+      "bytes": 3997,
+      "passed": true,
+      "path": "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_fixture.mjs",
+      "sha256": "601bb41f21916fc836603e54cb5caecec6987e75347609ff1881eef758940788"
+    }
+  ],
+  "result": "pass",
+  "schema_version": "ariadne.native_harness_preset_mount_windows_minimum_environment_evidence.v1",
+  "upstream_source_binding": {
+    "bytes": 52188,
+    "package_version": "0.1.0-rc.7",
+    "passed": true,
+    "path": "dsh-agent-presets/lib/index.js",
+    "sha256": "a0b417514e3d285ad5fef74867e8049af333ebdec6e4d7639e388aa0903e0039"
+  },
+  "zero_counters": {
+    "broker_process_count": 0,
+    "broker_request_count": 0,
+    "database_invocation_count": 0,
+    "docker_invocation_count": 0,
+    "model_request_count": 0,
+    "native_harness_process_count": 0,
+    "network_attempt_count": 0,
+    "occupied_worker_count": 0,
+    "provider_request_count": 0,
+    "request_count": 0,
+    "target_creation_count": 0,
+    "target_use_count": 0,
+    "turn_count": 0
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "attempt_id": "attempt-001",
+  "candidate_source": "ceac8b2600530bf858394bb84e66a42ec3d016f4",
+  "environment": {
+    "key_count": 5,
+    "keys": [
+      "SystemRoot",
+      "WINDIR",
+      "ComSpec",
+      "TEMP",
+      "TMP"
+    ],
+    "node_options_present": false,
+    "path_present": false,
+    "unlisted_key_count": 0,
+    "values_retained": false
+  },
+  "further_process_authorized": false,
+  "lineage_cumulative_node_process_count": 4,
+  "native_harness_process_count": 0,
+  "node_process_count": 1,
+  "numeric_exit_code": 0,
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery",
+  "prior_consumed_node_process_count": 3,
+  "raw_runtime_detail_retained": false,
+  "schema_version": "ariadne.native_harness_preset_mount_windows_minimum_environment_process_envelope.v1",
+  "stderr_bytes": 0,
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 1187,
+  "stdout_sha256": "f292b58587dfb320afbbdc4b5d7ce27281869ab7e7b645bbddb19614a75679e2",
+  "stream_content_retained": false
+}
