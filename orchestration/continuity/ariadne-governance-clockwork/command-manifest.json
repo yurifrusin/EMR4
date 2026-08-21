@@ -2,26 +2,54 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "authored_synthetic_native_worker_attempt_005_checkpoint_provider_free_tests",
+      "command_id": "attempt_005_postterminal_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "attempt_005_governance_tests",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/emr4",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_active_operation_latch.py",
         "tests/test_current_baton_consistency.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "authored_synthetic_native_worker_attempt_005_checkpoint_controller_check",
+      "command_id": "attempt_005_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005",
-        "--check"
+        "ruff",
+        "check",
+        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "attempt_005_compile",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "py_compile",
+        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

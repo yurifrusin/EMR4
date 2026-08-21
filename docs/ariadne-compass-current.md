@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Rehydrate, resolve the exact full source, freeze a fresh clockwork checkpoint and admit at most one occupied attempt-005 process under the established one-request/no-retry envelope.
+> Inspect and instrument the closed runner pre-request stages; do not launch another occupied process.
 
 ## North star
 
@@ -512,32 +512,31 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One canonical provider-free process reached stock-headless readiness with the mandatory inert task and complete cleanup. Lineage parent: `deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis`.
 248. **Convert the accepted startup repair chain into one exact fail-closed worker-attempt envelope — Native Harness attempt 005 deterministic readiness decision**
    The current repaired native-Harness composition is deterministically representable for one separately checkpointed attempt 005 with zero process activity. Lineage parent: `deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof`.
+249. **Test whether the native Harness can provide bounded, orchestrator-controlled DeepSeek worker execution — Native Harness bounded-worker attempt 005 runner terminal**
+   The one occupied identity passed full HMR readiness and entered the custom runner, then failed before provider I/O with exact cleanup but only a generic runner code. Lineage parent: `raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision`.
 
 ## Current position
 
-**Checkpoint and consume at most one traceable native DeepSeek worker attempt — Native Harness attempt 005 deterministic readiness decision**
+**Identify and instrument the custom runner's pre-request failure without spending another occupied attempt — Native Harness bounded-worker attempt 005 runner terminal**
 
-**Why this proof came next:** The stock readiness proof and process-free attempt-005 decision both pass, while all previous worker attempts remain consumed and non-resumable.
+**Why this proof came next:** The terminal rules out pre-HMR startup but its generic catch cannot distinguish the bounded runner sub-stages.
 
-A fresh preexecution checkpoint will either admit one exact occupied attempt-005 process or fail closed before Node, broker, model or provider activity.
+A provider-free source reading and closed diagnostic design will decide the narrowest correction before any later occupied proof.
 
 ### What this unlocks
 
-- One traceable bounded DeepSeek worker opportunity using the repaired runner and broker composition.
-- Direct evidence of whether the Harness reaches runner HMR and one model-requested edit after the startup repairs.
+- A stage-grounded repair-or-stop decision for the native runner.
+- A later separately authorised occupied proof only after diagnostic acceptance.
 
 ### What it does not solve
 
-- No retry, second worker or generic reliability claim.
-- No product, patient, clinical or historical data and no product runtime.
-- No deployment, release, Pages or protected-ref authority.
+- No native Harness, broker, worker, model or provider process.
+- No occupied retry, product work, data use, deployment or protected integration.
 
 ## Continuity and authority
 
 - Current-node audit: **passed**
-- Bounded opening `model-runtime`: At most one fresh native Harness model-runtime attempt 005 after a separate latch, full rehydration, exact source resolution and clockwork checkpoint.
-- Bounded opening `provider-call`: At most one DeepSeek provider request inside the same consumed attempt-005 envelope, with zero retry, resume, fallback or auxiliary model.
-- All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `pii`, `production`, `protected-evidence`, `release`, `security-review`, `stage-3b`, `voice`.
+- All other named boundaries remain closed: `api-change`, `appointment-write`, `autonomous-action`, `container-runtime`, `deployment`, `event-runtime`, `historical-diary`, `model-runtime`, `pii`, `production`, `protected-evidence`, `provider-call`, `release`, `security-review`, `stage-3b`, `voice`.
 
 ## Product decision horizon
 
@@ -1327,6 +1326,7 @@ Prerequisites:
 - `docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-002-failed-closed-closeout.md`
 - `docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003-failed-closed-closeout.md`
 - `docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004-closeout.md`
+- `docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-closeout.md`
 - `docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-closeout.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-closeout.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-design.md`
@@ -2230,7 +2230,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-packet.md`
@@ -2740,6 +2739,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-002/occupied-terminal.json`
 - `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-003/efficacy-reading.json`
 - `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/efficacy-reading.json`
+- `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/diagnosis.md`
+- `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/efficacy-reading.json`
+- `orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-terminal.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-cost-ledger.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/occupied-rehearsal-evidence.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-free-acceptance-evidence.json`
@@ -3664,4 +3666,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 353; continuity graph revision 371._
+_Compass map revision 354; continuity graph revision 372._

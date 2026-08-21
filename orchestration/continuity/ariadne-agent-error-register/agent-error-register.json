@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 594,
+  "register_revision": 595,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -32087,6 +32087,298 @@
       },
       "incident_id": "AER-0820",
       "attempt_id": "clock-be75cb767687b0cbac7fb90e",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-005-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-preflight-configuration",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_powershell_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Read-only absence checks must consume the exact keys exported by the attempt controller configuration.",
+      "observed_error": "The first query addressed non-existent disposable_root and evidence_root property names instead of the exported attempt_root and evidence_root coordinates.",
+      "detection_method": "PowerShell rejected the null Test-Path argument before preparation, Harness, broker, model or provider activity.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-595.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preflight_used_unresolved_controller_configuration_property",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve the exported attempt configuration and use only its actual attempt_root and evidence_root keys.",
+        "prevention_control": "Every preflight property is read from the controller's exported configuration before composing an absence query.",
+        "evidence_paths": [
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py"
+        ]
+      },
+      "incident_id": "AER-0821",
+      "attempt_id": "clock-5f0af86b617ebf2d08abb78f",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-005-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-process-absence-query",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_powershell_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A process-absence reading must not match the observation command that produces it.",
+      "observed_error": "The first broad command-line query matched its own PowerShell command and reported one false process.",
+      "detection_method": "Readback showed the sole result was the observing PowerShell command rather than node.exe or a Harness-owned process.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-595.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.process_absence_query_self_matched_observer_command",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Filter exact node.exe processes before matching Harness, broker, attempt-root or package coordinates.",
+        "prevention_control": "Owned-process absence readings use executable identity first and bounded owned coordinates second.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-595.md"
+        ]
+      },
+      "incident_id": "AER-0822",
+      "attempt_id": "clock-a34aa3faf4dcf323d002e21b",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-005-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-historical-test-selection",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A widened descendant packet must not apply a predecessor's deliberately live-latch-bound selector to the current operation.",
+      "observed_error": "The first widened packet selected attempt 004's provider-free live-latch test while the latch correctly named attempt 005.",
+      "detection_method": "Pytest failed only that historical selector; all other selected predecessor and current tests passed without Harness or provider activity.",
+      "evidence_paths": [
+        "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-historical-test-selection.md",
+        "docs/ariadne-agent-error-correction-register-revision-595.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.descendant_packet_applied_predecessor_live_latch_selector",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Freeze the exact three-selector applicability boundary and rerun the 97-test widened and 219-test admission packets.",
+        "prevention_control": "Every historical selector is classified as immutable-artifact, digest-equality or live-latch-bound before descendant selection.",
+        "evidence_paths": [
+          "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-historical-test-selection.md"
+        ]
+      },
+      "incident_id": "AER-0823",
+      "attempt_id": "clock-5212f3d0812ba601e45c132a",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-005-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-postterminal-baseline-assertion",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_apply_patch",
+      "stage": "acceptance",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The immutable baseline digest must be asserted by one direct exact comparison with no dead branch or alternate value.",
+      "observed_error": "The first postterminal test draft accidentally wrapped the exact digest assertion in an always-false conditional expression.",
+      "detection_method": "Immediate source readback identified the dead conditional before the test, staging or acceptance packet ran.",
+      "evidence_paths": [
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py",
+        "docs/ariadne-agent-error-correction-register-revision-595.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.postterminal_exact_digest_assertion_contained_dead_conditional",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the conditional and retain one direct assertion of the exact 64-character baseline digest.",
+        "prevention_control": "Exact retained-evidence assertions receive source readback plus lint and focused execution before staging.",
+        "evidence_paths": [
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py"
+        ]
+      },
+      "incident_id": "AER-0824",
+      "attempt_id": "clock-08747b56158187b134e3c398",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-005-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-post-hmr-runner-diagnostic",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "deepseek_native_harness",
+      "stage": "acceptance",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "A bounded post-HMR runner failure must retain a closed sanitized stage coordinate precise enough to guide provider-free recovery.",
+      "observed_error": "The accepted runner catch discarded the exception and retained only CUSTOM_RUNNER_FAILURE, leaving five bounded pre-request sub-stages indistinguishable.",
+      "detection_method": "The immutable terminal proved both HMR events, runner activation, zero provider requests and the generic runner code with no finer diagnostic sidecar.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-terminal.json",
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/diagnosis.md",
+        "docs/ariadne-agent-error-correction-register-revision-595.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.post_hmr_runner_catch_retained_only_generic_failure_code",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume attempt 005 without retry and open only a provider-free source diagnosis plus closed-stage diagnostic design.",
+        "prevention_control": "No later occupied attempt may be admitted until post-HMR pre-request diagnostics use a schema-closed sanitized stage vocabulary and pass deterministic validation.",
+        "evidence_paths": [
+          "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-closeout.md",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/diagnosis.md"
+        ]
+      },
+      "incident_id": "AER-0825",
+      "attempt_id": "clock-cf4a3cd9acedd3c28d4fd2e7",
+      "origin": "harness",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-005-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-closeout-incident-category",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every incident-bearing closeout intent must pass the register's closed category vocabulary before its source is committed.",
+      "observed_error": "The first pre-commit intent described the runner diagnostic gap as orchestration_failure instead of selecting the admitted harness_failure category.",
+      "detection_method": "Direct validate_tick_intent admission rejected at tick_incident_category before commit, publication or any Harness/provider activity.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-595.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_incident_used_descriptive_unadmitted_category",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the descriptive category with harness_failure and rerun full direct intent admission before source freeze.",
+        "prevention_control": "Incident category, stage, state and disposition values are selected from exported schema constants and admitted together before commit.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0826",
+      "attempt_id": "clock-352be3a3dd38d87c8e18816e",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-005-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-postcloseout-test-selection",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "A postcloseout packet must exclude every test whose contract requires the closed operation to remain the live latch.",
+      "observed_error": "The first postpublication packet retained attempt 005's prelaunch-only provider-free check after clockwork had correctly activated the successor latch.",
+      "detection_method": "The 545-selector packet failed only the live-latch-bound provider-free check; all other selectors passed and zero Harness/provider activity occurred.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/clockwork-postpublication-verification-rejected-receipt.json",
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/clockwork-rollback-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-595.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.postcloseout_packet_retained_closed_operation_live_latch_selector",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Roll back the published generation byte-exactly, remove the selector from both postterminal command manifests and rerun before republishing.",
+        "prevention_control": "Closeout verification classifies selectors against the prospective successor latch before intent source freeze.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/postterminal-command-manifest.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0827",
+      "attempt_id": "clock-63a05ad06ba416c9ff413614",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "attempt-005-occupied",
+      "role": "orchestrator",
+      "resource_id": "attempt-005-clockwork-rollback-command",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Clockwork rollback must use its exact argument-free predecessor-selection interface.",
+      "observed_error": "The first rollback invocation supplied the unsupported --intent argument.",
+      "detection_method": "Argparse rejected the command before state change, then the exact --rollback invocation passed byte-exactly at lease 122.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/clockwork-rollback-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-595.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_rollback_supplied_unsupported_intent_argument",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Invoke clockwork rollback without an intent argument and preserve the byte-exact rollback receipt.",
+        "prevention_control": "Read the rollback CLI help and use the fixed argument-free rollback shape before execution.",
+        "evidence_paths": [
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/clockwork-rollback-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0828",
+      "attempt_id": "clock-d6103330e3c57cc45a57baa8",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

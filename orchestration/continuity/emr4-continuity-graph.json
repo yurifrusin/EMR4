@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 371,
+  "graph_revision": 372,
   "harvests": [],
   "nodes": [
     {
@@ -27975,9 +27975,124 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
+      "title": "Native Harness bounded-worker attempt 005 runner terminal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorised one attempt-005 occupied identity under standing uninterrupted-development authority.",
+          "The attempt is consumed with zero retry, resume, fallback or second-worker authority.",
+          "No product, data, production, deployment, Pages or protected integration authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-consumed-failed-closed-terminal",
+          "source": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one native process, exit one, zero provider calls, zero retries and complete cleanup as the final attempt-005 result."
+        },
+        {
+          "id": "accept-partial-runner-localization",
+          "source": "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept both HMR coordinates and runner activation as an execution-path improvement while recording only partial pre-request localization."
+        },
+        {
+          "id": "reject-native-worker-readiness",
+          "source": "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-closeout.md",
+          "status": "rejected",
+          "summary": "Reject every claim that DeepSeek was reached, model performance was measured or native Harness is ready for EMR4 worker use."
+        },
+        {
+          "id": "decline-postterminal-gemini-call",
+          "source": "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Decline Gemini because no code candidate or provider result survived and the closed machine terminal is decisive."
+        },
+        {
+          "id": "accept-contained-attempt-005-workflow-incidents",
+          "source": "docs/ariadne-agent-error-correction-register-revision-595.md",
+          "status": "accepted",
+          "summary": "Accept eight corrected or contained workflow and diagnostic observations with none open."
+        }
+      ],
+      "claim_scope": [
+        "Exactly one native Harness attempt-005 process started and exited one after both HMR readiness coordinates.",
+        "The custom runner activated and failed before its first model request with the closed generic code CUSTOM_RUNNER_FAILURE.",
+        "The broker recorded zero provider requests and the runner recorded no model or tool activity.",
+        "No candidate path changed; retry, fallback and auxiliary-model counts are zero.",
+        "Harness, broker and the exact disposable root are absent after cleanup.",
+        "The Harness advanced past attempt-004 startup but remains unready for EMR4 worker use."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-plan.md",
+          "docs/security/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-terminal.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/efficacy-reading.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/diagnosis.md"
+        ],
+        "closeouts": [
+          "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-005-sol-deterministic-admission-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-attempt-005-occupied-prelaunch-receipt.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/clockwork-checkpoint-tick-evidence.json"
+        ],
+        "tests": [
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005.py",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-attempt-consumed.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-report.md",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/postterminal-command-manifest.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/clockwork-postpublication-verification-rejected-receipt.json",
+          "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/clockwork-rollback-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-595.md",
+          "orchestration/human_inbox/yuri/2026-08-21--native-harness-attempt-005-terminal.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact custom-runner pre-request sub-stage remains unidentified.",
+        "DeepSeek provider, reasoning, coding and tool behavior were not reached.",
+        "Native Harness worker readiness and product-use authority remain closed.",
+        "Every attempt-005 identity is consumed and no occupied retry is authorised."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-21T19:35:59.5541506+10:00",
+      "updated_at": "2026-08-21T19:35:59.5541506+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "484a2bf3819d95e674aa7b1a57dbaa9cd1b25d68",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-21T18:25:14.5439157+10:00"
+  "updated_at": "2026-08-21T19:35:59.5541506+10:00"
 }

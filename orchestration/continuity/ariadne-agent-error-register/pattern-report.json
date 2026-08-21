@@ -1,24 +1,24 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 594,
+  "register_revision": 595,
   "source_cutoff_on": "2026-08-21",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "9306fff4adc88fbbada72bf276a934d161f1f75fd484d967bebc867f3c550ca6",
-  "incident_count": 820,
+  "canonical_register_sha256": "fb4d1be67eeec8a9ce898a6ae873bab96391facafaa4936e64a59c62558ef6f4",
+  "incident_count": 828,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 482,
-      "harness": 61,
-      "operator": 130,
+      "harness": 62,
+      "operator": 137,
       "repository": 131,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 93,
       "evidence_misreport": 71,
-      "harness_failure": 61,
-      "operator_error": 130,
+      "harness_failure": 62,
+      "operator_error": 137,
       "output_contract_violation": 266,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 57,
       "integration_reviewer": 3,
-      "orchestrator": 697,
+      "orchestrator": 705,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 496,
+      "low": 502,
       "material": 129,
-      "moderate": 195
+      "moderate": 197
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 151,
-      "canonical_unchanged": 510,
+      "accepted_candidate_changed": 155,
+      "canonical_unchanged": 514,
       "untrusted_partial_worktree": 159
     },
     "by_resource_and_role": {
@@ -100,7 +100,15 @@
       "attempt-004-prelaunch-adapter-probe-method::orchestrator": 1,
       "attempt-004-prelaunch-workspace-receipt::orchestrator": 1,
       "attempt-004-provider-free-test-inventory::orchestrator": 1,
+      "attempt-005-clockwork-rollback-command::orchestrator": 1,
+      "attempt-005-closeout-incident-category::orchestrator": 1,
       "attempt-005-deterministic-command-manifest::orchestrator": 1,
+      "attempt-005-historical-test-selection::orchestrator": 1,
+      "attempt-005-post-hmr-runner-diagnostic::orchestrator": 1,
+      "attempt-005-postcloseout-test-selection::orchestrator": 1,
+      "attempt-005-postterminal-baseline-assertion::orchestrator": 1,
+      "attempt-005-preflight-configuration::orchestrator": 1,
+      "attempt-005-process-absence-query::orchestrator": 1,
       "attempt-005-worker-packet-builder::orchestrator": 1,
       "authored-synthetic-native-worker-controller-broker-handshake::orchestrator": 1,
       "authored-synthetic-native-worker-exact-root-cleanup::orchestrator": 1,

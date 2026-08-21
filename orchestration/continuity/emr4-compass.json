@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 353,
-  "updated_at": "2026-08-21T18:25:14.5439157+10:00",
-  "source_graph_revision": 371,
-  "orientation_statement": "Rehydrate, resolve the exact full source, freeze a fresh clockwork checkpoint and admit at most one occupied attempt-005 process under the established one-request/no-retry envelope.",
+  "map_revision": 354,
+  "updated_at": "2026-08-21T19:35:59.5541506+10:00",
+  "source_graph_revision": 372,
+  "orientation_statement": "Inspect and instrument the closed runner pre-request stages; do not launch another occupied process.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4641,25 +4641,34 @@
         "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/deterministic-evidence.json",
         "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-closeout.md"
       ]
+    },
+    {
+      "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
+      "lineage_parent": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+      "strategic_role": "Test whether the native Harness can provide bounded, orchestrator-controlled DeepSeek worker execution",
+      "outcome": "The one occupied identity passed full HMR readiness and entered the custom runner, then failed before provider I/O with exact cleanup but only a generic runner code.",
+      "evidence": [
+        "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/efficacy-reading.json",
+        "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
-    "strategic_role": "Checkpoint and consume at most one traceable native DeepSeek worker attempt",
-    "why_now": "The stock readiness proof and process-free attempt-005 decision both pass, while all previous worker attempts remain consumed and non-resumable.",
-    "outcome": "A fresh preexecution checkpoint will either admit one exact occupied attempt-005 process or fail closed before Node, broker, model or provider activity.",
+    "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005",
+    "strategic_role": "Identify and instrument the custom runner's pre-request failure without spending another occupied attempt",
+    "why_now": "The terminal rules out pre-HMR startup but its generic catch cannot distinguish the bounded runner sub-stages.",
+    "outcome": "A provider-free source reading and closed diagnostic design will decide the narrowest correction before any later occupied proof.",
     "unlocks": [
-      "One traceable bounded DeepSeek worker opportunity using the repaired runner and broker composition.",
-      "Direct evidence of whether the Harness reaches runner HMR and one model-requested edit after the startup repairs."
+      "A stage-grounded repair-or-stop decision for the native runner.",
+      "A later separately authorised occupied proof only after diagnostic acceptance."
     ],
     "does_not_solve": [
-      "No retry, second worker or generic reliability claim.",
-      "No product, patient, clinical or historical data and no product runtime.",
-      "No deployment, release, Pages or protected-ref authority."
+      "No native Harness, broker, worker, model or provider process.",
+      "No occupied retry, product work, data use, deployment or protected integration."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/deterministic-evidence.json",
-      "orchestration/agent_inbox/codex/raisa-native-harness-attempt-005-readiness-sol-acceptance.md"
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-005/diagnosis.md"
     ]
   },
   "decision_horizon": [
