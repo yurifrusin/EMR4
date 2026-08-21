@@ -1,0 +1,126 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free preset-mount sanitized-terminal native rehearsal",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_derive_the_exact_native_materialisation_controller_and_freeze_one_process_before_execution",
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "7b87189de73319be8f68113984e34e150688d59f",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "c1ae13df334dfdffefb229c3ae5a502a7251451c",
+    "reason_codes": [],
+    "resolved_commit": "7b87189de73319be8f68113984e34e150688d59f",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "7b87189de73319be8f68113984e34e150688d59f"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "c1ae13df334dfdffefb229c3ae5a502a7251451c",
+    "branch_origin_aligned": true,
+    "head": "c1ae13df334dfdffefb229c3ae5a502a7251451c",
+    "origin_branch_commit": "c1ae13df334dfdffefb229c3ae5a502a7251451c",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 665
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "consumed-attempt offline recovery preplanning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The one native process is consumed; asking DeepSeek to inspect or repeat its own governed attempt would violate the no-retry boundary.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The remaining work is a deterministic digest, schema-version, closed-terminal and exact-root cleanup transaction with no semantic product question.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits delegation and the retained disposable root requires a single serial owner until cleanup is proved.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "offline admission result",
+      "cleanup result",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "freeze the exact zero-process recovery",
+      "bind the consumed attempt and content-free envelope",
+      "admit only the exact retained typed sidecar",
+      "write the typed projection before cleanup",
+      "remove only the exact verified disposable root",
+      "close without retry"
+    ]
+  },
+  "planned_action": "freeze_and_implement_a_zero_process_offline_admission_recovery_for_the_consumed_native_attempt_preserve_the_content_free_envelope_admit_only_the_hash_bound_typed_terminal_complete_exact_cleanup_and_authorize_no_retry",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-threat-model-delta.md",
+      "scripts/deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/native-attempt-consumed.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/attempt-001-process-envelope.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial offline recovery. DeepSeek is declined because its consumed native process is the governed evidence; Gemini is declined because the remaining decision is exact hash, schema and cleanup admission; native subagents are prohibited.",
+    "git_refs_and_worktree": "The receipt builder supplies every current Git identity. Caller prose supplies none. Its machine snapshot must preserve task-branch alignment, fixed protected refs, unrelated untracked files and docs/branding.",
+    "live_handover_current_baton": "The Current Baton retains the accepted native-Harness control lineage and the active latch names the preset-mount sanitized-terminal native rehearsal.",
+    "protected_evidence_boundaries": "The sole native process is consumed and may not be retried or resumed. Recovery is offline, retains no raw stream or error detail, launches no Node, Harness, worker, model or provider process, admits no product or data authority, and must clean the exact disposable root."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
