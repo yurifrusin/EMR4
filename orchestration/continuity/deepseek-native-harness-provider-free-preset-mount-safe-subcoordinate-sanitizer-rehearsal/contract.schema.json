@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Native Harness preset-mount safe-subcoordinate sanitizer contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "planning_source",
+    "accepted_source_candidate",
+    "accepted_source_contract",
+    "seed_relative_path",
+    "upstream_source",
+    "repository_files",
+    "upstream_source_anchors",
+    "closed_codes",
+    "expected_result_codes",
+    "required_zero_counters"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_preset_mount_safe_subcoordinate_sanitizer_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_source_candidate": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_source_contract": {"type": "string", "minLength": 1},
+    "seed_relative_path": {"type": "string", "minLength": 1},
+    "upstream_source": {"$ref": "#/$defs/sourceBinding"},
+    "repository_files": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {"$ref": "#/$defs/repositoryBinding"}
+    },
+    "upstream_source_anchors": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "closed_codes": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/code"}
+    },
+    "expected_result_codes": {
+      "type": "array",
+      "minItems": 15,
+      "maxItems": 15,
+      "items": {"$ref": "#/$defs/code"}
+    },
+    "required_zero_counters": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "code": {
+      "enum": [
+        "PRESET_MOUNT_AGENT_SCOPE_ABSENT",
+        "PRESET_MOUNT_COMPOSITION_STAMP_UNREADABLE",
+        "PRESET_MOUNT_ROW_IMPORT_OR_APPLY_REJECTED",
+        "PRESET_MOUNT_SUBTREE_PUBLICATION_ABSENT",
+        "PRESET_MOUNT_ROW_INACTIVE_AFTER_AWAIT",
+        "PRESET_MOUNT_ROOT_SERVICE_LEAK",
+        "PRESET_MOUNT_UNCLASSIFIED"
+      ]
+    },
+    "repositoryBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "sourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256", "package_version"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "package_version": {"const": "0.1.0-rc.7"}
+      }
+    }
+  }
+}
