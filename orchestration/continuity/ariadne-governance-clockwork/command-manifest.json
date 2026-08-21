@@ -2,17 +2,17 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "runner_bridge_persisted_check",
+      "command_id": "native_offline_recovery_check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal",
+        "scripts.deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_offline_admission_recovery",
         "--check"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "runner_bridge_selected_tests",
+      "command_id": "native_recovery_focused_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -23,36 +23,33 @@
         "--strict-config",
         "--strict-markers",
         "-q",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py",
-        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_windows_minimum_environment_recovery.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py"
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_offline_admission_recovery.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "runner_bridge_ruff",
+      "command_id": "native_recovery_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py"
+        "scripts/deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+        "scripts/deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_offline_admission_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_offline_admission_recovery.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "runner_bridge_compile",
+      "command_id": "native_recovery_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py"
+        "scripts/deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+        "scripts/deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_offline_admission_recovery.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

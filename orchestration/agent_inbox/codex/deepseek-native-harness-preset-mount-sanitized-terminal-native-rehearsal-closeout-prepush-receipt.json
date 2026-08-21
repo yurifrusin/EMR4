@@ -1,0 +1,124 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free preset-mount composition-unclassified source reconciliation rehearsal",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_exact_process_free_source_reconciliation_contract",
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "f97d6bd035cd9408bf561f36c802a9687fbddd58",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "f97d6bd035cd9408bf561f36c802a9687fbddd58",
+    "reason_codes": [],
+    "resolved_commit": "f97d6bd035cd9408bf561f36c802a9687fbddd58",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "f97d6bd035cd9408bf561f36c802a9687fbddd58"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "f97d6bd035cd9408bf561f36c802a9687fbddd58",
+    "branch_origin_aligned": true,
+    "head": "f97d6bd035cd9408bf561f36c802a9687fbddd58",
+    "origin_branch_commit": "f97d6bd035cd9408bf561f36c802a9687fbddd58",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 663
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "native closeout prepush and process-free successor handoff",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native attempt is consumed and the successor explicitly authorises only process-free source reconciliation.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Canonical closeout publication and initial exact source inventory are deterministic; reassess only if reconciliation leaves a genuine semantic ambiguity.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits delegation and the canonical clockwork surfaces require one serial owner.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "postpush verification",
+      "source reconciliation ambiguity",
+      "successor preacceptance"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "verify the published clockwork generation",
+      "commit only generated canonical and closeout receipt surfaces",
+      "push and verify branch alignment",
+      "send the non-PHI closeout notification",
+      "rehydrate the process-free successor"
+    ]
+  },
+  "planned_action": "commit_and_publish_the_single_clockwork_generated_closeout_generation_preserving_revision_608_continuity_compass_current_baton_and_the_process_free_source_reconciliation_latch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitized-terminal-native-rehearsal-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/offline-recovery-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/closeout/clockwork-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns clockwork-surface commit and process-free successor planning. DeepSeek is declined because no worker or native process is authorised; Gemini is declined until source reconciliation creates semantic ambiguity; native subagents are prohibited.",
+    "git_refs_and_worktree": "The receipt builder supplies every current Git identity. Caller prose supplies none. Its machine snapshot must preserve task-branch alignment, fixed protected refs, unrelated untracked files and docs/branding.",
+    "live_handover_current_baton": "The clockwork-projected Current Baton accepts the finite negative native result, zero-process recovery and process-free source-reconciliation successor.",
+    "protected_evidence_boundaries": "Commit only the generated closeout and receipt surfaces; no native retry, Node, Harness, worker/model/provider process, product/data action, deployment, Pages, protected evidence or protected-ref movement."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

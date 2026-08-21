@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 366,
-  "updated_at": "2026-08-22T06:36:06.5611095+10:00",
-  "source_graph_revision": 384,
-  "orientation_statement": "Run one provider-free native rc.7 process with the exact admitted bridge, zero turns and zero provider requests, then stop without retry.",
+  "map_revision": 367,
+  "updated_at": "2026-08-22T07:43:26.3147932+10:00",
+  "source_graph_revision": 385,
+  "orientation_statement": "Reconcile the exact source-owned unclassified composition coordinate without Node, native Harness, worker, model or provider execution.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4773,25 +4773,35 @@
         "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal/attempt-001-process-envelope.json",
         "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-closeout.md"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+      "lineage_parent": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+      "strategic_role": "Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development",
+      "outcome": "One native process was constrained to a private zero-request attempt and yielded a finite recoverable composition failure instead of an opaque transport loss.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/attempt-001-process-envelope.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/offline-recovery-evidence.json",
+        "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
-    "strategic_role": "Turn the native rc.7 engine once with the exact new terminal gauge attached while keeping DeepSeek and providers off",
-    "why_now": "The source bridge, precedence, hashes, process envelope and pure finite vector are accepted; only native materialisation and terminal survival remain unproved.",
-    "outcome": "One disposable native process will yield one finite typed terminal before any turn, worker action or provider request, then clean up without retry.",
+    "node_id": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+    "strategic_role": "Resolve the exact source boundary that collapsed the native preset-mount path into an unclassified composition terminal",
+    "why_now": "The native attempt is consumed and fully recovered; exact emitted and installed sources remain available without another process.",
+    "outcome": "A process-free source reconciliation will identify the narrowest deterministic correction or prove that another source probe is required.",
     "unlocks": [
-      "Native runtime proof of the exact preset-mount terminal if that branch is reached.",
-      "A source-owned next recovery or a later separately frozen worker gate based on one typed result."
+      "A source-owned correction plan for the native composition boundary.",
+      "A defensible decision about whether any later separately frozen native process is worthwhile."
     ],
     "does_not_solve": [
       "No occupied DeepSeek worker turn, model/provider request or coding-quality evidence.",
       "No product/data action, production, release, Pages or protected integration."
     ],
     "evidence": [
-      "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal-closeout.md",
-      "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-plan.md",
-      "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-threat-model-delta.md"
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-closeout.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/offline-recovery-evidence.json"
     ]
   },
   "decision_horizon": [

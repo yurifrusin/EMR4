@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 384,
+  "graph_revision": 385,
   "harvests": [],
   "nodes": [
     {
@@ -29486,9 +29486,130 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+      "title": "Preset-mount sanitized-terminal native rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-runner-bridge-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits this bounded native-Harness control sequence and its dependency-satisfied process-free successor.",
+          "This closeout accepts one consumed native process as a finite negative result plus one zero-process offline recovery.",
+          "No retry, worker/model/provider, product/data, deployment, Pages or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-consumed-one-process-native-envelope",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/attempt-001-process-envelope.json",
+          "status": "accepted",
+          "summary": "Accept one native process, zero retry/resume, no retained streams and the exact content-free sidecar binding."
+        },
+        {
+          "id": "accept-recovered-finite-composition-terminal",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/offline-recovery-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the envelope-bound composition-unclassified terminal and complete exact-root cleanup through zero-process recovery."
+        },
+        {
+          "id": "reject-preset-mount-bridge-runtime-proof",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "The observed broader composition terminal does not prove preset_mount_failure_attributed or the new runtime bridge path."
+        },
+        {
+          "id": "reject-native-retry-or-worker-inference",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitized-terminal-native-rehearsal-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Do not infer retry authority, occupied DeepSeek performance, worker/model/provider access or product authority."
+        },
+        {
+          "id": "accept-process-free-source-reconciliation-successor",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Proceed only with exact process-free source reconciliation of the unclassified composition coordinate."
+        }
+      ],
+      "claim_scope": [
+        "Exact consumed candidate c1ae13df334dfdffefb229c3ae5a502a7251451c ran one native rc.7 process.",
+        "The exact sidecar was 1646 bytes and was SHA-256 bound before semantic admission.",
+        "The finite native terminal is preset_composition_failure_attributed at EFFECTIVE_TOOL_COMPOSITION_UNCLASSIFIED.",
+        "Turn, worker, broker, model/provider, network, database, Docker, target and product activity were zero.",
+        "Recovery source 05a721a075a96a5e248818371d7bdfc8e136c792 admitted only the typed projection with zero Node or native processes.",
+        "The exact retained diagnostic root is absent and owned Node process count is zero.",
+        "The new preset-mount bridge runtime path remains unproved and no retry is authorised.",
+        "Focused native/recovery, latch, Current Baton and full agent-error-register suites pass."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-offline-admission-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-offline-admission-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-608.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-preset-mount-sanitized-terminal-recovery.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitized-terminal-native-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitized-terminal-native-rehearsal-preplanning-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitized-terminal-native-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitized-terminal-native-rehearsal-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitized-terminal-offline-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitized-terminal-offline-recovery-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitized-terminal-offline-recovery-preexecution-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_offline_admission_recovery.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_offline_admission_recovery.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/native-attempt-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/attempt-001-process-envelope.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/offline-admitted-terminal.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/offline-recovery-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/offline-recovery-report.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The new preset-mount bridge runtime path is not proved.",
+        "The exact source cause of EFFECTIVE_TOOL_COMPOSITION_UNCLASSIFIED remains unresolved.",
+        "No occupied DeepSeek worker turn, model/provider request or coding-quality evidence is accepted.",
+        "No native retry exists; any later process requires a distinct frozen plan.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T07:43:26.3147932+10:00",
+      "updated_at": "2026-08-22T07:43:26.3147932+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "f97d6bd035cd9408bf561f36c802a9687fbddd58",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T06:36:06.5611095+10:00"
+  "updated_at": "2026-08-22T07:43:26.3147932+10:00"
 }

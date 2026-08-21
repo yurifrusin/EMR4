@@ -1,45 +1,45 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 607,
+  "register_revision": 608,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "ff06005098dc4529f0e8323a1ee34929e0e2926a92caf1ac2adb031124c7e0fc",
-  "incident_count": 897,
+  "canonical_register_sha256": "97a997ea90f4573f3cba3e2b3f62aeae0f58eee2ced38876d28c7cb7b61cdca8",
+  "incident_count": 907,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 493,
+      "agent_behavior": 494,
       "harness": 67,
-      "operator": 187,
-      "repository": 134,
+      "operator": 195,
+      "repository": 135,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 95,
       "evidence_misreport": 73,
       "harness_failure": 67,
-      "operator_error": 187,
-      "output_contract_violation": 273,
+      "operator_error": 195,
+      "output_contract_violation": 274,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
-      "repository_defect": 134,
+      "repository_defect": 135,
       "transport_timeout": 16
     },
     "by_role": {
       "implementer": 64,
       "integration_reviewer": 3,
-      "orchestrator": 767,
+      "orchestrator": 777,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 552,
-      "material": 131,
+      "low": 560,
+      "material": 133,
       "moderate": 214
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 169,
-      "canonical_unchanged": 561,
-      "untrusted_partial_worktree": 167
+      "accepted_candidate_changed": 173,
+      "canonical_unchanged": 565,
+      "untrusted_partial_worktree": 169
     },
     "by_resource_and_role": {
       "accepted-native-startup-terminal-and-consumed-controller-source::orchestrator": 1,
@@ -274,8 +274,18 @@
       "native-harness-direct-npm-cli-materialiser::orchestrator": 1,
       "native-harness-prelaunch-materialiser::orchestrator": 1,
       "native-preset-contract-family-binding::orchestrator": 1,
+      "native-rehearsal-emitted-sidecar-schema-token::orchestrator": 1,
+      "native-rehearsal-module-rebinding-boundary::orchestrator": 1,
+      "native-rehearsal-owned-process-absence-probe::orchestrator": 1,
+      "native-rehearsal-plan-prose-tests::orchestrator": 1,
+      "native-rehearsal-powershell-read-only-expressions::orchestrator": 1,
+      "native-rehearsal-preplanning-git-ref-prose::orchestrator": 1,
+      "native-rehearsal-preset-mount-code-vocabulary::orchestrator": 1,
+      "native-rehearsal-rejected-sidecar-envelope-and-cleanup::orchestrator": 1,
       "native-runner-factory-stage-sidecar::orchestrator": 1,
       "native-startup-terminal-validator::implementer": 1,
+      "offline-recovery-plan-commit-sequence::orchestrator": 1,
+      "offline-recovery-register-incident-stage::orchestrator": 1,
       "orchestrator-git-ref-evidence-binding::orchestrator": 1,
       "ordinary-diary-cancellation-browser-review-manifest::verifier": 1,
       "ordinary-diary-cancellation-continuity-updater::orchestrator": 1,
