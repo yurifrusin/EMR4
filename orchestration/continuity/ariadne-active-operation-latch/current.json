@@ -4,11 +4,11 @@
   "active_tranche": "Raisa authored-synthetic check-in native Harness bounded-worker attempt 004",
   "objective": "Under a fresh post-closeout clockwork checkpoint, execute exactly one bounded rc.7 native DeepSeek Harness session against the accepted authored-synthetic one-file task through the converged structured-diagnostic controller and broker; retain only bounded terminal evidence and stop on every failure without retry.",
   "status": "in_progress",
-  "source_head": "66272f28a8ba135066a10f03721de7aeb32b5f46",
+  "source_head": "905b1829f5e85c3cbba440e80a48553b6a548452",
   "authority_source": "Yuri's explicit new-attempt confirmation and standing uninterrupted-development authority, constrained by the accepted attempt-004 readiness result.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_resolve_full_current_source_and_take_one_occupied_preexecution_clockwork_checkpoint",
+    "completed_stage": "Attempt 004 passed fresh five-source rehydration, exact zero-provider deterministic admission and preparation. Its distinct synthetic root, pinned rc.7 package, preset, edit/glob/read projection, WorkOrder and structured-diagnostic gear are bound. Attempts 001-003 remain consumed; zero processes and provider requests occurred. The one-process, one-request, one-tool-call, zero-retry checkpoint is admitted.",
+    "next_executable_stage": "generate_a_fresh_five_source_attempt_004_occupied_prelaunch_receipt_then_run_exactly_one_deepseek_native_harness_authored_synthetic_edit_through_the_structured_diagnostic_controller_without_retry_resume_fallback_or_second_worker",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
