@@ -37,7 +37,9 @@ source/version readback pass.
 
 The first focused run used the wrong local cache convention and failed closed
 before source admission or output; AER-0879 records the corrected package-seed
-root. No native process was involved.
+root. The first clockwork check then rejected an invalid `contract_evidence`
+field shape before publication; AER-0880 records the schema-supported
+correction. No native process was involved.
 
 ## Parallelism disposition
 

@@ -57,9 +57,7 @@
         "Native Harness, turn, request, broker, worker, model/provider, network, database, Docker and target counts remain zero.",
         "No raw runtime error, repair, retry or occupied worker authority is accepted."
       ],
-      "contract_evidence": [
-        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal/contract.json"
-      ],
+      "contract_evidence": [],
       "evidence": {
         "plans": [
           "docs/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-plan.md",
@@ -69,6 +67,7 @@
         ],
         "findings": [
           "docs/deepseek-native-harness-provider-free-preset-mount-source-cache-root-recovery.md",
+          "docs/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-clockwork-intent-recovery.md",
           "docs/ariadne-agent-error-correction-register-revision-604.md"
         ],
         "closeouts": [
@@ -137,6 +136,11 @@
       {
         "incident_id": "preset-mount-source-cache-root-inference",
         "source_id": "preset-mount-source-focused-test-001",
+        "peers": []
+      },
+      {
+        "incident_id": "preset-mount-source-contract-evidence-shape",
+        "source_id": "preset-mount-source-clockwork-check-001",
         "peers": []
       }
     ],
@@ -252,6 +256,40 @@
         ]
       },
       "baton_summary": "records and corrects the inferred package-seed cache root before source admission."
+    },
+    {
+      "attempt_key": "preset-mount-source-clockwork-check-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-preset-mount-source-coordinate-reconciliation",
+      "role": "orchestrator",
+      "resource_id": "preset-mount-source-closeout-intent-contract-evidence",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_check",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A clockwork graph node uses the schema-supported empty contract_evidence form unless it supplies the required structured object.",
+      "observed_error": "The first closeout intent supplied contract_evidence as a path list, which the prospective source-graph validator rejected as contract_evidence_object_required.",
+      "detection_method": "Clockwork --check rejected tick_transaction_prepare before command execution, generation, publication or canonical mutation.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-clockwork-intent-recovery.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.contract_evidence_path_list_used_where_structured_object_required",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the supported empty contract_evidence form and retain the contract path in the artifact list.",
+        "prevention_control": "Closeout authors copy contract_evidence shape from the live graph schema or an accepted non-empty exemplar and rely on clockwork --check before publication.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-clockwork-intent-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-604.md"
+        ]
+      },
+      "baton_summary": "records the rejected contract-evidence field shape and the schema-supported correction before publication."
     }
   ]
 }

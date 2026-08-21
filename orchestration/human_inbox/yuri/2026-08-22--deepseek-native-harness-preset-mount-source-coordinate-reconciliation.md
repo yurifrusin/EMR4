@@ -39,7 +39,9 @@ tested with synthetic errors in Node without starting the Harness.
 
 The first reader used the npm-cache location by analogy instead of the
 accepted package-seed location. It failed closed before reading source or
-writing evidence. AER-0879 binds the corrected `.cache` seed root.
+writing evidence. AER-0879 binds the corrected `.cache` seed root. The first
+clockwork check also rejected a malformed contract-evidence field before any
+publication; AER-0880 binds the supported closeout shape.
 
 ## Deliberately closed and place in Raisa
 
