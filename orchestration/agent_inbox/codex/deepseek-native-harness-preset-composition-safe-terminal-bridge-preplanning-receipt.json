@@ -13,7 +13,7 @@
   "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
   "continuation_event": "pre_worker_dispatch",
   "git_object_resolution": {
-    "observed_head": "403a91121a6f14aebc055d5db7dd083907a5239a",
+    "observed_head": "7f0c1126d5017ebf660eea3b026d95d5e9a2c3c9",
     "reason_codes": [],
     "resolved_commit": "c7593acd3cb03aae2ac9f17dc44564f12782c025",
     "schema_version": "ariadne.git_object_resolution.v1",
@@ -31,10 +31,10 @@
   },
   "git_refs_snapshot": {
     "branch": "codex/ariadne-bernie-davida-parallel-seam",
-    "branch_commit": "403a91121a6f14aebc055d5db7dd083907a5239a",
+    "branch_commit": "7f0c1126d5017ebf660eea3b026d95d5e9a2c3c9",
     "branch_origin_aligned": true,
-    "head": "403a91121a6f14aebc055d5db7dd083907a5239a",
-    "origin_branch_commit": "403a91121a6f14aebc055d5db7dd083907a5239a",
+    "head": "7f0c1126d5017ebf660eea3b026d95d5e9a2c3c9",
+    "origin_branch_commit": "7f0c1126d5017ebf660eea3b026d95d5e9a2c3c9",
     "preserved_untracked_paths": {
       "docs/branding": true
     },
@@ -49,7 +49,7 @@
     "reason_codes": [],
     "schema_version": "ariadne.git_refs_snapshot.v1",
     "status": "passed",
-    "tracked_worktree_clean": false,
+    "tracked_worktree_clean": true,
     "untracked_path_count": 660
   },
   "parallelism_assessment": {
