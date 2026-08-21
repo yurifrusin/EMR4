@@ -1,0 +1,62 @@
+{
+  "schema_version": "ariadne.native_harness_composition_unclassified_source_reconciliation_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+  "planning_source": "c0057868f1eb464ee87e5bfe3f56ae201723bd23",
+  "closed_results": [
+    "root_preset_service_not_forwarded_before_bridge",
+    "source_evidence_insufficient",
+    "source_binding_rejected"
+  ],
+  "attribution": {
+    "result": "root_preset_service_not_forwarded_before_bridge",
+    "exact_runtime_exception_observed": false,
+    "private_context_value_observed": false,
+    "new_bridge_runtime_path_proved": false,
+    "prospective_correction_applied": false
+  },
+  "source_inventory": {
+    "generated_runner": {
+      "bytes": 12941,
+      "sha256": "871fb7fc9d2d8a93e5e67c41a4c0f18af7ba8a23d0a3664505f149199befb9cb"
+    },
+    "generated_guard": {
+      "bytes": 4535,
+      "sha256": "440e7e60bd8a8a1b6c33a4e64ae241c51cd4e126ce6422dc0fcba39b41ec4151"
+    },
+    "preset_mount_bridge": {
+      "bytes": 1326,
+      "sha256": "867b32001030786018cdc8423179902869eed92a2d35f62dc6bb83eb4c6ab428"
+    },
+    "preset_mount_sanitizer": {
+      "bytes": 2439,
+      "sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f"
+    },
+    "installed_agent_loop": {
+      "bytes": 47416,
+      "sha256": "bf8ca1e9b05e9b78320a5e2f0b4e25395eba91dd72db6d3cb5626e3dfb529204"
+    },
+    "installed_scope": {
+      "bytes": 12151,
+      "sha256": "2829df71d76e08941457d4dd173eac60783e55354921137c8b75e8b5c0d2ecca"
+    },
+    "installed_agent_presets": {
+      "bytes": 52188,
+      "sha256": "a0b417514e3d285ad5fef74867e8049af333ebdec6e4d7639e388aa0903e0039"
+    }
+  },
+  "predecessor_bindings": {
+    "frozen_plan_sha256": "58c40f538f5862f2a89bb8e7d7c7d1f871f42079d17c8beb46a53a05da9118e2",
+    "threat_model_sha256": "902edf86fec002acf1c248c07d6a55b2d33a383eff1bb99587de8cc850f69db7",
+    "accepted_native_contract_sha256": "bafb4c9ed6df157459f5bbad751600d9de65a7fd6037ca20fe9fab8b66ec49dd",
+    "accepted_terminal_sha256": "c07b0416c1712bfbbf55bdbb5e91a2fd28141f867d156c7b3c66e84c4de8c6b1",
+    "accepted_offline_recovery_sha256": "5a711cc83a03efdfa417943a4d6858834616bbded1e8ba7d814bb07ecf874503",
+    "prior_source_reconciliation_contract_sha256": "af3a729be5e31883fc6a4bf5aa72199bc018bb7f534e51d7b36937d5cefa117a",
+    "prior_source_reconciliation_evidence_sha256": "b515750653ebed874752a3b7ba39755d110a37b2d01dbd907e4c70682f60a820"
+  },
+  "implementation_bindings": {
+    "controller_sha256": "0148e5a28ee252788cf4549918a618dca00578f1e2e95c4059c4d81185ea65d8",
+    "focused_test_sha256": "5e44749f3a6cc775a8d23210317fd3f9b7393449f0678e916dc58ab92937530b",
+    "contract_schema_sha256": "824e69c3555b5ceb91e94b98fcfe8c4954a43dea5ecf7716029b2bb1a5586bda",
+    "evidence_schema_sha256": "54b76a805d0030390e4c1767a76fce7672b5b06381c70baaf1ad537f114ea3f5"
+  }
+}

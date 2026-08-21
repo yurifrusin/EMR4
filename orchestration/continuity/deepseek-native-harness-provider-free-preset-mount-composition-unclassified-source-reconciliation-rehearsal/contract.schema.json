@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "planning_source",
+    "closed_results",
+    "attribution",
+    "source_inventory",
+    "predecessor_bindings",
+    "implementation_bindings"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_composition_unclassified_source_reconciliation_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "closed_results": {
+      "const": [
+        "root_preset_service_not_forwarded_before_bridge",
+        "source_evidence_insufficient",
+        "source_binding_rejected"
+      ]
+    },
+    "attribution": {
+      "const": {
+        "result": "root_preset_service_not_forwarded_before_bridge",
+        "exact_runtime_exception_observed": false,
+        "private_context_value_observed": false,
+        "new_bridge_runtime_path_proved": false,
+        "prospective_correction_applied": false
+      }
+    },
+    "source_inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "generated_runner",
+        "generated_guard",
+        "preset_mount_bridge",
+        "preset_mount_sanitizer",
+        "installed_agent_loop",
+        "installed_scope",
+        "installed_agent_presets"
+      ],
+      "properties": {
+        "generated_runner": {"$ref": "#/$defs/source"},
+        "generated_guard": {"$ref": "#/$defs/source"},
+        "preset_mount_bridge": {"$ref": "#/$defs/source"},
+        "preset_mount_sanitizer": {"$ref": "#/$defs/source"},
+        "installed_agent_loop": {"$ref": "#/$defs/source"},
+        "installed_scope": {"$ref": "#/$defs/source"},
+        "installed_agent_presets": {"$ref": "#/$defs/source"}
+      }
+    },
+    "predecessor_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "frozen_plan_sha256",
+        "threat_model_sha256",
+        "accepted_native_contract_sha256",
+        "accepted_terminal_sha256",
+        "accepted_offline_recovery_sha256",
+        "prior_source_reconciliation_contract_sha256",
+        "prior_source_reconciliation_evidence_sha256"
+      ],
+      "properties": {
+        "frozen_plan_sha256": {"$ref": "#/$defs/sha256"},
+        "threat_model_sha256": {"$ref": "#/$defs/sha256"},
+        "accepted_native_contract_sha256": {"$ref": "#/$defs/sha256"},
+        "accepted_terminal_sha256": {"$ref": "#/$defs/sha256"},
+        "accepted_offline_recovery_sha256": {"$ref": "#/$defs/sha256"},
+        "prior_source_reconciliation_contract_sha256": {"$ref": "#/$defs/sha256"},
+        "prior_source_reconciliation_evidence_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "implementation_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "controller_sha256",
+        "focused_test_sha256",
+        "contract_schema_sha256",
+        "evidence_schema_sha256"
+      ],
+      "properties": {
+        "controller_sha256": {"$ref": "#/$defs/sha256"},
+        "focused_test_sha256": {"$ref": "#/$defs/sha256"},
+        "contract_schema_sha256": {"$ref": "#/$defs/sha256"},
+        "evidence_schema_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256"],
+      "properties": {
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "candidate_source",
+    "result",
+    "failed_source_coordinates",
+    "accepted_terminal",
+    "source_inventory",
+    "source_semantics",
+    "attribution",
+    "claim_boundary",
+    "process_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_composition_unclassified_source_reconciliation_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {
+      "enum": [
+        "root_preset_service_not_forwarded_before_bridge",
+        "source_evidence_insufficient",
+        "source_binding_rejected"
+      ]
+    },
+    "failed_source_coordinates": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[a-z0-9_]+$"}
+    },
+    "accepted_terminal": {
+      "const": {
+        "error_class": null,
+        "last_admitted_stage": "private_identity_admitted",
+        "preset_mount_terminal": null,
+        "result": "preset_composition_failure_attributed",
+        "safe_guard_coordinate": "EFFECTIVE_TOOL_COMPOSITION_UNCLASSIFIED",
+        "safe_guard_detail": null
+      }
+    },
+    "source_inventory": {"$ref": "#/$defs/source_inventory"},
+    "source_semantics": {
+      "type": "object",
+      "additionalProperties": {"type": "boolean"},
+      "minProperties": 13
+    },
+    "attribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "root_preset_service_admitted_by_runner",
+        "root_preset_service_forwarded_to_guard",
+        "private_agent_context_dependency_surface_declares_agent_presets",
+        "mount_handle_dereference_occurs_before_bridge_entry",
+        "uncoded_escape_maps_to_observed_terminal",
+        "prospective_correction_coordinate"
+      ],
+      "properties": {
+        "root_preset_service_admitted_by_runner": {"const": true},
+        "root_preset_service_forwarded_to_guard": {"const": false},
+        "private_agent_context_dependency_surface_declares_agent_presets": {"const": false},
+        "mount_handle_dereference_occurs_before_bridge_entry": {"const": true},
+        "uncoded_escape_maps_to_observed_terminal": {"const": true},
+        "prospective_correction_coordinate": {"const": "forward_admitted_root_preset_service_into_guard_and_validate_mount_handle_inside_bridge"}
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "deterministic_source_route_explained",
+        "exact_runtime_exception_observed",
+        "private_context_value_observed",
+        "new_bridge_runtime_path_proved",
+        "prospective_correction_applied",
+        "native_retry_authorized",
+        "worker_model_provider_process_authorized",
+        "product_authority"
+      ],
+      "properties": {
+        "deterministic_source_route_explained": {"type": "boolean"},
+        "exact_runtime_exception_observed": {"const": false},
+        "private_context_value_observed": {"const": false},
+        "new_bridge_runtime_path_proved": {"const": false},
+        "prospective_correction_applied": {"const": false},
+        "native_retry_authorized": {"const": false},
+        "worker_model_provider_process_authorized": {"const": false},
+        "product_authority": {"const": false}
+      }
+    },
+    "process_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node_process_count",
+        "native_harness_process_count",
+        "worker_process_count",
+        "model_request_count",
+        "provider_request_count",
+        "network_attempt_count",
+        "target_creation_count",
+        "target_use_count",
+        "retry_count",
+        "resume_count"
+      ],
+      "properties": {
+        "node_process_count": {"const": 0},
+        "native_harness_process_count": {"const": 0},
+        "worker_process_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0},
+        "network_attempt_count": {"const": 0},
+        "target_creation_count": {"const": 0},
+        "target_use_count": {"const": 0},
+        "retry_count": {"const": 0},
+        "resume_count": {"const": 0}
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256"],
+      "properties": {
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "source_inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "generated_runner",
+        "generated_guard",
+        "preset_mount_bridge",
+        "preset_mount_sanitizer",
+        "installed_agent_loop",
+        "installed_scope",
+        "installed_agent_presets"
+      ],
+      "properties": {
+        "generated_runner": {"$ref": "#/$defs/source"},
+        "generated_guard": {"$ref": "#/$defs/source"},
+        "preset_mount_bridge": {"$ref": "#/$defs/source"},
+        "preset_mount_sanitizer": {"$ref": "#/$defs/source"},
+        "installed_agent_loop": {"$ref": "#/$defs/source"},
+        "installed_scope": {"$ref": "#/$defs/source"},
+        "installed_agent_presets": {"$ref": "#/$defs/source"}
+      }
+    }
+  }
+}
