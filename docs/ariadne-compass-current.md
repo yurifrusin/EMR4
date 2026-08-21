@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Inspect pinned rc7 and the exact initial profile statically; identify one preactivation coordinate without raw reconstruction or runtime execution.
+> Repair only the sentinel-source escape spellings, prove generated-byte lexical validity statically, and keep all executable Harness/provider surfaces closed.
 
 ## North star
 
@@ -500,23 +500,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The two proof-module names now match the already passing rc7 relative-specifier form without runtime or provider activity. Lineage parent: `deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis`.
 242. **Test whether the accepted profile-relative repair clears initial Harness startup — Native Harness repaired-sentinel boot terminal**
    One bounded process reached a sanitized preactivation failure, proving the relative-path repair alone is insufficient while all provider and cleanup controls held. Lineage parent: `deepseek-native-harness-provider-free-proof-module-relative-specifier-repair`.
+243. **Replace opaque native retries with a deterministic preactivation coordinate — Native Harness repaired-sentinel preactivation source diagnosis**
+   One static pass traced the zero-event exit to a Python-to-JavaScript escape transformation without another Harness or provider process. Lineage parent: `deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof`.
 
 ## Current position
 
-**Identify the next exact preactivation source coordinate without another runtime attempt — Native Harness repaired-sentinel boot terminal**
+**Repair only the proven sentinel-source lexical defect — Native Harness repaired-sentinel preactivation source diagnosis**
 
-**Why this proof came next:** The only process exited before every sentinel event, so static package/profile comparison must narrow the failure before any later execution can be considered.
+**Why this proof came next:** The exact generated-byte transformation is known and can be corrected without executing rc7 or widening the worker boundary.
 
-A deterministic diagnosis will name one unique code/config coordinate or fail closed as non-unique.
+A source-only repair will prove the sentinel generator emits lexically valid JavaScript while preserving every consumed attempt and zero runtime activity.
 
 ### What this unlocks
 
-- A grounded decision about whether a narrow configuration repair exists.
-- A separately frozen later proof only if diagnosis justifies it.
+- A grounded decision about whether a separately contracted repaired-sentinel boot proof is warranted.
+- Removal of one known preactivation defect from the native Harness integration.
 
 ### What it does not solve
 
-- No retry, runner, worker, broker, model or provider request.
+- No Node or native Harness boot.
+- No runner, broker, worker, model or provider request.
 - No product work, data use, deployment or protected integration.
 
 ## Continuity and authority
@@ -1263,6 +1266,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md`
 - `docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-closeout.md`
+- `docs/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-closeout.md`
@@ -2000,6 +2004,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-preactivation-source-coordinate-diagnosis-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2654,7 +2659,7 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/efficacy-reading.json`
-- `orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-terminal.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/diagnosis-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json`
@@ -3637,4 +3642,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 347; continuity graph revision 365._
+_Compass map revision 348; continuity graph revision 366._

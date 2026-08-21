@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 347,
-  "updated_at": "2026-08-21T14:22:57.0516264+10:00",
-  "source_graph_revision": 365,
-  "orientation_statement": "Inspect pinned rc7 and the exact initial profile statically; identify one preactivation coordinate without raw reconstruction or runtime execution.",
+  "map_revision": 348,
+  "updated_at": "2026-08-21T15:19:26.6692485+10:00",
+  "source_graph_revision": 366,
+  "orientation_statement": "Repair only the sentinel-source escape spellings, prove generated-byte lexical validity statically, and keep all executable Harness/provider surfaces closed.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4581,24 +4581,35 @@
         "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/efficacy-reading.json",
         "docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-closeout.md"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis",
+      "lineage_parent": "deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof",
+      "strategic_role": "Replace opaque native retries with a deterministic preactivation coordinate",
+      "outcome": "One static pass traced the zero-event exit to a Python-to-JavaScript escape transformation without another Harness or provider process.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/diagnosis-evidence.json",
+        "docs/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof",
-    "strategic_role": "Identify the next exact preactivation source coordinate without another runtime attempt",
-    "why_now": "The only process exited before every sentinel event, so static package/profile comparison must narrow the failure before any later execution can be considered.",
-    "outcome": "A deterministic diagnosis will name one unique code/config coordinate or fail closed as non-unique.",
+    "node_id": "deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis",
+    "strategic_role": "Repair only the proven sentinel-source lexical defect",
+    "why_now": "The exact generated-byte transformation is known and can be corrected without executing rc7 or widening the worker boundary.",
+    "outcome": "A source-only repair will prove the sentinel generator emits lexically valid JavaScript while preserving every consumed attempt and zero runtime activity.",
     "unlocks": [
-      "A grounded decision about whether a narrow configuration repair exists.",
-      "A separately frozen later proof only if diagnosis justifies it."
+      "A grounded decision about whether a separately contracted repaired-sentinel boot proof is warranted.",
+      "Removal of one known preactivation defect from the native Harness integration."
     ],
     "does_not_solve": [
-      "No retry, runner, worker, broker, model or provider request.",
+      "No Node or native Harness boot.",
+      "No runner, broker, worker, model or provider request.",
       "No product work, data use, deployment or protected integration."
     ],
     "evidence": [
-      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-terminal.json",
-      "docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-closeout.md"
+      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/diagnosis-evidence.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-preactivation-source-coordinate-diagnosis-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

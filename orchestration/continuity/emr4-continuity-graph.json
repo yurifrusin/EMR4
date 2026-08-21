@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 365,
+  "graph_revision": 366,
   "harvests": [],
   "nodes": [
     {
@@ -27307,9 +27307,113 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis",
+      "title": "Native Harness repaired-sentinel preactivation source diagnosis",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted a provider-free static diagnosis only.",
+          "The consumed native attempt remains immutable; no retry, Node, Harness, broker, worker, model, provider or network authority opened.",
+          "No product, data, deployment, Pages or protected-ref authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-unique-sentinel-source-coordinate",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/diagnosis-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one Python-bytes-literal escape transformation as sufficient to prevent sentinel module parsing before activation."
+        },
+        {
+          "id": "preserve-raw-stream-and-consumed-attempt-boundaries",
+          "source": "docs/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis-closeout.md",
+          "status": "accepted",
+          "summary": "Preserve destroyed raw streams and the consumed no-retry attempt without digest-oracle reconstruction."
+        },
+        {
+          "id": "accept-source-only-repair-next",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-preactivation-source-coordinate-diagnosis-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Permit only a separately frozen static sentinel escape repair before any later boot can be considered."
+        },
+        {
+          "id": "accept-contained-diagnosis-incidents",
+          "source": "docs/ariadne-agent-error-correction-register-revision-589.md",
+          "status": "accepted",
+          "summary": "Accept four corrected or contained observations with none open."
+        }
+      ],
+      "claim_scope": [
+        "The exact failed module contains raw Python-translated line terminators inside JavaScript regex and string literals.",
+        "The first lexical violation is sufficient to prevent sentinel apply and its first HMR event.",
+        "The accepted same-rc7 control double-escapes the spellings, has no lexical violation and emitted both readiness events.",
+        "The result does not claim absence of later defects or measure DeepSeek model/provider performance.",
+        "No raw stream was reconstructed and every executable Harness/provider activity count is zero."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/diagnosis-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/diagnosis-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/verification-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-preactivation-source-coordinate-diagnosis-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-preactivation-source-coordinate-diagnosis-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-preactivation-source-coordinate-diagnosis-pre-verifier-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_preactivation_source_coordinate_diagnosis.py",
+          "tests/test_deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py",
+          "tests/test_deepseek_native_harness_provider_free_proof_module_relative_specifier_repair.py",
+          "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_native_boot_proof.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_repaired_sentinel_preactivation_source_coordinate_diagnosis.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/contract.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-589.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-repaired-sentinel-preactivation-source-coordinate-diagnosis.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The diagnosed source literal is not repaired in this tranche.",
+        "No repaired sentinel module validity proof has yet been accepted.",
+        "No new native boot attempt is authorised.",
+        "No runner, worker, model/provider or EMR4 development work is admitted."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-21T15:19:26.6692485+10:00",
+      "updated_at": "2026-08-21T15:19:26.6692485+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "1609d7fa2c505fbd3f4f28a1a7f1f823356059d3",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-21T14:22:57.0516264+10:00"
+  "updated_at": "2026-08-21T15:19:26.6692485+10:00"
 }

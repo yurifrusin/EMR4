@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 588,
+  "register_revision": 589,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -30902,6 +30902,150 @@
       },
       "incident_id": "AER-0787",
       "attempt_id": "clock-2296e2a0475238357665672f",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-repaired-sentinel-preactivation-source-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "repaired-sentinel-source-author",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_ast",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "A Python-authored JavaScript sentinel module must retain JavaScript escape sequences as backslash bytes and remain lexically valid before activation.",
+      "observed_error": "The ordinary Python bytes literal translated single-escaped carriage-return and newline spellings into raw line terminators inside the generated JavaScript regex and string literals.",
+      "detection_method": "Hash-bound Python AST extraction and a deterministic lexical-state scan found three violations and bound the first fatal coordinate before sentinel activation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/diagnosis-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-589.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.python_authored_javascript_literal_escape_translation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Accept the unique coordinate without another boot and constrain the successor to a source-only escape repair.",
+        "prevention_control": "Every Python-authored JavaScript module must undergo generated-byte lexical validation before any native attempt is admitted.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis-closeout.md"
+        ]
+      },
+      "incident_id": "AER-0788",
+      "attempt_id": "clock-0f49d8f99dda88637e6ca072",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-repaired-sentinel-preactivation-source-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "diagnosis-provider-boundary-predicate",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Provider-boundary acceptance must distinguish prohibited activity counters from positive credential-scrubbing safety evidence.",
+      "observed_error": "The first predicate required every integer in provider_boundary to be zero and therefore rejected the intentional credential_environment_names_removed_count of three.",
+      "detection_method": "The first focused pytest run failed the exact static acceptance before evidence publication or any executable Harness activity.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_repaired_sentinel_preactivation_source_coordinate_diagnosis.py",
+        "docs/ariadne-agent-error-correction-register-revision-589.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.provider_boundary_zero_check_included_positive_scrub_count",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the generic integer scan with explicit failed-terminal and passing-control zero-field allowlists.",
+        "prevention_control": "Boundary predicates name each prohibited activity counter and test positive safety counters separately.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/verification-evidence.json"
+        ]
+      },
+      "incident_id": "AER-0789",
+      "attempt_id": "clock-bd665db64005075495db1da2",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-repaired-sentinel-preactivation-source-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "pre-verifier-candidate-git-object",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_git_cli",
+      "stage": "acceptance",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Every Git object binding must be machine-resolved as a full 40-character commit and git_refs_and_worktree evidence must contain no caller-authored object ID.",
+      "observed_error": "An unvalidated pre-verifier draft expanded the displayed eight-character abbreviation with guessed suffix characters instead of first resolving HEAD through Git.",
+      "detection_method": "A direct git rev-parse comparison caught the mismatch before preflight, staging, receipt acceptance or clockwork publication.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-589.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.pre_verifier_draft_guessed_full_git_object_suffix",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Discard the guessed value, resolve HEAD with Git and remove object IDs from the Git-evidence narrative before running preflight.",
+        "prevention_control": "The preflight machine snapshot is the sole Git-ref binding; runtime-state Git prose remains object-ID-free.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-preactivation-source-coordinate-diagnosis-pre-verifier-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0790",
+      "attempt_id": "clock-3f14ead618315c45d39f8f2b",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-repaired-sentinel-preactivation-source-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "transactional-contract-evidence-field",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Transactional contract_evidence must use its structured object vocabulary or the accepted empty-list form when contract paths are already carried by node evidence.",
+      "observed_error": "The first closeout intent supplied two plain path strings in contract_evidence.",
+      "detection_method": "The governance clockwork dry run rejected the prospective Compass projection with contract_evidence_object_required before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-589.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.transactional_contract_evidence_used_path_strings",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the path strings with the accepted empty-list form and retain the same contract paths in node evidence and baton acceptance.",
+        "prevention_control": "Schema-build transactional subfields before the live clockwork dry run instead of inferring their shape from neighboring evidence arrays.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis/efficacy-reading.json"
+        ]
+      },
+      "incident_id": "AER-0791",
+      "attempt_id": "clock-8859f1c1cbb7244a2401d876",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

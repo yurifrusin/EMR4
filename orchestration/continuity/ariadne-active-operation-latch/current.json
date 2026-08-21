@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis",
-  "active_tranche": "DeepSeek native Harness provider-free repaired-sentinel preactivation source-coordinate diagnosis",
-  "objective": "Statically inspect the pinned rc7 loader and plugin configuration against the exact repaired initial profile and sanitized terminal to identify the narrowest unique source coordinate consistent with zero HMR events and exit 1, without reconstructing raw output or launching Node, Harness, broker, worker, model, provider or network activity.",
+  "operation_id": "deepseek-native-harness-provider-free-sentinel-source-escape-repair",
+  "active_tranche": "DeepSeek native Harness provider-free sentinel source escape repair",
+  "objective": "Repair only the diagnosed sentinel_source Python-to-JavaScript escape translation, prove the generated module has no raw line terminators inside JavaScript regex or quoted literals, preserve the exact request/profile boundaries and every consumed attempt, and launch no Node, Harness, broker, worker, model, provider or network activity.",
   "status": "in_progress",
-  "source_head": "42f6314b640c55ed8fd72f62e09548f0fdabfe87",
-  "authority_source": "Yuri's standing uninterrupted-development authority, constrained by the consumed no-retry boot terminal and a provider-free static diagnosis envelope.",
+  "source_head": "1609d7fa2c505fbd3f4f28a1a7f1f823356059d3",
+  "authority_source": "Yuri's standing uninterrupted-development authority, constrained by the accepted static diagnosis and a source-only provider-free repair envelope.",
   "checkpoint": {
-    "completed_stage": "Accepted deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof at the machine-resolved source.",
-    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_static_preactivation_source_coordinate_diagnosis_contract",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_source_only_sentinel_escape_repair_contract",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,9 +34,9 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_static_preactivation_source_coordinate_diagnosis_only",
+    "provider_free_static_sentinel_source_escape_repair_only",
     "zero_node_native_harness_broker_worker_model_provider_or_network_process_or_request",
-    "no_retry_resume_fallback_reclassification_or_second_process_for_consumed_attempt_001",
+    "no_retry_resume_fallback_reclassification_or_second_process_for_any_consumed_attempt",
     "consumed_terminal_stream_digests_and_attempt_evidence_remain_immutable",
     "no_raw_error_message_stack_path_stream_session_environment_or_credential_reconstruction",
     "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",

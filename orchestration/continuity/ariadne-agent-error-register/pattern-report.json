@@ -1,45 +1,45 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 588,
+  "register_revision": 589,
   "source_cutoff_on": "2026-08-21",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "357b797c436742f0b90598f6f479efdb2ac731385c83cb5c95a3fad05eab68ce",
-  "incident_count": 787,
+  "canonical_register_sha256": "52280e57ebc0d48de80e8b3aae605452cd7d58b9b8b04898d437aecb44d3db98",
+  "incident_count": 791,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 482,
       "harness": 61,
-      "operator": 98,
-      "repository": 130,
+      "operator": 101,
+      "repository": 131,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 93,
       "evidence_misreport": 71,
       "harness_failure": 61,
-      "operator_error": 98,
+      "operator_error": 101,
       "output_contract_violation": 266,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
-      "repository_defect": 130,
+      "repository_defect": 131,
       "transport_timeout": 16
     },
     "by_role": {
       "implementer": 57,
       "integration_reviewer": 3,
-      "orchestrator": 664,
+      "orchestrator": 668,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 466,
+      "low": 468,
       "material": 129,
-      "moderate": 192
+      "moderate": 194
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 141,
-      "canonical_unchanged": 494,
-      "untrusted_partial_worktree": 152
+      "canonical_unchanged": 496,
+      "untrusted_partial_worktree": 154
     },
     "by_resource_and_role": {
       "accepted-native-startup-terminal-and-consumed-controller-source::orchestrator": 1,
@@ -156,6 +156,7 @@
       "delete-confirm-http-postgresql-harness::orchestrator": 3,
       "delete-confirm-idempotency-route-contract-test::orchestrator": 1,
       "deterministic-node-process-guard::orchestrator": 1,
+      "diagnosis-provider-boundary-predicate::orchestrator": 1,
       "docker-desktop-windows::orchestrator": 1,
       "emr4-ariadne-agent-error-register-acceptance::orchestrator": 18,
       "emr4-arrival-check-in-convergence-prose-fixtures::orchestrator": 1,
@@ -232,6 +233,7 @@
       "plan-commit-staged-whitespace-gate::orchestrator": 1,
       "postcompaction-five-source-rehydration-receipt::orchestrator": 1,
       "pre-hmr-controller-ordering-probe::implementer": 1,
+      "pre-verifier-candidate-git-object::orchestrator": 1,
       "pre-verifier-task-branch-alignment::orchestrator": 1,
       "preexecution-git-refs-evidence-binding::orchestrator": 1,
       "prelaunch-composite-readback-command::orchestrator": 1,
@@ -256,6 +258,7 @@
       "repair-dead-local-guard::orchestrator": 1,
       "repair-runner-cli-import::orchestrator": 1,
       "repaired-sentinel-native-boot-process::orchestrator": 1,
+      "repaired-sentinel-source-author::orchestrator": 1,
       "repaired-sentinel-terminal-claim-wording::orchestrator": 1,
       "shadow-clockwork-causal-tick-engine::orchestrator": 1,
       "shadow-clockwork-efficacy-reducer::orchestrator": 1,
@@ -268,6 +271,7 @@
       "successor-protected-boundary-vocabulary::orchestrator": 1,
       "transactional-closeout-node-relationship-cardinality::orchestrator": 1,
       "transactional-closeout-shadow-fixture::orchestrator": 1,
+      "transactional-contract-evidence-field::orchestrator": 1,
       "windows-owned-process-absence-reading::orchestrator": 1
     }
   },
