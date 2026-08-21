@@ -20,12 +20,14 @@
     "native_boot_utility_sha256": "158a229fb1df85c6f1692295a4cf8cf2c12519ea2ff2cb88fec2f408c5f43262",
     "prelaunch_recovery_sha256": "575370c7a24cd6b6f55d22896df4db6b07c66e5e8e6dc645596467b3dfc45648",
     "prelaunch_failure_sha256": "505cde86db44d7b185680d0b07704bc7716c5d50a268fa1b85ad1e5adf2ec99d",
-    "incident_revision_sha256": "ce83a652740437c74ce3b6e3f230087ad6dd5151afac2b93ae2c183310d472b2"
+    "package_seed_recovery_sha256": "8ee139587569129ac0bb86fea4580af12f571215336882e9ca7a136d475f37d2",
+    "prelaunch_failure_two_sha256": "d280d5a6f11e5a57b33fc48fa11aa20ed032034cefc75830d4db710a88f84630",
+    "incident_revision_sha256": "3a989f31684e95535a644658b5fa78f7c14fec0e870cd6cfea8b76f3850380b4"
   },
   "implementation_bytes": {
-    "execution_controller_sha256": "e3183a998bfd4ad65224fc7e10b4e45ebd51f2ba36d986f4ee19f6f1c1481fed",
-    "focused_test_sha256": "8dac679fab398fa495ba8811da85d9abcb80fc1fb8a3fe9d7ca30234af78ff17",
-    "contract_schema_sha256": "98726ab9daa61bc5e5717b31b051c2ca821aa73bcda84615c14173fb4418d1e2",
+    "execution_controller_sha256": "26f773cff2195a8600ddef89b59c1457bb5d85aecacc262e67f0d352b07c1e07",
+    "focused_test_sha256": "b4d7841e9ef2246943ab660f9688b602d22877e08b6e8941a3f91aa070752d1a",
+    "contract_schema_sha256": "18d94e7c16076d7b185795e65ee46e88fa26e21a9119d67111f9da70bed2a613",
     "evidence_schema_sha256": "314d32addf1fd941097c60382fb4130d9da87ee2d237b17a7775cce45fa13edb"
   },
   "execution_attempt": {
@@ -71,13 +73,20 @@
     "@deepseek-ai/dsh-tool-fs-search"
   ],
   "materialisation": {
-    "generation": 2,
-    "process_count": 1,
+    "generation": 3,
+    "strategy": "verified_installed_tree_seed_copy",
+    "seed_classification": "provider_free_rc7_package_only_seed",
+    "process_count": 0,
     "retry_count": 0,
-    "direct_node_npm_cli": true,
-    "timeout_seconds": 600,
-    "node_executable_sha256": "9a4eb5f1c29c6a2e93852ead46b999e284a6a5ca8bab4d4e241d587d025a52de",
-    "npm_cli_sha256": "3ce7cba6f5128dd5f54c98b6a5036b0f850496878cc2e21044b675fe3c594e3e"
+    "package_json_sha256": "0009f94a6b9c3495404d4a1a89e0eef82ba4948c4ea29994c210a271390e64db",
+    "package_lock_sha256": "a89defcd8a2c5aae4a54c03bda98e2585711fce881b4b08c90ca4808d45555f4",
+    "lock_package_count": 588,
+    "tree_sha256": "d84e73067c8dbbf4836969eb948012fd364ee454bb07744cfe486995a256084d",
+    "file_count": 32744,
+    "byte_count": 219364530,
+    "dsh_manifest_sha256": "7a9f356ad1e27c7013b44619bc675b8cb877f995cd0951ab3dfeb10d4edcc361",
+    "reparse_point_count": 0,
+    "seed_scope_package_only": true
   },
   "launch": {
     "node_flag": "--expose-internals",

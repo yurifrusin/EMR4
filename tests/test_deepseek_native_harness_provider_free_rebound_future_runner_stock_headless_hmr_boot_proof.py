@@ -59,38 +59,48 @@ def test_execution_attempt_is_exactly_one_process_without_retry() -> None:
     }
 
 
-def test_prelaunch_materialisation_generation_two_owns_direct_npm_cli() -> None:
+def test_prelaunch_materialisation_generation_three_is_process_free() -> None:
     assert CONTRACT["materialisation"] == {
-        "generation": 2,
-        "process_count": 1,
+        "generation": 3,
+        "strategy": "verified_installed_tree_seed_copy",
+        "seed_classification": "provider_free_rc7_package_only_seed",
+        "process_count": 0,
         "retry_count": 0,
-        "direct_node_npm_cli": True,
-        "timeout_seconds": 600,
-        "node_executable_sha256": "9a4eb5f1c29c6a2e93852ead46b999e284a6a5ca8bab4d4e241d587d025a52de",
-        "npm_cli_sha256": "3ce7cba6f5128dd5f54c98b6a5036b0f850496878cc2e21044b675fe3c594e3e",
+        "package_json_sha256": "0009f94a6b9c3495404d4a1a89e0eef82ba4948c4ea29994c210a271390e64db",
+        "package_lock_sha256": "a89defcd8a2c5aae4a54c03bda98e2585711fce881b4b08c90ca4808d45555f4",
+        "lock_package_count": 588,
+        "tree_sha256": "d84e73067c8dbbf4836969eb948012fd364ee454bb07744cfe486995a256084d",
+        "file_count": 32744,
+        "byte_count": 219364530,
+        "dsh_manifest_sha256": "7a9f356ad1e27c7013b44619bc675b8cb877f995cd0951ab3dfeb10d4edcc361",
+        "reparse_point_count": 0,
+        "seed_scope_package_only": True,
     }
 
 
-def test_owned_materializer_is_direct_and_waited_without_wrapper() -> None:
-    source = inspect.getsource(subject._owned_offline_install)
-    assert source.count("subprocess.Popen(") == 1
-    assert "subprocess.run(" not in source
-    assert '"npm-cli.js"' not in source
-    assert "npm.cmd" not in source.lower()
-    assert "stdout=subprocess.DEVNULL" in source
-    assert "stderr=subprocess.DEVNULL" in source
-    assert "process.wait(" in source
-    assert source.count("_terminate_process(process)") == 2
+def test_package_seed_materializer_has_no_process_or_npm_surface() -> None:
+    source = inspect.getsource(subject._materialize_package_seed)
+    assert "subprocess." not in source
+    assert "npm" not in source.lower()
+    assert "shutil.copytree(" in source
+    assert "symlinks=True" in source
+    assert source.count("_package_tree_reading(") == 1
 
 
-def test_owned_materializer_paths_are_hash_bound() -> None:
-    node, npm_cli = subject._owned_materializer_paths(CONTRACT)
-    assert subject.sha256_file(node) == CONTRACT["materialisation"][
-        "node_executable_sha256"
-    ]
-    assert subject.sha256_file(npm_cli) == CONTRACT["materialisation"][
-        "npm_cli_sha256"
-    ]
+def test_package_tree_reader_rejects_reparse_points_without_following_them() -> None:
+    source = inspect.getsource(subject._package_tree_reading)
+    assert "os.scandir(" in source
+    assert "follow_symlinks=False" in source
+    assert "_has_reparse_attribute" in source
+
+
+def test_package_seed_exact_reading_is_hash_bound() -> None:
+    reading = subject._verify_package_seed(CONTRACT)
+    assert reading["tree_sha256"] == CONTRACT["materialisation"]["tree_sha256"]
+    assert reading["file_count"] == CONTRACT["materialisation"]["file_count"]
+    assert reading["byte_count"] == CONTRACT["materialisation"]["byte_count"]
+    assert reading["lock_package_count"] == 588
+    assert reading["seed_scope_package_only"] is True
 
 
 def test_prelaunch_failure_is_typed_and_did_not_consume_native_attempt() -> None:
@@ -103,6 +113,18 @@ def test_prelaunch_failure_is_typed_and_did_not_consume_native_attempt() -> None
     assert value["execution_attempt_consumed"] is False
     assert value["owned_orphan_terminated"] is True
     assert value["disposable_root_cleanup_complete"] is True
+
+
+def test_second_prelaunch_failure_proved_direct_ownership_but_no_native_attempt() -> None:
+    value = json.loads(subject.PRELAUNCH_FAILURE_TWO_PATH.read_bytes())
+    assert value["result"] == "prelaunch_rejected"
+    assert value["prelaunch_materialisation_generation"] == 2
+    assert value["cause_coordinate"] == (
+        "owned_direct_npm_cli_did_not_complete_before_frozen_deadline"
+    )
+    assert value["materialiser_process_absent"] is True
+    assert value["native_harness_process_count"] == 0
+    assert value["execution_attempt_consumed"] is False
 
 
 def test_bundle_identity_remains_the_accepted_rebound_identity() -> None:

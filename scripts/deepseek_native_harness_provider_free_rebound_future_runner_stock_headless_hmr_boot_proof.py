@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import shutil
@@ -71,6 +72,11 @@ RECOVERY_PATH = (
     / "docs"
     / "deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-prelaunch-materialisation-process-ownership-recovery.md"
 )
+PACKAGE_SEED_RECOVERY_PATH = (
+    REPO_ROOT
+    / "docs"
+    / "deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-package-seed-materialisation-recovery.md"
+)
 INCIDENT_REVISION_PATH = (
     REPO_ROOT / "docs" / "ariadne-agent-error-correction-register-revision-600.md"
 )
@@ -81,6 +87,13 @@ EVIDENCE_PATH = OPERATION_ROOT / "native-boot-evidence.json"
 REPORT_PATH = OPERATION_ROOT / "native-boot-report.md"
 EFFICACY_PATH = OPERATION_ROOT / "efficacy-reading.json"
 PRELAUNCH_FAILURE_PATH = OPERATION_ROOT / "prelaunch-materialisation-failure-001.json"
+PRELAUNCH_FAILURE_TWO_PATH = OPERATION_ROOT / "prelaunch-materialisation-failure-002.json"
+PACKAGE_SEED_ROOT = (
+    DISPOSABLE_PARENT.parent
+    / ".cache"
+    / "emr4-native-harness"
+    / "dsh-0.1.0-rc.7-package-seed"
+)
 FOCUSED_TEST_PATH = (
     REPO_ROOT
     / "tests"
@@ -364,6 +377,8 @@ def validate_predecessors(contract: dict[str, Any]) -> dict[str, Any]:
         "native_boot_utility_sha256": Path(native_base.__file__).resolve(),
         "prelaunch_recovery_sha256": RECOVERY_PATH,
         "prelaunch_failure_sha256": PRELAUNCH_FAILURE_PATH,
+        "package_seed_recovery_sha256": PACKAGE_SEED_RECOVERY_PATH,
+        "prelaunch_failure_two_sha256": PRELAUNCH_FAILURE_TWO_PATH,
         "incident_revision_sha256": INCIDENT_REVISION_PATH,
     }
     observed = {key: sha256_file(path) for key, path in paths.items()}
@@ -384,86 +399,149 @@ def validate_predecessors(contract: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _owned_materializer_paths(contract: dict[str, Any]) -> tuple[Path, Path]:
-    node_name = shutil.which("node")
-    if node_name is None:
-        raise ReboundNativeBootError("node_not_found")
-    node = Path(node_name).resolve()
-    npm_cli = node.parent / "node_modules" / "npm" / "bin" / "npm-cli.js"
-    if not node.is_file() or not npm_cli.is_file():
-        raise ReboundNativeBootError("owned_materializer_surface_missing")
+def _has_reparse_attribute(stat_result: os.stat_result) -> bool:
+    return bool(getattr(stat_result, "st_file_attributes", 0) & 0x400)
+
+
+def _is_reparse_point(path: Path) -> bool:
+    return path.is_symlink() or _has_reparse_attribute(path.lstat())
+
+
+def _package_tree_reading(root: Path) -> dict[str, Any]:
+    if not root.is_absolute() or not root.is_dir() or _is_reparse_point(root):
+        raise ReboundNativeBootError("package_tree_root_invalid")
+    members: list[tuple[str, Path]] = []
+    pending = [root]
+    while pending:
+        directory = pending.pop()
+        with os.scandir(directory) as entries:
+            for entry in entries:
+                stat_result = entry.stat(follow_symlinks=False)
+                if entry.is_symlink() or _has_reparse_attribute(stat_result):
+                    raise ReboundNativeBootError(
+                        "package_tree_reparse_point_forbidden"
+                    )
+                path = Path(entry.path)
+                if entry.is_file(follow_symlinks=False):
+                    members.append((path.relative_to(root).as_posix(), path))
+                elif entry.is_dir(follow_symlinks=False):
+                    pending.append(path)
+                else:
+                    raise ReboundNativeBootError("package_tree_member_invalid")
+    digest = hashlib.sha256()
+    byte_count = 0
+    for relative, path in sorted(members, key=lambda item: (item[0].casefold(), item[0])):
+        payload = path.read_bytes()
+        byte_count += len(payload)
+        digest.update(relative.encode())
+        digest.update(b"\0")
+        digest.update(str(len(payload)).encode())
+        digest.update(b"\0")
+        digest.update(hashlib.sha256(payload).hexdigest().encode())
+        digest.update(b"\n")
+    return {
+        "tree_sha256": digest.hexdigest(),
+        "file_count": len(members),
+        "byte_count": byte_count,
+        "reparse_point_count": 0,
+    }
+
+
+def _verify_package_seed(contract: dict[str, Any]) -> dict[str, Any]:
+    seed = PACKAGE_SEED_ROOT.resolve()
     expected = contract["materialisation"]
+    if seed != PACKAGE_SEED_ROOT or not seed.is_dir() or _is_reparse_point(seed):
+        raise ReboundNativeBootError("package_seed_root_invalid")
+    if {member.name for member in seed.iterdir()} != {
+        "package.json",
+        "package-lock.json",
+        "node_modules",
+    }:
+        raise ReboundNativeBootError("package_seed_roster_invalid")
+    package_path = seed / "package.json"
+    lock_path = seed / "package-lock.json"
+    modules = seed / "node_modules"
     if (
-        sha256_file(node) != expected["node_executable_sha256"]
-        or sha256_file(npm_cli) != expected["npm_cli_sha256"]
+        _is_reparse_point(package_path)
+        or _is_reparse_point(lock_path)
+        or _is_reparse_point(modules)
+        or sha256_file(package_path) != expected["package_json_sha256"]
+        or sha256_file(lock_path) != expected["package_lock_sha256"]
     ):
-        raise ReboundNativeBootError("owned_materializer_digest_mismatch")
-    return node, npm_cli
+        raise ReboundNativeBootError("package_seed_root_digest_invalid")
+    lock = json.loads(lock_path.read_bytes())
+    packages = lock.get("packages")
+    if (
+        lock.get("lockfileVersion") != 3
+        or not isinstance(packages, dict)
+        or len(packages) != expected["lock_package_count"]
+        or packages.get("", {}).get("dependencies")
+        != {"@deepseek-ai/dsh": "^0.1.0-rc.7"}
+    ):
+        raise ReboundNativeBootError("package_seed_lock_invalid")
+    dsh_lock = packages.get("node_modules/@deepseek-ai/dsh", {})
+    if (
+        dsh_lock.get("version") != contract["package"]["version"]
+        or dsh_lock.get("integrity") != contract["package"]["tarball_integrity"]
+        or dsh_lock.get("bin") != {"dsh": contract["package"]["bin"]}
+        or sha256_file(modules / "@deepseek-ai" / "dsh" / "package.json")
+        != expected["dsh_manifest_sha256"]
+    ):
+        raise ReboundNativeBootError("package_seed_dsh_identity_invalid")
+    reading = _package_tree_reading(modules)
+    if reading != {
+        "tree_sha256": expected["tree_sha256"],
+        "file_count": expected["file_count"],
+        "byte_count": expected["byte_count"],
+        "reparse_point_count": 0,
+    }:
+        raise ReboundNativeBootError("package_seed_tree_invalid")
+    return {
+        **reading,
+        "package_json_sha256": sha256_file(package_path),
+        "package_lock_sha256": sha256_file(lock_path),
+        "lock_package_count": len(packages),
+        "dsh_manifest_sha256": sha256_file(
+            modules / "@deepseek-ai" / "dsh" / "package.json"
+        ),
+        "seed_scope_package_only": True,
+    }
 
 
-def _owned_offline_install(
-    root: Path,
-    tarball: Path,
-    environment: dict[str, str],
-    contract: dict[str, Any],
+def _materialize_package_seed(
+    root: Path, contract: dict[str, Any]
 ) -> tuple[Path, dict[str, Any]]:
-    node, npm_cli = _owned_materializer_paths(contract)
+    seed_reading = _verify_package_seed(contract)
     install_root = root / "installation"
     install_root.mkdir()
-    _write_exclusive(
-        install_root / "package.json",
-        (json.dumps({"name": "emr4-provider-free-hmr-proof", "private": True}, indent=2) + "\n").encode(),
-    )
-    command = [
-        str(node),
-        str(npm_cli),
-        "install",
-        "--offline",
-        "--ignore-scripts",
-        "--no-audit",
-        "--no-fund",
-        str(tarball.resolve()),
-    ]
-    process: subprocess.Popen[bytes] | None = None
     started = time.monotonic()
-    timed_out = False
-    try:
-        process = subprocess.Popen(
-            command,
-            cwd=install_root,
-            env=environment,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
-        try:
-            exit_code = process.wait(
-                timeout=float(contract["materialisation"]["timeout_seconds"])
-            )
-        except subprocess.TimeoutExpired:
-            timed_out = True
-            _terminate_process(process)
-            exit_code = process.returncode
-    finally:
-        if process is not None:
-            _terminate_process(process)
+    _write_exclusive(
+        install_root / "package.json", (PACKAGE_SEED_ROOT / "package.json").read_bytes()
+    )
+    _write_exclusive(
+        install_root / "package-lock.json",
+        (PACKAGE_SEED_ROOT / "package-lock.json").read_bytes(),
+    )
+    shutil.copytree(
+        PACKAGE_SEED_ROOT / "node_modules",
+        install_root / "node_modules",
+        symlinks=True,
+    )
+    copy_reading = _package_tree_reading(install_root / "node_modules")
     duration_ms = round((time.monotonic() - started) * 1000)
-    process_absent = process is not None and process.poll() is not None
-    if not process_absent:
-        raise ReboundNativeBootError("owned_materializer_process_not_absent")
-    if timed_out:
-        raise ReboundNativeBootError("owned_offline_materialisation_timeout")
-    if exit_code != 0:
-        raise ReboundNativeBootError("owned_offline_materialisation_failed")
+    if copy_reading != {
+        key: seed_reading[key]
+        for key in ("tree_sha256", "file_count", "byte_count", "reparse_point_count")
+    }:
+        raise ReboundNativeBootError("package_seed_copy_mismatch")
     package_root = install_root / "node_modules" / "@deepseek-ai" / "dsh"
     return package_root, {
-        "exit_code": exit_code,
         "duration_ms": duration_ms,
-        "process_count": 1,
+        "process_count": 0,
         "retry_count": 0,
-        "direct_node_npm_cli": True,
-        "owned_process_absent": process_absent,
-        "node_executable_sha256": sha256_file(node),
-        "npm_cli_sha256": sha256_file(npm_cli),
+        "strategy": "verified_installed_tree_seed_copy",
+        "seed": seed_reading,
+        "copy": copy_reading,
     }
 
 
@@ -473,7 +551,7 @@ def deterministic_check(cache_root: Path | None = None) -> dict[str, Any]:
     runner, helper, guard, sentinel, bindings = source_payloads(contract)
     resolved_cache = (cache_root or _default_cache_root()).resolve()
     _, cached = verify_cached_packages(contract, resolved_cache)
-    node, npm_cli = _owned_materializer_paths(contract)
+    package_seed = _verify_package_seed(contract)
     deterministic_root = Path("C:/deterministic/rebound-runner-native-boot").resolve()
     profile_dir = deterministic_root / "home" / "profiles" / "headless"
     initial, changed = build_patch_pair(
@@ -499,9 +577,8 @@ def deterministic_check(cache_root: Path | None = None) -> dict[str, Any]:
             "changed": sha256_bytes(changed),
         },
         "verified_cached_package_count": len(cached),
-        "owned_materializer": {
-            "node_executable_sha256": sha256_file(node),
-            "npm_cli_sha256": sha256_file(npm_cli),
+        "package_seed_materializer": {
+            **package_seed,
             "prelaunch_materialisation_generation": contract["materialisation"][
                 "generation"
             ],
@@ -744,9 +821,7 @@ def execute_boot(cache_root: Path | None = None) -> dict[str, Any]:
         environment, removed_environment_names = build_child_environment(
             home, network_guard_path, network_path
         )
-        package_root, install_projection = _owned_offline_install(
-            root, tarball_path, environment, contract
-        )
+        package_root, install_projection = _materialize_package_seed(root, contract)
         installed_source = _verify_installed_source(package_root, contract)
         installed_versions = validate_installed_packages(package_root, contract)
 
