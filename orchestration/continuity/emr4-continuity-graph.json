@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 380,
+  "graph_revision": 381,
   "harvests": [],
   "nodes": [
     {
@@ -29029,9 +29029,111 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal",
+      "title": "Preset-mount source-coordinate reconciliation rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the bounded native-Harness control sequence and dependency-satisfied deterministic descendants.",
+          "The source reconciliation consumes zero native Harness processes and opens no worker, model/provider, target, product, data, deployment, Pages or protected-ref authority.",
+          "The accepted safe terminal and all predecessor attempts remain immutable."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-source-coordinate-reconciliation",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal/source-coordinate-reconciliation-evidence.json",
+          "status": "accepted",
+          "summary": "Accept eight exact rc.7 source bindings, eleven mount semantics, declared host prerequisites and the six-coordinate source-reachable set."
+        },
+        {
+          "id": "reject-runtime-cause-repair-and-retry-inference",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal/source-coordinate-reconciliation-report.md",
+          "status": "rejected",
+          "summary": "Do not infer the exact internal runtime coordinate, raw error, repair, retry, worker readiness or occupied model behavior."
+        },
+        {
+          "id": "accept-safe-subcoordinate-sanitizer-successor",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-plan.md",
+          "status": "accepted",
+          "summary": "Freeze one pure provider-free sanitizer and fixed synthetic Node fixture matrix without starting the DeepSeek Harness."
+        },
+        {
+          "id": "accept-sol-source-reconciliation-closeout",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-source-coordinate-reconciliation-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the zero-process source-level narrowing and its explicit non-observation boundaries."
+        }
+      ],
+      "claim_scope": [
+        "Eight pinned rc.7 source and manifest files match exact SHA-256 and byte bindings at the reviewed candidate.",
+        "Four package versions, eleven mount-state semantics and both preset rows' injected host-service prerequisites pass.",
+        "The six closed coordinates are source-reachable candidates only; the exact internal runtime coordinate remains unobserved.",
+        "Native Harness, turn, request, broker, worker, model/provider, network, database, Docker and target counts remain zero.",
+        "No raw runtime error, repair, retry or occupied worker authority is accepted."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-source-cache-root-recovery.md",
+          "docs/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-clockwork-intent-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-604.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-preset-mount-source-coordinate-reconciliation.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-source-coordinate-reconciliation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-source-coordinate-reconciliation-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal_evidence.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal/evidence.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal/source-coordinate-reconciliation-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal/source-coordinate-reconciliation-report.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact internal preset-mount runtime subcoordinate remains unobserved and no repair is selected.",
+        "The safe sanitizer is not connected to a runner and no further native attempt is authorised.",
+        "Preset success, effective tools, worker readiness, occupied model behavior and all product/provider/production gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T04:54:51.8809118+10:00",
+      "updated_at": "2026-08-22T04:54:51.8809118+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "e58ad788543622bdd2481cb46fc9e55c428e7e2e",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T04:31:24.1598131+10:00"
+  "updated_at": "2026-08-22T04:54:51.8809118+10:00"
 }

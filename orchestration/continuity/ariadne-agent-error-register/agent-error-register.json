@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 603,
+  "register_revision": 604,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -34237,6 +34237,80 @@
       },
       "incident_id": "AER-0878",
       "attempt_id": "clock-655a3cae9f2b109209cb2f16",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-preset-mount-source-coordinate-reconciliation",
+      "role": "orchestrator",
+      "resource_id": "preset-mount-source-package-seed-root",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The source reader copies the exact accepted installed package-seed root from the materialisation lineage rather than inferring it from another cache convention.",
+      "observed_error": "The first reader inferred AppData/Local/emr4-native-harness from the separate npm-cache convention while the accepted seed is under the user profile's .cache/emr4-native-harness path.",
+      "detection_method": "Five focused assertions and deterministic --check failed closed at source_root_missing_or_unsafe before source admission, output publication or a native process.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-preset-mount-source-cache-root-recovery.md",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.package_seed_root_inferred_from_unrelated_cache_convention",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the accepted user-profile .cache package-seed root in the reader and focused tests.",
+        "prevention_control": "Descendant source readers copy package-seed locations from the accepted materialisation owner and never infer them from another cache's environment convention.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-source-cache-root-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-604.md"
+        ]
+      },
+      "incident_id": "AER-0879",
+      "attempt_id": "clock-cfa5048f300d36f73ef978b4",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-preset-mount-source-coordinate-reconciliation",
+      "role": "orchestrator",
+      "resource_id": "preset-mount-source-closeout-intent-contract-evidence",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_check",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A clockwork graph node uses the schema-supported empty contract_evidence form unless it supplies the required structured object.",
+      "observed_error": "The first closeout intent supplied contract_evidence as a path list, which the prospective source-graph validator rejected as contract_evidence_object_required.",
+      "detection_method": "Clockwork --check rejected tick_transaction_prepare before command execution, generation, publication or canonical mutation.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-clockwork-intent-recovery.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.contract_evidence_path_list_used_where_structured_object_required",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the supported empty contract_evidence form and retain the contract path in the artifact list.",
+        "prevention_control": "Closeout authors copy contract_evidence shape from the live graph schema or an accepted non-empty exemplar and rely on clockwork --check before publication.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-clockwork-intent-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-604.md"
+        ]
+      },
+      "incident_id": "AER-0880",
+      "attempt_id": "clock-b4f6f36ed6ba4b118b3a898e",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

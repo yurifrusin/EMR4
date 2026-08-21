@@ -2,7 +2,24 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "safe_terminal_focused_and_evidence_tests",
+      "command_id": "preset_mount_source_focused_and_evidence_tests",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-p",
+        "no:cacheprovider",
+        "--strict-config",
+        "--strict-markers",
+        "-q",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal_evidence.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "preset_mount_source_selected_inherited_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -14,65 +31,43 @@
         "--strict-markers",
         "-q",
         "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py"
+        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal_evidence.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "safe_terminal_selected_inherited_tests",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "pytest",
-        "--noconftest",
-        "-p",
-        "no:cacheprovider",
-        "--strict-config",
-        "--strict-markers",
-        "-q",
-        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py",
-        "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py",
-        "tests/test_deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
-        "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required"
-    },
-    {
-      "command_id": "safe_terminal_ruff",
+      "command_id": "preset_mount_source_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py"
+        "scripts/deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal_evidence.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "safe_terminal_compile",
+      "command_id": "preset_mount_source_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py"
+        "scripts/deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal_evidence.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "safe_terminal_deterministic_check",
+      "command_id": "preset_mount_source_deterministic_check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal",
+        "scripts.deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal",
         "--check"
       ],
       "completion_contract": "final_exit_code_zero_required"

@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Continue the bounded native-Harness control sequence with a zero-process exact-source reconciliation before any further execution.
+> Continue the bounded control sequence with a pure source-bound safe-subcoordinate sanitizer before any runner bridge or native attempt.
 
 ## North star
 
@@ -530,24 +530,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The first self-reporting native factory attempt narrowed an opaque post-HMR exit to the exact interval after private identity admission and before preset composition admission. Lineage parent: `deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal`.
 257. **Make native DeepSeek worker execution bounded, traceable and governable enough for Raisa development — Preset-composition safe-terminal bridge rehearsal**
    The safe terminal bridge converted an opaque factory failure into one exact closed preset-mount coordinate without raw-error retention or downstream activity. Lineage parent: `deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal`.
+258. **Give the orchestrator substantial, typed control over native DeepSeek worker execution for reliable Raisa development — Preset-mount source-coordinate reconciliation rehearsal**
+   The opaque outer preset-mount stop is now bounded to six exact source-reachable coordinates without spending another native process or retaining the raw exception. Lineage parent: `deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal`.
 
 ## Current position
 
-**Reconcile the exact pinned preset-mount source before designing any further native probe — Preset-composition safe-terminal bridge rehearsal**
+**Construct a closed, non-leaking error reduction gear before another native attempt — Preset-mount source-coordinate reconciliation rehearsal**
 
-**Why this proof came next:** The safe terminal identifies preset mounting but deliberately omits the raw internal exception, leaving a finite source-level ambiguity that should be resolved without spending another process.
+**Why this proof came next:** The exact pinned source leaves six reachable mount coordinates, while the accepted outer bridge deliberately discarded path-bearing raw detail.
 
-One deterministic projection will verify exact source identities and freeze the narrowest source-reachable six-coordinate candidate set.
+A pure sanitizer will reduce exact in-memory rc.7 error shapes to one closed code and null detail using only fixed synthetic fixtures.
 
 ### What this unlocks
 
-- A separately frozen safe typed subcoordinate probe if more than one source coordinate remains reachable.
-- A source-grounded repair only after an exact internal coordinate is observed.
+- A later separately frozen runner bridge that can retain one safe mount subcoordinate.
+- A narrowly selected repair only after an exact safe coordinate is observed.
 
 ### What it does not solve
 
-- No native process, worker turn, model/provider request, target edit or coding-performance evidence.
-- No product/data action, ordinary-practice enablement, production, deployment, release, Pages or protected integration.
+- No native Harness process, worker turn, model/provider request or coding-performance evidence.
+- No runner connection, repair, retry, target, product/data action, production, release, Pages or protected integration.
 
 ## Continuity and authority
 
@@ -1296,7 +1298,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md`
-- `docs/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-plan.md`
+- `docs/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-plan.md`
 - `docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md`
 - `docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-closeout.md`
@@ -1719,7 +1721,7 @@ Prerequisites:
 - `docs/security/bernie-reception-one-structured-source-language-threat-model-delta.md`
 - `docs/security/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-threat-model-delta.md`
 - `docs/security/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-threat-model-delta.md`
-- `docs/security/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal-threat-model-delta.md`
+- `docs/security/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-threat-model-delta.md`
 - `docs/security/dependabot-alert-17-triage-2026-08-01.md`
 - `docs/security/dependabot-alerts-8-15-triage-2026-08-01.md`
 - `docs/security/emr4-model-required-bureau-a3-b3-request-contract-recovery-threat-model-delta.md`
@@ -2704,6 +2706,8 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/preset-mount-source-coordinate-interpretation.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/safe-terminal-bridge-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal/source-coordinate-reconciliation-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal/source-coordinate-reconciliation-report.md`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot/provider-free-preterminal-observable-native-boot-evidence.json`
@@ -3698,4 +3702,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 362; continuity graph revision 380._
+_Compass map revision 363; continuity graph revision 381._

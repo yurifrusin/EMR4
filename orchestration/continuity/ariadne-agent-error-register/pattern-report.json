@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 603,
+  "register_revision": 604,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "60103b520bb75fb8a1cd53460785868853b79510ceddedcf57a74566fe6f5597",
-  "incident_count": 878,
+  "canonical_register_sha256": "26731e7cdb11642896fddea9b682f1485870cf8f398528b8a9b977684a83ee91",
+  "incident_count": 880,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 493,
       "harness": 65,
-      "operator": 170,
+      "operator": 172,
       "repository": 134,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 95,
       "evidence_misreport": 73,
       "harness_failure": 65,
-      "operator_error": 170,
+      "operator_error": 172,
       "output_contract_violation": 273,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 64,
       "integration_reviewer": 3,
-      "orchestrator": 748,
+      "orchestrator": 750,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 536,
+      "low": 538,
       "material": 131,
       "moderate": 211
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 164,
-      "canonical_unchanged": 551,
+      "canonical_unchanged": 553,
       "untrusted_partial_worktree": 163
     },
     "by_resource_and_role": {
@@ -291,6 +291,8 @@
       "preplanning-adapter-inventory::orchestrator": 1,
       "preplanning-git-ref-prose-binding::orchestrator": 1,
       "preplanning-latch-and-git-evidence::orchestrator": 1,
+      "preset-mount-source-closeout-intent-contract-evidence::orchestrator": 1,
+      "preset-mount-source-package-seed-root::orchestrator": 1,
       "preset-projection-deterministic-classifiers::orchestrator": 1,
       "preset-projection-disposable-root-recovery::orchestrator": 1,
       "preset-projection-explicit-path-commit::orchestrator": 1,
