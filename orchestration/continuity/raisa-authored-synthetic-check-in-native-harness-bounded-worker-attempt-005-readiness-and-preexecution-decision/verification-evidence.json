@@ -6,8 +6,8 @@
   "decision": "ready_for_one_separately_checkpointed_occupied_attempt_005",
   "commands": [
     {"id": "deterministic_readiness_gate", "result": "pass"},
-    {"id": "focused_pytest", "result": "pass", "passed": 9, "failed": 0},
-    {"id": "applicable_startup_lineage_pytest", "result": "pass", "passed": 75, "failed": 0, "historical_selectors_deselected": 2},
+    {"id": "focused_pytest", "result": "pass", "passed": 10, "failed": 0},
+    {"id": "applicable_startup_lineage_pytest", "result": "pass", "passed": 76, "failed": 0, "historical_selectors_deselected": 2},
     {"id": "ruff", "result": "pass"},
     {"id": "py_compile", "result": "pass"},
     {"id": "git_diff_check", "result": "pass"},
@@ -66,6 +66,34 @@
       "count": 1,
       "outcome": "second_read_only_clockwork_check_rejected_with_zero_publication",
       "correction": "Use the existing model-runtime and provider-call boundary identifiers with exact one-attempt scopes."
+    },
+    {
+      "incident_id": "AER-0815",
+      "coordinate": "successor_latch_canonical_closed_surface_boundary",
+      "count": 1,
+      "outcome": "postpublication_governance_assertion_failed_and_generation_rolled_back_byte_exactly",
+      "correction": "Retain both the narrow authored-synthetic boundary and the canonical general no-product-data boundary."
+    },
+    {
+      "incident_id": "AER-0816",
+      "coordinate": "nonreusable_clockwork_reading_recomputation_guard",
+      "count": 1,
+      "outcome": "postrollback_focused_test_failed_closed_on_consumed_reading",
+      "correction": "Require exact live generation and lease equality before recomputing the readiness reading."
+    },
+    {
+      "incident_id": "AER-0817",
+      "coordinate": "readiness_test_clockwork_pointer_coordinate",
+      "count": 1,
+      "outcome": "focused_test_failed_closed_on_invented_subject_attribute",
+      "correction": "Use the subject module's exported CLOCKWORK_ROOT joined with current.json."
+    },
+    {
+      "incident_id": "AER-0818",
+      "coordinate": "readiness_verification_count_assertions",
+      "count": 1,
+      "outcome": "widened_packet_failed_only_on_stale_expected_counts",
+      "correction": "Update the paired verification assertions to the post-closeout 10 and 76 test counts."
     }
   ],
   "activity": {

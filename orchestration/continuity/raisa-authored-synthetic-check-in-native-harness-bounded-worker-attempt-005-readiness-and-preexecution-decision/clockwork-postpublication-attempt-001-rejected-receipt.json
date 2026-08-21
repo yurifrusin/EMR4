@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.clockwork_postpublication_rejected_receipt.v1",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+  "source_commit": "83c3bfbc3f40727566c81652509d6b4d10a6a176",
+  "published_generation_id": "gen-827676833e4b23e1c5cb6f99fcd5e850f9a5e53eee2798f963b10e2599b95ffe",
+  "published_lease_sequence": 117,
+  "result": "revision_required",
+  "failed_selector": "tests/test_current_baton_consistency.py::test_current_rows_preserve_closed_surface_boundary",
+  "reason": "successor_latch_omitted_canonical_no_product_data_boundary",
+  "narrow_boundary_preserved": "authored_synthetic_non_product_single_file_only_no_product_patient_appointment_clinical_historical_or_protected_data",
+  "canonical_boundary_omitted": "no_product_patient_appointment_clinical_historical_or_protected_data",
+  "rollback": {
+    "status": "passed",
+    "byte_exact": true,
+    "restored_generation_id": "gen-cfbfb3cdf473a5b6b46246d960df2a2a46f29c5387e9c0980cd934fe28706b62",
+    "lease_sequence": 118
+  },
+  "attempt_005_preparation_count": 0,
+  "native_harness_process_count": 0,
+  "provider_request_count": 0,
+  "user_attention_required": false
+}

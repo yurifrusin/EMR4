@@ -10,7 +10,7 @@ I accept `ready_for_one_separately_checkpointed_occupied_attempt_005`. The exact
 consumed lineage, startup repairs, current rc.7 runner composition, broker,
 work-order schema, disjoint identity, absent outputs, terminal projection and
 non-reusable clockwork reading all pass. The focused and applicable widened
-packets pass 9/9 and 75/75 respectively, with the two immutable pre-repair
+packets pass 10/10 and 76/76 respectively, with the two immutable pre-repair
 equality selectors explicitly bounded.
 
 This acceptance authorises only creation of a fresh successor latch and

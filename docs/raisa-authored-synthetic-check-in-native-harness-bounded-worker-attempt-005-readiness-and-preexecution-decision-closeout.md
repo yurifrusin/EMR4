@@ -27,8 +27,8 @@ rehydration, full source resolution and checkpoint all pass.
 ## Verification
 
 - deterministic gate: pass;
-- focused packet: 9/9;
-- applicable startup-lineage packet: 75/75;
+- focused packet: 10/10;
+- applicable startup-lineage packet: 76/76;
 - two immutable pre-repair equality selectors explicitly excluded;
 - Ruff, compilation, diff hygiene, pre-verifier receipt, task/origin alignment
   and all protected refs: pass;
@@ -40,8 +40,17 @@ Five low-severity procedure classes were contained: two PowerShell inventory
 syntax errors, two self-auditing guard reruns, one historical-selector
 selection rerun and two rejected clockwork authority-opening drafts. None
 consumed a Harness process or provider request, and both clockwork rejections
-published nothing. Revision 594 records AER-0810 through AER-0814; all 814 incidents are
-contained or corrected and none are open.
+published nothing. The first live generation was then rolled back byte-exactly
+when the final governance assertion found that its successor latch retained the
+narrow authored-synthetic data boundary but omitted the canonical companion
+no-product-data boundary. The first corrective focused run then proved that the
+readiness regression also had to gate recomputation on its exact generation and
+lease, rather than operation identity alone. Its first correction named a
+nonexistent pointer constant and failed closed before recomputation; the test
+now uses the subject's exported clockwork root. The widened rerun then caught
+one stale paired 9/75 count assertion after the evidence advanced to 10/76.
+Revision 598 records AER-0810 through AER-0818; all 818 incidents are contained
+or corrected and none are open. No attempt-005 process or provider request ran.
 
 ## Parallelism closeout
 

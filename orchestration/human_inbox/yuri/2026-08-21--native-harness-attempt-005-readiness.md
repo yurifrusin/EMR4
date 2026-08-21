@@ -28,10 +28,15 @@ Decision:
 - 7 legacy consumed artifacts and 15 attempt-004/startup artifacts bound;
 - 16 current component digests and 22 absent future output paths verified;
 - exact initial sentinel-only and changed sentinel-plus-runner profiles pass;
-- focused 9/9 and applicable widened 75/75 tests pass;
+- focused 10/10 and applicable widened 76/76 tests pass;
 - zero Node/Harness/broker/worker/model/provider/network activity;
 - readiness clockwork reading is explicitly non-reusable;
-- AER-0810 through AER-0814 contained; 814 total, none open.
+- the first successor-latch publication was rolled back byte-exactly after a
+  canonical boundary-vocabulary assertion failed; zero Harness/provider work
+  ran during it;
+- the readiness regression now proves non-reuse from exact generation-and-lease
+  state after rollback;
+- AER-0810 through AER-0818 contained; 818 total, none open.
 
 Still closed: occupied execution until its new checkpoint; retries, resumes,
 fallbacks and second workers; ordinary-practice/product/data/runtime/

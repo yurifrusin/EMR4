@@ -119,10 +119,22 @@ def test_readiness_source_has_no_native_or_provider_launcher() -> None:
 
 def test_stored_evidence_is_schema_bound_and_authorizes_no_execution() -> None:
     value = subject.validate_artifacts()
-    fresh = subject.deterministic_evidence()
-    for key in value:
-        if key not in {"evaluated_source", "git_refs"}:
-            assert value[key] == fresh[key]
+    latch = subject.load_json(subject.LATCH_PATH)
+    pointer = subject.load_json(subject.CLOCKWORK_ROOT / "current.json")
+    reading = value["clockwork_reading"]
+    reading_is_still_live = (
+        pointer["selected_generation_id"] == reading["generation_id"]
+        and pointer["lease_sequence"] == reading["lease_sequence"]
+    )
+    if latch["operation_id"] == subject.OPERATION_ID and reading_is_still_live:
+        fresh = subject.deterministic_evidence()
+        for key in value:
+            if key not in {"evaluated_source", "git_refs"}:
+                assert value[key] == fresh[key]
+    elif latch["operation_id"] != subject.OPERATION_ID:
+        assert subject.OPERATION_ID in latch["checkpoint"]["completed_stage"]
+    else:
+        assert pointer["lease_sequence"] > reading["lease_sequence"]
     assert value["result"] == "pass"
     assert value["decision"] == (
         "ready_for_one_separately_checkpointed_occupied_attempt_005"
@@ -138,8 +150,8 @@ def test_verification_acceptance_and_human_closeout_are_bound() -> None:
     verification_path = subject.CONTINUITY_ROOT / "verification-evidence.json"
     verification = json.loads(verification_path.read_text(encoding="utf-8"))
     assert len(verification["verification_source"]) == 40
-    assert verification["commands"][1]["passed"] == 9
-    assert verification["commands"][2]["passed"] == 75
+    assert verification["commands"][1]["passed"] == 10
+    assert verification["commands"][2]["passed"] == 76
     assert set(verification["activity"].values()) == {0}
     paths = (
         subject.REPO_ROOT / "docs" / f"{subject.OPERATION_ID}-closeout.md",
