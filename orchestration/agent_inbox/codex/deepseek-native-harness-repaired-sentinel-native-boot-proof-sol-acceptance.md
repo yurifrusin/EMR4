@@ -23,5 +23,10 @@ The immutable terminal's generic claim sentence is over-affirmative for a
 failure; the structured failure fields control, and AER-0782 preserves the
 correction without rewriting execution evidence.
 
+The first clockwork publication was also rolled back byte-exactly after one of
+98 extended checks found the canonical closed-surface boundary token missing
+from the successor latch. AER-0787 and the corrected typed intent preserve the
+failure and repair; no Harness or provider retry occurred.
+
 Proceed only to a separately frozen provider-free static preactivation source-
 coordinate diagnosis. No second native process is authorised.

@@ -5,8 +5,8 @@ Timestamp: 2026-08-21T14:22:57.0516264+10:00 (Australia/Brisbane)
 
 <!-- ariadne-agent-error-register-reading
 revision: 588
-incident_count: 786
-new_incident_ids: AER-0777,AER-0778,AER-0779,AER-0780,AER-0781,AER-0782,AER-0783,AER-0784,AER-0785,AER-0786
+incident_count: 787
+new_incident_ids: AER-0777,AER-0778,AER-0779,AER-0780,AER-0781,AER-0782,AER-0783,AER-0784,AER-0785,AER-0786,AER-0787
 open_incident_count: 0
 -->
 
@@ -79,7 +79,15 @@ an empty observation list. Validation rejected it before projection or
 publication. The corrected intent supplies the complete ordered observation
 set and lets the clockwork allocate identifiers and derived counts.
 
-All ten incidents are corrected or contained and none remains open. The
+## AER-0787 — successor latch omitted canonical boundary vocabulary
+
+The first published generation preserved the substantive ordinary-practice
+denial but omitted the clockwork's exact canonical flag/allowlist/mounting
+token. The extended post-publication suite failed only its closed-surface
+subset check after 97 peers passed. Lease 109 was rolled back byte-exactly; the
+typed intent now includes the required token before corrected republication.
+
+All eleven incidents are corrected or contained and none remains open. The
 receipt failures and canonical-drift checks demonstrate the clockwork gate
 acting before runtime or publication; the direct-bootstrap recurrence and the
 manual canonical writes show why prose memory is being replaced by executable

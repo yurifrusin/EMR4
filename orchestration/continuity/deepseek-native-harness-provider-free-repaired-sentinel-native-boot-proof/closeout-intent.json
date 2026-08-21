@@ -47,7 +47,7 @@
           "id": "accept-contained-terminal-and-closeout-incidents",
           "source": "docs/ariadne-agent-error-correction-register-revision-588.md",
           "status": "accepted",
-          "summary": "Accept three contained or corrected incidents with none open, including explicit correction of the failed terminal's generic claim wording."
+          "summary": "Accept eleven contained or corrected incidents with none open, including the failed terminal wording and clockwork-boundary vocabulary corrections."
         }
       ],
       "claim_scope": [
@@ -67,7 +67,8 @@
           "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/native-attempt-consumed.json",
           "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-terminal.json",
           "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-report.md",
-          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/efficacy-reading.json"
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/efficacy-reading.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/clockwork-postpublication-verification-rejected-lease-109.json"
         ],
         "closeouts": [
           "docs/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof-closeout.md"
@@ -184,6 +185,9 @@
       "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-terminal.json",
       "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/provider-free-repaired-sentinel-native-boot-report.md",
       "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/efficacy-reading.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/clockwork-tick-evidence-rejected-lease-109.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/clockwork-tick-report-rejected-lease-109.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/clockwork-postpublication-verification-rejected-lease-109.json",
       "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-preplanning-receipt-v3.json",
       "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-preexecution-receipt.json",
       "orchestration/agent_inbox/codex/deepseek-native-harness-repaired-sentinel-native-boot-proof-pre-verifier-receipt.json",
@@ -199,6 +203,7 @@
     "no_retry_resume_fallback_reclassification_or_second_process_for_consumed_attempt_001",
     "consumed_terminal_stream_digests_and_attempt_evidence_remain_immutable",
     "no_raw_error_message_stack_path_stream_session_environment_or_credential_reconstruction",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
     "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
     "no_ordinary_practice_enablement_or_generic_status_arrived_change",
     "no_product_patient_appointment_clinical_historical_or_protected_data",
@@ -534,13 +539,48 @@
       "causal_claim_level": "observation_only",
       "correction": {
         "status": "control_added",
-        "action": "Supply all ten observations and bind the revision note to clockwork-derived IDs and count.",
+        "action": "Supply the complete ordered observations and bind the revision note to clockwork-derived IDs and count.",
         "prevention_control": "Validate v2 intent observations before treating an incident revision artifact as frozen.",
         "evidence_paths": [
           "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/closeout-intent.json"
         ]
       },
       "baton_summary": "records the rejected empty v2 observation set and complete typed replacement."
+    },
+    {
+      "attempt_key": "repaired-sentinel-successor-boundary-vocabulary-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-repaired-sentinel-native-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "successor-protected-boundary-vocabulary",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Every successor latch must preserve the clockwork's exact canonical closed-surface boundary token in addition to tranche-specific denials.",
+      "observed_error": "The first published generation used a narrower ordinary-practice denial but omitted no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting.",
+      "detection_method": "The extended post-publication suite failed only test_current_rows_preserve_closed_surface_boundary after 97 peers passed.",
+      "evidence_paths": [
+        "tests/test_current_baton_consistency.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/clockwork-postpublication-verification-rejected-lease-109.json",
+        "docs/ariadne-agent-error-correction-register-revision-588.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_latch_omitted_canonical_closed_surface_boundary_token",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Roll back lease 109 byte-exactly, add the canonical token to the typed intent and republish a corrected generation.",
+        "prevention_control": "Every successor boundary set runs the canonical closed-surface subset test before publication acceptance.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-repaired-sentinel-native-boot-proof/closeout-intent.json",
+          "tests/test_current_baton_consistency.py"
+        ]
+      },
+      "baton_summary": "records the rolled-back boundary-token omission and exact canonical vocabulary correction."
     }
   ]
 }

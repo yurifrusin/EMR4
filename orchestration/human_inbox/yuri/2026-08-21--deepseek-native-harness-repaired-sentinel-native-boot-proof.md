@@ -15,6 +15,12 @@ evidence because it tells us the relative-path repair alone was not the whole
 problem. The next step is a static source diagnosis, not another speculative
 run.
 
+The new record-keeping clockwork also caught one vocabulary mismatch in its
+own successor record: the meaning stayed closed, but one standard boundary
+label was absent. It rolled that publication back exactly and the corrected
+record now carries both the standard label and the more specific denial. This
+did not restart the Harness.
+
 ## Technical summary
 
 - reviewed candidate: `b99d961e225f355a17e74ec15d6e82fb61d83532`;
@@ -28,6 +34,11 @@ run.
 - raw stream retention: false;
 - process and disposable root absent: true / true; and
 - protected refs remain fixed at the accepted protected commit.
+
+Clockwork verification: the first lease-109 generation passed 97/98 extended
+checks, was rolled back byte-exactly at lease 110, and is being republished
+from a corrected typed boundary set. Provider and native-process counts for
+the correction are zero.
 
 The terminal's structured result is `failed_closed` at
 `native_process_exited_before_readiness`. Its generic claim sentence is too

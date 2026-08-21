@@ -47,6 +47,17 @@ proves the bounded attempt and cleanup, not sentinel loading or readiness.
 AER-0782 records this output-contract defect; the immutable terminal is not
 rewritten.
 
+## Clockwork publication correction
+
+The first lease-109 publication passed the transactional writer but its wider
+post-publication suite passed 97 of 98 checks: the successor latch expressed
+the substantive ordinary-practice denial without also retaining the canonical
+flag/allowlist/mounting token. The clockwork rolled the generation back at
+lease 110 byte-exactly. AER-0787 records the omission; the corrected typed
+intent now carries both the canonical token and the narrower tranche denial.
+This correction launched no Node, Harness, worker, model or provider activity
+and does not alter the consumed native terminal.
+
 ## Parallelism efficacy
 
 DeepSeek and Gemini were correctly declined because worker/model/provider

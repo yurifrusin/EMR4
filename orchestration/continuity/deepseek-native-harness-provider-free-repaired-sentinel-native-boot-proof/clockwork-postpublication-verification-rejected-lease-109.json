@@ -1,0 +1,25 @@
+{
+  "schema_version": "deepseek.native_harness.repaired_sentinel_clockwork_postpublication_verification.v1",
+  "status": "revision_required",
+  "source_commit": "eb172f679e11cc89ddfa50979f061080eb0ea941",
+  "generation_id": "gen-312e3811fb0bcbb188b889fe9e78f5025912945f79aa78eca41ee07345ca01ab",
+  "lease_sequence": 109,
+  "tests": 98,
+  "passed": 97,
+  "failed": 1,
+  "errors": 0,
+  "skipped": 0,
+  "duration_seconds": 174.209,
+  "failed_nodeid": "tests/test_current_baton_consistency.py::test_current_rows_preserve_closed_surface_boundary",
+  "failure_class": "missing_canonical_closed_surface_boundary_token",
+  "provider_requests": 0,
+  "native_harness_processes": 0,
+  "rollback": {
+    "status": "passed",
+    "rolled_back_generation_id": "gen-312e3811fb0bcbb188b889fe9e78f5025912945f79aa78eca41ee07345ca01ab",
+    "selected_generation_id": "gen-7cdf8fcc1fc4b4efae973ad25cc92e70b4a806c7fae009d6c52ee9e6f2489d48",
+    "lease_sequence": 110,
+    "byte_exact": true
+  },
+  "claim_boundary": "This record proves one postpublication vocabulary failure and byte-exact rollback only. It is not Harness, worker, model or provider evidence."
+}
