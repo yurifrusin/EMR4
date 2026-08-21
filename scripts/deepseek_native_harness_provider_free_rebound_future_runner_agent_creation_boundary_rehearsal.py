@@ -838,6 +838,7 @@ def deterministic_check(cache_root: Path | None = None) -> dict[str, Any]:
     contract = load_contract()
     predecessors = validate_predecessors(contract)
     runner, helper, guard, sentinel, bindings = source_payloads(contract)
+    preset_payload = _build_bound_preset_payload(contract)
     resolved_cache = (cache_root or predecessor._default_cache_root()).resolve()
     _, cached = predecessor.verify_cached_packages(contract, resolved_cache)
     seed = predecessor._verify_package_seed(contract)
@@ -886,8 +887,27 @@ def deterministic_check(cache_root: Path | None = None) -> dict[str, Any]:
         "verified_cached_package_count": len(cached),
         "package_seed": seed,
         "package_source_members": package_members,
+        "preset_payload": preset_payload,
         "native_process_count": 0,
     }
+
+
+def _build_bound_preset_payload(contract: dict[str, Any]) -> bytes:
+    composition_contract = native_composition.load_contract()
+    composition_preset = composition_contract["preset"]
+    if (
+        composition_preset["id"] != contract["preset"]["id"]
+        or composition_preset["selected_tools"]
+        != contract["preset"]["effective_tools"]
+    ):
+        raise AgentCreationBoundaryError("preset_contract_family_binding_mismatch")
+    payload = native_composition.build_preset_source(composition_contract)
+    if (
+        len(payload) != contract["preset"]["bytes"]
+        or sha256_bytes(payload) != contract["preset"]["sha256"]
+    ):
+        raise AgentCreationBoundaryError("preset_binding_mismatch")
+    return payload
 
 
 def _render_report(evidence: dict[str, Any]) -> str:
@@ -1120,14 +1140,7 @@ def execute_rehearsal(cache_root: Path | None = None) -> dict[str, Any]:
             profile_dir / "pnpm-workspace.yaml",
             b"packages:\n  - .\n\nnodeLinker: hoisted\nautoInstallPeers: false\n",
         )
-        preset_payload = native_composition.build_preset_source(
-            predecessor.load_contract()
-        )
-        if (
-            len(preset_payload) != contract["preset"]["bytes"]
-            or sha256_bytes(preset_payload) != contract["preset"]["sha256"]
-        ):
-            raise AgentCreationBoundaryError("preset_binding_mismatch")
+        preset_payload = check["preset_payload"]
         preset_path = user_root / PRESET_ID / "agent.cordis.yml"
         predecessor._write_exclusive(preset_path, preset_payload)
         predecessor._write_exclusive(proof_dir / "runner.mjs", runner)

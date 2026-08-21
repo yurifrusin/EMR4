@@ -83,6 +83,22 @@ def test_contract_and_all_schemas_are_closed_and_valid() -> None:
     jsonschema.Draft202012Validator(contract_schema).validate(CONTRACT)
 
 
+def test_preset_payload_is_built_from_its_own_typed_contract_family() -> None:
+    payload = subject._build_bound_preset_payload(CONTRACT)
+    composition_contract = subject.native_composition.load_contract()
+    assert yaml.safe_load(payload) == composition_contract["preset"]["rows"]
+    assert len(payload) == CONTRACT["preset"]["bytes"]
+    assert subject.sha256_bytes(payload) == CONTRACT["preset"]["sha256"]
+
+
+def test_deterministic_check_owns_the_only_preset_contract_selection() -> None:
+    check_source = inspect.getsource(subject.deterministic_check)
+    execute_source = inspect.getsource(subject.execute_rehearsal)
+    assert "preset_payload = _build_bound_preset_payload(contract)" in check_source
+    assert 'preset_payload = check["preset_payload"]' in execute_source
+    assert "predecessor.load_contract()" not in execute_source
+
+
 def test_planning_and_accepted_sources_are_full_git_object_ids() -> None:
     values = [CONTRACT["planning_source"], *CONTRACT["accepted_sources"].values()]
     assert all(subject.FULL_OID.fullmatch(value) is not None for value in values)
