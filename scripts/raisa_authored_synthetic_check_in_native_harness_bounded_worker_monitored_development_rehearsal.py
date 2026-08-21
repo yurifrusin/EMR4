@@ -744,7 +744,6 @@ def profile_patch(root: Path, port: int, *, changed: bool) -> bytes:
     home = root / "home"
     profile_dir = home / "profiles" / "headless"
     workspace = root / "workspace"
-    proof = root / "installation" / "proof"
     events = root / "hmr-events.jsonl"
     runner_terminal = root / "runner-terminal.json"
     preset_root = home / ".agent-presets"
@@ -848,7 +847,7 @@ def profile_patch(root: Path, port: int, *, changed: bool) -> bytes:
             trust: system
         includeUserRoot: true
     - id: synthetic-worker-hmr-sentinel
-      name: {quoted(proof / "sentinel.mjs")}
+      name: ../../../installation/proof/sentinel.mjs
       config:
         eventPath: {quoted(events)}
         watchedPaths:
@@ -857,7 +856,7 @@ def profile_patch(root: Path, port: int, *, changed: bool) -> bytes:
 '''
     if changed:
         rows += f'''    - id: synthetic-one-request-worker-runner
-      name: {quoted(proof / "runner.mjs")}
+      name: ../../../installation/proof/runner.mjs
       inject: [hmr, headlessStartup, agents, sessions, agentPresets]
       config:
         task: !!js ctx.headlessStartup.task

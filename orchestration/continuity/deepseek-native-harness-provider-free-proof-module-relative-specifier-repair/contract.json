@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.native_harness_proof_module_relative_specifier_repair_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-proof-module-relative-specifier-repair",
+  "accepted_diagnosis_source": "f735e6c9f4412aea8e83e410c0292668ebe7853f",
+  "accepted_predecessor_evidence_sha256": "9ba784b0726addb5644ac3786def410aed56e5bf9da3e23ec21d8e10f6ba1ea0",
+  "target_source": "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py",
+  "allowed_relative_specifiers": [
+    "../../../installation/proof/sentinel.mjs",
+    "../../../installation/proof/runner.mjs"
+  ],
+  "allowed_semantic_row_changes": 2,
+  "dead_local_removal_allowed": true,
+  "native_boot_authorized": false,
+  "occupied_retry_authorized": false,
+  "required_zero_counters": [
+    "node_process_count",
+    "harness_process_count",
+    "broker_process_count",
+    "worker_process_count",
+    "model_request_count",
+    "provider_request_count",
+    "network_request_count"
+  ]
+}

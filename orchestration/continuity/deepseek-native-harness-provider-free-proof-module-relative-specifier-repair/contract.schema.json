@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-proof-module-relative-specifier-repair-contract-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "accepted_diagnosis_source",
+    "accepted_predecessor_evidence_sha256",
+    "target_source",
+    "allowed_relative_specifiers",
+    "allowed_semantic_row_changes",
+    "dead_local_removal_allowed",
+    "native_boot_authorized",
+    "occupied_retry_authorized",
+    "required_zero_counters"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_proof_module_relative_specifier_repair_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-proof-module-relative-specifier-repair"},
+    "accepted_diagnosis_source": {"const": "f735e6c9f4412aea8e83e410c0292668ebe7853f"},
+    "accepted_predecessor_evidence_sha256": {"const": "9ba784b0726addb5644ac3786def410aed56e5bf9da3e23ec21d8e10f6ba1ea0"},
+    "target_source": {"const": "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_monitored_development_rehearsal.py"},
+    "allowed_relative_specifiers": {
+      "const": [
+        "../../../installation/proof/sentinel.mjs",
+        "../../../installation/proof/runner.mjs"
+      ]
+    },
+    "allowed_semantic_row_changes": {"const": 2},
+    "dead_local_removal_allowed": {"const": true},
+    "native_boot_authorized": {"const": false},
+    "occupied_retry_authorized": {"const": false},
+    "required_zero_counters": {"type": "array", "minItems": 7, "uniqueItems": true, "items": {"type": "string"}}
+  }
+}

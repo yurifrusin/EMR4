@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-proof-module-relative-specifier-repair-evidence-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "status",
+    "target_source_sha256",
+    "source_checks",
+    "profile_checks",
+    "zero_activity",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_proof_module_relative_specifier_repair_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-proof-module-relative-specifier-repair"},
+    "status": {"enum": ["passed", "failed_closed"]},
+    "target_source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_checks": {"type": "object", "additionalProperties": {"type": "boolean"}, "minProperties": 5},
+    "profile_checks": {"type": "object", "additionalProperties": {"type": "boolean"}, "minProperties": 8},
+    "zero_activity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_process_count", "harness_process_count", "broker_process_count", "worker_process_count", "model_request_count", "provider_request_count", "network_request_count"],
+      "properties": {
+        "node_process_count": {"const": 0},
+        "harness_process_count": {"const": 0},
+        "broker_process_count": {"const": 0},
+        "worker_process_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0},
+        "network_request_count": {"const": 0}
+      }
+    },
+    "claim_boundary": {"type": "string", "minLength": 1}
+  }
+}
