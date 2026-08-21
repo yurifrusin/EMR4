@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "result", "decision", "evaluated_source", "git_refs", "consumed_history", "components", "clockwork_reading", "fresh_attempt", "terminal_projection", "limits", "process_boundary", "occupied_attempt_authorized", "readiness_clockwork_reusable_for_execution", "fresh_post_closeout_clockwork_reading_required", "ordinary_practice_boundary"],
+  "properties": {
+    "schema_version": {"const": "ariadne.synthetic_native_worker_attempt_004_readiness_evidence.v1"},
+    "operation_id": {"const": "raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision"},
+    "result": {"const": "pass"},
+    "decision": {"const": "ready_for_one_separately_checkpointed_occupied_attempt_004"},
+    "evaluated_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "git_refs": {"type": "object"},
+    "consumed_history": {"type": "array", "minItems": 7, "maxItems": 7},
+    "components": {"type": "object"},
+    "clockwork_reading": {"type": "object"},
+    "fresh_attempt": {"type": "object"},
+    "terminal_projection": {"type": "object"},
+    "limits": {"type": "object"},
+    "process_boundary": {"type": "object", "additionalProperties": {"const": 0}},
+    "occupied_attempt_authorized": {"const": false},
+    "readiness_clockwork_reusable_for_execution": {"const": false},
+    "fresh_post_closeout_clockwork_reading_required": {"const": true},
+    "ordinary_practice_boundary": {"const": "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting"}
+  }
+}
