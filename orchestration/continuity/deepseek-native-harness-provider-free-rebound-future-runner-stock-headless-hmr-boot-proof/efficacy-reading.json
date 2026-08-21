@@ -1,0 +1,13 @@
+{
+  "control_gain": "exact_rebound_runner_native_activation_is_machine_joined_to_typed_pre_request_and_broker_zero_evidence",
+  "deepseek_worker_request_count": 0,
+  "free_form_finite_control_fields": 0,
+  "model_request_count": 0,
+  "native_process_count": 1,
+  "next_gate": "one_bounded_provider_free_deepseek_worker_attempt_only_if_separately_frozen",
+  "operation_id": "deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof",
+  "provider_request_count": 0,
+  "result": "pass",
+  "retry_count": 0,
+  "schema_version": "ariadne.native_harness_rebound_stock_headless_hmr_boot_efficacy.v1"
+}

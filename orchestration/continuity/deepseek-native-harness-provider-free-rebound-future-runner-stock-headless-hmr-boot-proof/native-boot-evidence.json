@@ -1,0 +1,198 @@
+{
+  "broker_reading": {
+    "canonical": true,
+    "identity_bound": true,
+    "provider_call_completed": 0,
+    "provider_call_failed": 0,
+    "provider_call_started": 0,
+    "raw_broker_stream_retained": false,
+    "request_count": 0,
+    "request_rejected": 0,
+    "schema_version": "ariadne.native_harness_broker_request_reading.v1"
+  },
+  "bundle_identity": {
+    "attempt_id": "future-identity-target-rebinding-fixture-001",
+    "candidate_source": "deaf0b3ccc23adb2f2f17b275a6a7faa4d2ae2ac",
+    "operation_id": "deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal"
+  },
+  "candidate_source": "560f471b72bef0b9790120238657dc7afd4d602b",
+  "cleanup": {
+    "disposable_root_absent": true,
+    "npm_cache_retained_by_boot": false,
+    "process_absent": true,
+    "raw_environment_retained": false,
+    "raw_logs_retained": false
+  },
+  "composition": {
+    "bundle_manifest_after_sha256": "3816deba287772d10a955d0a59d1fd2a90bc6ef599b8d63e10990d2bb5c01bf3",
+    "bundle_manifest_before_sha256": "3816deba287772d10a955d0a59d1fd2a90bc6ef599b8d63e10990d2bb5c01bf3",
+    "bundle_manifest_unchanged": true,
+    "changed_patch_sha256": "7146d7bae9af38881871763423b9929a7c42a723a1b487fee6faaf1ea583e3ff",
+    "guard_sha256": "6678ed31bdcd30a5018689b72ad509c182854bf5d63862f59b397acc8de40894",
+    "helper_copy_equal": true,
+    "helper_copy_sha256": "7ff2630b1523c66bb9e0cb5d649879cfa97d0340b791a85255c7dc5ad1fb66fd",
+    "initial_patch_sha256": "0c5b5efb3c9c4038aeb4fd8afd3829a26a6014a1442001bd5b89585deae180c1",
+    "runner_copy_equal": true,
+    "runner_copy_sha256": "d025d1929f20589e86cbd66e983bda17435c1a21e937468532c38bb4895efb1a",
+    "runner_fallback_terminal_absent": true,
+    "sentinel_sha256": "6ff4ff7da4b0bc4a488d1cf79e8412ebb959d8d2c4061683196cf4fa5f4c8de4"
+  },
+  "controller_terminal": {
+    "attempt_id": "future-identity-target-rebinding-fixture-001",
+    "broker_zero": true,
+    "candidate_source": "deaf0b3ccc23adb2f2f17b275a6a7faa4d2ae2ac",
+    "cause_coordinate": "preset_root_roster_mismatch",
+    "coordinate": "post_hmr_pre_request_failure",
+    "diagnostic_accepted": true,
+    "error_kind": "error",
+    "occupied_launch_authorized": false,
+    "operation_id": "deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal",
+    "pre_request_supported": true,
+    "raw_error_retained": false,
+    "raw_stream_read": false,
+    "schema_version": "ariadne.native_harness_rebound_controller_terminal.v1",
+    "source_bindings": {
+      "controller_module_sha256": "29495710c5e95a12fba92a2ef34c28ed6b9ce5e034402e5551767e19b843014c",
+      "future_runner_sha256": "d025d1929f20589e86cbd66e983bda17435c1a21e937468532c38bb4895efb1a",
+      "generated_helper_sha256": "7ff2630b1523c66bb9e0cb5d649879cfa97d0340b791a85255c7dc5ad1fb66fd"
+    },
+    "stage": "preset_root_roster_admission",
+    "target_binding": {
+      "classification": "inert_authored_synthetic_relative_python_fixture",
+      "coordinate_sha256": "f1a4634e24e1cde4bcddfcc88e932a44d75843f6c8a47c1568599775f219c72d",
+      "occupied_target_use_authorized": false,
+      "relative_path": "workspace/authored_synthetic_control_probe.py"
+    }
+  },
+  "diagnostic": {
+    "attempt_id": "future-identity-target-rebinding-fixture-001",
+    "candidate_source": "deaf0b3ccc23adb2f2f17b275a6a7faa4d2ae2ac",
+    "cause_coordinate": "preset_root_roster_mismatch",
+    "error_kind": "error",
+    "operation_id": "deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal",
+    "raw_cause_retained": false,
+    "raw_error_message_retained": false,
+    "raw_paths_retained": false,
+    "raw_stack_retained": false,
+    "schema_version": "ariadne.native_harness_post_hmr_pre_request_diagnostic.v1",
+    "stage": "preset_root_roster_admission"
+  },
+  "execution_attempt_id": "rebound-stock-headless-hmr-boot-attempt-001",
+  "failure_classification": null,
+  "launch": {
+    "duration_ms": 851,
+    "exit_code": 1,
+    "exit_mode": "controller_terminated_after_typed_sidecar",
+    "hmr_mutation_count": 1,
+    "native_process_count": 1,
+    "raw_stream_read": false,
+    "resume_count": 0,
+    "retry_count": 0,
+    "started_at_utc": "2026-08-21T14:59:05Z",
+    "stderr_retained": false,
+    "stdout_retained": false
+  },
+  "operation_id": "deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof",
+  "package": {
+    "bin": "lib/bin.js",
+    "installed_source": {
+      "checks": {
+        "documented_headless_profile_flag": true,
+        "headless_hmr_row_disabled": true,
+        "headless_runner_declared": true,
+        "hmr_expose_internals_required": true,
+        "hmr_register_config_present": true,
+        "profile_boot_creates_watch_only_hmr": true,
+        "profile_boot_watches_user_patches_twice": true
+      },
+      "source_sha256": {
+        "bin": "c0226687bb20f45c603ec6fe50f3de16d1c3510c3a803304ec575ef9bc366c62",
+        "headless_patch": "534dc49c84b0fb9c2d3278dc8990f577d57b7a88442941444b58c96ac1a09ba0",
+        "hmr": "7ec3296a902154a2b9906dceb4d81b996ff4c8373709e116ea8dac69058ee2b1",
+        "profile_boot": "f83ffea6a4d30cfbe02b41dabcc05104c4ad27bf79c74f601f0ddb6ccdf88969"
+      }
+    },
+    "installed_versions": {
+      "@deepseek-ai/dsh": "0.1.0-rc.7",
+      "@deepseek-ai/dsh-agent-presets": "0.1.0-rc.7",
+      "@deepseek-ai/dsh-scope": "0.1.0-rc.7",
+      "@deepseek-ai/dsh-tool-fs": "0.1.0-rc.7",
+      "@deepseek-ai/dsh-tool-fs-search": "0.1.0-rc.7",
+      "@deepseek-ai/dsh-tools": "0.1.0-rc.7"
+    },
+    "integrity": "sha512-ZceDCJ8FAywih+USW/OMk9jEhunlvJBGEz4kqrhau23hPzbciOazZrywH0nBRsaalSeAJ1JGBmjtw4OSjToStw==",
+    "name": "@deepseek-ai/dsh",
+    "offline_install": {
+      "copy": {
+        "byte_count": 219364530,
+        "file_count": 32744,
+        "reparse_point_count": 0,
+        "tree_sha256": "d84e73067c8dbbf4836969eb948012fd364ee454bb07744cfe486995a256084d"
+      },
+      "duration_ms": 180673,
+      "process_count": 0,
+      "retry_count": 0,
+      "seed": {
+        "byte_count": 219364530,
+        "dsh_manifest_sha256": "7a9f356ad1e27c7013b44619bc675b8cb877f995cd0951ab3dfeb10d4edcc361",
+        "file_count": 32744,
+        "lock_package_count": 588,
+        "package_json_sha256": "0009f94a6b9c3495404d4a1a89e0eef82ba4948c4ea29994c210a271390e64db",
+        "package_lock_sha256": "a89defcd8a2c5aae4a54c03bda98e2585711fce881b4b08c90ca4808d45555f4",
+        "reparse_point_count": 0,
+        "seed_scope_package_only": true,
+        "tree_sha256": "d84e73067c8dbbf4836969eb948012fd364ee454bb07744cfe486995a256084d"
+      },
+      "strategy": "verified_installed_tree_seed_copy"
+    },
+    "sha1": "8a69013c06179d7af437de92fb4a9a2e1fd7d410",
+    "sha256": "2f8f0b763d611ac536f7a9411ee43c0afc067c1b8732c3102c04dbe398bcacc5",
+    "verified_cached_package_count": 4,
+    "version": "0.1.0-rc.7"
+  },
+  "planning_source": "d1f9e549068c4ac1bb6348219b389e02e10352da",
+  "provider_boundary": {
+    "agent_create_count": 0,
+    "broker_process_count": 0,
+    "broker_request_count": 0,
+    "credential_environment_names_removed_count": 3,
+    "database_invocation_count": 0,
+    "docker_invocation_count": 0,
+    "model_request_count": 0,
+    "network_attempt_count": 0,
+    "network_ledger_valid": true,
+    "provider_request_count": 0,
+    "session_count": 0,
+    "turn_count": 0,
+    "worker_count": 0
+  },
+  "readiness": {
+    "events": [
+      "sentinel_activated",
+      "stock_headless_hmr_ready"
+    ],
+    "exact_expected_order": true,
+    "valid": true
+  },
+  "result": "pass",
+  "schema_version": "ariadne.native_harness_rebound_stock_headless_hmr_boot_evidence.v1",
+  "source_bindings": {
+    "controller_module_sha256": "29495710c5e95a12fba92a2ef34c28ed6b9ce5e034402e5551767e19b843014c",
+    "effective_tool_guard_sha256": "6678ed31bdcd30a5018689b72ad509c182854bf5d63862f59b397acc8de40894",
+    "future_runner_sha256": "d025d1929f20589e86cbd66e983bda17435c1a21e937468532c38bb4895efb1a",
+    "generated_helper_sha256": "7ff2630b1523c66bb9e0cb5d649879cfa97d0340b791a85255c7dc5ad1fb66fd",
+    "readiness_sentinel_sha256": "6ff4ff7da4b0bc4a488d1cf79e8412ebb959d8d2c4061683196cf4fa5f4c8de4",
+    "rebinding_module_sha256": "6f2bf41551ddb839678eaea0cfbf2f61c8cc0735be60b0cd94db4e79b469b983"
+  },
+  "target": {
+    "absent_after_process": true,
+    "file_created": false,
+    "used": false
+  },
+  "target_binding": {
+    "classification": "inert_authored_synthetic_relative_python_fixture",
+    "coordinate_sha256": "f1a4634e24e1cde4bcddfcc88e932a44d75843f6c8a47c1568599775f219c72d",
+    "occupied_target_use_authorized": false,
+    "relative_path": "workspace/authored_synthetic_control_probe.py"
+  }
+}
