@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.native_harness_preset_mount_safe_subcoordinate_sanitizer_attempt.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+  "attempt_id": "attempt-002",
+  "candidate_source": "50a17beba7ea3a461cc2dd2154f747b307119f20",
+  "result": "node_fixture_exit_nonzero",
+  "safe_controller_terminal": "node_fixture_exit_nonzero",
+  "node_process_count": 1,
+  "cumulative_node_process_count": 2,
+  "numeric_exit_code_retained": false,
+  "stdout_byte_count_retained": false,
+  "stderr_byte_count_retained": false,
+  "stream_content_retained": false,
+  "raw_runtime_detail_retained": false,
+  "native_harness_process_count": 0,
+  "native_harness_import_count": 0,
+  "provider_request_count": 0,
+  "worker_turn_count": 0,
+  "runner_integrated": false,
+  "repair_selected": false,
+  "further_process_authorized_by_attempt": false,
+  "consumed": true
+}
