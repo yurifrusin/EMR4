@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 601,
+  "register_revision": 602,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -33825,6 +33825,233 @@
       },
       "incident_id": "AER-0867",
       "attempt_id": "clock-9629df6f8f89a16422cef129",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-agent-factory-diagnostic",
+      "role": "orchestrator",
+      "resource_id": "generated-diagnostic-report-timestamp",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_script_execution",
+      "stage": "closeout",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Every generated narrative timestamp must be measured at artifact creation or copied from an authoritative typed evidence time.",
+      "observed_error": "The generated report used a guessed static 04:15 Brisbane timestamp that was still in the future when the attempt and readback completed.",
+      "detection_method": "The report timestamp was compared with the machine clock and the evidence launch time during immediate postexecution readback.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/agent-factory-diagnostic-report.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/generated-report-metadata-rejection.json",
+        "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-report-timestamp-recovery.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.static_future_timestamp_in_generated_report",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the report bytes, reject only the timestamp metadata, retain the typed launch time as authoritative and add an evidence regression test.",
+        "prevention_control": "Generated narrative timestamps come from the creation clock or an already typed evidence timestamp; guessed static future values are forbidden.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/generated-report-metadata-rejection.json",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal_evidence.py",
+          "docs/ariadne-agent-error-correction-register-revision-602.md"
+        ]
+      },
+      "incident_id": "AER-0868",
+      "attempt_id": "clock-39cb6013bc5a1393b491fb82",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-agent-factory-diagnostic",
+      "role": "orchestrator",
+      "resource_id": "transactional-contract-evidence-projection",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Transactional node contract_evidence is empty unless it contains the graph's structured contract-evidence objects; ordinary artifact paths belong in the evidence inventory.",
+      "observed_error": "The first prospective intent placed three ordinary file-path strings in contract_evidence and the clockwork rejected the graph projection before commands or publication.",
+      "detection_method": "The clockwork validated the prospective Continuity and Compass graph and returned contract_evidence_object_required while every canonical byte remained unchanged.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-contract-evidence-shape-recovery.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.transactional_closeout_contract_evidence_string_shape",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep the exact contract and schema paths in the node artifact inventory and make contract_evidence empty because no structured contract-evidence object is needed.",
+        "prevention_control": "Ordinary file paths are routed through evidence.artifacts; contract_evidence is reserved for schema-valid structured graph objects.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-contract-evidence-shape-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-602.md"
+        ]
+      },
+      "incident_id": "AER-0869",
+      "attempt_id": "clock-518151d59f1a9ee449eca50b",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-agent-factory-diagnostic",
+      "role": "orchestrator",
+      "resource_id": "agent-error-register-revision-reading",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The prospective register revision increments once per accepted clockwork transaction, while incident population and incident identifiers increment independently for every observation in that transaction.",
+      "observed_error": "The second prospective intent incorrectly incremented the register revision once for each of two observations and named revision 603 instead of canonical revision 601 plus one transaction, revision 602.",
+      "detection_method": "The clockwork compared the prospective note with the canonical register and rejected tick_incident_revision_path before commands or publication.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-register-revision-recovery.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.agent_error_revision_confused_with_incident_increment",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use prospective register revision 602, incident population 870 and latest incident AER-0870 for this one transaction containing three observations.",
+        "prevention_control": "Derive the register revision as canonical revision plus one per transaction; derive incident population and identifiers independently from the observation count.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-register-revision-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-602.md"
+        ]
+      },
+      "incident_id": "AER-0870",
+      "attempt_id": "clock-2bdbbc7a944ce350c239eed3",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-agent-factory-diagnostic",
+      "role": "orchestrator",
+      "resource_id": "provider-free-deterministic-check-cache-root",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_provider_free_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A deterministic check executed through the provider-free test wrapper supplies every required local resource path explicitly and does not rely on stripped ambient user-location variables.",
+      "observed_error": "The first combined focused/evidence run called deterministic_check without cache_root; the provider-free wrapper had correctly removed LOCALAPPDATA, so the test failed before any native process was created.",
+      "detection_method": "The focused provider-free test gate failed with the typed localappdata_missing guard error while native-process count remained zero.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-explicit-cache-root-test-recovery.md",
+        "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.provider_free_test_omitted_explicit_local_resource_root",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep the hash-bound focused test unchanged and run it through the closeout's no-conftest pytest command, which retains the accepted host cache-location binding without loading repository conftest.",
+        "prevention_control": "Provider-free wrapper suitability is checked against each test's bound local-resource requirements before command-manifest selection; postexecution implementation bytes remain immutable.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-explicit-cache-root-test-recovery.md",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-602.md"
+        ]
+      },
+      "incident_id": "AER-0871",
+      "attempt_id": "clock-6de3c689fc8878c5588479ee",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-agent-factory-diagnostic",
+      "role": "orchestrator",
+      "resource_id": "postexecution-hash-bound-focused-test",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_provider_free_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The focused test bound by implementation_bytes remains byte-identical after the native attempt; closeout-only execution-environment corrections occur in the mutable command manifest.",
+      "observed_error": "The first cache-root correction edited the hash-bound focused test, so the next run correctly failed with implementation_digest_mismatch before any native process was created.",
+      "detection_method": "The accepted deterministic source recalculated implementation_bytes and rejected the changed focused-test digest.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-hash-bound-test-recovery.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/contract.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.postexecution_hash_bound_test_edited_for_closeout_environment",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the focused test byte-for-byte and move the environment-sensitive verification choice to the closeout command manifest's no-conftest pytest invocation.",
+        "prevention_control": "After occupied execution, implementation_bytes paths are immutable; closeout verification adaptations are expressed only in unbound verifier orchestration.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-hash-bound-test-recovery.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-602.md"
+        ]
+      },
+      "incident_id": "AER-0872",
+      "attempt_id": "clock-60816376529592e02533ba6b",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-agent-factory-diagnostic",
+      "role": "orchestrator",
+      "resource_id": "clockwork-incident-category-vocabulary",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every incident observation chooses category directly from EXPECTED_ORIGIN_BY_CATEGORY's closed vocabulary.",
+      "observed_error": "The third prospective clockwork intent used the descriptive categories test_setup_error and protected_evidence_boundary_violation, neither of which belongs to the closed incident vocabulary.",
+      "detection_method": "The clockwork rejected tick_incident_category before commands or canonical publication; direct reading of EXPECTED_ORIGIN_BY_CATEGORY identified operator_error as the admitted category for both observations.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-incident-category-vocabulary-recovery.md",
+        "orchestration_harness/governance_clockwork_tick.py",
+        "scripts/ariadne_agent_error_register.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.closed_incident_category_vocabulary_bypassed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace both descriptive categories with the admitted operator_error category and bind future selection to the runtime category map.",
+        "prevention_control": "Incident category is selected by reading EXPECTED_ORIGIN_BY_CATEGORY; free-form category authoring is forbidden.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-incident-category-vocabulary-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-602.md"
+        ]
+      },
+      "incident_id": "AER-0873",
+      "attempt_id": "clock-69c70bea5d5dcd6bf9c56119",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

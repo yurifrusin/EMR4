@@ -2,21 +2,24 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "agent_boundary_focused_evidence_and_plan_tests",
+      "command_id": "agent_factory_diagnostic_focused_and_evidence_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.ariadne_provider_free_pytest",
-        "--repo-root",
-        "C:/Users/sarashera/emr4",
-        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_plan.py",
-        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_evidence.py"
+        "pytest",
+        "--noconftest",
+        "-p",
+        "no:cacheprovider",
+        "--strict-config",
+        "--strict-markers",
+        "-q",
+        "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal_evidence.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "agent_boundary_inherited_regressions",
+      "command_id": "agent_factory_diagnostic_inherited_regressions",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -28,6 +31,7 @@
         "tests/test_deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal.py",
         "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py",
         "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
         "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
         "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof_evidence.py",
         "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py"
@@ -35,7 +39,7 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "agent_boundary_governance_regressions",
+      "command_id": "agent_factory_diagnostic_governance_regressions",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -53,29 +57,37 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "agent_boundary_ruff",
+      "command_id": "agent_factory_diagnostic_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_plan.py",
-        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_evidence.py"
+        "scripts/deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal_evidence.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "agent_boundary_compile",
+      "command_id": "agent_factory_diagnostic_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_plan.py",
-        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_evidence.py"
+        "scripts/deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal_evidence.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "agent_factory_diagnostic_deterministic_check",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "scripts.deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal",
+        "--check"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

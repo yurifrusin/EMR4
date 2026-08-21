@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Freeze and execute one provider-free closed-subcoordinate diagnostic transaction without retrying the consumed attempt.
+> Continue the bounded native-Harness control sequence by connecting the accepted guard sanitizer to one distinct no-request process.
 
 ## North star
 
@@ -526,24 +526,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The orchestrator can now prove exact stock-headless readiness, rebound-runner activation, the chosen typed pre-request stop and independent broker silence from one native process. Lineage parent: `deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal`.
 255. **Make native DeepSeek worker execution bounded, traceable and governable enough for Raisa development — Rebound future-runner agent-creation boundary failed-closed rehearsal**
    The orchestrator contained one real post-HMR failure completely and identified the remaining traceability gap: runner/factory stages need a mandatory finite terminal before any success claim. Lineage parent: `deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof`.
+256. **Make native DeepSeek worker execution bounded, traceable and governable enough for Raisa development — Post-HMR agent-factory closed-subcoordinate diagnostic rehearsal**
+   The first self-reporting native factory attempt narrowed an opaque post-HMR exit to the exact interval after private identity admission and before preset composition admission. Lineage parent: `deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal`.
 
 ## Current position
 
-**Eliminate the sidecar-free attribution gap between HMR mounting and the native agent-factory boundary — Rebound future-runner agent-creation boundary failed-closed rehearsal**
+**Expose the preset-composition failure through the guard's already accepted safe terminal vocabulary — Post-HMR agent-factory closed-subcoordinate diagnostic rehearsal**
 
-**Why this proof came next:** The consumed attempt is safely contained but cannot reveal its factory stage, and no reviewer can reconstruct runtime state that was not recorded.
+**Why this proof came next:** The native process proved the factory and private identity boundary but retained only an outer unclassified coordinate while the guard already supplies a finite sanitizer.
 
-One distinct provider-free diagnostic process will emit a finite typed stage/error terminal or narrow the failure to runner link/apply absence without projecting unknown factory counts.
+One distinct process will emit an exact safe guard coordinate or proceed through the prepublication veto without raw error retention.
 
 ### What this unlocks
 
-- Attributable native package-import, service, preset and factory-stage evidence.
-- A defensible decision on the narrowest later agent-creation proof without opaque reruns.
+- A source-grounded repair for the exact preset-composition defect if a safe guard coordinate is returned.
+- A defensible private factory-boundary acceptance if the existing prepublication veto is reached.
 
 ### What it does not solve
 
-- No published agent/session, turn, broker/model/provider request or coding-performance evidence.
-- No target edit, product command, product data, ordinary-practice enablement, production, deployment, release, Pages or protected integration.
+- No occupied worker turn, model/provider request, target edit or coding-performance evidence.
+- No product/data action, ordinary-practice enablement, production, deployment, release, Pages or protected integration.
 
 ## Continuity and authority
 
@@ -1289,10 +1291,10 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-closeout.md`
 - `docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md`
-- `docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md`
 - `docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md`
+- `docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-plan.md`
 - `docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md`
 - `docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-closeout.md`
@@ -1715,7 +1717,7 @@ Prerequisites:
 - `docs/security/bernie-reception-one-structured-source-language-threat-model-delta.md`
 - `docs/security/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-threat-model-delta.md`
 - `docs/security/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-threat-model-delta.md`
-- `docs/security/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-threat-model-delta.md`
+- `docs/security/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-threat-model-delta.md`
 - `docs/security/dependabot-alert-17-triage-2026-08-01.md`
 - `docs/security/dependabot-alerts-8-15-triage-2026-08-01.md`
 - `docs/security/emr4-model-required-bureau-a3-b3-request-contract-recovery-threat-model-delta.md`
@@ -2693,6 +2695,8 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/provider-free-inert-task-sentinel-readiness-native-boot-terminal.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/efficacy-reading.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/agent-factory-diagnostic-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/diagnostic-interpretation.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/integration-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis/diagnosis-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json`
@@ -3690,4 +3694,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 360; continuity graph revision 378._
+_Compass map revision 361; continuity graph revision 379._

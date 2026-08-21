@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 378,
+  "graph_revision": 379,
   "harvests": [],
   "nodes": [
     {
@@ -28803,9 +28803,130 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal",
+      "title": "Post-HMR agent-factory closed-subcoordinate diagnostic rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the bounded provider-free native-Harness control sequence and its narrow deterministic recoveries.",
+          "The distinct native attempt is consumed without retry; no worker turn, model/provider request, target, product, data, deployment, Pages or protected-ref authority opened.",
+          "Both predecessor attempts, their exact negative evidence and the accepted package/runner bindings remain immutable."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-finite-agent-factory-diagnostic-pass",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/agent-factory-diagnostic-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one typed private-identity-admitted terminal as finite diagnostic evidence with exact zero downstream activity and cleanup."
+        },
+        {
+          "id": "reject-agent-creation-worker-readiness-and-composition-claims",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/diagnostic-interpretation.json",
+          "status": "rejected",
+          "summary": "Do not infer effective-tool composition, model selection, commit, publication veto, agent creation, worker readiness or occupied model behavior."
+        },
+        {
+          "id": "accept-preset-composition-failure-interval",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/diagnostic-interpretation.json",
+          "status": "accepted",
+          "summary": "Accept the interval after private identity admission and before preset composition admission while retaining the exact internal guard coordinate as unknown."
+        },
+        {
+          "id": "reject-generated-future-report-timestamp",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/generated-report-metadata-rejection.json",
+          "status": "rejected",
+          "summary": "Reject only the guessed future Markdown timestamp; preserve the exact report and retain its evidence-consistent terminal, counter and cleanup claims."
+        },
+        {
+          "id": "freeze-safe-terminal-bridge-successor",
+          "source": "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-plan.md",
+          "status": "accepted",
+          "summary": "Freeze one distinct process whose runner exposes only the accepted guard sanitizer's closed safe coordinate or the existing prepublication-veto path."
+        },
+        {
+          "id": "accept-sol-diagnostic-closeout",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-agent-factory-diagnostic-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the diagnostic gain and exact containment without opening a DeepSeek worker or model request."
+        }
+      ],
+      "claim_scope": [
+        "One pinned rc.7 process traversed exact readiness and HMR mutation, dynamically imported the bound package dependencies and emitted one typed sidecar.",
+        "The real factory was invoked once and private Agent/Session identity was admitted before the preset-composition interval failed with a closed unclassified coordinate.",
+        "Public registries, lifecycle announcements, turns, requests, broker, worker, model/provider, network, database, Docker and target activity remained zero.",
+        "The process and disposable root were absent, the bundle and package seed remained unchanged, and no raw runtime detail was retained.",
+        "The generated report's static future timestamp is rejected without changing the accepted typed evidence."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/diagnostic-interpretation.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/generated-report-metadata-rejection.json",
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-report-timestamp-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-602.md",
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-register-revision-recovery.md",
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-explicit-cache-root-test-recovery.md",
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-hash-bound-test-recovery.md",
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-diagnostic-incident-category-vocabulary-recovery.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-agent-factory-closed-subcoordinate-diagnostic.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-agent-factory-diagnostic-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-agent-factory-diagnostic-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal_evidence.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/diagnostic-sidecar.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/evidence.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/native-attempt-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/agent-factory-diagnostic-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/agent-factory-diagnostic-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/efficacy-reading.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact safe effective-tool guard coordinate remains unobserved.",
+        "Effective-tool composition, model selection, commit, publication veto, agent creation, worker readiness and occupied model behavior remain unproved.",
+        "All product, data, provider-request, production, release, Pages and protected-integration gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T03:42:19.3682524+10:00",
+      "updated_at": "2026-08-22T03:42:19.3682524+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "c7593acd3cb03aae2ac9f17dc44564f12782c025",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T02:48:06.6590250+10:00"
+  "updated_at": "2026-08-22T03:42:19.3682524+10:00"
 }

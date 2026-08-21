@@ -1,25 +1,25 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 601,
+  "register_revision": 602,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "f9734578f2b040236837797bafaa5c3448af3c1a9b534ad6ee1cbfabb346d2bc",
-  "incident_count": 867,
+  "canonical_register_sha256": "970ddb1218fe3a506689e7ccad6af6ce900f8fd61dc225b116742830fa83b21c",
+  "incident_count": 873,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 489,
+      "agent_behavior": 493,
       "harness": 65,
-      "operator": 163,
+      "operator": 165,
       "repository": 134,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 95,
-      "evidence_misreport": 72,
+      "evidence_misreport": 73,
       "harness_failure": 65,
-      "operator_error": 163,
-      "output_contract_violation": 270,
+      "operator_error": 165,
+      "output_contract_violation": 273,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
       "repository_defect": 134,
@@ -28,23 +28,24 @@
     "by_role": {
       "implementer": 64,
       "integration_reviewer": 3,
-      "orchestrator": 737,
+      "orchestrator": 743,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 525,
+      "low": 531,
       "material": 131,
       "moderate": 211
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 164,
-      "canonical_unchanged": 540,
+      "canonical_unchanged": 546,
       "untrusted_partial_worktree": 163
     },
     "by_resource_and_role": {
       "accepted-native-startup-terminal-and-consumed-controller-source::orchestrator": 1,
       "agent-error-register-append-anchor::orchestrator": 1,
       "agent-error-register-peer-linkage::orchestrator": 1,
+      "agent-error-register-revision-reading::orchestrator": 1,
       "agent-error-register-stage-vocabulary::orchestrator": 1,
       "antigravity-gemini-36-flash-high::verifier": 1,
       "antigravity-gemini-flash-3-6-high-verifier::verifier": 43,
@@ -124,6 +125,7 @@
       "clockwork-closeout-incident-observation::orchestrator": 1,
       "clockwork-continuity-node-projector::orchestrator": 1,
       "clockwork-gear-architecture-plan-latch-test::orchestrator": 1,
+      "clockwork-incident-category-vocabulary::orchestrator": 1,
       "clockwork-incident-register-revision-projection::orchestrator": 1,
       "clockwork-incident-revision-intake::orchestrator": 1,
       "clockwork-incident-stage-vocabulary::orchestrator": 2,
@@ -228,6 +230,7 @@
       "frozen-plan-process-and-authority-vocabulary::orchestrator": 1,
       "future-attempt-embedded-helper-identity::implementer": 1,
       "gemini-36-flash-high-verifier::verifier": 1,
+      "generated-diagnostic-report-timestamp::orchestrator": 1,
       "generated-entrypoint-wrapper-json-serializer::implementer": 1,
       "git-cached-diff-whitespace-gate::orchestrator": 1,
       "git-object-identity-commentary::orchestrator": 1,
@@ -278,6 +281,7 @@
       "ordinary-practice-check-in-readiness-reviewer::orchestrator": 3,
       "plan-commit-staged-whitespace-gate::orchestrator": 1,
       "postcompaction-five-source-rehydration-receipt::orchestrator": 1,
+      "postexecution-hash-bound-focused-test::orchestrator": 1,
       "powershell-read-only-inventory::orchestrator": 1,
       "pre-hmr-controller-ordering-probe::implementer": 1,
       "pre-verifier-candidate-git-object::orchestrator": 1,
@@ -300,6 +304,7 @@
       "provider-disabled-test-manifest::orchestrator": 1,
       "provider-disabled-test-selection::orchestrator": 2,
       "provider-free-cached-rc7-source-reader::implementer": 1,
+      "provider-free-deterministic-check-cache-root::orchestrator": 1,
       "provider-free-pytest-command-manifest::orchestrator": 1,
       "provider-free-pytest-wrapper-cli::orchestrator": 1,
       "provider-free-recovery-evidence-runner::implementer": 1,
@@ -342,6 +347,7 @@
       "transactional-closeout-node-relationship-cardinality::orchestrator": 1,
       "transactional-closeout-shadow-fixture::orchestrator": 1,
       "transactional-contract-evidence-field::orchestrator": 1,
+      "transactional-contract-evidence-projection::orchestrator": 1,
       "windows-owned-process-absence-reading::orchestrator": 1
     }
   },
