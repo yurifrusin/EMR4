@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import inspect
+import json
 import subprocess
 
 import pytest
@@ -131,3 +132,30 @@ def test_stored_evidence_is_schema_bound_and_authorizes_no_execution() -> None:
     assert value["readiness_clockwork_reusable_for_execution"] is False
     assert value["fresh_post_closeout_clockwork_reading_required"] is True
     assert value["fresh_attempt"]["output_path_count"] == 22
+
+
+def test_verification_acceptance_and_human_closeout_are_bound() -> None:
+    verification_path = subject.CONTINUITY_ROOT / "verification-evidence.json"
+    verification = json.loads(verification_path.read_text(encoding="utf-8"))
+    assert len(verification["verification_source"]) == 40
+    assert verification["commands"][1]["passed"] == 9
+    assert verification["commands"][2]["passed"] == 75
+    assert set(verification["activity"].values()) == {0}
+    paths = (
+        subject.REPO_ROOT / "docs" / f"{subject.OPERATION_ID}-closeout.md",
+        subject.REPO_ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-native-harness-attempt-005-readiness-sol-acceptance.md",
+        subject.REPO_ROOT
+        / "orchestration"
+        / "human_inbox"
+        / "yuri"
+        / "2026-08-21--native-harness-attempt-005-readiness.md",
+    )
+    for path in paths:
+        text = path.read_text(encoding="utf-8")
+        assert "Timestamp: 2026-08-21T" in text
+        assert "+10:00" in text
+        assert "48d7d457bc5768f3f4b4f52fced7c7fd6452a8cc" in text

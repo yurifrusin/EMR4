@@ -1,0 +1,69 @@
+{
+  "schema_version": "ariadne.synthetic_native_worker_attempt_005_readiness_verification.v1",
+  "verification_source": "48d7d457bc5768f3f4b4f52fced7c7fd6452a8cc",
+  "evaluated_source": "951bfce43ed9bcb8729bdbbec91153b870fde537",
+  "result": "pass",
+  "decision": "ready_for_one_separately_checkpointed_occupied_attempt_005",
+  "commands": [
+    {"id": "deterministic_readiness_gate", "result": "pass"},
+    {"id": "focused_pytest", "result": "pass", "passed": 9, "failed": 0},
+    {"id": "applicable_startup_lineage_pytest", "result": "pass", "passed": 75, "failed": 0, "historical_selectors_deselected": 2},
+    {"id": "ruff", "result": "pass"},
+    {"id": "py_compile", "result": "pass"},
+    {"id": "git_diff_check", "result": "pass"},
+    {"id": "protected_ref_and_task_origin_verification", "result": "pass"},
+    {"id": "pre_verifier_ariadne_receipt", "result": "pass", "manual_git_object_ids": 0}
+  ],
+  "bindings": {
+    "legacy_consumed_artifacts": 7,
+    "attempt_004_and_startup_lineage_artifacts": 15,
+    "prospective_attempt_005_output_paths_absent": 22,
+    "component_digests": 16,
+    "clockwork_lease_sequence": 116,
+    "clockwork_reading_reusable_for_execution": false,
+    "occupied_attempt_authorized": false
+  },
+  "historical_selector_boundary": {
+    "deselected": [
+      "controller_convergence.test_deterministic_evidence_launches_no_subprocess",
+      "controller_convergence.test_contract_evidence_and_report_are_current"
+    ],
+    "reason": "Both immutable selectors bind the pre-repair controller digest; the current gate directly binds the later accepted relative-specifier and sentinel-source repairs while retaining every other selector.",
+    "evidence": "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-historical-test-selection.md"
+  },
+  "contained_corrections": [
+    {
+      "incident_id": "AER-0810",
+      "coordinate": "powershell_foreach_pipeline_parse",
+      "count": 2,
+      "outcome": "read_only_inventory_commands_rejected_before_output",
+      "correction": "Assign foreach output to a rows variable before piping it to JSON conversion."
+    },
+    {
+      "incident_id": "AER-0811",
+      "coordinate": "process_free_source_guard_self_reference",
+      "count": 2,
+      "outcome": "focused_tests_failed_closed_without_process_activity",
+      "correction": "Construct every forbidden token, including the subprocess-run token, from fragments before scanning module source."
+    },
+    {
+      "incident_id": "AER-0812",
+      "coordinate": "historical_controller_equality_selector",
+      "count": 1,
+      "outcome": "widened_packet_failed_only_on_two_pre_repair_equality_selectors",
+      "correction": "Freeze the exact two-selector applicability boundary and retain the other 75 current tests."
+    }
+  ],
+  "activity": {
+    "node_process_count": 0,
+    "harness_process_count": 0,
+    "broker_process_count": 0,
+    "worker_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "network_request_count": 0,
+    "retry_count": 0,
+    "resume_count": 0,
+    "fallback_count": 0
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa authored-synthetic native Harness bounded-worker attempt 005 readiness and preexecution decision",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_attempt_005_readiness_decision_contract",
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+    "resume_after_compaction": true,
+    "source_head": "1913e55a5d5a0e24835f7c61ec77228b4628e8d3",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "48d7d457bc5768f3f4b4f52fced7c7fd6452a8cc",
+    "reason_codes": [],
+    "resolved_commit": "1913e55a5d5a0e24835f7c61ec77228b4628e8d3",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "1913e55a5d5a0e24835f7c61ec77228b4628e8d3"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "48d7d457bc5768f3f4b4f52fced7c7fd6452a8cc",
+    "branch_origin_aligned": true,
+    "head": "48d7d457bc5768f3f4b4f52fced7c7fd6452a8cc",
+    "origin_branch_commit": "48d7d457bc5768f3f4b4f52fced7c7fd6452a8cc",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 659
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_gate",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The candidate is a process-free readiness record; asking DeepSeek to review itself would violate the provider-free envelope and add no independent local runtime fact.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "gemini_verifier",
+        "rationale": "The exact local digest, identity, absence, schema and lifecycle gates pass and this bounded tier does not require a provider veto; Gemini would add cost without a distinct evidence surface.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the completed deterministic decision has no separable review package that exceeds briefing and reconciliation cost.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "acceptance",
+      "clockwork_closeout",
+      "successor_preexecution"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "accept only the exact origin-aligned candidate and stored full source binding",
+      "preserve the fifteen-artifact startup lineage and seven-artifact legacy history",
+      "retain zero process and request counts",
+      "keep the readiness clockwork reading non-reusable for execution",
+      "close out through one clockwork publication before any successor checkpoint"
+    ]
+  },
+  "planned_action": "accept_the_deterministic_attempt_005_readiness_decision",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-plan.md",
+      "docs/security/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision-threat-model-delta.md",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/contract.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/deterministic-evidence.json",
+      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision/readiness-report.md",
+      "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-historical-test-selection.md",
+      "docs/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-closeout.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns deterministic verification and acceptance. DeepSeek, Gemini and native-subagent lanes remain declined because no worker/provider activity or independent provider veto is required for this exact local gate.",
+    "git_refs_and_worktree": "The machine-generated snapshot must confirm task-branch/origin alignment, all local/origin protected refs at the protected expected commit, tracked cleanliness, docs/branding presence and preservation of unrelated untracked paths; no Git object ID is caller supplied.",
+    "live_handover_current_baton": "Continuity 370 / Compass 352 name this process-free attempt-005 readiness decision after the accepted inert-task boot proof.",
+    "protected_evidence_boundaries": "The accepted candidate remains a provider-free and process-free readiness decision. It binds consumed attempts and startup repairs, an absent disjoint attempt-005 identity, exact repaired components and a non-reusable clockwork reading. It authorizes no occupied process, retry, product/data/runtime/deployment/Pages change or protected-ref movement."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

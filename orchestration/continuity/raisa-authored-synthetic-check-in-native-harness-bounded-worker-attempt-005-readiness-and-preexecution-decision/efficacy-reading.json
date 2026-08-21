@@ -1,0 +1,44 @@
+{
+  "schema_version": "ariadne.workflow_efficacy_reading.v1",
+  "operation_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-005-readiness-and-preexecution-decision",
+  "result": "promising_exact_readiness_pass_with_three_contained_procedure_classes",
+  "outcome": "The repaired native-Harness runner composition is deterministically coherent and one fresh attempt-005 envelope is representable, while execution authority remains separately checkpointed and every process/provider counter stays zero.",
+  "useful_work": {
+    "readiness_decision_passed": true,
+    "legacy_consumed_artifacts_bound": 7,
+    "startup_lineage_artifacts_bound": 15,
+    "component_digests_bound": 16,
+    "prospective_output_paths_absent": 22,
+    "focused_tests_passed": 9,
+    "applicable_widened_tests_passed": 75,
+    "native_processes": 0,
+    "provider_requests": 0
+  },
+  "reruns": [
+    {
+      "kind": "powershell_read_only_inventory_syntax",
+      "count": 2,
+      "cause": "Two foreach expressions were piped directly after their closing braces, which PowerShell parsed as an empty pipeline element.",
+      "control": "Inventory commands now assign foreach output to a rows variable before conversion or piping."
+    },
+    {
+      "kind": "self_auditing_source_guard",
+      "count": 2,
+      "cause": "The process-free source check initially contained the forbidden literals it searched for; its first correction omitted the equivalent subprocess-run self-reference.",
+      "control": "All scanned tokens are now constructed from fragments, and the focused packet passes."
+    },
+    {
+      "kind": "historical_selector_applicability",
+      "count": 1,
+      "cause": "The first widened packet included two immutable controller-convergence equality selectors that intentionally bind the pre-repair controller digest.",
+      "control": "The exact two-selector boundary is frozen; all other 75 current/applicable startup-lineage tests pass."
+    }
+  ],
+  "process_cost": {
+    "native_processes_consumed": 0,
+    "provider_cost_incurred": false,
+    "extra_processes_caused_by_procedure_corrections": 0,
+    "deterministic_test_rerun_classes": 3
+  },
+  "assessment": "The clockwork-oriented regime preserved the important property: none of the procedural corrections consumed a Harness or provider attempt. The remaining friction is local command and test-selection syntax, now measured explicitly. Attempt 005 is ready only for a new exact checkpoint, not execution from this tranche."
+}
