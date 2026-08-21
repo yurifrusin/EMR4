@@ -1,0 +1,281 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+    "title": "Raisa provider-free authored-synthetic native Harness structured diagnostic bounded-worker controller convergence rehearsal",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-21T10:54:16.4878045+10:00",
+    "node": {
+      "id": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+      "title": "Provider-free structured diagnostic bounded-worker controller convergence",
+      "kind": "tooling",
+      "relationships": [
+        {"node_id": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal", "relation": "builds_on"}
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority covers provider-free controller convergence.",
+          "The tranche admits no Harness, broker, worker, model or provider process.",
+          "No occupied, product, data, deployment or protected-integration authority opened."
+        ]
+      },
+      "decisions": [
+        {"id": "accept-descendant-controller-adapter", "source": "orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/deterministic-evidence.json", "status": "accepted", "summary": "Accept the descendant controller adapter around the canonical wrapper, exact launch binding, closed terminal selector and safe writer."},
+        {"id": "accept-v2-only-for-canonical-exact-identity", "source": "orchestration_harness/bounded_worker_structured_diagnostic_controller.py", "status": "accepted", "summary": "Select v2 only for canonical exact-identity sidecars; retain v1 and fail closed for absent or invalid evidence."},
+        {"id": "preserve-historical-controller-and-consumed-evidence", "source": "docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md", "status": "accepted", "summary": "Keep the historical controller and attempts 001-003 byte-identical by using a descendant adapter."},
+        {"id": "reject-occupied-readiness", "source": "orchestration/agent_inbox/codex/raisa-provider-free-structured-diagnostic-bounded-worker-controller-convergence-sol-acceptance.md", "status": "rejected", "summary": "Reject any claim that this provider-free source convergence authorises or proves an occupied worker or provider attempt."},
+        {"id": "accept-contained-controller-procedure-corrections", "source": "docs/ariadne-agent-error-correction-register-revision-582.md", "status": "accepted", "summary": "Accept three corrected local procedure observations with no occupied or protected-surface effect."}
+      ],
+      "claim_scope": [
+        "The descendant controller adapter composes the accepted wrapper, task vocabulary, sidecar reader and v2 terminal builder.",
+        "Canonical exact-identity evidence selects v2; absent or invalid evidence preserves v1 and fails closed.",
+        "The safe terminal precedes owned-process termination and exact disposable-root cleanup in the frozen lifecycle envelope.",
+        "The historical controller and seven consumed evidence artifacts remain byte-identical.",
+        "Node, Harness, broker, worker, session, prompt, tool, model, provider and network counts are zero.",
+        "This proves provider-free controller composition only."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/deterministic-evidence.json",
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/deterministic-report.md"
+        ],
+        "closeouts": ["docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md"],
+        "acceptances": ["orchestration/agent_inbox/codex/raisa-provider-free-structured-diagnostic-bounded-worker-controller-convergence-sol-acceptance.md"],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-structured-diagnostic-bounded-worker-controller-convergence-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-structured-diagnostic-bounded-worker-controller-convergence-pre-verifier-acceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py",
+          "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal_plan.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/bounded_worker_structured_diagnostic_controller.py",
+          "scripts/raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-582.md",
+          "orchestration/human_inbox/yuri/2026-08-21--structured-diagnostic-bounded-worker-controller-convergence.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The older startup-terminal recovery validator still compares historical source hashes to later mutable working-tree sources.",
+        "No fresh occupied attempt identity or preexecution admission exists.",
+        "No Harness, worker, model or provider activity occurred.",
+        "Product, data, ordinary-practice, deployment and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Converge the proven structured diagnostic gear into a callable descendant of the bounded authored-synthetic controller",
+      "outcome": "A future fresh runner can build the canonical wrapper and select the exact safe terminal without mutating consumed evidence.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/deterministic-evidence.json",
+        "docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Repair historical source-binding semantics before admitting a fresh occupied attempt",
+      "why_now": "The controller convergence exposed two old tests whose validator treats mutable present-day controller and test sources as if they were immutable historical evidence.",
+      "outcome": "A narrow provider-free repair can bind those historical hashes to their exact Git snapshot and restore deterministic predecessor verification.",
+      "unlocks": [
+        "A clean full predecessor verification surface for the converged controller.",
+        "A grounded attempt-004 readiness and preexecution decision."
+      ],
+      "does_not_solve": [
+        "No occupied Harness, worker, model or provider attempt.",
+        "No change to immutable historical evidence bytes.",
+        "No product, data, production, deployment or protected-ref authority."
+      ],
+      "evidence": [
+        "docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md",
+        "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py"
+      ],
+      "orientation_statement": "Bind historical validation to historical Git objects, not mutable current files, before attempt-004 planning."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair",
+      "active_tranche": "DeepSeek native Harness provider-free historical recovery validator source-binding repair",
+      "objective": "Replace the historical startup-terminal validator's mutable-current-source equality with exact immutable Git-object binding and restore its two predecessor checks without changing historical evidence or launching Harness, worker, model or provider activity.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, constrained to provider-free deterministic validator repair and no occupied attempt.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_historical_git_object_binding_repair_contract"
+    },
+    "incidents": [
+      {"incident_id": "direct-controller-edit-crossed-historical-source-binding", "source_id": "controller-convergence-implementation-001", "peers": []},
+      {"incident_id": "pre-verifier-receipt-before-candidate-push", "source_id": "controller-convergence-acceptance-001", "peers": []},
+      {"incident_id": "clockwork-incident-tranche-exceeded-bound", "source_id": "controller-convergence-closeout-check-001", "peers": []}
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "controller_convergence_final_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal", "--check"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "controller_convergence_final_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py",
+          "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal_plan.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "controller_convergence_final_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "orchestration_harness/bounded_worker_structured_diagnostic_controller.py", "scripts/raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py", "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "controller_convergence_final_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "orchestration_harness/bounded_worker_structured_diagnostic_controller.py", "scripts/raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Provider-free structured diagnostic bounded-worker controller convergence acceptance",
+    "paths": [
+      "docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/contract.json",
+      "orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/contract.schema.json",
+      "orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/deterministic-evidence.schema.json",
+      "orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/deterministic-evidence.json",
+      "orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/deterministic-report.md",
+      "orchestration_harness/bounded_worker_structured_diagnostic_controller.py",
+      "scripts/raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py",
+      "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py",
+      "docs/ariadne-agent-error-correction-register-revision-582.md",
+      "docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-structured-diagnostic-bounded-worker-controller-convergence-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-21--structured-diagnostic-bounded-worker-controller-convergence.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_historical_validator_source_binding_repair_only",
+    "no_native_harness_broker_worker_session_prompt_tool_model_or_provider_process_or_request",
+    "historical_evidence_bytes_and_consumed_attempts_remain_immutable",
+    "exact_full_git_object_resolution_required",
+    "no_occupied_attempt_retry_resume_overwrite_or_reclassification",
+    "no_raw_startup_stream_reconstruction_or_retention",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "controller-convergence-direct-edit-source-binding-001",
+      "observed_on": "2026-08-21",
+      "tranche": "structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "historical-bounded-worker-controller-source",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Controller convergence must preserve every byte-bound historical evidence input unless a separately frozen repair changes its validation semantics.",
+      "observed_error": "The first uncommitted implementation edited the historical bounded-worker controller directly before predecessor tests exposed its source-hash binding.",
+      "detection_method": "Focused predecessor tests rejected current-source equality before candidate commit or occupied execution.",
+      "evidence_paths": ["docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.direct_controller_edit_crossed_historical_source_binding",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the historical controller exactly and place the new gear in a descendant adapter with explicit immutable-artifact checks.",
+        "prevention_control": "Inspect historical source-hash consumers before editing accepted controllers; use a descendant adapter when consumed evidence binds the original bytes.",
+        "evidence_paths": ["orchestration_harness/bounded_worker_structured_diagnostic_controller.py"]
+      },
+      "baton_summary": "records the caught direct-controller source-binding conflict and exact descendant-adapter correction."
+    },
+    {
+      "attempt_key": "controller-convergence-preverifier-before-push-001",
+      "observed_on": "2026-08-21",
+      "tranche": "structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "pre-verifier-task-branch-alignment",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "acceptance",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A pre-verifier receipt requiring branch alignment must run after the exact candidate is present on the task-branch origin.",
+      "observed_error": "The first receipt was generated after local candidate commit but before its task-branch push.",
+      "detection_method": "The machine Git snapshot returned branch_origin_aligned false and revision_required.",
+      "evidence_paths": ["docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.preverifier_receipt_generated_before_candidate_push",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Push the exact candidate, rerun the unchanged preflight and require branch-origin alignment before acceptance.",
+        "prevention_control": "Pre-verifier sequencing now treats candidate push as a prerequisite whenever the generic Git snapshot policy requires branch alignment.",
+        "evidence_paths": ["orchestration/agent_inbox/codex/raisa-provider-free-structured-diagnostic-bounded-worker-controller-convergence-pre-verifier-acceptance-receipt.json"]
+      },
+      "baton_summary": "records the rejected pre-push receipt and passing post-push machine snapshot."
+    },
+    {
+      "attempt_key": "controller-convergence-clockwork-tranche-bound-001",
+      "observed_on": "2026-08-21",
+      "tranche": "structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "clockwork-incident-tranche-vocabulary",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every incident tranche label must fit the clockwork's closed 120-character bounded vocabulary.",
+      "observed_error": "The first read-only closeout check supplied the full operation identifier as the incident tranche label and exceeded the bound.",
+      "detection_method": "Clockwork rejected with tick_incident_tranche before transaction preparation, command execution or publication.",
+      "evidence_paths": ["docs/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal-closeout.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_incident_tranche_exceeded_bound",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use one concise unique tranche label that fits the engine-owned bound and rerun the read-only check.",
+        "prevention_control": "Measure incident tranche labels against the 120-character clockwork contract before the first closeout check.",
+        "evidence_paths": ["orchestration/continuity/raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal/closeout/closeout-intent.json"]
+      },
+      "baton_summary": "records the bounded-vocabulary rejection and concise tranche-label correction."
+    }
+  ]
+}
