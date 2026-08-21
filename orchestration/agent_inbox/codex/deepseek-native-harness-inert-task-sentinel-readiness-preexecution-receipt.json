@@ -1,0 +1,130 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free inert-task sentinel-readiness native boot proof",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_one_process_inert_task_sentinel_readiness_contract",
+    "operation_id": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof",
+    "resume_after_compaction": true,
+    "source_head": "5fae13203261be6c8960d1bad599e7f04f749fed",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "1b4b2b4f04ff29ace609f788fc9fb891d933bb24",
+    "reason_codes": [],
+    "resolved_commit": "5fae13203261be6c8960d1bad599e7f04f749fed",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "5fae13203261be6c8960d1bad599e7f04f749fed"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "1b4b2b4f04ff29ace609f788fc9fb891d933bb24",
+    "branch_origin_aligned": true,
+    "head": "1b4b2b4f04ff29ace609f788fc9fb891d933bb24",
+    "origin_branch_commit": "1b4b2b4f04ff29ace609f788fc9fb891d933bb24",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 659
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "single_inert_task_native_boot_preexecution",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "This tranche tests the native Harness before any worker/model request; dispatching DeepSeek would violate the provider-free claim and contend with the sole serial process lease.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "gemini_verifier",
+        "rationale": "Provider review is outside the one-process provider-free envelope; deterministic admission and sanitized lifecycle evidence own this narrow readiness decision.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation, and construction plus observation of one non-repeatable process lifecycle is tightly serial with Sol acceptance.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "preexecution receipt revision_required",
+      "candidate, contract, package or component mismatch before Popen",
+      "terminal or cleanup failure after attempt consumption",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "freeze the exact task argument, component hashes and launch command before execution",
+      "complete deterministic admission before consuming the sole native process lease",
+      "observe exactly one Node/Harness lifecycle and terminate immediately after readiness or failure",
+      "sanitize and destroy streams, environment and disposable package tree before deciding acceptance",
+      "perform no retry, resume, fallback or second process"
+    ]
+  },
+  "planned_action": "consume_exactly_one_provider_free_inert_task_sentinel_readiness_native_boot_attempt_then_terminalize_and_clean_without_retry",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/evidence.schema.json",
+      "scripts/deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_engine.py",
+      "scripts/deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py",
+      "tests/test_deepseek_native_harness_provider_free_inert_task_sentinel_readiness_native_boot_proof.py",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-inert-task-sentinel-readiness-preplanning-receipt.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial sole launch, bounded event reading, terminalization, termination, cleanup and acceptance. DeepSeek, Gemini and native-subagent lanes receive no work package.",
+    "git_refs_and_worktree": "The machine-generated snapshot must confirm task-branch/origin alignment, all local/origin protected refs at the protected expected commit, tracked cleanliness, docs/branding presence and preservation of every unrelated untracked path; no Git object ID is caller supplied.",
+    "live_handover_current_baton": "Continuity 369 / Compass 351 accept the empty-task diagnosis and name this exact one-process inert-task readiness proof; the committed task-branch candidate now passes deterministic admission.",
+    "protected_evidence_boundaries": "Run exactly one local rc7 Node/native-Harness process with one fixed inert authored-synthetic task and the unchanged sentinel-only headless profile. Keep the runner, broker, worker, model/provider and network surfaces disabled; retain only bounded events/counts/exit/digests; destroy streams, environment and disposable tree; no retry or product/data/deployment/protected action."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
