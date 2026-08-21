@@ -1,0 +1,465 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal",
+    "title": "DeepSeek native Harness provider-free future-runner materialisation and controller terminal",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-21T22:25:11.2517454+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal",
+      "title": "Native Harness exact future-attempt bundle and typed controller terminal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the bounded provider-free native-Harness control sequence.",
+          "No Node, Harness, broker, worker, model, provider, network, database, product, deployment, Pages or protected-ref authority opened.",
+          "The accepted predecessor runner, helper and all consumed attempts remain byte-immutable."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-six-path-future-attempt-materialisation",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/materialisation-evidence.json",
+          "status": "accepted",
+          "summary": "Accept exclusive materialisation and readback of the exact runner, helper and canonical bundle manifest in a closed disposable six-path tree."
+        },
+        {
+          "id": "accept-controller-owned-terminal-assembly",
+          "source": "orchestration_harness/native_post_hmr_future_attempt_materialisation.py",
+          "status": "accepted",
+          "summary": "Accept one canonical terminal assembled from exact bundle, broker and optional sidecar evidence through closed code-owned coordinates."
+        },
+        {
+          "id": "reject-occupied-readiness-and-behavior-overclaim",
+          "source": "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "Reject claims about JavaScript parsing, native loading, real broker or sidecar readings, DeepSeek behavior, provider reachability or occupied readiness."
+        },
+        {
+          "id": "accept-corrected-materialisation-workflow-readings",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/closeout/closeout-intent.json",
+          "status": "accepted",
+          "summary": "Accept seven corrected materialisation and workflow observations with their deterministic controls and none open."
+        }
+      ],
+      "claim_scope": [
+        "The accepted future runner, generated helper and controller are separately hash-bound before materialisation.",
+        "The disposable tree admits exactly six named paths and writes files exclusively without overwrite.",
+        "The canonical bundle explicitly preserves the inherited consumed target classification and keeps occupied launch false.",
+        "Pre-request terminal selection requires both exact diagnostic and independent all-zero broker evidence.",
+        "Invalid broker or bundle evidence rejects while invalid or absent sidecar evidence preserves the generic terminal.",
+        "No prohibited process, request, raw stream, product, data or protected-ref effect occurred."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-future-runner-materialisation-identity-binding-recovery.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/materialisation-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/materialisation-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-runner-materialisation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-runner-materialisation-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-runner-materialisation-candidate-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-future-runner-materialisation-candidate-prepush-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_agents_handover_archive.py",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/native_post_hmr_future_attempt_materialisation.py",
+          "scripts/deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-598.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-future-runner-materialisation.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The materialised bundle retains the predecessor embedded identity and consumed authored-synthetic target coordinate.",
+        "No JavaScript parse, stock-headless-to-custom-runner boot, real sidecar or broker source has been exercised.",
+        "No occupied Harness attempt, provider request or DeepSeek behavior is authorised or proved.",
+        "Product, data, production, deployment, release, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Make DeepSeek native-Harness worker execution bounded, traceable and governable enough for Raisa development",
+      "outcome": "The orchestrator can now materialise an exact future-attempt bundle and assemble its typed terminal from two independent canonical gauges before any worker process exists.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/materialisation-evidence.json",
+        "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Give the verified bundle one genuinely fresh inert future-attempt identity and target before native loading",
+      "why_now": "Materialisation and terminal assembly pass, but the exact accepted bytes intentionally retain predecessor identity and a consumed target that cannot be relaunched.",
+      "outcome": "A deterministic transformation will bind a new disposable identity and inert authored-synthetic target across runner, helper, bundle and terminal without executing them.",
+      "unlocks": [
+        "One fresh inspectable future-attempt bundle whose identity and target are not inherited from consumed attempt evidence.",
+        "The separately required provider-free stock-headless-to-custom-runner boot proof under already assembled controls."
+      ],
+      "does_not_solve": [
+        "No Node, Harness, broker, worker, model or provider execution.",
+        "No DeepSeek performance evidence or native Harness occupied readiness.",
+        "No product, data, production, deployment or protected integration."
+      ],
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/efficacy-reading.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-future-runner-materialisation-sol-acceptance.md"
+      ],
+      "orientation_statement": "Rebind one fresh inert future-attempt identity and target provider-free; do not launch the native Harness."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal",
+      "active_tranche": "DeepSeek native Harness provider-free future-attempt identity and target rebinding rehearsal",
+      "objective": "Derive one fresh disposable future-attempt identity and inert authored-synthetic target from the exact accepted materialised bundle, and prove runner, helper, bundle and terminal bindings remain closed without executing Node, Harness, broker, worker, model or provider activity.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and extended authority for the bounded native-Harness control sequence.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_exact_identity_and_target_rebinding_contract"
+    },
+    "incidents": [
+      {
+        "incident_id": "manual-canonical-path-staging-mismatch",
+        "source_id": "materialisation-staging-path-001",
+        "peers": []
+      },
+      {
+        "incident_id": "mandatory-timestamp-omission",
+        "source_id": "materialisation-predecessor-timestamp-001",
+        "peers": []
+      },
+      {
+        "incident_id": "outer-embedded-identity-conflation",
+        "source_id": "materialisation-identity-binding-001",
+        "peers": []
+      },
+      {
+        "incident_id": "standalone-repository-import-bootstrap-missing",
+        "source_id": "materialisation-generator-entrypoint-001",
+        "peers": []
+      },
+      {
+        "incident_id": "typed-identity-validation-order",
+        "source_id": "materialisation-candidate-validation-001",
+        "peers": []
+      },
+      {
+        "incident_id": "closed-incident-stage-vocabulary-lapse",
+        "source_id": "materialisation-closeout-stage-vocabulary-001",
+        "peers": []
+      },
+      {
+        "incident_id": "successor-protected-boundary-omission",
+        "source_id": "materialisation-closeout-boundary-001",
+        "peers": []
+      }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "materialisation_generated_evidence",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal", "--check"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "materialisation_focused_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "materialisation_inherited_regressions",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py", "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py", "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py", "tests/test_ariadne_orchestrator_preflight.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "materialisation_governance_regressions",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_ariadne_active_operation_latch_continuity.py", "tests/test_agents_handover_archive.py", "tests/test_agents_acceptance_index.py", "tests/test_current_baton_consistency.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "materialisation_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "orchestration_harness/native_post_hmr_future_attempt_materialisation.py", "scripts/deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "materialisation_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "orchestration_harness/native_post_hmr_future_attempt_materialisation.py", "scripts/deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-future-runner-materialisation-identity-binding-recovery.md",
+      "orchestration_harness/native_post_hmr_future_attempt_materialisation.py",
+      "scripts/deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/materialisation-evidence.json",
+      "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py",
+      "docs/ariadne-agent-error-correction-register-revision-598.md",
+      "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-future-runner-materialisation-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-future-runner-materialisation.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_future_attempt_identity_and_target_rebinding_only",
+    "accepted_materialisation_candidate_55906f55dfd82474f095acaa9dc436013db77411_remains_immutable",
+    "derive_one_fresh_disposable_identity_and_inert_authored_synthetic_target_only",
+    "runner_helper_bundle_and_terminal_identity_bindings_must_converge_exactly",
+    "closed_stage_cause_error_vocabulary_and_full_git_oid_contract_remain_exact",
+    "occupied_launch_authorized_remains_false",
+    "no_node_native_harness_broker_worker_model_provider_process_or_request",
+    "no_occupied_attempt_retry_resume_fallback_or_second_worker",
+    "no_raw_error_message_stack_code_path_cause_stream_session_prompt_response_or_credential",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "exact_test_counts_from_completed_machine_output_only",
+    "no_commit_identity_statement_without_current_machine_snapshot_copy",
+    "all_new_narrative_artifacts_require_date_and_brisbane_timestamp",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "materialisation-staging-path-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-future-attempt-materialisation",
+      "role": "orchestrator",
+      "resource_id": "clockwork-canonical-path-staging",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Candidate and closeout staging must use the exact current canonical path roster rather than recalled historical graph names.",
+      "observed_error": "The first predecessor candidate-staging invocation named emr-compass.json and emr-continuity-graph.json instead of the current emr4-prefixed canonical paths; Git rejected the whole invocation before staging.",
+      "detection_method": "Git pathspec resolution failed before index mutation, after which an explicit machine-read roster was staged successfully.",
+      "evidence_paths": ["docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-plan.md", "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-closeout.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manually_recalled_canonical_graph_path_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the exact clockwork-owned path roster and verify the complete staged set before commit.",
+        "prevention_control": "Explicit-path staging is checked against the machine roster; no broad staging command is permitted.",
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-598.md"]
+      },
+      "baton_summary": "records the rejected manual canonical-path staging mismatch and machine-roster control."
+    },
+    {
+      "attempt_key": "materialisation-predecessor-timestamp-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-future-attempt-materialisation",
+      "role": "orchestrator",
+      "resource_id": "mandatory-narrative-timestamp",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_document_generation",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every newly authored plan, threat delta, report, closeout, Sol acceptance and Yuri summary must include Date and an explicit Brisbane ISO 8601 Timestamp.",
+      "observed_error": "The accepted predecessor report, closeout, Sol acceptance and Yuri summary omitted the mandatory Timestamp line.",
+      "detection_method": "The successor rehydration compared the four immutable predecessor narratives with AGENTS section 10 rule 8.",
+      "evidence_paths": ["docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-plan.md", "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-closeout.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.mandatory_brisbane_timestamp_omitted_from_narrative_artifact",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep accepted predecessor artifacts immutable and add the mandatory timestamp to every narrative in the successor tranche.",
+        "prevention_control": "The successor artifact tests assert both Date and the exact Australia/Brisbane Timestamp for all newly authored narratives.",
+        "evidence_paths": ["tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py"]
+      },
+      "baton_summary": "records the predecessor timestamp omission and tested successor timestamp control."
+    },
+    {
+      "attempt_key": "materialisation-identity-binding-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-future-attempt-materialisation",
+      "role": "implementer",
+      "resource_id": "future-attempt-embedded-helper-identity",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "The outer evidence operation and embedded accepted helper identity must be separate typed bindings; exact accepted helper bytes cannot be regenerated under a new identity silently.",
+      "observed_error": "The first contract used the new outer operation, attempt and planning source to generate the helper, changing its hash and causing source_binding_mismatch before evidence output.",
+      "detection_method": "The generator compared the independently generated helper hash with the exact accepted helper binding and rejected the draft.",
+      "evidence_paths": ["docs/deepseek-native-harness-provider-free-future-runner-materialisation-identity-binding-recovery.md", "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/contract.json"],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.outer_evidence_identity_conflated_with_embedded_source_identity",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Separate fixture_identity from the outer operation and bind the exact accepted predecessor operation, attempt and candidate values.",
+        "prevention_control": "The contract and schemas now carry a dedicated fixture_identity object and tests prove the outer identity is absent from helper bytes.",
+        "evidence_paths": ["docs/deepseek-native-harness-provider-free-future-runner-materialisation-identity-binding-recovery.md", "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py"]
+      },
+      "baton_summary": "records the rejected outer/embedded identity conflation and exact identity-separation repair."
+    },
+    {
+      "attempt_key": "materialisation-generator-entrypoint-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-future-attempt-materialisation",
+      "role": "implementer",
+      "resource_id": "standalone-generator-import-bootstrap",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A repository generator intended for direct file-path execution must resolve and add the repository root before importing local packages.",
+      "observed_error": "The generator compiled but its first direct file-path invocation raised ModuleNotFoundError for orchestration_harness before artifact generation.",
+      "detection_method": "The exact documented direct invocation returned nonzero before the generator entered its fail-closed evidence handler.",
+      "evidence_paths": ["scripts/deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py", "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-closeout.md"],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.standalone_repository_script_missing_root_import_bootstrap",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Resolve the repository root from __file__ and insert it before local imports, then rerun direct write and check.",
+        "prevention_control": "The command manifest exercises the module path and candidate verification also exercises the direct file-path entry point.",
+        "evidence_paths": ["scripts/deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py", "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/materialisation-evidence.json"]
+      },
+      "baton_summary": "records the failed standalone generator import and explicit repository-root bootstrap."
+    },
+    {
+      "attempt_key": "materialisation-candidate-validation-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-future-attempt-materialisation",
+      "role": "implementer",
+      "resource_id": "materialised-runtime-identity-validator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_pytest_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A shortened candidate identity must be rejected by the full-Git-object validator before generic runtime identity comparison.",
+      "observed_error": "The first hostile shortened-candidate test received bundle_runtime_identity_mismatch because typed runtime identity validation occurred after manifest comparison.",
+      "detection_method": "The focused adversarial test asserted the exact finite error coordinate and exposed the validation-order gap.",
+      "evidence_paths": ["orchestration_harness/native_post_hmr_future_attempt_materialisation.py", "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py"],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.typed_git_identity_validation_after_generic_relationship_check",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Validate operation, attempt and full candidate identity before tree and manifest comparison.",
+        "prevention_control": "The hostile test now requires candidate_source_invalid for a shortened identity and the complete suite passes.",
+        "evidence_paths": ["orchestration_harness/native_post_hmr_future_attempt_materialisation.py", "tests/test_deepseek_native_harness_provider_free_future_runner_materialisation_and_controller_terminal_fixture_rehearsal.py"]
+      },
+      "baton_summary": "records the typed candidate-validation order gap and exact full-object guard."
+    },
+    {
+      "attempt_key": "materialisation-closeout-stage-vocabulary-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-future-attempt-materialisation",
+      "role": "orchestrator",
+      "resource_id": "clockwork-incident-stage-vocabulary",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every incident stage must be selected from the clockwork-owned closed vocabulary rather than authored as descriptive prose.",
+      "observed_error": "The first closeout intent used planning and verification as incident stages even though neither is present in the closed INCIDENT_STAGES vocabulary.",
+      "detection_method": "The read-only clockwork intent validator rejected tick_incident_stage before command execution or canonical writes.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/closeout/closeout-intent.json", "docs/ariadne-agent-error-correction-register-revision-598.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.descriptive_incident_stage_outside_clockwork_closed_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace both descriptive values with deterministic_verification and preserve the rejected draft as a bounded incident.",
+        "prevention_control": "Future incident intent stages must be selected directly from the finite clockwork INCIDENT_STAGES register.",
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-598.md", "orchestration_harness/governance_clockwork_tick.py"]
+      },
+      "baton_summary": "records the rejected descriptive incident stages and closed-vocabulary selection control."
+    },
+    {
+      "attempt_key": "materialisation-closeout-boundary-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-future-attempt-materialisation",
+      "role": "orchestrator",
+      "resource_id": "clockwork-successor-protected-boundary",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Every clockwork successor latch must retain the exact mandatory ordinary-practice feature-flag, allowlist and command-mounting closure in addition to broader product boundaries.",
+      "observed_error": "The first published generation omitted no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting from the successor protected boundaries.",
+      "detection_method": "The completed 548-case postpublication governance suite failed test_current_rows_preserve_closed_surface_boundary on the generated latch.",
+      "evidence_paths": ["tests/test_current_baton_consistency.py", "orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/closeout/closeout-intent.json", "docs/ariadne-agent-error-correction-register-revision-598.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_latch_omitted_mandatory_ordinary_practice_subboundary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Roll back the uncommitted generation byte-exactly, restore the exact missing boundary and republish only after read-only preparation passes.",
+        "prevention_control": "The postpublication current-baton consistency suite requires the exact mandatory boundary set in every clockwork-selected latch.",
+        "evidence_paths": ["tests/test_current_baton_consistency.py", "docs/ariadne-agent-error-correction-register-revision-598.md"]
+      },
+      "baton_summary": "records the rolled-back successor-boundary omission and exact mandatory-boundary restoration."
+    }
+  ]
+}
