@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 585,
+  "register_revision": 586,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -30249,6 +30249,114 @@
       },
       "incident_id": "AER-0769",
       "attempt_id": "clock-278ecd329c73ae21521d2c90",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-plugin-tree-source-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "historical-latch-test-selection",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Successor regression selection must exclude historical tests whose contract requires a predecessor live latch.",
+      "observed_error": "The first widened run selected the historical attempt-004 provider-free check after the live latch had advanced to the diagnosis successor.",
+      "detection_method": "The historical check correctly rejected the successor operation id before Harness, model, provider or network activity.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-historical-latch-test-selection.md",
+        "docs/ariadne-agent-error-correction-register-revision-586.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_regression_selected_historical_predecessor_latch_test",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Deselect only the exact historical latch assertion while retaining every other test in its module.",
+        "prevention_control": "Successor regression manifests carry an explicit documented deselection for predecessor-live-latch assertions.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-historical-latch-test-selection.md"
+        ]
+      },
+      "incident_id": "AER-0770",
+      "attempt_id": "clock-4bac5f6efb43934e2a326f00",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-plugin-tree-source-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "grouped-test-path-inventory",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Grouped verification must select exact current test paths resolved from the repository inventory.",
+      "observed_error": "A grouped command used two remembered mnemonic filenames that did not exist under those exact repository paths.",
+      "detection_method": "Pytest returned file-or-directory-not-found before collection; rg --files then exposed the exact current paths.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md",
+        "docs/ariadne-agent-error-correction-register-revision-586.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.grouped_verification_used_mnemonic_not_inventory_resolved_paths",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve current test paths with rg --files and rerun the exact corrected 58-test selection.",
+        "prevention_control": "Grouped verification paths are copied from a fresh repository inventory reading.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md"
+        ]
+      },
+      "incident_id": "AER-0771",
+      "attempt_id": "clock-e8797814fb6eb0a4cea0c44d",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-plugin-tree-source-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "closeout-contract-evidence-shape",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Continuity contract evidence must be an exact structured object and must be empty when no cross-contract claim is made.",
+      "observed_error": "The first read-only closeout intent supplied the diagnosis contract path as a bare string in contract_evidence.",
+      "detection_method": "The prospective Compass projection returned contract_evidence_object_required before commands or publication.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-586.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_contract_evidence_used_bare_path_not_structured_object",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the exact empty contract_evidence list because this node makes no cross-contract claim.",
+        "prevention_control": "Read-only clockwork projection validation remains mandatory before commands and publication.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0772",
+      "attempt_id": "clock-4f1a41ec19013bedcb0f151a",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

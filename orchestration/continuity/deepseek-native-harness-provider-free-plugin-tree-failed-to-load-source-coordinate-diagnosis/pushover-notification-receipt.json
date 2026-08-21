@@ -1,0 +1,10 @@
+{
+  "schema_version": "emr4.non_phi_pushover_notification_receipt.v1",
+  "operation_id": "deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis",
+  "sent_at": "2026-08-21T13:34:36.6024833+10:00",
+  "provider": "pushover",
+  "request": "ccb26861-4c10-43ef-9694-a9fbdef0ae29",
+  "status": 1,
+  "contains_phi": false,
+  "message_scope": "unique source coordinate accepted; 8 focused plus 58 widened tests, schema and clockwork generation 107 passed; zero Harness or provider activity; provider-free two-row relative-specifier repair next"
+}

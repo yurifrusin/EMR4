@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 362,
+  "graph_revision": 363,
   "harvests": [],
   "nodes": [
     {
@@ -26993,9 +26993,112 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis",
+      "title": "Native Harness plugin-tree source-coordinate diagnosis",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the provider-free diagnosis after consumed attempt 004.",
+          "No Harness, broker, worker, model, provider, network or occupied-retry authority opened.",
+          "No product, data, production, deployment, Pages or protected-ref authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-unique-source-coordinate",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/diagnosis-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one digest-bound profile-input coordinate as the sole supported initial plugin-tree failure branch."
+        },
+        {
+          "id": "authorize-separate-two-row-provider-free-repair",
+          "source": "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md",
+          "status": "accepted",
+          "summary": "Permit a separately frozen repair of only the sentinel and runner profile-relative module specifiers."
+        },
+        {
+          "id": "reject-boot-and-worker-readiness-claims",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-plugin-tree-source-coordinate-diagnosis-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Reject any claim that the repaired Harness booted, reached DeepSeek or is ready for EMR4 development."
+        },
+        {
+          "id": "accept-contained-verification-incidents",
+          "source": "docs/ariadne-agent-error-correction-register-revision-586.md",
+          "status": "accepted",
+          "summary": "Accept three corrected or contained verification and closeout-shape incidents with none open."
+        }
+      ],
+      "claim_scope": [
+        "The exact local rc7 package source and immutable attempt-004 terminal support one initial profile-input failure coordinate.",
+        "The current sentinel and later runner names are authored as absolute Windows filesystem specifiers.",
+        "The accepted passing predecessor used exact profile-relative sentinel and runner specifiers.",
+        "A separate provider-free two-row repair is justified.",
+        "Node, Harness, broker, worker, model, provider and network activity remained zero."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/diagnosis-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/diagnosis-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/efficacy-reading.json",
+          "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-historical-latch-test-selection.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-plugin-tree-source-coordinate-diagnosis-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-plugin-tree-source-coordinate-diagnosis-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-plugin-tree-source-coordinate-diagnosis-pre-verifier-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py",
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py",
+          "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
+          "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/diagnosis-evidence.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-586.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-plugin-tree-source-coordinate-diagnosis.md"
+        ]
+      },
+      "unresolved_gates": [
+        "No repaired profile candidate exists yet.",
+        "No repaired native boot has been proved.",
+        "DeepSeek provider, reasoning, coding and tool behavior remain unreached.",
+        "Every attempt-004 identity remains consumed and no occupied retry is authorised."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-21T13:26:54.8506659+10:00",
+      "updated_at": "2026-08-21T13:26:54.8506659+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "a166c96d35c9200b33d7bd2ec4e492d0a374d57c",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-21T12:45:22.5790561+10:00"
+  "updated_at": "2026-08-21T13:26:54.8506659+10:00"
 }

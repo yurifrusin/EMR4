@@ -2,19 +2,19 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "attempt_004_postterminal_tests",
+      "command_id": "plugin_tree_source_diagnosis_focused_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py"
+        "tests/test_deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "attempt_004_governance_tests",
+      "command_id": "plugin_tree_source_diagnosis_widened_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -22,35 +22,35 @@
         "--repo-root",
         "C:/Users/sarashera/emr4",
         "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py",
-        "tests/test_ariadne_agent_error_register.py",
-        "tests/test_ariadne_governance_clockwork_tick.py",
-        "tests/test_ariadne_active_operation_latch.py",
-        "tests/test_current_baton_consistency.py"
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py",
+        "tests/test_raisa_provider_free_authored_synthetic_native_harness_structured_diagnostic_bounded_worker_controller_convergence_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
+        "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
+        "--deselect",
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py::test_attempt_four_provider_free_check_reports_zero_processes_and_requests"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "attempt_004_ruff",
+      "command_id": "plugin_tree_source_diagnosis_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py"
+        "scripts/deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py",
+        "tests/test_deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "attempt_004_compile",
+      "command_id": "plugin_tree_source_diagnosis_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py",
-        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004_postterminal.py"
+        "scripts/deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py",
+        "tests/test_deepseek_native_harness_provider_free_plugin_tree_source_coordinate_diagnosis.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

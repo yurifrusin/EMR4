@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 344,
-  "updated_at": "2026-08-21T12:45:22.5790561+10:00",
-  "source_graph_revision": 362,
-  "orientation_statement": "Inspect the pinned plugin-tree source against the immutable cause chain; do not launch another occupied process.",
+  "map_revision": 345,
+  "updated_at": "2026-08-21T13:26:54.8506659+10:00",
+  "source_graph_revision": 363,
+  "orientation_statement": "Change only the two generated proof-module names to the accepted profile-relative form; do not launch the Harness.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4551,24 +4551,34 @@
         "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/efficacy-reading.json",
         "docs/raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004-closeout.md"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis",
+      "lineage_parent": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004",
+      "strategic_role": "Replace opaque native Harness startup failure with a source-bound repair decision",
+      "outcome": "The provider-free reading identified one profile-owned Windows module-specifier coordinate and justified a two-row repair without another occupied attempt.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/efficacy-reading.json",
+        "docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-004",
-    "strategic_role": "Identify the pinned rc.7 plugin-tree failure without spending another occupied attempt",
-    "why_now": "The structured terminal supplies a bounded top coordinate and cause-chain shape, but the deepest code remains outside the closed vocabulary.",
-    "outcome": "A provider-free source reading will decide whether the exact failing plugin-tree branch can be named and safely repaired.",
+    "node_id": "deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis",
+    "strategic_role": "Repair the exact generated proof-module specifier family before any new native boot",
+    "why_now": "The source proof has one supported coordinate and an already passing relative-specifier control.",
+    "outcome": "A two-row provider-free candidate will align sentinel and runner names with the accepted relative-specifier form and add deterministic regression evidence.",
     "unlocks": [
-      "A grounded repair-or-stop decision for the native Harness profile.",
-      "A later separately authorised boot proof only if source evidence supports it."
+      "A later separately frozen provider-free native boot proof.",
+      "A grounded reassessment of Gemini review and eventual occupied-worker readiness."
     ],
     "does_not_solve": [
-      "No native Harness, broker, worker, model or provider process.",
+      "No Node, Harness, broker, worker, model or provider process.",
       "No occupied retry, product work, data use, deployment or protected integration."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/pre-hmr-startup-terminal.json",
-      "orchestration/continuity/raisa-authored-synthetic-check-in-native-harness-bounded-worker-monitored-development-rehearsal/attempt-004/diagnosis.md"
+      "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/diagnosis-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/diagnosis-report.md"
     ]
   },
   "decision_horizon": [
