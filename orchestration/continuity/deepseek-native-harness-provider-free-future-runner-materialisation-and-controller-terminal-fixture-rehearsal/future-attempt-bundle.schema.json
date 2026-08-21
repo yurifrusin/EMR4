@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "attempt_id", "candidate_source", "source_bindings", "path_roster", "inherited_target_classification", "occupied_launch_authorized", "execution_authority", "raw_retention"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_future_attempt_bundle.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal"},
+    "attempt_id": {"const": "future-post-hmr-sidecar-static-fixture-001"},
+    "candidate_source": {"const": "cc75a9f8991120b66bf64ee12d415462f2cbfbb3"},
+    "source_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["future_runner_sha256", "generated_helper_sha256", "controller_module_sha256"],
+      "properties": {
+        "future_runner_sha256": {"const": "98cf8db1803c7dbfde867044504a820518e448278faf220c8ec3c5dbb8818805"},
+        "generated_helper_sha256": {"const": "bd2995a62c7d8bbf37b29c0cd5b5a88c3570341255d1644d9cb98cbef0bd490e"},
+        "controller_module_sha256": {"const": "29495710c5e95a12fba92a2ef34c28ed6b9ce5e034402e5551767e19b843014c"}
+      }
+    },
+    "path_roster": {"const": ["runner/synthetic-one-request-worker-runner.mjs", "runner/post-hmr-pre-request-diagnostic.mjs", "control/future-attempt-bundle.json", "control/post-hmr-diagnostic.json", "control/broker-request-reading.json", "control/controller-terminal.json"]},
+    "inherited_target_classification": {"const": "consumed_attempt_005_authored_synthetic_target"},
+    "occupied_launch_authorized": {"const": false},
+    "execution_authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_process_authorized", "native_harness_process_authorized", "broker_process_authorized", "worker_process_authorized", "model_request_authorized", "provider_request_authorized", "network_request_authorized", "database_invocation_authorized", "docker_invocation_authorized"],
+      "properties": {
+        "node_process_authorized": {"const": false},
+        "native_harness_process_authorized": {"const": false},
+        "broker_process_authorized": {"const": false},
+        "worker_process_authorized": {"const": false},
+        "model_request_authorized": {"const": false},
+        "provider_request_authorized": {"const": false},
+        "network_request_authorized": {"const": false},
+        "database_invocation_authorized": {"const": false},
+        "docker_invocation_authorized": {"const": false}
+      }
+    },
+    "raw_retention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["raw_error_message_retained", "raw_stack_retained", "raw_paths_retained", "raw_cause_retained", "raw_stream_retained"],
+      "properties": {
+        "raw_error_message_retained": {"const": false},
+        "raw_stack_retained": {"const": false},
+        "raw_paths_retained": {"const": false},
+        "raw_cause_retained": {"const": false},
+        "raw_stream_retained": {"const": false}
+      }
+    }
+  }
+}

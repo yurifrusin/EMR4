@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "attempt_id", "candidate_source", "coordinate", "diagnostic_accepted", "broker_zero", "pre_request_supported", "stage", "cause_coordinate", "error_kind", "source_bindings", "inherited_target_classification", "occupied_launch_authorized", "raw_stream_read", "raw_error_retained"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_controller_terminal.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal"},
+    "attempt_id": {"const": "future-post-hmr-sidecar-static-fixture-001"},
+    "candidate_source": {"const": "cc75a9f8991120b66bf64ee12d415462f2cbfbb3"},
+    "coordinate": {"enum": ["native_harness_terminal_failure", "post_hmr_pre_request_failure", "post_hmr_request_boundary_unresolved"]},
+    "diagnostic_accepted": {"type": "boolean"},
+    "broker_zero": {"type": "boolean"},
+    "pre_request_supported": {"type": "boolean"},
+    "stage": {"type": ["string", "null"], "enum": [null, "loader_readiness_wait", "required_service_lookup", "preset_root_roster_admission", "agent_create_setup_publish", "initial_idle_wait", "first_followup_dispatch", "first_turn_idle_wait"]},
+    "cause_coordinate": {"type": ["string", "null"], "enum": [null, "operation_rejected", "required_service_missing", "preset_root_roster_mismatch"]},
+    "error_kind": {"type": ["string", "null"], "enum": [null, "aggregate_error", "error", "invalid_preset_id_error", "preset_mount_error", "type_error", "unknown", "unknown_preset_error"]},
+    "source_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["future_runner_sha256", "generated_helper_sha256", "controller_module_sha256"],
+      "properties": {
+        "future_runner_sha256": {"const": "98cf8db1803c7dbfde867044504a820518e448278faf220c8ec3c5dbb8818805"},
+        "generated_helper_sha256": {"const": "bd2995a62c7d8bbf37b29c0cd5b5a88c3570341255d1644d9cb98cbef0bd490e"},
+        "controller_module_sha256": {"const": "29495710c5e95a12fba92a2ef34c28ed6b9ce5e034402e5551767e19b843014c"}
+      }
+    },
+    "inherited_target_classification": {"const": "consumed_attempt_005_authored_synthetic_target"},
+    "occupied_launch_authorized": {"const": false},
+    "raw_stream_read": {"const": false},
+    "raw_error_retained": {"const": false}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"diagnostic_accepted": {"const": false}}, "required": ["diagnostic_accepted"]},
+      "then": {"properties": {"coordinate": {"const": "native_harness_terminal_failure"}, "pre_request_supported": {"const": false}, "stage": {"const": null}, "cause_coordinate": {"const": null}, "error_kind": {"const": null}}}
+    },
+    {
+      "if": {"properties": {"diagnostic_accepted": {"const": true}, "broker_zero": {"const": true}}, "required": ["diagnostic_accepted", "broker_zero"]},
+      "then": {"properties": {"coordinate": {"const": "post_hmr_pre_request_failure"}, "pre_request_supported": {"const": true}, "stage": {"type": "string"}, "cause_coordinate": {"type": "string"}, "error_kind": {"type": "string"}}}
+    },
+    {
+      "if": {"properties": {"diagnostic_accepted": {"const": true}, "broker_zero": {"const": false}}, "required": ["diagnostic_accepted", "broker_zero"]},
+      "then": {"properties": {"coordinate": {"const": "post_hmr_request_boundary_unresolved"}, "pre_request_supported": {"const": false}, "stage": {"type": "string"}, "cause_coordinate": {"type": "string"}, "error_kind": {"type": "string"}}}
+    }
+  ]
+}

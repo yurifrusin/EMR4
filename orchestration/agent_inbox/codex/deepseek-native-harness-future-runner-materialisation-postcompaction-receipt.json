@@ -1,0 +1,129 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free future-runner materialisation and controller-terminal fixture rehearsal",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_future_attempt_materialisation_and_terminal_assembly_contract",
+    "operation_id": "deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "34dc1facb493984aa3609e2a7beddb9699534a68",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "git_object_resolution": {
+    "observed_head": "f1d3e782e7a35a19c219a4fbadd58997440bad58",
+    "reason_codes": [],
+    "resolved_commit": "34dc1facb493984aa3609e2a7beddb9699534a68",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "34dc1facb493984aa3609e2a7beddb9699534a68"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "f1d3e782e7a35a19c219a4fbadd58997440bad58",
+    "branch_origin_aligned": true,
+    "head": "f1d3e782e7a35a19c219a4fbadd58997440bad58",
+    "origin_branch_commit": "f1d3e782e7a35a19c219a4fbadd58997440bad58",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 667
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "fresh_post_compaction_identity_binding_recovery",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The tranche is preparing and validating the native Harness bundle and expressly forbids Harness, worker, model and provider execution; a DeepSeek dispatch would violate the subject boundary.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "gemini_verifier",
+        "rationale": "The recovery is a deterministic exact-byte identity separation with provider activity forbidden; reassess only after complete deterministic evidence if a semantic veto remains.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits delegation and the outer-versus-embedded identity repair is one serial trust boundary.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "identity recovery passes",
+      "deterministic materialisation evidence",
+      "pre-verifier gate",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "preserve the accepted embedded fixture identity separately from the outer evidence operation",
+      "prove exact runner/helper/controller bindings before materialisation",
+      "materialise the exact six-path tree before admitting control fixtures",
+      "assemble a terminal only after bundle sidecar and broker readers pass",
+      "copy exact counts and Git identities only from completed machine output"
+    ]
+  },
+  "planned_action": "resume_the_fail_closed_identity_binding_recovery_then_generate_and_verify_the_provider_free_future_attempt_fixture",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-future-runner-materialisation-identity-binding-recovery.md",
+      "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-plan.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/integration-evidence.json",
+      "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-sidecar-integration-sol-acceptance.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial provider-free identity recovery, implementation, deterministic fixtures, review and acceptance. DeepSeek and Gemini are declined because model/provider activity is forbidden; native subagents are declined because developer policy prohibits delegation and the identity chain is a single coupled boundary.",
+    "git_refs_and_worktree": "Current machine evidence must confirm the task branch and origin are aligned; local/origin master and handoff/current remain at the protected expected commit; tracked changes are operation-owned only; docs/branding and every unrelated untracked file remain preserved; Git identities come only from the receipt builder snapshot.",
+    "live_handover_current_baton": "The live baton at Continuity 374 / Compass 356 accepts the provider-free sidecar and broker-zero join and names future-runner materialisation plus controller-terminal fixture assembly as the active next operation.",
+    "protected_evidence_boundaries": "Materialise only the exact accepted runner/helper/controller gear into a disposable Python fixture and assemble typed terminals. Do not mutate accepted evidence, launch Node/Harness/broker/worker/model/provider/network/database activity, read raw streams, change product/configuration, enable ordinary practice, touch patient or protected data, deploy, publish Pages, or move protected refs."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

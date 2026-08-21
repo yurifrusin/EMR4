@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "result", "claim", "source_bindings", "materialisation", "terminal_matrix", "proof_boundary", "occupied_attempt_authorized", "raw_historical_stream_read"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_future_attempt_materialisation_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal"},
+    "result": {"const": "pass"},
+    "claim": {"const": "provider_free_exact_future_attempt_bundle_and_controller_terminal_assembly_representable"},
+    "source_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["accepted_runner_sha256", "accepted_diagnostic_module_sha256", "controller_module_sha256", "future_runner_sha256", "generated_helper_sha256", "materializer_module_sha256"],
+      "properties": {
+        "accepted_runner_sha256": {"const": "1233d4fc14726800dcf063c1cab5e814f3df0091040126784c4a7d42c3ec0746"},
+        "accepted_diagnostic_module_sha256": {"const": "5b42a61f6fd1b23b8044a0b9248e2c202c42b7800c6d36b10dbed229ae954368"},
+        "controller_module_sha256": {"const": "29495710c5e95a12fba92a2ef34c28ed6b9ce5e034402e5551767e19b843014c"},
+        "future_runner_sha256": {"const": "98cf8db1803c7dbfde867044504a820518e448278faf220c8ec3c5dbb8818805"},
+        "generated_helper_sha256": {"const": "bd2995a62c7d8bbf37b29c0cd5b5a88c3570341255d1644d9cb98cbef0bd490e"},
+        "materializer_module_sha256": {"const": "73ea743106ab07409c21d5d29f53b0b6845584fa41fe8125751dba63fe413c0c"}
+      }
+    },
+    "materialisation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path_roster", "initial_files", "runner_bytes", "helper_bytes", "inherited_target_coordinate_present", "inherited_target_classification", "occupied_launch_authorized", "exclusive_write", "cleanup_complete"],
+      "properties": {
+        "path_roster": {"const": ["runner/synthetic-one-request-worker-runner.mjs", "runner/post-hmr-pre-request-diagnostic.mjs", "control/future-attempt-bundle.json", "control/post-hmr-diagnostic.json", "control/broker-request-reading.json", "control/controller-terminal.json"]},
+        "initial_files": {"const": ["control/future-attempt-bundle.json", "runner/post-hmr-pre-request-diagnostic.mjs", "runner/synthetic-one-request-worker-runner.mjs"]},
+        "runner_bytes": {"const": 6300},
+        "helper_bytes": {"const": 3110},
+        "inherited_target_coordinate_present": {"const": true},
+        "inherited_target_classification": {"const": "consumed_attempt_005_authored_synthetic_target"},
+        "occupied_launch_authorized": {"const": false},
+        "exclusive_write": {"const": true},
+        "cleanup_complete": {"const": true}
+      }
+    },
+    "terminal_matrix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scenario_count", "stage_count", "error_kind_count", "special_cause_count", "nonzero_counter_count", "valid_zero_coordinate", "nonzero_coordinate", "absent_sidecar_coordinate", "invalid_sidecar_coordinate", "pre_request_requires_both", "raw_stream_read", "raw_error_retained"],
+      "properties": {
+        "scenario_count": {"const": 24},
+        "stage_count": {"const": 7},
+        "error_kind_count": {"const": 7},
+        "special_cause_count": {"const": 2},
+        "nonzero_counter_count": {"const": 5},
+        "valid_zero_coordinate": {"const": "post_hmr_pre_request_failure"},
+        "nonzero_coordinate": {"const": "post_hmr_request_boundary_unresolved"},
+        "absent_sidecar_coordinate": {"const": "native_harness_terminal_failure"},
+        "invalid_sidecar_coordinate": {"const": "native_harness_terminal_failure"},
+        "pre_request_requires_both": {"const": true},
+        "raw_stream_read": {"const": false},
+        "raw_error_retained": {"const": false}
+      }
+    },
+    "proof_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_process_count", "native_harness_process_count", "broker_process_count", "worker_process_count", "model_request_count", "provider_request_count", "network_request_count", "database_invocation_count", "docker_invocation_count", "raw_attempt_stream_read_count"],
+      "properties": {
+        "node_process_count": {"const": 0},
+        "native_harness_process_count": {"const": 0},
+        "broker_process_count": {"const": 0},
+        "worker_process_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0},
+        "network_request_count": {"const": 0},
+        "database_invocation_count": {"const": 0},
+        "docker_invocation_count": {"const": 0},
+        "raw_attempt_stream_read_count": {"const": 0}
+      }
+    },
+    "occupied_attempt_authorized": {"const": false},
+    "raw_historical_stream_read": {"const": false}
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "ariadne.native_harness_future_attempt_materialisation_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal",
+  "planning_source": "f1d3e782e7a35a19c219a4fbadd58997440bad58",
+  "fixture_identity": {
+    "operation_id": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
+    "attempt_id": "future-post-hmr-sidecar-static-fixture-001",
+    "candidate_source": "cc75a9f8991120b66bf64ee12d415462f2cbfbb3"
+  },
+  "source_bindings": {
+    "accepted_runner_sha256": "1233d4fc14726800dcf063c1cab5e814f3df0091040126784c4a7d42c3ec0746",
+    "accepted_diagnostic_module_sha256": "5b42a61f6fd1b23b8044a0b9248e2c202c42b7800c6d36b10dbed229ae954368",
+    "controller_module_sha256": "29495710c5e95a12fba92a2ef34c28ed6b9ce5e034402e5551767e19b843014c",
+    "future_runner_sha256": "98cf8db1803c7dbfde867044504a820518e448278faf220c8ec3c5dbb8818805",
+    "generated_helper_sha256": "bd2995a62c7d8bbf37b29c0cd5b5a88c3570341255d1644d9cb98cbef0bd490e",
+    "materializer_module_sha256": "73ea743106ab07409c21d5d29f53b0b6845584fa41fe8125751dba63fe413c0c"
+  },
+  "path_roster": [
+    "runner/synthetic-one-request-worker-runner.mjs",
+    "runner/post-hmr-pre-request-diagnostic.mjs",
+    "control/future-attempt-bundle.json",
+    "control/post-hmr-diagnostic.json",
+    "control/broker-request-reading.json",
+    "control/controller-terminal.json"
+  ],
+  "selection_coordinates": [
+    "native_harness_terminal_failure",
+    "post_hmr_pre_request_failure",
+    "post_hmr_request_boundary_unresolved"
+  ],
+  "proof_boundary": {
+    "node_process_count": 0,
+    "native_harness_process_count": 0,
+    "broker_process_count": 0,
+    "worker_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "network_request_count": 0,
+    "database_invocation_count": 0,
+    "docker_invocation_count": 0,
+    "raw_attempt_stream_read_count": 0
+  },
+  "artifacts": {
+    "contract_schema": "contract.schema.json",
+    "bundle_schema": "future-attempt-bundle.schema.json",
+    "terminal_schema": "controller-terminal.schema.json",
+    "evidence_schema": "materialisation-evidence.schema.json",
+    "evidence": "materialisation-evidence.json",
+    "report": "materialisation-report.md",
+    "efficacy": "efficacy-reading.json"
+  }
+}
