@@ -1,0 +1,65 @@
+{
+  "schema_version": "ariadne.native_harness_preset_mount_root_service_forwarding_process_free_correction_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+  "git_binding_policy": {
+    "mode": "machine_resolved_only",
+    "plan_path": "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-plan.md",
+    "caller_authored_object_id_count": 0
+  },
+  "closed_results": [
+    "root_service_forwarding_correction_admitted",
+    "prospective_source_derivation_rejected",
+    "source_binding_rejected"
+  ],
+  "accepted_source_inventory": {
+    "accepted_generated_runner": {
+      "bytes": 12941,
+      "sha256": "871fb7fc9d2d8a93e5e67c41a4c0f18af7ba8a23d0a3664505f149199befb9cb"
+    },
+    "accepted_generated_guard": {
+      "bytes": 4535,
+      "sha256": "440e7e60bd8a8a1b6c33a4e64ae241c51cd4e126ce6422dc0fcba39b41ec4151"
+    },
+    "accepted_preset_mount_bridge": {
+      "bytes": 1326,
+      "sha256": "867b32001030786018cdc8423179902869eed92a2d35f62dc6bb83eb4c6ab428"
+    },
+    "accepted_preset_mount_sanitizer": {
+      "bytes": 2439,
+      "sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f"
+    },
+    "installed_agent_presets": {
+      "bytes": 52188,
+      "sha256": "a0b417514e3d285ad5fef74867e8049af333ebdec6e4d7639e388aa0903e0039"
+    }
+  },
+  "predecessor_bindings": {
+    "frozen_plan_sha256": "fc66489035852190ea2ecab65899b6c3a5e2b08e3ad37dcc6237036c4a6fbb7f",
+    "threat_model_sha256": "d39660981ca52a8d8c96b7b2a8eff8e6935f399731bdb70a37e518d2db9de3dd",
+    "accepted_source_reconciliation_contract_sha256": "cd8cbc9faae8536e6deee155eac34cc47d1e813aa77f7fac1cd8157ab6e819d9",
+    "accepted_source_reconciliation_evidence_sha256": "59066214ed9c49b7c1cf2e299c838cc8f283cd20fd54a9619671faa12546ed42"
+  },
+  "implementation_bindings": {
+    "controller_sha256": "9fea3b34fcd81fc5f53aa8195d311cf2e610b8ea925f59e6f948bd531f551290",
+    "focused_test_sha256": "fde8dbda34c971cfcd3d7da0730488c2f1538f046a436b2bc40146a968f0fe8e",
+    "contract_schema_sha256": "9a4d62ccdefafb3eeef2ba9f5e04ecea48a558e2774fa1b3456f6433102c39b8",
+    "evidence_schema_sha256": "f16ed2981c0517390911c42f21ff7b5ce6becc94bd56e193dfadb453f55d62af"
+  },
+  "correction": {
+    "result": "root_service_forwarding_correction_admitted",
+    "old_runner_call": "assertEffectiveToolComposition(agentCtx, PRESET_ID, TOOLS)",
+    "new_runner_call": "assertEffectiveToolComposition(agentCtx, presets, PRESET_ID, TOOLS)",
+    "old_guard_mount_binding": "mount: agentCtx.agentPresets.mount.bind(agentCtx.agentPresets)",
+    "new_guard_service_argument": "presetService,",
+    "bridge_call": "await mount.call(presetService, agentCtx, presetId);",
+    "invalid_service_terminal": "PRESET_MOUNT_UNCLASSIFIED"
+  },
+  "claim_boundary": {
+    "prospective_source_correction_only": true,
+    "javascript_executed": false,
+    "native_harness_executed": false,
+    "worker_model_provider_executed": false,
+    "native_retry_authorized": false,
+    "product_authority": false
+  }
+}

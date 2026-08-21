@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:emr4:deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-contract:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "git_binding_policy",
+    "closed_results",
+    "accepted_source_inventory",
+    "predecessor_bindings",
+    "implementation_bindings",
+    "correction",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_preset_mount_root_service_forwarding_process_free_correction_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal"},
+    "git_binding_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "plan_path", "caller_authored_object_id_count"],
+      "properties": {
+        "mode": {"const": "machine_resolved_only"},
+        "plan_path": {"const": "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-plan.md"},
+        "caller_authored_object_id_count": {"const": 0}
+      }
+    },
+    "closed_results": {
+      "const": [
+        "root_service_forwarding_correction_admitted",
+        "prospective_source_derivation_rejected",
+        "source_binding_rejected"
+      ]
+    },
+    "accepted_source_inventory": {"$ref": "#/$defs/acceptedInventory"},
+    "predecessor_bindings": {"$ref": "#/$defs/predecessorBindings"},
+    "implementation_bindings": {"$ref": "#/$defs/implementationBindings"},
+    "correction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "result",
+        "old_runner_call",
+        "new_runner_call",
+        "old_guard_mount_binding",
+        "new_guard_service_argument",
+        "bridge_call",
+        "invalid_service_terminal"
+      ],
+      "properties": {
+        "result": {"type": "string"},
+        "old_runner_call": {"type": "string"},
+        "new_runner_call": {"type": "string"},
+        "old_guard_mount_binding": {"type": "string"},
+        "new_guard_service_argument": {"type": "string"},
+        "bridge_call": {"type": "string"},
+        "invalid_service_terminal": {"type": "string"}
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prospective_source_correction_only",
+        "javascript_executed",
+        "native_harness_executed",
+        "worker_model_provider_executed",
+        "native_retry_authorized",
+        "product_authority"
+      ],
+      "properties": {
+        "prospective_source_correction_only": {"const": true},
+        "javascript_executed": {"const": false},
+        "native_harness_executed": {"const": false},
+        "worker_model_provider_executed": {"const": false},
+        "native_retry_authorized": {"const": false},
+        "product_authority": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "sourceEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256"],
+      "properties": {
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "acceptedInventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "accepted_generated_runner",
+        "accepted_generated_guard",
+        "accepted_preset_mount_bridge",
+        "accepted_preset_mount_sanitizer",
+        "installed_agent_presets"
+      ],
+      "properties": {
+        "accepted_generated_runner": {"$ref": "#/$defs/sourceEntry"},
+        "accepted_generated_guard": {"$ref": "#/$defs/sourceEntry"},
+        "accepted_preset_mount_bridge": {"$ref": "#/$defs/sourceEntry"},
+        "accepted_preset_mount_sanitizer": {"$ref": "#/$defs/sourceEntry"},
+        "installed_agent_presets": {"$ref": "#/$defs/sourceEntry"}
+      }
+    },
+    "predecessorBindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "frozen_plan_sha256",
+        "threat_model_sha256",
+        "accepted_source_reconciliation_contract_sha256",
+        "accepted_source_reconciliation_evidence_sha256"
+      ],
+      "properties": {
+        "frozen_plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "threat_model_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "accepted_source_reconciliation_contract_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "accepted_source_reconciliation_evidence_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "implementationBindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "controller_sha256",
+        "focused_test_sha256",
+        "contract_schema_sha256",
+        "evidence_schema_sha256"
+      ],
+      "properties": {
+        "controller_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "focused_test_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "contract_schema_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "evidence_schema_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}

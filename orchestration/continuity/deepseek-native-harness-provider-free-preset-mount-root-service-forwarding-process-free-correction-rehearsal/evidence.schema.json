@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:emr4:deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-evidence:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "git_binding",
+    "result",
+    "failed_source_coordinates",
+    "accepted_source_inventory",
+    "derived_source_inventory",
+    "source_semantics",
+    "correction_projection",
+    "claim_boundary",
+    "process_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_preset_mount_root_service_forwarding_process_free_correction_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal"},
+    "git_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policy",
+        "caller_authored_object_id_count",
+        "planning_source_commit",
+        "candidate_source_commit",
+        "planning_source_is_ancestor_of_candidate",
+        "branch",
+        "branch_origin_aligned",
+        "protected_refs_aligned",
+        "tracked_worktree_clean",
+        "docs_branding_preserved"
+      ],
+      "properties": {
+        "policy": {"const": "machine_resolved_only"},
+        "caller_authored_object_id_count": {"const": 0},
+        "planning_source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "candidate_source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "planning_source_is_ancestor_of_candidate": {"const": true},
+        "branch": {"const": "codex/ariadne-bernie-davida-parallel-seam"},
+        "branch_origin_aligned": {"const": true},
+        "protected_refs_aligned": {"const": true},
+        "tracked_worktree_clean": {"const": true},
+        "docs_branding_preserved": {"const": true}
+      }
+    },
+    "result": {
+      "enum": [
+        "root_service_forwarding_correction_admitted",
+        "prospective_source_derivation_rejected",
+        "source_binding_rejected"
+      ]
+    },
+    "failed_source_coordinates": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+      "uniqueItems": true
+    },
+    "accepted_source_inventory": {"$ref": "#/$defs/sourceInventory"},
+    "derived_source_inventory": {"$ref": "#/$defs/derivedInventory"},
+    "source_semantics": {
+      "type": "object",
+      "minProperties": 20,
+      "additionalProperties": {"type": "boolean"}
+    },
+    "correction_projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "root_service_admitted_by_runner",
+        "root_service_forwarded_explicitly",
+        "guard_private_service_dereference_count",
+        "mount_handle_validation_inside_bridge",
+        "invalid_service_terminal",
+        "javascript_materialized_or_executed"
+      ],
+      "properties": {
+        "root_service_admitted_by_runner": {"const": true},
+        "root_service_forwarded_explicitly": {"type": "boolean"},
+        "guard_private_service_dereference_count": {"const": 0},
+        "mount_handle_validation_inside_bridge": {"type": "boolean"},
+        "invalid_service_terminal": {"const": "PRESET_MOUNT_UNCLASSIFIED"},
+        "javascript_materialized_or_executed": {"const": false}
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prospective_source_correction_admitted",
+        "javascript_executed",
+        "native_harness_executed",
+        "worker_model_provider_executed",
+        "native_runtime_path_proved",
+        "native_retry_authorized",
+        "product_authority"
+      ],
+      "properties": {
+        "prospective_source_correction_admitted": {"type": "boolean"},
+        "javascript_executed": {"const": false},
+        "native_harness_executed": {"const": false},
+        "worker_model_provider_executed": {"const": false},
+        "native_runtime_path_proved": {"const": false},
+        "native_retry_authorized": {"const": false},
+        "product_authority": {"const": false}
+      }
+    },
+    "process_boundary": {
+      "type": "object",
+      "minProperties": 10,
+      "additionalProperties": {"const": 0}
+    }
+  },
+  "$defs": {
+    "sourceEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256"],
+      "properties": {
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "sourceInventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "accepted_generated_runner",
+        "accepted_generated_guard",
+        "accepted_preset_mount_bridge",
+        "accepted_preset_mount_sanitizer",
+        "installed_agent_presets"
+      ],
+      "properties": {
+        "accepted_generated_runner": {"$ref": "#/$defs/sourceEntry"},
+        "accepted_generated_guard": {"$ref": "#/$defs/sourceEntry"},
+        "accepted_preset_mount_bridge": {"$ref": "#/$defs/sourceEntry"},
+        "accepted_preset_mount_sanitizer": {"$ref": "#/$defs/sourceEntry"},
+        "installed_agent_presets": {"$ref": "#/$defs/sourceEntry"}
+      }
+    },
+    "derivedInventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["derived_runner", "derived_guard", "derived_bridge"],
+      "properties": {
+        "derived_runner": {"$ref": "#/$defs/sourceEntry"},
+        "derived_guard": {"$ref": "#/$defs/sourceEntry"},
+        "derived_bridge": {"$ref": "#/$defs/sourceEntry"}
+      }
+    }
+  }
+}
