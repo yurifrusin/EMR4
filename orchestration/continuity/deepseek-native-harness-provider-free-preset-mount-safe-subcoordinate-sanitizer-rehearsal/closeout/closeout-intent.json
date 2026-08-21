@@ -1,0 +1,622 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+    "title": "DeepSeek native Harness provider-free preset-mount safe-subcoordinate sanitizer rehearsal",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T05:35:38.3957746+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "title": "Preset-mount safe-subcoordinate sanitizer rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the bounded native-Harness control sequence and dependency-satisfied deterministic recoveries.",
+          "This closeout accepts only a bounded negative sanitizer result and a content-free process-envelope control gain.",
+          "No fourth process, sanitizer admission, DSH/native Harness, worker/model/provider, product/data, deployment, Pages or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-three-consumed-local-node-attempts",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-consumed.json",
+          "status": "accepted",
+          "summary": "Accept three consumed local Node processes, including attempt 003 exit 134 with exact content-free byte counts and digests."
+        },
+        {
+          "id": "reject-sanitizer-admission-and-runtime-cause-inference",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "Do not accept a safe vector, sanitizer mapping, exact JavaScript cause, native preset subcoordinate, worker readiness, repair or retry."
+        },
+        {
+          "id": "accept-content-free-process-envelope-control",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-process-envelope.json",
+          "status": "accepted",
+          "summary": "Accept numeric exit, stdout/stderr byte counts and SHA-256 digests retained before semantic admission, with stream content absent."
+        },
+        {
+          "id": "accept-windows-minimum-environment-successor",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-plan.md",
+          "status": "accepted",
+          "summary": "Freeze one separate successor that preserves sanitizer/wrapper bytes and replaces only env={} with the exact five-key Windows minimum."
+        },
+        {
+          "id": "accept-sol-bounded-negative-closeout",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-safe-subcoordinate-sanitizer-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the non-transferable negative result and exact claim boundary without admitting sanitizer behavior."
+        }
+      ],
+      "claim_scope": [
+        "Three local Node fixture processes are consumed at exact candidates 475a5b6c210a1bc98f75234f544b5c619a94b704, 50a17beba7ea3a461cc2dd2154f747b307119f20 and 03a53c5b6f5e487b991e465a73c6368aa9759d74.",
+        "Attempt 003 observed exit 134, zero stdout bytes and 715 stderr bytes; stream content was discarded and exact digests were retained.",
+        "The sanitizer produced no admitted safe vector and no internal native preset-mount coordinate is claimed.",
+        "The shared env={} launch override is a source-supported recovery hypothesis only, not causal proof.",
+        "Native Harness, DSH, worker, model/provider, network, database, Docker, target and product counts remain zero.",
+        "Fifteen implementation tests and seven immutable negative-evidence tests pass with static checks."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-observable-fixture-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-observable-fixture-recovery-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-typed-process-envelope-import-wrapper-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitizer-typed-process-envelope-import-wrapper-recovery-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-launch-environment-diagnosis.md",
+          "docs/ariadne-agent-error-correction-register-revision-605.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-preset-mount-safe-subcoordinate-sanitizer-negative-result.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-safe-subcoordinate-sanitizer-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-safe-subcoordinate-sanitizer-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-observable-fixture-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-typed-process-envelope-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-safe-subcoordinate-sanitizer-postcompaction-negative-closeout-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer.mjs",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_fixture.mjs",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/evidence.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-001-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-002-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-process-envelope.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The sanitizer safe vector remains unobserved and is not admitted.",
+        "The exact JavaScript abort cause and exact native preset-mount subcoordinate remain unobserved.",
+        "Runner connection, any native Harness attempt, worker/model use, repair, retry and occupied behavior remain closed.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Give the orchestrator substantial, typed control over native DeepSeek worker execution for reliable Raisa development",
+      "outcome": "An opaque local fixture abort is now a content-free typed process reading, while the sanitizer correctly remains unadmitted.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-process-envelope.json",
+        "docs/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Test the narrowest remaining local launch-envelope difference without widening worker authority",
+      "why_now": "All three consumed fixture processes used env={}, unlike the accepted repository Node fixture convention; attempt 003 made that divergence safely measurable but did not prove causation.",
+      "outcome": "One successor will provide only five required Windows runtime variables to the unchanged sanitizer/wrapper and record another content-free process reading.",
+      "unlocks": [
+        "Sanitizer admission if and only if the exact fifteen-result vector passes.",
+        "A later separately frozen runner bridge only after sanitizer admission."
+      ],
+      "does_not_solve": [
+        "No DeepSeek Harness process, worker turn, model/provider request or coding-performance evidence.",
+        "No causal proof until the one-process result is observed.",
+        "No product/data action, production, release, Pages or protected integration."
+      ],
+      "evidence": [
+        "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-launch-environment-diagnosis.md",
+        "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-plan.md",
+        "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-threat-model-delta.md"
+      ],
+      "orientation_statement": "Continue with one exact five-variable Windows minimum-environment fixture process while preserving the sanitizer and wrapper byte-for-byte."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery",
+      "active_tranche": "DeepSeek native Harness provider-free preset-mount sanitizer Windows minimum-environment recovery",
+      "objective": "Prove whether the unchanged exact-hash sanitizer and import wrapper produce the fifteen-result closed vector when the child receives only the five required Windows runtime variables.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and extended authority for the bounded native-Harness control sequence.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_implement_the_exact_five_key_child_environment_and_execute_one_local_node_fixture_process"
+    },
+    "incidents": [
+      {
+        "incident_id": "sanitizer-logical-binding-used-as-physical-path",
+        "source_id": "preset-mount-sanitizer-source-lookup-001",
+        "peers": []
+      },
+      {
+        "incident_id": "sanitizer-raw-markdown-wrap-assertion",
+        "source_id": "preset-mount-sanitizer-focused-test-001",
+        "peers": []
+      },
+      {
+        "incident_id": "sanitizer-incomplete-prose-normalization",
+        "source_id": "preset-mount-sanitizer-focused-test-002",
+        "peers": []
+      },
+      {
+        "incident_id": "sanitizer-attempt-001-opaque-envelope-and-exit-inference",
+        "source_id": "preset-mount-sanitizer-attempt-001",
+        "peers": []
+      },
+      {
+        "incident_id": "sanitizer-attempt-002-missing-process-envelope",
+        "source_id": "preset-mount-sanitizer-attempt-002",
+        "peers": []
+      },
+      {
+        "incident_id": "sanitizer-empty-windows-environment-abort",
+        "source_id": "preset-mount-sanitizer-attempt-003",
+        "peers": []
+      },
+      {
+        "incident_id": "sanitizer-negative-test-invented-plan-phrase",
+        "source_id": "preset-mount-sanitizer-negative-test-001",
+        "peers": []
+      },
+      {
+        "incident_id": "sanitizer-clockwork-incident-enum-vocabulary",
+        "source_id": "preset-mount-sanitizer-clockwork-check-001",
+        "peers": []
+      },
+      {
+        "incident_id": "sanitizer-clockwork-register-revision-derivation",
+        "source_id": "preset-mount-sanitizer-clockwork-check-002",
+        "peers": []
+      }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "preset_mount_sanitizer_focused_and_negative_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "--noconftest",
+          "-p",
+          "no:cacheprovider",
+          "--strict-config",
+          "--strict-markers",
+          "-q",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "preset_mount_sanitizer_selected_inherited_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "--noconftest",
+          "-p",
+          "no:cacheprovider",
+          "--strict-config",
+          "--strict-markers",
+          "-q",
+          "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_composition_safe_terminal_bridge_rehearsal_evidence.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_source_coordinate_reconciliation_rehearsal_evidence.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "preset_mount_sanitizer_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "preset_mount_sanitizer_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-safe-subcoordinate-sanitizer-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-001-consumed.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-002-consumed.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-consumed.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-process-envelope.json",
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-launch-environment-diagnosis.md",
+      "docs/ariadne-agent-error-correction-register-revision-605.md",
+      "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-preset-mount-safe-subcoordinate-sanitizer-negative-result.md",
+      "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-threat-model-delta.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_preset_mount_sanitizer_windows_minimum_environment_recovery_only",
+    "accepted_source_reconciliation_and_three_attempt_records_remain_immutable",
+    "sanitizer_sha256_12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f_preserved",
+    "wrapper_sha256_601bb41f21916fc836603e54cb5caecec6987e75347609ff1881eef758940788_preserved",
+    "child_environment_exactly_systemroot_windir_comspec_temp_tmp",
+    "environment_values_never_persisted_or_logged",
+    "path_node_options_credentials_provider_configuration_and_all_unlisted_variables_excluded",
+    "one_local_node_fixture_process_only_in_successor",
+    "content_free_process_envelope_persisted_before_semantic_admission",
+    "success_requires_exit_zero_zero_stderr_and_exact_fifteen_result_safe_vector",
+    "any_other_result_stops_without_second_successor_process",
+    "no_dsh_import_or_native_harness_process",
+    "no_runner_integration_repair_retry_worker_model_or_provider_authority",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "exact_test_counts_from_completed_machine_output_only",
+    "no_commit_identity_statement_without_current_machine_snapshot_copy",
+    "all_new_narrative_artifacts_require_date_and_brisbane_timestamp",
+    "generated_narrative_timestamps_derive_from_creation_clock_or_typed_evidence",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "causal_claim_level": "observation_only",
+      "attempt_key": "preset-mount-sanitizer-source-lookup-001",
+      "resource_id": "preset-mount-sanitizer-physical-package-seed-path",
+      "transport": "local_filesystem_read",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The exact physical rc.7 package source path is copied from the accepted predecessor contract and is not inferred from a logical evidence binding.",
+      "observed_error": "The first source lookup appended the logical evidence path directly to the cache root and omitted the package-seed/node_modules/@deepseek-ai segments.",
+      "detection_method": "The read-only lookup returned path absence before source admission or process execution.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-605.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/contract.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.logical_source_binding_used_as_physical_package_path",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve the physical seed path from the accepted predecessor contract before reading the pinned source.",
+        "prevention_control": "Descendant source readers copy the full physical path from the accepted source-owning contract.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-605.md"
+        ]
+      },
+      "baton_summary": "records and corrects the logical-binding versus physical package-path lookup error."
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "causal_claim_level": "observation_only",
+      "attempt_key": "preset-mount-sanitizer-focused-test-001",
+      "resource_id": "preset-mount-sanitizer-plan-prose-assertion",
+      "transport": "local_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Plan prose assertions compare normalized document text where Markdown line wrapping is non-semantic.",
+      "observed_error": "The first focused assertion searched raw Markdown for a phrase split by line wrapping.",
+      "detection_method": "Pytest failed before Node execution.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-605.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.raw_markdown_phrase_assertion_ignores_line_wrap",
+      "correction": {
+        "status": "control_added",
+        "action": "Normalize whitespace before plan prose assertions.",
+        "prevention_control": "Use one normalized document reading for non-format-sensitive prose assertions.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py"
+        ]
+      },
+      "baton_summary": "records the raw Markdown line-wrap assertion and normalized correction."
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "causal_claim_level": "observation_only",
+      "attempt_key": "preset-mount-sanitizer-focused-test-002",
+      "resource_id": "preset-mount-sanitizer-plan-prose-normalization",
+      "transport": "local_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A representation-level correction is applied consistently to all adjacent assertions sharing the same source representation.",
+      "observed_error": "The first correction normalized only the failing assertion and left the adjacent null-detail assertion on raw text.",
+      "detection_method": "The next pytest run failed on the adjacent assertion before Node execution.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-605.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.partial_representation_normalization_leaves_adjacent_assertion",
+      "correction": {
+        "status": "control_added",
+        "action": "Use one normalized reading for every plan-prose assertion.",
+        "prevention_control": "When a source representation rule changes, audit the full local assertion family before rerun.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py"
+        ]
+      },
+      "baton_summary": "records the incomplete normalization and full local assertion-family correction."
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "causal_claim_level": "observation_only",
+      "attempt_key": "preset-mount-sanitizer-attempt-001",
+      "resource_id": "preset-mount-sanitizer-fixture-self-check",
+      "transport": "local_node_fixture",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "The controller retains a typed process envelope before interpreting a fixture result, and reports only observed numeric exits.",
+      "observed_error": "Attempt 001 embedded an all-or-nothing vector self-check while the controller retained neither vector nor process envelope; the orchestrator later described source-defined exit 2 as observed.",
+      "detection_method": "Post-attempt evidence review found only the outer node_fixture_exit_nonzero terminal and no retained numeric exit.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-001-consumed.json",
+        "docs/ariadne-agent-error-correction-register-revision-605.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "agent.unobserved_fixture_exit_inferred_from_source_without_process_envelope",
+      "correction": {
+        "status": "control_added",
+        "action": "Correct the attempt record to numeric-exit unobserved and move semantic vector checking into Python after process-envelope retention.",
+        "prevention_control": "Never state a numeric process exit unless it is present in typed machine evidence.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-001-consumed.json",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py"
+        ]
+      },
+      "baton_summary": "records the opaque attempt-001 controller and corrects the inferred exit-code claim."
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "causal_claim_level": "observation_only",
+      "attempt_key": "preset-mount-sanitizer-attempt-002",
+      "resource_id": "preset-mount-sanitizer-controller-process-envelope",
+      "transport": "local_node_fixture",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The controller retains numeric exit and content-free stream measurements before any semantic admission branch.",
+      "observed_error": "Attempt 002 checked nonzero exit before retaining numeric exit or stream sizes, leaving another outer-only terminal.",
+      "detection_method": "The consumed attempt record contained node_fixture_exit_nonzero but no process envelope.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-002-consumed.json",
+        "docs/ariadne-agent-error-correction-register-revision-605.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.process_exit_branch_precedes_content_free_envelope_retention",
+      "correction": {
+        "status": "control_added",
+        "action": "Record numeric exit, byte counts and digests before semantic admission in attempt 003.",
+        "prevention_control": "Every governed child process writes a content-free envelope before success or failure interpretation.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-process-envelope.json"
+        ]
+      },
+      "baton_summary": "records the attempt-002 missing envelope and the typed pre-admission correction."
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "causal_claim_level": "observation_only",
+      "attempt_key": "preset-mount-sanitizer-attempt-003",
+      "resource_id": "preset-mount-sanitizer-windows-child-environment",
+      "transport": "local_node_fixture",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "A local Windows Node fixture receives the minimum operating-system environment needed by the resolved executable without inheriting ambient secrets.",
+      "observed_error": "All three sanitizer fixture processes used env={}; attempt 003 returned exit 134 with zero stdout and 715 stderr bytes.",
+      "detection_method": "Source comparison with the accepted repository Node fixture convention and the typed attempt-003 process envelope.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-launch-environment-diagnosis.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-process-envelope.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.windows_node_child_launched_with_completely_empty_environment",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Freeze a separate one-process successor that supplies only SystemRoot, WINDIR, ComSpec, TEMP and TMP while preserving sanitizer/wrapper hashes.",
+        "prevention_control": "Windows child launch envelopes use an explicitly reviewed minimum-key projection and never an unexplained empty or full ambient environment.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-threat-model-delta.md"
+        ]
+      },
+      "baton_summary": "records the shared empty-Windows-environment divergence and bounded recovery hypothesis without claiming causation."
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "causal_claim_level": "observation_only",
+      "attempt_key": "preset-mount-sanitizer-negative-test-001",
+      "resource_id": "preset-mount-sanitizer-successor-plan-phrase",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Negative-evidence tests bind exact authored plan language instead of inventing equivalent prose.",
+      "observed_error": "The first test asserted an invented phrase, Exactly one successor process, rather than the plan's authored wording.",
+      "detection_method": "Pytest rejected the mismatch during closeout verification.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py",
+        "docs/ariadne-agent-error-correction-register-revision-605.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.negative_evidence_test_invents_equivalent_plan_phrase",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the normalized exact phrase one local Node process in this successor.",
+        "prevention_control": "Copy source-owned wording into evidence tests after normalizing only non-semantic whitespace.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py"
+        ]
+      },
+      "baton_summary": "records the invented test phrase and exact authored-wording correction."
+    },
+    {
+      "attempt_key": "preset-mount-sanitizer-clockwork-check-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preset-mount-sanitizer-closeout-incident-vocabulary",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_check",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Closeout incident observations use only the validator's closed candidate-state, severity, workflow-disposition, category, stage and correction-status vocabularies.",
+      "observed_error": "The first intent used descriptive labels including uncommitted_candidate, committed_failed_candidate and medium outside the closed incident vocabulary.",
+      "detection_method": "Clockwork --check rejected tick_incident_candidate_state before command execution, generation, publication or canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-605.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.closeout_incident_descriptive_labels_outside_closed_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace every descriptive incident label with a validator-enumerated value and record the rejection in the same atomic closeout.",
+        "prevention_control": "Read and copy the live incident enum values before authoring a closeout observation; rely on clockwork --check before command execution or publication.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "docs/ariadne-agent-error-correction-register-revision-605.md"
+        ]
+      },
+      "baton_summary": "records the rejected descriptive incident labels and the correction to the clockwork's closed vocabulary."
+    },
+    {
+      "attempt_key": "preset-mount-sanitizer-clockwork-check-002",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preset-mount-sanitizer-prospective-register-revision",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_check",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The prospective register revision is the canonical predecessor revision plus one atomic projection, independent of the number of incident observations in that projection.",
+      "observed_error": "After adding the eighth observation, the intent advanced the prospective register path from revision 605 to 606 instead of retaining revision 605 and increasing only the incident count.",
+      "detection_method": "Clockwork --check rejected tick_incident_revision_path before command execution, generation, publication or canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-605.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.prospective_register_revision_advanced_per_incident_not_per_projection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep the prospective register at revision 605 and advance the incident count from 880 by the exact nine observations.",
+        "prevention_control": "Derive revision as canonical revision plus one projection and derive incident count separately as canonical count plus observation count.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "docs/ariadne-agent-error-correction-register-revision-605.md"
+        ]
+      },
+      "baton_summary": "records the rejected prospective register revision and separates projection revision from incident-count arithmetic."
+    }
+  ]
+}
+
