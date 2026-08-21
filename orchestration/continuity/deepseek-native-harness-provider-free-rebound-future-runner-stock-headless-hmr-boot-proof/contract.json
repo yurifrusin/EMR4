@@ -17,12 +17,15 @@
     "accepted_rebinding_controller_sha256": "cb7a3475ddd12486f9b5eb10b92dba909924d73f592b3d9770de05f9514b7dc6",
     "rebinding_module_sha256": "6f2bf41551ddb839678eaea0cfbf2f61c8cc0735be60b0cd94db4e79b469b983",
     "accepted_controller_sha256": "29495710c5e95a12fba92a2ef34c28ed6b9ce5e034402e5551767e19b843014c",
-    "native_boot_utility_sha256": "158a229fb1df85c6f1692295a4cf8cf2c12519ea2ff2cb88fec2f408c5f43262"
+    "native_boot_utility_sha256": "158a229fb1df85c6f1692295a4cf8cf2c12519ea2ff2cb88fec2f408c5f43262",
+    "prelaunch_recovery_sha256": "575370c7a24cd6b6f55d22896df4db6b07c66e5e8e6dc645596467b3dfc45648",
+    "prelaunch_failure_sha256": "505cde86db44d7b185680d0b07704bc7716c5d50a268fa1b85ad1e5adf2ec99d",
+    "incident_revision_sha256": "ce83a652740437c74ce3b6e3f230087ad6dd5151afac2b93ae2c183310d472b2"
   },
   "implementation_bytes": {
-    "execution_controller_sha256": "edad182cda034c83d74b74a14467bbeb680659d20ea1bf7e405aedc2cae6c6a7",
-    "focused_test_sha256": "a9cdfa611df1dc42f50a71b6df1ff4bcea82e00b95528d920a6c3dbdea829d77",
-    "contract_schema_sha256": "238e24c254178f4ca88ac1cf08abab593dba90777df63bc7dd7c0f50b3de539c",
+    "execution_controller_sha256": "e3183a998bfd4ad65224fc7e10b4e45ebd51f2ba36d986f4ee19f6f1c1481fed",
+    "focused_test_sha256": "8dac679fab398fa495ba8811da85d9abcb80fc1fb8a3fe9d7ca30234af78ff17",
+    "contract_schema_sha256": "98726ab9daa61bc5e5717b31b051c2ca821aa73bcda84615c14173fb4418d1e2",
     "evidence_schema_sha256": "314d32addf1fd941097c60382fb4130d9da87ee2d237b17a7775cce45fa13edb"
   },
   "execution_attempt": {
@@ -67,6 +70,15 @@
     "@deepseek-ai/dsh-tool-fs",
     "@deepseek-ai/dsh-tool-fs-search"
   ],
+  "materialisation": {
+    "generation": 2,
+    "process_count": 1,
+    "retry_count": 0,
+    "direct_node_npm_cli": true,
+    "timeout_seconds": 600,
+    "node_executable_sha256": "9a4eb5f1c29c6a2e93852ead46b999e284a6a5ca8bab4d4e241d587d025a52de",
+    "npm_cli_sha256": "3ce7cba6f5128dd5f54c98b6a5036b0f850496878cc2e21044b675fe3c594e3e"
+  },
   "launch": {
     "node_flag": "--expose-internals",
     "profile_args": ["--profile", "headless"],

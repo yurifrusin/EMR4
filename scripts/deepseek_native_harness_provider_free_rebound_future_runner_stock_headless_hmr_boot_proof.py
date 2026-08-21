@@ -44,7 +44,6 @@ from scripts.deepseek_native_harness_provider_free_hmr_boot_proof import (
     POLL_SECONDS,
     ProofError,
     _network_attempts,
-    _offline_install,
     _terminate_process,
     _verify_installed_source,
     atomic_write,
@@ -67,12 +66,21 @@ EXECUTION_ATTEMPT_ID = "rebound-stock-headless-hmr-boot-attempt-001"
 OPERATION_ROOT = REPO_ROOT / "orchestration" / "continuity" / OPERATION_ID
 PLAN_PATH = REPO_ROOT / "docs" / f"{OPERATION_ID}-plan.md"
 THREAT_PATH = REPO_ROOT / "docs" / "security" / f"{OPERATION_ID}-threat-model-delta.md"
+RECOVERY_PATH = (
+    REPO_ROOT
+    / "docs"
+    / "deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-prelaunch-materialisation-process-ownership-recovery.md"
+)
+INCIDENT_REVISION_PATH = (
+    REPO_ROOT / "docs" / "ariadne-agent-error-correction-register-revision-600.md"
+)
 CONTRACT_PATH = OPERATION_ROOT / "contract.json"
 CONTRACT_SCHEMA_PATH = OPERATION_ROOT / "contract.schema.json"
 EVIDENCE_SCHEMA_PATH = OPERATION_ROOT / "evidence.schema.json"
 EVIDENCE_PATH = OPERATION_ROOT / "native-boot-evidence.json"
 REPORT_PATH = OPERATION_ROOT / "native-boot-report.md"
 EFFICACY_PATH = OPERATION_ROOT / "efficacy-reading.json"
+PRELAUNCH_FAILURE_PATH = OPERATION_ROOT / "prelaunch-materialisation-failure-001.json"
 FOCUSED_TEST_PATH = (
     REPO_ROOT
     / "tests"
@@ -354,6 +362,9 @@ def validate_predecessors(contract: dict[str, Any]) -> dict[str, Any]:
         "rebinding_module_sha256": REBOUND_MODULE_PATH,
         "accepted_controller_sha256": ACCEPTED_CONTROLLER_PATH,
         "native_boot_utility_sha256": Path(native_base.__file__).resolve(),
+        "prelaunch_recovery_sha256": RECOVERY_PATH,
+        "prelaunch_failure_sha256": PRELAUNCH_FAILURE_PATH,
+        "incident_revision_sha256": INCIDENT_REVISION_PATH,
     }
     observed = {key: sha256_file(path) for key, path in paths.items()}
     if observed != contract["predecessor_bytes"]:
@@ -373,12 +384,96 @@ def validate_predecessors(contract: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _owned_materializer_paths(contract: dict[str, Any]) -> tuple[Path, Path]:
+    node_name = shutil.which("node")
+    if node_name is None:
+        raise ReboundNativeBootError("node_not_found")
+    node = Path(node_name).resolve()
+    npm_cli = node.parent / "node_modules" / "npm" / "bin" / "npm-cli.js"
+    if not node.is_file() or not npm_cli.is_file():
+        raise ReboundNativeBootError("owned_materializer_surface_missing")
+    expected = contract["materialisation"]
+    if (
+        sha256_file(node) != expected["node_executable_sha256"]
+        or sha256_file(npm_cli) != expected["npm_cli_sha256"]
+    ):
+        raise ReboundNativeBootError("owned_materializer_digest_mismatch")
+    return node, npm_cli
+
+
+def _owned_offline_install(
+    root: Path,
+    tarball: Path,
+    environment: dict[str, str],
+    contract: dict[str, Any],
+) -> tuple[Path, dict[str, Any]]:
+    node, npm_cli = _owned_materializer_paths(contract)
+    install_root = root / "installation"
+    install_root.mkdir()
+    _write_exclusive(
+        install_root / "package.json",
+        (json.dumps({"name": "emr4-provider-free-hmr-proof", "private": True}, indent=2) + "\n").encode(),
+    )
+    command = [
+        str(node),
+        str(npm_cli),
+        "install",
+        "--offline",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund",
+        str(tarball.resolve()),
+    ]
+    process: subprocess.Popen[bytes] | None = None
+    started = time.monotonic()
+    timed_out = False
+    try:
+        process = subprocess.Popen(
+            command,
+            cwd=install_root,
+            env=environment,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        try:
+            exit_code = process.wait(
+                timeout=float(contract["materialisation"]["timeout_seconds"])
+            )
+        except subprocess.TimeoutExpired:
+            timed_out = True
+            _terminate_process(process)
+            exit_code = process.returncode
+    finally:
+        if process is not None:
+            _terminate_process(process)
+    duration_ms = round((time.monotonic() - started) * 1000)
+    process_absent = process is not None and process.poll() is not None
+    if not process_absent:
+        raise ReboundNativeBootError("owned_materializer_process_not_absent")
+    if timed_out:
+        raise ReboundNativeBootError("owned_offline_materialisation_timeout")
+    if exit_code != 0:
+        raise ReboundNativeBootError("owned_offline_materialisation_failed")
+    package_root = install_root / "node_modules" / "@deepseek-ai" / "dsh"
+    return package_root, {
+        "exit_code": exit_code,
+        "duration_ms": duration_ms,
+        "process_count": 1,
+        "retry_count": 0,
+        "direct_node_npm_cli": True,
+        "owned_process_absent": process_absent,
+        "node_executable_sha256": sha256_file(node),
+        "npm_cli_sha256": sha256_file(npm_cli),
+    }
+
+
 def deterministic_check(cache_root: Path | None = None) -> dict[str, Any]:
     contract = load_contract()
     predecessor = validate_predecessors(contract)
     runner, helper, guard, sentinel, bindings = source_payloads(contract)
     resolved_cache = (cache_root or _default_cache_root()).resolve()
     _, cached = verify_cached_packages(contract, resolved_cache)
+    node, npm_cli = _owned_materializer_paths(contract)
     deterministic_root = Path("C:/deterministic/rebound-runner-native-boot").resolve()
     profile_dir = deterministic_root / "home" / "profiles" / "headless"
     initial, changed = build_patch_pair(
@@ -404,6 +499,13 @@ def deterministic_check(cache_root: Path | None = None) -> dict[str, Any]:
             "changed": sha256_bytes(changed),
         },
         "verified_cached_package_count": len(cached),
+        "owned_materializer": {
+            "node_executable_sha256": sha256_file(node),
+            "npm_cli_sha256": sha256_file(npm_cli),
+            "prelaunch_materialisation_generation": contract["materialisation"][
+                "generation"
+            ],
+        },
     }
 
 
@@ -642,7 +744,9 @@ def execute_boot(cache_root: Path | None = None) -> dict[str, Any]:
         environment, removed_environment_names = build_child_environment(
             home, network_guard_path, network_path
         )
-        package_root, install_projection = _offline_install(root, tarball_path, environment)
+        package_root, install_projection = _owned_offline_install(
+            root, tarball_path, environment, contract
+        )
         installed_source = _verify_installed_source(package_root, contract)
         installed_versions = validate_installed_packages(package_root, contract)
 

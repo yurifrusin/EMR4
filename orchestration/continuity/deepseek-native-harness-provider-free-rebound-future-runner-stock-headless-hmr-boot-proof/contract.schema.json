@@ -6,7 +6,7 @@
   "required": [
     "schema_version", "operation_id", "planning_source", "accepted_sources",
     "predecessor_bytes", "implementation_bytes", "execution_attempt", "bundle_identity", "source_bindings",
-    "target_binding", "package", "required_installed_packages", "launch", "readiness",
+    "target_binding", "package", "required_installed_packages", "materialisation", "launch", "readiness",
     "expected_terminal", "required_zero_counts"
   ],
   "properties": {
@@ -60,6 +60,19 @@
       }
     },
     "required_installed_packages": {"type": "array", "minItems": 6, "maxItems": 6, "uniqueItems": true, "items": {"type": "string"}},
+    "materialisation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["generation", "process_count", "retry_count", "direct_node_npm_cli", "timeout_seconds", "node_executable_sha256", "npm_cli_sha256"],
+      "properties": {
+        "generation": {"const": 2},
+        "process_count": {"const": 1},
+        "retry_count": {"const": 0},
+        "direct_node_npm_cli": {"const": true},
+        "timeout_seconds": {"type": "integer", "minimum": 300, "maximum": 900},
+        "node_executable_sha256": {"$ref": "#/$defs/digest"},
+        "npm_cli_sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
     "launch": {
       "type": "object", "additionalProperties": false,
       "required": ["node_flag", "profile_args", "online_package_fallback", "package_lifecycle_scripts", "timeout_seconds"],

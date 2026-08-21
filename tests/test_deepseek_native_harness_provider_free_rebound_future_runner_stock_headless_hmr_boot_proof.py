@@ -59,6 +59,52 @@ def test_execution_attempt_is_exactly_one_process_without_retry() -> None:
     }
 
 
+def test_prelaunch_materialisation_generation_two_owns_direct_npm_cli() -> None:
+    assert CONTRACT["materialisation"] == {
+        "generation": 2,
+        "process_count": 1,
+        "retry_count": 0,
+        "direct_node_npm_cli": True,
+        "timeout_seconds": 600,
+        "node_executable_sha256": "9a4eb5f1c29c6a2e93852ead46b999e284a6a5ca8bab4d4e241d587d025a52de",
+        "npm_cli_sha256": "3ce7cba6f5128dd5f54c98b6a5036b0f850496878cc2e21044b675fe3c594e3e",
+    }
+
+
+def test_owned_materializer_is_direct_and_waited_without_wrapper() -> None:
+    source = inspect.getsource(subject._owned_offline_install)
+    assert source.count("subprocess.Popen(") == 1
+    assert "subprocess.run(" not in source
+    assert '"npm-cli.js"' not in source
+    assert "npm.cmd" not in source.lower()
+    assert "stdout=subprocess.DEVNULL" in source
+    assert "stderr=subprocess.DEVNULL" in source
+    assert "process.wait(" in source
+    assert source.count("_terminate_process(process)") == 2
+
+
+def test_owned_materializer_paths_are_hash_bound() -> None:
+    node, npm_cli = subject._owned_materializer_paths(CONTRACT)
+    assert subject.sha256_file(node) == CONTRACT["materialisation"][
+        "node_executable_sha256"
+    ]
+    assert subject.sha256_file(npm_cli) == CONTRACT["materialisation"][
+        "npm_cli_sha256"
+    ]
+
+
+def test_prelaunch_failure_is_typed_and_did_not_consume_native_attempt() -> None:
+    value = json.loads(subject.PRELAUNCH_FAILURE_PATH.read_bytes())
+    assert value["result"] == "prelaunch_rejected"
+    assert value["cause_coordinate"] == (
+        "npm_descendant_outlived_parent_and_held_disposable_installation"
+    )
+    assert value["native_harness_process_count"] == 0
+    assert value["execution_attempt_consumed"] is False
+    assert value["owned_orphan_terminated"] is True
+    assert value["disposable_root_cleanup_complete"] is True
+
+
 def test_bundle_identity_remains_the_accepted_rebound_identity() -> None:
     assert CONTRACT["bundle_identity"] == {
         "operation_id": "deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal",
@@ -270,4 +316,3 @@ def test_no_product_or_data_authority_enters_the_contract() -> None:
         "ordinary_practice_enablement",
     ):
         assert forbidden not in payload
-
