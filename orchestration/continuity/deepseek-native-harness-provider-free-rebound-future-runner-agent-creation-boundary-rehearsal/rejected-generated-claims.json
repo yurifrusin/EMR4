@@ -1,0 +1,37 @@
+{
+  "schema_version": "ariadne.native_harness_agent_creation_boundary_rejected_generated_claims.v1",
+  "operation_id": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal",
+  "execution_attempt_id": "rebound-agent-creation-boundary-attempt-001",
+  "recorded_at": "2026-08-22T02:48:06.6590250+10:00",
+  "rejected_artifacts": [
+    {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-agent-creation-boundary-report.md",
+      "sha256": "bd83be7d1434a122f262549a23470f6e8276924ed6b6441416ba4d87f3477661",
+      "reason": "result_invariant_success_prose_contradicts_failed_evidence_and_absent_sidecar"
+    },
+    {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/efficacy-reading.json",
+      "sha256": "0e78435e429f0abae4661c723279794510b7aeaf1e37d311d5474b913703c22f",
+      "reason": "factory_commit_control_gain_is_unproved_without_typed_sidecar"
+    }
+  ],
+  "partially_admissible_artifact": {
+    "path": "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-agent-creation-boundary-evidence.json",
+    "sha256": "cf674a1759d075a818dfffb2bf1fa9018e35104bf89466fad2beb616bd633696",
+    "admissible_fields": [
+      "result",
+      "failure_classification",
+      "launch",
+      "readiness",
+      "provider_boundary",
+      "target",
+      "cleanup",
+      "sidecar"
+    ],
+    "inadmissible_as_observed_fields": [
+      "factory_boundary"
+    ],
+    "reason": "factory_boundary_zeros_are_controller_fallback_values_when_sidecar_is_null"
+  },
+  "authoritative_interpretation": "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/failure-interpretation.json"
+}

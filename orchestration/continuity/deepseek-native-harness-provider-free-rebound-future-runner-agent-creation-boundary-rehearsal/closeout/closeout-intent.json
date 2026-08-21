@@ -1,0 +1,387 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal",
+    "title": "DeepSeek native Harness provider-free rebound future-runner agent-creation boundary rehearsal",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T02:48:06.6590250+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal",
+      "title": "Rebound future-runner agent-creation boundary failed-closed rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits this bounded provider-free native-Harness control sequence and deterministic self-correction.",
+          "The one native attempt was consumed without retry; no model/provider request, target, product, data, deployment, Pages or protected-ref authority opened.",
+          "The predecessor boot proof, consumed attempt bytes, rejected generated claims and bounded failure interpretation remain immutable."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "reject-agent-creation-and-prepublication-veto-proof",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/failure-interpretation.json",
+          "status": "rejected",
+          "summary": "Reject any claim that the absent sidecar proves factory invocation, setup, private preparation, preset composition, model selection, commit or publication veto."
+        },
+        {
+          "id": "accept-clean-provider-free-failure-containment",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-agent-creation-boundary-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one process, exact readiness, one HMR mutation, process-exit rejection, downstream silence, target absence, immutable seed and complete process/root cleanup as bounded negative evidence."
+        },
+        {
+          "id": "accept-prelaunch-contract-family-guard",
+          "source": "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-prelaunch-contract-family-recovery.md",
+          "status": "accepted",
+          "summary": "Accept the owner-contract preset binding and deterministic pre-root guard; the prelaunch controller stop consumed no native attempt."
+        },
+        {
+          "id": "reject-result-invariant-generated-success-claims",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/rejected-generated-claims.json",
+          "status": "rejected",
+          "summary": "Reject the generated report success paragraph and factory-commit efficacy claim while preserving their exact bytes and hashes."
+        },
+        {
+          "id": "freeze-distinct-closed-subcoordinate-diagnostic-successor",
+          "source": "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md",
+          "status": "accepted",
+          "summary": "Freeze one distinct provider-free diagnostic transaction with dynamic imports and finite stage/error output; it is not a retry or retroactive acceptance."
+        }
+      ],
+      "claim_scope": [
+        "One pinned rc.7 process traversed the exact stock-headless readiness sequence and accepted one HMR mutation.",
+        "The process self-exited with code 2 before the required typed sidecar and the controller rejected the result.",
+        "The exact factory stage remains unknown; fallback zero fields are not observations.",
+        "Broker, request, worker, model/provider, database, Docker, network and target activity remained zero.",
+        "Process/root cleanup passed, the package seed remained unchanged and no raw stream, environment or log was retained.",
+        "The prelaunch contract-family defect is guarded deterministically before any disposable root."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-prelaunch-contract-family-recovery.md",
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/prelaunch-controller-contract-family-failure-001.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-attempt-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-agent-creation-boundary-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-agent-creation-boundary-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/efficacy-reading.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/failure-interpretation.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/rejected-generated-claims.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-sol-nonacceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-prelaunch-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-contract-family-recovery-prepush-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-recovered-preexecution-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_plan.py",
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_evidence.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_agents_handover_archive.py",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-rebound-future-runner-agent-creation-boundary-rehearsal.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact post-HMR runner/factory failure stage is unknown because no typed sidecar was written.",
+        "No agent creation, private Agent/Session preparation, preset composition, model selection, commit or publication-veto claim is accepted.",
+        "No DeepSeek worker, turn, model/provider request, coding behavior or target edit is authorised or proved.",
+        "Product, data, ordinary-practice, production, deployment, release, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Make native DeepSeek worker execution bounded, traceable and governable enough for Raisa development",
+      "outcome": "The orchestrator contained one real post-HMR failure completely and identified the remaining traceability gap: runner/factory stages need a mandatory finite terminal before any success claim.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/failure-interpretation.json",
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Eliminate the sidecar-free attribution gap between HMR mounting and the native agent-factory boundary",
+      "why_now": "The consumed attempt is safely contained but cannot reveal its factory stage, and no reviewer can reconstruct runtime state that was not recorded.",
+      "outcome": "One distinct provider-free diagnostic process will emit a finite typed stage/error terminal or narrow the failure to runner link/apply absence without projecting unknown factory counts.",
+      "unlocks": [
+        "Attributable native package-import, service, preset and factory-stage evidence.",
+        "A defensible decision on the narrowest later agent-creation proof without opaque reruns."
+      ],
+      "does_not_solve": [
+        "No published agent/session, turn, broker/model/provider request or coding-performance evidence.",
+        "No target edit, product command, product data, ordinary-practice enablement, production, deployment, release, Pages or protected integration."
+      ],
+      "evidence": [
+        "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md",
+        "docs/security/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-threat-model-delta.md"
+      ],
+      "orientation_statement": "Freeze and execute one provider-free closed-subcoordinate diagnostic transaction without retrying the consumed attempt."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal",
+      "active_tranche": "DeepSeek native Harness provider-free post-HMR agent-factory closed-subcoordinate diagnostic rehearsal",
+      "objective": "Derive one minimal rebound runner that dynamically imports its package dependencies inside a guarded transaction, emits exactly one finite typed stage/error sidecar, and runs at most one distinct provider-free native process before any turn, broker/model/provider request or target creation or use.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and extended authority for the bounded native-Harness control sequence.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_implement_the_closed_subcoordinate_contract_and_deterministic_runner_guard"
+    },
+    "incidents": [
+      {"incident_id": "manual-git-object-in-prepush-receipt", "source_id": "agent-boundary-prepush-receipt-001", "peers": []},
+      {"incident_id": "preset-contract-family-prelaunch-stop", "source_id": "agent-boundary-prelaunch-contract-001", "peers": []},
+      {"incident_id": "post-hmr-sidecar-free-process-exit", "source_id": "agent-boundary-native-attempt-001", "peers": []},
+      {"incident_id": "failed-result-success-claim-generation", "source_id": "agent-boundary-generated-claims-001", "peers": []}
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "agent_boundary_focused_evidence_and_plan_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_plan.py", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_evidence.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "agent_boundary_inherited_regressions",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_guard.py", "tests/test_deepseek_native_harness_provider_free_effective_tool_composition_native_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_future_attempt_identity_and_target_rebinding_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_hmr_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof_evidence.py", "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "agent_boundary_governance_regressions",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_ariadne_active_operation_latch_continuity.py", "tests/test_agents_handover_archive.py", "tests/test_agents_acceptance_index.py", "tests/test_current_baton_consistency.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "agent_boundary_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_plan.py", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_evidence.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "agent_boundary_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_plan.py", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_evidence.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-prelaunch-contract-family-recovery.md",
+      "scripts/deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/prelaunch-controller-contract-family-failure-001.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-attempt-consumed.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-agent-creation-boundary-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-agent-creation-boundary-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/efficacy-reading.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/failure-interpretation.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/rejected-generated-claims.json",
+      "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
+      "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_plan.py",
+      "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_evidence.py",
+      "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-sol-nonacceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-rebound-future-runner-agent-creation-boundary-rehearsal.md",
+      "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-threat-model-delta.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_post_hmr_agent_factory_closed_subcoordinate_diagnostic_only",
+    "consumed_rebound_agent_creation_boundary_attempt_001_and_its_failure_interpretation_remain_immutable",
+    "accepted_rebound_runner_helper_controller_target_package_and_preset_bindings_remain_immutable",
+    "one_distinct_fresh_disposable_root_one_native_harness_process_and_one_terminal_only",
+    "dynamic_package_and_guard_imports_must_remain_inside_the_guarded_diagnostic_transaction",
+    "finite_closed_stage_error_and_terminal_vocabularies_only",
+    "no_raw_error_message_stack_code_path_cause_stream_session_prompt_response_path_or_credential",
+    "no_fallback_factory_counts_when_typed_sidecar_is_absent",
+    "at_most_one_agent_factory_invocation_and_zero_published_agents_sessions_or_lifecycle_announcements",
+    "turn_broker_worker_request_model_provider_database_docker_network_counts_remain_zero",
+    "occupied_model_launch_authorized_remains_false",
+    "target_file_creation_and_target_use_remain_false",
+    "no_second_diagnostic_process_retry_resume_fallback_or_alternate_transport",
+    "verified_package_only_seed_and_independent_copy_required",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "exact_test_counts_from_completed_machine_output_only",
+    "no_commit_identity_statement_without_current_machine_snapshot_copy",
+    "all_new_narrative_artifacts_require_date_and_brisbane_timestamp",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "agent-boundary-prepush-receipt-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-rebound-agent-creation-boundary",
+      "role": "orchestrator",
+      "resource_id": "ariadne-prepush-git-ref-binding",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "implementation",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Git identity in free-form continuation prose must be absent so the preflight gear alone supplies current full object identities.",
+      "observed_error": "The first pre-push runtime state embedded a reviewed Git identity in prose and the preflight rejected the receipt before publication.",
+      "detection_method": "The git-ref evidence binding returned manual-object-id forbidden; the rejected runtime/receipt were preserved and a machine-snapshot-only replacement passed with zero manual ids.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-implementation-prepush-runtime-state.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-implementation-prepush-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.prepush_freeform_git_object_identity",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace every Git identity statement in prose with a machine-snapshot-only declaration and rerun the preflight without changing the implementation candidate.",
+        "prevention_control": "Every continuation receipt must report zero manually supplied object ids before it can pass.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-implementation-prepush-corrected-receipt.json"
+        ]
+      },
+      "baton_summary": "records the rejected free-form Git identity and machine-snapshot-only corrected receipt."
+    },
+    {
+      "attempt_key": "agent-boundary-prelaunch-contract-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-rebound-agent-creation-boundary",
+      "role": "orchestrator",
+      "resource_id": "native-preset-contract-family-binding",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_native_harness_controller",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The preset builder must receive its owning effective-tool contract and validate exact preset identity, tools, bytes and digest before any disposable root or native process.",
+      "observed_error": "The first controller invocation supplied the accepted rebinding contract to the effective-tool preset builder; the schema mismatch rejected before native launch and wrote no canonical attempt output.",
+      "detection_method": "The controller rejection was joined with zero native processes, zero canonical outputs and exact disposable-root absence, preserving native attempt 001 as unconsumed.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/prelaunch-controller-contract-family-failure-001.json",
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-prelaunch-contract-family-recovery.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.preset_builder_wrong_typed_contract_family",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Load the effective-tool contract through its owner, validate exact cross-contract bindings during deterministic checking and pass the checked bytes into execution.",
+        "prevention_control": "The pre-root deterministic guard and focused regression tests reject wrong contract-family selection before materialisation.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py"
+        ]
+      },
+      "baton_summary": "records the prelaunch typed-contract mismatch and deterministic owner-contract guard."
+    },
+    {
+      "attempt_key": "agent-boundary-native-attempt-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-rebound-agent-creation-boundary",
+      "role": "orchestrator",
+      "resource_id": "native-runner-factory-stage-sidecar",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_native_harness_controller",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "material",
+      "expected_invariant": "After exact HMR mutation the native runner must emit one finite typed terminal before exit so factory progress is attributable without raw streams.",
+      "observed_error": "The one native process reached exact readiness and HMR mutation, then self-exited with code 2 before the typed sidecar; the controller could classify only process-exit rejection and factory progress remained unknown.",
+      "detection_method": "The consumed attempt ledger, null sidecar, exit coordinate, independent downstream-zero gauges and complete process/root cleanup jointly establish the bounded failure without reconstructing a hidden stage.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-attempt-consumed.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/failure-interpretation.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.post_hmr_exit_before_typed_factory_subcoordinate",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume the attempt without retry, reject factory-progress claims and freeze a distinct dynamic-import closed-subcoordinate diagnostic transaction.",
+        "prevention_control": "The successor requires exactly one finite typed stage/error terminal and forbids fallback factory counts when the sidecar is absent.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-threat-model-delta.md"
+        ]
+      },
+      "baton_summary": "records the consumed sidecar-free native exit and distinct closed-subcoordinate diagnostic successor."
+    },
+    {
+      "attempt_key": "agent-boundary-generated-claims-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-rebound-agent-creation-boundary",
+      "role": "orchestrator",
+      "resource_id": "native-attempt-report-and-efficacy-generator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_native_harness_controller",
+      "stage": "acceptance",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "Generated narrative and efficacy artifacts must branch on the typed result and may claim factory control only when a valid sidecar proves the required terminal.",
+      "observed_error": "The failed attempt generated an unconditional success paragraph and factory-commit control-gain string despite result fail, null sidecar and null controller terminal.",
+      "detection_method": "Post-execution readback compared the report and efficacy claims with the canonical evidence result and sidecar fields, then hash-bound both generated artifacts as rejected claims.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-agent-creation-boundary-report.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/efficacy-reading.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.evidence_generator_result_invariant_success_claim",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve and explicitly reject the two generated success claims, make the bounded failure interpretation authoritative and test every exact artifact hash and claim boundary.",
+        "prevention_control": "The successor accepts only typed result-aware terminals and its evidence tests prohibit success claims or observed factory counts without a valid sidecar.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/rejected-generated-claims.json",
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_evidence.py"
+        ]
+      },
+      "baton_summary": "records and rejects the failed-result success overclaim with a typed authoritative interpretation."
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": "ariadne.native_harness_agent_creation_boundary_failure_interpretation.v1",
+  "operation_id": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal",
+  "execution_attempt_id": "rebound-agent-creation-boundary-attempt-001",
+  "recorded_at": "2026-08-22T02:48:06.6590250+10:00",
+  "result": "fail",
+  "failure_classification": "PROCESS_EXIT_REJECTED",
+  "accepted_observations": {
+    "native_process_count": 1,
+    "retry_count": 0,
+    "resume_count": 0,
+    "readiness_events": [
+      "sentinel_activated",
+      "stock_headless_hmr_ready"
+    ],
+    "hmr_mutation_count": 1,
+    "exit_code": 2,
+    "exit_mode": "self_exited_before_typed_sidecar",
+    "typed_sidecar_present": false,
+    "broker_request_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "network_attempt_count": 0,
+    "target_created": false,
+    "target_used": false,
+    "process_absent": true,
+    "disposable_root_absent": true,
+    "package_seed_unchanged": true
+  },
+  "factory_progress": {
+    "classification": "unknown_without_typed_sidecar",
+    "agent_create_invocation_observed": null,
+    "private_agent_preparation_observed": null,
+    "private_session_preparation_observed": null,
+    "setup_commit_observed": null,
+    "publication_veto_observed": null
+  },
+  "non_observational_fallback_fields": [
+    "factory_boundary.agent_create_invocation_count",
+    "factory_boundary.private_agent_preparation_count",
+    "factory_boundary.private_session_preparation_count",
+    "factory_boundary.live_agent_count",
+    "factory_boundary.live_session_count",
+    "factory_boundary.session_created_event_count",
+    "factory_boundary.agent_created_event_count",
+    "factory_boundary.agent_session_start_event_count"
+  ],
+  "claim_boundary": "This attempt proves clean provider-free containment through HMR mutation and a typed controller-level process-exit rejection. It does not prove whether the runner invoked the factory, entered setup, prepared private objects, installed the preset or model selection, reached commit, or exercised the publication veto.",
+  "retry_permitted": false,
+  "successor_classification": "separately_frozen_closed_subcoordinate_diagnostic"
+}

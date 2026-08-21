@@ -1,0 +1,9 @@
+{
+  "candidate_source": "39373fbbde75c7614dfe9c64e0fe1bcb5c5af212",
+  "execution_attempt_id": "rebound-agent-creation-boundary-attempt-001",
+  "operation_id": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal",
+  "resume_permitted": false,
+  "retry_count": 0,
+  "schema_version": "ariadne.native_harness_agent_creation_boundary_attempt.v1",
+  "state": "consumed"
+}

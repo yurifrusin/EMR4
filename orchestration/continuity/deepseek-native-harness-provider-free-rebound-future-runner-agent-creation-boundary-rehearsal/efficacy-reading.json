@@ -1,0 +1,15 @@
+{
+  "agents_create_invocation_count": 0,
+  "control_gain": "real_factory_prepublication_commit_is_under_typed_orchestrator_veto",
+  "free_form_finite_control_fields": 0,
+  "model_request_count": 0,
+  "native_process_count": 1,
+  "next_gate": "one_atomic_published_inert_agent_session_pair_only_if_separately_frozen",
+  "operation_id": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal",
+  "provider_request_count": 0,
+  "published_agent_count": 0,
+  "published_session_count": 0,
+  "result": "fail",
+  "retry_count": 0,
+  "schema_version": "ariadne.native_harness_agent_creation_boundary_efficacy.v1"
+}

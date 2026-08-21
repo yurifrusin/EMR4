@@ -1,0 +1,131 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free rebound future-runner agent-creation boundary rehearsal",
+    "completed_stage": "The first controller invocation rejected before native launch at the preset contract-family boundary; zero native processes, zero canonical attempt outputs and complete disposable-root absence preserve native attempt 001 as unconsumed.",
+    "next_executable_stage": "implement_and_publish_the_deterministic_preset_contract_family_guard_then_freshly_rehydrate_before_native_launch",
+    "operation_id": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "f7eff76e61f4b139741aadbe61df4c3c6a7f8d68",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "39373fbbde75c7614dfe9c64e0fe1bcb5c5af212",
+    "reason_codes": [],
+    "resolved_commit": "f7eff76e61f4b139741aadbe61df4c3c6a7f8d68",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "f7eff76e61f4b139741aadbe61df4c3c6a7f8d68"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "39373fbbde75c7614dfe9c64e0fe1bcb5c5af212",
+    "branch_origin_aligned": true,
+    "head": "39373fbbde75c7614dfe9c64e0fe1bcb5c5af212",
+    "origin_branch_commit": "39373fbbde75c7614dfe9c64e0fe1bcb5c5af212",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 674
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "failed_closeout_precommit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The factory remains unproved and DeepSeek cannot provide an independent reading of its own missing runtime terminal.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "gemini_verifier",
+        "rationale": "No external reviewer can reconstruct a runtime stage that was not recorded; exact local failure evidence controls closeout.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits delegation and the consumed attempt plus clockwork closeout is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "successor preplanning",
+      "successor typed terminal",
+      "successor closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit exact failure evidence",
+      "run clockwork check",
+      "publish one failed closeout generation",
+      "notify Yuri",
+      "rehydrate the distinct diagnostic successor"
+    ]
+  },
+  "planned_action": "commit_the_truthful_failed_no_retry_closeout_the_rejected_claim_bindings_and_the_frozen_distinct_diagnostic_successor",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-plan.md",
+      "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-prelaunch-contract-family-recovery.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-attempt-consumed.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-agent-creation-boundary-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/failure-interpretation.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/rejected-generated-claims.json",
+      "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-sol-nonacceptance.md",
+      "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/closeout/closeout-intent.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns failure interpretation, incident registration and closeout. DeepSeek cannot review its own unproved factory boundary, Gemini cannot reconstruct missing runtime state, and native subagents are prohibited.",
+    "git_refs_and_worktree": "Machine snapshot only: task and origin, protected refs, tracked cleanliness and preserved untracked paths are read by the preflight gear; caller prose supplies no Git object.",
+    "live_handover_current_baton": "The active tranche has consumed its single native attempt and must close without retry or an agent-creation claim before the separately frozen diagnostic successor begins.",
+    "protected_evidence_boundaries": "Commit the exact failed attempt, truthful interpretation, rejected claim bindings, incident intent and distinct diagnostic plan only. No retry, published agent/session, turn, broker/model/provider request, target, product/data, ordinary-practice, production, deployment, release, Pages, protected evidence or protected-ref movement is allowed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
