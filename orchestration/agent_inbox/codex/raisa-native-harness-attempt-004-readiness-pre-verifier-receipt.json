@@ -1,0 +1,122 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa authored-synthetic native Harness bounded-worker attempt-004 readiness and preexecution decision",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_attempt_004_readiness_contract_and_one_execution_gate",
+    "operation_id": "raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision",
+    "resume_after_compaction": true,
+    "source_head": "4410c0c4d1ac95d31775d87f13dd6c6077a016d7",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "0ef8ab1317e21152c9ee7c331801183250361745",
+    "reason_codes": [],
+    "resolved_commit": "4410c0c4d1ac95d31775d87f13dd6c6077a016d7",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "4410c0c4d1ac95d31775d87f13dd6c6077a016d7"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "0ef8ab1317e21152c9ee7c331801183250361745",
+    "branch_origin_aligned": true,
+    "head": "0ef8ab1317e21152c9ee7c331801183250361745",
+    "origin_branch_commit": "0ef8ab1317e21152c9ee7c331801183250361745",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 659
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "deepseek_flash",
+        "rationale": "Readiness candidate acceptance is provider-free and the latch forbids a DeepSeek execution.",
+        "work_packages": []
+      },
+      {
+        "disposition": "not_applicable",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exact local schema, hash, identity, clock and cleanup evidence supplies the decision without a provider review.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy and the single serial identity/lease gate admit no delegated work package.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "candidate verification fails",
+      "occupied authority is proposed",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one exact candidate acceptance owner",
+      "no Harness worker model or provider process",
+      "fresh occupied clockwork reading remains a successor requirement"
+    ]
+  },
+  "planned_action": "accept_the_provider_free_attempt_004_readiness_candidate_without_worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision-plan.md",
+      "docs/security/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision-threat-model-delta.md",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision/contract.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision/deterministic-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns provider-free candidate acceptance and clockwork closeout; DeepSeek, Gemini and native subagents have no execution package in this serial deterministic gate.",
+    "git_refs_and_worktree": "Machine snapshot alone must prove the task branch and origin aligned at the candidate, protected refs fixed at the configured expected commit, tracked state clean, docs/branding present and unrelated untracked paths preserved.",
+    "live_handover_current_baton": "Continuity 360 and Compass 342 name attempt-004 readiness as the active operation; its frozen plan and deterministic result are now published on the task branch.",
+    "protected_evidence_boundaries": "Attempts 001-003 and historical bytes are immutable; readiness launched no Harness/provider process and leaves occupied authority, product/data/deployment and protected surfaces closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
