@@ -7,11 +7,11 @@
   "source_head": "f7eff76e61f4b139741aadbe61df4c3c6a7f8d68",
   "authority_source": "Yuri's standing uninterrupted-development authority and extended authority for the bounded native-Harness control sequence.",
   "checkpoint": {
-    "completed_stage": "Frozen the package-supported prepublication-veto plan and completed the deterministic implementation candidate with exact rc.7 source, preset, tool, sidecar and controller bindings.",
-    "next_executable_stage": "commit_and_push_the_clean_preexecution_candidate_then_rehydrate_and_admit_exactly_one_native_process",
+    "completed_stage": "The first controller invocation rejected before native launch at the preset contract-family boundary; zero native processes, zero canonical attempt outputs and complete disposable-root absence preserve native attempt 001 as unconsumed.",
+    "next_executable_stage": "implement_and_publish_the_deterministic_preset_contract_family_guard_then_freshly_rehydrate_before_native_launch",
     "retry_counters": {
       "planning": 0,
-      "implementation": 0,
+      "implementation": 1,
       "review": 0,
       "verification": 0
     },
