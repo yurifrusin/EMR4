@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "attempt_id", "candidate_source", "result", "failure_coordinate", "package", "profile", "launch", "hmr_events", "streams", "provider_boundary", "cleanup", "claim_boundary"],
+  "properties": {
+    "schema_version": {"const": "ariadne.deepseek_native_harness_inert_task_sentinel_readiness_boot_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof"},
+    "attempt_id": {"const": "inert-task-sentinel-readiness-native-boot-attempt-001"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {"enum": ["pass", "failed_closed"]},
+    "failure_coordinate": {"type": ["string", "null"]},
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "bin", "materialization_method", "materialization_process_count", "package_json_sha256"],
+      "properties": {
+        "name": {"const": "@deepseek-ai/dsh"},
+        "version": {"const": "0.1.0-rc.7"},
+        "bin": {"const": "lib/bin.js"},
+        "materialization_method": {"const": "python_copy_only"},
+        "materialization_process_count": {"const": 0},
+        "package_json_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["changed", "sha256", "sentinel_sha256", "sentinel_relative_name", "sentinel_row_count", "runner_row_count", "runner_file_count", "changed_profile_write_count"],
+      "properties": {
+        "changed": {"const": false},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "sentinel_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "sentinel_relative_name": {"const": "../../../installation/proof/sentinel.mjs"},
+        "sentinel_row_count": {"const": 1},
+        "runner_row_count": {"const": 0},
+        "runner_file_count": {"const": 0},
+        "changed_profile_write_count": {"const": 0}
+      }
+    },
+    "launch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["launch_attempt_count", "native_process_count", "retry_count", "argument_count", "task_argument_count", "node_flag", "profile_args", "duration_ms", "duration_source", "exit_code_after_controller_termination", "readiness_observed", "controller_terminated_after_readiness"],
+      "properties": {
+        "launch_attempt_count": {"const": 1},
+        "native_process_count": {"type": "integer", "minimum": 0, "maximum": 1},
+        "retry_count": {"const": 0},
+        "argument_count": {"const": 6},
+        "task_argument_count": {"const": 1},
+        "node_flag": {"const": "--expose-internals"},
+        "profile_args": {"const": ["--profile", "headless"]},
+        "duration_ms": {"type": ["integer", "null"], "minimum": 0},
+        "duration_source": {"const": "finally_before_termination_and_cleanup"},
+        "exit_code_after_controller_termination": {"type": ["integer", "null"]},
+        "readiness_observed": {"type": "boolean"},
+        "controller_terminated_after_readiness": {"type": "boolean"}
+      }
+    },
+    "hmr_events": {"type": "array", "items": {"enum": ["sentinel_activated", "stock_headless_hmr_ready"]}, "maxItems": 2},
+    "streams": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stdout", "stderr", "raw_retained"],
+      "properties": {
+        "stdout": {"$ref": "#/$defs/stream"},
+        "stderr": {"$ref": "#/$defs/stream"},
+        "raw_retained": {"const": false}
+      }
+    },
+    "provider_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["credential_environment_names_removed_count", "changed_runner_processes", "broker_processes", "worker_sessions", "prompts", "tool_executions", "model_requests", "provider_requests", "network_attempts", "docker_invocations", "database_invocations"],
+      "properties": {
+        "credential_environment_names_removed_count": {"type": "integer", "minimum": 0},
+        "changed_runner_processes": {"const": 0},
+        "broker_processes": {"const": 0},
+        "worker_sessions": {"const": 0},
+        "prompts": {"const": 0},
+        "tool_executions": {"const": 0},
+        "model_requests": {"const": 0},
+        "provider_requests": {"const": 0},
+        "network_attempts": {"const": 0},
+        "docker_invocations": {"const": 0},
+        "database_invocations": {"const": 0}
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["process_absent", "disposable_root_absent", "raw_streams_retained", "raw_environment_retained", "copied_package_tree_retained"],
+      "properties": {
+        "process_absent": {"const": true},
+        "disposable_root_absent": {"const": true},
+        "raw_streams_retained": {"const": false},
+        "raw_environment_retained": {"const": false},
+        "copied_package_tree_retained": {"const": false}
+      }
+    },
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "stream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["byte_count", "sha256"],
+      "properties": {
+        "byte_count": {"type": "integer", "minimum": 0},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}

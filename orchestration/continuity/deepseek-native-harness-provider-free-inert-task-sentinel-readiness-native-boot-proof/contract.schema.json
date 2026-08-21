@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "accepted_sources", "components", "package", "attempt", "profile", "launch", "failure_coordinates", "zero_activity", "raw_streams_retained", "cleanup_required"],
+  "properties": {
+    "schema_version": {"const": "ariadne.deepseek_native_harness_inert_task_sentinel_readiness_boot_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["post_sentinel_diagnosis", "source_repaired_boot", "sentinel_source_repair"],
+      "properties": {
+        "post_sentinel_diagnosis": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "source_repaired_boot": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "sentinel_source_repair": {"type": "string", "pattern": "^[0-9a-f]{40}$"}
+      }
+    },
+    "components": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "path", "sha256"],
+        "properties": {
+          "role": {"type": "string", "minLength": 1},
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "bin", "materialization_method", "materialization_process_count"],
+      "properties": {
+        "name": {"const": "@deepseek-ai/dsh"},
+        "version": {"const": "0.1.0-rc.7"},
+        "bin": {"const": "lib/bin.js"},
+        "materialization_method": {"const": "python_copy_only"},
+        "materialization_process_count": {"const": 0}
+      }
+    },
+    "attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempt_id", "native_process_limit", "automatic_retry", "manual_retry", "resume", "fallback", "reclassification"],
+      "properties": {
+        "attempt_id": {"const": "inert-task-sentinel-readiness-native-boot-attempt-001"},
+        "native_process_limit": {"const": 1},
+        "automatic_retry": {"const": false},
+        "manual_retry": {"const": false},
+        "resume": {"const": false},
+        "fallback": {"const": false},
+        "reclassification": {"const": false}
+      }
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile", "changed", "sentinel_id", "sentinel_name", "expected_events", "runner_row_count", "runner_file_count", "changed_profile_write_count"],
+      "properties": {
+        "profile": {"const": "headless"},
+        "changed": {"const": false},
+        "sentinel_id": {"const": "synthetic-worker-hmr-sentinel"},
+        "sentinel_name": {"const": "../../../installation/proof/sentinel.mjs"},
+        "expected_events": {"const": ["sentinel_activated", "stock_headless_hmr_ready"]},
+        "runner_row_count": {"const": 0},
+        "runner_file_count": {"const": 0},
+        "changed_profile_write_count": {"const": 0}
+      }
+    },
+    "launch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_flag", "profile_flag", "profile", "task_arguments", "argument_count", "timeout_seconds", "termination_owner"],
+      "properties": {
+        "node_flag": {"const": "--expose-internals"},
+        "profile_flag": {"const": "--profile"},
+        "profile": {"const": "headless"},
+        "task_arguments": {"const": ["EMR4_PROVIDER_FREE_SENTINEL_READINESS_PROBE"]},
+        "argument_count": {"const": 6},
+        "timeout_seconds": {"const": 45},
+        "termination_owner": {"const": "controller_after_readiness"}
+      }
+    },
+    "failure_coordinates": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[a-z0-9_]+$"}
+    },
+    "zero_activity": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[a-z0-9_]+$"}
+    },
+    "raw_streams_retained": {"const": false},
+    "cleanup_required": {"const": true}
+  }
+}
