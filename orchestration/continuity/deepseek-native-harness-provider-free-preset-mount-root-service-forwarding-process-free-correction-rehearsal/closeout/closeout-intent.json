@@ -1,0 +1,498 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+    "title": "DeepSeek native Harness provider-free preset-mount root-service-forwarding process-free correction rehearsal",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T09:01:43.2459891+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "title": "Preset-mount root-service-forwarding process-free correction rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits this bounded process-free correction and its dependency-satisfied isolated Node-fixture successor.",
+          "No native Harness, worker, model, provider, retry, product, data, deployment, Pages or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-root-service-forwarding-source-correction",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence-v2.json",
+          "status": "accepted",
+          "summary": "Accept the prospective runner, guard and bridge source correction with explicit root-service forwarding and in-bridge mount validation."
+        },
+        {
+          "id": "accept-machine-resolved-idempotent-candidate-binding",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the zero-authored-object-ID binding whose implementation source remains stable after the evidence descendant advances HEAD."
+        },
+        {
+          "id": "accept-isolated-node-fixture-successor",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Proceed only with one separately frozen disposable authored-synthetic Node fixture for the exact derived bridge and sanitizer."
+        },
+        {
+          "id": "reject-javascript-or-native-runtime-proof",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "The source correction proves no JavaScript evaluation, native boot, DeepSeek turn, model/provider request or retry."
+        }
+      ],
+      "claim_scope": [
+        "The derived runner forwards the already admitted root preset service explicitly to the guard.",
+        "The derived guard contains zero agentCtx.agentPresets dereferences and passes the service object into the bridge.",
+        "The derived bridge validates the service, reads and validates the mount handle and invokes it inside the sanitizing try boundary.",
+        "All twenty-three ordered source predicates pass with zero failed coordinates.",
+        "The caller-authored contract contains zero Git object IDs.",
+        "The repository resolver binds the plan and controller-owning implementation commits and remains stable after an evidence descendant advances HEAD.",
+        "The focused eleven-test file and exact broader 169-test collection pass with one platform-specific skip.",
+        "Node, native Harness, worker, model, provider, retry, resume, target and product activity remained zero.",
+        "JavaScript evaluation, native runtime behavior and occupied worker quality remain unproved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-610.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-root-service-forwarding-process-free-correction.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-pre-verifier-before-idempotency-repair-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-pre-verifier-acceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence-v2.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-report-v2.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact derived bridge has not been materialized or evaluated by Node.",
+        "The derived runner and guard module graph has not been evaluated.",
+        "The installed package seed has not executed the correction.",
+        "No native Harness boot, occupied DeepSeek worker turn, model/provider request or coding-quality evidence is accepted.",
+        "No native retry exists; any later process requires a distinct frozen plan.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development",
+      "outcome": "The exact wiring correction is now prospective, hash-bound, machine-source-resolved and idempotent without consuming another process.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence-v2.json",
+        "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Evaluate the exact corrected bridge behavior in one disposable provider-free Node fixture before considering any native process",
+      "why_now": "The source correction and implementation-owner binding are deterministic and idempotent, but JavaScript behavior remains deliberately unproved.",
+      "outcome": "One isolated authored-synthetic Node fixture will prove success and invalid-service or invalid-mount terminal behavior for the exact derived bridge and sanitizer.",
+      "unlocks": [
+        "Behavioral evidence for the corrected typed bridge without native-Harness or model risk.",
+        "A defensible decision about the next package-free or native integration coordinate."
+      ],
+      "does_not_solve": [
+        "No native Harness boot, DeepSeek turn, model/provider request or worker-quality evidence.",
+        "No product/data action, production, release, Pages or protected integration."
+      ],
+      "evidence": [
+        "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-closeout.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence-v2.json"
+      ],
+      "orientation_statement": "Run exactly one disposable provider-free Node fixture for the exact derived bridge and sanitizer while native Harness, worker, model, provider and product authority remain closed."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal",
+      "active_tranche": "DeepSeek native Harness provider-free preset-mount root-service-forwarding isolated Node-fixture rehearsal",
+      "objective": "Materialize the exact derived bridge and sanitizer only inside one disposable authored-synthetic fixture root and run exactly one isolated Node process to prove success plus missing-service and missing-mount terminal behavior without native Harness, worker, model or provider activity.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and extended authority for the bounded native-Harness control sequence.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_exact_one_process_isolated_node_fixture_contract"
+    },
+    "incidents": [],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "native_root_service_correction_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal",
+          "--check"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "native_root_service_correction_focused_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "--noconftest",
+          "-p",
+          "no:cacheprovider",
+          "--strict-config",
+          "--strict-markers",
+          "-q",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "native_root_service_correction_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "native_root_service_correction_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-threat-model-delta.md",
+      "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+      "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/evidence.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence-v2.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-report-v2.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-pre-verifier-before-idempotency-repair-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-pre-verifier-acceptance-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-610.md",
+      "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-root-service-forwarding-process-free-correction.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_root_service_forwarding_isolated_node_fixture_only",
+    "accepted_process_free_correction_implementation_2c25ce7d65199e82c4d4fe93bbd1d0efc80474fe_preserved",
+    "accepted_process_free_correction_v2_evidence_preserved",
+    "exactly_one_isolated_node_fixture_process",
+    "native_harness_worker_model_provider_process_count_zero",
+    "automatic_manual_retry_and_resume_zero",
+    "exact_derived_bridge_and_sanitizer_materialized_in_disposable_root_only",
+    "authored_synthetic_service_and_context_only",
+    "success_missing_service_and_missing_mount_matrix_only",
+    "accepted_package_seed_immutable_and_unloaded",
+    "no_dsh_package_import_or_native_runner_guard_execution",
+    "content_free_outer_process_envelope_before_interpretation",
+    "no_raw_message_stack_cause_path_stream_prompt_response_environment_or_credential",
+    "zero_turn_request_broker_worker_model_provider_network_database_docker_and_target_activity",
+    "private_identity_and_public_agent_session_activity_zero",
+    "disposable_process_and_root_cleanup_required",
+    "no_worker_model_provider_request_repair_retry_or_target_authority",
+    "git_object_id_contract_bindings_derive_from_machine_resolver_only",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "exact_test_counts_from_completed_machine_output_only",
+    "no_commit_identity_statement_without_current_machine_snapshot_copy",
+    "all_new_narrative_artifacts_require_date_and_brisbane_timestamp",
+    "generated_narrative_timestamps_derive_from_creation_clock_or_typed_evidence",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "root-service-correction-incident-0912",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "postclockwork-current-state-suite-selection",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A live-state closeout suite excludes historical equality nodes whose frozen revision and orientation are not current acceptance predicates.",
+      "observed_error": "The first post-clockwork command included a historical test fixed at Continuity 324 and the former check-in orientation, producing two non-regression failures.",
+      "detection_method": "The failure text named only the old graph revision and old strategic-role assertion; the current-state suite then passed without rewriting the historical test.",
+      "evidence_paths": [
+        "tests/test_ariadne_transactional_closeout_control_plane_consolidation_efficacy_rehearsal_continuity.py",
+        "docs/ariadne-agent-error-correction-register-revision-610.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.historical_snapshot_test_included_in_live_state_suite",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Rerun the current-state suite without the immutable historical equality node and preserve that node unchanged.",
+        "prevention_control": "Live closeout suites are assembled from active acceptance paths; frozen historical equality nodes require an explicit active reason before inclusion.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-610.md",
+          "tests/test_current_baton_consistency.py"
+        ]
+      },
+      "baton_summary": "records and corrects inclusion of an immutable historical snapshot test in a live-state suite."
+    },
+    {
+      "attempt_key": "root-service-correction-incident-0913",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "postclockwork-powershell-reading",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_powershell",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Read-only PowerShell projections use admitted statement-form control flow.",
+      "observed_error": "A read-only file projection piped directly from an inline foreach construct and stopped at parsing.",
+      "detection_method": "PowerShell emitted an empty-pipe parser error before any command, file or Git mutation.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-610.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_inline_expression_parse_failure",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use separate statement-form commands for the diff check and exact file readings.",
+        "prevention_control": "Multi-step PowerShell readings assign or emit results only after statement-form control flow completes.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-610.md"
+        ]
+      },
+      "baton_summary": "records recurrence and correction of the PowerShell inline-expression parser defect."
+    },
+    {
+      "attempt_key": "root-service-correction-incident-0914",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "powershell-git-commit-peel-expression",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_powershell",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "PowerShell Git revision expressions containing braces are quoted as one exact argument.",
+      "observed_error": "The unquoted commit-peel expression resolved a parent form and then passed an encoded brace fragment that Git rejected.",
+      "detection_method": "The read-only command output contained the unintended parent and fatal ambiguous-argument errors; quoted revisions returned both intended full commits.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-610.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_git_revision_braces_unquoted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Quote every full Git revision expression containing braces before passing it to Git.",
+        "prevention_control": "Manual PowerShell Git peels use one single-quoted revision argument; contract evidence uses the repository resolver instead.",
+        "evidence_paths": [
+          "orchestration_harness/git_object_resolution.py",
+          "docs/ariadne-agent-error-correction-register-revision-610.md"
+        ]
+      },
+      "baton_summary": "records and corrects unquoted PowerShell Git commit-peel syntax."
+    },
+    {
+      "attempt_key": "root-service-correction-incident-0915",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "guard-postrewrite-selected-tools-count",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_python_cli",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A source-rewrite count is measured at the exact transformation stage where it is asserted.",
+      "observed_error": "The first guard derivation required three selectedTools tokens after the signature rewrite had already consumed one and only two body references remained.",
+      "detection_method": "The direct source check rejected the post-rewrite count before commit or evidence generation.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-610.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.source_rewrite_anchor_count_measured_at_wrong_stage",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Require the two body references that remain after the signature rewrite and rerun the direct check.",
+        "prevention_control": "Rewrite predicates name whether their expected count is pre-transform or post-transform and retain a focused rejection test.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-610.md"
+        ]
+      },
+      "baton_summary": "records and corrects a source-anchor count measured at the wrong rewrite stage."
+    },
+    {
+      "attempt_key": "root-service-correction-incident-0916",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "raw-detail-release-predicate",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "The raw-detail guard rejects release projections without rejecting fixed internal error-message comparisons.",
+      "observed_error": "The first predicate banned every .message read and falsely rejected three accepted equality or lookup checks that release no raw content.",
+      "detection_method": "The closed reading named only derived_sources_release_no_raw_detail; exact source projection showed the three fixed internal comparisons.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-610.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "controller.raw_detail_guard_confused_internal_comparison_with_release",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Match actual detail, stack, cause, environment, prompt, response and credential projections instead of the generic message member.",
+        "prevention_control": "Release guards target output coordinates and preserve fixed internal classification comparisons.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-610.md"
+        ]
+      },
+      "baton_summary": "records and corrects an over-broad raw-detail predicate that confused internal comparison with release."
+    },
+    {
+      "attempt_key": "root-service-correction-incident-0917",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "controller-rejected-result-exit-contract",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "A direct controller check returns zero only for the single admitted closed result.",
+      "observed_error": "The first rejected derivation printed its closed result but returned exit code zero.",
+      "detection_method": "The orchestrator read the typed result as non-admitted despite the process status and stopped before commit or evidence generation.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-610.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "controller.rejected_closed_result_exited_zero",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Return nonzero for every result except root_service_forwarding_correction_admitted.",
+        "prevention_control": "The direct CLI exit contract is derived from the same single admitted closed-result constant used by evidence acceptance.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-610.md"
+        ]
+      },
+      "baton_summary": "records and corrects a rejected controller result that initially exited zero."
+    },
+    {
+      "attempt_key": "root-service-correction-incident-0918",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "candidate-source-idempotency-binding",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_git_object_resolution",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "A deterministic evidence check resolves the implementation-owning commit identically before and after evidence descendants advance HEAD.",
+      "observed_error": "The preliminary reading used current HEAD, so later recomputation would select the evidence descendant rather than the implementation owner.",
+      "detection_method": "The pre-verifier audit compared evidence-time binding semantics with the post-evidence repository position before acceptance.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-pre-verifier-before-idempotency-repair-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-610.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "controller.candidate_binding_followed_current_head_instead_of_source_owner",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve the commit that last changed the controller path, emit immutable v2 evidence and recompute after its descendant commit.",
+        "prevention_control": "Implementation ownership comes from the Git path history plus repository resolver; current HEAD remains only the live worktree position.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence-v2.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-process-free-correction-pre-verifier-acceptance-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-610.md"
+        ]
+      },
+      "baton_summary": "records and corrects a time-sensitive current-HEAD candidate binding with an idempotent source-owner resolution."
+    }
+  ]
+}
