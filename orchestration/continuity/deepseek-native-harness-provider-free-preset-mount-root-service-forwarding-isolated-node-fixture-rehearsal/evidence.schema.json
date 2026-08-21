@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "result", "git_binding",
+    "accepted_source_inventory", "fixture_source_inventory",
+    "process_envelope_sha256", "process_envelope_recorded_before_interpretation",
+    "fixture_outcome", "environment", "cleanup", "process_boundary",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_root_service_forwarding_isolated_node_fixture_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal"},
+    "result": {"const": "isolated_node_fixture_pass"},
+    "git_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policy", "caller_authored_object_id_count", "planning_source_commit",
+        "candidate_source_commit", "planning_source_is_ancestor_of_candidate",
+        "branch", "branch_origin_aligned", "protected_refs_aligned",
+        "tracked_worktree_clean", "docs_branding_preserved"
+      ],
+      "properties": {
+        "policy": {"const": "machine_resolved_only"},
+        "caller_authored_object_id_count": {"const": 0},
+        "planning_source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "candidate_source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "planning_source_is_ancestor_of_candidate": {"const": true},
+        "branch": {"const": "codex/ariadne-bernie-davida-parallel-seam"},
+        "branch_origin_aligned": {"const": true},
+        "protected_refs_aligned": {"const": true},
+        "tracked_worktree_clean": {"const": true},
+        "docs_branding_preserved": {"const": true}
+      }
+    },
+    "accepted_source_inventory": {"$ref": "#/$defs/sourceInventory"},
+    "fixture_source_inventory": {"$ref": "#/$defs/sourceEntry"},
+    "process_envelope_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "process_envelope_recorded_before_interpretation": {"const": true},
+    "fixture_outcome": {"$ref": "#/$defs/fixtureResult"},
+    "environment": {"$ref": "#/$defs/environment"},
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fixture_root_absent", "fixture_root_path_retained", "materialized_javascript_retained"],
+      "properties": {
+        "fixture_root_absent": {"const": true},
+        "fixture_root_path_retained": {"const": false},
+        "materialized_javascript_retained": {"const": false}
+      }
+    },
+    "process_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node_process_count", "native_harness_process_count",
+        "runner_process_count", "guard_process_count",
+        "installed_package_import_count", "worker_process_count",
+        "model_request_count", "provider_request_count", "network_attempt_count",
+        "database_attempt_count", "docker_attempt_count", "target_creation_count",
+        "target_use_count", "retry_count", "resume_count"
+      ],
+      "properties": {
+        "node_process_count": {"const": 1},
+        "native_harness_process_count": {"const": 0},
+        "runner_process_count": {"const": 0},
+        "guard_process_count": {"const": 0},
+        "installed_package_import_count": {"const": 0},
+        "worker_process_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0},
+        "network_attempt_count": {"const": 0},
+        "database_attempt_count": {"const": 0},
+        "docker_attempt_count": {"const": 0},
+        "target_creation_count": {"const": 0},
+        "target_use_count": {"const": 0},
+        "retry_count": {"const": 0},
+        "resume_count": {"const": 0}
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "isolated_bridge_behavior_proved", "runner_guard_graph_proved",
+        "installed_package_loaded", "native_harness_proved",
+        "worker_model_provider_executed", "retry_authorized",
+        "product_authority"
+      ],
+      "properties": {
+        "isolated_bridge_behavior_proved": {"const": true},
+        "runner_guard_graph_proved": {"const": false},
+        "installed_package_loaded": {"const": false},
+        "native_harness_proved": {"const": false},
+        "worker_model_provider_executed": {"const": false},
+        "retry_authorized": {"const": false},
+        "product_authority": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "sourceEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256"],
+      "properties": {
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "sourceInventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["derived_bridge", "accepted_sanitizer"],
+      "properties": {
+        "derived_bridge": {"$ref": "#/$defs/sourceEntry"},
+        "accepted_sanitizer": {"$ref": "#/$defs/sourceEntry"}
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["keys", "key_count", "values_retained", "path_present", "node_options_present"],
+      "properties": {
+        "keys": {
+          "type": "array",
+          "prefixItems": [
+            {"const": "SystemRoot"}, {"const": "WINDIR"}, {"const": "ComSpec"},
+            {"const": "TEMP"}, {"const": "TMP"}
+          ],
+          "items": false,
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "key_count": {"const": 5},
+        "values_retained": {"const": false},
+        "path_present": {"const": false},
+        "node_options_present": {"const": false}
+      }
+    },
+    "terminal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "code", "detail"],
+      "properties": {
+        "stage": {"const": "preset_mount"},
+        "code": {"const": "PRESET_MOUNT_UNCLASSIFIED"},
+        "detail": {"type": "null"}
+      }
+    },
+    "fixtureResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "result", "cases"],
+      "properties": {
+        "schema_version": {"const": "ariadne.native_harness_root_service_forwarding_isolated_fixture_result.v1"},
+        "result": {"const": "pass"},
+        "cases": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["case_id", "passed", "terminal", "mount_call_count", "receiver_bound", "context_forwarded", "preset_id_forwarded"],
+              "properties": {
+                "case_id": {"const": "success"},
+                "passed": {"const": true},
+                "terminal": {"type": "null"},
+                "mount_call_count": {"const": 1},
+                "receiver_bound": {"const": true},
+                "context_forwarded": {"const": true},
+                "preset_id_forwarded": {"const": true}
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["case_id", "passed", "terminal"],
+              "properties": {
+                "case_id": {"const": "missing_service"},
+                "passed": {"const": false},
+                "terminal": {"$ref": "#/$defs/terminal"}
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["case_id", "passed", "terminal"],
+              "properties": {
+                "case_id": {"const": "missing_mount"},
+                "passed": {"const": false},
+                "terminal": {"$ref": "#/$defs/terminal"}
+              }
+            }
+          ],
+          "items": false,
+          "minItems": 3,
+          "maxItems": 3
+        }
+      }
+    }
+  }
+}

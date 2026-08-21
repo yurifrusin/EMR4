@@ -1,0 +1,115 @@
+{
+  "schema_version": "ariadne.native_harness_root_service_forwarding_isolated_node_fixture_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal",
+  "git_binding_policy": {
+    "mode": "machine_resolved_only",
+    "plan_path": "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal-plan.md",
+    "controller_path": "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_isolated_node_fixture_rehearsal.py",
+    "caller_authored_object_id_count": 0
+  },
+  "documentation_bindings": {
+    "plan_sha256": "f993d854a3606ae971a7f55611ee96fceae0174a06915599b59e3cb34b2d389f",
+    "threat_model_sha256": "020940d13aae394dd856bb22537e5e1aa8dc5bf05da1c59439d269aaa6186049"
+  },
+  "predecessor_bindings": {
+    "accepted_correction_evidence_sha256": "835bdc53701b9423795a22ee75ba1dd145586d73de32bdeb0906769cf24b0181",
+    "accepted_correction_controller_sha256": "bf1261c60add47526526587e32966fdb315153a87574cd7c7a3c44b6ec5b8d83"
+  },
+  "implementation_bindings": {
+    "controller_sha256": "13199462486713b671b736ae05b77a6b641cfb5096cbc4b2dfb727a30e67371a",
+    "focused_test_sha256": "196bd5ad4e3c2ea9ce38baac4b2fc19c608cfc2f181fff3b70cf7117b6b78aab",
+    "contract_schema_sha256": "6f399d954ae5ef4d128aea9b0ebfcc0a871b3698aa03bec114bf5c95446a2be4",
+    "process_envelope_schema_sha256": "4af353d14311e2759716046aefdf7e6d8ac710941378572d63f0d72bc8dbcb6c",
+    "evidence_schema_sha256": "da362a70de988bec24fbcdc0d1e938df62c2b4c11de756e4670591b052a347f0",
+    "failure_terminal_schema_sha256": "97575d99f0cd5335e7d8a44933f8fd7d6593d0e54f06cabc091e18ff16cc8ee8"
+  },
+  "accepted_source_inventory": {
+    "derived_bridge": {
+      "bytes": 1661,
+      "sha256": "3a49b28174eeefd77d7efe0a00498901ac6636b637ed9dfe60aba46980df1d0b"
+    },
+    "accepted_sanitizer": {
+      "bytes": 2439,
+      "sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f"
+    }
+  },
+  "fixture_source_inventory": {
+    "bytes": 1870,
+    "sha256": "63e921352471c52850588a68aa9c4364f958df04a8f9a32eb3b4481e6fb0fbb7"
+  },
+  "case_ids": [
+    "success",
+    "missing_service",
+    "missing_mount"
+  ],
+  "expected_result": {
+    "schema_version": "ariadne.native_harness_root_service_forwarding_isolated_fixture_result.v1",
+    "result": "pass",
+    "cases": [
+      {
+        "case_id": "success",
+        "passed": true,
+        "terminal": null,
+        "mount_call_count": 1,
+        "receiver_bound": true,
+        "context_forwarded": true,
+        "preset_id_forwarded": true
+      },
+      {
+        "case_id": "missing_service",
+        "passed": false,
+        "terminal": {
+          "stage": "preset_mount",
+          "code": "PRESET_MOUNT_UNCLASSIFIED",
+          "detail": null
+        }
+      },
+      {
+        "case_id": "missing_mount",
+        "passed": false,
+        "terminal": {
+          "stage": "preset_mount",
+          "code": "PRESET_MOUNT_UNCLASSIFIED",
+          "detail": null
+        }
+      }
+    ]
+  },
+  "windows_environment_keys": [
+    "SystemRoot",
+    "WINDIR",
+    "ComSpec",
+    "TEMP",
+    "TMP"
+  ],
+  "closed_results": [
+    "isolated_node_fixture_pass",
+    "fixture_preflight_rejected",
+    "fixture_process_terminal",
+    "fixture_result_rejected"
+  ],
+  "required_zero_counters": [
+    "native_harness_process_count",
+    "runner_process_count",
+    "guard_process_count",
+    "installed_package_import_count",
+    "worker_process_count",
+    "model_request_count",
+    "provider_request_count",
+    "network_attempt_count",
+    "database_attempt_count",
+    "docker_attempt_count",
+    "target_creation_count",
+    "target_use_count",
+    "retry_count",
+    "resume_count"
+  ],
+  "claim_boundary": {
+    "isolated_bridge_behavior_only": true,
+    "runner_guard_graph_proved": false,
+    "native_harness_proved": false,
+    "worker_model_provider_executed": false,
+    "retry_authorized": false,
+    "product_authority": false
+  }
+}
