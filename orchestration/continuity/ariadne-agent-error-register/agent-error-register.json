@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 607,
+  "register_revision": 608,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -34935,6 +34935,383 @@
       },
       "incident_id": "AER-0897",
       "attempt_id": "clock-424dd6d4748f01b836084ad2",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "native-rehearsal-preplanning-git-ref-prose",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_preflight",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Git object identities in source-evidence prose are supplied only by the machine snapshot.",
+      "observed_error": "The first preplanning state embedded reviewed Git object IDs in descriptive evidence.",
+      "detection_method": "Preflight returned git_refs_evidence_manual_object_id_forbidden before implementation or native execution.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitized-terminal-native-rehearsal-preplanning-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-608.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_ref_source_evidence_embedded_manual_object_ids",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove caller-authored object IDs and let the receipt builder supply the machine snapshot.",
+        "prevention_control": "Runtime-state Git prose names the evidence class only; object identities come from git_refs_snapshot.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitized-terminal-native-rehearsal-preplanning-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-608.md"
+        ]
+      },
+      "incident_id": "AER-0898",
+      "attempt_id": "clock-000000000000000000000898",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "native-rehearsal-powershell-read-only-expressions",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_powershell",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Read-only PowerShell projections use admitted statement-form control flow.",
+      "observed_error": "Three read-only inspection commands used invalid inline if or foreach-pipeline expressions and stopped at the parser.",
+      "detection_method": "PowerShell emitted parser or command-resolution errors before any mutation.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-608.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_inline_expression_parse_failure",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Assign conditional and foreach results to variables before final serialization.",
+        "prevention_control": "Multi-step PowerShell readings use statement-form control flow and one final projection.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-608.md"
+        ]
+      },
+      "incident_id": "AER-0899",
+      "attempt_id": "clock-000000000000000000000899",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "native-rehearsal-preset-mount-code-vocabulary",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The successor contract copies exact preset-mount codes from the accepted bridge source.",
+      "observed_error": "The first controller draft used seven conceptual paraphrases instead of the source-owned codes.",
+      "detection_method": "The deterministic contract check rejected the mismatch before commit and native execution.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-608.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closed_vocabulary_paraphrased_instead_of_source_imported",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Derive the codes directly from the accepted runner-bridge module.",
+        "prevention_control": "Closed vocabularies are imported or machine-copied, never recalled conceptually.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-608.md"
+        ]
+      },
+      "incident_id": "AER-0900",
+      "attempt_id": "clock-000000000000000000000900",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "native-rehearsal-module-rebinding-boundary",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Temporary rebinding mutates only the execution controller and leaves accepted generators immutable.",
+      "observed_error": "The first nested binding rebound a shared module object and caused recursive self-calls.",
+      "detection_method": "A deterministic focused test raised recursion before commit and native execution.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-608.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.shared_module_rebinding_recursed_into_accepted_generator",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind only the post-HMR execution controller and preserve the runner generator.",
+        "prevention_control": "Temporary binding inventories distinguish shared module identities before mutation.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-608.md"
+        ]
+      },
+      "incident_id": "AER-0901",
+      "attempt_id": "clock-000000000000000000000901",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "native-rehearsal-plan-prose-tests",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Non-format-sensitive plan assertions normalize Markdown whitespace.",
+      "observed_error": "Two first-draft tests treated line-wrapped prose as contiguous tokens.",
+      "detection_method": "The focused suite reported only those prose assertion mismatches before native execution.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-608.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.plan_prose_assertion_failed_to_normalize_whitespace",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Normalize whitespace and assert the material boundary wording.",
+        "prevention_control": "Prose tests normalize Markdown unless formatting itself is the contract.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-608.md"
+        ]
+      },
+      "incident_id": "AER-0902",
+      "attempt_id": "clock-000000000000000000000902",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "native-rehearsal-owned-process-absence-probe",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_powershell",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "An owned-process probe filters executable identity before command-line coordinates.",
+      "observed_error": "The first probe matched the PowerShell observer because the searched operation text appeared in its command line.",
+      "detection_method": "Executable inventory showed no owned node.exe; the corrected executable-first query returned zero.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-608.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.process_absence_query_self_matched_command_text",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Filter to node.exe before matching the exact retained-root coordinate.",
+        "prevention_control": "Process absence predicates begin with executable identity and a unique owned path.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_offline_admission_recovery.py",
+          "docs/ariadne-agent-error-correction-register-revision-608.md"
+        ]
+      },
+      "incident_id": "AER-0903",
+      "attempt_id": "clock-000000000000000000000903",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "native-rehearsal-emitted-sidecar-schema-token",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "native_harness_rc7",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "material",
+      "expected_invariant": "The validator token equals the token emitted by the exact derived runner.",
+      "observed_error": "The runner emitted the predecessor token while the successor validator required a new token, so the exact 1646-byte sidecar failed before semantic admission.",
+      "detection_method": "The envelope bound byte count and digest; offline recovery showed the token mismatch and otherwise valid fixed fields and terminal.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/attempt-001-process-envelope.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/offline-admitted-terminal.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/offline-recovery-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-608.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "harness.derived_runner_emitted_schema_token_not_bound_by_successor_validator",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Admit the exact envelope-bound observed token offline and add a prospective source-token check.",
+        "prevention_control": "Preexecution validation counts the emitted token and rejects an absent intended token.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/offline-recovery-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-608.md"
+        ]
+      },
+      "incident_id": "AER-0904",
+      "attempt_id": "clock-000000000000000000000904",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "native-rehearsal-rejected-sidecar-envelope-and-cleanup",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "native_controller",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "A rejected sidecar preserves its durable sidecar-seen envelope and cleanup always runs.",
+      "observed_error": "The controller tried to replace the sidecar-seen envelope with sidecar-absent; the mismatch interrupted summaries and cleanup.",
+      "detection_method": "Only attempt and envelope existed, the inactive root remained, and source flow proved the rewrite preceded cleanup.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-offline-admission-recovery-plan.md",
+        "scripts/deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/offline-recovery-evidence.json",
+        "docs/ariadne-agent-error-correction-register-revision-608.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "recovery_lease_invoked",
+      "recurrence_signature": "controller.rejected_sidecar_rewritten_as_absent_before_cleanup",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "recovery_lease_applied",
+        "action": "Preserve the envelope, persist a typed projection, verify zero owned processes and remove only the exact root.",
+        "prevention_control": "The prospective controller never rewrites an envelope and its regression test proves byte identity.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitized_terminal_native_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/offline-recovery-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-608.md"
+        ]
+      },
+      "incident_id": "AER-0905",
+      "attempt_id": "clock-000000000000000000000905",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-offline-admission-recovery",
+      "role": "orchestrator",
+      "resource_id": "offline-recovery-plan-commit-sequence",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_git_diff_cached_check",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A nonzero staged diff check stops before commit.",
+      "observed_error": "The first plan commit proceeded after two EOF blank-line warnings because the semicolon sequence did not inspect LASTEXITCODE.",
+      "detection_method": "Command output retained the warnings and local commit; a corrective descendant normalized both documents before publication.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-offline-admission-recovery-plan.md",
+        "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-offline-admission-recovery-threat-model-delta.md",
+        "docs/ariadne-agent-error-correction-register-revision-608.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.cached_diff_check_failure_not_short_circuiting_local_commit",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Normalize the documents distinctly and guard every later diff check, commit and push.",
+        "prevention_control": "A staged-diff gate and commit are separate or joined only by explicit exit checks.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-offline-admission-recovery-plan.md",
+          "docs/ariadne-agent-error-correction-register-revision-608.md"
+        ]
+      },
+      "incident_id": "AER-0906",
+      "attempt_id": "clock-000000000000000000000906",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-offline-admission-recovery",
+      "role": "orchestrator",
+      "resource_id": "offline-recovery-register-incident-stage",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_register_validation",
+      "stage": "acceptance",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Agent-error rows choose stage and causal-claim values only from the register schema's closed vocabulary.",
+      "observed_error": "The first AER-0903 through AER-0906 rows used descriptive stages preexecution, native_execution and planning plus the unadmitted causal label deterministic instead of dispatch, deterministic_verification, implementation and observation_only.",
+      "detection_method": "Successive canonical validation passes rejected all draft tokens before pattern-report generation, closeout or publication.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+        "docs/ariadne-agent-error-correction-register-revision-608.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.closeout_incident_descriptive_labels_outside_closed_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the descriptive stages and causal label with schema-owned dispatch, deterministic_verification, implementation and observation_only values and retain this rejected-draft incident.",
+        "prevention_control": "New incident rows copy stage, category, disposition and causal-claim tokens from the canonical schema before validation.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json",
+          "docs/ariadne-agent-error-correction-register-revision-608.md"
+        ]
+      },
+      "incident_id": "AER-0907",
+      "attempt_id": "clock-000000000000000000000907",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"
