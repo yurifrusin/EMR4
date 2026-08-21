@@ -1,0 +1,126 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free proof-module relative-specifier repair",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_two_row_relative_specifier_repair_contract",
+    "operation_id": "deepseek-native-harness-provider-free-proof-module-relative-specifier-repair",
+    "resume_after_compaction": true,
+    "source_head": "a166c96d35c9200b33d7bd2ec4e492d0a374d57c",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "3c31f2a9a44713db27b82e338e05374c5d9f62bc",
+    "reason_codes": [],
+    "resolved_commit": "a166c96d35c9200b33d7bd2ec4e492d0a374d57c",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "a166c96d35c9200b33d7bd2ec4e492d0a374d57c"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "3c31f2a9a44713db27b82e338e05374c5d9f62bc",
+    "branch_origin_aligned": true,
+    "head": "3c31f2a9a44713db27b82e338e05374c5d9f62bc",
+    "origin_branch_commit": "3c31f2a9a44713db27b82e338e05374c5d9f62bc",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 659
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The latch forbids model/provider activity and the exact two-row candidate has no DeepSeek work package.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "gemini_verifier",
+        "rationale": "The latch forbids provider review; exact diff and deterministic profile evidence are decisive. Reassess for a separately frozen native boot proof.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the candidate is one serial two-row repair.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-proof-module-relative-specifier-repair",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "candidate diff widens",
+      "deterministic verification changes",
+      "separately frozen native boot proof",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "one exact candidate owner",
+      "two output rows plus dead local only",
+      "no runtime or provider execution",
+      "clockwork closeout before native boot proof"
+    ]
+  },
+  "planned_action": "accept_the_exact_provider_free_two_row_relative_specifier_repair_candidate_without_external_provider_review",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/repair-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/repair-report.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-proof-module-relative-specifier-repair-preplanning-receipt.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns this serial deterministic candidate; DeepSeek, Gemini and native subagents remain declined under the no-provider and no-proactive-delegation controls.",
+    "git_refs_and_worktree": "Machine evidence must show exact candidate and origin alignment, fixed protected refs, clean tracked worktree, preserved docs/branding and unrelated untracked files.",
+    "live_handover_current_baton": "Continuity 363 / Compass 345 authorise only the provider-free two-row proof-module relative-specifier repair.",
+    "protected_evidence_boundaries": "The exact candidate changes two generated module-name rows and removes one dead local only. No Node, Harness, broker, worker, model, provider, network, retry, product, data, deployment or protected-ref activity is admitted."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

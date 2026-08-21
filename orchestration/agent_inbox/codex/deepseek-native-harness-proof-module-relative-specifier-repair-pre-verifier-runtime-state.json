@@ -1,0 +1,93 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_the_exact_provider_free_two_row_relative_specifier_repair_candidate_without_external_provider_review",
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "fresh five-source preplanning receipt, frozen repair plan/contract, exact candidate 3c31f2a9a44713db27b82e338e05374c5d9f62bc, deterministic evidence and clean aligned Git snapshot",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+    }]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "Continuity 363 / Compass 345 authorise only the provider-free two-row proof-module relative-specifier repair.",
+    "current_authority_allocation": "GPT Sol owns this serial deterministic candidate; DeepSeek, Gemini and native subagents remain declined under the no-provider and no-proactive-delegation controls.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/repair-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair/repair-report.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-proof-module-relative-specifier-repair-preplanning-receipt.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "The exact candidate changes two generated module-name rows and removes one dead local only. No Node, Harness, broker, worker, model, provider, network, retry, product, data, deployment or protected-ref activity is admitted.",
+    "git_refs_and_worktree": "Machine evidence must show exact candidate and origin alignment, fixed protected refs, clean tracked worktree, preserved docs/branding and unrelated untracked files."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-provider-free-proof-module-relative-specifier-repair",
+    "active_tranche": "DeepSeek native Harness provider-free proof-module relative-specifier repair",
+    "objective": "Change only the generated sentinel and runner module names from root-specific absolute Windows filesystem paths to the exact profile-relative specifiers proven by the accepted rc7 predecessor, add deterministic static regression evidence and preserve zero Node, Harness, broker, worker, model, provider and network activity.",
+    "status": "in_progress",
+    "source_head": "a166c96d35c9200b33d7bd2ec4e492d0a374d57c",
+    "authority_source": "Yuri's standing uninterrupted-development authority, constrained by the accepted source-coordinate diagnosis and its two-row provider-free repair decision.",
+    "checkpoint": {
+      "completed_stage": "Accepted deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis at the machine-resolved source.",
+      "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_two_row_relative_specifier_repair_contract",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_two_row_profile_relative_proof_module_specifier_repair_only",
+      "no_node_native_harness_broker_worker_model_provider_process_or_request",
+      "no_occupied_attempt_retry_resume_overwrite_reclassification_or_second_worker",
+      "attempts_001_002_003_004_terminal_and_consumed_evidence_remain_immutable",
+      "no_raw_error_message_stack_path_stream_session_or_credential_reconstruction",
+      "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change_except_the_two_generated_harness_profile_module_name_rows",
+      "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-provider-free-proof-module-relative-specifier-repair",
+    "assessed_stage": "pre_verifier_acceptance",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "The latch forbids model/provider activity and the exact two-row candidate has no DeepSeek work package.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "declined", "expected_leverage": "negative", "rationale": "The latch forbids provider review; exact diff and deterministic profile evidence are decisive. Reassess for a separately frozen native boot proof.", "work_packages": []},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Developer policy prohibits proactive delegation and the candidate is one serial two-row repair.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["one exact candidate owner", "two output rows plus dead local only", "no runtime or provider execution", "clockwork closeout before native boot proof"],
+    "reassessment_triggers": ["candidate diff widens", "deterministic verification changes", "separately frozen native boot proof", "closeout"]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["GPT Sol owns the exact provider-free candidate."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Historical transport only; no provider request admitted."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Provider review forbidden in this latch."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent was spawned."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
