@@ -6,6 +6,9 @@ Timestamp: 2026-08-22T02:48:06.6590250+10:00 (Australia/Brisbane)
 
 Status: **closed failed; native attempt consumed; no retry**
 
+Continuity accepts this node only as an exact failed-closed negative result. The
+agent-creation claim remains explicitly non-accepted in the paired Sol record.
+
 ## Result
 
 The provider-free rehearsal is not accepted as an agent-creation proof. The

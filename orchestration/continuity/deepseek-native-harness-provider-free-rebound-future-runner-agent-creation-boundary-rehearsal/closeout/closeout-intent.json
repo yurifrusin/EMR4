@@ -60,6 +60,12 @@
           "source": "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-clockwork-canonical-latch-recovery.md",
           "status": "accepted",
           "summary": "Accept byte-exact restoration of the selected latch generation after the first check rejected manual canonical drift before commands or publication."
+        },
+        {
+          "id": "accept-failed-closed-negative-result-node",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-failed-result-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the exact negative containment result as a Continuity node while retaining the separate non-acceptance of agent creation and publication-veto claims."
         }
       ],
       "claim_scope": [
@@ -94,7 +100,7 @@
           "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-closeout.md"
         ],
         "acceptances": [
-          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-sol-nonacceptance.md"
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-failed-result-sol-acceptance.md"
         ],
         "receipts": [
           "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-preexecution-receipt.json",
@@ -115,6 +121,7 @@
         ],
         "artifacts": [
           "scripts/deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-sol-nonacceptance.md",
           "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-rebound-future-runner-agent-creation-boundary-rehearsal.md"
         ]
       },
@@ -163,7 +170,8 @@
       {"incident_id": "preset-contract-family-prelaunch-stop", "source_id": "agent-boundary-prelaunch-contract-001", "peers": []},
       {"incident_id": "post-hmr-sidecar-free-process-exit", "source_id": "agent-boundary-native-attempt-001", "peers": []},
       {"incident_id": "failed-result-success-claim-generation", "source_id": "agent-boundary-generated-claims-001", "peers": []},
-      {"incident_id": "manual-canonical-latch-drift", "source_id": "agent-boundary-clockwork-check-001", "peers": []}
+      {"incident_id": "manual-canonical-latch-drift", "source_id": "agent-boundary-clockwork-check-001", "peers": []},
+      {"incident_id": "negative-result-nonacceptance-pointer", "source_id": "agent-boundary-clockwork-check-002", "peers": []}
     ],
     "broker": {"enabled": false, "posture": "provider_free_shadow"}
   },
@@ -222,6 +230,7 @@
       "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_plan.py",
       "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_evidence.py",
       "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-failed-result-sol-acceptance.md",
       "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-sol-nonacceptance.md",
       "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-rebound-future-runner-agent-creation-boundary-rehearsal.md",
       "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md",
@@ -425,6 +434,40 @@
         ]
       },
       "baton_summary": "records the rejected manual canonical-latch drift and exact single-owner restoration."
+    },
+    {
+      "attempt_key": "agent-boundary-clockwork-check-002",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-rebound-agent-creation-boundary",
+      "role": "orchestrator",
+      "resource_id": "continuity-negative-result-acceptance-pointer",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A Continuity node must point to a syntactically accepted Sol artifact even when that artifact accepts only a failed-closed negative result and separately rejects the intended capability claim.",
+      "observed_error": "The first corrected intent used the truthful Sol non-acceptance as the node acceptance pointer, so the prospective graph rejected the acceptance document before commands or publication.",
+      "detection_method": "The clockwork transaction reducer returned accepted-node acceptance invalid for the non-acceptance path and left every canonical byte unchanged.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-sol-nonacceptance.md",
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.continuity_negative_result_nonacceptance_pointer",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add a separate Sol acceptance that accepts only the failed-closed negative containment result while retaining the non-acceptance of the intended capability claim.",
+        "prevention_control": "Failed tranches use paired acceptance semantics: an accepted negative-result node artifact plus an explicit non-acceptance for every unproved capability claim.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-failed-result-sol-acceptance.md",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-sol-nonacceptance.md"
+        ]
+      },
+      "baton_summary": "records the rejected non-acceptance node pointer and paired negative-result acceptance semantics."
     }
   ]
 }
