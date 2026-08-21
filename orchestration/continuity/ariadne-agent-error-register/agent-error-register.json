@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 600,
+  "register_revision": 601,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -33567,6 +33567,264 @@
       },
       "incident_id": "AER-0860",
       "attempt_id": "clock-63b76eb574ccae58b3d243e8",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-rebound-agent-creation-boundary",
+      "role": "orchestrator",
+      "resource_id": "ariadne-prepush-git-ref-binding",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "implementation",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Git identity in free-form continuation prose must be absent so the preflight gear alone supplies current full object identities.",
+      "observed_error": "The first pre-push runtime state embedded a reviewed Git identity in prose and the preflight rejected the receipt before publication.",
+      "detection_method": "The git-ref evidence binding returned manual-object-id forbidden; the rejected runtime/receipt were preserved and a machine-snapshot-only replacement passed with zero manual ids.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-implementation-prepush-runtime-state.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-implementation-prepush-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.prepush_freeform_git_object_identity",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace every Git identity statement in prose with a machine-snapshot-only declaration and rerun the preflight without changing the implementation candidate.",
+        "prevention_control": "Every continuation receipt must report zero manually supplied object ids before it can pass.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-implementation-prepush-corrected-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0861",
+      "attempt_id": "clock-4f7ef0617607d8285041b861",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-rebound-agent-creation-boundary",
+      "role": "orchestrator",
+      "resource_id": "native-preset-contract-family-binding",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_native_harness_controller",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The preset builder must receive its owning effective-tool contract and validate exact preset identity, tools, bytes and digest before any disposable root or native process.",
+      "observed_error": "The first controller invocation supplied the accepted rebinding contract to the effective-tool preset builder; the schema mismatch rejected before native launch and wrote no canonical attempt output.",
+      "detection_method": "The controller rejection was joined with zero native processes, zero canonical outputs and exact disposable-root absence, preserving native attempt 001 as unconsumed.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/prelaunch-controller-contract-family-failure-001.json",
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-prelaunch-contract-family-recovery.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.preset_builder_wrong_typed_contract_family",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Load the effective-tool contract through its owner, validate exact cross-contract bindings during deterministic checking and pass the checked bytes into execution.",
+        "prevention_control": "The pre-root deterministic guard and focused regression tests reject wrong contract-family selection before materialisation.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py"
+        ]
+      },
+      "incident_id": "AER-0862",
+      "attempt_id": "clock-638a9dd6b4f484be9bbef1f4",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-rebound-agent-creation-boundary",
+      "role": "orchestrator",
+      "resource_id": "native-runner-factory-stage-sidecar",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_native_harness_controller",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "material",
+      "expected_invariant": "After exact HMR mutation the native runner must emit one finite typed terminal before exit so factory progress is attributable without raw streams.",
+      "observed_error": "The one native process reached exact readiness and HMR mutation, then self-exited with code 2 before the typed sidecar; the controller could classify only process-exit rejection and factory progress remained unknown.",
+      "detection_method": "The consumed attempt ledger, null sidecar, exit coordinate, independent downstream-zero gauges and complete process/root cleanup jointly establish the bounded failure without reconstructing a hidden stage.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-attempt-consumed.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/failure-interpretation.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.post_hmr_exit_before_typed_factory_subcoordinate",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume the attempt without retry, reject factory-progress claims and freeze a distinct dynamic-import closed-subcoordinate diagnostic transaction.",
+        "prevention_control": "The successor requires exactly one finite typed stage/error terminal and forbids fallback factory counts when the sidecar is absent.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-threat-model-delta.md"
+        ]
+      },
+      "incident_id": "AER-0863",
+      "attempt_id": "clock-817abd341a276eb07e3bccfb",
+      "origin": "harness",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-rebound-agent-creation-boundary",
+      "role": "orchestrator",
+      "resource_id": "native-attempt-report-and-efficacy-generator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_native_harness_controller",
+      "stage": "acceptance",
+      "category": "evidence_misreport",
+      "process_severity": "material",
+      "expected_invariant": "Generated narrative and efficacy artifacts must branch on the typed result and may claim factory control only when a valid sidecar proves the required terminal.",
+      "observed_error": "The failed attempt generated an unconditional success paragraph and factory-commit control-gain string despite result fail, null sidecar and null controller terminal.",
+      "detection_method": "Post-execution readback compared the report and efficacy claims with the canonical evidence result and sidecar fields, then hash-bound both generated artifacts as rejected claims.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-agent-creation-boundary-report.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/efficacy-reading.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.evidence_generator_result_invariant_success_claim",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve and explicitly reject the two generated success claims, make the bounded failure interpretation authoritative and test every exact artifact hash and claim boundary.",
+        "prevention_control": "The successor accepts only typed result-aware terminals and its evidence tests prohibit success claims or observed factory counts without a valid sidecar.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/rejected-generated-claims.json",
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_evidence.py"
+        ]
+      },
+      "incident_id": "AER-0864",
+      "attempt_id": "clock-2525d83106b19d640de04a3a",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-rebound-agent-creation-boundary",
+      "role": "orchestrator",
+      "resource_id": "clockwork-owned-active-operation-latch",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "After live clockwork adoption the active latch and every other canonical governance surface must change only through one passed pointer-last clockwork transaction.",
+      "observed_error": "The orchestrator manually advanced the active latch during prelaunch recovery, so the first closeout check rejected canonical drift before running commands or publishing a projection.",
+      "detection_method": "The clockwork compared live canonical hashes with its selected generation, rejected before mutation and identified the latch as the only changed canonical path.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-clockwork-canonical-latch-recovery.md",
+        "orchestration/continuity/ariadne-active-operation-latch/current.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.manual_write_to_clockwork_owned_active_latch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the active latch byte-for-byte to the selected clockwork generation and rerun the same closeout only after that restoration is committed.",
+        "prevention_control": "Continuity, Compass, active latch, error register, pattern report and live baton are exclusive clockwork outputs after adoption; ordinary tranche commits must never edit them.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-clockwork-canonical-latch-recovery.md",
+          "orchestration/continuity/ariadne-governance-clockwork/current.json"
+        ]
+      },
+      "incident_id": "AER-0865",
+      "attempt_id": "clock-335620cb04fc4a5c6989f154",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-rebound-agent-creation-boundary",
+      "role": "orchestrator",
+      "resource_id": "continuity-negative-result-acceptance-pointer",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A Continuity node must point to a syntactically accepted Sol artifact even when that artifact accepts only a failed-closed negative result and separately rejects the intended capability claim.",
+      "observed_error": "The first corrected intent used the truthful Sol non-acceptance as the node acceptance pointer, so the prospective graph rejected the acceptance document before commands or publication.",
+      "detection_method": "The clockwork transaction reducer returned accepted-node acceptance invalid for the non-acceptance path and left every canonical byte unchanged.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-sol-nonacceptance.md",
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.continuity_negative_result_nonacceptance_pointer",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add a separate Sol acceptance that accepts only the failed-closed negative containment result while retaining the non-acceptance of the intended capability claim.",
+        "prevention_control": "Failed tranches use paired acceptance semantics: an accepted negative-result node artifact plus an explicit non-acceptance for every unproved capability claim.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-failed-result-sol-acceptance.md",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-sol-nonacceptance.md"
+        ]
+      },
+      "incident_id": "AER-0866",
+      "attempt_id": "clock-400c3f7e01611b5fa1067005",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-rebound-agent-creation-boundary",
+      "role": "orchestrator",
+      "resource_id": "current-baton-acceptance-row-compaction",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The compact live handover must remain within its byte budget and route to aggregate artifacts rather than duplicating the detailed Continuity evidence inventory.",
+      "observed_error": "The first graph-valid closeout intent repeated the detailed artifact inventory in the live acceptance row and the clockwork rejected baton compaction budget before publication.",
+      "detection_method": "The clockwork rendered the prospective baton, measured it against the fixed 80 KB limit and rejected the transaction while every canonical byte remained unchanged.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-baton-compaction-recovery.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.live_baton_acceptance_row_exceeds_compaction_budget",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep the full evidence inventory in the Continuity node and reduce the Current Baton row to nine aggregate routing artifacts.",
+        "prevention_control": "Live baton acceptance rows carry compact aggregate routes; detailed tests, receipts and implementation artifacts remain in Continuity evidence.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-baton-compaction-recovery.md",
+          "docs/ariadne-agent-error-correction-register-revision-601.md"
+        ]
+      },
+      "incident_id": "AER-0867",
+      "attempt_id": "clock-9629df6f8f89a16422cef129",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

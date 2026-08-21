@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 377,
+  "graph_revision": 378,
   "harvests": [],
   "nodes": [
     {
@@ -28668,9 +28668,144 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal",
+      "title": "Rebound future-runner agent-creation boundary failed-closed rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits this bounded provider-free native-Harness control sequence and deterministic self-correction.",
+          "The one native attempt was consumed without retry; no model/provider request, target, product, data, deployment, Pages or protected-ref authority opened.",
+          "The predecessor boot proof, consumed attempt bytes, rejected generated claims and bounded failure interpretation remain immutable."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "reject-agent-creation-and-prepublication-veto-proof",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/failure-interpretation.json",
+          "status": "rejected",
+          "summary": "Reject any claim that the absent sidecar proves factory invocation, setup, private preparation, preset composition, model selection, commit or publication veto."
+        },
+        {
+          "id": "accept-clean-provider-free-failure-containment",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-agent-creation-boundary-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one process, exact readiness, one HMR mutation, process-exit rejection, downstream silence, target absence, immutable seed and complete process/root cleanup as bounded negative evidence."
+        },
+        {
+          "id": "accept-prelaunch-contract-family-guard",
+          "source": "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-prelaunch-contract-family-recovery.md",
+          "status": "accepted",
+          "summary": "Accept the owner-contract preset binding and deterministic pre-root guard; the prelaunch controller stop consumed no native attempt."
+        },
+        {
+          "id": "reject-result-invariant-generated-success-claims",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/rejected-generated-claims.json",
+          "status": "rejected",
+          "summary": "Reject the generated report success paragraph and factory-commit efficacy claim while preserving their exact bytes and hashes."
+        },
+        {
+          "id": "freeze-distinct-closed-subcoordinate-diagnostic-successor",
+          "source": "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md",
+          "status": "accepted",
+          "summary": "Freeze one distinct provider-free diagnostic transaction with dynamic imports and finite stage/error output; it is not a retry or retroactive acceptance."
+        },
+        {
+          "id": "accept-byte-exact-clockwork-canonical-latch-recovery",
+          "source": "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-clockwork-canonical-latch-recovery.md",
+          "status": "accepted",
+          "summary": "Accept byte-exact restoration of the selected latch generation after the first check rejected manual canonical drift before commands or publication."
+        },
+        {
+          "id": "accept-failed-closed-negative-result-node",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-failed-result-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the exact negative containment result as a Continuity node while retaining the separate non-acceptance of agent creation and publication-veto claims."
+        }
+      ],
+      "claim_scope": [
+        "One pinned rc.7 process traversed the exact stock-headless readiness sequence and accepted one HMR mutation.",
+        "The process self-exited with code 2 before the required typed sidecar and the controller rejected the result.",
+        "The exact factory stage remains unknown; fallback zero fields are not observations.",
+        "Broker, request, worker, model/provider, database, Docker, network and target activity remained zero.",
+        "Process/root cleanup passed, the package seed remained unchanged and no raw stream, environment or log was retained.",
+        "The prelaunch contract-family defect is guarded deterministically before any disposable root."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-prelaunch-contract-family-recovery.md",
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-clockwork-canonical-latch-recovery.md",
+          "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/prelaunch-controller-contract-family-failure-001.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-attempt-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-agent-creation-boundary-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/native-agent-creation-boundary-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/efficacy-reading.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/failure-interpretation.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/rejected-generated-claims.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-failed-result-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-prelaunch-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-contract-family-recovery-prepush-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-recovered-preexecution-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_plan.py",
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal_evidence.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_agents_handover_archive.py",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_rebound_future_runner_agent_creation_boundary_rehearsal.py",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-agent-creation-boundary-sol-nonacceptance.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-rebound-future-runner-agent-creation-boundary-rehearsal.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The exact post-HMR runner/factory failure stage is unknown because no typed sidecar was written.",
+        "No agent creation, private Agent/Session preparation, preset composition, model selection, commit or publication-veto claim is accepted.",
+        "No DeepSeek worker, turn, model/provider request, coding behavior or target edit is authorised or proved.",
+        "Product, data, ordinary-practice, production, deployment, release, Pages and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T02:48:06.6590250+10:00",
+      "updated_at": "2026-08-22T02:48:06.6590250+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "70cd5569e83008c02796a8bac9291626ee3d6286",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T01:02:14.2919121+10:00"
+  "updated_at": "2026-08-22T02:48:06.6590250+10:00"
 }

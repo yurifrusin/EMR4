@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 359,
-  "updated_at": "2026-08-22T01:02:14.2919121+10:00",
-  "source_graph_revision": 377,
-  "orientation_statement": "Freeze one provider-free rebound-runner agent-creation proof and stop before session or request.",
+  "map_revision": 360,
+  "updated_at": "2026-08-22T02:48:06.6590250+10:00",
+  "source_graph_revision": 378,
+  "orientation_statement": "Freeze and execute one provider-free closed-subcoordinate diagnostic transaction without retrying the consumed attempt.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4701,25 +4701,34 @@
         "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/native-boot-evidence.json",
         "docs/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof-closeout.md"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal",
+      "lineage_parent": "deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof",
+      "strategic_role": "Make native DeepSeek worker execution bounded, traceable and governable enough for Raisa development",
+      "outcome": "The orchestrator contained one real post-HMR failure completely and identified the remaining traceability gap: runner/factory stages need a mandatory finite terminal before any success claim.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal/failure-interpretation.json",
+        "docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof",
-    "strategic_role": "Prove the native Harness can create exactly one inert rebound worker agent while retaining provider-free broker and target silence",
-    "why_now": "Native HMR activation and typed pre-request attribution pass, while agent creation remains the next unproved boundary before any session or request.",
-    "outcome": "One provider-free runner descendant will either create one exact inert worker agent and emit a typed sidecar before session creation or fail closed with attributable evidence.",
+    "node_id": "deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal",
+    "strategic_role": "Eliminate the sidecar-free attribution gap between HMR mounting and the native agent-factory boundary",
+    "why_now": "The consumed attempt is safely contained but cannot reveal its factory stage, and no reviewer can reconstruct runtime state that was not recorded.",
+    "outcome": "One distinct provider-free diagnostic process will emit a finite typed stage/error terminal or narrow the failure to runner link/apply absence without projecting unknown factory counts.",
     "unlocks": [
-      "Typed agent-creation evidence under the native Harness and admitted preset roots.",
-      "A later separately frozen session/request-boundary rehearsal before any occupied DeepSeek development task."
+      "Attributable native package-import, service, preset and factory-stage evidence.",
+      "A defensible decision on the narrowest later agent-creation proof without opaque reruns."
     ],
     "does_not_solve": [
-      "No session, turn, broker/model/provider request or coding-performance evidence.",
-      "No target-file creation, product command, product data or ordinary-practice enablement.",
-      "No production, deployment, release, Pages or protected integration."
+      "No published agent/session, turn, broker/model/provider request or coding-performance evidence.",
+      "No target edit, product command, product data, ordinary-practice enablement, production, deployment, release, Pages or protected integration."
     ],
     "evidence": [
-      "orchestration/continuity/deepseek-native-harness-provider-free-rebound-future-runner-stock-headless-hmr-boot-proof/efficacy-reading.json",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-rebound-future-runner-stock-headless-hmr-boot-proof-sol-acceptance.md"
+      "docs/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal-threat-model-delta.md"
     ]
   },
   "decision_horizon": [
