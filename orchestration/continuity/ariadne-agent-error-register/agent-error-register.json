@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 580,
+  "register_revision": 581,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-21",
@@ -29334,6 +29334,218 @@
       },
       "incident_id": "AER-0743",
       "attempt_id": "clock-6545833c520724171d78fa37",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preexecution-git-refs-evidence-binding",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Exact Git objects in an Ariadne receipt must come only from the machine snapshot, not free-form source-evidence prose.",
+      "observed_error": "The first preexecution runtime state repeated the full candidate Git object in git_refs_and_worktree prose.",
+      "detection_method": "The Ariadne preflight returned revision_required with git_refs_evidence_manual_object_id_forbidden before native launch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-preexecution-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.preexecution_prose_repeated_machine_owned_git_object",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the object from prose, preserve the rejected receipt and rerun preflight before process start.",
+        "prevention_control": "Receipt prose names the active candidate semantically while full objects are supplied only through typed active_operation fields and resolved by the machine snapshot.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-preexecution-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0744",
+      "attempt_id": "clock-4199f73ea09aa5e1ae4b2a66",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "prelaunch-composite-readback-command",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_powershell_cli",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The final prelaunch reading must parse and complete before the one-process authority can be consumed.",
+      "observed_error": "The first composite reading embedded a semicolon inside an invalid parenthesized expression and PowerShell rejected it during parsing.",
+      "detection_method": "PowerShell emitted Missing closing parenthesis before controller or native process execution.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.prelaunch_composite_powershell_expression_parse_failure",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Decompose candidate ancestry and protected-ref collection into explicit assignments and require the deterministic check to exit zero first.",
+        "prevention_control": "Lifecycle-critical prelaunch readings use simple sequential assignments rather than nested native-command expressions.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md"
+        ]
+      },
+      "incident_id": "AER-0745",
+      "attempt_id": "clock-13571ad2966b87c8ef567b4d",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "provider-free-pytest-command-manifest",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A provider-free pytest command manifest must pass only literal repository-relative test files accepted by the wrapper.",
+      "observed_error": "The checkpoint manifest appended a pytest -k selector that the provider-free wrapper does not admit.",
+      "detection_method": "The post-terminal wrapper invocation rejected the unrecognized arguments before pytest collection.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/preexecution/checkpoint-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.provider_free_pytest_manifest_used_untyped_selector",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Run the exact acceptance set as whole literal files and include the package materialisation fixture once.",
+        "prevention_control": "Future provider-free command manifests use literal file paths only unless a separately reviewed typed selection contract exists.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md"
+        ]
+      },
+      "incident_id": "AER-0746",
+      "attempt_id": "clock-53b7464a62726955754f8bd4",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "clockwork-closeout-incident-observation",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every clockwork incident observation must use one exact stage from the engine's closed vocabulary.",
+      "observed_error": "The first closeout intent used preexecution for two incident stages even though the clockwork vocabulary represents that phase as dispatch.",
+      "detection_method": "The read-only clockwork check rejected with tick_incident_stage before transaction preparation, command execution or publication.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_closeout_used_noncanonical_incident_stage",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the two invalid stage values with the exact dispatch vocabulary and rerun the unchanged read-only transaction.",
+        "prevention_control": "Closeout incident stages are selected from the engine-owned closed vocabulary before the first clockwork check.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0747",
+      "attempt_id": "clock-6d326f5c52ee6c5c621491dc",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "clockwork-successor-protected-boundaries",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every generated successor latch must retain the canonical closed-surface token required by baton consistency.",
+      "observed_error": "The first published successor boundaries expressed the closed ordinary-practice posture but omitted the exact no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting token.",
+      "detection_method": "The postpublication current-baton consistency suite failed the exact protected-boundary subset assertion.",
+      "evidence_paths": [
+        "tests/test_current_baton_consistency.py",
+        "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.successor_latch_omitted_canonical_closed_surface_token",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Roll back the uncommitted generation byte-exactly, add the canonical token and republish the corrected bundle.",
+        "prevention_control": "Successor boundary construction retains the baton test's canonical closed-surface subset in addition to tranche-specific constraints.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0748",
+      "attempt_id": "clock-52ac9cf3296f16762aeefdbd",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "clockwork-rollback-pointer-lease",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A byte-exact rollback restores canonical and metadata bytes while its incremented pointer lease must be committed before another generation is prepared.",
+      "observed_error": "The first corrected dry-run was attempted immediately after rollback without first binding the incremented rollback lease in Git.",
+      "detection_method": "The read-only clockwork check rejected with tick_pointer_physical_drift before transaction preparation or command execution.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-governance-clockwork/current.json",
+        "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_rollback_lease_not_bound_before_republication",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Commit only the clockwork-owned incremented pointer lease, then prepare the corrected generation from that source.",
+        "prevention_control": "The rollback procedure now treats the byte-exact restoration and its monotonic lease commit as one required precursor to any replacement generation.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-governance-clockwork/current.json"
+        ]
+      },
+      "incident_id": "AER-0749",
+      "attempt_id": "clock-4b50a85275b9980eab5d2738",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

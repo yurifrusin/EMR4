@@ -1,0 +1,474 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+    "title": "DeepSeek native Harness provider-free structured diagnostic native-boot observability rehearsal",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-21T10:15:26.7935902+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+      "title": "DeepSeek native Harness provider-free structured diagnostic native-boot observability rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority covers this provider-free diagnostic-strengthening rehearsal.",
+          "Exactly one pinned rc.7 authored-missing-profile native entrypoint process was permitted without a task argument.",
+          "No broker, worker session, prompt, tool, model, provider, product or protected integration authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-real-native-entrypoint-structured-terminal",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one canonical v2 structured entrypoint-import terminal around the real pinned rc.7 provider-free entrypoint."
+        },
+        {
+          "id": "accept-one-process-zero-downstream-cleanup",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/pre-hmr-startup-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one process, zero retry, zero HMR or downstream activity and exact raw-stream, copied-tree and process cleanup."
+        },
+        {
+          "id": "reject-worker-and-provider-readiness",
+          "source": "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "Reject claims of worker creation, DeepSeek reasoning, coding quality, provider reliability or occupied readiness."
+        },
+        {
+          "id": "accept-contained-native-boot-procedure-corrections",
+          "source": "docs/ariadne-agent-error-correction-register-revision-581.md",
+          "status": "accepted",
+          "summary": "Accept six bounded corrected procedural observations with no second native attempt, provider call or protected-surface effect."
+        }
+      ],
+      "claim_scope": [
+        "Exactly one pinned rc.7 native entrypoint process ran with the authored missing profile and no task argument.",
+        "The process exited one before HMR and produced one canonical safe structured diagnostic plus the exact v2 terminal.",
+        "Broker, worker-session, prompt, tool, model, provider, network, Docker and database counts remained zero.",
+        "No raw message, stack, path, environment or credential value became durable.",
+        "The native process, copied package tree, raw streams and disposable root are absent.",
+        "This proves diagnostic composition only, not occupied worker or provider readiness."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-historical-equality-test-selection.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/pre-hmr-startup-terminal.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-report.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-preexecution-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-result-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal_plan.py",
+          "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-581.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The accepted structured wrapper and v2 reader are not yet converged into the bounded occupied-worker controller.",
+        "No worker session, prompt, tool execution, model or provider request occurred.",
+        "A future occupied attempt requires a separately frozen fresh identity and exact preexecution admission after provider-free controller convergence.",
+        "Product, data, ordinary-practice, deployment and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Connect the tested structured diagnostic gear to one real pinned provider-free native Harness entrypoint boundary",
+      "outcome": "One authored pre-HMR rc.7 failure becomes the exact safe v2 terminal with zero downstream activity and complete cleanup.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-evidence.json",
+        "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Converge the proven diagnostic gear into the future bounded-worker controller before another occupied decision",
+      "why_now": "The wrapper and v2 reader now work around the real pinned entrypoint, but the accepted occupied-worker controller still owns only the older unclassified pre-HMR terminal path.",
+      "outcome": "The diagnostic gear is ready for a separately frozen provider-free bounded-worker-controller convergence rehearsal while every worker and provider surface remains closed.",
+      "unlocks": [
+        "One deterministic proof that the future bounded-worker controller selects the structured v2 terminal when an entrypoint import rejects.",
+        "A grounded later decision on a separately named fresh occupied authored-synthetic attempt."
+      ],
+      "does_not_solve": [
+        "No Harness process, worker session, prompt, tool execution, model or provider request in the successor.",
+        "No retry or reclassification of consumed attempts.",
+        "No product, data, production, deployment or protected-ref authority."
+      ],
+      "evidence": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-sol-acceptance.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-report.md"
+      ],
+      "orientation_statement": "Freeze one provider-free controller convergence around the accepted wrapper and v2 reader; admit no Harness, worker or provider activity."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
+      "active_tranche": "Raisa provider-free authored-synthetic native Harness structured diagnostic bounded-worker controller convergence rehearsal",
+      "objective": "Compose the accepted canonical structured diagnostic wrapper and v2 terminal reader into the bounded authored-synthetic worker controller and prove exact pre-provider terminal selection, identity binding and cleanup relationships without launching Harness, broker, worker, model or provider activity.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, constrained to provider-free deterministic controller convergence and no occupied attempt.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_provider_free_bounded_worker_controller_convergence_contract"
+    },
+    "incidents": [
+      {
+        "incident_id": "preexecution-prose-repeated-machine-owned-git-object",
+        "source_id": "native-boot-preexecution-receipt-001",
+        "peers": []
+      },
+      {
+        "incident_id": "prelaunch-powershell-reading-parser-error",
+        "source_id": "native-boot-prelaunch-reading-001",
+        "peers": []
+      },
+      {
+        "incident_id": "checkpoint-manifest-used-inadmissible-pytest-selector",
+        "source_id": "native-boot-postterminal-tests-001",
+        "peers": []
+      },
+      {
+        "incident_id": "closeout-intent-used-noncanonical-incident-stage",
+        "source_id": "native-boot-closeout-check-001",
+        "peers": []
+      },
+      {
+        "incident_id": "successor-latch-omitted-canonical-closed-surface-token",
+        "source_id": "native-boot-postpublication-baton-test-001",
+        "peers": []
+      },
+      {
+        "incident_id": "rollback-lease-was-not-bound-before-republication-check",
+        "source_id": "native-boot-rollback-lease-001",
+        "peers": []
+      }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "native_boot_final_deterministic_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal",
+          "--check",
+          "--candidate-source",
+          "253b4071ca2758da948a618aa86b5393fab0f1de"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "native_boot_final_provider_free_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal_plan.py",
+          "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "native_boot_final_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "native_boot_final_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "DeepSeek native Harness provider-free structured diagnostic native-boot observability rehearsal acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-historical-equality-test-selection.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/evidence.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/pre-hmr-startup-terminal.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-report.md",
+      "scripts/deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
+      "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
+      "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal_plan.py",
+      "docs/ariadne-agent-error-correction-register-revision-581.md",
+      "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_bounded_worker_controller_convergence_only",
+    "no_native_harness_broker_worker_session_prompt_tool_model_or_provider_process_or_request",
+    "pinned_rc7_wrapper_terminal_and_controller_identity_required",
+    "no_occupied_attempt_retry_resume_overwrite_or_reclassification",
+    "consumed_attempts_and_terminal_evidence_remain_immutable",
+    "no_raw_startup_stream_reconstruction_or_retention",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "native-boot-preexecution-manual-git-object-prose-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preexecution-git-refs-evidence-binding",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Exact Git objects in an Ariadne receipt must come only from the machine snapshot, not free-form source-evidence prose.",
+      "observed_error": "The first preexecution runtime state repeated the full candidate Git object in git_refs_and_worktree prose.",
+      "detection_method": "The Ariadne preflight returned revision_required with git_refs_evidence_manual_object_id_forbidden before native launch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-preexecution-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.preexecution_prose_repeated_machine_owned_git_object",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the object from prose, preserve the rejected receipt and rerun preflight before process start.",
+        "prevention_control": "Receipt prose names the active candidate semantically while full objects are supplied only through typed active_operation fields and resolved by the machine snapshot.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-preexecution-receipt.json"
+        ]
+      },
+      "baton_summary": "records the rejected manual Git-object prose and corrected machine-owned receipt binding."
+    },
+    {
+      "attempt_key": "native-boot-prelaunch-powershell-parser-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "prelaunch-composite-readback-command",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_powershell_cli",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The final prelaunch reading must parse and complete before the one-process authority can be consumed.",
+      "observed_error": "The first composite reading embedded a semicolon inside an invalid parenthesized expression and PowerShell rejected it during parsing.",
+      "detection_method": "PowerShell emitted Missing closing parenthesis before controller or native process execution.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.prelaunch_composite_powershell_expression_parse_failure",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Decompose candidate ancestry and protected-ref collection into explicit assignments and require the deterministic check to exit zero first.",
+        "prevention_control": "Lifecycle-critical prelaunch readings use simple sequential assignments rather than nested native-command expressions.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md"
+        ]
+      },
+      "baton_summary": "records the prelaunch parser rejection and passing decomposed reading before the only native process."
+    },
+    {
+      "attempt_key": "native-boot-checkpoint-manifest-pytest-selector-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "provider-free-pytest-command-manifest",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A provider-free pytest command manifest must pass only literal repository-relative test files accepted by the wrapper.",
+      "observed_error": "The checkpoint manifest appended a pytest -k selector that the provider-free wrapper does not admit.",
+      "detection_method": "The post-terminal wrapper invocation rejected the unrecognized arguments before pytest collection.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/preexecution/checkpoint-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.provider_free_pytest_manifest_used_untyped_selector",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Run the exact acceptance set as whole literal files and include the package materialisation fixture once.",
+        "prevention_control": "Future provider-free command manifests use literal file paths only unless a separately reviewed typed selection contract exists.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md"
+        ]
+      },
+      "baton_summary": "records the inadmissible pytest selector and the passing 64-test whole-file allowlist."
+    },
+    {
+      "attempt_key": "native-boot-closeout-incident-stage-vocabulary-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "clockwork-closeout-incident-observation",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every clockwork incident observation must use one exact stage from the engine's closed vocabulary.",
+      "observed_error": "The first closeout intent used preexecution for two incident stages even though the clockwork vocabulary represents that phase as dispatch.",
+      "detection_method": "The read-only clockwork check rejected with tick_incident_stage before transaction preparation, command execution or publication.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_closeout_used_noncanonical_incident_stage",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the two invalid stage values with the exact dispatch vocabulary and rerun the unchanged read-only transaction.",
+        "prevention_control": "Closeout incident stages are selected from the engine-owned closed vocabulary before the first clockwork check.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the rejected noncanonical incident stage and corrected typed clockwork observation."
+    },
+    {
+      "attempt_key": "native-boot-successor-latch-closed-surface-token-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "clockwork-successor-protected-boundaries",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every generated successor latch must retain the canonical closed-surface token required by baton consistency.",
+      "observed_error": "The first published successor boundaries expressed the closed ordinary-practice posture but omitted the exact no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting token.",
+      "detection_method": "The postpublication current-baton consistency suite failed the exact protected-boundary subset assertion.",
+      "evidence_paths": [
+        "tests/test_current_baton_consistency.py",
+        "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.successor_latch_omitted_canonical_closed_surface_token",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Roll back the uncommitted generation byte-exactly, add the canonical token and republish the corrected bundle.",
+        "prevention_control": "Successor boundary construction retains the baton test's canonical closed-surface subset in addition to tranche-specific constraints.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the postpublication boundary-token rejection and byte-exact rollback before corrected publication."
+    },
+    {
+      "attempt_key": "native-boot-rollback-lease-binding-order-001",
+      "observed_on": "2026-08-21",
+      "tranche": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "clockwork-rollback-pointer-lease",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A byte-exact rollback restores canonical and metadata bytes while its incremented pointer lease must be committed before another generation is prepared.",
+      "observed_error": "The first corrected dry-run was attempted immediately after rollback without first binding the incremented rollback lease in Git.",
+      "detection_method": "The read-only clockwork check rejected with tick_pointer_physical_drift before transaction preparation or command execution.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-governance-clockwork/current.json",
+        "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.clockwork_rollback_lease_not_bound_before_republication",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Commit only the clockwork-owned incremented pointer lease, then prepare the corrected generation from that source.",
+        "prevention_control": "The rollback procedure now treats the byte-exact restoration and its monotonic lease commit as one required precursor to any replacement generation.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-governance-clockwork/current.json"
+        ]
+      },
+      "baton_summary": "records the rejected post-rollback dry-run and the explicit rollback-lease commit before corrected publication."
+    }
+  ]
+}

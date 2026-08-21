@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 357,
+  "graph_revision": 358,
   "harvests": [],
   "nodes": [
     {
@@ -26414,9 +26414,117 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal",
+      "title": "DeepSeek native Harness provider-free structured diagnostic native-boot observability rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority covers this provider-free diagnostic-strengthening rehearsal.",
+          "Exactly one pinned rc.7 authored-missing-profile native entrypoint process was permitted without a task argument.",
+          "No broker, worker session, prompt, tool, model, provider, product or protected integration authority opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-real-native-entrypoint-structured-terminal",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one canonical v2 structured entrypoint-import terminal around the real pinned rc.7 provider-free entrypoint."
+        },
+        {
+          "id": "accept-one-process-zero-downstream-cleanup",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/pre-hmr-startup-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one process, zero retry, zero HMR or downstream activity and exact raw-stream, copied-tree and process cleanup."
+        },
+        {
+          "id": "reject-worker-and-provider-readiness",
+          "source": "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "Reject claims of worker creation, DeepSeek reasoning, coding quality, provider reliability or occupied readiness."
+        },
+        {
+          "id": "accept-contained-native-boot-procedure-corrections",
+          "source": "docs/ariadne-agent-error-correction-register-revision-581.md",
+          "status": "accepted",
+          "summary": "Accept six bounded corrected procedural observations with no second native attempt, provider call or protected-surface effect."
+        }
+      ],
+      "claim_scope": [
+        "Exactly one pinned rc.7 native entrypoint process ran with the authored missing profile and no task argument.",
+        "The process exited one before HMR and produced one canonical safe structured diagnostic plus the exact v2 terminal.",
+        "Broker, worker-session, prompt, tool, model, provider, network, Docker and database counts remained zero.",
+        "No raw message, stack, path, environment or credential value became durable.",
+        "The native process, copied package tree, raw streams and disposable root are absent.",
+        "This proves diagnostic composition only, not occupied worker or provider readiness."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-historical-equality-test-selection.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/pre-hmr-startup-terminal.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-report.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-preexecution-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-result-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal_plan.py",
+          "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py",
+          "tests/test_deepseek_native_harness_provider_free_structured_diagnostic_wrapper_node_fixture_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_native_harness_preset_mount_effective_tool_projection_rehearsal.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_structured_diagnostic_native_boot_observability_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-581.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The accepted structured wrapper and v2 reader are not yet converged into the bounded occupied-worker controller.",
+        "No worker session, prompt, tool execution, model or provider request occurred.",
+        "A future occupied attempt requires a separately frozen fresh identity and exact preexecution admission after provider-free controller convergence.",
+        "Product, data, ordinary-practice, deployment and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-21T10:15:26.7935902+10:00",
+      "updated_at": "2026-08-21T10:15:26.7935902+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "6f728b2979dffcd089bd79eb73f49d7e447d772f",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-21T09:19:00.3227540+10:00"
+  "updated_at": "2026-08-21T10:15:26.7935902+10:00"
 }

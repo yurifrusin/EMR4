@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Freeze one provider-free native-Harness boot around the accepted wrapper and reader; admit no worker or provider activity.
+> Freeze one provider-free controller convergence around the accepted wrapper and v2 reader; admit no Harness, worker or provider activity.
 
 ## North star
 
@@ -484,24 +484,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    A future-only closed wrapper and v2 terminal are source-proved while all accepted v1 and consumed evidence stays unchanged. Lineage parent: `raisa-authored-synthetic-check-in-native-harness-bounded-worker-attempt-003`.
 234. **Prove the structured diagnostic gear under real Node semantics before native Harness composition — DeepSeek native Harness provider-free structured diagnostic wrapper Node fixture rehearsal**
    Canonical safe sidecar creation, identical rejection, exclusive-write failure handling and exact cleanup pass across four authored fixtures. Lineage parent: `deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery`.
+235. **Connect the tested structured diagnostic gear to one real pinned provider-free native Harness entrypoint boundary — DeepSeek native Harness provider-free structured diagnostic native-boot observability rehearsal**
+   One authored pre-HMR rc.7 failure becomes the exact safe v2 terminal with zero downstream activity and complete cleanup. Lineage parent: `deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal`.
 
 ## Current position
 
-**Connect the now-tested diagnostic gear to one provider-free native Harness boot boundary — DeepSeek native Harness provider-free structured diagnostic wrapper Node fixture rehearsal**
+**Converge the proven diagnostic gear into the future bounded-worker controller before another occupied decision — DeepSeek native Harness provider-free structured diagnostic native-boot observability rehearsal**
 
-**Why this proof came next:** Real Node fixture behavior passes, but the wrapper and terminal reader have not yet surrounded the pinned rc.7 entrypoint.
+**Why this proof came next:** The wrapper and v2 reader now work around the real pinned entrypoint, but the accepted occupied-worker controller still owns only the older unclassified pre-HMR terminal path.
 
-The diagnostic gear is ready for a separately frozen provider-free native-boot observability rehearsal, while every worker and provider surface remains closed.
+The diagnostic gear is ready for a separately frozen provider-free bounded-worker-controller convergence rehearsal while every worker and provider surface remains closed.
 
 ### What this unlocks
 
-- One bounded proof that a pinned native-Harness pre-HMR failure becomes a safe v2 terminal.
-- A grounded decision whether later provider-free worker-session preparation remains justified.
+- One deterministic proof that the future bounded-worker controller selects the structured v2 terminal when an entrypoint import rejects.
+- A grounded later decision on a separately named fresh occupied authored-synthetic attempt.
 
 ### What it does not solve
 
-- No worker session, prompt, tool execution, model or provider request.
-- No occupied retry or attempt-003 reclassification.
+- No Harness process, worker session, prompt, tool execution, model or provider request in the successor.
+- No retry or reclassification of consumed attempts.
 - No product, data, production, deployment or protected-ref authority.
 
 ## Continuity and authority
@@ -1244,6 +1246,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-closeout.md`
 - `docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md`
+- `docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery-closeout.md`
 - `docs/diary/diary.css`
@@ -1977,7 +1980,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-wrapper-node-fixture-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-structured-diagnostic-native-boot-observability-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2631,8 +2634,9 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-report.md`
 - `orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/provider-free-node-fixture-evidence.json`
-- `orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/provider-free-node-fixture-report.md`
 - `orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-evidence.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-cost-ledger.json`
@@ -3607,4 +3611,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 339; continuity graph revision 357._
+_Compass map revision 340; continuity graph revision 358._
