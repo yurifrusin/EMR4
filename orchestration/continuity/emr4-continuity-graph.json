@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 381,
+  "graph_revision": 382,
   "harvests": [],
   "nodes": [
     {
@@ -29131,9 +29131,129 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "title": "Preset-mount safe-subcoordinate sanitizer rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the bounded native-Harness control sequence and dependency-satisfied deterministic recoveries.",
+          "This closeout accepts only a bounded negative sanitizer result and a content-free process-envelope control gain.",
+          "No fourth process, sanitizer admission, DSH/native Harness, worker/model/provider, product/data, deployment, Pages or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-three-consumed-local-node-attempts",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-consumed.json",
+          "status": "accepted",
+          "summary": "Accept three consumed local Node processes, including attempt 003 exit 134 with exact content-free byte counts and digests."
+        },
+        {
+          "id": "reject-sanitizer-admission-and-runtime-cause-inference",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "Do not accept a safe vector, sanitizer mapping, exact JavaScript cause, native preset subcoordinate, worker readiness, repair or retry."
+        },
+        {
+          "id": "accept-content-free-process-envelope-control",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-process-envelope.json",
+          "status": "accepted",
+          "summary": "Accept numeric exit, stdout/stderr byte counts and SHA-256 digests retained before semantic admission, with stream content absent."
+        },
+        {
+          "id": "accept-windows-minimum-environment-successor",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-plan.md",
+          "status": "accepted",
+          "summary": "Freeze one separate successor that preserves sanitizer/wrapper bytes and replaces only env={} with the exact five-key Windows minimum."
+        },
+        {
+          "id": "accept-sol-bounded-negative-closeout",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-safe-subcoordinate-sanitizer-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the non-transferable negative result and exact claim boundary without admitting sanitizer behavior."
+        }
+      ],
+      "claim_scope": [
+        "Three local Node fixture processes are consumed at exact candidates 475a5b6c210a1bc98f75234f544b5c619a94b704, 50a17beba7ea3a461cc2dd2154f747b307119f20 and 03a53c5b6f5e487b991e465a73c6368aa9759d74.",
+        "Attempt 003 observed exit 134, zero stdout bytes and 715 stderr bytes; stream content was discarded and exact digests were retained.",
+        "The sanitizer produced no admitted safe vector and no internal native preset-mount coordinate is claimed.",
+        "The shared env={} launch override is a source-supported recovery hypothesis only, not causal proof.",
+        "Native Harness, DSH, worker, model/provider, network, database, Docker, target and product counts remain zero.",
+        "Fifteen implementation tests and seven immutable negative-evidence tests pass with static checks."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-observable-fixture-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-observable-fixture-recovery-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-typed-process-envelope-import-wrapper-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitizer-typed-process-envelope-import-wrapper-recovery-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-launch-environment-diagnosis.md",
+          "docs/ariadne-agent-error-correction-register-revision-605.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-preset-mount-safe-subcoordinate-sanitizer-negative-result.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-safe-subcoordinate-sanitizer-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-safe-subcoordinate-sanitizer-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-observable-fixture-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-sanitizer-typed-process-envelope-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-safe-subcoordinate-sanitizer-postcompaction-negative-closeout-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer.mjs",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_fixture.mjs",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/evidence.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-001-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-002-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-process-envelope.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The sanitizer safe vector remains unobserved and is not admitted.",
+        "The exact JavaScript abort cause and exact native preset-mount subcoordinate remain unobserved.",
+        "Runner connection, any native Harness attempt, worker/model use, repair, retry and occupied behavior remain closed.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T05:35:38.3957746+10:00",
+      "updated_at": "2026-08-22T05:35:38.3957746+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "2c36ef593e57b1be814fc9d36c028641c4f835e1",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T04:54:51.8809118+10:00"
+  "updated_at": "2026-08-22T05:35:38.3957746+10:00"
 }

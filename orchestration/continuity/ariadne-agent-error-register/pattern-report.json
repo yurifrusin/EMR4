@@ -1,24 +1,24 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 604,
+  "register_revision": 605,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "26731e7cdb11642896fddea9b682f1485870cf8f398528b8a9b977684a83ee91",
-  "incident_count": 880,
+  "canonical_register_sha256": "49be12e4a45636787fe43753a260388c625ade8ae2ec6a6f85fd52ff60d44517",
+  "incident_count": 890,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 493,
-      "harness": 65,
-      "operator": 172,
+      "harness": 67,
+      "operator": 180,
       "repository": 134,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 95,
       "evidence_misreport": 73,
-      "harness_failure": 65,
-      "operator_error": 172,
+      "harness_failure": 67,
+      "operator_error": 180,
       "output_contract_violation": 273,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
@@ -28,18 +28,18 @@
     "by_role": {
       "implementer": 64,
       "integration_reviewer": 3,
-      "orchestrator": 750,
+      "orchestrator": 760,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 538,
+      "low": 545,
       "material": 131,
-      "moderate": 211
+      "moderate": 214
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 164,
-      "canonical_unchanged": 553,
-      "untrusted_partial_worktree": 163
+      "accepted_candidate_changed": 168,
+      "canonical_unchanged": 556,
+      "untrusted_partial_worktree": 166
     },
     "by_resource_and_role": {
       "accepted-native-startup-terminal-and-consumed-controller-source::orchestrator": 1,
@@ -291,6 +291,16 @@
       "preplanning-adapter-inventory::orchestrator": 1,
       "preplanning-git-ref-prose-binding::orchestrator": 1,
       "preplanning-latch-and-git-evidence::orchestrator": 1,
+      "preset-mount-sanitizer-candidate-commit-sequence::orchestrator": 1,
+      "preset-mount-sanitizer-closeout-incident-vocabulary::orchestrator": 1,
+      "preset-mount-sanitizer-controller-process-envelope::orchestrator": 1,
+      "preset-mount-sanitizer-fixture-self-check::orchestrator": 1,
+      "preset-mount-sanitizer-physical-package-seed-path::orchestrator": 1,
+      "preset-mount-sanitizer-plan-prose-assertion::orchestrator": 1,
+      "preset-mount-sanitizer-plan-prose-normalization::orchestrator": 1,
+      "preset-mount-sanitizer-prospective-register-revision::orchestrator": 1,
+      "preset-mount-sanitizer-successor-plan-phrase::orchestrator": 1,
+      "preset-mount-sanitizer-windows-child-environment::orchestrator": 1,
       "preset-mount-source-closeout-intent-contract-evidence::orchestrator": 1,
       "preset-mount-source-package-seed-root::orchestrator": 1,
       "preset-projection-deterministic-classifiers::orchestrator": 1,

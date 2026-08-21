@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 604,
+  "register_revision": 605,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -34311,6 +34311,371 @@
       },
       "incident_id": "AER-0880",
       "attempt_id": "clock-b4f6f36ed6ba4b118b3a898e",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preset-mount-sanitizer-physical-package-seed-path",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_filesystem_read",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The exact physical rc.7 package source path is copied from the accepted predecessor contract and is not inferred from a logical evidence binding.",
+      "observed_error": "The first source lookup appended the logical evidence path directly to the cache root and omitted the package-seed/node_modules/@deepseek-ai segments.",
+      "detection_method": "The read-only lookup returned path absence before source admission or process execution.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-605.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/contract.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.logical_source_binding_used_as_physical_package_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve the physical seed path from the accepted predecessor contract before reading the pinned source.",
+        "prevention_control": "Descendant source readers copy the full physical path from the accepted source-owning contract.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-605.md"
+        ]
+      },
+      "incident_id": "AER-0881",
+      "attempt_id": "clock-ab62ea3acacb3ae257dc67ff",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preset-mount-sanitizer-plan-prose-assertion",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Plan prose assertions compare normalized document text where Markdown line wrapping is non-semantic.",
+      "observed_error": "The first focused assertion searched raw Markdown for a phrase split by line wrapping.",
+      "detection_method": "Pytest failed before Node execution.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-605.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.raw_markdown_phrase_assertion_ignores_line_wrap",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Normalize whitespace before plan prose assertions.",
+        "prevention_control": "Use one normalized document reading for non-format-sensitive prose assertions.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py"
+        ]
+      },
+      "incident_id": "AER-0882",
+      "attempt_id": "clock-689840fae853313b0329a70d",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preset-mount-sanitizer-plan-prose-normalization",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A representation-level correction is applied consistently to all adjacent assertions sharing the same source representation.",
+      "observed_error": "The first correction normalized only the failing assertion and left the adjacent null-detail assertion on raw text.",
+      "detection_method": "The next pytest run failed on the adjacent assertion before Node execution.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-605.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.partial_representation_normalization_leaves_adjacent_assertion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use one normalized reading for every plan-prose assertion.",
+        "prevention_control": "When a source representation rule changes, audit the full local assertion family before rerun.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py"
+        ]
+      },
+      "incident_id": "AER-0883",
+      "attempt_id": "clock-268cef25a88739d8bfb0d4ce",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preset-mount-sanitizer-fixture-self-check",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_node_fixture",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "The controller retains a typed process envelope before interpreting a fixture result, and reports only observed numeric exits.",
+      "observed_error": "Attempt 001 embedded an all-or-nothing vector self-check while the controller retained neither vector nor process envelope; the orchestrator later described source-defined exit 2 as observed.",
+      "detection_method": "Post-attempt evidence review found only the outer node_fixture_exit_nonzero terminal and no retained numeric exit.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-001-consumed.json",
+        "docs/ariadne-agent-error-correction-register-revision-605.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "agent.unobserved_fixture_exit_inferred_from_source_without_process_envelope",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Correct the attempt record to numeric-exit unobserved and move semantic vector checking into Python after process-envelope retention.",
+        "prevention_control": "Never state a numeric process exit unless it is present in typed machine evidence.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-001-consumed.json",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py"
+        ]
+      },
+      "incident_id": "AER-0884",
+      "attempt_id": "clock-b9e4927a08b0104cd29a3237",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preset-mount-sanitizer-controller-process-envelope",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_node_fixture",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The controller retains numeric exit and content-free stream measurements before any semantic admission branch.",
+      "observed_error": "Attempt 002 checked nonzero exit before retaining numeric exit or stream sizes, leaving another outer-only terminal.",
+      "detection_method": "The consumed attempt record contained node_fixture_exit_nonzero but no process envelope.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-002-consumed.json",
+        "docs/ariadne-agent-error-correction-register-revision-605.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.process_exit_branch_precedes_content_free_envelope_retention",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Record numeric exit, byte counts and digests before semantic admission in attempt 003.",
+        "prevention_control": "Every governed child process writes a content-free envelope before success or failure interpretation.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-process-envelope.json"
+        ]
+      },
+      "incident_id": "AER-0885",
+      "attempt_id": "clock-be1f5fba9336ebe0ee1e6eaf",
+      "origin": "harness",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preset-mount-sanitizer-windows-child-environment",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_node_fixture",
+      "stage": "deterministic_verification",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "A local Windows Node fixture receives the minimum operating-system environment needed by the resolved executable without inheriting ambient secrets.",
+      "observed_error": "All three sanitizer fixture processes used env={}; attempt 003 returned exit 134 with zero stdout and 715 stderr bytes.",
+      "detection_method": "Source comparison with the accepted repository Node fixture convention and the typed attempt-003 process envelope.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-launch-environment-diagnosis.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-process-envelope.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.windows_node_child_launched_with_completely_empty_environment",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Freeze a separate one-process successor that supplies only SystemRoot, WINDIR, ComSpec, TEMP and TMP while preserving sanitizer/wrapper hashes.",
+        "prevention_control": "Windows child launch envelopes use an explicitly reviewed minimum-key projection and never an unexplained empty or full ambient environment.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-threat-model-delta.md"
+        ]
+      },
+      "incident_id": "AER-0886",
+      "attempt_id": "clock-d30227b158065c5b43d97738",
+      "origin": "harness",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preset-mount-sanitizer-successor-plan-phrase",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Negative-evidence tests bind exact authored plan language instead of inventing equivalent prose.",
+      "observed_error": "The first test asserted an invented phrase, Exactly one successor process, rather than the plan's authored wording.",
+      "detection_method": "Pytest rejected the mismatch during closeout verification.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py",
+        "docs/ariadne-agent-error-correction-register-revision-605.md"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.negative_evidence_test_invents_equivalent_plan_phrase",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the normalized exact phrase one local Node process in this successor.",
+        "prevention_control": "Copy source-owned wording into evidence tests after normalizing only non-semantic whitespace.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_negative_evidence.py"
+        ]
+      },
+      "incident_id": "AER-0887",
+      "attempt_id": "clock-d1e0a796bab00be6d1590303",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preset-mount-sanitizer-closeout-incident-vocabulary",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_check",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Closeout incident observations use only the validator's closed candidate-state, severity, workflow-disposition, category, stage and correction-status vocabularies.",
+      "observed_error": "The first intent used descriptive labels including uncommitted_candidate, committed_failed_candidate and medium outside the closed incident vocabulary.",
+      "detection_method": "Clockwork --check rejected tick_incident_candidate_state before command execution, generation, publication or canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-605.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.closeout_incident_descriptive_labels_outside_closed_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace every descriptive incident label with a validator-enumerated value and record the rejection in the same atomic closeout.",
+        "prevention_control": "Read and copy the live incident enum values before authoring a closeout observation; rely on clockwork --check before command execution or publication.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "docs/ariadne-agent-error-correction-register-revision-605.md"
+        ]
+      },
+      "incident_id": "AER-0888",
+      "attempt_id": "clock-ede4aea79ad63aaacc85a6d5",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preset-mount-sanitizer-prospective-register-revision",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_check",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The prospective register revision is the canonical predecessor revision plus one atomic projection, independent of the number of incident observations in that projection.",
+      "observed_error": "After adding the eighth observation, the intent advanced the prospective register path from revision 605 to 606 instead of retaining revision 605 and increasing only the incident count.",
+      "detection_method": "Clockwork --check rejected tick_incident_revision_path before command execution, generation, publication or canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-605.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.prospective_register_revision_advanced_per_incident_not_per_projection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep the prospective register at revision 605 and advance the incident count from 880 by the exact nine observations.",
+        "prevention_control": "Derive revision as canonical revision plus one projection and derive incident count separately as canonical count plus observation count.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "docs/ariadne-agent-error-correction-register-revision-605.md"
+        ]
+      },
+      "incident_id": "AER-0889",
+      "attempt_id": "clock-2925692e1dc4bf6fd3857645",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preset-mount-sanitizer-candidate-commit-sequence",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_git",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A failing cached-diff whitespace check stops the command sequence before commit.",
+      "observed_error": "The PowerShell sequence did not inspect LASTEXITCODE after git diff --cached --check, so four EOF blank-line warnings were followed by a local commit.",
+      "detection_method": "The command output showed the four warnings immediately before the successful local commit summary.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-605.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "agent.cached_diff_check_failure_not_short_circuiting_local_commit",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the four EOF blank lines in an explicit-path follow-up commit and guard the final whitespace check exit before push.",
+        "prevention_control": "Every multi-command verification/commit or verification/push sequence checks LASTEXITCODE and exits before the state-changing command.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-605.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0890",
+      "attempt_id": "clock-510630d8e2ad8ea25f5a51be",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

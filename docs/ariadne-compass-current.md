@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Continue the bounded control sequence with a pure source-bound safe-subcoordinate sanitizer before any runner bridge or native attempt.
+> Continue with one exact five-variable Windows minimum-environment fixture process while preserving the sanitizer and wrapper byte-for-byte.
 
 ## North star
 
@@ -532,24 +532,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The safe terminal bridge converted an opaque factory failure into one exact closed preset-mount coordinate without raw-error retention or downstream activity. Lineage parent: `deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal`.
 258. **Give the orchestrator substantial, typed control over native DeepSeek worker execution for reliable Raisa development — Preset-mount source-coordinate reconciliation rehearsal**
    The opaque outer preset-mount stop is now bounded to six exact source-reachable coordinates without spending another native process or retaining the raw exception. Lineage parent: `deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal`.
+259. **Give the orchestrator substantial, typed control over native DeepSeek worker execution for reliable Raisa development — Preset-mount safe-subcoordinate sanitizer rehearsal**
+   An opaque local fixture abort is now a content-free typed process reading, while the sanitizer correctly remains unadmitted. Lineage parent: `deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal`.
 
 ## Current position
 
-**Construct a closed, non-leaking error reduction gear before another native attempt — Preset-mount source-coordinate reconciliation rehearsal**
+**Test the narrowest remaining local launch-envelope difference without widening worker authority — Preset-mount safe-subcoordinate sanitizer rehearsal**
 
-**Why this proof came next:** The exact pinned source leaves six reachable mount coordinates, while the accepted outer bridge deliberately discarded path-bearing raw detail.
+**Why this proof came next:** All three consumed fixture processes used env={}, unlike the accepted repository Node fixture convention; attempt 003 made that divergence safely measurable but did not prove causation.
 
-A pure sanitizer will reduce exact in-memory rc.7 error shapes to one closed code and null detail using only fixed synthetic fixtures.
+One successor will provide only five required Windows runtime variables to the unchanged sanitizer/wrapper and record another content-free process reading.
 
 ### What this unlocks
 
-- A later separately frozen runner bridge that can retain one safe mount subcoordinate.
-- A narrowly selected repair only after an exact safe coordinate is observed.
+- Sanitizer admission if and only if the exact fifteen-result vector passes.
+- A later separately frozen runner bridge only after sanitizer admission.
 
 ### What it does not solve
 
-- No native Harness process, worker turn, model/provider request or coding-performance evidence.
-- No runner connection, repair, retry, target, product/data action, production, release, Pages or protected integration.
+- No DeepSeek Harness process, worker turn, model/provider request or coding-performance evidence.
+- No causal proof until the one-process result is observed.
+- No product/data action, production, release, Pages or protected integration.
 
 ## Continuity and authority
 
@@ -1298,7 +1301,9 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md`
-- `docs/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-plan.md`
+- `docs/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-closeout.md`
+- `docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-launch-environment-diagnosis.md`
+- `docs/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-plan.md`
 - `docs/deepseek-native-harness-provider-free-preterminal-observable-composition-recovery-boot-closeout.md`
 - `docs/deepseek-native-harness-provider-free-proof-module-relative-specifier-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-rebound-future-runner-agent-creation-boundary-rehearsal-closeout.md`
@@ -1721,7 +1726,7 @@ Prerequisites:
 - `docs/security/bernie-reception-one-structured-source-language-threat-model-delta.md`
 - `docs/security/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-threat-model-delta.md`
 - `docs/security/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-threat-model-delta.md`
-- `docs/security/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-threat-model-delta.md`
+- `docs/security/deepseek-native-harness-provider-free-preset-mount-sanitizer-windows-minimum-environment-recovery-threat-model-delta.md`
 - `docs/security/dependabot-alert-17-triage-2026-08-01.md`
 - `docs/security/dependabot-alerts-8-15-triage-2026-08-01.md`
 - `docs/security/emr4-model-required-bureau-a3-b3-request-contract-recovery-threat-model-delta.md`
@@ -2706,6 +2711,7 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery/provider-free-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/preset-mount-source-coordinate-interpretation.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/safe-terminal-bridge-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-process-envelope.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal/source-coordinate-reconciliation-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal/source-coordinate-reconciliation-report.md`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preterminal-activation-observability-recovery/provider-free-preterminal-observability-recovery-evidence.json`
@@ -3702,4 +3708,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 363; continuity graph revision 381._
+_Compass map revision 364; continuity graph revision 382._
