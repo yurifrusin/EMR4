@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.pushover_closeout_receipt.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-source-coordinate-reconciliation-rehearsal",
+  "sent_at": "2026-08-22T05:00:40.1061998+10:00",
+  "status": "passed",
+  "provider_status": 1,
+  "request": "477547c7-f27a-4ccd-9386-379b189f75c1",
+  "continuing": true,
+  "next_operation": "deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal",
+  "non_phi": true
+}
