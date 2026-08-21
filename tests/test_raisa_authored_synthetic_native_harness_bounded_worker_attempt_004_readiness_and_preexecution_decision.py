@@ -93,3 +93,31 @@ def test_stored_evidence_schema_and_report_are_bound() -> None:
     assert value["decision"] == "ready_for_one_separately_checkpointed_occupied_attempt_004"
     assert value["clockwork_reading"]["lease_sequence"] == 103
     assert value["components"]["package_version"] == "0.1.0-rc.7"
+
+
+def test_closeout_documents_bind_machine_resolved_full_commits_and_timestamps() -> None:
+    paths = (
+        subject.REPO_ROOT / "docs" / f"{subject.OPERATION_ID}-closeout.md",
+        subject.REPO_ROOT
+        / "orchestration"
+        / "agent_inbox"
+        / "codex"
+        / "raisa-native-harness-attempt-004-readiness-sol-acceptance.md",
+        subject.REPO_ROOT
+        / "orchestration"
+        / "human_inbox"
+        / "yuri"
+        / "2026-08-21--native-harness-attempt-004-readiness.md",
+    )
+    candidate = subject.git("rev-parse", "0ef8ab13")
+    binding = subject.git("rev-parse", "a96448a1")
+    assert len(candidate) == len(binding) == 40
+    for path in paths:
+        text = path.read_text(encoding="utf-8")
+        assert "Date: 2026-08-21" in text
+        assert "Timestamp: 2026-08-21T" in text
+        assert "+10:00" in text
+    assert candidate in paths[0].read_text(encoding="utf-8")
+    assert binding in paths[0].read_text(encoding="utf-8")
+    assert candidate in paths[1].read_text(encoding="utf-8")
+    assert binding in paths[1].read_text(encoding="utf-8")
