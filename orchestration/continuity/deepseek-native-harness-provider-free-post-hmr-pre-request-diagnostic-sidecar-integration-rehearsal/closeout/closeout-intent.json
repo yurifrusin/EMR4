@@ -1,0 +1,397 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
+    "title": "DeepSeek native Harness provider-free post-HMR diagnostic-sidecar integration",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-21T21:40:25.0822453+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal",
+      "title": "Native Harness future-runner sidecar and broker-zero join",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the bounded provider-free native-Harness control sequence.",
+          "No Node, Harness, broker, worker, model, provider, network, database, product, deployment, Pages or protected-ref authority opened.",
+          "The accepted runner and every consumed attempt remain byte-immutable."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-complete-future-runner-derivation",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/integration-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact future runner with seven code-owned stages, one helper write, identical rethrow and a diagnostic interval closed before flush."
+        },
+        {
+          "id": "accept-independent-broker-zero-join",
+          "source": "orchestration_harness/native_post_hmr_pre_request_controller.py",
+          "status": "accepted",
+          "summary": "Accept pre-request only from a canonical identity-bound sidecar plus a separately canonical all-zero five-counter broker reading."
+        },
+        {
+          "id": "reject-runtime-and-readiness-overclaim",
+          "source": "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md",
+          "status": "rejected",
+          "summary": "Reject claims about native loading, real broker counters, DeepSeek performance, occupied execution or Harness readiness."
+        },
+        {
+          "id": "accept-corrected-workflow-readings",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/closeout/closeout-intent.json",
+          "status": "accepted",
+          "summary": "Accept five corrected workflow observations and their typed prevention controls with none open."
+        }
+      ],
+      "claim_scope": [
+        "The byte-exact accepted attempt-005 runner validates before any transformation.",
+        "The complete future runner adds only the closed diagnostic import, stages, causes, guarded write and interval closure.",
+        "A canonical sidecar alone cannot establish a pre-request coordinate.",
+        "Every broker counter is an exact non-negative integer and booleans are rejected.",
+        "Invalid broker evidence rejects the join while invalid or absent sidecar evidence preserves the generic terminal.",
+        "No prohibited process, request, raw stream, product, data or protected-ref effect occurred."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/integration-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/integration-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-sidecar-integration-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-pre-request-sidecar-integration-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-sidecar-integration-candidate-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_agents_handover_archive.py",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/native_post_hmr_pre_request_controller.py",
+          "scripts/deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-597.md",
+          "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-post-hmr-sidecar-integration.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The accepted future runner and helper are not materialised in a native Harness attempt tree.",
+        "No real broker counter source or controller terminal has been exercised.",
+        "No occupied Harness attempt, provider request or DeepSeek behavior is authorised or proved.",
+        "Product, data, production, deployment, release, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Make DeepSeek native-Harness worker execution bounded, traceable and governable enough for Raisa development",
+      "outcome": "A future runner and controller now form a deterministic two-gauge join that distinguishes supported pre-request failure from unresolved request-boundary and generic terminal states.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/integration-evidence.json",
+        "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Materialise the exact deterministic gears before any further occupied native-Harness attempt",
+      "why_now": "The source transformation and evidence join pass; byte-exact disposable materialisation and controller-terminal assembly are the remaining provider-free prerequisites.",
+      "outcome": "A future-attempt fixture will contain the exact accepted runner, helper and controller bindings and prove closed terminal selection without executing the subject stack.",
+      "unlocks": [
+        "One inspectable future native-attempt bundle with exact source identities.",
+        "A later occupied-attempt decision whose terminal path is already mechanically assembled and verified."
+      ],
+      "does_not_solve": [
+        "No Node, Harness, broker, worker, model or provider execution.",
+        "No DeepSeek performance evidence or native Harness worker readiness.",
+        "No product, data, production, deployment or protected integration."
+      ],
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/efficacy-reading.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-sidecar-integration-sol-acceptance.md"
+      ],
+      "orientation_statement": "Materialise and verify the typed native-Harness control gears provider-free; do not launch an occupied attempt."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal",
+      "active_tranche": "DeepSeek native Harness provider-free future-runner materialisation and controller-terminal fixture rehearsal",
+      "objective": "Materialise the exact accepted future runner and generated diagnostic helper in a disposable future-attempt fixture, bind the controller and canonical broker-reading paths, and prove complete terminal-selection assembly without Node, Harness, broker, worker, model or provider activity.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and extended authority for the bounded native-Harness control sequence.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_future_attempt_materialisation_and_terminal_assembly_contract"
+    },
+    "incidents": [
+      {
+        "incident_id": "premature-test-count-statement",
+        "source_id": "sidecar-predecessor-test-count-001",
+        "peers": []
+      },
+      {
+        "incident_id": "diagnostic-module-binding-substitution",
+        "source_id": "sidecar-diagnostic-binding-001",
+        "peers": []
+      },
+      {
+        "incident_id": "manual-git-abbreviation-expansion",
+        "source_id": "sidecar-git-identity-commentary-001",
+        "peers": []
+      },
+      {
+        "incident_id": "derived-register-forward-reference",
+        "source_id": "sidecar-clockwork-forward-reference-001",
+        "peers": []
+      },
+      {
+        "incident_id": "incident-revision-intake-omission",
+        "source_id": "sidecar-incident-revision-intake-001",
+        "peers": []
+      }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "sidecar_generated_evidence",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal", "--check"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "sidecar_focused_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "sidecar_predecessor_regressions",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_provider_free_custom_runner_pre_request_failure_coordinate_diagnosis.py", "tests/test_deepseek_native_harness_pre_hmr_startup_terminal.py", "tests/test_deepseek_native_harness_unclassified_pre_hmr_structured_diagnostic_seam.py", "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_005_postterminal.py", "tests/test_ariadne_orchestrator_preflight.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "sidecar_governance_regressions",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_ariadne_active_operation_latch_continuity.py", "tests/test_agents_handover_archive.py", "tests/test_agents_acceptance_index.py", "tests/test_current_baton_consistency.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "sidecar_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "orchestration_harness/native_post_hmr_pre_request_controller.py", "scripts/deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "sidecar_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "orchestration_harness/native_post_hmr_pre_request_controller.py", "scripts/deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-threat-model-delta.md",
+      "orchestration_harness/native_post_hmr_pre_request_controller.py",
+      "scripts/deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/integration-evidence.json",
+      "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py",
+      "docs/ariadne-agent-error-correction-register-revision-597.md",
+      "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-post-hmr-sidecar-integration-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-21--deepseek-native-harness-post-hmr-sidecar-integration.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_future_runner_materialisation_and_controller_terminal_fixture_only",
+    "accepted_attempt_005_runner_terminal_and_all_consumed_attempt_evidence_remain_byte_immutable",
+    "materialised_future_runner_and_helper_must_match_accepted_sha256_bindings",
+    "closed_stage_cause_error_vocabulary_and_full_git_oid_contract_remain_exact",
+    "controller_may_ingest_only_canonical_identity_bound_sidecar_and_broker_bytes",
+    "pre_request_conclusion_requires_independent_broker_zero_reading",
+    "no_node_native_harness_broker_worker_model_provider_process_or_request",
+    "no_occupied_attempt_retry_resume_fallback_or_second_worker",
+    "no_raw_error_message_stack_code_path_cause_stream_session_prompt_response_or_credential",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "exact_test_counts_from_completed_machine_output_only",
+    "semantic_source_bindings_use_separate_typed_fields_not_adjacent_hash_copy",
+    "no_commit_identity_statement_without_current_machine_snapshot_copy",
+    "no_closeout_input_evidence_reference_to_not_yet_generated_derived_register",
+    "incident_revision_intake_must_preexist_clockwork_check_or_be_clockwork_rendered",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "sidecar-predecessor-test-count-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-sidecar-integration",
+      "role": "orchestrator",
+      "resource_id": "completed-test-output",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Exact test counts must be stated only after mechanically collecting the completed command output.",
+      "observed_error": "The predecessor closeout packet was called 555 governance cases in commentary before completed output established 548; the statement was immediately corrected and did not alter evidence.",
+      "detection_method": "The completed provider-free pytest output and accepted predecessor closeout reported the exact 548-case reading.",
+      "evidence_paths": ["docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-closeout.md", "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-plan.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.test_count_stated_before_completed_machine_output",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Correct the statement and bind future exact test counts only from a completed machine collection or execution result.",
+        "prevention_control": "The successor latch carries exact_test_counts_from_completed_machine_output_only as an exact typed boundary.",
+        "evidence_paths": ["docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md"]
+      },
+      "baton_summary": "records the premature governance test-count statement and completed-output-only correction."
+    },
+    {
+      "attempt_key": "sidecar-diagnostic-binding-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-sidecar-integration",
+      "role": "implementer",
+      "resource_id": "sidecar-source-binding-contract",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Each semantically distinct source binding must contain the hash of the exact named source rather than a nearby generated artifact.",
+      "observed_error": "The first contract placed the generated diagnostic-helper hash in accepted_diagnostic_module_sha256, so the evidence generator rejected source_binding_mismatch before writing canonical evidence.",
+      "detection_method": "A direct machine hash roster isolated the accepted runner, diagnostic module, controller, future runner and generated helper as five separate bindings.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/contract.json", "scripts/deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py"],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.adjacent_source_hash_bound_to_wrong_semantic_field",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the three affected schema constants with the exact diagnostic-module hash and rerun write plus idempotent check.",
+        "prevention_control": "The successor latch separates semantic source-binding fields and requires an exact machine-generated hash roster before schema freeze.",
+        "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/integration-evidence.json", "tests/test_deepseek_native_harness_provider_free_post_hmr_pre_request_diagnostic_sidecar_integration_rehearsal.py"]
+      },
+      "baton_summary": "records the rejected diagnostic-module binding substitution and exact typed hash-roster repair."
+    },
+    {
+      "attempt_key": "sidecar-git-identity-commentary-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-sidecar-integration",
+      "role": "orchestrator",
+      "resource_id": "git-object-identity-commentary",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "A commit identity may be stated only by copying a current machine-resolved 40-character object ID; an abbreviated display must never be manually expanded.",
+      "observed_error": "After candidate publication the orchestrator manually expanded the displayed 3a16f5a0 abbreviation into an incorrect 40-character value in commentary.",
+      "detection_method": "An immediate git rev-parse snapshot returned the actual candidate 3a16f5a00e50259caf993decc67719173348dc0a and confirmed task-origin alignment and unchanged protected refs.",
+      "evidence_paths": ["docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md", "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/closeout/closeout-intent.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_git_abbreviation_expansion_without_snapshot",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Correct the commentary from fresh git rev-parse output and prohibit any further manually expanded commit identity.",
+        "prevention_control": "The successor latch carries no_commit_identity_statement_without_current_machine_snapshot_copy as an exact typed boundary; clockwork-derived records remain the authority for closeout identities.",
+        "evidence_paths": ["docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md", "orchestration/continuity/ariadne-active-operation-latch/current.json"]
+      },
+      "baton_summary": "records the incorrect manual Git abbreviation expansion and machine-snapshot-only identity control."
+    },
+    {
+      "attempt_key": "sidecar-clockwork-forward-reference-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-sidecar-integration",
+      "role": "orchestrator",
+      "resource_id": "clockwork-prospective-graph",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A clockwork input decision may cite only evidence already present before preparation; a register revision produced by the same tick is a derived output, not prospective input evidence.",
+      "observed_error": "The first closeout intent cited docs/ariadne-agent-error-correction-register-revision-597.md as a decision source before that derived register revision existed.",
+      "detection_method": "The read-only clockwork check rejected tick_transaction_prepare with a current-position evidence_not_found result before command execution or canonical writes.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/closeout/closeout-intent.json", "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_input_forward_referenced_derived_register_output",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the prospective decision to the existing closeout intent and leave the generated register only in post-reduction acceptance paths.",
+        "prevention_control": "The successor latch prohibits closeout input evidence from referring to a not-yet-generated derived register revision.",
+        "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/closeout/closeout-intent.json"]
+      },
+      "baton_summary": "records the rejected derived-register forward reference and existing-input-evidence correction."
+    },
+    {
+      "attempt_key": "sidecar-incident-revision-intake-001",
+      "observed_on": "2026-08-21",
+      "tranche": "native-harness-sidecar-integration",
+      "role": "orchestrator",
+      "resource_id": "clockwork-incident-revision-intake",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "When a closeout supplies incident observations, its exact human-readable prospective revision note must exist before clockwork preparation unless the writer itself renders that intake artifact.",
+      "observed_error": "The corrected clockwork intent was checked before docs/ariadne-agent-error-correction-register-revision-597.md had been prepared.",
+      "detection_method": "The read-only clockwork gate rejected tick_incident_revision_reading before command execution or canonical writes.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/closeout/closeout-intent.json", "docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_incident_revision_intake_not_prepared_before_check",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Prepare revision 597 with the exact prospective revision, population, incident IDs, open count and ordered incident headings before rerunning the clockwork.",
+        "prevention_control": "The successor latch requires the intake note to preexist a clockwork check unless a future clockwork renderer makes it a deterministic output.",
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-597.md", "orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal/closeout/closeout-intent.json"]
+      },
+      "baton_summary": "records the missing incident-revision intake note and pre-check/rendered-artifact control."
+    }
+  ]
+}
