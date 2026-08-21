@@ -6,8 +6,8 @@ Timestamp: 2026-08-21T11:28:18.5222638+10:00 (Australia/Brisbane)
 
 <!-- ariadne-agent-error-register-reading
 revision: 583
-incident_count: 753
-new_incident_ids: AER-0753
+incident_count: 754
+new_incident_ids: AER-0753,AER-0754
 open_incident_count: 0
 -->
 
@@ -25,4 +25,16 @@ requirements.
 The initial focused test correctly rejected the missing token, after which the
 unchanged candidate passed. No Harness, worker, model or provider process was
 started; no historical evidence, product surface, data or protected ref moved.
-The incident is corrected and none remains open.
+
+## AER-0754 — closeout manifest supplied two node relationships
+
+The first read-only clockwork check supplied both the controlling `builds_on`
+parent and a descriptive repair relation. The transactional manifest contract
+admits exactly one node relationship, so clockwork rejected with
+`node_relationship_invalid` before transaction preparation, command execution
+or publication. The intent now retains only the controller-convergence parent;
+the relationship to the older recovery remains explicit in prose and evidence.
+Future closeout construction checks relationship cardinality before its first
+clockwork reading.
+
+Both incidents are corrected or contained and none remains open.

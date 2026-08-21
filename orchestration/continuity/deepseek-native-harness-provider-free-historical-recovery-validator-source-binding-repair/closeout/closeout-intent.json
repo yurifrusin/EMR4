@@ -14,10 +14,6 @@
         {
           "node_id": "raisa-provider-free-authored-synthetic-native-harness-structured-diagnostic-bounded-worker-controller-convergence-rehearsal",
           "relation": "builds_on"
-        },
-        {
-          "node_id": "deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery",
-          "relation": "repairs_validation_of"
         }
       ],
       "authority": {
@@ -58,6 +54,12 @@
           "source": "docs/ariadne-agent-error-correction-register-revision-583.md",
           "status": "accepted",
           "summary": "Bind the distinction between nine local Git reads and zero Harness/provider activity, plus the exact ordinary-practice token."
+        },
+        {
+          "id": "accept-contained-single-parent-manifest-correction",
+          "source": "docs/ariadne-agent-error-correction-register-revision-583.md",
+          "status": "accepted",
+          "summary": "Retain only the one admitted builds_on relationship after the first read-only clockwork check rejected a two-parent manifest."
         }
       ],
       "claim_scope": [
@@ -149,6 +151,11 @@
       {
         "incident_id": "plan-local-git-subprocess-boundary-imprecise",
         "source_id": "historical-source-binding-plan-001",
+        "peers": []
+      },
+      {
+        "incident_id": "closeout-manifest-supplied-two-relationships",
+        "source_id": "historical-source-binding-closeout-check-001",
         "peers": []
       }
     ],
@@ -280,6 +287,38 @@
         ]
       },
       "baton_summary": "records the contained local-Git boundary and exact-authority-token wording correction."
+    },
+    {
+      "attempt_key": "historical-source-binding-closeout-two-relationships-001",
+      "observed_on": "2026-08-21",
+      "tranche": "historical-recovery-source-binding-repair",
+      "role": "orchestrator",
+      "resource_id": "transactional-closeout-node-relationship-cardinality",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A transactional closeout node must declare exactly one admitted parent relationship.",
+      "observed_error": "The first read-only check supplied both a builds_on relation and a descriptive repairs-validation relation, but the manifest contract admits exactly one relationship.",
+      "detection_method": "Clockwork rejected with tick_transaction_manifest and node_relationship_invalid before transaction preparation, commands or publication.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.transactional_closeout_supplied_two_node_relationships",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Retain the single controller-convergence builds_on parent and preserve the older recovery relation in prose and evidence rather than the closed relationship array.",
+        "prevention_control": "Validate closeout node relationship cardinality as exactly one before the first clockwork check.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the read-only two-relationship rejection and exact single-parent correction."
     }
   ]
 }

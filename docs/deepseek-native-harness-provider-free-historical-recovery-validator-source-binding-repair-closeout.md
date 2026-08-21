@@ -75,6 +75,11 @@ repeat the exact ordinary-practice token. Both were corrected before candidate
 acceptance; a focused plan test now binds the distinction. No Harness, provider,
 product or protected effect occurred.
 
+AER-0754 records the first read-only clockwork check's rejection of two node
+relationships where the manifest admits exactly one. The intent now retains
+the controlling controller-convergence parent; no transaction, command or
+publication began before rejection.
+
 ## Boundaries and next step
 
 This result proves historical validator stability only. It does not identify
