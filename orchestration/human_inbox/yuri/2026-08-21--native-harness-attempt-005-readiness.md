@@ -36,7 +36,8 @@ Decision:
   ran during it;
 - the readiness regression now proves non-reuse from exact generation-and-lease
   state after rollback;
-- AER-0810 through AER-0819 contained; 819 total, none open.
+- AER-0810 through AER-0820 contained in register revision 594; 820 total,
+  none open.
 
 Still closed: occupied execution until its new checkpoint; retries, resumes,
 fallbacks and second workers; ordinary-practice/product/data/runtime/

@@ -101,6 +101,13 @@
       "count": 1,
       "outcome": "read_only_clockwork_check_rejected_with_zero_publication",
       "correction": "Use admitted closeout and canonical-state values and validate the whole incident-bearing intent before commit."
+    },
+    {
+      "incident_id": "AER-0820",
+      "coordinate": "clockwork_incident_register_revision_projection",
+      "count": 1,
+      "outcome": "read_only_clockwork_check_rejected_with_zero_publication",
+      "correction": "Use the machine-projected next register revision 594 for the complete incident batch."
     }
   ],
   "activity": {

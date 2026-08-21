@@ -51,7 +51,9 @@ now uses the subject's exported clockwork root. The widened rerun then caught
 one stale paired 9/75 count assertion after the evidence advanced to 10/76.
 The next dry check rejected descriptive incident stage/state labels outside the
 register's closed vocabulary; they are now schema-admitted before source
-freeze. Revision 599 records AER-0810 through AER-0819; all 819 incidents are
+freeze. A subsequent dry check caught an incorrect attempt to advance the
+register revision once per new observation: this single tick correctly remains
+revision 594. It records AER-0810 through AER-0820; all 820 incidents are
 contained or corrected and none are open. No attempt-005 process or provider
 request ran.
 
