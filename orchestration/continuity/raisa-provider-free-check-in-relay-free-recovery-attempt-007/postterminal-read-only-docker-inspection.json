@@ -1,0 +1,27 @@
+{
+  "schema_version": "emr4.check-in-relay-free-recovery-attempt-007.postterminal-docker-inspection.v1",
+  "status": "owned_docker_resources_absent",
+  "observed_at": "2026-08-23T03:27:05.0290590+10:00",
+  "source_commit": "b7c37a76c41d399c4b198d3ab6b526c5510b434b",
+  "inspection_only": true,
+  "occupied_execution_count": 1,
+  "automatic_retry_count": 0,
+  "wrapper_exit_code": 1,
+  "terminal": {
+    "result": "failed_closed",
+    "stage": "redaction",
+    "code": "forbidden_field",
+    "failure_sha256": "86e5e1342eb54e062e35d73390ebceb141d097d03e180e4fe3c0ed64b465f422",
+    "execution_envelope_sha256": "3338c58054dea96b3845827dacfe184889ee328e5a4463966464b560d0a2c2c5",
+    "transaction_attestation_present": false,
+    "success_evidence_present": false,
+    "envelope_cleanup_status": "not_started"
+  },
+  "residue": {
+    "label_filter": "emr4.harness=check-in-relay-free-recovery-v1",
+    "container_ids": [],
+    "network_ids": [],
+    "matching_resource_count": 0
+  },
+  "claim_boundary": "read_only_owned_docker_resource_absence_only_role_and_transaction_acceptance_unproved"
+}

@@ -4,11 +4,11 @@
   "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in relay-free rollback/unknown-commit recovery attempt 007",
   "objective": "Freeze and checkpoint exactly one provider-free disposable PostgreSQL attempt 007 against the accepted repaired start/attach source, then execute at most once to prove rollback and unknown-terminal-response authoritative recovery or preserve one immutable failed-closed terminal.",
   "status": "in_progress",
-  "source_head": "8814d4b5d62885f8f8eca4cf02fe5a49ccdc013b",
+  "source_head": "b7c37a76c41d399c4b198d3ab6b526c5510b434b",
   "authority_source": "Yuri's standing uninterrupted-development authority and the accepted exact one-token start-argv repair.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_attempt_007_plan_contract_and_one_run_checkpoint",
+    "completed_stage": "Attempt-007 plan and wrapper are committed and origin-aligned. Exact repaired-harness and predecessor hashes, provider-free source/governance tests, hostile static gates, Ruff and compilation pass. Read-only Docker inspection matches the cached image with zero labelled residue and no object or database creation. The fresh five-source receipt passes with all three parallel lanes declined for the serial lifecycle.",
+    "next_executable_stage": "execute_exactly_one_attempt_007_wrapper_run_then_stop_without_retry_resume_or_fallback_and_preserve_its_immutable_terminal",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
