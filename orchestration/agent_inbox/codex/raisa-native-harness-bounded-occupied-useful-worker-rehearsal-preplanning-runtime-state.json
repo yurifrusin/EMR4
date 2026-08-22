@@ -1,7 +1,7 @@
 {
   "schema_version": "ariadne.orchestrator_runtime_state.v1",
-  "continuation_event": "pre_commit",
-  "planned_action": "commit_only_the_explicitly_staged_frozen_useful_worker_plan_threat_contract_schemas_runner_controller_tests_and_fresh_ariadne_receipts_before_any_native_harness_or_provider_process",
+  "continuation_event": "pre_push",
+  "planned_action": "push_only_the_current_exact_task_branch_useful_worker_control_candidate_after_fresh_fetch_and_protected_ref_verification_before_any_native_harness_or_provider_process",
   "context_health": {
     "agent_contexts": [
       {
