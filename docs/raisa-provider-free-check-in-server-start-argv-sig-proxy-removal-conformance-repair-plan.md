@@ -60,7 +60,9 @@ Exact conformance bindings and tests may change only where required to:
   `cwd=ROOT` remain exact;
 - prove each credential line is encoded, written and flushed while stdin stays
   open until the existing sole teardown owner closes it;
-- prove normal control and cleanup do not synthesize or send a host signal;
+- prove normal control sends no host signal, while cleanup retains only the
+  existing bounded stdin-close, attachment terminate/wait/kill sequence where
+  captured-container termination is already the intended teardown outcome;
 - record that Docker's advertised `--attach` default forwards signals while
   the harness adds no unsupported signal option; and
 - prove the existing ownership-checked teardown still terminates/waits for the
@@ -94,7 +96,8 @@ One source-owned repair contract and attestation schema must close:
    sig-proxy;
 4. unchanged Popen stream/cwd/shell relations;
 5. credential write/flush and open-stdin lifecycle;
-6. default signal-forwarding observation with zero harness-generated signals;
+6. default signal-forwarding observation, zero normal-path signals and only
+   the existing bounded teardown termination sequence;
 7. one sole teardown owner and exact attachment/resource cleanup relations;
 8. historical diagnosis immutability and source-commit conformance;
 9. zero Docker object, PostgreSQL, database, provider, product and ordinary

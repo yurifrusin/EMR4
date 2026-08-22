@@ -22,7 +22,7 @@ protected-ref surface.
 | Threat | Control | Fail-closed result |
 |---|---|---|
 | Repair changes more than the diagnosed token | AST and exact-diff test admits one list-element deletion only | Reject candidate |
-| Removing signal option silently changes cleanup authority | Bind Docker attach help semantics, zero harness-generated signals and the unchanged sole teardown owner through static/fake tests | Reject repair |
+| Removing signal option silently changes cleanup authority | Bind Docker attach help semantics, zero normal-path signals and the unchanged bounded stdin-close plus terminate/wait/kill teardown owner through static/fake tests | Reject repair |
 | Stdin closes early or credentials are buffered | Deterministic Popen stream records exact write/flush order and open-until-teardown state | Reject repair |
 | Historical diagnosis is weakened to fit new source | Verify old contract/evidence against exact historical Git source; current closed diagnostic refuses source drift | Reject historical reclassification |
 | Test fakes call real Docker or PostgreSQL | Dependency injection plus zero-process counters and fixed metadata-only command manifest | Stop before process |
