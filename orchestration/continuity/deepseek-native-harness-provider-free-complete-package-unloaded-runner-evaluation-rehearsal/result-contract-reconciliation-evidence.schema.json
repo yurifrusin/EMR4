@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-complete-runner-result-contract-reconciliation.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "parent_operation_id", "result",
+    "git_binding", "implementation_bindings", "immutable_parent_result",
+    "reconciliation", "fixture_result", "runner_sidecar",
+    "process_boundary", "cleanup", "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_complete_runner_result_contract_reconciliation.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-complete-runner-result-contract-reconciliation"},
+    "parent_operation_id": {"const": "deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal"},
+    "result": {"const": "complete_package_unloaded_runner_evaluation_reconciled_pass"},
+    "git_binding": {"type": "object"},
+    "implementation_bindings": {
+      "type": "object", "minProperties": 8, "maxProperties": 8,
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "immutable_parent_result": {"const": "complete_runner_result_rejected"},
+    "reconciliation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["fixture_wire", "sidecar_wire", "controller_defect"],
+      "properties": {
+        "fixture_wire": {"$ref": "#/$defs/wire"},
+        "sidecar_wire": {"$ref": "#/$defs/wire"},
+        "controller_defect": {"type": "object"}
+      }
+    },
+    "fixture_result": {"type": "object"},
+    "runner_sidecar": {"type": "object", "minProperties": 39, "maxProperties": 39},
+    "process_boundary": {"type": "object"},
+    "cleanup": {"type": "object"},
+    "claim_boundary": {"type": "object"}
+  },
+  "$defs": {
+    "wire": {
+      "type": "object", "additionalProperties": false,
+      "required": ["bytes", "sha256", "declared_key_order", "content_retained_from_process"],
+      "properties": {
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "declared_key_order": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "content_retained_from_process": {"const": false}
+      }
+    }
+  }
+}
