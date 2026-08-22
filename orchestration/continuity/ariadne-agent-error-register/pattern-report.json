@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 613,
+  "register_revision": 614,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "d90ff0273d4c7e5f676bc4ce59eb3aa0517b7e5241216aae9a4351c0ac6b35c9",
-  "incident_count": 937,
+  "canonical_register_sha256": "d53cb14f09d5032c9c0466215722f35edf187f50ea967db2c362a61ff75d8279",
+  "incident_count": 943,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 495,
       "harness": 67,
-      "operator": 221,
+      "operator": 227,
       "repository": 138,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 95,
       "evidence_misreport": 73,
       "harness_failure": 67,
-      "operator_error": 221,
+      "operator_error": 227,
       "output_contract_violation": 274,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
@@ -28,16 +28,16 @@
     "by_role": {
       "implementer": 64,
       "integration_reviewer": 3,
-      "orchestrator": 807,
+      "orchestrator": 813,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 585,
+      "low": 588,
       "material": 133,
-      "moderate": 219
+      "moderate": 222
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 198,
+      "accepted_candidate_changed": 204,
       "canonical_unchanged": 570,
       "untrusted_partial_worktree": 169
     },
@@ -125,6 +125,7 @@
       "clockwork-authorized-opening-vocabulary::orchestrator": 1,
       "clockwork-canonical-baton-writer::orchestrator": 1,
       "clockwork-canonical-path-staging::orchestrator": 1,
+      "clockwork-closed-rolling-acceptance-label::orchestrator": 1,
       "clockwork-closed-tick-intent-path::orchestrator": 1,
       "clockwork-closeout-incident-observation::orchestrator": 1,
       "clockwork-closeout-transaction-recorded-at::orchestrator": 1,
@@ -140,6 +141,7 @@
       "clockwork-live-tick-intent-schema::orchestrator": 1,
       "clockwork-migration-focused-replay-fixture::orchestrator": 1,
       "clockwork-migration-verifier-command-manifest::orchestrator": 1,
+      "clockwork-next-boundary-literal-floor::orchestrator": 1,
       "clockwork-next-operation-identifier::orchestrator": 1,
       "clockwork-owned-active-latch-projection::orchestrator": 1,
       "clockwork-owned-active-operation-latch::orchestrator": 2,
@@ -152,6 +154,7 @@
       "clockwork-rollback-republication-sequence::orchestrator": 1,
       "clockwork-successor-boundary-projector::orchestrator": 1,
       "clockwork-successor-closed-boundary::orchestrator": 1,
+      "clockwork-successor-closed-surface-boundary-floor::orchestrator": 1,
       "clockwork-successor-protected-boundaries::orchestrator": 2,
       "clockwork-successor-protected-boundary::orchestrator": 1,
       "clockwork-v2-incident-observations::orchestrator": 1,
@@ -169,6 +172,8 @@
       "codex-primary-orchestrator::orchestrator": 348,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
+      "complete-runner-fixture-wire-validator::orchestrator": 1,
+      "complete-runner-focused-contract-expectations::orchestrator": 1,
       "completed-test-output::orchestrator": 1,
       "context-fabric-behavior-result-admission::orchestrator": 1,
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
@@ -362,6 +367,7 @@
       "readiness-clockwork-nonreuse-regression::orchestrator": 1,
       "readiness-test-clockwork-pointer-coordinate::orchestrator": 1,
       "readiness-verification-count-assertions::orchestrator": 1,
+      "reconciliation-parent-schema-exception-boundary::orchestrator": 1,
       "recovery-fixture-wire-order-mock::orchestrator": 1,
       "recovery-plan-semantic-assertion::orchestrator": 1,
       "repair-dead-local-guard::orchestrator": 1,

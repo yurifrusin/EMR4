@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 390,
+  "graph_revision": 391,
   "harvests": [],
   "nodes": [
     {
@@ -30151,9 +30151,131 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal",
+      "title": "Complete package-unloaded runner reconciled pass",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted exactly one provider-free complete package-unloaded runner evaluation.",
+          "The one process is consumed and its post-processing rejection remains immutable; no retry, installed-package load, native Harness, worker, model, provider, product, data, deployment, Pages or protected-ref authority is opened by this acceptance."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-complete-runner-import-closure",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/contract.json",
+          "status": "accepted",
+          "summary": "Accept the exact derived runner, four-edge relative graph, four local package stubs and three admitted Node built-ins in the thirteen-file disposable inventory."
+        },
+        {
+          "id": "preserve-postprocessing-rejection",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/attempt-001-failure-terminal.json",
+          "status": "accepted",
+          "summary": "Preserve the immutable result rejection as an evidence-controller decision after the zero-exit runner process."
+        },
+        {
+          "id": "accept-process-free-wire-reconciliation",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/result-contract-reconciliation-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact declared-order stdout and sidecar preimages because both byte counts and hashes match the immutable envelope with zero retry or reconciliation process."
+        },
+        {
+          "id": "reject-native-worker-provider-claim",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "The result proves no installed-package load, native-Harness boot, occupied DeepSeek turn, provider transport or worker quality."
+        }
+      ],
+      "claim_scope": [
+        "The exact 12950-byte derived runner executed once over the accepted guard bridge and sanitizer graph.",
+        "Exactly four local package stubs and three admitted Node built-ins completed the package-unloaded closure.",
+        "The authored-synthetic private factory path mounted the exact preset, restricted edit glob and read, installed local model selection and observed the exact publication veto.",
+        "The consumed process exited zero with empty stderr, exact declared-order stdout, exact successful runner sidecar and complete disposable cleanup.",
+        "The original result rejection is preserved and attributed to sorted evidence serialization at a declared-order wire boundary.",
+        "The process-free reconciliation matched both frozen preimages exactly and launched no retry or process.",
+        "Installed package, native Harness, worker, model, provider, broker, network, database, Docker and target counts remain zero.",
+        "Native occupied worker behavior and quality remain unproved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-result-contract-reconciliation.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/attempt-001-failure-terminal.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-001-rollback-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-002-rollback-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-614.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--complete-package-unloaded-runner-reconciled-pass.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-pre-verifier-acceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
+          "scripts/deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/attempt-001-process-envelope.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/result-contract-reconciliation-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/result-contract-reconciliation-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-001-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-001-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-001-rollback-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-001-rollback-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-002-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-002-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-002-rollback-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-002-rollback-report.md",
+          "orchestration_harness/governance_clockwork_tick.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The installed DeepSeek Harness package has not loaded the complete correction.",
+        "No occupied native-Harness DeepSeek worker turn or provider request has passed.",
+        "Worker reliability and useful Raisa development quality remain unproved.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T11:54:17.2967942+10:00",
+      "updated_at": "2026-08-22T11:54:17.2967942+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "0918064241c7f10eaeaef76bb371adfcecc4e4f6",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T11:14:21.3006188+10:00"
+  "updated_at": "2026-08-22T11:54:17.2967942+10:00"
 }

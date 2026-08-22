@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Freeze and run one complete package-unloaded runner evaluation; if it passes, advance directly to one bounded occupied useful Raisa worker run.
+> Freeze and run one bounded occupied native-Harness DeepSeek worker on one exact useful low-risk Raisa development package; accept or reject its attributable candidate without retry.
 
 ## North star
 
@@ -550,24 +550,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The first full guard module graph failed closed and exposed one exact missing import-closure invariant without external activity or raw error retention. Lineage parent: `deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal`.
 267. **Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development — Guard-bridge import-closure recovery pass**
    The exact corrected package-unloaded guard graph now passes complete static import closure and all three typed behavior cases in one consumed process. Lineage parent: `deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal`.
+268. **Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development — Complete package-unloaded runner reconciled pass**
+   The complete derived runner now passes its exact package-unloaded composition and prepublication-veto terminal in one consumed process. Lineage parent: `deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal`.
 
 ## Current position
 
-**Evaluate the complete derived runner on the accepted closed graph before returning to occupied native-Harness work — Guard-bridge import-closure recovery pass**
+**Use the accepted complete runner in one bounded occupied native-Harness DeepSeek worker on useful Raisa development work — Complete package-unloaded runner reconciled pass**
 
-**Why this proof came next:** The guard, bridge, sanitizer, local stubs and typed behavior matrix now pass with complete static closure; the complete runner is the next unproved package-unloaded composition boundary.
+**Why this proof came next:** The exact runner, preset-mount guard graph, tool restriction, local model selection, publication veto, terminal sidecar and cleanup have all passed package-unloaded composition; another speculative provider-free checkpoint would add procedure without capability evidence.
 
-One complete package-unloaded runner evaluation will prove the runner's exact composition and terminal contract without loading the installed package, native Harness, worker, model or provider.
+The next tranche freezes one exact low-risk useful Raisa work package and may consume one native-Harness DeepSeek V4 Flash/high worker turn under the accepted broker, runner, zero-retry and cleanup controls.
 
 ### What this unlocks
 
-- A complete package-unloaded runner result rather than isolated guard components.
-- Direct progression to one bounded occupied DeepSeek Harness worker on useful Raisa development work if the runner passes.
+- First evidence that the corrected native Harness can reach and control a useful DeepSeek worker turn.
+- An attributable candidate that Sol can independently adopt or reject.
+- A direct comparison with the earlier opaque Claude Code worker failures.
 
 ### What it does not solve
 
-- No installed-package load, native-Harness boot, DeepSeek turn, model/provider request or worker-quality evidence.
-- No product/data action, ordinary-practice change, production, release, Pages or protected integration.
+- No general Harness or model reliability conclusion from one worker.
+- No unrestricted product/data, ordinary-practice, production or protected-integration authority.
+- No retry, resume, fallback or auxiliary-model authority.
 
 ## Continuity and authority
 
@@ -1306,6 +1310,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-plan.md`
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md`
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md`
+- `docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-closeout.md`
 - `docs/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal-closeout.md`
@@ -2065,6 +2070,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-pre-dispatch-receipt.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-agentic-coding-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-profile-validator-worker-terminal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-predispatch-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-emr4-worker-profile-first-admission-sol-acceptance.md`
@@ -2712,6 +2718,7 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml`
 - `orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/provider-free-complete-composition-native-boot-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/result-contract-reconciliation-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/diagnosis-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/provider-free-effective-tool-guard-evidence.json`
@@ -3739,4 +3746,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 372; continuity graph revision 390._
+_Compass map revision 373; continuity graph revision 391._
