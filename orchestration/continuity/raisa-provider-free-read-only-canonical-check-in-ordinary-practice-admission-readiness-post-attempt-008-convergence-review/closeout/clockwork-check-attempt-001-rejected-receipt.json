@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.governance_clockwork_check_rejection.v1",
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review",
+  "recorded_at": "2026-08-23T08:02:19.7403138+10:00",
+  "status": "revision_required",
+  "canonical_mutation": false,
+  "reason": "tick_baton_compaction_unindexed",
+  "detail": "The first closeout intent supplied a descriptive acceptance label that was outside the hash-bound compaction manifest active-label vocabulary.",
+  "correction": "Reuse the existing Current DeepSeek native Harness acceptance rolling label, preserve this rejected check, record the lapse and rerun the idempotent clockwork check."
+}

@@ -1,0 +1,411 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review",
+    "title": "Post-attempt-008 canonical check-in admission-readiness convergence closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T07:53:10.3671912+10:00",
+    "node": {
+      "id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review",
+      "title": "Post-attempt-008 canonical check-in admission-readiness convergence review",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-008",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing authority permits the dependency-satisfied read-only evidence join and task-branch closeout.",
+          "Only the atomic rollback and unknown-response dimension may change; ordinary-practice admission remains closed.",
+          "DeepSeek, Gemini and native subagents remained declined under the serial provider-free assessment."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-dimension-seven-convergence",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/evidence.json",
+          "status": "accepted",
+          "summary": "Accept dimension 7 as satisfied because all nine exact attempt-008 transaction, isolation, one-shot and cleanup predicates pass."
+        },
+        {
+          "id": "retain-dimension-eleven-and-not-ready-verdict",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/report.md",
+          "status": "accepted",
+          "summary": "Accept the 11/0/1 matrix while retaining the environment/secret-posture gap and not-ready ordinary-practice verdict."
+        },
+        {
+          "id": "accept-read-only-api-spine-boundary",
+          "source": "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-closeout.md",
+          "status": "accepted",
+          "summary": "Accept unchanged GraphQL read and explicit REST command boundaries across six exact unchanged product/API/client paths."
+        },
+        {
+          "id": "accept-measured-convergence-efficacy",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept one substantive readiness advance, zero runtime reruns and five contained prepublication workflow lapses without a new reusable control layer."
+        }
+      ],
+      "claim_scope": [
+        "The accepted matrix advances from 10/0/2 to exactly 11/0/1.",
+        "Only atomic rollback and unknown-response recovery changes to satisfied.",
+        "Environment-manifest and operational-secret posture remains the sole open gap.",
+        "Ordinary-practice admission remains not ready, default-off and unauthorised.",
+        "The API Spine, product, client and configuration surfaces remain unchanged.",
+        "No database, Docker, provider, worker, data, production, deployment, release, Pages or protected-ref authority opened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-plan.md",
+          "docs/security/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/report.md",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-post-attempt-008-check-in-admission-readiness-convergence-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-preplanning-corrected-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-closeout-precommit-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/pushover-notification-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/closeout/clockwork-check-attempt-001-rejected-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py",
+          "tests/test_raisa_provider_free_read_only_canonical_check_in_admission_readiness_convergence_review.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_postterminal.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_plan.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/contract.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-636.md",
+          "orchestration/human_inbox/yuri/2026-08-23--post-attempt-008-check-in-admission-readiness-convergence-review.md"
+        ]
+      },
+      "unresolved_gates": [
+        "Environment-manifest and operational-secret posture remains an operational-evidence gap.",
+        "No canonical operational manifest instance, secret-reference custody, rotation evidence or live role binding is proved.",
+        "Dedicated check-in remains default-off without ordinary-practice admission.",
+        "No product data, provider, reusable runtime, production, deployment, release, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Convert one successful one-shot transaction terminal into an exact readiness-matrix reduction",
+      "outcome": "The accepted check-in matrix now has eleven satisfied dimensions and one independent operational gap without activating ordinary practice.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/evidence.json",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/report.md",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/efficacy-reading.json"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Decompose the sole remaining operational environment and secret-posture gap without touching secrets or runtime",
+      "why_now": "All other frozen readiness dimensions are satisfied and the remaining gap combines several operational prerequisites that must not be conflated.",
+      "outcome": "A read-only decomposition will distinguish non-secret engineering prerequisites from any genuine human-owned external decision before further work.",
+      "unlocks": [
+        "The final readiness gap can be split into evidence-bearing prerequisites without pretending a synthetic manifest is operational posture.",
+        "Any dependency-satisfied provider-free work can be identified separately from secret custody or live-role actions.",
+        "A genuine user-attention fork can be named precisely if one exists."
+      ],
+      "does_not_solve": [
+        "No operational environment manifest is created.",
+        "No secret value, credential, role binding or rotation action is read or changed.",
+        "No ordinary-practice admission, product runtime or deployment is authorised."
+      ],
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/evidence.json",
+        "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/provider-free-architecture-evidence.json",
+        "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md"
+      ],
+      "orientation_statement": "EMR4 will separate non-secret readiness engineering from human-owned secret custody and live operational authority before attempting the final check-in admission dimension."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+      "active_tranche": "Provider-free read-only canonical check-in environment-manifest and operational-secret-posture evidence-gap decomposition",
+      "objective": "Bind the accepted environment/secret-posture architecture and 11/0/1 readiness matrix, then deterministically decompose the sole remaining gap into the smallest non-secret engineering prerequisites and any genuine human-owned external decision without creating an operational manifest or accessing secrets.",
+      "authority_source": "Yuri's standing uninterrupted-development authority plus the accepted 11/0/1 readiness result select the narrowest remaining read-only dependency analysis.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_environment_secret_posture_gap_decomposition_plan"
+    },
+    "incidents": [
+      {"incident_id": "post-attempt008-powershell-grouping-parse", "source_id": "post-attempt008-local-001", "peers": []},
+      {"incident_id": "post-attempt008-manual-git-receipt-prose", "source_id": "post-attempt008-local-002", "peers": []},
+      {"incident_id": "post-attempt008-threat-verdict-token-omission", "source_id": "post-attempt008-local-003", "peers": []},
+      {"incident_id": "post-attempt008-threat-gap-token-omission", "source_id": "post-attempt008-local-004", "peers": []}
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v2",
+    "database_authority": "closed",
+    "commands": [
+      {
+        "command_id": "post-attempt008-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/closeout/closeout-intent.json"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "post-attempt008-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py",
+          "tests/test_raisa_provider_free_read_only_canonical_check_in_admission_readiness_convergence_review.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_postterminal.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_plan.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "post-attempt008-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py", "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "post-attempt008-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py", "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "post-attempt008-closeout-postpublication-readback",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "postpublication"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-plan.md",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/contract.json",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/evidence.json",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/report.md",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-636.md",
+      "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-post-attempt-008-check-in-admission-readiness-convergence-review-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-23--post-attempt-008-check-in-admission-readiness-convergence-review.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_read_only_environment_manifest_operational_secret_posture_gap_decomposition_only",
+    "accepted_environment_architecture_and_11_0_1_readiness_matrix_only",
+    "no_operational_manifest_instance_creation_or_activation",
+    "no_secret_value_reference_resolution_credential_store_or_environment_variable_access",
+    "no_live_database_role_binding_rotation_or_infrastructure_action",
+    "no_database_conftest_engine_schema_fixture_docker_postgresql_or_sql_execution",
+    "no_native_deepseek_harness_worker_gemini_or_provider_call",
+    "no_application_import_route_call_product_api_openapi_graphql_client_or_configuration_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "post-attempt008-readonly-git-summary-shell-001",
+      "observed_on": "2026-08-23",
+      "tranche": "post-attempt-008-check-in-readiness-convergence-review",
+      "role": "orchestrator",
+      "resource_id": "rehydration-git-ref-summary",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Read-only Git summaries use valid sequential PowerShell syntax and capture native-command exits explicitly.",
+      "observed_error": "The first summary placed a native git command and LASTEXITCODE assignment inside a parenthesized expression that PowerShell could not parse.",
+      "detection_method": "PowerShell returned a missing-closing-parenthesis parser error before any Git state summary was produced.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/efficacy-reading.json",
+        "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.powershell_native_command_grouping_parse",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Run the Git ancestry command sequentially, capture LASTEXITCODE on the next statement and regenerate the read-only summary.",
+        "prevention_control": "PowerShell native-command exit checks use separate sequential statements rather than expression grouping.",
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-636.md"]
+      },
+      "baton_summary": "records one read-only PowerShell grouping parse failure and sequential correction."
+    },
+    {
+      "attempt_key": "post-attempt008-manual-git-receipt-prose-001",
+      "observed_on": "2026-08-23",
+      "tranche": "post-attempt-008-check-in-readiness-convergence-review",
+      "role": "orchestrator",
+      "resource_id": "fresh-five-source-preplanning-receipt",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Receipt prose delegates every Git object reading to the machine-generated Git snapshot.",
+      "observed_error": "The first runtime-state prose repeated three full Git object IDs and the preflight rejected caller-authored Git evidence.",
+      "detection_method": "The fresh receipt returned revision_required with git_refs_evidence_manual_object_id_forbidden and manual count three.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-preplanning-corrected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.receipt_prose_repeats_machine_owned_git_ids",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove all caller-supplied Git IDs from the evidence sentence and generate a distinct corrected receipt.",
+        "prevention_control": "Receipt source prose names required relations while the machine snapshot alone supplies object values.",
+        "evidence_paths": ["orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-preplanning-corrected-receipt.json"]
+      },
+      "baton_summary": "records one rejected manual-Git receipt and a zero-manual-ID corrected receipt."
+    },
+    {
+      "attempt_key": "post-attempt008-threat-verdict-token-001",
+      "observed_on": "2026-08-23",
+      "tranche": "post-attempt-008-check-in-readiness-convergence-review",
+      "role": "orchestrator",
+      "resource_id": "post-attempt008-threat-delta",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The threat delta contains the exact closed-vocabulary ordinary-practice verdict token.",
+      "observed_error": "The first threat delta described the unchanged not-ready verdict only in prose and omitted its exact token.",
+      "detection_method": "The first focused provider-free packet failed the exact threat-token assertion.",
+      "evidence_paths": [
+        "docs/security/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-threat-model-delta.md",
+        "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.threat_delta_closed_verdict_token_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact unchanged verdict token and rerun the focused packet.",
+        "prevention_control": "Threat deltas repeat every acceptance-critical closed-vocabulary verdict token used by focused tests.",
+        "evidence_paths": ["docs/security/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-threat-model-delta.md"]
+      },
+      "baton_summary": "records one exact verdict-token omission and its mechanical correction."
+    },
+    {
+      "attempt_key": "post-attempt008-threat-gap-token-001",
+      "observed_on": "2026-08-23",
+      "tranche": "post-attempt-008-check-in-readiness-convergence-review",
+      "role": "orchestrator",
+      "resource_id": "post-attempt008-threat-delta",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The threat delta contains the exact sole remaining operational-gap dimension ID.",
+      "observed_error": "The second focused run exposed that the environment and secret posture gap was described only in prose without its exact dimension ID.",
+      "detection_method": "The focused provider-free packet failed the exact remaining-gap token assertion after the verdict token was corrected.",
+      "evidence_paths": [
+        "docs/security/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-threat-model-delta.md",
+        "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.threat_delta_remaining_gap_token_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact remaining-gap dimension ID and rerun the focused packet to a complete pass.",
+        "prevention_control": "Threat deltas repeat every acceptance-critical closed-vocabulary gap ID used by focused tests.",
+        "evidence_paths": ["docs/security/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-threat-model-delta.md"]
+      },
+      "baton_summary": "records one exact remaining-gap token omission and its mechanical correction."
+    },
+    {
+      "attempt_key": "post-attempt008-clockwork-baton-label-001",
+      "observed_on": "2026-08-23",
+      "tranche": "post-attempt-008-check-in-readiness-convergence-review",
+      "role": "orchestrator",
+      "resource_id": "clockwork-baton-compaction",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A compact active Baton replaces an existing allowlisted rolling acceptance label from the hash-bound compaction manifest.",
+      "observed_error": "The first closeout intent supplied a new descriptive acceptance label outside the compaction manifest active-label vocabulary.",
+      "detection_method": "The governance clockwork check rejected tick_baton_compaction_unindexed before generation construction, canonical mutation or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+        "docs/handover-ledgers/current-baton-acceptance-index.manifest.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_baton_label_unindexed_at_compaction_boundary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the descriptive label with the existing Current DeepSeek native Harness acceptance rolling label and preserve the rejected check.",
+        "prevention_control": "Resolve Baton acceptance labels from the compaction manifest active-label enum before constructing a closeout intent.",
+        "evidence_paths": [
+          "docs/handover-ledgers/current-baton-acceptance-index.manifest.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records one rejected unindexed Baton label and correction to the existing rolling acceptance label."
+    }
+  ]
+}

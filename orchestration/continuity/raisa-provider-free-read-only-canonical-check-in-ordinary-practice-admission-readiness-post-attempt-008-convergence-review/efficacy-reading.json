@@ -1,0 +1,46 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review",
+  "source_head": "5e9bf951f3712c48cac32f240d78b2cb685cc93c",
+  "result": "effective_one_dimension_convergence_with_five_contained_prepublication_lapses",
+  "before": {
+    "satisfied_dimensions": 10,
+    "blocking_gaps": 0,
+    "operational_evidence_gaps": 2,
+    "verdict": "not_ready_for_ordinary_practice_admission"
+  },
+  "after": {
+    "satisfied_dimensions": 11,
+    "blocking_gaps": 0,
+    "operational_evidence_gaps": 1,
+    "verdict": "not_ready_for_ordinary_practice_admission",
+    "dimensions_advanced": 1,
+    "remaining_gap": "environment_manifest_and_operational_secret_posture",
+    "hostile_contract_mutations_rejected": 124,
+    "focused_tests_passed": 20,
+    "descendant_and_api_tests_passed": 96,
+    "product_api_client_or_configuration_changes": 0,
+    "database_docker_sql_network_or_provider_actions": 0,
+    "worker_or_subagent_runs": 0,
+    "new_reusable_control_layers": 0,
+    "preplanning_receipt_rejections": 1,
+    "focused_documentation_correction_iterations": 2,
+    "shell_parse_failures": 1,
+    "clockwork_check_rejections": 1
+  },
+  "workflow_lapses": [
+    "The first read-only Git summary used invalid PowerShell grouping around a native command and failed at parse time before producing state.",
+    "The first fresh receipt prose manually repeated three Git object IDs even though the receipt requires its machine snapshot to own those values; the rejected receipt was preserved and the corrected receipt passed with zero manual IDs.",
+    "The threat delta first described the unchanged not-ready verdict without its exact closed-vocabulary token; the focused test rejected it and the token was added.",
+    "The next focused run exposed the same prose-versus-token omission for the remaining environment gap; the exact dimension ID was added and the third focused run passed.",
+    "The first clockwork check supplied a descriptive Baton acceptance label outside the hash-bound active-label vocabulary; the check failed closed before generation and the corrected intent reused the existing rolling label."
+  ],
+  "clockwork_effect": {
+    "false_receipt_prevented": true,
+    "false_closed_vocabulary_claim_prevented": true,
+    "runtime_reruns_caused": 0,
+    "product_or_database_effects_caused": 0,
+    "remaining_friction_class": "cheap_prepublication_form_and_shell_corrections"
+  },
+  "bounded_conclusion": "The tranche removed one substantive readiness uncertainty without adding a reusable control layer or spending another runtime action. Five cheap lapses show that the workflow is not infallible, but each was contained before publication and none widened product authority."
+}
