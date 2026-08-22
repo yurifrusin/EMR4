@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "timestamp", "result", "contract_sha256", "accepted_inventory", "import_closure", "fixture", "process_boundary", "cleanup", "next_decision", "claim_boundary"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_accepted_guard_graph_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery"},
+    "timestamp": {"type": "string", "minLength": 20},
+    "result": {"const": "accepted_guard_graph_passed_old_factory_coordinate"},
+    "contract_sha256": {"$ref": "#/$defs/sha256"},
+    "accepted_inventory": {"$ref": "#/$defs/inventory"},
+    "import_closure": {"$ref": "#/$defs/importClosure"},
+    "fixture": {"$ref": "#/$defs/fixture"},
+    "process_boundary": {"$ref": "#/$defs/processBoundary"},
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_process_absent", "scope_disposed", "disposable_root_absent", "accepted_sources_unchanged", "predecessor_evidence_unchanged"],
+      "properties": {
+        "node_process_absent": {"const": true},
+        "scope_disposed": {"const": true},
+        "disposable_root_absent": {"const": true},
+        "accepted_sources_unchanged": {"const": true},
+        "predecessor_evidence_unchanged": {"const": true}
+      }
+    },
+    "next_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "deepseek_turn_authorized", "provider_request_authorized"],
+      "properties": {
+        "decision": {"const": "corrected_materializer_admitted_for_provider_free_boot_proof"},
+        "deepseek_turn_authorized": {"const": false},
+        "provider_request_authorized": {"const": false}
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["installed_agent_registry_setup_fixture_only", "native_harness_proved", "deepseek_turn_proved", "provider_reached", "product_authority"],
+      "properties": {
+        "installed_agent_registry_setup_fixture_only": {"const": true},
+        "native_harness_proved": {"const": false},
+        "deepseek_turn_proved": {"const": false},
+        "provider_reached": {"const": false},
+        "product_authority": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256"],
+      "properties": {
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runner", "guard", "bridge", "sanitizer"],
+      "properties": {
+        "runner": {"$ref": "#/$defs/source"},
+        "guard": {"$ref": "#/$defs/source"},
+        "bridge": {"$ref": "#/$defs/source"},
+        "sanitizer": {"$ref": "#/$defs/source"}
+      }
+    },
+    "importClosure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["module_count", "relative_edge_count", "bare_edge_count", "builtin_edge_count", "bare_target_count", "all_targets_present"],
+      "properties": {
+        "module_count": {"const": 5},
+        "relative_edge_count": {"const": 4},
+        "bare_edge_count": {"const": 8},
+        "builtin_edge_count": {"const": 3},
+        "bare_target_count": {"const": 6},
+        "all_targets_present": {"const": true}
+      }
+    },
+    "fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "result", "structured_coordinate", "old_input_invalid_observed", "factory_create_agent_invocations", "setup_invocations", "setup_resolved", "preset_root_reads", "preset_mount_reads", "preset_mount_calls", "tool_view_calls", "tool_restrict_calls", "tool_schema_calls", "hook_installations", "scope_disposals", "runner_app_exit_code", "runner_status", "runner_failure_stage", "runner_request_count", "runner_tool_result_count", "runner_turn_kind", "runner_conclusion_marked", "live_agent_count", "raw_error_retained", "cordis_disposed"],
+      "properties": {
+        "schema_version": {"const": "ariadne.native_harness_accepted_guard_graph_fixture.v1"},
+        "result": {"const": "accepted_guard_graph_passed_old_factory_coordinate"},
+        "structured_coordinate": {"const": "EFFECTIVE_TOOL_COMPOSITION_PASSED"},
+        "old_input_invalid_observed": {"const": false},
+        "factory_create_agent_invocations": {"const": 1},
+        "setup_invocations": {"const": 1},
+        "setup_resolved": {"const": true},
+        "preset_root_reads": {"type": "integer", "minimum": 1},
+        "preset_mount_reads": {"const": 1},
+        "preset_mount_calls": {"const": 1},
+        "tool_view_calls": {"const": 1},
+        "tool_restrict_calls": {"const": 1},
+        "tool_schema_calls": {"const": 1},
+        "hook_installations": {"const": 3},
+        "scope_disposals": {"const": 1},
+        "runner_app_exit_code": {"const": 1},
+        "runner_status": {"const": "failed"},
+        "runner_failure_stage": {"const": "factory"},
+        "runner_request_count": {"const": 0},
+        "runner_tool_result_count": {"const": 0},
+        "runner_turn_kind": {"type": "null"},
+        "runner_conclusion_marked": {"const": false},
+        "live_agent_count": {"const": 0},
+        "raw_error_retained": {"const": false},
+        "cordis_disposed": {"const": true}
+      }
+    },
+    "processBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempt_id", "node_process_count", "exit_code", "stdout_bytes", "stdout_sha256", "stderr_bytes", "stderr_sha256", "native_harness_process_count", "broker_process_count", "worker_process_count", "model_request_count", "provider_request_count", "network_attempt_count", "database_attempt_count", "docker_attempt_count", "target_attempt_count", "retry_count", "resume_count", "fallback_count", "raw_stream_retained"],
+      "properties": {
+        "attempt_id": {"const": "accepted-guard-graph-materialization-001"},
+        "node_process_count": {"const": 1},
+        "exit_code": {"const": 0},
+        "stdout_bytes": {"type": "integer", "minimum": 1},
+        "stdout_sha256": {"$ref": "#/$defs/sha256"},
+        "stderr_bytes": {"const": 0},
+        "stderr_sha256": {"const": "e3b0c44298fc1c149afbf5c8996fb92427ae41e4649b934ca495991b7852b855"},
+        "native_harness_process_count": {"const": 0},
+        "broker_process_count": {"const": 0},
+        "worker_process_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0},
+        "network_attempt_count": {"const": 0},
+        "database_attempt_count": {"const": 0},
+        "docker_attempt_count": {"const": 0},
+        "target_attempt_count": {"const": 0},
+        "retry_count": {"const": 0},
+        "resume_count": {"const": 0},
+        "fallback_count": {"const": 0},
+        "raw_stream_retained": {"const": false}
+      }
+    }
+  }
+}

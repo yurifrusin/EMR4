@@ -1,0 +1,100 @@
+{
+  "schema_version": "ariadne.native_harness_accepted_guard_graph_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery",
+  "evidence_label": "provider_free_installed_agent_registry_accepted_guard_graph_materialization_fixture",
+  "git_binding_policy": {
+    "mode": "machine_resolved_only",
+    "caller_authored_object_id_count": 0
+  },
+  "accepted_inputs": {
+    "plan": {
+      "path": "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-plan.md",
+      "bytes": 6369,
+      "sha256": "f6094931e34000fe6b94d7bf5191d21c060638d7f15803b23fb084982c84791e"
+    },
+    "threat_model": {
+      "path": "docs/security/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-threat-model-delta.md",
+      "bytes": 2602,
+      "sha256": "957beeea9af553930a15d5e1e90aacc6238e9548ce223c4af1f13bab1597ae66"
+    },
+    "predecessor_recovery_evidence": {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery/recovery-evidence.json",
+      "bytes": 3333,
+      "sha256": "b624f113e4f978e4bb89bd014585dd5a8c549be22acf2f7c427de962e76d0cb8"
+    },
+    "accepted_graph_evidence": {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/import-closure-recovery-evidence.json",
+      "bytes": 6504,
+      "sha256": "1f19d2e8f972577e941e2dcd2f6372e7272f544a4802e2671e088b71e37c5eca"
+    },
+    "occupied_preparation": {
+      "path": "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-attempt-preparation.json",
+      "bytes": 2187,
+      "sha256": "5237bd35a84e8c7cfdeafeaf13684840af32424d25eeba59c166121ef6cd7300"
+    },
+    "accepted_correction_evidence": {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence-v2.json",
+      "bytes": 3591,
+      "sha256": "835bdc53701b9423795a22ee75ba1dd145586d73de32bdeb0906769cf24b0181"
+    }
+  },
+  "occupied_composition": {
+    "runner_bytes": 14210,
+    "runner_sha256": "017394e3f86a3efdf5eba0745c254a8b561615fb6ab923978b81bb5941e8e3f4",
+    "guard_bytes": 4009,
+    "guard_sha256": "6678ed31bdcd30a5018689b72ad509c182854bf5d63862f59b397acc8de40894",
+    "runner_argument_count": 4,
+    "guard_parameter_count": 3
+  },
+  "accepted_inventory": {
+    "runner": {
+      "bytes": 14210,
+      "sha256": "017394e3f86a3efdf5eba0745c254a8b561615fb6ab923978b81bb5941e8e3f4"
+    },
+    "guard": {
+      "bytes": 4501,
+      "sha256": "76029da0f9c030651fd10c0df16f4e75e86b2269d7560af7f94c74680f8598b9"
+    },
+    "bridge": {
+      "bytes": 1661,
+      "sha256": "3a49b28174eeefd77d7efe0a00498901ac6636b637ed9dfe60aba46980df1d0b"
+    },
+    "sanitizer": {
+      "bytes": 2439,
+      "sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f"
+    }
+  },
+  "expected_import_closure": {
+    "module_count": 5,
+    "relative_edge_count": 4,
+    "bare_edge_count": 8,
+    "builtin_edge_count": 3,
+    "bare_target_count": 6,
+    "all_targets_present": true
+  },
+  "expected_fixture": {
+    "structured_coordinate": "EFFECTIVE_TOOL_COMPOSITION_PASSED",
+    "old_input_invalid_observed": false,
+    "runner_status": "failed",
+    "runner_failure_stage": "factory",
+    "node_process_count": 1,
+    "setup_invocations": 1,
+    "request_count": 0,
+    "tool_result_count": 0
+  },
+  "process_limits": {
+    "node_process_count": 1,
+    "native_harness_process_count": 0,
+    "broker_process_count": 0,
+    "worker_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "network_attempt_count": 0,
+    "database_attempt_count": 0,
+    "docker_attempt_count": 0,
+    "target_attempt_count": 0,
+    "retry_count": 0,
+    "resume_count": 0,
+    "fallback_count": 0
+  }
+}

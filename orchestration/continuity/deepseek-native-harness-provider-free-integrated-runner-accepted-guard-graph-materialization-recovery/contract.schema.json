@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "evidence_label", "git_binding_policy", "accepted_inputs", "occupied_composition", "accepted_inventory", "expected_import_closure", "expected_fixture", "process_limits"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_accepted_guard_graph_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery"},
+    "evidence_label": {"const": "provider_free_installed_agent_registry_accepted_guard_graph_materialization_fixture"},
+    "git_binding_policy": {"$ref": "#/$defs/gitBindingPolicy"},
+    "accepted_inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["plan", "threat_model", "predecessor_recovery_evidence", "accepted_graph_evidence", "occupied_preparation", "accepted_correction_evidence"],
+      "properties": {
+        "plan": {"$ref": "#/$defs/fileBinding"},
+        "threat_model": {"$ref": "#/$defs/fileBinding"},
+        "predecessor_recovery_evidence": {"$ref": "#/$defs/fileBinding"},
+        "accepted_graph_evidence": {"$ref": "#/$defs/fileBinding"},
+        "occupied_preparation": {"$ref": "#/$defs/fileBinding"},
+        "accepted_correction_evidence": {"$ref": "#/$defs/fileBinding"}
+      }
+    },
+    "occupied_composition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runner_bytes", "runner_sha256", "guard_bytes", "guard_sha256", "runner_argument_count", "guard_parameter_count"],
+      "properties": {
+        "runner_bytes": {"const": 14210},
+        "runner_sha256": {"const": "017394e3f86a3efdf5eba0745c254a8b561615fb6ab923978b81bb5941e8e3f4"},
+        "guard_bytes": {"const": 4009},
+        "guard_sha256": {"const": "6678ed31bdcd30a5018689b72ad509c182854bf5d63862f59b397acc8de40894"},
+        "runner_argument_count": {"const": 4},
+        "guard_parameter_count": {"const": 3}
+      }
+    },
+    "accepted_inventory": {"$ref": "#/$defs/inventory"},
+    "expected_import_closure": {"$ref": "#/$defs/importClosure"},
+    "expected_fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["structured_coordinate", "old_input_invalid_observed", "runner_status", "runner_failure_stage", "node_process_count", "setup_invocations", "request_count", "tool_result_count"],
+      "properties": {
+        "structured_coordinate": {"const": "EFFECTIVE_TOOL_COMPOSITION_PASSED"},
+        "old_input_invalid_observed": {"const": false},
+        "runner_status": {"const": "failed"},
+        "runner_failure_stage": {"const": "factory"},
+        "node_process_count": {"const": 1},
+        "setup_invocations": {"const": 1},
+        "request_count": {"const": 0},
+        "tool_result_count": {"const": 0}
+      }
+    },
+    "process_limits": {"$ref": "#/$defs/processLimits"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "fileBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "gitBindingPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "caller_authored_object_id_count"],
+      "properties": {
+        "mode": {"const": "machine_resolved_only"},
+        "caller_authored_object_id_count": {"const": 0}
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256"],
+      "properties": {
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runner", "guard", "bridge", "sanitizer"],
+      "properties": {
+        "runner": {"$ref": "#/$defs/source"},
+        "guard": {"$ref": "#/$defs/source"},
+        "bridge": {"$ref": "#/$defs/source"},
+        "sanitizer": {"$ref": "#/$defs/source"}
+      }
+    },
+    "importClosure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["module_count", "relative_edge_count", "bare_edge_count", "builtin_edge_count", "bare_target_count", "all_targets_present"],
+      "properties": {
+        "module_count": {"const": 5},
+        "relative_edge_count": {"const": 4},
+        "bare_edge_count": {"const": 8},
+        "builtin_edge_count": {"const": 3},
+        "bare_target_count": {"const": 6},
+        "all_targets_present": {"const": true}
+      }
+    },
+    "processLimits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_process_count", "native_harness_process_count", "broker_process_count", "worker_process_count", "model_request_count", "provider_request_count", "network_attempt_count", "database_attempt_count", "docker_attempt_count", "target_attempt_count", "retry_count", "resume_count", "fallback_count"],
+      "properties": {
+        "node_process_count": {"const": 1},
+        "native_harness_process_count": {"const": 0},
+        "broker_process_count": {"const": 0},
+        "worker_process_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0},
+        "network_attempt_count": {"const": 0},
+        "database_attempt_count": {"const": 0},
+        "docker_attempt_count": {"const": 0},
+        "target_attempt_count": {"const": 0},
+        "retry_count": {"const": 0},
+        "resume_count": {"const": 0},
+        "fallback_count": {"const": 0}
+      }
+    }
+  }
+}

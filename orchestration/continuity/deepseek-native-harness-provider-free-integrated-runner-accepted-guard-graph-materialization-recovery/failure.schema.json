@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "attempt_id", "result", "node_process_count", "retry_count", "raw_error_retained"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_accepted_guard_graph_failure.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery"},
+    "attempt_id": {"const": "accepted-guard-graph-materialization-001"},
+    "result": {"enum": ["fixture_process_terminal", "fixture_result_rejected"]},
+    "node_process_count": {"const": 1},
+    "retry_count": {"const": 0},
+    "raw_error_retained": {"const": false}
+  }
+}
