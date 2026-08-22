@@ -1,0 +1,9 @@
+{
+  "schema_version": "emr4.pushover_closeout_receipt.v1",
+  "operation_id": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal",
+  "status": "delivered",
+  "request_id": "61dce4f4-d049-4976-bc3d-7ccad4f9d889",
+  "non_phi": true,
+  "continuing": true,
+  "next_operation": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal"
+}

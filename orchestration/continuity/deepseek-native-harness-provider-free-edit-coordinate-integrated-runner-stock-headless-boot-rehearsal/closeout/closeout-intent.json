@@ -1,0 +1,280 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal",
+    "title": "DeepSeek native Harness integrated-runner stock-headless boot closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T17:43:07.7749502+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal",
+      "title": "DeepSeek native Harness integrated-runner stock-headless boot closeout",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority covers this provider-free stock-headless proof and closeout.",
+          "The exact one-process attempt is consumed; no retry, resume or replacement occurred.",
+          "The successor must freeze any at-most-one DeepSeek request before launch and has no silent Claude Code fallback."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-integrated-runner-native-loading-coordinate",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/native-boot-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact integrated runner and typed edit-control exports as loaded through one real rc.7 stock-headless HMR mutation before request authority."
+        },
+        {
+          "id": "accept-roots-stage-pre-request-hold",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/native-boot-report.md",
+          "status": "accepted",
+          "summary": "Accept the deliberate single-root mismatch and roots-stage generic terminal as a positive pre-agent containment result with every effect gauge zero."
+        },
+        {
+          "id": "decline-further-provider-free-loading-rehearsal",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Reject another provider-free loader/HMR rehearsal; the next test must measure one controlled useful development contribution."
+        }
+      ],
+      "claim_scope": [
+        "The exact 14,077-byte integrated runner loaded through one real rc.7 stock-headless process and one HMR mutation.",
+        "The adapter proved apply, preflightEditArguments and classifyEditArgumentResult were live exports before delegation.",
+        "The runner stopped at the deliberate roots-stage mismatch before agents.create.",
+        "Agent, session, turn, tool, broker, worker, model, provider, network, database and Docker counts remained zero.",
+        "No retry, resume or fallback occurred; accepted inputs remained exact and cleanup completed.",
+        "The proof resolves loading-path uncertainty but does not prove useful worker output or general DeepSeek reliability.",
+        "No product, ordinary-practice, data, production, deployment, release, Pages or protected-ref authority opened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/native-boot-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/native-boot-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-preplanning-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal_plan.py",
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/evidence.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/integrated-runner-boot-probe.mjs",
+          "docs/ariadne-agent-error-correction-register-revision-620.md",
+          "orchestration/human_inbox/yuri/2026-08-22--native-harness-integrated-runner-stock-headless-boot.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The integrated runner is not yet bound to a useful authored-synthetic development work package.",
+        "No useful DeepSeek worker output or general native-Harness reliability result exists.",
+        "Any next occupied request requires a separately frozen at-most-one-request candidate and work order.",
+        "Ordinary practice, product data, production, deployment, release, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Move typed edit controls through the real native Harness loading boundary before useful controlled work",
+      "outcome": "The exact integrated runner loaded through stock-headless HMR and stopped before agent creation with all external-effect gauges zero.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/native-boot-evidence.json",
+        "docs/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-closeout.md",
+        "orchestration/human_inbox/yuri/2026-08-22--native-harness-integrated-runner-stock-headless-boot.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Use the accepted controls on one useful bounded authored-synthetic development task",
+      "why_now": "Loading-path uncertainty is closed; another provider-free boot would add ceremonial weight without testing development utility.",
+      "outcome": "The orchestrator has exact control-load, edit-result and pre-request stop coordinates in the real native Harness path.",
+      "unlocks": [
+        "One separately frozen at-most-one-request DeepSeek development rehearsal.",
+        "Measurement of useful output, traceability and correction cost.",
+        "An evidence-based decision on continued native-Harness worker use."
+      ],
+      "does_not_solve": [
+        "No useful worker result or general reliability conclusion yet.",
+        "No ordinary-practice, product-data, production or protected-ref authority.",
+        "No silent Claude Code fallback."
+      ],
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/efficacy-reading.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-sol-acceptance.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/native-boot-report.md"
+      ],
+      "orientation_statement": "EMR4 will next test one useful authored-synthetic DeepSeek development contribution under the accepted typed native-Harness controls, not perform another loading rehearsal."
+    },
+    "next_operation": {
+      "operation_id": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+      "active_tranche": "Raisa authored-synthetic native-Harness integrated-runner first controlled development rehearsal",
+      "objective": "Freeze one exact authored-synthetic EMR4 development work package, bind the accepted integrated runner and typed edit controls to it, permit at most one DeepSeek request after provider-free gates pass, and measure useful output, traceability, correction cost and cleanup without product, patient or clinical data.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted integrated-runner stock-headless boot proof.",
+      "next_stage": "fresh_five_source_rehydration_then_select_and_freeze_one_useful_authored_synthetic_work_package"
+    },
+    "incidents": [],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "integrated-runner-stock-headless-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/closeout/closeout-intent.json"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "integrated-runner-stock-headless-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal_plan.py", "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_ariadne_active_operation_latch_continuity.py", "tests/test_current_baton_consistency.py", "tests/test_api_spine_artifacts.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "integrated-runner-stock-headless-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal_plan.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "integrated-runner-stock-headless-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal_plan.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-threat-model-delta.md",
+      "scripts/deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/evidence.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/integrated-runner-boot-probe.mjs",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/native-boot-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/native-boot-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-620.md",
+      "docs/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--native-harness-integrated-runner-stock-headless-boot.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/closeout/pushover-notification-receipt.json"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "one_authored_synthetic_bounded_development_work_package_only",
+    "at_most_one_deepseek_provider_request_after_provider_free_gates",
+    "accepted_typed_edit_controls_mandatory_no_weakening",
+    "no_claude_code_or_other_transport_fallback",
+    "consumed_attempts_immutable_no_retry_resume_overwrite_or_reclassification",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_ordinary_practice_enablement_or_live_product_runtime",
+    "no_generic_status_arrived_action_grammar_first_party_client_or_waiting_area_change_without_separate_authority",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "integrated-runner-stock-headless-closeout-boundary-vocabulary-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The successor boundary list must contain every clockwork-required closed-vocabulary floor value exactly, while any descriptive additions remain separate.",
+      "observed_error": "The first clockwork check used a descriptive ordinary-practice boundary instead of also carrying the required exact no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting value and failed closed with tick_next_boundaries_floor.",
+      "detection_method": "The governance clockwork rejected the intent before generation construction or publication; all live canonical surfaces remained unchanged.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-620.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.required_closed_boundary_replaced_by_descriptive_near_synonym",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the exact required boundary value in addition to the narrower successor-specific boundaries and rerun the same intent through the idempotent clockwork.",
+        "prevention_control": "Construct future successor boundary lists from the clockwork REQUIRED_NEXT_BOUNDARIES typed floor before appending tranche-specific values.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "baton_summary": "records the rejected descriptive near-synonym and requires future successor boundaries to begin with the exact typed clockwork floor."
+    },
+    {
+      "attempt_key": "integrated-runner-stock-headless-closeout-incident-stage-vocabulary-002",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "An incident observation must select its stage from the clockwork INCIDENT_STAGES closed vocabulary instead of inventing a descriptive stage label.",
+      "observed_error": "The second clockwork check used governance_validation for the first incident stage, outside the registered vocabulary, and failed closed with tick_incident_stage.",
+      "detection_method": "The governance clockwork rejected the incident observation before prospective register projection, generation construction or publication; all live canonical surfaces remained unchanged.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-620.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.incident_stage_reconstructed_as_unregistered_description",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the descriptive stage with the exact registered closeout value and preserve both rejected checks in the same prospective register revision.",
+        "prevention_control": "Construct future incident observations from the clockwork INCIDENT_STAGES typed choices rather than reconstructing stage vocabulary from prose.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "baton_summary": "records the rejected unregistered incident-stage description and requires incident stages to be selected from the clockwork's typed choices."
+    }
+  ]
+}
