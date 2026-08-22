@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "ca18d64052241cd07bc1ac73887f849e2d245f98",
+  "source_commit": "ca18d64052241cd07bc1ac73887f849e2d245f98",
+  "generation_id": "gen-fc4bb720a10a33dcdca8f2ef59fec9221de6abf869085c925b249fa6de557b32",
+  "bundle_sha256": "fc4bb720a10a33dcdca8f2ef59fec9221de6abf869085c925b249fa6de557b32",
+  "previous_generation_id": "gen-896528098e5fc919fa760eb6378a11e597f48af729651f34b5432ef6feb7072c",
+  "previous_source_commit": "ca18d64052241cd07bc1ac73887f849e2d245f98",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 192,
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review",
+  "event_kind": "clean_closeout",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

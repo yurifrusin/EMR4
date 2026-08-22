@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 401,
-  "updated_at": "2026-08-23T07:19:39.9791037+10:00",
-  "source_graph_revision": 419,
-  "orientation_statement": "EMR4 will update the ordinary-practice readiness matrix from exact immutable evidence without treating a successful rehearsal as activation authority.",
+  "map_revision": 402,
+  "updated_at": "2026-08-23T07:53:10.3671912+10:00",
+  "source_graph_revision": 420,
+  "orientation_statement": "EMR4 will separate non-secret readiness engineering from human-owned secret custody and live operational authority before attempting the final check-in admission dimension.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5140,27 +5140,38 @@
         "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/attempt-008-execution-envelope.json",
         "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/efficacy-reading.json"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review",
+      "lineage_parent": "raisa-provider-free-check-in-relay-free-recovery-attempt-008",
+      "strategic_role": "Convert one successful one-shot transaction terminal into an exact readiness-matrix reduction",
+      "outcome": "The accepted check-in matrix now has eleven satisfied dimensions and one independent operational gap without activating ordinary practice.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/evidence.json",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/report.md",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/efficacy-reading.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-008",
-    "strategic_role": "Take a read-only ordinary-admission readiness reading from the new immutable transaction evidence",
-    "why_now": "The exact operational transaction gap named by the accepted twelve-dimension review now has one successful immutable terminal.",
-    "outcome": "A deterministic review will decide only whether the atomic rollback and unknown-response dimension becomes satisfied while retaining the separate environment/secret gap.",
+    "node_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review",
+    "strategic_role": "Decompose the sole remaining operational environment and secret-posture gap without touching secrets or runtime",
+    "why_now": "All other frozen readiness dimensions are satisfied and the remaining gap combines several operational prerequisites that must not be conflated.",
+    "outcome": "A read-only decomposition will distinguish non-secret engineering prerequisites from any genuine human-owned external decision before further work.",
     "unlocks": [
-      "The accepted twelve-dimension matrix can consume attempt-008 evidence without another database run.",
-      "Remaining operational gaps can be stated without conflating plan or execution readiness.",
-      "Ordinary-practice denial remains explicit while the evidence graph converges."
+      "The final readiness gap can be split into evidence-bearing prerequisites without pretending a synthetic manifest is operational posture.",
+      "Any dependency-satisfied provider-free work can be identified separately from secret custody or live-role actions.",
+      "A genuine user-attention fork can be named precisely if one exists."
     ],
     "does_not_solve": [
-      "No ordinary-practice check-in activation is authorised.",
-      "No operational environment or secret posture is proved.",
-      "No provider, product-data, production or protected authority opens."
+      "No operational environment manifest is created.",
+      "No secret value, credential, role binding or rotation action is read or changed.",
+      "No ordinary-practice admission, product runtime or deployment is authorised."
     ],
     "evidence": [
-      "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md",
-      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/transaction-attestation.json",
-      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-008-closeout.md"
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/evidence.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/provider-free-architecture-evidence.json",
+      "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md"
     ]
   },
   "decision_horizon": [

@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will update the ordinary-practice readiness matrix from exact immutable evidence without treating a successful rehearsal as activation authority.
+> EMR4 will separate non-secret readiness engineering from human-owned secret custody and live operational authority before attempting the final check-in admission dimension.
 
 ## North star
 
@@ -608,26 +608,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    A separate attempt-008 plan is admissible, while nine hard plan/preexecution conditions and execution denial remain explicit. Lineage parent: `ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair`.
 296. **Turn deterministic pre-admission into one successful, non-retriable database proof — Raisa provider-free check-in relay-free recovery attempt 008**
    The sole attempt-008 invocation proves rollback-zero and unknown-response exactly-once recovery with exact isolation and cleanup. Lineage parent: `raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision`.
+297. **Convert one successful one-shot transaction terminal into an exact readiness-matrix reduction — Post-attempt-008 canonical check-in admission-readiness convergence review**
+   The accepted check-in matrix now has eleven satisfied dimensions and one independent operational gap without activating ordinary practice. Lineage parent: `raisa-provider-free-check-in-relay-free-recovery-attempt-008`.
 
 ## Current position
 
-**Take a read-only ordinary-admission readiness reading from the new immutable transaction evidence — Raisa provider-free check-in relay-free recovery attempt 008**
+**Decompose the sole remaining operational environment and secret-posture gap without touching secrets or runtime — Post-attempt-008 canonical check-in admission-readiness convergence review**
 
-**Why this proof came next:** The exact operational transaction gap named by the accepted twelve-dimension review now has one successful immutable terminal.
+**Why this proof came next:** All other frozen readiness dimensions are satisfied and the remaining gap combines several operational prerequisites that must not be conflated.
 
-A deterministic review will decide only whether the atomic rollback and unknown-response dimension becomes satisfied while retaining the separate environment/secret gap.
+A read-only decomposition will distinguish non-secret engineering prerequisites from any genuine human-owned external decision before further work.
 
 ### What this unlocks
 
-- The accepted twelve-dimension matrix can consume attempt-008 evidence without another database run.
-- Remaining operational gaps can be stated without conflating plan or execution readiness.
-- Ordinary-practice denial remains explicit while the evidence graph converges.
+- The final readiness gap can be split into evidence-bearing prerequisites without pretending a synthetic manifest is operational posture.
+- Any dependency-satisfied provider-free work can be identified separately from secret custody or live-role actions.
+- A genuine user-attention fork can be named precisely if one exists.
 
 ### What it does not solve
 
-- No ordinary-practice check-in activation is authorised.
-- No operational environment or secret posture is proved.
-- No provider, product-data, production or protected authority opens.
+- No operational environment manifest is created.
+- No secret value, credential, role binding or rotation action is read or changed.
+- No ordinary-practice admission, product runtime or deployment is authorised.
 
 ## Continuity and authority
 
@@ -1531,7 +1533,6 @@ Prerequisites:
 - `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md`
 - `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-failed-closed-closeout.md`
 - `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-007-failed-closed-closeout.md`
-- `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-008-closeout.md`
 - `docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md`
 - `docs/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-closeout.md`
 - `docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md`
@@ -1544,6 +1545,7 @@ Prerequisites:
 - `docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md`
 - `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md`
 - `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md`
+- `docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md`
 - `docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md`
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-closeout.md`
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-design.md`
@@ -3074,6 +3076,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.example.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json`
+- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/efficacy-reading.json`
+- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/evidence.json`
+- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/report.md`
 - `orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-report.md`
 - `orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/decision-evidence.json`
@@ -3873,4 +3878,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 401; continuity graph revision 419._
+_Compass map revision 402; continuity graph revision 420._

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 635,
+  "register_revision": 636,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -40080,6 +40080,187 @@
       "incident_id": "AER-1035",
       "attempt_id": "clock-1f7ac857760b609aacbf1789",
       "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "post-attempt-008-check-in-readiness-convergence-review",
+      "role": "orchestrator",
+      "resource_id": "rehydration-git-ref-summary",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Read-only Git summaries use valid sequential PowerShell syntax and capture native-command exits explicitly.",
+      "observed_error": "The first summary placed a native git command and LASTEXITCODE assignment inside a parenthesized expression that PowerShell could not parse.",
+      "detection_method": "PowerShell returned a missing-closing-parenthesis parser error before any Git state summary was produced.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/efficacy-reading.json",
+        "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.powershell_native_command_grouping_parse",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Run the Git ancestry command sequentially, capture LASTEXITCODE on the next statement and regenerate the read-only summary.",
+        "prevention_control": "PowerShell native-command exit checks use separate sequential statements rather than expression grouping.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-636.md"
+        ]
+      },
+      "incident_id": "AER-1036",
+      "attempt_id": "clock-25243da4fcac7d959e5151c8",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "post-attempt-008-check-in-readiness-convergence-review",
+      "role": "orchestrator",
+      "resource_id": "fresh-five-source-preplanning-receipt",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Receipt prose delegates every Git object reading to the machine-generated Git snapshot.",
+      "observed_error": "The first runtime-state prose repeated three full Git object IDs and the preflight rejected caller-authored Git evidence.",
+      "detection_method": "The fresh receipt returned revision_required with git_refs_evidence_manual_object_id_forbidden and manual count three.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-preplanning-corrected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.receipt_prose_repeats_machine_owned_git_ids",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove all caller-supplied Git IDs from the evidence sentence and generate a distinct corrected receipt.",
+        "prevention_control": "Receipt source prose names required relations while the machine snapshot alone supplies object values.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-preplanning-corrected-receipt.json"
+        ]
+      },
+      "incident_id": "AER-1037",
+      "attempt_id": "clock-a82a38b02eb59e179f7467d9",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "post-attempt-008-check-in-readiness-convergence-review",
+      "role": "orchestrator",
+      "resource_id": "post-attempt008-threat-delta",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The threat delta contains the exact closed-vocabulary ordinary-practice verdict token.",
+      "observed_error": "The first threat delta described the unchanged not-ready verdict only in prose and omitted its exact token.",
+      "detection_method": "The first focused provider-free packet failed the exact threat-token assertion.",
+      "evidence_paths": [
+        "docs/security/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-threat-model-delta.md",
+        "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.threat_delta_closed_verdict_token_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact unchanged verdict token and rerun the focused packet.",
+        "prevention_control": "Threat deltas repeat every acceptance-critical closed-vocabulary verdict token used by focused tests.",
+        "evidence_paths": [
+          "docs/security/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-threat-model-delta.md"
+        ]
+      },
+      "incident_id": "AER-1038",
+      "attempt_id": "clock-b696e786b6d078f5f080d2e8",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "post-attempt-008-check-in-readiness-convergence-review",
+      "role": "orchestrator",
+      "resource_id": "post-attempt008-threat-delta",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The threat delta contains the exact sole remaining operational-gap dimension ID.",
+      "observed_error": "The second focused run exposed that the environment and secret posture gap was described only in prose without its exact dimension ID.",
+      "detection_method": "The focused provider-free packet failed the exact remaining-gap token assertion after the verdict token was corrected.",
+      "evidence_paths": [
+        "docs/security/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-threat-model-delta.md",
+        "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.threat_delta_remaining_gap_token_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact remaining-gap dimension ID and rerun the focused packet to a complete pass.",
+        "prevention_control": "Threat deltas repeat every acceptance-critical closed-vocabulary gap ID used by focused tests.",
+        "evidence_paths": [
+          "docs/security/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-threat-model-delta.md"
+        ]
+      },
+      "incident_id": "AER-1039",
+      "attempt_id": "clock-0a41f7e3cbaa969074d1350b",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "post-attempt-008-check-in-readiness-convergence-review",
+      "role": "orchestrator",
+      "resource_id": "clockwork-baton-compaction",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A compact active Baton replaces an existing allowlisted rolling acceptance label from the hash-bound compaction manifest.",
+      "observed_error": "The first closeout intent supplied a new descriptive acceptance label outside the compaction manifest active-label vocabulary.",
+      "detection_method": "The governance clockwork check rejected tick_baton_compaction_unindexed before generation construction, canonical mutation or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+        "docs/handover-ledgers/current-baton-acceptance-index.manifest.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_baton_label_unindexed_at_compaction_boundary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the descriptive label with the existing Current DeepSeek native Harness acceptance rolling label and preserve the rejected check.",
+        "prevention_control": "Resolve Baton acceptance labels from the compaction manifest active-label enum before constructing a closeout intent.",
+        "evidence_paths": [
+          "docs/handover-ledgers/current-baton-acceptance-index.manifest.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1040",
+      "attempt_id": "clock-28ad979175ff6f8a5fdf167e",
+      "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"
     }

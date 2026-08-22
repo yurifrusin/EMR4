@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 635,
+  "register_revision": 636,
   "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "98368333922278f7aa08c9b7e2e66b32390a287ac2dbdc8a2d15a63859e2fbb9",
-  "incident_count": 1035,
+  "canonical_register_sha256": "5942242e23c1a3480042e2a5b9881ef72f0b8ecb59a32731b8e025605b235c7e",
+  "incident_count": 1040,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 537,
+      "agent_behavior": 538,
       "harness": 72,
-      "operator": 266,
+      "operator": 270,
       "repository": 144,
       "transport": 16
     },
@@ -18,8 +18,8 @@
       "command_scope_violation": 100,
       "evidence_misreport": 75,
       "harness_failure": 72,
-      "operator_error": 266,
-      "output_contract_violation": 309,
+      "operator_error": 270,
+      "output_contract_violation": 310,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
       "repository_defect": 144,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 83,
       "integration_reviewer": 3,
-      "orchestrator": 886,
+      "orchestrator": 891,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 666,
+      "low": 671,
       "material": 135,
       "moderate": 234
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 220,
-      "canonical_unchanged": 644,
+      "accepted_candidate_changed": 222,
+      "canonical_unchanged": 647,
       "untrusted_partial_worktree": 171
     },
     "by_resource_and_role": {
@@ -140,7 +140,7 @@
       "clockwork-agent-error-tranche-label::orchestrator": 1,
       "clockwork-authorized-opening-shape::orchestrator": 1,
       "clockwork-authorized-opening-vocabulary::orchestrator": 1,
-      "clockwork-baton-compaction::orchestrator": 2,
+      "clockwork-baton-compaction::orchestrator": 3,
       "clockwork-canonical-baton-writer::orchestrator": 1,
       "clockwork-canonical-path-staging::orchestrator": 1,
       "clockwork-closed-rolling-acceptance-label::orchestrator": 1,
@@ -281,6 +281,7 @@
       "explicit-path-precommit-diff-gate::orchestrator": 1,
       "factory-fixture-package-scope-projection::implementer": 1,
       "factory-import-recovery-focused-tests::implementer": 1,
+      "fresh-five-source-preplanning-receipt::orchestrator": 1,
       "frozen-plan-process-and-authority-vocabulary::orchestrator": 1,
       "future-attempt-embedded-helper-identity::implementer": 1,
       "gemini-36-flash-high-verifier::verifier": 1,
@@ -365,6 +366,7 @@
       "ordinary-practice-check-in-readiness-reviewer::orchestrator": 3,
       "package-unloaded-relative-import-closure::orchestrator": 1,
       "plan-commit-staged-whitespace-gate::orchestrator": 1,
+      "post-attempt008-threat-delta::orchestrator": 2,
       "postclockwork-current-state-suite-selection::orchestrator": 1,
       "postclockwork-powershell-reading::orchestrator": 1,
       "postcompaction-five-source-rehydration-receipt::orchestrator": 1,
@@ -421,6 +423,7 @@
       "reconciliation-parent-schema-exception-boundary::orchestrator": 1,
       "recovery-fixture-wire-order-mock::orchestrator": 1,
       "recovery-plan-semantic-assertion::orchestrator": 1,
+      "rehydration-git-ref-summary::orchestrator": 1,
       "repair-closeout-intent-stage::orchestrator": 1,
       "repair-conformance-direct-cli::implementer": 1,
       "repair-dead-local-guard::orchestrator": 1,
@@ -998,10 +1001,11 @@
     },
     {
       "recurrence_signature": "orchestrator.closeout_baton_label_unindexed_at_compaction_boundary",
-      "incident_count": 2,
+      "incident_count": 3,
       "incident_ids": [
         "AER-1002",
-        "AER-1028"
+        "AER-1028",
+        "AER-1040"
       ],
       "origins": [
         "agent_behavior"
@@ -1016,6 +1020,7 @@
         "clockwork-baton-compaction"
       ],
       "prevention_controls": [
+        "Resolve Baton acceptance labels from the compaction manifest active-label enum before constructing a closeout intent.",
         "Resolve acceptance labels against active_labels before every clockwork invocation; the next workflow tranche will make this a typed input.",
         "Resolve active acceptance labels against the live Baton and acceptance index before closeout rendering."
       ]

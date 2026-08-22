@@ -3,31 +3,30 @@
   "database_authority": "closed",
   "commands": [
     {
-      "command_id": "attempt-008-closeout-tick-check",
+      "command_id": "post-attempt008-closeout-tick-check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_governance_clockwork_tick",
         "--check",
         "--intent",
-        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/closeout/closeout-intent.json"
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required",
       "verification_phase": "prepublication"
     },
     {
-      "command_id": "attempt-008-closeout-provider-free-tests",
+      "command_id": "post-attempt008-closeout-provider-free-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
+        "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py",
+        "tests/test_raisa_provider_free_read_only_canonical_check_in_admission_readiness_convergence_review.py",
         "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_postterminal.py",
         "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_plan.py",
-        "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
-        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
-        "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair.py",
         "tests/test_api_spine_artifacts.py",
         "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py",
         "tests/test_ariadne_agent_error_register.py",
@@ -39,36 +38,32 @@
       "verification_phase": "prepublication"
     },
     {
-      "command_id": "attempt-008-closeout-ruff",
+      "command_id": "post-attempt008-closeout-ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_plan.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_postterminal.py"
+        "scripts/raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py",
+        "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py"
       ],
       "completion_contract": "final_exit_code_zero_required",
       "verification_phase": "prepublication"
     },
     {
-      "command_id": "attempt-008-closeout-compile",
+      "command_id": "post-attempt008-closeout-compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_plan.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_postterminal.py"
+        "scripts/raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py",
+        "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py"
       ],
       "completion_contract": "final_exit_code_zero_required",
       "verification_phase": "prepublication"
     },
     {
-      "command_id": "attempt-008-closeout-postpublication-readback",
+      "command_id": "post-attempt008-closeout-postpublication-readback",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -80,8 +75,7 @@
         "tests/test_ariadne_active_operation_latch.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_transactional_closeout.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_postterminal.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_plan.py"
+        "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py"
       ],
       "completion_contract": "final_exit_code_zero_required",
       "verification_phase": "postpublication"
