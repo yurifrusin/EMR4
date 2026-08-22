@@ -1,0 +1,444 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "attempt_id",
+    "candidate_source",
+    "result",
+    "terminal_class",
+    "failure_coordinate",
+    "process",
+    "hmr_events",
+    "runner",
+    "broker",
+    "candidate",
+    "automatic_retry_count",
+    "manual_retry_count",
+    "resume_count",
+    "fallback_count",
+    "auxiliary_model_call_count",
+    "cleanup"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ariadne.native_harness_useful_worker_coordinate_recovery_terminal.v1"
+    },
+    "operation_id": {
+      "const": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal"
+    },
+    "attempt_id": {
+      "const": "deepseek-native-check-in-runbook-worker-coordinate-recovery-001"
+    },
+    "candidate_source": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "result": {
+      "enum": [
+        "pass",
+        "failed_closed"
+      ]
+    },
+    "terminal_class": {
+      "enum": [
+        "useful_worker_pass",
+        "useful_worker_candidate_rejected",
+        "useful_worker_transport_terminal"
+      ]
+    },
+    "failure_coordinate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        null,
+        "native_worker_timeout",
+        "native_harness_terminal_failure",
+        "occupied_transport_failure",
+        "useful_worker_candidate_rejected",
+        "occupied_acceptance_mismatch",
+        "attempt_root_cleanup_failed"
+      ]
+    },
+    "process": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "native_process_count",
+        "harness_exit_code",
+        "wall_clock_ms",
+        "stdout_bytes",
+        "stdout_sha256",
+        "stderr_bytes",
+        "stderr_sha256",
+        "broker_stderr_bytes",
+        "broker_stderr_sha256"
+      ],
+      "properties": {
+        "native_process_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "harness_exit_code": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "wall_clock_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "stdout_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "stdout_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "stderr_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "stderr_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "broker_stderr_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "broker_stderr_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "hmr_events": {
+      "type": "array",
+      "maxItems": 2,
+      "items": {
+        "enum": [
+          "sentinel_activated",
+          "stock_headless_hmr_ready"
+        ]
+      }
+    },
+    "runner": {
+      "oneOf": [
+        {
+          "type": "object",
+          "maxProperties": 0
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schema_version",
+            "status",
+            "failure_stage",
+            "session_id_sha256",
+            "provider",
+            "model",
+            "reasoning_effort",
+            "allowed_tool_names",
+            "tool_lifecycle",
+            "target_path_sha256",
+            "request_count",
+            "tool_names",
+            "tool_result_count",
+            "turn_kind"
+          ],
+          "properties": {
+            "schema_version": {
+              "const": "ariadne.native_harness_useful_worker_coordinate_runner_terminal.v1"
+            },
+            "status": {
+              "enum": [
+                "completed",
+                "failed"
+              ]
+            },
+            "failure_stage": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                null,
+                "loader",
+                "packages",
+                "services",
+                "roots",
+                "factory",
+                "published",
+                "turn",
+                "flush",
+                "terminal"
+              ]
+            },
+            "session_id_sha256": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "provider": {
+              "const": "deepseek-official"
+            },
+            "model": {
+              "const": "deepseek-v4-flash"
+            },
+            "reasoning_effort": {
+              "const": "high"
+            },
+            "allowed_tool_names": {
+              "const": [
+                "edit",
+                "glob",
+                "read"
+              ]
+            },
+            "target_path_sha256": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "request_count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tool_names": {
+              "type": "array",
+              "maxItems": 1,
+              "items": {
+                "type": "string",
+                "maxLength": 32
+              }
+            },
+            "tool_result_count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "turn_kind": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 64
+            },
+            "tool_lifecycle": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "input_result_kind",
+                    "post_execute_decision_kind",
+                    "conclusion_request_stage",
+                    "authoritative_final_result_kind",
+                    "coordinate"
+                  ],
+                  "properties": {
+                    "input_result_kind": {
+                      "enum": [
+                        "success",
+                        "error"
+                      ]
+                    },
+                    "post_execute_decision_kind": {
+                      "enum": [
+                        "accept",
+                        "block",
+                        "failed"
+                      ]
+                    },
+                    "conclusion_request_stage": {
+                      "enum": [
+                        "pre_execute_after_boundary_accept",
+                        "post_execute_after_decision",
+                        "not_requested"
+                      ]
+                    },
+                    "authoritative_final_result_kind": {
+                      "enum": [
+                        "success_concluding",
+                        "success_nonconcluding",
+                        "error"
+                      ]
+                    },
+                    "coordinate": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "enum": [
+                        null,
+                        "edit_success_accept_concluded",
+                        "edit_success_accept_late_marker",
+                        "edit_error_accept_not_concluded",
+                        "edit_success_blocked_not_concluded",
+                        "post_execute_decision_failed_not_concluded"
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "broker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider_call_started",
+        "provider_call_completed",
+        "provider_call_failed",
+        "request_rejected"
+      ],
+      "properties": {
+        "provider_call_started": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "provider_call_completed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "provider_call_failed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "request_rejected": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "changed_paths",
+        "admitted",
+        "canonical_byte_count",
+        "canonical_sha256",
+        "retained_path",
+        "claim"
+      ],
+      "properties": {
+        "changed_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "maxItems": 1
+        },
+        "admitted": {
+          "type": "boolean"
+        },
+        "canonical_byte_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 8192
+        },
+        "canonical_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "retained_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
+        },
+        "claim": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "runbook_contract_present_default_off"
+          ]
+        }
+      }
+    },
+    "automatic_retry_count": {
+      "const": 0
+    },
+    "manual_retry_count": {
+      "const": 0
+    },
+    "resume_count": {
+      "const": 0
+    },
+    "fallback_count": {
+      "const": 0
+    },
+    "auxiliary_model_call_count": {
+      "const": 0
+    },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "harness_absent",
+        "broker_absent",
+        "attempt_root_absent",
+        "raw_logs_retained",
+        "raw_session_retained",
+        "raw_prompt_response_reasoning_retained",
+        "provider_key_present_in_worker_environment"
+      ],
+      "properties": {
+        "harness_absent": {
+          "const": true
+        },
+        "broker_absent": {
+          "const": true
+        },
+        "attempt_root_absent": {
+          "const": true
+        },
+        "raw_logs_retained": {
+          "const": false
+        },
+        "raw_session_retained": {
+          "const": false
+        },
+        "raw_prompt_response_reasoning_retained": {
+          "const": false
+        },
+        "provider_key_present_in_worker_environment": {
+          "const": false
+        }
+      }
+    }
+  }
+}

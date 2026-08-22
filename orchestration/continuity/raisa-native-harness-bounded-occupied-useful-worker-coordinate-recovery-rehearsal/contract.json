@@ -1,0 +1,92 @@
+{
+  "attempt": {
+    "attempt_id": "deepseek-native-check-in-runbook-worker-coordinate-recovery-001",
+    "disposable_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-runbook-worker-coordinate-recovery-001",
+    "evidence_namespace": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-001",
+    "lease_id": "lease-deepseek-native-check-in-runbook-worker-coordinate-recovery-001",
+    "work_order_id": "wo-deepseek-native-check-in-runbook-worker-coordinate-recovery-001"
+  },
+  "documentation_bindings": {
+    "plan_sha256": "3fad0373bc533c28cb53cfe308b68839de1cd50d13f6f490fb2aebd94a70f5b8",
+    "threat_model_sha256": "7d65979c9b4b7d550b538c36a8cb56d670feca03583aa3c4155a1c0426fa771b"
+  },
+  "occupied_envelope": {
+    "admitted_tool_names": [
+      "edit"
+    ],
+    "allowed_tool_names": [
+      "edit",
+      "glob",
+      "read"
+    ],
+    "automatic_retry_limit": 0,
+    "auxiliary_model_call_limit": 0,
+    "fallback_limit": 0,
+    "manual_retry_limit": 0,
+    "maximum_output_tokens": 4096,
+    "model": "deepseek-v4-flash",
+    "native_process_limit": 1,
+    "native_seconds": 420,
+    "parallel_tool_call_limit": 1,
+    "provider": "deepseek-official",
+    "provider_request_limit": 1,
+    "reasoning_effort": "high",
+    "resume_limit": 0,
+    "upstream_seconds": 300
+  },
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+  "protected_boundaries": {
+    "feature_flag_or_allowlist_changed": false,
+    "live_runtime_deployment_release_pages": false,
+    "ordinary_practice_enabled": false,
+    "product_or_patient_data_used": false,
+    "protected_ref_movement": false,
+    "raw_prompt_response_reasoning_retained": false
+  },
+  "schema_version": "ariadne.native_harness_useful_worker_contract.v1",
+  "source_bindings": {
+    "accepted_complete_sources": {
+      "accepted_sanitizer": {
+        "bytes": 2439,
+        "sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f"
+      },
+      "derived_bridge": {
+        "bytes": 1661,
+        "sha256": "3a49b28174eeefd77d7efe0a00498901ac6636b637ed9dfe60aba46980df1d0b"
+      },
+      "derived_guard": {
+        "bytes": 4501,
+        "sha256": "76029da0f9c030651fd10c0df16f4e75e86b2269d7560af7f94c74680f8598b9"
+      },
+      "derived_runner": {
+        "bytes": 12950,
+        "sha256": "5ef3b25babad23f4851faf7981cbdd6e77bf04701e91bf9ed80387df53f93ab9"
+      }
+    },
+    "accepted_coordinate_runner": {
+      "bytes": 9542,
+      "sha256": "33e4ceefc612ac2410c95b71d80ccc42e913976379e8c088f0b8eff966853282",
+      "source_commit": "f2d420ce9637081d08ef7d8241b588258d4ddc6a"
+    },
+    "occupied_runner": {
+      "bytes": 9467,
+      "sha256": "05a6752de9abeb878f96a0608fbd7195de1ad84ef4b593b794b354ddc490cfc0"
+    }
+  },
+  "work_package": {
+    "baseline": {
+      "bytes": 330,
+      "sha256": "9b9900a6aa084c458094ec89cb0bc816aa3a787fb84a1188abdd0897db43afd1"
+    },
+    "candidate_schema_sha256": "39ecaa4879d52094633788d32fa661e4b912293c9202522655b1f845e4aca071",
+    "claim": "runbook_contract_present_default_off",
+    "required_candidate": {
+      "bytes": 2331,
+      "sha256": "dbd765ef3afe2ffe283a07befff44f745b21a8ec474c58d5a6d944fe3a9c8448"
+    },
+    "target_relative_path": "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json",
+    "worker_owned_paths": [
+      "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json"
+    ]
+  }
+}

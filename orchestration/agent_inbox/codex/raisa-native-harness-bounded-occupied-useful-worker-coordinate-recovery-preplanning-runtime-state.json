@@ -1,0 +1,196 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_one_request_typed_useful_worker_coordinate_recovery_plan_before_any_native_harness_worker_or_provider_process",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh complete AGENTS.md read; accepted provider-free tool-result/conclusion coordinate diagnostic plan, evidence, closeout and Sol acceptance; accepted useful-worker failed-closed evidence; protected-evidence and user-decision boundaries; validated active-operation latch; machine-observed Git refs and worktree",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the accepted provider-free native-Harness tool-result/conclusion coordinate diagnostic at Continuity 393 / Compass 375 and the one-request typed useful-worker coordinate-recovery rehearsal as the next implementation.",
+    "current_authority_allocation": "GPT Sol owns plan freeze, deterministic admission, occupied-run monitoring, cleanup, candidate admission or rejection and acceptance. DeepSeek V4 Flash/high is planned for exactly one native-Harness worker turn and one provider request. Gemini 3.7 Flash/high is reserved for a fresh serial veto only if a deterministic candidate is admitted. Native subagents are declined because current developer policy prohibits delegation.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/deterministic-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/future-runner.mjs",
+      "docs/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-sol-acceptance.md",
+      "docs/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-closeout.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-terminal.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Exactly one separately named native-Harness worker process and one DeepSeek request may target only the same authored-synthetic default-off runbook candidate through the accepted typed runner. The consumed prior attempt is immutable. Retry, resume, fallback and auxiliary models remain zero. Product/API/schema/database/configuration changes, ordinary-practice enablement, protected data, deployment, Pages, protected evidence and protected refs remain closed.",
+    "git_refs_and_worktree": "The receipt builder supplies every Git identity and protected-ref comparison from its fresh machine snapshot. The task branch and origin tracking branch are aligned; all four protected refs remain exact; docs/branding and every unrelated untracked path remain preserved; explicit-path staging only."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+    "active_tranche": "Raisa native Harness bounded occupied useful-worker coordinate-recovery rehearsal",
+    "objective": "Freeze, admit and execute at most one separately named DeepSeek V4 Flash/high native-Harness worker turn against the same closed default-off runbook candidate using the accepted typed runner, one provider request, zero retry/resume/fallback and exact cleanup, then accept a candidate only through deterministic and independent review.",
+    "status": "in_progress",
+    "source_head": "d9a5ca40328c336857a44e5b28f94b991f61d269",
+    "authority_source": "Yuri's explicit confirmation of a new attempt, subsequent standing uninterrupted-development authority, and the accepted provider-free coordinate diagnostic.",
+    "checkpoint": {
+      "completed_stage": "Accepted deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_one_request_typed_useful_worker_coordinate_recovery_plan",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "one_separately_named_native_harness_worker_process_and_one_deepseek_provider_request_maximum",
+      "same_closed_default_off_runbook_candidate_only",
+      "accepted_typed_tool_result_conclusion_runner_required",
+      "consumed_useful_worker_attempt_001_immutable_no_retry_resume_overwrite_or_reclassification",
+      "automatic_retry_resume_fallback_and_auxiliary_model_counts_zero",
+      "candidate_adoption_requires_canonical_validation_and_independent_review",
+      "no_product_source_configuration_api_openapi_graphql_schema_migration_route_or_database_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_first_party_client_or_waiting_area_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+    "assessed_stage": "one-request typed useful-worker coordinate-recovery preplanning",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "rationale": "One stable separable mechanical package can now be constrained by an accepted typed Harness coordinate: produce the already frozen default-off rollout, kill-switch and rollback runbook candidate without acceptance or activation authority.",
+        "work_packages": [
+          "one_typed_native_harness_turn_for_the_closed_default_off_check_in_rollout_kill_switch_runbook_candidate"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "rationale": "A fresh Gemini 3.7 Flash/high veto provides useful independent semantic review only after a candidate passes the typed terminal and deterministic admission; no candidate means no Gemini dispatch.",
+        "work_packages": [
+          "serial_independent_veto_of_an_admitted_candidate_only"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Current developer policy prohibits native-subagent delegation, and plan freeze, one occupied worker turn, cleanup, deterministic admission and verifier dispatch form one serial custody chain.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "freeze the exact plan contract terminal schema and worker packet before consuming the attempt identity",
+      "pass deterministic admission and the one-request preexecution checkpoint before DeepSeek dispatch",
+      "settle the typed terminal and complete exact cleanup before candidate interpretation",
+      "dispatch Gemini only after deterministic candidate admission and never as a fallback worker"
+    ],
+    "reassessment_triggers": [
+      "plan and contract freeze",
+      "pre-worker dispatch",
+      "typed terminal and candidate gate",
+      "pre-verifier dispatch",
+      "closeout"
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "GPT Sol completed the fresh five-source rehydration and owns the serial custody chain."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Code is historical lineage only and is prohibited as fallback for this native-Harness operation."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Gemini is reserved for a later fresh serial veto only if a deterministic candidate is admitted."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No subagent was spawned because current developer policy prohibits delegation."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The exact native-Harness broker is not invoked until the plan and deterministic admission pass; no fallback transport is authorised."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected and no fallback is authorised."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

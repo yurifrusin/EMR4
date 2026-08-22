@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Canonical check-in default-off rollout runbook worker candidate",
+  "const": {
+    "schema_version": "emr4.api_spine.canonical_check_in_rollout_runbook.v1",
+    "command": "canonical_check_in",
+    "default_posture": {
+      "ordinary_practice_enabled": false,
+      "activation_authority": false,
+      "authored_synthetic_allowlist_unchanged": true,
+      "active_ordinary_practice_records": 0
+    },
+    "runbook": {
+      "status": "prepared_not_authorized",
+      "rollout_stages": [
+        "preflight",
+        "synthetic_canary_planned",
+        "kill_switch_engaged",
+        "rollback_required",
+        "rollback_verified",
+        "withdrawn"
+      ],
+      "admission": {
+        "ordinary_activation_permitted": false,
+        "feature_flag_change_permitted": false,
+        "allowlist_change_permitted": false,
+        "route_mount_change_permitted": false
+      },
+      "kill_switch": {
+        "default_state": "engaged",
+        "allowed_transition": "clear_to_engaged_only",
+        "unknown_state_releases_command": false
+      },
+      "rollback": {
+        "unknown_commit_policy": "deny_success_no_blind_retry",
+        "triggers": [
+          "candidate_validation_failed",
+          "authority_or_attestation_stale",
+          "non_phi_alert_threshold_crossed",
+          "commit_state_unknown",
+          "readback_mismatch"
+        ],
+        "ordered_steps": [
+          "engage_kill_switch",
+          "stop_new_admissions",
+          "classify_commit_state",
+          "read_back_source_truth",
+          "verify_zero_ordinary_release",
+          "record_non_phi_evidence"
+        ],
+        "source_truth_readback_required": true,
+        "ordinary_release_after_rollback": false
+      },
+      "audit": {
+        "non_phi_only": true,
+        "required_identifier_classes": [
+          "correlation_id",
+          "idempotency_key_digest",
+          "command_receipt_id",
+          "source_commit_oid",
+          "rollback_reason"
+        ],
+        "full_git_object_id_required": true,
+        "secret_values_permitted": false
+      },
+      "effects": {
+        "product_route_changed": false,
+        "feature_flag_changed": false,
+        "synthetic_allowlist_changed": false,
+        "ordinary_practice_enabled": false,
+        "generic_status_arrived_changed": false,
+        "waiting_area_changed": false,
+        "product_or_patient_data_used": false,
+        "live_runtime_or_deployment_changed": false,
+        "protected_ref_changed": false
+      },
+      "claim": "runbook_contract_present_default_off"
+    }
+  }
+}

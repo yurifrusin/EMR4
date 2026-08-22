@@ -1,0 +1,133 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa native Harness bounded occupied useful-worker coordinate-recovery rehearsal",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_one_request_typed_useful_worker_coordinate_recovery_plan",
+    "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "d9a5ca40328c336857a44e5b28f94b991f61d269",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "7fa63b37dc72be7af6ac3d1588706dbfdade1e35",
+    "reason_codes": [],
+    "resolved_commit": "d9a5ca40328c336857a44e5b28f94b991f61d269",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "d9a5ca40328c336857a44e5b28f94b991f61d269"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "7fa63b37dc72be7af6ac3d1588706dbfdade1e35",
+    "branch_origin_aligned": true,
+    "head": "7fa63b37dc72be7af6ac3d1588706dbfdade1e35",
+    "origin_branch_commit": "7fa63b37dc72be7af6ac3d1588706dbfdade1e35",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 662
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "one-request typed useful-worker coordinate-recovery preplanning",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "One stable separable mechanical package can now be constrained by an accepted typed Harness coordinate: produce the already frozen default-off rollout, kill-switch and rollback runbook candidate without acceptance or activation authority.",
+        "work_packages": [
+          "one_typed_native_harness_turn_for_the_closed_default_off_check_in_rollout_kill_switch_runbook_candidate"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "A fresh Gemini 3.7 Flash/high veto provides useful independent semantic review only after a candidate passes the typed terminal and deterministic admission; no candidate means no Gemini dispatch.",
+        "work_packages": [
+          "serial_independent_veto_of_an_admitted_candidate_only"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits native-subagent delegation, and plan freeze, one occupied worker turn, cleanup, deterministic admission and verifier dispatch form one serial custody chain.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "plan and contract freeze",
+      "pre-worker dispatch",
+      "typed terminal and candidate gate",
+      "pre-verifier dispatch",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "freeze the exact plan contract terminal schema and worker packet before consuming the attempt identity",
+      "pass deterministic admission and the one-request preexecution checkpoint before DeepSeek dispatch",
+      "settle the typed terminal and complete exact cleanup before candidate interpretation",
+      "dispatch Gemini only after deterministic candidate admission and never as a fallback worker"
+    ]
+  },
+  "planned_action": "freeze_the_one_request_typed_useful_worker_coordinate_recovery_plan_before_any_native_harness_worker_or_provider_process",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/deterministic-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/future-runner.mjs",
+      "docs/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-sol-acceptance.md",
+      "docs/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-closeout.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-terminal.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns plan freeze, deterministic admission, occupied-run monitoring, cleanup, candidate admission or rejection and acceptance. DeepSeek V4 Flash/high is planned for exactly one native-Harness worker turn and one provider request. Gemini 3.7 Flash/high is reserved for a fresh serial veto only if a deterministic candidate is admitted. Native subagents are declined because current developer policy prohibits delegation.",
+    "git_refs_and_worktree": "The receipt builder supplies every Git identity and protected-ref comparison from its fresh machine snapshot. The task branch and origin tracking branch are aligned; all four protected refs remain exact; docs/branding and every unrelated untracked path remain preserved; explicit-path staging only.",
+    "live_handover_current_baton": "AGENTS.md names the accepted provider-free native-Harness tool-result/conclusion coordinate diagnostic at Continuity 393 / Compass 375 and the one-request typed useful-worker coordinate-recovery rehearsal as the next implementation.",
+    "protected_evidence_boundaries": "Exactly one separately named native-Harness worker process and one DeepSeek request may target only the same authored-synthetic default-off runbook candidate through the accepted typed runner. The consumed prior attempt is immutable. Retry, resume, fallback and auxiliary models remain zero. Product/API/schema/database/configuration changes, ordinary-practice enablement, protected data, deployment, Pages, protected evidence and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
