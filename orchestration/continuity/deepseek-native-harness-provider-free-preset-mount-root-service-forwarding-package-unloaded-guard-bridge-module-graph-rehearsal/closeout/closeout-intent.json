@@ -1,0 +1,546 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal",
+    "title": "DeepSeek native Harness package-unloaded guard-bridge module-graph terminal",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T10:27:17.1698176+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal",
+      "title": "Package-unloaded guard-bridge module-graph terminal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted exactly one package-unloaded authored-synthetic Node module graph and its deterministic negative-evidence closeout.",
+          "The attempt is consumed; no retry, runner, installed package, native Harness, worker, model, provider, product, data, deployment, Pages or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-content-free-module-graph-terminal",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/attempt-001-process-envelope.json",
+          "status": "accepted",
+          "summary": "Accept one immutable exit-1 content-free process envelope with zero stdout, complete cleanup and no retry."
+        },
+        {
+          "id": "accept-bridge-import-target-absence-diagnosis",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/attempt-001-source-diagnosis.json",
+          "status": "accepted",
+          "summary": "Accept the deterministic source reading that the guard-owned relative bridge import target was absent from the eight-file inventory."
+        },
+        {
+          "id": "reject-guard-graph-behavior-claim",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "The terminal proves no guard mount, scope, restriction, schema, typed-handoff, runner, native-Harness or worker behavior."
+        },
+        {
+          "id": "require-derived-import-closure-before-successor-process",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "A distinct recovery must derive every relative specifier and prove every resolved target is materialized before its one process."
+        }
+      ],
+      "claim_scope": [
+        "Exactly one isolated package-unloaded Node process was consumed and exited 1.",
+        "The process envelope was persisted before stream decoding or interpretation and retains no raw stream, path or environment value.",
+        "The disposable root and all eight materialized files were absent after process completion.",
+        "The exact guard relative bridge specifier resolved to a target absent from the materialized inventory.",
+        "The byte-exact accepted bridge was present under a different repository source basename.",
+        "Raw stderr was not read or retained; the diagnosis is source-only.",
+        "Focused twenty-three tests and the exact broader 149-test collection passed before the process but lacked import-closure verification.",
+        "Node process count is one; native Harness, worker, model, provider, network, database, Docker, target, retry and resume counts are zero.",
+        "Guard behavior, runner behavior, native boot and useful worker quality remain unproved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-612.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-guard-bridge-module-graph-terminal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-pre-verifier-acceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_isolated_node_fixture_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/attempt-001-process-envelope.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/attempt-001-failure-terminal.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/attempt-001-source-diagnosis.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/attempt-001-source-diagnosis-report.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The guard-bridge-sanitizer relative import graph has not passed.",
+        "The derived runner has not been materialized or executed.",
+        "The installed package seed has not loaded the correction.",
+        "No native Harness boot, DeepSeek worker turn, model/provider request or worker-quality evidence is accepted.",
+        "Attempt 001 is consumed and no retry exists.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development",
+      "outcome": "The first full guard module graph failed closed and exposed one exact missing import-closure invariant without external activity or raw error retention.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/attempt-001-source-diagnosis.json",
+        "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Repair the demonstrated guard-to-bridge module-resolution defect before admitting the broader runner",
+      "why_now": "The exact guard behavior remains unproved solely because its relative bridge target was absent; complete import closure is the demonstrated missing mechanical control.",
+      "outcome": "One distinct package-unloaded graph will derive every relative import target, prove closure and then exercise the exact three cases.",
+      "unlocks": [
+        "Behavioral evidence that the corrected guard reaches the accepted bridge and projects the exact tool view.",
+        "Direct progression to the complete package-unloaded runner evaluation."
+      ],
+      "does_not_solve": [
+        "No installed package load, native Harness boot, DeepSeek turn, model/provider request or worker-quality evidence.",
+        "No product/data action, production, release, Pages or protected integration."
+      ],
+      "evidence": [
+        "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal-closeout.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/attempt-001-source-diagnosis.json"
+      ],
+      "orientation_statement": "Derive and validate the complete package-unloaded import closure before one distinct recovery process; if it passes, proceed directly to the full runner."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal",
+      "active_tranche": "DeepSeek native Harness provider-free package-unloaded guard-bridge import-closure recovery rehearsal",
+      "objective": "Derive every relative module specifier from the exact guard, bridge and fixture, prove every resolved target is present, materialize the accepted bridge bytes at the guard-owned target and run exactly one distinct Node graph for success, missing service and missing mount without runner, installed package, native Harness, worker, model or provider activity.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and extended authority for the bounded native-Harness control sequence.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_exact_import_closure_recovery_contract"
+    },
+    "incidents": [],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "guard_bridge_module_graph_focused_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "pytest",
+          "--noconftest",
+          "-p",
+          "no:cacheprovider",
+          "--strict-config",
+          "--strict-markers",
+          "-q",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "guard_bridge_module_graph_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "guard_bridge_module_graph_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal-threat-model-delta.md",
+      "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-pre-verifier-acceptance-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-612.md",
+      "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-guard-bridge-module-graph-terminal.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_package_unloaded_import_closure_recovery_only",
+    "consumed_module_graph_attempt_001_immutable_and_no_retry",
+    "accepted_guard_bridge_and_sanitizer_bytes_unchanged",
+    "derive_every_relative_import_specifier_and_resolved_target",
+    "complete_import_closure_required_before_process",
+    "accepted_bridge_bytes_materialized_at_guard_owned_relative_target",
+    "exactly_one_distinct_isolated_node_recovery_process",
+    "automatic_manual_retry_and_resume_zero",
+    "authored_synthetic_scope_preset_error_service_context_and_tool_views_only",
+    "local_stub_modules_for_dsh_scope_and_dsh_agent_presets_only",
+    "installed_package_seed_immutable_and_unloaded",
+    "no_derived_runner_materialization_or_execution",
+    "success_missing_service_and_missing_mount_guard_handoff_matrix_only",
+    "content_free_outer_process_envelope_before_interpretation",
+    "no_raw_message_stack_cause_path_stream_prompt_response_environment_or_credential",
+    "zero_native_harness_worker_model_provider_network_database_docker_and_target_activity",
+    "disposable_process_and_root_cleanup_required",
+    "git_object_id_contract_bindings_derive_from_machine_resolver_only",
+    "push_expected_origin_derives_from_machine_git_parent_only",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_or_generic_status_arrived_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "guard-bridge-graph-incident-0923",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-guard-bridge-module-graph",
+      "role": "orchestrator",
+      "resource_id": "module-graph-predecessor-evidence-binding",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_python",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Predecessor artifact constants are read from the imported source and not inferred from filename semantics.",
+      "observed_error": "The first contract-generation command referenced nonexistent EVIDENCE_V2_PATH instead of the predecessor's actual EVIDENCE_PATH constant.",
+      "detection_method": "Python import raised AttributeError before contract creation or Node execution.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-612.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.predecessor_artifact_constant_guessed_instead_of_read_from_source",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the predecessor evidence through its exported EVIDENCE_PATH constant.",
+        "prevention_control": "Imported predecessor artifact paths are resolved from source-owned exported constants before contract generation.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-612.md"
+        ]
+      },
+      "baton_summary": "records and corrects a guessed predecessor evidence constant before process execution."
+    },
+    {
+      "attempt_key": "guard-bridge-graph-incident-0924",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-guard-bridge-module-graph",
+      "role": "orchestrator",
+      "resource_id": "module-graph-contract-materialized-path-schema",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_jsonschema",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Materialized module basenames in schemas are derived from the controller's exact source inventory.",
+      "observed_error": "The first schema guessed a short bridge basename while the controller inventory used the longer source-owned basename.",
+      "detection_method": "Contract JSON Schema validation rejected the materialized_relative_paths vector before process execution.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/contract.schema.json",
+        "docs/ariadne-agent-error-correction-register-revision-612.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.module_materialization_basename_guessed_instead_of_derived",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Align the schema to the controller-derived materialized basename and regenerate the exact contract.",
+        "prevention_control": "Schema path vectors are compared directly to controller materialization constants before admission.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/contract.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-612.md"
+        ]
+      },
+      "baton_summary": "records and corrects a guessed bridge basename in the contract schema before process execution."
+    },
+    {
+      "attempt_key": "guard-bridge-graph-incident-0925",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-guard-bridge-module-graph",
+      "role": "orchestrator",
+      "resource_id": "module-graph-focused-plan-assertion",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Focused assertion literals contain only the intended document text and no patch syntax.",
+      "observed_error": "The first focused plan assertion retained a literal plus sign after an embedded newline.",
+      "detection_method": "The focused suite reported one failed and twenty-two passed tests before process execution.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-612.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.patch_marker_retained_inside_multiline_test_literal",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the patch marker and rerun the complete focused suite.",
+        "prevention_control": "Focused narrative assertions are executed before contract and process admission; exact passing counts come only from completed pytest output.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-612.md"
+        ]
+      },
+      "baton_summary": "records and corrects a retained patch marker in a focused assertion before process execution."
+    },
+    {
+      "attempt_key": "guard-bridge-graph-incident-0926",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-guard-bridge-module-graph",
+      "role": "orchestrator",
+      "resource_id": "package-unloaded-relative-import-closure",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "isolated_node_process",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Every relative module specifier resolves to an exact materialized target before the single process is admitted.",
+      "observed_error": "The guard imported a short bridge relative path while the inventory materialized the accepted bridge bytes only under the longer repository source basename.",
+      "detection_method": "The single Node process exited 1 with zero stdout; process-free source diagnosis then proved the guard-owned import target absent without reading raw stderr.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/attempt-001-process-envelope.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/attempt-001-source-diagnosis.json",
+        "docs/ariadne-agent-error-correction-register-revision-612.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.module_graph_file_inventory_passed_without_relative_import_closure",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Contain attempt 001 without retry and require a distinct recovery to derive and validate every relative import target before its process boundary.",
+        "prevention_control": "The recovery contract admits a process only when the source-derived relative-import graph has complete one-to-one closure against the disposable file inventory.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/attempt-001-source-diagnosis.json",
+          "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal-closeout.md"
+        ]
+      },
+      "baton_summary": "records and contains the consumed module-graph failure caused by a missing relative-import closure invariant."
+    },
+    {
+      "attempt_key": "guard-bridge-graph-incident-0927",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-guard-bridge-module-graph",
+      "role": "orchestrator",
+      "resource_id": "module-graph-negative-evidence-pre-verifier-runtime-state",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "acceptance",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every required adapter has an explicit observation in each continuation runtime state.",
+      "observed_error": "The first pre-verifier state omitted Deep Code and Claude adapter observations.",
+      "detection_method": "Orchestrator preflight returned revision_required with two exact adapter_observation_missing reasons.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-pre-verifier-acceptance-runtime-state.json",
+        "docs/ariadne-agent-error-correction-register-revision-612.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.pre_verifier_runtime_state_omitted_required_adapter_observations",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add explicit not-selected observations for Deep Code and Claude and rerun the same preflight.",
+        "prevention_control": "Continuation states enumerate the complete configured adapter roster before a receipt may pass.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-pre-verifier-acceptance-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-612.md"
+        ]
+      },
+      "baton_summary": "records and corrects two omitted required adapter observations before negative-evidence acceptance."
+    },
+    {
+      "attempt_key": "guard-bridge-graph-incident-0928",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-guard-bridge-module-graph",
+      "role": "orchestrator",
+      "resource_id": "clockwork-next-operation-identifier",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_dry_run",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A successor operation identifier satisfies the transactional closed length and character vocabulary before closeout publication.",
+      "observed_error": "The first closeout intent proposed a 138-character successor operation identifier, exceeding the 128-character schema maximum.",
+      "detection_method": "Clockwork dry-run rejected the transaction manifest with next_operation_id_invalid before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-612.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_operation_identifier_composed_beyond_closed_length",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the successor identifier with an 84-character closed-vocabulary identifier and rerun the clockwork dry-run.",
+        "prevention_control": "Successor operation identifiers are passed through the transactional manifest validator before any live clockwork publication.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-612.md"
+        ]
+      },
+      "baton_summary": "records and corrects an overlength successor operation identifier before clockwork publication."
+    },
+    {
+      "attempt_key": "guard-bridge-graph-incident-0929",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-guard-bridge-module-graph",
+      "role": "orchestrator",
+      "resource_id": "clockwork-agent-error-tranche-label",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_dry_run",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Agent-error tranche labels satisfy their own closed length contract and do not blindly reuse longer operation identifiers.",
+      "observed_error": "The first six incident observations reused the current 127-character operation identifier in a field limited to 120 characters.",
+      "detection_method": "Clockwork dry-run rejected the observations with tick_incident_tranche before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-612.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.incident_tranche_reused_operation_identifier_beyond_closed_length",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace all six observation tranche values with a stable 53-character closed-vocabulary label.",
+        "prevention_control": "Incident observations use a dedicated schema-valid tranche label and pass the clockwork validator before publication.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-612.md"
+        ]
+      },
+      "baton_summary": "records and corrects an overlength incident-tranche label before clockwork publication."
+    },
+    {
+      "attempt_key": "guard-bridge-graph-incident-0930",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-guard-bridge-module-graph",
+      "role": "orchestrator",
+      "resource_id": "clockwork-agent-error-stage-vocabulary",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_dry_run",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Incident stages are selected from the exact registered vocabulary rather than authored descriptively.",
+      "observed_error": "Two observations used descriptive verification and review labels outside the incident stage enum.",
+      "detection_method": "Clockwork dry-run rejected the observations with tick_incident_stage before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-612.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.incident_stage_authored_descriptively_outside_closed_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the descriptive values with deterministic_verification and acceptance from the closed stage vocabulary.",
+        "prevention_control": "Closeout incident stages are selected from the clockwork-owned enum and validated before publication.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-612.md"
+        ]
+      },
+      "baton_summary": "records and corrects descriptive incident stages outside the closed vocabulary before publication."
+    },
+    {
+      "attempt_key": "guard-bridge-graph-incident-0931",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-guard-bridge-module-graph",
+      "role": "orchestrator",
+      "resource_id": "agent-error-revision-machine-reading",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_dry_run",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The human register revision note includes the exact prospective machine reading required by clockwork.",
+      "observed_error": "Revision 612 omitted the comment binding revision number, total incident count, ordered new incident IDs and open count.",
+      "detection_method": "Clockwork dry-run rejected the revision artifact with tick_incident_revision_reading before publication.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-612.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.incident_revision_note_omitted_machine_reading_comment",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact revision 612, 931 incidents, ordered AER-0923 through AER-0931 and zero-open machine reading comment.",
+        "prevention_control": "Every incident-bearing revision note carries the exact clockwork-derived prospective register reading before live publication.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-612.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records and corrects a missing register machine-reading comment before clockwork publication."
+    }
+  ]
+}
