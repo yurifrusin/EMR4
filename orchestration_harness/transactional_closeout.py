@@ -138,6 +138,11 @@ def validate_manifest(value: object) -> dict[str, Any]:
         "node",
     )
     _identifier(node["id"], "node_id")
+    contract_evidence = node["contract_evidence"]
+    if not isinstance(contract_evidence, list) or any(
+        not isinstance(item, dict) for item in contract_evidence
+    ):
+        raise ValueError("node_contract_evidence_invalid")
     relationships = node["relationships"]
     if not isinstance(relationships, list) or len(relationships) != 1:
         raise ValueError("node_relationship_invalid")

@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.governance_live_tick_rejection_receipt.v1",
+  "operation_id": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery",
+  "attempt_id": "clockwork-closeout-check-001",
+  "status": "rejected",
+  "source_commit": "d9a5ca40328c336857a44e5b28f94b991f61d269",
+  "failure_coordinate": "tick_transaction_prepare",
+  "specific_invariant": "contract_evidence_object_required",
+  "canonical_mutation_count": 0,
+  "provider_request_count": 0
+}

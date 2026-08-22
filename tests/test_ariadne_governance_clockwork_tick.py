@@ -448,6 +448,18 @@ def test_intent_rejects_derived_unsafe_and_underbounded_input() -> None:
             validate_tick_intent(underbounded, contract)
 
 
+def test_intent_rejects_non_object_contract_evidence_before_projection() -> None:
+    contract = validate_contract(_json(CONTRACT_PATH))
+    malformed = _json(INTENT_PATH)
+    malformed["transaction_manifest"]["node"]["contract_evidence"] = [
+        "docs/not-a-contract-evidence-object.md"
+    ]
+    with pytest.raises(
+        ClockworkTickRejection, match="tick_transaction_manifest"
+    ):
+        validate_tick_intent(malformed, contract)
+
+
 def test_incident_intent_rejects_derived_identity_and_unsafe_evidence() -> None:
     contract = validate_contract(_json(CONTRACT_PATH))
     baseline = _incident_intent(ROOT)

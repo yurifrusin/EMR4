@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 615,
+  "register_revision": 616,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -37049,6 +37049,117 @@
       },
       "incident_id": "AER-0953",
       "attempt_id": "clock-21e33b7ad9835cc904d3424e",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery",
+      "role": "orchestrator",
+      "resource_id": "coordinate-recovery-postcompaction-receipt",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Git identities in Ariadne source evidence must come only from the machine snapshot and never from manually repeated object identifiers in prose.",
+      "observed_error": "The first post-compaction continuation receipt repeated one full Git object in git_refs_and_worktree prose and was rejected before action.",
+      "detection_method": "The orchestrator receipt builder returned revision_required with git_refs_evidence_manual_object_id_forbidden before worker, provider or repository mutation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-tool-result-coordinate-recovery-postcompaction-attempt-001-rejected-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-tool-result-coordinate-recovery-postcompaction-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_ref_object_repeated_in_source_evidence_prose",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove object identifiers from source-evidence prose and rely exclusively on the receipt builder's machine Git snapshot and resolver.",
+        "prevention_control": "Receipt tests and the builder reject every manually supplied Git object in git-ref evidence while allowing full resolved objects only in machine-owned fields.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-tool-result-coordinate-recovery-postcompaction-receipt.json",
+          "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery_plan.py"
+        ]
+      },
+      "incident_id": "AER-0954",
+      "attempt_id": "clock-16c582fb7846a8d132aa7828",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery",
+      "role": "orchestrator",
+      "resource_id": "coordinate-recovery-runtime-fixture",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_node_fixture",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The real-runtime fixture must derive the Cordis peer from the exact @deepseek-ai package parent and import only the accepted local rc.7 dependency graph.",
+      "observed_error": "The first real-runtime fixture derived Cordis from one directory above the @deepseek-ai scope and emitted fixture_output_rejected before starting Node.",
+      "detection_method": "The closed controller terminal reported fixture_output_rejected with zero external activity and complete root cleanup; bounded local inspection identified the incorrect parent relation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/attempt-001-fixture-output-rejected-terminal.json",
+        "scripts/deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.scoped_node_package_peer_parent_miscalculated",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Resolve Cordis from the accepted dsh-tools package's @deepseek-ai scope parent and rerun the immutable new fixture attempt.",
+        "prevention_control": "The focused test now executes all five variants through the imported real rc.7 ToolRuntime and requires exact cleanup, preventing a classifier-only false pass.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/deterministic-evidence.json",
+          "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py"
+        ]
+      },
+      "incident_id": "AER-0955",
+      "attempt_id": "clock-dca716ae6c63e820b7d5df5d",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery",
+      "role": "orchestrator",
+      "resource_id": "coordinate-recovery-clockwork-closeout",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Initial transactional-manifest validation must reject non-object contract-evidence entries before prospective Continuity projection.",
+      "observed_error": "The first closeout intent supplied repository paths as contract-evidence entries; shallow validation passed and the later Continuity projection rejected contract_evidence_object_required.",
+      "detection_method": "The clockwork dry-run failed with tick_transaction_prepare before generation publication or canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.transaction_manifest_contract_evidence_shape_validated_only_at_projection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use an empty contract-evidence array for this foundation node and reject every non-object entry during initial transactional-manifest validation.",
+        "prevention_control": "A shared clockwork regression test now requires tick_transaction_manifest rejection before projection whenever contract evidence contains a non-object entry.",
+        "evidence_paths": [
+          "orchestration_harness/transactional_closeout.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "incident_id": "AER-0956",
+      "attempt_id": "clock-cb6c186706943fb87daee076",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

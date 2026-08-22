@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 615,
+  "register_revision": 616,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "e67296f94d0313b942778060840c375cc1b069657c3a53ecb4e5bde65e2968fc",
-  "incident_count": 953,
+  "canonical_register_sha256": "5b64fd458f712cf6f14cf980b2ffe1d31cc962ad778b3f130550479942531502",
+  "incident_count": 956,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 503,
+      "agent_behavior": 505,
       "harness": 68,
-      "operator": 228,
+      "operator": 229,
       "repository": 138,
       "transport": 16
     },
@@ -18,8 +18,8 @@
       "command_scope_violation": 95,
       "evidence_misreport": 73,
       "harness_failure": 68,
-      "operator_error": 228,
-      "output_contract_violation": 282,
+      "operator_error": 229,
+      "output_contract_violation": 284,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
       "repository_defect": 138,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 65,
       "integration_reviewer": 3,
-      "orchestrator": 822,
+      "orchestrator": 825,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 596,
+      "low": 599,
       "material": 133,
       "moderate": 224
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 204,
-      "canonical_unchanged": 580,
+      "canonical_unchanged": 583,
       "untrusted_partial_worktree": 169
     },
     "by_resource_and_role": {
@@ -182,6 +182,9 @@
       "continuity-negative-result-acceptance-pointer::orchestrator": 1,
       "controlled-document-date-timestamp-pair::orchestrator": 1,
       "controller-rejected-result-exit-contract::orchestrator": 1,
+      "coordinate-recovery-clockwork-closeout::orchestrator": 1,
+      "coordinate-recovery-postcompaction-receipt::orchestrator": 1,
+      "coordinate-recovery-runtime-fixture::orchestrator": 1,
       "current-baton-acceptance-row-compaction::orchestrator": 1,
       "current-baton-acceptance-row-density::orchestrator": 1,
       "deepseek-flash-workers::implementer": 14,

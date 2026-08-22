@@ -2,30 +2,32 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "useful-worker-failed-closed-closeout-tick-check",
+      "command_id": "tool-result-coordinate-closeout-tick-check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_governance_clockwork_tick",
         "--check",
         "--intent",
-        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/closeout-intent.json"
+        "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "useful-worker-failed-closed-closeout-provider-free-tests",
+      "command_id": "tool-result-coordinate-closeout-provider-free-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
+        "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery_plan.py",
         "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
-        "tests/test_ariadne_deepseek_native_harness_broker.py",
+        "tests/test_ariadne_git_object_resolution.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
         "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_transactional_closeout.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_active_operation_latch.py",
         "tests/test_current_baton_consistency.py",
@@ -34,27 +36,31 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "useful-worker-failed-closed-closeout-ruff",
+      "command_id": "tool-result-coordinate-closeout-ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "orchestration_harness/check_in_rollout_runbook.py",
-        "scripts/raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
-        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py"
+        "orchestration_harness/transactional_closeout.py",
+        "orchestration_harness/native_tool_result_conclusion_coordinate.py",
+        "scripts/deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery_plan.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "useful-worker-failed-closed-closeout-compile",
+      "command_id": "tool-result-coordinate-closeout-compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "orchestration_harness/check_in_rollout_runbook.py",
-        "scripts/raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
-        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py"
+        "orchestration_harness/transactional_closeout.py",
+        "orchestration_harness/native_tool_result_conclusion_coordinate.py",
+        "scripts/deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery_plan.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

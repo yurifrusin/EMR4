@@ -1,0 +1,377 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery",
+    "title": "DeepSeek native Harness provider-free tool-result/conclusion coordinate diagnostic recovery",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T14:31:55.5258598+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery",
+      "title": "DeepSeek native Harness provider-free tool-result/conclusion coordinate diagnostic recovery",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorised continued native-Harness control development under the standing uninterrupted-development authority.",
+          "This diagnostic remained provider-free and made no worker, model, provider, broker, network, database or Docker request.",
+          "The separately named successor may plan one new bounded occupied attempt; the consumed attempt remains immutable."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-rc7-real-runtime-coordinate-evidence",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/deterministic-evidence.json",
+          "status": "accepted",
+          "summary": "Accept five unique closed coordinates exercised through the exact rc.7 ToolRuntime in one provider-free Node process."
+        },
+        {
+          "id": "accept-pre-execute-conclusion-boundary",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/future-runner.mjs",
+          "status": "accepted",
+          "summary": "Accept conclusion marking after exact pre-execute boundary admission and before dispatch, with separate post-decision and final-result observation."
+        },
+        {
+          "id": "accept-machine-resolved-full-runner-source",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/deterministic-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the machine-resolved full accepted-runner source object and exact runner/package digests."
+        },
+        {
+          "id": "reject-broad-useful-worker-or-reliability-claim",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Reject any claim that provider-free lifecycle classification proves a future DeepSeek edit will be useful."
+        }
+      ],
+      "claim_scope": [
+        "The exact installed rc.7 ToolRuntime distinguishes pre-execute conclusion, late conclusion, tool error, policy block and policy-decision failure over authored-synthetic fixtures.",
+        "The future runner moves one conclusion request before dispatch and observes post-policy and authoritative result state separately.",
+        "Unknown vocabulary, contradictory states and mismatched coordinates fail closed.",
+        "No native worker, provider, product, data, runtime, deployment, release, Pages or protected-ref authority opened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/deterministic-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/deterministic-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/attempt-001-fixture-output-rejected-terminal.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-tool-result-coordinate-recovery-postcompaction-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-tool-result-coordinate-recovery-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-tool-result-coordinate-recovery-preplanning-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery_plan.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+          "tests/test_ariadne_git_object_resolution.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/transactional_closeout.py",
+          "orchestration_harness/native_tool_result_conclusion_coordinate.py",
+          "scripts/deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/coordinate.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/evidence.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/failure-terminal.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/future-runner.mjs",
+          "orchestration/human_inbox/yuri/2026-08-22--native-harness-tool-result-conclusion-coordinate-diagnostic.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "No occupied DeepSeek call has yet exercised the accepted typed runner.",
+        "No useful default-off runbook candidate has yet been produced or admitted.",
+        "The accepted provider-free coordinate result is not a broad Harness reliability claim.",
+        "Ordinary practice, product data, production, deployment, release, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Replace ambiguous native-Harness worker failures with exact orchestrator-readable result coordinates",
+      "outcome": "The exact rc.7 lifecycle now yields one of five typed readings without a provider request, removing the prior tool-result/conclusion ambiguity.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/deterministic-evidence.json",
+        "docs/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-closeout.md",
+        "orchestration/human_inbox/yuri/2026-08-22--native-harness-tool-result-conclusion-coordinate-diagnostic.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Use the accepted typed runner in one separately named bounded useful-worker attempt before returning to the check-in route-adapter product tranche",
+      "why_now": "The late conclusion-marker defect is reproduced and corrected over the exact rc.7 runtime, so another occupied attempt can be both bounded and diagnostically decisive.",
+      "outcome": "The tool-result/conclusion ambiguity is retired; useful occupied worker efficacy remains to be proved.",
+      "unlocks": [
+        "One new one-request native-Harness useful-worker attempt with exact typed terminal coordinates.",
+        "Automatic separation of valid edit, tool error, post-policy block and late-marker failure.",
+        "An evidence-based decision about using the DeepSeek lane for subsequent Raisa product work."
+      ],
+      "does_not_solve": [
+        "No guarantee that DeepSeek will produce the canonical runbook candidate.",
+        "No automatic retry, resume, fallback or candidate adoption.",
+        "No product, ordinary-practice, production or protected-ref authority."
+      ],
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/deterministic-evidence.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-sol-acceptance.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/future-runner.mjs"
+      ],
+      "orientation_statement": "EMR4 will next freeze and execute at most one new typed native-Harness useful-worker attempt; the consumed attempt remains closed."
+    },
+    "next_operation": {
+      "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+      "active_tranche": "Raisa native Harness bounded occupied useful-worker coordinate-recovery rehearsal",
+      "objective": "Freeze, admit and execute at most one separately named DeepSeek V4 Flash/high native-Harness worker turn against the same closed default-off runbook candidate using the accepted typed runner, one provider request, zero retry/resume/fallback and exact cleanup, then accept a candidate only through deterministic and independent review.",
+      "authority_source": "Yuri's explicit confirmation of a new attempt, subsequent standing uninterrupted-development authority, and the accepted provider-free coordinate diagnostic.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_one_request_typed_useful_worker_coordinate_recovery_plan"
+    },
+    "incidents": [
+      {
+        "incident_id": "coordinate-recovery-manual-git-prose",
+        "source_id": "coordinate-recovery-postcompaction-receipt-001",
+        "peers": []
+      },
+      {
+        "incident_id": "coordinate-recovery-cordis-peer-path",
+        "source_id": "coordinate-recovery-runtime-fixture-001",
+        "peers": []
+      },
+      {
+        "incident_id": "coordinate-recovery-contract-evidence-shape",
+        "source_id": "coordinate-recovery-clockwork-check-001",
+        "peers": []
+      }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "tool-result-coordinate-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "tool-result-coordinate-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery_plan.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+          "tests/test_ariadne_git_object_resolution.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "tool-result-coordinate-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "orchestration_harness/transactional_closeout.py",
+          "orchestration_harness/native_tool_result_conclusion_coordinate.py",
+          "scripts/deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "tool-result-coordinate-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "orchestration_harness/transactional_closeout.py",
+          "orchestration_harness/native_tool_result_conclusion_coordinate.py",
+          "scripts/deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/deterministic-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/future-runner.mjs",
+      "docs/ariadne-agent-error-correction-register-revision-616.md",
+      "docs/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--native-harness-tool-result-conclusion-coordinate-diagnostic.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "one_separately_named_native_harness_worker_process_and_one_deepseek_provider_request_maximum",
+    "same_closed_default_off_runbook_candidate_only",
+    "accepted_typed_tool_result_conclusion_runner_required",
+    "consumed_useful_worker_attempt_001_immutable_no_retry_resume_overwrite_or_reclassification",
+    "automatic_retry_resume_fallback_and_auxiliary_model_counts_zero",
+    "candidate_adoption_requires_canonical_validation_and_independent_review",
+    "no_product_source_configuration_api_openapi_graphql_schema_migration_route_or_database_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_first_party_client_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "coordinate-recovery-manual-git-prose-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery",
+      "role": "orchestrator",
+      "resource_id": "coordinate-recovery-postcompaction-receipt",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Git identities in Ariadne source evidence must come only from the machine snapshot and never from manually repeated object identifiers in prose.",
+      "observed_error": "The first post-compaction continuation receipt repeated one full Git object in git_refs_and_worktree prose and was rejected before action.",
+      "detection_method": "The orchestrator receipt builder returned revision_required with git_refs_evidence_manual_object_id_forbidden before worker, provider or repository mutation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-tool-result-coordinate-recovery-postcompaction-attempt-001-rejected-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-tool-result-coordinate-recovery-postcompaction-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_ref_object_repeated_in_source_evidence_prose",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove object identifiers from source-evidence prose and rely exclusively on the receipt builder's machine Git snapshot and resolver.",
+        "prevention_control": "Receipt tests and the builder reject every manually supplied Git object in git-ref evidence while allowing full resolved objects only in machine-owned fields.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-tool-result-coordinate-recovery-postcompaction-receipt.json",
+          "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery_plan.py"
+        ]
+      },
+      "baton_summary": "moves the recurring Git-object memory requirement into machine-only receipt and source-resolution fields."
+    },
+    {
+      "attempt_key": "coordinate-recovery-cordis-peer-path-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery",
+      "role": "orchestrator",
+      "resource_id": "coordinate-recovery-runtime-fixture",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_node_fixture",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The real-runtime fixture must derive the Cordis peer from the exact @deepseek-ai package parent and import only the accepted local rc.7 dependency graph.",
+      "observed_error": "The first real-runtime fixture derived Cordis from one directory above the @deepseek-ai scope and emitted fixture_output_rejected before starting Node.",
+      "detection_method": "The closed controller terminal reported fixture_output_rejected with zero external activity and complete root cleanup; bounded local inspection identified the incorrect parent relation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/attempt-001-fixture-output-rejected-terminal.json",
+        "scripts/deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.scoped_node_package_peer_parent_miscalculated",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Resolve Cordis from the accepted dsh-tools package's @deepseek-ai scope parent and rerun the immutable new fixture attempt.",
+        "prevention_control": "The focused test now executes all five variants through the imported real rc.7 ToolRuntime and requires exact cleanup, preventing a classifier-only false pass.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/deterministic-evidence.json",
+          "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py"
+        ]
+      },
+      "baton_summary": "preserves the rejected peer-path attempt and adds a real rc.7 runtime import/execution test rather than a classifier-only proxy."
+    },
+    {
+      "attempt_key": "coordinate-recovery-contract-evidence-shape-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery",
+      "role": "orchestrator",
+      "resource_id": "coordinate-recovery-clockwork-closeout",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Initial transactional-manifest validation must reject non-object contract-evidence entries before prospective Continuity projection.",
+      "observed_error": "The first closeout intent supplied repository paths as contract-evidence entries; shallow validation passed and the later Continuity projection rejected contract_evidence_object_required.",
+      "detection_method": "The clockwork dry-run failed with tick_transaction_prepare before generation publication or canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.transaction_manifest_contract_evidence_shape_validated_only_at_projection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use an empty contract-evidence array for this foundation node and reject every non-object entry during initial transactional-manifest validation.",
+        "prevention_control": "A shared clockwork regression test now requires tick_transaction_manifest rejection before projection whenever contract evidence contains a non-object entry.",
+        "evidence_paths": [
+          "orchestration_harness/transactional_closeout.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "baton_summary": "moves contract-evidence object-shape rejection from prospective projection into the first manifest-validation pass."
+    }
+  ]
+}
