@@ -51,9 +51,10 @@ retains no raw stream, executable path, root path or environment value.
 - protected local/origin `master` and `handoff/current`: unchanged at
   `2e34bdad732fdab32fbf778280b3d3c70d66d602`.
 
-Register revision 613 records AER-0934 through AER-0936. AER-0934 narrows the
+Register revision 613 records AER-0934 through AER-0937. AER-0934 narrows the
 predecessor causal claim and corrects both source-proved defects. AER-0935 and
-AER-0936 are pre-process focused-test defects. None caused another Node launch.
+AER-0936 are pre-process focused-test defects. AER-0937 is a rejected
+pre-publication command-manifest shape. None caused another Node launch.
 
 ## Parallelism outcome
 

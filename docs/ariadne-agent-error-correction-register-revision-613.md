@@ -4,16 +4,16 @@ Date: 2026-08-22
 
 Timestamp: 2026-08-22T11:14:21.3006188+10:00 (Australia/Brisbane)
 
-Status: **936 bounded incidents; all corrected or contained; none open**
+Status: **937 bounded incidents; all corrected or contained; none open**
 
 <!-- ariadne-agent-error-register-reading
 revision: 613
-incident_count: 936
-new_incident_ids: AER-0934,AER-0935,AER-0936
+incident_count: 937
+new_incident_ids: AER-0934,AER-0935,AER-0936,AER-0937
 open_incident_count: 0
 -->
 
-This revision adds AER-0934 through AER-0936. It preserves every preceding
+This revision adds AER-0934 through AER-0937. It preserves every preceding
 entry unchanged.
 
 ## AER-0934 — fixture patch markers made the predecessor diagnosis non-exclusive
@@ -57,10 +57,22 @@ had not started.
 Recurrence signature:
 `orchestrator.fixture_mock_used_evidence_canonicalization_instead_of_wire_order`
 
+## AER-0937 — closeout command omitted the required module switch
+
+The first clockwork dry-run rejected the persisted-check command because its
+arguments began with the script path rather than the closed command grammar's
+required `-m` module switch. No live clockwork publication occurred. The
+manifest now invokes the same controller through its exact Python module name;
+the exercised verification and accepted product evidence are unchanged.
+
+Recurrence signature:
+`orchestrator.clockwork_command_manifest_omitted_module_switch`
+
 ## Control reading
 
 AER-0934 is the material acceptance correction: the failed predecessor remains
 valid negative evidence, but its causal claim is narrowed to two source-proved
 defects rather than one exclusive explanation. AER-0935 and AER-0936 were
-focused-test construction defects caught before the process boundary. Their
+focused-test construction defects caught before the process boundary. AER-0937
+was a closeout command-manifest shape defect rejected before publication. Their
 corrections added no tranche, retry, provider activity or product authority.

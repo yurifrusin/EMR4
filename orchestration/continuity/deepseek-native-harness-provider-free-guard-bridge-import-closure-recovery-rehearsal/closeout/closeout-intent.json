@@ -144,7 +144,7 @@
       {
         "command_id": "guard_bridge_import_closure_persisted_check",
         "executable": ".venv/Scripts/python.exe",
-        "arguments": ["scripts/deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py", "--check"],
+        "arguments": ["-m", "scripts.deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal", "--check"],
         "completion_contract": "final_exit_code_zero_required"
       },
       {
@@ -313,6 +313,40 @@
         ]
       },
       "baton_summary": "records and corrects a sorted mock wire-order defect before process execution."
+    },
+    {
+      "attempt_key": "guard-bridge-import-closure-incident-0937",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-guard-bridge-import-closure-recovery",
+      "role": "orchestrator",
+      "resource_id": "clockwork-command-manifest-module-invocation",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_dry_run",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every clockwork command manifest invokes Python through the closed required module-switch grammar.",
+      "observed_error": "The first persisted-check command began with a direct script path rather than the required -m module switch.",
+      "detection_method": "Clockwork dry-run rejected the command with tick_command_contract before live publication.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-613.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_command_manifest_omitted_module_switch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Invoke the persisted controller check through -m and its exact Python module name.",
+        "prevention_control": "Every clockwork command is dry-run validated against the closed module-invocation grammar before publication.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-613.md"
+        ]
+      },
+      "baton_summary": "records and corrects a direct-script command manifest outside the closed module-invocation grammar before publication."
     }
   ]
 }

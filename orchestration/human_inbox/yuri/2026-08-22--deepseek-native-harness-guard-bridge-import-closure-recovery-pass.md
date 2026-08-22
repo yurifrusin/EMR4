@@ -33,7 +33,7 @@ useful Raisa development work. No additional intermediate rehearsal is planned.
 - native Harness/worker/model/provider: zero;
 - focused tests: 32 passed;
 - broader exact collection: 181 passed;
-- register: revision 613, AER-0934 through AER-0936;
+- register: revision 613, AER-0934 through AER-0937;
 - protected refs: unchanged at
   `2e34bdad732fdab32fbf778280b3d3c70d66d602`.
 
