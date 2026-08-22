@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256"],
+      "properties": {"bytes": {"type": "integer", "minimum": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+    },
+    "path_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256"],
+      "properties": {"path": {"type": "string", "minLength": 1}, "bytes": {"type": "integer", "minimum": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+    },
+    "runner_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256", "source_commit"],
+      "properties": {"path": {"type": "string", "minLength": 1}, "bytes": {"type": "integer", "minimum": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"}}
+    },
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "files"],
+      "properties": {
+        "name": {"type": "string", "pattern": "^@deepseek-ai/dsh"},
+        "version": {"const": "0.1.0-rc.7"},
+        "files": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["package.json", "lib/index.js", "lib/types/index.d.ts"],
+          "properties": {"package.json": {"$ref": "#/$defs/binding"}, "lib/index.js": {"$ref": "#/$defs/binding"}, "lib/types/index.d.ts": {"$ref": "#/$defs/binding"}}
+        }
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "evidence_label", "documentation_bindings", "accepted_packages", "accepted_future_runner", "consumed_attempt_bindings", "coordinates", "variants", "process_limits"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_edit_argument_result_diagnostic_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery"},
+    "evidence_label": {"const": "provider_free_authored_synthetic_real_edit_argument_result_fixture"},
+    "documentation_bindings": {"type": "object", "additionalProperties": false, "required": ["plan_sha256", "threat_model_sha256"], "properties": {"plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "threat_model_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}},
+    "accepted_packages": {"type": "object", "additionalProperties": false, "required": ["dsh_tools", "dsh_tool_fs", "dsh_fs", "dsh_fs_local"], "properties": {"dsh_tools": {"$ref": "#/$defs/package"}, "dsh_tool_fs": {"$ref": "#/$defs/package"}, "dsh_fs": {"$ref": "#/$defs/package"}, "dsh_fs_local": {"$ref": "#/$defs/package"}}},
+    "accepted_future_runner": {"$ref": "#/$defs/runner_binding"},
+    "consumed_attempt_bindings": {"type": "object", "additionalProperties": false, "required": ["attempt_001_preparation", "attempt_001_rejection", "attempt_002_terminal", "attempt_002_consumed"], "properties": {"attempt_001_preparation": {"$ref": "#/$defs/path_binding"}, "attempt_001_rejection": {"$ref": "#/$defs/path_binding"}, "attempt_002_terminal": {"$ref": "#/$defs/path_binding"}, "attempt_002_consumed": {"$ref": "#/$defs/path_binding"}}},
+    "coordinates": {"type": "array", "minItems": 7, "maxItems": 7, "uniqueItems": true, "items": {"type": "string"}},
+    "variants": {"type": "array", "minItems": 9, "maxItems": 9, "items": {"type": "object", "additionalProperties": false, "required": ["variant_id", "expected_coordinate", "structured_error_code", "success_class", "target_present_before", "target_present_after"], "properties": {"variant_id": {"type": "string", "pattern": "^[a-z0-9_]+$"}, "expected_coordinate": {"type": "string"}, "structured_error_code": {"type": ["string", "null"]}, "success_class": {"type": ["string", "null"]}, "target_present_before": {"type": "boolean"}, "target_present_after": {"type": "boolean"}}}},
+    "process_limits": {"type": "object", "minProperties": 13, "maxProperties": 13, "additionalProperties": {"type": "integer", "minimum": 0, "maximum": 1}}
+  }
+}

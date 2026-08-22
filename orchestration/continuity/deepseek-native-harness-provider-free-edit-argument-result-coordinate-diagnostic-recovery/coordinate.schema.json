@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "result_kind", "structured_error_code", "success_class", "target_changed", "coordinate"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_edit_argument_result_coordinate.v1"},
+    "result_kind": {"enum": ["success", "error"]},
+    "structured_error_code": {"type": ["string", "null"], "enum": [null, "INVALID_ARGS", "FS_STALE_VERSION", "FS_EDIT_NOT_FOUND", "FS_AMBIGUOUS_EDIT"]},
+    "success_class": {"type": ["string", "null"], "enum": [null, "unique_match", "replace_all"]},
+    "target_changed": {"type": "boolean"},
+    "coordinate": {"enum": ["edit_success_unique_match", "edit_success_replace_all", "edit_error_invalid_args", "edit_error_untyped_argument_constraint", "edit_error_fs_stale_version", "edit_error_fs_edit_not_found", "edit_error_fs_ambiguous_edit"]}
+  }
+}

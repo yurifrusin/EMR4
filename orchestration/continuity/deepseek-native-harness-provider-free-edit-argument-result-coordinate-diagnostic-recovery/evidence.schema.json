@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256"],
+      "properties": {"bytes": {"type": "integer", "minimum": 0}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["present", "bytes", "sha256"],
+      "properties": {"present": {"type": "boolean"}, "bytes": {"type": ["integer", "null"], "minimum": 0}, "sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}}
+    },
+    "package_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "files"],
+      "properties": {"name": {"type": "string"}, "version": {"const": "0.1.0-rc.7"}, "files": {"type": "object", "additionalProperties": {"$ref": "#/$defs/binding"}, "minProperties": 3, "maxProperties": 3}}
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "result", "operation_id", "evidence_label", "contract_sha256", "package_source", "source_checks", "accepted_future_runner", "consumed_attempt_bindings", "variants", "process_counts", "fixture", "cleanup"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_edit_argument_result_diagnostic_evidence.v1"},
+    "status": {"const": "passed"},
+    "result": {"const": "real_edit_argument_result_coordinate_diagnostic_pass"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery"},
+    "evidence_label": {"const": "provider_free_authored_synthetic_real_edit_argument_result_fixture"},
+    "contract_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "package_source": {"type": "object", "additionalProperties": false, "required": ["dsh_tools", "dsh_tool_fs", "dsh_fs", "dsh_fs_local", "third_party_source_text_retained"], "properties": {"dsh_tools": {"$ref": "#/$defs/package_result"}, "dsh_tool_fs": {"$ref": "#/$defs/package_result"}, "dsh_fs": {"$ref": "#/$defs/package_result"}, "dsh_fs_local": {"$ref": "#/$defs/package_result"}, "third_party_source_text_retained": {"const": false}}},
+    "source_checks": {"type": "object", "additionalProperties": {"const": true}, "minProperties": 12},
+    "accepted_future_runner": {"type": "object", "additionalProperties": false, "required": ["bytes", "sha256", "source_commit", "source_commit_resolved", "source_is_ancestor_of_head"], "properties": {"bytes": {"type": "integer", "minimum": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"}, "source_commit_resolved": {"const": true}, "source_is_ancestor_of_head": {"const": true}}},
+    "consumed_attempt_bindings": {"type": "object", "additionalProperties": {"$ref": "#/$defs/binding"}, "minProperties": 4, "maxProperties": 4},
+    "variants": {"type": "array", "minItems": 9, "maxItems": 9, "items": {"type": "object", "additionalProperties": false, "required": ["variant_id", "schema_version", "result_kind", "structured_error_code", "success_class", "target_changed", "coordinate", "before", "after"], "properties": {"variant_id": {"type": "string", "pattern": "^[a-z0-9_]+$"}, "schema_version": {"const": "ariadne.native_harness_edit_argument_result_coordinate.v1"}, "result_kind": {"enum": ["success", "error"]}, "structured_error_code": {"type": ["string", "null"]}, "success_class": {"type": ["string", "null"]}, "target_changed": {"type": "boolean"}, "coordinate": {"type": "string"}, "before": {"$ref": "#/$defs/state"}, "after": {"$ref": "#/$defs/state"}}}},
+    "process_counts": {"type": "object", "minProperties": 13, "maxProperties": 13, "additionalProperties": {"type": "integer", "minimum": 0, "maximum": 1}},
+    "fixture": {"type": "object", "additionalProperties": false, "required": ["node_fixture_process_count", "actual_dsh_tools_runtime_imported", "actual_dsh_tool_fs_edit_imported", "actual_dsh_fs_local_imported", "synthetic_edit_registration_count", "tool_runtime_execution_count", "cordis_disposed", "exit_code", "stdout_bytes", "stdout_sha256", "stderr_bytes", "stderr_sha256", "owned_process_absent", "disposable_root_absent"], "properties": {"node_fixture_process_count": {"const": 1}, "actual_dsh_tools_runtime_imported": {"const": true}, "actual_dsh_tool_fs_edit_imported": {"const": true}, "actual_dsh_fs_local_imported": {"const": true}, "synthetic_edit_registration_count": {"const": 0}, "tool_runtime_execution_count": {"const": 9}, "cordis_disposed": {"const": true}, "exit_code": {"const": 0}, "stdout_bytes": {"type": "integer", "minimum": 1}, "stdout_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "stderr_bytes": {"const": 0}, "stderr_sha256": {"const": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}, "owned_process_absent": {"const": true}, "disposable_root_absent": {"const": true}}},
+    "cleanup": {"type": "object", "additionalProperties": false, "required": ["owned_process_absent", "disposable_root_absent", "credentials_present_in_fixture_environment", "raw_arguments_content_error_stack_retained", "raw_prompt_response_reasoning_session_environment_retained"], "properties": {"owned_process_absent": {"const": true}, "disposable_root_absent": {"const": true}, "credentials_present_in_fixture_environment": {"const": false}, "raw_arguments_content_error_stack_retained": {"const": false}, "raw_prompt_response_reasoning_session_environment_retained": {"const": false}}}
+  }
+}

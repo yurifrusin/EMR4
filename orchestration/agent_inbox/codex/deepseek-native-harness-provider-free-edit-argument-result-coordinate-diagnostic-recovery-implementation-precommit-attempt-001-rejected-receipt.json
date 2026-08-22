@@ -1,0 +1,130 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free edit argument/result coordinate diagnostic recovery",
+    "completed_stage": "Frozen plan implemented; the real rc.7 edit stack passed nine authored-synthetic variants with exact typed coordinates and complete cleanup.",
+    "next_executable_stage": "commit_exact_deterministically_accepted_provider_free_diagnostic_candidate",
+    "operation_id": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery",
+    "resume_after_compaction": true,
+    "source_head": "0e4f76ec55d73d180cbc88e74bde1783691c2f95",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "fdca5bd3286fef6e760fcba6fd10e475b1230c2a",
+    "reason_codes": [],
+    "resolved_commit": "0e4f76ec55d73d180cbc88e74bde1783691c2f95",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "0e4f76ec55d73d180cbc88e74bde1783691c2f95"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 1,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [
+      "git_refs_evidence_manual_object_id_forbidden"
+    ],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "revision_required"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "fdca5bd3286fef6e760fcba6fd10e475b1230c2a",
+    "branch_origin_aligned": true,
+    "head": "fdca5bd3286fef6e760fcba6fd10e475b1230c2a",
+    "origin_branch_commit": "fdca5bd3286fef6e760fcba6fd10e475b1230c2a",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 679
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "deterministic real edit evidence release precommit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The completed fixture is provider-free and another model/provider request would destroy the experimental separation without adding edit-stack evidence.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exact package-bound execution resolved the runner semantics and exposed the sole untyped rc.7 boundary directly; an LLM veto cannot add stronger evidence or safely invent specificity.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits delegation and the remaining commit and closeout custody chain is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "post-commit exact-source review",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit only the exact deterministic candidate paths",
+      "bind the reviewed full Git object before closeout",
+      "publish clockwork-owned closeout surfaces in their typed transaction",
+      "preserve protected refs and unrelated untracked files"
+    ]
+  },
+  "planned_action": "commit_the_provider_free_real_edit_argument_result_coordinate_diagnostic_candidate_after_deterministic_acceptance",
+  "reasons": [
+    "git_refs_evidence_manual_object_id_forbidden"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-report.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-001/preexecution-preparation-rejected.json",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-terminal.json",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-attempt-consumed.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial provider-free plan, implementation, deterministic acceptance and closeout. DeepSeek is declined because worker/model/provider calls are closed. Gemini is now declined because the exact real-tool fixture left no material runner-semantic ambiguity for an LLM veto. Native subagents are declined because developer policy prohibits delegation.",
+    "git_refs_and_worktree": "The receipt builder must obtain Git identities from a fresh machine snapshot. Task branch and origin remain at the accepted published predecessor while the explicit diagnostic candidate paths are tracked changes. All four protected refs must remain exact at 2e34bdad732fdab32fbf778280b3d3c70d66d602. Preserve docs/branding and all unrelated untracked files; explicit-path staging only.",
+    "live_handover_current_baton": "AGENTS.md records Continuity 394 / Compass 376, the accepted typed failed-closed occupied result, and this provider-free real edit argument/result diagnostic as the active next operation.",
+    "protected_evidence_boundaries": "Provider-free authored-synthetic real edit diagnostic only. Both consumed attempts remain immutable. No worker, model, provider, retry, candidate adoption, product/API/configuration/schema/database change, ordinary-practice enablement, product or protected data, production, deployment, Pages, protected evidence or protected-ref movement."
+  },
+  "status": "revision_required",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": false
+}
