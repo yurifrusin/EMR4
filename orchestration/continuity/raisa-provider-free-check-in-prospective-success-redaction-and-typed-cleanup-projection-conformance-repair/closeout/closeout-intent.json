@@ -1,0 +1,425 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+    "title": "Raisa provider-free check-in prospective-success redaction and typed cleanup-projection conformance repair closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T05:05:13.7520724+10:00",
+    "node": {
+      "id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "title": "Raisa provider-free check-in prospective-success redaction and typed cleanup-projection conformance repair",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted only the two deterministic repair gears selected by the accepted attempt-007 diagnosis.",
+          "The accepted candidate used no Docker object, PostgreSQL start, SQL, provider, product call or attempt-008 action.",
+          "Six ordinary-pytest synthetic-test-database sessions breached the process boundary, are excluded and are replaced by provider-free evidence."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-complete-prospective-success-static-gate",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-evidence.json",
+          "status": "accepted",
+          "summary": "Accept exact 67-to-67 prospective/runtime path parity, whole-projection redaction/schema admission and 66 hostile forbidden-key rejections before Docker-capable work."
+        },
+        {
+          "id": "accept-safe-default-denial-boundary-name",
+          "source": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal/contract.json",
+          "status": "accepted",
+          "summary": "Accept the safe live-sensitive-material boundary name while preserving ten false boundaries and the unchanged source-owned redactor."
+        },
+        {
+          "id": "accept-typed-post-finalization-terminal-bridge",
+          "source": "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "status": "accepted",
+          "summary": "Accept the frozen base-owned terminal bridge that converts late redaction/schema failures to sanitised evidence carrying exact finalized cleanup."
+        },
+        {
+          "id": "accept-provider-free-replacement-verification-only",
+          "source": "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md",
+          "status": "accepted",
+          "summary": "Admit only the passing 83-test candidate profile and complete register suite run through the no-conftest provider-free entry point."
+        },
+        {
+          "id": "exclude-six-ordinary-pytest-sessions",
+          "source": "docs/ariadne-agent-error-correction-register-revision-633.md",
+          "status": "accepted",
+          "summary": "Exclude six ordinary-pytest results because autouse conftest touched the authored-synthetic test database contrary to authority."
+        },
+        {
+          "id": "accept-measured-efficacy-with-process-violation",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept retirement of two product-harness rerun causes while retaining seven local process incidents and one material verification-boundary recurrence."
+        }
+      ],
+      "claim_scope": [
+        "The complete prospective success surface has 67 paths and passes the unchanged redactor and evidence schema before any Docker-capable call.",
+        "All 66 exact, prefix and suffix hostile forbidden-key mutations are rejected.",
+        "Late redaction and schema failures retain exact base-finalized cleanup through a frozen typed terminal.",
+        "Attempt 007 remains consumed, immutable and unreclassified.",
+        "Only provider-free replacement test results are admitted.",
+        "The ordinary-pytest database-boundary violation remains recorded and is not relabelled provider-free.",
+        "No attempt-008 transaction or occupied database result is accepted."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-plan.md",
+          "docs/security/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-contract.json",
+          "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-report.md",
+          "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-prospective-success-redaction-and-typed-cleanup-projection-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-prospective-success-redaction-and-typed-cleanup-projection-repair-preplanning-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_plan.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-633.md",
+          "orchestration/human_inbox/yuri/2026-08-23--check-in-prospective-redaction-typed-cleanup-repair.md",
+          "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Rollback, unknown-response commit recovery, role absence and successful occupied database behavior remain unproved.",
+        "Attempt 008 remains unplanned and unauthorised.",
+        "The verification envelope does not yet mechanically reject database-capable pytest under a no-database boundary.",
+        "Prepublication and postpublication test phases are not yet typed in the command manifest.",
+        "Dedicated check-in remains default-off without ordinary-practice admission.",
+        "No provider, product-data, production, deployment, release, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Turn two occupied-run failure coordinates into reusable deterministic base-harness gears",
+      "outcome": "Prospective success records are checked before occupied work and post-cleanup failures retain truthful cleanup state.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-evidence.json",
+        "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-report.md",
+        "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Make provider-free verification authority executable rather than dependent on runner recall",
+      "why_now": "The code repair passed, but six excluded sessions repeated an already-known database-autouse boundary violation and a postpublication test was selected too early.",
+      "outcome": "The next gear will reject database-capable runners when database authority is closed and type verification phases before any future occupied decision.",
+      "unlocks": [
+        "Provider-free plans can compile directly to an admissible runner envelope.",
+        "Prepublication suites cannot accidentally include live-projection assertions.",
+        "A later attempt-008 decision can rely on mechanically scoped verification."
+      ],
+      "does_not_solve": [
+        "No database lifecycle or attempt-008 behavior is proved.",
+        "No ordinary-practice or product command is admitted.",
+        "No provider, production or protected authority opens."
+      ],
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-633.md",
+        "orchestration/human_inbox/yuri/2026-08-23--check-in-prospective-redaction-typed-cleanup-repair.md"
+      ],
+      "orientation_statement": "EMR4 will make provider-free runner and publication-phase admission deterministic before considering another occupied check-in recovery attempt."
+    },
+    "next_operation": {
+      "operation_id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+      "active_tranche": "Ariadne provider-free verification envelope phase and runner admission repair",
+      "objective": "Freeze and implement the narrow deterministic control-plane repair that rejects ordinary or serial pytest whenever database authority is closed and types verification commands as prepublication or postpublication, without running a database, provider, worker, product path or attempt 008.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, accepted clockwork-control direction and AER-1024/AER-1026 evidence from this closeout.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_provider_free_runner_and_verification_phase_admission_plan"
+    },
+    "incidents": [
+      {"incident_id": "repair-receipt-manual-git-objects", "source_id": "repair-local-001", "peers": []},
+      {"incident_id": "repair-direct-cli-import-root", "source_id": "repair-local-002", "peers": []},
+      {"incident_id": "repair-serial-nested-python-command", "source_id": "repair-local-003", "peers": []},
+      {"incident_id": "repair-provider-free-database-conftest", "source_id": "repair-local-004", "peers": []},
+      {"incident_id": "repair-direct-register-draft", "source_id": "repair-local-005", "peers": []},
+      {"incident_id": "repair-prepublication-baton-test", "source_id": "repair-local-006", "peers": []},
+      {"incident_id": "repair-manual-revert-object", "source_id": "repair-local-007", "peers": []}
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "check-in-terminal-repair-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/closeout/closeout-intent.json"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "check-in-terminal-repair-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_profile_call_site_and_pre_registry_cleanup_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_server_post_readiness_lifecycle_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_plan.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_provider_free_no_database_admission.py",
+          "tests/test_ariadne_orchestrator_preflight.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "check-in-terminal-repair-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "ruff", "check",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "scripts/raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "check-in-terminal-repair-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "py_compile",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "scripts/raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Check-in prospective-success redaction and typed cleanup-projection repair acceptance",
+    "paths": [
+      "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-plan.md",
+      "docs/security/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-contract.json",
+      "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-report.md",
+      "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/efficacy-reading.json",
+      "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+      "scripts/raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+      "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+      "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_plan.py",
+      "docs/ariadne-agent-error-correction-register-revision-633.md",
+      "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-prospective-success-redaction-and-typed-cleanup-projection-repair-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-23--check-in-prospective-redaction-typed-cleanup-repair.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_verification_envelope_phase_and_runner_admission_repair_only",
+    "database_closed_authority_must_reject_ordinary_and_serial_pytest",
+    "verification_commands_must_be_typed_prepublication_or_postpublication",
+    "deterministic_source_schema_and_process_fake_evidence_only",
+    "no_database_conftest_engine_schema_or_fixture_execution",
+    "no_attempt_008_plan_checkpoint_or_execution",
+    "no_native_deepseek_harness_worker_or_provider_call",
+    "no_application_product_api_openapi_graphql_route_client_or_configuration_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "repair-receipt-manual-git-objects-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "ariadne-preplanning-git-ref-evidence",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_preflight",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Free-form Git-ref source evidence contains no manually supplied object IDs because the machine snapshot owns exact identities.",
+      "observed_error": "The first preplanning runtime note repeated the task and protected Git objects, so preflight rejected it before plan writing.",
+      "detection_method": "The receipt returned revision_required with git_refs_evidence_manual_object_id_forbidden and manual count two.",
+      "evidence_paths": ["orchestration/agent_inbox/codex/raisa-check-in-prospective-success-redaction-and-typed-cleanup-projection-repair-preplanning-receipt.json", "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.manual_git_object_ids_in_receipt_prose",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Remove narrative object IDs and regenerate from the machine snapshot.", "prevention_control": "Require manually supplied object count zero on every receipt.", "evidence_paths": ["orchestration/agent_inbox/codex/raisa-check-in-prospective-success-redaction-and-typed-cleanup-projection-repair-preplanning-receipt.json"]},
+      "baton_summary": "records one machine-snapshot rejection of manually repeated Git objects."
+    },
+    {
+      "attempt_key": "repair-direct-cli-import-root-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "implementer",
+      "resource_id": "repair-conformance-direct-cli",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_python",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "A sibling-importing repository CLI bootstraps the repository root before imports and passes by direct path.",
+      "observed_error": "The first direct conformance check raised ImportError before constructing evidence.",
+      "detection_method": "The CLI exited at import with no provider, Docker or database action.",
+      "evidence_paths": ["scripts/raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py", "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.direct_script_missing_repo_import_root",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Insert repository root before imports and add a passing direct CLI test.", "prevention_control": "Require direct-path smoke coverage for every new sibling-importing CLI.", "evidence_paths": ["scripts/raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py", "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py"]},
+      "baton_summary": "records and repairs one direct-script sibling-import failure."
+    },
+    {
+      "attempt_key": "repair-serial-nested-python-command-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "ariadne-serial-pytest-invocation",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_test_runner",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Arguments after the serial runner separator are pytest arguments only.",
+      "observed_error": "The first broader command forwarded a nested Python command, so pytest treated python as a path and collected nothing.",
+      "detection_method": "Pytest returned file-or-directory-not-found for python before executing a test.",
+      "evidence_paths": ["scripts/ariadne_serial_pytest.py", "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.serial_pytest_forwarded_nested_python_command",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Forward a pytest-only remainder; the corrected selection passed.", "prevention_control": "Compile serial commands as runner options, one separator and pytest-only remainder.", "evidence_paths": ["scripts/ariadne_serial_pytest.py"]},
+      "baton_summary": "records one nested-command serial-runner shape error."
+    },
+    {
+      "attempt_key": "repair-provider-free-database-conftest-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "provider-free-repair-verification",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "material",
+      "expected_invariant": "A no-database tranche runs every selected test through the no-conftest provider-free entry point.",
+      "observed_error": "Six ordinary-pytest sessions loaded autouse conftest and created, truncated and dropped the local authored-synthetic test schema.",
+      "detection_method": "Conftest inspection after serial-lock output proved session engine and autouse cleanup execution; all six results were excluded.",
+      "evidence_paths": ["scripts/ariadne_provider_free_pytest.py", "tests/conftest.py", "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.provider_free_static_pytest_loaded_database_autouse_conftest",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "corrected_fresh_attempt", "action": "Exclude six results and replace the exact 83-test profile plus complete register suite through the provider-free runner.", "prevention_control": "When database authority is closed, use scripts.ariadne_provider_free_pytest exclusively.", "evidence_paths": ["scripts/ariadne_provider_free_pytest.py", "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"]},
+      "baton_summary": "records six excluded database-autouse sessions and passing provider-free replacements."
+    },
+    {
+      "attempt_key": "repair-direct-register-draft-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_git",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "The incident register and pattern report change only through clockwork incident intake.",
+      "observed_error": "The orchestrator committed a direct register and pattern-report draft before recognising the single-writer violation.",
+      "detection_method": "Ownership review found the direct commit before clockwork check or publication.",
+      "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-633.md", "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.direct_edit_of_clockwork_owned_incident_register",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "corrected_fresh_attempt", "action": "Revert the direct draft and submit all seven observations only through the closeout intent.", "prevention_control": "Treat register and pattern report as clockwork-owned canonical surfaces with no direct staging.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-633.md", "scripts/ariadne_governance_clockwork_tick.py"]},
+      "baton_summary": "records and reverts one direct draft of clockwork-owned register surfaces."
+    },
+    {
+      "attempt_key": "repair-prepublication-baton-test-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "verification-phase-test-manifest",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Tests of clockwork-derived live projections run only after clockwork publication.",
+      "observed_error": "A prepublication suite included current Baton consistency, which correctly rejected the old live register revision.",
+      "detection_method": "The provider-free suite reported one exact revision mismatch while every prepublication-compatible test passed.",
+      "evidence_paths": ["tests/test_current_baton_consistency.py", "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.postpublication_projection_test_selected_prepublication",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Exclude the prepublication mismatch and reserve Baton consistency for the postpublication gate.", "prevention_control": "Type every closeout test as prepublication or postpublication in the verification envelope.", "evidence_paths": ["tests/test_current_baton_consistency.py", "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"]},
+      "baton_summary": "records one postpublication projection test selected before publication."
+    },
+    {
+      "attempt_key": "repair-manual-revert-object-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "git-revert-object-resolution",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_git",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A Git command requiring a commit consumes the exact full object from machine resolution and never a manually completed display prefix.",
+      "observed_error": "The first revert used a manually completed nonexistent object; Git rejected it without changing the worktree.",
+      "detection_method": "Git returned bad object, then git rev-parse HEAD supplied the exact object used by the successful revert.",
+      "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-633.md", "orchestration_harness/git_object_resolution.py"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.manual_git_object_expansion_for_mutating_command",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Resolve and copy the exact full HEAD object before the successful revert.", "prevention_control": "Commands that require a commit consume a machine-resolved full object and never complete a displayed prefix from memory.", "evidence_paths": ["orchestration_harness/git_object_resolution.py", "docs/ariadne-agent-error-correction-register-revision-633.md"]},
+      "baton_summary": "records one rejected manual Git object expansion and exact resolved correction."
+    }
+  ]
+}
