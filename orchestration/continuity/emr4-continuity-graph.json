@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 402,
+  "graph_revision": 403,
   "harvests": [],
   "nodes": [
     {
@@ -31544,9 +31544,119 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
+      "title": "Provider-free stock-headless-to-corrected-runner boot proof",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted one separately frozen provider-free native rc.7 boot process after deterministic preexecution admission.",
+          "No target, DeepSeek turn, worker, model/provider request, product/data action, deployment, Pages or protected-ref authority was opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-stock-headless-corrected-runner-handoff",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/native-boot-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the one consumed rc.7 stock-headless handoff to the exact corrected integrated runner and guard graph."
+        },
+        {
+          "id": "accept-two-root-four-read-five-hook-terminal",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/native-boot-evidence.json",
+          "status": "accepted",
+          "summary": "Accept two distinct preset roots, four root-service reads, five hook installations and EFFECTIVE_TOOL_COMPOSITION_PASSED before the controlled factory stop."
+        },
+        {
+          "id": "end-generic-provider-free-boot-testing",
+          "source": "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout.md",
+          "status": "accepted",
+          "summary": "The provider-free boot prerequisite is closed; another generic boot rehearsal is not selected."
+        },
+        {
+          "id": "reject-deepseek-turn-or-useful-work-claim",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "The proof establishes no DeepSeek turn, useful development output, provider reliability, product behavior, deployment or production suitability."
+        }
+      ],
+      "claim_scope": [
+        "Exactly one provider-free native rc.7 process and one stock HMR mutation occurred.",
+        "The exact accepted runner graph produced two distinct roots, four root reads, five hooks and EFFECTIVE_TOOL_COMPOSITION_PASSED.",
+        "The controlled failed/factory runner terminal occurred before target, agent publication, session, turn, broker, worker, model or provider activity.",
+        "Stock exit was zero after 5874 ms; network, database, Docker, retry, resume and fallback counts were zero.",
+        "Process and disposable root are absent and canonical sources plus package seed are unchanged.",
+        "Only a separately frozen authored-synthetic corrected-guard-graph useful-development recovery rehearsal is selected next."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-historical-test-selection.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-626.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--native-harness-corrected-runner-boot-proof.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-preplanning-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-result-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_stock_headless_to_custom_runner_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_content_free_counter_diagnosis.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_stock_headless_to_custom_runner_boot_proof.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/accepted-guard-graph-boot-probe.mjs",
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/native-attempt-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/native-boot-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/native-boot-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/efficacy-reading.json"
+        ]
+      },
+      "unresolved_gates": [
+        "No DeepSeek model turn, provider response or useful development candidate is accepted.",
+        "The earlier authored-synthetic development attempt remains consumed and cannot be retried or resumed.",
+        "The next distinct occupied attempt requires an exact authored-synthetic work order, owned paths, prepaid call/cost ceiling, typed result protocol and deterministic preexecution admission.",
+        "All real/product data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T21:03:29.4171606+10:00",
+      "updated_at": "2026-08-22T21:03:29.4171606+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "5e5881e2123e840b9b3d22fdcfe65ca0ecf78c75",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T20:22:32.2159306+10:00"
+  "updated_at": "2026-08-22T21:03:29.4171606+10:00"
 }

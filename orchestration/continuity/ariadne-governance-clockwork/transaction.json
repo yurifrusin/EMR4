@@ -1,85 +1,85 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
-  "operation_id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis",
-  "transaction_id": "txn-23d1125ea11f7f3e04ad3877",
-  "source_commit": "3d82febd6a402337db606ce4767fbd4875698eba",
-  "previous_source_commit": "3d82febd6a402337db606ce4767fbd4875698eba",
-  "previous_generation_id": "gen-619e02c07e48c1b63ba82f248b6f9be38e71a5813e4e85941307e817de9156cc",
-  "previous_bundle_sha256": "619e02c07e48c1b63ba82f248b6f9be38e71a5813e4e85941307e817de9156cc",
+  "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
+  "transaction_id": "txn-74b4e4bfdb96401e12c21042",
+  "source_commit": "5e5881e2123e840b9b3d22fdcfe65ca0ecf78c75",
+  "previous_source_commit": "5e5881e2123e840b9b3d22fdcfe65ca0ecf78c75",
+  "previous_generation_id": "gen-e563c33bc2125a931985475d49fdc8a3d3613253e1550fe65b7b23d7285b7d2f",
+  "previous_bundle_sha256": "e563c33bc2125a931985475d49fdc8a3d3613253e1550fe65b7b23d7285b7d2f",
   "previous_canonical_sha256s": {
-    "continuity": "6e60508be61072f5eb586573042485dfea76b526d84c8be9ff296be1ad6ed306",
-    "compass": "d3599e4dc297e030ef816e8ebecdf94a6bafdcea5e21a452de51b7229ecc4bf8",
-    "compass_markdown": "bab1b2fd06fd5778d4f55b5945c9c2fca3b62a87ca8cb25aaa4ea25097df7b8d",
-    "active_latch": "7d57759cf267cef132f54e5d8ca7ea05319f1b51a7cabe387e11f828f6f65a52",
-    "error_register": "0a4c92d06f0b2880e0fe02246901af5ab36b4851a4f635c51e373b3f97da0bf2",
-    "pattern_report": "1b8120ce956124ff802dab5f011ba2a982a8d90c7fa6adb911e9a36af0f271ff",
-    "current_baton": "4142284a0c84c721ecd8426bd7d926af4ee0d3b9f88a69b0f5b76291a6cd014b"
+    "continuity": "79aafa8e85a93a6ccd398076725fdb322134d6e1f9794e4b48907067aeb03c43",
+    "compass": "f211001bcd12ad2010d7eff3d7cc3c1399de1f2909357f0292e1513deb4f0a94",
+    "compass_markdown": "902a3e22edcbcdf8e458cb9c8fb33c81b069457128273d2c7d154f5f2c796c30",
+    "active_latch": "bec753766350bb3e90c16be76d35fca0db464072f8496a201640686060a6d5df",
+    "error_register": "8d6ccdfff57b60425eb37122389f91cdec5095c251f3a78bf5bb7972fd044706",
+    "pattern_report": "e2fff17033f8abca54a985c5489e65bc8369d9ca479e317e15cf1d89879f4cbc",
+    "current_baton": "98b36c6bcfc1c00b461af57fc409f0ea1b8f75d758e03d10bc10fbf5e3024880"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "8cad762fa3aa6c10c99aeda6db922afb19f2fd6bee811d9b8494e833b151aa3b",
-    "transaction.json": "db78b0621f76c2341fd6349351c50a9b7db1743bb0fc33baaf7996df14b27b0e",
+    "command-manifest.json": "748c6bda030e102b2ad0c6818c88dcb6b08e1f4d8abf978920b190c4ee4469ac",
+    "transaction.json": "4f05316b25196a6892c90e5ac67ba88afb9f82473685f891b9b8e19f1eb3c6d7",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "2bd0bd91685e8864c51645fee8bca17b406dc78da020a786f8ded129250c22d3"
+    "generation-manifest.json": "770fb64b6673c8f45757fe34b6c54d183b9628f525dd51f519a8d0abfe2b9530"
   },
   "projection_sha256s": {
-    "graph": "sha256:adfdb32ddf3e001c80ee8644833981703f0461bdc9f48b3e408677a444a98d07",
-    "compass": "sha256:34d337a40ead4c0123f92fb8d0b7c95986c4940e4881fda517bbaaf06a4cc7df",
-    "report": "sha256:9cc6b629523c8153bea8c775f4d423a2d5e759fcebfc2fde64bd64f2af7e125c",
-    "latch": "sha256:b650e72a9d5ba4d9947aebcffc9ce092567bbf6103c473697cbc5ac9c641dba1",
+    "graph": "sha256:984a00cc5a966a8c868d711cd607e2711f909324a6c5b1101bc8a8c10f1a02bb",
+    "compass": "sha256:b7e2b1c9b6b49ea67beae8fef76cacdfdb9b1fab50f6d34416ad99a4a5803a85",
+    "report": "sha256:d9c641896795abe2851ba2710bab145e5dc6412680a4f2ffc729ba29256aa6b8",
+    "latch": "sha256:1885221540965f845b59d4e493f1c2cf1eda8881f2725c72e9604763a53af07e",
     "incident_aggregate": "sha256:012cd99c89990d8a80584cdc38452c69df669aaa4fbdbc83e5f088ec2c190ded"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-23d1125ea11f7f3e04ad3877",
-      "transaction_id": "txn-23d1125ea11f7f3e04ad3877",
-      "operation_id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis",
+      "journal_id": "journal-74b4e4bfdb96401e12c21042",
+      "transaction_id": "txn-74b4e4bfdb96401e12c21042",
+      "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
       "event_type": "manifest-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "manifest_sha256": "sha256:538677381e46480171cfe43f01e13aff20c96e3f27fa3bd0754375e1378d1f98"
+        "manifest_sha256": "sha256:323e7f8d2d74ab2693f5daff53b1ef14439b241afd6d82a86037cc5bdd0bb98e"
       },
-      "event_sha256": "sha256:920a73ea649e416fd15a2365ee5f9bc5884ccc4de1964cf10925930e8a856e48"
+      "event_sha256": "sha256:7d62b635d0660b832721d367cdc0da41956cac4da4cad396bbf357a6316ec45c"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-23d1125ea11f7f3e04ad3877",
-      "transaction_id": "txn-23d1125ea11f7f3e04ad3877",
-      "operation_id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis",
+      "journal_id": "journal-74b4e4bfdb96401e12c21042",
+      "transaction_id": "txn-74b4e4bfdb96401e12c21042",
+      "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
       "sequence": 2,
-      "previous_event_sha256": "sha256:920a73ea649e416fd15a2365ee5f9bc5884ccc4de1964cf10925930e8a856e48",
+      "previous_event_sha256": "sha256:7d62b635d0660b832721d367cdc0da41956cac4da4cad396bbf357a6316ec45c",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "3d82febd6a402337db606ce4767fbd4875698eba",
+        "source_commit": "5e5881e2123e840b9b3d22fdcfe65ca0ecf78c75",
         "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
       },
-      "event_sha256": "sha256:31a75fc98cd63b983675e24bb262e2c085f5ee0bc9f2eac00af9748526f6c7a0"
+      "event_sha256": "sha256:a8b8c824a0f7ff95dc93ab0ce38f12e3343070b4b5b1552632b3bbca2a9f5b18"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-23d1125ea11f7f3e04ad3877",
-      "transaction_id": "txn-23d1125ea11f7f3e04ad3877",
-      "operation_id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis",
+      "journal_id": "journal-74b4e4bfdb96401e12c21042",
+      "transaction_id": "txn-74b4e4bfdb96401e12c21042",
+      "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
       "sequence": 3,
-      "previous_event_sha256": "sha256:31a75fc98cd63b983675e24bb262e2c085f5ee0bc9f2eac00af9748526f6c7a0",
+      "previous_event_sha256": "sha256:a8b8c824a0f7ff95dc93ab0ce38f12e3343070b4b5b1552632b3bbca2a9f5b18",
       "event_type": "projections-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "graph_revision": 402,
-        "map_revision": 384
+        "graph_revision": 403,
+        "map_revision": 385
       },
-      "event_sha256": "sha256:1b8ebb1c9c9cecbbca6d47e3c2026ed1a817e61747ac8ccdc5ce981e5c738d24"
+      "event_sha256": "sha256:26645a138cf80c6505910a40992a62570a4d71441a83f96f7dd84d03a184097e"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-23d1125ea11f7f3e04ad3877",
-      "transaction_id": "txn-23d1125ea11f7f3e04ad3877",
-      "operation_id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis",
+      "journal_id": "journal-74b4e4bfdb96401e12c21042",
+      "transaction_id": "txn-74b4e4bfdb96401e12c21042",
+      "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
       "sequence": 4,
-      "previous_event_sha256": "sha256:1b8ebb1c9c9cecbbca6d47e3c2026ed1a817e61747ac8ccdc5ce981e5c738d24",
+      "previous_event_sha256": "sha256:26645a138cf80c6505910a40992a62570a4d71441a83f96f7dd84d03a184097e",
       "event_type": "projections-validated",
       "actor": "gpt-sol",
       "payload": {
@@ -87,26 +87,26 @@
         "compass": "passed",
         "latch": "passed"
       },
-      "event_sha256": "sha256:2c9043a53434220a79f745dce0b601af57830c6f2657e3fb30887ace33cafc4b"
+      "event_sha256": "sha256:9016e213efc768d5805f85c0e69c80be302d29e7b29b3ec7be56720a62c78dd8"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-23d1125ea11f7f3e04ad3877",
-      "transaction_id": "txn-23d1125ea11f7f3e04ad3877",
-      "operation_id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis",
+      "journal_id": "journal-74b4e4bfdb96401e12c21042",
+      "transaction_id": "txn-74b4e4bfdb96401e12c21042",
+      "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
       "sequence": 5,
-      "previous_event_sha256": "sha256:2c9043a53434220a79f745dce0b601af57830c6f2657e3fb30887ace33cafc4b",
+      "previous_event_sha256": "sha256:9016e213efc768d5805f85c0e69c80be302d29e7b29b3ec7be56720a62c78dd8",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "shadow_directory_rename"
       },
-      "event_sha256": "sha256:2a3fc45f3df048ed617832ce9de63e4884fda439972ee4094af78f78f36f7423"
+      "event_sha256": "sha256:1bcb5e08dff351988734cc3b91d130dc7b8ec2958cc9ee8f3089f62c6478d0d7"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
   "event_kind": "clean_closeout",
-  "next_boundaries_sha256": "sha256:3016b38626fad7ac85ce1e66c9c757e1703d8663793679c7cbf512058a984d56",
+  "next_boundaries_sha256": "sha256:0ac0858cb3c94e176f5fd1e131503f76d4a97fbb8745277b8d0f0a388f0e6d59",
   "register_bytes_preserved": false,
   "pattern_bytes_preserved": false
 }

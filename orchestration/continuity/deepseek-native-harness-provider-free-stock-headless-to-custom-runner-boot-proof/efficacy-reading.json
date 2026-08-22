@@ -1,0 +1,41 @@
+{
+  "schema_version": "ariadne.native_harness_stock_headless_custom_runner_boot_efficacy.v1",
+  "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
+  "timestamp": "2026-08-22T21:03:29.4171606+10:00",
+  "result": "provider_free_corrected_runner_boot_pass",
+  "objective_reached": true,
+  "provider_free_boot_prerequisite_closed": true,
+  "useful_development_work_proved": false,
+  "observed": {
+    "native_process_count": 1,
+    "native_duration_ms": 5874,
+    "hmr_mutation_count": 1,
+    "distinct_preset_root_count": 2,
+    "preset_root_reads": 4,
+    "hook_installations": 5,
+    "structured_coordinate": "EFFECTIVE_TOOL_COMPOSITION_PASSED",
+    "target_attempt_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "network_attempt_count": 0,
+    "retry_count": 0,
+    "process_absent": true,
+    "disposable_root_absent": true
+  },
+  "correction_cost": {
+    "native_process_retries": 0,
+    "provider_request_retries": 0,
+    "preplanning_receipt_corrections": 1,
+    "historical_equality_test_selections": 1,
+    "postterminal_readback_corrections": 1,
+    "read_only_command_spelling_or_shell_syntax_corrections": 2,
+    "closeout_clockwork_manifest_or_readback_corrections": 7
+  },
+  "parallelism": {
+    "deepseek": {"disposition": "declined_before_turn", "result": "not_dispatched", "rationale": "The native Harness was the provider-free subject and the proof stopped before a model turn."},
+    "gemini": {"disposition": "declined_provider_free_exact_terminal", "result": "not_dispatched", "rationale": "The latch admitted zero provider requests and the typed terminal was unambiguous."},
+    "native_subagents": {"disposition": "declined", "result": "not_dispatched", "rationale": "Developer policy and one-process custody required serial ownership."},
+    "serial_owner": "gpt-sol"
+  },
+  "conclusion": "The provider-free boot loop is closed: stock rc.7 reaches the corrected runner and exact accepted guard graph once, with complete typed attribution and cleanup. The next justified evidence is useful authored-synthetic DeepSeek development work, not another generic boot proof."
+}

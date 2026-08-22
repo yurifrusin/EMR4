@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Use the corrected source-derived counter contract in one newly frozen provider-free native boot proof; do not retry the consumed fixture or start a DeepSeek turn.
+> End generic boot testing and freeze one distinct authored-synthetic corrected-guard-graph useful-development recovery attempt with exact call, cost, effect and typed-result controls.
 
 ## North star
 
@@ -574,22 +574,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The accepted graph and import closure held through one clean local process, while the frozen counter vector failed closed without retry or provider cost. Lineage parent: `deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery`.
 279. **Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development — Accepted guard-graph content-free counter diagnosis**
    A content-free clockwork reading uniquely reconstructed the passed guard coordinate and corrected counter contract without another process or provider cost. Lineage parent: `deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery`.
+280. **Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development — Provider-free stock-headless-to-corrected-runner boot proof**
+   The pinned stock headless launcher reached the corrected accepted runner graph once with exact typed attribution and complete provider-free cleanup. Lineage parent: `deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis`.
 
 ## Current position
 
-**Prove the native Harness stock headless entry point can hand off to the corrected custom runner without a DeepSeek or provider turn — Accepted guard-graph content-free counter diagnosis**
+**Measure whether the corrected controlled native Harness can produce one useful authored-synthetic EMR4 development contribution — Provider-free stock-headless-to-corrected-runner boot proof**
 
-**Why this proof came next:** The guard graph crossing and exact four-root/five-hook contract are now deterministically diagnosed from immutable evidence.
+**Why this proof came next:** The provider-free stock-headless, HMR, corrected runner, guard graph, typed terminal and cleanup chain now passes exactly once.
 
-One separately identified provider-free boot proof will decide whether the pinned native Harness reaches the corrected custom runner boundary.
+A separately frozen distinct attempt will produce either one typed useful candidate or one exact failure terminal with measured correction cost.
 
 ### What this unlocks
 
-- A bounded decision on whether the native Harness is ready for a later monitored DeepSeek development worker turn.
+- Evidence about useful DeepSeek development performance under orchestrator-owned typed controls rather than another Harness boot result.
 
 ### What it does not solve
 
-- No DeepSeek turn, provider request, useful-worker quality, product action, deployment or production claim.
+- No real/product data, ordinary-practice, production, deployment, release or protected-ref authority.
 
 ## Continuity and authority
 
@@ -1363,6 +1365,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-repaired-sentinel-preactivation-source-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-sentinel-source-escape-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof-closeout.md`
+- `docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout.md`
 - `docs/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-closeout.md`
@@ -2106,7 +2109,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2800,6 +2803,7 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-required-service-injection-recovery/provider-free-required-service-injection-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-sentinel-source-escape-repair/repair-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-source-repaired-sentinel-native-boot-proof/provider-free-source-repaired-sentinel-native-boot-terminal.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/native-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/provider-free-node-fixture-evidence.json`
@@ -3793,4 +3797,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 384; continuity graph revision 402._
+_Compass map revision 385; continuity graph revision 403._

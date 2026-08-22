@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 625,
+  "register_revision": 626,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -38206,6 +38206,444 @@
       },
       "incident_id": "AER-0984",
       "attempt_id": "clock-50e90264ac37493c581ba7ff",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-stock-headless-custom-runner-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "orchestrator-preplanning-receipt",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Receipt fields use only closed dispositions and reachability values, declare every configured adapter and leave Git identity binding to the machine snapshot.",
+      "observed_error": "The first receipt used descriptive non-admitted values, omitted two configured adapters and manually repeated full Git IDs in the machine-owned Git evidence field.",
+      "detection_method": "The orchestrator preflight returned revision_required with exact reason codes before plan freeze, process launch or state mutation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-preplanning-attempt-001-rejected-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-preplanning-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closed_receipt_vocabulary_and_machine_git_binding_bypassed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the configured closed disposition/reachability vocabulary, include all six adapters and remove caller-authored Git IDs from narrative Git evidence.",
+        "prevention_control": "The preflight remains the executable enum and machine-Git gate; a rejected receipt is preserved and cannot authorize planning.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-preplanning-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0985",
+      "attempt_id": "clock-8114bc84999ddd9b1e9aa362",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-stock-headless-custom-runner-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "inherited-provider-free-regression-selection",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A predecessor-only active-latch equality is explicitly selected out before replay while every substantive predecessor assertion remains selected.",
+      "observed_error": "The first inherited run replayed the predecessor's exact active-operation equality after the latch had validly advanced, producing one expected failure before the selection was recorded.",
+      "detection_method": "The serial inherited pytest gate reported exactly one latch-operation mismatch and all other selected assertions passed.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-historical-test-selection.md",
+        "tests/test_deepseek_native_harness_provider_free_stock_headless_to_custom_runner_boot_proof.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.predecessor_active_latch_historical_equality_not_preselected",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Record and test the exact predecessor-only node deselection while retaining the rest of the inherited file.",
+        "prevention_control": "Every successor gate names historical live-latch equality selections before executing inherited plan tests.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-historical-test-selection.md"
+        ]
+      },
+      "incident_id": "AER-0986",
+      "attempt_id": "clock-abf68aaf659bcdc2dfa52ff1",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-stock-headless-custom-runner-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "native-boot-provider-free-terminal-readback",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A one-attempt controller validates its schema-valid consumed success terminal idempotently after launch without suggesting or starting another attempt.",
+      "observed_error": "The first controller admitted only the no-artifact preflight state and therefore lacked a success-terminal readback branch after its one process passed.",
+      "detection_method": "Postterminal review identified that the focused test's no-artifact assertion would reject the now-valid canonical success artifacts; no rerun was attempted.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_stock_headless_to_custom_runner_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_stock_headless_to_custom_runner_boot_proof.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/native-boot-evidence.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.one_attempt_controller_omitted_success_terminal_readback",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Validate the exact consumed identity, schema-valid passing evidence, expected observation, cleanup and report marker idempotently.",
+        "prevention_control": "Every one-attempt controller owns both no-artifact preflight and every admitted terminal readback branch before closeout.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_stock_headless_to_custom_runner_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_stock_headless_to_custom_runner_boot_proof.py"
+        ]
+      },
+      "incident_id": "AER-0987",
+      "attempt_id": "clock-e27ea162cb5cbc4b531dfedb",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-stock-headless-custom-runner-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "implementation-file-hash-readback",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_read_only",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Implementation hashes are read from exact repository paths without manually changing separator vocabulary inside filenames.",
+      "observed_error": "One read-only hash command substituted hyphens for underscores in the focused-test filename and failed before the exact path was rerun.",
+      "detection_method": "Get-Item and Get-FileHash returned path-not-found; no file or Git state changed.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/contract.json",
+        "tests/test_deepseek_native_harness_provider_free_stock_headless_to_custom_runner_boot_proof.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_repository_filename_separator_substitution",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Repeat the read from the exact repository filename and bind the resulting full digest in the contract.",
+        "prevention_control": "Derive implementation binding paths from controller constants or exact file inventory rather than retyping filenames.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/contract.json"
+        ]
+      },
+      "incident_id": "AER-0988",
+      "attempt_id": "clock-2365ed43d38b7f4b96e1ff20",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-stock-headless-custom-runner-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "git-object-readback-command",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_git",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Git object readback uses a shell-safe exact argument form and returns one full object ID per requested commit.",
+      "observed_error": "A read-only PowerShell command supplied the revision peeling suffix without shell-safe quoting, allowing PowerShell to reinterpret it and produce rejected arguments.",
+      "detection_method": "git rev-parse returned fatal ambiguous-argument diagnostics; a subsequent plain exact commit resolution returned the three full IDs without state change.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/native-boot-evidence.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_unquoted_git_revision_peeling_suffix",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve already-known commit abbreviations with plain git rev-parse arguments and consume the returned 40-character IDs.",
+        "prevention_control": "Use machine-owned full IDs from receipts/evidence or quote Git revision expressions as literal arguments in PowerShell.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout.md"
+        ]
+      },
+      "incident_id": "AER-0989",
+      "attempt_id": "clock-0f230779aa9aba486f7c97b2",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-stock-headless-custom-runner-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "governance-clockwork-closeout-intent",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The broker block uses the transactional closeout contract's exact provider_free_shadow posture rather than descriptive future-state prose.",
+      "observed_error": "The first check supplied provider_free_shadow_until_frozen_occupied_preexecution, which was meaningful prose but outside the one-value broker posture vocabulary.",
+      "detection_method": "Clockwork --check rejected tick_transaction_manifest before lease acquisition, canonical writes or any Harness/model/provider activity.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/closeout/closeout-intent.json",
+        "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.transactional_closeout_broker_posture_outside_closed_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the descriptive posture with exact provider_free_shadow and retain future execution closure in next-operation protected boundaries.",
+        "prevention_control": "Closeout broker posture is selected only from the transactional validator's literal closed value; future-state qualifications belong in boundary fields.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0990",
+      "attempt_id": "clock-c1a5fa26c3f840674a24aa37",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-stock-headless-custom-runner-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "governance-clockwork-next-boundaries",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every next-operation boundary list contains the validator-owned exact closure floor in addition to any operation-specific restrictions.",
+      "observed_error": "The second check used semantically similar product/data, production and protected-evidence closures but omitted three literal mandatory floor values.",
+      "detection_method": "Clockwork --check rejected tick_next_boundaries_floor before lease acquisition, canonical writes or Harness/model/provider activity.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/closeout/closeout-intent.json",
+        "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.next_operation_boundaries_paraphrased_below_literal_clockwork_floor",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the three missing exact mandatory closure tokens while retaining the narrower operation-specific boundaries.",
+        "prevention_control": "Construct every next-operation boundary list by starting with REQUIRED_NEXT_BOUNDARIES and then append operation-specific restrictions.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0991",
+      "attempt_id": "clock-b1b7ff4d3d98dab9bad3a189",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-stock-headless-custom-runner-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "prospective-agent-error-register-reading",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The caller-authored human-readable prospective register revision exists before graph preparation while canonical register state remains clockwork-owned.",
+      "observed_error": "The third check referenced docs/ariadne-agent-error-correction-register-revision-626.md in prospective findings before that evidence document had been authored.",
+      "detection_method": "Clockwork transaction preparation rejected evidence_not_found before lease acquisition, canonical writes or Harness/model/provider activity.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-626.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.prospective_register_revision_referenced_before_human_reading_authored",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Author the prospective human-readable register revision with exact revision, incident population and allocated IDs before rerunning transaction preparation.",
+        "prevention_control": "Closeout assembly creates caller-owned prospective evidence documents before the first clockwork check while leaving canonical surfaces to the clockwork.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-626.md"
+        ]
+      },
+      "incident_id": "AER-0992",
+      "attempt_id": "clock-ced6d247b46076646691e1b0",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-stock-headless-custom-runner-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "closeout-provider-free-command-manifest",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The provider-free wrapper receives only literal test paths; pytest node selectors and deselection arguments use the admitted serial pytest runner.",
+      "observed_error": "The dry-run command manifest passed a pytest --deselect node selector to scripts.ariadne_provider_free_pytest, whose closed interface accepts literal test paths only.",
+      "detection_method": "The provider-free wrapper's argument parser rejected the unsupported selector before tests, Harness activity, provider activity or state mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-626.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.provider_free_literal_path_wrapper_received_pytest_node_selector",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep literal-path tests in the provider-free wrapper and run the one historical node deselection through scripts.ariadne_serial_pytest.",
+        "prevention_control": "Validate each closeout command against the selected runner's closed CLI grammar before publication.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0993",
+      "attempt_id": "clock-3cf5115349938f9e10d6ccd2",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-stock-headless-custom-runner-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "completed-attempt-deterministic-readback",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A completed immutable success-terminal readback is independent of ambient npm-cache discovery; only an unexecuted preflight needs a supplied or discovered cache root.",
+      "observed_error": "The first clean provider-free closeout test removed LOCALAPPDATA and exposed that deterministic_check resolved the npm cache before it inspected the complete canonical success terminal.",
+      "detection_method": "One focused test failed closed with localappdata_missing before any Harness process, provider request, test mutation or canonical publication.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_stock_headless_to_custom_runner_boot_proof.py",
+        "tests/test_deepseek_native_harness_provider_free_stock_headless_to_custom_runner_boot_proof.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/contract.json",
+        "docs/ariadne-agent-error-correction-register-revision-626.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.completed_terminal_readback_depended_on_ambient_localappdata_cache_root",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "For a complete success terminal, validate canonical evidence, its recorded four-package cache proof and the immutable package seed without resolving an ambient cache root; retain live cache verification for preexecution only.",
+        "prevention_control": "Provider-free terminal-readback tests run under the sanitized environment and assert the recorded cache-package count.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_stock_headless_to_custom_runner_boot_proof.py",
+          "tests/test_deepseek_native_harness_provider_free_stock_headless_to_custom_runner_boot_proof.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/contract.json"
+        ]
+      },
+      "incident_id": "AER-0994",
+      "attempt_id": "clock-927db520afa1ae6879f243da",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-stock-headless-custom-runner-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "closeout-serial-pytest-command-manifest",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_serial_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Pytest arguments supplied through scripts.ariadne_serial_pytest begin after its explicit -- remainder delimiter.",
+      "observed_error": "The first serial command put -q immediately after --repo-root, so the wrapper parser treated it as an unrecognized wrapper option.",
+      "detection_method": "The serial wrapper's argument parser rejected -q before lock acquisition, test collection, Harness activity, provider activity or state mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-626.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.serial_pytest_remainder_missing_explicit_delimiter",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Insert the explicit -- delimiter before -q and the frozen historical path/deselection arguments.",
+        "prevention_control": "Render serial-pytest manifests from the wrapper grammar with a mandatory remainder delimiter whenever pytest options are present.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0995",
+      "attempt_id": "clock-c7f61cd0a463d00e0cf3765c",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-stock-headless-custom-runner-boot-proof",
+      "role": "orchestrator",
+      "resource_id": "closeout-incident-observation-vocabulary",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every incident observation selects candidate_state and correction.status only from the clockwork's generated closed schema vocabulary.",
+      "observed_error": "The new readback incident used descriptive corrected_clean_candidate and fixed labels instead of accepted_candidate_changed and control_added.",
+      "detection_method": "Clockwork --check rejected tick_incident_candidate_state before lease acquisition, canonical writes, Harness activity or provider activity; local schema inspection also identified the second non-admitted label before another check.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-626.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.incident_observation_used_descriptive_candidate_and_correction_labels",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace both descriptive labels with accepted_candidate_changed and control_added from the schema-owned vocabulary.",
+        "prevention_control": "Construct incident observation enum fields from the generated schema or imported clockwork constants before the first check.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0996",
+      "attempt_id": "clock-c7db0eff119bac7c28f21171",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"
