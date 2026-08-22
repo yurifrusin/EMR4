@@ -2,58 +2,18 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "integrated-runner-stock-headless-closeout-tick-check",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "scripts.ariadne_governance_clockwork_tick",
-        "--check",
-        "--intent",
-        "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/closeout/closeout-intent.json"
-      ],
-      "completion_contract": "final_exit_code_zero_required"
-    },
-    {
-      "command_id": "integrated-runner-stock-headless-closeout-provider-free-tests",
+      "command_id": "integrated_native_harness_useful_development_checkpoint_provider_free_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
+        "tests/test_raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py",
         "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal_plan.py",
-        "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
-        "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_active_operation_latch.py",
-        "tests/test_ariadne_active_operation_latch_continuity.py",
-        "tests/test_current_baton_consistency.py",
-        "tests/test_api_spine_artifacts.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required"
-    },
-    {
-      "command_id": "integrated-runner-stock-headless-closeout-ruff",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "ruff",
-        "check",
-        "scripts/deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal_plan.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required"
-    },
-    {
-      "command_id": "integrated-runner-stock-headless-closeout-compile",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "py_compile",
-        "scripts/deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal_plan.py"
+        "tests/test_current_baton_consistency.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }
