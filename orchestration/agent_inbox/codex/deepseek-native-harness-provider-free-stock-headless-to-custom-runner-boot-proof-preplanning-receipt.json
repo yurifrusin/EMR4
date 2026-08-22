@@ -1,0 +1,129 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free stock-headless-to-custom-runner boot proof",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_provider_free_stock_headless_custom_runner_boot_contract",
+    "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
+    "resume_after_compaction": true,
+    "source_head": "3d82febd6a402337db606ce4767fbd4875698eba",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "25268f89353b9077fd7896f3c7c498f91fe1551b",
+    "reason_codes": [],
+    "resolved_commit": "3d82febd6a402337db606ce4767fbd4875698eba",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "3d82febd6a402337db606ce4767fbd4875698eba"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "25268f89353b9077fd7896f3c7c498f91fe1551b",
+    "branch_origin_aligned": true,
+    "head": "25268f89353b9077fd7896f3c7c498f91fe1551b",
+    "origin_branch_commit": "25268f89353b9077fd7896f3c7c498f91fe1551b",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 671
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "fresh_preplanning_stock_headless_to_corrected_custom_runner_boot_proof",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native Harness is the provider-free subject under test; starting a DeepSeek worker, turn, model or provider request is forbidden and would destroy the proof boundary.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "No candidate plan or evidence exists yet. Reassess after deterministic source, containment and one-process evidence gates; Gemini may own only a fresh read-only veto if material ambiguity remains.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation, and process launch, readiness attribution, terminal capture and cleanup require one serial custodian.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "frozen_plan_or_source_binding_rejects",
+      "deterministic_candidate_reaches_preexecution_gate",
+      "one_process_terminal_requires_semantic_veto",
+      "any_unexpected_target_worker_model_provider_or_network_activity"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "bind the accepted diagnosis and exact corrected integrated runner graph",
+      "freeze the pinned stock-headless handoff and four-root/five-hook terminal contract",
+      "pass static source containment and no-artifact preflight before launch",
+      "launch at most one separately identified native Harness process",
+      "stop before target, DeepSeek turn, worker, model, provider or network request",
+      "capture typed terminal and prove exact process/root cleanup",
+      "admit the result or fail closed without retry"
+    ]
+  },
+  "planned_action": "freeze_the_provider_free_stock_headless_to_corrected_custom_runner_boot_contract",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis/diagnosis-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis/efficacy-reading.json",
+      "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis-sol-acceptance.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial contract, source binding, one-process custody, terminal admission and closeout. DeepSeek is declined as a model worker because the native Harness is the provider-free subject and no turn or provider request is permitted. Gemini is deferred until a deterministic exact candidate exists and will be reassessed before verifier admission. Native subagents are declined under current developer policy and because one native process, readiness, terminal capture and cleanup require a single attribution chain.",
+    "git_refs_and_worktree": "The preflight machine snapshot alone owns exact Git identities and verifies the named task branch, origin task alignment, user-required source ancestry, accepted diagnosis-source ancestry, all four protected refs at the configured protected commit, tracked cleanliness and preservation of unrelated untracked files.",
+    "live_handover_current_baton": "AGENTS.md names Continuity 402 / Compass 384, the accepted unique content-free counter diagnosis at exact source 3d82febd6a402337db606ce4767fbd4875698eba, and the provider-free stock-headless-to-custom-runner boot proof as the next implementation.",
+    "protected_evidence_boundaries": "The successor may freeze and run only one separately identified provider-free native Harness boot after deterministic preflight, through the pinned stock headless entry point to the corrected custom runner under the four-root/five-hook contract. It must stop before any target, DeepSeek turn, worker, model or provider request and retain zero broker, network, database, Docker and product-target activity. The consumed materialization fixture is immutable and may not be retried or reclassified. Product source/configuration, ordinary-practice admission, protected evidence, production, deployment, release, Pages and protected refs remain closed. Preserve docs/branding/ and unrelated untracked files; stage explicit paths only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
