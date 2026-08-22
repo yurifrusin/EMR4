@@ -137,6 +137,10 @@ def test_failure_coordinate_is_exact_and_fail_closed() -> None:
 
 def test_contract_and_provider_free_preflight() -> None:
     projection = proof.deterministic_check()
+    assert projection["result"] in {
+        "provider_free_preflight_pass",
+        "provider_free_success_readback_pass",
+    }
     assert projection["contract"]["expected_observation"] == proof.EXPECTED_OBSERVATION
     assert projection["import_closure"] == {
         "module_count": 5,
@@ -146,5 +150,10 @@ def test_contract_and_provider_free_preflight() -> None:
         "bare_target_count": 6,
         "all_targets_present": True,
     }
-    assert not proof.EVIDENCE_PATH.exists()
-    assert not proof.CONSUMED_PATH.exists()
+    if proof.EVIDENCE_PATH.exists():
+        assert projection["result"] == "provider_free_success_readback_pass"
+        evidence = json.loads(proof.EVIDENCE_PATH.read_bytes())
+        assert evidence["result"] == "pass"
+        assert evidence["observation"] == proof.EXPECTED_OBSERVATION
+    else:
+        assert not proof.CONSUMED_PATH.exists()

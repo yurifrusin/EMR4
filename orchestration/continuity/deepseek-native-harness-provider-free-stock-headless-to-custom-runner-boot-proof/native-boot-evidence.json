@@ -1,0 +1,201 @@
+{
+  "candidate_source": "d3cdf7362153079bdc92305714197a88f14a4b74",
+  "cleanup": {
+    "disposable_root_absent": true,
+    "package_seed_unchanged": true,
+    "process_absent": true,
+    "raw_environment_retained": false,
+    "raw_logs_retained": false
+  },
+  "composition": {
+    "canonical_sources_unchanged": true,
+    "changed_patch_sha256": "cdbd69d97c200226303902764d1408035e426f34ba71df4c47193a42bf647e74",
+    "execution_copies_equal": true,
+    "execution_copy_sha256": {
+      "adapter": "8a05867f5ce6debf98836624471886dc3a5d61493ecc8a01c9cd1d16508a8bec",
+      "bridge": "3a49b28174eeefd77d7efe0a00498901ac6636b637ed9dfe60aba46980df1d0b",
+      "guard": "76029da0f9c030651fd10c0df16f4e75e86b2269d7560af7f94c74680f8598b9",
+      "readiness_sentinel": "6ff4ff7da4b0bc4a488d1cf79e8412ebb959d8d2c4061683196cf4fa5f4c8de4",
+      "runner": "017394e3f86a3efdf5eba0745c254a8b561615fb6ab923978b81bb5941e8e3f4",
+      "sanitizer": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f"
+    },
+    "initial_patch_sha256": "a883585454a5988c1ed7dd81f658113e0b17a9f6b8ce211d141a0ffdb96ec7fd"
+  },
+  "coordinate": "stock_headless_handed_off_to_accepted_guard_graph_runner",
+  "execution_attempt_id": "stock-headless-custom-runner-boot-attempt-001",
+  "failure_classification": null,
+  "import_closure": {
+    "all_targets_present": true,
+    "bare_edge_count": 8,
+    "bare_target_count": 6,
+    "builtin_edge_count": 4,
+    "module_count": 5,
+    "relative_edge_count": 4
+  },
+  "launch": {
+    "duration_ms": 5874,
+    "exit_code": 0,
+    "exit_mode": "self_exited_after_or_before_typed_terminal",
+    "fallback_count": 0,
+    "hmr_mutation_count": 1,
+    "native_process_count": 1,
+    "raw_stream_read": false,
+    "resume_count": 0,
+    "retry_count": 0,
+    "started_at_utc": "2026-08-22T10:58:53Z",
+    "stderr_retained": false,
+    "stdout_retained": false
+  },
+  "observation": {
+    "cordis_disposed": true,
+    "distinct_preset_root_count": 2,
+    "factory_create_agent_invocations": 1,
+    "hook_installations": 5,
+    "live_agent_count": 0,
+    "old_input_invalid_observed": false,
+    "preset_mount_calls": 1,
+    "preset_mount_reads": 1,
+    "preset_root_reads": 4,
+    "raw_error_retained": false,
+    "result": "stock_headless_handed_off_to_accepted_guard_graph_runner",
+    "runner_app_exit_code": 1,
+    "runner_conclusion_marked": false,
+    "runner_failure_stage": "factory",
+    "runner_request_count": 0,
+    "runner_status": "failed",
+    "runner_tool_result_count": 0,
+    "runner_turn_kind": null,
+    "schema_version": "ariadne.native_harness_stock_headless_custom_runner_observation.v1",
+    "scope_disposals": 1,
+    "setup_invocations": 1,
+    "setup_resolved": true,
+    "stock_app_exit_requested": true,
+    "structured_coordinate": "EFFECTIVE_TOOL_COMPOSITION_PASSED",
+    "tool_restrict_calls": 1,
+    "tool_schema_calls": 1,
+    "tool_view_calls": 1
+  },
+  "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
+  "package": {
+    "bin": "lib/bin.js",
+    "installed_source": {
+      "checks": {
+        "documented_headless_profile_flag": true,
+        "headless_hmr_row_disabled": true,
+        "headless_runner_declared": true,
+        "hmr_expose_internals_required": true,
+        "hmr_register_config_present": true,
+        "profile_boot_creates_watch_only_hmr": true,
+        "profile_boot_watches_user_patches_twice": true
+      },
+      "source_sha256": {
+        "bin": "c0226687bb20f45c603ec6fe50f3de16d1c3510c3a803304ec575ef9bc366c62",
+        "headless_patch": "534dc49c84b0fb9c2d3278dc8990f577d57b7a88442941444b58c96ac1a09ba0",
+        "hmr": "7ec3296a902154a2b9906dceb4d81b996ff4c8373709e116ea8dac69058ee2b1",
+        "profile_boot": "f83ffea6a4d30cfbe02b41dabcc05104c4ad27bf79c74f601f0ddb6ccdf88969"
+      }
+    },
+    "installed_versions": {
+      "@deepseek-ai/dsh": "0.1.0-rc.7",
+      "@deepseek-ai/dsh-agent-presets": "0.1.0-rc.7",
+      "@deepseek-ai/dsh-scope": "0.1.0-rc.7",
+      "@deepseek-ai/dsh-tool-fs": "0.1.0-rc.7",
+      "@deepseek-ai/dsh-tool-fs-search": "0.1.0-rc.7",
+      "@deepseek-ai/dsh-tools": "0.1.0-rc.7"
+    },
+    "name": "@deepseek-ai/dsh",
+    "offline_materialisation": {
+      "copy": {
+        "byte_count": 219364530,
+        "file_count": 32744,
+        "reparse_point_count": 0,
+        "tree_sha256": "d84e73067c8dbbf4836969eb948012fd364ee454bb07744cfe486995a256084d"
+      },
+      "duration_ms": 178829,
+      "process_count": 0,
+      "retry_count": 0,
+      "seed": {
+        "byte_count": 219364530,
+        "dsh_manifest_sha256": "7a9f356ad1e27c7013b44619bc675b8cb877f995cd0951ab3dfeb10d4edcc361",
+        "file_count": 32744,
+        "lock_package_count": 588,
+        "package_json_sha256": "0009f94a6b9c3495404d4a1a89e0eef82ba4948c4ea29994c210a271390e64db",
+        "package_lock_sha256": "a89defcd8a2c5aae4a54c03bda98e2585711fce881b4b08c90ca4808d45555f4",
+        "reparse_point_count": 0,
+        "seed_scope_package_only": true,
+        "tree_sha256": "d84e73067c8dbbf4836969eb948012fd364ee454bb07744cfe486995a256084d"
+      },
+      "strategy": "verified_installed_tree_seed_copy"
+    },
+    "seed_unchanged": true,
+    "verified_cached_package_count": 4,
+    "version": "0.1.0-rc.7"
+  },
+  "planning_source": "79690a3c990eba5676662510a4ffa98d452fbc0a",
+  "provider_boundary": {
+    "agent_publication_count": 0,
+    "broker_process_count": 0,
+    "broker_request_count": 0,
+    "credential_environment_names_removed_count": 3,
+    "database_invocation_count": 0,
+    "docker_invocation_count": 0,
+    "model_request_count": 0,
+    "network_attempt_count": 0,
+    "network_ledger_valid": true,
+    "provider_request_count": 0,
+    "session_count": 0,
+    "target_attempt_count": 0,
+    "tool_call_count": 0,
+    "tool_result_count": 0,
+    "turn_count": 0,
+    "worker_count": 0
+  },
+  "readiness": {
+    "events": [
+      "sentinel_activated",
+      "stock_headless_hmr_ready"
+    ],
+    "exact_expected_order": true
+  },
+  "result": "pass",
+  "schema_version": "ariadne.native_harness_stock_headless_custom_runner_boot_evidence.v1",
+  "source_bindings": {
+    "adapter": {
+      "bytes": 7027,
+      "sha256": "8a05867f5ce6debf98836624471886dc3a5d61493ecc8a01c9cd1d16508a8bec"
+    },
+    "bridge": {
+      "bytes": 1661,
+      "sha256": "3a49b28174eeefd77d7efe0a00498901ac6636b637ed9dfe60aba46980df1d0b"
+    },
+    "guard": {
+      "bytes": 4501,
+      "sha256": "76029da0f9c030651fd10c0df16f4e75e86b2269d7560af7f94c74680f8598b9"
+    },
+    "network_guard": {
+      "bytes": 1643,
+      "sha256": "76e7adc10b646e67e7dd8af7d74c8d0701a93025daf140f19cd5e794bb7a4796"
+    },
+    "readiness_sentinel": {
+      "bytes": 1238,
+      "sha256": "6ff4ff7da4b0bc4a488d1cf79e8412ebb959d8d2c4061683196cf4fa5f4c8de4"
+    },
+    "runner": {
+      "bytes": 14210,
+      "sha256": "017394e3f86a3efdf5eba0745c254a8b561615fb6ab923978b81bb5941e8e3f4"
+    },
+    "sanitizer": {
+      "bytes": 2439,
+      "sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f"
+    }
+  },
+  "terminal": {
+    "conclusion_marked": false,
+    "failure_stage": "factory",
+    "request_count": 0,
+    "status": "failed",
+    "target_path_sha256": "sha256:064475367ffd6763f0bcad1dcd6e272e0b4b9d92ca8efce290f56ab77d57efac",
+    "tool_result_count": 0,
+    "turn_kind": null
+  }
+}

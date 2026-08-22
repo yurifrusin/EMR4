@@ -495,11 +495,43 @@ def deterministic_check(cache_root: Path | None = None) -> dict[str, Any]:
         observation_path=root / "observation.json",
         terminal_path=root / "runner-terminal.json",
     )
-    if any(path.exists() for path in (EVIDENCE_PATH, REPORT_PATH, CONSUMED_PATH)):
-        raise StockHeadlessCustomRunnerBootError("canonical_attempt_output_already_exists")
+    terminal_result = "provider_free_preflight_pass"
+    terminal_paths = (EVIDENCE_PATH, REPORT_PATH, CONSUMED_PATH)
+    if any(path.exists() for path in terminal_paths):
+        if not all(path.is_file() for path in terminal_paths):
+            raise StockHeadlessCustomRunnerBootError("canonical_attempt_output_incomplete")
+        evidence = json.loads(EVIDENCE_PATH.read_bytes())
+        evidence_schema = json.loads(EVIDENCE_SCHEMA_PATH.read_bytes())
+        jsonschema.Draft202012Validator(evidence_schema).validate(evidence)
+        consumed = json.loads(CONSUMED_PATH.read_bytes())
+        if (
+            evidence.get("operation_id") != OPERATION_ID
+            or evidence.get("execution_attempt_id") != ATTEMPT_ID
+            or evidence.get("result") != "pass"
+            or evidence.get("coordinate") != PASS_RESULT
+            or evidence.get("observation") != EXPECTED_OBSERVATION
+            or evidence.get("launch", {}).get("native_process_count") != 1
+            or evidence.get("launch", {}).get("retry_count") != 0
+            or evidence.get("cleanup", {}).get("process_absent") is not True
+            or evidence.get("cleanup", {}).get("disposable_root_absent") is not True
+            or consumed
+            != {
+                "schema_version": "ariadne.native_harness_stock_headless_custom_runner_attempt.v1",
+                "operation_id": OPERATION_ID,
+                "attempt_id": ATTEMPT_ID,
+                "status": "consumed_before_native_launch",
+                "retry_count": 0,
+                "resume_count": 0,
+                "fallback_count": 0,
+            }
+            or f"- Result: `pass`" not in REPORT_PATH.read_text(encoding="utf-8")
+        ):
+            raise StockHeadlessCustomRunnerBootError("canonical_attempt_readback_rejected")
+        terminal_result = "provider_free_success_readback_pass"
     if any(DISPOSABLE_PARENT.glob("dsh-accepted-guard-boot-*")):
         raise StockHeadlessCustomRunnerBootError("disposable_root_not_absent")
     return {
+        "result": terminal_result,
         "contract": contract,
         "source_sha256": {name: sha256_bytes(value) for name, value in payloads.items()},
         "import_closure": closure,
@@ -907,7 +939,7 @@ def main() -> int:
         print(
             json.dumps(
                 {
-                    "status": "passed",
+                    "status": projection["result"],
                     "attempt_id": ATTEMPT_ID,
                     "source_sha256": projection["source_sha256"],
                     "import_closure": projection["import_closure"],

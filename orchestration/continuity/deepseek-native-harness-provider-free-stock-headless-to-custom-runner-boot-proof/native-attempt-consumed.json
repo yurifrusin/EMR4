@@ -1,0 +1,9 @@
+{
+  "attempt_id": "stock-headless-custom-runner-boot-attempt-001",
+  "fallback_count": 0,
+  "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
+  "resume_count": 0,
+  "retry_count": 0,
+  "schema_version": "ariadne.native_harness_stock_headless_custom_runner_attempt.v1",
+  "status": "consumed_before_native_launch"
+}
