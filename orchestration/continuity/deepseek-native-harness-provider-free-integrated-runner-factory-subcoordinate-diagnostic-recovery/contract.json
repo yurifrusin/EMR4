@@ -1,0 +1,76 @@
+{
+  "schema_version": "ariadne.native_harness_integrated_runner_factory_subcoordinate_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery",
+  "evidence_label": "provider_free_installed_agent_registry_setup_fixture",
+  "git_binding_policy": {
+    "mode": "machine_resolved_only",
+    "caller_authored_object_id_count": 0
+  },
+  "accepted_inputs": {
+    "plan": {
+      "path": "docs/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery-plan.md",
+      "bytes": 6404,
+      "sha256": "79140e3b1de3f56b0b8f769fb4211e82706eeb722b8f71e72d102e31d6358a84"
+    },
+    "threat_model": {
+      "path": "docs/security/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery-threat-model-delta.md",
+      "bytes": 2466,
+      "sha256": "0ec05525812b43acc7978c6b7f1fb6714665d082758fe6572e5e5d2dbc95e477"
+    },
+    "occupied_preparation": {
+      "path": "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-attempt-preparation.json",
+      "bytes": 2187,
+      "sha256": "5237bd35a84e8c7cfdeafeaf13684840af32424d25eeba59c166121ef6cd7300"
+    },
+    "occupied_terminal": {
+      "path": "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-terminal.json",
+      "bytes": 2593,
+      "sha256": "fc0122df433fab2526b46c779294a23b8c26ae1c63620635b290dc7b78cba716"
+    },
+    "accepted_correction_evidence": {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence-v2.json",
+      "bytes": 3591,
+      "sha256": "835bdc53701b9423795a22ee75ba1dd145586d73de32bdeb0906769cf24b0181"
+    }
+  },
+  "occupied_composition": {
+    "runner_bytes": 14210,
+    "runner_sha256": "017394e3f86a3efdf5eba0745c254a8b561615fb6ab923978b81bb5941e8e3f4",
+    "guard_bytes": 4009,
+    "guard_sha256": "6678ed31bdcd30a5018689b72ad509c182854bf5d63862f59b397acc8de40894",
+    "runner_argument_count": 4,
+    "guard_parameter_count": 3
+  },
+  "expected_fixture": {
+    "result": "occupied_guard_graph_signature_mismatch_reproduced",
+    "structured_guard_coordinate": "EFFECTIVE_TOOL_COMPOSITION_INPUT_INVALID",
+    "runner_status": "failed",
+    "runner_failure_stage": "factory",
+    "node_process_count": 1,
+    "agent_registry_create_transits": 1,
+    "setup_invocations": 1,
+    "preset_mount_reads": 0,
+    "request_count": 0,
+    "tool_result_count": 0
+  },
+  "accepted_correction": {
+    "decision": "materialize_accepted_root_service_forwarding_graph",
+    "derived_guard_sha256": "76029da0f9c030651fd10c0df16f4e75e86b2269d7560af7f94c74680f8598b9",
+    "derived_bridge_sha256": "3a49b28174eeefd77d7efe0a00498901ac6636b637ed9dfe60aba46980df1d0b",
+    "sanitizer_sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f"
+  },
+  "process_limits": {
+    "node_process_count": 1,
+    "native_harness_process_count": 0,
+    "broker_process_count": 0,
+    "worker_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "network_attempt_count": 0,
+    "database_attempt_count": 0,
+    "docker_attempt_count": 0,
+    "retry_count": 0,
+    "resume_count": 0,
+    "fallback_count": 0
+  }
+}
