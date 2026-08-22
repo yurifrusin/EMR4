@@ -1,0 +1,31 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+  "source_head": "aab7dcf2e408f05f57935c1ee1800cff04be6cdf",
+  "result": "effective_with_bounded_local_iteration_and_one_transcript_replay",
+  "before": {
+    "excluded_ordinary_pytest_database_sessions": 6,
+    "postpublication_projection_selected_prepublication": 1,
+    "shared_typed_verification_gears": 0
+  },
+  "after": {
+    "shared_typed_verification_gears": 1,
+    "control_surfaces_using_shared_gear": 2,
+    "hostile_coordinates_rejected_before_subprocess": 8,
+    "cross_phase_execution_count": 0,
+    "unauthorised_subprocess_launch_count": 0,
+    "database_provider_product_or_protected_actions": 0,
+    "bounded_first_run_code_or_test_corrections": 2,
+    "compatibility_packets_repeated_for_missing_restored_transcript": 1
+  },
+  "recurrent_gears": [
+    "typed_database_authority_runner_admission",
+    "typed_monotonic_verification_phase_partition"
+  ],
+  "honest_build_cost": {
+    "reusable_shared_and_projection_net_lines": 218,
+    "supporting_contract_conformance_and_test_lines": 872,
+    "new_free_form_runner_or_phase_choices_per_v2_manifest": 0
+  },
+  "bounded_conclusion": "Both observed verification-envelope recurrence classes now reject before child launch through one shared finite semantic gear on two control surfaces. Historical v1 remains readable. Two local first-run corrections and one evidence-only transcript replay remain visible; no database, provider, product, protected or occupied action occurred."
+}

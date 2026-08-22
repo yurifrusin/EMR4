@@ -1,0 +1,10 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "operation_id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+  "sent_at": "2026-08-23T06:00:22.7546020+10:00",
+  "status": "delivered",
+  "provider_status": 1,
+  "request_id": "1d3d623e-f830-42b4-a538-f8c9c02449c9",
+  "contains_phi": false,
+  "continuation": "read-only attempt-008 plan-admissibility decision"
+}

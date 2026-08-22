@@ -1,0 +1,240 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v1",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+    "title": "Ariadne provider-free verification-envelope phase and runner-admission repair closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T05:57:19.6577887+10:00",
+    "node": {
+      "id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+      "title": "Ariadne provider-free verification-envelope phase and runner-admission repair",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted only a provider-free deterministic verification-control repair.",
+          "The accepted candidate used no database conftest, engine, fixture, Docker, PostgreSQL, provider, product path or attempt-008 action.",
+          "DeepSeek, Gemini and native subagents remained declined under the frozen serial parallelism assessment."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-shared-verification-envelope-gear",
+          "source": "orchestration_harness/verification_envelope.py",
+          "status": "accepted",
+          "summary": "Accept one finite database-authority, verification-phase and pytest-runner semantic owner shared by both projections."
+        },
+        {
+          "id": "accept-verifier-manifest-v2-and-phase-runner",
+          "source": "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/evidence.json",
+          "status": "accepted",
+          "summary": "Accept exact v2 phase-only execution and closed-authority rejection before subprocess launch while retaining historical v1 admission."
+        },
+        {
+          "id": "accept-governance-manifest-v2-self-application",
+          "source": "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/closeout/closeout-intent.json",
+          "status": "accepted",
+          "summary": "Accept the same typed gear on clockwork command manifests and require this closeout to publish through its closed-authority phase partition."
+        },
+        {
+          "id": "accept-measured-verification-envelope-efficacy",
+          "source": "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept retirement of two procedural recurrence classes while retaining two bounded first-run corrections and one transcript-only replay."
+        }
+      ],
+      "claim_scope": [
+        "Both typed v2 command-control surfaces call one shared semantic gear.",
+        "Closed database authority rejects ordinary and serial pytest before subprocess launch.",
+        "V2 commands use exact monotonic prepublication and postpublication phases.",
+        "Historical v1 manifests retain their prior admission.",
+        "No database, provider, product, protected or attempt-008 behavior is proved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair-plan.md",
+          "docs/security/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/contract.json",
+          "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/evidence.json",
+          "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/report.md",
+          "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-provider-free-verification-envelope-phase-runner-admission-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-provider-free-verification-envelope-phase-runner-admission-repair-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_evidence_gate.py",
+          "tests/test_ariadne_validation_runner.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair.py",
+          "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair_plan.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/verification_envelope.py",
+          "scripts/ariadne_evidence_gate.py",
+          "scripts/ariadne_validation_runner.py",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair.py",
+          "orchestration/human_inbox/yuri/2026-08-23--verification-envelope-phase-runner-admission-repair.md"
+        ]
+      },
+      "unresolved_gates": [
+        "Arbitrary non-pytest commands remain bounded by allowlisting rather than semantic database proof.",
+        "Attempt 008 remains unplanned and unauthorised pending a separate read-only admissibility decision.",
+        "Rollback, unknown-response commit recovery, role absence and successful occupied database behavior remain unproved.",
+        "Dedicated check-in remains default-off without ordinary-practice admission.",
+        "No provider, product-data, production, deployment, release, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Replace remembered verification procedure with one typed executable control gear",
+      "outcome": "Database-closed runner choice and publication phase now fail closed on both command-control surfaces.",
+      "evidence": [
+        "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/evidence.json",
+        "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/efficacy-reading.json",
+        "docs/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Decide whether the repaired deterministic envelope is sufficient to plan one more occupied check-in recovery attempt",
+      "why_now": "The two product-harness causes and two surrounding verification-envelope causes are now represented by reusable fail-closed controls.",
+      "outcome": "A read-only decision will enumerate every frozen prerequisite and either admit a separate attempt-008 planning tranche or identify the exact remaining deterministic gap.",
+      "unlocks": [
+        "An admissible result can support a separately frozen attempt-008 plan.",
+        "A negative result can name one bounded repair without spending an occupied run.",
+        "The decision will use the typed provider-free verification envelope."
+      ],
+      "does_not_solve": [
+        "No attempt-008 plan or execution is authorised in the decision tranche.",
+        "No database lifecycle or occupied behavior is proved.",
+        "No product, provider, production or protected authority opens."
+      ],
+      "evidence": [
+        "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/efficacy-reading.json",
+        "docs/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair-closeout.md",
+        "orchestration/human_inbox/yuri/2026-08-23--verification-envelope-phase-runner-admission-repair.md"
+      ],
+      "orientation_statement": "EMR4 will take a provider-free read-only admissibility reading before spending another occupied check-in recovery attempt."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+      "active_tranche": "Raisa provider-free read-only check-in attempt-008 plan-admissibility decision",
+      "objective": "Compare accepted attempt-007 diagnosis, repair evidence and verification-envelope controls against every frozen occupied-run prerequisite and decide whether a separate attempt-008 plan may be frozen, without planning or executing attempt 008.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted verification-envelope closeout boundary.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_read_only_attempt_008_plan_admissibility_decision"
+    },
+    "incidents": [],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v2",
+    "database_authority": "closed",
+    "commands": [
+      {
+        "command_id": "verification-envelope-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/closeout/closeout-intent.json"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "verification-envelope-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4",
+          "tests/test_ariadne_evidence_gate.py",
+          "tests/test_ariadne_validation_runner.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_provider_free_no_database_admission.py",
+          "tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_ariadne_antigravity.py",
+          "tests/test_ariadne_verifier_worktree_preflight.py",
+          "tests/test_ariadne_provider_free_clockwork_live_canonical_adoption_retirement.py",
+          "tests/test_ariadne_provider_free_clockwork_governance_projection_consolidation_repair.py",
+          "tests/test_ariadne_provider_free_clockwork_single_owner_migration_retirement_rehearsal.py",
+          "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair.py",
+          "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "verification-envelope-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "orchestration_harness/verification_envelope.py", "orchestration_harness/governance_clockwork_tick.py", "scripts/ariadne_evidence_gate.py", "scripts/ariadne_validation_runner.py", "scripts/ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair.py", "tests/test_ariadne_evidence_gate.py", "tests/test_ariadne_validation_runner.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair.py", "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair_plan.py"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "verification-envelope-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "orchestration_harness/verification_envelope.py", "orchestration_harness/governance_clockwork_tick.py", "scripts/ariadne_evidence_gate.py", "scripts/ariadne_validation_runner.py", "scripts/ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair.py", "tests/test_ariadne_evidence_gate.py", "tests/test_ariadne_validation_runner.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair.py", "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair_plan.py"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "verification-envelope-closeout-conformance",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair", "--check", "--source", "aab7dcf2e408f05f57935c1ee1800cff04be6cdf"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "verification-envelope-closeout-postpublication-readback",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_current_baton_consistency.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_transactional_closeout.py", "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair.py", "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair_plan.py"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "postpublication"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair-plan.md",
+      "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/evidence.json",
+      "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/efficacy-reading.json",
+      "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/report.md",
+      "docs/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-provider-free-verification-envelope-phase-runner-admission-repair-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-23--verification-envelope-phase-runner-admission-repair.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_read_only_check_in_attempt_008_plan_admissibility_decision_only",
+    "accepted_evidence_and_frozen_prerequisite_comparison_only",
+    "no_database_conftest_engine_schema_fixture_docker_postgresql_or_sql_execution",
+    "no_attempt_008_plan_freeze_checkpoint_or_execution",
+    "no_native_deepseek_harness_worker_gemini_or_provider_call",
+    "no_application_product_api_openapi_graphql_route_client_or_configuration_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}
