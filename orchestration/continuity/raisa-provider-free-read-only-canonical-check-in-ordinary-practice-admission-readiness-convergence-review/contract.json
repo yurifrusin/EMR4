@@ -1,0 +1,137 @@
+{
+  "schema_version": "raisa.canonical_check_in_admission_readiness_convergence_review_contract.v1",
+  "planning_source": "f4623fed8d12011a9a34747d12696e5e6017f18b",
+  "input_hash_mode": "strict_utf8_canonical_lf_reject_bare_cr_sha256",
+  "accepted_git_objects": {
+    "original_readiness_review": "27101faa86b5aa3850e90bc4ded8600e5f8d7dc9",
+    "admission_control_architecture": "752b521c59f5b44bf46de0cf776a33ac74b8134d",
+    "admission_control_kernel": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+    "rollout_runbook": "149e377344fab671927682e428af7825e9a0e143",
+    "observability_manifest": "7acd4e9c39ce534042178f9b8b7e049161ce8b03",
+    "observer_adapter": "1fb1db90e1fdbf73d4dcbaf7d51793f4320ba8b5",
+    "tenant_role_attestation": "6a2832575e9b4df5c40a13984db7281e79814a94",
+    "unknown_commit_attempt_node": "03b94136c9c6cd82d5a8098705f263ba34a20de4",
+    "unknown_commit_occupied_execution": "905184b76f576006232fcfdc78da71d98fcf0ca0",
+    "server_lifecycle_repair": "290923ef7b068b4b61f1bf41fff84fe4f47e3049",
+    "environment_secret_architecture": "a1f309a6d52d01f9866432f7e9abb8095788d023"
+  },
+  "inputs": [
+    {
+      "path": "orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/provider-free-read-only-evidence.json",
+      "sha256": "8a55280baa053d983c9fb904adf48932f68a4699e239519cdad7f33b8e4765ac"
+    },
+    {
+      "path": "docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-closeout.md",
+      "sha256": "335c82727662a408305e18954bc2927d724e8e312182af5b1ca0d4b32d32d3e8"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-ordinary-practice-check-in-admission-readiness-review-sol-acceptance.md",
+      "sha256": "584756f6723e0e699c4dd9ffc7d504b3d7b5cea8dd1f735c63e3e13aef31af53"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/provider-free-kernel-rehearsal-evidence.json",
+      "sha256": "25f69675d8cf944fcbed15424c6e476e6bf8d17041a86d9e91ab847fc1aab48d"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-closeout.md",
+      "sha256": "74d3e60840883fe197cb10c5c695c793b8d2f440a5a14b94d3b52488e2dd37c4"
+    },
+    {
+      "path": "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json",
+      "sha256": "dbd765ef3afe2ffe283a07befff44f745b21a8ec474c58d5a6d944fe3a9c8448"
+    },
+    {
+      "path": "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md",
+      "sha256": "0e492feb5c8bb45234f4f26a1499d99e5b5044ad6ca5e8603ec2329b658616cc"
+    },
+    {
+      "path": "docs/api-spine/manifests/canonical-check-in-non-phi-observability.json",
+      "sha256": "79d6191e1a499e85bb12be38fd15980c7f1bf7dc54eb15132c607b0c43341d8c"
+    },
+    {
+      "path": "docs/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-closeout.md",
+      "sha256": "221ea5d0d8069e1a52114756f3e5623bfabe9f2b9e08ce2cb2959c739b60d54a"
+    },
+    {
+      "path": "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal-closeout.md",
+      "sha256": "2fdb56192ca7e639ba0d532f311eeae0cfb34d771bbd5953de4ebf9459f4db02"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json",
+      "sha256": "1d0e6bfa7224a1f8b57465b44bb6b1df14f997032e7537827b8acb373a777c8a"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json",
+      "sha256": "14c215a44037252a3346025149d8031a87b05094611e49c9f7c7337de92025e4"
+    },
+    {
+      "path": "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md",
+      "sha256": "ee2d0d7b2560a627fdf82f429d061787db75b055de5d38a31ac7910d1c76f90c"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/rehearsal-failure-evidence.json",
+      "sha256": "a9e6331471dadc06ddc1fc7f5f6e9510a231fa7cd3a0fc748495f8c9794bb887"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/attempt-005-execution-envelope.json",
+      "sha256": "dedfcbf008ea11c9dac9241a59c900582f5ca82a1de003bcd9f740409c0bbb54"
+    },
+    {
+      "path": "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md",
+      "sha256": "eaa68a6457d40a6801037535d78a9a0e3bd0b17c5600202c6ad5b420db546f89"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/repair-evidence.json",
+      "sha256": "5dc9b777bfbf34878c0efe1e7b58a261866650f5d7ebb62a6dae7b6d13e4013a"
+    },
+    {
+      "path": "docs/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair-closeout.md",
+      "sha256": "8884a1309261548b19f245fc608945e1ddc572c698039f84e6b0249a1692c038"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/provider-free-architecture-evidence.json",
+      "sha256": "0f1b762f28247e5c9033cf377716b21a625080344c5996ea743d90b66b1eb32b"
+    },
+    {
+      "path": "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md",
+      "sha256": "0858486ff6cd173a6b3b397585e7b1ff74c578b341a8e34b8425e114e0520b5e"
+    }
+  ],
+  "classifications": [
+    "satisfied",
+    "blocking_gap",
+    "operational_evidence_gap"
+  ],
+  "dimensions": [
+    {"order": 1, "id": "current_default_off_and_empty_ordinary_posture", "expected_classification": "satisfied", "basis": "original_accepted"},
+    {"order": 2, "id": "ordinary_practice_admission_control", "expected_classification": "satisfied", "basis": "accepted_admission_kernel"},
+    {"order": 3, "id": "api_spine_contract_and_route_identity", "expected_classification": "satisfied", "basis": "original_accepted"},
+    {"order": 4, "id": "authentication_and_dual_receptionist_authorization", "expected_classification": "satisfied", "basis": "original_accepted"},
+    {"order": 5, "id": "tenant_isolation_and_runtime_database_role", "expected_classification": "satisfied", "basis": "accepted_disposable_postgresql_attestation"},
+    {"order": 6, "id": "idempotency_evidence_and_replay", "expected_classification": "satisfied", "basis": "original_accepted"},
+    {"order": 7, "id": "atomic_effect_rollback_and_unknown_commit_recovery", "expected_classification": "operational_evidence_gap", "basis": "attempt_005_failed_before_transaction_evidence"},
+    {"order": 8, "id": "append_only_audit_and_committed_event", "expected_classification": "satisfied", "basis": "original_accepted"},
+    {"order": 9, "id": "ordinary_rollout_kill_switch_and_rollback_runbook", "expected_classification": "satisfied", "basis": "accepted_default_off_runbook"},
+    {"order": 10, "id": "non_phi_observability_and_alerting", "expected_classification": "satisfied", "basis": "accepted_non_phi_manifest_and_unmounted_adapter"},
+    {"order": 11, "id": "environment_manifest_and_operational_secret_posture", "expected_classification": "operational_evidence_gap", "basis": "architecture_has_zero_operational_instances"},
+    {"order": 12, "id": "client_cutover_and_waiting_area_separation", "expected_classification": "satisfied", "basis": "original_accepted"}
+  ],
+  "acceptance": {
+    "expected_counts": {"satisfied": 10, "blocking_gap": 0, "operational_evidence_gap": 2},
+    "expected_verdict": "not_ready_for_ordinary_practice_admission",
+    "minimum_hostile_mutations": 120,
+    "required_open_gaps": [
+      "atomic_effect_rollback_and_unknown_commit_recovery",
+      "environment_manifest_and_operational_secret_posture"
+    ]
+  },
+  "closed_boundaries": [
+    "no_app_import_or_product_runtime",
+    "no_route_database_docker_sql_browser_provider_model_harness_or_network",
+    "no_ordinary_practice_enablement_or_admission_release",
+    "no_product_configuration_api_client_or_waiting_area_change",
+    "no_product_patient_clinical_historical_or_protected_data",
+    "no_deployment_release_pages_or_protected_ref_movement",
+    "preserve_docs_branding_and_all_unrelated_untracked_files"
+  ]
+}
