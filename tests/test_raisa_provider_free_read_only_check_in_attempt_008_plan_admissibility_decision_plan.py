@@ -55,6 +55,11 @@ def test_plan_and_contract_use_full_machine_resolvable_sources() -> None:
 def test_receipt_and_latch_preserve_read_only_authority() -> None:
     receipt = _json(RECEIPT)
     latch = _json(LATCH)
+    decision_id = (
+        "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-"
+        "decision"
+    )
+    successor_id = "raisa-provider-free-check-in-relay-free-recovery-attempt-008"
     assert receipt["status"] == "passed"
     assert receipt["rehydration_sources"] == [
         "live_handover_current_baton",
@@ -64,8 +69,20 @@ def test_receipt_and_latch_preserve_read_only_authority() -> None:
         "git_refs_and_worktree",
     ]
     assert receipt["git_ref_evidence_binding"]["manually_supplied_object_id_count"] == 0
-    assert latch["operation_id"] == receipt["active_operation"]["operation_id"]
-    assert "no_attempt_008_plan_freeze_checkpoint_or_execution" in latch["protected_boundaries"]
+    assert receipt["active_operation"]["operation_id"] == decision_id
+    assert latch["operation_id"] in {decision_id, successor_id}
+    if latch["operation_id"] == decision_id:
+        assert (
+            "no_attempt_008_plan_freeze_checkpoint_or_execution"
+            in latch["protected_boundaries"]
+        )
+    else:
+        assert latch["checkpoint"]["completed_stage"] == (
+            f"Accepted {decision_id} at the machine-resolved source."
+        )
+        assert "p06_through_p14_remain_hard_fail_closed_conditions" in latch[
+            "protected_boundaries"
+        ]
 
 
 def test_plan_and_threat_keep_forbidden_surfaces_closed() -> None:
