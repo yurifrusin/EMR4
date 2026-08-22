@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 632,
+  "register_revision": 633,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -39529,6 +39529,301 @@
       "incident_id": "AER-1020",
       "attempt_id": "clock-665c436c9848f2fb3ea50842",
       "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "ariadne-preplanning-git-ref-evidence",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_preflight",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Free-form Git-ref source evidence contains no manually supplied object IDs because the machine snapshot owns exact identities.",
+      "observed_error": "The first preplanning runtime note repeated the task and protected Git objects, so preflight rejected it before plan writing.",
+      "detection_method": "The receipt returned revision_required with git_refs_evidence_manual_object_id_forbidden and manual count two.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-check-in-prospective-success-redaction-and-typed-cleanup-projection-repair-preplanning-receipt.json",
+        "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.manual_git_object_ids_in_receipt_prose",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove narrative object IDs and regenerate from the machine snapshot.",
+        "prevention_control": "Require manually supplied object count zero on every receipt.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-prospective-success-redaction-and-typed-cleanup-projection-repair-preplanning-receipt.json"
+        ]
+      },
+      "incident_id": "AER-1021",
+      "attempt_id": "clock-52abd2151bc14794f186f30a",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "implementer",
+      "resource_id": "repair-conformance-direct-cli",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_python",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "A sibling-importing repository CLI bootstraps the repository root before imports and passes by direct path.",
+      "observed_error": "The first direct conformance check raised ImportError before constructing evidence.",
+      "detection_method": "The CLI exited at import with no provider, Docker or database action.",
+      "evidence_paths": [
+        "scripts/raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+        "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.direct_script_missing_repo_import_root",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Insert repository root before imports and add a passing direct CLI test.",
+        "prevention_control": "Require direct-path smoke coverage for every new sibling-importing CLI.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py"
+        ]
+      },
+      "incident_id": "AER-1022",
+      "attempt_id": "clock-dfc260ffdeeaf0c7063e6b85",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "ariadne-serial-pytest-invocation",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_test_runner",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Arguments after the serial runner separator are pytest arguments only.",
+      "observed_error": "The first broader command forwarded a nested Python command, so pytest treated python as a path and collected nothing.",
+      "detection_method": "Pytest returned file-or-directory-not-found for python before executing a test.",
+      "evidence_paths": [
+        "scripts/ariadne_serial_pytest.py",
+        "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.serial_pytest_forwarded_nested_python_command",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Forward a pytest-only remainder; the corrected selection passed.",
+        "prevention_control": "Compile serial commands as runner options, one separator and pytest-only remainder.",
+        "evidence_paths": [
+          "scripts/ariadne_serial_pytest.py"
+        ]
+      },
+      "incident_id": "AER-1023",
+      "attempt_id": "clock-1a571e15ccfe92fba68ddf72",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "provider-free-repair-verification",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "material",
+      "expected_invariant": "A no-database tranche runs every selected test through the no-conftest provider-free entry point.",
+      "observed_error": "Six ordinary-pytest sessions loaded autouse conftest and created, truncated and dropped the local authored-synthetic test schema.",
+      "detection_method": "Conftest inspection after serial-lock output proved session engine and autouse cleanup execution; all six results were excluded.",
+      "evidence_paths": [
+        "scripts/ariadne_provider_free_pytest.py",
+        "tests/conftest.py",
+        "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.provider_free_static_pytest_loaded_database_autouse_conftest",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Exclude six results and replace the exact 83-test profile plus complete register suite through the provider-free runner.",
+        "prevention_control": "When database authority is closed, use scripts.ariadne_provider_free_pytest exclusively.",
+        "evidence_paths": [
+          "scripts/ariadne_provider_free_pytest.py",
+          "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"
+        ]
+      },
+      "incident_id": "AER-1024",
+      "attempt_id": "clock-ce1a7507c4364e3db6250c11",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "ariadne-agent-error-register",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_git",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "The incident register and pattern report change only through clockwork incident intake.",
+      "observed_error": "The orchestrator committed a direct register and pattern-report draft before recognising the single-writer violation.",
+      "detection_method": "Ownership review found the direct commit before clockwork check or publication.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-633.md",
+        "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.direct_edit_of_clockwork_owned_incident_register",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Revert the direct draft and submit all seven observations only through the closeout intent.",
+        "prevention_control": "Treat register and pattern report as clockwork-owned canonical surfaces with no direct staging.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-633.md",
+          "scripts/ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "incident_id": "AER-1025",
+      "attempt_id": "clock-7753cf5a402afe4267462845",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "verification-phase-test-manifest",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Tests of clockwork-derived live projections run only after clockwork publication.",
+      "observed_error": "A prepublication suite included current Baton consistency, which correctly rejected the old live register revision.",
+      "detection_method": "The provider-free suite reported one exact revision mismatch while every prepublication-compatible test passed.",
+      "evidence_paths": [
+        "tests/test_current_baton_consistency.py",
+        "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.postpublication_projection_test_selected_prepublication",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Exclude the prepublication mismatch and reserve Baton consistency for the postpublication gate.",
+        "prevention_control": "Type every closeout test as prepublication or postpublication in the verification envelope.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"
+        ]
+      },
+      "incident_id": "AER-1026",
+      "attempt_id": "clock-1a85d02b59031000e7c3018f",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "git-revert-object-resolution",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_git",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A Git command requiring a commit consumes the exact full object from machine resolution and never a manually completed display prefix.",
+      "observed_error": "The first revert used a manually completed nonexistent object; Git rejected it without changing the worktree.",
+      "detection_method": "Git returned bad object, then git rev-parse HEAD supplied the exact object used by the successful revert.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-633.md",
+        "orchestration_harness/git_object_resolution.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.manual_git_object_expansion_for_mutating_command",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve and copy the exact full HEAD object before the successful revert.",
+        "prevention_control": "Commands that require a commit consume a machine-resolved full object and never complete a displayed prefix from memory.",
+        "evidence_paths": [
+          "orchestration_harness/git_object_resolution.py",
+          "docs/ariadne-agent-error-correction-register-revision-633.md"
+        ]
+      },
+      "incident_id": "AER-1027",
+      "attempt_id": "clock-4cb0b7d586c2b30cf5f640dd",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "clockwork-baton-compaction",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A clockwork closeout selects its live acceptance label from the manifest-listed active vocabulary before invocation.",
+      "observed_error": "The first closeout intent invented a descriptive repair-acceptance label outside the active vocabulary.",
+      "detection_method": "The clockwork dry run rejected tick_baton_compaction_unindexed before generation construction, canonical mutation or publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/closeout/closeout-intent.json",
+        "docs/handover-ledgers/current-baton-acceptance-index.manifest.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_baton_label_unindexed_at_compaction_boundary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Select the exact Current DeepSeek native Harness acceptance rolling label from the machine-read active_labels array and keep detailed repair meaning in graph-owned artifacts.",
+        "prevention_control": "Resolve acceptance labels against active_labels before every clockwork invocation; the next workflow tranche will make this a typed input.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/closeout/closeout-intent.json",
+          "docs/handover-ledgers/current-baton-acceptance-index.manifest.json"
+        ]
+      },
+      "incident_id": "AER-1028",
+      "attempt_id": "clock-d82eee0e783fc58012bd1f5b",
+      "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"
     }

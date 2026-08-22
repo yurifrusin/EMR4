@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 415,
+  "graph_revision": 416,
   "harvests": [],
   "nodes": [
     {
@@ -33043,9 +33043,132 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "title": "Raisa provider-free check-in prospective-success redaction and typed cleanup-projection conformance repair",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted only the two deterministic repair gears selected by the accepted attempt-007 diagnosis.",
+          "The accepted candidate used no Docker object, PostgreSQL start, SQL, provider, product call or attempt-008 action.",
+          "Six ordinary-pytest synthetic-test-database sessions breached the process boundary, are excluded and are replaced by provider-free evidence."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-complete-prospective-success-static-gate",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-evidence.json",
+          "status": "accepted",
+          "summary": "Accept exact 67-to-67 prospective/runtime path parity, whole-projection redaction/schema admission and 66 hostile forbidden-key rejections before Docker-capable work."
+        },
+        {
+          "id": "accept-safe-default-denial-boundary-name",
+          "source": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal/contract.json",
+          "status": "accepted",
+          "summary": "Accept the safe live-sensitive-material boundary name while preserving ten false boundaries and the unchanged source-owned redactor."
+        },
+        {
+          "id": "accept-typed-post-finalization-terminal-bridge",
+          "source": "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "status": "accepted",
+          "summary": "Accept the frozen base-owned terminal bridge that converts late redaction/schema failures to sanitised evidence carrying exact finalized cleanup."
+        },
+        {
+          "id": "accept-provider-free-replacement-verification-only",
+          "source": "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md",
+          "status": "accepted",
+          "summary": "Admit only the passing 83-test candidate profile and complete register suite run through the no-conftest provider-free entry point."
+        },
+        {
+          "id": "exclude-six-ordinary-pytest-sessions",
+          "source": "docs/ariadne-agent-error-correction-register-revision-633.md",
+          "status": "accepted",
+          "summary": "Exclude six ordinary-pytest results because autouse conftest touched the authored-synthetic test database contrary to authority."
+        },
+        {
+          "id": "accept-measured-efficacy-with-process-violation",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept retirement of two product-harness rerun causes while retaining seven local process incidents and one material verification-boundary recurrence."
+        }
+      ],
+      "claim_scope": [
+        "The complete prospective success surface has 67 paths and passes the unchanged redactor and evidence schema before any Docker-capable call.",
+        "All 66 exact, prefix and suffix hostile forbidden-key mutations are rejected.",
+        "Late redaction and schema failures retain exact base-finalized cleanup through a frozen typed terminal.",
+        "Attempt 007 remains consumed, immutable and unreclassified.",
+        "Only provider-free replacement test results are admitted.",
+        "The ordinary-pytest database-boundary violation remains recorded and is not relabelled provider-free.",
+        "No attempt-008 transaction or occupied database result is accepted."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-plan.md",
+          "docs/security/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-contract.json",
+          "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-report.md",
+          "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-prospective-success-redaction-and-typed-cleanup-projection-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-prospective-success-redaction-and-typed-cleanup-projection-repair-preplanning-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_plan.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-633.md",
+          "orchestration/human_inbox/yuri/2026-08-23--check-in-prospective-redaction-typed-cleanup-repair.md",
+          "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Rollback, unknown-response commit recovery, role absence and successful occupied database behavior remain unproved.",
+        "Attempt 008 remains unplanned and unauthorised.",
+        "The verification envelope does not yet mechanically reject database-capable pytest under a no-database boundary.",
+        "Prepublication and postpublication test phases are not yet typed in the command manifest.",
+        "Dedicated check-in remains default-off without ordinary-practice admission.",
+        "No provider, product-data, production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T05:05:13.7520724+10:00",
+      "updated_at": "2026-08-23T05:05:13.7520724+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "a33a4ccc7619fcae5cdd45a48a2312ab0c0384a4",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T04:09:17.7509356+10:00"
+  "updated_at": "2026-08-23T05:05:13.7520724+10:00"
 }

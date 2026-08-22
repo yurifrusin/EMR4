@@ -1,44 +1,44 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 632,
+  "register_revision": 633,
   "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "ab99311f5f3f0438c3f03142bbe2a12cf37c0fdf6c64dcbfffcac35f56403bac",
-  "incident_count": 1020,
+  "canonical_register_sha256": "4ebe8888f05628847dfa84c9854cf240a3021b4291401cd80ddbe9205b2bddf4",
+  "incident_count": 1028,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 532,
+      "agent_behavior": 536,
       "harness": 72,
-      "operator": 257,
-      "repository": 143,
+      "operator": 260,
+      "repository": 144,
       "transport": 16
     },
     "by_category": {
-      "command_scope_violation": 99,
+      "command_scope_violation": 100,
       "evidence_misreport": 75,
       "harness_failure": 72,
-      "operator_error": 257,
-      "output_contract_violation": 305,
+      "operator_error": 260,
+      "output_contract_violation": 308,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
-      "repository_defect": 143,
+      "repository_defect": 144,
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 82,
+      "implementer": 83,
       "integration_reviewer": 3,
-      "orchestrator": 872,
+      "orchestrator": 879,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 653,
-      "material": 134,
-      "moderate": 233
+      "low": 659,
+      "material": 135,
+      "moderate": 234
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 216,
-      "canonical_unchanged": 633,
+      "accepted_candidate_changed": 218,
+      "canonical_unchanged": 639,
       "untrusted_partial_worktree": 171
     },
     "by_resource_and_role": {
@@ -71,7 +71,7 @@
       "ariadne-agent-error-register-targeted-tests::orchestrator": 1,
       "ariadne-agent-error-register-tests::orchestrator": 3,
       "ariadne-agent-error-register-update::orchestrator": 1,
-      "ariadne-agent-error-register::orchestrator": 5,
+      "ariadne-agent-error-register::orchestrator": 6,
       "ariadne-antigravity-command-result-egress::verifier": 2,
       "ariadne-antigravity-command-schema::orchestrator": 1,
       "ariadne-antigravity-egress-admission::verifier": 2,
@@ -96,10 +96,11 @@
       "ariadne-orchestrator-preflight::orchestrator": 3,
       "ariadne-parallelism-assessment::orchestrator": 1,
       "ariadne-preplanning-git-ref-evidence-binding::orchestrator": 1,
+      "ariadne-preplanning-git-ref-evidence::orchestrator": 1,
       "ariadne-preplanning-receipt-source-evidence::orchestrator": 1,
       "ariadne-prepush-git-ref-binding::orchestrator": 1,
       "ariadne-provider-free-pytest-launcher::orchestrator": 1,
-      "ariadne-serial-pytest-invocation::orchestrator": 1,
+      "ariadne-serial-pytest-invocation::orchestrator": 2,
       "ariadne-validation-runner-cli::orchestrator": 1,
       "ariadne-verifier-worktree-preflight::orchestrator": 3,
       "ariadne-workspace-receipt::orchestrator": 1,
@@ -135,7 +136,7 @@
       "clockwork-agent-error-tranche-label::orchestrator": 1,
       "clockwork-authorized-opening-shape::orchestrator": 1,
       "clockwork-authorized-opening-vocabulary::orchestrator": 1,
-      "clockwork-baton-compaction::orchestrator": 1,
+      "clockwork-baton-compaction::orchestrator": 2,
       "clockwork-canonical-baton-writer::orchestrator": 1,
       "clockwork-canonical-path-staging::orchestrator": 1,
       "clockwork-closed-rolling-acceptance-label::orchestrator": 1,
@@ -283,6 +284,7 @@
       "git-cached-diff-whitespace-gate::orchestrator": 1,
       "git-object-identity-commentary::orchestrator": 1,
       "git-object-readback-command::orchestrator": 1,
+      "git-revert-object-resolution::orchestrator": 1,
       "git-worktree-windows-path-layout::orchestrator": 3,
       "governance-clockwork-agent-error-observations::orchestrator": 1,
       "governance-clockwork-canonical-owner::orchestrator": 1,
@@ -403,6 +405,7 @@
       "provider-free-pytest-command-manifest::orchestrator": 1,
       "provider-free-pytest-wrapper-cli::orchestrator": 1,
       "provider-free-recovery-evidence-runner::implementer": 1,
+      "provider-free-repair-verification::orchestrator": 1,
       "provider-free-test-session-exit-capture::orchestrator": 1,
       "raw-detail-release-predicate::orchestrator": 1,
       "raw-stream-nonretention-test::orchestrator": 1,
@@ -413,6 +416,7 @@
       "recovery-fixture-wire-order-mock::orchestrator": 1,
       "recovery-plan-semantic-assertion::orchestrator": 1,
       "repair-closeout-intent-stage::orchestrator": 1,
+      "repair-conformance-direct-cli::implementer": 1,
       "repair-dead-local-guard::orchestrator": 1,
       "repair-plan-signal-semantics::orchestrator": 1,
       "repair-postterminal-report-tests::implementer": 1,
@@ -472,6 +476,7 @@
       "useful-worker-controller::orchestrator": 1,
       "useful-worker-preplanning-receipt::orchestrator": 1,
       "useful-worker-process-query::orchestrator": 1,
+      "verification-phase-test-manifest::orchestrator": 1,
       "windows-owned-process-absence-reading::orchestrator": 1
     }
   },
@@ -982,6 +987,30 @@
       "prevention_controls": [
         "Copy the exact verifier branch prefix from the execution policy or a passing preflight template; never derive a narrower prefix from the tranche name.",
         "Generate verifier preflight arguments from the typed execution-policy enum; until adoption, copy branch_prefix exactly as codex/review- and never derive it from the branch name."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.closeout_baton_label_unindexed_at_compaction_boundary",
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-1002",
+        "AER-1028"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "categories": [
+        "output_contract_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "clockwork-baton-compaction"
+      ],
+      "prevention_controls": [
+        "Resolve acceptance labels against active_labels before every clockwork invocation; the next workflow tranche will make this a typed input.",
+        "Resolve active acceptance labels against the live Baton and acceptance index before closeout rendering."
       ]
     },
     {

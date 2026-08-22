@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will make prospective success redaction and post-finalization cleanup projection deterministic before considering any further occupied check-in recovery.
+> EMR4 will make provider-free runner and publication-phase admission deterministic before considering another occupied check-in recovery attempt.
 
 ## North star
 
@@ -600,26 +600,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The attempt moves beyond the prior start coordinate but fails closed at final evidence redaction with zero owned Docker residue. Lineage parent: `raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair`.
 292. **Replace another occupied discovery loop with exact prospective-evidence and terminal-projection coordinates — Raisa provider-free read-only check-in attempt-007 redaction and cleanup-projection coordinate diagnosis**
    The late redaction failure and lost cleanup reading are now two deterministic pre-execution repair requirements rather than reasons for another database run. Lineage parent: `raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-007`.
+293. **Turn two occupied-run failure coordinates into reusable deterministic base-harness gears — Raisa provider-free check-in prospective-success redaction and typed cleanup-projection conformance repair**
+   Prospective success records are checked before occupied work and post-cleanup failures retain truthful cleanup state. Lineage parent: `raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis`.
 
 ## Current position
 
-**Install the complete prospective-success redaction gear and typed post-finalization cleanup gear before any occupied successor — Raisa provider-free read-only check-in attempt-007 redaction and cleanup-projection coordinate diagnosis**
+**Make provider-free verification authority executable rather than dependent on runner recall — Raisa provider-free check-in prospective-success redaction and typed cleanup-projection conformance repair**
 
-**Why this proof came next:** The read-only diagnosis proves one exact contract-derived field conflict and one exact base-to-wrapper cleanup projection loss.
+**Why this proof came next:** The code repair passed, but six excluded sessions repeated an already-known database-autouse boundary violation and a postpublication test was selected too early.
 
-Both defects can now be repaired and exhaustively exercised through pure deterministic source, schema and fake-process tests.
+The next gear will reject database-capable runners when database authority is closed and type verification phases before any future occupied decision.
 
 ### What this unlocks
 
-- All prospective success-evidence keys can be rejected or admitted before Docker or database work.
-- Late redaction or schema failures can retain the truthful base-finalized cleanup projection.
-- A later attempt decision can depend on deterministic conformance rather than another blind occupied cycle.
+- Provider-free plans can compile directly to an admissible runner envelope.
+- Prepublication suites cannot accidentally include live-projection assertions.
+- A later attempt-008 decision can rely on mechanically scoped verification.
 
 ### What it does not solve
 
-- No repaired database lifecycle has run.
-- No rollback, exactly-once or role-absence transaction result is proved.
-- No attempt 008, ordinary-practice, product-data, provider, production or protected authority opens.
+- No database lifecycle or attempt-008 behavior is proved.
+- No ordinary-practice or product command is admitted.
+- No provider, production or protected authority opens.
 
 ## Continuity and authority
 
@@ -1200,6 +1202,7 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-543.md`
 - `docs/ariadne-agent-error-correction-register-revision-561.md`
 - `docs/ariadne-agent-error-correction-register-revision-566.md`
+- `docs/ariadne-agent-error-correction-register-revision-633.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
@@ -1518,6 +1521,7 @@ Prerequisites:
 - `docs/raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal-closeout.md`
 - `docs/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery-closeout.md`
 - `docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-closeout.md`
+- `docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md`
 - `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md`
 - `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-failed-closed-closeout.md`
 - `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-007-failed-closed-closeout.md`
@@ -2237,7 +2241,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-check-in-attempt-007-redaction-cleanup-diagnosis-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -2951,6 +2954,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-service-terminal.json`
 - `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-validation-terminal.json`
 - `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/package-only-discovery-evidence.json`
+- `orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/efficacy-reading.json`
+- `orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-evidence.json`
+- `orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-report.md`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json`
@@ -3545,7 +3551,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-tool-result-conclusion-coordinate-diagnostic.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-coordinate-recovery.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-failed-closed.md`
-- `orchestration/human_inbox/yuri/2026-08-23--check-in-attempt-007-redaction-cleanup-diagnosis.md`
+- `orchestration/human_inbox/yuri/2026-08-23--check-in-prospective-redaction-typed-cleanup-repair.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3854,4 +3860,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 397; continuity graph revision 415._
+_Compass map revision 398; continuity graph revision 416._
