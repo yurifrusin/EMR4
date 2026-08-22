@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.synthetic_native_worker_checkpoint.v1",
+  "operation_id": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+  "attempt_id": "deepseek-native-corrected-guard-window-worker-001",
+  "status": "admitted",
+  "candidate_source": "b9d9a32d111a23bff259a0ff9d5168cfdc305508",
+  "review_receipt": "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-deterministic-admission-receipt.json",
+  "review_receipt_sha256": "9b4f5ceb2a08ef3692ea9cc7dab6a464ebe76349c546adb03a0f97d52f03ca67",
+  "preparation_sha256": "c656b40f7abc9dfbeb0b3233f6cf51f3365666678a580d4232aadc021e5b26ae",
+  "work_order_sha256": "a778e1b83106f44e7dd1d26b48fa2e1c25e0e213d0989db633d09c91f8d04f9e",
+  "runner_sha256": "c25bc2a1420e82cbb73641c14cc453cd8148010b66203c7c3cace2be2fa7a426",
+  "prompt_sha256": "977a644a5690cf95fed138bea3f5f7ece36b630f574872bcc31e26cc92ac7ef8",
+  "attempt_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-corrected-guard-window-worker-001",
+  "native_process_limit": 1,
+  "provider_request_limit": 1,
+  "automatic_retry_limit": 0,
+  "fallback_limit": 0,
+  "auxiliary_model_call_limit": 0,
+  "expected_tool_names": ["edit"],
+  "expected_changed_paths": ["synthetic_window_coalescer.py"],
+  "checkpoint_admitted": true
+}

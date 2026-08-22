@@ -2,17 +2,19 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "corrected-guard-useful-recovery-static-admission",
+      "command_id": "corrected-graph-useful-recovery-closeout-tick-check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal",
-        "--check"
+        "scripts.ariadne_governance_clockwork_tick",
+        "--check",
+        "--intent",
+        "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "corrected-guard-useful-recovery-provider-free-tests",
+      "command_id": "corrected-graph-useful-recovery-closeout-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -21,15 +23,15 @@
         "C:/Users/sarashera/emr4",
         "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py",
         "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_active_operation_latch.py",
-        "tests/test_current_baton_consistency.py",
-        "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal_plan.py",
-        "--deselect=tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal_plan.py::test_active_latch_is_the_exact_in_progress_operation"
+        "tests/test_current_baton_consistency.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "corrected-guard-useful-recovery-ruff",
+      "command_id": "corrected-graph-useful-recovery-closeout-ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -41,7 +43,7 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "corrected-guard-useful-recovery-compile",
+      "command_id": "corrected-graph-useful-recovery-closeout-compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",

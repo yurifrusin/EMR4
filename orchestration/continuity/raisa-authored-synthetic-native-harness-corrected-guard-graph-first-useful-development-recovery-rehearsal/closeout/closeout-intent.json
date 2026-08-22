@@ -1,0 +1,262 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+    "title": "Raisa authored-synthetic native-Harness corrected-graph useful-development recovery closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T22:17:01.2031206+10:00",
+    "node": {
+      "id": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+      "title": "Corrected-graph native-Harness useful-development recovery",
+      "kind": "tooling",
+      "relationships": [{"node_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof", "relation": "builds_on"}],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted one distinct authored-synthetic process and at most one prepaid DeepSeek request after deterministic checkpointing.",
+          "The attempt is consumed and cannot be retried or resumed; no Claude fallback, second worker, product/data action, deployment, Pages or protected-ref authority opened.",
+          "The native Harness is unavailable for subsequent EMR4 worker allocation; Raisa development continues through other authorised resources."
+        ]
+      },
+      "decisions": [
+        {"id": "accept-one-request-typed-negative-terminal", "source": "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json", "status": "accepted", "summary": "Accept the one-process one-request typed negative terminal and its exact cleanup as final evidence for this Harness recovery sequence."},
+        {"id": "reject-useful-development-candidate", "source": "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/efficacy-reading.json", "status": "rejected", "summary": "Reject a useful development claim because the edit result errored, no path changed and no candidate survived."},
+        {"id": "retire-native-harness-worker-allocation", "source": "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md", "status": "accepted", "summary": "End automatic Harness recovery and mark the native Harness unavailable for EMR4 worker allocation."},
+        {"id": "resume-post-check-in-programme-orientation", "source": "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md", "status": "accepted", "summary": "Begin one new read-only orientation across the already-accepted check-in route, readiness, kernel and operational-evidence lineage before selecting another product change."}
+      ],
+      "claim_scope": [
+        "One native rc.7 Harness process completed one DeepSeek V4 Flash/high provider request and produced one direct edit result.",
+        "The edit result terminalized at edit_error_accept_not_concluded; no target bytes or paths changed and no candidate was admitted.",
+        "Retries, resumes, fallbacks, auxiliary models and Gemini reviews were zero.",
+        "Harness, broker and exact disposable root are absent; raw prompts, responses, reasoning, streams, session and credentials are not retained.",
+        "Typed control improved failure attribution but the cumulative orchestration burden was not justified by useful output.",
+        "The native Harness development-recovery sequence is closed without another diagnostic or occupied attempt."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": ["docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-plan.md", "docs/security/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-threat-model-delta.md"],
+        "findings": ["orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json", "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/efficacy-reading.json", "docs/ariadne-agent-error-correction-register-revision-627.md"],
+        "closeouts": ["docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md", "orchestration/human_inbox/yuri/2026-08-22--native-harness-corrected-graph-useful-recovery.md"],
+        "acceptances": ["orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md"],
+        "receipts": ["orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-deterministic-admission-receipt.json", "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-occupied-prelaunch-receipt.json", "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/clockwork-checkpoint-tick-evidence.json"],
+        "tests": ["tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_current_baton_consistency.py"],
+        "artifacts": ["scripts/raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py", "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/contract.json", "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-attempt-consumed.json", "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-preexecution-checkpoint.json", "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/work-order-v2.json"]
+      },
+      "unresolved_gates": [
+        "No useful DeepSeek candidate or general native-Harness reliability is established.",
+        "The consumed attempt cannot be retried, resumed or moved to Claude as a fallback.",
+        "The native Harness is unavailable for EMR4 worker allocation absent a genuinely new later Yuri direction.",
+        "Dedicated check-in remains default-off; ordinary-practice admission, grammar, clients and waiting-area movement remain closed.",
+        "All product/patient/clinical data, live provider, production, deployment, release, Pages and protected-ref gates remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Determine whether typed orchestrator control could make one native DeepSeek worker reliably useful for Raisa development",
+      "outcome": "The corrected graph reached one provider request with precise typed attribution and cleanup but produced no usable edit.",
+      "evidence": ["orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json", "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md"]
+    },
+    "current_position": {
+      "strategic_role": "Reconcile the completed default-off check-in lineage before selecting a genuinely unfinished blocker without allocating the native DeepSeek Harness",
+      "why_now": "The Harness question has a decisive negative terminal, while route convergence, admission-control architecture and the unmounted kernel are already accepted historical nodes.",
+      "outcome": "Harness recovery ends and one read-only orientation identifies the narrowest remaining check-in product tranche without replaying accepted work.",
+      "unlocks": ["A graph-grounded choice of the next genuinely unfinished ordinary-admission blocker."],
+      "does_not_solve": ["No ordinary-practice admission, client cutover, waiting-area movement, product data, production runtime or protected integration is opened."],
+      "evidence": ["orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md", "orchestration/human_inbox/yuri/2026-08-22--native-harness-corrected-graph-useful-recovery.md"],
+      "orientation_statement": "Close the native Harness recovery sequence and reconcile the completed check-in route, readiness, kernel and operational-evidence lineage before selecting another product tranche."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation",
+      "active_tranche": "Raisa provider-free read-only post-check-in admission-control programme orientation",
+      "objective": "Perform one provider-free read-only orientation that reconciles the accepted default-off check-in route, ordinary-admission readiness verdict, unmounted admission-control kernel, completed operational-evidence work and closed native-Harness sequence, then freeze the narrowest genuinely unfinished product tranche without enabling check-in or changing product source.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, the accepted check-in convergence and admission-control lineage, and Yuri's direction to tighten the workflow regime without circular reruns.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_read_only_post_check_in_admission_control_programme_orientation_plan"
+    },
+    "incidents": [
+      {"incident_id": "useful-recovery-prior-closeout-git-identity", "source_id": "corrected-graph-useful-recovery-receipt-001", "peers": []},
+      {"incident_id": "useful-recovery-graph-cache-order", "source_id": "corrected-graph-useful-recovery-controller-001", "peers": []},
+      {"incident_id": "useful-recovery-historical-latch-selection", "source_id": "corrected-graph-useful-recovery-tests-001", "peers": []},
+      {"incident_id": "useful-recovery-edit-error-terminal", "source_id": "corrected-graph-useful-recovery-native-001", "peers": []}
+      ,{"incident_id": "useful-recovery-recorded-successor-selection", "source_id": "corrected-graph-useful-recovery-closeout-001", "peers": []}
+      ,{"incident_id": "useful-recovery-baton-label-compaction", "source_id": "corrected-graph-useful-recovery-closeout-002", "peers": []}
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {"command_id": "corrected-graph-useful-recovery-closeout-tick-check", "executable": ".venv/Scripts/python.exe", "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/closeout/closeout-intent.json"], "completion_contract": "final_exit_code_zero_required"},
+      {"command_id": "corrected-graph-useful-recovery-closeout-tests", "executable": ".venv/Scripts/python.exe", "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_current_baton_consistency.py"], "completion_contract": "final_exit_code_zero_required"},
+      {"command_id": "corrected-graph-useful-recovery-closeout-ruff", "executable": ".venv/Scripts/python.exe", "arguments": ["-m", "ruff", "check", "scripts/raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py", "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py"], "completion_contract": "final_exit_code_zero_required"},
+      {"command_id": "corrected-graph-useful-recovery-closeout-compile", "executable": ".venv/Scripts/python.exe", "arguments": ["-m", "py_compile", "scripts/raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py", "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py"], "completion_contract": "final_exit_code_zero_required"}
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-plan.md",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-627.md",
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--native-harness-corrected-graph-useful-recovery.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_read_only_post_check_in_admission_control_programme_orientation_only",
+    "no_product_source_configuration_route_api_or_client_change",
+    "accepted_route_readiness_kernel_and_operational_evidence_nodes_remain_immutable",
+    "no_native_deepseek_harness_worker_allocation",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_action_grammar_or_first_party_client_change",
+    "no_generic_status_arrived_change_or_waiting_area_movement",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_live_provider_or_production_runtime",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "corrected-graph-useful-recovery-receipt-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "orchestrator-closeout-receipt",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Git identities in receipt narrative evidence are supplied only by the machine snapshot.",
+      "observed_error": "The first preceding boot closeout receipt repeated one full protected Git object ID in narrative evidence and preflight rejected it.",
+      "detection_method": "The orchestrator preflight returned revision_required before commit, dispatch or provider activity.",
+      "evidence_paths": ["orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout-precommit-receipt.json", "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout-precommit-v2-receipt.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_receipt_repeated_machine_owned_git_identity",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Remove the caller-authored Git identity and regenerate the receipt from machine snapshot evidence.", "prevention_control": "Keep git_refs_and_worktree narrative identity-free and require manually_supplied_object_id_count zero before continuation.", "evidence_paths": ["scripts/ariadne_orchestrator_preflight.py", "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout-precommit-v2-receipt.json"]},
+      "baton_summary": "records the rejected prior closeout Git-identity repetition and the passing machine-only replacement."
+    },
+    {
+      "attempt_key": "corrected-graph-useful-recovery-controller-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+      "role": "implementer",
+      "resource_id": "corrected-graph-materializer",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_python",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Fresh-process graph materialization resolves immutable accepted ancestry before temporarily replacing the historical guard builder.",
+      "observed_error": "The first fresh-process probe replaced the historical builder before accepted-source reconstruction and recursively re-entered graph resolution.",
+      "detection_method": "A provider-free fresh-process materialization probe failed before attempt preparation, lease consumption or provider activity.",
+      "evidence_paths": ["scripts/raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py", "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.accepted_graph_ancestry_resolved_after_historical_builder_rebind",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Resolve, validate and cache the four immutable graph sources before rebinding the historical guard builder.", "prevention_control": "Exercise graph materialization from a fresh process and test cache-empty context entry before occupied preparation.", "evidence_paths": ["scripts/raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py", "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py"]},
+      "baton_summary": "records the prelaunch graph-resolution ordering repair and fresh-process regression control."
+    },
+    {
+      "attempt_key": "corrected-graph-useful-recovery-tests-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "inherited-attempt-004-tests",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Predecessor-only active-latch equality is selected out when replaying inherited attempt tests after valid latch advancement.",
+      "observed_error": "The first inherited run replayed attempt 004's own live-latch assertion and produced one expected mismatch while every substantive selected test passed.",
+      "detection_method": "Pytest reported exactly the predecessor operation mismatch before the explicit deselection rerun passed.",
+      "evidence_paths": ["tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py", "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.predecessor_attempt_live_latch_equality_not_preselected",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Deselect the exact predecessor-only active-latch node while retaining every substantive inherited assertion.", "prevention_control": "Treat exact historical live-latch assertions as explicit manifest selections whenever an operation advances.", "evidence_paths": ["tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py", "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md"]},
+      "baton_summary": "records the inherited attempt-004 latch equality selection without weakening substantive lineage tests."
+    },
+    {
+      "attempt_key": "corrected-graph-useful-recovery-native-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+      "role": "implementer",
+      "resource_id": "deepseek-native-harness-rc7",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "deepseek_native_harness",
+      "stage": "implementation",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The one admitted direct edit produces the exact expected synthetic bytes and one completed turn after a single provider request.",
+      "observed_error": "The one provider request completed but the direct edit result terminalized at edit_error_accept_not_concluded, the Harness exited 1 and the target remained unchanged.",
+      "detection_method": "The typed runner and outer terminals agreed on one request, one edit result, no changed path, unchanged baseline digest and exact cleanup.",
+      "evidence_paths": ["orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json", "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/efficacy-reading.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "deepseek_native_harness.direct_edit_error_accept_not_concluded_no_candidate",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "contained_then_escalated", "action": "Consume the terminal, decline retry and Gemini, clean every owned surface and end the native-Harness recovery sequence.", "prevention_control": "Do not allocate the native Harness to further EMR4 worker runs absent a genuinely new later Yuri direction.", "evidence_paths": ["docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md", "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md"]},
+      "baton_summary": "records the consumed one-request edit-error terminal and closes native-Harness worker allocation."
+    },
+    {
+      "attempt_key": "corrected-graph-useful-recovery-closeout-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "clockwork-successor-resolution",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A closeout successor is a new graph identity and does not replay an already accepted product tranche.",
+      "observed_error": "The first closeout proposed the already-recorded default-off route-adapter convergence operation despite its accepted graph node and later accepted admission-control descendants.",
+      "detection_method": "The governance clockwork rejected the dry run with tick_next_operation_already_recorded before generation construction or publication.",
+      "evidence_paths": ["orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/closeout/closeout-intent.json", "orchestration/continuity/emr4-continuity-graph.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_successor_replayed_already_recorded_product_node",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Replace the recorded successor with a new read-only post-check-in programme orientation.", "prevention_control": "Require clockwork graph-membership rejection and machine-read successor uniqueness before closeout publication.", "evidence_paths": ["orchestration_harness/governance_clockwork_tick.py", "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/closeout/closeout-intent.json"]},
+      "baton_summary": "records the clockwork-rejected circular successor and selects a new graph-grounded read-only orientation."
+    },
+    {
+      "attempt_key": "corrected-graph-useful-recovery-closeout-002",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "clockwork-baton-compaction",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A compact active Baton replaces an existing indexed current acceptance label rather than adding an unindexed row at the byte boundary.",
+      "observed_error": "The first corrected closeout used a new native-Harness acceptance label and the compactor rejected it as unindexed.",
+      "detection_method": "The governance clockwork dry run failed closed with tick_baton_compaction_unindexed before generation construction or publication.",
+      "evidence_paths": ["orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/closeout/closeout-intent.json", "docs/handover-ledgers/current-baton-acceptance-index.manifest.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_baton_label_unindexed_at_compaction_boundary",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Reuse the existing Current DeepSeek native Harness acceptance label and keep detailed evidence in the graph.", "prevention_control": "Resolve active acceptance labels against the live Baton and acceptance index before closeout rendering.", "evidence_paths": ["orchestration_harness/governance_clockwork_tick.py", "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/closeout/closeout-intent.json"]},
+      "baton_summary": "records the rejected unindexed Baton label and the compact existing-row replacement."
+    }
+  ]
+}

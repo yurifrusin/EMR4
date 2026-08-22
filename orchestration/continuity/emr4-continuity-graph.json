@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 403,
+  "graph_revision": 404,
   "harvests": [],
   "nodes": [
     {
@@ -31654,9 +31654,117 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+      "title": "Corrected-graph native-Harness useful-development recovery",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted one distinct authored-synthetic process and at most one prepaid DeepSeek request after deterministic checkpointing.",
+          "The attempt is consumed and cannot be retried or resumed; no Claude fallback, second worker, product/data action, deployment, Pages or protected-ref authority opened.",
+          "The native Harness is unavailable for subsequent EMR4 worker allocation; Raisa development continues through other authorised resources."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-one-request-typed-negative-terminal",
+          "source": "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json",
+          "status": "accepted",
+          "summary": "Accept the one-process one-request typed negative terminal and its exact cleanup as final evidence for this Harness recovery sequence."
+        },
+        {
+          "id": "reject-useful-development-candidate",
+          "source": "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/efficacy-reading.json",
+          "status": "rejected",
+          "summary": "Reject a useful development claim because the edit result errored, no path changed and no candidate survived."
+        },
+        {
+          "id": "retire-native-harness-worker-allocation",
+          "source": "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "End automatic Harness recovery and mark the native Harness unavailable for EMR4 worker allocation."
+        },
+        {
+          "id": "resume-post-check-in-programme-orientation",
+          "source": "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Begin one new read-only orientation across the already-accepted check-in route, readiness, kernel and operational-evidence lineage before selecting another product change."
+        }
+      ],
+      "claim_scope": [
+        "One native rc.7 Harness process completed one DeepSeek V4 Flash/high provider request and produced one direct edit result.",
+        "The edit result terminalized at edit_error_accept_not_concluded; no target bytes or paths changed and no candidate was admitted.",
+        "Retries, resumes, fallbacks, auxiliary models and Gemini reviews were zero.",
+        "Harness, broker and exact disposable root are absent; raw prompts, responses, reasoning, streams, session and credentials are not retained.",
+        "Typed control improved failure attribution but the cumulative orchestration burden was not justified by useful output.",
+        "The native Harness development-recovery sequence is closed without another diagnostic or occupied attempt."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-plan.md",
+          "docs/security/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/efficacy-reading.json",
+          "docs/ariadne-agent-error-correction-register-revision-627.md"
+        ],
+        "closeouts": [
+          "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--native-harness-corrected-graph-useful-recovery.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-deterministic-admission-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-occupied-prelaunch-receipt.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/clockwork-checkpoint-tick-evidence.json"
+        ],
+        "tests": [
+          "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/contract.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-attempt-consumed.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-preexecution-checkpoint.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/work-order-v2.json"
+        ]
+      },
+      "unresolved_gates": [
+        "No useful DeepSeek candidate or general native-Harness reliability is established.",
+        "The consumed attempt cannot be retried, resumed or moved to Claude as a fallback.",
+        "The native Harness is unavailable for EMR4 worker allocation absent a genuinely new later Yuri direction.",
+        "Dedicated check-in remains default-off; ordinary-practice admission, grammar, clients and waiting-area movement remain closed.",
+        "All product/patient/clinical data, live provider, production, deployment, release, Pages and protected-ref gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T22:17:01.2031206+10:00",
+      "updated_at": "2026-08-22T22:17:01.2031206+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "b9d9a32d111a23bff259a0ff9d5168cfdc305508",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T21:03:29.4171606+10:00"
+  "updated_at": "2026-08-22T22:17:01.2031206+10:00"
 }

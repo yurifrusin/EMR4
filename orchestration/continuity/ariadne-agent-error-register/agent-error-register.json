@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 626,
+  "register_revision": 627,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -38645,6 +38645,228 @@
       "incident_id": "AER-0996",
       "attempt_id": "clock-c7db0eff119bac7c28f21171",
       "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "orchestrator-closeout-receipt",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Git identities in receipt narrative evidence are supplied only by the machine snapshot.",
+      "observed_error": "The first preceding boot closeout receipt repeated one full protected Git object ID in narrative evidence and preflight rejected it.",
+      "detection_method": "The orchestrator preflight returned revision_required before commit, dispatch or provider activity.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout-precommit-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout-precommit-v2-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_receipt_repeated_machine_owned_git_identity",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the caller-authored Git identity and regenerate the receipt from machine snapshot evidence.",
+        "prevention_control": "Keep git_refs_and_worktree narrative identity-free and require manually_supplied_object_id_count zero before continuation.",
+        "evidence_paths": [
+          "scripts/ariadne_orchestrator_preflight.py",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout-precommit-v2-receipt.json"
+        ]
+      },
+      "incident_id": "AER-0997",
+      "attempt_id": "clock-f685e08f36272312b3b190b2",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+      "role": "implementer",
+      "resource_id": "corrected-graph-materializer",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_python",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Fresh-process graph materialization resolves immutable accepted ancestry before temporarily replacing the historical guard builder.",
+      "observed_error": "The first fresh-process probe replaced the historical builder before accepted-source reconstruction and recursively re-entered graph resolution.",
+      "detection_method": "A provider-free fresh-process materialization probe failed before attempt preparation, lease consumption or provider activity.",
+      "evidence_paths": [
+        "scripts/raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.accepted_graph_ancestry_resolved_after_historical_builder_rebind",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve, validate and cache the four immutable graph sources before rebinding the historical guard builder.",
+        "prevention_control": "Exercise graph materialization from a fresh process and test cache-empty context entry before occupied preparation.",
+        "evidence_paths": [
+          "scripts/raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py",
+          "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py"
+        ]
+      },
+      "incident_id": "AER-0998",
+      "attempt_id": "clock-190205908850ba21e8d0859b",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "inherited-attempt-004-tests",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Predecessor-only active-latch equality is selected out when replaying inherited attempt tests after valid latch advancement.",
+      "observed_error": "The first inherited run replayed attempt 004's own live-latch assertion and produced one expected mismatch while every substantive selected test passed.",
+      "detection_method": "Pytest reported exactly the predecessor operation mismatch before the explicit deselection rerun passed.",
+      "evidence_paths": [
+        "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py",
+        "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.predecessor_attempt_live_latch_equality_not_preselected",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Deselect the exact predecessor-only active-latch node while retaining every substantive inherited assertion.",
+        "prevention_control": "Treat exact historical live-latch assertions as explicit manifest selections whenever an operation advances.",
+        "evidence_paths": [
+          "tests/test_raisa_authored_synthetic_check_in_native_harness_bounded_worker_attempt_004.py",
+          "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md"
+        ]
+      },
+      "incident_id": "AER-0999",
+      "attempt_id": "clock-da82ee38669cce3553423759",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+      "role": "implementer",
+      "resource_id": "deepseek-native-harness-rc7",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "deepseek_native_harness",
+      "stage": "implementation",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The one admitted direct edit produces the exact expected synthetic bytes and one completed turn after a single provider request.",
+      "observed_error": "The one provider request completed but the direct edit result terminalized at edit_error_accept_not_concluded, the Harness exited 1 and the target remained unchanged.",
+      "detection_method": "The typed runner and outer terminals agreed on one request, one edit result, no changed path, unchanged baseline digest and exact cleanup.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json",
+        "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/efficacy-reading.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "deepseek_native_harness.direct_edit_error_accept_not_concluded_no_candidate",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume the terminal, decline retry and Gemini, clean every owned surface and end the native-Harness recovery sequence.",
+        "prevention_control": "Do not allocate the native Harness to further EMR4 worker runs absent a genuinely new later Yuri direction.",
+        "evidence_paths": [
+          "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md",
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md"
+        ]
+      },
+      "incident_id": "AER-1000",
+      "attempt_id": "clock-1a9fd663e22cdf7e80f043ea",
+      "origin": "harness",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "clockwork-successor-resolution",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A closeout successor is a new graph identity and does not replay an already accepted product tranche.",
+      "observed_error": "The first closeout proposed the already-recorded default-off route-adapter convergence operation despite its accepted graph node and later accepted admission-control descendants.",
+      "detection_method": "The governance clockwork rejected the dry run with tick_next_operation_already_recorded before generation construction or publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/closeout/closeout-intent.json",
+        "orchestration/continuity/emr4-continuity-graph.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_successor_replayed_already_recorded_product_node",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the recorded successor with a new read-only post-check-in programme orientation.",
+        "prevention_control": "Require clockwork graph-membership rejection and machine-read successor uniqueness before closeout publication.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1001",
+      "attempt_id": "clock-9345414887981f4593aa7a46",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "clockwork-baton-compaction",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A compact active Baton replaces an existing indexed current acceptance label rather than adding an unindexed row at the byte boundary.",
+      "observed_error": "The first corrected closeout used a new native-Harness acceptance label and the compactor rejected it as unindexed.",
+      "detection_method": "The governance clockwork dry run failed closed with tick_baton_compaction_unindexed before generation construction or publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/closeout/closeout-intent.json",
+        "docs/handover-ledgers/current-baton-acceptance-index.manifest.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_baton_label_unindexed_at_compaction_boundary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Reuse the existing Current DeepSeek native Harness acceptance label and keep detailed evidence in the graph.",
+        "prevention_control": "Resolve active acceptance labels against the live Baton and acceptance index before closeout rendering.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1002",
+      "attempt_id": "clock-7fe70fc824802558003495b0",
+      "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"
     }

@@ -1,0 +1,56 @@
+{
+  "schema_version": "ariadne.sol_deterministic_admission_receipt.v1",
+  "operation_id": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+  "timestamp": "2026-08-22T22:09:32.7560947+10:00",
+  "decision": "passed",
+  "head_before": "b9d9a32d111a23bff259a0ff9d5168cfdc305508",
+  "head_after": "b9d9a32d111a23bff259a0ff9d5168cfdc305508",
+  "dirty_before": false,
+  "dirty_after": false,
+  "origin_aligned": true,
+  "reviewed_paths": [
+    "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-plan.md",
+    "docs/security/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-threat-model-delta.md",
+    "scripts/raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py",
+    "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py",
+    "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/contract.json",
+    "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/contract.schema.json",
+    "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.schema.json",
+    "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/provider-free-evidence.json",
+    "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/checkpoint-intent.json",
+    "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/clockwork-checkpoint-tick-evidence.json"
+  ],
+  "verification": {
+    "provider_free_gate": "passed",
+    "focused_and_integrated_lineage_tests": "passed",
+    "clockwork_latch_and_baton_tests": "passed",
+    "ruff": "passed",
+    "compile": "passed",
+    "fresh_process_graph_materialization": "passed",
+    "accepted_runner_sha256": "017394e3f86a3efdf5eba0745c254a8b561615fb6ab923978b81bb5941e8e3f4",
+    "attempt_target_runner_sha256": "c25bc2a1420e82cbb73641c14cc453cd8148010b66203c7c3cace2be2fa7a426",
+    "disposable_root_absent": true,
+    "matching_process_count": 0,
+    "native_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "prelaunch_local_correction_count": 1
+  },
+  "work_package": {
+    "path": "synthetic_window_coalescer.py",
+    "baseline_sha256": "9606d9341e6b7e53f4ee9007d7518145322968b2d0bc156622928c33ab97d4f8",
+    "expected_sha256": "e763b74f87b5d6e721263414c74f1c36bac64bc5783987425a55a95826716d3c",
+    "public_case_count": 4,
+    "holdback_case_count": 3
+  },
+  "parallelism": {
+    "deepseek": "planned_for_one_request_after_prelaunch_receipt",
+    "gemini": "reserved_for_postcandidate_independent_veto",
+    "native_subagents": "declined_under_developer_policy",
+    "serial_owner": "gpt-sol"
+  },
+  "protected_refs_aligned": true,
+  "unrelated_untracked_preserved": true,
+  "docs_branding_preserved": true,
+  "authority": "This receipt admits creation of the one disposable synthetic attempt only. It does not launch Harness, consume the lease or authorise a second provider request."
+}

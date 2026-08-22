@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 385,
-  "updated_at": "2026-08-22T21:03:29.4171606+10:00",
-  "source_graph_revision": 403,
-  "orientation_statement": "End generic boot testing and freeze one distinct authored-synthetic corrected-guard-graph useful-development recovery attempt with exact call, cost, effect and typed-result controls.",
+  "map_revision": 386,
+  "updated_at": "2026-08-22T22:17:01.2031206+10:00",
+  "source_graph_revision": 404,
+  "orientation_statement": "Close the native Harness recovery sequence and reconcile the completed check-in route, readiness, kernel and operational-evidence lineage before selecting another product tranche.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4971,22 +4971,32 @@
         "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/native-boot-evidence.json",
         "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout.md"
       ]
+    },
+    {
+      "node_id": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+      "lineage_parent": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
+      "strategic_role": "Determine whether typed orchestrator control could make one native DeepSeek worker reliably useful for Raisa development",
+      "outcome": "The corrected graph reached one provider request with precise typed attribution and cleanup but produced no usable edit.",
+      "evidence": [
+        "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json",
+        "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
-    "strategic_role": "Measure whether the corrected controlled native Harness can produce one useful authored-synthetic EMR4 development contribution",
-    "why_now": "The provider-free stock-headless, HMR, corrected runner, guard graph, typed terminal and cleanup chain now passes exactly once.",
-    "outcome": "A separately frozen distinct attempt will produce either one typed useful candidate or one exact failure terminal with measured correction cost.",
+    "node_id": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+    "strategic_role": "Reconcile the completed default-off check-in lineage before selecting a genuinely unfinished blocker without allocating the native DeepSeek Harness",
+    "why_now": "The Harness question has a decisive negative terminal, while route convergence, admission-control architecture and the unmounted kernel are already accepted historical nodes.",
+    "outcome": "Harness recovery ends and one read-only orientation identifies the narrowest remaining check-in product tranche without replaying accepted work.",
     "unlocks": [
-      "Evidence about useful DeepSeek development performance under orchestrator-owned typed controls rather than another Harness boot result."
+      "A graph-grounded choice of the next genuinely unfinished ordinary-admission blocker."
     ],
     "does_not_solve": [
-      "No real/product data, ordinary-practice, production, deployment, release or protected-ref authority."
+      "No ordinary-practice admission, client cutover, waiting-area movement, product data, production runtime or protected integration is opened."
     ],
     "evidence": [
-      "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/native-boot-evidence.json",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-sol-acceptance.md"
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--native-harness-corrected-graph-useful-recovery.md"
     ]
   },
   "decision_horizon": [

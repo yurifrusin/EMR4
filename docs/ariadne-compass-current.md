@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> End generic boot testing and freeze one distinct authored-synthetic corrected-guard-graph useful-development recovery attempt with exact call, cost, effect and typed-result controls.
+> Close the native Harness recovery sequence and reconcile the completed check-in route, readiness, kernel and operational-evidence lineage before selecting another product tranche.
 
 ## North star
 
@@ -576,22 +576,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    A content-free clockwork reading uniquely reconstructed the passed guard coordinate and corrected counter contract without another process or provider cost. Lineage parent: `deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery`.
 280. **Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development — Provider-free stock-headless-to-corrected-runner boot proof**
    The pinned stock headless launcher reached the corrected accepted runner graph once with exact typed attribution and complete provider-free cleanup. Lineage parent: `deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis`.
+281. **Determine whether typed orchestrator control could make one native DeepSeek worker reliably useful for Raisa development — Corrected-graph native-Harness useful-development recovery**
+   The corrected graph reached one provider request with precise typed attribution and cleanup but produced no usable edit. Lineage parent: `deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof`.
 
 ## Current position
 
-**Measure whether the corrected controlled native Harness can produce one useful authored-synthetic EMR4 development contribution — Provider-free stock-headless-to-corrected-runner boot proof**
+**Reconcile the completed default-off check-in lineage before selecting a genuinely unfinished blocker without allocating the native DeepSeek Harness — Corrected-graph native-Harness useful-development recovery**
 
-**Why this proof came next:** The provider-free stock-headless, HMR, corrected runner, guard graph, typed terminal and cleanup chain now passes exactly once.
+**Why this proof came next:** The Harness question has a decisive negative terminal, while route convergence, admission-control architecture and the unmounted kernel are already accepted historical nodes.
 
-A separately frozen distinct attempt will produce either one typed useful candidate or one exact failure terminal with measured correction cost.
+Harness recovery ends and one read-only orientation identifies the narrowest remaining check-in product tranche without replaying accepted work.
 
 ### What this unlocks
 
-- Evidence about useful DeepSeek development performance under orchestrator-owned typed controls rather than another Harness boot result.
+- A graph-grounded choice of the next genuinely unfinished ordinary-admission blocker.
 
 ### What it does not solve
 
-- No real/product data, ordinary-practice, production, deployment, release or protected-ref authority.
+- No ordinary-practice admission, client cutover, waiting-area movement, product data, production runtime or protected integration is opened.
 
 ## Continuity and authority
 
@@ -1417,6 +1419,7 @@ Prerequisites:
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-design.md`
 - `docs/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal-plan.md`
 - `docs/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision-closeout.md`
+- `docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md`
 - `docs/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-closeout.md`
 - `docs/raisa-authority-kernel-reference-client-adapter-seam.md`
 - `docs/raisa-channel-neutral-patient-interaction-foundation-architecture.md`
@@ -2109,7 +2112,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2161,6 +2163,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-aes-c5-single-generation-destination-conflict-analysis.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-source-review-receipt.json`
+- `orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-sol-acceptance.md`
@@ -2869,6 +2872,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-free-dry-run-evidence.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/rayleen-context-fabric-intent-shaping-attempt-1-preflight.json`
 - `orchestration/continuity/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision/deterministic-evidence.json`
+- `orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json`
 - `orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-terminal.json`
 - `orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/authored-synthetic-contract-examples.json`
 - `orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/foundation-contract.json`
@@ -3483,6 +3487,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-mount-effective-tool-projection.md`
 - `orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-row-service-path-recovery.md`
 - `orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-pre-hmr-startup-recovery.md`
+- `orchestration/human_inbox/yuri/2026-08-22--native-harness-corrected-graph-useful-recovery.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-edit-coordinate-future-runner-integration.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-integrated-runner-first-controlled-development.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-integrated-runner-stock-headless-boot.md`
@@ -3797,4 +3802,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 385; continuity graph revision 403._
+_Compass map revision 386; continuity graph revision 404._
