@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 383,
-  "updated_at": "2026-08-22T19:57:09.0815687+10:00",
-  "source_graph_revision": 401,
-  "orientation_statement": "Treat the stdout hash as a clockwork reading over a closed source-derived grammar; do not rerun or infer from unconstrained prose.",
+  "map_revision": 384,
+  "updated_at": "2026-08-22T20:22:32.2159306+10:00",
+  "source_graph_revision": 402,
+  "orientation_statement": "Use the corrected source-derived counter contract in one newly frozen provider-free native boot proof; do not retry the consumed fixture or start a DeepSeek turn.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4951,24 +4951,32 @@
         "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/materialization-failure-report.md",
         "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-closeout.md"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis",
+      "lineage_parent": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery",
+      "strategic_role": "Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development",
+      "outcome": "A content-free clockwork reading uniquely reconstructed the passed guard coordinate and corrected counter contract without another process or provider cost.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis/diagnosis-evidence.json",
+        "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery",
-    "strategic_role": "Recover the exact source-defined typed observation from the immutable content-free process envelope",
-    "why_now": "The process exited cleanly and retained a finite stdout length/hash, but generic validation discarded the typed mismatch needed for direct diagnosis.",
-    "outcome": "A process-free finite grammar will prove a unique matching counter vector or reject without another process.",
+    "node_id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis",
+    "strategic_role": "Prove the native Harness stock headless entry point can hand off to the corrected custom runner without a DeepSeek or provider turn",
+    "why_now": "The guard graph crossing and exact four-root/five-hook contract are now deterministically diagnosed from immutable evidence.",
+    "outcome": "One separately identified provider-free boot proof will decide whether the pinned native Harness reaches the corrected custom runner boundary.",
     "unlocks": [
-      "A deterministic conclusion about whether the accepted guard crossed the old coordinate.",
-      "A corrected typed counter contract for the later provider-free boot proof without retrying the consumed identity."
+      "A bounded decision on whether the native Harness is ready for a later monitored DeepSeek development worker turn."
     ],
     "does_not_solve": [
-      "No native Harness boot, DeepSeek worker turn, model/provider request or useful-worker quality evidence.",
-      "No product/data action, ordinary-practice enablement, production, release, Pages or protected integration."
+      "No DeepSeek turn, provider request, useful-worker quality, product action, deployment or production claim."
     ],
     "evidence": [
-      "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-process-envelope.json",
-      "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/materialization-failure-report.md"
+      "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis/diagnosis-evidence.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 624,
+  "register_revision": 625,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "cfa11e6da971b802c40c3d9e3909f111d2d87eef9ae726d002cce48b26dea7ea",
-  "incident_count": 982,
+  "canonical_register_sha256": "afa6782b4671189eab2b96d0d8d6e9f6eb8817834272f1e223aaafa386cf4c75",
+  "incident_count": 984,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 520,
       "harness": 69,
-      "operator": 237,
+      "operator": 239,
       "repository": 140,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 99,
       "evidence_misreport": 74,
       "harness_failure": 69,
-      "operator_error": 237,
+      "operator_error": 239,
       "output_contract_violation": 294,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 72,
       "integration_reviewer": 3,
-      "orchestrator": 844,
+      "orchestrator": 846,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 621,
+      "low": 623,
       "material": 133,
       "moderate": 228
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 206,
-      "canonical_unchanged": 607,
+      "accepted_candidate_changed": 207,
+      "canonical_unchanged": 608,
       "untrusted_partial_worktree": 169
     },
     "by_resource_and_role": {
@@ -141,6 +141,7 @@
       "clockwork-incident-stage-vocabulary::orchestrator": 2,
       "clockwork-incident-tranche-vocabulary::orchestrator": 1,
       "clockwork-incident-vocabulary-admission::orchestrator": 2,
+      "clockwork-live-state-validation::orchestrator": 1,
       "clockwork-live-tick-intent-schema::orchestrator": 1,
       "clockwork-migration-focused-replay-fixture::orchestrator": 1,
       "clockwork-migration-verifier-command-manifest::orchestrator": 1,
@@ -290,6 +291,7 @@
       "local-rg-operator::orchestrator": 3,
       "mandatory-narrative-timestamp::orchestrator": 1,
       "materialised-runtime-identity-validator::implementer": 1,
+      "materialization-provider-free-terminal-readback::orchestrator": 1,
       "minimum-environment-candidate-identity::orchestrator": 1,
       "minimum-environment-evidence-shape::orchestrator": 1,
       "minimum-environment-javascript-paths::orchestrator": 1,

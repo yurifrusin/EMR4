@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 401,
+  "graph_revision": 402,
   "harvests": [],
   "nodes": [
     {
@@ -31442,9 +31442,111 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis",
+      "title": "Accepted guard-graph content-free counter diagnosis",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted a zero-process finite-grammar diagnosis over the immutable consumed envelope.",
+          "The predecessor remains rejected and consumed; no retry, raw stream, worker, model, provider, product, deployment, Pages or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-unique-finite-grammar-observation",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis/diagnosis-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one unique 756-byte and SHA-256 matching typed observation among 496 frozen candidates."
+        },
+        {
+          "id": "accept-source-derived-four-root-five-hook-contract",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis/diagnosis-evidence.json",
+          "status": "accepted",
+          "summary": "Accept four preset-root reads and five hook installations as the exact corrected counter contract."
+        },
+        {
+          "id": "preserve-predecessor-rejection",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Keep the consumed materialization attempt rejected, immutable and not reclassified."
+        },
+        {
+          "id": "reject-broader-harness-claim",
+          "source": "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis-closeout.md",
+          "status": "rejected",
+          "summary": "The diagnosis proves no native Harness boot, DeepSeek turn, provider reachability, useful-worker output or product behavior."
+        }
+      ],
+      "claim_scope": [
+        "The frozen grammar contains 496 distinct source-derived typed serializations.",
+        "Exactly one candidate matches both the retained 756-byte length and SHA-256.",
+        "The unique observation records four root reads, five hook installations and EFFECTIVE_TOOL_COMPOSITION_PASSED.",
+        "The predecessor remains fixture_result_rejected with retry and reclassification false.",
+        "Diagnosis subprocess, Harness, broker, worker, model, provider, network, database, Docker and product-target counts are zero.",
+        "Only a separately frozen provider-free stock-headless/custom-runner boot proof is selected next."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-625.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--native-harness-content-free-counter-diagnosis.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_content_free_counter_diagnosis.py",
+          "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_content_free_counter_diagnosis.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis/diagnosis-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis/diagnosis-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis/efficacy-reading.json"
+        ]
+      },
+      "unresolved_gates": [
+        "No provider-free native Harness stock-headless/custom-runner handoff has yet passed with the corrected counter contract.",
+        "No DeepSeek worker turn, model/provider request or useful-worker evidence is accepted.",
+        "The consumed materialization attempt remains rejected and cannot be retried.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T20:22:32.2159306+10:00",
+      "updated_at": "2026-08-22T20:22:32.2159306+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "3d82febd6a402337db606ce4767fbd4875698eba",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T19:57:09.0815687+10:00"
+  "updated_at": "2026-08-22T20:22:32.2159306+10:00"
 }

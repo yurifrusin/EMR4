@@ -1,0 +1,33 @@
+{
+  "schema_version": "ariadne.native_harness_content_free_counter_efficacy.v1",
+  "operation_id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis",
+  "timestamp": "2026-08-22T20:22:32.2159306+10:00",
+  "result": "unique_counter_observation_admitted_without_process",
+  "objective_reached": true,
+  "useful_diagnostic_output": true,
+  "observed": {
+    "grammar_candidate_count": 496,
+    "byte_length_match_count": 1,
+    "byte_and_hash_match_count": 1,
+    "preset_root_reads": 4,
+    "hook_installations": 5,
+    "structured_coordinate": "EFFECTIVE_TOOL_COMPOSITION_PASSED",
+    "diagnosis_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "predecessor_retry_count": 0,
+    "predecessor_reclassified": false
+  },
+  "correction_cost": {
+    "new_process_attempts": 0,
+    "raw_stream_recovery": false,
+    "finite_candidates_compared": 496
+  },
+  "parallelism": {
+    "deepseek": {"disposition": "declined", "result": "not_dispatched", "rationale": "Worker, Harness, model and provider requests were forbidden."},
+    "gemini": {"disposition": "declined_provider_free_boundary", "result": "not_dispatched", "rationale": "The result was fully determined by immutable bytes and a closed grammar."},
+    "native_subagents": {"disposition": "declined", "result": "not_dispatched", "rationale": "Developer policy prohibited proactive delegation and the proof was serial."},
+    "serial_owner": "gpt-sol"
+  },
+  "conclusion": "The retained content-free hash was sufficient to reconstruct one unique typed observation, avoiding a fixture retry and admitting the corrected counter contract for the next provider-free boot proof."
+}

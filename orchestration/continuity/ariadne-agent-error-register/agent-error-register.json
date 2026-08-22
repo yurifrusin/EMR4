@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 624,
+  "register_revision": 625,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -38131,6 +38131,81 @@
       },
       "incident_id": "AER-0982",
       "attempt_id": "clock-99be16dad0d3d4d1fd4bc56b",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-content-free-counter-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "materialization-provider-free-terminal-readback",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Idempotent provider-free readback validates either mutually exclusive accepted evidence or a schema-valid consumed failure terminal plus its exact envelopes.",
+      "observed_error": "The controller handled accepted evidence only and rejected its valid consumed failure branch during the first post-terminal focused check.",
+      "detection_method": "Focused pytest rejected provider_free_check before any new process, Harness, worker, model or provider boundary.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+        "docs/ariadne-agent-error-correction-register-revision-625.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.idempotent_terminal_readback_omitted_failure_branch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Validate mutually exclusive accepted or consumed-failure terminal artifacts and exact attempt/process envelopes without starting a process.",
+        "prevention_control": "Every one-attempt controller has idempotent readback branches for every schema-valid terminal class before closeout.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+          "docs/ariadne-agent-error-correction-register-revision-625.md"
+        ]
+      },
+      "incident_id": "AER-0983",
+      "attempt_id": "clock-edb2715b4526496be107bde4",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-content-free-counter-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "clockwork-live-state-validation",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Clockwork callers use only parser-owned check, publish or rollback modes and use typed tests for live-state validation.",
+      "observed_error": "The orchestrator guessed nonexistent --check-live after previously learning the closed clockwork mode vocabulary; argparse rejected without mutation.",
+      "detection_method": "The CLI returned exit 1 before any clockwork state write or process boundary.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-625.md",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_cli_mode_guessed_outside_closed_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use typed latch and clockwork tests for live-state validation and restrict publications to the parser-owned --publish mode.",
+        "prevention_control": "No clockwork CLI mode may be supplied unless selected from the exact parser-owned vocabulary.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-625.md",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "incident_id": "AER-0984",
+      "attempt_id": "clock-50e90264ac37493c581ba7ff",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"
