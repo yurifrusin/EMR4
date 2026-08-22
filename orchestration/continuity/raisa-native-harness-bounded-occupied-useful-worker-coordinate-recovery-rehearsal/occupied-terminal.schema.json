@@ -30,7 +30,7 @@
       "const": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal"
     },
     "attempt_id": {
-      "const": "deepseek-native-check-in-runbook-worker-coordinate-recovery-001"
+        "const": "deepseek-native-check-in-runbook-worker-coordinate-recovery-002"
     },
     "candidate_source": {
       "type": "string",

@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.governance_checkpoint_rejected_receipt.v1",
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+  "source_commit": "1f20c048a555a9b7c199f2579cd5d98bae50cf61",
+  "rejected_at": "2026-08-22T15:15:54.4888216+10:00",
+  "stage": "clockwork_checkpoint_dry_run",
+  "coordinate": "canonical_drift",
+  "cause": "clockwork_owned_AGENTS_and_agent_error_register_surfaces_were_updated_directly_before_the_transactional_tick",
+  "validation_receipt_sha256": "0227850e3b46830e08400f98d1e232a84fa544f16ebb3b1110c3abf03747f992",
+  "correction": "Restore every clockwork-owned surface to the last accepted generation, retain tranche-local incident evidence, and let only the closeout clockwork advance the canonical register and Baton.",
+  "checkpoint_published": false,
+  "attempt_identity_consumed": false,
+  "native_harness_process_count": 0,
+  "worker_process_count": 0,
+  "provider_request_count": 0,
+  "retry_count": 0,
+  "resume_count": 0,
+  "fallback_count": 0,
+  "product_or_protected_effect": false
+}

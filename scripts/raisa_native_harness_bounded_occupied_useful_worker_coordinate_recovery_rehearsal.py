@@ -39,11 +39,11 @@ from scripts import (
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 OPERATION_ID = "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal"
-ATTEMPT_ID = "deepseek-native-check-in-runbook-worker-coordinate-recovery-001"
-WORK_ORDER_ID = "wo-deepseek-native-check-in-runbook-worker-coordinate-recovery-001"
-LEASE_ID = "lease-deepseek-native-check-in-runbook-worker-coordinate-recovery-001"
+ATTEMPT_ID = "deepseek-native-check-in-runbook-worker-coordinate-recovery-002"
+WORK_ORDER_ID = "wo-deepseek-native-check-in-runbook-worker-coordinate-recovery-002"
+LEASE_ID = "lease-deepseek-native-check-in-runbook-worker-coordinate-recovery-002"
 OPERATION_ROOT = REPO_ROOT / "orchestration" / "continuity" / OPERATION_ID
-ATTEMPT_EVIDENCE_ROOT = OPERATION_ROOT / "attempt-001"
+ATTEMPT_EVIDENCE_ROOT = OPERATION_ROOT / "attempt-002"
 ATTEMPT_ROOT = Path(f"C:/Users/sarashera/EMR4-worktrees/{ATTEMPT_ID}")
 PLAN_PATH = REPO_ROOT / "docs" / f"{OPERATION_ID}-plan.md"
 THREAT_PATH = REPO_ROOT / "docs" / "security" / f"{OPERATION_ID}-threat-model-delta.md"

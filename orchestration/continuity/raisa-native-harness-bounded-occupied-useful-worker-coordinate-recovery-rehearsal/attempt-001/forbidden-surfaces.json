@@ -1,0 +1,12 @@
+{
+  "forbidden_surfaces": [
+    "second_worker_retry_resume_or_fallback",
+    "read_glob_shell_git_docker_database_network_or_subagent_tool",
+    "unowned_file_creation_change_delete_or_rename",
+    "ordinary_practice_feature_flag_allowlist_or_command_mounting",
+    "generic_status_arrived_grammar_client_or_waiting_area_change",
+    "product_patient_appointment_clinical_historical_or_protected_data",
+    "production_deployment_release_pages_or_protected_refs",
+    "raw_prompt_response_reasoning_stream_session_environment_or_credential_retention"
+  ]
+}

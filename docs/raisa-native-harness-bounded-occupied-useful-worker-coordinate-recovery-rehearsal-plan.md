@@ -98,6 +98,14 @@ namespace are disjoint from the consumed predecessor and are written once. The
 lease is consumed immediately before launch. A terminal is never retried or
 resumed.
 
+The first recovery preparation identity (`coordinate-recovery-001`) was closed
+before checkpoint admission when the clockwork detected direct drift on its
+canonical surfaces. It consumed no lease, worker or provider authority, its
+exact root was removed, and its evidence remains immutable. The occupied
+authority is therefore attached only to the fresh disjoint
+`coordinate-recovery-002` identity; this is a preparation recovery, not a retry
+of an occupied turn.
+
 ## Admission and custody chain
 
 Before any native Harness or provider process:

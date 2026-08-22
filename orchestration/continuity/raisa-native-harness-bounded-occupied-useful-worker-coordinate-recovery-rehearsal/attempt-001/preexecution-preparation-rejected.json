@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.native_harness_useful_worker_preexecution_preparation_rejected.v1",
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+  "attempt_id": "deepseek-native-check-in-runbook-worker-coordinate-recovery-001",
+  "candidate_source": "1f20c048a555a9b7c199f2579cd5d98bae50cf61",
+  "rejected_at": "2026-08-22T15:17:03.6579807+10:00",
+  "coordinate": "clockwork_candidate_canonical_drift",
+  "reason": "The prepared source contained direct writes to clockwork-owned canonical surfaces and could not enter the checkpoint transaction.",
+  "attempt_identity_reusable": false,
+  "lease_consumed": false,
+  "native_harness_process_count": 0,
+  "worker_process_count": 0,
+  "provider_request_count": 0,
+  "retry_count": 0,
+  "resume_count": 0,
+  "fallback_count": 0,
+  "cleanup": {
+    "attempt_root_absent": true,
+    "owned_process_absent": true,
+    "raw_prompt_response_reasoning_retained": false
+  },
+  "disposition": "immutable_preexecution_rejection_fresh_attempt_identity_required"
+}

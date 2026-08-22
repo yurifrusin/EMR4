@@ -1,13 +1,13 @@
 {
   "attempt": {
-    "attempt_id": "deepseek-native-check-in-runbook-worker-coordinate-recovery-001",
-    "disposable_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-runbook-worker-coordinate-recovery-001",
-    "evidence_namespace": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-001",
-    "lease_id": "lease-deepseek-native-check-in-runbook-worker-coordinate-recovery-001",
-    "work_order_id": "wo-deepseek-native-check-in-runbook-worker-coordinate-recovery-001"
+    "attempt_id": "deepseek-native-check-in-runbook-worker-coordinate-recovery-002",
+    "disposable_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-runbook-worker-coordinate-recovery-002",
+    "evidence_namespace": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002",
+    "lease_id": "lease-deepseek-native-check-in-runbook-worker-coordinate-recovery-002",
+    "work_order_id": "wo-deepseek-native-check-in-runbook-worker-coordinate-recovery-002"
   },
   "documentation_bindings": {
-    "plan_sha256": "3fad0373bc533c28cb53cfe308b68839de1cd50d13f6f490fb2aebd94a70f5b8",
+    "plan_sha256": "e1ea8befc427a94ec3e4d9194057865d35e2f732def27efcc94529765a941063",
     "threat_model_sha256": "7d65979c9b4b7d550b538c36a8cb56d670feca03583aa3c4155a1c0426fa771b"
   },
   "occupied_envelope": {
@@ -70,7 +70,7 @@
     },
     "occupied_runner": {
       "bytes": 9467,
-      "sha256": "05a6752de9abeb878f96a0608fbd7195de1ad84ef4b593b794b354ddc490cfc0"
+      "sha256": "65fb85385dd44307b71ff040035288ccfad51b78d8e46ab45cffb154e32f2d75"
     }
   },
   "work_package": {

@@ -31,19 +31,19 @@
       ],
       "properties": {
         "attempt_id": {
-          "const": "deepseek-native-check-in-runbook-worker-coordinate-recovery-001"
+              "const": "deepseek-native-check-in-runbook-worker-coordinate-recovery-002"
         },
         "work_order_id": {
-          "const": "wo-deepseek-native-check-in-runbook-worker-coordinate-recovery-001"
+              "const": "wo-deepseek-native-check-in-runbook-worker-coordinate-recovery-002"
         },
         "lease_id": {
-          "const": "lease-deepseek-native-check-in-runbook-worker-coordinate-recovery-001"
+              "const": "lease-deepseek-native-check-in-runbook-worker-coordinate-recovery-002"
         },
         "disposable_root": {
-          "const": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-runbook-worker-coordinate-recovery-001"
+              "const": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-runbook-worker-coordinate-recovery-002"
         },
         "evidence_namespace": {
-          "const": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-001"
+              "const": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002"
         }
       }
     },

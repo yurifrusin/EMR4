@@ -1,0 +1,33 @@
+{
+  "attempt_id": "deepseek-native-check-in-runbook-worker-coordinate-recovery-001",
+  "attempt_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-runbook-worker-coordinate-recovery-001",
+  "authority_sha256": "205b32bc714ed7a5adee7827450b82aae10943467bd54f03a844588728815843",
+  "candidate_source": "1f20c048a555a9b7c199f2579cd5d98bae50cf61",
+  "checkpoint_admitted": false,
+  "command_manifest_sha256": "566ef20005ad09e704c26a1d4c494a85992735e0cde0d44e64f3c914b68abe54",
+  "forbidden_sha256": "f76c70f63a0ed20aa248ac916338e6cbd316dc460afbd3580671e3805573b3a7",
+  "native_process_count": 0,
+  "no_database_admission_sha256": "e18dbdc943c581cea3fdea5c50725b487b4b76b722ae1e40698dada8d8157be2",
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+  "profile": {
+    "bridge_sha256": "3a49b28174eeefd77d7efe0a00498901ac6636b637ed9dfe60aba46980df1d0b",
+    "guard_sha256": "76029da0f9c030651fd10c0df16f4e75e86b2269d7560af7f94c74680f8598b9",
+    "package_json_sha256": "7a9f356ad1e27c7013b44619bc675b8cb877f995cd0951ab3dfeb10d4edcc361",
+    "package_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-runbook-worker-coordinate-recovery-001/installation/node_modules/@deepseek-ai/dsh",
+    "preset_sha256": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1",
+    "runner_sha256": "05a6752de9abeb878f96a0608fbd7195de1ad84ef4b593b794b354ddc490cfc0",
+    "sanitizer_sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f",
+    "sentinel_sha256": "8b53bc7fb781d29d87310ee2d3425ca159a62fed4893a3e4db94069d63cd60bd"
+  },
+  "provider_request_count": 0,
+  "review_receipt": "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-deterministic-validation-receipt.json",
+  "review_receipt_sha256": "0227850e3b46830e08400f98d1e232a84fa544f16ebb3b1110c3abf03747f992",
+  "schema_version": "ariadne.native_harness_useful_worker_preparation.v1",
+  "status": "passed",
+  "work_order_sha256": "e191ee0f36deb13338057cd1a9d636dbf14a5ea734dc1f39b5bfc327a57c4e6f",
+  "workspace": {
+    "baseline_commit": "1362a0ec56df4754567b498317e3ca3de1d39972",
+    "baseline_sha256": "9b9900a6aa084c458094ec89cb0bc816aa3a787fb84a1188abdd0897db43afd1",
+    "workspace": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-runbook-worker-coordinate-recovery-001/workspace"
+  }
+}

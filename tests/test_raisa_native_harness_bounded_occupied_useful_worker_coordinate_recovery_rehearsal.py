@@ -83,7 +83,7 @@ def test_contract_is_canonical_schema_valid_and_exactly_bound() -> None:
 
 
 def test_attempt_identity_is_disjoint_and_predecessor_is_immutable() -> None:
-    assert worker.ATTEMPT_ID.endswith("coordinate-recovery-001")
+    assert worker.ATTEMPT_ID.endswith("coordinate-recovery-002")
     assert worker.ATTEMPT_ROOT != Path(
         "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-runbook-worker-001"
     )

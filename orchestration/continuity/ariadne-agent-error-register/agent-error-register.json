@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 617,
+  "register_revision": 616,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -37161,43 +37161,6 @@
       "incident_id": "AER-0956",
       "attempt_id": "clock-cb6c186706943fb87daee076",
       "origin": "agent_behavior",
-      "related_incident_ids": [],
-      "status": "corrected"
-    },
-    {
-      "observed_on": "2026-08-22",
-      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
-      "role": "orchestrator",
-      "resource_id": "typed-useful-worker-preexecution-contract",
-      "model": null,
-      "reasoning_level": "high",
-      "transport": "local_validation_runner",
-      "stage": "deterministic_verification",
-      "category": "operator_error",
-      "process_severity": "low",
-      "expected_invariant": "The contract must be generated only after every bound schema and source file has reached its final byte representation.",
-      "observed_error": "The first published control candidate normalized trailing blank lines in copied schemas after generating the contract, leaving its candidate-schema digest stale.",
-      "detection_method": "The shell-free preexecution validation runner rejected contract equality and the provider-free controller check before preparation, lease consumption, native Harness startup or provider access.",
-      "evidence_paths": [
-        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/preexecution-candidate-rejection.json",
-        "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-deterministic-validation-attempt-001-rejected-receipt.json"
-      ],
-      "candidate_state": "canonical_unchanged",
-      "workflow_disposition": "revision_required",
-      "recurrence_signature": "orchestrator.contract_generated_before_bound_bytes_finalized",
-      "causal_claim_level": "observation_only",
-      "correction": {
-        "status": "corrected_fresh_attempt",
-        "action": "Regenerate the contract from the final normalized schemas, require its exact-equality focused tests to pass, and publish a new descendant before attempt preparation.",
-        "prevention_control": "The deterministic preexecution manifest runs contract equality and provider-free checks before the controller may create an attempt root or consume the lease.",
-        "evidence_paths": [
-          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/contract.json",
-          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py"
-        ]
-      },
-      "incident_id": "AER-0957",
-      "attempt_id": "preexecution-a049864c6b89",
-      "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"
     }
