@@ -152,6 +152,7 @@ def test_contract_and_provider_free_preflight() -> None:
     }
     if proof.EVIDENCE_PATH.exists():
         assert projection["result"] == "provider_free_success_readback_pass"
+        assert projection["verified_cached_package_count"] == 4
         evidence = json.loads(proof.EVIDENCE_PATH.read_bytes())
         assert evidence["result"] == "pass"
         assert evidence["observation"] == proof.EXPECTED_OBSERVATION
