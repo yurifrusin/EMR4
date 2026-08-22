@@ -1,0 +1,195 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_narrowest_provider_free_edit_coordinate_future_runner_integration_plan",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh updated Current Baton and clockwork publication; accepted edit-coordinate plan, threat delta, contract, deterministic report, efficacy reading, closeout, Sol acceptance and clockwork evidence; protected-evidence and user-decision boundaries; validated successor latch; machine-observed Git refs and worktree",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md records Continuity 395 / Compass 377, the accepted provider-free seven-coordinate edit diagnostic and the provider-free future-runner integration rehearsal as the exact next implementation.",
+    "current_authority_allocation": "GPT Sol owns plan freeze, derived-runner implementation, deterministic replay, acceptance and clockwork closeout. DeepSeek is declined because no worker, model or provider call is authorised. Gemini is reserved only for a later fresh veto if deterministic integration evidence leaves material runner semantics ambiguous. Native subagents are declined because current developer policy prohibits delegation.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-threat-model-delta.md",
+      "orchestration_harness/native_edit_argument_result_coordinate.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/efficacy-reading.json",
+      "docs/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/closeout/clockwork-tick-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/future-runner.mjs",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "The integration is provider-free and authored-synthetic. Both occupied attempts remain immutable and consumed. No worker, model, provider, retry, candidate adoption, runbook change, product/API/schema/database/configuration change, ordinary-practice enablement, product or protected data, production, deployment, Pages, protected evidence or protected-ref movement is authorised.",
+    "git_refs_and_worktree": "The receipt builder supplies all Git identities from a fresh machine snapshot. The task branch and origin are aligned at the accepted closeout source while only clockwork-owned publication surfaces, successor-latch test adaptation and successor receipt inputs are tracked changes. All four protected refs remain exact; docs/branding and unrelated untracked files remain preserved; explicit-path staging only."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
+    "active_tranche": "DeepSeek native Harness provider-free edit-coordinate future-runner integration rehearsal",
+    "objective": "Integrate the accepted seven-coordinate edit argument/result classifier and three pre-dispatch semantic argument checks into a provider-free derived future runner, replay every closed coordinate and prove exact cleanup without any worker, model or provider request.",
+    "status": "in_progress",
+    "source_head": "8513a0609a30f0d12376f9c1b918f80350f82063",
+    "authority_source": "Yuri's standing uninterrupted-development authority and the accepted provider-free real edit argument/result coordinate diagnostic.",
+    "checkpoint": {
+      "completed_stage": "Accepted deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_provider_free_edit_coordinate_future_runner_integration_plan",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_edit_coordinate_future_runner_integration_only",
+      "authored_synthetic_closed_argument_result_variants_and_typed_terminals_only",
+      "no_native_harness_worker_model_or_live_provider_request",
+      "both_consumed_occupied_attempts_immutable_no_retry_resume_overwrite_or_reclassification",
+      "no_candidate_adoption_or_runbook_manifest_change",
+      "no_product_source_configuration_api_openapi_graphql_schema_migration_route_or_database_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_first_party_client_or_waiting_area_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
+    "assessed_stage": "provider-free edit-coordinate future-runner integration preplanning",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "This tranche exists to put deterministic controls around a future worker before another occupied request; calling DeepSeek would violate the provider-free boundary and confound the integration proof.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "neutral",
+        "rationale": "Exact closed-coordinate and hash-transition replay owns the first decision. Reassess one fresh Gemini 3.7 Flash/high veto only if a material future-runner semantic ambiguity survives complete deterministic integration evidence.",
+        "work_packages": [
+          "serial_independent_veto_only_if_deterministic_runner_integration_semantics_remain_materially_ambiguous"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Current developer policy prohibits native-subagent delegation, and accepted-runner derivation, pre-dispatch denial, result classification and cleanup form one short serial custody chain.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "bind and preserve the accepted future runner and seven-coordinate classifier before deriving the integration runner",
+      "freeze the three pre-dispatch semantic denials before executing any edit variant",
+      "replay every accepted coordinate in one provider-free authored-synthetic custody chain",
+      "prove exact failure non-mutation and cleanup before evidence interpretation",
+      "reassess Gemini only after all deterministic hostile mutations and integration results pass"
+    ],
+    "reassessment_triggers": [
+      "plan freeze",
+      "deterministic integration evidence release",
+      "pre-verifier gate",
+      "closeout"
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "GPT Sol completed the successor five-source rehydration and owns its serial provider-free custody chain."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Code is historical lineage only and no worker or fallback is authorised."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Gemini is reserved only for a later serial veto if deterministic evidence leaves material integration ambiguity."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No subagent was spawned because current developer policy prohibits delegation."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The exact native Harness occupied authority is consumed and this integration rehearsal is provider-free."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected and no fallback is authorised."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

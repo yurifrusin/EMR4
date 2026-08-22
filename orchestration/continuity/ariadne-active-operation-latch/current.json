@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery",
-  "active_tranche": "DeepSeek native Harness provider-free edit argument/result coordinate diagnostic recovery",
-  "objective": "Freeze and implement the narrowest provider-free diagnostic that executes the real accepted native-Harness edit tool over closed authored-synthetic valid and invalid argument/result variants, emits a non-sensitive typed edit-result coordinate, preserves both consumed occupied attempts and proves complete cleanup without any worker, model or provider request.",
+  "operation_id": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
+  "active_tranche": "DeepSeek native Harness provider-free edit-coordinate future-runner integration rehearsal",
+  "objective": "Integrate the accepted seven-coordinate edit argument/result classifier and three pre-dispatch semantic argument checks into a provider-free derived future runner, replay every closed coordinate and prove exact cleanup without any worker, model or provider request.",
   "status": "in_progress",
-  "source_head": "0e4f76ec55d73d180cbc88e74bde1783691c2f95",
-  "authority_source": "Yuri's standing uninterrupted-development authority and the accepted typed edit-error occupied terminal, exact cleanup and efficacy reading.",
+  "source_head": "8513a0609a30f0d12376f9c1b918f80350f82063",
+  "authority_source": "Yuri's standing uninterrupted-development authority and the accepted provider-free real edit argument/result coordinate diagnostic.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_provider_free_real_edit_tool_argument_and_result_coordinate_diagnostic_plan",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_provider_free_edit_coordinate_future_runner_integration_plan",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,7 +34,7 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_real_edit_tool_argument_and_result_coordinate_diagnostic_only",
+    "provider_free_edit_coordinate_future_runner_integration_only",
     "authored_synthetic_closed_argument_result_variants_and_typed_terminals_only",
     "no_native_harness_worker_model_or_live_provider_request",
     "both_consumed_occupied_attempts_immutable_no_retry_resume_overwrite_or_reclassification",

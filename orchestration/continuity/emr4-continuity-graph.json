@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 394,
+  "graph_revision": 395,
   "harvests": [],
   "nodes": [
     {
@@ -30651,9 +30651,139 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery",
+      "title": "DeepSeek native Harness provider-free real edit argument/result coordinate diagnostic closeout",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority covers the bounded provider-free Harness diagnostic and its closeout.",
+          "Both occupied native-Harness attempts remain immutable and consumed; this result grants no retry or new occupied authority.",
+          "The successor is a provider-free future-runner integration rehearsal only."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-real-rc7-edit-coordinate-matrix",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-evidence.json",
+          "status": "accepted",
+          "summary": "Accept nine real-tool variants, seven closed coordinates, exact success mutations, exact failure non-mutations and complete provider-free cleanup."
+        },
+        {
+          "id": "accept-honest-untyped-semantic-argument-boundary",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept one shared untyped coordinate for the three rc.7 plain-Error semantic constraints and forbid message parsing or invented specificity."
+        },
+        {
+          "id": "preserve-consumed-terminal-without-retrospective-reclassification",
+          "source": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-terminal.json",
+          "status": "accepted",
+          "summary": "Preserve edit_error_accept_not_concluded exactly because its intentionally discarded arguments cannot support a narrower historical coordinate."
+        },
+        {
+          "id": "decline-gemini-and-new-occupied-attempt",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Reject Gemini review and any new occupied attempt because exact runtime evidence resolved the material semantics and the coordinate is not yet integrated into the future runner."
+        },
+        {
+          "id": "accept-precommit-git-prose-correction",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-implementation-precommit-receipt.json",
+          "status": "accepted",
+          "summary": "Accept the machine-only Git evidence correction after the first receipt rejected a manually supplied object identity in prose before commit."
+        },
+        {
+          "id": "accept-required-incident-revision-artifact-correction",
+          "source": "docs/ariadne-agent-error-correction-register-revision-618.md",
+          "status": "accepted",
+          "summary": "Accept the required prospective register revision artifact after the first clockwork dry-run rejected its omission with zero canonical mutation."
+        }
+      ],
+      "claim_scope": [
+        "The exact accepted rc.7 ToolRuntime, dsh-tool-fs edit and LocalFileSystem executed nine authored-synthetic variants in one local Node process.",
+        "Seven closed coordinates distinguish schema, semantic constraint, target freshness, literal matching and success result classes without parsing error prose.",
+        "Both successful variants made only their exact expected hash transition and every failed variant preserved its target state.",
+        "No worker, model, provider, broker, network, database, Docker, retry, resume or fallback activity occurred.",
+        "No raw argument, content, error, stack, prompt, response, reasoning, session, environment or credential material was retained.",
+        "The diagnostic reduces rerun pressure but proves neither useful-worker success nor general native-Harness reliability.",
+        "The first clockwork dry-run rejected a missing incident revision artifact before generation preparation or canonical mutation.",
+        "No product, ordinary-practice, data, production, deployment, release, Pages or protected-ref authority opened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-implementation-precommit-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-implementation-precommit-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery_plan.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/native_edit_argument_result_coordinate.py",
+          "scripts/deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/coordinate.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/evidence.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/failure-terminal.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-618.md",
+          "orchestration/human_inbox/yuri/2026-08-22--native-harness-real-edit-coordinate-diagnostic.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The three rc.7 semantic argument constraints remain one honest untyped coordinate until a future runner validates them before dispatch.",
+        "The accepted classifier is not yet integrated into an occupied runner terminal.",
+        "No useful worker candidate or general native-Harness reliability result exists.",
+        "Both occupied attempts are consumed and no new occupied worker is authorised.",
+        "Ordinary practice, product data, production, deployment, release, Pages and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T16:25:00.0826136+10:00",
+      "updated_at": "2026-08-22T16:25:00.0826136+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "8513a0609a30f0d12376f9c1b918f80350f82063",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T15:22:46.1484880+10:00"
+  "updated_at": "2026-08-22T16:25:00.0826136+10:00"
 }
