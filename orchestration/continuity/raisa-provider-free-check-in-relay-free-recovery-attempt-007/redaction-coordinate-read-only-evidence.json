@@ -1,0 +1,19 @@
+{
+  "schema_version": "emr4.check-in-relay-free-recovery-attempt-007.redaction-coordinate-read-only-evidence.v1",
+  "status": "coordinate_reproduced",
+  "recorded_at": "2026-08-23T03:30:46.2756937+10:00",
+  "source_commit": "6657ee5061265d732096e9987f327d82feed800c",
+  "terminal_stage": "redaction",
+  "terminal_code": "forbidden_field",
+  "predicate": "accepted_success_evidence_redaction",
+  "projection": "contract.closed_boundaries",
+  "conflicting_keys": [
+    "live_secret_existing_hosted_or_product_database_used"
+  ],
+  "forbidden_token": "secret",
+  "deterministic_result": "redaction_forbidden_field",
+  "docker_object_commands": 0,
+  "database_executions": 0,
+  "provider_requests": 0,
+  "claim_boundary": "exact_static_key_conflict_only_no_transaction_or_cleanup_acceptance"
+}

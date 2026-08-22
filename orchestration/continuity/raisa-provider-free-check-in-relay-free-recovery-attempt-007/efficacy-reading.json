@@ -1,0 +1,97 @@
+{
+  "schema_version": "ariadne.workflow_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-007",
+  "recorded_at": "2026-08-23T03:30:46.2756937+10:00",
+  "result": "accepted_failed_closed_negative_evidence",
+  "exact_occupied_source": "b7c37a76c41d399c4b198d3ab6b526c5510b434b",
+  "exact_terminal_commit": "6657ee5061265d732096e9987f327d82feed800c",
+  "terminal": {
+    "failure_sha256": "86e5e1342eb54e062e35d73390ebceb141d097d03e180e4fe3c0ed64b465f422",
+    "execution_envelope_sha256": "3338c58054dea96b3845827dacfe184889ee328e5a4463966464b560d0a2c2c5",
+    "stage": "redaction",
+    "code": "forbidden_field",
+    "occupied_execution_count": 1,
+    "automatic_retry_count": 0,
+    "success_released": false,
+    "transaction_attestation_present": false,
+    "success_evidence_present": false,
+    "envelope_cleanup_status": "not_started"
+  },
+  "postterminal_reading": {
+    "matching_owned_docker_resources": 0,
+    "containers": 0,
+    "networks": 0,
+    "transaction_acceptance": "unproved",
+    "role_absence_before_teardown": "unproved",
+    "provider_requests": 0,
+    "ordinary_admission_releases": 0,
+    "product_records": 0
+  },
+  "bounded_inference": {
+    "status": "source_supported_not_transaction_acceptance",
+    "observation": "The terminal is redaction/forbidden_field and the wrapper caught a base-harness exception outside the base failure projection.",
+    "source_coordinate": "closed_boundaries.live_secret_existing_hosted_or_product_database_used",
+    "deterministic_reproduction": "Applying the accepted redaction predicate to the contract closed-boundaries projection yields redaction/forbidden_field on that exact key.",
+    "claim_limit": "The source control flow places successful-result redaction after final cleanup, but absent attestation and success evidence forbid a claim that rollback or unknown-response transaction semantics passed."
+  },
+  "contained_workflow_events": [
+    {
+      "event": "preplanning_receipt_prose_repeated_two_machine_owned_git_ids",
+      "effect": "the receipt rejected before planning and the corrected machine-only snapshot passed with zero manual Git IDs",
+      "expensive_execution": false,
+      "canonical_mutation": false,
+      "prospective_control": "remove Git object entry from free-form source-evidence forms"
+    },
+    {
+      "event": "first_envelope_vocabulary_used_forbidden_argv_substring",
+      "effect": "pure tests rejected both pass and failure envelope projections before commit",
+      "expensive_execution": false,
+      "canonical_mutation": false,
+      "prospective_control": "generate envelope field choices from the redaction vocabulary before authoring"
+    },
+    {
+      "event": "first_plan_tests_used_one_raw_wrapped_assertion_and_one_contradictory_negative_assertion",
+      "effect": "pure tests failed before commit and were corrected to normalized positive predicates",
+      "expensive_execution": false,
+      "canonical_mutation": false,
+      "prospective_control": "use shared normalized document predicates and prohibit simultaneous negative/positive tests for one phrase"
+    },
+    {
+      "event": "first_provider_free_manifest_included_a_test_with_direct_conftest_import",
+      "effect": "the admission runner rejected before pytest collection and the corrected closed selection passed",
+      "expensive_execution": false,
+      "canonical_mutation": false,
+      "prospective_control": "generate provider-free selections from the runner's AST classification"
+    },
+    {
+      "event": "occupied_attempt_reached_an_unadmitted_late_redaction_coordinate",
+      "effect": "one-run authority was consumed with no retry; terminal and zero owned Docker residue were preserved",
+      "expensive_execution": true,
+      "canonical_mutation": false,
+      "prospective_control": "exercise the complete prospective success-evidence object through the redaction predicate before any occupied run"
+    },
+    {
+      "event": "wrapper_failure_projection_did_not_retain_base_cleanup_state",
+      "effect": "the immutable envelope says not_started while an independent read-only inspection proves zero Docker residue; transaction and role acceptance remain unproved",
+      "expensive_execution": false,
+      "canonical_mutation": false,
+      "prospective_control": "add a typed terminal bridge for post-finalization base exceptions before another occupied plan"
+    },
+    {
+      "event": "closeout_relationships_were_first_authored_as_a_general_graph_then_with_a_noncanonical_parent",
+      "effect": "two dry runs rejected before publication and the single immediately projected predecessor passed",
+      "expensive_execution": false,
+      "canonical_mutation": false,
+      "prospective_control": "inject the canonical predecessor from the live projection rather than accept caller-authored relationship structure"
+    }
+  ],
+  "clockwork_assessment": {
+    "one_run_scope_enforced": true,
+    "automatic_retry_prevented": true,
+    "immutable_terminal_preserved": true,
+    "protected_state_unchanged": true,
+    "form_construction_reruns_eliminated": false,
+    "net_direction": "closer_but_not_complete",
+    "conclusion": "Attempt 007 moved past the repaired start coordinate and exposed a later exact evidence-redaction boundary, while the clockwork prevented retry and preserved zero residue. The goal remains unproved; the next useful work is read-only diagnosis, a deterministic prospective-success projection and generated canonical lineage, not attempt 008."
+  }
+}

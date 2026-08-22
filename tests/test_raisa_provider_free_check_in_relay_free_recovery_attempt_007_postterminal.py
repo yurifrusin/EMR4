@@ -100,3 +100,25 @@ def test_terminal_and_inspection_are_sanitized() -> None:
         "appointment_id",
     ):
         assert forbidden not in text
+
+
+def test_exact_closed_boundary_key_reproduces_redaction_failure() -> None:
+    contract = attempt.accepted._load_json(attempt.accepted.CONTRACT_PATH)
+    closed = contract["closed_boundaries"]
+    conflicts = [
+        key
+        for key in closed
+        if any(
+            part == key.lower()
+            or f"{part}_" in key.lower()
+            or key.lower().endswith(f"_{part}")
+            for part in attempt.accepted.FORBIDDEN_EVIDENCE_KEYS
+        )
+    ]
+    assert conflicts == ["live_secret_existing_hosted_or_product_database_used"]
+    with pytest.raises(attempt.accepted.RehearsalFailure) as caught:
+        attempt.accepted._assert_redacted(
+            {"closed_boundaries": closed}, forbidden_values=()
+        )
+    assert caught.value.stage == "redaction"
+    assert caught.value.code == "forbidden_field"

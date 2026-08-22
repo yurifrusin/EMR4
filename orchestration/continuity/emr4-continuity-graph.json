@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 413,
+  "graph_revision": 414,
   "harvests": [],
   "nodes": [
     {
@@ -32798,9 +32798,131 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-007",
+      "title": "Raisa provider-free check-in relay-free recovery attempt 007",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted one and only one occupied attempt-007 database execution after its distinct checkpoint.",
+          "The invocation is consumed with zero retry, no success release and an immutable failed-closed terminal.",
+          "Only a provider-free read-only redaction and cleanup-projection diagnosis follows; attempt 008 is not authorised."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-immutable-attempt-007-failed-closed-terminal",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/rehearsal-failure-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one consumed redaction/forbidden_field terminal with zero retry and no success, ordinary admission, product record or transaction attestation."
+        },
+        {
+          "id": "accept-external-owned-docker-resource-absence-only",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/postterminal-read-only-docker-inspection.json",
+          "status": "accepted",
+          "summary": "Accept zero matching owned containers and networks after close without inferring role, transaction or base cleanup acceptance."
+        },
+        {
+          "id": "accept-static-redaction-key-coordinate",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/redaction-coordinate-read-only-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact closed-boundary key containing the forbidden secret token as a deterministic redaction conflict, not as transaction success evidence."
+        },
+        {
+          "id": "reject-rollback-and-unknown-response-success-claim",
+          "source": "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-007-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Reject rollback, unknown-response recovery, role-absence and cleanup-status acceptance because attestation and success evidence are absent."
+        },
+        {
+          "id": "select-read-only-redaction-and-cleanup-projection-diagnosis",
+          "source": "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-007-failed-closed-closeout.md",
+          "status": "accepted",
+          "summary": "Select a database-nonexecuting diagnosis before any repair or attempt-008 plan."
+        },
+        {
+          "id": "accept-attempt-007-workflow-efficacy-reading",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept closer-but-incomplete direction, exact one-run containment and the remaining generated-form and prospective-success-redaction controls."
+        }
+      ],
+      "claim_scope": [
+        "Attempt 007 executed exactly once and is consumed without retry, resume or fallback.",
+        "The closed result is redaction/forbidden_field with no success, ordinary admission, product record, attestation or success evidence.",
+        "Read-only inspection proves zero matching owned Docker containers or networks after terminalization.",
+        "Static evaluation reproduces the forbidden-field predicate on the exact closed-boundary key containing secret.",
+        "Source control flow supports a late evidence-publication coordinate but does not prove transaction semantics or role absence.",
+        "No provider, product, ordinary-practice, production, Pages or protected-ref effect occurred."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-007-plan.md",
+          "docs/security/raisa-provider-free-check-in-relay-free-recovery-attempt-007-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/rehearsal-failure-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/attempt-007-execution-envelope.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/postterminal-read-only-docker-inspection.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/redaction-coordinate-read-only-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-007-failed-closed-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-007-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-check-in-relay-free-recovery-attempt-007-preplanning-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-check-in-relay-free-recovery-attempt-007-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-check-in-relay-free-recovery-attempt-007-preexecution-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/database-preexecution/clockwork-checkpoint-tick-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_007.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_007_plan.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_007_postterminal.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_007.py",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/attempt-007-execution-envelope.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-631.md",
+          "orchestration/human_inbox/yuri/2026-08-23--check-in-relay-free-recovery-attempt-007.md",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Rollback and unknown-terminal-response transaction recovery remain unproved.",
+        "The absent attestation and success evidence prevent transaction acceptance.",
+        "The wrapper terminal does not retain base cleanup state; internal role absence remains unproved.",
+        "The exact late redaction/control-flow coordinate requires a separate read-only diagnosis.",
+        "Attempt 008, ordinary-practice admission, product data, provider, production and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T03:30:46.2756937+10:00",
+      "updated_at": "2026-08-23T03:30:46.2756937+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "6657ee5061265d732096e9987f327d82feed800c",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T02:48:38.4129265+10:00"
+  "updated_at": "2026-08-23T03:30:46.2756937+10:00"
 }

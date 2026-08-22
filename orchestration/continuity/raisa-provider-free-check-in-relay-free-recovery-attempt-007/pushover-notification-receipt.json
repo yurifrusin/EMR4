@@ -1,0 +1,10 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-007",
+  "sent_at": "2026-08-23T03:30:46.2756937+10:00",
+  "status": "delivered",
+  "provider_status": 1,
+  "request_id": "11680b38-9750-4a01-abbf-7e4f00300b37",
+  "contains_phi": false,
+  "continuation": "read-only redaction and cleanup-projection diagnosis"
+}

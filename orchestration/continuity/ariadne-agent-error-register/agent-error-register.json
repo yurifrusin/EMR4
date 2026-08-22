@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 630,
+  "register_revision": 631,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -39087,6 +39087,264 @@
       },
       "incident_id": "AER-1008",
       "attempt_id": "clock-6503d0f6b3a67ea689ad74a9",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-007",
+      "role": "orchestrator",
+      "resource_id": "attempt-007-preplanning-receipt",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_preflight",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Free-form Git worktree evidence must contain no manually supplied Git object IDs because the receipt builder owns the exact snapshot.",
+      "observed_error": "The first runtime-state prose repeated the task and protected Git objects, and preflight reported two manually supplied IDs.",
+      "detection_method": "The fresh preplanning receipt returned revision_required before planning or dispatch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-check-in-relay-free-recovery-attempt-007-preplanning-attempt-001-rejected-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-check-in-relay-free-recovery-attempt-007-preplanning-receipt.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/efficacy-reading.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.manual_git_object_ids_in_receipt_prose",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove both object IDs from prose, preserve the rejected receipt and regenerate the passed receipt from the machine snapshot.",
+        "prevention_control": "Remove Git object entry from free-form source-evidence forms and render the entire field from machine state.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-check-in-relay-free-recovery-attempt-007-preplanning-receipt.json"
+        ]
+      },
+      "incident_id": "AER-1009",
+      "attempt_id": "clock-08a68822cfbeb30e71369198",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-007",
+      "role": "implementer",
+      "resource_id": "attempt-007-envelope-vocabulary",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "implementation",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every new terminal-envelope key must avoid all substrings forbidden by the accepted evidence redactor.",
+      "observed_error": "The first uncommitted wrapper used start_argv_repair field names, causing pure pass and failure projections to reject forbidden_field.",
+      "detection_method": "Two pure wrapper tests failed before candidate commit or occupied execution.",
+      "evidence_paths": [
+        "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_007.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_007.py",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/efficacy-reading.json"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.envelope_field_crossed_redaction_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Rename the keys to start_option_repair and rerun the complete pure wrapper suite.",
+        "prevention_control": "Generate new envelope field choices against the redaction vocabulary before authoring.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/attempt-007-execution-envelope.schema.json"
+        ]
+      },
+      "incident_id": "AER-1010",
+      "attempt_id": "clock-d83146b5aae021b5a5997854",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-007",
+      "role": "implementer",
+      "resource_id": "attempt-007-plan-test-oracles",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Plan semantics must use normalized positive predicates rather than raw wrapping-sensitive or contradictory assertions.",
+      "observed_error": "The first tests used one raw wrapped substring and one negative assertion contradicted by the required positive phrase.",
+      "detection_method": "The initial pure plan suite failed before candidate commit.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_007_plan.py",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/efficacy-reading.json"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.plan_test_raw_wrap_and_contradictory_predicate",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the normalized plan string and retain only the exact positive claim-boundary predicate.",
+        "prevention_control": "Use shared normalized document predicates and reject simultaneous negative and positive oracles for one phrase.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_007_plan.py"
+        ]
+      },
+      "incident_id": "AER-1011",
+      "attempt_id": "clock-c536a3f179071b2b2639ce20",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-007",
+      "role": "orchestrator",
+      "resource_id": "attempt-007-provider-free-test-manifest",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_test_admission",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A provider-free no-database manifest must exclude every test importing repository conftest.",
+      "observed_error": "The first broad selection included the A5.1 runtime test with a direct tests.conftest import.",
+      "detection_method": "The provider-free runner rejected provider_free_conftest_import_forbidden before pytest collection.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/database-preexecution/checkpoint-intent.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/efficacy-reading.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.provider_free_manifest_selected_conftest_importer",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the ineligible test from the provider-free manifest and run the corrected static boundary suite serially.",
+        "prevention_control": "Generate provider-free selections from the runner's AST classification rather than manual file lists.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/database-preexecution/checkpoint-intent.json"
+        ]
+      },
+      "incident_id": "AER-1012",
+      "attempt_id": "clock-892db852bb1b025de4edcf31",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-007",
+      "role": "implementer",
+      "resource_id": "attempt-007-success-evidence-redaction",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_disposable_postgresql",
+      "stage": "implementation",
+      "category": "repository_defect",
+      "process_severity": "material",
+      "expected_invariant": "The complete prospective success-evidence object must pass redaction before any occupied database execution can be admitted.",
+      "observed_error": "The sole occupied invocation ended at redaction/forbidden_field with no attestation or success evidence; static reproduction identifies a closed-boundary key containing secret.",
+      "detection_method": "The immutable wrapper terminal, missing success artifacts and deterministic redaction reproduction identify the late evidence coordinate.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/rehearsal-failure-evidence.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/redaction-coordinate-read-only-evidence.json",
+        "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-007-failed-closed-closeout.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "repository.success_evidence_closed_boundary_key_rejected_by_redactor",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume the one-run authority without retry, preserve the terminal and select a read-only coordinate diagnosis.",
+        "prevention_control": "Exercise the full prospective success-evidence projection through redaction before another occupied plan.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/rehearsal-failure-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/redaction-coordinate-read-only-evidence.json"
+        ]
+      },
+      "incident_id": "AER-1013",
+      "attempt_id": "clock-cbbcd953d26f099d3d03c224",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-007",
+      "role": "implementer",
+      "resource_id": "attempt-007-terminal-cleanup-projection",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_harness",
+      "stage": "closeout",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "A wrapper catching a post-finalization base exception must preserve a typed truthful cleanup projection without broadening claims.",
+      "observed_error": "The immutable wrapper envelope records cleanup_status not_started even though read-only inspection proves zero owned Docker resources; role and transaction cleanup remain unproved.",
+      "detection_method": "Terminal readback and independent label-filtered Docker inspection exposed the projection gap.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/attempt-007-execution-envelope.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/postterminal-read-only-docker-inspection.json",
+        "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-007-failed-closed-closeout.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "harness.post_finalization_exception_lost_cleanup_projection",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Preserve the immutable not_started projection, add separate external-absence evidence and keep role and transaction acceptance closed.",
+        "prevention_control": "Specify and test a typed post-finalization terminal bridge before another occupied plan.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/postterminal-read-only-docker-inspection.json",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_007_postterminal.py"
+        ]
+      },
+      "incident_id": "AER-1014",
+      "attempt_id": "clock-9d32cc347d39f98eb7c81600",
+      "origin": "harness",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-007",
+      "role": "orchestrator",
+      "resource_id": "attempt-007-closeout-lineage",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A transactional closeout must contain exactly one builds-on edge to the immediately projected predecessor.",
+      "observed_error": "The first intent supplied two parents; the next retained the older attempt node instead of the canonical projected predecessor.",
+      "detection_method": "Two clockwork dry runs rejected node_relationship_invalid and projection_predecessor_mismatch before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/closeout/closeout-intent.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/efficacy-reading.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.closeout_relationship_not_single_canonical_predecessor",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Retain exactly one builds-on edge to the accepted start-option repair and rerun the same dry-run transaction.",
+        "prevention_control": "Inject the canonical predecessor from the live projection rather than accept caller-authored relationship structure.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1015",
+      "attempt_id": "clock-9528fcc2ee172166471b5d6f",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

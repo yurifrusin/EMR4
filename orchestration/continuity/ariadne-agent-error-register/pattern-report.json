@@ -1,45 +1,45 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 630,
+  "register_revision": 631,
   "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "4e9228fcf95a296c06f0f39c886aec80d2f8a795fc82f8da33bfbef196ca4deb",
-  "incident_count": 1008,
+  "canonical_register_sha256": "80239fae4f129852107f80ee6fd0da04cb58bc3c94d0c3e8d2914a882471758f",
+  "incident_count": 1015,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 526,
-      "harness": 71,
+      "agent_behavior": 531,
+      "harness": 72,
       "operator": 254,
-      "repository": 141,
+      "repository": 142,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 99,
       "evidence_misreport": 75,
-      "harness_failure": 71,
+      "harness_failure": 72,
       "operator_error": 254,
-      "output_contract_violation": 299,
+      "output_contract_violation": 304,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
-      "repository_defect": 141,
+      "repository_defect": 142,
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 77,
+      "implementer": 81,
       "integration_reviewer": 3,
-      "orchestrator": 865,
+      "orchestrator": 868,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 645,
-      "material": 133,
-      "moderate": 230
+      "low": 650,
+      "material": 134,
+      "moderate": 231
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 212,
-      "canonical_unchanged": 627,
-      "untrusted_partial_worktree": 169
+      "accepted_candidate_changed": 215,
+      "canonical_unchanged": 629,
+      "untrusted_partial_worktree": 171
     },
     "by_resource_and_role": {
       "accepted-guard-graph-clockwork-publication::orchestrator": 1,
@@ -118,6 +118,13 @@
       "attempt-005-process-absence-query::orchestrator": 1,
       "attempt-005-worker-packet-builder::orchestrator": 1,
       "attempt-006-docker-start-attach::implementer": 1,
+      "attempt-007-closeout-lineage::orchestrator": 1,
+      "attempt-007-envelope-vocabulary::implementer": 1,
+      "attempt-007-plan-test-oracles::implementer": 1,
+      "attempt-007-preplanning-receipt::orchestrator": 1,
+      "attempt-007-provider-free-test-manifest::orchestrator": 1,
+      "attempt-007-success-evidence-redaction::implementer": 1,
+      "attempt-007-terminal-cleanup-projection::implementer": 1,
       "authored-synthetic-native-worker-controller-broker-handshake::orchestrator": 1,
       "authored-synthetic-native-worker-exact-root-cleanup::orchestrator": 1,
       "boot-runner-cli-import::orchestrator": 1,
