@@ -1,0 +1,96 @@
+{
+  "schema_version": "ariadne.native_harness_content_free_counter_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis",
+  "evidence_label": "provider_free_content_free_finite_grammar_counter_diagnosis",
+  "git_binding_policy": {
+    "mode": "machine_resolved_only",
+    "caller_authored_object_id_count": 0
+  },
+  "accepted_inputs": {
+    "plan": {
+      "path": "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis-plan.md",
+      "bytes": 6294,
+      "sha256": "086866c1e3064c73468d6443e438867fa4e9c29e04bff1931853e09310748f0b"
+    },
+    "threat_model": {
+      "path": "docs/security/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis-threat-model-delta.md",
+      "bytes": 2374,
+      "sha256": "c0369d78bf601a1b5056b2d2f48cb81626b19a4eb2f5809abe4af0ee8e8f753f"
+    },
+    "process_envelope": {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-process-envelope.json",
+      "bytes": 522,
+      "sha256": "e1696656a7088010808be12f82713f67ee22495a81a861f4d7e7d8ee4fc78c48"
+    },
+    "failure_terminal": {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-failure-terminal.json",
+      "bytes": 352,
+      "sha256": "3b07178ca74d0c357a7123792a5c21afc7a7a6e3a4c370467ca14b2061739fa5"
+    },
+    "consumed_identity": {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-attempt-consumed.json",
+      "bytes": 338,
+      "sha256": "bc3d13c9d72a1a612ab213d2755250f051d8beae91fd4faeebfeee5dfc446e7d"
+    },
+    "predecessor_contract": {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/contract.json",
+      "bytes": 4065,
+      "sha256": "12bda8d7ed75311098dc20661ad61dc291efb957354c9386733250dbc44c510c"
+    }
+  },
+  "source_derivation": {
+    "fixture_result_key_count": 25,
+    "runner_preset_root_reads": 4,
+    "runner_hook_installations": 3,
+    "model_selection_hook_installations": 2,
+    "maximum_hook_installations": 5,
+    "maximum_preset_root_reads": 4
+  },
+  "grammar": {
+    "candidate_count": 496,
+    "target_stdout_bytes": 756,
+    "target_stdout_sha256": "6e75c083f6b42d5c828d53c7f16a11ae09897023bf0a8139abde615c674225ff",
+    "expected_byte_and_hash_match_count": 1,
+    "uniqueness_scope": "frozen_source_derived_finite_grammar_only"
+  },
+  "expected_unique_observation": {
+    "schema_version": "ariadne.native_harness_accepted_guard_graph_fixture.v1",
+    "result": "accepted_guard_graph_passed_old_factory_coordinate",
+    "structured_coordinate": "EFFECTIVE_TOOL_COMPOSITION_PASSED",
+    "old_input_invalid_observed": false,
+    "factory_create_agent_invocations": 1,
+    "setup_invocations": 1,
+    "setup_resolved": true,
+    "preset_root_reads": 4,
+    "preset_mount_reads": 1,
+    "preset_mount_calls": 1,
+    "tool_view_calls": 1,
+    "tool_restrict_calls": 1,
+    "tool_schema_calls": 1,
+    "hook_installations": 5,
+    "scope_disposals": 1,
+    "runner_app_exit_code": 1,
+    "runner_status": "failed",
+    "runner_failure_stage": "factory",
+    "runner_request_count": 0,
+    "runner_tool_result_count": 0,
+    "runner_turn_kind": null,
+    "runner_conclusion_marked": false,
+    "live_agent_count": 0,
+    "raw_error_retained": false,
+    "cordis_disposed": true
+  },
+  "process_limits": {
+    "diagnosis_subprocess_count": 0,
+    "node_process_count": 0,
+    "native_harness_process_count": 0,
+    "broker_process_count": 0,
+    "worker_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "network_attempt_count": 0,
+    "database_attempt_count": 0,
+    "docker_attempt_count": 0,
+    "product_target_attempt_count": 0
+  }
+}

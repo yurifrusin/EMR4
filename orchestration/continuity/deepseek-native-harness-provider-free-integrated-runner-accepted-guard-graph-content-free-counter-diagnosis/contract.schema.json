@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "evidence_label", "git_binding_policy", "accepted_inputs", "source_derivation", "grammar", "expected_unique_observation", "process_limits"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_content_free_counter_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis"},
+    "evidence_label": {"const": "provider_free_content_free_finite_grammar_counter_diagnosis"},
+    "git_binding_policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["mode", "caller_authored_object_id_count"],
+      "properties": {"mode": {"const": "machine_resolved_only"}, "caller_authored_object_id_count": {"const": 0}}
+    },
+    "accepted_inputs": {
+      "type": "object", "additionalProperties": false,
+      "required": ["plan", "threat_model", "process_envelope", "failure_terminal", "consumed_identity", "predecessor_contract"],
+      "properties": {
+        "plan": {"$ref": "#/$defs/fileBinding"},
+        "threat_model": {"$ref": "#/$defs/fileBinding"},
+        "process_envelope": {"$ref": "#/$defs/fileBinding"},
+        "failure_terminal": {"$ref": "#/$defs/fileBinding"},
+        "consumed_identity": {"$ref": "#/$defs/fileBinding"},
+        "predecessor_contract": {"$ref": "#/$defs/fileBinding"}
+      }
+    },
+    "source_derivation": {"$ref": "#/$defs/sourceDerivation"},
+    "grammar": {"$ref": "#/$defs/grammar"},
+    "expected_unique_observation": {"$ref": "#/$defs/observation"},
+    "process_limits": {"$ref": "#/$defs/processBoundary"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "fileBinding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "bytes", "sha256"],
+      "properties": {"path": {"type": "string", "minLength": 1}, "bytes": {"type": "integer", "minimum": 1}, "sha256": {"$ref": "#/$defs/sha256"}}
+    },
+    "sourceDerivation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["fixture_result_key_count", "runner_preset_root_reads", "runner_hook_installations", "model_selection_hook_installations", "maximum_hook_installations", "maximum_preset_root_reads"],
+      "properties": {
+        "fixture_result_key_count": {"const": 25}, "runner_preset_root_reads": {"const": 4},
+        "runner_hook_installations": {"const": 3}, "model_selection_hook_installations": {"const": 2},
+        "maximum_hook_installations": {"const": 5}, "maximum_preset_root_reads": {"const": 4}
+      }
+    },
+    "grammar": {
+      "type": "object", "additionalProperties": false,
+      "required": ["candidate_count", "target_stdout_bytes", "target_stdout_sha256", "expected_byte_and_hash_match_count", "uniqueness_scope"],
+      "properties": {
+        "candidate_count": {"const": 496}, "target_stdout_bytes": {"const": 756},
+        "target_stdout_sha256": {"const": "6e75c083f6b42d5c828d53c7f16a11ae09897023bf0a8139abde615c674225ff"},
+        "expected_byte_and_hash_match_count": {"const": 1},
+        "uniqueness_scope": {"const": "frozen_source_derived_finite_grammar_only"}
+      }
+    },
+    "observation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "result", "structured_coordinate", "old_input_invalid_observed", "factory_create_agent_invocations", "setup_invocations", "setup_resolved", "preset_root_reads", "preset_mount_reads", "preset_mount_calls", "tool_view_calls", "tool_restrict_calls", "tool_schema_calls", "hook_installations", "scope_disposals", "runner_app_exit_code", "runner_status", "runner_failure_stage", "runner_request_count", "runner_tool_result_count", "runner_turn_kind", "runner_conclusion_marked", "live_agent_count", "raw_error_retained", "cordis_disposed"],
+      "properties": {
+        "schema_version": {"const": "ariadne.native_harness_accepted_guard_graph_fixture.v1"},
+        "result": {"const": "accepted_guard_graph_passed_old_factory_coordinate"},
+        "structured_coordinate": {"const": "EFFECTIVE_TOOL_COMPOSITION_PASSED"},
+        "old_input_invalid_observed": {"const": false}, "factory_create_agent_invocations": {"const": 1},
+        "setup_invocations": {"const": 1}, "setup_resolved": {"const": true}, "preset_root_reads": {"const": 4},
+        "preset_mount_reads": {"const": 1}, "preset_mount_calls": {"const": 1}, "tool_view_calls": {"const": 1},
+        "tool_restrict_calls": {"const": 1}, "tool_schema_calls": {"const": 1}, "hook_installations": {"const": 5},
+        "scope_disposals": {"const": 1}, "runner_app_exit_code": {"const": 1}, "runner_status": {"const": "failed"},
+        "runner_failure_stage": {"const": "factory"}, "runner_request_count": {"const": 0},
+        "runner_tool_result_count": {"const": 0}, "runner_turn_kind": {"type": "null"},
+        "runner_conclusion_marked": {"const": false}, "live_agent_count": {"const": 0},
+        "raw_error_retained": {"const": false}, "cordis_disposed": {"const": true}
+      }
+    },
+    "processBoundary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["diagnosis_subprocess_count", "node_process_count", "native_harness_process_count", "broker_process_count", "worker_process_count", "model_request_count", "provider_request_count", "network_attempt_count", "database_attempt_count", "docker_attempt_count", "product_target_attempt_count"],
+      "properties": {
+        "diagnosis_subprocess_count": {"const": 0}, "node_process_count": {"const": 0},
+        "native_harness_process_count": {"const": 0}, "broker_process_count": {"const": 0},
+        "worker_process_count": {"const": 0}, "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0}, "network_attempt_count": {"const": 0},
+        "database_attempt_count": {"const": 0}, "docker_attempt_count": {"const": 0},
+        "product_target_attempt_count": {"const": 0}
+      }
+    }
+  }
+}
