@@ -1,0 +1,130 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free edit argument/result coordinate diagnostic recovery",
+    "completed_stage": "Accepted raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_provider_free_real_edit_tool_argument_and_result_coordinate_diagnostic_plan",
+    "operation_id": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery",
+    "resume_after_compaction": true,
+    "source_head": "0e4f76ec55d73d180cbc88e74bde1783691c2f95",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "0e4f76ec55d73d180cbc88e74bde1783691c2f95",
+    "reason_codes": [],
+    "resolved_commit": "0e4f76ec55d73d180cbc88e74bde1783691c2f95",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "0e4f76ec55d73d180cbc88e74bde1783691c2f95"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "0e4f76ec55d73d180cbc88e74bde1783691c2f95",
+    "branch_origin_aligned": true,
+    "head": "0e4f76ec55d73d180cbc88e74bde1783691c2f95",
+    "origin_branch_commit": "0e4f76ec55d73d180cbc88e74bde1783691c2f95",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 667
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "provider-free edit argument result diagnostic preplanning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The operation exists specifically to diagnose the real edit tool without another occupied guess; any DeepSeek or provider request would violate its authority and erase the experimental separation.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Deterministic exact-package fixtures own the first decision. Reassess one fresh Gemini 3.7 Flash/high veto only if a material future-runner semantic ambiguity survives complete deterministic evidence.",
+        "work_packages": [
+          "serial_independent_veto_only_if_deterministic_runner_semantics_remain_materially_ambiguous"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits native-subagent delegation, and exact package binding, fixture execution, coordinate classification and cleanup form one short serial custody chain.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "plan freeze",
+      "deterministic evidence release",
+      "pre-verifier gate",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "freeze the closed coordinate model and source-bound real edit-tool fixture before implementation",
+      "execute only authored-synthetic valid and invalid variants in one provider-free local process",
+      "prove exact cleanup before evidence interpretation",
+      "reassess Gemini only after all deterministic mutations and package-bound results pass"
+    ]
+  },
+  "planned_action": "freeze_the_narrowest_provider_free_real_edit_tool_argument_and_result_coordinate_diagnostic_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-plan.md",
+      "docs/security/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-terminal.json",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/diagnosis.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/efficacy-reading.json",
+      "docs/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-sol-acceptance.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/closeout/clockwork-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns plan freeze, source-bound implementation, deterministic evidence, acceptance and clockwork closeout. DeepSeek is declined because no worker, model or provider call is authorised. Gemini is reserved only for a later fresh veto if deterministic evidence leaves material runner semantics ambiguous. Native subagents are declined because current developer policy prohibits delegation.",
+    "git_refs_and_worktree": "The receipt builder supplies all Git identities from a fresh machine snapshot. The task branch and origin are aligned at the exact accepted source while only clockwork-owned closeout surfaces and their focused post-publication test adjustments are tracked changes. All four protected refs remain exact; docs/branding and unrelated untracked files remain preserved; explicit-path staging only.",
+    "live_handover_current_baton": "AGENTS.md now records Continuity 394 / Compass 376, the accepted typed failed-closed occupied result at exact full source 0e4f76ec55d73d180cbc88e74bde1783691c2f95, and the provider-free edit argument/result coordinate diagnostic as next implementation.",
+    "protected_evidence_boundaries": "The diagnostic is provider-free, authored-synthetic and process-bounded. Both occupied attempts remain immutable and consumed. No worker, model, provider, retry, candidate adoption, product/API/schema/database/configuration change, ordinary-practice enablement, product or protected data, production, deployment, Pages, protected evidence or protected-ref movement is authorised."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

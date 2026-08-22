@@ -4054,6 +4054,7 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
             "orchestrator.agent_error_register_regression_assertion_literal_not_canonical",
             "operator.ripgrep_compound_regex_not_syntax_validated",
             "orchestrator.yielded_verification_session_id_not_exposed",
+            "orchestrator.parallelism_expected_leverage_vocabulary_mismatch",
         }
         and max(
             int(incident_id.removeprefix("AER-"))
@@ -4132,29 +4133,6 @@ def test_aer_0184_records_input_column_ambiguity_and_collision_proof_lowering() 
                 "Every content-search command in this and later protected-evidence-adjacent work must supply an explicit exact-file allowlist assembled from already known non-protected baton/API paths. Searching a directory root such as tests, docs or the repository root is prohibited even when the textual pattern appears narrow.",
                 "Every environment-discovery step must carry an exact path or executable-name allowlist before execution. Unknown facts become explicit fail-closed plan preconditions rather than triggers for broad search.",
                 "No content-search, recursive or glob command may target a directory root in protected-evidence-adjacent work; every read must name one predeclared non-protected literal file.",
-            ],
-        },
-        {
-            "recurrence_signature": (
-                "orchestrator.parallelism_expected_leverage_vocabulary_mismatch"
-            ),
-            "incident_count": 5,
-            "incident_ids": [
-                "AER-0314",
-                "AER-0321",
-                "AER-0330",
-                "AER-0385",
-                "AER-0398",
-            ],
-            "origins": ["agent_behavior"],
-            "categories": ["command_scope_violation"],
-            "roles": ["orchestrator"],
-            "resource_ids": ["codex-primary-orchestrator"],
-            "prevention_controls": [
-                "Construct every parallelism assessment from the configured enum vocabulary and the last passing exact analogue; express timing, qualifications and net leverage only in rationale text.",
-                "Copy every expected_leverage value from orchestration/harness_settings/orchestrator_requirements.yaml; express qualifications only in rationale text and require exact passed readback before planning or dispatch.",
-                "Copy operation_id directly from the validated live latch and select every expected_leverage value from the configured enum before receipt generation; express timing or qualifications only in rationale text and require exact passed readback before dispatch.",
-                "Use only the configured expected_leverage vocabulary in Ariadne runtime states; express qualified or net assessments in rationale text, never by inventing a new enum value.",
             ],
         },
         {

@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "0e4f76ec55d73d180cbc88e74bde1783691c2f95",
+  "source_commit": "0e4f76ec55d73d180cbc88e74bde1783691c2f95",
+  "generation_id": "gen-5527aa100fdf39a9398d1d24e614a716692e4f952607ce643f9ecf6469c32591",
+  "bundle_sha256": "5527aa100fdf39a9398d1d24e614a716692e4f952607ce643f9ecf6469c32591",
+  "previous_generation_id": "gen-ab7d008d8026a0a4b56f0ddacc08b4ea72836fbd677cd41809a6978d120d248c",
+  "previous_source_commit": "0e4f76ec55d73d180cbc88e74bde1783691c2f95",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 161,
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+  "event_kind": "clean_closeout",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

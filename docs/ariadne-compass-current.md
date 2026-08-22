@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will next freeze and execute at most one new typed native-Harness useful-worker attempt; the consumed attempt remains closed.
+> EMR4 will next type only the provider-free real edit-tool argument/result boundary; no occupied DeepSeek request is admitted.
 
 ## North star
 
@@ -556,25 +556,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The control chain contained and attributed one provider-reaching failure, but produced no useful repository candidate. Lineage parent: `deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal`.
 270. **Replace ambiguous native-Harness worker failures with exact orchestrator-readable result coordinates — DeepSeek native Harness provider-free tool-result/conclusion coordinate diagnostic recovery**
    The exact rc.7 lifecycle now yields one of five typed readings without a provider request, removing the prior tool-result/conclusion ambiguity. Lineage parent: `raisa-native-harness-bounded-occupied-useful-worker-rehearsal`.
+271. **Connect the governance clockwork to one useful DeepSeek native-Harness turn with typed failure coordinates — Raisa native Harness bounded occupied useful-worker coordinate-recovery failed-closed closeout**
+   One bounded turn produced no candidate, but the accepted runner localized the failure from an unresolved conclusion seam to an authoritative edit-error coordinate. Lineage parent: `deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery`.
 
 ## Current position
 
-**Use the accepted typed runner in one separately named bounded useful-worker attempt before returning to the check-in route-adapter product tranche — DeepSeek native Harness provider-free tool-result/conclusion coordinate diagnostic recovery**
+**Type the native Harness edit argument/result boundary provider-free before considering any further occupied use — Raisa native Harness bounded occupied useful-worker coordinate-recovery failed-closed closeout**
 
-**Why this proof came next:** The late conclusion-marker defect is reproduced and corrected over the exact rc.7 runtime, so another occupied attempt can be both bounded and diagnostically decisive.
+**Why this proof came next:** The conclusion timing defect is retired and the consumed terminal identifies the authoritative edit result as error, but safe retained evidence cannot distinguish argument rejection from edit-runtime failure.
 
-The tool-result/conclusion ambiguity is retired; useful occupied worker efficacy remains to be proved.
+The negative occupied attempt is honestly closed with materially better traceability; useful-worker efficacy remains unproved.
 
 ### What this unlocks
 
-- One new one-request native-Harness useful-worker attempt with exact typed terminal coordinates.
-- Automatic separation of valid edit, tool error, post-policy block and late-marker failure.
-- An evidence-based decision about using the DeepSeek lane for subsequent Raisa product work.
+- Closed non-sensitive coordinates for valid and invalid real edit-tool argument/result variants.
+- Provider-free proof that a future runner can retain the decisive edit failure class without raw model material.
+- An evidence-based decision whether any later native-Harness worker attempt is justified.
 
 ### What it does not solve
 
-- No guarantee that DeepSeek will produce the canonical runbook candidate.
-- No automatic retry, resume, fallback or candidate adoption.
+- No useful worker success, runbook adoption or broad DeepSeek quality conclusion.
+- No occupied request, retry, resume, fallback or provider authority.
 - No product, ordinary-practice, production or protected-ref authority.
 
 ## Continuity and authority
@@ -1430,6 +1432,7 @@ Prerequisites:
 - `docs/raisa-microsoft-federation-admission-runtime-plan.md`
 - `docs/raisa-microsoft-federation-postgresql-persistence-closeout.md`
 - `docs/raisa-microsoft-federation-postgresql-persistence-plan.md`
+- `docs/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-closeout.md`
 - `docs/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-closeout.md`
 - `docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-closeout.md`
 - `docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md`
@@ -2083,7 +2086,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2293,6 +2295,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-packet.md`
@@ -2774,7 +2777,6 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-native-boot-observability-rehearsal/provider-free-structured-diagnostic-native-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/provider-free-node-fixture-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/deterministic-evidence.json`
-- `orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/future-runner.mjs`
 - `orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-evidence.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-cost-ledger.json`
@@ -2859,6 +2861,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-maintained-oidc-verifier-session-bridge-architecture/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-microsoft-federation-admission-runtime/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json`
+- `orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/diagnosis.md`
+- `orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/efficacy-reading.json`
+- `orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-terminal.json`
 - `orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-terminal.json`
 - `orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json`
 - `orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.schema.json`
@@ -3449,6 +3454,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-row-service-path-recovery.md`
 - `orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-pre-hmr-startup-recovery.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-tool-result-conclusion-coordinate-diagnostic.md`
+- `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-coordinate-recovery.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-failed-closed.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
@@ -3757,4 +3763,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 375; continuity graph revision 393._
+_Compass map revision 376; continuity graph revision 394._

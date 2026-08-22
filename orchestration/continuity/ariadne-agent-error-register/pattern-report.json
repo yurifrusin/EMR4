@@ -1,25 +1,25 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 616,
+  "register_revision": 617,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "5b64fd458f712cf6f14cf980b2ffe1d31cc962ad778b3f130550479942531502",
-  "incident_count": 956,
+  "canonical_register_sha256": "927f3f0d100d1564bbc17aefec09220af3539a81bc26cca0f3f1dbf18357a363",
+  "incident_count": 960,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 505,
+      "agent_behavior": 508,
       "harness": 68,
-      "operator": 229,
+      "operator": 230,
       "repository": 138,
       "transport": 16
     },
     "by_category": {
-      "command_scope_violation": 95,
+      "command_scope_violation": 97,
       "evidence_misreport": 73,
       "harness_failure": 68,
-      "operator_error": 229,
-      "output_contract_violation": 284,
+      "operator_error": 230,
+      "output_contract_violation": 285,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
       "repository_defect": 138,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 65,
       "integration_reviewer": 3,
-      "orchestrator": 825,
+      "orchestrator": 829,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 599,
+      "low": 602,
       "material": 133,
-      "moderate": 224
+      "moderate": 225
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 204,
-      "canonical_unchanged": 583,
+      "canonical_unchanged": 587,
       "untrusted_partial_worktree": 169
     },
     "by_resource_and_role": {
@@ -169,7 +169,7 @@
       "codex-primary-orchestrator-commentary::orchestrator": 2,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 348,
+      "codex-primary-orchestrator::orchestrator": 350,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "complete-runner-fixture-wire-validator::orchestrator": 1,
@@ -422,6 +422,8 @@
       "transactional-closeout-shadow-fixture::orchestrator": 1,
       "transactional-contract-evidence-field::orchestrator": 1,
       "transactional-contract-evidence-projection::orchestrator": 1,
+      "typed-useful-worker-clockwork-checkpoint::orchestrator": 1,
+      "typed-useful-worker-preexecution-contract::orchestrator": 1,
       "useful-worker-checkpoint-controller::orchestrator": 1,
       "useful-worker-checkpoint-loader::orchestrator": 1,
       "useful-worker-cleanup-controller::orchestrator": 1,
@@ -579,13 +581,14 @@
     },
     {
       "recurrence_signature": "orchestrator.parallelism_expected_leverage_vocabulary_mismatch",
-      "incident_count": 5,
+      "incident_count": 6,
       "incident_ids": [
         "AER-0314",
         "AER-0321",
         "AER-0330",
         "AER-0385",
-        "AER-0398"
+        "AER-0398",
+        "AER-0959"
       ],
       "origins": [
         "agent_behavior"
@@ -601,6 +604,7 @@
       ],
       "prevention_controls": [
         "Construct every parallelism assessment from the configured enum vocabulary and the last passing exact analogue; express timing, qualifications and net leverage only in rationale text.",
+        "Construct future parallelism assessments from the configured enum or a typed selector; never author expected_leverage as free prose.",
         "Copy every expected_leverage value from orchestration/harness_settings/orchestrator_requirements.yaml; express qualifications only in rationale text and require exact passed readback before planning or dispatch.",
         "Copy operation_id directly from the validated live latch and select every expected_leverage value from the configured enum before receipt generation; express timing or qualifications only in rationale text and require exact passed readback before dispatch.",
         "Use only the configured expected_leverage vocabulary in Ariadne runtime states; express qualified or net assessments in rationale text, never by inventing a new enum value."

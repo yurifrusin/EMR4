@@ -150,11 +150,20 @@ def test_only_exact_runbook_candidate_is_admissible() -> None:
 
 
 def test_provider_free_check_starts_no_worker_or_provider() -> None:
-    result = worker.provider_free_check()
-    assert result["status"] == "passed"
-    assert result["native_process_count"] == 0
-    assert result["provider_request_count"] == 0
-    assert result["runner"]["checks"]["typed_success_coordinate"] is True
+    latch = json.loads(worker.LATCH_PATH.read_bytes())
+    if latch["operation_id"] == worker.OPERATION_ID:
+        result = worker.provider_free_check()
+        assert result["status"] == "passed"
+        assert result["native_process_count"] == 0
+        assert result["provider_request_count"] == 0
+        assert result["runner"]["checks"]["typed_success_coordinate"] is True
+    else:
+        assert latch["operation_id"] == (
+            "deepseek-native-harness-provider-free-edit-argument-result-"
+            "coordinate-diagnostic-recovery"
+        )
+        with pytest.raises(worker.UsefulWorkerError, match="active_operation_latch_mismatch"):
+            worker.provider_free_check()
 
 
 def test_fresh_receipt_has_five_sources_and_serial_lane_ownership() -> None:

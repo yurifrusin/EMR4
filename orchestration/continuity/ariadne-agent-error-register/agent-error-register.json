@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 616,
+  "register_revision": 617,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -37160,6 +37160,157 @@
       },
       "incident_id": "AER-0956",
       "attempt_id": "clock-cb6c186706943fb87daee076",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "typed-useful-worker-preexecution-contract",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_validation_runner",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The deterministic contract must be generated only after every bound schema and source file has reached its final byte representation.",
+      "observed_error": "The first published control candidate normalized copied schema bytes after contract generation, leaving the candidate-schema digest stale.",
+      "detection_method": "The shell-free validation runner rejected exact contract equality and the provider-free controller check before preparation, lease consumption, native Harness startup or provider access.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/preexecution-candidate-rejection.json",
+        "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-deterministic-validation-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.contract_generated_before_bound_bytes_finalized",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Regenerate the contract from final normalized bytes and require exact-equality plus provider-free checks before attempt preparation.",
+        "prevention_control": "The deterministic preexecution manifest now blocks preparation whenever any bound byte changes after contract generation.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/contract.json",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py"
+        ]
+      },
+      "incident_id": "AER-0957",
+      "attempt_id": "clock-c09caec0623c485ceeeac95b",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "typed-useful-worker-clockwork-checkpoint",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Only the governance clockwork may write its ten canonical surfaces, including the live Baton and agent-error register.",
+      "observed_error": "The orchestrator directly edited AGENTS and agent-error-register surfaces while recording the prior incident, producing canonical drift before checkpoint publication.",
+      "detection_method": "The checkpoint dry-run rejected canonical_drift; after restoration, it required a clean source commit before the transactional checkpoint could pass.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/checkpoint-clockwork-attempt-001-rejected-receipt.json",
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-001/preexecution-preparation-rejected.json",
+        "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-deterministic-validation-attempt-002-clockwork-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_owned_surface_written_outside_transaction",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore all clockwork-owned surfaces to the last accepted generation, close and clean the first preparation identity, and let only a transactional tick update canonical state.",
+        "prevention_control": "Every checkpoint and closeout dry-run validates live canonical bytes against the selected generation and fails before worker or provider activity on any direct-write drift.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/clockwork-checkpoint-tick-evidence.json",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "incident_id": "AER-0958",
+      "attempt_id": "clock-6458807d0b912ae83530c115",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every parallelism assessment must select expected_leverage only from the configured closed vocabulary and express qualifications in rationale text.",
+      "observed_error": "The first post-compaction runtime state invented leverage values mixed and none for the DeepSeek and Gemini lanes.",
+      "detection_method": "The local orchestrator preflight returned revision_required with parallelism_lane_leverage_invalid for both lanes before commit or clockwork publication; replacing only those values with positive and neutral produced a fresh passing five-source receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-postcompaction-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-postcompaction-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-postcompaction-corrected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.parallelism_expected_leverage_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace only the invalid leverage values with configured positive and neutral while retaining all qualifications in rationale text, then require a fresh passing readback before closeout commit.",
+        "prevention_control": "Construct future parallelism assessments from the configured enum or a typed selector; never author expected_leverage as free prose.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-postcompaction-corrected-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-617.md"
+        ]
+      },
+      "incident_id": "AER-0959",
+      "attempt_id": "clock-0422bbde3460de7e6ea20005",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every incident observation must select its stage from the governance clockwork's configured closed vocabulary before the closeout candidate is committed.",
+      "observed_error": "The first closeout intent labelled the leverage-vocabulary incident stage verification instead of deterministic_verification.",
+      "detection_method": "The first clockwork --check invocation rejected tick_incident_stage before generation preparation or canonical mutation; the rejection receipt records the exact configured vocabulary and zero effects.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_incident_stage_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace only the invalid stage with configured deterministic_verification and validate the full tick intent before committing the replacement closeout candidate.",
+        "prevention_control": "Run validate_tick_intent or the clockwork intent-validation gate before every closeout candidate commit; incident stages are selected from the validator's closed enum, not written as descriptive prose.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-617.md"
+        ]
+      },
+      "incident_id": "AER-0960",
+      "attempt_id": "clock-1d0004545fffb9d7cb4ba873",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"
