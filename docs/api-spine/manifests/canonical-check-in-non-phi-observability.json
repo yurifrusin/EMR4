@@ -1,0 +1,227 @@
+{
+  "claim": "non_phi_observability_contract_present_default_off",
+  "default_posture": {
+    "alert_transport_enabled": false,
+    "automatic_control_action_enabled": false,
+    "instrumentation_enabled": false,
+    "ordinary_practice_enabled": false
+  },
+  "effects": {
+    "alert_transport_changed": false,
+    "automatic_control_action_changed": false,
+    "feature_flag_changed": false,
+    "instrumentation_runtime_changed": false,
+    "ordinary_practice_enabled": false,
+    "product_or_patient_data_used": false,
+    "product_source_changed": false,
+    "protected_ref_changed": false
+  },
+  "observability": {
+    "alerts": [
+      {
+        "alert_id": "check_in_kill_switch_engaged",
+        "automatic_control_action": false,
+        "contains_identifier": false,
+        "severity": "critical",
+        "trigger": "kill_switch_metric_equals_one"
+      },
+      {
+        "alert_id": "check_in_admission_snapshot_invalid_or_stale",
+        "automatic_control_action": false,
+        "contains_identifier": false,
+        "severity": "critical",
+        "trigger": "invalid_snapshot_or_age_over_bound"
+      },
+      {
+        "alert_id": "check_in_unknown_commit",
+        "automatic_control_action": false,
+        "contains_identifier": false,
+        "severity": "critical",
+        "trigger": "unknown_commit_counter_increase"
+      },
+      {
+        "alert_id": "check_in_active_record_rejected",
+        "automatic_control_action": false,
+        "contains_identifier": false,
+        "severity": "critical",
+        "trigger": "active_record_binding_or_evidence_rejected"
+      },
+      {
+        "alert_id": "check_in_control_audit_failure",
+        "automatic_control_action": false,
+        "contains_identifier": false,
+        "severity": "critical",
+        "trigger": "control_command_cannot_append_audit"
+      },
+      {
+        "alert_id": "check_in_rollback_failure",
+        "automatic_control_action": false,
+        "contains_identifier": false,
+        "severity": "critical",
+        "trigger": "withdraw_command_failed_or_uncertain"
+      }
+    ],
+    "audit_record_used_as_metric": false,
+    "automatic_retry_or_control_action": false,
+    "forbidden_labels_and_values": [
+      "practice_id",
+      "appointment_id",
+      "patient_id",
+      "practitioner_id",
+      "user_id",
+      "actor_id",
+      "correlation_id",
+      "idempotency_key",
+      "command_id",
+      "record_id",
+      "evidence_digest",
+      "token",
+      "free_text",
+      "request_body",
+      "response_body"
+    ],
+    "metric_families": [
+      {
+        "kind": "counter",
+        "label_domains": [
+          {
+            "label": "environment",
+            "values": [
+              "development",
+              "test",
+              "staging",
+              "production"
+            ]
+          },
+          {
+            "label": "lane",
+            "values": [
+              "none",
+              "authored_synthetic",
+              "ordinary_practice",
+              "ambiguous"
+            ]
+          },
+          {
+            "label": "outcome",
+            "values": [
+              "admitted",
+              "denied"
+            ]
+          },
+          {
+            "label": "reason_code",
+            "values": [
+              "feature_disabled",
+              "kill_switch_engaged",
+              "snapshot_missing",
+              "snapshot_invalid",
+              "snapshot_stale",
+              "snapshot_ambiguous",
+              "no_matching_lane",
+              "lane_ambiguous",
+              "ordinary_record_missing",
+              "ordinary_state_not_active",
+              "ordinary_binding_mismatch",
+              "ordinary_evidence_missing",
+              "ordinary_evidence_invalid",
+              "admitted_synthetic",
+              "admitted_ordinary"
+            ]
+          }
+        ],
+        "name": "emr4_check_in_admission_decisions_total"
+      },
+      {
+        "kind": "gauge",
+        "label_domains": [
+          {
+            "label": "environment",
+            "values": [
+              "development",
+              "test",
+              "staging",
+              "production"
+            ]
+          }
+        ],
+        "name": "emr4_check_in_admission_snapshot_age_seconds"
+      },
+      {
+        "kind": "gauge",
+        "label_domains": [
+          {
+            "label": "environment",
+            "values": [
+              "development",
+              "test",
+              "staging",
+              "production"
+            ]
+          }
+        ],
+        "name": "emr4_check_in_admission_kill_switch"
+      },
+      {
+        "kind": "counter",
+        "label_domains": [
+          {
+            "label": "environment",
+            "values": [
+              "development",
+              "test",
+              "staging",
+              "production"
+            ]
+          }
+        ],
+        "name": "emr4_check_in_unknown_commit_total"
+      },
+      {
+        "kind": "counter",
+        "label_domains": [
+          {
+            "label": "environment",
+            "values": [
+              "development",
+              "test",
+              "staging",
+              "production"
+            ]
+          },
+          {
+            "label": "operation",
+            "values": [
+              "prepare",
+              "activate",
+              "suspend",
+              "withdraw",
+              "engage_kill_switch"
+            ]
+          },
+          {
+            "label": "outcome",
+            "values": [
+              "accepted",
+              "replayed",
+              "denied",
+              "conflict",
+              "uncertain",
+              "failed"
+            ]
+          }
+        ],
+        "name": "emr4_check_in_control_commands_total"
+      }
+    ],
+    "raw_request_or_response_allowed": false,
+    "telemetry_feedback_to_admission": false
+  },
+  "schema_version": "emr4.api_spine.canonical_check_in_non_phi_observability.v1",
+  "source": {
+    "architecture_contract": "orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.json",
+    "architecture_source_git_object": "752b521c59f5b44bf46de0cf776a33ac74b8134d",
+    "projection": "exact_observability_subobject"
+  },
+  "status": "prepared_not_authorized"
+}

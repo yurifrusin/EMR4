@@ -1,0 +1,210 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_exact_default_off_canonical_check_in_non_phi_observability_manifest_convergence_plan",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after the runbook closeout. Its Current result accepts that exact artifact and its Next implementation names this non-PHI observability manifest convergence operation.",
+    "current_authority_allocation": "GPT Sol owns exact sub-contract projection, deterministic API-Spine admission, acceptance and Git. DeepSeek, Gemini and native subagents are declined because the accepted object and target are exact, small and serial.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-plan.md",
+      "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-canonical-check-in-rollout-runbook-convergence-sol-acceptance.md",
+      "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-plan.md",
+      "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture.md",
+      "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-closeout.md",
+      "orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-admission-control-architecture-sol-acceptance.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/api-spine/openapi/appointment-commands.yaml",
+      "tests/test_api_spine_artifacts.py",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Only the exact accepted observability sub-contract, a default-off declarative API-Spine wrapper, focused deterministic tests and bounded plan/closeout evidence may change. No instrumentation, telemetry/alert transport, automatic action, app/configuration/route/OpenAPI/GraphQL/client/feature/allowlist, data, provider, database, runtime, deployment, Pages or protected ref is open. Preserve docs/branding and every unrelated untracked file; use explicit-path staging only.",
+    "git_refs_and_worktree": "Machine readings verify exact full task HEAD, task/origin alignment, all four protected refs at the required object, required ancestry, clean tracked state, 669 preserved unrelated untracked files, target absence and successor graph non-membership."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal",
+    "active_tranche": "Provider-free default-off canonical check-in non-PHI observability manifest convergence",
+    "objective": "Materialize the exact accepted five low-cardinality metric families and six non-actuating critical alerts as one default-off declarative API-Spine manifest with focused deterministic validation, without instrumentation, alert transport, automatic control action, product source, data, provider, database or runtime change.",
+    "status": "in_progress",
+    "source_head": "149e377344fab671927682e428af7825e9a0e143",
+    "authority_source": "Yuri's standing uninterrupted-development authority, the accepted check-in admission-control architecture and the accepted runbook-manifest convergence select the narrow graph-new observability artifact.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_exact_non_phi_observability_manifest_convergence_plan",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_only",
+      "only_exact_accepted_five_metric_six_alert_api_spine_manifest_and_focused_validation_may_change",
+      "manifest_is_declarative_and_never_alert_transport_command_or_control_authority",
+      "no_product_source_configuration_route_openapi_graphql_or_client_change",
+      "no_native_deepseek_harness_worker_or_claude_fallback",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_metric_or_alert_identifier_free_text_secret_or_product_data",
+      "no_action_grammar_or_first_party_client_change",
+      "no_generic_status_arrived_change_or_waiting_area_movement",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_provider_database_docker_or_production_runtime",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "no_deployment_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal",
+    "assessed_stage": "fresh_rehydration_preplanning",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The native Harness remains paused, Claude Code is historical only, and briefing a worker exceeds exact projection of one accepted sub-contract.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "Exact equality to the accepted observability object and deterministic API-Spine tests decide this atomic artifact without a model-judgment fork.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and the source-object/wrapper/graph boundary is serial.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "freeze the exact wrapper and sub-contract projection",
+      "materialize one manifest",
+      "run deterministic API-Spine admission",
+      "Sol alone accepts and publishes"
+    ],
+    "reassessment_triggers": [
+      "after plan freeze",
+      "after focused validation",
+      "if source-object equality or API-Spine evidence conflicts",
+      "pre_closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete 489-line handover read, active runbook and architecture acceptance read, full 578-line source contract read, passing latch decision and exact Git readings",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "GPT Sol owns plan freeze and exact sub-contract projection."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "deepcode_cli_observation",
+      "reachability": "unreachable",
+      "evidence": [
+        "Native Harness worker allocation remains closed by the accepted terminal."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Historical only and not selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected because exact accepted-object equality decides the artifact."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No native subagent spawned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
