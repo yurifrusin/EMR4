@@ -1,0 +1,127 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free package-unloaded guard-bridge import-closure recovery rehearsal",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_exact_import_closure_recovery_contract",
+    "operation_id": "deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "e1b0e0e6943066be5d0c675b17ccda8fb7badb50",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "c8d74146fd3b15da7f64a7d8511782b78479def2",
+    "reason_codes": [],
+    "resolved_commit": "e1b0e0e6943066be5d0c675b17ccda8fb7badb50",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "e1b0e0e6943066be5d0c675b17ccda8fb7badb50"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "c8d74146fd3b15da7f64a7d8511782b78479def2",
+    "branch_origin_aligned": true,
+    "head": "c8d74146fd3b15da7f64a7d8511782b78479def2",
+    "origin_branch_commit": "c8d74146fd3b15da7f64a7d8511782b78479def2",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 665
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "guard-bridge import-closure pre-verifier acceptance",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native Harness and DeepSeek worker were excluded governed objects; self-review would not independently verify this prerequisite.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exact module identities, three derived relative edges, two bare imports, three typed cases, content-free envelope and cleanup all passed deterministic gates with no semantic ambiguity.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits delegation and acceptance is a serial conductor responsibility.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "closeout",
+      "complete-runner preplanning"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "preserve the one consumed recovery process and exact content-free evidence",
+      "accept only static closure and the exact package-unloaded three-case graph",
+      "record the narrowed predecessor causal claim and two pre-process test defects",
+      "advance directly to the complete package-unloaded runner"
+    ]
+  },
+  "planned_action": "accept_the_exact_one_process_import_closure_recovery_pass_and_advance_directly_to_the_complete_package_unloaded_runner_without_external_model_review_because_the_closed_graph_result_is_deterministic_and_unambiguous",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/attempt-001-process-envelope.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/import-closure-recovery-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/import-closure-recovery-report.md",
+      "docs/ariadne-agent-error-correction-register-revision-613.md",
+      "docs/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-guard-bridge-import-closure-recovery-sol-acceptance.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns acceptance. DeepSeek is declined because its Harness and worker were excluded governed objects; Gemini is declined because the exact typed deterministic pass leaves no veto ambiguity; native subagents are declined under current developer policy.",
+    "git_refs_and_worktree": "Machine snapshot must show the exact task branch aligned with origin, a clean tracked candidate, docs/branding preserved and local/origin master plus handoff/current unchanged at the protected commit.",
+    "live_handover_current_baton": "AGENTS.md names the import-closure recovery as active after Continuity 389 / Compass 371 and requires direct progression to the complete runner if the exact recovery passes.",
+    "protected_evidence_boundaries": "Accept only the exact static closure and package-unloaded three-case graph. The predecessor cannot be retried; no second recovery process exists. The complete runner, installed package, native Harness, worker, model/provider, product/data, production, deployment, release, Pages, protected evidence and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
