@@ -1,0 +1,10 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "operation_id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+  "sent_at": "2026-08-23T06:32:35.2825543+10:00",
+  "status": "delivered",
+  "provider_status": 1,
+  "request_id": "351cacc0-ece2-4f0f-afae-cef82651027f",
+  "contains_phi": false,
+  "continuation": "attempt-008 plan and deterministic admission"
+}

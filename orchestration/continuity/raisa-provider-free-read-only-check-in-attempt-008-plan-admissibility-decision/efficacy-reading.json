@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+  "source_head": "e5d87834d95aa3c25306b9db88a985a81db9dddb",
+  "result": "effective_with_four_contained_workflow_lapses",
+  "before": {
+    "known_deterministic_occupied_failure_causes_without_accepted_controls": 4,
+    "attempt_008_plan_admissibility_rows_accounted_for": 0
+  },
+  "after": {
+    "known_deterministic_occupied_failure_causes_without_accepted_controls": 0,
+    "attempt_008_plan_admissibility_rows_accounted_for": 14,
+    "satisfied_rows": 5,
+    "future_plan_obligations": 6,
+    "preexecution_obligations": 3,
+    "blocking_rows": 0,
+    "attempt_008_ready_to_execute": false,
+    "database_provider_worker_network_product_or_protected_actions": 0,
+    "manual_git_object_draft_corrections": 1,
+    "non_fail_fast_staged_check_corrections": 1,
+    "historical_generator_packet_exclusions": 1,
+    "closed_node_kind_vocabulary_rejections": 1,
+    "focused_test_specification_correction_iterations": 2
+  },
+  "recurrent_gears_used": [
+    "machine_git_ancestry_validation",
+    "provider_free_closed_database_runner_admission",
+    "typed_prepublication_postpublication_partition",
+    "clockwork_owned_incident_and_closeout_projection"
+  ],
+  "bounded_conclusion": "All frozen readiness rows are typed and accounted for, so a separate attempt-008 plan may be frozen without implying execution readiness. Four workflow lapses were contained before product, database, provider or canonical effect and are registered through the clockwork; current-lineage replacement verification passed."
+}

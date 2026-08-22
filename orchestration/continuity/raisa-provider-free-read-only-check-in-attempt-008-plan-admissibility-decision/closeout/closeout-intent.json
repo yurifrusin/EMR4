@@ -1,0 +1,356 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+    "title": "Raisa provider-free read-only check-in attempt-008 plan-admissibility decision closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T06:26:26.9894169+10:00",
+    "node": {
+      "id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+      "title": "Raisa provider-free read-only check-in attempt-008 plan-admissibility decision",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing authority admitted only a provider-free read-only decision over accepted unprotected evidence.",
+          "The positive verdict authorises a separate plan freeze, not an attempt-008 checkpoint or execution.",
+          "DeepSeek, Gemini and native subagents remained declined under the frozen serial assessment."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-fourteen-row-prerequisite-population",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/contract.json",
+          "status": "accepted",
+          "summary": "Accept P01-P14 with five satisfied, six future-plan, three preexecution and zero blocking rows."
+        },
+        {
+          "id": "accept-plan-freeze-admissibility-only",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/decision-evidence.json",
+          "status": "accepted",
+          "summary": "Accept admissible_for_separate_plan_freeze while retaining ready_to_execute false and absent attempt-008 targets."
+        },
+        {
+          "id": "accept-current-lineage-verification-and-historical-boundary",
+          "source": "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md",
+          "status": "accepted",
+          "summary": "Accept current repair/envelope/decision generators and consume immutable diagnostic bytes without rerunning their pre-repair generator tests."
+        },
+        {
+          "id": "accept-measured-efficacy-with-contained-workflow-lapses",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept the zero-blocker decision while retaining four qualifying workflow lapses and two focused test-specification correction iterations."
+        }
+      ],
+      "claim_scope": [
+        "All fourteen inherited prerequisite rows are present with exact finite states.",
+        "Five accepted-evidence prerequisites are satisfied and zero rows block a separate plan freeze.",
+        "Six plan and three preexecution obligations remain non-satisfied.",
+        "No attempt-008 plan, namespace, checkpoint, execution or result exists.",
+        "No database, provider, worker, network, product or protected activity is accepted."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-plan.md",
+          "docs/security/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/decision-evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/decision-report.md",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-attempt-008-plan-admissibility-decision-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py",
+          "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision_plan.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+          "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py",
+          "docs/ariadne-agent-error-correction-register-revision-634.md",
+          "orchestration/human_inbox/yuri/2026-08-23--check-in-attempt-008-plan-admissibility-decision.md"
+        ]
+      },
+      "unresolved_gates": [
+        "P06-P11 require a separately frozen attempt-008 plan.",
+        "P12-P14 require one committed clean candidate, deterministic admission, read-only Docker inspection, a fresh receipt and a distinct checkpoint.",
+        "No rollback, unknown-response exactly-once, isolation or cleanup behavior is proved for attempt 008.",
+        "Dedicated check-in remains default-off without ordinary-practice admission.",
+        "No provider, product-data, production, deployment, release, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Take a typed readiness reading before spending another occupied database attempt",
+      "outcome": "A separate attempt-008 plan is admissible, while nine hard plan/preexecution conditions and execution denial remain explicit.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/decision-evidence.json",
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/efficacy-reading.json",
+        "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Freeze and deterministically admit one collision-free attempt-008 lifecycle before any occupied action",
+      "why_now": "All known deterministic failure causes have accepted controls and the read-only decision reports zero plan-freeze blockers.",
+      "outcome": "The next plan will bind a fresh identity, current repaired source, immutable lineage, exact one-run semantics and every preexecution condition before a checkpoint can open one execution.",
+      "unlocks": [
+        "A new wrapper/schema can be constructed without database activity.",
+        "Typed provider-free verification can decide the complete deterministic candidate.",
+        "Only a later exact checkpoint can admit one occupied invocation."
+      ],
+      "does_not_solve": [
+        "The positive decision itself proves no attempt-008 database behavior.",
+        "No ordinary-practice or product command is admitted.",
+        "No provider, production or protected authority opens."
+      ],
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/decision-evidence.json",
+        "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md",
+        "orchestration/human_inbox/yuri/2026-08-23--check-in-attempt-008-plan-admissibility-decision.md"
+      ],
+      "orientation_statement": "EMR4 will freeze and prove every deterministic attempt-008 condition before one checkpoint can admit one disposable database invocation."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-008",
+      "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 008",
+      "objective": "Freeze a fresh collision-free attempt-008 plan, construct and deterministically admit its exact wrapper and terminal schema, then only after a committed clean candidate, read-only Docker inspection, fresh five-source receipt and distinct clockwork checkpoint execute exactly one provider-free disposable PostgreSQL invocation with zero retry, resume or fallback.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted zero-blocker attempt-008 plan-admissibility decision.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_attempt_008_plan_with_p06_through_p14_as_hard_conditions"
+    },
+    "incidents": [
+      {"incident_id": "decision-manual-git-object", "source_id": "decision-local-001", "peers": []},
+      {"incident_id": "decision-non-fail-fast-staged-check", "source_id": "decision-local-002", "peers": []},
+      {"incident_id": "decision-historical-generator-test-selection", "source_id": "decision-local-003", "peers": []},
+      {"incident_id": "decision-unindexed-node-kind", "source_id": "decision-local-004", "peers": []}
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v2",
+    "database_authority": "closed",
+    "commands": [
+      {
+        "command_id": "attempt-008-admissibility-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/closeout/closeout-intent.json"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "attempt-008-admissibility-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_plan.py",
+          "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair.py",
+          "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair_plan.py",
+          "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py",
+          "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision_plan.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "attempt-008-admissibility-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py", "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py", "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision_plan.py"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "attempt-008-admissibility-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py", "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py", "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision_plan.py"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "attempt-008-admissibility-closeout-decision-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision", "--check"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "attempt-008-admissibility-closeout-postpublication-readback",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_current_baton_consistency.py", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_transactional_closeout.py", "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py", "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision_plan.py"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "postpublication"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-plan.md",
+      "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/decision-evidence.json",
+      "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-634.md",
+      "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-attempt-008-plan-admissibility-decision-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-23--check-in-attempt-008-plan-admissibility-decision.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_check_in_relay_free_recovery_attempt_008_only",
+    "p06_through_p14_remain_hard_fail_closed_conditions",
+    "provider_free_deterministic_construction_and_admission_before_checkpoint",
+    "no_docker_object_postgresql_sql_or_database_action_before_published_preexecution_checkpoint",
+    "read_only_docker_version_image_and_owned_resource_inspection_only_before_checkpoint",
+    "after_checkpoint_exactly_one_local_provider_free_disposable_postgresql_16_invocation",
+    "zero_retry_resume_or_fallback_after_first_database_process_start",
+    "no_native_deepseek_harness_worker_gemini_or_provider_call",
+    "no_application_product_api_openapi_graphql_route_client_or_configuration_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "decision-manual-git-object-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+      "role": "orchestrator",
+      "resource_id": "attempt-008-admissibility-contract",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_authoring",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every Git binding in an authored decision contract is consumed from machine resolution and is a full ancestor of the candidate.",
+      "observed_error": "The first unvalidated contract draft manually completed the displayed planning-commit prefix instead of reading the full object.",
+      "detection_method": "The orchestrator noticed the manual expansion before validation, staging or evidence construction and compared it with git rev-parse HEAD.",
+      "evidence_paths": ["orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/contract.json", "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.manual_git_object_expansion_for_artifact_binding",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the draft value with the exact machine-resolved HEAD before validation and evidence generation.",
+        "prevention_control": "The assessor rejects abbreviated, nonexistent or non-ancestor plan and evidence sources; future artifact generation consumes git rev-parse output directly.",
+        "evidence_paths": ["scripts/raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py", "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision_plan.py"]
+      },
+      "baton_summary": "records one prevalidation manual Git-object expansion and machine-resolved correction."
+    },
+    {
+      "attempt_key": "decision-non-fail-fast-staged-check-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+      "role": "orchestrator",
+      "resource_id": "task-branch-staged-check",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_git",
+      "stage": "integration",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A failed staged diff-hygiene check stops before task-branch commit.",
+      "observed_error": "A semicolon-separated PowerShell command continued to commit after git diff --cached --check reported one trailing blank line.",
+      "detection_method": "The command output displayed the whitespace warning immediately before the successful task-branch commit.",
+      "evidence_paths": ["tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py", "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.powershell_non_fail_fast_staged_check_chain",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove the trailing blank line in a follow-up task-branch commit and rerun staged diff hygiene.",
+        "prevention_control": "Subsequent multi-step staged gates check LASTEXITCODE explicitly and exit before commit on any nonzero result.",
+        "evidence_paths": ["tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py", "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"]
+      },
+      "baton_summary": "records one non-fail-fast staged hygiene chain and guarded follow-up correction."
+    },
+    {
+      "attempt_key": "decision-historical-generator-test-selection-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+      "role": "orchestrator",
+      "resource_id": "provider-free-test-selection",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Current compatibility packets execute current-lineage generators and consume immutable pre-repair diagnostic output only as hash-bound evidence.",
+      "observed_error": "The first broader packet selected attempt-007 diagnostic regeneration tests that correctly reject the repaired base source they were never intended to regenerate against.",
+      "detection_method": "Six failures reported the accepted source-binding drift and absence of the retired forbidden-field/control-flow coordinates.",
+      "evidence_paths": ["orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-evidence.json", "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.immutable_historical_generator_selected_as_current_compatibility",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Exclude the immutable diagnosis generators and pass the replacement current-lineage packet while the assessor validates the accepted diagnosis bytes.",
+        "prevention_control": "The closeout records immutable diagnosis outputs as evidence inputs and names only repair-era or later generators in current compatibility commands.",
+        "evidence_paths": ["orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/decision-evidence.json", "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"]
+      },
+      "baton_summary": "records one historical generator selected as current verification and its explicit immutable-evidence replacement."
+    },
+    {
+      "attempt_key": "decision-unindexed-node-kind-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+      "role": "orchestrator",
+      "resource_id": "clockwork-continuity-node-kind",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A clockwork closeout selects its Continuity graph node kind from the closed accepted vocabulary.",
+      "observed_error": "The first closeout intent used the descriptive node kind decision, which is outside the accepted graph vocabulary.",
+      "detection_method": "Clockwork dry-run rejected prospective projection construction with node_kind_invalid before publication.",
+      "evidence_paths": ["orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/closeout/closeout-intent.json", "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.unindexed_continuity_graph_node_kind",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the descriptive value with existing closed-vocabulary kind foundation and rerun the dry-run.",
+        "prevention_control": "Future closeout construction reads the graph's admitted node-kind vocabulary before intent validation; clockwork remains the fail-closed final guard.",
+        "evidence_paths": ["orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/closeout/closeout-intent.json", "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"]
+      },
+      "baton_summary": "records one fail-closed rejection of a descriptive graph node kind and its closed-vocabulary correction."
+    }
+  ]
+}
