@@ -1,0 +1,146 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_exact_unmounted_default_off_check_in_observer_adapter_plan_with_explicit_kernel_manifest_asymmetry",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after the observability-manifest publication. The Current result accepts that exact manifest and the Next implementation names this unmounted globally disabled observer-adapter rehearsal.",
+    "current_authority_allocation": "GPT Sol owns the cross-contract reconciliation, frozen plan, pure adapter, deterministic admission, acceptance and Git. All external and native worker lanes are declined for this provider-free serial tranche.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-threat-model-delta.md",
+      "docs/api-spine/manifests/canonical-check-in-non-phi-observability.json",
+      "docs/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-canonical-check-in-non-phi-observability-manifest-convergence-sol-acceptance.md",
+      "docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-threat-model-delta.md",
+      "orchestration_harness/check_in_admission_control.py",
+      "docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Only a pure unmounted globally disabled harness adapter, exact plan/threat/tests/receipts and bounded closeout evidence may change. It may consume only closed kernel/manifest values and emit immutable intents in pure tests; runtime output remains empty. No app, configuration, route, API, client, transport, exporter, automatic action, practice enablement, data, provider, database, production, Pages or protected-ref surface is open. Preserve all unrelated untracked files and stage explicit paths only.",
+    "git_refs_and_worktree": "Machine readings verify the full current task HEAD and origin alignment, all protected refs at the required object, required ancestry, clean tracked state, 669 preserved unrelated untracked files including five docs/branding entries, and absence of the target module, test and graph node."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal",
+    "active_tranche": "Provider-free unmounted default-off canonical check-in non-PHI observer adapter rehearsal",
+    "objective": "Add one pure globally disabled adapter that accepts only the closed check-in admission-kernel values and maps them to typed metric and critical-alert intents bounded by the exact accepted observability manifest, proving zero output while disabled and adding no transport, exporter, automatic action, product data, application mounting or runtime configuration.",
+    "status": "in_progress",
+    "source_head": "7acd4e9c39ce534042178f9b8b7e049161ce8b03",
+    "authority_source": "Yuri's standing uninterrupted-development authority plus the accepted admission kernel and exact observability manifest select the smallest graph-new executable bridge.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_exact_unmounted_default_off_observer_adapter_plan",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_unmounted_default_off_canonical_check_in_non_phi_observer_adapter_only",
+      "only_closed_admission_kernel_values_and_exact_manifest_vocabulary_may_enter",
+      "disabled_path_produces_zero_metric_or_alert_intents",
+      "no_transport_exporter_alert_delivery_or_automatic_action",
+      "no_application_mounting_configuration_route_openapi_graphql_or_client_change",
+      "no_native_deepseek_harness_worker_or_claude_fallback",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_identifier_free_text_secret_request_response_or_product_data",
+      "no_action_grammar_or_first_party_client_change",
+      "no_generic_status_arrived_change_or_waiting_area_movement",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_provider_database_docker_or_production_runtime",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal",
+    "assessed_stage": "fresh_rehydration_preplanning",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The native Harness is paused, Claude Code is historical only, and no permitted DeepSeek transport exists for this provider-free bounded module.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "The tranche is provider-free and exact closed-set comparison, import closure and hostile deterministic tests decide the unmounted disabled adapter.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and the kernel/manifest asymmetry, adapter and tests are one tightly coupled serial package.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "freeze the exact shared and asymmetric vocabularies",
+      "implement one pure globally disabled adapter",
+      "prove zero disabled output and exact future-shaped intent mapping",
+      "Sol alone accepts and publishes"
+    ],
+    "reassessment_triggers": [
+      "after plan freeze",
+      "after focused deterministic validation",
+      "if any kernel-only value is coerced into a production reason",
+      "pre_closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "Complete 489-line handover read, predecessor manifest acceptance, kernel plan/closeout/acceptance and source read, passing latch decision, exact vocabulary comparison and Git readings.",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["GPT Sol owns reconciliation and implementation."]},
+    {"adapter_id": "deepseek_native_harness", "method": "deepcode_cli_observation", "reachability": "unreachable", "evidence": ["Native Harness worker allocation remains closed."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Historical only and not selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected; provider-free deterministic admission owns review."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent spawned."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
