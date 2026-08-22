@@ -1,0 +1,204 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_read_only_created_state_failure_coordinate_diagnosis_plan",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely. The Current Baton accepts attempt 006 as failed-closed negative evidence and selects read-only server start/attach failure-coordinate diagnosis as the next implementation.",
+    "current_authority_allocation": "GPT Sol owns plan meaning, local read-only evidence collection, deterministic diagnosis, acceptance and Git. No model worker, verifier or subagent is active.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-plan.md",
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-failed-closed-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-006-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/rehearsal-failure-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/attempt-006-execution-envelope.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/efficacy-reading.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Read exact source and immutable attempt-006 terminal, local Docker help or version output, and deterministic process fakes only. Create no Docker object, start no PostgreSQL process, execute no SQL, and do not authorise attempt 007, a provider, product change, ordinary-practice admission, protected data, production, Pages or protected-ref movement.",
+    "git_refs_and_worktree": "Machine readings verify task HEAD and task origin alignment, all four protected refs at the required protected object, required ancestry, a clean tracked tree and 671 preserved unrelated untracked files including five docs/branding entries."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+    "active_tranche": "Raisa provider-free read-only check-in server start/attach created-state failure-coordinate diagnosis",
+    "objective": "Freeze a provider-free read-only diagnosis that binds the immutable attempt-006 terminal, inspects exact Docker start/attach command construction and read-only CLI grammar evidence, derives a closed sanitised host-process/OCI failure coordinate, and identifies the narrowest repair without creating a Docker object, starting PostgreSQL or authorising attempt 007.",
+    "status": "in_progress",
+    "source_head": "a9567be36c82bc6d2eebc2488b48cd8bfb9f8d23",
+    "authority_source": "Yuri's standing uninterrupted-development authority and the accepted failed-closed attempt-006 terminal, exact cleanup and efficacy reading.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006 at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_read_only_created_state_failure_coordinate_diagnosis_plan",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_read_only_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_only",
+      "no_docker_object_creation_postgresql_start_sql_or_database_execution",
+      "read_exact_source_terminal_and_read_only_local_cli_help_or_version_evidence_only",
+      "closed_sanitized_host_process_and_oci_coordinate_with_deterministic_fakes_only",
+      "attempts_001_through_006_immutable_no_retry_resume_overwrite_or_reclassification",
+      "no_attempt_007_without_separate_repair_acceptance_plan_and_one_run_checkpoint",
+      "no_deepseek_gemini_or_other_live_provider_call",
+      "no_product_source_configuration_api_openapi_graphql_schema_migration_client_or_waiting_area_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+    "assessed_stage": "fresh_rehydration_preplanning",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Native Harness worker allocation is closed, provider authority is absent, and this small source-plus-terminal forensic diagnosis has no bounded model work package.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "There is no material repair candidate to veto; exact local source, terminal and CLI-help evidence must establish the failure coordinate first.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and the narrow read-only diagnosis is serial.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "freeze the exact read-only diagnosis plan",
+      "bind immutable attempt-006 terminal evidence",
+      "inspect exact command construction and local CLI help or version only",
+      "derive one closed sanitised coordinate using deterministic fakes",
+      "identify but do not implement the narrowest repair"
+    ],
+    "reassessment_triggers": [
+      "after exact plan freeze",
+      "after deterministic diagnosis",
+      "before any future repair candidate",
+      "pre_closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "Complete AGENTS.md read, exact attempt-006 plan, closeout, acceptance, terminal pair, efficacy reading and current latch read, followed by fresh remote fetch and exact Git readings.",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "Sol holds diagnosis, acceptance and Git custody."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "deepcode_cli_observation",
+      "reachability": "unreachable",
+      "evidence": [
+        "Worker allocation remains closed."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Historical only; no fallback."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No verifier dispatch before a material repair candidate exists."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No subagent spawned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

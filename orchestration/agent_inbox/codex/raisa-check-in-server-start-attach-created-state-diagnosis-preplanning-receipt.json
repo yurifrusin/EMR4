@@ -1,0 +1,127 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free read-only check-in server start/attach created-state failure-coordinate diagnosis",
+    "completed_stage": "Accepted raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006 at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_read_only_created_state_failure_coordinate_diagnosis_plan",
+    "operation_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+    "resume_after_compaction": true,
+    "source_head": "a9567be36c82bc6d2eebc2488b48cd8bfb9f8d23",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "53760513c42a380904136eb4ef2f5ffda397e820",
+    "reason_codes": [],
+    "resolved_commit": "a9567be36c82bc6d2eebc2488b48cd8bfb9f8d23",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "a9567be36c82bc6d2eebc2488b48cd8bfb9f8d23"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "53760513c42a380904136eb4ef2f5ffda397e820",
+    "branch_origin_aligned": true,
+    "head": "53760513c42a380904136eb4ef2f5ffda397e820",
+    "origin_branch_commit": "53760513c42a380904136eb4ef2f5ffda397e820",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 672
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "fresh_rehydration_preplanning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Native Harness worker allocation is closed, provider authority is absent, and this small source-plus-terminal forensic diagnosis has no bounded model work package.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "There is no material repair candidate to veto; exact local source, terminal and CLI-help evidence must establish the failure coordinate first.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the narrow read-only diagnosis is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "after exact plan freeze",
+      "after deterministic diagnosis",
+      "before any future repair candidate",
+      "pre_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "freeze the exact read-only diagnosis plan",
+      "bind immutable attempt-006 terminal evidence",
+      "inspect exact command construction and local CLI help or version only",
+      "derive one closed sanitised coordinate using deterministic fakes",
+      "identify but do not implement the narrowest repair"
+    ]
+  },
+  "planned_action": "freeze_the_read_only_created_state_failure_coordinate_diagnosis_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-plan.md",
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-failed-closed-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-006-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/rehearsal-failure-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/attempt-006-execution-envelope.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/efficacy-reading.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns plan meaning, local read-only evidence collection, deterministic diagnosis, acceptance and Git. No model worker, verifier or subagent is active.",
+    "git_refs_and_worktree": "Machine readings verify task HEAD and task origin alignment, all four protected refs at the required protected object, required ancestry, a clean tracked tree and 671 preserved unrelated untracked files including five docs/branding entries.",
+    "live_handover_current_baton": "AGENTS.md was read completely. The Current Baton accepts attempt 006 as failed-closed negative evidence and selects read-only server start/attach failure-coordinate diagnosis as the next implementation.",
+    "protected_evidence_boundaries": "Read exact source and immutable attempt-006 terminal, local Docker help or version output, and deterministic process fakes only. Create no Docker object, start no PostgreSQL process, execute no SQL, and do not authorise attempt 007, a provider, product change, ordinary-practice admission, protected data, production, Pages or protected-ref movement."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
