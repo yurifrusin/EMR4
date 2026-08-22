@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "timestamp", "result", "process_envelope_sha256", "path_diagnosis", "boundary", "successor"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_integrated_runner_factory_fixture_failure_diagnosis.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery"},
+    "timestamp": {"type": "string", "minLength": 20},
+    "result": {"const": "fixture_import_scope_path_mismatch"},
+    "process_envelope_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "path_diagnosis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selected_parent_index", "selected_scope", "required_scope", "selected_cordis_target_absent", "selected_agent_target_absent", "corrected_cordis_target_present", "corrected_agent_target_present", "prelaunch_import_existence_guard_missing"],
+      "properties": {
+        "selected_parent_index": {"const": 1},
+        "selected_scope": {"const": "node_modules"},
+        "required_scope": {"const": "node_modules/@deepseek-ai"},
+        "selected_cordis_target_absent": {"const": true},
+        "selected_agent_target_absent": {"const": true},
+        "corrected_cordis_target_present": {"const": true},
+        "corrected_agent_target_present": {"const": true},
+        "prelaunch_import_existence_guard_missing": {"const": true}
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_process_count", "stdout_bytes", "stderr_bytes_positive", "factory_boundary_reached", "raw_stream_retained", "disposable_root_absent", "retry_count", "native_harness_process_count", "model_request_count", "provider_request_count"],
+      "properties": {
+        "node_process_count": {"const": 1},
+        "stdout_bytes": {"const": 0},
+        "stderr_bytes_positive": {"const": true},
+        "factory_boundary_reached": {"const": false},
+        "raw_stream_retained": {"const": false},
+        "disposable_root_absent": {"const": true},
+        "retry_count": {"const": 0},
+        "native_harness_process_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0}
+      }
+    },
+    "successor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operation_id", "correction", "second_process_in_current_operation_authorized"],
+      "properties": {
+        "operation_id": {"const": "deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery"},
+        "correction": {"const": "use_package_root_parent_and_require_both_import_targets_before_launch"},
+        "second_process_in_current_operation_authorized": {"const": false}
+      }
+    }
+  }
+}

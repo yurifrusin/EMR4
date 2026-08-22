@@ -22,7 +22,11 @@ def test_contract_and_schemas_are_closed_and_bound() -> None:
         "runner_argument_count": 4,
         "guard_parameter_count": 3,
     }
-    for path in (subject.CONTRACT_SCHEMA_PATH, subject.EVIDENCE_SCHEMA_PATH):
+    for path in (
+        subject.CONTRACT_SCHEMA_PATH,
+        subject.EVIDENCE_SCHEMA_PATH,
+        subject.FAILURE_DIAGNOSIS_SCHEMA_PATH,
+    ):
         schema = json.loads(path.read_bytes())
         jsonschema.Draft202012Validator.check_schema(schema)
         assert schema["additionalProperties"] is False
@@ -63,6 +67,23 @@ def test_fixture_uses_installed_registry_and_exact_runner_without_agent_loop() -
     assert source.count("applyRunner(ctx") == 1
 
 
+def test_consumed_fixture_path_builder_selected_the_unscoped_parent() -> None:
+    source_package_root = (
+        subject.package_projection.MATERIALIZATION_SOURCE_ROOT
+        / "node_modules"
+        / "@deepseek-ai"
+        / "dsh"
+    )
+    selected = source_package_root.parents[1]
+    corrected = source_package_root.parent
+    assert selected.name == "node_modules"
+    assert corrected.name == "@deepseek-ai"
+    assert not (selected / "cordis" / "lib" / "index.js").exists()
+    assert not (selected / "dsh-agent" / "lib" / "index.js").exists()
+    assert (corrected / "cordis" / "lib" / "index.js").is_file()
+    assert (corrected / "dsh-agent" / "lib" / "index.js").is_file()
+
+
 def _fixture_value() -> dict:
     return {
         "schema_version": subject.FIXTURE_SCHEMA,
@@ -101,7 +122,9 @@ def test_fixture_result_accepts_only_the_exact_closed_vector() -> None:
             subject.validate_fixture_result(hostile)
 
 
-def test_provider_free_check_starts_no_process() -> None:
+def test_provider_free_check_starts_no_process(tmp_path, monkeypatch) -> None:
+    for name in ("EVIDENCE_PATH", "CONSUMED_PATH", "PROCESS_ENVELOPE_PATH", "FAILURE_PATH"):
+        monkeypatch.setattr(subject, name, tmp_path / name.lower())
     result = subject.provider_free_check()
     assert result["result"] == "provider_free_preflight_pass"
     assert result["node_process_count"] == 0

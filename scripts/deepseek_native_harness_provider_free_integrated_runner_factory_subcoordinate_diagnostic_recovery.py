@@ -47,6 +47,9 @@ REPORT_PATH = OPERATION_ROOT / "diagnostic-report.md"
 CONSUMED_PATH = OPERATION_ROOT / "fixture-attempt-consumed.json"
 PROCESS_ENVELOPE_PATH = OPERATION_ROOT / "fixture-process-envelope.json"
 FAILURE_PATH = OPERATION_ROOT / "fixture-failure-terminal.json"
+FAILURE_DIAGNOSIS_PATH = OPERATION_ROOT / "fixture-failure-diagnosis.json"
+FAILURE_DIAGNOSIS_SCHEMA_PATH = OPERATION_ROOT / "failure-diagnosis.schema.json"
+FAILURE_DIAGNOSIS_REPORT_PATH = OPERATION_ROOT / "fixture-failure-diagnosis-report.md"
 DISPOSABLE_PARENT = Path("C:/Users/sarashera/EMR4-worktrees")
 DISPOSABLE_ROOT = DISPOSABLE_PARENT / "deepseek-native-factory-subcoordinate-fixture-001"
 FIXTURE_SCHEMA = "ariadne.native_harness_integrated_runner_factory_fixture.v1"
@@ -352,6 +355,115 @@ def provider_free_check() -> dict[str, Any]:
     }
 
 
+def diagnose_failure() -> dict[str, Any]:
+    load_contract()
+    source_diagnosis(load_contract())
+    if EVIDENCE_PATH.exists() or FAILURE_DIAGNOSIS_PATH.exists():
+        raise FactoryDiagnosticError("failure_diagnosis_output_conflict")
+    for path in (CONSUMED_PATH, PROCESS_ENVELOPE_PATH, FAILURE_PATH):
+        if not path.is_file():
+            raise FactoryDiagnosticError("consumed_failure_evidence_missing")
+    if DISPOSABLE_ROOT.exists():
+        raise FactoryDiagnosticError("disposable_root_not_absent")
+    envelope = json.loads(PROCESS_ENVELOPE_PATH.read_bytes())
+    failure = json.loads(FAILURE_PATH.read_bytes())
+    if (
+        envelope.get("exit_code") != 1
+        or envelope.get("node_process_count") != 1
+        or envelope.get("stdout_bytes") != 0
+        or not isinstance(envelope.get("stderr_bytes"), int)
+        or envelope["stderr_bytes"] <= 0
+        or envelope.get("raw_stream_retained") is not False
+        or failure.get("result") != "fixture_process_terminal"
+        or failure.get("retry_count") != 0
+    ):
+        raise FactoryDiagnosticError("consumed_failure_envelope_rejected")
+    source_package_root = (
+        package_projection.MATERIALIZATION_SOURCE_ROOT.resolve(strict=True)
+        / "node_modules"
+        / "@deepseek-ai"
+        / "dsh"
+    )
+    source_package_root.resolve(strict=True)
+    selected_scope = source_package_root.parents[1]
+    corrected_scope = source_package_root.parent
+    selected_cordis = selected_scope / "cordis" / "lib" / "index.js"
+    selected_agent = selected_scope / "dsh-agent" / "lib" / "index.js"
+    corrected_cordis = corrected_scope / "cordis" / "lib" / "index.js"
+    corrected_agent = corrected_scope / "dsh-agent" / "lib" / "index.js"
+    if (
+        selected_cordis.exists()
+        or selected_agent.exists()
+        or not corrected_cordis.is_file()
+        or not corrected_agent.is_file()
+    ):
+        raise FactoryDiagnosticError("import_scope_diagnosis_rejected")
+    now = datetime.now(ZoneInfo("Australia/Brisbane"))
+    diagnosis = {
+        "schema_version": (
+            "ariadne.native_harness_integrated_runner_factory_fixture_"
+            "failure_diagnosis.v1"
+        ),
+        "operation_id": OPERATION_ID,
+        "timestamp": now.isoformat(),
+        "result": "fixture_import_scope_path_mismatch",
+        "process_envelope_sha256": sha256_bytes(PROCESS_ENVELOPE_PATH.read_bytes()),
+        "path_diagnosis": {
+            "selected_parent_index": 1,
+            "selected_scope": "node_modules",
+            "required_scope": "node_modules/@deepseek-ai",
+            "selected_cordis_target_absent": True,
+            "selected_agent_target_absent": True,
+            "corrected_cordis_target_present": True,
+            "corrected_agent_target_present": True,
+            "prelaunch_import_existence_guard_missing": True,
+        },
+        "boundary": {
+            "node_process_count": 1,
+            "stdout_bytes": 0,
+            "stderr_bytes_positive": True,
+            "factory_boundary_reached": False,
+            "raw_stream_retained": False,
+            "disposable_root_absent": True,
+            "retry_count": 0,
+            "native_harness_process_count": 0,
+            "model_request_count": 0,
+            "provider_request_count": 0,
+        },
+        "successor": {
+            "operation_id": (
+                "deepseek-native-harness-provider-free-integrated-runner-"
+                "factory-fixture-import-path-recovery"
+            ),
+            "correction": (
+                "use_package_root_parent_and_require_both_import_targets_before_launch"
+            ),
+            "second_process_in_current_operation_authorized": False,
+        },
+    }
+    schema = json.loads(FAILURE_DIAGNOSIS_SCHEMA_PATH.read_bytes())
+    jsonschema.Draft202012Validator.check_schema(schema)
+    jsonschema.Draft202012Validator(schema).validate(diagnosis)
+    write_exclusive(FAILURE_DIAGNOSIS_PATH, diagnosis)
+    FAILURE_DIAGNOSIS_REPORT_PATH.write_text(
+        "# Factory fixture failure diagnosis\n\n"
+        f"Date: {now.date().isoformat()}\n\n"
+        f"Timestamp: {now.isoformat()} (Australia/Brisbane)\n\n"
+        "Result: `fixture_import_scope_path_mismatch`\n\n"
+        "The consumed fixture selected `node_modules` as the package scope, "
+        "but both required rc.7 imports live under `node_modules/@deepseek-ai`. "
+        "Both emitted targets were absent and both corrected targets are present. "
+        "The process therefore stopped before the installed AgentRegistry or "
+        "runner factory boundary. No raw stderr was read or retained.\n\n"
+        "This operation permits no retry. Its narrow successor must use "
+        "`package_root.parent` and fail closed on both import-target existence "
+        "checks before one separately identified process.\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    return diagnosis
+
+
 def execute() -> dict[str, Any]:
     contract = load_contract()
     diagnosis = source_diagnosis(contract)
@@ -521,10 +633,16 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--execute", action="store_true")
+    parser.add_argument("--diagnose-failure", action="store_true")
     args = parser.parse_args()
-    if args.check == args.execute:
+    if sum((args.check, args.execute, args.diagnose_failure)) != 1:
         raise FactoryDiagnosticError("exactly_one_mode_required")
-    value = provider_free_check() if args.check else execute()
+    if args.check:
+        value = provider_free_check()
+    elif args.execute:
+        value = execute()
+    else:
+        value = diagnose_failure()
     print(json.dumps(value, sort_keys=True))
     return 0
 
