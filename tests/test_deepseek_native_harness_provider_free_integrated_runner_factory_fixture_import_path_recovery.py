@@ -108,6 +108,33 @@ def test_controller_has_one_process_boundary_and_distinct_attempt_identity() -> 
     assert "raw_error_retained\": False" in execute_source
 
 
+def test_persisted_attempt_passes_exact_schema_and_cleanup_readback() -> None:
+    evidence = json.loads(subject.EVIDENCE_PATH.read_bytes())
+    schema = json.loads(subject.EVIDENCE_SCHEMA_PATH.read_bytes())
+    jsonschema.Draft202012Validator(schema).validate(evidence)
+    assert evidence["result"] == subject.PASS_RESULT
+    assert evidence["fixture"]["structured_guard_coordinate"] == subject.EXPECTED_COORDINATE
+    assert evidence["fixture"]["factory_create_agent_invocations"] == 1
+    assert evidence["fixture"]["setup_invocations"] == 1
+    assert evidence["fixture"]["preset_mount_reads"] == 0
+    assert evidence["process_boundary"]["attempt_id"] == subject.ATTEMPT_ID
+    assert evidence["process_boundary"]["node_process_count"] == 1
+    assert evidence["process_boundary"]["model_request_count"] == 0
+    assert evidence["process_boundary"]["provider_request_count"] == 0
+    assert evidence["process_boundary"]["retry_count"] == 0
+    assert evidence["cleanup"]["disposable_root_absent"] is True
+    assert not subject.DISPOSABLE_ROOT.exists()
+    assert not subject.FAILURE_PATH.exists()
+    consumed = json.loads(subject.CONSUMED_PATH.read_bytes())
+    envelope = json.loads(subject.PROCESS_ENVELOPE_PATH.read_bytes())
+    assert consumed["attempt_id"] == subject.ATTEMPT_ID
+    assert envelope["attempt_id"] == subject.ATTEMPT_ID
+    assert envelope["exit_code"] == 0
+    assert envelope["stdout_bytes"] == 641
+    assert envelope["stderr_bytes"] == 0
+    assert envelope["raw_stream_retained"] is False
+
+
 def test_plan_preserves_exact_process_and_product_boundaries() -> None:
     plan = (
         subject.REPO_ROOT
