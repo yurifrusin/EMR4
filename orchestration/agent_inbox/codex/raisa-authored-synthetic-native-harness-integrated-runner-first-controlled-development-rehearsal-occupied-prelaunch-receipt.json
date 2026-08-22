@@ -1,0 +1,130 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa authored-synthetic native-Harness integrated-runner first controlled development rehearsal",
+    "completed_stage": "The exact useful authored-synthetic window-coalescer package, accepted integrated runner derivation, typed edit controls, one-request broker ceiling and fresh disposable envelope are frozen. Provider-free evidence and 26 focused lineage tests pass. The workspace contains only the committed synthetic baseline, the exact runner digest is bound, and zero Harness, session, turn, model or provider request has occurred.",
+    "next_executable_stage": "generate_a_fresh_five_source_occupied_prelaunch_receipt_then_consume_and_run_exactly_one_deepseek_v4_flash_high_native_harness_request_for_the_frozen_synthetic_window_coalescer_repair_without_retry_resume_fallback_auxiliary_model_or_second_worker",
+    "operation_id": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "3d7c65c8dc1419e8aac0f21ac13d6edec2687401",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "87fa826f313ee805eb12e15885d3c09feed6c674",
+    "reason_codes": [],
+    "resolved_commit": "3d7c65c8dc1419e8aac0f21ac13d6edec2687401",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "3d7c65c8dc1419e8aac0f21ac13d6edec2687401"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "87fa826f313ee805eb12e15885d3c09feed6c674",
+    "branch_origin_aligned": true,
+    "head": "87fa826f313ee805eb12e15885d3c09feed6c674",
+    "origin_branch_commit": "87fa826f313ee805eb12e15885d3c09feed6c674",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 670
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "occupied_prelaunch",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The useful synthetic package, integrated runner and one-request checkpoint are exact; DeepSeek V4 Flash/high now owns the sole repair turn.",
+        "work_packages": [
+          "one synthetic_window_coalescer.py nested-window repair"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini remains outside the occupied attempt and will receive an exact read-only postcandidate veto package only if deterministic candidate admission passes.",
+        "work_packages": [
+          "postcandidate independent veto if a candidate survives"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the checkpoint grants one serial native-Harness worker identity.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "prelaunch_receipt_rejects",
+      "occupied_attempt_terminalizes",
+      "deterministic_candidate_admission_passes_or_rejects"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "fresh occupied-prelaunch receipt before lease consumption",
+      "one invocation consumes the checkpoint regardless of result",
+      "terminal reduction and exact-root cleanup before any verifier decision",
+      "no retry after terminalization"
+    ]
+  },
+  "planned_action": "worker_dispatch",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-plan.md",
+      "docs/security/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/contract.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/provider-free-evidence.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-attempt-preparation.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-preexecution-checkpoint.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/clockwork-checkpoint-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "DeepSeek V4 Flash/high through the native Harness owns one synthetic window-coalescer repair. GPT Sol owns the one-shot launch, terminal reduction, deterministic evaluation, cleanup and acceptance. Gemini 3.7 Flash/high is reserved for a postcandidate independent veto. Native subagents are declined under developer policy.",
+    "git_refs_and_worktree": "The preflight machine snapshot alone owns exact Git identities and verifies the named task branch, origin alignment, all four protected refs, tracked-worktree cleanliness and preservation of unrelated untracked files including docs/branding/. The prepared synthetic Git workspace is clean and zero matching native-Harness processes exist.",
+    "live_handover_current_baton": "AGENTS.md and the active latch name the clockwork-checkpointed useful synthetic package and exactly one native-Harness DeepSeek request as the next executable stage.",
+    "protected_evidence_boundaries": "Exactly one new synthetic native-Harness process, session and turn and at most one DeepSeek provider request are admitted. There is no retry, resume, fallback, auxiliary model or second worker. Only synthetic_window_coalescer.py in the disposable root may change. Product, patient, appointment, clinical, historical, protected, database, deployment, Pages and protected-ref surfaces remain closed; raw prompt, response, reasoning, streams, environments, sessions and credentials are not retained."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,180 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "worker_dispatch",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh complete five-source occupied-prelaunch rehydration, clockwork checkpoint readback, exact prepared-root validation, zero matching process observation and machine Git snapshot",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md and the active latch name the clockwork-checkpointed useful synthetic package and exactly one native-Harness DeepSeek request as the next executable stage.",
+    "current_authority_allocation": "DeepSeek V4 Flash/high through the native Harness owns one synthetic window-coalescer repair. GPT Sol owns the one-shot launch, terminal reduction, deterministic evaluation, cleanup and acceptance. Gemini 3.7 Flash/high is reserved for a postcandidate independent veto. Native subagents are declined under developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-plan.md",
+      "docs/security/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/contract.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/provider-free-evidence.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-attempt-preparation.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-preexecution-checkpoint.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/clockwork-checkpoint-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Exactly one new synthetic native-Harness process, session and turn and at most one DeepSeek provider request are admitted. There is no retry, resume, fallback, auxiliary model or second worker. Only synthetic_window_coalescer.py in the disposable root may change. Product, patient, appointment, clinical, historical, protected, database, deployment, Pages and protected-ref surfaces remain closed; raw prompt, response, reasoning, streams, environments, sessions and credentials are not retained.",
+    "git_refs_and_worktree": "The preflight machine snapshot alone owns exact Git identities and verifies the named task branch, origin alignment, all four protected refs, tracked-worktree cleanliness and preservation of unrelated untracked files including docs/branding/. The prepared synthetic Git workspace is clean and zero matching native-Harness processes exist."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+    "active_tranche": "Raisa authored-synthetic native-Harness integrated-runner first controlled development rehearsal",
+    "objective": "Freeze one exact authored-synthetic EMR4 development work package, bind the accepted integrated runner and typed edit controls to it, permit at most one DeepSeek request after provider-free gates pass, and measure useful output, traceability, correction cost and cleanup without product, patient or clinical data.",
+    "status": "in_progress",
+    "source_head": "3d7c65c8dc1419e8aac0f21ac13d6edec2687401",
+    "authority_source": "Yuri's standing uninterrupted-development authority and the accepted integrated-runner stock-headless boot proof.",
+    "checkpoint": {
+      "completed_stage": "The exact useful authored-synthetic window-coalescer package, accepted integrated runner derivation, typed edit controls, one-request broker ceiling and fresh disposable envelope are frozen. Provider-free evidence and 26 focused lineage tests pass. The workspace contains only the committed synthetic baseline, the exact runner digest is bound, and zero Harness, session, turn, model or provider request has occurred.",
+      "next_executable_stage": "generate_a_fresh_five_source_occupied_prelaunch_receipt_then_consume_and_run_exactly_one_deepseek_v4_flash_high_native_harness_request_for_the_frozen_synthetic_window_coalescer_repair_without_retry_resume_fallback_auxiliary_model_or_second_worker",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "one_authored_synthetic_bounded_development_work_package_only",
+      "at_most_one_deepseek_provider_request_after_provider_free_gates",
+      "accepted_typed_edit_controls_mandatory_no_weakening",
+      "no_claude_code_or_other_transport_fallback",
+      "consumed_attempts_immutable_no_retry_resume_overwrite_or_reclassification",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_ordinary_practice_enablement_or_live_product_runtime",
+      "no_generic_status_arrived_action_grammar_first_party_client_or_waiting_area_change_without_separate_authority",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+    "assessed_stage": "occupied_prelaunch",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "rationale": "The useful synthetic package, integrated runner and one-request checkpoint are exact; DeepSeek V4 Flash/high now owns the sole repair turn.",
+        "work_packages": [
+          "one synthetic_window_coalescer.py nested-window repair"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "rationale": "Gemini remains outside the occupied attempt and will receive an exact read-only postcandidate veto package only if deterministic candidate admission passes.",
+        "work_packages": [
+          "postcandidate independent veto if a candidate survives"
+        ]
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and the checkpoint grants one serial native-Harness worker identity.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "fresh occupied-prelaunch receipt before lease consumption",
+      "one invocation consumes the checkpoint regardless of result",
+      "terminal reduction and exact-root cleanup before any verifier decision",
+      "no retry after terminalization"
+    ],
+    "reassessment_triggers": [
+      "prelaunch_receipt_rejects",
+      "occupied_attempt_terminalizes",
+      "deterministic_candidate_admission_passes_or_rejects"
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["GPT Sol owns launch custody, terminal reduction and cleanup."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Historical transport only; no Claude Code fallback is selected or permitted."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Gemini is reserved and excluded from the occupied attempt."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent was spawned."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "reachable",
+      "evidence": ["The pinned native Harness, accepted integrated runner and exact synthetic envelope are checkpointed; no occupied process has started yet."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
