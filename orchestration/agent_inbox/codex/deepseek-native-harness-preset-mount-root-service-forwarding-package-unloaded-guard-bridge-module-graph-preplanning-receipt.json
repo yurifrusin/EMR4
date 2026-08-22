@@ -1,0 +1,127 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free preset-mount root-service-forwarding package-unloaded guard\u2013bridge module-graph rehearsal",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_exact_one_process_package_unloaded_guard_bridge_module_graph_contract",
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "71e231fe6462e689662a0f92e4f51ce95cdaf056",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "31162d2d3fae23eb3bc90170fd7d0b8dd4d5c90a",
+    "reason_codes": [],
+    "resolved_commit": "71e231fe6462e689662a0f92e4f51ce95cdaf056",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "71e231fe6462e689662a0f92e4f51ce95cdaf056"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "31162d2d3fae23eb3bc90170fd7d0b8dd4d5c90a",
+    "branch_origin_aligned": true,
+    "head": "31162d2d3fae23eb3bc90170fd7d0b8dd4d5c90a",
+    "origin_branch_commit": "31162d2d3fae23eb3bc90170fd7d0b8dd4d5c90a",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 661
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "package-unloaded guard-bridge module-graph preplanning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "DeepSeek and the native Harness are the governed execution path; this predecessor graph permits one Node process but excludes Harness, worker, model, provider and self-review activity.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini has neutral-to-negative leverage for a closed authored-synthetic three-case package-unloaded module graph with exact typed terminals; reassess only if the consumed graph leaves a material semantic ambiguity.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits native-subagent delegation, and one module-graph process plus cleanup is inherently serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "module-graph contract freeze",
+      "one-process execution result",
+      "pre-verifier gate",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "freeze exact accepted guard bridge and sanitizer byte identities",
+      "materialize only the three exact derived modules and two local package stubs in one disposable root",
+      "run success missing-service and missing-mount cases through the guard inside exactly one Node process",
+      "admit only closed typed terminals and content-free outer process evidence",
+      "prove package-unloaded state and disposable-root cleanup before acceptance",
+      "advance directly toward the complete package-unloaded runner and then one occupied useful Raisa worker run unless a demonstrated hazard requires a narrower control"
+    ]
+  },
+  "planned_action": "freeze_the_narrowest_exact_one_process_package_unloaded_guard_bridge_sanitizer_module_graph_contract_with_local_scope_and_preset_mount_error_stubs_success_missing_service_and_missing_mount_cases_and_zero_runner_native_harness_worker_model_or_provider_activity",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal/isolated-node-fixture-evidence.json",
+      "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-isolated-node-fixture-sol-acceptance.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial one-process module-graph plan, implementation, deterministic verification and acceptance. DeepSeek is declined because its native Harness and worker are governed objects excluded from this provider-free graph; Gemini is declined provisionally because the three-case graph is deterministic; native subagents are declined under current developer policy.",
+    "git_refs_and_worktree": "The receipt builder supplies all Git identities from the machine snapshot and receives no caller-authored object ID. It must preserve task-branch alignment, all four protected refs, docs/branding and every unrelated untracked path.",
+    "live_handover_current_baton": "AGENTS.md names the accepted isolated root-service fixture at Continuity 388 / Compass 370 and the package-unloaded guard-bridge module-graph rehearsal as the exact next implementation.",
+    "protected_evidence_boundaries": "Only one disposable authored-synthetic package-unloaded Node module graph for the exact accepted guard, bridge and sanitizer with local scope and PresetMountError stubs is open. The derived runner, installed package, native Harness, worker, model, provider, product, data, deployment, release, Pages, protected evidence and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
