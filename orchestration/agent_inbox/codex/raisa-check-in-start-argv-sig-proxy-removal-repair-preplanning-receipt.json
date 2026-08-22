@@ -1,0 +1,127 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in server start argv sig-proxy removal conformance repair",
+    "completed_stage": "Accepted raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_sig_proxy_removal_conformance_repair_plan",
+    "operation_id": "raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair",
+    "resume_after_compaction": true,
+    "source_head": "2ab8707e2ac03be3b1a4c9c538dfa45382d7d92d",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "fb195aeb4d5ef9f7e25ce5def7656a165cc1b293",
+    "reason_codes": [],
+    "resolved_commit": "2ab8707e2ac03be3b1a4c9c538dfa45382d7d92d",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "2ab8707e2ac03be3b1a4c9c538dfa45382d7d92d"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "fb195aeb4d5ef9f7e25ce5def7656a165cc1b293",
+    "branch_origin_aligned": true,
+    "head": "fb195aeb4d5ef9f7e25ce5def7656a165cc1b293",
+    "origin_branch_commit": "fb195aeb4d5ef9f7e25ce5def7656a165cc1b293",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 672
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "fresh_rehydration_preplanning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native Harness worker lane is paused and the one-token source repair plus its tightly coupled deterministic semantics cost less to implement and review serially than to packetize for a worker.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "No repair candidate exists during plan freeze; exact local source and hostile deterministic conformance must pass first, after which any genuine material veto surface can be reassessed.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the one-token repair with its source-owned contract is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "after exact plan freeze",
+      "after deterministic repair candidate",
+      "before any future occupied plan",
+      "pre_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "freeze the exact one-token repair plan",
+      "bind the accepted diagnosis and immutable attempt-006 terminal",
+      "remove only sig-proxy=false from _start_attached argv",
+      "prove source signal attachment stdin and cleanup semantics with deterministic fakes",
+      "close out without Docker objects PostgreSQL or attempt 007"
+    ]
+  },
+  "planned_action": "freeze_the_sig_proxy_removal_conformance_repair_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-plan.md",
+      "docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-server-start-attach-created-state-diagnosis-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-evidence.json",
+      "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-report.md",
+      "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/efficacy-reading.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns repair-plan meaning, the tightly coupled one-token source change, deterministic conformance, acceptance and Git. No model worker, verifier or subagent is active during plan freeze.",
+    "git_refs_and_worktree": "Machine readings verify task HEAD and task origin alignment, all four protected refs at the required protected object, required ancestry, a clean tracked tree and 671 preserved unrelated untracked files including five docs/branding entries.",
+    "live_handover_current_baton": "AGENTS.md was read completely after diagnostic closeout publication. Current result accepts the exact CLI option-surface diagnosis at Continuity 412 / Compass 394 and Next implementation selects the one-token provider-free conformance repair.",
+    "protected_evidence_boundaries": "Remove only the unsupported sig-proxy=false token from the accepted start-attached argv and prove the remaining source plus signal, attachment, stdin and cleanup relations through deterministic fakes and read-only local CLI help/version. Create no Docker object, start no PostgreSQL process, execute no SQL, authorise no attempt 007 and change no product, ordinary-practice, provider, production, Pages or protected-ref surface."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
