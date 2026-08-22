@@ -1,0 +1,131 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in relay-free rollback/unknown-commit recovery attempt 007",
+    "completed_stage": "Accepted raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_attempt_007_plan_contract_and_one_run_checkpoint",
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-007",
+    "resume_after_compaction": true,
+    "source_head": "8814d4b5d62885f8f8eca4cf02fe5a49ccdc013b",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "f30b82ea0b80bdef2fa8d63549ba78d39d14e24d",
+    "reason_codes": [],
+    "resolved_commit": "8814d4b5d62885f8f8eca4cf02fe5a49ccdc013b",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "8814d4b5d62885f8f8eca4cf02fe5a49ccdc013b"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "f30b82ea0b80bdef2fa8d63549ba78d39d14e24d",
+    "branch_origin_aligned": true,
+    "head": "f30b82ea0b80bdef2fa8d63549ba78d39d14e24d",
+    "origin_branch_commit": "f30b82ea0b80bdef2fa8d63549ba78d39d14e24d",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 673
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "fresh_rehydration_preplanning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native DeepSeek Harness lane is paused pending its separately frozen boot proof, and this provider-free one-run database lifecycle grants no worker or provider call. Packet, monitoring and recovery cost would add risk inside one indivisible controller lease.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The tranche is provider-free and no independent candidate judgment exists before plan construction. Deterministic admission, one immutable terminal and exact cleanup are serial; reassess only after a successful terminal exposes a material static-veto surface.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation, and the single disposable PostgreSQL controller, terminal namespace and cleanup lease cannot be split safely.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-007",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "after exact plan freeze",
+      "after deterministic candidate admission",
+      "after immutable occupied terminal",
+      "pre_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "freeze the attempt-007 plan and threat boundary against the accepted repair",
+      "construct one collision-free wrapper schema and hostile deterministic test set",
+      "bind every source and digest with full machine-resolved Git objects",
+      "publish one distinct preexecution checkpoint only after deterministic and read-only Docker admission",
+      "execute at most one occupied database lifecycle under sole Sol cleanup custody",
+      "preserve one immutable pass or failed-closed terminal with zero retry"
+    ]
+  },
+  "planned_action": "freeze_attempt_007_plan_contract_and_one_run_checkpoint",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-plan.md",
+      "docs/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-server-start-argv-sig-proxy-removal-repair-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/repair-attestation.json",
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-plan.md",
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-failed-closed-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-006-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/rehearsal-failure-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/attempt-006-execution-envelope.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the attempt-007 authority envelope, deterministic construction, the indivisible disposable database lifecycle and cleanup, acceptance and Git. No DeepSeek worker, Gemini verifier, provider call or native subagent is active during plan freeze.",
+    "git_refs_and_worktree": "Machine readings verify task HEAD and task origin alignment, all four protected refs at the required protected object, accepted repair ancestry, a clean tracked tree and 671 preserved unrelated untracked files including five docs/branding entries.",
+    "live_handover_current_baton": "AGENTS.md was read completely after the start-argv repair closeout publication. Current result accepts the exact one-token repair at Continuity 413 / Compass 395 and Next implementation selects the separately frozen, checkpointed one-run attempt 007.",
+    "protected_evidence_boundaries": "Plan and checkpoint only one collision-free provider-free disposable PostgreSQL attempt 007 against exact repaired start/attach source and harness digest. At most one later occupied run may use newly authored synthetic non-PHI data, an internal network and no published port, relay, bind or volume. No retry, worker/provider call, ordinary-practice enablement, product/API/client change, product/patient/clinical data, production, Pages, protected evidence or protected-ref movement is authorised."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
