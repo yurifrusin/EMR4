@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ariadne.native_harness_package_unloaded_guard_bridge_module_graph_evidence.schema.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "result", "git_binding", "accepted_source_inventory", "stub_source_inventory", "fixture_source_inventory", "materialized_relative_paths", "process_envelope_sha256", "process_envelope_recorded_before_interpretation", "fixture_outcome", "environment", "cleanup", "process_boundary", "claim_boundary"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_package_unloaded_guard_bridge_module_graph_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal"},
+    "result": {"const": "package_unloaded_guard_bridge_module_graph_pass"},
+    "git_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy", "caller_authored_object_id_count", "planning_source_commit", "candidate_source_commit", "planning_source_is_ancestor_of_candidate", "branch", "branch_origin_aligned", "protected_refs_aligned", "tracked_worktree_clean", "docs_branding_preserved"],
+      "properties": {
+        "policy": {"const": "machine_resolved_only"},
+        "caller_authored_object_id_count": {"const": 0},
+        "planning_source_commit": {"$ref": "#/$defs/oid"},
+        "candidate_source_commit": {"$ref": "#/$defs/oid"},
+        "planning_source_is_ancestor_of_candidate": {"const": true},
+        "branch": {"const": "codex/ariadne-bernie-davida-parallel-seam"},
+        "branch_origin_aligned": {"const": true},
+        "protected_refs_aligned": {"const": true},
+        "tracked_worktree_clean": {"const": true},
+        "docs_branding_preserved": {"const": true}
+      }
+    },
+    "accepted_source_inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["derived_guard", "derived_bridge", "accepted_sanitizer"],
+      "properties": {
+        "derived_guard": {"$ref": "#/$defs/source_entry"},
+        "derived_bridge": {"$ref": "#/$defs/source_entry"},
+        "accepted_sanitizer": {"$ref": "#/$defs/source_entry"}
+      }
+    },
+    "stub_source_inventory": {
+      "type": "object",
+      "minProperties": 4,
+      "maxProperties": 4,
+      "additionalProperties": {"$ref": "#/$defs/source_entry"}
+    },
+    "fixture_source_inventory": {"$ref": "#/$defs/source_entry"},
+    "materialized_relative_paths": {"type": "array", "minItems": 8, "maxItems": 8, "uniqueItems": true, "items": {"type": "string"}},
+    "process_envelope_sha256": {"$ref": "#/$defs/digest"},
+    "process_envelope_recorded_before_interpretation": {"const": true},
+    "fixture_outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "result", "cases"],
+      "properties": {
+        "schema_version": {"const": "ariadne.native_harness_package_unloaded_guard_bridge_fixture_result.v1"},
+        "result": {"const": "pass"},
+        "cases": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "object"}}
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["keys", "key_count", "values_retained", "path_present", "node_options_present"],
+      "properties": {
+        "keys": {"const": ["SystemRoot", "WINDIR", "ComSpec", "TEMP", "TMP"]},
+        "key_count": {"const": 5},
+        "values_retained": {"const": false},
+        "path_present": {"const": false},
+        "node_options_present": {"const": false}
+      }
+    },
+    "cleanup": {
+      "const": {
+        "fixture_root_absent": true,
+        "fixture_root_path_retained": false,
+        "materialized_javascript_retained": false,
+        "materialized_package_manifests_retained": false
+      }
+    },
+    "process_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_process_count", "guard_module_execution_count", "bridge_module_execution_count", "sanitizer_module_execution_count", "local_stub_package_count", "materialized_file_count", "derived_runner_materialization_count", "derived_runner_execution_count", "installed_package_import_count", "native_harness_process_count", "worker_process_count", "model_request_count", "provider_request_count", "network_attempt_count", "database_attempt_count", "docker_attempt_count", "target_creation_count", "target_use_count", "retry_count", "resume_count"],
+      "properties": {
+        "node_process_count": {"const": 1},
+        "guard_module_execution_count": {"const": 1},
+        "bridge_module_execution_count": {"const": 1},
+        "sanitizer_module_execution_count": {"const": 1},
+        "local_stub_package_count": {"const": 2},
+        "materialized_file_count": {"const": 8},
+        "derived_runner_materialization_count": {"const": 0},
+        "derived_runner_execution_count": {"const": 0},
+        "installed_package_import_count": {"const": 0},
+        "native_harness_process_count": {"const": 0},
+        "worker_process_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0},
+        "network_attempt_count": {"const": 0},
+        "database_attempt_count": {"const": 0},
+        "docker_attempt_count": {"const": 0},
+        "target_creation_count": {"const": 0},
+        "target_use_count": {"const": 0},
+        "retry_count": {"const": 0},
+        "resume_count": {"const": 0}
+      }
+    },
+    "claim_boundary": {
+      "const": {
+        "package_unloaded_guard_bridge_graph_proved": true,
+        "derived_runner_proved": false,
+        "installed_package_loaded": false,
+        "native_harness_proved": false,
+        "worker_model_provider_executed": false,
+        "retry_authorized": false,
+        "product_authority": false
+      }
+    }
+  },
+  "$defs": {
+    "oid": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256"],
+      "properties": {
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/digest"}
+      }
+    }
+  }
+}

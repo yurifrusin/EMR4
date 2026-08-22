@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ariadne.native_harness_package_unloaded_guard_bridge_module_graph_contract.schema.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "git_binding_policy",
+    "closed_results",
+    "windows_environment_keys",
+    "case_ids",
+    "materialized_relative_paths",
+    "required_zero_counters",
+    "documentation_bindings",
+    "predecessor_bindings",
+    "implementation_bindings",
+    "accepted_source_inventory",
+    "stub_source_inventory",
+    "fixture_source_inventory",
+    "expected_result",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_package_unloaded_guard_bridge_module_graph_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal"},
+    "git_binding_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "plan_path", "controller_path", "caller_authored_object_id_count"],
+      "properties": {
+        "mode": {"const": "machine_resolved_only"},
+        "plan_path": {"const": "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal-plan.md"},
+        "controller_path": {"const": "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py"},
+        "caller_authored_object_id_count": {"const": 0}
+      }
+    },
+    "closed_results": {
+      "const": [
+        "package_unloaded_guard_bridge_module_graph_pass",
+        "module_graph_preflight_rejected",
+        "module_graph_process_terminal",
+        "module_graph_result_rejected"
+      ]
+    },
+    "windows_environment_keys": {"const": ["SystemRoot", "WINDIR", "ComSpec", "TEMP", "TMP"]},
+    "case_ids": {"const": ["success", "missing_service", "missing_mount"]},
+    "materialized_relative_paths": {
+      "const": [
+        "effective-tool-guard.mjs",
+        "deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge.mjs",
+        "deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer.mjs",
+        "package_unloaded_guard_bridge_fixture.mjs",
+        "node_modules/@deepseek-ai/dsh-scope/package.json",
+        "node_modules/@deepseek-ai/dsh-scope/index.mjs",
+        "node_modules/@deepseek-ai/dsh-agent-presets/package.json",
+        "node_modules/@deepseek-ai/dsh-agent-presets/index.mjs"
+      ]
+    },
+    "required_zero_counters": {
+      "const": [
+        "derived_runner_materialization_count",
+        "derived_runner_execution_count",
+        "installed_package_import_count",
+        "native_harness_process_count",
+        "worker_process_count",
+        "model_request_count",
+        "provider_request_count",
+        "network_attempt_count",
+        "database_attempt_count",
+        "docker_attempt_count",
+        "target_creation_count",
+        "target_use_count",
+        "retry_count",
+        "resume_count"
+      ]
+    },
+    "documentation_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["plan_sha256", "threat_model_sha256"],
+      "properties": {
+        "plan_sha256": {"$ref": "#/$defs/digest"},
+        "threat_model_sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "predecessor_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["accepted_correction_evidence_sha256", "accepted_correction_controller_sha256", "accepted_isolated_evidence_sha256", "accepted_isolated_controller_sha256"],
+      "properties": {
+        "accepted_correction_evidence_sha256": {"$ref": "#/$defs/digest"},
+        "accepted_correction_controller_sha256": {"$ref": "#/$defs/digest"},
+        "accepted_isolated_evidence_sha256": {"$ref": "#/$defs/digest"},
+        "accepted_isolated_controller_sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "implementation_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["controller_sha256", "focused_test_sha256", "contract_schema_sha256", "process_envelope_schema_sha256", "evidence_schema_sha256", "failure_terminal_schema_sha256"],
+      "properties": {
+        "controller_sha256": {"$ref": "#/$defs/digest"},
+        "focused_test_sha256": {"$ref": "#/$defs/digest"},
+        "contract_schema_sha256": {"$ref": "#/$defs/digest"},
+        "process_envelope_schema_sha256": {"$ref": "#/$defs/digest"},
+        "evidence_schema_sha256": {"$ref": "#/$defs/digest"},
+        "failure_terminal_schema_sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "accepted_source_inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["derived_guard", "derived_bridge", "accepted_sanitizer"],
+      "properties": {
+        "derived_guard": {"$ref": "#/$defs/source_entry"},
+        "derived_bridge": {"$ref": "#/$defs/source_entry"},
+        "accepted_sanitizer": {"$ref": "#/$defs/source_entry"}
+      }
+    },
+    "stub_source_inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_modules/@deepseek-ai/dsh-scope/package.json", "node_modules/@deepseek-ai/dsh-scope/index.mjs", "node_modules/@deepseek-ai/dsh-agent-presets/package.json", "node_modules/@deepseek-ai/dsh-agent-presets/index.mjs"],
+      "properties": {
+        "node_modules/@deepseek-ai/dsh-scope/package.json": {"$ref": "#/$defs/source_entry"},
+        "node_modules/@deepseek-ai/dsh-scope/index.mjs": {"$ref": "#/$defs/source_entry"},
+        "node_modules/@deepseek-ai/dsh-agent-presets/package.json": {"$ref": "#/$defs/source_entry"},
+        "node_modules/@deepseek-ai/dsh-agent-presets/index.mjs": {"$ref": "#/$defs/source_entry"}
+      }
+    },
+    "fixture_source_inventory": {"$ref": "#/$defs/source_entry"},
+    "expected_result": {"$ref": "#/$defs/outcome"},
+    "claim_boundary": {
+      "const": {
+        "package_unloaded_guard_bridge_graph_only": true,
+        "derived_runner_proved": false,
+        "installed_package_loaded": false,
+        "native_harness_proved": false,
+        "worker_model_provider_executed": false,
+        "retry_authorized": false,
+        "product_authority": false
+      }
+    }
+  },
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256"],
+      "properties": {
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "mount_terminal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "code", "detail"],
+      "properties": {
+        "stage": {"const": "preset_mount"},
+        "code": {"const": "PRESET_MOUNT_UNCLASSIFIED"},
+        "detail": {"type": "null"}
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "result", "cases"],
+      "properties": {
+        "schema_version": {"const": "ariadne.native_harness_package_unloaded_guard_bridge_fixture_result.v1"},
+        "result": {"const": "pass"},
+        "cases": {
+          "type": "array",
+          "prefixItems": [
+            {"$ref": "#/$defs/success_case"},
+            {"$ref": "#/$defs/failure_case"},
+            {"$ref": "#/$defs/failure_case"}
+          ],
+          "items": false,
+          "minItems": 3,
+          "maxItems": 3
+        }
+      }
+    },
+    "guard_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coordinate", "presetId", "effectiveToolNames", "effectiveToolCount"],
+      "properties": {
+        "coordinate": {"const": "EFFECTIVE_TOOL_COMPOSITION_PASSED"},
+        "presetId": {"const": "emr4-bounded-worker"},
+        "effectiveToolNames": {"const": ["edit", "glob", "read"]},
+        "effectiveToolCount": {"const": 3}
+      }
+    },
+    "success_case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_id", "passed", "terminal", "guard_result", "mount_call_count", "receiver_bound", "context_forwarded", "preset_id_forwarded", "scope_lookup_count", "scope_forwarded", "view_call_count", "view_scope_forwarded", "restrict_call_count", "restrict_allow_exact", "schema_call_count", "schema_scope_forwarded"],
+      "properties": {
+        "case_id": {"const": "success"},
+        "passed": {"const": true},
+        "terminal": {"type": "null"},
+        "guard_result": {"$ref": "#/$defs/guard_result"},
+        "mount_call_count": {"const": 1},
+        "receiver_bound": {"const": true},
+        "context_forwarded": {"const": true},
+        "preset_id_forwarded": {"const": true},
+        "scope_lookup_count": {"const": 1},
+        "scope_forwarded": {"const": true},
+        "view_call_count": {"const": 1},
+        "view_scope_forwarded": {"const": true},
+        "restrict_call_count": {"const": 1},
+        "restrict_allow_exact": {"const": true},
+        "schema_call_count": {"const": 1},
+        "schema_scope_forwarded": {"const": true}
+      }
+    },
+    "failure_case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_id", "passed", "typed_terminal_caught", "terminal", "scope_lookup_count", "view_call_count", "restrict_call_count", "schema_call_count"],
+      "properties": {
+        "case_id": {"enum": ["missing_service", "missing_mount"]},
+        "passed": {"const": false},
+        "typed_terminal_caught": {"const": true},
+        "terminal": {"$ref": "#/$defs/mount_terminal"},
+        "scope_lookup_count": {"const": 0},
+        "view_call_count": {"const": 0},
+        "restrict_call_count": {"const": 0},
+        "schema_call_count": {"const": 0}
+      }
+    }
+  }
+}

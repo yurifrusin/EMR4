@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ariadne.native_harness_package_unloaded_guard_bridge_process_envelope.schema.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "attempt_id", "candidate_source", "numeric_exit_code", "stdout_bytes", "stdout_sha256", "stderr_bytes", "stderr_sha256", "stream_content_retained", "raw_runtime_detail_retained", "executable_path_retained", "fixture_root_path_retained", "fixture_root_absent", "environment", "materialized_file_count", "local_stub_package_count", "installed_package_import_count", "node_process_count", "native_harness_process_count", "worker_model_provider_process_count", "further_process_authorized"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_package_unloaded_guard_bridge_process_envelope.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal"},
+    "attempt_id": {"const": "attempt-001"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "numeric_exit_code": {"type": "integer"},
+    "stdout_bytes": {"type": "integer", "minimum": 0},
+    "stdout_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "stderr_bytes": {"type": "integer", "minimum": 0},
+    "stderr_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "stream_content_retained": {"const": false},
+    "raw_runtime_detail_retained": {"const": false},
+    "executable_path_retained": {"const": false},
+    "fixture_root_path_retained": {"const": false},
+    "fixture_root_absent": {"type": "boolean"},
+    "environment": {"$ref": "#/$defs/environment"},
+    "materialized_file_count": {"const": 8},
+    "local_stub_package_count": {"const": 2},
+    "installed_package_import_count": {"const": 0},
+    "node_process_count": {"const": 1},
+    "native_harness_process_count": {"const": 0},
+    "worker_model_provider_process_count": {"const": 0},
+    "further_process_authorized": {"const": false}
+  },
+  "$defs": {
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["keys", "key_count", "values_retained", "path_present", "node_options_present"],
+      "properties": {
+        "keys": {"const": ["SystemRoot", "WINDIR", "ComSpec", "TEMP", "TMP"]},
+        "key_count": {"const": 5},
+        "values_retained": {"const": false},
+        "path_present": {"const": false},
+        "node_options_present": {"const": false}
+      }
+    }
+  }
+}
