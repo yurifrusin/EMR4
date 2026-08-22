@@ -1,0 +1,22 @@
+{
+  "coordinate": "integrated_runner_post_hmr_pre_request_hold",
+  "deepseek": {
+    "disposition": "declined",
+    "owned_work_package": null,
+    "rationale": "Proof stops before worker, model and provider request."
+  },
+  "gemini": {
+    "disposition": "declined_after_deterministic_evidence",
+    "owned_work_package": null,
+    "rationale": "Typed native lifecycle evidence left no material loading ambiguity."
+  },
+  "native_subagents": {
+    "disposition": "declined",
+    "owned_work_package": null,
+    "rationale": "Developer policy prohibits delegation and process custody is serial."
+  },
+  "operation_id": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal",
+  "result": "pass",
+  "schema_version": "ariadne.parallelism_efficacy_reading.v1",
+  "serial_owner": "gpt-sol"
+}
