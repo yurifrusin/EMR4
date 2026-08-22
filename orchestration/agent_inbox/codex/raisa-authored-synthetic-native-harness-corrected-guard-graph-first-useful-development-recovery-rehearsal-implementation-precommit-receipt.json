@@ -1,0 +1,127 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa authored-synthetic native Harness corrected-guard-graph first useful-development recovery rehearsal",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_exact_authored_synthetic_work_order_call_cost_effect_and_typed_result_boundary",
+    "operation_id": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "5e5881e2123e840b9b3d22fdcfe65ca0ecf78c75",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "97c73ea454489d40dcf6e3cb0a024fc9e023a03d",
+    "reason_codes": [],
+    "resolved_commit": "5e5881e2123e840b9b3d22fdcfe65ca0ecf78c75",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "5e5881e2123e840b9b3d22fdcfe65ca0ecf78c75"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "97c73ea454489d40dcf6e3cb0a024fc9e023a03d",
+    "branch_origin_aligned": false,
+    "head": "97c73ea454489d40dcf6e3cb0a024fc9e023a03d",
+    "origin_branch_commit": "4ea72bb4481b0e4b6f3f531bc65f809a448ad5d1",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 677
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "provider_free_implementation_candidate_precommit",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "DeepSeek owns one later exact synthetic nested-window edit only after origin alignment and preexecution admission.",
+        "work_packages": [
+          "repair synthetic_window_coalescer.py in one literal edit and add the frozen nested regression row"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "Gemini receives one read-only exact-candidate veto only if deterministic candidate admission passes.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the one-process identity custody chain is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "preexecution",
+      "occupied terminal",
+      "pre-verifier",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit and origin-align implementation before preexecution",
+      "prepare before consuming one lease",
+      "DeepSeek terminal before deterministic candidate admission",
+      "candidate admission before Gemini",
+      "Sol alone accepts"
+    ]
+  },
+  "planned_action": "commit_the_exact_corrected_graph_controller_contract_schemas_tests_and_provider_free_evidence",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-plan.md",
+      "docs/security/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/contract.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/provider-free-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns admission and acceptance; DeepSeek owns one later exact synthetic edit; Gemini remains reserved after candidate admission; native subagents remain declined.",
+    "git_refs_and_worktree": "The machine snapshot alone verifies task and protected refs, required ancestry, preserved docs/branding and explicit untracked implementation paths.",
+    "live_handover_current_baton": "The live latch selects the one corrected-graph authored-synthetic useful-development recovery rehearsal.",
+    "protected_evidence_boundaries": "Commit only the exact provider-free controller, contract, schemas, tests, evidence and receipt. No occupied Harness process, provider request, product or protected-ref action occurs."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

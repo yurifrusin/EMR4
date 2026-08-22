@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/native-harness-integrated-development-contract-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "accepted_sources", "identity", "runner", "graph_inventory", "work_package", "documentation", "implementation", "ceilings"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_integrated_development_contract.v1"},
+    "operation_id": {"const": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal"},
+    "planning_source": {"const": "97c73ea454489d40dcf6e3cb0a024fc9e023a03d"},
+    "accepted_sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["corrected_guard_graph", "corrected_graph_stock_headless_boot"],
+      "properties": {
+        "corrected_guard_graph": {"const": "822d487afcf6657027bc66c8d6d9635677e73096"},
+        "corrected_graph_stock_headless_boot": {"const": "f0f8e59ebd70da5167edf907c9ece26049cdcf1c"}
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempt_id", "work_order_id", "lease_id", "target_path"],
+      "properties": {
+        "attempt_id": {"const": "deepseek-native-corrected-guard-window-worker-001"},
+        "work_order_id": {"const": "wo-deepseek-native-corrected-guard-window-worker-001"},
+        "lease_id": {"const": "lease-deepseek-native-corrected-guard-window-worker-001"},
+        "target_path": {"type": "string", "pattern": "synthetic_window_coalescer\\.py$"}
+      }
+    },
+    "runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["accepted_bytes", "accepted_sha256", "derived_bytes", "derived_sha256", "allowed_transformations"],
+      "properties": {
+        "accepted_bytes": {"const": 14210},
+        "accepted_sha256": {"const": "017394e3f86a3efdf5eba0745c254a8b561615fb6ab923978b81bb5941e8e3f4"},
+        "derived_bytes": {"type": "integer", "minimum": 14000, "maximum": 14500},
+        "derived_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "allowed_transformations": {"const": ["exact_target_literal_rebinding"]}
+      }
+    },
+    "graph_inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["guard", "bridge", "sanitizer"],
+      "properties": {
+        "guard": {"const": {"bytes": 4501, "filename": "effective-tool-guard.mjs", "sha256": "76029da0f9c030651fd10c0df16f4e75e86b2269d7560af7f94c74680f8598b9"}},
+        "bridge": {"const": {"bytes": 1661, "filename": "preset-mount-sanitizer-runner-bridge.mjs", "sha256": "3a49b28174eeefd77d7efe0a00498901ac6636b637ed9dfe60aba46980df1d0b"}},
+        "sanitizer": {"const": {"bytes": 2439, "filename": "deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer.mjs", "sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f"}}
+      }
+    },
+    "work_package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "baseline_sha256", "expected_sha256", "public_case_count", "holdback_case_count"],
+      "properties": {
+        "path": {"const": "synthetic_window_coalescer.py"},
+        "baseline_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "expected_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "public_case_count": {"const": 4},
+        "holdback_case_count": {"const": 3}
+      }
+    },
+    "documentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["plan_sha256", "threat_model_sha256"],
+      "properties": {
+        "plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "threat_model_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["controller_sha256", "focused_test_sha256", "contract_schema_sha256", "terminal_schema_sha256"],
+      "properties": {
+        "controller_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "focused_test_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "contract_schema_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "terminal_schema_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "ceilings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["native_processes", "sessions", "turns", "provider_requests", "direct_literal_edits", "retries", "resumes", "fallbacks", "auxiliary_models"],
+      "properties": {
+        "native_processes": {"const": 1},
+        "sessions": {"const": 1},
+        "turns": {"const": 1},
+        "provider_requests": {"const": 1},
+        "direct_literal_edits": {"const": 1},
+        "retries": {"const": 0},
+        "resumes": {"const": 0},
+        "fallbacks": {"const": 0},
+        "auxiliary_models": {"const": 0}
+      }
+    }
+  }
+}
