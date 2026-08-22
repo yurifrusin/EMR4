@@ -1,0 +1,127 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free integrated-runner factory fixture import-path recovery",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_exact_import_path_recovery_contract",
+    "operation_id": "deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery",
+    "resume_after_compaction": true,
+    "source_head": "7a483ce738162b3f9e70b58ae5a66ee1ebee0eef",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "3e1ec2421d8866ce5fc21662e92115069acd4015",
+    "reason_codes": [],
+    "resolved_commit": "7a483ce738162b3f9e70b58ae5a66ee1ebee0eef",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "7a483ce738162b3f9e70b58ae5a66ee1ebee0eef"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "3e1ec2421d8866ce5fc21662e92115069acd4015",
+    "branch_origin_aligned": true,
+    "head": "3e1ec2421d8866ce5fc21662e92115069acd4015",
+    "origin_branch_commit": "3e1ec2421d8866ce5fc21662e92115069acd4015",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 670
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "fresh_preplanning_import_path_recovery",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The DeepSeek worker and native Harness boundaries are forbidden; the owned change is a local fixture path projection whose process must remain provider-free.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The exact one-line projection and deterministic file-existence gate are serial and mechanical. Gemini becomes proportionate only if a material runner/guard correction candidate survives the fixture and deterministic gates.",
+        "work_packages": [
+          "independent veto only if the fixture yields an admitted material runner or guard correction candidate"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive delegation, and the source projection, prelaunch existence proof and one process form one serial attribution chain.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "material_runner_guard_correction_candidate_exists",
+      "deterministic_fixture_rejects",
+      "provider_free_fixture_reaches_terminal_decision"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "freeze the exact one-line projection and both source-owned import targets",
+      "prove both absolute targets are files before process admission",
+      "run exactly one separately identified provider-free Node fixture",
+      "stop without retry on any non-pass terminal",
+      "admit any later correction only after deterministic verification"
+    ]
+  },
+  "planned_action": "freeze_the_exact_scoped_package_import_projection_and_prelaunch_target_existence_gate_before_one_separately_identified_provider_free_node_fixture",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery/fixture-failure-diagnosis.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the one-path mechanical recovery, deterministic prelaunch existence gate, one serial fixture, acceptance and closeout. DeepSeek cannot be dispatched because every worker/model/provider request is forbidden. Gemini is proportionate only if a later material correction candidate survives deterministic admission. Native subagents are declined under current developer policy and the serial one-process boundary.",
+    "git_refs_and_worktree": "The preflight machine snapshot alone owns exact Git identities and verifies the named task branch, origin task alignment, required-head ancestry, all four protected refs, tracked cleanliness and preservation of unrelated untracked files.",
+    "live_handover_current_baton": "AGENTS.md names Continuity 399 / Compass 381, the accepted bounded-negative factory-subcoordinate diagnosis and the exact provider-free import-path recovery as next implementation.",
+    "protected_evidence_boundaries": "The successor may change only the local fixture package-scope projection, must prove both exact scoped import files before launch, and may start exactly one separately identified provider-free Node process. It may not retry the consumed fixture, mutate accepted runner/guard bytes, start a native Harness, broker, worker, model or provider request, touch product or protected data, enable ordinary practice, deploy, release, rebuild Pages or move a protected ref. Preserve docs/branding/ and all unrelated untracked files; stage explicit paths only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
