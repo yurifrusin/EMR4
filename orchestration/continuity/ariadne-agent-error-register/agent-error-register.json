@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 631,
+  "register_revision": 632,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -39346,6 +39346,189 @@
       "incident_id": "AER-1015",
       "attempt_id": "clock-9528fcc2ee172166471b5d6f",
       "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "diagnosis-verification-test-manifest",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every selected verification test path must be discovered from the current repository before command construction.",
+      "observed_error": "The first small governance selection named a nonexistent current-Baton test file and pytest rejected it before collection.",
+      "detection_method": "Pytest returned file-or-directory-not-found before executing a test.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/efficacy-reading.json",
+        "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.verification_manifest_used_undiscovered_test_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Discover the exact current Baton consistency test path with repository file search and use that path in the passing selection.",
+        "prevention_control": "Generate verification manifests from repository-discovered test paths rather than recalled filenames.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py"
+        ]
+      },
+      "incident_id": "AER-1016",
+      "attempt_id": "clock-eea361e9cd3383df8836e09f",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "ariadne-serial-pytest-invocation",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_test_runner",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Pytest arguments supplied to the serial runner must follow the required separator in its typed command form.",
+      "observed_error": "The first serial-runner invocation placed -q before the separator and argparse rejected it before collection.",
+      "detection_method": "The serial runner returned unrecognized-arguments before acquiring or running the test manifest.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/efficacy-reading.json",
+        "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.serial_pytest_missing_argument_separator",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the documented separator before all pytest arguments; the corrected invocation passed.",
+        "prevention_control": "Generate serial-runner invocations from a typed command form that inserts the separator mechanically.",
+        "evidence_paths": [
+          "scripts/ariadne_serial_pytest.py"
+        ]
+      },
+      "incident_id": "AER-1017",
+      "attempt_id": "clock-6f6f24ce5d4ffd6a9775d3b2",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "codex-yielded-execution-session",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_exec_controller",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Every yielded long-running command must retain its session identifier until final exit and complete output are read back.",
+      "observed_error": "The first 164-test run yielded a session identifier inside a result object whose output alone was retained; the run completed but its final exit could not be read back, requiring one redundant full rerun.",
+      "detection_method": "Process inspection showed the original run continued to completion while the orchestrator no longer held its session identifier.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/efficacy-reading.json",
+        "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.yielded_exec_session_identifier_not_retained",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Retain the complete execution result, poll the yielded session to final exit and record the passing 164-test result.",
+        "prevention_control": "Route every potentially long command through one typed controller that persists and polls the returned session identifier.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/efficacy-reading.json"
+        ]
+      },
+      "incident_id": "AER-1018",
+      "attempt_id": "clock-b5d1e21a5d617295aa55607b",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "ariadne-active-operation-latch",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "The live active-operation latch is a clockwork-owned canonical surface and may change only through the clockwork writer.",
+      "observed_error": "The orchestrator directly edited the latch at plan freeze; the closeout dry run rejected canonical_drift before publication.",
+      "detection_method": "The clockwork live-state validator rejected the dry run and wrote no canonical projection.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/efficacy-reading.json",
+        "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.direct_edit_of_clockwork_owned_active_latch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the exact previous latch bytes and submit the successor state only through the clockwork closeout transaction.",
+        "prevention_control": "Prohibit direct writes to every clockwork-owned canonical surface, including named plan checkpoints.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1019",
+      "attempt_id": "clock-d5c420b3160344eda12c168d",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
+      "role": "implementer",
+      "resource_id": "diagnosis-canonical-evidence-readback",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_diagnostic",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Canonical evidence written at a full source object must remain idempotently readable after descendant commits.",
+      "observed_error": "The first postcommit check rebuilt evidence against live HEAD rather than its retained full source object and rejected its own canonical bytes as drifted.",
+      "detection_method": "The postcommit --check path returned existing_evidence_noncanonical_or_drifted before closeout publication.",
+      "evidence_paths": [
+        "scripts/raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+        "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/efficacy-reading.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.canonical_evidence_rebound_to_live_head_on_readback",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Retain the existing full source binding, prove it is an ancestor of current HEAD and rebuild canonical evidence against that retained object.",
+        "prevention_control": "Every evidence readback must validate its stored full object as an ancestor rather than silently substitute live HEAD.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+          "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py"
+        ]
+      },
+      "incident_id": "AER-1020",
+      "attempt_id": "clock-665c436c9848f2fb3ea50842",
+      "origin": "repository",
       "related_incident_ids": [],
       "status": "corrected"
     }

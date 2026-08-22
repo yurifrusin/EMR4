@@ -1,0 +1,10 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "operation_id": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
+  "sent_at": "2026-08-23T04:11:26.5527985+10:00",
+  "status": "delivered",
+  "provider_status": 1,
+  "request_id": "437f8417-00d9-4847-9d1d-db20387efbec",
+  "contains_phi": false,
+  "continuation": "prospective-success redaction and typed-cleanup conformance repair"
+}

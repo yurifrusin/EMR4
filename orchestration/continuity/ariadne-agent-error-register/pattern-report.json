@@ -1,44 +1,44 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 631,
+  "register_revision": 632,
   "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "80239fae4f129852107f80ee6fd0da04cb58bc3c94d0c3e8d2914a882471758f",
-  "incident_count": 1015,
+  "canonical_register_sha256": "ab99311f5f3f0438c3f03142bbe2a12cf37c0fdf6c64dcbfffcac35f56403bac",
+  "incident_count": 1020,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 531,
+      "agent_behavior": 532,
       "harness": 72,
-      "operator": 254,
-      "repository": 142,
+      "operator": 257,
+      "repository": 143,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 99,
       "evidence_misreport": 75,
       "harness_failure": 72,
-      "operator_error": 254,
-      "output_contract_violation": 304,
+      "operator_error": 257,
+      "output_contract_violation": 305,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
-      "repository_defect": 142,
+      "repository_defect": 143,
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 81,
+      "implementer": 82,
       "integration_reviewer": 3,
-      "orchestrator": 868,
+      "orchestrator": 872,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 650,
+      "low": 653,
       "material": 134,
-      "moderate": 231
+      "moderate": 233
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 215,
-      "canonical_unchanged": 629,
+      "accepted_candidate_changed": 216,
+      "canonical_unchanged": 633,
       "untrusted_partial_worktree": 171
     },
     "by_resource_and_role": {
@@ -60,7 +60,7 @@
       "applicable-startup-lineage-test-selector::orchestrator": 1,
       "ariadne-active-operation-latch-closeout::orchestrator": 1,
       "ariadne-active-operation-latch-continuity-test::orchestrator": 3,
-      "ariadne-active-operation-latch::orchestrator": 3,
+      "ariadne-active-operation-latch::orchestrator": 4,
       "ariadne-adapter-observation-inventory::orchestrator": 1,
       "ariadne-agent-error-register-current-literal-test::orchestrator": 1,
       "ariadne-agent-error-register-current-projection-tests::orchestrator": 2,
@@ -99,6 +99,7 @@
       "ariadne-preplanning-receipt-source-evidence::orchestrator": 1,
       "ariadne-prepush-git-ref-binding::orchestrator": 1,
       "ariadne-provider-free-pytest-launcher::orchestrator": 1,
+      "ariadne-serial-pytest-invocation::orchestrator": 1,
       "ariadne-validation-runner-cli::orchestrator": 1,
       "ariadne-verifier-worktree-preflight::orchestrator": 3,
       "ariadne-workspace-receipt::orchestrator": 1,
@@ -189,6 +190,7 @@
       "codex-primary-orchestrator::orchestrator": 363,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
+      "codex-yielded-execution-session::orchestrator": 1,
       "complete-runner-fixture-wire-validator::orchestrator": 1,
       "complete-runner-focused-contract-expectations::orchestrator": 1,
       "completed-attempt-deterministic-readback::orchestrator": 1,
@@ -230,11 +232,13 @@
       "delete-confirm-http-postgresql-harness::orchestrator": 3,
       "delete-confirm-idempotency-route-contract-test::orchestrator": 1,
       "deterministic-node-process-guard::orchestrator": 1,
+      "diagnosis-canonical-evidence-readback::implementer": 1,
       "diagnosis-generator-entry-point::orchestrator": 1,
       "diagnosis-plan-boundary-test::implementer": 1,
       "diagnosis-postterminal-tests::implementer": 1,
       "diagnosis-provider-boundary-predicate::orchestrator": 1,
       "diagnosis-validation-manifest::orchestrator": 1,
+      "diagnosis-verification-test-manifest::orchestrator": 1,
       "docker-desktop-windows::orchestrator": 1,
       "emr4-ariadne-agent-error-register-acceptance::orchestrator": 18,
       "emr4-arrival-check-in-convergence-prose-fixtures::orchestrator": 1,

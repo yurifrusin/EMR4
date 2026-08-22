@@ -2,57 +2,55 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "attempt-007-closeout-tick-check",
+      "command_id": "attempt-007-redaction-diagnosis-closeout-tick-check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_governance_clockwork_tick",
         "--check",
         "--intent",
-        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/closeout/closeout-intent.json"
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "attempt-007-closeout-provider-free-tests",
+      "command_id": "attempt-007-redaction-diagnosis-closeout-provider-free-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
+        "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+        "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis_plan.py",
         "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_007_postterminal.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_007_plan.py",
-        "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair_postterminal.py",
         "tests/test_ariadne_active_operation_latch.py",
         "tests/test_ariadne_governance_clockwork_tick.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "attempt-007-closeout-ruff",
+      "command_id": "attempt-007-redaction-diagnosis-closeout-ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_007.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_007.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_007_plan.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_007_postterminal.py"
+        "scripts/raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+        "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+        "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis_plan.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "attempt-007-closeout-compile",
+      "command_id": "attempt-007-redaction-diagnosis-closeout-compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_007.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_007.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_007_plan.py",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_007_postterminal.py"
+        "scripts/raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+        "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+        "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis_plan.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

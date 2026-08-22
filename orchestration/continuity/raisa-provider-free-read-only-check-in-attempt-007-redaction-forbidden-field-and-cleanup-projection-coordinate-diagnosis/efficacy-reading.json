@@ -1,0 +1,78 @@
+{
+  "schema_version": "ariadne.workflow_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
+  "recorded_at": "2026-08-23T04:09:17.7509356+10:00",
+  "result": "accepted",
+  "exact_plan_source": "3240c0a00dcce1ea9c07907a1d67b2493c8f33ed",
+  "exact_candidate_source": "ca7970b3520b2c38e9abd6fee3462ebb743792e0",
+  "diagnosis_evidence_sha256": "b6d473d20fa64757fc25fbd2eb4f1792d86ebc91e3f0a8bf5bb3c9bdcc62d8e4",
+  "substantive_result": {
+    "prospective_final_result_key_paths": 67,
+    "forbidden_conflicts": 1,
+    "post_cleanup_escape_coordinates": 1,
+    "cleanup_projection_collapse_coordinates": 1,
+    "occupied_retries": 0,
+    "docker_object_commands": 0,
+    "database_operations": 0,
+    "provider_requests": 0,
+    "product_effects": 0
+  },
+  "verification": {
+    "focused_tests_passed": 25,
+    "broader_serial_tests_passed": 164,
+    "ruff": "passed",
+    "compilation": "passed",
+    "schema_and_canonical_readback": "passed",
+    "git_diff_check": "passed"
+  },
+  "workflow_cost": {
+    "productive_broader_regression_runs": 1,
+    "redundant_broader_regression_runs": 1,
+    "preexecution_command_shape_rejections": 2,
+    "candidate_mutations_from_those_events": 0,
+    "external_effects_from_those_events": 0,
+    "clockwork_dry_run_rejections": 1,
+    "postcommit_idempotency_repairs": 1
+  },
+  "contained_workflow_events": [
+    {
+      "event": "nonexistent_current_baton_test_path_selected",
+      "effect": "pytest rejected the path before collection",
+      "prospective_control": "resolve test paths from repository discovery before constructing the manifest"
+    },
+    {
+      "event": "serial_pytest_separator_omitted",
+      "effect": "the runner rejected the pytest option before collection",
+      "prospective_control": "generate the serial-runner command from a typed command form with the required separator"
+    },
+    {
+      "event": "long_running_exec_session_identifier_not_retained",
+      "effect": "the first passing broader run could not be read back and one redundant 164-test run was required",
+      "prospective_control": "retain and poll every yielded execution session identifier through one typed long-run controller"
+    },
+    {
+      "event": "clockwork_owned_latch_edited_directly",
+      "effect": "the clockwork dry run rejected canonical_drift before publication and the exact previous latch bytes were restored",
+      "prospective_control": "route every named canonical checkpoint through the clockwork single writer and prohibit direct latch edits"
+    },
+    {
+      "event": "evidence_check_rebound_to_live_head_after_commit",
+      "effect": "postcommit canonical readback failed until the evidence retained its original full ancestor binding",
+      "prospective_control": "on readback validate the retained full source object as an ancestor instead of recomputing evidence against live HEAD"
+    }
+  ],
+  "parallelism": {
+    "deepseek": "declined_negative_paused_native_lane_and_no_separable_worker_package",
+    "gemini": "declined_neutral_deterministic_evidence_no_material_veto_surface",
+    "native_subagents": "declined_negative_developer_policy_and_serial_evidence_chain",
+    "actual_worker": "gpt_sol_only"
+  },
+  "clockwork_assessment": {
+    "substantive_loop_narrowed": true,
+    "future_occupied_detection_replaced_by_static_gate": true,
+    "typed_cleanup_reading_selected": true,
+    "form_and_command_reruns_eliminated": false,
+    "net_direction": "closer_with_measured_remaining_friction",
+    "conclusion": "The exact occupied failure is now preventable without another database run, and cleanup truth has a typed repair boundary. Remaining local command-form friction is measurable and should be folded into generated command/session controls rather than additional memory rules."
+  }
+}

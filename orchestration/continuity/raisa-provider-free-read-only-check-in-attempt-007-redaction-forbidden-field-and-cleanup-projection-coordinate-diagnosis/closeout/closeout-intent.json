@@ -1,0 +1,414 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
+    "title": "Raisa provider-free read-only check-in attempt-007 redaction and cleanup-projection coordinate diagnosis closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T04:09:17.7509356+10:00",
+    "node": {
+      "id": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
+      "title": "Raisa provider-free read-only check-in attempt-007 redaction and cleanup-projection coordinate diagnosis",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-007",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted this provider-free read-only diagnosis after the accepted attempt-007 failed-closed terminal.",
+          "The diagnosis created no Docker object, started no PostgreSQL process, executed no SQL or database operation and made no provider request.",
+          "The successor is a provider-free deterministic conformance repair for two exact gears; attempt 008 remains closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-prospective-success-forbidden-field-coordinate",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-evidence.json",
+          "status": "accepted",
+          "summary": "Accept 67 prospective final-result key paths and exactly one conflict at the contract-derived closed-boundary key containing the forbidden secret token."
+        },
+        {
+          "id": "accept-post-cleanup-redaction-escape-coordinate",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-report.md",
+          "status": "accepted",
+          "summary": "Accept AST proof that final result redaction executes after lifecycle cleanup outside the base handler that would preserve failure evidence."
+        },
+        {
+          "id": "accept-wrapper-cleanup-projection-collapse-coordinate",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-evidence.json",
+          "status": "accepted",
+          "summary": "Accept wrapper AST and pure-fake proof that the escaped failure is rebuilt with literal cleanup status not_started rather than the finalized base cleanup projection."
+        },
+        {
+          "id": "accept-two-gear-future-conformance-repair-boundary",
+          "source": "orchestration/agent_inbox/codex/raisa-check-in-attempt-007-redaction-cleanup-diagnosis-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept a complete prospective-success static redaction gate plus a base-owned typed post-finalization cleanup bridge without weakening redaction or authorising attempt 008."
+        },
+        {
+          "id": "accept-read-only-diagnosis-verification",
+          "source": "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md",
+          "status": "accepted",
+          "summary": "Accept 25 focused and 164 broader serial tests plus Ruff, compilation, schema, canonical-readback and Git-diff checks with zero external runtime effect."
+        },
+        {
+          "id": "accept-measured-workflow-efficacy-reading",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept substantive loop narrowing and explicitly measure one redundant broader run, two precollection command-shape rejections, one rejected direct canonical edit and one postcommit idempotency repair."
+        }
+      ],
+      "claim_scope": [
+        "The complete prospective final-result structure contains 67 key paths and exactly one forbidden-field conflict.",
+        "The source-owned redactor returns redaction/forbidden_field on the exact contract-derived conflicting key.",
+        "Final result redaction occurs after lifecycle cleanup and outside the earlier base failure handler.",
+        "The attempt-007 wrapper substitutes literal cleanup status not_started for the escaped post-finalization failure.",
+        "A future repair must add the complete prospective-success static gate and typed post-finalization cleanup bridge without weakening default denial.",
+        "No attempt-007 transaction, role-absence or internal cleanup result is accepted.",
+        "No Docker, PostgreSQL, SQL/database, provider, product, ordinary-practice, production, Pages or protected-ref effect occurred."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-plan.md",
+          "docs/security/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-report.md",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-attempt-007-redaction-cleanup-diagnosis-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-attempt-007-redaction-cleanup-diagnosis-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-attempt-007-redaction-cleanup-diagnosis-candidate-precommit-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+          "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis_plan.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_007_postterminal.py",
+          "tests/test_ariadne_provider_free_no_database_admission.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-evidence.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-632.md",
+          "orchestration/human_inbox/yuri/2026-08-23--check-in-attempt-007-redaction-cleanup-diagnosis.md",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The conflicting closed-boundary field and missing prospective-success static gate remain unrepaired until the next deterministic tranche.",
+        "The base-owned typed post-finalization cleanup bridge remains unimplemented.",
+        "Attempt-007 rollback, unknown-response commit recovery, role absence and internal cleanup history remain unproved.",
+        "Attempt 008 and every further database execution remain closed.",
+        "Dedicated check-in remains default-off without ordinary-practice admission.",
+        "No provider, product-data, production, deployment, release, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Replace another occupied discovery loop with exact prospective-evidence and terminal-projection coordinates",
+      "outcome": "The late redaction failure and lost cleanup reading are now two deterministic pre-execution repair requirements rather than reasons for another database run.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-evidence.json",
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-report.md",
+        "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Install the complete prospective-success redaction gear and typed post-finalization cleanup gear before any occupied successor",
+      "why_now": "The read-only diagnosis proves one exact contract-derived field conflict and one exact base-to-wrapper cleanup projection loss.",
+      "outcome": "Both defects can now be repaired and exhaustively exercised through pure deterministic source, schema and fake-process tests.",
+      "unlocks": [
+        "All prospective success-evidence keys can be rejected or admitted before Docker or database work.",
+        "Late redaction or schema failures can retain the truthful base-finalized cleanup projection.",
+        "A later attempt decision can depend on deterministic conformance rather than another blind occupied cycle."
+      ],
+      "does_not_solve": [
+        "No repaired database lifecycle has run.",
+        "No rollback, exactly-once or role-absence transaction result is proved.",
+        "No attempt 008, ordinary-practice, product-data, provider, production or protected authority opens."
+      ],
+      "evidence": [
+        "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-check-in-attempt-007-redaction-cleanup-diagnosis-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-23--check-in-attempt-007-redaction-cleanup-diagnosis.md"
+      ],
+      "orientation_statement": "EMR4 will make prospective success redaction and post-finalization cleanup projection deterministic before considering any further occupied check-in recovery."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "active_tranche": "Raisa provider-free check-in prospective-success redaction and typed cleanup-projection conformance repair",
+      "objective": "Freeze and implement the narrow provider-free deterministic repair that validates the complete prospective success-evidence projection before occupied work and carries the base-finalized cleanup projection through a typed post-finalization terminal bridge, without creating a Docker object, starting PostgreSQL, executing SQL or authorising attempt 008.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted attempt-007 redaction and cleanup-projection coordinate diagnosis.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_prospective_success_redaction_and_typed_cleanup_projection_repair_plan"
+    },
+    "incidents": [
+      {"incident_id": "diagnosis-nonexistent-baton-test-path", "source_id": "diagnosis-verification-local-001", "peers": []},
+      {"incident_id": "diagnosis-serial-runner-separator", "source_id": "diagnosis-verification-local-002", "peers": []},
+      {"incident_id": "diagnosis-long-run-session-capture", "source_id": "diagnosis-verification-local-003", "peers": []}
+      ,{"incident_id": "diagnosis-direct-latch-canonical-drift", "source_id": "diagnosis-closeout-local-001", "peers": []}
+      ,{"incident_id": "diagnosis-evidence-postcommit-head-rebind", "source_id": "diagnosis-verification-local-004", "peers": []}
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "attempt-007-redaction-diagnosis-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/closeout/closeout-intent.json"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt-007-redaction-diagnosis-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+          "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis_plan.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_007_postterminal.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt-007-redaction-diagnosis-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "ruff", "check",
+          "scripts/raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+          "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+          "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt-007-redaction-diagnosis-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "py_compile",
+          "scripts/raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+          "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+          "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-plan.md",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-632.md",
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--native-harness-corrected-graph-useful-recovery.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_only",
+    "complete_prospective_success_projection_redaction_gate_before_any_occupied_work",
+    "typed_base_owned_post_finalization_cleanup_projection_bridge_only",
+    "forbidden_field_predicate_unchanged_and_closed_boundary_default_denial_preserved",
+    "deterministic_source_ast_schema_and_process_fake_evidence_only",
+    "attempt_007_terminal_immutable_no_retry_resume_overwrite_or_reclassification",
+    "no_docker_object_creation_postgresql_start_sql_or_database_execution",
+    "no_attempt_008_plan_checkpoint_or_execution",
+    "no_native_deepseek_harness_worker_or_provider_call",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_application_configuration_route_openapi_graphql_or_client_change",
+    "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_existing_hosted_live_or_production_database",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "diagnosis-nonexistent-baton-test-path-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "diagnosis-verification-test-manifest",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every selected verification test path must be discovered from the current repository before command construction.",
+      "observed_error": "The first small governance selection named a nonexistent current-Baton test file and pytest rejected it before collection.",
+      "detection_method": "Pytest returned file-or-directory-not-found before executing a test.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/efficacy-reading.json",
+        "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.verification_manifest_used_undiscovered_test_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Discover the exact current Baton consistency test path with repository file search and use that path in the passing selection.",
+        "prevention_control": "Generate verification manifests from repository-discovered test paths rather than recalled filenames.",
+        "evidence_paths": ["tests/test_current_baton_consistency.py"]
+      },
+      "baton_summary": "records one precollection nonexistent-test-path lapse and selects repository-discovered manifests."
+    },
+    {
+      "attempt_key": "diagnosis-serial-runner-separator-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "ariadne-serial-pytest-invocation",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_test_runner",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Pytest arguments supplied to the serial runner must follow the required separator in its typed command form.",
+      "observed_error": "The first serial-runner invocation placed -q before the separator and argparse rejected it before collection.",
+      "detection_method": "The serial runner returned unrecognized-arguments before acquiring or running the test manifest.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/efficacy-reading.json",
+        "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.serial_pytest_missing_argument_separator",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the documented separator before all pytest arguments; the corrected invocation passed.",
+        "prevention_control": "Generate serial-runner invocations from a typed command form that inserts the separator mechanically.",
+        "evidence_paths": ["scripts/ariadne_serial_pytest.py"]
+      },
+      "baton_summary": "records one precollection serial-runner argument-shape lapse and selects typed command generation."
+    },
+    {
+      "attempt_key": "diagnosis-long-run-session-capture-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "codex-yielded-execution-session",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_exec_controller",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Every yielded long-running command must retain its session identifier until final exit and complete output are read back.",
+      "observed_error": "The first 164-test run yielded a session identifier inside a result object whose output alone was retained; the run completed but its final exit could not be read back, requiring one redundant full rerun.",
+      "detection_method": "Process inspection showed the original run continued to completion while the orchestrator no longer held its session identifier.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/efficacy-reading.json",
+        "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.yielded_exec_session_identifier_not_retained",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Retain the complete execution result, poll the yielded session to final exit and record the passing 164-test result.",
+        "prevention_control": "Route every potentially long command through one typed controller that persists and polls the returned session identifier.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/efficacy-reading.json"
+        ]
+      },
+      "baton_summary": "records one redundant regression run caused by lost yielded-session state and selects mandatory session capture."
+    },
+    {
+      "attempt_key": "diagnosis-direct-latch-canonical-drift-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "ariadne-active-operation-latch",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "The live active-operation latch is a clockwork-owned canonical surface and may change only through the clockwork writer.",
+      "observed_error": "The orchestrator directly edited the latch at plan freeze; the closeout dry run rejected canonical_drift before publication.",
+      "detection_method": "The clockwork live-state validator rejected the dry run and wrote no canonical projection.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/efficacy-reading.json",
+        "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.direct_edit_of_clockwork_owned_active_latch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the exact previous latch bytes and submit the successor state only through the clockwork closeout transaction.",
+        "prevention_control": "Prohibit direct writes to every clockwork-owned canonical surface, including named plan checkpoints.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-active-operation-latch/current.json",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records one clockwork-rejected direct latch edit and restores single-writer ownership before publication."
+    },
+    {
+      "attempt_key": "diagnosis-evidence-postcommit-head-rebind-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
+      "role": "implementer",
+      "resource_id": "diagnosis-canonical-evidence-readback",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_diagnostic",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Canonical evidence written at a full source object must remain idempotently readable after descendant commits.",
+      "observed_error": "The first postcommit check rebuilt evidence against live HEAD rather than its retained full source object and rejected its own canonical bytes as drifted.",
+      "detection_method": "The postcommit --check path returned existing_evidence_noncanonical_or_drifted before closeout publication.",
+      "evidence_paths": [
+        "scripts/raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+        "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/efficacy-reading.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.canonical_evidence_rebound_to_live_head_on_readback",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Retain the existing full source binding, prove it is an ancestor of current HEAD and rebuild canonical evidence against that retained object.",
+        "prevention_control": "Every evidence readback must validate its stored full object as an ancestor rather than silently substitute live HEAD.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py",
+          "tests/test_raisa_provider_free_check_in_attempt_007_redaction_cleanup_projection_diagnosis.py"
+        ]
+      },
+      "baton_summary": "records and repairs one postcommit evidence-head rebinding defect with stable full-object ancestry."
+    }
+  ]
+}

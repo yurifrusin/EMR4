@@ -1,0 +1,128 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_clockwork_published_attempt_007_redaction_cleanup_diagnosis_closeout",
+  "source_evidence": {
+    "live_handover_current_baton": "The clockwork-published AGENTS.md current result accepts the read-only attempt-007 redaction and cleanup-projection diagnosis at Continuity 415 / Compass 397 and selects the provider-free two-gear conformance repair as next implementation.",
+    "current_authority_allocation": "GPT Sol retains deterministic diagnosis acceptance, clockwork, Git and successor plan ownership. The native DeepSeek Harness is paused, Gemini had no material veto package for the exact deterministic diagnosis, and native subagents were prohibited by developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-plan.md",
+      "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-attempt-007-redaction-cleanup-diagnosis-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-evidence.json",
+      "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-report.md",
+      "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/efficacy-reading.json",
+      "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/closeout/clockwork-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "The accepted diagnosis and selected successor remain provider-free and deterministic. The successor may repair only complete prospective-success redaction admission and typed base-owned cleanup projection. It creates no Docker object, starts no PostgreSQL process, executes no SQL/database operation and authorises no attempt 008, provider, product/API change, ordinary enablement, protected data, production, Pages or protected-ref movement.",
+    "git_refs_and_worktree": "Fresh machine readings verify the accepted diagnosis source, the clockwork-published canonical surfaces with zero drift, all four protected refs at the required protected object, and every unrelated untracked entry including five docs/branding entries preserved. Git object values remain machine-owned receipt fields rather than manually repeated prose."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+    "active_tranche": "Raisa provider-free check-in prospective-success redaction and typed cleanup-projection conformance repair",
+    "objective": "Freeze and implement the narrow provider-free deterministic repair that validates the complete prospective success-evidence projection before occupied work and carries the base-finalized cleanup projection through a typed post-finalization terminal bridge, without creating a Docker object, starting PostgreSQL, executing SQL or authorising attempt 008.",
+    "status": "in_progress",
+    "source_head": "ca7970b3520b2c38e9abd6fee3462ebb743792e0",
+    "authority_source": "Yuri's standing uninterrupted-development authority and the accepted attempt-007 redaction and cleanup-projection coordinate diagnosis.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_prospective_success_redaction_and_typed_cleanup_projection_repair_plan",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_only",
+      "complete_prospective_success_projection_redaction_gate_before_any_occupied_work",
+      "typed_base_owned_post_finalization_cleanup_projection_bridge_only",
+      "forbidden_field_predicate_unchanged_and_closed_boundary_default_denial_preserved",
+      "deterministic_source_ast_schema_and_process_fake_evidence_only",
+      "attempt_007_terminal_immutable_no_retry_resume_overwrite_or_reclassification",
+      "no_docker_object_creation_postgresql_start_sql_or_database_execution",
+      "no_attempt_008_plan_checkpoint_or_execution",
+      "no_native_deepseek_harness_worker_or_provider_call",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_application_configuration_route_openapi_graphql_or_client_change",
+      "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_existing_hosted_live_or_production_database",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+    "assessed_stage": "diagnosis_closeout_precommit_and_successor_preplanning",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The native DeepSeek Harness remains paused and neither the accepted diagnosis closeout nor the tightly coupled two-gear successor currently supplies an authorised separable worker package.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "The accepted diagnosis is fixed by exact hashes, AST, the source-owned predicate, schema and pure fake. Reassess after the successor repair has a material candidate that could benefit from independent static veto.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and the redaction plus typed-cleanup repair is one serial source/evidence contract.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "commit the already-published clockwork closeout without altering its generated surfaces",
+      "freshly rehydrate from the five sources before successor plan freeze",
+      "keep both future repair gears coupled under one deterministic acceptance boundary",
+      "keep attempt 008 and every occupied database action closed"
+    ],
+    "reassessment_triggers": ["after closeout commit and push", "after successor plan freeze", "after successor deterministic candidate", "pre_closeout"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "Clockwork-published AGENTS.md and active latch; exact diagnosis plan, evidence, report, closeout, acceptance and efficacy; postpublication latch, Baton, register and clockwork tests; protected Git readings.",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol owns closeout, successor planning, clockwork and Git."]},
+    {"adapter_id": "deepseek_native_harness", "method": "deepcode_cli_observation", "reachability": "unreachable", "evidence": ["Paused and outside the provider-free diagnosis closeout."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Historical only; no fallback."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No provider-backed verifier selected for the diagnosis closeout."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No subagent spawned; developer policy prohibits proactive delegation."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will diagnose the exact evidence-redaction and cleanup-projection boundaries without another Docker object or database execution.
+> EMR4 will make prospective success redaction and post-finalization cleanup projection deterministic before considering any further occupied check-in recovery.
 
 ## North star
 
@@ -598,26 +598,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One executable deletion produces an advertised start/attach argv with deterministic stdin, signal and teardown conformance. Lineage parent: `raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis`.
 291. **Exercise one repaired start/attach database attempt without retry — Raisa provider-free check-in relay-free recovery attempt 007**
    The attempt moves beyond the prior start coordinate but fails closed at final evidence redaction with zero owned Docker residue. Lineage parent: `raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair`.
+292. **Replace another occupied discovery loop with exact prospective-evidence and terminal-projection coordinates — Raisa provider-free read-only check-in attempt-007 redaction and cleanup-projection coordinate diagnosis**
+   The late redaction failure and lost cleanup reading are now two deterministic pre-execution repair requirements rather than reasons for another database run. Lineage parent: `raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-007`.
 
 ## Current position
 
-**Diagnose the late redaction and cleanup-projection coordinates without another database run — Raisa provider-free check-in relay-free recovery attempt 007**
+**Install the complete prospective-success redaction gear and typed post-finalization cleanup gear before any occupied successor — Raisa provider-free read-only check-in attempt-007 redaction and cleanup-projection coordinate diagnosis**
 
-**Why this proof came next:** The exact start defect is repaired and the next occupied terminal exposes a deterministic evidence-key conflict plus incomplete wrapper cleanup projection.
+**Why this proof came next:** The read-only diagnosis proves one exact contract-derived field conflict and one exact base-to-wrapper cleanup projection loss.
 
-A read-only diagnosis will decide the smallest deterministic repair while keeping attempt 008 closed.
+Both defects can now be repaired and exhaustively exercised through pure deterministic source, schema and fake-process tests.
 
 ### What this unlocks
 
-- Exact source/control-flow proof of every redaction conflict in the prospective success projection.
-- A typed cleanup-terminal bridge requirement for post-finalization exceptions.
-- A bounded repair plan that can be exhaustively exercised without Docker or PostgreSQL.
+- All prospective success-evidence keys can be rejected or admitted before Docker or database work.
+- Late redaction or schema failures can retain the truthful base-finalized cleanup projection.
+- A later attempt decision can depend on deterministic conformance rather than another blind occupied cycle.
 
 ### What it does not solve
 
-- No transaction or role-absence result is accepted.
-- No further database attempt is admitted.
-- No ordinary-practice, product-data, provider, production or protected authority opens.
+- No repaired database lifecycle has run.
+- No rollback, exactly-once or role-absence transaction result is proved.
+- No attempt 008, ordinary-practice, product-data, provider, production or protected authority opens.
 
 ## Continuity and authority
 
@@ -1619,6 +1621,7 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-plan.md`
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md`
 - `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md`
+- `docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md`
 - `docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-closeout.md`
 - `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-closeout.md`
 - `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-plan.md`
@@ -2234,7 +2237,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-007-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-check-in-attempt-007-redaction-cleanup-diagnosis-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -3053,6 +3056,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.example.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json`
+- `orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-evidence.json`
+- `orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-report.md`
 - `orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-report.md`
 - `orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/provider-free-read-only-evidence.json`
@@ -3540,7 +3545,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-tool-result-conclusion-coordinate-diagnostic.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-coordinate-recovery.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-failed-closed.md`
-- `orchestration/human_inbox/yuri/2026-08-23--check-in-relay-free-recovery-attempt-007.md`
+- `orchestration/human_inbox/yuri/2026-08-23--check-in-attempt-007-redaction-cleanup-diagnosis.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3849,4 +3854,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 396; continuity graph revision 414._
+_Compass map revision 397; continuity graph revision 415._

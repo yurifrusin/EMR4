@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
-  "active_tranche": "Raisa provider-free read-only check-in attempt-007 redaction forbidden-field and cleanup-projection coordinate diagnosis",
-  "objective": "Bind the immutable attempt-007 terminal, trace the exact success-evidence redaction and wrapper post-finalization cleanup-projection coordinates, and identify the smallest deterministic repair without creating a Docker object, starting PostgreSQL, executing SQL or authorising attempt 008.",
+  "operation_id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+  "active_tranche": "Raisa provider-free check-in prospective-success redaction and typed cleanup-projection conformance repair",
+  "objective": "Freeze and implement the narrow provider-free deterministic repair that validates the complete prospective success-evidence projection before occupied work and carries the base-finalized cleanup projection through a typed post-finalization terminal bridge, without creating a Docker object, starting PostgreSQL, executing SQL or authorising attempt 008.",
   "status": "in_progress",
-  "source_head": "6657ee5061265d732096e9987f327d82feed800c",
-  "authority_source": "Yuri's standing uninterrupted-development authority and the accepted attempt-007 failed-closed terminal.",
+  "source_head": "ca7970b3520b2c38e9abd6fee3462ebb743792e0",
+  "authority_source": "Yuri's standing uninterrupted-development authority and the accepted attempt-007 redaction and cleanup-projection coordinate diagnosis.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-007 at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_read_only_redaction_and_cleanup_projection_diagnosis",
+    "completed_stage": "Accepted raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_prospective_success_redaction_and_typed_cleanup_projection_repair_plan",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,9 +34,12 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_read_only_attempt_007_redaction_and_cleanup_projection_diagnosis_only",
-    "immutable_attempt_007_terminal_no_retry_resume_overwrite_or_reclassification",
+    "provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_only",
+    "complete_prospective_success_projection_redaction_gate_before_any_occupied_work",
+    "typed_base_owned_post_finalization_cleanup_projection_bridge_only",
+    "forbidden_field_predicate_unchanged_and_closed_boundary_default_denial_preserved",
     "deterministic_source_ast_schema_and_process_fake_evidence_only",
+    "attempt_007_terminal_immutable_no_retry_resume_overwrite_or_reclassification",
     "no_docker_object_creation_postgresql_start_sql_or_database_execution",
     "no_attempt_008_plan_checkpoint_or_execution",
     "no_native_deepseek_harness_worker_or_provider_call",
