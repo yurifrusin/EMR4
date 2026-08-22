@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will repair and deterministically verify the one invalid Docker start option before considering any attempt 007.
+> EMR4 will freeze and checkpoint a distinct one-run attempt 007 against the repaired exact start argv before any Docker object or PostgreSQL action.
 
 ## North star
 
@@ -594,25 +594,27 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The attempt failed closed at a newly specific created-state start/attach coordinate and cleaned up exactly without reaching PostgreSQL readiness or transaction work. Lineage parent: `raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review`.
 289. **Replace another blind occupied retry with an exact read-only start/attach failure-coordinate diagnosis — Raisa provider-free read-only check-in server start/attach created-state failure-coordinate diagnosis**
    The installed Docker start grammar and exact harness argv exposed one unsupported option that fully explains the attempt-006 created-state terminal. Lineage parent: `raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006`.
+290. **Remove the exact unsupported Docker start token without another occupied execution — Raisa provider-free check-in server start argv sig-proxy removal conformance repair**
+   One executable deletion produces an advertised start/attach argv with deterministic stdin, signal and teardown conformance. Lineage parent: `raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis`.
 
 ## Current position
 
-**Correct one unsupported Docker start argument under provider-free deterministic conformance before any new occupied attempt — Raisa provider-free read-only check-in server start/attach created-state failure-coordinate diagnosis**
+**Plan and checkpoint one new disposable attempt 007 against the repaired start/attach source — Raisa provider-free check-in server start argv sig-proxy removal conformance repair**
 
-**Why this proof came next:** The read-only diagnosis resolves the failure coordinate exactly, making a one-token static repair the smallest remaining evidence dependency.
+**Why this proof came next:** The exact CLI grammar defect is diagnosed and repaired with current deterministic conformance; one occupied database result remains the next evidence dependency.
 
-The cause is no longer ambiguous; repair semantics rather than another database run are now the next gate.
+The harness is statically ready for a separately governed one-run attempt, not automatically authorised to execute.
 
 ### What this unlocks
 
-- A source-only repair can remove the invalid option without Docker object creation.
-- Deterministic fakes can prove the resulting argument vector and signal, stdin, attachment and cleanup expectations.
-- Only an accepted repair can later support a separately planned attempt 007.
+- A fresh plan can bind the repaired full-Git source and exact harness digest.
+- A distinct preexecution checkpoint can admit at most one new disposable authored-synthetic execution.
+- The run can finally reach readiness and the rollback/unknown-response transaction proof or preserve a new failed-closed terminal.
 
 ### What it does not solve
 
-- No repaired command or PostgreSQL lifecycle has run.
-- No rollback or exactly-once transaction result is proved.
+- No repaired container or PostgreSQL process has run.
+- No rollback or exactly-once result is yet proved.
 - No ordinary-practice, product-data, production or protected authority opens.
 
 ## Continuity and authority
@@ -1515,6 +1517,7 @@ Prerequisites:
 - `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md`
 - `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-failed-closed-closeout.md`
 - `docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md`
+- `docs/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-closeout.md`
 - `docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-closeout.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-plan.md`
@@ -2228,7 +2231,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-check-in-server-start-attach-created-state-diagnosis-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-check-in-server-start-argv-sig-proxy-removal-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -2952,6 +2955,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/native-probe-terminal.json`
 - `orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-evidence.json`
+- `orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/repair-attestation.json`
+- `orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/repair-report.md`
 - `orchestration/continuity/raisa-provider-free-clockwork-governed-check-in-successor-resolution/successor-resolution-report.md`
 - `orchestration/continuity/raisa-provider-free-compatibility-conformance-harness-readiness-repair/structural-repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review/consumer-and-preservation-inventory.json`
@@ -3530,7 +3535,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-tool-result-conclusion-coordinate-diagnostic.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-coordinate-recovery.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-failed-closed.md`
-- `orchestration/human_inbox/yuri/2026-08-23--check-in-start-attach-created-state-diagnosis.md`
+- `orchestration/human_inbox/yuri/2026-08-23--check-in-start-argv-sig-proxy-removal-repair.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3839,4 +3844,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 394; continuity graph revision 412._
+_Compass map revision 395; continuity graph revision 413._

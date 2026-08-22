@@ -1,0 +1,11 @@
+{
+  "schema_version": "emr4.non_phi_pushover_notification_receipt.v1",
+  "recorded_at": "2026-08-23T02:48:38.4129265+10:00",
+  "status": "passed",
+  "provider": "pushover",
+  "request": "de9ad6ae-8927-486c-869d-4b29da7b872f",
+  "title": "EMR4 start argv repair",
+  "message_class": "non_phi_operational_closeout",
+  "phi_or_clinical_data": false,
+  "summary": "Provider-free repair passed: removed one unsupported Docker start option; exact diff and stdin/signal/cleanup conformance passed with zero Docker/database/provider activity. Attempt 007 remains separately planned and gated."
+}

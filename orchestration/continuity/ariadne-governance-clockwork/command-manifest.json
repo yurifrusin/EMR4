@@ -2,27 +2,27 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "start-attach-diagnosis-closeout-tick-check",
+      "command_id": "start-argv-repair-closeout-tick-check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_governance_clockwork_tick",
         "--check",
         "--intent",
-        "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/closeout/closeout-intent.json"
+        "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "start-attach-diagnosis-closeout-provider-free-tests",
+      "command_id": "start-argv-repair-closeout-provider-free-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
-        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
-        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_plan.py",
+        "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair.py",
+        "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair_postterminal.py",
         "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_active_operation_latch.py"
@@ -30,29 +30,29 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "start-attach-diagnosis-closeout-ruff",
+      "command_id": "start-argv-repair-closeout-ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
-        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
-        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_plan.py",
-        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py"
+        "scripts/raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair.py",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair.py",
+        "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair_postterminal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "start-attach-diagnosis-closeout-compile",
+      "command_id": "start-argv-repair-closeout-compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
-        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
-        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_plan.py",
-        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py"
+        "scripts/raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair.py",
+        "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair.py",
+        "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair_postterminal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

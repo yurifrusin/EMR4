@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 629,
+  "register_revision": 630,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -38978,6 +38978,115 @@
       },
       "incident_id": "AER-1005",
       "attempt_id": "clock-5ca0590198c63c4e6f993930",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "repair-plan-signal-semantics",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_source_inspection",
+      "stage": "dispatch",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "The repair plan must distinguish zero normal-path signal operations from the accepted teardown's bounded Popen terminate/wait/kill behavior.",
+      "observed_error": "The first frozen prose required zero normal and cleanup host signals even though exact source already used Popen.terminate during intended teardown.",
+      "detection_method": "Read-only exact source inspection found the teardown call before the executable repair was edited.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-plan.md",
+        "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/efficacy-reading.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.plan_conflated_normal_signal_absence_with_teardown_termination",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Correct the plan and threat delta before code to separate zero normal-path terminate/kill from bounded teardown termination.",
+        "prevention_control": "Render lifecycle prose from exact AST call-role projections before plan commit.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-plan.md",
+          "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/repair-attestation.json"
+        ]
+      },
+      "incident_id": "AER-1006",
+      "attempt_id": "clock-ea4f490beedb5bb10148e198",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair",
+      "role": "implementer",
+      "resource_id": "repair-postterminal-report-tests",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "After AER-1005, report semantics must be asserted through one normalized document representation rather than raw multiline substrings.",
+      "observed_error": "The first repair postterminal test repeated two raw report substring assertions; sequential focused runs exposed both wrapped sentences.",
+      "detection_method": "Pytest failed before closeout publication and each mismatch was confined to a line-wrapped report assertion, not the repair or attestation.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair_postterminal.py",
+        "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/efficacy-reading.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.raw_multiline_substring_assertion_recurred_after_normalization_control",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use one normalized report string for both semantic assertions and rerun the complete current suite.",
+        "prevention_control": "Add one shared normalized_markdown_contains helper and prohibit raw multiline semantic substring assertions.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair_postterminal.py"
+        ]
+      },
+      "incident_id": "AER-1007",
+      "attempt_id": "clock-95d6899e4bfbb4939633f932",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "repair-closeout-intent-stage",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every incident stage in a clockwork intent must be selected from the register's closed vocabulary before dry-run validation.",
+      "observed_error": "The first caller-authored closeout intent used the descriptive stage planning, which is outside the closed incident-stage vocabulary.",
+      "detection_method": "The clockwork dry run rejected tick_incident_stage before canonical publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/closeout/closeout-intent.json",
+        "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/efficacy-reading.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.descriptive_incident_stage_outside_closed_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace planning with the registered dispatch stage and rerun the same dry-run transaction.",
+        "prevention_control": "Generate incident-stage inputs from the clockwork schema's enum-backed selector rather than accept free-text entry.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1008",
+      "attempt_id": "clock-6503d0f6b3a67ea689ad74a9",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

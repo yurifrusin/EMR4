@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 629,
+  "register_revision": 630,
   "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "b36c1d6515a21b82c48080532a429aa05f071061d22b620403b438f105fe33d1",
-  "incident_count": 1005,
+  "canonical_register_sha256": "4e9228fcf95a296c06f0f39c886aec80d2f8a795fc82f8da33bfbef196ca4deb",
+  "incident_count": 1008,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 523,
+      "agent_behavior": 526,
       "harness": 71,
       "operator": 254,
       "repository": 141,
@@ -16,29 +16,29 @@
     },
     "by_category": {
       "command_scope_violation": 99,
-      "evidence_misreport": 74,
+      "evidence_misreport": 75,
       "harness_failure": 71,
       "operator_error": 254,
-      "output_contract_violation": 297,
+      "output_contract_violation": 299,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
       "repository_defect": 141,
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 76,
+      "implementer": 77,
       "integration_reviewer": 3,
-      "orchestrator": 863,
+      "orchestrator": 865,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 642,
+      "low": 645,
       "material": 133,
       "moderate": 230
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 211,
-      "canonical_unchanged": 625,
+      "accepted_candidate_changed": 212,
+      "canonical_unchanged": 627,
       "untrusted_partial_worktree": 169
     },
     "by_resource_and_role": {
@@ -401,7 +401,10 @@
       "reconciliation-parent-schema-exception-boundary::orchestrator": 1,
       "recovery-fixture-wire-order-mock::orchestrator": 1,
       "recovery-plan-semantic-assertion::orchestrator": 1,
+      "repair-closeout-intent-stage::orchestrator": 1,
       "repair-dead-local-guard::orchestrator": 1,
+      "repair-plan-signal-semantics::orchestrator": 1,
+      "repair-postterminal-report-tests::implementer": 1,
       "repair-runner-cli-import::orchestrator": 1,
       "repaired-sentinel-native-boot-process::orchestrator": 1,
       "repaired-sentinel-source-author::orchestrator": 1,

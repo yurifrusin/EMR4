@@ -1,0 +1,74 @@
+{
+  "schema_version": "ariadne.workflow_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair",
+  "recorded_at": "2026-08-23T02:48:38.4129265+10:00",
+  "result": "passed",
+  "exact_reviewed_source": "8814d4b5d62885f8f8eca4cf02fe5a49ccdc013b",
+  "repair_source": "022d780726c74cb285d5b626cd004821b4e5ff47",
+  "attestation_sha256": "73d5773d3662509ec2cdb8d8f109651b77ef79be42f5b641f07e36d7ca8bcf91",
+  "repair": {
+    "removed_tokens": [
+      "--sig-proxy=false"
+    ],
+    "added_tokens": [],
+    "other_harness_changes": 0,
+    "attempt_007_authorized": false
+  },
+  "execution_reading": {
+    "docker_metadata_commands": 0,
+    "docker_object_commands": 0,
+    "docker_objects_created": 0,
+    "postgresql_processes": 0,
+    "sql_or_database_attempts": 0,
+    "provider_requests": 0,
+    "product_effects": 0,
+    "ordinary_admission_releases": 0
+  },
+  "deterministic_verification": {
+    "current_repair_diagnosis_and_lineage_tests_passed": 94,
+    "ruff_passed": true,
+    "compile_passed": true,
+    "schema_and_canonical_attestation_passed": true,
+    "deepseek_dispatched": false,
+    "gemini_dispatched": false,
+    "native_subagents_spawned": false
+  },
+  "contained_workflow_events": [
+    {
+      "event": "frozen_plan_prose_initially_conflated_no_normal_path_signal_with_existing_teardown_terminate",
+      "effect": "source inspection corrected the plan and threat delta before the executable edit",
+      "canonical_mutation": false,
+      "expensive_execution": false,
+      "prospective_control": "derive lifecycle prose from AST call-role projections before plan commit"
+    },
+    {
+      "event": "postterminal_report_assertion_repeated_line_wrap_sensitivity_after_prior_registered_control",
+      "effect": "two focused local failures preceded normalized semantic assertions and a clean 94-test rerun",
+      "canonical_mutation": false,
+      "expensive_execution": false,
+      "prospective_control": "provide one shared normalized_markdown_contains helper and prohibit raw multiline substring assertions"
+    },
+    {
+      "event": "first_explicit_stage_command_misspelled_one_new_test_path",
+      "effect": "git rejected the pathspec before staging and the corrected explicit command staged only intended paths",
+      "canonical_mutation": false,
+      "expensive_execution": false,
+      "prospective_control": "stage from a machine-generated exact closeout surface manifest"
+    },
+    {
+      "event": "first_closeout_intent_used_descriptive_planning_stage_outside_closed_vocabulary",
+      "effect": "the clockwork rejected the caller-authored form before publication and the enum-backed dispatch value passed on the same transaction",
+      "canonical_mutation": false,
+      "expensive_execution": false,
+      "prospective_control": "generate incident forms from schema-enumerated selectors rather than accept free-text stage entry"
+    }
+  ],
+  "clockwork_assessment": {
+    "expensive_retry_prevented": true,
+    "one_token_scope_enforced": true,
+    "historical_diagnosis_preserved": true,
+    "low_cost_form_or_assertion_reruns_eliminated": false,
+    "net_direction": "closer",
+    "conclusion": "The source defect was repaired in one exact executable deletion with no Docker or database run. Remaining circles are confined to prose, assertions, path construction and a rejected prepublication form value, reinforcing the case for typed lifecycle prose, normalized document predicates, generated staging manifests and enum-backed form selectors."
+  }
+}

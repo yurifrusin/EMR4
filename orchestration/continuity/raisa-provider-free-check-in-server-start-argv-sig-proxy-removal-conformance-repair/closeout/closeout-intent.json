@@ -1,0 +1,367 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair",
+    "title": "Raisa provider-free check-in server start argv sig-proxy removal conformance repair closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T02:48:38.4129265+10:00",
+    "node": {
+      "id": "raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair",
+      "title": "Raisa provider-free check-in server start argv sig-proxy removal conformance repair",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted the exact diagnosed one-token provider-free repair.",
+          "No Docker metadata/object command, PostgreSQL process, database attempt or provider request occurred.",
+          "A future attempt 007 remains separately planned, checkpointed, one-run and zero-retry."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-one-token-start-argv-repair",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/repair-attestation.json",
+          "status": "accepted",
+          "summary": "Accept deletion of only the unsupported sig-proxy=false token with zero additions and zero other harness changes."
+        },
+        {
+          "id": "accept-stdin-signal-and-teardown-conformance",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/repair-report.md",
+          "status": "accepted",
+          "summary": "Accept unchanged Popen, write/flush/open-stdin and bounded teardown relations with zero normal-path terminate or kill."
+        },
+        {
+          "id": "accept-historical-diagnosis-immutability",
+          "source": "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py",
+          "status": "accepted",
+          "summary": "Accept that historical diagnosis bytes remain exact against their full committed source while the closed live-source checker rejects repaired-source drift."
+        },
+        {
+          "id": "accept-current-deterministic-verification",
+          "source": "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair_postterminal.py",
+          "status": "accepted",
+          "summary": "Accept 94 current repair, diagnosis, postterminal and lifecycle tests plus Ruff, compile, schema and canonical attestation validation."
+        },
+        {
+          "id": "accept-bounded-workflow-efficacy-reading",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept exact one-token efficiency and retain the AST-prose, normalized-document and generated-staging controls exposed by low-cost corrections."
+        }
+      ],
+      "claim_scope": [
+        "Exactly one unsupported Docker start argv token was removed and no token was added.",
+        "The repaired start argv lies inside the installed Docker CLI's accepted advertised option surface.",
+        "Popen stream, cwd, shell, stdin write/flush/open and bounded teardown relations remain exact.",
+        "Historical diagnosis and attempts 001 through 006 remain immutable and unreclassified.",
+        "No Docker command/object, PostgreSQL process, SQL/database attempt, provider request, product effect or ordinary admission occurred.",
+        "The repair grants no attempt-007 execution without separate plan, receipt and checkpoint.",
+        "Clockwork confined remaining correction loops to low-cost prose, assertions and explicit path construction."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-plan.md",
+          "docs/security/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/contract.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/repair-attestation.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/repair-report.md",
+          "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-server-start-argv-sig-proxy-removal-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-start-argv-sig-proxy-removal-repair-preplanning-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair_postterminal.py",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "scripts/raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair.py",
+          "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/repair-attestation.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-630.md",
+          "orchestration/human_inbox/yuri/2026-08-23--check-in-start-argv-sig-proxy-removal-repair.md",
+          "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "No repaired Docker start or PostgreSQL lifecycle has run.",
+        "Attempt 007 requires a separately frozen plan, fresh five-source receipt and distinct one-run checkpoint.",
+        "Rollback, unknown-response commit and authoritative readback remain unproved.",
+        "Dedicated check-in remains default-off without ordinary-practice admission.",
+        "No provider, product-data, production, deployment, release, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Remove the exact unsupported Docker start token without another occupied execution",
+      "outcome": "One executable deletion produces an advertised start/attach argv with deterministic stdin, signal and teardown conformance.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/repair-attestation.json",
+        "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/repair-report.md",
+        "docs/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Plan and checkpoint one new disposable attempt 007 against the repaired start/attach source",
+      "why_now": "The exact CLI grammar defect is diagnosed and repaired with current deterministic conformance; one occupied database result remains the next evidence dependency.",
+      "outcome": "The harness is statically ready for a separately governed one-run attempt, not automatically authorised to execute.",
+      "unlocks": [
+        "A fresh plan can bind the repaired full-Git source and exact harness digest.",
+        "A distinct preexecution checkpoint can admit at most one new disposable authored-synthetic execution.",
+        "The run can finally reach readiness and the rollback/unknown-response transaction proof or preserve a new failed-closed terminal."
+      ],
+      "does_not_solve": [
+        "No repaired container or PostgreSQL process has run.",
+        "No rollback or exactly-once result is yet proved.",
+        "No ordinary-practice, product-data, production or protected authority opens."
+      ],
+      "evidence": [
+        "docs/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-check-in-server-start-argv-sig-proxy-removal-repair-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-23--check-in-start-argv-sig-proxy-removal-repair.md"
+      ],
+      "orientation_statement": "EMR4 will freeze and checkpoint a distinct one-run attempt 007 against the repaired exact start argv before any Docker object or PostgreSQL action."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-007",
+      "active_tranche": "Raisa provider-free disposable PostgreSQL default-off check-in relay-free rollback/unknown-commit recovery attempt 007",
+      "objective": "Freeze and checkpoint exactly one provider-free disposable PostgreSQL attempt 007 against the accepted repaired start/attach source, then execute at most once to prove rollback and unknown-terminal-response authoritative recovery or preserve one immutable failed-closed terminal.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted exact one-token start-argv repair.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_attempt_007_plan_contract_and_one_run_checkpoint"
+    },
+    "incidents": [
+      {
+        "incident_id": "repair-plan-signal-teardown-conflation",
+        "source_id": "repair-plan-local-001",
+        "peers": []
+      },
+      {
+        "incident_id": "repair-postterminal-line-wrap-recurrence",
+        "source_id": "repair-test-local-001",
+        "peers": []
+      },
+      {
+        "incident_id": "repair-closeout-stage-vocabulary-rejection",
+        "source_id": "repair-closeout-local-001",
+        "peers": []
+      }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "start-argv-repair-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "start-argv-repair-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair_postterminal.py",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "start-argv-repair-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair.py",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair_postterminal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "start-argv-repair-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair.py",
+          "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair_postterminal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-plan.md",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-630.md",
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--native-harness-corrected-graph-useful-recovery.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_disposable_postgresql_attempt_007_only_after_exact_plan_and_checkpoint",
+    "at_most_one_occupied_execution_zero_retry_resume_or_fallback",
+    "accepted_repaired_start_attach_source_and_exact_harness_digest_only",
+    "authored_synthetic_non_phi_fixture_only_no_product_relation_or_data",
+    "internal_network_no_published_port_host_relay_external_network_bind_or_volume",
+    "no_native_deepseek_harness_worker_or_provider_call",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_application_configuration_route_openapi_graphql_or_client_change",
+    "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_existing_hosted_live_or_production_database",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "repair-plan-signal-teardown-conflation-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "repair-plan-signal-semantics",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_source_inspection",
+      "stage": "dispatch",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "The repair plan must distinguish zero normal-path signal operations from the accepted teardown's bounded Popen terminate/wait/kill behavior.",
+      "observed_error": "The first frozen prose required zero normal and cleanup host signals even though exact source already used Popen.terminate during intended teardown.",
+      "detection_method": "Read-only exact source inspection found the teardown call before the executable repair was edited.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-plan.md",
+        "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/efficacy-reading.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.plan_conflated_normal_signal_absence_with_teardown_termination",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Correct the plan and threat delta before code to separate zero normal-path terminate/kill from bounded teardown termination.",
+        "prevention_control": "Render lifecycle prose from exact AST call-role projections before plan commit.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-plan.md",
+          "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/repair-attestation.json"
+        ]
+      },
+      "baton_summary": "records and corrects the plan's normal-signal versus teardown-termination conflation before the repair."
+    },
+    {
+      "attempt_key": "repair-postterminal-line-wrap-recurrence-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair",
+      "role": "implementer",
+      "resource_id": "repair-postterminal-report-tests",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "After AER-1005, report semantics must be asserted through one normalized document representation rather than raw multiline substrings.",
+      "observed_error": "The first repair postterminal test repeated two raw report substring assertions; sequential focused runs exposed both wrapped sentences.",
+      "detection_method": "Pytest failed before closeout publication and each mismatch was confined to a line-wrapped report assertion, not the repair or attestation.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair_postterminal.py",
+        "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/efficacy-reading.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.raw_multiline_substring_assertion_recurred_after_normalization_control",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use one normalized report string for both semantic assertions and rerun the complete current suite.",
+        "prevention_control": "Add one shared normalized_markdown_contains helper and prohibit raw multiline semantic substring assertions.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair_postterminal.py"
+        ]
+      },
+      "baton_summary": "records and corrects the repeated line-wrap-sensitive report assertions before publication."
+    },
+    {
+      "attempt_key": "repair-closeout-stage-vocabulary-rejection-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "repair-closeout-intent-stage",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every incident stage in a clockwork intent must be selected from the register's closed vocabulary before dry-run validation.",
+      "observed_error": "The first caller-authored closeout intent used the descriptive stage planning, which is outside the closed incident-stage vocabulary.",
+      "detection_method": "The clockwork dry run rejected tick_incident_stage before canonical publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/closeout/closeout-intent.json",
+        "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/efficacy-reading.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.descriptive_incident_stage_outside_closed_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace planning with the registered dispatch stage and rerun the same dry-run transaction.",
+        "prevention_control": "Generate incident-stage inputs from the clockwork schema's enum-backed selector rather than accept free-text entry.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the typed gate's successful containment of a descriptive stage before publication."
+    }
+  ]
+}

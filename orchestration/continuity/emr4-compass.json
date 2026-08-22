@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 394,
-  "updated_at": "2026-08-23T02:22:13.0856700+10:00",
-  "source_graph_revision": 412,
-  "orientation_statement": "EMR4 will repair and deterministically verify the one invalid Docker start option before considering any attempt 007.",
+  "map_revision": 395,
+  "updated_at": "2026-08-23T02:48:38.4129265+10:00",
+  "source_graph_revision": 413,
+  "orientation_statement": "EMR4 will freeze and checkpoint a distinct one-run attempt 007 against the repaired exact start argv before any Docker object or PostgreSQL action.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5063,27 +5063,38 @@
         "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-report.md",
         "docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-closeout.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair",
+      "lineage_parent": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+      "strategic_role": "Remove the exact unsupported Docker start token without another occupied execution",
+      "outcome": "One executable deletion produces an advertised start/attach argv with deterministic stdin, signal and teardown conformance.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/repair-attestation.json",
+        "orchestration/continuity/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair/repair-report.md",
+        "docs/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
-    "strategic_role": "Correct one unsupported Docker start argument under provider-free deterministic conformance before any new occupied attempt",
-    "why_now": "The read-only diagnosis resolves the failure coordinate exactly, making a one-token static repair the smallest remaining evidence dependency.",
-    "outcome": "The cause is no longer ambiguous; repair semantics rather than another database run are now the next gate.",
+    "node_id": "raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair",
+    "strategic_role": "Plan and checkpoint one new disposable attempt 007 against the repaired start/attach source",
+    "why_now": "The exact CLI grammar defect is diagnosed and repaired with current deterministic conformance; one occupied database result remains the next evidence dependency.",
+    "outcome": "The harness is statically ready for a separately governed one-run attempt, not automatically authorised to execute.",
     "unlocks": [
-      "A source-only repair can remove the invalid option without Docker object creation.",
-      "Deterministic fakes can prove the resulting argument vector and signal, stdin, attachment and cleanup expectations.",
-      "Only an accepted repair can later support a separately planned attempt 007."
+      "A fresh plan can bind the repaired full-Git source and exact harness digest.",
+      "A distinct preexecution checkpoint can admit at most one new disposable authored-synthetic execution.",
+      "The run can finally reach readiness and the rollback/unknown-response transaction proof or preserve a new failed-closed terminal."
     ],
     "does_not_solve": [
-      "No repaired command or PostgreSQL lifecycle has run.",
-      "No rollback or exactly-once transaction result is proved.",
+      "No repaired container or PostgreSQL process has run.",
+      "No rollback or exactly-once result is yet proved.",
       "No ordinary-practice, product-data, production or protected authority opens."
     ],
     "evidence": [
-      "docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-check-in-server-start-attach-created-state-diagnosis-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-23--check-in-start-attach-created-state-diagnosis.md"
+      "docs/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-server-start-argv-sig-proxy-removal-repair-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-23--check-in-start-argv-sig-proxy-removal-repair.md"
     ]
   },
   "decision_horizon": [
