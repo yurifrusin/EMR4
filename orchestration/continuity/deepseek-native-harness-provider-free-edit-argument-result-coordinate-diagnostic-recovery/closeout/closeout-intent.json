@@ -1,0 +1,354 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery",
+    "title": "DeepSeek native Harness provider-free real edit argument/result coordinate diagnostic closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T16:25:00.0826136+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery",
+      "title": "DeepSeek native Harness provider-free real edit argument/result coordinate diagnostic closeout",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority covers the bounded provider-free Harness diagnostic and its closeout.",
+          "Both occupied native-Harness attempts remain immutable and consumed; this result grants no retry or new occupied authority.",
+          "The successor is a provider-free future-runner integration rehearsal only."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-real-rc7-edit-coordinate-matrix",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-evidence.json",
+          "status": "accepted",
+          "summary": "Accept nine real-tool variants, seven closed coordinates, exact success mutations, exact failure non-mutations and complete provider-free cleanup."
+        },
+        {
+          "id": "accept-honest-untyped-semantic-argument-boundary",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept one shared untyped coordinate for the three rc.7 plain-Error semantic constraints and forbid message parsing or invented specificity."
+        },
+        {
+          "id": "preserve-consumed-terminal-without-retrospective-reclassification",
+          "source": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-terminal.json",
+          "status": "accepted",
+          "summary": "Preserve edit_error_accept_not_concluded exactly because its intentionally discarded arguments cannot support a narrower historical coordinate."
+        },
+        {
+          "id": "decline-gemini-and-new-occupied-attempt",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Reject Gemini review and any new occupied attempt because exact runtime evidence resolved the material semantics and the coordinate is not yet integrated into the future runner."
+        },
+        {
+          "id": "accept-precommit-git-prose-correction",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-implementation-precommit-receipt.json",
+          "status": "accepted",
+          "summary": "Accept the machine-only Git evidence correction after the first receipt rejected a manually supplied object identity in prose before commit."
+        },
+        {
+          "id": "accept-required-incident-revision-artifact-correction",
+          "source": "docs/ariadne-agent-error-correction-register-revision-618.md",
+          "status": "accepted",
+          "summary": "Accept the required prospective register revision artifact after the first clockwork dry-run rejected its omission with zero canonical mutation."
+        }
+      ],
+      "claim_scope": [
+        "The exact accepted rc.7 ToolRuntime, dsh-tool-fs edit and LocalFileSystem executed nine authored-synthetic variants in one local Node process.",
+        "Seven closed coordinates distinguish schema, semantic constraint, target freshness, literal matching and success result classes without parsing error prose.",
+        "Both successful variants made only their exact expected hash transition and every failed variant preserved its target state.",
+        "No worker, model, provider, broker, network, database, Docker, retry, resume or fallback activity occurred.",
+        "No raw argument, content, error, stack, prompt, response, reasoning, session, environment or credential material was retained.",
+        "The diagnostic reduces rerun pressure but proves neither useful-worker success nor general native-Harness reliability.",
+        "The first clockwork dry-run rejected a missing incident revision artifact before generation preparation or canonical mutation.",
+        "No product, ordinary-practice, data, production, deployment, release, Pages or protected-ref authority opened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-implementation-precommit-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-implementation-precommit-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery_plan.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/native_edit_argument_result_coordinate.py",
+          "scripts/deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/coordinate.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/evidence.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/failure-terminal.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-618.md",
+          "orchestration/human_inbox/yuri/2026-08-22--native-harness-real-edit-coordinate-diagnostic.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The three rc.7 semantic argument constraints remain one honest untyped coordinate until a future runner validates them before dispatch.",
+        "The accepted classifier is not yet integrated into an occupied runner terminal.",
+        "No useful worker candidate or general native-Harness reliability result exists.",
+        "Both occupied attempts are consumed and no new occupied worker is authorised.",
+        "Ordinary practice, product data, production, deployment, release, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Turn one opaque native-Harness edit-error boundary into stable provider-free coordinates",
+      "outcome": "The real edit stack now exposes seven tested closed coordinates and exact state effects without another model request.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-evidence.json",
+        "docs/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-closeout.md",
+        "orchestration/human_inbox/yuri/2026-08-22--native-harness-real-edit-coordinate-diagnostic.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Integrate the accepted edit coordinates into the bounded future runner before any occupied use",
+      "why_now": "The diagnostic proved the runtime taxonomy, while the future runner still records only the broad edit lifecycle error and does not prevalidate the three plain semantic constraints.",
+      "outcome": "Rerun pressure is reduced because edit failure classes are now locally reproducible and machine-routable.",
+      "unlocks": [
+        "A provider-free future runner that releases the seven-coordinate result without raw errors.",
+        "Pre-dispatch typed denial of blank path, empty search and equal old/new arguments.",
+        "A later evidence-based decision on whether another occupied worker attempt is justified."
+      ],
+      "does_not_solve": [
+        "No useful worker success, runbook adoption or general DeepSeek quality conclusion.",
+        "No occupied request, retry, resume, fallback or provider authority.",
+        "No product, ordinary-practice, production or protected-ref authority."
+      ],
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/efficacy-reading.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-sol-acceptance.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-report.md"
+      ],
+      "orientation_statement": "EMR4 will next integrate the accepted edit coordinates into a provider-free future runner; no occupied DeepSeek request is admitted."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
+      "active_tranche": "DeepSeek native Harness provider-free edit-coordinate future-runner integration rehearsal",
+      "objective": "Integrate the accepted seven-coordinate edit argument/result classifier and three pre-dispatch semantic argument checks into a provider-free derived future runner, replay every closed coordinate and prove exact cleanup without any worker, model or provider request.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted provider-free real edit argument/result coordinate diagnostic.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_provider_free_edit_coordinate_future_runner_integration_plan"
+    },
+    "incidents": [
+      {
+        "incident_id": "edit-coordinate-precommit-manual-git-prose",
+        "source_id": "edit-coordinate-precommit-receipt-001",
+        "peers": []
+      },
+      {
+        "incident_id": "edit-coordinate-closeout-missing-register-revision",
+        "source_id": "edit-coordinate-closeout-clockwork-check-001",
+        "peers": []
+      },
+      {
+        "incident_id": "edit-coordinate-closeout-unindexed-baton-label",
+        "source_id": "edit-coordinate-closeout-clockwork-check-002",
+        "peers": []
+      }
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "edit-coordinate-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/closeout/closeout-intent.json"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "edit-coordinate-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery.py", "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery_plan.py", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_current_baton_consistency.py", "tests/test_api_spine_artifacts.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "edit-coordinate-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "orchestration_harness/native_edit_argument_result_coordinate.py", "scripts/deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery.py", "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery.py", "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery_plan.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "edit-coordinate-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "orchestration_harness/native_edit_argument_result_coordinate.py", "scripts/deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery.py", "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery.py", "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery_plan.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-threat-model-delta.md",
+      "orchestration_harness/native_edit_argument_result_coordinate.py",
+      "scripts/deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/coordinate.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-618.md",
+      "docs/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--native-harness-real-edit-coordinate-diagnostic.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/closeout/pushover-notification-receipt.json"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_edit_coordinate_future_runner_integration_only",
+    "authored_synthetic_closed_argument_result_variants_and_typed_terminals_only",
+    "no_native_harness_worker_model_or_live_provider_request",
+    "both_consumed_occupied_attempts_immutable_no_retry_resume_overwrite_or_reclassification",
+    "no_candidate_adoption_or_runbook_manifest_change",
+    "no_product_source_configuration_api_openapi_graphql_schema_migration_route_or_database_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_first_party_client_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "edit-coordinate-precommit-git-prose-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Git reference evidence in an Ariadne receipt must come only from the fresh machine snapshot; authored source prose must not supply any object identity.",
+      "observed_error": "The first implementation precommit runtime state repeated the protected object identity inside its git_refs_and_worktree prose.",
+      "detection_method": "The local orchestrator preflight returned revision_required with git_refs_evidence_manual_object_id_forbidden before staging or commit; the preserved receipt reports one manually supplied identity and zero worker or provider effects.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-implementation-precommit-attempt-001-rejected-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-implementation-precommit-runtime-state.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_ref_evidence_manual_object_id_in_prose",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove every authored Git identity from the source prose, retain the semantic boundary by name, and regenerate a fresh receipt whose Git section is entirely machine-snapshotted.",
+        "prevention_control": "Receipt runtime-state templates must use identity-free Git prose and leave all object identities to the preflight builder's typed snapshot.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-implementation-precommit-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-implementation-precommit-receipt.json"
+        ]
+      },
+      "baton_summary": "records the precommit rejection of a manually supplied Git identity in prose and confines all later receipt identities to machine snapshots."
+    },
+    {
+      "attempt_key": "edit-coordinate-closeout-missing-register-revision-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A version-two clockwork closeout with incident observations must include exactly one human revision artifact matching the prospective register revision and reading.",
+      "observed_error": "The first closeout intent included incident observations but omitted the required prospective agent-error register revision note from Baton acceptance.",
+      "detection_method": "The first clockwork --check invocation rejected tick_incident_revision_path before generation preparation, canonical mutation or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_incident_revision_artifact_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact prospective revision note and Baton acceptance path, preserve the rejected dry-run receipt, and validate the full typed intent before its candidate commit.",
+        "prevention_control": "Every version-two closeout intent test derives the expected register revision, incident count and new incident identifiers before the candidate is committed.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-618.md",
+          "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery.py"
+        ]
+      },
+      "baton_summary": "records the closeout dry-run rejection for a missing prospective register revision artifact and moves full typed-intent validation before candidate commit."
+    },
+    {
+      "attempt_key": "edit-coordinate-closeout-unindexed-baton-label-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "A clockwork closeout must select an existing allowlisted Current Baton label from the hash-bound compaction manifest rather than author a descriptive replacement.",
+      "observed_error": "The second closeout intent invented Current DeepSeek native Harness edit-coordinate acceptance, which was not present in the compaction manifest's active label vocabulary.",
+      "detection_method": "The second clockwork --check invocation rejected tick_baton_compaction_unindexed before generation preparation, canonical mutation or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+        "docs/handover-ledgers/current-baton-acceptance-index.manifest.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_baton_label_outside_indexed_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace the descriptive label with the existing indexed Current DeepSeek native Harness acceptance label and preserve the rejected dry-run receipt.",
+        "prevention_control": "Closeout label selection must read from the compaction manifest active_labels enum before intent construction.",
+        "evidence_paths": [
+          "docs/handover-ledgers/current-baton-acceptance-index.manifest.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the rejection of an unindexed closeout label and confines future Baton label selection to the compaction manifest vocabulary."
+    }
+  ]
+}

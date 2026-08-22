@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.governance_clockwork_tick_rejection.v1",
+  "operation_id": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery",
+  "attempt_id": "edit-coordinate-closeout-clockwork-check-001",
+  "status": "revision_required",
+  "reason": "tick_incident_revision_path",
+  "source_commit": "099907c8fbe0cf5480492545629fc0f15e7c688b",
+  "canonical_surface_mutation_count": 0,
+  "generation_prepared": false,
+  "pointer_moved": false,
+  "worker_process_count": 0,
+  "model_request_count": 0,
+  "provider_request_count": 0,
+  "retry_count": 0,
+  "cleanup_required": false,
+  "disposition": "preserved_closeout_input_rejection_correct_with_required_human_revision_artifact"
+}

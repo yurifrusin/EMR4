@@ -7,6 +7,10 @@ from pathlib import Path
 import jsonschema
 import pytest
 
+from orchestration_harness.governance_clockwork_tick import validate_tick_intent
+from orchestration_harness.governance_live_adoption import (
+    validate_contract as validate_governance_contract,
+)
 from orchestration_harness import native_edit_argument_result_coordinate as coordinate
 from scripts import (
     deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery
@@ -15,6 +19,18 @@ from scripts import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
+CLOSEOUT_INTENT_PATH = ROOT / (
+    "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-"
+    "result-coordinate-diagnostic-recovery/closeout/closeout-intent.json"
+)
+GOVERNANCE_CONTRACT_PATH = ROOT / (
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-"
+    "adoption-retirement/contract.json"
+)
+BATON_COMPACTION_MANIFEST_PATH = (
+    ROOT / "docs/handover-ledgers/current-baton-acceptance-index.manifest.json"
+)
+REGISTER_REVISION_PATH = ROOT / "docs/ariadne-agent-error-correction-register-revision-618.md"
 
 
 def _contract() -> dict[str, object]:
@@ -35,6 +51,24 @@ def test_contract_and_all_schemas_are_closed_and_valid() -> None:
         diagnostic.FAILURE_SCHEMA_PATH,
     ):
         jsonschema.Draft202012Validator.check_schema(json.loads(path.read_bytes()))
+
+
+def test_closeout_intent_uses_typed_clockwork_and_indexed_baton_vocabulary() -> None:
+    contract = validate_governance_contract(
+        json.loads(GOVERNANCE_CONTRACT_PATH.read_bytes())
+    )
+    intent = validate_tick_intent(json.loads(CLOSEOUT_INTENT_PATH.read_bytes()), contract)
+    label = intent["baton_acceptance"]["label"]
+    manifest = json.loads(BATON_COMPACTION_MANIFEST_PATH.read_bytes())
+    assert label == "Current DeepSeek native Harness acceptance"
+    assert label in manifest["active_labels"]
+    register_path = REGISTER_REVISION_PATH.relative_to(ROOT).as_posix()
+    assert intent["baton_acceptance"]["paths"].count(register_path) == 1
+    assert len(intent["agent_error_observations"]) == 3
+    marker = REGISTER_REVISION_PATH.read_text(encoding="utf-8")
+    assert "revision: 618" in marker
+    assert "incident_count: 963" in marker
+    assert "new_incident_ids: AER-0961,AER-0962,AER-0963" in marker
 
 
 def test_all_nine_variants_release_the_exact_closed_coordinate() -> None:

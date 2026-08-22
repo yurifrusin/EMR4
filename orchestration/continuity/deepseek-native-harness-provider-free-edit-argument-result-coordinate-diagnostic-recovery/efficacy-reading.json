@@ -1,0 +1,29 @@
+{
+  "schema_version": "ariadne.native_harness_edit_argument_result_diagnostic_efficacy.v1",
+  "operation_id": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery",
+  "status": "accepted",
+  "result": "positive_traceability_and_rerun_reduction",
+  "source_commit": "099907c8fbe0cf5480492545629fc0f15e7c688b",
+  "provider_free_fixture": {
+    "node_process_count": 1,
+    "real_tool_runtime_execution_count": 9,
+    "closed_coordinate_count": 7,
+    "passed_variant_count": 9,
+    "worker_model_provider_request_count": 0,
+    "retry_resume_fallback_count": 0,
+    "complete_cleanup": true
+  },
+  "retired_ambiguity": [
+    "schema-invalid edit calls now map to INVALID_ARGS",
+    "missing targets now map to FS_STALE_VERSION",
+    "missing literal matches now map to FS_EDIT_NOT_FOUND",
+    "ambiguous literal matches now map to FS_AMBIGUOUS_EDIT",
+    "unique and replace-all successes are distinguished by exact hash transitions"
+  ],
+  "remaining_limit": "The rc.7 edit implementation throws plain Error for blank file_path, empty old_string and equal old/new strings, so those three cases honestly share edit_error_untyped_argument_constraint unless a future runner validates them before dispatch.",
+  "historical_disposition": "The consumed occupied edit_error_accept_not_concluded terminal remains exact and cannot be retrospectively assigned a narrower coordinate because its raw arguments were intentionally not retained.",
+  "rerun_effect": "A future edit failure can be narrowed locally from stable result metadata and exact state hashes; another paid request is not needed merely to rediscover whether the edit boundary, filesystem match or mutation succeeded.",
+  "general_reliability_claim": false,
+  "useful_worker_success_proved": false,
+  "next_recommendation": "Integrate the seven-coordinate classifier and pre-dispatch semantic argument checks into a provider-free future-runner rehearsal before deciding whether any new occupied worker attempt is justified."
+}
