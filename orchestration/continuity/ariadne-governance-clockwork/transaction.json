@@ -1,85 +1,85 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
-  "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal",
-  "transaction_id": "txn-64e74cdc6a7b935a802dec98",
-  "source_commit": "71e231fe6462e689662a0f92e4f51ce95cdaf056",
-  "previous_source_commit": "71e231fe6462e689662a0f92e4f51ce95cdaf056",
-  "previous_generation_id": "gen-df049f0fa7a26fbfae89cf0df399dd8adfc39a66e752d3311ec28e08e2b98d17",
-  "previous_bundle_sha256": "df049f0fa7a26fbfae89cf0df399dd8adfc39a66e752d3311ec28e08e2b98d17",
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal",
+  "transaction_id": "txn-4bc066e19a48342ea5e51d2b",
+  "source_commit": "e1b0e0e6943066be5d0c675b17ccda8fb7badb50",
+  "previous_source_commit": "e1b0e0e6943066be5d0c675b17ccda8fb7badb50",
+  "previous_generation_id": "gen-89b46cfc0518a2e7a32f98af8fe3bd68c019bffff10f568b05dc80df82d2c2e5",
+  "previous_bundle_sha256": "89b46cfc0518a2e7a32f98af8fe3bd68c019bffff10f568b05dc80df82d2c2e5",
   "previous_canonical_sha256s": {
-    "continuity": "030da7a42d25b76ea0f0d637e9b6dc553d307ceda24f6ee92515dc225074375c",
-    "compass": "7c93ba051db0fbfb4f2d09f283505348d9465f07d8927c7a8ddce9da13dd722b",
-    "compass_markdown": "bfd009daeff641bcced16988794e827322ebe318d87b4e0936ba5dca4b03022e",
-    "active_latch": "481fcde7149243651855aceee7b9d58146f957284ba8f4556cc414f9b85bea58",
-    "error_register": "dbdab1a120441fba12a7dc9af190921b557953d0bac37492187082af0c0feb79",
-    "pattern_report": "d3915e5530741d0daa8408f82df5081ebc00b26c6afb15dd28f205c1bad6aea2",
-    "current_baton": "b84484abc29849df85237b0b7ae187c030cff6c2e7be7ece73835e58019b48a2"
+    "continuity": "ffaf4b310a7da801627986b3b2e2863c023e3e335237f4eb81f2b807bb1cd109",
+    "compass": "0bd2a034b0f94fb75536c0a03af0f0a7cb9f1a801edffa31dfbb5a83ec9344ac",
+    "compass_markdown": "5c9a5f105c439d80b23a065039f67b1eb748d4e80f520fc1c4ccde30dc82e4b1",
+    "active_latch": "c41869365fbdc202f952a2c2bc152ed667a461f1466981fa1135a511a2a20a67",
+    "error_register": "6f26bef9ee5d6ad9bf24b11b769e64ff98da1f3ffdaa19e40c777b9dc4ab989e",
+    "pattern_report": "0e2fec9dac6b2cba7ce9f70fdd65c713dfc44bb0909a0cb499b477e9c99f89ec",
+    "current_baton": "61cbb72ec727a300e28a993f43d3d9b8246b0da46a6a7ba24e5762f6537aa01e"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "9dac74b457a62e57d14feba9570ec9442b0b47deeca25490d07dd8f07fc89e69",
-    "transaction.json": "53509df83cd28956d57c43e8876c9524d687878b019d640c2c3fc68b0b7ba7e6",
+    "command-manifest.json": "0bd404c284fa05dc77fe8811d32f346cbfa63bb93aba84a872a7b78026800192",
+    "transaction.json": "cf217f1d2021e8368838fd59f60d68a3394f51d0bdd36036a528ed309cdb739b",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "2ce8bd7984a23e89ea8058f6b5b728ba83f20ee39ff676dd085db80fd9b3b1c1"
+    "generation-manifest.json": "97514f301f75d52029347a1d14fc3ae911ed612221f847dcd212f8de1d684571"
   },
   "projection_sha256s": {
-    "graph": "sha256:1be63bd3ec23e965c0a99723af68c2a92efcb6b084d255d55e2be1930a145060",
-    "compass": "sha256:4e454057f91090dfd4820966c7f532198376521476165c85730a421796c58be2",
-    "report": "sha256:962a9c72bc2cae2807fff9adf246810cae78a84e768b2fa928978152081887ad",
-    "latch": "sha256:ff67cb18b8c803a7975a45340824cbd5267ab85eabfb163dcdbe185dcb8b107b",
+    "graph": "sha256:621bea66eb1e214609426d09ef3b0161879ac08d9bd17adcc22cfdcd2d6bffc6",
+    "compass": "sha256:1fa6fbdee654bf30043a641db28dc5bfd6fe8290f6513f4af287df42a942b82d",
+    "report": "sha256:9d639d93b9ce6b0350ff4cf610a1f9d5fec072907460382e6e25143d4cd4cbb6",
+    "latch": "sha256:fd18c76a15dc79cbeff9e89a4346c306ce881755c41e98e80ea3bb49e4a47f00",
     "incident_aggregate": "sha256:012cd99c89990d8a80584cdc38452c69df669aaa4fbdbc83e5f088ec2c190ded"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-64e74cdc6a7b935a802dec98",
-      "transaction_id": "txn-64e74cdc6a7b935a802dec98",
-      "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal",
+      "journal_id": "journal-4bc066e19a48342ea5e51d2b",
+      "transaction_id": "txn-4bc066e19a48342ea5e51d2b",
+      "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
       "event_type": "manifest-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "manifest_sha256": "sha256:9dc48dc64598a7e93bdfd02317c3e3613143218e32edd604ba696982d11d7b20"
+        "manifest_sha256": "sha256:cfad5aa71296e0c2cb1959aaf4c09539d85fc3cb9d11519558af5961a7e55883"
       },
-      "event_sha256": "sha256:9d5f5a53a7ebafd9eb9c8e907b14bcbb7b46bb4b3c70edc6fce8719d60db1105"
+      "event_sha256": "sha256:218ef731d4bbbc574a05ad391107bf5093b5e78d132a53195c1d9896e47ff3ed"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-64e74cdc6a7b935a802dec98",
-      "transaction_id": "txn-64e74cdc6a7b935a802dec98",
-      "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal",
+      "journal_id": "journal-4bc066e19a48342ea5e51d2b",
+      "transaction_id": "txn-4bc066e19a48342ea5e51d2b",
+      "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal",
       "sequence": 2,
-      "previous_event_sha256": "sha256:9d5f5a53a7ebafd9eb9c8e907b14bcbb7b46bb4b3c70edc6fce8719d60db1105",
+      "previous_event_sha256": "sha256:218ef731d4bbbc574a05ad391107bf5093b5e78d132a53195c1d9896e47ff3ed",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "71e231fe6462e689662a0f92e4f51ce95cdaf056",
+        "source_commit": "e1b0e0e6943066be5d0c675b17ccda8fb7badb50",
         "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
       },
-      "event_sha256": "sha256:3ec79487878659ac5eabe73a7995dc08adf6317c68745e4ef1dc6a80bbe67a79"
+      "event_sha256": "sha256:04ffa30e8bb142170f9ccf4ee5029592b75c59875424a91060d725f405b2e250"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-64e74cdc6a7b935a802dec98",
-      "transaction_id": "txn-64e74cdc6a7b935a802dec98",
-      "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal",
+      "journal_id": "journal-4bc066e19a48342ea5e51d2b",
+      "transaction_id": "txn-4bc066e19a48342ea5e51d2b",
+      "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal",
       "sequence": 3,
-      "previous_event_sha256": "sha256:3ec79487878659ac5eabe73a7995dc08adf6317c68745e4ef1dc6a80bbe67a79",
+      "previous_event_sha256": "sha256:04ffa30e8bb142170f9ccf4ee5029592b75c59875424a91060d725f405b2e250",
       "event_type": "projections-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "graph_revision": 388,
-        "map_revision": 370
+        "graph_revision": 389,
+        "map_revision": 371
       },
-      "event_sha256": "sha256:e7189b6c2a1306dcd65c3d7277aed3b42c0bb114c50507874bdb169dc9582ba6"
+      "event_sha256": "sha256:7314da83483ae4207e2607328f7b91ac16b61a3374c660608f4f92e9c94c4e1d"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-64e74cdc6a7b935a802dec98",
-      "transaction_id": "txn-64e74cdc6a7b935a802dec98",
-      "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal",
+      "journal_id": "journal-4bc066e19a48342ea5e51d2b",
+      "transaction_id": "txn-4bc066e19a48342ea5e51d2b",
+      "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal",
       "sequence": 4,
-      "previous_event_sha256": "sha256:e7189b6c2a1306dcd65c3d7277aed3b42c0bb114c50507874bdb169dc9582ba6",
+      "previous_event_sha256": "sha256:7314da83483ae4207e2607328f7b91ac16b61a3374c660608f4f92e9c94c4e1d",
       "event_type": "projections-validated",
       "actor": "gpt-sol",
       "payload": {
@@ -87,26 +87,26 @@
         "compass": "passed",
         "latch": "passed"
       },
-      "event_sha256": "sha256:8c6726e3d4f33f1b041d451574860538a59942402980b8be50acacc535b1d4c3"
+      "event_sha256": "sha256:bb4c96477aef1f5620af4c076db09e4bb0daebc9da5f09ffbcfcb74b02a6228a"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-64e74cdc6a7b935a802dec98",
-      "transaction_id": "txn-64e74cdc6a7b935a802dec98",
-      "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal",
+      "journal_id": "journal-4bc066e19a48342ea5e51d2b",
+      "transaction_id": "txn-4bc066e19a48342ea5e51d2b",
+      "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal",
       "sequence": 5,
-      "previous_event_sha256": "sha256:8c6726e3d4f33f1b041d451574860538a59942402980b8be50acacc535b1d4c3",
+      "previous_event_sha256": "sha256:bb4c96477aef1f5620af4c076db09e4bb0daebc9da5f09ffbcfcb74b02a6228a",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "shadow_directory_rename"
       },
-      "event_sha256": "sha256:19815d4e9da82d4c838ae005e9392d3340d3f7307ee6c138c4957fb19052cca5"
+      "event_sha256": "sha256:337539ee4add2da57feade5e85c13e1bbd1ba9246a9096c82c2446cd9a011be7"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
   "event_kind": "clean_closeout",
-  "next_boundaries_sha256": "sha256:8d674fbf9c819762462f1eb1ddcec9508dbe4f531de6ebf5983702b433c022d1",
+  "next_boundaries_sha256": "sha256:6196142fec11c5fd6eb8c077da2e68397f13e5027fadad3ba24e99adb0324c3a",
   "register_bytes_preserved": false,
   "pattern_bytes_preserved": false
 }

@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "e1b0e0e6943066be5d0c675b17ccda8fb7badb50",
+  "source_commit": "e1b0e0e6943066be5d0c675b17ccda8fb7badb50",
+  "generation_id": "gen-faa810f058236fc91d58ba2a611399f288e58ee673fd9f1582ca45b4e94b1156",
+  "bundle_sha256": "faa810f058236fc91d58ba2a611399f288e58ee673fd9f1582ca45b4e94b1156",
+  "previous_generation_id": "gen-89b46cfc0518a2e7a32f98af8fe3bd68c019bffff10f568b05dc80df82d2c2e5",
+  "previous_source_commit": "e1b0e0e6943066be5d0c675b17ccda8fb7badb50",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 150,
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal",
+  "event_kind": "clean_closeout",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}
