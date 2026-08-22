@@ -1,0 +1,52 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_the_exact_authored_synthetic_native_harness_work_order_call_cost_effect_and_typed_result_boundary",
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh complete AGENTS reading, active boot acceptance, protected sections, active latch, current Git snapshot and explicit three-lane efficacy assessment", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "source_evidence": {
+    "live_handover_current_baton": "Continuity 403 and Compass 385 accept the one-process provider-free corrected-runner boot and select the first useful authored-synthetic native-Harness development recovery rehearsal.",
+    "current_authority_allocation": "GPT Sol owns planning, deterministic admission, monitoring and acceptance. DeepSeek Flash is planned only for the later frozen native-Harness work package; Gemini is reserved for a postcandidate independent veto; native subagents are declined under developer policy and serial custody.",
+    "active_plan_and_acceptance": ["docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-plan.md", "docs/security/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-threat-model-delta.md", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/native-boot-evidence.json", "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout.md", "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-sol-acceptance.md", "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/efficacy-reading.json", "orchestration/continuity/ariadne-active-operation-latch/current.json", "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout-precommit-receipt.json", "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout-precommit-v2-receipt.json"],
+    "protected_evidence_boundaries": "Use newly authored synthetic content only. Freeze owned paths and a no-effect failure terminal before execution. The previous attempts remain consumed; product, patient, appointment, clinical, historical and protected data plus product/runtime/deployment/protected surfaces remain closed.",
+    "git_refs_and_worktree": "The machine snapshot alone verifies the aligned task branch, configured protected refs, required ancestry, clean tracked tree and preserved docs/branding plus unrelated untracked paths."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+    "active_tranche": "Raisa authored-synthetic native Harness corrected-guard-graph first useful-development recovery rehearsal",
+    "objective": "Freeze and execute one distinct authored-synthetic native-Harness development recovery attempt using the corrected accepted runner graph, one exact small EMR4 work order and at most one prepaid DeepSeek provider request; release only a typed reviewed candidate or exact failure terminal while measuring useful output, traceability, correction cost and cleanup.",
+    "status": "in_progress",
+    "source_head": "5e5881e2123e840b9b3d22fdcfe65ca0ecf78c75",
+    "authority_source": "Yuri's standing uninterrupted-development authority, the accepted provider-free corrected-runner boot proof and Yuri's prepaid DeepSeek cost-control clarification.",
+    "checkpoint": {"completed_stage": "Accepted deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof at the machine-resolved source.", "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_exact_authored_synthetic_work_order_call_cost_effect_and_typed_result_boundary", "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0}, "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"},
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": ["authored_synthetic_corrected_guard_graph_useful_development_recovery_only", "fresh_exact_work_order_owned_paths_and_typed_result_contract_required_before_preexecution", "one_distinct_native_harness_process_and_one_prepaid_deepseek_provider_request_maximum_after_frozen_preexecution", "consumed_prior_development_attempt_and_boot_attempt_immutable_and_no_retry_or_resume", "no_claude_code_or_other_transport_fallback", "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting", "no_product_patient_appointment_clinical_historical_or_protected_data", "no_production_runtime_deployment_release_or_pages", "no_protected_evidence_access_or_protected_ref_movement", "no_real_product_patient_appointment_clinical_historical_or_protected_data", "no_live_product_database_docker_or_production_runtime", "no_ordinary_practice_enablement_feature_flag_allowlist_grammar_client_or_waiting_area_change", "no_deployment_release_pages_or_protected_ref_movement", "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602", "docs_branding_and_all_unrelated_untracked_files_preserved", "explicit_path_staging_only"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+    "assessed_stage": "fresh_preplanning_after_corrected_runner_boot_acceptance",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "planned", "expected_leverage": "positive", "rationale": "The tranche exists to measure one useful bounded DeepSeek development turn through the native Harness after a committed exact work order and preexecution gate.", "work_packages": ["produce one typed candidate or exact failure for the frozen small authored-synthetic EMR4 work order"]},
+      {"lane_id": "gemini_verifier", "disposition": "reserved", "expected_leverage": "required_independence", "rationale": "A released candidate needs a fresh independent veto after deterministic source, scope and test admission; no Gemini request occurs during planning or before a candidate exists.", "work_packages": []},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Developer policy forbids proactive delegation here, and work-order freeze plus one-process custody are serial stateful work.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["freeze exact work order before any dispatch", "commit candidate source and preexecution evidence before native launch", "one Harness process and at most one DeepSeek request", "deterministic candidate admission precedes any Gemini veto", "Sol alone accepts and publishes"],
+    "reassessment_triggers": ["exact work-order selection", "deterministic preexecution result", "typed DeepSeek terminal", "pre-verifier gate", "closeout"]
+  },
+  "adapter_observations": [
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Historical lineage only; no fallback is permitted."]},
+    {"adapter_id": "deepcode_cli", "method": "deepcode_cli_observation", "reachability": "reachable", "evidence": ["The pinned native Harness passed its provider-free corrected-runner boot prerequisite; no occupied attempt has started."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not used."]},
+    {"adapter_id": "antigravity_cli_print", "method": "agy_cli_observation", "reachability": "reachable", "evidence": ["Gemini 3.7 is reserved behind deterministic candidate admission."]},
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["GPT Sol owns planning and acceptance."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No subagent was spawned; developer policy precludes proactive delegation."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

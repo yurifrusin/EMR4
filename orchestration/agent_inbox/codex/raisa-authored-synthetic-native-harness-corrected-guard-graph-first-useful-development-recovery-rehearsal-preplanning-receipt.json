@@ -1,0 +1,132 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa authored-synthetic native Harness corrected-guard-graph first useful-development recovery rehearsal",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_exact_authored_synthetic_work_order_call_cost_effect_and_typed_result_boundary",
+    "operation_id": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "5e5881e2123e840b9b3d22fdcfe65ca0ecf78c75",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "4ea72bb4481b0e4b6f3f531bc65f809a448ad5d1",
+    "reason_codes": [],
+    "resolved_commit": "5e5881e2123e840b9b3d22fdcfe65ca0ecf78c75",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "5e5881e2123e840b9b3d22fdcfe65ca0ecf78c75"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "4ea72bb4481b0e4b6f3f531bc65f809a448ad5d1",
+    "branch_origin_aligned": true,
+    "head": "4ea72bb4481b0e4b6f3f531bc65f809a448ad5d1",
+    "origin_branch_commit": "4ea72bb4481b0e4b6f3f531bc65f809a448ad5d1",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 670
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "fresh_preplanning_after_corrected_runner_boot_acceptance",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The tranche exists to measure one useful bounded DeepSeek development turn through the native Harness after a committed exact work order and preexecution gate.",
+        "work_packages": [
+          "produce one typed candidate or exact failure for the frozen small authored-synthetic EMR4 work order"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "A released candidate needs a fresh independent veto after deterministic source, scope and test admission; no Gemini request occurs during planning or before a candidate exists.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy forbids proactive delegation here, and work-order freeze plus one-process custody are serial stateful work.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "exact work-order selection",
+      "deterministic preexecution result",
+      "typed DeepSeek terminal",
+      "pre-verifier gate",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "freeze exact work order before any dispatch",
+      "commit candidate source and preexecution evidence before native launch",
+      "one Harness process and at most one DeepSeek request",
+      "deterministic candidate admission precedes any Gemini veto",
+      "Sol alone accepts and publishes"
+    ]
+  },
+  "planned_action": "freeze_the_exact_authored_synthetic_native_harness_work_order_call_cost_effect_and_typed_result_boundary",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/native-boot-evidence.json",
+      "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/efficacy-reading.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout-precommit-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-closeout-precommit-v2-receipt.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns planning, deterministic admission, monitoring and acceptance. DeepSeek Flash is planned only for the later frozen native-Harness work package; Gemini is reserved for a postcandidate independent veto; native subagents are declined under developer policy and serial custody.",
+    "git_refs_and_worktree": "The machine snapshot alone verifies the aligned task branch, configured protected refs, required ancestry, clean tracked tree and preserved docs/branding plus unrelated untracked paths.",
+    "live_handover_current_baton": "Continuity 403 and Compass 385 accept the one-process provider-free corrected-runner boot and select the first useful authored-synthetic native-Harness development recovery rehearsal.",
+    "protected_evidence_boundaries": "Use newly authored synthetic content only. Freeze owned paths and a no-effect failure terminal before execution. The previous attempts remain consumed; product, patient, appointment, clinical, historical and protected data plus product/runtime/deployment/protected surfaces remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
