@@ -116,4 +116,3 @@ def test_subprocess_surface_is_git_resolution_only() -> None:
         and node.func.attr == "run"
     ]
     assert {enclosing[node] for node in calls} == {"_git_head", "_assert_ancestor"}
-
