@@ -1,0 +1,148 @@
+{
+  "schema_version": "ariadne.deepseek_native_harness_pragmatic_adoption_review.v1",
+  "operation_id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+  "planning_source_head": "6d77276134b6690ca4dccba03234c0cbc3982acb",
+  "accepted_predecessor_source": "5c7c204d44ab9db23786ec4996ca92d525f6771a",
+  "evidence_scope": "retained_non_protected_repository_evidence_only",
+  "inventory": {
+    "continuity_nodes_with_native_harness_id": 68,
+    "continuity_node_statuses": {
+      "accepted": 68
+    },
+    "continuity_created_at_first": "2026-08-18T04:37:03Z",
+    "continuity_created_at_last": "2026-08-22T22:17:01Z",
+    "top_level_docs": 176,
+    "plan_docs": 71,
+    "closeout_docs": 71,
+    "continuity_directories": 64,
+    "scripts": 75,
+    "tests": 96
+  },
+  "key_findings": {
+    "generic_agentic_traceability": {
+      "status": "correct_partial_candidate_incomplete_task",
+      "successful_model_steps": 6,
+      "ordered_tool_calls": 8,
+      "focused_tests_passed": 4,
+      "request_ceiling_terminal": 7,
+      "estimated_provider_cost_usd": 0.001722812
+    },
+    "first_emr4_admission": {
+      "status": "broker_rejected_surplus_tool_schemas_before_provider",
+      "declared_tool_count": 7,
+      "admitted_tools": ["edit", "glob", "read"],
+      "provider_requests": 0,
+      "candidate_present": false
+    },
+    "second_emr4_admission": {
+      "status": "exact_tool_view_passed_stock_headless_hmr_failed_before_provider",
+      "provider_requests": 0,
+      "candidate_present": false
+    },
+    "stock_headless_custom_runner_boot": {
+      "status": "passed",
+      "evidence_source": "f0f8e59ebd70da5167edf907c9ece26049cdcf1c",
+      "execution_candidate": "d3cdf7362153079bdc92305714197a88f14a4b74",
+      "generic_boot_reproof_justified": false
+    },
+    "last_occupied_useful_development_attempt": {
+      "status": "bounded_negative_terminal",
+      "provider_requests": 1,
+      "tool_calls": 1,
+      "tool_results": 1,
+      "coordinate": "edit_error_accept_not_concluded",
+      "changed_path_count": 0,
+      "candidate_present": false
+    }
+  },
+  "incident_corpus": {
+    "claude_labelled_deepseek_rows": 30,
+    "claude_origins": {
+      "agent_behavior": 21,
+      "transport": 9
+    },
+    "claude_categories": {
+      "transport_timeout": 9,
+      "reasoning_claim_error": 8,
+      "output_contract_violation": 7,
+      "command_scope_violation": 3,
+      "evidence_misreport": 3
+    },
+    "direct_native_harness_rows": 21,
+    "native_origins": {
+      "harness": 14,
+      "agent_behavior": 5,
+      "repository": 2
+    },
+    "native_categories": {
+      "harness_failure": 14,
+      "evidence_misreport": 3,
+      "repository_defect": 2,
+      "output_contract_violation": 1,
+      "reasoning_claim_error": 1
+    },
+    "comparative_rate_claim_allowed": false,
+    "reason": "tasks_denominators_containment_and_observation_quality_are_not_matched"
+  },
+  "decision": {
+    "native_harness_admitted_for_monitored_real_development": true,
+    "native_harness_default_worker": false,
+    "native_harness_more_traceable_than_retained_claude_failures": true,
+    "native_harness_more_reliable_at_useful_completion_proved": false,
+    "additional_generic_boot_or_interoperability_rehearsal_required": false,
+    "silent_claude_fallback_allowed": false
+  },
+  "retained_controls": [
+    "pinned_package_profile_and_runner_hashes",
+    "fresh_sparse_worktree_and_session_bound_to_full_source_oid_and_owned_paths",
+    "read_glob_edit_only",
+    "single_parallel_tool_zero_automatic_retry_zero_fallback_zero_auxiliary_model",
+    "isolated_broker_credential_custody_no_direct_worker_egress",
+    "nine_hundred_second_wall_clock",
+    "sanitized_structural_trace_usage_changed_paths_and_cleanup",
+    "sol_owned_diff_tests_and_acceptance"
+  ],
+  "relaxed_or_retired_controls": [
+    "one_provider_request_ceiling",
+    "generic_boot_reproof_when_hashes_match",
+    "clockwork_tick_per_internal_agent_step",
+    "separate_closeout_for_every_harness_subcoordinate",
+    "diagnostic_sequel_after_attributable_terminal",
+    "gemini_review_without_candidate_or_risk_trigger",
+    "perfect_clockwork_native_harness_interoperability_gate"
+  ],
+  "first_real_assignment": {
+    "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+    "owned_repository_node": "closed_manifest_normalizer",
+    "intended_owned_paths": [
+      "app/services/appointment_check_in_environment_manifest.py",
+      "tests/test_appointment_check_in_environment_manifest.py"
+    ],
+    "api_spine_classification": "declarative_manifest_input_normalized_into_typed_unmounted_code",
+    "product_command_or_activation_authority": false,
+    "data_class": "authored_reference_only_non_phi_non_secret_repository_source",
+    "occupied_session_count": 1,
+    "wall_clock_seconds": 900,
+    "automatic_retries": 0,
+    "fallbacks": 0,
+    "natural_multi_turn_self_correction_allowed": true
+  },
+  "matched_future_readings": [
+    "useful_candidate",
+    "task_completion",
+    "trace_complete",
+    "correction_cost",
+    "scope_integrity"
+  ],
+  "protected_effects": {
+    "harness_worker_or_provider_run_during_review": false,
+    "broker_runner_or_preset_mutated": false,
+    "application_product_api_or_configuration_changed": false,
+    "database_or_secret_accessed": false,
+    "product_patient_clinical_historical_or_protected_data_used": false,
+    "ordinary_practice_enabled": false,
+    "production_deployment_release_or_pages": false,
+    "protected_ref_moved": false
+  },
+  "result": "pragmatic_secondary_worker_adoption_plan_frozen_first_real_assignment_selected"
+}
