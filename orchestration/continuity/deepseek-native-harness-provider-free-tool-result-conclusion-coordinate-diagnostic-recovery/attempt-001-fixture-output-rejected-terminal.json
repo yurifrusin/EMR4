@@ -1,0 +1,19 @@
+{
+  "broker_process_count": 0,
+  "database_attempt_count": 0,
+  "disposable_root_absent": true,
+  "docker_attempt_count": 0,
+  "failure_coordinate": "fixture_output_rejected",
+  "fallback_count": 0,
+  "model_request_count": 0,
+  "native_harness_process_count": 0,
+  "network_attempt_count": 0,
+  "operation_id": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery",
+  "provider_request_count": 0,
+  "raw_sensitive_material_retained": false,
+  "resume_count": 0,
+  "retry_count": 0,
+  "schema_version": "ariadne.native_harness_tool_result_conclusion_diagnostic_failure.v1",
+  "status": "failed_closed",
+  "worker_process_count": 0
+}

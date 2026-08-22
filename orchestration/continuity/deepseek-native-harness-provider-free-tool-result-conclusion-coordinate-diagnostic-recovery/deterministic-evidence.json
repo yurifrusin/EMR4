@@ -1,0 +1,161 @@
+{
+  "accepted_runner": {
+    "bytes": 6516,
+    "sha256": "8eceaa17a3e00f1872898a345bd7daad43620380c20ce3c9be79b643421780d8",
+    "source_commit": "f2d420ce9637081d08ef7d8241b588258d4ddc6a",
+    "source_commit_resolved": true,
+    "source_is_ancestor_of_head": true
+  },
+  "cleanup": {
+    "disposable_root_absent": true,
+    "owned_process_absent": true,
+    "raw_argument_content_value_error_retained": false,
+    "raw_prompt_response_reasoning_session_environment_retained": false
+  },
+  "contract_sha256": "d1992c46a3078f6dba4fc7264d127800e8668b8a065447374f199a5a13f50af7",
+  "evidence_label": "provider_free_authored_synthetic_tool_lifecycle_fixture",
+  "fixture": {
+    "actual_dsh_tools_runtime_imported": true,
+    "disposable_root_absent": true,
+    "exit_code": 0,
+    "node_fixture_process_count": 1,
+    "owned_process_absent": true,
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_bytes": 1988,
+    "stdout_sha256": "926b5f879befe7290d12c65e8361305993b46c1534ee47ef6f687ee03e5f24da",
+    "tool_runtime_execution_count": 5
+  },
+  "future_runner": {
+    "accepted_runner_sha256": "8eceaa17a3e00f1872898a345bd7daad43620380c20ce3c9be79b643421780d8",
+    "bytes": 9542,
+    "checks": {
+      "accepted_runner_bound": true,
+      "closed_coordinate_inventory_exact": true,
+      "conclusion_before_dispatch": true,
+      "new_schema_exact": true,
+      "no_post_execute_conclusion": true,
+      "no_raw_error_projection": true,
+      "no_retry_resume_fallback": true,
+      "old_schema_absent": true,
+      "one_classifier": true,
+      "one_pre_execute_conclusion": true,
+      "post_result_observer_authoritative": true,
+      "post_result_observer_order": true,
+      "typed_terminal_present": true
+    },
+    "sha256": "33e4ceefc612ac2410c95b71d80ccc42e913976379e8c088f0b8eff966853282"
+  },
+  "historical_terminal": {
+    "classification": "immutable_unresolved_observation",
+    "sha256": "2c66b7de93b25579347d0e9199437fdc8c7ebf5d21f6d59dc2f73dda602970a5",
+    "unchanged": true
+  },
+  "operation_id": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery",
+  "package_source": {
+    "files": {
+      "lib/index.js": {
+        "bytes": 150646,
+        "sha256": "47de95d14493dbd22d1a3ade14890fc99d7232db4e363f2190c9063b030dd029"
+      },
+      "lib/types/index.d.ts": {
+        "bytes": 42942,
+        "sha256": "bad13885fcaa9d781e2a28988e9e9fd4cdeb750e65b8bc148356ffd1f0457907"
+      },
+      "package.json": {
+        "bytes": 2053,
+        "sha256": "d03b9856ee20c9fd804322589f7c259a7404786e4af99cc892609c3d671690f3"
+      }
+    },
+    "lifecycle_checks": {
+      "failure_type_forbids_conclusion": true,
+      "finalize_calls_post_execute": true,
+      "post_execute_default_is_accept": true,
+      "post_execute_does_not_resnapshot_marker": true,
+      "post_execute_receives_normalized_outcome": true,
+      "result_observer_is_final_outcome": true,
+      "success_creation_snapshots_marker": true,
+      "success_type_allows_conclusion": true
+    },
+    "lifecycle_positions": {
+      "final_success_marker_projection": 147201,
+      "finalize_post_execute_call": 137856,
+      "post_execute_definition": 142662,
+      "success_marker_projection": 145691,
+      "success_marker_snapshot": 145485
+    },
+    "name": "@deepseek-ai/dsh-tools",
+    "third_party_source_text_retained": false,
+    "version": "0.1.0-rc.7"
+  },
+  "process_counts": {
+    "broker_process_count": 0,
+    "broker_request_count": 0,
+    "database_attempt_count": 0,
+    "docker_attempt_count": 0,
+    "fallback_count": 0,
+    "model_request_count": 0,
+    "native_harness_process_count": 0,
+    "network_attempt_count": 0,
+    "node_fixture_process_count": 1,
+    "provider_request_count": 0,
+    "resume_count": 0,
+    "retry_count": 0,
+    "worker_process_count": 0
+  },
+  "result": "tool_result_conclusion_coordinate_diagnostic_pass",
+  "schema_version": "ariadne.native_harness_tool_result_conclusion_diagnostic_evidence.v1",
+  "status": "passed",
+  "variants": [
+    {
+      "authoritative_final_result_kind": "success_concluding",
+      "conclusion_request_stage": "pre_execute_after_boundary_accept",
+      "coordinate": "edit_success_accept_concluded",
+      "input_result_kind": "success",
+      "post_execute_decision_kind": "accept",
+      "schema_version": "ariadne.native_harness_tool_result_conclusion_coordinate.v1",
+      "turn_kind": "completed",
+      "variant_id": "success_accept_pre_execute_marker"
+    },
+    {
+      "authoritative_final_result_kind": "success_nonconcluding",
+      "conclusion_request_stage": "post_execute_after_decision",
+      "coordinate": "edit_success_accept_late_marker",
+      "input_result_kind": "success",
+      "post_execute_decision_kind": "accept",
+      "schema_version": "ariadne.native_harness_tool_result_conclusion_coordinate.v1",
+      "turn_kind": "error",
+      "variant_id": "success_accept_post_execute_marker"
+    },
+    {
+      "authoritative_final_result_kind": "error",
+      "conclusion_request_stage": "pre_execute_after_boundary_accept",
+      "coordinate": "edit_error_accept_not_concluded",
+      "input_result_kind": "error",
+      "post_execute_decision_kind": "accept",
+      "schema_version": "ariadne.native_harness_tool_result_conclusion_coordinate.v1",
+      "turn_kind": "error",
+      "variant_id": "error_accept_pre_execute_marker"
+    },
+    {
+      "authoritative_final_result_kind": "error",
+      "conclusion_request_stage": "pre_execute_after_boundary_accept",
+      "coordinate": "edit_success_blocked_not_concluded",
+      "input_result_kind": "success",
+      "post_execute_decision_kind": "block",
+      "schema_version": "ariadne.native_harness_tool_result_conclusion_coordinate.v1",
+      "turn_kind": "error",
+      "variant_id": "success_block_pre_execute_marker"
+    },
+    {
+      "authoritative_final_result_kind": "error",
+      "conclusion_request_stage": "pre_execute_after_boundary_accept",
+      "coordinate": "post_execute_decision_failed_not_concluded",
+      "input_result_kind": "success",
+      "post_execute_decision_kind": "failed",
+      "schema_version": "ariadne.native_harness_tool_result_conclusion_coordinate.v1",
+      "turn_kind": "error",
+      "variant_id": "success_decision_failure_pre_execute_marker"
+    }
+  ]
+}

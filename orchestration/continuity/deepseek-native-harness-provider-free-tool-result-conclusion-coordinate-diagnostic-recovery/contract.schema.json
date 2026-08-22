@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "evidence_label",
+    "accepted_runner",
+    "accepted_dsh_tools",
+    "historical_terminal",
+    "coordinates",
+    "variants",
+    "process_limits",
+    "forbidden_surfaces"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_tool_result_conclusion_diagnostic_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery"},
+    "evidence_label": {"const": "provider_free_authored_synthetic_tool_lifecycle_fixture"},
+    "accepted_runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_path", "source_commit", "fixture_target", "bytes", "sha256"],
+      "properties": {
+        "source_path": {"const": "scripts/raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py"},
+        "source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "fixture_target": {"type": "string", "pattern": "^/synthetic/workspace/"},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "accepted_dsh_tools": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["materialization_source_operation", "name", "version", "files"],
+      "properties": {
+        "materialization_source_operation": {"type": "string", "minLength": 1},
+        "name": {"const": "@deepseek-ai/dsh-tools"},
+        "version": {"const": "0.1.0-rc.7"},
+        "files": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["package.json", "lib/index.js", "lib/types/index.d.ts"],
+          "properties": {
+            "package.json": {"$ref": "#/$defs/fileBinding"},
+            "lib/index.js": {"$ref": "#/$defs/fileBinding"},
+            "lib/types/index.d.ts": {"$ref": "#/$defs/fileBinding"}
+          }
+        }
+      }
+    },
+    "historical_terminal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "classification"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "classification": {"const": "immutable_unresolved_observation"}
+      }
+    },
+    "coordinates": {
+      "const": [
+        "edit_success_accept_concluded",
+        "edit_success_accept_late_marker",
+        "edit_error_accept_not_concluded",
+        "edit_success_blocked_not_concluded",
+        "post_execute_decision_failed_not_concluded"
+      ]
+    },
+    "variants": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {"$ref": "#/$defs/variant"}
+    },
+    "process_limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node_fixture_process_count",
+        "native_harness_process_count",
+        "worker_process_count",
+        "model_request_count",
+        "provider_request_count",
+        "broker_process_count",
+        "broker_request_count",
+        "network_attempt_count",
+        "database_attempt_count",
+        "docker_attempt_count",
+        "retry_count",
+        "resume_count",
+        "fallback_count"
+      ],
+      "properties": {
+        "node_fixture_process_count": {"const": 1},
+        "native_harness_process_count": {"const": 0},
+        "worker_process_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0},
+        "broker_process_count": {"const": 0},
+        "broker_request_count": {"const": 0},
+        "network_attempt_count": {"const": 0},
+        "database_attempt_count": {"const": 0},
+        "docker_attempt_count": {"const": 0},
+        "retry_count": {"const": 0},
+        "resume_count": {"const": 0},
+        "fallback_count": {"const": 0}
+      }
+    },
+    "forbidden_surfaces": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "fileBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256"],
+      "properties": {
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "input_result_kind",
+        "post_execute_decision_kind",
+        "conclusion_request_stage",
+        "authoritative_final_result_kind",
+        "turn_kind"
+      ],
+      "properties": {
+        "input_result_kind": {"enum": ["success", "error"]},
+        "post_execute_decision_kind": {"enum": ["accept", "block", "failed"]},
+        "conclusion_request_stage": {"enum": ["pre_execute_after_boundary_accept", "post_execute_after_decision", "not_requested"]},
+        "authoritative_final_result_kind": {"enum": ["success_concluding", "success_nonconcluding", "error"]},
+        "turn_kind": {"enum": ["completed", "error"]}
+      }
+    },
+    "variant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant_id", "observation", "coordinate"],
+      "properties": {
+        "variant_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{0,99}$"},
+        "observation": {"$ref": "#/$defs/observation"},
+        "coordinate": {"enum": ["edit_success_accept_concluded", "edit_success_accept_late_marker", "edit_error_accept_not_concluded", "edit_success_blocked_not_concluded", "post_execute_decision_failed_not_concluded"]}
+      }
+    }
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "result",
+    "operation_id",
+    "evidence_label",
+    "contract_sha256",
+    "package_source",
+    "accepted_runner",
+    "future_runner",
+    "historical_terminal",
+    "variants",
+    "process_counts",
+    "fixture",
+    "cleanup"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_tool_result_conclusion_diagnostic_evidence.v1"},
+    "status": {"const": "passed"},
+    "result": {"const": "tool_result_conclusion_coordinate_diagnostic_pass"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery"},
+    "evidence_label": {"const": "provider_free_authored_synthetic_tool_lifecycle_fixture"},
+    "contract_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "package_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "files", "lifecycle_positions", "lifecycle_checks", "third_party_source_text_retained"],
+      "properties": {
+        "name": {"const": "@deepseek-ai/dsh-tools"},
+        "version": {"const": "0.1.0-rc.7"},
+        "files": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["package.json", "lib/index.js", "lib/types/index.d.ts"],
+          "properties": {
+            "package.json": {"$ref": "#/$defs/fileBinding"},
+            "lib/index.js": {"$ref": "#/$defs/fileBinding"},
+            "lib/types/index.d.ts": {"$ref": "#/$defs/fileBinding"}
+          }
+        },
+        "lifecycle_positions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["finalize_post_execute_call", "post_execute_definition", "success_marker_snapshot", "success_marker_projection", "final_success_marker_projection"],
+          "properties": {
+            "finalize_post_execute_call": {"type": "integer", "minimum": 0},
+            "post_execute_definition": {"type": "integer", "minimum": 0},
+            "success_marker_snapshot": {"type": "integer", "minimum": 0},
+            "success_marker_projection": {"type": "integer", "minimum": 0},
+            "final_success_marker_projection": {"type": "integer", "minimum": 0}
+          }
+        },
+        "lifecycle_checks": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["finalize_calls_post_execute", "success_creation_snapshots_marker", "post_execute_does_not_resnapshot_marker", "post_execute_default_is_accept", "success_type_allows_conclusion", "failure_type_forbids_conclusion", "result_observer_is_final_outcome", "post_execute_receives_normalized_outcome"],
+          "properties": {
+            "finalize_calls_post_execute": {"const": true},
+            "success_creation_snapshots_marker": {"const": true},
+            "post_execute_does_not_resnapshot_marker": {"const": true},
+            "post_execute_default_is_accept": {"const": true},
+            "success_type_allows_conclusion": {"const": true},
+            "failure_type_forbids_conclusion": {"const": true},
+            "result_observer_is_final_outcome": {"const": true},
+            "post_execute_receives_normalized_outcome": {"const": true}
+          }
+        },
+        "third_party_source_text_retained": {"const": false}
+      }
+    },
+    "accepted_runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256", "source_commit", "source_commit_resolved", "source_is_ancestor_of_head"],
+      "properties": {
+        "bytes": {"const": 6516},
+        "sha256": {"const": "8eceaa17a3e00f1872898a345bd7daad43620380c20ce3c9be79b643421780d8"},
+        "source_commit": {"const": "f2d420ce9637081d08ef7d8241b588258d4ddc6a"},
+        "source_commit_resolved": {"const": true},
+        "source_is_ancestor_of_head": {"const": true}
+      }
+    },
+    "future_runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256", "accepted_runner_sha256", "checks"],
+      "properties": {
+        "bytes": {"type": "integer", "minimum": 6517},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "accepted_runner_sha256": {"const": "8eceaa17a3e00f1872898a345bd7daad43620380c20ce3c9be79b643421780d8"},
+        "checks": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["accepted_runner_bound", "one_classifier", "closed_coordinate_inventory_exact", "one_pre_execute_conclusion", "conclusion_before_dispatch", "no_post_execute_conclusion", "post_result_observer_order", "post_result_observer_authoritative", "typed_terminal_present", "new_schema_exact", "old_schema_absent", "no_raw_error_projection", "no_retry_resume_fallback"],
+          "properties": {
+            "accepted_runner_bound": {"const": true},
+            "one_classifier": {"const": true},
+            "closed_coordinate_inventory_exact": {"const": true},
+            "one_pre_execute_conclusion": {"const": true},
+            "conclusion_before_dispatch": {"const": true},
+            "no_post_execute_conclusion": {"const": true},
+            "post_result_observer_order": {"const": true},
+            "post_result_observer_authoritative": {"const": true},
+            "typed_terminal_present": {"const": true},
+            "new_schema_exact": {"const": true},
+            "old_schema_absent": {"const": true},
+            "no_raw_error_projection": {"const": true},
+            "no_retry_resume_fallback": {"const": true}
+          }
+        }
+      }
+    },
+    "historical_terminal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "unchanged", "classification"],
+      "properties": {
+        "sha256": {"const": "2c66b7de93b25579347d0e9199437fdc8c7ebf5d21f6d59dc2f73dda602970a5"},
+        "unchanged": {"const": true},
+        "classification": {"const": "immutable_unresolved_observation"}
+      }
+    },
+    "variants": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {"$ref": "#/$defs/variant"}
+    },
+    "process_counts": {"$ref": "#/$defs/processCounts"},
+    "fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_fixture_process_count", "actual_dsh_tools_runtime_imported", "tool_runtime_execution_count", "exit_code", "stdout_bytes", "stdout_sha256", "stderr_bytes", "stderr_sha256", "owned_process_absent", "disposable_root_absent"],
+      "properties": {
+        "node_fixture_process_count": {"const": 1},
+        "actual_dsh_tools_runtime_imported": {"const": true},
+        "tool_runtime_execution_count": {"const": 5},
+        "exit_code": {"const": 0},
+        "stdout_bytes": {"type": "integer", "minimum": 1},
+        "stdout_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "stderr_bytes": {"const": 0},
+        "stderr_sha256": {"const": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
+        "owned_process_absent": {"const": true},
+        "disposable_root_absent": {"const": true}
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owned_process_absent", "disposable_root_absent", "raw_argument_content_value_error_retained", "raw_prompt_response_reasoning_session_environment_retained"],
+      "properties": {
+        "owned_process_absent": {"const": true},
+        "disposable_root_absent": {"const": true},
+        "raw_argument_content_value_error_retained": {"const": false},
+        "raw_prompt_response_reasoning_session_environment_retained": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "fileBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256"],
+      "properties": {
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "processCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_fixture_process_count", "native_harness_process_count", "worker_process_count", "model_request_count", "provider_request_count", "broker_process_count", "broker_request_count", "network_attempt_count", "database_attempt_count", "docker_attempt_count", "retry_count", "resume_count", "fallback_count"],
+      "properties": {
+        "node_fixture_process_count": {"const": 1},
+        "native_harness_process_count": {"const": 0},
+        "worker_process_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0},
+        "broker_process_count": {"const": 0},
+        "broker_request_count": {"const": 0},
+        "network_attempt_count": {"const": 0},
+        "database_attempt_count": {"const": 0},
+        "docker_attempt_count": {"const": 0},
+        "retry_count": {"const": 0},
+        "resume_count": {"const": 0},
+        "fallback_count": {"const": 0}
+      }
+    },
+    "variant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant_id", "schema_version", "input_result_kind", "post_execute_decision_kind", "conclusion_request_stage", "authoritative_final_result_kind", "turn_kind", "coordinate"],
+      "properties": {
+        "variant_id": {"type": "string", "minLength": 1},
+        "schema_version": {"const": "ariadne.native_harness_tool_result_conclusion_coordinate.v1"},
+        "input_result_kind": {"enum": ["success", "error"]},
+        "post_execute_decision_kind": {"enum": ["accept", "block", "failed"]},
+        "conclusion_request_stage": {"enum": ["pre_execute_after_boundary_accept", "post_execute_after_decision", "not_requested"]},
+        "authoritative_final_result_kind": {"enum": ["success_concluding", "success_nonconcluding", "error"]},
+        "turn_kind": {"enum": ["completed", "error"]},
+        "coordinate": {"enum": ["edit_success_accept_concluded", "edit_success_accept_late_marker", "edit_error_accept_not_concluded", "edit_success_blocked_not_concluded", "post_execute_decision_failed_not_concluded"]}
+      }
+    }
+  }
+}

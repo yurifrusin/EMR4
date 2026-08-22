@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "input_result_kind",
+    "post_execute_decision_kind",
+    "conclusion_request_stage",
+    "authoritative_final_result_kind",
+    "turn_kind",
+    "coordinate"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_tool_result_conclusion_coordinate.v1"},
+    "input_result_kind": {"enum": ["success", "error"]},
+    "post_execute_decision_kind": {"enum": ["accept", "block", "failed"]},
+    "conclusion_request_stage": {"enum": ["pre_execute_after_boundary_accept", "post_execute_after_decision", "not_requested"]},
+    "authoritative_final_result_kind": {"enum": ["success_concluding", "success_nonconcluding", "error"]},
+    "turn_kind": {"enum": ["completed", "error"]},
+    "coordinate": {"enum": ["edit_success_accept_concluded", "edit_success_accept_late_marker", "edit_error_accept_not_concluded", "edit_success_blocked_not_concluded", "post_execute_decision_failed_not_concluded"]}
+  }
+}

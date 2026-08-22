@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "operation_id", "failure_coordinate", "native_harness_process_count", "worker_process_count", "model_request_count", "provider_request_count", "broker_process_count", "network_attempt_count", "database_attempt_count", "docker_attempt_count", "retry_count", "resume_count", "fallback_count", "disposable_root_absent", "raw_sensitive_material_retained"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_tool_result_conclusion_diagnostic_failure.v1"},
+    "status": {"const": "failed_closed"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery"},
+    "failure_coordinate": {"enum": ["contract_rejected", "package_source_rejected", "accepted_runner_rejected", "derived_runner_rejected", "historical_terminal_drift", "fixture_root_rejected", "fixture_process_failed", "fixture_output_rejected", "fixture_cleanup_failed", "evidence_rejected", "output_conflict", "unexpected_provider_free_failure"]},
+    "native_harness_process_count": {"const": 0},
+    "worker_process_count": {"const": 0},
+    "model_request_count": {"const": 0},
+    "provider_request_count": {"const": 0},
+    "broker_process_count": {"const": 0},
+    "network_attempt_count": {"const": 0},
+    "database_attempt_count": {"const": 0},
+    "docker_attempt_count": {"const": 0},
+    "retry_count": {"const": 0},
+    "resume_count": {"const": 0},
+    "fallback_count": {"const": 0},
+    "disposable_root_absent": {"type": "boolean"},
+    "raw_sensitive_material_retained": {"const": false}
+  }
+}

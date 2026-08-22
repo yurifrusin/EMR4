@@ -1,0 +1,125 @@
+{
+  "schema_version": "ariadne.native_harness_tool_result_conclusion_diagnostic_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery",
+  "evidence_label": "provider_free_authored_synthetic_tool_lifecycle_fixture",
+  "accepted_runner": {
+    "source_path": "scripts/raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+    "source_commit": "f2d420ce9637081d08ef7d8241b588258d4ddc6a",
+    "fixture_target": "/synthetic/workspace/orchestration/harness_settings/raisa-check-in-rollout-kill-switch.json",
+    "bytes": 6516,
+    "sha256": "8eceaa17a3e00f1872898a345bd7daad43620380c20ce3c9be79b643421780d8"
+  },
+  "accepted_dsh_tools": {
+    "materialization_source_operation": "raisa-provider-free-check-in-native-harness-preset-mount-effective-tool-projection-rehearsal",
+    "name": "@deepseek-ai/dsh-tools",
+    "version": "0.1.0-rc.7",
+    "files": {
+      "package.json": {
+        "bytes": 2053,
+        "sha256": "d03b9856ee20c9fd804322589f7c259a7404786e4af99cc892609c3d671690f3"
+      },
+      "lib/index.js": {
+        "bytes": 150646,
+        "sha256": "47de95d14493dbd22d1a3ade14890fc99d7232db4e363f2190c9063b030dd029"
+      },
+      "lib/types/index.d.ts": {
+        "bytes": 42942,
+        "sha256": "bad13885fcaa9d781e2a28988e9e9fd4cdeb750e65b8bc148356ffd1f0457907"
+      }
+    }
+  },
+  "historical_terminal": {
+    "path": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-terminal.json",
+    "sha256": "2c66b7de93b25579347d0e9199437fdc8c7ebf5d21f6d59dc2f73dda602970a5",
+    "classification": "immutable_unresolved_observation"
+  },
+  "coordinates": [
+    "edit_success_accept_concluded",
+    "edit_success_accept_late_marker",
+    "edit_error_accept_not_concluded",
+    "edit_success_blocked_not_concluded",
+    "post_execute_decision_failed_not_concluded"
+  ],
+  "variants": [
+    {
+      "variant_id": "success_accept_pre_execute_marker",
+      "observation": {
+        "input_result_kind": "success",
+        "post_execute_decision_kind": "accept",
+        "conclusion_request_stage": "pre_execute_after_boundary_accept",
+        "authoritative_final_result_kind": "success_concluding",
+        "turn_kind": "completed"
+      },
+      "coordinate": "edit_success_accept_concluded"
+    },
+    {
+      "variant_id": "success_accept_post_execute_marker",
+      "observation": {
+        "input_result_kind": "success",
+        "post_execute_decision_kind": "accept",
+        "conclusion_request_stage": "post_execute_after_decision",
+        "authoritative_final_result_kind": "success_nonconcluding",
+        "turn_kind": "error"
+      },
+      "coordinate": "edit_success_accept_late_marker"
+    },
+    {
+      "variant_id": "error_accept_pre_execute_marker",
+      "observation": {
+        "input_result_kind": "error",
+        "post_execute_decision_kind": "accept",
+        "conclusion_request_stage": "pre_execute_after_boundary_accept",
+        "authoritative_final_result_kind": "error",
+        "turn_kind": "error"
+      },
+      "coordinate": "edit_error_accept_not_concluded"
+    },
+    {
+      "variant_id": "success_block_pre_execute_marker",
+      "observation": {
+        "input_result_kind": "success",
+        "post_execute_decision_kind": "block",
+        "conclusion_request_stage": "pre_execute_after_boundary_accept",
+        "authoritative_final_result_kind": "error",
+        "turn_kind": "error"
+      },
+      "coordinate": "edit_success_blocked_not_concluded"
+    },
+    {
+      "variant_id": "success_decision_failure_pre_execute_marker",
+      "observation": {
+        "input_result_kind": "success",
+        "post_execute_decision_kind": "failed",
+        "conclusion_request_stage": "pre_execute_after_boundary_accept",
+        "authoritative_final_result_kind": "error",
+        "turn_kind": "error"
+      },
+      "coordinate": "post_execute_decision_failed_not_concluded"
+    }
+  ],
+  "process_limits": {
+    "node_fixture_process_count": 1,
+    "native_harness_process_count": 0,
+    "worker_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "broker_process_count": 0,
+    "broker_request_count": 0,
+    "network_attempt_count": 0,
+    "database_attempt_count": 0,
+    "docker_attempt_count": 0,
+    "retry_count": 0,
+    "resume_count": 0,
+    "fallback_count": 0
+  },
+  "forbidden_surfaces": [
+    "native_harness_worker_or_provider_request",
+    "consumed_attempt_mutation_or_reclassification",
+    "runbook_manifest_or_candidate_adoption",
+    "product_configuration_api_schema_route_migration_or_database",
+    "ordinary_practice_feature_flag_allowlist_or_command_mounting",
+    "generic_status_arrived_action_grammar_client_or_waiting_area",
+    "product_patient_appointment_clinical_historical_or_protected_data",
+    "production_deployment_release_pages_or_protected_refs"
+  ]
+}
