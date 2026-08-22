@@ -578,6 +578,42 @@
         ]
       },
       "baton_summary": "records and corrects an omitted exact successor-latch boundary through byte-exact rollback before canonical commit."
+    },
+    {
+      "attempt_key": "guard-bridge-graph-incident-0933",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-guard-bridge-module-graph",
+      "role": "orchestrator",
+      "resource_id": "clockwork-rollback-pointer-source-binding",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_dry_run",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A byte-exact rollback pointer is committed as source before a corrected live tick is derived from it.",
+      "observed_error": "The corrected dry-run was attempted while the physical pointer carried rollback lease 149 and the source pointer still carried the prior lease.",
+      "detection_method": "Clockwork dry-run rejected the corrected intent with tick_pointer_physical_drift before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-governance-clockwork/current.json",
+        "docs/ariadne-agent-error-correction-register-revision-612.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.corrected_tick_attempted_before_rollback_pointer_commit",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Commit the byte-exact rollback pointer before deriving or publishing the corrected tick.",
+        "prevention_control": "Corrected publication requires source/physical pointer equality after any rollback and before dry-run generation.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-governance-clockwork/current.json",
+          "docs/ariadne-agent-error-correction-register-revision-612.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records and corrects a premature corrected tick before the rollback pointer received its required source commit."
     }
   ]
 }

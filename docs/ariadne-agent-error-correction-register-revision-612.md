@@ -4,16 +4,16 @@ Date: 2026-08-22
 
 Timestamp: 2026-08-22T10:27:17.1698176+10:00 (Australia/Brisbane)
 
-Status: **932 bounded incidents; all corrected or contained; none open**
+Status: **933 bounded incidents; all corrected or contained; none open**
 
 <!-- ariadne-agent-error-register-reading
 revision: 612
-incident_count: 932
-new_incident_ids: AER-0923,AER-0924,AER-0925,AER-0926,AER-0927,AER-0928,AER-0929,AER-0930,AER-0931,AER-0932
+incident_count: 933
+new_incident_ids: AER-0923,AER-0924,AER-0925,AER-0926,AER-0927,AER-0928,AER-0929,AER-0930,AER-0931,AER-0932,AER-0933
 open_incident_count: 0
 -->
 
-This revision adds AER-0923 through AER-0932. It preserves every preceding
+This revision adds AER-0923 through AER-0933. It preserves every preceding
 entry unchanged.
 
 ## AER-0923 — predecessor evidence constant named incorrectly
@@ -115,9 +115,9 @@ Recurrence signature:
 After all observation fields validated, the dry-run rejected revision 612
 because its human note lacked the exact clockwork-owned comment binding the
 prospective revision, total incident count, ordered new IDs and open count. The
-note first gained the exact prospective reading; after AER-0932 the same
-machine binding was updated atomically to revision 612 / 932 incidents /
-AER-0923 through AER-0932 / zero open.
+note first gained the exact prospective reading; after AER-0932 and AER-0933
+the same machine binding was updated atomically to revision 612 / 933
+incidents / AER-0923 through AER-0933 / zero open.
 
 Recurrence signature:
 `orchestrator.incident_revision_note_omitted_machine_reading_comment`
@@ -135,9 +135,20 @@ pass the complete suite after corrected republication.
 Recurrence signature:
 `orchestrator.successor_latch_omitted_exact_closed_surface_boundary`
 
+## AER-0933 — corrected tick attempted before rollback pointer commit
+
+After byte-exact rollback, the physical clockwork pointer carried the new
+rollback lease while the corrected source commit still contained the older
+pointer. A premature dry-run rejected this as `tick_pointer_physical_drift`.
+The rollback pointer is now explicitly committed before the corrected tick is
+prepared, restoring source/physical equality without manual pointer editing.
+
+Recurrence signature:
+`orchestrator.corrected_tick_attempted_before_rollback_pointer_commit`
+
 ## Control reading
 
-Nine incidents were caught before the consumed process or before canonical
+Ten incidents were caught before the consumed process or before canonical
 clockwork commit publication. AER-0926 is the one
 material execution defect: a missing import-closure invariant, not a model or
 provider failure. The recovery control is intentionally structural—derive

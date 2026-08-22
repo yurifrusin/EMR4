@@ -34,7 +34,7 @@ more speculative intermediate rehearsals.
 - retry/resume count: zero;
 - focused tests before process: 23 passed;
 - exact broader collection before process: 149 passed;
-- register: revision 612, AER-0923 through AER-0932;
+- register: revision 612, AER-0923 through AER-0933;
 - protected refs: unchanged at
   `2e34bdad732fdab32fbf778280b3d3c70d66d602`.
 
