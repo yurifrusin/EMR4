@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/native-harness-integrated-development-terminal-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "attempt_id", "candidate_source", "result", "failure_coordinate", "work_order_sha256", "process", "profile", "hmr_events", "runner", "broker", "candidate", "automatic_retry_count", "fallback_count", "auxiliary_model_call_count", "cleanup"],
+  "properties": {
+    "schema_version": {"const": "ariadne.synthetic_native_worker_occupied_terminal.v1"},
+    "operation_id": {"const": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal"},
+    "attempt_id": {"const": "deepseek-native-integrated-window-worker-001"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {"enum": ["pass", "failed_closed"]},
+    "failure_coordinate": {"type": ["string", "null"]},
+    "pre_hmr_startup_terminal_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "work_order_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "process": {"type": "object"},
+    "profile": {"type": "object"},
+    "hmr_events": {"type": "array", "items": {"type": "string"}},
+    "runner": {"type": "object"},
+    "broker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider_call_started", "provider_call_completed", "provider_call_failed", "request_rejected"],
+      "properties": {
+        "provider_call_started": {"type": "integer", "minimum": 0, "maximum": 1},
+        "provider_call_completed": {"type": "integer", "minimum": 0, "maximum": 1},
+        "provider_call_failed": {"type": "integer", "minimum": 0, "maximum": 1},
+        "request_rejected": {"type": "integer", "minimum": 0}
+      }
+    },
+    "candidate": {"type": "object"},
+    "automatic_retry_count": {"const": 0},
+    "fallback_count": {"const": 0},
+    "auxiliary_model_call_count": {"const": 0},
+    "cleanup": {"type": "object"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"result": {"const": "pass"}}},
+      "then": {
+        "properties": {
+          "failure_coordinate": {"const": null},
+          "process": {"properties": {"native_process_count": {"const": 1}, "harness_exit_code": {"const": 0}}},
+          "hmr_events": {"const": ["sentinel_activated", "stock_headless_hmr_ready"]},
+          "broker": {"properties": {"provider_call_started": {"const": 1}, "provider_call_completed": {"const": 1}, "provider_call_failed": {"const": 0}, "request_rejected": {"const": 0}}},
+          "candidate": {"properties": {"changed_paths": {"const": ["synthetic_window_coalescer.py"]}, "exact_expected_bytes": {"const": true}, "cases": {"properties": {"executed": {"const": true}, "public_passed": {"const": 4}, "holdback_passed": {"const": 3}}}}},
+          "cleanup": {"properties": {"harness_absent": {"const": true}, "broker_absent": {"const": true}, "attempt_root_absent": {"const": true}}}
+        }
+      }
+    }
+  ]
+}

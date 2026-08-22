@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/native-harness-integrated-development-contract-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "planning_source", "accepted_sources", "identity", "runner", "work_package", "documentation", "implementation", "ceilings"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_integrated_development_contract.v1"},
+    "operation_id": {"const": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal"},
+    "planning_source": {"const": "fdb2e48c5828041623cf4bef4d11881445527034"},
+    "accepted_sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["integrated_runner", "integrated_runner_stock_headless_boot"],
+      "properties": {
+        "integrated_runner": {"const": "3139b246db3da0f2b0ded98b140328349f35751c"},
+        "integrated_runner_stock_headless_boot": {"const": "a0ab7ac0c6ecde0291bb4f5304cdc9c46a68efd0"}
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempt_id", "work_order_id", "lease_id", "target_path"],
+      "properties": {
+        "attempt_id": {"const": "deepseek-native-integrated-window-worker-001"},
+        "work_order_id": {"const": "wo-deepseek-native-integrated-window-worker-001"},
+        "lease_id": {"const": "lease-deepseek-native-integrated-window-worker-001"},
+        "target_path": {"type": "string", "pattern": "synthetic_window_coalescer\\.py$"}
+      }
+    },
+    "runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["accepted_bytes", "accepted_sha256", "derived_bytes", "derived_sha256", "allowed_transformations"],
+      "properties": {
+        "accepted_bytes": {"const": 14077},
+        "accepted_sha256": {"const": "115cbf245ca6a2e218b2f2989093cea651bf4fe0aed796204dce1f83826e6be0"},
+        "derived_bytes": {"type": "integer", "minimum": 14078},
+        "derived_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "allowed_transformations": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "string"}}
+      }
+    },
+    "work_package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "baseline_sha256", "expected_sha256", "public_case_count", "holdback_case_count"],
+      "properties": {
+        "path": {"const": "synthetic_window_coalescer.py"},
+        "baseline_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "expected_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "public_case_count": {"const": 4},
+        "holdback_case_count": {"const": 3}
+      }
+    },
+    "documentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["plan_sha256", "threat_model_sha256"],
+      "properties": {
+        "plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "threat_model_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["controller_sha256", "focused_test_sha256", "contract_schema_sha256", "terminal_schema_sha256"],
+      "properties": {
+        "controller_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "focused_test_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "contract_schema_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "terminal_schema_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "ceilings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["native_processes", "sessions", "turns", "provider_requests", "direct_literal_edits", "retries", "resumes", "fallbacks", "auxiliary_models"],
+      "properties": {
+        "native_processes": {"const": 1},
+        "sessions": {"const": 1},
+        "turns": {"const": 1},
+        "provider_requests": {"const": 1},
+        "direct_literal_edits": {"const": 1},
+        "retries": {"const": 0},
+        "resumes": {"const": 0},
+        "fallbacks": {"const": 0},
+        "auxiliary_models": {"const": 0}
+      }
+    }
+  }
+}

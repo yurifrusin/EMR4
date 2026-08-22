@@ -1,0 +1,54 @@
+{
+  "accepted_sources": {
+    "integrated_runner": "3139b246db3da0f2b0ded98b140328349f35751c",
+    "integrated_runner_stock_headless_boot": "a0ab7ac0c6ecde0291bb4f5304cdc9c46a68efd0"
+  },
+  "ceilings": {
+    "auxiliary_models": 0,
+    "direct_literal_edits": 1,
+    "fallbacks": 0,
+    "native_processes": 1,
+    "provider_requests": 1,
+    "resumes": 0,
+    "retries": 0,
+    "sessions": 1,
+    "turns": 1
+  },
+  "documentation": {
+    "plan_sha256": "2a8e45776a43fd175f2d73a5e8b9b6fce58e25f8700d06420564bcefc4eda1a4",
+    "threat_model_sha256": "a7ef5221c06d2da33c5e58d2aeb26184bdcc52a02a13e5419a7e0002ee3c5146"
+  },
+  "identity": {
+    "attempt_id": "deepseek-native-integrated-window-worker-001",
+    "lease_id": "lease-deepseek-native-integrated-window-worker-001",
+    "target_path": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-integrated-window-worker-001/workspace/synthetic_window_coalescer.py",
+    "work_order_id": "wo-deepseek-native-integrated-window-worker-001"
+  },
+  "implementation": {
+    "contract_schema_sha256": "fa4bb0c060d38611ce9c458e9657ba68fdfa50e30735602d0845e6ce104fc198",
+    "controller_sha256": "367358b079e7c31fd5c72ec01446238958d57851ba77d5cd4d6696e20fe3df79",
+    "focused_test_sha256": "111e6c285c92f7259154fcc5ff3213ad3df1746885020866f4d1ca91f3cf643a",
+    "terminal_schema_sha256": "2b6be66d2fd1a11b20f3a46041fb81e36db876dce790bc19bb5d3f46177bdb05"
+  },
+  "operation_id": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+  "planning_source": "fdb2e48c5828041623cf4bef4d11881445527034",
+  "runner": {
+    "accepted_bytes": 14077,
+    "accepted_sha256": "115cbf245ca6a2e218b2f2989093cea651bf4fe0aed796204dce1f83826e6be0",
+    "allowed_transformations": [
+      "exact_target_literal_rebinding",
+      "redundant_conclusion_marked_success_reading",
+      "redundant_conclusion_marked_failure_reading"
+    ],
+    "derived_bytes": 14210,
+    "derived_sha256": "017394e3f86a3efdf5eba0745c254a8b561615fb6ab923978b81bb5941e8e3f4"
+  },
+  "schema_version": "ariadne.native_harness_integrated_development_contract.v1",
+  "work_package": {
+    "baseline_sha256": "9606d9341e6b7e53f4ee9007d7518145322968b2d0bc156622928c33ab97d4f8",
+    "expected_sha256": "e763b74f87b5d6e721263414c74f1c36bac64bc5783987425a55a95826716d3c",
+    "holdback_case_count": 3,
+    "path": "synthetic_window_coalescer.py",
+    "public_case_count": 4
+  }
+}
