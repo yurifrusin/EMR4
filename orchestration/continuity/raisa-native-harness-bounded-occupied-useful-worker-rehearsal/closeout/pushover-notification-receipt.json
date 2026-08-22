@@ -1,0 +1,8 @@
+{
+  "schema_version": "emr4.non_phi_closeout_notification_receipt.v1",
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+  "status": "delivered",
+  "request_id": "9f5cb75e-4be2-49c4-9178-66cb46011fa8",
+  "message_class": "non_phi_continuing_closeout",
+  "next_operation": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery"
+}

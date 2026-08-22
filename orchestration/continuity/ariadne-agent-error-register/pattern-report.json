@@ -1,44 +1,44 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 614,
+  "register_revision": 615,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "d53cb14f09d5032c9c0466215722f35edf187f50ea967db2c362a61ff75d8279",
-  "incident_count": 943,
+  "canonical_register_sha256": "e67296f94d0313b942778060840c375cc1b069657c3a53ecb4e5bde65e2968fc",
+  "incident_count": 953,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 495,
-      "harness": 67,
-      "operator": 227,
+      "agent_behavior": 503,
+      "harness": 68,
+      "operator": 228,
       "repository": 138,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 95,
       "evidence_misreport": 73,
-      "harness_failure": 67,
-      "operator_error": 227,
-      "output_contract_violation": 274,
+      "harness_failure": 68,
+      "operator_error": 228,
+      "output_contract_violation": 282,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
       "repository_defect": 138,
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 64,
+      "implementer": 65,
       "integration_reviewer": 3,
-      "orchestrator": 813,
+      "orchestrator": 822,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 588,
+      "low": 596,
       "material": 133,
-      "moderate": 222
+      "moderate": 224
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 204,
-      "canonical_unchanged": 570,
+      "canonical_unchanged": 580,
       "untrusted_partial_worktree": 169
     },
     "by_resource_and_role": {
@@ -190,6 +190,7 @@
       "deepseek-native-harness-rc7-container-worker::implementer": 1,
       "deepseek-native-harness-rc7-container-worker::orchestrator": 2,
       "deepseek-native-harness-rc7-provider-disabled::implementer": 2,
+      "deepseek-native-harness-rc7-useful-worker::implementer": 1,
       "deepseek-native-harness-rc7-worker-attempt-002::implementer": 1,
       "deepseek-native-harness-rc7-worker-attempt-003::implementer": 1,
       "deepseek-native-harness-rc7-worker::implementer": 1,
@@ -418,6 +419,13 @@
       "transactional-closeout-shadow-fixture::orchestrator": 1,
       "transactional-contract-evidence-field::orchestrator": 1,
       "transactional-contract-evidence-projection::orchestrator": 1,
+      "useful-worker-checkpoint-controller::orchestrator": 1,
+      "useful-worker-checkpoint-loader::orchestrator": 1,
+      "useful-worker-cleanup-controller::orchestrator": 1,
+      "useful-worker-clockwork-closeout::orchestrator": 3,
+      "useful-worker-controller::orchestrator": 1,
+      "useful-worker-preplanning-receipt::orchestrator": 1,
+      "useful-worker-process-query::orchestrator": 1,
       "windows-owned-process-absence-reading::orchestrator": 1
     }
   },

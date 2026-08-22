@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 373,
-  "updated_at": "2026-08-22T11:54:17.2967942+10:00",
-  "source_graph_revision": 391,
-  "orientation_statement": "Freeze and run one bounded occupied native-Harness DeepSeek worker on one exact useful low-risk Raisa development package; accept or reject its attributable candidate without retry.",
+  "map_revision": 374,
+  "updated_at": "2026-08-22T13:30:09.9126535+10:00",
+  "source_graph_revision": 392,
+  "orientation_statement": "EMR4 will next diagnose and type only the provider-free edit-result/conclusion seam; no occupied DeepSeek request is admitted.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4844,26 +4844,38 @@
         "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/result-contract-reconciliation-evidence.json",
         "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-closeout.md"
       ]
+    },
+    {
+      "node_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+      "lineage_parent": "deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal",
+      "strategic_role": "Connect Ariadne clockwork to one useful native-Harness DeepSeek worker while preserving deterministic authority and cleanup",
+      "outcome": "The control chain contained and attributed one provider-reaching failure, but produced no useful repository candidate.",
+      "evidence": [
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-terminal.json",
+        "docs/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-closeout.md",
+        "orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-failed-closed.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal",
-    "strategic_role": "Use the accepted complete runner in one bounded occupied native-Harness DeepSeek worker on useful Raisa development work",
-    "why_now": "The exact runner, preset-mount guard graph, tool restriction, local model selection, publication veto, terminal sidecar and cleanup have all passed package-unloaded composition; another speculative provider-free checkpoint would add procedure without capability evidence.",
-    "outcome": "The next tranche freezes one exact low-risk useful Raisa work package and may consume one native-Harness DeepSeek V4 Flash/high worker turn under the accepted broker, runner, zero-retry and cleanup controls.",
+    "node_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+    "strategic_role": "Make the native Harness tool-result and turn-conclusion seam deterministically classifiable before another occupied worker is considered",
+    "why_now": "The consumed terminal proves one provider response and one edit result but records neither an accepted change nor the specific post-execute rejection coordinate.",
+    "outcome": "The negative occupied attempt is honestly closed; the next tranche is provider-free and diagnostic only.",
     "unlocks": [
-      "First evidence that the corrected native Harness can reach and control a useful DeepSeek worker turn.",
-      "An attributable candidate that Sol can independently adopt or reject.",
-      "A direct comparison with the earlier opaque Claude Code worker failures."
+      "Closed typed coordinates for edit success, edit error, post-execute rejection and conclusion marking.",
+      "Provider-free reproduction of the one-edit lifecycle using authored-synthetic fixtures.",
+      "An evidence-based decision about the shape of any later separately frozen occupied successor."
     ],
     "does_not_solve": [
-      "No general Harness or model reliability conclusion from one worker.",
-      "No unrestricted product/data, ordinary-practice, production or protected-integration authority.",
-      "No retry, resume, fallback or auxiliary-model authority."
+      "No useful worker success, runbook adoption or broad DeepSeek quality conclusion.",
+      "No second occupied request, retry, resume or provider authority.",
+      "No product, ordinary-practice, production or protected-ref authority."
     ],
     "evidence": [
-      "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-closeout.md",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-sol-acceptance.md"
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/diagnosis.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-sol-acceptance.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/efficacy-reading.json"
     ]
   },
   "decision_horizon": [

@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 391,
+  "graph_revision": 392,
   "harvests": [],
   "nodes": [
     {
@@ -30273,9 +30273,134 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+      "title": "Raisa native Harness bounded occupied useful-worker failed-closed closeout",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorised one bounded native-Harness DeepSeek V4 Flash/high useful-worker turn under the frozen one-request and zero-retry envelope.",
+          "The exact attempt identity is consumed and cannot be retried, resumed or reclassified.",
+          "The successor is provider-free tool-result/conclusion diagnosis only and opens no occupied worker or provider authority."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-useful-worker-plan-controls-and-checkpoint",
+          "source": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-preexecution-checkpoint.json",
+          "status": "accepted",
+          "summary": "Accept the frozen closed-form API Spine work package, deterministic admission, one-request checkpoint and complete preexecution controls."
+        },
+        {
+          "id": "accept-immutable-useful-worker-terminal",
+          "source": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one consumed native process, one completed provider request, one edit call/result, zero changed paths, zero retries and complete cleanup."
+        },
+        {
+          "id": "reject-useful-worker-success-and-candidate-adoption",
+          "source": "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Reject useful-worker success, candidate adoption and broad DeepSeek or Harness reliability claims because no candidate exists."
+        },
+        {
+          "id": "accept-postterminal-deterministic-validation",
+          "source": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/postterminal-command-validation-receipt.json",
+          "status": "accepted",
+          "summary": "Accept the passing post-terminal command ledger, persisted terminal schema, zero owned processes and exact root absence."
+        },
+        {
+          "id": "accept-clockwork-incident-readings",
+          "source": "docs/ariadne-agent-error-correction-register-revision-615.md",
+          "status": "accepted",
+          "summary": "Accept seven contained or escalated workflow and occupied-attempt observations with no open incident and no retry authority."
+        }
+      ],
+      "claim_scope": [
+        "The installed native Harness reached stock-headless HMR, the custom runner and one completed DeepSeek provider request.",
+        "The runner observed one edit tool call and one tool result but no concluded turn, changed path or candidate.",
+        "The broker contained a later request at the one-request ceiling and all retry, resume, fallback and auxiliary-model counts remained zero.",
+        "Harness, broker and disposable root cleanup is complete and no raw sensitive runtime artifact is retained.",
+        "The clockwork improved containment and traceability but useful worker efficacy remains unproved.",
+        "No ordinary-practice, product, data, production, deployment, release, Pages or protected-ref authority opened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-plan.md",
+          "docs/security/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-terminal.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/diagnosis.md",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/efficacy-reading.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/postterminal-command-validation-receipt.json"
+        ],
+        "closeouts": [
+          "docs/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-preexecution-corrected-receipt.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/clockwork-checkpoint-tick-evidence.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/pushover-notification-receipt.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/clockwork-check-attempt-003-rejected-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "artifacts": [
+          "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json",
+          "orchestration_harness/check_in_rollout_runbook.py",
+          "scripts/raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/contract.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-attempt-preparation.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-preexecution-checkpoint.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-attempt-consumed.json",
+          "docs/ariadne-agent-error-correction-register-revision-615.md",
+          "orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-failed-closed.md",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The edit tool-result/post-execute conclusion cause is not distinguished by the retained typed terminal.",
+        "No useful runbook candidate or native-Harness useful-worker success exists.",
+        "The consumed attempt cannot be retried or resumed and no new occupied worker is authorised.",
+        "The admission-readiness runbook, observability and operational-evidence gaps remain open.",
+        "Ordinary practice, product data, production, deployment, release, Pages and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T13:30:09.9126535+10:00",
+      "updated_at": "2026-08-22T13:30:09.9126535+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "e0a0b393c7334ce7645f1876f5154fb261e2941d",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T11:54:17.2967942+10:00"
+  "updated_at": "2026-08-22T13:30:09.9126535+10:00"
 }

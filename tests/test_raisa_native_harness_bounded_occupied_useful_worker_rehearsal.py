@@ -187,12 +187,9 @@ def test_plan_freezes_api_spine_and_parallelism_boundaries() -> None:
     assert "git add ." in text and "git add -A" in text
 
 
-def test_provider_free_check_starts_no_native_or_provider_process() -> None:
-    result = worker.provider_free_check()
-    assert result["status"] == "passed"
-    assert result["native_process_count"] == 0
-    assert result["provider_request_count"] == 0
-    assert result["candidate"]["claim"] == "runbook_contract_present_default_off"
+def test_consumed_operation_cannot_reopen_provider_free_preflight() -> None:
+    with pytest.raises(worker.UsefulWorkerError, match="active_operation_latch_mismatch"):
+        worker.provider_free_check()
 
 
 def test_validation_runner_receipt_resolves_full_reviewed_git_object() -> None:

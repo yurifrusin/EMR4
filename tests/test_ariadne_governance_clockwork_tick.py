@@ -73,6 +73,23 @@ def _json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _replay_intent(worktree: Path) -> dict:
+    intent = _json(worktree / INTENT_PATH.relative_to(ROOT))
+    compaction = _json(
+        worktree
+        / "docs/handover-ledgers/current-baton-acceptance-index.manifest.json"
+    )
+    active_labels = compaction["active_labels"]
+    for rolling_label in (
+        "Current DeepSeek native Harness acceptance",
+        "DeepSeek native Harness authored-synthetic traceability micro-rehearsal acceptance",
+    ):
+        if rolling_label in active_labels:
+            intent["baton_acceptance"]["label"] = rolling_label
+            return intent
+    raise AssertionError("replay fixture has no admitted native-Harness rolling label")
+
+
 def test_cli_idempotency_requires_exact_intent_digest() -> None:
     transaction = {
         "operation_id": REDESIGN_OPERATION_ID,
@@ -196,7 +213,7 @@ def _checkpoint_intent(worktree: Path) -> dict:
 
 
 def _incident_intent(worktree: Path) -> dict:
-    intent = _json(worktree / INTENT_PATH.relative_to(ROOT))
+    intent = _replay_intent(worktree)
     intent["schema_version"] = TICK_INCIDENT_INTENT_VERSION
     intent["agent_error_observations"] = [
         {
@@ -587,7 +604,7 @@ def test_reviewed_fixture_generation_is_preparable(tmp_path: Path) -> None:
         contract = validate_contract(_json(worktree / CONTRACT_PATH.relative_to(ROOT)))
         before = validate_live_state(worktree, contract)
         prepared = build_tick_generation(
-            worktree, contract, _json(worktree / INTENT_PATH.relative_to(ROOT))
+            worktree, contract, _replay_intent(worktree)
         )
         graph = json.loads(prepared["canonical"]["continuity"].decode("utf-8"))
         compass = json.loads(prepared["canonical"]["compass"].decode("utf-8"))
@@ -606,8 +623,7 @@ def test_clean_closeout_rejects_a_successor_already_recorded_in_graph(
 ) -> None:
     with _worktree(tmp_path / "recorded-successor") as worktree:
         contract = validate_contract(_json(worktree / CONTRACT_PATH.relative_to(ROOT)))
-        intent_path = worktree / INTENT_PATH.relative_to(ROOT)
-        intent = _json(intent_path)
+        intent = _replay_intent(worktree)
         graph = _json(
             worktree / "orchestration/continuity/emr4-continuity-graph.json"
         )
@@ -909,14 +925,14 @@ def test_checkpoint_tick_advances_stage_and_is_pointer_last_recoverable(
 def test_git_clean_line_ending_variation_does_not_change_tick(tmp_path: Path) -> None:
     with _worktree(tmp_path / "line-endings") as worktree:
         contract = validate_contract(_json(worktree / CONTRACT_PATH.relative_to(ROOT)))
-        intent_path = worktree / INTENT_PATH.relative_to(ROOT)
-        expected = build_tick_generation(worktree, contract, _json(intent_path))
+        intent = _replay_intent(worktree)
+        expected = build_tick_generation(worktree, contract, intent)
         baton = worktree / contract["canonical_paths"]["current_baton"]
         baton.write_bytes(baton.read_bytes().replace(b"\n", b"\r\n"))
         assert subprocess.run(
             ["git", "diff", "--quiet", "HEAD", "--", str(baton)], cwd=worktree
         ).returncode == 0
-        observed = build_tick_generation(worktree, contract, _json(intent_path))
+        observed = build_tick_generation(worktree, contract, intent)
         assert observed["generation_manifest"] == expected["generation_manifest"]
         assert observed["canonical"] == expected["canonical"]
 
@@ -924,7 +940,7 @@ def test_git_clean_line_ending_variation_does_not_change_tick(tmp_path: Path) ->
 def test_all_pre_pointer_faults_restore_and_rollback_is_exact(tmp_path: Path) -> None:
     with _worktree(tmp_path / "faults") as worktree:
         contract = validate_contract(_json(worktree / CONTRACT_PATH.relative_to(ROOT)))
-        intent = _json(worktree / INTENT_PATH.relative_to(ROOT))
+        intent = _replay_intent(worktree)
         prepared = build_tick_generation(worktree, contract, intent)
         canonical_paths, metadata_paths, pointer_path = _paths(worktree, contract)
         before_canonical = {key: path.read_bytes() for key, path in canonical_paths.items()}
@@ -967,7 +983,7 @@ def test_post_pointer_failure_is_committed_and_stale_predecessor_fails(tmp_path:
     with _worktree(tmp_path / "post-pointer") as worktree:
         contract = validate_contract(_json(worktree / CONTRACT_PATH.relative_to(ROOT)))
         prepared = build_tick_generation(
-            worktree, contract, _json(worktree / INTENT_PATH.relative_to(ROOT))
+            worktree, contract, _replay_intent(worktree)
         )
         stale = json.loads(json.dumps(prepared["base_pointer"]))
         pointer_path = worktree / contract["clockwork_root"] / "current.json"

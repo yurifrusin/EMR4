@@ -1,0 +1,188 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "commit_and_publish_only_the_validated_useful_worker_failed_closed_closeout_then_freeze_the_provider_free_tool_result_and_conclusion_coordinate_diagnostic_plan",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh complete AGENTS.md read; accepted useful-worker terminal, diagnosis, closeout and Sol acceptance; protected-evidence and user-decision boundaries; validated active-operation latch; machine-observed Git refs and worktree",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the accepted useful-worker failed-closed result at Continuity 392 / Compass 374 and the provider-free tool-result/conclusion coordinate diagnostic recovery as the next implementation.",
+    "current_authority_allocation": "GPT Sol owns this serial provider-free diagnostic. DeepSeek is declined because no worker or provider request is authorised and its Harness lifecycle is the subject under diagnosis. Gemini is declined until a material deterministic candidate exists. Native subagents are declined because current developer policy prohibits delegation.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-plan.md",
+      "docs/security/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-terminal.json",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/diagnosis.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/efficacy-reading.json",
+      "docs/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-sol-acceptance.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Provider-free authored-synthetic diagnostic fixtures and closed typed terminals only. The consumed occupied attempt is immutable. No native Harness worker, provider request, product/API/schema/database/configuration change, ordinary-practice enablement, deployment, release, Pages, protected evidence or protected-ref movement is authorised.",
+    "git_refs_and_worktree": "The receipt builder supplies every Git identity and protected-ref comparison from its fresh machine snapshot; docs/branding and all unrelated untracked paths remain preserved; explicit-path staging only."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery",
+    "active_tranche": "DeepSeek native Harness provider-free tool-result/conclusion coordinate diagnostic recovery",
+    "objective": "Freeze and implement the narrowest provider-free recovery that reproduces the useful-worker runner's edit post-execute boundary across closed authored-synthetic success, error and decision variants, emits distinguishable typed conclusion coordinates and proves complete cleanup without a native worker or provider request.",
+    "status": "in_progress",
+    "source_head": "e0a0b393c7334ce7645f1876f5154fb261e2941d",
+    "authority_source": "Yuri's standing uninterrupted-development authority and the accepted useful-worker failed-closed terminal, exact cleanup and efficacy reading.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-native-harness-bounded-occupied-useful-worker-rehearsal at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_provider_free_tool_result_and_conclusion_coordinate_diagnostic_plan",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_tool_result_and_conclusion_coordinate_diagnostic_only",
+      "authored_synthetic_fixture_inputs_and_closed_typed_terminals_only",
+      "no_native_harness_worker_or_live_provider_request",
+      "consumed_useful_worker_attempt_001_immutable_no_retry_resume_overwrite_or_reclassification",
+      "no_candidate_adoption_or_runbook_manifest_change",
+      "no_product_source_configuration_api_openapi_graphql_schema_migration_route_or_database_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_first_party_client_or_waiting_area_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery",
+    "assessed_stage": "post-compaction rehydration and prior-closeout publication bridge",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "No worker or provider request is authorised; the DeepSeek native Harness edit lifecycle is the subject of deterministic provider-free diagnosis.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "There is no new semantic candidate to veto before the provider-free coordinate plan and deterministic implementation exist.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Current developer policy prohibits native-subagent delegation and this publication bridge is serial.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "publish the already validated failed-closed closeout before freezing successor artifacts",
+      "freeze the diagnostic coordinates before changing the runner or terminal schema",
+      "run only provider-free authored-synthetic fixtures before considering independent review"
+    ],
+    "reassessment_triggers": [
+      "successor plan freeze",
+      "deterministic implementation complete",
+      "pre-verifier gate",
+      "closeout"
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "GPT Sol completed the five-source rehydration and owns the serial recovery."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Code is historical lineage only; no DeepSeek transport is authorised in this provider-free diagnostic."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "No Gemini process is justified before a material deterministic candidate exists."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No subagent was spawned because current developer policy prohibits delegation."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected and no fallback is authorised."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected and no fallback is authorised."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

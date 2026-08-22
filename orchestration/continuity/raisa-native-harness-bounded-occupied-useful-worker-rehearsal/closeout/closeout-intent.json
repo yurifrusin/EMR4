@@ -1,0 +1,658 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+    "title": "Raisa native Harness bounded occupied useful-worker failed-closed closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T13:30:09.9126535+10:00",
+    "node": {
+      "id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+      "title": "Raisa native Harness bounded occupied useful-worker failed-closed closeout",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorised one bounded native-Harness DeepSeek V4 Flash/high useful-worker turn under the frozen one-request and zero-retry envelope.",
+          "The exact attempt identity is consumed and cannot be retried, resumed or reclassified.",
+          "The successor is provider-free tool-result/conclusion diagnosis only and opens no occupied worker or provider authority."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-useful-worker-plan-controls-and-checkpoint",
+          "source": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-preexecution-checkpoint.json",
+          "status": "accepted",
+          "summary": "Accept the frozen closed-form API Spine work package, deterministic admission, one-request checkpoint and complete preexecution controls."
+        },
+        {
+          "id": "accept-immutable-useful-worker-terminal",
+          "source": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one consumed native process, one completed provider request, one edit call/result, zero changed paths, zero retries and complete cleanup."
+        },
+        {
+          "id": "reject-useful-worker-success-and-candidate-adoption",
+          "source": "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Reject useful-worker success, candidate adoption and broad DeepSeek or Harness reliability claims because no candidate exists."
+        },
+        {
+          "id": "accept-postterminal-deterministic-validation",
+          "source": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/postterminal-command-validation-receipt.json",
+          "status": "accepted",
+          "summary": "Accept the passing post-terminal command ledger, persisted terminal schema, zero owned processes and exact root absence."
+        },
+        {
+          "id": "accept-clockwork-incident-readings",
+          "source": "docs/ariadne-agent-error-correction-register-revision-615.md",
+          "status": "accepted",
+          "summary": "Accept seven contained or escalated workflow and occupied-attempt observations with no open incident and no retry authority."
+        }
+      ],
+      "claim_scope": [
+        "The installed native Harness reached stock-headless HMR, the custom runner and one completed DeepSeek provider request.",
+        "The runner observed one edit tool call and one tool result but no concluded turn, changed path or candidate.",
+        "The broker contained a later request at the one-request ceiling and all retry, resume, fallback and auxiliary-model counts remained zero.",
+        "Harness, broker and disposable root cleanup is complete and no raw sensitive runtime artifact is retained.",
+        "The clockwork improved containment and traceability but useful worker efficacy remains unproved.",
+        "No ordinary-practice, product, data, production, deployment, release, Pages or protected-ref authority opened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-plan.md",
+          "docs/security/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-terminal.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/diagnosis.md",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/efficacy-reading.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/postterminal-command-validation-receipt.json"
+        ],
+        "closeouts": [
+          "docs/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-preexecution-corrected-receipt.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/clockwork-checkpoint-tick-evidence.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/pushover-notification-receipt.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/clockwork-check-attempt-003-rejected-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "artifacts": [
+          "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json",
+          "orchestration_harness/check_in_rollout_runbook.py",
+          "scripts/raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/contract.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-attempt-preparation.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-preexecution-checkpoint.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-attempt-consumed.json",
+          "docs/ariadne-agent-error-correction-register-revision-615.md",
+          "orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-failed-closed.md",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The edit tool-result/post-execute conclusion cause is not distinguished by the retained typed terminal.",
+        "No useful runbook candidate or native-Harness useful-worker success exists.",
+        "The consumed attempt cannot be retried or resumed and no new occupied worker is authorised.",
+        "The admission-readiness runbook, observability and operational-evidence gaps remain open.",
+        "Ordinary practice, product data, production, deployment, release, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Connect Ariadne clockwork to one useful native-Harness DeepSeek worker while preserving deterministic authority and cleanup",
+      "outcome": "The control chain contained and attributed one provider-reaching failure, but produced no useful repository candidate.",
+      "evidence": [
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-terminal.json",
+        "docs/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-closeout.md",
+        "orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-failed-closed.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Make the native Harness tool-result and turn-conclusion seam deterministically classifiable before another occupied worker is considered",
+      "why_now": "The consumed terminal proves one provider response and one edit result but records neither an accepted change nor the specific post-execute rejection coordinate.",
+      "outcome": "The negative occupied attempt is honestly closed; the next tranche is provider-free and diagnostic only.",
+      "unlocks": [
+        "Closed typed coordinates for edit success, edit error, post-execute rejection and conclusion marking.",
+        "Provider-free reproduction of the one-edit lifecycle using authored-synthetic fixtures.",
+        "An evidence-based decision about the shape of any later separately frozen occupied successor."
+      ],
+      "does_not_solve": [
+        "No useful worker success, runbook adoption or broad DeepSeek quality conclusion.",
+        "No second occupied request, retry, resume or provider authority.",
+        "No product, ordinary-practice, production or protected-ref authority."
+      ],
+      "evidence": [
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/diagnosis.md",
+        "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-sol-acceptance.md",
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/efficacy-reading.json"
+      ],
+      "orientation_statement": "EMR4 will next diagnose and type only the provider-free edit-result/conclusion seam; no occupied DeepSeek request is admitted."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery",
+      "active_tranche": "DeepSeek native Harness provider-free tool-result/conclusion coordinate diagnostic recovery",
+      "objective": "Freeze and implement the narrowest provider-free recovery that reproduces the useful-worker runner's edit post-execute boundary across closed authored-synthetic success, error and decision variants, emits distinguishable typed conclusion coordinates and proves complete cleanup without a native worker or provider request.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted useful-worker failed-closed terminal, exact cleanup and efficacy reading.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_provider_free_tool_result_and_conclusion_coordinate_diagnostic_plan"
+    },
+    "incidents": [
+      {
+        "incident_id": "useful-worker-manual-git-ref-prose",
+        "source_id": "useful-worker-preplanning-receipt-001",
+        "peers": []
+      },
+      {
+        "incident_id": "useful-worker-validation-receipt-shape",
+        "source_id": "useful-worker-controller-admission-001",
+        "peers": []
+      },
+      {
+        "incident_id": "useful-worker-checkpoint-evidence-descendant",
+        "source_id": "useful-worker-controller-checkpoint-001",
+        "peers": []
+      },
+      {
+        "incident_id": "useful-worker-foreign-cleanup-name",
+        "source_id": "useful-worker-controller-cleanup-001",
+        "peers": []
+      },
+      {
+        "incident_id": "useful-worker-checkpoint-loader-key",
+        "source_id": "useful-worker-controller-readback-001",
+        "peers": []
+      },
+      {
+        "incident_id": "useful-worker-process-query-self-match",
+        "source_id": "useful-worker-prelaunch-process-query-001",
+        "peers": []
+      },
+        {
+          "incident_id": "useful-worker-edit-result-not-concluded",
+          "source_id": "deepseek-native-check-in-runbook-worker-001",
+          "peers": []
+        },
+        {
+          "incident_id": "useful-worker-closeout-parent-cardinality",
+          "source_id": "useful-worker-clockwork-check-001",
+          "peers": []
+        },
+        {
+          "incident_id": "useful-worker-closeout-baton-rolling-label",
+          "source_id": "useful-worker-clockwork-check-002",
+          "peers": []
+        },
+        {
+          "incident_id": "useful-worker-closeout-baton-byte-budget",
+          "source_id": "useful-worker-clockwork-check-003",
+          "peers": []
+        }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "useful-worker-failed-closed-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "useful-worker-failed-closed-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "useful-worker-failed-closed-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "orchestration_harness/check_in_rollout_runbook.py",
+          "scripts/raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "useful-worker-failed-closed-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "orchestration_harness/check_in_rollout_runbook.py",
+          "scripts/raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-plan.md",
+      "docs/security/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-terminal.json",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/diagnosis.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-615.md",
+      "docs/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-sol-acceptance.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_tool_result_and_conclusion_coordinate_diagnostic_only",
+    "authored_synthetic_fixture_inputs_and_closed_typed_terminals_only",
+    "no_native_harness_worker_or_live_provider_request",
+    "consumed_useful_worker_attempt_001_immutable_no_retry_resume_overwrite_or_reclassification",
+    "no_candidate_adoption_or_runbook_manifest_change",
+    "no_product_source_configuration_api_openapi_graphql_schema_migration_route_or_database_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_first_party_client_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "useful-worker-manual-git-ref-prose-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "useful-worker-preplanning-receipt",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Git identities in Ariadne runtime source evidence must be generated by the machine snapshot and never restated in hand-authored Git-ref prose.",
+      "observed_error": "The first preplanning receipt rejected git_refs_and_worktree prose because it manually restated Git object identities.",
+      "detection_method": "The Ariadne receipt builder returned revision_required before worker preparation or provider execution.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-preplanning-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-615.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_git_object_expansion_in_report",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove manually stated Git identities from source prose and use only the builder's machine-resolved snapshot.",
+        "prevention_control": "Keep git_refs_and_worktree descriptive and require all full object identities to originate in the receipt builder's typed Git snapshot.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-preplanning-corrected-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-615.md"
+        ]
+      },
+      "baton_summary": "preserves the rejected manual Git-ref prose and reinforces machine-only full-object resolution."
+    },
+    {
+      "attempt_key": "useful-worker-validation-receipt-shape-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "useful-worker-controller",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The preparation controller must consume the validation runner's actual typed receipt without a hand-written compatibility artifact.",
+      "observed_error": "The first controller expected obsolete direct head_before, head_after and dirty_after fields instead of the validation runner's hashed command ledger.",
+      "detection_method": "Pre-preparation source inspection compared the controller contract with the passed validation receipt and found the incompatible shape before dispatch.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-deterministic-admission-receipt.json",
+        "scripts/raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-615.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.validation_receipt_schema_not_bound_to_consumer",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Validate the exact command manifest and results, bind the tracked-clean command and machine-resolve the full source object from its stdout digest.",
+        "prevention_control": "Consumer tests must exercise the persisted validation-runner receipt schema directly and reject digest, command or result drift.",
+        "evidence_paths": [
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-615.md"
+        ]
+      },
+      "baton_summary": "binds preparation directly to the validation runner's hashed command ledger and full machine-resolved source."
+    },
+    {
+      "attempt_key": "useful-worker-checkpoint-evidence-descendant-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "useful-worker-checkpoint-controller",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A clockwork checkpoint may descend from the reviewed candidate only through the exact immutable review-receipt commit and no product or control delta.",
+      "observed_error": "The first rule required literal equality between reviewed candidate and checkpoint source, making its own committed review receipt impossible to bind.",
+      "detection_method": "Prepublication source comparison showed that the clockwork would resolve the one-receipt descendant and the controller would reject it.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-preexecution-checkpoint.json",
+        "scripts/raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-615.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.checkpoint_source_equality_ignored_evidence_commit",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Admit only an ancestor relation whose exact changed-path list contains the named review receipt and nothing else.",
+        "prevention_control": "Checkpoint source validation must separate reviewed semantic source from its single evidence-only receipt descendant and fail every other delta.",
+        "evidence_paths": [
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-615.md"
+        ]
+      },
+      "baton_summary": "permits exactly one evidence-receipt descendant while preserving the reviewed semantic source and rejecting every other delta."
+    },
+    {
+      "attempt_key": "useful-worker-foreign-cleanup-name-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "useful-worker-cleanup-controller",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "implementation",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Occupied cleanup must be bound to this tranche's exact attempt root name and parent and must be exercised before launch.",
+      "observed_error": "The first controller delegated cleanup to a predecessor helper whose hard-coded exact attempt name differed from this tranche.",
+      "detection_method": "A preexecution cleanup rehearsal returned attempt_cleanup_scope_invalid before any occupied process or provider request.",
+      "evidence_paths": [
+        "scripts/raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-615.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.foreign_exact_attempt_cleanup_guard_reuse",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Implement a local exact-name and exact-parent cleanup guard and test successful removal plus wrong-name rejection.",
+        "prevention_control": "Every occupied controller must own or parameterize its cleanup identity and execute a real disposable removal test before launch.",
+        "evidence_paths": [
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-615.md"
+        ]
+      },
+      "baton_summary": "replaces a foreign hard-coded cleanup identity with a tranche-owned exact containment and removal test."
+    },
+    {
+      "attempt_key": "useful-worker-checkpoint-loader-key-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "useful-worker-checkpoint-loader",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The persisted checkpoint loader must validate every exact field emitted by checkpoint admission before attempt consumption.",
+      "observed_error": "The first expected object omitted the newly emitted checkpoint_source field and would have rejected the admitted checkpoint before native launch.",
+      "detection_method": "A new persisted-checkpoint test failed before attempt consumption and provider execution.",
+      "evidence_paths": [
+        "scripts/raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+        "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-preexecution-corrected-admission-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-615.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.persisted_checkpoint_expected_key_omission",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Revalidate checkpoint ancestry and include checkpoint_source in the exact persisted object expectation.",
+        "prevention_control": "Every prepared and checkpoint artifact must have a persisted round-trip test before its consuming action becomes callable.",
+        "evidence_paths": [
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-615.md"
+        ]
+      },
+      "baton_summary": "adds persisted checkpoint round-trip validation before attempt consumption."
+    },
+    {
+      "attempt_key": "useful-worker-process-query-self-match-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "useful-worker-process-query",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_powershell",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The process-absence reading must count only the owned Node runtime class and must not match the observer command containing its search literals.",
+      "observed_error": "The first generic command-line query reported one match because it counted its own pwsh.exe command.",
+      "detection_method": "Process identity readback showed the sole match was PowerShell; an exact node.exe-filtered query returned zero.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-615.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.process_query_commandline_self_match",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Filter the read-only query to node.exe before applying the exact attempt and broker command-line predicates.",
+        "prevention_control": "Owned-process absence queries must type the executable class independently of command-line search literals and report only that closed class.",
+        "evidence_paths": [
+          "docs/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-closeout.md",
+          "docs/ariadne-agent-error-correction-register-revision-615.md"
+        ]
+      },
+      "baton_summary": "corrects a self-matching process query and binds absence to the owned Node executable class."
+    },
+    {
+      "attempt_key": "useful-worker-edit-result-not-concluded-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+      "role": "implementer",
+      "resource_id": "deepseek-native-harness-rc7-useful-worker",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "deepseek_native_harness",
+      "stage": "implementation",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "One provider response selecting the admitted direct edit must yield an accepted edit result, immediate concluded turn, exact changed path and schema-valid candidate without a second request.",
+      "observed_error": "The consumed turn recorded one edit call and result but no changed path or conclusion, ended with turn_kind error, and reached a contained later-request rejection after its one completed provider request.",
+      "detection_method": "The typed runner, broker, candidate and cleanup coordinates in the immutable occupied terminal established the exact failed-closed sequence.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-terminal.json",
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/diagnosis.md",
+        "docs/ariadne-agent-error-correction-register-revision-615.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.occupied_edit_result_not_concluded_or_changed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume the attempt without retry, reject candidate adoption, preserve only typed evidence and route a provider-free diagnostic successor.",
+        "prevention_control": "Before any later occupied successor, reproduce the exact post-execute variants provider-free and emit a closed edit-result, decision and conclusion coordinate in the terminal.",
+        "evidence_paths": [
+          "docs/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-closeout.md",
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-sol-acceptance.md",
+          "docs/ariadne-agent-error-correction-register-revision-615.md"
+        ]
+      },
+      "baton_summary": "preserves the one-request edit-result/conclusion failure as Harness evidence and routes only provider-free diagnosis."
+    },
+    {
+      "attempt_key": "useful-worker-closeout-parent-cardinality-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "useful-worker-clockwork-closeout",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A transactional closeout node must contain exactly one immediate builds_on relationship.",
+      "observed_error": "The first closeout intent carried two builds_on relationships and was rejected as node_relationship_invalid.",
+      "detection_method": "The clockwork semantic check rejected the transaction manifest before command execution, generation publication or canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-615.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_node_relationship_cardinality_invalid",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Retain only the immediate accepted Harness predecessor as the single builds_on parent.",
+        "prevention_control": "Construct closeout relationships through the transaction schema's exact one-parent builder rather than an open list.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-615.md"
+        ]
+      },
+      "baton_summary": "preserves the rejected two-parent closeout and restores the exact one-immediate-parent invariant."
+    },
+    {
+      "attempt_key": "useful-worker-closeout-baton-rolling-label-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "useful-worker-clockwork-closeout",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The live Baton acceptance projection must use the manifest-listed Current DeepSeek native Harness acceptance rolling slot.",
+      "observed_error": "The second closeout intent invented a descriptive failed-closed acceptance label and the compaction guard rejected it as unindexed.",
+      "detection_method": "The clockwork dry-run rejected tick_baton_compaction_unindexed before publication or canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-615.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_baton_label_outside_rolling_slot",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the exact manifest-listed rolling acceptance label and retain result semantics in schema-owned node and closeout fields.",
+        "prevention_control": "Select Baton acceptance labels only from the compaction manifest's active_labels vocabulary before clockwork invocation.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-615.md"
+        ]
+      },
+      "baton_summary": "preserves the rejected descriptive label and restores the closed current native-Harness rolling slot."
+    },
+    {
+      "attempt_key": "useful-worker-closeout-baton-byte-budget-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "useful-worker-clockwork-closeout",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The compact live Baton rolling acceptance row must remain below the fixed byte budget while the complete evidence inventory remains available in Continuity.",
+      "observed_error": "The third closeout intent placed the complete evidence inventory in the rolling acceptance row and exceeded the prospective live Baton byte ceiling.",
+      "detection_method": "The clockwork dry-run rejected tick_baton_compaction_budget before publication or canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/clockwork-check-attempt-003-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-615.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.rolling_baton_acceptance_paths_exceeded_byte_budget",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Reduce the rolling acceptance row to eight controlling artifacts and retain the complete inventory in the Continuity node and closeout intent.",
+        "prevention_control": "Precompute the prospective Baton byte count and generate compact rolling acceptance paths from controlling roles rather than copying the full evidence inventory.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-615.md"
+        ]
+      },
+      "baton_summary": "preserves the byte-budget rejection and separates compact rolling acceptance from the complete Continuity inventory."
+    }
+  ]
+}

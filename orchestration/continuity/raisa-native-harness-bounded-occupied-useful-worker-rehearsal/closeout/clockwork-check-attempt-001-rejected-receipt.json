@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.governance_live_tick_rejection_receipt.v1",
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+  "attempt_id": "clockwork-closeout-check-001",
+  "status": "rejected",
+  "source_commit": "e0a0b393c7334ce7645f1876f5154fb261e2941d",
+  "failure_coordinate": "tick_transaction_manifest",
+  "specific_invariant": "node_relationship_invalid",
+  "canonical_mutation_count": 0,
+  "provider_request_count": 0
+}
