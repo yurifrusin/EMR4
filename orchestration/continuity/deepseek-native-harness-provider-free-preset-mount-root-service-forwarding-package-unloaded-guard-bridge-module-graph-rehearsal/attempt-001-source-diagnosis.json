@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.native_harness_package_unloaded_guard_bridge_source_diagnosis.v1",
+  "operation_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal",
+  "result": "bridge_relative_import_target_absent",
+  "process_envelope_sha256": "08e472cb2233e47ffc0ac79cb35672feb0a78665a5c2169b95688a88c551f16f",
+  "process_reading": {
+    "numeric_exit_code": 1,
+    "stdout_bytes": 0,
+    "stderr_bytes": 938,
+    "raw_stream_read_or_retained": false,
+    "node_process_count": 1,
+    "retry_count": 0
+  },
+  "source_reading": {
+    "guard_bridge_relative_specifier": "./preset-mount-sanitizer-runner-bridge.mjs",
+    "resolved_target_relative_path": "preset-mount-sanitizer-runner-bridge.mjs",
+    "materialized_bridge_relative_path": "deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge.mjs",
+    "import_target_materialized": false,
+    "materialized_bridge_source": {
+      "bytes": 1661,
+      "sha256": "3a49b28174eeefd77d7efe0a00498901ac6636b637ed9dfe60aba46980df1d0b"
+    },
+    "materialized_bridge_bytes_equal_accepted": true
+  },
+  "claim_boundary": {
+    "source_import_closure_diagnosed": true,
+    "raw_stderr_interpreted": false,
+    "guard_behavior_proved": false,
+    "retry_authorized": false,
+    "native_harness_worker_model_provider_executed": false
+  }
+}

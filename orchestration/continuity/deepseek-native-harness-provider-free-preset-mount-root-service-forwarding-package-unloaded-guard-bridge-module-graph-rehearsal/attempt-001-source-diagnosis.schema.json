@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ariadne.native_harness_package_unloaded_guard_bridge_source_diagnosis.schema.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "result", "process_envelope_sha256", "process_reading", "source_reading", "claim_boundary"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_package_unloaded_guard_bridge_source_diagnosis.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal"},
+    "result": {"const": "bridge_relative_import_target_absent"},
+    "process_envelope_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "process_reading": {
+      "const": {
+        "numeric_exit_code": 1,
+        "stdout_bytes": 0,
+        "stderr_bytes": 938,
+        "raw_stream_read_or_retained": false,
+        "node_process_count": 1,
+        "retry_count": 0
+      }
+    },
+    "source_reading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["guard_bridge_relative_specifier", "resolved_target_relative_path", "materialized_bridge_relative_path", "import_target_materialized", "materialized_bridge_source", "materialized_bridge_bytes_equal_accepted"],
+      "properties": {
+        "guard_bridge_relative_specifier": {"const": "./preset-mount-sanitizer-runner-bridge.mjs"},
+        "resolved_target_relative_path": {"const": "preset-mount-sanitizer-runner-bridge.mjs"},
+        "materialized_bridge_relative_path": {"const": "deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge.mjs"},
+        "import_target_materialized": {"const": false},
+        "materialized_bridge_source": {
+          "const": {
+            "bytes": 1661,
+            "sha256": "3a49b28174eeefd77d7efe0a00498901ac6636b637ed9dfe60aba46980df1d0b"
+          }
+        },
+        "materialized_bridge_bytes_equal_accepted": {"const": true}
+      }
+    },
+    "claim_boundary": {
+      "const": {
+        "source_import_closure_diagnosed": true,
+        "raw_stderr_interpreted": false,
+        "guard_behavior_proved": false,
+        "retry_authorized": false,
+        "native_harness_worker_model_provider_executed": false
+      }
+    }
+  }
+}
