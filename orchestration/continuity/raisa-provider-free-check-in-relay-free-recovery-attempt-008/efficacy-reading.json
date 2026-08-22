@@ -1,0 +1,47 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-008",
+  "source_head": "9f37ede79a915172e449c1f2d19bdba3eb592b44",
+  "terminal_commit": "0e50f7f48d9c8622341a1679db507de78b1260a5",
+  "result": "effective_one_shot_pass_with_three_contained_workflow_lapses",
+  "before": {
+    "accepted_successful_relay_free_rollback_unknown_response_recovery_attempts": 0,
+    "known_deterministic_occupied_failure_causes_without_accepted_controls": 0,
+    "ordinary_admission_readiness_transaction_dimension": "operational_evidence_gap"
+  },
+  "after": {
+    "p06_through_p14_accounted_for": 9,
+    "deterministic_candidate_correction_iterations": 0,
+    "focused_candidate_packet_first_run_passed": true,
+    "occupied_database_invocations": 1,
+    "occupied_database_successes": 1,
+    "automatic_retry_count": 0,
+    "resume_count": 0,
+    "fallback_count": 0,
+    "rollback_zero_effect": true,
+    "unknown_response_committed_exactly_once": true,
+    "ambiguous_success_released": false,
+    "other_practice_visible_count": 0,
+    "duplicate_effect_count": 0,
+    "cleanup_verified": true,
+    "postterminal_matching_owned_resources": 0,
+    "ordinary_or_product_records_created": 0,
+    "provider_worker_or_network_calls": 0,
+    "workflow_lapses_entering_register": 3,
+    "database_reruns_caused_by_workflow_lapses": 0
+  },
+  "workflow_lapses": [
+    "The preceding decision's first postpublication test retained only the prepublication latch state; the phase-aware replacement now accepts exactly the decision and successor states.",
+    "The first broad P12 test invocation yielded without its execution-session identifier being retained; the completed process was observed and the exact packet was recaptured in bounded groups.",
+    "The first protected-ref pre-push guard used an unbraced PowerShell variable immediately before a colon and failed at parse time; the braced replacement passed before fetch/push effects."
+  ],
+  "recurrent_gears_used": [
+    "machine_git_ancestry_validation",
+    "prospective_success_redaction_static_admission",
+    "typed_post_finalization_terminal",
+    "provider_free_closed_database_runner_admission",
+    "typed_prepublication_checkpoint",
+    "clockwork_owned_checkpoint_and_closeout_projection"
+  ],
+  "bounded_conclusion": "The clockwork did not make drafting infallible, but it converted the expensive database step into a genuine one-shot ratchet: all known deterministic causes were rejected before launch and the sole occupied invocation passed without retry. Three workflow lapses remain visible, while none caused a Docker or database rerun."
+}

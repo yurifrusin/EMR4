@@ -1,0 +1,129 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 008",
+    "completed_stage": "Attempt-008 P06-P13 pass: its plan and wrapper are committed and origin-aligned; exact repaired-base and immutable-lineage hashes, prospective redaction, typed terminal, provider-free source/governance tests, hostile static gates, Ruff, compilation and schema checks pass; read-only Docker inspection matches the cached image with zero labelled residue; and the fresh five-source receipt passes with all three parallel lanes declined for the serial lifecycle.",
+    "next_executable_stage": "execute_exactly_one_attempt_008_wrapper_invocation_then_stop_without_retry_resume_or_fallback_and_preserve_its_immutable_terminal",
+    "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-008",
+    "resume_after_compaction": true,
+    "source_head": "9f37ede79a915172e449c1f2d19bdba3eb592b44",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "0e50f7f48d9c8622341a1679db507de78b1260a5",
+    "reason_codes": [],
+    "resolved_commit": "9f37ede79a915172e449c1f2d19bdba3eb592b44",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "9f37ede79a915172e449c1f2d19bdba3eb592b44"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "0e50f7f48d9c8622341a1679db507de78b1260a5",
+    "branch_origin_aligned": true,
+    "head": "0e50f7f48d9c8622341a1679db507de78b1260a5",
+    "origin_branch_commit": "0e50f7f48d9c8622341a1679db507de78b1260a5",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 674
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_closeout",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The active tranche forbids a native DeepSeek Harness worker/provider call, the implementation is complete, and dispatch would add no separable evidence or repair value.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Provider use remains forbidden and deterministic schema, API-Spine, transaction, isolation and cleanup checks decide the immutable successful terminal without an unresolved veto question.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and one owner must retain the non-transferable terminal, cleanup and acceptance chain.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-008",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "successor_plan_freeze",
+      "next_material_recovery",
+      "next_external_veto_surface"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "attempt 008 is consumed exactly once and cannot be rerun",
+      "postterminal review must bind the exact immutable terminal bytes",
+      "Sol alone reconciles API-Spine transaction evidence and cleanup",
+      "clockwork remains the sole canonical closeout writer"
+    ]
+  },
+  "planned_action": "accept_and_publish_the_single_successful_attempt_008_terminal_then_continue_to_a_read_only_admission_readiness_convergence_reading",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-008-plan.md",
+      "docs/security/raisa-provider-free-check-in-relay-free-recovery-attempt-008-threat-model-delta.md",
+      "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/attempt-008-execution-envelope.schema.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/attempt-008-execution-envelope.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/rehearsal-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/transaction-attestation.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/postterminal-read-only-docker-inspection.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/database-preexecution/clockwork-checkpoint-tick-evidence.json",
+      "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_postterminal.py",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns deterministic postterminal review, API-Spine compatibility review, acceptance, incident accounting, clockwork and Git closeout. DeepSeek is declined because the tranche forbids its worker/provider lane and no implementation package remains. Gemini is declined because provider use remains forbidden and the schema-valid immutable terminal has no unresolved model-judgment surface. Native subagents are declined because developer policy prohibits proactive delegation and one owner must reconcile execution, cleanup and acceptance.",
+    "git_refs_and_worktree": "The terminal-bearing task HEAD is committed and aligned with its fetched origin branch. Machine snapshots verify all four protected refs at the required protected object, a clean tracked worktree, preserved docs/branding, immutable attempt-007 ancestry, and exact attempt-008 terminal source bindings.",
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction and its clockwork checkpoint now records the exact attempt-008 candidate while retaining the prior accepted product result. The active latch still prohibits terminal handback until this successful immutable terminal is closed out.",
+    "protected_evidence_boundaries": "Attempt 008 is consumed once and cannot be rerun, resumed or retried. Closeout may accept only the exact authored-synthetic provider-free disposable PostgreSQL rollback/unknown-response/idempotency/audit/isolation/cleanup result. It cannot enable ordinary practice, alter REST/OpenAPI/GraphQL/routes/clients/configuration/grammar/status/waiting-area behavior, use product/patient/clinical/protected data, call a worker/provider, create reusable runtime, deploy/release/trigger Pages or move protected refs. docs/branding and all unrelated untracked files remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

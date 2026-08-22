@@ -1,0 +1,187 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "accept_and_publish_the_single_successful_attempt_008_terminal_then_continue_to_a_read_only_admission_readiness_convergence_reading",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after compaction and its clockwork checkpoint now records the exact attempt-008 candidate while retaining the prior accepted product result. The active latch still prohibits terminal handback until this successful immutable terminal is closed out.",
+    "current_authority_allocation": "GPT Sol owns deterministic postterminal review, API-Spine compatibility review, acceptance, incident accounting, clockwork and Git closeout. DeepSeek is declined because the tranche forbids its worker/provider lane and no implementation package remains. Gemini is declined because provider use remains forbidden and the schema-valid immutable terminal has no unresolved model-judgment surface. Native subagents are declined because developer policy prohibits proactive delegation and one owner must reconcile execution, cleanup and acceptance.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-008-plan.md",
+      "docs/security/raisa-provider-free-check-in-relay-free-recovery-attempt-008-threat-model-delta.md",
+      "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/attempt-008-execution-envelope.schema.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/attempt-008-execution-envelope.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/rehearsal-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/transaction-attestation.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/postterminal-read-only-docker-inspection.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/database-preexecution/clockwork-checkpoint-tick-evidence.json",
+      "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_postterminal.py",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Attempt 008 is consumed once and cannot be rerun, resumed or retried. Closeout may accept only the exact authored-synthetic provider-free disposable PostgreSQL rollback/unknown-response/idempotency/audit/isolation/cleanup result. It cannot enable ordinary practice, alter REST/OpenAPI/GraphQL/routes/clients/configuration/grammar/status/waiting-area behavior, use product/patient/clinical/protected data, call a worker/provider, create reusable runtime, deploy/release/trigger Pages or move protected refs. docs/branding and all unrelated untracked files remain preserved; explicit-path staging only.",
+    "git_refs_and_worktree": "The terminal-bearing task HEAD is committed and aligned with its fetched origin branch. Machine snapshots verify all four protected refs at the required protected object, a clean tracked worktree, preserved docs/branding, immutable attempt-007 ancestry, and exact attempt-008 terminal source bindings."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-008",
+    "active_tranche": "Raisa provider-free check-in relay-free recovery attempt 008",
+    "objective": "Freeze a fresh collision-free attempt-008 plan, construct and deterministically admit its exact wrapper and terminal schema, then only after a committed clean candidate, read-only Docker inspection, fresh five-source receipt and distinct clockwork checkpoint execute exactly one provider-free disposable PostgreSQL invocation with zero retry, resume or fallback.",
+    "status": "in_progress",
+    "source_head": "9f37ede79a915172e449c1f2d19bdba3eb592b44",
+    "authority_source": "Yuri's standing uninterrupted-development authority and the accepted zero-blocker attempt-008 plan-admissibility decision.",
+    "checkpoint": {
+      "completed_stage": "Attempt-008 P06-P13 pass: its plan and wrapper are committed and origin-aligned; exact repaired-base and immutable-lineage hashes, prospective redaction, typed terminal, provider-free source/governance tests, hostile static gates, Ruff, compilation and schema checks pass; read-only Docker inspection matches the cached image with zero labelled residue; and the fresh five-source receipt passes with all three parallel lanes declined for the serial lifecycle.",
+      "next_executable_stage": "execute_exactly_one_attempt_008_wrapper_invocation_then_stop_without_retry_resume_or_fallback_and_preserve_its_immutable_terminal",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_check_in_relay_free_recovery_attempt_008_only",
+      "p06_through_p14_remain_hard_fail_closed_conditions",
+      "provider_free_deterministic_construction_and_admission_before_checkpoint",
+      "no_docker_object_postgresql_sql_or_database_action_before_published_preexecution_checkpoint",
+      "read_only_docker_version_image_and_owned_resource_inspection_only_before_checkpoint",
+      "after_checkpoint_exactly_one_local_provider_free_disposable_postgresql_16_invocation",
+      "zero_retry_resume_or_fallback_after_first_database_process_start",
+      "no_native_deepseek_harness_worker_gemini_or_provider_call",
+      "no_application_product_api_openapi_graphql_route_client_or_configuration_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-008",
+    "assessed_stage": "pre_closeout",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The active tranche forbids a native DeepSeek Harness worker/provider call, the implementation is complete, and dispatch would add no separable evidence or repair value.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "Provider use remains forbidden and deterministic schema, API-Spine, transaction, isolation and cleanup checks decide the immutable successful terminal without an unresolved veto question.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and one owner must retain the non-transferable terminal, cleanup and acceptance chain.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "attempt 008 is consumed exactly once and cannot be rerun",
+      "postterminal review must bind the exact immutable terminal bytes",
+      "Sol alone reconciles API-Spine transaction evidence and cleanup",
+      "clockwork remains the sole canonical closeout writer"
+    ],
+    "reassessment_triggers": [
+      "successor_plan_freeze",
+      "next_material_recovery",
+      "next_external_veto_surface"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete postcompaction AGENTS and active-acceptance read, exact successful terminal, postterminal Docker absence, provider-free governance packet, API-steward source pass, fetched aligned refs and clean tracked worktree",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol completed the one-shot execution and deterministic postterminal/API-Spine review."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Historical transport and native Harness were not selected; no fallback was used."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Verifier lane remained declined and no provider call was made."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Native lane remained declined and no subagent was spawned."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
