@@ -9,8 +9,12 @@ import subprocess
 from pathlib import Path
 
 import pytest
+from jsonschema import Draft202012Validator
 
 from scripts import raisa_provider_free_check_in_relay_free_recovery_attempt_007 as attempt
+from scripts import (
+    raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair as repair,
+)
 from scripts import (
     raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal as base,
 )
@@ -295,3 +299,46 @@ def test_attempt_007_terminal_artifacts_remain_immutable() -> None:
     }
     for relative, expected in bindings.items():
         assert hashlib.sha256((ROOT / relative).read_bytes()).hexdigest() == expected
+
+
+def test_repair_contract_and_evidence_builder_are_closed() -> None:
+    contract = json.loads(repair.CONTRACT_PATH.read_text(encoding="utf-8"))
+    contract_schema = json.loads(
+        repair.CONTRACT_SCHEMA_PATH.read_text(encoding="utf-8")
+    )
+    assert not list(Draft202012Validator(contract_schema).iter_errors(contract))
+    assert len(contract["closed_boundaries"]) == 10
+    assert all(value is False for value in contract["closed_boundaries"].values())
+    evidence = repair.build_evidence()
+    evidence_schema = json.loads(
+        repair.EVIDENCE_SCHEMA_PATH.read_text(encoding="utf-8")
+    )
+    assert not list(Draft202012Validator(evidence_schema).iter_errors(evidence))
+    assert evidence["result"] == contract["result"]
+    assert evidence["efficacy"] == {
+        "diagnosed_forbidden_field_occupied_escape_before": 1,
+        "diagnosed_forbidden_field_occupied_escape_after": 0,
+        "diagnosed_cleanup_collapse_before": 1,
+        "diagnosed_cleanup_collapse_after": 0,
+        "occupied_runs_used_for_repair": 0,
+    }
+
+
+def test_direct_cli_check_is_provider_free_and_passes() -> None:
+    completed = subprocess.run(
+        ["python", str(Path(repair.__file__)), "--check"],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+        timeout=30,
+        shell=False,
+    )
+    assert completed.returncode == 0, completed.stderr
+    reading = json.loads(completed.stdout)
+    assert reading == {
+        "result": "raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_pass",
+        "projection_paths": 67,
+        "late_failure_escapes": 0,
+        "occupied_runs": 0,
+    }

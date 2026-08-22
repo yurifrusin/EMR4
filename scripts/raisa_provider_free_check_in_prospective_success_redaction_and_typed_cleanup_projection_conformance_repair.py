@@ -9,6 +9,7 @@ import dataclasses
 import hashlib
 import json
 import subprocess
+import sys
 import tempfile
 from contextlib import contextmanager
 from pathlib import Path
@@ -16,13 +17,15 @@ from typing import Any, Iterator, NoReturn
 
 from jsonschema import Draft202012Validator
 
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 from scripts import raisa_provider_free_check_in_relay_free_recovery_attempt_007 as attempt
 from scripts import (
     raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal as base,
 )
 
-
-ROOT = Path(__file__).resolve().parents[1]
 TOPIC = ROOT / (
     "orchestration/continuity/raisa-provider-free-check-in-prospective-success-"
     "redaction-and-typed-cleanup-projection-conformance-repair"
