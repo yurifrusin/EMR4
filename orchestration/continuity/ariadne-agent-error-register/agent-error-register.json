@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 634,
+  "register_revision": 635,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -39972,6 +39972,114 @@
       "incident_id": "AER-1032",
       "attempt_id": "clock-a67ffae7d118e55291d09c9d",
       "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-008",
+      "role": "orchestrator",
+      "resource_id": "attempt-008-admissibility-plan-postpublication-test",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A test selected in both publication phases accepts exactly the valid phase-dependent latch states.",
+      "observed_error": "The first postpublication decision-plan packet asserted only the decision operation even though the clockwork had validly installed its attempt-008 successor latch.",
+      "detection_method": "The typed postpublication provider-free command failed its exact latch assertion after canonical publication.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision_plan.py",
+        "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-008-closeout.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.phase_insensitive_assertion_selected_across_publication_boundary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Accept exactly the prepublication decision latch or postpublication named successor latch and rerun the postpublication packet.",
+        "prevention_control": "Publication-phase shared tests enumerate the exact valid before/after states instead of assuming one timeless current latch.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision_plan.py"
+        ]
+      },
+      "incident_id": "AER-1033",
+      "attempt_id": "clock-695e7b045782109fbf095354",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-008",
+      "role": "orchestrator",
+      "resource_id": "attempt-008-p12-provider-free-packet",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A yielded verification command retains its executable session identifier and final exit coordinate.",
+      "observed_error": "The first broad P12 packet yielded after thirty seconds but the caller emitted only partial text and did not retain the returned execution-session identifier.",
+      "detection_method": "Read-only process inspection showed the exact provider-free runner and pytest descendant still advancing after the caller lost its wait coordinate.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/efficacy-reading.json",
+        "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-008-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.yielded_exec_session_identifier_not_retained",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Observe the original process to completion, then recapture the exact verification in bounded provider-free groups with retained session identifiers and final zero exits.",
+        "prevention_control": "Long command calls serialize the full tool result, including session_id, before emitting partial output or waiting.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/closeout-report.md"
+        ]
+      },
+      "incident_id": "AER-1034",
+      "attempt_id": "clock-7818c156b0f4b1ad97ab4c18",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-008",
+      "role": "orchestrator",
+      "resource_id": "attempt-008-protected-ref-prepush-guard",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "integration",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Protected-ref guard diagnostics use syntactically unambiguous PowerShell interpolation and run before any push effect.",
+      "observed_error": "The first guard placed an unbraced variable immediately before a colon inside a double-quoted diagnostic and failed at PowerShell parse time.",
+      "detection_method": "PowerShell returned Variable reference is not valid before executing fetch or push commands.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-008-closeout.md",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/efficacy-reading.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.powershell_unbraced_variable_before_colon",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Brace both interpolated variables and rerun the complete protected-ref guard before pushing.",
+        "prevention_control": "PowerShell diagnostics adjacent to punctuation use explicit braced interpolation.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/closeout-report.md"
+        ]
+      },
+      "incident_id": "AER-1035",
+      "attempt_id": "clock-1f7ac857760b609aacbf1789",
+      "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"
     }

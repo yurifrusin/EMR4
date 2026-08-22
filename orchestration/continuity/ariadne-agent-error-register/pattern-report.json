@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 634,
+  "register_revision": 635,
   "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "b7f7ad47a5f2f640b57fb16612d88cee8cf427f052e8f83f6a56ddb899deb5bb",
-  "incident_count": 1032,
+  "canonical_register_sha256": "98368333922278f7aa08c9b7e2e66b32390a287ac2dbdc8a2d15a63859e2fbb9",
+  "incident_count": 1035,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 537,
       "harness": 72,
-      "operator": 263,
+      "operator": 266,
       "repository": 144,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 100,
       "evidence_misreport": 75,
       "harness_failure": 72,
-      "operator_error": 263,
+      "operator_error": 266,
       "output_contract_violation": 309,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 83,
       "integration_reviewer": 3,
-      "orchestrator": 883,
+      "orchestrator": 886,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 663,
+      "low": 666,
       "material": 135,
       "moderate": 234
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 219,
-      "canonical_unchanged": 642,
+      "accepted_candidate_changed": 220,
+      "canonical_unchanged": 644,
       "untrusted_partial_worktree": 171
     },
     "by_resource_and_role": {
@@ -128,6 +128,9 @@
       "attempt-007-success-evidence-redaction::implementer": 1,
       "attempt-007-terminal-cleanup-projection::implementer": 1,
       "attempt-008-admissibility-contract::orchestrator": 1,
+      "attempt-008-admissibility-plan-postpublication-test::orchestrator": 1,
+      "attempt-008-p12-provider-free-packet::orchestrator": 1,
+      "attempt-008-protected-ref-prepush-guard::orchestrator": 1,
       "authored-synthetic-native-worker-controller-broker-handshake::orchestrator": 1,
       "authored-synthetic-native-worker-exact-root-cleanup::orchestrator": 1,
       "boot-runner-cli-import::orchestrator": 1,

@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 400,
-  "updated_at": "2026-08-23T06:26:26.9894169+10:00",
-  "source_graph_revision": 418,
-  "orientation_statement": "EMR4 will freeze and prove every deterministic attempt-008 condition before one checkpoint can admit one disposable database invocation.",
+  "map_revision": 401,
+  "updated_at": "2026-08-23T07:19:39.9791037+10:00",
+  "source_graph_revision": 419,
+  "orientation_statement": "EMR4 will update the ordinary-practice readiness matrix from exact immutable evidence without treating a successful rehearsal as activation authority.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5129,27 +5129,38 @@
         "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/efficacy-reading.json",
         "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-008",
+      "lineage_parent": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+      "strategic_role": "Turn deterministic pre-admission into one successful, non-retriable database proof",
+      "outcome": "The sole attempt-008 invocation proves rollback-zero and unknown-response exactly-once recovery with exact isolation and cleanup.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/transaction-attestation.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/attempt-008-execution-envelope.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/efficacy-reading.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
-    "strategic_role": "Freeze and deterministically admit one collision-free attempt-008 lifecycle before any occupied action",
-    "why_now": "All known deterministic failure causes have accepted controls and the read-only decision reports zero plan-freeze blockers.",
-    "outcome": "The next plan will bind a fresh identity, current repaired source, immutable lineage, exact one-run semantics and every preexecution condition before a checkpoint can open one execution.",
+    "node_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-008",
+    "strategic_role": "Take a read-only ordinary-admission readiness reading from the new immutable transaction evidence",
+    "why_now": "The exact operational transaction gap named by the accepted twelve-dimension review now has one successful immutable terminal.",
+    "outcome": "A deterministic review will decide only whether the atomic rollback and unknown-response dimension becomes satisfied while retaining the separate environment/secret gap.",
     "unlocks": [
-      "A new wrapper/schema can be constructed without database activity.",
-      "Typed provider-free verification can decide the complete deterministic candidate.",
-      "Only a later exact checkpoint can admit one occupied invocation."
+      "The accepted twelve-dimension matrix can consume attempt-008 evidence without another database run.",
+      "Remaining operational gaps can be stated without conflating plan or execution readiness.",
+      "Ordinary-practice denial remains explicit while the evidence graph converges."
     ],
     "does_not_solve": [
-      "The positive decision itself proves no attempt-008 database behavior.",
-      "No ordinary-practice or product command is admitted.",
-      "No provider, production or protected authority opens."
+      "No ordinary-practice check-in activation is authorised.",
+      "No operational environment or secret posture is proved.",
+      "No provider, product-data, production or protected authority opens."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/decision-evidence.json",
-      "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md",
-      "orchestration/human_inbox/yuri/2026-08-23--check-in-attempt-008-plan-admissibility-decision.md"
+      "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/transaction-attestation.json",
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-008-closeout.md"
     ]
   },
   "decision_horizon": [

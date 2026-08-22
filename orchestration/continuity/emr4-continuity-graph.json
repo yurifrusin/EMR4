@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 418,
+  "graph_revision": 419,
   "harvests": [],
   "nodes": [
     {
@@ -33378,9 +33378,131 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-check-in-relay-free-recovery-attempt-008",
+      "title": "Raisa provider-free check-in relay-free recovery attempt 008",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing authority admitted one provider-free disposable PostgreSQL invocation only after P06-P14 passed.",
+          "The first database-process start consumed attempt 008; retry, resume and fallback remained zero.",
+          "DeepSeek, Gemini and native subagents remained declined under the serial lifecycle assessment."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-p06-through-p14-ordered-admission",
+          "source": "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-008-plan.md",
+          "status": "accepted",
+          "summary": "Accept the full plan, deterministic candidate, read-only inspection, fresh receipt and checkpoint sequence before occupied execution."
+        },
+        {
+          "id": "accept-one-shot-rollback-and-unknown-response-recovery",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/transaction-attestation.json",
+          "status": "accepted",
+          "summary": "Accept rollback zero and committed-exactly-once authoritative readback after an incomplete caller response with no success or retry."
+        },
+        {
+          "id": "accept-exact-isolation-and-cleanup-terminal",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/attempt-008-execution-envelope.json",
+          "status": "accepted",
+          "summary": "Accept one immutable success terminal with forced-RLS non-bypass posture, zero cross-practice visibility, finalized cleanup and zero owned residue."
+        },
+        {
+          "id": "accept-api-spine-compatible-bounded-claim",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/closeout-report.md",
+          "status": "accepted",
+          "summary": "Accept bounded REST command security, idempotency and audit evidence without API source change or ordinary-practice admission."
+        },
+        {
+          "id": "accept-measured-one-shot-efficacy",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept one occupied pass and zero database reruns while retaining three contained workflow lapses."
+        }
+      ],
+      "claim_scope": [
+        "Attempt 008 executed exactly once with zero retry, resume or fallback.",
+        "Explicit rollback left zero effect, receipt and audit members.",
+        "Unknown terminal response recovery observed exactly one committed packet with no duplicate or cross-practice visibility.",
+        "The non-bypass restricted role, forced RLS and exact cleanup passed in authored-synthetic disposable PostgreSQL.",
+        "The existing API Spine command pattern remains unchanged and ordinary-practice admission remains closed.",
+        "No provider, worker, product data, production, deployment, release, Pages or protected-ref authority opened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-008-plan.md",
+          "docs/security/raisa-provider-free-check-in-relay-free-recovery-attempt-008-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/rehearsal-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/transaction-attestation.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/attempt-008-execution-envelope.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/preexecution-read-only-docker-inspection.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/postterminal-read-only-docker-inspection.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/database-preexecution/clockwork-checkpoint-tick-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/efficacy-reading.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/closeout-report.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-008-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-008-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-check-in-relay-free-recovery-attempt-008-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-check-in-relay-free-recovery-attempt-008-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-check-in-relay-free-recovery-attempt-008-closeout-precommit-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_plan.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_postterminal.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/attempt-008-execution-envelope.schema.json",
+          "orchestration/human_inbox/yuri/2026-08-23--check-in-relay-free-recovery-attempt-008.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The twelve-dimension ordinary-practice admission verdict has not yet consumed attempt-008 evidence.",
+        "Operational environment-manifest and secret-posture evidence remains absent.",
+        "Dedicated check-in remains default-off without ordinary-practice admission.",
+        "No provider, product-data, reusable runtime, production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T07:19:39.9791037+10:00",
+      "updated_at": "2026-08-23T07:19:39.9791037+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "4cba1edebe9bd924ff49f757935ca898845cbf99",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T06:26:26.9894169+10:00"
+  "updated_at": "2026-08-23T07:19:39.9791037+10:00"
 }

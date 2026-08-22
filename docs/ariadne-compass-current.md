@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will freeze and prove every deterministic attempt-008 condition before one checkpoint can admit one disposable database invocation.
+> EMR4 will update the ordinary-practice readiness matrix from exact immutable evidence without treating a successful rehearsal as activation authority.
 
 ## North star
 
@@ -606,26 +606,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Database-closed runner choice and publication phase now fail closed on both command-control surfaces. Lineage parent: `raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair`.
 295. **Take a typed readiness reading before spending another occupied database attempt — Raisa provider-free read-only check-in attempt-008 plan-admissibility decision**
    A separate attempt-008 plan is admissible, while nine hard plan/preexecution conditions and execution denial remain explicit. Lineage parent: `ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair`.
+296. **Turn deterministic pre-admission into one successful, non-retriable database proof — Raisa provider-free check-in relay-free recovery attempt 008**
+   The sole attempt-008 invocation proves rollback-zero and unknown-response exactly-once recovery with exact isolation and cleanup. Lineage parent: `raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision`.
 
 ## Current position
 
-**Freeze and deterministically admit one collision-free attempt-008 lifecycle before any occupied action — Raisa provider-free read-only check-in attempt-008 plan-admissibility decision**
+**Take a read-only ordinary-admission readiness reading from the new immutable transaction evidence — Raisa provider-free check-in relay-free recovery attempt 008**
 
-**Why this proof came next:** All known deterministic failure causes have accepted controls and the read-only decision reports zero plan-freeze blockers.
+**Why this proof came next:** The exact operational transaction gap named by the accepted twelve-dimension review now has one successful immutable terminal.
 
-The next plan will bind a fresh identity, current repaired source, immutable lineage, exact one-run semantics and every preexecution condition before a checkpoint can open one execution.
+A deterministic review will decide only whether the atomic rollback and unknown-response dimension becomes satisfied while retaining the separate environment/secret gap.
 
 ### What this unlocks
 
-- A new wrapper/schema can be constructed without database activity.
-- Typed provider-free verification can decide the complete deterministic candidate.
-- Only a later exact checkpoint can admit one occupied invocation.
+- The accepted twelve-dimension matrix can consume attempt-008 evidence without another database run.
+- Remaining operational gaps can be stated without conflating plan or execution readiness.
+- Ordinary-practice denial remains explicit while the evidence graph converges.
 
 ### What it does not solve
 
-- The positive decision itself proves no attempt-008 database behavior.
-- No ordinary-practice or product command is admitted.
-- No provider, production or protected authority opens.
+- No ordinary-practice check-in activation is authorised.
+- No operational environment or secret posture is proved.
+- No provider, product-data, production or protected authority opens.
 
 ## Continuity and authority
 
@@ -1529,6 +1531,7 @@ Prerequisites:
 - `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md`
 - `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-failed-closed-closeout.md`
 - `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-007-failed-closed-closeout.md`
+- `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-008-closeout.md`
 - `docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md`
 - `docs/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-closeout.md`
 - `docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md`
@@ -2971,6 +2974,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/rehearsal-failure-evidence.json`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/postterminal-read-only-docker-inspection.json`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/rehearsal-failure-evidence.json`
+- `orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/attempt-008-execution-envelope.json`
+- `orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/efficacy-reading.json`
+- `orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/transaction-attestation.json`
 - `orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/native-probe-terminal.json`
@@ -3559,7 +3565,6 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-tool-result-conclusion-coordinate-diagnostic.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-coordinate-recovery.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-failed-closed.md`
-- `orchestration/human_inbox/yuri/2026-08-23--check-in-attempt-008-plan-admissibility-decision.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3868,4 +3873,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 400; continuity graph revision 418._
+_Compass map revision 401; continuity graph revision 419._

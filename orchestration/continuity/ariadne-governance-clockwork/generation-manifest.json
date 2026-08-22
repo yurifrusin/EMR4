@@ -1,41 +1,41 @@
 {
   "schema_version": "ariadne.governance_live_tick_generation.v1",
-  "generation_id": "gen-c4d2176545b9c9daac0d48291f72687bb382e0d2ad262e7811abe19cb356040f",
-  "bundle_sha256": "c4d2176545b9c9daac0d48291f72687bb382e0d2ad262e7811abe19cb356040f",
-  "source_commit": "9f37ede79a915172e449c1f2d19bdba3eb592b44",
+  "generation_id": "gen-896528098e5fc919fa760eb6378a11e597f48af729651f34b5432ef6feb7072c",
+  "bundle_sha256": "896528098e5fc919fa760eb6378a11e597f48af729651f34b5432ef6feb7072c",
+  "source_commit": "4cba1edebe9bd924ff49f757935ca898845cbf99",
   "previous_generation": {
-    "generation_id": "gen-af77fe976c3f46a1c3c31a52d7cc223ca0212aec10acbfd712d8cf3aa0f7aca1",
-    "source_commit": "9f37ede79a915172e449c1f2d19bdba3eb592b44",
-    "bundle_sha256": "af77fe976c3f46a1c3c31a52d7cc223ca0212aec10acbfd712d8cf3aa0f7aca1",
+    "generation_id": "gen-c4d2176545b9c9daac0d48291f72687bb382e0d2ad262e7811abe19cb356040f",
+    "source_commit": "4cba1edebe9bd924ff49f757935ca898845cbf99",
+    "bundle_sha256": "c4d2176545b9c9daac0d48291f72687bb382e0d2ad262e7811abe19cb356040f",
     "canonical_sha256s": {
       "continuity": "255844d313a813cdb19a12915dfb4e711e32f36df56943c366d20f6917400c38",
       "compass": "8ff7d12b58a230e809d49554828c6c961a80b4265e3a7ab5867dfe6b85cfa4ba",
       "compass_markdown": "9070ad9bfe33817837ba462e964da13dbbd9a8aefe7f374bc5c3238c03c2c98f",
-      "active_latch": "ea6e607aeb4762ffccb834557bf2bd094b7d8e6131b623c1c17c250378bd54c7",
+      "active_latch": "3d2dd9cf4bcbb0e2bb8b77d87c8aaf4dd8fc04dc89f19207ff535fdc36f5d94a",
       "error_register": "7d973dd7b36b39fce7c0f0e7a1a2aa392dc6de130ec4bfd163c7c8f3f51d3bc3",
       "pattern_report": "55d7ae2cc279d3f17f9f2ab2be92d37bde699fbefd03d76dd2e54987adac9bde",
-      "current_baton": "4c605dfbdbda1dca170cf9cd51a5cf55bc8a491a0bc83cf0c3af24cb10b95f11"
+      "current_baton": "d97eea9ad4caed14f9e8d4d3a59a38bfac728b987870d23bc26b30276646dab8"
     },
     "metadata_sha256s": {
-      "command-manifest.json": "62f07db75f0b374976bd298f7e5a3c1cc21ee89e92d54c11205cc400799e1a8a",
-      "transaction.json": "9e649dbe69521df2c618b9d7ae66585f269a8fdd5329a02cdf55fed9ab9cf969",
+      "command-manifest.json": "915a867ca2b21c2a350fabfcea5d27289ff2dfce9abaeb5dc61fa611663e8ee1",
+      "transaction.json": "15ac13674b11cc48546e3157111d0ee721c56b29a81002f73a8988c63c221e06",
       "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-      "generation-manifest.json": "c9e38c22880ffe35b5c66c33778ae47d8670a93bbec8f70b6c694af321d41373"
+      "generation-manifest.json": "215e9f6230499bbb5ea7f90470728b3c50ebe1a87f4641899f95f147a81c8876"
     },
-    "pointer_sha256": "63537afd070a4a045d7f05e42794f923b85c18fb2c20069f331bf2623c9d900b"
+    "pointer_sha256": "9767ec2955ace94929b7be8cf96aac2129c60bfc78c41d7b64c955a3c81e9219"
   },
   "canonical_sha256s": {
-    "continuity": "255844d313a813cdb19a12915dfb4e711e32f36df56943c366d20f6917400c38",
-    "compass": "8ff7d12b58a230e809d49554828c6c961a80b4265e3a7ab5867dfe6b85cfa4ba",
-    "compass_markdown": "9070ad9bfe33817837ba462e964da13dbbd9a8aefe7f374bc5c3238c03c2c98f",
-    "active_latch": "3d2dd9cf4bcbb0e2bb8b77d87c8aaf4dd8fc04dc89f19207ff535fdc36f5d94a",
-    "error_register": "7d973dd7b36b39fce7c0f0e7a1a2aa392dc6de130ec4bfd163c7c8f3f51d3bc3",
-    "pattern_report": "55d7ae2cc279d3f17f9f2ab2be92d37bde699fbefd03d76dd2e54987adac9bde",
-    "current_baton": "d97eea9ad4caed14f9e8d4d3a59a38bfac728b987870d23bc26b30276646dab8"
+    "continuity": "06bb0346e4689ae061b1157cf140ec9eab0b007245c0e4b5de4a775c532f00f0",
+    "compass": "bbbb702a2befc6c84375826055595d5405b7623173f06fd8eb58af1e754ab50a",
+    "compass_markdown": "16c88ea53382288c2021e4f3ae4323f5dbf059cdc90a72087bd4db919c13212c",
+    "active_latch": "a1a148de9b78133977864abeb369d15cd9e4506f1e4bee1684642513752e0d78",
+    "error_register": "dae61885fe93ff2483508f1dad315260c541d535c56751b973892c0eca8b834a",
+    "pattern_report": "c6c3d5274525e36f3b7e23a7bb54f1dc0a39478e701c5f21e9870d133dc5b18c",
+    "current_baton": "89a8cdb07bdc03d3f6dcef814a2dd8584c0f43c1d275ec9ae62efae280deebe4"
   },
   "metadata_sha256s": {
-    "command-manifest.json": "915a867ca2b21c2a350fabfcea5d27289ff2dfce9abaeb5dc61fa611663e8ee1",
-    "transaction.json": "15ac13674b11cc48546e3157111d0ee721c56b29a81002f73a8988c63c221e06",
+    "command-manifest.json": "9debcadb5e83f1716663b9926fbfc276a02e1acf75940a3f79ad3f294029337c",
+    "transaction.json": "a35f5a45f68ed138b90bcc99a0d33bed833d89534f3fffca25e6dbd993b330d8",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9"
   }
 }
