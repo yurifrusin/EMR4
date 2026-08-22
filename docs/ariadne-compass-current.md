@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Close the native Harness recovery sequence and reconcile the completed check-in route, readiness, kernel and operational-evidence lineage before selecting another product tranche.
+> Complete one exact absent runbook manifest before attempting wider operational or activation work.
 
 ## North star
 
@@ -578,22 +578,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The pinned stock headless launcher reached the corrected accepted runner graph once with exact typed attribution and complete provider-free cleanup. Lineage parent: `deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis`.
 281. **Determine whether typed orchestrator control could make one native DeepSeek worker reliably useful for Raisa development — Corrected-graph native-Harness useful-development recovery**
    The corrected graph reached one provider request with precise typed attribution and cleanup but produced no usable edit. Lineage parent: `deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof`.
+282. **Exit the closed native-Harness recovery loop and restore graph-grounded forward progress on default-off canonical check-in admission readiness — Post-check-in admission-control programme orientation**
+   A deterministic matrix distinguishes accepted, contract-only, blocked operational and later gates and identifies one genuinely absent binary-completion artifact. Lineage parent: `raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal`.
 
 ## Current position
 
-**Reconcile the completed default-off check-in lineage before selecting a genuinely unfinished blocker without allocating the native DeepSeek Harness — Corrected-graph native-Harness useful-development recovery**
+**Materialize the already-frozen default-off rollout, kill-switch and rollback procedure as one canonical API-Spine manifest — Post-check-in admission-control programme orientation**
 
-**Why this proof came next:** The Harness question has a decisive negative terminal, while route convergence, admission-control architecture and the unmounted kernel are already accepted historical nodes.
+**Why this proof came next:** The manifest's exact closed form and validator exist, its canonical target is absent, and this can close one original readiness artifact gap without re-entering failed database or Harness recovery.
 
-Harness recovery ends and one read-only orientation identifies the narrowest remaining check-in product tranche without replaying accepted work.
+One exact declarative runbook becomes a machine-checked API-Spine artifact while ordinary check-in remains disabled.
 
 ### What this unlocks
 
-- A graph-grounded choice of the next genuinely unfinished ordinary-admission blocker.
+- A canonical default-off rollout and disable procedure for later admission-control and observability work.
 
 ### What it does not solve
 
-- No ordinary-practice admission, client cutover, waiting-area movement, product data, production runtime or protected integration is opened.
+- No ordinary activation, unknown-commit proof, live secret custody, mounted monitoring, client cutover, product runtime or production readiness is opened.
 
 ## Continuity and authority
 
@@ -1596,6 +1598,8 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-closeout.md`
 - `docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-plan.md`
 - `docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md`
+- `docs/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation-closeout.md`
+- `docs/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation.md`
 - `docs/raisa-provider-free-read-only-status-confirm-physical-representability-review-closeout.md`
 - `docs/raisa-provider-free-read-only-status-confirm-physical-representability-review-plan.md`
 - `docs/raisa-provider-free-read-only-status-confirm-route-mounting-admission-review-closeout.md`
@@ -2163,7 +2167,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-aes-c5-single-generation-destination-conflict-analysis.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-source-review-receipt.json`
-- `orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-sol-acceptance.md`
@@ -3018,6 +3021,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/admission-readiness-review-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/admission-readiness-review-report.md`
 - `orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/provider-free-read-only-evidence.json`
+- `orchestration/continuity/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation/orientation-evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-physical-representability-review/physical-representability-review-contract.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-physical-representability-review/physical-representability-review-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-read-only-status-confirm-physical-representability-review/provider-free-read-only-review-evidence.json`
@@ -3487,7 +3491,6 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-mount-effective-tool-projection.md`
 - `orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-row-service-path-recovery.md`
 - `orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-pre-hmr-startup-recovery.md`
-- `orchestration/human_inbox/yuri/2026-08-22--native-harness-corrected-graph-useful-recovery.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-edit-coordinate-future-runner-integration.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-integrated-runner-first-controlled-development.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-integrated-runner-stock-headless-boot.md`
@@ -3506,6 +3509,7 @@ Prerequisites:
 - `orchestration/prototypes/reception-one-yuri-internal-walkthrough/completed-review.json`
 - `orchestration_harness/active_operation.py`
 - `orchestration_harness/check_in_admission_control.py`
+- `orchestration_harness/check_in_rollout_runbook.py`
 - `orchestration_harness/continuity_and_refinement.py`
 - `orchestration_harness/git_object_resolution.py`
 - `orchestration_harness/git_refs_snapshot.py`
@@ -3802,4 +3806,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 386; continuity graph revision 404._
+_Compass map revision 387; continuity graph revision 405._

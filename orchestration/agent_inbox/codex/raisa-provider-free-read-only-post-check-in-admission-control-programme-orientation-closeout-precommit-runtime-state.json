@@ -1,0 +1,102 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_and_publish_the_clockwork_admitted_post_check_in_orientation_closeout_then_rehydrate_the_latched_successor",
+  "source_evidence": {
+    "live_handover_current_baton": "The fully read Current Baton and its clockwork-projected current result now accept the read-only post-check-in orientation and select the exact default-off runbook-manifest successor.",
+    "current_authority_allocation": "GPT Sol owns deterministic closeout, explicit-path Git publication and successor rehydration. DeepSeek, Gemini and native subagents remain declined because no independent model-owned package exists at this serial clockwork boundary.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation-plan.md",
+      "docs/security/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation-threat-model-delta.md",
+      "docs/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation.md",
+      "docs/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation-closeout.md",
+      "orchestration/continuity/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation/orientation-evidence.json",
+      "orchestration/continuity/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation/efficacy-reading.json",
+      "orchestration/continuity/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation/closeout/clockwork-tick-evidence.json",
+      "orchestration/agent_inbox/codex/raisa-post-check-in-admission-control-programme-orientation-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--post-check-in-admission-control-programme-orientation.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Commit only the orientation closeout, deterministic clockwork projections and the paired non-PHI summary. No product/API/configuration/client, admission, data, provider, database, runtime, deployment, Pages or protected-ref surface may change. Preserve docs/branding and every unrelated untracked path; stage explicit paths only.",
+    "git_refs_and_worktree": "The machine snapshot alone verifies the task branch, protected refs, exact full Git source, intentional tracked closeout and preserved untracked paths."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal",
+    "active_tranche": "Provider-free default-off canonical check-in rollout runbook convergence",
+    "objective": "Materialize the exact already-frozen default-off canonical check-in rollout, kill-switch and rollback closed form as one declarative API-Spine manifest and focused deterministic validation, without changing product source, enabling a practice or exercising a route, database or provider.",
+    "status": "in_progress",
+    "source_head": "1d83ec70462c6d725b8368d7b678c72c774a35ce",
+    "authority_source": "Yuri's standing uninterrupted-development authority and the accepted read-only post-check-in programme orientation select the unique graph-new absent runbook artifact.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_exact_default_off_runbook_convergence_plan",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_default_off_canonical_check_in_rollout_runbook_convergence_only",
+      "only_exact_closed_form_api_spine_manifest_and_focused_validation_may_change",
+      "manifest_is_declarative_input_and_never_command_or_activation_authority",
+      "no_product_source_configuration_route_openapi_graphql_or_client_change",
+      "no_native_deepseek_harness_worker_or_claude_fallback",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_action_grammar_or_first_party_client_change",
+      "no_generic_status_arrived_change_or_waiting_area_movement",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_provider_database_docker_or_production_runtime",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "no_deployment_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal",
+    "assessed_stage": "orientation_closeout_before_successor_rehydration",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "Native Harness allocation is closed and this boundary contains only clockwork-derived closeout publication.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "declined", "expected_leverage": "neutral", "rationale": "The deterministic closeout suite and clockwork projection fully decide the serial publication boundary.", "work_packages": []},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Developer policy prohibits proactive delegation and one writer must retain graph and Git custody.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["publish one clockwork generation", "stage only named paths", "commit and push the task branch", "rehydrate the successor from five sources"],
+    "reassessment_triggers": ["after_successor_rehydration", "before_successor_candidate_commit", "if_scope_or_exact_manifest_source_changes"]
+  },
+  "context_health": {
+    "agent_contexts": [{
+      "agent_id": "orchestrator",
+      "measurement_source": "passed clockwork publish, 149-test closeout packet, lint, compilation and diff-integrity validation",
+      "rehydrated_from_receipt": true,
+      "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+    }]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["GPT Sol owns the deterministic closeout boundary."]},
+    {"adapter_id": "deepseek_native_harness", "method": "deepcode_cli_observation", "reachability": "unreachable", "evidence": ["Native Harness allocation remains closed."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Historical only and not selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected at the deterministic publication boundary."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent spawned."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

@@ -2,54 +2,58 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "corrected-graph-useful-recovery-closeout-tick-check",
+      "command_id": "post-check-in-orientation-closeout-tick-check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_governance_clockwork_tick",
         "--check",
         "--intent",
-        "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/closeout/closeout-intent.json"
+        "orchestration/continuity/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "corrected-graph-useful-recovery-closeout-tests",
+      "command_id": "post-check-in-orientation-closeout-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
-        "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
-        "tests/test_ariadne_agent_error_register.py",
-        "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation.py",
+        "tests/test_raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation_plan.py",
+        "tests/test_api_spine_artifacts.py",
+        "tests/test_api_spine_appointment_openapi_drift_guard.py",
         "tests/test_ariadne_active_operation_latch.py",
-        "tests/test_current_baton_consistency.py"
+        "tests/test_current_baton_consistency.py",
+        "tests/test_ariadne_compass.py",
+        "tests/test_ariadne_governance_clockwork_tick.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "corrected-graph-useful-recovery-closeout-ruff",
+      "command_id": "post-check-in-orientation-closeout-ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py",
-        "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py"
+        "scripts/raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation.py",
+        "tests/test_raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation.py",
+        "tests/test_raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation_plan.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "corrected-graph-useful-recovery-closeout-compile",
+      "command_id": "post-check-in-orientation-closeout-compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py",
-        "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py"
+        "scripts/raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation.py",
+        "tests/test_raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation.py",
+        "tests/test_raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation_plan.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

@@ -1,0 +1,235 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v1",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation",
+    "title": "Provider-free read-only post-check-in admission-control programme orientation closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T22:54:55.0717769+10:00",
+    "node": {
+      "id": "raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation",
+      "title": "Post-check-in admission-control programme orientation",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admits one provider-free repository-static read-only orientation after the native-Harness sequence closed.",
+          "The orientation changes no product, API, configuration, route, client, database, runtime, deployment, Pages or protected ref.",
+          "The selected successor may later add one exact default-off declarative API-Spine manifest only; it receives no current execution or activation authority from this node."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-ten-dimension-post-check-in-matrix",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation/orientation-evidence.json",
+          "status": "accepted",
+          "summary": "Accept two satisfied prerequisites, three contract-only prerequisites, two operational-evidence gaps and three deliberately later gates without promoting design or blocked evidence."
+        },
+        {
+          "id": "select-exact-default-off-runbook-manifest-successor",
+          "source": "docs/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation.md",
+          "status": "accepted",
+          "summary": "Select one graph-new successor because the exact closed-form runbook exists while its canonical API-Spine manifest target is absent."
+        },
+        {
+          "id": "preserve-not-ready-verdict-and-operational-gaps",
+          "source": "docs/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation-closeout.md",
+          "status": "accepted",
+          "summary": "Preserve the not-ready verdict, unknown-commit and live-secret evidence gaps, default denial and closed activation/client/runtime gates."
+        },
+        {
+          "id": "decline-external-worker-and-model-review",
+          "source": "orchestration/agent_inbox/codex/raisa-post-check-in-admission-control-programme-orientation-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Decline DeepSeek, Gemini and native-subagent execution because exact deterministic graph membership and file absence settle the serial orientation."
+        }
+      ],
+      "claim_scope": [
+        "Nine accepted check-in and Harness lineage nodes were reconciled without replay or mutation.",
+        "The current ten-dimension matrix is two satisfied-accepted, three satisfied-contract-only, two operational-evidence-gap and three closed-later-gate.",
+        "The exact rollout/kill-switch/rollback closed form exists and its named canonical API-Spine manifest is absent.",
+        "The selected successor operation is absent from the accepted Continuity graph.",
+        "Ordinary-practice readiness remains false; activation authority and active ordinary-record count remain zero.",
+        "No worker, provider, database, Docker, product or protected activity occurred."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation-plan.md",
+          "docs/security/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation/orientation-evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation/efficacy-reading.json",
+          "docs/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation.md"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--post-check-in-admission-control-programme-orientation.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-post-check-in-admission-control-programme-orientation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation-plan-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation-candidate-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation.py",
+          "tests/test_raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation_plan.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation.py",
+          "orchestration/continuity/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation/contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation/contract.schema.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The canonical default-off rollout/kill-switch/rollback API-Spine manifest remains absent until the selected successor passes.",
+        "Environment architecture still has zero live manifests, secret references and operational secret-custody evidence.",
+        "Atomic rollback and unknown-commit authoritative readback remain unproved after the consumed failed database sequence.",
+        "Admission-control commands, operational observability, ordinary activation and atomic two-client cutover remain unmounted and closed.",
+        "The native Harness remains unavailable for EMR4 worker allocation and Claude is not a silent fallback.",
+        "All product/patient/clinical data, providers, production, deployment, release, Pages and protected-ref gates remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Exit the closed native-Harness recovery loop and restore graph-grounded forward progress on default-off canonical check-in admission readiness",
+      "outcome": "A deterministic matrix distinguishes accepted, contract-only, blocked operational and later gates and identifies one genuinely absent binary-completion artifact.",
+      "evidence": [
+        "docs/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation.md",
+        "orchestration/continuity/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation/orientation-evidence.json"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Materialize the already-frozen default-off rollout, kill-switch and rollback procedure as one canonical API-Spine manifest",
+      "why_now": "The manifest's exact closed form and validator exist, its canonical target is absent, and this can close one original readiness artifact gap without re-entering failed database or Harness recovery.",
+      "outcome": "One exact declarative runbook becomes a machine-checked API-Spine artifact while ordinary check-in remains disabled.",
+      "unlocks": [
+        "A canonical default-off rollout and disable procedure for later admission-control and observability work."
+      ],
+      "does_not_solve": [
+        "No ordinary activation, unknown-commit proof, live secret custody, mounted monitoring, client cutover, product runtime or production readiness is opened."
+      ],
+      "evidence": [
+        "orchestration_harness/check_in_rollout_runbook.py",
+        "docs/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation-closeout.md"
+      ],
+      "orientation_statement": "Complete one exact absent runbook manifest before attempting wider operational or activation work."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal",
+      "active_tranche": "Provider-free default-off canonical check-in rollout runbook convergence",
+      "objective": "Materialize the exact already-frozen default-off canonical check-in rollout, kill-switch and rollback closed form as one declarative API-Spine manifest and focused deterministic validation, without changing product source, enabling a practice or exercising a route, database or provider.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted read-only post-check-in programme orientation select the unique graph-new absent runbook artifact.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_exact_default_off_runbook_convergence_plan"
+    },
+    "incidents": [],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "post-check-in-orientation-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "post-check-in-orientation-closeout-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation.py",
+          "tests/test_raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation_plan.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_api_spine_appointment_openapi_drift_guard.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_compass.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "post-check-in-orientation-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation.py",
+          "tests/test_raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation.py",
+          "tests/test_raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "post-check-in-orientation-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation.py",
+          "tests/test_raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation.py",
+          "tests/test_raisa_provider_free_read_only_post_check_in_admission_control_programme_orientation_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-plan.md",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-627.md",
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--native-harness-corrected-graph-useful-recovery.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_default_off_canonical_check_in_rollout_runbook_convergence_only",
+    "only_exact_closed_form_api_spine_manifest_and_focused_validation_may_change",
+    "manifest_is_declarative_input_and_never_command_or_activation_authority",
+    "no_product_source_configuration_route_openapi_graphql_or_client_change",
+    "no_native_deepseek_harness_worker_or_claude_fallback",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_action_grammar_or_first_party_client_change",
+    "no_generic_status_arrived_change_or_waiting_area_movement",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_provider_database_docker_or_production_runtime",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "no_deployment_release_pages_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}
