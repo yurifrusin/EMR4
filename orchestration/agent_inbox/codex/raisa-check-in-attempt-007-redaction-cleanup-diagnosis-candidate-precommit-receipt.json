@@ -1,11 +1,11 @@
 {
   "active_operation": {
     "active_tranche": "Raisa provider-free read-only check-in attempt-007 redaction forbidden-field and cleanup-projection coordinate diagnosis",
-    "completed_stage": "Frozen the read-only attempt-007 redaction and cleanup-projection coordinate diagnosis plan at the machine-resolved source.",
-    "next_executable_stage": "build_verify_and_accept_read_only_deterministic_redaction_and_cleanup_projection_diagnosis",
+    "completed_stage": "Accepted raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-007 at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_read_only_redaction_and_cleanup_projection_diagnosis",
     "operation_id": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
     "resume_after_compaction": true,
-    "source_head": "3240c0a00dcce1ea9c07907a1d67b2493c8f33ed",
+    "source_head": "6657ee5061265d732096e9987f327d82feed800c",
     "status": "in_progress",
     "terminal_handback_permitted": false,
     "user_attention_required": false
@@ -13,14 +13,14 @@
   "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
   "continuation_event": "pre_commit",
   "git_object_resolution": {
-    "observed_head": "3240c0a00dcce1ea9c07907a1d67b2493c8f33ed",
+    "observed_head": "84700374e1aeb21e7c8af309a846eda9b96598a7",
     "reason_codes": [],
-    "resolved_commit": "3240c0a00dcce1ea9c07907a1d67b2493c8f33ed",
+    "resolved_commit": "6657ee5061265d732096e9987f327d82feed800c",
     "schema_version": "ariadne.git_object_resolution.v1",
     "source_field": "active_operation.source_head",
     "source_is_ancestor_of_head": true,
     "status": "passed",
-    "supplied_object_id": "3240c0a00dcce1ea9c07907a1d67b2493c8f33ed"
+    "supplied_object_id": "6657ee5061265d732096e9987f327d82feed800c"
   },
   "git_ref_evidence_binding": {
     "manually_supplied_object_id_count": 0,
@@ -31,9 +31,9 @@
   },
   "git_refs_snapshot": {
     "branch": "codex/ariadne-bernie-davida-parallel-seam",
-    "branch_commit": "3240c0a00dcce1ea9c07907a1d67b2493c8f33ed",
+    "branch_commit": "84700374e1aeb21e7c8af309a846eda9b96598a7",
     "branch_origin_aligned": false,
-    "head": "3240c0a00dcce1ea9c07907a1d67b2493c8f33ed",
+    "head": "84700374e1aeb21e7c8af309a846eda9b96598a7",
     "origin_branch_commit": "edfa7ae33c0df8aefaea6490dc2d54b05d233dd5",
     "preserved_untracked_paths": {
       "docs/branding": true
@@ -50,7 +50,7 @@
     "schema_version": "ariadne.git_refs_snapshot.v1",
     "status": "passed",
     "tracked_worktree_clean": false,
-    "untracked_path_count": 679
+    "untracked_path_count": 677
   },
   "parallelism_assessment": {
     "assessed_stage": "deterministic_candidate_precommit",
@@ -117,7 +117,7 @@
       "orchestration/continuity/ariadne-active-operation-latch/current.json"
     ],
     "current_authority_allocation": "GPT Sol owns the serial read-only source, AST, schema and process-fake diagnosis, acceptance and Git. The native DeepSeek Harness remains paused, Gemini has no material independent veto package in this deterministic diagnosis, and developer policy prohibits proactive native-subagent delegation.",
-    "git_refs_and_worktree": "Fresh machine readings verify the task branch at its exact frozen-plan source, all four protected refs at the required protected object, tracked changes restricted to the explicit diagnosis candidate and latch checkpoint, and 679 preserved untracked entries including five docs/branding entries. Git object values remain machine-owned receipt fields rather than manually repeated prose.",
+    "git_refs_and_worktree": "Fresh machine readings verify the task branch at its exact deterministic-candidate source, all four protected refs at the required protected object, the clockwork-owned live latch restored byte-for-byte after a rejected direct checkpoint edit, and all unrelated untracked entries including five docs/branding entries preserved. Git object values remain machine-owned receipt fields rather than manually repeated prose.",
     "live_handover_current_baton": "AGENTS.md was read completely after attempt-007 closeout. Current result and Next implementation select this exact read-only diagnosis; the plan is frozen and its deterministic candidate now identifies the exact redaction and cleanup-projection coordinates.",
     "protected_evidence_boundaries": "The candidate is provider-free and read-only. It binds immutable attempt 007, uses exact local source, AST, schema and deterministic process fakes, and records a future repair boundary only. It creates no Docker object, starts no PostgreSQL process, executes no SQL or database operation, and authorises no attempt 008, worker/provider call, product/API change, ordinary enablement, product/protected data, production, Pages or protected-ref movement."
   },

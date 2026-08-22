@@ -16,7 +16,7 @@
       "orchestration/continuity/ariadne-active-operation-latch/current.json"
     ],
     "protected_evidence_boundaries": "The candidate is provider-free and read-only. It binds immutable attempt 007, uses exact local source, AST, schema and deterministic process fakes, and records a future repair boundary only. It creates no Docker object, starts no PostgreSQL process, executes no SQL or database operation, and authorises no attempt 008, worker/provider call, product/API change, ordinary enablement, product/protected data, production, Pages or protected-ref movement.",
-    "git_refs_and_worktree": "Fresh machine readings verify the task branch at its exact frozen-plan source, all four protected refs at the required protected object, tracked changes restricted to the explicit diagnosis candidate and latch checkpoint, and 679 preserved untracked entries including five docs/branding entries. Git object values remain machine-owned receipt fields rather than manually repeated prose."
+    "git_refs_and_worktree": "Fresh machine readings verify the task branch at its exact deterministic-candidate source, all four protected refs at the required protected object, the clockwork-owned live latch restored byte-for-byte after a rejected direct checkpoint edit, and all unrelated untracked entries including five docs/branding entries preserved. Git object values remain machine-owned receipt fields rather than manually repeated prose."
   },
   "active_operation": {
     "schema_version": "ariadne.active_operation_latch.v1",
@@ -24,11 +24,11 @@
     "active_tranche": "Raisa provider-free read-only check-in attempt-007 redaction forbidden-field and cleanup-projection coordinate diagnosis",
     "objective": "Bind the immutable attempt-007 terminal, trace the exact success-evidence redaction and wrapper post-finalization cleanup-projection coordinates, and identify the smallest deterministic repair without creating a Docker object, starting PostgreSQL, executing SQL or authorising attempt 008.",
     "status": "in_progress",
-    "source_head": "3240c0a00dcce1ea9c07907a1d67b2493c8f33ed",
+    "source_head": "6657ee5061265d732096e9987f327d82feed800c",
     "authority_source": "Yuri's standing uninterrupted-development authority and the accepted attempt-007 failed-closed terminal.",
     "checkpoint": {
-      "completed_stage": "Frozen the read-only attempt-007 redaction and cleanup-projection coordinate diagnosis plan at the machine-resolved source.",
-      "next_executable_stage": "build_verify_and_accept_read_only_deterministic_redaction_and_cleanup_projection_diagnosis",
+      "completed_stage": "Accepted raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-007 at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_read_only_redaction_and_cleanup_projection_diagnosis",
       "retry_counters": {
         "planning": 0,
         "implementation": 0,
