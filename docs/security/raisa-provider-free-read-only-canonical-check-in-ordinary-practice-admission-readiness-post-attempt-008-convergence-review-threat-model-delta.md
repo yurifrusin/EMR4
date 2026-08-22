@@ -17,7 +17,7 @@ database, Docker, SQL, provider, network or deployment action.
 - the prior twelve-dimension order, vocabulary, evidence and not-ready verdict;
 - the immutable attempt-008 terminal, attestation and one-shot semantics;
 - default-off and zero-ordinary-admission posture;
-- the independent environment-manifest/operational-secret-posture gap;
+- the independent `environment_manifest_and_operational_secret_posture` gap;
 - API-Spine read/command/event separation;
 - product, patient, clinical, historical and protected evidence;
 - protected refs and every unrelated untracked file.
@@ -26,7 +26,7 @@ database, Docker, SQL, provider, network or deployment action.
 
 | Threat | Fail-closed control |
 |---|---|
-| A successful disposable rehearsal is mistaken for ordinary-practice authority. | The output can change only dimension 7, retains dimension 11, retains the not-ready verdict and records zero ordinary admission. |
+| A successful disposable rehearsal is mistaken for ordinary-practice authority. | The output can change only dimension 7, retains dimension 11, retains verdict `not_ready_for_ordinary_practice_admission` and records zero ordinary admission. |
 | Partial transaction evidence is overclaimed. | Nine exact predicates jointly require rollback zero, incomplete response without success/retry, authoritative exactly-once readback, restricted forced-RLS posture and complete cleanup. |
 | The environment/secret gap is silently folded into transaction evidence. | Dimension 11 and its accepted `architecture_has_zero_operational_instances` basis are immutable inputs and required outputs. |
 | A model invents a new classification or basis label. | Contract and schema admit only the three existing classifications and exact frozen row-specific bases. |

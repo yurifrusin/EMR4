@@ -1,0 +1,265 @@
+{
+  "accepted_git_objects": {
+    "attempt_008_closeout_source": "4cba1edebe9bd924ff49f757935ca898845cbf99",
+    "attempt_008_occupied_source": "9f37ede79a915172e449c1f2d19bdba3eb592b44",
+    "attempt_008_terminal_commit": "0e50f7f48d9c8622341a1679db507de78b1260a5",
+    "prior_convergence_source": "369c1284af87631a94ffff04ca530cf4c74db4b8"
+  },
+  "api_spine_boundary": {
+    "api_or_product_artifact_changed": false,
+    "authoritative_readback_decides_unknown_response": true,
+    "classification": "read_only_security_audit_idempotency_evidence_review",
+    "graphql_remains_read_only": true,
+    "practice_scope_confirmation_idempotency_audit_retained": true,
+    "rest_command_pattern_unchanged": true,
+    "unchanged_path_count": 6
+  },
+  "blocking_gaps": [],
+  "closed_boundaries": {
+    "app_imported": false,
+    "browser_opened": false,
+    "database_opened": false,
+    "docker_used": false,
+    "environment_or_secret_posture_claimed": false,
+    "network_opened": false,
+    "ordinary_admission_released": false,
+    "ordinary_practice_enabled": false,
+    "product_or_configuration_changed": false,
+    "provider_called": false,
+    "route_called": false,
+    "sql_executed": false,
+    "worker_or_model_used": false
+  },
+  "dimension_counts": {
+    "blocking_gap": 0,
+    "operational_evidence_gap": 1,
+    "satisfied": 11
+  },
+  "dimensions": [
+    {
+      "basis": "original_accepted",
+      "citations": [
+        ".env.example",
+        "app/config.py",
+        "app/routers/appointments.py"
+      ],
+      "classification": "satisfied",
+      "id": "current_default_off_and_empty_ordinary_posture",
+      "markers": [
+        "original_exact_accepted_classification_retained"
+      ],
+      "order": 1
+    },
+    {
+      "basis": "accepted_admission_kernel",
+      "citations": [
+        "orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/provider-free-kernel-rehearsal-evidence.json",
+        "docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-closeout.md"
+      ],
+      "classification": "satisfied",
+      "id": "ordinary_practice_admission_control",
+      "markers": [
+        "zero_active_ordinary_records",
+        "every_ordinary_scenario_denied",
+        "kernel_unmounted_and_product_unchanged"
+      ],
+      "order": 2
+    },
+    {
+      "basis": "original_accepted",
+      "citations": [
+        "app/routers/appointments.py",
+        "app/schemas/appointments.py",
+        "docs/api-spine/openapi/appointment-commands.yaml",
+        "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md"
+      ],
+      "classification": "satisfied",
+      "id": "api_spine_contract_and_route_identity",
+      "markers": [
+        "original_exact_accepted_classification_retained"
+      ],
+      "order": 3
+    },
+    {
+      "basis": "original_accepted",
+      "citations": [
+        "app/dependencies.py",
+        "app/routers/appointments.py",
+        "app/services/appointment_check_in_product_adapter.py",
+        "app/services/auth_service.py"
+      ],
+      "classification": "satisfied",
+      "id": "authentication_and_dual_receptionist_authorization",
+      "markers": [
+        "original_exact_accepted_classification_retained"
+      ],
+      "order": 4
+    },
+    {
+      "basis": "accepted_disposable_postgresql_attestation",
+      "citations": [
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/tenant-role-attestation.json",
+        "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal/rehearsal-evidence.json",
+        "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md"
+      ],
+      "classification": "satisfied",
+      "id": "tenant_isolation_and_runtime_database_role",
+      "markers": [
+        "restricted_runtime_role_attested",
+        "forced_rls_cross_tenant_denials_observed",
+        "disposable_cleanup_verified"
+      ],
+      "order": 5
+    },
+    {
+      "basis": "original_accepted",
+      "citations": [
+        "alembic/versions/v1w2x3y4z5a6_add_a5_check_in_runtime.py",
+        "app/services/appointment_check_in_product_adapter.py",
+        "app/services/appointment_idempotency.py",
+        "tests/test_model_required_bureau_a5_1_check_in_runtime.py"
+      ],
+      "classification": "satisfied",
+      "id": "idempotency_evidence_and_replay",
+      "markers": [
+        "original_exact_accepted_classification_retained"
+      ],
+      "order": 6
+    },
+    {
+      "basis": "accepted_attempt_008_one_shot_transaction_terminal",
+      "citations": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/rehearsal-evidence.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/transaction-attestation.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/attempt-008-execution-envelope.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/closeout-report.md",
+        "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-008-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-008-sol-acceptance.md"
+      ],
+      "classification": "satisfied",
+      "id": "atomic_effect_rollback_and_unknown_commit_recovery",
+      "markers": [
+        "one_occupied_invocation_zero_retry_resume_fallback",
+        "explicit_rollback_zero_effect_receipt_audit",
+        "incomplete_response_no_success_or_retry",
+        "fresh_readback_committed_exactly_once",
+        "zero_duplicates_and_cross_practice_visibility",
+        "forced_rls_non_bypass_role",
+        "cleanup_verified_zero_owned_residue"
+      ],
+      "order": 7
+    },
+    {
+      "basis": "original_accepted",
+      "citations": [
+        "alembic/versions/m2n3o4p5q6r7_add_bernie_durable_authority.py",
+        "alembic/versions/n3o4p5q6r7s8_add_reception_one_committed_events.py",
+        "app/services/appointment_check_in_product_adapter.py",
+        "app/services/diary_committed_events.py"
+      ],
+      "classification": "satisfied",
+      "id": "append_only_audit_and_committed_event",
+      "markers": [
+        "original_exact_accepted_classification_retained"
+      ],
+      "order": 8
+    },
+    {
+      "basis": "accepted_default_off_runbook",
+      "citations": [
+        "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json",
+        "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md"
+      ],
+      "classification": "satisfied",
+      "id": "ordinary_rollout_kill_switch_and_rollback_runbook",
+      "markers": [
+        "kill_switch_defaults_engaged",
+        "rollback_order_and_triggers_frozen",
+        "prepared_not_authorized"
+      ],
+      "order": 9
+    },
+    {
+      "basis": "accepted_non_phi_manifest_and_unmounted_adapter",
+      "citations": [
+        "docs/api-spine/manifests/canonical-check-in-non-phi-observability.json",
+        "docs/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-closeout.md",
+        "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal-closeout.md"
+      ],
+      "classification": "satisfied",
+      "id": "non_phi_observability_and_alerting",
+      "markers": [
+        "five_metric_families_defined",
+        "six_non_identifying_non_actuating_alerts_defined",
+        "instrumentation_and_transport_disabled"
+      ],
+      "order": 10
+    },
+    {
+      "basis": "architecture_has_zero_operational_instances",
+      "citations": [
+        "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/provider-free-architecture-evidence.json",
+        "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md"
+      ],
+      "classification": "operational_evidence_gap",
+      "id": "environment_manifest_and_operational_secret_posture",
+      "markers": [
+        "canonical_manifest_instance_count_zero",
+        "secret_and_rotation_evidence_counts_zero",
+        "architecture_only_no_role_or_provider_use"
+      ],
+      "order": 11
+    },
+    {
+      "basis": "original_accepted",
+      "citations": [
+        "app/routers/appointments.py",
+        "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md",
+        "docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md"
+      ],
+      "classification": "satisfied",
+      "id": "client_cutover_and_waiting_area_separation",
+      "markers": [
+        "original_exact_accepted_classification_retained"
+      ],
+      "order": 12
+    }
+  ],
+  "hostile_mutations_rejected": 124,
+  "operational_evidence_gaps": [
+    "environment_manifest_and_operational_secret_posture"
+  ],
+  "planning_source": "7fb98cbe1f9a814a237172e58f911008e68aad82",
+  "prior_dimension_counts": {
+    "blocking_gap": 0,
+    "operational_evidence_gap": 2,
+    "satisfied": 10
+  },
+  "result": "raisa_provider_free_read_only_canonical_check_in_ordinary_practice_admission_readiness_post_attempt_008_convergence_review_pass",
+  "schema_version": "raisa.canonical_check_in_admission_readiness_post_attempt_008_convergence_evidence.v1",
+  "source_bindings": {
+    "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-008-closeout.md": "d72962cfadcb16922a891d2958545650ca61c3d7570a0da4a53c0b79111ebf29",
+    "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md": "1266219bb6ce833cb1a09e01f070f8989b137b9ce366fad25cb83fede177a137",
+    "orchestration/agent_inbox/codex/raisa-canonical-check-in-admission-readiness-convergence-review-sol-acceptance.md": "2908d0d4ecb08bf17f663a6317c0c713798eaf41fe99507a5d64d614f29a6eab",
+    "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-008-sol-acceptance.md": "7f4547133e908124c20923be588121c6a1b042e1e20ac059d655d82c242eae6f",
+    "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/attempt-008-execution-envelope.json": "50ce4f4ef672d9392062f40c87833c63fc9eac2f4c3979567fb81da5ac0b81ce",
+    "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/closeout-report.md": "7a7b3ca09d0abc4eefafa0677c92b315b3ebe05e112102cd96b6f427f4d18c40",
+    "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/rehearsal-evidence.json": "d15a06188b7399df13fc4871a34e273e72969de16b729bdf360436b4d794d0b8",
+    "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/transaction-attestation.json": "d7967117f59fadde447ca0e848c428ef3461ee12a4bd140f715d8b067be5890e",
+    "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/contract.json": "4172ccbf5b59827919c8a4a56b7b8e5482ee026f17f8fac21abb2edba25bc051",
+    "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json": "bd77d5940a9286437a1d528938c4b4bad981c1ed6cb6037752e7326da1a4e97c",
+    "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/report.md": "88f38bd9def2ceacdd1cd8a51077e97c495c28d4bfa5eb30b252063c0fcd51f4"
+  },
+  "transaction_criteria": {
+    "authoritative_readback_committed_exactly_once": true,
+    "explicit_rollback_zero_effect": true,
+    "finalized_cleanup_and_zero_owned_residue": true,
+    "incomplete_response_released_no_success_or_retry": true,
+    "no_retry_resume_or_fallback": true,
+    "one_shot_attempt_passed": true,
+    "restricted_non_bypass_forced_rls_posture": true,
+    "terminal_hashes_and_closed_boundaries_bound": true,
+    "zero_ordinary_or_product_records": true
+  },
+  "verdict": "not_ready_for_ordinary_practice_admission"
+}

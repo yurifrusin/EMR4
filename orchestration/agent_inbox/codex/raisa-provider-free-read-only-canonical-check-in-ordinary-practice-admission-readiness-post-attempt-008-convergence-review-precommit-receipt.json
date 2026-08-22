@@ -1,0 +1,130 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free read-only canonical check-in ordinary-practice admission-readiness post-attempt-008 convergence review",
+    "completed_stage": "Accepted raisa-provider-free-check-in-relay-free-recovery-attempt-008 at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_post_attempt_008_read_only_convergence_plan",
+    "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review",
+    "resume_after_compaction": true,
+    "source_head": "4cba1edebe9bd924ff49f757935ca898845cbf99",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "7fb98cbe1f9a814a237172e58f911008e68aad82",
+    "reason_codes": [],
+    "resolved_commit": "4cba1edebe9bd924ff49f757935ca898845cbf99",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "4cba1edebe9bd924ff49f757935ca898845cbf99"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "7fb98cbe1f9a814a237172e58f911008e68aad82",
+    "branch_origin_aligned": false,
+    "head": "7fb98cbe1f9a814a237172e58f911008e68aad82",
+    "origin_branch_commit": "d108a5c62512f4d40e4b2116d2202ee2da071a18",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 680
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "deterministic_candidate_precommit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native Harness remains paused pending its separate boot proof, this tranche forbids worker/provider use and the one-row authority classification is not separable.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exact immutable inputs, nine typed predicates, 124 hostile mutations and the provider-free descendant/API packet completely decide the result.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the reviewed matrix has one serial verdict owner.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "if deterministic evidence conflicts",
+      "pre_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "bind accepted predecessor and attempt-008 bytes",
+      "apply one exact dimension-seven transition",
+      "retain dimension eleven and not-ready verdict",
+      "Sol alone accepts and publishes"
+    ]
+  },
+  "planned_action": "commit_the_deterministically_verified_post_attempt_008_read_only_convergence_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-plan.md",
+      "docs/security/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/contract.json",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/contract.schema.json",
+      "scripts/raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py",
+      "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/evidence.json",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/report.md",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/rehearsal-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/transaction-attestation.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/attempt-008-execution-envelope.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns this serial evidence join, deterministic acceptance and task-branch Git. DeepSeek, Gemini and native-subagent lanes remain declined for the recorded reasons.",
+    "git_refs_and_worktree": "Machine readings provide the exact task, origin, protected-ref and ancestry snapshot. The tracked candidate is intentionally dirty before commit; all unrelated untracked paths including docs/branding remain preserved and staging is exact-path only.",
+    "live_handover_current_baton": "The completely re-read live Baton selects the post-attempt-008 read-only convergence review after accepted attempt 008 at Continuity 419 / Compass 401.",
+    "protected_evidence_boundaries": "Only dimension seven advances on all nine exact predicates. Dimension eleven and the not-ready verdict remain. No app import, product/API/configuration/client change, database, Docker, SQL, network, provider, worker, ordinary admission, production, deployment, Pages, protected evidence or protected-ref movement is open."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

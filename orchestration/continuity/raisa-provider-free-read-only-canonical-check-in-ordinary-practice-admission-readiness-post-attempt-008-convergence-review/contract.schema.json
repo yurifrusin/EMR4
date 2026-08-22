@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.au/schemas/canonical-check-in-admission-readiness-post-attempt-008-convergence-contract.v1.json",
+  "title": "Post-attempt-008 canonical check-in admission-readiness convergence contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "planning_source",
+    "input_hash_mode",
+    "accepted_git_objects",
+    "inputs",
+    "classifications",
+    "dimensions",
+    "prior_expected_counts",
+    "acceptance",
+    "closed_boundaries"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "raisa.canonical_check_in_admission_readiness_post_attempt_008_convergence_contract.v1"
+    },
+    "planning_source": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "input_hash_mode": {
+      "const": "strict_utf8_canonical_lf_reject_bare_cr_sha256"
+    },
+    "accepted_git_objects": {
+      "type": "object",
+      "minProperties": 4,
+      "maxProperties": 4,
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{40}$"
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "classifications": {
+      "const": ["satisfied", "blocking_gap", "operational_evidence_gap"]
+    },
+    "dimensions": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["order", "id", "expected_classification", "basis"],
+        "properties": {
+          "order": {"type": "integer", "minimum": 1, "maximum": 12},
+          "id": {"type": "string", "minLength": 1},
+          "expected_classification": {
+            "enum": ["satisfied", "blocking_gap", "operational_evidence_gap"]
+          },
+          "basis": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "prior_expected_counts": {
+      "const": {"satisfied": 10, "blocking_gap": 0, "operational_evidence_gap": 2}
+    },
+    "acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expected_counts",
+        "expected_verdict",
+        "minimum_hostile_mutations",
+        "required_open_gaps"
+      ],
+      "properties": {
+        "expected_counts": {
+          "const": {"satisfied": 11, "blocking_gap": 0, "operational_evidence_gap": 1}
+        },
+        "expected_verdict": {
+          "const": "not_ready_for_ordinary_practice_admission"
+        },
+        "minimum_hostile_mutations": {"type": "integer", "minimum": 120},
+        "required_open_gaps": {
+          "const": ["environment_manifest_and_operational_secret_posture"]
+        }
+      }
+    },
+    "closed_boundaries": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "schema_version": "raisa.canonical_check_in_admission_readiness_post_attempt_008_convergence_contract.v1",
+  "planning_source": "7fb98cbe1f9a814a237172e58f911008e68aad82",
+  "input_hash_mode": "strict_utf8_canonical_lf_reject_bare_cr_sha256",
+  "accepted_git_objects": {
+    "prior_convergence_source": "369c1284af87631a94ffff04ca530cf4c74db4b8",
+    "attempt_008_closeout_source": "4cba1edebe9bd924ff49f757935ca898845cbf99",
+    "attempt_008_occupied_source": "9f37ede79a915172e449c1f2d19bdba3eb592b44",
+    "attempt_008_terminal_commit": "0e50f7f48d9c8622341a1679db507de78b1260a5"
+  },
+  "inputs": [
+    {
+      "path": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/contract.json",
+      "sha256": "4172ccbf5b59827919c8a4a56b7b8e5482ee026f17f8fac21abb2edba25bc051"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json",
+      "sha256": "bd77d5940a9286437a1d528938c4b4bad981c1ed6cb6037752e7326da1a4e97c"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/report.md",
+      "sha256": "88f38bd9def2ceacdd1cd8a51077e97c495c28d4bfa5eb30b252063c0fcd51f4"
+    },
+    {
+      "path": "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md",
+      "sha256": "1266219bb6ce833cb1a09e01f070f8989b137b9ce366fad25cb83fede177a137"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-canonical-check-in-admission-readiness-convergence-review-sol-acceptance.md",
+      "sha256": "2908d0d4ecb08bf17f663a6317c0c713798eaf41fe99507a5d64d614f29a6eab"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/rehearsal-evidence.json",
+      "sha256": "d15a06188b7399df13fc4871a34e273e72969de16b729bdf360436b4d794d0b8"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/transaction-attestation.json",
+      "sha256": "d7967117f59fadde447ca0e848c428ef3461ee12a4bd140f715d8b067be5890e"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/attempt-008-execution-envelope.json",
+      "sha256": "50ce4f4ef672d9392062f40c87833c63fc9eac2f4c3979567fb81da5ac0b81ce"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008/closeout-report.md",
+      "sha256": "7a7b3ca09d0abc4eefafa0677c92b315b3ebe05e112102cd96b6f427f4d18c40"
+    },
+    {
+      "path": "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-008-closeout.md",
+      "sha256": "d72962cfadcb16922a891d2958545650ca61c3d7570a0da4a53c0b79111ebf29"
+    },
+    {
+      "path": "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-008-sol-acceptance.md",
+      "sha256": "7f4547133e908124c20923be588121c6a1b042e1e20ac059d655d82c242eae6f"
+    }
+  ],
+  "classifications": [
+    "satisfied",
+    "blocking_gap",
+    "operational_evidence_gap"
+  ],
+  "dimensions": [
+    {"order": 1, "id": "current_default_off_and_empty_ordinary_posture", "expected_classification": "satisfied", "basis": "original_accepted"},
+    {"order": 2, "id": "ordinary_practice_admission_control", "expected_classification": "satisfied", "basis": "accepted_admission_kernel"},
+    {"order": 3, "id": "api_spine_contract_and_route_identity", "expected_classification": "satisfied", "basis": "original_accepted"},
+    {"order": 4, "id": "authentication_and_dual_receptionist_authorization", "expected_classification": "satisfied", "basis": "original_accepted"},
+    {"order": 5, "id": "tenant_isolation_and_runtime_database_role", "expected_classification": "satisfied", "basis": "accepted_disposable_postgresql_attestation"},
+    {"order": 6, "id": "idempotency_evidence_and_replay", "expected_classification": "satisfied", "basis": "original_accepted"},
+    {"order": 7, "id": "atomic_effect_rollback_and_unknown_commit_recovery", "expected_classification": "satisfied", "basis": "accepted_attempt_008_one_shot_transaction_terminal"},
+    {"order": 8, "id": "append_only_audit_and_committed_event", "expected_classification": "satisfied", "basis": "original_accepted"},
+    {"order": 9, "id": "ordinary_rollout_kill_switch_and_rollback_runbook", "expected_classification": "satisfied", "basis": "accepted_default_off_runbook"},
+    {"order": 10, "id": "non_phi_observability_and_alerting", "expected_classification": "satisfied", "basis": "accepted_non_phi_manifest_and_unmounted_adapter"},
+    {"order": 11, "id": "environment_manifest_and_operational_secret_posture", "expected_classification": "operational_evidence_gap", "basis": "architecture_has_zero_operational_instances"},
+    {"order": 12, "id": "client_cutover_and_waiting_area_separation", "expected_classification": "satisfied", "basis": "original_accepted"}
+  ],
+  "prior_expected_counts": {
+    "satisfied": 10,
+    "blocking_gap": 0,
+    "operational_evidence_gap": 2
+  },
+  "acceptance": {
+    "expected_counts": {
+      "satisfied": 11,
+      "blocking_gap": 0,
+      "operational_evidence_gap": 1
+    },
+    "expected_verdict": "not_ready_for_ordinary_practice_admission",
+    "minimum_hostile_mutations": 120,
+    "required_open_gaps": [
+      "environment_manifest_and_operational_secret_posture"
+    ]
+  },
+  "closed_boundaries": [
+    "no_app_import_or_product_runtime",
+    "no_route_database_docker_sql_browser_provider_model_harness_or_network",
+    "no_ordinary_practice_enablement_or_admission_release",
+    "no_product_configuration_api_openapi_graphql_client_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_environment_manifest_or_secret_posture_claim",
+    "no_deployment_release_pages_or_protected_ref_movement",
+    "preserve_docs_branding_and_all_unrelated_untracked_files"
+  ]
+}
