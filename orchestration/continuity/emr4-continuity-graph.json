@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 405,
+  "graph_revision": 406,
   "harvests": [],
   "nodes": [
     {
@@ -31869,9 +31869,120 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal",
+      "title": "Default-off canonical check-in rollout runbook manifest convergence",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority and the accepted orientation admit one exact default-off declarative API-Spine manifest.",
+          "The manifest is not a command, activation record, executable runtime policy, rollback execution or unknown-commit proof.",
+          "No product, configuration, route, OpenAPI, GraphQL, client, data, provider, database, runtime, deployment, Pages or protected ref changed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-byte-exact-default-off-runbook-manifest",
+          "source": "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json",
+          "status": "accepted",
+          "summary": "Accept one 2,331-byte manifest whose SHA-256 and semantic object exactly equal the pre-existing closed-form validator candidate."
+        },
+        {
+          "id": "preserve-declarative-only-api-spine-boundary",
+          "source": "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept only artifact convergence; REST/OpenAPI command enforcement remains unchanged and GraphQL/events remain non-mutating and non-authoritative."
+        },
+        {
+          "id": "preserve-default-denial-and-unknown-commit-closure",
+          "source": "orchestration/agent_inbox/codex/raisa-canonical-check-in-rollout-runbook-convergence-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Keep activation false, zero active ordinary records, the kill switch engaged and unknown-commit success/blind retry denied pending source-truth readback."
+        },
+        {
+          "id": "select-exact-non-phi-observability-manifest-successor",
+          "source": "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Select the graph-new absent manifest for the already-accepted five metric families and six non-actuating critical alerts."
+        },
+        {
+          "id": "decline-external-worker-and-model-review",
+          "source": "orchestration/continuity/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Decline DeepSeek, Gemini and native subagents because exact byte equality and deterministic validation fully decide the serial artifact."
+        }
+      ],
+      "claim_scope": [
+        "One canonical API-Spine runbook manifest is present at the exact frozen path.",
+        "The manifest is exactly 2,331 bytes with SHA-256 dbd765ef3afe2ffe283a07befff44f745b21a8ec474c58d5a6d944fe3a9c8448.",
+        "The existing closed-form validator accepts the exact bytes without normalization.",
+        "Ordinary practice and activation remain false, active ordinary records remain zero and the kill switch remains engaged.",
+        "Unknown commit denies success and blind retry and still requires source-truth readback.",
+        "No worker, provider, database, Docker, product-runtime or protected activity occurred."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--canonical-check-in-rollout-runbook-convergence.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-canonical-check-in-rollout-runbook-convergence-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-candidate-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_rollout_kill_switch_rollback_runbook_convergence_rehearsal.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_api_spine_appointment_openapi_drift_guard.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_compass.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "artifacts": [
+          "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json",
+          "orchestration_harness/check_in_rollout_runbook.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The accepted five-metric/six-alert non-PHI observability contract still lacks its canonical API-Spine manifest until the selected successor passes.",
+        "No operational instrumentation, telemetry transport, alert transport or automatic control action is mounted.",
+        "Environment architecture still has zero live manifests, secret references and operational secret-custody evidence.",
+        "Atomic rollback and unknown-commit authoritative readback remain unproved after the consumed failed database sequence.",
+        "Admission-control mounting, ordinary activation and atomic two-client cutover remain closed.",
+        "The native Harness remains unavailable for EMR4 worker allocation and Claude is not a silent fallback.",
+        "All product/patient/clinical data, providers, production, deployment, release, Pages and protected-ref gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T23:19:52.9249303+10:00",
+      "updated_at": "2026-08-22T23:19:52.9249303+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "149e377344fab671927682e428af7825e9a0e143",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T22:54:55.0717769+10:00"
+  "updated_at": "2026-08-22T23:19:52.9249303+10:00"
 }

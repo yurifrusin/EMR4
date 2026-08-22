@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Complete one exact absent runbook manifest before attempting wider operational or activation work.
+> Complete the second exact declarative control artifact before considering wider runtime or activation work.
 
 ## North star
 
@@ -580,22 +580,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The corrected graph reached one provider request with precise typed attribution and cleanup but produced no usable edit. Lineage parent: `deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof`.
 282. **Exit the closed native-Harness recovery loop and restore graph-grounded forward progress on default-off canonical check-in admission readiness — Post-check-in admission-control programme orientation**
    A deterministic matrix distinguishes accepted, contract-only, blocked operational and later gates and identifies one genuinely absent binary-completion artifact. Lineage parent: `raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal`.
+283. **Turn accepted default-off check-in control architecture into small canonical API-Spine artifacts before any wider operational or activation gate — Default-off canonical check-in rollout runbook manifest convergence**
+   The rollout, kill-switch and rollback procedure now has one byte-exact declarative home without opening runtime authority. Lineage parent: `raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation`.
 
 ## Current position
 
-**Materialize the already-frozen default-off rollout, kill-switch and rollback procedure as one canonical API-Spine manifest — Post-check-in admission-control programme orientation**
+**Materialize the already-accepted five metric families and six non-actuating alerts as one canonical default-off API-Spine manifest — Default-off canonical check-in rollout runbook manifest convergence**
 
-**Why this proof came next:** The manifest's exact closed form and validator exist, its canonical target is absent, and this can close one original readiness artifact gap without re-entering failed database or Harness recovery.
+**Why this proof came next:** The runbook artifact now passes, the observability sub-contract is exact and accepted, and its canonical manifest target and successor graph node are absent.
 
-One exact declarative runbook becomes a machine-checked API-Spine artifact while ordinary check-in remains disabled.
+One exact non-PHI observability manifest becomes machine-checked without instrumentation, transport or control action.
 
 ### What this unlocks
 
-- A canonical default-off rollout and disable procedure for later admission-control and observability work.
+- A canonical low-cardinality observability vocabulary for later separately authorised instrumentation work.
 
 ### What it does not solve
 
-- No ordinary activation, unknown-commit proof, live secret custody, mounted monitoring, client cutover, product runtime or production readiness is opened.
+- No metrics emission, alert transport, automatic rollback, ordinary activation, live secret custody, unknown-commit proof, client cutover or production readiness is opened.
 
 ## Continuity and authority
 
@@ -1108,6 +1110,7 @@ Prerequisites:
 - `docs/api-spine/external-read-model-current-surface-status.json`
 - `docs/api-spine/external-read-model-current-surface-status.schema.json`
 - `docs/api-spine/manifests/agent-capability-charters.yaml`
+- `docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json`
 - `docs/api-spine/openapi/application-auth-synthetic-transport.yaml`
 - `docs/api-spine/openapi/application-identity-federation-session-bridge.yaml`
 - `docs/api-spine/openapi/appointment-commands.yaml`
@@ -1499,6 +1502,7 @@ Prerequisites:
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-closeout.md`
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-plan.md`
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review.md`
+- `docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md`
 - `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md`
 - `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md`
 - `docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md`
@@ -1598,7 +1602,6 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-closeout.md`
 - `docs/raisa-provider-free-read-only-post-cancellation-programme-orientation-plan.md`
 - `docs/raisa-provider-free-read-only-post-cancellation-programme-orientation.md`
-- `docs/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation-closeout.md`
 - `docs/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation.md`
 - `docs/raisa-provider-free-read-only-status-confirm-physical-representability-review-closeout.md`
 - `docs/raisa-provider-free-read-only-status-confirm-physical-representability-review-plan.md`
@@ -3509,7 +3512,6 @@ Prerequisites:
 - `orchestration/prototypes/reception-one-yuri-internal-walkthrough/completed-review.json`
 - `orchestration_harness/active_operation.py`
 - `orchestration_harness/check_in_admission_control.py`
-- `orchestration_harness/check_in_rollout_runbook.py`
 - `orchestration_harness/continuity_and_refinement.py`
 - `orchestration_harness/git_object_resolution.py`
 - `orchestration_harness/git_refs_snapshot.py`
@@ -3806,4 +3808,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 387; continuity graph revision 405._
+_Compass map revision 388; continuity graph revision 406._

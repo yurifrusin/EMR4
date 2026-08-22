@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 387,
-  "updated_at": "2026-08-22T22:54:55.0717769+10:00",
-  "source_graph_revision": 405,
-  "orientation_statement": "Complete one exact absent runbook manifest before attempting wider operational or activation work.",
+  "map_revision": 388,
+  "updated_at": "2026-08-22T23:19:52.9249303+10:00",
+  "source_graph_revision": 406,
+  "orientation_statement": "Complete the second exact declarative control artifact before considering wider runtime or activation work.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4991,22 +4991,32 @@
         "docs/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation.md",
         "orchestration/continuity/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation/orientation-evidence.json"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal",
+      "lineage_parent": "raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation",
+      "strategic_role": "Turn accepted default-off check-in control architecture into small canonical API-Spine artifacts before any wider operational or activation gate",
+      "outcome": "The rollout, kill-switch and rollback procedure now has one byte-exact declarative home without opening runtime authority.",
+      "evidence": [
+        "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json",
+        "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation",
-    "strategic_role": "Materialize the already-frozen default-off rollout, kill-switch and rollback procedure as one canonical API-Spine manifest",
-    "why_now": "The manifest's exact closed form and validator exist, its canonical target is absent, and this can close one original readiness artifact gap without re-entering failed database or Harness recovery.",
-    "outcome": "One exact declarative runbook becomes a machine-checked API-Spine artifact while ordinary check-in remains disabled.",
+    "node_id": "raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal",
+    "strategic_role": "Materialize the already-accepted five metric families and six non-actuating alerts as one canonical default-off API-Spine manifest",
+    "why_now": "The runbook artifact now passes, the observability sub-contract is exact and accepted, and its canonical manifest target and successor graph node are absent.",
+    "outcome": "One exact non-PHI observability manifest becomes machine-checked without instrumentation, transport or control action.",
     "unlocks": [
-      "A canonical default-off rollout and disable procedure for later admission-control and observability work."
+      "A canonical low-cardinality observability vocabulary for later separately authorised instrumentation work."
     ],
     "does_not_solve": [
-      "No ordinary activation, unknown-commit proof, live secret custody, mounted monitoring, client cutover, product runtime or production readiness is opened."
+      "No metrics emission, alert transport, automatic rollback, ordinary activation, live secret custody, unknown-commit proof, client cutover or production readiness is opened."
     ],
     "evidence": [
-      "orchestration_harness/check_in_rollout_runbook.py",
-      "docs/raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation-closeout.md"
+      "orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.json",
+      "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md"
     ]
   },
   "decision_horizon": [

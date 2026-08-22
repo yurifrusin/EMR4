@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal",
-  "active_tranche": "Provider-free default-off canonical check-in rollout runbook convergence",
-  "objective": "Materialize the exact already-frozen default-off canonical check-in rollout, kill-switch and rollback closed form as one declarative API-Spine manifest and focused deterministic validation, without changing product source, enabling a practice or exercising a route, database or provider.",
+  "operation_id": "raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal",
+  "active_tranche": "Provider-free default-off canonical check-in non-PHI observability manifest convergence",
+  "objective": "Materialize the exact accepted five low-cardinality metric families and six non-actuating critical alerts as one default-off declarative API-Spine manifest with focused deterministic validation, without instrumentation, alert transport, automatic control action, product source, data, provider, database or runtime change.",
   "status": "in_progress",
-  "source_head": "1d83ec70462c6d725b8368d7b678c72c774a35ce",
-  "authority_source": "Yuri's standing uninterrupted-development authority and the accepted read-only post-check-in programme orientation select the unique graph-new absent runbook artifact.",
+  "source_head": "149e377344fab671927682e428af7825e9a0e143",
+  "authority_source": "Yuri's standing uninterrupted-development authority, the accepted check-in admission-control architecture and the accepted runbook-manifest convergence select the narrow graph-new observability artifact.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_exact_default_off_runbook_convergence_plan",
+    "completed_stage": "Accepted raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_exact_non_phi_observability_manifest_convergence_plan",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,12 +34,13 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_default_off_canonical_check_in_rollout_runbook_convergence_only",
-    "only_exact_closed_form_api_spine_manifest_and_focused_validation_may_change",
-    "manifest_is_declarative_input_and_never_command_or_activation_authority",
+    "provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_only",
+    "only_exact_accepted_five_metric_six_alert_api_spine_manifest_and_focused_validation_may_change",
+    "manifest_is_declarative_and_never_alert_transport_command_or_control_authority",
     "no_product_source_configuration_route_openapi_graphql_or_client_change",
     "no_native_deepseek_harness_worker_or_claude_fallback",
     "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_metric_or_alert_identifier_free_text_secret_or_product_data",
     "no_action_grammar_or_first_party_client_change",
     "no_generic_status_arrived_change_or_waiting_area_movement",
     "no_product_patient_appointment_clinical_historical_or_protected_data",

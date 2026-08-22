@@ -1,0 +1,235 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v1",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal",
+    "title": "Provider-free default-off canonical check-in rollout runbook convergence closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T23:19:52.9249303+10:00",
+    "node": {
+      "id": "raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal",
+      "title": "Default-off canonical check-in rollout runbook manifest convergence",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority and the accepted orientation admit one exact default-off declarative API-Spine manifest.",
+          "The manifest is not a command, activation record, executable runtime policy, rollback execution or unknown-commit proof.",
+          "No product, configuration, route, OpenAPI, GraphQL, client, data, provider, database, runtime, deployment, Pages or protected ref changed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-byte-exact-default-off-runbook-manifest",
+          "source": "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json",
+          "status": "accepted",
+          "summary": "Accept one 2,331-byte manifest whose SHA-256 and semantic object exactly equal the pre-existing closed-form validator candidate."
+        },
+        {
+          "id": "preserve-declarative-only-api-spine-boundary",
+          "source": "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept only artifact convergence; REST/OpenAPI command enforcement remains unchanged and GraphQL/events remain non-mutating and non-authoritative."
+        },
+        {
+          "id": "preserve-default-denial-and-unknown-commit-closure",
+          "source": "orchestration/agent_inbox/codex/raisa-canonical-check-in-rollout-runbook-convergence-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Keep activation false, zero active ordinary records, the kill switch engaged and unknown-commit success/blind retry denied pending source-truth readback."
+        },
+        {
+          "id": "select-exact-non-phi-observability-manifest-successor",
+          "source": "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Select the graph-new absent manifest for the already-accepted five metric families and six non-actuating critical alerts."
+        },
+        {
+          "id": "decline-external-worker-and-model-review",
+          "source": "orchestration/continuity/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Decline DeepSeek, Gemini and native subagents because exact byte equality and deterministic validation fully decide the serial artifact."
+        }
+      ],
+      "claim_scope": [
+        "One canonical API-Spine runbook manifest is present at the exact frozen path.",
+        "The manifest is exactly 2,331 bytes with SHA-256 dbd765ef3afe2ffe283a07befff44f745b21a8ec474c58d5a6d944fe3a9c8448.",
+        "The existing closed-form validator accepts the exact bytes without normalization.",
+        "Ordinary practice and activation remain false, active ordinary records remain zero and the kill switch remains engaged.",
+        "Unknown commit denies success and blind retry and still requires source-truth readback.",
+        "No worker, provider, database, Docker, product-runtime or protected activity occurred."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--canonical-check-in-rollout-runbook-convergence.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-canonical-check-in-rollout-runbook-convergence-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-candidate-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_rollout_kill_switch_rollback_runbook_convergence_rehearsal.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_api_spine_appointment_openapi_drift_guard.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_compass.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "artifacts": [
+          "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json",
+          "orchestration_harness/check_in_rollout_runbook.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The accepted five-metric/six-alert non-PHI observability contract still lacks its canonical API-Spine manifest until the selected successor passes.",
+        "No operational instrumentation, telemetry transport, alert transport or automatic control action is mounted.",
+        "Environment architecture still has zero live manifests, secret references and operational secret-custody evidence.",
+        "Atomic rollback and unknown-commit authoritative readback remain unproved after the consumed failed database sequence.",
+        "Admission-control mounting, ordinary activation and atomic two-client cutover remain closed.",
+        "The native Harness remains unavailable for EMR4 worker allocation and Claude is not a silent fallback.",
+        "All product/patient/clinical data, providers, production, deployment, release, Pages and protected-ref gates remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Turn accepted default-off check-in control architecture into small canonical API-Spine artifacts before any wider operational or activation gate",
+      "outcome": "The rollout, kill-switch and rollback procedure now has one byte-exact declarative home without opening runtime authority.",
+      "evidence": [
+        "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json",
+        "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Materialize the already-accepted five metric families and six non-actuating alerts as one canonical default-off API-Spine manifest",
+      "why_now": "The runbook artifact now passes, the observability sub-contract is exact and accepted, and its canonical manifest target and successor graph node are absent.",
+      "outcome": "One exact non-PHI observability manifest becomes machine-checked without instrumentation, transport or control action.",
+      "unlocks": [
+        "A canonical low-cardinality observability vocabulary for later separately authorised instrumentation work."
+      ],
+      "does_not_solve": [
+        "No metrics emission, alert transport, automatic rollback, ordinary activation, live secret custody, unknown-commit proof, client cutover or production readiness is opened."
+      ],
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.json",
+        "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md"
+      ],
+      "orientation_statement": "Complete the second exact declarative control artifact before considering wider runtime or activation work."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal",
+      "active_tranche": "Provider-free default-off canonical check-in non-PHI observability manifest convergence",
+      "objective": "Materialize the exact accepted five low-cardinality metric families and six non-actuating critical alerts as one default-off declarative API-Spine manifest with focused deterministic validation, without instrumentation, alert transport, automatic control action, product source, data, provider, database or runtime change.",
+      "authority_source": "Yuri's standing uninterrupted-development authority, the accepted check-in admission-control architecture and the accepted runbook-manifest convergence select the narrow graph-new observability artifact.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_exact_non_phi_observability_manifest_convergence_plan"
+    },
+    "incidents": [],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "check-in-runbook-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "check-in-runbook-closeout-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_rollout_kill_switch_rollback_runbook_convergence_rehearsal.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_api_spine_appointment_openapi_drift_guard.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_compass.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "check-in-runbook-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_rollout_kill_switch_rollback_runbook_convergence_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "check-in-runbook-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_rollout_kill_switch_rollback_runbook_convergence_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-plan.md",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-627.md",
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--native-harness-corrected-graph-useful-recovery.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_only",
+    "only_exact_accepted_five_metric_six_alert_api_spine_manifest_and_focused_validation_may_change",
+    "manifest_is_declarative_and_never_alert_transport_command_or_control_authority",
+    "no_product_source_configuration_route_openapi_graphql_or_client_change",
+    "no_native_deepseek_harness_worker_or_claude_fallback",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_metric_or_alert_identifier_free_text_secret_or_product_data",
+    "no_action_grammar_or_first_party_client_change",
+    "no_generic_status_arrived_change_or_waiting_area_movement",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_provider_database_docker_or_production_runtime",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "no_deployment_release_pages_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}
