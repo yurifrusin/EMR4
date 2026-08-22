@@ -1,0 +1,206 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_push",
+  "planned_action": "push_the_exact_committed_runbook_manifest_closeout_to_the_task_branch_then_rehydrate_the_observability_successor",
+  "source_evidence": {
+    "live_handover_current_baton": "The fully read Current Baton and live clockwork projection now accept the exact runbook-manifest convergence and latch the non-PHI observability manifest successor.",
+    "current_authority_allocation": "GPT Sol owns deterministic closeout, explicit-path publication and successor rehydration. DeepSeek, Gemini and native subagents remain declined because exact byte admission and the serial clockwork projection leave no model-owned package.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-threat-model-delta.md",
+      "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json",
+      "tests/test_raisa_provider_free_default_off_canonical_check_in_rollout_kill_switch_rollback_runbook_convergence_rehearsal.py",
+      "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md",
+      "orchestration/continuity/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal/efficacy-reading.json",
+      "orchestration/continuity/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal/closeout/clockwork-tick-evidence.json",
+      "orchestration/agent_inbox/codex/raisa-canonical-check-in-rollout-runbook-convergence-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--canonical-check-in-rollout-runbook-convergence.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Commit only the exact runbook closeout, deterministic clockwork projections, efficacy reading and paired non-PHI summary. No product/configuration/route/OpenAPI/GraphQL/client, admission, data, provider, database, runtime, deployment, Pages or protected ref may change. Preserve docs/branding and every unrelated untracked file; stage explicit paths only.",
+    "git_refs_and_worktree": "Machine snapshot verification owns the exact full HEAD, task branch, protected refs, intentional closeout changes and preserved untracked paths."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal",
+    "active_tranche": "Provider-free default-off canonical check-in non-PHI observability manifest convergence",
+    "objective": "Materialize the exact accepted five low-cardinality metric families and six non-actuating critical alerts as one default-off declarative API-Spine manifest with focused deterministic validation, without instrumentation, alert transport, automatic control action, product source, data, provider, database or runtime change.",
+    "status": "in_progress",
+    "source_head": "149e377344fab671927682e428af7825e9a0e143",
+    "authority_source": "Yuri's standing uninterrupted-development authority, the accepted check-in admission-control architecture and the accepted runbook-manifest convergence select the narrow graph-new observability artifact.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_exact_non_phi_observability_manifest_convergence_plan",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_only",
+      "only_exact_accepted_five_metric_six_alert_api_spine_manifest_and_focused_validation_may_change",
+      "manifest_is_declarative_and_never_alert_transport_command_or_control_authority",
+      "no_product_source_configuration_route_openapi_graphql_or_client_change",
+      "no_native_deepseek_harness_worker_or_claude_fallback",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_metric_or_alert_identifier_free_text_secret_or_product_data",
+      "no_action_grammar_or_first_party_client_change",
+      "no_generic_status_arrived_change_or_waiting_area_movement",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_provider_database_docker_or_production_runtime",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "no_deployment_release_pages_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal",
+    "assessed_stage": "runbook_closeout_pre_push",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Native Harness allocation is closed and the closeout is a serial deterministic publication boundary.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "Exact bytes, digest, closed-form validation and 143 passing closeout tests fully decide acceptance.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and one writer retains graph and Git custody.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "publish one clockwork generation",
+      "stage only named paths",
+      "commit and push the task branch",
+      "rehydrate the observability successor"
+    ],
+    "reassessment_triggers": [
+      "after_successor_rehydration",
+      "before_successor_candidate_commit",
+      "if_observability_contract_or_scope_changes"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "passed closeout precommit receipt, exact committed runbook closeout and pending machine-bound pre-push snapshot",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "GPT Sol owns the deterministic closeout boundary."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "deepcode_cli_observation",
+      "reachability": "unreachable",
+      "evidence": [
+        "Native Harness allocation remains closed."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Historical only and not selected."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected after deterministic acceptance."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No native subagent spawned."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

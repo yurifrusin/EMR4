@@ -1,0 +1,128 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free default-off canonical check-in non-PHI observability manifest convergence",
+    "completed_stage": "Accepted raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_exact_non_phi_observability_manifest_convergence_plan",
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "149e377344fab671927682e428af7825e9a0e143",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_push",
+  "git_object_resolution": {
+    "observed_head": "86580f509956bbd86148e4efd9e1ac459be496ad",
+    "reason_codes": [],
+    "resolved_commit": "149e377344fab671927682e428af7825e9a0e143",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "149e377344fab671927682e428af7825e9a0e143"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "86580f509956bbd86148e4efd9e1ac459be496ad",
+    "branch_origin_aligned": false,
+    "head": "86580f509956bbd86148e4efd9e1ac459be496ad",
+    "origin_branch_commit": "6c57762db71b002a5dd1d7c73a8edbc482aaa40e",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 670
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "runbook_closeout_pre_push",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Native Harness allocation is closed and the closeout is a serial deterministic publication boundary.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Exact bytes, digest, closed-form validation and 143 passing closeout tests fully decide acceptance.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and one writer retains graph and Git custody.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "after_successor_rehydration",
+      "before_successor_candidate_commit",
+      "if_observability_contract_or_scope_changes"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "publish one clockwork generation",
+      "stage only named paths",
+      "commit and push the task branch",
+      "rehydrate the observability successor"
+    ]
+  },
+  "planned_action": "push_the_exact_committed_runbook_manifest_closeout_to_the_task_branch_then_rehydrate_the_observability_successor",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-threat-model-delta.md",
+      "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json",
+      "tests/test_raisa_provider_free_default_off_canonical_check_in_rollout_kill_switch_rollback_runbook_convergence_rehearsal.py",
+      "docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md",
+      "orchestration/continuity/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal/efficacy-reading.json",
+      "orchestration/continuity/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal/closeout/clockwork-tick-evidence.json",
+      "orchestration/agent_inbox/codex/raisa-canonical-check-in-rollout-runbook-convergence-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--canonical-check-in-rollout-runbook-convergence.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns deterministic closeout, explicit-path publication and successor rehydration. DeepSeek, Gemini and native subagents remain declined because exact byte admission and the serial clockwork projection leave no model-owned package.",
+    "git_refs_and_worktree": "Machine snapshot verification owns the exact full HEAD, task branch, protected refs, intentional closeout changes and preserved untracked paths.",
+    "live_handover_current_baton": "The fully read Current Baton and live clockwork projection now accept the exact runbook-manifest convergence and latch the non-PHI observability manifest successor.",
+    "protected_evidence_boundaries": "Commit only the exact runbook closeout, deterministic clockwork projections, efficacy reading and paired non-PHI summary. No product/configuration/route/OpenAPI/GraphQL/client, admission, data, provider, database, runtime, deployment, Pages or protected ref may change. Preserve docs/branding and every unrelated untracked file; stage explicit paths only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
