@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 420,
+  "graph_revision": 421,
   "harvests": [],
   "nodes": [
     {
@@ -33613,9 +33613,127 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+      "title": "Canonical check-in environment-manifest and operational-secret-posture evidence-gap decomposition",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the dependency-satisfied read-only evidence decomposition and task-branch closeout.",
+          "The sole operational-evidence gap may be decomposed, but it may not be represented as satisfied.",
+          "DeepSeek, Gemini and native subagents remained declined under the explicit serial provider-free assessment."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-finite-environment-secret-posture-dependency-graph",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json",
+          "status": "accepted",
+          "summary": "Accept the closed acyclic 20-node, 39-edge graph separating four accepted foundations, five repository prerequisites, six external facts and five human-owned decisions."
+        },
+        {
+          "id": "retain-eleven-zero-one-and-not-ready-verdict",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md",
+          "status": "accepted",
+          "summary": "Accept gap_decomposed_not_satisfied while retaining the exact 11/0/1 matrix, not-ready verdict and no-human-attention-now reading."
+        },
+        {
+          "id": "accept-declarative-api-spine-and-no-activation-boundary",
+          "source": "docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-closeout.md",
+          "status": "accepted",
+          "summary": "Accept that declarative manifest input, typed evidence and a pure evaluator carry no command, admission or activation authority."
+        },
+        {
+          "id": "accept-measured-gap-decomposition-efficacy",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept a finite actionable decomposition, zero runtime reruns and nine contained prepublication workflow lapses without a new reusable control layer."
+        }
+      ],
+      "claim_scope": [
+        "The sole environment-manifest and operational-secret-posture gap is decomposed, not closed.",
+        "The accepted matrix remains exactly 11 satisfied, 0 blocking and 1 operational-evidence gap.",
+        "The dependency graph contains exactly 20 nodes and 39 edges: four accepted foundations, five repository prerequisites, six external operational facts and five human-owned decisions.",
+        "The next tranche owns exactly closed_manifest_normalizer, typed_operational_evidence_inputs and pure_environment_evidence_gate_evaluator.",
+        "All six external facts remain absent and all five human-owned decisions remain unselected.",
+        "No operational manifest, secret, product, provider, runtime, deployment, release, Pages or protected-ref action occurred or is authorised."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-plan.md",
+          "docs/security/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-closeout-precommit-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/pushover-notification-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/pushover-successor-redirect-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/clockwork-check-attempt-003-rejected-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
+          "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
+          "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py",
+          "tests/test_raisa_provider_free_read_only_canonical_check_in_admission_readiness_convergence_review.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.schema.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-precommit-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-closeout-precommit-runtime-state.json",
+          "docs/ariadne-agent-error-correction-register-revision-637.md",
+          "orchestration/human_inbox/yuri/2026-08-23--check-in-environment-secret-posture-gap-decomposition.md"
+        ]
+      },
+      "unresolved_gates": [
+        "All six current operational facts remain absent.",
+        "All five external decisions remain human-owned and unselected.",
+        "The default-off admission input seam remains a separate later repository prerequisite.",
+        "Dedicated check-in remains default-off without ordinary-practice admission.",
+        "No product data, provider, reusable runtime, production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T08:34:31.0895778+10:00",
+      "updated_at": "2026-08-23T08:34:31.0895778+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "5c7c204d44ab9db23786ec4996ca92d525f6771a",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T07:53:10.3671912+10:00"
+  "updated_at": "2026-08-23T08:34:31.0895778+10:00"
 }

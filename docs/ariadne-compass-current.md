@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will separate non-secret readiness engineering from human-owned secret custody and live operational authority before attempting the final check-in admission dimension.
+> EMR4 will stop treating perfect native-Harness interoperability as the admission standard and will instead use the minimum fail-closed controls needed to learn from a bounded real development assignment.
 
 ## North star
 
@@ -610,26 +610,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The sole attempt-008 invocation proves rollback-zero and unknown-response exactly-once recovery with exact isolation and cleanup. Lineage parent: `raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision`.
 297. **Convert one successful one-shot transaction terminal into an exact readiness-matrix reduction — Post-attempt-008 canonical check-in admission-readiness convergence review**
    The accepted check-in matrix now has eleven satisfied dimensions and one independent operational gap without activating ordinary practice. Lineage parent: `raisa-provider-free-check-in-relay-free-recovery-attempt-008`.
+298. **Turn the final composite check-in readiness gap into a finite dependency graph with explicit repository and real-world boundaries — Canonical check-in environment-manifest and operational-secret-posture evidence-gap decomposition**
+   Three dependency-satisfied repository mechanisms are now isolated from six absent external facts and five unselected human decisions. Lineage parent: `raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review`.
 
 ## Current position
 
-**Decompose the sole remaining operational environment and secret-posture gap without touching secrets or runtime — Post-attempt-008 canonical check-in admission-readiness convergence review**
+**Review the complete native DeepSeek Harness evidence and freeze the shortest credible route into useful EMR4 development — Canonical check-in environment-manifest and operational-secret-posture evidence-gap decomposition**
 
-**Why this proof came next:** All other frozen readiness dimensions are satisfied and the remaining gap combines several operational prerequisites that must not be conflated.
+**Why this proof came next:** Yuri explicitly redirected the successor after accepting the decomposition, and the Harness has already received more rigorous investigation than prior DeepSeek transports.
 
-A read-only decomposition will distinguish non-secret engineering prerequisites from any genuine human-owned external decision before further work.
+A pragmatic adoption plan will retain only controls needed for traceability and bounded orchestrator control, then select a first real development assignment with monitoring and correction in use.
 
 ### What this unlocks
 
-- The final readiness gap can be split into evidence-bearing prerequisites without pretending a synthetic manifest is operational posture.
-- Any dependency-satisfied provider-free work can be identified separately from secret custody or live-role actions.
-- A genuine user-attention fork can be named precisely if one exists.
+- The native Harness can be assessed against Claude Code on matched useful-work and traceability criteria.
+- Further proof can be limited to the smallest unresolved control needed before a real worker assignment.
+- A bounded EMR4 development tranche can become the monitored adoption run instead of another comprehensive synthetic rehearsal.
 
 ### What it does not solve
 
-- No operational environment manifest is created.
-- No secret value, credential, role binding or rotation action is read or changed.
-- No ordinary-practice admission, product runtime or deployment is authorised.
+- The review itself does not dispatch a provider or worker.
+- It does not require perfect interoperability or prove that any harness is failure-free.
+- It does not alter product code, protected refs, production, deployment or release authority.
 
 ## Continuity and authority
 
@@ -1545,7 +1547,6 @@ Prerequisites:
 - `docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md`
 - `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md`
 - `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md`
-- `docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md`
 - `docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md`
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-closeout.md`
 - `docs/raisa-provider-free-default-off-live-source-observation-boundary-design.md`
@@ -1633,6 +1634,7 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-closeout.md`
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-plan.md`
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md`
+- `docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-closeout.md`
 - `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md`
 - `docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md`
 - `docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md`
@@ -3075,6 +3077,10 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.example.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json`
+- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json`
+- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/pushover-successor-redirect-receipt.json`
+- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/evidence.json`
@@ -3878,4 +3884,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 402; continuity graph revision 420._
+_Compass map revision 403; continuity graph revision 421._

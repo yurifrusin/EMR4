@@ -1,25 +1,25 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 636,
+  "register_revision": 637,
   "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "5942242e23c1a3480042e2a5b9881ef72f0b8ecb59a32731b8e025605b235c7e",
-  "incident_count": 1040,
+  "canonical_register_sha256": "2e9e0ea9f0f164a8e6a0bad789a091dc6314ef0f2236f063beeff50b2910d2ec",
+  "incident_count": 1049,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 538,
+      "agent_behavior": 544,
       "harness": 72,
-      "operator": 270,
+      "operator": 273,
       "repository": 144,
       "transport": 16
     },
     "by_category": {
-      "command_scope_violation": 100,
+      "command_scope_violation": 102,
       "evidence_misreport": 75,
       "harness_failure": 72,
-      "operator_error": 270,
-      "output_contract_violation": 310,
+      "operator_error": 273,
+      "output_contract_violation": 314,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
       "repository_defect": 144,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 83,
       "integration_reviewer": 3,
-      "orchestrator": 891,
+      "orchestrator": 900,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 671,
+      "low": 680,
       "material": 135,
       "moderate": 234
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 222,
-      "canonical_unchanged": 647,
+      "accepted_candidate_changed": 227,
+      "canonical_unchanged": 651,
       "untrusted_partial_worktree": 171
     },
     "by_resource_and_role": {
@@ -205,6 +205,7 @@
       "context-fabric-durability-failure-036-diagnosis-test::verifier": 1,
       "context-fabric-outbox-rls-catalogue::implementer": 1,
       "context-proofread-observation-admission-rls-catalogue::implementer": 1,
+      "continuation-event-read-only-search::orchestrator": 1,
       "continuity-negative-result-acceptance-pointer::orchestrator": 1,
       "controlled-document-date-timestamp-pair::orchestrator": 1,
       "controller-rejected-result-exit-contract::orchestrator": 1,
@@ -284,6 +285,12 @@
       "fresh-five-source-preplanning-receipt::orchestrator": 1,
       "frozen-plan-process-and-authority-vocabulary::orchestrator": 1,
       "future-attempt-embedded-helper-identity::implementer": 1,
+      "gap-decomposition-agent-error-register-summary::orchestrator": 1,
+      "gap-decomposition-broader-test-packet::orchestrator": 1,
+      "gap-decomposition-closeout-intent::orchestrator": 2,
+      "gap-decomposition-focused-document-test::orchestrator": 1,
+      "gap-decomposition-focused-validator::orchestrator": 1,
+      "gap-decomposition-plan::orchestrator": 1,
       "gemini-36-flash-high-verifier::verifier": 1,
       "generated-diagnostic-report-timestamp::orchestrator": 1,
       "generated-entrypoint-wrapper-json-serializer::implementer": 1,
@@ -423,7 +430,7 @@
       "reconciliation-parent-schema-exception-boundary::orchestrator": 1,
       "recovery-fixture-wire-order-mock::orchestrator": 1,
       "recovery-plan-semantic-assertion::orchestrator": 1,
-      "rehydration-git-ref-summary::orchestrator": 1,
+      "rehydration-git-ref-summary::orchestrator": 2,
       "repair-closeout-intent-stage::orchestrator": 1,
       "repair-conformance-direct-cli::implementer": 1,
       "repair-dead-local-guard::orchestrator": 1,
@@ -2139,6 +2146,30 @@
       "prevention_controls": [
         "Prefer one fixed-string search per known register baseline; any required compound regular expression must be syntax-validated before repository execution.",
         "Use one fixed-string search per known vocabulary token; compound ripgrep expressions are prohibited for the remainder of this closeout."
+      ]
+    },
+    {
+      "recurrence_signature": "operator.powershell_native_command_grouping_parse",
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-1036",
+        "AER-1041"
+      ],
+      "origins": [
+        "operator"
+      ],
+      "categories": [
+        "operator_error"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "rehydration-git-ref-summary"
+      ],
+      "prevention_controls": [
+        "Ad hoc composite Git summaries have no acceptance authority; the existing preflight snapshot is canonical.",
+        "PowerShell native-command exit checks use separate sequential statements rather than expression grouping."
       ]
     },
     {

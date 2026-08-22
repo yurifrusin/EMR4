@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "5c7c204d44ab9db23786ec4996ca92d525f6771a",
+  "source_commit": "5c7c204d44ab9db23786ec4996ca92d525f6771a",
+  "generation_id": "gen-a202d684cd43d7ec6fa5fbb22c7e259b02d6f10c6d55e6f3c5cf543e17f6cab6",
+  "bundle_sha256": "a202d684cd43d7ec6fa5fbb22c7e259b02d6f10c6d55e6f3c5cf543e17f6cab6",
+  "previous_generation_id": "gen-fc4bb720a10a33dcdca8f2ef59fec9221de6abf869085c925b249fa6de557b32",
+  "previous_source_commit": "5c7c204d44ab9db23786ec4996ca92d525f6771a",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 193,
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+  "event_kind": "clean_closeout",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 636,
+  "register_revision": 637,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -40260,6 +40260,331 @@
       },
       "incident_id": "AER-1040",
       "attempt_id": "clock-28ad979175ff6f8a5fdf167e",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "rehydration-git-ref-summary",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Acceptance Git state comes from the existing machine-generated preflight snapshot.",
+      "observed_error": "The invalid PowerShell native-command grouping pattern recurred and failed during parsing before any read or change.",
+      "detection_method": "PowerShell returned a parser error before producing Git output.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-637.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.powershell_native_command_grouping_parse",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the existing preflight git_refs_snapshot as acceptance evidence and run any diagnostic commands sequentially.",
+        "prevention_control": "Ad hoc composite Git summaries have no acceptance authority; the existing preflight snapshot is canonical.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-closeout-precommit-receipt.json"
+        ]
+      },
+      "incident_id": "AER-1041",
+      "attempt_id": "clock-2fbddbc9c557e1c323d9e43b",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "gap-decomposition-focused-validator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Hostile tests expect the first exact fail-closed validator reason.",
+      "observed_error": "The first focused test expected a generic semantic error although the validator correctly returned the more specific planning-source error.",
+      "detection_method": "The focused provider-free packet failed its exact expected-error assertion.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
+        "docs/ariadne-agent-error-correction-register-revision-637.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.validator_error_precedence_expectation_overgeneralized",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the test to the validator's exact first fail-closed planning-source reason.",
+        "prevention_control": "Mutation expectations follow the validator's explicit guard precedence.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"
+        ]
+      },
+      "incident_id": "AER-1042",
+      "attempt_id": "clock-51bd65796758c4ebc447e124",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "gap-decomposition-plan",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The plan repeats the exact closed-vocabulary decomposition result token.",
+      "observed_error": "The first plan described the unchanged readiness state but omitted gap_decomposed_not_satisfied.",
+      "detection_method": "The focused packet failed the exact plan-token assertion.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-plan.md",
+        "docs/ariadne-agent-error-correction-register-revision-637.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.plan_closed_result_token_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact gap_decomposed_not_satisfied result token and rerun the packet.",
+        "prevention_control": "Plans repeat acceptance-critical closed-vocabulary result tokens verbatim.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-plan.md"
+        ]
+      },
+      "incident_id": "AER-1043",
+      "attempt_id": "clock-cd25fa17e1ac033edb85f5e4",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "gap-decomposition-focused-document-test",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Document semantic assertions normalize Markdown whitespace.",
+      "observed_error": "The second focused test treated an ordinary Markdown line wrap as semantic phrase absence.",
+      "detection_method": "The focused packet failed a literal phrase assertion even though the phrase spanned adjacent lines.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
+        "docs/ariadne-agent-error-correction-register-revision-637.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.markdown_line_wrap_literal_semantic_assertion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Normalize document whitespace before asserting the required semantic phrase.",
+        "prevention_control": "Prose assertions normalize Markdown wrapping unless literal layout is the contract.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"
+        ]
+      },
+      "incident_id": "AER-1044",
+      "attempt_id": "clock-dfb66b4e004e5fa8d56840ae",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "gap-decomposition-broader-test-packet",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every selected broader-packet test path exists before invocation.",
+      "observed_error": "The first broader packet named a nonexistent separate environment-architecture plan test.",
+      "detection_method": "The provider-free wrapper rejected the path before test collection.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-637.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.provider_free_packet_nonexistent_test_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Discover the existing architecture test path and run the corrected 183-test packet.",
+        "prevention_control": "Repository discovery verifies every selected test path before wrapper invocation.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json"
+        ]
+      },
+      "incident_id": "AER-1045",
+      "attempt_id": "clock-17db20f3adf224f07c9a72b2",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "continuation-event-read-only-search",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_ripgrep",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Windows ripgrep searches use explicit files or a valid directory scope.",
+      "observed_error": "A read-only search appended a Windows-invalid wildcard path after two valid explicit paths.",
+      "detection_method": "Ripgrep returned an invalid-file-pattern error for the wildcard path.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-637.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.windows_ripgrep_invalid_wildcard_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the wildcard with a directory-scoped ripgrep search.",
+        "prevention_control": "Use explicit paths or directory scopes for Windows ripgrep searches.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-637.md"
+        ]
+      },
+      "incident_id": "AER-1046",
+      "attempt_id": "clock-0b154132a0f42c1b9fb6259d",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "gap-decomposition-closeout-intent",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_governance_clockwork_check",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The next-operation protected-boundary array contains every exact code-owned required token.",
+      "observed_error": "The first intent omitted the exact required ordinary-practice boundary token.",
+      "detection_method": "The idempotent clockwork check rejected with tick_next_boundaries_floor before canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-637.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_next_operation_boundary_floor_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Inspect the code-owned required set, add the exact ordinary-practice boundary token, preserve the rejection and rerun the idempotent check.",
+        "prevention_control": "Every next operation contains the exact code-owned required boundary set plus tranche-specific restrictions.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1047",
+      "attempt_id": "clock-8417798513145fc72708c668",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "gap-decomposition-closeout-intent",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_governance_clockwork_check",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A clockwork floor rejection is corrected from the code-owned required set rather than inferred from its label.",
+      "observed_error": "The orchestrator misread floor as a minimum count, added a semantically useful boundary and left the exact required token absent.",
+      "detection_method": "The second idempotent check rejected with tick_next_boundaries_floor before canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-637.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_rejection_label_inferred_without_required_set_read",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Read REQUIRED_NEXT_BOUNDARIES directly, add the exact missing token and rerun the idempotent check.",
+        "prevention_control": "Inspect code-owned required sets before correcting any set-membership rejection.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1048",
+      "attempt_id": "clock-3a155434f8566bd57cb24e31",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "gap-decomposition-agent-error-register-summary",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_governance_clockwork_check",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The human register-summary revision advances once per tranche while incident_count advances per observation.",
+      "observed_error": "The register-summary file was renamed from revision 637 to 639 after two additional incidents, leaving earlier evidence paths missing.",
+      "detection_method": "The third idempotent check rejected tick_incident_register_projection because an observation referenced the missing revision-637 file.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/clockwork-check-attempt-003-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-637.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.register_revision_incremented_per_incident_not_tranche",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore revision 637, retain incident_count 1049 and rebind every observation to the one tranche summary.",
+        "prevention_control": "Register-summary revision increments once per tranche; incident_count alone increments for each new observation.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-637.md"
+        ]
+      },
+      "incident_id": "AER-1049",
+      "attempt_id": "clock-3ee33e0067834ac0378b9b3e",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

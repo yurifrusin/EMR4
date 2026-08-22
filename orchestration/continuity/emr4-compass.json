@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 402,
-  "updated_at": "2026-08-23T07:53:10.3671912+10:00",
-  "source_graph_revision": 420,
-  "orientation_statement": "EMR4 will separate non-secret readiness engineering from human-owned secret custody and live operational authority before attempting the final check-in admission dimension.",
+  "map_revision": 403,
+  "updated_at": "2026-08-23T08:34:31.0895778+10:00",
+  "source_graph_revision": 421,
+  "orientation_statement": "EMR4 will stop treating perfect native-Harness interoperability as the admission standard and will instead use the minimum fail-closed controls needed to learn from a bounded real development assignment.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5151,27 +5151,38 @@
         "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/report.md",
         "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/efficacy-reading.json"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+      "lineage_parent": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review",
+      "strategic_role": "Turn the final composite check-in readiness gap into a finite dependency graph with explicit repository and real-world boundaries",
+      "outcome": "Three dependency-satisfied repository mechanisms are now isolated from six absent external facts and five unselected human decisions.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review",
-    "strategic_role": "Decompose the sole remaining operational environment and secret-posture gap without touching secrets or runtime",
-    "why_now": "All other frozen readiness dimensions are satisfied and the remaining gap combines several operational prerequisites that must not be conflated.",
-    "outcome": "A read-only decomposition will distinguish non-secret engineering prerequisites from any genuine human-owned external decision before further work.",
+    "node_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+    "strategic_role": "Review the complete native DeepSeek Harness evidence and freeze the shortest credible route into useful EMR4 development",
+    "why_now": "Yuri explicitly redirected the successor after accepting the decomposition, and the Harness has already received more rigorous investigation than prior DeepSeek transports.",
+    "outcome": "A pragmatic adoption plan will retain only controls needed for traceability and bounded orchestrator control, then select a first real development assignment with monitoring and correction in use.",
     "unlocks": [
-      "The final readiness gap can be split into evidence-bearing prerequisites without pretending a synthetic manifest is operational posture.",
-      "Any dependency-satisfied provider-free work can be identified separately from secret custody or live-role actions.",
-      "A genuine user-attention fork can be named precisely if one exists."
+      "The native Harness can be assessed against Claude Code on matched useful-work and traceability criteria.",
+      "Further proof can be limited to the smallest unresolved control needed before a real worker assignment.",
+      "A bounded EMR4 development tranche can become the monitored adoption run instead of another comprehensive synthetic rehearsal."
     ],
     "does_not_solve": [
-      "No operational environment manifest is created.",
-      "No secret value, credential, role binding or rotation action is read or changed.",
-      "No ordinary-practice admission, product runtime or deployment is authorised."
+      "The review itself does not dispatch a provider or worker.",
+      "It does not require perfect interoperability or prove that any harness is failure-free.",
+      "It does not alter product code, protected refs, production, deployment or release authority."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/evidence.json",
-      "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/provider-free-architecture-evidence.json",
-      "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md"
+      "AGENTS.md",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/pushover-successor-redirect-receipt.json",
+      "docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-closeout.md"
     ]
   },
   "decision_horizon": [
