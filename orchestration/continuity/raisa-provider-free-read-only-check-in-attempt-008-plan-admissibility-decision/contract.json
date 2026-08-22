@@ -1,0 +1,70 @@
+{
+  "schema_version": "emr4.check-in-attempt-008-plan-admissibility-contract.v1",
+  "operation_id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+  "result": "raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision_pass",
+  "positive_verdict": "admissible_for_separate_plan_freeze",
+  "plan_source": "26a27eb95b39028995b0803bcea6aaf486e5ebbe",
+  "protected_source": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+  "accepted_git_sources": [
+    {"label": "attempt_007_plan", "source": "e3da4d993c8daec9973aed59ca4052e8a8429747"},
+    {"label": "attempt_007_terminal", "source": "6657ee5061265d732096e9987f327d82feed800c"},
+    {"label": "diagnosis_closeout", "source": "5d93380060f31bab21bddc9ffdd5580754eb4fc6"},
+    {"label": "deterministic_repair_closeout", "source": "a33a4ccc7619fcae5cdd45a48a2312ab0c0384a4"},
+    {"label": "verification_envelope_closeout", "source": "d01ef2f3afe16ccdb9a8f2077d5e76688397adb6"}
+  ],
+  "prerequisites": [
+    {"id": "P01", "stage": "accepted_evidence", "expected_state": "satisfied", "summary": "Attempt 007 is consumed once, immutable, failed closed and retried zero times."},
+    {"id": "P02", "stage": "accepted_evidence", "expected_state": "satisfied", "summary": "The exact failure and cleanup-collapse coordinates are deterministically diagnosed."},
+    {"id": "P03", "stage": "accepted_evidence", "expected_state": "satisfied", "summary": "The complete prospective-success projection passes unchanged redaction/schema admission and hostile mutations reject before occupied work."},
+    {"id": "P04", "stage": "accepted_evidence", "expected_state": "satisfied", "summary": "A base-owned typed post-finalization terminal preserves finalized cleanup and prevents late success release."},
+    {"id": "P05", "stage": "accepted_evidence", "expected_state": "satisfied", "summary": "Closed database authority rejects ordinary/serial pytest and verification phases are typed before child launch."},
+    {"id": "P06", "stage": "future_plan", "expected_state": "plan_required", "summary": "Attempt 008 receives a fresh identity, collision-free namespace and no-retry/no-resume/no-fallback rule."},
+    {"id": "P07", "stage": "future_plan", "expected_state": "plan_required", "summary": "A new wrapper and closed terminal schema bind current repaired base source and immutable attempt-007 lineage without altering either."},
+    {"id": "P08", "stage": "future_plan", "expected_state": "plan_required", "summary": "Every source digest and Git ancestry binding is regenerated mechanically at the exact clean candidate."},
+    {"id": "P09", "stage": "future_plan", "expected_state": "plan_required", "summary": "The one authorized command, invocation count one and terminal consumption semantics are frozen exactly."},
+    {"id": "P10", "stage": "future_plan", "expected_state": "plan_required", "summary": "Rollback-zero, unknown-response no-success/no-retry, authoritative exactly-once readback, isolation and cleanup acceptance remain exact."},
+    {"id": "P11", "stage": "future_plan", "expected_state": "plan_required", "summary": "Product, API, ordinary-practice, provider, data, production and protected boundaries remain closed."},
+    {"id": "P12", "stage": "preexecution", "expected_state": "preexecution_required", "summary": "Complete deterministic provider-free tests, static admission, Ruff, compilation, schema and diff gates pass on one committed candidate."},
+    {"id": "P13", "stage": "preexecution", "expected_state": "preexecution_required", "summary": "Read-only Docker inspection proves exact cached image and zero matching resources, then a fresh five-source receipt repeats lane dispositions."},
+    {"id": "P14", "stage": "preexecution", "expected_state": "preexecution_required", "summary": "A distinct clockwork checkpoint check/publish advances the latch to exactly one occupied execution only after all earlier rows pass."}
+  ],
+  "source_bindings": [
+    {"path": "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-007-plan.md", "sha256": "d0f692aa2d8afabbb29a9cac0aaceb77382dde60bcbfb4f1e3128bb3629ae18c"},
+    {"path": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/attempt-007-execution-envelope.json", "sha256": "3338c58054dea96b3845827dacfe184889ee328e5a4463966464b560d0a2c2c5"},
+    {"path": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/rehearsal-failure-evidence.json", "sha256": "86e5e1342eb54e062e35d73390ebceb141d097d03e180e4fe3c0ed64b465f422"},
+    {"path": "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-evidence.json", "sha256": "b6d473d20fa64757fc25fbd2eb4f1792d86ebc91e3f0a8bf5bb3c9bdcc62d8e4"},
+    {"path": "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-report.md", "sha256": "74739c1cddeb0345e793da6a1059d020b595f09852ed64c76db87a67ad885674"},
+    {"path": "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md", "sha256": "94451fa5f3e6a09001b9fdce21a2ded6d66a51a93e4429529c12528668531d65"},
+    {"path": "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-contract.json", "sha256": "662e055f9011aa5574127503b46dd3ca9c6c3113ce6dad3b6e3ca35728930658"},
+    {"path": "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-evidence.json", "sha256": "47f422e7b8ad072c9f4912fe6269cfc85f44eb75808419182c75e19d41157eaa"},
+    {"path": "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md", "sha256": "5efae848109d632e3a9c858269995205a9ef94e2ab26fb9de9ffa365ec5b2492"},
+    {"path": "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/contract.json", "sha256": "ee7ce96d2561c0b9c8f73e01e2ffb25d3154239bd22b0d0a19dba6d87a28119e"},
+    {"path": "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/evidence.json", "sha256": "47e6fd567e773c69fd7867e30a56f69e0d9346f1f6216fd37aebbdbaec96aa0d"},
+    {"path": "docs/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair-closeout.md", "sha256": "32a7d2059d4c8d39a5480f05f7ac00d51e65396ae9c71a7cd40b9a9bcbc7eb10"}
+  ],
+  "target_absent_paths": [
+    "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-008-plan.md",
+    "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-008"
+  ],
+  "expected_signals": {
+    "prerequisite_count": 14,
+    "satisfied_count": 5,
+    "plan_required_count": 6,
+    "preexecution_required_count": 3,
+    "blocking_count": 0,
+    "prospective_path_count": 67,
+    "hostile_projection_rejections": 66,
+    "verification_envelope_rejections": 8
+  },
+  "closed_boundaries": {
+    "attempt_008_plan_created": false,
+    "attempt_008_checkpoint_or_execution_used": false,
+    "database_conftest_engine_schema_fixture_used": false,
+    "docker_postgresql_sql_database_used": false,
+    "worker_provider_or_network_used": false,
+    "product_api_client_configuration_changed": false,
+    "ordinary_practice_or_domain_data_used": false,
+    "production_deployment_release_pages_used": false,
+    "protected_evidence_or_ref_moved": false
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/check-in-attempt-008-plan-admissibility-decision-evidence.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "result", "verdict", "source_head",
+    "source_bindings_verified", "accepted_sources_ancestor_of_candidate",
+    "prerequisites", "counts", "attempt_008", "activity", "closed_boundaries"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.check-in-attempt-008-plan-admissibility-decision-evidence.v1"},
+    "operation_id": {"const": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision"},
+    "result": {"const": "raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision_pass"},
+    "verdict": {"enum": ["admissible_for_separate_plan_freeze", "not_admissible"]},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "source_bindings_verified": {"const": true},
+    "accepted_sources_ancestor_of_candidate": {"const": true},
+    "prerequisites": {
+      "type": "array", "minItems": 14, "maxItems": 14,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "stage", "state", "summary", "basis"],
+        "properties": {
+          "id": {"pattern": "^P(0[1-9]|1[0-4])$"},
+          "stage": {"enum": ["accepted_evidence", "future_plan", "preexecution"]},
+          "state": {"enum": ["satisfied", "plan_required", "preexecution_required", "blocking"]},
+          "summary": {"type": "string", "minLength": 1},
+          "basis": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+        }
+      }
+    },
+    "counts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["prerequisite_count", "satisfied_count", "plan_required_count", "preexecution_required_count", "blocking_count"],
+      "properties": {
+        "prerequisite_count": {"const": 14},
+        "satisfied_count": {"const": 5},
+        "plan_required_count": {"const": 6},
+        "preexecution_required_count": {"const": 3},
+        "blocking_count": {"const": 0}
+      }
+    },
+    "attempt_008": {
+      "type": "object", "additionalProperties": false,
+      "required": ["plan_exists", "continuity_namespace_exists", "plan_freeze_admissible", "ready_to_execute"],
+      "properties": {
+        "plan_exists": {"const": false},
+        "continuity_namespace_exists": {"const": false},
+        "plan_freeze_admissible": {"const": true},
+        "ready_to_execute": {"const": false}
+      }
+    },
+    "activity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["database_actions", "docker_actions", "postgresql_starts", "sql_executions", "provider_calls", "worker_calls", "network_calls", "product_actions"],
+      "properties": {
+        "database_actions": {"const": 0}, "docker_actions": {"const": 0},
+        "postgresql_starts": {"const": 0}, "sql_executions": {"const": 0},
+        "provider_calls": {"const": 0}, "worker_calls": {"const": 0},
+        "network_calls": {"const": 0}, "product_actions": {"const": 0}
+      }
+    },
+    "closed_boundaries": {
+      "type": "object", "additionalProperties": {"const": false},
+      "minProperties": 9, "maxProperties": 9
+    }
+  }
+}
