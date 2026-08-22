@@ -1,0 +1,125 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in prospective-success redaction and typed cleanup-projection conformance repair",
+    "completed_stage": "Accepted raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_prospective_success_redaction_and_typed_cleanup_projection_repair_plan",
+    "operation_id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+    "resume_after_compaction": true,
+    "source_head": "ca7970b3520b2c38e9abd6fee3462ebb743792e0",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "5d93380060f31bab21bddc9ffdd5580754eb4fc6",
+    "reason_codes": [],
+    "resolved_commit": "ca7970b3520b2c38e9abd6fee3462ebb743792e0",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "ca7970b3520b2c38e9abd6fee3462ebb743792e0"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "5d93380060f31bab21bddc9ffdd5580754eb4fc6",
+    "branch_origin_aligned": true,
+    "head": "5d93380060f31bab21bddc9ffdd5580754eb4fc6",
+    "origin_branch_commit": "5d93380060f31bab21bddc9ffdd5580754eb4fc6",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 675
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The active latch explicitly forbids a native DeepSeek Harness worker and provider call; this is a deterministic repair of already-localized coordinates with no separable authorised worker package.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "No provider call is warranted before a material exact candidate exists; deterministic source, AST, schema and process-fake gates own plan freeze and construction.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits proactive native delegation, and the prospective projection and typed terminal bridge must be designed and verified as one tightly coupled serial change.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "plan_frozen",
+      "candidate_ready",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol freezes the exact two-gear contract before implementation",
+      "the projection gate and typed terminal bridge share one evidence shape and must remain consistent",
+      "no occupied execution or provider dispatch is permitted",
+      "candidate review follows deterministic admission only if material residual uncertainty warrants it"
+    ]
+  },
+  "planned_action": "freeze_the_narrowest_provider_free_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-plan.md",
+      "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-attempt-007-redaction-cleanup-diagnosis-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-evidence.json",
+      "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-report.md",
+      "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/efficacy-reading.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial plan freeze, deterministic implementation, verification, acceptance, continuity and Git closeout. DeepSeek is declined because the latch forbids a native-Harness worker or provider call. Gemini is declined during plan freeze and deterministic construction, with reassessment only if a material exact candidate benefits from an independent static veto. Native subagents are declined because current developer policy prohibits proactive delegation and the two repair gears are tightly coupled.",
+    "git_refs_and_worktree": "The task HEAD, local task branch, origin task branch, all four protected refs, tracked-worktree state and preserved docs/branding presence were verified immediately before this receipt. Exact object identities and worktree counts are supplied only by the receipt builder's machine snapshot.",
+    "live_handover_current_baton": "AGENTS.md was read completely after the accepted attempt-007 diagnosis closeout. The Current Baton preserves the accepted check-in adapter and the exact attempt-007 diagnosis lineage while the active latch requires the provider-free prospective-success redaction and typed cleanup-projection repair.",
+    "protected_evidence_boundaries": "This tranche may change only the provider-free check-in rehearsal contract and deterministic harness/test/evidence surfaces needed to validate a complete prospective success projection before occupied work and carry base-finalized cleanup through a typed post-finalization terminal bridge. The redactor predicate and default denial remain unchanged; attempt 007 is immutable. No Docker object, PostgreSQL start, SQL, database, attempt 008, DeepSeek/provider call, product/API/client/grammar/waiting-area/data/runtime/deployment/release/Pages/protected-ref movement is authorised. docs/branding and every unrelated untracked file remain excluded; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
