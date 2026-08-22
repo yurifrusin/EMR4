@@ -1,0 +1,55 @@
+{
+  "schema_version": "ariadne.native_harness_factory_import_path_recovery_efficacy.v1",
+  "operation_id": "deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery",
+  "timestamp": "2026-08-22T19:27:57.8855998+10:00",
+  "result": "exact_factory_subcoordinate_reproduced",
+  "objective_reached": true,
+  "useful_diagnostic_output": true,
+  "observed": {
+    "node_process_count": 1,
+    "native_harness_process_count": 0,
+    "factory_boundary_reached": true,
+    "setup_invocation_count": 1,
+    "structured_coordinate": "EFFECTIVE_TOOL_COMPOSITION_INPUT_INVALID",
+    "stdout_bytes": 641,
+    "stderr_bytes": 0,
+    "raw_stream_retained": false,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "retry_count": 0,
+    "resume_count": 0,
+    "fallback_count": 0,
+    "disposable_root_absent": true
+  },
+  "correction_cost": {
+    "preprocess_focused_test_revisions": 1,
+    "process_attempts": 1,
+    "expected_postprocess_git_binding_rejections_before_terminal_commit": 4,
+    "additional_process_attempts": 0
+  },
+  "selected_correction": {
+    "decision": "materialize_accepted_root_service_forwarding_graph",
+    "runner_change_required": false,
+    "new_architecture_required": false,
+    "existing_accepted_guard_graph_reused": true
+  },
+  "parallelism": {
+    "deepseek": {
+      "disposition": "declined",
+      "result": "not_dispatched",
+      "rationale": "Worker, model and provider requests were forbidden."
+    },
+    "gemini": {
+      "disposition": "declined_provider_free_boundary",
+      "result": "not_dispatched",
+      "rationale": "The pass selected an already accepted immutable correction graph; no new semantic candidate required provider review."
+    },
+    "native_subagents": {
+      "disposition": "declined",
+      "result": "not_dispatched",
+      "rationale": "Developer policy prohibited proactive delegation and the process attribution chain was serial."
+    },
+    "serial_owner": "gpt-sol"
+  },
+  "conclusion": "One exact mechanical successor converted the prior traceable negative into the predicted dynamic factory coordinate. The workflow advanced without a retry, model/provider cost or new diagnostic taxonomy."
+}

@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 622,
+  "register_revision": 623,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "ff2c8f6b56b17889972b6bd54121913c27a9a9ee61bbec53197ea49a32723c0c",
-  "incident_count": 978,
+  "canonical_register_sha256": "c78fb5ecd725f1bcf29e5c6c4ef537032dd57c82af10763b33f1fadce460cace",
+  "incident_count": 979,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 520,
       "harness": 69,
-      "operator": 233,
+      "operator": 234,
       "repository": 140,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 99,
       "evidence_misreport": 74,
       "harness_failure": 69,
-      "operator_error": 233,
+      "operator_error": 234,
       "output_contract_violation": 294,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
@@ -26,18 +26,18 @@
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 70,
+      "implementer": 71,
       "integration_reviewer": 3,
       "orchestrator": 842,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 618,
+      "low": 619,
       "material": 133,
       "moderate": 227
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 204,
+      "accepted_candidate_changed": 205,
       "canonical_unchanged": 605,
       "untrusted_partial_worktree": 169
     },
@@ -249,6 +249,7 @@
       "emr4-repository::orchestrator": 3,
       "explicit-path-precommit-diff-gate::orchestrator": 1,
       "factory-fixture-package-scope-projection::implementer": 1,
+      "factory-import-recovery-focused-tests::implementer": 1,
       "frozen-plan-process-and-authority-vocabulary::orchestrator": 1,
       "future-attempt-embedded-helper-identity::implementer": 1,
       "gemini-36-flash-high-verifier::verifier": 1,

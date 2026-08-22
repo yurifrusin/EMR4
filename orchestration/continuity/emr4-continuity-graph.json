@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 399,
+  "graph_revision": 400,
   "harvests": [],
   "nodes": [
     {
@@ -31224,9 +31224,120 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery",
+      "title": "Integrated-runner factory fixture import-path recovery",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted one separately identified provider-free Node fixture after exact source-equivalence and import-target gates passed.",
+          "The attempt is consumed; no retry, native Harness, worker, model, provider, product, data, deployment, Pages or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-path-corrected-source-equivalence",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery/recovery-evidence.json",
+          "status": "accepted",
+          "summary": "Accept exact fixture source equivalence after normalizing only parents[1] to parent and both scoped import targets before launch."
+        },
+        {
+          "id": "accept-dynamic-factory-coordinate",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery/recovery-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one installed AgentRegistry transit and setup invocation reproducing EFFECTIVE_TOOL_COMPOSITION_INPUT_INVALID before preset mounting."
+        },
+        {
+          "id": "select-existing-accepted-guard-graph",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Keep the runner unchanged and select only the already accepted four-argument guard, bridge and sanitizer graph for materialization recovery."
+        },
+        {
+          "id": "reject-broader-harness-claim",
+          "source": "docs/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery-closeout.md",
+          "status": "rejected",
+          "summary": "The pass proves no native Harness boot, DeepSeek turn, provider reachability, useful worker output or general Harness reliability."
+        }
+      ],
+      "claim_scope": [
+        "The recovery fixture differs from its consumed predecessor only in the exact package-root parent projection.",
+        "Both exact scoped import targets were existing regular files before process admission.",
+        "Exactly one separately identified provider-free Node process exited 0.",
+        "Installed AgentRegistry.create and the integrated runner setup callback were each entered once.",
+        "The exact occupied old guard released EFFECTIVE_TOOL_COMPOSITION_INPUT_INVALID before preset mounting.",
+        "The runner terminal was failed at factory with zero request, tool-result and turn activity.",
+        "Raw streams were not retained; retry, resume and fallback counts are zero.",
+        "Native Harness, broker, worker, model and provider request counts are zero.",
+        "The process and disposable root are absent after cleanup.",
+        "Only the already accepted guard, bridge and sanitizer graph is selected for the next correction."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-623.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--native-harness-factory-import-path-recovery.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_integrated_runner_factory_fixture_import_path_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_integrated_runner_factory_subcoordinate_diagnostic_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_integrated_runner_factory_fixture_import_path_recovery.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery/fixture-attempt-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery/fixture-process-envelope.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery/recovery-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery/recovery-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery/efficacy-reading.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The occupied integrated-runner materializer still supplies the old three-parameter guard.",
+        "The already accepted four-argument guard, bridge and sanitizer graph has not yet been installed in the occupied materializer.",
+        "The corrected installed runner has not yet proved passage beyond the old factory coordinate.",
+        "No native Harness boot, DeepSeek worker turn, model/provider request or useful-worker evidence is accepted.",
+        "The consumed fixture cannot be retried or resumed.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T19:27:57.8855998+10:00",
+      "updated_at": "2026-08-22T19:27:57.8855998+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "3434f3e8d7430acc296bea535864ea7bd02d311c",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T19:05:50.6495370+10:00"
+  "updated_at": "2026-08-22T19:27:57.8855998+10:00"
 }

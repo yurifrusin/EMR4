@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 622,
+  "register_revision": 623,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -37980,6 +37980,44 @@
       },
       "incident_id": "AER-0978",
       "attempt_id": "clock-43f5afa706bd170c400adf17",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-factory-import-path-recovery",
+      "role": "implementer",
+      "resource_id": "factory-import-recovery-focused-tests",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Focused pre-process tests bind to source-owned URIs and semantic call sites without intercepting shared Git subprocess probes or incidental report prose.",
+      "observed_error": "The first focused collection used literal URI and prose assumptions, monkeypatched the shared subprocess module while historical Git probes were active, and retained one unused import; four tests and Ruff rejected before process admission.",
+      "detection_method": "The first focused pytest and Ruff invocation failed before any Node attempt identity, Harness, worker, model or provider boundary was entered.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_integrated_runner_factory_fixture_import_path_recovery.py",
+        "scripts/deepseek_native_harness_provider_free_integrated_runner_factory_fixture_import_path_recovery.py",
+        "docs/ariadne-agent-error-correction-register-revision-623.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.focused_test_bound_to_incidental_form_and_shared_subprocess_object",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind URI assertions to the resolver-owned values, inspect the exact Node call site without monkeypatching shared subprocess state, assert semantic boundaries and remove the unused import.",
+        "prevention_control": "Provider-free process-absence tests inspect or intercept the exact executable boundary and use source-owned resolved values rather than platform-dependent URI or prose literals.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_integrated_runner_factory_fixture_import_path_recovery.py",
+          "docs/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery-closeout.md"
+        ]
+      },
+      "incident_id": "AER-0979",
+      "attempt_id": "clock-0c490c418d4d82d6f2a9b259",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

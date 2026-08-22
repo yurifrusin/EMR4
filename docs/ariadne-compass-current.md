@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Change only the package-scope parent projection, prove both absolute import targets before launch, then consume one separately identified provider-free Node fixture.
+> Reuse the accepted correction bytes and import graph exactly; do not redesign the runner, guard contract or fixture taxonomy.
 
 ## North star
 
@@ -568,23 +568,25 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The one-shot attempt crossed HMR readiness but failed at the integrated runner factory stage before any provider request or candidate. Lineage parent: `deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal`.
 276. **Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development — Integrated-runner factory-subcoordinate diagnostic recovery**
    The operation localized the likely occupied runner defect and its own pre-factory fixture path defect without external activity, but did not dynamically prove the factory subcoordinate. Lineage parent: `raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal`.
+277. **Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development — Integrated-runner factory fixture import-path recovery**
+   One exact provider-free successor reproduced the predicted installed factory coordinate and converted the prior negative diagnosis into a selected existing correction without model/provider activity. Lineage parent: `deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery`.
 
 ## Current position
 
-**Remove the single demonstrated fixture import projection defect before making one distinct factory-boundary attempt — Integrated-runner factory-subcoordinate diagnostic recovery**
+**Materialize the already accepted four-argument guard graph beside the unchanged integrated runner — Integrated-runner factory fixture import-path recovery**
 
-**Why this proof came next:** Both exact corrected import targets already exist, and a deterministic prelaunch existence gate can prevent recurrence without changing the accepted runner or guard.
+**Why this proof came next:** The installed AgentRegistry fixture dynamically proved the old guard rejects the runner's four-argument call at the exact predicted coordinate.
 
-One path-corrected provider-free fixture will either reproduce the exact structured guard coordinate through installed AgentRegistry.create or stop without retry.
+A provider-free corrected materializer will prove complete import closure and passage beyond the old factory coordinate without a DeepSeek turn or model/provider request.
 
 ### What this unlocks
 
-- Dynamic confirmation or falsification of the predicted occupied runner/guard mismatch.
-- A bounded decision on whether the accepted four-argument guard graph should replace the occupied old guard.
+- Removal of the demonstrated occupied runner/guard interface mismatch.
+- A bounded decision on the next provider-free native-Harness boot proof before any DeepSeek development turn.
 
 ### What it does not solve
 
-- No native Harness boot, DeepSeek worker turn, model/provider request or useful-worker quality evidence.
+- No DeepSeek worker turn, model/provider request or useful-worker quality evidence.
 - No product/data action, ordinary-practice enablement, production, release, Pages or protected integration.
 
 ## Continuity and authority
@@ -1335,6 +1337,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-closeout.md`
+- `docs/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md`
@@ -2755,6 +2758,7 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/import-closure-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/provider-free-inert-task-sentinel-readiness-native-boot-terminal.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery/recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery/fixture-failure-diagnosis.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/agent-factory-diagnostic-evidence.json`
@@ -3782,4 +3786,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 381; continuity graph revision 399._
+_Compass map revision 382; continuity graph revision 400._
