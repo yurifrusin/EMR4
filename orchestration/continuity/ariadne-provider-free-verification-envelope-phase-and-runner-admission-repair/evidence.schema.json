@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-provider-free-verification-envelope-evidence.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "source_head",
+    "recorded_at",
+    "result",
+    "database_authority",
+    "verification_phases",
+    "surface_results",
+    "phase_partition",
+    "hostile_rejection_count",
+    "subprocess_launch_count",
+    "closed_boundaries"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.provider_free_verification_envelope_evidence.v1"},
+    "operation_id": {"const": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair"},
+    "source_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "recorded_at": {"type": "string", "minLength": 1},
+    "result": {"const": "ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair_pass"},
+    "database_authority": {"const": "closed"},
+    "verification_phases": {"const": ["prepublication", "postpublication"]},
+    "surface_results": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["surface", "legacy_v1_admitted", "typed_v2_admitted", "rejected_coordinates"],
+        "properties": {
+          "surface": {"enum": ["verifier_command_manifest", "governance_command_manifest"]},
+          "legacy_v1_admitted": {"const": true},
+          "typed_v2_admitted": {"const": true},
+          "rejected_coordinates": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "uniqueItems": true,
+            "items": {"enum": ["ordinary_pytest", "serial_pytest", "unknown_phase", "reversed_phase_order"]}
+          }
+        }
+      }
+    },
+    "phase_partition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prepublication_command_ids", "postpublication_command_ids", "cross_phase_execution_count"],
+      "properties": {
+        "prepublication_command_ids": {"const": ["PRE"]},
+        "postpublication_command_ids": {"const": ["POST"]},
+        "cross_phase_execution_count": {"const": 0}
+      }
+    },
+    "hostile_rejection_count": {"const": 8},
+    "subprocess_launch_count": {"const": 0},
+    "closed_boundaries": {
+      "type": "object",
+      "minProperties": 7,
+      "maxProperties": 7,
+      "additionalProperties": {"const": false}
+    }
+  }
+}

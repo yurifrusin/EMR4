@@ -1,0 +1,40 @@
+{
+  "schema_version": "ariadne.provider_free_verification_envelope_contract.v1",
+  "operation_id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+  "recorded_at": "2026-08-23T05:41:13.7188062+10:00",
+  "database_authorities": [
+    "closed",
+    "open"
+  ],
+  "verification_phases": [
+    "prepublication",
+    "postpublication"
+  ],
+  "verifier_manifest_versions": [
+    "ariadne.verifier-command-manifest.v1",
+    "ariadne.verifier-command-manifest.v2"
+  ],
+  "governance_manifest_versions": [
+    "ariadne.governance_command_manifest.v1",
+    "ariadne.governance_command_manifest.v2"
+  ],
+  "database_closed_forbidden_runners": [
+    "ordinary_pytest",
+    "serial_pytest"
+  ],
+  "database_closed_pytest_runner": "scripts.ariadne_provider_free_pytest",
+  "phase_order": [
+    "prepublication",
+    "postpublication"
+  ],
+  "evidence_posture": "provider_free_source_schema_and_pure_function_only",
+  "closed_boundaries": {
+    "database_conftest_engine_schema_fixture_executed": false,
+    "docker_postgresql_sql_database_used": false,
+    "attempt_008_action_used": false,
+    "worker_or_provider_used": false,
+    "product_or_application_path_used": false,
+    "production_deployment_release_pages_used": false,
+    "protected_evidence_or_ref_movement_used": false
+  }
+}

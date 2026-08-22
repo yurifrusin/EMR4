@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/ariadne-provider-free-verification-envelope-contract.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "recorded_at",
+    "database_authorities",
+    "verification_phases",
+    "verifier_manifest_versions",
+    "governance_manifest_versions",
+    "database_closed_forbidden_runners",
+    "database_closed_pytest_runner",
+    "phase_order",
+    "evidence_posture",
+    "closed_boundaries"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.provider_free_verification_envelope_contract.v1"},
+    "operation_id": {"const": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair"},
+    "recorded_at": {"type": "string", "minLength": 1},
+    "database_authorities": {"const": ["closed", "open"]},
+    "verification_phases": {"const": ["prepublication", "postpublication"]},
+    "verifier_manifest_versions": {"const": ["ariadne.verifier-command-manifest.v1", "ariadne.verifier-command-manifest.v2"]},
+    "governance_manifest_versions": {"const": ["ariadne.governance_command_manifest.v1", "ariadne.governance_command_manifest.v2"]},
+    "database_closed_forbidden_runners": {"const": ["ordinary_pytest", "serial_pytest"]},
+    "database_closed_pytest_runner": {"const": "scripts.ariadne_provider_free_pytest"},
+    "phase_order": {"const": ["prepublication", "postpublication"]},
+    "evidence_posture": {"const": "provider_free_source_schema_and_pure_function_only"},
+    "closed_boundaries": {
+      "type": "object",
+      "minProperties": 7,
+      "maxProperties": 7,
+      "additionalProperties": {"const": false}
+    }
+  }
+}
