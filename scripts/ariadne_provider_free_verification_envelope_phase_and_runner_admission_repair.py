@@ -160,6 +160,7 @@ def _exercise_surface(
     typed: dict[str, Any],
     command_key: str,
     argv_key: str,
+    module_index: int,
     surface: str,
     ordinary_reason: str,
     serial_reason: str,
@@ -169,10 +170,10 @@ def _exercise_surface(
     validator(legacy)
     validator(typed)
     ordinary = copy.deepcopy(typed)
-    ordinary["commands"][0][argv_key][1] = "pytest"
+    ordinary["commands"][0][argv_key][module_index] = "pytest"
     _must_reject(validator, ordinary, ordinary_reason)
     serial = copy.deepcopy(typed)
-    serial["commands"][0][argv_key][1] = "scripts.ariadne_serial_pytest"
+    serial["commands"][0][argv_key][module_index] = "scripts.ariadne_serial_pytest"
     _must_reject(validator, serial, serial_reason)
     unknown = copy.deepcopy(typed)
     unknown["commands"][0]["verification_phase"] = "before_publish"
@@ -218,6 +219,7 @@ def build_evidence(source: str) -> dict[str, Any]:
                 typed=_verifier_v2(),
                 command_key="id",
                 argv_key="argv",
+                module_index=2,
                 surface="verifier_command_manifest",
                 ordinary_reason="database_closed_ordinary_pytest_forbidden",
                 serial_reason="database_closed_serial_pytest_forbidden",
@@ -230,6 +232,7 @@ def build_evidence(source: str) -> dict[str, Any]:
                 typed=_governance_v2(),
                 command_key="command_id",
                 argv_key="arguments",
+                module_index=1,
                 surface="governance_command_manifest",
                 ordinary_reason="tick_database_closed_pytest_runner",
                 serial_reason="tick_database_closed_pytest_runner",
