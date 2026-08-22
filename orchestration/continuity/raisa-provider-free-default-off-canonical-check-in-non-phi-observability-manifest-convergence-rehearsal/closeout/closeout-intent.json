@@ -1,0 +1,236 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v1",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal",
+    "title": "Provider-free default-off canonical check-in non-PHI observability manifest convergence closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T23:41:40.1369077+10:00",
+    "node": {
+      "id": "raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal",
+      "title": "Default-off canonical check-in non-PHI observability manifest convergence",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority and the accepted check-in admission-control architecture admit one exact default-off declarative observability manifest.",
+          "The manifest is not instrumentation, alert transport, automatic control authority or operational evidence.",
+          "No product, configuration, route, OpenAPI, GraphQL, client, data, provider, database, runtime, deployment, Pages or protected ref changed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-non-phi-observability-manifest",
+          "source": "docs/api-spine/manifests/canonical-check-in-non-phi-observability.json",
+          "status": "accepted",
+          "summary": "Accept one canonical 6291-byte manifest whose observability object exactly equals the accepted five-metric and six-alert contract."
+        },
+        {
+          "id": "preserve-default-off-non-actuating-boundary",
+          "source": "docs/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Keep instrumentation, transport, automatic action and ordinary practice false; no metric is emitted and no alert is delivered."
+        },
+        {
+          "id": "accept-api-spine-declarative-classification",
+          "source": "orchestration/agent_inbox/codex/raisa-canonical-check-in-non-phi-observability-manifest-convergence-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept a support manifest only; REST/OpenAPI command identity remains unchanged and GraphQL/events remain non-mutating and non-authoritative."
+        },
+        {
+          "id": "select-unmounted-default-off-observer-adapter-successor",
+          "source": "docs/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Select one pure globally disabled bridge from closed admission-kernel values to manifest-bounded typed metric and alert intents."
+        },
+        {
+          "id": "decline-model-worker-lanes",
+          "source": "orchestration/continuity/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Decline DeepSeek, Gemini and native subagents because exact source equality and deterministic validation fully decide this serial artifact."
+        }
+      ],
+      "claim_scope": [
+        "One canonical default-off non-PHI observability manifest is present at its frozen API-Spine path.",
+        "The manifest is exactly 6291 bytes with SHA-256 79d6191e1a499e85bb12be38fd15980c7f1bf7dc54eb15132c607b0c43341d8c.",
+        "Its observability object exactly equals the accepted architecture source object.",
+        "It contains five closed low-cardinality metric families and six non-identifying non-actuating critical alerts.",
+        "Instrumentation, alert transport, automatic control and ordinary practice remain disabled.",
+        "No worker, provider, database, Docker, product runtime or protected activity occurred."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--canonical-check-in-non-phi-observability-manifest-convergence.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-canonical-check-in-non-phi-observability-manifest-convergence-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_rehearsal.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_api_spine_appointment_openapi_drift_guard.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_compass.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "artifacts": [
+          "docs/api-spine/manifests/canonical-check-in-non-phi-observability.json",
+          "orchestration/continuity/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture/contract.json",
+          "orchestration_harness/check_in_admission_control.py"
+        ]
+      },
+      "unresolved_gates": [
+        "No operational instrumentation, telemetry exporter, alert transport or automatic control action is mounted.",
+        "Environment architecture still has zero live manifests, secret references and operational secret-custody evidence.",
+        "Atomic rollback and unknown-commit authoritative readback remain unproved after the consumed failed database sequence.",
+        "Admission-control mounting, ordinary activation and atomic two-client cutover remain closed.",
+        "The native Harness remains unavailable for EMR4 worker allocation and Claude is not a silent fallback.",
+        "All product data, providers, production, deployment, release, Pages and protected-ref gates remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Turn accepted default-off check-in control architecture into small canonical and executable dependencies before any activation gate",
+      "outcome": "The exact non-PHI metric and alert vocabulary now has one canonical declarative home without emitting telemetry or opening runtime authority.",
+      "evidence": [
+        "docs/api-spine/manifests/canonical-check-in-non-phi-observability.json",
+        "docs/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Connect the accepted pure admission kernel to the exact observability vocabulary through one unmounted globally disabled typed adapter",
+      "why_now": "The kernel and canonical vocabulary both pass, their bridge is absent, and a pure disabled adapter is the smallest graph-new executable dependency.",
+      "outcome": "Closed admission values can be mapped to typed metric and alert intents while the disabled path produces no output and no transport exists.",
+      "unlocks": [
+        "A deterministic seam for a later separately authorised instrumentation mount and exporter integration."
+      ],
+      "does_not_solve": [
+        "No metric emission, alert delivery, automatic rollback, ordinary activation, live secret custody, unknown-commit proof, client cutover or production readiness is opened."
+      ],
+      "evidence": [
+        "orchestration_harness/check_in_admission_control.py",
+        "docs/api-spine/manifests/canonical-check-in-non-phi-observability.json",
+        "docs/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-closeout.md"
+      ],
+      "orientation_statement": "Build one disabled executable bridge; do not add another architecture layer or attempt blocked operational activation evidence."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal",
+      "active_tranche": "Provider-free unmounted default-off canonical check-in non-PHI observer adapter rehearsal",
+      "objective": "Add one pure globally disabled adapter that accepts only the closed check-in admission-kernel values and maps them to typed metric and critical-alert intents bounded by the exact accepted observability manifest, proving zero output while disabled and adding no transport, exporter, automatic action, product data, application mounting or runtime configuration.",
+      "authority_source": "Yuri's standing uninterrupted-development authority plus the accepted admission kernel and exact observability manifest select the smallest graph-new executable bridge.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_exact_unmounted_default_off_observer_adapter_plan"
+    },
+    "incidents": [],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "check-in-observability-manifest-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "check-in-observability-manifest-closeout-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_rehearsal.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_api_spine_appointment_openapi_drift_guard.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_compass.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "check-in-observability-manifest-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "check-in-observability-manifest-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-plan.md",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-627.md",
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--native-harness-corrected-graph-useful-recovery.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_unmounted_default_off_canonical_check_in_non_phi_observer_adapter_only",
+    "only_closed_admission_kernel_values_and_exact_manifest_vocabulary_may_enter",
+    "disabled_path_produces_zero_metric_or_alert_intents",
+    "no_transport_exporter_alert_delivery_or_automatic_action",
+    "no_application_mounting_configuration_route_openapi_graphql_or_client_change",
+    "no_native_deepseek_harness_worker_or_claude_fallback",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_identifier_free_text_secret_request_response_or_product_data",
+    "no_action_grammar_or_first_party_client_change",
+    "no_generic_status_arrived_change_or_waiting_area_movement",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_provider_database_docker_or_production_runtime",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}

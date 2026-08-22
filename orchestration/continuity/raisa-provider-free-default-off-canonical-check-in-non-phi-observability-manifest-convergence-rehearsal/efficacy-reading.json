@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.atomic_manifest_convergence_efficacy.v1",
+  "operation_id": "raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal",
+  "result": "pass",
+  "canonical_manifest_count": 1,
+  "canonical_manifest_bytes": 6291,
+  "canonical_manifest_sha256": "79d6191e1a499e85bb12be38fd15980c7f1bf7dc54eb15132c607b0c43341d8c",
+  "metric_family_count": 5,
+  "critical_alert_count": 6,
+  "focused_tests_passed": 5,
+  "integrated_tests_passed": 98,
+  "closeout_tests_expected": 143,
+  "external_worker_runs": 0,
+  "provider_requests": 0,
+  "database_or_docker_runs": 0,
+  "product_runtime_source_changes": 0,
+  "large_patch_readback_cycles": 1,
+  "shell_serialization_false_signal_cycles": 1,
+  "candidate_or_test_correction_cycles": 1,
+  "semantic_candidate_correction_cycles": 0,
+  "candidate_commits": 1,
+  "efficacy_decision": "one_exact_graph_new_observability_artifact_gap_closed_with_one_local_prose_assertion_correction_and_zero_semantic_external_or_runtime_reruns"
+}

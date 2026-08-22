@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Complete the second exact declarative control artifact before considering wider runtime or activation work.
+> Build one disabled executable bridge; do not add another architecture layer or attempt blocked operational activation evidence.
 
 ## North star
 
@@ -582,22 +582,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    A deterministic matrix distinguishes accepted, contract-only, blocked operational and later gates and identifies one genuinely absent binary-completion artifact. Lineage parent: `raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal`.
 283. **Turn accepted default-off check-in control architecture into small canonical API-Spine artifacts before any wider operational or activation gate — Default-off canonical check-in rollout runbook manifest convergence**
    The rollout, kill-switch and rollback procedure now has one byte-exact declarative home without opening runtime authority. Lineage parent: `raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation`.
+284. **Turn accepted default-off check-in control architecture into small canonical and executable dependencies before any activation gate — Default-off canonical check-in non-PHI observability manifest convergence**
+   The exact non-PHI metric and alert vocabulary now has one canonical declarative home without emitting telemetry or opening runtime authority. Lineage parent: `raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal`.
 
 ## Current position
 
-**Materialize the already-accepted five metric families and six non-actuating alerts as one canonical default-off API-Spine manifest — Default-off canonical check-in rollout runbook manifest convergence**
+**Connect the accepted pure admission kernel to the exact observability vocabulary through one unmounted globally disabled typed adapter — Default-off canonical check-in non-PHI observability manifest convergence**
 
-**Why this proof came next:** The runbook artifact now passes, the observability sub-contract is exact and accepted, and its canonical manifest target and successor graph node are absent.
+**Why this proof came next:** The kernel and canonical vocabulary both pass, their bridge is absent, and a pure disabled adapter is the smallest graph-new executable dependency.
 
-One exact non-PHI observability manifest becomes machine-checked without instrumentation, transport or control action.
+Closed admission values can be mapped to typed metric and alert intents while the disabled path produces no output and no transport exists.
 
 ### What this unlocks
 
-- A canonical low-cardinality observability vocabulary for later separately authorised instrumentation work.
+- A deterministic seam for a later separately authorised instrumentation mount and exporter integration.
 
 ### What it does not solve
 
-- No metrics emission, alert transport, automatic rollback, ordinary activation, live secret custody, unknown-commit proof, client cutover or production readiness is opened.
+- No metric emission, alert delivery, automatic rollback, ordinary activation, live secret custody, unknown-commit proof, client cutover or production readiness is opened.
 
 ## Continuity and authority
 
@@ -1110,6 +1112,7 @@ Prerequisites:
 - `docs/api-spine/external-read-model-current-surface-status.json`
 - `docs/api-spine/external-read-model-current-surface-status.schema.json`
 - `docs/api-spine/manifests/agent-capability-charters.yaml`
+- `docs/api-spine/manifests/canonical-check-in-non-phi-observability.json`
 - `docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json`
 - `docs/api-spine/openapi/application-auth-synthetic-transport.yaml`
 - `docs/api-spine/openapi/application-identity-federation-session-bridge.yaml`
@@ -1502,6 +1505,7 @@ Prerequisites:
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-closeout.md`
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review-plan.md`
 - `docs/raisa-provider-free-compatibility-consumer-kernel-convergence-admission-review.md`
+- `docs/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-closeout.md`
 - `docs/raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal-closeout.md`
 - `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-closeout.md`
 - `docs/raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal-plan.md`
@@ -3808,4 +3812,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 388; continuity graph revision 406._
+_Compass map revision 389; continuity graph revision 407._
