@@ -1,0 +1,11 @@
+{
+  "schema_version": "emr4.non_phi_pushover_notification_receipt.v1",
+  "recorded_at": "2026-08-22T10:57:26.2883686+10:00",
+  "status": "passed",
+  "provider": "pushover",
+  "request": "e8a969be-ae01-4a1c-a04a-126ebb1ef969",
+  "title": "EMR4 sprint closeout",
+  "message_class": "non_phi_operational_closeout",
+  "phi_or_clinical_data": false,
+  "summary": "Continuity 389 / Compass 371; immutable guard-bridge module-graph terminal diagnosis and full governance suite passed; one derived import-closure recovery is continuing."
+}
