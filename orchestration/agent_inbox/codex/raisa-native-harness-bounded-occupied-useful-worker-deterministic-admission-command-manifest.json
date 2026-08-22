@@ -1,0 +1,60 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {"id": "C01", "argv": ["git", "status", "--short", "--branch"]},
+    {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]},
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/emr4",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_api_spine_artifacts.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/check_in_rollout_runbook.py",
+        "scripts/raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/check_in_rollout_runbook.py",
+        "scripts/raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_native_harness_bounded_occupied_useful_worker_rehearsal",
+        "--check"
+      ]
+    },
+    {"id": "C07", "argv": ["git", "diff", "--exit-code", "HEAD", "--"]},
+    {"id": "C08", "argv": ["git", "diff", "--check", "HEAD~2..HEAD"]},
+    {"id": "C09", "argv": ["git", "diff", "--name-only", "HEAD~2..HEAD"]},
+    {"id": "C10", "argv": ["git", "status", "--short", "--branch"]}
+  ]
+}

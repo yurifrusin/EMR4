@@ -549,6 +549,79 @@ def _materialize_profile(root: Path, target_path: str) -> dict[str, Any]:
 
 def _review_candidate_source(path: Path) -> str:
     receipt = load_json(path)
+    if receipt.get("schema_version") == "ariadne.validation_run.v1":
+        from scripts.ariadne_evidence_gate import command_manifest_sha256
+
+        commands = receipt.get("commands")
+        results = receipt.get("results")
+        manifest = {
+            "schema_version": "ariadne.verifier-command-manifest.v1",
+            "commands": commands,
+        }
+        if (
+            receipt.get("status") != "passed"
+            or receipt.get("failure_command_id") is not None
+            or receipt.get("repo_root") != str(REPO_ROOT.resolve())
+            or not isinstance(commands, list)
+            or not isinstance(results, list)
+            or len(commands) != len(results)
+            or receipt.get("command_manifest_sha256")
+            != command_manifest_sha256(manifest)
+        ):
+            raise UsefulWorkerError("deterministic_admission_receipt_invalid")
+        result_by_id = {
+            result.get("id"): result
+            for result in results
+            if isinstance(result, dict) and isinstance(result.get("id"), str)
+        }
+        command_by_id = {
+            command.get("id"): command
+            for command in commands
+            if isinstance(command, dict) and isinstance(command.get("id"), str)
+        }
+        if len(result_by_id) != len(results) or len(command_by_id) != len(commands):
+            raise UsefulWorkerError("deterministic_admission_receipt_invalid")
+        for command_id, command in command_by_id.items():
+            result = result_by_id.get(command_id)
+            if (
+                not isinstance(result, dict)
+                or result.get("argv") != command.get("argv")
+                or result.get("status") != "passed"
+                or result.get("exit_code") != 0
+                or result.get("error_code") is not None
+            ):
+                raise UsefulWorkerError("deterministic_admission_receipt_invalid")
+        source_result = result_by_id.get("C02")
+        tracked_clean_result = result_by_id.get("C07")
+        if (
+            not isinstance(source_result, dict)
+            or not isinstance(tracked_clean_result, dict)
+            or command_by_id.get("C02")
+            != {"id": "C02", "argv": ["git", "rev-parse", "HEAD"]}
+            or command_by_id.get("C07")
+            != {
+                "id": "C07",
+                "argv": ["git", "diff", "--exit-code", "HEAD", "--"],
+            }
+            or source_result.get("stdout_bytes") != 41
+            or source_result.get("stderr_bytes") != 0
+            or source_result.get("stderr_sha256") != sha256_bytes(b"")
+            or tracked_clean_result.get("stdout_bytes") != 0
+            or tracked_clean_result.get("stderr_bytes") != 0
+            or tracked_clean_result.get("stdout_sha256") != sha256_bytes(b"")
+            or tracked_clean_result.get("stderr_sha256") != sha256_bytes(b"")
+        ):
+            raise UsefulWorkerError("deterministic_admission_receipt_invalid")
+        matching_sources = [
+            candidate
+            for candidate in git("rev-list", "HEAD").splitlines()
+            if FULL_OID.fullmatch(candidate) is not None
+            and sha256_bytes(f"{candidate}\n".encode("ascii"))
+            == source_result.get("stdout_sha256")
+        ]
+        if len(matching_sources) != 1:
+            raise UsefulWorkerError("deterministic_admission_receipt_invalid")
+        return matching_sources[0]
     source = receipt.get("head_before")
     if (
         receipt.get("status", receipt.get("decision")) not in {"passed", "pass", "accepted"}

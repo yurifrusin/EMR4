@@ -181,6 +181,35 @@ def test_provider_free_check_starts_no_native_or_provider_process() -> None:
     assert result["candidate"]["claim"] == "runbook_contract_present_default_off"
 
 
+def test_validation_runner_receipt_resolves_full_reviewed_git_object() -> None:
+    receipt = (
+        ROOT
+        / "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-deterministic-admission-receipt.json"
+    )
+    source = worker._review_candidate_source(receipt)
+    assert len(source) == 40
+    assert subprocess.run(
+        ["git", "merge-base", "--is-ancestor", source, "HEAD"],
+        cwd=ROOT,
+        check=False,
+    ).returncode == 0
+
+
+def test_validation_runner_receipt_rejects_changed_source_digest(tmp_path: Path) -> None:
+    receipt = json.loads(
+        (
+            ROOT
+            / "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-deterministic-admission-receipt.json"
+        ).read_bytes()
+    )
+    source_result = next(row for row in receipt["results"] if row["id"] == "C02")
+    source_result["stdout_sha256"] = "0" * 64
+    changed = tmp_path / "changed-receipt.json"
+    changed.write_text(json.dumps(receipt), encoding="utf-8")
+    with pytest.raises(worker.UsefulWorkerError, match="deterministic_admission_receipt_invalid"):
+        worker._review_candidate_source(changed)
+
+
 def test_terminal_schema_accepts_only_bounded_success() -> None:
     zero_hash = "0" * 64
     terminal = {
