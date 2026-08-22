@@ -50,8 +50,10 @@ None of the nine lapses caused runtime or product work to repeat.
 
 ## Next
 
-Continue with the provider-free unmounted manifest normalizer, typed evidence
-inputs and pure evidence-gate evaluator. Stop before the product admission seam
-or any real environment, secret, role or human decision.
+The normalizer/evaluator work remains dependency-satisfied but is deferred under
+your explicit redirect. The immediate successor will review all native
+DeepSeek Harness work and freeze the shortest credible route into bounded real
+EMR4 development. It will retain the useful traceability controls while
+dropping any expectation of exhaustive or perfect interoperability testing.
 
 Yuri's attention is not currently required.

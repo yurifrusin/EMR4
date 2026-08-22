@@ -48,6 +48,16 @@ manifest instance, feed the product admission seam or activate ordinary
 practice. The separate `default_off_admission_input_seam` remains a later
 tranche.
 
+## Successor redirect
+
+After accepting this decomposition, Yuri explicitly redirected the immediate
+successor. The dependency-satisfied normalizer/evaluator tranche remains
+planned but is deferred, not cancelled. The active successor will instead
+review the complete native DeepSeek Harness evidence and freeze a pragmatic
+development-entry plan. Its standard is the minimum traceability and control
+needed for a bounded real EMR4 worker assignment, not exhaustive or perfect
+interoperability proof.
+
 ## Irreducible operational boundary
 
 Dimension 11 can close only after all six facts are current in one authorized

@@ -39,3 +39,8 @@ lapses caused runtime, secret, database, provider, product or protected effects.
 No operational manifest, secret/environment access, live infrastructure,
 ordinary-practice admission, data, production, deployment, release, Pages or
 protected-ref movement is accepted.
+
+Yuri's subsequent explicit redirect defers the normalizer/evaluator tranche and
+selects a pragmatic native DeepSeek Harness development-adoption review and
+plan as the immediate successor. This changes sequencing only; it does not
+alter this accepted decomposition or open provider/worker authority here.

@@ -1,0 +1,11 @@
+{
+  "schema_version": "emr4.non_phi_pushover_successor_redirect_receipt.v1",
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+  "delivered_at": "2026-08-23T08:52:35.5511492+10:00",
+  "request_id": "9a0c930d-287a-4be5-a429-bd29d63cd867",
+  "status": 1,
+  "previous_next_operation": "raisa-provider-free-unmounted-canonical-check-in-environment-manifest-normalizer-and-evidence-gate-evaluator-rehearsal",
+  "next_operation": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+  "reason": "explicit_user_successor_redirect",
+  "non_phi": true
+}
