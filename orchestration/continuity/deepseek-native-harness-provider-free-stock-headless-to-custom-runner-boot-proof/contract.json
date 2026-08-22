@@ -1,0 +1,183 @@
+{
+  "schema_version": "ariadne.native_harness_stock_headless_custom_runner_boot_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
+  "planning_source": "79690a3c990eba5676662510a4ffa98d452fbc0a",
+  "accepted_sources": {
+    "stock_headless_hmr_boot": "560f471b72bef0b9790120238657dc7afd4d602b",
+    "accepted_graph_materializer": "822d487afcf6657027bc66c8d6d9635677e73096",
+    "consumed_materializer_failure": "cc6d14257c7ff110a3c51476738e57f5a3135232",
+    "accepted_counter_diagnosis": "3d82febd6a402337db606ce4767fbd4875698eba"
+  },
+  "accepted_inputs": {
+    "plan": {
+      "path": "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-plan.md",
+      "bytes": 9578,
+      "sha256": "9d2a26dfdc03cf6b7382cee75c114ff63e2571a8f16cfdb709f242dfaaa9b10c"
+    },
+    "threat_model": {
+      "path": "docs/security/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-threat-model-delta.md",
+      "bytes": 3296,
+      "sha256": "61e5947e07802ed7eadb7c7c96fabedb627a529c31e6c75dd43290da64a0eaa0"
+    },
+    "accepted_diagnosis_evidence": {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis/diagnosis-evidence.json",
+      "bytes": 2635,
+      "sha256": "42274fcd881e6be4e2af7f96bde5c36ad0278253cb821b83c3b346735f3d8e26"
+    },
+    "accepted_materializer_contract": {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/contract.json",
+      "bytes": 4065,
+      "sha256": "12bda8d7ed75311098dc20661ad61dc291efb957354c9386733250dbc44c510c"
+    },
+    "accepted_stock_boot_evidence": {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-hmr-boot-proof/provider-free-native-harness-hmr-boot-evidence.json",
+      "bytes": 2932,
+      "sha256": "68d4168649d80268fdb81ba3582bed261e7944fc0f19d24aee5933270882afcc"
+    },
+    "historical_test_selection": {
+      "path": "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-historical-test-selection.md",
+      "bytes": 1163,
+      "sha256": "137a2e04067c9b8d050bae09324f47389db40b474bfd6c501152c1577b307c4c"
+    }
+  },
+  "implementation_sha256": {
+    "controller": "a4359ab2d01d77e89b97461ecce346b5a51f4e40fe3dbde657223d8f2bae5824",
+    "focused_test": "bfed6b8530e86057618f4040d5870d481e63de82c630133623dfe8f87b061890",
+    "adapter": "8a05867f5ce6debf98836624471886dc3a5d61493ecc8a01c9cd1d16508a8bec",
+    "contract_schema": "e7cf20d2e2feef007b9c7a2b7f49dd61bc22e3020d48ac64c6533e1304336b0f",
+    "evidence_schema": "96887edcf307459bad6e4bc652a7ab0d739e5879bca257bd345e73714933ead1"
+  },
+  "source_bindings": {
+    "runner": {
+      "bytes": 14210,
+      "sha256": "017394e3f86a3efdf5eba0745c254a8b561615fb6ab923978b81bb5941e8e3f4"
+    },
+    "guard": {
+      "bytes": 4501,
+      "sha256": "76029da0f9c030651fd10c0df16f4e75e86b2269d7560af7f94c74680f8598b9"
+    },
+    "bridge": {
+      "bytes": 1661,
+      "sha256": "3a49b28174eeefd77d7efe0a00498901ac6636b637ed9dfe60aba46980df1d0b"
+    },
+    "sanitizer": {
+      "bytes": 2439,
+      "sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f"
+    },
+    "adapter": {
+      "bytes": 7027,
+      "sha256": "8a05867f5ce6debf98836624471886dc3a5d61493ecc8a01c9cd1d16508a8bec"
+    },
+    "readiness_sentinel": {
+      "bytes": 1238,
+      "sha256": "6ff4ff7da4b0bc4a488d1cf79e8412ebb959d8d2c4061683196cf4fa5f4c8de4"
+    },
+    "network_guard": {
+      "bytes": 1643,
+      "sha256": "76e7adc10b646e67e7dd8af7d74c8d0701a93025daf140f19cd5e794bb7a4796"
+    }
+  },
+  "expected_import_closure": {
+    "module_count": 5,
+    "relative_edge_count": 4,
+    "bare_edge_count": 8,
+    "builtin_edge_count": 4,
+    "bare_target_count": 6,
+    "all_targets_present": true
+  },
+  "execution_attempt": {
+    "attempt_id": "stock-headless-custom-runner-boot-attempt-001",
+    "native_process_count": 1,
+    "automatic_retry": false,
+    "manual_retry": false,
+    "resume": false,
+    "fallback": false
+  },
+  "package": {
+    "name": "@deepseek-ai/dsh",
+    "version": "0.1.0-rc.7",
+    "bin": "lib/bin.js",
+    "tarball_sha1": "8a69013c06179d7af437de92fb4a9a2e1fd7d410",
+    "tarball_integrity": "sha512-ZceDCJ8FAywih+USW/OMk9jEhunlvJBGEz4kqrhau23hPzbciOazZrywH0nBRsaalSeAJ1JGBmjtw4OSjToStw==",
+    "tarball_sha256": "2f8f0b763d611ac536f7a9411ee43c0afc067c1b8732c3102c04dbe398bcacc5"
+  },
+  "required_installed_packages": [
+    "@deepseek-ai/dsh",
+    "@deepseek-ai/dsh-tools",
+    "@deepseek-ai/dsh-agent-presets",
+    "@deepseek-ai/dsh-scope",
+    "@deepseek-ai/dsh-tool-fs",
+    "@deepseek-ai/dsh-tool-fs-search"
+  ],
+  "materialisation": {
+    "generation": 3,
+    "strategy": "verified_installed_tree_seed_copy",
+    "seed_classification": "provider_free_rc7_package_only_seed",
+    "process_count": 0,
+    "retry_count": 0,
+    "package_json_sha256": "0009f94a6b9c3495404d4a1a89e0eef82ba4948c4ea29994c210a271390e64db",
+    "package_lock_sha256": "a89defcd8a2c5aae4a54c03bda98e2585711fce881b4b08c90ca4808d45555f4",
+    "lock_package_count": 588,
+    "tree_sha256": "d84e73067c8dbbf4836969eb948012fd364ee454bb07744cfe486995a256084d",
+    "file_count": 32744,
+    "byte_count": 219364530,
+    "dsh_manifest_sha256": "7a9f356ad1e27c7013b44619bc675b8cb877f995cd0951ab3dfeb10d4edcc361",
+    "reparse_point_count": 0,
+    "seed_scope_package_only": true
+  },
+  "launch": {
+    "node_flag": "--expose-internals",
+    "profile_args": ["--profile", "headless"],
+    "timeout_seconds": 45,
+    "online_package_fallback": false,
+    "package_lifecycle_scripts": false
+  },
+  "expected_observation": {
+    "schema_version": "ariadne.native_harness_stock_headless_custom_runner_observation.v1",
+    "result": "stock_headless_handed_off_to_accepted_guard_graph_runner",
+    "structured_coordinate": "EFFECTIVE_TOOL_COMPOSITION_PASSED",
+    "old_input_invalid_observed": false,
+    "distinct_preset_root_count": 2,
+    "factory_create_agent_invocations": 1,
+    "setup_invocations": 1,
+    "setup_resolved": true,
+    "preset_root_reads": 4,
+    "preset_mount_reads": 1,
+    "preset_mount_calls": 1,
+    "tool_view_calls": 1,
+    "tool_restrict_calls": 1,
+    "tool_schema_calls": 1,
+    "hook_installations": 5,
+    "scope_disposals": 1,
+    "runner_app_exit_code": 1,
+    "runner_status": "failed",
+    "runner_failure_stage": "factory",
+    "runner_request_count": 0,
+    "runner_tool_result_count": 0,
+    "runner_turn_kind": null,
+    "runner_conclusion_marked": false,
+    "live_agent_count": 0,
+    "raw_error_retained": false,
+    "cordis_disposed": true,
+    "stock_app_exit_requested": true
+  },
+  "required_zero_counts": [
+    "target_attempts",
+    "agent_publications",
+    "sessions",
+    "turns",
+    "tool_calls",
+    "tool_results",
+    "broker_processes",
+    "broker_requests",
+    "workers",
+    "model_requests",
+    "provider_requests",
+    "network_attempts",
+    "database_invocations",
+    "docker_invocations",
+    "retries",
+    "resumes",
+    "fallbacks"
+  ]
+}

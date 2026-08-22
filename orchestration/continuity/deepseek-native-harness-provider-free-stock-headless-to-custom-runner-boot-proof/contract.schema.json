@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-stock-headless-custom-runner-boot-contract.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "planning_source",
+    "accepted_sources",
+    "accepted_inputs",
+    "implementation_sha256",
+    "source_bindings",
+    "expected_import_closure",
+    "execution_attempt",
+    "package",
+    "required_installed_packages",
+    "materialisation",
+    "launch",
+    "expected_observation",
+    "required_zero_counts"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_stock_headless_custom_runner_boot_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_sources": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+      "minProperties": 4,
+      "maxProperties": 4
+    },
+    "accepted_inputs": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/fileBinding"},
+      "minProperties": 6,
+      "maxProperties": 6
+    },
+    "implementation_sha256": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+      "minProperties": 5,
+      "maxProperties": 5
+    },
+    "source_bindings": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/bytesHash"},
+      "minProperties": 7,
+      "maxProperties": 7
+    },
+    "expected_import_closure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["module_count", "relative_edge_count", "bare_edge_count", "builtin_edge_count", "bare_target_count", "all_targets_present"],
+      "properties": {
+        "module_count": {"const": 5},
+        "relative_edge_count": {"const": 4},
+        "bare_edge_count": {"const": 8},
+        "builtin_edge_count": {"const": 4},
+        "bare_target_count": {"const": 6},
+        "all_targets_present": {"const": true}
+      }
+    },
+    "execution_attempt": {"type": "object"},
+    "package": {"type": "object"},
+    "required_installed_packages": {"type": "array", "items": {"type": "string"}, "minItems": 6, "maxItems": 6, "uniqueItems": true},
+    "materialisation": {"type": "object"},
+    "launch": {"type": "object"},
+    "expected_observation": {"type": "object"},
+    "required_zero_counts": {"type": "array", "items": {"type": "string"}, "minItems": 16, "uniqueItems": true}
+  },
+  "$defs": {
+    "bytesHash": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256"],
+      "properties": {
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "fileBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}
