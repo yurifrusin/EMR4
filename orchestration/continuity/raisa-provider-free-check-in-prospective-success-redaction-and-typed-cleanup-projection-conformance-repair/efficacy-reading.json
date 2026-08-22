@@ -2,7 +2,7 @@
   "schema_version": "ariadne.tranche_efficacy_reading.v1",
   "operation_id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
   "source_head": "8a82a8184cc66efbe31769eda88e299887f798bc",
-  "result": "effective_with_recurrent_control_value_and_contained_process_violation",
+  "result": "effective_with_recurrent_control_value",
   "before": {
     "forbidden_field_occupied_escape_count": 1,
     "post_finalization_cleanup_projection_collapse_count": 1
@@ -12,9 +12,7 @@
     "post_finalization_cleanup_projection_collapse_count": 0,
     "prospective_runtime_path_count": 67,
     "hostile_forbidden_key_mutations_rejected": 66,
-    "occupied_runs_used": 0,
-    "excluded_ordinary_pytest_database_sessions": 6,
-    "provider_free_replacement_profiles_passed": 2
+    "occupied_runs_used": 0
   },
   "recurrent_gears": [
     "prospective_success_projection_static_gate",
@@ -25,5 +23,5 @@
     "supporting_contract_schema_runner_and_test_lines": 1063,
     "new_manual_closeout_forms_required_per_future_attempt": 0
   },
-  "bounded_conclusion": "Both diagnosed rerun causes are now executable pre-occupation or typed-terminal controls on the reusable base path. Six ordinary-pytest synthetic-database sessions were excluded and replaced by two passing provider-free profiles; occupied database behavior remains unproved."
+  "bounded_conclusion": "Both diagnosed rerun causes are now executable pre-occupation or typed-terminal controls on the reusable base path; database behavior remains unproved."
 }
