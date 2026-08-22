@@ -1,0 +1,63 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+  "source_head": "d55eb12c768aaca3583a6e0c9e00e1ba1a36c9b2",
+  "result": "effective_gap_decomposition_without_operational_gap_closure",
+  "before": {
+    "satisfied_dimensions": 11,
+    "blocking_gaps": 0,
+    "operational_evidence_gaps": 1,
+    "remaining_gap_shape": "one_composite_environment_manifest_and_operational_secret_posture_gap",
+    "verdict": "not_ready_for_ordinary_practice_admission"
+  },
+  "after": {
+    "satisfied_dimensions": 11,
+    "blocking_gaps": 0,
+    "operational_evidence_gaps": 1,
+    "remaining_gap_shape": "twenty_node_acyclic_dependency_graph",
+    "accepted_foundations": 4,
+    "repository_engineering_prerequisites": 5,
+    "external_operational_facts": 6,
+    "human_owned_external_decisions": 5,
+    "next_dependency_satisfied_repository_nodes": 3,
+    "human_attention_required_now": false,
+    "verdict": "not_ready_for_ordinary_practice_admission"
+  },
+  "verification": {
+    "exact_input_hashes": 10,
+    "full_git_bindings": 5,
+    "hostile_mutations_rejected": 142,
+    "focused_tests_passed": 21,
+    "relevant_provider_free_tests_passed": 183,
+    "focused_validation_attempts": 3,
+    "focused_validation_failed_attempts": 2,
+    "broader_packet_attempts": 2,
+    "broader_packet_pretest_aborts": 1,
+    "clockwork_check_attempts": 4,
+    "clockwork_check_rejections": 3,
+    "ruff_and_compile_passed": true,
+    "product_api_client_or_configuration_changes": 0,
+    "database_docker_sql_secret_environment_network_or_provider_actions": 0,
+    "worker_or_subagent_runs": 0,
+    "new_reusable_control_layers": 0,
+    "preflight_receipts_with_zero_manual_git_ids": 3
+  },
+  "workflow_lapses": [
+    "The invalid PowerShell native-command grouping pattern recurred once after publication and failed before reading or changing state.",
+    "The first focused packet expected a generic semantic-hash error where the validator correctly returned the more specific planning-source error.",
+    "The first focused packet also found that the plan had not repeated the exact gap_decomposed_not_satisfied result token.",
+    "The second focused packet used a literal phrase assertion that did not normalize a Markdown line wrap.",
+    "The first broader packet named a nonexistent separate environment-architecture plan test and aborted before collection.",
+    "One read-only rg command included a Windows-invalid wildcard path after two explicit valid paths; the corrected directory-scoped search succeeded.",
+    "The first clockwork check omitted an exact required next-boundary token and failed closed.",
+    "The rejection label was then misread as a count requirement; a semantically useful boundary was added, but the second check rejected until the code-owned required set was inspected and its exact ordinary-practice token added.",
+    "While recording the two rejections, the register-summary revision was incorrectly advanced per incident rather than once per tranche; the third check rejected the missing evidence path until revision 637 was restored with the larger incident count."
+  ],
+  "clockwork_effect": {
+    "acceptance_git_snapshot_reused": true,
+    "new_git_summary_layer_added": false,
+    "runtime_or_product_reruns_caused": 0,
+    "remaining_friction_class": "contained_prepublication_command_and_exact_expectation_corrections"
+  },
+  "bounded_conclusion": "The tranche did not alter readiness counts, but it converted one composite gap into a finite dependency graph with three immediately actionable repository nodes and an explicit boundary around six real-world facts and five human choices. Nine cheap workflow lapses were contained before publication; none caused a runtime, provider, database, product or protected effect."
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.governance_clockwork_check_rejection.v1",
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+  "recorded_at": "2026-08-23T08:42:52.6383293+10:00",
+  "status": "revision_required",
+  "canonical_mutation": false,
+  "reason": "tick_next_boundaries_floor",
+  "detail": "The first closeout intent omitted the exact required no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting next-operation boundary token.",
+  "correction": "Inspect the code-owned required boundary set, add the exact missing token, preserve this rejected check, record the lapse and rerun the idempotent clockwork check."
+}

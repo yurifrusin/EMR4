@@ -1,0 +1,514 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+    "title": "Canonical check-in environment and secret-posture gap-decomposition closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T08:34:31.0895778+10:00",
+    "node": {
+      "id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+      "title": "Canonical check-in environment-manifest and operational-secret-posture evidence-gap decomposition",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the dependency-satisfied read-only evidence decomposition and task-branch closeout.",
+          "The sole operational-evidence gap may be decomposed, but it may not be represented as satisfied.",
+          "DeepSeek, Gemini and native subagents remained declined under the explicit serial provider-free assessment."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-finite-environment-secret-posture-dependency-graph",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json",
+          "status": "accepted",
+          "summary": "Accept the closed acyclic 20-node, 39-edge graph separating four accepted foundations, five repository prerequisites, six external facts and five human-owned decisions."
+        },
+        {
+          "id": "retain-eleven-zero-one-and-not-ready-verdict",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md",
+          "status": "accepted",
+          "summary": "Accept gap_decomposed_not_satisfied while retaining the exact 11/0/1 matrix, not-ready verdict and no-human-attention-now reading."
+        },
+        {
+          "id": "accept-declarative-api-spine-and-no-activation-boundary",
+          "source": "docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-closeout.md",
+          "status": "accepted",
+          "summary": "Accept that declarative manifest input, typed evidence and a pure evaluator carry no command, admission or activation authority."
+        },
+        {
+          "id": "accept-measured-gap-decomposition-efficacy",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept a finite actionable decomposition, zero runtime reruns and nine contained prepublication workflow lapses without a new reusable control layer."
+        }
+      ],
+      "claim_scope": [
+        "The sole environment-manifest and operational-secret-posture gap is decomposed, not closed.",
+        "The accepted matrix remains exactly 11 satisfied, 0 blocking and 1 operational-evidence gap.",
+        "The dependency graph contains exactly 20 nodes and 39 edges: four accepted foundations, five repository prerequisites, six external operational facts and five human-owned decisions.",
+        "The next tranche owns exactly closed_manifest_normalizer, typed_operational_evidence_inputs and pure_environment_evidence_gate_evaluator.",
+        "All six external facts remain absent and all five human-owned decisions remain unselected.",
+        "No operational manifest, secret, product, provider, runtime, deployment, release, Pages or protected-ref action occurred or is authorised."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-plan.md",
+          "docs/security/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-closeout-precommit-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/pushover-notification-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/clockwork-check-attempt-003-rejected-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
+          "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
+          "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py",
+          "tests/test_raisa_provider_free_read_only_canonical_check_in_admission_readiness_convergence_review.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.schema.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-preplanning-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-precommit-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-closeout-precommit-runtime-state.json",
+          "docs/ariadne-agent-error-correction-register-revision-637.md",
+          "orchestration/human_inbox/yuri/2026-08-23--check-in-environment-secret-posture-gap-decomposition.md"
+        ]
+      },
+      "unresolved_gates": [
+        "All six current operational facts remain absent.",
+        "All five external decisions remain human-owned and unselected.",
+        "The default-off admission input seam remains a separate later repository prerequisite.",
+        "Dedicated check-in remains default-off without ordinary-practice admission.",
+        "No product data, provider, reusable runtime, production, deployment, release, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Turn the final composite check-in readiness gap into a finite dependency graph with explicit repository and real-world boundaries",
+      "outcome": "Three dependency-satisfied repository mechanisms are now isolated from six absent external facts and five unselected human decisions.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Implement the closed normalizer, typed evidence inputs and pure evaluator without connecting them to admission",
+      "why_now": "The accepted graph proves these three repository nodes are dependency-satisfied and require neither secrets nor external decisions.",
+      "outcome": "An unmounted authored-synthetic conformance packet will prove deterministic normalization and fail-closed evidence evaluation without creating operational evidence.",
+      "unlocks": [
+        "The three immediately actionable repository prerequisites can move from pending to accepted.",
+        "Malformed, incomplete, synthetic or stale evidence inputs can be denied mechanically.",
+        "The later admission-input seam can be assessed separately after the evaluator contract is stable."
+      ],
+      "does_not_solve": [
+        "No operational manifest instance or external operational fact is created.",
+        "No secret value, credential, role binding or rotation evidence is read or changed.",
+        "No product admission seam, ordinary-practice activation or deployment is authorised."
+      ],
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json",
+        "docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-closeout.md"
+      ],
+      "orientation_statement": "EMR4 will implement only the three dependency-satisfied pure repository mechanisms, then take another measured reading before approaching any admission seam or external operational choice."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-unmounted-canonical-check-in-environment-manifest-normalizer-and-evidence-gate-evaluator-rehearsal",
+      "active_tranche": "Provider-free unmounted canonical check-in environment-manifest normalizer and evidence-gate evaluator rehearsal",
+      "objective": "Implement only the closed manifest normalizer, typed operational-evidence inputs and pure environment evidence-gate evaluator, then prove their authored-synthetic reference-only conformance without a product admission seam, external fact or human decision.",
+      "authority_source": "Yuri's standing uninterrupted-development authority plus the accepted finite dependency graph select the three dependency-satisfied repository nodes.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_normalizer_typed_inputs_and_pure_evaluator_plan"
+    },
+    "incidents": [
+      {"incident_id": "gap-decomposition-powershell-grouping-recurrence", "source_id": "gap-decomposition-local-001", "peers": []},
+      {"incident_id": "gap-decomposition-overgeneralized-validator-expectation", "source_id": "gap-decomposition-local-002", "peers": []},
+      {"incident_id": "gap-decomposition-result-token-omission", "source_id": "gap-decomposition-local-003", "peers": []},
+      {"incident_id": "gap-decomposition-markdown-line-wrap-expectation", "source_id": "gap-decomposition-local-004", "peers": []},
+      {"incident_id": "gap-decomposition-nonexistent-test-path", "source_id": "gap-decomposition-local-005", "peers": []},
+      {"incident_id": "gap-decomposition-windows-invalid-rg-wildcard", "source_id": "gap-decomposition-local-006", "peers": []}
+      ,{"incident_id": "gap-decomposition-next-boundary-floor", "source_id": "gap-decomposition-local-007", "peers": []},
+      {"incident_id": "gap-decomposition-boundary-floor-misread", "source_id": "gap-decomposition-local-008", "peers": []},
+      {"incident_id": "gap-decomposition-register-revision-per-incident", "source_id": "gap-decomposition-local-009", "peers": []}
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v2",
+    "database_authority": "closed",
+    "commands": [
+      {
+        "command_id": "gap-decomposition-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/closeout-intent.json"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "gap-decomposition-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
+          "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
+          "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py",
+          "tests/test_raisa_provider_free_read_only_canonical_check_in_admission_readiness_convergence_review.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "gap-decomposition-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py", "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "gap-decomposition-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py", "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "gap-decomposition-closeout-postpublication-readback",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "postpublication"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-plan.md",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-637.md",
+      "docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-23--check-in-environment-secret-posture-gap-decomposition.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_unmounted_manifest_normalizer_typed_evidence_inputs_pure_evaluator_only",
+    "accepted_gap_decomposition_and_reference_only_architecture_only",
+    "no_product_admission_input_seam",
+    "no_operational_manifest_instance_secret_resolution_environment_variable_or_credential_store_access",
+    "no_database_conftest_engine_schema_fixture_docker_postgresql_sql_live_role_or_infrastructure_action",
+    "no_native_deepseek_harness_worker_gemini_subagent_or_provider_call",
+    "no_application_import_route_call_product_api_openapi_graphql_client_or_configuration_change",
+    "no_ordinary_practice_admission_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "no_external_operational_fact_claim_or_human_owned_decision_selection",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "gap-decomposition-git-summary-shell-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "rehydration-git-ref-summary",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Acceptance Git state comes from the existing machine-generated preflight snapshot.",
+      "observed_error": "The invalid PowerShell native-command grouping pattern recurred and failed during parsing before any read or change.",
+      "detection_method": "PowerShell returned a parser error before producing Git output.",
+      "evidence_paths": ["orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json", "docs/ariadne-agent-error-correction-register-revision-637.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.powershell_native_command_grouping_parse",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the existing preflight git_refs_snapshot as acceptance evidence and run any diagnostic commands sequentially.",
+        "prevention_control": "Ad hoc composite Git summaries have no acceptance authority; the existing preflight snapshot is canonical.",
+        "evidence_paths": ["orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-closeout-precommit-receipt.json"]
+      },
+      "baton_summary": "records one contained PowerShell grouping recurrence and canonical preflight-snapshot control."
+    },
+    {
+      "attempt_key": "gap-decomposition-validator-expectation-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "gap-decomposition-focused-validator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Hostile tests expect the first exact fail-closed validator reason.",
+      "observed_error": "The first focused test expected a generic semantic error although the validator correctly returned the more specific planning-source error.",
+      "detection_method": "The focused provider-free packet failed its exact expected-error assertion.",
+      "evidence_paths": ["tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py", "docs/ariadne-agent-error-correction-register-revision-637.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.validator_error_precedence_expectation_overgeneralized",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the test to the validator's exact first fail-closed planning-source reason.",
+        "prevention_control": "Mutation expectations follow the validator's explicit guard precedence.",
+        "evidence_paths": ["tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"]
+      },
+      "baton_summary": "records one corrected validator-precedence expectation."
+    },
+    {
+      "attempt_key": "gap-decomposition-result-token-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "gap-decomposition-plan",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The plan repeats the exact closed-vocabulary decomposition result token.",
+      "observed_error": "The first plan described the unchanged readiness state but omitted gap_decomposed_not_satisfied.",
+      "detection_method": "The focused packet failed the exact plan-token assertion.",
+      "evidence_paths": ["docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-plan.md", "docs/ariadne-agent-error-correction-register-revision-637.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.plan_closed_result_token_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact gap_decomposed_not_satisfied result token and rerun the packet.",
+        "prevention_control": "Plans repeat acceptance-critical closed-vocabulary result tokens verbatim.",
+        "evidence_paths": ["docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-plan.md"]
+      },
+      "baton_summary": "records one corrected closed-vocabulary plan-token omission."
+    },
+    {
+      "attempt_key": "gap-decomposition-markdown-wrap-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "gap-decomposition-focused-document-test",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Document semantic assertions normalize Markdown whitespace.",
+      "observed_error": "The second focused test treated an ordinary Markdown line wrap as semantic phrase absence.",
+      "detection_method": "The focused packet failed a literal phrase assertion even though the phrase spanned adjacent lines.",
+      "evidence_paths": ["tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py", "docs/ariadne-agent-error-correction-register-revision-637.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.markdown_line_wrap_literal_semantic_assertion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Normalize document whitespace before asserting the required semantic phrase.",
+        "prevention_control": "Prose assertions normalize Markdown wrapping unless literal layout is the contract.",
+        "evidence_paths": ["tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"]
+      },
+      "baton_summary": "records one corrected line-wrap-sensitive document assertion."
+    },
+    {
+      "attempt_key": "gap-decomposition-test-path-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "gap-decomposition-broader-test-packet",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every selected broader-packet test path exists before invocation.",
+      "observed_error": "The first broader packet named a nonexistent separate environment-architecture plan test.",
+      "detection_method": "The provider-free wrapper rejected the path before test collection.",
+      "evidence_paths": ["orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json", "docs/ariadne-agent-error-correction-register-revision-637.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.provider_free_packet_nonexistent_test_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Discover the existing architecture test path and run the corrected 183-test packet.",
+        "prevention_control": "Repository discovery verifies every selected test path before wrapper invocation.",
+        "evidence_paths": ["orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json"]
+      },
+      "baton_summary": "records one precollection nonexistent-test-path correction."
+    },
+    {
+      "attempt_key": "gap-decomposition-rg-wildcard-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "continuation-event-read-only-search",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_ripgrep",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Windows ripgrep searches use explicit files or a valid directory scope.",
+      "observed_error": "A read-only search appended a Windows-invalid wildcard path after two valid explicit paths.",
+      "detection_method": "Ripgrep returned an invalid-file-pattern error for the wildcard path.",
+      "evidence_paths": ["orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json", "docs/ariadne-agent-error-correction-register-revision-637.md"],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.windows_ripgrep_invalid_wildcard_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the wildcard with a directory-scoped ripgrep search.",
+        "prevention_control": "Use explicit paths or directory scopes for Windows ripgrep searches.",
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-637.md"]
+      },
+      "baton_summary": "records one corrected Windows-invalid read-only search scope."
+    },
+    {
+      "attempt_key": "gap-decomposition-next-boundary-floor-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "gap-decomposition-closeout-intent",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_governance_clockwork_check",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The next-operation protected-boundary array contains every exact code-owned required token.",
+      "observed_error": "The first intent omitted the exact required ordinary-practice boundary token.",
+      "detection_method": "The idempotent clockwork check rejected with tick_next_boundaries_floor before canonical mutation.",
+      "evidence_paths": ["orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/clockwork-check-attempt-001-rejected-receipt.json", "docs/ariadne-agent-error-correction-register-revision-637.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_next_operation_boundary_floor_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Inspect the code-owned required set, add the exact ordinary-practice boundary token, preserve the rejection and rerun the idempotent check.",
+        "prevention_control": "Every next operation contains the exact code-owned required boundary set plus tranche-specific restrictions.",
+        "evidence_paths": ["orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/closeout-intent.json"]
+      },
+      "baton_summary": "records one prepublication missing-boundary-token rejection and exact correction."
+    },
+    {
+      "attempt_key": "gap-decomposition-boundary-floor-misread-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "gap-decomposition-closeout-intent",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_governance_clockwork_check",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A clockwork floor rejection is corrected from the code-owned required set rather than inferred from its label.",
+      "observed_error": "The orchestrator misread floor as a minimum count, added a semantically useful boundary and left the exact required token absent.",
+      "detection_method": "The second idempotent check rejected with tick_next_boundaries_floor before canonical mutation.",
+      "evidence_paths": ["orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/clockwork-check-attempt-002-rejected-receipt.json", "docs/ariadne-agent-error-correction-register-revision-637.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_rejection_label_inferred_without_required_set_read",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Read REQUIRED_NEXT_BOUNDARIES directly, add the exact missing token and rerun the idempotent check.",
+        "prevention_control": "Inspect code-owned required sets before correcting any set-membership rejection.",
+        "evidence_paths": ["orchestration_harness/governance_clockwork_tick.py", "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/closeout-intent.json"]
+      },
+      "baton_summary": "records one rejected label-inference correction and direct required-set read."
+    },
+    {
+      "attempt_key": "gap-decomposition-register-revision-per-incident-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-environment-secret-posture-gap-decomposition",
+      "role": "orchestrator",
+      "resource_id": "gap-decomposition-agent-error-register-summary",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_governance_clockwork_check",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The human register-summary revision advances once per tranche while incident_count advances per observation.",
+      "observed_error": "The register-summary file was renamed from revision 637 to 639 after two additional incidents, leaving earlier evidence paths missing.",
+      "detection_method": "The third idempotent check rejected tick_incident_register_projection because an observation referenced the missing revision-637 file.",
+      "evidence_paths": ["orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/clockwork-check-attempt-003-rejected-receipt.json", "docs/ariadne-agent-error-correction-register-revision-637.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.register_revision_incremented_per_incident_not_tranche",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore revision 637, retain incident_count 1049 and rebind every observation to the one tranche summary.",
+        "prevention_control": "Register-summary revision increments once per tranche; incident_count alone increments for each new observation.",
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-637.md"]
+      },
+      "baton_summary": "records one rejected per-incident revision increment and per-tranche correction."
+    }
+  ]
+}

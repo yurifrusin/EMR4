@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.governance_clockwork_check_rejection.v1",
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+  "recorded_at": "2026-08-23T08:46:13.3119002+10:00",
+  "status": "revision_required",
+  "canonical_mutation": false,
+  "reason": "tick_incident_register_projection",
+  "detail": "The register-summary revision was incorrectly advanced once per new incident instead of once for the tranche, leaving earlier observation evidence paths bound to a missing revision-637 file.",
+  "correction": "Restore the one tranche summary at revision 637, retain the larger incident count, rebind all observations to it, preserve this rejection and rerun the idempotent clockwork check."
+}
