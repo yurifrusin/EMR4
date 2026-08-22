@@ -1,0 +1,552 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+    "title": "Native Harness integrated-runner first controlled development closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T18:23:35.2663093+10:00",
+    "node": {
+      "id": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+      "title": "Native Harness integrated-runner first controlled development closeout",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority covered one exact authored-synthetic useful-work attempt.",
+          "The one occupied identity is consumed and no retry, resume, fallback or replacement is authorized.",
+          "The successor is provider-free and cannot launch a Harness model turn, broker or provider request."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-traceable-integrated-runner-factory-failure",
+          "source": "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one consumed failed-closed native-Harness terminal at the integrated runner factory stage after both readiness coordinates and before any model or provider request."
+        },
+        {
+          "id": "reject-useful-worker-or-deepseek-performance-claim",
+          "source": "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/efficacy-reading.json",
+          "status": "rejected",
+          "summary": "Reject any useful-development or DeepSeek-performance claim because no request, tool call, edit or candidate occurred."
+        },
+        {
+          "id": "reject-another-occupied-attempt-before-factory-diagnosis",
+          "source": "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Reject any further occupied attempt until a separately bounded provider-free factory-subcoordinate diagnosis resolves or terminally characterizes the pre-request failure."
+        }
+      ],
+      "claim_scope": [
+        "Exactly one rc.7 native-Harness process crossed sentinel_activated and stock_headless_hmr_ready.",
+        "The accepted integrated runner then failed closed at its factory stage before agent publication.",
+        "Model requests, provider calls, tool calls, tool results, changed paths and candidate tests all remained zero.",
+        "The consumed attempt used zero retry, resume, fallback, auxiliary model or second worker.",
+        "Harness, broker and disposable root are absent and raw runtime material was not retained.",
+        "The result improves failure localization but proves neither useful DeepSeek output nor general Harness reliability.",
+        "No product, ordinary-practice, data, production, deployment, release, Pages or protected-ref authority opened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-plan.md",
+          "docs/security/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/provider-free-evidence.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-attempt-preparation.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-preexecution-checkpoint.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-attempt-consumed.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-terminal.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-report.md",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-preplanning-corrected-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-sol-deterministic-admission-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-occupied-prelaunch-receipt.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/clockwork-checkpoint-tick-evidence.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py",
+          "tests/test_raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal_postterminal.py",
+          "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/contract.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/contract.schema.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-terminal.schema.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/work-order-v2.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/worker-authority.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/forbidden-surfaces.json",
+          "docs/ariadne-agent-error-correction-register-revision-621.md",
+          "orchestration/human_inbox/yuri/2026-08-22--native-harness-integrated-runner-first-controlled-development.md",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The runner factory failure is not yet split into a closed agent-creation or setup subcoordinate.",
+        "No model request, DeepSeek reasoning result, useful edit or candidate exists.",
+        "No further occupied native-Harness attempt is authorized before provider-free factory diagnosis.",
+        "Ordinary practice, product data, production, deployment, release, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Test whether orchestrator-controlled native-Harness gear can produce one useful traceable DeepSeek development contribution",
+      "outcome": "The one-shot attempt crossed HMR readiness but failed at the integrated runner factory stage before any provider request or candidate.",
+      "evidence": [
+        "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-terminal.json",
+        "docs/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-closeout.md",
+        "orchestration/human_inbox/yuri/2026-08-22--native-harness-integrated-runner-first-controlled-development.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Resolve the exact pre-request factory substage without spending another provider attempt",
+      "why_now": "The occupied result proves loading and readiness but localizes the remaining blocker only to factory; another occupied launch would repeat cost without removing the known uncertainty.",
+      "outcome": "Startup, HMR, runner loading and provider-zero boundaries are exact; agent creation or setup remains the sole current blocker.",
+      "unlocks": [
+        "A finite provider-free factory substage coordinate.",
+        "A correction design that can be tested without a model request.",
+        "An evidence-based stop or go decision for any later useful-worker attempt."
+      ],
+      "does_not_solve": [
+        "No useful DeepSeek worker result or general native-Harness reliability conclusion.",
+        "No authority for another occupied request.",
+        "No ordinary-practice, product-data, production or protected-ref authority."
+      ],
+      "evidence": [
+        "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/efficacy-reading.json",
+        "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-sol-acceptance.md",
+        "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-report.md"
+      ],
+      "orientation_statement": "EMR4 will diagnose the integrated runner factory boundary provider-free and will not spend another occupied DeepSeek attempt on the unresolved coordinate."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery",
+      "active_tranche": "DeepSeek native Harness provider-free integrated-runner factory-subcoordinate diagnostic recovery",
+      "objective": "Exercise the exact installed integrated-runner agents.create and setup boundary with closed provider-free fixtures, derive a sanitized finite factory-substage coordinate, and freeze the narrowest correction or stop decision without a Harness model turn, broker or provider request.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted traceable factory-stage terminal.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_closed_factory_substage_vocabulary_and_exact_provider_free_fixture_matrix"
+    },
+    "incidents": [],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "integrated-development-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/closeout/closeout-intent.json"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "integrated-development-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py", "tests/test_raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal_postterminal.py", "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_ariadne_active_operation_latch_continuity.py", "tests/test_current_baton_consistency.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "integrated-development-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py", "tests/test_raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py", "tests/test_raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal_postterminal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "integrated-development-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py", "tests/test_raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py", "tests/test_raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal_postterminal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-plan.md",
+      "scripts/raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-621.md",
+      "docs/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--native-harness-integrated-runner-first-controlled-development.md",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/closeout/pushover-notification-receipt.json"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_factory_subcoordinate_diagnostic_only",
+    "no_harness_model_turn_broker_worker_model_or_provider_request",
+    "consumed_integrated_window_worker_attempt_immutable_no_retry_resume_overwrite_or_reclassification",
+    "accepted_integrated_runner_and_typed_edit_controls_remain_unchanged",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "integrated-development-preplanning-manual-git-identity-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Git identities in Ariadne git_refs_and_worktree evidence must come only from the machine snapshot.",
+      "observed_error": "The first preplanning runtime state repeated two exact Git object IDs in prose and the preflight rejected it with git_refs_evidence_manual_object_id_forbidden.",
+      "detection_method": "The Ariadne preflight returned revision_required before any worker, model or provider authority was opened.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-preplanning-corrected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.ariadne_git_refs_prose_repeated_machine_owned_oids",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove manual object identities from the evidence prose and regenerate from the machine snapshot.",
+        "prevention_control": "Treat git_refs_and_worktree narrative as an identity-free description and leave every exact ref to the generated snapshot.",
+        "evidence_paths": [
+          "scripts/ariadne_orchestrator_preflight.py",
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-preplanning-corrected-receipt.json"
+        ]
+      },
+      "baton_summary": "records the rejected manual Git-identity repetition and preserves machine-only Git ref authority."
+    },
+    {
+      "attempt_key": "integrated-development-runner-source-count-002",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+      "role": "implementer",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Runner source assertions must distinguish a function definition from its invocation.",
+      "observed_error": "The first focused test expected the preflightEditArguments text once although the accepted source correctly contains one definition and one call.",
+      "detection_method": "Focused pytest failed before contract publication or occupied preparation.",
+      "evidence_paths": [
+        "scripts/raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.source_fragment_count_conflated_definition_and_call",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Assert the exact exported definition and exact call-site fragment separately.",
+        "prevention_control": "Use role-specific source anchors instead of counting a shared function-name substring.",
+        "evidence_paths": [
+          "scripts/raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py",
+          "tests/test_raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py"
+        ]
+      },
+      "baton_summary": "records the corrected source-count assertion that now separates definition and invocation roles."
+    },
+    {
+      "attempt_key": "integrated-development-direct-script-import-bootstrap-003",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+      "role": "implementer",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_python",
+      "stage": "implementation",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "The controller must import its repository modules both as a test module and when executed directly by path.",
+      "observed_error": "The first direct --write-contract invocation could not import the scripts package because repository-root bootstrapping was omitted.",
+      "detection_method": "Direct controller execution failed before writing a contract or starting any runtime process.",
+      "evidence_paths": [
+        "scripts/raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py",
+        "docs/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.direct_script_repo_root_bootstrap_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Insert the repository root into sys.path before repository-package imports.",
+        "prevention_control": "Exercise each new controller both through pytest import and one direct CLI invocation before contract freeze.",
+        "evidence_paths": [
+          "scripts/raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py",
+          "tests/test_raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py"
+        ]
+      },
+      "baton_summary": "records the direct-script import bootstrap correction and dual import/CLI execution control."
+    },
+    {
+      "attempt_key": "integrated-development-contract-schema-properties-004",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+      "role": "implementer",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_python",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Every closed nested JSON object must declare the properties it admits.",
+      "observed_error": "The first contract generation found nested objects with additionalProperties false but no properties maps, so every intended member was rejected.",
+      "detection_method": "Draft 2020-12 validation failed before a contract file, preparation or occupied lease existed.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/contract.schema.json",
+        "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/contract.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "implementer.closed_nested_json_schema_properties_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Declare every admitted nested property and regenerate the exact contract from final schema bytes.",
+        "prevention_control": "Validate a representative complete instance against every new closed schema before contract publication.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/contract.schema.json",
+          "tests/test_raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py"
+        ]
+      },
+      "baton_summary": "records the closed nested-schema property correction and complete-instance validation control."
+    },
+    {
+      "attempt_key": "integrated-development-powershell-chunk-bound-005",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_shell",
+      "stage": "dispatch",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "PowerShell chunk boundaries must evaluate scalar arithmetic before array construction.",
+      "observed_error": "The first fresh AGENTS read constructed the final chunk with an unparenthesized array subtraction expression and PowerShell rejected it.",
+      "detection_method": "The read-only command failed before dispatch; the complete read was immediately rerun with typed chunk objects.",
+      "evidence_paths": [
+        "AGENTS.md",
+        "docs/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_chunk_end_expression_array_precedence",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Parenthesize the scalar subtraction and represent chunk bounds as named objects.",
+        "prevention_control": "Use explicit Start/End objects for future chunked PowerShell reads.",
+        "evidence_paths": [
+          "AGENTS.md",
+          "docs/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-closeout.md"
+        ]
+      },
+      "baton_summary": "records the corrected PowerShell chunk-bound expression used for complete rehydration."
+    },
+    {
+      "attempt_key": "integrated-development-checkpoint-context-readback-006",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_python",
+      "stage": "deterministic_verification",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Checkpoint readback through nested adapters must activate both the outer identity binding and the accepted controller binding.",
+      "observed_error": "The first read-only checkpoint probe activated only the outer adapter and therefore printed the historical base checkpoint instead of the current one.",
+      "detection_method": "The unexpected candidate and runner hashes visibly disagreed with the frozen checkpoint and were rejected before any launch.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-preexecution-checkpoint.json",
+        "scripts/raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.nested_controller_checkpoint_readback_context_incomplete",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Activate the accepted attempt's nested controller context before reading the current checkpoint and compare the exact frozen identities.",
+        "prevention_control": "Expose a future adapter-owned prepared-check entry point rather than probing nested controller internals directly.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-preexecution-checkpoint.json",
+          "docs/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-closeout.md"
+        ]
+      },
+      "baton_summary": "records the rejected historical checkpoint readback and requires both nested adapter contexts."
+    },
+    {
+      "attempt_key": "integrated-development-native-factory-terminal-007",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+      "role": "implementer",
+      "resource_id": "deepseek-native-harness-rc7",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "deepseek_native_harness",
+      "stage": "implementation",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "After exact readiness and runner loading, the bounded agent factory must publish one session and permit one provider request for the frozen synthetic task.",
+      "observed_error": "The integrated runner failed closed at factory after readiness, with zero model request, provider call, tool activity or candidate.",
+      "detection_method": "The runner's sanitized terminal reported failure_stage factory; the outer terminal, broker counters and unchanged synthetic hash corroborated it.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-terminal.json",
+        "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/efficacy-reading.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "deepseek_native_harness.integrated_runner_factory_pre_request_failure",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume the attempt, preserve the typed terminal, decline retry and move to a provider-free factory-subcoordinate diagnostic.",
+        "prevention_control": "Require a closed provider-free agents.create/setup fixture to pass before any later occupied request can be considered.",
+        "evidence_paths": [
+          "tests/test_raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal_postterminal.py",
+          "docs/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-closeout.md"
+        ]
+      },
+      "baton_summary": "records the consumed factory-stage Harness failure and bars another occupied attempt before provider-free diagnosis."
+    },
+    {
+      "attempt_key": "integrated-development-closeout-revision-path-008",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A closeout with new error observations must bind exactly the prospective register revision document in its acceptance paths.",
+      "observed_error": "The first closeout dry-run carried eight observations but omitted the prospective Revision 621 document path and failed closed with tick_incident_revision_path.",
+      "detection_method": "The governance clockwork rejected the intent before generation construction or canonical publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-621.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_incident_revision_acceptance_path_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact prospective Revision 621 path to the node artifacts and baton acceptance before rerunning the idempotent dry check.",
+        "prevention_control": "When agent_error_observations is nonempty, derive the prospective revision path from the current register revision plus one before assembling acceptance paths.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "docs/ariadne-agent-error-correction-register-revision-621.md"
+        ]
+      },
+      "baton_summary": "records the rejected missing prospective register path and requires revision-path derivation before closeout validation."
+    },
+    {
+      "attempt_key": "integrated-development-closeout-revision-headings-009",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The prospective register revision note must contain one ordered level-two heading for every newly projected incident ID.",
+      "observed_error": "The second closeout dry-run found the correct machine reading but only a bullet list, so the exact projected AER heading list was absent and it failed closed with tick_incident_revision_reading.",
+      "detection_method": "The governance clockwork rejected the document before generation construction or canonical publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-621.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.incident_revision_ordered_aer_headings_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Render one ordered level-two AER heading for every projected ID and update the embedded complete register reading.",
+        "prevention_control": "Generate revision headings from the same projected incident-ID sequence used for the machine comment.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "docs/ariadne-agent-error-correction-register-revision-621.md"
+        ]
+      },
+      "baton_summary": "records the rejected bullet-only revision note and requires ordered headings from projected incident IDs."
+    },
+    {
+      "attempt_key": "integrated-development-closeout-baton-budget-010",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The active Baton acceptance lookup must remain inside the deterministic live-handover byte and line budget.",
+      "observed_error": "The third closeout dry-run tried to place the full detailed artifact inventory in the active Baton row and failed closed with tick_baton_compaction_budget.",
+      "detection_method": "The governance clockwork rejected prospective Baton rendering before generation construction or canonical publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/closeout/closeout-intent.json",
+        "docs/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.active_baton_acceptance_inventory_exceeded_compaction_budget",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep the detailed artifact inventory in the immutable closeout graph and reduce the active Baton row to the essential lookup paths.",
+        "prevention_control": "Measure the prospective Baton rendering budget before assembling an exhaustive active acceptance list.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records the rejected exhaustive Baton inventory and keeps detailed artifacts in the closeout graph behind a compact active lookup."
+    }
+  ]
+}
