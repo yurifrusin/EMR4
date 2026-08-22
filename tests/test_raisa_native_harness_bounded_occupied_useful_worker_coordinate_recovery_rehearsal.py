@@ -9,6 +9,8 @@ import jsonschema
 import pytest
 
 from orchestration_harness import check_in_rollout_runbook as runbook
+from orchestration_harness.governance_clockwork_tick import validate_tick_intent
+from orchestration_harness.governance_live_adoption import validate_contract
 from scripts import (
     raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal
     as worker,
@@ -19,6 +21,14 @@ ROOT = Path(__file__).resolve().parents[1]
 PREDECESSOR_TERMINAL = (
     ROOT
     / "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-terminal.json"
+)
+CLOCKWORK_CONTRACT = (
+    ROOT
+    / "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json"
+)
+CLOSEOUT_INTENT = (
+    ROOT
+    / "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/closeout/closeout-intent.json"
 )
 
 
@@ -224,3 +234,9 @@ def test_persisted_terminal_is_typed_edit_error_and_completely_clean() -> None:
         "raw_prompt_response_reasoning_retained": False,
         "provider_key_present_in_worker_environment": False,
     }
+
+
+def test_closeout_intent_passes_the_typed_clockwork_validator() -> None:
+    contract = validate_contract(json.loads(CLOCKWORK_CONTRACT.read_bytes()))
+    admitted = validate_tick_intent(json.loads(CLOSEOUT_INTENT.read_bytes()), contract)
+    assert admitted["transaction_manifest"]["operation_id"] == worker.OPERATION_ID

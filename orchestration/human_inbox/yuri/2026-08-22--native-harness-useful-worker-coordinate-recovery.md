@@ -28,6 +28,12 @@ publication, without any model call. This is precisely the kind of residual
 form-filling lapse the clockwork catches; the next efficiency target is to make
 those fields selector-generated so the invalid words cannot be authored.
 
+The first closeout dry-run caught the same class once more in the incident
+record itself (`verification` rather than `deterministic_verification`). It
+moved no canonical state. The replacement closeout now validates the intent's
+typed form before committing it, so this particular error can no longer wait
+until the post-commit clockwork check.
+
 ## Technical summary
 
 - Operation: `raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal`

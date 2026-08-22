@@ -53,7 +53,7 @@
           "id": "accept-clockwork-and-receipt-corrections",
           "source": "docs/ariadne-agent-error-correction-register-revision-617.md",
           "status": "accepted",
-          "summary": "Accept the stale contract-binding and direct clockwork-surface write as corrected preexecution incidents and the post-compaction leverage-vocabulary rejection as a corrected local receipt incident; none consumed occupied authority."
+          "summary": "Accept the stale contract-binding and direct clockwork-surface write as corrected preexecution incidents plus the post-compaction leverage and closeout-stage vocabulary rejections as corrected local validation incidents; none consumed occupied authority."
         }
       ],
       "claim_scope": [
@@ -63,6 +63,7 @@
         "All retry, resume, fallback and auxiliary-model counts are zero and Harness, broker and exact-root cleanup is complete.",
         "The clockwork stopped two orchestrator setup errors before occupied authority consumption.",
         "A post-compaction preflight rejected invented leverage values before commit or canonical publication; the corrected five-source receipt passes.",
+        "The first closeout dry-run rejected an invalid incident-stage value with zero canonical mutation; the corrected intent uses the configured deterministic_verification value.",
         "No product, ordinary-practice, data, production, deployment, release, Pages or protected-ref authority opened."
       ],
       "contract_evidence": [],
@@ -95,6 +96,8 @@
           "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-postcompaction-receipt.json",
           "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-postcompaction-corrected-receipt.json",
           "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-closeout-precommit-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-closeout-correction-precommit-receipt.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/closeout/clockwork-check-attempt-001-rejected-receipt.json",
           "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/clockwork-checkpoint-tick-evidence.json",
           "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/closeout/pushover-notification-receipt.json"
         ],
@@ -182,6 +185,11 @@
       {
         "incident_id": "typed-worker-postcompaction-leverage-vocabulary",
         "source_id": "typed-worker-postcompaction-receipt-001",
+        "peers": []
+      },
+      {
+        "incident_id": "typed-worker-closeout-incident-stage-vocabulary",
+        "source_id": "typed-worker-closeout-clockwork-check-001",
         "peers": []
       }
     ],
@@ -362,7 +370,7 @@
       "model": "gpt-sol",
       "reasoning_level": "high",
       "transport": "local_orchestrator_preflight",
-      "stage": "verification",
+      "stage": "deterministic_verification",
       "category": "command_scope_violation",
       "process_severity": "low",
       "expected_invariant": "Every parallelism assessment must select expected_leverage only from the configured closed vocabulary and express qualifications in rationale text.",
@@ -388,6 +396,40 @@
         ]
       },
       "baton_summary": "records the rejected post-compaction leverage vocabulary and confines later receipts to configured typed values."
+    },
+    {
+      "attempt_key": "typed-worker-closeout-incident-stage-vocabulary-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every incident observation must select its stage from the governance clockwork's configured closed vocabulary before the closeout candidate is committed.",
+      "observed_error": "The first closeout intent labelled the leverage-vocabulary incident stage verification instead of deterministic_verification.",
+      "detection_method": "The first clockwork --check invocation rejected tick_incident_stage before generation preparation or canonical mutation; the rejection receipt records the exact configured vocabulary and zero effects.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_incident_stage_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace only the invalid stage with configured deterministic_verification and validate the full tick intent before committing the replacement closeout candidate.",
+        "prevention_control": "Run validate_tick_intent or the clockwork intent-validation gate before every closeout candidate commit; incident stages are selected from the validator's closed enum, not written as descriptive prose.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-617.md"
+        ]
+      },
+      "baton_summary": "records the rejected closeout incident-stage vocabulary and moves full intent validation before replacement candidate commit."
     }
   ]
 }

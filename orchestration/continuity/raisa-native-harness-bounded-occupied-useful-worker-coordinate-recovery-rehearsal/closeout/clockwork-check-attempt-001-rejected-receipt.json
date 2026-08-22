@@ -1,0 +1,25 @@
+{
+  "schema_version": "ariadne.governance_clockwork_check_rejection.v1",
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+  "recorded_at": "2026-08-22T15:42:01.4320204+10:00",
+  "source_head": "556ccc2e7eb3254912bf7ae3b56af275ab515f81",
+  "command": ".venv/Scripts/python.exe -m scripts.ariadne_governance_clockwork_tick --check --intent orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/closeout/closeout-intent.json",
+  "status": "revision_required",
+  "reason": "tick_incident_stage",
+  "invalid_value": "verification",
+  "configured_values": [
+    "dispatch",
+    "implementation",
+    "deterministic_verification",
+    "independent_review",
+    "acceptance",
+    "integration",
+    "closeout"
+  ],
+  "canonical_surface_mutation_count": 0,
+  "provider_request_count": 0,
+  "worker_process_count": 0,
+  "verifier_request_count": 0,
+  "protected_ref_movement_count": 0,
+  "candidate_state": "canonical_unchanged"
+}

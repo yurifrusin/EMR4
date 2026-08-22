@@ -6,15 +6,15 @@ Timestamp: 2026-08-22T15:33:39.2497985+10:00 (Australia/Brisbane)
 
 <!-- ariadne-agent-error-register-reading
 revision: 617
-incident_count: 959
-new_incident_ids: AER-0957,AER-0958,AER-0959
+incident_count: 960
+new_incident_ids: AER-0957,AER-0958,AER-0959,AER-0960
 open_incident_count: 0
 -->
 
-This revision adds two bounded, corrected preexecution observations and one
-post-compaction receipt-vocabulary observation from the native-Harness useful-
-worker coordinate recovery. All failed outside occupied authority. None is an
-occupied retry.
+This revision adds two bounded, corrected preexecution observations, one post-
+compaction receipt-vocabulary observation and one closeout-intent vocabulary
+observation from the native-Harness useful-worker coordinate recovery. All
+failed outside occupied authority. None is an occupied retry.
 
 ## AER-0957 — contract generated before bound schema bytes were final
 
@@ -41,10 +41,21 @@ before commit or clockwork publication. The corrected state uses configured
 values `positive` and `neutral`, retaining the qualifications only in each
 lane's rationale, and the fresh receipt passes.
 
+## AER-0960 — closeout incident stage used descriptive rather than typed form
+
+The first clockwork closeout intent labelled AER-0959's stage `verification`
+instead of configured `deterministic_verification`. The clockwork rejected
+`tick_incident_stage` before preparing or publishing any canonical surface. The
+corrected descendant uses the configured value and requires intent-schema
+validation before a closeout candidate commit, rather than discovering a form
+error only after publication of that candidate.
+
 ## Register reading
 
 The incidents show why a clockwork reading is preferable to remembered
 procedure: a stale binding and an ownership violation stopped before they could
 consume the one paid request, and a vocabulary lapse stopped before canonical
-publication. The process was not free, but it prevented more ambiguous occupied
-reruns or invalid state and preserved exact corrective evidence.
+publication. A second vocabulary lapse then stopped at the first closeout
+dry-run with zero canonical mutation. The process was not free, but it prevented
+more ambiguous occupied reruns or invalid state and preserved exact corrective
+evidence.

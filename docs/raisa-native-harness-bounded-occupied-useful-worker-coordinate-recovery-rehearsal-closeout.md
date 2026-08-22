@@ -62,6 +62,12 @@ corrected receipt uses only `positive`, `required_independence`, `neutral` or
 `negative`, keeping qualifications in rationale text. This added one local
 receipt regeneration but no provider, worker or verifier action.
 
+The first transactional closeout dry-run then rejected that new incident's
+descriptive stage `verification`; the clockwork requires the closed value
+`deterministic_verification`. No canonical surface moved. The value was
+corrected and intent-schema validation was moved before the replacement
+closeout candidate commit.
+
 ## Verification
 
 The focused postterminal suite validates the terminal schema, exact coordinate,
