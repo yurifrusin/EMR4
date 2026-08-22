@@ -1,0 +1,75 @@
+{
+  "schema_version": "emr4.check-in-attempt-007-redaction-cleanup-diagnosis-contract.v1",
+  "operation_id": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis",
+  "result": "raisa_provider_free_read_only_check_in_attempt_007_redaction_cleanup_projection_coordinate_diagnosis_pass",
+  "plan_source": "3240c0a00dcce1ea9c07907a1d67b2493c8f33ed",
+  "accepted_occupied_source": "b7c37a76c41d399c4b198d3ab6b526c5510b434b",
+  "accepted_terminal_source": "6657ee5061265d732096e9987f327d82feed800c",
+  "protected_source": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+  "coordinate_vocabulary": [
+    "prospective_success_projection_forbidden_field",
+    "post_cleanup_result_redaction_escape",
+    "wrapper_untyped_post_finalization_cleanup_collapse",
+    "insufficient_closed_evidence"
+  ],
+  "expected_conflict_paths": [
+    "closed_boundaries.live_secret_existing_hosted_or_product_database_used"
+  ],
+  "expected_terminal": {
+    "stage": "redaction",
+    "code": "forbidden_field",
+    "cleanup_status": "not_started",
+    "occupied_execution_count": 1,
+    "automatic_retry_count": 0
+  },
+  "source_bindings": [
+    {
+      "source_file": "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-plan.md",
+      "sha256": "fc66d153a42a5a8025d9c1ac46a8f43302ffc52a1bc4f4d3799aec7d2ef68e09"
+    },
+    {
+      "source_file": "docs/security/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-threat-model-delta.md",
+      "sha256": "eb6ffc1bf6f96872207bc0f7993ed06008a8113e80305d475f0cdfab44205e2f"
+    },
+    {
+      "source_file": "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+      "sha256": "1b7ec51cfd97fa6a54398ab0587acf79d3b0b8d34fa5609a2bad2abe17e91c16"
+    },
+    {
+      "source_file": "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_007.py",
+      "sha256": "ed7d84993d3b89037db09d0af2e7a0de32b0fb00c5da01a00731d100dcc14295"
+    },
+    {
+      "source_file": "orchestration/continuity/raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-rehearsal/contract.json",
+      "sha256": "bed2a89a3814ba9e9ac006d0fdb0c68d204fec53d8c21b6128190605b6ad9ec2"
+    },
+    {
+      "source_file": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/attempt-007-execution-envelope.schema.json",
+      "sha256": "4c62319a372a96897add7908159510b269ffca7f2a19d4f98facf03020d186c5"
+    },
+    {
+      "source_file": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/rehearsal-failure-evidence.json",
+      "sha256": "86e5e1342eb54e062e35d73390ebceb141d097d03e180e4fe3c0ed64b465f422"
+    },
+    {
+      "source_file": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-007/attempt-007-execution-envelope.json",
+      "sha256": "3338c58054dea96b3845827dacfe184889ee328e5a4463966464b560d0a2c2c5"
+    }
+  ],
+  "repair_gears": [
+    "prospective_success_projection_static_gate",
+    "typed_post_finalization_terminal_bridge"
+  ],
+  "closed_boundaries": {
+    "docker_object_created": false,
+    "postgresql_started": false,
+    "sql_or_database_executed": false,
+    "attempt_008_authorized": false,
+    "worker_or_provider_used": false,
+    "ordinary_practice_enabled": false,
+    "product_or_api_changed": false,
+    "product_or_protected_data_used": false,
+    "production_deployment_release_or_pages": false,
+    "protected_ref_moved": false
+  }
+}

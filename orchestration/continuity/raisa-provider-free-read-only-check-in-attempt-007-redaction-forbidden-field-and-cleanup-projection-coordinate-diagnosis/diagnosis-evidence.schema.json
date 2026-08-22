@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/check-in-attempt-007-redaction-cleanup-diagnosis-evidence.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "result", "source_head", "plan_source",
+    "accepted_terminal_source", "input_bindings_verified", "immutable_terminal",
+    "prospective_projection", "base_control_flow", "wrapper_projection",
+    "repair_boundary", "activity", "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.check-in-attempt-007-redaction-cleanup-diagnosis-evidence.v1"},
+    "operation_id": {"const": "raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis"},
+    "result": {"const": "raisa_provider_free_read_only_check_in_attempt_007_redaction_cleanup_projection_coordinate_diagnosis_pass"},
+    "source_head": {"$ref": "#/$defs/git"},
+    "plan_source": {"const": "3240c0a00dcce1ea9c07907a1d67b2493c8f33ed"},
+    "accepted_terminal_source": {"const": "6657ee5061265d732096e9987f327d82feed800c"},
+    "input_bindings_verified": {"const": true},
+    "immutable_terminal": {
+      "type": "object", "additionalProperties": false,
+      "required": ["stage", "code", "cleanup_status", "occupied_execution_count", "automatic_retry_count", "failure_sha256", "envelope_sha256", "transaction_attestation_present", "success_evidence_present"],
+      "properties": {
+        "stage": {"const": "redaction"}, "code": {"const": "forbidden_field"},
+        "cleanup_status": {"const": "not_started"}, "occupied_execution_count": {"const": 1},
+        "automatic_retry_count": {"const": 0}, "failure_sha256": {"$ref": "#/$defs/sha"},
+        "envelope_sha256": {"$ref": "#/$defs/sha"}, "transaction_attestation_present": {"const": false},
+        "success_evidence_present": {"const": false}
+      }
+    },
+    "prospective_projection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["key_path_count", "key_path_set_sha256", "conflict_count", "conflict_paths", "predicate_stage", "predicate_code", "coordinate"],
+      "properties": {
+        "key_path_count": {"type": "integer", "minimum": 50, "maximum": 200},
+        "key_path_set_sha256": {"$ref": "#/$defs/sha"}, "conflict_count": {"const": 1},
+        "conflict_paths": {"const": ["closed_boundaries.live_secret_existing_hosted_or_product_database_used"]},
+        "predicate_stage": {"const": "redaction"}, "predicate_code": {"const": "forbidden_field"},
+        "coordinate": {"const": "prospective_success_projection_forbidden_field"}
+      }
+    },
+    "base_control_flow": {
+      "type": "object", "additionalProperties": false,
+      "required": ["result_constructed_inside_lifecycle_try", "cleanup_finalized_in_finally", "final_result_redaction_after_finally", "base_handler_covers_final_result_redaction", "lifecycle_try_statement_index", "final_result_redaction_statement_index", "coordinate"],
+      "properties": {
+        "result_constructed_inside_lifecycle_try": {"const": true}, "cleanup_finalized_in_finally": {"const": true},
+        "final_result_redaction_after_finally": {"const": true}, "base_handler_covers_final_result_redaction": {"const": false},
+        "lifecycle_try_statement_index": {"type": "integer", "minimum": 0}, "final_result_redaction_statement_index": {"type": "integer", "minimum": 1},
+        "coordinate": {"const": "post_cleanup_result_redaction_escape"}
+      }
+    },
+    "wrapper_projection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["caught_base_failure_forwarded_to_writer", "writer_calls_sanitizer", "sanitizer_cleanup_status", "fake_stage", "fake_code", "coordinate"],
+      "properties": {
+        "caught_base_failure_forwarded_to_writer": {"const": true}, "writer_calls_sanitizer": {"const": true},
+        "sanitizer_cleanup_status": {"const": "not_started"}, "fake_stage": {"const": "redaction"},
+        "fake_code": {"const": "forbidden_field"}, "coordinate": {"const": "wrapper_untyped_post_finalization_cleanup_collapse"}
+      }
+    },
+    "repair_boundary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["gears", "forbidden_field_predicate_weakened", "closed_boundary_default_denial_preserved", "attempt_008_authorized"],
+      "properties": {
+        "gears": {"const": ["prospective_success_projection_static_gate", "typed_post_finalization_terminal_bridge"]},
+        "forbidden_field_predicate_weakened": {"const": false}, "closed_boundary_default_denial_preserved": {"const": true},
+        "attempt_008_authorized": {"const": false}
+      }
+    },
+    "activity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["docker_object_commands", "postgresql_processes_started", "sql_executions", "database_operations", "provider_requests", "product_effects"],
+      "properties": {
+        "docker_object_commands": {"const": 0}, "postgresql_processes_started": {"const": 0},
+        "sql_executions": {"const": 0}, "database_operations": {"const": 0},
+        "provider_requests": {"const": 0}, "product_effects": {"const": 0}
+      }
+    },
+    "claim_boundary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["transaction_semantics", "role_absence_before_teardown", "internal_cleanup_history", "external_owned_docker_resource_absence", "future_repair"],
+      "properties": {
+        "transaction_semantics": {"const": "unproved"}, "role_absence_before_teardown": {"const": "unproved"},
+        "internal_cleanup_history": {"const": "unproved"}, "external_owned_docker_resource_absence": {"const": "accepted_predecessor_evidence_only"},
+        "future_repair": {"const": "selected_not_implemented"}
+      }
+    }
+  },
+  "$defs": {
+    "git": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "sha": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}
