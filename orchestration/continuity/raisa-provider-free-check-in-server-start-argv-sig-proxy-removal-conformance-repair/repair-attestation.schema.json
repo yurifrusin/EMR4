@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/check-in-start-argv-sig-proxy-removal-repair-attestation.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "result",
+    "source_head",
+    "input_bindings_verified",
+    "exact_diff",
+    "start_attached",
+    "stdin_lifecycle",
+    "signal_and_teardown",
+    "historical_diagnosis",
+    "repair",
+    "closed_boundaries"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.check-in-start-argv-sig-proxy-removal-repair-attestation.v1"
+    },
+    "operation_id": {
+      "const": "raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair"
+    },
+    "result": {
+      "const": "raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair_pass"
+    },
+    "source_head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "input_bindings_verified": {
+      "const": true
+    },
+    "exact_diff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pre_repair_sha256",
+        "post_repair_sha256",
+        "removed_tokens",
+        "added_tokens",
+        "other_harness_changes"
+      ],
+      "properties": {
+        "pre_repair_sha256": {
+          "const": "839a9a17b22aa132ea5bddf878f59f4741412cb1ee464020f34aa2aefbdff8e2"
+        },
+        "post_repair_sha256": {
+          "const": "1b7ec51cfd97fa6a54398ab0587acf79d3b0b8d34fa5609a2bad2abe17e91c16"
+        },
+        "removed_tokens": {
+          "const": [
+            "--sig-proxy=false"
+          ]
+        },
+        "added_tokens": {
+          "const": []
+        },
+        "other_harness_changes": {
+          "const": 0
+        }
+      }
+    },
+    "start_attached": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "argv",
+        "advertised_options",
+        "popen_profile"
+      ],
+      "properties": {
+        "argv": {
+          "const": [
+            "<executable>",
+            "start",
+            "--attach",
+            "--interactive",
+            "<container_id>"
+          ]
+        },
+        "advertised_options": {
+          "const": {
+            "attach": true,
+            "interactive": true,
+            "sig_proxy": false
+          }
+        },
+        "popen_profile": {
+          "const": {
+            "cwd": "ROOT",
+            "stdin": "subprocess.PIPE",
+            "stdout": "subprocess.DEVNULL",
+            "stderr": "subprocess.DEVNULL",
+            "shell": false
+          }
+        }
+      }
+    },
+    "stdin_lifecycle": {
+      "const": {
+        "payload": "two_lines_ascii_newline_terminated",
+        "write_count": 1,
+        "flush_count": 1,
+        "open_after_delivery": true,
+        "normal_path_close_count": 0
+      }
+    },
+    "signal_and_teardown": {
+      "const": {
+        "docker_attach_default_forwards_signals": true,
+        "normal_path_terminate_count": 0,
+        "normal_path_kill_count": 0,
+        "teardown_stdin_close_count": 1,
+        "teardown_terminate_count": 1,
+        "teardown_wait_count": 1,
+        "teardown_kill_count": 0,
+        "teardown_result": "attachment_absent"
+      }
+    },
+    "historical_diagnosis": {
+      "const": {
+        "evidence_sha256": "924ca23b361770fa31037232aa342e39c377e91685ac7137d1bb4da264647bb0",
+        "historical_argv_contains_sig_proxy": true,
+        "current_live_source_check": "source_binding_drift_expected_after_accepted_repair",
+        "reclassified": false
+      }
+    },
+    "repair": {
+      "const": {
+        "surface": "remove_unsupported_sig_proxy_option_from_docker_start_argv",
+        "implemented": true,
+        "attempt_007_authorized": false
+      }
+    },
+    "closed_boundaries": {
+      "const": {
+        "docker_metadata_commands": 0,
+        "docker_object_commands": 0,
+        "docker_objects_created": 0,
+        "postgresql_processes": 0,
+        "sql_or_database_attempts": 0,
+        "provider_requests": 0,
+        "product_effects": 0,
+        "ordinary_admission_releases": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": "emr4.check-in-start-argv-sig-proxy-removal-repair-contract.v1",
+  "operation_id": "raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair",
+  "plan_source": "44585a202f4484f20e329772dd227305bb61e4a3",
+  "accepted_diagnosis_source": "2ab8707e2ac03be3b1a4c9c538dfa45382d7d92d",
+  "protected_source": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+  "result": "raisa_provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair_pass",
+  "source_bindings": [
+    {
+      "path": "docs/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-plan.md",
+      "sha256": "769250ac9d3785a653c2e9e7ecf57660e90516bc759353fe28c97beaf187bda1"
+    },
+    {
+      "path": "docs/security/raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair-threat-model-delta.md",
+      "sha256": "2187351e2a6d233b09b349fd222aa91a9ef36cf65a07e97d19f6fd851b2ff202"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-evidence.json",
+      "sha256": "924ca23b361770fa31037232aa342e39c377e91685ac7137d1bb4da264647bb0"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-report.md",
+      "sha256": "519b5f7d496adf770ad7e6641c18fa4804a14f9cc60a8284fd5964bedf947416"
+    }
+  ],
+  "harness_path": "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+  "pre_repair_harness_sha256": "839a9a17b22aa132ea5bddf878f59f4741412cb1ee464020f34aa2aefbdff8e2",
+  "post_repair_harness_sha256": "1b7ec51cfd97fa6a54398ab0587acf79d3b0b8d34fa5609a2bad2abe17e91c16",
+  "removed_line": "            \"--sig-proxy=false\",",
+  "expected_argv": [
+    "<executable>",
+    "start",
+    "--attach",
+    "--interactive",
+    "<container_id>"
+  ],
+  "popen_profile": {
+    "cwd": "ROOT",
+    "stdin": "subprocess.PIPE",
+    "stdout": "subprocess.DEVNULL",
+    "stderr": "subprocess.DEVNULL",
+    "shell": false
+  },
+  "diagnosis_option_surface": {
+    "attach": true,
+    "interactive": true,
+    "sig_proxy": false
+  },
+  "closed_boundaries": {
+    "docker_metadata_commands": 0,
+    "docker_object_commands": 0,
+    "docker_objects_created": 0,
+    "postgresql_processes": 0,
+    "sql_or_database_attempts": 0,
+    "provider_requests": 0,
+    "product_effects": 0,
+    "ordinary_admission_releases": 0,
+    "attempt_007_authorized": false
+  }
+}

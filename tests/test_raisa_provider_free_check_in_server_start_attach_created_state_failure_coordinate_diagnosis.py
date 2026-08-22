@@ -15,6 +15,10 @@ from scripts import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
+HARNESS_REPOSITORY_PATH = (
+    "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_"
+    "relay_free_rollback_unknown_commit_recovery_rehearsal.py"
+)
 
 
 def _contract() -> dict[str, object]:
@@ -48,12 +52,37 @@ def _runner(command: list[str] | tuple[str, ...]) -> subprocess.CompletedProcess
     raise AssertionError(f"unadmitted command: {command!r}")
 
 
-def test_contract_and_exact_source_bindings_pass() -> None:
+def _historical_harness_source() -> str:
+    result = subprocess.run(
+        [
+            "git",
+            "show",
+            f"7cd4d8069fc3983cdb4d2e80384e0f663e917c4e:{HARNESS_REPOSITORY_PATH}",
+        ],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+    )
+    return result.stdout
+
+
+def _bind_historical_harness(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    historical = tmp_path / "historical_harness.py"
+    historical.write_text(_historical_harness_source(), encoding="utf-8")
+    monkeypatch.setattr(diagnosis, "HARNESS_PATH", historical)
+
+
+def test_closed_contract_refuses_repaired_live_source_and_history_remains_exact() -> None:
     head = diagnosis._git_head()
-    diagnosis._validate_contract(_contract(), head)
-    assert diagnosis.extract_start_argv(
-        diagnosis.HARNESS_PATH.read_text(encoding="utf-8")
-    ) == diagnosis.EXPECTED_ARGV
+    with pytest.raises(diagnosis.DiagnosisError, match="source binding drift"):
+        diagnosis._validate_contract(_contract(), head)
+    assert diagnosis.extract_start_argv(_historical_harness_source()) == (
+        diagnosis.EXPECTED_ARGV
+    )
 
 
 def test_cli_manifest_is_read_only_and_object_free() -> None:
@@ -85,7 +114,10 @@ def test_cli_manifest_is_read_only_and_object_free() -> None:
         assert prohibited not in flattened
 
 
-def test_deterministic_evidence_selects_exact_cli_surface_mismatch() -> None:
+def test_deterministic_evidence_selects_exact_cli_surface_mismatch(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    _bind_historical_harness(monkeypatch, tmp_path)
     evidence = diagnosis.build_evidence(
         contract=_contract(),
         head=diagnosis._git_head(),
@@ -134,7 +166,10 @@ def test_classifier_uses_only_closed_coordinates() -> None:
     ) == "insufficient_closed_evidence"
 
 
-def test_schema_rejects_free_form_coordinate_and_raw_output() -> None:
+def test_schema_rejects_free_form_coordinate_and_raw_output(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    _bind_historical_harness(monkeypatch, tmp_path)
     evidence = diagnosis.build_evidence(
         contract=_contract(),
         head=diagnosis._git_head(),

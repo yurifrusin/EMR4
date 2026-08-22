@@ -1859,7 +1859,6 @@ def _start_attached(
             "start",
             "--attach",
             "--interactive",
-            "--sig-proxy=false",
             container_id,
         ],
         cwd=ROOT,

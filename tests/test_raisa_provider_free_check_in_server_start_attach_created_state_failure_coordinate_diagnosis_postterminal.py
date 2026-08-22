@@ -21,6 +21,7 @@ HARNESS_PATH = ROOT / "scripts" / (
     "raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_"
     "rollback_unknown_commit_recovery_rehearsal.py"
 )
+HARNESS_REPOSITORY_PATH = HARNESS_PATH.relative_to(ROOT).as_posix()
 
 
 def test_terminal_is_canonical_schema_valid_and_exactly_bound() -> None:
@@ -78,7 +79,14 @@ def test_no_raw_output_or_dynamic_failure_text_is_retained() -> None:
 
 
 def test_database_harness_remains_exact_and_report_names_future_repair() -> None:
-    assert hashlib.sha256(HARNESS_PATH.read_bytes()).hexdigest() == (
+    evidence = json.loads(EVIDENCE_PATH.read_text(encoding="utf-8"))
+    historical = subprocess.run(
+        ["git", "show", f"{evidence['source_head']}:{HARNESS_REPOSITORY_PATH}"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+    ).stdout
+    assert hashlib.sha256(historical).hexdigest() == (
         "839a9a17b22aa132ea5bddf878f59f4741412cb1ee464020f34aa2aefbdff8e2"
     )
     report = REPORT_PATH.read_text(encoding="utf-8")
