@@ -1,0 +1,67 @@
+{
+  "accepted_attempt_check": {
+    "attempt_id": "deepseek-native-integrated-window-worker-001",
+    "attempt_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-integrated-window-worker-001",
+    "lease_id": "lease-deepseek-native-integrated-window-worker-001",
+    "native_process_count": 0,
+    "operation_id": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+    "provider_request_count": 0,
+    "result": "pass",
+    "schema_version": "ariadne.synthetic_native_worker_attempt_004_check.v1",
+    "structured_diagnostic_lifecycle": {
+      "checks": {
+        "cleanup_last": true,
+        "exact_order": true,
+        "no_retry": true,
+        "single_launch": true,
+        "single_terminal_write": true
+      },
+      "sha256": "14c2c7e4fdb3520b0c8face8607b519a8980cb45e2a0e2c82477d48243722d09"
+    },
+    "work_order_id": "wo-deepseek-native-integrated-window-worker-001"
+  },
+  "boundary": {
+    "auxiliary_model_count": 0,
+    "database_or_docker_count": 0,
+    "fallback_count": 0,
+    "model_request_count": 0,
+    "native_process_count": 0,
+    "provider_request_count": 0,
+    "resume_count": 0,
+    "retry_count": 0,
+    "session_count": 0,
+    "turn_count": 0
+  },
+  "contract_sha256": "6b9ba2666b3b38914ed405642cd16cc0ae8d983dc945a99db1fad1c584bb56e7",
+  "operation_id": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+  "result": "passed",
+  "runner": {
+    "bytes": 14210,
+    "checks": {
+      "compatibility_failure": true,
+      "compatibility_success": true,
+      "conclusion_before_dispatch": true,
+      "exact_model": true,
+      "exact_tools": true,
+      "no_retry_fallback": true,
+      "one_conclusion": true,
+      "one_factory": true,
+      "one_followup": true,
+      "one_post_execute": true,
+      "one_pre_execute": true,
+      "one_result": true,
+      "typed_argument_preflight": true,
+      "typed_argument_result": true,
+      "typed_lifecycle": true
+    },
+    "sha256": "017394e3f86a3efdf5eba0745c254a8b561615fb6ab923978b81bb5941e8e3f4"
+  },
+  "schema_version": "ariadne.native_harness_integrated_development_provider_free_evidence.v1",
+  "work_package": {
+    "baseline_sha256": "9606d9341e6b7e53f4ee9007d7518145322968b2d0bc156622928c33ab97d4f8",
+    "expected_sha256": "e763b74f87b5d6e721263414c74f1c36bac64bc5783987425a55a95826716d3c",
+    "holdback_case_count": 3,
+    "path": "synthetic_window_coalescer.py",
+    "public_case_count": 4
+  }
+}
