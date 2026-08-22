@@ -41,7 +41,7 @@ unless that occupied preflight exposes a concrete new hazard.
   request/provider/model/target counters zero.
 - Immutable controller terminal: `complete_runner_result_rejected`.
 - Recovery: zero-process, zero-retry exact-preimage hash reconciliation.
-- Register: revision 614, 940 bounded incidents, none open; AER-0939 is the
+- Register: revision 614, 941 bounded incidents, none open; AER-0939 is the
   material wire/evidence serializer recurrence.
 - Protected refs remain exact at
   `2e34bdad732fdab32fbf778280b3d3c70d66d602`; no Pages or product/data action.

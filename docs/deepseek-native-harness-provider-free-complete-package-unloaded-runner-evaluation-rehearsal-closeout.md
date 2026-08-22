@@ -47,7 +47,7 @@ and accepted the runner result. The rejection remains preserved as evidence.
   tests passed;
 - the reconciliation persisted check passes at the exact clean candidate;
 - Python compilation, Ruff and all five JSON Schemas pass;
-- the agent-error register is revision 614 with 940 bounded incidents, none
+- the agent-error register is revision 614 with 941 bounded incidents, none
   open, and its fresh pattern report is deterministic; and
 - all four protected refs remain at
   `2e34bdad732fdab32fbf778280b3d3c70d66d602` with `docs/branding/` preserved.
@@ -58,7 +58,8 @@ AER-0938 records three focused contract-expectation mistakes caught before
 execution. AER-0939 records the material sorted-wire validator error and its
 process-free correction. It is explicitly related in prose to AER-0936: the
 earlier local mock fix did not prevent recurrence in the production validator.
-AER-0940 records the recovery exception-domain leak caught before publication.
+AER-0940 records the recovery exception-domain leak caught before publication;
+AER-0941 records the clockwork boundary-floor literal rejected before generation.
 All are corrected; none authorises a retry.
 
 ## Parallelism outcome

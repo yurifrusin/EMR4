@@ -4,16 +4,16 @@ Date: 2026-08-22
 
 Timestamp: 2026-08-22T11:54:17.2967942+10:00 (Australia/Brisbane)
 
-Status: **940 bounded incidents; all corrected or contained; none open**
+Status: **941 bounded incidents; all corrected or contained; none open**
 
 <!-- ariadne-agent-error-register-reading
 revision: 614
-incident_count: 940
-new_incident_ids: AER-0938,AER-0939,AER-0940
+incident_count: 941
+new_incident_ids: AER-0938,AER-0939,AER-0940,AER-0941
 open_incident_count: 0
 -->
 
-This revision adds AER-0938 through AER-0940. It preserves every preceding
+This revision adds AER-0938 through AER-0941. It preserves every preceding
 entry unchanged.
 
 ## AER-0938 — focused complete-runner expectations drifted from the contract
@@ -67,12 +67,27 @@ all hostile cases pass and no process was launched.
 Recurrence signature:
 `orchestrator.reconciliation_leaked_parent_validation_exception_domain`
 
+## AER-0941 — closeout omitted one exact boundary-floor literal
+
+The first clockwork dry-run carried a broader boundary forbidding live product
+runtime, production, deployment, release and Pages, but omitted the clockwork's
+exact canonical `no_production_runtime_deployment_release_or_pages` token. The
+typed validator rejected the intent with `tick_next_boundaries_floor` before
+generation or publication.
+
+The exact required literal was added without weakening the broader boundary.
+The corrected dry-run then progressed to live-state validation. No canonical
+projection, latch or protected ref changed in the rejected run.
+
+Recurrence signature:
+`orchestrator.clockwork_next_boundary_floor_literal_omitted`
+
 ## Control reading
 
 AER-0939 is the material incident. The useful runner capability passed in one
 process, but an already-known class of serializer-boundary lapse consumed a
 reconciliation cycle because the prior fix was local rather than structural.
-AER-0938 and AER-0940 were pre-execution test/control defects. Revision 614
+AER-0938, AER-0940 and AER-0941 were pre-execution test/control defects. Revision 614
 therefore does not count the recovery paperwork as Harness capability progress;
 it records one substantive runner pass and one avoidable post-processing rerun
 of procedure, with zero Node retry, provider activity or product authority.

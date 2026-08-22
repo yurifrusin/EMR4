@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 614,
+  "register_revision": 613,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -36434,121 +36434,6 @@
       },
       "incident_id": "AER-0937",
       "attempt_id": "clock-ed67c116ed2c2bba2f42f998",
-      "origin": "operator",
-      "related_incident_ids": [],
-      "status": "corrected"
-    },
-    {
-      "observed_on": "2026-08-22",
-      "tranche": "deepseek-native-harness-complete-package-unloaded-runner-evaluation",
-      "role": "orchestrator",
-      "resource_id": "complete-runner-focused-contract-expectations",
-      "model": "gpt-sol",
-      "reasoning_level": "extra-high",
-      "transport": "local_pytest",
-      "stage": "deterministic_verification",
-      "category": "operator_error",
-      "process_severity": "low",
-      "expected_invariant": "Focused expectations mirror the exact module iteration order, sidecar cardinality and content-free envelope field contract.",
-      "observed_error": "The first focused collection expected a different relative-edge order, forty rather than thirty-nine sidecar keys, and treated the word fixture in safe envelope field names as retained content.",
-      "detection_method": "The first focused provider-free pytest collection failed before commit or process execution.",
-      "evidence_paths": [
-        "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
-        "docs/ariadne-agent-error-correction-register-revision-614.md"
-      ],
-      "candidate_state": "accepted_candidate_changed",
-      "workflow_disposition": "revision_required",
-      "recurrence_signature": "orchestrator.complete_runner_focused_expectations_drifted_from_exact_contract",
-      "causal_claim_level": "observation_only",
-      "correction": {
-        "status": "control_added",
-        "action": "Bind expected edges to actual module traversal, set the exact thirty-nine-key sidecar cardinality and assert absence of raw-content fields rather than words in safe field names.",
-        "prevention_control": "Focused tests compare typed structures and exact source-owned cardinalities before process admission.",
-        "evidence_paths": [
-          "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
-          "docs/ariadne-agent-error-correction-register-revision-614.md"
-        ]
-      },
-      "incident_id": "AER-0938",
-      "attempt_id": "clock-32a8aa5c874f42fbaa0fb4d1",
-      "origin": "operator",
-      "related_incident_ids": [],
-      "status": "corrected"
-    },
-    {
-      "observed_on": "2026-08-22",
-      "tranche": "deepseek-native-harness-complete-package-unloaded-runner-evaluation",
-      "role": "orchestrator",
-      "resource_id": "complete-runner-fixture-wire-validator",
-      "model": "gpt-sol",
-      "reasoning_level": "extra-high",
-      "transport": "isolated_node_then_local_hash_reconciliation",
-      "stage": "deterministic_verification",
-      "category": "operator_error",
-      "process_severity": "moderate",
-      "expected_invariant": "The result validator compares stdout with the fixture's declared wire key order rather than a sorted evidence serializer.",
-      "observed_error": "The one authorised Node process exited zero with empty stderr and exact runner sidecar, but the validator rejected its exact 129-byte declared-order fixture line because it compared against alphabetically sorted JSON bytes.",
-      "detection_method": "The immutable process envelope and failure terminal showed a zero-exit result rejection; process-free expected-preimage hashing matched stdout and sidecar exactly.",
-      "evidence_paths": [
-        "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/attempt-001-process-envelope.json",
-        "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/attempt-001-failure-terminal.json",
-        "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-result-contract-reconciliation.md",
-        "docs/ariadne-agent-error-correction-register-revision-614.md"
-      ],
-      "candidate_state": "accepted_candidate_changed",
-      "workflow_disposition": "revision_required",
-      "recurrence_signature": "orchestrator.complete_runner_validator_used_evidence_canonicalization_for_wire_contract",
-      "causal_claim_level": "observation_only",
-      "correction": {
-        "status": "control_added",
-        "action": "Preserve the rejection, derive both exact declared-order preimages from frozen source, require their byte counts and hashes to match the immutable envelope and accept only the process-free reconciled result.",
-        "prevention_control": "Wire contracts expose a dedicated serializer and golden byte/hash assertion shared by fixture and validator; generic evidence canonicalization is never used for wire comparison.",
-        "evidence_paths": [
-          "scripts/deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py",
-          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/result-contract-reconciliation-evidence.json",
-          "docs/ariadne-agent-error-correction-register-revision-614.md"
-        ]
-      },
-      "incident_id": "AER-0939",
-      "attempt_id": "clock-005c93e0fe96425fba2b9c5b",
-      "origin": "operator",
-      "related_incident_ids": [],
-      "status": "corrected"
-    },
-    {
-      "observed_on": "2026-08-22",
-      "tranche": "deepseek-native-harness-complete-runner-result-contract-reconciliation",
-      "role": "orchestrator",
-      "resource_id": "reconciliation-parent-schema-exception-boundary",
-      "model": "gpt-sol",
-      "reasoning_level": "extra-high",
-      "transport": "local_pytest",
-      "stage": "deterministic_verification",
-      "category": "operator_error",
-      "process_severity": "low",
-      "expected_invariant": "A process-free reconciliation projects every parent validation failure into its own closed exception vocabulary.",
-      "observed_error": "Five hostile schema-constant cases escaped as the parent controller exception rather than ReconciliationError.",
-      "detection_method": "The first focused process-free reconciliation pytest collection failed before reconciliation publication.",
-      "evidence_paths": [
-        "tests/test_deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py",
-        "docs/ariadne-agent-error-correction-register-revision-614.md"
-      ],
-      "candidate_state": "accepted_candidate_changed",
-      "workflow_disposition": "revision_required",
-      "recurrence_signature": "orchestrator.reconciliation_leaked_parent_validation_exception_domain",
-      "causal_claim_level": "observation_only",
-      "correction": {
-        "status": "control_added",
-        "action": "Catch parent CompleteRunnerError at the reconciliation boundary and rethrow its closed coordinate as ReconciliationError.",
-        "prevention_control": "Recovery adapters translate imported validator failures into their own declared exception domain and test every schema-constant rejection.",
-        "evidence_paths": [
-          "scripts/deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py",
-          "tests/test_deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py",
-          "docs/ariadne-agent-error-correction-register-revision-614.md"
-        ]
-      },
-      "incident_id": "AER-0940",
-      "attempt_id": "clock-81ace2425d834066b563c333",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

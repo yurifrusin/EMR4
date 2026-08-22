@@ -1,0 +1,364 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal",
+    "title": "DeepSeek native Harness complete package-unloaded runner reconciled pass",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T11:54:17.2967942+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal",
+      "title": "Complete package-unloaded runner reconciled pass",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted exactly one provider-free complete package-unloaded runner evaluation.",
+          "The one process is consumed and its post-processing rejection remains immutable; no retry, installed-package load, native Harness, worker, model, provider, product, data, deployment, Pages or protected-ref authority is opened by this acceptance."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-complete-runner-import-closure",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/contract.json",
+          "status": "accepted",
+          "summary": "Accept the exact derived runner, four-edge relative graph, four local package stubs and three admitted Node built-ins in the thirteen-file disposable inventory."
+        },
+        {
+          "id": "preserve-postprocessing-rejection",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/attempt-001-failure-terminal.json",
+          "status": "accepted",
+          "summary": "Preserve the immutable result rejection as an evidence-controller decision after the zero-exit runner process."
+        },
+        {
+          "id": "accept-process-free-wire-reconciliation",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/result-contract-reconciliation-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact declared-order stdout and sidecar preimages because both byte counts and hashes match the immutable envelope with zero retry or reconciliation process."
+        },
+        {
+          "id": "reject-native-worker-provider-claim",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "The result proves no installed-package load, native-Harness boot, occupied DeepSeek turn, provider transport or worker quality."
+        }
+      ],
+      "claim_scope": [
+        "The exact 12950-byte derived runner executed once over the accepted guard bridge and sanitizer graph.",
+        "Exactly four local package stubs and three admitted Node built-ins completed the package-unloaded closure.",
+        "The authored-synthetic private factory path mounted the exact preset, restricted edit glob and read, installed local model selection and observed the exact publication veto.",
+        "The consumed process exited zero with empty stderr, exact declared-order stdout, exact successful runner sidecar and complete disposable cleanup.",
+        "The original result rejection is preserved and attributed to sorted evidence serialization at a declared-order wire boundary.",
+        "The process-free reconciliation matched both frozen preimages exactly and launched no retry or process.",
+        "Installed package, native Harness, worker, model, provider, broker, network, database, Docker and target counts remain zero.",
+        "Native occupied worker behavior and quality remain unproved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-threat-model-delta.md",
+          "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-result-contract-reconciliation.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/attempt-001-failure-terminal.json",
+          "docs/ariadne-agent-error-correction-register-revision-614.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--complete-package-unloaded-runner-reconciled-pass.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-pre-verifier-acceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_agents_acceptance_index.py",
+          "tests/test_ariadne_agent_error_register.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
+          "scripts/deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/attempt-001-process-envelope.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/result-contract-reconciliation-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/result-contract-reconciliation-report.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The installed DeepSeek Harness package has not loaded the complete correction.",
+        "No occupied native-Harness DeepSeek worker turn or provider request has passed.",
+        "Worker reliability and useful Raisa development quality remain unproved.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development",
+      "outcome": "The complete derived runner now passes its exact package-unloaded composition and prepublication-veto terminal in one consumed process.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/result-contract-reconciliation-evidence.json",
+        "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Use the accepted complete runner in one bounded occupied native-Harness DeepSeek worker on useful Raisa development work",
+      "why_now": "The exact runner, preset-mount guard graph, tool restriction, local model selection, publication veto, terminal sidecar and cleanup have all passed package-unloaded composition; another speculative provider-free checkpoint would add procedure without capability evidence.",
+      "outcome": "The next tranche freezes one exact low-risk useful Raisa work package and may consume one native-Harness DeepSeek V4 Flash/high worker turn under the accepted broker, runner, zero-retry and cleanup controls.",
+      "unlocks": [
+        "First evidence that the corrected native Harness can reach and control a useful DeepSeek worker turn.",
+        "An attributable candidate that Sol can independently adopt or reject.",
+        "A direct comparison with the earlier opaque Claude Code worker failures."
+      ],
+      "does_not_solve": [
+        "No general Harness or model reliability conclusion from one worker.",
+        "No unrestricted product/data, ordinary-practice, production or protected-integration authority.",
+        "No retry, resume, fallback or auxiliary-model authority."
+      ],
+      "evidence": [
+        "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-closeout.md",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-sol-acceptance.md"
+      ],
+      "orientation_statement": "Freeze and run one bounded occupied native-Harness DeepSeek worker on one exact useful low-risk Raisa development package; accept or reject its attributable candidate without retry."
+    },
+    "next_operation": {
+      "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+      "active_tranche": "Raisa native Harness bounded occupied useful-worker rehearsal",
+      "objective": "Freeze one exact low-risk useful Raisa repository work package and execute at most one fresh native-Harness DeepSeek V4 Flash/high worker turn with exact owned paths, tool and request ceilings, attributable terminal evidence, complete cleanup and independent Sol adoption or rejection.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and extended authority for the bounded native-Harness control sequence, plus the accepted complete package-unloaded runner result.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_select_and_freeze_the_narrowest_useful_low_risk_raisa_worker_package_before_any_native_harness_or_provider_process"
+    },
+    "incidents": [],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "complete_runner_reconciliation_persisted_check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation", "--check"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "complete_runner_and_reconciliation_focused_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "pytest", "--noconftest", "-p", "no:cacheprovider", "--strict-config", "--strict-markers", "-q", "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "complete_runner_governance_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_ariadne_active_operation_latch.py", "tests/test_ariadne_active_operation_latch_continuity.py", "tests/test_current_baton_consistency.py", "tests/test_agents_acceptance_index.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "complete_runner_closeout_ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py", "scripts/deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py", "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "complete_runner_closeout_compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py", "scripts/deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py", "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "DeepSeek native Harness complete package-unloaded runner reconciled acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-result-contract-reconciliation.md",
+      "scripts/deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
+      "scripts/deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py",
+      "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
+      "tests/test_deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-postcompaction-receipt.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-pre-verifier-acceptance-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-614.md",
+      "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--complete-package-unloaded-runner-reconciled-pass.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "one_bounded_occupied_native_harness_deepseek_worker_turn_only_after_frozen_exact_work_package_and_preexecution_admission",
+    "accepted_complete_runner_guard_bridge_sanitizer_broker_and_clockwork_bindings_preserved",
+    "fresh_disjoint_attempt_work_order_lease_root_and_evidence_namespace_required",
+    "exact_owned_paths_and_low_risk_useful_raisa_repository_package_only",
+    "at_most_one_provider_request_and_one_worker_turn",
+    "zero_automatic_manual_retry_resume_fallback_auxiliary_model_or_claude_code_fallback",
+    "prepaid_deepseek_balance_is_the_financial_ceiling_no_top_up_or_local_currency_claim",
+    "raw_prompt_response_reasoning_stream_environment_session_and_credential_material_not_retained",
+    "complete_owned_process_and_disposable_root_cleanup_required",
+    "worker_candidate_is_untrusted_until_independent_sol_readback_and_adoption",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_command_mounting_or_generic_status_arrived_change",
+    "no_live_product_runtime_production_deployment_release_or_pages",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "complete-runner-closeout-contract-expectations",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-complete-package-unloaded-runner-evaluation",
+      "role": "orchestrator",
+      "resource_id": "complete-runner-focused-contract-expectations",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Focused expectations mirror the exact module iteration order, sidecar cardinality and content-free envelope field contract.",
+      "observed_error": "The first focused collection expected a different relative-edge order, forty rather than thirty-nine sidecar keys, and treated the word fixture in safe envelope field names as retained content.",
+      "detection_method": "The first focused provider-free pytest collection failed before commit or process execution.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-614.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.complete_runner_focused_expectations_drifted_from_exact_contract",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind expected edges to actual module traversal, set the exact thirty-nine-key sidecar cardinality and assert absence of raw-content fields rather than words in safe field names.",
+        "prevention_control": "Focused tests compare typed structures and exact source-owned cardinalities before process admission.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-614.md"
+        ]
+      },
+      "baton_summary": "records and corrects three focused complete-runner expectation defects before process execution."
+    },
+    {
+      "attempt_key": "complete-runner-closeout-wire-validator",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-complete-package-unloaded-runner-evaluation",
+      "role": "orchestrator",
+      "resource_id": "complete-runner-fixture-wire-validator",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "isolated_node_then_local_hash_reconciliation",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "The result validator compares stdout with the fixture's declared wire key order rather than a sorted evidence serializer.",
+      "observed_error": "The one authorised Node process exited zero with empty stderr and exact runner sidecar, but the validator rejected its exact 129-byte declared-order fixture line because it compared against alphabetically sorted JSON bytes.",
+      "detection_method": "The immutable process envelope and failure terminal showed a zero-exit result rejection; process-free expected-preimage hashing matched stdout and sidecar exactly.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/attempt-001-process-envelope.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/attempt-001-failure-terminal.json",
+        "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-result-contract-reconciliation.md",
+        "docs/ariadne-agent-error-correction-register-revision-614.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.complete_runner_validator_used_evidence_canonicalization_for_wire_contract",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the rejection, derive both exact declared-order preimages from frozen source, require their byte counts and hashes to match the immutable envelope and accept only the process-free reconciled result.",
+        "prevention_control": "Wire contracts expose a dedicated serializer and golden byte/hash assertion shared by fixture and validator; generic evidence canonicalization is never used for wire comparison.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/result-contract-reconciliation-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-614.md"
+        ]
+      },
+      "baton_summary": "preserves the successful consumed runner process and corrects its declared-wire versus sorted-evidence validator recurrence without retry."
+    },
+    {
+      "attempt_key": "complete-runner-closeout-reconciliation-exception",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-complete-runner-result-contract-reconciliation",
+      "role": "orchestrator",
+      "resource_id": "reconciliation-parent-schema-exception-boundary",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A process-free reconciliation projects every parent validation failure into its own closed exception vocabulary.",
+      "observed_error": "Five hostile schema-constant cases escaped as the parent controller exception rather than ReconciliationError.",
+      "detection_method": "The first focused process-free reconciliation pytest collection failed before reconciliation publication.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py",
+        "docs/ariadne-agent-error-correction-register-revision-614.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.reconciliation_leaked_parent_validation_exception_domain",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Catch parent CompleteRunnerError at the reconciliation boundary and rethrow its closed coordinate as ReconciliationError.",
+        "prevention_control": "Recovery adapters translate imported validator failures into their own declared exception domain and test every schema-constant rejection.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py",
+          "tests/test_deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py",
+          "docs/ariadne-agent-error-correction-register-revision-614.md"
+        ]
+      },
+      "baton_summary": "records and corrects the process-free recovery exception-domain leak before publication."
+    },
+    {
+      "attempt_key": "complete-runner-closeout-boundary-floor",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-complete-package-unloaded-runner-evaluation",
+      "role": "orchestrator",
+      "resource_id": "clockwork-next-boundary-literal-floor",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_dry_run",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every clockwork successor boundary list contains each exact canonical floor token in addition to any stronger contextual boundary.",
+      "observed_error": "The first closeout intent carried a stronger contextual runtime boundary but omitted the exact no_production_runtime_deployment_release_or_pages floor literal.",
+      "detection_method": "Clockwork dry-run rejected the intent with tick_next_boundaries_floor before generation or publication.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-614.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_next_boundary_floor_literal_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact required floor literal while retaining the stronger contextual boundary.",
+        "prevention_control": "Successor boundary manifests copy the canonical floor set verbatim before appending tranche-specific restrictions.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-614.md"
+        ]
+      },
+      "baton_summary": "records and corrects an omitted exact clockwork boundary-floor literal before generation."
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free complete package-unloaded runner evaluation rehearsal",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_exact_complete_package_unloaded_runner_contract",
+    "operation_id": "deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "3c0a0ec55dacfd8efc0a0e4b28a85bf96079bce1",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "37dbd156e319c9482c5cf5db0b5a127a745647c5",
+    "reason_codes": [],
+    "resolved_commit": "3c0a0ec55dacfd8efc0a0e4b28a85bf96079bce1",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "3c0a0ec55dacfd8efc0a0e4b28a85bf96079bce1"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "37dbd156e319c9482c5cf5db0b5a127a745647c5",
+    "branch_origin_aligned": true,
+    "head": "37dbd156e319c9482c5cf5db0b5a127a745647c5",
+    "origin_branch_commit": "37dbd156e319c9482c5cf5db0b5a127a745647c5",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 662
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "complete package-unloaded runner pre-verifier acceptance",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native Harness and worker are the governed successor and cannot self-certify this provider-free package-unloaded acceptance.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The immutable zero-exit envelope and both exact frozen preimage hashes remove the only ambiguity; no external semantic veto is proportionate.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits delegation and the final evidence binding is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "clockwork closeout",
+      "occupied-worker contract freeze"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "preserve the immutable post-processing rejection",
+      "bind both exact wire preimage hashes without another process",
+      "verify cleanup zero activity and protected refs",
+      "accept the reconciled package-unloaded runner only",
+      "advance directly to one bounded occupied useful Raisa worker"
+    ]
+  },
+  "planned_action": "accept_the_exact_reconciled_complete_package_unloaded_runner_pass_after_binding_the_immutable_zero_exit_process_declared_wire_and_sidecar_hashes_zero_retry_cleanup_git_refs_and_closed_native_worker_provider_and_product_boundaries",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-result-contract-reconciliation.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/attempt-001-process-envelope.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/attempt-001-failure-terminal.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/result-contract-reconciliation-evidence.json",
+      "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-sol-acceptance.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns deterministic acceptance. DeepSeek remains declined because the native worker is the governed successor; Gemini remains declined because exact immutable byte/hash reconciliation leaves no material semantic ambiguity; native subagents remain prohibited and serially inapplicable.",
+    "git_refs_and_worktree": "The receipt builder supplies every Git identity from its machine snapshot. The task branch must remain origin-aligned and tracked-clean, all four protected refs exact, docs/branding present and every unrelated untracked path preserved.",
+    "live_handover_current_baton": "AGENTS.md and the active latch require acceptance of exactly one complete package-unloaded runner evaluation before direct progression to one bounded occupied useful Raisa worker.",
+    "protected_evidence_boundaries": "Accept one reconciled package-unloaded runner pass and its preserved post-processing rejection only. No retry, installed-package load, native Harness, worker, model/provider, product/data, ordinary-practice, production, deployment, release, Pages, protected evidence or protected refs are opened."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
