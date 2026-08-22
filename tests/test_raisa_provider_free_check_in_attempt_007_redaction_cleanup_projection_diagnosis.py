@@ -136,6 +136,16 @@ def test_execute_writes_exclusively_and_check_reads_canonically(
     assert output.read_bytes() == first
 
 
+def test_existing_evidence_binding_must_be_full_ancestor(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    output = tmp_path / "diagnosis-evidence.json"
+    output.write_text('{"source_head":"3240c0a"}', encoding="utf-8")
+    monkeypatch.setattr(diagnosis, "EVIDENCE_PATH", output)
+    with pytest.raises(diagnosis.DiagnosisError):
+        diagnosis._evidence_binding_head(diagnosis._git_head())
+
+
 def test_module_has_no_external_runtime_subprocess_surface() -> None:
     tree = ast.parse(Path(diagnosis.__file__).read_text(encoding="utf-8"))
     enclosing: dict[ast.AST, str] = {}

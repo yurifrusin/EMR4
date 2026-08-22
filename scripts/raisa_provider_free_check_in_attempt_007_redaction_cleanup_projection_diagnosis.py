@@ -518,6 +518,17 @@ def _write_exclusive(path: Path, value: Mapping[str, Any]) -> None:
         handle.write(_canonical_bytes(value))
 
 
+def _evidence_binding_head(current_head: str) -> str:
+    if not EVIDENCE_PATH.exists():
+        return current_head
+    existing = _load_json(EVIDENCE_PATH)
+    bound_head = existing.get("source_head")
+    if not isinstance(bound_head, str) or HEX40.fullmatch(bound_head) is None:
+        raise DiagnosisError("existing_evidence_source_not_full_git_object")
+    _assert_ancestor(bound_head, current_head)
+    return bound_head
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group(required=True)
@@ -526,7 +537,8 @@ def main(argv: list[str] | None = None) -> int:
     arguments = parser.parse_args(argv)
     try:
         contract = _load_json(CONTRACT_PATH)
-        evidence = build_evidence(contract, _git_head())
+        current_head = _git_head()
+        evidence = build_evidence(contract, _evidence_binding_head(current_head))
         if arguments.execute:
             _write_exclusive(EVIDENCE_PATH, evidence)
         elif EVIDENCE_PATH.exists() and EVIDENCE_PATH.read_bytes() != _canonical_bytes(evidence):
