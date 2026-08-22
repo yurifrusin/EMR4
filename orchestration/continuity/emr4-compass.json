@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 398,
-  "updated_at": "2026-08-23T05:05:13.7520724+10:00",
-  "source_graph_revision": 416,
-  "orientation_statement": "EMR4 will make provider-free runner and publication-phase admission deterministic before considering another occupied check-in recovery attempt.",
+  "map_revision": 399,
+  "updated_at": "2026-08-23T05:57:19.6577887+10:00",
+  "source_graph_revision": 417,
+  "orientation_statement": "EMR4 will take a provider-free read-only admissibility reading before spending another occupied check-in recovery attempt.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5107,27 +5107,38 @@
         "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-report.md",
         "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md"
       ]
+    },
+    {
+      "node_id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+      "lineage_parent": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "strategic_role": "Replace remembered verification procedure with one typed executable control gear",
+      "outcome": "Database-closed runner choice and publication phase now fail closed on both command-control surfaces.",
+      "evidence": [
+        "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/evidence.json",
+        "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/efficacy-reading.json",
+        "docs/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
-    "strategic_role": "Make provider-free verification authority executable rather than dependent on runner recall",
-    "why_now": "The code repair passed, but six excluded sessions repeated an already-known database-autouse boundary violation and a postpublication test was selected too early.",
-    "outcome": "The next gear will reject database-capable runners when database authority is closed and type verification phases before any future occupied decision.",
+    "node_id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+    "strategic_role": "Decide whether the repaired deterministic envelope is sufficient to plan one more occupied check-in recovery attempt",
+    "why_now": "The two product-harness causes and two surrounding verification-envelope causes are now represented by reusable fail-closed controls.",
+    "outcome": "A read-only decision will enumerate every frozen prerequisite and either admit a separate attempt-008 planning tranche or identify the exact remaining deterministic gap.",
     "unlocks": [
-      "Provider-free plans can compile directly to an admissible runner envelope.",
-      "Prepublication suites cannot accidentally include live-projection assertions.",
-      "A later attempt-008 decision can rely on mechanically scoped verification."
+      "An admissible result can support a separately frozen attempt-008 plan.",
+      "A negative result can name one bounded repair without spending an occupied run.",
+      "The decision will use the typed provider-free verification envelope."
     ],
     "does_not_solve": [
-      "No database lifecycle or attempt-008 behavior is proved.",
-      "No ordinary-practice or product command is admitted.",
-      "No provider, production or protected authority opens."
+      "No attempt-008 plan or execution is authorised in the decision tranche.",
+      "No database lifecycle or occupied behavior is proved.",
+      "No product, provider, production or protected authority opens."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/efficacy-reading.json",
-      "docs/ariadne-agent-error-correction-register-revision-633.md",
-      "orchestration/human_inbox/yuri/2026-08-23--check-in-prospective-redaction-typed-cleanup-repair.md"
+      "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/efficacy-reading.json",
+      "docs/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair-closeout.md",
+      "orchestration/human_inbox/yuri/2026-08-23--verification-envelope-phase-runner-admission-repair.md"
     ]
   },
   "decision_horizon": [

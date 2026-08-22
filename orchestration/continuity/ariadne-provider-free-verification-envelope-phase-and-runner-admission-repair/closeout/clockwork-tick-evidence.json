@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "d01ef2f3afe16ccdb9a8f2077d5e76688397adb6",
+  "source_commit": "d01ef2f3afe16ccdb9a8f2077d5e76688397adb6",
+  "generation_id": "gen-63fe9d02c2b04de3f864a931ffda225575203a792cb60705377731409ac7b8b4",
+  "bundle_sha256": "63fe9d02c2b04de3f864a931ffda225575203a792cb60705377731409ac7b8b4",
+  "previous_generation_id": "gen-05043ea7535a48c24308458a3fba3260b03d43d39b76b36f0a53e6ee0de445b1",
+  "previous_source_commit": "d01ef2f3afe16ccdb9a8f2077d5e76688397adb6",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 188,
+  "operation_id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+  "event_kind": "clean_closeout",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

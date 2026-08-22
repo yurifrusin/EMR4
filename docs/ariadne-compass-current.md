@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will make provider-free runner and publication-phase admission deterministic before considering another occupied check-in recovery attempt.
+> EMR4 will take a provider-free read-only admissibility reading before spending another occupied check-in recovery attempt.
 
 ## North star
 
@@ -602,26 +602,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The late redaction failure and lost cleanup reading are now two deterministic pre-execution repair requirements rather than reasons for another database run. Lineage parent: `raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-007`.
 293. **Turn two occupied-run failure coordinates into reusable deterministic base-harness gears — Raisa provider-free check-in prospective-success redaction and typed cleanup-projection conformance repair**
    Prospective success records are checked before occupied work and post-cleanup failures retain truthful cleanup state. Lineage parent: `raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis`.
+294. **Replace remembered verification procedure with one typed executable control gear — Ariadne provider-free verification-envelope phase and runner-admission repair**
+   Database-closed runner choice and publication phase now fail closed on both command-control surfaces. Lineage parent: `raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair`.
 
 ## Current position
 
-**Make provider-free verification authority executable rather than dependent on runner recall — Raisa provider-free check-in prospective-success redaction and typed cleanup-projection conformance repair**
+**Decide whether the repaired deterministic envelope is sufficient to plan one more occupied check-in recovery attempt — Ariadne provider-free verification-envelope phase and runner-admission repair**
 
-**Why this proof came next:** The code repair passed, but six excluded sessions repeated an already-known database-autouse boundary violation and a postpublication test was selected too early.
+**Why this proof came next:** The two product-harness causes and two surrounding verification-envelope causes are now represented by reusable fail-closed controls.
 
-The next gear will reject database-capable runners when database authority is closed and type verification phases before any future occupied decision.
+A read-only decision will enumerate every frozen prerequisite and either admit a separate attempt-008 planning tranche or identify the exact remaining deterministic gap.
 
 ### What this unlocks
 
-- Provider-free plans can compile directly to an admissible runner envelope.
-- Prepublication suites cannot accidentally include live-projection assertions.
-- A later attempt-008 decision can rely on mechanically scoped verification.
+- An admissible result can support a separately frozen attempt-008 plan.
+- A negative result can name one bounded repair without spending an occupied run.
+- The decision will use the typed provider-free verification envelope.
 
 ### What it does not solve
 
-- No database lifecycle or attempt-008 behavior is proved.
-- No ordinary-practice or product command is admitted.
-- No provider, production or protected authority opens.
+- No attempt-008 plan or execution is authorised in the decision tranche.
+- No database lifecycle or occupied behavior is proved.
+- No product, provider, production or protected authority opens.
 
 ## Continuity and authority
 
@@ -1202,7 +1204,6 @@ Prerequisites:
 - `docs/ariadne-agent-error-correction-register-revision-543.md`
 - `docs/ariadne-agent-error-correction-register-revision-561.md`
 - `docs/ariadne-agent-error-correction-register-revision-566.md`
-- `docs/ariadne-agent-error-correction-register-revision-633.md`
 - `docs/ariadne-agent-error-correction-register-revision-91.md`
 - `docs/ariadne-agent-error-correction-register-revision-92.md`
 - `docs/ariadne-antigravity-gemini-37-high-verifier-allocation.md`
@@ -1237,6 +1238,7 @@ Prerequisites:
 - `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture.md`
 - `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal-closeout.md`
 - `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal-plan.md`
+- `docs/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair-closeout.md`
 - `docs/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-closeout.md`
 - `docs/ariadne-recent-work-effectiveness-and-deepseek-harness-adaptation-plan.md`
 - `docs/ariadne-recent-work-effectiveness-and-deepseek-harness-assessment.md`
@@ -2743,6 +2745,8 @@ Prerequisites:
 - `orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/rejected-attempt-001.json`
 - `orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/rejected-attempt-002.json`
 - `orchestration/continuity/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-rehearsal/rejected-attempt-003.json`
+- `orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/efficacy-reading.json`
+- `orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/evidence.json`
 - `orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-profile.json`
 - `orchestration/continuity/ariadne-risk-weighted-workflow-reform/tranche-result.json`
 - `orchestration/continuity/ariadne-terra-gemini-comparison/attempt-003-audit-analysis.json`
@@ -2954,7 +2958,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery/native-service-terminal.json`
 - `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/native-validation-terminal.json`
 - `orchestration/continuity/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery/package-only-discovery-evidence.json`
-- `orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-report.md`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/efficacy-reading.json`
@@ -3551,7 +3554,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-tool-result-conclusion-coordinate-diagnostic.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-coordinate-recovery.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-failed-closed.md`
-- `orchestration/human_inbox/yuri/2026-08-23--check-in-prospective-redaction-typed-cleanup-repair.md`
+- `orchestration/human_inbox/yuri/2026-08-23--verification-envelope-phase-runner-admission-repair.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3860,4 +3863,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 398; continuity graph revision 416._
+_Compass map revision 399; continuity graph revision 417._

@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 416,
+  "graph_revision": 417,
   "harvests": [],
   "nodes": [
     {
@@ -33166,9 +33166,115 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+      "title": "Ariadne provider-free verification-envelope phase and runner-admission repair",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted only a provider-free deterministic verification-control repair.",
+          "The accepted candidate used no database conftest, engine, fixture, Docker, PostgreSQL, provider, product path or attempt-008 action.",
+          "DeepSeek, Gemini and native subagents remained declined under the frozen serial parallelism assessment."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-shared-verification-envelope-gear",
+          "source": "orchestration_harness/verification_envelope.py",
+          "status": "accepted",
+          "summary": "Accept one finite database-authority, verification-phase and pytest-runner semantic owner shared by both projections."
+        },
+        {
+          "id": "accept-verifier-manifest-v2-and-phase-runner",
+          "source": "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/evidence.json",
+          "status": "accepted",
+          "summary": "Accept exact v2 phase-only execution and closed-authority rejection before subprocess launch while retaining historical v1 admission."
+        },
+        {
+          "id": "accept-governance-manifest-v2-self-application",
+          "source": "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/closeout/closeout-intent.json",
+          "status": "accepted",
+          "summary": "Accept the same typed gear on clockwork command manifests and require this closeout to publish through its closed-authority phase partition."
+        },
+        {
+          "id": "accept-measured-verification-envelope-efficacy",
+          "source": "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept retirement of two procedural recurrence classes while retaining two bounded first-run corrections and one transcript-only replay."
+        }
+      ],
+      "claim_scope": [
+        "Both typed v2 command-control surfaces call one shared semantic gear.",
+        "Closed database authority rejects ordinary and serial pytest before subprocess launch.",
+        "V2 commands use exact monotonic prepublication and postpublication phases.",
+        "Historical v1 manifests retain their prior admission.",
+        "No database, provider, product, protected or attempt-008 behavior is proved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair-plan.md",
+          "docs/security/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/contract.json",
+          "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/evidence.json",
+          "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/report.md",
+          "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-provider-free-verification-envelope-phase-runner-admission-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-provider-free-verification-envelope-phase-runner-admission-repair-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_evidence_gate.py",
+          "tests/test_ariadne_validation_runner.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair.py",
+          "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair_plan.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/verification_envelope.py",
+          "scripts/ariadne_evidence_gate.py",
+          "scripts/ariadne_validation_runner.py",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair.py",
+          "orchestration/human_inbox/yuri/2026-08-23--verification-envelope-phase-runner-admission-repair.md"
+        ]
+      },
+      "unresolved_gates": [
+        "Arbitrary non-pytest commands remain bounded by allowlisting rather than semantic database proof.",
+        "Attempt 008 remains unplanned and unauthorised pending a separate read-only admissibility decision.",
+        "Rollback, unknown-response commit recovery, role absence and successful occupied database behavior remain unproved.",
+        "Dedicated check-in remains default-off without ordinary-practice admission.",
+        "No provider, product-data, production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T05:57:19.6577887+10:00",
+      "updated_at": "2026-08-23T05:57:19.6577887+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "d01ef2f3afe16ccdb9a8f2077d5e76688397adb6",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T05:05:13.7520724+10:00"
+  "updated_at": "2026-08-23T05:57:19.6577887+10:00"
 }
