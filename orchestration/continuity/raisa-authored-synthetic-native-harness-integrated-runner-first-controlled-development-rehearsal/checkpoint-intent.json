@@ -1,0 +1,27 @@
+{
+  "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
+  "operation_id": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+  "completed_stage": "The exact useful authored-synthetic window-coalescer package, accepted integrated runner derivation, typed edit controls, one-request broker ceiling and fresh disposable envelope are frozen. Provider-free evidence and 26 focused lineage tests pass. The workspace contains only the committed synthetic baseline, the exact runner digest is bound, and zero Harness, session, turn, model or provider request has occurred.",
+  "next_executable_stage": "generate_a_fresh_five_source_occupied_prelaunch_receipt_then_consume_and_run_exactly_one_deepseek_v4_flash_high_native_harness_request_for_the_frozen_synthetic_window_coalescer_repair_without_retry_resume_fallback_auxiliary_model_or_second_worker",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "integrated_native_harness_useful_development_checkpoint_provider_free_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}
