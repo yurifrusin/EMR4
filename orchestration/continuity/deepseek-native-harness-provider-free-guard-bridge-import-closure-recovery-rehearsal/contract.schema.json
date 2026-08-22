@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/native-harness-guard-bridge-import-closure-recovery-contract.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "git_binding_policy",
+    "closed_results",
+    "windows_environment_keys",
+    "case_ids",
+    "materialized_relative_paths",
+    "required_zero_counters",
+    "documentation_bindings",
+    "predecessor_bindings",
+    "implementation_bindings",
+    "accepted_source_inventory",
+    "stub_source_inventory",
+    "fixture_correction",
+    "import_closure",
+    "expected_result",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_guard_bridge_import_closure_recovery_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal"},
+    "git_binding_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "plan_path", "controller_path", "caller_authored_object_id_count"],
+      "properties": {
+        "mode": {"const": "machine_resolved_only"},
+        "plan_path": {"type": "string", "minLength": 1},
+        "controller_path": {"type": "string", "minLength": 1},
+        "caller_authored_object_id_count": {"const": 0}
+      }
+    },
+    "closed_results": {
+      "const": [
+        "package_unloaded_guard_bridge_import_closure_recovery_pass",
+        "import_closure_preflight_rejected",
+        "import_closure_process_terminal",
+        "import_closure_result_rejected"
+      ]
+    },
+    "windows_environment_keys": {"const": ["SystemRoot", "WINDIR", "ComSpec", "TEMP", "TMP"]},
+    "case_ids": {"const": ["success", "missing_service", "missing_mount"]},
+    "materialized_relative_paths": {
+      "const": [
+        "effective-tool-guard.mjs",
+        "preset-mount-sanitizer-runner-bridge.mjs",
+        "deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer.mjs",
+        "package_unloaded_guard_bridge_import_closure_fixture.mjs",
+        "node_modules/@deepseek-ai/dsh-scope/package.json",
+        "node_modules/@deepseek-ai/dsh-scope/index.mjs",
+        "node_modules/@deepseek-ai/dsh-agent-presets/package.json",
+        "node_modules/@deepseek-ai/dsh-agent-presets/index.mjs"
+      ]
+    },
+    "required_zero_counters": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "documentation_bindings": {"$ref": "#/$defs/hashMap"},
+    "predecessor_bindings": {"$ref": "#/$defs/hashMap"},
+    "implementation_bindings": {"$ref": "#/$defs/hashMap"},
+    "accepted_source_inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["derived_guard", "derived_bridge", "accepted_sanitizer"],
+      "properties": {
+        "derived_guard": {"$ref": "#/$defs/sourceEntry"},
+        "derived_bridge": {"$ref": "#/$defs/sourceEntry"},
+        "accepted_sanitizer": {"$ref": "#/$defs/sourceEntry"}
+      }
+    },
+    "stub_source_inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node_modules/@deepseek-ai/dsh-scope/package.json",
+        "node_modules/@deepseek-ai/dsh-scope/index.mjs",
+        "node_modules/@deepseek-ai/dsh-agent-presets/package.json",
+        "node_modules/@deepseek-ai/dsh-agent-presets/index.mjs"
+      ],
+      "properties": {
+        "node_modules/@deepseek-ai/dsh-scope/package.json": {"$ref": "#/$defs/sourceEntry"},
+        "node_modules/@deepseek-ai/dsh-scope/index.mjs": {"$ref": "#/$defs/sourceEntry"},
+        "node_modules/@deepseek-ai/dsh-agent-presets/package.json": {"$ref": "#/$defs/sourceEntry"},
+        "node_modules/@deepseek-ai/dsh-agent-presets/index.mjs": {"$ref": "#/$defs/sourceEntry"}
+      }
+    },
+    "fixture_correction": {"$ref": "#/$defs/fixtureCorrection"},
+    "import_closure": {"$ref": "#/$defs/importClosure"},
+    "expected_result": {"type": "object"},
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "static_import_closure_proved",
+        "package_unloaded_guard_bridge_graph_only",
+        "predecessor_retry",
+        "derived_runner_proved",
+        "installed_package_loaded",
+        "native_harness_proved",
+        "worker_model_provider_executed",
+        "retry_authorized",
+        "product_authority"
+      ],
+      "properties": {
+        "static_import_closure_proved": {"const": true},
+        "package_unloaded_guard_bridge_graph_only": {"const": true},
+        "predecessor_retry": {"const": false},
+        "derived_runner_proved": {"const": false},
+        "installed_package_loaded": {"const": false},
+        "native_harness_proved": {"const": false},
+        "worker_model_provider_executed": {"const": false},
+        "retry_authorized": {"const": false},
+        "product_authority": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "sourceEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bytes", "sha256"],
+      "properties": {
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "hashMap": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "relativeEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["importer", "specifier", "resolved_target", "target_source"],
+      "properties": {
+        "importer": {"type": "string", "minLength": 1},
+        "specifier": {"type": "string", "pattern": "^\\.\\.?/"},
+        "resolved_target": {"type": "string", "minLength": 1},
+        "target_source": {"$ref": "#/$defs/sourceEntry"}
+      }
+    },
+    "bareEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["importer", "specifier", "resolved_manifest", "resolved_source"],
+      "properties": {
+        "importer": {"type": "string", "minLength": 1},
+        "specifier": {"enum": ["@deepseek-ai/dsh-scope", "@deepseek-ai/dsh-agent-presets"]},
+        "resolved_manifest": {"type": "string", "minLength": 1},
+        "resolved_source": {"type": "string", "minLength": 1}
+      }
+    },
+    "importClosure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relative_edges", "bare_edges", "relative_edge_count", "bare_edge_count", "all_resolved_targets_materialized"],
+      "properties": {
+        "relative_edges": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"$ref": "#/$defs/relativeEdge"}},
+        "bare_edges": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/bareEdge"}},
+        "relative_edge_count": {"const": 3},
+        "bare_edge_count": {"const": 2},
+        "all_resolved_targets_materialized": {"const": true}
+      }
+    },
+    "fixtureCorrection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["predecessor_fixture_source", "corrected_fixture_source", "leading_patch_marker_count_removed", "leading_patch_marker_absent_after_correction", "carriage_return_absent"],
+      "properties": {
+        "predecessor_fixture_source": {"$ref": "#/$defs/sourceEntry"},
+        "corrected_fixture_source": {"$ref": "#/$defs/sourceEntry"},
+        "leading_patch_marker_count_removed": {"const": 103},
+        "leading_patch_marker_absent_after_correction": {"const": true},
+        "carriage_return_absent": {"const": true}
+      }
+    }
+  }
+}

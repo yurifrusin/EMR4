@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.dev/schemas/native-harness-guard-bridge-import-closure-failure-terminal.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "attempt_id", "candidate_source", "result", "terminal", "process_envelope_sha256", "raw_runtime_detail_retained", "further_process_authorized"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_guard_bridge_import_closure_failure_terminal.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal"},
+    "attempt_id": {"const": "attempt-001"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {"enum": ["import_closure_process_terminal", "import_closure_result_rejected"]},
+    "terminal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "code", "detail"],
+      "properties": {
+        "stage": {"const": "package_unloaded_import_closure_recovery"},
+        "code": {"enum": ["import_closure_process_terminal", "import_closure_result_rejected"]},
+        "detail": {"type": "null"}
+      }
+    },
+    "process_envelope_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "raw_runtime_detail_retained": {"const": false},
+    "further_process_authorized": {"const": false}
+  }
+}
