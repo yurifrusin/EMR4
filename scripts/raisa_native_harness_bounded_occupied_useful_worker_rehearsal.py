@@ -907,12 +907,16 @@ def _load_checkpoint() -> dict[str, Any]:
     value = load_json(CHECKPOINT_PATH)
     preparation = load_json(PREPARATION_PATH)
     authority = load_json(AUTHORITY_PATH)
+    checkpoint_source = _admit_checkpoint_source(
+        preparation, {"source_commit": value.get("checkpoint_source")}
+    )
     expected = {
         "schema_version": "ariadne.native_harness_useful_worker_checkpoint.v1",
         "operation_id": OPERATION_ID,
         "attempt_id": ATTEMPT_ID,
         "status": "admitted",
         "candidate_source": preparation["candidate_source"],
+        "checkpoint_source": checkpoint_source,
         "review_receipt": preparation["review_receipt"],
         "review_receipt_sha256": preparation["review_receipt_sha256"],
         "preparation_sha256": sha256_file(PREPARATION_PATH),
@@ -1111,7 +1115,6 @@ def execute_native() -> dict[str, Any]:
             accepted_worker.validate_profile_patch(changed, changed=True)
             profile_path.write_bytes(initial)
             package_root = root / "installation" / "node_modules" / "@deepseek-ai" / "dsh"
-            wrapper_path = root / diagnostic.WRAPPER_LEAF if hasattr(diagnostic, "WRAPPER_LEAF") else root / "entrypoint-wrapper.mjs"
             wrapper_path = root / "entrypoint-wrapper.mjs"
             diagnostic_path = root / "pre-hmr-structured-diagnostic.json"
             wrapper = diagnostic.build_entrypoint_wrapper_source(

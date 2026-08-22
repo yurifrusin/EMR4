@@ -269,6 +269,13 @@ def test_checkpoint_source_rejects_non_evidence_delta(monkeypatch: pytest.Monkey
         )
 
 
+def test_persisted_checkpoint_is_exactly_loadable() -> None:
+    checkpoint = worker._load_checkpoint()
+    assert checkpoint["status"] == "admitted"
+    assert len(checkpoint["candidate_source"]) == 40
+    assert len(checkpoint["checkpoint_source"]) == 40
+
+
 def test_terminal_schema_accepts_only_bounded_success() -> None:
     zero_hash = "0" * 64
     terminal = {
