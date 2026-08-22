@@ -1,0 +1,11 @@
+{
+  "schema_version": "emr4.non_phi_pushover_notification_receipt.v1",
+  "recorded_at": "2026-08-22T10:04:37.2125687+10:00",
+  "status": "passed",
+  "provider": "pushover",
+  "request": "b98f59a7-a2bb-479b-91eb-0586ac29026e",
+  "title": "EMR4 sprint closeout",
+  "message_class": "non_phi_operational_closeout",
+  "phi_or_clinical_data": false,
+  "summary": "Continuity 388 / Compass 370; isolated Node fixture and full governance suite passed; the package-unloaded guard and bridge module graph is continuing."
+}
