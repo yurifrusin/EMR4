@@ -1,0 +1,10 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "operation_id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+  "sent_at": "2026-08-23T05:05:13.7520724+10:00",
+  "status": "delivered",
+  "provider_status": 1,
+  "request_id": "f90999db-040a-45fb-8fb4-60cde852a793",
+  "contains_phi": false,
+  "continuation": "verification-envelope runner and phase admission repair"
+}

@@ -57,11 +57,40 @@ manual form or per-attempt repair.
 
 Canonical deterministic evidence is `repair-evidence.json`, SHA-256
 `47f422e7b8ad072c9f4912fe6269cfc85f44eb75808419182c75e19d41157eaa`.
-It records zero Docker objects, PostgreSQL starts, SQL/database operations,
-provider calls, product calls and attempt-008 actions. Attempt 007 remains
-byte-exact, consumed once, retried zero times and unreclassified.
+For the conformance runner itself, it records zero Docker objects, PostgreSQL
+starts, SQL/database operations, provider calls, product calls and attempt-008
+actions. Attempt 007 remains byte-exact, consumed once, retried zero times and
+unreclassified.
 
 This repair proves structural admission and terminal projection only. It does
 not prove rollback, unknown-response transaction recovery, role absence before
 teardown or any successful occupied database behavior. Attempt 008 remains
 closed pending its own fresh authority and frozen plan.
+
+## Workflow efficacy and contained incidents
+
+The two product-harness rerun causes were retired, but the orchestration layer
+was not spotless. Seven local incidents were contained:
+
+- machine-owned Git objects were repeated in receipt prose and rejected;
+- the new direct CLI lacked its repository import bootstrap;
+- one serial-runner command forwarded a nested Python command;
+- six ordinary-pytest sessions loaded the database autouse conftest;
+- the orchestrator drafted the clockwork-owned incident register directly;
+- a post-publication Baton consistency test was selected before publication;
+  and
+- a displayed short commit was manually expanded into a nonexistent object for
+  the first revert command.
+
+The six database-bearing test results are excluded. The exact 83-test
+candidate profile and the complete incident-register suite were rerun through
+`scripts.ariadne_provider_free_pytest`; both replacement profiles passed with
+conftest, plugin autoload and inherited database configuration disabled. The
+direct register draft was reverted, so the clockwork remains the sole writer.
+The final closeout intent supplies all seven incidents for atomic register,
+Baton and pattern-report projection.
+
+No product, patient or clinical data and no occupied rehearsal were involved.
+The process result is therefore accurately described as an effective reusable
+repair with a contained material verification-boundary violation—not as a
+flawless provider-free tranche.
