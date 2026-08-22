@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Run exactly one disposable provider-free Node fixture for the exact derived bridge and sanitizer while native Harness, worker, model, provider and product authority remain closed.
+> Run exactly one package-unloaded guard–bridge–sanitizer Node graph with authored local stubs while runner, installed package, native Harness, worker, model, provider and product authority remain closed.
 
 ## North star
 
@@ -544,23 +544,25 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The previously broad native composition terminal is now attributable to one exact interface seam without another process. Lineage parent: `deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal`.
 264. **Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development — Preset-mount root-service-forwarding process-free correction rehearsal**
    The exact wiring correction is now prospective, hash-bound, machine-source-resolved and idempotent without consuming another process. Lineage parent: `deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal`.
+265. **Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development — Root-service-forwarding isolated Node-fixture rehearsal**
+   The proposed root-service correction now has exact one-process JavaScript behavior, typed failure reduction and cleanup evidence without native-Harness risk. Lineage parent: `deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal`.
 
 ## Current position
 
-**Evaluate the exact corrected bridge behavior in one disposable provider-free Node fixture before considering any native process — Preset-mount root-service-forwarding process-free correction rehearsal**
+**Evaluate the corrected guard, bridge and sanitizer as a package-unloaded module graph before admitting the broader runner — Root-service-forwarding isolated Node-fixture rehearsal**
 
-**Why this proof came next:** The source correction and implementation-owner binding are deterministic and idempotent, but JavaScript behavior remains deliberately unproved.
+**Why this proof came next:** The bridge behavior is exact and accepted, while the guard remains the narrowest unproved caller and the runner adds unnecessary filesystem and target behavior.
 
-One isolated authored-synthetic Node fixture will prove success and invalid-service or invalid-mount terminal behavior for the exact derived bridge and sanitizer.
+One isolated authored-synthetic module graph will prove successful effective-tool projection and sanitized missing-service or missing-mount handoff through the exact derived guard.
 
 ### What this unlocks
 
-- Behavioral evidence for the corrected typed bridge without native-Harness or model risk.
-- A defensible decision about the next package-free or native integration coordinate.
+- Behavioral evidence that explicit root-service forwarding survives the guard-to-bridge boundary.
+- A defensible decision about a later runner-only or package integration coordinate.
 
 ### What it does not solve
 
-- No native Harness boot, DeepSeek turn, model/provider request or worker-quality evidence.
+- No derived runner execution, installed package load, native Harness boot, DeepSeek turn, model/provider request or worker-quality evidence.
 - No product/data action, production, release, Pages or protected integration.
 
 ## Continuity and authority
@@ -1311,6 +1313,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-pre-hmr-startup-failure-classification-and-terminalization-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal-closeout.md`
+- `docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal-closeout.md`
@@ -2723,6 +2726,7 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/preset-mount-source-coordinate-interpretation.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preset-composition-safe-terminal-bridge-rehearsal/safe-terminal-bridge-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-composition-unclassified-source-reconciliation-rehearsal/source-reconciliation-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal/isolated-node-fixture-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal/process-free-correction-evidence-v2.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-safe-subcoordinate-sanitizer-rehearsal/attempt-003-process-envelope.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-sanitized-terminal-native-rehearsal/attempt-001-process-envelope.json`
@@ -3727,4 +3731,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 369; continuity graph revision 387._
+_Compass map revision 370; continuity graph revision 388._

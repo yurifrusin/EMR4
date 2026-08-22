@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 610,
+  "register_revision": 611,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -35762,6 +35762,117 @@
       },
       "incident_id": "AER-0919",
       "attempt_id": "clock-51612960bd678762327a6a80",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "task-branch-notification-receipt-push-guard",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_git_push_guard",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Expected-origin commit identity is derived directly from current Git state and is never manually expanded from an abbreviated display.",
+      "observed_error": "The first notification-receipt push guard used an invented 40-character expected-origin value based on Git's abbreviated display and rejected before push.",
+      "detection_method": "The guarded pre-push comparison returned origin_task_branch_changed while the remote branch remained unchanged.",
+      "evidence_paths": [
+        "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal-plan.md",
+        "docs/ariadne-agent-error-correction-register-revision-611.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_expansion_of_abbreviated_expected_origin_commit",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Derive the expected task-branch parent directly with git rev-parse HEAD^ and compare that machine value to the fetched origin branch.",
+        "prevention_control": "Task-branch push guards receive no caller-authored expected-origin object identity; the expected parent is resolved from Git in the same command.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal-plan.md",
+          "docs/ariadne-agent-error-correction-register-revision-611.md"
+        ]
+      },
+      "incident_id": "AER-0920",
+      "attempt_id": "clock-1d81d6429d93ad51487edf05",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "isolated-root-service-focused-source-binding-test",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Focused tests distinguish source-owned content-free terminal construction from prohibited raw runtime detail release.",
+      "observed_error": "The first focused test incorrectly forbade the sanitizer's legitimate internal code-and-null-detail terminal constructor.",
+      "detection_method": "The static focused suite failed one assertion before the authorised Node attempt.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_isolated_node_fixture_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-611.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.accepted_typed_terminal_constructor_misclassified_as_raw_detail_release",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Require the source-owned content-free constructor and PRESET_MOUNT_UNCLASSIFIED mapping while retaining exact source hashes.",
+        "prevention_control": "Raw-detail tests target released message, stack, cause, path, stream or environment values rather than schema-owned null-detail constructors.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_isolated_node_fixture_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-611.md"
+        ]
+      },
+      "incident_id": "AER-0921",
+      "attempt_id": "clock-4c1b6e4311a400569327c7c0",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "clockwork-closeout-transaction-recorded-at",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_intent_authoring",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The clockwork transaction timestamp is copied from the machine creation clock or typed evidence and is never manually composed.",
+      "observed_error": "The first unvalidated closeout intent contained a manually composed plausible timestamp rather than the machine clock reading.",
+      "detection_method": "Pre-validation comparison against the paired closeout timestamp and creation workflow identified that the intent value had not come from a tool reading.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-611.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_recorded_at_manually_composed_instead_of_clock_read",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace recorded_at with the exact machine clock reading obtained immediately before the correction.",
+        "prevention_control": "Every new clockwork recorded_at field is populated directly from a tool-returned ISO 8601 clock reading, never from model-composed digits.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-611.md"
+        ]
+      },
+      "incident_id": "AER-0922",
+      "attempt_id": "clock-301dff9c3a87678f732def74",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

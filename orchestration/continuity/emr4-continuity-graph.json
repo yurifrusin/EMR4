@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 387,
+  "graph_revision": 388,
   "harvests": [],
   "nodes": [
     {
@@ -29819,9 +29819,124 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal",
+      "title": "Root-service-forwarding isolated Node-fixture rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted exactly one isolated authored-synthetic Node fixture and its deterministic closeout.",
+          "No runner, installed package, native Harness, worker, model, provider, retry, product, data, deployment, Pages or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-isolated-root-service-bridge-behavior",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal/isolated-node-fixture-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one correctly bound service mount and exact content-free missing-service and missing-mount terminals in one isolated Node process."
+        },
+        {
+          "id": "accept-content-free-process-envelope-and-cleanup",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal/attempt-001-process-envelope.json",
+          "status": "accepted",
+          "summary": "Accept the pre-interpretation stream metrics, five-key value-free environment and complete disposable-root cleanup."
+        },
+        {
+          "id": "accept-machine-resolved-implementation-owner",
+          "source": "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Accept the implementation-owner Git binding that remains stable after the evidence descendant advances HEAD."
+        },
+        {
+          "id": "reject-native-harness-or-runner-proof",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-isolated-node-fixture-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "The fixture proves no guard/runner graph, package composition, native boot, worker/model/provider request or retry."
+        }
+      ],
+      "claim_scope": [
+        "The exact accepted derived bridge and sanitizer executed in one isolated authored-synthetic Node process.",
+        "The success case invoked mount once with the correct service receiver, context and preset ID.",
+        "Missing service and missing mount each returned PRESET_MOUNT_UNCLASSIFIED with null detail.",
+        "The process envelope was persisted before stdout interpretation and retains no raw stream, path or environment value.",
+        "The five-key child environment omitted PATH and NODE_OPTIONS.",
+        "The disposable fixture root and materialized JavaScript were absent before admission.",
+        "The caller-authored contract contains zero Git object IDs and the repository resolver supplied full planning and implementation-owner commits.",
+        "The focused twenty-four-test file and exact broader 126-test collection pass.",
+        "Node process count is one; native Harness, runner, guard, package, worker, model, provider, network, database, Docker, target, retry and resume counts are zero.",
+        "Guard/runner integration, installed package composition, native boot and occupied worker quality remain unproved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-611.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-root-service-forwarding-isolated-node-fixture.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-isolated-node-fixture-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-isolated-node-fixture-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-preset-mount-root-service-forwarding-isolated-node-fixture-pre-verifier-acceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_isolated_node_fixture_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_composition_unclassified_source_reconciliation_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_sanitizer_runner_bridge_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_safe_subcoordinate_sanitizer_rehearsal.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_isolated_node_fixture_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal/process-envelope.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal/evidence.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal/failure-terminal.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal/attempt-001-process-envelope.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal/isolated-node-fixture-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal/isolated-node-fixture-report.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The corrected guard has not been evaluated with the bridge and sanitizer as one module graph.",
+        "The derived runner has not been materialized or executed.",
+        "The installed package seed has not loaded the correction.",
+        "No native Harness boot, DeepSeek worker turn, model/provider request or worker-quality evidence is accepted.",
+        "The one Node attempt is consumed and no retry exists.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T09:54:08.4296664+10:00",
+      "updated_at": "2026-08-22T09:54:08.4296664+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "71e231fe6462e689662a0f92e4f51ce95cdaf056",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T09:01:43.2459891+10:00"
+  "updated_at": "2026-08-22T09:54:08.4296664+10:00"
 }

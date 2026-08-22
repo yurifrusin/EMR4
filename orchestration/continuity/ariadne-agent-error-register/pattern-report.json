@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 610,
+  "register_revision": 611,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "ae0944dfb8c5794fcb26c69fd53966f6878b5d4fd843a052e1b0c500fecf2ae1",
-  "incident_count": 919,
+  "canonical_register_sha256": "f2bf4dcc9f27d487335cea3fbf91d1f969f424a6d460ff169544a7c8a30c32e5",
+  "incident_count": 922,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 494,
       "harness": 67,
-      "operator": 204,
+      "operator": 207,
       "repository": 138,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 95,
       "evidence_misreport": 73,
       "harness_failure": 67,
-      "operator_error": 204,
+      "operator_error": 207,
       "output_contract_violation": 274,
       "read_only_violation": 5,
       "reasoning_claim_error": 47,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 64,
       "integration_reviewer": 3,
-      "orchestrator": 789,
+      "orchestrator": 792,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 570,
+      "low": 573,
       "material": 133,
       "moderate": 216
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 182,
-      "canonical_unchanged": 568,
+      "accepted_candidate_changed": 184,
+      "canonical_unchanged": 569,
       "untrusted_partial_worktree": 169
     },
     "by_resource_and_role": {
@@ -124,6 +124,7 @@
       "clockwork-canonical-path-staging::orchestrator": 1,
       "clockwork-closed-tick-intent-path::orchestrator": 1,
       "clockwork-closeout-incident-observation::orchestrator": 1,
+      "clockwork-closeout-transaction-recorded-at::orchestrator": 1,
       "clockwork-continuity-node-projector::orchestrator": 1,
       "clockwork-gear-architecture-plan-latch-test::orchestrator": 1,
       "clockwork-incident-category-vocabulary::orchestrator": 1,
@@ -252,6 +253,7 @@
       "historical-bounded-worker-controller-source::orchestrator": 1,
       "historical-latch-test-selection::orchestrator": 1,
       "historical-source-binding-test-selection::orchestrator": 1,
+      "isolated-root-service-focused-source-binding-test::orchestrator": 1,
       "lifecycle-closeout-staging-command::orchestrator": 1,
       "lifecycle-controller-cli-entrypoint::implementer": 1,
       "lifecycle-controller-static-scope-guard::implementer": 1,
@@ -389,6 +391,7 @@
       "static-source-chain-helper-count-predicate::orchestrator": 1,
       "successor-latch-closed-boundary-vocabulary::orchestrator": 1,
       "successor-protected-boundary-vocabulary::orchestrator": 1,
+      "task-branch-notification-receipt-push-guard::orchestrator": 1,
       "transactional-closeout-decision-evidence::orchestrator": 1,
       "transactional-closeout-node-relationship-cardinality::orchestrator": 1,
       "transactional-closeout-shadow-fixture::orchestrator": 1,
