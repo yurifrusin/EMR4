@@ -1,0 +1,35 @@
+{
+  "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
+  "operation_id": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+  "completed_stage": "The exact authored-synthetic nested-window work order, target-only corrected runner derivation, four-module guard graph, closed contract and terminal schemas pass deterministic provider-free admission. The task branch is origin-aligned, the accepted graph materializes in a fresh process, public and hidden behavior passes 4/4 and 3/3, and zero Harness processes or provider requests have occurred.",
+  "next_executable_stage": "prepare_one_fresh_disjoint_synthetic_attempt_then_generate_a_fresh_five_source_prelaunch_receipt_and_consume_exactly_one_native_harness_process_with_at_most_one_prepaid_deepseek_request_no_retry_resume_fallback_or_second_worker",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "corrected-guard-useful-recovery-static-admission",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal", "--check"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "corrected-guard-useful-recovery-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_current_baton_consistency.py", "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal_plan.py", "--deselect=tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal_plan.py::test_active_latch_is_the_exact_in_progress_operation"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "corrected-guard-useful-recovery-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py", "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "corrected-guard-useful-recovery-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py", "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}

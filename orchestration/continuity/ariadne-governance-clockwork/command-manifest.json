@@ -2,48 +2,52 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "corrected-runner-boot-closeout-tick-check",
+      "command_id": "corrected-guard-useful-recovery-static-admission",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.ariadne_governance_clockwork_tick",
-        "--check",
-        "--intent",
-        "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/closeout/closeout-intent.json"
+        "scripts.raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal",
+        "--check"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "corrected-runner-boot-closeout-provider-free-tests",
+      "command_id": "corrected-guard-useful-recovery-provider-free-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
-        "tests/test_deepseek_native_harness_provider_free_stock_headless_to_custom_runner_boot_proof.py",
-        "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py",
         "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
-        "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_content_free_counter_diagnosis.py",
-        "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_active_operation_latch.py",
-        "tests/test_ariadne_active_operation_latch_continuity.py",
-        "tests/test_current_baton_consistency.py"
+        "tests/test_current_baton_consistency.py",
+        "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal_plan.py",
+        "--deselect=tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal_plan.py::test_active_latch_is_the_exact_in_progress_operation"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "corrected-runner-boot-historical-plan-serial-tests",
+      "command_id": "corrected-guard-useful-recovery-ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.ariadne_serial_pytest",
-        "--repo-root",
-        "C:/Users/sarashera/emr4",
-        "--",
-        "-q",
-        "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal_plan.py",
-        "--deselect=tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal_plan.py::test_active_latch_is_the_exact_in_progress_operation"
+        "ruff",
+        "check",
+        "scripts/raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "corrected-guard-useful-recovery-compile",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "py_compile",
+        "scripts/raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py",
+        "tests/test_raisa_authored_synthetic_native_harness_corrected_guard_graph_first_useful_development_recovery_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

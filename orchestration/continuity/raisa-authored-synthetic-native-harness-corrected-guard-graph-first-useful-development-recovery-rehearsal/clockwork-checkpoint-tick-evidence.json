@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "f21aecfc2ae69602f85bab6c9792b82e2fddf349",
+  "source_commit": "f21aecfc2ae69602f85bab6c9792b82e2fddf349",
+  "generation_id": "gen-659786b89f3956d311270f3de4117be0f7bf20b059fc3cb074561fbcf28bd216",
+  "bundle_sha256": "659786b89f3956d311270f3de4117be0f7bf20b059fc3cb074561fbcf28bd216",
+  "previous_generation_id": "gen-9baa1acd76c79c0ff4e9e52cc805989ff9dcbefa1a174f941b48fef261efe900",
+  "previous_source_commit": "f21aecfc2ae69602f85bab6c9792b82e2fddf349",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 172,
+  "operation_id": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+  "event_kind": "checkpoint_transition",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}
