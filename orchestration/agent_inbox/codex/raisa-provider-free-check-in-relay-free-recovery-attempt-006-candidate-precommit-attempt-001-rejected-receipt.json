@@ -1,0 +1,49 @@
+{
+  "active_operation": {},
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_acceptance",
+  "git_object_resolution": {},
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "673faa7487ef830f3a12da74a1875da994493819",
+    "branch_origin_aligned": false,
+    "head": "673faa7487ef830f3a12da74a1875da994493819",
+    "origin_branch_commit": "5b2659de15bfd95380619bfb7143fffba6817e5a",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 674
+  },
+  "parallelism_assessment": {},
+  "planned_action": "validate_and_commit_the_fixed_attempt_006_adapter_and_focused_tests_without_executing_docker_or_postgresql",
+  "reasons": [
+    "continuation_event_missing_or_unapproved"
+  ],
+  "rehydrated_from_receipt": false,
+  "rehydration_sources": [],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {},
+  "status": "revision_required",
+  "terminal_handback_permitted": null,
+  "worker_dispatch_permitted": false
+}
