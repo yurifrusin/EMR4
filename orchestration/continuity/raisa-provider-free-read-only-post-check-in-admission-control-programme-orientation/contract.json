@@ -1,0 +1,34 @@
+{
+  "schema_version": "emr4.post_check_in_programme_orientation_contract.v1",
+  "operation_id": "raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation",
+  "allowed_classifications": [
+    "satisfied_accepted",
+    "satisfied_contract_only",
+    "operational_evidence_gap",
+    "closed_later_gate"
+  ],
+  "required_dimensions": [
+    "route_and_api_command_identity",
+    "ordinary_admission_control",
+    "ordinary_rollout_kill_switch_and_rollback_runbook",
+    "non_phi_observability_and_alerting",
+    "environment_manifest_and_operational_secret_posture",
+    "tenant_isolation_and_runtime_database_role",
+    "atomic_rollback_and_unknown_commit_recovery",
+    "native_harness_worker_allocation",
+    "ordinary_practice_activation",
+    "atomic_two_client_cutover_and_waiting_area_separation"
+  ],
+  "required_api_operations": [
+    "proposeAppointmentCheckIn",
+    "confirmAppointmentCheckInProposal"
+  ],
+  "selected_successor": "raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal",
+  "selected_product_artifact": "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json",
+  "successor_must_be_absent_from_graph": true,
+  "selected_product_artifact_must_be_absent": true,
+  "ordinary_practice_ready": false,
+  "ordinary_enablement_authorized": false,
+  "product_source_change_authorized": false,
+  "native_harness_worker_authorized": false
+}

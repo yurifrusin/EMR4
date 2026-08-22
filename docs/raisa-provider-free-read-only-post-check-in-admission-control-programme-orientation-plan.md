@@ -124,6 +124,9 @@ It is selected only if deterministic evidence proves that
 closed-form candidate, that the named API-Spine manifest is absent, and that no
 accepted graph node already records this operation.
 
+The exact absent target is
+`docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json`.
+
 The successor may add only the exact default-off declarative API-Spine manifest
 and focused deterministic validation around the existing closed-form contract.
 It may not edit `app/**`, mount a command, activate a practice, clear the kill

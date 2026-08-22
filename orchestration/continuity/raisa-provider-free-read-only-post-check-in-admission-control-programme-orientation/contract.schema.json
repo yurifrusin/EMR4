@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.example/schemas/post-check-in-programme-orientation-contract.v1.json",
+  "title": "Post-check-in programme orientation contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "allowed_classifications",
+    "required_dimensions",
+    "required_api_operations",
+    "selected_successor",
+    "selected_product_artifact",
+    "successor_must_be_absent_from_graph",
+    "selected_product_artifact_must_be_absent",
+    "ordinary_practice_ready",
+    "ordinary_enablement_authorized",
+    "product_source_change_authorized",
+    "native_harness_worker_authorized"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.post_check_in_programme_orientation_contract.v1"
+    },
+    "operation_id": {
+      "const": "raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation"
+    },
+    "allowed_classifications": {
+      "const": [
+        "satisfied_accepted",
+        "satisfied_contract_only",
+        "operational_evidence_gap",
+        "closed_later_gate"
+      ]
+    },
+    "required_dimensions": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "items": {"type": "string"}
+    },
+    "required_api_operations": {
+      "const": [
+        "proposeAppointmentCheckIn",
+        "confirmAppointmentCheckInProposal"
+      ]
+    },
+    "selected_successor": {
+      "const": "raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal"
+    },
+    "selected_product_artifact": {
+      "const": "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json"
+    },
+    "successor_must_be_absent_from_graph": {"const": true},
+    "selected_product_artifact_must_be_absent": {"const": true},
+    "ordinary_practice_ready": {"const": false},
+    "ordinary_enablement_authorized": {"const": false},
+    "product_source_change_authorized": {"const": false},
+    "native_harness_worker_authorized": {"const": false}
+  }
+}

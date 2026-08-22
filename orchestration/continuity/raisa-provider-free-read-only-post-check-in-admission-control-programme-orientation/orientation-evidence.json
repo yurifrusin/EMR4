@@ -1,0 +1,143 @@
+{
+  "api_spine": {
+    "boundary": "rest_openapi_command",
+    "confirmation_operation_id": "confirmAppointmentCheckInProposal",
+    "graphql_mutation_authorized": false,
+    "manifest_is_command_authority": false,
+    "proposal_operation_id": "proposeAppointmentCheckIn"
+  },
+  "claim_boundary": {
+    "client_cutover_authorized": false,
+    "live_secret_custody_proved": false,
+    "operational_monitoring_proved": false,
+    "ordinary_practice_ready": false,
+    "product_runtime_changed": false,
+    "protected_ref_moved": false,
+    "provider_used": false,
+    "unknown_commit_recovery_proved": false
+  },
+  "classification_counts": {
+    "closed_later_gate": 3,
+    "operational_evidence_gap": 2,
+    "satisfied_accepted": 2,
+    "satisfied_contract_only": 3
+  },
+  "classifications": [
+    {
+      "classification": "satisfied_accepted",
+      "dimension": "route_and_api_command_identity",
+      "reason": "accepted_default_off_route_delegates_to_the_canonical_adapter"
+    },
+    {
+      "classification": "satisfied_contract_only",
+      "dimension": "ordinary_admission_control",
+      "reason": "accepted_architecture_and_unmounted_kernel_have_zero_active_records"
+    },
+    {
+      "classification": "satisfied_contract_only",
+      "dimension": "ordinary_rollout_kill_switch_and_rollback_runbook",
+      "reason": "closed_form_validator_exists_but_canonical_api_spine_manifest_is_absent"
+    },
+    {
+      "classification": "satisfied_contract_only",
+      "dimension": "non_phi_observability_and_alerting",
+      "reason": "five_metric_families_and_six_non_actuating_alerts_are_frozen_but_unmounted"
+    },
+    {
+      "classification": "operational_evidence_gap",
+      "dimension": "environment_manifest_and_operational_secret_posture",
+      "reason": "architecture_exists_with_zero_manifests_secret_references_or_operational_artifacts"
+    },
+    {
+      "classification": "satisfied_accepted",
+      "dimension": "tenant_isolation_and_runtime_database_role",
+      "reason": "disposable_postgresql_non_owner_nobypassrls_and_cross_tenant_denial_passed"
+    },
+    {
+      "classification": "operational_evidence_gap",
+      "dimension": "atomic_rollback_and_unknown_commit_recovery",
+      "reason": "rollback_passed_but_unknown_response_readback_never_reached_acceptance"
+    },
+    {
+      "classification": "closed_later_gate",
+      "dimension": "native_harness_worker_allocation",
+      "reason": "final_one_request_terminal_produced_no_candidate_and_allocation_is_unavailable"
+    },
+    {
+      "classification": "closed_later_gate",
+      "dimension": "ordinary_practice_activation",
+      "reason": "activation_authority_false_and_zero_active_ordinary_records"
+    },
+    {
+      "classification": "closed_later_gate",
+      "dimension": "atomic_two_client_cutover_and_waiting_area_separation",
+      "reason": "client_cutover_is_distinct_and_waiting_area_movement_remains_separate"
+    }
+  ],
+  "current_posture": {
+    "active_ordinary_records": 0,
+    "feature_default": false,
+    "native_harness_allocation": "unavailable",
+    "ordinary_activation_authority": false,
+    "synthetic_allowlist_default": []
+  },
+  "operation_id": "raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation",
+  "required_nodes": {
+    "admission_architecture": {
+      "operation_id": "raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture",
+      "source_head": "752b521c59f5b44bf46de0cf776a33ac74b8134d"
+    },
+    "admission_kernel": {
+      "operation_id": "raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal",
+      "source_head": "4204ec6348abb0f92b1a30314699d4a469fa860a"
+    },
+    "database_attempt": {
+      "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-005",
+      "source_head": "03b94136c9c6cd82d5a8098705f263ba34a20de4"
+    },
+    "environment_architecture": {
+      "operation_id": "raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture",
+      "source_head": "a1f309a6d52d01f9866432f7e9abb8095788d023"
+    },
+    "harness_terminal": {
+      "operation_id": "raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal",
+      "source_head": "b9d9a32d111a23bff259a0ff9d5168cfdc305508"
+    },
+    "readiness": {
+      "operation_id": "raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review",
+      "source_head": "27101faa86b5aa3850e90bc4ded8600e5f8d7dc9"
+    },
+    "relay_transport": {
+      "operation_id": "raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign",
+      "source_head": "a00da58c630202085a33fe8e9afdb8ace4b2a028"
+    },
+    "route": {
+      "operation_id": "raisa-provider-free-default-off-canonical-check-in-route-adapter-convergence-rehearsal",
+      "source_head": "c82c3a741053a9c8da260aa62e1a968af22bb54e"
+    },
+    "tenant_role": {
+      "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal",
+      "source_head": "6a2832575e9b4df5c40a13984db7281e79814a94"
+    }
+  },
+  "result": "pass",
+  "runbook_contract": {
+    "activation_authority": false,
+    "claim": "runbook_contract_present_default_off",
+    "closed_form_byte_count": 2331,
+    "closed_form_sha256": "dbd765ef3afe2ffe283a07befff44f745b21a8ec474c58d5a6d944fe3a9c8448",
+    "ordinary_practice_enabled": false,
+    "schema_version": "emr4.api_spine.canonical_check_in_rollout_runbook.v1",
+    "target_path": "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json",
+    "target_present": false
+  },
+  "schema_version": "emr4.post_check_in_programme_orientation.v1",
+  "selected_successor": {
+    "already_recorded": false,
+    "operation_id": "raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal",
+    "ordinary_enablement_authorized": false,
+    "owned_product_artifact": "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json",
+    "product_source_change_authorized": false,
+    "reason": "exact_default_off_closed_form_exists_and_its_canonical_api_spine_manifest_is_genuinely_absent"
+  }
+}
