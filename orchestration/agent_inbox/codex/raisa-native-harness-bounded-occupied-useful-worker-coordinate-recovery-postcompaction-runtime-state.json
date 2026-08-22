@@ -1,0 +1,194 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "resume_the_typed_failed_closed_closeout_transaction_then_begin_the_provider_free_real_edit_tool_coordinate_diagnostic",
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "fresh complete AGENTS.md read; active plan, threat delta, typed occupied terminal, diagnosis, efficacy reading, closeout and Sol acceptance; accepted predecessor coordinate plan and acceptance; protected-evidence and user-decision boundaries; validated active-operation latch; machine-observed Git refs and worktree",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md names the accepted provider-free native-Harness coordinate diagnostic, the bounded occupied useful-worker successor, the exact protected ref identity and exclusive governance-clockwork ownership.",
+    "current_authority_allocation": "GPT Sol owns terminal interpretation, deterministic closeout, clockwork publication and the provider-free successor. DeepSeek completed its one authorised request with no candidate. Gemini is declined because no candidate exists. Native subagents remain declined because current developer policy prohibits delegation.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-plan.md",
+      "docs/security/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-terminal.json",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/diagnosis.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/efficacy-reading.json",
+      "docs/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-sol-acceptance.md",
+      "docs/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-plan.md",
+      "docs/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-sol-acceptance.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "The consumed attempt is immutable. It permits no retry, resume, fallback, candidate adoption or Gemini call. The successor is provider-free only. Product/API/schema/database/configuration change, ordinary-practice enablement, product or protected data, deployment, Pages, protected evidence and protected refs remain closed.",
+    "git_refs_and_worktree": "The receipt builder supplies all Git identities from a fresh machine snapshot. The task branch and origin tracking branch are aligned; all four protected refs remain exact; current closeout files are intentionally uncommitted; docs/branding and every unrelated untracked path remain preserved; explicit-path staging only."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+    "active_tranche": "Raisa native Harness bounded occupied useful-worker coordinate-recovery rehearsal",
+    "objective": "Freeze, admit and execute at most one separately named DeepSeek V4 Flash/high native-Harness worker turn against the same closed default-off runbook candidate using the accepted typed runner, one provider request, zero retry/resume/fallback and exact cleanup, then accept a candidate only through deterministic and independent review.",
+    "status": "in_progress",
+    "source_head": "75f47d5c8d20165c2b85f06565730e24db36c9e0",
+    "authority_source": "Yuri's explicit confirmation of a new attempt, subsequent standing uninterrupted-development authority, and the accepted provider-free coordinate diagnostic.",
+    "checkpoint": {
+      "completed_stage": "The separately named occupied attempt was consumed once and ended failed closed at edit_error_accept_not_concluded with one completed provider request, no candidate, zero retry family and complete cleanup.",
+      "next_executable_stage": "commit_the_exact_terminal_and_closeout_package_then_publish_the_transactional_clockwork_closeout_and_rehydrate_the_provider_free_successor",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "consumed_useful_worker_attempt_002_immutable_no_retry_resume_overwrite_or_reclassification",
+      "automatic_retry_manual_retry_resume_fallback_and_auxiliary_model_counts_zero",
+      "no_candidate_adoption_or_gemini_dispatch",
+      "successor_provider_free_real_edit_tool_diagnostic_only",
+      "no_native_harness_worker_model_or_provider_request_in_successor",
+      "no_product_source_configuration_api_openapi_graphql_schema_migration_route_or_database_change",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_generic_status_arrived_action_grammar_first_party_client_or_waiting_area_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+    "assessed_stage": "postterminal failed-closed closeout",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "rationale": "The sole authorised native-Harness turn produced no candidate, but its typed terminal retired conclusion ambiguity and localized the remaining failure to the edit argument/result boundary. Both the attempt and provider authority are consumed.",
+        "work_packages": [
+          "consumed_one_request_native_harness_turn_with_typed_edit_error_terminal"
+        ]
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "The plan admitted Gemini only after a deterministic candidate. No path changed and no candidate exists, so any verifier call would be invalid ceremony.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Current developer policy prohibits native-subagent delegation, and terminal interpretation plus transactional clockwork closeout are one serial custody chain.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "preserve the consumed terminal and cleanup evidence before any closeout publication",
+      "commit the exact non-clockwork closeout package at one full Git object before the transaction",
+      "let only the governance clockwork mutate the ten canonical surfaces",
+      "rehydrate the provider-free successor only after transactional closeout"
+    ],
+    "reassessment_triggers": [
+      "closeout candidate commit",
+      "clockwork dry-run",
+      "clockwork publication",
+      "successor plan freeze"
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "GPT Sol completed the fresh five-source post-compaction rehydration and owns the serial closeout."
+      ]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Claude Code is historical lineage only and no fallback is authorised."
+      ]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Gemini was not dispatched because no candidate passed deterministic admission."
+      ]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": [
+        "No subagent was spawned because current developer policy prohibits delegation."
+      ]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "The native Harness occupied authority is consumed and the successor is provider-free."
+      ]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": [
+        "Not selected and no fallback is authorised."
+      ]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

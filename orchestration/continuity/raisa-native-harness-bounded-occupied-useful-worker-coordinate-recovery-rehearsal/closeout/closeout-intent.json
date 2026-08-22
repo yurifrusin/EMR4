@@ -1,0 +1,393 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+    "title": "Raisa native Harness bounded occupied useful-worker coordinate-recovery failed-closed closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T15:22:46.1484880+10:00",
+    "node": {
+      "id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+      "title": "Raisa native Harness bounded occupied useful-worker coordinate-recovery failed-closed closeout",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorised one separately named native-Harness DeepSeek V4 Flash/high useful-worker turn under the frozen one-request and zero-retry envelope.",
+          "The occupied attempt identity is consumed and cannot be retried, resumed, overwritten or reclassified.",
+          "The successor is provider-free edit argument/result diagnosis only and opens no worker, model or provider authority."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-typed-coordinate-plan-checkpoint-and-preexecution-containment",
+          "source": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-preexecution-checkpoint.json",
+          "status": "accepted",
+          "summary": "Accept the corrected closed-form work package, full-object deterministic admission, transactional checkpoint and separate immutable preexecution rejections."
+        },
+        {
+          "id": "accept-immutable-edit-error-coordinate-terminal",
+          "source": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one request, one edit call/result, exact edit_error_accept_not_concluded, zero changed paths, zero retry family and complete cleanup."
+        },
+        {
+          "id": "reject-useful-worker-success-candidate-and-gemini-dispatch",
+          "source": "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Reject useful-worker success, candidate adoption, Gemini dispatch and general native-Harness reliability because the authoritative edit result was an error and no candidate exists."
+        },
+        {
+          "id": "accept-traceability-improvement",
+          "source": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept that the typed runner retired conclusion timing ambiguity and localized the remaining failure to the edit argument/result boundary."
+        },
+        {
+          "id": "accept-clockwork-and-receipt-corrections",
+          "source": "docs/ariadne-agent-error-correction-register-revision-617.md",
+          "status": "accepted",
+          "summary": "Accept the stale contract-binding and direct clockwork-surface write as corrected preexecution incidents and the post-compaction leverage-vocabulary rejection as a corrected local receipt incident; none consumed occupied authority."
+        }
+      ],
+      "claim_scope": [
+        "The installed native Harness reached HMR, the custom runner, one completed DeepSeek request and one edit dispatch.",
+        "The exact lifecycle coordinate is edit_error_accept_not_concluded; conclusion was requested before dispatch and the authoritative edit result was an error.",
+        "No path changed, no candidate exists and Gemini was correctly not dispatched.",
+        "All retry, resume, fallback and auxiliary-model counts are zero and Harness, broker and exact-root cleanup is complete.",
+        "The clockwork stopped two orchestrator setup errors before occupied authority consumption.",
+        "A post-compaction preflight rejected invented leverage values before commit or canonical publication; the corrected five-source receipt passes.",
+        "No product, ordinary-practice, data, production, deployment, release, Pages or protected-ref authority opened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-plan.md",
+          "docs/security/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/preexecution-candidate-rejection.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/checkpoint-clockwork-attempt-001-rejected-receipt.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-001/preexecution-preparation-rejected.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-terminal.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/diagnosis.md",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-preexecution-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-deterministic-validation-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-deterministic-validation-attempt-002-clockwork-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-deterministic-validation-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-postcompaction-runtime-state.json",
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-postcompaction-corrected-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-closeout-precommit-receipt.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/clockwork-checkpoint-tick-evidence.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal_plan.py",
+          "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/check_in_rollout_runbook.py",
+          "scripts/raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/contract.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/contract.schema.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/occupied-terminal.schema.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/worker-candidate.schema.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-attempt-preparation.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-preexecution-checkpoint.json",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-attempt-consumed.json",
+          "docs/ariadne-agent-error-correction-register-revision-617.md",
+          "orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-coordinate-recovery.md",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The retained typed terminal does not distinguish invalid edit arguments from filesystem or edit-runtime rejection without retaining prohibited raw text.",
+        "No useful runbook candidate or native-Harness useful-worker success exists.",
+        "Both occupied attempts are consumed and no new occupied worker is authorised.",
+        "Ordinary practice, product data, production, deployment, release, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Connect the governance clockwork to one useful DeepSeek native-Harness turn with typed failure coordinates",
+      "outcome": "One bounded turn produced no candidate, but the accepted runner localized the failure from an unresolved conclusion seam to an authoritative edit-error coordinate.",
+      "evidence": [
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-terminal.json",
+        "docs/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-closeout.md",
+        "orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-coordinate-recovery.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Type the native Harness edit argument/result boundary provider-free before considering any further occupied use",
+      "why_now": "The conclusion timing defect is retired and the consumed terminal identifies the authoritative edit result as error, but safe retained evidence cannot distinguish argument rejection from edit-runtime failure.",
+      "outcome": "The negative occupied attempt is honestly closed with materially better traceability; useful-worker efficacy remains unproved.",
+      "unlocks": [
+        "Closed non-sensitive coordinates for valid and invalid real edit-tool argument/result variants.",
+        "Provider-free proof that a future runner can retain the decisive edit failure class without raw model material.",
+        "An evidence-based decision whether any later native-Harness worker attempt is justified."
+      ],
+      "does_not_solve": [
+        "No useful worker success, runbook adoption or broad DeepSeek quality conclusion.",
+        "No occupied request, retry, resume, fallback or provider authority.",
+        "No product, ordinary-practice, production or protected-ref authority."
+      ],
+      "evidence": [
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/diagnosis.md",
+        "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-sol-acceptance.md",
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/efficacy-reading.json"
+      ],
+      "orientation_statement": "EMR4 will next type only the provider-free real edit-tool argument/result boundary; no occupied DeepSeek request is admitted."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery",
+      "active_tranche": "DeepSeek native Harness provider-free edit argument/result coordinate diagnostic recovery",
+      "objective": "Freeze and implement the narrowest provider-free diagnostic that executes the real accepted native-Harness edit tool over closed authored-synthetic valid and invalid argument/result variants, emits a non-sensitive typed edit-result coordinate, preserves both consumed occupied attempts and proves complete cleanup without any worker, model or provider request.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted typed edit-error occupied terminal, exact cleanup and efficacy reading.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_provider_free_real_edit_tool_argument_and_result_coordinate_diagnostic_plan"
+    },
+    "incidents": [
+      {
+        "incident_id": "typed-worker-contract-final-byte-order",
+        "source_id": "typed-worker-preexecution-contract-001",
+        "peers": []
+      },
+      {
+        "incident_id": "typed-worker-clockwork-owned-surface-write",
+        "source_id": "typed-worker-clockwork-checkpoint-001",
+        "peers": []
+      },
+      {
+        "incident_id": "typed-worker-postcompaction-leverage-vocabulary",
+        "source_id": "typed-worker-postcompaction-receipt-001",
+        "peers": []
+      }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "typed-useful-worker-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "typed-useful-worker-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal_plan.py",
+          "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "typed-useful-worker-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "orchestration_harness/check_in_rollout_runbook.py",
+          "scripts/raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "typed-useful-worker-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "orchestration_harness/check_in_rollout_runbook.py",
+          "scripts/raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-plan.md",
+      "docs/security/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-terminal.json",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/diagnosis.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-617.md",
+      "docs/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-sol-acceptance.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_real_edit_tool_argument_and_result_coordinate_diagnostic_only",
+    "authored_synthetic_closed_argument_result_variants_and_typed_terminals_only",
+    "no_native_harness_worker_model_or_live_provider_request",
+    "both_consumed_occupied_attempts_immutable_no_retry_resume_overwrite_or_reclassification",
+    "no_candidate_adoption_or_runbook_manifest_change",
+    "no_product_source_configuration_api_openapi_graphql_schema_migration_route_or_database_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_first_party_client_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "typed-worker-contract-final-byte-order-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "typed-useful-worker-preexecution-contract",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_validation_runner",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The deterministic contract must be generated only after every bound schema and source file has reached its final byte representation.",
+      "observed_error": "The first published control candidate normalized copied schema bytes after contract generation, leaving the candidate-schema digest stale.",
+      "detection_method": "The shell-free validation runner rejected exact contract equality and the provider-free controller check before preparation, lease consumption, native Harness startup or provider access.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/preexecution-candidate-rejection.json",
+        "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-deterministic-validation-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.contract_generated_before_bound_bytes_finalized",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Regenerate the contract from final normalized bytes and require exact-equality plus provider-free checks before attempt preparation.",
+        "prevention_control": "The deterministic preexecution manifest now blocks preparation whenever any bound byte changes after contract generation.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/contract.json",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py"
+        ]
+      },
+      "baton_summary": "records the stale binding rejected before attempt preparation and binds contract generation to final source bytes."
+    },
+    {
+      "attempt_key": "typed-worker-clockwork-owned-surface-write-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "typed-useful-worker-clockwork-checkpoint",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Only the governance clockwork may write its ten canonical surfaces, including the live Baton and agent-error register.",
+      "observed_error": "The orchestrator directly edited AGENTS and agent-error-register surfaces while recording the prior incident, producing canonical drift before checkpoint publication.",
+      "detection_method": "The checkpoint dry-run rejected canonical_drift; after restoration, it required a clean source commit before the transactional checkpoint could pass.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/checkpoint-clockwork-attempt-001-rejected-receipt.json",
+        "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-001/preexecution-preparation-rejected.json",
+        "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-deterministic-validation-attempt-002-clockwork-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_owned_surface_written_outside_transaction",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore all clockwork-owned surfaces to the last accepted generation, close and clean the first preparation identity, and let only a transactional tick update canonical state.",
+        "prevention_control": "Every checkpoint and closeout dry-run validates live canonical bytes against the selected generation and fails before worker or provider activity on any direct-write drift.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/clockwork-checkpoint-tick-evidence.json",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "baton_summary": "records the canonical-drift rejection and restores exclusive clockwork ownership before the occupied request."
+    },
+    {
+      "attempt_key": "typed-worker-postcompaction-leverage-vocabulary-001",
+      "observed_on": "2026-08-22",
+      "tranche": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "verification",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every parallelism assessment must select expected_leverage only from the configured closed vocabulary and express qualifications in rationale text.",
+      "observed_error": "The first post-compaction runtime state invented leverage values mixed and none for the DeepSeek and Gemini lanes.",
+      "detection_method": "The local orchestrator preflight returned revision_required with parallelism_lane_leverage_invalid for both lanes before commit or clockwork publication; replacing only those values with positive and neutral produced a fresh passing five-source receipt.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-postcompaction-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-postcompaction-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-postcompaction-corrected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.parallelism_expected_leverage_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace only the invalid leverage values with configured positive and neutral while retaining all qualifications in rationale text, then require a fresh passing readback before closeout commit.",
+        "prevention_control": "Construct future parallelism assessments from the configured enum or a typed selector; never author expected_leverage as free prose.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-postcompaction-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-postcompaction-corrected-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-617.md"
+        ]
+      },
+      "baton_summary": "records the rejected post-compaction leverage vocabulary and confines later receipts to configured typed values."
+    }
+  ]
+}

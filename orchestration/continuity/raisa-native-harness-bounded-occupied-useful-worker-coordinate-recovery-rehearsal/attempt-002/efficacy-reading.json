@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.native_harness_useful_worker_coordinate_recovery_efficacy.v1",
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+  "attempt_id": "deepseek-native-check-in-runbook-worker-coordinate-recovery-002",
+  "result": "typed_failed_closed_no_candidate",
+  "prior_ambiguity_retired": true,
+  "observed_coordinate": "edit_error_accept_not_concluded",
+  "useful_worker_success_proved": false,
+  "native_harness_general_reliability_proved": false,
+  "provider_request_count": 1,
+  "worker_process_count": 1,
+  "retry_count": 0,
+  "resume_count": 0,
+  "fallback_count": 0,
+  "auxiliary_model_call_count": 0,
+  "gemini_dispatched": false,
+  "candidate_admitted": false,
+  "cleanup_complete": true,
+  "workflow_value": "The typed runner converted the predecessor's unresolved conclusion/tool ambiguity into one closed authoritative edit-error coordinate, so the next control can target the edit-result boundary without another occupied guess.",
+  "next_control": "provider_free_real_edit_tool_argument_and_result_coordinate_diagnostic"
+}

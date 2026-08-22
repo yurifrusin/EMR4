@@ -1,0 +1,133 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa native Harness bounded occupied useful-worker coordinate-recovery rehearsal",
+    "completed_stage": "The corrected typed coordinate-recovery contract, runner derivation, terminal schema, closed runbook package, full-object source resolution and exact-root preparation pass deterministic preexecution admission. The first stale-binding source is preserved as non-executable, while this freshly prepared disjoint attempt records zero native Harness processes and zero provider requests.",
+    "next_executable_stage": "fresh_five_source_preexecution_receipt_then_consume_the_attempt_once_and_execute_exactly_one_native_harness_deepseek_v4_flash_high_turn_with_one_provider_request_one_direct_edit_zero_retry_and_exact_cleanup",
+    "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "75f47d5c8d20165c2b85f06565730e24db36c9e0",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "f9ae0c5768f9e564983f70d00641c13288bde543",
+    "reason_codes": [],
+    "resolved_commit": "75f47d5c8d20165c2b85f06565730e24db36c9e0",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "75f47d5c8d20165c2b85f06565730e24db36c9e0"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "f9ae0c5768f9e564983f70d00641c13288bde543",
+    "branch_origin_aligned": true,
+    "head": "f9ae0c5768f9e564983f70d00641c13288bde543",
+    "origin_branch_commit": "f9ae0c5768f9e564983f70d00641c13288bde543",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 662
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "checkpoint-admitted typed occupied worker pre-dispatch",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The accepted coordinate runner now constrains one useful closed-form edit and emits a typed terminal that distinguishes lifecycle failure from model output and candidate admission.",
+        "work_packages": [
+          "one_closed_default_off_check_in_runbook_member_edit"
+        ]
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "positive",
+        "lane_id": "gemini_verifier",
+        "rationale": "A fresh Gemini 3.7 Flash/high veto is useful only after cleanup and deterministic candidate admission; it is not part of the occupied attempt and is never a fallback worker.",
+        "work_packages": [
+          "serial_independent_veto_of_an_admitted_candidate_only"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits native-subagent delegation, and plan freeze, one occupied worker turn, cleanup, deterministic admission and verifier dispatch form one serial custody chain.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "typed occupied terminal",
+      "deterministic candidate gate",
+      "pre-verifier dispatch",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "this fresh receipt passes before the attempt lease is consumed",
+      "one native-Harness DeepSeek request consumes the entire occupied worker authority",
+      "the Harness broker and exact disposable root are absent before candidate interpretation",
+      "deterministic candidate admission precedes any fresh Gemini veto"
+    ]
+  },
+  "planned_action": "consume_the_checkpoint_admitted_attempt_once_and_execute_exactly_one_native_harness_deepseek_v4_flash_high_turn_with_one_provider_request_one_direct_edit_zero_retry_then_cleanup_before_candidate_interpretation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-plan.md",
+      "docs/security/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/contract.json",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-attempt-preparation.json",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-preexecution-checkpoint.json",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/clockwork-checkpoint-tick-evidence.json",
+      "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-deterministic-validation-receipt.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/deterministic-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/future-runner.mjs",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns monitoring, cleanup, deterministic candidate admission or rejection, verifier dispatch and acceptance. DeepSeek V4 Flash/high owns exactly one direct literal edit through the native Harness. Gemini 3.7 Flash/high remains reserved for a later serial veto only if a candidate is deterministically admitted. Native subagents are declined because current developer policy prohibits delegation.",
+    "git_refs_and_worktree": "The receipt builder supplies every Git identity and protected-ref comparison from its fresh machine snapshot. The task branch and origin tracking branch are aligned, all four protected refs remain exact, tracked paths are clean, and docs/branding plus every unrelated untracked path remain preserved.",
+    "live_handover_current_baton": "AGENTS.md and the active clockwork checkpoint name the one-request typed native-Harness useful-worker coordinate-recovery turn as the next executable stage.",
+    "protected_evidence_boundaries": "Only the prepared authored-synthetic default-off manifest, one native-Harness worker process and one prepaid DeepSeek request are open. The edit is unmounted and non-actuating. Retry, resume, fallback and auxiliary models are zero. Ordinary practice, flags, allowlists, routes, status grammar, clients, waiting area, product or protected data, production, deployment, release, Pages, protected evidence and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

@@ -1,0 +1,80 @@
+{
+  "attempt_id": "deepseek-native-check-in-runbook-worker-coordinate-recovery-002",
+  "automatic_retry_count": 0,
+  "auxiliary_model_call_count": 0,
+  "broker": {
+    "provider_call_completed": 1,
+    "provider_call_failed": 0,
+    "provider_call_started": 1,
+    "request_rejected": 1
+  },
+  "candidate": {
+    "admitted": false,
+    "canonical_byte_count": null,
+    "canonical_sha256": null,
+    "changed_paths": [],
+    "claim": null,
+    "retained_path": null
+  },
+  "candidate_source": "ff9dd92f9ba6c2641751f9f1580f9aba0a92e3b6",
+  "cleanup": {
+    "attempt_root_absent": true,
+    "broker_absent": true,
+    "harness_absent": true,
+    "provider_key_present_in_worker_environment": false,
+    "raw_logs_retained": false,
+    "raw_prompt_response_reasoning_retained": false,
+    "raw_session_retained": false
+  },
+  "failure_coordinate": "native_harness_terminal_failure",
+  "fallback_count": 0,
+  "hmr_events": [
+    "sentinel_activated",
+    "stock_headless_hmr_ready"
+  ],
+  "manual_retry_count": 0,
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+  "process": {
+    "broker_stderr_bytes": 0,
+    "broker_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "harness_exit_code": 1,
+    "native_process_count": 1,
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_bytes": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "wall_clock_ms": 16237
+  },
+  "result": "failed_closed",
+  "resume_count": 0,
+  "runner": {
+    "allowed_tool_names": [
+      "edit",
+      "glob",
+      "read"
+    ],
+    "failure_stage": "terminal",
+    "model": "deepseek-v4-flash",
+    "provider": "deepseek-official",
+    "reasoning_effort": "high",
+    "request_count": 1,
+    "schema_version": "ariadne.native_harness_useful_worker_coordinate_runner_terminal.v1",
+    "session_id_sha256": "sha256:10c35adbf8f98f092490b2deb06628a2ff6430e74e22832e6470802e4f958b82",
+    "status": "failed",
+    "target_path_sha256": "sha256:691dcd5e1feb5db5332f73330da8fd3f61bcae9967698e8c67cfb2f6bd9dd444",
+    "tool_lifecycle": {
+      "authoritative_final_result_kind": "error",
+      "conclusion_request_stage": "pre_execute_after_boundary_accept",
+      "coordinate": "edit_error_accept_not_concluded",
+      "input_result_kind": "error",
+      "post_execute_decision_kind": "accept"
+    },
+    "tool_names": [
+      "edit"
+    ],
+    "tool_result_count": 1,
+    "turn_kind": "error"
+  },
+  "schema_version": "ariadne.native_harness_useful_worker_coordinate_recovery_terminal.v1",
+  "terminal_class": "useful_worker_transport_terminal"
+}

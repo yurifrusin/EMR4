@@ -172,5 +172,55 @@ def test_fresh_receipt_has_five_sources_and_serial_lane_ownership() -> None:
     assert receipt["parallelism_assessment"]["parallel_work_packages"] == []
 
 
-def test_attempt_root_is_absent_before_consumption() -> None:
-    assert not worker.ATTEMPT_ROOT.exists()
+def test_attempt_root_matches_the_durable_attempt_state() -> None:
+    if worker.CONSUMED_PATH.exists() or worker.TERMINAL_PATH.exists():
+        assert not worker.ATTEMPT_ROOT.exists()
+    elif worker.PREPARATION_PATH.exists():
+        assert worker.ATTEMPT_ROOT.is_dir()
+    else:
+        assert not worker.ATTEMPT_ROOT.exists()
+
+
+def test_persisted_terminal_is_typed_edit_error_and_completely_clean() -> None:
+    terminal = json.loads(worker.TERMINAL_PATH.read_bytes())
+    schema = json.loads(worker.TERMINAL_SCHEMA_PATH.read_bytes())
+    jsonschema.Draft202012Validator(schema).validate(terminal)
+    assert terminal["result"] == "failed_closed"
+    assert terminal["terminal_class"] == "useful_worker_transport_terminal"
+    assert terminal["runner"]["tool_lifecycle"] == {
+        "input_result_kind": "error",
+        "post_execute_decision_kind": "accept",
+        "conclusion_request_stage": "pre_execute_after_boundary_accept",
+        "authoritative_final_result_kind": "error",
+        "coordinate": "edit_error_accept_not_concluded",
+    }
+    assert terminal["runner"]["request_count"] == 1
+    assert terminal["runner"]["tool_names"] == ["edit"]
+    assert terminal["runner"]["tool_result_count"] == 1
+    assert terminal["broker"] == {
+        "provider_call_started": 1,
+        "provider_call_completed": 1,
+        "provider_call_failed": 0,
+        "request_rejected": 1,
+    }
+    assert terminal["candidate"]["admitted"] is False
+    assert terminal["candidate"]["changed_paths"] == []
+    assert all(
+        terminal[name] == 0
+        for name in (
+            "automatic_retry_count",
+            "manual_retry_count",
+            "resume_count",
+            "fallback_count",
+            "auxiliary_model_call_count",
+        )
+    )
+    assert terminal["cleanup"] == {
+        "harness_absent": True,
+        "broker_absent": True,
+        "attempt_root_absent": True,
+        "raw_logs_retained": False,
+        "raw_session_retained": False,
+        "raw_prompt_response_reasoning_retained": False,
+        "provider_key_present_in_worker_environment": False,
+    }

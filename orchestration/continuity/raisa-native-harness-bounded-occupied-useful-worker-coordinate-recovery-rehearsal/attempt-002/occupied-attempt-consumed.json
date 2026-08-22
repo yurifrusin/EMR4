@@ -1,0 +1,9 @@
+{
+  "attempt_id": "deepseek-native-check-in-runbook-worker-coordinate-recovery-002",
+  "automatic_retry_count": 0,
+  "candidate_source": "ff9dd92f9ba6c2641751f9f1580f9aba0a92e3b6",
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+  "resume_permitted": false,
+  "schema_version": "ariadne.native_harness_useful_worker_consumed.v1",
+  "state": "consumed"
+}

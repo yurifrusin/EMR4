@@ -1,0 +1,132 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa native Harness bounded occupied useful-worker coordinate-recovery rehearsal",
+    "completed_stage": "The separately named occupied attempt was consumed once and ended failed closed at edit_error_accept_not_concluded with one completed provider request, no candidate, zero retry family and complete cleanup.",
+    "next_executable_stage": "commit_the_exact_terminal_and_closeout_package_then_publish_the_transactional_clockwork_closeout_and_rehydrate_the_provider_free_successor",
+    "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "75f47d5c8d20165c2b85f06565730e24db36c9e0",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "git_object_resolution": {
+    "observed_head": "f9ae0c5768f9e564983f70d00641c13288bde543",
+    "reason_codes": [],
+    "resolved_commit": "75f47d5c8d20165c2b85f06565730e24db36c9e0",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "75f47d5c8d20165c2b85f06565730e24db36c9e0"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "f9ae0c5768f9e564983f70d00641c13288bde543",
+    "branch_origin_aligned": true,
+    "head": "f9ae0c5768f9e564983f70d00641c13288bde543",
+    "origin_branch_commit": "f9ae0c5768f9e564983f70d00641c13288bde543",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 676
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "postterminal failed-closed closeout",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The sole authorised native-Harness turn produced no candidate, but its typed terminal retired conclusion ambiguity and localized the remaining failure to the edit argument/result boundary. Both the attempt and provider authority are consumed.",
+        "work_packages": [
+          "consumed_one_request_native_harness_turn_with_typed_edit_error_terminal"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The plan admitted Gemini only after a deterministic candidate. No path changed and no candidate exists, so any verifier call would be invalid ceremony.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits native-subagent delegation, and terminal interpretation plus transactional clockwork closeout are one serial custody chain.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "closeout candidate commit",
+      "clockwork dry-run",
+      "clockwork publication",
+      "successor plan freeze"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "preserve the consumed terminal and cleanup evidence before any closeout publication",
+      "commit the exact non-clockwork closeout package at one full Git object before the transaction",
+      "let only the governance clockwork mutate the ten canonical surfaces",
+      "rehydrate the provider-free successor only after transactional closeout"
+    ]
+  },
+  "planned_action": "resume_the_typed_failed_closed_closeout_transaction_then_begin_the_provider_free_real_edit_tool_coordinate_diagnostic",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-plan.md",
+      "docs/security/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-terminal.json",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/diagnosis.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/efficacy-reading.json",
+      "docs/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-sol-acceptance.md",
+      "docs/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-plan.md",
+      "docs/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery-sol-acceptance.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns terminal interpretation, deterministic closeout, clockwork publication and the provider-free successor. DeepSeek completed its one authorised request with no candidate. Gemini is declined because no candidate exists. Native subagents remain declined because current developer policy prohibits delegation.",
+    "git_refs_and_worktree": "The receipt builder supplies all Git identities from a fresh machine snapshot. The task branch and origin tracking branch are aligned; all four protected refs remain exact; current closeout files are intentionally uncommitted; docs/branding and every unrelated untracked path remain preserved; explicit-path staging only.",
+    "live_handover_current_baton": "AGENTS.md names the accepted provider-free native-Harness coordinate diagnostic, the bounded occupied useful-worker successor, the exact protected ref identity and exclusive governance-clockwork ownership.",
+    "protected_evidence_boundaries": "The consumed attempt is immutable. It permits no retry, resume, fallback, candidate adoption or Gemini call. The successor is provider-free only. Product/API/schema/database/configuration change, ordinary-practice enablement, product or protected data, deployment, Pages, protected evidence and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
