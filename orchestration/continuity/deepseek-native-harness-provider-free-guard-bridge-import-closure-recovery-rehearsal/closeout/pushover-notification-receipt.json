@@ -1,0 +1,11 @@
+{
+  "schema_version": "emr4.non_phi_pushover_notification_receipt.v1",
+  "recorded_at": "2026-08-22T11:28:14.5918483+10:00",
+  "status": "passed",
+  "provider": "pushover",
+  "request": "812a6785-fc9d-4f2e-bffe-0296ec8fbe71",
+  "title": "EMR4 sprint closeout",
+  "message_class": "non_phi_operational_closeout",
+  "phi_or_clinical_data": false,
+  "summary": "Continuity 390 / Compass 372; one-process guard-bridge import-closure recovery and full governance suite passed; the complete package-unloaded runner evaluation is continuing."
+}
