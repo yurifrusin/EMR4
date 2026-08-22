@@ -78,7 +78,7 @@
       "bytes": 330,
       "sha256": "9b9900a6aa084c458094ec89cb0bc816aa3a787fb84a1188abdd0897db43afd1"
     },
-    "candidate_schema_sha256": "39ecaa4879d52094633788d32fa661e4b912293c9202522655b1f845e4aca071",
+    "candidate_schema_sha256": "d5b15e5200835a5b97a56adba80c2ad56e990ee535309141ed9dce8093bb5e30",
     "claim": "runbook_contract_present_default_off",
     "required_candidate": {
       "bytes": 2331,

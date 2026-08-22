@@ -1,0 +1,308 @@
+{
+  "command_manifest_sha256": "0d5e758d7bc8851a37aeec52e0b810deb5470c8f38fdf24c4fa7536394144bf8",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "id": "C01"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "id": "C02"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/emr4",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal_plan.py",
+        "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_api_spine_artifacts.py"
+      ],
+      "id": "C03"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/check_in_rollout_runbook.py",
+        "scripts/raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal_plan.py"
+      ],
+      "id": "C04"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/check_in_rollout_runbook.py",
+        "scripts/raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal_plan.py"
+      ],
+      "id": "C05"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal",
+        "--check"
+      ],
+      "id": "C06"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "id": "C07"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "HEAD~1..HEAD"
+      ],
+      "id": "C08"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "HEAD~1..HEAD"
+      ],
+      "id": "C09"
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "id": "C10"
+    }
+  ],
+  "ended_at": "2026-08-22T05:07:20.168466Z",
+  "failure_command_id": "C03",
+  "provider_free_no_database_admission_sha256": "sha256:178996a1aa19bba955827dda2dd4779e4d8d459e427172479735b462bf219702",
+  "repo_root": "C:\\Users\\sarashera\\emr4",
+  "results": [
+    {
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "elapsed_ms": 75,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C01",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 80999,
+      "stdout_sha256": "c54dd1caa9cc7941d50c7fa0e379a4cdea00f9e6b486eb7d32b85e3a416f4e33"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "elapsed_ms": 23,
+      "error_code": null,
+      "exit_code": 0,
+      "id": "C02",
+      "status": "passed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 41,
+      "stdout_sha256": "2db690c71237af118b6cb9cfbe9b07360be7e33073293592ce03ecc2abc52e84"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/emr4",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal_plan.py",
+        "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_current_baton_consistency.py",
+        "tests/test_api_spine_artifacts.py"
+      ],
+      "elapsed_ms": 24468,
+      "error_code": null,
+      "exit_code": 1,
+      "id": "C03",
+      "status": "failed",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 2555,
+      "stdout_sha256": "2456f115ed25b1f60cb7a458782de4d05d386063d02ddeac7ddac23c87464096"
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "orchestration_harness/check_in_rollout_runbook.py",
+        "scripts/raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal_plan.py"
+      ],
+      "elapsed_ms": null,
+      "error_code": null,
+      "exit_code": null,
+      "id": "C04",
+      "status": "pending",
+      "stderr_bytes": null,
+      "stderr_sha256": null,
+      "stdout_bytes": null,
+      "stdout_sha256": null
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/check_in_rollout_runbook.py",
+        "scripts/raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal_plan.py"
+      ],
+      "elapsed_ms": null,
+      "error_code": null,
+      "exit_code": null,
+      "id": "C05",
+      "status": "pending",
+      "stderr_bytes": null,
+      "stderr_sha256": null,
+      "stdout_bytes": null,
+      "stdout_sha256": null
+    },
+    {
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal",
+        "--check"
+      ],
+      "elapsed_ms": null,
+      "error_code": null,
+      "exit_code": null,
+      "id": "C06",
+      "status": "pending",
+      "stderr_bytes": null,
+      "stderr_sha256": null,
+      "stdout_bytes": null,
+      "stdout_sha256": null
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "HEAD",
+        "--"
+      ],
+      "elapsed_ms": null,
+      "error_code": null,
+      "exit_code": null,
+      "id": "C07",
+      "status": "pending",
+      "stderr_bytes": null,
+      "stderr_sha256": null,
+      "stdout_bytes": null,
+      "stdout_sha256": null
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "HEAD~1..HEAD"
+      ],
+      "elapsed_ms": null,
+      "error_code": null,
+      "exit_code": null,
+      "id": "C08",
+      "status": "pending",
+      "stderr_bytes": null,
+      "stderr_sha256": null,
+      "stdout_bytes": null,
+      "stdout_sha256": null
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "HEAD~1..HEAD"
+      ],
+      "elapsed_ms": null,
+      "error_code": null,
+      "exit_code": null,
+      "id": "C09",
+      "status": "pending",
+      "stderr_bytes": null,
+      "stderr_sha256": null,
+      "stdout_bytes": null,
+      "stdout_sha256": null
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "elapsed_ms": null,
+      "error_code": null,
+      "exit_code": null,
+      "id": "C10",
+      "status": "pending",
+      "stderr_bytes": null,
+      "stderr_sha256": null,
+      "stdout_bytes": null,
+      "stdout_sha256": null
+    }
+  ],
+  "schema_version": "ariadne.validation_run.v1",
+  "started_at": "2026-08-22T05:06:55.584319Z",
+  "status": "failed"
+}

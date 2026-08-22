@@ -1,0 +1,20 @@
+{
+  "schema_version": "ariadne.native_harness_useful_worker_preexecution_candidate_rejection.v1",
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+  "rejected_candidate_source": "a049864c6b89b5085d9c3325f3a41c573ab861e2",
+  "rejected_at": "2026-08-22T15:07:52.9378905+10:00",
+  "stage": "deterministic_preexecution_validation",
+  "coordinate": "contract_binding_mismatch",
+  "cause": "candidate_schema_bytes_normalized_after_contract_generation",
+  "validation_receipt_sha256": "456811758b655a5a9866eab0a7083c272c7ee3368ba270578d5f21903f03f5d6",
+  "candidate_executable": false,
+  "attempt_identity_consumed": false,
+  "native_harness_process_count": 0,
+  "worker_process_count": 0,
+  "provider_request_count": 0,
+  "retry_count": 0,
+  "resume_count": 0,
+  "fallback_count": 0,
+  "product_or_protected_effect": false,
+  "correction": "Regenerate the deterministic contract from final normalized bound bytes, verify it, and publish a new descendant source before preparing the one occupied attempt."
+}
