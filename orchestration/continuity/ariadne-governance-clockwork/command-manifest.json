@@ -3,34 +3,28 @@
   "database_authority": "closed",
   "commands": [
     {
-      "command_id": "attempt-008-admissibility-closeout-tick-check",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "scripts.ariadne_governance_clockwork_tick",
-        "--check",
-        "--intent",
-        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/closeout/closeout-intent.json"
-      ],
-      "completion_contract": "final_exit_code_zero_required",
-      "verification_phase": "prepublication"
-    },
-    {
-      "command_id": "attempt-008-admissibility-closeout-provider-free-tests",
+      "command_id": "attempt-008-database-preexecution-provider-free-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_plan.py",
         "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
         "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_plan.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+        "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal_plan.py",
         "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair.py",
         "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair_plan.py",
-        "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py",
-        "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision_plan.py",
-        "tests/test_ariadne_agent_error_register.py",
+        "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py",
+        "tests/test_ariadne_provider_free_no_database_admission.py",
+        "tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py",
         "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_git_object_resolution.py",
+        "tests/test_current_baton_consistency.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_transactional_closeout.py"
       ],
@@ -38,61 +32,42 @@
       "verification_phase": "prepublication"
     },
     {
-      "command_id": "attempt-008-admissibility-closeout-ruff",
+      "command_id": "attempt-008-database-preexecution-static-check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "ruff",
-        "check",
-        "scripts/raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py",
-        "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py",
-        "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision_plan.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required",
-      "verification_phase": "prepublication"
-    },
-    {
-      "command_id": "attempt-008-admissibility-closeout-compile",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "py_compile",
-        "scripts/raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py",
-        "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py",
-        "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision_plan.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required",
-      "verification_phase": "prepublication"
-    },
-    {
-      "command_id": "attempt-008-admissibility-closeout-decision-check",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "scripts.raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision",
+        "scripts.raisa_provider_free_check_in_relay_free_recovery_attempt_008",
         "--check"
       ],
       "completion_contract": "final_exit_code_zero_required",
       "verification_phase": "prepublication"
     },
     {
-      "command_id": "attempt-008-admissibility-closeout-postpublication-readback",
+      "command_id": "attempt-008-database-preexecution-ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "scripts.ariadne_provider_free_pytest",
-        "--repo-root",
-        "C:/Users/sarashera/emr4",
-        "tests/test_current_baton_consistency.py",
-        "tests/test_ariadne_agent_error_register.py",
-        "tests/test_ariadne_active_operation_latch.py",
-        "tests/test_ariadne_governance_clockwork_tick.py",
-        "tests/test_ariadne_transactional_closeout.py",
-        "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py",
-        "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision_plan.py"
+        "ruff",
+        "check",
+        "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_plan.py"
       ],
       "completion_contract": "final_exit_code_zero_required",
-      "verification_phase": "postpublication"
+      "verification_phase": "prepublication"
+    },
+    {
+      "command_id": "attempt-008-database-preexecution-compile",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "py_compile",
+        "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
+        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_plan.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required",
+      "verification_phase": "prepublication"
     }
   ]
 }

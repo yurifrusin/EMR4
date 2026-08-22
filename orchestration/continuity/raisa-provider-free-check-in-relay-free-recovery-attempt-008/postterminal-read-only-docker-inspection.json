@@ -1,0 +1,27 @@
+{
+  "schema_version": "emr4.check-in-relay-free-recovery-attempt-008.postterminal-docker-inspection.v1",
+  "status": "owned_docker_resources_absent",
+  "observed_at": "2026-08-23T07:12:01.6397204+10:00",
+  "source_commit": "9f37ede79a915172e449c1f2d19bdba3eb592b44",
+  "inspection_only": true,
+  "occupied_execution_count": 1,
+  "automatic_retry_count": 0,
+  "resume_count": 0,
+  "fallback_count": 0,
+  "terminal": {
+    "evidence_sha256": "d15a06188b7399df13fc4871a34e273e72969de16b729bdf360436b4d794d0b8",
+    "transaction_attestation_sha256": "d7967117f59fadde447ca0e848c428ef3461ee12a4bd140f715d8b067be5890e",
+    "execution_envelope_sha256": "50ce4f4ef672d9392062f40c87833c63fc9eac2f4c3979567fb81da5ac0b81ce",
+    "failure_evidence_present": false,
+    "success_evidence_present": true,
+    "transaction_attestation_present": true,
+    "cleanup_status": "cleanup_verified"
+  },
+  "residue": {
+    "label_filter": "emr4.harness=check-in-relay-free-recovery-v1",
+    "container_ids": [],
+    "network_ids": [],
+    "matching_resource_count": 0
+  },
+  "claim_boundary": "read_only_terminal_binding_and_owned_docker_resource_absence_only"
+}

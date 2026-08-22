@@ -1,0 +1,79 @@
+{
+  "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
+  "operation_id": "raisa-provider-free-check-in-relay-free-recovery-attempt-008",
+  "completed_stage": "Attempt-008 P06-P13 pass: its plan and wrapper are committed and origin-aligned; exact repaired-base and immutable-lineage hashes, prospective redaction, typed terminal, provider-free source/governance tests, hostile static gates, Ruff, compilation and schema checks pass; read-only Docker inspection matches the cached image with zero labelled residue; and the fresh five-source receipt passes with all three parallel lanes declined for the serial lifecycle.",
+  "next_executable_stage": "execute_exactly_one_attempt_008_wrapper_invocation_then_stop_without_retry_resume_or_fallback_and_preserve_its_immutable_terminal",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v2",
+    "database_authority": "closed",
+    "commands": [
+      {
+        "command_id": "attempt-008-database-preexecution-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_plan.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_plan.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal_plan.py",
+          "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair.py",
+          "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair_plan.py",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_route_adapter_convergence.py",
+          "tests/test_ariadne_provider_free_no_database_admission.py",
+          "tests/test_ariadne_provider_free_no_database_admission_repair_evidence.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "tests/test_ariadne_git_object_resolution.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "attempt-008-database-preexecution-static-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.raisa_provider_free_check_in_relay_free_recovery_attempt_008",
+          "--check"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "attempt-008-database-preexecution-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "attempt-008-database-preexecution-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_008_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      }
+    ]
+  }
+}
