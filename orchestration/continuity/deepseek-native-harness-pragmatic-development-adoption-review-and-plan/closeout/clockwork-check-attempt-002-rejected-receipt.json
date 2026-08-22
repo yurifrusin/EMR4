@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.governance_clockwork_rejected_check.v1",
+  "operation_id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+  "attempt_id": "clockwork-check-attempt-002",
+  "observed_on": "2026-08-23",
+  "status": "rejected_before_canonical_mutation",
+  "reason_code": "tick_incident_stage",
+  "detail": "descriptive_stage_labels_outside_closed_incident_vocabulary",
+  "rejected_intent_sha256": "1afd9c3d1f4abc8007e4cea87bfdcdfac42a712e538cfc881eeee23174367383",
+  "canonical_mutation_count": 0,
+  "correction": "map_all_review_and_closeout_assembly_incidents_to_admitted_closeout_stage"
+}

@@ -1,0 +1,525 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+    "title": "DeepSeek native Harness pragmatic development-adoption review closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T09:22:37.2550535+10:00",
+    "node": {
+      "id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "title": "DeepSeek native Harness pragmatic development-adoption review and plan",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri explicitly requested that perfect clockwork/native-Harness interoperability cease to be the admission standard and that retained know-how be used to enter real development with minimum further stand-alone testing.",
+          "The review itself remains provider-free and read-only; occupied worker authority begins only in the separately latched successor.",
+          "DeepSeek is a monitored secondary worker, not the default or its own acceptance authority."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "admit-native-harness-as-monitored-secondary-worker",
+          "source": "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan.md",
+          "status": "accepted",
+          "summary": "Admit the pinned native Harness for bounded real EMR4 implementation work without another generic boot or interoperability qualification tranche, while declining default promotion."
+        },
+        {
+          "id": "separate-traceability-from-useful-completion",
+          "source": "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/evidence.json",
+          "status": "accepted",
+          "summary": "Accept materially stronger traceability while retaining that useful EMR4 completion and comparative reliability versus Claude Code remain unproved."
+        },
+        {
+          "id": "retain-lean-controls-and-retire-perfection-ceremony",
+          "source": "docs/security/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-threat-model-delta.md",
+          "status": "accepted",
+          "summary": "Keep pinned enclosure, broker, tool, trace, cleanup and Sol acceptance controls; retire generic boot reproof, one-request containment, per-step ticks and diagnostic sequels."
+        },
+        {
+          "id": "select-first-real-manifest-normalizer-assignment",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Select one unmounted non-secret canonical check-in manifest-normalizer source/test package as the first monitored real assignment."
+        },
+        {
+          "id": "accept-pragmatic-review-efficacy",
+          "source": "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept a zero-additional-rehearsal development-entry plan, 53 deterministic passes and nine contained local evidence/closeout-command lapses without another reusable control layer."
+        }
+      ],
+      "claim_scope": [
+        "Sixty-eight accepted native-Harness Continuity nodes and seventy-one closeouts were reviewed as retained non-protected evidence.",
+        "The accepted stock-headless-to-custom-runner boot prerequisite already passed and requires no generic reproof while exact hashes remain pinned.",
+        "The native Harness is admitted as a monitored secondary worker and is not the default worker.",
+        "Native traceability is materially stronger than the retained Claude-Code failure evidence, but superior useful-task reliability is not proved.",
+        "The first real assignment owns only closed_manifest_normalizer as unmounted authored-reference-only EMR4 source and focused tests.",
+        "No Harness, provider, product, data, runtime, deployment, release, Pages or protected-ref action occurred during the review."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan.md",
+          "docs/security/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/evidence.json",
+          "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-candidate-precommit-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/closeout/clockwork-check-attempt-001-rejected-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "docs/ariadne-agent-error-correction-register-revision-638.md",
+          "orchestration/human_inbox/yuri/2026-08-23--deepseek-native-harness-pragmatic-development-adoption.md",
+          "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml",
+          "scripts/ariadne_deepseek_native_harness_broker.mjs"
+        ]
+      },
+      "unresolved_gates": [
+        "Useful native-Harness completion on real EMR4 source remains unproved until a candidate passes Sol review and focused tests.",
+        "Default-worker promotion remains closed and depends on matched real-work readings rather than raw incident counts.",
+        "The typed operational-evidence inputs and pure environment evidence-gate evaluator remain later repository nodes.",
+        "The check-in admission seam, ordinary-practice activation and every external operational fact or human selection remain closed.",
+        "No product data, production runtime, deployment, release, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Move the native DeepSeek Harness from an over-qualified integration subject into useful bounded Raisa development",
+      "outcome": "The accepted controls are reduced to the gears needed for traceability, containment and Sol acceptance, and the first real assignment is selected.",
+      "evidence": [
+        "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan.md",
+        "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/evidence.json",
+        "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Use the native Harness on one small genuine EMR4 source/test package and measure accepted usefulness plus correction cost",
+      "why_now": "The boot, tool and trace boundaries are already accepted, and another synthetic qualification phase would answer less than a real bounded assignment.",
+      "outcome": "One fresh native-Harness session will attempt the unmounted closed manifest normalizer with natural multi-turn self-correction and Sol-owned tests.",
+      "unlocks": [
+        "A matched useful-candidate reading rather than another boot coordinate.",
+        "Practical evidence of whether stronger traceability reduces orchestrator recovery cost.",
+        "The first of a rolling set of real-work readings that can support continued use or later promotion."
+      ],
+      "does_not_solve": [
+        "One run cannot prove general reliability or default-worker suitability.",
+        "The unmounted normalizer does not create an operational manifest, resolve a secret or enable ordinary practice.",
+        "No product data, live product runtime, deployment, release or protected integration is opened."
+      ],
+      "evidence": [
+        "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan.md",
+        "docs/security/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-threat-model-delta.md",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-sol-acceptance.md"
+      ],
+      "orientation_statement": "The clockwork will take pre-dispatch and terminal readings while the native Harness is allowed to perform ordinary multi-turn coding inside one bounded session."
+    },
+    "next_operation": {
+      "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+      "active_tranche": "Native Harness first pragmatic real-development run: canonical check-in manifest normalizer",
+      "objective": "Freeze the exact unmounted closed manifest-normalizer contract and minimal scaffold, then let one fresh pinned native-Harness session implement only that source/test package with natural multi-turn self-correction, Sol-owned deterministic tests and terminal trace/cleanup readback.",
+      "authority_source": "Yuri explicitly requested pragmatic native-Harness entry into real EMR4 development with minimum further rigorous testing, and the accepted adoption plan selects this bounded first assignment under standing uninterrupted-development authority.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_exact_normalizer_contract_scaffold_and_predispatch_readback"
+    },
+    "incidents": [
+      {"incident_id": "harness-adoption-foreach-pipeline-parse", "source_id": "harness-adoption-local-001", "peers": []},
+      {"incident_id": "harness-adoption-windows-wildcard-search", "source_id": "harness-adoption-local-002", "peers": []},
+      {"incident_id": "harness-adoption-js-composer-parenthesis", "source_id": "harness-adoption-local-003", "peers": []},
+      {"incident_id": "harness-adoption-js-composer-backtick", "source_id": "harness-adoption-local-004", "peers": []},
+      {"incident_id": "harness-adoption-nonexistent-graph-directory", "source_id": "harness-adoption-local-005", "peers": []},
+      {"incident_id": "harness-adoption-datetime-string-formatter", "source_id": "harness-adoption-local-006", "peers": []},
+      {"incident_id": "harness-adoption-windows-wildcard-recurrence", "source_id": "harness-adoption-local-007", "peers": []},
+      {"incident_id": "harness-adoption-closeout-subdirectory-omitted", "source_id": "harness-adoption-local-008", "peers": []},
+      {"incident_id": "harness-adoption-node-relationship-cardinality", "source_id": "harness-adoption-local-009", "peers": []},
+      {"incident_id": "harness-adoption-incident-stage-vocabulary", "source_id": "harness-adoption-local-010", "peers": []}
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v2",
+    "database_authority": "closed",
+    "commands": [
+      {
+        "command_id": "native-harness-pragmatic-adoption-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/closeout/closeout-intent.json"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "native-harness-pragmatic-adoption-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "native-harness-pragmatic-adoption-closeout-postpublication-readback",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "postpublication"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan.md",
+      "docs/security/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/evidence.json",
+      "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-638.md",
+      "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-23--deepseek-native-harness-pragmatic-development-adoption.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_authored_reference_only_native_harness_first_real_development_assignment",
+    "one_fresh_sparse_worker_worktree_and_one_fresh_native_harness_session",
+    "pinned_rc7_profile_runner_and_broker_hash_readback_without_generic_boot_reproof",
+    "natural_multi_turn_within_nine_hundred_seconds_zero_automatic_retry_fallback_or_auxiliary_model",
+    "closed_manifest_normalizer_only_typed_operational_inputs_and_evaluator_deferred",
+    "owned_paths_limited_to_unmounted_normalizer_source_and_focused_test",
+    "sol_owned_diff_focused_tests_acceptance_and_terminal_cleanup_readback",
+    "at_most_one_fresh_correction_run_only_for_direct_pre_packet_mechanical_envelope_defect",
+    "no_diagnostic_sequel_runner_broker_guard_graph_or_package_archaeology",
+    "no_operational_manifest_secret_value_reference_resolution_environment_variable_configuration_or_credential_store_access",
+    "no_database_conftest_engine_schema_fixture_docker_postgresql_sql_live_role_or_infrastructure_action",
+    "no_route_call_api_openapi_graphql_client_configuration_or_product_mounting",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "harness-adoption-foreach-pipeline-001",
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "native-harness-closeout-inventory-summary",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "PowerShell loop output is materialized before it enters a pipeline.",
+      "observed_error": "A pipeline was placed directly after a foreach block and PowerShell rejected an empty pipe element before the summary ran.",
+      "detection_method": "PowerShell returned a parser error before producing evidence or changing state.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json", "docs/ariadne-agent-error-correction-register-revision-638.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_foreach_direct_pipeline_parse",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Assign the foreach result to an array and pipe the array.",
+        "prevention_control": "PowerShell loop summaries materialize the collection before sorting or selecting.",
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-638.md"]
+      },
+      "baton_summary": "records one corrected PowerShell foreach-pipeline parse error."
+    },
+    {
+      "attempt_key": "harness-adoption-windows-wildcard-001",
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "native-harness-retained-evidence-search",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_ripgrep",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Windows ripgrep searches use explicit files or valid directory roots.",
+      "observed_error": "A read-only evidence search supplied a Windows-invalid wildcard path.",
+      "detection_method": "Ripgrep rejected the wildcard target with no file change.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json", "docs/ariadne-agent-error-correction-register-revision-638.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.windows_ripgrep_invalid_wildcard_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the wildcard target with a valid directory-scoped search.",
+        "prevention_control": "Use explicit files or literal directory roots for Windows ripgrep.",
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-638.md"]
+      },
+      "baton_summary": "records one corrected Windows-invalid Harness evidence search."
+    },
+    {
+      "attempt_key": "harness-adoption-js-composer-parenthesis-001",
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "native-harness-file-size-inventory-tool-call",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_tool_call_composer",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The tool-call JavaScript parses before invoking a read-only PowerShell command.",
+      "observed_error": "The first file-size inventory composer contained an unmatched parenthesis.",
+      "detection_method": "The tool wrapper returned a JavaScript syntax error before PowerShell invocation.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json", "docs/ariadne-agent-error-correction-register-revision-638.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.javascript_tool_composer_unmatched_parenthesis",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Rebuild the command from an explicit quoted path array.",
+        "prevention_control": "Prefer short explicit tool-call composition over nested interpolation.",
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-638.md"]
+      },
+      "baton_summary": "records one corrected tool-call composer parenthesis error."
+    },
+    {
+      "attempt_key": "harness-adoption-js-composer-backtick-001",
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "native-harness-file-size-inventory-tool-call",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_tool_call_composer",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Nested JavaScript and PowerShell strings contain no unescaped language delimiter.",
+      "observed_error": "The corrected composer embedded a PowerShell backtick tab escape inside a JavaScript template literal.",
+      "detection_method": "The tool wrapper returned a JavaScript syntax error before PowerShell invocation.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json", "docs/ariadne-agent-error-correction-register-revision-638.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.javascript_powershell_nested_backtick_escape",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the PowerShell escape with [char]9.",
+        "prevention_control": "Use character codes rather than backticks in nested JavaScript/PowerShell tool calls.",
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-638.md"]
+      },
+      "baton_summary": "records one corrected nested JavaScript/PowerShell escape error."
+    },
+    {
+      "attempt_key": "harness-adoption-graph-directory-001",
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "continuity-native-harness-node-inventory",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_ripgrep",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "The canonical Continuity graph path is discovered before it is searched.",
+      "observed_error": "The search named a nonexistent ariadne-continuity-graph directory instead of the canonical graph file.",
+      "detection_method": "Ripgrep returned a missing-path error while leaving the repository unchanged.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json", "docs/ariadne-agent-error-correction-register-revision-638.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.continuity_graph_file_assumed_directory",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "List the Continuity root and read emr4-continuity-graph.json directly.",
+        "prevention_control": "Discover exact graph paths with a root file listing before structured reads.",
+        "evidence_paths": ["orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/evidence.json"]
+      },
+      "baton_summary": "records one corrected Continuity graph path assumption."
+    },
+    {
+      "attempt_key": "harness-adoption-datetime-formatter-001",
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "native-harness-node-chronology-summary",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Structured values are converted to strings before display concatenation.",
+      "observed_error": "PowerShell treated a parsed DateTime as the left concatenation operand and tried to coerce the status string to TimeSpan.",
+      "detection_method": "The formatter returned twelve MethodException rows without changing evidence.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json", "docs/ariadne-agent-error-correction-register-revision-638.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_datetime_string_concatenation_coercion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Cast every chronology field to string before concatenation.",
+        "prevention_control": "Display summaries normalize structured values to strings first.",
+        "evidence_paths": ["orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/evidence.json"]
+      },
+      "baton_summary": "records one corrected PowerShell DateTime display-coercion error."
+    },
+    {
+      "attempt_key": "harness-adoption-windows-wildcard-002",
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "api-manifest-source-pass",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_ripgrep",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "The corrected explicit-file or directory-scope search form remains in use throughout the tranche.",
+      "observed_error": "The Windows-invalid wildcard path pattern recurred during the API-manifest source pass.",
+      "detection_method": "Ripgrep returned a nonzero invalid-target error after reading the explicit valid paths.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json", "docs/ariadne-agent-error-correction-register-revision-638.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.windows_ripgrep_invalid_wildcard_path_recurrence",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Return to explicit files and valid directory roots for the remaining source pass.",
+        "prevention_control": "No wildcard is passed as a Windows ripgrep path argument.",
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-638.md"]
+      },
+      "baton_summary": "records one contained recurrence of the invalid Windows wildcard search."
+    },
+    {
+      "attempt_key": "harness-adoption-closeout-path-001",
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "predecessor-clockwork-intent-read",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "The exact accepted operation layout is listed before reading a nested closeout artifact.",
+      "observed_error": "The first read omitted the predecessor's closeout subdirectory and targeted a nonexistent root-level closeout-intent path.",
+      "detection_method": "Get-Content returned PathNotFound and no state changed.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json", "docs/ariadne-agent-error-correction-register-revision-638.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_intent_subdirectory_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "List the operation directory and read closeout/closeout-intent.json.",
+        "prevention_control": "Discover nested closeout artifacts from exact directory listings before reads.",
+        "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-638.md"]
+      },
+      "baton_summary": "records one corrected closeout-intent subdirectory omission."
+    },
+    {
+      "attempt_key": "harness-adoption-node-relationship-001",
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "pragmatic-adoption-closeout-intent",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_governance_clockwork_check",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A transactional Continuity node contains exactly one builds_on relationship.",
+      "observed_error": "The first closeout intent encoded the active predecessor plus two historical evidence nodes as three builds_on relationships.",
+      "detection_method": "The idempotent clockwork check rejected tick_transaction_manifest/node_relationship_invalid before canonical mutation.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/closeout/clockwork-check-attempt-001-rejected-receipt.json", "docs/ariadne-agent-error-correction-register-revision-638.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.transactional_closeout_node_relationship_cardinality",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Retain only the active predecessor as builds_on and keep historical Harness nodes in decision evidence.",
+        "prevention_control": "Transactional closeout nodes use exactly one active predecessor relationship; other lineage remains ordinary evidence.",
+        "evidence_paths": ["orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/closeout/closeout-intent.json"]
+      },
+      "baton_summary": "records one rejected multi-parent Continuity node and exact one-parent correction."
+    },
+    {
+      "attempt_key": "harness-adoption-incident-stage-vocabulary-001",
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "pragmatic-adoption-closeout-intent",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_governance_clockwork_check",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every incident stage is selected from the clockwork's closed INCIDENT_STAGES vocabulary.",
+      "observed_error": "The corrected closeout intent still used five descriptive stage labels outside the closed vocabulary.",
+      "detection_method": "The second idempotent clockwork check rejected tick_incident_stage before canonical mutation.",
+      "evidence_paths": ["orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/closeout/clockwork-check-attempt-002-rejected-receipt.json", "docs/ariadne-agent-error-correction-register-revision-638.md"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_incident_stage_closed_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Map all review and closeout assembly incidents to the admitted closeout stage.",
+        "prevention_control": "Select incident stage values directly from the clockwork's closed INCIDENT_STAGES set.",
+        "evidence_paths": ["orchestration_harness/governance_clockwork_tick.py", "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/closeout/closeout-intent.json"]
+      },
+      "baton_summary": "records one rejected descriptive-stage vocabulary set and its typed closeout-stage correction."
+    }
+  ]
+}

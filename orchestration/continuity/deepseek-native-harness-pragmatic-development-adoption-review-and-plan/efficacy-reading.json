@@ -1,0 +1,62 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+  "source_head": "0c73fdea7d0158086720de08c1ff796365288cd5",
+  "result": "pragmatic_secondary_worker_adoption_plan_frozen_without_further_qualification_run",
+  "before": {
+    "native_harness_worker_allocation": "paused_unavailable",
+    "baton_boot_prerequisite": "described_as_unproved",
+    "useful_emr4_candidates_from_controlled_native_runs": 0,
+    "default_worker": false,
+    "next_step": "unspecified_after_closed_harness_sequence"
+  },
+  "after": {
+    "native_harness_worker_allocation": "monitored_secondary_worker",
+    "accepted_boot_prerequisite": "passed_no_generic_reproof",
+    "default_worker": false,
+    "first_real_assignment": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+    "standalone_qualification_tranches_required_before_first_assignment": 0,
+    "perfect_clockwork_interoperability_required": false
+  },
+  "evidence_inventory": {
+    "continuity_nodes_reviewed": 68,
+    "top_level_docs_inventoried": 176,
+    "plans_inventoried": 71,
+    "closeouts_inventoried": 71,
+    "continuity_directories_inventoried": 64,
+    "scripts_inventoried": 75,
+    "tests_inventoried": 96,
+    "claude_labelled_incident_rows": 30,
+    "direct_native_harness_incident_rows": 21,
+    "comparative_rate_claims": 0
+  },
+  "verification": {
+    "focused_profile_broker_and_api_spine_tests_passed": 53,
+    "structured_evidence_recomputed": true,
+    "json_parse_passed": true,
+    "git_diff_check_passed": true,
+    "harness_worker_provider_or_verifier_runs": 0,
+    "product_api_client_or_configuration_changes": 0,
+    "database_docker_secret_environment_or_network_actions": 0,
+    "new_reusable_control_layers": 0
+  },
+  "workflow_lapses": [
+    "A PowerShell pipeline was placed directly after a foreach block and failed during parsing before the closeout inventory summary ran.",
+    "A read-only ripgrep inventory supplied a Windows-invalid wildcard path and was corrected to a directory-scoped search.",
+    "The first JavaScript tool-call composer for file-size inventory had an unmatched parenthesis and did not invoke PowerShell.",
+    "The corrected composer then embedded an unescaped PowerShell backtick in a JavaScript template literal and again failed before invocation.",
+    "One read-only search named a nonexistent ariadne-continuity-graph directory before the canonical graph filename was discovered.",
+    "One PowerShell summary treated a parsed DateTime as the left operand of string concatenation and failed while formatting twelve rows.",
+    "The Windows-invalid ripgrep wildcard pattern recurred once during the API-manifest source pass before explicit directory scope was restored.",
+    "One read-only closeout-intent lookup omitted the existing closeout subdirectory and was corrected after listing the exact directory.",
+    "The first idempotent clockwork check rejected a three-parent Continuity node because the transaction schema requires exactly one active predecessor; historical Harness lineage was moved back to ordinary decision evidence.",
+    "The second idempotent clockwork check rejected five descriptive incident-stage labels outside its closed vocabulary; every row was mapped to the admitted closeout stage."
+  ],
+  "clockwork_effect": {
+    "canonical_publications_before_acceptance": 0,
+    "runtime_or_provider_reruns_caused": 0,
+    "product_or_protected_effects_caused": 0,
+    "remaining_friction_class": "cheap_manual_evidence_command_composition_errors_outside_the_clockwork_transaction"
+  },
+  "bounded_conclusion": "The native Harness has enough accepted boot, tool-boundary and traceability evidence to enter monitored real work without another synthetic qualification phase. It remains a secondary worker because useful EMR4 completion is unproved. Ten cheap evidence/closeout-command lapses were corrected before publication; they caused no model, runtime, product or protected rerun and reinforce the plan to keep clockwork readings sparse."
+}
