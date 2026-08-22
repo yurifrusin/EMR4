@@ -1,0 +1,9 @@
+{
+  "attempt_id": "deepseek-native-check-in-runbook-worker-001",
+  "automatic_retry_count": 0,
+  "candidate_source": "3298c97e07cb1670835ea774368f14897c659cd6",
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+  "resume_permitted": false,
+  "schema_version": "ariadne.native_harness_useful_worker_consumed.v1",
+  "state": "consumed"
+}

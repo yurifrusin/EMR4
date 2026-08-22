@@ -1,0 +1,139 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa native Harness bounded occupied useful-worker rehearsal",
+    "completed_stage": "At exact full reviewed source 3298c97e07cb1670835ea774368f14897c659cd6, the closed API Spine runbook candidate, native-Harness runner, validation-runner Git-object resolution, descendant evidence-only checkpoint binding and tranche-owned exact cleanup guard pass deterministic admission. The disposable attempt is freshly prepared from that source through its immutable final admission receipt with zero native processes and zero provider requests.",
+    "next_executable_stage": "fresh_five_source_preexecution_rehydration_then_execute_exactly_one_native_harness_deepseek_v4_flash_high_turn_with_one_provider_request_one_direct_edit_zero_retry_and_complete_cleanup",
+    "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "34a484a2998bc4cb7e2554d99ebd020351b79d77",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "4af24f79685fce4748e7800f39864892b5e19ddf",
+    "reason_codes": [],
+    "resolved_commit": "34a484a2998bc4cb7e2554d99ebd020351b79d77",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "34a484a2998bc4cb7e2554d99ebd020351b79d77"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "4af24f79685fce4748e7800f39864892b5e19ddf",
+    "branch_origin_aligned": true,
+    "head": "4af24f79685fce4748e7800f39864892b5e19ddf",
+    "origin_branch_commit": "4af24f79685fce4748e7800f39864892b5e19ddf",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 661
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "checkpoint-admitted occupied worker pre-dispatch",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The only external work is one typed box-filling edit to the closed default-off check-in rollout, kill-switch and rollback manifest through the accepted native Harness control chain.",
+        "work_packages": [
+          "one_closed_default_off_check_in_runbook_member_edit"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "gemini_verifier",
+        "rationale": "The occupied envelope forbids auxiliary model calls; GPT Sol independently validates and adopts or rejects the exact candidate after cleanup.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits delegation and the one-turn, cleanup, readback and adoption sequence is strictly serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "occupied terminal",
+      "Sol adoption or rejection",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "the committed checkpoint and fresh five-source receipt pass before the sole occupied process",
+      "one native-Harness DeepSeek V4 Flash/high request consumes the entire worker authority",
+      "the Harness broker and disposable root are absent before any candidate is interpreted",
+      "GPT Sol independently validates and adopts or rejects the exact retained bytes"
+    ]
+  },
+  "planned_action": "execute_exactly_one_checkpoint_admitted_native_harness_deepseek_v4_flash_high_turn_for_the_closed_default_off_check_in_runbook_member_then_cleanup_and_independently_read_back_the_candidate_without_retry_fallback_or_auxiliary_model",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-plan.md",
+      "docs/security/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/contract.json",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-attempt-preparation.json",
+      "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-preexecution-checkpoint.json",
+      "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-result-contract-reconciliation.md",
+      "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-sol-acceptance.md",
+      "docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-ordinary-practice-check-in-admission-readiness-review-sol-acceptance.md",
+      "docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/api-spine/openapi/appointment-commands.yaml",
+      "orchestration/bernie_release_gates.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns meaning, admission, monitoring, candidate readback, adoption or rejection, Git and acceptance. DeepSeek V4 Flash/high owns one direct literal edit in the disposable manifest. Gemini is declined because auxiliary model calls are forbidden. Native subagents are declined because developer policy prohibits delegation and the sequence is serial.",
+    "git_refs_and_worktree": "The receipt builder supplies Git identities and ancestry only from its fresh machine snapshot after fetch. The task branch and origin tracking branch must be aligned, all four protected refs must remain exact, the reviewed candidate must remain an ancestor, tracked paths must be clean, and docs/branding plus every unrelated untracked path must remain preserved.",
+    "live_handover_current_baton": "AGENTS.md names the accepted complete package-unloaded runner reconciled pass and one bounded occupied native-Harness DeepSeek V4 Flash/high useful-worker turn as the current implementation. The current clockwork checkpoint opens only that exact turn.",
+    "protected_evidence_boundaries": "Only the prepared authored-synthetic provider-free manifest and one prepaid DeepSeek request are open. The edit is unmounted and non-actuating. Ordinary practice, feature flags, allowlists, routes, status grammar, clients, waiting area, product or protected data, production, deployment, release, Pages, protected evidence and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

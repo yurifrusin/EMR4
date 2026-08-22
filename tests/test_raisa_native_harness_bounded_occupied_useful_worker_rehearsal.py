@@ -351,6 +351,46 @@ def test_terminal_schema_accepts_only_bounded_success() -> None:
         jsonschema.Draft202012Validator(schema).validate(mutated)
 
 
+def test_persisted_occupied_terminal_is_valid_and_failed_closed() -> None:
+    terminal = json.loads(worker.TERMINAL_PATH.read_bytes())
+    schema = json.loads(worker.TERMINAL_SCHEMA_PATH.read_bytes())
+    jsonschema.Draft202012Validator(schema).validate(terminal)
+    assert terminal["result"] == "failed_closed"
+    assert terminal["terminal_class"] == "useful_worker_transport_terminal"
+    assert terminal["failure_coordinate"] == "native_harness_terminal_failure"
+    assert terminal["broker"] == {
+        "provider_call_started": 1,
+        "provider_call_completed": 1,
+        "provider_call_failed": 0,
+        "request_rejected": 1,
+    }
+    assert terminal["runner"]["tool_names"] == ["edit"]
+    assert terminal["runner"]["tool_result_count"] == 1
+    assert terminal["candidate"]["admitted"] is False
+    assert terminal["candidate"]["changed_paths"] == []
+    assert all(
+        terminal[key] == 0
+        for key in (
+            "automatic_retry_count",
+            "manual_retry_count",
+            "resume_count",
+            "fallback_count",
+            "auxiliary_model_call_count",
+        )
+    )
+    assert terminal["cleanup"] == {
+        "harness_absent": True,
+        "broker_absent": True,
+        "attempt_root_absent": True,
+        "raw_logs_retained": False,
+        "raw_session_retained": False,
+        "raw_prompt_response_reasoning_retained": False,
+        "provider_key_present_in_worker_environment": False,
+    }
+    assert not worker.ATTEMPT_ROOT.exists()
+    assert not worker.CANDIDATE_OUTPUT_PATH.exists()
+
+
 def test_fresh_ariadne_receipt_names_all_five_sources_and_parallel_lanes() -> None:
     receipt = json.loads(
         (

@@ -1,0 +1,74 @@
+{
+  "attempt_id": "deepseek-native-check-in-runbook-worker-001",
+  "automatic_retry_count": 0,
+  "auxiliary_model_call_count": 0,
+  "broker": {
+    "provider_call_completed": 1,
+    "provider_call_failed": 0,
+    "provider_call_started": 1,
+    "request_rejected": 1
+  },
+  "candidate": {
+    "admitted": false,
+    "canonical_byte_count": null,
+    "canonical_sha256": null,
+    "changed_paths": [],
+    "claim": null,
+    "retained_path": null
+  },
+  "candidate_source": "3298c97e07cb1670835ea774368f14897c659cd6",
+  "cleanup": {
+    "attempt_root_absent": true,
+    "broker_absent": true,
+    "harness_absent": true,
+    "provider_key_present_in_worker_environment": false,
+    "raw_logs_retained": false,
+    "raw_prompt_response_reasoning_retained": false,
+    "raw_session_retained": false
+  },
+  "failure_coordinate": "native_harness_terminal_failure",
+  "fallback_count": 0,
+  "hmr_events": [
+    "sentinel_activated",
+    "stock_headless_hmr_ready"
+  ],
+  "manual_retry_count": 0,
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+  "process": {
+    "broker_stderr_bytes": 0,
+    "broker_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "harness_exit_code": 1,
+    "native_process_count": 1,
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_bytes": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "wall_clock_ms": 15742
+  },
+  "result": "failed_closed",
+  "resume_count": 0,
+  "runner": {
+    "allowed_tool_names": [
+      "edit",
+      "glob",
+      "read"
+    ],
+    "conclusion_marked": false,
+    "failure_stage": "terminal",
+    "model": "deepseek-v4-flash",
+    "provider": "deepseek-official",
+    "reasoning_effort": "high",
+    "request_count": 1,
+    "schema_version": "ariadne.native_harness_useful_worker_runner_terminal.v1",
+    "session_id_sha256": "sha256:4f31d096c0f830fa1c74ae1f7218afe37fcfc392b89710349f37f1b66c404a91",
+    "status": "failed",
+    "target_path_sha256": "sha256:5e52a2bb895dafe75f4a97d45043507542ce0d0b8aca5fcbc22f21ae495a9b42",
+    "tool_names": [
+      "edit"
+    ],
+    "tool_result_count": 1,
+    "turn_kind": "error"
+  },
+  "schema_version": "ariadne.native_harness_useful_worker_terminal.v1",
+  "terminal_class": "useful_worker_transport_terminal"
+}

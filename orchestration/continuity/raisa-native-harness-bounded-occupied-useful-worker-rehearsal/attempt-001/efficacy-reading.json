@@ -1,0 +1,32 @@
+{
+  "schema_version": "ariadne.native_harness_useful_worker_efficacy_reading.v1",
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+  "attempt_id": "deepseek-native-check-in-runbook-worker-001",
+  "result": "failed_closed",
+  "useful_candidate_count": 0,
+  "occupied_process_count": 1,
+  "provider_request_started_count": 1,
+  "provider_request_completed_count": 1,
+  "provider_request_failed_count": 0,
+  "broker_request_rejected_count": 1,
+  "edit_tool_call_count": 1,
+  "edit_tool_result_count": 1,
+  "changed_path_count": 0,
+  "automatic_retry_count": 0,
+  "manual_retry_count": 0,
+  "resume_count": 0,
+  "fallback_count": 0,
+  "auxiliary_model_call_count": 0,
+  "owned_process_leak_count": 0,
+  "disposable_root_leak_count": 0,
+  "raw_sensitive_artifact_retention_count": 0,
+  "preexecution_corrections": [
+    "manual_git_object_prose_rejected_by_ariadne_receipt",
+    "validation_runner_receipt_shape_bound_directly_in_controller",
+    "clockwork_checkpoint_source_allowed_only_one_evidence_receipt_descendant",
+    "tranche_owned_exact_attempt_cleanup_replaced_foreign_name_guard",
+    "persisted_checkpoint_source_added_to_loader_contract"
+  ],
+  "provisional_reading": "The clockwork and broker contained and attributed one useful-worker failure with exact cleanup, but the Harness did not deliver a repository candidate. The workflow is safer and more traceable, not yet effective as a useful DeepSeek worker path.",
+  "next_measurement": "Provider-free typed tool-result and conclude-turn diagnostic before any separately authorised occupied successor."
+}
