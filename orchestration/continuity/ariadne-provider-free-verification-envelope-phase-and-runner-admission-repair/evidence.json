@@ -1,0 +1,56 @@
+{
+  "closed_boundaries": {
+    "attempt_008_action_used": false,
+    "database_conftest_engine_schema_fixture_executed": false,
+    "docker_postgresql_sql_database_used": false,
+    "product_or_application_path_used": false,
+    "production_deployment_release_pages_used": false,
+    "protected_evidence_or_ref_movement_used": false,
+    "worker_or_provider_used": false
+  },
+  "database_authority": "closed",
+  "hostile_rejection_count": 8,
+  "operation_id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+  "phase_partition": {
+    "cross_phase_execution_count": 0,
+    "postpublication_command_ids": [
+      "POST"
+    ],
+    "prepublication_command_ids": [
+      "PRE"
+    ]
+  },
+  "recorded_at": "2026-08-23T05:41:13.7188062+10:00",
+  "result": "ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair_pass",
+  "schema_version": "ariadne.provider_free_verification_envelope_evidence.v1",
+  "source_head": "aab7dcf2e408f05f57935c1ee1800cff04be6cdf",
+  "subprocess_launch_count": 0,
+  "surface_results": [
+    {
+      "legacy_v1_admitted": true,
+      "rejected_coordinates": [
+        "ordinary_pytest",
+        "serial_pytest",
+        "unknown_phase",
+        "reversed_phase_order"
+      ],
+      "surface": "verifier_command_manifest",
+      "typed_v2_admitted": true
+    },
+    {
+      "legacy_v1_admitted": true,
+      "rejected_coordinates": [
+        "ordinary_pytest",
+        "serial_pytest",
+        "unknown_phase",
+        "reversed_phase_order"
+      ],
+      "surface": "governance_command_manifest",
+      "typed_v2_admitted": true
+    }
+  ],
+  "verification_phases": [
+    "prepublication",
+    "postpublication"
+  ]
+}
