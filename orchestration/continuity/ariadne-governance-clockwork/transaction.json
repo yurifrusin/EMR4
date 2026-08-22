@@ -1,85 +1,85 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
-  "operation_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
-  "transaction_id": "txn-4e756b98c9c0a9e2c626fe8e",
-  "source_commit": "5c7c204d44ab9db23786ec4996ca92d525f6771a",
-  "previous_source_commit": "5c7c204d44ab9db23786ec4996ca92d525f6771a",
-  "previous_generation_id": "gen-fc4bb720a10a33dcdca8f2ef59fec9221de6abf869085c925b249fa6de557b32",
-  "previous_bundle_sha256": "fc4bb720a10a33dcdca8f2ef59fec9221de6abf869085c925b249fa6de557b32",
+  "operation_id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+  "transaction_id": "txn-dc37c77e3742a9d4bc93d262",
+  "source_commit": "20d03e2ac4134c980461ebb149535ff3e88e7306",
+  "previous_source_commit": "20d03e2ac4134c980461ebb149535ff3e88e7306",
+  "previous_generation_id": "gen-a202d684cd43d7ec6fa5fbb22c7e259b02d6f10c6d55e6f3c5cf543e17f6cab6",
+  "previous_bundle_sha256": "a202d684cd43d7ec6fa5fbb22c7e259b02d6f10c6d55e6f3c5cf543e17f6cab6",
   "previous_canonical_sha256s": {
-    "continuity": "a2c78e5f6b3ef92c89fdabc1719cdfa6c1b4e98a669fd3e019250df2f0d0f6d1",
-    "compass": "475ee5b3368b5fec0b3f9958f6032ac16f3477508d24455ed102f56b5c6a513f",
-    "compass_markdown": "7f58986da55b12e494841ccdd32d972472173e548eaabf4e84d328009bdd3429",
-    "active_latch": "a1a653316f808f3562f41c65a5ea72099849c1add27dbf654acffaab9fd1ffec",
-    "error_register": "397dd55d7c7157570701c1d3b72c1691ad9f47f817e5c26d9f65c59c4680f0df",
-    "pattern_report": "b9d7a4bebf8316c7e036201d20fc5203d94ebc3f57f95023506915a4c4cc6159",
-    "current_baton": "6f8bbf199b107e52bae651c9b53e102625de79dd6927404a880e92cef78590fe"
+    "continuity": "7504a1cce8d79ec513e1a454d7a05e5f846e17b45efb1359cc2bdff50aae42c3",
+    "compass": "1f301e4f2fd99b4be7eb858e0b9662b11b71e4f3bdb87df299b74c700a4d30d6",
+    "compass_markdown": "f553bbc62cf7e7d86ded6a49adb21574fc3aee47884fc43adff8e29b2f972a61",
+    "active_latch": "b9b829717ec4fb370c0e7c32f0df5d7a47ce4711b0af312769f6160206a269e7",
+    "error_register": "3bab828540b408359fc1dd99b5ed9d28da3b66d0858991fb06c399e09b41f57e",
+    "pattern_report": "71a01c287e5c6672932531a2149d91a52cd174c78a423a3310483ce68f803909",
+    "current_baton": "e8e084faf6534aa64d27141b297c9801a71d5a2285453edc537a0752e9b52ddb"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "49ee4921ea9f77c92b55f1e10dd91e060b7206f2d78a88cb764633a63cec6326",
-    "transaction.json": "6f67f4e6ecd9bc5d2ee2959e12cfdda8594a2fc386d2e32c7614614297a8f501",
+    "command-manifest.json": "53c6b38ea0864ce1cc8d3f5caebaf33d9588adad133d19f3187d5d9018c33e7f",
+    "transaction.json": "02e4427b969dca3e878ca01fa3534af16e54183fb54b94fa1953a10d806cd58e",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "67361b5dafa7b16b3347d3af20655f40b768f4cd76350faeb3b137ef68d89f3c"
+    "generation-manifest.json": "b5e782b7c8b72e077a67e878e858c9e2237dcb6d5942725765473f5d90bdb927"
   },
   "projection_sha256s": {
-    "graph": "sha256:806ceaac720f1753566e1a9f1f0048ff4477498d8a85ffb1ac663eb318d6a390",
-    "compass": "sha256:d4e3c19b21eece1b9295883da8f13488c52a680bb12fbaa89faa19291e0b4697",
-    "report": "sha256:693fe791c1d44d96acfa05a03892de27d8364a3f86cfe8a83c93733ace17b6a5",
-    "latch": "sha256:180b4b7e1b36a387003310d87708b42c01587c58e047f0f96204ac2f5a79838a",
-    "incident_aggregate": "sha256:b89529fe02365d880929e737c9bbdce66d0ab6f7528b1d6d3597305675ba1b0d"
+    "graph": "sha256:56d441d7d5ba058cd402f9be25062701ee2f965e65b5e103245a6ea653368c89",
+    "compass": "sha256:0d5b4abb8fc4fd428d39a4b7f375d48c05141024d162a2f27cbcb7d295447d71",
+    "report": "sha256:45340dc58a7b268c2a1efe1fd11ebd5ea0c01e412fa4c84d0265b73bfb554a75",
+    "latch": "sha256:db411b8bd0e1422225ffbf121239631f7e4a1fed6d35733aed0de171c10b8749",
+    "incident_aggregate": "sha256:16dfd46aae2c88ae728fc923cce3efe30caa28d343fcebbb6a77d6bb10fc55cd"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-4e756b98c9c0a9e2c626fe8e",
-      "transaction_id": "txn-4e756b98c9c0a9e2c626fe8e",
-      "operation_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+      "journal_id": "journal-dc37c77e3742a9d4bc93d262",
+      "transaction_id": "txn-dc37c77e3742a9d4bc93d262",
+      "operation_id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
       "event_type": "manifest-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "manifest_sha256": "sha256:024d9cd7582907bb3f8d3424da830bccda1471a7f02ac7218b67c929736f74c1"
+        "manifest_sha256": "sha256:e75f9b64e9ac0d7a6097bab3103cc2e0ce804fa133b431d5e2bcbef8f9463385"
       },
-      "event_sha256": "sha256:fa65aa3c0844984b322e5d0c00c0557f85964e086e42dfedcc2692be84334ab3"
+      "event_sha256": "sha256:32d8d3a59739ac43e7d58650c41cb9539626c9eeaa43e5f14e4a93218967fd1b"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-4e756b98c9c0a9e2c626fe8e",
-      "transaction_id": "txn-4e756b98c9c0a9e2c626fe8e",
-      "operation_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+      "journal_id": "journal-dc37c77e3742a9d4bc93d262",
+      "transaction_id": "txn-dc37c77e3742a9d4bc93d262",
+      "operation_id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
       "sequence": 2,
-      "previous_event_sha256": "sha256:fa65aa3c0844984b322e5d0c00c0557f85964e086e42dfedcc2692be84334ab3",
+      "previous_event_sha256": "sha256:32d8d3a59739ac43e7d58650c41cb9539626c9eeaa43e5f14e4a93218967fd1b",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "5c7c204d44ab9db23786ec4996ca92d525f6771a",
+        "source_commit": "20d03e2ac4134c980461ebb149535ff3e88e7306",
         "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
       },
-      "event_sha256": "sha256:e1d5629eed367019e779c8bac09467a6be92d6b8107bc16c2e0cebc5eb7e592e"
+      "event_sha256": "sha256:7f0a91aee62e42e3b367e412fd07ff0368007cdb9150b0356394a871c14e8701"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-4e756b98c9c0a9e2c626fe8e",
-      "transaction_id": "txn-4e756b98c9c0a9e2c626fe8e",
-      "operation_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+      "journal_id": "journal-dc37c77e3742a9d4bc93d262",
+      "transaction_id": "txn-dc37c77e3742a9d4bc93d262",
+      "operation_id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
       "sequence": 3,
-      "previous_event_sha256": "sha256:e1d5629eed367019e779c8bac09467a6be92d6b8107bc16c2e0cebc5eb7e592e",
+      "previous_event_sha256": "sha256:7f0a91aee62e42e3b367e412fd07ff0368007cdb9150b0356394a871c14e8701",
       "event_type": "projections-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "graph_revision": 421,
-        "map_revision": 403
+        "graph_revision": 422,
+        "map_revision": 404
       },
-      "event_sha256": "sha256:b37abc97468b363dcf54d6ee32ad96359e0d81a19c2ae89449a02c7e5021db8e"
+      "event_sha256": "sha256:d662e31933de0bdecae48bc707db6c04ed8a69701add7d2bf7d286a1d48ae36c"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-4e756b98c9c0a9e2c626fe8e",
-      "transaction_id": "txn-4e756b98c9c0a9e2c626fe8e",
-      "operation_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+      "journal_id": "journal-dc37c77e3742a9d4bc93d262",
+      "transaction_id": "txn-dc37c77e3742a9d4bc93d262",
+      "operation_id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
       "sequence": 4,
-      "previous_event_sha256": "sha256:b37abc97468b363dcf54d6ee32ad96359e0d81a19c2ae89449a02c7e5021db8e",
+      "previous_event_sha256": "sha256:d662e31933de0bdecae48bc707db6c04ed8a69701add7d2bf7d286a1d48ae36c",
       "event_type": "projections-validated",
       "actor": "gpt-sol",
       "payload": {
@@ -87,26 +87,26 @@
         "compass": "passed",
         "latch": "passed"
       },
-      "event_sha256": "sha256:b914ce0f030b212156ba10e6fb4a1c424f16fe5dc2e94e8a9b33a595fa735338"
+      "event_sha256": "sha256:5cdcac1ce9c6d4c6cfa8cf1ef4ec510f9085ff3593f0ed09264c7fb8c0d52347"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-4e756b98c9c0a9e2c626fe8e",
-      "transaction_id": "txn-4e756b98c9c0a9e2c626fe8e",
-      "operation_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+      "journal_id": "journal-dc37c77e3742a9d4bc93d262",
+      "transaction_id": "txn-dc37c77e3742a9d4bc93d262",
+      "operation_id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
       "sequence": 5,
-      "previous_event_sha256": "sha256:b914ce0f030b212156ba10e6fb4a1c424f16fe5dc2e94e8a9b33a595fa735338",
+      "previous_event_sha256": "sha256:5cdcac1ce9c6d4c6cfa8cf1ef4ec510f9085ff3593f0ed09264c7fb8c0d52347",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "shadow_directory_rename"
       },
-      "event_sha256": "sha256:af7a03a71f2f66ea71e05d1470296dce5cfd9708406301c4c976c4c778f7dd8d"
+      "event_sha256": "sha256:a49ed761bc706e7af0daca868863d6b148427dcf00a062548c178ab706a8578d"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
   "event_kind": "clean_closeout",
-  "next_boundaries_sha256": "sha256:7393ed259b3a3f01de1423b1196ccc973d3ee47afd65f61fec3cac0757c21bb5",
+  "next_boundaries_sha256": "sha256:cb783029e972b3a30de40378d3fe1d729e0432579f5abc05dc9c6b6c30a5d20b",
   "register_bytes_preserved": false,
   "pattern_bytes_preserved": false
 }

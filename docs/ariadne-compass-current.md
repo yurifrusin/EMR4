@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will stop treating perfect native-Harness interoperability as the admission standard and will instead use the minimum fail-closed controls needed to learn from a bounded real development assignment.
+> The clockwork will take pre-dispatch and terminal readings while the native Harness is allowed to perform ordinary multi-turn coding inside one bounded session.
 
 ## North star
 
@@ -612,26 +612,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The accepted check-in matrix now has eleven satisfied dimensions and one independent operational gap without activating ordinary practice. Lineage parent: `raisa-provider-free-check-in-relay-free-recovery-attempt-008`.
 298. **Turn the final composite check-in readiness gap into a finite dependency graph with explicit repository and real-world boundaries — Canonical check-in environment-manifest and operational-secret-posture evidence-gap decomposition**
    Three dependency-satisfied repository mechanisms are now isolated from six absent external facts and five unselected human decisions. Lineage parent: `raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review`.
+299. **Move the native DeepSeek Harness from an over-qualified integration subject into useful bounded Raisa development — DeepSeek native Harness pragmatic development-adoption review and plan**
+   The accepted controls are reduced to the gears needed for traceability, containment and Sol acceptance, and the first real assignment is selected. Lineage parent: `raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition`.
 
 ## Current position
 
-**Review the complete native DeepSeek Harness evidence and freeze the shortest credible route into useful EMR4 development — Canonical check-in environment-manifest and operational-secret-posture evidence-gap decomposition**
+**Use the native Harness on one small genuine EMR4 source/test package and measure accepted usefulness plus correction cost — DeepSeek native Harness pragmatic development-adoption review and plan**
 
-**Why this proof came next:** Yuri explicitly redirected the successor after accepting the decomposition, and the Harness has already received more rigorous investigation than prior DeepSeek transports.
+**Why this proof came next:** The boot, tool and trace boundaries are already accepted, and another synthetic qualification phase would answer less than a real bounded assignment.
 
-A pragmatic adoption plan will retain only controls needed for traceability and bounded orchestrator control, then select a first real development assignment with monitoring and correction in use.
+One fresh native-Harness session will attempt the unmounted closed manifest normalizer with natural multi-turn self-correction and Sol-owned tests.
 
 ### What this unlocks
 
-- The native Harness can be assessed against Claude Code on matched useful-work and traceability criteria.
-- Further proof can be limited to the smallest unresolved control needed before a real worker assignment.
-- A bounded EMR4 development tranche can become the monitored adoption run instead of another comprehensive synthetic rehearsal.
+- A matched useful-candidate reading rather than another boot coordinate.
+- Practical evidence of whether stronger traceability reduces orchestrator recovery cost.
+- The first of a rolling set of real-work readings that can support continued use or later promotion.
 
 ### What it does not solve
 
-- The review itself does not dispatch a provider or worker.
-- It does not require perfect interoperability or prove that any harness is failure-free.
-- It does not alter product code, protected refs, production, deployment or release authority.
+- One run cannot prove general reliability or default-worker suitability.
+- The unmounted normalizer does not create an operational manifest, resolve a secret or enable ordinary practice.
+- No product data, live product runtime, deployment, release or protected integration is opened.
 
 ## Continuity and authority
 
@@ -1374,6 +1376,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-plan.md`
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-closeout.md`
 - `docs/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-plan.md`
+- `docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan.md`
 - `docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-closeout.md`
@@ -1634,7 +1637,6 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-closeout.md`
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-plan.md`
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md`
-- `docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-closeout.md`
 - `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md`
 - `docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md`
 - `docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md`
@@ -1842,6 +1844,7 @@ Prerequisites:
 - `docs/security/bernie-reception-one-structured-source-language-threat-model-delta.md`
 - `docs/security/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-threat-model-delta.md`
 - `docs/security/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-threat-model-delta.md`
+- `docs/security/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-threat-model-delta.md`
 - `docs/security/dependabot-alert-17-triage-2026-08-01.md`
 - `docs/security/dependabot-alerts-8-15-triage-2026-08-01.md`
 - `docs/security/emr4-model-required-bureau-a3-b3-request-contract-recovery-threat-model-delta.md`
@@ -2167,6 +2170,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2807,6 +2811,8 @@ Prerequisites:
 - `orchestration/continuity/clinician-one-word-desktop-selection-check/manifest.xml`
 - `orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.schema.json`
 - `orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml`
+- `orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json`
+- `orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-complete-composition-native-boot-recovery/provider-free-complete-composition-native-boot-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/result-contract-reconciliation-evidence.json`
@@ -3079,7 +3085,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json`
-- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/pushover-successor-redirect-receipt.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/efficacy-reading.json`
@@ -3884,4 +3889,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 403; continuity graph revision 421._
+_Compass map revision 404; continuity graph revision 422._

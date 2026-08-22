@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 403,
-  "updated_at": "2026-08-23T08:34:31.0895778+10:00",
-  "source_graph_revision": 421,
-  "orientation_statement": "EMR4 will stop treating perfect native-Harness interoperability as the admission standard and will instead use the minimum fail-closed controls needed to learn from a bounded real development assignment.",
+  "map_revision": 404,
+  "updated_at": "2026-08-23T09:22:37.2550535+10:00",
+  "source_graph_revision": 422,
+  "orientation_statement": "The clockwork will take pre-dispatch and terminal readings while the native Harness is allowed to perform ordinary multi-turn coding inside one bounded session.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5162,27 +5162,38 @@
         "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md",
         "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "lineage_parent": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+      "strategic_role": "Move the native DeepSeek Harness from an over-qualified integration subject into useful bounded Raisa development",
+      "outcome": "The accepted controls are reduced to the gears needed for traceability, containment and Sol acceptance, and the first real assignment is selected.",
+      "evidence": [
+        "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan.md",
+        "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/evidence.json",
+        "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
-    "strategic_role": "Review the complete native DeepSeek Harness evidence and freeze the shortest credible route into useful EMR4 development",
-    "why_now": "Yuri explicitly redirected the successor after accepting the decomposition, and the Harness has already received more rigorous investigation than prior DeepSeek transports.",
-    "outcome": "A pragmatic adoption plan will retain only controls needed for traceability and bounded orchestrator control, then select a first real development assignment with monitoring and correction in use.",
+    "node_id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+    "strategic_role": "Use the native Harness on one small genuine EMR4 source/test package and measure accepted usefulness plus correction cost",
+    "why_now": "The boot, tool and trace boundaries are already accepted, and another synthetic qualification phase would answer less than a real bounded assignment.",
+    "outcome": "One fresh native-Harness session will attempt the unmounted closed manifest normalizer with natural multi-turn self-correction and Sol-owned tests.",
     "unlocks": [
-      "The native Harness can be assessed against Claude Code on matched useful-work and traceability criteria.",
-      "Further proof can be limited to the smallest unresolved control needed before a real worker assignment.",
-      "A bounded EMR4 development tranche can become the monitored adoption run instead of another comprehensive synthetic rehearsal."
+      "A matched useful-candidate reading rather than another boot coordinate.",
+      "Practical evidence of whether stronger traceability reduces orchestrator recovery cost.",
+      "The first of a rolling set of real-work readings that can support continued use or later promotion."
     ],
     "does_not_solve": [
-      "The review itself does not dispatch a provider or worker.",
-      "It does not require perfect interoperability or prove that any harness is failure-free.",
-      "It does not alter product code, protected refs, production, deployment or release authority."
+      "One run cannot prove general reliability or default-worker suitability.",
+      "The unmounted normalizer does not create an operational manifest, resolve a secret or enable ordinary practice.",
+      "No product data, live product runtime, deployment, release or protected integration is opened."
     ],
     "evidence": [
-      "AGENTS.md",
-      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/pushover-successor-redirect-receipt.json",
-      "docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-closeout.md"
+      "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan.md",
+      "docs/security/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-threat-model-delta.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

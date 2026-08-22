@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 421,
+  "graph_revision": 422,
   "harvests": [],
   "nodes": [
     {
@@ -33731,9 +33731,121 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "title": "DeepSeek native Harness pragmatic development-adoption review and plan",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri explicitly requested that perfect clockwork/native-Harness interoperability cease to be the admission standard and that retained know-how be used to enter real development with minimum further stand-alone testing.",
+          "The review itself remains provider-free and read-only; occupied worker authority begins only in the separately latched successor.",
+          "DeepSeek is a monitored secondary worker, not the default or its own acceptance authority."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "admit-native-harness-as-monitored-secondary-worker",
+          "source": "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan.md",
+          "status": "accepted",
+          "summary": "Admit the pinned native Harness for bounded real EMR4 implementation work without another generic boot or interoperability qualification tranche, while declining default promotion."
+        },
+        {
+          "id": "separate-traceability-from-useful-completion",
+          "source": "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/evidence.json",
+          "status": "accepted",
+          "summary": "Accept materially stronger traceability while retaining that useful EMR4 completion and comparative reliability versus Claude Code remain unproved."
+        },
+        {
+          "id": "retain-lean-controls-and-retire-perfection-ceremony",
+          "source": "docs/security/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-threat-model-delta.md",
+          "status": "accepted",
+          "summary": "Keep pinned enclosure, broker, tool, trace, cleanup and Sol acceptance controls; retire generic boot reproof, one-request containment, per-step ticks and diagnostic sequels."
+        },
+        {
+          "id": "select-first-real-manifest-normalizer-assignment",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Select one unmounted non-secret canonical check-in manifest-normalizer source/test package as the first monitored real assignment."
+        },
+        {
+          "id": "accept-pragmatic-review-efficacy",
+          "source": "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept a zero-additional-rehearsal development-entry plan, 53 deterministic passes and nine contained local evidence/closeout-command lapses without another reusable control layer."
+        }
+      ],
+      "claim_scope": [
+        "Sixty-eight accepted native-Harness Continuity nodes and seventy-one closeouts were reviewed as retained non-protected evidence.",
+        "The accepted stock-headless-to-custom-runner boot prerequisite already passed and requires no generic reproof while exact hashes remain pinned.",
+        "The native Harness is admitted as a monitored secondary worker and is not the default worker.",
+        "Native traceability is materially stronger than the retained Claude-Code failure evidence, but superior useful-task reliability is not proved.",
+        "The first real assignment owns only closed_manifest_normalizer as unmounted authored-reference-only EMR4 source and focused tests.",
+        "No Harness, provider, product, data, runtime, deployment, release, Pages or protected-ref action occurred during the review."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan.md",
+          "docs/security/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/evidence.json",
+          "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-candidate-precommit-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/closeout/clockwork-check-attempt-001-rejected-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "docs/ariadne-agent-error-correction-register-revision-638.md",
+          "orchestration/human_inbox/yuri/2026-08-23--deepseek-native-harness-pragmatic-development-adoption.md",
+          "orchestration/continuity/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission/profile-family.yaml",
+          "scripts/ariadne_deepseek_native_harness_broker.mjs"
+        ]
+      },
+      "unresolved_gates": [
+        "Useful native-Harness completion on real EMR4 source remains unproved until a candidate passes Sol review and focused tests.",
+        "Default-worker promotion remains closed and depends on matched real-work readings rather than raw incident counts.",
+        "The typed operational-evidence inputs and pure environment evidence-gate evaluator remain later repository nodes.",
+        "The check-in admission seam, ordinary-practice activation and every external operational fact or human selection remain closed.",
+        "No product data, production runtime, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T09:22:37.2550535+10:00",
+      "updated_at": "2026-08-23T09:22:37.2550535+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "20d03e2ac4134c980461ebb149535ff3e88e7306",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T08:34:31.0895778+10:00"
+  "updated_at": "2026-08-23T09:22:37.2550535+10:00"
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 637,
+  "register_revision": 638,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -40585,6 +40585,367 @@
       },
       "incident_id": "AER-1049",
       "attempt_id": "clock-3ee33e0067834ac0378b9b3e",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "native-harness-closeout-inventory-summary",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "PowerShell loop output is materialized before it enters a pipeline.",
+      "observed_error": "A pipeline was placed directly after a foreach block and PowerShell rejected an empty pipe element before the summary ran.",
+      "detection_method": "PowerShell returned a parser error before producing evidence or changing state.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-638.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_foreach_direct_pipeline_parse",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Assign the foreach result to an array and pipe the array.",
+        "prevention_control": "PowerShell loop summaries materialize the collection before sorting or selecting.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-638.md"
+        ]
+      },
+      "incident_id": "AER-1050",
+      "attempt_id": "clock-4d05c1bc75a462e1ccc256b6",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "native-harness-retained-evidence-search",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_ripgrep",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "Windows ripgrep searches use explicit files or valid directory roots.",
+      "observed_error": "A read-only evidence search supplied a Windows-invalid wildcard path.",
+      "detection_method": "Ripgrep rejected the wildcard target with no file change.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-638.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.windows_ripgrep_invalid_wildcard_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the wildcard target with a valid directory-scoped search.",
+        "prevention_control": "Use explicit files or literal directory roots for Windows ripgrep.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-638.md"
+        ]
+      },
+      "incident_id": "AER-1051",
+      "attempt_id": "clock-0cfba3ee2138456df69625ce",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "native-harness-file-size-inventory-tool-call",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_tool_call_composer",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The tool-call JavaScript parses before invoking a read-only PowerShell command.",
+      "observed_error": "The first file-size inventory composer contained an unmatched parenthesis.",
+      "detection_method": "The tool wrapper returned a JavaScript syntax error before PowerShell invocation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-638.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.javascript_tool_composer_unmatched_parenthesis",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Rebuild the command from an explicit quoted path array.",
+        "prevention_control": "Prefer short explicit tool-call composition over nested interpolation.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-638.md"
+        ]
+      },
+      "incident_id": "AER-1052",
+      "attempt_id": "clock-1790eae015ce9f569567d14c",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "native-harness-file-size-inventory-tool-call",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_tool_call_composer",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Nested JavaScript and PowerShell strings contain no unescaped language delimiter.",
+      "observed_error": "The corrected composer embedded a PowerShell backtick tab escape inside a JavaScript template literal.",
+      "detection_method": "The tool wrapper returned a JavaScript syntax error before PowerShell invocation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-638.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.javascript_powershell_nested_backtick_escape",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the PowerShell escape with [char]9.",
+        "prevention_control": "Use character codes rather than backticks in nested JavaScript/PowerShell tool calls.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-638.md"
+        ]
+      },
+      "incident_id": "AER-1053",
+      "attempt_id": "clock-4e1575232fddac8247eee4cf",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "continuity-native-harness-node-inventory",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_ripgrep",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "The canonical Continuity graph path is discovered before it is searched.",
+      "observed_error": "The search named a nonexistent ariadne-continuity-graph directory instead of the canonical graph file.",
+      "detection_method": "Ripgrep returned a missing-path error while leaving the repository unchanged.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-638.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.continuity_graph_file_assumed_directory",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "List the Continuity root and read emr4-continuity-graph.json directly.",
+        "prevention_control": "Discover exact graph paths with a root file listing before structured reads.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/evidence.json"
+        ]
+      },
+      "incident_id": "AER-1054",
+      "attempt_id": "clock-97307af11e66d72f5191c5bc",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "native-harness-node-chronology-summary",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Structured values are converted to strings before display concatenation.",
+      "observed_error": "PowerShell treated a parsed DateTime as the left concatenation operand and tried to coerce the status string to TimeSpan.",
+      "detection_method": "The formatter returned twelve MethodException rows without changing evidence.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-638.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_datetime_string_concatenation_coercion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Cast every chronology field to string before concatenation.",
+        "prevention_control": "Display summaries normalize structured values to strings first.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/evidence.json"
+        ]
+      },
+      "incident_id": "AER-1055",
+      "attempt_id": "clock-6d74a808dc2f5ef1b79fc44b",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "api-manifest-source-pass",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_ripgrep",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "The corrected explicit-file or directory-scope search form remains in use throughout the tranche.",
+      "observed_error": "The Windows-invalid wildcard path pattern recurred during the API-manifest source pass.",
+      "detection_method": "Ripgrep returned a nonzero invalid-target error after reading the explicit valid paths.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-638.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.windows_ripgrep_invalid_wildcard_path_recurrence",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Return to explicit files and valid directory roots for the remaining source pass.",
+        "prevention_control": "No wildcard is passed as a Windows ripgrep path argument.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-638.md"
+        ]
+      },
+      "incident_id": "AER-1056",
+      "attempt_id": "clock-10d043a583aff642eb3fc09a",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "predecessor-clockwork-intent-read",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "closeout",
+      "category": "command_scope_violation",
+      "process_severity": "low",
+      "expected_invariant": "The exact accepted operation layout is listed before reading a nested closeout artifact.",
+      "observed_error": "The first read omitted the predecessor's closeout subdirectory and targeted a nonexistent root-level closeout-intent path.",
+      "detection_method": "Get-Content returned PathNotFound and no state changed.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-638.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_intent_subdirectory_omitted",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "List the operation directory and read closeout/closeout-intent.json.",
+        "prevention_control": "Discover nested closeout artifacts from exact directory listings before reads.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-638.md"
+        ]
+      },
+      "incident_id": "AER-1057",
+      "attempt_id": "clock-509d969db26a93739f76f4f8",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "pragmatic-adoption-closeout-intent",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_governance_clockwork_check",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A transactional Continuity node contains exactly one builds_on relationship.",
+      "observed_error": "The first closeout intent encoded the active predecessor plus two historical evidence nodes as three builds_on relationships.",
+      "detection_method": "The idempotent clockwork check rejected tick_transaction_manifest/node_relationship_invalid before canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-638.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.transactional_closeout_node_relationship_cardinality",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Retain only the active predecessor as builds_on and keep historical Harness nodes in decision evidence.",
+        "prevention_control": "Transactional closeout nodes use exactly one active predecessor relationship; other lineage remains ordinary evidence.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1058",
+      "attempt_id": "clock-b23b9ca56ea9c8d08699eb54",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "pragmatic-adoption-closeout-intent",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_governance_clockwork_check",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every incident stage is selected from the clockwork's closed INCIDENT_STAGES vocabulary.",
+      "observed_error": "The corrected closeout intent still used five descriptive stage labels outside the closed vocabulary.",
+      "detection_method": "The second idempotent clockwork check rejected tick_incident_stage before canonical mutation.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-638.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_incident_stage_closed_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Map all review and closeout assembly incidents to the admitted closeout stage.",
+        "prevention_control": "Select incident stage values directly from the clockwork's closed INCIDENT_STAGES set.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1059",
+      "attempt_id": "clock-f95a6493526e85847d007041",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

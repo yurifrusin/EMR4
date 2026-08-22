@@ -3,30 +3,28 @@
   "database_authority": "closed",
   "commands": [
     {
-      "command_id": "gap-decomposition-closeout-tick-check",
+      "command_id": "native-harness-pragmatic-adoption-closeout-tick-check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_governance_clockwork_tick",
         "--check",
         "--intent",
-        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/closeout/closeout-intent.json"
+        "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required",
       "verification_phase": "prepublication"
     },
     {
-      "command_id": "gap-decomposition-closeout-provider-free-tests",
+      "command_id": "native-harness-pragmatic-adoption-closeout-provider-free-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
-        "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
-        "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
-        "tests/test_raisa_provider_free_read_only_post_attempt_008_check_in_admission_readiness_convergence_review.py",
-        "tests/test_raisa_provider_free_read_only_canonical_check_in_admission_readiness_convergence_review.py",
+        "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py",
         "tests/test_api_spine_artifacts.py",
         "tests/test_ariadne_agent_error_register.py",
         "tests/test_ariadne_active_operation_latch.py",
@@ -37,32 +35,7 @@
       "verification_phase": "prepublication"
     },
     {
-      "command_id": "gap-decomposition-closeout-ruff",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "ruff",
-        "check",
-        "scripts/raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
-        "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required",
-      "verification_phase": "prepublication"
-    },
-    {
-      "command_id": "gap-decomposition-closeout-compile",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "py_compile",
-        "scripts/raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
-        "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required",
-      "verification_phase": "prepublication"
-    },
-    {
-      "command_id": "gap-decomposition-closeout-postpublication-readback",
+      "command_id": "native-harness-pragmatic-adoption-closeout-postpublication-readback",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -74,7 +47,8 @@
         "tests/test_ariadne_active_operation_latch.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_transactional_closeout.py",
-        "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"
+        "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+        "tests/test_api_spine_artifacts.py"
       ],
       "completion_contract": "final_exit_code_zero_required",
       "verification_phase": "postpublication"

@@ -1,0 +1,9 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "operation_id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+  "status": 1,
+  "request": "1e013348-6abc-4baf-82a3-955760cf5354",
+  "contains_phi": false,
+  "engine_state": "continuing",
+  "next_workstream": "first bounded real manifest-normalizer assignment"
+}
