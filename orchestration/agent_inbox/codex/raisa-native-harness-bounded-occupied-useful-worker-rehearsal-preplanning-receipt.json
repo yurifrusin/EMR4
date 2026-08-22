@@ -1,0 +1,141 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa native Harness bounded occupied useful-worker rehearsal",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_select_and_freeze_the_narrowest_useful_low_risk_raisa_worker_package_before_any_native_harness_or_provider_process",
+    "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "0918064241c7f10eaeaef76bb371adfcecc4e4f6",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "055998c0febf2dc50c0cc01c988219211bc19522",
+    "reason_codes": [],
+    "resolved_commit": "0918064241c7f10eaeaef76bb371adfcecc4e4f6",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "0918064241c7f10eaeaef76bb371adfcecc4e4f6"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 3,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [
+      "git_refs_evidence_manual_object_id_forbidden"
+    ],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "revision_required"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "055998c0febf2dc50c0cc01c988219211bc19522",
+    "branch_origin_aligned": true,
+    "head": "055998c0febf2dc50c0cc01c988219211bc19522",
+    "origin_branch_commit": "055998c0febf2dc50c0cc01c988219211bc19522",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 662
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "useful-worker package selection and preplanning",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The selected work is one stable separable mechanical package: encode Sol-frozen default-off rollout, kill-switch and rollback rules in a declarative contract, deterministic validator and focused tests. It supplies the first useful Raisa worker-quality evidence without giving the worker acceptance or activation authority.",
+        "work_packages": [
+          "default_off_canonical_check_in_rollout_kill_switch_rollback_contract_validator_and_focused_tests"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "gemini_verifier",
+        "rationale": "The active latch authorises no auxiliary model in this one-turn occupied rehearsal. GPT Sol independently reads and either adopts or rejects the untrusted candidate after deterministic verification.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Current developer policy prohibits native-subagent delegation, and package freeze, one occupied worker turn, cleanup, readback and adoption are serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "exact plan and worker packet freeze",
+      "preexecution admission",
+      "one occupied terminal",
+      "Sol adoption or rejection",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "GPT Sol freezes the exact declarative contract meaning and every worker-owned path before dispatch",
+      "deterministic preexecution admission passes before any native Harness or provider process",
+      "one native-Harness DeepSeek V4 Flash/high turn consumes the only worker and provider authority",
+      "the Harness and disposable roots are cleaned before candidate interpretation",
+      "GPT Sol independently reads the exact diff and adopts or rejects it without worker self-acceptance"
+    ]
+  },
+  "planned_action": "freeze_one_provider_free_unmounted_default_off_canonical_check_in_rollout_kill_switch_and_rollback_runbook_contract_with_a_deterministic_validator_and_focused_tests_then_consume_at_most_one_native_harness_deepseek_v4_flash_high_worker_turn_under_the_active_latch",
+  "reasons": [
+    "git_refs_evidence_manual_object_id_forbidden"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-result-contract-reconciliation.md",
+      "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-sol-acceptance.md",
+      "docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-ordinary-practice-check-in-admission-readiness-review-sol-acceptance.md",
+      "docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/api-spine/openapi/appointment-commands.yaml",
+      "orchestration/bernie_release_gates.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns package selection, plan, preexecution admission, monitoring, readback, adoption or rejection, integration and acceptance. DeepSeek V4 Flash/high is planned for one exact separable mechanical implementation/test package through the native Harness. Gemini is declined because the active latch forbids an auxiliary model and independent Sol readback is the required review. Native subagents are declined because current developer policy prohibits delegation and the occupied turn is serial.",
+    "git_refs_and_worktree": "The receipt builder supplies every Git identity from its machine snapshot after fetch. The task branch and origin task branch are aligned at 055998c0febf2dc50c0cc01c988219211bc19522; local/origin master and handoff/current remain exactly 2e34bdad732fdab32fbf778280b3d3c70d66d602; the accepted 0918064241c7f10eaeaef76bb371adfcecc4e4f6 source is an ancestor; docs/branding and every unrelated untracked path are preserved.",
+    "live_handover_current_baton": "AGENTS.md names the accepted complete package-unloaded runner reconciled pass at Continuity 391 / Compass 373 and exactly one bounded occupied native-Harness DeepSeek V4 Flash/high worker turn on useful low-risk Raisa development as the next implementation.",
+    "protected_evidence_boundaries": "Only one bounded occupied native-Harness DeepSeek worker turn is open after an exact work package and preexecution admission. It may author only a provider-free unmounted default-off rollout/kill-switch/rollback runbook contract, deterministic validator and focused tests. Ordinary-practice enablement, feature flags, allowlists, command mounting, product or patient data, live runtime, deployment, release, Pages, protected evidence and protected refs remain closed."
+  },
+  "status": "revision_required",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": false
+}

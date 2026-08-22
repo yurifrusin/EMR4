@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "attempt",
+    "work_package",
+    "occupied_envelope",
+    "source_bindings",
+    "documentation_bindings",
+    "protected_boundaries"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_useful_worker_contract.v1"},
+    "operation_id": {"const": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal"},
+    "attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempt_id", "work_order_id", "lease_id", "disposable_root", "evidence_namespace"],
+      "properties": {
+        "attempt_id": {"const": "deepseek-native-check-in-runbook-worker-001"},
+        "work_order_id": {"const": "wo-deepseek-native-check-in-runbook-worker-001"},
+        "lease_id": {"const": "lease-deepseek-native-check-in-runbook-worker-001"},
+        "disposable_root": {"const": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-runbook-worker-001"},
+        "evidence_namespace": {"const": "orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001"}
+      }
+    },
+    "work_package": {"type": "object"},
+    "occupied_envelope": {"type": "object"},
+    "source_bindings": {"type": "object"},
+    "documentation_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["plan_sha256", "threat_model_sha256"],
+      "properties": {
+        "plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "threat_model_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "protected_boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ordinary_practice_enabled",
+        "feature_flag_or_allowlist_changed",
+        "product_or_patient_data_used",
+        "live_runtime_deployment_release_pages",
+        "protected_ref_movement",
+        "raw_prompt_response_reasoning_retained"
+      ],
+      "properties": {
+        "ordinary_practice_enabled": {"const": false},
+        "feature_flag_or_allowlist_changed": {"const": false},
+        "product_or_patient_data_used": {"const": false},
+        "live_runtime_deployment_release_pages": {"const": false},
+        "protected_ref_movement": {"const": false},
+        "raw_prompt_response_reasoning_retained": {"const": false}
+      }
+    }
+  }
+}
