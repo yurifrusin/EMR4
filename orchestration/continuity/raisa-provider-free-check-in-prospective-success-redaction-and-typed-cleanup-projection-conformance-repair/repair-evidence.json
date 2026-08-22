@@ -1,0 +1,74 @@
+{
+  "accepted_diagnosis_closeout_source": "5d93380060f31bab21bddc9ffdd5580754eb4fc6",
+  "accepted_diagnosis_source": "ca7970b3520b2c38e9abd6fee3462ebb743792e0",
+  "activity_counts": {
+    "attempt_008_actions": 0,
+    "database_operations": 0,
+    "docker_objects": 0,
+    "postgresql_starts": 0,
+    "product_calls": 0,
+    "provider_calls": 0,
+    "sql_executions": 0
+  },
+  "boundary_repair": {
+    "all_default_denied": true,
+    "boundary_count": 10,
+    "redactor_ast_unchanged": true,
+    "retired_key_absent": true,
+    "safe_key_present": true
+  },
+  "closed_boundaries": {
+    "attempt_007_retried_resumed_overwritten_or_reclassified": false,
+    "attempt_008_planned_checkpointed_or_executed": false,
+    "docker_object_postgresql_sql_or_database_used": false,
+    "domain_record_material_used": false,
+    "native_deepseek_worker_or_provider_used": false,
+    "ordinary_practice_or_product_surface_changed": false,
+    "production_deployment_release_or_pages_used": false,
+    "protected_evidence_or_ref_moved": false,
+    "redactor_predicate_weakened": false,
+    "unrelated_untracked_path_changed": false
+  },
+  "efficacy": {
+    "diagnosed_cleanup_collapse_after": 0,
+    "diagnosed_cleanup_collapse_before": 1,
+    "diagnosed_forbidden_field_occupied_escape_after": 0,
+    "diagnosed_forbidden_field_occupied_escape_before": 1,
+    "occupied_runs_used_for_repair": 0
+  },
+  "immutable_attempt_007": {
+    "envelope_sha256": "3338c58054dea96b3845827dacfe184889ee328e5a4463966464b560d0a2c2c5",
+    "failure_sha256": "86e5e1342eb54e062e35d73390ebceb141d097d03e180e4fe3c0ed64b465f422",
+    "reclassified": false,
+    "retry_count": 0
+  },
+  "plan_source": "23eb45724c39b0788c32f253229ca43e4a41288f",
+  "prospective_projection": {
+    "before_docker_capable_call": true,
+    "hostile_attempted": 66,
+    "hostile_rejected": 66,
+    "path_count": 67,
+    "redaction_status": "passed",
+    "runtime_path_count": 67,
+    "schema_status": "passed"
+  },
+  "protected_source": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+  "result": "raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_pass",
+  "schema_version": "emr4.check-in-prospective-success-redaction-typed-cleanup-projection-repair-evidence.v1",
+  "source_digests": {
+    "base_contract_sha256": "bcad86a4607c12ef5a3f98394b6e65e03c7ff8be8b3d83de2ba39884ea63bbda",
+    "base_harness_sha256": "c4372d443206c2a39351667b6d599c6911d575059955e6c615358d379355ae78",
+    "repair_contract_sha256": "662e055f9011aa5574127503b46dd3ca9c6c3113ce6dad3b6e3ca35728930658"
+  },
+  "source_head": "8a82a8184cc66efbe31769eda88e299887f798bc",
+  "typed_terminal": {
+    "failure_fallback_cleanup": "cleanup_incomplete",
+    "frozen_dataclass": true,
+    "late_failure_escape_count": 0,
+    "redaction_failure_cleanup": "cleanup_verified",
+    "schema_failure_cleanup": "cleanup_verified",
+    "success_cleanup": "cleanup_verified",
+    "success_release_after_late_failure_count": 0,
+    "wrapper_cleanup_projection": "cleanup_verified"
+  }
+}
