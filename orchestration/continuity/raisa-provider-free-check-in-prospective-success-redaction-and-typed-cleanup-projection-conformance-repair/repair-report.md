@@ -57,11 +57,33 @@ manual form or per-attempt repair.
 
 Canonical deterministic evidence is `repair-evidence.json`, SHA-256
 `47f422e7b8ad072c9f4912fe6269cfc85f44eb75808419182c75e19d41157eaa`.
-It records zero Docker objects, PostgreSQL starts, SQL/database operations,
-provider calls, product calls and attempt-008 actions. Attempt 007 remains
-byte-exact, consumed once, retried zero times and unreclassified.
+For the conformance runner itself, it records zero Docker objects, PostgreSQL
+starts, SQL/database operations, provider calls, product calls and attempt-008
+actions. Attempt 007 remains byte-exact, consumed once, retried zero times and
+unreclassified.
 
 This repair proves structural admission and terminal projection only. It does
 not prove rollback, unknown-response transaction recovery, role absence before
 teardown or any successful occupied database behavior. Attempt 008 remains
 closed pending its own fresh authority and frozen plan.
+
+## Procedural corrections
+
+Three low-severity local mistakes were contained without occupied or external
+work. The preplanning receipt rejected two manually repeated Git objects and
+then passed from its machine snapshot; the new conformance CLI initially lacked
+the direct-script repository import bootstrap and was repaired with a direct
+CLI test; and one serial-runner command incorrectly forwarded a nested
+`python -m pytest` command before the corrected pytest-only argument vector
+passed all 83 selected tests. These are recorded as AER-1021 through AER-1023.
+
+A separate material process incident is AER-1024. Six otherwise-passing
+ordinary pytest sessions loaded the repository's autouse conftest and therefore
+created, truncated and dropped the local authored-synthetic `gp_pms_test`
+schema, contrary to this tranche's no-database boundary. Those six results are
+excluded. The exact 83-test candidate profile and the complete register suite
+were rerun through `scripts.ariadne_provider_free_pytest`, which disables
+conftest, plugin autoload and inherited database configuration; both replacement
+profiles passed. No product, patient or clinical data and no occupied rehearsal
+were involved, but the process violation remains recorded rather than being
+relabelled as provider-free.

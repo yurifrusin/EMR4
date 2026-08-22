@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 632,
+  "register_revision": 634,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -39529,6 +39529,158 @@
       "incident_id": "AER-1020",
       "attempt_id": "clock-665c436c9848f2fb3ea50842",
       "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "ariadne-preplanning-git-ref-evidence",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_preflight",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Free-form Git-ref source evidence must contain no manually supplied object IDs because the receipt builder's machine snapshot owns exact identities.",
+      "observed_error": "The first repair preplanning runtime note repeated the task and protected Git objects; preflight rejected it before plan writing or implementation.",
+      "detection_method": "The orchestrator receipt returned revision_required with git_refs_evidence_manual_object_id_forbidden and reported two manually supplied objects.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-check-in-prospective-success-redaction-and-typed-cleanup-projection-repair-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-prospective-success-redaction-and-typed-cleanup-projection-repair-preplanning-receipt.json",
+        "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-report.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.manual_git_object_ids_in_receipt_prose",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the narrative object IDs and regenerate the passed receipt from the machine-owned Git snapshot.",
+        "prevention_control": "Every continuation receipt must report zero manually supplied object IDs; exact refs appear only in machine-owned receipt fields.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-prospective-success-redaction-and-typed-cleanup-projection-repair-preplanning-receipt.json"
+        ]
+      },
+      "incident_id": "AER-1021",
+      "attempt_id": "clock-8f17a02f1a12da27b391184c",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "implementer",
+      "resource_id": "repair-conformance-direct-cli",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_python",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "A repository CLI that imports sibling scripts must bootstrap the repository root before those imports and pass by direct path as documented.",
+      "observed_error": "The first direct conformance check raised ImportError because sibling script imports preceded repository-root path insertion.",
+      "detection_method": "The direct CLI exited before conformance construction and before any evidence, provider, Docker or database action.",
+      "evidence_paths": [
+        "scripts/raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+        "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+        "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-report.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.direct_script_missing_repo_import_root",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Insert the repository root before sibling imports and add a direct-path CLI regression test; the corrected check and 47 focused tests passed.",
+        "prevention_control": "Every new sibling-importing CLI carries the established direct-script import bootstrap and a direct-path smoke test.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py"
+        ]
+      },
+      "incident_id": "AER-1022",
+      "attempt_id": "clock-3b45a8718ad3a4d7b63e56a2",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "ariadne-serial-pytest-invocation",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_test_runner",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Arguments following the serial runner's separator are pytest arguments only, not a nested Python command.",
+      "observed_error": "The first broader command forwarded python -m pytest after the separator, so pytest treated python as a file path and rejected it before collection.",
+      "detection_method": "The serial runner acquired its lock and pytest returned file-or-directory-not-found for python without executing a test.",
+      "evidence_paths": [
+        "scripts/ariadne_serial_pytest.py",
+        "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-report.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.serial_pytest_forwarded_nested_python_command",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Forward only -q and the exact test paths after the separator; the corrected serial selection passed all 83 tests.",
+        "prevention_control": "Generate serial-runner commands as runner options, one separator and a pytest-only remainder vector.",
+        "evidence_paths": [
+          "scripts/ariadne_serial_pytest.py",
+          "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-report.md"
+        ]
+      },
+      "incident_id": "AER-1023",
+      "attempt_id": "clock-c00b5fb8402b93994ef404a1",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "provider-free-repair-verification",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "command_scope_violation",
+      "process_severity": "material",
+      "expected_invariant": "A provider-free deterministic tranche whose database authority is closed must run every selected test through the no-conftest provider-free entry point.",
+      "observed_error": "Six otherwise-passing ordinary pytest sessions loaded the autouse repository conftest and created, truncated and dropped the local authored-synthetic gp_pms_test schema despite the explicit no-database boundary.",
+      "detection_method": "Inspection of tests/conftest.py after the serial lock output proved that every executed test used the session engine and autouse clean_db fixture; all six results were excluded.",
+      "evidence_paths": [
+        "scripts/ariadne_provider_free_pytest.py",
+        "tests/conftest.py",
+        "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-report.md",
+        "docs/ariadne-agent-error-correction-register-revision-634.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.provider_free_static_pytest_loaded_database_autouse_conftest",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Exclude all six ordinary-pytest results, then rerun the exact 83-test candidate profile and the complete register suite through scripts.ariadne_provider_free_pytest; both provider-free replacements passed.",
+        "prevention_control": "When database authority is closed, command manifests and local verification must use python -m scripts.ariadne_provider_free_pytest exclusively; serial or ordinary pytest is inadmissible even for apparently pure files.",
+        "evidence_paths": [
+          "scripts/ariadne_provider_free_pytest.py",
+          "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-report.md",
+          "docs/ariadne-agent-error-correction-register-revision-634.md"
+        ]
+      },
+      "incident_id": "AER-1024",
+      "attempt_id": "clock-1b1f61dc1325c61481b4fdde",
+      "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"
     }
