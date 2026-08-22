@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 623,
+  "register_revision": 624,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -38018,6 +38018,119 @@
       },
       "incident_id": "AER-0979",
       "attempt_id": "clock-0c490c418d4d82d6f2a9b259",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-accepted-guard-graph-materialization",
+      "role": "implementer",
+      "resource_id": "accepted-guard-graph-focused-tests",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Focused tests bind to the exact accepted function form and frozen semantic boundaries rather than a remembered layout or paraphrased prose.",
+      "observed_error": "Two assertions expected a multiline guard signature and prose sentences that were not the exact accepted source and plan forms; focused pytest rejected before process admission.",
+      "detection_method": "The first two focused pytest invocations failed before any Node attempt identity, Harness, worker, model or provider boundary was entered.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+        "docs/ariadne-agent-error-correction-register-revision-624.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.focused_test_copied_incidental_layout_and_prose",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the source assertion to the exact four-argument semantic signature and bind boundary assertions to the actual frozen documents.",
+        "prevention_control": "Focused form tests derive exact strings from accepted source or test semantic tokens rather than remembered layout and prose.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+          "docs/ariadne-agent-error-correction-register-revision-624.md"
+        ]
+      },
+      "incident_id": "AER-0980",
+      "attempt_id": "clock-57e2377ece2f16a8e5f1d21c",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-accepted-guard-graph-materialization",
+      "role": "orchestrator",
+      "resource_id": "accepted-guard-graph-success-vector",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "isolated_node_process",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "The one-process success vector is derived from the installed setup graph and preserves a schema-safe typed mismatch coordinate sufficient for diagnosis.",
+      "observed_error": "The contract expected three hook installations and did not freeze the exact preset-root read count; the clean 756-byte typed result was rejected and only its length and hash were retained.",
+      "detection_method": "The one Node process exited 0 with zero stderr, but exact result validation emitted fixture_result_rejected; a process-free provisional finite hash calculation matched root reads four and hook installations five.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-process-envelope.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-failure-terminal.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/materialization-failure-report.md",
+        "docs/ariadne-agent-error-correction-register-revision-624.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.installed_setup_counter_vector_not_derived_before_single_attempt",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Keep the attempt rejected and immutable, prohibit retry and admit a distinct process-free finite-grammar hash diagnosis.",
+        "prevention_control": "Future single-process contracts derive exact counter vectors from the installed setup graph and retain a closed typed mismatch coordinate before launch.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-closeout.md",
+          "docs/ariadne-agent-error-correction-register-revision-624.md"
+        ]
+      },
+      "incident_id": "AER-0981",
+      "attempt_id": "clock-ff177055e0f7925407fb2f81",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-accepted-guard-graph-materialization",
+      "role": "orchestrator",
+      "resource_id": "accepted-guard-graph-clockwork-publication",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Clockwork publication uses one parser-owned closed mode from check, publish or rollback.",
+      "observed_error": "After a passing dry run, the orchestrator supplied nonexistent --execute instead of --publish; argparse rejected before any mutation.",
+      "detection_method": "The clockwork CLI returned exit 1 with its closed mode vocabulary and no live publication.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-624.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_publication_mode_generalized_instead_of_parser_owned",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the parser-owned --publish mode after the passing dry run.",
+        "prevention_control": "Clockwork callers read and select from the exact parser-owned mode vocabulary rather than reusing mode names from other controllers.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-624.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-0982",
+      "attempt_id": "clock-99be16dad0d3d4d1fd4bc56b",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

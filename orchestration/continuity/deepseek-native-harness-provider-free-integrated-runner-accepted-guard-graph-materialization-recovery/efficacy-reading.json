@@ -1,0 +1,48 @@
+{
+  "schema_version": "ariadne.native_harness_accepted_guard_graph_efficacy.v1",
+  "operation_id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery",
+  "timestamp": "2026-08-22T19:57:09.0815687+10:00",
+  "result": "bounded_negative_requires_content_free_counter_diagnosis",
+  "objective_reached": false,
+  "useful_diagnostic_output": true,
+  "observed": {
+    "node_process_count": 1,
+    "exit_code": 0,
+    "stdout_bytes": 756,
+    "stdout_sha256": "6e75c083f6b42d5c828d53c7f16a11ae09897023bf0a8139abde615c674225ff",
+    "stderr_bytes": 0,
+    "raw_stream_retained": false,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "retry_count": 0,
+    "resume_count": 0,
+    "fallback_count": 0,
+    "disposable_root_absent": true
+  },
+  "correction_cost": {
+    "preprocess_focused_test_revisions": 2,
+    "process_attempts": 1,
+    "additional_process_attempts": 0,
+    "rejected_clockwork_publication_invocations": 1,
+    "new_diagnostic_identity_required": true
+  },
+  "parallelism": {
+    "deepseek": {
+      "disposition": "declined",
+      "result": "not_dispatched",
+      "rationale": "Worker, native-Harness, model and provider boundaries were forbidden."
+    },
+    "gemini": {
+      "disposition": "declined_provider_free_boundary",
+      "result": "not_dispatched",
+      "rationale": "The immutable accepted graph and provider-free boundary required no fresh model review."
+    },
+    "native_subagents": {
+      "disposition": "declined",
+      "result": "not_dispatched",
+      "rationale": "Developer policy prohibited proactive delegation and the attempt was serial."
+    },
+    "serial_owner": "gpt-sol"
+  },
+  "conclusion": "The accepted graph crossed a clean Node process but the frozen typed success vector rejected. The consumed identity remains immutable; a process-free hash diagnosis is the narrow successor."
+}

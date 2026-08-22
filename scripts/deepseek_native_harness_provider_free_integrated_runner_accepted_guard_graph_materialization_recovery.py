@@ -430,13 +430,37 @@ def provider_free_check() -> dict[str, Any]:
     closure = import_closure(contract, package_root)
     if DISPOSABLE_ROOT.exists():
         raise AcceptedGuardGraphError("disposable_root_not_absent")
-    if any(path.exists() for path in (EVIDENCE_PATH, CONSUMED_PATH, PROCESS_ENVELOPE_PATH, FAILURE_PATH)):
-        if not EVIDENCE_PATH.is_file():
+    terminal_result = "provider_free_preflight_pass"
+    terminal_paths = (EVIDENCE_PATH, CONSUMED_PATH, PROCESS_ENVELOPE_PATH, FAILURE_PATH)
+    if any(path.exists() for path in terminal_paths):
+        if not CONSUMED_PATH.is_file() or not PROCESS_ENVELOPE_PATH.is_file():
             raise AcceptedGuardGraphError("fixture_identity_already_consumed")
-        schema = json.loads(EVIDENCE_SCHEMA_PATH.read_bytes())
-        jsonschema.Draft202012Validator(schema).validate(json.loads(EVIDENCE_PATH.read_bytes()))
+        consumed = json.loads(CONSUMED_PATH.read_bytes())
+        envelope = json.loads(PROCESS_ENVELOPE_PATH.read_bytes())
+        if (
+            consumed.get("attempt_id") != ATTEMPT_ID
+            or consumed.get("retry_count") != 0
+            or envelope.get("attempt_id") != ATTEMPT_ID
+            or envelope.get("node_process_count") != 1
+            or envelope.get("raw_stream_retained") is not False
+        ):
+            raise AcceptedGuardGraphError("fixture_identity_already_consumed")
+        if EVIDENCE_PATH.is_file() and not FAILURE_PATH.exists():
+            schema = json.loads(EVIDENCE_SCHEMA_PATH.read_bytes())
+            jsonschema.Draft202012Validator(schema).validate(
+                json.loads(EVIDENCE_PATH.read_bytes())
+            )
+            terminal_result = "provider_free_success_readback_pass"
+        elif FAILURE_PATH.is_file() and not EVIDENCE_PATH.exists():
+            schema = json.loads(FAILURE_SCHEMA_PATH.read_bytes())
+            jsonschema.Draft202012Validator(schema).validate(
+                json.loads(FAILURE_PATH.read_bytes())
+            )
+            terminal_result = "provider_free_failure_readback_pass"
+        else:
+            raise AcceptedGuardGraphError("fixture_identity_already_consumed")
     return {
-        "result": "provider_free_preflight_pass",
+        "result": terminal_result,
         "accepted_inventory": EXPECTED_INVENTORY,
         "import_closure": closure,
         "node_process_count": 0,

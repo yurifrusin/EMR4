@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 400,
+  "graph_revision": 401,
   "harvests": [],
   "nodes": [
     {
@@ -31335,9 +31335,116 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery",
+      "title": "Integrated-runner accepted guard-graph materialization recovery",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted one provider-free installed AgentRegistry fixture after exact source and import-closure gates passed.",
+          "The attempt is consumed and rejected; no retry, native Harness, worker, model, provider, product, data, deployment, Pages or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-graph-materialization-and-import-closure",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/materialization-failure-report.md",
+          "status": "accepted",
+          "summary": "Accept the byte-identical runner, accepted guard graph and complete five-module import closure."
+        },
+        {
+          "id": "reject-fixture-terminal-success",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-failure-terminal.json",
+          "status": "rejected",
+          "summary": "Reject terminal success because the typed observation failed the frozen success vector."
+        },
+        {
+          "id": "admit-process-free-content-hash-diagnosis",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Admit only a distinct process-free finite-grammar diagnosis against the retained stdout length and SHA-256."
+        },
+        {
+          "id": "reject-retry-and-broader-harness-claim",
+          "source": "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-closeout.md",
+          "status": "rejected",
+          "summary": "The bounded negative authorises no retry, native Harness boot, DeepSeek turn, provider reachability or useful-worker claim."
+        }
+      ],
+      "claim_scope": [
+        "The unchanged runner and accepted guard, bridge and sanitizer bytes matched four exact source-owned bindings.",
+        "All four relative, eight scoped-package and three Node builtin import edges resolved before launch.",
+        "Exactly one provider-free Node process exited 0 with 756 stdout and zero stderr bytes.",
+        "The typed observation was rejected against the frozen success vector and the attempt identity is consumed.",
+        "Raw streams were not retained; retry, resume and fallback counts are zero.",
+        "Native Harness, broker, worker, model, provider, network, database, Docker and product-target counts are zero.",
+        "The disposable process and root are absent after cleanup.",
+        "Only a process-free finite-grammar hash diagnosis is selected next."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-624.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--native-harness-accepted-guard-graph-materialization-recovery.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_integrated_runner_factory_fixture_import_path_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-attempt-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-process-envelope.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-failure-terminal.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/materialization-failure-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/efficacy-reading.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The consumed fixture is rejected and cannot be retried or resumed.",
+        "The exact typed observation behind the retained stdout hash is not yet accepted.",
+        "No native Harness boot, DeepSeek worker turn, model/provider request or useful-worker evidence is accepted.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T19:57:09.0815687+10:00",
+      "updated_at": "2026-08-22T19:57:09.0815687+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "cc6d14257c7ff110a3c51476738e57f5a3135232",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T19:27:57.8855998+10:00"
+  "updated_at": "2026-08-22T19:57:09.0815687+10:00"
 }

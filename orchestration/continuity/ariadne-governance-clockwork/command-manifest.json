@@ -2,28 +2,28 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "factory-import-recovery-closeout-tick-check",
+      "command_id": "accepted-guard-graph-closeout-tick-check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_governance_clockwork_tick",
         "--check",
         "--intent",
-        "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery/closeout/closeout-intent.json"
+        "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "factory-import-recovery-closeout-provider-free-tests",
+      "command_id": "accepted-guard-graph-closeout-provider-free-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
+        "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
         "tests/test_deepseek_native_harness_provider_free_integrated_runner_factory_fixture_import_path_recovery.py",
-        "tests/test_deepseek_native_harness_provider_free_integrated_runner_factory_subcoordinate_diagnostic_recovery.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_process_free_correction_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_active_operation_latch.py",
         "tests/test_ariadne_active_operation_latch_continuity.py",
@@ -32,25 +32,14 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "factory-import-recovery-closeout-ruff",
+      "command_id": "accepted-guard-graph-closeout-ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/deepseek_native_harness_provider_free_integrated_runner_factory_fixture_import_path_recovery.py",
-        "tests/test_deepseek_native_harness_provider_free_integrated_runner_factory_fixture_import_path_recovery.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required"
-    },
-    {
-      "command_id": "factory-import-recovery-closeout-compile",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "py_compile",
-        "scripts/deepseek_native_harness_provider_free_integrated_runner_factory_fixture_import_path_recovery.py",
-        "tests/test_deepseek_native_harness_provider_free_integrated_runner_factory_fixture_import_path_recovery.py"
+        "scripts/deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+        "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Reuse the accepted correction bytes and import graph exactly; do not redesign the runner, guard contract or fixture taxonomy.
+> Treat the stdout hash as a clockwork reading over a closed source-derived grammar; do not rerun or infer from unconstrained prose.
 
 ## North star
 
@@ -570,23 +570,25 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The operation localized the likely occupied runner defect and its own pre-factory fixture path defect without external activity, but did not dynamically prove the factory subcoordinate. Lineage parent: `raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal`.
 277. **Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development — Integrated-runner factory fixture import-path recovery**
    One exact provider-free successor reproduced the predicted installed factory coordinate and converted the prior negative diagnosis into a selected existing correction without model/provider activity. Lineage parent: `deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery`.
+278. **Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development — Integrated-runner accepted guard-graph materialization recovery**
+   The accepted graph and import closure held through one clean local process, while the frozen counter vector failed closed without retry or provider cost. Lineage parent: `deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery`.
 
 ## Current position
 
-**Materialize the already accepted four-argument guard graph beside the unchanged integrated runner — Integrated-runner factory fixture import-path recovery**
+**Recover the exact source-defined typed observation from the immutable content-free process envelope — Integrated-runner accepted guard-graph materialization recovery**
 
-**Why this proof came next:** The installed AgentRegistry fixture dynamically proved the old guard rejects the runner's four-argument call at the exact predicted coordinate.
+**Why this proof came next:** The process exited cleanly and retained a finite stdout length/hash, but generic validation discarded the typed mismatch needed for direct diagnosis.
 
-A provider-free corrected materializer will prove complete import closure and passage beyond the old factory coordinate without a DeepSeek turn or model/provider request.
+A process-free finite grammar will prove a unique matching counter vector or reject without another process.
 
 ### What this unlocks
 
-- Removal of the demonstrated occupied runner/guard interface mismatch.
-- A bounded decision on the next provider-free native-Harness boot proof before any DeepSeek development turn.
+- A deterministic conclusion about whether the accepted guard crossed the old coordinate.
+- A corrected typed counter contract for the later provider-free boot proof without retrying the consumed identity.
 
 ### What it does not solve
 
-- No DeepSeek worker turn, model/provider request or useful-worker quality evidence.
+- No native Harness boot, DeepSeek worker turn, model/provider request or useful-worker quality evidence.
 - No product/data action, ordinary-practice enablement, production, release, Pages or protected integration.
 
 ## Continuity and authority
@@ -1337,6 +1339,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-closeout.md`
+- `docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md`
@@ -2758,6 +2761,8 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/import-closure-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/provider-free-inert-task-sentinel-readiness-native-boot-terminal.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-process-envelope.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/materialization-failure-report.md`
 - `orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery/recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery/fixture-failure-diagnosis.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/efficacy-reading.json`
@@ -3786,4 +3791,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 382; continuity graph revision 400._
+_Compass map revision 383; continuity graph revision 401._

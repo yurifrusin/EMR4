@@ -1,0 +1,315 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery",
+    "title": "DeepSeek native Harness integrated-runner accepted guard-graph materialization recovery",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T19:57:09.0815687+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery",
+      "title": "Integrated-runner accepted guard-graph materialization recovery",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-integrated-runner-factory-fixture-import-path-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted one provider-free installed AgentRegistry fixture after exact source and import-closure gates passed.",
+          "The attempt is consumed and rejected; no retry, native Harness, worker, model, provider, product, data, deployment, Pages or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-graph-materialization-and-import-closure",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/materialization-failure-report.md",
+          "status": "accepted",
+          "summary": "Accept the byte-identical runner, accepted guard graph and complete five-module import closure."
+        },
+        {
+          "id": "reject-fixture-terminal-success",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-failure-terminal.json",
+          "status": "rejected",
+          "summary": "Reject terminal success because the typed observation failed the frozen success vector."
+        },
+        {
+          "id": "admit-process-free-content-hash-diagnosis",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Admit only a distinct process-free finite-grammar diagnosis against the retained stdout length and SHA-256."
+        },
+        {
+          "id": "reject-retry-and-broader-harness-claim",
+          "source": "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-closeout.md",
+          "status": "rejected",
+          "summary": "The bounded negative authorises no retry, native Harness boot, DeepSeek turn, provider reachability or useful-worker claim."
+        }
+      ],
+      "claim_scope": [
+        "The unchanged runner and accepted guard, bridge and sanitizer bytes matched four exact source-owned bindings.",
+        "All four relative, eight scoped-package and three Node builtin import edges resolved before launch.",
+        "Exactly one provider-free Node process exited 0 with 756 stdout and zero stderr bytes.",
+        "The typed observation was rejected against the frozen success vector and the attempt identity is consumed.",
+        "Raw streams were not retained; retry, resume and fallback counts are zero.",
+        "Native Harness, broker, worker, model, provider, network, database, Docker and product-target counts are zero.",
+        "The disposable process and root are absent after cleanup.",
+        "Only a process-free finite-grammar hash diagnosis is selected next."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-624.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--native-harness-accepted-guard-graph-materialization-recovery.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_integrated_runner_factory_fixture_import_path_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-attempt-consumed.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-process-envelope.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-failure-terminal.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/materialization-failure-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/efficacy-reading.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The consumed fixture is rejected and cannot be retried or resumed.",
+        "The exact typed observation behind the retained stdout hash is not yet accepted.",
+        "No native Harness boot, DeepSeek worker turn, model/provider request or useful-worker evidence is accepted.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development",
+      "outcome": "The accepted graph and import closure held through one clean local process, while the frozen counter vector failed closed without retry or provider cost.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/materialization-failure-report.md",
+        "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Recover the exact source-defined typed observation from the immutable content-free process envelope",
+      "why_now": "The process exited cleanly and retained a finite stdout length/hash, but generic validation discarded the typed mismatch needed for direct diagnosis.",
+      "outcome": "A process-free finite grammar will prove a unique matching counter vector or reject without another process.",
+      "unlocks": [
+        "A deterministic conclusion about whether the accepted guard crossed the old coordinate.",
+        "A corrected typed counter contract for the later provider-free boot proof without retrying the consumed identity."
+      ],
+      "does_not_solve": [
+        "No native Harness boot, DeepSeek worker turn, model/provider request or useful-worker quality evidence.",
+        "No product/data action, ordinary-practice enablement, production, release, Pages or protected integration."
+      ],
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-process-envelope.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/materialization-failure-report.md"
+      ],
+      "orientation_statement": "Treat the stdout hash as a clockwork reading over a closed source-derived grammar; do not rerun or infer from unconstrained prose."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis",
+      "active_tranche": "DeepSeek native Harness provider-free integrated-runner accepted guard-graph content-free counter diagnosis",
+      "objective": "Using only the immutable fixture source, consumed process envelope and a closed finite typed-output grammar, prove whether the retained 756-byte stdout SHA-256 has one unique source-valid observation; admit that observation or fail closed without starting any process.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted bounded-negative materialization closeout.",
+      "next_stage": "perform_fresh_five_source_rehydration_then_freeze_the_process_free_hash_diagnosis_contract"
+    },
+    "incidents": [],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "accepted-guard-graph-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/closeout/closeout-intent.json"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "accepted-guard-graph-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4",
+          "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_integrated_runner_factory_fixture_import_path_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "accepted-guard-graph-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py", "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-threat-model-delta.md",
+      "scripts/deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+      "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/",
+      "docs/ariadne-agent-error-correction-register-revision-624.md",
+      "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--native-harness-accepted-guard-graph-materialization-recovery.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_content_hash_counter_diagnosis_only",
+    "consumed_materialization_fixture_immutable_and_no_retry",
+    "immutable_fixture_source_and_process_envelope_only",
+    "closed_finite_typed_output_grammar_required",
+    "unique_sha256_and_byte_length_match_required",
+    "zero_process_native_harness_broker_worker_model_provider_and_network_activity",
+    "no_reclassification_without_deterministic_unique_match",
+    "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "accepted-guard-graph-focused-form-assertions-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-accepted-guard-graph-materialization",
+      "role": "implementer",
+      "resource_id": "accepted-guard-graph-focused-tests",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_pytest",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Focused tests bind to the exact accepted function form and frozen semantic boundaries rather than a remembered layout or paraphrased prose.",
+      "observed_error": "Two assertions expected a multiline guard signature and prose sentences that were not the exact accepted source and plan forms; focused pytest rejected before process admission.",
+      "detection_method": "The first two focused pytest invocations failed before any Node attempt identity, Harness, worker, model or provider boundary was entered.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+        "docs/ariadne-agent-error-correction-register-revision-624.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.focused_test_copied_incidental_layout_and_prose",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the source assertion to the exact four-argument semantic signature and bind boundary assertions to the actual frozen documents.",
+        "prevention_control": "Focused form tests derive exact strings from accepted source or test semantic tokens rather than remembered layout and prose.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_integrated_runner_accepted_guard_graph_materialization_recovery.py",
+          "docs/ariadne-agent-error-correction-register-revision-624.md"
+        ]
+      },
+      "baton_summary": "records and corrects two pre-process assertions coupled to incidental source layout and paraphrased prose."
+    },
+    {
+      "attempt_key": "accepted-guard-graph-counter-vector-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-accepted-guard-graph-materialization",
+      "role": "orchestrator",
+      "resource_id": "accepted-guard-graph-success-vector",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "isolated_node_process",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "The one-process success vector is derived from the installed setup graph and preserves a schema-safe typed mismatch coordinate sufficient for diagnosis.",
+      "observed_error": "The contract expected three hook installations and did not freeze the exact preset-root read count; the clean 756-byte typed result was rejected and only its length and hash were retained.",
+      "detection_method": "The one Node process exited 0 with zero stderr, but exact result validation emitted fixture_result_rejected; a process-free provisional finite hash calculation matched root reads four and hook installations five.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-process-envelope.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/fixture-failure-terminal.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/materialization-failure-report.md",
+        "docs/ariadne-agent-error-correction-register-revision-624.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.installed_setup_counter_vector_not_derived_before_single_attempt",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Keep the attempt rejected and immutable, prohibit retry and admit a distinct process-free finite-grammar hash diagnosis.",
+        "prevention_control": "Future single-process contracts derive exact counter vectors from the installed setup graph and retain a closed typed mismatch coordinate before launch.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery-closeout.md",
+          "docs/ariadne-agent-error-correction-register-revision-624.md"
+        ]
+      },
+      "baton_summary": "records and contains the underestimated installed setup counter vector without retry, selecting a process-free hash diagnosis."
+    },
+    {
+      "attempt_key": "accepted-guard-graph-clockwork-publication-mode-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-accepted-guard-graph-materialization",
+      "role": "orchestrator",
+      "resource_id": "accepted-guard-graph-clockwork-publication",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork_cli",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Clockwork publication uses one parser-owned closed mode from check, publish or rollback.",
+      "observed_error": "After a passing dry run, the orchestrator supplied nonexistent --execute instead of --publish; argparse rejected before any mutation.",
+      "detection_method": "The clockwork CLI returned exit 1 with its closed mode vocabulary and no live publication.",
+      "evidence_paths": [
+        "docs/ariadne-agent-error-correction-register-revision-624.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/closeout/closeout-intent.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_publication_mode_generalized_instead_of_parser_owned",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the parser-owned --publish mode after the passing dry run.",
+        "prevention_control": "Clockwork callers read and select from the exact parser-owned mode vocabulary rather than reusing mode names from other controllers.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-624.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-materialization-recovery/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records and corrects a rejected nonexistent clockwork publication mode before any state mutation."
+    }
+  ]
+}

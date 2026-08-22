@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 623,
+  "register_revision": 624,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "c78fb5ecd725f1bcf29e5c6c4ef537032dd57c82af10763b33f1fadce460cace",
-  "incident_count": 979,
+  "canonical_register_sha256": "cfa11e6da971b802c40c3d9e3909f111d2d87eef9ae726d002cce48b26dea7ea",
+  "incident_count": 982,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 520,
       "harness": 69,
-      "operator": 234,
+      "operator": 237,
       "repository": 140,
       "transport": 16
     },
@@ -18,7 +18,7 @@
       "command_scope_violation": 99,
       "evidence_misreport": 74,
       "harness_failure": 69,
-      "operator_error": 234,
+      "operator_error": 237,
       "output_contract_violation": 294,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
@@ -26,22 +26,25 @@
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 71,
+      "implementer": 72,
       "integration_reviewer": 3,
-      "orchestrator": 842,
+      "orchestrator": 844,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 619,
+      "low": 621,
       "material": 133,
-      "moderate": 227
+      "moderate": 228
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 205,
-      "canonical_unchanged": 605,
+      "accepted_candidate_changed": 206,
+      "canonical_unchanged": 607,
       "untrusted_partial_worktree": 169
     },
     "by_resource_and_role": {
+      "accepted-guard-graph-clockwork-publication::orchestrator": 1,
+      "accepted-guard-graph-focused-tests::implementer": 1,
+      "accepted-guard-graph-success-vector::orchestrator": 1,
       "accepted-native-startup-terminal-and-consumed-controller-source::orchestrator": 1,
       "agent-error-register-append-anchor::orchestrator": 1,
       "agent-error-register-peer-linkage::orchestrator": 1,

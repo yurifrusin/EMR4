@@ -147,7 +147,7 @@ def test_provider_free_check_starts_no_process_and_preserves_attempt_identity() 
     assert execute_source.count("subprocess.run(") == 1
     assert subject.ATTEMPT_ID == "accepted-guard-graph-materialization-001"
     result = subject.provider_free_check()
-    assert result["result"] == "provider_free_preflight_pass"
+    assert result["result"] == "provider_free_failure_readback_pass"
     assert result["import_closure"]["all_targets_present"] is True
     assert result["node_process_count"] == 0
     assert result["native_harness_process_count"] == 0
@@ -157,9 +157,23 @@ def test_provider_free_check_starts_no_process_and_preserves_attempt_identity() 
 
 def test_persisted_evidence_is_exact_when_attempt_has_run() -> None:
     if not subject.EVIDENCE_PATH.exists():
-        assert not subject.CONSUMED_PATH.exists()
-        assert not subject.PROCESS_ENVELOPE_PATH.exists()
-        assert not subject.FAILURE_PATH.exists()
+        failure = json.loads(subject.FAILURE_PATH.read_bytes())
+        failure_schema = json.loads(subject.FAILURE_SCHEMA_PATH.read_bytes())
+        jsonschema.Draft202012Validator(failure_schema).validate(failure)
+        consumed = json.loads(subject.CONSUMED_PATH.read_bytes())
+        envelope = json.loads(subject.PROCESS_ENVELOPE_PATH.read_bytes())
+        assert failure["result"] == "fixture_result_rejected"
+        assert failure["retry_count"] == 0
+        assert consumed["status"] == "consumed_before_node_launch"
+        assert consumed["retry_count"] == 0
+        assert envelope["exit_code"] == 0
+        assert envelope["stdout_bytes"] == 756
+        assert envelope["stdout_sha256"] == (
+            "6e75c083f6b42d5c828d53c7f16a11ae09897023bf0a8139abde615c674225ff"
+        )
+        assert envelope["stderr_bytes"] == 0
+        assert envelope["raw_stream_retained"] is False
+        assert not subject.DISPOSABLE_ROOT.exists()
         return
     evidence = json.loads(subject.EVIDENCE_PATH.read_bytes())
     schema = json.loads(subject.EVIDENCE_SCHEMA_PATH.read_bytes())
