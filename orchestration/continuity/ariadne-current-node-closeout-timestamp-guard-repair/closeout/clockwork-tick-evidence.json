@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "4fe5e8b8e2aab3bb73cdf831a0b8edfeda6f1f7c",
+  "source_commit": "4fe5e8b8e2aab3bb73cdf831a0b8edfeda6f1f7c",
+  "generation_id": "gen-73a8bf05aa100e1ee5ac3fa1ad06c13473fdc434e9791773eee137d8dc25fd3d",
+  "bundle_sha256": "73a8bf05aa100e1ee5ac3fa1ad06c13473fdc434e9791773eee137d8dc25fd3d",
+  "previous_generation_id": "gen-f871a79e0b4b08b27f2129f2a154a0c07364be7ddead7e90ac57b27a4af74711",
+  "previous_source_commit": "4fe5e8b8e2aab3bb73cdf831a0b8edfeda6f1f7c",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 178,
+  "operation_id": "ariadne-current-node-closeout-timestamp-guard-repair",
+  "event_kind": "clean_closeout",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

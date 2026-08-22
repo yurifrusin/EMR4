@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 390,
-  "updated_at": "2026-08-23T00:07:27.9299596+10:00",
-  "source_graph_revision": 408,
-  "orientation_statement": "Make the timestamp a machine reading, then return immediately to graph-new check-in development.",
+  "map_revision": 391,
+  "updated_at": "2026-08-23T00:36:31.8959087+10:00",
+  "source_graph_revision": 409,
+  "orientation_statement": "Recompute the fixed readiness verdict from exact accepted descendants before authoring any further check-in control layer.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5021,23 +5021,33 @@
         "orchestration_harness/check_in_observability.py",
         "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal-closeout.md"
       ]
+    },
+    {
+      "node_id": "ariadne-current-node-closeout-timestamp-guard-repair",
+      "lineage_parent": "raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal",
+      "strategic_role": "Move recurring bureaucratic correctness from model memory into deterministic graph-derived readings",
+      "outcome": "Current-node closeout timestamps now fail closed automatically and the three exposing omissions are repaired without a new form or ledger.",
+      "evidence": [
+        "tests/test_current_baton_consistency.py",
+        "docs/ariadne-current-node-closeout-timestamp-guard-repair-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal",
-    "strategic_role": "Fold one recurring closeout timestamp memory requirement into the deterministic current-node consistency reading",
-    "why_now": "Fresh rehydration caught three omissions after publication; one bounded repair can restore them and prevent recurrence without creating a new form or ledger.",
-    "outcome": "The prior packet regains its required timestamps and every future current-node closeout fails if its Date and Brisbane ISO timestamp are absent or inconsistent.",
+    "node_id": "ariadne-current-node-closeout-timestamp-guard-repair",
+    "strategic_role": "Return from bounded workflow repair to a graph-new product-readiness verdict",
+    "why_now": "Accepted descendants now exist for all three original blocking gaps and all three operational-evidence gaps, but the original twelve-dimension verdict has not been recomputed against them.",
+    "outcome": "One exact read-only review will show which ordinary check-in admission gaps, if any, genuinely remain without enabling a practice.",
     "unlocks": [
-      "More reliable clockwork closeouts with one less hand-authored memory obligation."
+      "A current evidence-backed decision about the next default-off check-in dependency rather than another inferred control artifact."
     ],
     "does_not_solve": [
-      "It does not alter product behavior, instrumentation, admission, providers, data, deployment or the remaining operational check-in gates."
+      "It does not authorize ordinary-practice activation, product/runtime changes, provider use, data access or client cutover."
     ],
     "evidence": [
-      "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal-closeout.md",
-      "AGENTS.md",
-      "tests/test_current_baton_consistency.py"
+      "docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-closeout.md",
+      "docs/ariadne-current-node-closeout-timestamp-guard-repair-closeout.md",
+      "orchestration/continuity/emr4-continuity-graph.json"
     ]
   },
   "decision_horizon": [

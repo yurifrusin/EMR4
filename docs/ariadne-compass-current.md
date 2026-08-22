@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Make the timestamp a machine reading, then return immediately to graph-new check-in development.
+> Recompute the fixed readiness verdict from exact accepted descendants before authoring any further check-in control layer.
 
 ## North star
 
@@ -586,22 +586,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The exact non-PHI metric and alert vocabulary now has one canonical declarative home without emitting telemetry or opening runtime authority. Lineage parent: `raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal`.
 285. **Turn accepted default-off check-in control contracts into small executable dependencies while preserving zero-work denial — Unmounted default-off canonical check-in non-PHI observer adapter**
    Closed admission values now have a pure typed observability bridge without runtime emission, transport or authority feedback. Lineage parent: `raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal`.
+286. **Move recurring bureaucratic correctness from model memory into deterministic graph-derived readings — Current-node closeout timestamp guard repair**
+   Current-node closeout timestamps now fail closed automatically and the three exposing omissions are repaired without a new form or ledger. Lineage parent: `raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal`.
 
 ## Current position
 
-**Fold one recurring closeout timestamp memory requirement into the deterministic current-node consistency reading — Unmounted default-off canonical check-in non-PHI observer adapter**
+**Return from bounded workflow repair to a graph-new product-readiness verdict — Current-node closeout timestamp guard repair**
 
-**Why this proof came next:** Fresh rehydration caught three omissions after publication; one bounded repair can restore them and prevent recurrence without creating a new form or ledger.
+**Why this proof came next:** Accepted descendants now exist for all three original blocking gaps and all three operational-evidence gaps, but the original twelve-dimension verdict has not been recomputed against them.
 
-The prior packet regains its required timestamps and every future current-node closeout fails if its Date and Brisbane ISO timestamp are absent or inconsistent.
+One exact read-only review will show which ordinary check-in admission gaps, if any, genuinely remain without enabling a practice.
 
 ### What this unlocks
 
-- More reliable clockwork closeouts with one less hand-authored memory obligation.
+- A current evidence-backed decision about the next default-off check-in dependency rather than another inferred control artifact.
 
 ### What it does not solve
 
-- It does not alter product behavior, instrumentation, admission, providers, data, deployment or the remaining operational check-in gates.
+- It does not authorize ordinary-practice activation, product/runtime changes, provider use, data access or client cutover.
 
 ## Continuity and authority
 
@@ -1193,6 +1195,7 @@ Prerequisites:
 - `docs/ariadne-cf-d2-workflow-incident-diagnosis.md`
 - `docs/ariadne-compass-increment2-plan.md`
 - `docs/ariadne-continuity-engine-increment1-closeout.md`
+- `docs/ariadne-current-node-closeout-timestamp-guard-repair-closeout.md`
 - `docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-closeout.md`
 - `docs/ariadne-deepseek-in-cell-generated-draft-rehearsal-plan.md`
 - `docs/ariadne-gemini-provider-blocked-request-contract-diagnostic-closeout.md`
@@ -2825,6 +2828,7 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/provider-free-node-fixture-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/deterministic-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-evidence.json`
+- `orchestration/continuity/emr4-continuity-graph.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-cost-ledger.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-evidence.json`
@@ -3816,4 +3820,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 390; continuity graph revision 408._
+_Compass map revision 391; continuity graph revision 409._
