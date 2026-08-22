@@ -2,19 +2,31 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "current-node-timestamp-guard-closeout-tick-check",
+      "command_id": "check-in-readiness-convergence-closeout-tick-check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_governance_clockwork_tick",
         "--check",
         "--intent",
-        "orchestration/continuity/ariadne-current-node-closeout-timestamp-guard-repair/closeout/closeout-intent.json"
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "current-node-timestamp-guard-closeout-tests",
+      "command_id": "check-in-readiness-convergence-focused-tests",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/emr4",
+        "tests/test_raisa_provider_free_read_only_canonical_check_in_admission_readiness_convergence_review.py"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "check-in-readiness-convergence-governance-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -23,30 +35,21 @@
         "C:/Users/sarashera/emr4",
         "tests/test_current_baton_consistency.py",
         "tests/test_ariadne_active_operation_latch.py",
-        "tests/test_ariadne_compass.py",
-        "tests/test_ariadne_governance_clockwork_tick.py",
-        "tests/test_ariadne_transactional_closeout.py"
+        "tests/test_ariadne_active_operation_latch_continuity.py",
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "tests/test_ariadne_git_object_resolution.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "current-node-timestamp-guard-closeout-ruff",
+      "command_id": "check-in-readiness-convergence-ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "tests/test_current_baton_consistency.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required"
-    },
-    {
-      "command_id": "current-node-timestamp-guard-closeout-compile",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "py_compile",
-        "tests/test_current_baton_consistency.py"
+        "scripts/raisa_provider_free_read_only_canonical_check_in_admission_readiness_convergence_review.py",
+        "tests/test_raisa_provider_free_read_only_canonical_check_in_admission_readiness_convergence_review.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

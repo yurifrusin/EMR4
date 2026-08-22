@@ -1,0 +1,152 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v1",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review",
+    "title": "Canonical check-in ordinary-practice admission-readiness convergence review closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T01:06:59.0335269+10:00",
+    "node": {
+      "id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review",
+      "title": "Canonical check-in ordinary-practice admission-readiness convergence review",
+      "kind": "review",
+      "relationships": [
+        {"node_id": "ariadne-current-node-closeout-timestamp-guard-repair", "relation": "builds_on"}
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admits one exact repository-static convergence review.",
+          "The result changes no product/runtime source and grants no ordinary-practice authority.",
+          "No provider, model, Harness, database, Docker, data, deployment, Pages or protected-ref surface opened."
+        ]
+      },
+      "decisions": [
+        {"id": "accept-four-evidence-backed-gap-closures", "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json", "status": "accepted", "summary": "Advance admission control, tenant/runtime-role attestation, rollout/runbook and non-PHI observability to satisfied on exact accepted descendants."},
+        {"id": "retain-unknown-commit-operational-gap", "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/rehearsal-failure-evidence.json", "status": "accepted", "summary": "Retain the recovery gap because attempt 005 failed before transaction setup and produced no transaction attestation."},
+        {"id": "retain-environment-secret-operational-gap", "source": "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/provider-free-architecture-evidence.json", "status": "accepted", "summary": "Retain the environment/secret gap because the architecture has zero manifest instances, secret references and rotation evidence."},
+        {"id": "accept-current-not-ready-verdict", "source": "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md", "status": "accepted", "summary": "Accept exactly 10 satisfied, zero blocking and two operational-evidence gaps with ordinary-practice admission still not ready."},
+        {"id": "preserve-historical-source-pin-negatives", "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/efficacy-reading.json", "status": "accepted", "summary": "Preserve eleven expected broad-sweep historical source-pin/current-latch failures without weakening immutable tests."},
+        {"id": "record-unretained-combined-suite-coordinate", "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/efficacy-reading.json", "status": "accepted", "summary": "Record one completed but unattributable combined suite and replace it with captured 95-test and 103-test passing suites."},
+        {"id": "select-separately-frozen-attempt-006", "source": "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md", "status": "accepted", "summary": "Select one separately planned and checkpointed disposable PostgreSQL attempt 006 as the smallest graph-new dependency for the remaining recovery gap."},
+        {"id": "decline-model-and-subagent-lanes", "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/efficacy-reading.json", "status": "accepted", "summary": "Decline DeepSeek, Gemini and native subagents because exact deterministic evidence completely decides this serial review."}
+      ],
+      "claim_scope": [
+        "Four of six original readiness gaps are now satisfied by exact accepted descendants.",
+        "The current matrix is exactly 10 satisfied, zero blocking and two operational-evidence gaps.",
+        "The exact verdict remains not ready for ordinary-practice admission.",
+        "All accepted Git bindings are full 40-character ancestral objects and all twenty source hashes match.",
+        "No product/runtime source or lasting external state changed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-plan.md",
+          "docs/security/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/report.md",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-23--canonical-check-in-admission-readiness-convergence-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-canonical-check-in-admission-readiness-convergence-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_read_only_canonical_check_in_admission_readiness_convergence_review.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_read_only_canonical_check_in_admission_readiness_convergence_review.py",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/contract.schema.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Unknown-commit recovery remains unproved until a separately frozen attempt 006 reaches transaction/readback evidence or fails closed.",
+        "Operational environment/secret posture remains unproved; architecture and synthetic shapes are insufficient.",
+        "Ordinary-practice admission, client cutover and waiting-area movement remain closed.",
+        "Native Harness worker allocation remains closed and Claude is not a silent fallback.",
+        "Product data, providers, production, deployment, release, Pages and protected refs remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Replace inferred readiness with one exact reading of accepted evidence",
+      "outcome": "Four previous gaps close without adding a control layer; two unsupported operational claims remain denied.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json",
+        "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Obtain the missing unknown-commit behavioral evidence before any ordinary-practice admission decision",
+      "why_now": "Attempt 005 failed before transaction setup, but its accepted server-lifecycle repairs now exist and the convergence review isolates this as one of only two remaining gaps.",
+      "outcome": "One separately frozen and checkpointed attempt 006 will either prove rollback/unknown-commit recovery in disposable PostgreSQL or preserve an exact failed-closed terminal.",
+      "unlocks": ["A current evidence-backed classification of the unknown-commit recovery dimension."],
+      "does_not_solve": ["It does not prove operational secret posture or authorise ordinary-practice activation, product data, provider use or production."],
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json",
+        "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md",
+        "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md"
+      ],
+      "orientation_statement": "Freeze exactly one disposable PostgreSQL attempt 006 and require an immutable terminal before any further recovery claim."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006",
+      "active_tranche": "Provider-free disposable PostgreSQL default-off check-in relay-free rollback/unknown-commit recovery attempt 006",
+      "objective": "Freeze and checkpoint exactly one provider-free disposable PostgreSQL attempt 006 against the accepted repaired relay-free server lifecycle, then execute at most once to prove rollback and unknown-terminal-response authoritative recovery or preserve one immutable failed-closed terminal.",
+      "authority_source": "Yuri's standing uninterrupted-development authority plus the accepted convergence review select the smallest remaining evidence dependency; execution remains conditional on fresh plan freeze and a clockwork preexecution checkpoint.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_attempt_006_plan_contract_and_one_run_checkpoint"
+    },
+    "incidents": [],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {"command_id": "check-in-readiness-convergence-closeout-tick-check", "executable": ".venv/Scripts/python.exe", "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/closeout/closeout-intent.json"], "completion_contract": "final_exit_code_zero_required"},
+      {"command_id": "check-in-readiness-convergence-focused-tests", "executable": ".venv/Scripts/python.exe", "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_raisa_provider_free_read_only_canonical_check_in_admission_readiness_convergence_review.py"], "completion_contract": "final_exit_code_zero_required"},
+      {"command_id": "check-in-readiness-convergence-governance-tests", "executable": ".venv/Scripts/python.exe", "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_current_baton_consistency.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_ariadne_active_operation_latch_continuity.py", "tests/test_ariadne_orchestrator_preflight.py", "tests/test_ariadne_git_object_resolution.py"], "completion_contract": "final_exit_code_zero_required"},
+      {"command_id": "check-in-readiness-convergence-ruff", "executable": ".venv/Scripts/python.exe", "arguments": ["-m", "ruff", "check", "scripts/raisa_provider_free_read_only_canonical_check_in_admission_readiness_convergence_review.py", "tests/test_raisa_provider_free_read_only_canonical_check_in_admission_readiness_convergence_review.py"], "completion_contract": "final_exit_code_zero_required"}
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-plan.md",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-627.md",
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--native-harness-corrected-graph-useful-recovery.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_disposable_postgresql_attempt_006_only_after_exact_plan_and_checkpoint",
+    "at_most_one_occupied_execution_zero_retry_resume_or_fallback",
+    "authored_synthetic_non_phi_fixture_only_no_product_relation_or_data",
+    "accepted_repaired_relay_free_server_lifecycle_exact_source_only",
+    "no_native_deepseek_harness_worker_or_provider_call",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_application_configuration_route_openapi_graphql_or_client_change",
+    "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_existing_hosted_live_or_production_database",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "raisa.check_in_admission_readiness_convergence_efficacy.v1",
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review",
+  "candidate_source": "369c1284af87631a94ffff04ca530cf4c74db4b8",
+  "matrix_before": {"satisfied": 6, "blocking_gap": 3, "operational_evidence_gap": 3},
+  "matrix_after": {"satisfied": 10, "blocking_gap": 0, "operational_evidence_gap": 2},
+  "gaps_closed": 4,
+  "controls_added": 0,
+  "ordinary_practice_enabled": false,
+  "verification": {
+    "focused_passed": 11,
+    "descendant_compatible_passed": 95,
+    "governance_passed": 103,
+    "hostile_mutations_rejected": 125,
+    "hostile_mutation_escapes": 0
+  },
+  "workflow_overhead": {
+    "broad_compatibility_sweeps": 1,
+    "expected_historical_source_pin_failures": 11,
+    "historical_tests_weakened": 0,
+    "unattributed_completed_combined_suite_coordinates": 1,
+    "captured_replacement_suites": 2,
+    "clockwork_prepublication_rejections": 1,
+    "clockwork_rejection_reason": "The first intent supplied two parent relationships where the transaction schema requires exactly one and supplied contract evidence as paths where the schema requires objects. The check rejected before canonical mutation; the parent was narrowed to the immediately preceding node and contract paths remain in the artifact evidence category.",
+    "semantic_candidate_failures": 0
+  },
+  "assessment": "The tranche records real convergence because four pre-existing gaps close on accepted descendant evidence while two unsupported operational claims remain denied. It adds no control layer. The broad historical-pin sweep and one unretained yielded-session coordinate are measurable orchestration overhead and show that test applicability and process-coordinate capture still belong upstream in typed execution manifests.",
+  "next_operation": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006"
+}

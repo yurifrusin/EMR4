@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Recompute the fixed readiness verdict from exact accepted descendants before authoring any further check-in control layer.
+> Freeze exactly one disposable PostgreSQL attempt 006 and require an immutable terminal before any further recovery claim.
 
 ## North star
 
@@ -588,22 +588,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Closed admission values now have a pure typed observability bridge without runtime emission, transport or authority feedback. Lineage parent: `raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal`.
 286. **Move recurring bureaucratic correctness from model memory into deterministic graph-derived readings — Current-node closeout timestamp guard repair**
    Current-node closeout timestamps now fail closed automatically and the three exposing omissions are repaired without a new form or ledger. Lineage parent: `raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal`.
+287. **Replace inferred readiness with one exact reading of accepted evidence — Canonical check-in ordinary-practice admission-readiness convergence review**
+   Four previous gaps close without adding a control layer; two unsupported operational claims remain denied. Lineage parent: `ariadne-current-node-closeout-timestamp-guard-repair`.
 
 ## Current position
 
-**Return from bounded workflow repair to a graph-new product-readiness verdict — Current-node closeout timestamp guard repair**
+**Obtain the missing unknown-commit behavioral evidence before any ordinary-practice admission decision — Canonical check-in ordinary-practice admission-readiness convergence review**
 
-**Why this proof came next:** Accepted descendants now exist for all three original blocking gaps and all three operational-evidence gaps, but the original twelve-dimension verdict has not been recomputed against them.
+**Why this proof came next:** Attempt 005 failed before transaction setup, but its accepted server-lifecycle repairs now exist and the convergence review isolates this as one of only two remaining gaps.
 
-One exact read-only review will show which ordinary check-in admission gaps, if any, genuinely remain without enabling a practice.
+One separately frozen and checkpointed attempt 006 will either prove rollback/unknown-commit recovery in disposable PostgreSQL or preserve an exact failed-closed terminal.
 
 ### What this unlocks
 
-- A current evidence-backed decision about the next default-off check-in dependency rather than another inferred control artifact.
+- A current evidence-backed classification of the unknown-commit recovery dimension.
 
 ### What it does not solve
 
-- It does not authorize ordinary-practice activation, product/runtime changes, provider use, data access or client cutover.
+- It does not prove operational secret posture or authorise ordinary-practice activation, product data, provider use or production.
 
 ## Continuity and authority
 
@@ -1601,6 +1603,7 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-closeout.md`
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-plan.md`
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md`
+- `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md`
 - `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-closeout.md`
 - `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-plan.md`
 - `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-review.md`
@@ -2828,7 +2831,6 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-structured-diagnostic-wrapper-node-fixture-rehearsal/provider-free-node-fixture-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/deterministic-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-unclassified-pre-hmr-structured-diagnostic-seam-recovery/provider-free-structured-diagnostic-seam-evidence.json`
-- `orchestration/continuity/emr4-continuity-graph.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-acceptance-evidence.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-cost-ledger.json`
 - `orchestration/continuity/model-required-bureau-a3-b3-request-contract-recovery/occupied-rehearsal-evidence.json`
@@ -3027,6 +3029,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.example.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/provider-free-read-only-evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-contract.json`
 - `orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/route-mounting-readiness-review-contract.schema.json`
@@ -3820,4 +3823,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 391; continuity graph revision 409._
+_Compass map revision 392; continuity graph revision 410._

@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 391,
-  "updated_at": "2026-08-23T00:36:31.8959087+10:00",
-  "source_graph_revision": 409,
-  "orientation_statement": "Recompute the fixed readiness verdict from exact accepted descendants before authoring any further check-in control layer.",
+  "map_revision": 392,
+  "updated_at": "2026-08-23T01:06:59.0335269+10:00",
+  "source_graph_revision": 410,
+  "orientation_statement": "Freeze exactly one disposable PostgreSQL attempt 006 and require an immutable terminal before any further recovery claim.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5031,23 +5031,33 @@
         "tests/test_current_baton_consistency.py",
         "docs/ariadne-current-node-closeout-timestamp-guard-repair-closeout.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review",
+      "lineage_parent": "ariadne-current-node-closeout-timestamp-guard-repair",
+      "strategic_role": "Replace inferred readiness with one exact reading of accepted evidence",
+      "outcome": "Four previous gaps close without adding a control layer; two unsupported operational claims remain denied.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json",
+        "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "ariadne-current-node-closeout-timestamp-guard-repair",
-    "strategic_role": "Return from bounded workflow repair to a graph-new product-readiness verdict",
-    "why_now": "Accepted descendants now exist for all three original blocking gaps and all three operational-evidence gaps, but the original twelve-dimension verdict has not been recomputed against them.",
-    "outcome": "One exact read-only review will show which ordinary check-in admission gaps, if any, genuinely remain without enabling a practice.",
+    "node_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review",
+    "strategic_role": "Obtain the missing unknown-commit behavioral evidence before any ordinary-practice admission decision",
+    "why_now": "Attempt 005 failed before transaction setup, but its accepted server-lifecycle repairs now exist and the convergence review isolates this as one of only two remaining gaps.",
+    "outcome": "One separately frozen and checkpointed attempt 006 will either prove rollback/unknown-commit recovery in disposable PostgreSQL or preserve an exact failed-closed terminal.",
     "unlocks": [
-      "A current evidence-backed decision about the next default-off check-in dependency rather than another inferred control artifact."
+      "A current evidence-backed classification of the unknown-commit recovery dimension."
     ],
     "does_not_solve": [
-      "It does not authorize ordinary-practice activation, product/runtime changes, provider use, data access or client cutover."
+      "It does not prove operational secret posture or authorise ordinary-practice activation, product data, provider use or production."
     ],
     "evidence": [
-      "docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-closeout.md",
-      "docs/ariadne-current-node-closeout-timestamp-guard-repair-closeout.md",
-      "orchestration/continuity/emr4-continuity-graph.json"
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json",
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md",
+      "docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md"
     ]
   },
   "decision_horizon": [
