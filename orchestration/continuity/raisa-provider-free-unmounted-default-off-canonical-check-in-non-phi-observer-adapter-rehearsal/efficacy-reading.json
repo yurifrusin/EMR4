@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.unmounted_observer_adapter_efficacy.v1",
+  "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal",
+  "result": "pass",
+  "focused_tests_passed": 15,
+  "integrated_tests_passed": 132,
+  "external_worker_runs": 0,
+  "provider_requests": 0,
+  "database_or_docker_runs": 0,
+  "application_or_product_runtime_changes": 0,
+  "shared_kernel_reason_count": 12,
+  "rehearsal_only_kernel_reason_count": 1,
+  "future_only_manifest_reason_count": 3,
+  "metric_family_count": 5,
+  "critical_alert_count": 6,
+  "candidate_or_test_correction_cycles": 1,
+  "semantic_candidate_correction_cycles": 0,
+  "predecessor_closeout_timestamp_omissions_discovered": 3,
+  "candidate_commits": 1,
+  "efficacy_decision": "one_executable_graph_new_bridge_added_with_zero_semantic_external_or_runtime_reruns_and_one_brittle_prose_assertion_correction"
+}

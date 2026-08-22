@@ -2,25 +2,27 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "check-in-observability-manifest-closeout-tick-check",
+      "command_id": "check-in-observer-adapter-closeout-tick-check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_governance_clockwork_tick",
         "--check",
         "--intent",
-        "orchestration/continuity/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal/closeout/closeout-intent.json"
+        "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "check-in-observability-manifest-closeout-tests",
+      "command_id": "check-in-observer-adapter-closeout-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
+        "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_non_phi_observer_adapter_rehearsal.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
         "tests/test_raisa_provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_rehearsal.py",
         "tests/test_api_spine_artifacts.py",
         "tests/test_api_spine_appointment_openapi_drift_guard.py",
@@ -32,23 +34,25 @@
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "check-in-observability-manifest-closeout-ruff",
+      "command_id": "check-in-observer-adapter-closeout-ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "tests/test_raisa_provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_rehearsal.py"
+        "orchestration_harness/check_in_observability.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_non_phi_observer_adapter_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "check-in-observability-manifest-closeout-compile",
+      "command_id": "check-in-observer-adapter-closeout-compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "tests/test_raisa_provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_rehearsal.py"
+        "orchestration_harness/check_in_observability.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_non_phi_observer_adapter_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

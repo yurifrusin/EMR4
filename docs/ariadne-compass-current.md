@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Build one disabled executable bridge; do not add another architecture layer or attempt blocked operational activation evidence.
+> Make the timestamp a machine reading, then return immediately to graph-new check-in development.
 
 ## North star
 
@@ -584,22 +584,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The rollout, kill-switch and rollback procedure now has one byte-exact declarative home without opening runtime authority. Lineage parent: `raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation`.
 284. **Turn accepted default-off check-in control architecture into small canonical and executable dependencies before any activation gate — Default-off canonical check-in non-PHI observability manifest convergence**
    The exact non-PHI metric and alert vocabulary now has one canonical declarative home without emitting telemetry or opening runtime authority. Lineage parent: `raisa-provider-free-default-off-canonical-check-in-rollout-kill-switch-rollback-runbook-convergence-rehearsal`.
+285. **Turn accepted default-off check-in control contracts into small executable dependencies while preserving zero-work denial — Unmounted default-off canonical check-in non-PHI observer adapter**
+   Closed admission values now have a pure typed observability bridge without runtime emission, transport or authority feedback. Lineage parent: `raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal`.
 
 ## Current position
 
-**Connect the accepted pure admission kernel to the exact observability vocabulary through one unmounted globally disabled typed adapter — Default-off canonical check-in non-PHI observability manifest convergence**
+**Fold one recurring closeout timestamp memory requirement into the deterministic current-node consistency reading — Unmounted default-off canonical check-in non-PHI observer adapter**
 
-**Why this proof came next:** The kernel and canonical vocabulary both pass, their bridge is absent, and a pure disabled adapter is the smallest graph-new executable dependency.
+**Why this proof came next:** Fresh rehydration caught three omissions after publication; one bounded repair can restore them and prevent recurrence without creating a new form or ledger.
 
-Closed admission values can be mapped to typed metric and alert intents while the disabled path produces no output and no transport exists.
+The prior packet regains its required timestamps and every future current-node closeout fails if its Date and Brisbane ISO timestamp are absent or inconsistent.
 
 ### What this unlocks
 
-- A deterministic seam for a later separately authorised instrumentation mount and exporter integration.
+- More reliable clockwork closeouts with one less hand-authored memory obligation.
 
 ### What it does not solve
 
-- No metric emission, alert delivery, automatic rollback, ordinary activation, live secret custody, unknown-commit proof, client cutover or production readiness is opened.
+- It does not alter product behavior, instrumentation, admission, providers, data, deployment or the remaining operational check-in gates.
 
 ## Continuity and authority
 
@@ -1649,6 +1651,7 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-design.md`
 - `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-plan.md`
+- `docs/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-default-off-shadow-comparison-architecture-closeout.md`
@@ -3516,6 +3519,7 @@ Prerequisites:
 - `orchestration/prototypes/reception-one-yuri-internal-walkthrough/completed-review.json`
 - `orchestration_harness/active_operation.py`
 - `orchestration_harness/check_in_admission_control.py`
+- `orchestration_harness/check_in_observability.py`
 - `orchestration_harness/continuity_and_refinement.py`
 - `orchestration_harness/git_object_resolution.py`
 - `orchestration_harness/git_refs_snapshot.py`
@@ -3812,4 +3816,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 389; continuity graph revision 407._
+_Compass map revision 390; continuity graph revision 408._

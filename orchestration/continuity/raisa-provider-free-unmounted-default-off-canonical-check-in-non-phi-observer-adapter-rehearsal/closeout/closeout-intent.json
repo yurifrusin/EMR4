@@ -1,0 +1,242 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v1",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal",
+    "title": "Provider-free unmounted default-off canonical check-in non-PHI observer adapter closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T00:07:27.9299596+10:00",
+    "node": {
+      "id": "raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal",
+      "title": "Unmounted default-off canonical check-in non-PHI observer adapter",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority plus the accepted admission kernel and observability manifest admit one pure unmounted disabled bridge.",
+          "The only constructible runtime generation is disabled and produces no output or supplier access.",
+          "No product, configuration, API, client, transport, data, provider, database, runtime, deployment, Pages or protected ref changed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-pure-disabled-observer-adapter",
+          "source": "orchestration_harness/check_in_observability.py",
+          "status": "accepted",
+          "summary": "Accept one pure unmounted adapter with immutable metric/alert intents and a structurally disabled zero-work runtime generation."
+        },
+        {
+          "id": "preserve-kernel-manifest-asymmetry",
+          "source": "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Map twelve shared reasons exactly, reject the rehearsal-only reason without output and never fabricate three future-only manifest reasons."
+        },
+        {
+          "id": "preserve-observation-only-api-spine-boundary",
+          "source": "orchestration/agent_inbox/codex/raisa-canonical-check-in-non-phi-observer-adapter-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Keep intents non-authoritative and unmounted; REST/OpenAPI mutation authority and read-only GraphQL remain unchanged."
+        },
+        {
+          "id": "select-current-node-timestamp-guard-repair",
+          "source": "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Restore three omitted predecessor timestamps and add one reusable current-node consistency guard without a new ledger or form."
+        },
+        {
+          "id": "decline-model-worker-lanes",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Decline DeepSeek, Gemini and native subagents because the provider-free closed-set adapter is fully decided by deterministic admission."
+        }
+      ],
+      "claim_scope": [
+        "One pure unmounted observer adapter is present under orchestration_harness.",
+        "Its only constructible generation is globally disabled and returns the shared empty batch before supplier access.",
+        "Twelve shared reasons, five operations and six control outcomes map exactly to the accepted manifest.",
+        "The rehearsal-only reason releases no intent and three future-only reasons are not fabricated.",
+        "Pure tests can construct all five metric and six critical non-actuating alert intents from closed non-PHI material.",
+        "No worker, provider, database, Docker, application runtime or protected activity occurred."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-23--canonical-check-in-non-phi-observer-adapter.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-canonical-check-in-non-phi-observer-adapter-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_non_phi_observer_adapter_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_rehearsal.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_api_spine_appointment_openapi_drift_guard.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_compass.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/check_in_observability.py",
+          "orchestration_harness/check_in_admission_control.py",
+          "docs/api-spine/manifests/canonical-check-in-non-phi-observability.json"
+        ]
+      },
+      "unresolved_gates": [
+        "No operational instrumentation, registry, exporter, alert transport or automatic control action is mounted.",
+        "One rehearsal-only reason remains intentionally outside the production vocabulary and three future-production reasons remain outside the current kernel.",
+        "The preceding observability-manifest closeout packet has three timestamp omissions pending the selected bounded guard repair.",
+        "Environment secret-custody evidence and authoritative unknown-commit readback remain unproved.",
+        "Admission mounting, ordinary activation and atomic two-client cutover remain closed.",
+        "The native Harness remains unavailable for EMR4 worker allocation and Claude is not a silent fallback.",
+        "All product data, providers, production, deployment, release, Pages and protected-ref gates remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Turn accepted default-off check-in control contracts into small executable dependencies while preserving zero-work denial",
+      "outcome": "Closed admission values now have a pure typed observability bridge without runtime emission, transport or authority feedback.",
+      "evidence": [
+        "orchestration_harness/check_in_observability.py",
+        "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Fold one recurring closeout timestamp memory requirement into the deterministic current-node consistency reading",
+      "why_now": "Fresh rehydration caught three omissions after publication; one bounded repair can restore them and prevent recurrence without creating a new form or ledger.",
+      "outcome": "The prior packet regains its required timestamps and every future current-node closeout fails if its Date and Brisbane ISO timestamp are absent or inconsistent.",
+      "unlocks": [
+        "More reliable clockwork closeouts with one less hand-authored memory obligation."
+      ],
+      "does_not_solve": [
+        "It does not alter product behavior, instrumentation, admission, providers, data, deployment or the remaining operational check-in gates."
+      ],
+      "evidence": [
+        "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal-closeout.md",
+        "AGENTS.md",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "orientation_statement": "Make the timestamp a machine reading, then return immediately to graph-new check-in development."
+    },
+    "next_operation": {
+      "operation_id": "ariadne-current-node-closeout-timestamp-guard-repair",
+      "active_tranche": "Ariadne current-node closeout timestamp guard repair",
+      "objective": "Restore the required Brisbane ISO timestamp to exactly the three observability-manifest predecessor summaries and add one deterministic current-node Baton consistency guard for referenced plans, closeouts and acceptances, without adding a form or ledger or changing product, provider, data, deployment or protected refs.",
+      "authority_source": "Yuri's standing workflow-tightening authority plus the fresh rehydration finding and existing AGENTS timestamp rule select one bounded recurrence guard.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_exact_current_node_timestamp_guard_repair_plan"
+    },
+    "incidents": [],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "check-in-observer-adapter-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "check-in-observer-adapter-closeout-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_non_phi_observer_adapter_rehearsal.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_rehearsal.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_api_spine_appointment_openapi_drift_guard.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_compass.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "check-in-observer-adapter-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "orchestration_harness/check_in_observability.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_non_phi_observer_adapter_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "check-in-observer-adapter-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "orchestration_harness/check_in_observability.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_non_phi_observer_adapter_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-plan.md",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-627.md",
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--native-harness-corrected-graph-useful-recovery.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "current_node_timestamp_guard_repair_only",
+    "only_three_predecessor_timestamp_lines_and_one_reusable_baton_consistency_guard_may_change",
+    "no_new_form_ledger_or_manual_receipt_field",
+    "no_semantic_rewrite_of_accepted_closeout_evidence",
+    "no_application_configuration_route_openapi_graphql_or_client_change",
+    "no_native_deepseek_harness_worker_or_claude_fallback",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_action_grammar_or_first_party_client_change",
+    "no_generic_status_arrived_change_or_waiting_area_movement",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_provider_database_docker_or_production_runtime",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}
