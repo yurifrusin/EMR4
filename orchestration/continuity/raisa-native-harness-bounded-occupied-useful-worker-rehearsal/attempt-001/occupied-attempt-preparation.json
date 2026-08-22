@@ -1,0 +1,33 @@
+{
+  "attempt_id": "deepseek-native-check-in-runbook-worker-001",
+  "attempt_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-runbook-worker-001",
+  "authority_sha256": "9e7f567dadc2dbe7b1cf2e1f0e63179acff348d36a53fa4539372ae83f3b3e5d",
+  "candidate_source": "3298c97e07cb1670835ea774368f14897c659cd6",
+  "checkpoint_admitted": false,
+  "command_manifest_sha256": "83bebc13823f9022f4d534c7a70b910106b8fb3915ad8b40a3ce47f50a1a5298",
+  "forbidden_sha256": "f76c70f63a0ed20aa248ac916338e6cbd316dc460afbd3580671e3805573b3a7",
+  "native_process_count": 0,
+  "no_database_admission_sha256": "186128e09d181f6dd1a037119e2347d12dd62ad170450c86616836af48427118",
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+  "profile": {
+    "bridge_sha256": "3a49b28174eeefd77d7efe0a00498901ac6636b637ed9dfe60aba46980df1d0b",
+    "guard_sha256": "76029da0f9c030651fd10c0df16f4e75e86b2269d7560af7f94c74680f8598b9",
+    "package_json_sha256": "7a9f356ad1e27c7013b44619bc675b8cb877f995cd0951ab3dfeb10d4edcc361",
+    "package_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-runbook-worker-001/installation/node_modules/@deepseek-ai/dsh",
+    "preset_sha256": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1",
+    "runner_sha256": "76bed287b5af6c2a2ebde18003b80495ccd960e8374505cf7074f996a28d4adf",
+    "sanitizer_sha256": "12552925a600dc951afc30b9a738746499c7e2f4cefc9962bc05fb06780f158f",
+    "sentinel_sha256": "8b53bc7fb781d29d87310ee2d3425ca159a62fed4893a3e4db94069d63cd60bd"
+  },
+  "provider_request_count": 0,
+  "review_receipt": "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-deterministic-admission-final-receipt.json",
+  "review_receipt_sha256": "f5e1e18bedf19cda809ace739d9945afa9e1c0611f503f304726eeef2a94c4d1",
+  "schema_version": "ariadne.native_harness_useful_worker_preparation.v1",
+  "status": "passed",
+  "work_order_sha256": "1a2817c9481a7812ce7ae6863ff5b6a545ab9360f3b2e7962fc34c8652870f25",
+  "workspace": {
+    "baseline_commit": "b169ab2af4ee56d591234571c2106ebcd5e58cdb",
+    "baseline_sha256": "9b9900a6aa084c458094ec89cb0bc816aa3a787fb84a1188abdd0897db43afd1",
+    "workspace": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-runbook-worker-001/workspace"
+  }
+}

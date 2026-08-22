@@ -1,0 +1,30 @@
+{
+  "admitted_tool_names": [
+    "edit"
+  ],
+  "allowed_tool_names": [
+    "edit",
+    "glob",
+    "read"
+  ],
+  "attempt_id": "deepseek-native-check-in-runbook-worker-001",
+  "automatic_retries": 0,
+  "auxiliary_model_calls": 0,
+  "broker_currency_cap_enforced": false,
+  "candidate_source": "3298c97e07cb1670835ea774368f14897c659cd6",
+  "fallbacks": 0,
+  "manual_retries": 0,
+  "maximum_native_wall_clock_seconds": 420,
+  "maximum_output_tokens": 4096,
+  "maximum_parallel_tool_calls": 1,
+  "maximum_provider_calls": 1,
+  "maximum_upstream_wall_clock_seconds": 300,
+  "model": "deepseek-v4-flash",
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+  "owned_path": "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json",
+  "prompt_sha256": "210d10e29fb94261fe321f1992768085a63fd943a2b70970984360e53d2fa0c2",
+  "provider": "deepseek-official",
+  "provider_balance_top_up_authorized": false,
+  "provider_spend_source": "existing_user_controlled_prepaid_balance",
+  "reasoning_effort": "high"
+}

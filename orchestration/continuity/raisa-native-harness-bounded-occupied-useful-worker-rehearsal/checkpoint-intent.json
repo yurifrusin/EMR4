@@ -1,0 +1,64 @@
+{
+  "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+  "completed_stage": "At exact full reviewed source 3298c97e07cb1670835ea774368f14897c659cd6, the closed API Spine runbook candidate, native-Harness runner, validation-runner Git-object resolution, descendant evidence-only checkpoint binding and tranche-owned exact cleanup guard pass deterministic admission. The disposable attempt is freshly prepared from that source through its immutable final admission receipt with zero native processes and zero provider requests.",
+  "next_executable_stage": "fresh_five_source_preexecution_rehydration_then_execute_exactly_one_native_harness_deepseek_v4_flash_high_turn_with_one_provider_request_one_direct_edit_zero_retry_and_complete_cleanup",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "useful-worker-static-admission",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.raisa_native_harness_bounded_occupied_useful_worker_rehearsal",
+          "--check"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "useful-worker-preexecution-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "useful-worker-preexecution-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "orchestration_harness/check_in_rollout_runbook.py",
+          "scripts/raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "useful-worker-preexecution-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "orchestration_harness/check_in_rollout_runbook.py",
+          "scripts/raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "attempt_id": "deepseek-native-check-in-runbook-worker-001",
+  "attempt_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-runbook-worker-001",
+  "automatic_retry_limit": 0,
+  "auxiliary_model_call_limit": 0,
+  "candidate_source": "3298c97e07cb1670835ea774368f14897c659cd6",
+  "checkpoint_admitted": true,
+  "checkpoint_source": "34a484a2998bc4cb7e2554d99ebd020351b79d77",
+  "clockwork_checkpoint_sha256": "f8ba17700ed890acde23830210a39e8eac7df41178c1fb3e85a15d36532c121b",
+  "expected_changed_paths": [
+    "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json"
+  ],
+  "expected_tool_names": [
+    "edit"
+  ],
+  "fallback_limit": 0,
+  "native_process_limit": 1,
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-rehearsal",
+  "preparation_sha256": "101f911b54c00ecca3df01eaad4ae73df00a2f71ed9a7aef7d3cc7bab595cac5",
+  "prompt_sha256": "210d10e29fb94261fe321f1992768085a63fd943a2b70970984360e53d2fa0c2",
+  "provider_request_limit": 1,
+  "review_receipt": "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-deterministic-admission-final-receipt.json",
+  "review_receipt_sha256": "f5e1e18bedf19cda809ace739d9945afa9e1c0611f503f304726eeef2a94c4d1",
+  "runner_sha256": "76bed287b5af6c2a2ebde18003b80495ccd960e8374505cf7074f996a28d4adf",
+  "schema_version": "ariadne.native_harness_useful_worker_checkpoint.v1",
+  "status": "admitted",
+  "work_order_sha256": "1a2817c9481a7812ce7ae6863ff5b6a545ab9360f3b2e7962fc34c8652870f25"
+}
