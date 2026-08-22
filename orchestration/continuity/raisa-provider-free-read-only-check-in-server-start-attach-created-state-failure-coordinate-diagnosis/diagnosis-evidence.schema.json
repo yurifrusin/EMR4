@@ -1,0 +1,241 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/check-in-start-attach-created-state-diagnosis-evidence.v1.json",
+  "title": "Check-in start/attach created-state diagnosis evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "result",
+    "source_head",
+    "input_bindings_verified",
+    "cli_evidence",
+    "source_coordinate",
+    "attempt_006_projection",
+    "coordinate",
+    "bounded_conclusion",
+    "unresolved_causes",
+    "repair",
+    "closed_boundaries"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "emr4.check-in-start-attach-created-state-diagnosis-evidence.v1"
+    },
+    "operation_id": {
+      "const": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis"
+    },
+    "result": {
+      "const": "raisa_provider_free_read_only_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_pass"
+    },
+    "source_head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "input_bindings_verified": {
+      "const": true
+    },
+    "cli_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "commands_executed",
+        "docker_object_command_count",
+        "version_return_code",
+        "start_help_return_code",
+        "client_version",
+        "server_version",
+        "start_help_sha256",
+        "advertised_options"
+      ],
+      "properties": {
+        "commands_executed": {
+          "const": [
+            "docker_version",
+            "docker_start_help"
+          ]
+        },
+        "docker_object_command_count": {
+          "const": 0
+        },
+        "version_return_code": {
+          "const": 0
+        },
+        "start_help_return_code": {
+          "const": 0
+        },
+        "client_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "maxLength": 24
+        },
+        "server_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "maxLength": 24
+        },
+        "start_help_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "advertised_options": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "attach",
+            "interactive",
+            "sig_proxy"
+          ],
+          "properties": {
+            "attach": {
+              "const": true
+            },
+            "interactive": {
+              "const": true
+            },
+            "sig_proxy": {
+              "const": false
+            }
+          }
+        }
+      }
+    },
+    "source_coordinate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "function",
+        "argv_profile",
+        "unsupported_options"
+      ],
+      "properties": {
+        "function": {
+          "const": "_start_attached"
+        },
+        "argv_profile": {
+          "const": [
+            "<executable>",
+            "start",
+            "--attach",
+            "--interactive",
+            "--sig-proxy=false",
+            "<container_id>"
+          ]
+        },
+        "unsupported_options": {
+          "const": [
+            "--sig-proxy"
+          ]
+        }
+      }
+    },
+    "attempt_006_projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage",
+        "code",
+        "status",
+        "running",
+        "attachment_process",
+        "attachment_stdin",
+        "readiness_completed",
+        "transaction_steps_started"
+      ],
+      "properties": {
+        "stage": {
+          "const": "environment"
+        },
+        "code": {
+          "const": "server_not_running_after_readiness"
+        },
+        "status": {
+          "const": "created"
+        },
+        "running": {
+          "const": false
+        },
+        "attachment_process": {
+          "const": "exited_nonzero"
+        },
+        "attachment_stdin": {
+          "const": "open_after_delivery"
+        },
+        "readiness_completed": {
+          "const": false
+        },
+        "transaction_steps_started": {
+          "const": false
+        }
+      }
+    },
+    "coordinate": {
+      "enum": [
+        "cli_option_surface_mismatch",
+        "composite_start_attach_exited_while_oci_created",
+        "container_exited_after_start",
+        "readiness_expired_while_running",
+        "insufficient_closed_evidence"
+      ]
+    },
+    "bounded_conclusion": {
+      "const": "docker_start_help_does_not_advertise_sig_proxy_but_the_exact_start_argv_supplies_it"
+    },
+    "unresolved_causes": {
+      "const": []
+    },
+    "repair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "surface",
+        "implemented",
+        "attempt_007_authorized"
+      ],
+      "properties": {
+        "surface": {
+          "const": "remove_unsupported_sig_proxy_option_from_docker_start_argv"
+        },
+        "implemented": {
+          "const": false
+        },
+        "attempt_007_authorized": {
+          "const": false
+        }
+      }
+    },
+    "closed_boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "docker_object_commands",
+        "postgresql_processes",
+        "sql_or_database_attempts",
+        "provider_requests",
+        "product_effects",
+        "ordinary_admission_releases"
+      ],
+      "properties": {
+        "docker_object_commands": {
+          "const": 0
+        },
+        "postgresql_processes": {
+          "const": 0
+        },
+        "sql_or_database_attempts": {
+          "const": 0
+        },
+        "provider_requests": {
+          "const": 0
+        },
+        "product_effects": {
+          "const": 0
+        },
+        "ordinary_admission_releases": {
+          "const": 0
+        }
+      }
+    }
+  }
+}

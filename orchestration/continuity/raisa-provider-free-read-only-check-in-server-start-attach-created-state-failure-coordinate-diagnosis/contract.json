@@ -1,0 +1,74 @@
+{
+  "schema_version": "emr4.check-in-start-attach-created-state-diagnosis-contract.v1",
+  "operation_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+  "plan_source": "765927b6e844cf183a7b03eca376f6b02f9104e2",
+  "protected_source": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+  "result": "raisa_provider_free_read_only_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_pass",
+  "source_bindings": [
+    {
+      "path": "docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-plan.md",
+      "sha256": "5fa5b97063ece2cce96eed840a9bec83443a2efeccb5eeb5b331af0a6fbce42a"
+    },
+    {
+      "path": "docs/security/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-threat-model-delta.md",
+      "sha256": "635e87a6f9bee95022cbd511b01cc0af8af07e9b28a7221ef7fe57b5592e1ba5"
+    },
+    {
+      "path": "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+      "sha256": "839a9a17b22aa132ea5bddf878f59f4741412cb1ee464020f34aa2aefbdff8e2"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/rehearsal-failure-evidence.json",
+      "sha256": "3c7049b318fffb28aa70e8b4346f1ed857b7cf34e1780eec21373935f6c88efd"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/attempt-006-execution-envelope.json",
+      "sha256": "52470c6c6245f0988dd4f580e68f7a0e21ce5b8636e60119091c089d603bde1c"
+    },
+    {
+      "path": "orchestration/continuity/raisa-provider-free-docker-created-state-profile-conformance-repair/created-state-representation-evidence.json",
+      "sha256": "9f721e0d0e11f5570c2ebe95f8e62d4f1f0e7b2af27f704e4108e2f1792fb98b"
+    }
+  ],
+  "cli_manifest": {
+    "docker_version": [
+      "docker.exe",
+      "version",
+      "--format",
+      "{{.Client.Version}}|{{.Server.Version}}"
+    ],
+    "docker_start_help": [
+      "docker.exe",
+      "start",
+      "--help"
+    ]
+  },
+  "coordinate_vocabulary": [
+    "cli_option_surface_mismatch",
+    "composite_start_attach_exited_while_oci_created",
+    "container_exited_after_start",
+    "readiness_expired_while_running",
+    "insufficient_closed_evidence"
+  ],
+  "expected_source_argv": [
+    "<executable>",
+    "start",
+    "--attach",
+    "--interactive",
+    "--sig-proxy=false",
+    "<container_id>"
+  ],
+  "expected_coordinate": "cli_option_surface_mismatch",
+  "expected_unsupported_option": "--sig-proxy",
+  "repair_surface": "remove_unsupported_sig_proxy_option_from_docker_start_argv",
+  "closed_boundaries": {
+    "docker_object_commands": 0,
+    "postgresql_processes": 0,
+    "sql_or_database_attempts": 0,
+    "provider_requests": 0,
+    "product_effects": 0,
+    "ordinary_admission_releases": 0,
+    "attempt_007_authorized": false,
+    "repair_implemented": false
+  }
+}
