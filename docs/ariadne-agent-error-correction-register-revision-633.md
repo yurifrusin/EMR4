@@ -4,8 +4,8 @@ Date: 2026-08-23
 
 <!-- ariadne-agent-error-register-reading
 revision: 633
-incident_count: 1027
-new_incident_ids: AER-1021,AER-1022,AER-1023,AER-1024,AER-1025,AER-1026,AER-1027
+incident_count: 1028
+new_incident_ids: AER-1021,AER-1022,AER-1023,AER-1024,AER-1025,AER-1026,AER-1027,AER-1028
 open_incident_count: 0
 -->
 
@@ -67,3 +67,13 @@ rev-parse HEAD`, and the revert succeeded.
 The durable control is the one Yuri previously requested: no displayed prefix
 is ever completed from memory. Commands that require a commit consume a
 machine-resolved full object value.
+
+## AER-1028 — Closeout intent invented an unindexed acceptance label
+
+Status: `closed_corrected`
+
+The first clockwork dry run rejected the descriptive repair-acceptance label
+as outside the closed active-label vocabulary before canonical mutation. The
+corrected intent selects `Current DeepSeek native Harness acceptance` directly
+from the machine-read manifest and keeps detailed repair meaning in the graph,
+closeout and acceptance artifacts.

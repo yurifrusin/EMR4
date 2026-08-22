@@ -70,7 +70,7 @@ closed pending its own fresh authority and frozen plan.
 ## Workflow efficacy and contained incidents
 
 The two product-harness rerun causes were retired, but the orchestration layer
-was not spotless. Seven local incidents were contained:
+was not spotless. Eight local incidents were contained:
 
 - machine-owned Git objects were repeated in receipt prose and rejected;
 - the new direct CLI lacked its repository import bootstrap;
@@ -78,16 +78,17 @@ was not spotless. Seven local incidents were contained:
 - six ordinary-pytest sessions loaded the database autouse conftest;
 - the orchestrator drafted the clockwork-owned incident register directly;
 - a post-publication Baton consistency test was selected before publication;
-  and
 - a displayed short commit was manually expanded into a nonexistent object for
-  the first revert command.
+  the first revert command; and
+- the first closeout intent used a descriptive acceptance label outside the
+  machine-read active vocabulary and was rejected before publication.
 
 The six database-bearing test results are excluded. The exact 83-test
 candidate profile and the complete incident-register suite were rerun through
 `scripts.ariadne_provider_free_pytest`; both replacement profiles passed with
 conftest, plugin autoload and inherited database configuration disabled. The
 direct register draft was reverted, so the clockwork remains the sole writer.
-The final closeout intent supplies all seven incidents for atomic register,
+The final closeout intent supplies all eight incidents for atomic register,
 Baton and pattern-report projection.
 
 No product, patient or clinical data and no occupied rehearsal were involved.

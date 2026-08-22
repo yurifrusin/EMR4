@@ -15,7 +15,7 @@
     "occupied_runs_used": 0,
     "excluded_ordinary_pytest_database_sessions": 6,
     "provider_free_replacement_profiles_passed": 2,
-    "local_process_incidents": 7
+    "local_process_incidents": 8
   },
   "recurrent_gears": [
     "prospective_success_projection_static_gate",

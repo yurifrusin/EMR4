@@ -1,0 +1,125 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free check-in prospective-success redaction and typed cleanup-projection conformance repair",
+    "completed_stage": "Accepted raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_prospective_success_redaction_and_typed_cleanup_projection_repair_plan",
+    "operation_id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+    "resume_after_compaction": true,
+    "source_head": "ca7970b3520b2c38e9abd6fee3462ebb743792e0",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "post_compaction",
+  "git_object_resolution": {
+    "observed_head": "cbfd211190f4bc86e6793b530ef4692af7b2d9d0",
+    "reason_codes": [],
+    "resolved_commit": "ca7970b3520b2c38e9abd6fee3462ebb743792e0",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "ca7970b3520b2c38e9abd6fee3462ebb743792e0"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "cbfd211190f4bc86e6793b530ef4692af7b2d9d0",
+    "branch_origin_aligned": false,
+    "head": "cbfd211190f4bc86e6793b530ef4692af7b2d9d0",
+    "origin_branch_commit": "5d93380060f31bab21bddc9ffdd5580754eb4fc6",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 674
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "post_compaction",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The active latch forbids a native DeepSeek Harness worker and provider call; only a deterministic serial clockwork closeout remains.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "No external veto adds evidence beyond the exact provider-free source, schema, process-fake and clockwork gates at this checkpoint.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive native delegation and the clockwork publication is a single-writer serial transaction.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "clockwork_check_passed",
+      "clockwork_published",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol selects the acceptance label from the machine-read active vocabulary before clockwork check",
+      "the provider-free prepublication command manifest passes before publication",
+      "clockwork alone updates canonical governance surfaces",
+      "postpublication projection tests run only after the atomic tick"
+    ]
+  },
+  "planned_action": "resume_provider_free_repair_closeout_by_correcting_the_clockwork_intent_then_running_atomic_check_publication_and_postpublication_verification",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-attempt-007-redaction-cleanup-diagnosis-sol-acceptance.md",
+      "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-plan.md",
+      "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-prospective-success-redaction-and-typed-cleanup-projection-repair-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/closeout/closeout-intent.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns this serial deterministic closeout. DeepSeek remains declined because the active latch forbids its worker and provider lane. Gemini remains declined because the exact candidate is fully determined by local source, schema and process-fake evidence. Native subagents remain declined because developer policy prohibits proactive delegation and the clockwork transaction is single-writer serial work.",
+    "git_refs_and_worktree": "The task HEAD, task branch, origin task ref, four protected refs, tracked-worktree state and preserved docs/branding presence were verified immediately before this receipt. Exact identities and counts are supplied only by the receipt builder machine snapshot.",
+    "live_handover_current_baton": "AGENTS.md was reread completely after conversation compaction. The live Baton still selects the provider-free prospective-success redaction and typed cleanup-projection repair and preserves the closed product, provider, protected-ref and attempt-008 boundaries.",
+    "protected_evidence_boundaries": "Only deterministic provider-free closeout correction, verification and clockwork publication are permitted. No ordinary pytest or serial pytest may load the database conftest. No Docker, PostgreSQL, SQL, database, attempt 008, worker/provider, product/API/client/grammar/waiting-area/data/runtime/deployment/release/Pages/protected-ref activity is authorised. docs/branding and all unrelated untracked files remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

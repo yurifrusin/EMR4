@@ -17,8 +17,8 @@ across late redaction/schema failure with zero success release.
 
 Only the passing no-conftest provider-free replacement suites are admitted.
 Six ordinary-pytest synthetic-test-database sessions are excluded and recorded
-as material AER-1024. Six additional contained local process incidents bring
-the closeout batch to AER-1021 through AER-1027. The direct canonical-register
+as material AER-1024. Seven additional contained local process incidents bring
+the closeout batch to AER-1021 through AER-1028. The direct canonical-register
 draft was reverted; clockwork remains the sole writer.
 
 This acceptance grants no attempt 008, Docker/PostgreSQL/SQL/database

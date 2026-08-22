@@ -1,0 +1,185 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "resume_provider_free_repair_closeout_by_correcting_the_clockwork_intent_then_running_atomic_check_publication_and_postpublication_verification",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely after conversation compaction. The live Baton still selects the provider-free prospective-success redaction and typed cleanup-projection repair and preserves the closed product, provider, protected-ref and attempt-008 boundaries.",
+    "current_authority_allocation": "GPT Sol owns this serial deterministic closeout. DeepSeek remains declined because the active latch forbids its worker and provider lane. Gemini remains declined because the exact candidate is fully determined by local source, schema and process-fake evidence. Native subagents remain declined because developer policy prohibits proactive delegation and the clockwork transaction is single-writer serial work.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-attempt-007-redaction-cleanup-diagnosis-sol-acceptance.md",
+      "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-plan.md",
+      "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-prospective-success-redaction-and-typed-cleanup-projection-repair-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/closeout/closeout-intent.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Only deterministic provider-free closeout correction, verification and clockwork publication are permitted. No ordinary pytest or serial pytest may load the database conftest. No Docker, PostgreSQL, SQL, database, attempt 008, worker/provider, product/API/client/grammar/waiting-area/data/runtime/deployment/release/Pages/protected-ref activity is authorised. docs/branding and all unrelated untracked files remain preserved; explicit-path staging only.",
+    "git_refs_and_worktree": "The task HEAD, task branch, origin task ref, four protected refs, tracked-worktree state and preserved docs/branding presence were verified immediately before this receipt. Exact identities and counts are supplied only by the receipt builder machine snapshot."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+    "active_tranche": "Raisa provider-free check-in prospective-success redaction and typed cleanup-projection conformance repair",
+    "objective": "Freeze and implement the narrow provider-free deterministic repair that validates the complete prospective success-evidence projection before occupied work and carries the base-finalized cleanup projection through a typed post-finalization terminal bridge, without creating a Docker object, starting PostgreSQL, executing SQL or authorising attempt 008.",
+    "status": "in_progress",
+    "source_head": "ca7970b3520b2c38e9abd6fee3462ebb743792e0",
+    "authority_source": "Yuri's standing uninterrupted-development authority and the accepted attempt-007 redaction and cleanup-projection coordinate diagnosis.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_prospective_success_redaction_and_typed_cleanup_projection_repair_plan",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_only",
+      "complete_prospective_success_projection_redaction_gate_before_any_occupied_work",
+      "typed_base_owned_post_finalization_cleanup_projection_bridge_only",
+      "forbidden_field_predicate_unchanged_and_closed_boundary_default_denial_preserved",
+      "deterministic_source_ast_schema_and_process_fake_evidence_only",
+      "attempt_007_terminal_immutable_no_retry_resume_overwrite_or_reclassification",
+      "no_docker_object_creation_postgresql_start_sql_or_database_execution",
+      "no_attempt_008_plan_checkpoint_or_execution",
+      "no_native_deepseek_harness_worker_or_provider_call",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_application_configuration_route_openapi_graphql_or_client_change",
+      "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_existing_hosted_live_or_production_database",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+    "assessed_stage": "post_compaction",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The active latch forbids a native DeepSeek Harness worker and provider call; only a deterministic serial clockwork closeout remains.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "No external veto adds evidence beyond the exact provider-free source, schema, process-fake and clockwork gates at this checkpoint.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive native delegation and the clockwork publication is a single-writer serial transaction.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "Sol selects the acceptance label from the machine-read active vocabulary before clockwork check",
+      "the provider-free prepublication command manifest passes before publication",
+      "clockwork alone updates canonical governance surfaces",
+      "postpublication projection tests run only after the atomic tick"
+    ],
+    "reassessment_triggers": [
+      "clockwork_check_passed",
+      "clockwork_published",
+      "closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "complete AGENTS reread, active latch and current plan/acceptance reread, exact ref/worktree verification and machine-read acceptance-label roster",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol rehydrated all five authority sources, validated the latch and restored all three lane dispositions after compaction."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Historical transport is not selected and no fallback is authorised."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Verifier lane is declined; no provider call is permitted."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["Native lane is declined and no native subagent was spawned."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Fallback not selected."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

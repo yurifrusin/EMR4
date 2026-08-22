@@ -39,8 +39,9 @@ evidence SHA-256 is
 The exact 83-test candidate profile and complete register suite passed through
 the provider-free runner. Six ordinary-pytest results were excluded because
 autouse conftest touched only the local authored-synthetic test schema. AER-1021
-through AER-1027 record all seven process incidents, including the direct
-canonical-register draft that was reverted before clockwork publication.
+through AER-1028 record all eight process incidents, including the direct
+canonical-register draft that was reverted before clockwork publication and
+the descriptive acceptance label rejected by the closed manifest vocabulary.
 
 ## Deliberately closed
 

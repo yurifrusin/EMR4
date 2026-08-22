@@ -164,7 +164,8 @@
       {"incident_id": "repair-provider-free-database-conftest", "source_id": "repair-local-004", "peers": []},
       {"incident_id": "repair-direct-register-draft", "source_id": "repair-local-005", "peers": []},
       {"incident_id": "repair-prepublication-baton-test", "source_id": "repair-local-006", "peers": []},
-      {"incident_id": "repair-manual-revert-object", "source_id": "repair-local-007", "peers": []}
+      {"incident_id": "repair-manual-revert-object", "source_id": "repair-local-007", "peers": []},
+      {"incident_id": "repair-unindexed-baton-acceptance-label", "source_id": "repair-local-008", "peers": []}
     ],
     "broker": {"enabled": false, "posture": "provider_free_shadow"}
   },
@@ -223,18 +224,11 @@
     ]
   },
   "baton_acceptance": {
-    "label": "Check-in prospective-success redaction and typed cleanup-projection repair acceptance",
+    "label": "Current DeepSeek native Harness acceptance",
     "paths": [
       "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-plan.md",
-      "docs/security/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-threat-model-delta.md",
-      "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-contract.json",
       "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-evidence.json",
-      "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/repair-report.md",
       "orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/efficacy-reading.json",
-      "scripts/raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
-      "scripts/raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
-      "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
-      "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_plan.py",
       "docs/ariadne-agent-error-correction-register-revision-633.md",
       "docs/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair-closeout.md",
       "orchestration/agent_inbox/codex/raisa-check-in-prospective-success-redaction-and-typed-cleanup-projection-repair-sol-acceptance.md",
@@ -420,6 +414,29 @@
       "causal_claim_level": "observation_only",
       "correction": {"status": "control_added", "action": "Resolve and copy the exact full HEAD object before the successful revert.", "prevention_control": "Commands that require a commit consume a machine-resolved full object and never complete a displayed prefix from memory.", "evidence_paths": ["orchestration_harness/git_object_resolution.py", "docs/ariadne-agent-error-correction-register-revision-633.md"]},
       "baton_summary": "records one rejected manual Git object expansion and exact resolved correction."
+    },
+    {
+      "attempt_key": "repair-unindexed-baton-acceptance-label-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair",
+      "role": "orchestrator",
+      "resource_id": "clockwork-baton-compaction",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A clockwork closeout selects its live acceptance label from the manifest-listed active vocabulary before invocation.",
+      "observed_error": "The first closeout intent invented a descriptive repair-acceptance label outside the active vocabulary.",
+      "detection_method": "The clockwork dry run rejected tick_baton_compaction_unindexed before generation construction, canonical mutation or publication.",
+      "evidence_paths": ["orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/closeout/closeout-intent.json", "docs/handover-ledgers/current-baton-acceptance-index.manifest.json"],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_baton_label_unindexed_at_compaction_boundary",
+      "causal_claim_level": "observation_only",
+      "correction": {"status": "control_added", "action": "Select the exact Current DeepSeek native Harness acceptance rolling label from the machine-read active_labels array and keep detailed repair meaning in graph-owned artifacts.", "prevention_control": "Resolve acceptance labels against active_labels before every clockwork invocation; the next workflow tranche will make this a typed input.", "evidence_paths": ["orchestration/continuity/raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair/closeout/closeout-intent.json", "docs/handover-ledgers/current-baton-acceptance-index.manifest.json"]},
+      "baton_summary": "records one fail-closed rejection of an unindexed acceptance label and its machine-vocabulary correction."
     }
   ]
 }

@@ -64,12 +64,15 @@ no-database process boundary. No product, patient or clinical data and no
 occupied rehearsal were involved. AER-1024 records the material recurrence of
 AER-0358; only the provider-free replacement profiles above are admitted.
 
-Six other local workflow incidents were contained: receipt prose repeated
+Seven other local workflow incidents were contained: receipt prose repeated
 machine-owned Git objects; a direct CLI import bootstrap was missing; a serial
 runner received a nested Python command; the clockwork-owned register was
 drafted directly and then reverted; a post-publication Baton test was selected
 pre-publication; and a short Git display was manually expanded into a
-nonexistent revert object. AER-1021 through AER-1027 record the complete set.
+nonexistent revert object. The first closeout intent also invented an
+acceptance label outside the machine-read active vocabulary; the clockwork
+rejected it before publication. AER-1021 through AER-1028 record the complete
+set.
 
 The product-harness result is accepted because the exact candidate and all
 admitted evidence are deterministic and provider-free. The process is not
