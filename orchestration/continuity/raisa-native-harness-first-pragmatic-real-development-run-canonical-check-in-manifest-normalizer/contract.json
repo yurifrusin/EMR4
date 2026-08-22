@@ -1,0 +1,142 @@
+{
+  "schema_version": "emr4.check-in-environment-manifest-normalizer-contract.v1",
+  "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+  "result": "closed_manifest_normalizer_contract_frozen",
+  "source_contract": "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/environment-manifest.schema.json",
+  "api_spine_classification": "yaml_manifest_declarative_input_normalized_into_typed_unmounted_code",
+  "public_function": "normalize_check_in_environment_manifest",
+  "input": {
+    "type": "exact_bytes",
+    "minimum_bytes": 1,
+    "maximum_bytes": 32768,
+    "encoding": "utf_8_strict",
+    "bom_allowed": false,
+    "nul_allowed": false,
+    "carriage_return_allowed": false,
+    "tab_allowed": false,
+    "terminal_lf": "exactly_one_required",
+    "yaml_document_count": 1,
+    "root_type": "mapping"
+  },
+  "parser_controls": {
+    "dependency": "PyYAML==6.0.3",
+    "loader": "local_safe_loader_subclass",
+    "unsafe_load_allowed": false,
+    "full_load_allowed": false,
+    "anchors_allowed": false,
+    "aliases_allowed": false,
+    "explicit_tags_allowed": false,
+    "merge_keys_allowed": false,
+    "duplicate_keys_allowed": false,
+    "non_string_mapping_keys_allowed": false,
+    "scalar_domain": ["string", "integer", "boolean", "null"],
+    "float_allowed": false,
+    "timestamp_constructor_allowed": false,
+    "custom_object_constructor_allowed": false
+  },
+  "required_top_level_fields": [
+    "schema_version",
+    "manifest_id",
+    "environment",
+    "admission_snapshot_generation",
+    "authority_git_object",
+    "practice_scope_reference",
+    "runtime_role",
+    "secret_references",
+    "rotation_evidence",
+    "break_glass",
+    "issued_at",
+    "expires_at"
+  ],
+  "ordered_slot_ids": [
+    "database_connection_credential",
+    "application_token_signing_key",
+    "admission_snapshot_verification_key"
+  ],
+  "forbidden_field_names_after_casefold_and_hyphen_normalization": [
+    "value",
+    "secret_value",
+    "password",
+    "token",
+    "private_key",
+    "database_url",
+    "connection_url",
+    "environment_value",
+    "secret_material_sha256",
+    "secret_fingerprint",
+    "secret_manager_endpoint"
+  ],
+  "cross_field_invariants": [
+    "secret_and_rotation_rows_follow_exact_slot_order",
+    "provider_namespaces_secret_references_and_key_ids_are_distinct_across_slots",
+    "rotation_slot_key_version_and_evidence_reference_match_secret_binding",
+    "rotation_environment_generation_and_authority_git_object_match_manifest",
+    "issued_and_rotation_timestamps_are_aware_utc_z",
+    "expires_at_follows_issued_at",
+    "fresh_until_follows_observed_at",
+    "no_current_time_or_external_freshness_evaluation"
+  ],
+  "reason_code_precedence": [
+    "manifest_input_type_invalid",
+    "manifest_size_invalid",
+    "manifest_encoding_invalid",
+    "manifest_bytes_non_canonical",
+    "manifest_alias_or_tag_forbidden",
+    "manifest_duplicate_key",
+    "manifest_yaml_structure_invalid",
+    "manifest_forbidden_field",
+    "manifest_shape_invalid",
+    "manifest_git_object_invalid",
+    "manifest_binding_invalid",
+    "manifest_normalized"
+  ],
+  "normalized_output": {
+    "type": "frozen_nested_dataclasses",
+    "outcome": "normalized",
+    "reason_code": "manifest_normalized",
+    "manifest_digest": "lowercase_sha256_of_exact_input_bytes",
+    "manifest": "complete_normalized_reading"
+  },
+  "denied_output": {
+    "type": "frozen_result_dataclass",
+    "outcome": "denied",
+    "manifest_digest": null,
+    "manifest": null,
+    "caller_controlled_exception_allowed": false
+  },
+  "forbidden_capabilities": [
+    "filesystem_or_path_read",
+    "environment_variable_or_dotenv_read",
+    "application_configuration_import",
+    "credential_or_secret_store_access",
+    "secret_reference_resolution",
+    "database_or_docker_access",
+    "route_api_graphql_openapi_or_client_access",
+    "network_or_provider_access",
+    "current_time_read",
+    "admission_activation_or_command_effect"
+  ],
+  "owned_paths": [
+    "app/services/appointment_check_in_environment_manifest.py",
+    "tests/test_appointment_check_in_environment_manifest.py"
+  ],
+  "minimum_tests": [
+    "one_complete_canonical_normalization_and_exact_digest",
+    "every_reason_code_and_precedence_sensitive_envelope_class",
+    "every_forbidden_secret_field_name",
+    "ordered_slots_and_representative_cross_field_mismatches",
+    "full_lowercase_git_objects_only",
+    "duplicate_unknown_and_missing_keys",
+    "determinism_and_input_non_mutation",
+    "no_forbidden_import_or_ambient_capability"
+  ],
+  "authority": {
+    "manifest_instance_created": false,
+    "secret_or_reference_resolved": false,
+    "environment_or_practice_selected": false,
+    "evidence_gate_evaluated": false,
+    "ordinary_practice_admitted": false,
+    "command_or_activation_authority": false,
+    "product_runtime_mounted": false
+  }
+}
