@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "3c0a0ec55dacfd8efc0a0e4b28a85bf96079bce1",
+  "source_commit": "3c0a0ec55dacfd8efc0a0e4b28a85bf96079bce1",
+  "generation_id": "gen-f421ab28dbae0bb7ed44925c9c50ed675e1b43ee285bd07371a4bafafa556431",
+  "bundle_sha256": "f421ab28dbae0bb7ed44925c9c50ed675e1b43ee285bd07371a4bafafa556431",
+  "previous_generation_id": "gen-faa810f058236fc91d58ba2a611399f288e58ee673fd9f1582ca45b4e94b1156",
+  "previous_source_commit": "3c0a0ec55dacfd8efc0a0e4b28a85bf96079bce1",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 151,
+  "operation_id": "deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal",
+  "event_kind": "clean_closeout",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

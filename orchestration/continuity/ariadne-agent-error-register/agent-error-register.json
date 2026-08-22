@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 612,
+  "register_revision": 613,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -36285,6 +36285,155 @@
       },
       "incident_id": "AER-0933",
       "attempt_id": "clock-de374e6d8a65776aedea3638",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-guard-bridge-import-closure-recovery",
+      "role": "orchestrator",
+      "resource_id": "predecessor-fixture-causal-claim",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_source_inspection",
+      "stage": "deterministic_verification",
+      "category": "reasoning_claim_error",
+      "process_severity": "moderate",
+      "expected_invariant": "A source-only causal diagnosis is not exclusive when raw terminal detail is withheld and another pre-execution source defect exists.",
+      "observed_error": "The predecessor accepted the absent bridge target as explaining its terminal, but its fixture generator also embedded 103 literal leading patch markers that could fail parsing first.",
+      "detection_method": "Fresh exact-source recovery preplanning inspected the fixture generator before any recovery process.",
+      "evidence_paths": [
+        "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py",
+        "docs/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal-plan.md",
+        "docs/ariadne-agent-error-correction-register-revision-613.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.fixture_patch_markers_made_source_diagnosis_nonexclusive",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Withdraw causal exclusivity, remove exactly the 103 fixture prefixes, reject residual markers and prove full closure before one distinct recovery process.",
+        "prevention_control": "Future source-only terminals separate proved defects from exclusive process cause and fixtures reject leading patch-marker lines before execution.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/import-closure-recovery-evidence.json",
+          "docs/ariadne-agent-error-correction-register-revision-613.md"
+        ]
+      },
+      "incident_id": "AER-0934",
+      "attempt_id": "clock-e14db2df4b411ce6b1070ef3",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-guard-bridge-import-closure-recovery",
+      "role": "orchestrator",
+      "resource_id": "recovery-plan-semantic-assertion",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Plan semantic assertions are insensitive to ordinary Markdown line wrapping.",
+      "observed_error": "The first focused test expected a required plan phrase on one physical line although Markdown wrapped it across two lines.",
+      "detection_method": "The first focused provider-free pytest collection failed before commit or process execution.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-613.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.plan_assertion_treated_line_wrap_as_semantic_change",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Flatten plan lines before asserting the frozen semantic phrases.",
+        "prevention_control": "Narrative-plan tests normalize line wrapping before semantic token checks.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-613.md"
+        ]
+      },
+      "incident_id": "AER-0935",
+      "attempt_id": "clock-52e41089427a3c60f5db9678",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-guard-bridge-import-closure-recovery",
+      "role": "orchestrator",
+      "resource_id": "recovery-fixture-wire-order-mock",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Mock fixture output preserves the exact wire key order instead of reusing sorted evidence serialization.",
+      "observed_error": "The first focused helper sorted mock output keys, violating the frozen schema_version-result-cases wire order.",
+      "detection_method": "The first focused provider-free pytest collection failed before commit or process execution.",
+      "evidence_paths": [
+        "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
+        "docs/ariadne-agent-error-correction-register-revision-613.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.fixture_mock_used_evidence_canonicalization_instead_of_wire_order",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Serialize the frozen fixture object without sorting keys in the mock helper.",
+        "prevention_control": "Wire-contract mocks use wire-order serialization; evidence canonicalization remains separate.",
+        "evidence_paths": [
+          "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
+          "docs/ariadne-agent-error-correction-register-revision-613.md"
+        ]
+      },
+      "incident_id": "AER-0936",
+      "attempt_id": "clock-41f7bb4f41f8635fa8517f72",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-guard-bridge-import-closure-recovery",
+      "role": "orchestrator",
+      "resource_id": "clockwork-command-manifest-module-invocation",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_dry_run",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every clockwork command manifest invokes Python through the closed required module-switch grammar.",
+      "observed_error": "The first persisted-check command began with a direct script path rather than the required -m module switch.",
+      "detection_method": "Clockwork dry-run rejected the command with tick_command_contract before live publication.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-613.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_command_manifest_omitted_module_switch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Invoke the persisted controller check through -m and its exact Python module name.",
+        "prevention_control": "Every clockwork command is dry-run validated against the closed module-invocation grammar before publication.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-613.md"
+        ]
+      },
+      "incident_id": "AER-0937",
+      "attempt_id": "clock-ed67c116ed2c2bba2f42f998",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"

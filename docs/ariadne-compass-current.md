@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Derive and validate the complete package-unloaded import closure before one distinct recovery process; if it passes, proceed directly to the full runner.
+> Freeze and run one complete package-unloaded runner evaluation; if it passes, advance directly to one bounded occupied useful Raisa worker run.
 
 ## North star
 
@@ -548,24 +548,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The proposed root-service correction now has exact one-process JavaScript behavior, typed failure reduction and cleanup evidence without native-Harness risk. Lineage parent: `deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-process-free-correction-rehearsal`.
 266. **Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development — Package-unloaded guard-bridge module-graph terminal**
    The first full guard module graph failed closed and exposed one exact missing import-closure invariant without external activity or raw error retention. Lineage parent: `deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-isolated-node-fixture-rehearsal`.
+267. **Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development — Guard-bridge import-closure recovery pass**
+   The exact corrected package-unloaded guard graph now passes complete static import closure and all three typed behavior cases in one consumed process. Lineage parent: `deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal`.
 
 ## Current position
 
-**Repair the demonstrated guard-to-bridge module-resolution defect before admitting the broader runner — Package-unloaded guard-bridge module-graph terminal**
+**Evaluate the complete derived runner on the accepted closed graph before returning to occupied native-Harness work — Guard-bridge import-closure recovery pass**
 
-**Why this proof came next:** The exact guard behavior remains unproved solely because its relative bridge target was absent; complete import closure is the demonstrated missing mechanical control.
+**Why this proof came next:** The guard, bridge, sanitizer, local stubs and typed behavior matrix now pass with complete static closure; the complete runner is the next unproved package-unloaded composition boundary.
 
-One distinct package-unloaded graph will derive every relative import target, prove closure and then exercise the exact three cases.
+One complete package-unloaded runner evaluation will prove the runner's exact composition and terminal contract without loading the installed package, native Harness, worker, model or provider.
 
 ### What this unlocks
 
-- Behavioral evidence that the corrected guard reaches the accepted bridge and projects the exact tool view.
-- Direct progression to the complete package-unloaded runner evaluation.
+- A complete package-unloaded runner result rather than isolated guard components.
+- Direct progression to one bounded occupied DeepSeek Harness worker on useful Raisa development work if the runner passes.
 
 ### What it does not solve
 
-- No installed package load, native Harness boot, DeepSeek turn, model/provider request or worker-quality evidence.
-- No product/data action, production, release, Pages or protected integration.
+- No installed-package load, native-Harness boot, DeepSeek turn, model/provider request or worker-quality evidence.
+- No product/data action, ordinary-practice change, production, release, Pages or protected integration.
 
 ## Continuity and authority
 
@@ -1308,6 +1310,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-closeout.md`
 - `docs/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-closeout.md`
+- `docs/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-closeout.md`
 - `docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md`
@@ -2718,6 +2721,7 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-emr4-bounded-worker-preset-materialisation-recovery/provider-free-emr4-bounded-worker-preset-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal/rebinding-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal/materialisation-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/import-closure-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/provider-free-inert-task-sentinel-readiness-native-boot-terminal.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/efficacy-reading.json`
@@ -3735,4 +3739,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 371; continuity graph revision 389._
+_Compass map revision 372; continuity graph revision 390._

@@ -2,7 +2,17 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "guard_bridge_module_graph_focused_tests",
+      "command_id": "guard_bridge_import_closure_persisted_check",
+      "executable": ".venv/Scripts/python.exe",
+      "arguments": [
+        "-m",
+        "scripts.deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal",
+        "--check"
+      ],
+      "completion_contract": "final_exit_code_zero_required"
+    },
+    {
+      "command_id": "guard_bridge_import_closure_focused_tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -13,29 +23,30 @@
         "--strict-config",
         "--strict-markers",
         "-q",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py"
+        "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "guard_bridge_module_graph_ruff",
+      "command_id": "guard_bridge_import_closure_ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py",
-        "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py"
+        "scripts/deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "guard_bridge_module_graph_compile",
+      "command_id": "guard_bridge_import_closure_compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "scripts/deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py"
+        "scripts/deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
+        "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

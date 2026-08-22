@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 612,
+  "register_revision": 613,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "18348cf1c377af6491ba683c00997f03131df2cb576c2e2dd2ce905e0f79ca41",
-  "incident_count": 933,
+  "canonical_register_sha256": "d90ff0273d4c7e5f676bc4ce59eb3aa0517b7e5241216aae9a4351c0ac6b35c9",
+  "incident_count": 937,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 494,
+      "agent_behavior": 495,
       "harness": 67,
-      "operator": 218,
+      "operator": 221,
       "repository": 138,
       "transport": 16
     },
@@ -18,26 +18,26 @@
       "command_scope_violation": 95,
       "evidence_misreport": 73,
       "harness_failure": 67,
-      "operator_error": 218,
+      "operator_error": 221,
       "output_contract_violation": 274,
       "read_only_violation": 5,
-      "reasoning_claim_error": 47,
+      "reasoning_claim_error": 48,
       "repository_defect": 138,
       "transport_timeout": 16
     },
     "by_role": {
       "implementer": 64,
       "integration_reviewer": 3,
-      "orchestrator": 803,
+      "orchestrator": 807,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 582,
+      "low": 585,
       "material": 133,
-      "moderate": 218
+      "moderate": 219
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 194,
+      "accepted_candidate_changed": 198,
       "canonical_unchanged": 570,
       "untrusted_partial_worktree": 169
     },
@@ -128,6 +128,7 @@
       "clockwork-closed-tick-intent-path::orchestrator": 1,
       "clockwork-closeout-incident-observation::orchestrator": 1,
       "clockwork-closeout-transaction-recorded-at::orchestrator": 1,
+      "clockwork-command-manifest-module-invocation::orchestrator": 1,
       "clockwork-continuity-node-projector::orchestrator": 1,
       "clockwork-gear-architecture-plan-latch-test::orchestrator": 1,
       "clockwork-incident-category-vocabulary::orchestrator": 1,
@@ -320,6 +321,7 @@
       "pre-hmr-controller-ordering-probe::implementer": 1,
       "pre-verifier-candidate-git-object::orchestrator": 1,
       "pre-verifier-task-branch-alignment::orchestrator": 1,
+      "predecessor-fixture-causal-claim::orchestrator": 1,
       "preexecution-git-refs-evidence-binding::orchestrator": 1,
       "prelaunch-composite-readback-command::orchestrator": 1,
       "preplanning-adapter-inventory::orchestrator": 1,
@@ -360,6 +362,8 @@
       "readiness-clockwork-nonreuse-regression::orchestrator": 1,
       "readiness-test-clockwork-pointer-coordinate::orchestrator": 1,
       "readiness-verification-count-assertions::orchestrator": 1,
+      "recovery-fixture-wire-order-mock::orchestrator": 1,
+      "recovery-plan-semantic-assertion::orchestrator": 1,
       "repair-dead-local-guard::orchestrator": 1,
       "repair-runner-cli-import::orchestrator": 1,
       "repaired-sentinel-native-boot-process::orchestrator": 1,

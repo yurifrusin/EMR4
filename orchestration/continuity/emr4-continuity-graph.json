@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 389,
+  "graph_revision": 390,
   "harvests": [],
   "nodes": [
     {
@@ -30046,9 +30046,114 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal",
+      "title": "Guard-bridge import-closure recovery pass",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permitted one distinct provider-free package-unloaded import-closure recovery process after complete static closure.",
+          "The recovery process is consumed; no retry, second process, installed-package load, native Harness, worker, model, provider, product, data, deployment, Pages or protected-ref authority is opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-corrected-fixture-source-reading",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/import-closure-recovery-evidence.json",
+          "status": "accepted",
+          "summary": "Accept exact removal of 103 predecessor fixture patch markers and narrow the absent-target diagnosis from exclusive cause to one of two source-proved defects."
+        },
+        {
+          "id": "accept-complete-static-import-closure",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/import-closure-recovery-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact three relative edges, two bare local imports and all resolved targets inside the eight-file disposable inventory."
+        },
+        {
+          "id": "accept-one-process-three-case-pass",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/attempt-001-process-envelope.json",
+          "status": "accepted",
+          "summary": "Accept one consumed exit-zero Node process with the exact success and two typed short-circuit cases, zero stderr and complete cleanup."
+        },
+        {
+          "id": "reject-runner-native-harness-worker-claim",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-guard-bridge-import-closure-recovery-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "The recovery proves no complete runner, installed package, native-Harness boot, DeepSeek turn, provider activity or useful worker quality."
+        }
+      ],
+      "claim_scope": [
+        "The predecessor fixture generator contained exactly 103 leading patch markers; exclusivity of its absent-target causal claim is withdrawn.",
+        "The unchanged accepted guard, bridge and sanitizer identities remain exact.",
+        "The corrected fixture, guard, bridge and sanitizer form exactly three resolved relative ESM edges.",
+        "The guard's two bare imports resolve only to two exact local stub packages.",
+        "The accepted bridge bytes were materialized at the guard-owned preset-mount-sanitizer-runner-bridge.mjs target.",
+        "Exactly one distinct Node process exited zero, emitted zero stderr and passed success, missing service and missing mount.",
+        "The content-free envelope was persisted after complete root cleanup and before stream interpretation.",
+        "Native Harness, worker, model, provider, network, database, Docker, target, retry and resume counts are zero.",
+        "Complete-runner, installed-package, native-boot and useful-worker quality remain unproved."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "docs/ariadne-agent-error-correction-register-revision-613.md"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-22--deepseek-native-harness-guard-bridge-import-closure-recovery-pass.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-guard-bridge-import-closure-recovery-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-guard-bridge-import-closure-recovery-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-guard-bridge-import-closure-recovery-pre-verifier-acceptance-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_preset_mount_root_service_forwarding_package_unloaded_guard_bridge_module_graph_rehearsal.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_guard_bridge_import_closure_recovery_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/attempt-001-process-envelope.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/import-closure-recovery-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/import-closure-recovery-report.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The complete derived runner has not been materialized or evaluated.",
+        "The installed package seed has not loaded the complete correction.",
+        "No native-Harness boot, DeepSeek worker turn, model/provider request or worker-quality evidence is accepted.",
+        "All product/data, ordinary-practice, production, deployment, release, Pages and protected-ref gates remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T11:14:21.3006188+10:00",
+      "updated_at": "2026-08-22T11:14:21.3006188+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "3c0a0ec55dacfd8efc0a0e4b28a85bf96079bce1",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T10:27:17.1698176+10:00"
+  "updated_at": "2026-08-22T11:14:21.3006188+10:00"
 }
