@@ -37,6 +37,7 @@ from orchestration_harness.governance_clockwork_tick import (
     validate_tick_intent,
     validate_tick_live_state,
     validate_user_decision_tick_intent,
+    _validate_commands,
     _compact_rendered_baton,
     _load_baton_compaction_manifest,
 )
@@ -446,6 +447,76 @@ def test_intent_rejects_derived_unsafe_and_underbounded_input() -> None:
             ClockworkTickRejection, match="tick_next_boundaries_floor"
         ):
             validate_tick_intent(underbounded, contract)
+
+
+def _governance_v2_manifest() -> dict:
+    return {
+        "schema_version": "ariadne.governance_command_manifest.v2",
+        "database_authority": "closed",
+        "commands": [
+            {
+                "command_id": "provider-free-prepublication",
+                "executable": ".venv/Scripts/python.exe",
+                "arguments": [
+                    "-m",
+                    "scripts.ariadne_provider_free_pytest",
+                    "tests/test_ariadne_governance_clockwork_tick.py",
+                ],
+                "completion_contract": "final_exit_code_zero_required",
+                "verification_phase": "prepublication",
+            },
+            {
+                "command_id": "provider-free-postpublication",
+                "executable": ".venv/Scripts/python.exe",
+                "arguments": [
+                    "-m",
+                    "scripts.ariadne_provider_free_pytest",
+                    "tests/test_current_baton_consistency.py",
+                ],
+                "completion_contract": "final_exit_code_zero_required",
+                "verification_phase": "postpublication",
+            },
+        ],
+    }
+
+
+def test_governance_v2_admits_closed_provider_free_phases() -> None:
+    admitted = _validate_commands(_governance_v2_manifest())
+
+    assert admitted["database_authority"] == "closed"
+    assert [row["verification_phase"] for row in admitted["commands"]] == [
+        "prepublication",
+        "postpublication",
+    ]
+
+
+@pytest.mark.parametrize(
+    "module",
+    ["pytest", "scripts.ariadne_serial_pytest"],
+)
+def test_governance_v2_rejects_database_capable_pytest(module: str) -> None:
+    manifest = _governance_v2_manifest()
+    manifest["commands"][0]["arguments"][1] = module
+
+    with pytest.raises(
+        ClockworkTickRejection, match="tick_database_closed_pytest_runner"
+    ):
+        _validate_commands(manifest)
+
+
+def test_governance_v2_rejects_unknown_and_reversed_phase() -> None:
+    unknown = _governance_v2_manifest()
+    unknown["commands"][0]["verification_phase"] = "before_publish"
+    with pytest.raises(ClockworkTickRejection, match="tick_verification_phase"):
+        _validate_commands(unknown)
+
+    reversed_order = _governance_v2_manifest()
+    reversed_order["commands"][0]["verification_phase"] = "postpublication"
+    reversed_order["commands"][1]["verification_phase"] = "prepublication"
+    with pytest.raises(
+        ClockworkTickRejection, match="tick_verification_phase_order"
+    ):
+        _validate_commands(reversed_order)
 
 
 def test_intent_rejects_non_object_contract_evidence_before_projection() -> None:

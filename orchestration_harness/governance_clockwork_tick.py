@@ -41,9 +41,16 @@ from scripts.ariadne_agent_error_register import (
     EXPECTED_ORIGIN_BY_CATEGORY,
     build_pattern_report_from_payload,
 )
+from orchestration_harness.verification_envelope import (
+    validate_database_authority,
+    validate_phase_order,
+    validate_runner_for_authority,
+    validate_verification_phase,
+)
 
 
 TICK_INTENT_VERSION = "ariadne.governance_live_tick_intent.v1"
+GOVERNANCE_COMMAND_VERSION_V2 = "ariadne.governance_command_manifest.v2"
 TICK_INCIDENT_INTENT_VERSION = "ariadne.governance_live_tick_intent.v2"
 BLOCKED_INTENT_VERSION = "ariadne.governance_live_blocked_transition_intent.v1"
 USER_DECISION_INTENT_VERSION = (
@@ -205,15 +212,46 @@ def _strings(value: object, rule: str, *, maximum: int = 500) -> list[str]:
 
 
 def _validate_commands(value: object) -> dict[str, Any]:
-    row = _exact(value, {"schema_version", "commands"}, "tick_commands_keys")
-    if row["schema_version"] != COMMAND_VERSION or not isinstance(row["commands"], list) or not row["commands"]:
+    if not isinstance(value, dict):
+        _reject("tick_commands_keys")
+    schema_version = value.get("schema_version")
+    if schema_version == COMMAND_VERSION:
+        row = _exact(value, {"schema_version", "commands"}, "tick_commands_keys")
+        database_authority = None
+    elif schema_version == GOVERNANCE_COMMAND_VERSION_V2:
+        row = _exact(
+            value,
+            {"schema_version", "database_authority", "commands"},
+            "tick_commands_keys",
+        )
+        try:
+            database_authority = validate_database_authority(
+                row["database_authority"]
+            )
+        except ValueError:
+            _reject("tick_database_authority")
+    else:
+        _reject("tick_commands_version")
+    if not isinstance(row["commands"], list) or not row["commands"]:
         _reject("tick_commands_version")
     commands: list[dict[str, Any]] = []
     ids: list[str] = []
+    phases: list[str] = []
     for value in row["commands"]:
+        command_keys = (
+            {"command_id", "executable", "arguments", "completion_contract"}
+            if schema_version == COMMAND_VERSION
+            else {
+                "command_id",
+                "executable",
+                "arguments",
+                "completion_contract",
+                "verification_phase",
+            }
+        )
         command = _exact(
             value,
-            {"command_id", "executable", "arguments", "completion_contract"},
+            command_keys,
             "tick_command_keys",
         )
         command_id = _text(command["command_id"], "tick_command_id", 128)
@@ -235,10 +273,34 @@ def _validate_commands(value: object) -> dict[str, Any]:
             or command["completion_contract"] != "final_exit_code_zero_required"
         ):
             _reject("tick_command_contract")
+        if database_authority is not None:
+            try:
+                phase = validate_verification_phase(
+                    command["verification_phase"]
+                )
+                validate_runner_for_authority(
+                    [executable, *arguments],
+                    database_authority=database_authority,
+                )
+            except ValueError as error:
+                if "pytest_forbidden" in str(error):
+                    _reject("tick_database_closed_pytest_runner")
+                _reject("tick_verification_phase")
+            phases.append(phase)
         ids.append(command_id)
         commands.append(copy.deepcopy(command))
     if len(ids) != len(set(ids)):
         _reject("tick_command_duplicate")
+    if database_authority is not None:
+        try:
+            validate_phase_order(phases)
+        except ValueError:
+            _reject("tick_verification_phase_order")
+        return {
+            "schema_version": GOVERNANCE_COMMAND_VERSION_V2,
+            "database_authority": database_authority,
+            "commands": commands,
+        }
     return {"schema_version": COMMAND_VERSION, "commands": commands}
 
 

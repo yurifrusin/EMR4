@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any, Sequence
 
 from scripts.ariadne_evidence_gate import (
+    COMMAND_MANIFEST_SCHEMA_VERSION_V2,
     command_manifest_sha256,
     load_command_manifest,
     validate_command_manifest,
@@ -27,9 +28,14 @@ from orchestration_harness.provider_free_no_database_admission import (
     validate_manifest_admission,
 )
 from scripts.ariadne_provider_free_pytest import EXPECTED_ADMISSION_ENV
+from orchestration_harness.verification_envelope import (
+    VERIFICATION_PHASES,
+    validate_verification_phase,
+)
 
 
 SCHEMA_VERSION = "ariadne.validation_run.v1"
+SCHEMA_VERSION_V2 = "ariadne.validation_run.v2"
 SERIAL_PYTEST_MODULE = "scripts.ariadne_serial_pytest"
 PROVIDER_FREE_PYTEST_MODULE = "scripts.ariadne_provider_free_pytest"
 PYTEST_EXECUTABLES = frozenset({"pytest", "pytest.exe", "py.test", "py.test.exe"})
@@ -167,6 +173,26 @@ def validate_execution_manifest(
     return admitted
 
 
+def _commands_for_phase(
+    admitted: dict[str, Any], *, phase: str | None
+) -> list[dict[str, Any]]:
+    if admitted["schema_version"] != COMMAND_MANIFEST_SCHEMA_VERSION_V2:
+        if phase is not None:
+            raise ValueError("legacy_manifest_verification_phase_forbidden")
+        return admitted["commands"]
+    if phase is None:
+        raise ValueError("verification_phase_required")
+    selected_phase = validate_verification_phase(phase)
+    selected = [
+        command
+        for command in admitted["commands"]
+        if command["verification_phase"] == selected_phase
+    ]
+    if not selected:
+        raise ValueError("verification_phase_has_no_commands")
+    return selected
+
+
 def _atomic_write(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     rendered = (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
@@ -211,17 +237,26 @@ def _pending_result(command: dict[str, Any]) -> dict[str, Any]:
 
 
 def run_validation(
-    *, manifest: object, repo_root: Path, receipt_path: Path
+    *,
+    manifest: object,
+    repo_root: Path,
+    receipt_path: Path,
+    phase: str | None = None,
 ) -> dict[str, Any]:
     root = repo_root.resolve(strict=True)
     admitted, provider_free_admission = validate_execution_manifest_with_admission(
         manifest, repo_root=root
     )
+    selected_commands = _commands_for_phase(admitted, phase=phase)
     receipt = receipt_path.resolve()
     if receipt.exists():
         raise ValueError("validation_receipt_already_exists")
     lifecycle: dict[str, Any] = {
-        "schema_version": SCHEMA_VERSION,
+        "schema_version": (
+            SCHEMA_VERSION_V2
+            if admitted["schema_version"] == COMMAND_MANIFEST_SCHEMA_VERSION_V2
+            else SCHEMA_VERSION
+        ),
         "status": "in_progress",
         "repo_root": str(root),
         "command_manifest_sha256": command_manifest_sha256(admitted),
@@ -230,15 +265,18 @@ def run_validation(
             if provider_free_admission is not None
             else None
         ),
-        "commands": admitted["commands"],
+        "commands": selected_commands,
         "started_at": _timestamp(),
         "ended_at": None,
         "failure_command_id": None,
-        "results": [_pending_result(command) for command in admitted["commands"]],
+        "results": [_pending_result(command) for command in selected_commands],
     }
+    if admitted["schema_version"] == COMMAND_MANIFEST_SCHEMA_VERSION_V2:
+        lifecycle["database_authority"] = admitted["database_authority"]
+        lifecycle["verification_phase"] = phase
     _atomic_write(receipt, lifecycle)
 
-    for index, command in enumerate(admitted["commands"]):
+    for index, command in enumerate(selected_commands):
         lifecycle["results"][index]["status"] = "in_progress"
         _atomic_write(receipt, lifecycle)
         started = time.monotonic()
@@ -323,6 +361,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--repo-root", type=Path, required=True)
     parser.add_argument("--receipt", type=Path, required=True)
+    parser.add_argument("--phase", choices=VERIFICATION_PHASES)
     args = parser.parse_args(sys.argv[1:] if argv is None else argv)
     try:
         manifest = load_command_manifest(args.manifest.resolve(strict=True))
@@ -330,6 +369,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             manifest=manifest,
             repo_root=args.repo_root,
             receipt_path=args.receipt,
+            phase=args.phase,
         )
     except (OSError, ValueError, json.JSONDecodeError) as error:
         print(f"Ariadne validation runner failed: {error}", file=sys.stderr)

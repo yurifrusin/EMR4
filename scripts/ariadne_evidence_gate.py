@@ -10,8 +10,16 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from orchestration_harness.verification_envelope import (
+    validate_database_authority,
+    validate_phase_order,
+    validate_runner_for_authority,
+    validate_verification_phase,
+)
+
 
 COMMAND_MANIFEST_SCHEMA_VERSION = "ariadne.verifier-command-manifest.v1"
+COMMAND_MANIFEST_SCHEMA_VERSION_V2 = "ariadne.verifier-command-manifest.v2"
 DIAGNOSTIC_PACKET_SCHEMA_VERSION = "ariadne.diagnostic-decision-packet.v1"
 DECISION_SCHEMA_VERSION = "ariadne.evidence-gate-decision.v1"
 COMMAND_ID_PATTERN = re.compile(r"^[A-Z][A-Z0-9_-]{0,31}$")
@@ -73,12 +81,24 @@ def _looks_like_repository_script(token: str) -> bool:
 
 def validate_command_manifest(value: object) -> dict[str, Any]:
     manifest = _object(value, label="command manifest")
-    _exact_keys(
-        manifest,
-        {"schema_version", "commands"},
-        label="command manifest",
-    )
-    if manifest["schema_version"] != COMMAND_MANIFEST_SCHEMA_VERSION:
+    schema_version = manifest.get("schema_version")
+    if schema_version == COMMAND_MANIFEST_SCHEMA_VERSION:
+        _exact_keys(
+            manifest,
+            {"schema_version", "commands"},
+            label="command manifest",
+        )
+        database_authority = None
+    elif schema_version == COMMAND_MANIFEST_SCHEMA_VERSION_V2:
+        _exact_keys(
+            manifest,
+            {"schema_version", "database_authority", "commands"},
+            label="command manifest",
+        )
+        database_authority = validate_database_authority(
+            manifest["database_authority"]
+        )
+    else:
         raise ValueError("command manifest schema version is not admitted")
     commands = manifest["commands"]
     if not isinstance(commands, list) or not 1 <= len(commands) <= 64:
@@ -86,9 +106,15 @@ def validate_command_manifest(value: object) -> dict[str, Any]:
 
     normalized: list[dict[str, Any]] = []
     observed_ids: set[str] = set()
+    phases: list[str] = []
     for index, raw_command in enumerate(commands):
         command = _object(raw_command, label=f"command[{index}]")
-        _exact_keys(command, {"id", "argv"}, label=f"command[{index}]")
+        command_keys = (
+            {"id", "argv"}
+            if schema_version == COMMAND_MANIFEST_SCHEMA_VERSION
+            else {"id", "argv", "verification_phase"}
+        )
+        _exact_keys(command, command_keys, label=f"command[{index}]")
         command_id = command["id"]
         if (
             not isinstance(command_id, str)
@@ -122,12 +148,24 @@ def validate_command_manifest(value: object) -> dict[str, Any]:
             if argv[1] == "-m" and len(argv) < 3:
                 raise ValueError(f"command[{index}] python -m requires a module")
 
-        normalized.append({"id": command_id, "argv": list(argv)})
+        normalized_command = {"id": command_id, "argv": list(argv)}
+        if database_authority is not None:
+            phase = validate_verification_phase(command["verification_phase"])
+            validate_runner_for_authority(
+                argv, database_authority=database_authority
+            )
+            phases.append(phase)
+            normalized_command["verification_phase"] = phase
+        normalized.append(normalized_command)
 
-    return {
-        "schema_version": COMMAND_MANIFEST_SCHEMA_VERSION,
-        "commands": normalized,
-    }
+    if database_authority is not None:
+        validate_phase_order(phases)
+        return {
+            "schema_version": COMMAND_MANIFEST_SCHEMA_VERSION_V2,
+            "database_authority": database_authority,
+            "commands": normalized,
+        }
+    return {"schema_version": COMMAND_MANIFEST_SCHEMA_VERSION, "commands": normalized}
 
 
 def load_command_manifest(path: Path) -> dict[str, Any]:

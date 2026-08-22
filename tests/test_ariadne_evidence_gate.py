@@ -15,6 +15,7 @@ from scripts.ariadne_antigravity import (
 )
 from scripts.ariadne_evidence_gate import (
     COMMAND_MANIFEST_SCHEMA_VERSION,
+    COMMAND_MANIFEST_SCHEMA_VERSION_V2,
     DIAGNOSTIC_PACKET_SCHEMA_VERSION,
     admit_command_results,
     assess_diagnostic_packet,
@@ -64,6 +65,30 @@ def _results(manifest: dict, *, exit_codes: tuple[int, ...] = (0, 0, 0)) -> list
         {"id": command["id"], "argv": command["argv"], "exit_code": exit_code}
         for command, exit_code in zip(manifest["commands"], exit_codes, strict=True)
     ]
+
+
+def _closed_v2_manifest() -> dict:
+    return {
+        "schema_version": COMMAND_MANIFEST_SCHEMA_VERSION_V2,
+        "database_authority": "closed",
+        "commands": [
+            {
+                "id": "PRE",
+                "argv": [
+                    r"C:\Python\python.exe",
+                    "-m",
+                    "scripts.ariadne_provider_free_pytest",
+                    "tests/test_example.py",
+                ],
+                "verification_phase": "prepublication",
+            },
+            {
+                "id": "POST",
+                "argv": [r"C:\Python\python.exe", "-m", "py_compile", "safe.py"],
+                "verification_phase": "postpublication",
+            },
+        ],
+    }
 
 
 def _diagnostic_packet() -> dict:
@@ -130,6 +155,59 @@ def test_command_manifest_is_canonical_and_accepts_exact_zero_results() -> None:
         results=_results(manifest),
         decision="pass",
     ) == _results(manifest)
+
+
+def test_v2_command_manifest_types_closed_authority_and_monotonic_phases() -> None:
+    admitted = validate_command_manifest(_closed_v2_manifest())
+
+    assert admitted["schema_version"] == COMMAND_MANIFEST_SCHEMA_VERSION_V2
+    assert admitted["database_authority"] == "closed"
+    assert [row["verification_phase"] for row in admitted["commands"]] == [
+        "prepublication",
+        "postpublication",
+    ]
+
+
+@pytest.mark.parametrize(
+    ("argv", "reason"),
+    [
+        (
+            [r"C:\Python\python.exe", "-m", "pytest", "tests/test_example.py"],
+            "database_closed_ordinary_pytest_forbidden",
+        ),
+        (
+            [
+                r"C:\Python\python.exe",
+                "-m",
+                "scripts.ariadne_serial_pytest",
+                "--",
+                "tests/test_example.py",
+            ],
+            "database_closed_serial_pytest_forbidden",
+        ),
+    ],
+)
+def test_v2_closed_manifest_rejects_database_capable_pytest(
+    argv: list[str], reason: str
+) -> None:
+    manifest = _closed_v2_manifest()
+    manifest["commands"][0]["argv"] = argv
+
+    with pytest.raises(ValueError, match=reason):
+        validate_command_manifest(manifest)
+
+
+def test_v2_manifest_rejects_unknown_or_reversed_phase() -> None:
+    unknown = _closed_v2_manifest()
+    unknown["commands"][0]["verification_phase"] = "before_publish"
+    with pytest.raises(ValueError, match="verification_phase_invalid"):
+        validate_command_manifest(unknown)
+
+    reversed_order = _closed_v2_manifest()
+    reversed_order["commands"][0]["verification_phase"] = "postpublication"
+    reversed_order["commands"][1]["verification_phase"] = "prepublication"
+    with pytest.raises(ValueError, match="verification_phase_order_invalid"):
+        validate_command_manifest(reversed_order)
 
 
 @pytest.mark.parametrize(
