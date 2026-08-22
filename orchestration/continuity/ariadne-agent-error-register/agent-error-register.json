@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 619,
+  "register_revision": 620,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -37459,6 +37459,80 @@
       },
       "incident_id": "AER-0964",
       "attempt_id": "clock-af6aff1806e515ee4630eaf3",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The successor boundary list must contain every clockwork-required closed-vocabulary floor value exactly, while any descriptive additions remain separate.",
+      "observed_error": "The first clockwork check used a descriptive ordinary-practice boundary instead of also carrying the required exact no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting value and failed closed with tick_next_boundaries_floor.",
+      "detection_method": "The governance clockwork rejected the intent before generation construction or publication; all live canonical surfaces remained unchanged.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-620.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.required_closed_boundary_replaced_by_descriptive_near_synonym",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the exact required boundary value in addition to the narrower successor-specific boundaries and rerun the same intent through the idempotent clockwork.",
+        "prevention_control": "Construct future successor boundary lists from the clockwork REQUIRED_NEXT_BOUNDARIES typed floor before appending tranche-specific values.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "incident_id": "AER-0965",
+      "attempt_id": "clock-3817c38e5551e5d87086d283",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "An incident observation must select its stage from the clockwork INCIDENT_STAGES closed vocabulary instead of inventing a descriptive stage label.",
+      "observed_error": "The second clockwork check used governance_validation for the first incident stage, outside the registered vocabulary, and failed closed with tick_incident_stage.",
+      "detection_method": "The governance clockwork rejected the incident observation before prospective register projection, generation construction or publication; all live canonical surfaces remained unchanged.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-620.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.incident_stage_reconstructed_as_unregistered_description",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the descriptive stage with the exact registered closeout value and preserve both rejected checks in the same prospective register revision.",
+        "prevention_control": "Construct future incident observations from the clockwork INCIDENT_STAGES typed choices rather than reconstructing stage vocabulary from prose.",
+        "evidence_paths": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "incident_id": "AER-0966",
+      "attempt_id": "clock-18e2cffc8fd4139304f86046",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

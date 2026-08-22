@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 396,
+  "graph_revision": 397,
   "harvests": [],
   "nodes": [
     {
@@ -30897,9 +30897,114 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal",
+      "title": "DeepSeek native Harness integrated-runner stock-headless boot closeout",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority covers this provider-free stock-headless proof and closeout.",
+          "The exact one-process attempt is consumed; no retry, resume or replacement occurred.",
+          "The successor must freeze any at-most-one DeepSeek request before launch and has no silent Claude Code fallback."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-integrated-runner-native-loading-coordinate",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/native-boot-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact integrated runner and typed edit-control exports as loaded through one real rc.7 stock-headless HMR mutation before request authority."
+        },
+        {
+          "id": "accept-roots-stage-pre-request-hold",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/native-boot-report.md",
+          "status": "accepted",
+          "summary": "Accept the deliberate single-root mismatch and roots-stage generic terminal as a positive pre-agent containment result with every effect gauge zero."
+        },
+        {
+          "id": "decline-further-provider-free-loading-rehearsal",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Reject another provider-free loader/HMR rehearsal; the next test must measure one controlled useful development contribution."
+        }
+      ],
+      "claim_scope": [
+        "The exact 14,077-byte integrated runner loaded through one real rc.7 stock-headless process and one HMR mutation.",
+        "The adapter proved apply, preflightEditArguments and classifyEditArgumentResult were live exports before delegation.",
+        "The runner stopped at the deliberate roots-stage mismatch before agents.create.",
+        "Agent, session, turn, tool, broker, worker, model, provider, network, database and Docker counts remained zero.",
+        "No retry, resume or fallback occurred; accepted inputs remained exact and cleanup completed.",
+        "The proof resolves loading-path uncertainty but does not prove useful worker output or general DeepSeek reliability.",
+        "No product, ordinary-practice, data, production, deployment, release, Pages or protected-ref authority opened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/native-boot-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/native-boot-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-preplanning-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal_plan.py",
+          "tests/test_deepseek_native_harness_provider_free_rebound_future_runner_stock_headless_hmr_boot_proof.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/evidence.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/integrated-runner-boot-probe.mjs",
+          "docs/ariadne-agent-error-correction-register-revision-620.md",
+          "orchestration/human_inbox/yuri/2026-08-22--native-harness-integrated-runner-stock-headless-boot.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The integrated runner is not yet bound to a useful authored-synthetic development work package.",
+        "No useful DeepSeek worker output or general native-Harness reliability result exists.",
+        "Any next occupied request requires a separately frozen at-most-one-request candidate and work order.",
+        "Ordinary practice, product data, production, deployment, release, Pages and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T17:43:07.7749502+10:00",
+      "updated_at": "2026-08-22T17:43:07.7749502+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "a0ab7ac0c6ecde0291bb4f5304cdc9c46a68efd0",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T17:06:02.0539735+10:00"
+  "updated_at": "2026-08-22T17:43:07.7749502+10:00"
 }

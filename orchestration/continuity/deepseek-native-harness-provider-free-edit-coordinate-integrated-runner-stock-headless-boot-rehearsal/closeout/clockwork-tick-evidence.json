@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "a0ab7ac0c6ecde0291bb4f5304cdc9c46a68efd0",
+  "source_commit": "a0ab7ac0c6ecde0291bb4f5304cdc9c46a68efd0",
+  "generation_id": "gen-e074f6cbc45639d09c62a4113632801dab4bcdac561fcace08554686619abb7f",
+  "bundle_sha256": "e074f6cbc45639d09c62a4113632801dab4bcdac561fcace08554686619abb7f",
+  "previous_generation_id": "gen-9f0b0308ed27cfe65dc03ec1494efb3184923f2fe20a1f4ba8aa2e7f361c6405",
+  "previous_source_commit": "a0ab7ac0c6ecde0291bb4f5304cdc9c46a68efd0",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 164,
+  "operation_id": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal",
+  "event_kind": "clean_closeout",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 378,
-  "updated_at": "2026-08-22T17:06:02.0539735+10:00",
-  "source_graph_revision": 396,
-  "orientation_statement": "EMR4 will next prove the exact integrated runner's provider-free stock-headless/HMR loading path; no occupied request or adoption is admitted.",
+  "map_revision": 379,
+  "updated_at": "2026-08-22T17:43:07.7749502+10:00",
+  "source_graph_revision": 397,
+  "orientation_statement": "EMR4 will next test one useful authored-synthetic DeepSeek development contribution under the accepted typed native-Harness controls, not perform another loading rehearsal.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4899,27 +4899,38 @@
         "docs/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-closeout.md",
         "orchestration/human_inbox/yuri/2026-08-22--native-harness-edit-coordinate-future-runner-integration.md"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal",
+      "lineage_parent": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
+      "strategic_role": "Move typed edit controls through the real native Harness loading boundary before useful controlled work",
+      "outcome": "The exact integrated runner loaded through stock-headless HMR and stopped before agent creation with all external-effect gauges zero.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/native-boot-evidence.json",
+        "docs/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-closeout.md",
+        "orchestration/human_inbox/yuri/2026-08-22--native-harness-integrated-runner-stock-headless-boot.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
-    "strategic_role": "Prove the integrated runner loads through the actual provider-free stock-headless/HMR path before adoption",
-    "why_now": "Pure exports and the real edit stack pass, but the exact derived runner has not yet traversed the loader and HMR boundary used by a future occupied attempt.",
-    "outcome": "The edit-control mechanism is integrated and locally replayable without a provider request.",
+    "node_id": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal",
+    "strategic_role": "Use the accepted controls on one useful bounded authored-synthetic development task",
+    "why_now": "Loading-path uncertainty is closed; another provider-free boot would add ceremonial weight without testing development utility.",
+    "outcome": "The orchestrator has exact control-load, edit-result and pre-request stop coordinates in the real native Harness path.",
     "unlocks": [
-      "A provider-free stock-headless boot proof of the exact integrated runner.",
-      "A later evidence-based adoption-readiness decision.",
-      "A later evidence-based decision on whether any occupied worker attempt is justified."
+      "One separately frozen at-most-one-request DeepSeek development rehearsal.",
+      "Measurement of useful output, traceability and correction cost.",
+      "An evidence-based decision on continued native-Harness worker use."
     ],
     "does_not_solve": [
-      "No stock-headless/HMR loading proof yet.",
-      "No candidate or runbook adoption, useful-worker success or general DeepSeek quality conclusion.",
-      "No occupied request, product, ordinary-practice, production or protected-ref authority."
+      "No useful worker result or general reliability conclusion yet.",
+      "No ordinary-practice, product-data, production or protected-ref authority.",
+      "No silent Claude Code fallback."
     ],
     "evidence": [
-      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/efficacy-reading.json",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-sol-acceptance.md",
-      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/deterministic-report.md"
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/efficacy-reading.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/native-boot-report.md"
     ]
   },
   "decision_horizon": [

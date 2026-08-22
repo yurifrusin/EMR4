@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 619,
+  "register_revision": 620,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "f2588861fff827f9c4f97fc6f7d400a3b163c3b0fccea0d32e80a88e1d736342",
-  "incident_count": 964,
+  "canonical_register_sha256": "7ff8e119282b97f9b46e1b7988ee2386a473644d0e19cbb6c1a38ef8cd0cf9a3",
+  "incident_count": 966,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 512,
+      "agent_behavior": 514,
       "harness": 68,
       "operator": 230,
       "repository": 138,
@@ -19,7 +19,7 @@
       "evidence_misreport": 73,
       "harness_failure": 68,
       "operator_error": 230,
-      "output_contract_violation": 287,
+      "output_contract_violation": 289,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
       "repository_defect": 138,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 65,
       "integration_reviewer": 3,
-      "orchestrator": 833,
+      "orchestrator": 835,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 606,
+      "low": 608,
       "material": 133,
       "moderate": 225
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 204,
-      "canonical_unchanged": 591,
+      "canonical_unchanged": 593,
       "untrusted_partial_worktree": 169
     },
     "by_resource_and_role": {
@@ -169,7 +169,7 @@
       "codex-primary-orchestrator-commentary::orchestrator": 2,
       "codex-primary-orchestrator::implementer": 1,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 354,
+      "codex-primary-orchestrator::orchestrator": 356,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "complete-runner-fixture-wire-validator::orchestrator": 1,

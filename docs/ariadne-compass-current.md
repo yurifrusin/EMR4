@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will next prove the exact integrated runner's provider-free stock-headless/HMR loading path; no occupied request or adoption is admitted.
+> EMR4 will next test one useful authored-synthetic DeepSeek development contribution under the accepted typed native-Harness controls, not perform another loading rehearsal.
 
 ## North star
 
@@ -562,26 +562,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The real edit stack now exposes seven tested closed coordinates and exact state effects without another model request. Lineage parent: `raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal`.
 273. **Move stable edit coordinates from a standalone diagnostic into the bounded future-runner control surface — DeepSeek native Harness provider-free edit-coordinate future-runner integration closeout**
    Three semantic edit mistakes now stop before dispatch and all seven result coordinates are released through one deterministic derived runner. Lineage parent: `deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery`.
+274. **Move typed edit controls through the real native Harness loading boundary before useful controlled work — DeepSeek native Harness integrated-runner stock-headless boot closeout**
+   The exact integrated runner loaded through stock-headless HMR and stopped before agent creation with all external-effect gauges zero. Lineage parent: `deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal`.
 
 ## Current position
 
-**Prove the integrated runner loads through the actual provider-free stock-headless/HMR path before adoption — DeepSeek native Harness provider-free edit-coordinate future-runner integration closeout**
+**Use the accepted controls on one useful bounded authored-synthetic development task — DeepSeek native Harness integrated-runner stock-headless boot closeout**
 
-**Why this proof came next:** Pure exports and the real edit stack pass, but the exact derived runner has not yet traversed the loader and HMR boundary used by a future occupied attempt.
+**Why this proof came next:** Loading-path uncertainty is closed; another provider-free boot would add ceremonial weight without testing development utility.
 
-The edit-control mechanism is integrated and locally replayable without a provider request.
+The orchestrator has exact control-load, edit-result and pre-request stop coordinates in the real native Harness path.
 
 ### What this unlocks
 
-- A provider-free stock-headless boot proof of the exact integrated runner.
-- A later evidence-based adoption-readiness decision.
-- A later evidence-based decision on whether any occupied worker attempt is justified.
+- One separately frozen at-most-one-request DeepSeek development rehearsal.
+- Measurement of useful output, traceability and correction cost.
+- An evidence-based decision on continued native-Harness worker use.
 
 ### What it does not solve
 
-- No stock-headless/HMR loading proof yet.
-- No candidate or runbook adoption, useful-worker success or general DeepSeek quality conclusion.
-- No occupied request, product, ordinary-practice, production or protected-ref authority.
+- No useful worker result or general reliability conclusion yet.
+- No ordinary-practice, product-data, production or protected-ref authority.
+- No silent Claude Code fallback.
 
 ## Continuity and authority
 
@@ -1324,6 +1326,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-closeout.md`
+- `docs/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-closeout.md`
 - `docs/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-closeout.md`
@@ -2092,7 +2095,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2737,8 +2740,9 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/diagnosis-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/deterministic-evidence.json`
-- `orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/deterministic-report.md`
-- `orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/efficacy-reading.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/efficacy-reading.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/native-boot-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal/native-boot-report.md`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/provider-free-effective-tool-guard-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/efficacy-reading.json`
@@ -3462,6 +3466,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-row-service-path-recovery.md`
 - `orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-pre-hmr-startup-recovery.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-edit-coordinate-future-runner-integration.md`
+- `orchestration/human_inbox/yuri/2026-08-22--native-harness-integrated-runner-stock-headless-boot.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-real-edit-coordinate-diagnostic.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-tool-result-conclusion-coordinate-diagnostic.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-coordinate-recovery.md`
@@ -3773,4 +3778,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 378; continuity graph revision 396._
+_Compass map revision 379; continuity graph revision 397._
