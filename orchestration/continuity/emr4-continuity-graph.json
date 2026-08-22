@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 397,
+  "graph_revision": 398,
   "harvests": [],
   "nodes": [
     {
@@ -31002,9 +31002,123 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+      "title": "Native Harness integrated-runner first controlled development closeout",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority covered one exact authored-synthetic useful-work attempt.",
+          "The one occupied identity is consumed and no retry, resume, fallback or replacement is authorized.",
+          "The successor is provider-free and cannot launch a Harness model turn, broker or provider request."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-traceable-integrated-runner-factory-failure",
+          "source": "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-terminal.json",
+          "status": "accepted",
+          "summary": "Accept one consumed failed-closed native-Harness terminal at the integrated runner factory stage after both readiness coordinates and before any model or provider request."
+        },
+        {
+          "id": "reject-useful-worker-or-deepseek-performance-claim",
+          "source": "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/efficacy-reading.json",
+          "status": "rejected",
+          "summary": "Reject any useful-development or DeepSeek-performance claim because no request, tool call, edit or candidate occurred."
+        },
+        {
+          "id": "reject-another-occupied-attempt-before-factory-diagnosis",
+          "source": "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Reject any further occupied attempt until a separately bounded provider-free factory-subcoordinate diagnosis resolves or terminally characterizes the pre-request failure."
+        }
+      ],
+      "claim_scope": [
+        "Exactly one rc.7 native-Harness process crossed sentinel_activated and stock_headless_hmr_ready.",
+        "The accepted integrated runner then failed closed at its factory stage before agent publication.",
+        "Model requests, provider calls, tool calls, tool results, changed paths and candidate tests all remained zero.",
+        "The consumed attempt used zero retry, resume, fallback, auxiliary model or second worker.",
+        "Harness, broker and disposable root are absent and raw runtime material was not retained.",
+        "The result improves failure localization but proves neither useful DeepSeek output nor general Harness reliability.",
+        "No product, ordinary-practice, data, production, deployment, release, Pages or protected-ref authority opened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-plan.md",
+          "docs/security/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/provider-free-evidence.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-attempt-preparation.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-preexecution-checkpoint.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-attempt-consumed.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-terminal.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-report.md",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-preplanning-corrected-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-sol-deterministic-admission-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-occupied-prelaunch-receipt.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/clockwork-checkpoint-tick-evidence.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py",
+          "tests/test_raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal_postterminal.py",
+          "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_edit_coordinate_integrated_runner_stock_headless_boot_rehearsal.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_active_operation_latch_continuity.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_authored_synthetic_native_harness_integrated_runner_first_controlled_development_rehearsal.py",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/contract.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/contract.schema.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-terminal.schema.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/work-order-v2.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/worker-authority.json",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/forbidden-surfaces.json",
+          "docs/ariadne-agent-error-correction-register-revision-621.md",
+          "orchestration/human_inbox/yuri/2026-08-22--native-harness-integrated-runner-first-controlled-development.md",
+          "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The runner factory failure is not yet split into a closed agent-creation or setup subcoordinate.",
+        "No model request, DeepSeek reasoning result, useful edit or candidate exists.",
+        "No further occupied native-Harness attempt is authorized before provider-free factory diagnosis.",
+        "Ordinary practice, product data, production, deployment, release, Pages and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-22T18:23:35.2663093+10:00",
+      "updated_at": "2026-08-22T18:23:35.2663093+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "b39a0228a071a173e3bfbc59e72a207ef24c8686",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-22T17:43:07.7749502+10:00"
+  "updated_at": "2026-08-22T18:23:35.2663093+10:00"
 }

@@ -1,44 +1,44 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 620,
+  "register_revision": 621,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "7ff8e119282b97f9b46e1b7988ee2386a473644d0e19cbb6c1a38ef8cd0cf9a3",
-  "incident_count": 966,
+  "canonical_register_sha256": "aa800c03ccf3ecf047ed245c69c0bbebc6af586373784ee8b6dc9a74e9c69c8d",
+  "incident_count": 976,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 514,
-      "harness": 68,
-      "operator": 230,
-      "repository": 138,
+      "agent_behavior": 519,
+      "harness": 69,
+      "operator": 232,
+      "repository": 140,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 99,
-      "evidence_misreport": 73,
-      "harness_failure": 68,
-      "operator_error": 230,
-      "output_contract_violation": 289,
+      "evidence_misreport": 74,
+      "harness_failure": 69,
+      "operator_error": 232,
+      "output_contract_violation": 293,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
-      "repository_defect": 138,
+      "repository_defect": 140,
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 65,
+      "implementer": 69,
       "integration_reviewer": 3,
-      "orchestrator": 835,
+      "orchestrator": 841,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 608,
+      "low": 617,
       "material": 133,
-      "moderate": 225
+      "moderate": 226
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 204,
-      "canonical_unchanged": 593,
+      "canonical_unchanged": 603,
       "untrusted_partial_worktree": 169
     },
     "by_resource_and_role": {
@@ -167,9 +167,9 @@
       "codex-native-parallel-worker::integration_reviewer": 2,
       "codex-primary-implementer::implementer": 3,
       "codex-primary-orchestrator-commentary::orchestrator": 2,
-      "codex-primary-orchestrator::implementer": 1,
+      "codex-primary-orchestrator::implementer": 4,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 356,
+      "codex-primary-orchestrator::orchestrator": 362,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "complete-runner-fixture-wire-validator::orchestrator": 1,
@@ -197,6 +197,7 @@
       "deepseek-native-harness-rc7-worker-attempt-002::implementer": 1,
       "deepseek-native-harness-rc7-worker-attempt-003::implementer": 1,
       "deepseek-native-harness-rc7-worker::implementer": 1,
+      "deepseek-native-harness-rc7::implementer": 1,
       "deepseek-v4-flash-a5-1-worker::implementer": 1,
       "deepseek-v4-flash-c4-worker::implementer": 2,
       "deepseek-v4-flash-c5-worker::implementer": 1,
