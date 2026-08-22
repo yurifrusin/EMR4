@@ -245,7 +245,7 @@
     "ordinary_admission_released": false,
     "product_relation_record_or_configuration_changed": false,
     "api_openapi_graphql_async_or_client_changed": false,
-    "live_secret_existing_hosted_or_product_database_used": false,
+    "live_sensitive_material_existing_hosted_or_product_database_used": false,
     "provider_or_external_network_used": false,
     "production_runtime_deployment_release_or_pages": false,
     "protected_evidence_or_ref_movement": false

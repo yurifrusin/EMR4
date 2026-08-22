@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:emr4:check-in-prospective-success-redaction-typed-cleanup-projection-repair-evidence:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "source_head",
+    "plan_source",
+    "accepted_diagnosis_source",
+    "accepted_diagnosis_closeout_source",
+    "protected_source",
+    "source_digests",
+    "prospective_projection",
+    "boundary_repair",
+    "typed_terminal",
+    "immutable_attempt_007",
+    "efficacy",
+    "activity_counts",
+    "closed_boundaries"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.check-in-prospective-success-redaction-typed-cleanup-projection-repair-evidence.v1"},
+    "result": {"const": "raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_pass"},
+    "source_head": {"$ref": "#/$defs/git"},
+    "plan_source": {"$ref": "#/$defs/git"},
+    "accepted_diagnosis_source": {"$ref": "#/$defs/git"},
+    "accepted_diagnosis_closeout_source": {"$ref": "#/$defs/git"},
+    "protected_source": {"const": "2e34bdad732fdab32fbf778280b3d3c70d66d602"},
+    "source_digests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["base_harness_sha256", "base_contract_sha256", "repair_contract_sha256"],
+      "properties": {
+        "base_harness_sha256": {"$ref": "#/$defs/sha256"},
+        "base_contract_sha256": {"$ref": "#/$defs/sha256"},
+        "repair_contract_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "prospective_projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path_count", "runtime_path_count", "redaction_status", "schema_status", "hostile_attempted", "hostile_rejected", "before_docker_capable_call"],
+      "properties": {
+        "path_count": {"const": 67},
+        "runtime_path_count": {"const": 67},
+        "redaction_status": {"const": "passed"},
+        "schema_status": {"const": "passed"},
+        "hostile_attempted": {"const": 66},
+        "hostile_rejected": {"const": 66},
+        "before_docker_capable_call": {"const": true}
+      }
+    },
+    "boundary_repair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["safe_key_present", "retired_key_absent", "boundary_count", "all_default_denied", "redactor_ast_unchanged"],
+      "properties": {
+        "safe_key_present": {"const": true},
+        "retired_key_absent": {"const": true},
+        "boundary_count": {"const": 10},
+        "all_default_denied": {"const": true},
+        "redactor_ast_unchanged": {"const": true}
+      }
+    },
+    "typed_terminal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["frozen_dataclass", "redaction_failure_cleanup", "schema_failure_cleanup", "failure_fallback_cleanup", "success_cleanup", "wrapper_cleanup_projection", "late_failure_escape_count", "success_release_after_late_failure_count"],
+      "properties": {
+        "frozen_dataclass": {"const": true},
+        "redaction_failure_cleanup": {"const": "cleanup_verified"},
+        "schema_failure_cleanup": {"const": "cleanup_verified"},
+        "failure_fallback_cleanup": {"const": "cleanup_incomplete"},
+        "success_cleanup": {"const": "cleanup_verified"},
+        "wrapper_cleanup_projection": {"const": "cleanup_verified"},
+        "late_failure_escape_count": {"const": 0},
+        "success_release_after_late_failure_count": {"const": 0}
+      }
+    },
+    "immutable_attempt_007": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["failure_sha256", "envelope_sha256", "retry_count", "reclassified"],
+      "properties": {
+        "failure_sha256": {"const": "86e5e1342eb54e062e35d73390ebceb141d097d03e180e4fe3c0ed64b465f422"},
+        "envelope_sha256": {"const": "3338c58054dea96b3845827dacfe184889ee328e5a4463966464b560d0a2c2c5"},
+        "retry_count": {"const": 0},
+        "reclassified": {"const": false}
+      }
+    },
+    "efficacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["diagnosed_forbidden_field_occupied_escape_before", "diagnosed_forbidden_field_occupied_escape_after", "diagnosed_cleanup_collapse_before", "diagnosed_cleanup_collapse_after", "occupied_runs_used_for_repair"],
+      "properties": {
+        "diagnosed_forbidden_field_occupied_escape_before": {"const": 1},
+        "diagnosed_forbidden_field_occupied_escape_after": {"const": 0},
+        "diagnosed_cleanup_collapse_before": {"const": 1},
+        "diagnosed_cleanup_collapse_after": {"const": 0},
+        "occupied_runs_used_for_repair": {"const": 0}
+      }
+    },
+    "activity_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["docker_objects", "postgresql_starts", "sql_executions", "database_operations", "provider_calls", "product_calls", "attempt_008_actions"],
+      "properties": {
+        "docker_objects": {"const": 0},
+        "postgresql_starts": {"const": 0},
+        "sql_executions": {"const": 0},
+        "database_operations": {"const": 0},
+        "provider_calls": {"const": 0},
+        "product_calls": {"const": 0},
+        "attempt_008_actions": {"const": 0}
+      }
+    },
+    "closed_boundaries": {
+      "type": "object",
+      "minProperties": 10,
+      "maxProperties": 10,
+      "additionalProperties": {"const": false}
+    }
+  },
+  "$defs": {
+    "git": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

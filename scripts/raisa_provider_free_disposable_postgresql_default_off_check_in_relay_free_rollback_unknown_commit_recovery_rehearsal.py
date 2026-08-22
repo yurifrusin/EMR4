@@ -13,6 +13,7 @@ import shutil
 import subprocess
 import time
 import uuid
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, NoReturn
 
@@ -92,6 +93,12 @@ class RehearsalFailure(RuntimeError):
         self.detail = detail
         self.server_post_readiness = server_post_readiness
         super().__init__(f"{stage}:{code}")
+
+
+@dataclass(frozen=True)
+class PostFinalizationTerminal:
+    evidence: dict[str, Any]
+    attestation: dict[str, Any] | None
 
 
 def _fail(
@@ -219,6 +226,198 @@ def _assert_redacted(value: object, *, forbidden_values: tuple[str, ...]) -> Non
                 _fail("redaction", "forbidden_value")
 
     walk(value)
+
+
+def _ast_function(tree: ast.Module, name: str) -> ast.FunctionDef:
+    matches = [
+        node
+        for node in tree.body
+        if isinstance(node, ast.FunctionDef) and node.name == name
+    ]
+    if len(matches) != 1:
+        _fail("static", "prospective_projection_source_shape_invalid")
+    return matches[0]
+
+
+def _ast_assigned_dict(function: ast.FunctionDef, name: str) -> ast.Dict:
+    matches: list[ast.Dict] = []
+    for node in ast.walk(function):
+        if not isinstance(node, (ast.Assign, ast.AnnAssign)):
+            continue
+        targets = node.targets if isinstance(node, ast.Assign) else [node.target]
+        if any(isinstance(target, ast.Name) and target.id == name for target in targets):
+            if isinstance(node.value, ast.Dict):
+                matches.append(node.value)
+    if len(matches) != 1:
+        _fail("static", "prospective_projection_source_shape_invalid")
+    return matches[0]
+
+
+def _ast_dict_paths(node: ast.Dict, prefix: str = "") -> set[str]:
+    paths: set[str] = set()
+    for key, value in zip(node.keys, node.values, strict=True):
+        if not isinstance(key, ast.Constant) or not isinstance(key.value, str):
+            _fail("static", "prospective_projection_nonliteral_key")
+        current = f"{prefix}.{key.value}" if prefix else key.value
+        paths.add(current)
+        if isinstance(value, ast.Dict):
+            paths.update(_ast_dict_paths(value, current))
+    return paths
+
+
+def _ast_return_dict(function: ast.FunctionDef) -> ast.Dict:
+    returns = [
+        node.value for node in ast.walk(function) if isinstance(node, ast.Return)
+    ]
+    if len(returns) != 1 or not isinstance(returns[0], ast.Dict):
+        _fail("static", "prospective_projection_source_shape_invalid")
+    return returns[0]
+
+
+def _runtime_success_key_paths(
+    source: str, contract: dict[str, Any]
+) -> tuple[str, ...]:
+    tree = ast.parse(source)
+    rehearsal = _ast_function(tree, "run_rehearsal")
+    paths = _ast_dict_paths(_ast_assigned_dict(rehearsal, "result"))
+    lifecycle_tries = [
+        node for node in rehearsal.body if isinstance(node, ast.Try) and node.finalbody
+    ]
+    if len(lifecycle_tries) != 1:
+        _fail("static", "prospective_projection_source_shape_invalid")
+    finalizer = ast.FunctionDef(
+        name="finalizer",
+        args=ast.arguments(
+            posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]
+        ),
+        body=lifecycle_tries[0].finalbody,
+        decorator_list=[],
+    )
+    paths.update(
+        _ast_dict_paths(_ast_assigned_dict(finalizer, "cleanup"), "cleanup")
+    )
+    paths.update(
+        _ast_dict_paths(
+            _ast_return_dict(_ast_function(tree, "_scenario")), "scenarios[]"
+        )
+    )
+    closed = contract.get("closed_boundaries")
+    if not isinstance(closed, dict) or len(closed) != 10:
+        _fail("static", "prospective_projection_contract_shape_invalid")
+    paths.update(f"closed_boundaries.{key}" for key in closed)
+    return tuple(sorted(paths))
+
+
+def _projection_key_paths(value: object, prefix: str = "") -> tuple[str, ...]:
+    paths: set[str] = set()
+
+    def walk(item: object, current_prefix: str) -> None:
+        if isinstance(item, dict):
+            for key, child in item.items():
+                current = f"{current_prefix}.{key}" if current_prefix else str(key)
+                paths.add(current)
+                walk(child, current)
+        elif isinstance(item, list):
+            for child in item:
+                walk(child, f"{current_prefix}[]")
+
+    walk(value, prefix)
+    return tuple(sorted(paths))
+
+
+def _prospective_success_evidence_projection(
+    contract: dict[str, Any], source_head: str
+) -> dict[str, Any]:
+    return {
+        "schema_version": (
+            "emr4.check-in-relay-free-rollback-unknown-response-rehearsal-"
+            "evidence.v1"
+        ),
+        "result": PASS_RESULT,
+        "evidence_label": EVIDENCE_LABEL,
+        "source_head": source_head,
+        "plan_source": PLAN_SOURCE,
+        "accepted_relay_free_transport_source": RELAY_FREE_SOURCE,
+        "accepted_runtime_role_source": RUNTIME_ROLE_SOURCE,
+        "protected_source": PROTECTED_SOURCE,
+        "contract_sha256": "0" * 64,
+        "source_binding_count": 15,
+        "manifest_sha256": "0" * 64,
+        "attestation_sha256": "0" * 64,
+        "hostile_mutations": {
+            "contract_attempted": 256,
+            "contract_rejected": 256,
+            "state_attempted": 96,
+            "state_rejected": 96,
+            "classifier_attempted": 24,
+            "classifier_rejected": 24,
+            "escapes": 0,
+        },
+        "scenarios": [
+            _scenario(f"RFR-S{index:02d}", 0) for index in range(1, 13)
+        ],
+        "containment": {
+            "image_reference": contract["containment_profile"]["image_reference"],
+            "image_id_sha256": contract["containment_profile"]["image_id"],
+            "pulls": 0,
+            "internal_network": True,
+            "published_ports": False,
+            "bind_mounts": 0,
+            "volumes": 0,
+            "log_driver": "none",
+            "server_count": 1,
+            "sidecar_count": 0,
+        },
+        "transport": {
+            "host_listener": False,
+            "forwarder": False,
+            "socket_copy_relay": False,
+            "docker_exec_byte_bridge": False,
+            "multiprocessing_process_or_queue": False,
+            "input_channel": "post_inspection_attached_stdin",
+            "outcome_channel": "exact_terminal_oci_state",
+            "attachment_is_outcome_evidence": False,
+            "complete_terminal_response": False,
+            "success_released": False,
+            "automatic_retries": 0,
+        },
+        "cleanup": {
+            "role_absent_before_teardown": True,
+            "attachments_absent": True,
+            "sidecars_absent": True,
+            "server_absent": True,
+            "network_absent": True,
+            "matching_owned_resources": 0,
+            "status": "cleanup_verified",
+        },
+        "elapsed_seconds": 0.0,
+        "closed_boundaries": copy.deepcopy(contract["closed_boundaries"]),
+    }
+
+
+def hostile_prospective_projection_keys_rejected(
+    projection: dict[str, Any],
+) -> tuple[int, int]:
+    attempted = 0
+    rejected = 0
+    for forbidden in sorted(FORBIDDEN_EVIDENCE_KEYS):
+        for key, nested in (
+            (forbidden, False),
+            (f"{forbidden}_material", False),
+            (f"material_{forbidden}", True),
+        ):
+            candidate = copy.deepcopy(projection)
+            target = candidate["closed_boundaries"] if nested else candidate
+            target[key] = False
+            attempted += 1
+            try:
+                _assert_redacted(candidate, forbidden_values=())
+            except RehearsalFailure as error:
+                if error.stage == "redaction" and error.code == "forbidden_field":
+                    rejected += 1
+                    continue
+            _fail("static", "prospective_projection_hostile_escape")
+    return attempted, rejected
 
 
 def validate_contract(
@@ -634,6 +833,23 @@ def static_check() -> dict[str, Any]:
         for node in ast.walk(tree)
     ):
         _fail("static", "forbidden_host_control_path")
+    prospective_projection = _prospective_success_evidence_projection(
+        contract, _git("rev-parse", "HEAD")
+    )
+    prospective_paths = _projection_key_paths(prospective_projection)
+    runtime_paths = _runtime_success_key_paths(source, contract)
+    if prospective_paths != runtime_paths:
+        _fail("static", "prospective_projection_shape_mismatch")
+    _assert_redacted(prospective_projection, forbidden_values=())
+    if list(
+        Draft202012Validator(_load_json(EVIDENCE_SCHEMA_PATH)).iter_errors(
+            prospective_projection
+        )
+    ):
+        _fail("static", "prospective_projection_schema_invalid")
+    projection_mutations = hostile_prospective_projection_keys_rejected(
+        prospective_projection
+    )
     for schema_path in (
         CONTRACT_SCHEMA_PATH,
         MANIFEST_SCHEMA_PATH,
@@ -663,6 +879,14 @@ def static_check() -> dict[str, Any]:
         "state_mutations": {
             "attempted": state_mutations[0],
             "rejected": state_mutations[1],
+        },
+        "prospective_projection": {
+            "path_count": len(prospective_paths),
+            "runtime_path_count": len(runtime_paths),
+            "redaction_status": "passed",
+            "schema_status": "passed",
+            "hostile_attempted": projection_mutations[0],
+            "hostile_rejected": projection_mutations[1],
         },
     }
 
@@ -2137,6 +2361,58 @@ def _write_json(path: Path, value: dict[str, Any]) -> None:
     path.write_bytes(_json_bytes(value))
 
 
+def _finalize_post_cleanup_terminal(
+    *,
+    error: RehearsalFailure | None,
+    result: dict[str, Any] | None,
+    attestation: dict[str, Any] | None,
+    lifecycle: list[str],
+    cleanup: dict[str, Any],
+    elapsed_seconds: float,
+    forbidden_values: tuple[str, ...],
+) -> PostFinalizationTerminal:
+    finalized_cleanup = copy.deepcopy(cleanup)
+
+    def failed_terminal(terminal_error: RehearsalFailure) -> PostFinalizationTerminal:
+        failure = _failure_evidence(
+            terminal_error,
+            copy.deepcopy(lifecycle),
+            copy.deepcopy(finalized_cleanup),
+        )
+        try:
+            _assert_redacted(failure, forbidden_values=forbidden_values)
+        except RehearsalFailure:
+            failure = _failure_evidence(
+                RehearsalFailure("redaction", "failure_evidence_rejected"),
+                ["post_finalization_failure_evidence_rejected"],
+                copy.deepcopy(finalized_cleanup),
+            )
+            _assert_redacted(failure, forbidden_values=forbidden_values)
+        _write_json(FAILURE_PATH, failure)
+        return PostFinalizationTerminal(evidence=failure, attestation=None)
+
+    if error is not None or result is None or attestation is None:
+        return failed_terminal(
+            error or RehearsalFailure("execution", "result_missing")
+        )
+    candidate = copy.deepcopy(result)
+    candidate["cleanup"] = copy.deepcopy(finalized_cleanup)
+    candidate["elapsed_seconds"] = elapsed_seconds
+    try:
+        _assert_redacted(candidate, forbidden_values=forbidden_values)
+    except RehearsalFailure as late_error:
+        return failed_terminal(late_error)
+    if list(
+        Draft202012Validator(_load_json(EVIDENCE_SCHEMA_PATH)).iter_errors(candidate)
+    ):
+        return failed_terminal(
+            RehearsalFailure("evidence", "parent_schema_invalid")
+        )
+    _write_json(ATTESTATION_PATH, attestation)
+    _write_json(EVIDENCE_PATH, candidate)
+    return PostFinalizationTerminal(evidence=candidate, attestation=attestation)
+
+
 def run_rehearsal() -> tuple[dict[str, Any], dict[str, Any] | None]:
     if EVIDENCE_PATH.exists() or ATTESTATION_PATH.exists() or FAILURE_PATH.exists():
         _fail("execution", "terminal_artifact_already_exists")
@@ -2707,33 +2983,16 @@ def run_rehearsal() -> tuple[dict[str, Any], dict[str, Any] | None]:
                 RehearsalFailure("cleanup", "exact_cleanup_unverified"),
                 lifecycle,
             )
-    elapsed = round(time.monotonic() - started, 6)
-    if error is not None or result is None or attestation is None:
-        failure = _failure_evidence(
-            error or RehearsalFailure("execution", "result_missing"),
-            lifecycle,
-            cleanup,
-        )
-        _assert_redacted(failure, forbidden_values=forbidden_values)
-        _write_json(FAILURE_PATH, failure)
-        return failure, None
-    result["cleanup"] = cleanup
-    result["elapsed_seconds"] = elapsed
-    _assert_redacted(result, forbidden_values=forbidden_values)
-    evidence_errors = list(
-        Draft202012Validator(_load_json(EVIDENCE_SCHEMA_PATH)).iter_errors(result)
+    terminal = _finalize_post_cleanup_terminal(
+        error=error,
+        result=result,
+        attestation=attestation,
+        lifecycle=lifecycle,
+        cleanup=cleanup,
+        elapsed_seconds=round(time.monotonic() - started, 6),
+        forbidden_values=forbidden_values,
     )
-    if evidence_errors:
-        failure = _failure_evidence(
-            RehearsalFailure("evidence", "parent_schema_invalid"),
-            lifecycle,
-            cleanup,
-        )
-        _write_json(FAILURE_PATH, failure)
-        return failure, None
-    _write_json(ATTESTATION_PATH, attestation)
-    _write_json(EVIDENCE_PATH, result)
-    return result, attestation
+    return terminal.evidence, terminal.attestation
 
 
 def main(argv: list[str] | None = None) -> int:

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:emr4:check-in-prospective-success-redaction-typed-cleanup-projection-repair-contract:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "plan_source",
+    "accepted_diagnosis_source",
+    "accepted_diagnosis_closeout_source",
+    "protected_source",
+    "safe_boundary_key",
+    "retired_conflicting_boundary_key",
+    "expected_projection_path_count",
+    "expected_hostile_projection_mutations",
+    "repair_gears",
+    "closed_boundaries"
+  ],
+  "properties": {
+    "schema_version": {"const": "emr4.check-in-prospective-success-redaction-typed-cleanup-projection-repair-contract.v1"},
+    "result": {"const": "raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair_pass"},
+    "plan_source": {"$ref": "#/$defs/git"},
+    "accepted_diagnosis_source": {"$ref": "#/$defs/git"},
+    "accepted_diagnosis_closeout_source": {"$ref": "#/$defs/git"},
+    "protected_source": {"const": "2e34bdad732fdab32fbf778280b3d3c70d66d602"},
+    "safe_boundary_key": {"const": "live_sensitive_material_existing_hosted_or_product_database_used"},
+    "retired_conflicting_boundary_key": {"const": "live_secret_existing_hosted_or_product_database_used"},
+    "expected_projection_path_count": {"const": 67},
+    "expected_hostile_projection_mutations": {"const": 66},
+    "repair_gears": {
+      "const": [
+        "prospective_success_projection_static_gate",
+        "typed_post_finalization_terminal_bridge"
+      ]
+    },
+    "closed_boundaries": {
+      "type": "object",
+      "minProperties": 10,
+      "maxProperties": 10,
+      "additionalProperties": {"const": false}
+    }
+  },
+  "$defs": {
+    "git": {"type": "string", "pattern": "^[0-9a-f]{40}$"}
+  }
+}
