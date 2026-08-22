@@ -1,0 +1,139 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free read-only post-check-in admission-control programme orientation",
+    "completed_stage": "Accepted raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_read_only_post_check_in_admission_control_programme_orientation_plan",
+    "operation_id": "raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation",
+    "resume_after_compaction": true,
+    "source_head": "b9d9a32d111a23bff259a0ff9d5168cfdc305508",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "ea05e120d0974542a5a56b2ffde5df0a9494f217",
+    "reason_codes": [],
+    "resolved_commit": "b9d9a32d111a23bff259a0ff9d5168cfdc305508",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "b9d9a32d111a23bff259a0ff9d5168cfdc305508"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "ea05e120d0974542a5a56b2ffde5df0a9494f217",
+    "branch_origin_aligned": true,
+    "head": "ea05e120d0974542a5a56b2ffde5df0a9494f217",
+    "origin_branch_commit": "ea05e120d0974542a5a56b2ffde5df0a9494f217",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 671
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "fresh_preplanning_after_native_harness_closeout",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native Harness is unavailable after its final consumed negative terminal, Claude Code is historical only, and this read-only authoritative-lineage reconciliation has no worker implementation package.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "No candidate or unresolved conceptual fork exists before the orientation is frozen. Reassess after the successor selection and use a fresh veto only if deterministic evidence leaves a material architecture judgment requiring independence.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the accepted lineage, one latch and one successor decision require serial custody.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-read-only-post-check-in-admission-control-programme-orientation",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "post_plan_freeze",
+      "after_gap_matrix_freeze",
+      "pre_verifier_gate",
+      "closeout",
+      "before_successor_dispatch"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "complete five-source rehydration before plan freeze",
+      "reconcile accepted and blocked lineage without rewriting immutable evidence",
+      "prove graph non-membership before naming a successor",
+      "freeze exactly one provider-free default-off successor",
+      "Sol alone accepts and publishes"
+    ]
+  },
+  "planned_action": "freeze_and_execute_the_provider_free_read_only_post_check_in_admission_control_programme_orientation",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-plan.md",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/efficacy-reading.json",
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md",
+      "docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-plan.md",
+      "docs/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-closeout.md",
+      "docs/raisa-provider-free-default-off-ordinary-practice-canonical-check-in-admission-control-architecture-closeout.md",
+      "docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-closeout.md",
+      "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md",
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-runtime-role-tenant-isolation-attestation-rehearsal-closeout.md",
+      "docs/raisa-provider-free-disposable-postgresql-default-off-check-in-rollback-unknown-commit-recovery-rehearsal-blocked-closeout.md",
+      "docs/raisa-provider-free-default-off-check-in-relay-free-unknown-response-transport-redesign-closeout.md",
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md",
+      "orchestration/api_spine_adr.md",
+      "orchestration/api_spine_programme.md",
+      "docs/api-spine/openapi/appointment-commands.yaml",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns serial lineage reconciliation, successor selection, deterministic evidence, acceptance and Git. DeepSeek is declined because the native Harness is unavailable and Claude Code is historical only. Gemini is reserved for reassessment after the orientation freezes a material successor. Native subagents are declined under developer policy and serial authoritative-source reconciliation.",
+    "git_refs_and_worktree": "The machine snapshot alone verifies the origin-aligned task branch, exact configured protected refs, required ancestry, clean tracked tree and preserved docs/branding plus unrelated untracked paths.",
+    "live_handover_current_baton": "AGENTS.md was read completely. The Current Baton accepts the default-off check-in route, read-only not-ready verdict, unmounted ordinary-admission kernel, later operational-evidence lineage and final native-Harness negative terminal, then selects this exact read-only orientation without product-source change.",
+    "protected_evidence_boundaries": "Provider-free repository-static read-only orientation only. Preserve every accepted route, readiness, admission-kernel, operational-evidence and Harness node. No product/API/configuration/client change, ordinary enablement, flag or allowlist change, generic-status Arrived change, waiting-area movement, product or protected data, provider, runtime, deployment, Pages or protected-ref action. Preserve docs/branding and every unrelated untracked path; use explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
