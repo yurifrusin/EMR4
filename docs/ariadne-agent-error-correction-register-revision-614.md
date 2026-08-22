@@ -4,16 +4,16 @@ Date: 2026-08-22
 
 Timestamp: 2026-08-22T11:54:17.2967942+10:00 (Australia/Brisbane)
 
-Status: **941 bounded incidents; all corrected or contained; none open**
+Status: **942 bounded incidents; all corrected or contained; none open**
 
 <!-- ariadne-agent-error-register-reading
 revision: 614
-incident_count: 941
-new_incident_ids: AER-0938,AER-0939,AER-0940,AER-0941
+incident_count: 942
+new_incident_ids: AER-0938,AER-0939,AER-0940,AER-0941,AER-0942
 open_incident_count: 0
 -->
 
-This revision adds AER-0938 through AER-0941. It preserves every preceding
+This revision adds AER-0938 through AER-0942. It preserves every preceding
 entry unchanged.
 
 ## AER-0938 — focused complete-runner expectations drifted from the contract
@@ -82,12 +82,33 @@ projection, latch or protected ref changed in the rejected run.
 Recurrence signature:
 `orchestrator.clockwork_next_boundary_floor_literal_omitted`
 
+## AER-0942 — closeout used an unregistered live acceptance label
+
+The first live clockwork publication used a descriptive complete-runner
+acceptance label rather than the closed `Current DeepSeek native Harness
+acceptance` rolling slot. The renderer therefore inserted a second live
+DeepSeek acceptance row. The broad post-publication clockwork test rejected
+that state with `tick_baton_compaction_unindexed`.
+
+The first generation and report remain preserved. The clockwork restored its
+immediately previous generation byte exactly, with no Harness, worker, provider
+or protected-ref process. The corrected intent now uses the exact rolling
+label. The clockwork compactor also rejects every acceptance label absent from
+the closed active-label manifest before rendering, with focused positive and
+hostile tests.
+
+Recurrence signature:
+`orchestrator.clockwork_closeout_used_unregistered_live_acceptance_label`
+
 ## Control reading
 
 AER-0939 is the material incident. The useful runner capability passed in one
 process, but an already-known class of serializer-boundary lapse consumed a
 reconciliation cycle because the prior fix was local rather than structural.
-AER-0938, AER-0940 and AER-0941 were pre-execution test/control defects. Revision 614
+AER-0938, AER-0940 and AER-0941 were pre-execution test/control defects.
+AER-0942 was a live governance-projection defect that the broad post-publication
+test contained through the clockwork's byte-exact rollback. Revision 614
 therefore does not count the recovery paperwork as Harness capability progress;
 it records one substantive runner pass and one avoidable post-processing rerun
-of procedure, with zero Node retry, provider activity or product authority.
+of procedure plus one corrected governance projection, with zero Node retry,
+provider activity or product authority.

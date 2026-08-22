@@ -1082,6 +1082,8 @@ def _compact_rendered_baton(
     # The validated tick acceptance is clockwork-owned active state. Older replay
     # fixtures predate the rolling acceptance slot and the clockwork-relation row,
     # so both are explicit derived active rows rather than caller-authored labels.
+    if acceptance_label not in manifest["active_labels"]:
+        _reject("tick_baton_compaction_unindexed")
     active = set(manifest["active_labels"]).union(
         {acceptance_label, "Current clockwork relation"}
     )

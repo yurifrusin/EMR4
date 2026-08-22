@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.governance_live_tick_corrective_rollback_evidence.v1",
+  "status": "passed",
+  "operation_id": "deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal",
+  "observed_at": "2026-08-22T12:25:38.6169090+10:00",
+  "reason": "rolling_acceptance_label_outside_closed_active_vocabulary",
+  "failed_test": "tests/test_ariadne_governance_clockwork_tick.py::test_clockwork_compacts_the_rendered_baton_from_the_closed_index",
+  "rejected_publication": {
+    "generation_id": "gen-12cd5e0d3688f87f8f67a52ca24b978a72628197db5a65d620ecc6c742ca5a2a",
+    "source_commit": "84132b0bf9c87b6104e86abc955f149e97d73b9f",
+    "acceptance_label": "DeepSeek native Harness complete package-unloaded runner reconciled acceptance",
+    "effect": "inserted_a_second_live_deepseek_acceptance_row_instead_of_replacing_the_closed_rolling_slot"
+  },
+  "rollback": {
+    "rolled_back_from_generation_id": "gen-12cd5e0d3688f87f8f67a52ca24b978a72628197db5a65d620ecc6c742ca5a2a",
+    "selected_generation_id": "gen-f421ab28dbae0bb7ed44925c9c50ed675e1b43ee285bd07371a4bafafa556431",
+    "previous_source_commit": "84132b0bf9c87b6104e86abc955f149e97d73b9f",
+    "lease_sequence": 153,
+    "byte_exact": true
+  },
+  "correction": {
+    "acceptance_label": "Current DeepSeek native Harness acceptance",
+    "guard": "reject_every_baton_acceptance_label_not_present_in_the_closed_active_label_manifest_before_rendering",
+    "retry_scope": "one_process_free_clockwork_republication_only"
+  },
+  "native_harness_process_count": 0,
+  "deepseek_worker_turn_count": 0,
+  "provider_request_count": 0,
+  "protected_ref_movement_count": 0
+}

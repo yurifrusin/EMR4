@@ -391,6 +391,18 @@ def test_clockwork_compaction_rejects_an_unindexed_live_row() -> None:
         )
 
 
+def test_clockwork_compaction_rejects_an_unregistered_acceptance_label() -> None:
+    manifest = _load_baton_compaction_manifest(ROOT)
+    with pytest.raises(
+        ClockworkTickRejection, match="tick_baton_compaction_unindexed"
+    ):
+        _compact_rendered_baton(
+            _rolling_slot_baton(),
+            manifest,
+            acceptance_label="Caller-authored duplicate acceptance",
+        )
+
+
 def test_intent_rejects_derived_unsafe_and_underbounded_input() -> None:
     contract = validate_contract(_json(CONTRACT_PATH))
     baseline = _json(INTENT_PATH)

@@ -68,6 +68,7 @@
         ],
         "findings": [
           "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/attempt-001-failure-terminal.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-001-rollback-evidence.json",
           "docs/ariadne-agent-error-correction-register-revision-614.md"
         ],
         "closeouts": [
@@ -89,7 +90,8 @@
           "tests/test_ariadne_active_operation_latch_continuity.py",
           "tests/test_current_baton_consistency.py",
           "tests/test_agents_acceptance_index.py",
-          "tests/test_ariadne_agent_error_register.py"
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
         ],
         "artifacts": [
           "scripts/deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
@@ -97,7 +99,12 @@
           "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/contract.json",
           "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/attempt-001-process-envelope.json",
           "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/result-contract-reconciliation-evidence.json",
-          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/result-contract-reconciliation-report.md"
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/result-contract-reconciliation-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-001-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-001-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-001-rollback-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-001-rollback-report.md",
+          "orchestration_harness/governance_clockwork_tick.py"
         ]
       },
       "unresolved_gates": [
@@ -167,21 +174,27 @@
         "completion_contract": "final_exit_code_zero_required"
       },
       {
+        "command_id": "complete_runner_clockwork_rolling_label_tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "pytest", "--noconftest", "-p", "no:cacheprovider", "--strict-config", "--strict-markers", "-q", "tests/test_ariadne_governance_clockwork_tick.py::test_clockwork_compacts_the_rendered_baton_from_the_closed_index", "tests/test_ariadne_governance_clockwork_tick.py::test_clockwork_compaction_rejects_an_unregistered_acceptance_label"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
         "command_id": "complete_runner_closeout_ruff",
         "executable": ".venv/Scripts/python.exe",
-        "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py", "scripts/deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py", "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py"],
+        "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py", "scripts/deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py", "orchestration_harness/governance_clockwork_tick.py", "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py", "tests/test_ariadne_governance_clockwork_tick.py"],
         "completion_contract": "final_exit_code_zero_required"
       },
       {
         "command_id": "complete_runner_closeout_compile",
         "executable": ".venv/Scripts/python.exe",
-        "arguments": ["-m", "py_compile", "scripts/deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py", "scripts/deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py", "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py"],
+        "arguments": ["-m", "py_compile", "scripts/deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py", "scripts/deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py", "orchestration_harness/governance_clockwork_tick.py", "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py", "tests/test_ariadne_governance_clockwork_tick.py"],
         "completion_contract": "final_exit_code_zero_required"
       }
     ]
   },
   "baton_acceptance": {
-    "label": "DeepSeek native Harness complete package-unloaded runner reconciled acceptance",
+    "label": "Current DeepSeek native Harness acceptance",
     "paths": [
       "docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-plan.md",
       "docs/security/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-threat-model-delta.md",
@@ -190,6 +203,8 @@
       "scripts/deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py",
       "tests/test_deepseek_native_harness_provider_free_complete_package_unloaded_runner_evaluation_rehearsal.py",
       "tests/test_deepseek_native_harness_provider_free_complete_runner_result_contract_reconciliation.py",
+      "orchestration_harness/governance_clockwork_tick.py",
+      "tests/test_ariadne_governance_clockwork_tick.py",
       "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/",
       "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-postcompaction-receipt.json",
       "orchestration/agent_inbox/codex/deepseek-native-harness-complete-package-unloaded-runner-evaluation-pre-verifier-acceptance-receipt.json",
@@ -359,6 +374,46 @@
         ]
       },
       "baton_summary": "records and corrects an omitted exact clockwork boundary-floor literal before generation."
+    },
+    {
+      "attempt_key": "complete-runner-closeout-rolling-acceptance-label",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-complete-package-unloaded-runner-evaluation",
+      "role": "orchestrator",
+      "resource_id": "clockwork-closed-rolling-acceptance-label",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_clockwork_publish_then_byte_exact_rollback",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "A DeepSeek closeout replaces the one closed Current DeepSeek native Harness acceptance rolling row and cannot introduce a caller-authored live label.",
+      "observed_error": "The first live closeout generation used a descriptive acceptance label, so the renderer inserted a second DeepSeek acceptance row alongside the closed rolling slot; the broad governance test rejected the live projection.",
+      "detection_method": "tests/test_ariadne_governance_clockwork_tick.py::test_clockwork_compacts_the_rendered_baton_from_the_closed_index failed with tick_baton_compaction_unindexed after the first publication, and the clockwork then rolled back one generation byte exactly.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-001-evidence.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-001-rollback-evidence.json",
+        "orchestration_harness/governance_clockwork_tick.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "docs/ariadne-agent-error-correction-register-revision-614.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_closeout_used_unregistered_live_acceptance_label",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restore the previous generation byte exactly, use the exact Current DeepSeek native Harness acceptance rolling label and reject every future acceptance label absent from the closed active-label manifest before rendering.",
+        "prevention_control": "Clockwork compaction admits only a manifest-listed active acceptance label, with focused positive and hostile tests for the DeepSeek rolling slot.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/clockwork-tick-attempt-001-rollback-evidence.json",
+          "orchestration_harness/governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-614.md"
+        ]
+      },
+      "baton_summary": "preserves the rejected duplicate-row publication, records its byte-exact rollback and closes acceptance labels to the manifest-listed rolling vocabulary before corrected publication."
     }
   ]
 }

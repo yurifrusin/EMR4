@@ -22,6 +22,12 @@ is also a useful warning that AER-0936's earlier serializer fix was too local;
 the same general mistake recurred in the real validator. The stronger control
 now separates wire serialization from evidence serialization structurally.
 
+The first clockwork closeout also tried to add a descriptive acceptance row
+instead of replacing its one closed DeepSeek slot. The broad governance test
+caught the duplicate; the previous generation was restored byte exactly. The
+corrected gear now refuses any live acceptance label outside its closed list,
+so the same paperwork choice cannot create another row.
+
 Next we go directly to one tightly bounded real DeepSeek Harness worker doing
 useful Raisa development work. There is no further ceremonial local rehearsal
 unless that occupied preflight exposes a concrete new hazard.
@@ -41,7 +47,9 @@ unless that occupied preflight exposes a concrete new hazard.
   request/provider/model/target counters zero.
 - Immutable controller terminal: `complete_runner_result_rejected`.
 - Recovery: zero-process, zero-retry exact-preimage hash reconciliation.
-- Register: revision 614, 941 bounded incidents, none open; AER-0939 is the
-  material wire/evidence serializer recurrence.
+- Register: revision 614, 942 bounded incidents, none open; AER-0939 is the
+  material wire/evidence serializer recurrence and AER-0942 records the
+  duplicate acceptance-row projection, byte-exact rollback and closed
+  rolling-label guard.
 - Protected refs remain exact at
   `2e34bdad732fdab32fbf778280b3d3c70d66d602`; no Pages or product/data action.
