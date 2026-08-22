@@ -41,7 +41,8 @@ ordered set of:
 
 The output is a dependency map, not a gap closure. The exact result must remain
 11 satisfied / 0 blocking / 1 operational-evidence gap with verdict
-`not_ready_for_ordinary_practice_admission`.
+`not_ready_for_ordinary_practice_admission` and result
+`gap_decomposed_not_satisfied`.
 
 ## Exact accepted inputs
 

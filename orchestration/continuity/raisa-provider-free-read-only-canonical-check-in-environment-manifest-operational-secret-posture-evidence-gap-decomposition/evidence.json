@@ -1,0 +1,79 @@
+{
+  "accepted_git_objects": {
+    "environment_architecture_candidate": "a1f309a6d52d01f9866432f7e9abb8095788d023",
+    "environment_architecture_closeout_source": "455e41b8b9038813b290e67c43ce0b3190120988",
+    "post_attempt_008_convergence_candidate": "5e9bf951f3712c48cac32f240d78b2cb685cc93c",
+    "post_attempt_008_convergence_closeout_source": "ca18d64052241cd07bc1ac73887f849e2d245f98"
+  },
+  "closed_boundaries": {
+    "application_or_product_surface_opened": false,
+    "credential_store_or_environment_read": false,
+    "database_role_or_infrastructure_used": false,
+    "operational_manifest_created": false,
+    "ordinary_practice_enabled": false,
+    "protected_evidence_or_ref_opened": false,
+    "provider_worker_or_network_used": false,
+    "secret_or_reference_resolved": false
+  },
+  "contract_schema_sha256": "18f2b3f9698d2e2df2f78198cc889cd67e0a31597f498e773d343bfada8bdcda",
+  "contract_sha256": "adad1642e1de628246eb7e39263a381f837139eb662baeefe8b2873a71b56bc2",
+  "dependency_edge_count": 39,
+  "hostile_mutations_rejected": 142,
+  "human_attention": {
+    "ceremonial_pause_allowed": false,
+    "required_now": false,
+    "trigger": "immediately_before_required_external_selection_or_lasting_action"
+  },
+  "next_owned_node_ids": [
+    "closed_manifest_normalizer",
+    "typed_operational_evidence_inputs",
+    "pure_environment_evidence_gate_evaluator"
+  ],
+  "node_count": 20,
+  "node_counts": {
+    "accepted_foundation": 4,
+    "external_operational_fact": 6,
+    "human_owned_external_decision": 5,
+    "repository_engineering_prerequisite": 5
+  },
+  "planning_source": "878c3b4ef9790ff876e877f69653e74f16056948",
+  "readiness_result": {
+    "blocking_gap": 0,
+    "operational_evidence_gap": 1,
+    "result": "gap_decomposed_not_satisfied",
+    "satisfied": 11,
+    "verdict": "not_ready_for_ordinary_practice_admission"
+  },
+  "required_external_fact_ids": [
+    "live_runtime_role_binding_and_attestation",
+    "three_current_opaque_secret_bindings",
+    "three_current_rotation_custody_attestations",
+    "current_deny_only_break_glass_posture",
+    "one_current_environment_manifest_instance",
+    "operational_uniqueness_and_freshness_readback"
+  ],
+  "result": "raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition_pass",
+  "schema_version": "raisa.check_in_environment_secret_posture_gap_decomposition_evidence.v1",
+  "source_bindings": {
+    "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture-closeout.md": "0858486ff6cd173a6b3b397585e7b1ff74c578b341a8e34b8425e114e0520b5e",
+    "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review-closeout.md": "f0dfeebd7f5ecafdc6ad2d63484e6ff83d515e4216107f990677947f28a82236",
+    "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-secret-posture-architecture-sol-acceptance.md": "ecac18824503953828d876eda863f40c419af5d5b92b0ef1fd180730452570ea",
+    "orchestration/agent_inbox/codex/raisa-post-attempt-008-check-in-admission-readiness-convergence-review-sol-acceptance.md": "f0624b93eee19275365e7dd1b813ca318b8bb4c1c775803fe80cab68322806dd",
+    "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/architecture-report.md": "35f09c1118734d6b40ae267732a168343e2b76ebd9dd00fd901a7d891a831018",
+    "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/contract.json": "e9aab3504520d955a0ce2c94c32a5f9a6ae25d7bbf129c7f2bd21951201c34d8",
+    "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/environment-manifest.schema.json": "786cab3b19231c391d281cf36568b4206fe5f11b2a2ac51469f0996c3e718e88",
+    "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/provider-free-architecture-evidence.json": "0f1b762f28247e5c9033cf377716b21a625080344c5996ea743d90b66b1eb32b",
+    "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/evidence.json": "d2b6836a84465555e47ce97d66b3dddc0f866251bbf7cf53b73908103d7d7c46",
+    "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/report.md": "c93ab33095fc5be81a6e14a3eeb26ee402edd498ef8c8bdc2e435fda6c851a54"
+  },
+  "source_findings": {
+    "architecture_population_zero": true,
+    "deny_only_break_glass_retained": true,
+    "evaluator_has_no_admission_or_runtime_capability": true,
+    "human_decisions_unselected": true,
+    "readiness_counts_retained": true,
+    "reference_only_secret_slots_retained": true,
+    "sole_gap_retained": true,
+    "synthetic_substitution_for_operational_fact_denied": true
+  }
+}

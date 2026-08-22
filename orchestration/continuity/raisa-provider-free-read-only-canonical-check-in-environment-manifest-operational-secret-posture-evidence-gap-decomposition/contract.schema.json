@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.invalid/schema/check-in-environment-secret-posture-gap-decomposition-v1.json",
+  "title": "Canonical check-in environment and secret-posture gap decomposition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "planning_source",
+    "input_hash_mode",
+    "accepted_git_objects",
+    "inputs",
+    "node_classes",
+    "nodes",
+    "gap_closure_rule",
+    "readiness_result",
+    "human_attention",
+    "next_operation",
+    "workflow_control",
+    "closed_boundaries"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "raisa.check_in_environment_secret_posture_gap_decomposition_contract.v1"
+    },
+    "planning_source": {
+      "$ref": "#/$defs/fullGitObject"
+    },
+    "input_hash_mode": {
+      "const": "strict_utf8_canonical_lf_reject_bare_cr_sha256"
+    },
+    "accepted_git_objects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "post_attempt_008_convergence_closeout_source",
+        "post_attempt_008_convergence_candidate",
+        "environment_architecture_candidate",
+        "environment_architecture_closeout_source"
+      ],
+      "properties": {
+        "post_attempt_008_convergence_closeout_source": {"$ref": "#/$defs/fullGitObject"},
+        "post_attempt_008_convergence_candidate": {"$ref": "#/$defs/fullGitObject"},
+        "environment_architecture_candidate": {"$ref": "#/$defs/fullGitObject"},
+        "environment_architecture_closeout_source": {"$ref": "#/$defs/fullGitObject"}
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"$ref": "#/$defs/sha256"}
+        }
+      }
+    },
+    "node_classes": {
+      "const": [
+        "accepted_foundation",
+        "repository_engineering_prerequisite",
+        "external_operational_fact",
+        "human_owned_external_decision"
+      ]
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 20,
+      "maxItems": 20,
+      "items": {"$ref": "#/$defs/node"}
+    },
+    "gap_closure_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dimension_id",
+        "current_classification",
+        "required_external_fact_ids",
+        "all_required",
+        "repository_documentation_or_synthetic_substitution_allowed",
+        "this_tranche_closes_gap"
+      ],
+      "properties": {
+        "dimension_id": {"const": "environment_manifest_and_operational_secret_posture"},
+        "current_classification": {"const": "operational_evidence_gap"},
+        "required_external_fact_ids": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/nodeId"}
+        },
+        "all_required": {"const": true},
+        "repository_documentation_or_synthetic_substitution_allowed": {"const": false},
+        "this_tranche_closes_gap": {"const": false}
+      }
+    },
+    "readiness_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["satisfied", "blocking_gap", "operational_evidence_gap", "verdict", "result"],
+      "properties": {
+        "satisfied": {"const": 11},
+        "blocking_gap": {"const": 0},
+        "operational_evidence_gap": {"const": 1},
+        "verdict": {"const": "not_ready_for_ordinary_practice_admission"},
+        "result": {"const": "gap_decomposed_not_satisfied"}
+      }
+    },
+    "human_attention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_now", "trigger", "ceremonial_pause_allowed"],
+      "properties": {
+        "required_now": {"const": false},
+        "trigger": {"const": "immediately_before_required_external_selection_or_lasting_action"},
+        "ceremonial_pause_allowed": {"const": false}
+      }
+    },
+    "next_operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operation_id", "owned_node_ids", "product_admission_seam_in_scope", "external_fact_or_human_decision_in_scope"],
+      "properties": {
+        "operation_id": {"const": "raisa-provider-free-unmounted-canonical-check-in-environment-manifest-normalizer-and-evidence-gate-evaluator-rehearsal"},
+        "owned_node_ids": {
+          "const": [
+            "closed_manifest_normalizer",
+            "typed_operational_evidence_inputs",
+            "pure_environment_evidence_gate_evaluator"
+          ]
+        },
+        "product_admission_seam_in_scope": {"const": false},
+        "external_fact_or_human_decision_in_scope": {"const": false}
+      }
+    },
+    "workflow_control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "git_acceptance_source",
+        "ad_hoc_composite_powershell_git_summary_is_acceptance_input",
+        "new_git_summary_control_layer_added"
+      ],
+      "properties": {
+        "git_acceptance_source": {"const": "preflight_git_refs_snapshot_only"},
+        "ad_hoc_composite_powershell_git_summary_is_acceptance_input": {"const": false},
+        "new_git_summary_control_layer_added": {"const": false}
+      }
+    },
+    "closed_boundaries": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "fullGitObject": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nodeClass": {
+      "enum": [
+        "accepted_foundation",
+        "repository_engineering_prerequisite",
+        "external_operational_fact",
+        "human_owned_external_decision"
+      ]
+    },
+    "nodeStatus": {
+      "enum": ["accepted", "pending", "absent", "unselected"]
+    },
+    "nodeId": {
+      "enum": [
+        "readiness_matrix_11_0_1",
+        "reference_only_manifest_architecture",
+        "disposable_role_tenant_attestation",
+        "atomic_unknown_response_and_rollback",
+        "select_target_environment_and_practice_scope",
+        "approve_secret_custody_and_operational_owners",
+        "approve_rotation_policy_and_independent_verifiers",
+        "authorize_live_role_secret_and_manifest_provisioning",
+        "closed_manifest_normalizer",
+        "typed_operational_evidence_inputs",
+        "pure_environment_evidence_gate_evaluator",
+        "default_off_admission_input_seam",
+        "unmounted_reference_only_conformance_packet",
+        "live_runtime_role_binding_and_attestation",
+        "three_current_opaque_secret_bindings",
+        "three_current_rotation_custody_attestations",
+        "current_deny_only_break_glass_posture",
+        "one_current_environment_manifest_instance",
+        "operational_uniqueness_and_freshness_readback",
+        "confirm_ordinary_activation_separately"
+      ]
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["order", "id", "class", "status", "depends_on", "completion_evidence", "repository_only"],
+      "properties": {
+        "order": {"type": "integer", "minimum": 1, "maximum": 20},
+        "id": {"$ref": "#/$defs/nodeId"},
+        "class": {"$ref": "#/$defs/nodeClass"},
+        "status": {"$ref": "#/$defs/nodeStatus"},
+        "depends_on": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/nodeId"}
+        },
+        "completion_evidence": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+        "repository_only": {"type": "boolean"}
+      }
+    }
+  }
+}
