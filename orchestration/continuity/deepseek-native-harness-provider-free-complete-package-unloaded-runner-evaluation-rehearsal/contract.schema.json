@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-complete-package-unloaded-runner-contract.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "git_binding_policy", "closed_results",
+    "windows_environment_keys", "materialized_relative_paths",
+    "required_zero_counters", "documentation_bindings",
+    "predecessor_bindings", "implementation_bindings",
+    "accepted_source_inventory", "fixture_source_inventory",
+    "stub_source_inventory", "import_closure", "expected_fixture_result",
+    "expected_sidecar_keys", "claim_boundary", "source_byte_total"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_complete_package_unloaded_runner_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal"},
+    "git_binding_policy": {"type": "object"},
+    "closed_results": {"type": "array", "minItems": 4, "maxItems": 4, "uniqueItems": true, "items": {"type": "string"}},
+    "windows_environment_keys": {"type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true, "items": {"type": "string"}},
+    "materialized_relative_paths": {"type": "array", "minItems": 13, "maxItems": 13, "uniqueItems": true, "items": {"type": "string"}},
+    "required_zero_counters": {"type": "array", "minItems": 14, "maxItems": 14, "uniqueItems": true, "items": {"type": "string"}},
+    "documentation_bindings": {"$ref": "#/$defs/hashMap"},
+    "predecessor_bindings": {"$ref": "#/$defs/hashMap"},
+    "implementation_bindings": {"$ref": "#/$defs/hashMap"},
+    "accepted_source_inventory": {"$ref": "#/$defs/sourceMap"},
+    "fixture_source_inventory": {"$ref": "#/$defs/sourceEntry"},
+    "stub_source_inventory": {"$ref": "#/$defs/sourceMap"},
+    "import_closure": {"type": "object"},
+    "expected_fixture_result": {"type": "object"},
+    "expected_sidecar_keys": {"type": "array", "minItems": 39, "maxItems": 39, "uniqueItems": true, "items": {"type": "string"}},
+    "claim_boundary": {"type": "object"},
+    "source_byte_total": {"const": 21551}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "hashMap": {"type": "object", "minProperties": 1, "additionalProperties": {"$ref": "#/$defs/sha256"}},
+    "sourceEntry": {
+      "type": "object", "additionalProperties": false,
+      "required": ["bytes", "sha256"],
+      "properties": {"bytes": {"type": "integer", "minimum": 1}, "sha256": {"$ref": "#/$defs/sha256"}}
+    },
+    "sourceMap": {"type": "object", "minProperties": 1, "additionalProperties": {"$ref": "#/$defs/sourceEntry"}}
+  }
+}

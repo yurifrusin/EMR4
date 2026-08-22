@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-complete-package-unloaded-runner-failure-terminal.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "attempt_id", "candidate_source",
+    "result", "terminal", "process_envelope_sha256",
+    "raw_runtime_detail_retained", "further_process_authorized"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_complete_package_unloaded_runner_failure_terminal.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal"},
+    "attempt_id": {"const": "attempt-001"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {"enum": ["complete_runner_process_terminal", "complete_runner_result_rejected"]},
+    "terminal": {
+      "type": "object", "additionalProperties": false,
+      "required": ["stage", "code", "detail"],
+      "properties": {
+        "stage": {"const": "complete_package_unloaded_runner"},
+        "code": {"type": "string", "minLength": 1},
+        "detail": {"const": null}
+      }
+    },
+    "process_envelope_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "raw_runtime_detail_retained": {"const": false},
+    "further_process_authorized": {"const": false}
+  }
+}

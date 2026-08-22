@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-complete-package-unloaded-runner-evidence.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "result", "git_binding",
+    "accepted_source_inventory", "fixture_source_inventory",
+    "stub_source_inventory", "import_closure",
+    "materialized_relative_paths", "process_envelope_sha256",
+    "process_envelope_recorded_before_interpretation", "fixture_result",
+    "runner_sidecar", "environment", "cleanup", "process_boundary",
+    "claim_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_complete_package_unloaded_runner_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal"},
+    "result": {"const": "complete_package_unloaded_runner_evaluation_pass"},
+    "git_binding": {"type": "object"},
+    "accepted_source_inventory": {"type": "object"},
+    "fixture_source_inventory": {"type": "object"},
+    "stub_source_inventory": {"type": "object"},
+    "import_closure": {"type": "object"},
+    "materialized_relative_paths": {"type": "array", "minItems": 13, "maxItems": 13, "uniqueItems": true, "items": {"type": "string"}},
+    "process_envelope_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "process_envelope_recorded_before_interpretation": {"const": true},
+    "fixture_result": {"type": "object"},
+    "runner_sidecar": {"type": "object", "minProperties": 39, "maxProperties": 39},
+    "environment": {"type": "object"},
+    "cleanup": {"type": "object"},
+    "process_boundary": {"type": "object"},
+    "claim_boundary": {"type": "object"}
+  }
+}
