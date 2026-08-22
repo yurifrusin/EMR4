@@ -2,6 +2,8 @@
 
 Date: 2026-08-22
 
+Timestamp: 2026-08-22T23:41:40.1369077+10:00 (Australia/Brisbane)
+
 Result: `raisa_provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_pass`
 
 Exact reviewed source: `7acd4e9c39ce534042178f9b8b7e049161ce8b03`

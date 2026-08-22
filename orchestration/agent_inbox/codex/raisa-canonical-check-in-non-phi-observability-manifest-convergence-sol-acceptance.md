@@ -2,6 +2,8 @@
 
 Date: 2026-08-22
 
+Timestamp: 2026-08-22T23:41:40.1369077+10:00 (Australia/Brisbane)
+
 Decision: `accepted`
 
 Accepted result:

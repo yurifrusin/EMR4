@@ -1,5 +1,8 @@
 import json
+from datetime import date, datetime, timedelta
 from pathlib import Path
+
+import pytest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -7,10 +10,29 @@ AGENTS = ROOT / "AGENTS.md"
 PLAN = ROOT / "implementation_plan.md"
 GRAPH = ROOT / "orchestration/continuity/emr4-continuity-graph.json"
 COMPASS = ROOT / "orchestration/continuity/emr4-compass.json"
-ERROR_REGISTER = ROOT / "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
-CLOCKWORK_POINTER = ROOT / "orchestration/continuity/ariadne-governance-clockwork/current.json"
-CLOCKWORK_TRANSACTION = ROOT / "orchestration/continuity/ariadne-governance-clockwork/transaction.json"
-ACTIVE_LATCH = ROOT / "orchestration/continuity/ariadne-active-operation-latch/current.json"
+ERROR_REGISTER = (
+    ROOT
+    / "orchestration/continuity/ariadne-agent-error-register/agent-error-register.json"
+)
+CLOCKWORK_POINTER = (
+    ROOT / "orchestration/continuity/ariadne-governance-clockwork/current.json"
+)
+CLOCKWORK_TRANSACTION = (
+    ROOT / "orchestration/continuity/ariadne-governance-clockwork/transaction.json"
+)
+ACTIVE_LATCH = (
+    ROOT / "orchestration/continuity/ariadne-active-operation-latch/current.json"
+)
+BRISBANE_TIMESTAMP_SUFFIX = " (Australia/Brisbane)"
+CURRENT_NODE_TIMESTAMP_CATEGORIES = ("plans", "closeouts", "acceptances")
+REPAIRED_PREDECESSOR_TIMESTAMP_PATHS = (
+    "docs/raisa-provider-free-default-off-canonical-check-in-non-phi-"
+    "observability-manifest-convergence-rehearsal-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-canonical-check-in-non-phi-"
+    "observability-manifest-convergence-sol-acceptance.md",
+    "orchestration/human_inbox/yuri/2026-08-22--canonical-check-in-non-phi-"
+    "observability-manifest-convergence.md",
+)
 NODE_ID = "raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review"
 SOURCE_HEAD = "da03039f637d3808c8785a6d6fc95309650044d9"
 HTTP_NODE_ID = "raisa-provider-free-delete-confirm-http-route-convergence"
@@ -36,12 +58,9 @@ ORDINARY_CONVERGENCE_SOURCE_HEAD = "bfac65298e1d4aaca85d1c9dcb20329ef298c485"
 POST_CANCELLATION_ORIENTATION_NODE_ID = (
     "raisa-provider-free-read-only-post-cancellation-programme-orientation"
 )
-POST_CANCELLATION_ORIENTATION_SOURCE_HEAD = (
-    "74da22d5372299eb2d2e38bb2266b76c89a97035"
-)
+POST_CANCELLATION_ORIENTATION_SOURCE_HEAD = "74da22d5372299eb2d2e38bb2266b76c89a97035"
 ARRIVAL_CHECK_IN_REVIEW_NODE_ID = (
-    "raisa-provider-free-read-only-arrival-check-in-command-family-"
-    "convergence-review"
+    "raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review"
 )
 ARRIVAL_CHECK_IN_REVIEW_SOURCE_HEAD = "3bed3eb32dd1b8723bf5aa6218963b757ebc0e3d"
 CHECK_IN_ADAPTER_NODE_ID = (
@@ -145,6 +164,115 @@ def _selected_clockwork_transaction() -> dict | None:
     return json.loads(CLOCKWORK_TRANSACTION.read_text(encoding="utf-8"))
 
 
+def _assert_brisbane_timestamp_header(text: str, *, evidence_path: str) -> None:
+    header = text.splitlines()[:12]
+    date_lines = [line for line in header if line.startswith("Date:")]
+    timestamp_lines = [line for line in header if line.startswith("Timestamp:")]
+    assert len(date_lines) == 1, (
+        f"{evidence_path}: expected exactly one top-level Date line"
+    )
+    assert len(timestamp_lines) == 1, (
+        f"{evidence_path}: expected exactly one top-level Timestamp line"
+    )
+
+    date_text = date_lines[0].removeprefix("Date:").strip()
+    try:
+        declared_date = date.fromisoformat(date_text)
+    except ValueError as exc:
+        raise AssertionError(f"{evidence_path}: invalid ISO Date") from exc
+
+    timestamp_text = timestamp_lines[0].removeprefix("Timestamp:").strip()
+    assert timestamp_text.endswith(BRISBANE_TIMESTAMP_SUFFIX), (
+        f"{evidence_path}: Timestamp must name Australia/Brisbane"
+    )
+    iso_text = timestamp_text.removesuffix(BRISBANE_TIMESTAMP_SUFFIX)
+    try:
+        instant = datetime.fromisoformat(iso_text)
+    except ValueError as exc:
+        raise AssertionError(f"{evidence_path}: invalid ISO Timestamp") from exc
+    assert instant.tzinfo is not None, (
+        f"{evidence_path}: Timestamp must carry an explicit offset"
+    )
+    assert instant.utcoffset() == timedelta(hours=10), (
+        f"{evidence_path}: Australia/Brisbane Timestamp offset must be +10:00"
+    )
+    assert instant.date() == declared_date, (
+        f"{evidence_path}: Date and Timestamp calendar dates must match"
+    )
+
+
+def _current_node_timestamp_evidence_paths() -> tuple[str, ...]:
+    graph = json.loads(GRAPH.read_text(encoding="utf-8"))
+    evidence = graph["nodes"][-1]["evidence"]
+    paths: list[str] = []
+    for category in CURRENT_NODE_TIMESTAMP_CATEGORIES:
+        category_paths = evidence.get(category)
+        assert isinstance(category_paths, list) and category_paths, (
+            f"current node must name non-empty {category} evidence"
+        )
+        for relative_path in category_paths:
+            assert isinstance(relative_path, str) and relative_path.endswith(".md"), (
+                f"current node {category} evidence must be Markdown"
+            )
+            paths.append(relative_path)
+    assert len(paths) == len(set(paths)), (
+        "current-node timestamp evidence must be unique"
+    )
+    return tuple(paths)
+
+
+def _assert_repository_timestamp_evidence(relative_path: str) -> None:
+    repository_root = ROOT.resolve()
+    evidence_path = (ROOT / relative_path).resolve()
+    assert evidence_path.is_relative_to(repository_root), (
+        f"timestamp evidence escapes repository: {relative_path}"
+    )
+    assert evidence_path.is_file(), f"timestamp evidence is absent: {relative_path}"
+    _assert_brisbane_timestamp_header(
+        evidence_path.read_text(encoding="utf-8"), evidence_path=relative_path
+    )
+
+
+def test_current_node_and_repaired_predecessor_evidence_have_brisbane_timestamps() -> (
+    None
+):
+    guarded_paths = (
+        *_current_node_timestamp_evidence_paths(),
+        *REPAIRED_PREDECESSOR_TIMESTAMP_PATHS,
+    )
+    for relative_path in dict.fromkeys(guarded_paths):
+        _assert_repository_timestamp_evidence(relative_path)
+
+
+@pytest.mark.parametrize(
+    ("header", "reason"),
+    (
+        ("Date: 2026-08-23\n", "exactly one top-level Timestamp"),
+        (
+            "Date: 2026-08-23\nTimestamp: 2026-08-23T00:00:00+10:00 (Etc/GMT-10)\n",
+            "must name Australia/Brisbane",
+        ),
+        (
+            "Date: 2026-08-23\n"
+            "Timestamp: 2026-08-23T00:00:00+11:00 (Australia/Brisbane)\n",
+            "offset must be \\+10:00",
+        ),
+        (
+            "Date: 2026-08-23\nTimestamp: not-a-time (Australia/Brisbane)\n",
+            "invalid ISO Timestamp",
+        ),
+        (
+            "Date: 2026-08-22\n"
+            "Timestamp: 2026-08-23T00:00:00+10:00 (Australia/Brisbane)\n",
+            "calendar dates must match",
+        ),
+    ),
+)
+def test_brisbane_timestamp_header_fails_closed(header: str, reason: str) -> None:
+    with pytest.raises(AssertionError, match=reason):
+        _assert_brisbane_timestamp_header(header, evidence_path="synthetic.md")
+
+
 def test_continuity_and_compass_bind_risk_weighted_result_and_product_position() -> (
     None
 ):
@@ -208,7 +336,9 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     )
     reform_relation = _table_row(text, "Ariadne risk-weighted reform Git relation")
     ordinary_relation = _table_row(text, "Current ordinary Diary cancellation relation")
-    orientation_relation = _table_row(text, "Current arrival/check-in convergence relation")
+    orientation_relation = _table_row(
+        text, "Current arrival/check-in convergence relation"
+    )
     clockwork_relation = _table_row(
         text,
         "Current clockwork relation"
@@ -217,7 +347,10 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     )
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     compass = json.loads(COMPASS.read_text(encoding="utf-8"))
-    assert f"Continuity {graph['graph_revision']} / Compass {compass['map_revision']}" in current
+    assert (
+        f"Continuity {graph['graph_revision']} / Compass {compass['map_revision']}"
+        in current
+    )
     assert graph["nodes"][-1]["coordinates"]["source_head"] in current
     selected_transaction = _selected_clockwork_transaction()
     if selected_transaction is not None:
@@ -238,7 +371,9 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
             assert latch["status"] == "in_progress"
             assert latch["user_attention"]["required"] is False
             assert latch["terminal_response"]["permitted"] is False
-        assert "one clockwork writer owns all ten surfaces" in clockwork_relation.lower()
+        assert (
+            "one clockwork writer owns all ten surfaces" in clockwork_relation.lower()
+        )
         assert "immediately previous generation" in clockwork_relation.lower()
         assert latch["operation_id"] in next_work
         assert "active latch is the exact authority boundary" in next_work.lower()
@@ -246,7 +381,10 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
     else:
         assert "exclusive mirror ownership" in current.lower()
         assert "23/23 fault safety" in current.lower()
-        assert "actual canonical adoption and retirement flags remain false" in current.lower()
+        assert (
+            "actual canonical adoption and retirement flags remain false"
+            in current.lower()
+        )
         assert CLOCKWORK_ARCHITECTURE_SOURCE_HEAD in clockwork_relation
         assert CLOCKWORK_REHEARSAL_SOURCE_HEAD in clockwork_relation
     error_register = _table_row(
@@ -322,7 +460,10 @@ def test_live_baton_rows_accept_behavior_and_resume_narrow_product_work() -> Non
         assert "live canonical clockwork adoption/retirement" in next_work.lower()
         assert "no dual writer" in next_work.lower()
         assert "exact rollback" in next_work.lower()
-        assert "canonical-check-in-route-adapter-convergence-rehearsal" in next_work.lower()
+        assert (
+            "canonical-check-in-route-adapter-convergence-rehearsal"
+            in next_work.lower()
+        )
         assert "neither branch is inferred" in next_work.lower()
         assert "occupied deepseek/hmr" in next_work.lower()
         assert "product/practice/data/runtime" in next_work.lower()

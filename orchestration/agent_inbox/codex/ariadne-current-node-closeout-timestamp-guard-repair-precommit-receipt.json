@@ -1,0 +1,128 @@
+{
+  "active_operation": {
+    "active_tranche": "Ariadne current-node closeout timestamp guard repair",
+    "completed_stage": "Frozen plan and threat delta, exactly three restored timestamp lines and one graph-derived current-node guard materialized; 10 focused and 112 integrated checks pass with Ruff, formatting, parsing and diff validation.",
+    "next_executable_stage": "commit_the_machine_admitted_candidate_then_run_transactional_clockwork_closeout",
+    "operation_id": "ariadne-current-node-closeout-timestamp-guard-repair",
+    "resume_after_compaction": true,
+    "source_head": "1fb1db90e1fdbf73d4dcbaf7d51793f4320ba8b5",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_commit",
+  "git_object_resolution": {
+    "observed_head": "d12813744bbb815a80bb905e51a0244533a0c031",
+    "reason_codes": [],
+    "resolved_commit": "1fb1db90e1fdbf73d4dcbaf7d51793f4320ba8b5",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "1fb1db90e1fdbf73d4dcbaf7d51793f4320ba8b5"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "d12813744bbb815a80bb905e51a0244533a0c031",
+    "branch_origin_aligned": true,
+    "head": "d12813744bbb815a80bb905e51a0244533a0c031",
+    "origin_branch_commit": "d12813744bbb815a80bb905e51a0244533a0c031",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": false,
+    "untracked_path_count": 674
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "post_focused_and_integrated_validation_precommit",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "Native Harness allocation remains closed, Claude Code is historical only and the exact candidate already passes its complete deterministic gate.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "Graph traversal, strict local-time parsing, five hostile mutations and the integrated clockwork suite completely decide this metadata invariant.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and candidate/graph/Git custody is serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-current-node-closeout-timestamp-guard-repair",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "if candidate validation regresses",
+      "if current-node evidence categories drift",
+      "pre_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "machine precommit admission",
+      "explicit-path candidate commit",
+      "transactional clockwork closeout",
+      "Sol acceptance and publication"
+    ]
+  },
+  "planned_action": "admit_the_exact_three_timestamp_repairs_and_graph_derived_current_node_guard_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-current-node-closeout-timestamp-guard-repair-plan.md",
+      "docs/security/ariadne-current-node-closeout-timestamp-guard-repair-threat-model-delta.md",
+      "tests/test_current_baton_consistency.py",
+      "docs/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-canonical-check-in-non-phi-observability-manifest-convergence-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--canonical-check-in-non-phi-observability-manifest-convergence.md",
+      "orchestration/continuity/emr4-continuity-graph.json",
+      "orchestration/continuity/emr4-compass.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json",
+      "orchestration/agent_inbox/codex/ariadne-current-node-closeout-timestamp-guard-repair-preplanning-receipt.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the frozen plan, exact metadata repairs, deterministic guard, acceptance and Git. All worker lanes remain declined for this serial repository-invariant package.",
+    "git_refs_and_worktree": "Machine snapshot must verify the full task HEAD and branch relation, all protected refs, required ancestry, the bounded tracked diff and preserved docs/branding without manually authored Git identity fields.",
+    "live_handover_current_baton": "The completely read live handover selects this exact bounded timestamp-guard repair after acceptance of the disabled observer adapter at Continuity 408 / Compass 390.",
+    "protected_evidence_boundaries": "Only the exact three predecessor timestamp lines, frozen plan/threat delta, one graph-derived validator in the existing Baton consistency test and bounded receipts are open. No semantic history, form, ledger, app, API, client, data, provider, database, runtime, deployment, Pages or protected-ref change is permitted. Preserve unrelated untracked files and stage explicit paths only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

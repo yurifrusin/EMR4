@@ -1,0 +1,191 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "admit_the_exact_three_timestamp_repairs_and_graph_derived_current_node_guard_candidate",
+  "source_evidence": {
+    "live_handover_current_baton": "The completely read live handover selects this exact bounded timestamp-guard repair after acceptance of the disabled observer adapter at Continuity 408 / Compass 390.",
+    "current_authority_allocation": "GPT Sol owns the frozen plan, exact metadata repairs, deterministic guard, acceptance and Git. All worker lanes remain declined for this serial repository-invariant package.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-current-node-closeout-timestamp-guard-repair-plan.md",
+      "docs/security/ariadne-current-node-closeout-timestamp-guard-repair-threat-model-delta.md",
+      "tests/test_current_baton_consistency.py",
+      "docs/raisa-provider-free-default-off-canonical-check-in-non-phi-observability-manifest-convergence-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-canonical-check-in-non-phi-observability-manifest-convergence-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--canonical-check-in-non-phi-observability-manifest-convergence.md",
+      "orchestration/continuity/emr4-continuity-graph.json",
+      "orchestration/continuity/emr4-compass.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json",
+      "orchestration/agent_inbox/codex/ariadne-current-node-closeout-timestamp-guard-repair-preplanning-receipt.json"
+    ],
+    "protected_evidence_boundaries": "Only the exact three predecessor timestamp lines, frozen plan/threat delta, one graph-derived validator in the existing Baton consistency test and bounded receipts are open. No semantic history, form, ledger, app, API, client, data, provider, database, runtime, deployment, Pages or protected-ref change is permitted. Preserve unrelated untracked files and stage explicit paths only.",
+    "git_refs_and_worktree": "Machine snapshot must verify the full task HEAD and branch relation, all protected refs, required ancestry, the bounded tracked diff and preserved docs/branding without manually authored Git identity fields."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "ariadne-current-node-closeout-timestamp-guard-repair",
+    "active_tranche": "Ariadne current-node closeout timestamp guard repair",
+    "objective": "Restore the required Brisbane ISO timestamp to exactly the three observability-manifest predecessor summaries and add one deterministic current-node Baton consistency guard for referenced plans, closeouts and acceptances, without adding a form or ledger or changing product, provider, data, deployment or protected refs.",
+    "status": "in_progress",
+    "source_head": "1fb1db90e1fdbf73d4dcbaf7d51793f4320ba8b5",
+    "authority_source": "Yuri's standing workflow-tightening authority plus the fresh rehydration finding and existing AGENTS timestamp rule select one bounded recurrence guard.",
+    "checkpoint": {
+      "completed_stage": "Frozen plan and threat delta, exactly three restored timestamp lines and one graph-derived current-node guard materialized; 10 focused and 112 integrated checks pass with Ruff, formatting, parsing and diff validation.",
+      "next_executable_stage": "commit_the_machine_admitted_candidate_then_run_transactional_clockwork_closeout",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "current_node_timestamp_guard_repair_only",
+      "only_three_predecessor_timestamp_lines_and_one_reusable_baton_consistency_guard_may_change",
+      "no_new_form_ledger_or_manual_receipt_field",
+      "no_semantic_rewrite_of_accepted_closeout_evidence",
+      "no_application_configuration_route_openapi_graphql_or_client_change",
+      "no_native_deepseek_harness_worker_or_claude_fallback",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_action_grammar_or_first_party_client_change",
+      "no_generic_status_arrived_change_or_waiting_area_movement",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_provider_database_docker_or_production_runtime",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "ariadne-current-node-closeout-timestamp-guard-repair",
+    "assessed_stage": "post_focused_and_integrated_validation_precommit",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Native Harness allocation remains closed, Claude Code is historical only and the exact candidate already passes its complete deterministic gate.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "Graph traversal, strict local-time parsing, five hostile mutations and the integrated clockwork suite completely decide this metadata invariant.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and candidate/graph/Git custody is serial.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "machine precommit admission",
+      "explicit-path candidate commit",
+      "transactional clockwork closeout",
+      "Sol acceptance and publication"
+    ],
+    "reassessment_triggers": [
+      "if candidate validation regresses",
+      "if current-node evidence categories drift",
+      "pre_closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "Complete five-source rehydration, exact predecessor graph-time recovery, passing five hostile mutations and 10-focused/112-integrated candidate gate.",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["GPT Sol materialized and validated the candidate."]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "deepcode_cli_observation",
+      "reachability": "unreachable",
+      "evidence": ["Native Harness worker allocation remains closed."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Historical only and not selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected; deterministic parsing and mutation tests decide the candidate."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent spawned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
