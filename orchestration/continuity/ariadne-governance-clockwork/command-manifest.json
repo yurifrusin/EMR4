@@ -2,49 +2,57 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "attempt-006-closeout-tick-check",
+      "command_id": "start-attach-diagnosis-closeout-tick-check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_governance_clockwork_tick",
         "--check",
         "--intent",
-        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/closeout/closeout-intent.json"
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "attempt-006-closeout-provider-free-tests",
+      "command_id": "start-attach-diagnosis-closeout-provider-free-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_006_postterminal.py",
+        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
+        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_plan.py",
+        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_active_operation_latch.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "attempt-006-closeout-ruff",
+      "command_id": "start-attach-diagnosis-closeout-ruff",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "ruff",
         "check",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_006_postterminal.py"
+        "scripts/raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
+        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
+        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_plan.py",
+        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "attempt-006-closeout-compile",
+      "command_id": "start-attach-diagnosis-closeout-compile",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "py_compile",
-        "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_006_postterminal.py"
+        "scripts/raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
+        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
+        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_plan.py",
+        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }

@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "2ab8707e2ac03be3b1a4c9c538dfa45382d7d92d",
+  "source_commit": "2ab8707e2ac03be3b1a4c9c538dfa45382d7d92d",
+  "generation_id": "gen-a6f07f4f1db80ba4968c31f6783760103080ebc3056bba431dd931f219a73bb7",
+  "bundle_sha256": "a6f07f4f1db80ba4968c31f6783760103080ebc3056bba431dd931f219a73bb7",
+  "previous_generation_id": "gen-084147948f794c4cff8cadd7058ba0e889e9ac965efc22b29e9b5b7d7b3c31e5",
+  "previous_source_commit": "2ab8707e2ac03be3b1a4c9c538dfa45382d7d92d",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 182,
+  "operation_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+  "event_kind": "clean_closeout",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

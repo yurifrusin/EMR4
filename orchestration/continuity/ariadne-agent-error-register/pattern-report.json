@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 628,
+  "register_revision": 629,
   "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "ba053ea5f791c8a68f1506a81941d17f2eb70fe1d7789ffdb8d79486cb2563e4",
-  "incident_count": 1003,
+  "canonical_register_sha256": "b36c1d6515a21b82c48080532a429aa05f071061d22b620403b438f105fe33d1",
+  "incident_count": 1005,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 522,
+      "agent_behavior": 523,
       "harness": 71,
-      "operator": 253,
+      "operator": 254,
       "repository": 141,
       "transport": 16
     },
@@ -18,27 +18,27 @@
       "command_scope_violation": 99,
       "evidence_misreport": 74,
       "harness_failure": 71,
-      "operator_error": 253,
-      "output_contract_violation": 296,
+      "operator_error": 254,
+      "output_contract_violation": 297,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
       "repository_defect": 141,
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 75,
+      "implementer": 76,
       "integration_reviewer": 3,
-      "orchestrator": 862,
+      "orchestrator": 863,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 640,
+      "low": 642,
       "material": 133,
       "moderate": 230
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 210,
-      "canonical_unchanged": 624,
+      "accepted_candidate_changed": 211,
+      "canonical_unchanged": 625,
       "untrusted_partial_worktree": 169
     },
     "by_resource_and_role": {
@@ -225,7 +225,9 @@
       "deterministic-node-process-guard::orchestrator": 1,
       "diagnosis-generator-entry-point::orchestrator": 1,
       "diagnosis-plan-boundary-test::implementer": 1,
+      "diagnosis-postterminal-tests::implementer": 1,
       "diagnosis-provider-boundary-predicate::orchestrator": 1,
+      "diagnosis-validation-manifest::orchestrator": 1,
       "docker-desktop-windows::orchestrator": 1,
       "emr4-ariadne-agent-error-register-acceptance::orchestrator": 18,
       "emr4-arrival-check-in-convergence-prose-fixtures::orchestrator": 1,

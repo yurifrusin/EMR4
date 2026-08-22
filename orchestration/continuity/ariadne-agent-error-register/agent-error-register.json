@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 628,
+  "register_revision": 629,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -38906,6 +38906,79 @@
       "incident_id": "AER-1003",
       "attempt_id": "clock-f6297bd36fd9e94cbc4837a6",
       "origin": "harness",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "diagnosis-validation-manifest",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A postterminal diagnosis validation manifest must select current-lifecycle tests and exclude preterminal empty-namespace or historical exact-hash assertions that are intentionally false after accepted descendants.",
+      "observed_error": "The first broad selection included two consumed-attempt preterminal tests and one earlier repair-plan exact-hash assertion, producing three lifecycle-inapplicable failures.",
+      "detection_method": "Pytest failed before closeout publication; each failure was traced to an explicitly consumed terminal or accepted later harness digest rather than the diagnosis candidate.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/efficacy-reading.json",
+        "docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.validation_manifest_mixed_preterminal_and_postterminal_lifecycles",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the broad mixed selection with a current postterminal and descendant-compatible 58-test manifest.",
+        "prevention_control": "Generate future validation manifests from terminal-state and artifact-lifecycle tags instead of filename adjacency.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/efficacy-reading.json",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py"
+        ]
+      },
+      "incident_id": "AER-1004",
+      "attempt_id": "clock-4f784b1cedc298787287c37f",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+      "role": "implementer",
+      "resource_id": "diagnosis-postterminal-tests",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Postterminal tests must reject dynamic raw values while admitting safe typed placeholders and must compare document semantics independently of incidental Markdown capitalization.",
+      "observed_error": "Two first-draft assertions rejected the safe literal container-id placeholder and expected one report sentence with case-sensitive capitalization.",
+      "detection_method": "Focused pytest failed before candidate publication and showed both mismatches originated in new assertions rather than canonical evidence.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py",
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/efficacy-reading.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.test_assertion_confused_placeholder_or_case_with_dynamic_semantics",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Assert prohibited raw field names instead of safe typed placeholders and normalize report case before semantic comparison.",
+        "prevention_control": "Prefer schema-structural evidence assertions and normalized document predicates in postterminal suites.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py"
+        ]
+      },
+      "incident_id": "AER-1005",
+      "attempt_id": "clock-5ca0590198c63c4e6f993930",
+      "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"
     }

@@ -1,85 +1,85 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
-  "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006",
-  "transaction_id": "txn-be9bff19a47b10bd63ff47d8",
-  "source_commit": "a9567be36c82bc6d2eebc2488b48cd8bfb9f8d23",
-  "previous_source_commit": "a9567be36c82bc6d2eebc2488b48cd8bfb9f8d23",
-  "previous_generation_id": "gen-e22fd85329773268a678252303428419a76b29eb4f66d68957f473ca3943a07f",
-  "previous_bundle_sha256": "e22fd85329773268a678252303428419a76b29eb4f66d68957f473ca3943a07f",
+  "operation_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+  "transaction_id": "txn-cf5077b420572920d01487da",
+  "source_commit": "2ab8707e2ac03be3b1a4c9c538dfa45382d7d92d",
+  "previous_source_commit": "2ab8707e2ac03be3b1a4c9c538dfa45382d7d92d",
+  "previous_generation_id": "gen-084147948f794c4cff8cadd7058ba0e889e9ac965efc22b29e9b5b7d7b3c31e5",
+  "previous_bundle_sha256": "084147948f794c4cff8cadd7058ba0e889e9ac965efc22b29e9b5b7d7b3c31e5",
   "previous_canonical_sha256s": {
-    "continuity": "4f1c5e765febaaf27bfe1d0b33983c48a2a15080cb59c1ffd74b0b83389cdc3d",
-    "compass": "561a93b8534c76db444dd4fead870073dc38ebf63d82a95f3fc6823935b31ca4",
-    "compass_markdown": "cc749c7d52f0ab2bd4c673bb7279b0e0491142eb92cd9ad8e322b50c097add8c",
-    "active_latch": "f46c6d00d43a7a5caae5b8a2d0b69a1c10132b37045127e2d2957c4e4fafaf62",
-    "error_register": "b8f2e96e311b850779ec1295f85195d166291691685d8451b82534cc94c6f223",
-    "pattern_report": "9f21895252cbbf8070df53d33a3c2dd61736c54212ce12b00d3c473d7fdd96bb",
-    "current_baton": "67f88ebb6c034a9eb7f277c35bf9ae73e52918529dec26592bdbe7de634bc08c"
+    "continuity": "d725221f14efd9a9996c6743e1db06a2420a1af05d708d6e1cca2bd3f5eaf0c8",
+    "compass": "d031b46a149927c28a33695abbe578dc6f723757d0cc9d155d9bb739b7b7af71",
+    "compass_markdown": "6faeefe6b37b2362c27769a3cde7684a3b182bfcf08e88ca4b5e4aaf2c00e943",
+    "active_latch": "77c30560b190cac275a3109d9fd3917caae5b0e983d856b54a862201e0f6e073",
+    "error_register": "304ca7b9548a52031c59c9decd92f08ca8543f4c7b7d14654b25c74aca859970",
+    "pattern_report": "d14bcf512caefa1897faa12a2d683070a4b491050cc6d72fc569e602f5ad48d1",
+    "current_baton": "3102acfa6f933efb2239557814ce241b58eda5d5b1c8f396e6156938ee49dfe0"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "7c8b5600389dcaa36daa2f0222807fed30cd9854ee0c6087f4f98e86d67a42f4",
-    "transaction.json": "7c3fb25d7b4725776f9d3d3a3a70ac858f9045e03489b611facfcd959bd075ca",
+    "command-manifest.json": "4329bf3a03e2adaa8f1fd54ea7836d7b89d271649e6d8170c7279aba1472c341",
+    "transaction.json": "a6425e0a9379c6c4e25f1b6343af0fee21a9d36c9cc9eb85f66c499accadb862",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "0bd058a2f20a8d6b19507c65964a3bcdc4b937e5f9467869bd97760f997450fb"
+    "generation-manifest.json": "f4741e78932711e1116c37af5646acca1b339b79532b89445738f08f817e0fcb"
   },
   "projection_sha256s": {
-    "graph": "sha256:a68b0464b05f852823030bdb4d07cbe6a3b43a6052cc0c06621260794a8848dc",
-    "compass": "sha256:b499c1b160eb1e2e31d6c663c1549a28cb4798483bb24d6c3d8568da42b72c9b",
-    "report": "sha256:bfed72674f40fea75b0d069db61ded8047eb9ed9a97850d5ae81d2e7e59bb980",
-    "latch": "sha256:6ec0abee0202c44aa05b906b6600c19d021aeb5e953a5c4f362e5ce0e54396bc",
-    "incident_aggregate": "sha256:46581aa6ff4b9b96877ff07b93a3c9f2366eabc5e7166523bbf2e4b60e34ff84"
+    "graph": "sha256:c57bdf93b57d968ba06ec4616c0433525ae2d32d4f41f06be1e1dd5c9037082f",
+    "compass": "sha256:73ca71e0188e82c47b84555b5a3af562e265f92b2a4e0e2d21585c667b5af14b",
+    "report": "sha256:fb48b903576fcab1cd3d89a27d27d80a5feba8a410014d72c5a22098ca5d087c",
+    "latch": "sha256:39bed977eaf5363e86a38a0fba315cfb2b586fbb1a28013cb46ec2b4561ac385",
+    "incident_aggregate": "sha256:d845639a70c440ae3e8f083faa5113ce08b37ee054af504e995914412ed030a2"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-be9bff19a47b10bd63ff47d8",
-      "transaction_id": "txn-be9bff19a47b10bd63ff47d8",
-      "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006",
+      "journal_id": "journal-cf5077b420572920d01487da",
+      "transaction_id": "txn-cf5077b420572920d01487da",
+      "operation_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
       "event_type": "manifest-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "manifest_sha256": "sha256:0a1dbb2e1eb4b6ea2231e449ef5bedef228a0feaf73c43353c8669ecd2f4ac9a"
+        "manifest_sha256": "sha256:efdf3b1088c751afef9cec25e95f07813abc4352d10c050d40b3846e7f14c91f"
       },
-      "event_sha256": "sha256:6bb78540ef9682e01a83006d47fb011fb6f23e69f68459a92bdac0760c82711b"
+      "event_sha256": "sha256:01f813eb37361d0448896fd8dad94b6a7fafce30145cf33b55c3c7bc8c8a4ec4"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-be9bff19a47b10bd63ff47d8",
-      "transaction_id": "txn-be9bff19a47b10bd63ff47d8",
-      "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006",
+      "journal_id": "journal-cf5077b420572920d01487da",
+      "transaction_id": "txn-cf5077b420572920d01487da",
+      "operation_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
       "sequence": 2,
-      "previous_event_sha256": "sha256:6bb78540ef9682e01a83006d47fb011fb6f23e69f68459a92bdac0760c82711b",
+      "previous_event_sha256": "sha256:01f813eb37361d0448896fd8dad94b6a7fafce30145cf33b55c3c7bc8c8a4ec4",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "a9567be36c82bc6d2eebc2488b48cd8bfb9f8d23",
+        "source_commit": "2ab8707e2ac03be3b1a4c9c538dfa45382d7d92d",
         "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
       },
-      "event_sha256": "sha256:4be548a8db0389a6e459626c0b80ead9e2bb987a59e679fb91a92b04c0c7d670"
+      "event_sha256": "sha256:993ab8d2c39b1d5ad8911d316846e3ddc2ce7f1ae2fe7e142a02b8b775301616"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-be9bff19a47b10bd63ff47d8",
-      "transaction_id": "txn-be9bff19a47b10bd63ff47d8",
-      "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006",
+      "journal_id": "journal-cf5077b420572920d01487da",
+      "transaction_id": "txn-cf5077b420572920d01487da",
+      "operation_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
       "sequence": 3,
-      "previous_event_sha256": "sha256:4be548a8db0389a6e459626c0b80ead9e2bb987a59e679fb91a92b04c0c7d670",
+      "previous_event_sha256": "sha256:993ab8d2c39b1d5ad8911d316846e3ddc2ce7f1ae2fe7e142a02b8b775301616",
       "event_type": "projections-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "graph_revision": 411,
-        "map_revision": 393
+        "graph_revision": 412,
+        "map_revision": 394
       },
-      "event_sha256": "sha256:8aee66273dc25e16c33e1242da0b8827efe9939a00a94420dcc4bf307602c8ab"
+      "event_sha256": "sha256:73a6649e18f3ce4b8cf46aadc7cad7a7e5dc66ab151966643551fe1c81a289f9"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-be9bff19a47b10bd63ff47d8",
-      "transaction_id": "txn-be9bff19a47b10bd63ff47d8",
-      "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006",
+      "journal_id": "journal-cf5077b420572920d01487da",
+      "transaction_id": "txn-cf5077b420572920d01487da",
+      "operation_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
       "sequence": 4,
-      "previous_event_sha256": "sha256:8aee66273dc25e16c33e1242da0b8827efe9939a00a94420dcc4bf307602c8ab",
+      "previous_event_sha256": "sha256:73a6649e18f3ce4b8cf46aadc7cad7a7e5dc66ab151966643551fe1c81a289f9",
       "event_type": "projections-validated",
       "actor": "gpt-sol",
       "payload": {
@@ -87,26 +87,26 @@
         "compass": "passed",
         "latch": "passed"
       },
-      "event_sha256": "sha256:b916dc2955d82b839a0278ba912f2fe4eb66bac8d722fb8ae82482874816c618"
+      "event_sha256": "sha256:2523937626799aa8efd835411234023411252689772fe4a592abaee26bc51b99"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-be9bff19a47b10bd63ff47d8",
-      "transaction_id": "txn-be9bff19a47b10bd63ff47d8",
-      "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006",
+      "journal_id": "journal-cf5077b420572920d01487da",
+      "transaction_id": "txn-cf5077b420572920d01487da",
+      "operation_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
       "sequence": 5,
-      "previous_event_sha256": "sha256:b916dc2955d82b839a0278ba912f2fe4eb66bac8d722fb8ae82482874816c618",
+      "previous_event_sha256": "sha256:2523937626799aa8efd835411234023411252689772fe4a592abaee26bc51b99",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "shadow_directory_rename"
       },
-      "event_sha256": "sha256:13fc9ef28f91644dccfdbc82c97504990d28fbfff6ed146b3e00f2fa037a826f"
+      "event_sha256": "sha256:3542b6caf851730026ffd4dc12ab866a8b26a53c88fe0e1cf6cffdae79837fd1"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
   "event_kind": "clean_closeout",
-  "next_boundaries_sha256": "sha256:43c9a2edfbdef1fd0ec71952c3a9986079811fac0893c6326a5a64508ea02636",
+  "next_boundaries_sha256": "sha256:afbca9d4af7902910954f634ae5bb1cbd1028ef0ca3e00bf23b9b2d6613e1c26",
   "register_bytes_preserved": false,
   "pattern_bytes_preserved": false
 }

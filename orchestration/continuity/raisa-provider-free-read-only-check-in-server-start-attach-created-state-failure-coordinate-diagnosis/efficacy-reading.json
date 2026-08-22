@@ -1,0 +1,56 @@
+{
+  "schema_version": "ariadne.workflow_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+  "recorded_at": "2026-08-23T02:22:13.0856700+10:00",
+  "result": "passed",
+  "exact_reviewed_source": "2ab8707e2ac03be3b1a4c9c538dfa45382d7d92d",
+  "diagnostic_source": "7cd4d8069fc3983cdb4d2e80384e0f663e917c4e",
+  "diagnosis_evidence_sha256": "924ca23b361770fa31037232aa342e39c377e91685ac7137d1bb4da264647bb0",
+  "coordinate": "cli_option_surface_mismatch",
+  "execution_reading": {
+    "read_only_cli_metadata_commands": 2,
+    "docker_object_commands": 0,
+    "docker_objects_created": 0,
+    "postgresql_processes": 0,
+    "sql_or_database_attempts": 0,
+    "provider_requests": 0,
+    "product_effects": 0,
+    "ordinary_admission_releases": 0,
+    "attempt_006_retries": 0,
+    "attempt_007_authorized": false
+  },
+  "deterministic_verification": {
+    "initial_focused_tests_passed": 10,
+    "current_postterminal_and_lineage_tests_passed": 58,
+    "ruff_passed": true,
+    "compile_passed": true,
+    "schema_and_canonical_evidence_passed": true,
+    "deepseek_dispatched": false,
+    "gemini_dispatched": false,
+    "native_subagents_spawned": false
+  },
+  "contained_workflow_events": [
+    {
+      "event": "broad_validation_selection_mixed_consumed_preterminal_and_historical_exact_hash_assertions_with_current_postterminal_tests",
+      "effect": "three lifecycle-inapplicable assertions failed before a current-lifecycle 58-test manifest passed",
+      "canonical_mutation": false,
+      "expensive_execution": false,
+      "prospective_control": "generate validation manifests from artifact lifecycle tags and terminal state"
+    },
+    {
+      "event": "two_new_postterminal_assertions_compared_safe_placeholder_or_markdown_case_as_dynamic_semantics",
+      "effect": "the assertions were narrowed to prohibited raw keys and normalized text before publication",
+      "canonical_mutation": false,
+      "expensive_execution": false,
+      "prospective_control": "prefer schema-structural assertions and normalized document predicates"
+    }
+  ],
+  "clockwork_assessment": {
+    "expensive_retry_prevented": true,
+    "root_coordinate_resolved_without_docker_object_or_database_run": true,
+    "free_form_causal_overclaim_prevented": true,
+    "low_cost_validation_rerun_occurred": true,
+    "net_direction": "closer",
+    "conclusion": "The mechanism converted an apparently ambiguous occupied failure into one exact CLI option mismatch using two read-only metadata commands and typed evidence. It avoided another Docker/database circle, while validation-manifest lifecycle selection remains a concrete clockwork gear to automate."
+  }
+}

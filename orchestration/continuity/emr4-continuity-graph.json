@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 411,
+  "graph_revision": 412,
   "harvests": [],
   "nodes": [
     {
@@ -32568,9 +32568,123 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+      "title": "Raisa provider-free read-only check-in server start/attach created-state failure-coordinate diagnosis",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted provider-free read-only failure-coordinate diagnosis after the accepted attempt-006 terminal.",
+          "The diagnosis named no Docker object, created no object, started no PostgreSQL process and made no provider request.",
+          "The successor is a provider-free static source conformance repair; attempt 007 remains unauthorised."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-cli-option-surface-mismatch-coordinate",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the closed cli_option_surface_mismatch coordinate: Docker start advertises attach and interactive but not the exact sig-proxy option supplied by the current harness."
+        },
+        {
+          "id": "accept-bounded-source-terminal-and-cli-diagnosis",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-report.md",
+          "status": "accepted",
+          "summary": "Accept exact source, immutable attempt-006 projection and two read-only CLI metadata readings as sufficient to explain the created-state host-process failure without a Docker object or database rerun."
+        },
+        {
+          "id": "accept-narrow-future-repair-surface",
+          "source": "orchestration/agent_inbox/codex/raisa-check-in-server-start-attach-created-state-diagnosis-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept removal of the unsupported sig-proxy start argument as the narrowest future repair surface, subject to separate deterministic signal, attachment, stdin and cleanup conformance."
+        },
+        {
+          "id": "accept-current-lifecycle-deterministic-verification",
+          "source": "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py",
+          "status": "accepted",
+          "summary": "Accept 58 current postterminal and lineage tests plus Ruff, compile, schema and canonical evidence validation; consumed preterminal assertions are not current terminal tests."
+        },
+        {
+          "id": "accept-bounded-workflow-efficacy-reading",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept that clockwork prevented an expensive retry and causal overclaim while one lifecycle-aware validation-manifest improvement remains."
+        }
+      ],
+      "claim_scope": [
+        "The installed Docker start option surface does not advertise the sig-proxy option supplied by the exact harness argv.",
+        "The unsupported option explains a nonzero host process with the captured OCI server remaining created and not running.",
+        "Two fixed read-only Docker metadata commands named zero objects and created zero objects.",
+        "No PostgreSQL process, SQL/database attempt, provider request, product effect or ordinary admission occurred.",
+        "Attempts 001 through 006 and the accepted database harness remain immutable.",
+        "The smallest future repair removes one unsupported argv token and requires deterministic signal, attachment, stdin and cleanup conformance.",
+        "Attempt 007 remains unauthorised and requires separate accepted repair, plan, receipt and checkpoint.",
+        "Clockwork replaced a blind occupied retry with one typed read-only reading."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-plan.md",
+          "docs/security/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-report.md",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-server-start-attach-created-state-diagnosis-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-server-start-attach-created-state-diagnosis-preplanning-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_plan.py",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-evidence.schema.json",
+          "orchestration/human_inbox/yuri/2026-08-23--check-in-start-attach-created-state-diagnosis.md",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The unsupported sig-proxy start argument remains in the database harness until a separately accepted repair changes it.",
+        "Default signal forwarding plus attachment, stdin and cleanup semantics after token removal remain to be proved deterministically.",
+        "No attempt 007 or further disposable PostgreSQL execution is authorised.",
+        "Rollback, unknown-response commit and authoritative readback remain unproved.",
+        "Dedicated check-in remains default-off without ordinary-practice admission.",
+        "No provider, product-data, production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T02:22:13.0856700+10:00",
+      "updated_at": "2026-08-23T02:22:13.0856700+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "2ab8707e2ac03be3b1a4c9c538dfa45382d7d92d",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T01:53:08.1252181+10:00"
+  "updated_at": "2026-08-23T02:22:13.0856700+10:00"
 }

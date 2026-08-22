@@ -1,0 +1,328 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+    "title": "Raisa provider-free read-only check-in server start/attach created-state failure-coordinate diagnosis closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T02:22:13.0856700+10:00",
+    "node": {
+      "id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+      "title": "Raisa provider-free read-only check-in server start/attach created-state failure-coordinate diagnosis",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted provider-free read-only failure-coordinate diagnosis after the accepted attempt-006 terminal.",
+          "The diagnosis named no Docker object, created no object, started no PostgreSQL process and made no provider request.",
+          "The successor is a provider-free static source conformance repair; attempt 007 remains unauthorised."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-cli-option-surface-mismatch-coordinate",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-evidence.json",
+          "status": "accepted",
+          "summary": "Accept the closed cli_option_surface_mismatch coordinate: Docker start advertises attach and interactive but not the exact sig-proxy option supplied by the current harness."
+        },
+        {
+          "id": "accept-bounded-source-terminal-and-cli-diagnosis",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-report.md",
+          "status": "accepted",
+          "summary": "Accept exact source, immutable attempt-006 projection and two read-only CLI metadata readings as sufficient to explain the created-state host-process failure without a Docker object or database rerun."
+        },
+        {
+          "id": "accept-narrow-future-repair-surface",
+          "source": "orchestration/agent_inbox/codex/raisa-check-in-server-start-attach-created-state-diagnosis-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept removal of the unsupported sig-proxy start argument as the narrowest future repair surface, subject to separate deterministic signal, attachment, stdin and cleanup conformance."
+        },
+        {
+          "id": "accept-current-lifecycle-deterministic-verification",
+          "source": "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py",
+          "status": "accepted",
+          "summary": "Accept 58 current postterminal and lineage tests plus Ruff, compile, schema and canonical evidence validation; consumed preterminal assertions are not current terminal tests."
+        },
+        {
+          "id": "accept-bounded-workflow-efficacy-reading",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept that clockwork prevented an expensive retry and causal overclaim while one lifecycle-aware validation-manifest improvement remains."
+        }
+      ],
+      "claim_scope": [
+        "The installed Docker start option surface does not advertise the sig-proxy option supplied by the exact harness argv.",
+        "The unsupported option explains a nonzero host process with the captured OCI server remaining created and not running.",
+        "Two fixed read-only Docker metadata commands named zero objects and created zero objects.",
+        "No PostgreSQL process, SQL/database attempt, provider request, product effect or ordinary admission occurred.",
+        "Attempts 001 through 006 and the accepted database harness remain immutable.",
+        "The smallest future repair removes one unsupported argv token and requires deterministic signal, attachment, stdin and cleanup conformance.",
+        "Attempt 007 remains unauthorised and requires separate accepted repair, plan, receipt and checkpoint.",
+        "Clockwork replaced a blind occupied retry with one typed read-only reading."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-plan.md",
+          "docs/security/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-report.md",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-server-start-attach-created-state-diagnosis-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-server-start-attach-created-state-diagnosis-preplanning-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_plan.py",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-evidence.schema.json",
+          "orchestration/human_inbox/yuri/2026-08-23--check-in-start-attach-created-state-diagnosis.md",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The unsupported sig-proxy start argument remains in the database harness until a separately accepted repair changes it.",
+        "Default signal forwarding plus attachment, stdin and cleanup semantics after token removal remain to be proved deterministically.",
+        "No attempt 007 or further disposable PostgreSQL execution is authorised.",
+        "Rollback, unknown-response commit and authoritative readback remain unproved.",
+        "Dedicated check-in remains default-off without ordinary-practice admission.",
+        "No provider, product-data, production, deployment, release, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Replace another blind occupied retry with an exact read-only start/attach failure-coordinate diagnosis",
+      "outcome": "The installed Docker start grammar and exact harness argv exposed one unsupported option that fully explains the attempt-006 created-state terminal.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-evidence.json",
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-report.md",
+        "docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Correct one unsupported Docker start argument under provider-free deterministic conformance before any new occupied attempt",
+      "why_now": "The read-only diagnosis resolves the failure coordinate exactly, making a one-token static repair the smallest remaining evidence dependency.",
+      "outcome": "The cause is no longer ambiguous; repair semantics rather than another database run are now the next gate.",
+      "unlocks": [
+        "A source-only repair can remove the invalid option without Docker object creation.",
+        "Deterministic fakes can prove the resulting argument vector and signal, stdin, attachment and cleanup expectations.",
+        "Only an accepted repair can later support a separately planned attempt 007."
+      ],
+      "does_not_solve": [
+        "No repaired command or PostgreSQL lifecycle has run.",
+        "No rollback or exactly-once transaction result is proved.",
+        "No ordinary-practice, product-data, production or protected authority opens."
+      ],
+      "evidence": [
+        "docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-check-in-server-start-attach-created-state-diagnosis-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-23--check-in-start-attach-created-state-diagnosis.md"
+      ],
+      "orientation_statement": "EMR4 will repair and deterministically verify the one invalid Docker start option before considering any attempt 007."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-check-in-server-start-argv-sig-proxy-removal-conformance-repair",
+      "active_tranche": "Raisa provider-free check-in server start argv sig-proxy removal conformance repair",
+      "objective": "Freeze and implement the narrow provider-free source repair that removes only the unsupported sig-proxy option from Docker start argv, then deterministically prove the exact remaining argument vector plus signal, attachment, stdin and cleanup semantics without creating a Docker object, starting PostgreSQL or authorising attempt 007.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted typed CLI option-surface diagnosis.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_sig_proxy_removal_conformance_repair_plan"
+    },
+    "incidents": [
+      {
+        "incident_id": "diagnosis-validation-manifest-lifecycle-selection",
+        "source_id": "diagnosis-validation-local-001",
+        "peers": []
+      },
+      {
+        "incident_id": "diagnosis-postterminal-literal-assertions",
+        "source_id": "diagnosis-validation-local-002",
+        "peers": []
+      }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "start-attach-diagnosis-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "start-attach-diagnosis-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_plan.py",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "start-attach-diagnosis-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "scripts/raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_plan.py",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "start-attach-diagnosis-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "scripts/raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis.py",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_plan.py",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-plan.md",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-629.md",
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--native-harness-corrected-graph-useful-recovery.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_check_in_server_start_argv_sig_proxy_removal_conformance_repair_only",
+    "remove_only_the_unsupported_sig_proxy_false_token_from_start_attached_argv",
+    "deterministic_source_fakes_and_read_only_local_cli_help_or_version_only",
+    "no_docker_object_creation_postgresql_start_sql_or_database_execution",
+    "prove_default_signal_forwarding_attachment_stdin_and_cleanup_semantics_before_acceptance",
+    "attempts_001_through_006_immutable_no_retry_resume_overwrite_or_reclassification",
+    "no_attempt_007_without_separate_plan_five_source_receipt_and_one_run_checkpoint",
+    "no_deepseek_gemini_or_other_live_provider_call",
+    "no_product_configuration_api_openapi_graphql_schema_migration_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "diagnosis-validation-lifecycle-selection-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+      "role": "orchestrator",
+      "resource_id": "diagnosis-validation-manifest",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A postterminal diagnosis validation manifest must select current-lifecycle tests and exclude preterminal empty-namespace or historical exact-hash assertions that are intentionally false after accepted descendants.",
+      "observed_error": "The first broad selection included two consumed-attempt preterminal tests and one earlier repair-plan exact-hash assertion, producing three lifecycle-inapplicable failures.",
+      "detection_method": "Pytest failed before closeout publication; each failure was traced to an explicitly consumed terminal or accepted later harness digest rather than the diagnosis candidate.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/efficacy-reading.json",
+        "docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.validation_manifest_mixed_preterminal_and_postterminal_lifecycles",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the broad mixed selection with a current postterminal and descendant-compatible 58-test manifest.",
+        "prevention_control": "Generate future validation manifests from terminal-state and artifact-lifecycle tags instead of filename adjacency.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/efficacy-reading.json",
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py"
+        ]
+      },
+      "baton_summary": "records and corrects mixed preterminal/postterminal validation selection without another occupied run."
+    },
+    {
+      "attempt_key": "diagnosis-postterminal-literal-assertions-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+      "role": "implementer",
+      "resource_id": "diagnosis-postterminal-tests",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Postterminal tests must reject dynamic raw values while admitting safe typed placeholders and must compare document semantics independently of incidental Markdown capitalization.",
+      "observed_error": "Two first-draft assertions rejected the safe literal container-id placeholder and expected one report sentence with case-sensitive capitalization.",
+      "detection_method": "Focused pytest failed before candidate publication and showed both mismatches originated in new assertions rather than canonical evidence.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py",
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/efficacy-reading.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "output_contract.test_assertion_confused_placeholder_or_case_with_dynamic_semantics",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Assert prohibited raw field names instead of safe typed placeholders and normalize report case before semantic comparison.",
+        "prevention_control": "Prefer schema-structural evidence assertions and normalized document predicates in postterminal suites.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_postterminal.py"
+        ]
+      },
+      "baton_summary": "records and corrects two overly literal postterminal assertions before publication."
+    }
+  ]
+}

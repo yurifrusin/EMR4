@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 393,
-  "updated_at": "2026-08-23T01:53:08.1252181+10:00",
-  "source_graph_revision": 411,
-  "orientation_statement": "EMR4 will diagnose the created-state Docker start/attach failure read-only before considering a repair or separately frozen attempt 007.",
+  "map_revision": 394,
+  "updated_at": "2026-08-23T02:22:13.0856700+10:00",
+  "source_graph_revision": 412,
+  "orientation_statement": "EMR4 will repair and deterministically verify the one invalid Docker start option before considering any attempt 007.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5052,27 +5052,38 @@
         "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/attempt-006-execution-envelope.json",
         "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-failed-closed-closeout.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+      "lineage_parent": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006",
+      "strategic_role": "Replace another blind occupied retry with an exact read-only start/attach failure-coordinate diagnosis",
+      "outcome": "The installed Docker start grammar and exact harness argv exposed one unsupported option that fully explains the attempt-006 created-state terminal.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-evidence.json",
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-report.md",
+        "docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006",
-    "strategic_role": "Diagnose the exact pre-start Docker attachment failure without creating another object or database process",
-    "why_now": "Attempt 006 proves stdin remained open but the attachment process exited nonzero while the server stayed created, invalidating the current lifecycle assumption without identifying the host failure cause.",
-    "outcome": "Attempt 006 is honestly closed as failed evidence; the next work is read-only coordinate diagnosis before any repair or new attempt.",
+    "node_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+    "strategic_role": "Correct one unsupported Docker start argument under provider-free deterministic conformance before any new occupied attempt",
+    "why_now": "The read-only diagnosis resolves the failure coordinate exactly, making a one-token static repair the smallest remaining evidence dependency.",
+    "outcome": "The cause is no longer ambiguous; repair semantics rather than another database run are now the next gate.",
     "unlocks": [
-      "A closed host-process and OCI coordinate can distinguish CLI grammar, start failure and lifecycle race classes.",
-      "Deterministic fakes can test start/attach sequencing without Docker object creation.",
-      "A later repair and attempt 007 can be planned from evidence rather than another blind retry."
+      "A source-only repair can remove the invalid option without Docker object creation.",
+      "Deterministic fakes can prove the resulting argument vector and signal, stdin, attachment and cleanup expectations.",
+      "Only an accepted repair can later support a separately planned attempt 007."
     ],
     "does_not_solve": [
+      "No repaired command or PostgreSQL lifecycle has run.",
       "No rollback or exactly-once transaction result is proved.",
-      "No provider or model efficacy conclusion is created.",
-      "No new database run, ordinary-practice, product-data, production or protected authority opens."
+      "No ordinary-practice, product-data, production or protected authority opens."
     ],
     "evidence": [
-      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-failed-closed-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-006-sol-acceptance.md",
-      "orchestration/human_inbox/yuri/2026-08-23--check-in-relay-free-recovery-attempt-006.md"
+      "docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-server-start-attach-created-state-diagnosis-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-23--check-in-start-attach-created-state-diagnosis.md"
     ]
   },
   "decision_horizon": [

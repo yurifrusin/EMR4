@@ -1,0 +1,11 @@
+{
+  "schema_version": "emr4.non_phi_pushover_notification_receipt.v1",
+  "recorded_at": "2026-08-23T02:22:13.0856700+10:00",
+  "status": "passed",
+  "provider": "pushover",
+  "request": "5cdce8b9-0764-4a02-9d8f-0e2561607c65",
+  "title": "EMR4 start/attach diagnosis",
+  "message_class": "non_phi_operational_closeout",
+  "phi_or_clinical_data": false,
+  "summary": "Read-only diagnosis passed: Docker start does not admit the supplied sig-proxy option. Zero Docker objects or database runs; narrow static repair next, no attempt 007 authorised."
+}
