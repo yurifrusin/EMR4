@@ -1,0 +1,64 @@
+{
+  "schema_version": "ariadne.native_harness_integrated_development_efficacy.v1",
+  "operation_id": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+  "timestamp": "2026-08-22T18:21:44.5351300+10:00",
+  "result": "traceable_worker_failure",
+  "useful_output": false,
+  "provider_reached": false,
+  "failure_coordinate": "integrated_runner_factory_pre_request_rejected",
+  "observed": {
+    "native_processes": 1,
+    "hmr_readiness_events": [
+      "sentinel_activated",
+      "stock_headless_hmr_ready"
+    ],
+    "runner_failure_stage": "factory",
+    "provider_calls_started": 0,
+    "provider_calls_completed": 0,
+    "provider_calls_failed": 0,
+    "model_requests": 0,
+    "tool_calls": 0,
+    "tool_results": 0,
+    "changed_paths": [],
+    "public_cases_passed": 0,
+    "holdback_cases_passed": 0,
+    "wall_clock_ms": 11606,
+    "automatic_retries": 0,
+    "manual_retries": 0,
+    "resumes": 0,
+    "fallbacks": 0,
+    "auxiliary_models": 0
+  },
+  "traceability": {
+    "startup_localized": true,
+    "hmr_load_localized": true,
+    "runner_stage_localized": true,
+    "edit_argument_coordinate_observed": false,
+    "tool_lifecycle_coordinate_observed": false,
+    "provider_boundary_proved_zero": true,
+    "candidate_boundary_proved_zero": true,
+    "cleanup_proved_complete": true
+  },
+  "parallelism": {
+    "deepseek": {
+      "disposition": "terminalized_before_request",
+      "expected_leverage": "positive",
+      "owned_work_package": "one synthetic_window_coalescer.py nested-window repair",
+      "result": "not_reached"
+    },
+    "gemini": {
+      "disposition": "declined_no_candidate",
+      "expected_leverage": "required_independence",
+      "owned_work_package": null,
+      "result": "not_dispatched"
+    },
+    "native_subagents": {
+      "disposition": "declined",
+      "expected_leverage": "negative",
+      "owned_work_package": null,
+      "result": "not_dispatched"
+    },
+    "serial_owner": "gpt-sol"
+  },
+  "conclusion": "The integrated runner now crosses stock headless HMR and reaches its factory stage, but agent creation or setup fails before a first model request. This is improved localization and complete containment, not useful development performance. No further occupied EMR4 attempt is eligible until the factory substage is resolved provider-free."
+}
