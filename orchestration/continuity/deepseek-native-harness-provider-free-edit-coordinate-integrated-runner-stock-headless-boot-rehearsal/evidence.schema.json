@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.example/schemas/native-harness-integrated-runner-stock-headless-boot-evidence.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "planning_source", "candidate_source",
+    "execution_attempt_id", "result", "coordinate", "failure_classification",
+    "source_bindings", "package", "launch", "composition", "readiness",
+    "control_load", "runner_terminal", "provider_boundary", "cleanup"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_integrated_runner_stock_headless_boot_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "candidate_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "execution_attempt_id": {"const": "integrated-runner-stock-headless-boot-attempt-001"},
+    "result": {"enum": ["pass", "fail"]},
+    "coordinate": {"enum": ["integrated_runner_post_hmr_pre_request_hold", null]},
+    "failure_classification": {"type": ["string", "null"]},
+    "source_bindings": {"type": "object"},
+    "package": {"type": "object"},
+    "launch": {
+      "type": "object",
+      "required": ["native_process_count", "retry_count", "resume_count", "fallback_count", "hmr_mutation_count", "stdout_retained", "stderr_retained", "raw_stream_read"],
+      "properties": {
+        "native_process_count": {"const": 1},
+        "retry_count": {"const": 0},
+        "resume_count": {"const": 0},
+        "fallback_count": {"const": 0},
+        "hmr_mutation_count": {"type": "integer", "minimum": 0, "maximum": 1},
+        "stdout_retained": {"const": false},
+        "stderr_retained": {"const": false},
+        "raw_stream_read": {"const": false}
+      }
+    },
+    "composition": {"type": "object"},
+    "readiness": {"type": "object"},
+    "control_load": {"type": ["object", "null"]},
+    "runner_terminal": {"type": ["object", "null"]},
+    "provider_boundary": {
+      "type": "object",
+      "required": ["network_attempt_count", "agent_create_count", "session_count", "turn_count", "tool_call_count", "tool_result_count", "broker_process_count", "broker_request_count", "worker_count", "model_request_count", "provider_request_count", "database_invocation_count", "docker_invocation_count"],
+      "properties": {
+        "network_attempt_count": {"const": 0},
+        "agent_create_count": {"const": 0},
+        "session_count": {"const": 0},
+        "turn_count": {"const": 0},
+        "tool_call_count": {"const": 0},
+        "tool_result_count": {"const": 0},
+        "broker_process_count": {"const": 0},
+        "broker_request_count": {"const": 0},
+        "worker_count": {"const": 0},
+        "model_request_count": {"const": 0},
+        "provider_request_count": {"const": 0},
+        "database_invocation_count": {"const": 0},
+        "docker_invocation_count": {"const": 0}
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "required": ["process_absent", "disposable_root_absent", "raw_environment_retained", "raw_logs_retained", "package_seed_unchanged"],
+      "properties": {
+        "process_absent": {"const": true},
+        "disposable_root_absent": {"const": true},
+        "raw_environment_retained": {"const": false},
+        "raw_logs_retained": {"const": false},
+        "package_seed_unchanged": {"const": true}
+      }
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.example/schemas/native-harness-integrated-runner-stock-headless-boot-contract.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "operation_id", "planning_source", "accepted_sources",
+    "predecessor_bytes", "implementation_bytes", "execution_attempt",
+    "source_bindings", "package", "required_installed_packages", "materialisation",
+    "launch", "expected_result", "required_zero_counts"
+  ],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_integrated_runner_stock_headless_boot_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["integrated_runner_implementation", "integrated_runner_closeout", "accepted_stock_headless_boot"],
+      "properties": {
+        "integrated_runner_implementation": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "integrated_runner_closeout": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "accepted_stock_headless_boot": {"type": "string", "pattern": "^[0-9a-f]{40}$"}
+      }
+    },
+    "predecessor_bytes": {"$ref": "#/$defs/hashMap"},
+    "implementation_bytes": {"$ref": "#/$defs/hashMap"},
+    "execution_attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempt_id", "native_process_count", "automatic_retry", "manual_retry", "resume"],
+      "properties": {
+        "attempt_id": {"const": "integrated-runner-stock-headless-boot-attempt-001"},
+        "native_process_count": {"const": 1},
+        "automatic_retry": {"const": false},
+        "manual_retry": {"const": false},
+        "resume": {"const": false}
+      }
+    },
+    "source_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["integrated_runner", "adapter", "effective_tool_guard", "readiness_sentinel", "network_guard", "integrated_runner_bytes"],
+      "properties": {
+        "integrated_runner": {"$ref": "#/$defs/hash"},
+        "adapter": {"$ref": "#/$defs/hash"},
+        "effective_tool_guard": {"$ref": "#/$defs/hash"},
+        "readiness_sentinel": {"$ref": "#/$defs/hash"},
+        "network_guard": {"$ref": "#/$defs/hash"},
+        "integrated_runner_bytes": {"const": 14077}
+      }
+    },
+    "package": {
+      "type": "object",
+      "required": ["name", "version", "bin", "tarball_sha1", "tarball_integrity", "tarball_sha256"],
+      "properties": {
+        "name": {"const": "@deepseek-ai/dsh"},
+        "version": {"const": "0.1.0-rc.7"},
+        "bin": {"const": "lib/bin.js"},
+        "tarball_sha1": {"type": "string"},
+        "tarball_integrity": {"type": "string"},
+        "tarball_sha256": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "required_installed_packages": {
+      "type": "array", "minItems": 6, "uniqueItems": true, "items": {"type": "string"}
+    },
+    "materialisation": {"type": "object"},
+    "launch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_flag", "profile_args", "timeout_seconds", "online_package_fallback", "package_lifecycle_scripts"],
+      "properties": {
+        "node_flag": {"const": "--expose-internals"},
+        "profile_args": {"const": ["--profile", "headless"]},
+        "timeout_seconds": {"type": "integer", "minimum": 1, "maximum": 60},
+        "online_package_fallback": {"const": false},
+        "package_lifecycle_scripts": {"const": false}
+      }
+    },
+    "expected_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coordinate", "control_load_coordinate", "runner_status", "runner_failure_stage", "request_count"],
+      "properties": {
+        "coordinate": {"const": "integrated_runner_post_hmr_pre_request_hold"},
+        "control_load_coordinate": {"const": "integrated_edit_controls_loaded"},
+        "runner_status": {"const": "failed"},
+        "runner_failure_stage": {"const": "roots"},
+        "request_count": {"const": 0}
+      }
+    },
+    "required_zero_counts": {
+      "type": "array", "minItems": 14, "uniqueItems": true, "items": {"type": "string"}
+    }
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "hashMap": {"type": "object", "minProperties": 1, "additionalProperties": {"$ref": "#/$defs/hash"}}
+  }
+}
