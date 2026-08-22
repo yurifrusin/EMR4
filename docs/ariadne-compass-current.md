@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will next integrate the accepted edit coordinates into a provider-free future runner; no occupied DeepSeek request is admitted.
+> EMR4 will next prove the exact integrated runner's provider-free stock-headless/HMR loading path; no occupied request or adoption is admitted.
 
 ## North star
 
@@ -560,26 +560,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One bounded turn produced no candidate, but the accepted runner localized the failure from an unresolved conclusion seam to an authoritative edit-error coordinate. Lineage parent: `deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery`.
 272. **Turn one opaque native-Harness edit-error boundary into stable provider-free coordinates — DeepSeek native Harness provider-free real edit argument/result coordinate diagnostic closeout**
    The real edit stack now exposes seven tested closed coordinates and exact state effects without another model request. Lineage parent: `raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal`.
+273. **Move stable edit coordinates from a standalone diagnostic into the bounded future-runner control surface — DeepSeek native Harness provider-free edit-coordinate future-runner integration closeout**
+   Three semantic edit mistakes now stop before dispatch and all seven result coordinates are released through one deterministic derived runner. Lineage parent: `deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery`.
 
 ## Current position
 
-**Integrate the accepted edit coordinates into the bounded future runner before any occupied use — DeepSeek native Harness provider-free real edit argument/result coordinate diagnostic closeout**
+**Prove the integrated runner loads through the actual provider-free stock-headless/HMR path before adoption — DeepSeek native Harness provider-free edit-coordinate future-runner integration closeout**
 
-**Why this proof came next:** The diagnostic proved the runtime taxonomy, while the future runner still records only the broad edit lifecycle error and does not prevalidate the three plain semantic constraints.
+**Why this proof came next:** Pure exports and the real edit stack pass, but the exact derived runner has not yet traversed the loader and HMR boundary used by a future occupied attempt.
 
-Rerun pressure is reduced because edit failure classes are now locally reproducible and machine-routable.
+The edit-control mechanism is integrated and locally replayable without a provider request.
 
 ### What this unlocks
 
-- A provider-free future runner that releases the seven-coordinate result without raw errors.
-- Pre-dispatch typed denial of blank path, empty search and equal old/new arguments.
-- A later evidence-based decision on whether another occupied worker attempt is justified.
+- A provider-free stock-headless boot proof of the exact integrated runner.
+- A later evidence-based adoption-readiness decision.
+- A later evidence-based decision on whether any occupied worker attempt is justified.
 
 ### What it does not solve
 
-- No useful worker success, runbook adoption or general DeepSeek quality conclusion.
-- No occupied request, retry, resume, fallback or provider authority.
-- No product, ordinary-practice, production or protected-ref authority.
+- No stock-headless/HMR loading proof yet.
+- No candidate or runbook adoption, useful-worker success or general DeepSeek quality conclusion.
+- No occupied request, product, ordinary-practice, production or protected-ref authority.
 
 ## Continuity and authority
 
@@ -1321,6 +1323,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-closeout.md`
+- `docs/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof-closeout.md`
 - `docs/deepseek-native-harness-provider-free-future-attempt-identity-and-target-rebinding-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-future-runner-materialisation-and-controller-terminal-fixture-rehearsal-closeout.md`
@@ -2089,7 +2092,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2733,8 +2736,9 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-complete-package-unloaded-runner-evaluation-rehearsal/result-contract-reconciliation-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-custom-runner-pre-request-failure-coordinate-diagnosis/diagnosis-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-evidence.json`
-- `orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-report.md`
-- `orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/efficacy-reading.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/deterministic-evidence.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/deterministic-report.md`
+- `orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-and-terminal-coordinate-guard/provider-free-effective-tool-guard-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-effective-tool-composition-native-boot-proof/efficacy-reading.json`
@@ -3457,6 +3461,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-mount-effective-tool-projection.md`
 - `orchestration/human_inbox/yuri/2026-08-20--check-in-native-harness-preset-row-service-path-recovery.md`
 - `orchestration/human_inbox/yuri/2026-08-20--deepseek-native-harness-pre-hmr-startup-recovery.md`
+- `orchestration/human_inbox/yuri/2026-08-22--native-harness-edit-coordinate-future-runner-integration.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-real-edit-coordinate-diagnostic.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-tool-result-conclusion-coordinate-diagnostic.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-coordinate-recovery.md`
@@ -3768,4 +3773,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 377; continuity graph revision 395._
+_Compass map revision 378; continuity graph revision 396._

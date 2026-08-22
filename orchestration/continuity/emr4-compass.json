@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 377,
-  "updated_at": "2026-08-22T16:25:00.0826136+10:00",
-  "source_graph_revision": 395,
-  "orientation_statement": "EMR4 will next integrate the accepted edit coordinates into a provider-free future runner; no occupied DeepSeek request is admitted.",
+  "map_revision": 378,
+  "updated_at": "2026-08-22T17:06:02.0539735+10:00",
+  "source_graph_revision": 396,
+  "orientation_statement": "EMR4 will next prove the exact integrated runner's provider-free stock-headless/HMR loading path; no occupied request or adoption is admitted.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4888,27 +4888,38 @@
         "docs/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-closeout.md",
         "orchestration/human_inbox/yuri/2026-08-22--native-harness-real-edit-coordinate-diagnostic.md"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
+      "lineage_parent": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery",
+      "strategic_role": "Move stable edit coordinates from a standalone diagnostic into the bounded future-runner control surface",
+      "outcome": "Three semantic edit mistakes now stop before dispatch and all seven result coordinates are released through one deterministic derived runner.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/deterministic-evidence.json",
+        "docs/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-closeout.md",
+        "orchestration/human_inbox/yuri/2026-08-22--native-harness-edit-coordinate-future-runner-integration.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery",
-    "strategic_role": "Integrate the accepted edit coordinates into the bounded future runner before any occupied use",
-    "why_now": "The diagnostic proved the runtime taxonomy, while the future runner still records only the broad edit lifecycle error and does not prevalidate the three plain semantic constraints.",
-    "outcome": "Rerun pressure is reduced because edit failure classes are now locally reproducible and machine-routable.",
+    "node_id": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
+    "strategic_role": "Prove the integrated runner loads through the actual provider-free stock-headless/HMR path before adoption",
+    "why_now": "Pure exports and the real edit stack pass, but the exact derived runner has not yet traversed the loader and HMR boundary used by a future occupied attempt.",
+    "outcome": "The edit-control mechanism is integrated and locally replayable without a provider request.",
     "unlocks": [
-      "A provider-free future runner that releases the seven-coordinate result without raw errors.",
-      "Pre-dispatch typed denial of blank path, empty search and equal old/new arguments.",
-      "A later evidence-based decision on whether another occupied worker attempt is justified."
+      "A provider-free stock-headless boot proof of the exact integrated runner.",
+      "A later evidence-based adoption-readiness decision.",
+      "A later evidence-based decision on whether any occupied worker attempt is justified."
     ],
     "does_not_solve": [
-      "No useful worker success, runbook adoption or general DeepSeek quality conclusion.",
-      "No occupied request, retry, resume, fallback or provider authority.",
-      "No product, ordinary-practice, production or protected-ref authority."
+      "No stock-headless/HMR loading proof yet.",
+      "No candidate or runbook adoption, useful-worker success or general DeepSeek quality conclusion.",
+      "No occupied request, product, ordinary-practice, production or protected-ref authority."
     ],
     "evidence": [
-      "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/efficacy-reading.json",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery-sol-acceptance.md",
-      "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-report.md"
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/efficacy-reading.json",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-sol-acceptance.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/deterministic-report.md"
     ]
   },
   "decision_horizon": [

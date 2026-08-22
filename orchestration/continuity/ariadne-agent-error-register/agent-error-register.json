@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 618,
+  "register_revision": 619,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -37422,6 +37422,43 @@
       },
       "incident_id": "AER-0963",
       "attempt_id": "clock-8ecb9732d19445582d266d90",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_preflight",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The accepted future-runner input must bind its exact current bytes and accepted derivation-source ancestry as distinct facts without inventing file ownership absent from the predecessor contract.",
+      "observed_error": "The first integration preflight required the accepted logical source commit to contain the later future-runner evidence path and returned input_binding_rejected before the Node fixture.",
+      "detection_method": "The provider-free controller emitted a closed failure terminal with zero worker/model/provider requests, zero retry/resume/fallback and an absent disposable root.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/preflight-attempt-001-failure-terminal.json",
+        "docs/ariadne-agent-error-correction-register-revision-619.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.accepted_derivation_source_conflated_with_evidence_file_ownership",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep exact current artifact bytes and digest binding, independently prove the accepted source is a resolvable ancestor, and remove the unsupported file-at-source assertion.",
+        "prevention_control": "Future input contracts must represent artifact identity, derivation source and Git ancestry as separate typed fields and tests.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py"
+        ]
+      },
+      "incident_id": "AER-0964",
+      "attempt_id": "clock-af6aff1806e515ee4630eaf3",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

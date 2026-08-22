@@ -9,10 +9,6 @@ OPERATION_ID = (
     "deepseek-native-harness-provider-free-edit-argument-result-coordinate-"
     "diagnostic-recovery"
 )
-SUCCESSOR_OPERATION_ID = (
-    "deepseek-native-harness-provider-free-edit-coordinate-future-runner-"
-    "integration-rehearsal"
-)
 PLAN = ROOT / "docs" / f"{OPERATION_ID}-plan.md"
 THREAT = ROOT / "docs" / "security" / f"{OPERATION_ID}-threat-model-delta.md"
 
@@ -74,17 +70,23 @@ def test_preplanning_receipt_has_five_sources_and_lane_dispositions() -> None:
     assert receipt["parallelism_assessment"]["parallel_work_packages"] == []
 
 
-def test_active_latch_is_the_operation_or_its_exact_in_progress_successor() -> None:
+def test_operation_is_active_or_durably_accepted_before_the_current_latch() -> None:
     latch = json.loads(
         (
             ROOT
             / "orchestration/continuity/ariadne-active-operation-latch/current.json"
         ).read_bytes()
     )
-    assert latch["operation_id"] in {OPERATION_ID, SUCCESSOR_OPERATION_ID}
     assert latch["status"] == "in_progress"
     assert latch["user_attention"]["required"] is False
     assert latch["terminal_response"]["permitted"] is False
+    if latch["operation_id"] != OPERATION_ID:
+        graph = json.loads(
+            (
+                ROOT / "orchestration/continuity/emr4-continuity-graph.json"
+            ).read_bytes()
+        )
+        assert OPERATION_ID in {node["id"] for node in graph["nodes"]}
 
 
 def test_manual_git_prose_rejection_is_preserved_beside_corrected_receipt() -> None:

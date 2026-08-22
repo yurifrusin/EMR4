@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
-  "active_tranche": "DeepSeek native Harness provider-free edit-coordinate future-runner integration rehearsal",
-  "objective": "Integrate the accepted seven-coordinate edit argument/result classifier and three pre-dispatch semantic argument checks into a provider-free derived future runner, replay every closed coordinate and prove exact cleanup without any worker, model or provider request.",
+  "operation_id": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal",
+  "active_tranche": "DeepSeek native Harness provider-free edit-coordinate integrated-runner stock-headless boot rehearsal",
+  "objective": "Materialise the exact accepted edit-coordinate integrated runner into one disposable rc.7 stock-headless assembly, boot through HMR to the post-HMR pre-request hold, prove the typed edit controls are loaded and complete cleanup without any worker, model or provider request.",
   "status": "in_progress",
-  "source_head": "8513a0609a30f0d12376f9c1b918f80350f82063",
-  "authority_source": "Yuri's standing uninterrupted-development authority and the accepted provider-free real edit argument/result coordinate diagnostic.",
+  "source_head": "17cab7f182a0381941dec29e9a5c82d13114d97c",
+  "authority_source": "Yuri's standing uninterrupted-development authority and the accepted provider-free edit-coordinate future-runner integration rehearsal.",
   "checkpoint": {
-    "completed_stage": "Accepted deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_provider_free_edit_coordinate_future_runner_integration_plan",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_provider_free_integrated_runner_stock_headless_boot_plan",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,11 +34,11 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_edit_coordinate_future_runner_integration_only",
-    "authored_synthetic_closed_argument_result_variants_and_typed_terminals_only",
+    "provider_free_edit_coordinate_integrated_runner_stock_headless_boot_only",
+    "one_exact_disposable_rc7_stock_headless_assembly_and_post_hmr_pre_request_hold_only",
     "no_native_harness_worker_model_or_live_provider_request",
-    "both_consumed_occupied_attempts_immutable_no_retry_resume_overwrite_or_reclassification",
     "no_candidate_adoption_or_runbook_manifest_change",
+    "both_consumed_occupied_attempts_immutable_no_retry_resume_overwrite_or_reclassification",
     "no_product_source_configuration_api_openapi_graphql_schema_migration_route_or_database_change",
     "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
     "no_generic_status_arrived_action_grammar_first_party_client_or_waiting_area_change",
