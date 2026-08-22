@@ -1,0 +1,126 @@
+{
+  "active_operation": {
+    "active_tranche": "Raisa provider-free read-only check-in attempt-008 plan-admissibility decision",
+    "completed_stage": "Accepted ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_read_only_attempt_008_plan_admissibility_decision",
+    "operation_id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+    "resume_after_compaction": true,
+    "source_head": "d01ef2f3afe16ccdb9a8f2077d5e76688397adb6",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "e06d84a17dc3d868243c526a49dcc5270f12b441",
+    "reason_codes": [],
+    "resolved_commit": "d01ef2f3afe16ccdb9a8f2077d5e76688397adb6",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "d01ef2f3afe16ccdb9a8f2077d5e76688397adb6"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "e06d84a17dc3d868243c526a49dcc5270f12b441",
+    "branch_origin_aligned": true,
+    "head": "e06d84a17dc3d868243c526a49dcc5270f12b441",
+    "origin_branch_commit": "e06d84a17dc3d868243c526a49dcc5270f12b441",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 674
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_sprint_planning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The latch forbids a native DeepSeek Harness worker/provider call and the bounded work is acceptance judgment over already accepted evidence, not separable implementation.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "No provider call is authorised and the decision can be reproduced from exact accepted artifacts plus deterministic schema checks.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive native delegation and one authority owner must reconcile the prerequisite table without splitting acceptance meaning.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "plan_frozen",
+      "decision_candidate_ready",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "Sol freezes the exact prerequisite population before evaluating any row",
+      "only accepted unprotected evidence may satisfy a prerequisite",
+      "the decision cannot freeze or execute attempt 008",
+      "clockwork remains the sole canonical closeout writer"
+    ]
+  },
+  "planned_action": "freeze_the_narrowest_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair-plan.md",
+      "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/evidence.json",
+      "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/efficacy-reading.json",
+      "orchestration/continuity/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair/report.md",
+      "docs/ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-provider-free-verification-envelope-phase-runner-admission-repair-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-23--verification-envelope-phase-runner-admission-repair.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial evidence comparison, decision, acceptance, clockwork and Git closeout. DeepSeek is declined because the latch forbids its worker/provider lane and the work is acceptance judgment. Gemini is declined because no provider call is authorised and accepted deterministic artifacts supply the decision record. Native subagents are declined because developer policy prohibits proactive delegation and the decision has one tightly coupled authority owner.",
+    "git_refs_and_worktree": "The task HEAD, task branch, fetched origin task ref, all four protected refs, tracked-worktree state and preserved docs/branding presence were verified immediately before this receipt. Exact objects and counts are supplied only by the receipt builder machine snapshot.",
+    "live_handover_current_baton": "AGENTS.md was read completely after the clockwork published the verification-envelope closeout. The live Baton selects a provider-free read-only attempt-008 plan-admissibility decision and does not authorise an attempt plan or execution.",
+    "protected_evidence_boundaries": "Only accepted unprotected evidence and frozen prerequisite comparison may be used. No database conftest, engine, schema, fixture, Docker, PostgreSQL, SQL, attempt-008 plan freeze or execution, worker/provider, product/API/client/configuration/grammar/waiting-area/data/runtime/deployment/release/Pages/protected-ref action is authorised. docs/branding and every unrelated untracked file remain preserved; explicit-path staging only."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
