@@ -4,11 +4,11 @@
   "active_tranche": "Provider-free disposable PostgreSQL default-off check-in relay-free rollback/unknown-commit recovery attempt 006",
   "objective": "Freeze and checkpoint exactly one provider-free disposable PostgreSQL attempt 006 against the accepted repaired relay-free server lifecycle, then execute at most once to prove rollback and unknown-terminal-response authoritative recovery or preserve one immutable failed-closed terminal.",
   "status": "in_progress",
-  "source_head": "369c1284af87631a94ffff04ca530cf4c74db4b8",
+  "source_head": "bf0c383a7f3228fc7ef47000dbf83b71b7ce63e9",
   "authority_source": "Yuri's standing uninterrupted-development authority plus the accepted convergence review select the smallest remaining evidence dependency; execution remains conditional on fresh plan freeze and a clockwork preexecution checkpoint.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_attempt_006_plan_contract_and_one_run_checkpoint",
+    "completed_stage": "Attempt-006 plan and wrapper are committed and origin-aligned. Exact repaired-lifecycle and predecessor hashes pass static admission. Focused source, API, no-database, latch, Baton and Git-object checks plus the clockwork suite, Ruff and compilation pass. Read-only Docker inspection matches the cached image with zero residue or object creation. The five-source receipt passes; all parallel lanes are declined for the serial occupied lifecycle.",
+    "next_executable_stage": "execute_exactly_one_attempt_006_wrapper_run_then_stop_without_retry_resume_or_fallback_and_preserve_its_immutable_terminal",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,

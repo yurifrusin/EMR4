@@ -1,0 +1,31 @@
+{
+  "schema_version": "emr4.check-in-relay-free-recovery-attempt-006.preexecution-docker-inspection.v1",
+  "status": "passed",
+  "observed_at": "2026-08-23T01:48:10.6075680+10:00",
+  "source_commit": "bf0c383a7f3228fc7ef47000dbf83b71b7ce63e9",
+  "inspection_only": true,
+  "docker_object_creation_count": 0,
+  "database_execution_count": 0,
+  "engine": {
+    "platform": "Docker Desktop 4.78.0 (229452)",
+    "engine_version": "29.5.3",
+    "api_version": "1.54",
+    "os": "linux",
+    "architecture": "amd64"
+  },
+  "image": {
+    "reference": "postgres:16-bookworm",
+    "pull_policy": "never",
+    "observed_id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+    "expected_id": "sha256:64154d0babcb1741988719e703419af0382b19953706149f9872fbd0f438efa8",
+    "exact_match": true
+  },
+  "residue": {
+    "label_filter": "emr4.harness=check-in-relay-free-recovery-v1",
+    "container_ids": [],
+    "network_ids": [],
+    "matching_resource_count": 0
+  },
+  "protected_refs_expected": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+  "claim_boundary": "read_only_local_docker_engine_image_and_attempt_label_absence_only"
+}

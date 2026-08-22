@@ -1,0 +1,108 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_worker_dispatch",
+  "planned_action": "publish_the_distinct_attempt_006_database_one_run_clockwork_checkpoint_then_execute_exactly_once_without_retry_resume_or_fallback",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was read completely after convergence publication. Current result accepts 10 satisfied, zero blocking and two operational gaps; attempt 006 addresses only atomic rollback and unknown-terminal-response recovery.",
+    "current_authority_allocation": "GPT Sol owns the sole attempt-006 disposable PostgreSQL execution, monitoring, exact cleanup, deterministic acceptance, clockwork and task-branch Git. DeepSeek, Gemini and native subagents are declined for this serial occupied lifecycle.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-plan.md",
+      "docs/security/raisa-provider-free-check-in-relay-free-recovery-attempt-006-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/attempt-006-execution-envelope.schema.json",
+      "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_006.py",
+      "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_006.py",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/preexecution-read-only-docker-inspection.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/attempt-005-execution-envelope.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/rehearsal-failure-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "After one distinct clockwork checkpoint, exactly one attempt-006 wrapper invocation may create only captured internal disposable PostgreSQL resources with authored-synthetic ephemeral identifiers. The first database-process start consumes attempt 006 and no retry, resume or fallback exists. No model/provider, product/API/client/config change, ordinary-practice enablement, product/patient/clinical data, production, deployment, release, Pages, protected evidence access or protected-ref movement is authorised.",
+    "git_refs_and_worktree": "Machine snapshot readings align local/origin task branch at the committed candidate, verify the plan source as an ancestor, and align local/origin master plus handoff/current at the configured protected source. Read-only Docker inspection matches the cached image and finds zero labelled residue. Intentional untracked preexecution evidence, docs/branding and every unrelated untracked path remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006",
+    "active_tranche": "Provider-free disposable PostgreSQL default-off check-in relay-free rollback/unknown-commit recovery attempt 006",
+    "objective": "Freeze and checkpoint exactly one provider-free disposable PostgreSQL attempt 006 against the accepted repaired relay-free server lifecycle, then execute at most once to prove rollback and unknown-terminal-response authoritative recovery or preserve one immutable failed-closed terminal.",
+    "status": "in_progress",
+    "source_head": "369c1284af87631a94ffff04ca530cf4c74db4b8",
+    "authority_source": "Yuri's standing uninterrupted-development authority plus the accepted convergence review select the smallest remaining evidence dependency; execution remains conditional on fresh plan freeze and a clockwork preexecution checkpoint.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_attempt_006_plan_contract_and_one_run_checkpoint",
+      "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0},
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": [
+      "provider_free_disposable_postgresql_attempt_006_only_after_exact_plan_and_checkpoint",
+      "at_most_one_occupied_execution_zero_retry_resume_or_fallback",
+      "authored_synthetic_non_phi_fixture_only_no_product_relation_or_data",
+      "accepted_repaired_relay_free_server_lifecycle_exact_source_only",
+      "no_native_deepseek_harness_worker_or_provider_call",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_application_configuration_route_openapi_graphql_or_client_change",
+      "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_existing_hosted_live_or_production_database",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006",
+    "assessed_stage": "preexecution",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "The native worker allocation is closed and the accepted deterministic harness plus sole occupied execution require serial controller custody, not model editing.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "declined", "expected_leverage": "neutral", "rationale": "No independent judgment belongs inside the one-shot database lifecycle. Reassess only after an immutable successful terminal for a possible read-only static veto; a failed-closed terminal needs no model interpretation.", "work_packages": []},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Developer policy prohibits proactive delegation and the occupied database lifecycle plus cleanup lease are indivisible and serial.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "publish one-run checkpoint before database-process start",
+      "execute exactly one hard-coded attempt-006 wrapper invocation",
+      "retain one controller for acquisition cleanup and terminalization",
+      "preserve the immutable terminal whether pass or fail"
+    ],
+    "reassessment_triggers": ["after immutable terminal", "pre_closeout"]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "Complete five-source rehydration, exact plan and lifecycle audit, committed origin-aligned candidate, deterministic source and governance validation, and read-only Docker/image/residue inspection.",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["Sol holds sole attempt-006 database, cleanup, acceptance and Git custody."]},
+    {"adapter_id": "deepseek_native_harness", "method": "deepcode_cli_observation", "reachability": "unreachable", "evidence": ["Worker allocation is closed and no provider request is authorised."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Historical only; no fallback."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["No verifier before an immutable successful terminal."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No subagent spawned."]}
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

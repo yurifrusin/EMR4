@@ -1,0 +1,131 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free disposable PostgreSQL default-off check-in relay-free rollback/unknown-commit recovery attempt 006",
+    "completed_stage": "Accepted raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_attempt_006_plan_contract_and_one_run_checkpoint",
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006",
+    "resume_after_compaction": true,
+    "source_head": "369c1284af87631a94ffff04ca530cf4c74db4b8",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "bf0c383a7f3228fc7ef47000dbf83b71b7ce63e9",
+    "reason_codes": [],
+    "resolved_commit": "369c1284af87631a94ffff04ca530cf4c74db4b8",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "369c1284af87631a94ffff04ca530cf4c74db4b8"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 2,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [
+      "git_refs_evidence_manual_object_id_forbidden"
+    ],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "revision_required"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "bf0c383a7f3228fc7ef47000dbf83b71b7ce63e9",
+    "branch_origin_aligned": true,
+    "head": "bf0c383a7f3228fc7ef47000dbf83b71b7ce63e9",
+    "origin_branch_commit": "bf0c383a7f3228fc7ef47000dbf83b71b7ce63e9",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 673
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "preexecution",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native worker allocation is closed and the accepted deterministic harness plus sole occupied execution require serial controller custody, not model editing.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "No independent judgment belongs inside the one-shot database lifecycle. Reassess only after an immutable successful terminal for a possible read-only static veto; a failed-closed terminal needs no model interpretation.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the occupied database lifecycle plus cleanup lease are indivisible and serial.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "after immutable terminal",
+      "pre_closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "publish one-run checkpoint before database-process start",
+      "execute exactly one hard-coded attempt-006 wrapper invocation",
+      "retain one controller for acquisition cleanup and terminalization",
+      "preserve the immutable terminal whether pass or fail"
+    ]
+  },
+  "planned_action": "publish_the_distinct_attempt_006_database_one_run_clockwork_checkpoint_then_execute_exactly_once_without_retry_resume_or_fallback",
+  "reasons": [
+    "git_refs_evidence_manual_object_id_forbidden"
+  ],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-plan.md",
+      "docs/security/raisa-provider-free-check-in-relay-free-recovery-attempt-006-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/attempt-006-execution-envelope.schema.json",
+      "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_006.py",
+      "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_006.py",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/preexecution-read-only-docker-inspection.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/attempt-005-execution-envelope.json",
+      "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/rehearsal-failure-evidence.json",
+      "orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/repair-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the sole attempt-006 disposable PostgreSQL execution, monitoring, exact cleanup, deterministic acceptance, clockwork and task-branch Git. DeepSeek, Gemini and native subagents are declined for this serial occupied lifecycle.",
+    "git_refs_and_worktree": "Machine readings align local/origin task branch at exact committed candidate bf0c383a7f3228fc7ef47000dbf83b71b7ce63e9. Plan source 673faa7487ef830f3a12da74a1875da994493819 is an ancestor. Local/origin master and handoff/current are exact protected source. Read-only Docker inspection matches the cached image and finds zero labelled residue. Intentional untracked preexecution evidence, docs/branding and every unrelated untracked path remain preserved.",
+    "live_handover_current_baton": "AGENTS.md was read completely after convergence publication. Current result accepts 10 satisfied, zero blocking and two operational gaps; attempt 006 addresses only atomic rollback and unknown-terminal-response recovery.",
+    "protected_evidence_boundaries": "After one distinct clockwork checkpoint, exactly one attempt-006 wrapper invocation may create only captured internal disposable PostgreSQL resources with authored-synthetic ephemeral identifiers. The first database-process start consumes attempt 006 and no retry, resume or fallback exists. No model/provider, product/API/client/config change, ordinary-practice enablement, product/patient/clinical data, production, deployment, release, Pages, protected evidence access or protected-ref movement is authorised."
+  },
+  "status": "revision_required",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": false
+}
