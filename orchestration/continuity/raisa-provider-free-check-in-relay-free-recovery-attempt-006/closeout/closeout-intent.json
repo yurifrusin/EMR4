@@ -1,0 +1,264 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006",
+    "title": "Raisa provider-free check-in relay-free recovery attempt 006 failed-closed closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T01:53:08.1252181+10:00",
+    "node": {
+      "id": "raisa-provider-free-disposable-postgresql-default-off-check-in-relay-free-rollback-unknown-commit-recovery-attempt-006",
+      "title": "Raisa provider-free check-in relay-free recovery attempt 006 failed-closed closeout",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted one and only one occupied attempt-006 database execution after its separate checkpoint.",
+          "Attempt 006 is consumed with no retry, resume, fallback, overwrite or reclassification.",
+          "The successor is provider-free, read-only and Docker-object-noncreating; no attempt 007 is authorised."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-immutable-attempt-006-failed-closed-terminal",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/rehearsal-failure-evidence.json",
+          "status": "accepted",
+          "summary": "Accept one immutable environment/server_not_running_after_readiness terminal at the exact occupied source with safe created-state projection, zero retry, no transaction attestation and no released ordinary or product effect."
+        },
+        {
+          "id": "accept-exact-attempt-006-cleanup-and-one-run-envelope",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/attempt-006-execution-envelope.json",
+          "status": "accepted",
+          "summary": "Accept occupied count one, retry zero, cleanup_verified and attachments, sidecars, captured server, internal network and all matching labelled resources absent."
+        },
+        {
+          "id": "accept-negative-result-and-reject-planned-success",
+          "source": "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-006-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the failed-closed evidence and reject the target transaction proof because readiness, setup, rollback, unknown-response commit, authoritative readback and attestation did not run."
+        },
+        {
+          "id": "accept-postterminal-deterministic-verification",
+          "source": "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_006_postterminal.py",
+          "status": "accepted",
+          "summary": "Accept four provider-free tests validating exact hashes, closed schema, sanitised pretransaction coordinate, exact cleanup and consumed-namespace denial."
+        },
+        {
+          "id": "accept-bounded-workflow-efficacy-reading",
+          "source": "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept that clockwork prevented expensive retry and authority drift while five low-cost form-construction corrections remain candidates for typed generation."
+        }
+      ],
+      "claim_scope": [
+        "Attempt 006 executed exactly once and failed closed before readiness while the captured server retained safe projected created state.",
+        "The attachment process exited nonzero while attached stdin remained open after credential delivery.",
+        "The failure and envelope SHA-256 values are immutable and the terminal namespace denies reuse.",
+        "No readiness success, setup, role creation, transaction branch, authoritative readback or attestation occurred.",
+        "No retry, ambiguous success, ordinary-practice admission or product record was released.",
+        "All owned Docker resources and attachments are absent after cleanup.",
+        "The result narrows the next diagnosis to the Docker start/attach pre-start boundary but does not identify its cause.",
+        "Clockwork contained the expensive circle; typed form builders remain needed for low-cost procedural corrections."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-plan.md",
+          "docs/security/raisa-provider-free-check-in-relay-free-recovery-attempt-006-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/rehearsal-failure-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/attempt-006-execution-envelope.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/efficacy-reading.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/preexecution-read-only-docker-inspection.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-failed-closed-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-006-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-check-in-relay-free-recovery-attempt-006-preexecution-receipt.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/database-preexecution/clockwork-checkpoint-tick-evidence.json",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_006.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_006_plan.py",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_006_postterminal.py",
+          "tests/test_raisa_provider_free_disposable_postgresql_default_off_check_in_relay_free_rollback_unknown_commit_recovery_rehearsal.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_check_in_relay_free_recovery_attempt_006.py",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/attempt-006-execution-envelope.schema.json",
+          "docs/ariadne-agent-error-correction-register-revision-628.md",
+          "orchestration/human_inbox/yuri/2026-08-23--check-in-relay-free-recovery-attempt-006.md",
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The Docker start/attach pre-start failure cause remains unproved.",
+        "No further disposable PostgreSQL execution is authorised; any attempt 007 requires a separate plan and checkpoint after diagnosis.",
+        "Rollback, unknown-response commit and authoritative readback remain unproved.",
+        "Dedicated check-in remains default-off without ordinary-practice admission.",
+        "No provider, product-data, production, deployment, release, Pages or protected integration is open."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Run one checkpointed repaired relay-free rollback and unknown-response attempt without allowing retries or product effects",
+      "outcome": "The attempt failed closed at a newly specific created-state start/attach coordinate and cleaned up exactly without reaching PostgreSQL readiness or transaction work.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/rehearsal-failure-evidence.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/attempt-006-execution-envelope.json",
+        "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-failed-closed-closeout.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Diagnose the exact pre-start Docker attachment failure without creating another object or database process",
+      "why_now": "Attempt 006 proves stdin remained open but the attachment process exited nonzero while the server stayed created, invalidating the current lifecycle assumption without identifying the host failure cause.",
+      "outcome": "Attempt 006 is honestly closed as failed evidence; the next work is read-only coordinate diagnosis before any repair or new attempt.",
+      "unlocks": [
+        "A closed host-process and OCI coordinate can distinguish CLI grammar, start failure and lifecycle race classes.",
+        "Deterministic fakes can test start/attach sequencing without Docker object creation.",
+        "A later repair and attempt 007 can be planned from evidence rather than another blind retry."
+      ],
+      "does_not_solve": [
+        "No rollback or exactly-once transaction result is proved.",
+        "No provider or model efficacy conclusion is created.",
+        "No new database run, ordinary-practice, product-data, production or protected authority opens."
+      ],
+      "evidence": [
+        "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-failed-closed-closeout.md",
+        "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-006-sol-acceptance.md",
+        "orchestration/human_inbox/yuri/2026-08-23--check-in-relay-free-recovery-attempt-006.md"
+      ],
+      "orientation_statement": "EMR4 will diagnose the created-state Docker start/attach failure read-only before considering a repair or separately frozen attempt 007."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis",
+      "active_tranche": "Raisa provider-free read-only check-in server start/attach created-state failure-coordinate diagnosis",
+      "objective": "Freeze a provider-free read-only diagnosis that binds the immutable attempt-006 terminal, inspects exact Docker start/attach command construction and read-only CLI grammar evidence, derives a closed sanitised host-process/OCI failure coordinate, and identifies the narrowest repair without creating a Docker object, starting PostgreSQL or authorising attempt 007.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted failed-closed attempt-006 terminal, exact cleanup and efficacy reading.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_read_only_created_state_failure_coordinate_diagnosis_plan"
+    },
+    "incidents": [
+      {
+        "incident_id": "attempt-006-server-start-attach-created-state",
+        "source_id": "attempt-006-occupied-001",
+        "peers": []
+      }
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "attempt-006-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/closeout/closeout-intent.json"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt-006-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4",
+          "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_006_postterminal.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt-006-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_006_postterminal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "attempt-006-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "tests/test_raisa_provider_free_check_in_relay_free_recovery_attempt_006_postterminal.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-plan.md",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/occupied-terminal.json",
+      "orchestration/continuity/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-628.md",
+      "docs/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-corrected-guard-graph-first-useful-development-recovery-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--native-harness-corrected-graph-useful-recovery.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_read_only_check_in_server_start_attach_created_state_failure_coordinate_diagnosis_only",
+    "no_docker_object_creation_postgresql_start_sql_or_database_execution",
+    "read_exact_source_terminal_and_read_only_local_cli_help_or_version_evidence_only",
+    "closed_sanitized_host_process_and_oci_coordinate_with_deterministic_fakes_only",
+    "attempts_001_through_006_immutable_no_retry_resume_overwrite_or_reclassification",
+    "no_attempt_007_without_separate_repair_acceptance_plan_and_one_run_checkpoint",
+    "no_deepseek_gemini_or_other_live_provider_call",
+    "no_product_source_configuration_api_openapi_graphql_schema_migration_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_or_first_party_client_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "attempt-006-server-start-attach-created-state-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-006",
+      "role": "implementer",
+      "resource_id": "attempt-006-docker-start-attach",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_docker_cli",
+      "stage": "implementation",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The inspected captured server must start through the fixed attached-stdin command and remain running long enough for readiness before any transaction stage can begin.",
+      "observed_error": "The sole occupied attempt retained safe projected created state with running false while the attachment process exited nonzero and attached stdin remained open after credential delivery.",
+      "detection_method": "The closed server post-readiness projection, immutable failure evidence, one-run envelope and independent zero-residue Docker readback identified the exact pre-readiness coordinate without retaining raw output.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/rehearsal-failure-evidence.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/efficacy-reading.json",
+        "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-failed-closed-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.docker_start_attach_exited_container_created",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume attempt 006 without retry, preserve the immutable terminal and exact cleanup, and decline the planned transaction success claim.",
+        "prevention_control": "Before any repair or attempt 007, run a provider-free read-only diagnosis of exact start/attach construction and CLI grammar with deterministic process fakes and a closed sanitised coordinate.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/rehearsal-failure-evidence.json",
+          "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-failed-closed-closeout.md",
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-006-sol-acceptance.md"
+        ]
+      },
+      "baton_summary": "preserves the one-run created-state start/attach failure and requires read-only coordinate diagnosis before a repair or attempt 007."
+    }
+  ]
+}

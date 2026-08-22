@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Freeze exactly one disposable PostgreSQL attempt 006 and require an immutable terminal before any further recovery claim.
+> EMR4 will diagnose the created-state Docker start/attach failure read-only before considering a repair or separately frozen attempt 007.
 
 ## North star
 
@@ -590,22 +590,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Current-node closeout timestamps now fail closed automatically and the three exposing omissions are repaired without a new form or ledger. Lineage parent: `raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal`.
 287. **Replace inferred readiness with one exact reading of accepted evidence — Canonical check-in ordinary-practice admission-readiness convergence review**
    Four previous gaps close without adding a control layer; two unsupported operational claims remain denied. Lineage parent: `ariadne-current-node-closeout-timestamp-guard-repair`.
+288. **Run one checkpointed repaired relay-free rollback and unknown-response attempt without allowing retries or product effects — Raisa provider-free check-in relay-free recovery attempt 006 failed-closed closeout**
+   The attempt failed closed at a newly specific created-state start/attach coordinate and cleaned up exactly without reaching PostgreSQL readiness or transaction work. Lineage parent: `raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review`.
 
 ## Current position
 
-**Obtain the missing unknown-commit behavioral evidence before any ordinary-practice admission decision — Canonical check-in ordinary-practice admission-readiness convergence review**
+**Diagnose the exact pre-start Docker attachment failure without creating another object or database process — Raisa provider-free check-in relay-free recovery attempt 006 failed-closed closeout**
 
-**Why this proof came next:** Attempt 005 failed before transaction setup, but its accepted server-lifecycle repairs now exist and the convergence review isolates this as one of only two remaining gaps.
+**Why this proof came next:** Attempt 006 proves stdin remained open but the attachment process exited nonzero while the server stayed created, invalidating the current lifecycle assumption without identifying the host failure cause.
 
-One separately frozen and checkpointed attempt 006 will either prove rollback/unknown-commit recovery in disposable PostgreSQL or preserve an exact failed-closed terminal.
+Attempt 006 is honestly closed as failed evidence; the next work is read-only coordinate diagnosis before any repair or new attempt.
 
 ### What this unlocks
 
-- A current evidence-backed classification of the unknown-commit recovery dimension.
+- A closed host-process and OCI coordinate can distinguish CLI grammar, start failure and lifecycle race classes.
+- Deterministic fakes can test start/attach sequencing without Docker object creation.
+- A later repair and attempt 007 can be planned from evidence rather than another blind retry.
 
 ### What it does not solve
 
-- It does not prove operational secret posture or authorise ordinary-practice activation, product data, provider use or production.
+- No rollback or exactly-once transaction result is proved.
+- No provider or model efficacy conclusion is created.
+- No new database run, ordinary-practice, product-data, production or protected authority opens.
 
 ## Continuity and authority
 
@@ -1505,6 +1511,7 @@ Prerequisites:
 - `docs/raisa-provider-free-check-in-native-harness-preset-row-service-path-recovery-closeout.md`
 - `docs/raisa-provider-free-check-in-native-harness-preset-validation-subcoordinate-recovery-closeout.md`
 - `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-005-blocked-closeout.md`
+- `docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-failed-closed-closeout.md`
 - `docs/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair-closeout.md`
 - `docs/raisa-provider-free-clockwork-governed-check-in-successor-resolution-plan.md`
 - `docs/raisa-provider-free-compatibility-conformance-harness-temporal-idempotency-readiness-repair-closeout.md`
@@ -2218,6 +2225,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-006-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -2935,6 +2943,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-profile-call-site-and-pre-registry-cleanup-conformance-repair/repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/deepseek-native-worker-attempt-001/attempt-terminal-evidence.json`
 - `orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-005/rehearsal-failure-evidence.json`
+- `orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/attempt-006-execution-envelope.json`
+- `orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/rehearsal-failure-evidence.json`
 - `orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-check-in-server-attachment-lifetime-and-post-readiness-observability-conformance-repair/repair-evidence.json`
 - `orchestration/continuity/raisa-provider-free-check-in-server-post-readiness-exit-state-and-stdin-lifecycle-conformance-repair/native-probe-terminal.json`
@@ -3515,6 +3525,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-tool-result-conclusion-coordinate-diagnostic.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-coordinate-recovery.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-failed-closed.md`
+- `orchestration/human_inbox/yuri/2026-08-23--check-in-relay-free-recovery-attempt-006.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3823,4 +3834,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 392; continuity graph revision 410._
+_Compass map revision 393; continuity graph revision 411._

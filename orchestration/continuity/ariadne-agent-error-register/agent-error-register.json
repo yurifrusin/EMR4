@@ -1,9 +1,9 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 627,
+  "register_revision": 628,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
-    "source_cutoff_on": "2026-08-22",
+    "source_cutoff_on": "2026-08-23",
     "inclusion_rule": "Include only a specific invariant breach or transport failure supported by a preserved repository receipt or analysis and its recorded correction or containment.",
     "exclusions": [
       "Unpreserved anecdotes or reconstructed intent",
@@ -38867,6 +38867,45 @@
       "incident_id": "AER-1002",
       "attempt_id": "clock-7fe70fc824802558003495b0",
       "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-check-in-relay-free-recovery-attempt-006",
+      "role": "implementer",
+      "resource_id": "attempt-006-docker-start-attach",
+      "model": null,
+      "reasoning_level": "high",
+      "transport": "local_docker_cli",
+      "stage": "implementation",
+      "category": "harness_failure",
+      "process_severity": "moderate",
+      "expected_invariant": "The inspected captured server must start through the fixed attached-stdin command and remain running long enough for readiness before any transaction stage can begin.",
+      "observed_error": "The sole occupied attempt retained safe projected created state with running false while the attachment process exited nonzero and attached stdin remained open after credential delivery.",
+      "detection_method": "The closed server post-readiness projection, immutable failure evidence, one-run envelope and independent zero-residue Docker readback identified the exact pre-readiness coordinate without retaining raw output.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/rehearsal-failure-evidence.json",
+        "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/efficacy-reading.json",
+        "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-failed-closed-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "harness.docker_start_attach_exited_container_created",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Consume attempt 006 without retry, preserve the immutable terminal and exact cleanup, and decline the planned transaction success claim.",
+        "prevention_control": "Before any repair or attempt 007, run a provider-free read-only diagnosis of exact start/attach construction and CLI grammar with deterministic process fakes and a closed sanitised coordinate.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-check-in-relay-free-recovery-attempt-006/rehearsal-failure-evidence.json",
+          "docs/raisa-provider-free-check-in-relay-free-recovery-attempt-006-failed-closed-closeout.md",
+          "orchestration/agent_inbox/codex/raisa-check-in-relay-free-recovery-attempt-006-sol-acceptance.md"
+        ]
+      },
+      "incident_id": "AER-1003",
+      "attempt_id": "clock-f6297bd36fd9e94cbc4837a6",
+      "origin": "harness",
       "related_incident_ids": [],
       "status": "corrected"
     }

@@ -1,0 +1,11 @@
+{
+  "schema_version": "emr4.non_phi_pushover_notification_receipt.v1",
+  "recorded_at": "2026-08-23T01:56:43.0841049+10:00",
+  "status": "passed",
+  "provider": "pushover",
+  "request": "2fc5b58f-a158-45fe-9c36-2cd208dea278",
+  "title": "EMR4 attempt 006 closeout",
+  "message_class": "non_phi_operational_closeout",
+  "phi_or_clinical_data": false,
+  "summary": "Attempt 006 ran once and failed closed before readiness; retry zero, cleanup verified, no provider or product effect. Next is read-only start/attach created-state diagnosis."
+}

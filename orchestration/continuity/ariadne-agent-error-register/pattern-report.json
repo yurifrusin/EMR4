@@ -1,15 +1,15 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 627,
-  "source_cutoff_on": "2026-08-22",
+  "register_revision": 628,
+  "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "a21913967736b3917a0cb6e6041896b762c5aed7a5cafb7f4db469551f5f4d73",
-  "incident_count": 1002,
+  "canonical_register_sha256": "ba053ea5f791c8a68f1506a81941d17f2eb70fe1d7789ffdb8d79486cb2563e4",
+  "incident_count": 1003,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 522,
-      "harness": 70,
+      "harness": 71,
       "operator": 253,
       "repository": 141,
       "transport": 16
@@ -17,7 +17,7 @@
     "by_category": {
       "command_scope_violation": 99,
       "evidence_misreport": 74,
-      "harness_failure": 70,
+      "harness_failure": 71,
       "operator_error": 253,
       "output_contract_violation": 296,
       "read_only_violation": 5,
@@ -26,7 +26,7 @@
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 74,
+      "implementer": 75,
       "integration_reviewer": 3,
       "orchestrator": 862,
       "verifier": 63
@@ -34,11 +34,11 @@
     "by_process_severity": {
       "low": 640,
       "material": 133,
-      "moderate": 229
+      "moderate": 230
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 210,
-      "canonical_unchanged": 623,
+      "canonical_unchanged": 624,
       "untrusted_partial_worktree": 169
     },
     "by_resource_and_role": {
@@ -117,6 +117,7 @@
       "attempt-005-preflight-configuration::orchestrator": 1,
       "attempt-005-process-absence-query::orchestrator": 1,
       "attempt-005-worker-packet-builder::orchestrator": 1,
+      "attempt-006-docker-start-attach::implementer": 1,
       "authored-synthetic-native-worker-controller-broker-handshake::orchestrator": 1,
       "authored-synthetic-native-worker-exact-root-cleanup::orchestrator": 1,
       "boot-runner-cli-import::orchestrator": 1,
