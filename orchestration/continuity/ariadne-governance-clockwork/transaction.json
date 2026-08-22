@@ -1,85 +1,85 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
-  "operation_id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
-  "transaction_id": "txn-4251fe5a0dbd9b8a7384145b",
-  "source_commit": "d01ef2f3afe16ccdb9a8f2077d5e76688397adb6",
-  "previous_source_commit": "d01ef2f3afe16ccdb9a8f2077d5e76688397adb6",
-  "previous_generation_id": "gen-05043ea7535a48c24308458a3fba3260b03d43d39b76b36f0a53e6ee0de445b1",
-  "previous_bundle_sha256": "05043ea7535a48c24308458a3fba3260b03d43d39b76b36f0a53e6ee0de445b1",
+  "operation_id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+  "transaction_id": "txn-137139d752f0d458fd9acb3c",
+  "source_commit": "bcdd7fc25f745ade62cb145ead73c4a1ad6f4e83",
+  "previous_source_commit": "bcdd7fc25f745ade62cb145ead73c4a1ad6f4e83",
+  "previous_generation_id": "gen-63fe9d02c2b04de3f864a931ffda225575203a792cb60705377731409ac7b8b4",
+  "previous_bundle_sha256": "63fe9d02c2b04de3f864a931ffda225575203a792cb60705377731409ac7b8b4",
   "previous_canonical_sha256s": {
-    "continuity": "445e17a98269ab572b7152d51feb1c49756b434c227f1fc9f6c0fba68809ad3c",
-    "compass": "d0ec5122c83686956c1ef1ecca278885c26f6e0f659e06c34b7b3373136c2d55",
-    "compass_markdown": "2dc2248521dd68f6532377df4fb1211c4e7ca0e94f35dc92a893fe37f87c8dba",
-    "active_latch": "9f41a0b896427608167a1f22a85b06fd9cb4a522c03b2dbeb72943ccea298643",
+    "continuity": "321732a3b65a4408d7263ca7106cc922f0de8faca435a224126cb00b3cc868b2",
+    "compass": "f56532da9e34dea366a55874a73e7cf757b856390d2859756343c93a91b977c8",
+    "compass_markdown": "bee27912e3cf729359acd6680e5d5f730fd2d905901a92fce1571e34e214ebb0",
+    "active_latch": "9e28390e6f00987dbf5502a44f22be77a2c300afe857bb7978f1d8f19cc4cf34",
     "error_register": "f09d265e2c2345f1bbb0b97c8086188c110fe73cfea29333ad16f67e2dbd49ed",
     "pattern_report": "87e388ca99ede32855362a5adfc94f52a7f117f4497506dd10b45de99532796a",
-    "current_baton": "b064a37fe6fe498884344161fe7a59cae0ba817ee77e4a2879c6ec5432ea8ba6"
+    "current_baton": "98b45295280b027c060577782277db78ad0da95a36e38642bca10f7f629e87ae"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "29b36bc460c49950aaeeab0756ef2e4cde1d796b8412e2e8db8d475198bc9b9b",
-    "transaction.json": "174b4b0af3c8fc85313a7ccc3912379b5881f2efdd6f1a74c8a37c08b4ecd06b",
+    "command-manifest.json": "44ca27b433abb41a2a39b9eff661a929243b0e4d3c485ac86f3ea5976bf29090",
+    "transaction.json": "526df246b3ef2459725c68dedf43dcc8072c91e1940b074c5302bfc005e4d8b8",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "d5b40f951b505e6f3ea1a52f06a3cb5dbc40ed7c67e9fea376541641b53524e8"
+    "generation-manifest.json": "2937a4296851f3034c4c2cbd72a85b1ed3fb0f2e0b92885974eb9ebdf372aa47"
   },
   "projection_sha256s": {
-    "graph": "sha256:0239961ea5e729109624377c10a3c3ec13d21f34e21c8b2cd46a682ad909cfac",
-    "compass": "sha256:0d0ba287b36080c2260f7bc63367ffd39b32a721d8cee4f0e9de478e3e9d8fad",
-    "report": "sha256:00b265a33f6f895b2bb04ca21686f980901bfec84842992d13d29d171cfa2b3e",
-    "latch": "sha256:8332aecba1fd877832abcb5c0695475de09d9742da7d11ef9fec50fb82d60566",
-    "incident_aggregate": "sha256:012cd99c89990d8a80584cdc38452c69df669aaa4fbdbc83e5f088ec2c190ded"
+    "graph": "sha256:1c4b4fbc086e7a5d59cdd7f375d75e3988aa1ff6fa8fdc2ac5c812aa2e6f5843",
+    "compass": "sha256:eab7069f8fc73aea803b298bcf5a262fa0c742ff844848a03f7b4175984e8532",
+    "report": "sha256:62d4ef46e5e69b068218128c2f97119a9bf483e91b95e79dbc0346a25c074839",
+    "latch": "sha256:15d8fa95f1f897c0524fb3c382e087ae1b689a7d2dba2ca585196576f75fffb0",
+    "incident_aggregate": "sha256:9587471eb698a21b771d350cd6181e7b557feb818ea2b6a4cddc0cd93d66c374"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-4251fe5a0dbd9b8a7384145b",
-      "transaction_id": "txn-4251fe5a0dbd9b8a7384145b",
-      "operation_id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+      "journal_id": "journal-137139d752f0d458fd9acb3c",
+      "transaction_id": "txn-137139d752f0d458fd9acb3c",
+      "operation_id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
       "event_type": "manifest-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "manifest_sha256": "sha256:8a91dd5cd55986f7fbc07737bf61595b966bd8eba4a12b3a577d023e44e634a5"
+        "manifest_sha256": "sha256:d7ed1056e650ace3fbc61ec67d6ab921d307202ba7084144cca9ba7fe01d82cc"
       },
-      "event_sha256": "sha256:38d1a7f0e3321f0e664a2109ee37dbae1c8c00d7a70ea27fb3ea736bf725aff5"
+      "event_sha256": "sha256:e3b7d7f22af8340da2c948e525ac1e2528fa7c9f9cb22c305355debfb93bd55d"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-4251fe5a0dbd9b8a7384145b",
-      "transaction_id": "txn-4251fe5a0dbd9b8a7384145b",
-      "operation_id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+      "journal_id": "journal-137139d752f0d458fd9acb3c",
+      "transaction_id": "txn-137139d752f0d458fd9acb3c",
+      "operation_id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
       "sequence": 2,
-      "previous_event_sha256": "sha256:38d1a7f0e3321f0e664a2109ee37dbae1c8c00d7a70ea27fb3ea736bf725aff5",
+      "previous_event_sha256": "sha256:e3b7d7f22af8340da2c948e525ac1e2528fa7c9f9cb22c305355debfb93bd55d",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "d01ef2f3afe16ccdb9a8f2077d5e76688397adb6",
+        "source_commit": "bcdd7fc25f745ade62cb145ead73c4a1ad6f4e83",
         "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
       },
-      "event_sha256": "sha256:85de223219be077f8a2779eb433e0f993e9f247d4910f95ccd16fe7cfb7697dc"
+      "event_sha256": "sha256:4ef1634983d6faa954040c1b1767b2e88da44493ec3bb26b4d266fda40f46049"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-4251fe5a0dbd9b8a7384145b",
-      "transaction_id": "txn-4251fe5a0dbd9b8a7384145b",
-      "operation_id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+      "journal_id": "journal-137139d752f0d458fd9acb3c",
+      "transaction_id": "txn-137139d752f0d458fd9acb3c",
+      "operation_id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
       "sequence": 3,
-      "previous_event_sha256": "sha256:85de223219be077f8a2779eb433e0f993e9f247d4910f95ccd16fe7cfb7697dc",
+      "previous_event_sha256": "sha256:4ef1634983d6faa954040c1b1767b2e88da44493ec3bb26b4d266fda40f46049",
       "event_type": "projections-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "graph_revision": 417,
-        "map_revision": 399
+        "graph_revision": 418,
+        "map_revision": 400
       },
-      "event_sha256": "sha256:22ba94d17fd024a0fbbab131d2d3c2ea32f8e7629fc0d1d4d771f6c142e5b6c6"
+      "event_sha256": "sha256:2caf1f1d08839b6c84a8a282dafa6bcc53a41faf128a151ed2c98a03f8b85fb3"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-4251fe5a0dbd9b8a7384145b",
-      "transaction_id": "txn-4251fe5a0dbd9b8a7384145b",
-      "operation_id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+      "journal_id": "journal-137139d752f0d458fd9acb3c",
+      "transaction_id": "txn-137139d752f0d458fd9acb3c",
+      "operation_id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
       "sequence": 4,
-      "previous_event_sha256": "sha256:22ba94d17fd024a0fbbab131d2d3c2ea32f8e7629fc0d1d4d771f6c142e5b6c6",
+      "previous_event_sha256": "sha256:2caf1f1d08839b6c84a8a282dafa6bcc53a41faf128a151ed2c98a03f8b85fb3",
       "event_type": "projections-validated",
       "actor": "gpt-sol",
       "payload": {
@@ -87,26 +87,26 @@
         "compass": "passed",
         "latch": "passed"
       },
-      "event_sha256": "sha256:5d398da64518ec15b8f761e6a0c4dcca147198137e345ddcda86154b84fbdcb7"
+      "event_sha256": "sha256:6c07cc4b464b11ec67842564fea3e6d5365ed0a5e0a7cacc86251b3c74d2ae0c"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-4251fe5a0dbd9b8a7384145b",
-      "transaction_id": "txn-4251fe5a0dbd9b8a7384145b",
-      "operation_id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+      "journal_id": "journal-137139d752f0d458fd9acb3c",
+      "transaction_id": "txn-137139d752f0d458fd9acb3c",
+      "operation_id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
       "sequence": 5,
-      "previous_event_sha256": "sha256:5d398da64518ec15b8f761e6a0c4dcca147198137e345ddcda86154b84fbdcb7",
+      "previous_event_sha256": "sha256:6c07cc4b464b11ec67842564fea3e6d5365ed0a5e0a7cacc86251b3c74d2ae0c",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "shadow_directory_rename"
       },
-      "event_sha256": "sha256:bd5cc1cb3c52d045fec53927fdf4360389363a27e2e77c0e263489b2a942c31e"
+      "event_sha256": "sha256:9488ec9e0dcee314e8beceff570ed795a5405349a45e3b08c7f4882a9ed9dc47"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
   "event_kind": "clean_closeout",
-  "next_boundaries_sha256": "sha256:209d646679735ab487c55c0b80330d07f1e7ac5ebbc363273669d263dea49f35",
-  "register_bytes_preserved": true,
-  "pattern_bytes_preserved": true
+  "next_boundaries_sha256": "sha256:f59a58ce0bbce394441b5e554cd7b60f227c6b174ec0e8dab09415e1cdb8af30",
+  "register_bytes_preserved": false,
+  "pattern_bytes_preserved": false
 }

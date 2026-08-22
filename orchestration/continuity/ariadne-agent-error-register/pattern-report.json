@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 633,
+  "register_revision": 634,
   "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "4ebe8888f05628847dfa84c9854cf240a3021b4291401cd80ddbe9205b2bddf4",
-  "incident_count": 1028,
+  "canonical_register_sha256": "b7f7ad47a5f2f640b57fb16612d88cee8cf427f052e8f83f6a56ddb899deb5bb",
+  "incident_count": 1032,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 536,
+      "agent_behavior": 537,
       "harness": 72,
-      "operator": 260,
+      "operator": 263,
       "repository": 144,
       "transport": 16
     },
@@ -18,8 +18,8 @@
       "command_scope_violation": 100,
       "evidence_misreport": 75,
       "harness_failure": 72,
-      "operator_error": 260,
-      "output_contract_violation": 308,
+      "operator_error": 263,
+      "output_contract_violation": 309,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
       "repository_defect": 144,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 83,
       "integration_reviewer": 3,
-      "orchestrator": 879,
+      "orchestrator": 883,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 659,
+      "low": 663,
       "material": 135,
       "moderate": 234
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 218,
-      "canonical_unchanged": 639,
+      "accepted_candidate_changed": 219,
+      "canonical_unchanged": 642,
       "untrusted_partial_worktree": 171
     },
     "by_resource_and_role": {
@@ -127,6 +127,7 @@
       "attempt-007-provider-free-test-manifest::orchestrator": 1,
       "attempt-007-success-evidence-redaction::implementer": 1,
       "attempt-007-terminal-cleanup-projection::implementer": 1,
+      "attempt-008-admissibility-contract::orchestrator": 1,
       "authored-synthetic-native-worker-controller-broker-handshake::orchestrator": 1,
       "authored-synthetic-native-worker-exact-root-cleanup::orchestrator": 1,
       "boot-runner-cli-import::orchestrator": 1,
@@ -144,6 +145,7 @@
       "clockwork-closeout-incident-observation::orchestrator": 1,
       "clockwork-closeout-transaction-recorded-at::orchestrator": 1,
       "clockwork-command-manifest-module-invocation::orchestrator": 1,
+      "clockwork-continuity-node-kind::orchestrator": 1,
       "clockwork-continuity-node-projector::orchestrator": 1,
       "clockwork-gear-architecture-plan-latch-test::orchestrator": 1,
       "clockwork-incident-category-vocabulary::orchestrator": 1,
@@ -406,6 +408,7 @@
       "provider-free-pytest-wrapper-cli::orchestrator": 1,
       "provider-free-recovery-evidence-runner::implementer": 1,
       "provider-free-repair-verification::orchestrator": 1,
+      "provider-free-test-selection::orchestrator": 1,
       "provider-free-test-session-exit-capture::orchestrator": 1,
       "raw-detail-release-predicate::orchestrator": 1,
       "raw-stream-nonretention-test::orchestrator": 1,
@@ -462,6 +465,7 @@
       "successor-latch-closed-boundary-vocabulary::orchestrator": 1,
       "successor-protected-boundary-vocabulary::orchestrator": 1,
       "task-branch-notification-receipt-push-guard::orchestrator": 1,
+      "task-branch-staged-check::orchestrator": 1,
       "transactional-closeout-decision-evidence::orchestrator": 1,
       "transactional-closeout-node-relationship-cardinality::orchestrator": 1,
       "transactional-closeout-shadow-fixture::orchestrator": 1,

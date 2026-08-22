@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will take a provider-free read-only admissibility reading before spending another occupied check-in recovery attempt.
+> EMR4 will freeze and prove every deterministic attempt-008 condition before one checkpoint can admit one disposable database invocation.
 
 ## North star
 
@@ -604,26 +604,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Prospective success records are checked before occupied work and post-cleanup failures retain truthful cleanup state. Lineage parent: `raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis`.
 294. **Replace remembered verification procedure with one typed executable control gear — Ariadne provider-free verification-envelope phase and runner-admission repair**
    Database-closed runner choice and publication phase now fail closed on both command-control surfaces. Lineage parent: `raisa-provider-free-check-in-prospective-success-redaction-and-typed-cleanup-projection-conformance-repair`.
+295. **Take a typed readiness reading before spending another occupied database attempt — Raisa provider-free read-only check-in attempt-008 plan-admissibility decision**
+   A separate attempt-008 plan is admissible, while nine hard plan/preexecution conditions and execution denial remain explicit. Lineage parent: `ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair`.
 
 ## Current position
 
-**Decide whether the repaired deterministic envelope is sufficient to plan one more occupied check-in recovery attempt — Ariadne provider-free verification-envelope phase and runner-admission repair**
+**Freeze and deterministically admit one collision-free attempt-008 lifecycle before any occupied action — Raisa provider-free read-only check-in attempt-008 plan-admissibility decision**
 
-**Why this proof came next:** The two product-harness causes and two surrounding verification-envelope causes are now represented by reusable fail-closed controls.
+**Why this proof came next:** All known deterministic failure causes have accepted controls and the read-only decision reports zero plan-freeze blockers.
 
-A read-only decision will enumerate every frozen prerequisite and either admit a separate attempt-008 planning tranche or identify the exact remaining deterministic gap.
+The next plan will bind a fresh identity, current repaired source, immutable lineage, exact one-run semantics and every preexecution condition before a checkpoint can open one execution.
 
 ### What this unlocks
 
-- An admissible result can support a separately frozen attempt-008 plan.
-- A negative result can name one bounded repair without spending an occupied run.
-- The decision will use the typed provider-free verification envelope.
+- A new wrapper/schema can be constructed without database activity.
+- Typed provider-free verification can decide the complete deterministic candidate.
+- Only a later exact checkpoint can admit one occupied invocation.
 
 ### What it does not solve
 
-- No attempt-008 plan or execution is authorised in the decision tranche.
-- No database lifecycle or occupied behavior is proved.
-- No product, provider, production or protected authority opens.
+- The positive decision itself proves no attempt-008 database behavior.
+- No ordinary-practice or product command is admitted.
+- No provider, production or protected authority opens.
 
 ## Continuity and authority
 
@@ -1628,6 +1630,7 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md`
 - `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md`
 - `docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md`
+- `docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md`
 - `docs/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis-closeout.md`
 - `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-closeout.md`
 - `docs/raisa-provider-free-read-only-delete-confirm-route-convergence-and-ariadne-git-object-resolution-plan.md`
@@ -3067,6 +3070,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-report.md`
+- `orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/decision-evidence.json`
+- `orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-check-in-server-start-attach-created-state-failure-coordinate-diagnosis/diagnosis-report.md`
 - `orchestration/continuity/raisa-provider-free-read-only-delete-confirm-route-mounting-readiness-review/provider-free-read-only-evidence.json`
@@ -3554,7 +3559,7 @@ Prerequisites:
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-tool-result-conclusion-coordinate-diagnostic.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-coordinate-recovery.md`
 - `orchestration/human_inbox/yuri/2026-08-22--native-harness-useful-worker-failed-closed.md`
-- `orchestration/human_inbox/yuri/2026-08-23--verification-envelope-phase-runner-admission-repair.md`
+- `orchestration/human_inbox/yuri/2026-08-23--check-in-attempt-008-plan-admissibility-decision.md`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/database-cleanup-evidence.json`
 - `orchestration/prototypes/reception-one-bureau-runtime-ui-wiring/live-local-browser-backend-postgres-evidence.json`
 - `orchestration/prototypes/reception-one-integrated-bureau/browser-acceptance-evidence.json`
@@ -3863,4 +3868,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 399; continuity graph revision 417._
+_Compass map revision 400; continuity graph revision 418._

@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 417,
+  "graph_revision": 418,
   "harvests": [],
   "nodes": [
     {
@@ -33272,9 +33272,115 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+      "title": "Raisa provider-free read-only check-in attempt-008 plan-admissibility decision",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-verification-envelope-phase-and-runner-admission-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing authority admitted only a provider-free read-only decision over accepted unprotected evidence.",
+          "The positive verdict authorises a separate plan freeze, not an attempt-008 checkpoint or execution.",
+          "DeepSeek, Gemini and native subagents remained declined under the frozen serial assessment."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-fourteen-row-prerequisite-population",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/contract.json",
+          "status": "accepted",
+          "summary": "Accept P01-P14 with five satisfied, six future-plan, three preexecution and zero blocking rows."
+        },
+        {
+          "id": "accept-plan-freeze-admissibility-only",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/decision-evidence.json",
+          "status": "accepted",
+          "summary": "Accept admissible_for_separate_plan_freeze while retaining ready_to_execute false and absent attempt-008 targets."
+        },
+        {
+          "id": "accept-current-lineage-verification-and-historical-boundary",
+          "source": "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md",
+          "status": "accepted",
+          "summary": "Accept current repair/envelope/decision generators and consume immutable diagnostic bytes without rerunning their pre-repair generator tests."
+        },
+        {
+          "id": "accept-measured-efficacy-with-contained-workflow-lapses",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept the zero-blocker decision while retaining four qualifying workflow lapses and two focused test-specification correction iterations."
+        }
+      ],
+      "claim_scope": [
+        "All fourteen inherited prerequisite rows are present with exact finite states.",
+        "Five accepted-evidence prerequisites are satisfied and zero rows block a separate plan freeze.",
+        "Six plan and three preexecution obligations remain non-satisfied.",
+        "No attempt-008 plan, namespace, checkpoint, execution or result exists.",
+        "No database, provider, worker, network, product or protected activity is accepted."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-plan.md",
+          "docs/security/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/decision-evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/decision-report.md",
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-attempt-008-plan-admissibility-decision-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py",
+          "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision_plan.py",
+          "tests/test_raisa_provider_free_check_in_prospective_success_redaction_and_typed_cleanup_projection_conformance_repair.py",
+          "tests/test_ariadne_provider_free_verification_envelope_phase_and_runner_admission_repair.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_current_baton_consistency.py"
+        ],
+        "artifacts": [
+          "scripts/raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py",
+          "docs/ariadne-agent-error-correction-register-revision-634.md",
+          "orchestration/human_inbox/yuri/2026-08-23--check-in-attempt-008-plan-admissibility-decision.md"
+        ]
+      },
+      "unresolved_gates": [
+        "P06-P11 require a separately frozen attempt-008 plan.",
+        "P12-P14 require one committed clean candidate, deterministic admission, read-only Docker inspection, a fresh receipt and a distinct checkpoint.",
+        "No rollback, unknown-response exactly-once, isolation or cleanup behavior is proved for attempt 008.",
+        "Dedicated check-in remains default-off without ordinary-practice admission.",
+        "No provider, product-data, production, deployment, release, Pages or protected integration is open."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T06:26:26.9894169+10:00",
+      "updated_at": "2026-08-23T06:26:26.9894169+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "bcdd7fc25f745ade62cb145ead73c4a1ad6f4e83",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T05:57:19.6577887+10:00"
+  "updated_at": "2026-08-23T06:26:26.9894169+10:00"
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 633,
+  "register_revision": 634,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -39823,6 +39823,154 @@
       },
       "incident_id": "AER-1028",
       "attempt_id": "clock-d82eee0e783fc58012bd1f5b",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+      "role": "orchestrator",
+      "resource_id": "attempt-008-admissibility-contract",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_authoring",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every Git binding in an authored decision contract is consumed from machine resolution and is a full ancestor of the candidate.",
+      "observed_error": "The first unvalidated contract draft manually completed the displayed planning-commit prefix instead of reading the full object.",
+      "detection_method": "The orchestrator noticed the manual expansion before validation, staging or evidence construction and compared it with git rev-parse HEAD.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/contract.json",
+        "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.manual_git_object_expansion_for_artifact_binding",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the draft value with the exact machine-resolved HEAD before validation and evidence generation.",
+        "prevention_control": "The assessor rejects abbreviated, nonexistent or non-ancestor plan and evidence sources; future artifact generation consumes git rev-parse output directly.",
+        "evidence_paths": [
+          "scripts/raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py",
+          "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision_plan.py"
+        ]
+      },
+      "incident_id": "AER-1029",
+      "attempt_id": "clock-070a7289e3a3ffe40adafe91",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+      "role": "orchestrator",
+      "resource_id": "task-branch-staged-check",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_git",
+      "stage": "integration",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "A failed staged diff-hygiene check stops before task-branch commit.",
+      "observed_error": "A semicolon-separated PowerShell command continued to commit after git diff --cached --check reported one trailing blank line.",
+      "detection_method": "The command output displayed the whitespace warning immediately before the successful task-branch commit.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py",
+        "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.powershell_non_fail_fast_staged_check_chain",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Remove the trailing blank line in a follow-up task-branch commit and rerun staged diff hygiene.",
+        "prevention_control": "Subsequent multi-step staged gates check LASTEXITCODE explicitly and exit before commit on any nonzero result.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_read_only_check_in_attempt_008_plan_admissibility_decision.py",
+          "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"
+        ]
+      },
+      "incident_id": "AER-1030",
+      "attempt_id": "clock-cfd2284df58cb6636c217bbf",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+      "role": "orchestrator",
+      "resource_id": "provider-free-test-selection",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Current compatibility packets execute current-lineage generators and consume immutable pre-repair diagnostic output only as hash-bound evidence.",
+      "observed_error": "The first broader packet selected attempt-007 diagnostic regeneration tests that correctly reject the repaired base source they were never intended to regenerate against.",
+      "detection_method": "Six failures reported the accepted source-binding drift and absence of the retired forbidden-field/control-flow coordinates.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis/diagnosis-evidence.json",
+        "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.immutable_historical_generator_selected_as_current_compatibility",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Exclude the immutable diagnosis generators and pass the replacement current-lineage packet while the assessor validates the accepted diagnosis bytes.",
+        "prevention_control": "The closeout records immutable diagnosis outputs as evidence inputs and names only repair-era or later generators in current compatibility commands.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/decision-evidence.json",
+          "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"
+        ]
+      },
+      "incident_id": "AER-1031",
+      "attempt_id": "clock-90dbc374cc1451b719e4ca05",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+      "role": "orchestrator",
+      "resource_id": "clockwork-continuity-node-kind",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A clockwork closeout selects its Continuity graph node kind from the closed accepted vocabulary.",
+      "observed_error": "The first closeout intent used the descriptive node kind decision, which is outside the accepted graph vocabulary.",
+      "detection_method": "Clockwork dry-run rejected prospective projection construction with node_kind_invalid before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/closeout/closeout-intent.json",
+        "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.unindexed_continuity_graph_node_kind",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the descriptive value with existing closed-vocabulary kind foundation and rerun the dry-run.",
+        "prevention_control": "Future closeout construction reads the graph's admitted node-kind vocabulary before intent validation; clockwork remains the fail-closed final guard.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision/closeout/closeout-intent.json",
+          "docs/raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision-closeout.md"
+        ]
+      },
+      "incident_id": "AER-1032",
+      "attempt_id": "clock-a67ffae7d118e55291d09c9d",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

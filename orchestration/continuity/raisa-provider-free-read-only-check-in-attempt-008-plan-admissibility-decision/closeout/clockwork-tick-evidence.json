@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "bcdd7fc25f745ade62cb145ead73c4a1ad6f4e83",
+  "source_commit": "bcdd7fc25f745ade62cb145ead73c4a1ad6f4e83",
+  "generation_id": "gen-af77fe976c3f46a1c3c31a52d7cc223ca0212aec10acbfd712d8cf3aa0f7aca1",
+  "bundle_sha256": "af77fe976c3f46a1c3c31a52d7cc223ca0212aec10acbfd712d8cf3aa0f7aca1",
+  "previous_generation_id": "gen-63fe9d02c2b04de3f864a931ffda225575203a792cb60705377731409ac7b8b4",
+  "previous_source_commit": "bcdd7fc25f745ade62cb145ead73c4a1ad6f4e83",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 189,
+  "operation_id": "raisa-provider-free-read-only-check-in-attempt-008-plan-admissibility-decision",
+  "event_kind": "clean_closeout",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}
