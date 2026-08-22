@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-edit-coordinate-future-runner-integration-failure-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "status", "failure_coordinate", "worker_model_provider_request_count", "retry_count", "resume_count", "fallback_count", "disposable_root_absent"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_edit_coordinate_future_runner_integration_failure.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal"},
+    "status": {"const": "failed_closed"},
+    "failure_coordinate": {"enum": ["contract_rejected", "input_binding_rejected", "runner_derivation_rejected", "runner_syntax_rejected", "fixture_root_rejected", "fixture_source_rejected", "fixture_process_failed", "fixture_output_rejected", "fixture_cleanup_failed", "evidence_rejected", "output_conflict", "unexpected_provider_free_failure"]},
+    "worker_model_provider_request_count": {"const": 0}, "retry_count": {"const": 0}, "resume_count": {"const": 0}, "fallback_count": {"const": 0}, "disposable_root_absent": {"type": "boolean"}
+  }
+}

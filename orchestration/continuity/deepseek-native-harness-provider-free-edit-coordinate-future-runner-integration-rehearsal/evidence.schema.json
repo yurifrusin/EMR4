@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-edit-coordinate-future-runner-integration-evidence-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "status", "result", "evidence_label", "contract_sha256", "input_bindings", "derived_runner", "variants", "process_counts", "fixture", "cleanup"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_edit_coordinate_future_runner_integration_evidence.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal"},
+    "status": {"const": "passed"},
+    "result": {"const": "provider_free_edit_coordinate_future_runner_integration_pass"},
+    "evidence_label": {"const": "provider_free_authored_synthetic_real_edit_future_runner_integration"},
+    "contract_sha256": {"$ref": "#/$defs/sha256"},
+    "input_bindings": {"type": "object"},
+    "derived_runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256", "syntax_check_passed", "import_check_passed", "transformation_version", "source_checks"],
+      "properties": {
+        "path": {"type": "string"}, "bytes": {"type": "integer", "minimum": 1}, "sha256": {"$ref": "#/$defs/sha256"},
+        "syntax_check_passed": {"const": true}, "import_check_passed": {"const": true},
+        "transformation_version": {"const": "edit_coordinate_future_runner_integration_v1"},
+        "source_checks": {"type": "object", "additionalProperties": {"const": true}, "minProperties": 8}
+      }
+    },
+    "variants": {"type": "array", "minItems": 9, "maxItems": 9, "items": {"$ref": "#/$defs/variant"}},
+    "process_counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}, "minProperties": 15, "maxProperties": 15},
+    "fixture": {"type": "object"},
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cordis_disposed", "owned_process_absent", "disposable_root_absent", "credentials_present_in_fixture_environment", "raw_arguments_content_error_stack_retained", "raw_prompt_response_reasoning_session_environment_retained"],
+      "properties": {
+        "cordis_disposed": {"const": true}, "owned_process_absent": {"const": true}, "disposable_root_absent": {"const": true},
+        "credentials_present_in_fixture_environment": {"const": false}, "raw_arguments_content_error_stack_retained": {"const": false},
+        "raw_prompt_response_reasoning_session_environment_retained": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "coordinate": {"enum": ["edit_success_unique_match", "edit_success_replace_all", "edit_error_invalid_args", "edit_error_untyped_argument_constraint", "edit_error_fs_stale_version", "edit_error_fs_edit_not_found", "edit_error_fs_ambiguous_edit"]},
+    "state": {"type": "object", "additionalProperties": false, "required": ["present", "bytes", "sha256"], "properties": {"present": {"type": "boolean"}, "bytes": {"type": ["integer", "null"], "minimum": 0}, "sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}}},
+    "variant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant_id", "pre_dispatch_decision", "tool_executed", "result_kind", "structured_error_code", "success_class", "target_changed", "coordinate", "python_coordinate_agreement", "before", "after"],
+      "properties": {
+        "variant_id": {"type": "string"},
+        "pre_dispatch_decision": {"enum": ["defer_to_tool_schema", "deny_blank_file_path", "deny_empty_old_string", "deny_equal_old_new", "admit_semantic_constraints"]},
+        "tool_executed": {"type": "boolean"}, "result_kind": {"enum": ["success", "error"]},
+        "structured_error_code": {"type": ["string", "null"], "enum": [null, "INVALID_ARGS", "FS_STALE_VERSION", "FS_EDIT_NOT_FOUND", "FS_AMBIGUOUS_EDIT"]},
+        "success_class": {"type": ["string", "null"], "enum": [null, "unique_match", "replace_all"]},
+        "target_changed": {"type": "boolean"}, "coordinate": {"$ref": "#/$defs/coordinate"}, "python_coordinate_agreement": {"const": true},
+        "before": {"$ref": "#/$defs/state"}, "after": {"$ref": "#/$defs/state"}
+      }
+    }
+  }
+}

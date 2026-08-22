@@ -1,0 +1,144 @@
+{
+  "schema_version": "ariadne.native_harness_edit_coordinate_future_runner_integration_contract.v1",
+  "operation_id": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
+  "evidence_label": "provider_free_authored_synthetic_real_edit_future_runner_integration",
+  "accepted_inputs": {
+    "future_runner": {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/future-runner.mjs",
+      "bytes": 9542,
+      "sha256": "33e4ceefc612ac2410c95b71d80ccc42e913976379e8c088f0b8eff966853282",
+      "source_commit": "f2d420ce9637081d08ef7d8241b588258d4ddc6a"
+    },
+    "python_coordinate_classifier": {
+      "path": "orchestration_harness/native_edit_argument_result_coordinate.py",
+      "bytes": 3661,
+      "sha256": "a0f2afd7eec2cbd89b5a73cbc2815832e529252d3b67efca7827832f9fbafa93",
+      "source_commit": "099907c8fbe0cf5480492545629fc0f15e7c688b"
+    },
+    "predecessor_contract": {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/contract.json",
+      "bytes": 6826,
+      "sha256": "a3b90734a716e972bce04adfb4f1527a29661f1bb395e17894a163a28b409e46"
+    },
+    "predecessor_evidence": {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-evidence.json",
+      "bytes": 11374,
+      "sha256": "8c53fdd9194d92d5e4a8d6aa264cf0c6def3eb54339238ec8dbc1c1efeeb9060"
+    }
+  },
+  "derivation": {
+    "version": "edit_coordinate_future_runner_integration_v1",
+    "derived_runner_path": "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/integrated-future-runner.mjs",
+    "export_names": [
+      "preflightEditArguments",
+      "classifyEditArgumentResult"
+    ],
+    "pre_dispatch_decisions": [
+      "defer_to_tool_schema",
+      "deny_blank_file_path",
+      "deny_empty_old_string",
+      "deny_equal_old_new",
+      "admit_semantic_constraints"
+    ]
+  },
+  "coordinates": [
+    "edit_success_unique_match",
+    "edit_success_replace_all",
+    "edit_error_invalid_args",
+    "edit_error_untyped_argument_constraint",
+    "edit_error_fs_stale_version",
+    "edit_error_fs_edit_not_found",
+    "edit_error_fs_ambiguous_edit"
+  ],
+  "variants": [
+    {
+      "variant_id": "unique_match_success",
+      "pre_dispatch_decision": "admit_semantic_constraints",
+      "tool_execution_expected": true,
+      "expected_coordinate": "edit_success_unique_match",
+      "structured_error_code": null,
+      "success_class": "unique_match"
+    },
+    {
+      "variant_id": "replace_all_success",
+      "pre_dispatch_decision": "admit_semantic_constraints",
+      "tool_execution_expected": true,
+      "expected_coordinate": "edit_success_replace_all",
+      "structured_error_code": null,
+      "success_class": "replace_all"
+    },
+    {
+      "variant_id": "schema_missing_required",
+      "pre_dispatch_decision": "defer_to_tool_schema",
+      "tool_execution_expected": true,
+      "expected_coordinate": "edit_error_invalid_args",
+      "structured_error_code": "INVALID_ARGS",
+      "success_class": null
+    },
+    {
+      "variant_id": "blank_file_path",
+      "pre_dispatch_decision": "deny_blank_file_path",
+      "tool_execution_expected": false,
+      "expected_coordinate": "edit_error_untyped_argument_constraint",
+      "structured_error_code": null,
+      "success_class": null
+    },
+    {
+      "variant_id": "empty_old_string",
+      "pre_dispatch_decision": "deny_empty_old_string",
+      "tool_execution_expected": false,
+      "expected_coordinate": "edit_error_untyped_argument_constraint",
+      "structured_error_code": null,
+      "success_class": null
+    },
+    {
+      "variant_id": "equal_old_new",
+      "pre_dispatch_decision": "deny_equal_old_new",
+      "tool_execution_expected": false,
+      "expected_coordinate": "edit_error_untyped_argument_constraint",
+      "structured_error_code": null,
+      "success_class": null
+    },
+    {
+      "variant_id": "missing_target",
+      "pre_dispatch_decision": "admit_semantic_constraints",
+      "tool_execution_expected": true,
+      "expected_coordinate": "edit_error_fs_stale_version",
+      "structured_error_code": "FS_STALE_VERSION",
+      "success_class": null
+    },
+    {
+      "variant_id": "literal_not_found",
+      "pre_dispatch_decision": "admit_semantic_constraints",
+      "tool_execution_expected": true,
+      "expected_coordinate": "edit_error_fs_edit_not_found",
+      "structured_error_code": "FS_EDIT_NOT_FOUND",
+      "success_class": null
+    },
+    {
+      "variant_id": "literal_ambiguous",
+      "pre_dispatch_decision": "admit_semantic_constraints",
+      "tool_execution_expected": true,
+      "expected_coordinate": "edit_error_fs_ambiguous_edit",
+      "structured_error_code": "FS_AMBIGUOUS_EDIT",
+      "success_class": null
+    }
+  ],
+  "process_limits": {
+    "node_fixture_process_count": 1,
+    "real_edit_tool_execution_count": 6,
+    "pre_dispatch_denial_count": 3,
+    "native_harness_process_count": 0,
+    "worker_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "broker_process_count": 0,
+    "broker_request_count": 0,
+    "network_attempt_count": 0,
+    "database_attempt_count": 0,
+    "docker_attempt_count": 0,
+    "retry_count": 0,
+    "resume_count": 0,
+    "fallback_count": 0
+  }
+}

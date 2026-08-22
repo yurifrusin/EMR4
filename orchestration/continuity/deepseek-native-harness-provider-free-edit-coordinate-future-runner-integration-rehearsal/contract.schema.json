@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/native-harness-edit-coordinate-future-runner-integration-contract-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation_id", "evidence_label", "accepted_inputs", "derivation", "coordinates", "variants", "process_limits"],
+  "properties": {
+    "schema_version": {"const": "ariadne.native_harness_edit_coordinate_future_runner_integration_contract.v1"},
+    "operation_id": {"const": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal"},
+    "evidence_label": {"const": "provider_free_authored_synthetic_real_edit_future_runner_integration"},
+    "accepted_inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["future_runner", "python_coordinate_classifier", "predecessor_contract", "predecessor_evidence"],
+      "properties": {
+        "future_runner": {"$ref": "#/$defs/git_binding"},
+        "python_coordinate_classifier": {"$ref": "#/$defs/git_binding"},
+        "predecessor_contract": {"$ref": "#/$defs/file_binding"},
+        "predecessor_evidence": {"$ref": "#/$defs/file_binding"}
+      }
+    },
+    "derivation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "derived_runner_path", "export_names", "pre_dispatch_decisions"],
+      "properties": {
+        "version": {"const": "edit_coordinate_future_runner_integration_v1"},
+        "derived_runner_path": {"type": "string", "minLength": 1},
+        "export_names": {"type": "array", "prefixItems": [{"const": "preflightEditArguments"}, {"const": "classifyEditArgumentResult"}], "items": false},
+        "pre_dispatch_decisions": {"type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true, "items": {"enum": ["defer_to_tool_schema", "deny_blank_file_path", "deny_empty_old_string", "deny_equal_old_new", "admit_semantic_constraints"]}}
+      }
+    },
+    "coordinates": {"type": "array", "minItems": 7, "maxItems": 7, "uniqueItems": true, "items": {"$ref": "#/$defs/coordinate"}},
+    "variants": {"type": "array", "minItems": 9, "maxItems": 9, "items": {"$ref": "#/$defs/variant"}},
+    "process_limits": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}, "minProperties": 15, "maxProperties": 15}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "git_oid": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "file_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256"],
+      "properties": {"path": {"type": "string", "minLength": 1}, "bytes": {"type": "integer", "minimum": 1}, "sha256": {"$ref": "#/$defs/sha256"}}
+    },
+    "git_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256", "source_commit"],
+      "properties": {"path": {"type": "string", "minLength": 1}, "bytes": {"type": "integer", "minimum": 1}, "sha256": {"$ref": "#/$defs/sha256"}, "source_commit": {"$ref": "#/$defs/git_oid"}}
+    },
+    "coordinate": {"enum": ["edit_success_unique_match", "edit_success_replace_all", "edit_error_invalid_args", "edit_error_untyped_argument_constraint", "edit_error_fs_stale_version", "edit_error_fs_edit_not_found", "edit_error_fs_ambiguous_edit"]},
+    "variant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variant_id", "pre_dispatch_decision", "tool_execution_expected", "expected_coordinate", "structured_error_code", "success_class"],
+      "properties": {
+        "variant_id": {"type": "string", "minLength": 1},
+        "pre_dispatch_decision": {"enum": ["defer_to_tool_schema", "deny_blank_file_path", "deny_empty_old_string", "deny_equal_old_new", "admit_semantic_constraints"]},
+        "tool_execution_expected": {"type": "boolean"},
+        "expected_coordinate": {"$ref": "#/$defs/coordinate"},
+        "structured_error_code": {"type": ["string", "null"], "enum": [null, "INVALID_ARGS", "FS_STALE_VERSION", "FS_EDIT_NOT_FOUND", "FS_AMBIGUOUS_EDIT"]},
+        "success_class": {"type": ["string", "null"], "enum": [null, "unique_match", "replace_all"]}
+      }
+    }
+  }
+}

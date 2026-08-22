@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.native_harness_edit_coordinate_future_runner_integration_failure.v1",
+  "operation_id": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
+  "status": "failed_closed",
+  "failure_coordinate": "input_binding_rejected",
+  "worker_model_provider_request_count": 0,
+  "retry_count": 0,
+  "resume_count": 0,
+  "fallback_count": 0,
+  "disposable_root_absent": true
+}

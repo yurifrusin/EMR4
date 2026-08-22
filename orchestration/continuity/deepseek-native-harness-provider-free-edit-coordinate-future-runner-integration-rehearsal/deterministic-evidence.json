@@ -1,0 +1,381 @@
+{
+  "schema_version": "ariadne.native_harness_edit_coordinate_future_runner_integration_evidence.v1",
+  "operation_id": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
+  "status": "passed",
+  "result": "provider_free_edit_coordinate_future_runner_integration_pass",
+  "evidence_label": "provider_free_authored_synthetic_real_edit_future_runner_integration",
+  "contract_sha256": "1460d8b10a6cb1d90170be1b9c71b1a78a86891f479adb0eca7c2ee3ca8d1317",
+  "input_bindings": {
+    "future_runner": {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-tool-result-conclusion-coordinate-diagnostic-recovery/future-runner.mjs",
+      "bytes": 9542,
+      "sha256": "33e4ceefc612ac2410c95b71d80ccc42e913976379e8c088f0b8eff966853282",
+      "source_commit": "f2d420ce9637081d08ef7d8241b588258d4ddc6a",
+      "source_is_ancestor_of_head": true
+    },
+    "python_coordinate_classifier": {
+      "path": "orchestration_harness/native_edit_argument_result_coordinate.py",
+      "bytes": 3661,
+      "sha256": "a0f2afd7eec2cbd89b5a73cbc2815832e529252d3b67efca7827832f9fbafa93",
+      "source_commit": "099907c8fbe0cf5480492545629fc0f15e7c688b",
+      "source_is_ancestor_of_head": true
+    },
+    "predecessor_contract": {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/contract.json",
+      "bytes": 6826,
+      "sha256": "a3b90734a716e972bce04adfb4f1527a29661f1bb395e17894a163a28b409e46"
+    },
+    "predecessor_evidence": {
+      "path": "orchestration/continuity/deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery/deterministic-evidence.json",
+      "bytes": 11374,
+      "sha256": "8c53fdd9194d92d5e4a8d6aa264cf0c6def3eb54339238ec8dbc1c1efeeb9060"
+    },
+    "packages": {
+      "dsh_tools": {
+        "name": "@deepseek-ai/dsh-tools",
+        "version": "0.1.0-rc.7",
+        "files": {
+          "package.json": {
+            "bytes": 2053,
+            "sha256": "d03b9856ee20c9fd804322589f7c259a7404786e4af99cc892609c3d671690f3"
+          },
+          "lib/index.js": {
+            "bytes": 150646,
+            "sha256": "47de95d14493dbd22d1a3ade14890fc99d7232db4e363f2190c9063b030dd029"
+          },
+          "lib/types/index.d.ts": {
+            "bytes": 42942,
+            "sha256": "bad13885fcaa9d781e2a28988e9e9fd4cdeb750e65b8bc148356ffd1f0457907"
+          }
+        }
+      },
+      "dsh_tool_fs": {
+        "name": "@deepseek-ai/dsh-tool-fs",
+        "version": "0.1.0-rc.7",
+        "files": {
+          "package.json": {
+            "bytes": 2366,
+            "sha256": "aff8bc9a05d0aa1d44f0875a1efeba75a163ce5cd7d4f326abf724c9b466271b"
+          },
+          "lib/index.js": {
+            "bytes": 46024,
+            "sha256": "054af13c1d6f5e67ddf1b89211991f32e0e72f466762b75816282e5cdada86cd"
+          },
+          "lib/types/index.d.ts": {
+            "bytes": 1415,
+            "sha256": "ad438388d7c020b8e2dff5d7df93132f303465e672356dc824b04bf1fa1377f6"
+          }
+        }
+      },
+      "dsh_fs": {
+        "name": "@deepseek-ai/dsh-fs",
+        "version": "0.1.0-rc.7",
+        "files": {
+          "package.json": {
+            "bytes": 1461,
+            "sha256": "02774a1d7e3b12d24e30b26da5285c853b3a3c47943bf13c682a506a37fce87a"
+          },
+          "lib/index.js": {
+            "bytes": 3134,
+            "sha256": "0fa8999edf94bbcf460224273f6e566eef13952c5940072ee41fd61b6483d0a6"
+          },
+          "lib/types/index.d.ts": {
+            "bytes": 11206,
+            "sha256": "5880470a6e6a9f2e52b84cf35a88c0ffe0bfc547197ea344bfb011862f95db1c"
+          }
+        }
+      },
+      "dsh_fs_local": {
+        "name": "@deepseek-ai/dsh-fs-local",
+        "version": "0.1.0-rc.7",
+        "files": {
+          "package.json": {
+            "bytes": 1294,
+            "sha256": "0d9a61376e026d66072a414ee479c1b196caae1594e5ddf323f8b2544084d4fe"
+          },
+          "lib/index.js": {
+            "bytes": 37696,
+            "sha256": "9f31b7d19bee8ca0a51f0ef2fd6d4dc0c9bd0b10cc8378ea75a90beb134d32bb"
+          },
+          "lib/types/index.d.ts": {
+            "bytes": 3163,
+            "sha256": "95dc357156d649831acd52330496b5f954a4e1d9d1fe7b001108eecc737be77a"
+          }
+        }
+      },
+      "third_party_source_text_retained": false
+    },
+    "consumed_attempt_bindings": {
+      "attempt_001_preparation": {
+        "bytes": 2416,
+        "sha256": "f8c2aa3e942fb61ea04c1978c4a19f5041ffbc0567b80f6d2805d2860fadde29"
+      },
+      "attempt_001_rejection": {
+        "bytes": 1056,
+        "sha256": "cb54b35277a98cb2a64e5260d389bf5a9ae158eecfbe68988521164a5439dd95"
+      },
+      "attempt_002_terminal": {
+        "bytes": 2721,
+        "sha256": "1314e2f8e626f5bfde324f24a0a81c357f897baeea14f60da317b50b84dfeb2a"
+      },
+      "attempt_002_consumed": {
+        "bytes": 409,
+        "sha256": "14de1807e8dfbf83684fe1999280b95a8cfaa025ce068bbdc267a50595233968"
+      }
+    }
+  },
+  "derived_runner": {
+    "path": "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/integrated-future-runner.mjs",
+    "bytes": 14077,
+    "sha256": "115cbf245ca6a2e218b2f2989093cea651bf4fe0aed796204dce1f83826e6be0",
+    "syntax_check_passed": true,
+    "import_check_passed": true,
+    "transformation_version": "edit_coordinate_future_runner_integration_v1",
+    "source_checks": {
+      "argument_preflight_export_once": true,
+      "result_classifier_export_once": true,
+      "pre_execute_preflight_use_once": true,
+      "authoritative_result_classifier_use_once": true,
+      "target_before_snapshot_once": true,
+      "typed_terminal_field_twice": true,
+      "argument_constraint_denial_once": true,
+      "raw_error_message_parse_absent": true,
+      "existing_one_edit_boundary_preserved": true
+    }
+  },
+  "variants": [
+    {
+      "variant_id": "unique_match_success",
+      "pre_dispatch_decision": "admit_semantic_constraints",
+      "tool_executed": true,
+      "result_kind": "success",
+      "structured_error_code": null,
+      "success_class": "unique_match",
+      "target_changed": true,
+      "coordinate": "edit_success_unique_match",
+      "before": {
+        "present": true,
+        "bytes": 21,
+        "sha256": "4f965179f0a9afac9c01f6ae49778dada99867660cdf879688dccfae4d03c1ff"
+      },
+      "after": {
+        "present": true,
+        "bytes": 26,
+        "sha256": "982e471871d89f0733ee45fd511742ff5cc343dbe96701c93cfc336f480418c3"
+      },
+      "python_coordinate_agreement": true
+    },
+    {
+      "variant_id": "replace_all_success",
+      "pre_dispatch_decision": "admit_semantic_constraints",
+      "tool_executed": true,
+      "result_kind": "success",
+      "structured_error_code": null,
+      "success_class": "replace_all",
+      "target_changed": true,
+      "coordinate": "edit_success_replace_all",
+      "before": {
+        "present": true,
+        "bytes": 21,
+        "sha256": "ad87ba18c353d3ed56c79f6a172bde005861b24a5a6b254369cf46c0d5145153"
+      },
+      "after": {
+        "present": true,
+        "bytes": 31,
+        "sha256": "781941e21238b5ea9cd5fd64f54020ab347383d8e55476f7fffac40f1548e166"
+      },
+      "python_coordinate_agreement": true
+    },
+    {
+      "variant_id": "schema_missing_required",
+      "pre_dispatch_decision": "defer_to_tool_schema",
+      "tool_executed": true,
+      "result_kind": "error",
+      "structured_error_code": "INVALID_ARGS",
+      "success_class": null,
+      "target_changed": false,
+      "coordinate": "edit_error_invalid_args",
+      "before": {
+        "present": true,
+        "bytes": 21,
+        "sha256": "4f965179f0a9afac9c01f6ae49778dada99867660cdf879688dccfae4d03c1ff"
+      },
+      "after": {
+        "present": true,
+        "bytes": 21,
+        "sha256": "4f965179f0a9afac9c01f6ae49778dada99867660cdf879688dccfae4d03c1ff"
+      },
+      "python_coordinate_agreement": true
+    },
+    {
+      "variant_id": "blank_file_path",
+      "pre_dispatch_decision": "deny_blank_file_path",
+      "tool_executed": false,
+      "result_kind": "error",
+      "structured_error_code": null,
+      "success_class": null,
+      "target_changed": false,
+      "coordinate": "edit_error_untyped_argument_constraint",
+      "before": {
+        "present": true,
+        "bytes": 21,
+        "sha256": "4f965179f0a9afac9c01f6ae49778dada99867660cdf879688dccfae4d03c1ff"
+      },
+      "after": {
+        "present": true,
+        "bytes": 21,
+        "sha256": "4f965179f0a9afac9c01f6ae49778dada99867660cdf879688dccfae4d03c1ff"
+      },
+      "python_coordinate_agreement": true
+    },
+    {
+      "variant_id": "empty_old_string",
+      "pre_dispatch_decision": "deny_empty_old_string",
+      "tool_executed": false,
+      "result_kind": "error",
+      "structured_error_code": null,
+      "success_class": null,
+      "target_changed": false,
+      "coordinate": "edit_error_untyped_argument_constraint",
+      "before": {
+        "present": true,
+        "bytes": 21,
+        "sha256": "4f965179f0a9afac9c01f6ae49778dada99867660cdf879688dccfae4d03c1ff"
+      },
+      "after": {
+        "present": true,
+        "bytes": 21,
+        "sha256": "4f965179f0a9afac9c01f6ae49778dada99867660cdf879688dccfae4d03c1ff"
+      },
+      "python_coordinate_agreement": true
+    },
+    {
+      "variant_id": "equal_old_new",
+      "pre_dispatch_decision": "deny_equal_old_new",
+      "tool_executed": false,
+      "result_kind": "error",
+      "structured_error_code": null,
+      "success_class": null,
+      "target_changed": false,
+      "coordinate": "edit_error_untyped_argument_constraint",
+      "before": {
+        "present": true,
+        "bytes": 21,
+        "sha256": "4f965179f0a9afac9c01f6ae49778dada99867660cdf879688dccfae4d03c1ff"
+      },
+      "after": {
+        "present": true,
+        "bytes": 21,
+        "sha256": "4f965179f0a9afac9c01f6ae49778dada99867660cdf879688dccfae4d03c1ff"
+      },
+      "python_coordinate_agreement": true
+    },
+    {
+      "variant_id": "missing_target",
+      "pre_dispatch_decision": "admit_semantic_constraints",
+      "tool_executed": true,
+      "result_kind": "error",
+      "structured_error_code": "FS_STALE_VERSION",
+      "success_class": null,
+      "target_changed": false,
+      "coordinate": "edit_error_fs_stale_version",
+      "before": {
+        "present": false,
+        "bytes": null,
+        "sha256": null
+      },
+      "after": {
+        "present": false,
+        "bytes": null,
+        "sha256": null
+      },
+      "python_coordinate_agreement": true
+    },
+    {
+      "variant_id": "literal_not_found",
+      "pre_dispatch_decision": "admit_semantic_constraints",
+      "tool_executed": true,
+      "result_kind": "error",
+      "structured_error_code": "FS_EDIT_NOT_FOUND",
+      "success_class": null,
+      "target_changed": false,
+      "coordinate": "edit_error_fs_edit_not_found",
+      "before": {
+        "present": true,
+        "bytes": 21,
+        "sha256": "4f965179f0a9afac9c01f6ae49778dada99867660cdf879688dccfae4d03c1ff"
+      },
+      "after": {
+        "present": true,
+        "bytes": 21,
+        "sha256": "4f965179f0a9afac9c01f6ae49778dada99867660cdf879688dccfae4d03c1ff"
+      },
+      "python_coordinate_agreement": true
+    },
+    {
+      "variant_id": "literal_ambiguous",
+      "pre_dispatch_decision": "admit_semantic_constraints",
+      "tool_executed": true,
+      "result_kind": "error",
+      "structured_error_code": "FS_AMBIGUOUS_EDIT",
+      "success_class": null,
+      "target_changed": false,
+      "coordinate": "edit_error_fs_ambiguous_edit",
+      "before": {
+        "present": true,
+        "bytes": 21,
+        "sha256": "ad87ba18c353d3ed56c79f6a172bde005861b24a5a6b254369cf46c0d5145153"
+      },
+      "after": {
+        "present": true,
+        "bytes": 21,
+        "sha256": "ad87ba18c353d3ed56c79f6a172bde005861b24a5a6b254369cf46c0d5145153"
+      },
+      "python_coordinate_agreement": true
+    }
+  ],
+  "process_counts": {
+    "node_fixture_process_count": 1,
+    "real_edit_tool_execution_count": 6,
+    "pre_dispatch_denial_count": 3,
+    "native_harness_process_count": 0,
+    "worker_process_count": 0,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "broker_process_count": 0,
+    "broker_request_count": 0,
+    "network_attempt_count": 0,
+    "database_attempt_count": 0,
+    "docker_attempt_count": 0,
+    "retry_count": 0,
+    "resume_count": 0,
+    "fallback_count": 0
+  },
+  "fixture": {
+    "node_fixture_process_count": 1,
+    "actual_dsh_tools_runtime_imported": true,
+    "actual_dsh_tool_fs_edit_imported": true,
+    "actual_dsh_fs_local_imported": true,
+    "integrated_runner_imported": true,
+    "synthetic_edit_registration_count": 0,
+    "real_edit_tool_execution_count": 6,
+    "pre_dispatch_denial_count": 3,
+    "hostile_rejection_count": 5,
+    "cordis_disposed": true,
+    "exit_code": 0,
+    "stdout_bytes": 4611,
+    "stdout_sha256": "1c00ba1176efc4d2dc3b58f970555abf6992becd8b5535d9440f55e30d07d92a",
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "owned_process_absent": true,
+    "disposable_root_absent": true
+  },
+  "cleanup": {
+    "cordis_disposed": true,
+    "owned_process_absent": true,
+    "disposable_root_absent": true,
+    "credentials_present_in_fixture_environment": false,
+    "raw_arguments_content_error_stack_retained": false,
+    "raw_prompt_response_reasoning_session_environment_retained": false
+  }
+}
