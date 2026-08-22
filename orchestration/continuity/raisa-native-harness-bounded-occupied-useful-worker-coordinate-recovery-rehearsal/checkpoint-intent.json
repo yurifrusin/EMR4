@@ -1,0 +1,68 @@
+{
+  "schema_version": "ariadne.governance_live_checkpoint_transition_intent.v1",
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+  "completed_stage": "The corrected typed coordinate-recovery contract, runner derivation, terminal schema, closed runbook package, full-object source resolution and exact-root preparation pass deterministic preexecution admission. The first stale-binding source is preserved as non-executable, while this freshly prepared disjoint attempt records zero native Harness processes and zero provider requests.",
+  "next_executable_stage": "fresh_five_source_preexecution_receipt_then_consume_the_attempt_once_and_execute_exactly_one_native_harness_deepseek_v4_flash_high_turn_with_one_provider_request_one_direct_edit_zero_retry_and_exact_cleanup",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "typed-useful-worker-static-admission",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal",
+          "--check"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "typed-useful-worker-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal_plan.py",
+          "tests/test_deepseek_native_harness_provider_free_tool_result_conclusion_coordinate_diagnostic_recovery.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_rehearsal.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_api_spine_artifacts.py",
+          "--deselect=tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py::test_attempt_root_is_absent_before_consumption"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "typed-useful-worker-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "orchestration_harness/check_in_rollout_runbook.py",
+          "scripts/raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "typed-useful-worker-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "py_compile",
+          "orchestration_harness/check_in_rollout_runbook.py",
+          "scripts/raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+          "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal_plan.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}

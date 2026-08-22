@@ -1,0 +1,17 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\sarashera\\emr4\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:\\Users\\sarashera\\emr4",
+        "tests/test_raisa_native_harness_bounded_occupied_useful_worker_coordinate_recovery_rehearsal.py",
+        "tests/test_ariadne_deepseek_native_harness_broker.py"
+      ],
+      "id": "PF_NATIVE_USEFUL_WORKER"
+    }
+  ],
+  "schema_version": "ariadne.verifier-command-manifest.v1"
+}

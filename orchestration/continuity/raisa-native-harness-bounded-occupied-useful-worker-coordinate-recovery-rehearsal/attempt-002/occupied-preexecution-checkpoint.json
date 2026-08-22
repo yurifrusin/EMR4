@@ -1,0 +1,28 @@
+{
+  "attempt_id": "deepseek-native-check-in-runbook-worker-coordinate-recovery-002",
+  "attempt_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-runbook-worker-coordinate-recovery-002",
+  "automatic_retry_limit": 0,
+  "auxiliary_model_call_limit": 0,
+  "candidate_source": "ff9dd92f9ba6c2641751f9f1580f9aba0a92e3b6",
+  "checkpoint_admitted": true,
+  "checkpoint_source": "75f47d5c8d20165c2b85f06565730e24db36c9e0",
+  "clockwork_checkpoint_sha256": "e3425c13afcca466aeb9ed51cd13e926872a22419624392d8ba5978d6cf28467",
+  "expected_changed_paths": [
+    "docs/api-spine/manifests/canonical-check-in-rollout-kill-switch-rollback-runbook.json"
+  ],
+  "expected_tool_names": [
+    "edit"
+  ],
+  "fallback_limit": 0,
+  "native_process_limit": 1,
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+  "preparation_sha256": "1ee934eee161d2618b769070b5efee680d5f26ce0a1477ee0f91ff02ba555a5d",
+  "prompt_sha256": "44a02c5e783e7350e5257a4fff8b8a9dab16c46470fc6f9a0f23ac915fbf6772",
+  "provider_request_limit": 1,
+  "review_receipt": "orchestration/agent_inbox/codex/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-deterministic-validation-receipt.json",
+  "review_receipt_sha256": "d3c9083e2455d626a9f958e081d042c60e9dd32ba919b5a2c5e51a02d2c3837b",
+  "runner_sha256": "65fb85385dd44307b71ff040035288ccfad51b78d8e46ab45cffb154e32f2d75",
+  "schema_version": "ariadne.native_harness_useful_worker_checkpoint.v1",
+  "status": "admitted",
+  "work_order_sha256": "7fbf3ecd7febab32aa87e3fb2d8fd8a004f3ac91da74309d087058db76ed9bf4"
+}

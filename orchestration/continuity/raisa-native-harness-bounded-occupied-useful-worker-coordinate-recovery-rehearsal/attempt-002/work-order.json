@@ -1,0 +1,23 @@
+{
+  "allowed_tool_names": [
+    "edit",
+    "glob",
+    "read"
+  ],
+  "authority_sha256": "sha256:ef7c15cc6fd749a6c49df507aad7d2f732d73e669a8001495b1de6a801cb5cd7",
+  "branch": "codex/ariadne-bernie-davida-parallel-seam",
+  "command_manifest_sha256": "sha256:566ef20005ad09e704c26a1d4c494a85992735e0cde0d44e64f3c914b68abe54",
+  "forbidden_surfaces_sha256": "sha256:24f8b7383eba101a5f9b109c96e9e7d1acfbda7f6a1623284c737de6d14036da",
+  "journal_id": "journal-e067f2c5a6e4701c206d09f0",
+  "lease_id": "lease-deepseek-native-check-in-runbook-worker-coordinate-recovery-002",
+  "next_sequence": 6,
+  "operation_id": "raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal",
+  "posture": "provider_free_shadow",
+  "previous_event_sha256": "sha256:4fe7bc3094a4dafd1ac28c78c60f18e8fa15fb0894d9cb8b196d00f932e2e583",
+  "provider_free_no_database_admission_sha256": "sha256:210525a9db61f4ee63bf02ea5ed9753f84d69eb32249ef800b77688f5c60b65e",
+  "schema_version": "ariadne.deepseek_work_order.v2",
+  "source_commit": "ff9dd92f9ba6c2641751f9f1580f9aba0a92e3b6",
+  "transaction_id": "txn-e067f2c5a6e4701c206d09f0",
+  "work_order_id": "wo-deepseek-native-check-in-runbook-worker-coordinate-recovery-002",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-runbook-worker-coordinate-recovery-002/workspace"
+}
