@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> EMR4 will diagnose the integrated runner factory boundary provider-free and will not spend another occupied DeepSeek attempt on the unresolved coordinate.
+> Change only the package-scope parent projection, prove both absolute import targets before launch, then consume one separately identified provider-free Node fixture.
 
 ## North star
 
@@ -566,26 +566,26 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The exact integrated runner loaded through stock-headless HMR and stopped before agent creation with all external-effect gauges zero. Lineage parent: `deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal`.
 275. **Test whether orchestrator-controlled native-Harness gear can produce one useful traceable DeepSeek development contribution — Native Harness integrated-runner first controlled development closeout**
    The one-shot attempt crossed HMR readiness but failed at the integrated runner factory stage before any provider request or candidate. Lineage parent: `deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal`.
+276. **Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development — Integrated-runner factory-subcoordinate diagnostic recovery**
+   The operation localized the likely occupied runner defect and its own pre-factory fixture path defect without external activity, but did not dynamically prove the factory subcoordinate. Lineage parent: `raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal`.
 
 ## Current position
 
-**Resolve the exact pre-request factory substage without spending another provider attempt — Native Harness integrated-runner first controlled development closeout**
+**Remove the single demonstrated fixture import projection defect before making one distinct factory-boundary attempt — Integrated-runner factory-subcoordinate diagnostic recovery**
 
-**Why this proof came next:** The occupied result proves loading and readiness but localizes the remaining blocker only to factory; another occupied launch would repeat cost without removing the known uncertainty.
+**Why this proof came next:** Both exact corrected import targets already exist, and a deterministic prelaunch existence gate can prevent recurrence without changing the accepted runner or guard.
 
-Startup, HMR, runner loading and provider-zero boundaries are exact; agent creation or setup remains the sole current blocker.
+One path-corrected provider-free fixture will either reproduce the exact structured guard coordinate through installed AgentRegistry.create or stop without retry.
 
 ### What this unlocks
 
-- A finite provider-free factory substage coordinate.
-- A correction design that can be tested without a model request.
-- An evidence-based stop or go decision for any later useful-worker attempt.
+- Dynamic confirmation or falsification of the predicted occupied runner/guard mismatch.
+- A bounded decision on whether the accepted four-argument guard graph should replace the occupied old guard.
 
 ### What it does not solve
 
-- No useful DeepSeek worker result or general native-Harness reliability conclusion.
-- No authority for another occupied request.
-- No ordinary-practice, product-data, production or protected-ref authority.
+- No native Harness boot, DeepSeek worker turn, model/provider request or useful-worker quality evidence.
+- No product/data action, ordinary-practice enablement, production, release, Pages or protected integration.
 
 ## Continuity and authority
 
@@ -1335,6 +1335,7 @@ Prerequisites:
 - `docs/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair-closeout.md`
 - `docs/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof-closeout.md`
+- `docs/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery-closeout.md`
 - `docs/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis-closeout.md`
 - `docs/deepseek-native-harness-provider-free-post-hmr-pre-request-diagnostic-sidecar-integration-rehearsal-closeout.md`
 - `docs/deepseek-native-harness-provider-free-post-sentinel-pre-stock-readiness-exit-coordinate-diagnosis-closeout.md`
@@ -2149,7 +2150,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-aes-c5-single-generation-destination-conflict-analysis.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-source-review-receipt.json`
-- `orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-candidate-precommit-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-authored-synthetic-shadow-comparison-rehearsal-sol-acceptance.md`
@@ -2755,6 +2755,7 @@ Prerequisites:
 - `orchestration/continuity/deepseek-native-harness-provider-free-guard-bridge-import-closure-recovery-rehearsal/import-closure-recovery-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-historical-recovery-validator-source-binding-repair/provider-free-repair-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-inert-task-sentinel-readiness-native-boot-proof/provider-free-inert-task-sentinel-readiness-native-boot-terminal.json`
+- `orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery/fixture-failure-diagnosis.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-plugin-tree-failed-to-load-source-coordinate-diagnosis/efficacy-reading.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/agent-factory-diagnostic-evidence.json`
 - `orchestration/continuity/deepseek-native-harness-provider-free-post-hmr-agent-factory-closed-subcoordinate-diagnostic-rehearsal/diagnostic-interpretation.json`
@@ -2853,8 +2854,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/provider-free-dry-run-evidence.json`
 - `orchestration/continuity/raisa-authored-synthetic-model-required-practice-context-fabric-intent-shaping-rehearsal/rayleen-context-fabric-intent-shaping-attempt-1-preflight.json`
 - `orchestration/continuity/raisa-authored-synthetic-native-harness-bounded-worker-attempt-004-readiness-and-preexecution-decision/deterministic-evidence.json`
-- `orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/efficacy-reading.json`
-- `orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-report.md`
 - `orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-terminal.json`
 - `orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/authored-synthetic-contract-examples.json`
 - `orchestration/continuity/raisa-channel-neutral-patient-interaction-foundation/foundation-contract.json`
@@ -3783,4 +3782,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 380; continuity graph revision 398._
+_Compass map revision 381; continuity graph revision 399._

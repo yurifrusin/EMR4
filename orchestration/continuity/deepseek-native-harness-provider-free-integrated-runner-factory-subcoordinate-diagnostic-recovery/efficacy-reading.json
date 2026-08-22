@@ -1,0 +1,50 @@
+{
+  "schema_version": "ariadne.native_harness_factory_subcoordinate_efficacy.v1",
+  "operation_id": "deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery",
+  "timestamp": "2026-08-22T19:05:50.6495370+10:00",
+  "result": "traceable_fixture_failure_before_factory",
+  "objective_reached": false,
+  "useful_diagnostic_output": true,
+  "observed": {
+    "node_process_count": 1,
+    "native_harness_process_count": 0,
+    "factory_boundary_reached": false,
+    "stdout_bytes": 0,
+    "stderr_bytes": 1327,
+    "raw_stream_retained": false,
+    "model_request_count": 0,
+    "provider_request_count": 0,
+    "retry_count": 0,
+    "resume_count": 0,
+    "fallback_count": 0,
+    "disposable_root_absent": true
+  },
+  "deterministic_diagnosis": {
+    "result": "fixture_import_scope_path_mismatch",
+    "selected_scope": "node_modules",
+    "required_scope": "node_modules/@deepseek-ai",
+    "selected_targets_absent": 2,
+    "corrected_targets_present": 2,
+    "occupied_guard_signature_mismatch_still_predicted": true,
+    "dynamic_guard_coordinate_proved": false
+  },
+  "parallelism": {
+    "deepseek": {
+      "disposition": "declined",
+      "result": "not_dispatched",
+      "rationale": "Worker, model and provider requests were forbidden."
+    },
+    "gemini": {
+      "disposition": "declined_no_candidate",
+      "result": "not_dispatched",
+      "rationale": "No correction candidate or ambiguous semantic result reached review eligibility."
+    },
+    "native_subagents": {
+      "disposition": "declined",
+      "result": "not_dispatched",
+      "rationale": "Developer policy prohibited proactive delegation and the process boundary was serial."
+    },
+    "serial_owner": "gpt-sol"
+  },
+  "conclusion": "The operation localized its own consumed fixture failure to an unscoped package import path before AgentRegistry creation. This preserves traceability and prevents an occupied retry, but it is not the requested factory-subcoordinate proof. One separately identified path-corrected provider-free fixture is the narrowest eligible successor."
+}

@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 621,
+  "register_revision": 622,
   "source_cutoff_on": "2026-08-22",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "aa800c03ccf3ecf047ed245c69c0bbebc6af586373784ee8b6dc9a74e9c69c8d",
-  "incident_count": 976,
+  "canonical_register_sha256": "ff2c8f6b56b17889972b6bd54121913c27a9a9ee61bbec53197ea49a32723c0c",
+  "incident_count": 978,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 519,
+      "agent_behavior": 520,
       "harness": 69,
-      "operator": 232,
+      "operator": 233,
       "repository": 140,
       "transport": 16
     },
@@ -18,27 +18,27 @@
       "command_scope_violation": 99,
       "evidence_misreport": 74,
       "harness_failure": 69,
-      "operator_error": 232,
-      "output_contract_violation": 293,
+      "operator_error": 233,
+      "output_contract_violation": 294,
       "read_only_violation": 5,
       "reasoning_claim_error": 48,
       "repository_defect": 140,
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 69,
+      "implementer": 70,
       "integration_reviewer": 3,
-      "orchestrator": 841,
+      "orchestrator": 842,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 617,
+      "low": 618,
       "material": 133,
-      "moderate": 226
+      "moderate": 227
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 204,
-      "canonical_unchanged": 603,
+      "canonical_unchanged": 605,
       "untrusted_partial_worktree": 169
     },
     "by_resource_and_role": {
@@ -169,7 +169,7 @@
       "codex-primary-orchestrator-commentary::orchestrator": 2,
       "codex-primary-orchestrator::implementer": 4,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 362,
+      "codex-primary-orchestrator::orchestrator": 363,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "complete-runner-fixture-wire-validator::orchestrator": 1,
@@ -248,6 +248,7 @@
       "emr4-maintenance-test-suite::orchestrator": 1,
       "emr4-repository::orchestrator": 3,
       "explicit-path-precommit-diff-gate::orchestrator": 1,
+      "factory-fixture-package-scope-projection::implementer": 1,
       "frozen-plan-process-and-authority-vocabulary::orchestrator": 1,
       "future-attempt-embedded-helper-identity::implementer": 1,
       "gemini-36-flash-high-verifier::verifier": 1,

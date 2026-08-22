@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 380,
-  "updated_at": "2026-08-22T18:23:35.2663093+10:00",
-  "source_graph_revision": 398,
-  "orientation_statement": "EMR4 will diagnose the integrated runner factory boundary provider-free and will not spend another occupied DeepSeek attempt on the unresolved coordinate.",
+  "map_revision": 381,
+  "updated_at": "2026-08-22T19:05:50.6495370+10:00",
+  "source_graph_revision": 399,
+  "orientation_statement": "Change only the package-scope parent projection, prove both absolute import targets before launch, then consume one separately identified provider-free Node fixture.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -4921,27 +4921,34 @@
         "docs/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-closeout.md",
         "orchestration/human_inbox/yuri/2026-08-22--native-harness-integrated-runner-first-controlled-development.md"
       ]
+    },
+    {
+      "node_id": "deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery",
+      "lineage_parent": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
+      "strategic_role": "Give the orchestrator substantial typed control over native DeepSeek worker execution for reliable Raisa development",
+      "outcome": "The operation localized the likely occupied runner defect and its own pre-factory fixture path defect without external activity, but did not dynamically prove the factory subcoordinate.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery/fixture-failure-diagnosis.json",
+        "docs/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal",
-    "strategic_role": "Resolve the exact pre-request factory substage without spending another provider attempt",
-    "why_now": "The occupied result proves loading and readiness but localizes the remaining blocker only to factory; another occupied launch would repeat cost without removing the known uncertainty.",
-    "outcome": "Startup, HMR, runner loading and provider-zero boundaries are exact; agent creation or setup remains the sole current blocker.",
+    "node_id": "deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery",
+    "strategic_role": "Remove the single demonstrated fixture import projection defect before making one distinct factory-boundary attempt",
+    "why_now": "Both exact corrected import targets already exist, and a deterministic prelaunch existence gate can prevent recurrence without changing the accepted runner or guard.",
+    "outcome": "One path-corrected provider-free fixture will either reproduce the exact structured guard coordinate through installed AgentRegistry.create or stop without retry.",
     "unlocks": [
-      "A finite provider-free factory substage coordinate.",
-      "A correction design that can be tested without a model request.",
-      "An evidence-based stop or go decision for any later useful-worker attempt."
+      "Dynamic confirmation or falsification of the predicted occupied runner/guard mismatch.",
+      "A bounded decision on whether the accepted four-argument guard graph should replace the occupied old guard."
     ],
     "does_not_solve": [
-      "No useful DeepSeek worker result or general native-Harness reliability conclusion.",
-      "No authority for another occupied request.",
-      "No ordinary-practice, product-data, production or protected-ref authority."
+      "No native Harness boot, DeepSeek worker turn, model/provider request or useful-worker quality evidence.",
+      "No product/data action, ordinary-practice enablement, production, release, Pages or protected integration."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/efficacy-reading.json",
-      "orchestration/agent_inbox/codex/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal-sol-acceptance.md",
-      "orchestration/continuity/raisa-authored-synthetic-native-harness-integrated-runner-first-controlled-development-rehearsal/occupied-report.md"
+      "docs/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery-closeout.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery/fixture-failure-diagnosis.json"
     ]
   },
   "decision_horizon": [

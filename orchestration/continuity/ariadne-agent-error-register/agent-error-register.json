@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 621,
+  "register_revision": 622,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-22",
@@ -37904,6 +37904,83 @@
       "incident_id": "AER-0976",
       "attempt_id": "clock-1091cf87cfc953d296c1a862",
       "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-factory-subcoordinate-diagnostic",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_orchestrator_preflight",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every parallelism leverage value is selected from the orchestrator preflight's exact closed vocabulary.",
+      "observed_error": "The first post-compaction receipt used neutral_until_candidate instead of the registered neutral value and failed closed before dispatch.",
+      "detection_method": "The local orchestrator preflight returned revision_required; no worker, model, provider or product boundary was entered.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery-postcompaction-receipt.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery-postcompaction-corrected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-622.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.parallelism_leverage_value_reconstructed_as_unregistered_description",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the descriptive value with neutral and rerun the same provider-free preflight.",
+        "prevention_control": "Continuation receipts select leverage only from positive, required_independence, neutral or negative.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery-postcompaction-corrected-receipt.json",
+          "docs/ariadne-agent-error-correction-register-revision-622.md"
+        ]
+      },
+      "incident_id": "AER-0977",
+      "attempt_id": "clock-daa33ece1a116a253c5425c8",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-factory-subcoordinate-diagnostic",
+      "role": "implementer",
+      "resource_id": "factory-fixture-package-scope-projection",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "isolated_node_process",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Every emitted absolute package import target exists under the exact scoped package root before the single process is admitted.",
+      "observed_error": "The fixture used package_root.parents[1], selected node_modules instead of node_modules/@deepseek-ai, and emitted two absent import targets before its consumed Node process.",
+      "detection_method": "The content-free exit-1 envelope was preserved, then process-free path diagnosis proved both selected targets absent and both exact corrected targets present without reading raw stderr.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery/fixture-process-envelope.json",
+        "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery/fixture-failure-diagnosis.json",
+        "docs/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery-closeout.md",
+        "docs/ariadne-agent-error-correction-register-revision-622.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "attempt_rejected_and_escalated",
+      "recurrence_signature": "orchestrator.scoped_package_import_projection_passed_without_target_existence_gate",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Contain the consumed fixture without retry and require a distinct successor to use package_root.parent and prove both exact targets exist before its process.",
+        "prevention_control": "No recovery process is admitted until every emitted absolute import target is an existing file beneath the exact scoped package root.",
+        "evidence_paths": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery/fixture-failure-diagnosis.json",
+          "docs/deepseek-native-harness-provider-free-integrated-runner-factory-subcoordinate-diagnostic-recovery-closeout.md"
+        ]
+      },
+      "incident_id": "AER-0978",
+      "attempt_id": "clock-43f5afa706bd170c400adf17",
+      "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"
     }
