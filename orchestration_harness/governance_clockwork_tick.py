@@ -142,6 +142,8 @@ DERIVED_INPUT_KEYS = {
 
 REQUIRED_NEXT_BOUNDARIES = {
     "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
     "no_production_runtime_deployment_release_or_pages",
     "no_protected_evidence_access_or_protected_ref_movement",
     "docs_branding_and_all_unrelated_untracked_files_preserved",

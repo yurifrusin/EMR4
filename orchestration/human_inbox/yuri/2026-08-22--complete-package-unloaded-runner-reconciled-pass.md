@@ -28,6 +28,12 @@ caught the duplicate; the previous generation was restored byte exactly. The
 corrected gear now refuses any live acceptance label outside its closed list,
 so the same paperwork choice cannot create another row.
 
+The next projection revealed the same class of issue in a boundary token: a
+broader sentence was present, but the exact closed ordinary-practice token was
+not. That generation was also restored byte exactly. The clockwork validator
+now owns the exact ordinary-practice and product/data floor before any write,
+rather than relying on closeout authors to remember it.
+
 Next we go directly to one tightly bounded real DeepSeek Harness worker doing
 useful Raisa development work. There is no further ceremonial local rehearsal
 unless that occupied preflight exposes a concrete new hazard.
@@ -47,9 +53,9 @@ unless that occupied preflight exposes a concrete new hazard.
   request/provider/model/target counters zero.
 - Immutable controller terminal: `complete_runner_result_rejected`.
 - Recovery: zero-process, zero-retry exact-preimage hash reconciliation.
-- Register: revision 614, 942 bounded incidents, none open; AER-0939 is the
+- Register: revision 614, 943 bounded incidents, none open; AER-0939 is the
   material wire/evidence serializer recurrence and AER-0942 records the
   duplicate acceptance-row projection, byte-exact rollback and closed
-  rolling-label guard.
+  rolling-label guard; AER-0943 records the exact-boundary-floor recovery.
 - Protected refs remain exact at
   `2e34bdad732fdab32fbf778280b3d3c70d66d602`; no Pages or product/data action.

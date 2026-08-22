@@ -418,12 +418,17 @@ def test_intent_rejects_derived_unsafe_and_underbounded_input() -> None:
     shell["command_manifest"]["commands"][0]["arguments"].append("value;unsafe")
     with pytest.raises(ClockworkTickRejection, match="tick_command_contract"):
         validate_tick_intent(shell, contract)
-    underbounded = json.loads(json.dumps(baseline))
-    underbounded["next_operation_protected_boundaries"].remove(
-        "explicit_path_staging_only"
-    )
-    with pytest.raises(ClockworkTickRejection, match="tick_next_boundaries_floor"):
-        validate_tick_intent(underbounded, contract)
+    for boundary in (
+        "explicit_path_staging_only",
+        "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+        "no_product_patient_appointment_clinical_historical_or_protected_data",
+    ):
+        underbounded = json.loads(json.dumps(baseline))
+        underbounded["next_operation_protected_boundaries"].remove(boundary)
+        with pytest.raises(
+            ClockworkTickRejection, match="tick_next_boundaries_floor"
+        ):
+            validate_tick_intent(underbounded, contract)
 
 
 def test_incident_intent_rejects_derived_identity_and_unsafe_evidence() -> None:
