@@ -50,7 +50,9 @@ revision 612 records three pre-process drafting defects, the consumed graph
 closure defect, one fail-closed receipt-completeness defect and one rejected
 overlength successor identifier, one overlength incident-tranche label, one
 closed-stage vocabulary rejection and one missing machine-reading comment as
-AER-0923 through AER-0931.
+AER-0923 through AER-0931. AER-0932 additionally records the byte-exact
+rollback and correction of an omitted exact successor-latch boundary found by
+the comprehensive post-publication suite.
 
 ## Parallelism disposition
 

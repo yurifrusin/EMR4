@@ -4,16 +4,16 @@ Date: 2026-08-22
 
 Timestamp: 2026-08-22T10:27:17.1698176+10:00 (Australia/Brisbane)
 
-Status: **931 bounded incidents; all corrected or contained; none open**
+Status: **932 bounded incidents; all corrected or contained; none open**
 
 <!-- ariadne-agent-error-register-reading
 revision: 612
-incident_count: 931
-new_incident_ids: AER-0923,AER-0924,AER-0925,AER-0926,AER-0927,AER-0928,AER-0929,AER-0930,AER-0931
+incident_count: 932
+new_incident_ids: AER-0923,AER-0924,AER-0925,AER-0926,AER-0927,AER-0928,AER-0929,AER-0930,AER-0931,AER-0932
 open_incident_count: 0
 -->
 
-This revision adds AER-0923 through AER-0931. It preserves every preceding
+This revision adds AER-0923 through AER-0932. It preserves every preceding
 entry unchanged.
 
 ## AER-0923 — predecessor evidence constant named incorrectly
@@ -115,16 +115,30 @@ Recurrence signature:
 After all observation fields validated, the dry-run rejected revision 612
 because its human note lacked the exact clockwork-owned comment binding the
 prospective revision, total incident count, ordered new IDs and open count. The
-note now carries the exact revision 612 / 931 incidents / AER-0923 through
-AER-0931 / zero-open reading.
+note first gained the exact prospective reading; after AER-0932 the same
+machine binding was updated atomically to revision 612 / 932 incidents /
+AER-0923 through AER-0932 / zero open.
 
 Recurrence signature:
 `orchestrator.incident_revision_note_omitted_machine_reading_comment`
 
+## AER-0932 — successor latch omitted an exact closed boundary
+
+The first live clockwork generation preserved the general ordinary-practice
+closure but omitted the exact historical invariant
+`no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting`.
+The comprehensive post-publication suite failed its Current Baton boundary
+test. Clockwork rolled back byte-exactly to the previous generation before any
+canonical commit. The source intent now includes the exact boundary and must
+pass the complete suite after corrected republication.
+
+Recurrence signature:
+`orchestrator.successor_latch_omitted_exact_closed_surface_boundary`
+
 ## Control reading
 
-Eight incidents were caught before the consumed process or clockwork
-publication. AER-0926 is the one
+Nine incidents were caught before the consumed process or before canonical
+clockwork commit publication. AER-0926 is the one
 material execution defect: a missing import-closure invariant, not a model or
 provider failure. The recovery control is intentionally structural—derive
 every relative specifier and prove every resolved target is in the disposable

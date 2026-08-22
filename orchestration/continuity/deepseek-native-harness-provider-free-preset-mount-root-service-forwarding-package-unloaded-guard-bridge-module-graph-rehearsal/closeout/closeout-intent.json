@@ -226,6 +226,7 @@
     "git_object_id_contract_bindings_derive_from_machine_resolver_only",
     "push_expected_origin_derives_from_machine_git_parent_only",
     "no_product_source_configuration_api_database_route_adapter_flag_allowlist_grammar_client_or_waiting_area_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
     "no_ordinary_practice_enablement_or_generic_status_arrived_change",
     "no_product_patient_appointment_clinical_historical_or_protected_data",
     "no_production_runtime_deployment_release_or_pages",
@@ -541,6 +542,42 @@
         ]
       },
       "baton_summary": "records and corrects a missing register machine-reading comment before clockwork publication."
+    },
+    {
+      "attempt_key": "guard-bridge-graph-incident-0932",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-guard-bridge-module-graph",
+      "role": "orchestrator",
+      "resource_id": "clockwork-successor-closed-boundary",
+      "model": "gpt-sol",
+      "reasoning_level": "extra-high",
+      "transport": "local_pytest",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "Every successor latch preserves the exact closed ordinary-practice feature-flag allowlist and command-mounting boundary.",
+      "observed_error": "The first live generation preserved a general ordinary-practice closure but omitted the exact historical feature-flag allowlist and command-mounting invariant.",
+      "detection_method": "The comprehensive post-publication Current Baton test failed before canonical clockwork changes were committed.",
+      "evidence_paths": [
+        "tests/test_current_baton_consistency.py",
+        "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/closeout/closeout-intent.json",
+        "docs/ariadne-agent-error-correction-register-revision-612.md"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.successor_latch_omitted_exact_closed_surface_boundary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_implemented_pending_acceptance",
+        "action": "Roll back byte-exactly to the previous clockwork generation and add the exact missing boundary to the source intent before corrected republication.",
+        "prevention_control": "Every generated successor latch must pass the comprehensive Current Baton closed-boundary suite before canonical commit.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-preset-mount-root-service-forwarding-package-unloaded-guard-bridge-module-graph-rehearsal/closeout/closeout-intent.json",
+          "docs/ariadne-agent-error-correction-register-revision-612.md"
+        ]
+      },
+      "baton_summary": "records and corrects an omitted exact successor-latch boundary through byte-exact rollback before canonical commit."
     }
   ]
 }
