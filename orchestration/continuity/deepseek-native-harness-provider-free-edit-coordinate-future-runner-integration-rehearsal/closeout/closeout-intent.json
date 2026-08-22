@@ -1,0 +1,265 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
+    "title": "DeepSeek native Harness provider-free edit-coordinate future-runner integration closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-22T17:06:02.0539735+10:00",
+    "node": {
+      "id": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
+      "title": "DeepSeek native Harness provider-free edit-coordinate future-runner integration closeout",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-provider-free-edit-argument-result-coordinate-diagnostic-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority covers this provider-free derived-runner integration and closeout.",
+          "Both occupied attempts remain immutable and consumed; no worker, model, provider, retry or adoption authority opens.",
+          "The successor is one provider-free integrated-runner stock-headless loading proof only."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-typed-pre-dispatch-semantic-denials",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/deterministic-evidence.json",
+          "status": "accepted",
+          "summary": "Accept three distinct closed semantic argument decisions before dispatch while retaining the accepted shared public result coordinate."
+        },
+        {
+          "id": "accept-nine-coordinate-replay-through-derived-runner",
+          "source": "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/deterministic-report.md",
+          "status": "accepted",
+          "summary": "Accept nine-of-nine JavaScript/Python coordinate agreement, six real edit executions, exact state effects and cleanup."
+        },
+        {
+          "id": "accept-source-identity-versus-ancestry-correction",
+          "source": "docs/ariadne-agent-error-correction-register-revision-619.md",
+          "status": "accepted",
+          "summary": "Accept the corrected typed distinction between current artifact identity and accepted derivation-source ancestry after the first preflight failed closed."
+        },
+        {
+          "id": "decline-external-review-and-occupied-use",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-sol-acceptance.md",
+          "status": "rejected",
+          "summary": "Reject ceremonial Gemini review, candidate adoption and occupied use because deterministic evidence is complete while stock-headless loading remains unproved."
+        }
+      ],
+      "claim_scope": [
+        "The exact accepted future runner was deterministically derived with one closed semantic-argument preflight and one seven-coordinate result classifier.",
+        "Three semantic invalid variants were denied before dispatch and six remaining variants executed the real accepted rc.7 edit tool.",
+        "JavaScript and Python coordinates agreed for all nine variants; successes made exact hash transitions and failures preserved state.",
+        "Five hostile observations failed closed and no raw arguments, content or error prose entered durable evidence.",
+        "No worker, model, provider, broker, network, database, Docker, retry, resume or fallback activity occurred.",
+        "The result reduces rerun pressure but proves neither stock-headless loading, candidate adoption, useful-worker success nor general Harness reliability.",
+        "No product, ordinary-practice, data, production, deployment, release, Pages or protected-ref authority opened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-plan.md",
+          "docs/security/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/deterministic-evidence.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/deterministic-report.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-implementation-precommit-receipt.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/preflight-attempt-001-failure-terminal.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal_plan.py",
+          "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery.py",
+          "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery_plan.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "artifacts": [
+          "scripts/deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/contract.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/contract.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/evidence.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/failure-terminal.schema.json",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/integrated-future-runner.mjs",
+          "docs/ariadne-agent-error-correction-register-revision-619.md",
+          "orchestration/human_inbox/yuri/2026-08-22--native-harness-edit-coordinate-future-runner-integration.md",
+          "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The derived runner has not yet passed the disposable stock-headless/HMR loading path.",
+        "The derived runner is not adopted by the candidate or runbook.",
+        "No useful worker candidate or general native-Harness reliability result exists.",
+        "Both occupied attempts are consumed and no new occupied worker is authorised.",
+        "Ordinary practice, product data, production, deployment, release, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Move stable edit coordinates from a standalone diagnostic into the bounded future-runner control surface",
+      "outcome": "Three semantic edit mistakes now stop before dispatch and all seven result coordinates are released through one deterministic derived runner.",
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/deterministic-evidence.json",
+        "docs/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-closeout.md",
+        "orchestration/human_inbox/yuri/2026-08-22--native-harness-edit-coordinate-future-runner-integration.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Prove the integrated runner loads through the actual provider-free stock-headless/HMR path before adoption",
+      "why_now": "Pure exports and the real edit stack pass, but the exact derived runner has not yet traversed the loader and HMR boundary used by a future occupied attempt.",
+      "outcome": "The edit-control mechanism is integrated and locally replayable without a provider request.",
+      "unlocks": [
+        "A provider-free stock-headless boot proof of the exact integrated runner.",
+        "A later evidence-based adoption-readiness decision.",
+        "A later evidence-based decision on whether any occupied worker attempt is justified."
+      ],
+      "does_not_solve": [
+        "No stock-headless/HMR loading proof yet.",
+        "No candidate or runbook adoption, useful-worker success or general DeepSeek quality conclusion.",
+        "No occupied request, product, ordinary-practice, production or protected-ref authority."
+      ],
+      "evidence": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/efficacy-reading.json",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-sol-acceptance.md",
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/deterministic-report.md"
+      ],
+      "orientation_statement": "EMR4 will next prove the exact integrated runner's provider-free stock-headless/HMR loading path; no occupied request or adoption is admitted."
+    },
+    "next_operation": {
+      "operation_id": "deepseek-native-harness-provider-free-edit-coordinate-integrated-runner-stock-headless-boot-rehearsal",
+      "active_tranche": "DeepSeek native Harness provider-free edit-coordinate integrated-runner stock-headless boot rehearsal",
+      "objective": "Materialise the exact accepted edit-coordinate integrated runner into one disposable rc.7 stock-headless assembly, boot through HMR to the post-HMR pre-request hold, prove the typed edit controls are loaded and complete cleanup without any worker, model or provider request.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted provider-free edit-coordinate future-runner integration rehearsal.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_provider_free_integrated_runner_stock_headless_boot_plan"
+    },
+    "incidents": [
+      {
+        "incident_id": "edit-coordinate-integration-source-file-ownership-conflation",
+        "source_id": "edit-coordinate-integration-preflight-001",
+        "peers": []
+      }
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "edit-coordinate-integration-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/closeout/closeout-intent.json"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "edit-coordinate-integration-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4", "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal_plan.py", "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery.py", "tests/test_deepseek_native_harness_provider_free_edit_argument_result_coordinate_diagnostic_recovery_plan.py", "tests/test_ariadne_agent_error_register.py", "tests/test_ariadne_governance_clockwork_tick.py", "tests/test_ariadne_active_operation_latch.py", "tests/test_current_baton_consistency.py", "tests/test_api_spine_artifacts.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "edit-coordinate-integration-closeout-ruff",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "ruff", "check", "scripts/deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal_plan.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "edit-coordinate-integration-closeout-compile",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "py_compile", "scripts/deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py", "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal_plan.py"],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-threat-model-delta.md",
+      "scripts/deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/evidence.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/failure-terminal.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/integrated-future-runner.mjs",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/deterministic-evidence.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/deterministic-report.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/efficacy-reading.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/preflight-attempt-001-failure-terminal.json",
+      "docs/ariadne-agent-error-correction-register-revision-619.md",
+      "docs/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-22--native-harness-edit-coordinate-future-runner-integration.md",
+      "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/closeout/pushover-notification-receipt.json"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_edit_coordinate_integrated_runner_stock_headless_boot_only",
+    "one_exact_disposable_rc7_stock_headless_assembly_and_post_hmr_pre_request_hold_only",
+    "no_native_harness_worker_model_or_live_provider_request",
+    "no_candidate_adoption_or_runbook_manifest_change",
+    "both_consumed_occupied_attempts_immutable_no_retry_resume_overwrite_or_reclassification",
+    "no_product_source_configuration_api_openapi_graphql_schema_migration_route_or_database_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_generic_status_arrived_action_grammar_first_party_client_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "edit-coordinate-integration-source-file-ownership-conflation-001",
+      "observed_on": "2026-08-22",
+      "tranche": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_provider_free_preflight",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The accepted future-runner input must bind its exact current bytes and accepted derivation-source ancestry as distinct facts without inventing file ownership absent from the predecessor contract.",
+      "observed_error": "The first integration preflight required the accepted logical source commit to contain the later future-runner evidence path and returned input_binding_rejected before the Node fixture.",
+      "detection_method": "The provider-free controller emitted a closed failure terminal with zero worker/model/provider requests, zero retry/resume/fallback and an absent disposable root.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal/preflight-attempt-001-failure-terminal.json",
+        "docs/ariadne-agent-error-correction-register-revision-619.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.accepted_derivation_source_conflated_with_evidence_file_ownership",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep exact current artifact bytes and digest binding, independently prove the accepted source is a resolvable ancestor, and remove the unsupported file-at-source assertion.",
+        "prevention_control": "Future input contracts must represent artifact identity, derivation source and Git ancestry as separate typed fields and tests.",
+        "evidence_paths": [
+          "scripts/deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py",
+          "tests/test_deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal.py"
+        ]
+      },
+      "baton_summary": "records the rejected file-at-source ownership assumption and preserves distinct typed bindings for current artifact identity and accepted source ancestry."
+    }
+  ]
+}

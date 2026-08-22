@@ -8,10 +8,26 @@ import jsonschema
 import pytest
 
 from orchestration_harness import native_edit_argument_result_coordinate as coordinate
+from orchestration_harness.governance_clockwork_tick import validate_tick_intent
+from orchestration_harness.governance_live_adoption import (
+    validate_contract as validate_governance_contract,
+)
 from scripts import (
     deepseek_native_harness_provider_free_edit_coordinate_future_runner_integration_rehearsal
     as integration,
 )
+
+
+ROOT = Path(__file__).resolve().parents[1]
+CLOSEOUT_INTENT_PATH = integration.TOPIC / "closeout" / "closeout-intent.json"
+GOVERNANCE_CONTRACT_PATH = ROOT / (
+    "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-"
+    "adoption-retirement/contract.json"
+)
+BATON_COMPACTION_MANIFEST_PATH = (
+    ROOT / "docs/handover-ledgers/current-baton-acceptance-index.manifest.json"
+)
+REGISTER_REVISION_PATH = ROOT / "docs/ariadne-agent-error-correction-register-revision-619.md"
 
 
 def test_contract_and_schemas_are_closed_canonical_and_valid() -> None:
@@ -28,6 +44,24 @@ def test_contract_and_schemas_are_closed_canonical_and_valid() -> None:
         integration.FAILURE_SCHEMA_PATH,
     ):
         jsonschema.Draft202012Validator.check_schema(json.loads(path.read_bytes()))
+
+
+def test_closeout_intent_is_typed_indexed_and_binds_register_revision() -> None:
+    governance = validate_governance_contract(
+        json.loads(GOVERNANCE_CONTRACT_PATH.read_bytes())
+    )
+    intent = validate_tick_intent(json.loads(CLOSEOUT_INTENT_PATH.read_bytes()), governance)
+    label = intent["baton_acceptance"]["label"]
+    manifest = json.loads(BATON_COMPACTION_MANIFEST_PATH.read_bytes())
+    assert label == "Current DeepSeek native Harness acceptance"
+    assert label in manifest["active_labels"]
+    register_path = REGISTER_REVISION_PATH.relative_to(ROOT).as_posix()
+    assert intent["baton_acceptance"]["paths"].count(register_path) == 1
+    assert len(intent["agent_error_observations"]) == 1
+    marker = REGISTER_REVISION_PATH.read_text(encoding="utf-8")
+    assert "revision: 619" in marker
+    assert "incident_count: 964" in marker
+    assert "new_incident_ids: AER-0964" in marker
 
 
 def test_preflight_binds_inputs_attempts_packages_and_derivation() -> None:

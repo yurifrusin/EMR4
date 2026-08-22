@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.native_harness_edit_coordinate_future_runner_integration_efficacy.v1",
+  "operation_id": "deepseek-native-harness-provider-free-edit-coordinate-future-runner-integration-rehearsal",
+  "status": "accepted",
+  "result": "positive_control_integration_and_rerun_reduction",
+  "source_commit": "3139b246db3da0f2b0ded98b140328349f35751c",
+  "provider_free_integration": {
+    "closed_coordinate_count": 7,
+    "passed_variant_count": 9,
+    "pre_dispatch_denial_count": 3,
+    "real_edit_tool_execution_count": 6,
+    "javascript_python_agreement_count": 9,
+    "hostile_rejection_count": 5,
+    "worker_model_provider_request_count": 0,
+    "retry_resume_fallback_count": 0,
+    "complete_cleanup": true
+  },
+  "retired_loop": "Blank path, empty search and equal search/replacement no longer require a tool dispatch or interpretation of rc.7 free-form error prose; the derived runner selects one of three typed pre-dispatch decisions and retains the accepted shared public coordinate.",
+  "remaining_limit": "The integrated runner is continuity evidence only and has not yet been materialised through the stock headless/HMR loading path or adopted by the candidate/runbook.",
+  "general_reliability_claim": false,
+  "useful_worker_success_proved": false,
+  "next_recommendation": "Run one provider-free integrated-runner stock-headless boot rehearsal before any adoption or occupied worker decision."
+}
