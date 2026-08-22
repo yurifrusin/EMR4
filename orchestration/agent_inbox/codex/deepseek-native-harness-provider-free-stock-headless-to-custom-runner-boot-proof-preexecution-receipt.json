@@ -1,0 +1,131 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness provider-free stock-headless-to-custom-runner boot proof",
+    "completed_stage": "Accepted deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis at the machine-resolved source.",
+    "next_executable_stage": "perform_fresh_five_source_rehydration_then_freeze_the_provider_free_stock_headless_custom_runner_boot_contract",
+    "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
+    "resume_after_compaction": true,
+    "source_head": "3d82febd6a402337db606ce4767fbd4875698eba",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "abc9bbd3c8869b0b91f8aaf4ea99b62e00f2efc6",
+    "reason_codes": [],
+    "resolved_commit": "3d82febd6a402337db606ce4767fbd4875698eba",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "3d82febd6a402337db606ce4767fbd4875698eba"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "abc9bbd3c8869b0b91f8aaf4ea99b62e00f2efc6",
+    "branch_origin_aligned": true,
+    "head": "abc9bbd3c8869b0b91f8aaf4ea99b62e00f2efc6",
+    "origin_branch_commit": "abc9bbd3c8869b0b91f8aaf4ea99b62e00f2efc6",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 670
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "preexecution",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The process must stop before a DeepSeek worker, turn, model or provider request.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "gemini_verifier",
+        "rationale": "The active boundary admits zero model/provider requests and the terminal is a complete closed typed vector.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy and one Popen, HMR mutation, terminal capture and cleanup form an indivisible serial step.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "native_terminal",
+      "pre_verifier_gate",
+      "closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "consume the exact identity before launch",
+      "start one native process",
+      "wait for in-process stock HMR readiness",
+      "mutate the patch once",
+      "accept only the exact typed vector",
+      "verify process and root absence without retry"
+    ]
+  },
+  "planned_action": "run_exactly_one_provider_free_native_rc7_process_to_the_corrected_guard_graph_terminal",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-plan.md",
+      "docs/security/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-threat-model-delta.md",
+      "docs/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof-historical-test-selection.md",
+      "scripts/deepseek_native_harness_provider_free_stock_headless_to_custom_runner_boot_proof.py",
+      "tests/test_deepseek_native_harness_provider_free_stock_headless_to_custom_runner_boot_proof.py",
+      "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/contract.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/contract.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/evidence.schema.json",
+      "orchestration/continuity/deepseek-native-harness-provider-free-stock-headless-to-custom-runner-boot-proof/accepted-guard-graph-boot-probe.mjs",
+      "orchestration/continuity/deepseek-native-harness-provider-free-integrated-runner-accepted-guard-graph-content-free-counter-diagnosis/diagnosis-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the one native process and typed terminal. DeepSeek is declined because no turn is authorised; Gemini is declined because the absolute provider-free boundary and exact deterministic vector leave no semantic ambiguity; native subagents are declined under developer policy and indivisible process custody.",
+    "git_refs_and_worktree": "Machine snapshot only: task and origin must align at the committed candidate, all configured protected refs remain exact, tracked files are clean, docs/branding remains present and unrelated untracked paths remain preserved.",
+    "live_handover_current_baton": "Continuity 402 / Compass 384 accept the unique four-root-read/five-hook diagnosis and name this stock-headless-to-corrected-runner proof as the active prerequisite.",
+    "protected_evidence_boundaries": "Exactly one disposable root, one local native rc.7 stock-headless process, one HMR mutation and one typed terminal are admitted. The exact corrected runner must stop at the controlled factory sentinel after two distinct roots, four root reads and five hooks. No target, DeepSeek turn, agent publication, worker, broker, model/provider request, network, retry/resume/fallback, raw stream/error retention, product/data/runtime/deployment/Pages/protected-evidence or protected-ref action is admitted."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
