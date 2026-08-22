@@ -4,6 +4,7 @@ import copy
 import json
 from pathlib import Path
 import subprocess
+from types import SimpleNamespace
 
 import jsonschema
 import pytest
@@ -152,6 +153,19 @@ def test_disposable_profile_materializes_the_exact_guard_graph(tmp_path: Path) -
     ]
 
 
+def test_cleanup_is_bound_to_this_tranches_exact_attempt_name(tmp_path: Path) -> None:
+    root = tmp_path / worker.ATTEMPT_ROOT.name
+    root.mkdir()
+    (root / "sentinel.txt").write_text("disposable", encoding="utf-8")
+    assert worker.remove_exact_attempt_root(root, tmp_path)
+    assert not root.exists()
+    wrong = tmp_path / "wrong-attempt"
+    wrong.mkdir()
+    with pytest.raises(worker.UsefulWorkerError, match="attempt_cleanup_scope_invalid"):
+        worker.remove_exact_attempt_root(wrong, tmp_path)
+    assert wrong.exists()
+
+
 def test_contract_is_exact_and_all_effects_closed() -> None:
     contract = worker.validate_contract()
     assert contract == worker.contract_value()
@@ -208,6 +222,51 @@ def test_validation_runner_receipt_rejects_changed_source_digest(tmp_path: Path)
     changed.write_text(json.dumps(receipt), encoding="utf-8")
     with pytest.raises(worker.UsefulWorkerError, match="deterministic_admission_receipt_invalid"):
         worker._review_candidate_source(changed)
+
+
+def test_checkpoint_source_allows_only_the_review_receipt_commit(monkeypatch: pytest.MonkeyPatch) -> None:
+    candidate = "1" * 40
+    checkpoint = "2" * 40
+    review_receipt = "orchestration/agent_inbox/codex/review-receipt.json"
+    monkeypatch.setattr(
+        worker,
+        "git",
+        lambda *args: checkpoint if args[0] == "rev-parse" else review_receipt,
+    )
+    monkeypatch.setattr(
+        worker.subprocess,
+        "run",
+        lambda *args, **kwargs: SimpleNamespace(returncode=0),
+    )
+    assert worker._admit_checkpoint_source(
+        {"candidate_source": candidate, "review_receipt": review_receipt},
+        {"source_commit": checkpoint},
+    ) == checkpoint
+
+
+def test_checkpoint_source_rejects_non_evidence_delta(monkeypatch: pytest.MonkeyPatch) -> None:
+    candidate = "1" * 40
+    checkpoint = "2" * 40
+    monkeypatch.setattr(
+        worker,
+        "git",
+        lambda *args: checkpoint
+        if args[0] == "rev-parse"
+        else "scripts/product-runtime.py",
+    )
+    monkeypatch.setattr(
+        worker.subprocess,
+        "run",
+        lambda *args, **kwargs: SimpleNamespace(returncode=0),
+    )
+    with pytest.raises(worker.UsefulWorkerError, match="clockwork_checkpoint_source_delta_invalid"):
+        worker._admit_checkpoint_source(
+            {
+                "candidate_source": candidate,
+                "review_receipt": "orchestration/agent_inbox/codex/review-receipt.json",
+            },
+            {"source_commit": checkpoint},
+        )
 
 
 def test_terminal_schema_accepts_only_bounded_success() -> None:

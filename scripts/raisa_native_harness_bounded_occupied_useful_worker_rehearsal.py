@@ -11,6 +11,8 @@ from pathlib import Path
 import queue
 import re
 import secrets
+import shutil
+import stat
 import subprocess
 import threading
 import time
@@ -130,6 +132,34 @@ def write_json_exclusive(path: Path, value: dict[str, Any]) -> None:
     descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
     with os.fdopen(descriptor, "wb") as stream:
         stream.write(canonical_bytes(value))
+
+
+def _clear_readonly_then_retry(
+    function: Any, path: str, _error: BaseException
+) -> None:
+    os.chmod(path, stat.S_IWRITE)
+    function(path)
+
+
+def remove_exact_attempt_root(root: Path, parent: Path) -> bool:
+    resolved_root = root.resolve()
+    resolved_parent = parent.resolve()
+    if (
+        resolved_root.parent != resolved_parent
+        or resolved_root.name != ATTEMPT_ROOT.name
+        or resolved_root.is_symlink()
+    ):
+        raise UsefulWorkerError("attempt_cleanup_scope_invalid")
+    for attempt in range(26):
+        try:
+            if resolved_root.exists():
+                shutil.rmtree(resolved_root, onexc=_clear_readonly_then_retry)
+            return not resolved_root.exists()
+        except OSError:
+            if attempt == 25:
+                return False
+            time.sleep(0.2)
+    return False
 
 
 def git(*args: str) -> str:
@@ -791,8 +821,45 @@ def prepare_attempt(review_receipt: Path) -> dict[str, Any]:
         write_json_exclusive(PREPARATION_PATH, preparation)
         return preparation
     except Exception:
-        accepted_worker.remove_exact_attempt_root(root, parent)
+        remove_exact_attempt_root(root, parent)
         raise
+
+
+def _admit_checkpoint_source(preparation: dict[str, Any], tick: dict[str, Any]) -> str:
+    candidate_source = preparation.get("candidate_source")
+    checkpoint_source = tick.get("source_commit")
+    review_receipt = preparation.get("review_receipt")
+    if (
+        not isinstance(candidate_source, str)
+        or FULL_OID.fullmatch(candidate_source) is None
+        or not isinstance(checkpoint_source, str)
+        or FULL_OID.fullmatch(checkpoint_source) is None
+        or not isinstance(review_receipt, str)
+        or git("rev-parse", "--verify", f"{checkpoint_source}^{{commit}}")
+        != checkpoint_source
+        or subprocess.run(
+            [
+                "git",
+                "-C",
+                str(REPO_ROOT),
+                "merge-base",
+                "--is-ancestor",
+                candidate_source,
+                checkpoint_source,
+            ],
+            check=False,
+            capture_output=True,
+            timeout=15,
+        ).returncode
+        != 0
+    ):
+        raise UsefulWorkerError("clockwork_checkpoint_source_invalid")
+    evidence_delta = git(
+        "diff", "--name-only", f"{candidate_source}..{checkpoint_source}", "--"
+    ).splitlines()
+    if evidence_delta != [review_receipt]:
+        raise UsefulWorkerError("clockwork_checkpoint_source_delta_invalid")
+    return checkpoint_source
 
 
 def admit_checkpoint(clockwork_evidence: Path) -> dict[str, Any]:
@@ -804,9 +871,9 @@ def admit_checkpoint(clockwork_evidence: Path) -> dict[str, Any]:
         tick.get("status") != "passed"
         or tick.get("operation_id") != OPERATION_ID
         or tick.get("event_kind") != "checkpoint_transition"
-        or tick.get("source_commit") != preparation.get("candidate_source")
     ):
         raise UsefulWorkerError("clockwork_checkpoint_invalid")
+    checkpoint_source = _admit_checkpoint_source(preparation, tick)
     authority = load_json(AUTHORITY_PATH)
     checkpoint = {
         "schema_version": "ariadne.native_harness_useful_worker_checkpoint.v1",
@@ -814,6 +881,7 @@ def admit_checkpoint(clockwork_evidence: Path) -> dict[str, Any]:
         "attempt_id": ATTEMPT_ID,
         "status": "admitted",
         "candidate_source": preparation["candidate_source"],
+        "checkpoint_source": checkpoint_source,
         "review_receipt": preparation["review_receipt"],
         "review_receipt_sha256": preparation["review_receipt_sha256"],
         "preparation_sha256": sha256_file(PREPARATION_PATH),
@@ -1170,7 +1238,7 @@ def execute_native() -> dict[str, Any]:
         "stderr": _stream_reading(stderr_path),
         "broker_stderr": _stream_reading(broker_stderr_path),
     }
-    cleanup_passed = accepted_worker.remove_exact_attempt_root(root, parent)
+    cleanup_passed = remove_exact_attempt_root(root, parent)
     root_absent = not root.exists()
     if not cleanup_passed or not root_absent:
         success = False
