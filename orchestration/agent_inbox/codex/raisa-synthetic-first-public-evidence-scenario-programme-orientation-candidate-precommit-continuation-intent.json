@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_deterministically_verified_orientation_evidence_report_and_next_tranche_contract",
+  "assessed_stage": "orientation_candidate_precommit_after_completed_parallel_research_and_serial_sol_synthesis",
+  "active_evidence_paths": [
+    "docs/raisa-synthetic-first-public-evidence-scenario-programme-orientation-plan.md",
+    "docs/security/raisa-synthetic-first-public-evidence-scenario-programme-orientation-threat-model-delta.md",
+    "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/source-register.json",
+    "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/evidence.json",
+    "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/report.md",
+    "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/next-tranche-contract.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}

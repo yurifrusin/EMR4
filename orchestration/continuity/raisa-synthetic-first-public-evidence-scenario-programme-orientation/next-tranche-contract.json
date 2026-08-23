@@ -1,0 +1,48 @@
+{
+  "schema_version": "raisa.traceable_synthetic_scenario_envelope_next_tranche_contract.v1",
+  "operation_id": "raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal",
+  "target_result": "raisa_traceable_synthetic_scenario_envelope_and_legacy_binding_pass",
+  "planning_parent": "791f133493430d415f0d819241409937cfd611d5",
+  "objective": "Implement one strict domain-neutral traceability envelope and bind it to the existing non-protected reception semantic and replay contracts without duplicating either engine.",
+  "required_components": [
+    "strict_versioned_traceability_envelope",
+    "closed_source_record_and_oracle_eligibility_vocabulary",
+    "typed_oracle_bundle_and_coverage_claims",
+    "execution_binding_references_not_duplicated_dialogue_or_fixture_content",
+    "two_existing_reception_semantic_to_replay_fixture_bindings",
+    "author_extractor_adjudicator_reviewer_separation",
+    "opaque_non_resolving_calibration_evidence_reference",
+    "hostile_mutation_and_legacy_binding_tests"
+  ],
+  "reuse": [
+    "app/services/bernie/scenario_spec.py",
+    "tests/bernie_scenarios/loader.py",
+    "tests/bernie_scenarios/replay.py",
+    "tests/fixtures/bernie_scenario_spec/booking_create_then_exact_duplicate.json",
+    "tests/fixtures/bernie_scenario_spec/booking_overlap_not_exact_duplicate.json",
+    "tests/fixtures/bernie_scenarios/booking_create_then_exact_duplicate.yaml",
+    "tests/fixtures/bernie_scenarios/booking_overlap_not_exact_duplicate.yaml"
+  ],
+  "acceptance": [
+    "vendor_advertised_capability_and_fiction_prompt_only_sources_cannot_bind_authoritative_oracles",
+    "model_output_cannot_author_adjudicate_or_promote_an_oracle",
+    "committed_cases_are_wholly_synthetic_and_non_phi",
+    "external_sources_require_locator_rights_posture_transformation_and_limitations",
+    "execution_evidence_cannot_promote_source_or_evidence_tier",
+    "protected_references_are_opaque_and_non_resolving",
+    "calibration_reference_cannot_resolve_or_claim_deidentification",
+    "both_existing_matched_reception_pairs_validate_without_content_duplication",
+    "no_provider_call_product_mount_write_historical_data_or_protected_evidence_access"
+  ],
+  "protected_boundaries": [
+    "provider_free_and_unmounted",
+    "no_historical_diary_open_list_search_sample_hash_or_parse",
+    "no_real_or_real_practice_derived_fixture",
+    "no_protected_holdout_or_support_surface_access",
+    "no_product_runtime_route_api_client_or_database_change",
+    "no_ordinary_practice_enablement",
+    "no_production_deployment_release_pages_or_protected_ref_movement",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}

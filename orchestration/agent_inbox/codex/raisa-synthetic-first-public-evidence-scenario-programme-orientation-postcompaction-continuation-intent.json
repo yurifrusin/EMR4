@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "post_compaction",
+  "planned_action": "resume_orientation_evidence_synthesis_and_closeout_after_fresh_five_source_rehydration",
+  "assessed_stage": "public_research_complete_and_orientation_candidate_under_serial_sol_consolidation",
+  "active_evidence_paths": [
+    "docs/raisa-synthetic-first-public-evidence-scenario-programme-orientation-plan.md",
+    "docs/security/raisa-synthetic-first-public-evidence-scenario-programme-orientation-threat-model-delta.md",
+    "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/source-register.json",
+    "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/evidence.json",
+    "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/next-tranche-contract.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "reserved_required_independence"
+    }
+  ]
+}

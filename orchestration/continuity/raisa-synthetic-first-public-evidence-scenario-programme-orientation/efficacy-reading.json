@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-synthetic-first-public-evidence-scenario-programme-orientation",
+  "source_head": "791f133493430d415f0d819241409937cfd611d5",
+  "result": "public_research_consolidated_into_one_reusable_envelope_boundary",
+  "research": {
+    "read_only_packages_completed": 7,
+    "registered_public_sources": 20,
+    "source_classes": 7,
+    "worker_repository_edits": 0,
+    "private_data_accesses": 0,
+    "provider_calls": 0
+  },
+  "workflow": {
+    "existing_scenario_engines_reused": 2,
+    "replacement_scenario_engines_planned": 0,
+    "next_implementation_tranches_frozen": 1,
+    "separate_privacy_feasibility_successors_named": 1,
+    "product_source_files_changed": 0,
+    "protected_ref_movements": 0
+  },
+  "assessment": "The orientation converts seven parallel research streams into one closed evidence hierarchy and one small binding tranche. It avoids a third scenario engine, keeps the private archive unopened, and makes any later archive use conditional on an explicit privacy-feasibility gate."
+}

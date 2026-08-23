@@ -1,0 +1,147 @@
+{
+  "schema_version": "raisa.synthetic_first_public_evidence_scenario_programme_orientation.v1",
+  "result": "raisa_synthetic_first_public_evidence_scenario_programme_orientation_pass",
+  "recorded_at": "2026-08-23T23:50:27.2974275+10:00",
+  "plan_source": "791f133493430d415f0d819241409937cfd611d5",
+  "five_source_rehydration": "passed",
+  "post_compaction_receipt": "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-postcompaction-receipt.json",
+  "research": {
+    "read_only_packages": 7,
+    "completed_packages": 7,
+    "repository_edits_by_workers": 0,
+    "data_access_by_workers": 0,
+    "provider_calls": 0,
+    "streams": [
+      "australian_general_practice_administration_and_reception",
+      "clinical_and_diagnostic_scenario_structure",
+      "synthetic_healthcare_generation_and_evaluation",
+      "practice_management_system_public_claims",
+      "fictional_practice_human_factors",
+      "existing_non_protected_scenario_contract_gap_map",
+      "historical_snapshot_privacy_methods_without_data_access"
+    ]
+  },
+  "source_policy": {
+    "closed_classes": 7,
+    "vendor_claims_oracle_eligible": false,
+    "fiction_oracle_eligible": false,
+    "model_output_oracle_eligible": false,
+    "private_observation_oracle_eligible": false,
+    "normative_source_requires_scope_review": true,
+    "accepted_emr4_contract_oracle_eligible": true
+  },
+  "existing_repository": {
+    "reception_semantic_contract": "app/services/bernie/scenario_spec.py",
+    "stateful_replay_contract": "tests/bernie_scenarios/loader.py",
+    "stateful_replay_engine": "tests/bernie_scenarios/replay.py",
+    "matched_non_protected_semantic_and_replay_fixture_pairs": [
+      "booking_create_then_exact_duplicate",
+      "booking_overlap_not_exact_duplicate"
+    ],
+    "binding_adapter_present": false,
+    "replacement_engine_required": false
+  },
+  "research_dimensions": {
+    "administrative_and_reception": [
+      "identity_and_proxy_authority",
+      "appointment_and_check_in_races",
+      "result_and_recall_lifecycle",
+      "consent_and_communication_channels",
+      "accessibility_and_interpreters",
+      "emergency_escalation",
+      "offline_and_cross_system_reconciliation",
+      "financial_and_clinical_state_separation"
+    ],
+    "clinical_and_diagnostic": [
+      "presentation_and_progression",
+      "red_flags_and_must_not_miss",
+      "uncertainty_and_missing_information",
+      "investigation_and_result_lifecycle",
+      "management_alternatives",
+      "safety_netting",
+      "referral_handoff_and_follow_up"
+    ],
+    "fiction_prompt_only": [
+      "reception_privacy",
+      "dual_relationships",
+      "interruptions_and_concurrency",
+      "scarcity_and_coverage",
+      "distressed_relatives",
+      "conflicting_authority",
+      "community_surge",
+      "shift_closure"
+    ]
+  },
+  "indicative_corpus": {
+    "core_encounter_families": "40_to_50",
+    "counterfactual_variants_per_family": "6_to_12",
+    "additional_safety_workflow_and_adversarial_sequences": 100,
+    "indicative_executable_instances": "350_to_700",
+    "raw_count_is_acceptance_metric": false,
+    "required_coverage": [
+      "requirements",
+      "hazards",
+      "workflow_states",
+      "pairwise_interactions",
+      "risk_selected_higher_order_interactions",
+      "metamorphic_consistency",
+      "mutation_rejection",
+      "repeated_run_reliability"
+    ]
+  },
+  "historical_snapshot_direction": {
+    "source_facts": "user_attested_not_repository_verified",
+    "timestamped_file_names": true,
+    "states_per_day": "scores",
+    "observation_period": "several_months",
+    "reported_poll_interval_seconds": 30,
+    "adjacent_diff_event_reconstruction_plausible": true,
+    "exact_event_time_proved": false,
+    "required_time_representation": "interval_censored_observed_after_observed_by",
+    "raw_data_opened": false,
+    "recommended_release_form": "new_synthetic_days_generated_from_privacy_reviewed_aggregate_transition_statistics",
+    "prohibited_release_forms": [
+      "raw_snapshot",
+      "direct_identifier_removed_snapshot",
+      "exact_observed_day_replay",
+      "lightly_perturbed_real_sequence",
+      "persistent_pseudonymous_patient_or_staff_trajectory"
+    ],
+    "absolute_deidentification_guarantee_possible": false,
+    "near_real_practice_synthetic_scenarios_eligible_after_separate_privacy_gate": true,
+    "raw_archive_access_authorized_by_this_orientation": false
+  },
+  "deterministic_verification": {
+    "json_documents_parsed": 5,
+    "focused_pytest_paths": [
+      "tests/test_bernie_scenario_spec.py",
+      "tests/bernie_scenarios/test_t1_stateful_contract.py"
+    ],
+    "focused_pytest_result": "passed",
+    "warnings": 2,
+    "failures": 0,
+    "git_diff_check": "passed"
+  },
+  "next_tranche": {
+    "operation_id": "raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal",
+    "target_result": "raisa_traceable_synthetic_scenario_envelope_and_legacy_binding_pass",
+    "provider_live": false,
+    "historical_data_access": false,
+    "product_runtime_mounting": false,
+    "protected_evidence_access": false,
+    "private_calibration_reference": "opaque_non_resolving_only"
+  },
+  "deliberately_separate_successor": {
+    "operation_id": "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review",
+    "starts_with_authored_synthetic_snapshot_fixtures": true,
+    "real_snapshot_access_requires_separate_accepted_gate": true
+  },
+  "zero_effects": {
+    "historical_files_opened": 0,
+    "patient_or_practice_records_processed": 0,
+    "provider_prompts_sent": 0,
+    "product_files_changed": 0,
+    "ordinary_check_in_releases": 0,
+    "protected_ref_movements": 0
+  }
+}

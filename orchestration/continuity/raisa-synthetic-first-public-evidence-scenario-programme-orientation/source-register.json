@@ -1,0 +1,186 @@
+{
+  "schema_version": "raisa.synthetic_scenario_public_source_register.v1",
+  "recorded_at": "2026-08-23T23:50:27.2974275+10:00",
+  "entries": [
+    {
+      "source_id": "racgp-gp1-1-responsive-care",
+      "source_class": "normative_or_clinical_guidance",
+      "issuer": "Royal Australian College of General Practitioners",
+      "title": "GP1.1 Responsive system for patient care",
+      "url": "https://www.racgp.org.au/running-a-practice/practice-standards/standards-5th-edition/standards-for-general-practices-5th-ed/general-practice-standards/gp-standard-1/gp-standard-1",
+      "supports": ["appointment_access", "urgent_transfer", "fully_booked_workflow"],
+      "oracle_eligible_with_scope_review": true
+    },
+    {
+      "source_id": "racgp-c6-1-patient-identification",
+      "source_class": "normative_or_clinical_guidance",
+      "issuer": "Royal Australian College of General Practitioners",
+      "title": "C6.1 Patient identification",
+      "url": "https://www.racgp.org.au/running-a-practice/practice-standards/standards-5th-edition/standards-for-general-practices-5th-ed/core-standards/core-standard-6/criterion-c6-1-patient-identification",
+      "supports": ["three_identifiers", "identity_mismatch", "pseudonymous_care"],
+      "oracle_eligible_with_scope_review": true
+    },
+    {
+      "source_id": "racgp-gp2-2-follow-up",
+      "source_class": "normative_or_clinical_guidance",
+      "issuer": "Royal Australian College of General Practitioners",
+      "title": "GP2.2 Follow-up systems",
+      "url": "https://www.racgp.org.au/running-a-practice/practice-standards/standards-5th-edition/standards-for-general-practices-5th-ed/general-practice-standards/gp-standard-2/criterion-gp2-2-follow-up-systems",
+      "supports": ["result_review", "contact_attempts", "recall_ownership"],
+      "oracle_eligible_with_scope_review": true
+    },
+    {
+      "source_id": "acsqhc-primary-community-clinical-safety",
+      "source_class": "normative_or_clinical_guidance",
+      "issuer": "Australian Commission on Safety and Quality in Health Care",
+      "title": "Primary and Community Healthcare Clinical Safety Standard",
+      "url": "https://www.safetyandquality.gov.au/national-standards/primary-and-community-healthcare-standards/clinical-safety-standard",
+      "supports": ["critical_information", "deterioration", "follow_up", "escalation"],
+      "oracle_eligible_with_scope_review": true
+    },
+    {
+      "source_id": "queensland-primary-clinical-care-manual",
+      "source_class": "normative_or_clinical_guidance",
+      "issuer": "Queensland Health",
+      "title": "Primary Clinical Care Manual",
+      "url": "https://www.health.qld.gov.au/clinical-practice/guidelines-procedures/clinical-resources/rural-and-remote-health-clinical-resources/primary-clinical-care-manual",
+      "supports": ["presentation", "immediate_management", "assessment", "follow_up", "referral"],
+      "oracle_eligible_with_scope_review": true
+    },
+    {
+      "source_id": "synthea",
+      "source_class": "method_or_interoperability_standard",
+      "issuer": "The MITRE Corporation and contributors",
+      "title": "Synthea synthetic patient generator",
+      "url": "https://github.com/synthetichealth/synthea",
+      "supports": ["seeded_generation", "longitudinal_state_machine", "fhir_export"],
+      "oracle_eligible_with_scope_review": false
+    },
+    {
+      "source_id": "hl7-fhir-testscript",
+      "source_class": "method_or_interoperability_standard",
+      "issuer": "HL7 International",
+      "title": "FHIR R4 TestScript",
+      "url": "https://hl7.org/fhir/R4/testscript.html",
+      "supports": ["fixtures", "setup", "assertions", "teardown"],
+      "oracle_eligible_with_scope_review": false
+    },
+    {
+      "source_id": "au-core-fhir",
+      "source_class": "method_or_interoperability_standard",
+      "issuer": "HL7 Australia",
+      "title": "AU Core FHIR Implementation Guide",
+      "url": "https://hl7.org.au/fhir/core/",
+      "supports": ["australian_fhir_profiles", "terminology", "invariants"],
+      "oracle_eligible_with_scope_review": false
+    },
+    {
+      "source_id": "nist-sp800-142",
+      "source_class": "method_or_interoperability_standard",
+      "issuer": "National Institute of Standards and Technology",
+      "title": "Practical Combinatorial Testing",
+      "url": "https://csrc.nist.gov/pubs/sp/800/142/final",
+      "supports": ["interaction_coverage", "pairwise", "higher_order_coverage"],
+      "oracle_eligible_with_scope_review": false
+    },
+    {
+      "source_id": "nist-sp800-226",
+      "source_class": "method_or_interoperability_standard",
+      "issuer": "National Institute of Standards and Technology",
+      "title": "Guidelines for Evaluating Differential Privacy Guarantees",
+      "url": "https://csrc.nist.gov/pubs/sp/800/226/final",
+      "supports": ["privacy_unit", "contribution_bounds", "privacy_accounting", "synthetic_data_limits"],
+      "oracle_eligible_with_scope_review": false
+    },
+    {
+      "source_id": "oaic-deidentification",
+      "source_class": "normative_or_clinical_guidance",
+      "issuer": "Office of the Australian Information Commissioner",
+      "title": "De-identification and the Privacy Act",
+      "url": "https://www.oaic.gov.au/privacy/privacy-guidance-for-organisations-and-government-agencies/handling-personal-information/de-identification-and-the-privacy-act",
+      "supports": ["contextual_reidentification_risk", "very_low_risk", "specialist_review"],
+      "oracle_eligible_with_scope_review": true
+    },
+    {
+      "source_id": "abs-five-safes",
+      "source_class": "method_or_interoperability_standard",
+      "issuer": "Australian Bureau of Statistics",
+      "title": "Five Safes Framework",
+      "url": "https://www.abs.gov.au/statistics/understanding-statistics/data-confidentiality-guide/five-safes-framework",
+      "supports": ["safe_people", "safe_projects", "safe_settings", "safe_data", "safe_outputs"],
+      "oracle_eligible_with_scope_review": false
+    },
+    {
+      "source_id": "bp-premier-recall-appointments",
+      "source_class": "vendor_operational_documentation",
+      "issuer": "Best Practice Software",
+      "title": "Recall appointments",
+      "url": "https://kb.bpsoftware.net/bppremier/spectra/Management/AppointmentBook/RecallAppointments.htm",
+      "supports": ["recall_cancellation", "uncompleted_recall_visibility", "role_restriction"],
+      "oracle_eligible_with_scope_review": false
+    },
+    {
+      "source_id": "medicaldirector-clinical-recalls",
+      "source_class": "vendor_operational_documentation",
+      "issuer": "MedicalDirector",
+      "title": "Clinical recalls",
+      "url": "https://www.medicaldirector.com/help/topics-clinical/Recalls.htm",
+      "supports": ["recurrence", "contact_actions", "urgent_completed_deleted_states"],
+      "oracle_eligible_with_scope_review": false
+    },
+    {
+      "source_id": "zedmed-appointments",
+      "source_class": "vendor_operational_documentation",
+      "issuer": "Zedmed",
+      "title": "Appointments help",
+      "url": "https://help.zedmed.com.au/help/appointments",
+      "supports": ["cancel_vs_delete", "waiting_room", "walk_in", "linked_bookings"],
+      "oracle_eligible_with_scope_review": false
+    },
+    {
+      "source_id": "communicare-recalls",
+      "source_class": "vendor_operational_documentation",
+      "issuer": "Telstra Health",
+      "title": "Communicare recalls",
+      "url": "https://communicare-portal.telstrahealth.com/knowledge/V22.4/topics/_Recalls.html",
+      "supports": ["planned_vs_performed", "manual_vs_automatic", "patient_todo"],
+      "oracle_eligible_with_scope_review": false
+    },
+    {
+      "source_id": "screen-australia-country-practice",
+      "source_class": "fiction_prompt_only",
+      "issuer": "Screen Australia",
+      "title": "A Country Practice catalogue description",
+      "url": "https://www.screenaustralia.gov.au/the-screen-guide/p/colin-free/7389/",
+      "supports": ["small_community", "gp_hospital_overlap", "social_visibility", "scarcity"],
+      "oracle_eligible_with_scope_review": false
+    },
+    {
+      "source_id": "nfsa-gp-series",
+      "source_class": "fiction_prompt_only",
+      "issuer": "National Film and Sound Archive",
+      "title": "G.P. Australian Screen notes",
+      "url": "https://aso.gov.au/titles/tv/gp-toss-a-coin/notes/",
+      "supports": ["busy_suburban_practice", "reception", "simultaneous_subproblems"],
+      "oracle_eligible_with_scope_review": false
+    },
+    {
+      "source_id": "fictional-medical-tv-education-review",
+      "source_class": "method_or_interoperability_standard",
+      "issuer": "Peer-reviewed literature",
+      "title": "Use of fictional medical television in health-professions education",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28083814/",
+      "supports": ["guided_critical_analysis", "fiction_limitations"],
+      "oracle_eligible_with_scope_review": false
+    },
+    {
+      "source_id": "temporal-clinical-privacy",
+      "source_class": "method_or_interoperability_standard",
+      "issuer": "Peer-reviewed literature",
+      "title": "Preserving temporal relations in clinical data while maintaining privacy",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5070517/",
+      "supports": ["longitudinal_release_differencing", "temporal_privacy_risk"],
+      "oracle_eligible_with_scope_review": false
+    }
+  ]
+}
