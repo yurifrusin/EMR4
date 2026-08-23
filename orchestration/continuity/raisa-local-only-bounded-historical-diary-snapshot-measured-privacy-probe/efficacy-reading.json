@@ -1,0 +1,33 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+  "source_head": "a0887004298fbe3b3509f29c7844c228af16d4b3",
+  "result": "privacy_boundary_passed_temporal_utility_requires_revision",
+  "mechanism": {
+    "metadata_attempts": 7,
+    "content_attempts": 1,
+    "snapshots_opened_and_parsed": 80,
+    "raw_leakage_detections": 0,
+    "stable_linkage_records": 40,
+    "recovered_changes": 118,
+    "mapped_time_observations": 0,
+    "private_artifacts_retained": 0,
+    "provider_calls": 0
+  },
+  "risk_reading": {
+    "unique_records_successes": 9,
+    "unique_records_trials": 51,
+    "unique_trajectories_successes": 51,
+    "unique_trajectories_trials": 51,
+    "cross_key_differencing_successes": 51,
+    "cross_key_differencing_trials": 51,
+    "interpretation": "conditional_local_structural_linkability_not_universal_reidentification_probability"
+  },
+  "workflow": {
+    "new_tests": 36,
+    "unchanged_controls": 86,
+    "contained_prepublication_lapses": 5,
+    "automatic_content_retries": 0
+  },
+  "assessment": "The gate was useful now: it contained one real local read, quantified high trajectory linkability, preserved workflow motion and stopped semantic promotion when the first parser could not map time. Metadata recovery cost seven cheap pre-content attempts; only one content attempt ran. The next ergonomic gain is synthetic-first time-axis recovery, not weakening privacy or repeating the same run."
+}

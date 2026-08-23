@@ -1,0 +1,37 @@
+{
+  "schema_version": "raisa.historical_diary_measured_privacy_prepublication_lapses.v1",
+  "recorded_at": "2026-08-24T03:42:32.7376775+10:00",
+  "operation_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+  "candidate_source": "a0887004298fbe3b3509f29c7844c228af16d4b3",
+  "lapses": [
+    {
+      "attempt": "privacy-control-collection-001",
+      "reason": "ordinary_pytest_collect_only_used_before_provider_free_wrapper",
+      "effect": "shared_lock_acquired_and_46_tests_collected_without_test_execution_or_state_change"
+    },
+    {
+      "attempt": "metadata-binding-recovery-series-001",
+      "reason": "initial_selector_assumptions_required_six_fail_closed_metadata_corrections",
+      "effect": "zero_content_reads_before_the_single_passing_manifest"
+    },
+    {
+      "attempt": "timestamp-convention-candidate-001",
+      "reason": "month_day_label_reused_year_first_variable",
+      "effect": "synthetic_test_rejected_false_tie_before_another_archive_read"
+    },
+    {
+      "attempt": "pre-verifier-evidence-roots-001",
+      "reason": "serial_continuation_evidence_path_root_forbidden",
+      "effect": "receipt_builder_rejected_before_output_and_passed_after_governance_only_path_correction"
+    },
+    {
+      "attempt": "closeout-intent-scalar-budget-001",
+      "reason": "four_expanded_incident_forms_exceeded_semantic_scalar_budget",
+      "effect": "clockwork_check_rejected_before_verification_publication_or_pointer_movement_and_incidents_were_consolidated"
+    }
+  ],
+  "phase_b_content_runs": 1,
+  "automatic_content_retries": 0,
+  "raw_or_private_output_events": 0,
+  "product_or_protected_state_changes": 0
+}

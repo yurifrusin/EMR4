@@ -1,0 +1,115 @@
+{
+  "schema_version": "raisa.historical_diary_measured_privacy_probe_evidence.v1",
+  "result": "raisa_local_only_historical_diary_measured_privacy_revision_required",
+  "recorded_at": "2026-08-24T03:42:32.7376775+10:00",
+  "planning_source": "8d61680e0c18bc91edcfd32ea88180887ce9b758",
+  "reviewed_source": "a0887004298fbe3b3509f29c7844c228af16d4b3",
+  "five_source_rehydration": "passed",
+  "phase_a": {
+    "metadata_bind_attempts": 7,
+    "passing_bind_attempts": 1,
+    "content_reads_before_pass": 0,
+    "candidate_document_count": 582,
+    "excluded_below_minimum_count": 2,
+    "excluded_above_maximum_count": 0,
+    "timestamp_parse_success_count": 582,
+    "timestamp_parse_failure_count": 0,
+    "selected_timestamp_convention": "year_month_day_two_digit_year",
+    "selected_file_count": 80,
+    "selected_total_bytes": 8151040,
+    "maximum_selected_file_bytes": 110592,
+    "relative_observation_span_seconds": 5160,
+    "manifest_readback": "passed",
+    "manifest_ignored": true
+  },
+  "phase_b": {
+    "content_run_count": 1,
+    "opened_snapshots": 80,
+    "parsed_snapshots": 80,
+    "rejected_snapshots": 0,
+    "source_cell_observations": 1120,
+    "projected_cell_observations": 1120,
+    "stable_linkage_records": 40,
+    "adjacent_transition_count": 79,
+    "change_counts": {
+      "added": 39,
+      "removed": 39,
+      "format_changed": 1,
+      "same_position_replaced": 39,
+      "total": 118
+    },
+    "mapped_time_observations": 0,
+    "decision": "revision_required",
+    "reason_codes": [
+      "insufficient_time_mapping"
+    ]
+  },
+  "privacy": {
+    "source_value_leakage_count": 0,
+    "source_text_emitted": false,
+    "source_filename_path_or_timestamp_emitted": false,
+    "key_or_mapping_emitted": false,
+    "detector_category_counts": {
+      "address": 80,
+      "likely_name": 1040,
+      "sensitive_note": 80
+    },
+    "record_linkage_attack": {
+      "successes": 9,
+      "trials": 51
+    },
+    "trajectory_linkage_attack": {
+      "successes": 51,
+      "trials": 51
+    },
+    "cross_key_structural_differencing": {
+      "successes": 51,
+      "trials": 51
+    },
+    "universal_reidentification_probability_claimed": false,
+    "strongest_meaning": "ignored_local_research_retention_only_no_downstream_authority"
+  },
+  "cleanup": {
+    "word_cleanup_completed": true,
+    "private_manifest_retained": false,
+    "private_projection_retained": false,
+    "ephemeral_key_persisted": false,
+    "mapping_persisted": false,
+    "aggregate_reading_retained_ignored_local_only": true,
+    "provider_network_model_calls": 0
+  },
+  "deterministic_verification": {
+    "new_hostile_tests": 36,
+    "unchanged_privacy_h5_h15_controls": 86,
+    "combined_tests": 122,
+    "combined_failures": 0,
+    "provider_free_wrapper": "passed",
+    "ruff": "passed",
+    "compileall": "passed",
+    "powershell_parse": "passed",
+    "git_diff_check": "passed",
+    "contained_prepublication_lapses": 5
+  },
+  "parallelism": {
+    "deepseek": "declined_negative_native_harness_paused_and_private_data_worker_lease_forbidden",
+    "gemini": "not_applicable_neutral_provider_model_transmission_forbidden",
+    "native_subagents": "declined_negative_serial_manifest_word_process_key_and_projection",
+    "gpt_sol": "implementation_local_execution_acceptance_cleanup_git_and_closeout_owner"
+  },
+  "next_operation": {
+    "operation_id": "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal",
+    "launch": "immediate_after_clockwork_closeout",
+    "first_stage": "fresh_rehydration_then_freeze_synthetic_first_structural_time_axis_recovery_plan",
+    "maximum_content_runs": 1,
+    "provider_or_network_use": false,
+    "strongest_result": "locally_restricted_candidate"
+  },
+  "zero_effects": {
+    "provider_or_model_calls": 0,
+    "product_files_changed": 0,
+    "database_operations": 0,
+    "fixture_memory_or_rag_promotions": 0,
+    "ordinary_practice_releases": 0,
+    "protected_ref_movements": 0
+  }
+}

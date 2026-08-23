@@ -1,0 +1,12 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "recorded_at": "2026-08-24T03:59:44.6951996+10:00",
+  "operation_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+  "status": "delivered",
+  "provider_status": 1,
+  "request_id": "8a7af429-2ca1-4620-b9e9-bd9f7d55123b",
+  "continuing_to": [
+    "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal"
+  ],
+  "contains_phi": false
+}

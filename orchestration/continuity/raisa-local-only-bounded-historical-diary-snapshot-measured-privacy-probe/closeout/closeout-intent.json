@@ -1,0 +1,118 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+  "recorded_at": "2026-08-24T03:42:32.7376775+10:00",
+  "closeout": {
+    "operation_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+    "title": "Raisa local-only bounded historical Diary snapshot measured privacy probe",
+    "builds_on": [
+      "raisa-local-only-historical-diary-access-boundary-convergence"
+    ],
+    "authority_notes": [
+      "Yuri delegated gate timing and uninterrupted development; accept one contained local revision-required result without downstream use."
+    ],
+    "decisions": [
+      {
+        "id": "accept-revision-required-and-recover-structural-time-axis",
+        "source": "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/next-tranche-contract.json",
+        "summary": "Accept exact source a0887004298fbe3b3509f29c7844c228af16d4b3 and proceed synthetic-first to structural time-axis recovery."
+      }
+    ],
+    "claim_scope": [
+      "Eighty snapshots parsed with zero leakage, 40 stable records and 118 changes; zero time mapping requires revision."
+    ],
+    "additional_receipts": [
+      "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/closeout/prepublication-contained-lapses.json",
+      "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/closeout/pushover-notification-receipt.json"
+    ],
+    "additional_artifacts": [
+      "orchestration_harness/historical_diary_local_measured_privacy_probe.py",
+      "scripts/historical_diary_local_measured_privacy_probe.ps1",
+      "tests/test_raisa_local_only_bounded_historical_diary_snapshot_measured_privacy_probe.py",
+      "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/next-tranche-contract.json"
+    ],
+    "unresolved_gates": [
+      "Time-axis recovery, local retention, downstream use and protected integration remain gated."
+    ],
+    "journey": {
+      "strategic_role": "Measure whether Diary motion survives strict local privacy reduction.",
+      "outcome": "Containment and motion passed; scheduling time mapping did not."
+    },
+    "current_position": {
+      "strategic_role": "Recover the missing structural time axis without weakening privacy.",
+      "why_now": "The single empirical run isolated time mapping as the utility blocker.",
+      "outcome": "A synthetic-first mapper may earn one fresh bounded local measurement.",
+      "unlocks": [
+        "One at-most-80-file time-axis measurement after full pre-access verification."
+      ],
+      "does_not_solve": [
+        "No anonymity, fixture, provider, product or production authority opens."
+      ],
+      "orientation_statement": "Repair structure; do not relax privacy or retry content automatically."
+    },
+    "next_operation": {
+      "operation_id": "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal",
+      "active_tranche": "Raisa local-only historical Diary structural time-axis recovery rehearsal",
+      "objective": "Recover trustworthy time mapping under the local privacy boundary.",
+      "authority_source": "Yuri's historical Diary direction, delegated gate timing and uninterrupted-development authority.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_synthetic_first_structural_time_axis_recovery_plan"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only",
+    "no_product_patient_appointment_clinical_or_protected_data",
+    "allow_local_only_historical_diary_snapshot_measured_privacy_probe",
+    "historical_diary_privacy_subgate_contract_sha256_e312d58d7743b9b4d79d8a947b765732eea142f47586e0bd1f4e738047802615",
+    "historical_diary_access_one_leaf_root_one_dense_day_nonrecursive_maximum_80_files",
+    "historical_diary_access_maximum_134217728_total_bytes_and_8388608_per_file",
+    "historical_diary_access_read_only_no_symlink_or_reparse_traversal",
+    "historical_diary_access_new_ignored_output_root_ephemeral_in_memory_key_and_failure_cleanup",
+    "historical_diary_access_no_network_provider_model_prompt_telemetry_clipboard_or_external_release",
+    "historical_diary_access_no_raw_text_identity_filename_timestamp_key_or_mapping_commit",
+    "historical_diary_access_strongest_result_locally_restricted_candidate_without_downstream_authority",
+    "historical_diary_access_no_fixture_memory_rag_product_runtime_route_api_client_database_or_configuration"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "historical-diary-measured-privacy-prepublication-controls-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-measured-privacy",
+      "role": "orchestrator",
+      "resource_id": "measured-privacy-prepublication-controls",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Private-data workflow and closeout controls remain bounded, typed and compact before content or publication.",
+      "observed_error": "Five contained lapses covered one ordinary collect-only command, six metadata selector revisions, one false convention label, one forbidden continuation path set and one over-budget expanded incident intent.",
+      "detection_method": "Provider-free readback, aggregate-only bind codes, synthetic tests and the continuation and clockwork validators rejected each lapse before its protected boundary.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.private_data_prepublication_controls_require_compact_typed_reading",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use provider-free tests, aggregate-first binding, label-position tests, governance-only continuation paths and one compact incident.",
+        "prevention_control": "A typed detail artifact records related bounded lapses while one compact register observation stays within the clockwork budget.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-655.md",
+          "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/evidence.json"
+        ]
+      },
+      "baton_summary": "consolidates five contained prepublication lapses and their compact deterministic controls."
+    }
+  ]
+}

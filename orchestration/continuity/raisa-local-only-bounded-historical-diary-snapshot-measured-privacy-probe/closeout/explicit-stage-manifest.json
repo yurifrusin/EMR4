@@ -1,0 +1,31 @@
+{
+  "schema_version": "ariadne.governance_explicit_stage_manifest.v1",
+  "status": "passed",
+  "source_head": "a0887004298fbe3b3509f29c7844c228af16d4b3",
+  "derivation": "admitted_intent_clockwork_contract_intersect_git_inventory",
+  "paths": [
+    "docs/ariadne-agent-error-correction-register-revision-655.md",
+    "docs/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe-pre-verifier-receipt.json",
+    "orchestration/agent_inbox/codex/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe-sol-acceptance.md",
+    "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/closeout/closeout-driver-result.json",
+    "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/closeout/closeout-intent.json",
+    "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/closeout/explicit-stage-manifest.json",
+    "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/closeout/prepublication-contained-lapses.json",
+    "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/closeout/pushover-notification-receipt.json",
+    "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/efficacy-reading.json",
+    "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/evidence.json",
+    "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/next-tranche-contract.json",
+    "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/report.md",
+    "orchestration/human_inbox/yuri/2026-08-24--raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe.md"
+  ],
+  "path_count": 14,
+  "allowlist_path_count": 41,
+  "tracked_path_count": 0,
+  "allowlisted_untracked_path_count": 14,
+  "excluded_untracked_path_count": 682,
+  "unexpected_tracked_paths": [],
+  "git_add_invocations": 0,
+  "git_index_mutations": 0,
+  "docs_branding_included": false
+}

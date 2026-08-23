@@ -1,0 +1,46 @@
+{
+  "schema_version": "raisa.historical_diary_structural_time_axis_recovery_contract.v1",
+  "operation_id": "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal",
+  "parent_operation_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+  "parent_source": "a0887004298fbe3b3509f29c7844c228af16d4b3",
+  "parent_result": "revision_required",
+  "reason_code": "insufficient_time_mapping",
+  "objective": "Recover trustworthy structural time mapping without weakening the accepted local privacy boundary.",
+  "authorised_sequence": [
+    "fresh_five_source_rehydration",
+    "freeze_synthetic_first_time_axis_plan",
+    "implement_closed_structural_time_mapper",
+    "pass_hostile_and_unchanged_privacy_controls",
+    "bind_one_fresh_ignored_manifest",
+    "run_at_most_one_local_content_measurement",
+    "closeout_truthful_typed_result"
+  ],
+  "required_preservation": {
+    "maximum_leaf_roots": 1,
+    "maximum_dense_days": 1,
+    "recursive": false,
+    "maximum_files": 80,
+    "maximum_total_bytes": 134217728,
+    "maximum_per_file_bytes": 8388608,
+    "maximum_content_runs": 1,
+    "raw_or_private_output": false,
+    "provider_network_or_model_use": false,
+    "strongest_result": "locally_restricted_candidate",
+    "downstream_authority": false
+  },
+  "acceptance_floor": {
+    "source_value_leakage_count": 0,
+    "mapped_time_observations_minimum": 1,
+    "stable_linkage_records_minimum": 1,
+    "adjacent_changes_minimum": 1,
+    "word_cleanup_required": true,
+    "key_and_mapping_persistence_allowed": false
+  },
+  "closed_surfaces": [
+    "fixture_or_memory_promotion",
+    "provider_or_model_transmission",
+    "product_runtime_route_api_client_or_database",
+    "ordinary_practice_enablement",
+    "production_deployment_release_pages_or_protected_refs"
+  ]
+}
