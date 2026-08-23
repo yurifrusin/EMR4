@@ -1,0 +1,37 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review",
+  "source_head": "5a70ddef85e4d2f1350b885ac89e910916e2d7aa",
+  "result": "repository_work_exhausted_root_user_decision_identified",
+  "readiness": {
+    "prior_counts": "6_3_3",
+    "current_counts": "11_0_1",
+    "repository_prerequisites_remaining": 0,
+    "external_facts_inferred": 0,
+    "human_choices_inferred": 0,
+    "ordinary_admission_releases": 0
+  },
+  "workflow": {
+    "new_runtime_control_layers": 0,
+    "new_product_source_files": 0,
+    "provider_calls": 0,
+    "model_workers": 0,
+    "focused_tests_passed": 10,
+    "current_descendant_tests_passed": 52,
+    "hostile_mutations_rejected": 35,
+    "prepublication_closeout_rejections": 5,
+    "nonpublishing_diagnostic_reproductions": 3,
+    "committed_publication_failures": 0,
+    "retries_after_publication": 0,
+    "ordinary_implementation_corrections_before_candidate": 2,
+    "historical_source_frozen_checks_rejected_at_current_head": 4
+  },
+  "clockwork": {
+    "bound_closeout_driver_selected": true,
+    "caller_authored_git_id": false,
+    "manual_test_selection_for_closeout": false,
+    "manual_stage_path_transcription": false,
+    "automatic_staging": false
+  },
+  "assessment": "The review stopped repository work at the evidence boundary instead of inventing another implementation layer. Two ordinary pre-candidate corrections tightened whitespace-insensitive accepted-prose reading and plan-boundary wording; they were normal test-driven implementation work. Four deliberately source-frozen historical checks rejected later accepted descendant changes and were not weakened. Five bound-driver invocations then failed before publication: the semantic parent list held two genuine parents while the legacy transaction admits one, a semantically equivalent protected-boundary phrase did not match the exact mandatory token, the threat delta lacked its Brisbane timestamp, that tracked correction had not yet been committed, and recording the incident required a manually pre-authored prospective revision note. Three nonpublishing diagnostics were required because the driver returned only clockwork_tick_failed. These residual ergonomic mismatches are retained without weakening the schema. The next brief reduces the genuine attention fork to its root decision."
+}

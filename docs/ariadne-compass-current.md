@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> A safe clock is useful when its operator can take one reading instead of rebuilding the dial.
+> Ask for the root decision once; derive later gates only after its answer.
 
 ## North star
 
@@ -648,22 +648,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Interpreter, Git identity, test order and stage-path selection become machine readings. Lineage parent: `ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review`.
 316. **Replace model-operated closeout mechanics with deterministic readings while keeping all safety evidence. — Provider-free governance clockwork bound closeout entrypoint live-adoption efficacy review**
    One live tick determines whether the bound driver is ready for default eligible governance use. Lineage parent: `ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal`.
+317. **Stop repository ceremony at the boundary where only external facts and human decisions remain. — Provider-free read-only canonical check-in ordinary-practice admission blocker-priority review**
+   One exact dependency ranking identifies the smallest genuine user-attention fork. Lineage parent: `ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review`.
 
 ## Current position
 
-**Use the new control under real clockwork mutation conditions and measure its efficacy. — Provider-free governance clockwork bound closeout entrypoint live-adoption efficacy review**
+**Present the root operational-evidence decision without prematurely asking for downstream governance choices. — Provider-free read-only canonical check-in ordinary-practice admission blocker-priority review**
 
-**Why this proof came next:** The nonpublishing rehearsal passed and live adoption is the remaining proof boundary.
+**Why this proof came next:** All repository prerequisites are accepted and the remaining evidence must bind to a human-selected target.
 
-Conditional acceptance is bound to the fixed driver result after both verification phases.
+One concise brief asks whether to commence evidence acquisition and names the target and practice scope required on yes.
 
 ### What this unlocks
 
-- Default bound-driver use for eligible semantic governance closeouts.
+- A single coherent Yuri decision instead of repeated piecemeal attention requests.
 
 ### What it does not solve
 
-- It does not stage files, reduce tests or qualify a worker Harness.
+- It does not select a target, access an environment, provision a secret or enable ordinary practice.
 
 ## Continuity and authority
 
@@ -1254,7 +1256,6 @@ Prerequisites:
 - `docs/ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair-plan.md`
 - `docs/ariadne-cf-d2-workflow-incident-diagnosis.md`
 - `docs/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-rehearsal-plan.md`
-- `docs/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-closeout.md`
 - `docs/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-plan.md`
 - `docs/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-plan.md`
 - `docs/ariadne-clockwork-postpublication-validation-cadence-mapping-review-plan.md`
@@ -1679,6 +1680,8 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-closeout.md`
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-plan.md`
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md`
+- `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-closeout.md`
+- `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-plan.md`
 - `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md`
 - `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review-closeout.md`
 - `docs/raisa-provider-free-read-only-check-in-attempt-007-redaction-forbidden-field-and-cleanup-projection-coordinate-diagnosis-closeout.md`
@@ -2122,7 +2125,6 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-reception-one-time-reschedule-gemini-review-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-active-operation-latch-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-cf-d2-workflow-fluidity-repair-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-command-manifest.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-review-packet.md`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-broker-gear-gemini37-review-worktree-preflight.json`
@@ -2495,6 +2497,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-pre-verifier-acceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-preplanning-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-packet.md`
@@ -2792,7 +2795,6 @@ Prerequisites:
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/migration-report.md`
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/provider-free-migration-evidence.json`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal/report.md`
-- `orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review/evidence.json`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review/report.md`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair/report.md`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review/report.md`
@@ -3148,6 +3150,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md`
+- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/evidence.json`
+- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/report.md`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/evidence.json`
@@ -3957,4 +3961,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 421; continuity graph revision 439._
+_Compass map revision 422; continuity graph revision 440._

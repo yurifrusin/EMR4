@@ -1,0 +1,80 @@
+{
+  "schema_version": "ariadne.closeout_rejection_evidence.v1",
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review",
+  "attempt": 1,
+  "stage": "semantic_intent_expansion",
+  "reason": "tick_transaction_manifest",
+  "underlying_reason": "node_relationship_invalid",
+  "supplied_parent_count": 2,
+  "admitted_parent_count": 1,
+  "command_execution_started": false,
+  "generation_constructed": false,
+  "publication_committed": false,
+  "pointer_moved": false,
+  "canonical_state": "unchanged",
+  "protected_refs_changed": false,
+  "correction": "retain_one_controlling_parent_and_preserve_other_lineage_in_evidence",
+  "second_attempt": {
+    "stage": "semantic_intent_expansion",
+    "reason": "tick_next_boundaries_floor",
+    "cause": "semantically_equivalent_noncanonical_boundary_phrase",
+    "command_execution_started": false,
+    "generation_constructed": false,
+    "publication_committed": false,
+    "pointer_moved": false,
+    "canonical_state": "unchanged",
+    "correction": "copy_exact_required_boundary_floor_tokens"
+  },
+  "third_attempt": {
+    "stage": "prospective_current_node_evidence",
+    "reason": "tick_prospective_current_node_evidence",
+    "error": "docs/security/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-threat-model-delta.md:timestamp_count",
+    "command_execution_started": false,
+    "generation_constructed": false,
+    "publication_committed": false,
+    "pointer_moved": false,
+    "canonical_state": "unchanged",
+    "correction": "add_exact_brisbane_timestamp_header"
+  },
+  "diagnostic_reproduction": {
+    "mode": "verify",
+    "publication_capability": false,
+    "reason_recovered": "tick_prospective_current_node_evidence",
+    "driver_coarse_reason": "clockwork_tick_failed"
+  },
+  "fourth_attempt": {
+    "stage": "semantic_verification",
+    "reason": "tick_semantic_verification",
+    "detail": "tracked_worktree_not_clean",
+    "tracked_drift": 1,
+    "command_execution_started": false,
+    "generation_constructed": false,
+    "publication_committed": false,
+    "pointer_moved": false,
+    "canonical_state": "unchanged",
+    "correction": "commit_the_single_tracked_timestamp_correction"
+  },
+  "second_diagnostic_reproduction": {
+    "mode": "verify",
+    "publication_capability": false,
+    "reason_recovered": "tracked_worktree_not_clean",
+    "driver_coarse_reason": "clockwork_tick_failed"
+  },
+  "fifth_attempt": {
+    "stage": "incident_revision_reading",
+    "reason": "tick_incident_revision_reading",
+    "expected_path": "docs/ariadne-agent-error-correction-register-revision-650.md",
+    "command_execution_started": false,
+    "generation_constructed": false,
+    "publication_committed": false,
+    "pointer_moved": false,
+    "canonical_state": "unchanged",
+    "correction": "supply_exact_machine_predictable_revision_reading"
+  },
+  "third_diagnostic_reproduction": {
+    "mode": "verify",
+    "publication_capability": false,
+    "reason_recovered": "tick_incident_revision_reading",
+    "driver_coarse_reason": "clockwork_tick_failed"
+  }
+}

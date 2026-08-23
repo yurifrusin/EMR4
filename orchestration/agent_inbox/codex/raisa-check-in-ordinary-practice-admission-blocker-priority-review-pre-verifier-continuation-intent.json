@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_deterministic_check_in_admission_blocker_priority_candidate",
+  "assessed_stage": "check_in_admission_blocker_priority_pre_verifier_acceptance",
+  "active_evidence_paths": [
+    "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/contract.json",
+    "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/evidence.json",
+    "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/report.md",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": []
+}

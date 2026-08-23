@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_push",
+  "planned_action": "push_accepted_check_in_blocker_priority_closeout_then_continue_root_decision_brief",
+  "assessed_stage": "check_in_operational_evidence_root_decision_brief_preplanning",
+  "active_evidence_paths": [
+    "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/closeout/closeout-driver-result.json",
+    "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/closeout/explicit-stage-manifest.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": []
+}

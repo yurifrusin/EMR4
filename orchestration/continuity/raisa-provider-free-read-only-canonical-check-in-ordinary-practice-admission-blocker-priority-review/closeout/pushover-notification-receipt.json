@@ -1,0 +1,9 @@
+{
+  "schema_version": "emr4.pushover_notification_receipt.v1",
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review",
+  "sent_at": "2026-08-23T22:32:36.1602337+10:00",
+  "request": "cb012fd3-e37f-4ddf-8f51-14652197716c",
+  "status": 1,
+  "contains_phi": false,
+  "next": "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief"
+}

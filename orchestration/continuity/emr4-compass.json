@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 421,
-  "updated_at": "2026-08-23T22:00:45.8830204+10:00",
-  "source_graph_revision": 439,
-  "orientation_statement": "A safe clock is useful when its operator can take one reading instead of rebuilding the dial.",
+  "map_revision": 422,
+  "updated_at": "2026-08-23T22:32:36.1602337+10:00",
+  "source_graph_revision": 440,
+  "orientation_statement": "Ask for the root decision once; derive later gates only after its answer.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5347,24 +5347,34 @@
         "docs/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-plan.md",
         "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review/report.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review",
+      "lineage_parent": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review",
+      "strategic_role": "Stop repository ceremony at the boundary where only external facts and human decisions remain.",
+      "outcome": "One exact dependency ranking identifies the smallest genuine user-attention fork.",
+      "evidence": [
+        "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-plan.md",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/report.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review",
-    "strategic_role": "Use the new control under real clockwork mutation conditions and measure its efficacy.",
-    "why_now": "The nonpublishing rehearsal passed and live adoption is the remaining proof boundary.",
-    "outcome": "Conditional acceptance is bound to the fixed driver result after both verification phases.",
+    "node_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review",
+    "strategic_role": "Present the root operational-evidence decision without prematurely asking for downstream governance choices.",
+    "why_now": "All repository prerequisites are accepted and the remaining evidence must bind to a human-selected target.",
+    "outcome": "One concise brief asks whether to commence evidence acquisition and names the target and practice scope required on yes.",
     "unlocks": [
-      "Default bound-driver use for eligible semantic governance closeouts."
+      "A single coherent Yuri decision instead of repeated piecemeal attention requests."
     ],
     "does_not_solve": [
-      "It does not stage files, reduce tests or qualify a worker Harness."
+      "It does not select a target, access an environment, provision a secret or enable ordinary practice."
     ],
     "evidence": [
-      "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review/evidence.json",
-      "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review/report.md",
-      "docs/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-closeout.md",
-      "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-sol-acceptance.md"
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/evidence.json",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/report.md",
+      "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

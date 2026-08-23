@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 649,
+  "register_revision": 650,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -43618,6 +43618,42 @@
       },
       "incident_id": "AER-1133",
       "attempt_id": "clock-d263eb3682865a6a09f7f901",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-admission-blocker-priority-review",
+      "role": "orchestrator",
+      "resource_id": "clockwork-semantic-closeout-parent-selector",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The compact closeout supplies one controlling parent, exact closed boundary tokens and a Brisbane timestamp on every prospective human-evidence document.",
+      "observed_error": "Five bound-driver invocations failed before publication: two genuine parents violated the legacy singleton relationship, a semantically equivalent boundary phrase missed the exact floor token, the threat delta omitted its required Timestamp line, that tracked correction had not yet been committed, and the incident observation required its prospective revision note.",
+      "detection_method": "Semantic, prospective-evidence, clean-worktree and incident-reading validation rejected every mismatch before generation construction, publication or pointer movement; nonpublishing diagnostics recovered the detailed errors hidden by the driver.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/event-001-semantic-parent-cardinality-rejection.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.semantic_form_legacy_shape_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Retain one controlling parent, copy the exact mandatory boundary floor, add the Brisbane timestamp, commit that tracked correction and supply the exact prospective revision reading.",
+        "prevention_control": "A future ergonomic refinement may expose a singular parent, inherit boundary-floor tokens, derive human-evidence and incident-revision headers, and forward inner tick diagnostics including dirty paths.",
+        "evidence_paths": [
+          "orchestration_harness/transactional_closeout.py",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1134",
+      "attempt_id": "clock-e85e0395e7de41ff132fbf2b",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

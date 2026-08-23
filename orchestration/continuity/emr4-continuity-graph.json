@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 439,
+  "graph_revision": 440,
   "harvests": [],
   "nodes": [
     {
@@ -35470,9 +35470,116 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review",
+      "title": "Provider-free read-only canonical check-in ordinary-practice admission blocker-priority review",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admits this provider-free read-only ranking and one non-actuating decision brief.",
+          "GPT Sol owns the serial evidence join; DeepSeek, Gemini and native subagents have no work package.",
+          "No product, provider, environment, data, runtime or protected surface opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-readiness-reconciliation-eleven-zero-one",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/evidence.json",
+          "status": "accepted",
+          "summary": "Accept the exact progression from 6/3/3 to 11/0/1 with zero repository prerequisites remaining."
+        },
+        {
+          "id": "rank-target-scope-as-root-dependency",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/report.md",
+          "status": "accepted",
+          "summary": "Place target environment and practice scope before custody, provisioning, independent readback and separate activation."
+        },
+        {
+          "id": "select-non-actuating-root-decision-brief",
+          "source": "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-closeout.md",
+          "status": "accepted",
+          "summary": "Use one concise provider-free brief, then pause for genuine Yuri attention instead of manufacturing repository work."
+        }
+      ],
+      "claim_scope": [
+        "The current ordinary-practice readiness posture is exactly 11 satisfied, zero blocking and one operational-evidence gap.",
+        "All six external facts remain absent and all five human choices remain unselected.",
+        "No repository engineering prerequisite remains.",
+        "The exact dependency order preserves independent readback and separate final activation.",
+        "No ordinary admission was released and no product or operational surface changed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-plan.md",
+          "docs/security/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/report.md",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-23--raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-ordinary-practice-admission-blocker-priority-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-ordinary-practice-admission-blocker-priority-review-pre-verifier-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration/agent_inbox/codex/raisa-check-in-ordinary-practice-admission-blocker-priority-review-preplanning-continuation-intent.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-ordinary-practice-admission-blocker-priority-review-pre-verifier-continuation-intent.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/contract.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/contract.schema.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/evidence.schema.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/event-001-semantic-parent-cardinality-rejection.json",
+          "scripts/raisa_provider_free_read_only_canonical_check_in_admission_blocker_priority_review.py",
+          "tests/test_raisa_provider_free_read_only_canonical_check_in_admission_blocker_priority_review.py"
+        ]
+      },
+      "unresolved_gates": [
+        "A real target environment and practice scope remain unselected.",
+        "All role, opaque-reference, custody, rotation, break-glass, manifest and independent freshness evidence remains absent.",
+        "Ordinary activation remains a separate closed lasting-impact decision.",
+        "Product, provider, data, deployment, Pages and protected refs remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T22:32:36.1602337+10:00",
+      "updated_at": "2026-08-23T22:32:36.1602337+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "485b4170d998dbfd663907124929c6f89125e70a",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T22:00:45.8830204+10:00"
+  "updated_at": "2026-08-23T22:32:36.1602337+10:00"
 }
