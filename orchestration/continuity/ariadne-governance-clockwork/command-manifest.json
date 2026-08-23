@@ -2,57 +2,39 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "reference-packet-closeout-tick-check",
+      "command_id": "clockwork-ergonomics-review-closeout-tick-check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_governance_clockwork_tick",
         "--check",
         "--intent",
-        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/closeout-intent.json"
+        "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "reference-packet-contract-schema",
+      "command_id": "clockwork-ergonomics-measurement-contract-json",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "jsonschema",
-        "-i",
-        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/contract.json",
-        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/contract.schema.json"
+        "json.tool",
+        "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/measurement-contract.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "reference-packet-evidence-schema",
+      "command_id": "clockwork-ergonomics-evidence-json",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
-        "jsonschema",
-        "-i",
-        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.json",
-        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.schema.json"
+        "json.tool",
+        "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/evidence.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
     {
-      "command_id": "reference-packet-focused-tests",
-      "executable": ".venv/Scripts/python.exe",
-      "arguments": [
-        "-m",
-        "scripts.ariadne_provider_free_pytest",
-        "--repo-root",
-        "C:/Users/sarashera/emr4",
-        "tests/test_raisa_provider_free_unmounted_canonical_check_in_reference_only_operational_evidence_conformance_packet_rehearsal.py",
-        "tests/test_check_in_environment_evidence_admission.py",
-        "tests/test_api_spine_artifacts.py"
-      ],
-      "completion_contract": "final_exit_code_zero_required"
-    },
-    {
-      "command_id": "reference-packet-governance-tests",
+      "command_id": "clockwork-ergonomics-governance-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",

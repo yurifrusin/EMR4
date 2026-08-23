@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 411,
-  "updated_at": "2026-08-23T15:18:50.3859558+10:00",
-  "source_graph_revision": 429,
-  "orientation_statement": "Take a measured provider-free read-only ergonomics reading, prefer deleting or deriving operator inputs, and stop before implementing any clockwork or Harness change.",
+  "map_revision": 412,
+  "updated_at": "2026-08-23T15:59:03.2163529+10:00",
+  "source_graph_revision": 430,
+  "orientation_statement": "Repair the existing tick at the prospective publication boundary, remove measured operator work, preserve every safety invariant and add no new form or approval gate.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5245,22 +5245,32 @@
         "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.json",
         "docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-closeout.md"
       ]
+    },
+    {
+      "node_id": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
+      "lineage_parent": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+      "strategic_role": "Measure the cost and benefit of the governance clockwork after extended native-Harness coupling work",
+      "outcome": "Strong safety is retained while one high-yield zero-added-bureaucracy interface repair is selected.",
+      "evidence": [
+        "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/evidence.json",
+        "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/report.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
-    "strategic_role": "Measure whether the governance clockwork can retain its safety while asking less clerical work of the orchestrator",
-    "why_now": "The reference-only packet is complete and its twelve corrected interface reruns join the extended DeepSeek gear history as a bounded evidence set.",
-    "outcome": "A read-only review will distinguish safety controls from avoidable operator inputs and rank only simplifications with measurable removed work.",
+    "node_id": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
+    "strategic_role": "Move complete prospective evidence validation and transaction-derived facts into the existing clockwork tick",
+    "why_now": "The latest accepted closeout required three rollbacks for facts computable before publication, and the review identifies a repair with zero net new operator burden.",
+    "outcome": "The existing tick will reject the full prospective evidence error set before pointer movement and own its transaction accounting without weakening rollback safety.",
     "unlocks": [
-      "A narrow evidence-backed plan for the highest-yield clockwork ergonomic repair, if one is justified."
+      "A matched future closeout can measure fewer postpublication rollbacks and operator inputs against unchanged safety coverage."
     ],
     "does_not_solve": [
-      "It does not change the live clockwork, qualify the native Harness, select check-in operational facts or authorize ordinary-practice activation."
+      "It does not qualify the native Harness, reconcile worker-allocation prose, select check-in operational facts or alter product behavior."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json",
-      "docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-closeout.md"
+      "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/evidence.json",
+      "docs/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review-closeout.md"
     ]
   },
   "decision_horizon": [

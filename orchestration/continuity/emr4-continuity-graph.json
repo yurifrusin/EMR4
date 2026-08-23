@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 429,
+  "graph_revision": 430,
   "harvests": [],
   "nodes": [
     {
@@ -34598,9 +34598,110 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
+      "title": "Provider-free read-only governance clockwork ergonomics and efficacy review",
+      "kind": "review",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri explicitly requested the provider-free read-only clockwork ergonomics review under standing uninterrupted-development authority.",
+          "GPT Sol held the serial measurement and acceptance lease.",
+          "No Harness, provider, product, runtime, external fact, protected evidence or protected ref opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "retain-clockwork-safety-mechanism",
+          "source": "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/evidence.json",
+          "status": "accepted",
+          "summary": "Retain the single writer, full-Git binding, protected-boundary floor, pointer-last publication and byte-exact rollback."
+        },
+        {
+          "id": "classify-operator-interface-overweight",
+          "source": "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/report.md",
+          "status": "accepted",
+          "summary": "Accept that manually authored facts and command shapes now impose disproportionate closeout cost despite strong containment."
+        },
+        {
+          "id": "retain-three-cross-harness-readings",
+          "source": "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/evidence.json",
+          "status": "accepted",
+          "summary": "Retain prepared, terminal and accepted_or_recovered as the only clockwork/Harness boundary readings; per-turn coupling remains retired."
+        },
+        {
+          "id": "select-prospective-evidence-and-derived-accounting-repair",
+          "source": "docs/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review-closeout.md",
+          "status": "accepted",
+          "summary": "Select the existing-tick repair that removes three measured rollback sequences with zero new operator fields, gates or documents."
+        }
+      ],
+      "claim_scope": [
+        "The live clockwork safety mechanism is effective and retains zero current canonical drift.",
+        "The sampled operator interface comprises 73,459 bytes, 1,173 lines and 785 scalar leaves across two intents.",
+        "Four accepted reviews disclose 31 procedural lapses and zero product-semantic lapses.",
+        "Native Harness terminal traceability improved, but useful-completion superiority and comparative reliability remain unproved.",
+        "One narrow existing-tick repair is justified; no implementation occurred in this review."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review-plan.md",
+          "docs/security/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/evidence.json",
+          "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/report.md",
+          "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-23--governance-clockwork-ergonomics-and-efficacy-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-ergonomics-efficacy-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-ergonomics-efficacy-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-ergonomics-efficacy-review-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-ergonomics-efficacy-review-postcompaction-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/measurement-contract.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The recommended repair remains unimplemented until the next exact provider-free tranche passes.",
+        "Native useful-completion reliability remains unproved and the pinned occupied profile remains paused.",
+        "The generic Authority Allocation prose conflict remains recorded but is outside the first repair.",
+        "All check-in external operational facts and human choices remain closed.",
+        "Product, provider, runtime, deployment, Pages and protected refs remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T15:59:03.2163529+10:00",
+      "updated_at": "2026-08-23T15:59:03.2163529+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "702b5c2fd59c83f7335aa0b1d01d4fea52d248dd",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T15:18:50.3859558+10:00"
+  "updated_at": "2026-08-23T15:59:03.2163529+10:00"
 }

@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "702b5c2fd59c83f7335aa0b1d01d4fea52d248dd",
+  "source_commit": "702b5c2fd59c83f7335aa0b1d01d4fea52d248dd",
+  "generation_id": "gen-1de7df2391fd623f26841d7f74930331a59bcf22e8b433890e3166ec1fefcfef",
+  "bundle_sha256": "1de7df2391fd623f26841d7f74930331a59bcf22e8b433890e3166ec1fefcfef",
+  "previous_generation_id": "gen-13e27d57265f40869dc96e027f1ef24010cad358207d5dea82fa2b7b8d53fa1f",
+  "previous_source_commit": "702b5c2fd59c83f7335aa0b1d01d4fea52d248dd",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 212,
+  "operation_id": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
+  "event_kind": "clean_closeout",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}
