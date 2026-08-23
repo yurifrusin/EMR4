@@ -64,10 +64,10 @@ def test_content_run_terminal_prevents_second_execute(monkeypatch, tmp_path):
         probe.execute()
 
 
-def test_recovery_attempt_root_and_projection_schema_are_exact():
+def test_successor_attempt_root_and_projection_schema_are_exact():
     assert probe.ATTEMPT_ROOT.as_posix().endswith(
-        "local_data/historical-diary-trove/measured-probes/2026-08-24-time-axis-v1"
+        "local_data/historical-diary-trove/measured-probes/2026-08-24-story-coordinate-v1"
     )
     assert get_args(probe.PrivateProjection.model_fields["schema_version"].annotation) == (
-        "historical_diary.private_derived_grid_projection.v2",
+        "historical_diary.private_derived_grid_projection.v3",
     )

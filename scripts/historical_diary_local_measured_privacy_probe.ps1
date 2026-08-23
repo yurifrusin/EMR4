@@ -10,10 +10,12 @@ $MaximumDocuments = 80
 $MaximumCellsPerDocument = 100000
 $MaximumCellCharacters = 65536
 $MaximumPrivateCharacters = 16777216
+$MaximumStoryAnchorsPerDocument = 4096
+$MaximumVerticalQuarterPoints = 100000
 $ExpectedSchema = "historical_diary.private_binding_manifest.v1"
-$OutputSchema = "historical_diary.private_word_cell_extraction.v1"
+$OutputSchema = "historical_diary.private_word_story_coordinate_extraction.v2"
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
-$expectedManifest = Join-Path $repositoryRoot "local_data\historical-diary-trove\measured-probes\2026-08-24-time-axis-v1\private-binding-manifest.json"
+$expectedManifest = Join-Path $repositoryRoot "local_data\historical-diary-trove\measured-probes\2026-08-24-story-coordinate-v1\private-binding-manifest.json"
 
 function Convert-WordColour {
     param($Value)
@@ -27,6 +29,127 @@ function Convert-WordColour {
     } catch {
         return -1
     }
+}
+
+function Convert-TimeTokenToMinute {
+    param([string]$Value)
+
+    if ($Value -notmatch '^(?<hour>[01]?\d|2[0-3])[:.](?<minute>[0-5]\d)(?:\s*(?<ampm>[AaPp][Mm]))?$') {
+        return $null
+    }
+    $hour = [int]$Matches.hour
+    $minute = [int]$Matches.minute
+    $ampm = [string]$Matches.ampm
+    if ($ampm.Length -gt 0 -and ($hour -lt 1 -or $hour -gt 12)) {
+        return $null
+    }
+    if ($ampm -ieq 'pm' -and $hour -lt 12) {
+        $hour += 12
+    } elseif ($ampm -ieq 'am' -and $hour -eq 12) {
+        $hour = 0
+    }
+    return ($hour * 60) + $minute
+}
+
+function Get-PrivateWordCoordinate {
+    param($Range)
+
+    try {
+        $page = [int]$Range.Information(1)
+        $vertical = [double]$Range.Information(6)
+        if (
+            $page -lt 1 -or $page -gt 4096 -or
+            [double]::IsNaN($vertical) -or [double]::IsInfinity($vertical) -or
+            $vertical -lt 0
+        ) {
+            throw [System.InvalidOperationException]::new('closed_coordinate_unavailable')
+        }
+        $quarterPoints = [int][math]::Round(
+            $vertical * 4,
+            [System.MidpointRounding]::AwayFromZero
+        )
+        if ($quarterPoints -lt 0 -or $quarterPoints -gt $MaximumVerticalQuarterPoints) {
+            throw [System.InvalidOperationException]::new('closed_coordinate_out_of_range')
+        }
+        return [ordered]@{
+            coordinate_available = $true
+            page_ordinal = $page
+            vertical_quarter_points = $quarterPoints
+        }
+    } catch {
+        return [ordered]@{
+            coordinate_available = $false
+            page_ordinal = $null
+            vertical_quarter_points = $null
+        }
+    }
+}
+
+function Get-PrivateCellSegmentCoordinates {
+    param(
+        $CellRange,
+        [string]$Text
+    )
+
+    $body = $Text
+    if ($body.EndsWith("`r$([char]7)")) {
+        $body = $body.Substring(0, $body.Length - 2)
+    } elseif ($body.EndsWith([string][char]7)) {
+        $body = $body.Substring(0, $body.Length - 1)
+    }
+    $starts = [System.Collections.Generic.List[object]]::new()
+    $starts.Add([ordered]@{ offset = 0; follows_manual_line = $false })
+    $index = 0
+    while ($index -lt $body.Length) {
+        $character = $body[$index]
+        if ($character -eq [char]13 -or $character -eq [char]10 -or $character -eq [char]11) {
+            $manual = ($character -eq [char]11)
+            if (
+                $character -eq [char]13 -and
+                $index + 1 -lt $body.Length -and
+                $body[$index + 1] -eq [char]10
+            ) {
+                $index += 1
+            }
+            $starts.Add([ordered]@{
+                offset = $index + 1
+                follows_manual_line = $manual
+            })
+        }
+        $index += 1
+    }
+
+    $coordinates = [System.Collections.Generic.List[object]]::new()
+    for ($ordinal = 0; $ordinal -lt $starts.Count; $ordinal += 1) {
+        $start = $starts[$ordinal]
+        $coordinate = $null
+        if ([bool]$start.follows_manual_line) {
+            $coordinate = [ordered]@{
+                coordinate_available = $false
+                page_ordinal = $null
+                vertical_quarter_points = $null
+            }
+        } else {
+            $probeRange = $null
+            try {
+                $probeRange = $CellRange.Duplicate
+                $absoluteStart = [int]$CellRange.Start + [int]$start.offset
+                $probeRange.SetRange($absoluteStart, $absoluteStart)
+                $coordinate = Get-PrivateWordCoordinate -Range $probeRange
+            } finally {
+                if ($null -ne $probeRange) {
+                    [System.Runtime.InteropServices.Marshal]::ReleaseComObject($probeRange) | Out-Null
+                }
+            }
+        }
+        $coordinates.Add([ordered]@{
+            segment_ordinal = $ordinal
+            coordinate_available = [bool]$coordinate.coordinate_available
+            page_ordinal = $coordinate.page_ordinal
+            vertical_quarter_points = $coordinate.vertical_quarter_points
+        })
+    }
+    return @($coordinates.ToArray())
 }
 
 function New-ClosedPayload {
@@ -142,6 +265,7 @@ try {
     for ($sequence = 0; $sequence -lt $binding.files.Count; $sequence += 1) {
         $bound = $binding.files[$sequence]
         $cells = [System.Collections.Generic.List[object]]::new()
+        $storyTimeAnchors = [System.Collections.Generic.List[object]]::new()
         $document = $null
         $documentError = $null
         try {
@@ -154,6 +278,63 @@ try {
                 $documentsOpenedReadOnly = $false
                 $documentError = "document_open_failed"
             } else {
+                $mainStory = $null
+                $paragraphs = $null
+                try {
+                    $mainStory = $document.StoryRanges.Item(1)
+                    $paragraphs = $mainStory.Paragraphs
+                    for ($paragraphIndex = 1; $paragraphIndex -le $paragraphs.Count; $paragraphIndex += 1) {
+                        $paragraph = $null
+                        $paragraphRange = $null
+                        try {
+                            $paragraph = $paragraphs.Item($paragraphIndex)
+                            $paragraphRange = $paragraph.Range
+                            if (-not [bool]$paragraphRange.Information(12)) {
+                                $storyText = [string]$paragraphRange.Text
+                                $privateCharacterCount += $storyText.Length
+                                if ($privateCharacterCount -gt $MaximumPrivateCharacters) {
+                                    $reasonCode = "private_text_limit_exceeded"
+                                    throw [System.InvalidOperationException]::new("closed_total_text_limit")
+                                }
+                                $closedToken = $storyText.Trim(
+                                    [char[]]@([char]13, [char]7, [char]32, [char]9, [char]10, [char]11)
+                                )
+                                $timeMinute = Convert-TimeTokenToMinute -Value $closedToken
+                                if ($null -ne $timeMinute) {
+                                    if ($storyTimeAnchors.Count -ge $MaximumStoryAnchorsPerDocument) {
+                                        $reasonCode = "private_text_limit_exceeded"
+                                        throw [System.InvalidOperationException]::new("closed_story_anchor_limit")
+                                    }
+                                    $coordinate = Get-PrivateWordCoordinate -Range $paragraphRange
+                                    if ([bool]$coordinate.coordinate_available) {
+                                        $storyTimeAnchors.Add([ordered]@{
+                                            time_minute = [int]$timeMinute
+                                            page_ordinal = [int]$coordinate.page_ordinal
+                                            vertical_quarter_points = [int]$coordinate.vertical_quarter_points
+                                        })
+                                    }
+                                }
+                                $storyText = $null
+                                $closedToken = $null
+                            }
+                        } finally {
+                            if ($null -ne $paragraphRange) {
+                                [System.Runtime.InteropServices.Marshal]::ReleaseComObject($paragraphRange) | Out-Null
+                            }
+                            if ($null -ne $paragraph) {
+                                [System.Runtime.InteropServices.Marshal]::ReleaseComObject($paragraph) | Out-Null
+                            }
+                        }
+                    }
+                } finally {
+                    if ($null -ne $paragraphs) {
+                        [System.Runtime.InteropServices.Marshal]::ReleaseComObject($paragraphs) | Out-Null
+                    }
+                    if ($null -ne $mainStory) {
+                        [System.Runtime.InteropServices.Marshal]::ReleaseComObject($mainStory) | Out-Null
+                    }
+                }
+
                 $cellCount = 0
                 for ($tableIndex = 1; $tableIndex -le $document.Tables.Count; $tableIndex += 1) {
                     $table = $null
@@ -180,6 +361,9 @@ try {
                                     $reasonCode = "private_text_limit_exceeded"
                                     throw [System.InvalidOperationException]::new("closed_total_text_limit")
                                 }
+                                $segmentCoordinates = @(
+                                    Get-PrivateCellSegmentCoordinates -CellRange $range -Text $text
+                                )
                                 $cells.Add([ordered]@{
                                     table_index = $tableIndex
                                     row_index = [int]$cell.RowIndex
@@ -189,6 +373,7 @@ try {
                                     font_color = Convert-WordColour -Value $range.Font.Color
                                     bold = [bool]([int]$range.Font.Bold -ne 0)
                                     italic = [bool]([int]$range.Font.Italic -ne 0)
+                                    segment_coordinates = $segmentCoordinates
                                 })
                             } finally {
                                 if ($null -ne $range) {
@@ -227,6 +412,7 @@ try {
             sequence_index = $sequence
             observation_offset_seconds = [int]$bound.observation_offset_seconds
             cells = @($cells.ToArray())
+            story_time_anchors = @($storyTimeAnchors.ToArray())
             error_code = $documentError
         })
     }

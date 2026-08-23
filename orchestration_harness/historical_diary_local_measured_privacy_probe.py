@@ -28,7 +28,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 BOUND_ROOT = REPO_ROOT / "local_data/historical-diary-trove/raw/pilot_01"
 ATTEMPT_ROOT = (
     REPO_ROOT
-    / "local_data/historical-diary-trove/measured-probes/2026-08-24-time-axis-v1"
+    / "local_data/historical-diary-trove/measured-probes/2026-08-24-story-coordinate-v1"
 )
 MANIFEST_PATH = ATTEMPT_ROOT / "private-binding-manifest.json"
 PRIVATE_PROJECTION_PATH = ATTEMPT_ROOT / "private-derived-projection.json"
@@ -49,6 +49,10 @@ TWO_DIGIT_YEAR_MAX = 2020
 METADATA_CONCORDANCE_SECONDS = 24 * 60 * 60
 MAX_SEGMENTS_PER_CELL = 4096
 MIN_DISTINCT_TIME_MINUTES = 3
+MAX_PAGE_ORDINAL = 4096
+MAX_VERTICAL_QUARTER_POINTS = 100_000
+MAX_STORY_ANCHORS_PER_SNAPSHOT = 4096
+MAX_STORY_DISTANCE_QUARTER_POINTS = 16
 
 TIME_TOKEN = re.compile(
     r"^(?P<hour>[01]?\d|2[0-3])[:.](?P<minute>[0-5]\d)(?:\s*(?P<ampm>[AaPp][Mm]))?$"
@@ -84,6 +88,28 @@ class Decision(str, Enum):
     LOCALLY_RESTRICTED_CANDIDATE = "locally_restricted_candidate"
 
 
+class PrivateSegmentCoordinate(StrictFrozenModel):
+    segment_ordinal: int = Field(ge=0, lt=MAX_SEGMENTS_PER_CELL)
+    coordinate_available: bool
+    page_ordinal: int | None = Field(default=None, ge=1, le=MAX_PAGE_ORDINAL)
+    vertical_quarter_points: int | None = Field(
+        default=None, ge=0, le=MAX_VERTICAL_QUARTER_POINTS
+    )
+
+    @model_validator(mode="after")
+    def validate_coordinate_pair(self) -> "PrivateSegmentCoordinate":
+        paired = self.page_ordinal is not None and self.vertical_quarter_points is not None
+        if self.coordinate_available != paired:
+            raise ValueError("segment_coordinate_pair_invalid")
+        return self
+
+
+class PrivateStoryTimeAnchor(StrictFrozenModel):
+    time_minute: int = Field(ge=0, le=1439)
+    page_ordinal: int = Field(ge=1, le=MAX_PAGE_ORDINAL)
+    vertical_quarter_points: int = Field(ge=0, le=MAX_VERTICAL_QUARTER_POINTS)
+
+
 class PrivateCell(StrictFrozenModel):
     table_index: int = Field(ge=1, le=128)
     row_index: int = Field(ge=1, le=4096)
@@ -93,17 +119,33 @@ class PrivateCell(StrictFrozenModel):
     font_color: int = Field(ge=-1, le=16_777_215)
     bold: bool
     italic: bool
+    segment_coordinates: tuple[PrivateSegmentCoordinate, ...] = Field(
+        max_length=MAX_SEGMENTS_PER_CELL
+    )
+
+    @model_validator(mode="after")
+    def validate_segment_coordinates(self) -> "PrivateCell":
+        segments = _cell_segments(self.text)
+        ordinals = [item.segment_ordinal for item in self.segment_coordinates]
+        if len(self.segment_coordinates) != len(segments) or ordinals != list(
+            range(len(segments))
+        ):
+            raise ValueError("segment_coordinate_sequence_invalid")
+        return self
 
 
 class PrivateSnapshot(StrictFrozenModel):
     sequence_index: int = Field(ge=0, lt=MAX_FILES)
     observation_offset_seconds: int = Field(ge=0, le=172800)
     cells: tuple[PrivateCell, ...]
+    story_time_anchors: tuple[PrivateStoryTimeAnchor, ...] = Field(
+        max_length=MAX_STORY_ANCHORS_PER_SNAPSHOT
+    )
     error_code: Literal["document_open_failed", "document_structure_failed"] | None
 
 
 class PrivateExtraction(StrictFrozenModel):
-    schema_version: Literal["historical_diary.private_word_cell_extraction.v1"]
+    schema_version: Literal["historical_diary.private_word_story_coordinate_extraction.v2"]
     status: Literal["passed", "revision_required"]
     reason_code: Literal[
         "passed",
@@ -173,7 +215,7 @@ class ProjectedCell(StrictFrozenModel):
     segment_ordinal: int = Field(ge=0, lt=MAX_SEGMENTS_PER_CELL)
     resource_ordinal: str = Field(pattern=r"^resource_[0-9]+_[0-9]+$")
     time_minute: int | None = Field(default=None, ge=0, le=1439)
-    time_mapping: Literal["explicit_same_cell_anchor", "unmapped"]
+    time_mapping: Literal["explicit_story_same_page_coordinate", "unmapped"]
     format_bucket: str = Field(pattern=r"^format_[0-9]+$")
     length_bucket: Literal["short", "medium", "long", "very_long"]
     content_bucket: Literal["structural_text", "identifier_like", "sensitive_note_like"]
@@ -191,12 +233,13 @@ class ProjectedSnapshot(StrictFrozenModel):
 
 
 class PrivateProjection(StrictFrozenModel):
-    schema_version: Literal["historical_diary.private_derived_grid_projection.v2"]
+    schema_version: Literal["historical_diary.private_derived_grid_projection.v3"]
     evidence_label: Literal["private_derived_ignored_local_only"]
     source_day_policy: Literal["relative_day_zero_only"]
     source_filename_or_path_emitted: Literal[False]
     exact_source_timestamp_emitted: Literal[False]
     key_or_mapping_emitted: Literal[False]
+    page_coordinate_or_distance_emitted: Literal[False]
     snapshots: tuple[ProjectedSnapshot, ...]
 
 
@@ -563,6 +606,8 @@ def _time_minute(value: str) -> int | None:
     hour = int(match.group("hour"))
     minute = int(match.group("minute"))
     ampm = (match.group("ampm") or "").lower()
+    if ampm and not 1 <= hour <= 12:
+        return None
     if ampm == "pm" and hour < 12:
         hour += 12
     elif ampm == "am" and hour == 12:
@@ -591,11 +636,6 @@ def _positive_interval_mode(minutes: set[int]) -> int | None:
         return None
     counts = Counter(deltas)
     return min(counts, key=lambda value: (-counts[value], value))
-
-
-def _axis_decreases(segments: tuple[str, ...]) -> bool:
-    anchors = [minute for value in segments if (minute := _time_minute(value)) is not None]
-    return any(after < before for before, after in zip(anchors, anchors[1:]))
 
 
 def _detectors(value: str) -> tuple[str, ...]:
@@ -639,6 +679,53 @@ def _ratio(successes: int, trials: int) -> dict[str, int | float | None]:
     }
 
 
+def _story_coordinate_mapping(
+    coordinate: PrivateSegmentCoordinate,
+    anchors: tuple[PrivateStoryTimeAnchor, ...],
+) -> tuple[int | None, str, str]:
+    """Map only a same-page, bounded, unambiguous explicit story anchor."""
+
+    if not coordinate.coordinate_available:
+        return None, "unmapped", "coordinate_unavailable"
+    if coordinate.page_ordinal is None or coordinate.vertical_quarter_points is None:
+        raise ProbeError("segment_coordinate_pair_invalid")
+    same_page = tuple(
+        anchor for anchor in anchors if anchor.page_ordinal == coordinate.page_ordinal
+    )
+    if not same_page:
+        return None, "unmapped", "same_page_anchor_unavailable"
+    candidates = {
+        (anchor.vertical_quarter_points, anchor.time_minute)
+        for anchor in same_page
+        if abs(anchor.vertical_quarter_points - coordinate.vertical_quarter_points)
+        <= MAX_STORY_DISTANCE_QUARTER_POINTS
+    }
+    if not candidates:
+        return None, "unmapped", "nearest_anchor_over_distance"
+    nearest_distance = min(
+        abs(vertical - coordinate.vertical_quarter_points)
+        for vertical, _minute in candidates
+    )
+    nearest_minutes = {
+        minute
+        for vertical, minute in candidates
+        if abs(vertical - coordinate.vertical_quarter_points) == nearest_distance
+    }
+    if len(nearest_minutes) != 1:
+        return None, "unmapped", "different_time_nearest_tie"
+    if nearest_distance == 0:
+        bucket = "mapped_zero_distance"
+    elif nearest_distance <= 4:
+        bucket = "mapped_within_one_point"
+    else:
+        bucket = "mapped_within_four_points"
+    return (
+        next(iter(nearest_minutes)),
+        "explicit_story_same_page_coordinate",
+        bucket,
+    )
+
+
 def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjection, dict[str, Any]]:
     if (
         extraction.status != "passed"
@@ -673,36 +760,31 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
     source_table_cell_count = 0
     source_segment_count = 0
     mapped_time_count = 0
-    explicit_anchor_count = 0
-    decreasing_axis_cell_count = 0
+    story_anchor_count = 0
+    distinct_story_time_minutes: set[int] = set()
+    mapping_outcomes: Counter[str] = Counter()
     distinct_time_minutes: set[int] = set()
 
     for snapshot in extraction.snapshots:
-        structured_cells: list[tuple[PrivateCell, tuple[str, ...], bool]] = []
+        story_anchor_count += len(snapshot.story_time_anchors)
+        distinct_story_time_minutes.update(
+            anchor.time_minute for anchor in snapshot.story_time_anchors
+        )
+        structured_cells: list[tuple[PrivateCell, tuple[str, ...]]] = []
         for cell in snapshot.cells:
             segments = _cell_segments(cell.text)
+            if len(cell.segment_coordinates) != len(segments):
+                raise ProbeError("segment_coordinate_sequence_invalid")
             if not any(segments):
                 continue
             source_table_cell_count += 1
-            decreases = _axis_decreases(segments)
-            if decreases:
-                decreasing_axis_cell_count += 1
-            for value in segments:
-                minute = _time_minute(value)
-                if minute is not None:
-                    explicit_anchor_count += 1
-                    if not decreases:
-                        distinct_time_minutes.add(minute)
-            structured_cells.append((cell, segments, decreases))
+            structured_cells.append((cell, segments))
 
         occurrences: Counter[str] = Counter()
         projected_cells: list[ProjectedCell] = []
-        for cell, segments, decreases in structured_cells:
-            current_minute: int | None = None
+        for cell, segments in structured_cells:
             for segment_ordinal, text in enumerate(segments):
-                anchor = _time_minute(text)
-                if anchor is not None:
-                    current_minute = None if decreases else anchor
+                if _time_minute(text) is not None:
                     continue
                 if not text or DATE_TOKEN.fullmatch(text):
                     continue
@@ -721,8 +803,14 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
                     "cell", "cell", f"{normalized}|{occurrence}", second_key
                 )
                 resource = f"resource_{cell.table_index}_{cell.column_index}"
+                current_minute, time_mapping, mapping_outcome = _story_coordinate_mapping(
+                    cell.segment_coordinates[segment_ordinal],
+                    snapshot.story_time_anchors,
+                )
+                mapping_outcomes[mapping_outcome] += 1
                 if current_minute is not None:
                     mapped_time_count += 1
+                    distinct_time_minutes.add(current_minute)
                 format_bucket = formats[
                     (cell.shading, cell.font_color, cell.bold, cell.italic)
                 ]
@@ -751,11 +839,7 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
                     segment_ordinal=segment_ordinal,
                     resource_ordinal=resource,
                     time_minute=current_minute,
-                    time_mapping=(
-                        "explicit_same_cell_anchor"
-                        if current_minute is not None
-                        else "unmapped"
-                    ),
+                    time_mapping=time_mapping,
                     format_bucket=format_bucket,
                     length_bucket=_length_bucket(text),
                     content_bucket=content_bucket,
@@ -786,12 +870,13 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
         )
 
     projection = PrivateProjection(
-        schema_version="historical_diary.private_derived_grid_projection.v2",
+        schema_version="historical_diary.private_derived_grid_projection.v3",
         evidence_label="private_derived_ignored_local_only",
         source_day_policy="relative_day_zero_only",
         source_filename_or_path_emitted=False,
         exact_source_timestamp_emitted=False,
         key_or_mapping_emitted=False,
+        page_coordinate_or_distance_emitted=False,
         snapshots=tuple(projected_snapshots),
     )
 
@@ -883,9 +968,9 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
         or stable_linkage == 0
         or total_changes == 0
         or mapped_ratio < 0.25
+        or story_anchor_count < MIN_DISTINCT_TIME_MINUTES
         or len(distinct_time_minutes) < MIN_DISTINCT_TIME_MINUTES
         or interval_mode_minutes is None
-        or decreasing_axis_cell_count > 0
     ):
         decision = Decision.REVISION_REQUIRED
         reasons = [
@@ -896,11 +981,14 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
                 (total_changes == 0, "no_adjacent_changes"),
                 (mapped_ratio < 0.25, "insufficient_time_mapping"),
                 (
+                    story_anchor_count < MIN_DISTINCT_TIME_MINUTES,
+                    "insufficient_story_time_anchors",
+                ),
+                (
                     len(distinct_time_minutes) < MIN_DISTINCT_TIME_MINUTES,
                     "insufficient_distinct_time_anchors",
                 ),
                 (interval_mode_minutes is None, "time_interval_mode_unavailable"),
-                (decreasing_axis_cell_count > 0, "decreasing_same_cell_time_axis"),
             )
             if condition
         ]
@@ -909,7 +997,7 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
         reasons = []
 
     aggregate = {
-        "schema_version": "historical_diary.measured_privacy_reading.v2",
+        "schema_version": "historical_diary.measured_privacy_reading.v3",
         "evidence_label": "private_derived_aggregate_non_phi",
         "decision": decision.value,
         "reason_codes": reasons,
@@ -926,6 +1014,7 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
             "source_filename_path_or_timestamp_emitted": False,
             "source_text_emitted": False,
             "key_or_mapping_emitted": False,
+            "page_coordinate_or_distance_emitted": False,
             "source_value_leakage_count": source_leakage,
             "detector_category_counts": dict(sorted(detector_counts.items())),
         },
@@ -937,10 +1026,11 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
             "mapped_time_observations": mapped_time_count,
             "mapped_time_ratio_numerator": mapped_time_count,
             "mapped_time_ratio_denominator": source_segment_count,
-            "explicit_time_anchor_observations": explicit_anchor_count,
+            "explicit_story_time_anchor_observations": story_anchor_count,
+            "distinct_story_time_minutes": len(distinct_story_time_minutes),
             "distinct_time_minutes": len(distinct_time_minutes),
             "positive_interval_mode_minutes": interval_mode_minutes,
-            "decreasing_axis_cell_count": decreasing_axis_cell_count,
+            "mapping_outcome_counts": dict(sorted(mapping_outcomes.items())),
             "stable_linkage_records": stable_linkage,
             "adjacent_transition_count": len(projection.snapshots) - 1,
             "change_counts": dict(sorted(changes.items())),
@@ -980,6 +1070,7 @@ def _cleanup_private_outputs(*, retained: bool, decision: str, word_cleanup: boo
         "private_projection_retained": retained,
         "ephemeral_key_persisted": False,
         "mapping_persisted": False,
+        "page_coordinate_or_distance_persisted": False,
         "word_cleanup_completed": word_cleanup,
         "removed_private_artifact_classes": removed,
         "provider_network_model_calls": 0,
