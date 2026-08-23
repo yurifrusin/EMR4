@@ -1,0 +1,125 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free read-only governance clockwork ergonomics and efficacy review",
+    "completed_stage": "Accepted raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_read_only_measurement_set_and_no_added_bureaucracy_acceptance_rule",
+    "operation_id": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
+    "resume_after_compaction": true,
+    "source_head": "c35d2a1d69ad646cb7b561e201271ced25784df8",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "f0c59691733f15e112c09cb6acb4bbe3d2d52fc5",
+    "reason_codes": [],
+    "resolved_commit": "c35d2a1d69ad646cb7b561e201271ced25784df8",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "c35d2a1d69ad646cb7b561e201271ced25784df8"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "f0c59691733f15e112c09cb6acb4bbe3d2d52fc5",
+    "branch_origin_aligned": false,
+    "head": "f0c59691733f15e112c09cb6acb4bbe3d2d52fc5",
+    "origin_branch_commit": "0e8138c39ece888aa8e63db3f5612ff02328ed67",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 676
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_exact_read_only_review_candidate",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The latch forbids Harness/provider work, the native profile is an evidence subject rather than a self-reviewer, Claude Code is not a fallback, and the exact review candidate is complete.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "All frozen counts recompute from retained local JSON, the report makes no comparative model-rate or product claim, and no semantic implementation or independent-veto trigger remains.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the exact measurement, ranking and acceptance judgment are serially coupled.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "if exact aggregate recomputation fails",
+      "if the report introduces a product or provider claim",
+      "before the recommended implementation tranche",
+      "at closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "preserve the frozen evidence windows and exact aggregate recomputation",
+      "separate safety from ergonomics and avoid comparative model-rate claims",
+      "select only a change with measured removed work and zero net new operator burden",
+      "stop before implementation"
+    ]
+  },
+  "planned_action": "accept_exact_read_only_clockwork_ergonomics_review_without_external_verifier",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review-plan.md",
+      "docs/security/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review-threat-model-delta.md",
+      "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/measurement-contract.json",
+      "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/evidence.json",
+      "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/report.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial cross-layer review. DeepSeek is declined under the provider-free Harness closure, Gemini is declined because exact local measurements expose no independent product veto, and native subagents remain declined under developer policy.",
+    "git_refs_and_worktree": "The machine snapshot alone binds exact HEAD, task-origin state, all four protected refs, tracked cleanliness and preservation of unrelated untracked files including docs/branding.",
+    "live_handover_current_baton": "The complete live handover was freshly read for this tranche. The current Baton and latch authorize only the provider-free read-only ergonomics review and preserve all protected closures.",
+    "protected_evidence_boundaries": "Only retained non-protected repository workflow evidence was measured. No control layer, Harness, provider, check-in operational choice, product/runtime surface, deployment, Pages, protected evidence or protected ref was opened."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

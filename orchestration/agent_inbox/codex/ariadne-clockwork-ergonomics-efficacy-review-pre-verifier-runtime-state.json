@@ -1,0 +1,190 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_exact_read_only_clockwork_ergonomics_review_without_external_verifier",
+  "source_evidence": {
+    "live_handover_current_baton": "The complete live handover was freshly read for this tranche. The current Baton and latch authorize only the provider-free read-only ergonomics review and preserve all protected closures.",
+    "current_authority_allocation": "GPT Sol owns the serial cross-layer review. DeepSeek is declined under the provider-free Harness closure, Gemini is declined because exact local measurements expose no independent product veto, and native subagents remain declined under developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review-plan.md",
+      "docs/security/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review-threat-model-delta.md",
+      "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/measurement-contract.json",
+      "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/evidence.json",
+      "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/report.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Only retained non-protected repository workflow evidence was measured. No control layer, Harness, provider, check-in operational choice, product/runtime surface, deployment, Pages, protected evidence or protected ref was opened.",
+    "git_refs_and_worktree": "The machine snapshot alone binds exact HEAD, task-origin state, all four protected refs, tracked cleanliness and preservation of unrelated untracked files including docs/branding."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
+    "active_tranche": "Provider-free read-only governance clockwork ergonomics and efficacy review",
+    "objective": "Review the current clockwork and the extended native-Harness gear period, quantify manual inputs, rejected ticks, rollbacks, elapsed friction, bespoke updater use and accepted development yield, then rank only changes that remove at least one manual decision, duplicate field or rerun sequence while preserving fail-closed safety.",
+    "status": "in_progress",
+    "source_head": "c35d2a1d69ad646cb7b561e201271ced25784df8",
+    "authority_source": "Yuri explicitly requested this bounded review under standing uninterrupted-development authority; implementation, provider and protected surfaces remain closed.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_read_only_measurement_set_and_no_added_bureaucracy_acceptance_rule",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_read_only_clockwork_ergonomics_and_efficacy_review_only",
+      "measure_existing_artifacts_incidents_ticks_rollbacks_and_elapsed_friction_only",
+      "proposals_must_remove_at_least_one_manual_decision_duplicate_field_or_rerun_sequence",
+      "no_new_control_layer_or_clockwork_implementation_during_the_review",
+      "no_native_harness_worker_provider_call_or_transport_qualification",
+      "no_silent_claude_code_or_other_transport_fallback",
+      "no_check_in_external_fact_target_custody_policy_provisioning_or_activation_selection",
+      "no_existing_product_source_route_api_client_configuration_or_runtime_change",
+      "no_environment_variable_secret_credential_network_database_or_infrastructure_access",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_admission_record_activation",
+      "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
+    "assessed_stage": "pre_verifier_exact_read_only_review_candidate",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The latch forbids Harness/provider work, the native profile is an evidence subject rather than a self-reviewer, Claude Code is not a fallback, and the exact review candidate is complete.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "All frozen counts recompute from retained local JSON, the report makes no comparative model-rate or product claim, and no semantic implementation or independent-veto trigger remains.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and the exact measurement, ranking and acceptance judgment are serially coupled.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "preserve the frozen evidence windows and exact aggregate recomputation",
+      "separate safety from ergonomics and avoid comparative model-rate claims",
+      "select only a change with measured removed work and zero net new operator burden",
+      "stop before implementation"
+    ],
+    "reassessment_triggers": [
+      "if exact aggregate recomputation fails",
+      "if the report introduces a product or provider claim",
+      "before the recommended implementation tranche",
+      "at closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "The exact plan, threat delta, measurement contract, evidence, report, active latch, current acceptance and protected boundaries are present in this fresh rehydrated context.",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["GPT Sol is active and owns review acceptance."]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected; no native process opened."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected and not an authorized fallback."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected; deterministic local evidence is complete."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent was spawned under developer policy."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
