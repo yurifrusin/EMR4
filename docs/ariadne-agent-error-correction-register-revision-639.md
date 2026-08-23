@@ -8,8 +8,8 @@ Status: `accepted_pending_clockwork_publication`
 
 <!-- ariadne-agent-error-register-reading
 revision: 639
-incident_count: 1079
-new_incident_ids: AER-1060,AER-1061,AER-1062,AER-1063,AER-1064,AER-1065,AER-1066,AER-1067,AER-1068,AER-1069,AER-1070,AER-1071,AER-1072,AER-1073,AER-1074,AER-1075,AER-1076,AER-1077,AER-1078,AER-1079
+incident_count: 1081
+new_incident_ids: AER-1060,AER-1061,AER-1062,AER-1063,AER-1064,AER-1065,AER-1066,AER-1067,AER-1068,AER-1069,AER-1070,AER-1071,AER-1072,AER-1073,AER-1074,AER-1075,AER-1076,AER-1077,AER-1078,AER-1079,AER-1080,AER-1081
 open_incident_count: 0
 -->
 
@@ -177,9 +177,26 @@ and the rejected intent hash was retained. No canonical surface changed.
 
 Origin: operator. Severity: low. Status: corrected and contained.
 
+## AER-1080 — Ad hoc contract-evidence row lacked the graph evidence identifier
+
+The second clockwork dry-run rejected an ad hoc path/status row in
+`contract_evidence`, whose graph schema requires typed evidence identifiers.
+The contract was already bound through ordinary node evidence, so the graph
+field was restored to the accepted empty form. No canonical surface changed.
+
+Origin: operator. Severity: low. Status: corrected and contained.
+
+## AER-1081 — Invalid Windows wildcard recurred during closeout diagnosis
+
+A read-only diagnostic search again passed a wildcard as a Windows path and
+ripgrep rejected it. The corrected search used the Continuity directory with a
+filename glob filter and located the required examples without mutation.
+
+Origin: operator. Severity: low. Status: corrected and contained.
+
 ## Aggregate reading
 
-The durable register will contain 1,079 corrected or contained incidents and
+The durable register will contain 1,081 corrected or contained incidents and
 zero open incidents after clockwork publication. The native Harness terminal
 was a deterministic pre-provider tool-contract rejection rather than an
 untraceable model failure. The remaining rows are bounded preparation,

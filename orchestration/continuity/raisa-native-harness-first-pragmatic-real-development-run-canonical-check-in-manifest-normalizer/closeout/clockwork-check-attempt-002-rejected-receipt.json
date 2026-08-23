@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.governance_live_tick_rejected_check.v1",
+  "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+  "attempt": 2,
+  "intent_sha256": "8922bca6cd4b82ac8bb7de9a101d512941b819ad3242dbb28237c1829e2335e7",
+  "result": "rejected_before_canonical_mutation",
+  "reason": "tick_transaction_prepare:contract_evidence_id_required",
+  "selected_generation_id_unchanged": "gen-e49927e358035042ba06acd87d0a7148cca1391688ec3f9545ae22e101f70df1",
+  "lease_sequence_unchanged": 194,
+  "correction": "restore contract_evidence to the admitted empty graph form and retain the contract path in ordinary evidence"
+}
