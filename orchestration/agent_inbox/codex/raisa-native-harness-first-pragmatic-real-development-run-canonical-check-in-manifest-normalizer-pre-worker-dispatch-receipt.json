@@ -1,0 +1,138 @@
+{
+  "active_operation": {
+    "active_tranche": "Native Harness first pragmatic real-development run: canonical check-in manifest normalizer",
+    "completed_stage": "The exact contract and scaffold are committed at the machine-resolved source; the fresh sparse worktree, pinned rc.7 stock runner/profile, broker, work order and two-path packet passed deterministic preparation with zero provider calls and zero worker sessions.",
+    "next_executable_stage": "launch_one_native_harness_session_then_preserve_structural_terminal_and_candidate_for_sol_review",
+    "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+    "resume_after_compaction": true,
+    "source_head": "e48908a59e64e3c1f934a393f8d70ace532ea23c",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_worker_dispatch",
+  "git_object_resolution": {
+    "observed_head": "3acac635fff3f73740fd036b0902dc2346e7d59f",
+    "reason_codes": [],
+    "resolved_commit": "e48908a59e64e3c1f934a393f8d70ace532ea23c",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "e48908a59e64e3c1f934a393f8d70ace532ea23c"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "3acac635fff3f73740fd036b0902dc2346e7d59f",
+    "branch_origin_aligned": false,
+    "head": "3acac635fff3f73740fd036b0902dc2346e7d59f",
+    "origin_branch_commit": "27421b3f183011a03ced07e23bfdcc77d5dc884b",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 677
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_worker_dispatch",
+    "lanes": [
+      {
+        "disposition": "planned",
+        "expected_leverage": "positive",
+        "lane_id": "deepseek_flash",
+        "rationale": "The exact scaffold and packet are prepared. One fresh rc.7 stock-headless session can now perform the genuine two-path implementation with natural multi-turn correction and structural trace retention.",
+        "work_packages": [
+          "implement closed_manifest_normalizer in the two exact owned paths during the single prepared session"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "No automatic verifier is required for a low-risk unmounted typed normalizer; reassess only if API meaning, owned paths or evidence conflict changes.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation; Sol retains the serial authority and acceptance work.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+    "parallel_work_packages": [
+      "No concurrent package is open; the DeepSeek session is the next serial action and Sol resumes after its terminal."
+    ],
+    "reassessment_triggers": [
+      "before worker dispatch",
+      "on any packet or source conflict",
+      "after terminal candidate readback",
+      "before verifier decision",
+      "at closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "pre-dispatch clockwork receipt must pass",
+      "run one fresh native Harness session",
+      "Sol reviews diff and tests",
+      "take terminal clockwork reading"
+    ]
+  },
+  "planned_action": "launch_exactly_one_fresh_pinned_native_harness_session_for_the_prepared_two_path_manifest_normalizer_assignment",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan.md",
+      "docs/security/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/evidence.json",
+      "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json",
+      "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-sol-acceptance.md",
+      "docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-plan.md",
+      "docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-sol-acceptance.md",
+      "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-plan.md",
+      "docs/security/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-threat-model-delta.md",
+      "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/contract.json",
+      "orchestration/agent_inbox/codex/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-scaffold-precommit-receipt.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol has frozen and committed the contract/scaffold and owns dispatch, diff review, tests, recovery and acceptance. DeepSeek native Harness now owns exactly one natural multi-turn implementation session over the two prepared paths. Gemini remains conditionally withheld unless a risk trigger arises. Native subagents remain declined under developer policy.",
+    "git_refs_and_worktree": "The machine snapshot alone supplies the current task-branch HEAD, protected ref values, tracked cleanliness and preserved docs/branding evidence. The prepared sparse worker worktree separately binds the machine-resolved full scaffold source, exact two owned paths, four read-only packet paths, zero prior provider calls and zero prior worker sessions.",
+    "live_handover_current_baton": "AGENTS.md was reread completely at SHA-256 970011e31cd10917461c9070a0534c953ac3d2c146cc40f9c3e937caa8f86e39. Its specific current Harness acceptance, current result and next implementation select this operation at Continuity 422 / Compass 404; the older generic paused-worker sentence is superseded by those later specific fields and the active latch.",
+    "protected_evidence_boundaries": "Only authored reference-only non-secret repository source may enter the worker packet. No .env, process environment, configuration, credential or secret store, database, route, product data, ordinary-practice activation, protected evidence, deployment, release, Pages or protected-ref action is permitted."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
