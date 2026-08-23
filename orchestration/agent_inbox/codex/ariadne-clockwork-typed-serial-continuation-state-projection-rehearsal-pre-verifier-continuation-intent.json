@@ -1,0 +1,14 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "verifier_acceptance",
+  "assessed_stage": "candidate_committed_after_162_test_deterministic_gate",
+  "active_evidence_paths": [
+    "docs/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-plan.md",
+    "docs/security/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-threat-model-delta.md",
+    "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-candidate-precommit-receipt.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": []
+}

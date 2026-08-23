@@ -1,0 +1,87 @@
+{
+  "schema_version": "ariadne.typed_serial_continuation_projection_evidence.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal",
+  "candidate_source": "4ae806cc074f837aa5218a18f89cbae978bddc7d",
+  "manual_preplanning_baseline": {
+    "caller_scalar_leaves": 114,
+    "runtime_state_lines": 202,
+    "runtime_state_bytes": 9345,
+    "receipt_lines": 125,
+    "receipt_bytes": 6846,
+    "pair_lines": 327,
+    "pair_bytes": 16191
+  },
+  "occupied_typed_candidate_precommit": {
+    "caller_scalar_leaves": 9,
+    "intent_lines": 14,
+    "intent_bytes": 741,
+    "receipt_lines": 121,
+    "receipt_bytes": 5589,
+    "pair_lines": 135,
+    "pair_bytes": 6330,
+    "expanded_runtime_state_files_written": 0,
+    "status": "passed"
+  },
+  "matched_reduction": {
+    "caller_scalar_leaves_removed": 105,
+    "caller_scalar_leaf_reduction_percent": 92.11,
+    "input_lines_removed": 188,
+    "input_line_reduction_percent": 93.07,
+    "input_bytes_removed": 8604,
+    "input_byte_reduction_percent": 92.06,
+    "pair_lines_removed": 192,
+    "pair_line_reduction_percent": 58.72,
+    "pair_bytes_removed": 9861,
+    "pair_byte_reduction_percent": 60.90
+  },
+  "receipt_equivalence": {
+    "manual_and_typed_status_equal": true,
+    "settings_fingerprint_equal": true,
+    "five_source_names_equal": true,
+    "active_operation_equal": true,
+    "terminal_guard_equal": true,
+    "dispatch_decision_equal": true,
+    "lane_id_disposition_and_leverage_equal": true,
+    "git_ref_binding_equal": true,
+    "git_snapshot_equal": true,
+    "git_object_resolution_equal": true,
+    "protected_refs_aligned": true,
+    "docs_branding_preserved": true
+  },
+  "closed_contract": {
+    "admitted_presets": 1,
+    "admitted_lane_ids": 3,
+    "admitted_decision_codes": 4,
+    "worker_dispatch_event_admitted": false,
+    "positive_worker_dispositions_admitted": false,
+    "free_form_lane_rationale_admitted": false,
+    "full_runtime_state_output_admitted": false,
+    "legacy_runtime_state_input_preserved": true
+  },
+  "verification": {
+    "focused_preflight_tests_passed": 42,
+    "combined_orchestrator_and_governance_tests_passed": 162,
+    "ruff_owned_files_passed": true,
+    "implementation_test_correction_rounds": 0,
+    "product_reruns": 0,
+    "provider_calls": 0,
+    "external_verifier_calls": 0
+  },
+  "one_time_build_cost": {
+    "core_lines_added": 313,
+    "core_lines_removed": 1,
+    "cli_lines_added": 77,
+    "cli_lines_removed": 9,
+    "test_lines_added": 295
+  },
+  "boundaries": {
+    "new_receipt_layers": 0,
+    "new_ledgers": 0,
+    "new_gates": 0,
+    "new_settings_fields": 0,
+    "new_runtime_state_artifacts_per_event": 0,
+    "provider_or_worker_transports_opened": 0,
+    "product_or_data_surfaces_opened": 0,
+    "protected_ref_movements": 0
+  }
+}
