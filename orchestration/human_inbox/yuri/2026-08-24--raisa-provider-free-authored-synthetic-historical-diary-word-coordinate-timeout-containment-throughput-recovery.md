@@ -32,6 +32,8 @@ input until a later candidate-specific gate passes.
   no retained source or coordinate values;
 - verification: 187 relevant provider-free controls plus all static checks
   pass; and
+- clockwork ergonomics: its test-only successor-ID fixture now uses a short
+  deterministic hash instead of appending to the live operation name; and
 - protected local/origin `master` and `handoff/current` remain fixed at
   `2e34bdad732fdab32fbf778280b3d3c70d66d602`.
 

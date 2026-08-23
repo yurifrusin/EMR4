@@ -42,6 +42,12 @@ measurement succeeds.
 - generated documents, control/progress files and private extraction products
   are absent after cleanup.
 
+The prepublication clockwork suite then exposed a test-only ergonomics defect:
+its synthetic successor name appended a suffix to the live operation ID and
+could exceed the valid 128-character identifier bound. The fixture now derives
+a short deterministic hash-bound successor ID. This changes no production
+identifier, authority or clockwork vocabulary.
+
 The accepted successor is exactly one fresh 80-snapshot local measurement at
 the new `2026-08-24-story-coordinate-v2` attempt root, with one metadata bind,
 one content run, no retry, an 1,800-second ceiling, count-only progress and

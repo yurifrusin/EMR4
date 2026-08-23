@@ -28,6 +28,7 @@
       "Exact parent cleanup and count-only progress passed; 12 authored-synthetic documents yielded 2,016 coordinate attempts and 288 explicit story anchors within the planned terminal."
     ],
     "additional_receipts": [
+      "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/closeout/prepublication-clockwork-ergonomics-repair.json",
       "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/closeout/pushover-notification-receipt.json",
       "orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery-pre-verifier-receipt.json"
     ],
@@ -41,6 +42,7 @@
       "scripts/historical_diary_authored_synthetic_word_coordinate_recovery.py",
       "tests/test_raisa_local_only_bounded_historical_diary_snapshot_measured_privacy_probe.py",
       "tests/test_raisa_provider_free_authored_synthetic_historical_diary_word_coordinate_timeout_containment_throughput_recovery.py",
+      "tests/test_ariadne_governance_clockwork_tick.py",
       "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/evidence.json",
       "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/efficacy-reading.json",
       "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery/report.md",

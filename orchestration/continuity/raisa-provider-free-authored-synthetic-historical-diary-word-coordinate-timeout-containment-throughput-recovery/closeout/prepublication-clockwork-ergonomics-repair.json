@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.clockwork_prepublication_ergonomics_repair.v1",
+  "recorded_at": "2026-08-24T06:32:18.1946022+10:00",
+  "operation_id": "raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery",
+  "status": "corrected_before_publication",
+  "rejection": {
+    "reason": "tick_semantic_verification",
+    "failed_command_id": "semantic-closeout-governance-tests",
+    "root_invariant": "test_only_successor_identifier_must_not_exceed_128_characters",
+    "published_generations": 0,
+    "git_add_invocations": 0
+  },
+  "cause": "the_test_fixture_appended_fixture_successor_to_the_live_operation_id_and_made_fixture_validity_depend_on_live_name_length",
+  "correction": "derive_a_short_deterministic_sha256_bound_test_only_successor_identifier",
+  "production_effects": {
+    "production_identifier_changed": false,
+    "authority_changed": false,
+    "clockwork_vocabulary_changed": false,
+    "protected_ref_movement": false
+  }
+}

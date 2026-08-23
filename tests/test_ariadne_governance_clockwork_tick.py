@@ -158,7 +158,10 @@ def _semantic_intent(worktree: Path) -> dict:
     graph = _json(worktree / contract["canonical_paths"]["continuity"])
     artifact_slug = "ariadne-clockwork-typed-semantic-builder"
     plan_path = f"docs/{artifact_slug}-plan.md"
-    fixture_successor = f"{latch['operation_id']}-fixture-successor"
+    fixture_digest = hashlib.sha256(
+        latch["operation_id"].encode("utf-8")
+    ).hexdigest()[:16]
+    fixture_successor = f"fixture-successor-{fixture_digest}"
     return {
         "schema_version": SEMANTIC_TICK_INTENT_VERSION,
         "profile": SEMANTIC_PROFILE,
