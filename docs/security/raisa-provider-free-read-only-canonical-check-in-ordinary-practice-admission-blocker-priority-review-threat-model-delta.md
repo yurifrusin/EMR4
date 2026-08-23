@@ -2,6 +2,8 @@
 
 Date: 2026-08-23
 
+Timestamp: 2026-08-23T22:32:36.1602337+10:00 (Australia/Brisbane)
+
 Status: `frozen`
 
 ## Scope
