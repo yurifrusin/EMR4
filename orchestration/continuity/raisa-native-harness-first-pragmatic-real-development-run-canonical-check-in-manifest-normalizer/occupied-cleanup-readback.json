@@ -1,0 +1,22 @@
+{
+  "schema_version": "emr4.native_harness_pragmatic_worker_cleanup.v1",
+  "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+  "attempt_id": "deepseek-native-manifest-normalizer-001",
+  "worker_process_absent": true,
+  "broker_process_absent": true,
+  "git_worktree_registration_absent": true,
+  "disposable_attempt_root_absent": true,
+  "raw_session_prompt_response_reasoning_and_streams_retained": false,
+  "cleanup_complete": true,
+  "recovery": "not_recoverable_from_the_active_filesystem_or_windows_recycle_bin",
+  "preserved_repository_evidence": [
+    "worker-preparation.json",
+    "worker-authority.json",
+    "worker-forbidden-surfaces.json",
+    "worker-work-order-v2.json",
+    "worker-command-manifest.json",
+    "worker-provider-free-no-database-admission.json",
+    "occupied-terminal.json",
+    "occupied-terminal-review.json"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "forbidden_surfaces": [
+    "second_worker_automatic_retry_or_silent_fallback",
+    "shell_test_git_web_subagent_or_workflow_tool",
+    "non_owned_path_edit",
+    "environment_configuration_credential_secret_or_reference_resolution",
+    "database_docker_route_api_client_product_runtime_or_product_data",
+    "ordinary_practice_arrived_status_grammar_waiting_area_or_admission",
+    "production_deployment_release_pages_or_protected_refs",
+    "raw_prompt_response_reasoning_or_credential_retention"
+  ]
+}

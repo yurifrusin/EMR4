@@ -1,0 +1,71 @@
+{
+  "attempt_id": "deepseek-native-manifest-normalizer-001",
+  "broker": {
+    "clock_sequence_first": 6,
+    "clock_sequence_last": 7,
+    "maximum_provider_calls": null,
+    "provider_call_completed": 0,
+    "provider_call_failed": 0,
+    "provider_call_started": 0,
+    "ready": true,
+    "request_rejected": 1
+  },
+  "candidate": {
+    "changed_paths": [],
+    "scope_integrity": true,
+    "status_rows": []
+  },
+  "cleanup": {
+    "attempt_root_absent": false,
+    "broker_absent": true,
+    "raw_material_retained_pending_sol_review": true,
+    "worker_absent": true
+  },
+  "duration_ms": 7404,
+  "ended_at": "2026-08-23T00:07:27.238926Z",
+  "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+  "process": {
+    "automatic_retries": 0,
+    "auxiliary_model_calls": 0,
+    "exit_code": 1,
+    "fallbacks": 0,
+    "native_process_count": 1,
+    "timed_out": false
+  },
+  "schema_version": "emr4.native_harness_pragmatic_worker_terminal.v1",
+  "session": {
+    "event_count": 17,
+    "request_count": 1,
+    "session_bytes": 80251,
+    "session_file_count": 1,
+    "session_sha256": "d492cbfcf1d4f6a94de71f8bb563160634966f541436fef20c33469a90eeb5ea",
+    "terminal": {
+      "code": "INVALID_REQUEST",
+      "kind": "error",
+      "status": 400
+    },
+    "tool_result_count": 0,
+    "tool_sequence": [],
+    "trace_complete": true,
+    "usage_rows": []
+  },
+  "source_commit": "e48908a59e64e3c1f934a393f8d70ace532ea23c",
+  "started_at": "2026-08-23T00:07:19.920840Z",
+  "streams": {
+    "broker_stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "terminal_line": null
+    },
+    "stderr": {
+      "bytes": 52,
+      "sha256": "821b873f19e7fcd5019d7d43c6659a2650e9aeb069c2dd34432d2f814455ac82",
+      "terminal_line": "dsh: INVALID_REQUEST: DeepSeek API error (HTTP 400)"
+    },
+    "stdout": {
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "terminal_line": null
+    }
+  }
+}

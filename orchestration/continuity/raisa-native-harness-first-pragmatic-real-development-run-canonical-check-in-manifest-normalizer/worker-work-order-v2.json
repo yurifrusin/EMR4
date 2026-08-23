@@ -1,0 +1,23 @@
+{
+  "allowed_tool_names": [
+    "edit",
+    "glob",
+    "read"
+  ],
+  "authority_sha256": "sha256:82190d8287ec3601ec3278ea9fcd7f432aff19b5e582025c7a0b99b533b8f65c",
+  "branch": "detached-native-harness-worker",
+  "command_manifest_sha256": "sha256:ddd364b98a246e90edc6138d372f7d6b626632b85a83f21368c56de32f7945b3",
+  "forbidden_surfaces_sha256": "sha256:c301c9aea48582645cd0a17dd45560dc25a0af4c34ac1da9bc99bd7a60cf00e6",
+  "journal_id": "journal-dc37c77e3742a9d4bc93d262",
+  "lease_id": "lease-native-manifest-normalizer-001",
+  "next_sequence": 6,
+  "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+  "posture": "provider_free_shadow",
+  "previous_event_sha256": "sha256:a49ed761bc706e7af0daca868863d6b148427dcf00a062548c178ab706a8578d",
+  "provider_free_no_database_admission_sha256": "sha256:ee6907f70a6b7fc7be1c5ee2c95baedff247ff0844ab72200e4adddb4cf51148",
+  "schema_version": "ariadne.deepseek_work_order.v2",
+  "source_commit": "e48908a59e64e3c1f934a393f8d70ace532ea23c",
+  "transaction_id": "txn-dc37c77e3742a9d4bc93d262",
+  "work_order_id": "wo-native-manifest-normalizer-001",
+  "worktree": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-manifest-normalizer-001/workspace"
+}

@@ -1,0 +1,72 @@
+{
+  "command_manifest_sha256": "sha256:ddd364b98a246e90edc6138d372f7d6b626632b85a83f21368c56de32f7945b3",
+  "commands": [
+    {
+      "argv_sha256": "sha256:f412e353f75ab6b02b26a882595a1ef660d741cb08cf47b95f15ed3a5ea5cc4e",
+      "command_id": "PF_MANIFEST_NORMALIZER",
+      "selection": {
+        "policy_version": "ariadne.provider_free_no_database_policy.v1",
+        "pytest_core_fixture_allowlist": [
+          "capfd",
+          "capfdbinary",
+          "caplog",
+          "capsys",
+          "capsysbinary",
+          "doctest_namespace",
+          "monkeypatch",
+          "pytestconfig",
+          "record_property",
+          "record_testsuite_property",
+          "record_xml_attribute",
+          "recwarn",
+          "request",
+          "tmp_path",
+          "tmp_path_factory",
+          "tmpdir",
+          "tmpdir_factory"
+        ],
+        "schema_version": "ariadne.provider_free_no_database_selection.v1",
+        "selected_tests": [
+          {
+            "local_fixtures": [],
+            "path": "tests/test_appointment_check_in_environment_manifest.py",
+            "resolved_fixture_edges": [],
+            "source_sha256": "sha256:aa7268a20adbf47720662a41fc990effa04c33f87f6140157846bb280d797ab8",
+            "test_count": 1
+          },
+          {
+            "local_fixtures": [],
+            "path": "tests/test_api_spine_artifacts.py",
+            "resolved_fixture_edges": [],
+            "source_sha256": "sha256:01981b06e762b0fc044b962aba4d16c03ff3d407a19dbb13a81b0410bdbd2946",
+            "test_count": 36
+          }
+        ],
+        "shared_conftest": {
+          "fixture_names": [
+            "appt_type",
+            "clean_db",
+            "client",
+            "db",
+            "engine",
+            "gp_user",
+            "gp_user_b",
+            "patient",
+            "patient_b",
+            "practice",
+            "practice_b",
+            "practitioner",
+            "receptionist_user",
+            "schedule"
+          ],
+          "path": "tests/conftest.py",
+          "source_sha256": "sha256:905013c3e76b62c5eff68235cc2c770791b1ded96330391270d20b49b04a56e7"
+        },
+        "status": "passed"
+      },
+      "selection_sha256": "sha256:d0716aac2dec82a44c1de13039115994d32a7d9584c122255b88d555d56bcc23"
+    }
+  ],
+  "schema_version": "ariadne.provider_free_no_database_admission.v1",
+  "status": "passed"
+}

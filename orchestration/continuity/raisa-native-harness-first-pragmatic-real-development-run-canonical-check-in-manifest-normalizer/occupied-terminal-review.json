@@ -1,0 +1,60 @@
+{
+  "schema_version": "emr4.native_harness_pragmatic_worker_terminal_review.v1",
+  "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+  "attempt_id": "deepseek-native-manifest-normalizer-001",
+  "result": "bounded_pre_provider_tool_contract_rejection_no_candidate",
+  "worker_packet_received_by_model": false,
+  "provider_call_started": 0,
+  "provider_call_completed": 0,
+  "provider_call_failed": 0,
+  "broker_request_rejected": 1,
+  "model_tool_calls": 0,
+  "changed_paths": [],
+  "observed_request_header_tool_names": [
+    "edit",
+    "exit_plan_mode",
+    "glob",
+    "grep",
+    "read",
+    "read_image",
+    "write"
+  ],
+  "broker_allowed_tool_names": [
+    "edit",
+    "glob",
+    "read"
+  ],
+  "source_readback": {
+    "tool_fs_registers": [
+      "edit",
+      "read",
+      "read_image",
+      "write"
+    ],
+    "tool_fs_search_registers": [
+      "glob",
+      "grep"
+    ],
+    "plan_mode_registers": [
+      "exit_plan_mode"
+    ],
+    "profile_level_subtool_disable_supported": false,
+    "stock_headless_mounts_emr4_bounded_worker_agent_preset": false
+  },
+  "failure_coordinate": {
+    "stage": "broker_request_validation_before_provider_io",
+    "observed_terminal": "INVALID_REQUEST_HTTP_400",
+    "deterministic_mismatch": "stock_headless_request_declared_tools_exceed_exact_broker_allowlist",
+    "broker_rejection_reason_event_retained": false,
+    "classification": "mechanical_transport_envelope_defect"
+  },
+  "retry_decision": {
+    "fresh_run_authorized": false,
+    "reason": "Removing the surplus per-agent tools requires a custom runner restriction hook or a broader broker contract. The accepted pragmatic plan says a post-terminal correction needing a new runner, broker or guard ends the native lane for this assignment."
+  },
+  "recovery": {
+    "owner": "GPT Sol",
+    "action": "implement_and_verify_the_frozen_two_path_source_task_without_a_second_harness_session"
+  },
+  "evidence_limit": "The coordinator retained the broker-ready/request-count coordinates but omitted the broker rejection reason from occupied-terminal.json. The exact seven-tool request header was read structurally from the temporary local session, and the deterministic incompatibility was confirmed against pinned package and broker source. No prompt, response, reasoning, credential, environment dump or raw session row is retained here."
+}

@@ -1,0 +1,17 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\sarashera\\emr4\\.venv\\Scripts\\python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:\\Users\\sarashera\\emr4",
+        "tests/test_appointment_check_in_environment_manifest.py",
+        "tests/test_api_spine_artifacts.py"
+      ],
+      "id": "PF_MANIFEST_NORMALIZER"
+    }
+  ],
+  "schema_version": "ariadne.verifier-command-manifest.v1"
+}

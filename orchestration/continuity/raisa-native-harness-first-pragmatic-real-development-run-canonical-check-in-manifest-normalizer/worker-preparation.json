@@ -1,0 +1,30 @@
+{
+  "attempt_id": "deepseek-native-manifest-normalizer-001",
+  "broker_sha256": "f8e80314ef895ad14fdbc7c76ea012207934545c48db0d0d25fcc2a22f47b71b",
+  "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+  "owned_paths": [
+    "app/services/appointment_check_in_environment_manifest.py",
+    "tests/test_appointment_check_in_environment_manifest.py"
+  ],
+  "profile": {
+    "materialized_package_count": 7,
+    "package_json_sha256": "7a9f356ad1e27c7013b44619bc675b8cb877f995cd0951ab3dfeb10d4edcc361",
+    "package_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-manifest-normalizer-001/installation/node_modules/@deepseek-ai/dsh",
+    "profile_template_sha256": "cb475efd10473aa155b8791617dab6bcc2fc1198335457a9eda6fd41779cc12b",
+    "stock_runner_sha256": "997fe17d783aac2c392df65298aa8180f3748d0a50cc4151de13ae16457986dd"
+  },
+  "prompt_sha256": "83cfe4cc23dcdaca94ca23317bda0fa4353d7ccd3324ba999caa26fb3da33a7d",
+  "provider_calls_before_dispatch": 0,
+  "read_only_packet_paths": [
+    "AGENTS.md",
+    "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-plan.md",
+    "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/contract.json",
+    "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/environment-manifest.schema.json"
+  ],
+  "schema_version": "emr4.native_harness_pragmatic_worker_preparation.v1",
+  "source_commit": "e48908a59e64e3c1f934a393f8d70ace532ea23c",
+  "status": "passed",
+  "work_order_sha256": "8dfb28b5e06c2b5bd770d7454dcf2972ed32d3aa68a777a07d3d211f66807dc3",
+  "worker_sessions_before_dispatch": 0,
+  "workspace": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-manifest-normalizer-001/workspace"
+}

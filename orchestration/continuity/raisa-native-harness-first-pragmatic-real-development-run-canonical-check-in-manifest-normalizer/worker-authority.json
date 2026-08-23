@@ -1,0 +1,26 @@
+{
+  "allowed_tool_names": [
+    "edit",
+    "glob",
+    "read"
+  ],
+  "attempt_id": "deepseek-native-manifest-normalizer-001",
+  "automatic_retries": 0,
+  "auxiliary_model_calls": 0,
+  "broker_currency_cap_enforced": false,
+  "fallbacks": 0,
+  "maximum_native_wall_clock_seconds": 900,
+  "maximum_output_tokens_per_request": 4096,
+  "maximum_parallel_tool_calls": 1,
+  "model": "deepseek-v4-flash",
+  "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+  "owned_paths": [
+    "app/services/appointment_check_in_environment_manifest.py",
+    "tests/test_appointment_check_in_environment_manifest.py"
+  ],
+  "prompt_sha256": "83cfe4cc23dcdaca94ca23317bda0fa4353d7ccd3324ba999caa26fb3da33a7d",
+  "provider": "deepseek-official",
+  "provider_spend_source": "existing_user_controlled_prepaid_balance",
+  "reasoning_effort": "high",
+  "source_commit": "e48908a59e64e3c1f934a393f8d70ace532ea23c"
+}

@@ -148,9 +148,13 @@ The worker adds only the tests needed to prove the real contract:
 
 Sol runs the focused file, `tests/test_api_spine_artifacts.py`, the accepted
 environment-manifest architecture and gap-decomposition tests, Ruff/compile and
-`git diff --check` serially outside the worker. No separate Gemini veto is
-required unless API meaning changes, an owned path is crossed, evidence
-conflicts or another normal risk trigger arises.
+`git diff --check` serially outside the worker. Because the historical
+gap-decomposition tripwire denied every later `app/**` descendant, this tranche
+may update that one test to allow only the exact unmounted normalizer path while
+continuing to deny every route, API Spine, Diary, sidebar and environment-file
+change. No separate Gemini veto is required unless API meaning changes, an
+owned path is crossed, evidence conflicts or another normal risk trigger
+arises.
 
 ## Native Harness execution shape
 
@@ -196,7 +200,8 @@ or a claim that the native Harness is the default worker.
 
 ## Acceptance and stop conditions
 
-Accept only when the changed path set is exactly the two owned paths, all
+Accept only when the changed path set is exactly the two owned implementation
+paths plus the one historical tripwire test named above, all
 required focused/surrounding checks pass, the terminal trace and cleanup are
 complete, and source review confirms no ambient or forbidden capability.
 

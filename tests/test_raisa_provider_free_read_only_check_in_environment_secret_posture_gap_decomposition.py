@@ -204,7 +204,7 @@ def test_review_does_not_write_or_open_forbidden_surfaces() -> None:
     assert "os.environ" not in script
 
 
-def test_no_product_or_api_path_changed_since_plan_freeze() -> None:
+def test_only_authorised_unmounted_normalizer_changed_since_plan_freeze() -> None:
     paths = [
         "app",
         "docs/api-spine",
@@ -213,11 +213,16 @@ def test_no_product_or_api_path_changed_since_plan_freeze() -> None:
         ".env.example",
     ]
     process = subprocess.run(
-        ["git", "diff", "--quiet", f"{subject.PLAN_SOURCE}..HEAD", "--", *paths],
+        ["git", "diff", "--name-only", f"{subject.PLAN_SOURCE}..HEAD", "--", *paths],
         cwd=ROOT,
         check=False,
+        capture_output=True,
+        text=True,
     )
     assert process.returncode == 0
+    assert process.stdout.splitlines() == [
+        "app/services/appointment_check_in_environment_manifest.py"
+    ]
 
 
 def test_workflow_uses_existing_preflight_snapshot_not_new_summary_layer() -> None:
