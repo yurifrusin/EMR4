@@ -1,44 +1,44 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 646,
+  "register_revision": 647,
   "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "3f662028416ed58752697f6c13dd2dd62af76c92778372dcd73ce1d20388f930",
-  "incident_count": 1128,
+  "canonical_register_sha256": "8b0c6f6b91e13b6ee8a91068706836115d654088bd6d1ad669b775c469a2d840",
+  "incident_count": 1130,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 596,
+      "agent_behavior": 597,
       "harness": 73,
       "operator": 291,
-      "repository": 152,
+      "repository": 153,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 111,
-      "evidence_misreport": 77,
+      "evidence_misreport": 78,
       "harness_failure": 73,
       "operator_error": 291,
       "output_contract_violation": 353,
       "read_only_violation": 5,
       "reasoning_claim_error": 50,
-      "repository_defect": 152,
+      "repository_defect": 153,
       "transport_timeout": 16
     },
     "by_role": {
       "implementer": 89,
       "integration_reviewer": 5,
-      "orchestrator": 971,
+      "orchestrator": 973,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 740,
+      "low": 741,
       "material": 135,
-      "moderate": 253
+      "moderate": 254
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 233,
-      "canonical_unchanged": 711,
+      "canonical_unchanged": 713,
       "untrusted_partial_worktree": 184
     },
     "by_resource_and_role": {
@@ -202,7 +202,7 @@
       "codex-primary-orchestrator-commentary::orchestrator": 2,
       "codex-primary-orchestrator::implementer": 4,
       "codex-primary-orchestrator::integration_reviewer": 1,
-      "codex-primary-orchestrator::orchestrator": 363,
+      "codex-primary-orchestrator::orchestrator": 365,
       "codex-shell-command-timeout-wrapper::orchestrator": 3,
       "codex-sol-orchestrator::orchestrator": 5,
       "codex-yielded-execution-session::orchestrator": 1,

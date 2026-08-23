@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 432,
+  "graph_revision": 433,
   "harvests": [],
   "nodes": [
     {
@@ -34898,9 +34898,83 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+      "title": "Provider-free governance clockwork typed-builder matched efficacy review",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "GPT Sol owns the exact provider-free read-only matched review and acceptance."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "retain-builder-repair-traceability-next",
+          "source": "docs/ariadne-clockwork-typed-builder-matched-efficacy-review-plan.md",
+          "status": "accepted",
+          "summary": "Retain the measured interface, correct the normalized baseline and preserve publication evidence before broader ergonomics work."
+        }
+      ],
+      "claim_scope": [
+        "One first-use typed tooling closeout is measured and conditionally retained."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-clockwork-typed-builder-matched-efficacy-review-plan.md",
+          "docs/security/ariadne-clockwork-typed-builder-matched-efficacy-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/evidence.json",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/report.md",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/ariadne-clockwork-typed-builder-matched-efficacy-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-23--ariadne-clockwork-typed-builder-matched-efficacy-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-typed-builder-matched-efficacy-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-typed-builder-matched-efficacy-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-typed-builder-matched-efficacy-review-pre-verifier-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Arbitrary profiles, test reduction, worker transport and product surfaces remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T18:08:50.3183802+10:00",
+      "updated_at": "2026-08-23T18:08:50.3183802+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "08565a9806fcc74559633e518a97a5d9f8f602d1",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T17:17:00.4614783+10:00"
+  "updated_at": "2026-08-23T18:08:50.3183802+10:00"
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 646,
+  "register_revision": 647,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -43442,6 +43442,76 @@
       "incident_id": "AER-1128",
       "attempt_id": "clock-8f1fefe71728e50de1062846",
       "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "A no-incident leaf baseline must remove both the incident observation and every field derived only from that observation.",
+      "observed_error": "The frozen 151-leaf label removed the observation but retained its one generated register-revision acceptance path.",
+      "detection_method": "The matched review recomputed the 176-leaf intent, 25-leaf observation and normalized no-incident object separately.",
+      "evidence_paths": [
+        "docs/ariadne-clockwork-typed-semantic-builder-plan.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.semantic_leaf_baseline_retains_incident_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Report the subtractive 151 figure separately and use 150 for the normalized like-for-like comparison.",
+        "prevention_control": "Future leaf comparisons must materialize both normalized objects and enumerate every incident-derived field before counting.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/report.md"
+        ]
+      },
+      "incident_id": "AER-1129",
+      "attempt_id": "clock-0c12645823882eb0689ad68d",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "An idempotent readback must not erase the preceding publication command facts from the operation evidence pair.",
+      "observed_error": "The second publish skipped commands and canonical writes but rewrote the publication evidence pair with the idempotent result.",
+      "detection_method": "The matched review compared the initial publication output, current evidence pair, transaction, generation, pointer and CLI output branches.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal/clockwork-tick-evidence.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.idempotent_readback_overwrites_publication_evidence",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Do not repeat publish for readback until the selected repair preserves the publication evidence.",
+        "prevention_control": "The existing CLI must preserve the first publication pair and expose idempotent reading without overwriting it.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/report.md"
+        ]
+      },
+      "incident_id": "AER-1130",
+      "attempt_id": "clock-d6c712abbb776a0475229ba4",
+      "origin": "repository",
       "related_incident_ids": [],
       "status": "corrected"
     }

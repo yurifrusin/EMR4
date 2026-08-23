@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
-  "active_tranche": "Provider-free governance clockwork typed-builder matched efficacy review",
-  "objective": "Measure actual caller leaves, invocations, failures, elapsed closeout friction and safety invariants after the typed-builder rehearsal.",
+  "operation_id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
+  "active_tranche": "Provider-free governance clockwork idempotent publication evidence preservation repair",
+  "objective": "Preserve the first publication evidence and record idempotent readback without overwriting it inside the existing clockwork CLI.",
   "status": "in_progress",
-  "source_head": "1aa4cf893ed0d5290be95912ed5018280ff9a9e5",
-  "authority_source": "The accepted clockwork ergonomics sequence and standing authority select one provider-free matched review.",
+  "source_head": "08565a9806fcc74559633e518a97a5d9f8f602d1",
+  "authority_source": "The accepted matched efficacy review and standing authority select the narrowest traceability repair before further ergonomic expansion.",
   "checkpoint": {
-    "completed_stage": "Accepted ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_exact_matched_measurement_and_no_added_bureaucracy_acceptance",
+    "completed_stage": "Accepted ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_immutable_publication_evidence_and_separate_idempotent_reading_contract",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,9 +34,9 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_read_only_typed_builder_matched_efficacy_review_only",
-    "measure_actual_caller_leaves_invocations_failures_elapsed_friction_and_preserved_safety_invariants",
-    "recommend_retention_adjustment_or_rollback_without_implementing_a_new_control_layer",
+    "provider_free_existing_clockwork_cli_idempotent_evidence_preservation_repair_only",
+    "preserve_first_publication_evidence_and_record_readback_without_overwrite",
+    "no_new_operator_document_gate_ledger_approval_or_control_layer",
     "no_native_harness_worker_provider_call_or_transport_qualification",
     "no_silent_claude_code_or_other_transport_fallback",
     "no_authority_allocation_or_worker_transport_policy_change",
