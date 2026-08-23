@@ -1,0 +1,310 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+    "title": "Canonical check-in manifest normalizer and first pragmatic native Harness real-work reading",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T10:30:23.9779889+10:00",
+    "node": {
+      "id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+      "title": "Canonical check-in manifest normalizer",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorized pragmatic native-Harness entry into real Raisa development with minimum further generic testing and standing uninterrupted-development authority.",
+          "The source result is provider-free, unmounted and reference-only; it grants no operational fact, secret resolution, command or admission authority.",
+          "The accepted candidate is Sol recovery work because the native request was rejected before provider I/O."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-closed-manifest-normalizer",
+          "source": "app/services/appointment_check_in_environment_manifest.py",
+          "status": "accepted",
+          "summary": "Accept the pure exact-byte closed manifest normalizer and frozen typed result at the reviewed source."
+        },
+        {
+          "id": "classify-native-terminal-as-pre-provider-tool-mismatch",
+          "source": "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-terminal-review.json",
+          "status": "accepted",
+          "summary": "The stock headless runner's seven declared tools exceeded the broker's exact three-tool allowlist before any provider call."
+        },
+        {
+          "id": "retain-pragmatic-secondary-worker-posture",
+          "source": "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Retain native Harness as a monitored secondary worker without default promotion or another generic qualification programme."
+        },
+        {
+          "id": "accept-sol-recovery-provenance",
+          "source": "orchestration/agent_inbox/codex/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the source as Sol recovery after 149 passing focused and surrounding tests and deterministic hygiene checks."
+        }
+      ],
+      "claim_scope": [
+        "The normalizer consumes caller-supplied canonical bytes only and returns frozen typed data or one deterministic denial.",
+        "It reads no filesystem, process environment, configuration, credential, database, route, network or current clock.",
+        "The native session made zero provider calls, zero tool calls and zero file changes.",
+        "The terminal is attributable from the retained request tool header and pinned source, but the broker reason event was omitted so matched trace_complete is false.",
+        "The disposable worker processes, worktree registration and attempt root are absent.",
+        "No operational manifest, secret, admission, product runtime, deployment, Pages or protected-ref action occurred."
+      ],
+      "contract_evidence": [
+        {
+          "path": "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/contract.json",
+          "status": "satisfied"
+        }
+      ],
+      "evidence": {
+        "plans": [
+          "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-plan.md",
+          "docs/security/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-terminal.json",
+          "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-terminal-review.json",
+          "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-cleanup-readback.json",
+          "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-pre-worker-dispatch-receipt.json"
+        ],
+        "tests": [
+          "tests/test_appointment_check_in_environment_manifest.py",
+          "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
+          "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_rehearsal.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "artifacts": [
+          "app/services/appointment_check_in_environment_manifest.py",
+          "scripts/raisa_native_harness_pragmatic_real_worker.py",
+          "docs/ariadne-agent-error-correction-register-revision-639.md",
+          "orchestration/human_inbox/yuri/2026-08-23--canonical-check-in-manifest-normalizer-and-native-harness-reading.md"
+        ]
+      },
+      "unresolved_gates": [
+        "Typed operational-evidence inputs remain unimplemented.",
+        "The pure environment evidence-gate evaluator still depends on typed inputs and this normalizer.",
+        "No operational manifest instance or external operational fact exists.",
+        "Native-Harness useful completion and comparative reliability remain unproved by this pre-provider terminal.",
+        "Ordinary-practice activation, product runtime, deployment and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Complete the first real source assignment under pragmatic native-Harness adoption while preserving fail-closed operational boundaries",
+      "outcome": "The real unmounted normalizer is accepted through Sol recovery and the native transport mismatch has a bounded attributable reading without another interoperability tranche.",
+      "evidence": [
+        "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-closeout.md",
+        "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/efficacy-reading.json"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Build the remaining provider-free reference-only environment-evidence model before any evaluator or admission seam",
+      "why_now": "The normalizer prerequisite is complete and typed operational-evidence inputs are the narrowest dependency-satisfied repository node.",
+      "outcome": "One unmounted typed input model can make the later pure evaluator possible without asserting that any external operational fact exists.",
+      "unlocks": [
+        "A closed typed representation for runtime-role, rotation, custody, break-glass and freshness readings.",
+        "The later pure environment evidence-gate evaluator.",
+        "Another bounded real-work reading if an already accepted compatible native-Harness runner is available."
+      ],
+      "does_not_solve": [
+        "Typed inputs do not create or validate a live operational fact.",
+        "The evaluator and default-off admission input seam remain later nodes.",
+        "No ordinary-practice activation or external action is authorized."
+      ],
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json",
+        "app/services/appointment_check_in_environment_manifest.py"
+      ],
+      "orientation_statement": "Continue development, reuse only already accepted compatible Harness machinery, and decline the native lane rather than reopen generic interoperability testing."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+      "active_tranche": "Provider-free unmounted canonical check-in typed operational-evidence inputs rehearsal",
+      "objective": "Freeze and implement only the closed typed operational-evidence input model required by the accepted gap decomposition, with authored-reference-only tests and no external fact, evaluator, admission seam or runtime mount.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted gap decomposition authorize the next dependency-satisfied provider-free repository node without a ceremonial pause.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_narrow_typed_input_contract_and_parallelism_reading"
+    },
+    "incidents": [
+      {"incident_id": "manifest-normalizer-preplanning-binding", "source_id": "manifest-normalizer-local-001", "peers": []},
+      {"incident_id": "manifest-normalizer-windows-wildcard", "source_id": "manifest-normalizer-local-002", "peers": []},
+      {"incident_id": "manifest-normalizer-module-invocation", "source_id": "manifest-normalizer-local-003", "peers": []},
+      {"incident_id": "manifest-normalizer-eof-canonicality", "source_id": "manifest-normalizer-local-004", "peers": []},
+      {"incident_id": "manifest-normalizer-wildcard-recurrence", "source_id": "manifest-normalizer-local-005", "peers": []},
+      {"incident_id": "manifest-normalizer-preset-helper-argument", "source_id": "manifest-normalizer-local-006", "peers": []},
+      {"incident_id": "manifest-normalizer-command-id-bound", "source_id": "manifest-normalizer-local-007", "peers": []},
+      {"incident_id": "manifest-normalizer-workspace-receipt-model", "source_id": "manifest-normalizer-local-008", "peers": ["manifest-normalizer-workspace-handoff-model"]},
+      {"incident_id": "manifest-normalizer-workspace-handoff-model", "source_id": "manifest-normalizer-local-009", "peers": ["manifest-normalizer-workspace-receipt-model"]},
+      {"incident_id": "manifest-normalizer-powershell-regex-quoting", "source_id": "manifest-normalizer-local-010", "peers": []},
+      {"incident_id": "manifest-normalizer-cleanup-command-policy", "source_id": "manifest-normalizer-local-011", "peers": ["manifest-normalizer-cleanup-helper-scope"]},
+      {"incident_id": "manifest-normalizer-cleanup-helper-scope", "source_id": "manifest-normalizer-local-012", "peers": ["manifest-normalizer-cleanup-command-policy"]},
+      {"incident_id": "manifest-normalizer-terminal-reason-omission", "source_id": "manifest-normalizer-local-013", "peers": []},
+      {"incident_id": "manifest-normalizer-stock-runner-tool-mismatch", "source_id": "manifest-normalizer-local-014", "peers": []},
+      {"incident_id": "manifest-normalizer-pytest-parameter-id", "source_id": "manifest-normalizer-local-015", "peers": []},
+      {"incident_id": "manifest-normalizer-ambient-guard-substring", "source_id": "manifest-normalizer-local-016", "peers": []},
+      {"incident_id": "manifest-normalizer-historical-tripwire", "source_id": "manifest-normalizer-local-017", "peers": []},
+      {"incident_id": "manifest-normalizer-unhashable-enum", "source_id": "manifest-normalizer-local-018", "peers": []},
+      {"incident_id": "manifest-normalizer-serial-pytest-separator", "source_id": "manifest-normalizer-local-019", "peers": []}
+    ],
+    "broker": {"enabled": false, "posture": "provider_free_shadow"}
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v2",
+    "database_authority": "closed",
+    "commands": [
+      {
+        "command_id": "manifest-normalizer-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": ["-m", "scripts.ariadne_governance_clockwork_tick", "--check", "--intent", "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/closeout/closeout-intent.json"],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "manifest-normalizer-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4",
+          "tests/test_appointment_check_in_environment_manifest.py",
+          "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
+          "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_rehearsal.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "manifest-normalizer-closeout-postpublication-readback",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m", "scripts.ariadne_provider_free_pytest", "--repo-root", "C:/Users/sarashera/emr4",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_appointment_check_in_environment_manifest.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "postpublication"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-plan.md",
+      "docs/security/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-threat-model-delta.md",
+      "app/services/appointment_check_in_environment_manifest.py",
+      "tests/test_appointment_check_in_environment_manifest.py",
+      "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/contract.json",
+      "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-terminal.json",
+      "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-terminal-review.json",
+      "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-cleanup-readback.json",
+      "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-639.md",
+      "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-23--canonical-check-in-manifest-normalizer-and-native-harness-reading.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_authored_reference_only_typed_operational_evidence_inputs",
+    "closed_input_model_only_evaluator_and_admission_seam_deferred",
+    "external_operational_facts_remain_absent_and_unselected",
+    "reuse_only_already_accepted_compatible_native_harness_machinery_or_decline_lane",
+    "no_generic_harness_interoperability_qualification_or_new_runner_broker_guard",
+    "no_operational_manifest_secret_value_reference_resolution_environment_variable_configuration_or_credential_store_access",
+    "no_database_conftest_engine_schema_fixture_docker_postgresql_sql_live_role_or_infrastructure_action",
+    "no_route_call_api_openapi_graphql_client_configuration_or_product_mounting",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "manifest-normalizer-preplanning-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-preplanning-receipt", "model": "gpt-sol", "reasoning_level": "high", "transport": "local_orchestrator_preflight", "stage": "dispatch", "category": "output_contract_violation", "process_severity": "low", "expected_invariant": "Preplanning Git bindings are machine-resolved full objects and the undispatched lane is planned.", "observed_error": "The first receipt used manual Git bindings and the premature selected disposition.", "detection_method": "The preflight rejected the receipt before dispatch.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"], "candidate_state": "canonical_unchanged", "workflow_disposition": "revision_required", "recurrence_signature": "orchestrator.preplanning_manual_git_binding_and_disposition", "causal_claim_level": "observation_only", "correction": {"status": "control_added", "action": "Use the machine snapshot and planned disposition.", "prevention_control": "Preplanning receipts bind resolved 40-character objects and pre-dispatch lane states.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"]}, "baton_summary": "records one corrected preplanning binding and disposition error."
+    },
+    {
+      "attempt_key": "manifest-normalizer-wildcard-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-dependency-search", "model": "gpt-sol", "reasoning_level": "high", "transport": "local_repository_ripgrep", "stage": "dispatch", "category": "command_scope_violation", "process_severity": "low", "expected_invariant": "Windows searches use explicit paths or directory roots.", "observed_error": "Ripgrep received a Windows-invalid wildcard dependency path.", "detection_method": "Ripgrep returned an invalid-target error without mutation.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"], "candidate_state": "canonical_unchanged", "workflow_disposition": "revision_required", "recurrence_signature": "orchestrator.windows_ripgrep_invalid_wildcard_path", "causal_claim_level": "observation_only", "correction": {"status": "control_added", "action": "Use explicit dependency paths.", "prevention_control": "No wildcard is supplied as a Windows ripgrep path argument.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"]}, "baton_summary": "records one corrected Windows wildcard search."
+    },
+    {
+      "attempt_key": "manifest-normalizer-module-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-package-script", "model": "gpt-sol", "reasoning_level": "high", "transport": "local_repository_python", "stage": "dispatch", "category": "operator_error", "process_severity": "low", "expected_invariant": "Package-backed scripts execute with repository module context.", "observed_error": "Direct script invocation raised ModuleNotFoundError.", "detection_method": "Python exited before changing evidence.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"], "candidate_state": "canonical_unchanged", "workflow_disposition": "revision_required", "recurrence_signature": "orchestrator.package_script_direct_invocation", "causal_claim_level": "observation_only", "correction": {"status": "control_added", "action": "Invoke the script through python -m.", "prevention_control": "Repository package scripts use module invocation.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"]}, "baton_summary": "records one corrected package invocation error."
+    },
+    {
+      "attempt_key": "manifest-normalizer-eof-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-scaffold", "model": "gpt-sol", "reasoning_level": "high", "transport": "local_repository_patch", "stage": "implementation", "category": "output_contract_violation", "process_severity": "low", "expected_invariant": "Frozen scaffold text has one canonical terminal newline.", "observed_error": "The first scaffold carried extra terminal blank lines.", "detection_method": "The EOF canonicality check failed before dispatch.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"], "candidate_state": "canonical_unchanged", "workflow_disposition": "revision_required", "recurrence_signature": "orchestrator.scaffold_eof_extra_blank_lines", "causal_claim_level": "observation_only", "correction": {"status": "corrected_fresh_attempt", "action": "Normalize both scaffold files to one terminal newline.", "prevention_control": "Exact-byte scaffolds receive an EOF readback before commit.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"]}, "baton_summary": "records one corrected scaffold EOF defect."
+    },
+    {
+      "attempt_key": "manifest-normalizer-wildcard-002", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-harness-script-search", "model": "gpt-sol", "reasoning_level": "high", "transport": "local_repository_ripgrep", "stage": "dispatch", "category": "command_scope_violation", "process_severity": "low", "expected_invariant": "The corrected explicit-path search form remains in use.", "observed_error": "The Windows-invalid wildcard form recurred while locating Harness scripts.", "detection_method": "Ripgrep rejected the target without mutation.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"], "candidate_state": "canonical_unchanged", "workflow_disposition": "revision_required", "recurrence_signature": "orchestrator.windows_ripgrep_invalid_wildcard_path_recurrence", "causal_claim_level": "observation_only", "correction": {"status": "control_added", "action": "Return to a directory-root search.", "prevention_control": "Harness searches use literal directory roots.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"]}, "baton_summary": "records one contained wildcard-search recurrence."
+    },
+    {
+      "attempt_key": "manifest-normalizer-preset-helper-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-coordinator-preparation", "model": "gpt-sol", "reasoning_level": "high", "transport": "local_repository_python", "stage": "dispatch", "category": "operator_error", "process_severity": "low", "expected_invariant": "Coordinator helpers are called with their inspected signatures.", "observed_error": "build_preset_source received the wrong argument and raised TypeError.", "detection_method": "Preparation exited before worker or provider activity.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"], "candidate_state": "canonical_unchanged", "workflow_disposition": "revision_required", "recurrence_signature": "orchestrator.preset_source_helper_argument_mismatch", "causal_claim_level": "observation_only", "correction": {"status": "corrected_fresh_attempt", "action": "Inspect and use the exact helper signature.", "prevention_control": "New helper calls are bound from the source signature.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"]}, "baton_summary": "records one corrected preset-helper argument error."
+    },
+    {
+      "attempt_key": "manifest-normalizer-command-id-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-command-manifest", "model": "gpt-sol", "reasoning_level": "high", "transport": "local_harness_preparation", "stage": "dispatch", "category": "output_contract_violation", "process_severity": "low", "expected_invariant": "Command IDs fit the manifest's closed length bound.", "observed_error": "The first command ID exceeded the admitted bound.", "detection_method": "Preparation rejected it before occupied execution.", "evidence_paths": ["orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/worker-command-manifest.json", "docs/ariadne-agent-error-correction-register-revision-639.md"], "candidate_state": "canonical_unchanged", "workflow_disposition": "revision_required", "recurrence_signature": "orchestrator.command_manifest_identifier_length", "causal_claim_level": "observation_only", "correction": {"status": "control_added", "action": "Use PF_MANIFEST_NORMALIZER.", "prevention_control": "Command IDs are validated before occupied execution.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"]}, "baton_summary": "records one corrected command-ID bound violation."
+    },
+    {
+      "attempt_key": "manifest-normalizer-workspace-model-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-predispatch-workspace", "model": "gpt-sol", "reasoning_level": "high", "transport": "local_orchestrator_preflight", "stage": "dispatch", "category": "reasoning_claim_error", "process_severity": "low", "expected_invariant": "External Harness execution is not represented as an Ariadne assigned worker slot.", "observed_error": "The first pre-dispatch receipt incorrectly required a workspace receipt for the external Harness.", "detection_method": "Preflight returned workspace_receipt_missing.", "evidence_paths": ["orchestration/agent_inbox/codex/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-pre-worker-dispatch-receipt.json", "docs/ariadne-agent-error-correction-register-revision-639.md"], "candidate_state": "canonical_unchanged", "workflow_disposition": "revision_required", "recurrence_signature": "orchestrator.external_harness_assigned_workspace_model", "causal_claim_level": "observation_only", "correction": {"status": "control_added", "action": "Remove the false assigned-slot claim.", "prevention_control": "External Harness sessions remain transport evidence rather than Ariadne workspace owners.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"]}, "baton_summary": "records one corrected external-workspace ownership claim."
+    },
+    {
+      "attempt_key": "manifest-normalizer-workspace-model-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-predispatch-workspace", "model": "gpt-sol", "reasoning_level": "high", "transport": "local_orchestrator_preflight", "stage": "dispatch", "category": "reasoning_claim_error", "process_severity": "low", "expected_invariant": "External Harness execution is not represented as an Ariadne assigned worker slot.", "observed_error": "The second receipt incorrectly required the external Harness worktree to equal handoff/current.", "detection_method": "Preflight returned workspace_not_at_handoff.", "evidence_paths": ["orchestration/agent_inbox/codex/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-pre-worker-dispatch-receipt.json", "docs/ariadne-agent-error-correction-register-revision-639.md"], "candidate_state": "canonical_unchanged", "workflow_disposition": "revision_required", "recurrence_signature": "orchestrator.external_harness_assigned_workspace_model", "causal_claim_level": "observation_only", "correction": {"status": "control_added", "action": "Represent only actual Ariadne workspace owners.", "prevention_control": "External Harness sessions remain transport evidence rather than Ariadne workspace owners.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"]}, "baton_summary": "records the second contained workspace-model rejection."
+    },
+    {
+      "attempt_key": "manifest-normalizer-regex-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-tool-source-inspection", "model": "gpt-sol", "reasoning_level": "high", "transport": "local_repository_powershell", "stage": "dispatch", "category": "operator_error", "process_severity": "low", "expected_invariant": "PowerShell receives a literal regex pattern for source inspection.", "observed_error": "Incorrect quoting caused read to be interpreted as a cmdlet.", "detection_method": "PowerShell failed before changing state.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"], "candidate_state": "canonical_unchanged", "workflow_disposition": "revision_required", "recurrence_signature": "orchestrator.powershell_regex_quoting", "causal_claim_level": "observation_only", "correction": {"status": "corrected_fresh_attempt", "action": "Use a single-quoted literal regex.", "prevention_control": "Source-search alternations are passed as literal strings.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"]}, "baton_summary": "records one corrected PowerShell regex-quoting error."
+    },
+    {
+      "attempt_key": "manifest-normalizer-cleanup-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-attempt-root-cleanup", "model": "gpt-sol", "reasoning_level": "high", "transport": "local_filesystem_cleanup", "stage": "closeout", "category": "command_scope_violation", "process_severity": "low", "expected_invariant": "Recursive cleanup uses an exact validated target and an admitted command shape.", "observed_error": "The first recursive cleanup command was rejected by tool policy before execution.", "detection_method": "The tool rejected the command and the root remained present.", "evidence_paths": ["orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-cleanup-readback.json", "docs/ariadne-agent-error-correction-register-revision-639.md"], "candidate_state": "canonical_unchanged", "workflow_disposition": "revision_required", "recurrence_signature": "orchestrator.recursive_cleanup_command_policy", "causal_claim_level": "observation_only", "correction": {"status": "contained_then_escalated", "action": "Stop and validate the exact parent and leaf before cleanup.", "prevention_control": "Disposable cleanup binds exact asserted paths before deletion.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"]}, "baton_summary": "records one rejected cleanup command shape."
+    },
+    {
+      "attempt_key": "manifest-normalizer-cleanup-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-attempt-root-cleanup", "model": "gpt-sol", "reasoning_level": "high", "transport": "local_filesystem_cleanup", "stage": "closeout", "category": "command_scope_violation", "process_severity": "low", "expected_invariant": "Recursive cleanup uses an exact validated target and an admitted command shape.", "observed_error": "The existing cleanup helper did not own the task-specific root layout and refused it.", "detection_method": "The helper failed closed and the root remained present.", "evidence_paths": ["orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-cleanup-readback.json", "docs/ariadne-agent-error-correction-register-revision-639.md"], "candidate_state": "canonical_unchanged", "workflow_disposition": "revision_required", "recurrence_signature": "orchestrator.recursive_cleanup_command_policy", "causal_claim_level": "observation_only", "correction": {"status": "control_added", "action": "Use an exact parent/name assertion and remove only the named root.", "prevention_control": "Disposable cleanup binds exact asserted paths before deletion.", "evidence_paths": ["orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-cleanup-readback.json"]}, "baton_summary": "records the contained cleanup-helper scope mismatch."
+    },
+    {
+      "attempt_key": "manifest-normalizer-terminal-evidence-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-native-terminal", "model": "gpt-sol", "reasoning_level": "high", "transport": "native_harness_coordinator", "stage": "closeout", "category": "evidence_misreport", "process_severity": "moderate", "expected_invariant": "Terminal evidence retains the exact broker rejection reason.", "observed_error": "The coordinator retained counts and status but omitted the broker reason event.", "detection_method": "Sol read the terminal evidence and found only request_rejected plus HTTP 400.", "evidence_paths": ["orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-terminal-review.json", "docs/ariadne-agent-error-correction-register-revision-639.md"], "candidate_state": "canonical_unchanged", "workflow_disposition": "review_rejected", "recurrence_signature": "orchestrator.native_terminal_rejection_reason_omitted", "causal_claim_level": "observation_only", "correction": {"status": "contained_then_escalated", "action": "Bind the structurally read seven-tool header and pinned source, and score trace_complete false.", "prevention_control": "Future coordinators retain broker reason events when available.", "evidence_paths": ["orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/efficacy-reading.json"]}, "baton_summary": "records one contained terminal-reason evidence omission."
+    },
+    {
+      "attempt_key": "manifest-normalizer-native-session-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "implementer", "resource_id": "manifest-normalizer-stock-headless-session", "model": "deepseek-v4-flash", "reasoning_level": "high", "transport": "deepseek_native_harness", "stage": "implementation", "category": "harness_failure", "process_severity": "moderate", "expected_invariant": "The occupied request declares only broker-allowed tools.", "observed_error": "Stock headless declared seven tools while the broker allowed exactly three.", "detection_method": "The broker rejected one request before provider I/O with zero tool calls and zero changed paths.", "evidence_paths": ["orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-terminal.json", "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-terminal-review.json"], "candidate_state": "canonical_unchanged", "workflow_disposition": "recovery_lease_invoked", "recurrence_signature": "harness.stock_headless_global_tools_exceed_broker_allowlist", "causal_claim_level": "observation_only", "correction": {"status": "recovery_lease_applied", "action": "End the native lane and let Sol recover the frozen source task.", "prevention_control": "Use only an already accepted compatible runner or decline the native lane without new interoperability work.", "evidence_paths": ["orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/efficacy-reading.json"]}, "baton_summary": "records one pre-provider stock-runner tool-contract rejection."
+    },
+    {
+      "attempt_key": "manifest-normalizer-pytest-id-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-focused-tests", "model": "gpt-sol", "reasoning_level": "high", "transport": "local_repository_pytest", "stage": "deterministic_verification", "category": "operator_error", "process_severity": "low", "expected_invariant": "Large boundary payloads have compact deterministic test IDs.", "observed_error": "A 32-KiB parameter was embedded in the Pytest identity and caused two setup errors.", "detection_method": "The focused suite reported two setup errors before assertions.", "evidence_paths": ["tests/test_appointment_check_in_environment_manifest.py", "docs/ariadne-agent-error-correction-register-revision-639.md"], "candidate_state": "untrusted_partial_worktree", "workflow_disposition": "revision_required", "recurrence_signature": "orchestrator.pytest_large_parameter_identity", "causal_claim_level": "observation_only", "correction": {"status": "corrected_fresh_attempt", "action": "Assign compact explicit parameter IDs.", "prevention_control": "Large payload test cases always declare bounded IDs.", "evidence_paths": ["tests/test_appointment_check_in_environment_manifest.py"]}, "baton_summary": "records one corrected oversized Pytest identity."
+    },
+    {
+      "attempt_key": "manifest-normalizer-ambient-guard-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-source-guard", "model": "gpt-sol", "reasoning_level": "high", "transport": "local_repository_pytest", "stage": "deterministic_verification", "category": "operator_error", "process_severity": "low", "expected_invariant": "Static guards match actual ambient-access spellings without harmless substrings.", "observed_error": "The guard matched environ inside environment and rejected safe source.", "detection_method": "One focused assertion failed while all behavioral cases passed.", "evidence_paths": ["tests/test_appointment_check_in_environment_manifest.py", "docs/ariadne-agent-error-correction-register-revision-639.md"], "candidate_state": "untrusted_partial_worktree", "workflow_disposition": "revision_required", "recurrence_signature": "orchestrator.static_guard_overbroad_substring", "causal_claim_level": "observation_only", "correction": {"status": "corrected_fresh_attempt", "action": "Match os.environ and other actual access spellings.", "prevention_control": "Capability guards use semantic tokens rather than word fragments.", "evidence_paths": ["tests/test_appointment_check_in_environment_manifest.py"]}, "baton_summary": "records one corrected overbroad capability guard."
+    },
+    {
+      "attempt_key": "manifest-normalizer-gap-tripwire-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-gap-tripwire", "model": "gpt-sol", "reasoning_level": "high", "transport": "local_repository_pytest", "stage": "deterministic_verification", "category": "repository_defect", "process_severity": "moderate", "expected_invariant": "A read-only predecessor tripwire permits its exact authorized repository descendant.", "observed_error": "The historical test denied every later app change, including the named normalizer prerequisite.", "detection_method": "The surrounding suite failed on the exact unmounted service path only.", "evidence_paths": ["tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py", "docs/ariadne-agent-error-correction-register-revision-639.md"], "candidate_state": "untrusted_partial_worktree", "workflow_disposition": "revision_required", "recurrence_signature": "repository.historical_no_app_change_tripwire_blocks_descendant", "causal_claim_level": "observation_only", "correction": {"status": "control_added", "action": "Permit only the exact normalizer while preserving every other protected path denial.", "prevention_control": "Read-only historical tripwires name their authorized descendant exceptions.", "evidence_paths": ["tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"]}, "baton_summary": "records one repaired historical descendant tripwire."
+    },
+    {
+      "attempt_key": "manifest-normalizer-enum-shape-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-source-review", "model": "gpt-sol", "reasoning_level": "high", "transport": "local_source_review", "stage": "acceptance", "category": "repository_defect", "process_severity": "moderate", "expected_invariant": "Caller-controlled YAML cannot escape typed denial through unhashable enum values.", "observed_error": "List or mapping values for two string enums could raise during set membership.", "detection_method": "Direct source review identified the untyped membership before acceptance.", "evidence_paths": ["app/services/appointment_check_in_environment_manifest.py", "tests/test_appointment_check_in_environment_manifest.py"], "candidate_state": "untrusted_partial_worktree", "workflow_disposition": "revision_required", "recurrence_signature": "repository.unhashable_enum_membership_escape", "causal_claim_level": "observation_only", "correction": {"status": "corrected_fresh_attempt", "action": "Require string type before membership and add adversarial cases.", "prevention_control": "Closed vocabularies type-check before set membership.", "evidence_paths": ["tests/test_appointment_check_in_environment_manifest.py"]}, "baton_summary": "records one corrected fail-closed enum-shape defect."
+    },
+    {
+      "attempt_key": "manifest-normalizer-serial-pytest-001", "observed_on": "2026-08-23", "tranche": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer", "role": "orchestrator", "resource_id": "manifest-normalizer-final-suite", "model": "gpt-sol", "reasoning_level": "high", "transport": "local_repository_pytest", "stage": "deterministic_verification", "category": "operator_error", "process_severity": "low", "expected_invariant": "Serial wrapper arguments use the required remainder separator.", "observed_error": "The first command omitted -- and the wrapper rejected -q.", "detection_method": "Argument parsing failed before test execution.", "evidence_paths": ["docs/ariadne-agent-error-correction-register-revision-639.md"], "candidate_state": "accepted_candidate_changed", "workflow_disposition": "revision_required", "recurrence_signature": "orchestrator.serial_pytest_remainder_separator", "causal_claim_level": "observation_only", "correction": {"status": "corrected_fresh_attempt", "action": "Insert -- before Pytest arguments.", "prevention_control": "Serial Pytest invocations follow the documented CLI shape.", "evidence_paths": ["orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/efficacy-reading.json"]}, "baton_summary": "records one corrected serial-wrapper argument error."
+    }
+  ]
+}

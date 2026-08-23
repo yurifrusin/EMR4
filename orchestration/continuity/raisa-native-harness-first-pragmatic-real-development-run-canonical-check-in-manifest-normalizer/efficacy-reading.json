@@ -1,0 +1,38 @@
+{
+  "schema_version": "emr4.native_harness_pragmatic_real_work_efficacy.v1",
+  "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+  "reviewed_source": "ae62faf95b289b369a6eea1793ee4325f33447bc",
+  "assignment": "closed_manifest_normalizer",
+  "native_harness": {
+    "attempt_id": "deepseek-native-manifest-normalizer-001",
+    "useful_candidate": false,
+    "task_completion": false,
+    "trace_complete": false,
+    "trace_sufficient_for_terminal_attribution": true,
+    "scope_integrity": true,
+    "provider_call_started": 0,
+    "provider_call_completed": 0,
+    "automatic_retries": 0,
+    "duration_ms": 7404,
+    "terminal": "broker_rejected_stock_headless_seven_tool_request_before_provider_io",
+    "correction_cost": "one preparation correction, one occupied session, structural terminal review, cleanup, and Sol recovery",
+    "reliability_conclusion": "no_model_performance_reading"
+  },
+  "sol_recovery": {
+    "useful_candidate": true,
+    "task_completion": true,
+    "scope_integrity": true,
+    "focused_and_surrounding_tests_passed": 149,
+    "ruff": "passed",
+    "compile": "passed",
+    "git_diff_check": "passed"
+  },
+  "adoption_reading": {
+    "native_harness_retained_role": "monitored_secondary_worker",
+    "default_worker_promotion": false,
+    "more_generic_harness_testing_required": false,
+    "next_use_rule": "use the stock headless runner only when its visible tool set fits the broker contract; otherwise use an already accepted compatible runner or decline the native lane without building another interoperability tranche",
+    "comparative_reliability_vs_claude_code": "not_established"
+  },
+  "protected_boundary": "No provider payload, product data, secret, operational manifest, database, route, runtime, deployment, release, Pages or protected-ref action occurred."
+}
