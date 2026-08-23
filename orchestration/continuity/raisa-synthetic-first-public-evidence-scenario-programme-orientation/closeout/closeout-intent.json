@@ -42,7 +42,8 @@
       "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-plan-precommit-receipt.json",
       "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-postcompaction-receipt.json",
       "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-candidate-precommit-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-closeout-precommit-receipt.json"
+      "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-closeout-precommit-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-closeout-correction-precommit-receipt.json"
     ],
     "additional_artifacts": [
       "docs/raisa-synthetic-first-public-evidence-scenario-programme-orientation-plan.md",
@@ -89,6 +90,7 @@
     "no_private_calibration_reference_resolution",
     "no_protected_holdout_or_support_surface_access",
     "no_product_runtime_route_api_client_database_or_configuration_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
     "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
     "no_live_provider_model_prompt_or_cost",
     "no_production_runtime_deployment_release_or_pages",
@@ -96,5 +98,41 @@
     "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
     "docs_branding_and_all_unrelated_untracked_files_preserved",
     "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "synthetic-orientation-boundary-floor-001",
+      "observed_on": "2026-08-24",
+      "tranche": "synthetic-scenario-orientation",
+      "role": "orchestrator",
+      "resource_id": "clockwork-closeout-intent",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every semantic closeout carries the exact mandatory next-operation protected-boundary floor.",
+      "observed_error": "The first rehearsal split the product and historical-data protections into narrower prose but omitted the exact required floor token, so admission returned tick_next_boundaries_floor.",
+      "detection_method": "The bound clockwork driver rejected the intent before command execution, mutation, publication or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/closeout/clockwork-rehearsal-attempt-001-rejected-receipt.json",
+        "orchestration_harness/governance_clockwork_tick.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_required_boundary_floor_omission",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the exact mandatory product-patient-appointment-clinical-historical-protected-data floor token and retain the narrower controls.",
+        "prevention_control": "Use the bound driver's fail-closed admission as the canonical selector for mandatory boundary vocabulary.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/closeout/closeout-intent.json",
+          "orchestration_harness/governance_clockwork_tick.py"
+        ]
+      },
+      "baton_summary": "records one contained mandatory-boundary token omission and its exact floor correction."
+    }
   ]
 }

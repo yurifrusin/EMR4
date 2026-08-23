@@ -1,0 +1,18 @@
+{
+  "schema_version": "ariadne.governance_bound_closeout_rejection_receipt.v1",
+  "status": "revision_required",
+  "recorded_at": "2026-08-24T00:04:31+10:00",
+  "mode": "rehearse",
+  "source_head": "49ed406ceadd66058ec09b4ea008f1674fdd9644",
+  "intent": "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/closeout/closeout-intent.json",
+  "reason": "tick_next_boundaries_floor",
+  "mutation": {
+    "command_execution_count": 0,
+    "publication_count": 0,
+    "canonical_change_count": 0,
+    "pointer_movement_count": 0,
+    "retained_lease_sequence": 225,
+    "retained_generation_id": "gen-801d4a930d96a912aa0fc3944f7614eb713279a25fcfd215da7e778b0517c78e"
+  },
+  "correction": "Add the exact required no_product_patient_appointment_clinical_historical_or_protected_data boundary before a fresh rehearsal."
+}
