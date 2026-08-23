@@ -1,0 +1,139 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "ariadne-clockwork-typed-builder-matched-efficacy-review",
+  "recorded_at": "2026-08-23T18:08:50.3183802+10:00",
+  "closeout": {
+    "operation_id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+    "title": "Provider-free governance clockwork typed-builder matched efficacy review",
+    "builds_on": [
+      "ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal"
+    ],
+    "authority_notes": [
+      "GPT Sol owns the exact provider-free read-only matched review and acceptance."
+    ],
+    "decisions": [
+      {
+        "id": "retain-builder-repair-traceability-next",
+        "source": "docs/ariadne-clockwork-typed-builder-matched-efficacy-review-plan.md",
+        "summary": "Retain the measured interface, correct the normalized baseline and preserve publication evidence before broader ergonomics work."
+      }
+    ],
+    "claim_scope": [
+      "One first-use typed tooling closeout is measured and conditionally retained."
+    ],
+    "additional_receipts": [],
+    "additional_artifacts": [],
+    "unresolved_gates": [
+      "Arbitrary profiles, test reduction, worker transport and product surfaces remain closed."
+    ],
+    "journey": {
+      "strategic_role": "Judge whether the compact clock face removes more work than it creates.",
+      "outcome": "Retain the builder, correct its comparison and select evidence preservation first."
+    },
+    "current_position": {
+      "strategic_role": "Reduce clerical choices while keeping canonical safety observable.",
+      "why_now": "The first real semantic publication supplies actual cost, gain and failure evidence.",
+      "outcome": "A 59.3 percent reduction is retained with one traceability repair selected.",
+      "unlocks": [
+        "A narrow idempotent publication evidence-preservation repair."
+      ],
+      "does_not_solve": [
+        "It does not yet reduce continuation receipt volume or test cadence."
+      ],
+      "orientation_statement": "Preserve the publication reading, then reduce the larger receipt surface."
+    },
+    "next_operation": {
+      "operation_id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
+      "active_tranche": "Provider-free governance clockwork idempotent publication evidence preservation repair",
+      "objective": "Preserve the first publication evidence and record idempotent readback without overwriting it inside the existing clockwork CLI.",
+      "authority_source": "The accepted matched efficacy review and standing authority select the narrowest traceability repair before further ergonomic expansion.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_immutable_publication_evidence_and_separate_idempotent_reading_contract"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "provider_free_existing_clockwork_cli_idempotent_evidence_preservation_repair_only",
+    "preserve_first_publication_evidence_and_record_readback_without_overwrite",
+    "no_new_operator_document_gate_ledger_approval_or_control_layer",
+    "no_native_harness_worker_provider_call_or_transport_qualification",
+    "no_silent_claude_code_or_other_transport_fallback",
+    "no_authority_allocation_or_worker_transport_policy_change",
+    "no_existing_product_source_route_api_client_configuration_or_runtime_change",
+    "no_environment_variable_secret_credential_network_database_or_infrastructure_access",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "typed-builder-frozen-baseline-normalization",
+      "observed_on": "2026-08-23",
+      "tranche": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "acceptance",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "A no-incident leaf baseline must remove both the incident observation and every field derived only from that observation.",
+      "observed_error": "The frozen 151-leaf label removed the observation but retained its one generated register-revision acceptance path.",
+      "detection_method": "The matched review recomputed the 176-leaf intent, 25-leaf observation and normalized no-incident object separately.",
+      "evidence_paths": [
+        "docs/ariadne-clockwork-typed-semantic-builder-plan.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.semantic_leaf_baseline_retains_incident_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Report the subtractive 151 figure separately and use 150 for the normalized like-for-like comparison.",
+        "prevention_control": "Future leaf comparisons must materialize both normalized objects and enumerate every incident-derived field before counting.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/report.md"
+        ]
+      },
+      "baton_summary": "corrects the typed-builder baseline from subtractive 151 to normalized 150 leaves."
+    },
+    {
+      "attempt_key": "typed-builder-idempotent-evidence-overwrite",
+      "observed_on": "2026-08-23",
+      "tranche": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+      "role": "orchestrator",
+      "resource_id": "codex-primary-orchestrator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "An idempotent readback must not erase the preceding publication command facts from the operation evidence pair.",
+      "observed_error": "The second publish skipped commands and canonical writes but rewrote the publication evidence pair with the idempotent result.",
+      "detection_method": "The matched review compared the initial publication output, current evidence pair, transaction, generation, pointer and CLI output branches.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal/clockwork-tick-evidence.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.idempotent_readback_overwrites_publication_evidence",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "Do not repeat publish for readback until the selected repair preserves the publication evidence.",
+        "prevention_control": "The existing CLI must preserve the first publication pair and expose idempotent reading without overwriting it.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/report.md"
+        ]
+      },
+      "baton_summary": "contains idempotent convenience-evidence overwrite pending the selected preservation repair."
+    }
+  ]
+}

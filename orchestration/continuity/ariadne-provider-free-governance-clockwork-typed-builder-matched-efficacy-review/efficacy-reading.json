@@ -1,0 +1,36 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+  "source_head": "8c856e69827a401bcedb0fe0c02ca3bda8e48c15",
+  "result": "retain_builder_correct_baseline_and_repair_traceability_before_next_ergonomic_projection",
+  "matched_measurement": {
+    "normalized_legacy_leaves": 150,
+    "live_semantic_leaves": 61,
+    "removed_leaves": 89,
+    "reduction_percent": 59.33,
+    "runtime_state_and_receipt_files": 14,
+    "runtime_state_and_receipt_lines": 2334,
+    "semantic_intent_lines": 96,
+    "remaining_control_artifact_line_ratio": 24.31
+  },
+  "workflow": {
+    "canonical_publications": 1,
+    "canonical_rollbacks": 0,
+    "full_governance_suite_runs": 3,
+    "implementation_test_correction_rounds": 2,
+    "postpublication_traceability_defects": 1,
+    "baseline_measurement_corrections": 1,
+    "product_reruns": 0,
+    "provider_reruns": 0,
+    "new_control_layers": 0,
+    "implementation_files_changed_by_review": 0
+  },
+  "decision": {
+    "typed_builder": "retain",
+    "immediate_repair": "idempotent_publication_evidence_preservation",
+    "next_ergonomic_target": "typed_serial_continuation_state_projection_inside_existing_preflight",
+    "test_reduction": "not_yet_admitted",
+    "worker_clock_coupling": "coarse_states_only"
+  },
+  "assessment": "The first live typed closeout preserves safety and reduces the normalized caller surface by 59.3 percent. Its idempotent evidence overwrite is contained but requires a narrow repair. The much larger remaining clerical surface is seven runtime states plus seven receipts, which should be reduced only by deriving their repeated structure inside the existing preflight."
+}

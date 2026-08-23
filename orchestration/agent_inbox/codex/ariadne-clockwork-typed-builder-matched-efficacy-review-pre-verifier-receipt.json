@@ -1,0 +1,128 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free governance clockwork typed-builder matched efficacy review",
+    "completed_stage": "Accepted ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_exact_matched_measurement_and_no_added_bureaucracy_acceptance",
+    "operation_id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+    "resume_after_compaction": true,
+    "source_head": "1aa4cf893ed0d5290be95912ed5018280ff9a9e5",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "8c856e69827a401bcedb0fe0c02ca3bda8e48c15",
+    "reason_codes": [],
+    "resolved_commit": "1aa4cf893ed0d5290be95912ed5018280ff9a9e5",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "1aa4cf893ed0d5290be95912ed5018280ff9a9e5"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "8c856e69827a401bcedb0fe0c02ca3bda8e48c15",
+    "branch_origin_aligned": false,
+    "head": "8c856e69827a401bcedb0fe0c02ca3bda8e48c15",
+    "origin_branch_commit": "382444af5207dd4b7cb83f9ef2bb7b46c7a61546",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 685
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_acceptance_after_mechanical_matched_recomputation",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The native occupied profile remains paused, Claude Code is not an authorized fallback, provider work is closed and the next tranche is exact read-only local efficacy measurement.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The accepted publication, idempotent overwrite and safety readings are deterministic repository evidence; no provider call or independent semantic veto is authorized.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation and the small matched measurement is serially coupled to one publication and its canonical pointer.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "if canonical generation or pointer validation fails",
+      "if the idempotent overwrite changes acceptance rather than ergonomics",
+      "before matched-review acceptance and closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "commit and push the accepted clockwork generation before planning the matched review",
+      "measure the live 61-leaf intent against the frozen 151-leaf baseline",
+      "distinguish canonical generation safety from the non-canonical idempotent convenience-evidence overwrite",
+      "recommend retention adjustment or rollback without implementing a repair in the read-only tranche"
+    ]
+  },
+  "planned_action": "accept_exact_read_only_matched_efficacy_review_and_two_contained_evidence_findings",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal/report.md",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal/efficacy-reading.json",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/evidence.json",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/report.md",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/efficacy-reading.json",
+      "docs/ariadne-clockwork-typed-semantic-builder-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-typed-semantic-builder-sol-acceptance.md",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal/clockwork-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json",
+      "orchestration/continuity/ariadne-governance-clockwork/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol owns the serial closeout push and read-only measurement. DeepSeek remains declined because the native profile is paused and Claude Code is not a fallback; Gemini and native subagents remain declined because the review is exact local evidence analysis.",
+    "git_refs_and_worktree": "The machine snapshot alone binds exact Git identities, the task branch and origin relation, all four protected refs, intentional clockwork-owned closeout changes and preservation of unrelated untracked paths including docs/branding.",
+    "live_handover_current_baton": "The complete projected live handover was freshly read. It accepts the typed semantic builder, advances the clockwork reading and selects the matched read-only efficacy review.",
+    "protected_evidence_boundaries": "The next tranche is provider-free and read-only: measure the first semantic closeout, including its idempotent convenience-evidence overwrite, without changing the builder or adding a control layer. Harness, provider, product, data, runtime, deployment, Pages, protected evidence and protected refs remain closed."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

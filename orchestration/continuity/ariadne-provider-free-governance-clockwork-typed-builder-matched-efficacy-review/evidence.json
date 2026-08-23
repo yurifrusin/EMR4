@@ -1,0 +1,88 @@
+{
+  "schema_version": "ariadne.governance_typed_builder_matched_efficacy_evidence.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+  "review_source": "8c856e69827a401bcedb0fe0c02ca3bda8e48c15",
+  "measured_git_window": {
+    "start": "53261b5c855a951c0dbf4a80178ff6a7e1d1f71c",
+    "end": "382444af5207dd4b7cb83f9ef2bb7b46c7a61546",
+    "commit_count": 4,
+    "changed_path_count": 37,
+    "plan_commit_timestamp": "2026-08-23T17:19:38+10:00",
+    "publication_commit_timestamp": "2026-08-23T18:07:22+10:00",
+    "plan_to_publication_seconds": 2864,
+    "plan_timestamp_to_publication_seconds": 3021.5385217
+  },
+  "caller_surface": {
+    "incident_bearing_legacy_intent_leaves": 176,
+    "incident_observation_leaves": 25,
+    "frozen_subtractive_baseline_leaves": 151,
+    "residual_incident_revision_path_leaves_in_frozen_baseline": 1,
+    "normalized_no_incident_legacy_leaves": 150,
+    "representative_semantic_fixture_leaves": 64,
+    "live_semantic_intent_leaves": 61,
+    "live_semantic_intent_bytes": 5502,
+    "live_semantic_intent_lines": 96,
+    "normalized_removed_caller_leaves": 89,
+    "normalized_reduction_percent": 59.33,
+    "derived_header_values": 10,
+    "caller_header_timestamp_values": 1
+  },
+  "execution": {
+    "header_materializer_invocations": 2,
+    "header_materializing_invocations": 1,
+    "header_idempotent_invocations": 1,
+    "semantic_dry_checks": 1,
+    "dry_check_verification_commands_executed": 0,
+    "semantic_publication_invocations": 1,
+    "publication_verification_commands_executed": 3,
+    "publication_verification_commands_passed": 3,
+    "canonical_publications": 1,
+    "lease_advances": 1,
+    "rollbacks": 0,
+    "idempotent_readback_invocations": 1,
+    "idempotent_verification_commands_reexecuted": 0,
+    "whole_file_governance_suite_runs": 3,
+    "whole_file_governance_tests_per_run": 115,
+    "implementation_test_correction_rounds": 2,
+    "product_reruns": 0,
+    "provider_reruns": 0
+  },
+  "remaining_orchestrator_surface": {
+    "runtime_state_files": 7,
+    "receipt_files": 7,
+    "runtime_state_and_receipt_lines": 2334,
+    "runtime_state_and_receipt_bytes": 130653,
+    "lines_relative_to_semantic_intent": 24.31,
+    "bytes_relative_to_semantic_intent": 23.75
+  },
+  "safety": {
+    "canonical_generation_valid": true,
+    "canonical_pointer_valid": true,
+    "active_latch_valid": true,
+    "canonical_drift": 0,
+    "protected_ref_movements": 0,
+    "postpublication_governance_tests_passed": 115,
+    "docs_branding_preserved": true
+  },
+  "observed_defects": [
+    {
+      "id": "frozen_baseline_retained_incident_revision_path",
+      "class": "evidence_misreport",
+      "effect": "The 151-leaf label was not a fully normalized no-incident comparison; the corrected baseline is 150.",
+      "canonical_effect": "none"
+    },
+    {
+      "id": "idempotent_readback_overwrote_publication_convenience_evidence",
+      "class": "repository_defect",
+      "effect": "The idempotent publish rewrote the operation evidence/report pair and removed the preceding command digest readings from that convenience artifact.",
+      "canonical_effect": "none"
+    }
+  ],
+  "decision": {
+    "typed_builder": "retain_with_traceability_repair",
+    "first_priority": "preserve_publication_evidence_across_idempotent_readback",
+    "second_priority": "derive_serial_governance_continuation_runtime_state_inside_existing_preflight",
+    "test_cadence": "retain_until_exact_invariant_preserving_reduction_is_frozen",
+    "fine_grained_worker_clock_coupling": "remain_retired"
+  }
+}
