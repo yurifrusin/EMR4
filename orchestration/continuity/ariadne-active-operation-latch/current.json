@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
-  "active_tranche": "Provider-free governance clockwork idempotent publication evidence preservation repair",
-  "objective": "Preserve the first publication evidence and record idempotent readback without overwriting it inside the existing clockwork CLI.",
+  "operation_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal",
+  "active_tranche": "Provider-free governance clockwork typed serial-continuation state projection rehearsal",
+  "objective": "Replace repeated serial continuation runtime-state form filling with one typed projection inside the existing orchestrator preflight.",
   "status": "in_progress",
-  "source_head": "08565a9806fcc74559633e518a97a5d9f8f602d1",
-  "authority_source": "The accepted matched efficacy review and standing authority select the narrowest traceability repair before further ergonomic expansion.",
+  "source_head": "676c2d636aac9ced64214deacafadafc523be47f",
+  "authority_source": "The accepted matched efficacy review ranks continuation-state repetition as the next largest ergonomic burden, and this repair clears its prerequisite.",
   "checkpoint": {
-    "completed_stage": "Accepted ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_immutable_publication_evidence_and_separate_idempotent_reading_contract",
+    "completed_stage": "Accepted ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_minimal_continuation_intent_and_derived_runtime_state_contract",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,9 +34,10 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_existing_clockwork_cli_idempotent_evidence_preservation_repair_only",
-    "preserve_first_publication_evidence_and_record_readback_without_overwrite",
-    "no_new_operator_document_gate_ledger_approval_or_control_layer",
+    "provider_free_existing_orchestrator_preflight_typed_serial_continuation_projection_only",
+    "derive_repository_known_latch_context_adapter_worker_slot_and_default_lane_shapes",
+    "replace_repeated_runtime_state_form_filling_without_a_new_receipt_layer",
+    "preserve_existing_receipt_validation_five_source_git_snapshot_and_fail_closed_semantics",
     "no_native_harness_worker_provider_call_or_transport_qualification",
     "no_silent_claude_code_or_other_transport_fallback",
     "no_authority_allocation_or_worker_transport_policy_change",

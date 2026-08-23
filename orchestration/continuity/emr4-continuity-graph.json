@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 433,
+  "graph_revision": 434,
   "harvests": [],
   "nodes": [
     {
@@ -34972,9 +34972,90 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
+      "title": "Provider-free governance clockwork idempotent publication evidence preservation repair",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "GPT Sol owns the provider-free serial CLI repair and deterministic acceptance."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "preserve-publication-pair",
+          "source": "docs/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-plan.md",
+          "status": "accepted",
+          "summary": "Never route an exact already-published intent through the publication-pair writer."
+        },
+        {
+          "id": "one-machine-readback",
+          "source": "docs/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-plan.md",
+          "status": "accepted",
+          "summary": "Record idempotent state in one authenticated generated JSON with no companion operator report."
+        }
+      ],
+      "claim_scope": [
+        "One occupied exact readback preserves its valid publication pair and canonical state."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-plan.md",
+          "docs/security/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair/evidence.json",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair/report.md",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-23--ariadne-clockwork-idempotent-publication-evidence-preservation-repair.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-pre-verifier-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/clockwork-tick-idempotent-readback.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Historical lost digests, test-cadence reduction and worker transport remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T18:58:39.0105413+10:00",
+      "updated_at": "2026-08-23T18:58:39.0105413+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "676c2d636aac9ced64214deacafadafc523be47f",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T18:08:50.3183802+10:00"
+  "updated_at": "2026-08-23T18:58:39.0105413+10:00"
 }

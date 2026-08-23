@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 415,
-  "updated_at": "2026-08-23T18:08:50.3183802+10:00",
-  "source_graph_revision": 433,
-  "orientation_statement": "Preserve the publication reading, then reduce the larger receipt surface.",
+  "map_revision": 416,
+  "updated_at": "2026-08-23T18:58:39.0105413+10:00",
+  "source_graph_revision": 434,
+  "orientation_statement": "Preserve original readings; derive the remaining repeated forms.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5287,24 +5287,34 @@
         "docs/ariadne-clockwork-typed-builder-matched-efficacy-review-plan.md",
         "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/report.md"
       ]
+    },
+    {
+      "node_id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
+      "lineage_parent": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+      "strategic_role": "Make repeated clock readings non-destructive without adding operator paperwork.",
+      "outcome": "Publication evidence remains immutable and one machine readback records the repeat.",
+      "evidence": [
+        "docs/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-plan.md",
+        "orchestration/continuity/ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair/report.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
-    "strategic_role": "Reduce clerical choices while keeping canonical safety observable.",
-    "why_now": "The first real semantic publication supplies actual cost, gain and failure evidence.",
-    "outcome": "A 59.3 percent reduction is retained with one traceability repair selected.",
+    "node_id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
+    "strategic_role": "Reduce clerical failure while keeping the original safety reading visible.",
+    "why_now": "The matched review found a concrete postpublication traceability defect.",
+    "outcome": "Two publication files and four canonical hashes remain byte-exact after occupied readback.",
     "unlocks": [
-      "A narrow idempotent publication evidence-preservation repair."
+      "A typed serial-continuation projection inside the existing preflight."
     ],
     "does_not_solve": [
-      "It does not yet reduce continuation receipt volume or test cadence."
+      "It does not yet reduce continuation runtime-state or receipt volume."
     ],
     "evidence": [
-      "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/evidence.json",
-      "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/report.md",
-      "docs/ariadne-clockwork-typed-builder-matched-efficacy-review-closeout.md",
-      "orchestration/agent_inbox/codex/ariadne-clockwork-typed-builder-matched-efficacy-review-sol-acceptance.md"
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair/evidence.json",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair/report.md",
+      "docs/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

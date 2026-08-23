@@ -1,85 +1,85 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
-  "operation_id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
-  "transaction_id": "txn-594b60c90f5aa86cf61f35ce",
-  "source_commit": "08565a9806fcc74559633e518a97a5d9f8f602d1",
-  "previous_source_commit": "08565a9806fcc74559633e518a97a5d9f8f602d1",
-  "previous_generation_id": "gen-200e022a02b7ea18c03734e2e386344fad8c0805304f2b0ed38899534a6dc792",
-  "previous_bundle_sha256": "200e022a02b7ea18c03734e2e386344fad8c0805304f2b0ed38899534a6dc792",
+  "operation_id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
+  "transaction_id": "txn-e3166167b8cc8d9d36d918aa",
+  "source_commit": "676c2d636aac9ced64214deacafadafc523be47f",
+  "previous_source_commit": "676c2d636aac9ced64214deacafadafc523be47f",
+  "previous_generation_id": "gen-30308fd11f3905e28b6fb065aaa022ef7764fc3a49496711f1c2fb764f136b10",
+  "previous_bundle_sha256": "30308fd11f3905e28b6fb065aaa022ef7764fc3a49496711f1c2fb764f136b10",
   "previous_canonical_sha256s": {
-    "continuity": "07bb88948306445e77c35d09411e6c8f82580f53ee5ea7d6ecb09061587daa78",
-    "compass": "cb79dbb394e1576a0f84bba6cf34ce25979819b68c8351728339861b366abab2",
-    "compass_markdown": "3e11cf48319ce3e1ae65e2dc296882351f471c5ab089d32d2097f16bf8f95ce9",
-    "active_latch": "9e94cbecd54e9a298a03414fb231b823b5e4f97f6a8417f9f0cd38af8a74808c",
-    "error_register": "d1f96065cecd0c95292f48ec8ff7c9121b0cdb47e81343ba691d2a51894ed19b",
-    "pattern_report": "a7eacd77af7e316b53fec26f35b50f6e14eec75aafce251d9afb3435bcaca865",
-    "current_baton": "4aaedd012b686d6ef045ea0a92f27ea00f13d3d82e2c3e2a4a315adf25c07941"
+    "continuity": "32bb4463d719bddef93c963837defef2f82ee0fe30ddbdc1ee8a85045f795247",
+    "compass": "5f83f2e1040e3a1deff666d3cd0c70c1bea85a0d97ce2c5a89ed115f1c359ca8",
+    "compass_markdown": "38411b9f389609efd123d090194d20305a8b56d6bed2bff7039f5497073566c6",
+    "active_latch": "f931a511814154a6715154b36d160049c02989ae3f176d9cc4e3660277d28134",
+    "error_register": "1eb7e9d9af776ad57c431e894b022fc0a927e1e9d657dcd4e8a5830937c70e00",
+    "pattern_report": "614d5290c4fb779e7276f12b463fb97a210d623ee09109a97c2d15335db0690d",
+    "current_baton": "489440c13517650b0bd97161d0cfe72d9c45410fdabc4c4dc6a24e2daa71247c"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "f00defcfb35d5a16b4b21ec60f6ab2cb03bc025c0ab0055c8ea229cbcac78dac",
-    "transaction.json": "2915f156e5ec7b7d5ba707521fcb6244a019b1b046cd195aeae78d1f4490d3fb",
+    "command-manifest.json": "6beb4e79177d91558fcc233168c62942ab81f49029f01ae5f63ead68a1c672fe",
+    "transaction.json": "f39119e416acd174c6a61a2ea3e88b832e36f023accb69f9a4524f692bb2debe",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "a8505d15268973f1366ccf5673f2c2f24fe2300d27f340ec9942525afad8a6d2"
+    "generation-manifest.json": "b195f112ed5a84b8d084f0f2014ce0113317a6ae369709011b43fcc32b5430da"
   },
   "projection_sha256s": {
-    "graph": "sha256:684cc2dacf4ba3f82530dc90576c29ca3bec12135b2ff88d49e34ee277a4373a",
-    "compass": "sha256:6f9f13866e7b0866c6f8dec4c406e4ecd65f1184fbf4270e1e55eeec27030f86",
-    "report": "sha256:aa988c0ae799acd91ad9fc7e1e0f7b989359cfd45617570967818d35b182eb47",
-    "latch": "sha256:5d98303f0a71f2176d6bda71586c4033c7fa95bca56af965ee1dc99d1b709b27",
-    "incident_aggregate": "sha256:e95634c06f4702a899c6a5402a47a195f9779d72acea006e972ced2a13a36a74"
+    "graph": "sha256:bb0587661219eb20afea9eda989d8b7c01689f7861e46ee159d6ff526a553648",
+    "compass": "sha256:b36c15b564a808927786501be62e1be2d17289b41c5a78aced16399b44d6ff0b",
+    "report": "sha256:1ad1d356dd802a6ce9468cc102ca116195e6826221a9731d3f5230a9e4271cfc",
+    "latch": "sha256:50d928316b7b5a8bc0765535f08028ff9b4447ab953cd1d2878157c936d052a2",
+    "incident_aggregate": "sha256:012cd99c89990d8a80584cdc38452c69df669aaa4fbdbc83e5f088ec2c190ded"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-594b60c90f5aa86cf61f35ce",
-      "transaction_id": "txn-594b60c90f5aa86cf61f35ce",
-      "operation_id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+      "journal_id": "journal-e3166167b8cc8d9d36d918aa",
+      "transaction_id": "txn-e3166167b8cc8d9d36d918aa",
+      "operation_id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
       "event_type": "manifest-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "manifest_sha256": "sha256:1426a6ee1261400672119005cd56eb17ed5dc7a3c0a52ed7267362692b942943"
+        "manifest_sha256": "sha256:613500611a123be47dd99cdc4c7da1af1f7e4491ef45f0de7275a5baed973861"
       },
-      "event_sha256": "sha256:6010eb55203f9a32081a955a083872628470e1de5c99ddad4a7c4c78ed98caf5"
+      "event_sha256": "sha256:f70cbc775f08a7786f37206bdbee7902a22d586d39b635482f51293d296a621f"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-594b60c90f5aa86cf61f35ce",
-      "transaction_id": "txn-594b60c90f5aa86cf61f35ce",
-      "operation_id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+      "journal_id": "journal-e3166167b8cc8d9d36d918aa",
+      "transaction_id": "txn-e3166167b8cc8d9d36d918aa",
+      "operation_id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
       "sequence": 2,
-      "previous_event_sha256": "sha256:6010eb55203f9a32081a955a083872628470e1de5c99ddad4a7c4c78ed98caf5",
+      "previous_event_sha256": "sha256:f70cbc775f08a7786f37206bdbee7902a22d586d39b635482f51293d296a621f",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "08565a9806fcc74559633e518a97a5d9f8f602d1",
+        "source_commit": "676c2d636aac9ced64214deacafadafc523be47f",
         "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
       },
-      "event_sha256": "sha256:46b8fee09b5c014472892108a791914a7ef67289294498f157cca5c05288e52a"
+      "event_sha256": "sha256:864ff8316078b4e99cf7b593ee6bf4aae62f974f795adb3089214832326d065b"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-594b60c90f5aa86cf61f35ce",
-      "transaction_id": "txn-594b60c90f5aa86cf61f35ce",
-      "operation_id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+      "journal_id": "journal-e3166167b8cc8d9d36d918aa",
+      "transaction_id": "txn-e3166167b8cc8d9d36d918aa",
+      "operation_id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
       "sequence": 3,
-      "previous_event_sha256": "sha256:46b8fee09b5c014472892108a791914a7ef67289294498f157cca5c05288e52a",
+      "previous_event_sha256": "sha256:864ff8316078b4e99cf7b593ee6bf4aae62f974f795adb3089214832326d065b",
       "event_type": "projections-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "graph_revision": 433,
-        "map_revision": 415
+        "graph_revision": 434,
+        "map_revision": 416
       },
-      "event_sha256": "sha256:a48df072ab5583705b50feecd839ed5ff59ef1de296f32cc150b77926abec10d"
+      "event_sha256": "sha256:775e3e527ce527a028e41ca24bc4a14cc5267d47cbf2fd3c9264963a123aaede"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-594b60c90f5aa86cf61f35ce",
-      "transaction_id": "txn-594b60c90f5aa86cf61f35ce",
-      "operation_id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+      "journal_id": "journal-e3166167b8cc8d9d36d918aa",
+      "transaction_id": "txn-e3166167b8cc8d9d36d918aa",
+      "operation_id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
       "sequence": 4,
-      "previous_event_sha256": "sha256:a48df072ab5583705b50feecd839ed5ff59ef1de296f32cc150b77926abec10d",
+      "previous_event_sha256": "sha256:775e3e527ce527a028e41ca24bc4a14cc5267d47cbf2fd3c9264963a123aaede",
       "event_type": "projections-validated",
       "actor": "gpt-sol",
       "payload": {
@@ -87,26 +87,26 @@
         "compass": "passed",
         "latch": "passed"
       },
-      "event_sha256": "sha256:5008fe90a06c87a5c2ebb2300e8dd6f31717a19d170821bb85b16c1ff434ca8c"
+      "event_sha256": "sha256:29e6737883b927983b41e9fe0caea11e77ef126e3c7b04d1d4adaf96e0519965"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-594b60c90f5aa86cf61f35ce",
-      "transaction_id": "txn-594b60c90f5aa86cf61f35ce",
-      "operation_id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+      "journal_id": "journal-e3166167b8cc8d9d36d918aa",
+      "transaction_id": "txn-e3166167b8cc8d9d36d918aa",
+      "operation_id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
       "sequence": 5,
-      "previous_event_sha256": "sha256:5008fe90a06c87a5c2ebb2300e8dd6f31717a19d170821bb85b16c1ff434ca8c",
+      "previous_event_sha256": "sha256:29e6737883b927983b41e9fe0caea11e77ef126e3c7b04d1d4adaf96e0519965",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "shadow_directory_rename"
       },
-      "event_sha256": "sha256:7ac9a873a80c6af7b31f6252b78dd4bb94f810f23113c93a632ed5ff2e0d31ae"
+      "event_sha256": "sha256:ab586156a7e55144e8f06cb6f6278bf347828cbdc37aaa2ffcfb26433da6d03e"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
   "event_kind": "clean_closeout",
-  "next_boundaries_sha256": "sha256:eb433c50398aadeeeb462249b4b9c0a00a53e57a7e6b38b3413c173467b624b2",
-  "register_bytes_preserved": false,
-  "pattern_bytes_preserved": false
+  "next_boundaries_sha256": "sha256:db802ff85d092c29d702fb907beabf718676db577f136a6caf8752f025ed042e",
+  "register_bytes_preserved": true,
+  "pattern_bytes_preserved": true
 }
