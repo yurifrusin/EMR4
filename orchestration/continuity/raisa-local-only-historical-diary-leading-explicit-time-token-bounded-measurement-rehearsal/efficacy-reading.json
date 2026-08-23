@@ -1,0 +1,56 @@
+{
+  "schema_version": "raisa.local_historical_diary_leading_time_token_bounded_measurement_efficacy.v1",
+  "recorded_at": "2026-08-24T09:01:37.5638009+10:00",
+  "reviewed_source": "a9e00638b960306766260d6df674c3489be58b86",
+  "decision": "locally_restricted_candidate",
+  "operational_efficacy": {
+    "completed_snapshots": 80,
+    "total_snapshots": 80,
+    "completed_inside_1800_second_terminal": true,
+    "metadata_binds": 1,
+    "content_runs": 1,
+    "retries": 0,
+    "exact_word_cleanup": true,
+    "preexisting_word_process_preserved": true
+  },
+  "mapping_efficacy": {
+    "leading_token_hypothesis_supported": true,
+    "leading_token_observations": 5281,
+    "mapped_ratio": 0.420483,
+    "distinct_time_minutes": 34,
+    "positive_interval_mode_minutes": 10,
+    "stable_linkage_records": 199,
+    "adjacent_changes": 502,
+    "locally_restricted_candidate_exists": true
+  },
+  "privacy_and_promotion": {
+    "source_value_leakage_count": 0,
+    "provider_model_calls": 0,
+    "private_sidecars_removed": true,
+    "reusable_artifact_exists": false,
+    "first_use_admitted": false,
+    "candidate_specific_gate_evaluator_now_justified": true,
+    "whole_day_or_near_lossless_replay_supported": false
+  },
+  "risk_interpretation": {
+    "record_uniqueness_rate": 0.347619,
+    "trajectory_uniqueness_rate": 0.528571,
+    "identity_reconstruction_probability_claimed": false,
+    "minimisation_required_before_first_use": true,
+    "non_transitive_exact_artifact_authority_required": true
+  },
+  "workflow_ergonomics": {
+    "count_only_progress_useful": true,
+    "gross_progress_and_filtered_terminal_denominator_distinguished": true,
+    "stale_prior_attempt_assertion_detected_before_private_access": true,
+    "historical_rerun_caused_by_stale_assertion": false,
+    "full_test_gate_reruns_caused": 1,
+    "closeout_rehearsal_reruns_caused": 3,
+    "direct_intent_validation_rejections": 1,
+    "direct_validation_wrapper_reruns": 1,
+    "admitted_tick_failures_due_missing_register_reading": 2,
+    "closed_stage_vocabulary_rejection_contained": true,
+    "candidate_or_parser_changed_after_bind": false
+  },
+  "recommendation": "implement_the_existing_closed_first_use_contract_as_a_provider_free_typed_candidate_specific_in_memory_gate_before_any_reusable_historical_derived_artifact_is_written"
+}

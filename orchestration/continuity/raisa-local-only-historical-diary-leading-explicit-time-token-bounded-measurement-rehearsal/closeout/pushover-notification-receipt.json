@@ -1,0 +1,12 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "recorded_at": "2026-08-24T09:01:37.5638009+10:00",
+  "operation_id": "raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal",
+  "status": "delivered",
+  "provider_status": 1,
+  "request_id": "398c627e-a6c1-4203-8e47-e43ea6fec3fa",
+  "continuing_to": [
+    "raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal"
+  ],
+  "contains_phi": false
+}

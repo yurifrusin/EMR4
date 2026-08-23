@@ -1,0 +1,121 @@
+{
+  "schema_version": "raisa.local_historical_diary_leading_time_token_bounded_measurement_evidence.v1",
+  "result": "raisa_local_only_historical_diary_leading_time_token_locally_restricted_candidate",
+  "recorded_at": "2026-08-24T09:01:37.5638009+10:00",
+  "planning_source": "dab42891bb97906f88bb7877588cf10218ad9534",
+  "empirical_source": "a9e00638b960306766260d6df674c3489be58b86",
+  "reviewed_source": "a9e00638b960306766260d6df674c3489be58b86",
+  "five_source_rehydration": "passed",
+  "execution": {
+    "metadata_bind_attempts": 1,
+    "metadata_bind_result": "passed",
+    "selected_file_count": 80,
+    "selected_total_bytes": 8151040,
+    "archive_content_reads_before_admission": 0,
+    "content_runs": 1,
+    "content_retry_authorized": false,
+    "controller_timeout_seconds": 1800,
+    "terminal_status": "completed",
+    "terminal_decision": "locally_restricted_candidate"
+  },
+  "scope": {
+    "root_count": 1,
+    "dense_day_count": 1,
+    "opened_snapshot_count": 80,
+    "parsed_snapshot_count": 80,
+    "rejected_snapshot_count": 0
+  },
+  "utility": {
+    "source_table_cell_observations": 1120,
+    "source_structural_segment_observations": 12557,
+    "leading_explicit_time_token_observations": 5281,
+    "mapped_time_observations": 5281,
+    "mapped_time_ratio_numerator": 5281,
+    "mapped_time_ratio_denominator": 12557,
+    "distinct_time_minutes": 34,
+    "positive_interval_mode_minutes": 10,
+    "stable_linkage_records": 199,
+    "adjacent_transition_count": 79,
+    "total_changes": 502,
+    "change_counts": {
+      "added": 52,
+      "format_changed": 38,
+      "moved": 249,
+      "removed": 48,
+      "same_position_replaced": 115
+    },
+    "reason_codes": []
+  },
+  "privacy": {
+    "source_value_leakage_count": 0,
+    "source_text_emitted": false,
+    "source_filename_path_or_timestamp_emitted": false,
+    "page_coordinate_or_distance_emitted": false,
+    "key_or_mapping_emitted": false,
+    "provider_network_model_calls": 0,
+    "universal_reidentification_probability_claimed": false,
+    "record_uniqueness_successes": 73,
+    "record_uniqueness_trials": 210,
+    "trajectory_uniqueness_successes": 111,
+    "trajectory_uniqueness_trials": 210
+  },
+  "cleanup": {
+    "word_cleanup_completed": true,
+    "preexisting_word_process_preserved": true,
+    "preexisting_word_process_id": 32120,
+    "private_manifest_retained": false,
+    "private_projection_retained": false,
+    "owned_word_process_control_retained": false,
+    "count_only_progress_retained": false,
+    "key_mapping_or_coordinate_retained": false,
+    "retained_ignored_local_files": [
+      "aggregate-reading.json",
+      "cleanup-receipt.json",
+      "content-run-terminal.json",
+      "safe-binding-reading.json"
+    ]
+  },
+  "verification": {
+    "historical_diary_test_files": 24,
+    "provider_free_controls": 222,
+    "failures": 0,
+    "ruff": "passed",
+    "compileall": "passed",
+    "powershell_parse": "passed",
+    "json_validation": "passed",
+    "source_boundary_scan": "passed",
+    "git_diff_check": "passed"
+  },
+  "progress_interpretation": {
+    "last_observed_gross_structural_segments": 17764,
+    "accepted_occupancy_eligible_segments": 12557,
+    "difference_is_expected": true,
+    "reason": "progress counts extracted segments before empty, date and time-only filtering; the terminal denominator counts occupancy-eligible segments after those filters"
+  },
+  "contained_incidents": {
+    "register_revision": 659,
+    "incident_ids": [
+      "AER-1148",
+      "AER-1149"
+    ],
+    "published_before_correction": false,
+    "historical_content_accessed_before_correction": false
+  },
+  "parallelism": {
+    "deepseek": "declined_negative_private_historical_content_and_native_harness_paused",
+    "gemini": "not_applicable_neutral_provider_transmission_forbidden",
+    "native_subagents": "declined_negative_single_private_word_control_and_content_terminal",
+    "gpt_sol": "serial_plan_implementation_bind_content_cleanup_acceptance_git_and_closeout_owner"
+  },
+  "first_use_gate": {
+    "status": "closed_pending_candidate_specific_evaluation",
+    "reusable_historical_derived_artifacts": 0,
+    "opened_by_this_result": false,
+    "candidate_specific_evaluator_now_useful": true
+  },
+  "authority": {
+    "strongest_meaning": "ignored_local_research_retention_only_no_downstream_authority",
+    "provider_model_product_runtime_database_or_publication_allowed": false,
+    "ordinary_practice_or_protected_ref_movement_allowed": false
+  }
+}

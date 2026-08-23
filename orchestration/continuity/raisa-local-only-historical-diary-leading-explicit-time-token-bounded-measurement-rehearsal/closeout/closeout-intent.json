@@ -1,0 +1,154 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal",
+  "recorded_at": "2026-08-24T09:01:37.5638009+10:00",
+  "closeout": {
+    "operation_id": "raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal",
+    "title": "Raisa local-only historical Diary leading explicit time-token bounded measurement rehearsal",
+    "builds_on": [
+      "raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal"
+    ],
+    "authority_notes": [
+      "Yuri delegated first-use gate timing and uninterrupted development; accept the sole locally restricted candidate and make the closed gate executable before any reusable derivative is written."
+    ],
+    "decisions": [
+      {
+        "id": "accept-leading-time-locally-restricted-candidate",
+        "source": "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/evidence.json",
+        "summary": "Accept exact reviewed source a9e00638b960306766260d6df674c3489be58b86 after one bind, one no-retry run, zero leakage and 222 passing controls."
+      },
+      {
+        "id": "keep-first-use-closed-and-require-minimisation",
+        "source": "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/report.md",
+        "summary": "The useful private candidate opens no reusable artifact; nontrivial uniqueness diagnostics block whole-day or near-lossless first use."
+      },
+      {
+        "id": "continue-to-typed-candidate-specific-first-use-evaluator",
+        "source": "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/next-tranche-contract.json",
+        "summary": "Implement the existing closed gate on authored-synthetic in-memory candidates before any historical-derived artifact materialisation."
+      }
+    ],
+    "claim_scope": [
+      "The sole 80-snapshot run mapped 5281 of 12557 eligible segments across 34 minutes with a 10-minute mode, 199 stable records, 502 changes, zero leakage and complete cleanup."
+    ],
+    "additional_receipts": [
+      "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/closeout/prepublication-contained-lapses.json",
+      "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/closeout/pushover-notification-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-pre-verifier-receipt.json"
+    ],
+    "additional_artifacts": [
+      "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/next-tranche-contract.json"
+    ],
+    "unresolved_gates": [
+      "Reusable historical-derived materialisation, candidate admission and every product/provider/protected surface remain gated."
+    ],
+    "journey": {
+      "strategic_role": "Recover realistic scheduling motion without releasing historical source values.",
+      "outcome": "The strict leading clock produced one contained useful candidate from the fixed private slice."
+    },
+    "current_position": {
+      "strategic_role": "Make first-use promotion deterministic before a reusable derivative is possible.",
+      "why_now": "A useful private candidate exists and no reusable artifact does.",
+      "outcome": "A typed in-memory evaluator can bind any future admission to one exact digest and purpose.",
+      "unlocks": [
+        "A later separately planned minimised historical-derived materialiser only after exact admission."
+      ],
+      "does_not_solve": [
+        "No historical re-access, artifact write, product, provider or production authority opens."
+      ],
+      "orientation_statement": "Build the gate now; keep the first artifact unwritten."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal",
+      "active_tranche": "Raisa provider-free historical-derived scenario first-use candidate gate evaluator rehearsal",
+      "objective": "Implement and prove the typed candidate-specific in-memory first-use evaluator on authored-synthetic inputs only.",
+      "authority_source": "Yuri's delegated first-use gate timing and uninterrupted-development authority within the frozen provider-free successor contract.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_typed_candidate_gate_evaluator_plan"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only",
+    "no_product_patient_appointment_clinical_or_protected_data",
+    "no_historical_data_access",
+    "no_private_archive_or_local_attempt_output_access",
+    "provider_free_authored_synthetic_candidate_inputs_only",
+    "no_reusable_source_derived_artifact_materialisation",
+    "first_use_gate_remains_closed_pending_exact_candidate_admission"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "historical-diary-leading-token-v3-stale-prior-attempt-test-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-leading-time-measurement",
+      "role": "implementer",
+      "resource_id": "historical-diary-active-attempt-test-ownership",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Older tests preserve immutable prior evidence while only the current tranche test asserts the active ignored attempt root.",
+      "observed_error": "One older structural recovery test still asserted that the v2 root was active.",
+      "detection_method": "The complete pre-access historical-Diary regression gate failed closed.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.prior_attempt_tests_must_not_claim_current_active_root",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove mutable active-root ownership from the old test and keep it in the current v3 test.",
+        "prevention_control": "Attempt-specific tests assert their immutable root while active-root ownership advances in exactly one current test.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-659.md",
+          "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/evidence.json"
+        ]
+      },
+      "baton_summary": "records one contained stale prior-attempt active-root test assertion."
+    },
+    {
+      "attempt_key": "historical-diary-leading-token-closeout-vocabulary-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-leading-time-measurement",
+      "role": "orchestrator",
+      "resource_id": "clockwork-closed-vocabulary",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Incident fields and successor boundaries use executable vocabularies before rehearsal.",
+      "observed_error": "Drafts used unregistered vocabulary, omitted the denial mode, assumed an absent result key and referenced a missing register reading.",
+      "detection_method": "Schema readings, a wrapper error and two nonpublishing ticks exposed the defects.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.closeout_fields_require_executable_vocabularies",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Select executable values, restore the denial mode, fix the wrapper and add the referenced register reading.",
+        "prevention_control": "Validate incident fields and successor boundaries directly before rehearsal.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-659.md",
+          "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/evidence.json"
+        ]
+      },
+      "baton_summary": "records one compound rejected closeout-vocabulary draft."
+    }
+  ]
+}

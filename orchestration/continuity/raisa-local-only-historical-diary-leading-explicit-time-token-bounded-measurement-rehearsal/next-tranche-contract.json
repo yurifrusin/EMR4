@@ -1,0 +1,69 @@
+{
+  "schema_version": "raisa.historical_derived_scenario_first_use_candidate_gate_evaluator_contract.v1",
+  "status": "frozen_fail_closed_successor_contract",
+  "recorded_at": "2026-08-24T09:01:37.5638009+10:00",
+  "operation_id": "raisa-provider-free-historical-derived-scenario-first-use-candidate-gate-evaluator-rehearsal",
+  "builds_on_reviewed_source": "a9e00638b960306766260d6df674c3489be58b86",
+  "objective": "implement_the_existing_first_use_contract_as_a_typed_in_memory_candidate_gate_before_any_reusable_historical_derived_artifact_can_be_written",
+  "source_boundary": {
+    "historical_archive_access": false,
+    "historical_attempt_output_access": false,
+    "authored_synthetic_candidate_inputs_only": true,
+    "provider_network_model_calls": false,
+    "product_database_client_or_runtime": false
+  },
+  "candidate_envelope": {
+    "candidate_must_remain_in_memory_until_admission": true,
+    "candidate_digest_algorithm": "sha256",
+    "accepted_source_commit_format": "full_40_character_git_object_id",
+    "initial_admissible_artifact_class": "minimised_structural_scenario",
+    "bounded_multi_event_scenario_initial_disposition": "revision_required",
+    "whole_day_or_near_lossless_replay_initial_disposition": "blocked",
+    "identity_policy": "source_independent_synthetic_identity_only",
+    "date_policy": "relative_day_offset_only",
+    "forbidden_field_reading": "deterministic_zero_required",
+    "authority_ceiling": "local_provider_free_development_test_only"
+  },
+  "closed_decision_vocabulary": [
+    "blocked",
+    "revision_required",
+    "admitted_for_exact_declared_artifact_only"
+  ],
+  "admission_binding": {
+    "exact_candidate_digest": true,
+    "exact_artifact_class": true,
+    "exact_development_purpose": true,
+    "exact_accepted_source_commit": true,
+    "non_transitive": true,
+    "does_not_authorize_materialisation_in_this_rehearsal": true
+  },
+  "required_denials": [
+    "missing_or_abbreviated_git_object_id",
+    "unknown_artifact_class_purpose_identity_date_or_authority_value",
+    "nonzero_forbidden_field_reading",
+    "source_text_identity_contact_note_filename_path_timestamp_key_or_mapping",
+    "whole_day_or_near_lossless_replay",
+    "digest_or_declaration_mismatch",
+    "provider_model_product_runtime_database_client_or_ordinary_practice_use",
+    "transitive_or_class_wide_authority"
+  ],
+  "verification": {
+    "provider_free_authored_synthetic_positive_case": 1,
+    "hostile_and_incomplete_cases": "required",
+    "free_form_gate_decision_output": false,
+    "historical_content_run": false
+  },
+  "first_use_gate": {
+    "existing_contract_status": "closed_pending_candidate_specific_evaluation",
+    "opened_by_this_successor_contract": false,
+    "historical_candidate_materialised_by_this_successor_contract": false,
+    "later_materialiser_requires_separate_plan_and_exact_admission_receipt": true
+  },
+  "authority_ceiling": {
+    "historical_data_access": false,
+    "reusable_artifact_write": false,
+    "provider_model_product_database_client_or_runtime": false,
+    "ordinary_practice_activation": false,
+    "production_deployment_release_pages_or_protected_refs": false
+  }
+}

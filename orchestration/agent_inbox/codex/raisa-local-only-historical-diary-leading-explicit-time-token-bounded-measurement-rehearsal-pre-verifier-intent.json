@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_the_single_no_retry_locally_restricted_leading_time_candidate_then_continue_to_a_provider_free_typed_candidate_specific_first_use_gate_evaluator_without_historical_access_or_artifact_materialisation",
+  "assessed_stage": "pre_verifier_acceptance_for_local_historical_diary_leading_time_measurement",
+  "active_evidence_paths": [
+    "docs/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-plan.md",
+    "docs/security/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-threat-model-delta.md",
+    "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/evidence.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/efficacy-reading.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/report.md",
+    "orchestration/continuity/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal/next-tranche-contract.json",
+    "docs/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal-sol-acceptance.md",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}

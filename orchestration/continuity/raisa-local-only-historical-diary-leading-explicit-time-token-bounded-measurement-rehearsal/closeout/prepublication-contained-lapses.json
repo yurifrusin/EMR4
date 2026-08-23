@@ -1,0 +1,41 @@
+{
+  "schema_version": "raisa.prepublication_contained_lapses.v1",
+  "operation_id": "raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal",
+  "recorded_at": "2026-08-24T09:01:37.5638009+10:00",
+  "published_before_correction": false,
+  "historical_content_accessed_before_correction": false,
+  "historical_content_retry_used": false,
+  "observations": [
+    {
+      "attempt_key": "historical-diary-leading-token-v3-stale-prior-attempt-test-001",
+      "origin": "repository",
+      "category": "repository_defect",
+      "expected_invariant": "Only the current tranche test asserts the active ignored attempt root; older tests preserve immutable prior evidence without claiming current ownership.",
+      "observed_error": "One older structural recovery test still asserted that the v2 ignored root was the active attempt root.",
+      "detection_method": "The complete 24-file pre-access historical-Diary regression gate failed closed.",
+      "correction": "Removed the mutable active-root assertion from the old test and retained v3 ownership in the new current-tranche test.",
+      "verification": "The full 222-control gate passed before metadata bind or historical content access.",
+      "workflow_cost": {
+        "deterministic_full_test_gate_reruns": 1,
+        "historical_content_reruns": 0
+      }
+    },
+    {
+      "attempt_key": "historical-diary-leading-token-closeout-vocabulary-001",
+      "origin": "orchestrator",
+      "category": "operator_error",
+      "expected_invariant": "Incident fields and successor boundaries use executable vocabularies before closeout rehearsal.",
+      "observed_error": "Drafts used unregistered vocabulary, omitted the denial token, assumed an absent result key and referenced a missing register reading.",
+      "detection_method": "Schema readings, a wrapper error and two nonpublishing ticks exposed the successive closeout defects.",
+      "correction": "Selected executable values, restored the exact denial mode, fixed the wrapper and added the referenced revision-659 reading.",
+      "verification": "The corrected intent must pass a fresh nonpublishing rehearsal before staging.",
+      "workflow_cost": {
+        "clockwork_closeout_rehearsal_reruns": 3,
+        "direct_intent_validation_rejections": 1,
+        "direct_validation_wrapper_reruns": 1,
+        "admitted_tick_failures_due_missing_register_reading": 2,
+        "publications": 0
+      }
+    }
+  ]
+}
