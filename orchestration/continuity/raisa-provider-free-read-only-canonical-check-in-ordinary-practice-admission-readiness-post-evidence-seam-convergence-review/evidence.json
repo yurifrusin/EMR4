@@ -1,0 +1,114 @@
+{
+  "schema_version": "raisa.check_in_post_evidence_seam_readiness_convergence_evidence.v1",
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review",
+  "planning_source": "21f6523f371165923e3057417124c3d49f4fc96b",
+  "accepted_lineage_head": "e163353eb150cd0f4222f61f6ec5ef651cda9087",
+  "result": "raisa_provider_free_read_only_canonical_check_in_ordinary_practice_admission_readiness_post_evidence_seam_convergence_review_pass",
+  "verdict": "not_ready_for_ordinary_practice_admission",
+  "contract_sha256": "e571b7f845212d367f934b6a4d880272a7257895fad867ad74494ce3c86b138a",
+  "contract_schema_sha256": "221ca72266904a4c8e31a50345b1d1bf074c271f966d2da43c50dd923c728331",
+  "readiness": {
+    "satisfied": 11,
+    "blocking_gap": 0,
+    "operational_evidence_gap": 1,
+    "remaining_dimension": "environment_manifest_and_operational_secret_posture",
+    "changed_dimension_count": 0,
+    "ordinary_admission_release_count": 0
+  },
+  "repository_graph": {
+    "newly_accepted_nodes": [
+      {
+        "id": "closed_manifest_normalizer",
+        "product_source": "ae62faf95b289b369a6eea1793ee4325f33447bc",
+        "status": "accepted"
+      },
+      {
+        "id": "typed_operational_evidence_inputs",
+        "product_source": "9011d83d769f45bb717c039a126a890d43922dce",
+        "status": "accepted"
+      },
+      {
+        "id": "pure_environment_evidence_gate_evaluator",
+        "product_source": "89640f1bb6ad992f68d5c20fd578b4062eeb193d",
+        "status": "accepted"
+      },
+      {
+        "id": "default_off_admission_input_seam",
+        "product_source": "1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+        "status": "accepted"
+      }
+    ],
+    "next_dependency_satisfied_repository_node": "unmounted_reference_only_conformance_packet",
+    "other_dependency_satisfied_repository_nodes": [],
+    "repository_prerequisites_remaining_after_next_node": 0
+  },
+  "external_facts": [
+    {"id": "live_runtime_role_binding_and_attestation", "status": "absent"},
+    {"id": "three_current_opaque_secret_bindings", "status": "absent"},
+    {"id": "three_current_rotation_custody_attestations", "status": "absent"},
+    {"id": "current_deny_only_break_glass_posture", "status": "absent"},
+    {"id": "one_current_environment_manifest_instance", "status": "absent"},
+    {"id": "operational_uniqueness_and_freshness_readback", "status": "absent"}
+  ],
+  "human_owned_decisions": [
+    {"id": "select_target_environment_and_practice_scope", "status": "unselected"},
+    {"id": "approve_secret_custody_and_operational_owners", "status": "unselected"},
+    {"id": "approve_rotation_policy_and_independent_verifiers", "status": "unselected"},
+    {"id": "authorize_live_role_secret_and_manifest_provisioning", "status": "unselected"},
+    {"id": "confirm_ordinary_activation_separately", "status": "unselected"}
+  ],
+  "source_findings": {
+    "post_attempt_008_readiness_retained": true,
+    "normalizer_is_pure_and_unmounted": true,
+    "typed_inputs_select_no_external_fact": true,
+    "evidence_gate_reads_no_ambient_clock_or_configuration": true,
+    "admission_kernel_remains_default_off": true,
+    "environment_reading_is_independently_mandatory": true,
+    "valid_environment_reading_remains_non_admitting": true,
+    "authored_synthetic_substitution_for_operational_fact_denied": true,
+    "one_repository_successor_dependency_satisfied": true
+  },
+  "next_operation": {
+    "operation_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+    "owned_node_id": "unmounted_reference_only_conformance_packet",
+    "objective": "Compose one authored-synthetic reference-only packet through the accepted normalizer, typed evidence inputs, pure evidence gate and default-off admission seam, proving complete cross-component conformance and denial without claiming any operational fact.",
+    "human_attention_required_now": false,
+    "human_attention_trigger_after_completion": "before selecting a real target environment, practice scope, custody system, operational owners, rotation policy, independent verifiers, lasting provisioning or ordinary activation"
+  },
+  "harness_allocation": {
+    "native_traceability_retained": true,
+    "useful_native_candidate_proved": false,
+    "generic_testing": "closed",
+    "failed_exact_profile": "not_selected",
+    "claude_code_fallback": "not_authorized",
+    "next_use_rule": "select_native_only_for_a_real_bounded_task_that_fits_an_accepted_runner_or_after_naturally_in_scope_fix_evidence"
+  },
+  "parallelism": {
+    "deepseek_flash": "declined_serial_read_only_no_compatible_native_profile_no_claude_fallback",
+    "gemini_verifier": "declined_exact_source_bound_no_conflict",
+    "native_subagents": "declined_developer_policy",
+    "serial_owner": "gpt_sol"
+  },
+  "verification": {
+    "full_git_objects_resolved_and_ancestors": 13,
+    "canonical_lf_source_hashes_matched": 13,
+    "contract_schema": "passed",
+    "evidence_schema": "passed",
+    "source_assertions": "passed",
+    "git_diff_check": "passed"
+  },
+  "closed_boundaries": {
+    "app_imported": false,
+    "harness_or_provider_called": false,
+    "environment_or_credential_accessed": false,
+    "database_docker_postgresql_or_sql_used": false,
+    "product_source_or_product_test_changed": false,
+    "route_api_client_or_configuration_changed": false,
+    "ordinary_practice_enabled": false,
+    "admission_record_activated_or_command_mounted": false,
+    "product_patient_appointment_clinical_or_protected_data_used": false,
+    "production_deployment_release_or_pages": false,
+    "protected_ref_moved": false
+  },
+  "reasons": []
+}

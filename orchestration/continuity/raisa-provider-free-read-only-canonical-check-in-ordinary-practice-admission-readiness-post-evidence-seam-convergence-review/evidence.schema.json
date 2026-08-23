@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/check-in-post-evidence-seam-readiness-convergence-evidence.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operation_id",
+    "planning_source",
+    "accepted_lineage_head",
+    "result",
+    "verdict",
+    "contract_sha256",
+    "contract_schema_sha256",
+    "readiness",
+    "repository_graph",
+    "external_facts",
+    "human_owned_decisions",
+    "source_findings",
+    "next_operation",
+    "harness_allocation",
+    "parallelism",
+    "verification",
+    "closed_boundaries",
+    "reasons"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.check_in_post_evidence_seam_readiness_convergence_evidence.v1"},
+    "operation_id": {"const": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "accepted_lineage_head": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "result": {"const": "raisa_provider_free_read_only_canonical_check_in_ordinary_practice_admission_readiness_post_evidence_seam_convergence_review_pass"},
+    "verdict": {"const": "not_ready_for_ordinary_practice_admission"},
+    "contract_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "contract_schema_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["satisfied", "blocking_gap", "operational_evidence_gap", "remaining_dimension", "changed_dimension_count", "ordinary_admission_release_count"],
+      "properties": {
+        "satisfied": {"const": 11},
+        "blocking_gap": {"const": 0},
+        "operational_evidence_gap": {"const": 1},
+        "remaining_dimension": {"const": "environment_manifest_and_operational_secret_posture"},
+        "changed_dimension_count": {"const": 0},
+        "ordinary_admission_release_count": {"const": 0}
+      }
+    },
+    "repository_graph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["newly_accepted_nodes", "next_dependency_satisfied_repository_node", "other_dependency_satisfied_repository_nodes", "repository_prerequisites_remaining_after_next_node"],
+      "properties": {
+        "newly_accepted_nodes": {"type": "array", "minItems": 4, "maxItems": 4},
+        "next_dependency_satisfied_repository_node": {"const": "unmounted_reference_only_conformance_packet"},
+        "other_dependency_satisfied_repository_nodes": {"const": []},
+        "repository_prerequisites_remaining_after_next_node": {"const": 0}
+      }
+    },
+    "external_facts": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status"],
+        "properties": {"id": {"type": "string"}, "status": {"const": "absent"}}
+      }
+    },
+    "human_owned_decisions": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status"],
+        "properties": {"id": {"type": "string"}, "status": {"const": "unselected"}}
+      }
+    },
+    "source_findings": {"type": "object", "minProperties": 9, "maxProperties": 9, "additionalProperties": {"const": true}},
+    "next_operation": {"type": "object"},
+    "harness_allocation": {"type": "object"},
+    "parallelism": {"type": "object"},
+    "verification": {"type": "object"},
+    "closed_boundaries": {"type": "object", "additionalProperties": {"const": false}},
+    "reasons": {"const": []}
+  }
+}
