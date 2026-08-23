@@ -1137,6 +1137,8 @@ def _cleanup_private_outputs(*, retained: bool, decision: str, word_cleanup: boo
         for path, label in (
             (PRIVATE_PROJECTION_PATH, "private_projection"),
             (MANIFEST_PATH, "private_manifest"),
+            (WORD_CONTROL_PATH, "word_process_control"),
+            (WORD_PROGRESS_PATH, "count_only_progress"),
         ):
             if path.exists():
                 path.unlink()

@@ -667,6 +667,8 @@ def test_cleanup_removes_private_outputs_but_preserves_aggregate_receipt(monkeyp
     attempt.mkdir(parents=True)
     probe.MANIFEST_PATH.write_text("private manifest", encoding="utf-8")
     probe.PRIVATE_PROJECTION_PATH.write_text("private projection", encoding="utf-8")
+    probe.WORD_CONTROL_PATH.write_text("process control", encoding="utf-8")
+    probe.WORD_PROGRESS_PATH.write_text("count-only progress", encoding="utf-8")
 
     receipt = probe._cleanup_private_outputs(
         retained=False, decision="revision_required", word_cleanup=True
@@ -674,7 +676,15 @@ def test_cleanup_removes_private_outputs_but_preserves_aggregate_receipt(monkeyp
 
     assert not probe.MANIFEST_PATH.exists()
     assert not probe.PRIVATE_PROJECTION_PATH.exists()
+    assert not probe.WORD_CONTROL_PATH.exists()
+    assert not probe.WORD_PROGRESS_PATH.exists()
     assert probe.CLEANUP_PATH.exists()
+    assert receipt["removed_private_artifact_classes"] == [
+        "private_projection",
+        "private_manifest",
+        "word_process_control",
+        "count_only_progress",
+    ]
     assert receipt["ephemeral_key_persisted"] is False
     assert receipt["provider_network_model_calls"] == 0
 
