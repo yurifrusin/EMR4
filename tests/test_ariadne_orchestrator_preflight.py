@@ -634,9 +634,14 @@ def test_typed_serial_receipt_preserves_manual_safety_projections(
     )
     intent["assessed_stage"] = "preplanning_after_fresh_successor_rehydration"
     intent_path = _write_serial_intent(tmp_path, intent)
+    manual_state_path = tmp_path / "equivalent-manual-runtime-state.json"
+    manual_state_path.write_text(
+        json.dumps(_materialize_serial(intent), indent=2) + "\n",
+        encoding="utf-8",
+    )
 
     typed = build_serial_continuation_receipt(intent_path=intent_path)
-    manual = build_receipt(runtime_state_path=MANUAL_SERIAL_STATE)
+    manual = build_receipt(runtime_state_path=manual_state_path)
 
     for field in (
         "status",

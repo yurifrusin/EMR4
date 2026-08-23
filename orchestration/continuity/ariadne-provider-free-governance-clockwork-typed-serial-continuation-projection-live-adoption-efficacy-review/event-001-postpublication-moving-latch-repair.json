@@ -1,0 +1,39 @@
+{
+  "schema_version": "ariadne.typed_serial_live_adoption_event.v1",
+  "event_id": "event-001-postpublication-moving-latch-repair",
+  "operation_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review",
+  "accepted_source_at_observation": "7c296e942530b80c49a08ed144e4b934587b1064",
+  "lease_sequence": 217,
+  "canonical_live_state": {
+    "status": "passed",
+    "canonical_drift": 0,
+    "generation_id": "gen-818f2b6c0170e519b6738144ee33b1530b8ee776e19fc2c96c8fc096f5b5050a"
+  },
+  "postpublication_suite": {
+    "tests_selected": 162,
+    "failures": 1,
+    "failed_test": "test_typed_serial_receipt_preserves_manual_safety_projections",
+    "failure_kind": "historical_latch_compared_with_current_latch",
+    "compact_preflight_rejection": false
+  },
+  "cause": {
+    "claim_level": "necessary_defect",
+    "description": "The safety-equivalence test loaded the committed preplanning runtime state as both a size baseline and current authority. Publication correctly advanced the active latch, so the typed path and historical manual path no longer described the same operation."
+  },
+  "repair": {
+    "production_files_changed": 0,
+    "test_files_changed": 1,
+    "description": "Materialize the legacy comparison state from the same current intent and latch at test execution; retain the historical file only for size measurement.",
+    "focused_tests_passed": 42,
+    "combined_tests_passed": 162,
+    "ruff_passed": true
+  },
+  "boundaries": {
+    "canonical_mutations_from_repair": 0,
+    "provider_calls": 0,
+    "worker_dispatches": 0,
+    "product_reruns": 0,
+    "protected_ref_movements": 0,
+    "docs_branding_preserved": true
+  }
+}

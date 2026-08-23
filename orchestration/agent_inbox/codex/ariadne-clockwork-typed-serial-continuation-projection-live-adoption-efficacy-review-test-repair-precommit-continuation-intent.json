@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit",
+  "assessed_stage": "moving_latch_test_repair_after_42_focused_tests",
+  "active_evidence_paths": [
+    "docs/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-plan.md",
+    "docs/security/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-threat-model-delta.md",
+    "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/event-001-postpublication-moving-latch-repair.json",
+    "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/report.md",
+    "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/efficacy-reading.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": []
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "sprint_planning",
+  "assessed_stage": "live_adoption_review_after_fresh_successor_rehydration",
+  "active_evidence_paths": [
+    "docs/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-closeout.md",
+    "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-sol-acceptance.md",
+    "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/report.md",
+    "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/efficacy-reading.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": []
+}
