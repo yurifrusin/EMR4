@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Complete the one remaining provider-free reference-only conformance packet, then stop before the first human-owned external selection.
+> Take a measured provider-free read-only ergonomics reading, prefer deleting or deriving operator inputs, and stop before implementing any clockwork or Harness change.
 
 ## North star
 
@@ -626,22 +626,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The typed evidence reading now composes fail-closed with every existing admission control while ordinary activation remains closed. Lineage parent: `deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan`.
 305. **Take an exact readiness-clock reading after completing the repository evidence seam — Post-evidence-seam canonical check-in admission-readiness convergence review**
    Four repository nodes are accepted without manufacturing an operational fact; one final provider-free conformance node becomes executable. Lineage parent: `raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal`.
+306. **Complete the last provider-free repository prerequisite for canonical check-in operational-evidence admission — Canonical check-in reference-only operational-evidence conformance packet rehearsal**
+   The complete reference-only chain is exact and fail-closed while ordinary-practice activation and every external fact remain closed. Lineage parent: `raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review`.
 
 ## Current position
 
-**Prove complete reference-only cross-component conformance before requesting any external selection — Post-evidence-seam canonical check-in admission-readiness convergence review**
+**Measure whether the governance clockwork can retain its safety while asking less clerical work of the orchestrator — Canonical check-in reference-only operational-evidence conformance packet rehearsal**
 
-**Why this proof came next:** The normalizer, typed inputs, pure evaluator and admission seam are independently accepted, making their common unmounted conformance packet the sole dependency-satisfied repository node.
+**Why this proof came next:** The reference-only packet is complete and its twelve corrected interface reruns join the extended DeepSeek gear history as a bounded evidence set.
 
-One authored-synthetic packet will prove the composed satisfied and hostile-denial paths without adding an operational claim or admission capability.
+A read-only review will distinguish safety controls from avoidable operator inputs and rank only simplifications with measurable removed work.
 
 ### What this unlocks
 
-- Completion of the last repository engineering prerequisite before human-owned environment choices.
+- A narrow evidence-backed plan for the highest-yield clockwork ergonomic repair, if one is justified.
 
 ### What it does not solve
 
-- It does not select an environment, establish a live role, bind or resolve secrets, supply custody evidence, activate ordinary practice or mount a command.
+- It does not change the live clockwork, qualify the native Harness, select check-in operational facts or authorize ordinary-practice activation.
 
 ## Continuity and authority
 
@@ -1695,6 +1697,7 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-closeout.md`
+- `docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-plan.md`
@@ -3098,7 +3101,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.example.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json`
-- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md`
@@ -3149,6 +3151,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal/evidence.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.schema.json`
@@ -3910,4 +3914,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 410; continuity graph revision 428._
+_Compass map revision 411; continuity graph revision 429._

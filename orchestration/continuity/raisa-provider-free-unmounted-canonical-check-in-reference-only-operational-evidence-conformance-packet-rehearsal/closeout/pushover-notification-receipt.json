@@ -1,0 +1,10 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "recorded_on": "2026-08-23",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+  "status": "accepted",
+  "request": "75f27f1f-b440-427d-9ac0-18eb69964c3a",
+  "provider_status": 1,
+  "contains_phi": false,
+  "continuing": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review"
+}

@@ -1,85 +1,85 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
-  "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review",
-  "transaction_id": "txn-1588315a0f1d882395919c10",
-  "source_commit": "abe166791c8d3448ee3744cdc7bf4f4c3ad7807c",
-  "previous_source_commit": "abe166791c8d3448ee3744cdc7bf4f4c3ad7807c",
-  "previous_generation_id": "gen-2353e8e586da74993c86a47569f0d3497dda921e7be5ed2bd2f6607abab8b5f1",
-  "previous_bundle_sha256": "2353e8e586da74993c86a47569f0d3497dda921e7be5ed2bd2f6607abab8b5f1",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+  "transaction_id": "txn-8a395fc564cc7efabf9d8ec2",
+  "source_commit": "c35d2a1d69ad646cb7b561e201271ced25784df8",
+  "previous_source_commit": "c35d2a1d69ad646cb7b561e201271ced25784df8",
+  "previous_generation_id": "gen-f3adfd61281b9aecd52ae67baf9ecc3631dfa1d65c089a7e73778d8707a9bd03",
+  "previous_bundle_sha256": "f3adfd61281b9aecd52ae67baf9ecc3631dfa1d65c089a7e73778d8707a9bd03",
   "previous_canonical_sha256s": {
-    "continuity": "a4407b93f5e6b025f637008dd2a10e7449c1080e393211f034157ce689a4d374",
-    "compass": "f0b958e3f256fcf07b24f0c2b269eeec5763005eaf6c33812f64eae08207f6e1",
-    "compass_markdown": "c8434b5830091c481dc935b05ce85b365c196955dfe163dafb86623abb4f9acd",
-    "active_latch": "3a6d4b3d823d6e5445da2ba8a1f929da45e230dbb8248de9b6bba6b8dd9aaf93",
-    "error_register": "559128a9cea047a68b78c1ccc61add226a9719cc71856b9fb8ed866abcd9c683",
-    "pattern_report": "8482ae509b2c91d1b771456375a574b1ffeaa3829b3e1ff477f12f639f339117",
-    "current_baton": "630cca8be76b7b7a8fdf14eede734393cf83b8845a8087fb0833d655faded3a6"
+    "continuity": "88261706eb0db01a965d75e61fc9818c0d424e1871a84286a2b3b503dc4ab7ea",
+    "compass": "9ba54a2f1abf209cbe3e5708012a50bc41c966f6eefda0ea21c789ef4e90b24c",
+    "compass_markdown": "db003659683a62240e6fe91f56b1650d36ba19c1f030431c5b8bdd33f8647070",
+    "active_latch": "59c3a8310f2bad55f50831fad2de06f996cc59cc037f4b6403d751a7e89cbd2e",
+    "error_register": "2c7423fdd19aee95ea5270701ef378878e5f3dff2fefa4a42bc7a879ef360b39",
+    "pattern_report": "bd1a92d4380022d8678145d83eddd4390b9f3c92a7d4fca128ccfa143e07ba3c",
+    "current_baton": "47fee582f270cb2f0bb745d31f952e163f94f67119729d58a477660388ac31e7"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "2c27d8b31cd33373823ec3a3c719d0802cb1aaa9d71a5aacc289ba15076fda3e",
-    "transaction.json": "db71cf7d66a52a48ffd4ddf069b44ff8040a73184af575b5a52f90158e566d91",
+    "command-manifest.json": "9cb177163df9aa5e689041342bcb8d1a3ee1539f7909367a811bf554a177e418",
+    "transaction.json": "9b611c456dd0e6beeb9bbbc2742c47e6c80b6b67a6914bd1873d0d063d212473",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "b251bcefde3c484d0f1862a22ab053ff190f6b2f681ffcd296e173f263d3b24a"
+    "generation-manifest.json": "c798fc1c4fa4e807ea7fabc261cd7d8e1be271127bb51266d5092129a6b0ee61"
   },
   "projection_sha256s": {
-    "graph": "sha256:edc67f2d67eaca29eb9e40f5da64280e58144607624fa0b2eb787b52e13ca8e2",
-    "compass": "sha256:4e849bc4cb34c21fe30e1b2c8b330a9cd6d7799c77c76c2694b560845b0d7d77",
-    "report": "sha256:351a81669f3f1d035e38ef87a36819926633ce54d5461558190180b98f2bb867",
-    "latch": "sha256:e0bffbbcbf8c430200445b05408cfc243bec7731a4de8129d5e055bce2eca331",
-    "incident_aggregate": "sha256:b60378ad6db65d663f71c8c32fa4800d9307bc0ac38b24b9a6bdee08eace229e"
+    "graph": "sha256:dcfd11ff2dada054150c1f3872462aa9048082da6d712c8ba96eae6824382b24",
+    "compass": "sha256:b76043979c06cb601dc1c65e2490b8dc3f78ba9b2dd8f3368e0f96181bfeb4d1",
+    "report": "sha256:ce905df2ac64cef3990f705da18336b541e7316f37f458ec938d1d257405b964",
+    "latch": "sha256:eac8a095418c8673aa309cc4173b84c330a6dd5d8159143624edc32161689b71",
+    "incident_aggregate": "sha256:bde8004bec1e59b32d3985fa34f2e3e7899abe80bc9a9834fa6587a1f32d93a7"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-1588315a0f1d882395919c10",
-      "transaction_id": "txn-1588315a0f1d882395919c10",
-      "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review",
+      "journal_id": "journal-8a395fc564cc7efabf9d8ec2",
+      "transaction_id": "txn-8a395fc564cc7efabf9d8ec2",
+      "operation_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
       "event_type": "manifest-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "manifest_sha256": "sha256:51453122e004f19b988d236f5cac12db8bf4bd9cf0d6dd78c36a36a1a6011567"
+        "manifest_sha256": "sha256:0d6377dbb33aa54717b5dfa857af06cfe95305e5f70ae52dbd09a3f43fb65f7a"
       },
-      "event_sha256": "sha256:c540608592c85dc98f8a77a0aac35b62e258c5728bc6af710167d8bb371c6ab0"
+      "event_sha256": "sha256:af2253bfc2c47dea441ef42f4f2e7a38123c7c26504cef9c6960fea10fe95c79"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-1588315a0f1d882395919c10",
-      "transaction_id": "txn-1588315a0f1d882395919c10",
-      "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review",
+      "journal_id": "journal-8a395fc564cc7efabf9d8ec2",
+      "transaction_id": "txn-8a395fc564cc7efabf9d8ec2",
+      "operation_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
       "sequence": 2,
-      "previous_event_sha256": "sha256:c540608592c85dc98f8a77a0aac35b62e258c5728bc6af710167d8bb371c6ab0",
+      "previous_event_sha256": "sha256:af2253bfc2c47dea441ef42f4f2e7a38123c7c26504cef9c6960fea10fe95c79",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "abe166791c8d3448ee3744cdc7bf4f4c3ad7807c",
+        "source_commit": "c35d2a1d69ad646cb7b561e201271ced25784df8",
         "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
       },
-      "event_sha256": "sha256:ccbea06a59542ffa747aaf194be9df8312291ddf4ce5a216e197762f2d6c0fb4"
+      "event_sha256": "sha256:5499a63815f6cf45fa4966393b8234f74ef08b34e6b5b7e1b58eff0ddd7cac5e"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-1588315a0f1d882395919c10",
-      "transaction_id": "txn-1588315a0f1d882395919c10",
-      "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review",
+      "journal_id": "journal-8a395fc564cc7efabf9d8ec2",
+      "transaction_id": "txn-8a395fc564cc7efabf9d8ec2",
+      "operation_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
       "sequence": 3,
-      "previous_event_sha256": "sha256:ccbea06a59542ffa747aaf194be9df8312291ddf4ce5a216e197762f2d6c0fb4",
+      "previous_event_sha256": "sha256:5499a63815f6cf45fa4966393b8234f74ef08b34e6b5b7e1b58eff0ddd7cac5e",
       "event_type": "projections-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "graph_revision": 428,
-        "map_revision": 410
+        "graph_revision": 429,
+        "map_revision": 411
       },
-      "event_sha256": "sha256:0e802d8deecad249fc7145ee3116aad6a7ab24b43cc14dc79bedb871059d2d79"
+      "event_sha256": "sha256:a9ae17b65195e3f26532cc9412a2a22866e0d3b9ef8cc54688f15cb2f641135e"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-1588315a0f1d882395919c10",
-      "transaction_id": "txn-1588315a0f1d882395919c10",
-      "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review",
+      "journal_id": "journal-8a395fc564cc7efabf9d8ec2",
+      "transaction_id": "txn-8a395fc564cc7efabf9d8ec2",
+      "operation_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
       "sequence": 4,
-      "previous_event_sha256": "sha256:0e802d8deecad249fc7145ee3116aad6a7ab24b43cc14dc79bedb871059d2d79",
+      "previous_event_sha256": "sha256:a9ae17b65195e3f26532cc9412a2a22866e0d3b9ef8cc54688f15cb2f641135e",
       "event_type": "projections-validated",
       "actor": "gpt-sol",
       "payload": {
@@ -87,26 +87,26 @@
         "compass": "passed",
         "latch": "passed"
       },
-      "event_sha256": "sha256:c6a77140304dbb3bf9a8e98e7779a8c1d22b93493a3654be9b9f4c13f31de0d9"
+      "event_sha256": "sha256:d4d49ad11e6ad6512241e84976144f221424d41d4ab0be225b8e9bde71d4be96"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-1588315a0f1d882395919c10",
-      "transaction_id": "txn-1588315a0f1d882395919c10",
-      "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review",
+      "journal_id": "journal-8a395fc564cc7efabf9d8ec2",
+      "transaction_id": "txn-8a395fc564cc7efabf9d8ec2",
+      "operation_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
       "sequence": 5,
-      "previous_event_sha256": "sha256:c6a77140304dbb3bf9a8e98e7779a8c1d22b93493a3654be9b9f4c13f31de0d9",
+      "previous_event_sha256": "sha256:d4d49ad11e6ad6512241e84976144f221424d41d4ab0be225b8e9bde71d4be96",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "shadow_directory_rename"
       },
-      "event_sha256": "sha256:3b5bdabe5afe9bb6ca27d747acb9bf538b9f753a9444bcee5fbb14a75cb39077"
+      "event_sha256": "sha256:badbc6233f13b0f4b81500e18e3ab2822d5b66f0eca4b335423d5a1173ace29a"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
   "event_kind": "clean_closeout",
-  "next_boundaries_sha256": "sha256:d79889680f32f1969d1071b50a0bbd8e5960bfe6df2f4709a702f8c5ce564a5d",
+  "next_boundaries_sha256": "sha256:2d339d48c2b3a2b1cb586ac735a3fdef6dd4629cd391ea1fddef4a5c741bc04d",
   "register_bytes_preserved": false,
   "pattern_bytes_preserved": false
 }

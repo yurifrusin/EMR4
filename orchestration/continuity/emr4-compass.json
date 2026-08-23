@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 410,
-  "updated_at": "2026-08-23T14:10:17.4271956+10:00",
-  "source_graph_revision": 428,
-  "orientation_statement": "Complete the one remaining provider-free reference-only conformance packet, then stop before the first human-owned external selection.",
+  "map_revision": 411,
+  "updated_at": "2026-08-23T15:18:50.3859558+10:00",
+  "source_graph_revision": 429,
+  "orientation_statement": "Take a measured provider-free read-only ergonomics reading, prefer deleting or deriving operator inputs, and stop before implementing any clockwork or Harness change.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5235,22 +5235,32 @@
         "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/evidence.json",
         "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review-closeout.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+      "lineage_parent": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review",
+      "strategic_role": "Complete the last provider-free repository prerequisite for canonical check-in operational-evidence admission",
+      "outcome": "The complete reference-only chain is exact and fail-closed while ordinary-practice activation and every external fact remain closed.",
+      "evidence": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.json",
+        "docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-closeout.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review",
-    "strategic_role": "Prove complete reference-only cross-component conformance before requesting any external selection",
-    "why_now": "The normalizer, typed inputs, pure evaluator and admission seam are independently accepted, making their common unmounted conformance packet the sole dependency-satisfied repository node.",
-    "outcome": "One authored-synthetic packet will prove the composed satisfied and hostile-denial paths without adding an operational claim or admission capability.",
+    "node_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+    "strategic_role": "Measure whether the governance clockwork can retain its safety while asking less clerical work of the orchestrator",
+    "why_now": "The reference-only packet is complete and its twelve corrected interface reruns join the extended DeepSeek gear history as a bounded evidence set.",
+    "outcome": "A read-only review will distinguish safety controls from avoidable operator inputs and rank only simplifications with measurable removed work.",
     "unlocks": [
-      "Completion of the last repository engineering prerequisite before human-owned environment choices."
+      "A narrow evidence-backed plan for the highest-yield clockwork ergonomic repair, if one is justified."
     ],
     "does_not_solve": [
-      "It does not select an environment, establish a live role, bind or resolve secrets, supply custody evidence, activate ordinary practice or mount a command."
+      "It does not change the live clockwork, qualify the native Harness, select check-in operational facts or authorize ordinary-practice activation."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/evidence.json",
-      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json"
+      "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json",
+      "docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-closeout.md"
     ]
   },
   "decision_horizon": [

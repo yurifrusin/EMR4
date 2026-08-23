@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 428,
+  "graph_revision": 429,
   "harvests": [],
   "nodes": [
     {
@@ -34495,9 +34495,112 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+      "title": "Canonical check-in reference-only operational-evidence conformance packet rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority admitted the exact provider-free unmounted reference-only rehearsal.",
+          "GPT Sol held the serial implementation and acceptance lease.",
+          "DeepSeek, Gemini and native subagents were explicitly declined; no provider or Harness transport opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-reference-only-packet-conformance",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.json",
+          "status": "accepted",
+          "summary": "Accept the immutable authored-synthetic packet, canonical satisfied-gate path and twelve hostile fail-closed variants."
+        },
+        {
+          "id": "retain-default-off-ordinary-admission",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/report.md",
+          "status": "accepted",
+          "summary": "Retain ordinary_activation_closed with zero ordinary-practice release despite a satisfied synthetic evidence gate."
+        },
+        {
+          "id": "retain-eleven-zero-one-readiness",
+          "source": "docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Repository prerequisites are complete while six external facts remain absent, five human choices remain unselected and the readiness verdict remains not ready."
+        },
+        {
+          "id": "select-bounded-clockwork-ergonomics-review",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Use the twelve contained reruns and the extended native-Harness gear period as measured input to a provider-free read-only clockwork ergonomics and efficacy review."
+        }
+      ],
+      "claim_scope": [
+        "One authored-synthetic opaque-reference-only packet passed the accepted normalizer, typed-input and evidence-gate chain.",
+        "The unchanged default-off admission kernel denied the canonical packet at ordinary_activation_closed.",
+        "All twelve frozen hostile variants failed closed with zero admission release and zero external fact.",
+        "Readiness remains exactly eleven satisfied, zero blocking and one operational-evidence gap with zero repository prerequisites remaining.",
+        "No product source, API, runtime, provider, deployment, Pages or protected ref changed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/report.md",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-23--canonical-check-in-reference-only-operational-evidence-conformance-packet.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-postrestart-corrected-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-pre-verifier-receipt.json"
+        ],
+        "tests": [
+          "tests/test_raisa_provider_free_unmounted_canonical_check_in_reference_only_operational_evidence_conformance_packet_rehearsal.py",
+          "tests/test_check_in_environment_evidence_admission.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/contract.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/reference-only-packet.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/reference-only-packet.schema.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.schema.json"
+        ]
+      },
+      "unresolved_gates": [
+        "All six real external operational facts remain absent and cannot be replaced by repository evidence.",
+        "All five target, custody, policy, provisioning and activation choices remain human-owned and unselected.",
+        "Ordinary-practice activation, admission-record activation and command mounting remain closed.",
+        "The pinned native rc.7 Harness profile remains paused after a pre-provider startup failure and Claude Code is not a silent fallback.",
+        "Any clockwork ergonomic change requires a separately frozen implementation tranche after the read-only review.",
+        "Product data, production, deployment, release, Pages and protected refs remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T15:18:50.3859558+10:00",
+      "updated_at": "2026-08-23T15:18:50.3859558+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "c35d2a1d69ad646cb7b561e201271ced25784df8",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T14:10:17.4271956+10:00"
+  "updated_at": "2026-08-23T15:18:50.3859558+10:00"
 }

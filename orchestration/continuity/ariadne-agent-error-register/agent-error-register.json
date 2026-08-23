@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 644,
+  "register_revision": 645,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -42962,6 +42962,449 @@
       },
       "incident_id": "AER-1115",
       "attempt_id": "clock-3fb50d007063815e064ee94a",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "active-operation-latch-cli",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Repository package scripts are invoked through their admitted module entry point.",
+      "observed_error": "The first help probe invoked the latch script by file path and failed import resolution before any state change.",
+      "detection_method": "Python returned ModuleNotFoundError; the module-form invocation then validated the latch successfully.",
+      "evidence_paths": [
+        "scripts/ariadne_active_operation_latch.py",
+        "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-postrestart-corrected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.direct_path_package_module_invocation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use python -m scripts.ariadne_active_operation_latch for repository package execution.",
+        "prevention_control": "The ergonomics review will test whether admitted invocations can be selected or emitted rather than recalled.",
+        "evidence_paths": [
+          "scripts/ariadne_active_operation_latch.py",
+          "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-postrestart-corrected-receipt.json"
+        ]
+      },
+      "incident_id": "AER-1116",
+      "attempt_id": "clock-22e5f7419b44d8c2ec56724c",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "postrestart-ariadne-receipt",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_preflight",
+      "stage": "acceptance",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Git reference evidence is supplied exclusively by the machine-owned snapshot.",
+      "observed_error": "The first post-restart receipt draft repeated the protected source object in prose and failed git_refs_evidence_manual_object_id_forbidden.",
+      "detection_method": "The Ariadne preflight rejected the draft before acceptance; the corrected receipt passed with zero manually supplied object IDs.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-postrestart-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-postrestart-corrected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_git_object_in_receipt_prose",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove every manually repeated Git object and retain only the machine-owned Git snapshot binding.",
+        "prevention_control": "The ergonomics review will test whether free-form Git evidence fields can be removed from operator input.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-postrestart-corrected-receipt.json"
+        ]
+      },
+      "incident_id": "AER-1117",
+      "attempt_id": "clock-ae950fbe3f4434be2ff52c19",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "reference-only-packet",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_script",
+      "stage": "implementation",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The authored packet uses the exact admission schema vocabulary exported by the accepted product source.",
+      "observed_error": "The first packet draft copied a plausible but wrong admission schema version and the canonical path returned snapshot_invalid.",
+      "detection_method": "The pure rehearsal exposed the closed-vocabulary mismatch before acceptance; reading the exact product source and rerunning produced all passing cases.",
+      "evidence_paths": [
+        "scripts/raisa_provider_free_unmounted_canonical_check_in_reference_only_operational_evidence_conformance_packet_rehearsal.py",
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.json"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.copied_schema_vocabulary_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind the packet to the exact emr4.check-in-admission-kernel.v1 value exported by the accepted source.",
+        "prevention_control": "The ergonomics review will test whether closed vocabulary can be imported or selected instead of copied into free-form fields.",
+        "evidence_paths": [
+          "orchestration_harness/check_in_admission_control.py",
+          "tests/test_raisa_provider_free_unmounted_canonical_check_in_reference_only_operational_evidence_conformance_packet_rehearsal.py"
+        ]
+      },
+      "incident_id": "AER-1118",
+      "attempt_id": "clock-cbcd305c2c7622273d9c9a2e",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "surrounding-test-suite",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every surrounding-suite path is selected from the current repository inventory.",
+      "observed_error": "The first combined suite guessed a nonexistent test_check_in_admission_control.py path and stopped at collection.",
+      "detection_method": "Pytest reported the missing path; repository search resolved the existing admission test and the complete suite passed.",
+      "evidence_paths": [
+        "tests/test_check_in_environment_evidence_admission.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.guessed_nonexistent_test_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve surrounding test paths from the repository inventory before invoking the suite.",
+        "prevention_control": "The ergonomics review will test whether test selection can be derived from ownership or an explicit checked manifest.",
+        "evidence_paths": [
+          "tests/test_check_in_environment_evidence_admission.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py"
+        ]
+      },
+      "incident_id": "AER-1119",
+      "attempt_id": "clock-dc089fe28f3e32e7d837ab6d",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "clockwork-continuity-projection",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The Continuity node kind is selected from the graph's closed vocabulary before clockwork submission.",
+      "observed_error": "The first closeout check supplied the descriptive node kind rehearsal and failed prospective projection validation.",
+      "detection_method": "The clockwork returned node_kind_invalid before command execution, canonical mutation, publication or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+        "scripts/ariadne_continuity.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_closed_node_kind_vocabulary",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Select the admitted integration node kind for the cross-component conformance result.",
+        "prevention_control": "The ergonomics review will test whether node kinds can be emitted as typed selectors instead of free-form strings.",
+        "evidence_paths": [
+          "scripts/ariadne_continuity.py",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1120",
+      "attempt_id": "clock-6603c8f8b6d4943ba7f1906e",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "clockwork-contract-inheritance",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The selected Continuity kind both belongs to the closed vocabulary and matches the node's actual contract scope.",
+      "observed_error": "The second closeout check used the admitted integration kind, which activated two unrelated inherited appointment-availability contracts.",
+      "detection_method": "The prospective Continuity projection reported both missing contract-evidence identifiers before command execution, mutation, publication or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+        "orchestration/continuity/emr4-continuity-graph.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.valid_node_kind_hidden_contract_scope",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Classify the provider-free conformance packet as tooling instead of asserting irrelevant product integration evidence.",
+        "prevention_control": "The ergonomics review will test whether the selector can preview inherited contract obligations before a dry tick.",
+        "evidence_paths": [
+          "orchestration/continuity/emr4-continuity-graph.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1121",
+      "attempt_id": "clock-e4e0dfdf1851cf81a0caf313",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "agent-error-register-cli",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The register reporter is invoked only with arguments admitted by its parser.",
+      "observed_error": "One verification command supplied the unsupported --check flag and argparse rejected it without reading or writing the register.",
+      "detection_method": "The command returned an unrecognized-arguments error; the governance tests remained the authoritative canonical-register verification path.",
+      "evidence_paths": [
+        "scripts/ariadne_agent_error_register.py",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.guessed_agent_register_cli_flag",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the admitted governance suite instead of inventing a register --check mode.",
+        "prevention_control": "The ergonomics review will test whether safe verification commands can be emitted from the command manifest instead of reconstructed manually.",
+        "evidence_paths": [
+          "scripts/ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "incident_id": "AER-1122",
+      "attempt_id": "clock-2307eac4d1d7e59745a08078",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "postpublication-baton-consistency",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Every current-node human evidence document contains exactly one top-level Brisbane Timestamp line before publication.",
+      "observed_error": "The first publication made the new Yuri summary current-node evidence and postpublication consistency verification found that its Timestamp line was absent.",
+      "detection_method": "The current-Baton consistency test failed after publication; the clockwork restored the previous generation byte-exactly at lease 206.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-publication-attempt-001-rollback-receipt.json",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.current_node_summary_timestamp_missing",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore the previous generation byte-exactly, bind lease 206 and add the exact Brisbane Timestamp line before fresh publication.",
+        "prevention_control": "The ergonomics review will test a prepublication prospective-current-node evidence validator so the invariant is visible before pointer movement.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-publication-attempt-001-rollback-receipt.json",
+          "orchestration/human_inbox/yuri/2026-08-23--canonical-check-in-reference-only-operational-evidence-conformance-packet.md"
+        ]
+      },
+      "incident_id": "AER-1123",
+      "attempt_id": "clock-a9c313f478c0d0b79bc7e175",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "clockwork-rollback-cli",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Rollback is invoked with its closed argument shape and no intent parameter.",
+      "observed_error": "The first rollback invocation supplied --intent and argparse rejected it without pointer movement.",
+      "detection_method": "The CLI returned --rollback does not accept --intent; the argument-free invocation then restored the previous generation byte-exactly.",
+      "evidence_paths": [
+        "scripts/ariadne_governance_clockwork_tick.py",
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-publication-attempt-001-rollback-receipt.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.rollback_rejected_intent_argument",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Invoke clockwork rollback without an intent argument.",
+        "prevention_control": "The ergonomics review will test typed operation-specific command builders that cannot express invalid flag combinations.",
+        "evidence_paths": [
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-publication-attempt-001-rollback-receipt.json"
+        ]
+      },
+      "incident_id": "AER-1124",
+      "attempt_id": "clock-1a987e1362f3fcf3b3bba580",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "postpublication-baton-consistency",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Every prospective current-node plan, closeout and acceptance Markdown file contains exactly one top-level Brisbane Timestamp line before publication.",
+      "observed_error": "The second publication made the Sol acceptance current-node evidence and postpublication consistency verification found that its Timestamp line was absent.",
+      "detection_method": "The current-Baton consistency test failed after publication; the clockwork restored the previous generation byte-exactly at lease 208.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-publication-attempt-002-rollback-receipt.json",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.current_node_acceptance_timestamp_missing",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore the previous generation byte-exactly, bind lease 208, add the exact Brisbane Timestamp line and scan the complete prospective human-evidence set.",
+        "prevention_control": "The ergonomics review will test a prospective-current-node evidence validator that reports every missing timestamp in one prepublication pass.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-publication-attempt-002-rollback-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-sol-acceptance.md"
+        ]
+      },
+      "incident_id": "AER-1125",
+      "attempt_id": "clock-41234e835b83108c35c637c9",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "prospective-timestamp-scan",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A local prospective timestamp scan implements the repository's exact prefix, suffix, offset and date parsing rule.",
+      "observed_error": "The first all-path scan used an incorrect fixed string slice and raised ValueError on a valid Brisbane timestamp.",
+      "detection_method": "The local validator failed before completing the path set; inspection of the exact current-Baton test exposed the slice mismatch.",
+      "evidence_paths": [
+        "tests/test_current_baton_consistency.py",
+        "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-sol-acceptance.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.reconstructed_timestamp_parser_slice",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the exact removeprefix, removesuffix, offset and calendar-date parsing rule from the repository test.",
+        "prevention_control": "The ergonomics review will test exposing the prospective validator directly so the operator never reconstructs it.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1126",
+      "attempt_id": "clock-7b212d51dd7119739c087f3e",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "closeout-efficacy-accounting",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The accepted efficacy reading counts every publication attempt and rollback, including the final accepted transaction.",
+      "observed_error": "The third publication passed governance verification but its source efficacy reading counted only the two preceding publication attempts.",
+      "detection_method": "Postpublication efficacy inspection compared the declared counter with the retained attempt and rollback receipts.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-publication-attempt-003-rollback-receipt.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.premature_publication_attempt_accounting",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore the previous generation byte-exactly, bind lease 210 and freeze the convergent four-attempt three-rollback total before final publication.",
+        "prevention_control": "The ergonomics review will require publication and rollback counters to be derived after transaction completion rather than authored in the source intent.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-publication-attempt-003-rollback-receipt.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json"
+        ]
+      },
+      "incident_id": "AER-1127",
+      "attempt_id": "clock-fb65f7e1547e636e86e9fa04",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"
