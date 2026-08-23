@@ -1,0 +1,35 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
+  "source_head": "5971500fcef2de4970fa204a7bb50a94358c0dde",
+  "result": "exact_read_only_measurement_selects_one_zero_added_bureaucracy_repair",
+  "workflow": {
+    "new_runtime_control_layers": 0,
+    "new_product_source_files": 0,
+    "new_product_test_files": 0,
+    "provider_calls": 0,
+    "model_workers": 0,
+    "reruns_from_procedural_error": 0,
+    "byte_exact_rollbacks": 0,
+    "bespoke_updater_executions": 0,
+    "accepted_review_outputs": 1
+  },
+  "measurement": {
+    "live_clockwork_nodes": 99,
+    "accepted_native_synthesis_nodes": 70,
+    "sampled_workflow_lapses": 31,
+    "sampled_intent_lines": 1173,
+    "sampled_scalar_leaves": 785,
+    "sampled_byte_exact_rollbacks": 4,
+    "comparative_model_rate_claims": 0
+  },
+  "recommendation": {
+    "id": "fold_prospective_current_node_evidence_and_transaction_fact_derivation_into_existing_tick",
+    "measured_latest_rollbacks_removed": 3,
+    "net_new_required_operator_fields": 0,
+    "net_new_approval_gates": 0,
+    "net_new_closeout_documents": 0,
+    "implementation_deferred_to_next_tranche": true
+  },
+  "assessment": "The clockwork's safety mechanism is effective and should be retained. Its operator interface is overweight: exact prospective evidence and transaction facts are still manually reconstructed. The selected repair removes three measured rollback sequences by folding complete prospective validation and generated transaction accounting into the existing tick, without adding a parallel control layer."
+}

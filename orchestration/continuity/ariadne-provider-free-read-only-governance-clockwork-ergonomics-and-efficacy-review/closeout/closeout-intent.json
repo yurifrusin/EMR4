@@ -1,0 +1,221 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v1",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
+    "title": "Governance clockwork ergonomics and efficacy review closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T15:59:03.2163529+10:00",
+    "node": {
+      "id": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
+      "title": "Provider-free read-only governance clockwork ergonomics and efficacy review",
+      "kind": "review",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri explicitly requested the provider-free read-only clockwork ergonomics review under standing uninterrupted-development authority.",
+          "GPT Sol held the serial measurement and acceptance lease.",
+          "No Harness, provider, product, runtime, external fact, protected evidence or protected ref opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "retain-clockwork-safety-mechanism",
+          "source": "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/evidence.json",
+          "status": "accepted",
+          "summary": "Retain the single writer, full-Git binding, protected-boundary floor, pointer-last publication and byte-exact rollback."
+        },
+        {
+          "id": "classify-operator-interface-overweight",
+          "source": "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/report.md",
+          "status": "accepted",
+          "summary": "Accept that manually authored facts and command shapes now impose disproportionate closeout cost despite strong containment."
+        },
+        {
+          "id": "retain-three-cross-harness-readings",
+          "source": "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/evidence.json",
+          "status": "accepted",
+          "summary": "Retain prepared, terminal and accepted_or_recovered as the only clockwork/Harness boundary readings; per-turn coupling remains retired."
+        },
+        {
+          "id": "select-prospective-evidence-and-derived-accounting-repair",
+          "source": "docs/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review-closeout.md",
+          "status": "accepted",
+          "summary": "Select the existing-tick repair that removes three measured rollback sequences with zero new operator fields, gates or documents."
+        }
+      ],
+      "claim_scope": [
+        "The live clockwork safety mechanism is effective and retains zero current canonical drift.",
+        "The sampled operator interface comprises 73,459 bytes, 1,173 lines and 785 scalar leaves across two intents.",
+        "Four accepted reviews disclose 31 procedural lapses and zero product-semantic lapses.",
+        "Native Harness terminal traceability improved, but useful-completion superiority and comparative reliability remain unproved.",
+        "One narrow existing-tick repair is justified; no implementation occurred in this review."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review-plan.md",
+          "docs/security/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/evidence.json",
+          "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/report.md",
+          "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-23--governance-clockwork-ergonomics-and-efficacy-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-ergonomics-efficacy-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-ergonomics-efficacy-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-ergonomics-efficacy-review-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-ergonomics-efficacy-review-postcompaction-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/measurement-contract.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The recommended repair remains unimplemented until the next exact provider-free tranche passes.",
+        "Native useful-completion reliability remains unproved and the pinned occupied profile remains paused.",
+        "The generic Authority Allocation prose conflict remains recorded but is outside the first repair.",
+        "All check-in external operational facts and human choices remain closed.",
+        "Product, provider, runtime, deployment, Pages and protected refs remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Measure the cost and benefit of the governance clockwork after extended native-Harness coupling work",
+      "outcome": "Strong safety is retained while one high-yield zero-added-bureaucracy interface repair is selected.",
+      "evidence": [
+        "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/evidence.json",
+        "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/report.md"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Move complete prospective evidence validation and transaction-derived facts into the existing clockwork tick",
+      "why_now": "The latest accepted closeout required three rollbacks for facts computable before publication, and the review identifies a repair with zero net new operator burden.",
+      "outcome": "The existing tick will reject the full prospective evidence error set before pointer movement and own its transaction accounting without weakening rollback safety.",
+      "unlocks": [
+        "A matched future closeout can measure fewer postpublication rollbacks and operator inputs against unchanged safety coverage."
+      ],
+      "does_not_solve": [
+        "It does not qualify the native Harness, reconcile worker-allocation prose, select check-in operational facts or alter product behavior."
+      ],
+      "evidence": [
+        "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/evidence.json",
+        "docs/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review-closeout.md"
+      ],
+      "orientation_statement": "Repair the existing tick at the prospective publication boundary, remove measured operator work, preserve every safety invariant and add no new form or approval gate."
+    },
+    "next_operation": {
+      "operation_id": "ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair",
+      "active_tranche": "Provider-free governance clockwork prospective current-node evidence and transaction-fact derivation repair",
+      "objective": "Fold complete prospective current-node human-evidence validation and machine-owned transaction accounting into the existing clockwork tick, proving the same rejection coverage with zero new operator fields, gates or documents and no live publication until the repair passes its frozen fixtures.",
+      "authority_source": "Yuri's explicit ergonomics-review request, standing uninterrupted-development authority and the accepted measured recommendation select this narrow existing-tick repair; all provider, product and protected surfaces remain closed.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_exact_existing_tick_files_complete_error_set_and_zero_net_operator_input_acceptance"
+    },
+    "incidents": [],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "clockwork-ergonomics-review-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "clockwork-ergonomics-measurement-contract-json",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "json.tool",
+          "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/measurement-contract.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "clockwork-ergonomics-evidence-json",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "json.tool",
+          "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/evidence.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      },
+      {
+        "command_id": "clockwork-ergonomics-governance-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/report.md",
+      "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/efficacy-reading.json",
+      "docs/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-ergonomics-efficacy-review-sol-acceptance.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_existing_governance_clockwork_tick_repair_only",
+    "complete_prospective_current_node_plan_closeout_and_acceptance_evidence_validation_before_publication",
+    "complete_prospective_error_set_returned_in_one_preparation_pass",
+    "attempt_lease_generation_and_rollback_facts_are_machine_owned_outputs",
+    "zero_net_new_required_operator_fields_approvals_gates_or_closeout_documents",
+    "preserve_single_writer_full_git_binding_closed_vocabularies_pointer_last_publication_and_byte_exact_rollback",
+    "no_live_publication_through_repaired_path_until_frozen_fixtures_and_governance_tests_pass",
+    "no_native_harness_worker_provider_call_or_transport_qualification",
+    "no_silent_claude_code_or_other_transport_fallback",
+    "no_authority_allocation_or_worker_transport_policy_change",
+    "no_check_in_external_fact_target_custody_policy_provisioning_or_activation_selection",
+    "no_existing_product_source_route_api_client_configuration_or_runtime_change",
+    "no_environment_variable_secret_credential_network_database_or_infrastructure_access",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}
