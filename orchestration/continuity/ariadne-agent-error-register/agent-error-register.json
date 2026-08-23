@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 654,
+  "register_revision": 655,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-24",
@@ -43942,6 +43942,42 @@
       },
       "incident_id": "AER-1142",
       "attempt_id": "clock-7b604ce97150a444bb0e6037",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-measured-privacy",
+      "role": "orchestrator",
+      "resource_id": "measured-privacy-prepublication-controls",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Private-data workflow and closeout controls remain bounded, typed and compact before content or publication.",
+      "observed_error": "Five contained lapses covered one ordinary collect-only command, six metadata selector revisions, one false convention label, one forbidden continuation path set and one over-budget expanded incident intent.",
+      "detection_method": "Provider-free readback, aggregate-only bind codes, synthetic tests and the continuation and clockwork validators rejected each lapse before its protected boundary.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.private_data_prepublication_controls_require_compact_typed_reading",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use provider-free tests, aggregate-first binding, label-position tests, governance-only continuation paths and one compact incident.",
+        "prevention_control": "A typed detail artifact records related bounded lapses while one compact register observation stays within the clockwork budget.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-655.md",
+          "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/evidence.json"
+        ]
+      },
+      "incident_id": "AER-1143",
+      "attempt_id": "clock-468dca82449e1518338c9e9c",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

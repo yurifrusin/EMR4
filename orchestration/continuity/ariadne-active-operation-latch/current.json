@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
-  "active_tranche": "Raisa local-only bounded historical Diary snapshot measured privacy probe",
-  "objective": "Measure privacy and temporal utility on one exact local Diary slice without granting downstream use.",
+  "operation_id": "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal",
+  "active_tranche": "Raisa local-only historical Diary structural time-axis recovery rehearsal",
+  "objective": "Recover trustworthy time mapping under the local privacy boundary.",
   "status": "in_progress",
-  "source_head": "4219fd6ad94d6441c8e2c824e9518fa6eaaee5da",
-  "authority_source": "Yuri's local de-identified Diary direction, delegated gate timing, accepted privacy gate, exact boundary convergence and standing uninterrupted-development authority.",
+  "source_head": "08b6272bde1f72e97b36d8b4a3673de8063c82ba",
+  "authority_source": "Yuri's historical Diary direction, delegated gate timing and uninterrupted-development authority.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-local-only-historical-diary-access-boundary-convergence at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_exact_local_probe_plan_and_bind_ignored_root_day_manifest_before_content_read",
+    "completed_stage": "Accepted raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_synthetic_first_structural_time_axis_recovery_plan",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,

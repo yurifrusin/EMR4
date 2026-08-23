@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 427,
-  "updated_at": "2026-08-24T02:33:58+10:00",
-  "source_graph_revision": 445,
-  "orientation_statement": "Bind the exact local slice only after fresh planning, then let the gate take the reading.",
+  "map_revision": 428,
+  "updated_at": "2026-08-24T03:42:32.7376775+10:00",
+  "source_graph_revision": 446,
+  "orientation_statement": "Repair structure; do not relax privacy or retry content automatically.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5407,24 +5407,34 @@
         "docs/raisa-local-only-historical-diary-access-boundary-convergence-plan.md",
         "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/report.md"
       ]
+    },
+    {
+      "node_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+      "lineage_parent": "raisa-local-only-historical-diary-access-boundary-convergence",
+      "strategic_role": "Measure whether Diary motion survives strict local privacy reduction.",
+      "outcome": "Containment and motion passed; scheduling time mapping did not.",
+      "evidence": [
+        "docs/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe-plan.md",
+        "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/report.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-local-only-historical-diary-access-boundary-convergence",
-    "strategic_role": "Take one bounded local empirical privacy-and-utility reading.",
-    "why_now": "The gate and its exact clockwork boundary both pass.",
-    "outcome": "A local slice may be measured under fixed limits and no downstream authority.",
+    "node_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+    "strategic_role": "Recover the missing structural time axis without weakening privacy.",
+    "why_now": "The single empirical run isolated time mapping as the utility blocker.",
+    "outcome": "A synthetic-first mapper may earn one fresh bounded local measurement.",
     "unlocks": [
-      "One at-most-80-file local historical Diary privacy probe."
+      "One at-most-80-file time-axis measurement after full pre-access verification."
     ],
     "does_not_solve": [
-      "It does not prove anonymity or permit provider, fixture, product or production use."
+      "No anonymity, fixture, provider, product or production authority opens."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/evidence.json",
-      "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/report.md",
-      "docs/raisa-local-only-historical-diary-access-boundary-convergence-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-access-boundary-convergence-sol-acceptance.md"
+      "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/evidence.json",
+      "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/report.md",
+      "docs/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

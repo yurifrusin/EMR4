@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Bind the exact local slice only after fresh planning, then let the gate take the reading.
+> Repair structure; do not relax privacy or retry content automatically.
 
 ## North star
 
@@ -660,22 +660,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One provider-free synthetic gate now measures both sequence utility and contextual linkability without treating pseudonyms as anonymity. Lineage parent: `raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal`.
 322. **Connect the privacy gate to the clockwork without creating a general historical-data opening. — Raisa local-only historical Diary access boundary convergence**
    The next local probe is one exact all-or-nothing authority reading. Lineage parent: `raisa-local-only-historical-diary-snapshot-privacy-feasibility-review`.
+323. **Measure whether Diary motion survives strict local privacy reduction. — Raisa local-only bounded historical Diary snapshot measured privacy probe**
+   Containment and motion passed; scheduling time mapping did not. Lineage parent: `raisa-local-only-historical-diary-access-boundary-convergence`.
 
 ## Current position
 
-**Take one bounded local empirical privacy-and-utility reading. — Raisa local-only historical Diary access boundary convergence**
+**Recover the missing structural time axis without weakening privacy. — Raisa local-only bounded historical Diary snapshot measured privacy probe**
 
-**Why this proof came next:** The gate and its exact clockwork boundary both pass.
+**Why this proof came next:** The single empirical run isolated time mapping as the utility blocker.
 
-A local slice may be measured under fixed limits and no downstream authority.
+A synthetic-first mapper may earn one fresh bounded local measurement.
 
 ### What this unlocks
 
-- One at-most-80-file local historical Diary privacy probe.
+- One at-most-80-file time-axis measurement after full pre-access verification.
 
 ### What it does not solve
 
-- It does not prove anonymity or permit provider, fixture, product or production use.
+- No anonymity, fixture, provider, product or production authority opens.
 
 ## Continuity and authority
 
@@ -1548,7 +1550,8 @@ Prerequisites:
 - `docs/raisa-context-fabric-source-owned-truth-conditional-command-reorientation-plan.md`
 - `docs/raisa-dual-host-foundation-closeout.md`
 - `docs/raisa-dual-host-foundation-plan.md`
-- `docs/raisa-local-only-historical-diary-access-boundary-convergence-closeout.md`
+- `docs/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe-closeout.md`
+- `docs/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe-plan.md`
 - `docs/raisa-local-only-historical-diary-access-boundary-convergence-plan.md`
 - `docs/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-plan.md`
 - `docs/raisa-maintained-oidc-verifier-session-bridge-architecture-closeout.md`
@@ -2443,7 +2446,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-local-only-historical-diary-access-boundary-convergence-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-packet.md`
@@ -3033,7 +3036,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-dual-host-foundation/feature-inventory.json`
 - `orchestration/continuity/raisa-dual-host-foundation/final-residue-evidence.json`
 - `orchestration/continuity/raisa-dual-host-foundation/host-profile-matrix-evidence.json`
-- `orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/evidence.json`
+- `orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/evidence.json`
+- `orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/report.md`
 - `orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/report.md`
 - `orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/report.md`
 - `orchestration/continuity/raisa-maintained-oidc-verifier-session-bridge-architecture/architecture-policy.json`
@@ -3981,4 +3985,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 427; continuity graph revision 445._
+_Compass map revision 428; continuity graph revision 446._
