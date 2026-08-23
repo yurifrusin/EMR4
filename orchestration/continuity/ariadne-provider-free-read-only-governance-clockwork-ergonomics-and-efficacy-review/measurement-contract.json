@@ -1,0 +1,75 @@
+{
+  "schema_version": "ariadne.clockwork_ergonomics_measurement_contract.v1",
+  "operation_id": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
+  "evidence_scope": "retained_non_protected_repository_workflow_evidence_only",
+  "windows": {
+    "live_clockwork": {
+      "graph_path": "orchestration/continuity/emr4-continuity-graph.json",
+      "first_node_id": "ariadne-provider-free-clockwork-live-canonical-adoption-retirement",
+      "last_node_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+      "expected_node_count": 99,
+      "expected_native_harness_identifier_count": 66
+    },
+    "accepted_native_harness_synthesis": {
+      "evidence_path": "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/evidence.json",
+      "expected_node_count": 70,
+      "comparative_rate_claim_allowed": false
+    },
+    "closeout_friction": [
+      {
+        "path": "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json",
+        "expected_disclosed_lapses": 10
+      },
+      {
+        "path": "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/efficacy-reading.json",
+        "expected_disclosed_lapses": 3
+      },
+      {
+        "path": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/efficacy-reading.json",
+        "expected_disclosed_lapses": 6
+      },
+      {
+        "path": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json",
+        "expected_disclosed_lapses": 12
+      }
+    ],
+    "intent_surface": [
+      {
+        "path": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/closeout/closeout-intent.json",
+        "expected_bytes": 30263,
+        "expected_lines": 464,
+        "expected_scalar_leaves": 304,
+        "expected_incident_leaves": 152,
+        "expected_incident_observations": 6
+      },
+      {
+        "path": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/closeout-intent.json",
+        "expected_bytes": 43196,
+        "expected_lines": 709,
+        "expected_scalar_leaves": 481,
+        "expected_incident_leaves": 311,
+        "expected_incident_observations": 12
+      }
+    ]
+  },
+  "expected_aggregates": {
+    "disclosed_workflow_lapses": 31,
+    "sampled_intent_bytes": 73459,
+    "sampled_intent_lines": 1173,
+    "sampled_scalar_leaves": 785,
+    "sampled_incident_leaves": 463,
+    "sampled_incident_observations": 18,
+    "sampled_publication_attempts": 6,
+    "sampled_byte_exact_rollbacks": 4,
+    "sampled_bespoke_updater_executions": 0
+  },
+  "accepted_outcome_constraints": {
+    "minimum_manual_work_removed": 1,
+    "maximum_net_new_required_operator_fields": 0,
+    "maximum_net_new_approval_gates": 0,
+    "maximum_net_new_closeout_documents": 0,
+    "comparative_model_failure_rate_claim": false,
+    "implementation_in_this_tranche": false,
+    "protected_or_product_effect": false
+  }
+}
