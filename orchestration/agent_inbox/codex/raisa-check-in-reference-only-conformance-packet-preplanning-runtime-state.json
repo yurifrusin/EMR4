@@ -1,0 +1,197 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_reference_only_operational_evidence_packet_and_cross_component_denial_matrix",
+  "source_evidence": {
+    "live_handover_current_baton": "The complete live handover was freshly read through its final line. The Current Baton accepts the four repository prerequisites, retains the 11/0/1 not-ready posture and names the reference-only conformance packet as the exact active successor.",
+    "current_authority_allocation": "Yuri authorizes uninterrupted dependency-satisfied development. GPT Sol owns this serial provider-free conformance packet. DeepSeek and Gemini are declined because the active latch forbids provider/Harness work, Claude Code is not a fallback, and native subagents are declined under current developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review-plan.md",
+      "docs/security/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/contract.json",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/evidence.json",
+      "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-admission-readiness-post-evidence-seam-convergence-review-sol-acceptance.md",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json",
+      "app/services/appointment_check_in_environment_manifest.py",
+      "app/services/appointment_check_in_operational_evidence.py",
+      "app/services/appointment_check_in_environment_evidence_gate.py",
+      "orchestration_harness/check_in_admission_control.py",
+      "orchestration_harness/check_in_environment_evidence_admission.py",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Only one authored-synthetic opaque-reference packet and hostile variants may traverse the accepted pure modules. No external fact, environment, secret resolution, database, product data, app route, ordinary enablement, admission activation, command mount, provider, deployment, Pages, protected evidence or protected ref is opened.",
+    "git_refs_and_worktree": "The machine snapshot alone supplies exact task-branch, origin, protected-ref, ancestry and tracked-clean readings and records preservation of every unrelated untracked path including docs/branding."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+    "active_tranche": "Provider-free unmounted canonical check-in reference-only operational-evidence conformance packet rehearsal",
+    "objective": "Compose one authored-synthetic opaque-reference-only packet through the accepted environment-manifest normalizer, typed operational-evidence inputs, pure evidence gate and default-off admission seam, proving exact satisfied and hostile denial paths without claiming an external operational fact or releasing ordinary admission.",
+    "status": "in_progress",
+    "source_head": "abe166791c8d3448ee3744cdc7bf4f4c3ad7807c",
+    "authority_source": "Yuri's standing uninterrupted-development authority plus the accepted post-evidence-seam convergence review select the sole dependency-satisfied repository prerequisite; all external selections remain closed.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_exact_authored_synthetic_reference_only_packet_and_cross_component_denial_matrix",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_unmounted_reference_only_conformance_packet_only",
+      "one_authored_synthetic_opaque_reference_only_packet_and_hostile_variants",
+      "compose_only_the_accepted_normalizer_typed_inputs_evidence_gate_and_admission_seam",
+      "no_external_fact_claim_human_selection_or_lasting_action",
+      "no_native_harness_diagnostic_worker_or_provider_call",
+      "no_silent_claude_code_or_other_transport_fallback",
+      "no_existing_product_source_route_api_client_configuration_or_runtime_change",
+      "no_environment_variable_manifest_instance_secret_resolution_credential_store_or_network_access",
+      "no_database_docker_postgresql_sql_live_role_or_infrastructure_action",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_admission_record_activation",
+      "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+    "assessed_stage": "preplanning_rehydrated_reference_only_conformance_packet",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The active latch forbids a native-Harness or provider call, the exact preset profile remains paused without naturally in-scope fix evidence, and Claude Code is not a fallback.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "The tranche is one provider-free pure-composition contract with exhaustive deterministic denial tests, and the active boundary permits no provider call. Reassess only on conflicting source or material semantic change.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Current developer policy prohibits proactive delegation and the packet, denial matrix and acceptance are tightly coupled serial work.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "freeze the one canonical authored-synthetic packet before implementation",
+      "compose the accepted normalizer, typed inputs, gate and admission seam without bypass helpers",
+      "prove exact satisfied non-admission before hostile mutation precedence",
+      "accept and close the final repository prerequisite before any human-owned external selection"
+    ],
+    "reassessment_triggers": [
+      "if accepted component contracts conflict",
+      "if implementation would alter an existing product or API surface",
+      "if deterministic tests expose an unresolved semantic fork",
+      "at tranche closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "The complete live Baton, authority allocation, active review acceptance, gap decomposition, all four accepted pure component sources, protected boundaries, active latch and machine Git snapshot were freshly restored before planning.",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["GPT Sol owns the pure serial conformance packet and acceptance."]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected; the latch forbids provider/Harness work and the failed exact profile has no in-scope fix evidence."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Historical lineage only; no silent fallback is permitted."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected under the provider-free boundary."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent spawned under current developer policy."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

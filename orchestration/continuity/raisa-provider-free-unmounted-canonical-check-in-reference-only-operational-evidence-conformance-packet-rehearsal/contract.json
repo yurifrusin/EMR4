@@ -1,0 +1,73 @@
+{
+  "schema_version": "raisa.check_in_reference_only_operational_evidence_conformance_contract.v1",
+  "planning_source": "0e8138c39ece888aa8e63db3f5612ff02328ed67",
+  "input_hash_mode": "strict_utf8_canonical_lf_reject_bare_cr_sha256",
+  "accepted_git_objects": {
+    "manifest_normalizer_product": "ae62faf95b289b369a6eea1793ee4325f33447bc",
+    "typed_operational_evidence_inputs_product": "9011d83d769f45bb717c039a126a890d43922dce",
+    "environment_evidence_gate_product": "89640f1bb6ad992f68d5c20fd578b4062eeb193d",
+    "admission_kernel_product": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+    "admission_input_seam_product": "1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+    "post_evidence_seam_review_evidence": "f1e88ccfa62a90bd72cbc5dc6c0ac3e249245d4d",
+    "post_evidence_seam_review_closeout": "0e8138c39ece888aa8e63db3f5612ff02328ed67"
+  },
+  "inputs": [
+    {"path": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/evidence.json", "sha256": "6bc34af8b8d7347a0a5096e937e2054c98cb0cc81e437d2c345247049231f0d0"},
+    {"path": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json", "sha256": "adad1642e1de628246eb7e39263a381f837139eb662baeefe8b2873a71b56bc2"},
+    {"path": "app/services/appointment_check_in_environment_manifest.py", "sha256": "95dbc5f6dfb79e8a5f43f84ec3b4af51fbdca16902bc07859e9aacc6d970b2ef"},
+    {"path": "app/services/appointment_check_in_operational_evidence.py", "sha256": "cabcb9dce213469b9a53bd2201e47a33fd3ac73c9f568874debbf85468420bf0"},
+    {"path": "app/services/appointment_check_in_environment_evidence_gate.py", "sha256": "d1b39368814a4b9c59f0aaa7dd3b211f106bf9c21cef42fd0a59057c733f1a4e"},
+    {"path": "orchestration_harness/check_in_admission_control.py", "sha256": "9f9d3e1dd9dd1527e21cca1b6b0f920455d79bc26900698d7743ec919d45c526"},
+    {"path": "orchestration_harness/check_in_environment_evidence_admission.py", "sha256": "df28c6cbf67e45ffed555ffadfe806591ffbc56c600f16a210c982380b2d878a"}
+  ],
+  "packet": {
+    "classification": "authored_synthetic_opaque_reference_only",
+    "environment_identifier": "env:authored-reference",
+    "practice_scope_reference": "practice-ref:authored/reference",
+    "snapshot_generation": 7,
+    "evaluation_time": "2026-08-25T00:00:00Z",
+    "secret_slot_count": 3,
+    "secret_material_count": 0,
+    "external_fact_count": 0,
+    "human_selection_count": 0
+  },
+  "expected_canonical_path": {
+    "manifest_reason": "manifest_normalized",
+    "evidence_input_reason": "evidence_inputs_normalized",
+    "evidence_gate_reason": "evidence_gate_satisfied",
+    "admission_decision": "denied",
+    "admission_lane": "ordinary_practice",
+    "admission_reason": "ordinary_activation_closed",
+    "ordinary_admission_released": false,
+    "operational_fact_status": "not_established"
+  },
+  "hostile_matrix": [
+    {"id": "manifest_absent", "gate_reason": "manifest_absent", "admission_reason": "ordinary_evidence_missing"},
+    {"id": "manifest_ambiguous", "gate_reason": "manifest_ambiguous", "admission_reason": "ordinary_evidence_missing"},
+    {"id": "manifest_secret_material", "gate_reason": "manifest_invalid", "admission_reason": "ordinary_evidence_missing"},
+    {"id": "evidence_boolean_claim", "gate_reason": "role_evidence_invalid", "admission_reason": "ordinary_evidence_missing"},
+    {"id": "manifest_stale", "gate_reason": "manifest_stale", "admission_reason": "ordinary_evidence_missing"},
+    {"id": "wrong_environment", "gate_reason": "environment_mismatch", "admission_reason": "ordinary_evidence_missing"},
+    {"id": "wrong_role", "gate_reason": "role_binding_missing", "admission_reason": "ordinary_evidence_missing"},
+    {"id": "self_verified_role", "gate_reason": "role_evidence_invalid", "admission_reason": "ordinary_evidence_missing"},
+    {"id": "duplicate_evidence_reference", "gate_reason": "rotation_evidence_invalid", "admission_reason": "ordinary_evidence_missing"},
+    {"id": "rotation_key_mismatch", "gate_reason": "secret_reference_invalid", "admission_reason": "ordinary_evidence_missing"},
+    {"id": "break_glass_engaged", "gate_reason": "break_glass_not_inactive", "admission_reason": "ordinary_evidence_missing"},
+    {"id": "snapshot_binding_mismatch", "gate_reason": "evidence_gate_satisfied", "admission_reason": "ordinary_evidence_missing"}
+  ],
+  "readiness_after_pass": {
+    "satisfied": 11,
+    "blocking_gap": 0,
+    "operational_evidence_gap": 1,
+    "verdict": "not_ready_for_ordinary_practice_admission",
+    "repository_prerequisites_remaining": 0,
+    "human_attention_required_before_external_selection": true
+  },
+  "harness_allocation": {
+    "deepseek": "declined_provider_boundary_and_no_compatible_profile",
+    "gemini": "declined_provider_boundary_and_deterministic_contract",
+    "native_subagents": "declined_developer_policy",
+    "serial_owner": "gpt_sol",
+    "claude_code_fallback": "not_authorized"
+  }
+}

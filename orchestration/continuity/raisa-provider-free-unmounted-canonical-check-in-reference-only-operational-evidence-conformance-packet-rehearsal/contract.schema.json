@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/check-in-reference-only-operational-evidence-conformance-contract.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "planning_source",
+    "input_hash_mode",
+    "accepted_git_objects",
+    "inputs",
+    "packet",
+    "expected_canonical_path",
+    "hostile_matrix",
+    "readiness_after_pass",
+    "harness_allocation"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.check_in_reference_only_operational_evidence_conformance_contract.v1"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "input_hash_mode": {"const": "strict_utf8_canonical_lf_reject_bare_cr_sha256"},
+    "accepted_git_objects": {
+      "type": "object",
+      "minProperties": 7,
+      "maxProperties": 7,
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{40}$"}
+    },
+    "inputs": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "packet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification", "environment_identifier", "practice_scope_reference", "snapshot_generation", "evaluation_time", "secret_slot_count", "secret_material_count", "external_fact_count", "human_selection_count"],
+      "properties": {
+        "classification": {"const": "authored_synthetic_opaque_reference_only"},
+        "environment_identifier": {"const": "env:authored-reference"},
+        "practice_scope_reference": {"const": "practice-ref:authored/reference"},
+        "snapshot_generation": {"const": 7},
+        "evaluation_time": {"const": "2026-08-25T00:00:00Z"},
+        "secret_slot_count": {"const": 3},
+        "secret_material_count": {"const": 0},
+        "external_fact_count": {"const": 0},
+        "human_selection_count": {"const": 0}
+      }
+    },
+    "expected_canonical_path": {"type": "object"},
+    "hostile_matrix": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "gate_reason", "admission_reason"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z][a-z0-9_]+$"},
+          "gate_reason": {"type": "string", "minLength": 1},
+          "admission_reason": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "readiness_after_pass": {"type": "object"},
+    "harness_allocation": {"type": "object"}
+  }
+}
