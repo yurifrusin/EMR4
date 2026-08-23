@@ -221,6 +221,7 @@ def test_only_authorised_unmounted_input_modules_changed_since_plan_freeze() -> 
     )
     assert process.returncode == 0
     assert process.stdout.splitlines() == [
+        "app/services/appointment_check_in_environment_evidence_gate.py",
         "app/services/appointment_check_in_environment_manifest.py",
         "app/services/appointment_check_in_operational_evidence.py",
     ]
