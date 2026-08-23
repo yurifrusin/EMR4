@@ -1,0 +1,36 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
+  "source_head": "0033e48b3c9bbd8e597dbb3fc9473dce60c1fb3b",
+  "result": "one_machine_readback_preserves_two_publication_files_and_all_canonical_state",
+  "matched_measurement": {
+    "publication_files_preserved": 2,
+    "publication_hash_changes": 0,
+    "canonical_hash_changes": 0,
+    "generated_machine_readback_files": 1,
+    "operator_authored_fields_added": 0,
+    "operator_documents_added": 0,
+    "verification_commands_reexecuted": 0,
+    "lease_advances": 0,
+    "rollbacks": 0
+  },
+  "workflow": {
+    "new_control_layers": 0,
+    "new_gates": 0,
+    "new_ledgers": 0,
+    "focused_tests_passed": 5,
+    "clockwork_file_tests_passed": 54,
+    "full_governance_tests_passed": 120,
+    "implementation_test_correction_rounds": 1,
+    "product_reruns": 0,
+    "provider_calls": 0
+  },
+  "decision": {
+    "idempotent_readback_contract": "retain",
+    "historical_digest_reconstruction": "forbidden",
+    "next_ergonomic_target": "typed_serial_continuation_state_projection_inside_existing_preflight",
+    "test_reduction": "not_yet_admitted",
+    "worker_clock_coupling": "coarse_states_only"
+  },
+  "assessment": "The narrow repair converts the destructive second publish into one authenticated machine readback while preserving both publication files and all canonical hashes. It adds no operator choice. The next material ergonomic gain remains removal of repeated continuation-state form filling inside the existing preflight."
+}

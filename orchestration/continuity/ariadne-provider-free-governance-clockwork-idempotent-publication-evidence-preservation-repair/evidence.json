@@ -1,0 +1,69 @@
+{
+  "schema_version": "ariadne.governance_idempotent_publication_evidence_preservation_evidence.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
+  "candidate_source": "0033e48b3c9bbd8e597dbb3fc9473dce60c1fb3b",
+  "occupied_parent_operation": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+  "publication_pair": {
+    "evidence_path": "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/clockwork-tick-evidence.json",
+    "evidence_sha256_before": "e2b8fbf6c1beacecd086f210207fe97f0105cc2d7632001f638ddfa37e73641f",
+    "evidence_sha256_after": "e2b8fbf6c1beacecd086f210207fe97f0105cc2d7632001f638ddfa37e73641f",
+    "report_path": "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/clockwork-tick-report.md",
+    "report_sha256_before": "f0c27dc2df8a81c265f6648ae2ab155994a4db23d510cd54b71902ef5f3c6131",
+    "report_sha256_after": "f0c27dc2df8a81c265f6648ae2ab155994a4db23d510cd54b71902ef5f3c6131",
+    "byte_exact": true
+  },
+  "generated_readback": {
+    "path": "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/clockwork-tick-idempotent-readback.json",
+    "sha256": "3715d79f0973a77bfe6257686236c1d1473273a8ab75a0017103b79f8825e17e",
+    "command_disposition": "idempotent_readback",
+    "verification_disposition": "idempotent_not_reexecuted",
+    "executed_verification_commands": 0,
+    "published_generations": 0,
+    "committed_lease_advance": 0,
+    "lease_sequence": 215,
+    "generation_id": "gen-30308fd11f3905e28b6fb065aaa022ef7764fc3a49496711f1c2fb764f136b10"
+  },
+  "canonical_hashes": [
+    {
+      "path": "orchestration/continuity/ariadne-governance-clockwork/current.json",
+      "before": "76402a787035a181e24d70f5ef8d27b1f67ac83f1f9d7bf2dd462f4841fddf31",
+      "after": "76402a787035a181e24d70f5ef8d27b1f67ac83f1f9d7bf2dd462f4841fddf31"
+    },
+    {
+      "path": "orchestration/continuity/ariadne-governance-clockwork/transaction.json",
+      "before": "f39119e416acd174c6a61a2ea3e88b832e36f023accb69f9a4524f692bb2debe",
+      "after": "f39119e416acd174c6a61a2ea3e88b832e36f023accb69f9a4524f692bb2debe"
+    },
+    {
+      "path": "orchestration/continuity/ariadne-governance-clockwork/generation-manifest.json",
+      "before": "b195f112ed5a84b8d084f0f2014ce0113317a6ae369709011b43fcc32b5430da",
+      "after": "b195f112ed5a84b8d084f0f2014ce0113317a6ae369709011b43fcc32b5430da"
+    },
+    {
+      "path": "orchestration/continuity/ariadne-active-operation-latch/current.json",
+      "before": "f931a511814154a6715154b36d160049c02989ae3f176d9cc4e3660277d28134",
+      "after": "f931a511814154a6715154b36d160049c02989ae3f176d9cc4e3660277d28134"
+    }
+  ],
+  "verification": {
+    "new_focused_tests_passed": 5,
+    "clockwork_file_tests_passed": 54,
+    "full_governance_tests_passed": 120,
+    "ruff_owned_files_passed": true,
+    "production_live_state_passed": true,
+    "canonical_drift": 0,
+    "implementation_test_correction_rounds": 1,
+    "product_reruns": 0,
+    "provider_calls": 0
+  },
+  "boundaries": {
+    "new_operator_documents": 0,
+    "new_operator_fields": 0,
+    "new_gates": 0,
+    "new_ledgers": 0,
+    "new_control_layers": 0,
+    "generated_machine_readback_files": 1,
+    "protected_ref_movements": 0,
+    "docs_branding_preserved": true
+  }
+}
