@@ -19,9 +19,15 @@ import re
 import secrets
 import shutil
 import subprocess
+import sys
 import threading
 import time
 from typing import Any
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 from scripts import (
     deepseek_native_harness_provider_free_effective_tool_composition_guard as guard,
@@ -35,7 +41,6 @@ from scripts.raisa_authored_synthetic_check_in_native_harness_bounded_worker_mon
 )
 
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
 WORKTREE_PARENT = Path("C:/Users/sarashera/EMR4-worktrees")
 BROKER_PATH = REPO_ROOT / "scripts/ariadne_deepseek_native_harness_broker.mjs"
 TRANSACTION_PATH = (
