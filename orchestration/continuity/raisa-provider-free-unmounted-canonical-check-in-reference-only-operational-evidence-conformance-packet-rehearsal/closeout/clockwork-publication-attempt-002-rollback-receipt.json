@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.clockwork_publication_rollback_receipt.v1",
+  "recorded_at": "2026-08-23T15:38:00+10:00",
+  "status": "rolled_back_byte_exact",
+  "published_generation_id": "gen-4c207928935e1b6c5a5032f1aff66569e812dd0555defa985673384a0695f7ae",
+  "published_source_commit": "17a64ad57ee2a37b881d24a344c8f876a29fb288",
+  "postpublication_failure": "current_node_sol_acceptance_missing_exactly_one_brisbane_timestamp_header",
+  "selected_generation_id": "gen-f3adfd61281b9aecd52ae67baf9ecc3631dfa1d65c089a7e73778d8707a9bd03",
+  "rollback_lease_sequence": 208,
+  "byte_exact": true,
+  "canonical_result": "previous_generation_restored",
+  "correction": "Bind rollback lease 208 as source, add the required top-level Brisbane Timestamp line to the Sol acceptance, scan every prospective current-node human evidence file, and rerun a fresh dry check before publication."
+}
