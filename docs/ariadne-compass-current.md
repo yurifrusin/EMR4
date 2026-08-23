@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Select typed control positions; let the clockwork own their full representation.
+> The model chooses the lever position; the clockwork takes the authoritative reading.
 
 ## North star
 
@@ -640,22 +640,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Publication evidence remains immutable and one machine readback records the repeat. Lineage parent: `ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review`.
 312. **Make the orchestrator take serial governance readings instead of rewriting their full representation. — Provider-free governance clockwork typed serial-continuation state projection rehearsal**
    A 14-line typed card produces the existing safety receipt with 92.1 percent fewer caller leaves. Lineage parent: `ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair`.
+313. **Replace model-authored governance representations with typed control positions and deterministic readings. — Provider-free governance clockwork typed serial-continuation projection live-adoption efficacy review**
+   Three live serial events retained full safety evidence at an average pair cost 56.8 percent below the manual baseline. Lineage parent: `ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal`.
 
 ## Current position
 
-**Use typed controls for intent and deterministic expansion for governance state. — Provider-free governance clockwork typed serial-continuation state projection rehearsal**
+**Use one compact observed-empty serial preset for ordinary continuation while retaining the legacy occupied path. — Provider-free governance clockwork typed serial-continuation projection live-adoption efficacy review**
 
-**Why this proof came next:** The matched review found continuation runtime states were the largest remaining clerical surface.
+**Why this proof came next:** Live adoption was required to distinguish rehearsal savings from practical operator fit.
 
-The complete serial intent-plus-receipt pair is 58.7 percent smaller by lines and 60.9 percent smaller by bytes.
+The existing preset fits all three events; one historical-latch test defect is corrected and durably recorded.
 
 ### What this unlocks
 
-- Three-event live efficacy observation using ordinary compact serial intents.
+- Read-only mapping of unique and duplicated postpublication validation coverage.
 
 ### What it does not solve
 
-- It does not qualify occupied workers or reduce full governance-suite cadence.
+- It does not qualify a worker Harness or authorise removing any test run.
 
 ## Continuity and authority
 
@@ -1248,7 +1250,8 @@ Prerequisites:
 - `docs/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-plan.md`
 - `docs/ariadne-clockwork-typed-builder-matched-efficacy-review-plan.md`
 - `docs/ariadne-clockwork-typed-semantic-builder-plan.md`
-- `docs/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-closeout.md`
+- `docs/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-closeout.md`
+- `docs/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-plan.md`
 - `docs/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-plan.md`
 - `docs/ariadne-compass-increment2-plan.md`
 - `docs/ariadne-continuity-engine-increment1-closeout.md`
@@ -2134,7 +2137,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-preplanning-runtime-state.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-adaptation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-command-manifest.json`
@@ -2784,7 +2787,8 @@ Prerequisites:
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/report.md`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/report.md`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal/report.md`
-- `orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/evidence.json`
+- `orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/evidence.json`
+- `orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/report.md`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/report.md`
 - `orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-evidence.json`
 - `orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-report.md`
@@ -3941,4 +3945,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 417; continuity graph revision 435._
+_Compass map revision 418; continuity graph revision 436._

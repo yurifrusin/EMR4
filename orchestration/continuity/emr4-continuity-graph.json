@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 435,
+  "graph_revision": 436,
   "harvests": [],
   "nodes": [
     {
@@ -35135,9 +35135,88 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review",
+      "title": "Provider-free governance clockwork typed serial-continuation projection live-adoption efficacy review",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "GPT Sol owns the provider-free deterministic live-use measurement and the test-only moving-latch correction."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "retain-typed-serial-projection-with-current-latch-equivalence",
+          "source": "docs/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-plan.md",
+          "status": "accepted",
+          "summary": "Retain the existing compact serial preset after three first-invocation passes, and derive both safety comparison paths from the same current latch."
+        }
+      ],
+      "claim_scope": [
+        "Three ordinary provider-free compact serial events pass without rejection, missing non-default decisions or expanded runtime-state files."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-plan.md",
+          "docs/security/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/evidence.json",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/report.md",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-23--ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-test-repair-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/event-readings.json",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/event-001-postpublication-moving-latch-repair.json",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/event-002-semantic-publication-interpreter-rejection.json",
+          "tests/test_ariadne_orchestrator_preflight.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Test-run removal, occupied worker transport and native Harness qualification remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T20:13:31.0779586+10:00",
+      "updated_at": "2026-08-23T20:13:31.0779586+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "b2bca518c2d72ded86b4d53feeddad52fc389dc5",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T19:41:32.8076827+10:00"
+  "updated_at": "2026-08-23T20:13:31.0779586+10:00"
 }

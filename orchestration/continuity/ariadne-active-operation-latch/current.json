@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review",
-  "active_tranche": "Provider-free governance clockwork typed serial-continuation projection live-adoption efficacy review",
-  "objective": "Measure three ordinary compact serial continuation events for rejection rate, pair cost and missing-decision evidence before any preset adjustment or test-cadence proposal.",
+  "operation_id": "ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review",
+  "active_tranche": "Provider-free governance clockwork postpublication validation-cadence mapping review",
+  "objective": "Characterize unique and duplicated coverage among semantic publication verification, canonical live-state validation and the postpublication suite, then freeze exact replacement-evidence requirements without removing a test run.",
   "status": "in_progress",
-  "source_head": "7c296e942530b80c49a08ed144e4b934587b1064",
-  "authority_source": "The accepted projection plan requires several live serial events before further workflow reduction.",
+  "source_head": "b2bca518c2d72ded86b4d53feeddad52fc389dc5",
+  "authority_source": "The accepted live-adoption review identifies validation-cadence mapping as the next narrow ergonomic study.",
   "checkpoint": {
-    "completed_stage": "Accepted ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_record_three_ordinary_typed_serial_event_readings",
+    "completed_stage": "Accepted ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_read_only_coverage_mapping_plan",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,10 +34,10 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_read_only_live_efficacy_measurement_of_typed_serial_projection_only",
-    "use_existing_compact_intent_and_existing_receipt_without_new_schema_or_control_layer",
-    "measure_three_ordinary_serial_events_rejection_rate_pair_cost_and_missing_decisions",
-    "no_test_cadence_reduction_or_full_suite_removal",
+    "provider_free_read_only_postpublication_validation_coverage_mapping_only",
+    "characterize_unique_duplicate_and_dependency_coverage_without_changing_commands",
+    "freeze_exact_replacement_evidence_requirements_before_any_future_cadence_change",
+    "no_test_run_removal_skip_deselection_or_weakening",
     "no_worker_dispatch_native_harness_provider_call_or_transport_qualification",
     "no_silent_claude_code_or_other_transport_fallback",
     "no_authority_allocation_or_worker_transport_policy_change",

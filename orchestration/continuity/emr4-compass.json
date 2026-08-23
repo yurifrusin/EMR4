@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 417,
-  "updated_at": "2026-08-23T19:41:32.8076827+10:00",
-  "source_graph_revision": 435,
-  "orientation_statement": "Select typed control positions; let the clockwork own their full representation.",
+  "map_revision": 418,
+  "updated_at": "2026-08-23T20:13:31.0779586+10:00",
+  "source_graph_revision": 436,
+  "orientation_statement": "The model chooses the lever position; the clockwork takes the authoritative reading.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5307,24 +5307,34 @@
         "docs/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-plan.md",
         "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/report.md"
       ]
+    },
+    {
+      "node_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review",
+      "lineage_parent": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal",
+      "strategic_role": "Replace model-authored governance representations with typed control positions and deterministic readings.",
+      "outcome": "Three live serial events retained full safety evidence at an average pair cost 56.8 percent below the manual baseline.",
+      "evidence": [
+        "docs/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-plan.md",
+        "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/report.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal",
-    "strategic_role": "Use typed controls for intent and deterministic expansion for governance state.",
-    "why_now": "The matched review found continuation runtime states were the largest remaining clerical surface.",
-    "outcome": "The complete serial intent-plus-receipt pair is 58.7 percent smaller by lines and 60.9 percent smaller by bytes.",
+    "node_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review",
+    "strategic_role": "Use one compact observed-empty serial preset for ordinary continuation while retaining the legacy occupied path.",
+    "why_now": "Live adoption was required to distinguish rehearsal savings from practical operator fit.",
+    "outcome": "The existing preset fits all three events; one historical-latch test defect is corrected and durably recorded.",
     "unlocks": [
-      "Three-event live efficacy observation using ordinary compact serial intents."
+      "Read-only mapping of unique and duplicated postpublication validation coverage."
     ],
     "does_not_solve": [
-      "It does not qualify occupied workers or reduce full governance-suite cadence."
+      "It does not qualify a worker Harness or authorise removing any test run."
     ],
     "evidence": [
-      "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/evidence.json",
-      "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/report.md",
-      "docs/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-closeout.md",
-      "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-sol-acceptance.md"
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/evidence.json",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/report.md",
+      "docs/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

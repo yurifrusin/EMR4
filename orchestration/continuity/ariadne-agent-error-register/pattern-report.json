@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 647,
+  "register_revision": 648,
   "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "8b0c6f6b91e13b6ee8a91068706836115d654088bd6d1ad669b775c469a2d840",
-  "incident_count": 1130,
+  "canonical_register_sha256": "d53c2053e8f5caef5a96b37465f872048065f3e03c669b511e3ea50b995ff669",
+  "incident_count": 1132,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 597,
+      "agent_behavior": 599,
       "harness": 73,
       "operator": 291,
       "repository": 153,
@@ -19,7 +19,7 @@
       "evidence_misreport": 78,
       "harness_failure": 73,
       "operator_error": 291,
-      "output_contract_violation": 353,
+      "output_contract_violation": 355,
       "read_only_violation": 5,
       "reasoning_claim_error": 50,
       "repository_defect": 153,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 89,
       "integration_reviewer": 5,
-      "orchestrator": 973,
+      "orchestrator": 975,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 741,
+      "low": 743,
       "material": 135,
       "moderate": 254
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 233,
-      "canonical_unchanged": 713,
+      "accepted_candidate_changed": 234,
+      "canonical_unchanged": 714,
       "untrusted_partial_worktree": 184
     },
     "by_resource_and_role": {
@@ -508,6 +508,7 @@
       "safe-terminal-private-identity-validator::orchestrator": 1,
       "safe-terminal-threat-row-assertion::orchestrator": 1,
       "sanitized-error-kind-projector::implementer": 1,
+      "semantic-publication-launcher::orchestrator": 1,
       "sentinel-source-escape-repair-closeout-intent-json::orchestrator": 1,
       "sentinel-source-escape-repair-evidence-generator::orchestrator": 1,
       "sentinel-source-escape-repair-surrounding-test-packet::orchestrator": 1,
@@ -549,6 +550,7 @@
       "typed-input-preplanning-receipt::orchestrator": 1,
       "typed-input-source-capability-guard::orchestrator": 1,
       "typed-input-source-review::orchestrator": 1,
+      "typed-serial-safety-equivalence-test::orchestrator": 1,
       "typed-useful-worker-clockwork-checkpoint::orchestrator": 1,
       "typed-useful-worker-preexecution-contract::orchestrator": 1,
       "useful-worker-checkpoint-controller::orchestrator": 1,
