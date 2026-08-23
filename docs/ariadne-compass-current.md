@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Use explicit story anchors and bounded coordinates; never guess the clock.
+> Repair the extraction clock without winding the private-data clock again.
 
 ## North star
 
@@ -664,22 +664,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Containment and motion passed; scheduling time mapping did not. Lineage parent: `raisa-local-only-historical-diary-access-boundary-convergence`.
 324. **Recover scheduling time while retaining realistic local Diary motion. — Raisa local-only historical Diary structural time-axis recovery rehearsal**
    Table-cell paragraph motion passed; the time grid is outside table cells. Lineage parent: `raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe`.
+325. **Recover realistic scheduling time while keeping historical-derived use default-deny. — Raisa local-only historical Diary document-story time-coordinate recovery rehearsal**
+   The mapper passed synthetic controls but the sole private run exceeded its controller ceiling. Lineage parent: `raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal`.
 
 ## Current position
 
-**Bind explicit main-story time labels to private entries by rendered coordinates. — Raisa local-only historical Diary structural time-axis recovery rehearsal**
+**Make Word coordinate extraction operationally bounded before another private measurement. — Raisa local-only historical Diary document-story time-coordinate recovery rehearsal**
 
-**Why this proof came next:** The single empirical run isolated the time grid outside the fourteen table cells.
+**Why this proof came next:** The fixed timeout prevented any coordinate utility reading and interrupted automatic child cleanup.
 
-A synthetic-first coordinate mapper may earn one fresh bounded local measurement.
+Provider-free authored-synthetic recovery can type the timeout, own exact cleanup and measure throughput.
 
 ### What this unlocks
 
-- One at-most-80-file story-coordinate measurement after full pre-access verification.
+- A separately planned new local measurement candidate only after recovery acceptance.
 
 ### What it does not solve
 
-- No historical-derived artifact, provider, product or production authority opens.
+- No historical archive access, reusable derived artifact, provider, product or production authority opens.
 
 ## Continuity and authority
 
@@ -1554,8 +1556,9 @@ Prerequisites:
 - `docs/raisa-dual-host-foundation-plan.md`
 - `docs/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe-plan.md`
 - `docs/raisa-local-only-historical-diary-access-boundary-convergence-plan.md`
+- `docs/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal-closeout.md`
+- `docs/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal-plan.md`
 - `docs/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-plan.md`
-- `docs/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal-closeout.md`
 - `docs/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal-plan.md`
 - `docs/raisa-maintained-oidc-verifier-session-bridge-architecture-closeout.md`
 - `docs/raisa-maintained-oidc-verifier-session-bridge-architecture-design.md`
@@ -2449,7 +2452,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-preplanning-v2-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-legacy-route-convergence-kernel-interface-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-command-manifest.json`
 - `orchestration/agent_inbox/codex/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-gemini37-repair-review-packet.md`
@@ -3041,8 +3044,9 @@ Prerequisites:
 - `orchestration/continuity/raisa-dual-host-foundation/host-profile-matrix-evidence.json`
 - `orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/report.md`
 - `orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/report.md`
+- `orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/evidence.json`
+- `orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/report.md`
 - `orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/report.md`
-- `orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/evidence.json`
 - `orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/report.md`
 - `orchestration/continuity/raisa-maintained-oidc-verifier-session-bridge-architecture/architecture-policy.json`
 - `orchestration/continuity/raisa-maintained-oidc-verifier-session-bridge-architecture/provider-free-acceptance-evidence.json`
@@ -3989,4 +3993,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 429; continuity graph revision 447._
+_Compass map revision 430; continuity graph revision 448._

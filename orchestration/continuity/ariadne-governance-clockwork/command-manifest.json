@@ -7,7 +7,7 @@
       "arguments": [
         "-m",
         "json.tool",
-        "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/evidence.json"
+        "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/evidence.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 656,
+  "register_revision": 657,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-24",
@@ -44014,6 +44014,42 @@
       },
       "incident_id": "AER-1144",
       "attempt_id": "clock-cf54210226ed5327a1b9a612",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-story-coordinate-recovery",
+      "role": "orchestrator",
+      "resource_id": "provider-free-test-entrypoint-and-prose-semantics",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Pre-access verification uses the established module entry point and stable semantic assertions.",
+      "observed_error": "One direct-script import failure and one case-sensitive prose assertion were rejected before archive access.",
+      "detection_method": "The provider-free runner import boundary and focused pytest assertion failed closed.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.synthetic_verification_entrypoint_and_prose_require_stable_interfaces",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the repository-interpreter module entry point and case-folded semantic prose checks.",
+        "prevention_control": "All provider-free controls must pass before metadata binding or archive content access.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-657.md",
+          "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/evidence.json"
+        ]
+      },
+      "incident_id": "AER-1145",
+      "attempt_id": "clock-def5ec0869e890d026569437",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

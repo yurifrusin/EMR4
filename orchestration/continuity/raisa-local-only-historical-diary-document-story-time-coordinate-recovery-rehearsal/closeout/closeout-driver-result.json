@@ -1,8 +1,8 @@
 {
   "schema_version": "ariadne.governance_bound_closeout_driver_result.v1",
   "status": "passed",
-  "mode": "rehearse",
-  "source_head": "2e6974218f8a133e220d84684af432867d53fcd8",
+  "mode": "publish",
+  "source_head": "218830d744ae18b2284e4b3de89ca15f27022ba7",
   "interpreter": {
     "selected": "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
     "attested": "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
@@ -19,10 +19,10 @@
     "passed_command_count": 3
   },
   "inline_live_validation": {
-    "status": "not_executed_rehearsal",
-    "captured_from": "verified_dry_preparation",
-    "source_commit": "2e6974218f8a133e220d84684af432867d53fcd8",
-    "generation_id": "gen-50bb7597b8e30688f3542b4de3a0a4dcaac447b29553660d2f110c81dead5ea6",
+    "status": "passed",
+    "captured_from": "tick_publish_return_after_validate_tick_live_state",
+    "source_commit": "218830d744ae18b2284e4b3de89ca15f27022ba7",
+    "generation_id": "gen-99cd1bdcbf17ac6c48ca6d2776bb8fa6be7d49d482d52f36b34c98d8064ab51d",
     "lease_sequence": 232
   },
   "postpublication_verification": {
@@ -39,10 +39,10 @@
     "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tracked_drift": 0
   },
-  "publication_surface_changed_file_count": 0,
+  "publication_surface_changed_file_count": 11,
   "stage_manifest": "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/closeout/explicit-stage-manifest.json",
   "git_add_invocations": 0,
   "git_index_mutations": 0,
-  "stage_manifest_path_count": 14,
-  "stage_manifest_sha256": "a9be8c366bfd236feffedcad41e6818228b2d0b5a9877149e74ac87bbdced4ea"
+  "stage_manifest_path_count": 15,
+  "stage_manifest_sha256": "4e591b97981f8bb6210a531844c6befd9cdffd108259f7f6e6562b92f90ecfe9"
 }
