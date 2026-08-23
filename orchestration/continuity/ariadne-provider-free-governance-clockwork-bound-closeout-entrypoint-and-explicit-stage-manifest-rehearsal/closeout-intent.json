@@ -27,11 +27,14 @@
     "claim_scope": [
       "One provider-free nonpublishing rehearsal may prove the bound driver and inert stage manifest."
     ],
-    "additional_receipts": [],
+    "additional_receipts": [
+      "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-rehearsal-closeout-precommit-receipt.json"
+    ],
     "additional_artifacts": [
       "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-preplanning-continuation-intent.json",
       "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-preplanning-receipt.json",
       "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-rehearsal-pre-verifier-continuation-intent.json",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-rehearsal-closeout-precommit-continuation-intent.json",
       "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal/closeout-driver-result.json",
       "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal/explicit-stage-manifest.json"
     ],
