@@ -878,6 +878,7 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
     source_table_cell_count = 0
     source_segment_count = 0
     mapped_time_count = 0
+    leading_time_count = 0
     story_anchor_count = 0
     distinct_story_time_minutes: set[int] = set()
     mapping_outcomes: Counter[str] = Counter()
@@ -929,6 +930,7 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
                     current_minute = direct_minute
                     time_mapping = "leading_explicit_time_token"
                     mapping_outcome = "leading_explicit_time_token"
+                    leading_time_count += 1
                 else:
                     current_minute, time_mapping, mapping_outcome = (
                         _story_coordinate_mapping(
@@ -1088,6 +1090,7 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
         0 if source_segment_count == 0 else mapped_time_count / source_segment_count
     )
     interval_mode_minutes = _positive_interval_mode(distinct_time_minutes)
+    explicit_time_source_count = story_anchor_count + leading_time_count
 
     if source_leakage:
         decision = Decision.BLOCKED
@@ -1097,7 +1100,7 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
         or stable_linkage == 0
         or total_changes == 0
         or mapped_ratio < 0.25
-        or story_anchor_count < MIN_DISTINCT_TIME_MINUTES
+        or explicit_time_source_count < MIN_DISTINCT_TIME_MINUTES
         or len(distinct_time_minutes) < MIN_DISTINCT_TIME_MINUTES
         or interval_mode_minutes is None
     ):
@@ -1110,8 +1113,12 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
                 (total_changes == 0, "no_adjacent_changes"),
                 (mapped_ratio < 0.25, "insufficient_time_mapping"),
                 (
-                    story_anchor_count < MIN_DISTINCT_TIME_MINUTES,
-                    "insufficient_story_time_anchors",
+                    explicit_time_source_count < MIN_DISTINCT_TIME_MINUTES,
+                    (
+                        "insufficient_story_time_anchors"
+                        if leading_time_count == 0
+                        else "insufficient_explicit_time_sources"
+                    ),
                 ),
                 (
                     len(distinct_time_minutes) < MIN_DISTINCT_TIME_MINUTES,
@@ -1156,6 +1163,7 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
             "mapped_time_ratio_numerator": mapped_time_count,
             "mapped_time_ratio_denominator": source_segment_count,
             "explicit_story_time_anchor_observations": story_anchor_count,
+            "leading_explicit_time_token_observations": leading_time_count,
             "distinct_story_time_minutes": len(distinct_story_time_minutes),
             "distinct_time_minutes": len(distinct_time_minutes),
             "positive_interval_mode_minutes": interval_mode_minutes,

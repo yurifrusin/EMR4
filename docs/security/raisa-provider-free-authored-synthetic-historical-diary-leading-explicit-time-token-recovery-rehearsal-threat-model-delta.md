@@ -68,6 +68,11 @@ Control: coordinate code and thresholds are unchanged. Direct mapping applies
 only to the payload in the same successfully parsed segment; every other
 segment follows the existing mapper and closed reason codes.
 
+Candidate admission counts story anchors and valid leading tokens only as
+explicit time-source observations. Distinct-minute, interval, mapping-ratio,
+stable-linkage, adjacent-change and leakage controls remain separate; a high
+token count cannot substitute for any of them.
+
 ### Authored-synthetic proof reopens private historical data
 
 Threat: tests enumerate, import, open or tune against the ignored archive or a

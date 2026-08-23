@@ -44,15 +44,22 @@ def _cell(text: str, *, column: int = 1) -> probe.PrivateCell:
 
 
 def _extraction(*values: str) -> probe.PrivateExtraction:
+    return _extraction_snapshots(*(values for _index in range(3)))
+
+
+def _extraction_snapshots(*snapshots_values: tuple[str, ...]) -> probe.PrivateExtraction:
     snapshots = tuple(
         probe.PrivateSnapshot(
             sequence_index=index,
             observation_offset_seconds=index * 30,
-            cells=tuple(_cell(value, column=column) for column, value in enumerate(values, 1)),
+            cells=tuple(
+                _cell(value, column=column)
+                for column, value in enumerate(values, 1)
+            ),
             story_time_anchors=(),
             error_code=None,
         )
-        for index in range(3)
+        for index, values in enumerate(snapshots_values)
     )
     return probe.PrivateExtraction(
         schema_version="historical_diary.private_word_story_coordinate_extraction.v2",
@@ -148,6 +155,7 @@ def test_direct_mapping_is_same_segment_only_and_never_forward_fills(monkeypatch
         assert later.time_minute is None
         assert later.time_mapping == "unmapped"
     assert reading["utility"]["mapped_time_observations"] == 3
+    assert reading["utility"]["leading_explicit_time_token_observations"] == 3
     assert reading["utility"]["mapping_outcome_counts"] == {
         "coordinate_unavailable": 3,
         "leading_explicit_time_token": 3,
@@ -166,6 +174,29 @@ def test_token_and_separator_are_removed_before_private_hashing(monkeypatch):
     assert clock_cell.cell_token == plain_cell.cell_token
     assert clock_cell.time_minute == 540
     assert plain_cell.time_minute is None
+
+
+def test_sufficient_leading_tokens_are_first_class_explicit_time_sources(monkeypatch):
+    _fixed_keys(monkeypatch)
+    projection, reading = probe.project_and_measure(
+        _extraction_snapshots(
+            ("09:00 Alpha", "09:15 Beta", "09:30 Gamma"),
+            ("09:00 Alpha", "09:15 Beta", "09:30 Gamma", "09:45 Delta"),
+            ("09:00 Alpha", "09:15 Beta", "09:30 Gamma", "09:45 Delta"),
+        )
+    )
+
+    assert reading["decision"] == "locally_restricted_candidate"
+    assert reading["utility"]["leading_explicit_time_token_observations"] == 11
+    assert reading["utility"]["explicit_story_time_anchor_observations"] == 0
+    assert reading["utility"]["positive_interval_mode_minutes"] == 15
+    assert reading["utility"]["stable_linkage_records"] == 4
+    assert reading["utility"]["total_changes"] == 1
+    assert all(
+        cell.time_mapping == "leading_explicit_time_token"
+        for snapshot in projection.snapshots
+        for cell in snapshot.cells
+    )
 
 
 def test_projection_proof_does_not_enumerate_or_open_historical_files(monkeypatch):

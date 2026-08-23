@@ -15,6 +15,19 @@ position, token, separator, denial and authority meaning. This tranche lowers
 that contract into one pure parser and one existing projection seam without
 historical, provider, product or runtime access.
 
+Pre-closeout clarification timestamp:
+2026-08-24T07:58:23.4536198+10:00 (Australia/Brisbane)
+
+Clarification source HEAD: `e96b368b815989b4da8deefe61b8fe4e37b00479`
+
+Clarification reasoning level: Extra High. Focused integration review, before
+any historical access, showed that the inherited aggregate admission still
+required three main-story anchors even when leading tokens supplied sufficient
+explicit time evidence. The plan is therefore clarified fail-closed: story
+anchors and valid leading tokens are the only two explicit source forms, while
+all independent distinct-minute, interval, mapping-ratio, linkage, motion and
+privacy gates remain mandatory. No completed evidence was reinterpreted.
+
 ## Objective and inherited evidence
 
 Implement and prove a strict segment-leading explicit time-token parser on
@@ -58,6 +71,11 @@ operates on one already separated in-memory cell segment.
    existing same-page coordinate mapper remains unchanged and is consulted only
    when the segment has no valid leading token. A standalone complete time
    segment remains a structural marker and does not become a payload.
+8. Aggregate candidate admission treats story anchors and valid leading tokens
+   as two explicit time-source forms. Their combined observation count must be
+   at least three, and the existing distinct-minute, interval, mapping-ratio,
+   stable-linkage, adjacent-change and leakage gates remain independently
+   mandatory.
 
 The only new public mapping reason is a closed aggregate code such as
 `leading_explicit_time_token`; no raw token, payload, time value, source text,
@@ -76,7 +94,8 @@ Focused tests must cover:
   missing payload and nonleading embedded tokens;
 - date-like, phone-like and email/contact-like payload denials;
 - same-segment direct mapping, no forward fill, unchanged coordinate fallback,
-  and standalone time-marker behavior;
+  standalone time-marker behavior and leading-token-only candidate admission
+  when every unchanged utility gate is independently satisfied;
 - byte-stable proof that the leading time and separator are absent from the
   private normalized payload/HMAC input; and
 - strict zero filesystem enumeration, historical-content access, network,
