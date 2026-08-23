@@ -1,0 +1,76 @@
+{
+  "schema_version": "raisa.check_in_post_evidence_seam_readiness_convergence_contract.v1",
+  "planning_source": "e163353eb150cd0f4222f61f6ec5ef651cda9087",
+  "input_hash_mode": "strict_utf8_canonical_lf_reject_bare_cr_sha256",
+  "accepted_git_objects": {
+    "post_attempt_008_candidate": "5e9bf951f3712c48cac32f240d78b2cb685cc93c",
+    "post_attempt_008_closeout": "ca18d64052241cd07bc1ac73887f849e2d245f98",
+    "gap_decomposition_candidate": "d55eb12c768aaca3583a6e0c9e00e1ba1a36c9b2",
+    "gap_decomposition_closeout": "bad9ad07677c29628e51c963ae6f17068174eb59",
+    "manifest_normalizer_product": "ae62faf95b289b369a6eea1793ee4325f33447bc",
+    "manifest_normalizer_closeout": "2e7ab00b0ee4c874095c9725878df42f18dc16fd",
+    "typed_inputs_product": "9011d83d769f45bb717c039a126a890d43922dce",
+    "typed_inputs_closeout": "6edcc2486cfe18d48926f0d228dd3c23ac13dde4",
+    "evidence_gate_product": "89640f1bb6ad992f68d5c20fd578b4062eeb193d",
+    "evidence_gate_closeout": "03950c102584b92677b791e615248de090f13b61",
+    "admission_kernel_product": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+    "admission_seam_product": "1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+    "admission_seam_closeout": "e163353eb150cd0f4222f61f6ec5ef651cda9087"
+  },
+  "inputs": [
+    {"path": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/evidence.json", "sha256": "d2b6836a84465555e47ce97d66b3dddc0f866251bbf7cf53b73908103d7d7c46"},
+    {"path": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json", "sha256": "adad1642e1de628246eb7e39263a381f837139eb662baeefe8b2873a71b56bc2"},
+    {"path": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json", "sha256": "12999b3c91719895996f205e5e84b8154fbbb52267b8c43d5e9b191d55f18d46"},
+    {"path": "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-closeout.md", "sha256": "9be375cd9adab33e350ee2731a69efc229e29c593d4491b7a9bd7911ad41eb5a"},
+    {"path": "app/services/appointment_check_in_environment_manifest.py", "sha256": "95dbc5f6dfb79e8a5f43f84ec3b4af51fbdca16902bc07859e9aacc6d970b2ef"},
+    {"path": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/evidence.json", "sha256": "6dbeade71b125c739b3ff1ef3ca16a4870d10a20eb8436f1b0633e836d7cfb1e"},
+    {"path": "app/services/appointment_check_in_operational_evidence.py", "sha256": "cabcb9dce213469b9a53bd2201e47a33fd3ac73c9f568874debbf85468420bf0"},
+    {"path": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal/evidence.json", "sha256": "30d867a07e436910d5985f30d3a3fb75de7e15b7af8b83fc1dcf24378d9979fa"},
+    {"path": "app/services/appointment_check_in_environment_evidence_gate.py", "sha256": "d1b39368814a4b9c59f0aaa7dd3b211f106bf9c21cef42fd0a59057c733f1a4e"},
+    {"path": "orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/provider-free-kernel-rehearsal-evidence.json", "sha256": "25f69675d8cf944fcbed15424c6e476e6bf8d17041a86d9e91ab847fc1aab48d"},
+    {"path": "orchestration_harness/check_in_admission_control.py", "sha256": "9f9d3e1dd9dd1527e21cca1b6b0f920455d79bc26900698d7743ec919d45c526"},
+    {"path": "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/deterministic-evidence.json", "sha256": "044bc81b9321a9f7f3076c0e4670f480f95c3b19ca40ed7f31679d20667b22d8"},
+    {"path": "orchestration_harness/check_in_environment_evidence_admission.py", "sha256": "df28c6cbf67e45ffed555ffadfe806591ffbc56c600f16a210c982380b2d878a"}
+  ],
+  "expected_readiness": {
+    "satisfied": 11,
+    "blocking_gap": 0,
+    "operational_evidence_gap": 1,
+    "remaining_dimension": "environment_manifest_and_operational_secret_posture",
+    "verdict": "not_ready_for_ordinary_practice_admission"
+  },
+  "completed_repository_nodes": [
+    "closed_manifest_normalizer",
+    "typed_operational_evidence_inputs",
+    "pure_environment_evidence_gate_evaluator",
+    "default_off_admission_input_seam"
+  ],
+  "next_dependency_satisfied_repository_node": "unmounted_reference_only_conformance_packet",
+  "required_external_facts": [
+    "live_runtime_role_binding_and_attestation",
+    "three_current_opaque_secret_bindings",
+    "three_current_rotation_custody_attestations",
+    "current_deny_only_break_glass_posture",
+    "one_current_environment_manifest_instance",
+    "operational_uniqueness_and_freshness_readback"
+  ],
+  "human_owned_decisions": [
+    "select_target_environment_and_practice_scope",
+    "approve_secret_custody_and_operational_owners",
+    "approve_rotation_policy_and_independent_verifiers",
+    "authorize_live_role_secret_and_manifest_provisioning",
+    "confirm_ordinary_activation_separately"
+  ],
+  "next_operation": {
+    "operation_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+    "owned_node_id": "unmounted_reference_only_conformance_packet",
+    "external_fact_or_human_decision_in_scope": false,
+    "ordinary_activation_in_scope": false
+  },
+  "harness_allocation": {
+    "generic_testing": "closed",
+    "failed_exact_profile": "not_selected",
+    "claude_code_fallback": "not_authorized",
+    "reconsideration_trigger": "real_task_fits_accepted_runner_or_naturally_in_scope_fix_evidence"
+  }
+}

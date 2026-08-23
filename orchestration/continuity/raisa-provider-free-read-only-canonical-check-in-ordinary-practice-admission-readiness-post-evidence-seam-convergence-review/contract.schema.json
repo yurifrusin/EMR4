@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.local/schemas/check-in-post-evidence-seam-readiness-convergence-contract.v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "planning_source",
+    "input_hash_mode",
+    "accepted_git_objects",
+    "inputs",
+    "expected_readiness",
+    "completed_repository_nodes",
+    "next_dependency_satisfied_repository_node",
+    "required_external_facts",
+    "human_owned_decisions",
+    "next_operation",
+    "harness_allocation"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.check_in_post_evidence_seam_readiness_convergence_contract.v1"},
+    "planning_source": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "input_hash_mode": {"const": "strict_utf8_canonical_lf_reject_bare_cr_sha256"},
+    "accepted_git_objects": {
+      "type": "object",
+      "minProperties": 13,
+      "maxProperties": 13,
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{40}$"}
+    },
+    "inputs": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "expected_readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["satisfied", "blocking_gap", "operational_evidence_gap", "remaining_dimension", "verdict"],
+      "properties": {
+        "satisfied": {"const": 11},
+        "blocking_gap": {"const": 0},
+        "operational_evidence_gap": {"const": 1},
+        "remaining_dimension": {"const": "environment_manifest_and_operational_secret_posture"},
+        "verdict": {"const": "not_ready_for_ordinary_practice_admission"}
+      }
+    },
+    "completed_repository_nodes": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": {"enum": ["closed_manifest_normalizer", "typed_operational_evidence_inputs", "pure_environment_evidence_gate_evaluator", "default_off_admission_input_seam"]}
+    },
+    "next_dependency_satisfied_repository_node": {"const": "unmounted_reference_only_conformance_packet"},
+    "required_external_facts": {"type": "array", "minItems": 6, "maxItems": 6, "uniqueItems": true, "items": {"type": "string"}},
+    "human_owned_decisions": {"type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true, "items": {"type": "string"}},
+    "next_operation": {"type": "object"},
+    "harness_allocation": {"type": "object"}
+  }
+}
