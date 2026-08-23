@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 657,
+  "register_revision": 658,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-24",
@@ -44051,6 +44051,78 @@
       "incident_id": "AER-1145",
       "attempt_id": "clock-def5ec0869e890d026569437",
       "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-bounded-measurement-recovery",
+      "role": "orchestrator",
+      "resource_id": "git-object-binding",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Every Git-bearing closeout field uses the machine-resolved full 40-character object ID.",
+      "observed_error": "Two draft bindings used manually expanded strings derived from abbreviated planning and empirical IDs.",
+      "detection_method": "A prepublication git rev-parse comparison rejected both strings before staging or publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.git_binding_requires_machine_resolved_full_object_id",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace every draft binding with exact git rev-parse output.",
+        "prevention_control": "Reject caller-constructed expansions before closeout staging and clockwork admission.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-658.md",
+          "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/evidence.json"
+        ]
+      },
+      "incident_id": "AER-1146",
+      "attempt_id": "clock-2f5ee0449e899b29d7a37098",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-bounded-measurement-recovery",
+      "role": "implementer",
+      "resource_id": "count-only-progress-cleanup",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Normal terminal cleanup removes the count-only progress and process-control sidecars.",
+      "observed_error": "Post-run verification found the count-only progress sidecar after private and Word cleanup completed.",
+      "detection_method": "Exact generic-filename absence checks failed closed after the sole content terminal.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.local_measurement_cleanup_must_remove_control_and_progress_sidecars",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the exact residual sidecar and include control and progress paths in normal cleanup.",
+        "prevention_control": "The cleanup unit test creates and requires removal of all four ephemeral artifact classes.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-658.md",
+          "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/evidence.json"
+        ]
+      },
+      "incident_id": "AER-1147",
+      "attempt_id": "clock-b0c70b657722ef224573fdc7",
+      "origin": "repository",
       "related_incident_ids": [],
       "status": "corrected"
     }

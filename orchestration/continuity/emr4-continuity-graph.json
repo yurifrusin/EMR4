@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 449,
+  "graph_revision": 450,
   "harvests": [],
   "nodes": [
     {
@@ -36359,9 +36359,100 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal",
+      "title": "Raisa local-only historical Diary document-story time-coordinate bounded measurement recovery rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri delegated gate timing and uninterrupted development; accept the sole completed local measurement without retry and continue provider-free with the narrow leading-token hypothesis."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-completed-main-story-coordinate-revision-result",
+          "source": "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/evidence.json",
+          "status": "accepted",
+          "summary": "Accept exact empirical source 54eb390e0b0007c13cfb28615e4c9041db41696a and reviewed source 5df44bd28ae60db773b6fd833d0d8cdecca45611 as a contained revision-required result."
+        },
+        {
+          "id": "close-main-story-coordinate-hypothesis",
+          "source": "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/report.md",
+          "status": "accepted",
+          "summary": "All 80 documents completed with zero main-story anchors, so the frozen hypothesis closes without retry."
+        },
+        {
+          "id": "continue-provider-free-to-leading-explicit-time-token-recovery",
+          "source": "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/next-tranche-contract.json",
+          "status": "accepted",
+          "summary": "Prove only a strict segment-leading explicit time token on authored-synthetic inputs before any separately planned historical measurement."
+        }
+      ],
+      "claim_scope": [
+        "The sole run completed 80/80 snapshots with zero leakage, 199 stable records, 448 changes and zero main-story time anchors or mappings."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal-plan.md",
+          "docs/security/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/evidence.json",
+          "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/report.md",
+          "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal-pre-verifier-receipt.json",
+          "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/closeout/prepublication-contained-lapses.json",
+          "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration_harness/historical_diary_local_measured_privacy_probe.py",
+          "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/next-tranche-contract.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Leading explicit segment-token recovery, any new historical measurement, first-use admission and every downstream product/provider/protected surface remain gated."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-24T07:17:32.9431546+10:00",
+      "updated_at": "2026-08-24T07:17:32.9431546+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "f8d9a2082898207f5b489ee7f81509ed5924f4a1",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-24T06:09:21.0361409+10:00"
+  "updated_at": "2026-08-24T07:17:32.9431546+10:00"
 }
