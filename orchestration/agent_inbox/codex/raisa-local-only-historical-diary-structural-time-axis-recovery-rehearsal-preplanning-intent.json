@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_synthetic_first_structural_time_axis_recovery_and_first_useful_historical_derived_scenario_gate_before_any_new_archive_content_read",
+  "assessed_stage": "fresh_five_source_rehydration_for_historical_diary_structural_time_axis_recovery",
+  "active_evidence_paths": [
+    "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/next-tranche-contract.json",
+    "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/report.md",
+    "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/efficacy-reading.json",
+    "docs/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe-sol-acceptance.md",
+    "orchestration/continuity/raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe/closeout/clockwork-tick-evidence.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}

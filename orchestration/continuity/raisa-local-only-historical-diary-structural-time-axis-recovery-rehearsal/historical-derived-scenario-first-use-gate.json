@@ -1,0 +1,46 @@
+{
+  "schema_version": "raisa.historical_derived_scenario_first_use_gate.v1",
+  "operation_id": "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal",
+  "status": "closed_pending_candidate_specific_evaluation",
+  "activation_trigger": "before_first_reusable_historical_derived_fixture_scenario_replay_corpus_memory_or_product_test_is_materialised",
+  "does_not_apply_to": [
+    "wholly_authored_synthetic_tests",
+    "private_local_measurement",
+    "aggregate_non_phi_readings"
+  ],
+  "decision_vocabulary": [
+    "blocked",
+    "revision_required",
+    "admitted_for_exact_declared_artifact_only"
+  ],
+  "required_candidate_fields": [
+    "full_40_character_accepted_source_commit",
+    "closed_artifact_class",
+    "exact_development_purpose",
+    "source_independent_synthetic_identity_policy",
+    "relative_or_shifted_date_policy",
+    "deterministic_zero_forbidden_field_reading",
+    "structural_utility_reading",
+    "non_transitive_authority_ceiling"
+  ],
+  "forbidden_candidate_fields": [
+    "source_text",
+    "real_identity_or_contact_value",
+    "clinical_or_sensitive_note",
+    "original_filename_or_path",
+    "exact_source_date_or_timestamp",
+    "local_hmac_token_key_or_mapping"
+  ],
+  "artifact_classes": [
+    "minimised_structural_scenario",
+    "bounded_multi_event_scenario",
+    "whole_day_or_near_lossless_replay"
+  ],
+  "authority": {
+    "opened_by_this_contract": false,
+    "opened_by_time_axis_success": false,
+    "provider_model_or_runtime_use": false,
+    "product_or_ordinary_practice_use": false,
+    "production_deployment_release_pages_or_protected_refs": false
+  }
+}
