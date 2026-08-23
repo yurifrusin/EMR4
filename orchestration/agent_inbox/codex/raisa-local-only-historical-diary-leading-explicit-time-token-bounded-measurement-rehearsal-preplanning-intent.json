@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_one_fresh_fixed_slice_local_leading_time_token_measurement_at_literal_v3_root_with_one_metadata_bind_one_content_run_no_retry_1800_second_ceiling_exact_cleanup_generic_aggregate_only_and_first_use_closed",
+  "assessed_stage": "fresh_five_source_rehydration_for_local_leading_explicit_time_token_bounded_measurement",
+  "active_evidence_paths": [
+    "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/next-tranche-contract.json",
+    "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/report.md",
+    "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/efficacy-reading.json",
+    "docs/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal-sol-acceptance.md",
+    "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/closeout/clockwork-tick-evidence.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}
