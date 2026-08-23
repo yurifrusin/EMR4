@@ -168,4 +168,3 @@ release, Pages or protected-ref movement. Local/origin `master` and
 `handoff/current` remain exactly
 `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Preserve `docs/branding/` and
 every unrelated untracked file. Stage explicit paths only.
-

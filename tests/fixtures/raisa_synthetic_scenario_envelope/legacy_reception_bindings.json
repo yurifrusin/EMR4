@@ -1,0 +1,251 @@
+{
+  "schema_version": "raisa.traceable_scenario_manifest.v1",
+  "envelopes": [
+    {
+      "schema_version": "raisa.traceable_synthetic_scenario_envelope.v1",
+      "scenario_id": "booking_create_then_exact_duplicate",
+      "scenario_version": "1.0.0",
+      "domain": "reception",
+      "practice_context": "authored synthetic Australian general-practice reception laboratory",
+      "evidence_label": "wholly_authored_synthetic",
+      "sources": [
+        {
+          "source_id": "accepted-semantic-exact-duplicate",
+          "source_type": "accepted_emr4_contract",
+          "oracle_eligibility": "accepted_contract",
+          "scope_reviewed": false,
+          "issuer": "EMR4",
+          "title": "Accepted reception semantic fixture",
+          "locator": "tests/fixtures/bernie_scenario_spec/booking_create_then_exact_duplicate.json",
+          "jurisdiction": "EMR4 repository",
+          "version_or_retrieved_on": "sha256:0d90a7adc20663a122946dbabb89f691a2165f3caf5db0b60628728adf9c075d",
+          "rights_posture": "repository-owned authored-synthetic test asset",
+          "transformation": "referenced by exact path and digest; payload not copied",
+          "supported_claims": [
+            "semantic meaning and deterministic expected behavior"
+          ],
+          "limitations": [
+            "fixture-specific; does not establish prevalence or real-world efficacy"
+          ]
+        },
+        {
+          "source_id": "accepted-replay-exact-duplicate",
+          "source_type": "accepted_emr4_contract",
+          "oracle_eligibility": "accepted_contract",
+          "scope_reviewed": false,
+          "issuer": "EMR4",
+          "title": "Accepted stateful reception replay fixture",
+          "locator": "tests/fixtures/bernie_scenarios/booking_create_then_exact_duplicate.yaml",
+          "jurisdiction": "EMR4 repository",
+          "version_or_retrieved_on": "sha256:c6fbd8105922fcbb9a8b7bee94d67f757a8bc86a315abc1464f8b95f377a48c1",
+          "rights_posture": "repository-owned authored-synthetic test asset",
+          "transformation": "referenced by exact path and digest; payload not copied",
+          "supported_claims": [
+            "executable stateful rehearsal shape"
+          ],
+          "limitations": [
+            "complementary representation; not field-equivalent to the semantic fixture"
+          ]
+        }
+      ],
+      "roles": {
+        "author": {
+          "actor_kind": "orchestrator",
+          "actor_id": "accepted-emr4-corpus-authority"
+        },
+        "extractor": {
+          "actor_kind": "deterministic_tool",
+          "actor_id": "exact-reference-binder"
+        },
+        "adjudicator": {
+          "actor_kind": "orchestrator",
+          "actor_id": "accepted-emr4-adjudication-authority"
+        },
+        "reviewer": {
+          "actor_kind": "human",
+          "actor_id": "independent-contract-review-authority"
+        }
+      },
+      "oracle_bundle": {
+        "schema_version": "raisa.oracle_bundle.v1",
+        "deterministic_truth": [
+          {
+            "oracle_id": "accepted-semantic-outcome",
+            "claim_locator": "accepted-semantic-exact-duplicate#deterministic-outcome",
+            "source_ids": [
+              "accepted-semantic-exact-duplicate"
+            ]
+          }
+        ],
+        "authority_safety_rules": [
+          {
+            "oracle_id": "accepted-semantic-prohibitions",
+            "claim_locator": "accepted-semantic-exact-duplicate#authority-prohibitions",
+            "source_ids": [
+              "accepted-semantic-exact-duplicate"
+            ]
+          }
+        ],
+        "model_quality_rubrics": []
+      },
+      "coverage_claims": [
+        {
+          "coverage_id": "exact-duplicate-feature",
+          "kind": "feature",
+          "target_ref": "booking_create.exact_duplicate",
+          "source_ids": [
+            "accepted-semantic-exact-duplicate"
+          ]
+        },
+        {
+          "coverage_id": "stateful-rehearsal-evidence",
+          "kind": "evidence_level",
+          "target_ref": "provider_free.stateful_replay",
+          "source_ids": [
+            "accepted-replay-exact-duplicate"
+          ]
+        }
+      ],
+      "execution_binding": {
+        "schema_version": "raisa.execution_binding.v1",
+        "binding_kind": "reception_semantic_to_stateful_replay",
+        "scenario_id": "booking_create_then_exact_duplicate",
+        "relationship": "complementary_shared_identity",
+        "semantic_artifact": {
+          "contract_id": "emr4.reception_scenario_spec.lc1.v1",
+          "path": "tests/fixtures/bernie_scenario_spec/booking_create_then_exact_duplicate.json",
+          "sha256": "0d90a7adc20663a122946dbabb89f691a2165f3caf5db0b60628728adf9c075d"
+        },
+        "replay_artifact": {
+          "contract_id": "emr4.bernie_stateful_replay.v1",
+          "path": "tests/fixtures/bernie_scenarios/booking_create_then_exact_duplicate.yaml",
+          "sha256": "c6fbd8105922fcbb9a8b7bee94d67f757a8bc86a315abc1464f8b95f377a48c1"
+        }
+      },
+      "calibration_evidence_ref": null
+    },
+    {
+      "schema_version": "raisa.traceable_synthetic_scenario_envelope.v1",
+      "scenario_id": "booking_overlap_not_exact_duplicate",
+      "scenario_version": "1.0.0",
+      "domain": "reception",
+      "practice_context": "authored synthetic Australian general-practice reception laboratory",
+      "evidence_label": "wholly_authored_synthetic",
+      "sources": [
+        {
+          "source_id": "accepted-semantic-overlap",
+          "source_type": "accepted_emr4_contract",
+          "oracle_eligibility": "accepted_contract",
+          "scope_reviewed": false,
+          "issuer": "EMR4",
+          "title": "Accepted reception semantic fixture",
+          "locator": "tests/fixtures/bernie_scenario_spec/booking_overlap_not_exact_duplicate.json",
+          "jurisdiction": "EMR4 repository",
+          "version_or_retrieved_on": "sha256:ba0ebf78944e892d447bc4cd6aab9f524f62751f3f7ebd5150c93fa9a7cb6510",
+          "rights_posture": "repository-owned authored-synthetic test asset",
+          "transformation": "referenced by exact path and digest; payload not copied",
+          "supported_claims": [
+            "semantic meaning and deterministic expected behavior"
+          ],
+          "limitations": [
+            "fixture-specific; does not establish prevalence or real-world efficacy"
+          ]
+        },
+        {
+          "source_id": "accepted-replay-overlap",
+          "source_type": "accepted_emr4_contract",
+          "oracle_eligibility": "accepted_contract",
+          "scope_reviewed": false,
+          "issuer": "EMR4",
+          "title": "Accepted stateful reception replay fixture",
+          "locator": "tests/fixtures/bernie_scenarios/booking_overlap_not_exact_duplicate.yaml",
+          "jurisdiction": "EMR4 repository",
+          "version_or_retrieved_on": "sha256:ca098a054883bb90199a6aa29e18a181b4d36a9bf887dcc197927e0f793a90d5",
+          "rights_posture": "repository-owned authored-synthetic test asset",
+          "transformation": "referenced by exact path and digest; payload not copied",
+          "supported_claims": [
+            "executable stateful rehearsal shape"
+          ],
+          "limitations": [
+            "complementary representation; not field-equivalent to the semantic fixture"
+          ]
+        }
+      ],
+      "roles": {
+        "author": {
+          "actor_kind": "orchestrator",
+          "actor_id": "accepted-emr4-corpus-authority"
+        },
+        "extractor": {
+          "actor_kind": "deterministic_tool",
+          "actor_id": "exact-reference-binder"
+        },
+        "adjudicator": {
+          "actor_kind": "orchestrator",
+          "actor_id": "accepted-emr4-adjudication-authority"
+        },
+        "reviewer": {
+          "actor_kind": "human",
+          "actor_id": "independent-contract-review-authority"
+        }
+      },
+      "oracle_bundle": {
+        "schema_version": "raisa.oracle_bundle.v1",
+        "deterministic_truth": [
+          {
+            "oracle_id": "accepted-semantic-outcome",
+            "claim_locator": "accepted-semantic-overlap#deterministic-outcome",
+            "source_ids": [
+              "accepted-semantic-overlap"
+            ]
+          }
+        ],
+        "authority_safety_rules": [
+          {
+            "oracle_id": "accepted-semantic-prohibitions",
+            "claim_locator": "accepted-semantic-overlap#authority-prohibitions",
+            "source_ids": [
+              "accepted-semantic-overlap"
+            ]
+          }
+        ],
+        "model_quality_rubrics": []
+      },
+      "coverage_claims": [
+        {
+          "coverage_id": "overlap-feature",
+          "kind": "feature",
+          "target_ref": "booking_create.overlap_not_exact_duplicate",
+          "source_ids": [
+            "accepted-semantic-overlap"
+          ]
+        },
+        {
+          "coverage_id": "stateful-rehearsal-evidence",
+          "kind": "evidence_level",
+          "target_ref": "provider_free.stateful_replay",
+          "source_ids": [
+            "accepted-replay-overlap"
+          ]
+        }
+      ],
+      "execution_binding": {
+        "schema_version": "raisa.execution_binding.v1",
+        "binding_kind": "reception_semantic_to_stateful_replay",
+        "scenario_id": "booking_overlap_not_exact_duplicate",
+        "relationship": "complementary_shared_identity",
+        "semantic_artifact": {
+          "contract_id": "emr4.reception_scenario_spec.lc1.v1",
+          "path": "tests/fixtures/bernie_scenario_spec/booking_overlap_not_exact_duplicate.json",
+          "sha256": "ba0ebf78944e892d447bc4cd6aab9f524f62751f3f7ebd5150c93fa9a7cb6510"
+        },
+        "replay_artifact": {
+          "contract_id": "emr4.bernie_stateful_replay.v1",
+          "path": "tests/fixtures/bernie_scenarios/booking_overlap_not_exact_duplicate.yaml",
+          "sha256": "ca098a054883bb90199a6aa29e18a181b4d36a9bf887dcc197927e0f793a90d5"
+        }
+      },
+      "calibration_evidence_ref": null
+    }
+  ]
+}
