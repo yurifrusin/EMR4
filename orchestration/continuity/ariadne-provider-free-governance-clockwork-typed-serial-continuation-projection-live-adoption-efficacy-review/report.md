@@ -29,6 +29,13 @@ Forty-two focused tests and the full 162-test serial orchestrator/governance
 suite pass after that repair. Ruff, `git diff --check` and the read-only live
 canonical check pass at lease 217 with zero drift.
 
+The first semantic publication invocation then failed closed before executing
+verification because its launcher used the system Python rather than the
+repository-bound virtual environment. It made zero publication attempts and
+zero canonical mutations. The corrected invocation is explicitly bound to the
+repository interpreter from a new committed source. This is retained as a
+second ergonomic finding for the validation-cadence map.
+
 ## Ergonomic judgment
 
 The clockwork is safer and easier to operate when Sol selects a small typed

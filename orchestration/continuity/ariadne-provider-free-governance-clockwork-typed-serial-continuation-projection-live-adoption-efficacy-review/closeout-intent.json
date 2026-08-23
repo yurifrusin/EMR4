@@ -14,27 +14,21 @@
     ],
     "decisions": [
       {
-        "id": "retain-typed-serial-projection-without-preset-change",
+        "id": "retain-typed-serial-projection-with-current-latch-equivalence",
         "source": "docs/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-plan.md",
-        "summary": "Retain the existing compact serial preset after three first-invocation passes, zero missing decisions and materially lower pair cost."
-      },
-      {
-        "id": "derive-safety-equivalence-from-current-latch",
-        "source": "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/event-001-postpublication-moving-latch-repair.json",
-        "summary": "Use historical runtime state only for size measurement and derive both safety comparison paths from the same live latch."
+        "summary": "Retain the existing compact serial preset after three first-invocation passes, and derive both safety comparison paths from the same current latch."
       }
     ],
     "claim_scope": [
       "Three ordinary provider-free compact serial events pass without rejection, missing non-default decisions or expanded runtime-state files."
     ],
     "additional_receipts": [
-      "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-test-repair-precommit-receipt.json",
-      "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-closeout-precommit-receipt.json",
-      "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-postcompaction-receipt.json"
+      "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-test-repair-precommit-receipt.json"
     ],
     "additional_artifacts": [
       "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/event-readings.json",
       "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/event-001-postpublication-moving-latch-repair.json",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/event-002-semantic-publication-interpreter-rejection.json",
       "tests/test_ariadne_orchestrator_preflight.py"
     ],
     "unresolved_gates": [
@@ -118,6 +112,38 @@
         ]
       },
       "baton_summary": "records one corrected historical-latch safety-equivalence fixture defect."
+    },
+    {
+      "attempt_key": "typed-serial-semantic-publication-interpreter-001",
+      "observed_on": "2026-08-23",
+      "tranche": "clockwork-typed-serial-live-adoption",
+      "role": "orchestrator",
+      "resource_id": "semantic-publication-launcher",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Semantic publication runs under the repository-bound virtual-environment interpreter.",
+      "observed_error": "The first invocation used the system Python launcher and failed active_interpreter_mismatch before verification.",
+      "detection_method": "The clockwork returned revision_required with zero executed commands and zero publication attempts.",
+      "evidence_paths": [
+        "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/event-002-semantic-publication-interpreter-rejection.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.semantic_publication_active_interpreter_mismatch",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Run the clockwork entry point with the repository virtual-environment interpreter.",
+        "prevention_control": "Closeout publication commands bind .venv/Scripts/python.exe before semantic verification.",
+        "evidence_paths": [
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/event-002-semantic-publication-interpreter-rejection.json"
+        ]
+      },
+      "baton_summary": "records one fail-closed semantic-publication interpreter mismatch."
     }
   ]
 }

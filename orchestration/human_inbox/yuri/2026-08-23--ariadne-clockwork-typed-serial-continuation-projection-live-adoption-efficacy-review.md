@@ -26,6 +26,8 @@ was correct; the test now takes its current reading from the same mechanism.
 - three compact events: first-invocation pass, zero preflight rejections, zero
   expanded state files and zero missing non-default decisions;
 - one postpublication moving-latch test failure, contained and repaired;
+- one fail-closed launcher-interpreter mismatch before any publication attempt,
+  corrected by binding the repository virtual environment;
 - 42 focused and 162 combined tests, Ruff, diff check and live-state check pass;
   and
 - DeepSeek, Gemini and native subagents were not used because this was one

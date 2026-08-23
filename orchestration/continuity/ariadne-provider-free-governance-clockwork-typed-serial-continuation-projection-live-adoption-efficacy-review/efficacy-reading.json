@@ -19,6 +19,12 @@
     "corrected": true,
     "production_projection_defects": 0
   },
+  "closeout_execution": {
+    "semantic_precondition_rejections": 1,
+    "publication_attempts_before_correction": 0,
+    "canonical_mutations_before_correction": 0,
+    "interpreter_binding_correction": "repository_virtual_environment"
+  },
   "decision": {
     "typed_serial_projection": "retain",
     "preset_adjustment": "not_needed",

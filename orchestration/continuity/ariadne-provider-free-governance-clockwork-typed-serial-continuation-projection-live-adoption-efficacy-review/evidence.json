@@ -39,6 +39,14 @@
     "canonical_drift": 0,
     "lease_sequence": 217
   },
+  "semantic_publication_precondition": {
+    "rejected_invocations": 1,
+    "reason": "active_interpreter_mismatch",
+    "verification_commands_executed_before_rejection": 0,
+    "publication_attempts_before_rejection": 0,
+    "canonical_mutations": 0,
+    "correction": "Bind the clockwork launcher to .venv/Scripts/python.exe from a new committed source."
+  },
   "parallelism": {
     "deepseek": "declined_native_profile_paused_and_no_fallback",
     "gemini": "declined_deterministic_local_measurement",

@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.typed_serial_live_adoption_event.v1",
+  "event_id": "event-002-semantic-publication-interpreter-rejection",
+  "operation_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review",
+  "source_head": "0b42968e8bc59e9dd6ffc08cd42a711a3a50c1e8",
+  "result": "revision_required",
+  "reason": "active_interpreter_mismatch",
+  "verification_commands_executed": 0,
+  "publication_attempts": 0,
+  "published_generations": 0,
+  "canonical_mutations": 0,
+  "lease_sequence_before": 217,
+  "lease_sequence_after": 217,
+  "cause": "The semantic publication command used the system Python launcher instead of the repository-bound virtual-environment interpreter.",
+  "correction": "Invoke the same clockwork entry point with .venv/Scripts/python.exe from a newly committed source containing this incident evidence."
+}

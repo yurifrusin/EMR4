@@ -32,8 +32,10 @@ the ergonomic saving.
 - 42 focused and 162 combined tests pass after one test-only repair; and
 - the production projection remains unchanged at lease 217 with zero drift.
 
-One low-severity qualifying incident is included in the semantic closeout so
-the moving-latch fixture correction is durable rather than anecdotal.
+Two low-severity qualifying incidents are included in the semantic closeout:
+the moving-latch fixture correction and one fail-closed system-versus-repository
+interpreter invocation. The latter ran zero verification commands, admitted
+zero publication attempts and changed no canonical file.
 
 ## Next work
 

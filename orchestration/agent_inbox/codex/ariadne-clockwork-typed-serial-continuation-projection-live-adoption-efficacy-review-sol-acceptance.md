@@ -20,6 +20,11 @@ test fixture defect. Production projection and canonical validation remained
 passed. The repaired comparison derives both paths from current state; 42
 focused and 162 combined tests, Ruff and diff checks pass.
 
+I also accept the contained semantic-publication precondition rejection. The
+system-Python invocation stopped at `active_interpreter_mismatch` before any
+verification command or publication attempt. The correction binds the entry
+point to the repository virtual environment and is preserved as AER-1132.
+
 No preset change or further operator field is justified. The legacy full-state
 path remains available for occupied or non-serial work. Only a read-only
 postpublication validation-cadence map is opened next; test removal and all
