@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_frozen_traceability_envelope_legacy_binding_and_hostile_test_plan",
+  "assessed_stage": "frozen_traceability_envelope_plan_precommit",
+  "active_evidence_paths": [
+    "docs/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-plan.md",
+    "docs/security/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-threat-model-delta.md",
+    "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/next-tranche-contract.json",
+    "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/evidence.json",
+    "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/user-direction.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}
