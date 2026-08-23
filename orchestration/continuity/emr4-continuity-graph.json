@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 450,
+  "graph_revision": 451,
   "harvests": [],
   "nodes": [
     {
@@ -36450,9 +36450,99 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal",
+      "title": "Raisa provider-free authored-synthetic historical Diary leading explicit time-token recovery rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri delegated first-use gate timing and uninterrupted development; accept the provider-free parser candidate and proceed to one freshly bound no-retry local measurement while first use remains closed."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-strict-leading-explicit-time-token-parser",
+          "source": "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/evidence.json",
+          "status": "accepted",
+          "summary": "Accept exact reviewed source 5a3c589873a104e948e65eaadacd2397f0621a3b after 29 focused and 219 total provider-free controls passed."
+        },
+        {
+          "id": "accept-leading-tokens-as-first-class-explicit-time-sources",
+          "source": "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/report.md",
+          "status": "accepted",
+          "summary": "Count story anchors and valid leading tokens as the closed explicit-source set while preserving every independent utility and privacy gate."
+        },
+        {
+          "id": "continue-to-one-fresh-local-leading-token-measurement",
+          "source": "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/next-tranche-contract.json",
+          "status": "accepted",
+          "summary": "Permit one fresh fixed-slice local bind and one content run with no retry, exact cleanup, generic aggregate retention and first use closed."
+        }
+      ],
+      "claim_scope": [
+        "A strict leading parser, same-segment mapping, no forward fill, token-free HMAC input and leading-token-only aggregate admission pass without historical or provider access."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/evidence.json",
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/report.md",
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal-pre-verifier-receipt.json",
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration_harness/historical_diary_local_measured_privacy_probe.py",
+          "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/next-tranche-contract.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Historical leading-token utility, reusable historical-derived first use and every product/provider/protected surface remain gated."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-24T07:59:22.5874518+10:00",
+      "updated_at": "2026-08-24T07:59:22.5874518+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "19033ddb51f109ac03de4cc7fb590cd93b2121d7",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-24T07:17:32.9431546+10:00"
+  "updated_at": "2026-08-24T07:59:22.5874518+10:00"
 }
