@@ -135,6 +135,14 @@ def test_closed_timestamp_families(filename, expected):
     assert probe.parse_observation_timestamp(filename) == expected
 
 
+def test_two_digit_year_candidates_preserve_am_pm_and_global_orientation():
+    candidates = probe.timestamp_candidates("24-8-16 9-30-15 PM.doc")
+
+    assert candidates == {
+        "day_month_two_digit_year": datetime(2016, 8, 24, 21, 30, 15)
+    }
+
+
 @pytest.mark.parametrize(
     "filename",
     [
@@ -383,6 +391,18 @@ def test_phase_a_rejects_fewer_than_80_observations(monkeypatch, tmp_path):
     _write_dense_day(root, count=79)
 
     with pytest.raises(probe.ProbeError, match="insufficient_dense_day_observations"):
+        probe.build_binding_manifest()
+
+
+def test_phase_a_rejects_two_globally_complete_date_conventions(monkeypatch, tmp_path):
+    root, _ = _configure_synthetic_paths(monkeypatch, tmp_path)
+    first = datetime(2016, 8, 9, 8, 0, 0)
+    for index in range(probe.MAX_FILES):
+        observed = first + timedelta(seconds=index * 30)
+        path = root / f"08-09-16 {observed:%H-%M-%S} AM.doc"
+        path.write_bytes(b"0" * (probe.MIN_FILE_BYTES + 1))
+
+    with pytest.raises(probe.ProbeError, match="timestamp_binding_revision_required"):
         probe.build_binding_manifest()
 
 

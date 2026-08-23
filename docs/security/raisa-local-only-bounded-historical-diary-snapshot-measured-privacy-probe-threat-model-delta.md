@@ -152,3 +152,9 @@ Because the coarse shape did not reveal numeric-group widths, the frozen
 diagnostic may expose only aggregate group-length and total-digit-count
 distributions. It cannot expose digit values or preserve correspondence to a
 filename. Any parser change still requires a unique calendar interpretation.
+
+The aggregate widths admit exactly two closed date-order candidates. The
+controller must evaluate their archive-wide coverage and admit one only when
+it alone parses every in-envelope filename. Two-digit years outside 2000-2020,
+unknown time suffixes, per-file mixed conventions and full-coverage ties fail
+before manifest creation. Only the chosen closed convention label is public.

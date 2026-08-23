@@ -44,6 +44,7 @@ MIN_FILE_BYTES = 4096
 MAX_PRIVATE_PIPE_BYTES = 64 * 1024 * 1024
 POLL_INTERVAL_SECONDS = 30
 FILE_ATTRIBUTE_REPARSE_POINT = 0x400
+TWO_DIGIT_YEAR_MAX = 2020
 
 TIME_TOKEN = re.compile(
     r"^(?P<hour>[01]?\d|2[0-3])[:.](?P<minute>[0-5]\d)(?:\s*(?P<ampm>[AaPp][Mm]))?$"
@@ -142,7 +143,13 @@ class BindingManifest(StrictFrozenModel):
     root: str
     attempt_root: str
     selected_source_day: str
-    selector: Literal["densest_filename_timestamp_day_first_80_chronological"]
+    selector: Literal["densest_unique_closed_timestamp_convention_first_80_chronological"]
+    timestamp_convention: Literal[
+        "day_month_two_digit_year",
+        "month_day_two_digit_year",
+        "year_month_four_digit_year",
+        "day_month_four_digit_year",
+    ]
     core_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     extractor_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     total_bytes: int = Field(ge=1, le=MAX_TOTAL_BYTES)
@@ -201,39 +208,87 @@ def _is_reparse(path: Path) -> bool:
     )
 
 
-def _parse_datetime_digits(value: str) -> datetime | None:
-    candidates: set[datetime] = set()
-    numeric_tokens = re.findall(r"\d+", value)
-    joined = "".join(numeric_tokens)
-    for length, parsers in (
-        (
-            14,
-            (
-                lambda part: (part[0:4], part[4:6], part[6:8], part[8:10], part[10:12], part[12:14]),
-                lambda part: (part[4:8], part[2:4], part[0:2], part[8:10], part[10:12], part[12:14]),
-            ),
-        ),
-    ):
-        for part in (joined,) if len(joined) == length else ():
-            for parser in parsers:
-                try:
-                    year, month, day, hour, minute, second = map(int, parser(part))
-                    candidate = datetime(year, month, day, hour, minute, second)
-                except ValueError:
-                    continue
-                if 2000 <= candidate.year <= 2035:
-                    candidates.add(candidate)
-    if len(candidates) != 1:
+def _clock_parts(stem: str, values: list[str]) -> tuple[int, int, int] | None:
+    hour, minute, second = map(int, values)
+    suffix = re.search(r"(?i)(?:^|[^a-z])(?P<ampm>am|pm|a|p)\s*$", stem)
+    if suffix is not None:
+        if not 1 <= hour <= 12:
+            return None
+        if suffix.group("ampm").casefold().startswith("p") and hour < 12:
+            hour += 12
+        elif suffix.group("ampm").casefold().startswith("a") and hour == 12:
+            hour = 0
+    if not 0 <= hour <= 23 or not 0 <= minute <= 59 or not 0 <= second <= 59:
         return None
-    return next(iter(candidates))
+    return hour, minute, second
+
+
+def timestamp_candidates(filename: str) -> dict[str, datetime]:
+    """Return closed convention candidates without emitting filename values."""
+
+    if not filename or len(filename) > 260 or "\x00" in filename:
+        return {}
+    stem = Path(filename).stem
+    groups = re.findall(r"\d+", stem)
+    candidates: dict[str, datetime] = {}
+
+    def admit(label: str, parts: tuple[str, str, str], clock: list[str]) -> None:
+        try:
+            year, month, day = map(int, parts)
+            clock_parts = _clock_parts(stem, clock)
+            if clock_parts is None:
+                return
+            value = datetime(year, month, day, *clock_parts)
+        except ValueError:
+            return
+        if 2000 <= value.year <= TWO_DIGIT_YEAR_MAX:
+            candidates[label] = value
+
+    if len(groups) == 1 and len(groups[0]) == 14:
+        part = groups[0]
+        admit(
+            "year_month_four_digit_year",
+            (part[0:4], part[4:6], part[6:8]),
+            [part[8:10], part[10:12], part[12:14]],
+        )
+        admit(
+            "day_month_four_digit_year",
+            (part[4:8], part[2:4], part[0:2]),
+            [part[8:10], part[10:12], part[12:14]],
+        )
+    elif len(groups) == 6:
+        if len(groups[0]) == 4:
+            admit(
+                "year_month_four_digit_year",
+                (groups[0], groups[1], groups[2]),
+                groups[3:6],
+            )
+        if len(groups[2]) == 4:
+            admit(
+                "day_month_four_digit_year",
+                (groups[2], groups[1], groups[0]),
+                groups[3:6],
+            )
+        if len(groups[2]) == 2:
+            year = str(2000 + int(groups[2]))
+            admit(
+                "day_month_two_digit_year",
+                (year, groups[1], groups[0]),
+                groups[3:6],
+            )
+            admit(
+                "month_day_two_digit_year",
+                (year, groups[0], groups[1]),
+                groups[3:6],
+            )
+    return candidates
 
 
 def parse_observation_timestamp(filename: str) -> datetime | None:
     """Parse a closed numeric timestamp family without ever returning a name."""
 
-    if not filename or len(filename) > 260 or "\x00" in filename:
-        return None
-    return _parse_datetime_digits(Path(filename).stem)
+    candidates = set(timestamp_candidates(filename).values())
+    return next(iter(candidates)) if len(candidates) == 1 else None
 
 
 def filename_shape(filename: str) -> str:
@@ -273,14 +328,14 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
     if ATTEMPT_ROOT.exists():
         raise ProbeError("attempt_root_already_exists")
 
-    parsed: list[tuple[Path, os.stat_result, datetime]] = []
+    candidate_sets: list[tuple[Path, os.stat_result, dict[str, datetime]]] = []
+    convention_coverage: Counter[str] = Counter()
     shapes: Counter[str] = Counter()
     numeric_group_shapes: Counter[str] = Counter()
     numeric_digit_totals: Counter[int] = Counter()
     admitted_file_count = 0
     below_minimum_file_count = 0
     above_maximum_file_count = 0
-    timestamp_parse_failures = 0
     for path in root.iterdir():
         shapes[filename_shape(path.name)] += 1
         if _is_reparse(path):
@@ -300,23 +355,27 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
             above_maximum_file_count += 1
             continue
         admitted_file_count += 1
-        timestamp = parse_observation_timestamp(path.name)
-        if timestamp is None:
-            timestamp_parse_failures += 1
-            continue
-        parsed.append((path.resolve(), stat, timestamp))
+        candidates = timestamp_candidates(path.name)
+        convention_coverage.update(candidates.keys())
+        candidate_sets.append((path.resolve(), stat, candidates))
 
     if admitted_file_count == 0:
         raise ProbeError("no_candidate_documents")
-    if timestamp_parse_failures or len(parsed) != admitted_file_count:
+    maximum_coverage = max(convention_coverage.values(), default=0)
+    full_coverage_conventions = sorted(
+        label for label, count in convention_coverage.items() if count == admitted_file_count
+    )
+    if len(full_coverage_conventions) != 1:
         diagnostic = {
             "schema_version": "historical_diary.safe_binding_diagnostic.v1",
             "status": Decision.REVISION_REQUIRED.value,
             "candidate_document_count": admitted_file_count,
             "below_minimum_file_count": below_minimum_file_count,
             "above_maximum_file_count": above_maximum_file_count,
-            "timestamp_parse_success_count": len(parsed),
-            "timestamp_parse_failure_count": timestamp_parse_failures,
+            "timestamp_parse_success_count": maximum_coverage,
+            "timestamp_parse_failure_count": admitted_file_count - maximum_coverage,
+            "timestamp_convention_full_coverage_count": len(full_coverage_conventions),
+            "timestamp_convention_coverage": dict(sorted(convention_coverage.items())),
             "filename_shape_distribution": dict(sorted(shapes.items())),
             "numeric_group_length_distribution": dict(sorted(numeric_group_shapes.items())),
             "numeric_digit_total_distribution": {
@@ -325,6 +384,12 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
             "archive_content_reads": 0,
         }
         raise ProbeError("timestamp_binding_revision_required:" + json.dumps(diagnostic, sort_keys=True))
+
+    selected_convention = full_coverage_conventions[0]
+    parsed = [
+        (path, stat, candidates[selected_convention])
+        for path, stat, candidates in candidate_sets
+    ]
 
     per_day: defaultdict[str, list[tuple[Path, os.stat_result, datetime]]] = defaultdict(list)
     for item in parsed:
@@ -357,7 +422,8 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
         root=str(root),
         attempt_root=str(ATTEMPT_ROOT.resolve()),
         selected_source_day=selected_day,
-        selector="densest_filename_timestamp_day_first_80_chronological",
+        selector="densest_unique_closed_timestamp_convention_first_80_chronological",
+        timestamp_convention=selected_convention,
         core_sha256=_sha256_path(CORE_PATH),
         extractor_sha256=_sha256_path(EXTRACTOR_PATH),
         total_bytes=total_bytes,
@@ -373,6 +439,7 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
         "above_maximum_file_count": above_maximum_file_count,
         "timestamp_parse_success_count": len(parsed),
         "timestamp_parse_failure_count": 0,
+        "timestamp_convention": selected_convention,
         "selected_file_count": len(files),
         "selected_total_bytes": total_bytes,
         "maximum_file_bytes": max(item.size_bytes for item in files),
@@ -437,6 +504,12 @@ def _load_manifest() -> BindingManifest:
         for item, timestamp in zip(manifest.files, timestamps, strict=True)
     ):
         raise ProbeError("binding_offset_drift")
+    if any(
+        timestamp_candidates(Path(item.absolute_path).name).get(manifest.timestamp_convention)
+        != timestamp
+        for item, timestamp in zip(manifest.files, timestamps, strict=True)
+    ):
+        raise ProbeError("binding_timestamp_parser_drift")
     return manifest
 
 

@@ -228,3 +228,15 @@ length signatures and total-digit-count distributions. These are filename
 shape, not values: they contain no numeric group value and no filename, date
 or path. The next parser decision must derive solely from this reading and
 remain unambiguous before any manifest or content operation.
+
+The frozen diagnostic at exact source
+`7fc5f0568fe9e456d2e9c7f9aedbd49e92b18e21` reports that all 582 admissible
+files use six numeric groups: 477 have lengths `2-1-2-2-2-2` and 105 have
+`2-1-2-2-2-1`; the two five-group shapes are exactly the undersized exclusions.
+The next parser may treat group three as a two-digit year, groups four through
+six as time with a closed trailing AM/PM token, and test only day-month-year
+and month-day-year. It may bind only if exactly one convention parses all 582
+admissible files. A per-file guess or a tie is forbidden. Two-digit years are
+restricted to 2000 through 2020, matching this frozen historical archive
+scope. Phase B remains closed until one global convention and exactly 80
+observations bind.
