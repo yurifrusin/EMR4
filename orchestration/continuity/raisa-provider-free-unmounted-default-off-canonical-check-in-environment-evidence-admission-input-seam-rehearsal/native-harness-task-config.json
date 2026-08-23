@@ -1,0 +1,28 @@
+{
+  "schema_version": "ariadne.native_harness_task_worker_config.v1",
+  "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+  "attempt_id": "deepseek-native-check-in-evidence-seam-001",
+  "attempt_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-evidence-seam-001",
+  "evidence_root": "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+  "owned_paths": [
+    "orchestration_harness/check_in_environment_evidence_admission.py",
+    "tests/test_check_in_environment_evidence_admission.py"
+  ],
+  "read_only_packet_paths": [
+    "AGENTS.md",
+    "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-plan.md",
+    "docs/security/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-threat-model-delta.md",
+    "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/contract.json",
+    "orchestration_harness/check_in_admission_control.py",
+    "app/services/appointment_check_in_environment_evidence_gate.py",
+    "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+    "tests/test_appointment_check_in_environment_evidence_gate.py"
+  ],
+  "focused_test_paths": [
+    "tests/test_check_in_environment_evidence_admission.py",
+    "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+    "tests/test_appointment_check_in_environment_evidence_gate.py"
+  ],
+  "task": "You are the DeepSeek implementation contributor for one bounded, unmounted EMR4 task at exact Git source {source_commit}. Read AGENTS.md completely, then read the frozen plan, threat-model delta, machine contract, accepted admission kernel, accepted EnvironmentEvidenceGateReading evaluator and both predecessor focused tests named in the sparse packet. Implement only the two owned scaffold files: orchestration_harness/check_in_environment_evidence_admission.py and tests/test_check_in_environment_evidence_admission.py. The adapter must call evaluate_admission first and return every decision unchanged except the exact denied ordinary_practice/ordinary_activation_closed result. For only that result, require type(reading) is EnvironmentEvidenceGateReading, the exact reading schema, satisfied outcome, evidence_gate_satisfied reason, a valid snapshot env: identifier, a valid lowercase SHA-256 snapshot manifest digest, and exact identifier, snapshot-generation and manifest-digest equality. Any missing, denied, malformed, subclassed, duck-typed or mismatched reading must return the same six-field decision with ordinary_evidence_missing. A valid reading must return the original ordinary_activation_closed decision; it never admits. Preserve synthetic admission without a reading, the existing operational_evidence_valid Boolean and all existing precedence. Use only read, glob and edit. You have no shell or test tool; Sol will run tests. Natural reread and edit correction is allowed. Do not edit any other path or access environment/configuration/credentials/secrets/databases/routes/APIs/clients/product data/protected evidence. When complete, give a concise terminal summary and do not claim tests ran.",
+  "maximum_wall_clock_seconds": 900
+}

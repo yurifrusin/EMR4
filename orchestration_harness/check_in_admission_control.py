@@ -132,6 +132,8 @@ class AdmissionSnapshot:
     current_record_count: int
     kill_switch: KillSwitchState
     ordinary_record: OrdinaryAdmissionRecord | None = None
+    environment_evidence_identifier: str | None = None
+    environment_evidence_manifest_digest: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
