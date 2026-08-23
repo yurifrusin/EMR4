@@ -47,7 +47,7 @@
           "id": "select-bounded-clockwork-ergonomics-review",
           "source": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json",
           "status": "accepted",
-          "summary": "Use the six contained reruns and the extended native-Harness gear period as measured input to a provider-free read-only clockwork ergonomics and efficacy review."
+          "summary": "Use the nine contained reruns and the extended native-Harness gear period as measured input to a provider-free read-only clockwork ergonomics and efficacy review."
         }
       ],
       "claim_scope": [
@@ -110,7 +110,7 @@
     },
     "current_position": {
       "strategic_role": "Measure whether the governance clockwork can retain its safety while asking less clerical work of the orchestrator",
-      "why_now": "The reference-only packet is complete and its six corrected interface reruns join the extended DeepSeek gear history as a bounded evidence set.",
+      "why_now": "The reference-only packet is complete and its nine corrected interface reruns join the extended DeepSeek gear history as a bounded evidence set.",
       "outcome": "A read-only review will distinguish safety controls from avoidable operator inputs and rank only simplifications with measurable removed work.",
       "unlocks": [
         "A narrow evidence-backed plan for the highest-yield clockwork ergonomic repair, if one is justified."
@@ -160,6 +160,21 @@
       {
         "incident_id": "reference-packet-node-kind-contract-scope",
         "source_id": "reference-packet-local-006",
+        "peers": []
+      },
+      {
+        "incident_id": "reference-packet-register-cli-shape",
+        "source_id": "reference-packet-local-007",
+        "peers": []
+      },
+      {
+        "incident_id": "reference-packet-summary-timestamp",
+        "source_id": "reference-packet-local-008",
+        "peers": []
+      },
+      {
+        "incident_id": "reference-packet-rollback-cli-shape",
+        "source_id": "reference-packet-local-009",
         "peers": []
       }
     ],
@@ -450,6 +465,108 @@
         ]
       },
       "baton_summary": "records one valid-kind hidden-contract mismatch and its provider-free tooling classification."
+    },
+    {
+      "attempt_key": "reference-packet-register-cli-shape-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "agent-error-register-cli",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The register reporter is invoked only with arguments admitted by its parser.",
+      "observed_error": "One verification command supplied the unsupported --check flag and argparse rejected it without reading or writing the register.",
+      "detection_method": "The command returned an unrecognized-arguments error; the governance tests remained the authoritative canonical-register verification path.",
+      "evidence_paths": [
+        "scripts/ariadne_agent_error_register.py",
+        "tests/test_ariadne_governance_clockwork_tick.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.guessed_agent_register_cli_flag",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the admitted governance suite instead of inventing a register --check mode.",
+        "prevention_control": "The ergonomics review will test whether safe verification commands can be emitted from the command manifest instead of reconstructed manually.",
+        "evidence_paths": [
+          "scripts/ariadne_agent_error_register.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "baton_summary": "records one rejected guessed register flag and the canonical governance-suite verification path."
+    },
+    {
+      "attempt_key": "reference-packet-summary-timestamp-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "postpublication-baton-consistency",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Every current-node human evidence document contains exactly one top-level Brisbane Timestamp line before publication.",
+      "observed_error": "The first publication made the new Yuri summary current-node evidence and postpublication consistency verification found that its Timestamp line was absent.",
+      "detection_method": "The current-Baton consistency test failed after publication; the clockwork restored the previous generation byte-exactly at lease 206.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-publication-attempt-001-rollback-receipt.json",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.current_node_summary_timestamp_missing",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore the previous generation byte-exactly, bind lease 206 and add the exact Brisbane Timestamp line before fresh publication.",
+        "prevention_control": "The ergonomics review will test a prepublication prospective-current-node evidence validator so the invariant is visible before pointer movement.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-publication-attempt-001-rollback-receipt.json",
+          "orchestration/human_inbox/yuri/2026-08-23--canonical-check-in-reference-only-operational-evidence-conformance-packet.md"
+        ]
+      },
+      "baton_summary": "records one postpublication missing timestamp and the byte-exact lease-206 rollback correction."
+    },
+    {
+      "attempt_key": "reference-packet-rollback-cli-shape-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "clockwork-rollback-cli",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Rollback is invoked with its closed argument shape and no intent parameter.",
+      "observed_error": "The first rollback invocation supplied --intent and argparse rejected it without pointer movement.",
+      "detection_method": "The CLI returned --rollback does not accept --intent; the argument-free invocation then restored the previous generation byte-exactly.",
+      "evidence_paths": [
+        "scripts/ariadne_governance_clockwork_tick.py",
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-publication-attempt-001-rollback-receipt.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.rollback_rejected_intent_argument",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Invoke clockwork rollback without an intent argument.",
+        "prevention_control": "The ergonomics review will test typed operation-specific command builders that cannot express invalid flag combinations.",
+        "evidence_paths": [
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-publication-attempt-001-rollback-receipt.json"
+        ]
+      },
+      "baton_summary": "records one rejected rollback argument combination and the passing argument-free rollback."
     }
   ],
   "next_operation_protected_boundaries": [

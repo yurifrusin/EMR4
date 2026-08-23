@@ -9,9 +9,9 @@
     "new_product_test_files": 0,
     "provider_calls": 0,
     "model_workers": 0,
-    "reruns_from_procedural_error": 6,
-    "clockwork_publication_attempts": 0,
-    "byte_exact_rollbacks": 0,
+    "reruns_from_procedural_error": 9,
+    "clockwork_publication_attempts": 1,
+    "byte_exact_rollbacks": 1,
     "bespoke_updater_executions": 0,
     "accepted_development_yield": 1,
     "focused_tests_passed": 11,
@@ -31,5 +31,5 @@
     "claude_code_fallback": "not_authorized",
     "gemini_calls": 0
   },
-  "assessment": "The accepted product packet was small, exact and fully deterministic. Six reruns came from manually supplied interface details rather than product semantics: module invocation form, a repeated Git object in prose, a copied schema vocabulary, a guessed test path, a descriptive Continuity node kind outside its closed vocabulary and a nominally valid kind whose hidden contract inheritance did not fit the packet. Safety was strong because every lapse was contained before acceptance; ergonomics remain weaker because the operator could still express facts and classifications that the repository already knows or can compute."
+  "assessment": "The accepted product packet was small, exact and fully deterministic. Nine reruns came from manually supplied interface details rather than product semantics: module invocation form, a repeated Git object in prose, a copied schema vocabulary, a guessed test path, a descriptive Continuity node kind outside its closed vocabulary, a nominally valid kind whose hidden contract inheritance did not fit the packet, an unsupported register flag, a missing required summary timestamp and an invalid rollback argument. The postpublication timestamp defect required one byte-exact rollback. Safety was strong because every lapse was contained before durable acceptance; ergonomics remain weaker because the operator could still express facts, classifications and command shapes that the repository already knows or can compute."
 }

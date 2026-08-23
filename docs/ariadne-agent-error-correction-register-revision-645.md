@@ -2,8 +2,8 @@
 
 <!-- ariadne-agent-error-register-reading
 revision: 645
-incident_count: 1121
-new_incident_ids: AER-1116,AER-1117,AER-1118,AER-1119,AER-1120,AER-1121
+incident_count: 1124
+new_incident_ids: AER-1116,AER-1117,AER-1118,AER-1119,AER-1120,AER-1121,AER-1122,AER-1123,AER-1124
 open_incident_count: 0
 -->
 
@@ -43,3 +43,23 @@ unrelated inherited appointment-availability contracts. The second dry check
 failed before mutation; the conformance packet was reclassified as `tooling`,
 matching its provider-free verification role without asserting irrelevant
 product-contract evidence.
+
+## AER-1122
+
+One postpublication verification command supplied an unsupported `--check`
+flag to the agent-error-register reporter. Argparse rejected it without
+mutation; the canonical register is instead verified by the governance suite.
+
+## AER-1123
+
+The first publication revealed that the new Yuri summary lacked the exactly
+one top-level Brisbane `Timestamp:` line required once it became current-node
+evidence. Postpublication consistency verification rejected the generation and
+the clockwork restored the previous generation byte-exactly at lease 206. The
+summary now carries the required timestamp before a fresh publication attempt.
+
+## AER-1124
+
+The first rollback invocation incorrectly supplied `--intent`, which rollback
+does not accept. Argparse rejected it without movement; the argument-free
+rollback then restored the previous generation byte-exactly.

@@ -22,6 +22,6 @@ opened.
 The readiness result remains exactly 11 satisfied / 0 blocking / 1
 operational-evidence gap, with zero repository prerequisites remaining.
 
-The six corrected workflow reruns are accepted as contained process evidence
+The nine corrected workflow reruns are accepted as contained process evidence
 for the next bounded clockwork ergonomics review. They do not invalidate the
 product result.

@@ -41,14 +41,18 @@ real operational evidence and Yuri-owned choices are still absent.
 - no product source, route, API, client, runtime, feature flag, allowlist,
   status, waiting-area, deployment, Pages or protected ref changed.
 
-Six bounded workflow incidents were corrected without changing the accepted
+Nine bounded workflow incidents were corrected without changing the accepted
 candidate: one wrong script invocation form, one forbidden manually repeated
 Git object in receipt prose, one copied schema-vocabulary value, one guessed
 test filename and one descriptive Continuity node kind outside the closed
 vocabulary. A second dry check showed that the nominally valid `integration`
 kind activates two unrelated inherited availability contracts, so the packet
-was classified as provider-free `tooling`. They are retained as ergonomics
-evidence rather than hidden as incidental noise.
+was classified as provider-free `tooling`. Postpublication verification then
+found a missing required Brisbane timestamp in the Yuri summary and restored
+the previous generation byte-exactly. Two further CLI-shape lapses—an
+unsupported register `--check` flag and passing `--intent` to rollback—were
+corrected. They are retained as ergonomics evidence rather than hidden as
+incidental noise.
 
 ## Parallelism and Harness posture
 

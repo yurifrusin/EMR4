@@ -2,6 +2,8 @@
 
 Date: 2026-08-23
 
+Timestamp: 2026-08-23T15:18:50.3859558+10:00 (Australia/Brisbane)
+
 ## Lay summary
 
 The final software-only check before real operational choices has passed. A
@@ -25,5 +27,5 @@ codes. Focused and surrounding suites, API-spine checks, JSON Schema, Ruff,
 byte compilation and byte-exact reproduction passed.
 
 No API, route, client, product data, provider, runtime, deployment, Pages or
-protected ref changed. Six corrected procedural reruns are being carried into
+protected ref changed. Nine corrected procedural reruns are being carried into
 the next provider-free read-only clockwork ergonomics review.
