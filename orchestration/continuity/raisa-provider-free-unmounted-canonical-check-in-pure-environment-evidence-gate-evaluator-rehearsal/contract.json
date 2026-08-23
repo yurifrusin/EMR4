@@ -1,0 +1,113 @@
+{
+  "schema_version": "emr4.check-in-environment-evidence-gate-contract.v1",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+  "planning_source": "6edcc2486cfe18d48926f0d228dd3c23ac13dde4",
+  "accepted_manifest_normalizer_product_source": "ae62faf95b289b369a6eea1793ee4325f33447bc",
+  "accepted_typed_evidence_input_product_source": "9011d83d769f45bb717c039a126a890d43922dce",
+  "reading_schema_version": "emr4.check-in-environment-evidence-gate-reading.v1",
+  "public_function": "evaluate_check_in_environment_evidence_gate",
+  "public_result": "EnvironmentEvidenceGateReading",
+  "input_contract": {
+    "manifest_results": "exact_builtin_tuple_of_exact_ManifestNormalizationResult",
+    "operational_evidence_result": "exact_OperationalEvidenceInputNormalizationResult",
+    "evaluation_time": "exact_timezone_aware_datetime",
+    "current_time_read_allowed": false,
+    "caller_controlled_exception_allowed": false,
+    "ambient_or_external_read_allowed": false
+  },
+  "manifest_selection": {
+    "empty_tuple_reason": "manifest_absent",
+    "invalid_result_reason": "manifest_invalid",
+    "multiple_valid_results_reason": "manifest_ambiguous",
+    "current_window": "issued_at_lte_evaluation_time_lt_expires_at",
+    "outside_current_window_reason": "manifest_stale",
+    "last_known_good_fallback": false
+  },
+  "output_fields": [
+    "schema_version",
+    "outcome",
+    "reason_code",
+    "environment_identifier",
+    "admission_snapshot_generation",
+    "manifest_digest"
+  ],
+  "closed_reason_codes": [
+    "manifest_absent",
+    "manifest_invalid",
+    "manifest_stale",
+    "manifest_ambiguous",
+    "environment_mismatch",
+    "role_binding_missing",
+    "role_evidence_invalid",
+    "secret_reference_invalid",
+    "rotation_evidence_invalid",
+    "break_glass_not_inactive",
+    "evidence_gate_satisfied"
+  ],
+  "evaluation_order": [
+    "validate_exact_input_envelope_and_normalized_manifest_result",
+    "deny_zero_or_ambiguous_manifest_population_without_selection",
+    "validate_explicit_time_and_manifest_half_open_freshness",
+    "bind_all_evidence_to_manifest_environment_generation_and_authority_object",
+    "require_exact_logical_physical_and_credential_slot_role_binding",
+    "require_fresh_independent_satisfactory_categorical_role_evidence",
+    "require_three_distinct_ordered_secret_reference_bindings",
+    "require_exact_fresh_independent_rotation_custody_evidence",
+    "require_matching_fresh_independent_deny_only_inactive_break_glass",
+    "return_capability_free_satisfied_reading"
+  ],
+  "role_requirements": {
+    "logical_role_id": "appointment_check_in_ordinary_runtime_v1",
+    "ownership_observation": "non_owner",
+    "rls_bypass_observation": "nobypassrls",
+    "product_relation_ownership_observation": "absent",
+    "cross_tenant_probe_observation": "denied",
+    "manifest_tenant_attestation_reference_must_match": true,
+    "fresh_at_explicit_evaluation_time": true,
+    "self_verification_allowed": false
+  },
+  "secret_and_rotation_requirements": {
+    "ordered_slot_ids": [
+      "database_connection_credential",
+      "application_token_signing_key",
+      "admission_snapshot_verification_key"
+    ],
+    "slot_reference_key_version_and_evidence_reference_match": true,
+    "rotation_manifest_row_exact_match": true,
+    "evidence_references_distinct": true,
+    "evidence_artifact_digests_distinct": true,
+    "fresh_at_explicit_evaluation_time": true,
+    "self_verification_allowed": false
+  },
+  "break_glass_requirement": {
+    "mode": "deny_only",
+    "only_continuing_state": "inactive",
+    "manifest_and_operational_reference_and_state_match": true,
+    "fresh_at_explicit_evaluation_time": true,
+    "self_verification_allowed": false,
+    "bypass_capability": false
+  },
+  "parallelism_assessment": {
+    "deepseek_flash": "declined_incompatible_accepted_runner_no_new_runner_engineering",
+    "gemini_verifier": "declined_pure_unmounted_architecture_frozen_no_trigger",
+    "native_subagents": "declined_developer_policy",
+    "serial_owner": "gpt_sol"
+  },
+  "owned_paths": [
+    "app/services/appointment_check_in_environment_evidence_gate.py",
+    "tests/test_appointment_check_in_environment_evidence_gate.py",
+    "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"
+  ],
+  "closed_boundaries": {
+    "external_fact_selected_or_verified": false,
+    "raw_manifest_or_evidence_parsed": false,
+    "current_clock_or_ambient_configuration_read": false,
+    "secret_or_reference_resolved": false,
+    "git_lookup_database_or_route_used": false,
+    "admission_or_command_capability_added": false,
+    "ordinary_practice_enabled": false,
+    "product_api_or_client_changed": false,
+    "production_deployment_release_or_pages": false,
+    "protected_ref_moved": false
+  }
+}
