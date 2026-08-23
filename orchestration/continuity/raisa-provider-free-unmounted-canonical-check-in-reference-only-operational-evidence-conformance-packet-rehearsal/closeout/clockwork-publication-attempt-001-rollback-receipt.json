@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.clockwork_publication_rollback_receipt.v1",
+  "recorded_at": "2026-08-23T15:31:00+10:00",
+  "status": "rolled_back_byte_exact",
+  "published_generation_id": "gen-dc49add0c6f5a62b2a3cfa9b5c45d1b38220e14189e8b722d834683248503785",
+  "published_source_commit": "e7d26e7b90febd95b2d5a1349d11bf6a5c643bfe",
+  "postpublication_failure": "current_node_yuri_summary_missing_exactly_one_brisbane_timestamp_header",
+  "selected_generation_id": "gen-f3adfd61281b9aecd52ae67baf9ecc3631dfa1d65c089a7e73778d8707a9bd03",
+  "rollback_lease_sequence": 206,
+  "byte_exact": true,
+  "canonical_result": "previous_generation_restored",
+  "correction": "Bind rollback lease 206 as source, add the required top-level Brisbane Timestamp line, extend the incident reading and rerun a fresh dry check before publication."
+}
