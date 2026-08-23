@@ -1,3 +1,9 @@
 """Native-Harness worker scaffold for focused evidence admission tests."""
 
-# The bounded DeepSeek worker owns the focused tests for the frozen seam.
+import pytest
+
+
+def test_native_worker_scaffold_is_pending() -> None:
+    """The bounded DeepSeek worker replaces this test with focused conformance."""
+
+    pytest.skip("native Harness worker candidate pending")
