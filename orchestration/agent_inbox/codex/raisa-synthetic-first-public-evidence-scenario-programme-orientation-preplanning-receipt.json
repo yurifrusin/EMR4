@@ -1,0 +1,142 @@
+{
+  "active_operation": {
+    "active_tranche": "Synthetic-first public-evidence scenario programme orientation",
+    "completed_stage": "Yuri selected defer_keep_closed and separated the real-data boundary from provider-live use of wholly synthetic scenarios.",
+    "next_executable_stage": "complete_public_source_research_then_freeze_traceable_synthetic_scenario_grammar_and_next_architecture_tranche",
+    "operation_id": "raisa-synthetic-first-public-evidence-scenario-programme-orientation",
+    "resume_after_compaction": true,
+    "source_head": "7c4d374d12ecbf050326a84b34b99931e4439aca",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "4551b7ea480544a50910ec9443dc2cf72b860f89",
+    "reason_codes": [],
+    "resolved_commit": "7c4d374d12ecbf050326a84b34b99931e4439aca",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "7c4d374d12ecbf050326a84b34b99931e4439aca"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "4551b7ea480544a50910ec9443dc2cf72b860f89",
+    "branch_origin_aligned": false,
+    "head": "4551b7ea480544a50910ec9443dc2cf72b860f89",
+    "origin_branch_commit": "048541d55b2d91e6b9da2f19fc5e6389a73ea4c4",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 685
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "fresh_rehydration_and_public_research_consolidation_preplanning",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "This tranche needs primary-source research and programme synthesis rather than an implementation artifact; the occupied native DeepSeek profile remains paused and no Claude Code fallback is authorized.",
+        "work_packages": []
+      },
+      {
+        "disposition": "reserved",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "No exact material architecture candidate exists yet. Reassess Gemini for a fresh veto after the scenario grammar and next-tranche boundary are frozen and deterministically checked.",
+        "work_packages": []
+      },
+      {
+        "disposition": "dispatched",
+        "expected_leverage": "positive",
+        "lane_id": "native_subagents",
+        "rationale": "Yuri explicitly requested research-directed workers, and three independent public-source streams are read-only, separable and faster to collect in parallel without transferring acceptance authority.",
+        "work_packages": [
+          "authoritative Australian general-practice reception and administrative workflow research",
+          "authoritative primary-care clinical and diagnostic scenario-structure research",
+          "synthetic healthcare generation, traceability and provider-live evaluation methodology research",
+          "Australian and overseas practice-management-system public capability-claim research",
+          "copyright-safe fictional medical-practice human-factor prompt research",
+          "read-only existing non-protected scenario-contract gap mapping",
+          "high-frequency historical diary snapshot privacy and de-identification method research without repository data access"
+        ]
+      }
+    ],
+    "operation_id": "raisa-synthetic-first-public-evidence-scenario-programme-orientation",
+    "parallel_work_packages": [
+      "Australian administrative and reception source map",
+      "clinical and diagnostic scenario structure map",
+      "synthetic generation and evaluation method map",
+      "practice-management-system capability-claim map",
+      "fictional-practice human-factor prompt map",
+      "existing scenario-contract reuse and gap map",
+      "historical snapshot privacy-method map",
+      "Sol consolidation and architecture-priority selection"
+    ],
+    "reassessment_triggers": [
+      "when all three research packages return",
+      "before freezing the exact next architecture tranche",
+      "before any provider-live synthetic execution",
+      "at closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "workers are advisory and read-only",
+      "Sol alone reconciles normative force, copyright, privacy, architecture priority and acceptance",
+      "no provider-live execution occurs before a separately frozen plan and preexecution receipt",
+      "deterministic corpus rules precede any model evaluation"
+    ]
+  },
+  "planned_action": "consolidate_user_requested_public_research_then_freeze_the_synthetic_scenario_grammar_and_next_architecture_tranche",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/user-decision.json",
+      "docs/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-plan.md",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/report.md",
+      "docs/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-sol-acceptance.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "GPT Sol retains architecture, planning, integration and acceptance. DeepSeek has no package because the occupied native profile remains paused and this is public-source research; Gemini is reserved for a later material exact-candidate veto if needed; three user-requested native research subagents own independent read-only evidence streams.",
+    "git_refs_and_worktree": "machine_snapshot_only",
+    "live_handover_current_baton": "AGENTS.md was reread completely after the user-decision transition. The Current Baton names raisa-synthetic-first-public-evidence-scenario-programme-orientation as the exact next implementation and keeps protected refs closed.",
+    "protected_evidence_boundaries": "AGENTS.md sections 5 and 6 and the exact active latch were restored. Protected holdouts, historical diary PHI, real practice and real-practice-like data, fine-tuning, ordinary check-in activation, production, deployment, Pages and protected refs remain closed. Only public non-PHI research and wholly invented synthetic scenarios are admitted."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
