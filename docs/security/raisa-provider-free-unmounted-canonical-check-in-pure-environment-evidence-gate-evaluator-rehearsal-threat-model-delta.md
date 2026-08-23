@@ -2,6 +2,8 @@
 
 Date: 2026-08-23
 
+Timestamp: 2026-08-23T11:42:25.0002138+10:00 (Australia/Brisbane)
+
 Status: `frozen_narrow_delta`
 
 ## New asset and trust boundary

@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "89640f1bb6ad992f68d5c20fd578b4062eeb193d",
+  "source_commit": "89640f1bb6ad992f68d5c20fd578b4062eeb193d",
+  "generation_id": "gen-51436c8a7fc046b883e6b6c67a0d097efc0038faf81f3655b6189489f6c028f3",
+  "bundle_sha256": "51436c8a7fc046b883e6b6c67a0d097efc0038faf81f3655b6189489f6c028f3",
+  "previous_generation_id": "gen-00dfb5a6748d2740d1d60b4d615a8c515e0aed69055730c5def90e60a0fb775e",
+  "previous_source_commit": "89640f1bb6ad992f68d5c20fd578b4062eeb193d",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 199,
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+  "event_kind": "clean_closeout",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

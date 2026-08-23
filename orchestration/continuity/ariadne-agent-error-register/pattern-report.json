@@ -1,45 +1,45 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 640,
+  "register_revision": 641,
   "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "ee446c3575cdfee05143de9e0771a6ebc5a5b48fb28a87a0ff5ef102fa6b0fdc",
-  "incident_count": 1087,
+  "canonical_register_sha256": "a60c89ac63a7f447be9eee46134ac089564420f9e312f40eb5f5ff20b139838c",
+  "incident_count": 1096,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
       "agent_behavior": 566,
       "harness": 73,
-      "operator": 283,
-      "repository": 149,
+      "operator": 289,
+      "repository": 152,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 111,
       "evidence_misreport": 77,
       "harness_failure": 73,
-      "operator_error": 283,
+      "operator_error": 289,
       "output_contract_violation": 323,
       "read_only_violation": 5,
       "reasoning_claim_error": 50,
-      "repository_defect": 149,
+      "repository_defect": 152,
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 84,
-      "integration_reviewer": 3,
-      "orchestrator": 937,
+      "implementer": 87,
+      "integration_reviewer": 4,
+      "orchestrator": 942,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 710,
+      "low": 716,
       "material": 135,
-      "moderate": 242
+      "moderate": 245
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 228,
-      "canonical_unchanged": 681,
-      "untrusted_partial_worktree": 178
+      "canonical_unchanged": 685,
+      "untrusted_partial_worktree": 183
     },
     "by_resource_and_role": {
       "accepted-guard-graph-clockwork-publication::orchestrator": 1,
@@ -281,6 +281,11 @@
       "emr4-live-handover-compactness::orchestrator": 1,
       "emr4-maintenance-test-suite::orchestrator": 1,
       "emr4-repository::orchestrator": 3,
+      "evaluator-clockwork-check::orchestrator": 1,
+      "evaluator-focused-tests::implementer": 2,
+      "evaluator-historical-tripwire::orchestrator": 1,
+      "evaluator-source-hardening::implementer": 1,
+      "evaluator-source-review::integration_reviewer": 1,
       "explicit-path-precommit-diff-gate::orchestrator": 1,
       "factory-fixture-package-scope-projection::implementer": 1,
       "factory-import-recovery-focused-tests::implementer": 1,
@@ -513,6 +518,7 @@
       "transactional-contract-evidence-field::orchestrator": 1,
       "transactional-contract-evidence-projection::orchestrator": 1,
       "typed-input-active-acceptance-paths::orchestrator": 1,
+      "typed-input-clockwork-check::orchestrator": 3,
       "typed-input-historical-gap-tripwire::orchestrator": 1,
       "typed-input-preplanning-receipt::orchestrator": 1,
       "typed-input-source-capability-guard::orchestrator": 1,

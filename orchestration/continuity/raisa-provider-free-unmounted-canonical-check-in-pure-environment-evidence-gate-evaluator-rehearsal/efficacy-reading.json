@@ -1,0 +1,30 @@
+{
+  "schema_version": "emr4.pure_environment_evidence_gate_evaluator_efficacy.v1",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+  "reviewed_source": "89640f1bb6ad992f68d5c20fd578b4062eeb193d",
+  "task_completion": true,
+  "scope_integrity": true,
+  "focused_and_surrounding_tests_passed": 258,
+  "native_harness": {
+    "selected": false,
+    "declined": true,
+    "reason": "no_already_accepted_multi_file_runner_compatible_unchanged",
+    "new_runner_broker_or_guard_engineering": false,
+    "provider_calls": 0,
+    "performance_conclusion": "not_measured"
+  },
+  "workflow": {
+    "fresh_five_source_receipt_passed": true,
+    "corrected_local_observation_count_before_closeout": 6,
+    "carried_clockwork_rejection_observation_count": 3,
+    "candidate_reimplementation_count": 0,
+    "generic_harness_test_count": 0,
+    "worker_transport_fallback_count": 0
+  },
+  "adoption_reading": {
+    "native_harness_retained_role": "monitored_secondary_worker",
+    "default_worker_promotion": false,
+    "more_generic_harness_testing_required": false,
+    "next_action": "review_all_retained_native_harness_evidence_and_freeze_minimum_testing_real_work_adoption_plan"
+  }
+}

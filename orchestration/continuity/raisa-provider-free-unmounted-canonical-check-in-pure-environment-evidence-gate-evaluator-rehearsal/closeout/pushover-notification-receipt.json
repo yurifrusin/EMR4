@@ -1,0 +1,9 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+  "status": 1,
+  "request": "3643ffa7-f332-4f24-9572-796f032f4e24",
+  "contains_phi": false,
+  "engine_state": "continuing",
+  "next_workstream": "native Harness pragmatic adoption review"
+}

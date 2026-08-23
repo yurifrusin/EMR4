@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Implement only the pure evaluator, reuse an already accepted compatible Harness runner if one exists, and otherwise decline the native lane without new interoperability work.
+> Review retained evidence once, lower the perfection threshold explicitly, and plan the next native Harness use around valuable real work with only task-triggered adaptation.
 
 ## North star
 
@@ -618,26 +618,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The real unmounted normalizer is accepted through Sol recovery and the native transport mismatch has a bounded attributable reading without another interoperability tranche. Lineage parent: `deepseek-native-harness-pragmatic-development-adoption-review-and-plan`.
 301. **Make external role, custody/rotation and break-glass evidence readable by deterministic controls without converting input shape into authority — Canonical check-in typed operational-evidence inputs**
    The closed immutable input model is accepted and the workflow advanced real product-enabling source without another Harness interoperability detour. Lineage parent: `raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer`.
+302. **Complete the provider-free reference-only environment evidence gate before any admission seam — Canonical check-in pure environment evidence-gate evaluator**
+   The normalizer, typed evidence inputs and pure evaluator now form a complete unmounted deterministic evidence-reading chain. Lineage parent: `raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal`.
 
 ## Current position
 
-**Complete the provider-free reference-only evidence gate before any default-off admission seam — Canonical check-in typed operational-evidence inputs**
+**Turn accumulated native-Harness investigation into a pragmatic real-development operating plan — Canonical check-in pure environment evidence-gate evaluator**
 
-**Why this proof came next:** The normalizer and typed operational-evidence inputs are both complete, so the pure evaluator is the narrowest dependency-satisfied repository node.
+**Why this proof came next:** The current product tranche is complete and Yuri explicitly requested lower interoperability perfection, a review of all retained Harness work and minimum further generic testing.
 
-One pure function can compare explicit normalized inputs at an explicit evaluation time and return only the accepted typed evidence-gate reading.
+One evidence-based adoption plan will preserve useful traceability and control, identify task shapes that can enter real work now, and limit adaptation to concrete first-use needs.
 
 ### What this unlocks
 
-- Deterministic manifest/evidence binding and closed denial reasons.
-- Authored-reference hostile conformance for mismatch, uniqueness, self-verification, staleness and break glass.
-- A later separately frozen default-off admission input seam.
+- Selection of genuine EMR4 worker packages based on accepted runner compatibility and task value.
+- A small task-driven adaptation budget instead of another open-ended qualification programme.
+- Matched efficacy readings that distinguish transport, model, orchestration and task failures.
 
 ### What it does not solve
 
-- A pure evaluator does not create or authenticate an external operational fact.
-- The admission seam, route, ordinary activation and client cutover remain closed.
-- No provider, live environment, secret, database or lasting action is authorized.
+- The review does not make native Harness the default worker or guarantee model quality.
+- It does not authorize provider calls, product edits or generic interoperability testing.
+- Any later product authority remains controlled by the active EMR4 tranche boundaries.
 
 ## Continuity and authority
 
@@ -1135,8 +1137,6 @@ Prerequisites:
 - `app/services/application_identity_oidc_redemption.py`
 - `app/services/application_identity_oidc_redemption_database_role.py`
 - `app/services/application_identity_oidc_transport.py`
-- `app/services/appointment_check_in_environment_manifest.py`
-- `app/services/appointment_check_in_operational_evidence.py`
 - `app/services/appointment_check_in_product_adapter.py`
 - `app/services/appointment_delete_composition.py`
 - `app/services/appointment_delete_physical.py`
@@ -1690,6 +1690,7 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-plan.md`
+- `docs/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-plan.md`
@@ -3090,7 +3091,6 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.example.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json`
-- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md`
@@ -3139,6 +3139,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-two-projection-truth-parity-conformance-rehearsal/two-projection-truth-parity-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.schema.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal/efficacy-reading.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal/evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.schema.json`
@@ -3898,4 +3900,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 406; continuity graph revision 424._
+_Compass map revision 407; continuity graph revision 425._

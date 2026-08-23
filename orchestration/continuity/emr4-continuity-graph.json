@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 424,
+  "graph_revision": 425,
   "harvests": [],
   "nodes": [
     {
@@ -34050,9 +34050,111 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "title": "Canonical check-in pure environment evidence-gate evaluator",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits this dependency-satisfied provider-free repository node.",
+          "The evaluator reads only normalized in-memory data at an explicit time and grants no external-fact, admission, secret, runtime or product authority.",
+          "DeepSeek native Harness was declined because no accepted runner fits the package unchanged; no new interoperability work or fallback was authorized."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-pure-closed-evidence-gate-reading",
+          "source": "app/services/appointment_check_in_environment_evidence_gate.py",
+          "status": "accepted",
+          "summary": "Accept one immutable capability-free reading over exact normalized manifest and evidence inputs at an explicit aware time."
+        },
+        {
+          "id": "preserve-eleven-reason-fail-closed-order",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal/contract.json",
+          "status": "accepted",
+          "summary": "Accept deterministic absent, invalid, stale, ambiguous, binding, evidence, break-glass and satisfied outcomes without ambient state."
+        },
+        {
+          "id": "defer-admission-and-every-external-fact",
+          "source": "docs/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-closeout.md",
+          "status": "accepted",
+          "summary": "Keep operational evidence authenticity, the default-off admission seam and every product or ordinary-practice action outside this node."
+        },
+        {
+          "id": "review-native-harness-pragmatically-next",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Honor Yuri's request by reviewing retained Harness evidence and freezing a minimum-testing real-work adoption plan next."
+        }
+      ],
+      "claim_scope": [
+        "The evaluator consumes only exact normalized-result dataclasses and an explicit caller-supplied aware datetime.",
+        "It returns all eleven architecture reason codes in a deterministic fail-closed order.",
+        "It denies ambiguous selection, stale windows, cross-environment replay, wrong role and secret bindings, duplicate evidence, self-verification and non-inactive break glass.",
+        "A satisfied reading has no admission, route, command, database, secret-resolution or configuration capability.",
+        "No native Harness process, provider call, transport fallback or generic interoperability test occurred.",
+        "No external fact, product data, production action, Pages action or protected-ref movement occurred."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal/evidence.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal/report.md",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_appointment_check_in_environment_evidence_gate.py",
+          "tests/test_appointment_check_in_environment_manifest.py",
+          "tests/test_appointment_check_in_operational_evidence.py",
+          "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
+          "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "artifacts": [
+          "app/services/appointment_check_in_environment_evidence_gate.py",
+          "orchestration/human_inbox/yuri/2026-08-23--canonical-check-in-pure-environment-evidence-gate-evaluator.md",
+          "docs/ariadne-agent-error-correction-register-revision-641.md"
+        ]
+      },
+      "unresolved_gates": [
+        "No operational manifest instance, external verifier selection or external operational fact exists.",
+        "The default-off admission input seam remains separately closed.",
+        "No accepted generic multi-file native Harness runner exists.",
+        "Ordinary-practice activation, product runtime, deployment and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T12:01:25.0104668+10:00",
+      "updated_at": "2026-08-23T12:01:25.0104668+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "89640f1bb6ad992f68d5c20fd578b4062eeb193d",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T11:20:38.5755231+10:00"
+  "updated_at": "2026-08-23T12:01:25.0104668+10:00"
 }

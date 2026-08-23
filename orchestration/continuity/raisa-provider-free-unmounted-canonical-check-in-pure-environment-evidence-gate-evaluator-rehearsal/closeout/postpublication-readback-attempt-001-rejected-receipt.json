@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.governance_postpublication_readback_rejected_attempt.v1",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+  "attempt_id": "pure-evaluator-postpublication-readback-001",
+  "status": "revision_required",
+  "reason_code": "current_node_threat_delta_timestamp_header_absent",
+  "canonical_state_changed": false,
+  "correction": "add_the_required_single_brisbane_timestamp_header_and_rerun_the_exact_postpublication_suite",
+  "next_register_disposition": "carry_to_the_active_native_harness_adoption_review_closeout"
+}

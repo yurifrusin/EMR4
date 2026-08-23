@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 406,
-  "updated_at": "2026-08-23T11:20:38.5755231+10:00",
-  "source_graph_revision": 424,
-  "orientation_statement": "Implement only the pure evaluator, reuse an already accepted compatible Harness runner if one exists, and otherwise decline the native lane without new interoperability work.",
+  "map_revision": 407,
+  "updated_at": "2026-08-23T12:01:25.0104668+10:00",
+  "source_graph_revision": 425,
+  "orientation_statement": "Review retained evidence once, lower the perfection threshold explicitly, and plan the next native Harness use around valuable real work with only task-triggered adaptation.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5193,27 +5193,37 @@
         "docs/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-closeout.md",
         "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/evidence.json"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "lineage_parent": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+      "strategic_role": "Complete the provider-free reference-only environment evidence gate before any admission seam",
+      "outcome": "The normalizer, typed evidence inputs and pure evaluator now form a complete unmounted deterministic evidence-reading chain.",
+      "evidence": [
+        "docs/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-closeout.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal/evidence.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
-    "strategic_role": "Complete the provider-free reference-only evidence gate before any default-off admission seam",
-    "why_now": "The normalizer and typed operational-evidence inputs are both complete, so the pure evaluator is the narrowest dependency-satisfied repository node.",
-    "outcome": "One pure function can compare explicit normalized inputs at an explicit evaluation time and return only the accepted typed evidence-gate reading.",
+    "node_id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+    "strategic_role": "Turn accumulated native-Harness investigation into a pragmatic real-development operating plan",
+    "why_now": "The current product tranche is complete and Yuri explicitly requested lower interoperability perfection, a review of all retained Harness work and minimum further generic testing.",
+    "outcome": "One evidence-based adoption plan will preserve useful traceability and control, identify task shapes that can enter real work now, and limit adaptation to concrete first-use needs.",
     "unlocks": [
-      "Deterministic manifest/evidence binding and closed denial reasons.",
-      "Authored-reference hostile conformance for mismatch, uniqueness, self-verification, staleness and break glass.",
-      "A later separately frozen default-off admission input seam."
+      "Selection of genuine EMR4 worker packages based on accepted runner compatibility and task value.",
+      "A small task-driven adaptation budget instead of another open-ended qualification programme.",
+      "Matched efficacy readings that distinguish transport, model, orchestration and task failures."
     ],
     "does_not_solve": [
-      "A pure evaluator does not create or authenticate an external operational fact.",
-      "The admission seam, route, ordinary activation and client cutover remain closed.",
-      "No provider, live environment, secret, database or lasting action is authorized."
+      "The review does not make native Harness the default worker or guarantee model quality.",
+      "It does not authorize provider calls, product edits or generic interoperability testing.",
+      "Any later product authority remains controlled by the active EMR4 tranche boundaries."
     ],
     "evidence": [
-      "app/services/appointment_check_in_environment_manifest.py",
-      "app/services/appointment_check_in_operational_evidence.py",
-      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json"
+      "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-closeout.md",
+      "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/efficacy-reading.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal/efficacy-reading.json"
     ]
   },
   "decision_horizon": [

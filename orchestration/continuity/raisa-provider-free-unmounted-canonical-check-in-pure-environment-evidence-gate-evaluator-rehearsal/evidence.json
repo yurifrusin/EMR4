@@ -1,0 +1,54 @@
+{
+  "schema_version": "emr4.check-in-environment-evidence-gate-evidence.v1",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+  "reviewed_source": "89640f1bb6ad992f68d5c20fd578b4062eeb193d",
+  "result": "pass",
+  "implementation": {
+    "module": "app/services/appointment_check_in_environment_evidence_gate.py",
+    "reading_schema_version": "emr4.check-in-environment-evidence-gate-reading.v1",
+    "closed_reason_code_count": 11,
+    "explicit_evaluation_time_required": true,
+    "current_clock_read_count": 0,
+    "effect_method_count": 0,
+    "external_fact_selected_count": 0
+  },
+  "verification": {
+    "focused_tests_passed": 57,
+    "focused_and_surrounding_tests_passed": 258,
+    "ruff": "passed",
+    "compile": "passed",
+    "git_diff_check": "passed",
+    "source_review": "passed"
+  },
+  "closed_outcomes": {
+    "zero_manifest_population": "manifest_absent",
+    "invalid_or_forged_normalized_manifest": "manifest_invalid",
+    "outside_manifest_half_open_window": "manifest_stale",
+    "multiple_valid_manifests": "manifest_ambiguous",
+    "environment_generation_or_authority_object_mismatch": "environment_mismatch",
+    "logical_physical_or_credential_role_mismatch": "role_binding_missing",
+    "hostile_stale_or_self_verified_role_evidence": "role_evidence_invalid",
+    "slot_key_version_or_reference_mismatch": "secret_reference_invalid",
+    "hostile_stale_duplicate_or_self_verified_rotation_evidence": "rotation_evidence_invalid",
+    "noninactive_mismatched_stale_or_self_verified_break_glass": "break_glass_not_inactive",
+    "complete_authored_reference_bundle": "evidence_gate_satisfied"
+  },
+  "parallelism": {
+    "deepseek_flash": "declined_incompatible_accepted_runner_no_new_runner_engineering",
+    "gemini_verifier": "declined_pure_unmounted_architecture_frozen_no_trigger",
+    "native_subagents": "declined_developer_policy",
+    "serial_owner": "gpt_sol"
+  },
+  "closed_boundaries": {
+    "provider_or_network_used": false,
+    "external_evidence_or_secret_read": false,
+    "current_clock_or_ambient_configuration_read": false,
+    "git_lookup_database_or_route_used": false,
+    "admission_or_command_capability_added": false,
+    "ordinary_practice_enabled": false,
+    "product_api_or_client_changed": false,
+    "production_deployment_release_or_pages": false,
+    "protected_ref_moved": false
+  },
+  "reasons": []
+}

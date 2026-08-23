@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 640,
+  "register_revision": 641,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -41947,6 +41947,323 @@
       "incident_id": "AER-1087",
       "attempt_id": "clock-a8aba120e287e102d7cb194c",
       "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "typed-input-clockwork-check",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The prospective incident-register reading exists before a closeout check validates its exact revision and population.",
+      "observed_error": "The first typed-input clockwork dry run occurred before its prospective revision document existed and was rejected with tick_incident_revision_reading.",
+      "detection_method": "The clockwork check returned one closed reason and reported canonical_state_changed false.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/closeout/clockwork-check-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_register_reading_order",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Create the exact prospective register revision before rerunning the check.",
+        "prevention_control": "Closeout preparation orders prospective register reading creation before the first tick check.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-640.md"
+        ]
+      },
+      "incident_id": "AER-1088",
+      "attempt_id": "clock-085059e70fa68fb351dff8ff",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "typed-input-clockwork-check",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "An active Baton acceptance label is already represented in the compact immutable lookup index.",
+      "observed_error": "The second dry run proposed a new unindexed descriptive label and the clockwork rejected it with tick_baton_compaction_unindexed.",
+      "detection_method": "The clockwork returned one closed label-index reason before publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/closeout/clockwork-check-attempt-002-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_unindexed_baton_label",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Reuse the indexed Current DeepSeek native Harness acceptance slot and retain its predecessor paths.",
+        "prevention_control": "New active acceptance labels are not coined during closeout unless their index admission is separately frozen.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1089",
+      "attempt_id": "clock-dbc91b126b038dcdfd30e42b",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "typed-input-clockwork-check",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "moderate",
+      "expected_invariant": "The active acceptance row carries exactly one current incident-register revision path.",
+      "observed_error": "The third dry run retained both predecessor and prospective revision paths and was rejected with tick_incident_revision_path.",
+      "detection_method": "The clockwork rejected the active acceptance before any canonical write.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/closeout/clockwork-check-attempt-003-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_multiple_active_register_paths",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Retain only the prospective current revision in the active row while leaving the predecessor indexed historically.",
+        "prevention_control": "Every active acceptance intent is checked for exactly one register revision path before the tick.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1090",
+      "attempt_id": "clock-8313fd65f707b78601fe9dc9",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "role": "implementer",
+      "resource_id": "evaluator-focused-tests",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "A capability-absence assertion treats missing methods as the expected value rather than raising inside the test.",
+      "observed_error": "The first focused test used getattr without a default and raised AttributeError while proving admit and execute methods were absent.",
+      "detection_method": "The focused suite failed at the test assertion while the satisfied reading fields were correct.",
+      "evidence_paths": [
+        "tests/test_appointment_check_in_environment_evidence_gate.py"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.capability_absence_probe_unguarded_getattr",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Supply a None default to getattr and assert that no callable capability exists.",
+        "prevention_control": "Capability-absence tests use total attribute probes that cannot fail merely because the capability is absent.",
+        "evidence_paths": [
+          "tests/test_appointment_check_in_environment_evidence_gate.py"
+        ]
+      },
+      "incident_id": "AER-1091",
+      "attempt_id": "clock-fd6a8b7e629203fe385bd855",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "role": "implementer",
+      "resource_id": "evaluator-focused-tests",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "Boundary expectations follow the exact record timestamps and frozen reason precedence.",
+      "observed_error": "The manifest-issued-boundary test expected role_evidence_invalid although role evidence was current and the first rotation observation was future.",
+      "detection_method": "The evaluator returned rotation_evidence_invalid and direct timestamp readback confirmed that result.",
+      "evidence_paths": [
+        "tests/test_appointment_check_in_environment_evidence_gate.py"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.explicit_time_boundary_wrong_stage_expectation",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Correct the expected reason to rotation_evidence_invalid without changing evaluator semantics.",
+        "prevention_control": "Boundary cases derive expected stages from every normalized UTC timestamp before assertion.",
+        "evidence_paths": [
+          "tests/test_appointment_check_in_environment_evidence_gate.py"
+        ]
+      },
+      "incident_id": "AER-1092",
+      "attempt_id": "clock-74c61667a20be50f9a9c0bec",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "evaluator-historical-tripwire",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The commit-relative exact-path tripwire runs only after every authorized new path is visible in the Git index.",
+      "observed_error": "The first surrounding run occurred while the new evaluator remained untracked, so Git omitted it from the working/index diff.",
+      "detection_method": "The tripwire reported the two accepted predecessor modules and not the still-untracked evaluator.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.commit_relative_tripwire_before_explicit_staging",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Explicitly stage only the three authorized implementation paths before rerunning the tripwire.",
+        "prevention_control": "New authorized paths are staged explicitly before any Git-index-dependent conformance check.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"
+        ]
+      },
+      "incident_id": "AER-1093",
+      "attempt_id": "clock-fa8ed070e49276f2a6c622a1",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "role": "implementer",
+      "resource_id": "evaluator-source-hardening",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_edit",
+      "stage": "implementation",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Every added validation clause is syntactically connected before tests run.",
+      "observed_error": "One hardening edit omitted or between the final secret-reference check and the next binding comparison.",
+      "detection_method": "Python compilation rejected the file immediately with a syntax error.",
+      "evidence_paths": [
+        "app/services/appointment_check_in_environment_evidence_gate.py"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "operator.validation_chain_missing_boolean_connector",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Add the missing Boolean connector and rerun compilation, Ruff and focused tests.",
+        "prevention_control": "Compile immediately after multi-clause validation edits before entering the broader suite.",
+        "evidence_paths": [
+          "app/services/appointment_check_in_environment_evidence_gate.py"
+        ]
+      },
+      "incident_id": "AER-1094",
+      "attempt_id": "clock-5e019d2552278c9ea08bc4c9",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "role": "integration_reviewer",
+      "resource_id": "evaluator-source-review",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_source_review",
+      "stage": "acceptance",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "Caller-constructible normalized objects and explicit time inputs cannot escape the fail-closed public boundary.",
+      "observed_error": "Direct review found that a custom tzinfo could raise an arbitrary exception from utcoffset beyond the initial narrow exception list.",
+      "detection_method": "Sol traced the exact datetime boundary and added an exploding-timezone adversarial case before source acceptance.",
+      "evidence_paths": [
+        "app/services/appointment_check_in_environment_evidence_gate.py",
+        "tests/test_appointment_check_in_environment_evidence_gate.py"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.caller_timezone_exception_escape",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Contain hostile object exceptions at the public evaluator boundary and return manifest_invalid.",
+        "prevention_control": "Public pure evaluators receive an adversarial custom-object exception regression before acceptance.",
+        "evidence_paths": [
+          "app/services/appointment_check_in_environment_evidence_gate.py",
+          "tests/test_appointment_check_in_environment_evidence_gate.py"
+        ]
+      },
+      "incident_id": "AER-1095",
+      "attempt_id": "clock-7b5d7b1888a896f7d1460a91",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "evaluator-clockwork-check",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_clockwork",
+      "stage": "closeout",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "The active acceptance row stays within the compact Baton's fixed byte budget while the immutable index retains historical lookup.",
+      "observed_error": "The first evaluator closeout check appended every predecessor and current path to a Baton already near its byte ceiling.",
+      "detection_method": "The clockwork rejected the prospective projection with tick_baton_compaction_budget before canonical publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal/closeout/clockwork-check-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_active_baton_compaction_budget",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Retain only primary accepted artifacts in the active row and rely on the immutable index for full historical lookup.",
+        "prevention_control": "Estimate the replacement row against the existing Baton byte budget before the first tick check.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1096",
+      "attempt_id": "clock-a33b56b4519441ab57e090c8",
+      "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"
     }
