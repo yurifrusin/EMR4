@@ -285,14 +285,11 @@ def capture_tick_reading(
 def _evidence_paths(admitted: dict[str, Any]) -> set[str]:
     manifest = admitted["transaction_manifest"]
     paths: set[str] = set(admitted["baton_acceptance"]["paths"])
-    for section in (
-        manifest["node"]["evidence"],
-        manifest["journey"],
-        manifest["current_position"],
-    ):
-        for value in section.values():
-            if isinstance(value, list):
-                paths.update(item for item in value if isinstance(item, str))
+    for value in manifest["node"]["evidence"].values():
+        if isinstance(value, list):
+            paths.update(item for item in value if isinstance(item, str))
+    paths.update(manifest["journey"]["evidence"])
+    paths.update(manifest["current_position"]["evidence"])
     paths.update(
         decision["source"]
         for decision in manifest["node"]["decisions"]
