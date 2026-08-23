@@ -294,7 +294,7 @@ def _prepare_command_boundary() -> tuple[dict[str, Any], dict[str, Any]]:
         "schema_version": COMMAND_MANIFEST_SCHEMA_VERSION,
         "commands": [
             {
-                "id": "PF_MANIFEST_NORMALIZER_SOL_VERIFICATION",
+                "id": "PF_MANIFEST_NORMALIZER",
                 "argv": [
                     str(python),
                     "-m",
