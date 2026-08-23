@@ -2,6 +2,8 @@
 
 Date: 2026-08-23
 
+Timestamp: 2026-08-23T10:30:23.9779889+10:00 (Australia/Brisbane)
+
 Decision: `accepted_pending_clockwork_publication`
 
 Reviewed source: `ae62faf95b289b369a6eea1793ee4325f33447bc`

@@ -1,0 +1,17 @@
+{
+  "schema_version": "ariadne.governance_live_tick_postpublication_rejection.v1",
+  "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+  "published_generation_id": "gen-01012c87c2044ec4807fdfa3234953e109a971e498ffcdda7a1fa02a955b4a2f",
+  "source_commit": "4ff7748c0128155b94148736443b650c9c0df008",
+  "lease_sequence_at_publication": 195,
+  "result": "rejected_by_postpublication_readback",
+  "failed_test": "tests/test_current_baton_consistency.py::test_current_node_and_repaired_predecessor_evidence_have_brisbane_timestamps",
+  "reason": "current_node_markdown_timestamp_header_missing",
+  "rollback": {
+    "status": "passed",
+    "selected_generation_id": "gen-e49927e358035042ba06acd87d0a7148cca1391688ec3f9545ae22e101f70df1",
+    "lease_sequence": 196,
+    "byte_exact": true
+  },
+  "correction": "add exact Brisbane Timestamp headers to closeout, Sol acceptance and Yuri summary before republishing"
+}

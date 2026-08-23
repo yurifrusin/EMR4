@@ -8,8 +8,8 @@ Status: `accepted_pending_clockwork_publication`
 
 <!-- ariadne-agent-error-register-reading
 revision: 639
-incident_count: 1081
-new_incident_ids: AER-1060,AER-1061,AER-1062,AER-1063,AER-1064,AER-1065,AER-1066,AER-1067,AER-1068,AER-1069,AER-1070,AER-1071,AER-1072,AER-1073,AER-1074,AER-1075,AER-1076,AER-1077,AER-1078,AER-1079,AER-1080,AER-1081
+incident_count: 1082
+new_incident_ids: AER-1060,AER-1061,AER-1062,AER-1063,AER-1064,AER-1065,AER-1066,AER-1067,AER-1068,AER-1069,AER-1070,AER-1071,AER-1072,AER-1073,AER-1074,AER-1075,AER-1076,AER-1077,AER-1078,AER-1079,AER-1080,AER-1081,AER-1082
 open_incident_count: 0
 -->
 
@@ -194,9 +194,20 @@ filename glob filter and located the required examples without mutation.
 
 Origin: operator. Severity: low. Status: corrected and contained.
 
+## AER-1082 — Current-node Markdown omitted required Brisbane Timestamp headers
+
+The first live publication passed the clockwork transaction but the
+postpublication baton-consistency test found that the current closeout, Sol
+acceptance and Yuri summary lacked their required top-level Brisbane
+`Timestamp:` headers. The clockwork rolled back byte-exactly, the three headers
+were added, and the corrected source was prepared for a fresh dry-run and
+publication.
+
+Origin: operator. Severity: moderate. Status: corrected and contained.
+
 ## Aggregate reading
 
-The durable register will contain 1,081 corrected or contained incidents and
+The durable register will contain 1,082 corrected or contained incidents and
 zero open incidents after clockwork publication. The native Harness terminal
 was a deterministic pre-provider tool-contract rejection rather than an
 untraceable model failure. The remaining rows are bounded preparation,

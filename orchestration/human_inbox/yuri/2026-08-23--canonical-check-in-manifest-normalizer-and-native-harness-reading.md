@@ -1,5 +1,9 @@
 # Canonical check-in manifest normalizer and native Harness reading
 
+Date: 2026-08-23
+
+Timestamp: 2026-08-23T10:30:23.9779889+10:00 (Australia/Brisbane)
+
 ## Lay summary
 
 The useful Raisa work is complete: EMR4 can now read and strictly validate the
