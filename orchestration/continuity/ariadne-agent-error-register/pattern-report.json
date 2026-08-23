@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 645,
+  "register_revision": 646,
   "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "d686422de9ebc1e423a5831bd55b6167b8727e9c5591c0d9a068351c45776e63",
-  "incident_count": 1127,
+  "canonical_register_sha256": "3f662028416ed58752697f6c13dd2dd62af76c92778372dcd73ce1d20388f930",
+  "incident_count": 1128,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 595,
+      "agent_behavior": 596,
       "harness": 73,
       "operator": 291,
       "repository": 152,
@@ -19,7 +19,7 @@
       "evidence_misreport": 77,
       "harness_failure": 73,
       "operator_error": 291,
-      "output_contract_violation": 352,
+      "output_contract_violation": 353,
       "read_only_violation": 5,
       "reasoning_claim_error": 50,
       "repository_defect": 152,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 89,
       "integration_reviewer": 5,
-      "orchestrator": 970,
+      "orchestrator": 971,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 739,
+      "low": 740,
       "material": 135,
       "moderate": 253
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 233,
-      "canonical_unchanged": 710,
+      "canonical_unchanged": 711,
       "untrusted_partial_worktree": 184
     },
     "by_resource_and_role": {
@@ -429,7 +429,7 @@
       "postcompaction-five-source-rehydration-receipt::orchestrator": 1,
       "postexecution-hash-bound-focused-test::orchestrator": 1,
       "postpublication-baton-consistency::orchestrator": 2,
-      "postrestart-ariadne-receipt::orchestrator": 1,
+      "postrestart-ariadne-receipt::orchestrator": 2,
       "powershell-git-commit-peel-expression::orchestrator": 1,
       "powershell-read-only-inventory::orchestrator": 1,
       "pragmatic-adoption-closeout-intent::orchestrator": 2,
@@ -1778,6 +1778,30 @@
         "The typed manifest must render both live baton prose and boundary assertions from canonical tokens; denials never depend on grammatical carry-over.",
         "Treat graph/Compass advance, current-row fixtures, active-label classification and the live-handover byte budget as one closeout change set; measure and run the compactness check before the first full closeout packet and bind assertions to the new node and exact successor in the same patch.",
         "When a maintenance fixture intentionally binds prose, copy or deliberately add the exact normalized semantic phrase in the accepted baton row; use structured artifacts for numeric semantics instead of inventing alternate representations and read the entire assertion block before the next packet."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.manual_git_object_in_receipt_prose",
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-1117",
+        "AER-1128"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "categories": [
+        "output_contract_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "postrestart-ariadne-receipt"
+      ],
+      "prevention_controls": [
+        "The ergonomics review will test whether free-form Git evidence fields can be removed from operator input.",
+        "The next typed semantic builder will remove caller-authored Git-ref narrative from the ordinary receipt path while retaining the existing rejection guard."
       ]
     },
     {

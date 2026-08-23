@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 412,
-  "updated_at": "2026-08-23T15:59:03.2163529+10:00",
-  "source_graph_revision": 430,
-  "orientation_statement": "Repair the existing tick at the prospective publication boundary, remove measured operator work, preserve every safety invariant and add no new form or approval gate.",
+  "map_revision": 413,
+  "updated_at": "2026-08-23T16:46:31.8267653+10:00",
+  "source_graph_revision": 431,
+  "orientation_statement": "Preserve the clock's safety escapement while replacing repository-known operator memory with prospective typed readings.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5255,22 +5255,41 @@
         "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/evidence.json",
         "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/report.md"
       ]
+    },
+    {
+      "node_id": "ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair",
+      "lineage_parent": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
+      "strategic_role": "Turn the clockwork ergonomics review's highest-confidence recommendation into one existing-tick control repair.",
+      "outcome": "Complete prospective human-evidence errors and command-local transaction facts are machine readings rather than postpublication operator reconstruction.",
+      "evidence": [
+        "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/report.md",
+        "docs/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-plan.md",
+        "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/evidence.json",
+        "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/report.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
-    "strategic_role": "Move complete prospective evidence validation and transaction-derived facts into the existing clockwork tick",
-    "why_now": "The latest accepted closeout required three rollbacks for facts computable before publication, and the review identifies a repair with zero net new operator burden.",
-    "outcome": "The existing tick will reject the full prospective evidence error set before pointer movement and own its transaction accounting without weakening rollback safety.",
+    "node_id": "ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair",
+    "strategic_role": "Keep fail-closed governance safety while moving repository-known clerical work off the operator.",
+    "why_now": "The preceding packet measured three avoidable postpublication rollback shapes and the existing tick can derive all three without a new control layer.",
+    "outcome": "One preparation pass returns all human-evidence defects and every command reports its own exact transaction facts.",
     "unlocks": [
-      "A matched future closeout can measure fewer postpublication rollbacks and operator inputs against unchanged safety coverage."
+      "A matched live closeout can use prospective validation before pointer movement.",
+      "Future efficacy readings can consume output-owned command facts instead of manual counters.",
+      "The next tranche can target remaining high-volume free-form fields after a passing first repair."
     ],
     "does_not_solve": [
-      "It does not qualify the native Harness, reconcile worker-allocation prose, select check-in operational facts or alter product behavior."
+      "It does not make every future closeout error-free.",
+      "It does not reconstruct cumulative history absent retained machine outputs.",
+      "It does not qualify a DeepSeek transport or invoke a provider.",
+      "It does not open check-in operational choices, product runtime or protected integration."
     ],
     "evidence": [
-      "orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/evidence.json",
-      "docs/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review-closeout.md"
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/evidence.json",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/report.md",
+      "docs/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

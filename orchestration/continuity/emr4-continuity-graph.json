@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 430,
+  "graph_revision": 431,
   "harvests": [],
   "nodes": [
     {
@@ -34699,9 +34699,113 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair",
+      "title": "Provider-free governance clockwork prospective current-node evidence and transaction-fact derivation repair",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's explicit ergonomics-review request and standing authority selected the measured existing-tick repair.",
+          "GPT Sol held the serial implementation and acceptance lease.",
+          "No Harness, provider, authority allocation, product, data, runtime or protected surface opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "validate-complete-prospective-human-evidence-set",
+          "source": "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/evidence.json",
+          "status": "accepted",
+          "summary": "Validate all prospective plan, closeout and acceptance paths and headers before transaction projection or canonical write."
+        },
+        {
+          "id": "return-one-typed-complete-error-set",
+          "source": "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/report.md",
+          "status": "accepted",
+          "summary": "Return every detectable prospective human-evidence defect together as typed revision-required JSON with zero publication or lease movement."
+        },
+        {
+          "id": "derive-command-local-transaction-facts",
+          "source": "scripts/ariadne_governance_clockwork_tick.py",
+          "status": "accepted",
+          "summary": "Emit exact command-local preparation, publication, readback, rollback, lease and generation facts without new intent fields or invented historical totals."
+        },
+        {
+          "id": "select-typed-semantic-builder-successor",
+          "source": "docs/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-closeout.md",
+          "status": "accepted",
+          "summary": "Use the passing matched reading to target the remaining highest-yield free-form closeout choices inside the existing tick."
+        }
+      ],
+      "claim_scope": [
+        "The existing tick rejects the complete prospective plans, closeouts and acceptances error set before publication.",
+        "The CLI emits command-local transaction facts for dry, rejected, published, idempotent and rollback dispositions.",
+        "The three previously measured rollback shapes are now prepublication or output-owned.",
+        "Zero new required operator fields, approvals, gates, ledgers, closeout documents or runtime control layers were added.",
+        "The result is provider-free governance evidence and makes no product or worker-reliability claim."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-plan.md",
+          "docs/security/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/evidence.json",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/report.md",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-23--clockwork-prospective-evidence-and-transaction-fact-repair.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-restored-session-attempt-001-rejected-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-restored-session-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "unresolved_gates": [
+        "The broader typed semantic closeout builder and command registry remain unimplemented until their exact zero-added-bureaucracy plan passes.",
+        "Native useful-completion reliability remains unproved and the pinned occupied profile remains paused.",
+        "The generic Authority Allocation prose conflict remains recorded and outside this repair.",
+        "All check-in external operational facts and human choices remain closed.",
+        "Product, provider, runtime, deployment, Pages and protected refs remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T16:46:31.8267653+10:00",
+      "updated_at": "2026-08-23T16:46:31.8267653+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "8f0e436730b3704ee7b3f94cb68df6d57d3e02da",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T15:59:03.2163529+10:00"
+  "updated_at": "2026-08-23T16:46:31.8267653+10:00"
 }

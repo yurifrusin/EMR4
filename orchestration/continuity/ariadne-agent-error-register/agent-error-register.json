@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 645,
+  "register_revision": 646,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -43405,6 +43405,42 @@
       },
       "incident_id": "AER-1127",
       "attempt_id": "clock-fb65f7e1547e636e86e9fa04",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "clockwork-prospective-evidence-repair",
+      "role": "orchestrator",
+      "resource_id": "postrestart-ariadne-receipt",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_preflight",
+      "stage": "acceptance",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Git reference evidence is supplied exclusively by the machine-owned snapshot.",
+      "observed_error": "The first restored-session receipt draft repeated two full Git object IDs in narrative git_refs_and_worktree evidence.",
+      "detection_method": "The Ariadne preflight returned revision_required with git_refs_evidence_manual_object_id_forbidden and count two before publication; the machine-snapshot-only correction passed.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-restored-session-attempt-001-rejected-receipt.json",
+        "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-restored-session-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_git_object_in_receipt_prose",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove every manually repeated Git object and retain only the machine-owned Git snapshot binding.",
+        "prevention_control": "The next typed semantic builder will remove caller-authored Git-ref narrative from the ordinary receipt path while retaining the existing rejection guard.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-restored-session-receipt.json"
+        ]
+      },
+      "incident_id": "AER-1128",
+      "attempt_id": "clock-8f1fefe71728e50de1062846",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

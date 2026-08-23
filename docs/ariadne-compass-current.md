@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Repair the existing tick at the prospective publication boundary, remove measured operator work, preserve every safety invariant and add no new form or approval gate.
+> Preserve the clock's safety escapement while replacing repository-known operator memory with prospective typed readings.
 
 ## North star
 
@@ -630,22 +630,29 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The complete reference-only chain is exact and fail-closed while ordinary-practice activation and every external fact remain closed. Lineage parent: `raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review`.
 307. **Measure the cost and benefit of the governance clockwork after extended native-Harness coupling work — Provider-free read-only governance clockwork ergonomics and efficacy review**
    Strong safety is retained while one high-yield zero-added-bureaucracy interface repair is selected. Lineage parent: `raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal`.
+308. **Turn the clockwork ergonomics review's highest-confidence recommendation into one existing-tick control repair. — Provider-free governance clockwork prospective current-node evidence and transaction-fact derivation repair**
+   Complete prospective human-evidence errors and command-local transaction facts are machine readings rather than postpublication operator reconstruction. Lineage parent: `ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review`.
 
 ## Current position
 
-**Move complete prospective evidence validation and transaction-derived facts into the existing clockwork tick — Provider-free read-only governance clockwork ergonomics and efficacy review**
+**Keep fail-closed governance safety while moving repository-known clerical work off the operator. — Provider-free governance clockwork prospective current-node evidence and transaction-fact derivation repair**
 
-**Why this proof came next:** The latest accepted closeout required three rollbacks for facts computable before publication, and the review identifies a repair with zero net new operator burden.
+**Why this proof came next:** The preceding packet measured three avoidable postpublication rollback shapes and the existing tick can derive all three without a new control layer.
 
-The existing tick will reject the full prospective evidence error set before pointer movement and own its transaction accounting without weakening rollback safety.
+One preparation pass returns all human-evidence defects and every command reports its own exact transaction facts.
 
 ### What this unlocks
 
-- A matched future closeout can measure fewer postpublication rollbacks and operator inputs against unchanged safety coverage.
+- A matched live closeout can use prospective validation before pointer movement.
+- Future efficacy readings can consume output-owned command facts instead of manual counters.
+- The next tranche can target remaining high-volume free-form fields after a passing first repair.
 
 ### What it does not solve
 
-- It does not qualify the native Harness, reconcile worker-allocation prose, select check-in operational facts or alter product behavior.
+- It does not make every future closeout error-free.
+- It does not reconstruct cumulative history absent retained machine outputs.
+- It does not qualify a DeepSeek transport or invoke a provider.
+- It does not open check-in operational choices, product runtime or protected integration.
 
 ## Continuity and authority
 
@@ -1255,7 +1262,8 @@ Prerequisites:
 - `docs/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal-plan.md`
 - `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-closeout.md`
 - `docs/ariadne-provider-free-continuity-journal-and-refinement-promotion-plan.md`
-- `docs/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review-closeout.md`
+- `docs/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-closeout.md`
+- `docs/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-plan.md`
 - `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-closeout.md`
 - `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture-plan.md`
 - `docs/ariadne-provider-free-shadow-clockwork-deepseek-broker-gear-architecture.md`
@@ -2108,6 +2116,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-retry-pre-verifier-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-retry-pre-verifier-runtime-state.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-corrected-pre-verifier-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-corrected-pre-verifier-runtime-state.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-command-manifest.json`
@@ -2763,6 +2772,8 @@ Prerequisites:
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/contract.json`
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/migration-report.md`
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/provider-free-migration-evidence.json`
+- `orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/evidence.json`
+- `orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/report.md`
 - `orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-evidence.json`
 - `orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-report.md`
 - `orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/evidence.json`
@@ -3918,4 +3929,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 412; continuity graph revision 430._
+_Compass map revision 413; continuity graph revision 431._
