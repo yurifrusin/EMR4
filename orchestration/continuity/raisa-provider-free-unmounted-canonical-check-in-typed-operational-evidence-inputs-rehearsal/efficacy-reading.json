@@ -1,0 +1,29 @@
+{
+  "schema_version": "emr4.typed_operational_evidence_input_efficacy.v1",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+  "reviewed_source": "9011d83d769f45bb717c039a126a890d43922dce",
+  "task_completion": true,
+  "scope_integrity": true,
+  "focused_and_surrounding_tests_passed": 201,
+  "native_harness": {
+    "selected": false,
+    "declined": true,
+    "reason": "accepted_custom_runner_is_prompt_and_one_edit_specific_and_cannot_be_reused_unchanged",
+    "new_runner_broker_or_guard_engineering": false,
+    "provider_calls": 0,
+    "performance_conclusion": "not_measured"
+  },
+  "workflow": {
+    "preplanning_machine_receipt_prevented_manual_git_object_binding": true,
+    "corrected_local_observation_count_before_closeout": 5,
+    "candidate_reimplementation_count": 0,
+    "generic_harness_test_count": 0,
+    "worker_transport_fallback_count": 0
+  },
+  "adoption_reading": {
+    "native_harness_retained_role": "monitored_secondary_worker",
+    "default_worker_promotion": false,
+    "more_generic_harness_testing_required": false,
+    "next_use_rule": "select_only_an_already_accepted_task_shape_compatible_runner_otherwise_decline_without_interoperability_work"
+  }
+}

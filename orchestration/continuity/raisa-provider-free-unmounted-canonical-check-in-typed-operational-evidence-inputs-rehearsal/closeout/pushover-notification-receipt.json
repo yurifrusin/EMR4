@@ -1,0 +1,9 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+  "status": 1,
+  "request": "5f78e9a2-101c-4112-954b-8001beb93676",
+  "contains_phi": false,
+  "engine_state": "continuing",
+  "next_workstream": "pure environment evidence-gate evaluator"
+}

@@ -3,30 +3,30 @@
   "database_authority": "closed",
   "commands": [
     {
-      "command_id": "manifest-normalizer-closeout-tick-check",
+      "command_id": "typed-input-closeout-tick-check",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_governance_clockwork_tick",
         "--check",
         "--intent",
-        "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/closeout/closeout-intent.json"
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/closeout/closeout-intent.json"
       ],
       "completion_contract": "final_exit_code_zero_required",
       "verification_phase": "prepublication"
     },
     {
-      "command_id": "manifest-normalizer-closeout-provider-free-tests",
+      "command_id": "typed-input-closeout-provider-free-tests",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "scripts.ariadne_provider_free_pytest",
         "--repo-root",
         "C:/Users/sarashera/emr4",
+        "tests/test_appointment_check_in_operational_evidence.py",
         "tests/test_appointment_check_in_environment_manifest.py",
-        "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
         "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
-        "tests/test_raisa_provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_rehearsal.py",
+        "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
         "tests/test_api_spine_artifacts.py",
         "tests/test_ariadne_agent_error_register.py",
         "tests/test_ariadne_active_operation_latch.py",
@@ -37,7 +37,7 @@
       "verification_phase": "prepublication"
     },
     {
-      "command_id": "manifest-normalizer-closeout-postpublication-readback",
+      "command_id": "typed-input-closeout-postpublication-readback",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
@@ -49,6 +49,7 @@
         "tests/test_ariadne_active_operation_latch.py",
         "tests/test_ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_transactional_closeout.py",
+        "tests/test_appointment_check_in_operational_evidence.py",
         "tests/test_appointment_check_in_environment_manifest.py",
         "tests/test_api_spine_artifacts.py"
       ],

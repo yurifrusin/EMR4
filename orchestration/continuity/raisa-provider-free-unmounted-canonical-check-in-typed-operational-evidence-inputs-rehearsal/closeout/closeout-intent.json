@@ -1,0 +1,446 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+    "title": "Canonical check-in typed operational-evidence inputs",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T11:20:38.5755231+10:00",
+    "node": {
+      "id": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+      "title": "Canonical check-in typed operational-evidence inputs",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the next dependency-satisfied provider-free repository node without a ceremonial pause.",
+          "The typed model is authored-reference-only and grants no external-fact, evaluator, admission, secret, runtime or product authority.",
+          "The native Harness lane was declined because no already accepted runner fits this task unchanged; no new runner engineering or fallback was authorized."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-closed-typed-operational-evidence-inputs",
+          "source": "app/services/appointment_check_in_operational_evidence.py",
+          "status": "accepted",
+          "summary": "Accept immutable structural inputs for one role attestation, three ordered rotation/custody attestations and deny-only break-glass evidence."
+        },
+        {
+          "id": "defer-all-evidence-gate-decisions",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/contract.json",
+          "status": "accepted",
+          "summary": "Keep manifest comparison, full-object binding, uniqueness, explicit-time freshness, verifier independence and break-glass decisions in the later pure evaluator."
+        },
+        {
+          "id": "decline-incompatible-native-runner-without-interop-sequel",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Continue real development without adapting the one-edit prompt-specific accepted runner or reopening generic Harness qualification."
+        },
+        {
+          "id": "accept-sol-serial-source-and-verification",
+          "source": "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the exact Sol implementation after 57 focused and 201 focused/surrounding tests plus deterministic hygiene and source review."
+        }
+      ],
+      "claim_scope": [
+        "The module normalizes one explicitly supplied built-in object into frozen typed data or one closed denial.",
+        "No Boolean is an admissible evidence claim; categorical role observations remain external-verifier readbacks rather than repository truth.",
+        "Structurally valid mismatch, self-verifier, future-stale and non-inactive break-glass inputs remain representable for the later evaluator.",
+        "The module reads no file, process environment, configuration, credential, YAML, database, route, network or current clock.",
+        "No native Harness process, provider call, transport fallback or generic interoperability test occurred.",
+        "No operational manifest, external fact, secret, admission, product runtime, deployment, Pages or protected-ref action occurred."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/evidence.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/report.md",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_appointment_check_in_operational_evidence.py",
+          "tests/test_appointment_check_in_environment_manifest.py",
+          "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
+          "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "artifacts": [
+          "app/services/appointment_check_in_operational_evidence.py",
+          "orchestration/human_inbox/yuri/2026-08-23--canonical-check-in-typed-operational-evidence-inputs.md",
+          "docs/ariadne-agent-error-correction-register-revision-640.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The pure environment evidence-gate evaluator remains unimplemented.",
+        "The default-off admission input seam remains a later separately frozen product-adjacent node.",
+        "No operational manifest instance, external verifier selection or external operational fact exists.",
+        "No accepted task-shape-compatible native Harness runner was available for this package.",
+        "Ordinary-practice activation, product runtime, deployment and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Make external role, custody/rotation and break-glass evidence readable by deterministic controls without converting input shape into authority",
+      "outcome": "The closed immutable input model is accepted and the workflow advanced real product-enabling source without another Harness interoperability detour.",
+      "evidence": [
+        "docs/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-closeout.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/evidence.json"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Complete the provider-free reference-only evidence gate before any default-off admission seam",
+      "why_now": "The normalizer and typed operational-evidence inputs are both complete, so the pure evaluator is the narrowest dependency-satisfied repository node.",
+      "outcome": "One pure function can compare explicit normalized inputs at an explicit evaluation time and return only the accepted typed evidence-gate reading.",
+      "unlocks": [
+        "Deterministic manifest/evidence binding and closed denial reasons.",
+        "Authored-reference hostile conformance for mismatch, uniqueness, self-verification, staleness and break glass.",
+        "A later separately frozen default-off admission input seam."
+      ],
+      "does_not_solve": [
+        "A pure evaluator does not create or authenticate an external operational fact.",
+        "The admission seam, route, ordinary activation and client cutover remain closed.",
+        "No provider, live environment, secret, database or lasting action is authorized."
+      ],
+      "evidence": [
+        "app/services/appointment_check_in_environment_manifest.py",
+        "app/services/appointment_check_in_operational_evidence.py",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json"
+      ],
+      "orientation_statement": "Implement only the pure evaluator, reuse an already accepted compatible Harness runner if one exists, and otherwise decline the native lane without new interoperability work."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "active_tranche": "Provider-free unmounted canonical check-in pure environment evidence-gate evaluator rehearsal",
+      "objective": "Freeze and implement only the pure evaluator over the accepted normalized manifest and typed operational-evidence inputs, using an explicit evaluation time and closed evidence-gate reasons with no external fact, admission seam or runtime mount.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and the accepted gap decomposition authorize the next dependency-satisfied provider-free repository node without a ceremonial pause.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_pure_evaluator_contract_and_parallelism_reading"
+    },
+    "incidents": [
+      {
+        "incident_id": "typed-input-preplanning-manual-git-binding",
+        "source_id": "typed-input-local-001",
+        "peers": []
+      },
+      {
+        "incident_id": "typed-input-architecture-path-binding",
+        "source_id": "typed-input-local-002",
+        "peers": []
+      },
+      {
+        "incident_id": "typed-input-source-guard-substring",
+        "source_id": "typed-input-local-003",
+        "peers": []
+      },
+      {
+        "incident_id": "typed-input-historical-tripwire-precommit-view",
+        "source_id": "typed-input-local-004",
+        "peers": []
+      },
+      {
+        "incident_id": "typed-input-unhashable-enum",
+        "source_id": "typed-input-local-005",
+        "peers": []
+      }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v2",
+    "database_authority": "closed",
+    "commands": [
+      {
+        "command_id": "typed-input-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "typed-input-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_appointment_check_in_operational_evidence.py",
+          "tests/test_appointment_check_in_environment_manifest.py",
+          "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
+          "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "typed-input-closeout-postpublication-readback",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_appointment_check_in_operational_evidence.py",
+          "tests/test_appointment_check_in_environment_manifest.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "postpublication"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-plan.md",
+      "docs/security/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-threat-model-delta.md",
+      "app/services/appointment_check_in_environment_manifest.py",
+      "tests/test_appointment_check_in_environment_manifest.py",
+      "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/contract.json",
+      "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-terminal.json",
+      "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-terminal-review.json",
+      "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-cleanup-readback.json",
+      "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/efficacy-reading.json",
+      "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-23--canonical-check-in-manifest-normalizer-and-native-harness-reading.md",
+      "docs/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-threat-model-delta.md",
+      "app/services/appointment_check_in_operational_evidence.py",
+      "tests/test_appointment_check_in_operational_evidence.py",
+      "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
+      "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/contract.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/evidence.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/report.md",
+      "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-640.md",
+      "docs/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-23--canonical-check-in-typed-operational-evidence-inputs.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_authored_reference_only_pure_environment_evidence_gate_evaluator",
+    "accepted_normalizer_and_typed_inputs_only",
+    "explicit_caller_supplied_evaluation_time_no_current_clock_read",
+    "closed_evidence_gate_reading_only_default_off_admission_seam_deferred",
+    "external_operational_facts_remain_absent_and_unselected",
+    "reuse_only_already_accepted_compatible_native_harness_machinery_or_decline_lane",
+    "no_generic_harness_interoperability_qualification_or_new_runner_broker_guard",
+    "no_operational_manifest_secret_value_reference_resolution_environment_variable_configuration_or_credential_store_access",
+    "no_database_conftest_engine_schema_fixture_docker_postgresql_sql_live_role_or_infrastructure_action",
+    "no_route_call_api_openapi_graphql_client_configuration_or_product_mounting",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "typed-input-preplanning-git-binding-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "typed-input-preplanning-receipt",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Git ref evidence is supplied only by the machine snapshot rather than duplicated in narrative runtime state.",
+      "observed_error": "The first runtime-state draft repeated four full Git objects in the git-ref narrative and the preflight rejected it.",
+      "detection_method": "The machine preflight returned git_refs_evidence_manual_object_id_forbidden before planning receipt acceptance.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-preplanning-runtime-state.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preflight_manual_git_ref_evidence_binding",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove manual object IDs and rely exclusively on the exact preflight snapshot.",
+        "prevention_control": "The clockwork preflight rejects manually duplicated Git-object evidence before a receipt can pass.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-preplanning-receipt.json"
+        ]
+      },
+      "baton_summary": "records one rejected manual Git-binding draft and successful machine-only correction."
+    },
+    {
+      "attempt_key": "typed-input-architecture-path-binding-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "typed-input-active-acceptance-paths",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_read",
+      "stage": "dispatch",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "Every active acceptance path in a five-source receipt names an exact existing retained artifact.",
+      "observed_error": "The first draft used a descriptive architecture operation name rather than the exact retained default-off manifest-secret-posture paths.",
+      "detection_method": "Exact repository reads returned path-not-found and a filename inventory identified the accepted retained paths before implementation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-preplanning-runtime-state.json",
+        "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.active_acceptance_descriptive_path_not_exact_retained_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace all three descriptive paths with the exact retained document, contract and schema paths and regenerate the receipt.",
+        "prevention_control": "Active acceptance paths are existence-read before the receipt is treated as controlling evidence.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-preplanning-runtime-state.json"
+        ]
+      },
+      "baton_summary": "records one corrected descriptive-versus-exact acceptance-path binding."
+    },
+    {
+      "attempt_key": "typed-input-source-guard-substring-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "typed-input-source-capability-guard",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "A capability source guard matches an actual forbidden API token without colliding with accepted field names.",
+      "observed_error": "The first guard searched for the fragment environ and matched the required environment_identifier field.",
+      "detection_method": "The focused test failed on its own overbroad substring while all behavioral cases passed.",
+      "evidence_paths": [
+        "tests/test_appointment_check_in_operational_evidence.py"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.capability_guard_word_fragment_false_positive",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Match os.environ exactly rather than the ordinary-language fragment.",
+        "prevention_control": "Source guards use semantic API spellings rather than substrings embedded in accepted identifiers.",
+        "evidence_paths": [
+          "tests/test_appointment_check_in_operational_evidence.py"
+        ]
+      },
+      "baton_summary": "records one corrected overbroad source-capability guard."
+    },
+    {
+      "attempt_key": "typed-input-tripwire-precommit-view-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "typed-input-historical-gap-tripwire",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The historical descendant tripwire can verify the exact authorized application diff before the candidate commit.",
+      "observed_error": "The first form compared only plan-source-to-HEAD committed history and therefore could not see the new staged implementation during precommit verification.",
+      "detection_method": "The surrounding test expected the new exact path while its Git command returned only the previously committed normalizer.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.historical_tripwire_committed_only_precommit_blind_spot",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Compare the plan source directly with the working/index view so exact staged descendants are visible before commit.",
+        "prevention_control": "Authorized-descendant tripwires use a precommit-visible Git comparison while keeping the path allowlist exact.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"
+        ]
+      },
+      "baton_summary": "records one repaired committed-only precommit tripwire blind spot."
+    },
+    {
+      "attempt_key": "typed-input-unhashable-enum-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "typed-input-source-review",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_source_review",
+      "stage": "acceptance",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "Every caller-controlled scalar shape returns a closed denial rather than escaping through Python membership behavior.",
+      "observed_error": "Direct review found that an unhashable list in a frozenset-backed categorical field could raise before shape denial.",
+      "detection_method": "Sol inspected the successful candidate before commit and traced enum membership with hostile non-string values.",
+      "evidence_paths": [
+        "app/services/appointment_check_in_operational_evidence.py",
+        "tests/test_appointment_check_in_operational_evidence.py"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.unhashable_typed_input_enum_membership_escape",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Require exact string type before every categorical membership and add adversarial list regressions.",
+        "prevention_control": "Closed categorical validators type-check before set, tuple or equality membership.",
+        "evidence_paths": [
+          "app/services/appointment_check_in_operational_evidence.py",
+          "tests/test_appointment_check_in_operational_evidence.py"
+        ]
+      },
+      "baton_summary": "records one corrected fail-closed unhashable enum edge."
+    }
+  ]
+}

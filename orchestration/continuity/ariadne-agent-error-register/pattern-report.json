@@ -1,45 +1,45 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 639,
+  "register_revision": 640,
   "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "cf83933c5d8121fd4dd9dd75c15cf9e1a998ba461920be4008c8bc9fbf45aac7",
-  "incident_count": 1082,
+  "canonical_register_sha256": "ee446c3575cdfee05143de9e0771a6ebc5a5b48fb28a87a0ff5ef102fa6b0fdc",
+  "incident_count": 1087,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 564,
+      "agent_behavior": 566,
       "harness": 73,
       "operator": 283,
-      "repository": 146,
+      "repository": 149,
       "transport": 16
     },
     "by_category": {
       "command_scope_violation": 111,
-      "evidence_misreport": 76,
+      "evidence_misreport": 77,
       "harness_failure": 73,
       "operator_error": 283,
-      "output_contract_violation": 322,
+      "output_contract_violation": 323,
       "read_only_violation": 5,
       "reasoning_claim_error": 50,
-      "repository_defect": 146,
+      "repository_defect": 149,
       "transport_timeout": 16
     },
     "by_role": {
       "implementer": 84,
       "integration_reviewer": 3,
-      "orchestrator": 932,
+      "orchestrator": 937,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 708,
+      "low": 710,
       "material": 135,
-      "moderate": 239
+      "moderate": 242
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 228,
-      "canonical_unchanged": 679,
-      "untrusted_partial_worktree": 175
+      "canonical_unchanged": 681,
+      "untrusted_partial_worktree": 178
     },
     "by_resource_and_role": {
       "accepted-guard-graph-clockwork-publication::orchestrator": 1,
@@ -512,6 +512,11 @@
       "transactional-closeout-shadow-fixture::orchestrator": 1,
       "transactional-contract-evidence-field::orchestrator": 1,
       "transactional-contract-evidence-projection::orchestrator": 1,
+      "typed-input-active-acceptance-paths::orchestrator": 1,
+      "typed-input-historical-gap-tripwire::orchestrator": 1,
+      "typed-input-preplanning-receipt::orchestrator": 1,
+      "typed-input-source-capability-guard::orchestrator": 1,
+      "typed-input-source-review::orchestrator": 1,
       "typed-useful-worker-clockwork-checkpoint::orchestrator": 1,
       "typed-useful-worker-preexecution-contract::orchestrator": 1,
       "useful-worker-checkpoint-controller::orchestrator": 1,

@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Continue development, reuse only already accepted compatible Harness machinery, and decline the native lane rather than reopen generic interoperability testing.
+> Implement only the pure evaluator, reuse an already accepted compatible Harness runner if one exists, and otherwise decline the native lane without new interoperability work.
 
 ## North star
 
@@ -616,26 +616,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The accepted controls are reduced to the gears needed for traceability, containment and Sol acceptance, and the first real assignment is selected. Lineage parent: `raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition`.
 300. **Complete the first real source assignment under pragmatic native-Harness adoption while preserving fail-closed operational boundaries — Canonical check-in manifest normalizer**
    The real unmounted normalizer is accepted through Sol recovery and the native transport mismatch has a bounded attributable reading without another interoperability tranche. Lineage parent: `deepseek-native-harness-pragmatic-development-adoption-review-and-plan`.
+301. **Make external role, custody/rotation and break-glass evidence readable by deterministic controls without converting input shape into authority — Canonical check-in typed operational-evidence inputs**
+   The closed immutable input model is accepted and the workflow advanced real product-enabling source without another Harness interoperability detour. Lineage parent: `raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer`.
 
 ## Current position
 
-**Build the remaining provider-free reference-only environment-evidence model before any evaluator or admission seam — Canonical check-in manifest normalizer**
+**Complete the provider-free reference-only evidence gate before any default-off admission seam — Canonical check-in typed operational-evidence inputs**
 
-**Why this proof came next:** The normalizer prerequisite is complete and typed operational-evidence inputs are the narrowest dependency-satisfied repository node.
+**Why this proof came next:** The normalizer and typed operational-evidence inputs are both complete, so the pure evaluator is the narrowest dependency-satisfied repository node.
 
-One unmounted typed input model can make the later pure evaluator possible without asserting that any external operational fact exists.
+One pure function can compare explicit normalized inputs at an explicit evaluation time and return only the accepted typed evidence-gate reading.
 
 ### What this unlocks
 
-- A closed typed representation for runtime-role, rotation, custody, break-glass and freshness readings.
-- The later pure environment evidence-gate evaluator.
-- Another bounded real-work reading if an already accepted compatible native-Harness runner is available.
+- Deterministic manifest/evidence binding and closed denial reasons.
+- Authored-reference hostile conformance for mismatch, uniqueness, self-verification, staleness and break glass.
+- A later separately frozen default-off admission input seam.
 
 ### What it does not solve
 
-- Typed inputs do not create or validate a live operational fact.
-- The evaluator and default-off admission input seam remain later nodes.
-- No ordinary-practice activation or external action is authorized.
+- A pure evaluator does not create or authenticate an external operational fact.
+- The admission seam, route, ordinary activation and client cutover remain closed.
+- No provider, live environment, secret, database or lasting action is authorized.
 
 ## Continuity and authority
 
@@ -1134,6 +1136,7 @@ Prerequisites:
 - `app/services/application_identity_oidc_redemption_database_role.py`
 - `app/services/application_identity_oidc_transport.py`
 - `app/services/appointment_check_in_environment_manifest.py`
+- `app/services/appointment_check_in_operational_evidence.py`
 - `app/services/appointment_check_in_product_adapter.py`
 - `app/services/appointment_delete_composition.py`
 - `app/services/appointment_delete_physical.py`
@@ -1687,6 +1690,7 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-canonical-check-in-product-adapter-extraction-rehearsal-plan.md`
+- `docs/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal-plan.md`
 - `docs/raisa-provider-free-unmounted-cf-d2-event-cue-inert-ddl-lowering-closeout.md`
@@ -3135,6 +3139,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-two-projection-truth-parity-conformance-rehearsal/two-projection-truth-parity-evidence.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-authored-synthetic-shadow-comparison-rehearsal/provider-free-authored-synthetic-shadow-comparison-evidence.schema.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/evidence.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/admission-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-admission-rehearsal/provider-free-unmounted-admission-evidence.json`
@@ -3893,4 +3898,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 405; continuity graph revision 423._
+_Compass map revision 406; continuity graph revision 424._

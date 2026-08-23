@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "9011d83d769f45bb717c039a126a890d43922dce",
+  "source_commit": "9011d83d769f45bb717c039a126a890d43922dce",
+  "generation_id": "gen-00dfb5a6748d2740d1d60b4d615a8c515e0aed69055730c5def90e60a0fb775e",
+  "bundle_sha256": "00dfb5a6748d2740d1d60b4d615a8c515e0aed69055730c5def90e60a0fb775e",
+  "previous_generation_id": "gen-3b10578b61559dd2d4b5bf52646327845ee79ced26556622a1ad7bc2b6606d8f",
+  "previous_source_commit": "9011d83d769f45bb717c039a126a890d43922dce",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 198,
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+  "event_kind": "clean_closeout",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

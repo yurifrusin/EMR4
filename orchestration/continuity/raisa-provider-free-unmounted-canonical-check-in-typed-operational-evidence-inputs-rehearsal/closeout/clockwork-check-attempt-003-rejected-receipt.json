@@ -1,0 +1,10 @@
+{
+  "schema_version": "ariadne.governance_live_tick_rejected_attempt.v1",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+  "attempt_id": "typed-input-closeout-check-003",
+  "mode": "check",
+  "status": "revision_required",
+  "reason_code": "tick_incident_revision_path",
+  "canonical_state_changed": false,
+  "correction": "retain_only_the_current_revision_document_in_the_active_baton_acceptance_paths"
+}

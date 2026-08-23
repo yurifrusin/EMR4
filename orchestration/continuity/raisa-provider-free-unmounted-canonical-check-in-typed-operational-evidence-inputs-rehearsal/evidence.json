@@ -1,0 +1,49 @@
+{
+  "schema_version": "emr4.check-in-operational-evidence-inputs-evidence.v1",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+  "reviewed_source": "9011d83d769f45bb717c039a126a890d43922dce",
+  "result": "pass",
+  "implementation": {
+    "module": "app/services/appointment_check_in_operational_evidence.py",
+    "input_schema_version": "emr4.check-in-operational-evidence-inputs.v1",
+    "role_attestation_count": 1,
+    "rotation_custody_attestation_count": 3,
+    "break_glass_evidence_count": 1,
+    "boolean_claim_field_count": 0,
+    "effect_method_count": 0,
+    "external_fact_selected_count": 0
+  },
+  "verification": {
+    "focused_tests_passed": 57,
+    "focused_and_surrounding_tests_passed": 201,
+    "ruff": "passed",
+    "compile": "passed",
+    "git_diff_check": "passed",
+    "source_review": "passed"
+  },
+  "deferred_semantics": {
+    "manifest_comparison": true,
+    "cross_record_binding_and_uniqueness": true,
+    "explicit_evaluation_time_freshness": true,
+    "independent_verifier_separation": true,
+    "break_glass_gate_decision": true,
+    "admission_seam": true
+  },
+  "parallelism": {
+    "deepseek_flash": "declined_incompatible_accepted_runner_no_new_runner_engineering",
+    "gemini_verifier": "declined_low_risk_unmounted_no_trigger",
+    "native_subagents": "declined_developer_policy",
+    "serial_owner": "gpt_sol"
+  },
+  "closed_boundaries": {
+    "provider_or_network_used": false,
+    "external_evidence_or_secret_read": false,
+    "database_or_route_used": false,
+    "evaluator_or_admission_added": false,
+    "ordinary_practice_enabled": false,
+    "product_or_client_changed": false,
+    "production_deployment_release_or_pages": false,
+    "protected_ref_moved": false
+  },
+  "reasons": []
+}

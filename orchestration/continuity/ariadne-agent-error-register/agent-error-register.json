@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 639,
+  "register_revision": 640,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -41768,6 +41768,185 @@
       "incident_id": "AER-1082",
       "attempt_id": "clock-e7b57ff54555997d01e6a356",
       "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "typed-input-preplanning-receipt",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_orchestrator_preflight",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Git ref evidence is supplied only by the machine snapshot rather than duplicated in narrative runtime state.",
+      "observed_error": "The first runtime-state draft repeated four full Git objects in the git-ref narrative and the preflight rejected it.",
+      "detection_method": "The machine preflight returned git_refs_evidence_manual_object_id_forbidden before planning receipt acceptance.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-preplanning-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-preplanning-runtime-state.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.preflight_manual_git_ref_evidence_binding",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove manual object IDs and rely exclusively on the exact preflight snapshot.",
+        "prevention_control": "The clockwork preflight rejects manually duplicated Git-object evidence before a receipt can pass.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-preplanning-receipt.json"
+        ]
+      },
+      "incident_id": "AER-1083",
+      "attempt_id": "clock-cf58803c2c2d1bcc6767569d",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "typed-input-active-acceptance-paths",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_read",
+      "stage": "dispatch",
+      "category": "evidence_misreport",
+      "process_severity": "moderate",
+      "expected_invariant": "Every active acceptance path in a five-source receipt names an exact existing retained artifact.",
+      "observed_error": "The first draft used a descriptive architecture operation name rather than the exact retained default-off manifest-secret-posture paths.",
+      "detection_method": "Exact repository reads returned path-not-found and a filename inventory identified the accepted retained paths before implementation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-preplanning-runtime-state.json",
+        "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.active_acceptance_descriptive_path_not_exact_retained_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Replace all three descriptive paths with the exact retained document, contract and schema paths and regenerate the receipt.",
+        "prevention_control": "Active acceptance paths are existence-read before the receipt is treated as controlling evidence.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-preplanning-runtime-state.json"
+        ]
+      },
+      "incident_id": "AER-1084",
+      "attempt_id": "clock-b5b9034d88837bcb24e3a147",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "typed-input-source-capability-guard",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "low",
+      "expected_invariant": "A capability source guard matches an actual forbidden API token without colliding with accepted field names.",
+      "observed_error": "The first guard searched for the fragment environ and matched the required environment_identifier field.",
+      "detection_method": "The focused test failed on its own overbroad substring while all behavioral cases passed.",
+      "evidence_paths": [
+        "tests/test_appointment_check_in_operational_evidence.py"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.capability_guard_word_fragment_false_positive",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Match os.environ exactly rather than the ordinary-language fragment.",
+        "prevention_control": "Source guards use semantic API spellings rather than substrings embedded in accepted identifiers.",
+        "evidence_paths": [
+          "tests/test_appointment_check_in_operational_evidence.py"
+        ]
+      },
+      "incident_id": "AER-1085",
+      "attempt_id": "clock-b53f9bc9f9bfe6dfd4c8dcc9",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "typed-input-historical-gap-tripwire",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "deterministic_verification",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "The historical descendant tripwire can verify the exact authorized application diff before the candidate commit.",
+      "observed_error": "The first form compared only plan-source-to-HEAD committed history and therefore could not see the new staged implementation during precommit verification.",
+      "detection_method": "The surrounding test expected the new exact path while its Git command returned only the previously committed normalizer.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.historical_tripwire_committed_only_precommit_blind_spot",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Compare the plan source directly with the working/index view so exact staged descendants are visible before commit.",
+        "prevention_control": "Authorized-descendant tripwires use a precommit-visible Git comparison while keeping the path allowlist exact.",
+        "evidence_paths": [
+          "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"
+        ]
+      },
+      "incident_id": "AER-1086",
+      "attempt_id": "clock-c875952e46380b80a467438f",
+      "origin": "repository",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "typed-input-source-review",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_source_review",
+      "stage": "acceptance",
+      "category": "repository_defect",
+      "process_severity": "moderate",
+      "expected_invariant": "Every caller-controlled scalar shape returns a closed denial rather than escaping through Python membership behavior.",
+      "observed_error": "Direct review found that an unhashable list in a frozenset-backed categorical field could raise before shape denial.",
+      "detection_method": "Sol inspected the successful candidate before commit and traced enum membership with hostile non-string values.",
+      "evidence_paths": [
+        "app/services/appointment_check_in_operational_evidence.py",
+        "tests/test_appointment_check_in_operational_evidence.py"
+      ],
+      "candidate_state": "untrusted_partial_worktree",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "repository.unhashable_typed_input_enum_membership_escape",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Require exact string type before every categorical membership and add adversarial list regressions.",
+        "prevention_control": "Closed categorical validators type-check before set, tuple or equality membership.",
+        "evidence_paths": [
+          "app/services/appointment_check_in_operational_evidence.py",
+          "tests/test_appointment_check_in_operational_evidence.py"
+        ]
+      },
+      "incident_id": "AER-1087",
+      "attempt_id": "clock-a8aba120e287e102d7cb194c",
+      "origin": "repository",
       "related_incident_ids": [],
       "status": "corrected"
     }

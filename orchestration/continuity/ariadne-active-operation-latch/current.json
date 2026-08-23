@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
-  "active_tranche": "Provider-free unmounted canonical check-in typed operational-evidence inputs rehearsal",
-  "objective": "Freeze and implement only the closed typed operational-evidence input model required by the accepted gap decomposition, with authored-reference-only tests and no external fact, evaluator, admission seam or runtime mount.",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+  "active_tranche": "Provider-free unmounted canonical check-in pure environment evidence-gate evaluator rehearsal",
+  "objective": "Freeze and implement only the pure evaluator over the accepted normalized manifest and typed operational-evidence inputs, using an explicit evaluation time and closed evidence-gate reasons with no external fact, admission seam or runtime mount.",
   "status": "in_progress",
-  "source_head": "39502b308a96842ffe0dcf06f9325eb2fb14b6f9",
+  "source_head": "9011d83d769f45bb717c039a126a890d43922dce",
   "authority_source": "Yuri's standing uninterrupted-development authority and the accepted gap decomposition authorize the next dependency-satisfied provider-free repository node without a ceremonial pause.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_narrow_typed_input_contract_and_parallelism_reading",
+    "completed_stage": "Accepted raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_pure_evaluator_contract_and_parallelism_reading",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,8 +34,10 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_authored_reference_only_typed_operational_evidence_inputs",
-    "closed_input_model_only_evaluator_and_admission_seam_deferred",
+    "provider_free_authored_reference_only_pure_environment_evidence_gate_evaluator",
+    "accepted_normalizer_and_typed_inputs_only",
+    "explicit_caller_supplied_evaluation_time_no_current_clock_read",
+    "closed_evidence_gate_reading_only_default_off_admission_seam_deferred",
     "external_operational_facts_remain_absent_and_unselected",
     "reuse_only_already_accepted_compatible_native_harness_machinery_or_decline_lane",
     "no_generic_harness_interoperability_qualification_or_new_runner_broker_guard",

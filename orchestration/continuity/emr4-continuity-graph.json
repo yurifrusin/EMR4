@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 423,
+  "graph_revision": 424,
   "harvests": [],
   "nodes": [
     {
@@ -33948,9 +33948,111 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+      "title": "Canonical check-in typed operational-evidence inputs",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing uninterrupted-development authority permits the next dependency-satisfied provider-free repository node without a ceremonial pause.",
+          "The typed model is authored-reference-only and grants no external-fact, evaluator, admission, secret, runtime or product authority.",
+          "The native Harness lane was declined because no already accepted runner fits this task unchanged; no new runner engineering or fallback was authorized."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-closed-typed-operational-evidence-inputs",
+          "source": "app/services/appointment_check_in_operational_evidence.py",
+          "status": "accepted",
+          "summary": "Accept immutable structural inputs for one role attestation, three ordered rotation/custody attestations and deny-only break-glass evidence."
+        },
+        {
+          "id": "defer-all-evidence-gate-decisions",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/contract.json",
+          "status": "accepted",
+          "summary": "Keep manifest comparison, full-object binding, uniqueness, explicit-time freshness, verifier independence and break-glass decisions in the later pure evaluator."
+        },
+        {
+          "id": "decline-incompatible-native-runner-without-interop-sequel",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Continue real development without adapting the one-edit prompt-specific accepted runner or reopening generic Harness qualification."
+        },
+        {
+          "id": "accept-sol-serial-source-and-verification",
+          "source": "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the exact Sol implementation after 57 focused and 201 focused/surrounding tests plus deterministic hygiene and source review."
+        }
+      ],
+      "claim_scope": [
+        "The module normalizes one explicitly supplied built-in object into frozen typed data or one closed denial.",
+        "No Boolean is an admissible evidence claim; categorical role observations remain external-verifier readbacks rather than repository truth.",
+        "Structurally valid mismatch, self-verifier, future-stale and non-inactive break-glass inputs remain representable for the later evaluator.",
+        "The module reads no file, process environment, configuration, credential, YAML, database, route, network or current clock.",
+        "No native Harness process, provider call, transport fallback or generic interoperability test occurred.",
+        "No operational manifest, external fact, secret, admission, product runtime, deployment, Pages or protected-ref action occurred."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/evidence.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/report.md",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal-preplanning-receipt.json"
+        ],
+        "tests": [
+          "tests/test_appointment_check_in_operational_evidence.py",
+          "tests/test_appointment_check_in_environment_manifest.py",
+          "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
+          "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "artifacts": [
+          "app/services/appointment_check_in_operational_evidence.py",
+          "orchestration/human_inbox/yuri/2026-08-23--canonical-check-in-typed-operational-evidence-inputs.md",
+          "docs/ariadne-agent-error-correction-register-revision-640.md"
+        ]
+      },
+      "unresolved_gates": [
+        "The pure environment evidence-gate evaluator remains unimplemented.",
+        "The default-off admission input seam remains a later separately frozen product-adjacent node.",
+        "No operational manifest instance, external verifier selection or external operational fact exists.",
+        "No accepted task-shape-compatible native Harness runner was available for this package.",
+        "Ordinary-practice activation, product runtime, deployment and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T11:20:38.5755231+10:00",
+      "updated_at": "2026-08-23T11:20:38.5755231+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "9011d83d769f45bb717c039a126a890d43922dce",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T10:30:23.9779889+10:00"
+  "updated_at": "2026-08-23T11:20:38.5755231+10:00"
 }
