@@ -1,0 +1,21 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed",
+  "head": "39502b308a96842ffe0dcf06f9325eb2fb14b6f9",
+  "source_commit": "39502b308a96842ffe0dcf06f9325eb2fb14b6f9",
+  "generation_id": "gen-3b10578b61559dd2d4b5bf52646327845ee79ced26556622a1ad7bc2b6606d8f",
+  "bundle_sha256": "3b10578b61559dd2d4b5bf52646327845ee79ced26556622a1ad7bc2b6606d8f",
+  "previous_generation_id": "gen-e49927e358035042ba06acd87d0a7148cca1391688ec3f9545ae22e101f70df1",
+  "previous_source_commit": "39502b308a96842ffe0dcf06f9325eb2fb14b6f9",
+  "clockwork_owned_surfaces": 10,
+  "dual_owned_surfaces": 0,
+  "retired_legacy_writer_classes": 4,
+  "canonical_drift": 0,
+  "lease_sequence": 197,
+  "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+  "event_kind": "clean_closeout",
+  "previous_metadata_files": 4,
+  "caller_authored_derived_fields": 0,
+  "live_publication_count": 1,
+  "bespoke_updater_executions": 0
+}

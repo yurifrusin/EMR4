@@ -1,0 +1,9 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+  "status": 1,
+  "request": "91af734a-1071-40e5-9856-9509158b950a",
+  "contains_phi": false,
+  "engine_state": "continuing",
+  "next_workstream": "typed operational-evidence input model"
+}
