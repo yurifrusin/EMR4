@@ -41,10 +41,11 @@ real operational evidence and Yuri-owned choices are still absent.
 - no product source, route, API, client, runtime, feature flag, allowlist,
   status, waiting-area, deployment, Pages or protected ref changed.
 
-Four bounded workflow incidents were corrected without changing the accepted
+Five bounded workflow incidents were corrected without changing the accepted
 candidate: one wrong script invocation form, one forbidden manually repeated
-Git object in receipt prose, one copied schema-vocabulary value and one guessed
-test filename. They are retained as ergonomics evidence rather than hidden as
+Git object in receipt prose, one copied schema-vocabulary value, one guessed
+test filename and one descriptive Continuity node kind outside the closed
+vocabulary. They are retained as ergonomics evidence rather than hidden as
 incidental noise.
 
 ## Parallelism and Harness posture
@@ -68,4 +69,3 @@ duplicate field or rerun sequence.
 That review may propose a narrow later implementation plan. It may not alter
 the live clockwork, launch a Harness or provider, reopen check-in operational
 choices, enable ordinary practice, use product data, or move protected refs.
-

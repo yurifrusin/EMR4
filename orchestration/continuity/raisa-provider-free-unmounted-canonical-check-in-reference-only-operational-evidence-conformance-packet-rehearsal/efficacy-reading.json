@@ -9,7 +9,7 @@
     "new_product_test_files": 0,
     "provider_calls": 0,
     "model_workers": 0,
-    "reruns_from_procedural_error": 4,
+    "reruns_from_procedural_error": 5,
     "clockwork_publication_attempts": 0,
     "byte_exact_rollbacks": 0,
     "bespoke_updater_executions": 0,
@@ -31,6 +31,5 @@
     "claude_code_fallback": "not_authorized",
     "gemini_calls": 0
   },
-  "assessment": "The accepted product packet was small, exact and fully deterministic. Four reruns came from manually supplied interface details rather than product semantics: module invocation form, a repeated Git object in prose, a copied schema vocabulary and a guessed test path. Safety was strong because every lapse was contained before acceptance; ergonomics remain weaker because the operator could still express facts that the repository already knows."
+  "assessment": "The accepted product packet was small, exact and fully deterministic. Five reruns came from manually supplied interface details rather than product semantics: module invocation form, a repeated Git object in prose, a copied schema vocabulary, a guessed test path and a descriptive Continuity node kind outside its closed vocabulary. Safety was strong because every lapse was contained before acceptance; ergonomics remain weaker because the operator could still express facts that the repository already knows."
 }
-

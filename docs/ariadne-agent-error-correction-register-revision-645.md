@@ -2,8 +2,8 @@
 
 <!-- ariadne-agent-error-register-reading
 revision: 645
-incident_count: 1119
-new_incident_ids: AER-1116,AER-1117,AER-1118,AER-1119
+incident_count: 1120
+new_incident_ids: AER-1116,AER-1117,AER-1118,AER-1119,AER-1120
 open_incident_count: 0
 -->
 
@@ -29,3 +29,9 @@ source, corrected and all focused and surrounding tests passed.
 One surrounding-suite command guessed a nonexistent test filename. Repository
 search resolved the exact existing test path and the complete suite passed.
 
+## AER-1120
+
+One closeout intent used the descriptive Continuity node kind `rehearsal`,
+which is outside the graph's closed vocabulary. The first clockwork check
+failed before publication or pointer movement; the corrected intent selects
+the admitted `integration` kind.

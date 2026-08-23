@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.clockwork_rejected_check_receipt.v1",
+  "attempt_id": "reference-packet-clockwork-check-001",
+  "recorded_at": "2026-08-23T15:21:00+10:00",
+  "status": "rejected_before_publication",
+  "reason": "tick_transaction_prepare:prospective_projection_invalid:node_kind_invalid:rehearsal",
+  "canonical_mutation": false,
+  "pointer_movement": false,
+  "source_commit": "d1c24fed5076b310102910877c1cba176e8494a3",
+  "correction": "Replace the descriptive rehearsal node kind with the admitted integration kind and rerun the complete dry check."
+}
