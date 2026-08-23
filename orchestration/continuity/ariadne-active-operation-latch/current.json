@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
-  "active_tranche": "Provider-free governance clockwork bound closeout entrypoint and explicit-stage manifest rehearsal",
-  "objective": "Implement and provider-free rehearse one repository-interpreter-bound closeout driver that captures inline live validation, preserves the existing semantic and postpublication tests, and emits a machine-derived allowlisted explicit-stage manifest without staging or live publication.",
+  "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review",
+  "active_tranche": "Provider-free governance clockwork bound closeout entrypoint live-adoption efficacy review",
+  "objective": "Use the accepted bound entrypoint for one provider-free live governance closeout and measure first-pass completion, operator choices, validation preservation and stage-manifest accuracy without automatic staging.",
   "status": "in_progress",
-  "source_head": "f1a4553439e56be75b062e7c5f128febe6647812",
-  "authority_source": "The accepted cadence map ranks deterministic operator-sequence mechanization above test-count reduction.",
+  "source_head": "592423b490e80e10806502b251e424f068bdbf6f",
+  "authority_source": "The accepted nonpublishing rehearsal may open one separately bounded live-adoption efficacy review.",
   "checkpoint": {
-    "completed_stage": "Accepted ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_bound_driver_contract_and_tests",
+    "completed_stage": "Accepted ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_one_tick_live_adoption_contract",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,12 +34,13 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_governance_closeout_driver_and_manifest_rehearsal_only",
+    "provider_free_governance_closeout_driver_live_adoption_efficacy_review_only",
+    "one_exact_semantic_governance_tick_only",
     "bind_repository_virtual_environment_without_secret_or_environment_mutation",
     "preserve_existing_semantic_commands_and_postpublication_test_selection",
     "capture_existing_inline_live_validation_without_second_manual_readback",
     "machine_derive_allowlisted_explicit_stage_manifest_without_git_index_mutation",
-    "no_live_semantic_publication_through_new_driver_in_rehearsal",
+    "no_automatic_git_staging_commit_or_push_by_driver",
     "no_test_run_removal_skip_deselection_or_weakening",
     "no_worker_dispatch_native_harness_provider_call_or_transport_qualification",
     "no_silent_claude_code_or_other_transport_fallback",

@@ -7,7 +7,7 @@
       "arguments": [
         "-m",
         "json.tool",
-        "orchestration/continuity/ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review/evidence.json"
+        "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal/evidence.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },
@@ -19,6 +19,7 @@
         "ruff",
         "check",
         "orchestration_harness/governance_clockwork_tick.py",
+        "scripts/ariadne_governance_clockwork_closeout.py",
         "scripts/ariadne_governance_clockwork_tick.py",
         "tests/test_ariadne_governance_clockwork_tick.py"
       ],

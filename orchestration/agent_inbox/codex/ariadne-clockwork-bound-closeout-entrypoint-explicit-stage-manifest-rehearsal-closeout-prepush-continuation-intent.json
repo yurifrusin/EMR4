@@ -1,0 +1,15 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_push",
+  "planned_action": "commit_and_push_accepted_bound_closeout_rehearsal_publication",
+  "assessed_stage": "bound_closeout_entrypoint_rehearsal_postpublication_closeout",
+  "active_evidence_paths": [
+    "docs/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-rehearsal-closeout.md",
+    "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-explicit-stage-manifest-rehearsal-sol-acceptance.md",
+    "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal/clockwork-tick-evidence.json",
+    "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal/clockwork-tick-report.md",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": []
+}

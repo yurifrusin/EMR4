@@ -1,85 +1,85 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
-  "operation_id": "ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review",
-  "transaction_id": "txn-e37900daa920c40b6a244d05",
-  "source_commit": "f1a4553439e56be75b062e7c5f128febe6647812",
-  "previous_source_commit": "f1a4553439e56be75b062e7c5f128febe6647812",
-  "previous_generation_id": "gen-28fdb8ec16228637b736a3a12a33f646e35ce767a90b6dca0afe749fe79d2cf4",
-  "previous_bundle_sha256": "28fdb8ec16228637b736a3a12a33f646e35ce767a90b6dca0afe749fe79d2cf4",
+  "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
+  "transaction_id": "txn-b34671fb3132138b906b90c8",
+  "source_commit": "592423b490e80e10806502b251e424f068bdbf6f",
+  "previous_source_commit": "592423b490e80e10806502b251e424f068bdbf6f",
+  "previous_generation_id": "gen-158c1399a5c2b80580d9dba0901ef183e214c6941a370301eacf98bb51c059f7",
+  "previous_bundle_sha256": "158c1399a5c2b80580d9dba0901ef183e214c6941a370301eacf98bb51c059f7",
   "previous_canonical_sha256s": {
-    "continuity": "2d27cde3119edcfa6045eb64e68f9cbfb40e49ff2378ff4e7172f31c860cbca2",
-    "compass": "dd396e6920de24089bb5d72cd2a319abe648ff7e2cf1e38fa849c413fdb00c1a",
-    "compass_markdown": "42a0eca5b25ef2bcb34951d179accb1c9720134f16026e4ec8177337dbf0f0ef",
-    "active_latch": "f7af5356fceda33ca7a794daee37555fb19625beeb99761269a99e95218d4232",
-    "error_register": "20a50b55415efc1b749a60a78f96ecad33bce6a5395b3671d51e83627e21c3e5",
-    "pattern_report": "0812696a65b57451a50570ba5f01603496f009dc27a8e956405c7fb69ea82712",
-    "current_baton": "3ee09faecd6d5d84dfbb06630d8ed8e7bdce1758af5b80bd25dc48aa43685119"
+    "continuity": "e28293affed9bda1aabfcece90f2bf901e48e79d0ad059409f44d66be7b8cad6",
+    "compass": "fcb9b464940fb855487a74c693254c41c6a50fedf3bc8b7157d5102079d22660",
+    "compass_markdown": "657611d418d8a4122036e167dae2527678a6bcaf75dbe935c6f1ace0beca0dff",
+    "active_latch": "49aab5608ba258c58e466315948c8ad478dc773f213de90b326d532a31b22a0b",
+    "error_register": "1e5b69440620483cb460d06a2d9fdb03f35f340a78dd6e89114cca82ca50556e",
+    "pattern_report": "37f917894172dbc8a0de5e9213d2c967c9c7381f4b8b0f02c82be63b67910c1d",
+    "current_baton": "b2c6a9f2a4d6315d6278be8b04f74240a1a2e72fad38bf46582a2678e1846a81"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "b799e7439e3b849d94a4b8026d190461d137f4c1f1d74949ced6ad22e4b5eb04",
-    "transaction.json": "b56de715b8913dff04acb998aebe7275e0218ced7d041173ae8f0da147f13c12",
+    "command-manifest.json": "10649e867a4acb0777cd6ff696aaf0a81689128b3848c812949200098a34b0d8",
+    "transaction.json": "2011c46bcfcfa865f345232d863936192c015b0a1f11d10a59cee8cfb68fc192",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "6c6b0a5b983279fa900f6eb8b56ab8887baf65bbbc8cb5082ef6211197fb2aa1"
+    "generation-manifest.json": "015306d63538fef8037267c31108d78c75612e615d4bb7b5226c9fd5dd0ec022"
   },
   "projection_sha256s": {
-    "graph": "sha256:5737aadb7ccbb8f512d247bfe799b24dc8d8e2585b0c1e28c5d6342b9ba78752",
-    "compass": "sha256:d700a543336e898be1e3c07f1efd2ccc709f71a603bc7b453fb7bacf728f1094",
-    "report": "sha256:7487daf228d7bb0d81100fe74d972331d3163c2e0127f5a46f0b8c37c8ea2d00",
-    "latch": "sha256:65e9ae89c1c3e169084d19ac89b3129753211c04a55e06cda246b83dc1c8e790",
-    "incident_aggregate": "sha256:6f29881dbb6fec5fa6f6dcc71421101ed8704033dbb22c048db97fb3de5c76b2"
+    "graph": "sha256:daf898287ef83c19bbf9a65784f0ef6688ad662e2da18e151ac2f8417a2628c7",
+    "compass": "sha256:c4c10f8530df52b3adc9fde48ca9755ac122c6a5e65547d823f00ac85bbdd094",
+    "report": "sha256:1a0b4183b15f929f3d7e6f2fcc3d379df9cdb36736581f5cbaa6a63d7e68c0c1",
+    "latch": "sha256:58ee6d8ca6b3312e99fa9b165ba95d61da53cb3d7ca63e9571166c1897d525be",
+    "incident_aggregate": "sha256:012cd99c89990d8a80584cdc38452c69df669aaa4fbdbc83e5f088ec2c190ded"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-e37900daa920c40b6a244d05",
-      "transaction_id": "txn-e37900daa920c40b6a244d05",
-      "operation_id": "ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review",
+      "journal_id": "journal-b34671fb3132138b906b90c8",
+      "transaction_id": "txn-b34671fb3132138b906b90c8",
+      "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
       "event_type": "manifest-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "manifest_sha256": "sha256:f8c1ca8d3331f65fd8a19444ff994ad4a456b977e45396ee37f61e8cb8d1300e"
+        "manifest_sha256": "sha256:ebfbf7b6e51a00cdfe6e28f112c46e801b9d85e2105b2b94bfd0a930075d4893"
       },
-      "event_sha256": "sha256:9a2084004da70ba2ba24eee27131541bcf62f41b0504e754ea840eea77389ad6"
+      "event_sha256": "sha256:8dca7c2ded60e0339f767dfd9a67ded64eed7e2ec74d4e32e52da7f4444004bc"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-e37900daa920c40b6a244d05",
-      "transaction_id": "txn-e37900daa920c40b6a244d05",
-      "operation_id": "ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review",
+      "journal_id": "journal-b34671fb3132138b906b90c8",
+      "transaction_id": "txn-b34671fb3132138b906b90c8",
+      "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
       "sequence": 2,
-      "previous_event_sha256": "sha256:9a2084004da70ba2ba24eee27131541bcf62f41b0504e754ea840eea77389ad6",
+      "previous_event_sha256": "sha256:8dca7c2ded60e0339f767dfd9a67ded64eed7e2ec74d4e32e52da7f4444004bc",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "f1a4553439e56be75b062e7c5f128febe6647812",
+        "source_commit": "592423b490e80e10806502b251e424f068bdbf6f",
         "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
       },
-      "event_sha256": "sha256:4e6e6b986f98e1ab304f71b29b913a36ad1361ea77a285d72cc93f8caeae1474"
+      "event_sha256": "sha256:dd8c6346d16b0f58a7faaaa95b548db9f15b134538743eda86d6b9a6c36c98fa"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-e37900daa920c40b6a244d05",
-      "transaction_id": "txn-e37900daa920c40b6a244d05",
-      "operation_id": "ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review",
+      "journal_id": "journal-b34671fb3132138b906b90c8",
+      "transaction_id": "txn-b34671fb3132138b906b90c8",
+      "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
       "sequence": 3,
-      "previous_event_sha256": "sha256:4e6e6b986f98e1ab304f71b29b913a36ad1361ea77a285d72cc93f8caeae1474",
+      "previous_event_sha256": "sha256:dd8c6346d16b0f58a7faaaa95b548db9f15b134538743eda86d6b9a6c36c98fa",
       "event_type": "projections-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "graph_revision": 437,
-        "map_revision": 419
+        "graph_revision": 438,
+        "map_revision": 420
       },
-      "event_sha256": "sha256:d5ede1839888f651733658cd5c4cde7b93eb9992963d78e08ed1acc42c2e2e5b"
+      "event_sha256": "sha256:e65d4ec8bb24e1aeceeba1fcbab1393f074085c360159c1e8f9c8959607afe5b"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-e37900daa920c40b6a244d05",
-      "transaction_id": "txn-e37900daa920c40b6a244d05",
-      "operation_id": "ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review",
+      "journal_id": "journal-b34671fb3132138b906b90c8",
+      "transaction_id": "txn-b34671fb3132138b906b90c8",
+      "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
       "sequence": 4,
-      "previous_event_sha256": "sha256:d5ede1839888f651733658cd5c4cde7b93eb9992963d78e08ed1acc42c2e2e5b",
+      "previous_event_sha256": "sha256:e65d4ec8bb24e1aeceeba1fcbab1393f074085c360159c1e8f9c8959607afe5b",
       "event_type": "projections-validated",
       "actor": "gpt-sol",
       "payload": {
@@ -87,26 +87,26 @@
         "compass": "passed",
         "latch": "passed"
       },
-      "event_sha256": "sha256:dd410795e8b189646a814d1f1e8e83b4387572f967285ef0e4850b9bf308c54a"
+      "event_sha256": "sha256:b9bc72822052b8a5970ffd7c58484b779533f0c07d64a30d5ab8b5cb77ada74e"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-e37900daa920c40b6a244d05",
-      "transaction_id": "txn-e37900daa920c40b6a244d05",
-      "operation_id": "ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review",
+      "journal_id": "journal-b34671fb3132138b906b90c8",
+      "transaction_id": "txn-b34671fb3132138b906b90c8",
+      "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
       "sequence": 5,
-      "previous_event_sha256": "sha256:dd410795e8b189646a814d1f1e8e83b4387572f967285ef0e4850b9bf308c54a",
+      "previous_event_sha256": "sha256:b9bc72822052b8a5970ffd7c58484b779533f0c07d64a30d5ab8b5cb77ada74e",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "shadow_directory_rename"
       },
-      "event_sha256": "sha256:ed5825e2d0f450ac2d6bc4b1880c0913193ecf3a61b7376032979c4c32c010c2"
+      "event_sha256": "sha256:c9606b08896ac2559d560d8535808d8adf3488d9cfad7fe428260a89eb49bf85"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
   "event_kind": "clean_closeout",
-  "next_boundaries_sha256": "sha256:f6fdc1ec6288918070cb91123ccb18d1fe19e245d3beca2b63e8ce84d9a06f8f",
-  "register_bytes_preserved": false,
-  "pattern_bytes_preserved": false
+  "next_boundaries_sha256": "sha256:d686bd59c69033b25a38b4347d1ce576394590d913e08a062c1e0ed8755a5ae8",
+  "register_bytes_preserved": true,
+  "pattern_bytes_preserved": true
 }
