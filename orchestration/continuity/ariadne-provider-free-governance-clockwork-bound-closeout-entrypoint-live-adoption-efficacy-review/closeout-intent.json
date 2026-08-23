@@ -1,0 +1,83 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review",
+  "recorded_at": "2026-08-23T22:00:45.8830204+10:00",
+  "closeout": {
+    "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review",
+    "title": "Provider-free governance clockwork bound closeout entrypoint live-adoption efficacy review",
+    "builds_on": [
+      "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal"
+    ],
+    "authority_notes": [
+      "GPT Sol owns one exact provider-free live governance-driver efficacy review."
+    ],
+    "decisions": [
+      {
+        "id": "adopt-bound-entrypoint-on-exact-zero-exit",
+        "source": "docs/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-plan.md",
+        "summary": "Adopt the driver for its closed profile only if one live invocation completes both retained verification phases and exact stage derivation."
+      },
+      {
+        "id": "retain-inert-stage-manifest-and-lower-level-recovery",
+        "source": "docs/security/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-threat-model-delta.md",
+        "summary": "Keep staging non-actuating and preserve the established writer and byte-exact rollback as recovery controls."
+      }
+    ],
+    "claim_scope": [
+      "One passing fixed driver result adopts the bound entrypoint only for the exact provider-free semantic governance profile."
+    ],
+    "additional_receipts": [
+      "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-precommit-receipt.json"
+    ],
+    "additional_artifacts": [
+      "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-preplanning-continuation-intent.json",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-pre-verifier-continuation-intent.json",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-precommit-continuation-intent.json"
+    ],
+    "unresolved_gates": [
+      "Automatic staging and use outside the closed governance profile remain unadmitted."
+    ],
+    "journey": {
+      "strategic_role": "Replace model-operated closeout mechanics with deterministic readings while keeping all safety evidence.",
+      "outcome": "One live tick determines whether the bound driver is ready for default eligible governance use."
+    },
+    "current_position": {
+      "strategic_role": "Use the new control under real clockwork mutation conditions and measure its efficacy.",
+      "why_now": "The nonpublishing rehearsal passed and live adoption is the remaining proof boundary.",
+      "outcome": "Conditional acceptance is bound to the fixed driver result after both verification phases.",
+      "unlocks": [
+        "Default bound-driver use for eligible semantic governance closeouts."
+      ],
+      "does_not_solve": [
+        "It does not stage files, reduce tests or qualify a worker Harness."
+      ],
+      "orientation_statement": "A safe clock is useful when its operator can take one reading instead of rebuilding the dial."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review",
+      "active_tranche": "Provider-free read-only canonical check-in ordinary-practice admission blocker priority review",
+      "objective": "Re-read the accepted ordinary-practice check-in admission-readiness evidence, rank its remaining blockers by dependency and architecture leverage, and freeze the narrowest next provider-free tranche without changing product behavior.",
+      "authority_source": "The accepted live driver review returns the workflow to the current check-in product programme under Yuri's standing authority.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_read_only_blocker_ranking_contract"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "provider_free_read_only_check_in_admission_blocker_priority_review_only",
+    "accepted_existing_repository_evidence_only",
+    "no_worker_dispatch_native_harness_provider_call_or_transport_qualification",
+    "no_silent_claude_code_or_other_transport_fallback",
+    "no_authority_allocation_or_worker_transport_policy_change",
+    "no_existing_product_source_route_api_client_configuration_or_runtime_change",
+    "no_environment_variable_secret_credential_network_database_or_infrastructure_access",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "ariadne.bound_closeout_live_adoption_efficacy_evidence.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review",
+  "status": "acceptance_contract_frozen_pending_single_live_driver_invocation",
+  "starting_head": "3e25f85d68330050e860d9ba0900d43584aaf237",
+  "accepted_rehearsal_source": "592423b490e80e10806502b251e424f068bdbf6f",
+  "live_envelope": {
+    "maximum_driver_invocations": 1,
+    "maximum_committed_generations": 1,
+    "manual_live_readbacks": 0,
+    "semantic_command_rows": 3,
+    "semantic_test_count": 125,
+    "postpublication_test_count": 167,
+    "automatic_stage_capability": false,
+    "caller_authored_git_object_ids": 0
+  },
+  "acceptance_binding": {
+    "driver_result": "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review/closeout-driver-result.json",
+    "stage_manifest": "orchestration/continuity/ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review/explicit-stage-manifest.json",
+    "zero_exit_required": true,
+    "committed_publication_required": true,
+    "complete_postpublication_selection_required": true,
+    "zero_index_mutation_required": true
+  },
+  "parallelism": {
+    "deepseek": "declined_native_profile_paused_and_serial_live_writer",
+    "gemini": "declined_typed_deterministic_efficacy_readings",
+    "native_subagents": "declined_developer_policy_and_serial_mutation_boundary",
+    "owner": "gpt_sol"
+  },
+  "boundaries": {
+    "provider_calls": 0,
+    "worker_dispatches": 0,
+    "product_or_data_reads": 0,
+    "automatic_git_staging": 0,
+    "protected_ref_movements": 0,
+    "docs_branding_preserved": true
+  }
+}

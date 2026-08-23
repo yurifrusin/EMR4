@@ -1,0 +1,28 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review",
+  "result": "pending_fixed_driver_result",
+  "baseline_operator_choices": [
+    "select_python_interpreter",
+    "supply_or_copy_full_git_id",
+    "invoke_semantic_publication",
+    "repeat_manual_live_check",
+    "select_postpublication_tests",
+    "transcribe_stage_paths"
+  ],
+  "driver_operator_inputs": [
+    "semantic_closeout_intent_path",
+    "explicit_publish_mode"
+  ],
+  "acceptance_readings": [
+    "first_pass_disposition",
+    "machine_resolved_full_head",
+    "repository_interpreter_attestation",
+    "semantic_commands_and_tests",
+    "inline_live_validation",
+    "postpublication_tests",
+    "stage_manifest_git_agreement",
+    "index_and_branding_exclusion"
+  ],
+  "adoption_rule": "default_only_for_exact_provider_free_semantic_governance_profile_on_zero_exit"
+}

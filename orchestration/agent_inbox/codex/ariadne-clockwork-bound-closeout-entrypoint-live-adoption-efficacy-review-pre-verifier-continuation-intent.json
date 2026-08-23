@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "deterministic_live_adoption_acceptance_without_external_verifier",
+  "assessed_stage": "bound_closeout_entrypoint_live_adoption_pre_verifier",
+  "active_evidence_paths": [
+    "docs/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-plan.md",
+    "docs/security/ariadne-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review-threat-model-delta.md",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": []
+}
