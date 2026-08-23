@@ -1,0 +1,26 @@
+{
+  "schema_version": "raisa.canonical_check_in_operational_evidence_root_decision.v1",
+  "recorded_at": "2026-08-23T23:30:00+10:00",
+  "selected_outcome": "defer_keep_closed",
+  "clarification": "Yuri is not anywhere near ready to use real practice data for Raisa development.",
+  "programme_direction": {
+    "real_practice_data": "closed",
+    "real_practice_like_data": "closed",
+    "real_or_real_practice_like_fine_tuning": "deferred",
+    "wholly_authored_synthetic_cases": "permitted_and_preferred",
+    "provider_live_use_of_wholly_synthetic_cases": "eligible_for_separately_bounded_development_rehearsals",
+    "priority": "Fill out the major Raisa administrative-reception and clinical-diagnostic architecture before revisiting real-practice evidence or fine-tuning."
+  },
+  "interpretation": "Provider-free deterministic work remains the stable baseline, not an exclusive development mode. Public-source research and wholly invented synthetic scenarios may support later provider-live evaluation without opening real data.",
+  "unchanged_closed_gates": [
+    "ordinary_practice_check_in_admission",
+    "real_practice_environment_access",
+    "real_or_real_practice_like_data_ingestion",
+    "product_patient_appointment_clinical_historical_or_protected_data",
+    "production_runtime",
+    "deployment",
+    "release",
+    "pages",
+    "protected_ref_movement"
+  ]
+}

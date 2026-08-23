@@ -1,0 +1,44 @@
+{
+  "schema_version": "ariadne.governance_live_user_decision_transition_intent.v1",
+  "blocked_operation_id": "raisa-canonical-check-in-operational-evidence-acquisition-root-user-decision",
+  "selected_outcome": "replace_with_newly_frozen_descendant",
+  "next_operation": {
+    "operation_id": "raisa-synthetic-first-public-evidence-scenario-programme-orientation",
+    "active_tranche": "Synthetic-first public-evidence scenario programme orientation",
+    "objective": "Consolidate authoritative public research into a traceable wholly synthetic scenario grammar and freeze the next Raisa architecture tranche, with deterministic baselines and separately bounded provider-live synthetic evaluation tracks.",
+    "authority_source": "Yuri explicitly selected defer_keep_closed for real and real-practice-like data, preferred synthetic cases, confirmed he is not anywhere near ready for real-practice data, and asked for research-directed workers to improve synthetic scenarios and provider-live development value.",
+    "completed_stage": "Yuri selected defer_keep_closed and separated the real-data boundary from provider-live use of wholly synthetic scenarios.",
+    "next_executable_stage": "complete_public_source_research_then_freeze_traceable_synthetic_scenario_grammar_and_next_architecture_tranche"
+  },
+  "next_operation_protected_boundaries": [
+    "wholly_authored_synthetic_cases_only",
+    "public_non_phi_research_sources_only",
+    "no_real_practice_or_real_practice_like_data",
+    "no_real_or_real_practice_like_fine_tuning",
+    "provider_free_deterministic_baseline_preserved",
+    "provider_live_synthetic_execution_requires_a_separately_frozen_plan_and_preexecution_receipt",
+    "no_product_source_route_api_client_configuration_or_runtime_change_during_orientation",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "synthetic-first-user-decision-json-reading",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "json.tool",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/user-decision.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}

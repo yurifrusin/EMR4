@@ -3,17 +3,17 @@
   "operation_id": "raisa-canonical-check-in-operational-evidence-acquisition-root-user-decision",
   "active_tranche": "Canonical check-in operational-evidence acquisition root user decision",
   "objective": "Await Yuri's choice between defer_keep_closed and commence_nonproduction_evidence_acquisition, including a target non-production environment and practice scope on commence.",
-  "status": "in_progress",
+  "status": "blocked",
   "source_head": "eed77c1b87b62a507537036690d97a3620ca6267",
   "authority_source": "The accepted root-decision brief identifies a genuinely human-owned external target and scope choice.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief at the machine-resolved source.",
-    "next_executable_stage": "publish_blocked_user_attention_latch_then_request_the_exact_root_decision",
+    "completed_stage": "Accepted and published the provider-free canonical check-in operational-evidence root-decision brief.",
+    "next_executable_stage": null,
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 0
+      "verification": 1
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,12 +26,12 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": false,
-    "reason": null
+    "required": true,
+    "reason": "Yuri must choose defer_keep_closed or commence_nonproduction_evidence_acquisition and, on commence, name the target non-production environment and practice scope."
   },
   "terminal_response": {
-    "permitted": false,
-    "reason": "unfinished_authorized_operation"
+    "permitted": true,
+    "reason": "The next dependency is a genuinely human-owned external target and scope choice; standing development authority cannot infer it."
   },
   "protected_boundaries": [
     "human_root_decision_only",
