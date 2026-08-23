@@ -43,10 +43,8 @@ def synthetic_extraction() -> probe.PrivateExtraction:
             sequence_index=0,
             observation_offset_seconds=0,
             cells=(
-                _cell(1, 1, "09:00"),
-                _cell(1, 2, "Alice Smith"),
-                _cell(2, 1, "09:15"),
-                _cell(2, 2, "Bob Brown"),
+                _cell(1, 2, "09:00\rAlice Smith\r\x07"),
+                _cell(2, 2, "09:15\rBob Brown\r\x07"),
             ),
             error_code=None,
         ),
@@ -54,12 +52,9 @@ def synthetic_extraction() -> probe.PrivateExtraction:
             sequence_index=1,
             observation_offset_seconds=31,
             cells=(
-                _cell(1, 1, "09:00"),
-                _cell(1, 3, "Alice Smith", shading=7, bold=True),
-                _cell(2, 1, "09:15"),
-                _cell(2, 2, "Bob Brown"),
-                _cell(3, 1, "09:30"),
-                _cell(3, 2, "Carol White", italic=True),
+                _cell(1, 3, "09:00\rAlice Smith\r\x07", shading=7, bold=True),
+                _cell(2, 2, "09:15\rBob Brown\r\x07"),
+                _cell(3, 2, "09:30\rCarol White\r\x07", italic=True),
             ),
             error_code=None,
         ),
@@ -67,10 +62,8 @@ def synthetic_extraction() -> probe.PrivateExtraction:
             sequence_index=2,
             observation_offset_seconds=68,
             cells=(
-                _cell(1, 1, "09:00"),
-                _cell(1, 3, "Alice Smith"),
-                _cell(2, 1, "09:15"),
-                _cell(2, 2, "David Green"),
+                _cell(1, 3, "09:00\rAlice Smith\r\x07"),
+                _cell(2, 2, "09:15\rDavid Green\r\x07"),
             ),
             error_code=None,
         ),
@@ -97,7 +90,7 @@ def _fixed_keys(monkeypatch: pytest.MonkeyPatch) -> None:
 def _configure_synthetic_paths(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> tuple[Path, Path]:
     repo = tmp_path / "repo"
     root = repo / "local_data/historical-diary-trove/raw/pilot_01"
-    attempt = repo / "local_data/historical-diary-trove/measured-probes/2026-08-24-boundary-v1"
+    attempt = repo / "local_data/historical-diary-trove/measured-probes/2026-08-24-time-axis-v1"
     root.mkdir(parents=True)
     core = repo / "core.py"
     extractor = repo / "extract.ps1"
@@ -110,6 +103,7 @@ def _configure_synthetic_paths(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) 
     monkeypatch.setattr(probe, "PRIVATE_PROJECTION_PATH", attempt / "private-derived-projection.json")
     monkeypatch.setattr(probe, "AGGREGATE_PATH", attempt / "aggregate-reading.json")
     monkeypatch.setattr(probe, "CLEANUP_PATH", attempt / "cleanup-receipt.json")
+    monkeypatch.setattr(probe, "CONTENT_RUN_TERMINAL_PATH", attempt / "content-run-terminal.json")
     monkeypatch.setattr(probe, "CORE_PATH", core)
     monkeypatch.setattr(probe, "EXTRACTOR_PATH", extractor)
     return root, attempt
@@ -260,6 +254,101 @@ def test_projection_preserves_structure_and_every_required_event_type(monkeypatc
         "resource_1_2",
         "resource_1_3",
     }
+    assert {cell.segment_ordinal for item in projection.snapshots for cell in item.cells} == {1}
+    assert {
+        cell.time_mapping for item in projection.snapshots for cell in item.cells
+    } == {"explicit_same_cell_anchor"}
+
+
+def test_cell_segmentation_preserves_empty_positions_and_closed_terminators():
+    assert probe._cell_segments("Header\r\r09:00\vAlice Smith\r\x07") == (
+        "Header",
+        "",
+        "09:00",
+        "Alice Smith",
+    )
+
+
+def test_time_mapping_uses_only_preceding_anchor_in_same_cell(monkeypatch):
+    _fixed_keys(monkeypatch)
+    source = synthetic_extraction()
+    snapshots = tuple(
+        snapshot.model_copy(
+            update={
+                "cells": (
+                    _cell(1, 1, "09:00\r\x07"),
+                    _cell(1, 2, "Header\rAlice Smith\r\x07"),
+                    _cell(2, 2, "09:15\rBob Brown\r\x07"),
+                    _cell(3, 2, "09:30\rCarol White\r\x07"),
+                )
+            }
+        )
+        for snapshot in source.snapshots
+    )
+
+    projection, reading = probe.project_and_measure(
+        source.model_copy(update={"snapshots": snapshots})
+    )
+
+    first = projection.snapshots[0].cells
+    alice = next(cell for cell in first if cell.segment_ordinal == 1 and cell.column_index == 2)
+    assert alice.time_minute is None
+    assert alice.time_mapping == "unmapped"
+    assert reading["utility"]["mapped_time_observations"] == 6
+    assert reading["utility"]["mapped_time_ratio_denominator"] == 12
+
+
+def test_decreasing_same_cell_axis_requires_revision_and_releases_no_mapping(monkeypatch):
+    _fixed_keys(monkeypatch)
+    source = synthetic_extraction()
+    snapshots = tuple(
+        snapshot.model_copy(
+            update={
+                "cells": (
+                    _cell(
+                        1,
+                        2,
+                        "09:30\rAlice Smith\r09:00\rBob Brown\r09:00\rCarol White\r\x07",
+                    ),
+                )
+            }
+        )
+        for snapshot in source.snapshots
+    )
+
+    projection, reading = probe.project_and_measure(
+        source.model_copy(update={"snapshots": snapshots})
+    )
+
+    assert reading["decision"] == "revision_required"
+    assert "decreasing_same_cell_time_axis" in reading["reason_codes"]
+    assert reading["utility"]["decreasing_axis_cell_count"] == 3
+    assert all(cell.time_minute is None for item in projection.snapshots for cell in item.cells)
+
+
+def test_repeated_time_anchor_is_allowed_for_double_booking_shape(monkeypatch):
+    _fixed_keys(monkeypatch)
+    source = synthetic_extraction()
+    snapshots = tuple(
+        snapshot.model_copy(
+            update={
+                "cells": (
+                    _cell(
+                        1,
+                        2,
+                        "09:00\rAlice Smith\r09:00\rBob Brown\r09:10\rCarol White\r09:20\rDavid Green\r\x07",
+                    ),
+                )
+            }
+        )
+        for snapshot in source.snapshots
+    )
+
+    _, reading = probe.project_and_measure(source.model_copy(update={"snapshots": snapshots}))
+
+    assert reading["utility"]["decreasing_axis_cell_count"] == 0
+    assert reading["utility"]["distinct_time_minutes"] == 3
+    assert reading["utility"]["positive_interval_mode_minutes"] == 10
 
 
 def test_projection_contains_no_source_text_filename_path_timestamp_key_or_mapping(monkeypatch):
@@ -316,7 +405,16 @@ def test_risk_reading_has_exact_numerators_denominators_and_zero_safe_ratio(monk
                         item.model_copy(
                             update={
                                 "cells": tuple(
-                                    cell for cell in item.cells if probe._time_minute(cell.text) is None
+                                    cell.model_copy(
+                                        update={
+                                            "text": "\r".join(
+                                                segment
+                                                for segment in probe._cell_segments(cell.text)
+                                                if probe._time_minute(segment) is None
+                                            )
+                                        }
+                                    )
+                                    for cell in item.cells
                                 )
                             }
                         )
@@ -342,7 +440,22 @@ def test_no_structural_records_is_revision_required_with_zero_denominators(monke
     monkeypatch.setattr(probe.secrets, "token_bytes", lambda _size: next(keys))
     source = synthetic_extraction()
     snapshots = tuple(
-        item.model_copy(update={"cells": tuple(cell for cell in item.cells if ":" in cell.text)})
+        item.model_copy(
+            update={
+                "cells": tuple(
+                    cell.model_copy(
+                        update={
+                            "text": "\r".join(
+                                segment
+                                for segment in probe._cell_segments(cell.text)
+                                if probe._time_minute(segment) is not None
+                            )
+                        }
+                    )
+                    for cell in item.cells
+                )
+            }
+        )
         for item in source.snapshots
     )
 

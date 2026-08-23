@@ -28,12 +28,13 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 BOUND_ROOT = REPO_ROOT / "local_data/historical-diary-trove/raw/pilot_01"
 ATTEMPT_ROOT = (
     REPO_ROOT
-    / "local_data/historical-diary-trove/measured-probes/2026-08-24-boundary-v1"
+    / "local_data/historical-diary-trove/measured-probes/2026-08-24-time-axis-v1"
 )
 MANIFEST_PATH = ATTEMPT_ROOT / "private-binding-manifest.json"
 PRIVATE_PROJECTION_PATH = ATTEMPT_ROOT / "private-derived-projection.json"
 AGGREGATE_PATH = ATTEMPT_ROOT / "aggregate-reading.json"
 CLEANUP_PATH = ATTEMPT_ROOT / "cleanup-receipt.json"
+CONTENT_RUN_TERMINAL_PATH = ATTEMPT_ROOT / "content-run-terminal.json"
 EXTRACTOR_PATH = REPO_ROOT / "scripts/historical_diary_local_measured_privacy_probe.ps1"
 CORE_PATH = Path(__file__).resolve()
 
@@ -46,6 +47,8 @@ POLL_INTERVAL_SECONDS = 30
 FILE_ATTRIBUTE_REPARSE_POINT = 0x400
 TWO_DIGIT_YEAR_MAX = 2020
 METADATA_CONCORDANCE_SECONDS = 24 * 60 * 60
+MAX_SEGMENTS_PER_CELL = 4096
+MIN_DISTINCT_TIME_MINUTES = 3
 
 TIME_TOKEN = re.compile(
     r"^(?P<hour>[01]?\d|2[0-3])[:.](?P<minute>[0-5]\d)(?:\s*(?P<ampm>[AaPp][Mm]))?$"
@@ -167,8 +170,10 @@ class ProjectedCell(StrictFrozenModel):
     table_index: int = Field(ge=1)
     row_index: int = Field(ge=1)
     column_index: int = Field(ge=1)
+    segment_ordinal: int = Field(ge=0, lt=MAX_SEGMENTS_PER_CELL)
     resource_ordinal: str = Field(pattern=r"^resource_[0-9]+_[0-9]+$")
     time_minute: int | None = Field(default=None, ge=0, le=1439)
+    time_mapping: Literal["explicit_same_cell_anchor", "unmapped"]
     format_bucket: str = Field(pattern=r"^format_[0-9]+$")
     length_bucket: Literal["short", "medium", "long", "very_long"]
     content_bucket: Literal["structural_text", "identifier_like", "sensitive_note_like"]
@@ -186,7 +191,7 @@ class ProjectedSnapshot(StrictFrozenModel):
 
 
 class PrivateProjection(StrictFrozenModel):
-    schema_version: Literal["historical_diary.private_derived_grid_projection.v1"]
+    schema_version: Literal["historical_diary.private_derived_grid_projection.v2"]
     evidence_label: Literal["private_derived_ignored_local_only"]
     source_day_policy: Literal["relative_day_zero_only"]
     source_filename_or_path_emitted: Literal[False]
@@ -565,6 +570,34 @@ def _time_minute(value: str) -> int | None:
     return hour * 60 + minute
 
 
+def _cell_segments(value: str) -> tuple[str, ...]:
+    """Split one Word table cell without collapsing structural empty positions."""
+
+    if value.endswith("\r\x07"):
+        value = value[:-2]
+    elif value.endswith("\x07"):
+        value = value[:-1]
+    normalized = value.replace("\r\n", "\r").replace("\n", "\r").replace("\x0b", "\r")
+    segments = tuple(segment.strip() for segment in normalized.split("\r"))
+    if len(segments) > MAX_SEGMENTS_PER_CELL:
+        raise ProbeError("cell_segment_limit_exceeded")
+    return segments
+
+
+def _positive_interval_mode(minutes: set[int]) -> int | None:
+    ordered = sorted(minutes)
+    deltas = [after - before for before, after in zip(ordered, ordered[1:]) if after > before]
+    if not deltas:
+        return None
+    counts = Counter(deltas)
+    return min(counts, key=lambda value: (-counts[value], value))
+
+
+def _axis_decreases(segments: tuple[str, ...]) -> bool:
+    anchors = [minute for value in segments if (minute := _time_minute(value)) is not None]
+    return any(after < before for before, after in zip(anchors, anchors[1:]))
+
+
 def _detectors(value: str) -> tuple[str, ...]:
     found: list[str] = []
     for label, pattern in (
@@ -637,78 +670,106 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
     projected_snapshots: list[ProjectedSnapshot] = []
     token_sequences: defaultdict[str, list[tuple[int, str, int | None, str]]] = defaultdict(list)
     second_token_sequences: defaultdict[str, list[tuple[int, str, int | None, str]]] = defaultdict(list)
-    source_cell_count = 0
+    source_table_cell_count = 0
+    source_segment_count = 0
     mapped_time_count = 0
+    explicit_anchor_count = 0
+    decreasing_axis_cell_count = 0
+    distinct_time_minutes: set[int] = set()
 
     for snapshot in extraction.snapshots:
-        row_times: dict[tuple[int, int], int] = {}
-        cleaned: list[tuple[PrivateCell, str]] = []
+        structured_cells: list[tuple[PrivateCell, tuple[str, ...], bool]] = []
         for cell in snapshot.cells:
-            text = _clean_cell_text(cell.text)
-            if not text:
+            segments = _cell_segments(cell.text)
+            if not any(segments):
                 continue
-            cleaned.append((cell, text))
-            minute = _time_minute(text)
-            if minute is not None:
-                row_times[(cell.table_index, cell.row_index)] = minute
+            source_table_cell_count += 1
+            decreases = _axis_decreases(segments)
+            if decreases:
+                decreasing_axis_cell_count += 1
+            for value in segments:
+                minute = _time_minute(value)
+                if minute is not None:
+                    explicit_anchor_count += 1
+                    if not decreases:
+                        distinct_time_minutes.add(minute)
+            structured_cells.append((cell, segments, decreases))
 
         occurrences: Counter[str] = Counter()
         projected_cells: list[ProjectedCell] = []
-        for cell, text in cleaned:
-            if _time_minute(text) is not None or DATE_TOKEN.fullmatch(text):
-                continue
-            source_cell_count += 1
-            normalized = " ".join(text.casefold().split())
-            if not normalized:
-                continue
-            source_occupancy_values.add(normalized)
-            categories = _detectors(text)
-            detector_counts.update(categories)
-            occurrence = occurrences[normalized]
-            occurrences[normalized] += 1
-            content_token = _token("content", "content", normalized, key)
-            cell_token = _token("cell", "cell", f"{normalized}|{occurrence}", key)
-            second_cell_token = _token(
-                "cell", "cell", f"{normalized}|{occurrence}", second_key
-            )
-            resource = f"resource_{cell.table_index}_{cell.column_index}"
-            minute = row_times.get((cell.table_index, cell.row_index))
-            if minute is not None:
-                mapped_time_count += 1
-            format_bucket = formats[(cell.shading, cell.font_color, cell.bold, cell.italic)]
-            content_bucket = (
-                "sensitive_note_like"
-                if "sensitive_note" in categories
-                else "identifier_like"
-                if categories
-                else "structural_text"
-            )
-            projected = ProjectedCell(
-                cell_token=cell_token,
-                content_token=content_token,
-                sequence_index=snapshot.sequence_index,
-                observation_interval_start_seconds=(
-                    snapshot.observation_offset_seconds // POLL_INTERVAL_SECONDS
+        for cell, segments, decreases in structured_cells:
+            current_minute: int | None = None
+            for segment_ordinal, text in enumerate(segments):
+                anchor = _time_minute(text)
+                if anchor is not None:
+                    current_minute = None if decreases else anchor
+                    continue
+                if not text or DATE_TOKEN.fullmatch(text):
+                    continue
+                source_segment_count += 1
+                normalized = " ".join(text.casefold().split())
+                if not normalized:
+                    continue
+                source_occupancy_values.add(normalized)
+                categories = _detectors(text)
+                detector_counts.update(categories)
+                occurrence = occurrences[normalized]
+                occurrences[normalized] += 1
+                content_token = _token("content", "content", normalized, key)
+                cell_token = _token("cell", "cell", f"{normalized}|{occurrence}", key)
+                second_cell_token = _token(
+                    "cell", "cell", f"{normalized}|{occurrence}", second_key
                 )
-                * POLL_INTERVAL_SECONDS,
-                observation_interval_end_seconds=(
-                    snapshot.observation_offset_seconds // POLL_INTERVAL_SECONDS + 1
+                resource = f"resource_{cell.table_index}_{cell.column_index}"
+                if current_minute is not None:
+                    mapped_time_count += 1
+                format_bucket = formats[
+                    (cell.shading, cell.font_color, cell.bold, cell.italic)
+                ]
+                content_bucket = (
+                    "sensitive_note_like"
+                    if "sensitive_note" in categories
+                    else "identifier_like"
+                    if categories
+                    else "structural_text"
                 )
-                * POLL_INTERVAL_SECONDS,
-                table_index=cell.table_index,
-                row_index=cell.row_index,
-                column_index=cell.column_index,
-                resource_ordinal=resource,
-                time_minute=minute,
-                format_bucket=format_bucket,
-                length_bucket=_length_bucket(text),
-                content_bucket=content_bucket,
-                detector_categories=categories,
-            )
-            projected_cells.append(projected)
-            signature = (snapshot.sequence_index, resource, minute, format_bucket)
-            token_sequences[cell_token].append(signature)
-            second_token_sequences[second_cell_token].append(signature)
+                projected = ProjectedCell(
+                    cell_token=cell_token,
+                    content_token=content_token,
+                    sequence_index=snapshot.sequence_index,
+                    observation_interval_start_seconds=(
+                        snapshot.observation_offset_seconds // POLL_INTERVAL_SECONDS
+                    )
+                    * POLL_INTERVAL_SECONDS,
+                    observation_interval_end_seconds=(
+                        snapshot.observation_offset_seconds // POLL_INTERVAL_SECONDS + 1
+                    )
+                    * POLL_INTERVAL_SECONDS,
+                    table_index=cell.table_index,
+                    row_index=cell.row_index,
+                    column_index=cell.column_index,
+                    segment_ordinal=segment_ordinal,
+                    resource_ordinal=resource,
+                    time_minute=current_minute,
+                    time_mapping=(
+                        "explicit_same_cell_anchor"
+                        if current_minute is not None
+                        else "unmapped"
+                    ),
+                    format_bucket=format_bucket,
+                    length_bucket=_length_bucket(text),
+                    content_bucket=content_bucket,
+                    detector_categories=categories,
+                )
+                projected_cells.append(projected)
+                signature = (
+                    snapshot.sequence_index,
+                    resource,
+                    current_minute,
+                    format_bucket,
+                )
+                token_sequences[cell_token].append(signature)
+                second_token_sequences[second_cell_token].append(signature)
         projected_snapshots.append(
             ProjectedSnapshot(
                 sequence_index=snapshot.sequence_index,
@@ -725,7 +786,7 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
         )
 
     projection = PrivateProjection(
-        schema_version="historical_diary.private_derived_grid_projection.v1",
+        schema_version="historical_diary.private_derived_grid_projection.v2",
         evidence_label="private_derived_ignored_local_only",
         source_day_policy="relative_day_zero_only",
         source_filename_or_path_emitted=False,
@@ -739,20 +800,28 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
         previous_by_token = {cell.cell_token: cell for cell in previous.cells}
         current_by_token = {cell.cell_token: cell for cell in current.cells}
         previous_positions = {
-            (cell.table_index, cell.row_index, cell.column_index): cell for cell in previous.cells
+            (cell.table_index, cell.row_index, cell.column_index, cell.segment_ordinal): cell
+            for cell in previous.cells
         }
         current_positions = {
-            (cell.table_index, cell.row_index, cell.column_index): cell for cell in current.cells
+            (cell.table_index, cell.row_index, cell.column_index, cell.segment_ordinal): cell
+            for cell in current.cells
         }
         changes["added"] += len(current_by_token.keys() - previous_by_token.keys())
         changes["removed"] += len(previous_by_token.keys() - current_by_token.keys())
         for token in previous_by_token.keys() & current_by_token.keys():
             before = previous_by_token[token]
             after = current_by_token[token]
-            if (before.table_index, before.row_index, before.column_index) != (
+            if (
+                before.table_index,
+                before.row_index,
+                before.column_index,
+                before.segment_ordinal,
+            ) != (
                 after.table_index,
                 after.row_index,
                 after.column_index,
+                after.segment_ordinal,
             ):
                 changes["moved"] += 1
             if before.format_bucket != after.format_bucket:
@@ -801,12 +870,23 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
     )
     record_trials = len(representatives)
     trajectory_trials = len(token_sequences)
-    mapped_ratio = 0 if source_cell_count == 0 else mapped_time_count / source_cell_count
+    mapped_ratio = (
+        0 if source_segment_count == 0 else mapped_time_count / source_segment_count
+    )
+    interval_mode_minutes = _positive_interval_mode(distinct_time_minutes)
 
     if source_leakage:
         decision = Decision.BLOCKED
         reasons = ["source_value_detected_in_projection"]
-    elif not representatives or stable_linkage == 0 or total_changes == 0 or mapped_ratio < 0.25:
+    elif (
+        not representatives
+        or stable_linkage == 0
+        or total_changes == 0
+        or mapped_ratio < 0.25
+        or len(distinct_time_minutes) < MIN_DISTINCT_TIME_MINUTES
+        or interval_mode_minutes is None
+        or decreasing_axis_cell_count > 0
+    ):
         decision = Decision.REVISION_REQUIRED
         reasons = [
             reason
@@ -815,6 +895,12 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
                 (stable_linkage == 0, "no_stable_linkage"),
                 (total_changes == 0, "no_adjacent_changes"),
                 (mapped_ratio < 0.25, "insufficient_time_mapping"),
+                (
+                    len(distinct_time_minutes) < MIN_DISTINCT_TIME_MINUTES,
+                    "insufficient_distinct_time_anchors",
+                ),
+                (interval_mode_minutes is None, "time_interval_mode_unavailable"),
+                (decreasing_axis_cell_count > 0, "decreasing_same_cell_time_axis"),
             )
             if condition
         ]
@@ -823,7 +909,7 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
         reasons = []
 
     aggregate = {
-        "schema_version": "historical_diary.measured_privacy_reading.v1",
+        "schema_version": "historical_diary.measured_privacy_reading.v2",
         "evidence_label": "private_derived_aggregate_non_phi",
         "decision": decision.value,
         "reason_codes": reasons,
@@ -844,10 +930,17 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
             "detector_category_counts": dict(sorted(detector_counts.items())),
         },
         "utility": {
-            "source_cell_observations": source_cell_count,
+            "source_table_cell_observations": source_table_cell_count,
+            "source_structural_segment_observations": source_segment_count,
             "projected_cell_observations": sum(len(item.cells) for item in projection.snapshots),
             "distinct_structural_records": record_trials,
             "mapped_time_observations": mapped_time_count,
+            "mapped_time_ratio_numerator": mapped_time_count,
+            "mapped_time_ratio_denominator": source_segment_count,
+            "explicit_time_anchor_observations": explicit_anchor_count,
+            "distinct_time_minutes": len(distinct_time_minutes),
+            "positive_interval_mode_minutes": interval_mode_minutes,
+            "decreasing_axis_cell_count": decreasing_axis_cell_count,
             "stable_linkage_records": stable_linkage,
             "adjacent_transition_count": len(projection.snapshots) - 1,
             "change_counts": dict(sorted(changes.items())),
@@ -895,8 +988,25 @@ def _cleanup_private_outputs(*, retained: bool, decision: str, word_cleanup: boo
     return receipt
 
 
+def _record_content_run_terminal(*, status: str, decision: str | None) -> None:
+    _safe_public_write(
+        CONTENT_RUN_TERMINAL_PATH,
+        {
+            "schema_version": "historical_diary.local_content_run_terminal.v1",
+            "status": status,
+            "decision": decision,
+            "content_runs_consumed": 1,
+            "content_retry_authorized": False,
+            "source_value_emitted": False,
+        },
+    )
+
+
 def execute() -> dict[str, Any]:
+    if CONTENT_RUN_TERMINAL_PATH.exists():
+        raise ProbeError("content_run_already_consumed")
     manifest = _load_manifest()
+    _record_content_run_terminal(status="in_progress", decision=None)
     command = [
         "powershell.exe",
         "-NoProfile",
@@ -928,13 +1038,14 @@ def execute() -> dict[str, Any]:
 
     projection, aggregate = project_and_measure(extraction)
     _safe_public_write(AGGREGATE_PATH, aggregate)
-    retained = aggregate["decision"] == Decision.LOCALLY_RESTRICTED_CANDIDATE.value
-    if retained:
-        _safe_public_write(PRIVATE_PROJECTION_PATH, projection.model_dump(mode="json"))
+    _safe_public_write(PRIVATE_PROJECTION_PATH, projection.model_dump(mode="json"))
     cleanup = _cleanup_private_outputs(
-        retained=retained,
+        retained=False,
         decision=aggregate["decision"],
         word_cleanup=extraction.word_cleanup_completed,
+    )
+    _record_content_run_terminal(
+        status="completed", decision=aggregate["decision"]
     )
     return {
         **aggregate,
@@ -969,6 +1080,13 @@ def _failure(code: str, *, phase: str) -> dict[str, Any]:
         public["cleanup"] = _cleanup_private_outputs(
             retained=False, decision=decision, word_cleanup=False
         )
+        if phase == "execute" and CONTENT_RUN_TERMINAL_PATH.exists():
+            try:
+                terminal = json.loads(CONTENT_RUN_TERMINAL_PATH.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                terminal = {}
+            if terminal.get("status") == "in_progress":
+                _record_content_run_terminal(status="failed", decision=decision)
     return public
 
 

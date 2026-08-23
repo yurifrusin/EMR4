@@ -13,7 +13,7 @@ $MaximumPrivateCharacters = 16777216
 $ExpectedSchema = "historical_diary.private_binding_manifest.v1"
 $OutputSchema = "historical_diary.private_word_cell_extraction.v1"
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
-$expectedManifest = Join-Path $repositoryRoot "local_data\historical-diary-trove\measured-probes\2026-08-24-boundary-v1\private-binding-manifest.json"
+$expectedManifest = Join-Path $repositoryRoot "local_data\historical-diary-trove\measured-probes\2026-08-24-time-axis-v1\private-binding-manifest.json"
 
 function Convert-WordColour {
     param($Value)
