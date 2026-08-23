@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 425,
-  "updated_at": "2026-08-24T01:06:23.5988946+10:00",
-  "source_graph_revision": 443,
-  "orientation_statement": "Make the privacy gate executable and measurable before allowing it to see the archive.",
+  "map_revision": 426,
+  "updated_at": "2026-08-24T01:51:25.4005323+10:00",
+  "source_graph_revision": 444,
+  "orientation_statement": "Make the authorised historical-Diary exception exact in the clockwork before allowing the gate to read one local slice.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5387,24 +5387,34 @@
         "docs/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-plan.md",
         "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/report.md"
       ]
+    },
+    {
+      "node_id": "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review",
+      "lineage_parent": "raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal",
+      "strategic_role": "Replace aggregate-only caution with a typed local privacy-and-utility reading before using longitudinal Diary mechanics for development.",
+      "outcome": "One provider-free synthetic gate now measures both sequence utility and contextual linkability without treating pseudonyms as anonymity.",
+      "evidence": [
+        "docs/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-plan.md",
+        "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/report.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal",
-    "strategic_role": "Test privacy mechanics synthetically before any bounded historical archive reading.",
-    "why_now": "The exact provenance and evidence-class dependency now passes and the archive's temporal density can be evaluated without premature data access.",
-    "outcome": "The next tranche can build the gate, differencer, attack metrics and access subgate on invented snapshots.",
+    "node_id": "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review",
+    "strategic_role": "Converge the governance boundary that still forbids all historical data before taking one bounded empirical reading.",
+    "why_now": "The synthetic gate passes, but the clockwork mandatory floor still contradicts the separately authorised local historical-Diary direction.",
+    "outcome": "The successor can make one exact local historical-Diary subgate representable without weakening product, patient, clinical or protected-data denial.",
     "unlocks": [
-      "A separately accepted, empirically measured decision on near-lossless local de-identified Diary use."
+      "A separately frozen and clockwork-consistent 80-file local privacy measurement."
     ],
     "does_not_solve": [
-      "It does not yet inspect, de-identify or admit any historical record or prove real-world efficacy."
+      "It does not prove archive-wide anonymity, permit external/model use or promote any private-derived fixture."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/evidence.json",
-      "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/report.md",
-      "docs/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-sol-acceptance.md"
+      "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/evidence.json",
+      "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/report.md",
+      "docs/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

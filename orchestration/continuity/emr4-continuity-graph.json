@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 443,
+  "graph_revision": 444,
   "harvests": [],
   "nodes": [
     {
@@ -35851,9 +35851,86 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review",
+      "title": "Raisa local-only historical Diary snapshot privacy feasibility review",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri delegated gate timing to GPT Sol and authorised rich local de-identified Diary research; this synthetic-only tranche judges the gate useful now but grants no real access until its exact successor plan is frozen."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-gate-and-converge-historical-boundary",
+          "source": "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/next-tranche-contract.json",
+          "status": "accepted",
+          "summary": "Accept the gate mechanics at exact source 1746cbf7a78d7d98597e6458f00953bd1ab193aa and first converge the clockwork boundary so a later 80-file local probe does not contradict its mandatory floor."
+        }
+      ],
+      "claim_scope": [
+        "Four invented observations preserve all fourteen authored changes without serialized source values; forty-six hostile and forty unchanged controls pass while the risk reading exposes a unique trajectory and successful linkage trials."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-plan.md",
+          "docs/security/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/evidence.json",
+          "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/report.md",
+          "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-local-only-historical-diary-snapshot-privacy-feasibility-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-pre-verifier-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration_harness/historical_diary_snapshot_privacy_gate.py",
+          "docs/ariadne-agent-error-correction-register-revision-653.md"
+        ]
+      },
+      "unresolved_gates": [
+        "Clockwork historical-data boundary convergence, actual archive access, local projection retention, fixture or memory promotion, provider use, product runtime, production, deployment, Pages and protected refs remain separately gated."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-24T01:51:25.4005323+10:00",
+      "updated_at": "2026-08-24T01:51:25.4005323+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "c8e13e655558e0d66de9700652c0bac71a973678",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-24T01:06:23.5988946+10:00"
+  "updated_at": "2026-08-24T01:51:25.4005323+10:00"
 }

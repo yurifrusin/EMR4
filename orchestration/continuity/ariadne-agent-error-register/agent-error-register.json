@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 652,
+  "register_revision": 653,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-24",
@@ -43797,6 +43797,81 @@
       },
       "incident_id": "AER-1138",
       "attempt_id": "clock-0b812a63154bfda05816ae4c",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-privacy-gate",
+      "role": "orchestrator",
+      "resource_id": "serial-continuation-intent",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Serial continuation active evidence uses only documentation, Continuity and agent-inbox roots admitted by its closed schema.",
+      "observed_error": "The first closeout precommit intent included the paired Yuri summary under orchestration/human_inbox and failed with serial_continuation_evidence_path_root_forbidden.",
+      "detection_method": "Preflight rejected before runtime-state materialisation or repository mutation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-closeout-precommit-attempt-001-rejected-intent.json",
+        "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-closeout-precommit-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.serial_continuation_evidence_root_misclassification",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Keep the Yuri summary as a closeout artifact but remove its human-inbox path from the typed continuation evidence list.",
+        "prevention_control": "Use a fixed admitted-root lookup before every serial continuation intent and keep human-inbox artifacts outside active_evidence_paths.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-closeout-precommit-receipt.json"
+        ]
+      },
+      "incident_id": "AER-1139",
+      "attempt_id": "clock-76541aa1d4f750f27177266f",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-privacy-gate",
+      "role": "orchestrator",
+      "resource_id": "clockwork-closeout-intent",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The semantic closeout supplies valid incidents, scalar budget, exact boundaries, exact human-evidence shape and every convention-derived receipt.",
+      "observed_error": "Checks found an empty incident list, 109 leaves, four missing floor tokens, a missing acceptance timestamp and a missing conventional pre-verifier receipt.",
+      "detection_method": "Clockwork rejected all five checks before verifier execution, publication or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+        "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/closeout/clockwork-check-attempt-002-rejected-receipt.json",
+        "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/closeout/clockwork-check-attempt-003-rejected-receipt.json",
+        "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/closeout/clockwork-check-attempt-004-rejected-receipt.json",
+        "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/closeout/clockwork-check-attempt-005-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_semantic_intent_closed_interface_lapse",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Compact redundant leaves, restore exact boundaries and evidence shape, and materialise the convention-derived pre-verifier receipt.",
+        "prevention_control": "Take deterministic incident, scalar-budget, boundary and convention-derived evidence inventory readings before every first semantic check.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/closeout/closeout-intent.json"
+        ]
+      },
+      "incident_id": "AER-1140",
+      "attempt_id": "clock-8a3f0a8b014fb6cb787b8b29",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

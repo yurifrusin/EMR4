@@ -1,0 +1,12 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "recorded_at": "2026-08-24T02:14:36.1923170+10:00",
+  "operation_id": "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review",
+  "status": "delivered",
+  "provider_status": 1,
+  "request_id": "b645fa61-e437-4a73-923f-f2a91b136efd",
+  "continuing_to": [
+    "raisa-local-only-historical-diary-access-boundary-convergence"
+  ],
+  "contains_phi": false
+}
