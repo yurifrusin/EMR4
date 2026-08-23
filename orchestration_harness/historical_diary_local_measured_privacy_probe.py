@@ -147,6 +147,7 @@ class BindingManifest(StrictFrozenModel):
     timestamp_convention: Literal[
         "day_month_two_digit_year",
         "month_day_two_digit_year",
+        "year_month_day_two_digit_year",
         "year_month_four_digit_year",
         "day_month_four_digit_year",
     ]
@@ -274,6 +275,13 @@ def timestamp_candidates(filename: str) -> dict[str, datetime]:
             admit(
                 "day_month_two_digit_year",
                 (year, groups[1], groups[0]),
+                groups[3:6],
+            )
+        if len(groups[0]) == 2:
+            year = str(2000 + int(groups[0]))
+            admit(
+                "year_month_day_two_digit_year",
+                (year, groups[1], groups[2]),
                 groups[3:6],
             )
             admit(

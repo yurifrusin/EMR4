@@ -158,3 +158,8 @@ controller must evaluate their archive-wide coverage and admit one only when
 it alone parses every in-envelope filename. Two-digit years outside 2000-2020,
 unknown time suffixes, per-file mixed conventions and full-coverage ties fail
 before manifest creation. Only the chosen closed convention label is public.
+
+The first coverage calculation returned zero because it omitted the separated
+two-digit year-first ordering supported by the aggregate widths. That single
+ordering is added, but it receives no preference: it must be the unique
+archive-wide full-coverage convention under the same year and time controls.

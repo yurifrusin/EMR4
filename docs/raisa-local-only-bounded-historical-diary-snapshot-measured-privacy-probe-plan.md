@@ -240,3 +240,10 @@ admissible files. A per-file guess or a tie is forbidden. Two-digit years are
 restricted to 2000 through 2020, matching this frozen historical archive
 scope. Phase B remains closed until one global convention and exactly 80
 observations bind.
+
+The resulting source `2fd54a97f95aaec5a0601c3b0107fa27bf2fd5dc`
+reported zero coverage for both conventions, still without creating a manifest
+or reading content. The same aggregate widths support the omitted separated
+year-first form `YY-M-D HH-MM-SS`. Add that one closed candidate. It remains
+subject to the identical 2000-2020 year bound and sole archive-wide
+full-coverage rule; no convention is chosen from plausibility alone.

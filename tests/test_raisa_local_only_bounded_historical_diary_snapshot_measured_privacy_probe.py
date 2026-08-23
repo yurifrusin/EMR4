@@ -142,6 +142,10 @@ def test_two_digit_year_candidates_preserve_am_pm_and_global_orientation():
         "day_month_two_digit_year": datetime(2016, 8, 24, 21, 30, 15)
     }
 
+    assert probe.timestamp_candidates("16-8-24 9-30-15 PM.doc") == {
+        "year_month_day_two_digit_year": datetime(2016, 8, 24, 21, 30, 15)
+    }
+
 
 @pytest.mark.parametrize(
     "filename",
