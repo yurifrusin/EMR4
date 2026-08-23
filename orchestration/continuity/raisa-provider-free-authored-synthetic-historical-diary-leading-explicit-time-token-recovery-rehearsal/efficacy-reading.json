@@ -1,0 +1,33 @@
+{
+  "schema_version": "raisa.authored_synthetic_historical_diary_leading_time_token_recovery_efficacy.v1",
+  "recorded_at": "2026-08-24T07:59:22.5874518+10:00",
+  "reviewed_source": "5a3c589873a104e948e65eaadacd2397f0621a3b",
+  "decision": "accepted_parser_recovery_candidate",
+  "parser_efficacy": {
+    "closed_positive_matrix_passed": true,
+    "hostile_matrix_passed": true,
+    "same_segment_only": true,
+    "forward_fill_absent": true,
+    "contact_and_date_like_denial": true
+  },
+  "privacy_efficacy": {
+    "clocked_and_unclocked_payload_hmac_tokens_equal": true,
+    "raw_token_or_payload_emitted": false,
+    "historical_access": 0,
+    "provider_calls": 0,
+    "first_use_gate_opened": false
+  },
+  "integration_efficacy": {
+    "leading_tokens_are_first_class_explicit_time_sources": true,
+    "coordinate_mapper_changed": false,
+    "independent_utility_gates_preserved": true,
+    "leading_token_only_synthetic_candidate_passed": true
+  },
+  "workflow_efficacy": {
+    "precloseout_integration_review_found_stale_story_anchor_only_predicate": true,
+    "predicate_clarified_before_historical_access": true,
+    "historical_rerun_used": false,
+    "qualifying_open_incidents": 0
+  },
+  "recommendation": "freeze_one_fresh_fixed_slice_local_leading_token_measurement_with_one_metadata_bind_one_content_run_no_retry_exact_cleanup_and_first_use_gate_closed"
+}

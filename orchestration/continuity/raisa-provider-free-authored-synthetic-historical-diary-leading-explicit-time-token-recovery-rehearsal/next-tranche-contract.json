@@ -1,0 +1,59 @@
+{
+  "schema_version": "raisa.local_historical_diary_leading_time_token_bounded_measurement_contract.v1",
+  "status": "frozen_fail_closed_successor_contract",
+  "recorded_at": "2026-08-24T07:59:22.5874518+10:00",
+  "operation_id": "raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal",
+  "builds_on_reviewed_source": "5a3c589873a104e948e65eaadacd2397f0621a3b",
+  "objective": "measure_the_strict_leading_explicit_time_token_on_the_fixed_local_80_snapshot_slice_once_without_retry",
+  "source_boundary": {
+    "historical_root": "local_data/historical-diary-trove/raw/pilot_01",
+    "new_attempt_root": "local_data/historical-diary-trove/measured-probes/2026-08-24-leading-token-v3",
+    "root_count": 1,
+    "dense_day_count": 1,
+    "selected_file_count": 80,
+    "recursive_or_reparse_access": false,
+    "prior_attempt_reuse_or_retry": false
+  },
+  "execution": {
+    "metadata_bind_attempts": 1,
+    "content_runs": 1,
+    "content_retry_authorized": false,
+    "controller_timeout_seconds": 1800,
+    "exact_parent_word_cleanup": true,
+    "count_only_progress": true
+  },
+  "pre_access_admission": {
+    "all_219_or_later_provider_free_historical_diary_controls": "pass",
+    "python_and_powershell_bind_only_new_literal_attempt_root": true,
+    "new_attempt_root_manifest_terminal_and_aggregate_absent": true,
+    "source_boundary_and_zero_provider_product_checks": "pass"
+  },
+  "measurement": {
+    "strict_leading_parser_unchanged_after_access": true,
+    "same_segment_mapping_only": true,
+    "forward_fill": false,
+    "coordinate_fallback_unchanged": true,
+    "raw_token_payload_path_timestamp_coordinate_key_or_mapping_output": false
+  },
+  "decision": {
+    "locally_restricted_candidate": "all_existing_mapping_ratio_distinct_minute_interval_stable_linkage_adjacent_change_privacy_and_cleanup_gates_pass",
+    "revision_required": "containment_and_cleanup_pass_but_leading_token_or_utility_evidence_is_insufficient",
+    "blocked": "scope_binding_schema_output_process_cleanup_authority_or_leakage_failure"
+  },
+  "retention": {
+    "generic_aggregate_bind_cleanup_and_terminal_readings_only": true,
+    "private_manifest_projection_control_progress_key_mapping_or_coordinate_retained": false,
+    "historical_derived_reusable_artifact_created": false
+  },
+  "first_use_gate": {
+    "status": "closed_pending_candidate_specific_evaluation",
+    "opened_by_measurement_success": false,
+    "candidate_evaluation_deferred_until_a_specific_useful_derivative_exists": true
+  },
+  "authority_ceiling": {
+    "second_bind_or_content_run": false,
+    "provider_model_product_database_client_or_runtime": false,
+    "ordinary_practice_activation": false,
+    "production_deployment_release_pages_or_protected_refs": false
+  }
+}

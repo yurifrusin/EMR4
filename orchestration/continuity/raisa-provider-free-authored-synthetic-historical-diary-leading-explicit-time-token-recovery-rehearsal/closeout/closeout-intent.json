@@ -1,0 +1,93 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal",
+  "recorded_at": "2026-08-24T07:59:22.5874518+10:00",
+  "closeout": {
+    "operation_id": "raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal",
+    "title": "Raisa provider-free authored-synthetic historical Diary leading explicit time-token recovery rehearsal",
+    "builds_on": [
+      "raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal"
+    ],
+    "authority_notes": [
+      "Yuri delegated first-use gate timing and uninterrupted development; accept the provider-free parser candidate and proceed to one freshly bound no-retry local measurement while first use remains closed."
+    ],
+    "decisions": [
+      {
+        "id": "accept-strict-leading-explicit-time-token-parser",
+        "source": "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/evidence.json",
+        "summary": "Accept exact reviewed source 5a3c589873a104e948e65eaadacd2397f0621a3b after 29 focused and 219 total provider-free controls passed."
+      },
+      {
+        "id": "accept-leading-tokens-as-first-class-explicit-time-sources",
+        "source": "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/report.md",
+        "summary": "Count story anchors and valid leading tokens as the closed explicit-source set while preserving every independent utility and privacy gate."
+      },
+      {
+        "id": "continue-to-one-fresh-local-leading-token-measurement",
+        "source": "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/next-tranche-contract.json",
+        "summary": "Permit one fresh fixed-slice local bind and one content run with no retry, exact cleanup, generic aggregate retention and first use closed."
+      }
+    ],
+    "claim_scope": [
+      "A strict leading parser, same-segment mapping, no forward fill, token-free HMAC input and leading-token-only aggregate admission pass without historical or provider access."
+    ],
+    "additional_receipts": [
+      "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/closeout/pushover-notification-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal-pre-verifier-receipt.json"
+    ],
+    "additional_artifacts": [
+      "orchestration_harness/historical_diary_local_measured_privacy_probe.py",
+      "orchestration/continuity/raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal/next-tranche-contract.json"
+    ],
+    "unresolved_gates": [
+      "Historical leading-token utility, reusable historical-derived first use and every product/provider/protected surface remain gated."
+    ],
+    "journey": {
+      "strategic_role": "Recover an explicit scheduling clock without layout inference or source-value release.",
+      "outcome": "The leading-token parser and first-class explicit-source integration pass entirely on authored-synthetic evidence."
+    },
+    "current_position": {
+      "strategic_role": "Measure whether the fixed private slice actually contains useful leading explicit time tokens.",
+      "why_now": "The parser, hostile denials, token-free hashing and aggregate admission now pass before private access.",
+      "outcome": "One fresh 80-snapshot run may produce a generic ignored-local measurement reading only.",
+      "unlocks": [
+        "Candidate-specific first-use evaluation only if a useful minimized derivative later exists."
+      ],
+      "does_not_solve": [
+        "No reusable historical derivative, product, provider or production authority opens."
+      ],
+      "orientation_statement": "Measure one fixed slice once; keep promotion default-deny."
+    },
+    "next_operation": {
+      "operation_id": "raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal",
+      "active_tranche": "Raisa local-only historical Diary leading explicit time-token bounded measurement rehearsal",
+      "objective": "Perform one fresh fixed-slice local leading-token measurement with one bind, one no-retry content run and exact cleanup.",
+      "authority_source": "Yuri's historical Diary direction, delegated first-use gate timing and uninterrupted-development authority within the frozen successor contract.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_one_run_leading_token_measurement_plan"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only",
+    "no_product_patient_appointment_clinical_or_protected_data",
+    "allow_local_only_historical_diary_snapshot_measured_privacy_probe",
+    "historical_diary_privacy_subgate_contract_sha256_e312d58d7743b9b4d79d8a947b765732eea142f47586e0bd1f4e738047802615",
+    "historical_diary_access_one_leaf_root_one_dense_day_nonrecursive_maximum_80_files",
+    "historical_diary_access_maximum_134217728_total_bytes_and_8388608_per_file",
+    "historical_diary_access_read_only_no_symlink_or_reparse_traversal",
+    "historical_diary_access_new_ignored_output_root_ephemeral_in_memory_key_and_failure_cleanup",
+    "historical_diary_access_no_network_provider_model_prompt_telemetry_clipboard_or_external_release",
+    "historical_diary_access_no_raw_text_identity_filename_timestamp_key_or_mapping_commit",
+    "historical_diary_access_strongest_result_locally_restricted_candidate_without_downstream_authority",
+    "historical_diary_access_no_fixture_memory_rag_product_runtime_route_api_client_database_or_configuration",
+    "no_private_layout_coordinate_commit",
+    "first_use_scenario_gate_remains_closed"
+  ]
+}

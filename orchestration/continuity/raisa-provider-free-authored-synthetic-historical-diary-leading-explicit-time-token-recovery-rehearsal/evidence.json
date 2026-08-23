@@ -1,0 +1,81 @@
+{
+  "schema_version": "raisa.authored_synthetic_historical_diary_leading_time_token_recovery_evidence.v1",
+  "result": "accepted_parser_recovery_candidate",
+  "recorded_at": "2026-08-24T07:59:22.5874518+10:00",
+  "planning_source": "3e136c04f55d077ef6def23ecb5b40e2a6098e23",
+  "initial_implementation_source": "e96b368b815989b4da8deefe61b8fe4e37b00479",
+  "reviewed_source": "5a3c589873a104e948e65eaadacd2397f0621a3b",
+  "five_source_rehydration": "passed",
+  "parser": {
+    "position": "character_zero_after_structural_cell_segmentation_and_trimming",
+    "accepted_time_forms": [
+      "H:MM",
+      "HH:MM",
+      "H.MM",
+      "HH.MM",
+      "optional_case_insensitive_am_pm"
+    ],
+    "separator_allowlist": [
+      "ascii_space",
+      "ascii_tab",
+      "ascii_hyphen"
+    ],
+    "nonempty_payload_required": true,
+    "nonleading_embedded_attached_digit_phone_email_and_date_like_denied": true,
+    "forward_fill": false,
+    "raw_value_output": false
+  },
+  "projection": {
+    "same_segment_direct_mapping": true,
+    "coordinate_fallback_unchanged": true,
+    "token_and_separator_removed_before_normalization_and_hmac": true,
+    "leading_token_only_synthetic_candidate_observations": 11,
+    "leading_token_only_synthetic_distinct_minutes": 4,
+    "leading_token_only_synthetic_interval_mode_minutes": 15,
+    "leading_token_only_synthetic_stable_linkage_records": 4,
+    "leading_token_only_synthetic_total_changes": 1,
+    "leading_token_only_synthetic_decision": "locally_restricted_candidate"
+  },
+  "verification": {
+    "focused_controls": 29,
+    "positive_parser_cases": 7,
+    "hostile_parser_denials": 16,
+    "historical_diary_test_files": 23,
+    "provider_free_controls": 219,
+    "failures": 0,
+    "ruff": "passed",
+    "compileall": "passed",
+    "source_boundary_and_filesystem_enumeration_trap": "passed",
+    "git_diff_check": "passed"
+  },
+  "effects": {
+    "historical_archive_enumerations": 0,
+    "historical_metadata_or_content_reads": 0,
+    "historical_attempt_reuse_or_retry": 0,
+    "provider_network_model_calls": 0,
+    "product_database_client_or_runtime_effects": 0,
+    "source_value_leakage": 0
+  },
+  "clarification": {
+    "status": "accepted_precloseout_fail_closed_clarification",
+    "source": "e96b368b815989b4da8deefe61b8fe4e37b00479",
+    "reason": "the_inherited_candidate_predicate_required_story_anchors_even_when_valid_leading_tokens_supplied_sufficient_explicit_time_evidence",
+    "correction": "count_story_anchors_and_valid_leading_tokens_as_the_only_explicit_time_source_forms_while_preserving_all_independent_utility_and_privacy_gates",
+    "historical_evidence_reinterpreted": false
+  },
+  "parallelism": {
+    "deepseek": "declined_negative_native_harness_paused_no_silent_claude_fallback_and_tiny_tightly_coupled_seam",
+    "gemini": "not_applicable_neutral_deterministic_provider_free_proof",
+    "native_subagents": "declined_negative_packet_and_reconciliation_cost_exceeded_one_parser_seam",
+    "gpt_sol": "serial_plan_parser_integration_tests_acceptance_git_and_closeout_owner"
+  },
+  "first_use_gate": {
+    "status": "closed_pending_candidate_specific_evaluation",
+    "historical_derived_reusable_artifacts": 0,
+    "opened_by_this_result": false
+  },
+  "authority": {
+    "strongest_meaning": "provider_free_parser_recovery_candidate_for_a_separately_planned_fresh_local_measurement",
+    "historical_product_provider_runtime_or_protected_ref_authority": false
+  }
+}

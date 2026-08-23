@@ -1,0 +1,12 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "recorded_at": "2026-08-24T07:59:22.5874518+10:00",
+  "operation_id": "raisa-provider-free-authored-synthetic-historical-diary-leading-explicit-time-token-recovery-rehearsal",
+  "status": "delivered",
+  "provider_status": 1,
+  "request_id": "6a8016db-19aa-4a12-aa28-b65e725c2afb",
+  "continuing_to": [
+    "raisa-local-only-historical-diary-leading-explicit-time-token-bounded-measurement-rehearsal"
+  ],
+  "contains_phi": false
+}
