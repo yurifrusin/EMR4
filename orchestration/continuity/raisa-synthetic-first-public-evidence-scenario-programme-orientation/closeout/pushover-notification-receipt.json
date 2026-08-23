@@ -1,0 +1,13 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "recorded_at": "2026-08-24T00:38:26.2531291+10:00",
+  "operation_id": "raisa-synthetic-first-public-evidence-scenario-programme-orientation",
+  "status": "delivered",
+  "provider_status": 1,
+  "request_id": "72dd8913-1c76-4e90-a4b9-71aee5abbacd",
+  "continuing_to": [
+    "raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal",
+    "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review"
+  ],
+  "contains_phi": false
+}
