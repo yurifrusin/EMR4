@@ -1,0 +1,155 @@
+{
+  "schema_version": "emr4.check-in-operational-evidence-input-contract.v1",
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+  "planning_source": "c976c5ab3096e4c93566dad8afd19a6f9f7d6b96",
+  "accepted_normalizer_source": "39502b308a96842ffe0dcf06f9325eb2fb14b6f9",
+  "accepted_normalizer_product_source": "ae62faf95b289b369a6eea1793ee4325f33447bc",
+  "input_schema_version": "emr4.check-in-operational-evidence-inputs.v1",
+  "public_function": "normalize_check_in_operational_evidence_inputs",
+  "public_result": "OperationalEvidenceInputNormalizationResult",
+  "input_shape": {
+    "input_type": "exact_builtin_dict",
+    "top_level_fields": [
+      "schema_version",
+      "role_attestation",
+      "rotation_custody_attestations",
+      "break_glass_evidence"
+    ],
+    "nested_record_type": "exact_builtin_dict",
+    "rotation_collection_type": "exact_builtin_list",
+    "unknown_or_missing_fields": "deny",
+    "input_mutation_allowed": false,
+    "bundle_digest_generated": false
+  },
+  "role_attestation": {
+    "fields": [
+      "evidence_reference",
+      "artifact_sha256",
+      "authority_git_object",
+      "environment_identifier",
+      "admission_snapshot_generation",
+      "logical_role_id",
+      "database_role_identifier",
+      "credential_secret_slot_id",
+      "ownership_observation",
+      "rls_bypass_observation",
+      "product_relation_ownership_observation",
+      "cross_tenant_probe_observation",
+      "observed_at",
+      "fresh_until",
+      "independent_verifier_reference"
+    ],
+    "ownership_observations": ["non_owner", "owner", "unknown"],
+    "rls_bypass_observations": ["nobypassrls", "bypassrls", "unknown"],
+    "product_relation_ownership_observations": ["absent", "present", "unknown"],
+    "cross_tenant_probe_observations": ["denied", "allowed", "not_observed"],
+    "boolean_claim_fields": 0,
+    "evaluator_mismatch_values_representable": true
+  },
+  "rotation_custody_attestations": {
+    "count": 3,
+    "ordered_slot_ids": [
+      "database_connection_credential",
+      "application_token_signing_key",
+      "admission_snapshot_verification_key"
+    ],
+    "fields": [
+      "slot_id",
+      "evidence_reference",
+      "artifact_sha256",
+      "authority_git_object",
+      "environment_identifier",
+      "admission_snapshot_generation",
+      "key_id",
+      "version",
+      "rotation_sequence",
+      "observed_at",
+      "fresh_until",
+      "independent_verifier_reference"
+    ],
+    "artifact_digest_subject": "evidence_artifact_not_secret_material",
+    "secret_or_resolution_fields": 0
+  },
+  "break_glass_evidence": {
+    "fields": [
+      "mode",
+      "state",
+      "evidence_reference",
+      "artifact_sha256",
+      "authority_git_object",
+      "environment_identifier",
+      "admission_snapshot_generation",
+      "observed_at",
+      "fresh_until",
+      "independent_verifier_reference"
+    ],
+    "mode": "deny_only",
+    "states": ["inactive", "engaged_deny", "retired"],
+    "all_states_structurally_representable": true,
+    "bypass_or_grant_fields": 0
+  },
+  "patterns": {
+    "artifact_sha256": "^[0-9a-f]{64}$",
+    "authority_git_object": "^[0-9a-f]{40}$",
+    "environment_identifier": "^env:[a-z0-9][a-z0-9._-]{2,95}$",
+    "evidence_reference": "^evidence-ref:[a-z0-9][a-z0-9._/-]{2,127}$",
+    "logical_role_id": "^[a-z][a-z0-9_]{2,95}$",
+    "database_role_identifier": "^[a-z][a-z0-9_]{2,62}$",
+    "key_id": "^[a-z0-9][a-z0-9._-]{2,95}$",
+    "version": "^[a-z0-9][a-z0-9._-]{0,63}$"
+  },
+  "integer_bounds": {
+    "admission_snapshot_generation_minimum": 1,
+    "rotation_sequence_minimum": 1
+  },
+  "time_contract": {
+    "input": "timezone_aware_rfc3339",
+    "normalized_output": "utc_z",
+    "fresh_until_strictly_follows_observed_at": true,
+    "current_time_read_allowed": false,
+    "stale_at_future_evaluation_time_representable": true
+  },
+  "closed_reason_codes_in_precedence_order": [
+    "evidence_input_type_invalid",
+    "evidence_forbidden_field",
+    "evidence_boolean_claim_forbidden",
+    "evidence_shape_invalid",
+    "evidence_git_object_invalid",
+    "evidence_time_invalid",
+    "evidence_inputs_normalized"
+  ],
+  "deferred_to_pure_evaluator": [
+    "comparison_with_normalized_manifest",
+    "cross_record_uniqueness",
+    "full_object_binding",
+    "environment_and_generation_binding",
+    "role_requirement_satisfaction",
+    "key_and_version_binding",
+    "independent_verifier_separation",
+    "freshness_at_explicit_evaluation_time",
+    "break_glass_gate_decision",
+    "closed_evidence_gate_reason"
+  ],
+  "parallelism_assessment": {
+    "deepseek_flash": "declined_incompatible_accepted_runner_no_new_runner_engineering",
+    "gemini_verifier": "declined_low_risk_unmounted_no_trigger",
+    "native_subagents": "declined_developer_policy",
+    "serial_owner": "gpt_sol"
+  },
+  "owned_paths": [
+    "app/services/appointment_check_in_operational_evidence.py",
+    "tests/test_appointment_check_in_operational_evidence.py",
+    "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py"
+  ],
+  "closed_boundaries": {
+    "external_fact_selected": false,
+    "evaluator_or_admission_seam_added": false,
+    "ambient_configuration_or_credential_read": false,
+    "secret_or_reference_resolved": false,
+    "database_or_route_used": false,
+    "ordinary_practice_enabled": false,
+    "product_or_client_changed": false,
+    "production_deployment_release_or_pages": false,
+    "protected_ref_moved": false
+  }
+}

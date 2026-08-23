@@ -1,0 +1,195 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_closed_typed_operational_evidence_input_contract_and_authored_reference_only_conformance",
+  "source_evidence": {
+    "live_handover_current_baton": "AGENTS.md was reread completely at SHA-256 342ea9c7a1e2639965a5b17622fcc862ddb9c707790980f35c9ac903dae2432f. Its specific current result, native-Harness acceptance, active product track and next implementation select this typed-input operation at Continuity 423 / Compass 405; older generic worker-allocation language is superseded for this operation by the later specific acceptance, active latch and Yuri's pragmatic Harness direction.",
+    "current_authority_allocation": "GPT Sol owns the serial contract, implementation, tests, review, acceptance, closeout and clockwork reading. DeepSeek native Harness is declined because the accepted custom runner hard-codes one synthetic edit and cannot be reused unchanged for this source-and-test package; changing it would violate the no-new-runner boundary. Gemini is withheld unless a risk trigger arises. Native subagents are declined under developer policy.",
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-plan.md",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json",
+      "docs/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-environment-manifest-operational-secret-posture-gap-decomposition-sol-acceptance.md",
+      "docs/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture.md",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/contract.json",
+      "orchestration/continuity/raisa-provider-free-default-off-check-in-environment-manifest-secret-posture-architecture/environment-manifest.schema.json",
+      "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-plan.md",
+      "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-sol-acceptance.md",
+      "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/efficacy-reading.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "Only authored-reference, non-secret repository input examples may be used. The tranche defines structural typed inputs only: no self-asserted satisfaction booleans, external fact selection, evaluator, admission seam, current-time decision, manifest or secret resolution, environment/configuration/credential access, database, route, product data, ordinary-practice activation, protected evidence, deployment, release, Pages or protected-ref action is permitted.",
+    "git_refs_and_worktree": "A fresh fetch and machine readback established task-branch origin alignment, exact protected-ref alignment, required lineage ancestry, tracked cleanliness and preservation of every untracked path including docs/branding. The preflight machine snapshot alone is controlling for exact ref and worktree evidence; no Git object ID is manually supplied here."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+    "active_tranche": "Provider-free unmounted canonical check-in typed operational-evidence inputs rehearsal",
+    "objective": "Freeze and implement only the closed typed operational-evidence input model required by the accepted gap decomposition, with authored-reference-only tests and no external fact, evaluator, admission seam or runtime mount.",
+    "status": "in_progress",
+    "source_head": "39502b308a96842ffe0dcf06f9325eb2fb14b6f9",
+    "authority_source": "Yuri's standing uninterrupted-development authority and the accepted gap decomposition authorize the next dependency-satisfied provider-free repository node without a ceremonial pause.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_narrow_typed_input_contract_and_parallelism_reading",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_authored_reference_only_typed_operational_evidence_inputs",
+      "closed_input_model_only_evaluator_and_admission_seam_deferred",
+      "external_operational_facts_remain_absent_and_unselected",
+      "reuse_only_already_accepted_compatible_native_harness_machinery_or_decline_lane",
+      "no_generic_harness_interoperability_qualification_or_new_runner_broker_guard",
+      "no_operational_manifest_secret_value_reference_resolution_environment_variable_configuration_or_credential_store_access",
+      "no_database_conftest_engine_schema_fixture_docker_postgresql_sql_live_role_or_infrastructure_action",
+      "no_route_call_api_openapi_graphql_client_configuration_or_product_mounting",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal",
+    "assessed_stage": "post_rehydration_pre_plan",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The accepted custom runner is intentionally one-edit and prompt-specific; it cannot implement this new source-and-test package unchanged. Adapting the runner, broker or guard would reopen interoperability engineering forbidden by the latch and pragmatic adoption rule.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "This is a low-risk unmounted closed input model with no API, runtime or external-fact decision. Reassess only if exact semantics conflict, scope expands or deterministic tests expose ambiguity.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation; Sol retains one serial authority surface for the exact contract and acceptance.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "complete five-source rehydration and machine receipt",
+      "freeze exact closed typed-input contract without evaluator semantics",
+      "implement source and authored-reference-only tests",
+      "perform deterministic review and verification",
+      "publish one clockwork closeout reading"
+    ],
+    "reassessment_triggers": [
+      "if the typed input contract would require an external fact or evaluator decision",
+      "if API or product runtime surfaces enter the diff",
+      "if deterministic conformance exposes unresolved semantic ambiguity",
+      "before closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "The complete live Baton, authority allocation, accepted gap and architecture packet, normalizer acceptance, protected boundaries, active latch and fresh Git snapshot were restored; the exact accepted custom-runner reuse constraint was then read before lane disposition.",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["Sol owns the serial typed-input implementation and acceptance."]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "retained_acceptance_evidence",
+      "reachability": "reachable",
+      "evidence": ["The accepted custom runner is healthy for its frozen one-edit synthetic task but is not shape-compatible with this package; no native session or provider call is selected."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No silent fallback; not selected."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Verifier withheld unless a risk trigger arises."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent spawned under developer policy."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}
