@@ -153,7 +153,7 @@ def _fixed_keys(monkeypatch: pytest.MonkeyPatch) -> None:
 def _configure_synthetic_paths(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> tuple[Path, Path]:
     repo = tmp_path / "repo"
     root = repo / "local_data/historical-diary-trove/raw/pilot_01"
-    attempt = repo / "local_data/historical-diary-trove/measured-probes/2026-08-24-story-coordinate-v1"
+    attempt = repo / "local_data/historical-diary-trove/measured-probes/2026-08-24-story-coordinate-v2"
     root.mkdir(parents=True)
     core = repo / "core.py"
     extractor = repo / "extract.ps1"

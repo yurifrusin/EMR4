@@ -28,7 +28,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 BOUND_ROOT = REPO_ROOT / "local_data/historical-diary-trove/raw/pilot_01"
 ATTEMPT_ROOT = (
     REPO_ROOT
-    / "local_data/historical-diary-trove/measured-probes/2026-08-24-story-coordinate-v1"
+    / "local_data/historical-diary-trove/measured-probes/2026-08-24-story-coordinate-v2"
 )
 MANIFEST_PATH = ATTEMPT_ROOT / "private-binding-manifest.json"
 PRIVATE_PROJECTION_PATH = ATTEMPT_ROOT / "private-derived-projection.json"
@@ -1340,7 +1340,7 @@ def execute() -> dict[str, Any]:
     ]
     completed = run_owned_word_subprocess(
         command,
-        timeout_seconds=900,
+        timeout_seconds=1800,
     )
     if len(completed.stdout) > MAX_PRIVATE_PIPE_BYTES:
         raise ProbeError("private_pipe_byte_cap_exceeded")
