@@ -61,9 +61,17 @@ MAX_STORY_DISTANCE_QUARTER_POINTS = 16
 TIME_TOKEN = re.compile(
     r"^(?P<hour>[01]?\d|2[0-3])[:.](?P<minute>[0-5]\d)(?:\s*(?P<ampm>[AaPp][Mm]))?$"
 )
+LEADING_TIME_TOKEN = re.compile(
+    r"^(?P<hour>[01]?\d|2[0-3])[:.](?P<minute>[0-5]\d)"
+    r"(?P<ampm>[ \t]*[AaPp][Mm])?"
+)
 DATE_TOKEN = re.compile(r"^\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?$")
+DATE_LIKE = re.compile(r"(?<!\d)\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?(?!\d)")
 EMAIL = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")
 PHONE = re.compile(r"(?<!\d)(?:\+?61[\s().-]*|0)[2-478](?:[\s().-]*\d){8}(?!\d)")
+CONTACT_PHONE_LIKE = re.compile(
+    r"(?<!\d)(?:\+?\d[\s().-]*)?\d(?:[\s().-]*\d){7,}(?!\d)"
+)
 MEDICARE = re.compile(r"(?<!\d)\d{4}[\s-]?\d{5}[\s-]?\d(?!\d)")
 ADDRESS = re.compile(
     r"\b\d{1,5}\s+[A-Za-z][A-Za-z .'-]{2,}\s+"
@@ -292,7 +300,11 @@ class ProjectedCell(StrictFrozenModel):
     segment_ordinal: int = Field(ge=0, lt=MAX_SEGMENTS_PER_CELL)
     resource_ordinal: str = Field(pattern=r"^resource_[0-9]+_[0-9]+$")
     time_minute: int | None = Field(default=None, ge=0, le=1439)
-    time_mapping: Literal["explicit_story_same_page_coordinate", "unmapped"]
+    time_mapping: Literal[
+        "leading_explicit_time_token",
+        "explicit_story_same_page_coordinate",
+        "unmapped",
+    ]
     format_bucket: str = Field(pattern=r"^format_[0-9]+$")
     length_bucket: Literal["short", "medium", "long", "very_long"]
     content_bucket: Literal["structural_text", "identifier_like", "sensitive_note_like"]
@@ -692,6 +704,35 @@ def _time_minute(value: str) -> int | None:
     return hour * 60 + minute
 
 
+def _leading_explicit_time_payload(value: str) -> tuple[int, str] | None:
+    """Return one same-segment explicit minute and minimized payload."""
+
+    if not value or any(marker in value for marker in ("\r", "\n", "\x0b", "\x07")):
+        return None
+    match = LEADING_TIME_TOKEN.match(value)
+    if match is None:
+        return None
+    minute = _time_minute(match.group(0))
+    if minute is None or match.end() == len(value):
+        return None
+    if value[match.end()] not in " \t-":
+        return None
+    payload_start = match.end()
+    while payload_start < len(value) and value[payload_start] in " \t-":
+        payload_start += 1
+    payload = value[payload_start:].strip(" \t")
+    if not payload:
+        return None
+    if (
+        DATE_LIKE.search(payload)
+        or PHONE.search(payload)
+        or CONTACT_PHONE_LIKE.search(payload)
+        or EMAIL.search(payload)
+    ):
+        return None
+    return minute, payload
+
+
 def _cell_segments(value: str) -> tuple[str, ...]:
     """Split one Word table cell without collapsing structural empty positions."""
 
@@ -861,8 +902,12 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
         projected_cells: list[ProjectedCell] = []
         for cell, segments in structured_cells:
             for segment_ordinal, text in enumerate(segments):
-                if _time_minute(text) is not None:
+                leading_time = _leading_explicit_time_payload(text)
+                if leading_time is None and _time_minute(text) is not None:
                     continue
+                direct_minute: int | None = None
+                if leading_time is not None:
+                    direct_minute, text = leading_time
                 if not text or DATE_TOKEN.fullmatch(text):
                     continue
                 source_segment_count += 1
@@ -880,10 +925,17 @@ def project_and_measure(extraction: PrivateExtraction) -> tuple[PrivateProjectio
                     "cell", "cell", f"{normalized}|{occurrence}", second_key
                 )
                 resource = f"resource_{cell.table_index}_{cell.column_index}"
-                current_minute, time_mapping, mapping_outcome = _story_coordinate_mapping(
-                    cell.segment_coordinates[segment_ordinal],
-                    snapshot.story_time_anchors,
-                )
+                if direct_minute is not None:
+                    current_minute = direct_minute
+                    time_mapping = "leading_explicit_time_token"
+                    mapping_outcome = "leading_explicit_time_token"
+                else:
+                    current_minute, time_mapping, mapping_outcome = (
+                        _story_coordinate_mapping(
+                            cell.segment_coordinates[segment_ordinal],
+                            snapshot.story_time_anchors,
+                        )
+                    )
                 mapping_outcomes[mapping_outcome] += 1
                 if current_minute is not None:
                     mapped_time_count += 1
