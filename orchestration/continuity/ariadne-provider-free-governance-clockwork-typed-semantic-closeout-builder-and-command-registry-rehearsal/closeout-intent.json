@@ -1,0 +1,96 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "ariadne-clockwork-typed-semantic-builder",
+  "recorded_at": "2026-08-23T17:17:00.4614783+10:00",
+  "closeout": {
+    "operation_id": "ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal",
+    "title": "Provider-free governance clockwork typed semantic closeout builder and command registry rehearsal",
+    "builds_on": [
+      "ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair"
+    ],
+    "authority_notes": [
+      "Yuri requested an evidence-backed improvement to clockwork ergonomics.",
+      "GPT Sol owns the serial provider-free tooling rehearsal and acceptance.",
+      "No Harness, product, provider or protected surface opens."
+    ],
+    "decisions": [
+      {
+        "id": "compile-repository-known-closeout-fields",
+        "source": "docs/ariadne-clockwork-typed-semantic-builder-plan.md",
+        "summary": "Compile fixed governance mechanics from one closed semantic profile."
+      },
+      {
+        "id": "materialize-one-shared-human-header-reading",
+        "source": "docs/ariadne-clockwork-typed-semantic-builder-plan.md",
+        "summary": "Derive every prospective human evidence header from one Brisbane timestamp."
+      },
+      {
+        "id": "execute-one-closed-verification-profile",
+        "source": "docs/ariadne-clockwork-typed-semantic-builder-plan.md",
+        "summary": "Run exact repository-owned verification commands before semantic publication."
+      }
+    ],
+    "claim_scope": [
+      "One provider-free tooling closeout compiles through the existing tick.",
+      "Closed selectors replace caller-authored command, label and path shapes.",
+      "One recorded timestamp derives every prospective human evidence header.",
+      "Legacy v1 and v2 intent semantics remain unchanged."
+    ],
+    "additional_receipts": [
+      "orchestration/agent_inbox/codex/ariadne-clockwork-typed-semantic-builder-postcompaction-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-typed-semantic-builder-precommit-receipt.json"
+    ],
+    "additional_artifacts": [],
+    "unresolved_gates": [
+      "Arbitrary semantic profiles and commands remain closed.",
+      "Native useful-completion reliability remains unproved.",
+      "Product, provider, deployment and protected refs remain closed."
+    ],
+    "journey": {
+      "strategic_role": "Move repository-known clerical work from the orchestrator into the existing clock.",
+      "outcome": "One compact semantic request expands to the complete legacy governance meaning."
+    },
+    "current_position": {
+      "strategic_role": "Retain fail-closed governance while reducing operator choices.",
+      "why_now": "The matched first repair passed and a restored-session Git-object lapse exposed the next free-form trap.",
+      "outcome": "Typed selectors, derived headers and exact commands replace repeated form filling.",
+      "unlocks": [
+        "A matched operator-leaf efficacy review.",
+        "Future eligible tooling closeouts with fewer caller choices."
+      ],
+      "does_not_solve": [
+        "It does not author semantic narrative.",
+        "It does not qualify a worker transport.",
+        "It does not open product or protected integration."
+      ],
+      "orientation_statement": "Compile mechanics; retain human and model judgment only for semantic meaning."
+    },
+    "next_operation": {
+      "operation_id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+      "active_tranche": "Provider-free governance clockwork typed-builder matched efficacy review",
+      "objective": "Measure actual caller leaves, invocations, failures, elapsed closeout friction and safety invariants after the typed-builder rehearsal.",
+      "authority_source": "The accepted clockwork ergonomics sequence and standing authority select one provider-free matched review.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_exact_matched_measurement_and_no_added_bureaucracy_acceptance"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "provider_free_read_only_typed_builder_matched_efficacy_review_only",
+    "measure_actual_caller_leaves_invocations_failures_elapsed_friction_and_preserved_safety_invariants",
+    "recommend_retention_adjustment_or_rollback_without_implementing_a_new_control_layer",
+    "no_native_harness_worker_provider_call_or_transport_qualification",
+    "no_silent_claude_code_or_other_transport_fallback",
+    "no_authority_allocation_or_worker_transport_policy_change",
+    "no_existing_product_source_route_api_client_configuration_or_runtime_change",
+    "no_environment_variable_secret_credential_network_database_or_infrastructure_access",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}

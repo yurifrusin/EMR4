@@ -1,0 +1,72 @@
+{
+  "schema_version": "ariadne.governance_typed_semantic_builder_evidence.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal",
+  "candidate_source": "20cffb0fef641db5f4890a1d8dc0a7936e573a52",
+  "result": "typed_semantic_builder_and_closed_command_registry_pass",
+  "interface_measurement": {
+    "legacy_no_incident_scalar_leaves": 151,
+    "semantic_fixture_scalar_leaves": 64,
+    "live_semantic_closeout_scalar_leaves": 61,
+    "removed_live_caller_scalar_leaves": 90,
+    "live_caller_leaf_reduction_percent": 59.6,
+    "frozen_semantic_leaf_ceiling": 100,
+    "legacy_command_manifest_scalar_leaves": 36,
+    "semantic_verification_selector_scalar_leaves": 1,
+    "legacy_baton_acceptance_scalar_leaves": 6,
+    "semantic_baton_selector_scalar_leaves": 1,
+    "prospective_human_documents": 5,
+    "derived_date_timestamp_scalar_values": 10,
+    "caller_timestamp_scalar_values": 1
+  },
+  "derived_profile": {
+    "semantic_schema": "ariadne.governance_semantic_closeout_intent.v1",
+    "profile": "provider_free_governance_tooling_v1",
+    "baton_slot": "current_deepseek_native_harness_acceptance",
+    "verification_profile": "governance_clockwork_core_v1",
+    "command_ids": [
+      "semantic-closeout-evidence-json",
+      "semantic-closeout-ruff",
+      "semantic-closeout-governance-tests"
+    ],
+    "legacy_versions_preserved": [
+      "ariadne.governance_live_tick_intent.v1",
+      "ariadne.governance_live_tick_intent.v2"
+    ]
+  },
+  "deterministic_evidence": {
+    "semantic_fixture_tests_passed": 7,
+    "whole_file_governance_tests_passed": 115,
+    "ruff": "passed",
+    "byte_compilation": "passed",
+    "diff_check": "passed",
+    "header_second_run_byte_idempotent": true,
+    "midwrite_failure_byte_restoration": true,
+    "complete_hostile_header_error_count": 5,
+    "command_failure_rejects_before_preparation": true,
+    "tracked_drift_rejects_before_preparation": true,
+    "canonical_mutation_during_fixture_build": 0,
+    "implementation_test_correction_rounds": 2
+  },
+  "transaction_state": {
+    "live_semantic_publication_attempted": false,
+    "canonical_publications": 0,
+    "canonical_rollbacks": 0,
+    "pointer_movements": 0,
+    "status": "pending_clean_self_publication_after_closeout_evidence_commit"
+  },
+  "parallelism": {
+    "deepseek": "declined_native_profile_paused_no_fallback",
+    "gemini": "declined_provider_free_deterministic_repair",
+    "native_subagents": "declined_developer_policy_and_serial_state_boundary",
+    "owner": "gpt_sol"
+  },
+  "protected_postconditions": {
+    "product_files_changed": 0,
+    "provider_calls": 0,
+    "model_workers": 0,
+    "protected_ref_movements": 0,
+    "pages_runs": 0,
+    "docs_branding_preserved": true,
+    "unrelated_untracked_files_preserved": true
+  }
+}

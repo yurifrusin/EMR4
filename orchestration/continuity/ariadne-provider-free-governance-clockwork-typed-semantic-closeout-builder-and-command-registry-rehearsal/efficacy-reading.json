@@ -1,0 +1,59 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal",
+  "source_head": "20cffb0fef641db5f4890a1d8dc0a7936e573a52",
+  "result": "repository_known_mechanics_removed_from_operator_surface_without_new_control_layer",
+  "matched_measurement": {
+    "legacy_no_incident_scalar_leaves": 151,
+    "semantic_fixture_scalar_leaves": 64,
+    "live_semantic_closeout_scalar_leaves": 61,
+    "removed_live_caller_scalar_leaves": 90,
+    "live_reduction_percent": 59.6,
+    "frozen_ceiling_passed": true,
+    "command_leaves_replaced_by_one_selector": 36,
+    "baton_leaves_replaced_by_one_selector": 6,
+    "human_header_values_derived_from_one_timestamp": 10
+  },
+  "workflow": {
+    "new_runtime_control_layers": 0,
+    "new_required_operator_fields": 0,
+    "new_approval_gates": 0,
+    "new_ledgers": 0,
+    "new_required_closeout_documents": 0,
+    "new_product_files": 0,
+    "provider_calls": 0,
+    "model_workers": 0,
+    "implementation_test_correction_rounds": 2,
+    "canonical_publications_before_acceptance": 0,
+    "canonical_rollbacks_before_acceptance": 0,
+    "product_reruns": 0,
+    "accepted_development_yield": 1
+  },
+  "safety": {
+    "legacy_path_preserved": true,
+    "complete_header_conflict_set": true,
+    "atomic_header_restoration": true,
+    "closed_command_registry": true,
+    "shell_execution": false,
+    "command_failure_prepublication": true,
+    "tracked_drift_prepublication": true,
+    "single_writer_preserved": true,
+    "pointer_last_preserved": true,
+    "byte_exact_rollback_preserved": true,
+    "whole_file_governance_tests_passed": 115
+  },
+  "harness": {
+    "coarse_interop_states": [
+      "prepared",
+      "terminal",
+      "accepted_or_recovered"
+    ],
+    "fine_grained_clockwork_coupling": "retired",
+    "native_profile": "paused",
+    "claude_code_fallback": "not_authorized",
+    "deepseek_calls": 0,
+    "gemini_calls": 0,
+    "native_subagents": 0
+  },
+  "assessment": "The second repair reduces the frozen representative fixture by 87 caller scalar leaves and the first live semantic closeout by 90, removing the highest-yield repository-known command, Baton and header repetition while preserving the existing admitted transaction and writer. Its live transaction facts remain pending until the clean semantic self-publication."
+}
