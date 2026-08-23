@@ -209,3 +209,14 @@ This prevents an unadmitted housekeeping or unrelated large document from
 vetoing an otherwise exact bounded day while making it impossible for either
 class to reach content processing. One corrected metadata-only bind is
 authorised; it is not a content retry.
+
+The corrected size-aware bind at exact source
+`f449c536194a4760b9fc58db42d29fe0e6df87e7` then returned an aggregate-only
+`timestamp_binding_revision_required`: all 582 in-envelope files belonged to
+one six-numeric-group shape, with zero timestamp successes. It again created no
+attempt root or manifest and opened no content. The parser may therefore join
+all numeric groups only when their total is exactly 14 digits, then apply the
+unchanged unambiguous four-digit-year year-first/day-first calendars. Extra or
+missing digits, two-digit-year ambiguity and multiple valid interpretations
+remain rejected. One further metadata-only binding is authorised from this
+shape-derived repair; Phase B remains closed until it passes.

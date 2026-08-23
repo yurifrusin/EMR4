@@ -204,6 +204,7 @@ def _is_reparse(path: Path) -> bool:
 def _parse_datetime_digits(value: str) -> datetime | None:
     candidates: set[datetime] = set()
     numeric_tokens = re.findall(r"\d+", value)
+    joined = "".join(numeric_tokens)
     for length, parsers in (
         (
             14,
@@ -213,7 +214,7 @@ def _parse_datetime_digits(value: str) -> datetime | None:
             ),
         ),
     ):
-        for part in (token for token in numeric_tokens if len(token) == length):
+        for part in (joined,) if len(joined) == length else ():
             for parser in parsers:
                 try:
                     year, month, day, hour, minute, second = map(int, parser(part))

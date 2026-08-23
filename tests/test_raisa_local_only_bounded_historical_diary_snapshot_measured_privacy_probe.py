@@ -127,6 +127,8 @@ def _write_dense_day(root: Path, *, count: int = probe.MAX_FILES) -> None:
     [
         ("Diary_20160824093015.doc", datetime(2016, 8, 24, 9, 30, 15)),
         ("Diary_24082016093015.doc", datetime(2016, 8, 24, 9, 30, 15)),
+        ("2016-08-24 09-30-15 Diary.doc", datetime(2016, 8, 24, 9, 30, 15)),
+        ("24-08-2016 09-30-15 Diary.doc", datetime(2016, 8, 24, 9, 30, 15)),
     ],
 )
 def test_closed_timestamp_families(filename, expected):
@@ -141,6 +143,7 @@ def test_closed_timestamp_families(filename, expected):
         "Diary_010203040506.doc",
         "Diary_160824093015.doc",
         "Diary_240816093015.doc",
+        "2016-08-24 09-30-15 v2 Diary.doc",
         "x" * 261,
     ],
 )

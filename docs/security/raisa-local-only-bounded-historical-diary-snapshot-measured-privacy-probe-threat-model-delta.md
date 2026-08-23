@@ -141,3 +141,9 @@ and oversized exclusions without reading them. Neither class may enter the
 candidate set, selected manifest, Word process or private pipe. Exact selected
 file and total-byte caps remain independently enforced. This changes root-wide
 veto ergonomics only; it adds no admitted byte or path.
+
+The size-aware metadata retry exposed only an aggregate six-numeric-group
+filename shape. Joining those groups is safe only at an exact 14-digit total;
+the two four-digit-year calendar interpretations still must yield exactly one
+valid timestamp. The parser never emits a group, value, date or filename, and
+any extra numeric suffix remains a closed parse failure.
