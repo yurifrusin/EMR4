@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://emr4.example/schemas/check-in-reference-only-conformance-evidence-v1.json",
+  "title": "Canonical check-in reference-only conformance evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result",
+    "candidate_source",
+    "packet",
+    "canonical_path",
+    "hostile_cases",
+    "counts",
+    "readiness",
+    "external_facts",
+    "human_choices",
+    "api_spine",
+    "effects"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.check_in_reference_only_conformance_evidence.v1"},
+    "result": {"const": "raisa_provider_free_unmounted_canonical_check_in_reference_only_operational_evidence_conformance_packet_rehearsal_pass"},
+    "candidate_source": {"$ref": "#/$defs/full_git_object"},
+    "packet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification", "sha256", "unchanged", "operational_fact_status", "secret_material_count", "resolved_reference_count", "external_fact_count"],
+      "properties": {
+        "classification": {"const": "authored_synthetic_opaque_reference_only"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "unchanged": {"const": true},
+        "operational_fact_status": {"const": "not_established"},
+        "secret_material_count": {"const": 0},
+        "resolved_reference_count": {"const": 0},
+        "external_fact_count": {"const": 0}
+      }
+    },
+    "canonical_path": {"$ref": "#/$defs/canonical_path"},
+    "hostile_cases": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": {"$ref": "#/$defs/hostile_case"}
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hostile_cases", "admission_releases", "ordinary_admission_releases", "provider_calls", "product_data_records", "external_facts_established", "human_choices_selected"],
+      "properties": {
+        "hostile_cases": {"const": 12},
+        "admission_releases": {"const": 0},
+        "ordinary_admission_releases": {"const": 0},
+        "provider_calls": {"const": 0},
+        "product_data_records": {"const": 0},
+        "external_facts_established": {"const": 0},
+        "human_choices_selected": {"const": 0}
+      }
+    },
+    "readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["satisfied", "blocking_gap", "operational_evidence_gap", "repository_prerequisites_remaining", "verdict"],
+      "properties": {
+        "satisfied": {"const": 11},
+        "blocking_gap": {"const": 0},
+        "operational_evidence_gap": {"const": 1},
+        "repository_prerequisites_remaining": {"const": 0},
+        "verdict": {"const": "not_ready_for_ordinary_practice_admission"}
+      }
+    },
+    "external_facts": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status"],
+        "properties": {
+          "id": {
+            "enum": [
+              "live_runtime_role_binding_and_attestation",
+              "three_current_opaque_secret_bindings",
+              "three_current_rotation_custody_attestations",
+              "current_deny_only_break_glass_posture",
+              "one_current_environment_manifest_instance",
+              "operational_uniqueness_and_freshness_readback"
+            ]
+          },
+          "status": {"const": "absent"}
+        }
+      }
+    },
+    "human_choices": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status"],
+        "properties": {
+          "id": {
+            "enum": [
+              "select_target_environment_and_practice_scope",
+              "approve_secret_custody_and_operational_owners",
+              "approve_rotation_policy_and_independent_verifiers",
+              "authorize_live_role_secret_and_manifest_provisioning",
+              "confirm_ordinary_activation_separately"
+            ]
+          },
+          "status": {"const": "unselected"}
+        }
+      }
+    },
+    "api_spine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["boundary", "graphql_mutation_added", "rest_command_added_or_changed", "runtime_authority_added"],
+      "properties": {
+        "boundary": {"const": "declarative_manifest_and_default_off_admission_reading"},
+        "graphql_mutation_added": {"const": false},
+        "rest_command_added_or_changed": {"const": false},
+        "runtime_authority_added": {"const": false}
+      }
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["feature_flag_changed", "authored_synthetic_allowlist_changed", "ordinary_practice_enabled", "admission_record_activated", "generic_status_arrived_changed", "waiting_area_changed", "product_source_changed", "deployment_or_release", "protected_ref_changed"],
+      "properties": {
+        "feature_flag_changed": {"const": false},
+        "authored_synthetic_allowlist_changed": {"const": false},
+        "ordinary_practice_enabled": {"const": false},
+        "admission_record_activated": {"const": false},
+        "generic_status_arrived_changed": {"const": false},
+        "waiting_area_changed": {"const": false},
+        "product_source_changed": {"const": false},
+        "deployment_or_release": {"const": false},
+        "protected_ref_changed": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "full_git_object": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "canonical_path": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["manifest_reason", "evidence_input_reason", "evidence_gate_reason", "base_admission_reason", "decision", "lane", "reason", "admission_released", "ordinary_admission_released"],
+      "properties": {
+        "manifest_reason": {"const": "manifest_normalized"},
+        "evidence_input_reason": {"const": "evidence_inputs_normalized"},
+        "evidence_gate_reason": {"const": "evidence_gate_satisfied"},
+        "base_admission_reason": {"const": "ordinary_activation_closed"},
+        "decision": {"const": "denied"},
+        "lane": {"const": "ordinary_practice"},
+        "reason": {"const": "ordinary_activation_closed"},
+        "admission_released": {"const": false},
+        "ordinary_admission_released": {"const": false}
+      }
+    },
+    "hostile_case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "manifest_reason", "evidence_input_reason", "evidence_gate_reason", "base_admission_reason", "decision", "lane", "reason", "admission_released", "ordinary_admission_released", "external_fact_count"],
+      "properties": {
+        "id": {
+          "enum": [
+            "manifest_absent",
+            "manifest_ambiguous",
+            "manifest_secret_material",
+            "evidence_boolean_claim",
+            "manifest_stale",
+            "wrong_environment",
+            "wrong_role",
+            "self_verified_role",
+            "duplicate_evidence_reference",
+            "rotation_key_mismatch",
+            "break_glass_engaged",
+            "snapshot_binding_mismatch"
+          ]
+        },
+        "manifest_reason": {"type": "string"},
+        "evidence_input_reason": {"type": "string"},
+        "evidence_gate_reason": {
+          "enum": [
+            "manifest_absent",
+            "manifest_ambiguous",
+            "manifest_invalid",
+            "role_evidence_invalid",
+            "manifest_stale",
+            "environment_mismatch",
+            "role_binding_missing",
+            "rotation_evidence_invalid",
+            "secret_reference_invalid",
+            "break_glass_not_inactive",
+            "evidence_gate_satisfied"
+          ]
+        },
+        "base_admission_reason": {"const": "ordinary_activation_closed"},
+        "decision": {"const": "denied"},
+        "lane": {"const": "ordinary_practice"},
+        "reason": {"const": "ordinary_evidence_missing"},
+        "admission_released": {"const": false},
+        "ordinary_admission_released": {"const": false},
+        "external_fact_count": {"const": 0}
+      }
+    }
+  }
+}

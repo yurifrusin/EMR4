@@ -1,0 +1,238 @@
+{
+  "schema_version": "raisa.check_in_reference_only_conformance_packet.v1",
+  "classification": "authored_synthetic_opaque_reference_only",
+  "operational_fact_status": "not_established",
+  "evaluation_time": "2026-08-25T00:00:00Z",
+  "manifest": {
+    "schema_version": "emr4.check-in-ordinary-environment-manifest.v1",
+    "manifest_id": "check-in-env-manifest:authored-reference",
+    "environment": {
+      "class": "test",
+      "identifier": "env:authored-reference"
+    },
+    "admission_snapshot_generation": 7,
+    "authority_git_object": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+    "practice_scope_reference": "practice-ref:authored/reference",
+    "runtime_role": {
+      "logical_role_id": "appointment_check_in_ordinary_runtime_v1",
+      "database_role_identifier": "check_in_runtime",
+      "credential_secret_slot_id": "database_connection_credential",
+      "non_owner_required": true,
+      "nobypassrls_required": true,
+      "product_relation_ownership_allowed": false,
+      "tenant_attestation_reference": "evidence-ref:role/attestation"
+    },
+    "secret_references": [
+      {
+        "slot_id": "database_connection_credential",
+        "provider_namespace": "authored-reference-namespace-1",
+        "secret_reference": "secret-ref:check-in/1",
+        "key_id": "authored-key-1",
+        "version": "v1",
+        "rotation_policy_reference": "policy-ref:rotation/1",
+        "rotation_evidence_reference": "evidence-ref:rotation/1"
+      },
+      {
+        "slot_id": "application_token_signing_key",
+        "provider_namespace": "authored-reference-namespace-2",
+        "secret_reference": "secret-ref:check-in/2",
+        "key_id": "authored-key-2",
+        "version": "v2",
+        "rotation_policy_reference": "policy-ref:rotation/2",
+        "rotation_evidence_reference": "evidence-ref:rotation/2"
+      },
+      {
+        "slot_id": "admission_snapshot_verification_key",
+        "provider_namespace": "authored-reference-namespace-3",
+        "secret_reference": "secret-ref:check-in/3",
+        "key_id": "authored-key-3",
+        "version": "v3",
+        "rotation_policy_reference": "policy-ref:rotation/3",
+        "rotation_evidence_reference": "evidence-ref:rotation/3"
+      }
+    ],
+    "rotation_evidence": [
+      {
+        "slot_id": "database_connection_credential",
+        "evidence_reference": "evidence-ref:rotation/1",
+        "artifact_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "authority_git_object": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+        "environment_identifier": "env:authored-reference",
+        "admission_snapshot_generation": 7,
+        "key_id": "authored-key-1",
+        "version": "v1",
+        "rotation_sequence": 1,
+        "observed_at": "2026-08-21T00:00:00+10:00",
+        "fresh_until": "2026-09-21T00:00:00+10:00",
+        "independent_verifier_reference": "evidence-ref:verifier/1"
+      },
+      {
+        "slot_id": "application_token_signing_key",
+        "evidence_reference": "evidence-ref:rotation/2",
+        "artifact_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+        "authority_git_object": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+        "environment_identifier": "env:authored-reference",
+        "admission_snapshot_generation": 7,
+        "key_id": "authored-key-2",
+        "version": "v2",
+        "rotation_sequence": 2,
+        "observed_at": "2026-08-22T00:00:00+10:00",
+        "fresh_until": "2026-09-22T00:00:00+10:00",
+        "independent_verifier_reference": "evidence-ref:verifier/2"
+      },
+      {
+        "slot_id": "admission_snapshot_verification_key",
+        "evidence_reference": "evidence-ref:rotation/3",
+        "artifact_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+        "authority_git_object": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+        "environment_identifier": "env:authored-reference",
+        "admission_snapshot_generation": 7,
+        "key_id": "authored-key-3",
+        "version": "v3",
+        "rotation_sequence": 3,
+        "observed_at": "2026-08-23T00:00:00+10:00",
+        "fresh_until": "2026-09-23T00:00:00+10:00",
+        "independent_verifier_reference": "evidence-ref:verifier/3"
+      }
+    ],
+    "break_glass": {
+      "mode": "deny_only",
+      "state": "inactive",
+      "evidence_reference": "evidence-ref:break-glass/state",
+      "bypass_allowed": false,
+      "secret_injection_allowed": false,
+      "automatic_clear_allowed": false
+    },
+    "issued_at": "2026-08-20T00:00:00+10:00",
+    "expires_at": "2026-10-20T00:00:00+10:00"
+  },
+  "operational_evidence": {
+    "schema_version": "emr4.check-in-operational-evidence-inputs.v1",
+    "role_attestation": {
+      "evidence_reference": "evidence-ref:role/attestation",
+      "artifact_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+      "authority_git_object": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+      "environment_identifier": "env:authored-reference",
+      "admission_snapshot_generation": 7,
+      "logical_role_id": "appointment_check_in_ordinary_runtime_v1",
+      "database_role_identifier": "check_in_runtime",
+      "credential_secret_slot_id": "database_connection_credential",
+      "ownership_observation": "non_owner",
+      "rls_bypass_observation": "nobypassrls",
+      "product_relation_ownership_observation": "absent",
+      "cross_tenant_probe_observation": "denied",
+      "observed_at": "2026-08-20T00:00:00+10:00",
+      "fresh_until": "2026-09-20T00:00:00+10:00",
+      "independent_verifier_reference": "evidence-ref:verifier/role"
+    },
+    "rotation_custody_attestations": [
+      {
+        "slot_id": "database_connection_credential",
+        "evidence_reference": "evidence-ref:rotation/1",
+        "artifact_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "authority_git_object": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+        "environment_identifier": "env:authored-reference",
+        "admission_snapshot_generation": 7,
+        "key_id": "authored-key-1",
+        "version": "v1",
+        "rotation_sequence": 1,
+        "observed_at": "2026-08-21T00:00:00+10:00",
+        "fresh_until": "2026-09-21T00:00:00+10:00",
+        "independent_verifier_reference": "evidence-ref:verifier/1"
+      },
+      {
+        "slot_id": "application_token_signing_key",
+        "evidence_reference": "evidence-ref:rotation/2",
+        "artifact_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+        "authority_git_object": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+        "environment_identifier": "env:authored-reference",
+        "admission_snapshot_generation": 7,
+        "key_id": "authored-key-2",
+        "version": "v2",
+        "rotation_sequence": 2,
+        "observed_at": "2026-08-22T00:00:00+10:00",
+        "fresh_until": "2026-09-22T00:00:00+10:00",
+        "independent_verifier_reference": "evidence-ref:verifier/2"
+      },
+      {
+        "slot_id": "admission_snapshot_verification_key",
+        "evidence_reference": "evidence-ref:rotation/3",
+        "artifact_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+        "authority_git_object": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+        "environment_identifier": "env:authored-reference",
+        "admission_snapshot_generation": 7,
+        "key_id": "authored-key-3",
+        "version": "v3",
+        "rotation_sequence": 3,
+        "observed_at": "2026-08-23T00:00:00+10:00",
+        "fresh_until": "2026-09-23T00:00:00+10:00",
+        "independent_verifier_reference": "evidence-ref:verifier/3"
+      }
+    ],
+    "break_glass_evidence": {
+      "mode": "deny_only",
+      "state": "inactive",
+      "evidence_reference": "evidence-ref:break-glass/state",
+      "artifact_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+      "authority_git_object": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+      "environment_identifier": "env:authored-reference",
+      "admission_snapshot_generation": 7,
+      "observed_at": "2026-08-20T00:00:00+10:00",
+      "fresh_until": "2026-09-20T00:00:00+10:00",
+      "independent_verifier_reference": "evidence-ref:verifier/break-glass"
+    }
+  },
+  "admission": {
+    "snapshot": {
+      "schema_version": "emr4.check-in-admission-kernel.v1",
+      "signature_valid": true,
+      "authority_git_object": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+      "authority_git_object_resolved": true,
+      "fresh": true,
+      "environment": "test",
+      "snapshot_generation": 7,
+      "snapshot_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "current_record_count": 1,
+      "kill_switch": "clear",
+      "ordinary_record": {
+        "state": "active",
+        "practice_id": "authored-reference-practice",
+        "environment": "test",
+        "operation_family": "canonical_check_in",
+        "record_version": 1,
+        "snapshot_generation": 7,
+        "operational_evidence_valid": true
+      },
+      "environment_evidence_identifier": "env:authored-reference"
+    },
+    "request": {
+      "feature_enabled": true,
+      "authored_synthetic_admitted": false,
+      "practice_id": "authored-reference-practice",
+      "environment": "test",
+      "operation_family": "canonical_check_in"
+    }
+  },
+  "readiness": {
+    "satisfied": 11,
+    "blocking_gap": 0,
+    "operational_evidence_gap": 1,
+    "verdict": "not_ready_for_ordinary_practice_admission",
+    "repository_prerequisites_remaining_after_pass": 0
+  },
+  "external_fact_ids": [
+    "live_runtime_role_binding_and_attestation",
+    "three_current_opaque_secret_bindings",
+    "three_current_rotation_custody_attestations",
+    "current_deny_only_break_glass_posture",
+    "one_current_environment_manifest_instance",
+    "operational_uniqueness_and_freshness_readback"
+  ],
+  "human_choice_ids": [
+    "select_target_environment_and_practice_scope",
+    "approve_secret_custody_and_operational_owners",
+    "approve_rotation_policy_and_independent_verifiers",
+    "authorize_live_role_secret_and_manifest_provisioning",
+    "confirm_ordinary_activation_separately"
+  ]
+}
