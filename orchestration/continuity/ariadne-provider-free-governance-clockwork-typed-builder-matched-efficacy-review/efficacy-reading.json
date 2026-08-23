@@ -20,6 +20,8 @@
     "implementation_test_correction_rounds": 2,
     "postpublication_traceability_defects": 1,
     "baseline_measurement_corrections": 1,
+    "prepublication_test_fixture_defects": 1,
+    "failed_publication_canonical_mutations": 0,
     "product_reruns": 0,
     "provider_reruns": 0,
     "new_control_layers": 0,
@@ -32,5 +34,5 @@
     "test_reduction": "not_yet_admitted",
     "worker_clock_coupling": "coarse_states_only"
   },
-  "assessment": "The first live typed closeout preserves safety and reduces the normalized caller surface by 59.3 percent. Its idempotent evidence overwrite is contained but requires a narrow repair. The much larger remaining clerical surface is seven runtime states plus seven receipts, which should be reduced only by deriving their repeated structure inside the existing preflight."
+  "assessment": "The first live typed closeout preserves safety and reduces the normalized caller surface by 59.3 percent. Its idempotent evidence overwrite is contained but requires a narrow repair. The review closeout also failed closed on a regression fixture that encoded moving state as constants; deriving those facts from the isolated worktree restored all 115 tests without canonical mutation. The much larger remaining clerical surface is seven runtime states plus seven receipts, which should be reduced only by deriving their repeated structure inside the existing preflight."
 }

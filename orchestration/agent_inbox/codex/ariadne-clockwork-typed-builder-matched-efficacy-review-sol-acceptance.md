@@ -27,6 +27,12 @@ the next ranked ergonomic target because seven runtime states and seven
 receipts added 2,334 lines, 24.3 times the semantic intent. Test-cadence
 reduction remains unadmitted.
 
+The first closeout publication attempt failed before canonical mutation because
+one regression fixture hard-coded a moving leaf total and graph predecessor.
+The test-only recovery derives both from its isolated worktree. Both focused
+regressions and all 115 governance tests pass, and the canonical clock remains
+unchanged by the rejected attempt.
+
 No external verifier is required or authorised for this exact provider-free
 read-only review. DeepSeek, Gemini and native subagents remain declined with
 the frozen rationale. No implementation, product, data, provider, production,

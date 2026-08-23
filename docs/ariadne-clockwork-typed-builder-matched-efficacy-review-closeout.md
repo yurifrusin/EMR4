@@ -43,7 +43,15 @@ file. No digest is reconstructed.
 
 The builder is retained. Repeated `--publish` readback is contained until the
 selected repair preserves publication evidence. The review makes no source
-change.
+implementation change.
+
+The review's own first closeout publication attempt also failed closed before
+canonical mutation because a semantic regression fixture had frozen a leaf
+total and graph predecessor that legitimately change as the clock advances.
+The fixture now derives both from its isolated worktree; both focused
+regressions and all 115 governance tests pass. This reinforces the ergonomic
+rule that tests should compare invariant relationships rather than transcribe a
+current reading into another permanent form.
 
 ## Ranked next work
 

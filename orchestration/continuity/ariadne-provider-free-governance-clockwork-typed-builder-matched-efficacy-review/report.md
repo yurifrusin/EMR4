@@ -58,6 +58,20 @@ defect. The missing digests will not be reconstructed by hand. Until repaired,
 closeouts should publish once and use canonical validation rather than a second
 `--publish` for readback.
 
+## Closeout recovery finding
+
+The review's own first publication attempt failed closed before canonical
+mutation. The fixed test profile found that its semantic regression fixture
+still treated two moving facts as constants: a historical leaf total and the
+then-current graph predecessor. Once the accepted clock advanced, both became
+stale.
+
+The narrow test-only correction derives the leaf expectation from the current
+protected-boundary list and the predecessor from the isolated worktree's graph.
+Both focused regressions and all 115 governance tests pass. This supplies one
+more practical ergonomics rule: safety tests should assert invariant relations,
+not copy the current reading into a permanent assertion.
+
 ## Where the remaining weight moved
 
 The compact semantic intent is 96 lines and 5,502 bytes. The same tranche added
@@ -90,4 +104,4 @@ not create a new receipt layer.
 No implementation changed in this review. No Harness, Claude fallback,
 provider, model worker, product source, data, database, credential, environment,
 runtime, deployment, release, Pages, protected evidence or protected ref was
-opened.
+opened. One test fixture changed only to derive moving governance state.

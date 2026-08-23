@@ -76,8 +76,23 @@
       "class": "repository_defect",
       "effect": "The idempotent publish rewrote the operation evidence/report pair and removed the preceding command digest readings from that convenience artifact.",
       "canonical_effect": "none"
+    },
+    {
+      "id": "semantic_regression_fixture_encoded_moving_current_state",
+      "class": "test_fixture_defect",
+      "effect": "The closeout publication gate rejected because one semantic fixture hard-coded a historical leaf total and graph predecessor instead of deriving both from its isolated worktree.",
+      "canonical_effect": "none"
     }
   ],
+  "closeout_recovery": {
+    "failed_semantic_publication_attempts_before_canonical_mutation": 1,
+    "canonical_mutations_from_failed_attempt": 0,
+    "focused_regressions_after_correction": 2,
+    "focused_regressions_passed": 2,
+    "whole_file_governance_tests_after_correction": 115,
+    "whole_file_governance_tests_passed": 115,
+    "repair_scope": "derive fixture leaf expectation and graph predecessor from the isolated worktree"
+  },
   "decision": {
     "typed_builder": "retain_with_traceability_repair",
     "first_priority": "preserve_publication_evidence_across_idempotent_readback",

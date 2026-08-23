@@ -131,6 +131,8 @@ def _semantic_intent(worktree: Path) -> dict:
         worktree
         / "orchestration/continuity/ariadne-active-operation-latch/current.json"
     )
+    contract = _json(worktree / CONTRACT_PATH.relative_to(ROOT))
+    graph = _json(worktree / contract["canonical_paths"]["continuity"])
     artifact_slug = "ariadne-clockwork-typed-semantic-builder"
     plan_path = f"docs/{artifact_slug}-plan.md"
     return {
@@ -142,7 +144,7 @@ def _semantic_intent(worktree: Path) -> dict:
             "operation_id": latch["operation_id"],
             "title": "Provider-free governance clockwork typed semantic closeout builder and command registry rehearsal",
             "builds_on": [
-                "ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair"
+                graph["nodes"][-1]["id"]
             ],
             "authority_notes": [
                 "Yuri requested an evidence-backed clockwork ergonomics improvement.",
@@ -637,8 +639,11 @@ def test_semantic_builder_compiles_repository_owned_mechanics_with_fewer_leaves(
         )
         intent = _semantic_intent(worktree)
 
-        assert semantic_scalar_leaf_count(intent) == 64
-        assert semantic_scalar_leaf_count(intent) <= 100
+        scalar_leaves = semantic_scalar_leaf_count(intent)
+        assert scalar_leaves == 44 + len(
+            intent["next_operation_protected_boundaries"]
+        )
+        assert scalar_leaves <= 100
         admitted = expand_semantic_tick_intent(worktree, intent, contract)
 
         manifest = admitted["transaction_manifest"]

@@ -29,6 +29,13 @@ The largest remaining ergonomic burden is outside the semantic intent. The
 intent is 96 lines / 5,502 bytes, while seven runtime states and seven receipts
 added 2,334 lines / 130,653 bytes—more than 24 times as much text.
 
+The review closeout itself then supplied a further useful example. Its first
+publication attempt failed safely because a test had copied a current leaf
+count and graph position into permanent assertions. Those values legitimately
+changed when the clock advanced. The test now derives both from its isolated
+worktree; the two focused cases and all 115 governance tests pass, with no
+canonical mutation from the failed attempt.
+
 ## Recommendation and boundaries
 
 First repair idempotent evidence preservation inside the existing CLI. Then
