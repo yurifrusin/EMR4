@@ -21,7 +21,7 @@ $MaximumStoryAnchorsPerDocument = 4096
 $MaximumVerticalQuarterPoints = 100000
 $OutputSchema = "historical_diary.private_word_story_coordinate_extraction.v2"
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
-$historicalAttemptRoot = Join-Path $repositoryRoot "local_data\historical-diary-trove\measured-probes\2026-08-24-story-coordinate-v2"
+$historicalAttemptRoot = Join-Path $repositoryRoot "local_data\historical-diary-trove\measured-probes\2026-08-24-leading-token-v3"
 $syntheticAttemptRoot = Join-Path $repositoryRoot "local_data\authored-synthetic-diary-word-coordinate-recovery\run-v1"
 $syntheticDocumentRoot = Join-Path $syntheticAttemptRoot "documents"
 if ($ExecutionProfile -eq "HistoricalMeasuredProbe") {
