@@ -1,0 +1,9 @@
+{
+  "schema_version": "emr4.pushover_notification_receipt.v1",
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief",
+  "sent_at": "2026-08-23T23:10:45.7060848+10:00",
+  "request": "a03fb73d-68f1-41b0-a8c3-bbe93eab5c23",
+  "status": 1,
+  "contains_phi": false,
+  "engine_state": "paused_for_user_attention"
+}

@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Ask for the root decision once; derive later gates only after its answer.
+> Stop the clock where intent, not more repository mechanics, is required.
 
 ## North star
 
@@ -650,22 +650,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    One live tick determines whether the bound driver is ready for default eligible governance use. Lineage parent: `ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal`.
 317. **Stop repository ceremony at the boundary where only external facts and human decisions remain. — Provider-free read-only canonical check-in ordinary-practice admission blocker-priority review**
    One exact dependency ranking identifies the smallest genuine user-attention fork. Lineage parent: `ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-live-adoption-efficacy-review`.
+318. **Turn the completed repository readiness line into one intelligible human-owned root choice. — Provider-free read-only canonical check-in operational-evidence root-decision brief**
+   A concise brief replaces piecemeal future questions without selecting any answer. Lineage parent: `raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review`.
 
 ## Current position
 
-**Present the root operational-evidence decision without prematurely asking for downstream governance choices. — Provider-free read-only canonical check-in ordinary-practice admission blocker-priority review**
+**Wait at the boundary before a real target and practice scope are selected. — Provider-free read-only canonical check-in operational-evidence root-decision brief**
 
-**Why this proof came next:** All repository prerequisites are accepted and the remaining evidence must bind to a human-selected target.
+**Why this proof came next:** No repository prerequisite remains and all useful downstream evidence depends on the target.
 
-One concise brief asks whether to commence evidence acquisition and names the target and practice scope required on yes.
+Yuri can defer or commence for one named non-production environment and practice scope.
 
 ### What this unlocks
 
-- A single coherent Yuri decision instead of repeated piecemeal attention requests.
+- A target-bound custody and rotation governance plan if Yuri selects commence.
 
 ### What it does not solve
 
-- It does not select a target, access an environment, provision a secret or enable ordinary practice.
+- It does not access an environment, provision evidence or activate ordinary check-in.
 
 ## Continuity and authority
 
@@ -1680,7 +1682,8 @@ Prerequisites:
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-closeout.md`
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-plan.md`
 - `docs/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review.md`
-- `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-closeout.md`
+- `docs/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-closeout.md`
+- `docs/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-plan.md`
 - `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-plan.md`
 - `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review-closeout.md`
 - `docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review-closeout.md`
@@ -2497,7 +2500,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-pre-verifier-acceptance-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-arrival-check-in-command-family-convergence-review-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review-preplanning-runtime-state.json`
 - `orchestration/agent_inbox/codex/raisa-provider-free-read-only-post-cancellation-programme-orientation-gemini37-review-packet.md`
@@ -3150,7 +3153,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md`
-- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/evidence.json`
+- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/evidence.json`
+- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/report.md`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/report.md`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-convergence-review/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review/efficacy-reading.json`
@@ -3961,4 +3965,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 422; continuity graph revision 440._
+_Compass map revision 423; continuity graph revision 441._

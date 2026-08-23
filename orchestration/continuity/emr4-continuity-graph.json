@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 440,
+  "graph_revision": 441,
   "harvests": [],
   "nodes": [
     {
@@ -35577,9 +35577,109 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief",
+      "title": "Provider-free read-only canonical check-in operational-evidence root-decision brief",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri's standing authority admits this one provider-free non-actuating brief but not the human answer.",
+          "GPT Sol owns the serial brief; DeepSeek, Gemini and native subagents have no work package.",
+          "No product, provider, environment, data, runtime or protected surface opened."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "present-exact-two-outcome-root-choice",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/report.md",
+          "status": "accepted",
+          "summary": "Ask only defer or commence and require target environment plus practice scope on commence."
+        },
+        {
+          "id": "preserve-four-later-gates",
+          "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/evidence.json",
+          "status": "accepted",
+          "summary": "Keep custody governance, provisioning, independent readback and activation separate and unselected."
+        },
+        {
+          "id": "stop-at-genuine-user-attention",
+          "source": "docs/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-closeout.md",
+          "status": "accepted",
+          "summary": "Publish the brief, then block the decision operation until Yuri selects or defers the root outcome."
+        }
+      ],
+      "claim_scope": [
+        "The ordinary-practice readiness posture remains exactly 11/0/1 with zero repository prerequisites.",
+        "The brief presents two root outcomes and two required commence fields.",
+        "All six external facts and all five human decisions remain unselected.",
+        "No ordinary admission was released and no product or operational surface changed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-plan.md",
+          "docs/security/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/evidence.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/report.md",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-23--raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-operational-evidence-root-decision-brief-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-operational-evidence-root-decision-brief-pre-verifier-receipt.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration/agent_inbox/codex/raisa-check-in-operational-evidence-root-decision-brief-preplanning-continuation-intent.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-operational-evidence-root-decision-brief-pre-verifier-continuation-intent.json",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/blocked-transition-intent.json"
+        ]
+      },
+      "unresolved_gates": [
+        "The root commence-or-defer outcome, target environment and practice scope remain human-owned and unselected.",
+        "Custody, provisioning, independent readback and ordinary activation remain separately closed.",
+        "Product, provider, data, production, deployment, Pages and protected refs remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T23:10:45.7060848+10:00",
+      "updated_at": "2026-08-23T23:10:45.7060848+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "eed77c1b87b62a507537036690d97a3620ca6267",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T22:32:36.1602337+10:00"
+  "updated_at": "2026-08-23T23:10:45.7060848+10:00"
 }

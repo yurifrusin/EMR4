@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.governance_live_blocked_transition_intent.v1",
+  "operation_id": "raisa-canonical-check-in-operational-evidence-acquisition-root-user-decision",
+  "completed_stage": "Accepted and published the provider-free canonical check-in operational-evidence root-decision brief.",
+  "user_attention_reason": "Yuri must choose defer_keep_closed or commence_nonproduction_evidence_acquisition and, on commence, name the target non-production environment and practice scope.",
+  "terminal_reason": "The next dependency is a genuinely human-owned external target and scope choice; standing development authority cannot infer it.",
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v1",
+    "commands": [
+      {
+        "command_id": "root-decision-brief-json-reading",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "json.tool",
+          "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/evidence.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required"
+      }
+    ]
+  }
+}

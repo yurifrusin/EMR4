@@ -1,0 +1,27 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief",
+  "source_head": "eed77c1b87b62a507537036690d97a3620ca6267",
+  "result": "one_root_decision_without_new_control_layer",
+  "readiness": {
+    "current_counts": "11_0_1",
+    "repository_prerequisites_remaining": 0,
+    "external_facts_inferred": 0,
+    "human_choices_inferred": 0,
+    "ordinary_admission_releases": 0
+  },
+  "workflow": {
+    "new_schemas": 0,
+    "new_validators": 0,
+    "new_scripts": 0,
+    "new_runtime_control_layers": 0,
+    "new_product_source_files": 0,
+    "provider_calls": 0,
+    "model_workers": 0,
+    "root_outcomes_presented": 2,
+    "commence_fields_requested": 2,
+    "later_gates_preserved": 4,
+    "procedural_reruns_before_closeout": 0
+  },
+  "assessment": "The brief condenses five human choices and six operational facts into the only decision needed now, while explicitly deferring every downstream gate. It adds no mechanism whose own operation could create further mistakes."
+}

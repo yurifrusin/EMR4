@@ -1,0 +1,96 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief",
+  "recorded_at": "2026-08-23T23:10:45.7060848+10:00",
+  "closeout": {
+    "operation_id": "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief",
+    "title": "Provider-free read-only canonical check-in operational-evidence root-decision brief",
+    "builds_on": [
+      "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review"
+    ],
+    "authority_notes": [
+      "Yuri's standing authority admits this one provider-free non-actuating brief but not the human answer.",
+      "GPT Sol owns the serial brief; DeepSeek, Gemini and native subagents have no work package.",
+      "No product, provider, environment, data, runtime or protected surface opened."
+    ],
+    "decisions": [
+      {
+        "id": "present-exact-two-outcome-root-choice",
+        "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/report.md",
+        "summary": "Ask only defer or commence and require target environment plus practice scope on commence."
+      },
+      {
+        "id": "preserve-four-later-gates",
+        "source": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/evidence.json",
+        "summary": "Keep custody governance, provisioning, independent readback and activation separate and unselected."
+      },
+      {
+        "id": "stop-at-genuine-user-attention",
+        "source": "docs/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-closeout.md",
+        "summary": "Publish the brief, then block the decision operation until Yuri selects or defers the root outcome."
+      }
+    ],
+    "claim_scope": [
+      "The ordinary-practice readiness posture remains exactly 11/0/1 with zero repository prerequisites.",
+      "The brief presents two root outcomes and two required commence fields.",
+      "All six external facts and all five human decisions remain unselected.",
+      "No ordinary admission was released and no product or operational surface changed."
+    ],
+    "additional_receipts": [
+      "orchestration/agent_inbox/codex/raisa-check-in-operational-evidence-root-decision-brief-preplanning-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-operational-evidence-root-decision-brief-pre-verifier-receipt.json",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/closeout/pushover-notification-receipt.json"
+    ],
+    "additional_artifacts": [
+      "orchestration/agent_inbox/codex/raisa-check-in-operational-evidence-root-decision-brief-preplanning-continuation-intent.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-operational-evidence-root-decision-brief-pre-verifier-continuation-intent.json",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/blocked-transition-intent.json"
+    ],
+    "unresolved_gates": [
+      "The root commence-or-defer outcome, target environment and practice scope remain human-owned and unselected.",
+      "Custody, provisioning, independent readback and ordinary activation remain separately closed.",
+      "Product, provider, data, production, deployment, Pages and protected refs remain closed."
+    ],
+    "journey": {
+      "strategic_role": "Turn the completed repository readiness line into one intelligible human-owned root choice.",
+      "outcome": "A concise brief replaces piecemeal future questions without selecting any answer."
+    },
+    "current_position": {
+      "strategic_role": "Wait at the boundary before a real target and practice scope are selected.",
+      "why_now": "No repository prerequisite remains and all useful downstream evidence depends on the target.",
+      "outcome": "Yuri can defer or commence for one named non-production environment and practice scope.",
+      "unlocks": [
+        "A target-bound custody and rotation governance plan if Yuri selects commence."
+      ],
+      "does_not_solve": [
+        "It does not access an environment, provision evidence or activate ordinary check-in."
+      ],
+      "orientation_statement": "Stop the clock where intent, not more repository mechanics, is required."
+    },
+    "next_operation": {
+      "operation_id": "raisa-canonical-check-in-operational-evidence-acquisition-root-user-decision",
+      "active_tranche": "Canonical check-in operational-evidence acquisition root user decision",
+      "objective": "Await Yuri's choice between defer_keep_closed and commence_nonproduction_evidence_acquisition, including a target non-production environment and practice scope on commence.",
+      "authority_source": "The accepted root-decision brief identifies a genuinely human-owned external target and scope choice.",
+      "next_stage": "publish_blocked_user_attention_latch_then_request_the_exact_root_decision"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "human_root_decision_only",
+    "admit_only_defer_or_commence_nonproduction_with_target_and_practice_scope",
+    "do_not_infer_or_select_any_human_answer",
+    "no_worker_harness_provider_or_transport_call",
+    "no_environment_credential_secret_network_database_or_infrastructure_access",
+    "no_product_source_route_api_client_configuration_or_runtime_change",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ]
+}

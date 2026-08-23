@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 422,
-  "updated_at": "2026-08-23T22:32:36.1602337+10:00",
-  "source_graph_revision": 440,
-  "orientation_statement": "Ask for the root decision once; derive later gates only after its answer.",
+  "map_revision": 423,
+  "updated_at": "2026-08-23T23:10:45.7060848+10:00",
+  "source_graph_revision": 441,
+  "orientation_statement": "Stop the clock where intent, not more repository mechanics, is required.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5357,24 +5357,34 @@
         "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-plan.md",
         "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/report.md"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief",
+      "lineage_parent": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review",
+      "strategic_role": "Turn the completed repository readiness line into one intelligible human-owned root choice.",
+      "outcome": "A concise brief replaces piecemeal future questions without selecting any answer.",
+      "evidence": [
+        "docs/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-plan.md",
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/report.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review",
-    "strategic_role": "Present the root operational-evidence decision without prematurely asking for downstream governance choices.",
-    "why_now": "All repository prerequisites are accepted and the remaining evidence must bind to a human-selected target.",
-    "outcome": "One concise brief asks whether to commence evidence acquisition and names the target and practice scope required on yes.",
+    "node_id": "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief",
+    "strategic_role": "Wait at the boundary before a real target and practice scope are selected.",
+    "why_now": "No repository prerequisite remains and all useful downstream evidence depends on the target.",
+    "outcome": "Yuri can defer or commence for one named non-production environment and practice scope.",
     "unlocks": [
-      "A single coherent Yuri decision instead of repeated piecemeal attention requests."
+      "A target-bound custody and rotation governance plan if Yuri selects commence."
     ],
     "does_not_solve": [
-      "It does not select a target, access an environment, provision a secret or enable ordinary practice."
+      "It does not access an environment, provision evidence or activate ordinary check-in."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/evidence.json",
-      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review/report.md",
-      "docs/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review-sol-acceptance.md"
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/evidence.json",
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/report.md",
+      "docs/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

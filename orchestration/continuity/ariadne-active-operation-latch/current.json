@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief",
-  "active_tranche": "Provider-free read-only canonical check-in operational-evidence root-decision brief",
-  "objective": "Produce one concise lay and technical brief asking only whether to commence operational-evidence acquisition and, if yes, for the target environment and practice scope, while preserving every later custody, provisioning, readback and activation gate.",
+  "operation_id": "raisa-canonical-check-in-operational-evidence-acquisition-root-user-decision",
+  "active_tranche": "Canonical check-in operational-evidence acquisition root user decision",
+  "objective": "Await Yuri's choice between defer_keep_closed and commence_nonproduction_evidence_acquisition, including a target non-production environment and practice scope on commence.",
   "status": "in_progress",
-  "source_head": "485b4170d998dbfd663907124929c6f89125e70a",
-  "authority_source": "Yuri's standing authority admits one provider-free non-actuating decision brief; target selection itself remains human-owned.",
+  "source_head": "eed77c1b87b62a507537036690d97a3620ca6267",
+  "authority_source": "The accepted root-decision brief identifies a genuinely human-owned external target and scope choice.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_the_root_decision_brief_contract",
+    "completed_stage": "Accepted raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief at the machine-resolved source.",
+    "next_executable_stage": "publish_blocked_user_attention_latch_then_request_the_exact_root_decision",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,10 +34,9 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_read_only_root_decision_brief_only",
-    "ask_only_whether_to_commence_and_if_yes_target_environment_and_practice_scope",
+    "human_root_decision_only",
+    "admit_only_defer_or_commence_nonproduction_with_target_and_practice_scope",
     "do_not_infer_or_select_any_human_answer",
-    "pause_for_user_attention_after_brief_closeout",
     "no_worker_harness_provider_or_transport_call",
     "no_environment_credential_secret_network_database_or_infrastructure_access",
     "no_product_source_route_api_client_configuration_or_runtime_change",
