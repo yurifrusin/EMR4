@@ -1,19 +1,19 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-canonical-check-in-operational-evidence-acquisition-root-user-decision",
-  "active_tranche": "Canonical check-in operational-evidence acquisition root user decision",
-  "objective": "Await Yuri's choice between defer_keep_closed and commence_nonproduction_evidence_acquisition, including a target non-production environment and practice scope on commence.",
-  "status": "blocked",
-  "source_head": "eed77c1b87b62a507537036690d97a3620ca6267",
-  "authority_source": "The accepted root-decision brief identifies a genuinely human-owned external target and scope choice.",
+  "operation_id": "raisa-synthetic-first-public-evidence-scenario-programme-orientation",
+  "active_tranche": "Synthetic-first public-evidence scenario programme orientation",
+  "objective": "Consolidate authoritative public research into a traceable wholly synthetic scenario grammar and freeze the next Raisa architecture tranche, with deterministic baselines and separately bounded provider-live synthetic evaluation tracks.",
+  "status": "in_progress",
+  "source_head": "7c4d374d12ecbf050326a84b34b99931e4439aca",
+  "authority_source": "Yuri explicitly selected defer_keep_closed for real and real-practice-like data, preferred synthetic cases, confirmed he is not anywhere near ready for real-practice data, and asked for research-directed workers to improve synthetic scenarios and provider-live development value.",
   "checkpoint": {
-    "completed_stage": "Accepted and published the provider-free canonical check-in operational-evidence root-decision brief.",
-    "next_executable_stage": null,
+    "completed_stage": "Yuri selected defer_keep_closed and separated the real-data boundary from provider-live use of wholly synthetic scenarios.",
+    "next_executable_stage": "complete_public_source_research_then_freeze_traceable_synthetic_scenario_grammar_and_next_architecture_tranche",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
       "review": 0,
-      "verification": 1
+      "verification": 0
     },
     "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
   },
@@ -26,20 +26,21 @@
   },
   "resume_after_compaction": true,
   "user_attention": {
-    "required": true,
-    "reason": "Yuri must choose defer_keep_closed or commence_nonproduction_evidence_acquisition and, on commence, name the target non-production environment and practice scope."
+    "required": false,
+    "reason": null
   },
   "terminal_response": {
-    "permitted": true,
-    "reason": "The next dependency is a genuinely human-owned external target and scope choice; standing development authority cannot infer it."
+    "permitted": false,
+    "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "human_root_decision_only",
-    "admit_only_defer_or_commence_nonproduction_with_target_and_practice_scope",
-    "do_not_infer_or_select_any_human_answer",
-    "no_worker_harness_provider_or_transport_call",
-    "no_environment_credential_secret_network_database_or_infrastructure_access",
-    "no_product_source_route_api_client_configuration_or_runtime_change",
+    "wholly_authored_synthetic_cases_only",
+    "public_non_phi_research_sources_only",
+    "no_real_practice_or_real_practice_like_data",
+    "no_real_or_real_practice_like_fine_tuning",
+    "provider_free_deterministic_baseline_preserved",
+    "provider_live_synthetic_execution_requires_a_separately_frozen_plan_and_preexecution_receipt",
+    "no_product_source_route_api_client_configuration_or_runtime_change_during_orientation",
     "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
     "no_product_patient_appointment_clinical_historical_or_protected_data",
     "no_production_runtime_deployment_release_or_pages",

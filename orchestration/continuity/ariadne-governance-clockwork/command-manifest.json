@@ -2,12 +2,12 @@
   "schema_version": "ariadne.governance_command_manifest.v1",
   "commands": [
     {
-      "command_id": "root-decision-brief-json-reading",
+      "command_id": "synthetic-first-user-decision-json-reading",
       "executable": ".venv/Scripts/python.exe",
       "arguments": [
         "-m",
         "json.tool",
-        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/evidence.json"
+        "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief/user-decision.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     }
