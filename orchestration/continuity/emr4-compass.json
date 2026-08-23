@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 408,
-  "updated_at": "2026-08-23T12:36:36.1771905+10:00",
-  "source_graph_revision": 426,
-  "orientation_statement": "The clockwork now reads the native Harness at prepared, terminal and accepted-or-recovered boundaries while Sol retains every lasting repository decision.",
+  "map_revision": 409,
+  "updated_at": "2026-08-23T13:38:13.5091803+10:00",
+  "source_graph_revision": 427,
+  "orientation_statement": "Environment evidence is now a typed, independently mandatory but non-admitting input; the next step is a read-only readiness convergence review, not runtime activation or more Harness diagnosis.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5214,27 +5214,38 @@
         "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/evidence.json",
         "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/efficacy-reading.json"
       ]
+    },
+    {
+      "node_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "lineage_parent": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
+      "strategic_role": "Require reviewed environment evidence as an independent input to the future ordinary canonical check-in admission boundary",
+      "outcome": "The typed evidence reading now composes fail-closed with every existing admission control while ordinary activation remains closed.",
+      "evidence": [
+        "orchestration_harness/check_in_environment_evidence_admission.py",
+        "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/deterministic-evidence.json",
+        "orchestration/agent_inbox/antigravity/raisa-check-in-environment-evidence-admission-input-seam-gemini37-review-receipt.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
-    "strategic_role": "Use one monitored native DeepSeek contributor package inside the next default-off canonical check-in development tranche",
-    "why_now": "The Harness already has sufficient boot, HMR, effective-tool and trace evidence; the missing measurement is useful accepted EMR4 work.",
-    "outcome": "One task-coupled custom-runner adaptation and one occupied real-work session will be judged through ordinary Sol review and EMR4 tests, not another qualification programme.",
+    "node_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+    "strategic_role": "Reassess the remaining ordinary-practice canonical check-in readiness gap after the typed environment-evidence seam",
+    "why_now": "The manifest normalizer, typed evidence inputs, pure evidence gate and admission-input composition are accepted, so a read-only convergence review can identify the next smallest blocker without opening runtime authority.",
+    "outcome": "One evidence-led successor will select the narrowest provider-free next tranche while the failed native profile remains out of the immediate worker allocation.",
     "unlocks": [
-      "The first honest native-Harness useful-candidate reading on current EMR4 work.",
-      "A reusable typed work-order runner instead of task-specific synthetic runner identity.",
-      "A sparse three-reading clockwork/Harness interface with lower closeout friction."
+      "A complete static chain from normalized environment evidence to a fail-closed default-off admission decision.",
+      "A current convergence reading that can separate remaining record, signature, distribution and command-mounting gaps.",
+      "Continued Raisa development without another native-Harness diagnostic detour."
     ],
     "does_not_solve": [
-      "One assignment cannot prove general DeepSeek or Harness reliability.",
-      "The default-off admission seam does not enable ordinary practice or activate an admission record.",
-      "No live product data, production runtime, deployment, release or protected integration is opened."
+      "The static seam does not create or sign an operational admission snapshot.",
+      "The native Harness has not produced an accepted EMR4 candidate.",
+      "Ordinary practice, product runtime, data, deployment and protected integration remain closed."
     ],
     "evidence": [
-      "docs/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan.md",
-      "docs/security/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan-threat-model-delta.md",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan-sol-acceptance.md"
+      "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-closeout.md",
+      "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/efficacy-reading.json",
+      "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

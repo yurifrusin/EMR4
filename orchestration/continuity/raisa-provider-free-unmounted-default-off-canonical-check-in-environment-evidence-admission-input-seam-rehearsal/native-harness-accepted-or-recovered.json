@@ -1,0 +1,71 @@
+{
+  "schema_version": "ariadne.native_harness_task_accepted_or_recovered.v1",
+  "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+  "reading": "accepted_or_recovered",
+  "disposition": "recovered",
+  "native_harness": {
+    "useful_candidate": "none",
+    "task_completion": "incomplete",
+    "trace_boundary_complete": true,
+    "scope_integrity": true,
+    "provider_calls": 0,
+    "automatic_retries": 0,
+    "fallbacks": 0,
+    "occupied_attempts": 2,
+    "occupied_elapsed_ms": 13179,
+    "attempts": [
+      {
+        "attempt_id": "deepseek-native-check-in-evidence-seam-001",
+        "source_commit": "4d376efe8d189f2e539814b9998f1076146fd2e8",
+        "provider": "not_reached",
+        "candidate": "none",
+        "failure_stage": "pre_provider_envelope",
+        "failure_coordinate": "custom_runner_failure_unclassified",
+        "cleanup_complete": true
+      },
+      {
+        "attempt_id": "deepseek-native-check-in-evidence-seam-002",
+        "source_commit": "66732375335bed6eb0ed877564f7ad173f33b2ec",
+        "provider": "not_reached",
+        "candidate": "none",
+        "failure_stage": "pre_provider_envelope",
+        "failure_coordinate": "EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED",
+        "cleanup_complete": true
+      }
+    ]
+  },
+  "sol_recovery": {
+    "task_completion": "complete",
+    "product_source": "1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+    "product_paths": [
+      "orchestration_harness/check_in_admission_control.py",
+      "orchestration_harness/check_in_environment_evidence_admission.py",
+      "tests/test_check_in_environment_evidence_admission.py"
+    ],
+    "focused_and_surrounding_tests_passed": 278,
+    "gemini37_decision": "pass",
+    "gemini37_commands_passed": 8,
+    "gemini37_tests_passed": 135
+  },
+  "correction_cost": {
+    "task_adapter_module_lines": 1018,
+    "task_adapter_focused_test_lines": 96,
+    "adapter_and_scaffold_correction_commits": 4,
+    "sol_product_recovery_commits": 1,
+    "provider_spend_in_native_attempts": "zero_provider_calls",
+    "assessment": "high_orchestration_cost_zero_native_candidate"
+  },
+  "rolling_decision": {
+    "native_harness_traceability_gain_retained": true,
+    "native_harness_useful_completion_proved": false,
+    "immediate_further_generic_testing": false,
+    "immediate_next_emr4_worker_selection": false,
+    "exact_failed_profile_selected_for_reuse": false,
+    "silent_claude_code_fallback": false,
+    "reconsider_only_on": [
+      "upstream_or_local_non_diagnostic_evidence_that_the_preset_mount_boundary_is_fixed",
+      "a_future_bounded_task_with_a_previously_working_exact_runner_profile",
+      "fresh_explicit_transport_allocation"
+    ]
+  }
+}

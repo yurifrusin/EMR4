@@ -1,0 +1,52 @@
+{
+  "schema_version": "emr4.check-in-environment-evidence-admission-input-seam-evidence.v1",
+  "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+  "status": "passed",
+  "result": "raisa_provider_free_unmounted_default_off_canonical_check_in_environment_evidence_admission_input_seam_rehearsal_pass",
+  "product_source": "1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+  "accepted_evidence_gate_product_source": "89640f1bb6ad992f68d5c20fd578b4062eeb193d",
+  "accepted_admission_kernel_source": "4204ec6348abb0f92b1a30314699d4a469fa860a",
+  "seam": {
+    "existing_kernel_called_first": true,
+    "target_reason": "ordinary_activation_closed",
+    "invalid_reading_reason": "ordinary_evidence_missing",
+    "valid_reading_result": "ordinary_activation_closed",
+    "synthetic_lane_unchanged": true,
+    "existing_operational_evidence_boolean_mandatory": true,
+    "ordinary_admission_release_count": 0
+  },
+  "reading_controls": {
+    "exact_type": true,
+    "exact_schema_outcome_and_reason": true,
+    "environment_identifier_bound": true,
+    "snapshot_generation_bound": true,
+    "manifest_digest_bound": true,
+    "subclass_and_duck_type_rejected": true,
+    "malformed_optional_binding_raises": false
+  },
+  "verification": {
+    "focused_and_surrounding_tests_passed": 278,
+    "ruff": "passed",
+    "python_compilation": "passed",
+    "git_diff_check": "passed",
+    "gemini37_model": "gemini-3.7-flash-high",
+    "gemini37_decision": "pass",
+    "gemini37_command_count": 8,
+    "gemini37_test_count": 135,
+    "gemini37_head_unchanged": true,
+    "gemini37_worktree_clean": true
+  },
+  "closed_boundaries": {
+    "ordinary_practice_enabled": false,
+    "feature_flag_or_allowlist_changed": false,
+    "admission_record_transition_or_activation_added": false,
+    "route_api_graphql_openapi_or_client_changed": false,
+    "generic_status_arrived_grammar_or_waiting_area_changed": false,
+    "environment_configuration_manifest_or_secret_resolved": false,
+    "database_docker_or_infrastructure_used": false,
+    "product_patient_appointment_or_clinical_data_used": false,
+    "production_deployment_release_or_pages": false,
+    "protected_ref_moved": false
+  },
+  "reasons": []
+}

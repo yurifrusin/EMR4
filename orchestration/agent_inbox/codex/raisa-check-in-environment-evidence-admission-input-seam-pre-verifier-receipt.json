@@ -1,0 +1,134 @@
+{
+  "active_operation": {
+    "active_tranche": "Provider-free unmounted default-off canonical check-in environment-evidence admission-input seam rehearsal",
+    "completed_stage": "Sol recovered and deterministically verified the fail-closed seam after two attributable pre-provider native-Harness terminals released no candidate.",
+    "next_executable_stage": "one_fresh_gemini37_high_read_only_authority_veto_then_accept_or_repair",
+    "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+    "resume_after_compaction": true,
+    "source_head": "10e46b5330e86c65721848ee0c9a4254983770d2",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_verifier_acceptance",
+  "git_object_resolution": {
+    "observed_head": "1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+    "reason_codes": [],
+    "resolved_commit": "10e46b5330e86c65721848ee0c9a4254983770d2",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "10e46b5330e86c65721848ee0c9a4254983770d2"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+    "branch_origin_aligned": false,
+    "head": "1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+    "origin_branch_commit": "ba935ca41c5f93b3584304b0d479df49692bfe21",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 680
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "pre_verifier_exact_clean_recovered_candidate",
+    "lanes": [
+      {
+        "disposition": "completed",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The planned work package has terminal evidence: both attributable native-Harness attempts failed before provider delivery, produced no candidate and are complete with no further retry or diagnostic successor.",
+        "work_packages": [
+          "author_the_bounded_admission_kernel_and_focused_test_candidate_in_a_fresh_sparse_worktree"
+        ]
+      },
+      {
+        "disposition": "planned",
+        "expected_leverage": "required_independence",
+        "lane_id": "gemini_verifier",
+        "rationale": "The recovered seam changes admission-authority meaning while remaining default-off, so one fresh clean-worktree read-only veto supplies proportionate independence from Sol's implementation.",
+        "work_packages": [
+          "review_exact_fail_closed_environment_evidence_admission_seam_candidate"
+        ]
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation, and no additional implementation lane is needed after deterministic Sol recovery.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "if the verifier worktree preflight fails",
+      "if Gemini returns revision_required with a material authority defect",
+      "if the verifier changes the worktree or exceeds the command manifest",
+      "at tranche closeout"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "bind the reviewer to the exact clean product candidate and finite allowlist",
+      "execute only the admitted fixed command manifest",
+      "accept or repair only after the one terminal Gemini veto",
+      "publish closeout after verifier cleanup and protected-ref readback"
+    ]
+  },
+  "planned_action": "dispatch_one_fresh_gemini37_high_read_only_authority_veto_for_the_exact_clean_seam_candidate",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/contract.json",
+      "orchestration_harness/check_in_admission_control.py",
+      "orchestration_harness/check_in_environment_evidence_admission.py",
+      "tests/test_check_in_environment_evidence_admission.py",
+      "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-prepared.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-terminal.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-deepseek-native-check-in-evidence-seam-002-prepared.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-deepseek-native-check-in-evidence-seam-002-terminal.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "Yuri authorizes uninterrupted completion. GPT Sol owns the recovered implementation and acceptance. The native DeepSeek package ended without provider delivery or candidate. Gemini 3.7 Flash/high now owns exactly one read-only veto over the clean candidate. Native subagents remain declined by developer policy.",
+    "git_refs_and_worktree": "The machine snapshot alone supplies exact task-branch, origin, protected-ref, ancestry, tracked-clean and preserved-untracked readings. A separate clean verifier worktree is bound independently by the verifier preflight.",
+    "live_handover_current_baton": "The complete live Baton remains controlling. The accepted environment evidence-gate evaluator and default-off admission kernel are the two product parents composed by this unmounted seam.",
+    "protected_evidence_boundaries": "The verifier may read only the exact allowlisted repository files in the clean detached review worktree and execute the fixed provider-free command manifest. It may not modify files, inspect Harness raw material, access environment configuration, credentials, external facts, databases, routes, product data or protected evidence, or move any ref."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}

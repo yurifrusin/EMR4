@@ -1,0 +1,40 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+  "source_head": "1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+  "result": "product_seam_accepted_native_harness_traceable_but_not_operational_for_this_task",
+  "product": {
+    "task_completion": "complete_by_sol_recovery",
+    "ordinary_admission_releases": 0,
+    "focused_and_surrounding_tests_passed": 278,
+    "independent_veto": "pass"
+  },
+  "native_harness": {
+    "prepared_readings": 2,
+    "terminal_readings": 2,
+    "accepted_or_recovered_readings": 1,
+    "provider_calls": 0,
+    "candidates": 0,
+    "occupied_attempts": 2,
+    "automatic_retries": 0,
+    "fallbacks": 0,
+    "attributable_terminal_coordinates": 2,
+    "final_coordinate": "EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED",
+    "useful_completion_proved": false,
+    "scope_integrity": true
+  },
+  "honest_cost": {
+    "adapter_module_lines": 1018,
+    "adapter_test_lines": 96,
+    "adapter_and_scaffold_correction_commits": 4,
+    "sol_recovery_required": true,
+    "assessment": "the_trace_is_better_but_the_task_yield_did_not_justify_more_immediate_harness_engineering"
+  },
+  "rolling_allocation": {
+    "generic_harness_qualification": "closed",
+    "same_profile_diagnostic_successor": "declined",
+    "native_harness_next_product_tranche": "declined_until_new_non_diagnostic_fix_evidence",
+    "deepseek_via_claude_code_fallback": "not_authorized",
+    "product_continuation_owner": "gpt_sol"
+  }
+}

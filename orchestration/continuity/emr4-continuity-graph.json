@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 426,
+  "graph_revision": 427,
   "harvests": [],
   "nodes": [
     {
@@ -34263,9 +34263,132 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "title": "Provider-free unmounted default-off canonical check-in environment-evidence admission-input seam rehearsal",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorized uninterrupted completion and one bounded native-Harness contributor package under the pragmatic real-work plan.",
+          "GPT Sol owns architecture, product meaning, integration, recovery and acceptance; DeepSeek never received the packet and supplied no candidate.",
+          "One Gemini 3.7 Flash/high clean-worktree read-only veto supplies the independent authority review."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "compose-evidence-reading-after-existing-admission-controls",
+          "source": "orchestration_harness/check_in_environment_evidence_admission.py",
+          "status": "accepted",
+          "summary": "Call the accepted admission kernel first and apply the exact typed evidence check only to its ordinary activation-closed result."
+        },
+        {
+          "id": "preserve-default-off-and-synthetic-lane",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/deterministic-evidence.json",
+          "status": "accepted",
+          "summary": "A valid evidence reading remains denied, invalid readings fail closed and the authored-synthetic lane plus every older prerequisite remain unchanged."
+        },
+        {
+          "id": "accept-sol-recovered-product-candidate",
+          "source": "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the exact Sol recovery after 278 deterministic passes and one clean Gemini 3.7 authority veto."
+        },
+        {
+          "id": "record-native-harness-zero-candidate-result",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-accepted-or-recovered.json",
+          "status": "accepted",
+          "summary": "Both native attempts failed before provider delivery, produced no candidate and ended without retry or fallback; Sol recovery provenance is explicit."
+        },
+        {
+          "id": "narrow-immediate-native-harness-allocation",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Retain the traceability evidence but decline this exact native profile for the immediate next product tranche and open no generic diagnostic successor."
+        }
+      ],
+      "claim_scope": [
+        "The new pure unmounted seam requires an exact satisfied EnvironmentEvidenceGateReading bound to the signed snapshot environment identifier, generation and manifest digest.",
+        "Every pre-existing admission decision retains its precedence; only ordinary activation-closed receives the additional check.",
+        "Exact valid evidence remains ordinary activation-closed and cannot admit or execute a command.",
+        "Authored-synthetic-only admission is unchanged and the existing operational-evidence Boolean remains independently mandatory.",
+        "Two native Harness attempts produced complete coarse traces but zero provider calls and zero candidates; final coordinate is EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED.",
+        "The product candidate is Sol recovery, independently passed by Gemini 3.7 Flash/high.",
+        "No public API, route, client, data, runtime, deployment, Pages or protected-ref authority opened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/deterministic-evidence.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/efficacy-reading.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-accepted-or-recovered.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-gemini37-worktree-preflight.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-environment-evidence-admission-input-seam-gemini37-review-receipt.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-prepared.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-terminal.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-deepseek-native-check-in-evidence-seam-002-prepared.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-deepseek-native-check-in-evidence-seam-002-terminal.json"
+        ],
+        "tests": [
+          "tests/test_check_in_environment_evidence_admission.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_environment_evidence_admission_input_seam_rehearsal_plan.py",
+          "tests/test_raisa_native_harness_task_worker.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+          "tests/test_appointment_check_in_environment_evidence_gate.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/check_in_admission_control.py",
+          "orchestration_harness/check_in_environment_evidence_admission.py",
+          "scripts/raisa_native_harness_task_worker.py",
+          "docs/ariadne-agent-error-correction-register-revision-643.md",
+          "orchestration/human_inbox/yuri/2026-08-23--check-in-environment-evidence-admission-input-seam.md"
+        ]
+      },
+      "unresolved_gates": [
+        "No operational manifest source, signed snapshot distributor or live evidence verifier exists in this rehearsal.",
+        "No ordinary-practice admission record may be activated and the canonical active ordinary-record count remains zero.",
+        "The exact native Harness custom profile is not selected for immediate reuse because preset mounting failed before provider delivery.",
+        "No Claude Code fallback has been validated or authorized.",
+        "Product data, database/runtime authority, command mounting, deployment, release, Pages and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T13:38:13.5091803+10:00",
+      "updated_at": "2026-08-23T13:38:13.5091803+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T12:36:36.1771905+10:00"
+  "updated_at": "2026-08-23T13:38:13.5091803+10:00"
 }

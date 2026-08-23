@@ -1,0 +1,219 @@
+{
+  "schema_version": "ariadne.worker_receipt.v1",
+  "status": "completed",
+  "transport": "antigravity_new_project_bound_readonly_worktree",
+  "model": "gemini-3.7-flash-high",
+  "requested_model": "gemini-3.7-flash-high",
+  "reasoning_effort": "high",
+  "decision": "pass",
+  "decision_contract": "schema_constrained_json_v1",
+  "worktree": "C:\\Users\\sarashera\\EMR4-worktrees\\check-in-evidence-admission-gemini-1fd1d5f7",
+  "branch": "codex/review-check-in-evidence-admission-1fd1d5f7",
+  "head_before": "1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+  "head_after": "1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+  "dirty_after": false,
+  "os_sandbox": false,
+  "orchestrator_receipt_sha256": "9e5af6d7148beef53511e02da5cb715bf908adb303212f14e26f8144228ef8ce",
+  "result": "# Independent Authority Review \u2014 Check-in Environment-Evidence Admission-Input Seam\n\nDate: 2026-08-23\nTimestamp: 2026-08-23T13:34:06+10:00 (Australia/Brisbane)\nModel / Effort: gemini-3.7-flash-high / high\nEvidence Label: `provider_free_read_only_repository_review`\nWorktree: `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-evidence-admission-gemini-1fd1d5f7`\nBranch: `codex/review-check-in-evidence-admission-1fd1d5f7`\nHEAD: `1fd1d5f77a02c671528dd0a5f18de4da2f070eaa`\nTranche Planning Base: `9dbe72d7df97c3feeec1286cb60d45948f68d920`\n\n## 1. Five Mandatory Rehydration Sources\n\n1. `live_handover_current_baton`: Restored from `AGENTS.md` section 3. Baton ref is `handoff/current`. Protected integration is aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n2. `current_authority_allocation`: Restored from `AGENTS.md` section 4. GPT Sol is conductor/integrator; DeepSeek lane completed without provider delivery or candidate; Gemini 3.7 Flash/high holds this fresh read-only veto; native subagents are declined; Sol owns integration and acceptance.\n3. `active_plan_and_acceptance`: Restored from `docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-plan.md`, `docs/security/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-threat-model-delta.md`, and `orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/contract.json`.\n4. `protected_evidence_boundaries`: Restored from `AGENTS.md` section 5. Sealed holdouts v1-v10, paused provider lanes, ignored historical diary trove, closed ordinary-practice enablement, generic-status Arrived, and protected ref immutability are fully enforced.\n5. `git_refs_and_worktree`: Restored from `AGENTS.md` section 2 and verified on disk at `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-evidence-admission-gemini-1fd1d5f7` on branch `codex/review-check-in-evidence-admission-1fd1d5f7` with clean worktree.\n\n## 2. Active Operation Latch & Parallelism Assessment\n\n- Latch file `orchestration/continuity/ariadne-active-operation-latch/current.json` is valid and active (`in_progress`) for operation `raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal`.\n- Parallelism dispositions:\n  - DeepSeek native harness: completed without provider delivery or candidate; product implementation authored by Sol.\n  - Gemini 3.7 Flash/high: reserved and executing this independent authority veto.\n  - Native subagents: declined under policy.\n  - GPT Sol: owns architecture, tests, integration, and acceptance.\n\n## 3. Candidate Review Against Required Invariants\n\nThe candidate modifies `orchestration_harness/check_in_admission_control.py` by adding two optional fields (`environment_evidence_identifier: str | None = None` and `environment_evidence_manifest_digest: str | None = None`) to `AdmissionSnapshot`, introduces the unmounted typed adapter `orchestration_harness/check_in_environment_evidence_admission.py`, and adds comprehensive tests in `tests/test_check_in_environment_evidence_admission.py`.\n\n1. **Evaluation Order**: `evaluate_admission_with_environment_evidence` calls `evaluate_admission(snapshot, request, profile=profile)` first.\n2. **Target Isolation**: Only the exact denied `ordinary_practice` / `ordinary_activation_closed` decision targeting a present snapshot triggers the additional check. All other decision results (including snapshot missing, invalid, stale, ambiguous, feature disabled, kill switch engaged, lane ambiguous, synthetic admitted, ordinary binding mismatch, state not active, or operational evidence missing) are returned immediately and unchanged.\n3. **Exact Type Identity**: `_reading_matches_snapshot` requires `type(reading) is EnvironmentEvidenceGateReading`. Subclasses and duck types are rejected and fail closed to `ordinary_evidence_missing`.\n4. **Joint Exact Schema, Outcome, and Reason**: The reading's `schema_version` must equal `EVIDENCE_GATE_READING_SCHEMA_VERSION` (`emr4.check-in-environment-evidence-gate-reading.v1`), `outcome` must be `\"satisfied\"`, and `reason_code` must be `\"evidence_gate_satisfied\"`.\n5. **Environment Identifier Syntax and Binding**: The snapshot `environment_evidence_identifier` is validated against closed `^env:[a-z0-9][a-z0-9._-]{2,95}$` syntax and must exactly equal `reading.environment_identifier`.\n6. **Snapshot Generation Binding**: The snapshot generation (positive integer validated by base kernel) must exactly equal `reading.admission_snapshot_generation`.\n7. **Manifest Digest Syntax and Binding**: The snapshot `environment_evidence_manifest_digest` is validated against lowercase `^[0-9a-f]{64}$` syntax and must exactly equal `reading.manifest_digest`.\n8. **Exception Safety**: Primitive type checks on the snapshot's optional binding attributes prevent regex execution on malformed/non-string values without raising unhandled exceptions.\n9. **No Bypass of Existing Controls**: The operational-evidence Boolean, feature flag, kill switch, lane isolation, binding checks, and state checks are evaluated first by the base kernel; a valid reading cannot bypass any of them.\n10. **Authored-Synthetic Lane Isolation**: Authored-synthetic admission does not require a reading and is returned unchanged as `ADMITTED_SYNTHETIC`; lane overlap still denies as `LANE_AMBIGUOUS`.\n11. **Contract Invariance**: The six-field decision contract (`schema_version`, `decision`, `lane`, `reason_code`, `snapshot_generation`, `snapshot_digest`) is unchanged. No new admitted reason code or ordinary transition exists.\n12. **Historical Constructor Compatibility**: The two new snapshot fields default to `None`.\n13. **Pure Unmounted Evaluator**: The module performs no I/O, clock, environment, provider, persistence, command, or route operations.\n14. **API Spine Stability**: Public REST, OpenAPI, GraphQL, event contracts, and Access AI boundaries remain untouched.\n15. **Closed Product Boundaries**: No ordinary practice is enabled, no generic-status `Arrived` transition is permitted, no waiting-area change occurs, and no protected ref movement is made.\n16. **Execution Integrity**: Review executed under `gemini-3.7-flash-high` at high effort, leaving the worktree clean and unmodified.\n\n## 4. Verification Evidence\n\n- C01 (`git status --short --branch`): Clean branch `codex/review-check-in-evidence-admission-1fd1d5f7`. Exit code 0.\n- C02 (`git rev-parse HEAD`): `1fd1d5f77a02c671528dd0a5f18de4da2f070eaa`. Exit code 0.\n- C03 (pytest across 5 test suites): 135 passed tests with 0 failures/errors. Exit code 0.\n- C04 (`ruff check`): All checks passed. Exit code 0.\n- C05 (`py_compile`): Compilation clean. Exit code 0.\n- C06 (`git diff --check`): Clean whitespace and format check. Exit code 0.\n- C07 (`git diff --name-only`): Exactly the 3 owned candidate files. Exit code 0.\n- C08 (`git status --short --branch`): Clean worktree confirmed. Exit code 0.\n\nThe implementation is the narrowest fail-closed composition of the accepted evidence-gate reading and existing default-off admission kernel. All criteria and invariants are satisfied.",
+  "decision_envelope": {
+    "decision": "pass",
+    "review": "# Independent Authority Review \u2014 Check-in Environment-Evidence Admission-Input Seam\n\nDate: 2026-08-23\nTimestamp: 2026-08-23T13:34:06+10:00 (Australia/Brisbane)\nModel / Effort: gemini-3.7-flash-high / high\nEvidence Label: `provider_free_read_only_repository_review`\nWorktree: `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-evidence-admission-gemini-1fd1d5f7`\nBranch: `codex/review-check-in-evidence-admission-1fd1d5f7`\nHEAD: `1fd1d5f77a02c671528dd0a5f18de4da2f070eaa`\nTranche Planning Base: `9dbe72d7df97c3feeec1286cb60d45948f68d920`\n\n## 1. Five Mandatory Rehydration Sources\n\n1. `live_handover_current_baton`: Restored from `AGENTS.md` section 3. Baton ref is `handoff/current`. Protected integration is aligned at `2e34bdad732fdab32fbf778280b3d3c70d66d602`.\n2. `current_authority_allocation`: Restored from `AGENTS.md` section 4. GPT Sol is conductor/integrator; DeepSeek lane completed without provider delivery or candidate; Gemini 3.7 Flash/high holds this fresh read-only veto; native subagents are declined; Sol owns integration and acceptance.\n3. `active_plan_and_acceptance`: Restored from `docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-plan.md`, `docs/security/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-threat-model-delta.md`, and `orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/contract.json`.\n4. `protected_evidence_boundaries`: Restored from `AGENTS.md` section 5. Sealed holdouts v1-v10, paused provider lanes, ignored historical diary trove, closed ordinary-practice enablement, generic-status Arrived, and protected ref immutability are fully enforced.\n5. `git_refs_and_worktree`: Restored from `AGENTS.md` section 2 and verified on disk at `C:\\Users\\sarashera\\EMR4-worktrees\\check-in-evidence-admission-gemini-1fd1d5f7` on branch `codex/review-check-in-evidence-admission-1fd1d5f7` with clean worktree.\n\n## 2. Active Operation Latch & Parallelism Assessment\n\n- Latch file `orchestration/continuity/ariadne-active-operation-latch/current.json` is valid and active (`in_progress`) for operation `raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal`.\n- Parallelism dispositions:\n  - DeepSeek native harness: completed without provider delivery or candidate; product implementation authored by Sol.\n  - Gemini 3.7 Flash/high: reserved and executing this independent authority veto.\n  - Native subagents: declined under policy.\n  - GPT Sol: owns architecture, tests, integration, and acceptance.\n\n## 3. Candidate Review Against Required Invariants\n\nThe candidate modifies `orchestration_harness/check_in_admission_control.py` by adding two optional fields (`environment_evidence_identifier: str | None = None` and `environment_evidence_manifest_digest: str | None = None`) to `AdmissionSnapshot`, introduces the unmounted typed adapter `orchestration_harness/check_in_environment_evidence_admission.py`, and adds comprehensive tests in `tests/test_check_in_environment_evidence_admission.py`.\n\n1. **Evaluation Order**: `evaluate_admission_with_environment_evidence` calls `evaluate_admission(snapshot, request, profile=profile)` first.\n2. **Target Isolation**: Only the exact denied `ordinary_practice` / `ordinary_activation_closed` decision targeting a present snapshot triggers the additional check. All other decision results (including snapshot missing, invalid, stale, ambiguous, feature disabled, kill switch engaged, lane ambiguous, synthetic admitted, ordinary binding mismatch, state not active, or operational evidence missing) are returned immediately and unchanged.\n3. **Exact Type Identity**: `_reading_matches_snapshot` requires `type(reading) is EnvironmentEvidenceGateReading`. Subclasses and duck types are rejected and fail closed to `ordinary_evidence_missing`.\n4. **Joint Exact Schema, Outcome, and Reason**: The reading's `schema_version` must equal `EVIDENCE_GATE_READING_SCHEMA_VERSION` (`emr4.check-in-environment-evidence-gate-reading.v1`), `outcome` must be `\"satisfied\"`, and `reason_code` must be `\"evidence_gate_satisfied\"`.\n5. **Environment Identifier Syntax and Binding**: The snapshot `environment_evidence_identifier` is validated against closed `^env:[a-z0-9][a-z0-9._-]{2,95}$` syntax and must exactly equal `reading.environment_identifier`.\n6. **Snapshot Generation Binding**: The snapshot generation (positive integer validated by base kernel) must exactly equal `reading.admission_snapshot_generation`.\n7. **Manifest Digest Syntax and Binding**: The snapshot `environment_evidence_manifest_digest` is validated against lowercase `^[0-9a-f]{64}$` syntax and must exactly equal `reading.manifest_digest`.\n8. **Exception Safety**: Primitive type checks on the snapshot's optional binding attributes prevent regex execution on malformed/non-string values without raising unhandled exceptions.\n9. **No Bypass of Existing Controls**: The operational-evidence Boolean, feature flag, kill switch, lane isolation, binding checks, and state checks are evaluated first by the base kernel; a valid reading cannot bypass any of them.\n10. **Authored-Synthetic Lane Isolation**: Authored-synthetic admission does not require a reading and is returned unchanged as `ADMITTED_SYNTHETIC`; lane overlap still denies as `LANE_AMBIGUOUS`.\n11. **Contract Invariance**: The six-field decision contract (`schema_version`, `decision`, `lane`, `reason_code`, `snapshot_generation`, `snapshot_digest`) is unchanged. No new admitted reason code or ordinary transition exists.\n12. **Historical Constructor Compatibility**: The two new snapshot fields default to `None`.\n13. **Pure Unmounted Evaluator**: The module performs no I/O, clock, environment, provider, persistence, command, or route operations.\n14. **API Spine Stability**: Public REST, OpenAPI, GraphQL, event contracts, and Access AI boundaries remain untouched.\n15. **Closed Product Boundaries**: No ordinary practice is enabled, no generic-status `Arrived` transition is permitted, no waiting-area change occurs, and no protected ref movement is made.\n16. **Execution Integrity**: Review executed under `gemini-3.7-flash-high` at high effort, leaving the worktree clean and unmodified.\n\n## 4. Verification Evidence\n\n- C01 (`git status --short --branch`): Clean branch `codex/review-check-in-evidence-admission-1fd1d5f7`. Exit code 0.\n- C02 (`git rev-parse HEAD`): `1fd1d5f77a02c671528dd0a5f18de4da2f070eaa`. Exit code 0.\n- C03 (pytest across 5 test suites): 135 passed tests with 0 failures/errors. Exit code 0.\n- C04 (`ruff check`): All checks passed. Exit code 0.\n- C05 (`py_compile`): Compilation clean. Exit code 0.\n- C06 (`git diff --check`): Clean whitespace and format check. Exit code 0.\n- C07 (`git diff --name-only`): Exactly the 3 owned candidate files. Exit code 0.\n- C08 (`git status --short --branch`): Clean worktree confirmed. Exit code 0.\n\nThe implementation is the narrowest fail-closed composition of the accepted evidence-gate reading and existing default-off admission kernel. All criteria and invariants are satisfied.",
+    "command_results": [
+      {
+        "id": "C01",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C02",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C03",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/EMR4-worktrees/check-in-evidence-admission-gemini-1fd1d5f7",
+          "tests/test_check_in_environment_evidence_admission.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+          "tests/test_appointment_check_in_environment_evidence_gate.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_environment_evidence_admission_input_seam_rehearsal_plan.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C04",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+          "check",
+          "orchestration_harness/check_in_admission_control.py",
+          "orchestration_harness/check_in_environment_evidence_admission.py",
+          "tests/test_check_in_environment_evidence_admission.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C05",
+        "argv": [
+          "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+          "-m",
+          "py_compile",
+          "orchestration_harness/check_in_admission_control.py",
+          "orchestration_harness/check_in_environment_evidence_admission.py",
+          "tests/test_check_in_environment_evidence_admission.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C06",
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "9dbe72d7df97c3feeec1286cb60d45948f68d920..1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+          "--",
+          "orchestration_harness/check_in_admission_control.py",
+          "orchestration_harness/check_in_environment_evidence_admission.py",
+          "tests/test_check_in_environment_evidence_admission.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C07",
+        "argv": [
+          "git",
+          "diff",
+          "--name-only",
+          "9dbe72d7df97c3feeec1286cb60d45948f68d920..1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+          "--",
+          "orchestration_harness/check_in_admission_control.py",
+          "orchestration_harness/check_in_environment_evidence_admission.py",
+          "tests/test_check_in_environment_evidence_admission.py"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "C08",
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exit_code": 0
+      }
+    ]
+  },
+  "command_manifest_sha256": "f7d520ba269204a039630a23bb01a4a1b2fbaf663db1aab2a9714cd157611e33",
+  "command_results": [
+    {
+      "id": "C01",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C02",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/check-in-evidence-admission-gemini-1fd1d5f7",
+        "tests/test_check_in_environment_evidence_admission.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+        "tests/test_appointment_check_in_environment_evidence_gate.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_environment_evidence_admission_input_seam_rehearsal_plan.py",
+        "tests/test_api_spine_artifacts.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "orchestration_harness/check_in_admission_control.py",
+        "orchestration_harness/check_in_environment_evidence_admission.py",
+        "tests/test_check_in_environment_evidence_admission.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/check_in_admission_control.py",
+        "orchestration_harness/check_in_environment_evidence_admission.py",
+        "tests/test_check_in_environment_evidence_admission.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "9dbe72d7df97c3feeec1286cb60d45948f68d920..1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+        "--",
+        "orchestration_harness/check_in_admission_control.py",
+        "orchestration_harness/check_in_environment_evidence_admission.py",
+        "tests/test_check_in_environment_evidence_admission.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "9dbe72d7df97c3feeec1286cb60d45948f68d920..1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+        "--",
+        "orchestration_harness/check_in_admission_control.py",
+        "orchestration_harness/check_in_environment_evidence_admission.py",
+        "tests/test_check_in_environment_evidence_admission.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "C08",
+      "argv": [
+        "git",
+        "status",
+        "--short",
+        "--branch"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "schema_version": "ariadne.verifier-command-manifest.v1",
+  "commands": [
+    {
+      "id": "C01",
+      "argv": ["git", "status", "--short", "--branch"]
+    },
+    {
+      "id": "C02",
+      "argv": ["git", "rev-parse", "HEAD"]
+    },
+    {
+      "id": "C03",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "scripts.ariadne_provider_free_pytest",
+        "--repo-root",
+        "C:/Users/sarashera/EMR4-worktrees/check-in-evidence-admission-gemini-1fd1d5f7",
+        "tests/test_check_in_environment_evidence_admission.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+        "tests/test_appointment_check_in_environment_evidence_gate.py",
+        "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_environment_evidence_admission_input_seam_rehearsal_plan.py",
+        "tests/test_api_spine_artifacts.py"
+      ]
+    },
+    {
+      "id": "C04",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/ruff.exe",
+        "check",
+        "orchestration_harness/check_in_admission_control.py",
+        "orchestration_harness/check_in_environment_evidence_admission.py",
+        "tests/test_check_in_environment_evidence_admission.py"
+      ]
+    },
+    {
+      "id": "C05",
+      "argv": [
+        "C:/Users/sarashera/emr4/.venv/Scripts/python.exe",
+        "-m",
+        "py_compile",
+        "orchestration_harness/check_in_admission_control.py",
+        "orchestration_harness/check_in_environment_evidence_admission.py",
+        "tests/test_check_in_environment_evidence_admission.py"
+      ]
+    },
+    {
+      "id": "C06",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "9dbe72d7df97c3feeec1286cb60d45948f68d920..1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+        "--",
+        "orchestration_harness/check_in_admission_control.py",
+        "orchestration_harness/check_in_environment_evidence_admission.py",
+        "tests/test_check_in_environment_evidence_admission.py"
+      ]
+    },
+    {
+      "id": "C07",
+      "argv": [
+        "git",
+        "diff",
+        "--name-only",
+        "9dbe72d7df97c3feeec1286cb60d45948f68d920..1fd1d5f77a02c671528dd0a5f18de4da2f070eaa",
+        "--",
+        "orchestration_harness/check_in_admission_control.py",
+        "orchestration_harness/check_in_environment_evidence_admission.py",
+        "tests/test_check_in_environment_evidence_admission.py"
+      ]
+    },
+    {
+      "id": "C08",
+      "argv": ["git", "status", "--short", "--branch"]
+    }
+  ]
+}

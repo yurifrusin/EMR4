@@ -1,0 +1,616 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+    "title": "Check-in environment-evidence admission-input seam closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T13:38:13.5091803+10:00",
+    "node": {
+      "id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "title": "Provider-free unmounted default-off canonical check-in environment-evidence admission-input seam rehearsal",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorized uninterrupted completion and one bounded native-Harness contributor package under the pragmatic real-work plan.",
+          "GPT Sol owns architecture, product meaning, integration, recovery and acceptance; DeepSeek never received the packet and supplied no candidate.",
+          "One Gemini 3.7 Flash/high clean-worktree read-only veto supplies the independent authority review."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "compose-evidence-reading-after-existing-admission-controls",
+          "source": "orchestration_harness/check_in_environment_evidence_admission.py",
+          "status": "accepted",
+          "summary": "Call the accepted admission kernel first and apply the exact typed evidence check only to its ordinary activation-closed result."
+        },
+        {
+          "id": "preserve-default-off-and-synthetic-lane",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/deterministic-evidence.json",
+          "status": "accepted",
+          "summary": "A valid evidence reading remains denied, invalid readings fail closed and the authored-synthetic lane plus every older prerequisite remain unchanged."
+        },
+        {
+          "id": "accept-sol-recovered-product-candidate",
+          "source": "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the exact Sol recovery after 278 deterministic passes and one clean Gemini 3.7 authority veto."
+        },
+        {
+          "id": "record-native-harness-zero-candidate-result",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-accepted-or-recovered.json",
+          "status": "accepted",
+          "summary": "Both native attempts failed before provider delivery, produced no candidate and ended without retry or fallback; Sol recovery provenance is explicit."
+        },
+        {
+          "id": "narrow-immediate-native-harness-allocation",
+          "source": "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Retain the traceability evidence but decline this exact native profile for the immediate next product tranche and open no generic diagnostic successor."
+        }
+      ],
+      "claim_scope": [
+        "The new pure unmounted seam requires an exact satisfied EnvironmentEvidenceGateReading bound to the signed snapshot environment identifier, generation and manifest digest.",
+        "Every pre-existing admission decision retains its precedence; only ordinary activation-closed receives the additional check.",
+        "Exact valid evidence remains ordinary activation-closed and cannot admit or execute a command.",
+        "Authored-synthetic-only admission is unchanged and the existing operational-evidence Boolean remains independently mandatory.",
+        "Two native Harness attempts produced complete coarse traces but zero provider calls and zero candidates; final coordinate is EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED.",
+        "The product candidate is Sol recovery, independently passed by Gemini 3.7 Flash/high.",
+        "No public API, route, client, data, runtime, deployment, Pages or protected-ref authority opened."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-plan.md",
+          "docs/security/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/deterministic-evidence.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/efficacy-reading.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-accepted-or-recovered.json"
+        ],
+        "closeouts": [
+          "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-gemini37-worktree-preflight.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-environment-evidence-admission-input-seam-gemini37-review-receipt.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-prepared.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-terminal.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-deepseek-native-check-in-evidence-seam-002-prepared.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-deepseek-native-check-in-evidence-seam-002-terminal.json"
+        ],
+        "tests": [
+          "tests/test_check_in_environment_evidence_admission.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_environment_evidence_admission_input_seam_rehearsal_plan.py",
+          "tests/test_raisa_native_harness_task_worker.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+          "tests/test_appointment_check_in_environment_evidence_gate.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/check_in_admission_control.py",
+          "orchestration_harness/check_in_environment_evidence_admission.py",
+          "scripts/raisa_native_harness_task_worker.py",
+          "docs/ariadne-agent-error-correction-register-revision-643.md",
+          "orchestration/human_inbox/yuri/2026-08-23--check-in-environment-evidence-admission-input-seam.md"
+        ]
+      },
+      "unresolved_gates": [
+        "No operational manifest source, signed snapshot distributor or live evidence verifier exists in this rehearsal.",
+        "No ordinary-practice admission record may be activated and the canonical active ordinary-record count remains zero.",
+        "The exact native Harness custom profile is not selected for immediate reuse because preset mounting failed before provider delivery.",
+        "No Claude Code fallback has been validated or authorized.",
+        "Product data, database/runtime authority, command mounting, deployment, release, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Require reviewed environment evidence as an independent input to the future ordinary canonical check-in admission boundary",
+      "outcome": "The typed evidence reading now composes fail-closed with every existing admission control while ordinary activation remains closed.",
+      "evidence": [
+        "orchestration_harness/check_in_environment_evidence_admission.py",
+        "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/deterministic-evidence.json",
+        "orchestration/agent_inbox/antigravity/raisa-check-in-environment-evidence-admission-input-seam-gemini37-review-receipt.json"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Reassess the remaining ordinary-practice canonical check-in readiness gap after the typed environment-evidence seam",
+      "why_now": "The manifest normalizer, typed evidence inputs, pure evidence gate and admission-input composition are accepted, so a read-only convergence review can identify the next smallest blocker without opening runtime authority.",
+      "outcome": "One evidence-led successor will select the narrowest provider-free next tranche while the failed native profile remains out of the immediate worker allocation.",
+      "unlocks": [
+        "A complete static chain from normalized environment evidence to a fail-closed default-off admission decision.",
+        "A current convergence reading that can separate remaining record, signature, distribution and command-mounting gaps.",
+        "Continued Raisa development without another native-Harness diagnostic detour."
+      ],
+      "does_not_solve": [
+        "The static seam does not create or sign an operational admission snapshot.",
+        "The native Harness has not produced an accepted EMR4 candidate.",
+        "Ordinary practice, product runtime, data, deployment and protected integration remain closed."
+      ],
+      "evidence": [
+        "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-closeout.md",
+        "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/efficacy-reading.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-sol-acceptance.md"
+      ],
+      "orientation_statement": "Environment evidence is now a typed, independently mandatory but non-admitting input; the next step is a read-only readiness convergence review, not runtime activation or more Harness diagnosis."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review",
+      "active_tranche": "Provider-free read-only canonical check-in ordinary-practice admission-readiness post-evidence-seam convergence review",
+      "objective": "Read the complete accepted canonical check-in admission and environment-evidence lineage, determine the exact remaining readiness blockers after the new input seam, and freeze the narrowest next provider-free tranche without reopening native-Harness diagnostics or enabling ordinary practice.",
+      "authority_source": "Yuri's standing uninterrupted-development authority and explicit instruction to continue through dependency-satisfied planned tranches while minimizing further native-Harness testing.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_exact_post_seam_readiness_dimensions_and_source_bindings"
+    },
+    "incidents": [
+      {"incident_id": "seam-preplanning-manual-git-reading", "source_id": "seam-local-001", "peers": []},
+      {"incident_id": "seam-guessed-path-lookups", "source_id": "seam-local-002", "peers": []},
+      {"incident_id": "seam-explicit-stage-path-typo", "source_id": "seam-local-003", "peers": []},
+      {"incident_id": "seam-coordinator-direct-import-root", "source_id": "seam-local-004", "peers": []},
+      {"incident_id": "seam-empty-test-scaffold-admission", "source_id": "seam-local-005", "peers": []},
+      {"incident_id": "seam-native-attempt-001-custom-runner", "source_id": "seam-local-006", "peers": []},
+      {"incident_id": "seam-native-attempt-002-preset-mount", "source_id": "seam-local-007", "peers": []},
+      {"incident_id": "seam-sol-eager-predicate-evaluation", "source_id": "seam-local-008", "peers": []},
+      {"incident_id": "seam-powershell-rev-parse-expression", "source_id": "seam-local-009", "peers": []},
+      {"incident_id": "seam-verifier-process-cleanup", "source_id": "seam-local-010", "peers": []}
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v2",
+    "database_authority": "closed",
+    "commands": [
+      {
+        "command_id": "check-in-evidence-admission-seam-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "check-in-evidence-admission-seam-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_check_in_environment_evidence_admission.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_environment_evidence_admission_input_seam_rehearsal_plan.py",
+          "tests/test_raisa_native_harness_task_worker.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+          "tests/test_appointment_check_in_environment_evidence_gate.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "check-in-evidence-admission-seam-closeout-postpublication-readback",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_check_in_environment_evidence_admission.py",
+          "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_environment_evidence_admission_input_seam_rehearsal_plan.py",
+          "tests/test_raisa_native_harness_task_worker.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "postpublication"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-plan.md",
+      "docs/security/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-threat-model-delta.md",
+      "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/contract.json",
+      "orchestration_harness/check_in_environment_evidence_admission.py",
+      "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-accepted-or-recovered.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/deterministic-evidence.json",
+      "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/efficacy-reading.json",
+      "orchestration/agent_inbox/antigravity/raisa-check-in-environment-evidence-admission-input-seam-gemini37-review-receipt.json",
+      "docs/ariadne-agent-error-correction-register-revision-643.md",
+      "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-23--check-in-environment-evidence-admission-input-seam.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_read_only_post_evidence_seam_convergence_review_only",
+    "accepted_repository_lineage_and_non_protected_evidence_only",
+    "no_native_harness_diagnostic_or_provider_call",
+    "no_silent_claude_code_or_other_transport_fallback",
+    "no_product_source_test_route_api_client_configuration_or_runtime_change",
+    "no_environment_configuration_manifest_secret_reference_or_credential_access",
+    "no_database_docker_postgresql_sql_live_role_or_infrastructure_action",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_admission_record_activation",
+    "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "seam-preplanning-manual-git-reading-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preplanning-orchestrator-receipt",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_preflight",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The git_refs_and_worktree source is prose-only and exact Git values come solely from the machine snapshot.",
+      "observed_error": "The first runtime-state draft repeated exact Git object IDs in the narrative source and the preflight rejected manual Git-ref evidence.",
+      "detection_method": "The orchestrator preflight returned revision_required with git_refs_evidence_manual_object_id_forbidden.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-preplanning-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_git_object_in_machine_snapshot_narrative",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the hand-authored IDs and let the preflight supply all exact Git readings.",
+        "prevention_control": "Git-ref narrative fields remain identity-free; exact objects are read only from the machine snapshot.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-preplanning-runtime-state.json"
+        ]
+      },
+      "baton_summary": "records one rejected manual Git-ref narrative draft."
+    },
+    {
+      "attempt_key": "seam-guessed-path-lookups-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "active-acceptance-path-rehydration",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Repository paths are resolved from the file inventory before a read command is issued.",
+      "observed_error": "Two read commands guessed non-existent evaluator and admission-kernel artifact names before rg found the exact retained paths.",
+      "detection_method": "Get-Content failed closed with path-not-found and no file mutation.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-closeout.md",
+        "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-plan.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.guessed_long_repository_artifact_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve long artifact names with rg --files before reading them.",
+        "prevention_control": "Long generated artifact paths are inventory-resolved rather than reconstructed from memory.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-closeout.md",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py"
+        ]
+      },
+      "baton_summary": "records contained guessed-path read failures during rehydration."
+    },
+    {
+      "attempt_key": "seam-explicit-stage-path-typo-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "planning-explicit-path-staging",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_cli",
+      "stage": "implementation",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every explicit path supplied to git add is copied from the verified file inventory.",
+      "observed_error": "One test path used a hyphenated check-in segment instead of the actual underscore filename and the entire staging command failed.",
+      "detection_method": "Git rejected the unmatched pathspec before staging any path.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_environment_evidence_admission_input_seam_rehearsal_plan.py",
+        "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-plan.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.explicit_stage_path_transcription_error",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restage using the exact inventory-resolved underscore path and verify the cached diff.",
+        "prevention_control": "Explicit staging paths are copied from git status or rg output, not retyped from the document slug.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-plan.md",
+          "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_environment_evidence_admission_input_seam_rehearsal_plan.py"
+        ]
+      },
+      "baton_summary": "records one contained explicit-path staging typo."
+    },
+    {
+      "attempt_key": "seam-coordinator-direct-import-root-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "native-harness-task-coordinator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The reusable coordinator imports repository modules identically under pytest and direct script execution.",
+      "observed_error": "The first direct prepare invocation failed before attempt creation because the script did not insert the repository root on sys.path.",
+      "detection_method": "Python raised ImportError for the accepted effective-tool guard module; zero worktree and zero provider call existed.",
+      "evidence_paths": [
+        "scripts/raisa_native_harness_task_worker.py",
+        "tests/test_raisa_native_harness_task_worker.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.direct_script_repository_import_root_missing",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind REPO_ROOT before importing scripts and prove the direct --help path plus focused tests.",
+        "prevention_control": "Directly executable repository coordinators self-bind their repository import root before package imports.",
+        "evidence_paths": [
+          "tests/test_raisa_native_harness_task_worker.py",
+          "scripts/raisa_native_harness_task_worker.py"
+        ]
+      },
+      "baton_summary": "records the corrected direct-execution import-root defect."
+    },
+    {
+      "attempt_key": "seam-empty-test-scaffold-admission-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "provider-free-command-manifest-admission",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_preflight",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every selected future test path contains at least one collectible test before command-manifest admission.",
+      "observed_error": "The second zero-provider preparation rejected the deliberately empty worker-owned test scaffold as containing no tests.",
+      "detection_method": "The command-manifest validator returned selected_test_contains_no_tests before worktree retention or provider execution.",
+      "evidence_paths": [
+        "tests/test_check_in_environment_evidence_admission.py",
+        "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-prepared.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.future_test_scaffold_not_collectible",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add one explicit skipped scaffold test that the worker must replace.",
+        "prevention_control": "Worker-owned test scaffolds are collectible before they enter a fixed command manifest.",
+        "evidence_paths": [
+          "tests/test_check_in_environment_evidence_admission.py",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-prepared.json"
+        ]
+      },
+      "baton_summary": "records the corrected empty test-scaffold admission defect."
+    },
+    {
+      "attempt_key": "seam-native-attempt-001-custom-runner-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "implementer",
+      "resource_id": "deepseek-native-check-in-evidence-seam-001",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "deepseek_native_harness",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The HMR-loaded custom runner reaches the exact three-tool composition before any provider request.",
+      "observed_error": "HMR completed but the runner emitted CUSTOM_RUNNER_FAILURE before a provider request and the first terminal lacked a safe subcoordinate.",
+      "detection_method": "The attempt-001 terminal recorded provider not_reached, candidate none, HMR complete, zero requests and complete process cleanup.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-terminal.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-prepared.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "deepseek_native_harness.custom_runner_pre_provider_unclassified",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the accepted sanitized effective-tool coordinate, remove the extra persistence overlay and make retry artifacts attempt-scoped.",
+        "prevention_control": "Every pre-provider runner setup failure emits a closed guard coordinate and each fresh attempt has distinct boundary files.",
+        "evidence_paths": [
+          "scripts/raisa_native_harness_task_worker.py",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-deepseek-native-check-in-evidence-seam-002-prepared.json"
+        ]
+      },
+      "baton_summary": "records attempt 001's attributable pre-provider custom-runner failure."
+    },
+    {
+      "attempt_key": "seam-native-attempt-002-preset-mount-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "implementer",
+      "resource_id": "deepseek-native-check-in-evidence-seam-002",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "deepseek_native_harness",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The accepted emr4-bounded-worker preset mounts in the fresh real-work custom-runner context and exposes exactly edit/glob/read.",
+      "observed_error": "The final allowed attempt completed HMR but failed at EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED before provider delivery.",
+      "detection_method": "The attempt-002 terminal recorded provider not_reached, candidate none, exact guard coordinate, zero retry/fallback and complete cleanup.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-deepseek-native-check-in-evidence-seam-002-terminal.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-deepseek-native-check-in-evidence-seam-002-prepared.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "deepseek_native_harness.real_work_preset_mount_failed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "End the native assignment with no third run, no diagnostic successor and explicit Sol recovery provenance.",
+        "prevention_control": "This exact profile is not selected again until non-diagnostic evidence shows its preset-mount boundary is fixed.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-accepted-or-recovered.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/efficacy-reading.json"
+        ]
+      },
+      "baton_summary": "records the contained final native-Harness preset-mount failure and zero candidate."
+    },
+    {
+      "attempt_key": "seam-sol-eager-predicate-evaluation-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "integration_reviewer",
+      "resource_id": "check-in-environment-evidence-admission-seam",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A missing optional snapshot binding returns ordinary_evidence_missing without raising.",
+      "observed_error": "The first Sol implementation built an all tuple eagerly, so regex fullmatch received None despite an earlier false type predicate.",
+      "detection_method": "Two focused hostile-binding tests raised TypeError before the candidate commit.",
+      "evidence_paths": [
+        "tests/test_check_in_environment_evidence_admission.py",
+        "orchestration_harness/check_in_environment_evidence_admission.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "integrator.eager_all_tuple_guard_evaluates_hostile_value",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Move primitive type and syntax validation into explicit early-return guards before equality predicates.",
+        "prevention_control": "Hostile optional values are type-gated before regex or other type-specific operations.",
+        "evidence_paths": [
+          "orchestration_harness/check_in_environment_evidence_admission.py",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-environment-evidence-admission-input-seam-gemini37-review-receipt.json"
+        ]
+      },
+      "baton_summary": "records the corrected eager predicate-evaluation TypeError."
+    },
+    {
+      "attempt_key": "seam-powershell-rev-parse-expression-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "gemini-review-worktree-creation",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_git_cli",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The reviewer source is supplied as a machine-read full 40-character object without shell-sensitive revision syntax.",
+      "observed_error": "An unquoted PowerShell rev-parse brace expression was encoded as an invalid Git argument and the first worktree-creation command stopped before mutation.",
+      "detection_method": "Git rejected the ambiguous encoded argument and the explicit full-OID assertion stopped the command.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-gemini37-worktree-preflight.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-pre-verifier-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_git_revision_brace_expression_misparsed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Read the already exact current HEAD directly and pass that verified full object to git worktree add.",
+        "prevention_control": "PowerShell review-worktree setup uses machine-read full OIDs and no brace-suffixed revision expressions.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-environment-evidence-admission-input-seam-gemini37-review-receipt.json"
+        ]
+      },
+      "baton_summary": "records one contained PowerShell Git revision-expression lapse."
+    },
+    {
+      "attempt_key": "seam-verifier-process-cleanup-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "gemini-review-worktree-cleanup",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The fresh Antigravity process exits and releases the disposable clean review directory after its terminal receipt.",
+      "observed_error": "The launcher left the fresh agy process holding the now-empty review directory, so git removed metadata but could not remove the directory until that exact process was stopped.",
+      "detection_method": "Git worktree removal returned Windows permission denied; the directory was empty and the matching newly started agy process remained live.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-check-in-environment-evidence-admission-input-seam-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-gemini37-worktree-preflight.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "antigravity.completed_process_retains_review_directory_handle",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Verify the directory was empty, stop only the exact newly started agy process and remove the exact validated directory.",
+        "prevention_control": "Verifier cleanup checks the fresh launcher process and releases its directory handle before final worktree-absence readback.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-gemini37-worktree-preflight.json",
+          "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-closeout.md"
+        ]
+      },
+      "baton_summary": "records the contained fresh Antigravity directory-handle cleanup defect."
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> The clockwork now reads the native Harness at prepared, terminal and accepted-or-recovered boundaries while Sol retains every lasting repository decision.
+> Environment evidence is now a typed, independently mandatory but non-admitting input; the next step is a read-only readiness convergence review, not runtime activation or more Harness diagnosis.
 
 ## North star
 
@@ -622,26 +622,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    The normalizer, typed evidence inputs and pure evaluator now form a complete unmounted deterministic evidence-reading chain. Lineage parent: `raisa-provider-free-unmounted-canonical-check-in-typed-operational-evidence-inputs-rehearsal`.
 303. **Turn the native DeepSeek Harness from an interoperability research subject into a bounded useful EMR4 contributor — DeepSeek native Harness pragmatic real-work adoption review and plan**
    The strict broker and traceability gears remain, the unchanged-runner perfection rule is retired, and one task-driven adapter allowance opens practical real work. Lineage parent: `raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal`.
+304. **Require reviewed environment evidence as an independent input to the future ordinary canonical check-in admission boundary — Provider-free unmounted default-off canonical check-in environment-evidence admission-input seam rehearsal**
+   The typed evidence reading now composes fail-closed with every existing admission control while ordinary activation remains closed. Lineage parent: `deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan`.
 
 ## Current position
 
-**Use one monitored native DeepSeek contributor package inside the next default-off canonical check-in development tranche — DeepSeek native Harness pragmatic real-work adoption review and plan**
+**Reassess the remaining ordinary-practice canonical check-in readiness gap after the typed environment-evidence seam — Provider-free unmounted default-off canonical check-in environment-evidence admission-input seam rehearsal**
 
-**Why this proof came next:** The Harness already has sufficient boot, HMR, effective-tool and trace evidence; the missing measurement is useful accepted EMR4 work.
+**Why this proof came next:** The manifest normalizer, typed evidence inputs, pure evidence gate and admission-input composition are accepted, so a read-only convergence review can identify the next smallest blocker without opening runtime authority.
 
-One task-coupled custom-runner adaptation and one occupied real-work session will be judged through ordinary Sol review and EMR4 tests, not another qualification programme.
+One evidence-led successor will select the narrowest provider-free next tranche while the failed native profile remains out of the immediate worker allocation.
 
 ### What this unlocks
 
-- The first honest native-Harness useful-candidate reading on current EMR4 work.
-- A reusable typed work-order runner instead of task-specific synthetic runner identity.
-- A sparse three-reading clockwork/Harness interface with lower closeout friction.
+- A complete static chain from normalized environment evidence to a fail-closed default-off admission decision.
+- A current convergence reading that can separate remaining record, signature, distribution and command-mounting gaps.
+- Continued Raisa development without another native-Harness diagnostic detour.
 
 ### What it does not solve
 
-- One assignment cannot prove general DeepSeek or Harness reliability.
-- The default-off admission seam does not enable ordinary practice or activate an admission record.
-- No live product data, production runtime, deployment, release or protected integration is opened.
+- The static seam does not create or sign an operational admission snapshot.
+- The native Harness has not produced an accepted EMR4 candidate.
+- Ordinary practice, product runtime, data, deployment and protected integration remain closed.
 
 ## Continuity and authority
 
@@ -1706,6 +1708,7 @@ Prerequisites:
 - `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-design.md`
 - `docs/raisa-provider-free-unmounted-conditional-command-admission-rehearsal-plan.md`
+- `docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-default-off-canonical-check-in-non-phi-observer-adapter-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-closeout.md`
 - `docs/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal-plan.md`
@@ -1856,7 +1859,6 @@ Prerequisites:
 - `docs/security/bernie-reception-one-structured-source-language-threat-model-delta.md`
 - `docs/security/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-threat-model-delta.md`
 - `docs/security/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-threat-model-delta.md`
-- `docs/security/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan-threat-model-delta.md`
 - `docs/security/dependabot-alert-17-triage-2026-08-01.md`
 - `docs/security/dependabot-alerts-8-15-triage-2026-08-01.md`
 - `docs/security/emr4-model-required-bureau-a3-b3-request-contract-recovery-threat-model-delta.md`
@@ -2033,6 +2035,7 @@ Prerequisites:
 - `orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-architecture-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-kernel-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-admission-control-kernel-gemini37-first-worktree-postcondition-failure.json`
+- `orchestration/agent_inbox/antigravity/raisa-check-in-environment-evidence-admission-input-seam-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-relay-free-profile-call-site-cleanup-repair-gemini37-corrected-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-relay-free-transport-redesign-gemini37-review-receipt.json`
 - `orchestration/agent_inbox/antigravity/raisa-check-in-runtime-role-tenant-isolation-attestation-gemini37-review-receipt.json`
@@ -2182,7 +2185,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2269,6 +2271,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-gemini37-review-worktree-preflight.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-pre-verifier-acceptance-attempt-003-receipt.json`
 - `orchestration/agent_inbox/codex/raisa-check-in-admission-control-kernel-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-api-runtime-identity-enablement-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-deployment-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/raisa-cloud-run-public-https-dev-host-readiness-sol-acceptance.md`
@@ -3161,6 +3164,8 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-unmounted-cf-d2-event-cue-representation-architecture/representation-contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-conditional-command-admission-rehearsal/scenarios.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-conditional-command-admission-rehearsal/scenarios.schema.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/deterministic-evidence.json`
+- `orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/contract.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/contract.schema.json`
 - `orchestration/continuity/raisa-provider-free-unmounted-default-off-ordinary-practice-canonical-check-in-admission-control-kernel-rehearsal/kernel-rehearsal-report.md`
@@ -3609,6 +3614,7 @@ Prerequisites:
 - `orchestration/prototypes/reception-one-yuri-internal-walkthrough/completed-review.json`
 - `orchestration_harness/active_operation.py`
 - `orchestration_harness/check_in_admission_control.py`
+- `orchestration_harness/check_in_environment_evidence_admission.py`
 - `orchestration_harness/check_in_observability.py`
 - `orchestration_harness/continuity_and_refinement.py`
 - `orchestration_harness/git_object_resolution.py`
@@ -3906,4 +3912,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 408; continuity graph revision 426._
+_Compass map revision 409; continuity graph revision 427._

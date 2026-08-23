@@ -1,0 +1,58 @@
+{
+  "attempt_id": "deepseek-native-check-in-evidence-seam-002",
+  "broker": {
+    "provider_call_completed": 0,
+    "provider_call_failed": 0,
+    "provider_call_started": 0,
+    "ready": true
+  },
+  "candidate": "none",
+  "changed_paths": [],
+  "cleanup": {
+    "broker_absent": true,
+    "raw_material_retained_pending_sol_review": true,
+    "worker_absent": true
+  },
+  "duration_ms": 4924,
+  "ended_at": "2026-08-23T03:20:51.319650Z",
+  "failure_code": "native_harness_terminal_failure",
+  "failure_stage": "pre_provider_envelope",
+  "hmr_complete": true,
+  "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+  "process": {
+    "automatic_retries": 0,
+    "auxiliary_model_calls": 0,
+    "exit_code": 1,
+    "fallbacks": 0,
+    "timed_out": false
+  },
+  "provider": "not_reached",
+  "reading": "terminal",
+  "runner": {
+    "allowed_tool_names": [
+      "edit",
+      "glob",
+      "read"
+    ],
+    "effective_tool_coordinate": {
+      "code": "EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED",
+      "detail": null,
+      "stage": "pre_provider_tool_composition"
+    },
+    "failure_code": "CUSTOM_RUNNER_FAILURE",
+    "request_count": 0,
+    "schema_version": "ariadne.native_harness_task_runner_terminal.v1",
+    "status": "failed",
+    "tool_names": [],
+    "tool_result_count": 0,
+    "turn_kind": null
+  },
+  "schema_version": "ariadne.native_harness_task_terminal.v1",
+  "scope_integrity": true,
+  "session": {
+    "file_count": 0,
+    "trace_complete": false
+  },
+  "source_commit": "66732375335bed6eb0ed877564f7ad173f33b2ec",
+  "started_at": "2026-08-23T03:20:46.395169Z"
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 642,
+  "register_revision": 643,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -42375,6 +42375,376 @@
       "incident_id": "AER-1099",
       "attempt_id": "clock-d993fc488f4019f27b462fef",
       "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "preplanning-orchestrator-receipt",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_preflight",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The git_refs_and_worktree source is prose-only and exact Git values come solely from the machine snapshot.",
+      "observed_error": "The first runtime-state draft repeated exact Git object IDs in the narrative source and the preflight rejected manual Git-ref evidence.",
+      "detection_method": "The orchestrator preflight returned revision_required with git_refs_evidence_manual_object_id_forbidden.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-preplanning-runtime-state.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-preplanning-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_git_object_in_machine_snapshot_narrative",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Remove the hand-authored IDs and let the preflight supply all exact Git readings.",
+        "prevention_control": "Git-ref narrative fields remain identity-free; exact objects are read only from the machine snapshot.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-preplanning-runtime-state.json"
+        ]
+      },
+      "incident_id": "AER-1100",
+      "attempt_id": "clock-960785d5e7085e8d260dd654",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "active-acceptance-path-rehydration",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Repository paths are resolved from the file inventory before a read command is issued.",
+      "observed_error": "Two read commands guessed non-existent evaluator and admission-kernel artifact names before rg found the exact retained paths.",
+      "detection_method": "Get-Content failed closed with path-not-found and no file mutation.",
+      "evidence_paths": [
+        "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-closeout.md",
+        "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-plan.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.guessed_long_repository_artifact_path",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Resolve long artifact names with rg --files before reading them.",
+        "prevention_control": "Long generated artifact paths are inventory-resolved rather than reconstructed from memory.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-closeout.md",
+          "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py"
+        ]
+      },
+      "incident_id": "AER-1101",
+      "attempt_id": "clock-785e4fbfa4dbf5eec2a11945",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "planning-explicit-path-staging",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_git_cli",
+      "stage": "implementation",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every explicit path supplied to git add is copied from the verified file inventory.",
+      "observed_error": "One test path used a hyphenated check-in segment instead of the actual underscore filename and the entire staging command failed.",
+      "detection_method": "Git rejected the unmatched pathspec before staging any path.",
+      "evidence_paths": [
+        "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_environment_evidence_admission_input_seam_rehearsal_plan.py",
+        "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-plan.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.explicit_stage_path_transcription_error",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Restage using the exact inventory-resolved underscore path and verify the cached diff.",
+        "prevention_control": "Explicit staging paths are copied from git status or rg output, not retyped from the document slug.",
+        "evidence_paths": [
+          "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-plan.md",
+          "tests/test_raisa_provider_free_unmounted_default_off_canonical_check_in_environment_evidence_admission_input_seam_rehearsal_plan.py"
+        ]
+      },
+      "incident_id": "AER-1102",
+      "attempt_id": "clock-65b9a7968642a8dc1289ba31",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "native-harness-task-coordinator",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_python_cli",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The reusable coordinator imports repository modules identically under pytest and direct script execution.",
+      "observed_error": "The first direct prepare invocation failed before attempt creation because the script did not insert the repository root on sys.path.",
+      "detection_method": "Python raised ImportError for the accepted effective-tool guard module; zero worktree and zero provider call existed.",
+      "evidence_paths": [
+        "scripts/raisa_native_harness_task_worker.py",
+        "tests/test_raisa_native_harness_task_worker.py"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.direct_script_repository_import_root_missing",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Bind REPO_ROOT before importing scripts and prove the direct --help path plus focused tests.",
+        "prevention_control": "Directly executable repository coordinators self-bind their repository import root before package imports.",
+        "evidence_paths": [
+          "tests/test_raisa_native_harness_task_worker.py",
+          "scripts/raisa_native_harness_task_worker.py"
+        ]
+      },
+      "incident_id": "AER-1103",
+      "attempt_id": "clock-47e53248523a15adb02d3086",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "provider-free-command-manifest-admission",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_preflight",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every selected future test path contains at least one collectible test before command-manifest admission.",
+      "observed_error": "The second zero-provider preparation rejected the deliberately empty worker-owned test scaffold as containing no tests.",
+      "detection_method": "The command-manifest validator returned selected_test_contains_no_tests before worktree retention or provider execution.",
+      "evidence_paths": [
+        "tests/test_check_in_environment_evidence_admission.py",
+        "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-prepared.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.future_test_scaffold_not_collectible",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add one explicit skipped scaffold test that the worker must replace.",
+        "prevention_control": "Worker-owned test scaffolds are collectible before they enter a fixed command manifest.",
+        "evidence_paths": [
+          "tests/test_check_in_environment_evidence_admission.py",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-prepared.json"
+        ]
+      },
+      "incident_id": "AER-1104",
+      "attempt_id": "clock-9a203884dda570ed8f2bb930",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "implementer",
+      "resource_id": "deepseek-native-check-in-evidence-seam-001",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "deepseek_native_harness",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The HMR-loaded custom runner reaches the exact three-tool composition before any provider request.",
+      "observed_error": "HMR completed but the runner emitted CUSTOM_RUNNER_FAILURE before a provider request and the first terminal lacked a safe subcoordinate.",
+      "detection_method": "The attempt-001 terminal recorded provider not_reached, candidate none, HMR complete, zero requests and complete process cleanup.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-terminal.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-prepared.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "deepseek_native_harness.custom_runner_pre_provider_unclassified",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the accepted sanitized effective-tool coordinate, remove the extra persistence overlay and make retry artifacts attempt-scoped.",
+        "prevention_control": "Every pre-provider runner setup failure emits a closed guard coordinate and each fresh attempt has distinct boundary files.",
+        "evidence_paths": [
+          "scripts/raisa_native_harness_task_worker.py",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-deepseek-native-check-in-evidence-seam-002-prepared.json"
+        ]
+      },
+      "incident_id": "AER-1105",
+      "attempt_id": "clock-51e3765cebc3c95ff40bcc29",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "implementer",
+      "resource_id": "deepseek-native-check-in-evidence-seam-002",
+      "model": "deepseek-v4-flash",
+      "reasoning_level": "high",
+      "transport": "deepseek_native_harness",
+      "stage": "dispatch",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The accepted emr4-bounded-worker preset mounts in the fresh real-work custom-runner context and exposes exactly edit/glob/read.",
+      "observed_error": "The final allowed attempt completed HMR but failed at EFFECTIVE_TOOL_COMPOSITION_PRESET_MOUNT_FAILED before provider delivery.",
+      "detection_method": "The attempt-002 terminal recorded provider not_reached, candidate none, exact guard coordinate, zero retry/fallback and complete cleanup.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-deepseek-native-check-in-evidence-seam-002-terminal.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-deepseek-native-check-in-evidence-seam-002-prepared.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "deepseek_native_harness.real_work_preset_mount_failed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "contained_then_escalated",
+        "action": "End the native assignment with no third run, no diagnostic successor and explicit Sol recovery provenance.",
+        "prevention_control": "This exact profile is not selected again until non-diagnostic evidence shows its preset-mount boundary is fixed.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/native-harness-accepted-or-recovered.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/efficacy-reading.json"
+        ]
+      },
+      "incident_id": "AER-1106",
+      "attempt_id": "clock-1f14e6cb2e4b8f53c66a4b1a",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "integration_reviewer",
+      "resource_id": "check-in-environment-evidence-admission-seam",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "codex_primary_session",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "A missing optional snapshot binding returns ordinary_evidence_missing without raising.",
+      "observed_error": "The first Sol implementation built an all tuple eagerly, so regex fullmatch received None despite an earlier false type predicate.",
+      "detection_method": "Two focused hostile-binding tests raised TypeError before the candidate commit.",
+      "evidence_paths": [
+        "tests/test_check_in_environment_evidence_admission.py",
+        "orchestration_harness/check_in_environment_evidence_admission.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "integrator.eager_all_tuple_guard_evaluates_hostile_value",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Move primitive type and syntax validation into explicit early-return guards before equality predicates.",
+        "prevention_control": "Hostile optional values are type-gated before regex or other type-specific operations.",
+        "evidence_paths": [
+          "orchestration_harness/check_in_environment_evidence_admission.py",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-environment-evidence-admission-input-seam-gemini37-review-receipt.json"
+        ]
+      },
+      "incident_id": "AER-1107",
+      "attempt_id": "clock-4d4f46a4ba3261844f844b1f",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "gemini-review-worktree-creation",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_powershell_git_cli",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The reviewer source is supplied as a machine-read full 40-character object without shell-sensitive revision syntax.",
+      "observed_error": "An unquoted PowerShell rev-parse brace expression was encoded as an invalid Git argument and the first worktree-creation command stopped before mutation.",
+      "detection_method": "Git rejected the ambiguous encoded argument and the explicit full-OID assertion stopped the command.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-gemini37-worktree-preflight.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-pre-verifier-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.powershell_git_revision_brace_expression_misparsed",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Read the already exact current HEAD directly and pass that verified full object to git worktree add.",
+        "prevention_control": "PowerShell review-worktree setup uses machine-read full OIDs and no brace-suffixed revision expressions.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/antigravity/raisa-check-in-environment-evidence-admission-input-seam-gemini37-review-receipt.json"
+        ]
+      },
+      "incident_id": "AER-1108",
+      "attempt_id": "clock-db4f4730bba580250f251fd8",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "gemini-review-worktree-cleanup",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "antigravity_new_project_bound_readonly_worktree",
+      "stage": "independent_review",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The fresh Antigravity process exits and releases the disposable clean review directory after its terminal receipt.",
+      "observed_error": "The launcher left the fresh agy process holding the now-empty review directory, so git removed metadata but could not remove the directory until that exact process was stopped.",
+      "detection_method": "Git worktree removal returned Windows permission denied; the directory was empty and the matching newly started agy process remained live.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/antigravity/raisa-check-in-environment-evidence-admission-input-seam-gemini37-review-receipt.json",
+        "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-gemini37-worktree-preflight.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "antigravity.completed_process_retains_review_directory_handle",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Verify the directory was empty, stop only the exact newly started agy process and remove the exact validated directory.",
+        "prevention_control": "Verifier cleanup checks the fresh launcher process and releases its directory handle before final worktree-absence readback.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-check-in-environment-evidence-admission-input-seam-gemini37-worktree-preflight.json",
+          "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-closeout.md"
+        ]
+      },
+      "incident_id": "AER-1109",
+      "attempt_id": "clock-49eca5976d5d62066509f8b0",
+      "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"
     }

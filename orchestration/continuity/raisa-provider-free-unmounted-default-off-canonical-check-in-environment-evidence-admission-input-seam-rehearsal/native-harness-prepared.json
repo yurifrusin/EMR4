@@ -1,0 +1,53 @@
+{
+  "attempt_id": "deepseek-native-check-in-evidence-seam-001",
+  "effective_tool_preflight": {
+    "approval_never": true,
+    "custom_runner_absent_initially": true,
+    "custom_runner_hmr_inserted": true,
+    "exact_tools": true,
+    "multi_request_allowed": true,
+    "no_conclude_turn": true,
+    "no_model_shell": true,
+    "one_tool_at_a_time": true,
+    "owned_edit_gate": true,
+    "stock_runner_disabled": true,
+    "zero_retry": true
+  },
+  "effective_tools": [
+    "edit",
+    "glob",
+    "read"
+  ],
+  "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+  "owned_paths": [
+    "orchestration_harness/check_in_environment_evidence_admission.py",
+    "tests/test_check_in_environment_evidence_admission.py"
+  ],
+  "profile": {
+    "guard_sha256": "6678ed31bdcd30a5018689b72ad509c182854bf5d63862f59b397acc8de40894",
+    "materialized_package_count": 7,
+    "package_json_sha256": "7a9f356ad1e27c7013b44619bc675b8cb877f995cd0951ab3dfeb10d4edcc361",
+    "package_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-evidence-seam-001/installation/node_modules/@deepseek-ai/dsh",
+    "preset_sha256": "3de182eb702e6f2b397941c73393b87f65acb9b401565f966059d2bd46f649d1",
+    "runner_sha256": "368c6e1d7db2665b7211eefb1819183a92a543eb7a222b02f4c02c66d30ab206",
+    "sentinel_sha256": "8b53bc7fb781d29d87310ee2d3425ca159a62fed4893a3e4db94069d63cd60bd"
+  },
+  "prompt_sha256": "b8cd3bc3b097c132fd969096727371aabdf91d5746b8f60245d638340de4f443",
+  "provider_calls": 0,
+  "read_only_packet_paths": [
+    "AGENTS.md",
+    "docs/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-plan.md",
+    "docs/security/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal-threat-model-delta.md",
+    "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal/contract.json",
+    "orchestration_harness/check_in_admission_control.py",
+    "app/services/appointment_check_in_environment_evidence_gate.py",
+    "tests/test_raisa_provider_free_unmounted_default_off_ordinary_practice_check_in_admission_control_kernel_rehearsal.py",
+    "tests/test_appointment_check_in_environment_evidence_gate.py"
+  ],
+  "reading": "prepared",
+  "schema_version": "ariadne.native_harness_task_prepared.v1",
+  "source_commit": "4d376efe8d189f2e539814b9998f1076146fd2e8",
+  "status": "passed",
+  "work_order_sha256": "6cc263dfd61786d3243447f94899d687a94601a4ec02fb04149d67ce94eb6395",
+  "worker_sessions": 0
+}
