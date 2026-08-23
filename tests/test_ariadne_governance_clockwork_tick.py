@@ -62,10 +62,12 @@ from scripts.ariadne_governance_clockwork_tick import (
     _command_result,
     _idempotent_transaction_facts,
     _is_exact_published_intent,
+    _output_prefix,
     _prepared_transaction_facts,
     _prospective_rejection_result,
     _rollback_transaction_facts,
     _run_semantic_verification,
+    _write_idempotent_readback,
     _write_outputs,
 )
 
@@ -135,6 +137,7 @@ def _semantic_intent(worktree: Path) -> dict:
     graph = _json(worktree / contract["canonical_paths"]["continuity"])
     artifact_slug = "ariadne-clockwork-typed-semantic-builder"
     plan_path = f"docs/{artifact_slug}-plan.md"
+    fixture_successor = f"{latch['operation_id']}-fixture-successor"
     return {
         "schema_version": SEMANTIC_TICK_INTENT_VERSION,
         "profile": SEMANTIC_PROFILE,
@@ -201,11 +204,11 @@ def _semantic_intent(worktree: Path) -> dict:
                 "orientation_statement": "Compile mechanics; retain human and model judgment only for semantic meaning.",
             },
             "next_operation": {
-                "operation_id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
-                "active_tranche": "Provider-free governance clockwork typed-builder matched efficacy review",
-                "objective": "Measure actual caller leaves, invocations, failures, elapsed closeout friction and safety invariants after the typed-builder rehearsal.",
-                "authority_source": "The accepted clockwork ergonomics sequence and standing authority select one provider-free matched review.",
-                "next_stage": "fresh_five_source_rehydration_then_freeze_exact_matched_measurement_and_no_added_bureaucracy_acceptance",
+                "operation_id": fixture_successor,
+                "active_tranche": "Provider-free semantic builder test-only successor",
+                "objective": "Prove the semantic fixture can derive one unrecorded successor from its isolated latch.",
+                "authority_source": "The test fixture derives a non-published successor and grants no continuing authority.",
+                "next_stage": "stop_after_test_only_successor_projection",
             },
         },
         "verification_profile": SEMANTIC_VERIFICATION_PROFILE,
@@ -301,6 +304,164 @@ def test_cli_output_pair_is_written_together(tmp_path: Path) -> None:
     assert "Lease sequence: 8" in report_text
     assert "Command disposition: `publication_committed`" in report_text
     assert "Published generations: 1" in report_text
+
+
+def test_idempotent_readback_preserves_publication_pair_and_is_byte_idempotent(
+    tmp_path: Path,
+) -> None:
+    publication = {
+        "status": "passed",
+        "operation_id": REDESIGN_OPERATION_ID,
+        "source_commit": "a" * 40,
+        "generation_id": "gen-" + "b" * 64,
+        "previous_generation_id": "gen-" + "c" * 64,
+        "lease_sequence": 8,
+        "transaction_facts": {
+            "command_disposition": "publication_committed",
+            "published_generations": 1,
+            "byte_exact_rollbacks": 0,
+        },
+    }
+    readback = {
+        **publication,
+        "transaction_facts": {
+            "command_disposition": "idempotent_readback",
+            "published_generations": 0,
+            "byte_exact_rollbacks": 0,
+            "idempotent_readbacks": 1,
+            "committed_lease_advance": 0,
+        },
+        "verification_facts": {
+            "executed_command_count": 0,
+            "passed_command_count": 0,
+        },
+    }
+    _write_outputs(tmp_path, publication)
+    evidence = tmp_path / "clockwork-tick-evidence.json"
+    report = tmp_path / "clockwork-tick-report.md"
+    before = (evidence.read_bytes(), report.read_bytes())
+
+    target = _write_idempotent_readback(
+        tmp_path,
+        readback,
+        prefix="clockwork-tick",
+    )
+    first_readback = target.read_bytes()
+
+    assert (evidence.read_bytes(), report.read_bytes()) == before
+    assert json.loads(first_readback) == readback
+    assert target.name == "clockwork-tick-idempotent-readback.json"
+
+    _write_idempotent_readback(
+        tmp_path,
+        readback,
+        prefix="clockwork-tick",
+    )
+    assert target.read_bytes() == first_readback
+    assert (evidence.read_bytes(), report.read_bytes()) == before
+
+
+@pytest.mark.parametrize("missing_name", ["evidence", "report"])
+def test_idempotent_readback_rejects_missing_publication_pair(
+    tmp_path: Path,
+    missing_name: str,
+) -> None:
+    publication = {
+        "status": "passed",
+        "operation_id": REDESIGN_OPERATION_ID,
+        "source_commit": "a" * 40,
+        "generation_id": "gen-" + "b" * 64,
+        "previous_generation_id": "gen-" + "c" * 64,
+        "lease_sequence": 8,
+        "transaction_facts": {
+            "command_disposition": "publication_committed",
+            "published_generations": 1,
+            "byte_exact_rollbacks": 0,
+        },
+    }
+    readback = {
+        **publication,
+        "transaction_facts": {
+            "command_disposition": "idempotent_readback",
+            "published_generations": 0,
+        },
+    }
+    _write_outputs(tmp_path, publication)
+    (tmp_path / f"clockwork-tick-{missing_name}.json").unlink(missing_ok=True)
+    if missing_name == "report":
+        (tmp_path / "clockwork-tick-report.md").unlink()
+
+    with pytest.raises(
+        ClockworkTickRejection,
+        match="tick_publication_evidence_preservation",
+    ):
+        _write_idempotent_readback(
+            tmp_path,
+            readback,
+            prefix="clockwork-tick",
+        )
+
+    assert not (tmp_path / "clockwork-tick-idempotent-readback.json").exists()
+
+
+def test_idempotent_readback_rejects_mismatched_publication(tmp_path: Path) -> None:
+    publication = {
+        "status": "passed",
+        "operation_id": REDESIGN_OPERATION_ID,
+        "source_commit": "a" * 40,
+        "generation_id": "gen-" + "b" * 64,
+        "previous_generation_id": "gen-" + "c" * 64,
+        "lease_sequence": 8,
+        "transaction_facts": {
+            "command_disposition": "publication_committed",
+            "published_generations": 1,
+            "byte_exact_rollbacks": 0,
+        },
+    }
+    _write_outputs(tmp_path, publication)
+    before = {
+        path.name: path.read_bytes()
+        for path in (
+            tmp_path / "clockwork-tick-evidence.json",
+            tmp_path / "clockwork-tick-report.md",
+        )
+    }
+    readback = {
+        **publication,
+        "generation_id": "gen-" + "d" * 64,
+        "transaction_facts": {
+            "command_disposition": "idempotent_readback",
+            "published_generations": 0,
+        },
+    }
+
+    with pytest.raises(
+        ClockworkTickRejection,
+        match="publication_evidence_generation_id_mismatch",
+    ):
+        _write_idempotent_readback(
+            tmp_path,
+            readback,
+            prefix="clockwork-tick",
+        )
+
+    assert {
+        path.name: path.read_bytes()
+        for path in (
+            tmp_path / "clockwork-tick-evidence.json",
+            tmp_path / "clockwork-tick-report.md",
+        )
+    } == before
+    assert not (tmp_path / "clockwork-tick-idempotent-readback.json").exists()
+
+
+def test_output_prefix_is_closed_by_intent_schema() -> None:
+    assert _output_prefix({"schema_version": CHECKPOINT_INTENT_VERSION}) == (
+        "clockwork-checkpoint-tick"
+    )
+    assert _output_prefix({"schema_version": SEMANTIC_TICK_INTENT_VERSION}) == (
+        "clockwork-tick"
+    )
 
 
 def test_prospective_human_evidence_returns_the_complete_ordered_error_set(

@@ -1,0 +1,53 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_passing_idempotent_readback_evidence_preservation_candidate_before_one_occupied_parent_readback",
+  "source_evidence": {
+    "live_handover_current_baton": "The freshly restored Current Baton selects this evidence-preservation repair.",
+    "current_authority_allocation": "GPT Sol owns the serial candidate and occupied proof. DeepSeek remains declined because its native profile is paused and Claude Code is not a fallback; Gemini and native subagents remain declined because all acceptance facts are deterministic and tightly coupled.",
+    "active_plan_and_acceptance": ["docs/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-plan.md", "docs/security/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-threat-model-delta.md", "scripts/ariadne_governance_clockwork_tick.py", "tests/test_ariadne_governance_clockwork_tick.py", "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/clockwork-tick-evidence.json", "orchestration/continuity/ariadne-active-operation-latch/current.json", "orchestration/continuity/ariadne-governance-clockwork/current.json"],
+    "protected_evidence_boundaries": "The candidate changes only the existing CLI output branch and governance test fixture. The future occupied proof may add one generated readback JSON; product, provider, data, runtime, deployment, Pages, protected evidence and protected refs remain closed.",
+    "git_refs_and_worktree": "The machine snapshot binds full Git objects and protected refs. Intentional tracked changes are limited to two owned files; docs/branding and all unrelated untracked paths remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
+    "active_tranche": "Provider-free governance clockwork idempotent publication evidence preservation repair",
+    "objective": "Preserve the first publication evidence and record idempotent readback without overwriting it inside the existing clockwork CLI.",
+    "status": "in_progress",
+    "source_head": "08565a9806fcc74559633e518a97a5d9f8f602d1",
+    "authority_source": "The accepted matched efficacy review and standing authority select the narrowest traceability repair before further ergonomic expansion.",
+    "checkpoint": {"completed_stage": "Accepted ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review at the machine-resolved source.", "next_executable_stage": "fresh_five_source_rehydration_then_freeze_immutable_publication_evidence_and_separate_idempotent_reading_contract", "retry_counters": {"planning": 0, "implementation": 0, "review": 0, "verification": 0}, "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"},
+    "interruption_policy": {"chronological_last_prompt_is_controlling_authority": false, "side_question_behavior": "answer_then_resume", "status_request_behavior": "answer_then_resume", "scope_addition_behavior": "merge_then_resume", "replacement_requires_explicit_pause_or_redirect": true},
+    "resume_after_compaction": true,
+    "user_attention": {"required": false, "reason": null},
+    "terminal_response": {"permitted": false, "reason": "unfinished_authorized_operation"},
+    "protected_boundaries": ["provider_free_existing_clockwork_cli_idempotent_evidence_preservation_repair_only", "preserve_first_publication_evidence_and_record_readback_without_overwrite", "no_new_operator_document_gate_ledger_approval_or_control_layer", "no_native_harness_worker_provider_call_or_transport_qualification", "no_silent_claude_code_or_other_transport_fallback", "no_authority_allocation_or_worker_transport_policy_change", "no_existing_product_source_route_api_client_configuration_or_runtime_change", "no_environment_variable_secret_credential_network_database_or_infrastructure_access", "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting", "no_product_patient_appointment_clinical_historical_or_protected_data", "no_production_runtime_deployment_release_or_pages", "no_protected_evidence_access_or_protected_ref_movement", "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602", "docs_branding_and_all_unrelated_untracked_files_preserved", "explicit_path_staging_only"]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
+    "assessed_stage": "candidate_precommit_after_five_focused_and_120_full_tests",
+    "lanes": [
+      {"lane_id": "deepseek_flash", "disposition": "declined", "expected_leverage": "negative", "rationale": "The native profile is paused, Claude Code is not a fallback and the complete candidate already passes deterministic verification.", "work_packages": []},
+      {"lane_id": "gemini_verifier", "disposition": "declined", "expected_leverage": "neutral", "rationale": "The plan authorises deterministic byte/canonical verification and no provider veto.", "work_packages": []},
+      {"lane_id": "native_subagents", "disposition": "declined", "expected_leverage": "negative", "rationale": "Developer policy prohibits proactive delegation and the occupied readback is serial.", "work_packages": []}
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": ["commit the candidate", "capture publication-pair SHA-256", "run one occupied exact parent readback", "validate byte identity and canonical state"],
+    "reassessment_triggers": ["if the occupied readback rejects", "if either publication hash changes", "if canonical state moves"]
+  },
+  "context_health": {"agent_contexts": [{"agent_id": "orchestrator", "measurement_source": "fresh_five_source_context_plus_focused_and_full_deterministic_pass", "rehydrated_from_receipt": true, "rehydration_sources": ["live_handover_current_baton", "current_authority_allocation", "active_plan_and_acceptance", "protected_evidence_boundaries", "git_refs_and_worktree"]}]},
+  "adapter_observations": [
+    {"adapter_id": "codex_primary_session", "method": "codex_session_observation", "reachability": "reachable", "evidence": ["GPT Sol owns the candidate and proof."]},
+    {"adapter_id": "deepseek_native_harness", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected; paused."]},
+    {"adapter_id": "deepcode_cli", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "deepseek_via_claude_code_bare", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected and not an authorised fallback."]},
+    {"adapter_id": "claude_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected."]},
+    {"adapter_id": "antigravity_cli_print", "method": "synthetic_fixture", "reachability": "unknown", "evidence": ["Not selected; deterministic evidence is sufficient."]},
+    {"adapter_id": "codex_subagent_spawn", "method": "codex_subagent_observation", "reachability": "reachable", "evidence": ["No native subagent was spawned under developer policy."]}
+  ],
+  "worker_slots": [{"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []}, {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

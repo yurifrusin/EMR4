@@ -432,6 +432,105 @@ def _write_outputs(topic: Path, result: dict, *, prefix: str = "clockwork-tick")
     )
 
 
+def _output_prefix(intent: dict) -> str:
+    return (
+        "clockwork-checkpoint-tick"
+        if intent.get("schema_version") == CHECKPOINT_INTENT_VERSION
+        else "clockwork-tick"
+    )
+
+
+def _write_idempotent_readback(
+    topic: Path,
+    result: dict,
+    *,
+    prefix: str,
+) -> Path:
+    publication_evidence = topic / f"{prefix}-evidence.json"
+    publication_report = topic / f"{prefix}-report.md"
+    errors: list[str] = []
+    try:
+        evidence_bytes = publication_evidence.read_bytes()
+        publication = json.loads(evidence_bytes.decode("utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        evidence_bytes = b""
+        publication = None
+        errors.append("publication_evidence_missing_or_unreadable")
+    try:
+        report_bytes = publication_report.read_bytes()
+        report_text = report_bytes.decode("utf-8")
+    except (OSError, UnicodeDecodeError):
+        report_bytes = b""
+        report_text = ""
+        errors.append("publication_report_missing_or_unreadable")
+
+    operation_id = result.get("operation_id")
+    expected_publication = {
+        "status": "passed",
+        "operation_id": operation_id,
+        "source_commit": result.get("source_commit"),
+        "generation_id": result.get("generation_id"),
+    }
+    if isinstance(publication, dict):
+        for key, expected in expected_publication.items():
+            if publication.get(key) != expected:
+                errors.append(f"publication_evidence_{key}_mismatch")
+        transaction = publication.get("transaction_facts")
+        if not isinstance(transaction, dict):
+            errors.append("publication_transaction_facts_missing")
+        else:
+            if transaction.get("command_disposition") != "publication_committed":
+                errors.append("publication_disposition_mismatch")
+            if transaction.get("published_generations") != 1:
+                errors.append("publication_count_mismatch")
+    elif "publication_evidence_missing_or_unreadable" not in errors:
+        errors.append("publication_evidence_object_required")
+
+    report_bindings = (
+        f"Operation: `{operation_id if operation_id is not None else 'not-published'}`",
+        f"Source: `{result.get('source_commit')}`",
+        f"Generation: `{result.get('generation_id')}`",
+        "Command disposition: `publication_committed`",
+    )
+    for binding in report_bindings:
+        if binding not in report_text:
+            errors.append("publication_report_binding_mismatch")
+            break
+
+    facts = result.get("transaction_facts")
+    if (
+        not isinstance(facts, dict)
+        or facts.get("command_disposition") != "idempotent_readback"
+    ):
+        errors.append("idempotent_readback_facts_required")
+
+    if errors:
+        raise ClockworkTickRejection(
+            "tick_publication_evidence_preservation:" + ",".join(errors)
+        )
+
+    readback = topic / f"{prefix}-idempotent-readback.json"
+    temporary = readback.with_name(f".{readback.name}.tmp")
+    payload = json.dumps(result, indent=2, ensure_ascii=False) + "\n"
+    try:
+        temporary.write_text(
+            payload,
+            encoding="utf-8",
+            newline="\n",
+        )
+        if (
+            publication_evidence.read_bytes() != evidence_bytes
+            or publication_report.read_bytes() != report_bytes
+        ):
+            raise ClockworkTickRejection(
+                "tick_publication_evidence_preservation:publication_pair_changed"
+            )
+        temporary.replace(readback)
+    finally:
+        temporary.unlink(missing_ok=True)
+    return readback
+
+
 def _intent_identity(
     repo_root: Path, intent: dict, contract: dict
 ) -> tuple[str | None, str, str]:
@@ -534,14 +633,10 @@ def main(argv: list[str] | None = None) -> int:
                 verification_facts,
             )
             if arguments.publish:
-                _write_outputs(
+                _write_idempotent_readback(
                     intent_path.parent,
                     result,
-                    prefix=(
-                        "clockwork-checkpoint-tick"
-                        if intent.get("schema_version") == CHECKPOINT_INTENT_VERSION
-                        else "clockwork-tick"
-                    ),
+                    prefix=_output_prefix(intent),
                 )
         else:
             if semantic and arguments.publish:
@@ -586,11 +681,7 @@ def main(argv: list[str] | None = None) -> int:
                 _write_outputs(
                     intent_path.parent,
                     result,
-                    prefix=(
-                        "clockwork-checkpoint-tick"
-                        if intent.get("schema_version") == CHECKPOINT_INTENT_VERSION
-                        else "clockwork-tick"
-                    ),
+                    prefix=_output_prefix(intent),
                 )
     print(json.dumps(result, indent=2, ensure_ascii=False))
     return 0
@@ -609,6 +700,18 @@ def cli(argv: list[str] | None = None) -> int:
             result = _prospective_rejection_result(error)
         elif message.startswith("tick_semantic"):
             result = _semantic_materialization_rejection_result(error)
+        elif message.startswith("tick_publication_evidence_preservation:"):
+            errors = message.split(":", 1)[1].split(",")
+            result = {
+                "schema_version": "ariadne.governance_idempotent_readback_rejection.v1",
+                "status": "revision_required",
+                "reason": "tick_publication_evidence_preservation",
+                "errors": errors,
+                "error_count": len(errors),
+                "readback_writes": 0,
+                "canonical_writes": 0,
+                "pointer_movement": 0,
+            }
         else:
             raise
         print(json.dumps(result, indent=2, ensure_ascii=False))
