@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> Preserve original readings; derive the remaining repeated forms.
+> Select typed control positions; let the clockwork own their full representation.
 
 ## North star
 
@@ -638,22 +638,24 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Retain the builder, correct its comparison and select evidence preservation first. Lineage parent: `ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal`.
 311. **Make repeated clock readings non-destructive without adding operator paperwork. — Provider-free governance clockwork idempotent publication evidence preservation repair**
    Publication evidence remains immutable and one machine readback records the repeat. Lineage parent: `ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review`.
+312. **Make the orchestrator take serial governance readings instead of rewriting their full representation. — Provider-free governance clockwork typed serial-continuation state projection rehearsal**
+   A 14-line typed card produces the existing safety receipt with 92.1 percent fewer caller leaves. Lineage parent: `ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair`.
 
 ## Current position
 
-**Reduce clerical failure while keeping the original safety reading visible. — Provider-free governance clockwork idempotent publication evidence preservation repair**
+**Use typed controls for intent and deterministic expansion for governance state. — Provider-free governance clockwork typed serial-continuation state projection rehearsal**
 
-**Why this proof came next:** The matched review found a concrete postpublication traceability defect.
+**Why this proof came next:** The matched review found continuation runtime states were the largest remaining clerical surface.
 
-Two publication files and four canonical hashes remain byte-exact after occupied readback.
+The complete serial intent-plus-receipt pair is 58.7 percent smaller by lines and 60.9 percent smaller by bytes.
 
 ### What this unlocks
 
-- A typed serial-continuation projection inside the existing preflight.
+- Three-event live efficacy observation using ordinary compact serial intents.
 
 ### What it does not solve
 
-- It does not yet reduce continuation runtime-state or receipt volume.
+- It does not qualify occupied workers or reduce full governance-suite cadence.
 
 ## Continuity and authority
 
@@ -1243,10 +1245,11 @@ Prerequisites:
 - `docs/ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair-closeout.md`
 - `docs/ariadne-cf-d2-workflow-incident-diagnosis-and-fluidity-repair-plan.md`
 - `docs/ariadne-cf-d2-workflow-incident-diagnosis.md`
-- `docs/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-closeout.md`
 - `docs/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-plan.md`
 - `docs/ariadne-clockwork-typed-builder-matched-efficacy-review-plan.md`
 - `docs/ariadne-clockwork-typed-semantic-builder-plan.md`
+- `docs/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-closeout.md`
+- `docs/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-plan.md`
 - `docs/ariadne-compass-increment2-plan.md`
 - `docs/ariadne-continuity-engine-increment1-closeout.md`
 - `docs/ariadne-current-node-closeout-timestamp-guard-repair-closeout.md`
@@ -2120,7 +2123,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-retry-pre-verifier-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-retry-pre-verifier-runtime-state.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-governance-projection-consolidation-repair-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-corrected-pre-verifier-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-corrected-pre-verifier-runtime-state.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-gemini37-command-manifest.json`
@@ -2132,6 +2134,7 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-preplanning-receipt.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-preplanning-runtime-state.json`
 - `orchestration/agent_inbox/codex/ariadne-clockwork-single-owner-migration-retirement-rehearsal-sol-acceptance.md`
+- `orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-deepseek-in-cell-generated-draft-sol-review.md`
 - `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-adaptation-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/ariadne-effectiveness-and-deepseek-harness-review-gemini37-fresh-command-manifest.json`
@@ -2776,12 +2779,13 @@ Prerequisites:
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/contract.json`
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/migration-report.md`
 - `orchestration/continuity/ariadne-provider-free-clockwork-single-owner-migration-retirement-rehearsal/provider-free-migration-evidence.json`
-- `orchestration/continuity/ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair/evidence.json`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair/report.md`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/evidence.json`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/report.md`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review/report.md`
 - `orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal/report.md`
+- `orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/evidence.json`
+- `orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/report.md`
 - `orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-evidence.json`
 - `orchestration/continuity/ariadne-provider-free-no-database-manifest-runner-admission-repair/provider-free-no-database-admission-report.md`
 - `orchestration/continuity/ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review/evidence.json`
@@ -3937,4 +3941,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 416; continuity graph revision 434._
+_Compass map revision 417; continuity graph revision 435._

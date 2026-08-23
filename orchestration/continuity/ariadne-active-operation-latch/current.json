@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal",
-  "active_tranche": "Provider-free governance clockwork typed serial-continuation state projection rehearsal",
-  "objective": "Replace repeated serial continuation runtime-state form filling with one typed projection inside the existing orchestrator preflight.",
+  "operation_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review",
+  "active_tranche": "Provider-free governance clockwork typed serial-continuation projection live-adoption efficacy review",
+  "objective": "Measure three ordinary compact serial continuation events for rejection rate, pair cost and missing-decision evidence before any preset adjustment or test-cadence proposal.",
   "status": "in_progress",
-  "source_head": "676c2d636aac9ced64214deacafadafc523be47f",
-  "authority_source": "The accepted matched efficacy review ranks continuation-state repetition as the next largest ergonomic burden, and this repair clears its prerequisite.",
+  "source_head": "7c296e942530b80c49a08ed144e4b934587b1064",
+  "authority_source": "The accepted projection plan requires several live serial events before further workflow reduction.",
   "checkpoint": {
-    "completed_stage": "Accepted ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_minimal_continuation_intent_and_derived_runtime_state_contract",
+    "completed_stage": "Accepted ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_record_three_ordinary_typed_serial_event_readings",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,11 +34,11 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_existing_orchestrator_preflight_typed_serial_continuation_projection_only",
-    "derive_repository_known_latch_context_adapter_worker_slot_and_default_lane_shapes",
-    "replace_repeated_runtime_state_form_filling_without_a_new_receipt_layer",
-    "preserve_existing_receipt_validation_five_source_git_snapshot_and_fail_closed_semantics",
-    "no_native_harness_worker_provider_call_or_transport_qualification",
+    "provider_free_read_only_live_efficacy_measurement_of_typed_serial_projection_only",
+    "use_existing_compact_intent_and_existing_receipt_without_new_schema_or_control_layer",
+    "measure_three_ordinary_serial_events_rejection_rate_pair_cost_and_missing_decisions",
+    "no_test_cadence_reduction_or_full_suite_removal",
+    "no_worker_dispatch_native_harness_provider_call_or_transport_qualification",
     "no_silent_claude_code_or_other_transport_fallback",
     "no_authority_allocation_or_worker_transport_policy_change",
     "no_existing_product_source_route_api_client_configuration_or_runtime_change",

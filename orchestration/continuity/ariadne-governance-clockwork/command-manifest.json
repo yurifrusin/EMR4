@@ -7,7 +7,7 @@
       "arguments": [
         "-m",
         "json.tool",
-        "orchestration/continuity/ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair/evidence.json"
+        "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/evidence.json"
       ],
       "completion_contract": "final_exit_code_zero_required"
     },

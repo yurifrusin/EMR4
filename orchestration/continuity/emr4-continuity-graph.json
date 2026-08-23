@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 434,
+  "graph_revision": 435,
   "harvests": [],
   "nodes": [
     {
@@ -35053,9 +35053,91 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal",
+      "title": "Provider-free governance clockwork typed serial-continuation state projection rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "GPT Sol owns the provider-free serial preflight projection and deterministic acceptance."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "one-closed-serial-preset",
+          "source": "docs/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-plan.md",
+          "status": "accepted",
+          "summary": "Derive the full ordinary serial runtime state from one compact observed-empty typed preset."
+        },
+        {
+          "id": "retain-existing-validator-and-legacy-path",
+          "source": "docs/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-plan.md",
+          "status": "accepted",
+          "summary": "Pass the in-memory projection through the existing validator and retain full runtime-state input for occupied work."
+        }
+      ],
+      "claim_scope": [
+        "One occupied compact serial intent preserves the manual receipt safety decision while reducing caller leaves and pair size."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-plan.md",
+          "docs/security/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/evidence.json",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/report.md",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-23--ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-candidate-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/efficacy-reading.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Occupied worker transport, native Harness qualification and test-cadence reduction remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T19:41:32.8076827+10:00",
+      "updated_at": "2026-08-23T19:41:32.8076827+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "7c296e942530b80c49a08ed144e4b934587b1064",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T18:58:39.0105413+10:00"
+  "updated_at": "2026-08-23T19:41:32.8076827+10:00"
 }

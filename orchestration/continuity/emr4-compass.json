@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 416,
-  "updated_at": "2026-08-23T18:58:39.0105413+10:00",
-  "source_graph_revision": 434,
-  "orientation_statement": "Preserve original readings; derive the remaining repeated forms.",
+  "map_revision": 417,
+  "updated_at": "2026-08-23T19:41:32.8076827+10:00",
+  "source_graph_revision": 435,
+  "orientation_statement": "Select typed control positions; let the clockwork own their full representation.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5297,24 +5297,34 @@
         "docs/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-plan.md",
         "orchestration/continuity/ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair/report.md"
       ]
+    },
+    {
+      "node_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal",
+      "lineage_parent": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
+      "strategic_role": "Make the orchestrator take serial governance readings instead of rewriting their full representation.",
+      "outcome": "A 14-line typed card produces the existing safety receipt with 92.1 percent fewer caller leaves.",
+      "evidence": [
+        "docs/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-plan.md",
+        "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/report.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair",
-    "strategic_role": "Reduce clerical failure while keeping the original safety reading visible.",
-    "why_now": "The matched review found a concrete postpublication traceability defect.",
-    "outcome": "Two publication files and four canonical hashes remain byte-exact after occupied readback.",
+    "node_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal",
+    "strategic_role": "Use typed controls for intent and deterministic expansion for governance state.",
+    "why_now": "The matched review found continuation runtime states were the largest remaining clerical surface.",
+    "outcome": "The complete serial intent-plus-receipt pair is 58.7 percent smaller by lines and 60.9 percent smaller by bytes.",
     "unlocks": [
-      "A typed serial-continuation projection inside the existing preflight."
+      "Three-event live efficacy observation using ordinary compact serial intents."
     ],
     "does_not_solve": [
-      "It does not yet reduce continuation runtime-state or receipt volume."
+      "It does not qualify occupied workers or reduce full governance-suite cadence."
     ],
     "evidence": [
-      "orchestration/continuity/ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair/evidence.json",
-      "orchestration/continuity/ariadne-provider-free-governance-clockwork-idempotent-publication-evidence-preservation-repair/report.md",
-      "docs/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-closeout.md",
-      "orchestration/agent_inbox/codex/ariadne-clockwork-idempotent-publication-evidence-preservation-repair-sol-acceptance.md"
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/evidence.json",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal/report.md",
+      "docs/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-state-projection-rehearsal-sol-acceptance.md"
     ]
   },
   "decision_horizon": [
