@@ -285,6 +285,42 @@ def test_execution_evidence_cannot_promote_a_source_or_evidence_label() -> None:
         TraceableSyntheticScenarioEnvelope.model_validate(raw)
 
 
+def test_legacy_contract_ids_are_pinned_to_the_existing_owners() -> None:
+    raw = copy.deepcopy(_first_envelope())
+    raw["execution_binding"]["semantic_artifact"]["contract_id"] = (
+        "emr4.replacement_contract.v1"
+    )
+    envelope = TraceableSyntheticScenarioEnvelope.model_validate(raw)
+    with pytest.raises(ValueError, match="contract ids"):
+        validate_legacy_binding(REPO_ROOT, envelope)
+
+
+def test_legacy_source_locators_must_match_both_bound_artifacts() -> None:
+    raw = copy.deepcopy(_first_envelope())
+    raw["sources"][1]["locator"] = "docs/not-the-replay-owner.md"
+    envelope = TraceableSyntheticScenarioEnvelope.model_validate(raw)
+    with pytest.raises(ValueError, match="locators"):
+        validate_legacy_binding(REPO_ROOT, envelope)
+
+
+def test_oracle_locator_must_bind_one_of_its_declared_sources() -> None:
+    raw = copy.deepcopy(_first_envelope())
+    raw["oracle_bundle"]["deterministic_truth"][0]["claim_locator"] = (
+        "undeclared-source#outcome"
+    )
+    with pytest.raises(ValidationError, match="locator"):
+        TraceableSyntheticScenarioEnvelope.model_validate(raw)
+
+
+def test_coverage_ids_are_unique() -> None:
+    raw = copy.deepcopy(_first_envelope())
+    raw["coverage_claims"][1]["coverage_id"] = raw["coverage_claims"][0][
+        "coverage_id"
+    ]
+    with pytest.raises(ValidationError, match="coverage ids"):
+        TraceableSyntheticScenarioEnvelope.model_validate(raw)
+
+
 def test_manifest_copies_no_dialogue_state_or_known_synthetic_person_names() -> None:
     text = MANIFEST_PATH.read_text(encoding="utf-8")
     forbidden = (

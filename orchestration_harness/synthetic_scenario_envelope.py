@@ -320,6 +320,9 @@ class TraceableSyntheticScenarioEnvelope(StrictFrozenModel):
             missing = set(coverage.source_ids) - set(source_by_id)
             if missing:
                 raise ValueError("coverage claim references an unknown source")
+        coverage_ids = [coverage.coverage_id for coverage in self.coverage_claims]
+        if len(set(coverage_ids)) != len(coverage_ids):
+            raise ValueError("coverage ids must be unique")
 
         if self.execution_binding is not None:
             if self.evidence_label != EvidenceLabel.WHOLLY_AUTHORED_SYNTHETIC:
@@ -346,6 +349,13 @@ class TraceableSyntheticScenarioEnvelope(StrictFrozenModel):
         missing = set(claim.source_ids) - set(source_by_id)
         if missing:
             raise ValueError("oracle claim references an unknown source")
+        locator_parts = claim.claim_locator.split("#", maxsplit=1)
+        if (
+            len(locator_parts) != 2
+            or locator_parts[0] not in claim.source_ids
+            or not locator_parts[1]
+        ):
+            raise ValueError("oracle claim locator must bind one declared source id")
         for source_id in claim.source_ids:
             source = source_by_id[source_id]
             if authoritative:
@@ -401,6 +411,8 @@ LEGACY_RECEPTION_BINDINGS = {
         "tests/fixtures/bernie_scenarios/booking_overlap_not_exact_duplicate.yaml",
     ),
 }
+LEGACY_SEMANTIC_CONTRACT_ID = "emr4.reception_scenario_spec.lc1.v1"
+LEGACY_REPLAY_CONTRACT_ID = "emr4.bernie_stateful_replay.v1"
 
 
 def _allowed_path(repo_root: Path, artifact: ArtifactReference) -> Path:
@@ -436,6 +448,18 @@ def validate_legacy_binding(
     )
     if observed_paths != expected_paths:
         raise ValueError("legacy artifact paths do not match the exact allowlist")
+    if (
+        binding.semantic_artifact.contract_id != LEGACY_SEMANTIC_CONTRACT_ID
+        or binding.replay_artifact.contract_id != LEGACY_REPLAY_CONTRACT_ID
+    ):
+        raise ValueError("legacy artifact contract ids do not match their owners")
+    accepted_contract_locators = {
+        source.locator
+        for source in envelope.sources
+        if source.source_type == SourceType.ACCEPTED_EMR4_CONTRACT
+    }
+    if accepted_contract_locators != set(expected_paths):
+        raise ValueError("legacy accepted-contract locators do not match both artifacts")
 
     semantic_path = _allowed_path(repo_root, binding.semantic_artifact)
     replay_path = _allowed_path(repo_root, binding.replay_artifact)
@@ -485,6 +509,8 @@ __all__ = [
     "EvidenceLabel",
     "ExecutionBinding",
     "LEGACY_RECEPTION_BINDINGS",
+    "LEGACY_REPLAY_CONTRACT_ID",
+    "LEGACY_SEMANTIC_CONTRACT_ID",
     "LegacyBindingValidationResult",
     "OracleBundle",
     "OracleClaim",
