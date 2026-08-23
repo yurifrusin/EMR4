@@ -2,9 +2,57 @@
 
 from __future__ import annotations
 
+from pathlib import Path, PurePosixPath
 from typing import Any
 
-from orchestration_harness.active_operation import receipt_projection
+from orchestration_harness.active_operation import (
+    receipt_projection,
+    validate_active_operation,
+)
+
+
+SERIAL_CONTINUATION_INTENT_VERSION = "ariadne.serial_continuation_intent.v1"
+SERIAL_CONTINUATION_PRESET = "provider_free_serial_observed_empty_workers"
+SERIAL_CONTINUATION_INTENT_KEYS = {
+    "schema_version",
+    "preset",
+    "continuation_event",
+    "planned_action",
+    "assessed_stage",
+    "active_evidence_paths",
+    "lane_decision_overrides",
+}
+SERIAL_CONTINUATION_LANE_IDS = (
+    "deepseek_flash",
+    "gemini_verifier",
+    "native_subagents",
+)
+SERIAL_CONTINUATION_DEFAULT_DECISIONS = {
+    "deepseek_flash": "declined_negative",
+    "gemini_verifier": "declined_neutral",
+    "native_subagents": "declined_negative",
+}
+SERIAL_CONTINUATION_DECISIONS = {
+    "declined_negative": ("declined", "negative"),
+    "declined_neutral": ("declined", "neutral"),
+    "not_applicable_neutral": ("not_applicable", "neutral"),
+    "reserved_required_independence": ("reserved", "required_independence"),
+}
+SERIAL_CONTINUATION_REHYDRATION_SOURCES = (
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree",
+)
+
+
+class SerialContinuationIntentError(ValueError):
+    """A compact serial-continuation intent is not safe to materialize."""
+
+
+def _serial_reject(reason: str) -> None:
+    raise SerialContinuationIntentError(reason)
 
 
 def _bounded_text(value: Any) -> bool:
@@ -16,6 +64,270 @@ def _bounded_text(value: Any) -> bool:
         and "\n" not in value
         and len(value) <= 500
     )
+
+
+def _serial_evidence_path(raw: object, *, repo_root: Path) -> str:
+    if (
+        not isinstance(raw, str)
+        or not raw
+        or raw != raw.strip()
+        or "\\" in raw
+        or ":" in raw
+        or len(raw) > 240
+    ):
+        _serial_reject("serial_continuation_evidence_path_invalid")
+    path = PurePosixPath(raw)
+    if path.is_absolute() or any(part in {"", ".", ".."} for part in path.parts):
+        _serial_reject("serial_continuation_evidence_path_invalid")
+    admitted = bool(
+        raw == "implementation_plan.md"
+        or (path.parts and path.parts[0] == "docs")
+        or path.parts[:2] == ("orchestration", "continuity")
+        or path.parts[:2] == ("orchestration", "agent_inbox")
+    )
+    if not admitted:
+        _serial_reject("serial_continuation_evidence_path_root_forbidden")
+    root = repo_root.resolve()
+    candidate = (root / Path(*path.parts)).resolve()
+    try:
+        candidate.relative_to(root)
+    except ValueError:
+        _serial_reject("serial_continuation_evidence_path_escape")
+    if not candidate.is_file():
+        _serial_reject("serial_continuation_evidence_path_missing")
+    return path.as_posix()
+
+
+def _serial_intent(
+    value: object,
+    *,
+    repo_root: Path,
+    requirements: dict[str, Any],
+) -> dict[str, Any]:
+    if not isinstance(value, dict) or set(value) != SERIAL_CONTINUATION_INTENT_KEYS:
+        _serial_reject("serial_continuation_intent_keys_invalid")
+    if value.get("schema_version") != SERIAL_CONTINUATION_INTENT_VERSION:
+        _serial_reject("serial_continuation_intent_schema_invalid")
+    if value.get("preset") != SERIAL_CONTINUATION_PRESET:
+        _serial_reject("serial_continuation_preset_invalid")
+    event = value.get("continuation_event")
+    if event not in requirements.get("continuation_events", []):
+        _serial_reject("serial_continuation_event_invalid")
+    if event == "pre_worker_dispatch":
+        _serial_reject("serial_continuation_worker_dispatch_forbidden")
+    if not _bounded_text(value.get("planned_action")):
+        _serial_reject("serial_continuation_planned_action_invalid")
+    if not _bounded_text(value.get("assessed_stage")):
+        _serial_reject("serial_continuation_assessed_stage_invalid")
+
+    raw_paths = value.get("active_evidence_paths")
+    if not isinstance(raw_paths, list) or not 1 <= len(raw_paths) <= 32:
+        _serial_reject("serial_continuation_evidence_paths_invalid")
+    paths = [
+        _serial_evidence_path(item, repo_root=repo_root) for item in raw_paths
+    ]
+    if len(paths) != len(set(paths)):
+        _serial_reject("serial_continuation_evidence_paths_duplicate")
+
+    overrides = value.get("lane_decision_overrides")
+    if not isinstance(overrides, list) or len(overrides) > len(
+        SERIAL_CONTINUATION_LANE_IDS
+    ):
+        _serial_reject("serial_continuation_lane_overrides_invalid")
+    decisions = dict(SERIAL_CONTINUATION_DEFAULT_DECISIONS)
+    seen_lanes: set[str] = set()
+    for override in overrides:
+        if not isinstance(override, dict) or set(override) != {
+            "lane_id",
+            "decision_code",
+        }:
+            _serial_reject("serial_continuation_lane_override_keys_invalid")
+        lane_id = override.get("lane_id")
+        decision_code = override.get("decision_code")
+        if lane_id not in SERIAL_CONTINUATION_LANE_IDS:
+            _serial_reject("serial_continuation_lane_id_invalid")
+        if lane_id in seen_lanes:
+            _serial_reject("serial_continuation_lane_override_duplicate")
+        if decision_code not in SERIAL_CONTINUATION_DECISIONS:
+            _serial_reject("serial_continuation_lane_decision_invalid")
+        seen_lanes.add(lane_id)
+        decisions[lane_id] = decision_code
+
+    return {
+        **value,
+        "active_evidence_paths": paths,
+        "lane_decisions": decisions,
+    }
+
+
+def materialize_serial_continuation_runtime_state(
+    *,
+    intent: object,
+    requirements: dict[str, Any],
+    adapters: dict[str, Any],
+    worker_pool: dict[str, Any],
+    active_operation: object,
+    repo_root: Path,
+) -> dict[str, Any]:
+    """Expand one closed serial preset into the existing runtime-state schema."""
+    normalized = _serial_intent(
+        intent,
+        repo_root=repo_root,
+        requirements=requirements,
+    )
+    event = normalized["continuation_event"]
+    required_sources_by_event = requirements.get("context_health", {}).get(
+        "required_rehydration_sources_by_event"
+    )
+    required_sources = (
+        required_sources_by_event.get(event)
+        if isinstance(required_sources_by_event, dict)
+        else None
+    )
+    if required_sources != list(SERIAL_CONTINUATION_REHYDRATION_SOURCES):
+        _serial_reject("serial_continuation_rehydration_sources_invalid")
+
+    latch = validate_active_operation(active_operation)
+    lanes = []
+    for lane_id in SERIAL_CONTINUATION_LANE_IDS:
+        decision_code = normalized["lane_decisions"][lane_id]
+        disposition, leverage = SERIAL_CONTINUATION_DECISIONS[decision_code]
+        lanes.append(
+            {
+                "lane_id": lane_id,
+                "disposition": disposition,
+                "expected_leverage": leverage,
+                "rationale": (
+                    f"{lane_id} uses {decision_code}; the observed-empty serial "
+                    "preset assigns it no work package."
+                ),
+                "work_packages": [],
+            }
+        )
+
+    declared_adapters = adapters.get("adapters")
+    if not isinstance(declared_adapters, list) or not declared_adapters:
+        _serial_reject("serial_continuation_adapter_inventory_invalid")
+    observations = []
+    seen_adapters: set[str] = set()
+    for adapter in declared_adapters:
+        if not isinstance(adapter, dict):
+            _serial_reject("serial_continuation_adapter_inventory_invalid")
+        adapter_id = adapter.get("adapter_id")
+        allowed_methods = adapter.get("allowed_probe_methods")
+        if (
+            not isinstance(adapter_id, str)
+            or not adapter_id
+            or adapter_id in seen_adapters
+            or not isinstance(allowed_methods, list)
+        ):
+            _serial_reject("serial_continuation_adapter_inventory_invalid")
+        seen_adapters.add(adapter_id)
+        if adapter_id == "codex_primary_session":
+            if "codex_session_observation" not in allowed_methods:
+                _serial_reject("serial_continuation_primary_adapter_method_missing")
+            observations.append(
+                {
+                    "adapter_id": adapter_id,
+                    "method": "codex_session_observation",
+                    "reachability": "reachable",
+                    "evidence": [
+                        "Primary orchestrator selected the typed serial preset."
+                    ],
+                }
+            )
+        else:
+            if "synthetic_fixture" not in allowed_methods:
+                _serial_reject("serial_continuation_adapter_method_missing")
+            observations.append(
+                {
+                    "adapter_id": adapter_id,
+                    "method": "synthetic_fixture",
+                    "reachability": "unknown",
+                    "evidence": [
+                        "Observed-empty serial preset performed no live adapter probe."
+                    ],
+                }
+            )
+
+    managed_resource_ids = requirements.get("worker_slot_management", {}).get(
+        "managed_resource_ids"
+    )
+    resources = worker_pool.get("workers")
+    if (
+        not isinstance(managed_resource_ids, list)
+        or not managed_resource_ids
+        or len(managed_resource_ids) != len(set(managed_resource_ids))
+        or any(not isinstance(item, str) or not item for item in managed_resource_ids)
+        or not isinstance(resources, list)
+    ):
+        _serial_reject("serial_continuation_worker_inventory_invalid")
+    resource_ids = {
+        item.get("resource_id")
+        for item in resources
+        if isinstance(item, dict) and isinstance(item.get("resource_id"), str)
+    }
+    if any(resource_id not in resource_ids for resource_id in managed_resource_ids):
+        _serial_reject("serial_continuation_managed_worker_missing")
+
+    return {
+        "schema_version": "ariadne.orchestrator_runtime_state.v1",
+        "continuation_event": event,
+        "planned_action": normalized["planned_action"],
+        "source_evidence": {
+            "live_handover_current_baton": "AGENTS.md#3 Current Baton",
+            "current_authority_allocation": (
+                "AGENTS.md#4 Authority Allocation and the current harness settings"
+            ),
+            "active_plan_and_acceptance": normalized["active_evidence_paths"],
+            "protected_evidence_boundaries": (
+                "AGENTS.md#5 Protected Evidence and Closed Gates; "
+                "AGENTS.md#6 User Decision Boundaries; canonical active latch"
+            ),
+            "git_refs_and_worktree": "machine_snapshot_only",
+        },
+        "active_operation": latch,
+        "parallelism_assessment": {
+            "schema_version": "ariadne.parallelism_assessment.v1",
+            "operation_id": latch["operation_id"],
+            "assessed_stage": normalized["assessed_stage"],
+            "lanes": lanes,
+            "parallel_work_packages": [],
+            "serial_constraints": [
+                "typed serial preset declares every managed worker slot observed empty",
+                "worker dispatch requires a separate non-serial runtime state",
+                "the current continuation completes before any external verifier",
+            ],
+            "reassessment_triggers": [
+                "if the deterministic continuation fails",
+                "before any worker dispatch",
+                "at the next named tranche boundary",
+            ],
+        },
+        "context_health": {
+            "agent_contexts": [
+                {
+                    "agent_id": "orchestrator",
+                    "measurement_source": "typed_serial_continuation_projection",
+                    "rehydrated_from_receipt": True,
+                    "rehydration_sources": list(
+                        SERIAL_CONTINUATION_REHYDRATION_SOURCES
+                    ),
+                }
+            ]
+        },
+        "adapter_observations": observations,
+        "worker_slots": [
+            {
+                "resource_id": resource_id,
+                "active_instance_ids": [],
+                "stale_instance_ids": [],
+            }
+            for resource_id in managed_resource_ids
+        ],
+        "workspace_receipts": [],
+        "assigned_agent_ids": [],
+    }
 
 
 def _parallelism_projection(

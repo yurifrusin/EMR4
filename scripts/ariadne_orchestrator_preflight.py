@@ -16,7 +16,10 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from orchestration_harness.orchestrator_preflight import build_orchestrator_receipt
+from orchestration_harness.orchestrator_preflight import (
+    build_orchestrator_receipt,
+    materialize_serial_continuation_runtime_state,
+)
 from orchestration_harness.git_object_resolution import (
     GitObjectResolutionError,
     failure_projection,
@@ -90,15 +93,12 @@ def git_ref_evidence_commit_ids(runtime_state: dict[str, Any]) -> tuple[str, ...
     return tuple(sorted(set(_FULL_COMMIT_ID.findall(evidence))))
 
 
-def build_receipt(
+def _build_receipt_from_runtime_state(
     *,
-    runtime_state_path: Path,
+    runtime_state: dict[str, Any],
     settings_dir: Path = SETTINGS_DIR,
     repository_root: Path = REPO_ROOT,
 ) -> dict[str, Any]:
-    runtime_state = json.loads(runtime_state_path.read_text(encoding="utf-8"))
-    if not isinstance(runtime_state, dict):
-        raise ValueError("runtime state must be a JSON object")
     requirements = _yaml(settings_dir / "orchestrator_requirements.yaml")
     current_settings_fingerprint = settings_fingerprint(settings_dir)
     receipt = build_orchestrator_receipt(
@@ -239,6 +239,66 @@ def build_receipt(
     return receipt
 
 
+def _json_object(path: Path, *, label: str) -> dict[str, Any]:
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise ValueError(f"{label} must be a JSON object")
+    return value
+
+
+def build_receipt(
+    *,
+    runtime_state_path: Path,
+    settings_dir: Path = SETTINGS_DIR,
+    repository_root: Path = REPO_ROOT,
+) -> dict[str, Any]:
+    """Build a receipt from the historical complete runtime-state input."""
+    return _build_receipt_from_runtime_state(
+        runtime_state=_json_object(runtime_state_path, label="runtime state"),
+        settings_dir=settings_dir,
+        repository_root=repository_root,
+    )
+
+
+def build_serial_continuation_receipt(
+    *,
+    intent_path: Path,
+    settings_dir: Path = SETTINGS_DIR,
+    repository_root: Path = REPO_ROOT,
+) -> dict[str, Any]:
+    """Build the ordinary receipt from one compact observed-empty serial intent."""
+    requirements = _yaml(settings_dir / "orchestrator_requirements.yaml")
+    latch_policy = requirements.get("active_operation_latch")
+    latch_relative = (
+        latch_policy.get("current_state") if isinstance(latch_policy, dict) else None
+    )
+    if (
+        not isinstance(latch_relative, str)
+        or not latch_relative
+        or "\\" in latch_relative
+    ):
+        raise ValueError("active operation current-state path is invalid")
+    root = repository_root.resolve()
+    latch_path = (root / latch_relative).resolve()
+    try:
+        latch_path.relative_to(root)
+    except ValueError as error:
+        raise ValueError("active operation current-state path escapes repo") from error
+    runtime_state = materialize_serial_continuation_runtime_state(
+        intent=_json_object(intent_path, label="serial continuation intent"),
+        requirements=requirements,
+        adapters=_yaml(settings_dir / "transport_adapters.yaml"),
+        worker_pool=_yaml(settings_dir / "worker_pool.yaml"),
+        active_operation=_json_object(latch_path, label="active operation latch"),
+        repo_root=root,
+    )
+    return _build_receipt_from_runtime_state(
+        runtime_state=runtime_state,
+        settings_dir=settings_dir,
+        repository_root=root,
+    )
+
+
 def write_json_lf(path: Path, payload: dict[str, Any]) -> None:
     """Write canonical UTF-8 JSON with LF bytes on every platform."""
     rendered = json.dumps(payload, indent=2, sort_keys=True)
@@ -251,6 +311,7 @@ def main() -> int:
     )
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument("--runtime-state", type=Path)
+    source.add_argument("--continuation-intent", type=Path)
     source.add_argument(
         "--list-continuation-events",
         action="store_true",
@@ -264,9 +325,16 @@ def main() -> int:
             events = configured_continuation_events(args.settings_dir)
             print("\n".join(events))
             return 0
-        receipt = build_receipt(
-            runtime_state_path=args.runtime_state, settings_dir=args.settings_dir
-        )
+        if args.continuation_intent:
+            receipt = build_serial_continuation_receipt(
+                intent_path=args.continuation_intent,
+                settings_dir=args.settings_dir,
+            )
+        else:
+            receipt = build_receipt(
+                runtime_state_path=args.runtime_state,
+                settings_dir=args.settings_dir,
+            )
     except (OSError, ValueError, json.JSONDecodeError, yaml.YAMLError) as error:
         print(f"ariadne orchestrator preflight failed: {error}", file=sys.stderr)
         return 2
