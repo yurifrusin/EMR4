@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "freeze_and_execute_one_provider_free_authored_synthetic_strict_segment_leading_explicit_time_token_parser_recovery_with_no_historical_access_no_provider_calls_no_forward_fill_closed_hostile_rejections_and_first_use_gate_closed",
+  "assessed_stage": "fresh_five_source_rehydration_for_authored_synthetic_leading_explicit_time_token_recovery",
+  "active_evidence_paths": [
+    "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/next-tranche-contract.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/report.md",
+    "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/efficacy-reading.json",
+    "docs/ariadne-agent-error-correction-register-revision-658.md",
+    "docs/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal-sol-acceptance.md",
+    "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-bounded-measurement-recovery-rehearsal/closeout/clockwork-tick-evidence.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}
