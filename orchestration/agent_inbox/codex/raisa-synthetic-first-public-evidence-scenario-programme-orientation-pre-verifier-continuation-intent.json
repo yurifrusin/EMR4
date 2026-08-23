@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_deterministically_verified_non_actuating_orientation_without_live_model_execution",
+  "assessed_stage": "orientation_pre_verifier_acceptance_with_live_model_execution_forbidden_by_frozen_plan",
+  "active_evidence_paths": [
+    "docs/raisa-synthetic-first-public-evidence-scenario-programme-orientation-plan.md",
+    "docs/security/raisa-synthetic-first-public-evidence-scenario-programme-orientation-threat-model-delta.md",
+    "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/evidence.json",
+    "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/report.md",
+    "docs/raisa-synthetic-first-public-evidence-scenario-programme-orientation-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-sol-acceptance.md",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": "ariadne.governance_bound_closeout_rejection_receipt.v1",
+  "status": "revision_required",
+  "recorded_at": "2026-08-24T00:15:40+10:00",
+  "mode": "rehearse",
+  "source_head": "eafc83d3e0bba66c511068545791c4719f223183",
+  "intent": "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/closeout/closeout-intent.json",
+  "reason": "tick_transaction_prepare",
+  "detail": "prospective_projection_invalid: evidence_not_found for the convention-required pre-verifier receipt",
+  "mutation": {
+    "publication_count": 0,
+    "canonical_change_count": 0,
+    "pointer_movement_count": 0,
+    "retained_lease_sequence": 225,
+    "retained_generation_id": "gen-801d4a930d96a912aa0fc3944f7614eb713279a25fcfd215da7e778b0517c78e"
+  },
+  "correction": "Generate the typed no-provider pre-verifier acceptance receipt at the convention-derived exact path before a fresh rehearsal."
+}

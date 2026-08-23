@@ -10,9 +10,7 @@
       "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief"
     ],
     "authority_notes": [
-      "Yuri requested public research and research-directed workers, preferred synthetic-first development, and later identified a dense timestamped historical Diary archive as a possible carefully de-identified calibration source.",
-      "GPT Sol owns source-authority reconciliation, privacy interpretation, architecture selection, Git and acceptance.",
-      "Native workers completed seven read-only packages; DeepSeek received no package, Gemini was not called, and no provider or private data opened."
+      "Yuri requested public research and research-directed workers; GPT Sol retains reconciliation, privacy, architecture, Git and acceptance; native workers completed seven read-only packages while DeepSeek and Gemini were not called and no private data opened."
     ],
     "decisions": [
       {
@@ -32,29 +30,13 @@
       }
     ],
     "claim_scope": [
-      "Seven read-only research packages and twenty registered public sources support one traceable synthetic scenario programme boundary.",
-      "Existing semantic and replay contracts can be bound without content duplication.",
-      "Dense timestamped snapshots make interval-censored workflow reconstruction plausible but do not establish exact event time or irreversible anonymity.",
-      "No private data, provider call, product change or protected surface opened."
+      "Seven read-only packages and twenty public sources support one traceable envelope around existing semantic and replay contracts.",
+      "Dense snapshots make interval-censored reconstruction plausible but no private data, provider, product or protected surface opened and no irreversible anonymity is claimed."
     ],
-    "additional_receipts": [
-      "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-preplanning-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-plan-precommit-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-postcompaction-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-candidate-precommit-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-closeout-precommit-receipt.json",
-      "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-closeout-correction-precommit-receipt.json"
-    ],
-    "additional_artifacts": [
-      "docs/raisa-synthetic-first-public-evidence-scenario-programme-orientation-plan.md",
-      "docs/security/raisa-synthetic-first-public-evidence-scenario-programme-orientation-threat-model-delta.md",
-      "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/efficacy-reading.json",
-      "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/next-tranche-contract.json"
-    ],
+    "additional_receipts": [],
+    "additional_artifacts": [],
     "unresolved_gates": [
-      "The historical Diary archive remains unopened; any real snapshot access requires a separate accepted local-only privacy feasibility gate.",
-      "Provider-live synthetic evaluation requires its own exact data, call, cost, effect and proofreader envelope.",
-      "Product, ordinary-practice activation, production, deployment, Pages and protected refs remain closed."
+      "Historical Diary access, provider-live evaluation, product activation, production, deployment, Pages and protected refs remain separately closed."
     ],
     "journey": {
       "strategic_role": "Give Raisa a traceable synthetic practice laboratory spanning administrative and clinical-diagnostic architecture.",
@@ -65,8 +47,7 @@
       "why_now": "The research streams are complete and the existing semantic and replay engines need a shared provenance layer.",
       "outcome": "The next tranche can implement one strict envelope and two exact legacy bindings.",
       "unlocks": [
-        "Traceable expansion across reception, administrative and later clinical-diagnostic scenario families.",
-        "A clean future interface for privacy-reviewed aggregate calibration without resolving private data."
+        "Traceable scenario expansion and a future opaque interface for privacy-reviewed aggregate calibration."
       ],
       "does_not_solve": [
         "It does not prove real-world efficacy, de-identify the historical archive or open provider/product runtime."
@@ -133,6 +114,38 @@
         ]
       },
       "baton_summary": "records one contained mandatory-boundary token omission and its exact floor correction."
+    },
+    {
+      "attempt_key": "synthetic-orientation-preverifier-receipt-001",
+      "observed_on": "2026-08-24",
+      "tranche": "synthetic-scenario-orientation",
+      "role": "orchestrator",
+      "resource_id": "clockwork-prospective-projection",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "The convention-derived semantic closeout evidence set exists before prospective projection.",
+      "observed_error": "The corrected rehearsal reached prospective projection but the convention-required pre-verifier receipt did not exist at its exact derived path.",
+      "detection_method": "The verifier returned tick_transaction_prepare with evidence_not_found before publication or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-synthetic-first-public-evidence-scenario-programme-orientation/closeout/clockwork-rehearsal-attempt-002-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.semantic_closeout_required_receipt_absent",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Generate the typed no-provider pre-verifier receipt at the exact convention-derived path.",
+        "prevention_control": "Treat the semantic path projection as the required closeout evidence inventory.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-synthetic-first-public-evidence-scenario-programme-orientation-pre-verifier-receipt.json"
+        ]
+      },
+      "baton_summary": "records one contained convention-required receipt omission and its typed receipt correction."
     }
   ]
 }
