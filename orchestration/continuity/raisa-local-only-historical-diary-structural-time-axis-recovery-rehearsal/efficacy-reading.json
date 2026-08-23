@@ -1,0 +1,25 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal",
+  "source_head": "3bcf2302461874e54d372cf5a71860a495fa7b20",
+  "result": "contained_revision_required_time_grid_is_outside_table_cells",
+  "mechanism": {
+    "metadata_attempts": 1,
+    "content_attempts": 1,
+    "snapshots_opened_and_parsed": 80,
+    "source_structural_segments": 12557,
+    "stable_linkage_records": 199,
+    "recovered_changes": 448,
+    "explicit_same_cell_time_anchors": 0,
+    "mapped_time_observations": 0,
+    "raw_leakage_detections": 0,
+    "provider_calls": 0
+  },
+  "workflow": {
+    "focused_tests": 44,
+    "unchanged_controls": 101,
+    "contained_prepublication_lapses": 5,
+    "automatic_content_retries": 0
+  },
+  "assessment": "The stricter paragraph mapper substantially improved motion fidelity from 118 to 448 changes while proving that the explicit time grid is not stored in the fourteen table cells. The one content run was therefore informative rather than circular: the next narrow recovery must read only document-story time anchors and Word-rendered structural coordinates, not weaken privacy or guess clock values. The first-use gate is now useful and present, but correctly remains closed because no reusable historical-derived artifact exists."
+}

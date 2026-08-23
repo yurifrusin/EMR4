@@ -1,0 +1,122 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal",
+  "recorded_at": "2026-08-24T04:33:07.7001882+10:00",
+  "closeout": {
+    "operation_id": "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal",
+    "title": "Raisa local-only historical Diary structural time-axis recovery rehearsal",
+    "builds_on": [
+      "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe"
+    ],
+    "authority_notes": [
+      "Yuri delegated gate timing and uninterrupted development; accept one contained local revision-required result without downstream use."
+    ],
+    "decisions": [
+      {
+        "id": "accept-table-cell-time-axis-revision-and-recover-document-story-coordinates",
+        "source": "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/next-tranche-contract.json",
+        "summary": "Accept exact source 3bcf2302461874e54d372cf5a71860a495fa7b20 and proceed synthetic-first to document-story time coordinates."
+      }
+    ],
+    "claim_scope": [
+      "Eighty snapshots parsed with zero leakage, 199 stable records and 448 changes; table cells contain zero explicit time anchors."
+    ],
+    "additional_receipts": [
+      "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/closeout/prepublication-contained-lapses.json",
+      "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/closeout/pushover-notification-receipt.json"
+    ],
+    "additional_artifacts": [
+      "orchestration_harness/historical_diary_local_measured_privacy_probe.py",
+      "scripts/historical_diary_local_measured_privacy_probe.ps1",
+      "tests/test_raisa_local_only_bounded_historical_diary_snapshot_measured_privacy_probe.py",
+      "tests/test_raisa_local_only_historical_diary_structural_time_axis_recovery_rehearsal.py",
+      "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/historical-derived-scenario-first-use-gate.json",
+      "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/next-tranche-contract.json"
+    ],
+    "unresolved_gates": [
+      "Document-story coordinate recovery, first-use admission, local retention and downstream use remain gated."
+    ],
+    "journey": {
+      "strategic_role": "Recover scheduling time while retaining realistic local Diary motion.",
+      "outcome": "Table-cell paragraph motion passed; the time grid is outside table cells."
+    },
+    "current_position": {
+      "strategic_role": "Bind explicit main-story time labels to private entries by rendered coordinates.",
+      "why_now": "The single empirical run isolated the time grid outside the fourteen table cells.",
+      "outcome": "A synthetic-first coordinate mapper may earn one fresh bounded local measurement.",
+      "unlocks": [
+        "One at-most-80-file story-coordinate measurement after full pre-access verification."
+      ],
+      "does_not_solve": [
+        "No historical-derived artifact, provider, product or production authority opens."
+      ],
+      "orientation_statement": "Use explicit story anchors and bounded coordinates; never guess the clock."
+    },
+    "next_operation": {
+      "operation_id": "raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal",
+      "active_tranche": "Raisa local-only historical Diary document-story time-coordinate recovery rehearsal",
+      "objective": "Recover explicit document-story time anchors and map them through bounded same-page Word-rendered coordinates.",
+      "authority_source": "Yuri's historical Diary direction, delegated gate timing and uninterrupted-development authority.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_synthetic_first_word_story_coordinate_mapper_plan"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only",
+    "no_product_patient_appointment_clinical_or_protected_data",
+    "allow_local_only_historical_diary_snapshot_measured_privacy_probe",
+    "historical_diary_privacy_subgate_contract_sha256_e312d58d7743b9b4d79d8a947b765732eea142f47586e0bd1f4e738047802615",
+    "historical_diary_access_one_leaf_root_one_dense_day_nonrecursive_maximum_80_files",
+    "historical_diary_access_maximum_134217728_total_bytes_and_8388608_per_file",
+    "historical_diary_access_read_only_no_symlink_or_reparse_traversal",
+    "historical_diary_access_new_ignored_output_root_ephemeral_in_memory_key_and_failure_cleanup",
+    "historical_diary_access_no_network_provider_model_prompt_telemetry_clipboard_or_external_release",
+    "historical_diary_access_no_raw_text_identity_filename_timestamp_key_or_mapping_commit",
+    "historical_diary_access_strongest_result_locally_restricted_candidate_without_downstream_authority",
+    "historical_diary_access_no_fixture_memory_rag_product_runtime_route_api_client_database_or_configuration",
+    "no_private_layout_coordinate_commit",
+    "first_use_scenario_gate_remains_closed"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "historical-diary-time-axis-synthetic-interface-controls-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-time-axis-recovery",
+      "role": "orchestrator",
+      "resource_id": "time-axis-synthetic-verification-interface",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Provider-free test invocation and governance assertions use their exact stable interfaces before archive access.",
+      "observed_error": "Five contained lapses covered one unsupported runner argument, two brittle prose assertions and two rejected descriptive clockwork vocabulary values.",
+      "detection_method": "The provider-free CLI, focused tests and clockwork vocabulary gate rejected each lapse before content or publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.synthetic_verification_interfaces_require_literal_stable_contracts",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use literal wrapper paths and stable semantic phrase assertions.",
+        "prevention_control": "Focused verification must pass before any archive manifest or content read.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-656.md",
+          "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/evidence.json"
+        ]
+      },
+      "baton_summary": "consolidates five contained prepublication verification interface lapses."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "ariadne.governance_explicit_stage_manifest.v1",
+  "status": "passed",
+  "source_head": "3bcf2302461874e54d372cf5a71860a495fa7b20",
+  "derivation": "admitted_intent_clockwork_contract_intersect_git_inventory",
+  "paths": [
+    "docs/ariadne-agent-error-correction-register-revision-656.md",
+    "docs/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal-pre-verifier-receipt.json",
+    "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal-sol-acceptance.md",
+    "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/closeout/closeout-driver-result.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/closeout/closeout-intent.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/closeout/explicit-stage-manifest.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/closeout/prepublication-contained-lapses.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/closeout/pushover-notification-receipt.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/efficacy-reading.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/evidence.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/next-tranche-contract.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/report.md",
+    "orchestration/human_inbox/yuri/2026-08-24--raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal.md"
+  ],
+  "path_count": 14,
+  "allowlist_path_count": 43,
+  "tracked_path_count": 0,
+  "allowlisted_untracked_path_count": 13,
+  "excluded_untracked_path_count": 683,
+  "unexpected_tracked_paths": [],
+  "git_add_invocations": 0,
+  "git_index_mutations": 0,
+  "docs_branding_included": false
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "ariadne.prepublication_contained_lapses.v1",
+  "operation_id": "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal",
+  "incident_id": "AER-1144",
+  "lapse_count": 5,
+  "lapses": [
+    {
+      "code": "provider_free_runner_argument_mismatch",
+      "effect": "The provider-free wrapper rejected an unsupported pytest -q argument before collection or execution.",
+      "control": "Invoke the wrapper with literal test paths only."
+    },
+    {
+      "code": "brittle_multiline_plan_assertion",
+      "effect": "The first focused run rejected one test string containing an accidental patch-marker character.",
+      "control": "Assert the exact stable same-cell boundary phrase."
+    },
+    {
+      "code": "brittle_wrapped_threat_assertion",
+      "effect": "The second focused run rejected a prose assertion spanning a Markdown line wrap.",
+      "control": "Assert the stable gate-boundary phrase without depending on formatting."
+    },
+    {
+      "code": "descriptive_incident_stage_outside_closed_vocabulary",
+      "effect": "The clockwork check rejected descriptive stage verification before semantic verification or publication.",
+      "control": "Use the registered deterministic_verification stage value."
+    },
+    {
+      "code": "descriptive_historical_access_boundary_outside_closed_vocabulary",
+      "effect": "The clockwork check rejected a newly descriptive historical access label before semantic verification or publication.",
+      "control": "Reuse the exact approved historical subgate vocabulary and express coordinate restrictions as additional denial labels."
+    }
+  ],
+  "archive_content_reads_before_correction": 0,
+  "provider_calls": 0,
+  "product_or_protected_effects": 0,
+  "final_focused_tests": 44,
+  "final_combined_tests": 145,
+  "final_failures": 0
+}

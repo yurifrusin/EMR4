@@ -1,0 +1,117 @@
+{
+  "schema_version": "raisa.historical_diary_structural_time_axis_recovery_evidence.v1",
+  "result": "raisa_local_only_historical_diary_table_cell_time_axis_revision_required",
+  "recorded_at": "2026-08-24T04:33:07.7001882+10:00",
+  "planning_source": "e195f143f8126afa881ebcd84cb9b3a4f56315f4",
+  "reviewed_source": "3bcf2302461874e54d372cf5a71860a495fa7b20",
+  "five_source_rehydration": "passed",
+  "phase_a": {
+    "metadata_bind_attempts": 1,
+    "content_reads_before_pass": 0,
+    "candidate_document_count": 582,
+    "selected_file_count": 80,
+    "selected_total_bytes": 8151040,
+    "maximum_selected_file_bytes": 110592,
+    "relative_observation_span_seconds": 5160,
+    "manifest_readback": "passed",
+    "manifest_ignored": true
+  },
+  "phase_b": {
+    "content_run_count": 1,
+    "content_retry_authorized": false,
+    "opened_snapshots": 80,
+    "parsed_snapshots": 80,
+    "rejected_snapshots": 0,
+    "source_table_cell_observations": 1120,
+    "source_structural_segment_observations": 12557,
+    "distinct_structural_records": 210,
+    "stable_linkage_records": 199,
+    "adjacent_transition_count": 79,
+    "change_counts": {
+      "added": 52,
+      "removed": 48,
+      "moved": 159,
+      "format_changed": 38,
+      "same_position_replaced": 151,
+      "total": 448
+    },
+    "explicit_time_anchor_observations": 0,
+    "distinct_time_minutes": 0,
+    "mapped_time_observations": 0,
+    "decision": "revision_required",
+    "reason_codes": [
+      "insufficient_time_mapping",
+      "insufficient_distinct_time_anchors",
+      "time_interval_mode_unavailable"
+    ]
+  },
+  "privacy": {
+    "source_value_leakage_count": 0,
+    "source_text_emitted": false,
+    "source_filename_path_or_timestamp_emitted": false,
+    "key_or_mapping_emitted": false,
+    "detector_category_counts": {
+      "likely_name": 1623,
+      "sensitive_note": 80
+    },
+    "record_linkage_attack": {
+      "successes": 16,
+      "trials": 210
+    },
+    "trajectory_linkage_attack": {
+      "successes": 55,
+      "trials": 210
+    },
+    "cross_key_structural_differencing": {
+      "successes": 55,
+      "trials": 210
+    },
+    "universal_reidentification_probability_claimed": false,
+    "first_use_gate_status": "closed_pending_candidate_specific_evaluation"
+  },
+  "cleanup": {
+    "word_cleanup_completed": true,
+    "private_manifest_retained": false,
+    "private_projection_retained": false,
+    "ephemeral_key_persisted": false,
+    "mapping_persisted": false,
+    "aggregate_reading_retained_ignored_local_only": true,
+    "content_run_terminal_status": "completed",
+    "provider_network_model_calls": 0
+  },
+  "deterministic_verification": {
+    "focused_tests": 44,
+    "unchanged_privacy_h5_h15_controls": 101,
+    "combined_tests": 145,
+    "combined_failures": 0,
+    "provider_free_wrapper": "passed",
+    "ruff": "passed",
+    "compileall": "passed",
+    "powershell_parse": "passed",
+    "source_boundary_scan": "passed",
+    "git_diff_check": "passed",
+    "contained_prepublication_lapses": 5
+  },
+  "parallelism": {
+    "deepseek": "declined_negative_native_harness_paused_and_private_data_worker_lease_forbidden",
+    "gemini": "not_applicable_neutral_provider_model_transmission_forbidden",
+    "native_subagents": "declined_negative_serial_manifest_word_process_story_coordinates_keys_and_run_counter",
+    "gpt_sol": "implementation_local_execution_acceptance_cleanup_git_and_closeout_owner"
+  },
+  "next_operation": {
+    "operation_id": "raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal",
+    "launch": "immediate_after_clockwork_closeout",
+    "first_stage": "fresh_rehydration_then_freeze_synthetic_first_word_story_coordinate_mapper_plan",
+    "maximum_content_runs": 1,
+    "provider_or_network_use": false,
+    "strongest_result": "locally_restricted_candidate"
+  },
+  "zero_effects": {
+    "provider_or_model_calls": 0,
+    "reusable_historical_derived_artifacts": 0,
+    "product_files_changed": 0,
+    "database_operations": 0,
+    "ordinary_practice_releases": 0,
+    "protected_ref_movements": 0
+  }
+}
