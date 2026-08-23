@@ -2,6 +2,8 @@
 
 Date: 2026-08-23
 
+Timestamp: 2026-08-23T22:21:59.2768232+10:00 (Australia/Brisbane)
+
 Status: `frozen_fail_closed_plan`
 
 Operation:
@@ -43,8 +45,9 @@ and SHA-256 before any classification.
 | `d558da15660ee13e06140dcb502615c24928f349337a64859af9b2983ea54f84` | `c35d2a1d69ad646cb7b561e201271ced25784df8` | `docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-closeout.md` |
 | `77a4dde89706251ff2cafd044cfd2914f435ee477deca70be76ae5932fabb8ca` | `c35d2a1d69ad646cb7b561e201271ced25784df8` | `orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-sol-acceptance.md` |
 
-Every Git object must resolve to a commit and be an ancestor of the reviewed
-candidate. No repository-wide source discovery occurs after freeze.
+Every Git object must be a full 40-character identifier, resolve to a commit
+and be an ancestor of the reviewed candidate. No repository-wide source
+discovery occurs after freeze.
 
 ## Frozen reconciliation
 
@@ -85,6 +88,7 @@ separate final activation decision:
    evidence gate.
 
 No lower-ranked step may be used to bypass a higher-ranked step.
+Passing evidence acquisition does not authorize ordinary activation.
 
 ## Narrowest successor
 

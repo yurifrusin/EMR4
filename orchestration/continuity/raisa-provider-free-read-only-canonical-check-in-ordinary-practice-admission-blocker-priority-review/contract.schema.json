@@ -5,6 +5,9 @@
   "required": [
     "schema_version",
     "operation_id",
+    "planning_source",
+    "hash_mode",
+    "accepted_sources",
     "expected_prior_readiness",
     "expected_current_readiness",
     "remaining_dimension",
@@ -13,11 +16,30 @@
     "human_choice_status",
     "ranked_groups",
     "next_operation",
-    "terminal_after_next_operation"
+    "terminal_after_next_operation",
+    "minimum_hostile_mutations"
   ],
   "properties": {
     "schema_version": {"const": "raisa.check_in_admission_blocker_priority_contract.v1"},
     "operation_id": {"const": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review"},
+    "planning_source": {"pattern": "^[0-9a-f]{40}$"},
+    "hash_mode": {"const": "strict_utf8_canonical_lf_reject_bare_cr_sha256"},
+    "accepted_sources": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "git_object", "path", "sha256"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "git_object": {"pattern": "^[0-9a-f]{40}$"},
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
     "expected_prior_readiness": {"const": "6_3_3"},
     "expected_current_readiness": {"const": "11_0_1"},
     "remaining_dimension": {"const": "environment_manifest_and_operational_secret_posture"},
@@ -38,6 +60,7 @@
       "maxItems": 5
     },
     "next_operation": {"const": "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief"},
-    "terminal_after_next_operation": {"const": "pause_for_user_attention"}
+    "terminal_after_next_operation": {"const": "pause_for_user_attention"},
+    "minimum_hostile_mutations": {"type": "integer", "minimum": 30}
   }
 }

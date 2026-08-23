@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "operation_id",
+    "result",
+    "candidate_source",
+    "source_bindings",
+    "readiness_reconciliation",
+    "external_facts",
+    "human_choices",
+    "ranked_groups",
+    "next_operation",
+    "parallelism",
+    "verification",
+    "closed_boundaries"
+  ],
+  "properties": {
+    "schema_version": {"const": "raisa.check_in_admission_blocker_priority_evidence.v1"},
+    "operation_id": {"const": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review"},
+    "result": {"const": "raisa_provider_free_read_only_canonical_check_in_ordinary_practice_admission_blocker_priority_review_pass"},
+    "candidate_source": {"pattern": "^[0-9a-f]{40}$"},
+    "source_bindings": {"type": "array", "minItems": 5, "maxItems": 5},
+    "readiness_reconciliation": {"type": "object"},
+    "external_facts": {"type": "array", "minItems": 6, "maxItems": 6},
+    "human_choices": {"type": "array", "minItems": 5, "maxItems": 5},
+    "ranked_groups": {"type": "array", "minItems": 5, "maxItems": 5},
+    "next_operation": {"type": "object"},
+    "parallelism": {"type": "object"},
+    "verification": {"type": "object"},
+    "closed_boundaries": {"type": "object"}
+  }
+}

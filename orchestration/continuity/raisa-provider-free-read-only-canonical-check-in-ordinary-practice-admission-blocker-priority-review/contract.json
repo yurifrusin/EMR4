@@ -1,6 +1,40 @@
 {
   "schema_version": "raisa.check_in_admission_blocker_priority_contract.v1",
   "operation_id": "raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-blocker-priority-review",
+  "planning_source": "7560067e771b8b93dabc3ddbd55870c3d055b6f2",
+  "hash_mode": "strict_utf8_canonical_lf_reject_bare_cr_sha256",
+  "accepted_sources": [
+    {
+      "id": "original_readiness_report",
+      "git_object": "27101faa86b5aa3850e90bc4ded8600e5f8d7dc9",
+      "path": "orchestration/continuity/raisa-provider-free-read-only-ordinary-practice-canonical-check-in-admission-readiness-review/admission-readiness-review-report.md",
+      "sha256": "81a4a92e4f1f7e539282a646d59474420309f2f93785fe2c007e413ef26c297f"
+    },
+    {
+      "id": "post_evidence_seam_readiness",
+      "git_object": "f1e88ccfa62a90bd72cbc5dc6c0ac3e249245d4d",
+      "path": "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-evidence-seam-convergence-review/evidence.json",
+      "sha256": "6bc34af8b8d7347a0a5096e937e2054c98cb0cc81e437d2c345247049231f0d0"
+    },
+    {
+      "id": "reference_only_conformance_evidence",
+      "git_object": "b15b565649c274e9da11c6e8c3416094661596ee",
+      "path": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/evidence.json",
+      "sha256": "dbb3f2675236c476b4caf27699dc3bbde6e4810ec1127dce666994d6757a918f"
+    },
+    {
+      "id": "reference_only_conformance_closeout",
+      "git_object": "c35d2a1d69ad646cb7b561e201271ced25784df8",
+      "path": "docs/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal-closeout.md",
+      "sha256": "d558da15660ee13e06140dcb502615c24928f349337a64859af9b2983ea54f84"
+    },
+    {
+      "id": "reference_only_conformance_acceptance",
+      "git_object": "c35d2a1d69ad646cb7b561e201271ced25784df8",
+      "path": "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-sol-acceptance.md",
+      "sha256": "77a4dde89706251ff2cafd044cfd2914f435ee477deca70be76ae5932fabb8ca"
+    }
+  ],
   "expected_prior_readiness": "6_3_3",
   "expected_current_readiness": "11_0_1",
   "remaining_dimension": "environment_manifest_and_operational_secret_posture",
@@ -15,5 +49,6 @@
     "confirm_ordinary_activation_separately"
   ],
   "next_operation": "raisa-provider-free-read-only-canonical-check-in-operational-evidence-root-decision-brief",
-  "terminal_after_next_operation": "pause_for_user_attention"
+  "terminal_after_next_operation": "pause_for_user_attention",
+  "minimum_hostile_mutations": 30
 }
