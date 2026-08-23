@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review",
+  "result": "retain_typed_serial_projection_without_preset_change",
+  "ordinary_events": {
+    "measured": 3,
+    "passed_first_invocation": 3,
+    "compact_preflight_rejections": 0,
+    "full_runtime_state_files": 0,
+    "missing_nondefault_decisions": 0
+  },
+  "pair_cost": {
+    "historical_manual_pair_bytes": 16191,
+    "live_average_pair_bytes": 6994.67,
+    "live_pair_byte_reduction_percent": 56.80
+  },
+  "downstream_signal": {
+    "moving_latch_test_failures": 1,
+    "corrected": true,
+    "production_projection_defects": 0
+  },
+  "decision": {
+    "typed_serial_projection": "retain",
+    "preset_adjustment": "not_needed",
+    "legacy_full_runtime_state": "retain_for_nonserial_or_occupied_work",
+    "next_review": "read_only_postpublication_validation_cadence_mapping",
+    "test_run_removal": "not_authorised"
+  },
+  "assessment": "The live compact path remained materially smaller, made no ordinary event decision unavailable and rejected no ordinary event. One downstream test incorrectly froze a historical latch; the corrected test now derives both paths from current state."
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": "ariadne.typed_serial_live_adoption_efficacy_evidence.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review",
+  "repair_source": "0a24f0ed1eb941e5a5e3619bd0961ad6291441b4",
+  "accepted_projection_source": "7c296e942530b80c49a08ed144e4b934587b1064",
+  "clockwork_lease_sequence": 217,
+  "ordinary_event_results": {
+    "event_count": 3,
+    "first_invocation_pass_count": 3,
+    "compact_preflight_rejection_count": 0,
+    "full_runtime_state_files_written": 0,
+    "missing_nondefault_decision_count": 0,
+    "all_receipts_bound_current_latch": true,
+    "all_receipts_bound_five_sources": true,
+    "all_receipts_bound_machine_git_snapshot": true,
+    "all_receipts_preserved_protected_refs": true
+  },
+  "ergonomic_result": {
+    "historical_manual_pair_bytes": 16191,
+    "ordinary_pair_bytes": [6753, 7111, 7120],
+    "average_pair_bytes": 6994.67,
+    "average_pair_byte_reduction_percent": 56.80,
+    "caller_choice_reduction_remains_material": true
+  },
+  "moving_latch_repair": {
+    "postpublication_failures": 1,
+    "compact_preflight_rejections": 0,
+    "production_files_changed": 0,
+    "test_files_changed": 1,
+    "repair": "Derive both safety-equivalence receipt paths from the same current latch and retain the historical state only as the size baseline.",
+    "focused_tests_passed": 42,
+    "combined_tests_passed": 162,
+    "ruff_passed": true
+  },
+  "live_canonical_reading": {
+    "status": "passed",
+    "source_commit": "7c296e942530b80c49a08ed144e4b934587b1064",
+    "generation_id": "gen-818f2b6c0170e519b6738144ee33b1530b8ee776e19fc2c96c8fc096f5b5050a",
+    "canonical_drift": 0,
+    "lease_sequence": 217
+  },
+  "parallelism": {
+    "deepseek": "declined_native_profile_paused_and_no_fallback",
+    "gemini": "declined_deterministic_local_measurement",
+    "native_subagents": "declined_developer_policy_and_serial_latch",
+    "owner": "gpt_sol"
+  },
+  "boundaries": {
+    "provider_calls": 0,
+    "worker_dispatches": 0,
+    "product_reruns": 0,
+    "canonical_mutations_before_semantic_closeout": 0,
+    "protected_ref_movements": 0,
+    "docs_branding_preserved": true
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": "ariadne.typed_serial_live_adoption_readings.v1",
+  "operation_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review",
+  "recorded_at": "2026-08-23T20:13:31.0779586+10:00",
+  "historical_manual_pair": {
+    "caller_scalar_leaves": 114,
+    "pair_lines": 327,
+    "pair_bytes": 16191
+  },
+  "ordinary_events": [
+    {
+      "event_id": "preplanning",
+      "continuation_event": "pre_sprint_planning",
+      "intent_scalar_leaves": 10,
+      "intent_lines": 15,
+      "intent_bytes": 940,
+      "receipt_lines": 122,
+      "receipt_bytes": 5813,
+      "pair_lines": 137,
+      "pair_bytes": 6753,
+      "first_invocation_status": "passed",
+      "reason_count": 0,
+      "protected_refs_aligned": true,
+      "full_runtime_state_written": false,
+      "missing_nondefault_decision": false
+    },
+    {
+      "event_id": "test-repair-precommit",
+      "continuation_event": "pre_commit",
+      "intent_scalar_leaves": 11,
+      "intent_lines": 16,
+      "intent_bytes": 1118,
+      "receipt_lines": 123,
+      "receipt_bytes": 5993,
+      "pair_lines": 139,
+      "pair_bytes": 7111,
+      "first_invocation_status": "passed",
+      "reason_count": 0,
+      "protected_refs_aligned": true,
+      "full_runtime_state_written": false,
+      "missing_nondefault_decision": false
+    },
+    {
+      "event_id": "review-closeout-precommit",
+      "continuation_event": "pre_commit",
+      "intent_scalar_leaves": 11,
+      "intent_lines": 16,
+      "intent_bytes": 1123,
+      "receipt_lines": 123,
+      "receipt_bytes": 5997,
+      "pair_lines": 139,
+      "pair_bytes": 7120,
+      "first_invocation_status": "passed",
+      "reason_count": 0,
+      "protected_refs_aligned": true,
+      "full_runtime_state_written": false,
+      "missing_nondefault_decision": false
+    }
+  ],
+  "aggregate": {
+    "ordinary_event_count": 3,
+    "first_invocation_pass_count": 3,
+    "compact_preflight_rejection_count": 0,
+    "full_runtime_state_files_written": 0,
+    "missing_nondefault_decision_count": 0,
+    "average_pair_bytes": 6994.67,
+    "average_pair_byte_reduction_percent": 56.80,
+    "downstream_test_failures": 1,
+    "downstream_test_failures_corrected": 1
+  }
+}

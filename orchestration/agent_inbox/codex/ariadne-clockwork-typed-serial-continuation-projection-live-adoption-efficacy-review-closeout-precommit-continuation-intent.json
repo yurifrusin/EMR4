@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_commit",
+  "planned_action": "commit_accepted_efficacy_review_evidence",
+  "assessed_stage": "live_adoption_review_closeout_after_all_deterministic_checks",
+  "active_evidence_paths": [
+    "docs/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-plan.md",
+    "docs/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-closeout.md",
+    "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-sol-acceptance.md",
+    "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/report.md",
+    "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/efficacy-reading.json",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": []
+}

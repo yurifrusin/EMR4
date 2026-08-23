@@ -1,0 +1,123 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review",
+  "recorded_at": "2026-08-23T20:13:31.0779586+10:00",
+  "closeout": {
+    "operation_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review",
+    "title": "Provider-free governance clockwork typed serial-continuation projection live-adoption efficacy review",
+    "builds_on": [
+      "ariadne-provider-free-governance-clockwork-typed-serial-continuation-state-projection-rehearsal"
+    ],
+    "authority_notes": [
+      "GPT Sol owns the provider-free deterministic live-use measurement and the test-only moving-latch correction."
+    ],
+    "decisions": [
+      {
+        "id": "retain-typed-serial-projection-without-preset-change",
+        "source": "docs/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-plan.md",
+        "summary": "Retain the existing compact serial preset after three first-invocation passes, zero missing decisions and materially lower pair cost."
+      },
+      {
+        "id": "derive-safety-equivalence-from-current-latch",
+        "source": "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/event-001-postpublication-moving-latch-repair.json",
+        "summary": "Use historical runtime state only for size measurement and derive both safety comparison paths from the same live latch."
+      }
+    ],
+    "claim_scope": [
+      "Three ordinary provider-free compact serial events pass without rejection, missing non-default decisions or expanded runtime-state files."
+    ],
+    "additional_receipts": [
+      "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-test-repair-precommit-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-closeout-precommit-receipt.json",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review-postcompaction-receipt.json"
+    ],
+    "additional_artifacts": [
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/event-readings.json",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/event-001-postpublication-moving-latch-repair.json",
+      "tests/test_ariadne_orchestrator_preflight.py"
+    ],
+    "unresolved_gates": [
+      "Test-run removal, occupied worker transport and native Harness qualification remain closed."
+    ],
+    "journey": {
+      "strategic_role": "Replace model-authored governance representations with typed control positions and deterministic readings.",
+      "outcome": "Three live serial events retained full safety evidence at an average pair cost 56.8 percent below the manual baseline."
+    },
+    "current_position": {
+      "strategic_role": "Use one compact observed-empty serial preset for ordinary continuation while retaining the legacy occupied path.",
+      "why_now": "Live adoption was required to distinguish rehearsal savings from practical operator fit.",
+      "outcome": "The existing preset fits all three events; one historical-latch test defect is corrected and durably recorded.",
+      "unlocks": [
+        "Read-only mapping of unique and duplicated postpublication validation coverage."
+      ],
+      "does_not_solve": [
+        "It does not qualify a worker Harness or authorise removing any test run."
+      ],
+      "orientation_statement": "The model chooses the lever position; the clockwork takes the authoritative reading."
+    },
+    "next_operation": {
+      "operation_id": "ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review",
+      "active_tranche": "Provider-free governance clockwork postpublication validation-cadence mapping review",
+      "objective": "Characterize unique and duplicated coverage among semantic publication verification, canonical live-state validation and the postpublication suite, then freeze exact replacement-evidence requirements without removing a test run.",
+      "authority_source": "The accepted live-adoption review identifies validation-cadence mapping as the next narrow ergonomic study.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_read_only_coverage_mapping_plan"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "provider_free_read_only_postpublication_validation_coverage_mapping_only",
+    "characterize_unique_duplicate_and_dependency_coverage_without_changing_commands",
+    "freeze_exact_replacement_evidence_requirements_before_any_future_cadence_change",
+    "no_test_run_removal_skip_deselection_or_weakening",
+    "no_worker_dispatch_native_harness_provider_call_or_transport_qualification",
+    "no_silent_claude_code_or_other_transport_fallback",
+    "no_authority_allocation_or_worker_transport_policy_change",
+    "no_existing_product_source_route_api_client_configuration_or_runtime_change",
+    "no_environment_variable_secret_credential_network_database_or_infrastructure_access",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "typed-serial-postpublication-moving-latch-fixture-001",
+      "observed_on": "2026-08-23",
+      "tranche": "clockwork-typed-serial-live-adoption",
+      "role": "orchestrator",
+      "resource_id": "typed-serial-safety-equivalence-test",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Safety equivalence derives both receipt paths from the current latch while historical state is used only as a size baseline.",
+      "observed_error": "The first postpublication combined suite compared the new live latch with the prior tranche's committed preplanning latch.",
+      "detection_method": "One of 162 postpublication tests failed while production live-state validation remained passed at zero drift.",
+      "evidence_paths": [
+        "tests/test_ariadne_orchestrator_preflight.py",
+        "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/event-001-postpublication-moving-latch-repair.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.historical_latch_used_as_current_equivalence_authority",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Materialize the legacy comparison state from the same current typed intent and latch.",
+        "prevention_control": "The safety-equivalence test now derives both receipt paths from one current state and limits the historical file to size measurement.",
+        "evidence_paths": [
+          "tests/test_ariadne_orchestrator_preflight.py",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review/event-001-postpublication-moving-latch-repair.json"
+        ]
+      },
+      "baton_summary": "records one corrected historical-latch safety-equivalence fixture defect."
+    }
+  ]
+}
