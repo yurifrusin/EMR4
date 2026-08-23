@@ -2,8 +2,8 @@
 
 <!-- ariadne-agent-error-register-reading
 revision: 645
-incident_count: 1124
-new_incident_ids: AER-1116,AER-1117,AER-1118,AER-1119,AER-1120,AER-1121,AER-1122,AER-1123,AER-1124
+incident_count: 1126
+new_incident_ids: AER-1116,AER-1117,AER-1118,AER-1119,AER-1120,AER-1121,AER-1122,AER-1123,AER-1124,AER-1125,AER-1126
 open_incident_count: 0
 -->
 
@@ -63,3 +63,18 @@ summary now carries the required timestamp before a fresh publication attempt.
 The first rollback invocation incorrectly supplied `--intent`, which rollback
 does not accept. Argparse rejected it without movement; the argument-free
 rollback then restored the previous generation byte-exactly.
+
+## AER-1125
+
+The second publication found the same top-level Brisbane timestamp invariant
+missing from the Sol acceptance. The clockwork again restored the previous
+generation byte-exactly, this time at lease 208. The Sol acceptance now carries
+the required timestamp, and every prospective plan, closeout and acceptance
+Markdown path was scanned together before a fresh publication attempt.
+
+## AER-1126
+
+The first all-path timestamp scan reconstructed the repository parser with an
+incorrect string slice and rejected a valid offset timestamp locally. It made
+no mutation. The corrected scan uses the exact prefix, suffix, offset and date
+logic from the current-Baton consistency test.

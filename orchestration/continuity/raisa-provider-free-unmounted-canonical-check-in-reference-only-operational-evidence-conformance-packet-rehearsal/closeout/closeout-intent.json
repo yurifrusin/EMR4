@@ -47,7 +47,7 @@
           "id": "select-bounded-clockwork-ergonomics-review",
           "source": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json",
           "status": "accepted",
-          "summary": "Use the nine contained reruns and the extended native-Harness gear period as measured input to a provider-free read-only clockwork ergonomics and efficacy review."
+          "summary": "Use the eleven contained reruns and the extended native-Harness gear period as measured input to a provider-free read-only clockwork ergonomics and efficacy review."
         }
       ],
       "claim_scope": [
@@ -110,7 +110,7 @@
     },
     "current_position": {
       "strategic_role": "Measure whether the governance clockwork can retain its safety while asking less clerical work of the orchestrator",
-      "why_now": "The reference-only packet is complete and its nine corrected interface reruns join the extended DeepSeek gear history as a bounded evidence set.",
+      "why_now": "The reference-only packet is complete and its eleven corrected interface reruns join the extended DeepSeek gear history as a bounded evidence set.",
       "outcome": "A read-only review will distinguish safety controls from avoidable operator inputs and rank only simplifications with measurable removed work.",
       "unlocks": [
         "A narrow evidence-backed plan for the highest-yield clockwork ergonomic repair, if one is justified."
@@ -175,6 +175,16 @@
       {
         "incident_id": "reference-packet-rollback-cli-shape",
         "source_id": "reference-packet-local-009",
+        "peers": []
+      },
+      {
+        "incident_id": "reference-packet-sol-timestamp",
+        "source_id": "reference-packet-local-010",
+        "peers": []
+      },
+      {
+        "incident_id": "reference-packet-timestamp-scan-parser",
+        "source_id": "reference-packet-local-011",
         "peers": []
       }
     ],
@@ -567,6 +577,74 @@
         ]
       },
       "baton_summary": "records one rejected rollback argument combination and the passing argument-free rollback."
+    },
+    {
+      "attempt_key": "reference-packet-sol-timestamp-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "postpublication-baton-consistency",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "Every prospective current-node plan, closeout and acceptance Markdown file contains exactly one top-level Brisbane Timestamp line before publication.",
+      "observed_error": "The second publication made the Sol acceptance current-node evidence and postpublication consistency verification found that its Timestamp line was absent.",
+      "detection_method": "The current-Baton consistency test failed after publication; the clockwork restored the previous generation byte-exactly at lease 208.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-publication-attempt-002-rollback-receipt.json",
+        "tests/test_current_baton_consistency.py"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.current_node_acceptance_timestamp_missing",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore the previous generation byte-exactly, bind lease 208, add the exact Brisbane Timestamp line and scan the complete prospective human-evidence set.",
+        "prevention_control": "The ergonomics review will test a prospective-current-node evidence validator that reports every missing timestamp in one prepublication pass.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-publication-attempt-002-rollback-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-sol-acceptance.md"
+        ]
+      },
+      "baton_summary": "records a second postpublication missing timestamp and the byte-exact lease-208 rollback correction."
+    },
+    {
+      "attempt_key": "reference-packet-timestamp-scan-parser-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "prospective-timestamp-scan",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "A local prospective timestamp scan implements the repository's exact prefix, suffix, offset and date parsing rule.",
+      "observed_error": "The first all-path scan used an incorrect fixed string slice and raised ValueError on a valid Brisbane timestamp.",
+      "detection_method": "The local validator failed before completing the path set; inspection of the exact current-Baton test exposed the slice mismatch.",
+      "evidence_paths": [
+        "tests/test_current_baton_consistency.py",
+        "orchestration/agent_inbox/codex/raisa-check-in-reference-only-conformance-packet-sol-acceptance.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.reconstructed_timestamp_parser_slice",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the exact removeprefix, removesuffix, offset and calendar-date parsing rule from the repository test.",
+        "prevention_control": "The ergonomics review will test exposing the prospective validator directly so the operator never reconstructs it.",
+        "evidence_paths": [
+          "tests/test_current_baton_consistency.py",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records one contained reconstructed timestamp-parser lapse and the exact-test-rule correction."
     }
   ],
   "next_operation_protected_boundaries": [

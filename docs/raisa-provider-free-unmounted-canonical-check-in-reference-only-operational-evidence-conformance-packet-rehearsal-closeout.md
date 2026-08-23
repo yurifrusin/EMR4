@@ -41,7 +41,7 @@ real operational evidence and Yuri-owned choices are still absent.
 - no product source, route, API, client, runtime, feature flag, allowlist,
   status, waiting-area, deployment, Pages or protected ref changed.
 
-Nine bounded workflow incidents were corrected without changing the accepted
+Eleven bounded workflow incidents were corrected without changing the accepted
 candidate: one wrong script invocation form, one forbidden manually repeated
 Git object in receipt prose, one copied schema-vocabulary value, one guessed
 test filename and one descriptive Continuity node kind outside the closed
@@ -51,8 +51,13 @@ was classified as provider-free `tooling`. Postpublication verification then
 found a missing required Brisbane timestamp in the Yuri summary and restored
 the previous generation byte-exactly. Two further CLI-shape lapses—an
 unsupported register `--check` flag and passing `--intent` to rollback—were
-corrected. They are retained as ergonomics evidence rather than hidden as
-incidental noise.
+corrected. A second postpublication pass then exposed the same missing
+timestamp invariant in the Sol acceptance; the previous generation was again
+restored byte-exactly before the complete prospective human-evidence set was
+scanned. They are retained as ergonomics evidence rather than hidden as
+incidental noise. The first all-path scan also reconstructed the timestamp
+parser with an incorrect string slice; the corrected scan reused the exact
+repository parsing rule.
 
 ## Parallelism and Harness posture
 
