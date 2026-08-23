@@ -147,3 +147,8 @@ filename shape. Joining those groups is safe only at an exact 14-digit total;
 the two four-digit-year calendar interpretations still must yield exactly one
 valid timestamp. The parser never emits a group, value, date or filename, and
 any extra numeric suffix remains a closed parse failure.
+
+Because the coarse shape did not reveal numeric-group widths, the frozen
+diagnostic may expose only aggregate group-length and total-digit-count
+distributions. It cannot expose digit values or preserve correspondence to a
+filename. Any parser change still requires a unique calendar interpretation.

@@ -248,6 +248,13 @@ def filename_shape(filename: str) -> str:
     return "".join(classes)[:24] or "empty"
 
 
+def numeric_group_shape(filename: str) -> str:
+    """Return numeric-token lengths without retaining any digit value."""
+
+    lengths = [len(value) for value in re.findall(r"\d+", Path(filename).stem)]
+    return "-".join(map(str, lengths))[:48] or "none"
+
+
 def _safe_public_write(path: Path, value: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -268,6 +275,8 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
 
     parsed: list[tuple[Path, os.stat_result, datetime]] = []
     shapes: Counter[str] = Counter()
+    numeric_group_shapes: Counter[str] = Counter()
+    numeric_digit_totals: Counter[int] = Counter()
     admitted_file_count = 0
     below_minimum_file_count = 0
     above_maximum_file_count = 0
@@ -278,6 +287,11 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
             raise ProbeError("selected_reparse_forbidden")
         if not path.is_file() or path.suffix.lower() != ".doc":
             continue
+        numeric_shape = numeric_group_shape(path.name)
+        numeric_group_shapes[numeric_shape] += 1
+        numeric_digit_totals[
+            sum(len(value) for value in re.findall(r"\d+", path.stem))
+        ] += 1
         stat = path.stat()
         if stat.st_size <= MIN_FILE_BYTES:
             below_minimum_file_count += 1
@@ -304,6 +318,10 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
             "timestamp_parse_success_count": len(parsed),
             "timestamp_parse_failure_count": timestamp_parse_failures,
             "filename_shape_distribution": dict(sorted(shapes.items())),
+            "numeric_group_length_distribution": dict(sorted(numeric_group_shapes.items())),
+            "numeric_digit_total_distribution": {
+                str(key): value for key, value in sorted(numeric_digit_totals.items())
+            },
             "archive_content_reads": 0,
         }
         raise ProbeError("timestamp_binding_revision_required:" + json.dumps(diagnostic, sort_keys=True))
@@ -360,6 +378,10 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
         "maximum_file_bytes": max(item.size_bytes for item in files),
         "relative_observation_span_seconds": files[-1].observation_offset_seconds,
         "filename_shape_class_count": len(shapes),
+        "numeric_group_length_distribution": dict(sorted(numeric_group_shapes.items())),
+        "numeric_digit_total_distribution": {
+            str(key): value for key, value in sorted(numeric_digit_totals.items())
+        },
         "archive_content_reads": 0,
         "raw_filename_path_or_timestamp_emitted": False,
     }

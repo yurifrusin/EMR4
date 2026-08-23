@@ -220,3 +220,11 @@ unchanged unambiguous four-digit-year year-first/day-first calendars. Extra or
 missing digits, two-digit-year ambiguity and multiple valid interpretations
 remain rejected. One further metadata-only binding is authorised from this
 shape-derived repair; Phase B remains closed until it passes.
+
+That repaired source still returned zero parses, proving that the coarse
+alternating digit/separator class does not establish a 14-digit total. A
+separately frozen metadata diagnostic may add only aggregate numeric-group
+length signatures and total-digit-count distributions. These are filename
+shape, not values: they contain no numeric group value and no filename, date
+or path. The next parser decision must derive solely from this reading and
+remain unambiguous before any manifest or content operation.

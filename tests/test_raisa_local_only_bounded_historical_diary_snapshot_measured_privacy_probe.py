@@ -159,6 +159,16 @@ def test_filename_shape_cannot_repeat_source_letters_or_digits():
     assert not set(shape) & set("AliceSmith20160824093015") - set("asd")
 
 
+def test_numeric_group_shape_emits_lengths_but_no_digit_value():
+    source = "2016-08-24 09-30-15 Alice.doc"
+
+    assert probe.numeric_group_shape(source) == "4-2-2-2-2-2"
+    assert all(
+        value not in probe.numeric_group_shape(source)
+        for value in ("2016", "08", "24", "09", "30", "15")
+    )
+
+
 def test_private_models_reject_extra_fields_and_invalid_sequence():
     payload = synthetic_extraction().model_dump(mode="json")
     payload["raw_path"] = r"C:\private\diary.doc"
@@ -359,6 +369,8 @@ def test_phase_a_binds_exactly_80_nonrecursive_files_without_content_hash(monkey
     assert reading["selected_file_count"] == probe.MAX_FILES
     assert reading["below_minimum_file_count"] == 1
     assert reading["above_maximum_file_count"] == 1
+    assert reading["numeric_group_length_distribution"] == {"14": 82}
+    assert reading["numeric_digit_total_distribution"] == {"14": 82}
     assert reading["archive_content_reads"] == 0
     assert reading["raw_filename_path_or_timestamp_emitted"] is False
     assert len(manifest.files) == probe.MAX_FILES
