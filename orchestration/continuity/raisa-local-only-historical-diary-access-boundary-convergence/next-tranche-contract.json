@@ -1,0 +1,60 @@
+{
+  "schema_version": "raisa.historical_diary_bounded_measured_probe_next_tranche.v1",
+  "operation_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+  "status": "dependency_satisfied_after_current_clockwork_closeout",
+  "reasoning_level": "extra_high",
+  "objective": "Take one fail-closed local privacy-and-utility reading from an exact bounded historical Diary slice without granting downstream use.",
+  "required_first_stage": [
+    "fresh_five_source_rehydration",
+    "active_latch_validation",
+    "explicit_deepseek_gemini_native_subagent_parallelism_assessment",
+    "fresh_ariadne_receipt",
+    "freeze_exact_local_probe_plan_before_archive_enumeration_or_content_read"
+  ],
+  "exact_subgate": {
+    "contract_sha256": "e312d58d7743b9b4d79d8a947b765732eea142f47586e0bd1f4e738047802615",
+    "leaf_roots": 1,
+    "dense_days": 1,
+    "recursive": false,
+    "maximum_files": 80,
+    "maximum_total_bytes": 134217728,
+    "maximum_per_file_bytes": 8388608,
+    "read_only": true,
+    "symlink_or_reparse_traversal": false,
+    "provider_network_model_or_telemetry": false,
+    "strongest_decision": "locally_restricted_candidate"
+  },
+  "required_local_bindings_before_content_read": [
+    "exact_ignored_leaf_root",
+    "exact_dense_day_selector",
+    "exact_nonrecursive_input_manifest",
+    "exact_input_count_and_byte_readback",
+    "exact_parser_identity_and_digest",
+    "new_ignored_output_root",
+    "ephemeral_in_memory_key",
+    "failure_cleanup_contract"
+  ],
+  "required_outputs": [
+    "aggregate_field_inventory",
+    "direct_identifier_detector_reading",
+    "closed_projection_leakage_reading",
+    "adjacent_interval_differencing_reading",
+    "utility_invariants",
+    "equivalence_uniqueness_and_rarity",
+    "record_and_trajectory_linkage_attacks",
+    "multi_release_differencing_attack",
+    "typed_local_decision",
+    "cleanup_receipt"
+  ],
+  "closed": [
+    "access_outside_the_exact_root_day_manifest_or_byte_caps",
+    "raw_or_extracted_text_identity_filename_timestamp_key_or_mapping_commit",
+    "provider_network_model_prompt_telemetry_clipboard_or_external_release",
+    "fixture_memory_rag_or_product_promotion",
+    "product_runtime_route_api_client_database_or_configuration",
+    "ordinary_practice_enablement",
+    "production_deployment_release_or_pages",
+    "protected_evidence_or_ref_movement"
+  ],
+  "protected_commit_floor": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+}

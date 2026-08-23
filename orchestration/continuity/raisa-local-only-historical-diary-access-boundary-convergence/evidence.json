@@ -1,0 +1,75 @@
+{
+  "schema_version": "raisa.historical_diary_access_boundary_convergence_evidence.v1",
+  "result": "raisa_local_only_historical_diary_access_boundary_convergence_pass",
+  "recorded_at": "2026-08-24T02:33:58+10:00",
+  "planning_source": "96c7bc5fa808b39f27d095cd5838b8b770d26b78",
+  "reviewed_source": "7fef03bb8dc0acf38772850793e1aac35e878502",
+  "five_source_rehydration": "passed",
+  "typed_historical_data_modes": {
+    "mode_count": 3,
+    "legacy_full_denial": "passed",
+    "typed_full_denial": "passed",
+    "bounded_local_diary_probe": "passed",
+    "mutually_exclusive": true,
+    "unknown_historical_vocabulary_rejected": true,
+    "unknown_allowance_vocabulary_rejected": true,
+    "partial_subgate_rejected": true,
+    "missing_product_data_floor_rejected": true
+  },
+  "contract_binding": {
+    "artifact": "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/real-access-subgate-contract.json",
+    "sha256": "e312d58d7743b9b4d79d8a947b765732eea142f47586e0bd1f4e738047802615",
+    "actual_path_bound": false,
+    "executable_in_this_tranche": false,
+    "maximum_files": 80,
+    "maximum_total_bytes": 134217728,
+    "maximum_per_file_bytes": 8388608,
+    "strongest_decision": "locally_restricted_candidate"
+  },
+  "deterministic_verification": {
+    "new_boundary_test_functions": 5,
+    "complete_governance_tests": 172,
+    "failures": 0,
+    "provider_free_wrapper": "passed",
+    "ruff": "passed",
+    "compileall": "passed",
+    "git_diff_check": "passed",
+    "contained_prepublication_lapses": 2
+  },
+  "contained_workflow_lapses": [
+    {
+      "attempt": "closeout-evidence-draft-001",
+      "reason": "manually_expanded_abbreviated_planning_commit_did_not_match_git_object",
+      "effect": "readback_rejection_before_staging_clockwork_verification_or_publication"
+    },
+    {
+      "attempt": "clockwork-rehearsal-attempt-001",
+      "reason": "prospective_incident_revision_artifact_missing",
+      "effect": "tick_rejection_before_verifier_execution_publication_or_canonical_mutation"
+    }
+  ],
+  "parallelism": {
+    "deepseek": "declined_negative_native_harness_paused_and_no_isolated_authority_lease",
+    "gemini": "not_applicable_neutral_live_provider_forbidden_by_latch",
+    "native_subagents": "declined_negative_central_validator_and_latch_tests_serially_coupled",
+    "gpt_sol": "plan_implementation_verification_acceptance_and_git_owner"
+  },
+  "next_operation": {
+    "operation_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+    "launch": "immediate_after_clockwork_closeout",
+    "first_stage": "fresh_rehydration_then_freeze_exact_local_probe_plan_and_bind_ignored_root_day_manifest_before_content_read",
+    "maximum_files": 80,
+    "provider_or_network_use": false,
+    "strongest_result": "locally_restricted_candidate"
+  },
+  "zero_effects": {
+    "historical_diary_files_opened_listed_searched_sampled_hashed_or_parsed": 0,
+    "real_archive_paths_bound": 0,
+    "patient_practice_clinical_or_product_records_processed": 0,
+    "provider_or_model_calls": 0,
+    "product_files_changed": 0,
+    "database_operations": 0,
+    "ordinary_practice_releases": 0,
+    "protected_ref_movements": 0
+  }
+}

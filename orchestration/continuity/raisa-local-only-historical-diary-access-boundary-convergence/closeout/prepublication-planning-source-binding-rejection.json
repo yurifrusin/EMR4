@@ -1,0 +1,12 @@
+{
+  "schema_version": "ariadne.prepublication_git_binding_rejection.v1",
+  "operation_id": "raisa-local-only-historical-diary-access-boundary-convergence",
+  "attempt": "closeout-evidence-draft-001",
+  "status": "rejected_before_staging_or_publication",
+  "field": "planning_source",
+  "observed_value": "96c7bc5faf31ae314fa1cb5a32757c6e8d249ab3",
+  "machine_resolved_value": "96c7bc5fa808b39f27d095cd5838b8b770d26b78",
+  "detection": "git_rev_parse_readback",
+  "canonical_state_changed": false,
+  "archive_accessed": false
+}

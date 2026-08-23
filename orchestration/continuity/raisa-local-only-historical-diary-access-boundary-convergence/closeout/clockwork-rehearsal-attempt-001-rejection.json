@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.clockwork_rehearsal_rejection.v1",
+  "operation_id": "raisa-local-only-historical-diary-access-boundary-convergence",
+  "attempt": "clockwork-rehearsal-attempt-001",
+  "status": "revision_required",
+  "driver_reason": "clockwork_tick_failed",
+  "inner_reason": "tick_incident_revision_reading",
+  "missing_artifact": "docs/ariadne-agent-error-correction-register-revision-654.md",
+  "verifier_execution_reached": false,
+  "publication_reached": false,
+  "canonical_state_changed": false,
+  "archive_accessed": false
+}

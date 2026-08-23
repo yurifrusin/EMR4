@@ -1,0 +1,22 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-local-only-historical-diary-access-boundary-convergence",
+  "source_head": "7fef03bb8dc0acf38772850793e1aac35e878502",
+  "result": "exact_bounded_local_diary_privacy_probe_now_clockwork_representable",
+  "mechanism": {
+    "admitted_historical_modes": 3,
+    "exact_subgate_boundary_members": 10,
+    "contract_digest_bound": true,
+    "legacy_latches_preserved": true,
+    "free_form_historical_allowances": 0,
+    "archive_accesses": 0,
+    "provider_calls": 0
+  },
+  "verification": {
+    "new_boundary_test_functions": 5,
+    "complete_governance_tests": 172,
+    "failures": 0,
+    "contained_prepublication_lapses": 2
+  },
+  "assessment": "The control improves ergonomics by turning the next privacy probe into one exact clock reading: either all reviewed bounds are present or publication fails. Backward-compatible full denial remains valid, while descriptive or partial access labels cannot authorise work."
+}

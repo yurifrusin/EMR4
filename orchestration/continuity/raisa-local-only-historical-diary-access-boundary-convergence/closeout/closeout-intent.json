@@ -1,0 +1,144 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-local-only-historical-diary-access-boundary-convergence",
+  "recorded_at": "2026-08-24T02:33:58+10:00",
+  "closeout": {
+    "operation_id": "raisa-local-only-historical-diary-access-boundary-convergence",
+    "title": "Raisa local-only historical Diary access boundary convergence",
+    "builds_on": [
+      "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review"
+    ],
+    "authority_notes": [
+      "Yuri delegated gate timing to GPT Sol; this control-plane tranche admits only the accepted exact local Diary privacy subgate and grants no archive access itself."
+    ],
+    "decisions": [
+      {
+        "id": "accept-exact-diary-subgate-and-run-bounded-probe",
+        "source": "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/next-tranche-contract.json",
+        "summary": "Accept the typed boundary at exact source 7fef03bb8dc0acf38772850793e1aac35e878502 and proceed to one contract-bound local measured probe."
+      }
+    ],
+    "claim_scope": [
+      "Three mutually exclusive modes and a ten-member contract-bound exception pass 172 governance tests; no archive path or content was accessed."
+    ],
+    "additional_receipts": [
+      "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/closeout/prepublication-planning-source-binding-rejection.json",
+      "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/closeout/clockwork-rehearsal-attempt-001-rejection.json"
+    ],
+    "additional_artifacts": [],
+    "unresolved_gates": [
+      "Exact root/day binding, archive measurement, local retention, fixture or memory promotion, provider use, product runtime and protected integration remain gated."
+    ],
+    "journey": {
+      "strategic_role": "Connect the privacy gate to the clockwork without creating a general historical-data opening.",
+      "outcome": "The next local probe is one exact all-or-nothing authority reading."
+    },
+    "current_position": {
+      "strategic_role": "Take one bounded local empirical privacy-and-utility reading.",
+      "why_now": "The gate and its exact clockwork boundary both pass.",
+      "outcome": "A local slice may be measured under fixed limits and no downstream authority.",
+      "unlocks": [
+        "One at-most-80-file local historical Diary privacy probe."
+      ],
+      "does_not_solve": [
+        "It does not prove anonymity or permit provider, fixture, product or production use."
+      ],
+      "orientation_statement": "Bind the exact local slice only after fresh planning, then let the gate take the reading."
+    },
+    "next_operation": {
+      "operation_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+      "active_tranche": "Raisa local-only bounded historical Diary snapshot measured privacy probe",
+      "objective": "Measure privacy and temporal utility on one exact local Diary slice without granting downstream use.",
+      "authority_source": "Yuri's local de-identified Diary direction, delegated gate timing, accepted privacy gate, exact boundary convergence and standing uninterrupted-development authority.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_exact_local_probe_plan_and_bind_ignored_root_day_manifest_before_content_read"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only",
+    "no_product_patient_appointment_clinical_or_protected_data",
+    "allow_local_only_historical_diary_snapshot_measured_privacy_probe",
+    "historical_diary_privacy_subgate_contract_sha256_e312d58d7743b9b4d79d8a947b765732eea142f47586e0bd1f4e738047802615",
+    "historical_diary_access_one_leaf_root_one_dense_day_nonrecursive_maximum_80_files",
+    "historical_diary_access_maximum_134217728_total_bytes_and_8388608_per_file",
+    "historical_diary_access_read_only_no_symlink_or_reparse_traversal",
+    "historical_diary_access_new_ignored_output_root_ephemeral_in_memory_key_and_failure_cleanup",
+    "historical_diary_access_no_network_provider_model_prompt_telemetry_clipboard_or_external_release",
+    "historical_diary_access_no_raw_text_identity_filename_timestamp_key_or_mapping_commit",
+    "historical_diary_access_strongest_result_locally_restricted_candidate_without_downstream_authority",
+    "historical_diary_access_no_fixture_memory_rag_product_runtime_route_api_client_database_or_configuration"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "historical-boundary-closeout-git-binding-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-access-boundary",
+      "role": "orchestrator",
+      "resource_id": "closeout-evidence-draft",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Every Git binding is copied only from a machine-resolved full object ID.",
+      "observed_error": "The first evidence draft manually expanded the abbreviated planning commit and produced a nonexistent 40-character value.",
+      "detection_method": "A git rev-parse readback found the mismatch before staging or clockwork verification.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/closeout/prepublication-planning-source-binding-rejection.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_git_object_expansion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the draft with the exact git rev-parse output.",
+        "prevention_control": "Populate every closeout Git field from captured git rev-parse output; never expand a console abbreviation.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/evidence.json"
+        ]
+      },
+      "baton_summary": "records one contained manual Git-object expansion lapse and machine-resolved correction."
+    },
+    {
+      "attempt_key": "historical-boundary-clockwork-revision-artifact-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-access-boundary",
+      "role": "orchestrator",
+      "resource_id": "clockwork-closeout-driver",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "An incident-bearing closeout materialises its prospective human register reading before the first rehearsal.",
+      "observed_error": "The first rehearsal omitted revision 654 and failed at tick_incident_revision_reading.",
+      "detection_method": "The clockwork rejected before verifier execution or publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/closeout/clockwork-rehearsal-attempt-001-rejection.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.missing_incident_revision_artifact",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Materialise revision 654 with the exact prospective reading.",
+        "prevention_control": "Read current revision, incident count and next IDs before every incident-bearing rehearsal and create the required revision artifact first.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-654.md"
+        ]
+      },
+      "baton_summary": "records one contained missing prospective register reading and its deterministic pre-rehearsal correction."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "ariadne.governance_explicit_stage_manifest.v1",
+  "status": "passed",
+  "source_head": "788af28b1d2d0a500fecf9c8cc870fdff6230275",
+  "derivation": "admitted_intent_clockwork_contract_intersect_git_inventory",
+  "paths": [
+    "docs/ariadne-agent-error-correction-register-revision-654.md",
+    "docs/raisa-local-only-historical-diary-access-boundary-convergence-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-access-boundary-convergence-sol-acceptance.md",
+    "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/closeout/clockwork-rehearsal-attempt-001-rejection.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/closeout/closeout-driver-result.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/closeout/closeout-intent.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/closeout/explicit-stage-manifest.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/closeout/prepublication-planning-source-binding-rejection.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/efficacy-reading.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/evidence.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/next-tranche-contract.json",
+    "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/report.md",
+    "orchestration/human_inbox/yuri/2026-08-24--raisa-local-only-historical-diary-access-boundary-convergence.md"
+  ],
+  "path_count": 13,
+  "allowlist_path_count": 38,
+  "tracked_path_count": 0,
+  "allowlisted_untracked_path_count": 12,
+  "excluded_untracked_path_count": 681,
+  "unexpected_tracked_paths": [],
+  "git_add_invocations": 0,
+  "git_index_mutations": 0,
+  "docs_branding_included": false
+}
