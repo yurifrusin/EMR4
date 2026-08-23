@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.prepublication_contained_lapses.v1",
+  "recorded_at": "2026-08-24T05:28:25.6834754+10:00",
+  "operation_id": "raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal",
+  "incident_id": "AER-1145",
+  "lapse_count": 2,
+  "lapses": [
+    {
+      "code": "provider_free_runner_direct_script_import_failure",
+      "contained_before_archive_access": true,
+      "tests_collected_or_executed": false,
+      "correction": "invoke_repository_interpreter_dash_m_scripts_ariadne_provider_free_pytest"
+    },
+    {
+      "code": "case_sensitive_prose_assertion",
+      "contained_before_archive_access": true,
+      "tests_collected_or_executed": true,
+      "correction": "compare_stable_semantic_phrase_after_casefold"
+    }
+  ],
+  "archive_content_reads_caused": 0,
+  "provider_model_product_or_protected_ref_effects": 0
+}

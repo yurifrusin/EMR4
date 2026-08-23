@@ -1,0 +1,26 @@
+{
+  "schema_version": "raisa.historical_diary_document_story_time_coordinate_recovery_efficacy.v1",
+  "recorded_at": "2026-08-24T05:28:25.6834754+10:00",
+  "reviewed_source": "2e6974218f8a133e220d84684af432867d53fcd8",
+  "decision": "blocked_by_fixed_timeout_recovery_required",
+  "safety": {
+    "one_run_terminal_effective": true,
+    "private_cleanup_effective": true,
+    "manual_owned_process_recovery_required": true,
+    "source_value_leakage": 0,
+    "first_use_gate_remained_closed": true
+  },
+  "utility": {
+    "metadata_binding_effective": true,
+    "synthetic_mapper_controls_effective": true,
+    "real_slice_mapping_utility_measured": false,
+    "reason": "word_extractor_did_not_return_before_900_seconds"
+  },
+  "ergonomics": {
+    "typed_timeout_reason_missing": true,
+    "parent_owned_timeout_cleanup_missing": true,
+    "count_only_progress_or_throughput_reading_missing": true,
+    "same_attempt_retry_recommended": false
+  },
+  "recommendation": "recover_timeout_typing_exact_parent_cleanup_and_coordinate_throughput_on_authored_synthetic_documents_before_any_new_archive_content_authority"
+}

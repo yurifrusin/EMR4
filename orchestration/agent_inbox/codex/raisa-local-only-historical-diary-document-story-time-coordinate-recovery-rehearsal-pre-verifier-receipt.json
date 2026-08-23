@@ -1,0 +1,68 @@
+{
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "receipt_id": "raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal-pre-verifier",
+  "generated_at": "2026-08-24T05:28:25.6834754+10:00",
+  "result": "passed",
+  "rehydrated_from_receipt": false,
+  "sources": {
+    "live_handover_current_baton": {
+      "path": "AGENTS.md",
+      "status": "read_complete"
+    },
+    "current_authority_allocation": {
+      "conductor": "GPT Sol",
+      "implementation_owner": "GPT Sol",
+      "deepseek": "declined_negative",
+      "gemini": "not_applicable_neutral",
+      "native_subagents": "declined_negative"
+    },
+    "active_plan_and_acceptance": {
+      "plan": "docs/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal-plan.md",
+      "closeout": "docs/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal-closeout.md",
+      "reviewed_source": "2e6974218f8a133e220d84684af432867d53fcd8",
+      "decision": "accept_blocked_timeout_result"
+    },
+    "protected_evidence_boundaries": {
+      "historical_data": "one_run_consumed_no_retry_no_private_output",
+      "first_use_gate": "closed_pending_candidate_specific_evaluation",
+      "provider_product_protected_refs": "closed"
+    },
+    "git_refs_and_worktree": {
+      "branch": "codex/ariadne-bernie-davida-parallel-seam",
+      "head": "2e6974218f8a133e220d84684af432867d53fcd8",
+      "master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "origin_master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "handoff_current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "origin_handoff_current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "tracked_worktree": "clean_before_closeout_artifacts",
+      "docs_branding_preserved": true
+    }
+  },
+  "active_operation_latch": {
+    "operation_id": "raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal",
+    "status": "in_progress",
+    "content_terminal": "failed_no_retry",
+    "closeout_disposition": "accepted_blocked_then_continue_provider_free_synthetic_recovery"
+  },
+  "parallelism_efficacy": {
+    "deepseek": {
+      "disposition": "declined",
+      "leverage": "negative",
+      "rationale": "native_harness_paused_and_private_data_transport_forbidden"
+    },
+    "gemini": {
+      "disposition": "not_applicable",
+      "leverage": "neutral",
+      "rationale": "provider_model_transmission_forbidden"
+    },
+    "native_subagents": {
+      "disposition": "declined",
+      "leverage": "negative",
+      "rationale": "serial_private_run_terminal_and_cleanup_ownership"
+    },
+    "gpt_sol": {
+      "disposition": "owner",
+      "work_package": "acceptance_exact_cleanup_git_clockwork_and_synthetic_successor"
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal",
+  "recorded_at": "2026-08-24T05:28:25.6834754+10:00",
+  "closeout": {
+    "operation_id": "raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal",
+    "title": "Raisa local-only historical Diary document-story time-coordinate recovery rehearsal",
+    "builds_on": [
+      "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal"
+    ],
+    "authority_notes": [
+      "Yuri delegated gate timing and uninterrupted development; accept the consumed timeout result and continue only with provider-free authored-synthetic recovery."
+    ],
+    "decisions": [
+      {
+        "id": "accept-blocked-timeout-and-recover-on-authored-synthetic-word-documents",
+        "source": "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/next-tranche-contract.json",
+        "summary": "Accept exact source 2e6974218f8a133e220d84684af432867d53fcd8 without retry and recover timeout typing, parent cleanup and throughput without archive access."
+      }
+    ],
+    "claim_scope": [
+      "The sole content run exceeded the fixed 900-second ceiling; no mapping aggregate or private output was produced and exact post-timeout cleanup completed."
+    ],
+    "additional_receipts": [
+      "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/closeout/prepublication-contained-lapses.json",
+      "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/closeout/pushover-notification-receipt.json",
+      "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal-pre-verifier-receipt.json"
+    ],
+    "additional_artifacts": [
+      "docs/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal-plan.md",
+      "docs/security/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal-threat-model-delta.md",
+      "orchestration_harness/historical_diary_local_measured_privacy_probe.py",
+      "scripts/historical_diary_local_measured_privacy_probe.ps1",
+      "tests/test_raisa_local_only_bounded_historical_diary_snapshot_measured_privacy_probe.py",
+      "tests/test_raisa_local_only_historical_diary_document_story_time_coordinate_recovery_rehearsal.py",
+      "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/evidence.json",
+      "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/efficacy-reading.json",
+      "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/report.md",
+      "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/next-tranche-contract.json",
+      "docs/ariadne-agent-error-correction-register-revision-657.md",
+      "docs/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-24--raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal.md"
+    ],
+    "unresolved_gates": [
+      "Word coordinate throughput, typed timeout containment, any new historical content run and historical-derived first use remain gated."
+    ],
+    "journey": {
+      "strategic_role": "Recover realistic scheduling time while keeping historical-derived use default-deny.",
+      "outcome": "The mapper passed synthetic controls but the sole private run exceeded its controller ceiling."
+    },
+    "current_position": {
+      "strategic_role": "Make Word coordinate extraction operationally bounded before another private measurement.",
+      "why_now": "The fixed timeout prevented any coordinate utility reading and interrupted automatic child cleanup.",
+      "outcome": "Provider-free authored-synthetic recovery can type the timeout, own exact cleanup and measure throughput.",
+      "unlocks": [
+        "A separately planned new local measurement candidate only after recovery acceptance."
+      ],
+      "does_not_solve": [
+        "No historical archive access, reusable derived artifact, provider, product or production authority opens."
+      ],
+      "orientation_statement": "Repair the extraction clock without winding the private-data clock again."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery",
+      "active_tranche": "Raisa provider-free authored-synthetic historical Diary Word-coordinate timeout containment and throughput recovery",
+      "objective": "Recover typed timeout, exact parent-owned Word cleanup and count-only throughput using authored-synthetic documents only.",
+      "authority_source": "Yuri's delegated gate timing and uninterrupted-development authority within the accepted no-data successor contract.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_authored_synthetic_timeout_containment_and_throughput_plan"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only",
+    "no_product_patient_appointment_clinical_or_protected_data",
+    "no_historical_data_access",
+    "no_private_layout_coordinate_commit",
+    "first_use_scenario_gate_remains_closed"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "historical-diary-story-coordinate-preaccess-interface-controls-001",
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-story-coordinate-recovery",
+      "role": "orchestrator",
+      "resource_id": "provider-free-test-entrypoint-and-prose-semantics",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Pre-access verification uses the established module entry point and stable semantic assertions.",
+      "observed_error": "One direct-script import failure and one case-sensitive prose assertion were rejected before archive access.",
+      "detection_method": "The provider-free runner import boundary and focused pytest assertion failed closed.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.synthetic_verification_entrypoint_and_prose_require_stable_interfaces",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use the repository-interpreter module entry point and case-folded semantic prose checks.",
+        "prevention_control": "All provider-free controls must pass before metadata binding or archive content access.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-657.md",
+          "orchestration/continuity/raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal/evidence.json"
+        ]
+      },
+      "baton_summary": "consolidates two contained pre-access verification interface lapses."
+    }
+  ]
+}

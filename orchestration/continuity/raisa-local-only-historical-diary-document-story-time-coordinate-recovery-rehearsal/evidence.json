@@ -1,0 +1,88 @@
+{
+  "schema_version": "raisa.historical_diary_document_story_time_coordinate_recovery_evidence.v1",
+  "result": "raisa_local_only_historical_diary_story_coordinate_run_blocked_by_fixed_timeout",
+  "recorded_at": "2026-08-24T05:28:25.6834754+10:00",
+  "planning_source": "1000ecd4a8acd23a5753a60eb723ce83160ddc2c",
+  "reviewed_source": "2e6974218f8a133e220d84684af432867d53fcd8",
+  "five_source_rehydration": "passed",
+  "phase_a": {
+    "metadata_bind_attempts": 1,
+    "content_reads_before_pass": 0,
+    "candidate_document_count": 582,
+    "selected_file_count": 80,
+    "selected_total_bytes": 8151040,
+    "maximum_selected_file_bytes": 110592,
+    "relative_observation_span_seconds": 5160,
+    "manifest_readback": "passed",
+    "manifest_ignored": true
+  },
+  "phase_b": {
+    "content_run_count": 1,
+    "content_retry_authorized": false,
+    "controller_timeout_seconds": 900,
+    "typed_extraction_returned": false,
+    "aggregate_mapping_reading_available": false,
+    "decision": "blocked",
+    "reason_code": "fixed_900_second_controller_timeout",
+    "raw_controller_reason_code": "internal_local_probe_failure"
+  },
+  "privacy": {
+    "source_value_emitted": false,
+    "source_text_emitted": false,
+    "source_filename_path_or_timestamp_emitted": false,
+    "key_or_mapping_emitted": false,
+    "page_coordinate_or_distance_emitted": false,
+    "private_manifest_retained": false,
+    "private_projection_retained": false,
+    "ephemeral_key_persisted": false,
+    "mapping_persisted": false,
+    "page_coordinate_or_distance_persisted": false,
+    "provider_network_model_calls": 0,
+    "first_use_gate_status": "closed_pending_candidate_specific_evaluation"
+  },
+  "cleanup": {
+    "automatic_word_cleanup_completed": false,
+    "post_timeout_exact_owned_process_cleanup_completed": true,
+    "owned_word_processes_removed": 1,
+    "owned_word_processes_remaining": 0,
+    "preexisting_word_processes_preserved": 1,
+    "content_run_terminal_status": "failed",
+    "retained_ignored_artifact_classes": [
+      "aggregate_failure_reading",
+      "binding_reading",
+      "cleanup_receipt",
+      "content_run_terminal",
+      "post_timeout_cleanup_receipt"
+    ]
+  },
+  "deterministic_verification": {
+    "historical_diary_provider_free_controls": 175,
+    "failures": 0,
+    "provider_free_wrapper": "passed",
+    "ruff": "passed",
+    "compileall": "passed",
+    "powershell_parse": "passed",
+    "source_boundary_scan": "passed",
+    "git_diff_check": "passed",
+    "contained_prepublication_interface_lapses": 2
+  },
+  "parallelism": {
+    "deepseek": "declined_negative_native_harness_paused_and_private_data_worker_lease_forbidden",
+    "gemini": "not_applicable_neutral_provider_model_transmission_forbidden",
+    "native_subagents": "declined_negative_serial_manifest_word_process_coordinates_keys_and_run_terminal",
+    "gpt_sol": "implementation_local_execution_timeout_containment_acceptance_git_and_closeout_owner"
+  },
+  "conclusion": {
+    "coordinate_mapper_correctness_disproved": false,
+    "coordinate_utility_measured": false,
+    "operational_boundary_learned": "whole_slice_word_coordinate_extraction_exceeds_fixed_900_second_controller_ceiling",
+    "same_content_attempt_repeat_allowed": false
+  },
+  "zero_effects": {
+    "reusable_historical_derived_artifacts": 0,
+    "product_files_changed": 0,
+    "database_operations": 0,
+    "ordinary_practice_releases": 0,
+    "protected_ref_movements": 0
+  }
+}

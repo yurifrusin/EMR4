@@ -1,0 +1,44 @@
+{
+  "schema_version": "raisa.authored_synthetic_historical_diary_word_coordinate_timeout_throughput_recovery_contract.v1",
+  "status": "frozen_fail_closed_successor_contract",
+  "recorded_at": "2026-08-24T05:28:25.6834754+10:00",
+  "operation_id": "raisa-provider-free-authored-synthetic-historical-diary-word-coordinate-timeout-containment-throughput-recovery",
+  "builds_on_reviewed_source": "2e6974218f8a133e220d84684af432867d53fcd8",
+  "objective": "make_word_coordinate_extraction_typed_parent_cleanable_and_measurably_bounded_using_only_authored_synthetic_documents",
+  "required_repairs": [
+    "typed_word_extractor_timeout_reason_instead_of_internal_local_probe_failure",
+    "exact_parent_owned_word_process_identity_and_cleanup_on_timeout_or_child_loss",
+    "count_only_progress_and_elapsed_throughput_reading_without_text_filename_timestamp_or_coordinate_values",
+    "synthetic_benchmark_of_story_anchor_and_segment_coordinate_extraction",
+    "preserve_same_page_unique_nearest_maximum_four_point_mapper_without_fallback"
+  ],
+  "inputs": {
+    "historical_archive_enumeration_or_content_access": false,
+    "authored_synthetic_word_documents_only": true,
+    "provider_network_model_calls": false,
+    "product_patient_appointment_or_clinical_data": false
+  },
+  "acceptance": [
+    "all_existing_175_provider_free_historical_diary_controls_pass",
+    "typed_timeout_test_passes_without_generic_internal_reason",
+    "timeout_and_abnormal_child_exit_leave_zero_owned_word_processes",
+    "preexisting_word_process_is_preserved",
+    "progress_reading_contains_counts_and_elapsed_buckets_only",
+    "synthetic_story_coordinate_mapping_remains_exact_at_zero_and_four_points",
+    "no_private_text_page_coordinate_distance_key_or_mapping_is_retained_or_emitted",
+    "no_archive_content_run_occurs"
+  ],
+  "first_use_gate": {
+    "status": "closed_pending_candidate_specific_evaluation",
+    "opened_by_this_recovery": false,
+    "applies_to_wholly_authored_synthetic_tests": false
+  },
+  "strongest_result": "provider_free_recovery_candidate_for_separately_planned_new_local_measurement",
+  "authority_ceiling": {
+    "new_historical_content_run": false,
+    "historical_derived_artifact": false,
+    "provider_model_memory_product_or_runtime_use": false,
+    "ordinary_practice_activation": false,
+    "production_deployment_release_pages_or_protected_refs": false
+  }
+}
