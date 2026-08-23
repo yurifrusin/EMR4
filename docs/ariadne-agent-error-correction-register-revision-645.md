@@ -2,8 +2,8 @@
 
 <!-- ariadne-agent-error-register-reading
 revision: 645
-incident_count: 1126
-new_incident_ids: AER-1116,AER-1117,AER-1118,AER-1119,AER-1120,AER-1121,AER-1122,AER-1123,AER-1124,AER-1125,AER-1126
+incident_count: 1127
+new_incident_ids: AER-1116,AER-1117,AER-1118,AER-1119,AER-1120,AER-1121,AER-1122,AER-1123,AER-1124,AER-1125,AER-1126,AER-1127
 open_incident_count: 0
 -->
 
@@ -78,3 +78,12 @@ The first all-path timestamp scan reconstructed the repository parser with an
 incorrect string slice and rejected a valid offset timestamp locally. It made
 no mutation. The corrected scan uses the exact prefix, suffix, offset and date
 logic from the current-Baton consistency test.
+
+## AER-1127
+
+The third publication passed its governance suites, but the source efficacy
+reading counted only the two prior publication attempts and omitted the
+accepted attempt itself. The generation was restored byte-exactly at lease 210
+so the next source could freeze the convergent final total: four publication
+attempts and three byte-exact rollbacks. The review will treat transaction
+accounting as machine-derived output, not operator-authored input.

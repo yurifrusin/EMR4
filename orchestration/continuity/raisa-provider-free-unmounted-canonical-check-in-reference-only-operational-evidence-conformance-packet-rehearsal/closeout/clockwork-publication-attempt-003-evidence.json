@@ -1,0 +1,16 @@
+{
+  "schema_version": "ariadne.governance_live_tick_state.v1",
+  "status": "passed_then_rolled_back_for_exact_efficacy_accounting",
+  "head": "ff62978226341fadad13fe4a4b76281db796412e",
+  "source_commit": "ff62978226341fadad13fe4a4b76281db796412e",
+  "generation_id": "gen-b2ce71e410696d9d6491ee74fbe26c52ec9889f3eb9d4149d2c67320e8804be0",
+  "bundle_sha256": "b2ce71e410696d9d6491ee74fbe26c52ec9889f3eb9d4149d2c67320e8804be0",
+  "previous_generation_id": "gen-f3adfd61281b9aecd52ae67baf9ecc3631dfa1d65c089a7e73778d8707a9bd03",
+  "lease_sequence": 209,
+  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal",
+  "canonical_drift_before_rollback": 0,
+  "postpublication_verification": "passed",
+  "efficacy_accounting": "rejected_missing_accepted_publication_attempt",
+  "rollback_lease_sequence": 210,
+  "rollback_byte_exact": true
+}

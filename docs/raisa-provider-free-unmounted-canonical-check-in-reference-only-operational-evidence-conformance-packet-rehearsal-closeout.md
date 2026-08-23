@@ -41,7 +41,7 @@ real operational evidence and Yuri-owned choices are still absent.
 - no product source, route, API, client, runtime, feature flag, allowlist,
   status, waiting-area, deployment, Pages or protected ref changed.
 
-Eleven bounded workflow incidents were corrected without changing the accepted
+Twelve bounded workflow incidents were corrected without changing the accepted
 candidate: one wrong script invocation form, one forbidden manually repeated
 Git object in receipt prose, one copied schema-vocabulary value, one guessed
 test filename and one descriptive Continuity node kind outside the closed
@@ -58,6 +58,12 @@ scanned. They are retained as ergonomics evidence rather than hidden as
 incidental noise. The first all-path scan also reconstructed the timestamp
 parser with an incorrect string slice; the corrected scan reused the exact
 repository parsing rule.
+
+The third publication passed all governance tests but its efficacy reading
+still counted only the two preceding publication attempts. It was rolled back
+byte-exactly so the final source could freeze the convergent total of four
+publication attempts and three rollbacks; publication accounting is therefore
+another derived fact the operator should not author.
 
 ## Parallelism and Harness posture
 

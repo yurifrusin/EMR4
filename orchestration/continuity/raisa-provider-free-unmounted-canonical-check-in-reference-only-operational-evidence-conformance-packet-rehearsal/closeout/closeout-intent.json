@@ -47,7 +47,7 @@
           "id": "select-bounded-clockwork-ergonomics-review",
           "source": "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json",
           "status": "accepted",
-          "summary": "Use the eleven contained reruns and the extended native-Harness gear period as measured input to a provider-free read-only clockwork ergonomics and efficacy review."
+          "summary": "Use the twelve contained reruns and the extended native-Harness gear period as measured input to a provider-free read-only clockwork ergonomics and efficacy review."
         }
       ],
       "claim_scope": [
@@ -110,7 +110,7 @@
     },
     "current_position": {
       "strategic_role": "Measure whether the governance clockwork can retain its safety while asking less clerical work of the orchestrator",
-      "why_now": "The reference-only packet is complete and its eleven corrected interface reruns join the extended DeepSeek gear history as a bounded evidence set.",
+      "why_now": "The reference-only packet is complete and its twelve corrected interface reruns join the extended DeepSeek gear history as a bounded evidence set.",
       "outcome": "A read-only review will distinguish safety controls from avoidable operator inputs and rank only simplifications with measurable removed work.",
       "unlocks": [
         "A narrow evidence-backed plan for the highest-yield clockwork ergonomic repair, if one is justified."
@@ -185,6 +185,11 @@
       {
         "incident_id": "reference-packet-timestamp-scan-parser",
         "source_id": "reference-packet-local-011",
+        "peers": []
+      },
+      {
+        "incident_id": "reference-packet-publication-accounting",
+        "source_id": "reference-packet-local-012",
         "peers": []
       }
     ],
@@ -645,6 +650,40 @@
         ]
       },
       "baton_summary": "records one contained reconstructed timestamp-parser lapse and the exact-test-rule correction."
+    },
+    {
+      "attempt_key": "reference-packet-publication-accounting-001",
+      "observed_on": "2026-08-23",
+      "tranche": "check-in-reference-packet",
+      "role": "orchestrator",
+      "resource_id": "closeout-efficacy-accounting",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "moderate",
+      "expected_invariant": "The accepted efficacy reading counts every publication attempt and rollback, including the final accepted transaction.",
+      "observed_error": "The third publication passed governance verification but its source efficacy reading counted only the two preceding publication attempts.",
+      "detection_method": "Postpublication efficacy inspection compared the declared counter with the retained attempt and rollback receipts.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-publication-attempt-003-rollback-receipt.json",
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json"
+      ],
+      "candidate_state": "accepted_candidate_changed",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.premature_publication_attempt_accounting",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "corrected_fresh_attempt",
+        "action": "Restore the previous generation byte-exactly, bind lease 210 and freeze the convergent four-attempt three-rollback total before final publication.",
+        "prevention_control": "The ergonomics review will require publication and rollback counters to be derived after transaction completion rather than authored in the source intent.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/closeout/clockwork-publication-attempt-003-rollback-receipt.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-reference-only-operational-evidence-conformance-packet-rehearsal/efficacy-reading.json"
+        ]
+      },
+      "baton_summary": "records one premature publication-counter reading and the convergent four-attempt correction."
     }
   ],
   "next_operation_protected_boundaries": [
