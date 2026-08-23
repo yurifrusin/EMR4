@@ -6,6 +6,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
+from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,6 +17,7 @@ from orchestration_harness.governance_clockwork_tick import (
     BLOCKED_INTENT_VERSION,
     CHECKPOINT_INTENT_VERSION,
     USER_DECISION_INTENT_VERSION,
+    ClockworkTickRejection,
     build_checkpoint_tick_generation,
     build_user_decision_tick_generation,
     build_tick_generation,
@@ -33,6 +35,7 @@ from orchestration_harness import transactional_closeout as tc
 
 
 CONTRACT = ROOT / "orchestration/continuity/ariadne-provider-free-clockwork-live-canonical-adoption-retirement/contract.json"
+TRANSACTION_FACTS_VERSION = "ariadne.governance_command_transaction_facts.v1"
 
 
 def _load(path: Path) -> dict:
@@ -56,6 +59,166 @@ def _intent_path(raw: Path) -> Path:
     return path
 
 
+def _transaction_facts(
+    *,
+    disposition: str,
+    preparations: int,
+    preparation_rejections: int,
+    publication_attempts: int,
+    published_generations: int,
+    rollback_attempts: int,
+    byte_exact_rollbacks: int,
+    idempotent_readbacks: int,
+    base_lease_sequence: int,
+    prospective_lease_sequence: int | None,
+    result_lease_sequence: int,
+    base_generation_id: str,
+    prepared_generation_id: str | None,
+    result_generation_id: str,
+) -> dict[str, Any]:
+    return {
+        "schema_version": TRANSACTION_FACTS_VERSION,
+        "command_disposition": disposition,
+        "invocations": 1,
+        "preparations": preparations,
+        "preparation_rejections": preparation_rejections,
+        "publication_attempts": publication_attempts,
+        "published_generations": published_generations,
+        "rollback_attempts": rollback_attempts,
+        "byte_exact_rollbacks": byte_exact_rollbacks,
+        "idempotent_readbacks": idempotent_readbacks,
+        "base_lease_sequence": base_lease_sequence,
+        "prospective_lease_sequence": prospective_lease_sequence,
+        "result_lease_sequence": result_lease_sequence,
+        "committed_lease_advance": result_lease_sequence - base_lease_sequence,
+        "base_generation_id": base_generation_id,
+        "prepared_generation_id": prepared_generation_id,
+        "result_generation_id": result_generation_id,
+    }
+
+
+def _prepared_transaction_facts(
+    prepared: dict[str, Any], *, published: bool
+) -> dict[str, Any]:
+    base = prepared["base_pointer"]
+    target = prepared["pointer"]
+    generation_id = prepared["generation_manifest"]["generation_id"]
+    return _transaction_facts(
+        disposition="publication_committed" if published else "dry_preparation",
+        preparations=1,
+        preparation_rejections=0,
+        publication_attempts=int(published),
+        published_generations=int(published),
+        rollback_attempts=0,
+        byte_exact_rollbacks=0,
+        idempotent_readbacks=0,
+        base_lease_sequence=base["lease_sequence"],
+        prospective_lease_sequence=target["lease_sequence"],
+        result_lease_sequence=(
+            target["lease_sequence"] if published else base["lease_sequence"]
+        ),
+        base_generation_id=base["selected_generation_id"],
+        prepared_generation_id=generation_id,
+        result_generation_id=(
+            generation_id if published else base["selected_generation_id"]
+        ),
+    )
+
+
+def _idempotent_transaction_facts(state: dict[str, Any]) -> dict[str, Any]:
+    return _transaction_facts(
+        disposition="idempotent_readback",
+        preparations=0,
+        preparation_rejections=0,
+        publication_attempts=0,
+        published_generations=0,
+        rollback_attempts=0,
+        byte_exact_rollbacks=0,
+        idempotent_readbacks=1,
+        base_lease_sequence=state["lease_sequence"],
+        prospective_lease_sequence=None,
+        result_lease_sequence=state["lease_sequence"],
+        base_generation_id=state["generation_id"],
+        prepared_generation_id=None,
+        result_generation_id=state["generation_id"],
+    )
+
+
+def _rollback_transaction_facts(result: dict[str, Any]) -> dict[str, Any]:
+    result_lease = result["lease_sequence"]
+    return _transaction_facts(
+        disposition="byte_exact_rollback",
+        preparations=0,
+        preparation_rejections=0,
+        publication_attempts=0,
+        published_generations=0,
+        rollback_attempts=1,
+        byte_exact_rollbacks=int(result["byte_exact"] is True),
+        idempotent_readbacks=0,
+        base_lease_sequence=result_lease - 1,
+        prospective_lease_sequence=result_lease,
+        result_lease_sequence=result_lease,
+        base_generation_id=result["rolled_back_from_generation_id"],
+        prepared_generation_id=None,
+        result_generation_id=result["selected_generation_id"],
+    )
+
+
+def _command_result(
+    result: dict[str, Any], transaction_facts: dict[str, Any]
+) -> dict[str, Any]:
+    return {
+        **result,
+        "transaction_facts": transaction_facts,
+        "caller_authored_derived_fields": 0,
+        "live_publication_count": transaction_facts["published_generations"],
+        "bespoke_updater_executions": 0,
+    }
+
+
+def _prospective_rejection_result(
+    error: ClockworkTickRejection,
+) -> dict[str, Any]:
+    prefix = "tick_prospective_current_node_evidence:"
+    message = str(error)
+    if not message.startswith(prefix):
+        raise error
+    state = validate_tick_live_state(ROOT, validate_contract(_load(CONTRACT)))
+    transaction_facts = _transaction_facts(
+        disposition="prospective_evidence_rejected",
+        preparations=1,
+        preparation_rejections=1,
+        publication_attempts=0,
+        published_generations=0,
+        rollback_attempts=0,
+        byte_exact_rollbacks=0,
+        idempotent_readbacks=0,
+        base_lease_sequence=state["lease_sequence"],
+        prospective_lease_sequence=None,
+        result_lease_sequence=state["lease_sequence"],
+        base_generation_id=state["generation_id"],
+        prepared_generation_id=None,
+        result_generation_id=state["generation_id"],
+    )
+    errors = message.removeprefix(prefix).split(",")
+    return _command_result(
+        {
+            "schema_version": (
+                "ariadne.governance_prospective_evidence_rejection.v1"
+            ),
+            "status": "revision_required",
+            "reason": "tick_prospective_current_node_evidence",
+            "errors": errors,
+            "error_count": len(errors),
+            "source_commit": state["source_commit"],
+            "generation_id": state["generation_id"],
+            "previous_generation_id": state["previous_generation_id"],
+            "lease_sequence": state["lease_sequence"],
+        },
+        transaction_facts,
+    )
+
+
 def _write_outputs(topic: Path, result: dict, *, prefix: str = "clockwork-tick") -> None:
     evidence = topic / f"{prefix}-evidence.json"
     report = topic / f"{prefix}-report.md"
@@ -71,7 +234,10 @@ def _write_outputs(topic: Path, result: dict, *, prefix: str = "clockwork-tick")
         f"Source: `{result['source_commit']}`\n\n"
         f"Generation: `{result['generation_id']}`\n\n"
         f"Previous generation: `{result['previous_generation_id']}`\n\n"
-        f"Lease sequence: {result['lease_sequence']}\n",
+        f"Lease sequence: {result['lease_sequence']}\n\n"
+        f"Command disposition: `{result['transaction_facts']['command_disposition']}`\n\n"
+        f"Published generations: {result['transaction_facts']['published_generations']}\n\n"
+        f"Byte-exact rollbacks: {result['transaction_facts']['byte_exact_rollbacks']}\n",
         encoding="utf-8",
         newline="\n",
     )
@@ -137,7 +303,8 @@ def main(argv: list[str] | None = None) -> int:
     if arguments.rollback:
         if arguments.intent is not None:
             parser.error("--rollback does not accept --intent")
-        result = rollback_tick_generation(ROOT, contract, writer_id="clockwork")
+        rollback = rollback_tick_generation(ROOT, contract, writer_id="clockwork")
+        result = _command_result(rollback, _rollback_transaction_facts(rollback))
     else:
         if arguments.intent is None:
             parser.error("--check and --publish require --intent")
@@ -151,7 +318,8 @@ def main(argv: list[str] | None = None) -> int:
             event_kind=event_kind,
             intent_sha256=intent_sha256,
         ):
-            result = validate_tick_live_state(ROOT, contract)
+            state = validate_tick_live_state(ROOT, contract)
+            result = _command_result(state, _idempotent_transaction_facts(state))
             if arguments.publish:
                 _write_outputs(
                     intent_path.parent,
@@ -174,26 +342,26 @@ def main(argv: list[str] | None = None) -> int:
             else:
                 prepared = build_tick_generation(ROOT, contract, intent)
             if arguments.check:
-                result = {
-                    "schema_version": "ariadne.governance_live_tick_dry_run.v1",
-                    "status": "passed",
-                    "source_commit": prepared["source_commit"],
-                    "generation_id": prepared["generation_manifest"]["generation_id"],
-                    "bundle_sha256": prepared["generation_manifest"]["bundle_sha256"],
-                    "previous_generation_id": prepared["pointer"]["previous_generation_id"],
-                    "lease_sequence": prepared["pointer"]["lease_sequence"],
-                    "caller_authored_derived_fields": 0,
-                    "live_publication_count": 0,
-                }
+                result = _command_result(
+                    {
+                        "schema_version": "ariadne.governance_live_tick_dry_run.v1",
+                        "status": "passed",
+                        "source_commit": prepared["source_commit"],
+                        "generation_id": prepared["generation_manifest"]["generation_id"],
+                        "bundle_sha256": prepared["generation_manifest"]["bundle_sha256"],
+                        "previous_generation_id": prepared["pointer"]["previous_generation_id"],
+                        "lease_sequence": prepared["pointer"]["lease_sequence"],
+                    },
+                    _prepared_transaction_facts(prepared, published=False),
+                )
             else:
-                result = {
-                    **publish_tick_generation(
-                        ROOT, prepared, writer_id="clockwork"
-                    ),
-                    "caller_authored_derived_fields": 0,
-                    "live_publication_count": 1,
-                    "bespoke_updater_executions": 0,
-                }
+                published = publish_tick_generation(
+                    ROOT, prepared, writer_id="clockwork"
+                )
+                result = _command_result(
+                    published,
+                    _prepared_transaction_facts(prepared, published=True),
+                )
                 _write_outputs(
                     intent_path.parent,
                     result,
@@ -207,5 +375,14 @@ def main(argv: list[str] | None = None) -> int:
     return 0
 
 
+def cli(argv: list[str] | None = None) -> int:
+    try:
+        return main(argv)
+    except ClockworkTickRejection as error:
+        result = _prospective_rejection_result(error)
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+        return 1
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(cli())

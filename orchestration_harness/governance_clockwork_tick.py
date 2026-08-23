@@ -6,7 +6,7 @@ import copy
 import json
 import os
 import re
-from datetime import date
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any, NoReturn
 
@@ -123,6 +123,8 @@ BATON_TABLE_END = "### Compact historical evaluation and transition state"
 BATON_INDEX_LABEL = "Current Baton acceptance index"
 BATON_MAX_BYTES = 80_000
 BATON_MAX_LINES = 500
+CURRENT_NODE_HUMAN_EVIDENCE_CATEGORIES = ("plans", "closeouts", "acceptances")
+BRISBANE_TIMESTAMP_SUFFIX = " (Australia/Brisbane)"
 
 DERIVED_INPUT_KEYS = {
     "source_commit",
@@ -209,6 +211,120 @@ def _strings(value: object, rule: str, *, maximum: int = 500) -> list[str]:
     if len(result) != len(set(result)):
         _reject(rule)
     return result
+
+
+def prospective_human_evidence_header_errors(
+    text: str, *, evidence_path: str
+) -> tuple[str, ...]:
+    """Return every Brisbane Date/Timestamp header defect in stable order."""
+
+    prefix = f"{evidence_path}:"
+    header = text.splitlines()[:12]
+    date_lines = [line for line in header if line.startswith("Date:")]
+    timestamp_lines = [line for line in header if line.startswith("Timestamp:")]
+    errors: list[str] = []
+    declared_date: date | None = None
+    instant: datetime | None = None
+
+    if len(date_lines) != 1:
+        errors.append(prefix + "date_count")
+    else:
+        date_text = date_lines[0].removeprefix("Date:").strip()
+        try:
+            declared_date = date.fromisoformat(date_text)
+        except ValueError:
+            errors.append(prefix + "date_invalid")
+
+    if len(timestamp_lines) != 1:
+        errors.append(prefix + "timestamp_count")
+    else:
+        timestamp_text = timestamp_lines[0].removeprefix("Timestamp:").strip()
+        match = re.fullmatch(r"(.+) \(([^()]*)\)", timestamp_text)
+        if match is None:
+            errors.append(prefix + "timezone_name")
+            iso_text = timestamp_text
+        else:
+            iso_text, timezone_name = match.groups()
+            if timezone_name != "Australia/Brisbane":
+                errors.append(prefix + "timezone_name")
+        try:
+            instant = datetime.fromisoformat(iso_text)
+        except ValueError:
+            errors.append(prefix + "timestamp_invalid")
+        else:
+            if instant.tzinfo is None:
+                errors.append(prefix + "offset_required")
+            elif instant.utcoffset() != timedelta(hours=10):
+                errors.append(prefix + "offset_not_brisbane")
+
+    if (
+        declared_date is not None
+        and instant is not None
+        and instant.date() != declared_date
+    ):
+        errors.append(prefix + "calendar_date_mismatch")
+    return tuple(errors)
+
+
+def prospective_current_node_human_evidence_errors(
+    repo_root: Path, node_value: object
+) -> tuple[str, ...]:
+    """Collect all prospective plan/closeout/acceptance defects before projection."""
+
+    if not isinstance(node_value, dict):
+        return ("node:object_required",)
+    evidence = node_value.get("evidence")
+    if not isinstance(evidence, dict):
+        return ("evidence:object_required",)
+
+    errors: list[str] = []
+    seen_paths: set[str] = set()
+    repository_root = repo_root.resolve()
+    for category in CURRENT_NODE_HUMAN_EVIDENCE_CATEGORIES:
+        values = evidence.get(category)
+        if not isinstance(values, list) or not values:
+            errors.append(f"{category}:nonempty_list_required")
+            continue
+        for index, raw_path in enumerate(values):
+            label = f"{category}[{index}]"
+            if not isinstance(raw_path, str) or not raw_path:
+                errors.append(label + ":path_string_required")
+                continue
+            if raw_path in seen_paths:
+                errors.append(label + ":duplicate_path")
+            else:
+                seen_paths.add(raw_path)
+            if not raw_path.endswith(".md"):
+                errors.append(label + ":markdown_path_required")
+            relative = Path(raw_path)
+            if (
+                "\\" in raw_path
+                or relative.is_absolute()
+                or ".." in relative.parts
+                or raw_path.startswith("docs/branding/")
+            ):
+                errors.append(label + ":unsafe_path")
+                continue
+            resolved = (repo_root / relative).resolve()
+            if not resolved.is_relative_to(repository_root):
+                errors.append(label + ":unsafe_path")
+                continue
+            if not raw_path.endswith(".md"):
+                continue
+            if not resolved.is_file():
+                errors.append(label + ":file_missing")
+                continue
+            try:
+                text = resolved.read_text(encoding="utf-8")
+            except (OSError, UnicodeError):
+                errors.append(label + ":file_unreadable")
+                continue
+            errors.extend(
+                prospective_human_evidence_header_errors(
+                    text, evidence_path=raw_path
+                )
+            )
+    return tuple(errors)
 
 
 def _validate_commands(value: object) -> dict[str, Any]:
@@ -1347,6 +1463,14 @@ def build_tick_generation(
     _reject_recorded_next_operation(
         graph, manifest["next_operation"]["operation_id"]
     )
+    prospective_evidence_errors = prospective_current_node_human_evidence_errors(
+        repo_root, manifest["node"]
+    )
+    if prospective_evidence_errors:
+        _reject(
+            "tick_prospective_current_node_evidence:"
+            + ",".join(prospective_evidence_errors)
+        )
     try:
         bundle = tc.prepare_transaction(
             manifest,

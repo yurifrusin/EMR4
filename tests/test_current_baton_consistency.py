@@ -1,8 +1,11 @@
 import json
-from datetime import date, datetime, timedelta
 from pathlib import Path
 
 import pytest
+
+from orchestration_harness.governance_clockwork_tick import (
+    prospective_human_evidence_header_errors,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,7 +26,6 @@ CLOCKWORK_TRANSACTION = (
 ACTIVE_LATCH = (
     ROOT / "orchestration/continuity/ariadne-active-operation-latch/current.json"
 )
-BRISBANE_TIMESTAMP_SUFFIX = " (Australia/Brisbane)"
 CURRENT_NODE_TIMESTAMP_CATEGORIES = ("plans", "closeouts", "acceptances")
 REPAIRED_PREDECESSOR_TIMESTAMP_PATHS = (
     "docs/raisa-provider-free-default-off-canonical-check-in-non-phi-"
@@ -165,40 +167,10 @@ def _selected_clockwork_transaction() -> dict | None:
 
 
 def _assert_brisbane_timestamp_header(text: str, *, evidence_path: str) -> None:
-    header = text.splitlines()[:12]
-    date_lines = [line for line in header if line.startswith("Date:")]
-    timestamp_lines = [line for line in header if line.startswith("Timestamp:")]
-    assert len(date_lines) == 1, (
-        f"{evidence_path}: expected exactly one top-level Date line"
+    errors = prospective_human_evidence_header_errors(
+        text, evidence_path=evidence_path
     )
-    assert len(timestamp_lines) == 1, (
-        f"{evidence_path}: expected exactly one top-level Timestamp line"
-    )
-
-    date_text = date_lines[0].removeprefix("Date:").strip()
-    try:
-        declared_date = date.fromisoformat(date_text)
-    except ValueError as exc:
-        raise AssertionError(f"{evidence_path}: invalid ISO Date") from exc
-
-    timestamp_text = timestamp_lines[0].removeprefix("Timestamp:").strip()
-    assert timestamp_text.endswith(BRISBANE_TIMESTAMP_SUFFIX), (
-        f"{evidence_path}: Timestamp must name Australia/Brisbane"
-    )
-    iso_text = timestamp_text.removesuffix(BRISBANE_TIMESTAMP_SUFFIX)
-    try:
-        instant = datetime.fromisoformat(iso_text)
-    except ValueError as exc:
-        raise AssertionError(f"{evidence_path}: invalid ISO Timestamp") from exc
-    assert instant.tzinfo is not None, (
-        f"{evidence_path}: Timestamp must carry an explicit offset"
-    )
-    assert instant.utcoffset() == timedelta(hours=10), (
-        f"{evidence_path}: Australia/Brisbane Timestamp offset must be +10:00"
-    )
-    assert instant.date() == declared_date, (
-        f"{evidence_path}: Date and Timestamp calendar dates must match"
-    )
+    assert not errors, ",".join(errors)
 
 
 def _current_node_timestamp_evidence_paths() -> tuple[str, ...]:
@@ -247,24 +219,24 @@ def test_current_node_and_repaired_predecessor_evidence_have_brisbane_timestamps
 @pytest.mark.parametrize(
     ("header", "reason"),
     (
-        ("Date: 2026-08-23\n", "exactly one top-level Timestamp"),
+        ("Date: 2026-08-23\n", "timestamp_count"),
         (
             "Date: 2026-08-23\nTimestamp: 2026-08-23T00:00:00+10:00 (Etc/GMT-10)\n",
-            "must name Australia/Brisbane",
+            "timezone_name",
         ),
         (
             "Date: 2026-08-23\n"
             "Timestamp: 2026-08-23T00:00:00+11:00 (Australia/Brisbane)\n",
-            "offset must be \\+10:00",
+            "offset_not_brisbane",
         ),
         (
             "Date: 2026-08-23\nTimestamp: not-a-time (Australia/Brisbane)\n",
-            "invalid ISO Timestamp",
+            "timestamp_invalid",
         ),
         (
             "Date: 2026-08-22\n"
             "Timestamp: 2026-08-23T00:00:00+10:00 (Australia/Brisbane)\n",
-            "calendar dates must match",
+            "calendar_date_mismatch",
         ),
     ),
 )

@@ -31,6 +31,7 @@ from orchestration_harness.governance_clockwork_tick import (
     build_tick_generation,
     build_user_decision_tick_generation,
     publish_tick_generation,
+    prospective_current_node_human_evidence_errors,
     rollback_tick_generation,
     validate_blocked_tick_intent,
     validate_checkpoint_tick_intent,
@@ -48,7 +49,12 @@ from orchestration_harness.governance_live_adoption import (
     validate_live_state,
 )
 from scripts.ariadne_governance_clockwork_tick import (
+    _command_result,
+    _idempotent_transaction_facts,
     _is_exact_published_intent,
+    _prepared_transaction_facts,
+    _prospective_rejection_result,
+    _rollback_transaction_facts,
     _write_outputs,
 )
 
@@ -76,6 +82,24 @@ def _json(path: Path) -> dict:
 
 def _replay_intent(worktree: Path) -> dict:
     intent = _json(worktree / INTENT_PATH.relative_to(ROOT))
+    evidence = intent["transaction_manifest"]["node"]["evidence"]
+    fixture_paths = {
+        "plans": "docs/clockwork-prospective-plan-fixture.md",
+        "closeouts": "docs/clockwork-prospective-closeout-fixture.md",
+        "acceptances": (
+            "orchestration/agent_inbox/codex/"
+            "clockwork-prospective-fixture-acceptance.md"
+        ),
+    }
+    for category, relative in fixture_paths.items():
+        (worktree / relative).write_text(
+            "# Prospective clockwork fixture\n\n"
+            "Date: 2026-08-19\n\n"
+            "Timestamp: 2026-08-19T14:26:41+10:00 (Australia/Brisbane)\n",
+            encoding="utf-8",
+            newline="\n",
+        )
+        evidence[category] = [relative]
     compaction = _json(
         worktree
         / "docs/handover-ledgers/current-baton-acceptance-index.manifest.json"
@@ -142,12 +166,148 @@ def test_cli_output_pair_is_written_together(tmp_path: Path) -> None:
         "generation_id": "gen-" + "b" * 64,
         "previous_generation_id": "gen-" + "c" * 64,
         "lease_sequence": 8,
+        "transaction_facts": {
+            "command_disposition": "publication_committed",
+            "published_generations": 1,
+            "byte_exact_rollbacks": 0,
+        },
     }
     _write_outputs(tmp_path, result, prefix="clockwork-checkpoint-tick")
     assert (tmp_path / "clockwork-checkpoint-tick-evidence.json").is_file()
     report = tmp_path / "clockwork-checkpoint-tick-report.md"
     assert report.is_file()
-    assert "Lease sequence: 8" in report.read_text(encoding="utf-8")
+    report_text = report.read_text(encoding="utf-8")
+    assert "Lease sequence: 8" in report_text
+    assert "Command disposition: `publication_committed`" in report_text
+    assert "Published generations: 1" in report_text
+
+
+def test_prospective_human_evidence_returns_the_complete_ordered_error_set(
+    tmp_path: Path,
+) -> None:
+    docs = tmp_path / "docs"
+    docs.mkdir()
+    (docs / "plan.md").write_text(
+        "# Plan\n\nDate: not-a-date\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    (docs / "closeout.md").write_text(
+        "# Closeout\n\n"
+        "Date: 2026-08-22\n\n"
+        "Timestamp: 2026-08-23T00:00:00+11:00 (Australia/Brisbane)\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    node = {
+        "evidence": {
+            "plans": ["docs/plan.md"],
+            "closeouts": ["docs/closeout.md"],
+            "acceptances": [
+                "docs/closeout.md",
+                "docs/missing.md",
+                "docs/not-markdown.json",
+                "../escape.md",
+            ],
+        }
+    }
+
+    assert prospective_current_node_human_evidence_errors(tmp_path, node) == (
+        "docs/plan.md:date_invalid",
+        "docs/plan.md:timestamp_count",
+        "docs/closeout.md:offset_not_brisbane",
+        "docs/closeout.md:calendar_date_mismatch",
+        "acceptances[0]:duplicate_path",
+        "docs/closeout.md:offset_not_brisbane",
+        "docs/closeout.md:calendar_date_mismatch",
+        "acceptances[1]:file_missing",
+        "acceptances[2]:markdown_path_required",
+        "acceptances[3]:unsafe_path",
+    )
+
+    node["evidence"]["acceptances"] = []
+    assert prospective_current_node_human_evidence_errors(tmp_path, node)[-1] == (
+        "acceptances:nonempty_list_required"
+    )
+
+
+def test_command_local_transaction_facts_are_derived_for_every_disposition() -> None:
+    prepared = {
+        "base_pointer": {
+            "lease_sequence": 7,
+            "selected_generation_id": "gen-base",
+        },
+        "pointer": {"lease_sequence": 8},
+        "generation_manifest": {"generation_id": "gen-prepared"},
+    }
+    dry = _prepared_transaction_facts(prepared, published=False)
+    assert dry["command_disposition"] == "dry_preparation"
+    assert dry["preparations"] == 1
+    assert dry["preparation_rejections"] == 0
+    assert dry["publication_attempts"] == 0
+    assert dry["base_lease_sequence"] == 7
+    assert dry["prospective_lease_sequence"] == 8
+    assert dry["result_lease_sequence"] == 7
+    assert dry["committed_lease_advance"] == 0
+    assert dry["result_generation_id"] == "gen-base"
+
+    published = _prepared_transaction_facts(prepared, published=True)
+    assert published["command_disposition"] == "publication_committed"
+    assert published["publication_attempts"] == 1
+    assert published["published_generations"] == 1
+    assert published["result_lease_sequence"] == 8
+    assert published["committed_lease_advance"] == 1
+    assert published["result_generation_id"] == "gen-prepared"
+
+    readback = _idempotent_transaction_facts(
+        {"lease_sequence": 8, "generation_id": "gen-prepared"}
+    )
+    assert readback["command_disposition"] == "idempotent_readback"
+    assert readback["idempotent_readbacks"] == 1
+    assert readback["preparations"] == 0
+    assert readback["preparation_rejections"] == 0
+    assert readback["publication_attempts"] == 0
+    assert readback["committed_lease_advance"] == 0
+
+    rollback = _rollback_transaction_facts(
+        {
+            "lease_sequence": 9,
+            "rolled_back_from_generation_id": "gen-prepared",
+            "selected_generation_id": "gen-base",
+            "byte_exact": True,
+        }
+    )
+    assert rollback["command_disposition"] == "byte_exact_rollback"
+    assert rollback["rollback_attempts"] == 1
+    assert rollback["byte_exact_rollbacks"] == 1
+    assert rollback["base_lease_sequence"] == 8
+    assert rollback["result_lease_sequence"] == 9
+    assert rollback["committed_lease_advance"] == 1
+    assert rollback["base_generation_id"] == "gen-prepared"
+    assert rollback["result_generation_id"] == "gen-base"
+
+    command_result = _command_result(
+        {"status": "passed"}, published
+    )
+    assert command_result["live_publication_count"] == 1
+    assert command_result["caller_authored_derived_fields"] == 0
+    assert command_result["bespoke_updater_executions"] == 0
+
+    rejected = _prospective_rejection_result(
+        ClockworkTickRejection(
+            "tick_prospective_current_node_evidence:"
+            "docs/plan.md:timestamp_count,docs/closeout.md:date_count"
+        )
+    )
+    assert rejected["status"] == "revision_required"
+    assert rejected["error_count"] == 2
+    assert rejected["errors"] == [
+        "docs/plan.md:timestamp_count",
+        "docs/closeout.md:date_count",
+    ]
+    assert rejected["transaction_facts"]["preparation_rejections"] == 1
+    assert rejected["transaction_facts"]["publication_attempts"] == 0
+    assert rejected["transaction_facts"]["committed_lease_advance"] == 0
 
 
 def _blocked_intent(worktree: Path) -> dict:
@@ -680,6 +840,56 @@ def test_checkpoint_intent_is_closed_and_rejects_derived_or_no_progress_input() 
     invalid["operation_id"] = "INVALID"
     with pytest.raises(ClockworkTickRejection, match="checkpoint_tick_operation_id"):
         validate_checkpoint_tick_intent(invalid, contract)
+
+
+def test_generation_rejects_all_prospective_header_defects_before_mutation(
+    tmp_path: Path,
+) -> None:
+    with _worktree(tmp_path / "prospective-errors") as worktree:
+        contract = validate_contract(_json(worktree / CONTRACT_PATH.relative_to(ROOT)))
+        intent = _replay_intent(worktree)
+        evidence = intent["transaction_manifest"]["node"]["evidence"]
+        plan_path = worktree / evidence["plans"][0]
+        closeout_path = worktree / evidence["closeouts"][0]
+        plan_path.write_text(
+            "# Plan\n\nDate: not-a-date\n",
+            encoding="utf-8",
+            newline="\n",
+        )
+        closeout_path.write_text(
+            "# Closeout\n\n"
+            "Date: 2026-08-22\n\n"
+            "Timestamp: 2026-08-23T00:00:00+11:00 (Australia/Brisbane)\n",
+            encoding="utf-8",
+            newline="\n",
+        )
+        canonical_paths, metadata_paths, pointer_path = _paths(worktree, contract)
+        before_canonical = {
+            key: path.read_bytes() for key, path in canonical_paths.items()
+        }
+        before_metadata = {
+            key: path.read_bytes() for key, path in metadata_paths.items()
+        }
+        before_pointer = pointer_path.read_bytes()
+
+        with pytest.raises(
+            ClockworkTickRejection,
+            match="tick_prospective_current_node_evidence",
+        ) as caught:
+            build_tick_generation(worktree, contract, intent)
+
+        rejection = str(caught.value)
+        assert f"{evidence['plans'][0]}:date_invalid" in rejection
+        assert f"{evidence['plans'][0]}:timestamp_count" in rejection
+        assert f"{evidence['closeouts'][0]}:offset_not_brisbane" in rejection
+        assert f"{evidence['closeouts'][0]}:calendar_date_mismatch" in rejection
+        assert {
+            key: path.read_bytes() for key, path in canonical_paths.items()
+        } == before_canonical
+        assert {
+            key: path.read_bytes() for key, path in metadata_paths.items()
+        } == before_metadata
+        assert pointer_path.read_bytes() == before_pointer
 
 
 def test_reviewed_fixture_generation_is_preparable(tmp_path: Path) -> None:
