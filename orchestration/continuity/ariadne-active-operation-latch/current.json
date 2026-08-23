@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal",
-  "active_tranche": "Raisa local-only historical Diary structural time-axis recovery rehearsal",
-  "objective": "Recover trustworthy time mapping under the local privacy boundary.",
+  "operation_id": "raisa-local-only-historical-diary-document-story-time-coordinate-recovery-rehearsal",
+  "active_tranche": "Raisa local-only historical Diary document-story time-coordinate recovery rehearsal",
+  "objective": "Recover explicit document-story time anchors and map them through bounded same-page Word-rendered coordinates.",
   "status": "in_progress",
-  "source_head": "08b6272bde1f72e97b36d8b4a3673de8063c82ba",
+  "source_head": "95f71be8dbaa4486913badf0049d95eb4baf770b",
   "authority_source": "Yuri's historical Diary direction, delegated gate timing and uninterrupted-development authority.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_synthetic_first_structural_time_axis_recovery_plan",
+    "completed_stage": "Accepted raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_synthetic_first_word_story_coordinate_mapper_plan",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -50,6 +50,8 @@
     "historical_diary_access_no_network_provider_model_prompt_telemetry_clipboard_or_external_release",
     "historical_diary_access_no_raw_text_identity_filename_timestamp_key_or_mapping_commit",
     "historical_diary_access_strongest_result_locally_restricted_candidate_without_downstream_authority",
-    "historical_diary_access_no_fixture_memory_rag_product_runtime_route_api_client_database_or_configuration"
+    "historical_diary_access_no_fixture_memory_rag_product_runtime_route_api_client_database_or_configuration",
+    "no_private_layout_coordinate_commit",
+    "first_use_scenario_gate_remains_closed"
   ]
 }

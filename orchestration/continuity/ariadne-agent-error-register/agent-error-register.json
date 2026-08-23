@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 655,
+  "register_revision": 656,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-24",
@@ -43978,6 +43978,42 @@
       },
       "incident_id": "AER-1143",
       "attempt_id": "clock-468dca82449e1518338c9e9c",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-time-axis-recovery",
+      "role": "orchestrator",
+      "resource_id": "time-axis-synthetic-verification-interface",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Provider-free test invocation and governance assertions use their exact stable interfaces before archive access.",
+      "observed_error": "Five contained lapses covered one unsupported runner argument, two brittle prose assertions and two rejected descriptive clockwork vocabulary values.",
+      "detection_method": "The provider-free CLI, focused tests and clockwork vocabulary gate rejected each lapse before content or publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/closeout/prepublication-contained-lapses.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.synthetic_verification_interfaces_require_literal_stable_contracts",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use literal wrapper paths and stable semantic phrase assertions.",
+        "prevention_control": "Focused verification must pass before any archive manifest or content read.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-656.md",
+          "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/evidence.json"
+        ]
+      },
+      "incident_id": "AER-1144",
+      "attempt_id": "clock-cf54210226ed5327a1b9a612",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"

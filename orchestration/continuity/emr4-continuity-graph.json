@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 446,
+  "graph_revision": 447,
   "harvests": [],
   "nodes": [
     {
@@ -36086,9 +36086,92 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal",
+      "title": "Raisa local-only historical Diary structural time-axis recovery rehearsal",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri delegated gate timing and uninterrupted development; accept one contained local revision-required result without downstream use."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-table-cell-time-axis-revision-and-recover-document-story-coordinates",
+          "source": "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/next-tranche-contract.json",
+          "status": "accepted",
+          "summary": "Accept exact source 3bcf2302461874e54d372cf5a71860a495fa7b20 and proceed synthetic-first to document-story time coordinates."
+        }
+      ],
+      "claim_scope": [
+        "Eighty snapshots parsed with zero leakage, 199 stable records and 448 changes; table cells contain zero explicit time anchors."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal-plan.md",
+          "docs/security/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/evidence.json",
+          "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/report.md",
+          "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal-pre-verifier-receipt.json",
+          "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/closeout/prepublication-contained-lapses.json",
+          "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/closeout/pushover-notification-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration_harness/historical_diary_local_measured_privacy_probe.py",
+          "scripts/historical_diary_local_measured_privacy_probe.ps1",
+          "tests/test_raisa_local_only_bounded_historical_diary_snapshot_measured_privacy_probe.py",
+          "tests/test_raisa_local_only_historical_diary_structural_time_axis_recovery_rehearsal.py",
+          "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/historical-derived-scenario-first-use-gate.json",
+          "orchestration/continuity/raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal/next-tranche-contract.json"
+        ]
+      },
+      "unresolved_gates": [
+        "Document-story coordinate recovery, first-use admission, local retention and downstream use remain gated."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-24T04:33:07.7001882+10:00",
+      "updated_at": "2026-08-24T04:33:07.7001882+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "95f71be8dbaa4486913badf0049d95eb4baf770b",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-24T03:42:32.7376775+10:00"
+  "updated_at": "2026-08-24T04:33:07.7001882+10:00"
 }

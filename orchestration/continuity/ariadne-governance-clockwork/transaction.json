@@ -1,85 +1,85 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
-  "operation_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
-  "transaction_id": "txn-fd8e7f629c7b4f2a2c631984",
-  "source_commit": "08b6272bde1f72e97b36d8b4a3673de8063c82ba",
-  "previous_source_commit": "08b6272bde1f72e97b36d8b4a3673de8063c82ba",
-  "previous_generation_id": "gen-8ecadd9e0b643bb13c4b81e41dbbc16028501a589d5eb3cb553e698b5eeaf8be",
-  "previous_bundle_sha256": "8ecadd9e0b643bb13c4b81e41dbbc16028501a589d5eb3cb553e698b5eeaf8be",
+  "operation_id": "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal",
+  "transaction_id": "txn-370bea0a88c20aea775a014c",
+  "source_commit": "95f71be8dbaa4486913badf0049d95eb4baf770b",
+  "previous_source_commit": "95f71be8dbaa4486913badf0049d95eb4baf770b",
+  "previous_generation_id": "gen-40288d61d3a7b3d892e2f20f1c82a9d489c7a08bb967346f188f279dbd6c67bd",
+  "previous_bundle_sha256": "40288d61d3a7b3d892e2f20f1c82a9d489c7a08bb967346f188f279dbd6c67bd",
   "previous_canonical_sha256s": {
-    "continuity": "78a9486b2be86e94d4a0bdc3c0dbc61802dc85168e9071490b58cd3371c4a17d",
-    "compass": "92c32a65c515e9fc6871e34b6fdee47f4f739b05354217fced654eaf43edd4a2",
-    "compass_markdown": "0e8b715b6e7f2a66ea4b93e39a8b69cda2644f23e1601afccaa00582dd1256aa",
-    "active_latch": "11ffc56764020a860d4dd449d9da6a7ede4f05c884e9661a8a342946184005ab",
-    "error_register": "a4de4d61a886808099d789d75a17e76f90e6181fd009097e9c3ce02c4f937c4e",
-    "pattern_report": "d13bf64139e43bc0ecabd83967f13949abde8c584428d9cfabbba82af383be87",
-    "current_baton": "05de81bc604ac9a5731b29d7f2f304588d44e83013d76e474fd05e8706c56970"
+    "continuity": "1d939455eb7d426c3e1ea974e14c4893ed3728d5faddba89f79f4bc29a39e31e",
+    "compass": "4198d888b96e3d36a3f45595ba47265b91764f7c6ef1c74f92595d21ccaa590c",
+    "compass_markdown": "53af550477048aa61d2d1f70ebb4c54b59fae30761d613a1f8a6d85729226359",
+    "active_latch": "06ae9ad536915ea60ed164daf6220f622d599df465ea2b3cf99af6d22ac30cdc",
+    "error_register": "b2a40424ac079f5b65533b65a849fdb35df8dab20c6e95e02797c2433b114a21",
+    "pattern_report": "c1be287c406a46b55487f9103decbe2ba2011f2a3320f158e2a7d3f7597d9709",
+    "current_baton": "5c210f6afab6d11b706fead4205a028138951a2a135e28d7c12dcc5a583e849e"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "2332464ee8f32a4b53ae6a04062a0bc9c6614bb5ddaa4814b4fc6138a6e3d432",
-    "transaction.json": "1efddea9fd20f410daad11732d102de6db80d2a8205e311d80b856d698596caa",
+    "command-manifest.json": "ca862fb370ae2f47c27f84aed131081a0c2690a90a618f1ee5cc94dc3a28eb5a",
+    "transaction.json": "8303a0db906f9eb7817393f7cd0500c8ea91a773ebe48b4589cc5cc223d1cbc4",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "b417a0cb30885864941dabd4cf5d4619dfbc97996e650397842a2da862128409"
+    "generation-manifest.json": "8afb4a2548fb0fc5595af60a621bd74d71608050f385938368ca80476c81d4ad"
   },
   "projection_sha256s": {
-    "graph": "sha256:2f8cb6756a14f1fc88601ff112c42be777cfc9eb0bea0ec83589f64c2000aaa0",
-    "compass": "sha256:396768f075d15a46eb7c33d7751d54496f21c8c38c00f90596fa1c5cf623550b",
-    "report": "sha256:6880a73fafb5fbf6650b5c46177e372de18a6f7ee183e54e6e59adc1aade4681",
-    "latch": "sha256:c79762ee1f87918fb1ca20a985f2c73062716beb87636c9faaaa894930d24d43",
-    "incident_aggregate": "sha256:4642d3cdf7d110df2a54a60843aca7494cfc3856e0387dd9141dbbd0a3095316"
+    "graph": "sha256:6bd024f620cc17e83a821a80720374e0f568e0ccab5718c72b06d41bdb2b7b58",
+    "compass": "sha256:348ada662290fabd67efcd3e9ef990e92cbd256c5d73fceec68eb2753e954ec7",
+    "report": "sha256:12d19cc4b06eb30bbaf7924a0b83b4d000d89ff25860285318dc0fd69594efe7",
+    "latch": "sha256:6548ac4dfc1d95cb4087fb670d5095b8be82a878db2dc8c6ab1b75db7ac661a3",
+    "incident_aggregate": "sha256:6f9cda0c8b8a08d16c6ae2805c29dc816cf22eb2ccfdbe86c56d916e913ced60"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-fd8e7f629c7b4f2a2c631984",
-      "transaction_id": "txn-fd8e7f629c7b4f2a2c631984",
-      "operation_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+      "journal_id": "journal-370bea0a88c20aea775a014c",
+      "transaction_id": "txn-370bea0a88c20aea775a014c",
+      "operation_id": "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
       "event_type": "manifest-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "manifest_sha256": "sha256:5bdf7aa5735807184255517e20224a8a4a01681518aa1c54c84a78b017a59add"
+        "manifest_sha256": "sha256:96d564da319add41a93284622db535f9f722955bde6d6f7a22a311c881e23ab3"
       },
-      "event_sha256": "sha256:a8a1b8ca9843fd508436100fba8a0a722539ba2ea9f08e8aa7a3ff72f0bafb49"
+      "event_sha256": "sha256:b165742e12b90e5e29e09b66a91a84ff446c01fc75ec1b3945870f641e342e2c"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-fd8e7f629c7b4f2a2c631984",
-      "transaction_id": "txn-fd8e7f629c7b4f2a2c631984",
-      "operation_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+      "journal_id": "journal-370bea0a88c20aea775a014c",
+      "transaction_id": "txn-370bea0a88c20aea775a014c",
+      "operation_id": "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal",
       "sequence": 2,
-      "previous_event_sha256": "sha256:a8a1b8ca9843fd508436100fba8a0a722539ba2ea9f08e8aa7a3ff72f0bafb49",
+      "previous_event_sha256": "sha256:b165742e12b90e5e29e09b66a91a84ff446c01fc75ec1b3945870f641e342e2c",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "08b6272bde1f72e97b36d8b4a3673de8063c82ba",
+        "source_commit": "95f71be8dbaa4486913badf0049d95eb4baf770b",
         "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
       },
-      "event_sha256": "sha256:271c17dbb9582a5a0562a58c275f3e68fc60bb27e5952b540ee0e181ac431497"
+      "event_sha256": "sha256:df53fbdac4e5090cf69d3aacf784383bdbbf6d2f83f96f23a5ed2cab3c7f6937"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-fd8e7f629c7b4f2a2c631984",
-      "transaction_id": "txn-fd8e7f629c7b4f2a2c631984",
-      "operation_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+      "journal_id": "journal-370bea0a88c20aea775a014c",
+      "transaction_id": "txn-370bea0a88c20aea775a014c",
+      "operation_id": "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal",
       "sequence": 3,
-      "previous_event_sha256": "sha256:271c17dbb9582a5a0562a58c275f3e68fc60bb27e5952b540ee0e181ac431497",
+      "previous_event_sha256": "sha256:df53fbdac4e5090cf69d3aacf784383bdbbf6d2f83f96f23a5ed2cab3c7f6937",
       "event_type": "projections-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "graph_revision": 446,
-        "map_revision": 428
+        "graph_revision": 447,
+        "map_revision": 429
       },
-      "event_sha256": "sha256:477d54ce9c38bf287feb27991ff66f217ffc88e1ed414f6e4ba53b318f69d883"
+      "event_sha256": "sha256:c3436846248443f9611de4ad57b44153f2ae51930362182b0a7a47169f44dd8c"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-fd8e7f629c7b4f2a2c631984",
-      "transaction_id": "txn-fd8e7f629c7b4f2a2c631984",
-      "operation_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+      "journal_id": "journal-370bea0a88c20aea775a014c",
+      "transaction_id": "txn-370bea0a88c20aea775a014c",
+      "operation_id": "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal",
       "sequence": 4,
-      "previous_event_sha256": "sha256:477d54ce9c38bf287feb27991ff66f217ffc88e1ed414f6e4ba53b318f69d883",
+      "previous_event_sha256": "sha256:c3436846248443f9611de4ad57b44153f2ae51930362182b0a7a47169f44dd8c",
       "event_type": "projections-validated",
       "actor": "gpt-sol",
       "payload": {
@@ -87,26 +87,26 @@
         "compass": "passed",
         "latch": "passed"
       },
-      "event_sha256": "sha256:5f84a20aa555a286bcb0ea4453742302f009e012301f1ad46a3ebaba555e3c3f"
+      "event_sha256": "sha256:99caabf5acfa2f6e2cc3db5304b65cd4bf39848dd032b446deeab8d6ee36428b"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-fd8e7f629c7b4f2a2c631984",
-      "transaction_id": "txn-fd8e7f629c7b4f2a2c631984",
-      "operation_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+      "journal_id": "journal-370bea0a88c20aea775a014c",
+      "transaction_id": "txn-370bea0a88c20aea775a014c",
+      "operation_id": "raisa-local-only-historical-diary-structural-time-axis-recovery-rehearsal",
       "sequence": 5,
-      "previous_event_sha256": "sha256:5f84a20aa555a286bcb0ea4453742302f009e012301f1ad46a3ebaba555e3c3f",
+      "previous_event_sha256": "sha256:99caabf5acfa2f6e2cc3db5304b65cd4bf39848dd032b446deeab8d6ee36428b",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "shadow_directory_rename"
       },
-      "event_sha256": "sha256:9eb929a56ecae5786c36d479feca1a13b6c9de92b3a675ed6a051815b1eb4ffc"
+      "event_sha256": "sha256:2138bf382cbb9f82a2647e186709b0f0a51f3d4514edd95a42d75aba25bd6e9b"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
   "event_kind": "clean_closeout",
-  "next_boundaries_sha256": "sha256:49fd26d732686bb78682853181031c826c7af64721bf03cb3c406e58cf16dccf",
+  "next_boundaries_sha256": "sha256:6e456ea7bcdaa67856af05f9b22febf4b0301725d6a3b7d7804a6402faa2a3f0",
   "register_bytes_preserved": false,
   "pattern_bytes_preserved": false
 }
