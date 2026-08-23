@@ -167,6 +167,13 @@ def _configure_synthetic_paths(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) 
     monkeypatch.setattr(probe, "AGGREGATE_PATH", attempt / "aggregate-reading.json")
     monkeypatch.setattr(probe, "CLEANUP_PATH", attempt / "cleanup-receipt.json")
     monkeypatch.setattr(probe, "CONTENT_RUN_TERMINAL_PATH", attempt / "content-run-terminal.json")
+    monkeypatch.setattr(probe, "WORD_CONTROL_PATH", attempt / "owned-word-process-control.json")
+    monkeypatch.setattr(probe, "WORD_PROGRESS_PATH", attempt / "word-extraction-progress.json")
+    monkeypatch.setattr(
+        probe,
+        "PARENT_WORD_CLEANUP_PATH",
+        attempt / "parent-word-cleanup-receipt.json",
+    )
     monkeypatch.setattr(probe, "CORE_PATH", core)
     monkeypatch.setattr(probe, "EXTRACTOR_PATH", extractor)
     return root, attempt
@@ -704,7 +711,8 @@ def test_python_and_powershell_sources_have_no_provider_product_database_or_raw_
     assert "Stop-Process -Id $ownedWordProcessId" in powershell_source
     assert "Set-Content" not in powershell_source
     assert "Write-Output" not in powershell_source
-    assert powershell_source.count("ConvertTo-Json") == 1
+    assert "Write-ClosedProgress" in powershell_source
+    assert powershell_source.count("ConvertTo-Json") == 2
 
 
 def test_failure_output_is_closed_and_forbids_automatic_content_retry(monkeypatch, tmp_path):

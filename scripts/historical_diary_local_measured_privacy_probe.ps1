@@ -1,6 +1,13 @@
 param(
     [Parameter(Mandatory = $true)]
-    [string]$Manifest
+    [string]$Manifest,
+    [Parameter(Mandatory = $true)]
+    [string]$ControlPath,
+    [Parameter(Mandatory = $true)]
+    [string]$ProgressPath,
+    [Parameter(Mandatory = $true)]
+    [ValidateSet("HistoricalMeasuredProbe", "AuthoredSyntheticRecovery")]
+    [string]$ExecutionProfile
 )
 
 $ErrorActionPreference = "Stop"
@@ -12,10 +19,63 @@ $MaximumCellCharacters = 65536
 $MaximumPrivateCharacters = 16777216
 $MaximumStoryAnchorsPerDocument = 4096
 $MaximumVerticalQuarterPoints = 100000
-$ExpectedSchema = "historical_diary.private_binding_manifest.v1"
 $OutputSchema = "historical_diary.private_word_story_coordinate_extraction.v2"
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
-$expectedManifest = Join-Path $repositoryRoot "local_data\historical-diary-trove\measured-probes\2026-08-24-story-coordinate-v1\private-binding-manifest.json"
+$historicalAttemptRoot = Join-Path $repositoryRoot "local_data\historical-diary-trove\measured-probes\2026-08-24-story-coordinate-v1"
+$syntheticAttemptRoot = Join-Path $repositoryRoot "local_data\authored-synthetic-diary-word-coordinate-recovery\run-v1"
+$syntheticDocumentRoot = Join-Path $syntheticAttemptRoot "documents"
+if ($ExecutionProfile -eq "HistoricalMeasuredProbe") {
+    $ExpectedSchema = "historical_diary.private_binding_manifest.v1"
+    $expectedManifest = Join-Path $historicalAttemptRoot "private-binding-manifest.json"
+    $expectedControl = Join-Path $historicalAttemptRoot "owned-word-process-control.json"
+    $expectedProgress = Join-Path $historicalAttemptRoot "word-extraction-progress.json"
+} else {
+    $ExpectedSchema = "historical_diary.authored_synthetic_binding_manifest.v1"
+    $expectedManifest = Join-Path $syntheticAttemptRoot "synthetic-binding-manifest.json"
+    $expectedControl = Join-Path $syntheticAttemptRoot "owned-word-process-control.json"
+    $expectedProgress = Join-Path $syntheticAttemptRoot "word-extraction-progress.json"
+}
+
+function Write-ClosedJson {
+    param(
+        [string]$Path,
+        [object]$Value
+    )
+
+    $temporary = "$Path.tmp"
+    $json = $Value | ConvertTo-Json -Depth 8 -Compress
+    [System.IO.File]::WriteAllText(
+        $temporary,
+        $json,
+        [System.Text.UTF8Encoding]::new($false)
+    )
+    Move-Item -LiteralPath $temporary -Destination $Path -Force
+}
+
+function Get-ElapsedBucket {
+    param([double]$ElapsedSeconds)
+
+    if ($ElapsedSeconds -lt 30) { return "under_30_seconds" }
+    if ($ElapsedSeconds -lt 120) { return "30_to_119_seconds" }
+    if ($ElapsedSeconds -lt 300) { return "120_to_299_seconds" }
+    if ($ElapsedSeconds -lt 900) { return "300_to_899_seconds" }
+    return "900_seconds_or_more"
+}
+
+function Get-CoordinateRateFloorBucket {
+    param(
+        [int64]$CoordinateCount,
+        [double]$ElapsedSeconds
+    )
+
+    if ($CoordinateCount -eq 0 -or $ElapsedSeconds -le 0) { return "not_available" }
+    $rate = $CoordinateCount / $ElapsedSeconds
+    if ($rate -lt 1) { return "under_1_per_second" }
+    if ($rate -lt 4) { return "1_to_3_per_second" }
+    if ($rate -lt 8) { return "4_to_7_per_second" }
+    if ($rate -lt 16) { return "8_to_15_per_second" }
+    return "16_or_more_per_second"
+}
 
 function Convert-WordColour {
     param($Value)
@@ -191,10 +251,46 @@ $wordQuitCompleted = $false
 $ownedWordProcessId = $null
 $reasonCode = "passed"
 $privateCharacterCount = 0
+$completedDocumentCount = 0
+$tableCellCount = 0
+$structuralSegmentCount = 0
+$coordinateAttemptCount = 0
+$explicitStoryAnchorCount = 0
+$totalDocumentCount = 1
+$stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+
+function Write-ClosedProgress {
+    param([string]$Stage)
+
+    $elapsed = [double]$stopwatch.Elapsed.TotalSeconds
+    Write-ClosedJson -Path $ProgressPath -Value ([ordered]@{
+        schema_version = "historical_diary.word_extraction_progress.v1"
+        stage = $Stage
+        total_document_count = [int]$totalDocumentCount
+        completed_document_count = [int]$completedDocumentCount
+        table_cell_count = [int64]$tableCellCount
+        structural_segment_count = [int64]$structuralSegmentCount
+        coordinate_attempt_count = [int64]$coordinateAttemptCount
+        explicit_story_anchor_count = [int64]$explicitStoryAnchorCount
+        elapsed_bucket = Get-ElapsedBucket -ElapsedSeconds $elapsed
+        coordinate_rate_floor_bucket = Get-CoordinateRateFloorBucket `
+            -CoordinateCount $coordinateAttemptCount `
+            -ElapsedSeconds $elapsed
+        source_value_emitted = $false
+    })
+}
 
 try {
     $resolvedManifest = (Resolve-Path -LiteralPath $Manifest).Path
-    if ($resolvedManifest -ne $expectedManifest) {
+    $resolvedControlParent = (Resolve-Path -LiteralPath (Split-Path -Parent $ControlPath)).Path
+    $resolvedProgressParent = (Resolve-Path -LiteralPath (Split-Path -Parent $ProgressPath)).Path
+    $resolvedControl = Join-Path $resolvedControlParent (Split-Path -Leaf $ControlPath)
+    $resolvedProgress = Join-Path $resolvedProgressParent (Split-Path -Leaf $ProgressPath)
+    if (
+        $resolvedManifest -ne $expectedManifest -or
+        $resolvedControl -ne $expectedControl -or
+        $resolvedProgress -ne $expectedProgress
+    ) {
         $reasonCode = "manifest_invalid"
         throw [System.InvalidOperationException]::new("closed_manifest_boundary")
     }
@@ -214,6 +310,12 @@ try {
         $reasonCode = "manifest_invalid"
         throw [System.InvalidOperationException]::new("closed_manifest_schema")
     }
+    if ($ExecutionProfile -eq "AuthoredSyntheticRecovery" -and $binding.files.Count -ne 12) {
+        $reasonCode = "manifest_invalid"
+        throw [System.InvalidOperationException]::new("closed_synthetic_manifest_count")
+    }
+    $totalDocumentCount = [int]$binding.files.Count
+    Write-ClosedProgress -Stage "initialized"
 
     $baselineWordProcessIds = @(Get-Process -Name "WINWORD" -ErrorAction SilentlyContinue | ForEach-Object { $_.Id })
     try {
@@ -232,6 +334,14 @@ try {
         throw [System.InvalidOperationException]::new("closed_word_process_ownership")
     }
     $ownedWordProcessId = [int]$createdWordProcessIds[0]
+    $ownedProcess = Get-Process -Id $ownedWordProcessId -ErrorAction Stop
+    Write-ClosedJson -Path $ControlPath -Value ([ordered]@{
+        schema_version = "historical_diary.owned_word_process_control.v1"
+        process_id = $ownedWordProcessId
+        process_class = "WINWORD"
+        process_start_utc_ticks = [int64]$ownedProcess.StartTime.ToUniversalTime().Ticks
+    })
+    Write-ClosedProgress -Stage "word_isolated"
 
     $word.Visible = $false
     $word.DisplayAlerts = 0
@@ -273,6 +383,20 @@ try {
                 $reasonCode = "manifest_invalid"
                 throw [System.InvalidOperationException]::new("closed_manifest_sequence")
             }
+            if ($ExecutionProfile -eq "AuthoredSyntheticRecovery") {
+                $syntheticPath = (Resolve-Path -LiteralPath ([string]$bound.absolute_path)).Path
+                $syntheticParent = (Split-Path -Parent $syntheticPath)
+                $syntheticLeaf = (Split-Path -Leaf $syntheticPath)
+                $syntheticItem = Get-Item -LiteralPath $syntheticPath -Force
+                if (
+                    $syntheticParent -ne $syntheticDocumentRoot -or
+                    $syntheticLeaf -notmatch '^synthetic-[0-9]{2}\.docx$' -or
+                    ($syntheticItem.Attributes -band [System.IO.FileAttributes]::ReparsePoint)
+                ) {
+                    $reasonCode = "manifest_invalid"
+                    throw [System.InvalidOperationException]::new("closed_synthetic_path_boundary")
+                }
+            }
             $document = $word.Documents.Open([string]$bound.absolute_path, $false, $true, $false)
             if (-not [bool]$document.ReadOnly) {
                 $documentsOpenedReadOnly = $false
@@ -312,6 +436,7 @@ try {
                                             page_ordinal = [int]$coordinate.page_ordinal
                                             vertical_quarter_points = [int]$coordinate.vertical_quarter_points
                                         })
+                                        $explicitStoryAnchorCount += 1
                                     }
                                 }
                                 $storyText = $null
@@ -342,6 +467,7 @@ try {
                         $table = $document.Tables.Item($tableIndex)
                         for ($cellIndex = 1; $cellIndex -le $table.Range.Cells.Count; $cellIndex += 1) {
                             $cellCount += 1
+                            $tableCellCount += 1
                             if ($cellCount -gt $MaximumCellsPerDocument) {
                                 $reasonCode = "private_text_limit_exceeded"
                                 throw [System.InvalidOperationException]::new("closed_cell_count_limit")
@@ -364,6 +490,8 @@ try {
                                 $segmentCoordinates = @(
                                     Get-PrivateCellSegmentCoordinates -CellRange $range -Text $text
                                 )
+                                $structuralSegmentCount += $segmentCoordinates.Count
+                                $coordinateAttemptCount += $segmentCoordinates.Count
                                 $cells.Add([ordered]@{
                                     table_index = $tableIndex
                                     row_index = [int]$cell.RowIndex
@@ -415,6 +543,8 @@ try {
             story_time_anchors = @($storyTimeAnchors.ToArray())
             error_code = $documentError
         })
+        $completedDocumentCount += 1
+        Write-ClosedProgress -Stage "document_completed"
     }
 } catch {
     if ($reasonCode -eq "passed") {
@@ -448,7 +578,15 @@ try {
         $wordCleanupCompleted = $wordQuitCompleted -and $null -eq (
             Get-Process -Id $ownedWordProcessId -ErrorAction SilentlyContinue
         )
+        if ($wordCleanupCompleted -and (Test-Path -LiteralPath $ControlPath -PathType Leaf)) {
+            Remove-Item -LiteralPath $ControlPath -Force -ErrorAction SilentlyContinue
+        }
     } else {
+        $wordCleanupCompleted = $false
+    }
+    try {
+        Write-ClosedProgress -Stage "cleanup"
+    } catch {
         $wordCleanupCompleted = $false
     }
 }

@@ -35,7 +35,11 @@ PRIVATE_PROJECTION_PATH = ATTEMPT_ROOT / "private-derived-projection.json"
 AGGREGATE_PATH = ATTEMPT_ROOT / "aggregate-reading.json"
 CLEANUP_PATH = ATTEMPT_ROOT / "cleanup-receipt.json"
 CONTENT_RUN_TERMINAL_PATH = ATTEMPT_ROOT / "content-run-terminal.json"
+WORD_CONTROL_PATH = ATTEMPT_ROOT / "owned-word-process-control.json"
+WORD_PROGRESS_PATH = ATTEMPT_ROOT / "word-extraction-progress.json"
+PARENT_WORD_CLEANUP_PATH = ATTEMPT_ROOT / "parent-word-cleanup-receipt.json"
 EXTRACTOR_PATH = REPO_ROOT / "scripts/historical_diary_local_measured_privacy_probe.ps1"
+WORD_CLEANUP_SCRIPT_PATH = REPO_ROOT / "scripts/historical_diary_owned_word_cleanup.ps1"
 CORE_PATH = Path(__file__).resolve()
 
 MAX_FILES = 80
@@ -172,6 +176,79 @@ class PrivateExtraction(StrictFrozenModel):
         offsets = [item.observation_offset_seconds for item in self.snapshots]
         if offsets != sorted(offsets) or len(offsets) != len(set(offsets)):
             raise ValueError("snapshot_offsets_invalid")
+        return self
+
+
+class OwnedWordProcessControl(StrictFrozenModel):
+    schema_version: Literal["historical_diary.owned_word_process_control.v1"]
+    process_id: int = Field(ge=1, le=2_147_483_647)
+    process_class: Literal["WINWORD"]
+    process_start_utc_ticks: int = Field(ge=621_355_968_000_000_000)
+
+
+class OwnedWordCleanupResult(StrictFrozenModel):
+    schema_version: Literal["historical_diary.owned_word_cleanup_result.v1"]
+    status: Literal["passed", "blocked"]
+    reason_code: Literal[
+        "control_file_absent",
+        "owned_process_already_absent",
+        "owned_process_removed",
+        "control_file_invalid",
+        "owned_process_identity_mismatch",
+        "owned_process_remains",
+        "cleanup_internal_failure",
+    ]
+    exact_owned_process_absent: bool
+    broad_process_name_stop_used: Literal[False]
+    source_value_emitted: Literal[False]
+
+    @model_validator(mode="after")
+    def validate_cleanup_disposition(self) -> "OwnedWordCleanupResult":
+        if (self.status == "passed") != self.exact_owned_process_absent:
+            raise ValueError("word_cleanup_disposition_invalid")
+        return self
+
+
+class WordExtractionProgress(StrictFrozenModel):
+    schema_version: Literal["historical_diary.word_extraction_progress.v1"]
+    stage: Literal["initialized", "word_isolated", "document_completed", "cleanup"]
+    total_document_count: int = Field(ge=1, le=MAX_FILES)
+    completed_document_count: int = Field(ge=0, le=MAX_FILES)
+    table_cell_count: int = Field(ge=0, le=MAX_FILES * 100_000)
+    structural_segment_count: int = Field(
+        ge=0, le=MAX_FILES * 100_000 * MAX_SEGMENTS_PER_CELL
+    )
+    coordinate_attempt_count: int = Field(
+        ge=0, le=MAX_FILES * 100_000 * MAX_SEGMENTS_PER_CELL
+    )
+    explicit_story_anchor_count: int = Field(
+        ge=0, le=MAX_FILES * MAX_STORY_ANCHORS_PER_SNAPSHOT
+    )
+    elapsed_bucket: Literal[
+        "under_30_seconds",
+        "30_to_119_seconds",
+        "120_to_299_seconds",
+        "300_to_899_seconds",
+        "900_seconds_or_more",
+    ]
+    coordinate_rate_floor_bucket: Literal[
+        "not_available",
+        "under_1_per_second",
+        "1_to_3_per_second",
+        "4_to_7_per_second",
+        "8_to_15_per_second",
+        "16_or_more_per_second",
+    ]
+    source_value_emitted: Literal[False]
+
+    @model_validator(mode="after")
+    def validate_progress_counts(self) -> "WordExtractionProgress":
+        if self.completed_document_count > self.total_document_count:
+            raise ValueError("word_progress_document_count_invalid")
+        if self.coordinate_attempt_count > self.structural_segment_count:
+            raise ValueError("word_progress_coordinate_count_invalid")
+        if self.completed_document_count == 0 and self.stage == "document_completed":
+            raise ValueError("word_progress_stage_invalid")
         return self
 
 
@@ -1093,6 +1170,152 @@ def _record_content_run_terminal(*, status: str, decision: str | None) -> None:
     )
 
 
+def _closed_cleanup_result(
+    *, status: str, reason_code: str, exact_absent: bool
+) -> OwnedWordCleanupResult:
+    return OwnedWordCleanupResult(
+        schema_version="historical_diary.owned_word_cleanup_result.v1",
+        status=status,
+        reason_code=reason_code,
+        exact_owned_process_absent=exact_absent,
+        broad_process_name_stop_used=False,
+        source_value_emitted=False,
+    )
+
+
+def cleanup_owned_word_process(
+    *,
+    control_path: Path = WORD_CONTROL_PATH,
+    receipt_path: Path = PARENT_WORD_CLEANUP_PATH,
+    cleanup_script_path: Path = WORD_CLEANUP_SCRIPT_PATH,
+    runner: Any = subprocess.run,
+    control_absence_is_safe: bool = False,
+) -> OwnedWordCleanupResult:
+    """Stop only the exact Word identity written by the owned child."""
+
+    if not control_path.exists():
+        result = _closed_cleanup_result(
+            status="passed" if control_absence_is_safe else "blocked",
+            reason_code="control_file_absent",
+            exact_absent=control_absence_is_safe,
+        )
+        _safe_public_write(receipt_path, result.model_dump(mode="json"))
+        return result
+    try:
+        OwnedWordProcessControl.model_validate_json(control_path.read_bytes())
+    except (OSError, ValueError):
+        result = _closed_cleanup_result(
+            status="blocked",
+            reason_code="control_file_invalid",
+            exact_absent=False,
+        )
+        _safe_public_write(receipt_path, result.model_dump(mode="json"))
+        return result
+    try:
+        completed = runner(
+            [
+                "powershell.exe",
+                "-NoProfile",
+                "-NonInteractive",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                str(cleanup_script_path),
+                "-ControlPath",
+                str(control_path),
+            ],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            check=False,
+            timeout=30,
+        )
+    except (OSError, subprocess.SubprocessError):
+        result = _closed_cleanup_result(
+            status="blocked",
+            reason_code="cleanup_internal_failure",
+            exact_absent=False,
+        )
+    else:
+        try:
+            result = OwnedWordCleanupResult.model_validate_json(completed.stdout)
+        except ValueError:
+            result = _closed_cleanup_result(
+                status="blocked",
+                reason_code="cleanup_internal_failure",
+                exact_absent=False,
+            )
+        if completed.returncode != 0 and result.status == "passed":
+            result = _closed_cleanup_result(
+                status="blocked",
+                reason_code="cleanup_internal_failure",
+                exact_absent=False,
+            )
+    _safe_public_write(receipt_path, result.model_dump(mode="json"))
+    return result
+
+
+def run_owned_word_subprocess(
+    command: list[str],
+    *,
+    timeout_seconds: int,
+    control_path: Path = WORD_CONTROL_PATH,
+    cleanup_receipt_path: Path = PARENT_WORD_CLEANUP_PATH,
+    cleanup_script_path: Path = WORD_CLEANUP_SCRIPT_PATH,
+    runner: Any = subprocess.run,
+    cleanup_runner: Any = subprocess.run,
+) -> subprocess.CompletedProcess[bytes]:
+    """Run one Word child and classify timeout/exit cleanup without fallback."""
+
+    try:
+        completed = runner(
+            command,
+            cwd=REPO_ROOT,
+            capture_output=True,
+            check=False,
+            timeout=timeout_seconds,
+        )
+    except subprocess.TimeoutExpired as error:
+        cleanup = cleanup_owned_word_process(
+            control_path=control_path,
+            receipt_path=cleanup_receipt_path,
+            cleanup_script_path=cleanup_script_path,
+            runner=cleanup_runner,
+        )
+        code = (
+            "word_extractor_timeout"
+            if cleanup.exact_owned_process_absent
+            else "word_extractor_timeout_cleanup_failed"
+        )
+        raise ProbeError(code) from error
+    except (OSError, subprocess.SubprocessError) as error:
+        cleanup = cleanup_owned_word_process(
+            control_path=control_path,
+            receipt_path=cleanup_receipt_path,
+            cleanup_script_path=cleanup_script_path,
+            runner=cleanup_runner,
+        )
+        code = (
+            "word_extractor_start_failed"
+            if cleanup.exact_owned_process_absent
+            else "word_extractor_start_failed_cleanup_failed"
+        )
+        raise ProbeError(code) from error
+    if completed.returncode != 0:
+        cleanup = cleanup_owned_word_process(
+            control_path=control_path,
+            receipt_path=cleanup_receipt_path,
+            cleanup_script_path=cleanup_script_path,
+            runner=cleanup_runner,
+        )
+        code = (
+            "word_extractor_failed"
+            if cleanup.exact_owned_process_absent
+            else "word_extractor_failed_cleanup_failed"
+        )
+        raise ProbeError(code)
+    return completed
+
+
 def execute() -> dict[str, Any]:
     if CONTENT_RUN_TERMINAL_PATH.exists():
         raise ProbeError("content_run_already_consumed")
@@ -1108,22 +1331,29 @@ def execute() -> dict[str, Any]:
         str(EXTRACTOR_PATH),
         "-Manifest",
         str(MANIFEST_PATH),
+        "-ControlPath",
+        str(WORD_CONTROL_PATH),
+        "-ProgressPath",
+        str(WORD_PROGRESS_PATH),
+        "-ExecutionProfile",
+        "HistoricalMeasuredProbe",
     ]
-    completed = subprocess.run(
+    completed = run_owned_word_subprocess(
         command,
-        cwd=REPO_ROOT,
-        capture_output=True,
-        check=False,
-        timeout=900,
+        timeout_seconds=900,
     )
     if len(completed.stdout) > MAX_PRIVATE_PIPE_BYTES:
         raise ProbeError("private_pipe_byte_cap_exceeded")
-    if completed.returncode != 0:
-        raise ProbeError("word_extractor_failed")
     try:
         extraction = PrivateExtraction.model_validate_json(completed.stdout)
     except ValueError as error:
-        raise ProbeError("private_extraction_invalid") from error
+        cleanup = cleanup_owned_word_process(control_absence_is_safe=True)
+        code = (
+            "private_extraction_invalid"
+            if cleanup.exact_owned_process_absent
+            else "private_extraction_invalid_cleanup_failed"
+        )
+        raise ProbeError(code) from error
     if len(extraction.snapshots) != len(manifest.files):
         raise ProbeError("extraction_manifest_count_mismatch")
 
@@ -1152,6 +1382,8 @@ def _failure(code: str, *, phase: str) -> dict[str, Any]:
             "timestamp_binding_revision_required",
             "insufficient_dense_day_observations",
             "word_extractor_failed",
+            "word_extractor_start_failed",
+            "word_extractor_timeout",
             "private_extraction_invalid",
             "word_extraction_boundary_failed",
             "snapshot_parse_error",
@@ -1168,8 +1400,19 @@ def _failure(code: str, *, phase: str) -> dict[str, Any]:
     }
     if ATTEMPT_ROOT.exists():
         _safe_public_write(AGGREGATE_PATH, public)
+        parent_cleanup_completed = False
+        if PARENT_WORD_CLEANUP_PATH.exists():
+            try:
+                parent_cleanup = OwnedWordCleanupResult.model_validate_json(
+                    PARENT_WORD_CLEANUP_PATH.read_bytes()
+                )
+                parent_cleanup_completed = parent_cleanup.exact_owned_process_absent
+            except (OSError, ValueError):
+                parent_cleanup_completed = False
         public["cleanup"] = _cleanup_private_outputs(
-            retained=False, decision=decision, word_cleanup=False
+            retained=False,
+            decision=decision,
+            word_cleanup=parent_cleanup_completed,
         )
         if phase == "execute" and CONTENT_RUN_TERMINAL_PATH.exists():
             try:
