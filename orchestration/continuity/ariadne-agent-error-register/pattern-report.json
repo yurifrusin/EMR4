@@ -1,16 +1,16 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 641,
+  "register_revision": 642,
   "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "a60c89ac63a7f447be9eee46134ac089564420f9e312f40eb5f5ff20b139838c",
-  "incident_count": 1096,
+  "canonical_register_sha256": "0ec73ed6c729924d1a82d073583f7771b3a9f4ca9ae5d2f7270870bd7ad1a346",
+  "incident_count": 1099,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 566,
+      "agent_behavior": 567,
       "harness": 73,
-      "operator": 289,
+      "operator": 291,
       "repository": 152,
       "transport": 16
     },
@@ -18,8 +18,8 @@
       "command_scope_violation": 111,
       "evidence_misreport": 77,
       "harness_failure": 73,
-      "operator_error": 289,
-      "output_contract_violation": 323,
+      "operator_error": 291,
+      "output_contract_violation": 324,
       "read_only_violation": 5,
       "reasoning_claim_error": 50,
       "repository_defect": 152,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 87,
       "integration_reviewer": 4,
-      "orchestrator": 942,
+      "orchestrator": 945,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 716,
+      "low": 719,
       "material": 135,
       "moderate": 245
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 228,
-      "canonical_unchanged": 685,
+      "canonical_unchanged": 688,
       "untrusted_partial_worktree": 183
     },
     "by_resource_and_role": {
@@ -284,6 +284,7 @@
       "evaluator-clockwork-check::orchestrator": 1,
       "evaluator-focused-tests::implementer": 2,
       "evaluator-historical-tripwire::orchestrator": 1,
+      "evaluator-postpublication-readback::orchestrator": 1,
       "evaluator-source-hardening::implementer": 1,
       "evaluator-source-review::integration_reviewer": 1,
       "explicit-path-precommit-diff-gate::orchestrator": 1,
@@ -318,6 +319,7 @@
       "governance-projection-repair-runner-read-only-interface::verifier": 1,
       "grouped-test-path-inventory::orchestrator": 1,
       "guard-postrewrite-selected-tools-count::orchestrator": 1,
+      "harness-plan-source-assertions::orchestrator": 2,
       "historical-bounded-worker-controller-source::orchestrator": 1,
       "historical-latch-test-selection::orchestrator": 1,
       "historical-source-binding-test-selection::orchestrator": 1,

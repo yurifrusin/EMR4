@@ -1,0 +1,9 @@
+{
+  "schema_version": "emr4.non_phi_pushover_closeout_receipt.v1",
+  "operation_id": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
+  "status": 1,
+  "request": "32d5db91-32e8-4fbd-b996-feec50ba7d3e",
+  "contains_phi": false,
+  "engine_state": "continuing",
+  "next_workstream": "default-off canonical check-in environment-evidence admission-input seam"
+}

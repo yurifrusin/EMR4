@@ -1,85 +1,85 @@
 {
   "schema_version": "ariadne.governance_live_tick_transaction.v1",
-  "operation_id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
-  "transaction_id": "txn-a9c96fc6eb0800488de0add7",
-  "source_commit": "89640f1bb6ad992f68d5c20fd578b4062eeb193d",
-  "previous_source_commit": "89640f1bb6ad992f68d5c20fd578b4062eeb193d",
-  "previous_generation_id": "gen-00dfb5a6748d2740d1d60b4d615a8c515e0aed69055730c5def90e60a0fb775e",
-  "previous_bundle_sha256": "00dfb5a6748d2740d1d60b4d615a8c515e0aed69055730c5def90e60a0fb775e",
+  "operation_id": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
+  "transaction_id": "txn-0ca7dc3a6c3b30af3c698e8f",
+  "source_commit": "10e46b5330e86c65721848ee0c9a4254983770d2",
+  "previous_source_commit": "10e46b5330e86c65721848ee0c9a4254983770d2",
+  "previous_generation_id": "gen-51436c8a7fc046b883e6b6c67a0d097efc0038faf81f3655b6189489f6c028f3",
+  "previous_bundle_sha256": "51436c8a7fc046b883e6b6c67a0d097efc0038faf81f3655b6189489f6c028f3",
   "previous_canonical_sha256s": {
-    "continuity": "ca78575a3cd1c87e6b16a10fb9b8435f0792425dfe2da67cae1fabefa5924af0",
-    "compass": "8e570c170c5173c1fc890f41dc98763e8a15d8391de133220d83dc1e6caecc10",
-    "compass_markdown": "7645ba89b93fe44bc98784cacf15833659fca6d80fcae1ff8bef794b844287f2",
-    "active_latch": "595a642506c0b7d8df7a2a0cb1e14b44c93153373b4578a51661f79a3ccc08d7",
-    "error_register": "e4b14c1ea97a587fb5bc0c0280433c464f928f3515ada4bf405ef89221be83b7",
-    "pattern_report": "d6c343ee195eaa3ca827123217ad4d864ab25101a1c1bd3f79450e9d279497c5",
-    "current_baton": "cf6cda81a75828e85d070d784bb98b5ab96af95bfc3ee76f4d985df58ec48b77"
+    "continuity": "3a99547bdd44a8c8f9e250f783cd19a05fa6f7758b4996d8b1138fe12f14f674",
+    "compass": "fa27276a3e87741412e537ad322423571d3d4f1f99d6bb6fc011369ed08430d3",
+    "compass_markdown": "ce980dbcb80a72d4abd132ee8a3eaacf850f3025cc1d23757820a37384fa9a4f",
+    "active_latch": "6ebd01e0bf2a59eb022ea80e30a9bd48712aa798d7d04004f6a1356586c154ee",
+    "error_register": "bad6697492d1ee9f0dd569d96ba0ef31fe75ee5e8e7bfaabb6e77f387c148f2d",
+    "pattern_report": "db3557a01ec08cae63b6b7ae8178b768ae6c5cd3de4aa079337993c7521871e7",
+    "current_baton": "e8f3b950d65bb4709c22b92c63d22ac7416991dea592df723328e1bf55620a8e"
   },
   "previous_metadata_sha256s": {
-    "command-manifest.json": "b033a84cc8d2b79b5008cec1416f4a8c16d29088869590fdf2682aaf6017770b",
-    "transaction.json": "3cfc0f29b6b6f682e0ee457c431b3bfa4f73b0b05c4c7818f71679efb4504002",
+    "command-manifest.json": "d7af38ebd41e003e6afbbd837a0eeff2e17bd23045dd96d57be51de6d74ffe70",
+    "transaction.json": "5d19e0c06671978b41fc519b33c282121f7806be833f6cf6f9f78f5add8d7fe5",
     "ownership.json": "e78320a1b0d2f61041cd9d8cac1ed4f98d2bbdf7c3b94891a48d123589d8dee9",
-    "generation-manifest.json": "920e7004ad6215d70794bfe5531e9573c60134ee04e926d5c70e9f862ff10ee2"
+    "generation-manifest.json": "bdcf54889802d1cb5a69f268912999b6a6598dc65f29b4f4f0700607735bfacc"
   },
   "projection_sha256s": {
-    "graph": "sha256:672b2143da30c629805c51531ae66e42040b2e9e90a89f801a3306927ebaed1d",
-    "compass": "sha256:d2528a305c017f68e8da3482feb89c913244e0d536295aad611e99fc51ecc4b2",
-    "report": "sha256:df42dc81f2f62e7fd1e86ed28bcbab98ac120e9e11845e13d86df0d9ee53e564",
-    "latch": "sha256:47bbab892e840484637a84fd2307c66049f264d8a3f13c3e473082308697cc6b",
-    "incident_aggregate": "sha256:1dfba454ae9734e853f38155879cf4ccc0b6d2ae687250106fa211ab1ea9d03a"
+    "graph": "sha256:21bfb2e60af88f9d7bd9ae981eab9429594e5685452c5a9f124df03262469f07",
+    "compass": "sha256:51a1128bccc60c6fe3b49c9a95ceffb20fb2aa99492d1c174526b0709933dc3a",
+    "report": "sha256:c9d03ddaf52c3ff4bc705fbc533f741ee019fc5457ee5c84fb5a8c6c329f59b6",
+    "latch": "sha256:d47c728b9e3d9365bfd166c4a85a86e30edcfa7a12cd9d449d37fbc990fb309c",
+    "incident_aggregate": "sha256:b4f6dd7f1881aac54f509587f52e8a02f068eaccedbc14870291234fbc431fd6"
   },
   "journal": [
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-a9c96fc6eb0800488de0add7",
-      "transaction_id": "txn-a9c96fc6eb0800488de0add7",
-      "operation_id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "journal_id": "journal-0ca7dc3a6c3b30af3c698e8f",
+      "transaction_id": "txn-0ca7dc3a6c3b30af3c698e8f",
+      "operation_id": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
       "sequence": 1,
       "previous_event_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
       "event_type": "manifest-accepted",
       "actor": "gpt-sol",
       "payload": {
-        "manifest_sha256": "sha256:a1f2d26f88a546af50fbcd732ca1ee7cd73fc5d6d8293a262c47567b001b439a"
+        "manifest_sha256": "sha256:2bdc298725d71b66e66bec8427b5a1cee3effbfd1f5432659468a6a07f4ec4c1"
       },
-      "event_sha256": "sha256:db36c65e2652f58f6560df80c24e5062a61a34eb63c3041c32708cc14aaff968"
+      "event_sha256": "sha256:d7d48a31a56aa65075f27cd62e88afe51d4815f50c563d6359a09e23a9c0118b"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-a9c96fc6eb0800488de0add7",
-      "transaction_id": "txn-a9c96fc6eb0800488de0add7",
-      "operation_id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "journal_id": "journal-0ca7dc3a6c3b30af3c698e8f",
+      "transaction_id": "txn-0ca7dc3a6c3b30af3c698e8f",
+      "operation_id": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
       "sequence": 2,
-      "previous_event_sha256": "sha256:db36c65e2652f58f6560df80c24e5062a61a34eb63c3041c32708cc14aaff968",
+      "previous_event_sha256": "sha256:d7d48a31a56aa65075f27cd62e88afe51d4815f50c563d6359a09e23a9c0118b",
       "event_type": "git-source-resolved",
       "actor": "gpt-sol",
       "payload": {
-        "source_commit": "89640f1bb6ad992f68d5c20fd578b4062eeb193d",
+        "source_commit": "10e46b5330e86c65721848ee0c9a4254983770d2",
         "protected_refs_sha256": "sha256:cdc1b2a8af0f767eab683235c0d96558e8f83c297922c3e9aa02a9a76a4aafd2"
       },
-      "event_sha256": "sha256:63ada762af1ced139084b9d9b63138a077381d5d58449ea379e84bb5cd2da4e4"
+      "event_sha256": "sha256:8f628ec4cd3bac9b346747cc299d59b44424c51d0609ef2b075914cd71837004"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-a9c96fc6eb0800488de0add7",
-      "transaction_id": "txn-a9c96fc6eb0800488de0add7",
-      "operation_id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "journal_id": "journal-0ca7dc3a6c3b30af3c698e8f",
+      "transaction_id": "txn-0ca7dc3a6c3b30af3c698e8f",
+      "operation_id": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
       "sequence": 3,
-      "previous_event_sha256": "sha256:63ada762af1ced139084b9d9b63138a077381d5d58449ea379e84bb5cd2da4e4",
+      "previous_event_sha256": "sha256:8f628ec4cd3bac9b346747cc299d59b44424c51d0609ef2b075914cd71837004",
       "event_type": "projections-reduced",
       "actor": "gpt-sol",
       "payload": {
-        "graph_revision": 425,
-        "map_revision": 407
+        "graph_revision": 426,
+        "map_revision": 408
       },
-      "event_sha256": "sha256:1dc17b2a8a422be862890858635726cc46a5ed2d21cd06674a5e48e2236522e1"
+      "event_sha256": "sha256:125b1f70d80afb2efa8f329e9837d60cc85d01226c33e131478442c6b1cb87b2"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-a9c96fc6eb0800488de0add7",
-      "transaction_id": "txn-a9c96fc6eb0800488de0add7",
-      "operation_id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "journal_id": "journal-0ca7dc3a6c3b30af3c698e8f",
+      "transaction_id": "txn-0ca7dc3a6c3b30af3c698e8f",
+      "operation_id": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
       "sequence": 4,
-      "previous_event_sha256": "sha256:1dc17b2a8a422be862890858635726cc46a5ed2d21cd06674a5e48e2236522e1",
+      "previous_event_sha256": "sha256:125b1f70d80afb2efa8f329e9837d60cc85d01226c33e131478442c6b1cb87b2",
       "event_type": "projections-validated",
       "actor": "gpt-sol",
       "payload": {
@@ -87,26 +87,26 @@
         "compass": "passed",
         "latch": "passed"
       },
-      "event_sha256": "sha256:5b10d373297f88abd5d94f28929d6ca9ace0a3fc2be45c808a44b1c884c09499"
+      "event_sha256": "sha256:9a6bae0abf8daa1fde80bab4ded458adcefcf0919c41a78b3d9a3279d0c18f42"
     },
     {
       "schema_version": "ariadne.bureaucratic_clock_event.v1",
-      "journal_id": "journal-a9c96fc6eb0800488de0add7",
-      "transaction_id": "txn-a9c96fc6eb0800488de0add7",
-      "operation_id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "journal_id": "journal-0ca7dc3a6c3b30af3c698e8f",
+      "transaction_id": "txn-0ca7dc3a6c3b30af3c698e8f",
+      "operation_id": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
       "sequence": 5,
-      "previous_event_sha256": "sha256:5b10d373297f88abd5d94f28929d6ca9ace0a3fc2be45c808a44b1c884c09499",
+      "previous_event_sha256": "sha256:9a6bae0abf8daa1fde80bab4ded458adcefcf0919c41a78b3d9a3279d0c18f42",
       "event_type": "transaction-prepared",
       "actor": "gpt-sol",
       "payload": {
         "publication_mode": "shadow_directory_rename"
       },
-      "event_sha256": "sha256:300c06f77b0a9f280e0c9101e7732cb0dca43da0b6f2fc1660e19f2ad703ebea"
+      "event_sha256": "sha256:1c28bce714ee95e795828cd6edada58f7938f87df0fae48f95b7340717b82933"
     }
   ],
   "publication_mode": "lease_bound_pointer_last_live_tick",
   "event_kind": "clean_closeout",
-  "next_boundaries_sha256": "sha256:b9caebdb0bde85845253bd57dddf6ba439b51a3f29343aef2eafc58485a07bf1",
+  "next_boundaries_sha256": "sha256:8fa8e32d92fcb4cc67efc6f3bc410c2ea51a60ddfce959aac60ffaa282bb1b04",
   "register_bytes_preserved": false,
   "pattern_bytes_preserved": false
 }

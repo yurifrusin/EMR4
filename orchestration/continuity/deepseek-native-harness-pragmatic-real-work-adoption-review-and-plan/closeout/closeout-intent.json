@@ -1,0 +1,368 @@
+{
+  "schema_version": "ariadne.governance_live_tick_intent.v2",
+  "transaction_manifest": {
+    "schema_version": "ariadne.transactional_closeout_manifest.v1",
+    "operation_id": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
+    "title": "DeepSeek native Harness pragmatic real-work adoption review closeout",
+    "source_anchor": "current_head",
+    "recorded_at": "2026-08-23T12:36:36.1771905+10:00",
+    "node": {
+      "id": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
+      "title": "DeepSeek native Harness pragmatic real-work adoption review and plan",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri explicitly requested a complete retained-evidence review, a lower interoperability perfection target and practical native-Harness entry into real development with minimum further stand-alone testing.",
+          "The review itself is provider-free and read-only; native worker execution belongs only to a separately frozen real development tranche.",
+          "DeepSeek remains a bounded candidate contributor and never owns API meaning, integration or acceptance."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "select-native-harness-for-task-driven-real-work",
+          "source": "docs/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan.md",
+          "status": "accepted",
+          "summary": "Use the native DeepSeek Harness as a monitored contributor in the next suitable real EMR4 tranche without another generic qualification programme."
+        },
+        {
+          "id": "allow-one-bounded-task-coupled-runner-adaptation",
+          "source": "docs/security/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan-threat-model-delta.md",
+          "status": "accepted",
+          "summary": "Replace the unchanged-synthetic-runner rule with one small reusable task-coupled adapter allowance while preserving the exact broker and authority boundary."
+        },
+        {
+          "id": "couple-clockwork-at-three-boundaries",
+          "source": "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/evidence.json",
+          "status": "accepted",
+          "summary": "Take only prepared, terminal and accepted-or-recovered clockwork readings; internal model and tool steps remain non-canonical Harness evidence."
+        },
+        {
+          "id": "select-default-off-admission-input-seam-as-first-opportunity",
+          "source": "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Select a separable source/test contribution in the next default-off canonical check-in admission-input seam tranche for one monitored native session."
+        },
+        {
+          "id": "accept-pragmatic-real-work-review-efficacy",
+          "source": "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Accept the 70-node synthesis, 53 existing deterministic passes and three contained local observations without adding a generic control or test programme."
+        }
+      ],
+      "claim_scope": [
+        "Seventy accepted Continuity nodes naming native-harness are retained; the first sixty-eight are covered by the accepted predecessor synthesis and the two later nodes were directly incorporated here.",
+        "The native Harness is materially better evidenced for attribution and control than retained Claude-Code failures, but superior useful completion is not proved.",
+        "The first pragmatic real task did not reach DeepSeek because the stock seven-tool request exceeded the exact three-tool broker before provider I/O.",
+        "One small task-coupled custom-runner adaptation is admitted inside real work; the broker remains exact and is not broadened.",
+        "The clockwork consumes three coarse boundary readings rather than per-turn Harness events.",
+        "No Harness, provider, product, data, runtime, deployment, release, Pages or protected-ref action occurred during this review."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan.md",
+          "docs/security/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/evidence.json",
+          "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan-preplanning-receipt.json",
+          "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal/closeout/postpublication-readback-attempt-001-rejected-receipt.json"
+        ],
+        "tests": [
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "docs/ariadne-agent-error-correction-register-revision-642.md",
+          "orchestration/human_inbox/yuri/2026-08-23--deepseek-native-harness-pragmatic-real-work-adoption.md",
+          "scripts/raisa_native_harness_pragmatic_real_worker.py",
+          "scripts/ariadne_deepseek_native_harness_broker.mjs"
+        ]
+      },
+      "unresolved_gates": [
+        "A controlled native-Harness DeepSeek candidate has not yet passed Sol review and EMR4 tests.",
+        "The task-parameterized custom-runner descendant and its focused deterministic check remain part of the next real development tranche, not a predecessor qualification tranche.",
+        "Default-worker promotion remains a separate allocation decision based on useful accepted work and correction cost.",
+        "The default-off admission input seam cannot create or activate an ordinary-practice admission record.",
+        "Product data, live database or infrastructure, production runtime, deployment, release, Pages and protected integration remain closed."
+      ]
+    },
+    "journey": {
+      "strategic_role": "Turn the native DeepSeek Harness from an interoperability research subject into a bounded useful EMR4 contributor",
+      "outcome": "The strict broker and traceability gears remain, the unchanged-runner perfection rule is retired, and one task-driven adapter allowance opens practical real work.",
+      "evidence": [
+        "docs/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan.md",
+        "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/evidence.json",
+        "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/efficacy-reading.json"
+      ]
+    },
+    "current_position": {
+      "strategic_role": "Use one monitored native DeepSeek contributor package inside the next default-off canonical check-in development tranche",
+      "why_now": "The Harness already has sufficient boot, HMR, effective-tool and trace evidence; the missing measurement is useful accepted EMR4 work.",
+      "outcome": "One task-coupled custom-runner adaptation and one occupied real-work session will be judged through ordinary Sol review and EMR4 tests, not another qualification programme.",
+      "unlocks": [
+        "The first honest native-Harness useful-candidate reading on current EMR4 work.",
+        "A reusable typed work-order runner instead of task-specific synthetic runner identity.",
+        "A sparse three-reading clockwork/Harness interface with lower closeout friction."
+      ],
+      "does_not_solve": [
+        "One assignment cannot prove general DeepSeek or Harness reliability.",
+        "The default-off admission seam does not enable ordinary practice or activate an admission record.",
+        "No live product data, production runtime, deployment, release or protected integration is opened."
+      ],
+      "evidence": [
+        "docs/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan.md",
+        "docs/security/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan-threat-model-delta.md",
+        "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan-sol-acceptance.md"
+      ],
+      "orientation_statement": "The clockwork now reads the native Harness at prepared, terminal and accepted-or-recovered boundaries while Sol retains every lasting repository decision."
+    },
+    "next_operation": {
+      "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
+      "active_tranche": "Provider-free unmounted default-off canonical check-in environment-evidence admission-input seam rehearsal",
+      "objective": "Freeze and implement the narrowest fail-closed seam by which the existing default-off canonical check-in admission evaluator consumes the accepted typed EnvironmentEvidenceGateReading as one independently mandatory prerequisite, while using one bounded native DeepSeek contributor package under the pragmatic adapter rule and preserving every existing admission control.",
+      "authority_source": "Yuri's standing uninterrupted-development authority plus the explicit request to bring the native Harness into real EMR4 work with minimum further generic testing.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_the_exact_default_off_admission_input_contract_and_native_worker_slice"
+    },
+    "incidents": [
+      {
+        "incident_id": "harness-real-work-evaluator-threat-timestamp",
+        "source_id": "harness-real-work-local-001",
+        "peers": []
+      },
+      {
+        "incident_id": "harness-real-work-plan-linewrap-assertion",
+        "source_id": "harness-real-work-local-002",
+        "peers": []
+      },
+      {
+        "incident_id": "harness-real-work-plan-case-assertion",
+        "source_id": "harness-real-work-local-003",
+        "peers": []
+      }
+    ],
+    "broker": {
+      "enabled": false,
+      "posture": "provider_free_shadow"
+    }
+  },
+  "command_manifest": {
+    "schema_version": "ariadne.governance_command_manifest.v2",
+    "database_authority": "closed",
+    "commands": [
+      {
+        "command_id": "native-harness-pragmatic-real-work-closeout-tick-check",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_governance_clockwork_tick",
+          "--check",
+          "--intent",
+          "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/closeout/closeout-intent.json"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "native-harness-pragmatic-real-work-closeout-provider-free-tests",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_api_spine_artifacts.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "prepublication"
+      },
+      {
+        "command_id": "native-harness-pragmatic-real-work-closeout-postpublication-readback",
+        "executable": ".venv/Scripts/python.exe",
+        "arguments": [
+          "-m",
+          "scripts.ariadne_provider_free_pytest",
+          "--repo-root",
+          "C:/Users/sarashera/emr4",
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_agent_error_register.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py",
+          "tests/test_deepseek_native_harness_emr4_profile_contract.py",
+          "tests/test_ariadne_deepseek_native_harness_broker.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "completion_contract": "final_exit_code_zero_required",
+        "verification_phase": "postpublication"
+      }
+    ]
+  },
+  "baton_acceptance": {
+    "label": "Current DeepSeek native Harness acceptance",
+    "paths": [
+      "docs/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan.md",
+      "docs/security/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan-threat-model-delta.md",
+      "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/evidence.json",
+      "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-642.md",
+      "docs/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan-sol-acceptance.md",
+      "orchestration/human_inbox/yuri/2026-08-23--deepseek-native-harness-pragmatic-real-work-adoption.md"
+    ]
+  },
+  "next_operation_protected_boundaries": [
+    "provider_free_unmounted_default_off_admission_input_seam_only",
+    "one_small_reusable_task_coupled_runner_or_coordinator_adaptation_inside_real_work",
+    "stock_headless_hmr_to_custom_runner_exact_edit_glob_read_effective_tools",
+    "one_zero_provider_effective_tool_preflight_then_one_fresh_native_harness_session",
+    "natural_multi_turn_within_nine_hundred_seconds_zero_automatic_retry_fallback_or_auxiliary_model",
+    "deepseek_candidate_only_sol_owns_architecture_api_meaning_tests_integration_and_acceptance",
+    "environment_evidence_gate_reading_is_one_independently_mandatory_input_not_admission",
+    "existing_feature_flag_authored_synthetic_allowlist_admission_record_kill_switch_authorization_and_confirmation_preserved",
+    "no_silent_claude_code_or_other_transport_fallback",
+    "no_broker_tool_credential_egress_retry_or_worker_authority_broadening",
+    "no_operational_manifest_secret_value_reference_resolution_environment_variable_configuration_or_credential_store_access",
+    "no_database_conftest_engine_schema_fixture_docker_postgresql_sql_live_role_or_infrastructure_action",
+    "no_route_api_graphql_openapi_client_or_action_grammar_change_without_separate_explicit_plan",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "harness-real-work-evaluator-threat-timestamp-001",
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "evaluator-postpublication-readback",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every newly authored controlled Markdown document has one Brisbane Timestamp header before postpublication readback.",
+      "observed_error": "The evaluator threat-model delta had a Date header but no Timestamp header, so the first postpublication suite rejected the current-node document shape.",
+      "detection_method": "The exact postpublication readback failed closed with current_node_threat_delta_timestamp_header_absent.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal/closeout/postpublication-readback-attempt-001-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-642.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.controlled_markdown_timestamp_header_absent",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the required Brisbane Timestamp header and rerun the unchanged exact postpublication suite.",
+        "prevention_control": "New controlled Markdown artifacts are checked for both Date and Timestamp headers before publication readback.",
+        "evidence_paths": [
+          "docs/security/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-642.md"
+        ]
+      },
+      "baton_summary": "records the corrected evaluator threat-delta Timestamp-header omission."
+    },
+    {
+      "attempt_key": "harness-real-work-plan-linewrap-assertion-001",
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "harness-plan-source-assertions",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Source assertions use stable tokens that are not sensitive to Markdown wrapping.",
+      "observed_error": "The first assertion searched for one long literal split by a normal Markdown line break and falsely reported the present adapter rule as absent.",
+      "detection_method": "The read-only assertion command raised missing plan token while direct source inspection showed the words on adjacent lines.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-642.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.markdown_wrapped_literal_source_assertion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the wrapped phrase with a stable shorter semantic token and rerun the read-only assertions.",
+        "prevention_control": "Document assertions use structural headings or short stable tokens rather than prose spanning wrapped lines.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan.md",
+          "docs/ariadne-agent-error-correction-register-revision-642.md"
+        ]
+      },
+      "baton_summary": "records one corrected Markdown line-wrap-sensitive plan assertion."
+    },
+    {
+      "attempt_key": "harness-real-work-plan-case-assertion-001",
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "harness-plan-source-assertions",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Prose-presence assertions do not fail solely because sentence capitalization differs.",
+      "observed_error": "The second assertion used case-sensitive Contains with an initial capital while the in-sentence plan token began in lowercase.",
+      "detection_method": "The read-only assertion command raised a second false missing-token result with the plan bytes unchanged.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-642.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.case_sensitive_prose_presence_assertion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use escaped case-insensitive matching for the final semantic token assertions.",
+        "prevention_control": "Free-prose presence checks are case-insensitive unless capitalization is itself normative.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan.md",
+          "docs/ariadne-agent-error-correction-register-revision-642.md"
+        ]
+      },
+      "baton_summary": "records one corrected case-sensitive plan assertion."
+    }
+  ]
+}

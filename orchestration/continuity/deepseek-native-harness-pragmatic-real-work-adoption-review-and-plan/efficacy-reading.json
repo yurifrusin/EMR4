@@ -1,0 +1,57 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
+  "source_head": "10e46b5330e86c65721848ee0c9a4254983770d2",
+  "result": "task_driven_native_harness_adoption_frozen_without_generic_qualification",
+  "before": {
+    "native_harness_role": "monitored_secondary_worker_selected_only_when_an_existing_runner_fit_unchanged",
+    "generic_qualification_required": false,
+    "task_coupled_runner_adaptation_allowed": false,
+    "clockwork_harness_coupling": "aspired_to_fine_grained_subcoordinate_alignment",
+    "controlled_native_emr4_candidate_accepted": false
+  },
+  "after": {
+    "native_harness_role": "monitored_real_work_implementation_contributor",
+    "generic_qualification_required": false,
+    "task_coupled_runner_adaptation_allowed": true,
+    "adapter_allowance": "one_small_reusable_runner_or_coordinator_module_plus_one_focused_deterministic_test_inside_the_real_task",
+    "clockwork_harness_coupling": "three_boundary_readings_prepared_terminal_accepted_or_recovered",
+    "next_real_use": "default_off_admission_input_seam",
+    "default_worker": false,
+    "silent_claude_code_fallback": false
+  },
+  "evidence_inventory": {
+    "accepted_continuity_nodes": 70,
+    "top_level_docs": 180,
+    "continuity_directories": 66,
+    "scripts": 76,
+    "tests": 96,
+    "first_real_task_provider_calls": 0,
+    "first_real_task_candidate_present": false,
+    "first_real_task_terminal_attributable": true,
+    "comparative_useful_completion_claims": 0
+  },
+  "verification": {
+    "profile_broker_api_spine_tests_passed": 53,
+    "fresh_five_source_preflight": "passed",
+    "json_parse": "passed",
+    "full_git_object_readback": "passed",
+    "plan_and_evidence_assertions": "passed",
+    "staged_diff_check": "passed",
+    "harness_worker_provider_or_verifier_runs": 0,
+    "product_api_client_configuration_changes": 0,
+    "new_generic_qualification_tranches": 0
+  },
+  "workflow_observations": [
+    "The evaluator postpublication readback first rejected its threat-model delta because the required Brisbane Timestamp header was absent; the header was added and the unchanged exact suite passed.",
+    "The first plan assertion used one literal token that crossed a Markdown line break and therefore reported a false missing-token result.",
+    "The second plan assertion used a case-sensitive literal whose capitalization differed from the document and therefore reported a second false missing-token result; the final regex-escaped case-insensitive assertions passed."
+  ],
+  "clockwork_effect": {
+    "canonical_publications_before_acceptance": 0,
+    "runtime_or_provider_reruns_caused": 0,
+    "product_or_protected_effects_caused": 0,
+    "new_control_layer_added_for_local_assertion_lapses": false
+  },
+  "bounded_conclusion": "The native Harness should enter real EMR4 work now. Preserve its strict broker and attributable boundary readings, allow one small task-driven custom-runner adaptation, and stop opening generic interoperability or per-subcoordinate clockwork tranches. Reliability remains an empirical real-work question."
+}

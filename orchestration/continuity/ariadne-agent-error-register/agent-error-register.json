@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 641,
+  "register_revision": 642,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-23",
@@ -42263,6 +42263,117 @@
       },
       "incident_id": "AER-1096",
       "attempt_id": "clock-a33b56b4519441ab57e090c8",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal",
+      "role": "orchestrator",
+      "resource_id": "evaluator-postpublication-readback",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_pytest",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Every newly authored controlled Markdown document has one Brisbane Timestamp header before postpublication readback.",
+      "observed_error": "The evaluator threat-model delta had a Date header but no Timestamp header, so the first postpublication suite rejected the current-node document shape.",
+      "detection_method": "The exact postpublication readback failed closed with current_node_threat_delta_timestamp_header_absent.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal/closeout/postpublication-readback-attempt-001-rejected-receipt.json",
+        "docs/ariadne-agent-error-correction-register-revision-642.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.controlled_markdown_timestamp_header_absent",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Add the required Brisbane Timestamp header and rerun the unchanged exact postpublication suite.",
+        "prevention_control": "New controlled Markdown artifacts are checked for both Date and Timestamp headers before publication readback.",
+        "evidence_paths": [
+          "docs/security/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-threat-model-delta.md",
+          "docs/ariadne-agent-error-correction-register-revision-642.md"
+        ]
+      },
+      "incident_id": "AER-1097",
+      "attempt_id": "clock-6ec4567cdf42762b94e39098",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "harness-plan-source-assertions",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Source assertions use stable tokens that are not sensitive to Markdown wrapping.",
+      "observed_error": "The first assertion searched for one long literal split by a normal Markdown line break and falsely reported the present adapter rule as absent.",
+      "detection_method": "The read-only assertion command raised missing plan token while direct source inspection showed the words on adjacent lines.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-642.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.markdown_wrapped_literal_source_assertion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the wrapped phrase with a stable shorter semantic token and rerun the read-only assertions.",
+        "prevention_control": "Document assertions use structural headings or short stable tokens rather than prose spanning wrapped lines.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan.md",
+          "docs/ariadne-agent-error-correction-register-revision-642.md"
+        ]
+      },
+      "incident_id": "AER-1098",
+      "attempt_id": "clock-bfa8741368c5cdd559ba2af6",
+      "origin": "operator",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-23",
+      "tranche": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
+      "role": "orchestrator",
+      "resource_id": "harness-plan-source-assertions",
+      "model": "gpt-sol",
+      "reasoning_level": "high",
+      "transport": "local_repository_powershell",
+      "stage": "deterministic_verification",
+      "category": "operator_error",
+      "process_severity": "low",
+      "expected_invariant": "Prose-presence assertions do not fail solely because sentence capitalization differs.",
+      "observed_error": "The second assertion used case-sensitive Contains with an initial capital while the in-sentence plan token began in lowercase.",
+      "detection_method": "The read-only assertion command raised a second false missing-token result with the plan bytes unchanged.",
+      "evidence_paths": [
+        "orchestration/continuity/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan/efficacy-reading.json",
+        "docs/ariadne-agent-error-correction-register-revision-642.md"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.case_sensitive_prose_presence_assertion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use escaped case-insensitive matching for the final semantic token assertions.",
+        "prevention_control": "Free-prose presence checks are case-insensitive unless capitalization is itself normative.",
+        "evidence_paths": [
+          "docs/deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan.md",
+          "docs/ariadne-agent-error-correction-register-revision-642.md"
+        ]
+      },
+      "incident_id": "AER-1099",
+      "attempt_id": "clock-d993fc488f4019f27b462fef",
       "origin": "operator",
       "related_incident_ids": [],
       "status": "corrected"
