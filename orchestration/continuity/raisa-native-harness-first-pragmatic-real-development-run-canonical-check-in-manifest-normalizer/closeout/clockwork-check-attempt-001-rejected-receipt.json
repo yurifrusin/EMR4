@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.governance_live_tick_rejected_check.v1",
+  "operation_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+  "attempt": 1,
+  "intent_sha256": "6e7f19bda970735a6ef900673de5619abfc8926e8014306075e2e2470c84dc31",
+  "result": "rejected_before_canonical_mutation",
+  "reason": "tick_incident_attempt_key_duplicate",
+  "selected_generation_id_unchanged": "gen-e49927e358035042ba06acd87d0a7148cca1391688ec3f9545ae22e101f70df1",
+  "lease_sequence_unchanged": 194,
+  "correction": "assign one unique attempt_key to every v2 observation and retain narrative relationships separately"
+}

@@ -8,8 +8,8 @@ Status: `accepted_pending_clockwork_publication`
 
 <!-- ariadne-agent-error-register-reading
 revision: 639
-incident_count: 1078
-new_incident_ids: AER-1060,AER-1061,AER-1062,AER-1063,AER-1064,AER-1065,AER-1066,AER-1067,AER-1068,AER-1069,AER-1070,AER-1071,AER-1072,AER-1073,AER-1074,AER-1075,AER-1076,AER-1077,AER-1078
+incident_count: 1079
+new_incident_ids: AER-1060,AER-1061,AER-1062,AER-1063,AER-1064,AER-1065,AER-1066,AER-1067,AER-1068,AER-1069,AER-1070,AER-1071,AER-1072,AER-1073,AER-1074,AER-1075,AER-1076,AER-1077,AER-1078,AER-1079
 open_incident_count: 0
 -->
 
@@ -168,9 +168,18 @@ the serial lock and passed all 149 tests.
 
 Origin: operator. Severity: low. Status: corrected and contained.
 
+## AER-1079 — Paired incident observations reused one attempt key
+
+The first clockwork dry-run rejected two paired incident groups because each
+group reused an `attempt_key`; the v2 intent requires observation keys to be
+unique even when higher-level incidents are related. Unique keys were assigned
+and the rejected intent hash was retained. No canonical surface changed.
+
+Origin: operator. Severity: low. Status: corrected and contained.
+
 ## Aggregate reading
 
-The durable register will contain 1,078 corrected or contained incidents and
+The durable register will contain 1,079 corrected or contained incidents and
 zero open incidents after clockwork publication. The native Harness terminal
 was a deterministic pre-provider tool-contract rejection rather than an
 untraceable model failure. The remaining rows are bounded preparation,
