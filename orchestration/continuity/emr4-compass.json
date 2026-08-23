@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 404,
-  "updated_at": "2026-08-23T09:22:37.2550535+10:00",
-  "source_graph_revision": 422,
-  "orientation_statement": "The clockwork will take pre-dispatch and terminal readings while the native Harness is allowed to perform ordinary multi-turn coding inside one bounded session.",
+  "map_revision": 405,
+  "updated_at": "2026-08-23T10:30:23.9779889+10:00",
+  "source_graph_revision": 423,
+  "orientation_statement": "Continue development, reuse only already accepted compatible Harness machinery, and decline the native lane rather than reopen generic interoperability testing.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5173,27 +5173,36 @@
         "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/evidence.json",
         "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json"
       ]
+    },
+    {
+      "node_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+      "lineage_parent": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+      "strategic_role": "Complete the first real source assignment under pragmatic native-Harness adoption while preserving fail-closed operational boundaries",
+      "outcome": "The real unmounted normalizer is accepted through Sol recovery and the native transport mismatch has a bounded attributable reading without another interoperability tranche.",
+      "evidence": [
+        "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-closeout.md",
+        "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/efficacy-reading.json"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
-    "strategic_role": "Use the native Harness on one small genuine EMR4 source/test package and measure accepted usefulness plus correction cost",
-    "why_now": "The boot, tool and trace boundaries are already accepted, and another synthetic qualification phase would answer less than a real bounded assignment.",
-    "outcome": "One fresh native-Harness session will attempt the unmounted closed manifest normalizer with natural multi-turn self-correction and Sol-owned tests.",
+    "node_id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+    "strategic_role": "Build the remaining provider-free reference-only environment-evidence model before any evaluator or admission seam",
+    "why_now": "The normalizer prerequisite is complete and typed operational-evidence inputs are the narrowest dependency-satisfied repository node.",
+    "outcome": "One unmounted typed input model can make the later pure evaluator possible without asserting that any external operational fact exists.",
     "unlocks": [
-      "A matched useful-candidate reading rather than another boot coordinate.",
-      "Practical evidence of whether stronger traceability reduces orchestrator recovery cost.",
-      "The first of a rolling set of real-work readings that can support continued use or later promotion."
+      "A closed typed representation for runtime-role, rotation, custody, break-glass and freshness readings.",
+      "The later pure environment evidence-gate evaluator.",
+      "Another bounded real-work reading if an already accepted compatible native-Harness runner is available."
     ],
     "does_not_solve": [
-      "One run cannot prove general reliability or default-worker suitability.",
-      "The unmounted normalizer does not create an operational manifest, resolve a secret or enable ordinary practice.",
-      "No product data, live product runtime, deployment, release or protected integration is opened."
+      "Typed inputs do not create or validate a live operational fact.",
+      "The evaluator and default-off admission input seam remain later nodes.",
+      "No ordinary-practice activation or external action is authorized."
     ],
     "evidence": [
-      "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan.md",
-      "docs/security/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-threat-model-delta.md",
-      "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-sol-acceptance.md"
+      "orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json",
+      "app/services/appointment_check_in_environment_manifest.py"
     ]
   },
   "decision_horizon": [

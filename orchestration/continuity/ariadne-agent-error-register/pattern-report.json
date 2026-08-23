@@ -1,45 +1,45 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 638,
+  "register_revision": 639,
   "source_cutoff_on": "2026-08-23",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "b05833c1a22d9c6f7d523322b51892234b57f044d6eb3d3a6272e41dd8f349c5",
-  "incident_count": 1059,
+  "canonical_register_sha256": "cf83933c5d8121fd4dd9dd75c15cf9e1a998ba461920be4008c8bc9fbf45aac7",
+  "incident_count": 1082,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 550,
-      "harness": 72,
-      "operator": 277,
-      "repository": 144,
+      "agent_behavior": 564,
+      "harness": 73,
+      "operator": 283,
+      "repository": 146,
       "transport": 16
     },
     "by_category": {
-      "command_scope_violation": 106,
-      "evidence_misreport": 75,
-      "harness_failure": 72,
-      "operator_error": 277,
-      "output_contract_violation": 316,
+      "command_scope_violation": 111,
+      "evidence_misreport": 76,
+      "harness_failure": 73,
+      "operator_error": 283,
+      "output_contract_violation": 322,
       "read_only_violation": 5,
-      "reasoning_claim_error": 48,
-      "repository_defect": 144,
+      "reasoning_claim_error": 50,
+      "repository_defect": 146,
       "transport_timeout": 16
     },
     "by_role": {
-      "implementer": 83,
+      "implementer": 84,
       "integration_reviewer": 3,
-      "orchestrator": 910,
+      "orchestrator": 932,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 690,
+      "low": 708,
       "material": 135,
-      "moderate": 234
+      "moderate": 239
     },
     "by_candidate_state": {
-      "accepted_candidate_changed": 227,
-      "canonical_unchanged": 661,
-      "untrusted_partial_worktree": 171
+      "accepted_candidate_changed": 228,
+      "canonical_unchanged": 679,
+      "untrusted_partial_worktree": 175
     },
     "by_resource_and_role": {
       "accepted-guard-graph-clockwork-publication::orchestrator": 1,
@@ -333,6 +333,26 @@
       "local-python-operator::orchestrator": 5,
       "local-rg-operator::orchestrator": 3,
       "mandatory-narrative-timestamp::orchestrator": 1,
+      "manifest-normalizer-attempt-root-cleanup::orchestrator": 2,
+      "manifest-normalizer-closeout-example-search::orchestrator": 1,
+      "manifest-normalizer-closeout-intent::orchestrator": 2,
+      "manifest-normalizer-command-manifest::orchestrator": 1,
+      "manifest-normalizer-coordinator-preparation::orchestrator": 1,
+      "manifest-normalizer-current-node-markdown::orchestrator": 1,
+      "manifest-normalizer-dependency-search::orchestrator": 1,
+      "manifest-normalizer-final-suite::orchestrator": 1,
+      "manifest-normalizer-focused-tests::orchestrator": 1,
+      "manifest-normalizer-gap-tripwire::orchestrator": 1,
+      "manifest-normalizer-harness-script-search::orchestrator": 1,
+      "manifest-normalizer-native-terminal::orchestrator": 1,
+      "manifest-normalizer-package-script::orchestrator": 1,
+      "manifest-normalizer-predispatch-workspace::orchestrator": 2,
+      "manifest-normalizer-preplanning-receipt::orchestrator": 1,
+      "manifest-normalizer-scaffold::orchestrator": 1,
+      "manifest-normalizer-source-guard::orchestrator": 1,
+      "manifest-normalizer-source-review::orchestrator": 1,
+      "manifest-normalizer-stock-headless-session::implementer": 1,
+      "manifest-normalizer-tool-source-inspection::orchestrator": 1,
       "materialised-runtime-identity-validator::implementer": 1,
       "materialization-provider-free-terminal-readback::orchestrator": 1,
       "minimum-environment-candidate-identity::orchestrator": 1,
@@ -794,6 +814,29 @@
       "prevention_controls": [
         "Treat pre_sprint_planning and pre_worker_dispatch as distinct ordered events; the dispatch command may be issued only after the latter receipt is generated and read back as passed.",
         "Treat worker_dispatch_permitted true in the immediately preceding distinct receipt as a hard executable precondition for every native or external worker spawn or follow-up task."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.recursive_cleanup_command_policy",
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-1070",
+        "AER-1071"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "categories": [
+        "command_scope_violation"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "manifest-normalizer-attempt-root-cleanup"
+      ],
+      "prevention_controls": [
+        "Disposable cleanup binds exact asserted paths before deletion."
       ]
     },
     {
@@ -1878,6 +1921,29 @@
       "prevention_controls": [
         "Before every external review, execute and record every command in the packet's allowlist locally, including format checks, rather than treating Ruff lint as a formatter substitute.",
         "Generate verifier allowed-command blocks from one executable local gate list, persist each exit code before dispatch, and make the launcher reject any external pass receipt whose required command outcomes are nonzero."
+      ]
+    },
+    {
+      "recurrence_signature": "orchestrator.external_harness_assigned_workspace_model",
+      "incident_count": 2,
+      "incident_ids": [
+        "AER-1067",
+        "AER-1068"
+      ],
+      "origins": [
+        "agent_behavior"
+      ],
+      "categories": [
+        "reasoning_claim_error"
+      ],
+      "roles": [
+        "orchestrator"
+      ],
+      "resource_ids": [
+        "manifest-normalizer-predispatch-workspace"
+      ],
+      "prevention_controls": [
+        "External Harness sessions remain transport evidence rather than Ariadne workspace owners."
       ]
     },
     {

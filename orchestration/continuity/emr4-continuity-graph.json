@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 422,
+  "graph_revision": 423,
   "harvests": [],
   "nodes": [
     {
@@ -33843,9 +33843,114 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer",
+      "title": "Canonical check-in manifest normalizer",
+      "kind": "foundation",
+      "relationships": [
+        {
+          "node_id": "deepseek-native-harness-pragmatic-development-adoption-review-and-plan",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri authorized pragmatic native-Harness entry into real Raisa development with minimum further generic testing and standing uninterrupted-development authority.",
+          "The source result is provider-free, unmounted and reference-only; it grants no operational fact, secret resolution, command or admission authority.",
+          "The accepted candidate is Sol recovery work because the native request was rejected before provider I/O."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-closed-manifest-normalizer",
+          "source": "app/services/appointment_check_in_environment_manifest.py",
+          "status": "accepted",
+          "summary": "Accept the pure exact-byte closed manifest normalizer and frozen typed result at the reviewed source."
+        },
+        {
+          "id": "classify-native-terminal-as-pre-provider-tool-mismatch",
+          "source": "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-terminal-review.json",
+          "status": "accepted",
+          "summary": "The stock headless runner's seven declared tools exceeded the broker's exact three-tool allowlist before any provider call."
+        },
+        {
+          "id": "retain-pragmatic-secondary-worker-posture",
+          "source": "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/efficacy-reading.json",
+          "status": "accepted",
+          "summary": "Retain native Harness as a monitored secondary worker without default promotion or another generic qualification programme."
+        },
+        {
+          "id": "accept-sol-recovery-provenance",
+          "source": "orchestration/agent_inbox/codex/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-sol-acceptance.md",
+          "status": "accepted",
+          "summary": "Accept the source as Sol recovery after 149 passing focused and surrounding tests and deterministic hygiene checks."
+        }
+      ],
+      "claim_scope": [
+        "The normalizer consumes caller-supplied canonical bytes only and returns frozen typed data or one deterministic denial.",
+        "It reads no filesystem, process environment, configuration, credential, database, route, network or current clock.",
+        "The native session made zero provider calls, zero tool calls and zero file changes.",
+        "The terminal is attributable from the retained request tool header and pinned source, but the broker reason event was omitted so matched trace_complete is false.",
+        "The disposable worker processes, worktree registration and attempt root are absent.",
+        "No operational manifest, secret, admission, product runtime, deployment, Pages or protected-ref action occurred."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-plan.md",
+          "docs/security/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-terminal.json",
+          "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-terminal-review.json",
+          "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-cleanup-readback.json",
+          "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-closeout.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-pre-worker-dispatch-receipt.json"
+        ],
+        "tests": [
+          "tests/test_appointment_check_in_environment_manifest.py",
+          "tests/test_raisa_provider_free_default_off_check_in_environment_manifest_secret_posture_architecture.py",
+          "tests/test_raisa_provider_free_read_only_check_in_environment_secret_posture_gap_decomposition.py",
+          "tests/test_raisa_provider_free_default_off_canonical_check_in_non_phi_observability_manifest_convergence_rehearsal.py",
+          "tests/test_api_spine_artifacts.py"
+        ],
+        "artifacts": [
+          "app/services/appointment_check_in_environment_manifest.py",
+          "scripts/raisa_native_harness_pragmatic_real_worker.py",
+          "docs/ariadne-agent-error-correction-register-revision-639.md",
+          "orchestration/human_inbox/yuri/2026-08-23--canonical-check-in-manifest-normalizer-and-native-harness-reading.md"
+        ]
+      },
+      "unresolved_gates": [
+        "Typed operational-evidence inputs remain unimplemented.",
+        "The pure environment evidence-gate evaluator still depends on typed inputs and this normalizer.",
+        "No operational manifest instance or external operational fact exists.",
+        "Native-Harness useful completion and comparative reliability remain unproved by this pre-provider terminal.",
+        "Ordinary-practice activation, product runtime, deployment and protected integration remain closed."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T10:30:23.9779889+10:00",
+      "updated_at": "2026-08-23T10:30:23.9779889+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "39502b308a96842ffe0dcf06f9325eb2fb14b6f9",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T09:22:37.2550535+10:00"
+  "updated_at": "2026-08-23T10:30:23.9779889+10:00"
 }

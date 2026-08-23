@@ -1,6 +1,6 @@
 # Ariadne Compass — EMR4
 
-> The clockwork will take pre-dispatch and terminal readings while the native Harness is allowed to perform ordinary multi-turn coding inside one bounded session.
+> Continue development, reuse only already accepted compatible Harness machinery, and decline the native lane rather than reopen generic interoperability testing.
 
 ## North star
 
@@ -614,26 +614,28 @@ Reception One is the current internal receptionist-copilot programme. Its purpos
    Three dependency-satisfied repository mechanisms are now isolated from six absent external facts and five unselected human decisions. Lineage parent: `raisa-provider-free-read-only-canonical-check-in-ordinary-practice-admission-readiness-post-attempt-008-convergence-review`.
 299. **Move the native DeepSeek Harness from an over-qualified integration subject into useful bounded Raisa development — DeepSeek native Harness pragmatic development-adoption review and plan**
    The accepted controls are reduced to the gears needed for traceability, containment and Sol acceptance, and the first real assignment is selected. Lineage parent: `raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition`.
+300. **Complete the first real source assignment under pragmatic native-Harness adoption while preserving fail-closed operational boundaries — Canonical check-in manifest normalizer**
+   The real unmounted normalizer is accepted through Sol recovery and the native transport mismatch has a bounded attributable reading without another interoperability tranche. Lineage parent: `deepseek-native-harness-pragmatic-development-adoption-review-and-plan`.
 
 ## Current position
 
-**Use the native Harness on one small genuine EMR4 source/test package and measure accepted usefulness plus correction cost — DeepSeek native Harness pragmatic development-adoption review and plan**
+**Build the remaining provider-free reference-only environment-evidence model before any evaluator or admission seam — Canonical check-in manifest normalizer**
 
-**Why this proof came next:** The boot, tool and trace boundaries are already accepted, and another synthetic qualification phase would answer less than a real bounded assignment.
+**Why this proof came next:** The normalizer prerequisite is complete and typed operational-evidence inputs are the narrowest dependency-satisfied repository node.
 
-One fresh native-Harness session will attempt the unmounted closed manifest normalizer with natural multi-turn self-correction and Sol-owned tests.
+One unmounted typed input model can make the later pure evaluator possible without asserting that any external operational fact exists.
 
 ### What this unlocks
 
-- A matched useful-candidate reading rather than another boot coordinate.
-- Practical evidence of whether stronger traceability reduces orchestrator recovery cost.
-- The first of a rolling set of real-work readings that can support continued use or later promotion.
+- A closed typed representation for runtime-role, rotation, custody, break-glass and freshness readings.
+- The later pure environment evidence-gate evaluator.
+- Another bounded real-work reading if an already accepted compatible native-Harness runner is available.
 
 ### What it does not solve
 
-- One run cannot prove general reliability or default-worker suitability.
-- The unmounted normalizer does not create an operational manifest, resolve a secret or enable ordinary practice.
-- No product data, live product runtime, deployment, release or protected integration is opened.
+- Typed inputs do not create or validate a live operational fact.
+- The evaluator and default-off admission input seam remain later nodes.
+- No ordinary-practice activation or external action is authorized.
 
 ## Continuity and authority
 
@@ -1131,6 +1133,7 @@ Prerequisites:
 - `app/services/application_identity_oidc_redemption.py`
 - `app/services/application_identity_oidc_redemption_database_role.py`
 - `app/services/application_identity_oidc_transport.py`
+- `app/services/appointment_check_in_environment_manifest.py`
 - `app/services/appointment_check_in_product_adapter.py`
 - `app/services/appointment_delete_composition.py`
 - `app/services/appointment_delete_physical.py`
@@ -1505,6 +1508,7 @@ Prerequisites:
 - `docs/raisa-microsoft-federation-postgresql-persistence-plan.md`
 - `docs/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal-closeout.md`
 - `docs/raisa-native-harness-bounded-occupied-useful-worker-rehearsal-closeout.md`
+- `docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-closeout.md`
 - `docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-closeout.md`
 - `docs/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition-plan.md`
 - `docs/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review-closeout.md`
@@ -1844,7 +1848,6 @@ Prerequisites:
 - `docs/security/bernie-reception-one-structured-source-language-threat-model-delta.md`
 - `docs/security/deepseek-native-harness-emr4-worker-profile-and-first-monitored-development-admission-threat-model-delta.md`
 - `docs/security/deepseek-native-harness-exact-tool-view-recovery-and-second-monitored-development-admission-threat-model-delta.md`
-- `docs/security/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-threat-model-delta.md`
 - `docs/security/dependabot-alert-17-triage-2026-08-01.md`
 - `docs/security/dependabot-alerts-8-15-triage-2026-08-01.md`
 - `docs/security/emr4-model-required-bureau-a3-b3-request-contract-recovery-threat-model-delta.md`
@@ -2170,7 +2173,6 @@ Prerequisites:
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-provider-free-composed-request-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-occupied-negative-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-exact-tool-view-second-monitored-development-sol-acceptance.md`
-- `orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-sol-acceptance.md`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-micro-rehearsal-evidence.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-orchestrator-incidents.json`
 - `orchestration/agent_inbox/codex/deepseek-native-harness-traceability-package-preflight-evidence.json`
@@ -2961,6 +2963,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-microsoft-federation-postgresql-persistence/live-local-backend-postgres-evidence.json`
 - `orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-coordinate-recovery-rehearsal/attempt-002/occupied-terminal.json`
 - `orchestration/continuity/raisa-native-harness-bounded-occupied-useful-worker-rehearsal/attempt-001/occupied-terminal.json`
+- `orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/efficacy-reading.json`
 - `orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.json`
 - `orchestration/continuity/raisa-ordinary-diary-cancellation-canonical-consumer-convergence-composition/ordinary-diary-cancellation-canonical-consumer-convergence-composition-evidence.schema.json`
 - `orchestration/continuity/raisa-ordinary-diary-cancellation-compatibility-consumer-convergence-review/ordinary-diary-cancellation-compatibility-consumer-convergence-review-evidence.json`
@@ -3083,6 +3086,7 @@ Prerequisites:
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/provider-free-acceptance-evidence.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.example.json`
 - `orchestration/continuity/raisa-provider-free-practice-context-fabric-patient-free-temporal-weave/temporal-weave-contract.schema.json`
+- `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/contract.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/efficacy-reading.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/evidence.json`
 - `orchestration/continuity/raisa-provider-free-read-only-canonical-check-in-environment-manifest-operational-secret-posture-evidence-gap-decomposition/report.md`
@@ -3889,4 +3893,4 @@ Prerequisites:
 - `tests/test_reception_one_word_desktop_authenticated_dialog_check.py`
 - `tests/test_reception_one_word_hybrid_contextual_launch.py`
 
-_Compass map revision 404; continuity graph revision 422._
+_Compass map revision 405; continuity graph revision 423._
