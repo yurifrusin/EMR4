@@ -1,0 +1,195 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "pre_sprint_planning",
+  "planned_action": "review_retained_native_harness_real_work_evidence_and_freeze_task_driven_adoption_plan",
+  "source_evidence": {
+    "live_handover_current_baton": "The complete live Baton was freshly read. It records the accepted pure environment evidence-gate evaluator, the monitored-secondary native Harness posture and this pragmatic real-work adoption review as the current successor.",
+    "current_authority_allocation": "Yuri authorizes uninterrupted completion of this read-only review and minimum-further-testing plan. GPT Sol owns the serial synthesis and acceptance; no worker, verifier or subagent receives a package during the review.",
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan.md",
+      "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/evidence.json",
+      "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json",
+      "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-sol-acceptance.md",
+      "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-plan.md",
+      "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-terminal-review.json",
+      "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/efficacy-reading.json",
+      "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-sol-acceptance.md",
+      "docs/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-plan.md",
+      "docs/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-sol-acceptance.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "protected_evidence_boundaries": "The review may read retained non-protected native-Harness and historical transport evidence and author plan/closeout records only. It may not run or mutate the Harness, broker, runner or guard, call a provider, inspect protected evidence, use product or patient data, change product/API/client/configuration surfaces, deploy, release, publish Pages or move protected refs.",
+    "git_refs_and_worktree": "The machine snapshot alone supplies exact branch, origin, protected-ref, ancestry, tracked-clean and preserved-untracked readings. All unrelated untracked paths, especially docs/branding, remain preserved."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
+    "active_tranche": "DeepSeek native Harness pragmatic real-work adoption review and plan",
+    "objective": "Review all retained native-Harness investigation and real-work evidence, lower the interoperability perfection target, and freeze the most effective minimum-further-testing plan for bringing DeepSeek native Harness into EMR4 development.",
+    "status": "in_progress",
+    "source_head": "89640f1bb6ad992f68d5c20fd578b4062eeb193d",
+    "authority_source": "Yuri explicitly requested this review and plan after the evaluator tranche and authorized continued work without ceremonial pauses.",
+    "checkpoint": {
+      "completed_stage": "Accepted raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_inventory_retained_harness_evidence_and_freeze_pragmatic_adoption_criteria",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_read_only_native_harness_evidence_review_and_pragmatic_adoption_plan",
+      "retained_repository_evidence_only_no_new_generic_harness_qualification",
+      "lowered_interoperability_perfection_target_minimum_task_driven_adaptation_only",
+      "no_native_harness_session_provider_call_runner_broker_or_guard_change_in_review",
+      "no_silent_claude_code_or_other_transport_fallback",
+      "no_product_source_test_route_api_client_configuration_or_runtime_change",
+      "no_operational_manifest_secret_value_reference_resolution_environment_variable_configuration_or_credential_store_access",
+      "no_database_conftest_engine_schema_fixture_docker_postgresql_sql_live_role_or_infrastructure_action",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_action_grammar_generic_status_arrived_or_waiting_area_change",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
+    "assessed_stage": "preplanning_rehydrated_harness_real_work_review",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The review evaluates the native Harness and cannot use the subject worker as its own governance or acceptance source; the active boundary also forbids a native session or provider call during review.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "The retained repository corpus, occupied terminals and user direction decide this process plan without an external provider veto. Reassessment is reserved for a material evidence contradiction or later risky code candidate.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation, and a single serial owner must reconcile the Harness evidence and freeze the authority boundary.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "complete five-source rehydration",
+      "inventory retained Harness investigation and first-real-work evidence",
+      "separate traceability proof from useful-completion proof",
+      "freeze the minimum task-driven adaptation and real-work policy"
+    ],
+    "reassessment_triggers": [
+      "if retained evidence is materially contradictory",
+      "before dispatching a later native-Harness real-work package",
+      "if a later code candidate crosses a normal risk-weighted verifier trigger"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "The complete live Baton, current allocation, active acceptance packet, protected boundaries, active latch and machine Git snapshot were freshly restored before the Harness review.",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["GPT Sol owns the read-only review and plan."]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["No live probe is authorized; retained occupied and provider-free terminals supply the review evidence."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Historical comparison lineage only; no silent fallback is authorized."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent spawned."]
+    }
+  ],
+  "worker_slots": [
+    {
+      "resource_id": "deepseek-flash-workers",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    },
+    {
+      "resource_id": "antigravity-gemini-flash-3-7-high-verifier",
+      "active_instance_ids": [],
+      "stale_instance_ids": []
+    }
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

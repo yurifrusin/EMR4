@@ -1,0 +1,132 @@
+{
+  "active_operation": {
+    "active_tranche": "DeepSeek native Harness pragmatic real-work adoption review and plan",
+    "completed_stage": "Accepted raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_inventory_retained_harness_evidence_and_freeze_pragmatic_adoption_criteria",
+    "operation_id": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
+    "resume_after_compaction": true,
+    "source_head": "89640f1bb6ad992f68d5c20fd578b4062eeb193d",
+    "status": "in_progress",
+    "terminal_handback_permitted": false,
+    "user_attention_required": false
+  },
+  "authority_boundary": "receipt_only_no_worker_control_or_integration_authority",
+  "continuation_event": "pre_sprint_planning",
+  "git_object_resolution": {
+    "observed_head": "03950c102584b92677b791e615248de090f13b61",
+    "reason_codes": [],
+    "resolved_commit": "89640f1bb6ad992f68d5c20fd578b4062eeb193d",
+    "schema_version": "ariadne.git_object_resolution.v1",
+    "source_field": "active_operation.source_head",
+    "source_is_ancestor_of_head": true,
+    "status": "passed",
+    "supplied_object_id": "89640f1bb6ad992f68d5c20fd578b4062eeb193d"
+  },
+  "git_ref_evidence_binding": {
+    "manually_supplied_object_id_count": 0,
+    "policy": "machine_snapshot_only",
+    "reason_codes": [],
+    "schema_version": "ariadne.git_ref_evidence_binding.v1",
+    "status": "passed"
+  },
+  "git_refs_snapshot": {
+    "branch": "codex/ariadne-bernie-davida-parallel-seam",
+    "branch_commit": "03950c102584b92677b791e615248de090f13b61",
+    "branch_origin_aligned": true,
+    "head": "03950c102584b92677b791e615248de090f13b61",
+    "origin_branch_commit": "03950c102584b92677b791e615248de090f13b61",
+    "preserved_untracked_paths": {
+      "docs/branding": true
+    },
+    "protected_expected_commit": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "protected_refs": {
+      "refs/heads/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/heads/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/handoff/current": "2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "refs/remotes/origin/master": "2e34bdad732fdab32fbf778280b3d3c70d66d602"
+    },
+    "protected_refs_aligned": true,
+    "reason_codes": [],
+    "schema_version": "ariadne.git_refs_snapshot.v1",
+    "status": "passed",
+    "tracked_worktree_clean": true,
+    "untracked_path_count": 676
+  },
+  "parallelism_assessment": {
+    "assessed_stage": "preplanning_rehydrated_harness_real_work_review",
+    "lanes": [
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "deepseek_flash",
+        "rationale": "The review evaluates the native Harness and cannot use the subject worker as its own governance or acceptance source; the active boundary also forbids a native session or provider call during review.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "lane_id": "gemini_verifier",
+        "rationale": "The retained repository corpus, occupied terminals and user direction decide this process plan without an external provider veto. Reassessment is reserved for a material evidence contradiction or later risky code candidate.",
+        "work_packages": []
+      },
+      {
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "lane_id": "native_subagents",
+        "rationale": "Developer policy prohibits proactive delegation, and a single serial owner must reconcile the Harness evidence and freeze the authority boundary.",
+        "work_packages": []
+      }
+    ],
+    "operation_id": "deepseek-native-harness-pragmatic-real-work-adoption-review-and-plan",
+    "parallel_work_packages": [],
+    "reassessment_triggers": [
+      "if retained evidence is materially contradictory",
+      "before dispatching a later native-Harness real-work package",
+      "if a later code candidate crosses a normal risk-weighted verifier trigger"
+    ],
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "serial_constraints": [
+      "complete five-source rehydration",
+      "inventory retained Harness investigation and first-real-work evidence",
+      "separate traceability proof from useful-completion proof",
+      "freeze the minimum task-driven adaptation and real-work policy"
+    ]
+  },
+  "planned_action": "review_retained_native_harness_real_work_evidence_and_freeze_task_driven_adoption_plan",
+  "reasons": [],
+  "rehydrated_from_receipt": true,
+  "rehydration_sources": [
+    "live_handover_current_baton",
+    "current_authority_allocation",
+    "active_plan_and_acceptance",
+    "protected_evidence_boundaries",
+    "git_refs_and_worktree"
+  ],
+  "schema_version": "ariadne.orchestrator_receipt.v1",
+  "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb",
+  "source_evidence": {
+    "active_plan_and_acceptance": [
+      "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan.md",
+      "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/evidence.json",
+      "orchestration/continuity/deepseek-native-harness-pragmatic-development-adoption-review-and-plan/efficacy-reading.json",
+      "docs/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-closeout.md",
+      "orchestration/agent_inbox/codex/deepseek-native-harness-pragmatic-development-adoption-review-and-plan-sol-acceptance.md",
+      "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-plan.md",
+      "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/occupied-terminal-review.json",
+      "orchestration/continuity/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer/efficacy-reading.json",
+      "docs/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-native-harness-first-pragmatic-real-development-run-canonical-check-in-manifest-normalizer-sol-acceptance.md",
+      "docs/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-plan.md",
+      "docs/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-provider-free-unmounted-canonical-check-in-pure-environment-evidence-gate-evaluator-rehearsal-sol-acceptance.md",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    ],
+    "current_authority_allocation": "Yuri authorizes uninterrupted completion of this read-only review and minimum-further-testing plan. GPT Sol owns the serial synthesis and acceptance; no worker, verifier or subagent receives a package during the review.",
+    "git_refs_and_worktree": "The machine snapshot alone supplies exact branch, origin, protected-ref, ancestry, tracked-clean and preserved-untracked readings. All unrelated untracked paths, especially docs/branding, remain preserved.",
+    "live_handover_current_baton": "The complete live Baton was freshly read. It records the accepted pure environment evidence-gate evaluator, the monitored-secondary native Harness posture and this pragmatic real-work adoption review as the current successor.",
+    "protected_evidence_boundaries": "The review may read retained non-protected native-Harness and historical transport evidence and author plan/closeout records only. It may not run or mutate the Harness, broker, runner or guard, call a provider, inspect protected evidence, use product or patient data, change product/API/client/configuration surfaces, deploy, release, publish Pages or move protected refs."
+  },
+  "status": "passed",
+  "terminal_handback_permitted": false,
+  "worker_dispatch_permitted": true
+}
