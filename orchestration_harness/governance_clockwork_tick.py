@@ -52,6 +52,14 @@ from orchestration_harness.verification_envelope import (
 TICK_INTENT_VERSION = "ariadne.governance_live_tick_intent.v1"
 GOVERNANCE_COMMAND_VERSION_V2 = "ariadne.governance_command_manifest.v2"
 TICK_INCIDENT_INTENT_VERSION = "ariadne.governance_live_tick_intent.v2"
+SEMANTIC_TICK_INTENT_VERSION = "ariadne.governance_semantic_closeout_intent.v1"
+SEMANTIC_PROFILE = "provider_free_governance_tooling_v1"
+SEMANTIC_BATON_SLOT = "current_deepseek_native_harness_acceptance"
+SEMANTIC_VERIFICATION_PROFILE = "governance_clockwork_core_v1"
+SEMANTIC_BATON_LABEL = "Current DeepSeek native Harness acceptance"
+SEMANTIC_MATERIALIZATION_VERSION = (
+    "ariadne.governance_semantic_evidence_materialization.v1"
+)
 BLOCKED_INTENT_VERSION = "ariadne.governance_live_blocked_transition_intent.v1"
 USER_DECISION_INTENT_VERSION = (
     "ariadne.governance_live_user_decision_transition_intent.v1"
@@ -213,6 +221,32 @@ def _strings(value: object, rule: str, *, maximum: int = 500) -> list[str]:
     return result
 
 
+def _optional_strings(value: object, rule: str, *, maximum: int = 500) -> list[str]:
+    if not isinstance(value, list):
+        _reject(rule)
+    result = [_text(item, rule, maximum) for item in value]
+    if len(result) != len(set(result)):
+        _reject(rule)
+    return result
+
+
+def _semantic_exact(value: object, keys: set[str], rule: str) -> dict[str, Any]:
+    try:
+        return _exact(value, keys, rule)
+    except AdoptionRejection as error:
+        raise ClockworkTickRejection(rule) from error
+
+
+def semantic_scalar_leaf_count(value: object) -> int:
+    """Count caller-authored scalar leaves without treating container keys as input."""
+
+    if isinstance(value, dict):
+        return sum(semantic_scalar_leaf_count(item) for item in value.values())
+    if isinstance(value, list):
+        return sum(semantic_scalar_leaf_count(item) for item in value)
+    return 1
+
+
 def prospective_human_evidence_header_errors(
     text: str, *, evidence_path: str
 ) -> tuple[str, ...]:
@@ -325,6 +359,503 @@ def prospective_current_node_human_evidence_errors(
                 )
             )
     return tuple(errors)
+
+
+def _semantic_recorded_at(value: object) -> tuple[str, datetime]:
+    recorded_at = _text(value, "tick_semantic_recorded_at", 64)
+    if "T" not in recorded_at or " " in recorded_at:
+        _reject("tick_semantic_recorded_at")
+    try:
+        instant = datetime.fromisoformat(recorded_at)
+    except ValueError:
+        _reject("tick_semantic_recorded_at")
+    if instant.tzinfo is None or instant.utcoffset() != timedelta(hours=10):
+        _reject("tick_semantic_recorded_at")
+    return recorded_at, instant
+
+
+def _semantic_path(value: object, rule: str) -> str:
+    path = _text(value, rule, 500)
+    try:
+        _safe_path(path, rule)
+    except AdoptionRejection as error:
+        raise ClockworkTickRejection(rule) from error
+    if "\\" in path or path.startswith("docs/branding/"):
+        _reject(rule)
+    return path
+
+
+def _semantic_paths(repo_root: Path, operation_id: str, artifact_slug: str, day: str) -> dict[str, Any]:
+    topic = f"orchestration/continuity/{operation_id}"
+    inbox = "orchestration/agent_inbox/codex"
+    plan = f"docs/{artifact_slug}-plan.md"
+    threat = f"docs/security/{artifact_slug}-threat-model-delta.md"
+    evidence = f"{topic}/evidence.json"
+    report = f"{topic}/report.md"
+    efficacy = f"{topic}/efficacy-reading.json"
+    closeout = f"docs/{artifact_slug}-closeout.md"
+    yuri = f"orchestration/human_inbox/yuri/{day}--{artifact_slug}.md"
+    acceptance = f"{inbox}/{artifact_slug}-sol-acceptance.md"
+    preplanning = f"{inbox}/{artifact_slug}-preplanning-receipt.json"
+    pre_verifier = f"{inbox}/{artifact_slug}-pre-verifier-receipt.json"
+    values = {
+        "plans": [plan, threat],
+        "findings": [evidence, report, efficacy],
+        "closeouts": [closeout, yuri],
+        "acceptances": [acceptance],
+        "receipts": [preplanning, pre_verifier],
+        "report": report,
+        "efficacy": efficacy,
+        "closeout": closeout,
+        "acceptance": acceptance,
+        "evidence": evidence,
+        "plan": plan,
+    }
+    for path in {
+        item
+        for value in values.values()
+        for item in (value if isinstance(value, list) else [value])
+    }:
+        _semantic_path(path, "tick_semantic_derived_path")
+        if not (repo_root / path).resolve().is_relative_to(repo_root.resolve()):
+            _reject("tick_semantic_derived_path")
+    return values
+
+
+def _semantic_command_profile(repo_root: Path, evidence_path: str) -> dict[str, Any]:
+    implementation_paths = [
+        "orchestration_harness/governance_clockwork_tick.py",
+        "scripts/ariadne_governance_clockwork_tick.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+    ]
+    test_paths = [
+        "tests/test_current_baton_consistency.py",
+        "tests/test_ariadne_active_operation_latch.py",
+        "tests/test_ariadne_governance_clockwork_tick.py",
+        "tests/test_ariadne_transactional_closeout.py",
+    ]
+    manifest = {
+        "schema_version": COMMAND_VERSION,
+        "commands": [
+            {
+                "command_id": "semantic-closeout-evidence-json",
+                "executable": ".venv/Scripts/python.exe",
+                "arguments": ["-m", "json.tool", evidence_path],
+                "completion_contract": "final_exit_code_zero_required",
+            },
+            {
+                "command_id": "semantic-closeout-ruff",
+                "executable": ".venv/Scripts/python.exe",
+                "arguments": ["-m", "ruff", "check", *implementation_paths],
+                "completion_contract": "final_exit_code_zero_required",
+            },
+            {
+                "command_id": "semantic-closeout-governance-tests",
+                "executable": ".venv/Scripts/python.exe",
+                "arguments": [
+                    "-m",
+                    "scripts.ariadne_provider_free_pytest",
+                    "--repo-root",
+                    repo_root.resolve().as_posix(),
+                    *test_paths,
+                ],
+                "completion_contract": "final_exit_code_zero_required",
+            },
+        ],
+    }
+    return {
+        "manifest": _validate_commands(manifest),
+        "implementation_paths": implementation_paths,
+        "test_paths": test_paths,
+    }
+
+
+def _semantic_decisions(value: object) -> list[dict[str, str]]:
+    if not isinstance(value, list) or not value:
+        _reject("tick_semantic_decisions")
+    decisions: list[dict[str, str]] = []
+    identifiers: list[str] = []
+    for item in value:
+        row = _semantic_exact(
+            item, {"id", "source", "summary"}, "tick_semantic_decision_keys"
+        )
+        identifier = _text(row["id"], "tick_semantic_decision_id", 128)
+        if IDENTIFIER.fullmatch(identifier) is None:
+            _reject("tick_semantic_decision_id")
+        identifiers.append(identifier)
+        decisions.append(
+            {
+                "id": identifier,
+                "source": _semantic_path(
+                    row["source"], "tick_semantic_decision_source"
+                ),
+                "status": "accepted",
+                "summary": _text(
+                    row["summary"], "tick_semantic_decision_summary", 1000
+                ),
+            }
+        )
+    if len(identifiers) != len(set(identifiers)):
+        _reject("tick_semantic_decision_id_duplicate")
+    return decisions
+
+
+def expand_semantic_tick_intent(
+    repo_root: Path, value: object, contract_value: object
+) -> dict[str, Any]:
+    """Compile one compact, typed tooling closeout into the admitted legacy intent."""
+
+    contract = validate_contract(contract_value)
+    if semantic_scalar_leaf_count(value) > 100:
+        _reject("tick_semantic_scalar_leaf_budget")
+    if not isinstance(value, dict):
+        _reject("tick_semantic_intent_keys")
+    semantic_row = dict(value)
+    observations_value = semantic_row.pop("agent_error_observations", None)
+    row = _semantic_exact(
+        semantic_row,
+        {
+            "schema_version",
+            "profile",
+            "artifact_slug",
+            "recorded_at",
+            "closeout",
+            "verification_profile",
+            "baton_slot",
+            "next_operation_protected_boundaries",
+        },
+        "tick_semantic_intent_keys",
+    )
+    row["agent_error_observations"] = observations_value
+    if row["schema_version"] != SEMANTIC_TICK_INTENT_VERSION:
+        _reject("tick_semantic_intent_version")
+    if row["profile"] != SEMANTIC_PROFILE:
+        _reject("tick_semantic_profile")
+    if row["verification_profile"] != SEMANTIC_VERIFICATION_PROFILE:
+        _reject("tick_semantic_verification_profile")
+    if row["baton_slot"] != SEMANTIC_BATON_SLOT:
+        _reject("tick_semantic_baton_slot")
+    if _all_keys(row) & DERIVED_INPUT_KEYS:
+        _reject("caller_authored_derived_binding")
+
+    artifact_slug = _text(row["artifact_slug"], "tick_semantic_artifact_slug", 120)
+    if IDENTIFIER.fullmatch(artifact_slug) is None:
+        _reject("tick_semantic_artifact_slug")
+    recorded_at, instant = _semantic_recorded_at(row["recorded_at"])
+    closeout = _semantic_exact(
+        row["closeout"],
+        {
+            "operation_id",
+            "title",
+            "builds_on",
+            "authority_notes",
+            "decisions",
+            "claim_scope",
+            "additional_receipts",
+            "additional_artifacts",
+            "unresolved_gates",
+            "journey",
+            "current_position",
+            "next_operation",
+        },
+        "tick_semantic_closeout_keys",
+    )
+    operation_id = _text(
+        closeout["operation_id"], "tick_semantic_operation_id", 128
+    )
+    if IDENTIFIER.fullmatch(operation_id) is None:
+        _reject("tick_semantic_operation_id")
+    title = _text(closeout["title"], "tick_semantic_title", 300)
+    parents = _strings(closeout["builds_on"], "tick_semantic_builds_on", maximum=128)
+    if any(IDENTIFIER.fullmatch(parent) is None for parent in parents):
+        _reject("tick_semantic_builds_on")
+    paths = _semantic_paths(
+        repo_root, operation_id, artifact_slug, instant.date().isoformat()
+    )
+    command_profile = _semantic_command_profile(repo_root, paths["evidence"])
+    receipts = [
+        *paths["receipts"],
+        *[
+            _semantic_path(path, "tick_semantic_additional_receipt")
+            for path in _optional_strings(
+                closeout["additional_receipts"],
+                "tick_semantic_additional_receipts",
+            )
+        ],
+    ]
+    receipts = list(dict.fromkeys(receipts))
+    artifacts = [
+        *command_profile["implementation_paths"],
+        *[
+            _semantic_path(path, "tick_semantic_additional_artifact")
+            for path in _optional_strings(
+                closeout["additional_artifacts"],
+                "tick_semantic_additional_artifacts",
+            )
+        ],
+    ]
+    artifacts = list(dict.fromkeys(artifacts))
+    journey = _semantic_exact(
+        closeout["journey"],
+        {"strategic_role", "outcome"},
+        "tick_semantic_journey_keys",
+    )
+    current_position = _semantic_exact(
+        closeout["current_position"],
+        {
+            "strategic_role",
+            "why_now",
+            "outcome",
+            "unlocks",
+            "does_not_solve",
+            "orientation_statement",
+        },
+        "tick_semantic_current_position_keys",
+    )
+    observations: list[dict[str, Any]] = []
+    if observations_value is not None:
+        observations = _validate_incident_observations(observations_value)
+    node_incidents = [
+        {
+            "incident_id": observation["attempt_key"],
+            "source_id": observation["attempt_key"],
+            "peers": [],
+        }
+        for observation in observations
+    ]
+    baton_paths = [
+        paths["report"],
+        paths["efficacy"],
+    ]
+    if observations:
+        try:
+            register_path = repo_root / contract["canonical_paths"]["error_register"]
+            revision = json.loads(register_path.read_text(encoding="utf-8"))[
+                "register_revision"
+            ] + 1
+        except (KeyError, OSError, TypeError, ValueError, json.JSONDecodeError) as error:
+            raise ClockworkTickRejection("tick_semantic_register_revision") from error
+        baton_paths.append(f"{INCIDENT_REVISION_PREFIX}{revision}.md")
+    baton_paths.extend([paths["closeout"], paths["acceptance"]])
+    manifest = {
+        "schema_version": "ariadne.transactional_closeout_manifest.v1",
+        "operation_id": operation_id,
+        "title": title,
+        "source_anchor": "current_head",
+        "recorded_at": recorded_at,
+        "node": {
+            "id": operation_id,
+            "title": title,
+            "kind": "tooling",
+            "relationships": [
+                {"node_id": parent, "relation": "builds_on"} for parent in parents
+            ],
+            "authority": {
+                "authorized_openings": [],
+                "notes": _strings(
+                    closeout["authority_notes"], "tick_semantic_authority_notes"
+                ),
+            },
+            "decisions": _semantic_decisions(closeout["decisions"]),
+            "claim_scope": _strings(
+                closeout["claim_scope"], "tick_semantic_claim_scope"
+            ),
+            "contract_evidence": [],
+            "evidence": {
+                "plans": paths["plans"],
+                "findings": paths["findings"],
+                "closeouts": paths["closeouts"],
+                "acceptances": paths["acceptances"],
+                "receipts": receipts,
+                "tests": command_profile["test_paths"],
+                "artifacts": artifacts,
+            },
+            "unresolved_gates": _strings(
+                closeout["unresolved_gates"], "tick_semantic_unresolved_gates"
+            ),
+        },
+        "journey": {
+            "strategic_role": _text(
+                journey["strategic_role"], "tick_semantic_journey_role", 1000
+            ),
+            "outcome": _text(
+                journey["outcome"], "tick_semantic_journey_outcome", 1000
+            ),
+            "evidence": [paths["plan"], paths["report"]],
+        },
+        "current_position": {
+            "strategic_role": _text(
+                current_position["strategic_role"],
+                "tick_semantic_current_role",
+                1000,
+            ),
+            "why_now": _text(
+                current_position["why_now"], "tick_semantic_why_now", 1000
+            ),
+            "outcome": _text(
+                current_position["outcome"], "tick_semantic_current_outcome", 1000
+            ),
+            "unlocks": _strings(
+                current_position["unlocks"], "tick_semantic_unlocks"
+            ),
+            "does_not_solve": _strings(
+                current_position["does_not_solve"],
+                "tick_semantic_does_not_solve",
+            ),
+            "evidence": [
+                paths["evidence"],
+                paths["report"],
+                paths["closeout"],
+                paths["acceptance"],
+            ],
+            "orientation_statement": _text(
+                current_position["orientation_statement"],
+                "tick_semantic_orientation",
+                1000,
+            ),
+        },
+        "next_operation": closeout["next_operation"],
+        "incidents": node_incidents,
+        "broker": {"enabled": False, "posture": "provider_free_shadow"},
+    }
+    legacy: dict[str, Any] = {
+        "schema_version": (
+            TICK_INCIDENT_INTENT_VERSION if observations else TICK_INTENT_VERSION
+        ),
+        "transaction_manifest": manifest,
+        "command_manifest": command_profile["manifest"],
+        "baton_acceptance": {
+            "label": SEMANTIC_BATON_LABEL,
+            "paths": baton_paths,
+        },
+        "next_operation_protected_boundaries": row[
+            "next_operation_protected_boundaries"
+        ],
+    }
+    if observations:
+        legacy["agent_error_observations"] = observations
+    return validate_tick_intent(legacy, contract)
+
+
+def admit_tick_intent(
+    repo_root: Path, value: object, contract_value: object
+) -> dict[str, Any]:
+    if isinstance(value, dict) and value.get("schema_version") == SEMANTIC_TICK_INTENT_VERSION:
+        return expand_semantic_tick_intent(repo_root, value, contract_value)
+    return validate_tick_intent(value, contract_value)
+
+
+def materialize_semantic_evidence_headers(
+    repo_root: Path,
+    value: object,
+    contract_value: object,
+    *,
+    fail_at: str | None = None,
+) -> dict[str, Any]:
+    """Insert one derived Date/Timestamp pair into every prospective human document."""
+
+    if not isinstance(value, dict) or value.get("schema_version") != SEMANTIC_TICK_INTENT_VERSION:
+        _reject("tick_semantic_materialization_intent")
+    admitted = expand_semantic_tick_intent(repo_root, value, contract_value)
+    recorded_at, instant = _semantic_recorded_at(value["recorded_at"])
+    date_line = f"Date: {instant.date().isoformat()}"
+    timestamp_line = f"Timestamp: {recorded_at}{BRISBANE_TIMESTAMP_SUFFIX}"
+    evidence = admitted["transaction_manifest"]["node"]["evidence"]
+    paths = [
+        path
+        for category in CURRENT_NODE_HUMAN_EVIDENCE_CATEGORIES
+        for path in evidence[category]
+    ]
+    errors: list[str] = []
+    original: dict[Path, bytes] = {}
+    prepared: dict[Path, bytes] = {}
+    unchanged: list[str] = []
+    for relative in paths:
+        target = repo_root / relative
+        if not target.is_file():
+            errors.append(f"{relative}:file_missing")
+            continue
+        try:
+            raw = target.read_bytes()
+            text = raw.decode("utf-8")
+        except (OSError, UnicodeError):
+            errors.append(f"{relative}:file_unreadable")
+            continue
+        lines = text.splitlines()
+        if not lines or not lines[0].startswith("# "):
+            errors.append(f"{relative}:h1_required")
+            continue
+        header = lines[:12]
+        date_lines = [line for line in header if line.startswith("Date:")]
+        timestamp_lines = [line for line in header if line.startswith("Timestamp:")]
+        if date_lines == [date_line] and timestamp_lines == [timestamp_line]:
+            unchanged.append(relative)
+            continue
+        if date_lines or timestamp_lines:
+            errors.append(f"{relative}:derived_header_conflict")
+            continue
+        newline = "\r\n" if b"\r\n" in raw else "\n"
+        remainder = lines[1:]
+        while remainder and not remainder[0].strip():
+            remainder.pop(0)
+        rendered = (
+            lines[0]
+            + newline
+            + newline
+            + date_line
+            + newline
+            + newline
+            + timestamp_line
+            + newline
+            + newline
+            + newline.join(remainder)
+        )
+        if text.endswith(("\n", "\r")):
+            rendered += newline
+        original[target] = raw
+        prepared[target] = rendered.encode("utf-8")
+    if errors:
+        _reject("tick_semantic_evidence_materialization:" + ",".join(errors))
+
+    staged: dict[Path, Path] = {}
+    replaced: list[Path] = []
+    try:
+        for target, content in prepared.items():
+            staged[target] = _write_temp(target, content)
+        for index, (target, temporary) in enumerate(staged.items(), start=1):
+            os.replace(temporary, target)
+            replaced.append(target)
+            if fail_at == f"after_replace_{index}":
+                raise OSError("injected_semantic_materialization_failure")
+        for target, content in prepared.items():
+            if target.read_bytes() != content:
+                raise OSError("semantic_materialization_reread")
+    except OSError as error:
+        try:
+            for target in reversed(replaced):
+                os.replace(_write_temp(target, original[target]), target)
+        except OSError as rollback_error:
+            raise ClockworkTickRejection(
+                "tick_semantic_materialization_rollback"
+            ) from rollback_error
+        raise ClockworkTickRejection("tick_semantic_materialization_write") from error
+    finally:
+        for temporary in staged.values():
+            temporary.unlink(missing_ok=True)
+
+    return {
+        "schema_version": SEMANTIC_MATERIALIZATION_VERSION,
+        "status": "passed",
+        "operation_id": admitted["transaction_manifest"]["operation_id"],
+        "recorded_at": recorded_at,
+        "document_count": len(paths),
+        "materialized_documents": [
+            path for path in paths if (repo_root / path) in prepared
+        ],
+        "unchanged_documents": unchanged,
+        "derived_header_scalar_values": len(paths) * 2,
+        "caller_timestamp_values": 1,
+    }
 
 
 def _validate_commands(value: object) -> dict[str, Any]:
@@ -1438,7 +1969,7 @@ def build_tick_generation(
     """Derive a complete next generation from the current live reading."""
 
     contract = validate_contract(contract_value)
-    intent = validate_tick_intent(intent_value, contract)
+    intent = admit_tick_intent(repo_root, intent_value, contract)
     live = validate_live_state(repo_root, contract)
     source = _assert_git_state(repo_root, contract)
     current, prior_metadata, base_pointer = _assert_clean_predecessor(

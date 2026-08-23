@@ -1,0 +1,187 @@
+{
+  "schema_version": "ariadne.orchestrator_runtime_state.v1",
+  "continuation_event": "post_compaction",
+  "planned_action": "resume_exact_typed_semantic_builder_implementation_and_hostile_fixture_verification",
+  "source_evidence": {
+    "live_handover_current_baton": "The complete live handover was freshly read after restoration. The Current Baton accepts the prospective-evidence repair and selects the existing-tick typed semantic builder rehearsal.",
+    "current_authority_allocation": "GPT Sol owns the serial provider-free implementation and acceptance. The operation-specific Baton pauses the native DeepSeek profile and forbids silent Claude fallback; Gemini and native subagents remain declined because the compiler, materializer, command runner and canonical writer are tightly coupled.",
+    "active_plan_and_acceptance": [
+      "docs/ariadne-clockwork-typed-semantic-builder-plan.md",
+      "docs/security/ariadne-clockwork-typed-semantic-builder-threat-model-delta.md",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/report.md",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/efficacy-reading.json",
+      "docs/ariadne-agent-error-correction-register-revision-646.md",
+      "docs/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair-closeout.md",
+      "orchestration/agent_inbox/codex/ariadne-clockwork-prospective-evidence-transaction-fact-repair-sol-acceptance.md",
+      "orchestration/continuity/ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair/closeout/clockwork-tick-evidence.json",
+      "orchestration/continuity/ariadne-active-operation-latch/current.json",
+      "orchestration/continuity/ariadne-governance-clockwork/current.json"
+    ],
+    "protected_evidence_boundaries": "Only the existing provider-free governance tick core, CLI and one test file may change. No Harness, provider, product, data, runtime, deployment, Pages, protected evidence or protected ref is opened; every unrelated untracked path remains preserved.",
+    "git_refs_and_worktree": "The machine snapshot alone binds exact Git identities, task branch state, all four protected refs, the intentional three-file tracked implementation draft and preservation of unrelated untracked paths including docs/branding."
+  },
+  "active_operation": {
+    "schema_version": "ariadne.active_operation_latch.v1",
+    "operation_id": "ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal",
+    "active_tranche": "Provider-free governance clockwork typed semantic closeout builder and command registry rehearsal",
+    "objective": "Replace the highest-yield remaining free-form command shapes, closed labels, repository test paths and repeated human-evidence headers with typed selectors and repository-derived expansions inside the existing tick, proving fewer required operator leaves with no new gate, document, approval or parallel control layer.",
+    "status": "in_progress",
+    "source_head": "8f0e436730b3704ee7b3f94cb68df6d57d3e02da",
+    "authority_source": "Yuri's explicit ergonomics request, standing uninterrupted-development authority and the accepted matched first-repair reading select this next narrow interface repair; provider, product and protected surfaces remain closed.",
+    "checkpoint": {
+      "completed_stage": "Accepted ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair at the machine-resolved source.",
+      "next_executable_stage": "fresh_five_source_rehydration_then_freeze_exact_typed_selectors_repository_derived_expansions_and_operator_leaf_reduction_acceptance",
+      "retry_counters": {
+        "planning": 0,
+        "implementation": 0,
+        "review": 0,
+        "verification": 0
+      },
+      "settings_fingerprint": "sha256:5a977f73cad9b2b9316edf6fc2416ca75af6988bc471c43b6ae51f92054151bb"
+    },
+    "interruption_policy": {
+      "chronological_last_prompt_is_controlling_authority": false,
+      "side_question_behavior": "answer_then_resume",
+      "status_request_behavior": "answer_then_resume",
+      "scope_addition_behavior": "merge_then_resume",
+      "replacement_requires_explicit_pause_or_redirect": true
+    },
+    "resume_after_compaction": true,
+    "user_attention": {
+      "required": false,
+      "reason": null
+    },
+    "terminal_response": {
+      "permitted": false,
+      "reason": "unfinished_authorized_operation"
+    },
+    "protected_boundaries": [
+      "provider_free_existing_governance_clockwork_typed_semantic_interface_rehearsal_only",
+      "typed_selectors_only_for_highest_yield_command_shapes_closed_labels_repository_test_paths_and_repeated_human_evidence_headers",
+      "repository_derived_expansions_replace_operator_repetition_without_weakening_validation",
+      "prove_required_operator_leaf_reduction_against_the_frozen_first_repair_closeout",
+      "zero_net_new_required_operator_fields_approvals_gates_ledgers_or_closeout_documents",
+      "preserve_single_writer_full_git_binding_closed_vocabularies_complete_prospective_error_set_pointer_last_publication_and_byte_exact_rollback",
+      "no_live_publication_through_new_builder_until_frozen_fixtures_and_full_governance_tests_pass",
+      "no_native_harness_worker_provider_call_or_transport_qualification",
+      "no_silent_claude_code_or_other_transport_fallback",
+      "no_authority_allocation_or_worker_transport_policy_change",
+      "no_check_in_external_fact_target_custody_policy_provisioning_or_activation_selection",
+      "no_existing_product_source_route_api_client_configuration_or_runtime_change",
+      "no_environment_variable_secret_credential_network_database_or_infrastructure_access",
+      "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+      "no_product_patient_appointment_clinical_historical_or_protected_data",
+      "no_production_runtime_deployment_release_or_pages",
+      "no_protected_evidence_access_or_protected_ref_movement",
+      "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+      "docs_branding_and_all_unrelated_untracked_files_preserved",
+      "explicit_path_staging_only"
+    ]
+  },
+  "parallelism_assessment": {
+    "schema_version": "ariadne.parallelism_assessment.v1",
+    "operation_id": "ariadne-provider-free-governance-clockwork-typed-semantic-closeout-builder-and-command-registry-rehearsal",
+    "assessed_stage": "post_compaction_implementation_resume",
+    "lanes": [
+      {
+        "lane_id": "deepseek_flash",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "The native occupied profile remains paused, Claude Code is not an authorized fallback, provider work is closed and the interface is coupled to one canonical writer and its closed vocabularies.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "gemini_verifier",
+        "disposition": "declined",
+        "expected_leverage": "neutral",
+        "rationale": "The tranche is provider-free with exact deterministic compiler, materializer, command and regression fixtures; no model call is authorized.",
+        "work_packages": []
+      },
+      {
+        "lane_id": "native_subagents",
+        "disposition": "declined",
+        "expected_leverage": "negative",
+        "rationale": "Developer policy prohibits proactive delegation and the expansion, execution, compatibility path and efficacy measurement are serially coupled.",
+        "work_packages": []
+      }
+    ],
+    "parallel_work_packages": [],
+    "serial_constraints": [
+      "resume only the three frozen implementation and test files",
+      "prove one compact request expands into the unchanged admitted legacy meaning",
+      "reject all hostile selectors paths headers command failures and tracked drift before canonical mutation",
+      "do not use live publication before the full frozen governance suite passes"
+    ],
+    "reassessment_triggers": [
+      "if the existing tick cannot contain the builder",
+      "if a derived value weakens an existing closed invariant",
+      "before acceptance and closeout"
+    ]
+  },
+  "context_health": {
+    "agent_contexts": [
+      {
+        "agent_id": "orchestrator",
+        "measurement_source": "The complete live handover, active plan and acceptance set, protected sections, latch, clockwork pointer and exact Git state were freshly restored after compaction.",
+        "rehydrated_from_receipt": true,
+        "rehydration_sources": [
+          "live_handover_current_baton",
+          "current_authority_allocation",
+          "active_plan_and_acceptance",
+          "protected_evidence_boundaries",
+          "git_refs_and_worktree"
+        ]
+      }
+    ]
+  },
+  "adapter_observations": [
+    {
+      "adapter_id": "codex_primary_session",
+      "method": "codex_session_observation",
+      "reachability": "reachable",
+      "evidence": ["GPT Sol is active and owns the serial repair."]
+    },
+    {
+      "adapter_id": "deepseek_native_harness",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected; the occupied native profile remains paused."]
+    },
+    {
+      "adapter_id": "deepcode_cli",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "deepseek_via_claude_code_bare",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected and not an authorized fallback."]
+    },
+    {
+      "adapter_id": "antigravity_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected; provider use is closed."]
+    },
+    {
+      "adapter_id": "claude_cli_print",
+      "method": "synthetic_fixture",
+      "reachability": "unknown",
+      "evidence": ["Not selected."]
+    },
+    {
+      "adapter_id": "codex_subagent_spawn",
+      "method": "codex_subagent_observation",
+      "reachability": "reachable",
+      "evidence": ["No native subagent was spawned under current developer policy."]
+    }
+  ],
+  "worker_slots": [
+    {"resource_id": "deepseek-flash-workers", "active_instance_ids": [], "stale_instance_ids": []},
+    {"resource_id": "antigravity-gemini-flash-3-7-high-verifier", "active_instance_ids": [], "stale_instance_ids": []}
+  ],
+  "workspace_receipts": [],
+  "assigned_agent_ids": []
+}

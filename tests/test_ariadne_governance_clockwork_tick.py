@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
 from contextlib import contextmanager
 from pathlib import Path
 
@@ -21,6 +22,11 @@ from orchestration_harness.governance_clockwork_tick import (
     INCIDENT_TRANSPORT,
     INCIDENT_TRANCHE,
     INCIDENT_WORKFLOW_DISPOSITIONS,
+    SEMANTIC_BATON_LABEL,
+    SEMANTIC_BATON_SLOT,
+    SEMANTIC_PROFILE,
+    SEMANTIC_TICK_INTENT_VERSION,
+    SEMANTIC_VERIFICATION_PROFILE,
     TICK_INCIDENT_INTENT_VERSION,
     USER_DECISION_INTENT_VERSION,
     CommittedClockworkTick,
@@ -30,9 +36,12 @@ from orchestration_harness.governance_clockwork_tick import (
     build_checkpoint_tick_generation,
     build_tick_generation,
     build_user_decision_tick_generation,
+    expand_semantic_tick_intent,
+    materialize_semantic_evidence_headers,
     publish_tick_generation,
     prospective_current_node_human_evidence_errors,
     rollback_tick_generation,
+    semantic_scalar_leaf_count,
     validate_blocked_tick_intent,
     validate_checkpoint_tick_intent,
     validate_tick_intent,
@@ -49,12 +58,14 @@ from orchestration_harness.governance_live_adoption import (
     validate_live_state,
 )
 from scripts.ariadne_governance_clockwork_tick import (
+    SemanticVerificationRejection,
     _command_result,
     _idempotent_transaction_facts,
     _is_exact_published_intent,
     _prepared_transaction_facts,
     _prospective_rejection_result,
     _rollback_transaction_facts,
+    _run_semantic_verification,
     _write_outputs,
 )
 
@@ -113,6 +124,114 @@ def _replay_intent(worktree: Path) -> dict:
             intent["baton_acceptance"]["label"] = rolling_label
             return intent
     raise AssertionError("replay fixture has no admitted native-Harness rolling label")
+
+
+def _semantic_intent(worktree: Path) -> dict:
+    latch = _json(
+        worktree
+        / "orchestration/continuity/ariadne-active-operation-latch/current.json"
+    )
+    artifact_slug = "ariadne-clockwork-typed-semantic-builder"
+    plan_path = f"docs/{artifact_slug}-plan.md"
+    return {
+        "schema_version": SEMANTIC_TICK_INTENT_VERSION,
+        "profile": SEMANTIC_PROFILE,
+        "artifact_slug": artifact_slug,
+        "recorded_at": "2026-08-23T17:17:00.4614783+10:00",
+        "closeout": {
+            "operation_id": latch["operation_id"],
+            "title": "Provider-free governance clockwork typed semantic closeout builder and command registry rehearsal",
+            "builds_on": [
+                "ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair"
+            ],
+            "authority_notes": [
+                "Yuri requested an evidence-backed clockwork ergonomics improvement.",
+                "GPT Sol owns the serial provider-free tooling rehearsal.",
+                "No Harness, product, provider or protected surface opens.",
+            ],
+            "decisions": [
+                {
+                    "id": "compile-repository-known-closeout-fields",
+                    "source": plan_path,
+                    "summary": "Compile fixed governance mechanics from one closed semantic profile.",
+                },
+                {
+                    "id": "materialize-one-shared-human-header-reading",
+                    "source": plan_path,
+                    "summary": "Derive every prospective human evidence header from one Brisbane timestamp.",
+                },
+                {
+                    "id": "execute-one-closed-verification-profile",
+                    "source": plan_path,
+                    "summary": "Run exact repository-owned verification commands before semantic publication.",
+                },
+            ],
+            "claim_scope": [
+                "One provider-free tooling closeout compiles through the existing tick.",
+                "Closed selectors replace caller-authored command, label and path shapes.",
+                "One recorded timestamp derives every prospective human evidence header.",
+                "Legacy v1 and v2 intent semantics remain unchanged.",
+            ],
+            "additional_receipts": [],
+            "additional_artifacts": [],
+            "unresolved_gates": [
+                "Arbitrary semantic profiles and commands remain closed.",
+                "Native useful-completion reliability remains unproved.",
+                "Product, provider, deployment and protected refs remain closed.",
+            ],
+            "journey": {
+                "strategic_role": "Move repository-known clerical work from the orchestrator into the existing clock.",
+                "outcome": "One compact semantic request expands to the complete legacy governance meaning.",
+            },
+            "current_position": {
+                "strategic_role": "Retain fail-closed governance while reducing operator choices.",
+                "why_now": "The matched first repair passed and a restored-session Git-object lapse exposed the next free-form trap.",
+                "outcome": "Typed selectors, derived headers and exact commands replace repeated form filling.",
+                "unlocks": [
+                    "A matched operator-leaf efficacy review.",
+                    "Future eligible tooling closeouts with fewer caller choices.",
+                ],
+                "does_not_solve": [
+                    "It does not author semantic narrative.",
+                    "It does not qualify a worker transport.",
+                    "It does not open product or protected integration.",
+                ],
+                "orientation_statement": "Compile mechanics; retain human and model judgment only for semantic meaning.",
+            },
+            "next_operation": {
+                "operation_id": "ariadne-provider-free-governance-clockwork-typed-builder-matched-efficacy-review",
+                "active_tranche": "Provider-free governance clockwork typed-builder matched efficacy review",
+                "objective": "Measure actual caller leaves, invocations, failures, elapsed closeout friction and safety invariants after the typed-builder rehearsal.",
+                "authority_source": "The accepted clockwork ergonomics sequence and standing authority select one provider-free matched review.",
+                "next_stage": "fresh_five_source_rehydration_then_freeze_exact_matched_measurement_and_no_added_bureaucracy_acceptance",
+            },
+        },
+        "verification_profile": SEMANTIC_VERIFICATION_PROFILE,
+        "baton_slot": SEMANTIC_BATON_SLOT,
+        "next_operation_protected_boundaries": list(latch["protected_boundaries"]),
+    }
+
+
+def _write_semantic_human_bodies(worktree: Path, intent: dict) -> list[str]:
+    artifact_slug = intent["artifact_slug"]
+    operation_id = intent["closeout"]["operation_id"]
+    day = intent["recorded_at"][:10]
+    paths = [
+        f"docs/{artifact_slug}-plan.md",
+        f"docs/security/{artifact_slug}-threat-model-delta.md",
+        f"docs/{artifact_slug}-closeout.md",
+        f"orchestration/human_inbox/yuri/{day}--{artifact_slug}.md",
+        f"orchestration/agent_inbox/codex/{artifact_slug}-sol-acceptance.md",
+    ]
+    for relative in paths:
+        target = worktree / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(
+            f"# Semantic fixture for {operation_id}\n\nBody remains semantic.\n",
+            encoding="utf-8",
+            newline="\n",
+        )
+    return paths
 
 
 def test_cli_idempotency_requires_exact_intent_digest() -> None:
@@ -507,6 +626,331 @@ def _paths(worktree: Path, contract: dict) -> tuple[dict[str, Path], dict[str, P
     root = worktree / contract["clockwork_root"]
     metadata = {name: root / name for name in PREDECESSOR_METADATA_NAMES}
     return canonical, metadata, root / "current.json"
+
+
+def test_semantic_builder_compiles_repository_owned_mechanics_with_fewer_leaves(
+    tmp_path: Path,
+) -> None:
+    with _worktree(tmp_path / "semantic-expand", source_ref="HEAD") as worktree:
+        contract = validate_contract(
+            _json(worktree / CONTRACT_PATH.relative_to(ROOT))
+        )
+        intent = _semantic_intent(worktree)
+
+        assert semantic_scalar_leaf_count(intent) == 64
+        assert semantic_scalar_leaf_count(intent) <= 100
+        admitted = expand_semantic_tick_intent(worktree, intent, contract)
+
+        manifest = admitted["transaction_manifest"]
+        node = manifest["node"]
+        evidence = node["evidence"]
+        commands = admitted["command_manifest"]["commands"]
+        assert admitted["schema_version"] == "ariadne.governance_live_tick_intent.v1"
+        assert manifest["source_anchor"] == "current_head"
+        assert manifest["broker"] == {
+            "enabled": False,
+            "posture": "provider_free_shadow",
+        }
+        assert node["kind"] == "tooling"
+        assert node["authority"]["authorized_openings"] == []
+        assert {decision["status"] for decision in node["decisions"]} == {
+            "accepted"
+        }
+        assert evidence["plans"] == [
+            "docs/ariadne-clockwork-typed-semantic-builder-plan.md",
+            "docs/security/ariadne-clockwork-typed-semantic-builder-threat-model-delta.md",
+        ]
+        assert evidence["closeouts"] == [
+            "docs/ariadne-clockwork-typed-semantic-builder-closeout.md",
+            "orchestration/human_inbox/yuri/2026-08-23--ariadne-clockwork-typed-semantic-builder.md",
+        ]
+        assert evidence["acceptances"] == [
+            "orchestration/agent_inbox/codex/ariadne-clockwork-typed-semantic-builder-sol-acceptance.md"
+        ]
+        assert admitted["baton_acceptance"]["label"] == SEMANTIC_BATON_LABEL
+        assert [command["command_id"] for command in commands] == [
+            "semantic-closeout-evidence-json",
+            "semantic-closeout-ruff",
+            "semantic-closeout-governance-tests",
+        ]
+        assert {command["executable"] for command in commands} == {
+            ".venv/Scripts/python.exe"
+        }
+        assert commands[2]["arguments"][-4:] == [
+            "tests/test_current_baton_consistency.py",
+            "tests/test_ariadne_active_operation_latch.py",
+            "tests/test_ariadne_governance_clockwork_tick.py",
+            "tests/test_ariadne_transactional_closeout.py",
+        ]
+
+
+def test_semantic_builder_rejects_hostile_selectors_paths_and_leaf_overflow(
+    tmp_path: Path,
+) -> None:
+    with _worktree(tmp_path / "semantic-hostile", source_ref="HEAD") as worktree:
+        contract = validate_contract(
+            _json(worktree / CONTRACT_PATH.relative_to(ROOT))
+        )
+        baseline = _semantic_intent(worktree)
+        hostile: list[tuple[dict, str]] = []
+
+        wrong_profile = json.loads(json.dumps(baseline))
+        wrong_profile["profile"] = "arbitrary"
+        hostile.append((wrong_profile, "tick_semantic_profile"))
+
+        wrong_verification = json.loads(json.dumps(baseline))
+        wrong_verification["verification_profile"] = "arbitrary"
+        hostile.append(
+            (wrong_verification, "tick_semantic_verification_profile")
+        )
+
+        wrong_baton = json.loads(json.dumps(baseline))
+        wrong_baton["baton_slot"] = "arbitrary"
+        hostile.append((wrong_baton, "tick_semantic_baton_slot"))
+
+        unknown_key = json.loads(json.dumps(baseline))
+        unknown_key["command_manifest"] = {}
+        hostile.append((unknown_key, "tick_semantic_intent_keys"))
+
+        branding_path = json.loads(json.dumps(baseline))
+        branding_path["closeout"]["additional_artifacts"] = [
+            "docs/branding/untouchable.svg"
+        ]
+        hostile.append((branding_path, "tick_semantic_additional_artifact"))
+
+        too_many_leaves = json.loads(json.dumps(baseline))
+        too_many_leaves["closeout"]["authority_notes"] = [
+            f"Bounded authority note {index}." for index in range(101)
+        ]
+        hostile.append((too_many_leaves, "tick_semantic_scalar_leaf_budget"))
+
+        for candidate, reason in hostile:
+            with pytest.raises(ClockworkTickRejection, match=reason):
+                expand_semantic_tick_intent(worktree, candidate, contract)
+
+
+def test_semantic_header_materializer_derives_ten_values_and_is_idempotent(
+    tmp_path: Path,
+) -> None:
+    with _worktree(tmp_path / "semantic-header", source_ref="HEAD") as worktree:
+        contract = validate_contract(
+            _json(worktree / CONTRACT_PATH.relative_to(ROOT))
+        )
+        intent = _semantic_intent(worktree)
+        paths = _write_semantic_human_bodies(worktree, intent)
+
+        result = materialize_semantic_evidence_headers(
+            worktree, intent, contract
+        )
+        first_bytes = {
+            relative: (worktree / relative).read_bytes() for relative in paths
+        }
+        assert result["document_count"] == 5
+        assert result["materialized_documents"] == paths
+        assert result["unchanged_documents"] == []
+        assert result["derived_header_scalar_values"] == 10
+        assert result["caller_timestamp_values"] == 1
+        for relative in paths:
+            text = first_bytes[relative].decode("utf-8")
+            assert text.count("Date: 2026-08-23") == 1
+            assert text.count(
+                "Timestamp: 2026-08-23T17:17:00.4614783+10:00 "
+                "(Australia/Brisbane)"
+            ) == 1
+
+        repeated = materialize_semantic_evidence_headers(
+            worktree, intent, contract
+        )
+        assert repeated["materialized_documents"] == []
+        assert repeated["unchanged_documents"] == paths
+        assert {
+            relative: (worktree / relative).read_bytes() for relative in paths
+        } == first_bytes
+
+
+def test_semantic_header_materializer_returns_all_defects_before_any_write(
+    tmp_path: Path,
+) -> None:
+    with _worktree(tmp_path / "semantic-conflict", source_ref="HEAD") as worktree:
+        contract = validate_contract(
+            _json(worktree / CONTRACT_PATH.relative_to(ROOT))
+        )
+        intent = _semantic_intent(worktree)
+        paths = _write_semantic_human_bodies(worktree, intent)
+        targets = [worktree / relative for relative in paths]
+        targets[0].write_text(
+            "# Partial\n\nDate: 2026-08-23\n\nBody.\n",
+            encoding="utf-8",
+            newline="\n",
+        )
+        targets[1].write_text(
+            "# Conflict\n\nDate: 2026-08-22\n\n"
+            "Timestamp: 2026-08-22T17:17:00+10:00 (Australia/Brisbane)\n",
+            encoding="utf-8",
+            newline="\n",
+        )
+        targets[2].unlink()
+        targets[3].write_text("No heading.\n", encoding="utf-8", newline="\n")
+        targets[4].write_bytes(b"\xff")
+        before = {
+            target: target.read_bytes() if target.exists() else None
+            for target in targets
+        }
+
+        with pytest.raises(ClockworkTickRejection) as caught:
+            materialize_semantic_evidence_headers(worktree, intent, contract)
+
+        assert str(caught.value).split(":", 1)[0] == (
+            "tick_semantic_evidence_materialization"
+        )
+        errors = str(caught.value).split(":", 1)[1].split(",")
+        assert errors == [
+            f"{paths[0]}:derived_header_conflict",
+            f"{paths[1]}:derived_header_conflict",
+            f"{paths[2]}:file_missing",
+            f"{paths[3]}:h1_required",
+            f"{paths[4]}:file_unreadable",
+        ]
+        assert {
+            target: target.read_bytes() if target.exists() else None
+            for target in targets
+        } == before
+
+
+def test_semantic_header_materializer_restores_every_byte_on_midwrite_failure(
+    tmp_path: Path,
+) -> None:
+    with _worktree(tmp_path / "semantic-rollback", source_ref="HEAD") as worktree:
+        contract = validate_contract(
+            _json(worktree / CONTRACT_PATH.relative_to(ROOT))
+        )
+        intent = _semantic_intent(worktree)
+        paths = _write_semantic_human_bodies(worktree, intent)
+        before = {
+            relative: (worktree / relative).read_bytes() for relative in paths
+        }
+
+        with pytest.raises(
+            ClockworkTickRejection,
+            match="tick_semantic_materialization_write",
+        ):
+            materialize_semantic_evidence_headers(
+                worktree, intent, contract, fail_at="after_replace_1"
+            )
+
+        assert {
+            relative: (worktree / relative).read_bytes() for relative in paths
+        } == before
+
+
+def test_semantic_intent_builds_without_canonical_mutation(tmp_path: Path) -> None:
+    with _worktree(tmp_path / "semantic-build", source_ref="HEAD") as worktree:
+        contract = validate_contract(
+            _json(worktree / CONTRACT_PATH.relative_to(ROOT))
+        )
+        intent = _semantic_intent(worktree)
+        _write_semantic_human_bodies(worktree, intent)
+        materialize_semantic_evidence_headers(worktree, intent, contract)
+        admitted = expand_semantic_tick_intent(worktree, intent, contract)
+        evidence = admitted["transaction_manifest"]["node"]["evidence"]
+        for relative in [*evidence["findings"], *evidence["receipts"]]:
+            target = worktree / relative
+            if target.exists():
+                continue
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(
+                "{}\n" if target.suffix == ".json" else "# Fixture evidence\n",
+                encoding="utf-8",
+                newline="\n",
+            )
+        canonical, metadata, pointer = _paths(worktree, contract)
+        protected_paths = [*canonical.values(), *metadata.values(), pointer]
+        before = {path: path.read_bytes() for path in protected_paths}
+
+        prepared = build_tick_generation(worktree, contract, intent)
+
+        assert prepared["intent"]["transaction_manifest"]["operation_id"] == (
+            intent["closeout"]["operation_id"]
+        )
+        assert prepared["intent"]["schema_version"] == (
+            "ariadne.governance_live_tick_intent.v1"
+        )
+        assert {path: path.read_bytes() for path in protected_paths} == before
+
+
+def test_semantic_verification_executes_exact_commands_and_fails_closed(
+    tmp_path: Path,
+) -> None:
+    with _worktree(tmp_path / "semantic-commands", source_ref="HEAD") as worktree:
+        contract = validate_contract(
+            _json(worktree / CONTRACT_PATH.relative_to(ROOT))
+        )
+        admitted = expand_semantic_tick_intent(
+            worktree, _semantic_intent(worktree), contract
+        )
+        manifest = admitted["command_manifest"]
+
+        calls: list[list[str]] = []
+
+        def passing_runner(arguments: list[str], **_: object) -> subprocess.CompletedProcess:
+            calls.append(arguments)
+            return subprocess.CompletedProcess(
+                arguments, 0, stdout=f"passed-{len(calls)}", stderr=""
+            )
+
+        facts = _run_semantic_verification(
+            worktree,
+            manifest,
+            command_runner=passing_runner,
+            tracked_reader=lambda _: "",
+            interpreter=Path(sys.executable),
+        )
+        assert calls == [
+            [str(Path(sys.executable).resolve()), *command["arguments"]]
+            for command in manifest["commands"]
+        ]
+        assert facts["disposition"] == "verification_passed"
+        assert facts["executed_command_count"] == 3
+        assert facts["passed_command_count"] == 3
+        assert len(facts["commands"]) == 3
+        assert all(len(row["stdout_sha256"]) == 64 for row in facts["commands"])
+
+        failed_calls = 0
+
+        def failing_runner(arguments: list[str], **_: object) -> subprocess.CompletedProcess:
+            nonlocal failed_calls
+            failed_calls += 1
+            return subprocess.CompletedProcess(
+                arguments,
+                1 if failed_calls == 2 else 0,
+                stdout="bounded",
+                stderr="failed" if failed_calls == 2 else "",
+            )
+
+        with pytest.raises(SemanticVerificationRejection) as command_failure:
+            _run_semantic_verification(
+                worktree,
+                manifest,
+                command_runner=failing_runner,
+                tracked_reader=lambda _: "",
+                interpreter=Path(sys.executable),
+            )
+        assert command_failure.value.facts["reason"] == "command_failed"
+        assert command_failure.value.facts["executed_command_count"] == 2
+        assert command_failure.value.facts["passed_command_count"] == 1
+
+        statuses = iter(["", "", " M controlled.py\n"])
+        with pytest.raises(SemanticVerificationRejection) as drift_failure:
+            _run_semantic_verification(
+                worktree,
+                manifest,
+                command_runner=passing_runner,
+                tracked_reader=lambda _: next(statuses),
+                interpreter=Path(sys.executable),
+            )
+        assert drift_failure.value.facts["reason"] == "tracked_worktree_drift"
+        assert drift_failure.value.facts["tracked_drift"] == 1
+        assert drift_failure.value.facts["executed_command_count"] == 2
 
 
 def test_plan_and_intent_freeze_the_unrepeated_successor() -> None:
