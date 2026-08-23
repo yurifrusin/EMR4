@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 436,
+  "graph_revision": 437,
   "harvests": [],
   "nodes": [
     {
@@ -35214,9 +35214,92 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review",
+      "title": "Provider-free governance clockwork postpublication validation-cadence mapping review",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "GPT Sol owns the provider-free read-only cross-phase validation map and deterministic acceptance."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "retain-phase-shifted-postpublication-tests",
+          "source": "docs/ariadne-clockwork-postpublication-validation-cadence-mapping-review-plan.md",
+          "status": "accepted",
+          "summary": "Retain all postpublication tests because the repeated 120 nodes observe an advanced canonical generation and the unique 42 cover moving continuation state."
+        },
+        {
+          "id": "mechanize-interpreter-live-reading-tests-and-stage-paths",
+          "source": "orchestration/continuity/ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review/coverage-map.json",
+          "status": "accepted",
+          "summary": "Rehearse one bound closeout entrypoint that captures the inline live validator, runs unchanged tests and emits an exact stage manifest."
+        }
+      ],
+      "claim_scope": [
+        "The exact phase map distinguishes one redundant immediate live read from 120 phase-shifted and 42 unique postpublication test nodes."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/ariadne-clockwork-postpublication-validation-cadence-mapping-review-plan.md",
+          "docs/security/ariadne-clockwork-postpublication-validation-cadence-mapping-review-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review/evidence.json",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review/report.md",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/ariadne-clockwork-postpublication-validation-cadence-mapping-review-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-23--ariadne-clockwork-postpublication-validation-cadence-mapping-review.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-postpublication-validation-cadence-mapping-review-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/ariadne-clockwork-postpublication-validation-cadence-mapping-review-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-postpublication-validation-cadence-mapping-review-pre-verifier-receipt.json",
+          "orchestration/agent_inbox/codex/ariadne-clockwork-postpublication-validation-cadence-mapping-review-closeout-precommit-receipt.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review/coverage-map.json",
+          "orchestration/continuity/ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review/event-001-explicit-stage-path-transcription-rejection.json"
+        ]
+      },
+      "unresolved_gates": [
+        "No test run or manual readback is removed until the bound driver separately proves the frozen replacement contract."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-23T20:54:02.4308423+10:00",
+      "updated_at": "2026-08-23T20:54:02.4308423+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "f1a4553439e56be75b062e7c5f128febe6647812",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-23T20:13:31.0779586+10:00"
+  "updated_at": "2026-08-23T20:54:02.4308423+10:00"
 }

@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review",
-  "active_tranche": "Provider-free governance clockwork postpublication validation-cadence mapping review",
-  "objective": "Characterize unique and duplicated coverage among semantic publication verification, canonical live-state validation and the postpublication suite, then freeze exact replacement-evidence requirements without removing a test run.",
+  "operation_id": "ariadne-provider-free-governance-clockwork-bound-closeout-entrypoint-and-explicit-stage-manifest-rehearsal",
+  "active_tranche": "Provider-free governance clockwork bound closeout entrypoint and explicit-stage manifest rehearsal",
+  "objective": "Implement and provider-free rehearse one repository-interpreter-bound closeout driver that captures inline live validation, preserves the existing semantic and postpublication tests, and emits a machine-derived allowlisted explicit-stage manifest without staging or live publication.",
   "status": "in_progress",
-  "source_head": "b2bca518c2d72ded86b4d53feeddad52fc389dc5",
-  "authority_source": "The accepted live-adoption review identifies validation-cadence mapping as the next narrow ergonomic study.",
+  "source_head": "f1a4553439e56be75b062e7c5f128febe6647812",
+  "authority_source": "The accepted cadence map ranks deterministic operator-sequence mechanization above test-count reduction.",
   "checkpoint": {
-    "completed_stage": "Accepted ariadne-provider-free-governance-clockwork-typed-serial-continuation-projection-live-adoption-efficacy-review at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_read_only_coverage_mapping_plan",
+    "completed_stage": "Accepted ariadne-provider-free-governance-clockwork-postpublication-validation-cadence-mapping-review at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_bound_driver_contract_and_tests",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,9 +34,12 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_read_only_postpublication_validation_coverage_mapping_only",
-    "characterize_unique_duplicate_and_dependency_coverage_without_changing_commands",
-    "freeze_exact_replacement_evidence_requirements_before_any_future_cadence_change",
+    "provider_free_governance_closeout_driver_and_manifest_rehearsal_only",
+    "bind_repository_virtual_environment_without_secret_or_environment_mutation",
+    "preserve_existing_semantic_commands_and_postpublication_test_selection",
+    "capture_existing_inline_live_validation_without_second_manual_readback",
+    "machine_derive_allowlisted_explicit_stage_manifest_without_git_index_mutation",
+    "no_live_semantic_publication_through_new_driver_in_rehearsal",
     "no_test_run_removal_skip_deselection_or_weakening",
     "no_worker_dispatch_native_harness_provider_call_or_transport_qualification",
     "no_silent_claude_code_or_other_transport_fallback",
