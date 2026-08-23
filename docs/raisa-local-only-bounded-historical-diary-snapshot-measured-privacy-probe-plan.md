@@ -192,3 +192,20 @@ protected evidence or protected-ref movement. Local/origin `master` and
 `handoff/current` remain exactly
 `2e34bdad732fdab32fbf778280b3d3c70d66d602`. Preserve `docs/branding/` and
 every unrelated untracked file. Stage explicit paths only.
+
+## Phase A recovery addendum
+
+The first metadata-only bind at exact controller source
+`3d14337bb5428f2f388dfa97320abac86300695d` returned the closed code
+`candidate_file_size_invalid`. It created no attempt root or manifest and
+opened no document content.
+
+The size rule is clarified without widening admission: regular `.doc` files at
+or below 4,096 bytes or above 8 MiB are counted in separate aggregate exclusion
+buckets and never become candidates. Exactly 80 in-envelope observations are
+still mandatory, each selected file is rechecked against the cap in the strict
+manifest and before Word, and the selected total remains capped at 128 MiB.
+This prevents an unadmitted housekeeping or unrelated large document from
+vetoing an otherwise exact bounded day while making it impossible for either
+class to reach content processing. One corrected metadata-only bind is
+authorised; it is not a content retry.

@@ -345,11 +345,17 @@ def test_phase_a_binds_exactly_80_nonrecursive_files_without_content_hash(monkey
     nested = root / "nested"
     nested.mkdir()
     (nested / "Diary_20160824070000.doc").write_bytes(b"nested private bytes")
+    (root / "Diary_20160825070000.doc").write_bytes(b"too small")
+    oversized = root / "Diary_20160825070030.doc"
+    with oversized.open("wb") as handle:
+        handle.truncate(probe.MAX_FILE_BYTES + 1)
 
     reading = probe.bind()
     manifest = probe.BindingManifest.model_validate_json(probe.MANIFEST_PATH.read_text())
 
     assert reading["selected_file_count"] == probe.MAX_FILES
+    assert reading["below_minimum_file_count"] == 1
+    assert reading["above_maximum_file_count"] == 1
     assert reading["archive_content_reads"] == 0
     assert reading["raw_filename_path_or_timestamp_emitted"] is False
     assert len(manifest.files) == probe.MAX_FILES

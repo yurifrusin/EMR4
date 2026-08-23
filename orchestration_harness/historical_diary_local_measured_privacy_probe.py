@@ -268,6 +268,8 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
     parsed: list[tuple[Path, os.stat_result, datetime]] = []
     shapes: Counter[str] = Counter()
     admitted_file_count = 0
+    below_minimum_file_count = 0
+    above_maximum_file_count = 0
     timestamp_parse_failures = 0
     for path in root.iterdir():
         shapes[filename_shape(path.name)] += 1
@@ -275,10 +277,14 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
             raise ProbeError("selected_reparse_forbidden")
         if not path.is_file() or path.suffix.lower() != ".doc":
             continue
-        admitted_file_count += 1
         stat = path.stat()
-        if stat.st_size <= MIN_FILE_BYTES or stat.st_size > MAX_FILE_BYTES:
-            raise ProbeError("candidate_file_size_invalid")
+        if stat.st_size <= MIN_FILE_BYTES:
+            below_minimum_file_count += 1
+            continue
+        if stat.st_size > MAX_FILE_BYTES:
+            above_maximum_file_count += 1
+            continue
+        admitted_file_count += 1
         timestamp = parse_observation_timestamp(path.name)
         if timestamp is None:
             timestamp_parse_failures += 1
@@ -292,6 +298,8 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
             "schema_version": "historical_diary.safe_binding_diagnostic.v1",
             "status": Decision.REVISION_REQUIRED.value,
             "candidate_document_count": admitted_file_count,
+            "below_minimum_file_count": below_minimum_file_count,
+            "above_maximum_file_count": above_maximum_file_count,
             "timestamp_parse_success_count": len(parsed),
             "timestamp_parse_failure_count": timestamp_parse_failures,
             "filename_shape_distribution": dict(sorted(shapes.items())),
@@ -342,6 +350,8 @@ def build_binding_manifest() -> tuple[BindingManifest, dict[str, Any]]:
         "root_count": 1,
         "dense_day_count": 1,
         "candidate_document_count": admitted_file_count,
+        "below_minimum_file_count": below_minimum_file_count,
+        "above_maximum_file_count": above_maximum_file_count,
         "timestamp_parse_success_count": len(parsed),
         "timestamp_parse_failure_count": 0,
         "selected_file_count": len(files),

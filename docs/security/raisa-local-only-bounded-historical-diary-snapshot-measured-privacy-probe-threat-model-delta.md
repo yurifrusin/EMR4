@@ -132,3 +132,12 @@ pseudonyms also remain linkable through rare trajectories. Those limitations
 are the point of this measured probe: they must be quantified truthfully before
 any richer parser or downstream use is considered. A contained
 `revision_required` result is a valid outcome and leaves raw material local.
+
+## Phase A recovery delta
+
+The first metadata bind showed that the exact leaf includes at least one `.doc`
+outside the admission size envelope. The corrected selector counts undersized
+and oversized exclusions without reading them. Neither class may enter the
+candidate set, selected manifest, Word process or private pipe. Exact selected
+file and total-byte caps remain independently enforced. This changes root-wide
+veto ergonomics only; it adds no admitted byte or path.
