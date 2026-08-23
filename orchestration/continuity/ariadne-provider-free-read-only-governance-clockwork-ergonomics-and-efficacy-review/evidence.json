@@ -1,0 +1,186 @@
+{
+  "schema_version": "ariadne.clockwork_ergonomics_efficacy_evidence.v1",
+  "operation_id": "ariadne-provider-free-read-only-governance-clockwork-ergonomics-and-efficacy-review",
+  "reviewed_source": "1a0e8d02cc01c6b84aec173b10c0c43495cd26ce",
+  "result": "safety_strong_operator_interface_overweight_narrow_repair_justified",
+  "scope": {
+    "evidence_class": "retained_non_protected_repository_workflow_evidence_only",
+    "provider_calls": 0,
+    "harness_processes": 0,
+    "product_or_runtime_changes": 0,
+    "protected_ref_changes": 0
+  },
+  "live_clockwork_window": {
+    "accepted_nodes": 99,
+    "native_harness_identifier_nodes": 66,
+    "node_kinds": {
+      "foundation": 48,
+      "tooling": 47,
+      "review": 2,
+      "maintenance": 1,
+      "exploration": 1
+    },
+    "clockwork_owned_surfaces": 10,
+    "dual_owned_surfaces": 0,
+    "canonical_drift_at_current_generation": 0,
+    "bespoke_updater_executions_in_last_two_closeouts": 0,
+    "previous_generation_byte_recoverable": true
+  },
+  "native_harness_reading": {
+    "accepted_synthesis_nodes": 70,
+    "retained_claude_labelled_incident_rows": 30,
+    "direct_native_harness_incident_rows": 21,
+    "comparative_failure_rate_claim_allowed": false,
+    "native_more_traceable_than_retained_claude_failures": true,
+    "native_more_reliable_at_useful_completion_proved": false,
+    "controlled_native_emr4_candidate_accepted": false,
+    "generic_boot_prerequisite_closed": true,
+    "first_pragmatic_real_task": {
+      "provider_calls": 0,
+      "useful_candidate": false,
+      "terminal_attributable": true,
+      "terminal": "broker_rejected_stock_headless_seven_tool_request_before_provider_io"
+    },
+    "last_occupied_useful_development_attempt": {
+      "provider_calls": 1,
+      "tool_calls": 1,
+      "useful_candidate": false,
+      "terminal_attributable": true,
+      "coordinate": "edit_error_accept_not_concluded"
+    },
+    "retained_clockwork_boundary": [
+      "prepared",
+      "terminal",
+      "accepted_or_recovered"
+    ],
+    "fine_grained_subcoordinate_clockwork": "retired",
+    "current_allocation": "paused_for_occupied_emr4_work_no_silent_claude_fallback"
+  },
+  "closeout_friction_sample": {
+    "sampled_reviews": 4,
+    "disclosed_workflow_lapses": 31,
+    "classification": {
+      "command_shape": 17,
+      "prospective_projection": 7,
+      "closed_vocabulary": 5,
+      "derived_fact": 1,
+      "self_referential_accounting": 1,
+      "product_semantics": 0
+    },
+    "contained_before_durable_acceptance": 27,
+    "required_byte_exact_rollback": 4,
+    "provider_or_product_reruns_caused": 0,
+    "last_two_closeouts": {
+      "disclosed_incidents": 18,
+      "publication_attempts": 6,
+      "byte_exact_rollbacks": 4,
+      "bespoke_updater_executions": 0
+    }
+  },
+  "intent_surface_sample": {
+    "intent_count": 2,
+    "bytes": 73459,
+    "lines": 1173,
+    "scalar_leaves": 785,
+    "incident_observation_leaves": 463,
+    "incident_observations": 18,
+    "incident_leaf_share_percent": 58.9809,
+    "latest_vs_previous": {
+      "byte_growth_percent": 42.7354,
+      "line_growth_percent": 52.8017,
+      "scalar_leaf_growth_percent": 58.2237
+    }
+  },
+  "latest_packet_timing_proxy": {
+    "planning_commit_to_evidence_commit_minutes": 29.05,
+    "evidence_commit_to_published_closeout_commit_minutes": 29.7833,
+    "total_minutes": 58.8333,
+    "closeout_to_product_interval_ratio": 1.0252,
+    "interpretation": "bounded_commit_interval_proxy_not_human_labor_or_model_performance"
+  },
+  "findings": [
+    {
+      "id": "safety-mechanism-effective",
+      "verdict": "retain",
+      "evidence": "The single writer, prospective dry run, protected-boundary floor and pointer-last byte-exact rollback contained all observed workflow errors without product, provider, protected-ref or canonical-drift effects."
+    },
+    {
+      "id": "operator-interface-overweight",
+      "verdict": "repair",
+      "evidence": "Two closeout intents require 785 scalar leaves across 1,173 lines, while every sampled lapse is procedural rather than product-semantic."
+    },
+    {
+      "id": "postpublication-validation-too-late",
+      "verdict": "repair_first",
+      "evidence": "Four sampled lapses required byte-exact rollback; the latest packet's three rollbacks came from two prospective human-evidence timestamps and one transaction-derived counter."
+    },
+    {
+      "id": "native-harness-gear-learning-useful-but-completion-unproved",
+      "verdict": "retain_three_boundaries_pause_fine_grain",
+      "evidence": "The native path improved terminal attribution and cleanup evidence, but 70 accepted synthesis nodes still yielded no accepted controlled native EMR4 candidate and do not establish useful-completion reliability."
+    },
+    {
+      "id": "authority-allocation-prose-conflict",
+      "verdict": "surface_then_reconcile_in_later_governance_change",
+      "evidence": "The operation-specific live Baton pauses the native profile and forbids silent Claude fallback, while generic Authority Allocation still calls Claude Code the preferred DeepSeek transport. The specific active control governs, but the stale generic text increases interpretation cost."
+    }
+  ],
+  "options": [
+    {
+      "rank": 1,
+      "id": "fold_prospective_current_node_evidence_and_transaction_fact_derivation_into_existing_tick",
+      "decision": "recommended",
+      "measured_work_removed": {
+        "latest_packet_byte_exact_rollbacks": 3,
+        "latest_packet_postpublication_rerun_sequences": 3,
+        "new_required_operator_fields": 0,
+        "new_approval_gates": 0,
+        "new_closeout_documents": 0
+      },
+      "retained_safety": [
+        "single_clockwork_writer",
+        "full_git_binding",
+        "closed_vocabularies",
+        "protected_boundary_floor",
+        "pointer_last_publication",
+        "byte_exact_rollback"
+      ],
+      "shape": "Extend the existing dry tick to validate the complete prospective current-node plan, closeout and acceptance evidence set before publication and make attempt, lease, generation and rollback accounting output-owned. Return the complete prospective error set in one pass."
+    },
+    {
+      "rank": 2,
+      "id": "typed_semantic_closeout_builder_and_command_registry",
+      "decision": "defer_until_rank_one_measured",
+      "measured_work_addressable_in_principle": {
+        "latest_packet_lapses": 11,
+        "sampled_lapses": 30
+      },
+      "shape": "Replace free-form command shapes, node/stage labels, Git facts, test paths and repeated timestamp fields with typed selectors and repository-derived values inside the existing clockwork interface.",
+      "risk": "A broad first implementation could become another control layer; split only after the rank-one matched measurement."
+    },
+    {
+      "rank": 3,
+      "id": "relax_or_remove_fail_closed_checks",
+      "decision": "rejected",
+      "reason": "It reduces visible reruns by weakening the safety mechanism rather than improving the interface."
+    },
+    {
+      "rank": 4,
+      "id": "retain_current_interface_unchanged",
+      "decision": "rejected",
+      "reason": "Safety is strong, but the latest closeout interval slightly exceeded the product interval and required three avoidable rollbacks."
+    }
+  ],
+  "recommended_next_operation": {
+    "operation_id": "ariadne-provider-free-governance-clockwork-prospective-current-node-evidence-and-transaction-fact-derivation-repair",
+    "objective": "Fold complete prospective current-node human-evidence validation and machine-owned transaction accounting into the existing clockwork tick, proving the same rejection coverage with zero new operator fields, gates or documents and no live publication until the repair passes its frozen fixtures.",
+    "implementation_in_this_review": false
+  },
+  "verification": {
+    "measurement_contract_recomputed": true,
+    "json_parse_passed": true,
+    "comparative_rate_claim_absent": true,
+    "protected_effects": 0
+  }
+}
+
