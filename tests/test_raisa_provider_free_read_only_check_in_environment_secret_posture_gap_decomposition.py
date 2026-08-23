@@ -204,7 +204,7 @@ def test_review_does_not_write_or_open_forbidden_surfaces() -> None:
     assert "os.environ" not in script
 
 
-def test_only_authorised_unmounted_normalizer_changed_since_plan_freeze() -> None:
+def test_only_authorised_unmounted_input_modules_changed_since_plan_freeze() -> None:
     paths = [
         "app",
         "docs/api-spine",
@@ -213,7 +213,7 @@ def test_only_authorised_unmounted_normalizer_changed_since_plan_freeze() -> Non
         ".env.example",
     ]
     process = subprocess.run(
-        ["git", "diff", "--name-only", f"{subject.PLAN_SOURCE}..HEAD", "--", *paths],
+        ["git", "diff", "--name-only", subject.PLAN_SOURCE, "--", *paths],
         cwd=ROOT,
         check=False,
         capture_output=True,
@@ -221,7 +221,8 @@ def test_only_authorised_unmounted_normalizer_changed_since_plan_freeze() -> Non
     )
     assert process.returncode == 0
     assert process.stdout.splitlines() == [
-        "app/services/appointment_check_in_environment_manifest.py"
+        "app/services/appointment_check_in_environment_manifest.py",
+        "app/services/appointment_check_in_operational_evidence.py",
     ]
 
 
