@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.agent-error-pattern-report.v1",
-  "register_revision": 653,
+  "register_revision": 654,
   "source_cutoff_on": "2026-08-24",
   "coverage": "bounded_known_preserved_incidents",
-  "canonical_register_sha256": "fb267f96d0c35095a3734e4866b47999e51eb837592e85b35b3ff82ec6ee4e06",
-  "incident_count": 1140,
+  "canonical_register_sha256": "e2909bcd5ce08be5fc0f674706831d0ba7105d650b62a76fe3903ce34d6f563d",
+  "incident_count": 1142,
   "open_incident_ids": [],
   "counts": {
     "by_origin": {
-      "agent_behavior": 607,
+      "agent_behavior": 609,
       "harness": 73,
       "operator": 291,
       "repository": 153,
@@ -16,10 +16,10 @@
     },
     "by_category": {
       "command_scope_violation": 111,
-      "evidence_misreport": 78,
+      "evidence_misreport": 79,
       "harness_failure": 73,
       "operator_error": 291,
-      "output_contract_violation": 363,
+      "output_contract_violation": 364,
       "read_only_violation": 5,
       "reasoning_claim_error": 50,
       "repository_defect": 153,
@@ -28,17 +28,17 @@
     "by_role": {
       "implementer": 89,
       "integration_reviewer": 5,
-      "orchestrator": 983,
+      "orchestrator": 985,
       "verifier": 63
     },
     "by_process_severity": {
-      "low": 751,
+      "low": 753,
       "material": 135,
       "moderate": 254
     },
     "by_candidate_state": {
       "accepted_candidate_changed": 234,
-      "canonical_unchanged": 722,
+      "canonical_unchanged": 724,
       "untrusted_partial_worktree": 184
     },
     "by_resource_and_role": {
@@ -150,6 +150,7 @@
       "clockwork-canonical-path-staging::orchestrator": 1,
       "clockwork-closed-rolling-acceptance-label::orchestrator": 1,
       "clockwork-closed-tick-intent-path::orchestrator": 1,
+      "clockwork-closeout-driver::orchestrator": 1,
       "clockwork-closeout-incident-observation::orchestrator": 1,
       "clockwork-closeout-intent::orchestrator": 3,
       "clockwork-closeout-transaction-recorded-at::orchestrator": 1,
@@ -194,6 +195,7 @@
       "closeout-compass-node-kind::orchestrator": 1,
       "closeout-contract-evidence-shape::orchestrator": 1,
       "closeout-efficacy-accounting::orchestrator": 1,
+      "closeout-evidence-draft::orchestrator": 1,
       "closeout-full-git-object-binding::orchestrator": 1,
       "closeout-incident-observation-vocabulary::orchestrator": 1,
       "closeout-provider-free-command-manifest::orchestrator": 1,

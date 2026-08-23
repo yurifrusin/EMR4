@@ -60,7 +60,7 @@
       "voice"
     ]
   },
-  "graph_revision": 444,
+  "graph_revision": 445,
   "harvests": [],
   "nodes": [
     {
@@ -35928,9 +35928,86 @@
         "thread_id": null,
         "worktree_role": "task"
       }
+    },
+    {
+      "id": "raisa-local-only-historical-diary-access-boundary-convergence",
+      "title": "Raisa local-only historical Diary access boundary convergence",
+      "kind": "tooling",
+      "relationships": [
+        {
+          "node_id": "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review",
+          "relation": "builds_on"
+        }
+      ],
+      "authority": {
+        "authorized_openings": [],
+        "notes": [
+          "Yuri delegated gate timing to GPT Sol; this control-plane tranche admits only the accepted exact local Diary privacy subgate and grants no archive access itself."
+        ]
+      },
+      "decisions": [
+        {
+          "id": "accept-exact-diary-subgate-and-run-bounded-probe",
+          "source": "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/next-tranche-contract.json",
+          "status": "accepted",
+          "summary": "Accept the typed boundary at exact source 7fef03bb8dc0acf38772850793e1aac35e878502 and proceed to one contract-bound local measured probe."
+        }
+      ],
+      "claim_scope": [
+        "Three mutually exclusive modes and a ten-member contract-bound exception pass 172 governance tests; no archive path or content was accessed."
+      ],
+      "contract_evidence": [],
+      "evidence": {
+        "plans": [
+          "docs/raisa-local-only-historical-diary-access-boundary-convergence-plan.md",
+          "docs/security/raisa-local-only-historical-diary-access-boundary-convergence-threat-model-delta.md"
+        ],
+        "findings": [
+          "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/evidence.json",
+          "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/report.md",
+          "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/efficacy-reading.json"
+        ],
+        "closeouts": [
+          "docs/raisa-local-only-historical-diary-access-boundary-convergence-closeout.md",
+          "orchestration/human_inbox/yuri/2026-08-24--raisa-local-only-historical-diary-access-boundary-convergence.md"
+        ],
+        "acceptances": [
+          "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-access-boundary-convergence-sol-acceptance.md"
+        ],
+        "receipts": [
+          "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-access-boundary-convergence-preplanning-receipt.json",
+          "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-access-boundary-convergence-pre-verifier-receipt.json",
+          "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/closeout/prepublication-planning-source-binding-rejection.json",
+          "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/closeout/clockwork-rehearsal-attempt-001-rejection.json"
+        ],
+        "tests": [
+          "tests/test_current_baton_consistency.py",
+          "tests/test_ariadne_active_operation_latch.py",
+          "tests/test_ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_transactional_closeout.py"
+        ],
+        "artifacts": [
+          "orchestration_harness/governance_clockwork_tick.py",
+          "scripts/ariadne_governance_clockwork_closeout.py",
+          "scripts/ariadne_governance_clockwork_tick.py",
+          "tests/test_ariadne_governance_clockwork_tick.py"
+        ]
+      },
+      "unresolved_gates": [
+        "Exact root/day binding, archive measurement, local retention, fixture or memory promotion, provider use, product runtime and protected integration remain gated."
+      ],
+      "status": "accepted",
+      "created_at": "2026-08-24T02:33:58+10:00",
+      "updated_at": "2026-08-24T02:33:58+10:00",
+      "coordinates": {
+        "git_ref": "codex/ariadne-bernie-davida-parallel-seam",
+        "source_head": "4219fd6ad94d6441c8e2c824e9518fa6eaaee5da",
+        "thread_id": null,
+        "worktree_role": "task"
+      }
     }
   ],
   "project_id": "emr4",
   "schema_version": "ariadne.continuity_graph.v1",
-  "updated_at": "2026-08-24T01:51:25.4005323+10:00"
+  "updated_at": "2026-08-24T02:33:58+10:00"
 }

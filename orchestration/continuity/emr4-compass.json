@@ -1,10 +1,10 @@
 {
   "schema_version": "ariadne.compass.v1",
   "project_id": "emr4",
-  "map_revision": 426,
-  "updated_at": "2026-08-24T01:51:25.4005323+10:00",
-  "source_graph_revision": 444,
-  "orientation_statement": "Make the authorised historical-Diary exception exact in the clockwork before allowing the gate to read one local slice.",
+  "map_revision": 427,
+  "updated_at": "2026-08-24T02:33:58+10:00",
+  "source_graph_revision": 445,
+  "orientation_statement": "Bind the exact local slice only after fresh planning, then let the gate take the reading.",
   "north_star": {
     "title": "A complete AI-native Australian general-practice management system",
     "summary": "EMR4 joins a Word-centred clinical workspace and a native browser Diary to a FastAPI/PostgreSQL source of truth. Humans retain judgment and confirmation while bounded agents reduce mechanical work without becoming clinical or scheduling authority.",
@@ -5397,24 +5397,34 @@
         "docs/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-plan.md",
         "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/report.md"
       ]
+    },
+    {
+      "node_id": "raisa-local-only-historical-diary-access-boundary-convergence",
+      "lineage_parent": "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review",
+      "strategic_role": "Connect the privacy gate to the clockwork without creating a general historical-data opening.",
+      "outcome": "The next local probe is one exact all-or-nothing authority reading.",
+      "evidence": [
+        "docs/raisa-local-only-historical-diary-access-boundary-convergence-plan.md",
+        "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/report.md"
+      ]
     }
   ],
   "current_position": {
-    "node_id": "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review",
-    "strategic_role": "Converge the governance boundary that still forbids all historical data before taking one bounded empirical reading.",
-    "why_now": "The synthetic gate passes, but the clockwork mandatory floor still contradicts the separately authorised local historical-Diary direction.",
-    "outcome": "The successor can make one exact local historical-Diary subgate representable without weakening product, patient, clinical or protected-data denial.",
+    "node_id": "raisa-local-only-historical-diary-access-boundary-convergence",
+    "strategic_role": "Take one bounded local empirical privacy-and-utility reading.",
+    "why_now": "The gate and its exact clockwork boundary both pass.",
+    "outcome": "A local slice may be measured under fixed limits and no downstream authority.",
     "unlocks": [
-      "A separately frozen and clockwork-consistent 80-file local privacy measurement."
+      "One at-most-80-file local historical Diary privacy probe."
     ],
     "does_not_solve": [
-      "It does not prove archive-wide anonymity, permit external/model use or promote any private-derived fixture."
+      "It does not prove anonymity or permit provider, fixture, product or production use."
     ],
     "evidence": [
-      "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/evidence.json",
-      "orchestration/continuity/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review/report.md",
-      "docs/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-closeout.md",
-      "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-snapshot-privacy-feasibility-review-sol-acceptance.md"
+      "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/evidence.json",
+      "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/report.md",
+      "docs/raisa-local-only-historical-diary-access-boundary-convergence-closeout.md",
+      "orchestration/agent_inbox/codex/raisa-local-only-historical-diary-access-boundary-convergence-sol-acceptance.md"
     ]
   },
   "decision_horizon": [

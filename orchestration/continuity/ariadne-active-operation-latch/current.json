@@ -1,14 +1,14 @@
 {
   "schema_version": "ariadne.active_operation_latch.v1",
-  "operation_id": "raisa-local-only-historical-diary-access-boundary-convergence",
-  "active_tranche": "Raisa local-only historical Diary access boundary convergence",
-  "objective": "Make the exact bounded local historical-Diary privacy subgate representable in clockwork while preserving denial for product, patient, appointment, clinical and protected data.",
+  "operation_id": "raisa-local-only-bounded-historical-diary-snapshot-measured-privacy-probe",
+  "active_tranche": "Raisa local-only bounded historical Diary snapshot measured privacy probe",
+  "objective": "Measure privacy and temporal utility on one exact local Diary slice without granting downstream use.",
   "status": "in_progress",
-  "source_head": "c8e13e655558e0d66de9700652c0bac71a973678",
-  "authority_source": "Yuri's explicit local de-identified Diary direction, timing delegation, accepted synthetic gate and standing uninterrupted-development authority.",
+  "source_head": "4219fd6ad94d6441c8e2c824e9518fa6eaaee5da",
+  "authority_source": "Yuri's local de-identified Diary direction, delegated gate timing, accepted privacy gate, exact boundary convergence and standing uninterrupted-development authority.",
   "checkpoint": {
-    "completed_stage": "Accepted raisa-local-only-historical-diary-snapshot-privacy-feasibility-review at the machine-resolved source.",
-    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_fail_closed_historical_diary_boundary_convergence_plan_without_archive_access",
+    "completed_stage": "Accepted raisa-local-only-historical-diary-access-boundary-convergence at the machine-resolved source.",
+    "next_executable_stage": "fresh_five_source_rehydration_then_freeze_exact_local_probe_plan_and_bind_ignored_root_day_manifest_before_content_read",
     "retry_counters": {
       "planning": 0,
       "implementation": 0,
@@ -34,22 +34,22 @@
     "reason": "unfinished_authorized_operation"
   },
   "protected_boundaries": [
-    "provider_free_local_only_and_unmounted",
-    "no_archive_access_before_fresh_rehydration_and_exact_frozen_plan",
-    "one_literal_leaf_root_one_dense_day_nonrecursive_maximum_80_files",
-    "maximum_134217728_total_bytes_and_8388608_per_file",
-    "read_only_no_symlink_or_reparse_traversal",
-    "new_ignored_local_output_root_and_ephemeral_in_memory_key_only",
-    "no_network_provider_model_prompt_telemetry_clipboard_or_external_release",
-    "no_raw_text_identity_filename_timestamp_key_or_mapping_commit",
-    "strongest_result_locally_restricted_candidate_without_downstream_authority",
-    "no_fixture_memory_rag_product_runtime_route_api_client_database_or_configuration_change",
-    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
     "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
     "no_production_runtime_deployment_release_or_pages",
     "no_protected_evidence_access_or_protected_ref_movement",
-    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
     "docs_branding_and_all_unrelated_untracked_files_preserved",
-    "explicit_path_staging_only"
+    "explicit_path_staging_only",
+    "no_product_patient_appointment_clinical_or_protected_data",
+    "allow_local_only_historical_diary_snapshot_measured_privacy_probe",
+    "historical_diary_privacy_subgate_contract_sha256_e312d58d7743b9b4d79d8a947b765732eea142f47586e0bd1f4e738047802615",
+    "historical_diary_access_one_leaf_root_one_dense_day_nonrecursive_maximum_80_files",
+    "historical_diary_access_maximum_134217728_total_bytes_and_8388608_per_file",
+    "historical_diary_access_read_only_no_symlink_or_reparse_traversal",
+    "historical_diary_access_new_ignored_output_root_ephemeral_in_memory_key_and_failure_cleanup",
+    "historical_diary_access_no_network_provider_model_prompt_telemetry_clipboard_or_external_release",
+    "historical_diary_access_no_raw_text_identity_filename_timestamp_key_or_mapping_commit",
+    "historical_diary_access_strongest_result_locally_restricted_candidate_without_downstream_authority",
+    "historical_diary_access_no_fixture_memory_rag_product_runtime_route_api_client_database_or_configuration"
   ]
 }

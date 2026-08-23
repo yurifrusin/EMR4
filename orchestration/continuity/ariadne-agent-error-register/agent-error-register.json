@@ -1,6 +1,6 @@
 {
   "schema_version": "ariadne.agent-error-register.v1",
-  "register_revision": 653,
+  "register_revision": 654,
   "scope": {
     "coverage": "bounded_known_preserved_incidents",
     "source_cutoff_on": "2026-08-24",
@@ -43872,6 +43872,76 @@
       },
       "incident_id": "AER-1140",
       "attempt_id": "clock-8a3f0a8b014fb6cb787b8b29",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-access-boundary",
+      "role": "orchestrator",
+      "resource_id": "closeout-evidence-draft",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "evidence_misreport",
+      "process_severity": "low",
+      "expected_invariant": "Every Git binding is copied only from a machine-resolved full object ID.",
+      "observed_error": "The first evidence draft manually expanded the abbreviated planning commit and produced a nonexistent 40-character value.",
+      "detection_method": "A git rev-parse readback found the mismatch before staging or clockwork verification.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/closeout/prepublication-planning-source-binding-rejection.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.manual_git_object_expansion",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Replace the draft with the exact git rev-parse output.",
+        "prevention_control": "Populate every closeout Git field from captured git rev-parse output; never expand a console abbreviation.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/evidence.json"
+        ]
+      },
+      "incident_id": "AER-1141",
+      "attempt_id": "clock-9bea00a5f17ba3bade0a0d72",
+      "origin": "agent_behavior",
+      "related_incident_ids": [],
+      "status": "corrected"
+    },
+    {
+      "observed_on": "2026-08-24",
+      "tranche": "historical-diary-access-boundary",
+      "role": "orchestrator",
+      "resource_id": "clockwork-closeout-driver",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "An incident-bearing closeout materialises its prospective human register reading before the first rehearsal.",
+      "observed_error": "The first rehearsal omitted revision 654 and failed at tick_incident_revision_reading.",
+      "detection_method": "The clockwork rejected before verifier execution or publication.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-local-only-historical-diary-access-boundary-convergence/closeout/clockwork-rehearsal-attempt-001-rejection.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.missing_incident_revision_artifact",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Materialise revision 654 with the exact prospective reading.",
+        "prevention_control": "Read current revision, incident count and next IDs before every incident-bearing rehearsal and create the required revision artifact first.",
+        "evidence_paths": [
+          "docs/ariadne-agent-error-correction-register-revision-654.md"
+        ]
+      },
+      "incident_id": "AER-1142",
+      "attempt_id": "clock-7b604ce97150a444bb0e6037",
       "origin": "agent_behavior",
       "related_incident_ids": [],
       "status": "corrected"
