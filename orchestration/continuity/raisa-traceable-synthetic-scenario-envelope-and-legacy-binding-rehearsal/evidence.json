@@ -1,0 +1,93 @@
+{
+  "schema_version": "raisa.traceable_synthetic_scenario_envelope_evidence.v1",
+  "result": "raisa_traceable_synthetic_scenario_envelope_and_legacy_binding_pass",
+  "recorded_at": "2026-08-24T01:06:23.5988946+10:00",
+  "plan_source": "ff60dfb7be798b65b00f22452479749de19b4d99",
+  "reviewed_source": "3ab338348001e5d136fafcccec84941d3860e259",
+  "five_source_rehydration": "passed",
+  "traceability_envelope": {
+    "implementation": "orchestration_harness/synthetic_scenario_envelope.py",
+    "schema_version": "raisa.traceable_synthetic_scenario_envelope.v1",
+    "source_type_tokens": 8,
+    "authority_classes": 7,
+    "oracle_eligibility_values": 6,
+    "evidence_labels": 4,
+    "coverage_kinds": 8,
+    "distinct_roles_required": 4,
+    "model_controlled_authoritative_roles": 0,
+    "executable_evidence_label": "wholly_authored_synthetic",
+    "calibration_reference_resolvable": false,
+    "calibration_reference_can_claim_deidentification": false,
+    "promotion_api_present": false
+  },
+  "legacy_bindings": [
+    {
+      "scenario_id": "booking_create_then_exact_duplicate",
+      "relationship": "complementary_shared_identity",
+      "semantic_sha256": "0d90a7adc20663a122946dbabb89f691a2165f3caf5db0b60628728adf9c075d",
+      "replay_sha256": "c6fbd8105922fcbb9a8b7bee94d67f757a8bc86a315abc1464f8b95f377a48c1",
+      "validation": "passed"
+    },
+    {
+      "scenario_id": "booking_overlap_not_exact_duplicate",
+      "relationship": "complementary_shared_identity",
+      "semantic_sha256": "ba0ebf78944e892d447bc4cd6aab9f524f62751f3f7ebd5150c93fa9a7cb6510",
+      "replay_sha256": "ca098a054883bb90199a6aa29e18a181b4d36a9bf887dcc197927e0f793a90d5",
+      "validation": "passed"
+    }
+  ],
+  "non_duplication": {
+    "semantic_contract_replaced": false,
+    "yaml_loader_replaced": false,
+    "replay_engine_imported_or_executed_by_binding_validator": false,
+    "dialogue_or_state_payload_copied": false,
+    "manifest_known_synthetic_person_names": 0,
+    "bound_artifact_paths_allowlisted": 4,
+    "glob_or_discovery_operations": 0
+  },
+  "deterministic_verification": {
+    "new_hostile_tests": 43,
+    "existing_contract_tests": 81,
+    "combined_tests": 124,
+    "combined_failures": 0,
+    "ruff": "passed",
+    "compileall": "passed",
+    "manifest_json": "passed",
+    "git_diff_check": "passed"
+  },
+  "contained_workflow_lapses": [
+    {
+      "attempt": "provider-free-runner-attempt-001",
+      "reason": "unsupported_pytest_quiet_flag",
+      "effect": "argument_parser_rejection_before_test_execution_or_mutation"
+    },
+    {
+      "attempt": "candidate-precommit-attempt-001",
+      "reason": "serial_continuation_evidence_path_root_forbidden",
+      "effect": "receipt_rejection_before_runtime_state_or_repository_mutation"
+    }
+  ],
+  "parallelism": {
+    "deepseek": "declined_negative_no_isolated_lease_and_occupied_native_harness_paused",
+    "gemini": "not_applicable_neutral_live_provider_forbidden_by_latch",
+    "native_subagents": "declined_negative_tightly_coupled_serial_invariant",
+    "gpt_sol": "implementation_verification_acceptance_and_git_owner"
+  },
+  "next_operation": {
+    "operation_id": "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review",
+    "launch": "immediate_after_clockwork_closeout",
+    "first_stage": "authored_synthetic_snapshot_gate_and_measured_access_plan",
+    "historical_archive_access_in_first_stage": false,
+    "real_access_requires_separate_accepted_subgate": true
+  },
+  "zero_effects": {
+    "historical_diary_files_opened_listed_searched_sampled_hashed_or_parsed": 0,
+    "protected_evidence_accesses": 0,
+    "patient_practice_clinical_or_product_records_processed": 0,
+    "provider_or_model_calls": 0,
+    "product_files_changed": 0,
+    "database_operations": 0,
+    "ordinary_practice_releases": 0,
+    "protected_ref_movements": 0
+  }
+}

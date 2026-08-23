@@ -1,0 +1,149 @@
+{
+  "schema_version": "ariadne.governance_semantic_closeout_intent.v1",
+  "profile": "provider_free_governance_tooling_v1",
+  "artifact_slug": "raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal",
+  "recorded_at": "2026-08-24T01:06:23.5988946+10:00",
+  "closeout": {
+    "operation_id": "raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal",
+    "title": "Raisa traceable synthetic scenario envelope and legacy binding rehearsal",
+    "builds_on": [
+      "raisa-synthetic-first-public-evidence-scenario-programme-orientation"
+    ],
+    "authority_notes": [
+      "Yuri delegated gate timing to GPT Sol; this provider-free tranche adds traceability only and opens no historical, provider, product, deployment or protected-ref authority."
+    ],
+    "decisions": [
+      {
+        "id": "accept-strict-traceability-envelope",
+        "source": "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/evidence.json",
+        "summary": "Accept closed source, oracle, evidence, coverage, role and opaque-calibration controls at exact reviewed source 3ab338348001e5d136fafcccec84941d3860e259."
+      },
+      {
+        "id": "launch-diary-privacy-gate-synthetic-first",
+        "source": "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/next-tranche-contract.json",
+        "summary": "Start the local-only Diary privacy gate with authored-synthetic snapshots and freeze a separate bounded real-access subgate before opening the archive."
+      }
+    ],
+    "claim_scope": [
+      "Two existing reception semantic and replay pairs are bound by shared identity, exact owner, path and digest without copied domain payload.",
+      "Forty-three hostile and eighty-one unchanged contract tests pass; no historical Diary, provider, product, database or protected surface opened."
+    ],
+    "additional_receipts": [],
+    "additional_artifacts": [
+      "orchestration_harness/synthetic_scenario_envelope.py",
+      "tests/fixtures/raisa_synthetic_scenario_envelope/legacy_reception_bindings.json",
+      "tests/test_raisa_traceable_synthetic_scenario_envelope.py",
+      "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/next-tranche-contract.json"
+    ],
+    "unresolved_gates": [
+      "Historical Diary access, near-lossless projection admission, provider/external release, product runtime, production, deployment, Pages and protected refs remain separately closed."
+    ],
+    "journey": {
+      "strategic_role": "Give synthetic administrative and clinical scenarios typed provenance, oracle authority and execution identity before increasing realism or scale.",
+      "outcome": "One domain-neutral envelope now reuses both existing reception contracts and enables a measured Diary privacy gate."
+    },
+    "current_position": {
+      "strategic_role": "Test privacy mechanics synthetically before any bounded historical archive reading.",
+      "why_now": "The exact provenance and evidence-class dependency now passes and the archive's temporal density can be evaluated without premature data access.",
+      "outcome": "The next tranche can build the gate, differencer, attack metrics and access subgate on invented snapshots.",
+      "unlocks": [
+        "A separately accepted, empirically measured decision on near-lossless local de-identified Diary use."
+      ],
+      "does_not_solve": [
+        "It does not yet inspect, de-identify or admit any historical record or prove real-world efficacy."
+      ],
+      "orientation_statement": "Make the privacy gate executable and measurable before allowing it to see the archive."
+    },
+    "next_operation": {
+      "operation_id": "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review",
+      "active_tranche": "Raisa local-only historical Diary snapshot privacy feasibility review",
+      "objective": "Build and test the privacy gate on authored-synthetic timestamped snapshots and freeze the exact bounded real-access subgate without opening or enumerating the archive.",
+      "authority_source": "Yuri's explicit timing delegation, accepted traceability envelope and standing uninterrupted-development authority.",
+      "next_stage": "fresh_five_source_rehydration_then_freeze_synthetic_snapshot_gate_and_measured_access_plan"
+    }
+  },
+  "verification_profile": "governance_clockwork_core_v1",
+  "baton_slot": "current_deepseek_native_harness_acceptance",
+  "next_operation_protected_boundaries": [
+    "provider_free_local_only_and_unmounted",
+    "wholly_authored_synthetic_snapshot_fixtures_only_in_first_stage",
+    "no_historical_diary_open_list_search_sample_hash_or_parse_before_a_separate_accepted_subgate",
+    "no_private_calibration_reference_resolution",
+    "no_network_provider_model_prompt_or_external_release",
+    "no_product_runtime_route_api_client_database_or_configuration_change",
+    "no_product_patient_appointment_clinical_historical_or_protected_data",
+    "no_ordinary_practice_enablement_feature_flag_allowlist_or_command_mounting",
+    "no_production_runtime_deployment_release_or_pages",
+    "no_protected_evidence_access_or_protected_ref_movement",
+    "local_origin_master_and_handoff_current_remain_2e34bdad732fdab32fbf778280b3d3c70d66d602",
+    "docs_branding_and_all_unrelated_untracked_files_preserved",
+    "explicit_path_staging_only"
+  ],
+  "agent_error_observations": [
+    {
+      "attempt_key": "traceable-envelope-clockwork-interface-001",
+      "observed_on": "2026-08-24",
+      "tranche": "traceable-scenario-envelope-binding",
+      "role": "orchestrator",
+      "resource_id": "clockwork-closeout-intent",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "closeout",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Clockwork closeout uses the register's exact stage vocabulary and the verification profile's bound interpreter.",
+      "observed_error": "The first check used descriptive incident stages; after correction the first verify call used system Python rather than the bound virtual-environment interpreter.",
+      "detection_method": "Admission and interpreter gates rejected both invocations before verification commands, preparation, publication or pointer movement.",
+      "evidence_paths": [
+        "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/closeout/clockwork-check-attempt-001-rejected-receipt.json",
+        "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/closeout/clockwork-verify-attempt-001-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.clockwork_closed_interface_binding_lapse",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Use deterministic_verification for both observations and invoke check, verify and publish through the bound virtual-environment interpreter.",
+        "prevention_control": "Read INCIDENT_STAGES and the verification command profile before every semantic closeout invocation.",
+        "evidence_paths": [
+          "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/closeout/closeout-intent.json"
+        ]
+      },
+      "baton_summary": "records contained clockwork stage/interpreter interface lapses and their exact-token/bound-interpreter correction."
+    },
+    {
+      "attempt_key": "traceable-envelope-candidate-precommit-001",
+      "observed_on": "2026-08-24",
+      "tranche": "traceable-scenario-envelope-binding",
+      "role": "orchestrator",
+      "resource_id": "serial-continuation-intent",
+      "model": "gpt-sol",
+      "reasoning_level": "extra_high",
+      "transport": "local_repository_clockwork",
+      "stage": "deterministic_verification",
+      "category": "output_contract_violation",
+      "process_severity": "low",
+      "expected_invariant": "Serial continuation evidence paths use only the schema's admitted documentation and orchestration roots.",
+      "observed_error": "The first intent listed implementation and test roots and failed with serial_continuation_evidence_path_root_forbidden.",
+      "detection_method": "Preflight rejected the intent before runtime-state materialisation or repository mutation.",
+      "evidence_paths": [
+        "orchestration/agent_inbox/codex/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-candidate-precommit-rejected-receipt.json"
+      ],
+      "candidate_state": "canonical_unchanged",
+      "workflow_disposition": "revision_required",
+      "recurrence_signature": "orchestrator.serial_continuation_evidence_root_misclassification",
+      "causal_claim_level": "observation_only",
+      "correction": {
+        "status": "control_added",
+        "action": "Preserve the rejected intent and issue a distinct corrected intent using admitted roots only.",
+        "prevention_control": "Use implementation paths in closeout artifacts, not serial active_evidence_paths.",
+        "evidence_paths": [
+          "orchestration/agent_inbox/codex/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-candidate-precommit-corrected-receipt.json"
+        ]
+      },
+      "baton_summary": "records one contained serial evidence-root lapse and its admitted-root correction."
+    }
+  ]
+}

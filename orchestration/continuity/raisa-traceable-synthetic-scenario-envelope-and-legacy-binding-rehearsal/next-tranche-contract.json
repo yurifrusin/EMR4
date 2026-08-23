@@ -1,0 +1,35 @@
+{
+  "schema_version": "raisa.historical_diary_snapshot_privacy_feasibility_next_tranche_contract.v1",
+  "operation_id": "raisa-local-only-historical-diary-snapshot-privacy-feasibility-review",
+  "target_result": "raisa_local_only_historical_diary_snapshot_privacy_gate_synthetic_rehearsal_pass",
+  "planning_parent": "3ab338348001e5d136fafcccec84941d3860e259",
+  "objective": "Build and test the local-only Diary privacy gate on wholly authored synthetic snapshot fixtures, then freeze the exact bounded access subgate needed to measure the real archive without yet opening or enumerating it.",
+  "first_stage_components": [
+    "synthetic_timestamp_named_snapshot_fixture_generator",
+    "typed_field_inventory_and_direct_identifier_detector",
+    "adjacent_snapshot_interval_censored_differencer",
+    "equivalence_class_uniqueness_and_rare_sequence_metrics",
+    "defined_adversary_record_and_trajectory_linkage_trials",
+    "multi_release_differencing_test",
+    "near_lossless_projection_policy_with_random_nonsemantic_stand_ins",
+    "exact_path_file_count_byte_count_output_and_network_closed_access_subgate"
+  ],
+  "acceptance": [
+    "all_gate_mechanics_pass_on_wholly_authored_synthetic_snapshots",
+    "observation_times_remain_observed_after_and_observed_by_not_invented_event_times",
+    "direct_identifiers_contacts_identifiers_and_revealing_notes_fail_closed",
+    "record_and_trajectory_attack_success_rates_are_typed_and_denominator_bound",
+    "aggregate_only_internal_use_is_not_preselected",
+    "near_lossless_local_projection_remains_conditional_on_empirically_very_low_contextual_risk",
+    "no_historical_archive_access_occurs_before_a_separate_accepted_subgate",
+    "no_provider_external_release_product_runtime_or_protected_ref_effect"
+  ],
+  "first_stage_authority": {
+    "historical_archive_open_list_search_sample_hash_or_parse": false,
+    "synthetic_snapshot_fixture_use": true,
+    "local_provider_free_execution": true,
+    "network_or_provider_execution": false,
+    "real_access_subgate_may_be_designed": true,
+    "real_access_subgate_may_be_executed": false
+  }
+}

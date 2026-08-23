@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.governance_semantic_verification_rejection.v1",
+  "attempt_key": "traceable-envelope-clockwork-interpreter-001",
+  "status": "revision_required",
+  "operation_id": "raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal",
+  "reason": "active_interpreter_mismatch",
+  "supplied_interpreter": "system_python",
+  "required_interpreter": ".venv/Scripts/python.exe",
+  "verification_commands_executed": 0,
+  "publication_attempted": false,
+  "canonical_mutations": 0,
+  "lease_sequence": 226
+}

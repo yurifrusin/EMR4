@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.provider_free_test_invocation_rejection.v1",
+  "attempt_key": "traceable-envelope-provider-free-runner-001",
+  "status": "revision_required",
+  "command_surface": "scripts.ariadne_provider_free_pytest",
+  "supplied_extra_argument": "-q",
+  "reason": "unrecognized_arguments",
+  "exit_code": 1,
+  "tests_executed": 0,
+  "repository_mutations": 0,
+  "corrected_command": "path_arguments_only",
+  "corrected_result": "passed_43_of_43"
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "ariadne.serial_continuation_intent.v1",
+  "preset": "provider_free_serial_observed_empty_workers",
+  "continuation_event": "pre_verifier_acceptance",
+  "planned_action": "accept_deterministic_traceability_envelope_candidate_without_live_provider",
+  "assessed_stage": "traceability_envelope_clean_source_pre_verifier_acceptance",
+  "active_evidence_paths": [
+    "docs/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-plan.md",
+    "docs/security/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-threat-model-delta.md",
+    "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/evidence.json",
+    "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/report.md",
+    "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/efficacy-reading.json",
+    "orchestration/continuity/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal/next-tranche-contract.json",
+    "docs/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-closeout.md",
+    "orchestration/agent_inbox/codex/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-sol-acceptance.md",
+    "orchestration/continuity/ariadne-active-operation-latch/current.json"
+  ],
+  "lane_decision_overrides": [
+    {
+      "lane_id": "gemini_verifier",
+      "decision_code": "not_applicable_neutral"
+    }
+  ]
+}

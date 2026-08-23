@@ -1,0 +1,13 @@
+{
+  "schema_version": "ariadne.serial_continuation_rejection.v1",
+  "attempt_key": "traceable-envelope-candidate-precommit-001",
+  "status": "revision_required",
+  "continuation_event": "pre_commit",
+  "reason": "serial_continuation_evidence_path_root_forbidden",
+  "rejected_intent": "orchestration/agent_inbox/codex/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-candidate-precommit-intent.json",
+  "runtime_state_materialized": false,
+  "repository_mutations": 0,
+  "corrected_intent": "orchestration/agent_inbox/codex/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-candidate-precommit-corrected-intent.json",
+  "corrected_receipt": "orchestration/agent_inbox/codex/raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal-candidate-precommit-corrected-receipt.json",
+  "corrected_status": "passed"
+}

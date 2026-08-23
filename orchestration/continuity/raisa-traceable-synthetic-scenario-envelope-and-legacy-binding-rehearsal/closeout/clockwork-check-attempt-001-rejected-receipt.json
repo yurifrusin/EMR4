@@ -1,0 +1,11 @@
+{
+  "schema_version": "ariadne.governance_clockwork_check_rejection.v1",
+  "attempt_key": "traceable-envelope-clockwork-stage-001",
+  "status": "revision_required",
+  "operation_id": "raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal",
+  "reason": "tick_incident_stage",
+  "publication_attempted": false,
+  "canonical_mutations": 0,
+  "pointer_movements": 0,
+  "correction": "replace descriptive incident stages with deterministic_verification"
+}

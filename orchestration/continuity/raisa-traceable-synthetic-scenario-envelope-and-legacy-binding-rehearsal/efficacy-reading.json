@@ -1,0 +1,23 @@
+{
+  "schema_version": "ariadne.tranche_efficacy_reading.v1",
+  "operation_id": "raisa-traceable-synthetic-scenario-envelope-and-legacy-binding-rehearsal",
+  "source_head": "3ab338348001e5d136fafcccec84941d3860e259",
+  "result": "strict_traceability_added_without_a_third_scenario_engine",
+  "mechanism": {
+    "new_traceability_models": 13,
+    "existing_domain_contracts_reused": 2,
+    "existing_fixture_pairs_bound": 2,
+    "bound_artifact_paths": 4,
+    "copied_domain_payloads": 0,
+    "provider_calls": 0,
+    "historical_data_accesses": 0
+  },
+  "verification": {
+    "hostile_tests": 43,
+    "existing_contract_tests": 81,
+    "total_tests": 124,
+    "failures": 0,
+    "contained_preexecution_lapses": 2
+  },
+  "assessment": "The envelope makes source authority, oracle ownership, evidence class and exact fixture binding machine-checkable while leaving semantic truth and stateful execution with their existing owners. The extra validation cost is small and directly enables a traceable, separately gated historical-Diary privacy study."
+}
