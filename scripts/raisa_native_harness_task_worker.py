@@ -234,7 +234,7 @@ import { isAbsolute, resolve } from "node:path";
 import { installModelSelection } from "@deepseek-ai/dsh-agent";
 import { createUserMessage } from "@deepseek-ai/dsh-llm";
 import { SessionId } from "@deepseek-ai/dsh-session";
-import { assertEffectiveToolComposition } from "./effective-tool-guard.mjs";
+import { assertEffectiveToolComposition, sanitizeEffectiveToolTerminal } from "./effective-tool-guard.mjs";
 
 export const name = "emr4-task-worker-runner";
 export const inject = ["hmr", "headlessStartup", "agents", "sessions", "agentPresets"];
@@ -311,7 +311,7 @@ async function run(ctx, config) {
 }
 
 export function apply(ctx, config) {
-  run(ctx, config).catch(() => {
+  run(ctx, config).catch((error) => {
     writeTerminal(config.terminalPath, {
       schema_version: "ariadne.native_harness_task_runner_terminal.v1",
       status: "failed",
@@ -321,6 +321,7 @@ export function apply(ctx, config) {
       tool_result_count: 0,
       turn_kind: null,
       allowed_tool_names: TOOLS,
+      effective_tool_coordinate: sanitizeEffectiveToolTerminal(error),
     });
     ctx.get("appExit")(1);
   });
@@ -359,11 +360,7 @@ def profile_patch(root: Path, port: int, *, runner: bool) -> bytes:
         "tool-str-replace-editor",
     ]
     rows = "".join(f"- id: {item}\n  disabled: true\n" for item in disabled)
-    rows += f'''- id: session-persistence-jsonl
-  config:
-    root: {quoted(root / "raw-sessions")}
-    compression: none
-- id: sandbox-policy
+    rows += f'''- id: sandbox-policy
   config:
     mode: workspace-write
     workspaceRoot: {quoted(root / "workspace")}
@@ -546,7 +543,7 @@ def prepare(config_path: Path, source: str) -> dict[str, Any]:
     root = Path(config["attempt_root"]).resolve()
     workspace = root / "workspace"
     evidence_root = (REPO_ROOT / config["evidence_root"]).resolve()
-    prepared_path = evidence_root / "native-harness-prepared.json"
+    prepared_path = evidence_root / f"native-harness-{config['attempt_id']}-prepared.json"
     if root.exists() or prepared_path.exists():
         raise TaskWorkerError("attempt_not_fresh")
     root.mkdir(parents=True)
@@ -785,7 +782,7 @@ def execute(config_path: Path) -> dict[str, Any]:
     root = Path(config["attempt_root"]).resolve()
     workspace = root / "workspace"
     evidence_root = (REPO_ROOT / config["evidence_root"]).resolve()
-    terminal_path = evidence_root / "native-harness-terminal.json"
+    terminal_path = evidence_root / f"native-harness-{config['attempt_id']}-terminal.json"
     preparation = load_json(root / "preparation.json")
     source = preparation.get("source_commit")
     if source != git("rev-parse", "HEAD", cwd=workspace):

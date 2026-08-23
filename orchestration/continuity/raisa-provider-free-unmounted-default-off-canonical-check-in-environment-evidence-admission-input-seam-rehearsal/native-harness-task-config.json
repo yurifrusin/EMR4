@@ -1,8 +1,8 @@
 {
   "schema_version": "ariadne.native_harness_task_worker_config.v1",
   "operation_id": "raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
-  "attempt_id": "deepseek-native-check-in-evidence-seam-001",
-  "attempt_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-evidence-seam-001",
+  "attempt_id": "deepseek-native-check-in-evidence-seam-002",
+  "attempt_root": "C:/Users/sarashera/EMR4-worktrees/deepseek-native-check-in-evidence-seam-002",
   "evidence_root": "orchestration/continuity/raisa-provider-free-unmounted-default-off-canonical-check-in-environment-evidence-admission-input-seam-rehearsal",
   "owned_paths": [
     "orchestration_harness/check_in_environment_evidence_admission.py",
